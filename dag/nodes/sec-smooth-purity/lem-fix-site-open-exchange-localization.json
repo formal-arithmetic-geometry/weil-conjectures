@@ -1,0 +1,118 @@
+{
+ "id": "lem-fix-site-open-exchange-localization",
+ "kind": "statement",
+ "title": "Exact-functor localization preserves commutative cubes",
+ "statement": "Let C,D,E,F,G,H,I,J be arbitrary abelian categories with derived categories. Let a:C→D, b:D→E, c:E→F, d:C→G, e:G→E, f:G→H, g:H→F, h:C→I, i:I→H, j:D→J, k:J→F, m:I→J be exact additive functors. Given six natural isomorphisms q1:a⋙b≅d⋙e, q2:e⋙c≅f⋙g, q3:d⋙f≅h⋙i, q4:b⋙c≅j⋙k, q5:a⋙j≅h⋙m, q6:m⋙k≅i⋙g, suppose c(q1_X);q2_dX;g(q3_X)=q4_aX;k(q5_X);q6_hX for every X. Derive each face by inverse composition comparison, mapDerivedCategoryNatIso, and composition comparison. Then the two three-face derived paths are equal as natural transformations on the full unbounded derived category. No scheme, site comparison, coefficient ring or boundedness hypothesis occurs.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05S7 and 014F; universal property of localization, exact-functor factorization formulas; extracted from step 2 of lem-fix-site-open-exchange."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Apply Localization.natTrans_ext for DerivedCategory.Q. Postcompose the two paths with g applied to the i and h localization factors and the g factor. Use mapDerivedCategoryCompIso_fac and mapDerivedCategoryNatIso_fac on each face, with naturality to move all factors to the source. Both sides are the same source factors followed by Q of the two ordinary complex morphisms.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply HomologicalComplex.Hom.ext degreewise to the assumed ordinary cube equation. Functoriality of Q gives equality of the localized composites. Cancel the target factorization isomorphisms and conclude by localization extensionality. The proof works also for zero categories and identity faces.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05S7 and 014F; universal property of localization, exact-functor factorization formulas; extracted from step 2 of lem-fix-site-open-exchange."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization of exact functors preserves commutative cubes of natural isomorphisms",
+   "results": "8 Guitart-exactness and derivability-structure hits; no exact-functor cube equation.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftNatTrans\", \"comp\"",
+   "results": "Localization.comp_liftNatTrans and its reassociated form; composition infrastructure, not the six-face cube.",
+   "date": "2026-10-19",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Cc]ube|mapDerivedCategory.*[Ww]hisker",
+   "results": "No Mathlib hits. Local source has exact-square factorization and bounded-below composition, but no unbounded cube API.",
+   "date": "2026-10-19",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of exact functors preserves commutative cubes of natural isomorphisms",
+   "results": "Relevant generic localization or scheme geometry results, but no matching compatibility equation.",
+   "date": "2026-10-20",
+   "verdict": "No direct match; generic infrastructure used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FixSiteOpenExchange",
+  "date": "2026-10-19",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Final compatibility paragraph: site comparison preserves the open-factor comparison and its unit normalization; ordinary calculation and degreewise localization.",
+   "via": [
+    "lem-fix-site-open-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedExactCube",
+  "file": "lean/Sheaf/CategoryTheory/DerivedExactCube.lean",
+  "declaration": "CategoryTheory.Functor.mapDerivedCategory_exactCube",
+  "statement": "theorem mapDerivedCategory_exactCube\n    (q1 : a ⋙ b ≅ d ⋙ e)\n    (q2 : e ⋙ c ≅ f ⋙ g)\n    (q3 : d ⋙ f ≅ h ⋙ i)\n    (q4 : b ⋙ c ≅ j ⋙ k)\n    (q5 : a ⋙ j ≅ h ⋙ m)\n    (q6 : m ⋙ k ≅ i ⋙ g)\n    (comm : ∀ X : C,\n      c.map (q1.hom.app X) ≫ q2.hom.app (d.obj X) ≫ g.map (q3.hom.app X) =\n        q4.hom.app (a.obj X) ≫ k.map (q5.hom.app X) ≫ q6.hom.app (h.obj X)) :\n    let s1 := (mapDerivedCategoryCompIso a b).symm ≪≫\n      mapDerivedCategoryNatIso q1 ≪≫ mapDerivedCategoryCompIso d e\n    let s2 := (mapDerivedCategoryCompIso e c).symm ≪≫\n      mapDerivedCategoryNatIso q2 ≪≫ mapDerivedCategoryCompIso f g\n    let s3 := (mapDerivedCategoryCompIso d f).symm ≪≫\n      mapDerivedCategoryNatIso q3 ≪≫ mapDerivedCategoryCompIso h i\n    let s4 := (mapDerivedCategoryCompIso b c).symm ≪≫\n      mapDerivedCategoryNatIso q4 ≪≫ mapDerivedCategoryCompIso j k\n    let s5 := (mapDerivedCategoryCompIso a j).symm ≪≫\n      mapDerivedCategoryNatIso q5 ≪≫ mapDerivedCategoryCompIso h m\n    let s6 := (mapDerivedCategoryCompIso m k).symm ≪≫\n      mapDerivedCategoryNatIso q6 ≪≫ mapDerivedCategoryCompIso i g\n    whiskerRight s1.hom c.mapDerivedCategory ≫\n        whiskerLeft d.mapDerivedCategory s2.hom ≫\n        whiskerRight s3.hom g.mapDerivedCategory =\n      whiskerLeft a.mapDerivedCategory s4.hom ≫\n        whiskerRight s5.hom k.mapDerivedCategory ≫\n        whiskerLeft h.mapDerivedCategory s6.hom",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T051348-L-1652640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T051348-L-1652640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

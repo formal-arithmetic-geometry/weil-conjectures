@@ -1,0 +1,109 @@
+{
+ "id": "lem-fix-site-open-exchange-square",
+ "kind": "statement",
+ "title": "Specialized inverse-image comparison square for open exchange",
+ "statement": "For every finite commutative ring Λ, chosen Cartesian square gU:U′→U, j′:U′→X′, j:U→X, g:X′→X with gU≫j=j′≫g, and etale Λ-module sheaf F on X, let rho_f=comparisonUpperStarCompUpperStarIso Λ f. Then rho_gU.inv at j_et^*F, followed by gU_pro^*(rho_j.inv at F), followed by upperStarCompIso Λ sq.w at nu_X^*F, equals nu_U′^* of the component of Etale.squareUpperStarIso Λ sq.toCommSq.flip at F, followed by rho_j′.inv at g_et^*F, followed by j′_pro^*(rho_g.inv at F). All maps are the specified canonical comparison maps. No open-immersion assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R and 0B65; compatibility of the etale/pro-etale inverse-image comparison with a chosen Cartesian square."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-comparison-pullback",
+  "stage3-proetale-comparison-square-component",
+  "def-cbc-open-immersion-square"
+ ],
+ "proof": [
+  {
+   "text": "Flip the chosen Cartesian square using its pullback symmetry isomorphism, and apply comparison_square_component_of_commRing to this flipped square. Normalize comparisonSquareData: its coefficient isomorphisms are the inverses of comparisonUpperStarCompUpperStarIso, its etale square is Etale.squareUpperStarIso of the flipped square, and its pro-etale square is upperStarCompIso of the original commutativity equation. The abstract component_unpack lemma unfolds only the bundled component predicate and gives precisely the displayed component equation. The argument does not need an open-immersion hypothesis.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "stage3-proetale-comparison-square-component"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-pullback",
+  "stage3-proetale-comparison-square-component"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R and 0B65; component of the flipped canonical comparison square, with explicit data normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image comparison between sites respects commutative cartesian squares",
+   "results": "Relevant generic localization or scheme geometry results, but no matching compatibility equation.",
+   "date": "2026-10-20",
+   "verdict": "No direct match; generic infrastructure used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"square\", \"upperStar\"",
+   "results": "0 hits",
+   "date": "2026-10-20",
+   "verdict": "No matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*[Ss]quare|[Ss]quare.*comparison",
+   "results": "Only the closed monoidal functor exponential comparison square, not a site comparison.",
+   "date": "2026-10-20",
+   "verdict": "No direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FixSiteOpenExchange",
+  "date": "2026-10-20",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-site-open-exchange",
+   "place": "Ordinary sheaf comparison square coherence used in the open-exchange proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FixSiteOpenExchangeSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixSiteOpenExchangeSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.fixSiteOpenExchangeSquare",
+  "statement": "theorem fixSiteOpenExchangeSquare (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'} {j : U ⟶ X} {g : X' ⟶ X} (sq : ChosenCartesianSquare gU j' j g) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) gU).inv.app ((Etale.upperStar (ModuleCat.{u + 1} Λ) j).obj F) ≫ (upperStar (ModuleCat.{u + 1} Λ) gU).map ((comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j).inv.app F) ≫ (upperStarCompIso (ModuleCat.{u + 1} Λ) sq.w).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj F) = (comparisonUpperStar (ModuleCat.{u + 1} Λ) U').map ((Etale.squareUpperStarIso (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).hom.app F) ≫ (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j').inv.app ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj F) ≫ (upperStar (ModuleCat.{u + 1} Λ) j').map ((comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).inv.app F)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-20",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.fixSiteOpenExchangeSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T051348-L-1652640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T051348-L-1652640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
