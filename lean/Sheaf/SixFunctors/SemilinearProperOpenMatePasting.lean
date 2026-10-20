@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
 public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting
+import all Sheaf.AlgebraicGeometry.VaryingRingProperOpenArrows
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Intrinsic proper/open mates for semilinear coefficient systems
@@ -56,6 +56,25 @@ private theorem chosen_unit_isIso_congr
     IsIso (Adjunction.ofIsRightAdjoint F).unit := by
   subst G
   exact hi
+
+private theorem exact_derived_congr
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    {F G : A ⥤ B} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (h : F = G) :
+    F.mapDerivedCategory = G.mapDerivedCategory := by
+  subst G
+  rfl
+
+private theorem right_derived_congr
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [Abelian.HasKInjectiveResolutions A]
+    {F G : A ⥤ B} [F.Additive] [G.Additive] (h : F = G) :
+    F.rightDerivedFunctor = G.rightDerivedFunctor := by
+  subst G
+  rfl
 
 namespace AlgebraicGeometry.ProEtale.SemilinearProperOpen
 
@@ -113,7 +132,7 @@ instance derived (X : Scheme.{u}) : HasDerivedCategory.{u + 2} (Modules C τ X) 
 Source: Zheng 4.1; Stacks 0F7B, coefficient-system extension
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
 abbrev Derived (X : Scheme.{u}) :=
-  DS.{u + 1, u, u + 1} (ProEt.topology X) (coefficients C X) (transition C τ X)
+  DerivedCategory (Modules C τ X)
 
 /-- Base change acts at the same index on the existing sequence site.
 Source: Stacks 09A5 and 0F7B (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
@@ -274,12 +293,14 @@ attribute [instance] systems_kInjective
 /-- Exact termwise inverse image on the ordinary derived category of systems.
 Source: Zheng 4.10; Stacks 07A4
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
-abbrev P {X Y : Scheme.{u}} (f : X ⟶ Y) := (pull C τ f).mapDerivedCategory
+def P {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived C τ Y ⥤ Derived C τ X :=
+  (pull C τ f).mapDerivedCategory
 
 /-- Total derived direct image on systems.
 Source: Zheng 4.10; Stacks 07A4
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
-abbrev R {X Y : Scheme.{u}} (f : X ⟶ Y) := (push C τ f).rightDerivedFunctor
+def R {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived C τ X ⥤ Derived C τ Y :=
+  (push C τ f).rightDerivedFunctor
 
 /-- The canonical derived adjunction of the actual ordinary system adjunction.
 Source: Zheng 4.10; Stacks 07A4
@@ -414,7 +435,8 @@ instance extension_colimits {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- Exact extension by zero on ordinary derived systems.
 Source: Stacks 03DI; Zheng 4.10 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
-abbrev J {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
+def J {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    Derived C τ U ⥤ Derived C τ X :=
   (extension C τ j).mapDerivedCategory
 
 /-- The open adjunction is the exact localization of the ordinary open adjunction.
@@ -478,7 +500,12 @@ theorem betaInvApp_naturality {U' U X' X : Scheme.{u}}
     (M N : Derived C τ U) (f : M ⟶ N) :
     (P C τ gU ⋙ J C τ j').map f ≫ betaInvApp C τ gU j' j g h N =
       betaInvApp C τ gU j' j g h M ≫ (J C τ j ⋙ P C τ g).map f := by
-  sorry
+  dsimp only [betaInvApp, Functor.comp_map]
+  let t := Functor.whiskerRight (jAdj C τ j).unit (P C τ gU) ≫
+    Functor.whiskerLeft (J C τ j) (squareP C τ gU j' j g h).inv
+  exact (jAdj C τ j').homEquiv_naturality_right_square
+    ((P C τ gU).map f) (t.app N) (t.app M)
+    ((J C τ j ⋙ P C τ g).map f) (t.naturality f)
 
 /-- The inverse comparison as a natural transformation with the specified transpose.
 Source: Stacks, Tag 09AE (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
@@ -489,27 +516,24 @@ noncomputable def betaInv {U' U X' X : Scheme.{u}}
   app := betaInvApp C τ gU j' j g h
   naturality := betaInvApp_naturality C τ gU j' j g h
 
-/-- The unit-normalized comparison is invertible for a cartesian open square and
-arbitrary B. Source: Stacks, Tag 09AE and blueprint, second proof step
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: restriction commutes with direct image on the same pulled-back test object.
-The two routes are left adjoint to these canonically identified right adjoints.
-Their unique unit-preserving comparison is invertible and its inverse has exactly
-the displayed transpose. The equalities descend from strict complexes. -/
-theorem betaInv_isIso {U' U X' X : Scheme.{u}}
-    (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
-    [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
-    (hsq : IsPullback gU j' j g) : IsIso (betaInv C τ gU j' j g h) := by
-  sorry
+private theorem P_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    P C τ f = VaryingRing.G C τ f := by
+  have ha := VaryingRing.pullAdditive C τ f
+  have hl := VaryingRing.pullLimits C τ f
+  have hc := VaryingRing.pullColimits C τ f
+  exact exact_derived_congr (pull_eq C τ f)
 
-/-- Cartesian open base change, oriented as G_g j_! → j'_! G_gU.
-Source: Stacks, Tag 09AE (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
-noncomputable def beta {U' U X' X : Scheme.{u}}
-    (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
-    [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
-    (hsq : IsPullback gU j' j g) : J C τ j ⋙ P C τ g ≅ P C τ gU ⋙ J C τ j' :=
-  (@asIso _ _ _ _ (betaInv C τ gU j' j g h)
-    (betaInv_isIso C τ gU j' j g h hsq)).symm
+private theorem J_eq {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    J C τ j = VaryingRing.J C τ j := by
+  have ha := VaryingRing.extensionAdditive C τ j
+  have hl := VaryingRing.extensionLimits C τ j
+  have hc := VaryingRing.extensionColimits C τ j
+  exact exact_derived_congr (extension_eq C τ j)
+
+private theorem R_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    R C τ f = VaryingRing.P C τ f := by
+  have ha := VaryingRing.push_additive C τ f
+  exact right_derived_congr (push_eq C τ f)
 
 /-- The open-extension unit is invertible. Source: Stacks, Tags 03DI and 09AE
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting).
@@ -531,6 +555,45 @@ theorem jAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
   have := hf.faithful
   infer_instance
 
+/-- The unit-normalized comparison is invertible for a cartesian open square and
+arbitrary B. Source: Stacks, Tag 09AE and blueprint, second proof step
+(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
+Proof: restriction commutes with direct image on the same pulled-back test object.
+The two routes are left adjoint to these canonically identified right adjoints.
+Their unique unit-preserving comparison is invertible and its inverse has exactly
+the displayed transpose. The equalities descend from strict complexes. -/
+theorem betaInv_isIso {U' U X' X : Scheme.{u}}
+    (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
+    (hsq : IsPullback gU j' j g) : IsIso (betaInv C τ gU j' j g h) := by
+  have hu : IsIso (jAdj C τ j).unit := jAdj_unit_isIso C τ j
+  have := jAdj_unit_isIso C τ j'
+  let ff := (jAdj C τ j').fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  have hi (M : Derived C τ U) : IsIso ((betaInv C τ gU j' j g h).app M) := by
+    have := VaryingRing.derived_basechange_counit C τ gU j' j g h hsq M
+    have hm := (VaryingRing.jAdj C τ j').mem_essImage_of_counit_isIso
+      ((VaryingRing.G C τ g).obj ((VaryingRing.J C τ j).obj M))
+    have hm' : (J C τ j').essImage ((P C τ g).obj ((J C τ j).obj M)) := by
+      rw [P_eq, J_eq, J_eq]
+      exact hm
+    have := (jAdj C τ j').isIso_counit_app_iff_mem_essImage.mpr hm'
+    change IsIso (betaInvApp C τ gU j' j g h M)
+    unfold betaInvApp
+    rw [Adjunction.homEquiv_counit]
+    infer_instance
+  exact NatIso.isIso_of_isIso_app _
+
+/-- Cartesian open base change, oriented as G_g j_! → j'_! G_gU.
+Source: Stacks, Tag 09AE (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+noncomputable def beta {U' U X' X : Scheme.{u}}
+    (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
+    (hsq : IsPullback gU j' j g) : J C τ j ⋙ P C τ g ≅ P C τ gU ⋙ J C τ j' :=
+  (@asIso _ _ _ _ (betaInv C τ gU j' j g h)
+    (betaInv_isIso C τ gU j' j g h hsq)).symm
+
 /-- The canonical map from open extension to direct image is the counit mate of the
 inverse open unit. Source: Stacks, Tags 03DI and 09AE
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
@@ -551,7 +614,33 @@ image give the first factor with zero second factor. The specified comparison is
 identity on the first factor. The same formula acts termwise on towers and complexes. -/
 theorem openToS_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     [IsClosedImmersion j] : IsIso (openToS C τ j) := by
-  sorry
+  obtain ⟨e⟩ := VaryingRing.derived_clopen_iso C τ j
+  have he : Nonempty (J C τ j ≅ R C τ j) := by
+    rw [J_eq, R_eq]
+    exact ⟨e⟩
+  obtain ⟨e⟩ := he
+  have hu : IsIso (jAdj C τ j).unit := jAdj_unit_isIso C τ j
+  let ff := (jAdj C τ j).fullyFaithfulLOfIsIsoUnit
+  let fp := ff.ofIso e
+  have := fp.full
+  have := fp.faithful
+  have hi (M : Derived C τ U) : IsIso ((openToS C τ j).app M) := by
+    have hunit : IsIso ((adj C τ j).unit.app ((J C τ j).obj M)) :=
+      (adj C τ j).isIso_unit_app_of_iso (e.app M)
+    have hinv : IsIso ((inv (jAdj C τ j).unit).app M) := by infer_instance
+    have himap : IsIso ((R C τ j).map ((inv (jAdj C τ j).unit).app M)) := by
+      infer_instance
+    let e' := asIso ((adj C τ j).unit.app ((J C τ j).obj M)) ≪≫
+      (R C τ j).mapIso (asIso ((inv (jAdj C τ j).unit).app M))
+    have he' : (openToS C τ j).app M = e'.hom := by
+      simp only [openToS, NatTrans.comp_app, Functor.rightUnitor_inv_app,
+        Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.whiskerRight_app,
+        Functor.leftUnitor_hom_app, Category.id_comp, e',
+        Iso.trans_hom, asIso_hom, Functor.mapIso_hom]
+      erw [Category.comp_id]
+    rw [he']
+    exact e'.isIso_hom
+  exact NatIso.isIso_of_isIso_app _
 
 /-- The intrinsic clopen component projection, with no arbitrary splitting choice.
 Source: Stacks, Tag 09AE and blueprint, fourth proof step
@@ -796,7 +885,16 @@ theorem rhoOrdinary_exact (X : Scheme.{u}) :
     (rhoOrdinary C τ B φ hφ X).Additive ∧
       PreservesFiniteLimits (rhoOrdinary C τ B φ hφ X) ∧
         PreservesFiniteColimits (rhoOrdinary C τ B φ hφ X) := by
-  sorry
+  have he (n : ℕ) : rhoOrdinary C τ B φ hφ X ⋙
+      (CategoryTheory.evaluation ℕᵒᵖ (StrictTower.Modules B X)).obj (op n) =
+      SemilinearSections.evaluation (ProEt.topology X) (coefficients C X)
+        (transition C τ X) n ⋙ levelRestriction C B φ X n :=
+    (rhoOrdinary_existsUnique C τ B φ X hφ).choose_spec.1.1 n
+  have hl : PreservesFiniteLimits (rhoOrdinary C τ B φ hφ X) :=
+    preservesFiniteLimits_of_evaluation _ fun n ↦ by rw [he n.unop]; infer_instance
+  have hc : PreservesFiniteColimits (rhoOrdinary C τ B φ hφ X) :=
+    preservesFiniteColimits_of_evaluation _ fun n ↦ by rw [he n.unop]; infer_instance
+  exact ⟨Functor.additive_of_preserves_binary_products _, hl, hc⟩
 
 /-- Additivity of scalar restriction. Source: Stacks 03CZ
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
