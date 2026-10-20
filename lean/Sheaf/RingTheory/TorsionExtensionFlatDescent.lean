@@ -11,7 +11,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Tower
 import Sheaf.RingTheory.CyclicExtensionFlatDescent
 import Sheaf.RingTheory.DirectSumExtensionAssembly
 import WeilConjectures.RingTheory.TorsionCyclicPresentation
-import Sheaf.RingTheory.TorsionHomFlatComparison
+import WeilConjectures.RingTheory.TorsionHomFlatComparison
 
 /-!
 # Descent of extensions with an ideal-power torsion quotient
