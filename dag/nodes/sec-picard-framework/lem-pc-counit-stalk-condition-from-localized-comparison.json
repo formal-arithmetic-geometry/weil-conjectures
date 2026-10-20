@@ -115,14 +115,15 @@
   }
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/CounitStalkConditionFromLocalizedComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CounitStalkConditionFromLocalizedComparison.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.counit_stalkCondition_of_localizedComparison",
   "statement": "theorem counit_stalkCondition_of_localizedComparison\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (h : ∀ z : X',\n      letI := leftAlgebra f g' z\n      letI := rightAlgebra f f' g g' sq z\n      letI := (tensorMap f f' g g' sq z).toAlgebra\n      letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z))\n      letI := HasDerivedCategory.standard (ModuleCat.{u} (B f' z))\n      ∀ i : ℤ, IsIso ((cohomologyModel f f' g g' sq z G).localizedComparison i)) :\n    StalkCondition f f' g g' sq (DerivedCategory.Q.obj G)\n      (DerivedCategory.Q.obj\n        (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj G))\n      ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj G))",
   "branch": "sheaf-dag",
   "by": "T4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 G4: use the already-proved adopted upstream theorem with the identical signature; the restored Sheaf module re-exports it, avoiding the quarantined mixed old/new definition environment."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -135,13 +136,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H3",
+  "reviewer": "C-87f68",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T054219-L-443556",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T151218-L-2647831",
+  "kind": "proof",
+  "note": "independent cc review: Re-export shim of Sheaf.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison vs the quarantined archive and the upstream twin WeilConjectures.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison: identical theorem signature, IsKFlatTensor body = IsAcyclicTensorKFlat body; shim compiles, axioms propext/choice/Quot.sound; node changed only in lean record (existing:true)"
  }
 }
