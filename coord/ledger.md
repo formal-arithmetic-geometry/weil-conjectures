@@ -18172,3 +18172,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 21:50 L: batch 20261020T131932 dependency take-out
 - 13:53 L: returned deliver/A7/Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComparison (reviewer RETURN: (the landing tools, head 68760ef87) the delivery did not land: lean/Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAf)
+- 13:53 L: returned deliver/A8/Sheaf.AlgebraicGeometry.QCohTensorResolutionChartTensorComponents (reviewer RETURN: (the landing tools, head ae853a6cc) the delivery did not land: lean/Sheaf/AlgebraicGeometry/QCohTensorResolutionChartTen)
