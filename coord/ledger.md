@@ -18771,3 +18771,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:48 L: merged deliver/P1/Sheaf.Algebra.Homology.FilteredTensorGradedComparison (stage 3; reviewer PASS; first push; landing 20261020T174828-L-804893 (proof); batch 20261020T174710; modules 1; new nodes 0)
 - 17:48 L: merged deliver/P3/Sheaf.Paper.EtaleCERowCyclesNaturality (stage 3; reviewer PASS; after a return; landing 20261020T174830-L-805496 (proof); batch 20261020T174710; modules 1; new nodes 0)
 - 17:48 L: merged deliver/P4/Sheaf.AlgebraicGeometry.ResidueStalkHomologyMapComparison (stage 3; reviewer PASS; first push; landing 20261020T174832-L-805953 (proof); batch 20261020T174710; modules 1; new nodes 0; change records: coord/changes/P4-residue-stalk-homology-canonical-pullback.md)
+- 17:48 L: merged deliver/Q2/Sheaf.Paper.BoundedBelowCtfReflection (stage 3; reviewer PASS; first push; landing 20261020T174834-L-806514 (proof); batch 20261020T174710; modules 1; new nodes 0)
