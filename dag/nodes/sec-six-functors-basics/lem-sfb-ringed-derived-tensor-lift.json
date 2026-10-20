@@ -1,0 +1,174 @@
+{
+ "id": "lem-sfb-ringed-derived-tensor-lift",
+ "kind": "statement",
+ "title": "Symmetric monoidal coherence of a canonical derived tensor lift",
+ "statement": "Given recorded ringed-site presentations X and Y, a RingedTensorEdge from Y to X, and tensor representative isomorphisms equal to the two recorded site models on every pair of flat-term K-flat complexes, there is a CoreMonoidal structure on its left derived functor. Its inverse tensorator is exactly the canonical derived tensor comparison; its inverse unit has the specified localized scalar-action formula, and its braiding equation uses the two recorded signed symmetries. This asserts coherence for one edge only. The recorded presentations, edges, representative models and normalization equations are those defined in [def-sfb-ringed-derived-comparison-data].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product) and the signed tensor model of Tag 0FPT; Modules on Sites, Tag 03EL"
+ },
+ "stmt_deps": [
+  "def-sfb-ringed-derived-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose the unique ordinary coefficient-unit isomorphism j using the action-unit theorem for the canonical scalar comparison. Define the derived unit map by the explicit localized single-complex formula. The diagram result says that this map is invertible and provides associativity, both unit equations and signed symmetry.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-tensor-diagrams"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical tensor comparison is a natural isomorphism. Its naturality on pairs (f,id) and (id,f), followed by tensorHom_id and id_tensorHom, gives the two inverse-tensorator naturality equations. Use the inverse of the explicit unit map and the inverse component tensor isomorphisms in CoreMonoidal.mk'. The supplied diagram equations give its three remaining axioms. The tensor and unit normalizations are reflexive by construction, and the signed symmetry equation is exactly the supplied one.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-tensor-diagrams",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "K4: explicit ordinary and derived unit map, naturality of the canonical tensor comparison, and CoreMonoidal.mk'; only the localized diagram equations remain separate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback between ringed topoi is symmetric strong monoidal, with canonical composition and adjunction comparisons",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullbackComp",
+     "PresheafOfModules.pullbackComp",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullbackIso",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Abstract adjunction mates and ordinary module pullback comparisons found; no statement supplies this unbounded ringed-site normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": {
+    "hits": 10,
+    "top": [
+     "CategoryTheory.conjugateIsoEquiv",
+     "CategoryTheory.conjugateIsoEquiv_apply_hom",
+     "CategoryTheory.conjugateIsoEquiv_apply_inv",
+     "CategoryTheory.conjugateIsoEquiv_symm_apply_hom",
+     "CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Abstract adjunction mates and ordinary module pullback comparisons found; no statement supplies this unbounded ringed-site normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Mm]onoidal|[Mm]onoidal.*derived|conjugateIsoEquiv",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/Condensed/Light/Small.lean",
+     "Mathlib/Condensed/Light/Small.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Abstract adjunction mates and ordinary module pullback comparisons found; no statement supplies this unbounded ringed-site normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a core monoidal functor from inverse tensor and unit isomorphisms satisfying oplax coherence and naturality",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal",
+     "CategoryTheory.Functor.CoreMonoidal.ofLaxMonoidal",
+     "CategoryTheory.Functor.Monoidal.ofOplaxMonoidal",
+     "CategoryTheory.Functor.CoreMonoidal.mk",
+     "CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal.congr_simp",
+     "CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal",
+     "CategoryTheory.Functor.Monoidal.ofLaxMonoidal",
+     "CategoryTheory.Functor.CoreMonoidal.ofLaxMonoidal.congr_simp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "CoreMonoidal constructors supply the formal structure assembly, used by this proved theorem; they do not choose or normalize the ringed-site derived tensor and scalar-action unit maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RingedDerivedMonoidalComparisons",
+  "date": "2026-10-21",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "First identity: canonical adjunctions in Rq_* Rp_{2*} = R(qp_2)_* = R(qp_1)_* = Rq_* Rp_{1*}; Second identity: moving the outside tensor factor through projection maps. Tag 07A4 and the signed tensor model of Tag 0FPT; Modules on Sites, Tag 03EL"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RingedDerivedTensorLift",
+  "file": "lean/Sheaf/SixFunctors/RingedDerivedTensorLift.lean",
+  "declaration": "CategoryTheory.RingedDerivedComparisons.tensorLift_exists",
+  "statement": "theorem tensorLift_exists {X Y : Site.{u, w}} (e : RingedTensorEdge Y.corner X.corner)\n    (rY : RingedTensorModel Y.corner) (rX : RingedTensorModel X.corner)\n    (hY : ∀ P Q hP hQ,\n      rY.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) =\n        (Y.model.iso Y.J Y.A Y.closed P Q hP.1 hQ.1).hom)\n    (hX : ∀ P Q hP hQ,\n      rX.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) =\n        (X.model.iso X.J X.A X.closed P Q hP.1 hQ.1).hom) :\n    Nonempty (TensorLift e rY rX)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.RingedDerivedComparisons.TensorLift",
+   "CategoryTheory.RingedDerivedComparisons.tensorLift_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-45343",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T233155-L-902653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-45343",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T233155-L-902653",
+  "kind": "interface",
+  "note": "independent cc review: files of 453430169b35 against the PASSed 545ebfab8248 (only change record + report differ); moved records vs clone item (all 133 constant type hashes identical, published vs delivered); change-record Users vs every live/side-live/published-olean module referring to RingedDerivedComparisons; 9 direct importers compiled against the delivery"
+ }
+}

@@ -1,0 +1,176 @@
+{
+ "id": "lem-sfb-supplied-tensor-adjunction-normalization",
+ "kind": "statement",
+ "title": "Scalar-extension adjunction with normalized underlying Hom bijection",
+ "statement": "For a ringed-topos morphism f, an algebraic inverse-image lift I, a structural scalar map c with the specified underlying geometric ring map, and a pullback L realized objectwise and on maps by scalar extension after I.modules, the canonical ordinary tensor comparison determines scalar insertion. There is an adjunction L ⊣ f.modules whose underlying-sheaf Hom bijection is exactly the geometric Hom bijection applied after that insertion. This holds for the supplied, rather than an arbitrarily chosen, module direct image. Ringed-topos morphisms and algebraic inverse images are those of [def-weil-pbc-ringed-topos-morphism, def-weil-pbc-algebraic-inverse-image]; the canonical comparison is the one of [def-weil-pbc-ringed-tensor-square-presentation].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Modules on Sites, Tag 03D7, explicit inverse-image and scalar-extension transposes"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-ringed-tensor-square-presentation",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The module-linearity condition constructs inverse transposes using the geometric adjunction. The generalized scalar-action relation proves both transposes are linear. Their underlying maps are inverse and natural.",
+   "uses": [
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose with the tensor-extension adjunction; its insertion formula gives the normalized underlying Hom bijection. Transport along the given object equalities to L. The canonical comparison inserts one on every generalized section, so its insertion agrees with the tensor unit.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-ringed-tensor-section-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Modules on Sites, Tag 03D7, explicit inverse-image and scalar-extension transposes; representative normalization extracted from lem-sfb-ringed-derived-monoidal-comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback between ringed topoi is symmetric strong monoidal, with canonical composition and adjunction comparisons",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullbackComp",
+     "PresheafOfModules.pullbackComp",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullbackIso",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Abstract adjunction mates and ordinary module pullback comparisons found; no statement supplies this unbounded ringed-site normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": {
+    "hits": 10,
+    "top": [
+     "CategoryTheory.conjugateIsoEquiv",
+     "CategoryTheory.conjugateIsoEquiv_apply_hom",
+     "CategoryTheory.conjugateIsoEquiv_apply_inv",
+     "CategoryTheory.conjugateIsoEquiv_symm_apply_hom",
+     "CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Abstract adjunction mates and ordinary module pullback comparisons found; no statement supplies this unbounded ringed-site normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Mm]onoidal|[Mm]onoidal.*derived|conjugateIsoEquiv",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/Condensed/Light/Small.lean",
+     "Mathlib/Condensed/Light/Small.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Abstract adjunction mates and ordinary module pullback comparisons found; no statement supplies this unbounded ringed-site normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension tensor adjunction for sheaves of modules has Hom equivalence given by insertion of one tensor an element",
+   "results": {
+    "hits": 8,
+    "top": [
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+     "ModuleCat.extendRestrictScalarsAdj_homEquiv_apply",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+     "ModuleCat.ExtendRestrictScalarsAdj.homEquiv",
+     "lTensorHomEquivHomLTensor",
+     "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply",
+     "ModuleCat.monoidalClosedHomEquiv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "ModuleCat scalar-extension Hom formulas match the sectionwise calculation; the supplied sheaf direct-image transport and normalization remain to be assembled."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RingedDerivedMonoidalComparisons",
+  "date": "2026-10-21",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "First identity: canonical adjunctions in Rq_* Rp_{2*} = R(qp_2)_* = R(qp_1)_* = Rq_* Rp_{1*}; Second identity: moving the outside tensor factor through projection maps. Modules on Sites, Tag 03D7, explicit inverse-image and scalar-extension transposes"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SuppliedTensorAdjunctionNormalization",
+  "file": "lean/Sheaf/SixFunctors/SuppliedTensorAdjunctionNormalization.lean",
+  "declaration": "suppliedTensorAdjunction_normalized",
+  "statement": "theorem suppliedTensorAdjunction_normalized\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}\n    (f : RingedToposMorphism (RingedTensor.ringSheaf A) (RingedTensor.ringSheaf B))\n    (RI : Sheaf J CommRingCat.{u}) (I : AlgebraicInverseImage f.inverse B RI)\n    (c : RI ⟶ A)\n    (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =\n      I.ringUnderlying.inv ≫ f.ringMap)\n    (L : SheafOfModules.{u} (RingedTensor.ringSheaf B) ⥤\n      SheafOfModules.{u} (RingedTensor.ringSheaf A))\n    (hobj : ∀ M, L.obj M = changeOfRings c (I.modules.obj M))\n    (hmap : ∀ {M N} (a : M ⟶ N), L.map a = eqToHom (hobj M) ≫\n      changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm)\n    (k : CanonicalRingedTensorComparison B A RI f.inverse I c L hobj) :\n    ∃ am : L ⊣ f.modules,\n      ∀ (M : SheafOfModules.{u} (RingedTensor.ringSheaf B))\n        (H : SheafOfModules.{u} (RingedTensor.ringSheaf A)) (v : L.obj M ⟶ H),\n        (RingedTensor.underlying B).map (am.homEquiv M H v) ≫ f.underlying.hom.app H =\n          f.adj.homEquiv _ _ (I.moduleUnderlying.inv.app M ≫ k.q M ≫\n            (RingedTensor.underlying A).map v)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-45343",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T233155-L-902653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-45343",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T233155-L-902653",
+  "kind": "interface",
+  "note": "independent cc review: files of 453430169b35 against the PASSed 545ebfab8248 (only change record + report differ); moved records vs clone item (all 133 constant type hashes identical, published vs delivered); change-record Users vs every live/side-live/published-olean module referring to RingedDerivedComparisons; 9 direct importers compiled against the delivery"
+ }
+}

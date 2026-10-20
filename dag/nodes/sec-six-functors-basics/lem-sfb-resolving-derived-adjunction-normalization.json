@@ -1,0 +1,180 @@
+{
+ "id": "lem-sfb-resolving-derived-adjunction-normalization",
+ "kind": "statement",
+ "title": "Derived adjunction normalized by a left resolving class and K-injectives",
+ "statement": "Let A and B be abelian categories with derived categories in a common universe; B has unbounded K-injective resolutions. Let G : A → B and F : B → A be additive adjoints G ⊣ F. Let P be a left resolving class of the homotopy category of A, on which G followed by localization inverts quasi-isomorphisms. For any universal left derived pair (L, epsilon) on the homotopy category and universal right derived pair (RF, eta) on complexes, there is an adjunction L ⊣ RF such that for every chain map f : G(M) → I its Hom transpose, after the left comparison epsilon, is Q of the ordinary transpose followed by eta. No boundedness or preservation of K-injectives by F is assumed. Abelian categories, localizations and resolving representatives are used as in [def-sp-abelian, def-weil-abstract-derived-category]; the ordinary adjunction induces the termwise adjunction [lem-weil-pbc-termwise-adjunction-homotopy].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09T5, lemma-derived-adjoint-functors; normalization used in Cohomology on Sites, Tag 07A6 (lemma-adjoint)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Use resolving-class essential constancy and quasi-isomorphism saturation to show the left Kan extension is absolute, hence preserved by RF.",
+   "uses": [
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "new-derived-adjunction-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use K-injective derivability to show postcomposition of the right-derived pair by L is still right derived. Transfer the left universal property to complexes across the full object-surjective homotopy quotient. Apply the derived-adjunction theorem, and its unit factorization; naturality of eta proves the stated Hom formula.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "new-derived-adjunction-compatibility",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "new-derived-adjunction-compatibility",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, proof by the resolving-class derived adjunction; Derived Categories, Tags 06XN, 05SE, 09T5 and 0FND; representative normalization extracted from lem-sfb-ringed-derived-monoidal-comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback between ringed topoi is symmetric strong monoidal, with canonical composition and adjunction comparisons",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullbackComp",
+     "PresheafOfModules.pullbackComp",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullbackIso",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Abstract adjunction mates and ordinary module pullback comparisons found; no statement supplies this unbounded ringed-site normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": {
+    "hits": 10,
+    "top": [
+     "CategoryTheory.conjugateIsoEquiv",
+     "CategoryTheory.conjugateIsoEquiv_apply_hom",
+     "CategoryTheory.conjugateIsoEquiv_apply_inv",
+     "CategoryTheory.conjugateIsoEquiv_symm_apply_hom",
+     "CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Abstract adjunction mates and ordinary module pullback comparisons found; no statement supplies this unbounded ringed-site normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Mm]onoidal|[Mm]onoidal.*derived|conjugateIsoEquiv",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/Condensed/Light/Small.lean",
+     "Mathlib/Condensed/Light/Small.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Abstract adjunction mates and ordinary module pullback comparisons found; no statement supplies this unbounded ringed-site normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction induces an adjunction of universal left and right derived functors computed by a resolving class and K injective resolutions, with the formula for the Hom equivalence on chain maps",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derivedη.congr_simp",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Adjunction.derived and derived_unit supply the general formal adjunction used in the proof, but not the resolving-class and all-chain-map normalization assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RingedDerivedMonoidalComparisons",
+  "date": "2026-10-21",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "First identity: canonical adjunctions in Rq_* Rp_{2*} = R(qp_2)_* = R(qp_1)_* = Rq_* Rp_{1*}; Second identity: moving the outside tensor factor through projection maps. Tag 07A6, proof by the resolving-class derived adjunction; Derived Categories, Tags 06XN, 05SE, 09T5 and 0FND"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ResolvingDerivedAdjunction",
+  "file": "lean/Sheaf/SixFunctors/ResolvingDerivedAdjunction.lean",
+  "declaration": "CategoryTheory.derivedAdjunctionOfResolvingClass",
+  "statement": "theorem derivedAdjunctionOfResolvingClass\n    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]\n    [Abelian A] [Abelian B] [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]\n    [Abelian.HasKInjectiveResolutions B]\n    (G : A ⥤ B) (F : B ⥤ A) [G.Additive] [F.Additive] (adj : G ⊣ F)\n    (P : Set (HomotopyCategory A (.up ℤ)))\n    (hres : ∀ X : HomotopyCategory A (.up ℤ),\n      ∃ (X' : HomotopyCategory A (.up ℤ)) (s : X' ⟶ X),\n        X' ∈ P ∧ HomotopyCategory.quasiIso A (.up ℤ) s)\n    (hinv : ∀ (X Y : HomotopyCategory A (.up ℤ)) (s : X ⟶ Y),\n      X ∈ P → Y ∈ P → HomotopyCategory.quasiIso A (.up ℤ) s →\n        IsIso ((G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh.{w}).map s))\n    (L : DerivedCategory.{w} A ⥤ DerivedCategory.{w} B)\n    (εh : DerivedCategory.Qh ⋙ L ⟶ G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (hL : L.IsLeftDerivedFunctor εh (HomotopyCategory.quasiIso A (.up ℤ)))\n    (RF : DerivedCategory.{w} B ⥤ DerivedCategory.{w} A)\n    (η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF)\n    (hRF : RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso B (.up ℤ))) :\n    ∃ d : L ⊣ RF,\n      ∀ (M : CochainComplex A ℤ) (I : CochainComplex B ℤ)\n        (f : (G.mapHomologicalComplex (.up ℤ)).obj M ⟶ I),\n        d.homEquiv (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj I)\n            (εh.app ((HomotopyCategory.quotient A (.up ℤ)).obj M) ≫\n              DerivedCategory.Q.map f) =\n          DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv M I f) ≫\n            η.app I",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-45343",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T233155-L-902653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-45343",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T233155-L-902653",
+  "kind": "interface",
+  "note": "independent cc review: files of 453430169b35 against the PASSed 545ebfab8248 (only change record + report differ); moved records vs clone item (all 133 constant type hashes identical, published vs delivered); change-record Users vs every live/side-live/published-olean module referring to RingedDerivedComparisons; 9 direct importers compiled against the delivery"
+ }
+}
