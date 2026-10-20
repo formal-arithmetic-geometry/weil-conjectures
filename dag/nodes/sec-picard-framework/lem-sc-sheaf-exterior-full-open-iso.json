@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Apply exteriorSheaf_restrict_iso M d to the full open. Its inverse identifies the exterior sheaf of the restricted module with the restriction of the exterior sheaf. Compose with Mathlib restrictFunctorIsoPullback and the upstream pullbackIsoPushforwardInv for the scheme isomorphism X.topIso.hom. Push this isomorphism forward. The pushforwardComp, pushforwardCongr for inv j ≫ j = 𝟙 X, and pushforwardId isomorphisms identify the resulting pushforward along the inverse and then j with the original exterior sheaf. These functor isomorphisms apply to every module sheaf, including degree zero and the empty scheme. For the upstream restriction theorem, rewrite exteriorPower as exteriorSheaf at the module and its restriction using [lem-sc-exterior-sheaf-upstream-comparison]; this preserves exactly the legacy objects used by the rest of the argument.",
+   "text": "Use the retained upstream exteriorSheaf_fullOpen_pushforward_iso. Its proof specializes exteriorSheaf_restrict_iso to the full open, uses X.topIso.hom to identify restriction with pullback and inverse pushforward, and composes pushforwardComp, pushforwardCongr and pushforwardId. The upstream exteriorPower is the sheafification of sectionwise exterior powers required in the statement; the existing exteriorSheaf_eq_exteriorPower theorem identifies the legacy exteriorSheaf notation with it. These constructions and the restriction theorem impose no freeness, positive-degree or nonempty-scheme hypotheses.",
    "uses": [
     "lem-sc-exterior-sheaf-restrict-iso",
     "lem-sc-exterior-sheaf-upstream-comparison"
@@ -29,8 +29,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BR0 full-open identification; formal reduction via the existing open-restriction comparison and upstream pushforward/pullback functor isomorphisms",
-  "note": " K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved."
+  "place": "Tag 0BR0, full-open identification in wedge^r N[-r]",
+  "note": "V4 retirement: preserve the proved upstream full-open restriction/pushforward argument and attach the node to its upstream module. The comparison equality verifies agreement with the original Sheaf statement."
  },
  "mathlib_searches": [
   {
@@ -95,14 +95,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafFullOpenIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafFullOpenIso.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafFullOpenIso",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafFullOpenIso.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_fullOpen_pushforward_iso",
-  "statement": "theorem exteriorSheaf_fullOpen_pushforward_iso {X : Scheme.{u}} (M : X.Modules) (d : ℕ) : Nonempty ((pushforward (⊤ : X.Opens).ι).obj (exteriorSheaf ((restrictFunctor (⊤ : X.Opens).ι).obj M) d) ≅ exteriorSheaf M d)",
+  "statement": "theorem exteriorSheaf_fullOpen_pushforward_iso {X : Scheme.{u}} (M : X.Modules) (d : ℕ) : Nonempty ((pushforward (⊤ : X.Opens).ι).obj (exteriorPower ((restrictFunctor (⊤ : X.Opens).ι).obj M) d) ≅ exteriorPower M d)",
   "branch": "sheaf-dag",
-  "by": "U2",
-  "date": "2026-10-12"
+  "by": "V4",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module under coord/retire-items.tsv. The unchanged upstream theorem uses exteriorPower, the same sectionwise exterior-power sheafification; exteriorSheaf_eq_exteriorPower identifies it with the legacy construction without hypotheses. The retained source consumer already imports this upstream module."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -117,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a6756",
-  "group": "K4",
+  "reviewer": "C-555f6",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261020T221234-L-4162476",
+  "landing": "20261020T233229-L-909046",
   "kind": "interface",
-  "note": "independent cc review: retire-items row 749 + twin WeilConjectures…exteriorSheaf_restrict_iso (signature verbatim in node lean record) with the 5 adapted consumers vs live clone; exteriorSheaf_eq_exteriorPower (lem-sc-exterior-sheaf-upstream-comparison) bridges exteriorSheaf/exteriorPower"
+  "note": "independent cc review: withdrawn Sheaf twin vs retire-items.tsv row 919 and the live upstream WeilConjectures…exteriorSheaf_fullOpen_pushforward_iso (signature verbatim in the node lean record); no importers of the Sheaf module in the live lean tree"
  }
 }
