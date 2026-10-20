@@ -57,7 +57,9 @@ commutativity; both preserve this composition identity. -/
 theorem integralConstantQuotientRingMap_compatibility (n : ℕ) :
     integralConstantQuotientRingMap l E Y (n + 1) ≫
       integralCoefficientSheafTransition l E Y n = integralConstantQuotientRingMap l E Y n := by
-  sorry
+  unfold integralConstantQuotientRingMap integralCoefficientSheafTransition
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  congr 2
 
 /-- The cone of constant integral scalars over all finite levels.
 Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
