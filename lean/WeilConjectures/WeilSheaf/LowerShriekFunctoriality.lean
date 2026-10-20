@@ -19,7 +19,6 @@ import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
-import Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange
 
 /-!
 # Functoriality of the direct image with compact support of Weil complexes

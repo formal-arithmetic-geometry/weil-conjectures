@@ -35,7 +35,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
-import Sheaf.AlgebraicGeometry.TruncationHomotopyColimit
 
 /-!
 # The Künneth map in ordinary étale cohomology

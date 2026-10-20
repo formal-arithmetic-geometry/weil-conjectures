@@ -24,9 +24,9 @@ of the library (`Sheaf.*`, `WeilConjectures.*`), M != D, and M does not import D
                module of the definition; a theorem of that module uses the lemma). Edges are taken nearest to a target
                first, each tested against the graph with the edges already taken; the ones left out are listed with a
                path D -> ... -> M. Their plan is used by moving the theorem out of M, never by forcing the import.
-  upstream     M is a module of the source library (`WeilConjectures.*`) that the targets do not reach. A source module
-               gets imports only while the targets reach it (through the imports as they are after this run, computed
-               to a fixed point) and its node is not proved; every other source file stays as upstream has it.
+  upstream     M is a module of the source library (`WeilConjectures.*`). Upstream files stay verbatim (2026-10-20):
+               no import is ever written into them (2026-10-21: an import of a Sheaf module written into
+               Kunneth.Ordinary made the upstream PointFiberAlgClosed compile for more than 30 minutes).
   reserved     M is one of the two target modules another team proves (RESERVED below): never touched.
   no file      D is recorded in the node but lean/ has no such file.
   excluded     the edge is listed in tools/proof_imports_skip.tsv (`M<tab>D<tab>reason`): an import that was tried and
@@ -278,7 +278,7 @@ def plan():
     while True:
         dist = distances(g)
         todo = sorted((dist.get(m, 10**6), m, dm) for m, dm in pending
-                      if m.startswith("Sheaf.") or m in dist)
+                      if m.startswith("Sheaf."))
         if not todo:
             break
         for _, m, dm in todo:
@@ -346,7 +346,7 @@ LABEL = {
     "added": "missing, to add",
     "cycle": "left out: the import would close a cycle (D -> ... -> M)",
     "proved": "not added: the node's declaration is proved (no sorry)",
-    "upstream": "not added: module of the source library the targets do not reach",
+    "upstream": "not added: module of the source library (upstream files stay verbatim)",
     "reserved": "not added: target module another team proves",
     "no file": "not added: the dependency's module has no file",
     "excluded": "left out: listed in tools/proof_imports_skip.tsv",
