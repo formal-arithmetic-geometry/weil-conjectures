@@ -27,7 +27,7 @@
    "elementary": false
   },
   {
-   "text": "Apply the proved upstream open_derived_localization_adjunction X U, which needs only the ambient and localized-over-U derived localizations already assumed. Its proof installs the Grothendieck abelian structure and K-injective resolutions and derives the underived right adjoint using mapDerivedCategoryRightDerivedAdjunction. Package this adjunction with hD and hO into the displayed nested existentials. The combined theorem has the distinct name open_derived_localizations_and_adjunction, avoiding collision with the upstream adjunction-only theorem.",
+   "text": "Apply the proved upstream open_derived_localization_adjunction X U, which needs only the ambient and localized-over-U derived localizations already assumed. Its proof installs the Grothendieck abelian structure and K-injective resolutions and derives the underived right adjoint using mapDerivedCategoryRightDerivedAdjunction. Together with hD and hO from the first two steps, this proves all three clauses of the node. The former nested-existential wrapper is unnecessary: the two upstream declarations and nonempty_derivedOpenLocalization jointly realize the statement. All parent implementations already use these components directly.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "lem-sc-derived-adjunction-from-underived"
@@ -44,7 +44,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 079W, Lemma cohomology-lemma-adjoint, specialized to the open inclusion; the same adjunction is used in perfect.tex Tag 0A9A, lemma-supported-generator; explicit localization and module-system comparison argument; 2026-10-21: compose the upstream localization-transport and adjunction-only theorems, retaining all three clauses"
+  "place": "Tag 079W, Lemma cohomology-lemma-adjoint, specialized to the open inclusion; the same adjunction is used in perfect.tex Tag 0A9A, lemma-supported-generator; explicit localization and module-system comparison argument; 2026-10-21: compose the upstream localization-transport and adjunction-only theorems, retaining all three clauses; 2026-10-21 E6: retire the unused combined wrapper; attach the full assertion jointly to the upstream transport and adjunction theorems and the existing open-localization dependency"
  },
  "mathlib_searches": [
   {
@@ -114,14 +114,19 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenDerivedLocalizationAdjunction.lean",
-  "declaration": "AlgebraicGeometry.open_derived_localizations_and_adjunction",
-  "statement": "theorem open_derived_localizations_and_adjunction\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (U : X.Opens) :\n    ∃ hD : HasDerivedCategory.{w}\n        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)),\n    letI := hD\n    ∃ hO : ∀ W : U.toScheme.Opens, HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over W)),\n    letI := hO\n    ∃ (R : DerivedCategory\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n        schemeDerivedCategory X),\n      Nonempty ((SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R)",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationAdjunction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenDerivedLocalizationAdjunction.lean",
+  "declaration": "AlgebraicGeometry.open_derived_localization_adjunction",
+  "statement": "theorem open_derived_localization_adjunction\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :\n    ∃ (R : DerivedCategory\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n        schemeDerivedCategory X),\n      Nonempty ((SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R)",
   "branch": "sheaf-dag",
-  "by": "C2",
-  "date": "2026-10-12"
+  "by": "E6",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.nonempty_hasDerivedCategory_openSubscheme",
+   "AlgebraicGeometry.open_derived_localization_adjunction"
+  ],
+  "note": "Retirement: this node is jointly realized by the two recorded upstream theorems and its existing dependency lem-pc-derived-open-localization-universe (nonempty_derivedOpenLocalization). The primary declaration realizes only the adjunction clause. nonempty_hasDerivedCategory_openSubscheme realizes the open-scheme localization clause; installing that localization and applying nonempty_derivedOpenLocalization to U.toScheme realizes the family clause. Their nested-existential assembly was compiled with exactly the former full statement, including arbitrary u and w. No clause of the mathematical node statement is removed. The unused combined wrapper open_derived_localizations_and_adjunction is withdrawn; all six parent implementations already use the upstream component API."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -136,11 +141,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-3d00c",
-  "group": "M5",
+  "reviewer": "C-2e4b5",
+  "group": "E6",
   "result": "pass",
-  "landing": "20261020T221250-L-4166153",
+  "landing": "20261020T233126-L-897306",
   "kind": "interface",
-  "note": "independent cc review: renamed open_derived_localizations_and_adjunction (type identical to old combined theorem) and its 3-step proof against node lem-pc-open-derived-localization-adjunction and upstream WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationAdjunction (nonempty_hasDerivedCategory_openSubscheme, open_derived_localization_adjunction) plus nonempty_derivedOpenLocalization; delivered file compiles, axioms clean, 0 importers"
+  "note": "independent cc review: Withdrawn stub module and item node lean record (existing:true, upstream open_derived_localization_adjunction + nonempty_hasDerivedCategory_openSubscheme) against upstream twin sources; old combined statement re-proved from the 3 upstream components (axioms clean); 6 parent nodes' proof-text-only changes against the actual upstream proofs; 0 importers"
  }
 }
