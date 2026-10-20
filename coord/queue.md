@@ -1,15 +1,17 @@
 # Work queue
 
-302 items; claim with `tools/claim.py next <group> [--stage N]`.
+303 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (42 clusters, 1726 modules)
+## Rework: quarantined by the upstream sync (43 clusters, 1726 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
-| `Sheaf.AlgebraicGeometry.CoefficientConstructibleEtaleModules` | 1 |  | error: Sheaf/AlgebraicGeometry/CoefficientConstructibleEtaleModules.lean:111:10: error(lean.unknownIdentifier): Unknown identifier `LocallyClosedStratification` |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | 1 |  | error: Sheaf/Paper/LevelwiseAdicTruncations.lean:685:32: error(lean.unknownIdentifier): Unknown identifier `LocallyClosedStratification` | | Note: It is not pos |
+| `Sheaf.Paper.ConstructibleCoefficientHomologyTriangulated` | 1 |  | error: Sheaf/Paper/ConstructibleCoefficientHomologyTriangulated.lean:61:10: error(lean.unknownIdentifier): Unknown identifier `LocallyClosedStratification` | Sh |
+| `Sheaf.Paper.FinitePerfectAdicRealization` | 1 |  | error: Sheaf/Paper/FinitePerfectAdicRealization.lean:83:45: error(lean.unknownIdentifier): Unknown identifier `FinitePerfectModelsCompatible` | | Note: It is no |
+| `Sheaf.AlgebraicGeometry.CoefficientConstructibleEtaleModules` | 1 |  | error: Sheaf/AlgebraicGeometry/CoefficientConstructibleEtaleModules.lean:111:10: error(lean.unknownIdentifier): Unknown identifier `LocallyClosedStratification` |
 | `Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/Picard/CanonicalSinglePullbackComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, enviro |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
 | `Sheaf.AlgebraicGeometry.RelativeMVResolvedRoofOpenMateComparisons` | 1 |  | error: Sheaf/AlgebraicGeometry/RelativeMVResolvedRoofOpenMateComparisons.lean:5:0: error: import Sheaf.AlgebraicGeometry.DerivedPullback failed, environment alr |
@@ -39,6 +41,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.PerfectUniversalH0BottomModel` | 1 |  | error: Sheaf/AlgebraicGeometry/PerfectUniversalH0BottomModel.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment alrea |
 | `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence` | 1 |  | error: Sheaf/CategoryTheory/FilteredHomotopySpectralSequence.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alre |
+| `Sheaf.AlgebraicGeometry.BottomChainModelPullbackTransport` | 1 |  | error: Sheaf/AlgebraicGeometry/BottomChainModelPullbackTransport.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment a |
 | `Sheaf.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedProjectionMateOpenRestrictionComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed,  |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackSingleCohomology` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedPullbackSingleCohomology.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment alr |
 | `Sheaf.AlgebraicGeometry.FlatTelescopePullbackSumColimit` | 1 |  | error: Sheaf/AlgebraicGeometry/FlatTelescopePullbackSumColimit.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment alr |
@@ -47,11 +50,9 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral` | 1 |  | error: Sheaf/AlgebraicGeometry/RingedSpaceDerivedAdjunctionGeneral.lean:70:18: error(lean.unknownIdentifier): Unknown constant `SheafOfModules.changeOfRings` |  |
 | `Sheaf.AlgebraicGeometry.ScalarAbelianPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarAbelianPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ScalarAbelianExtFactorization failed, envir |
 | `Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore` | 1 |  | error: Sheaf/AlgebraicGeometry/SmoothProperTensorPerfectCaseCore.lean:1:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment a |
-| `Sheaf.Paper.ConstructibleCoefficientHomologyTriangulated` | 1 |  | error: Sheaf/Paper/ConstructibleCoefficientHomologyTriangulated.lean:61:10: error(lean.unknownIdentifier): Unknown identifier `LocallyClosedStratification` | Sh |
-| `Sheaf.Paper.FinitePerfectAdicRealization` | 1 |  | error: Sheaf/Paper/FinitePerfectAdicRealization.lean:83:45: error(lean.unknownIdentifier): Unknown identifier `FinitePerfectModelsCompatible` | | Note: It is no |
 | `Sheaf.Paper.ReconstructionUniformTower` | 1 |  | error: Sheaf/Paper/ReconstructionUniformTower.lean:82:14: error(lean.unknownIdentifier): Unknown identifier `LocallyClosedStratification` | | Note: It is not po |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 27, stage 3 32 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 27, stage 3 31 items.
 
 ## Stage 1: nodes to split (0)
 
@@ -109,6 +110,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | - | 5 | proof | 2 |
 | `Sheaf.Paper.IntegralDerivedOperationsOnSlices` | - | 4 | proof | 2 |
 | `Sheaf.Paper.IntegralHomReductionComparison` | - | 1 | proof | 2 |
+| `Sheaf.Paper.IntegralScalarExtensionWellDefined` | - | 2 | proof | 2 |
 | `Sheaf.Paper.KoszulReconstruction` | - | 1 | proof | 2 |
 | `Sheaf.Paper.OpenImmersionTensorPiece` | - | 1 | proof | 2 |
 | `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | proof | 2 |
@@ -169,7 +171,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteLevelRectangle` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteReductionConstructibility` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteSystemPullbackCoherence` | - | 2 | proof | 3 |
-| `Sheaf.Paper.IntegralScalarExtensionWellDefined` | - | 2 | proof | 3 |
 | `Sheaf.Paper.InternalSliceDerivedHomComparison` | - | 5 | proof | 3 |
 | `Sheaf.Paper.PurEtaleScalarMateProjection` | - | 2 | proof | 3 |
 | `Sheaf.Paper.RingedCoefficientProjectionCocycle` | - | 1 | proof | 3 |
