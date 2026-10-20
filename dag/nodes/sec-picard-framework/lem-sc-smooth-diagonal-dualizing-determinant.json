@@ -53,6 +53,13 @@
     "def-pur-sheaf-hom"
    ],
    "elementary": true
+  },
+  {
+   "text": "The upstream theorem uses the canonical exteriorPower implementation. To recover the archived exteriorSheaf conclusion, rewrite with exteriorSheaf_eq_exteriorPower. This equality follows from equality of the sectionwise exterior presheaves and the same sheafification functor, without freeness or nonempty hypotheses. The restored compatibility module checks this entire archived signature in Lean.",
+   "uses": [
+    "lem-sc-exterior-sheaf-upstream-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -64,12 +71,13 @@
   "lem-sc-smooth-proper-diagonal-koszul-dual",
   "def-pc-derived-category",
   "lem-sc-constant-rank-exterior-derived-comparison",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "lem-sc-exterior-sheaf-upstream-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BR0 specialized to the smooth diagonal, Tag 08S2, fourth equality of Tag 0BRT; Lean reduction using explicit structure-object transport and two smaller comparison statements"
+  "place": "Tag 0BR0 specialized to the smooth diagonal, Tag 08S2, fourth equality of Tag 0BRT; Lean reduction using explicit structure-object transport and two smaller comparison statements; T4 2026-10-20: same upstream proof, and equality transport to the archived exteriorSheaf conclusion"
  },
  "mathlib_searches": [
   {
@@ -119,14 +127,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SmoothDiagonalDualizingDeterminant",
-  "file": "lean/Sheaf/AlgebraicGeometry/SmoothDiagonalDualizingDeterminant.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SmoothDiagonalDualizingDeterminant",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SmoothDiagonalDualizingDeterminant.lean",
   "declaration": "AlgebraicGeometry.smoothDiagonal_dualizing_determinant",
-  "statement": "theorem smoothDiagonal_dualizing_determinant (X S : Scheme.{u}) [IsNoetherian S] (f : X ⟶ S) (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wP} (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace))] (hRΔ : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty (pullback f f) ((schemeDerivedDirectImage (pullback.diagonal f)).obj E.obj)) (c : schemeDerivedQCohCategory (pullback f f) ⥤ schemeDerivedQCohCategory X) (adjC : (schemeDerivedQCohProperty (pullback f f)).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage (pullback.diagonal f)) hRΔ ⊣ c) (OP : schemeDerivedQCohCategory (pullback f f)) (hOP : OP.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace)) 0).obj (SheafOfModules.unit (pullback f f).ringCatSheaf)) : Nonempty ((c.obj OP).obj ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (Scheme.Modules.exteriorSheaf (SheafOfModules.homObj (R := X.sheaf) f.relativeDifferentials (SheafOfModules.unit X.ringCatSheaf)) d))⟦-(d : ℤ)⟧)",
+  "statement": "theorem smoothDiagonal_dualizing_determinant (X S : Scheme.{u}) [IsNoetherian S] (f : X ⟶ S) (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wP} (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace))] (hRΔ : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty (pullback f f) ((schemeDerivedDirectImage (pullback.diagonal f)).obj E.obj)) (c : schemeDerivedQCohCategory (pullback f f) ⥤ schemeDerivedQCohCategory X) (adjC : (schemeDerivedQCohProperty (pullback f f)).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage (pullback.diagonal f)) hRΔ ⊣ c) (OP : schemeDerivedQCohCategory (pullback f f)) (hOP : OP.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace)) 0).obj (SheafOfModules.unit (pullback f f).ringCatSheaf)) : Nonempty ((c.obj OP).obj ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (Scheme.Modules.exteriorPower (SheafOfModules.homObj (R := X.sheaf) f.relativeDifferentials (SheafOfModules.unit X.ringCatSheaf)) d))⟦-(d : ℤ)⟧)",
   "branch": "sheaf-dag",
   "by": "Q3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "T4, 2026-10-20: use the canonical upstream theorem, with all hypotheses and independent derived universes unchanged. The restored Sheaf compatibility module privately verifies the exact archived exteriorSheaf conclusion using exteriorSheaf_eq_exteriorPower. No mathematical statement or dependency was withdrawn; the quarantined parent remains attached to this node."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -139,14 +148,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
+  "reviewer": "C-fed26",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261012T110255-L-612343",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T155828-L-3294386",
+  "kind": "proof",
+  "note": "independent cc review: node lem-sc-smooth-diagonal-dualizing-determinant lean.statement (old with exteriorSheaf→exteriorPower, otherwise byte-identical) against the upstream twin WeilConjectures.AlgebraicGeometry.SmoothDiagonalDualizingDeterminant; private exteriorSheaf_compatibility against the archived quarantine signature via exteriorSheaf_eq_exteriorPower; compiled, axioms clean, 0 importers"
  },
  "lean_audit": {
   "master": {
