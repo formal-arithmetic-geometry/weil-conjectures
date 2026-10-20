@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-qcoherent-comparison-degree-zero",
+ "kind": "statement",
+ "title": "Degree-zero normalization of the fixed large module comparison",
+ "statement": "For any scheme X [def-pc-scheme], any sheaf F of O_X-modules [def-weil-sheaf-of-modules-category], and any section s over X, apply the degree-zero right-derived global-sections unit [def-sc-ringed-space-module-cohomology] to s, then the fixed moduleAbelianCohomologyLarge comparison [def-pbc-canonical-coherent-etale-comparison]. Its terminal Zariski section evaluation sourceZero is exactly s. This is a formula for the fixed comparison, without any quasi-coherence, nonemptiness, compactness, separatedness or field assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD; homology.tex Tag 015E; derived-categories.tex Tag 06XR, degree-zero resolution and Ext computations"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pbc-canonical-coherent-etale-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For any additive functor, the degree-zero derived unit, followed by the injective-resolution comparison, is the augmentation into cycles followed by the cycle-to-homology map. Exact forgetting of scalars preserves this formula, by the natural cycles and homology comparison maps.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the underlying abelian sheaf, the forgotten module resolution is section-acyclic. Naturality of the canonical acyclic-resolution comparison, checked after mapping to a chosen injective resolution, identifies the same augmentation formula. The fixed Ext/sections comparison sends the Ext class of a degree-zero morphism to the associated section cocycle. The terminal-source identification evaluates its free generator at the integer 1.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-acyclic-comparison-natural",
+    "new-abelian-ext-sections-cocycle-normalization",
+    "new-terminal-source-sections-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the defining natural-isomorphism composite first for arbitrary functors. The module-to-abelian-section component preserves the derived-unit morphism by the common-resolution augmentation square. Independently, the inverse site-section component followed by terminal Ext-source change sends the abelian derived unit to the inverse H.equiv_0 image of the section: cancel the site-section isomorphism using the terminal generator evaluation. Compose these two unit identities and evaluate at the original section. This uses the defining components directly, without unfolding a chosen resolution or invoking the separate Ext-to-sections factorization theorem.",
+   "uses": [
+    "new-module-cohomology-ext-resolution-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For Ext in either presentation universe, homAddEquiv sends mk_0(f) to the same degree-zero derived morphism. Thus universe transport preserves addEquiv_0 and consequently preserves the constant-sheaf-adjunction terminal evaluation H.equiv_0. Apply this to the fixed comparison to obtain the asserted formula.",
+   "uses": [
+    "def-pbc-canonical-coherent-etale-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sc-acyclic-comparison-natural",
+  "new-abelian-ext-sections-cocycle-normalization",
+  "new-terminal-source-sections-evaluation",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "new-module-cohomology-ext-resolution-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03FD, 015E, 06XR; normalize both resolution augmentations and evaluate the terminal integer generator"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "moduleAbelianCohomologyLarge_zero|module.*[Ss]ections.*zero",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No theorem states this fixed module comparison formula. Use resolution unit and Ext degree-zero APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "results": "1 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-20",
+   "verdict": "No theorem states this fixed module comparison formula. Use resolution unit and Ext degree-zero APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero normalization of module global sections right derived functor Ext sheaf cohomology comparison",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-20",
+   "verdict": "No theorem states this fixed module comparison formula. Use resolution unit and Ext degree-zero APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree zero module sheaf cohomology comparison with Ext preserves the derived global sections unit",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_zero, SheafOfModules.unitHomEquiv_apply_coe, CategoryTheory.Abelian.Ext.addEquiv₀, CategoryTheory.Abelian.Ext.linearEquiv₀, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero",
+   "date": "2026-10-20",
+   "verdict": "No theorem states the normalization of this fixed comparison. Ext.addEquiv₀ supplies the degree-zero morphism identification used in the proved universe-transport calculation; the derived-unit formula still requires the resolution argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison",
+  "date": "2026-10-20",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-qcoherent-normalized-comparison-exists",
+   "place": "Normalization of the fixed moduleAbelianCohomologyLarge comparison on actual degree-zero sections; a proved independent lemma, with no new hole."
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcoherentComparisonDegreeZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcoherentComparisonDegreeZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge_zero",
+  "statement": "theorem moduleAbelianCohomologyLarge_zero (X : Scheme.{u})\n    (F : X.Modules) (s : Γ(F, ⊤)) :\n    letI : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=\n      (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2\n    CoherentEtale.sourceZero X F\n      (moduleAbelianCohomologyLarge X F 0\n        ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app F s)) =\n      s",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3809e",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261020T230711-L-602865",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3809e",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261020T230711-L-602865",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, new degree-zero module, adapted CanonicalCoherentEtaleComparison and six consumers matched against the base/quarantine originals, the adopted WeilConjectures ModuleCohomologyExtResolutionNaturality(+Extension), the DAG nodes and the change records; all compiled, plus two quarantined importers, original-vs-adapted forced-adaptation compiles, #print axioms and old=new scratch proofs for coherentExtUniverseEquiv and coherentModuleGroup"
+ }
+}
