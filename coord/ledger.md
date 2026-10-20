@@ -17932,3 +17932,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:21 L: returned deliver/Z6/Sheaf.Paper.WContractibleConstantReductionsML (reviewer RETURN: (reviewer C-662c4, head 662c40be5) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.WContractibleC)
 - 12:21 L: returned deliver/T2/Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison (reviewer RETURN: (the landing tools, head 4e26de77b) the delivery did not land: lean/Sheaf/WeilSheaf/CompactSupportFiniteCoefficientCompa)
 - 12:21 L: returned deliver/T3/Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction (reviewer RETURN: (the landing tools, head 0afb9c502) the delivery did not land: lean/Sheaf/AlgebraicGeometry/AffineSpaceAmbientAdjunction)
+- 12:21 L: returned deliver/T3/Sheaf.Paper.IntegralCompactSupportPrescribedReductions (reviewer RETURN: (the landing tools, head edfee445e) the delivery did not land: lean/Sheaf/Paper/IntegralCompactSupportPrescribedReductio)
