@@ -1,0 +1,126 @@
+{
+ "id": "lem-amb-signed-fibre-shift",
+ "kind": "definition",
+ "title": "Coherent signed comparisons with every integer shift",
+ "statement": "Let $C$ be an abelian category, $A,B:C\\to\\mathrm{Ab}$ additive functors and $r:A\\Rightarrow B$ natural, and let $F$ be their signed fibre functor [lem-amb-signed-fibre-complex]. Construct coherent natural isomorphisms $F(I[m])\\cong F(I)[m]$ for every integer $m$. In degree $n$ the comparison is $(a,b)\\mapsto(a,(-1)^m b)$, using canonical transports between equal integer indices. These comparisons satisfy the zero and addition identities of an integer-shift-compatible functor. For $m=1$ the formula is $(a,b)\\mapsto(a,-b)$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014E/014F; signed two-term refinement in the proof of lem-amb-signed-fibre-triangulated."
+ },
+ "stmt_deps": [
+  "lem-amb-signed-fibre-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the sign (-1)^m on the second coordinate and the canonical index transport to construct inverse degreewise maps. Expanding the signed differential proves the chain-map equation: the two signs multiply to one. Diagonal maps commute with the comparisons.",
+   "uses": [
+    "lem-amb-signed-fibre-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For shift zero, the two transports compose to the identity. For consecutive shifts a,b the transports compose to the single transport and (-1)^(a+b)=(-1)^a(-1)^b; thus the natural comparisons satisfy the CommShift zero and addition identities.",
+   "uses": [
+    "lem-amb-signed-fibre-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-signed-fibre-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Explicit Lean construction following the indicated signed fibre proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The signed mapping fibre of additive functors on complexes preserves shifts, homotopies and cone triangles",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; CategoryTheory.Functor.mapCochainComplexShiftIso; CategoryTheory.Functor.IsTriangulated; Homotopy.shift; CochainComplex.shiftFunctor; CategoryTheory.Functor.mapHomotopyEquiv; CochainComplex.mappingCone.map_δ; CategoryTheory.Pretriangulated.Triangle.shiftFunctorAdd'_hom_app_hom₁",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quotient.liftCommShift\"",
+   "results": "CategoryTheory.Quotient.liftCommShift; CategoryTheory.Quotient.LiftCommShift.iso; CategoryTheory.Quotient.liftCommShift_compatibility; CategoryTheory.Quotient.liftCommShift_commShiftIso; CategoryTheory.Quotient.LiftCommShift.iso_inv_app; CategoryTheory.Quotient.LiftCommShift.iso_hom_app",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on cochain complexes preserving homotopies, shifts and cone triangles induces a triangulated functor on the homotopy category",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; HomotopyCategory.instIsTriangulatedIntUp; HomotopyCategory.instPretriangulatedIntUp; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; CochainComplex.mappingCone.mapTrianglehIso; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; DerivedCategory.instIsTriangulated; CochainComplex.mappingConeCompTriangleh",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*IsTriangulated|IsTriangulated.*lift|liftCommShift",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SignedFibreTriangulated",
+  "date": "2026-10-20",
+  "group": "J2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Proof: \"One may compute the cone on an injective resolution\" and compatibility of cone maps and Kummer boundaries; coherent signed shift construction supporting step 3 of lem-amb-signed-fibre-triangulated.",
+   "via": [
+    "lem-amb-signed-fibre-triangulated",
+    "lem-amb-relative-torsor-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedFibreShift",
+  "file": "lean/Sheaf/CategoryTheory/SignedFibreShift.lean",
+  "declaration": "CategoryTheory.SignedFibre.commShift",
+  "declarations": [
+   "CategoryTheory.SignedFibre.commShift",
+   "CategoryTheory.SignedFibre.shiftXIso",
+   "CategoryTheory.SignedFibre.shiftIso",
+   "CategoryTheory.SignedFibre.shiftNatIso",
+   "CategoryTheory.SignedFibre.units_smul_apply"
+  ],
+  "statement": "def commShift : (functor A B r).CommShift ℤ",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T132013-L-1401007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T132013-L-1401007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

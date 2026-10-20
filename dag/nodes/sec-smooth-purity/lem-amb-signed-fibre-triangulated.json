@@ -16,7 +16,7 @@
   {
    "text": "Write $A(I)$ for the complex with differential $d_A^n=A(d_I^n)$, and similarly for $B$. Additivity gives $A(0)=B(0)=0$ on morphisms, so these differentials square to zero. Naturality gives $d_B^nr_{I^n}=r_{I^{n+1}}d_A^n$. Thus $D^{n+1}D^n(a,b)=(0,r d_Aa-d_Br a+d_B^2b)=(0,0)$, proving that $F(I)$ is a complex. For a chain map $f:I\\to J$, the two composites $D_JF(f)$ and $F(f)D_I$ are $(A(f)d_Aa,r_JA(f)a-B(f)d_Bb)$ and $(A(f)d_Aa,B(f)r_Ia-B(f)d_Bb)$; they agree by naturality of $r$. Identities and composition follow on each coordinate, and $F(f+g)=F(f)+F(g)$ by additivity of $A$ and $B$.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "lem-amb-signed-fibre-complex"
    ],
    "elementary": true,
    "source": {
@@ -27,7 +27,8 @@
   {
    "text": "Let $f-g=d_JH+Hd_I$ and set $h^n(a,b)=(A(H^n)a,-B(H^{n-1})b)$. The first coordinate of $D_Jh+hD_I$ is $(d_AA(H)+A(H)d_A)a=A(f-g)a$. Its second coordinate is $[r_JA(H)-B(H)r_I]a+[d_BB(H)+B(H)d_B]b=B(f-g)b$. The bracket involving $r$ vanishes by naturality for $H^n:I^n\\to J^{n-1}$. Hence $h$ is the asserted homotopy. Sending a homotopy class $[f]$ to $[F(f)]$ is therefore well-defined; the identity, composition and addition identities just proved descend to give the additive functor on $K(\\mathcal A)$.",
    "uses": [
-    "lem-trf-additive-homotopy-category-triangulated"
+    "lem-amb-signed-fibre-complex",
+    "lem-amb-cone-functor-descent"
    ],
    "elementary": true,
    "source": {
@@ -38,7 +39,7 @@
   {
    "text": "The differentials on $F(I[1])$ and $F(I)[1]$, on their common underlying groups, are respectively $(a,b)\\mapsto(-d_Aa,r a+d_Bb)$ and $(a,b)\\mapsto(-d_Aa,-r a+d_Bb)$. Applying $s_I(a,b)=(a,-b)$ before or after the differential gives $(-d_Aa,-r a-d_Bb)$. Thus $s_I$ is a chain map, inverse to the same coordinate sign map. It is natural since every $F(f)$ is diagonal in the two coordinates. The naturality identities persist on homotopy classes.",
    "uses": [
-    "lem-trf-additive-homotopy-category-triangulated"
+    "lem-amb-signed-fibre-shift"
    ],
    "elementary": true,
    "source": {
@@ -49,8 +50,7 @@
   {
    "text": "Use the canonical decompositions $A(U\\oplus V)\\cong A(U)\\oplus A(V)$ and similarly for $B$. Explicitly the maps induced by the two projections and the two inclusions are inverse: applying $A$ to $p_i i_j=\\delta_{ij}$ and $i_1p_1+i_2p_2=1$ proves both inverse identities, and the same holds for $B$. Naturality of $r$ for the inclusions and projections identifies $r_{U\\oplus V}$ with the diagonal matrix $(r_U,r_V)$. Therefore, in the stated source order, the differential of $F(\\operatorname{Cone}(f))$ is\n$$ (x,y,z,w)\\longmapsto(d_{AJ}x+A(f)y,-d_{AI}y,r_Jx-d_{BJ}z-B(f)w,r_Iy+d_{BI}w). $$\nAll indices are forced by the source order: $x\\in A(J^n)$, $y\\in A(I^{n+1})$, $z\\in B(J^{n-1})$, $w\\in B(I^n)$.",
    "uses": [
-    "def-sp-abelian",
-    "def-weil-abstract-derived-category"
+    "lem-amb-signed-fibre-cone"
    ],
    "elementary": true,
    "source": {
@@ -61,7 +61,7 @@
   {
    "text": "In target order $(u,v,t,q)\\in A(J^n)\\oplus B(J^{n-1})\\oplus A(I^{n+1})\\oplus B(I^n)$, the cone differential is\n$$d(u,v,t,q)=(d_{AJ}u+A(f)t,r_Ju-d_{BJ}v+B(f)q,-d_{AI}t,-r_It+d_{BI}q).$$\nSubstitution of $\\Phi_f(x,y,z,w)=(x,z,y,-w)$ gives\n$$(d\\Phi_f)(x,y,z,w)=(d_{AJ}x+A(f)y,r_Jx-d_{BJ}z-B(f)w,-d_{AI}y,-r_Iy-d_{BI}w).$$\nApplying $\\Phi_f$ in degree $n+1$ to the four coordinates of the preceding step gives exactly this tuple. Thus $\\Phi_f$ is a chain map, with inverse $(u,v,t,q)\\mapsto(u,t,v,-q)$, proving the asserted chain isomorphism.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "lem-amb-signed-fibre-cone"
    ],
    "elementary": true,
    "source": {
@@ -72,7 +72,7 @@
   {
    "text": "For a strictly commuting square $v f=f^{\\prime}u$ with $u:I\\to I^{\\prime}$, $v:J\\to J^{\\prime}$, the induced source cone map after applying $F$ sends $(x,y,z,w)$ to $(A(v)x,A(u)y,B(v)z,B(u)w)$. Either order of composing it with $\\Phi$ gives $(A(v)x,B(v)z,A(u)y,-B(u)w)$. This proves naturality of the cone isomorphism in chain-map squares. The inclusion $F(J)\\to F(\\operatorname{Cone}(f))$ sends $(x,z)$ to $(x,0,z,0)$, and $\\Phi$ sends this to $(x,z,0,0)$, the target cone inclusion. Finally $F(-p)(x,y,z,w)=(-y,-w)$, so $s_IF(-p)(x,y,z,w)=(-y,w)=(-p)\\Phi_f(x,y,z,w)$. This proves the boundary identity, including its sign.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "lem-amb-signed-fibre-cone"
    ],
    "elementary": true,
    "source": {
@@ -83,9 +83,9 @@
   {
    "text": "Apply the triangulation statement to $\\mathcal A$ and to $\\mathrm{Ab}$: both have a zero object and binary biproducts, and are preadditive. Every distinguished triangle in their homotopy categories is isomorphic to a cone triangle ending in $-p$. Steps 3, 5 and 6 give an isomorphism from the image under $F$ of each cone triangle, with last arrow composed with $s_I$, to the cone triangle of $F(f)$: on the first two vertices it is the identity, and on the third it is $\\Phi_f$. A functor sends isomorphisms and commuting diagrams to isomorphisms and commuting diagrams; hence the image of any distinguished triangle is isomorphic to this distinguished cone triangle. Together with additivity and the natural shift comparison, this is precisely the definition of an exact functor.",
    "uses": [
-    "lem-trf-additive-homotopy-category-triangulated",
-    "def-sp-abelian",
-    "def-weil-triangulated-category"
+    "lem-amb-cone-functor-descent",
+    "lem-amb-signed-fibre-shift",
+    "lem-amb-signed-fibre-cone"
    ],
    "elementary": false,
    "source": {
@@ -96,8 +96,8 @@
   {
    "text": "If $I^n=0$ for $n<N$, then $A(I^n)$ and $B(I^{n-1})$ vanish for $n<N$: an additive functor sends the zero object to zero since its identity is the image of the zero morphism and hence is zero. Thus $F(I)^n=0$ for $n<N$. The chain-map and homotopy formulas are the same on these complexes, so the functor restricts to $K^+(\\mathcal A)\\to K^+(\\mathrm{Ab})$. Shifts preserve bounded-below complexes, and if $I$ and $J$ vanish below $N_I$ and $N_J$, their cone vanishes below $\\min(N_J,N_I-1)$. The preceding cone-triangle comparison therefore also holds within bounded-below complexes.",
    "uses": [
-    "def-sp-abelian",
-    "def-weil-abstract-derived-category"
+    "lem-amb-signed-fibre-complex",
+    "lem-amb-cone-functor-descent"
    ],
    "elementary": true,
    "source": {
@@ -107,15 +107,15 @@
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "lem-trf-additive-homotopy-category-triangulated",
-  "def-sp-abelian",
-  "def-weil-triangulated-category"
+  "lem-amb-signed-fibre-complex",
+  "lem-amb-signed-fibre-shift",
+  "lem-amb-signed-fibre-cone",
+  "lem-amb-cone-functor-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Explicit signed two-term totalization argument, using cone conventions from Tags 014E/014F and the triangulation from Tag 014S; not a verbatim Stacks theorem."
+  "place": "Original eight-step signed two-term argument, now implemented by SignedFibreComplex, SignedFibreShift, SignedFibreCone, and the proved general ConeFunctorDescent. No unproved intermediate statements."
  },
  "mathlib_searches": [
   {
@@ -256,5 +256,15 @@
   "by": "Q68",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T132013-L-1401007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import Mathlib.Algebra.Category.Grp.Abelian
+import Sheaf.CategoryTheory.SignedFibreCone
+import Sheaf.CategoryTheory.ConeFunctorDescent
 
 /-!
 # The signed fibre functor preserves cone triangles
@@ -121,6 +123,54 @@ theorem exists_signedFibre_triangulated
         I.IsStrictlyGE N → (F.obj I).IsStrictlyGE N) ∧
       (∀ K : HomotopyCategory C (.up ℤ),
         HomotopyCategory.plus C K → HomotopyCategory.plus AddCommGrpCat.{w} (G.obj K)) := by
-  sorry
-
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.defeqAttrib.useBackward true in
+    let F := SignedFibre.functor A B r
+    let : F.CommShift ℤ := SignedFibre.commShift A B r
+    let e : ∀ (I : CochainComplex C ℤ) (n : ℤ),
+        (F.obj I).X n ≅ AddCommGrpCat.of (A.obj (I.X n) × B.obj (I.X (n - 1))) :=
+      fun _ _ ↦ Iso.refl _
+    let Phi : ∀ {I J : CochainComplex C ℤ} (f : I ⟶ J),
+        F.obj (mappingCone f) ≅ mappingCone (F.map f) :=
+      fun f ↦ SignedFibre.coneIso A B r f
+    have hb : ∀ (I : CochainComplex C ℤ) (N : ℤ),
+        I.IsStrictlyGE N → (F.obj I).IsStrictlyGE N := by
+      intro I N h
+      exact @SignedFibre.obj_isStrictlyGE C _ _ A B _ _ r I N h
+    have hc : ∀ {I J : CochainComplex C ℤ} (f : I ⟶ J),
+        Nonempty (F.mapTriangle.obj (mappingCone.triangle f) ≅
+          mappingCone.triangle (F.map f)) := by
+      intro I J f
+      refine ⟨Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Phi f) ?_ ?_ ?_⟩
+      · simp [Functor.mapTriangle]
+      · simpa [Functor.mapTriangle] using SignedFibre.coneIso_inr A B r f
+      · simp only [Functor.mapTriangle, Pretriangulated.Triangle.mk_mor₃, Iso.refl_hom,
+          Functor.map_id, Category.comp_id]
+        change SignedFibre.map A B r (mappingCone.triangle f).mor₃ ≫
+            (SignedFibre.shiftIso A B r I 1).hom = _
+        exact SignedFibre.coneIso_boundary A B r f
+    obtain ⟨G, addG, shiftG, alpha, hα, hG, hplus⟩ := exists_coneFunctor_descent F
+      (fun H ↦ ⟨SignedFibre.homotopy A B r H⟩) hc hb
+    refine ⟨F, inferInstance, inferInstance, e, Phi, G, addG, shiftG, alpha,
+      ?_, ?_, ?_, ?_, ?_, ?_, ?_, hα, hG, hb, hplus⟩
+    · intro I n t
+      dsimp only [e, Iso.refl_hom]
+      exact SignedFibre.obj_d_apply A B r I n (n + 1) rfl t
+    · intro I J f n t
+      rfl
+    · intro I J f g H
+      exact ⟨SignedFibre.homotopy A B r H, fun _ _ ↦ rfl⟩
+    · intro I n t
+      change (SignedFibre.shiftXIso A B I 1 n).hom t = _
+      rw [SignedFibre.shiftXIso_hom_apply]
+      dsimp [e, shiftFunctorObjXIso]
+      simp only [A.map_id, Units.neg_smul, one_smul]
+      rfl
+    · intro I J f n t
+      exact ⟨SignedFibre.coneXIso_snd_apply A B r f n t,
+        SignedFibre.coneXIso_fst_apply A B r f n t⟩
+    · intro I J I' J' f f' a b h
+      exact SignedFibre.coneIso_naturality A B r f f' a b h
+    · intro I J f
+      exact ⟨SignedFibre.coneIso_inr A B r f, SignedFibre.coneIso_boundary A B r f⟩
 end CategoryTheory

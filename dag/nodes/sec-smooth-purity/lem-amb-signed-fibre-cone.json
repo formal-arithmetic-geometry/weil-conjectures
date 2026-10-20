@@ -1,0 +1,144 @@
+{
+ "id": "lem-amb-signed-fibre-cone",
+ "kind": "definition",
+ "title": "Natural signed interchange between the two cones",
+ "statement": "Let $C$ be an abelian category, $A,B:C\\to\\mathrm{Ab}$ additive functors and $r:A\\Rightarrow B$ natural. Let $F$ be the signed fibre functor [lem-amb-signed-fibre-complex] with signed shift comparison [lem-amb-signed-fibre-shift]. For each chain map $f:I\\to J$, construct an isomorphism $\\Phi_f:F(\\operatorname{Cone}(f))\\cong\\operatorname{Cone}(F(f))$. It sends source coordinates $(x,y,z,w)$ in order $A(J)^n,A(I)^{n+1},B(J)^{n-1},B(I)^n$ to target order $(x,z,y,-w)$. It is natural in strictly commuting squares, preserves the cone inclusion, and satisfies $F(-p)$ followed by the signed shift comparison equals $\\Phi_f$ followed by the target boundary $-p$, with the cone convention [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014E/014F; signed two-term refinement in the proof of lem-amb-signed-fibre-triangulated."
+ },
+ "stmt_deps": [
+  "lem-amb-signed-fibre-complex",
+  "lem-amb-signed-fibre-shift",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The images under A and B of the cone projections and inclusions form inverse direct-sum decompositions, since additive functors preserve their identity and zero equations. Compose these decompositions with the explicit signed permutation and the inverse target decomposition.",
+   "uses": [
+    "lem-amb-signed-fibre-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the proposed chain-map equation with the two target cone projections. Use the cone differential identities d_fst and d_snd, additivity and naturality of r to prove the four equations. The constructed component inverses then give a chain isomorphism.",
+   "uses": [
+    "lem-amb-signed-fibre-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Check naturality and preservation of the inclusion after the same two projections. The negative cone boundary followed by the shift sign and the boundary after the permutation both give (-y,w), with equal-index transports composed canonically.",
+   "uses": [
+    "lem-amb-signed-fibre-shift",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-signed-fibre-complex",
+  "def-weil-abstract-derived-category",
+  "lem-amb-signed-fibre-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Explicit Lean construction following the indicated signed fibre proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The signed mapping fibre of additive functors on complexes preserves shifts, homotopies and cone triangles",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; CategoryTheory.Functor.mapCochainComplexShiftIso; CategoryTheory.Functor.IsTriangulated; Homotopy.shift; CochainComplex.shiftFunctor; CategoryTheory.Functor.mapHomotopyEquiv; CochainComplex.mappingCone.map_δ; CategoryTheory.Pretriangulated.Triangle.shiftFunctorAdd'_hom_app_hom₁",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quotient.liftCommShift\"",
+   "results": "CategoryTheory.Quotient.liftCommShift; CategoryTheory.Quotient.LiftCommShift.iso; CategoryTheory.Quotient.liftCommShift_compatibility; CategoryTheory.Quotient.liftCommShift_commShiftIso; CategoryTheory.Quotient.LiftCommShift.iso_inv_app; CategoryTheory.Quotient.LiftCommShift.iso_hom_app",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on cochain complexes preserving homotopies, shifts and cone triangles induces a triangulated functor on the homotopy category",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; HomotopyCategory.instIsTriangulatedIntUp; HomotopyCategory.instPretriangulatedIntUp; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; CochainComplex.mappingCone.mapTrianglehIso; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; DerivedCategory.instIsTriangulated; CochainComplex.mappingConeCompTriangleh",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*IsTriangulated|IsTriangulated.*lift|liftCommShift",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SignedFibreTriangulated",
+  "date": "2026-10-20",
+  "group": "J2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Proof: \"All the cone maps and Kummer boundaries commute with pullback of the pair and its trivialized line bundle\"; explicit double-cone interchange and boundary signs supporting steps 4--6 of lem-amb-signed-fibre-triangulated.",
+   "via": [
+    "lem-amb-signed-fibre-triangulated",
+    "lem-amb-relative-torsor-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedFibreCone",
+  "file": "lean/Sheaf/CategoryTheory/SignedFibreCone.lean",
+  "declaration": "CategoryTheory.SignedFibre.coneIso",
+  "declarations": [
+   "CategoryTheory.SignedFibre.coneIso",
+   "CategoryTheory.SignedFibre.coneCoordinates",
+   "CategoryTheory.SignedFibre.coneXIso",
+   "CategoryTheory.SignedFibre.coneXIso_fst_apply",
+   "CategoryTheory.SignedFibre.coneXIso_snd_apply",
+   "CategoryTheory.SignedFibre.coneIso_naturality",
+   "CategoryTheory.SignedFibre.coneIso_inr",
+   "CategoryTheory.SignedFibre.coneIso_boundary",
+   "CategoryTheory.SignedFibre.cochain_transport"
+  ],
+  "statement": "def coneIso {I J : CochainComplex C ℤ} (f : I ⟶ J) : obj A B r (mappingCone f) ≅ mappingCone (map A B r f)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T132013-L-1401007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T132013-L-1401007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

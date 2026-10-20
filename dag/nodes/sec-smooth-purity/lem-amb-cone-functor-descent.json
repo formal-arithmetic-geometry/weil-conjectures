@@ -1,0 +1,135 @@
+{
+ "id": "lem-amb-cone-functor-descent",
+ "kind": "statement",
+ "title": "Descent of a homotopy and cone preserving complex functor",
+ "statement": "Let $C,D$ be abelian categories [def-sp-abelian] and let $F:\\mathrm{CoCh}(C)\\to\\mathrm{CoCh}(D)$ be additive with coherent integer shift comparisons [def-weil-triangulated-category]. Suppose $F$ preserves homotopies, sends every cone triangle isomorphically to the cone triangle of its image map [def-weil-abstract-derived-category], and preserves every strict lower bound. Then there exist an additive triangulated functor $G:K(C)\\to K(D)$ [lem-trf-additive-homotopy-category-triangulated] and a shift-compatible isomorphism $F\\mathbin{\\circ}q_D\\cong q_C\\mathbin{\\circ}G$, where the displayed compositions use Lean order. Moreover $G$ preserves the property that the underlying complex is bounded below; this is the strict underlying-complex property, not merely its closure under isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014S; explicit quotient descent and bounded-below refinement of step 7 of lem-amb-signed-fibre-triangulated."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-trf-additive-homotopy-category-triangulated"
+ ],
+ "proof": [
+  {
+   "text": "Lift F⋙q_D through the homotopy relation: preservation of homotopies makes its values equal on related maps. The quotient is full and surjective, so additivity descends. Apply the quotient shift-lift construction and its compatibility isomorphism to descend the coherent shifts.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every distinguished homotopy-category triangle is isomorphic to the quotient image of a cone triangle. Apply G to that isomorphism and combine the factorization isomorphism with the assumed cone-triangle isomorphism. Its image is distinguished, proving G triangulated.",
+   "uses": [
+    "lem-trf-additive-homotopy-category-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient lift sends an object q_C(I) to q_D(F(I)) by equality. Represent each bounded-below input by its underlying complex and use the assumed lower-bound preservation. Equality, rather than an arbitrary isomorphism, proves the strict underlying-complex property.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-trf-additive-homotopy-category-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Explicit Lean construction following the indicated signed fibre proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The signed mapping fibre of additive functors on complexes preserves shifts, homotopies and cone triangles",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; CategoryTheory.Functor.mapCochainComplexShiftIso; CategoryTheory.Functor.IsTriangulated; Homotopy.shift; CochainComplex.shiftFunctor; CategoryTheory.Functor.mapHomotopyEquiv; CochainComplex.mappingCone.map_δ; CategoryTheory.Pretriangulated.Triangle.shiftFunctorAdd'_hom_app_hom₁",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quotient.liftCommShift\"",
+   "results": "CategoryTheory.Quotient.liftCommShift; CategoryTheory.Quotient.LiftCommShift.iso; CategoryTheory.Quotient.liftCommShift_compatibility; CategoryTheory.Quotient.liftCommShift_commShiftIso; CategoryTheory.Quotient.LiftCommShift.iso_inv_app; CategoryTheory.Quotient.LiftCommShift.iso_hom_app",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on cochain complexes preserving homotopies, shifts and cone triangles induces a triangulated functor on the homotopy category",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; HomotopyCategory.instIsTriangulatedIntUp; HomotopyCategory.instPretriangulatedIntUp; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; CochainComplex.mappingCone.mapTrianglehIso; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; DerivedCategory.instIsTriangulated; CochainComplex.mappingConeCompTriangleh",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*IsTriangulated|IsTriangulated.*lift|liftCommShift",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SignedFibreTriangulated",
+  "date": "2026-10-20",
+  "group": "J2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Proof: \"One may compute the cone on an injective resolution\" and compatibility of cone maps and Kummer boundaries; homotopy quotient descent and triangulatedness supporting step 7 of lem-amb-signed-fibre-triangulated.",
+   "via": [
+    "lem-amb-signed-fibre-triangulated",
+    "lem-amb-relative-torsor-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConeFunctorDescent",
+  "file": "lean/Sheaf/CategoryTheory/ConeFunctorDescent.lean",
+  "declaration": "CategoryTheory.exists_coneFunctor_descent",
+  "declarations": [
+   "CategoryTheory.exists_coneFunctor_descent"
+  ],
+  "statement": "theorem exists_coneFunctor_descent {C : Type u} [Category.{v} C] [Abelian C] {D : Type u'} [Category.{v'} D] [Abelian D] (F : CochainComplex C ℤ ⥤ CochainComplex D ℤ) [F.Additive] [F.CommShift ℤ] (hH : ∀ {I J : CochainComplex C ℤ} {f g : I ⟶ J}, Homotopy f g → Nonempty (Homotopy (F.map f) (F.map g))) (hc : ∀ {I J : CochainComplex C ℤ} (f : I ⟶ J), Nonempty (F.mapTriangle.obj (mappingCone.triangle f) ≅ mappingCone.triangle (F.map f))) (hb : ∀ (I : CochainComplex C ℤ) (N : ℤ), I.IsStrictlyGE N → (F.obj I).IsStrictlyGE N) : ∃ (G : HomotopyCategory C (.up ℤ) ⥤ HomotopyCategory D (.up ℤ)) (_addG : G.Additive) (_shiftG : G.CommShift ℤ) (alpha : F ⋙ HomotopyCategory.quotient D (.up ℤ) ≅ HomotopyCategory.quotient C (.up ℤ) ⋙ G), alpha.hom.CommShift ℤ ∧ G.IsTriangulated ∧ (∀ K : HomotopyCategory C (.up ℤ), HomotopyCategory.plus C K → HomotopyCategory.plus D (G.obj K))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T132013-L-1401007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T132013-L-1401007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

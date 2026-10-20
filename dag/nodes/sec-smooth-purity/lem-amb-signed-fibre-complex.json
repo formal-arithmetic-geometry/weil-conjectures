@@ -1,0 +1,131 @@
+{
+ "id": "lem-amb-signed-fibre-complex",
+ "kind": "definition",
+ "title": "The additive signed fibre complex and its homotopies",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian], let $A,B:C\\to\\mathrm{Ab}$ be additive functors and let $r:A\\Rightarrow B$ be natural. Construct an additive functor $F$ on integer cochain complexes [def-weil-abstract-derived-category] with $F(I)^n=A(I^n)\\times B(I^{n-1})$, $D(a,b)=(A(d)a,r(a)-B(d)b)$ and diagonal maps. A homotopy $H$ induces the homotopy $(A(H),-B(H))$. If $I^n=0$ for every $n<N$, then $F(I)^n=0$ for every $n<N$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014E/014F; signed two-term refinement in the proof of lem-amb-signed-fibre-triangulated."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the differential and the diagonal maps explicitly. The two squares of differentials vanish by functoriality, while naturality of r cancels the mixed terms. Naturality also proves the chain-map equations. Check identities, composition and addition in each coordinate.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the homotopy with second coordinate -B(H). Expanding D h+h D cancels its mixed r-terms by naturality and leaves A(f-g),B(f-g). For a lower bound N, additive functors preserve zero objects and n<N implies n-1<N, so both coordinates vanish.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Explicit Lean construction following the indicated signed fibre proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The signed mapping fibre of additive functors on complexes preserves shifts, homotopies and cone triangles",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; CategoryTheory.Functor.mapCochainComplexShiftIso; CategoryTheory.Functor.IsTriangulated; Homotopy.shift; CochainComplex.shiftFunctor; CategoryTheory.Functor.mapHomotopyEquiv; CochainComplex.mappingCone.map_δ; CategoryTheory.Pretriangulated.Triangle.shiftFunctorAdd'_hom_app_hom₁",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quotient.liftCommShift\"",
+   "results": "CategoryTheory.Quotient.liftCommShift; CategoryTheory.Quotient.LiftCommShift.iso; CategoryTheory.Quotient.liftCommShift_compatibility; CategoryTheory.Quotient.liftCommShift_commShiftIso; CategoryTheory.Quotient.LiftCommShift.iso_inv_app; CategoryTheory.Quotient.LiftCommShift.iso_hom_app",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on cochain complexes preserving homotopies, shifts and cone triangles induces a triangulated functor on the homotopy category",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; HomotopyCategory.instIsTriangulatedIntUp; HomotopyCategory.instPretriangulatedIntUp; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; CochainComplex.mappingCone.mapTrianglehIso; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; DerivedCategory.instIsTriangulated; CochainComplex.mappingConeCompTriangleh",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*IsTriangulated|IsTriangulated.*lift|liftCommShift",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "date": "2026-10-20",
+   "verdict": "No theorem covers the full signed fibre construction or general cone-preserving descent. The ordinary cone and quotient-shift APIs are reused in the supplied proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SignedFibreTriangulated",
+  "date": "2026-10-20",
+  "group": "J2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Proof: \"One may compute the cone on an injective resolution\" and \"All the cone maps and Kummer boundaries commute with pullback of the pair and its trivialized line bundle\"; signed complex, homotopy and strict-bound construction supporting steps 1, 2 and 8 of lem-amb-signed-fibre-triangulated.",
+   "via": [
+    "lem-amb-signed-fibre-triangulated",
+    "lem-amb-relative-torsor-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedFibreComplex",
+  "file": "lean/Sheaf/CategoryTheory/SignedFibreComplex.lean",
+  "declaration": "CategoryTheory.SignedFibre.functor",
+  "declarations": [
+   "CategoryTheory.SignedFibre.functor",
+   "CategoryTheory.SignedFibre.d_sq",
+   "CategoryTheory.SignedFibre.obj",
+   "CategoryTheory.SignedFibre.map",
+   "CategoryTheory.SignedFibre.homotopy",
+   "CategoryTheory.SignedFibre.obj_isStrictlyGE",
+   "CategoryTheory.SignedFibre.homotopy_transport",
+   "CategoryTheory.SignedFibre.homotopy_d_transport"
+  ],
+  "statement": "abbrev functor : CochainComplex C ℤ ⥤ CochainComplex AddCommGrpCat.{w} ℤ",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T132013-L-1401007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T132013-L-1401007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
