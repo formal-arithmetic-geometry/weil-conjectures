@@ -107,13 +107,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteFreeHomComplexQCCohomology",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeHomComplexQCCohomology.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteFreeHomComplexQCCohomology",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteFreeHomComplexQCCohomology.lean",
   "declaration": "AlgebraicGeometry.finiteFree_homComplex_qc_cohomology",
   "statement": "theorem finiteFree_homComplex_qc_cohomology\n    (X : Scheme.{u}) (U : X.Opens)\n    (E I : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hEbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (E.X i))\n    (hEfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (E.X i ≅ SheafOfModules.free\n      (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin r))))\n    (hI : ∀ i : ℤ, (I.homology i).IsQuasicoherent) (n : ℤ) :\n    ((homComplex (R := X.toRingedSpace.sheaf.over U) E I).homology n).IsQuasicoherent",
   "branch": "sheaf-dag",
   "by": "D2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (T2): retire the duplicate Sheaf module in favor of the adopted source twin; statement and proof route unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -126,14 +127,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T1",
+  "reviewer": "C-4ebdc",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T100128-L-2487707",
+  "landing": "20261020T154053-L-3041857",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: removed Sheaf theorem finiteFree_homComplex_qc_cohomology with the byte-identical, proved WeilConjectures twin (axioms clean); node repointing with the retirement protocol in coord/changes/retire-sheaf-twins-20261020.md; no Lean importers of the Sheaf path"
  },
  "lean_audit": {
   "master": {
