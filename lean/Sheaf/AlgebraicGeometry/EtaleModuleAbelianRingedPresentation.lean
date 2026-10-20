@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 public import Sheaf.CategoryTheory.RingedToposMorphism
 
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
