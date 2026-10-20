@@ -17840,3 +17840,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:24 L: returned deliver/NJ/lem-pod-hom-chain-counit-formula (reviewer RETURN: L: independent stage-2 immutable head 5dae6d09468e: file-only compilation failed: private overlay Sheaf.Paper.TensorAdju)
 - 05:26 L: returned deliver/Y9/Sheaf.AlgebraicGeometry.AbsoluteFrobeniusSite (reviewer RETURN: (reviewer C-3ebeb, head 3ebebbec6) H9: lean/Sheaf/AlgebraicGeometry/FrobeniusDerivedDescent.lean: delete the unused line)
 - 05:55 L: merged deliver/ND/lem-trf-source-hyperext-module-target (reviewer PASS; first push; new nodes: 0)
+- 12:19 L: returned deliver/K2/Sheaf.Paper.BasicOperationsCoefficientReduction (reviewer RETURN: (reviewer C-1c5dd, head 1c5dd1082) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.BasicOperation)
