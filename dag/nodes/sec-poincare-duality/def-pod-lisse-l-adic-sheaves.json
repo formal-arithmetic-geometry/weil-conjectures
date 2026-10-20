@@ -26,9 +26,61 @@
   "def-constructible-locally-constant",
   "def-pod-ring-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the integral scalar-extension diagram at level m by restricting the sheafified balanced extension along O_E to A_{L,m+1}, with source level floor(m/e). The quotient factor and the source transition induce its transition map. Use the scalar-extension adjunction unit and sheafification uniqueness to characterize maps on tensor generators; these formulas prove the inverse-system functor laws and functoriality in the source sheaf.",
+   "uses": [
+    "def-pod-ring-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar extension preserves finite local constancy: it commutes with passage to an etale slice and with constant sheaves, so apply it to a local trivialization. A finite set of module generators maps to a generating set under the adjunction unit; this proves finiteness after scalar extension. Restriction along the quotient preserves finite local constancy.",
+   "uses": [
+    "def-constructible-locally-constant",
+    "def-pod-ring-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the difference of source indices to obtain the source stalk transition kernel and surjectivity for every pair of indices. For the scalar transition, tensor right exactness computes the kernel as the sum of the coefficient-quotient kernel and the image of the source kernel. The ramification ideal identity places the latter inside the target coefficient ideal. Use the canonical scalar-extension stalk comparison and its unit/naturality formulas to transport this tensor calculation to the stalks of the sheafified diagram. This proves the lisse criterion and supplies the required finite-level scalar-extension data.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-pod-etale-stalk-tensor-scalar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a tower E to L to M, injectivity of powers of the nonzero DVR maximal ideal proves multiplicativity of ramification indices; floor division gives the corresponding source-index equality. Construct the scalar associator by uniqueness of left adjoints, and cancel restriction followed by extension along a surjective quotient map. Transport these comparisons through the prescribed finite-level isomorphisms. Their unit formulas give the nested tensor-generator formula. For identity extension, the scalar adjunction unit is an isomorphism on sheaves killed by the quotient ideal. Assemble both comparisons into natural isomorphisms of integral functors. Generator extensionality reduces associativity and both unit laws to composition of index casts, which follows by equality-proof irrelevance.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-pod-ring-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rationalize the integral comparison isomorphisms by sending their arrows to 1 tensor the integral arrow. The prescribed pure-tensor scalar-map formula proves naturality on pure tensors, and tensor induction extends naturality to all rational morphisms using additivity of scalar maps and bilinearity of composition. The integral coherence identities prove rational coherence. Apply LocallyDiscrete.mkPseudofunctor to the finite coefficient fields with the prescribed rational categories and functors. Its three coherence obligations are exactly these associativity and unit identities, giving the required coefficient diagram.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-ring-scalar-extension",
+  "def-constructible-locally-constant",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "def-weil-finite-subextension-directed-set"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H6",
+  "date": "2026-10-21",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf; Mathlib.LinearAlgebra.TensorProduct.RightExactness; Mathlib.CategoryTheory.Sites.Adjunction; Mathlib.CategoryTheory.Bicategory.Functor.LocallyDiscrete",
+  "place": "Weil II (1.1.1) b)-d), pp. 146-147; explicit finite-level scalar-extension construction, its stalk criterion, and tensor-associativity coefficient diagram"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -178,5 +230,15 @@
    "def-weil-finite-subextension-directed-set",
    "def-weil-l-adic-coefficient-extension"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261020T211730-L-3494823",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
