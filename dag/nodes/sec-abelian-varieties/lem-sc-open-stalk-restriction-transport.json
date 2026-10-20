@@ -44,10 +44,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N2",
-  "date": "2026-10-13",
-  "document": "Stacks Project",
-  "place": "Sheaves Tags 00A0 (3),(5) and 0096, read online on 2026-10-13; Mathlib Modules.overEquiv, overMapCompOverEquiv, restrictAdjunction and pushforward fully faithful instances. The direct descent calculation from naturality and the adjunction triangle identity is written by N2 and proved as a private helper."
+  "group": "S2",
+  "date": "2026-10-20",
+  "document": "WeilConjectures.AlgebraicGeometry.OpenStalkRestrictionTransport",
+  "place": "Adopted source theorem exists_openStalk_restriction_transport, fully proved by the same restriction-adjunction descent argument recorded here. The existential comparison family is the explicit openModuleStalkRestrictionComparison. The stronger identity-component clause is discarded by the adapted local-lift consumer. No mathematical dependency or unit route is removed."
  },
  "mathlib_searches": [
   {
@@ -120,14 +120,15 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenStalkRestrictionTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenStalkRestrictionTransport.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.OpenStalkRestrictionTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenStalkRestrictionTransport.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_openStalk_restriction_transport",
-  "statement": "theorem exists_openStalk_restriction_transport\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) :\n    ∃ e : ∀ (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U),\n      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU) ⋙\n        openModuleStalkFunctor X W ⟨x, hxW⟩ ≅ openModuleStalkFunctor X U ⟨x, hxU⟩,\n      ∀ (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U)\n        (a : SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU) ⋙\n          openModuleStalkFunctor X V ⟨x, hxV⟩ ≅ openModuleStalkFunctor X U ⟨x, hxU⟩)\n        (W : X.Opens) (hxW : x ∈ W) (hWV : W ≤ V) (hWU : W ≤ U),\n        let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hVU)\n        let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hWV)\n        let P := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hWU)\n        ∃ (c : R ⋙ Q ≅ P)\n          (d : Q ⋙ openModuleStalkFunctor X W ⟨x, hxW⟩ ≅\n            openModuleStalkFunctor X V ⟨x, hxV⟩),\n          ∀ M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U),\n            (openModuleStalkFunctor X W ⟨x, hxW⟩).map (c.hom.app M) ≫\n                (e W hxW hWU).hom.app M =\n              d.hom.app (R.obj M) ≫ a.hom.app M",
+  "statement": "theorem exists_openStalk_restriction_transport\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) :\n    ∀ (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U)\n      (a : SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU) ⋙\n        openModuleStalkFunctor X V ⟨x, hxV⟩ ≅ openModuleStalkFunctor X U ⟨x, hxU⟩)\n      (W : X.Opens) (hxW : x ∈ W) (hWV : W ≤ V) (hWU : W ≤ U),\n      let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU)\n      let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWV)\n      let P := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU)\n      ∃ (c : R ⋙ Q ≅ P)\n        (d : Q ⋙ openModuleStalkFunctor X W ⟨x, hxW⟩ ≅\n          openModuleStalkFunctor X V ⟨x, hxV⟩),\n        (∀ M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U),\n          c.hom.app M = 𝟙 _) ∧\n        ∀ M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U),\n          (openModuleStalkFunctor X W ⟨x, hxW⟩).map (c.hom.app M) ≫\n              (openModuleStalkRestrictionComparison X U W hWU x hxU hxW).hom.app M =\n            d.hom.app (R.obj M) ≫ a.hom.app M",
   "branch": "sheaf-dag",
-  "by": "T3",
-  "date": "2026-10-13"
+  "by": "S2",
+  "date": "2026-10-20",
+  "note": "Retired the duplicate Sheaf module. The source theorem fixes e_W to openModuleStalkRestrictionComparison, proves the same transport equation for every arbitrary intermediate comparison a, and additionally gives identity components of c. Choosing this explicit family before V, a, or any modules proves the existential family assertion of this node unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -142,11 +143,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-0a0bf",
-  "group": "S6",
+  "reviewer": "C-40030",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261020T141315-L-2035838",
+  "landing": "20261020T151229-L-2650899",
   "kind": "interface",
-  "note": "independent cc review: Retired Sheaf copy (Nonempty theorem) against the upstream twin def openModuleStalkRestrictionComparison (identical binders, iso type); 2 consumer adaptations (import + one use each) against the live originals; node lean fields against the twin signature"
+  "note": "independent cc review: Retired Sheaf exists_openStalk_restriction_transport (∃ e family) against live WeilConjectures twin (e fixed to openModuleStalkRestrictionComparison, extra c=𝟙 conjunct, stronger); sole importer OpenStalkFreeMapLocalLift adaptation (import + let e + drop conjunct) against live original; node lean.statement against twin signature verbatim; stub matches earlier retirements"
  }
 }

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.AlgebraicGeometry.OpenStalkFreeMapOneLift
-import Sheaf.AlgebraicGeometry.OpenStalkRestrictionTransport
+import WeilConjectures.AlgebraicGeometry.OpenStalkRestrictionTransport
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Local lifting from a finite free open-site stalk
@@ -91,7 +91,9 @@ theorem exists_open_stalk_free_map_local_lifts
               (openModuleStalkFunctor X W ⟨x, hxW⟩).map g =
                 (e W hxW hWU).hom.app _ ≫ t ≫ (e W hxW hWU).inv.app N := by
   classical
-  obtain ⟨e, he⟩ := exists_openStalk_restriction_transport X U x hxU
+  let e := fun (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U) ↦
+    openModuleStalkRestrictionComparison X U W hWU x hxU hxW
+  have he := exists_openStalk_restriction_transport X U x hxU
   refine ⟨e, ?_⟩
   intro m N t
   let F := SheafOfModules.free
@@ -100,7 +102,7 @@ theorem exists_open_stalk_free_map_local_lifts
     X U x hxU m N t
   refine ⟨V, hxV, hVU, ?_⟩
   intro W hxW hWV hWU
-  obtain ⟨c, d, hc⟩ := he V hxV hVU a W hxW hWV hWU
+  obtain ⟨c, d, -, hc⟩ := he V hxV hVU a W hxW hWV hWU
   let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWV)
   let S := openModuleStalkFunctor X W ⟨x, hxW⟩
   let g := c.inv.app F ≫ Q.map k ≫ c.hom.app N
