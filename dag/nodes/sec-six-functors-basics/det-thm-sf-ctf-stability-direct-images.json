@@ -26,207 +26,65 @@
  ],
  "proof": [
   {
-   "text": "Use the admissible rings of [sk-def-localizing-closure], including every finite commutative $\\ell$-primary ring $A$, and the arbitrary characteristic-$p$ field setting of [sk-def-sfb-dc-setting]. All schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. They are therefore qcqs, and every open subset is quasi-compact. By [det-proper-base-change-unbounded-pullback], the exact inverse image $f^*$ preserves $\\Dctf$ for every admissible coefficient. This proves the pullback assertion. For integral and rational coefficients, [det-def-localizing-closure-ctf-equals-bc] gives $\\Dctf=\\Dbc$; this equality will never be used for an arbitrary finite ring $A$.",
+   "text": "The standing scheme hypotheses give qcqs spaces. Apply the exact pullback constructibility and Tor-amplitude lemmas of unboundedLocalizingPullback to obtain the first clause.",
    "uses": [
-    "sk-def-localizing-closure",
-    "sk-def-sfb-dc-setting",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "det-proper-base-change-unbounded-pullback",
-    "det-def-localizing-closure-ctf-equals-bc"
+    "det-proper-base-change-unbounded-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 1, pullback and coefficient conventions"
-   }
+   "elementary": false
   },
   {
-   "text": "For finite $A$, descend $K,L\\in\\Dctf(X,A)$ to the étale site by [det-pe-finite-tor-comparison-noetherian]; $A$ is Noetherian because every ideal is a finite set. Choose ordered Tor intervals $[a,b]$, $[c,d]$. By [lem-sf-etale-flat-constructible], represent the descended objects by bounded complexes $P,Q$ of flat constructible sheaves, zero outside these intervals. Refine the finitely many stratifications of their terms by [lem-weil-pbc-constructible-stratification-intersection]. On each stratum, [lem-weil-pbc-locally-constant-tensor], applied to the flat terms in degree zero, shows that $P^i\\otimes_AQ^j$ is locally constant of finite type. Finite sums and the kernels and cokernels computing cohomology are constructible by [thm-constructible-serre]. Each tensor term is flat: tensoring with $P^i\\otimes_AQ^j$ is the composite of two exact tensor functors; finite sums remain exact. Thus $\\operatorname{Tot}(P\\otimes_AQ)$ is a bounded flat complex, supported in $[a+c,b+d]$. It is K-flat by [lem-pc-bounded-above-flat-kflat-site], so it computes the derived tensor and has this Tor interval against every module sheaf. The monoidal comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies its exact pro-étale pullback with $K\\otimes_A^{\\mathbf L}L$. The Tor comparison equivalence gives the finite-coefficient tensor assertion of (1).",
+   "text": "Apply lem-sfb-admissible-tensor-constructibility for the bounded-constructibility component. Choose Tor intervals [a,b] and [c,d] from the two hypotheses and apply generic torAmplitudeIn_tensor to get [a+c,b+d]. Unfold only derivedTensor and curriedTensor to identify the stated tensor.",
    "uses": [
-    "det-pe-finite-tor-comparison-noetherian",
-    "lem-sf-etale-flat-constructible",
-    "lem-weil-pbc-constructible-stratification-intersection",
-    "lem-weil-pbc-locally-constant-tensor",
-    "thm-constructible-serre",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-sfb-admissible-tensor-constructibility",
+    "lem-sc-source-tor-amplitude-lower-tensor-bound",
+    "lem-sc-source-tor-amplitude-upper-tensor-bound"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 1, bounded flat models and total tensor; Stacks Tags 03TT (lemma-when-ctf), 094H (lemma-locally-constant-tensor-product), 03RZ (lemma-constructible-abelian), 06YQ (lemma-bounded-flat-K-flat), 07A4 (lemma-pullback-tensor-product)"
-   }
+   "elementary": false
   },
   {
-   "text": "For $\\mathcal O_E$, [det-lem-integral-models-operations](2) gives tensor closure of $\\Dbc$. For $E$ and $\\overline{\\mathbf Q}_\\ell$, [det-thm-sf-pf-field-tensor](1) gives tensor closure of $\\Dbc$. Step 1 identifies these categories with $\\Dctf$, proving the remaining tensor assertions of (1). Taking $E=\\mathbf Q_\\ell$ includes $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$.",
+   "text": "For the specified locally closed factorization a = j followed by i, form its compactification with open j and proper i. The finite-type hypotheses give quasi-compactness of j and the boundary compactification. The Dctf clause of compactification_localizing applies to exactly the displayed composite D(j_!) followed by R(i_*).",
    "uses": [
-    "det-lem-integral-models-operations",
-    "det-thm-sf-pf-field-tensor"
+    "det-sf-comp-coherence-single"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 1, integral and rational tensor products"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $a:S\\hookrightarrow X$ be a locally closed immersion. Since the schemes are Noetherian, it is quasi-compact; [lem-pqf-qc-immersion-open-closed-factor] factors it as $S\\xrightarrow{u}T\\xrightarrow{i}X$ with $u$ open and $i$ closed. The coefficient sheaves are cartesian by [sk-prop-sfb-cartesian-coefficients]. Apply [lem-weil-pbc-proetale-ringed-open-closed] to the pairs $(T,S)$ and $(X,X\\setminus T)$: $u_!$ and $i_*$ are exact, their restriction back to their support is the identity, and their restrictions to the respective complements are zero. Hence $a_!=i_*u_!$ is exact and acts termwise on the derived category by [lem-weil-pbc-exact-functor-derived-functor]. If $F$ is constructible on $S$, take its finite stratification from [sk-def-sfb-constructible]. The stratum immersions composed with $a$ are immersions by [lem-weil-pbc-proper-fp-permanence](e). Together with $T\\setminus S$ and $X\\setminus T$ these give a finite locally closed stratification of $X$; all its strata are constructible because $X$ is Noetherian. On the source strata the restriction of $a_!F$ is the given finite constant local model, and on the two complementary strata it is zero, by the restriction identities just cited. Therefore $a_!F$ is constructible. For $K\\in\\Dctf(S,\\Lambda)$, exactness gives $H^n(a_!K)=a_!H^n(K)$, so $a_!K$ is bounded constructible. If $K$ has Tor interval $[a_0,b_0]$, then for every target module sheaf $N$, [det-lem-int-tensor-projection] gives $(a_!K)\\otimes^{\\mathbf L}_{\\Lambda_X}N\\simeq a_!(K\\otimes^{\\mathbf L}_{\\Lambda_S}a^*N)$. The pullback $a^*N$ is a sheaf by cartesian coefficients, and exact $a_!$ preserves vanishing outside $[a_0,b_0]$. Thus $a_!K$ has the same Tor interval. This proves (2) uniformly for every admissible coefficient, without replacing $K$ by its cohomology for the Tor test.",
+   "text": "Apply lem-sfb-admissible-direct-image to f and K for the ordinary direct-image clause.",
    "uses": [
-    "lem-pqf-qc-immersion-open-closed-factor",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "sk-def-sfb-constructible",
-    "lem-weil-pbc-proper-fp-permanence",
-    "det-lem-int-tensor-projection"
+    "lem-sfb-admissible-direct-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 1, exact locally closed extension, its constructibility and Tor interval; Stacks Tags 01QV (lemma-factor-quasi-compact-immersion), 02V0 (lemma-composition-immersion), 09BM, 09BN, 03DJ"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $j:U\\hookrightarrow X$ be open and $A$ finite; $j$ is quasi-compact and quasi-separated because the schemes are Noetherian (Step 1). Descend $K\\in\\Dctf(U,A)$ of Tor interval $[a,b]$ to a bounded constructible etale complex $C$ of the same Tor interval by [det-pe-finite-tor-comparison-noetherian]. Its etale direct image $B=Rj_*C$ is bounded constructible by [cor-fin-deligne-open-finite-coefficients], since a power of $\\ell$ kills $A$ and is invertible in $k$. Put $d=\\operatorname{cd}(j)<\\infty$ by [lem-kun-0f10](1); clause (1) of [det-geo-open-finiteness-ii-amplitude] states $R^qj_*F=0$ for every sheaf $F$ of $A$-modules and every $q>d$. A finite $A$-module $M$ is finitely presented: it is a quotient of some $A^n$, and the kernel is a finite set, hence finitely generated. Since $C$ is bounded, [lem-sf-projection-finite-constant] with $N=d$ shows that the projection map $B\\otimes_A^{\\mathbf L}\\underline M_X\\to Rj_*(C\\otimes_A^{\\mathbf L}\\underline M_U)$ is an isomorphism for every finite $A$-module $M$. These are exactly the hypotheses of [lem-sf-open-tor-bound-arbitrary-field] for $L=C\\in D^+(U_{\\mathrm{\\acute et}},A)$ and $e=d$, over the arbitrary standing field; it gives that $B$ has Tor amplitude in $[a,b+d]$ against every $A_X$-module sheaf. Finally [prop-weil-pbc-comparison-direct-image] identifies $\\nu_X^*B$ with the pro-etale $Rj_*K$, [lem-exc-comparison-tor-interval] keeps the interval $[a,b+d]$ against every pro-etale module sheaf, and the equivalence of [det-pe-finite-tor-comparison-noetherian] places $\\nu_X^*B$ in $\\Dctf(X,A)$. This proves the finite open direct-image case over the arbitrary standing field.",
+   "text": "Give the specified chosen compactification its quasi-compact open-leg instance, regard it as a boundary compactification, and apply the Dctf clause of compactification_localizing.",
    "uses": [
-    "det-pe-finite-tor-comparison-noetherian",
-    "cor-fin-deligne-open-finite-coefficients",
-    "lem-kun-0f10",
-    "det-geo-open-finiteness-ii-amplitude",
-    "lem-sf-projection-finite-constant",
-    "lem-sf-open-tor-bound-arbitrary-field",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-exc-comparison-tor-interval"
+    "det-sf-comp-coherence-single"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), finite open direct image; the all-module Tor bound is the existing lemma lem-sf-open-tor-bound-arbitrary-field"
-   }
+   "elementary": false
   },
   {
-   "text": "For $\\mathcal O_E$ and a quasi-compact open immersion $j$, [det-thm-sf-pf-adic-open] gives $Rj_*:\\Dbc(U,\\mathcal O_E)\\to\\Dbc(X,\\mathcal O_E)$, including derived completeness and the reduction comparison. Step 1 translates this to preservation of $\\Dctf$.",
+   "text": "Apply exceptionalInverseImage_exists to the bundled morphism over Spec k. It supplies a right adjoint Gprime with the required Dctf preservation. Any right adjoint G in the statement is naturally isomorphic to Gprime by rightAdjointUniq. The inclusion of the full localizing subcategory carries this isomorphism to the ambient derived category. Transport the bounded-constructible and finite-Tor properties using their isomorphism-closure clauses.",
    "uses": [
-    "det-thm-sf-pf-adic-open"
+    "sk-thm-existence",
+    "det-def-sfb-constructible-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 2, integral open direct image"
-   }
-  },
-  {
-   "text": "Use the generators of [det-lem-integral-models-generators] and finite cones and shifts, justified by [det-cor-coefficient-heart-ii-triangulated]. Write an $E$-generator as $M[1/\\ell]$, $M=a_!L_0\\in\\Dbc(U,\\mathcal O_E)$. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] to $j$: cartesian coefficient isomorphisms are [sk-prop-sfb-cartesian-coefficients](1), and their compatibility with each coefficient map is [sk-def-sfb-coefficient-change]. It gives exact conservative scalar restriction and $\\operatorname{Res}Rj_*^{\\Lambda'}\\simeq Rj_*^\\Lambda\\operatorname{Res}$. By [sk-prop-sfb-qlbar-colimit-x], $M[1/\\ell]$ is the degree-zero filtered system $M\\xrightarrow{\\ell}M\\xrightarrow{\\ell}\\cdots$. Bounded continuity [det-pe-bounded-continuity-direct-image] and exact filtered colimits [lem-pur-ringed-site-grothendieck-abelian] give $(Rj_*M)[1/\\ell]\\simeq Rj_*(M[1/\\ell])$. Step 6 bounds $Rj_*M$ constructibly. Flat localization [det-prop-sfb-qlbar-colimit-x-invert-ell] preserves its interval and finite constant local presentations [sk-def-sfb-constructible]. For a $\\Qlb$-generator take the filtered system over finite $F/E$ of $F_U\\otimes_{E_U}M[1/\\ell]$. Each $F_T$ is finite free over $E_T$ [sk-prop-sfb-cartesian-coefficients], so a basis and additivity give the direct-image comparison at $F$. Bounded continuity on this degree-zero system gives the comparison at $\\Qlb$ [sk-prop-sfb-qlbar-colimit-x]. Its tensor functor is a filtered colimit of exact finite-free tensor functors, hence exact, and extends the same finite presentations. The images are bounded constructible. Cones and shifts finish both rational cases; Step 1 gives $\\Dctf$.",
-   "uses": [
-    "det-lem-integral-models-generators",
-    "det-cor-coefficient-heart-ii-triangulated",
-    "sk-prop-sfb-qlbar-colimit-x",
-    "det-pe-bounded-continuity-direct-image",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-constructible",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "sk-def-sfb-coefficient-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 2 and sk-prop-open-coefficients.proof.md, rational open case via integral generators and bounded continuity; the scalar-restriction comparison is cited as the existing ring-sheaf-change-adjunction lemma (Stacks Tags 0D6E and 07A6)"
-   }
-  },
-  {
-   "text": "For proper $p$, finite-coefficient preservation is [det-ctf-finite-proper-localizing](1), for every finite $\\ell$-primary ring $A$. For $\\mathcal O_E$ it is the constructibility conclusion of [det-thm-sfb-proper-base-change-integral](1); for $E$ and $\\overline{\\mathbf Q}_\\ell$ it is [det-thm-sfb-proper-base-change-rational](2). Step 1 translates the integral and rational $\\Dbc$ conclusions to $\\Dctf$. Thus proper direct image preserves $\\Dctf$ at every coefficient stage.",
-   "uses": [
-    "det-ctf-finite-proper-localizing",
-    "det-thm-sfb-proper-base-change-integral",
-    "det-thm-sfb-proper-base-change-rational"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 2, proper direct image at all coefficient stages"
-   }
-  },
-  {
-   "text": "Choose the compactification $f=pj$ supplied by [sk-def-sfb-dc-setting], whose intermediate scheme is again in the standing setting. The derived direct-image composition isomorphism [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to the cartesian coefficient sheaves of [sk-prop-sfb-cartesian-coefficients], gives $Rf_*\\simeq Rp_*Rj_*$. By [sk-def-sfb-module-derived-lower-shriek], the specified compactly supported image is $Rf_!=Rp_*D(j_!)$, where $j_!$ is exact. Steps 5--8 show that the first composite preserves $\\Dctf$, and Steps 4 and 8 show this for the second. This proves (3) for the specified ambient derived functors and compactification.",
-   "uses": [
-    "sk-def-sfb-dc-setting",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-module-derived-lower-shriek"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 2, compactification assembly; Stacks Tag 0D6E"
-   }
-  },
-  {
-   "text": "For (4), apply the restriction assertion of [sk-prop-sf-rf-shriek-preservation] for every finite admissible $A$, [sk-thm-int-restriction] for $\\mathcal O_E$, and [sk-thm-restriction] for $E$ and $\\overline{\\mathbf Q}_\\ell$. Each statement explicitly sends $\\Dctf(Y,\\Lambda)$ into $\\Dctf(X,\\Lambda)$ for the exceptional right adjoint; existence on a localizing closure alone is not used as preservation. Taking $E=\\mathbf Q_\\ell$ covers $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$. These conclusions and Steps 1--9 give all four clauses.",
-   "uses": [
-    "sk-prop-sf-rf-shriek-preservation",
-    "sk-thm-int-restriction",
-    "sk-thm-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 3, the three exceptional restriction theorems"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "sk-def-localizing-closure",
-  "sk-def-sfb-dc-setting",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "det-proper-base-change-unbounded-pullback",
-  "det-def-localizing-closure-ctf-equals-bc",
-  "det-pe-finite-tor-comparison-noetherian",
-  "lem-sf-etale-flat-constructible",
-  "lem-weil-pbc-constructible-stratification-intersection",
-  "lem-weil-pbc-locally-constant-tensor",
-  "thm-constructible-serre",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "det-lem-integral-models-operations",
-  "det-thm-sf-pf-field-tensor",
-  "lem-pqf-qc-immersion-open-closed-factor",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "sk-def-sfb-constructible",
-  "lem-weil-pbc-proper-fp-permanence",
-  "det-lem-int-tensor-projection",
-  "cor-fin-deligne-open-finite-coefficients",
-  "lem-kun-0f10",
-  "det-geo-open-finiteness-ii-amplitude",
-  "lem-sf-projection-finite-constant",
-  "lem-sf-open-tor-bound-arbitrary-field",
-  "prop-weil-pbc-comparison-direct-image",
-  "lem-exc-comparison-tor-interval",
-  "det-thm-sf-pf-adic-open",
-  "det-lem-integral-models-generators",
-  "det-cor-coefficient-heart-ii-triangulated",
-  "sk-prop-sfb-qlbar-colimit-x",
-  "det-pe-bounded-continuity-direct-image",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "sk-def-sfb-coefficient-change",
-  "det-ctf-finite-proper-localizing",
-  "det-thm-sfb-proper-base-change-integral",
-  "det-thm-sfb-proper-base-change-rational",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "sk-def-sfb-module-derived-lower-shriek",
-  "sk-prop-sf-rf-shriek-preservation",
-  "sk-thm-int-restriction",
-  "sk-thm-restriction"
+  "lem-sfb-admissible-tensor-constructibility",
+  "lem-sc-source-tor-amplitude-lower-tensor-bound",
+  "lem-sc-source-tor-amplitude-upper-tensor-bound",
+  "det-sf-comp-coherence-single",
+  "lem-sfb-admissible-direct-image",
+  "sk-thm-existence",
+  "det-def-sfb-constructible-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "all three proof paragraphs, expanded into ten steps"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.md",
+  "place": "J6 stage 3: real Lean assembly of all six clauses; tensor constructibility and ordinary direct image are separate nodes, with the remaining clauses from existing interfaces and adjoint uniqueness."
  },
  "mathlib_searches": [
   {
@@ -671,5 +529,15 @@
   "group": "Q18",
   "result": "pass",
   "note": "Read the item node, the source place (statement verbatim), all 10 statement-dependency records and the Lean module; the delivery only adds the node's lean field. Hypotheses match the node: admissible Λ, char p≠ℓ, X, Y and f separated of finite type over k. Dctf is the recorded constantModelBoundedConstructible ∧ finiteTorAmplitude, the same predicate as ConstantModelConstructibleFiniteTor and the localizing-closure generator, so one definition per notion. Clauses: L(f^*); the relative derived tensor; a_! = D(u_!)⋙R(i_*) for a = u≫i, the same convention as det-lem-int-tensor-projection, with the quasi-compact open case at i=𝟙; R(f_*); rightDerivedLowerShriekOfCompactification at the chosen compactification (definitionally compactificationOverField k f); f^! for every right adjoint of localizingLowerShriek, non-vacuous because exists_localizingExceptionalAdjoint applies to the quasi-compact chosen compactification. Universes consistent, nothing unbound, edge cases covered. No definitions, proof only sorry, source/blueprint docstrings present, all ten proof steps verbatim, lean.statement verbatim. nt_compile --json: clean, 27.4 s, exit 0. Second-reading section is a process stub under the 2026-10-17 direct-delivery rule, not counted as a fault. Optional stylistic note: use compactificationOverField k f."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261020T051421-L-1674693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
