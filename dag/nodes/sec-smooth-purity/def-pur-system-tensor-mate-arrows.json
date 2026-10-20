@@ -17,9 +17,102 @@
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tag 0F7B, open case; sites-modules.tex Tag 0E8I; sites-cohomology.tex Tags 0B56 and 07A4; vertical-site realization of Zheng Construction 4.1 and Lemma 4.10. Universal, section-normalized presentations of the maps used by lem-pur-system-clopen-tensor-compatibility."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For base_continuous, characterize sheaves on the vertical sequence site by their restrictions to each quotient slice. Pullback along the product base-change functor has, on each slice, the ordinary continuous pro-etale base-change functor. This proves continuity without coefficient transition flatness.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For coefficient_existsUnique, assemble the natural constant-section direct-image maps at every quotient into a natural transformation of coefficient sequences, then uncurry it. For uniqueness restrict to a quotient slice and apply the constant-presheaf sheafification adjunction: agreement on all constant scalars implies equality.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The specified direct functor is the module-sheaf pushforward. Its section maps preserve addition, so the Mathlib additive pushforward instance proves direct_additive.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the independent-universe Grothendieck and functorial K-injective resolution theorem to the actual coefficient ring on the sequence site. Its resolution clause gives system_kInjective.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For laxTensor_existsUnique, compose the presheaf pushforward lax tensor map with the presheaf-to-sheaf tensor comparison, and extend through the module-sheafification adjunction. Its unit equation and the presheaf pure-tensor formula give the required section normalization. Cancel the tensor/sheafification isomorphism, use adjunction injectivity, and use tensor induction on each presheaf section to prove uniqueness. The independent-coefficient monoidal localization theorem provides the tensor/sheafification comparison at the stated universes.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For directComp_existsUnique, use the canonical fibre-product pasting isomorphism of the base-change functors. Constant-scalar preservation identifies the composite coefficient map with the structural coefficient map. This yields the sectionwise module pushforward comparison. The prescribed section formula determines all components and hence proves uniqueness.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For Operations.ordinaryOpenUnit_isIso, let the open-composition functor on sequence sites be left adjoint to base change. Its unit is invertible because the open immersion is a monomorphism. The continuous-cocontinuous constant-sheaf comparison supplies the reverse coefficient map. Check its two adjunction identities on constant scalars, using sheafification extensionality. Lift this to an adjunction of module pushforwards; its counit is invertible because, on underlying presheaf sections, it is restriction along the invertible site unit. Thus the specified direct image is fully faithful. Apply the adjunction-triple unit/counit criterion to the supplied extension, pullback, and direct-image adjunctions. No tensor or derived existence assertion is needed for this ordinary unit.",
+   "uses": [
+    "lem-pur-proetale-open-unit-evaluation",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Remaining obligation tensorOperations_nonempty: use semilinearDerivedSections on the actual quotient sequences, identify constant-coefficient inverse images with those sequences, and construct the exact universal ordinary operations. Construct the ordinary inverse-image tensor comparison as the transpose of the normalized lax tensor map and derive its signed-total K-flat model, as in the original declaration docstring.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-coef-semilinear-system-models",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Remaining obligation Operations.alpha_existsUnique: use the clopen lift from the strict-tower proper/open calculus. On the vertical module site compose open base change with the identity/zero projection onto that clopen component. Its open restriction is the stated unit word. Restriction determines maps into extension by zero, proving uniqueness, as in the original declaration docstring.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Remaining obligation TensorOperations.deltaInv_isIso: identify the supplied universal operations and their ordinary-unit and K-flat tensor normalizations with the localized open-restriction/extension operations. The specified transpose is then the inverse tensor comparison of openTensorNormalization, which is invertible for arbitrary unbounded systems, as in the original declaration docstring.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-coef-semilinear-system-models",
+  "def-pc-kflat-complex",
+  "lem-pur-proetale-open-unit-evaluation",
+  "lem-coef-semilinear-derived-sections",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03EK, with sites-cohomology.tex Tags 07A4 and 079P. H8 formalizes the seven elementary, sheafification, K-injective, composition and ordinary-open-unit clauses on 2026-10-21; the three geometric/derived clauses retain their recorded plans."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -169,5 +262,15 @@
   "group": "Q68",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, all statement dependencies, canonical maps, hypotheses, conclusions, universes, edge cases, docstrings, records, and route-pivot compliance. Both modules compile cleanly through scompile.py. No fixes required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261020T211733-L-3495395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

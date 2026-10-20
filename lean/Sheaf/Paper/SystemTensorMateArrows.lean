@@ -10,6 +10,9 @@ public import Sheaf.SixFunctors.OpenTensorNormalization
 public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 public import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 public import Sheaf.Paper.FiniteFieldFiber
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
+import Mathlib.CategoryTheory.Adjunction.Triple
 
 /-!
 # Canonical tensor and proper/open arrows for varying coefficient systems
@@ -96,6 +99,42 @@ Source: Stacks 0941, 09A5 (blueprint: def-pur-system-tensor-mate-arrows). -/
 def base {X Y : Scheme.{u}} (f : X ⟶ Y) : ℕ × Y.ProEt ⥤ ℕ × X.ProEt :=
   (𝟭 ℕ).prod (Scheme.proEtaleBaseChange f)
 
+private theorem sequence_isSheaf_of_slices {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C) (P : (ℕ × C)ᵒᵖ ⥤ Type (u + 1))
+    (hP : ∀ n : ℕ, Presieve.IsSheaf J ((Prod.sectR n C).op ⋙ P)) :
+    Presieve.IsSheaf (coefficientSequenceTopology J) P := by
+  intro X S hS x hx
+  let xv : Presieve.FamilyOfElements ((Prod.sectR X.1 C).op ⋙ P)
+      (S.functorPullback (Prod.sectR X.1 C)).arrows :=
+    fun Y f hf ↦ x ((Prod.sectR X.1 C).map f) hf
+  have hxv : xv.Compatible := by
+    intro Y₁ Y₂ Z g₁ g₂ f₁ f₂ hf₁ hf₂ he
+    exact hx ((Prod.sectR X.1 C).map g₁) ((Prod.sectR X.1 C).map g₂)
+      hf₁ hf₂ (by simpa only [← Functor.map_comp] using
+        (congrArg (fun f ↦ (Prod.sectR X.1 C).map f) he))
+  obtain ⟨a, ha, hua⟩ := hP X.1 _ hS xv hxv
+  refine ⟨a, ?_, ?_⟩
+  · intro Y f hf
+    apply ((hP Y.1).isSeparated _ (J.pullback_stable f.2 hS)).ext
+    intro Z g hg
+    let v : (X.1, Z) ⟶ X := (Prod.sectR X.1 C).map (g ≫ f.2)
+    let k : (Y.1, Z) ⟶ (X.1, Z) := Prod.mkHom f.1 (𝟙 Z)
+    have hv : S v := hg
+    have he : k ≫ v = (Prod.sectR Y.1 C).map g ≫ f := by
+      ext <;> simp [k, v]
+    have hc := hx k ((Prod.sectR Y.1 C).map g) hv hf he
+    have hag := congrArg (P.map k.op) (ha (g ≫ f.2) hv)
+    change P.map ((Prod.sectR Y.1 C).map g).op (P.map f.op a) = _
+    erw [← P.map_comp_apply, ← op_comp, ← he]
+    have hp : P.map (k ≫ v).op a = P.map k.op (P.map v.op a) := by
+      rw [op_comp, P.map_comp]
+      rfl
+    exact hp.trans (hag.trans hc)
+  · intro b hb
+    apply hua b
+    intro Y f hf
+    exact hb ((Prod.sectR X.1 C).map f) hf
+
 /-- Base change is continuous for vertical coverings.
 Source: Stacks 0941, 09A5 (blueprint: def-pur-system-tensor-mate-arrows).
 Proof: restrict a system sheaf to a vertical slice. Pro-etale base change is
@@ -104,9 +143,96 @@ same vertical restrictions, giving the system sheaf condition. -/
 theorem base_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (base f).IsContinuous (coefficientSequenceTopology (Scheme.ProEt.topology Y))
       (coefficientSequenceTopology (Scheme.ProEt.topology X)) := by
-  sorry
+  constructor
+  intro G
+  apply sequence_isSheaf_of_slices
+  intro n
+  have hG := (Prod.sectR n X.ProEt).op_comp_isSheaf_of_isSheaf_type
+    (Scheme.ProEt.topology X) ((isSheaf_iff_isSheaf_of_type _ _).1 G.property)
+  have h := (Scheme.proEtaleBaseChange f).op_comp_isSheaf_of_isSheaf_type
+    (Scheme.ProEt.topology Y) hG
+  exact h
 
 attribute [instance] base_continuous
+
+private instance commRingSheafify (X : Scheme.{u}) :
+    HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
+  integralCoefficientRingSheafify.{u, u + 1} X
+
+private theorem constantDirect_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {A B : CommRingCat.{u + 1}} (a : A ⟶ B) :
+    (constantSheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).map a ≫
+        Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} B =
+      Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} A ≫
+        (Scheme.proEtaleSheafDirectImage f CommRingCat.{u + 1}).map
+          ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map a) := by
+  apply ((sheafificationAdjunction (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).homEquiv
+    ((Functor.const Y.ProEtᵒᵖ).obj A) _).injective
+  dsimp only [constantSheaf, Functor.comp_map]
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+  erw [Scheme.proEtaleConstantDirectImageMap, Equiv.apply_symm_apply,
+    Scheme.proEtaleConstantDirectImageMap, Equiv.apply_symm_apply]
+  apply NatTrans.ext
+  funext U
+  exact congrArg (fun t ↦ t.app ((Scheme.proEtaleBaseChange f).op.obj U))
+    (toSheafify_naturality (Scheme.ProEt.topology X)
+      ((Functor.const X.ProEtᵒᵖ).map a))
+
+private theorem ring_vertical_map (W : Scheme.{u}) (n : ℕ)
+    {U V : W.ProEtᵒᵖ} (a : U ⟶ V) :
+    (R l E W).obj.map ((Prod.sectR n W.ProEt).op.map a) =
+      (integralCoefficientCommRingSheaf l E W n).obj.map a := by
+  change ((coefficientSequenceCommRingSystem l E W).map (𝟙 (op n))).hom.app U ≫
+    (integralCoefficientCommRingSheaf l E W n).obj.map a = _
+  erw [CategoryTheory.Functor.map_id]
+  rfl
+
+private def coefficient_system {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    coefficientSequenceCommRingSystem l E Y ⟶
+    coefficientSequenceCommRingSystem l E X ⋙
+      Scheme.proEtaleSheafDirectImage f CommRingCat.{u + 1} :=
+  NatTrans.ofOpSequence
+    (fun n ↦ Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1}
+      (CommRingCat.of
+        (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))
+    (fun n ↦ by
+      dsimp only [Functor.comp_map, coefficientSequenceCommRingSystem]
+      rw [Functor.ofOpSequence_map_homOfLE_succ,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      exact constantDirect_naturality f _)
+
+private def sequenceMap
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D] (F : C ⥤ D)
+    (A : ℕᵒᵖ ⥤ Cᵒᵖ ⥤ CommRingCat.{u + 1})
+    (B : ℕᵒᵖ ⥤ Dᵒᵖ ⥤ CommRingCat.{u + 1})
+    (d : A ⟶ B ⋙ (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ CommRingCat.{u + 1}).obj F.op) :
+    (prodOpEquiv (C := ℕ) (D := C)).functor ⋙ Functor.uncurry.obj A ⟶
+      ((𝟭 ℕ).prod F).op ⋙ (prodOpEquiv (C := ℕ) (D := D)).functor ⋙
+        Functor.uncurry.obj B where
+  app U := (d.app (op U.unop.1)).app (op U.unop.2)
+  naturality U V a := by
+    have hd := congrArg (fun t ↦ t.app (op U.unop.2)) (d.naturality a.unop.1.op)
+    have hv := (d.app (op V.unop.1)).naturality a.unop.2.op
+    change ((A.map a.unop.1.op).app (op U.unop.2) ≫
+      (A.obj (op V.unop.1)).map a.unop.2.op) ≫
+        (d.app (op V.unop.1)).app (op V.unop.2) =
+      (d.app (op U.unop.1)).app (op U.unop.2) ≫
+        ((B.map a.unop.1.op).app (F.op.obj (op U.unop.2)) ≫
+          (B.obj (op V.unop.1)).map (F.op.map a.unop.2.op))
+    rw [Category.assoc, hv, ← Category.assoc]
+    exact congrArg (fun t ↦ t ≫ _) hd
+
+private def coefficient_candidate {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    R l E Y ⟶ ((base f).sheafPushforwardContinuous CommRingCat.{u + 1}
+    (coefficientSequenceTopology (Scheme.ProEt.topology Y))
+    (coefficientSequenceTopology (Scheme.ProEt.topology X))).obj (R l E X) :=
+  ⟨sequenceMap (Scheme.proEtaleBaseChange f)
+    (coefficientSequenceCommRingSystem l E Y ⋙
+      sheafToPresheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1})
+    (coefficientSequenceCommRingSystem l E X ⋙
+      sheafToPresheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
+    (Functor.whiskerRight (coefficient_system l E f)
+      (sheafToPresheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1}))⟩
 
 /-- The ring map on the diagram site is uniquely fixed by constant sections.
 Source: Stacks 0H7J, 0941 (blueprint: def-pur-system-tensor-mate-arrows).
@@ -122,7 +248,52 @@ theorem coefficient_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (a : ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))),
         c.hom.app (op (n, U)) (scalar l E Y n U a) =
           scalar l E X n ((Scheme.proEtaleBaseChange f).obj U) a := by
-  sorry
+  let d := coefficient_system l E f
+  let c := coefficient_candidate l E f
+  have hc (n : ℕ) (U : Y.ProEt)
+      (a : ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) :
+      c.hom.app (op (n, U)) (scalar l E Y n U a) =
+        scalar l E X n ((Scheme.proEtaleBaseChange f).obj U) a := by
+    have h := Equiv.apply_symm_apply
+      ((sheafificationAdjunction (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).homEquiv
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))
+        ((Scheme.proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj
+          (integralCoefficientCommRingSheaf l E X n)))
+      (Functor.whiskerLeft (Scheme.proEtaleBaseChange f).op
+        (toSheafify (Scheme.ProEt.topology X)
+          ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of
+            (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))))
+    exact congrArg (fun t ↦ (t.app (op U)).hom a) h
+  refine ⟨c, hc, ?_⟩
+  intro c' hc'
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext V
+  let n := V.unop.1
+  let e : integralCoefficientCommRingSheaf l E Y n ⟶
+      (Scheme.proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj
+        (integralCoefficientCommRingSheaf l E X n) :=
+    ⟨{ app := fun U ↦ c'.hom.app (op (n, U.unop))
+       naturality := fun U U' a ↦ by
+         have h := c'.hom.naturality ((Prod.sectR n Y.ProEt).op.map a)
+         change (R l E Y).obj.map ((Prod.sectR n Y.ProEt).op.map a) ≫ _ =
+           _ ≫ (R l E X).obj.map
+             ((Prod.sectR n X.ProEt).op.map ((Scheme.proEtaleBaseChange f).op.map a)) at h
+         erw [ring_vertical_map, ring_vertical_map] at h
+         exact h }⟩
+  have he : e = d.app (op n) := by
+    apply ((sheafificationAdjunction (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).homEquiv
+      ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of
+        (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))) _).injective
+    apply NatTrans.ext
+    funext U
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro a
+    exact (hc' n U.unop a).trans (hc n U.unop a).symm
+  exact congrArg (fun t ↦ t.hom.app (op V.unop.2)) he
+
 
 /-- The unique constant-section-preserving structural ring map.
 Source: Stacks 0H7J, 0941 (blueprint: def-pur-system-tensor-mate-arrows). -/
@@ -145,8 +316,12 @@ Proof: restrictions and scalar restriction leave addition of maps unchanged,
 so the equality holds on every section, including the horizontal restrictions. -/
 theorem direct_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (direct l E f).Additive := by
-  sorry
+  constructor
+  intro M N a b
+  ext V x
+  rfl
 
+open SheafOfModules in
 /-- The actual system category has K-injective resolutions.
 Source: Stacks 079P; semilinearDerivedSections
 (blueprint: def-pur-system-tensor-mate-arrows).
@@ -155,7 +330,10 @@ vertical ringed site Grothendieck abelian. Apply K-injective existence for a
 Grothendieck abelian category, in the recorded standard derived universe. -/
 theorem system_kInjective (X : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (S l E X) := by
-  sorry
+  let : IsGrothendieckAbelian.{u + 1} (S l E X) :=
+    (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u + 1, u, u + 1}
+      (coefficientSequenceTopology (Scheme.ProEt.topology X)) (R l E X)).1
+  infer_instance
 
 attribute [instance] direct_additive system_kInjective
 
@@ -164,6 +342,72 @@ Source: Stacks 07A4 (blueprint: def-pur-system-tensor-mate-arrows). -/
 abbrev pushDerived {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (direct l E f).rightDerivedFunctor
 
+section
+
+attribute [local irreducible] coefficientSequenceCommRingSheaf
+
+open CategoryTheory.MonoidalCategory in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private def laxTensorPresheaf {X Y : Scheme.{u}} (f : X ⟶ Y) (M N : S l E X) :
+    ((direct l E f).obj M).val ⊗ ((direct l E f).obj N).val ⟶
+      ((direct l E f).obj (ordinaryTensor.{u + 1, u, u + 1}
+        (coefficientSequenceTopology (Scheme.ProEt.topology X)) (R l E X) M N)).val := by
+  let JX := coefficientSequenceTopology (Scheme.ProEt.topology X)
+  let RX := R l E X
+  let RY := R l E Y
+  let := SheafOfModules.isMonoidal_W_independentCoefficients RX
+  let φ := Functor.whiskerRight (coefficient l E f).hom
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+  let F := PresheafOfModules.pushforward.{u + 1} (F := base f)
+    (R := RX.obj ⋙ forget₂ CommRingCat RingCat)
+    (S := RY.obj ⋙ forget₂ CommRingCat RingCat) φ
+  let : F.LaxMonoidal := PresheafOfModules.pushforwardLaxMonoidal
+    (F := base f) (R := RX.obj) (S := RY.obj) φ
+  let adjX := PresheafOfModules.sheafificationAdjunction
+    (𝟙 (ring.{u + 1, u, u + 1} JX RX).obj)
+  let eX := SheafOfModules.tensorObjIsoSheafification (R := RX) M N
+  exact Functor.LaxMonoidal.μ F M.val N.val ≫ F.map
+    (adjX.unit.app (M.val ⊗ N.val) ≫ eX.inv.val)
+
+open CategoryTheory.MonoidalCategory in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem laxTensorPresheaf_tmul {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M N : S l E X) (V : (ℕ × Y.ProEt)ᵒᵖ)
+    (x : ((direct l E f).obj M).val.obj V)
+    (y : ((direct l E f).obj N).val.obj V) :
+    (laxTensorPresheaf l E f M N).app V
+      (x ⊗ₜ[(R l E Y).obj.obj V] y) =
+      tensorSection.{u + 1, u, u + 1}
+        (coefficientSequenceTopology (Scheme.ProEt.topology X)) (R l E X)
+        M N ((base f).op.obj V) x y := by
+  let JX := coefficientSequenceTopology (Scheme.ProEt.topology X)
+  let RX := R l E X
+  let RY := R l E Y
+  let := SheafOfModules.isMonoidal_W_independentCoefficients RX
+  let φ := Functor.whiskerRight (coefficient l E f).hom
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+  let F := PresheafOfModules.pushforward.{u + 1} (F := base f)
+    (R := RX.obj ⋙ forget₂ CommRingCat RingCat)
+    (S := RY.obj ⋙ forget₂ CommRingCat RingCat) φ
+  let : F.LaxMonoidal := PresheafOfModules.pushforwardLaxMonoidal
+    (F := base f) (R := RX.obj) (S := RY.obj) φ
+  let adjX := PresheafOfModules.sheafificationAdjunction
+    (𝟙 (ring.{u + 1, u, u + 1} JX RX).obj)
+  let eX := SheafOfModules.tensorObjIsoSheafification (R := RX) M N
+  change (F.map (adjX.unit.app (M.val ⊗ N.val) ≫ eX.inv.val)).app V
+    ((Functor.LaxMonoidal.μ F M.val N.val).app V (x ⊗ₜ[RY.obj.obj V] y)) = _
+  have hm := PresheafOfModules.pushforward_μ_app_tmul
+    (F := base f) (R := RX.obj) (S := RY.obj) φ M.val N.val V x y
+  exact congrArg (fun z ↦ (F.map
+    (adjX.unit.app (M.val ⊗ N.val) ≫ eX.inv.val)).app V z) hm
+
+attribute [local irreducible] laxTensorPresheaf
+
+open CategoryTheory.MonoidalCategory in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The lax tensor map of sectionwise direct image has its usual pure-tensor formula.
 Source: Stacks 03EK, 0B56 (blueprint: def-pur-system-tensor-mate-arrows).
 Proof: on every object the map sends x tensor y to x tensor y over the pulled
@@ -187,12 +431,83 @@ theorem laxTensor_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (M N : S l E X) 
           tensorSection.{u + 1, u, u + 1}
             (coefficientSequenceTopology (Scheme.ProEt.topology X)) (R l E X)
             M N ((base f).op.obj V) x y := by
-  sorry
+  let JX := coefficientSequenceTopology (Scheme.ProEt.topology X)
+  let JY := coefficientSequenceTopology (Scheme.ProEt.topology Y)
+  let RX := R l E X
+  let RY := R l E Y
+  let := SheafOfModules.isMonoidal_W_independentCoefficients RX
+  let := SheafOfModules.isMonoidal_W_independentCoefficients RY
+  let adjY := PresheafOfModules.sheafificationAdjunction
+    (𝟙 (ring.{u + 1, u, u + 1} JY RY).obj)
+  let A := (direct l E f).obj M
+  let B := (direct l E f).obj N
+  let H := (direct l E f).obj (ordinaryTensor.{u + 1, u, u + 1} JX RX M N)
+  let eY := SheafOfModules.tensorObjIsoSheafification (R := RY) A B
+  let q := laxTensorPresheaf l E f M N
+  let a := (adjY.homEquiv (A.val ⊗ B.val) H).symm q
+  let t := eY.hom ≫ a
+  have ht (V : (ℕ × Y.ProEt)ᵒᵖ) (x : A.val.obj V) (y : B.val.obj V) :
+      t.val.app V (tensorSection.{u + 1, u, u + 1} JY RY A B V x y) =
+        tensorSection.{u + 1, u, u + 1} JX RX M N ((base f).op.obj V) x y := by
+    have h := (adjY.homEquiv (A.val ⊗ B.val) H).apply_symm_apply q
+    rw [Adjunction.homEquiv_unit] at h
+    have hh := congrArg (fun k ↦ (k.app V) (x ⊗ₜ[RY.obj.obj V] y)) h
+    have hi := congrArg (fun k ↦ k.val.app V
+      ((adjY.unit.app (A.val ⊗ B.val)).app V (x ⊗ₜ[RY.obj.obj V] y)))
+      eY.inv_hom_id
+    change a.val.app V ((adjY.unit.app (A.val ⊗ B.val)).app V
+      (x ⊗ₜ[RY.obj.obj V] y)) = q.app V (x ⊗ₜ[RY.obj.obj V] y) at hh
+    change eY.hom.val.app V (eY.inv.val.app V _) =
+      (adjY.unit.app (A.val ⊗ B.val)).app V (x ⊗ₜ[RY.obj.obj V] y) at hi
+    change a.val.app V (eY.hom.val.app V (eY.inv.val.app V _)) = _
+    rw [hi, hh]
+    exact laxTensorPresheaf_tmul l E f M N V x y
+  refine ⟨t, ht, ?_⟩
+  intro t' ht'
+  apply (cancel_epi eY.inv).1
+  apply (adjY.homEquiv (A.val ⊗ B.val) H).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  apply PresheafOfModules.hom_ext
+  intro V
+  ext z
+  change (t'.val.app V).hom ((eY.inv.val.app V).hom
+      (((adjY.unit.app (A.val ⊗ B.val)).app V).hom z)) =
+    (t.val.app V).hom ((eY.inv.val.app V).hom
+      (((adjY.unit.app (A.val ⊗ B.val)).app V).hom z))
+  induction z using TensorProduct.induction_on with
+  | zero =>
+    set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+    simp only [map_zero]
+  | tmul x y => exact (ht' V x y).trans (ht V x y).symm
+  | add z w hz hw =>
+    set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+    simp only [map_add, hz, hw]
+
+
+end
 
 /-- The normalized lax tensor map, used to fix inverse-image tensor comparison.
 Source: Stacks 03EK, 0B56 (blueprint: def-pur-system-tensor-mate-arrows). -/
 def laxTensor {X Y : Scheme.{u}} (f : X ⟶ Y) (M N : S l E X) :=
   (laxTensor_existsUnique l E f M N).choose
+
+private theorem coefficient_scalar {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    (U : Y.ProEt) (a : ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) :
+    (coefficient l E f).hom.app (op (n, U)) (scalar l E Y n U a) =
+      scalar l E X n ((Scheme.proEtaleBaseChange f).obj U) a :=
+  (coefficient_existsUnique l E f).choose_spec.1 n U a
+
+private theorem scalar_map (X : Scheme.{u}) (n : ℕ) {U V : X.ProEt}
+    (b : U ⟶ V) (a : ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) :
+    (R l E X).obj.map ((Prod.sectR n X.ProEt).map b).op (scalar l E X n V a) =
+      scalar l E X n U a := by
+  erw [ring_vertical_map l E X n b.op]
+  have h := (toSheafify (Scheme.ProEt.topology X)
+    ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of
+      (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))).naturality b.op
+  exact (congrArg (fun t ↦ t.hom a) h).symm
 
 /-- Sectionwise direct-image composition is the fibre-product pasting map.
 Source: Stacks 0D6D (blueprint: def-pur-system-tensor-mate-arrows).
@@ -206,7 +521,58 @@ theorem directComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
         (e.hom.app M).val.app (op (n, U)) x =
           M.val.map (CategoryTheory.Prod.mkHom (𝟙 n)
             ((MorphismProperty.Over.pullbackComp f g (f ≫ g) rfl).hom.app U)).op x := by
-  sorry
+  let e : base (f ≫ g) ≅ base g ⋙ base f :=
+    NatIso.ofComponents
+      (fun U ↦ Iso.prod (Iso.refl U.1)
+        ((MorphismProperty.Over.pullbackComp f g (f ≫ g) rfl).app U.2))
+      (by
+        intro U V a
+        apply CategoryTheory.Prod.hom_ext
+        · exact Subsingleton.elim _ _
+        · exact (MorphismProperty.Over.pullbackComp f g (f ≫ g) rfl).hom.naturality a.2)
+  have : (base g ⋙ base f).IsContinuous
+      (coefficientSequenceTopology (Scheme.ProEt.topology Z))
+      (coefficientSequenceTopology (Scheme.ProEt.topology X)) :=
+    Functor.isContinuous_comp _ _ _ (coefficientSequenceTopology (Scheme.ProEt.topology Y)) _
+  let c : R l E Z ⟶ ((base g ⋙ base f).sheafPushforwardContinuous CommRingCat.{u + 1}
+      (coefficientSequenceTopology (Scheme.ProEt.topology Z))
+      (coefficientSequenceTopology (Scheme.ProEt.topology X))).obj (R l E X) :=
+    coefficient l E g ≫ ((base g).sheafPushforwardContinuous CommRingCat.{u + 1}
+      (coefficientSequenceTopology (Scheme.ProEt.topology Z))
+      (coefficientSequenceTopology (Scheme.ProEt.topology Y))).map (coefficient l E f)
+  have hc : c ≫ (Functor.sheafPushforwardContinuousNatTrans e.hom CommRingCat.{u + 1}
+      (coefficientSequenceTopology (Scheme.ProEt.topology Z))
+      (coefficientSequenceTopology (Scheme.ProEt.topology X))).app (R l E X) =
+        coefficient l E (f ≫ g) := by
+    apply (coefficient_existsUnique l E (f ≫ g)).choose_spec.2
+    intro n U a
+    change (R l E X).obj.map ((Prod.sectR n X.ProEt).map
+      ((MorphismProperty.Over.pullbackComp f g (f ≫ g) rfl).hom.app U)).op
+        ((coefficient l E f).hom.app (op (n, (Scheme.proEtaleBaseChange g).obj U))
+          ((coefficient l E g).hom.app (op (n, U)) (scalar l E Z n U a))) = _
+    rw [coefficient_scalar, coefficient_scalar]
+    exact scalar_map l E X n _ a
+  let φf := (direct l E f)
+  let φg := (direct l E g)
+  let a : φf ⋙ φg ≅ direct l E (f ≫ g) :=
+    SheafOfModules.pushforwardComp _ _ ≪≫ SheafOfModules.pushforwardCongr₂ _ e (by
+      apply Sheaf.hom_ext
+      exact congrArg (fun t ↦ Functor.whiskerRight t.hom
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) hc)
+  have ha (M : S l E X) (n : ℕ) (U : Z.ProEt)
+      (x : ((direct l E f ⋙ direct l E g).obj M).val.obj (op (n, U))) :
+      (a.hom.app M).val.app (op (n, U)) x =
+        M.val.map (CategoryTheory.Prod.mkHom (𝟙 n)
+          ((MorphismProperty.Over.pullbackComp f g (f ≫ g) rfl).hom.app U)).op x := by
+    rfl
+  refine ⟨a, ha, ?_⟩
+  intro a' ha'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  ext V x
+  exact (ha' M V.unop.1 V.unop.2 x).trans (ha M V.unop.1 V.unop.2 x).symm
+
 
 /-- The unique section-normalized direct-image compositor.
 Source: Stacks 0D6D (blueprint: def-pur-system-tensor-mate-arrows). -/
@@ -332,6 +698,269 @@ part of semilinearDerivedSections. No equalities are inferred from evaluation. -
 theorem tensorOperations_nonempty : Nonempty (TensorOperations l E) := by
   sorry
 
+private theorem ringHom_ext_scalar (W : Scheme.{u})
+    {H : Sheaf (coefficientSequenceTopology (Scheme.ProEt.topology W))
+      CommRingCat.{u + 1}} (a b : (R l E W).obj ⟶ H.obj)
+    (h : ∀ n U z, a.app (op (n, U)) (scalar l E W n U z) =
+      b.app (op (n, U)) (scalar l E W n U z)) : a = b := by
+  let e (c : (R l E W).obj ⟶ H.obj) (n : ℕ) : integralCoefficientCommRingSheaf l E W n ⟶
+      ((Prod.sectR n W.ProEt).sheafPushforwardContinuous CommRingCat.{u + 1}
+        (Scheme.ProEt.topology W)
+        (coefficientSequenceTopology (Scheme.ProEt.topology W))).obj H :=
+    ⟨{ app := fun U ↦ c.app (op (n, U.unop))
+       naturality := fun U V f ↦ by
+         have hc := c.naturality ((Prod.sectR n W.ProEt).op.map f)
+         erw [ring_vertical_map l E W n f] at hc
+         exact hc }⟩
+  have he (n : ℕ) : e a n = e b n := by
+    apply ((sheafificationAdjunction (Scheme.ProEt.topology W) CommRingCat.{u + 1}).homEquiv
+      ((Functor.const W.ProEtᵒᵖ).obj (CommRingCat.of
+        (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))) _).injective
+    apply NatTrans.ext
+    funext U
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro z
+    exact h n U.unop z
+  apply NatTrans.ext
+  funext V
+  exact congrArg (fun c ↦ c.hom.app (op V.unop.2)) (he V.unop.1)
+
+private def openBase {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    ℕ × U.ProEt ⥤ ℕ × X.ProEt :=
+  (𝟭 ℕ).prod (Scheme.proEtaleOpenComposition j)
+
+private instance openComposition_continuous {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] : (Scheme.proEtaleOpenComposition j).IsContinuous
+      (Scheme.ProEt.topology U) (Scheme.ProEt.topology X) :=
+  Scheme.ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
+
+private instance openBase_continuous {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] :
+    (openBase j).IsContinuous (coefficientSequenceTopology (Scheme.ProEt.topology U))
+      (coefficientSequenceTopology (Scheme.ProEt.topology X)) := by
+  constructor
+  intro G
+  apply sequence_isSheaf_of_slices
+  intro n
+  have hG := (Prod.sectR n X.ProEt).op_comp_isSheaf_of_isSheaf_type
+    (Scheme.ProEt.topology X) ((isSheaf_iff_isSheaf_of_type _ _).1 G.property)
+  have : (Scheme.proEtaleOpenComposition j).IsContinuous
+      (Scheme.ProEt.topology U) (Scheme.ProEt.topology X) :=
+    Scheme.ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
+  exact (Scheme.proEtaleOpenComposition j).op_comp_isSheaf_of_isSheaf_type
+    (Scheme.ProEt.topology U) hG
+
+private def openConstant {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    constantSheaf (Scheme.ProEt.topology U) CommRingCat.{u + 1} ⟶
+      constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} ⋙
+        (Scheme.proEtaleOpenComposition j).sheafPushforwardContinuous
+          CommRingCat.{u + 1} (Scheme.ProEt.topology U) (Scheme.ProEt.topology X) := by
+  let G := Scheme.proEtaleOpenComposition j
+  have : G.IsContinuous (Scheme.ProEt.topology U) (Scheme.ProEt.topology X) :=
+    Scheme.ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
+  have : G.IsCocontinuous (Scheme.ProEt.topology U) (Scheme.ProEt.topology X) :=
+    Scheme.ProEt.isCocontinuous_overMap (inferInstance : WeaklyEtale j)
+  exact Functor.whiskerLeft (Functor.const X.ProEtᵒᵖ)
+    (G.pushforwardContinuousSheafificationCompatibility CommRingCat.{u + 1}
+      (Scheme.ProEt.topology U) (Scheme.ProEt.topology X)).hom
+
+private def openCoefficient_system {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    coefficientSequenceCommRingSystem l E U ⟶
+    coefficientSequenceCommRingSystem l E X ⋙
+      (Scheme.proEtaleOpenComposition j).sheafPushforwardContinuous CommRingCat.{u + 1}
+        (Scheme.ProEt.topology U) (Scheme.ProEt.topology X) :=
+  NatTrans.ofOpSequence
+    (fun n ↦ (openConstant j).app (CommRingCat.of
+      (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))
+    (fun n ↦ by
+      dsimp only [Functor.comp_map, coefficientSequenceCommRingSystem]
+      rw [Functor.ofOpSequence_map_homOfLE_succ,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      exact (openConstant j).naturality _)
+
+private def openCoefficient {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    R l E U ⟶ ((openBase j).sheafPushforwardContinuous CommRingCat.{u + 1}
+      (coefficientSequenceTopology (Scheme.ProEt.topology U))
+      (coefficientSequenceTopology (Scheme.ProEt.topology X))).obj (R l E X) :=
+  ⟨sequenceMap (Scheme.proEtaleOpenComposition j)
+    (coefficientSequenceCommRingSystem l E U ⋙
+      sheafToPresheaf (Scheme.ProEt.topology U) CommRingCat.{u + 1})
+    (coefficientSequenceCommRingSystem l E X ⋙
+      sheafToPresheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
+    (Functor.whiskerRight (openCoefficient_system l E j)
+      (sheafToPresheaf (Scheme.ProEt.topology U) CommRingCat.{u + 1}))⟩
+
+private theorem openCoefficient_scalar {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] (n : ℕ) (V : U.ProEt)
+    (z : ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) :
+    (openCoefficient l E j).hom.app (op (n, V)) (scalar l E U n V z) =
+      scalar l E X n ((Scheme.proEtaleOpenComposition j).obj V) z := by
+  let G := Scheme.proEtaleOpenComposition j
+  have : G.IsContinuous (Scheme.ProEt.topology U) (Scheme.ProEt.topology X) :=
+    Scheme.ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
+  have : G.IsCocontinuous (Scheme.ProEt.topology U) (Scheme.ProEt.topology X) :=
+    Scheme.ProEt.isCocontinuous_overMap (inferInstance : WeaklyEtale j)
+  exact congrArg (fun c ↦ c.app (op V) z)
+    (G.toSheafify_pullbackSheafificationCompatibility CommRingCat.{u + 1}
+      (Scheme.ProEt.topology U) (Scheme.ProEt.topology X)
+      ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of
+        (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))))
+
+private def openSiteAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    openBase j ⊣ base j := by
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+    (inferInstance : WeaklyEtale j) trivial
+  exact
+    { unit :=
+        { app V := Prod.mkHom (𝟙 V.1) (a.unit.app V.2)
+          naturality := fun V W f ↦ by
+            ext
+            · simp [openBase, base]
+            · exact a.unit.naturality f.2 }
+      counit :=
+        { app V := Prod.mkHom (𝟙 V.1) (a.counit.app V.2)
+          naturality := fun V W f ↦ by
+            ext
+            · simp [openBase, base]
+            · exact a.counit.naturality f.2 }
+      left_triangle_components V := by
+        ext
+        · simp [openBase, base]
+        · exact a.left_triangle_components V.2
+      right_triangle_components V := by
+        ext
+        · simp [openBase, base]
+        · exact a.right_triangle_components V.2 }
+
+private theorem openSiteAdjunction_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] : IsIso (openSiteAdjunction j).unit := by
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+    (inferInstance : WeaklyEtale j) trivial
+  have : IsIso a.unit := inferInstance
+  let e : 𝟭 (ℕ × U.ProEt) ≅ openBase j ⋙ base j :=
+    NatIso.ofComponents (fun V ↦ Iso.prod (Iso.refl V.1) ((asIso a.unit).app V.2))
+      (by
+        intro V W f
+        ext
+        · simp [openBase, base]
+        · exact a.unit.naturality f.2)
+  change IsIso e.hom
+  infer_instance
+
+private theorem pushforwardAdj_counit_isIso
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {F : C ⥤ D} {G : D ⥤ C}
+    [F.IsContinuous J K] [G.IsContinuous K J]
+    {S : Sheaf J RingCat.{u + 1}} {R : Sheaf K RingCat.{u + 1}}
+    (a : F ⊣ G) [IsIso a.unit]
+    (φ : S ⟶ (F.sheafPushforwardContinuous RingCat.{u + 1} J K).obj R)
+    (ψ : R ⟶ (G.sheafPushforwardContinuous RingCat.{u + 1} K J).obj S)
+    (H₁ : Functor.whiskerRight (NatTrans.op a.counit) R.obj =
+      ψ.hom ≫ G.op.whiskerLeft φ.hom)
+    (H₂ : φ.hom ≫ F.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op a.unit) S.obj = 𝟙 S.obj) :
+    IsIso (SheafOfModules.pushforwardPushforwardAdj a φ ψ H₁ H₂).counit := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  rw [← isIso_iff_of_reflects_iso _
+    (SheafOfModules.forget S ⋙ PresheafOfModules.toPresheaf S.obj)]
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro V
+  change IsIso (M.val.presheaf.map (a.unit.app V.unop).op)
+  infer_instance
+
+section
+
+attribute [local irreducible] coefficientSequenceCommRingSheaf
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem openCoefficient_counit {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] :
+    Functor.whiskerRight (NatTrans.op (openSiteAdjunction j).counit) (R l E X).obj =
+      (coefficient l E j).hom ≫ (base j).op.whiskerLeft
+        (openCoefficient l E j).hom := by
+  let JU := coefficientSequenceTopology (Scheme.ProEt.topology U)
+  let JX := coefficientSequenceTopology (Scheme.ProEt.topology X)
+  let a := openSiteAdjunction j
+  let F := openBase j
+  let G := base j
+  have : (G ⋙ F).IsContinuous JX JX := Functor.isContinuous_comp _ _ _ JU _
+  apply ringHom_ext_scalar l E X
+    (H := ((G ⋙ F).sheafPushforwardContinuous CommRingCat.{u + 1}
+      JX JX).obj (R l E X))
+  intro n V z
+  change (R l E X).obj.map (a.counit.app (n, V)).op
+        (scalar l E X n V z) =
+      (openCoefficient l E j).hom.app (op (n, (Scheme.proEtaleBaseChange j).obj V))
+        ((coefficient l E j).hom.app (op (n, V)) (scalar l E X n V z))
+  rw [coefficient_scalar, openCoefficient_scalar]
+  have hc : a.counit.app (n, V) =
+      (Prod.sectR n X.ProEt).map (a.counit.app (n, V)).2 := rfl
+  rw [hc]
+  exact scalar_map l E X n _ z
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem openCoefficient_unit {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] :
+    (openCoefficient l E j).hom ≫ (openBase j).op.whiskerLeft (coefficient l E j).hom ≫
+      Functor.whiskerRight (NatTrans.op (openSiteAdjunction j).unit) (R l E U).obj =
+        𝟙 (R l E U).obj := by
+  let a := openSiteAdjunction j
+  apply ringHom_ext_scalar l E U (H := R l E U)
+  intro n V z
+  change (R l E U).obj.map (a.unit.app (n, V)).op
+        ((coefficient l E j).hom.app
+          (op (n, (Scheme.proEtaleOpenComposition j).obj V))
+          ((openCoefficient l E j).hom.app (op (n, V)) (scalar l E U n V z))) =
+      scalar l E U n V z
+  rw [openCoefficient_scalar, coefficient_scalar]
+  have hc : a.unit.app (n, V) =
+      (Prod.sectR n U.ProEt).map (a.unit.app (n, V)).2 := rfl
+  rw [hc]
+  exact scalar_map l E U n _ z
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem direct_open_counit_isIso {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] :
+    ∃ (L : S l E X ⥤ S l E U) (a : L ⊣ direct l E j), IsIso a.counit := by
+  let JU := coefficientSequenceTopology (Scheme.ProEt.topology U)
+  let JX := coefficientSequenceTopology (Scheme.ProEt.topology X)
+  let a := openSiteAdjunction j
+  let F := openBase j
+  let G := base j
+  let d := openCoefficient l E j
+  let c := coefficient l E j
+  have H₁c := openCoefficient_counit l E j
+  have H₂c := openCoefficient_unit l E j
+  let φ : ring.{u + 1, u, u + 1} JU (R l E U) ⟶
+      (F.sheafPushforwardContinuous RingCat.{u + 1} JU JX).obj
+        (ring.{u + 1, u, u + 1} JX (R l E X)) :=
+    ⟨Functor.whiskerRight d.hom (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  let ψ : ring.{u + 1, u, u + 1} JX (R l E X) ⟶
+      (G.sheafPushforwardContinuous RingCat.{u + 1} JX JU).obj
+        (ring.{u + 1, u, u + 1} JU (R l E U)) :=
+    ⟨Functor.whiskerRight c.hom (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  have H₁ : Functor.whiskerRight (NatTrans.op a.counit)
+      (ring.{u + 1, u, u + 1} JX (R l E X)).obj = ψ.hom ≫ G.op.whiskerLeft φ.hom :=
+    congrArg (fun t ↦ Functor.whiskerRight t
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) H₁c
+  have H₂ : φ.hom ≫ F.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op a.unit)
+        (ring.{u + 1, u, u + 1} JU (R l E U)).obj = 𝟙 _ :=
+    congrArg (fun t ↦ Functor.whiskerRight t
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) H₂c
+  let radj := SheafOfModules.pushforwardPushforwardAdj a φ ψ H₁ H₂
+  refine ⟨SheafOfModules.pushforward φ, radj, ?_⟩
+  have : IsIso a.unit := openSiteAdjunction_unit_isIso j
+  exact pushforwardAdj_counit_isIso a φ ψ H₁ H₂
+
+end
+
 namespace Operations
 variable {l E}
 variable (o : Operations l E)
@@ -353,7 +982,13 @@ Transport by the unique adjunction-compatible comparison to the supplied
 universal presentation. -/
 theorem ordinaryOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (o.openAdj j).unit := by
-  sorry
+  obtain ⟨L, a, ha⟩ := direct_open_counit_isIso l E j
+  have : IsIso a.counit := ha
+  have : (direct l E j).Full := a.fullyFaithfulROfIsIsoCounit.full
+  have : (direct l E j).Faithful := a.fullyFaithfulROfIsIsoCounit.faithful
+  have : IsIso (o.adj j).counit := (o.adj j).counit_isIso_of_R_fully_faithful
+  exact (Adjunction.Triple.isIso_unit_iff_isIso_counit
+    (⟨o.openAdj j, o.adj j⟩ : Adjunction.Triple _ _ _)).2 inferInstance
 
 /-- The inverse open unit is fixed by its two inverse identities.
 Source: Stacks 03DI (blueprint: def-pur-system-tensor-mate-arrows). -/
