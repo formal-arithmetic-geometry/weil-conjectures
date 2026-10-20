@@ -3,89 +3,73 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Apply the derived coefficient adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction] to the constant ring-sheaf map $A_Z\\to B_Z$. The coefficient unit on $D$ gives a map $i_*A_D\\to\\operatorname{Res}_{A\\to B}(i_*B_D)$ by the direct-image functor, and its adjoint is precisely the specified morphism $\\alpha_{A,B}:(i_*A_D)\\otimes^\\mathbf L_{A_Z}B_Z\\to i_*B_D$. The normalization in the adjunction identifies this as the adjunct of $x\\mapsto x\\otimes1$.",
+   "text": "Construct the ordinary coefficient unit by the constant-sheaf adjunction. Its image on the terminal-object generator 1 is 1, and its image on a is φ(a). These generator formulas prove the ordinary identity and composition laws before and after direct image.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4: supported source identification in finite coefficient extension. Agent comparison lemma, generalized from Cartier immersions to closed immersions; derived machinery: Stacks sites-cohomology.tex, Tags 06YU (definition-derived-tor), 06YV (section-derived-pullback), 06YY (lemma-derived-base-change)."
+   }
+  },
+  {
+   "text": "For N=ringChar A, finiteness gives N≥1 and both A and B are killed by N, including the zero ring (N=1). Apply lem-asd-supported-kummer-scalar-source to the canonical lifted-residue maps to A and B. Its generator clause identifies its maps with the explicitly constructed units.",
+   "uses": [
+    "lem-asd-supported-kummer-scalar-source"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-    "place": "Paragraph 4, apply derived extension from the source coefficient ring to the target coefficient ring"
+    "place": "Paragraph 4: supported source identification in finite coefficient extension. Agent comparison lemma, generalized from Cartier immersions to closed immersions; derived machinery: Stacks sites-cohomology.tex, Tags 06YU (definition-derived-tor), 06YV (section-derived-pullback), 06YY (lemma-derived-base-change)."
    }
   },
   {
-   "text": "Take a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to Z$. The closed immersion $i$ is finite: over an affine open $\\operatorname{Spec}R$ of $Z$ it is $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$ [def-weil-closed-immersion], and $R/I$ is a cyclic $R$-module. Its geometric fibre $D\\times_Z\\operatorname{Spec}\\Omega=\\operatorname{Spec}(\\Omega\\otimes_RR/I)$ is $\\operatorname{Spec}\\Omega$ (one point $\\bar d$ over $\\bar z$) if $\\bar z$ lies on $D$ and is empty otherwise, as $\\Omega\\otimes_RR/I$ is a quotient of the field $\\Omega$. By the finite-stalk formula [lemma-weil-pbc-finite-stalk-formula] and the geometric stalk of a constant sheaf [lem-weil-pbc-constant-sheaf-geometric-stalk], the stalk of $i_*A_D$ at $\\bar z$ is $(A_D)_{\\bar d}=A$ when $\\bar z$ lies on $D$ and is $0$ otherwise; likewise $(i_*B_D)_{\\bar z}$ is $B$ or $0$, the map $(i_*A_D)_{\\bar z}\\to(i_*B_D)_{\\bar z}$ induced by the coefficient unit is the ring map $A\\to B$ or $0$, and $(B_Z)_{\\bar z}=B$. On a K-flat flat-term representative $P$ of $i_*A_D$ the complex $P\\otimes_{A_Z}B_Z$ computes both the change of rings and the derived tensor product over $A$ with $B_Z$; stalks are inverse images [lem-kun-stalk-as-pullback], which are monoidal [lem-kun-inverse-image-monoidal]: the stalk of the derived tensor is $(i_*A_D)_{\\bar z}\\otimes_A^{\\mathbf L}B$, namely $A\\otimes_AB=B$ on $D$ ($A$ is free of rank one) and $0$ off $D$. By the normalized adjunct formula $x\\otimes b\\mapsto b\\,g(x)$ of Step 1, the stalk of $\\alpha_{A,B}$ is the multiplication $A\\otimes_AB\\to B$, $a\\otimes b\\mapsto ab$, an isomorphism, in the first case and the zero map $0\\to0$ in the second. Stalks are exact [prop-weil-pbc-geometric-stalks-exact], so each $\\mathcal H^q(\\alpha_{A,B})$ is an isomorphism on all geometric stalks, hence an isomorphism [lemma-weil-pbc-geometric-stalk-conservative], and $\\alpha_{A,B}$ is a quasi-isomorphism (an isomorphism in $D(Z_{\\Et},B)$) without any flatness assumption on $A\\to B$.",
-   "uses": [
-    "def-weil-closed-immersion",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-constant-sheaf",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-kun-stalk-as-pullback",
-    "lem-kun-inverse-image-monoidal",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
+   "text": "Uniqueness of a ring map from ZMod N shows that the residue map to B is φ composed with the residue map to A. For every unbounded derived B-object, cancel the bijection of Hom sets for the residue-to-A unit from the bijection for the residue-to-B unit; naturality of the restriction composition iso identifies their composite. The resulting coefficient unit is universal. The adjunction Hom equivalence and Yoneda imply that its specified adjunct is an isomorphism. Repeat for φ, ψ and ψ.comp φ.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Proposition etale-cohomology-proposition-finite-higher-direct-image-zero (Tag 03QP), part (1): stalks of a finite direct image; stalk calculation at geometric points"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4: supported source identification in finite coefficient extension. Agent comparison lemma, generalized from Cartier immersions to closed immersions; derived machinery: Stacks sites-cohomology.tex, Tags 06YU (definition-derived-tor), 06YV (section-derived-pullback), 06YY (lemma-derived-base-change)."
    }
   },
   {
-   "text": "For a commutative square of coefficient maps $A\\to B\\to B'$, the coefficient units on $D$ and their direct images commute with the maps induced by $B\\to B'$. The adjunction bijections are natural in both variables, and their normalized representative formula sends a map to the termwise balanced map $x\\otimes b\\mapsto b\\,g(x)$. Therefore taking adjuncts shows that $\\alpha_{A,B}$ is natural in the coefficient homomorphism.",
+   "text": "Transport the ordinary identity and composition laws through the canonical exact degree-zero unit. The named degree-zero interface proves compatibility with derived functor composition and natural-isomorphism comparisons, and with the canonical derived identity comparison.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "def-weil-pbc-direct-image"
+    "def-geo-exact-degree-zero-interface"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, derived coefficient adjunction and its naturality"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4: supported source identification in finite coefficient extension. Agent comparison lemma, generalized from Cartier immersions to closed immersions; derived machinery: Stacks sites-cohomology.tex, Tags 06YU (definition-derived-tor), 06YV (section-derived-pullback), 06YY (lemma-derived-base-change)."
    }
   },
   {
-   "text": "When the coefficient map is $A\\to A$, the coefficient unit is the identity on $i_*A_D$. The normalized unit in [lem-pur-sheaf-ring-derived-coefficient-adjunction] is represented by $x\\mapsto x\\otimes1$, which is the identity under the canonical identification $K\\otimes_A^{\\mathbf L}A\\cong K$. Thus the stalkwise isomorphism of Step 2 is the identity and $\\alpha_{A,A}=1$.",
+   "text": "The normalized identity and composition isomorphisms of fixed scalar extension are the conjugates of the corresponding right-adjoint isomorphisms. The defining unit equation for conjugateEquiv and naturality of adjunction Hom equivalences show that the adjunct of the identity unit is normalizedOriginScalarUnit, and that the adjuncts of composite units obey exactly pbcFixedScalarExtensionComp.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+    "def-weil-pbc-witness-compatibility",
+    "def-weil-pbc-normalized-origin-scalar-comparisons"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, normalized unit for derived change of rings"
-   }
-  },
-  {
-   "text": "Let $A\\to B\\to C$ be composable. On a K-flat flat-term representative $P$ of $i_*A_D$, the canonical transitivity map of [lem-sfb-successive-derived-quotient-normalization] is represented by $((x\\otimes b)\\otimes c)\\mapsto x\\otimes b c$, and that node says that the composite of the two scalar-extension units equals the unit for $A\\to C$. By the normalized adjunct formula of [lem-pur-sheaf-ring-derived-coefficient-adjunction], both $\\alpha_{B,C}\\circ(\\alpha_{A,B}\\otimes_B^{\\mathbf L}C)$ (transported across this transitivity isomorphism) and $\\alpha_{A,C}$ are adjuncts of the same coefficient-unit map $i_*A_D\\to\\operatorname{Res}_{A\\to C}(i_*C_D)$. Uniqueness of adjuncts gives the displayed composition identity, and the same argument gives coherence for iterated coefficient maps.",
-   "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D and Tag 0G7E, composition of derived pullbacks; normalized scalar-extension units"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4: supported source identification in finite coefficient extension. Agent comparison lemma, generalized from Cartier immersions to closed immersions; derived machinery: Stacks sites-cohomology.tex, Tags 06YU (definition-derived-tor), 06YV (section-derived-pullback), 06YY (lemma-derived-base-change)."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-closed-immersion",
+  "def-geo-exact-degree-zero-interface",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-direct-image",
-  "lem-kun-inverse-image-monoidal",
-  "lem-kun-stalk-as-pullback",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact"
+  "def-weil-pbc-normalized-origin-scalar-comparisons",
+  "def-weil-pbc-witness-compatibility",
+  "lem-asd-supported-kummer-scalar-source"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-  "place": "Paragraph 4, supported source identification in finite coefficient extension"
+  "place": "M9: finite characteristic residue-ring universal properties, cancellation, and canonical adjunction mates; source paragraph 4"
  },
  "mathlib_match": null,
  "status": "split",
@@ -196,15 +180,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-kun-stalk-as-pullback",
-  "lem-kun-inverse-image-monoidal",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lemma-weil-pbc-geometric-stalk-conservative"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -239,5 +215,15 @@
   "group": "Q05",
   "result": "pass",
   "note": "Read the node, all 8 statement dependencies, the module, the report and the exact declarations: pbcFixedScalarExtension (= recorded scalarExtension of lem-pur-derived-change-of-rings), pbcFixedScalarExtensionComp (leftAdjointCompIso of derivedRestrictScalarsCompIso), normalizedOriginScalarUnit (leftAdjointIdIso of the sectionwise identity), lowerStarRestrictScalarsIso (Iso.refl), restrictScalarsCompIso and Mathlib mapDerivedCategorySingleFunctor. Hypotheses match the node (closed immersion; finite comm rings in Type (u+1), the recorded coefficient universe; no flatness or boundedness). α is the concrete adjunct of i_* of the constant 1↦1 unit; the earlier H3 fault (arbitrary existential maps) is fixed and the helpers do real construction. Checked truth: IsIso for φ, ψ, ψφ (stalk argument, holds for non-flat maps); conjunct 4 unit cocycle true by the constant-sheaf adjunction and canonical coherences; identity clause true via conjugateEquiv_leftAdjointIdIso_hom; composition clause reduces to conjunct 4 by conjugation, direction matches a_{A,B,C}. Edge cases D empty, D=Z, A=B, zero rings, ZMod 4→ZMod 2 are covered. One sorry, in the theorem only; docstrings carry the source and blueprint tag; the docstring carries the node's 5 proof steps. lean.statement is verbatim; only the lean field differs from the shared node; the report has a real Worker report and Second reading by Q05. nt_compile.py --json: exit 0, no diagnostics, item file 13.0 s. Notes, not faults: conjunct 4 is an extra true unit-level clause; the associator uses the fixed-ring pbcFixedScalarExtensionComp, which is the unit-characterised iso of lem-sfb in the ModuleCat encoding."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261020T230814-L-615093",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

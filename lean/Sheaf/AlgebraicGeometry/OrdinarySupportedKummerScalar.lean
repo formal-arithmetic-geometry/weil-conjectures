@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerBoundary
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Sheaf.CategoryTheory.ExactDegreeZero
 
 /-!
 # Derived coefficient change of supported Kummer classes
@@ -33,6 +34,8 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
+attribute [local instance 10000] SheafExactDegreeZero.scalarWeakSheafify
+
 /-- The universal-property formulation of a derived scalar-extension unit at F.
 The target is G in degree zero, while test objects K range over the entire unbounded
 derived category. This is derived tensor extension, with no flatness assumption on S.
@@ -43,12 +46,7 @@ def SupportedDerivedScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R))
     (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} S))
     (η : F ⟶ (Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) : Prop :=
-  ∀ K : DerivedCategoryModule S T,
-    Function.Bijective (fun f : (DerivedCategory.singleFunctor _ 0).obj G ⟶ K ↦
-      (DerivedCategory.singleFunctor _ 0).map η ≫
-        ((Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategorySingleFunctor 0).inv.app
-          G ≫
-          (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategory.map f)
+  SheafExactDegreeZero.scalarUniversal T.smallEtaleTopology φ F G η
 
 /-- The scalar-extension clause, with the comparison maps fixed on generators.
 Both displayed universal properties refer to the canonical sectionwise scalar maps:
