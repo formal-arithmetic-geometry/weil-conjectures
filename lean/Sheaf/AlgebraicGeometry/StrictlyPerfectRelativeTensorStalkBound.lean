@@ -12,13 +12,13 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Projective
-import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Sheaf.Algebra.Homology.BoundedProjectiveRestrictionTorAmplitude
 import Sheaf.AlgebraicGeometry.RelativeTensorStalkLocalModelHomology
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.StalkTensorComplex
 
 /-! # Relative tensor bounds from a strictly perfect local model

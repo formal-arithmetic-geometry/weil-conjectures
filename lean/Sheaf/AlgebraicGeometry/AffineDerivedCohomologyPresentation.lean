@@ -6,7 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.Algebra.Homology.ModuleStalkExact
+public import WeilConjectures.Algebra.Homology.ModuleStalkExact
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 

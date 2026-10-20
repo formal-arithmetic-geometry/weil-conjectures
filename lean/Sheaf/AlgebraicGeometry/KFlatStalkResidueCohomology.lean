@@ -8,11 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Sheaf.AlgebraicGeometry.ResiduePullbackGlobalSections
+import WeilConjectures.AlgebraicGeometry.ResiduePullbackGlobalSections
 import Sheaf.Topology.PointModuleEvaluationEquivalence
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Mathlib.Algebra.Homology.Additive
 import Mathlib.CategoryTheory.Adjunction.Additive
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Residue cohomology of a K-flat sheaf representative
 

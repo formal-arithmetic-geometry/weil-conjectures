@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
-public import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+public import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.ModuleCupGodementModel
 import Sheaf.Paper.ModuleCupGodementStalkContraction
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Mathlib.CategoryTheory.Abelian.Exact
 import Mathlib.Topology.Sheaves.Abelian
 

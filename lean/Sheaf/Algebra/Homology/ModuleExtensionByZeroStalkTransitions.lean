@@ -1,9 +1,9 @@
 module
 
-public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+public import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Topology.Sheaves.Module
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkTransitionCoherence
+import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkTransitionCoherence
 
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite

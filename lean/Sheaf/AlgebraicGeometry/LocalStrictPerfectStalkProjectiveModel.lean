@@ -8,11 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Module.Projective
-import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
-import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Bounded finite-projective models of locally strictly perfect stalks
 

@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.PicardRankMatchDirectImage
 import Sheaf.AlgebraicGeometry.ProperFlatAffineCechPerfectModel
-import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
+import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import all Sheaf.AlgebraicGeometry.PerfectCohomologyFromGeometric
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat

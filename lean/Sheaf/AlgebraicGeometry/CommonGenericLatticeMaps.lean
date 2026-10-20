@@ -16,7 +16,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType
 
 /-! Construction of the common generic lattice, with coherence separated from the

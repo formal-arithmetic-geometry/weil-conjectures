@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition
 import Sheaf.AlgebraicGeometry.SingleComplexQcqsInduction
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
 import Sheaf.AlgebraicGeometry.TorIndependentPerfectPullbackComparison

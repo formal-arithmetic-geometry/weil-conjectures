@@ -6,7 +6,7 @@ Authors: SHEAF groups U1 and J1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.AlgebraicGeometry.IdealPowerAffineDenominatorMap

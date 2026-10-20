@@ -8,13 +8,14 @@ public import Sheaf.AlgebraicGeometry.LocalizedResidueHomology
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Sheaf.Topology.PointModuleEvaluationEquivalence
-import Sheaf.AlgebraicGeometry.ResiduePullbackGlobalSections
+import WeilConjectures.AlgebraicGeometry.ResiduePullbackGlobalSections
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Natural residue homology comparison for localized strictly perfect complexes
 

@@ -5,9 +5,10 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLiftBridge
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkHomLift
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # One unit-source open-site stalk map lifts on one neighbourhood
 

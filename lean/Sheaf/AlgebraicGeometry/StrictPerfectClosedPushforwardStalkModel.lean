@@ -9,8 +9,9 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Projective
-import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
-import Sheaf.AlgebraicGeometry.OpenModuleStalkClosedPushforwardHomology
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkClosedPushforwardHomology
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Bounded projective models of closed-pushforward stalks
 

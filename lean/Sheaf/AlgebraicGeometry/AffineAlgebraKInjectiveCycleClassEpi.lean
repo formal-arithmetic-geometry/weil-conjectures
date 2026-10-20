@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.AffineOpenDerivedTruncationComparison
 import WeilConjectures.AlgebraicGeometry.KInjectiveSectionCycleComparison
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
+import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
 import Mathlib.Topology.Sheaves.LocallySurjective
 import Mathlib.Algebra.Category.ModuleCat.EpiMono
 

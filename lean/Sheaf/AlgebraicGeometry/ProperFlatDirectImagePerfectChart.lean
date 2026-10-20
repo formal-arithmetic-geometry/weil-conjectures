@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.ProperFlatAffineCechPerfectModel
-import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
+import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import all Sheaf.AlgebraicGeometry.PerfectCohomologyFromGeometric
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle

@@ -11,7 +11,7 @@ public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
-import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful

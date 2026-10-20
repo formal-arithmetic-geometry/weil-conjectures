@@ -6,10 +6,11 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkChainMapLift
-import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Descent of derived morphisms between open perfect stalks
 

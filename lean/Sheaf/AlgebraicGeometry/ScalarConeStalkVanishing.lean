@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Mathlib.Algebra.Homology.ShortComplex.Linear
 
 /-! # Stalk vanishing for a scalar cone

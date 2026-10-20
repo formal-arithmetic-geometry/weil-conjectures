@@ -6,9 +6,10 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.OpenStalkFreeMapLocalLift
 import Mathlib.Data.Int.Interval
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Extending degreewise maps between perfect open-site stalks
 

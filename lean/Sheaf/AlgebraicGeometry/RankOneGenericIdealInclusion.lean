@@ -6,7 +6,7 @@ Authors: SHEAF group R2
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusionAux
+import WeilConjectures.AlgebraicGeometry.RankOneGenericIdealInclusionAux
 import Sheaf.AlgebraicGeometry.GenericIdealStalkEmbeddingExtension
 import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks

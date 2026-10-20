@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.Topology.RestrictInjectiveResolution
+import WeilConjectures.Topology.RestrictInjectiveResolution
 
 /-! # Vanishing of higher direct image on an affine neighbourhood basis
 
