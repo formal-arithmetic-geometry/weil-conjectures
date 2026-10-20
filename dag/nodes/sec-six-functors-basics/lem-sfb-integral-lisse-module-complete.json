@@ -1,0 +1,109 @@
+{
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1),(2), Definition 6.8.3, Proposition 6.8.4(1), p. 59; the reduction ring identification is the rank-one reduction in this proposition."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Proposition 6.8.4(1), coefficient and local-basis arguments"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "id": "lem-sfb-integral-lisse-module-complete",
+ "kind": "statement",
+ "title": "Finite locally free modules are complete",
+ "statement": "For any finite locally free integral coefficient module M on any scheme X, using [def-per-integral-lisse-reduction-data], the cone of canonical projections from M to its actual positive scalar-cokernel tower is limiting. The rank may be zero or vary on covering members.",
+ "stmt_deps": [
+  "def-per-integral-lisse-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the coefficient unit quotient tower with the finite coefficient unit tower by cokernel uniqueness. The coefficient limit is limiting after evaluation and forgetting to sets, hence as a module cone. The completion natural transformation is invertible on the unit and therefore on finite coproducts, since its source and target functors are additive. Slice restriction preserves these limits and cokernels, so a finite free chart transports completeness to each member of a trivializing cover of M. The map from M to the chosen tower limit is invertible on this cover. The sheaf isomorphism criterion makes it globally invertible, which proves the original cone limiting. All arguments include rank zero and empty covers.",
+   "uses": [
+    "lem-sfb-integral-lisse-cokernel-transition-quotient",
+    "lem-sfb-integral-lisse-coefficient-limit",
+    "lem-sfb-integral-lisse-coefficient-quotients",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lisse-cokernel-transition-quotient",
+  "lem-sfb-integral-lisse-coefficient-limit",
+  "lem-sfb-integral-lisse-coefficient-quotients",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-pur-localized-ringed-site"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cokernel.*[Tt]ower|[Ss]calarDescent|[Cc]omplete.*[Ll]ocallyFree",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "The hits give scalar restriction and generic cokernel presentations, not this coefficient-sheaf result. The proof uses these categorical APIs, the coefficient calculations, and finite free local charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar cokernel towers of locally free module sheaves over complete adic rings and restriction of scalars along surjective ring sheaf maps",
+   "results": "['PresheafOfModules.restrictScalarsObj', 'RestrictScalars.isScalarTower', 'PresheafOfModules.restrictScalars', 'SheafOfModules.restrictScalars', 'TopModuleCat.isColimitCoker', 'Submodule.restrictScalars', \"PresheafOfModules.sheafifyHomEquiv'\", 'ModuleCat.restrictCoextendScalarsAdj']",
+   "date": "2026-10-19",
+   "verdict": "The hits give scalar restriction and generic cokernel presentations, not this coefficient-sheaf result. The proof uses these categorical APIs, the coefficient calculations, and finite free local charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"SheafOfModules\"",
+   "results": "['PresheafOfModules.freeYonedaCoproductsCokernelCofork', 'PresheafOfModules.isColimitFreeYonedaCoproductsCokernelCofork', 'SheafOfModules.generatorsOfIsCokernelFree', 'SheafOfModules.presentationOfIsCokernelFree', 'SheafOfModules.generatorsOfIsCokernelFree_I', 'SheafOfModules.presentationOfIsCokernelFree_generators', 'SheafOfModules.generatorsOfIsCokernelFree_π', 'SheafOfModules.generatorsOfIsCokernelFree_s']",
+   "date": "2026-10-19",
+   "verdict": "The hits give scalar restriction and generic cokernel presentations, not this coefficient-sheaf result. The proof uses these categorical APIs, the coefficient calculations, and finite free local charts."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralLisseReductionEquivalence",
+  "date": "2026-10-19",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-lisse-reduction-equivalence",
+   "place": "Proposition 6.8.4(1), scalar quotient construction, completeness and normalization"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralLisseReductionComplete",
+  "file": "lean/Sheaf/SixFunctors/IntegralLisseReductionComplete.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralLisseCokernel_isLimit",
+  "statement": "theorem integralLisseCokernel_isLimit (M : IntegralLisseModule l E X) :\n    Nonempty (IsLimit (Cone.mk M.obj (integralLisseCokernelCone l E X M.obj)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "independent cc review: item theorem (signature byte-identical to live) proved without sorry; moved def block byte-identical to live and re-exported via public import; 12 modules compile clean; axioms propext/choice/Quot.sound only; 4 direct importers compile exit 0; node diffs limited to proof fields and lean record"
+ }
+}

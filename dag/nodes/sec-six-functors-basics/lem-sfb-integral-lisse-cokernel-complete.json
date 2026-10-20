@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-integral-lisse-cokernel-complete",
+ "kind": "statement",
+ "title": "Lisse modules have normalized complete quotient towers",
+ "statement": "Let l be prime, E a finite extension of Q_l, A its valuation ring and varpi the recorded uniformizer. Let X be any scheme. Use the continuous coefficient sheaves, scalar maps, normalized towers and quotient predicate of [def-per-integral-lisse-reduction-data]. For every finite locally free integral coefficient module M, its actual scalar-cokernel tower is normalized: each level is restriction of a finite locally free finite-coefficient module, and each adjacent transition is the indicated scalar cokernel. The cone from M formed by its canonical cokernel projections is limiting. Rank zero and locally varying rank are permitted.",
+ "stmt_deps": [
+  "def-per-integral-lisse-reduction-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1),(2), Definition 6.8.3, Proposition 6.8.4(1), p. 59; the reduction ring identification is the rank-one reduction in this proposition."
+ },
+ "proof": [
+  {
+   "text": "The coefficient unit is complete by the coefficient inverse-limit calculation. The completion natural transformation is an isomorphism on finite sums because its two functors are additive and preserve finite coproducts. Slice restriction preserves cokernels and inverse limits. Transport completeness through each finite free chart, then descend invertibility of the completion map using the covering criterion for sheaf isomorphisms. For normalization, construct the finite coefficient action on the actual scalar cokernel by lifting scalars along the sectionwise surjective coefficient reduction; its kernel annihilates the cokernel. Restriction of this action is the original module, and restriction of scalars is fully faithful. Lift the finite free charts of the restricted cokernel to finite-coefficient linear charts. Adjacent transitions are scalar cokernels by their universal properties. This handles zero and varying ranks.",
+   "uses": [
+    "lem-sfb-integral-lisse-coefficient-quotients",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-pur-localized-ringed-site",
+    "lem-sfb-integral-lisse-module-complete",
+    "lem-sfb-integral-lisse-coefficient-kernel-action",
+    "lem-sfb-integral-lisse-cokernel-transition-quotient"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lisse-coefficient-quotients",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-pur-localized-ringed-site",
+  "lem-sfb-integral-lisse-module-complete",
+  "lem-sfb-integral-lisse-coefficient-kernel-action",
+  "lem-sfb-integral-lisse-cokernel-transition-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Proposition 6.8.4(1), coefficient and local-basis arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally free sheaves over a complete adic ring are equivalent to compatible locally free quotient towers",
+   "results": "['LightCondensed.free', 'SheafOfModules.mapFree', 'IsAdicComplete', 'IsAdicComplete.of_comp_lift', 'SheafOfModules.generatorsOfIsCokernelFree', 'AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq', 'SheafOfModules.generatorsOfIsCokernelFree_I', 'AdicCompletion']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"Functor\"",
+   "results": "['CategoryTheory.Functor.PreservesHomology.preservesCokernel', 'CategoryTheory.Functor.PreservesHomology.preservesCokernels', 'CategoryTheory.Functor.preservesHomology_of_preservesMonos_and_cokernels', 'CategoryTheory.Functor.preservesBinaryCoproducts_of_preservesCokernels', 'CategoryTheory.Functor.preservesCoequalizers_of_preservesCokernels', 'CategoryTheory.Functor.preservesCoproduct_of_preservesCokernels', 'CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels', 'CategoryTheory.Functor.preservesCoequalizer_of_preservesCokernels']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Ss]heaf|[Ss]heaf.*adic|reduction.*[Ll]ocal",
+   "results": "['Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean', 'Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomeomorph\", \"Continuous\"",
+   "results": "['IsHomeomorph.continuous', 'isHomeomorph_iff_continuous_bijective', 'isHomeomorph_iff_continuous_isClosedMap_bijective', 'ContinuousLinearMap.isHomeomorph_of_isUnit', 'ContinuousLinearEquiv.isHomeomorph', 'ContinuousLinearEquiv.ofIsHomeomorph', 'ContinuousLinearEquiv.toLinearEquiv_ofIsHomeomorph', 'ContinuousLinearEquiv.toLinearquiv_ofIsHomeomorph']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of continuous functions into finite quotient rings",
+   "results": "['ProfiniteGrp.isIso_toLimit', 'ProfiniteGrp.toLimit_fun_continuous', 'Profinite.lim', 'InverseSystem.limit', 'ProfiniteGrp.toLimit_surjective', 'Profinite.asLimit', 'ProfiniteGrp.toLimit_injective', 'ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralLisseReductionEquivalence",
+  "date": "2026-10-18",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-lisse-reduction-equivalence",
+   "place": "Proof of Lemma 6.8.2 and Proposition 6.8.4(1), lisse modules have normalized complete quotient towers"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralLisseReductionNormalized",
+  "file": "lean/Sheaf/SixFunctors/IntegralLisseReductionNormalized.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralLisseCokernel_complete",
+  "statement": "theorem integralLisseCokernel_complete (M : IntegralLisseModule l E X) :\n    IsIntegralReductionTower l E X (integralLisseCokernelTower l E X M.obj) ∧\n      Nonempty (IsLimit (Cone.mk M.obj (integralLisseCokernelCone l E X M.obj)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "independent cc review: item theorem (signature byte-identical to live) proved without sorry; moved def block byte-identical to live and re-exported via public import; 12 modules compile clean; axioms propext/choice/Quot.sound only; 4 direct importers compile exit 0; node diffs limited to proof fields and lean record"
+ }
+}

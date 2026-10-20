@@ -74,7 +74,7 @@
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
-  "module": "Sheaf.SixFunctors.IntegralLisseReductionEquivalence",
+  "module": "Sheaf.SixFunctors.IntegralLisseReductionData",
   "declaration": "AlgebraicGeometry.ProEtale.IntegralLisseReductionEquivalence",
   "declarations": [
    "AlgebraicGeometry.ProEtale.integralLisseRing",
@@ -98,7 +98,8 @@
   "by": "Q11",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Reuse the exact published definitions, including all supporting declarations, in Sheaf.SixFunctors.IntegralLisseReductionEquivalence. The prior extraction duplicated those declarations; no copied definition or dependency-module replacement is delivered. This definition node records the existing type/predicate and does not assert its inhabitance/coherence."
+  "note": "The exact original declaration block is moved verbatim to IntegralLisseReductionData and re-exported by IntegralLisseReductionEquivalence to avoid import cycles. All names, signatures and definition bodies are preserved. This definition node records the type of coherence data, not its inhabitance.",
+  "file": "lean/Sheaf/SixFunctors/IntegralLisseReductionData.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -115,5 +116,15 @@
   "group": "Q11",
   "result": "pass",
   "note": "Head 7704166b02bf repairs both earlier returns. (1) The 88a3b6 return said the statement dependencies cited two theorem nodes only for their definitions. The item now cites two new definition nodes instead: def-per-integral-lisse-reduction-data and def-per-site-comparison-pullback-data. Both are existing:true records of the published declarations in Sheaf.SixFunctors.IntegralLisseReductionEquivalence and Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence. The theorem nodes stay as proof dependencies. (2) L's 8a66bc return found duplicate declarations; there are no copied modules now. The side DAG has 21 landed precedents of this pattern. Each new node statement matches the published structure or predicate field by field. The pullback node records that nu_X^* is definitionally comparisonUpperStar. stage2_delivery.check_existing and check_new_node report no failures for either node. No other node in the side DAG records these declarations except the two owning theorem nodes. The item module is byte-identical to the 88a3b6 module that was reviewed in full. Outside the lean record, the only item-node change is the two statement-dependency swaps, and lean.statement is verbatim. On my own re-reading, every hypothesis and conclusion clause matches the node and BS 6.8.2, 6.8.4(1),(4) and 5.1.5. Specifically: IsFreeSystem keeps the towers finite free; the inverse limit is pinned by IsLimit; rational realization is fully faithful with no essential surjectivity; pullback, ramified coefficient extension at sourceIndex, and identity/composition equations are all pinned. Edge cases checked: empty X, rank 0 and varying rank, index 0 = A/varpi, e=2. Single explicit universe u; no hollow definitions; the only sorry is the item theorem, with the ten-step proof docstring. nt_compile per-file compile: 57.3 s, exit 0, clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "independent cc review: item theorem (signature byte-identical to live) proved without sorry; moved def block byte-identical to live and re-exported via public import; 12 modules compile clean; axioms propext/choice/Quot.sound only; 4 direct importers compile exit 0; node diffs limited to proof fields and lean record"
  }
 }

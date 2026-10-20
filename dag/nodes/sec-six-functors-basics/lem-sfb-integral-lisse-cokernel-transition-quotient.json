@@ -1,0 +1,97 @@
+{
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1),(2), Definition 6.8.3, Proposition 6.8.4(1), p. 59; the reduction ring identification is the rank-one reduction in this proposition."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Proposition 6.8.4(1), coefficient and local-basis arguments"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "id": "lem-sfb-integral-lisse-cokernel-transition-quotient",
+ "kind": "statement",
+ "title": "Adjacent scalar quotients are normalized",
+ "statement": "For any sheaf M of integral coefficient modules on any scheme X, let Q_n be the actual cokernel of multiplication by varpi^(n+1), using the coefficients of [def-per-integral-lisse-reduction-data]. The canonical map Q_(n+1) to Q_n is itself the cokernel of multiplication by varpi^(n+1) on Q_(n+1). No local freeness assumption is required.",
+ "stmt_deps": [
+  "def-per-integral-lisse-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "The smaller scalar kills the transition: precompose with the epic larger quotient map and use scalar naturality and the smaller cokernel equation. Every map from the larger quotient killed by the smaller scalar descends from M through the smaller cokernel. The resulting factorization follows after cancelling the larger quotient projection. The transition is epic because its composite with that projection is the smaller cokernel projection, so the factorization is unique. This includes the zero module and empty base.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cokernel.*[Tt]ower|[Ss]calarDescent|[Cc]omplete.*[Ll]ocallyFree",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "The hits give scalar restriction and generic cokernel presentations, not this coefficient-sheaf result. The proof uses these categorical APIs, the coefficient calculations, and finite free local charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar cokernel towers of locally free module sheaves over complete adic rings and restriction of scalars along surjective ring sheaf maps",
+   "results": "['PresheafOfModules.restrictScalarsObj', 'RestrictScalars.isScalarTower', 'PresheafOfModules.restrictScalars', 'SheafOfModules.restrictScalars', 'TopModuleCat.isColimitCoker', 'Submodule.restrictScalars', \"PresheafOfModules.sheafifyHomEquiv'\", 'ModuleCat.restrictCoextendScalarsAdj']",
+   "date": "2026-10-19",
+   "verdict": "The hits give scalar restriction and generic cokernel presentations, not this coefficient-sheaf result. The proof uses these categorical APIs, the coefficient calculations, and finite free local charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"SheafOfModules\"",
+   "results": "['PresheafOfModules.freeYonedaCoproductsCokernelCofork', 'PresheafOfModules.isColimitFreeYonedaCoproductsCokernelCofork', 'SheafOfModules.generatorsOfIsCokernelFree', 'SheafOfModules.presentationOfIsCokernelFree', 'SheafOfModules.generatorsOfIsCokernelFree_I', 'SheafOfModules.presentationOfIsCokernelFree_generators', 'SheafOfModules.generatorsOfIsCokernelFree_π', 'SheafOfModules.generatorsOfIsCokernelFree_s']",
+   "date": "2026-10-19",
+   "verdict": "The hits give scalar restriction and generic cokernel presentations, not this coefficient-sheaf result. The proof uses these categorical APIs, the coefficient calculations, and finite free local charts."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralLisseReductionEquivalence",
+  "date": "2026-10-19",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-lisse-reduction-equivalence",
+   "place": "Proposition 6.8.4(1), scalar quotient construction, completeness and normalization"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralLisseReductionConstruction",
+  "file": "lean/Sheaf/SixFunctors/IntegralLisseReductionConstruction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralLisseCokernelTransition_quotient",
+  "statement": "theorem integralLisseCokernelTransition_quotient\n    (M : ringedSiteModules.{u + 1} (integralLisseRing l E X)) (n : ℕ) :\n    IsIntegralLisseQuotient l E X\n      (Padic.coefficientExtensionUniformizer l E ^ (n + 1))\n      (integralLisseCokernelTransition l E X M n)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "independent cc review: item theorem (signature byte-identical to live) proved without sorry; moved def block byte-identical to live and re-exported via public import; 12 modules compile clean; axioms propext/choice/Quot.sound only; 4 direct importers compile exit 0; node diffs limited to proof fields and lean record"
+ }
+}

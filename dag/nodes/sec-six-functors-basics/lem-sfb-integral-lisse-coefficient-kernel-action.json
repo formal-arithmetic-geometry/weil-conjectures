@@ -1,0 +1,103 @@
+{
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1),(2), Definition 6.8.3, Proposition 6.8.4(1), p. 59; the reduction ring identification is the rank-one reduction in this proposition."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Proposition 6.8.4(1), coefficient and local-basis arguments"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "id": "lem-sfb-integral-lisse-coefficient-kernel-action",
+ "kind": "statement",
+ "title": "Finite coefficient actions on scalar cokernels",
+ "statement": "For any integral coefficient module sheaf M, any positive level n+1, any pro-etale object U and coefficient section a on U, use [def-per-integral-lisse-reduction-data]. If a reduces to zero modulo varpi^(n+1), it acts by zero on every section of the actual scalar cokernel of M at this level. Consequently its action descends through coefficient reduction to the finite coefficient ring; restriction of that descended action recovers the original scalar cokernel.",
+ "stmt_deps": [
+  "def-per-integral-lisse-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "The uniformizer power annihilates the actual scalar cokernel: precompose its scalar endomorphism with the epic cokernel projection and apply scalar naturality and the cokernel equation. Sectionwise exactness of coefficient reduction expresses a kernel section as the uniformizer power times a continuous integral section. The module associativity law now makes its action zero. To construct the finite action, lift each finite scalar through the sectionwise surjective coefficient map. Two lifts differ by a kernel element, so their actions agree; transport the module axioms along surjectivity. Keep the original section groups and restriction maps. The latter are linear by lifting the scalar before applying their original linearity. The identity on sections identifies scalar restriction with the original module. Surjectivity likewise makes every integral-linear map between finite modules finite-linear, giving full faithfulness.",
+   "uses": [
+    "lem-sfb-integral-lisse-coefficient-quotients",
+    "lem-sfb-integral-lisse-cokernel-transition-quotient"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lisse-coefficient-quotients",
+  "lem-sfb-integral-lisse-cokernel-transition-quotient"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cokernel.*[Tt]ower|[Ss]calarDescent|[Cc]omplete.*[Ll]ocallyFree",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "The hits give scalar restriction and generic cokernel presentations, not this coefficient-sheaf result. The proof uses these categorical APIs, the coefficient calculations, and finite free local charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar cokernel towers of locally free module sheaves over complete adic rings and restriction of scalars along surjective ring sheaf maps",
+   "results": "['PresheafOfModules.restrictScalarsObj', 'RestrictScalars.isScalarTower', 'PresheafOfModules.restrictScalars', 'SheafOfModules.restrictScalars', 'TopModuleCat.isColimitCoker', 'Submodule.restrictScalars', \"PresheafOfModules.sheafifyHomEquiv'\", 'ModuleCat.restrictCoextendScalarsAdj']",
+   "date": "2026-10-19",
+   "verdict": "The hits give scalar restriction and generic cokernel presentations, not this coefficient-sheaf result. The proof uses these categorical APIs, the coefficient calculations, and finite free local charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"SheafOfModules\"",
+   "results": "['PresheafOfModules.freeYonedaCoproductsCokernelCofork', 'PresheafOfModules.isColimitFreeYonedaCoproductsCokernelCofork', 'SheafOfModules.generatorsOfIsCokernelFree', 'SheafOfModules.presentationOfIsCokernelFree', 'SheafOfModules.generatorsOfIsCokernelFree_I', 'SheafOfModules.presentationOfIsCokernelFree_generators', 'SheafOfModules.generatorsOfIsCokernelFree_π', 'SheafOfModules.generatorsOfIsCokernelFree_s']",
+   "date": "2026-10-19",
+   "verdict": "The hits give scalar restriction and generic cokernel presentations, not this coefficient-sheaf result. The proof uses these categorical APIs, the coefficient calculations, and finite free local charts."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralLisseReductionEquivalence",
+  "date": "2026-10-19",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-lisse-reduction-equivalence",
+   "place": "Proposition 6.8.4(1), scalar quotient construction, completeness and normalization"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralLisseReductionScalarDescent",
+  "file": "lean/Sheaf/SixFunctors/IntegralLisseReductionScalarDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralLisseCoefficientKernel_annihilates",
+  "statement": "theorem integralLisseCoefficientKernel_annihilates\n    (M : ringedSiteModules.{t + 1} (integralLisseRing l E X)) (n : ℕ)\n    (U : X.ProEtᵒᵖ) (a : (integralLisseRing l E X).obj.obj U)\n    (ha : (integralLisseReduction l E X n).hom.app U a = 0)\n    (x : (integralLisseCokernel l E X M n).val.obj U) : a • x = 0",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "independent cc review: item theorem (signature byte-identical to live) proved without sorry; moved def block byte-identical to live and re-exported via public import; 12 modules compile clean; axioms propext/choice/Quot.sound only; 4 direct importers compile exit 0; node diffs limited to proof fields and lean record"
+ }
+}

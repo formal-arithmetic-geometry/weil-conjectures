@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-integral-lisse-tower-effective",
+ "kind": "statement",
+ "title": "Normalized towers have lisse limits and quotient projections",
+ "statement": "Let l be prime, E a finite extension of Q_l, A its valuation ring and varpi the recorded uniformizer. Let X be any scheme. Use the continuous coefficient sheaves, scalar maps, normalized towers and quotient predicate of [def-per-integral-lisse-reduction-data]. For every normalized positive reduction tower F on an arbitrary scheme, the actual limit of its underlying integral module sheaves is finite locally free. Its projection to level n is the cokernel of multiplication by varpi^(n+1), for every n. Rank zero, varying rank and the empty scheme are included.",
+ "stmt_deps": [
+  "def-per-integral-lisse-reduction-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1),(2), Definition 6.8.3, Proposition 6.8.4(1), p. 59; the reduction ring identification is the rank-one reduction in this proposition."
+ },
+ "proof": [
+  {
+   "text": "Use compatible local bases to identify each restricted tower with the actual scalar-cokernel tower of a finite free integral module P. Completeness of P and preservation of limits by slice restriction give an isomorphism from the restricted limit to P. Uniqueness of limit comparison gives its equation with every projection. This proves finite local freeness of the limit. Each finite level is annihilated by its uniformizer power, by restriction of scalars from the finite ring, so the global projection factors through the corresponding scalar cokernel. On every member of the same cover, the induced map is an isomorphism: restriction preserves cokernels and the projection equation compares it with the cokernel map of the local limit isomorphism. Sheaf isomorphisms descend, hence this global comparison is invertible and the projection has the cokernel universal property.",
+   "uses": [
+    "lem-sfb-integral-lisse-tower-local-bases",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-pur-localized-ringed-site",
+    "lem-sfb-integral-lisse-module-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lisse-tower-local-bases",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-pur-localized-ringed-site",
+  "lem-sfb-integral-lisse-module-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Proposition 6.8.4(1), coefficient and local-basis arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally free sheaves over a complete adic ring are equivalent to compatible locally free quotient towers",
+   "results": "['LightCondensed.free', 'SheafOfModules.mapFree', 'IsAdicComplete', 'IsAdicComplete.of_comp_lift', 'SheafOfModules.generatorsOfIsCokernelFree', 'AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq', 'SheafOfModules.generatorsOfIsCokernelFree_I', 'AdicCompletion']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"Functor\"",
+   "results": "['CategoryTheory.Functor.PreservesHomology.preservesCokernel', 'CategoryTheory.Functor.PreservesHomology.preservesCokernels', 'CategoryTheory.Functor.preservesHomology_of_preservesMonos_and_cokernels', 'CategoryTheory.Functor.preservesBinaryCoproducts_of_preservesCokernels', 'CategoryTheory.Functor.preservesCoequalizers_of_preservesCokernels', 'CategoryTheory.Functor.preservesCoproduct_of_preservesCokernels', 'CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels', 'CategoryTheory.Functor.preservesCoequalizer_of_preservesCokernels']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Ss]heaf|[Ss]heaf.*adic|reduction.*[Ll]ocal",
+   "results": "['Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean', 'Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomeomorph\", \"Continuous\"",
+   "results": "['IsHomeomorph.continuous', 'isHomeomorph_iff_continuous_bijective', 'isHomeomorph_iff_continuous_isClosedMap_bijective', 'ContinuousLinearMap.isHomeomorph_of_isUnit', 'ContinuousLinearEquiv.isHomeomorph', 'ContinuousLinearEquiv.ofIsHomeomorph', 'ContinuousLinearEquiv.toLinearEquiv_ofIsHomeomorph', 'ContinuousLinearEquiv.toLinearquiv_ofIsHomeomorph']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of continuous functions into finite quotient rings",
+   "results": "['ProfiniteGrp.isIso_toLimit', 'ProfiniteGrp.toLimit_fun_continuous', 'Profinite.lim', 'InverseSystem.limit', 'ProfiniteGrp.toLimit_surjective', 'Profinite.asLimit', 'ProfiniteGrp.toLimit_injective', 'ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralLisseReductionEquivalence",
+  "date": "2026-10-18",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-lisse-reduction-equivalence",
+   "place": "Proof of Lemma 6.8.2 and Proposition 6.8.4(1), normalized towers have lisse limits and quotient projections"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralLisseTowerEffective",
+  "file": "lean/Sheaf/SixFunctors/IntegralLisseTowerEffective.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralLisseTower_effective",
+  "statement": "theorem integralLisseTower_effective (F : IntegralReductionTower l E X) :\n    (limit F.obj).IsFiniteLocallyFree ∧\n      ∀ n : ℕ, IsIntegralLisseQuotient l E X\n        (Padic.coefficientExtensionUniformizer l E ^ (n + 1))\n        (limit.π F.obj (op n))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "independent cc review: item theorem (signature byte-identical to live) proved without sorry; moved def block byte-identical to live and re-exported via public import; 12 modules compile clean; axioms propext/choice/Quot.sound only; 4 direct importers compile exit 0; node diffs limited to proof fields and lean record"
+ }
+}

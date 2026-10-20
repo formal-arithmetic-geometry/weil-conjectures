@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-integral-lisse-tower-local-bases",
+ "kind": "statement",
+ "title": "Compatible finite local bases for a normalized reduction tower",
+ "statement": "Let l be prime, E a finite extension of Q_l, and X any scheme. Use the integral coefficient sheaf and normalized positive reduction towers of [def-per-integral-lisse-reduction-data]. Every such tower F has a family U_i of pro-etale objects covering the terminal sheaf and finite types kappa_i, such that restriction of F to the slice over U_i is naturally isomorphic, as a whole inverse diagram of integral module sheaves, to the scalar-cokernel tower of the integral free sheaf on kappa_i, restricted to that slice. The cover is allowed to be empty on the empty base and ranks may be zero or vary between members.",
+ "stmt_deps": [
+  "def-per-integral-lisse-reduction-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1),(2), Definition 6.8.3, Proposition 6.8.4(1), p. 59; the reduction ring identification is the rank-one reduction in this proposition."
+ },
+ "proof": [
+  {
+   "text": "Proof: trivialize the first level and refine the covering to weakly contractible affines.\nTransitions are scalar cokernel projections, hence epic, and their section maps on these\nobjects are surjective by exactness of evaluation. Lift the first basis successively and\nuse the free-module universal property to obtain compatible integral free-module maps.\nThe scalar annihilates each target level, so these maps descend through the preserved\nscalar cokernels on the slice. Induct on the level to prove the descended maps invertible.\nOn weakly contractible refinements of a chart of the next level, evaluation gives an exact\nscalar-cokernel presentation by a projective finite free integral module. Lift the previous\ninverse from this projective presentation, and descend it since the larger scalar kills\nthe source quotient. Both inverse errors vanish after reduction. Exactness and commutation\nwith the smaller scalar imply their squares vanish, since that scalar has square zero.\nCorrecting by one minus the error gives a two-sided inverse. Isomorphisms are detected\non these covering refinements. Adjacent compatibility then gives a natural isomorphism\nof the whole diagrams. Zero and varying ranks and empty objects require no extra assumption.",
+   "uses": [
+    "lem-sfb-integral-lisse-coefficient-quotients",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-pur-localized-ringed-site",
+    "lem-sfb-integral-lisse-cokernel-transition-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The weakly contractible refinements and their affine construction are the already proved Scheme.ProEt.exists_isWeaklyContractible_cover in WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible. Evaluation is exact by a direct proof: the forgetful functor preserves epimorphisms, these are locally surjective on underlying sets, and weak contractibility makes them surjective on sections. Additivity and preservation of kernels then give finite-colimit preservation. The finite evaluated free integral module is projective since evaluation preserves finite coproducts and the evaluated unit is the coefficient ring itself. The private square-zero correction lemma is proved directly in the abelian category; no matrix-lifting theorem or rank-comparison lemma is assumed.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lisse-coefficient-quotients",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-pur-localized-ringed-site",
+  "lem-sfb-integral-lisse-cokernel-transition-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1), omitted proof supplied by compatible sections, scalar cokernel descent and projective square-zero inverse lifting; weakly contractible refinements use the proved upstream source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally free sheaves over a complete adic ring are equivalent to compatible locally free quotient towers",
+   "results": "['LightCondensed.free', 'SheafOfModules.mapFree', 'IsAdicComplete', 'IsAdicComplete.of_comp_lift', 'SheafOfModules.generatorsOfIsCokernelFree', 'AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq', 'SheafOfModules.generatorsOfIsCokernelFree_I', 'AdicCompletion']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"Functor\"",
+   "results": "['CategoryTheory.Functor.PreservesHomology.preservesCokernel', 'CategoryTheory.Functor.PreservesHomology.preservesCokernels', 'CategoryTheory.Functor.preservesHomology_of_preservesMonos_and_cokernels', 'CategoryTheory.Functor.preservesBinaryCoproducts_of_preservesCokernels', 'CategoryTheory.Functor.preservesCoequalizers_of_preservesCokernels', 'CategoryTheory.Functor.preservesCoproduct_of_preservesCokernels', 'CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels', 'CategoryTheory.Functor.preservesCoequalizer_of_preservesCokernels']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Ss]heaf|[Ss]heaf.*adic|reduction.*[Ll]ocal",
+   "results": "['Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean', 'Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean', 'Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomeomorph\", \"Continuous\"",
+   "results": "['IsHomeomorph.continuous', 'isHomeomorph_iff_continuous_bijective', 'isHomeomorph_iff_continuous_isClosedMap_bijective', 'ContinuousLinearMap.isHomeomorph_of_isUnit', 'ContinuousLinearEquiv.isHomeomorph', 'ContinuousLinearEquiv.ofIsHomeomorph', 'ContinuousLinearEquiv.toLinearEquiv_ofIsHomeomorph', 'ContinuousLinearEquiv.toLinearquiv_ofIsHomeomorph']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of continuous functions into finite quotient rings",
+   "results": "['ProfiniteGrp.isIso_toLimit', 'ProfiniteGrp.toLimit_fun_continuous', 'Profinite.lim', 'InverseSystem.limit', 'ProfiniteGrp.toLimit_surjective', 'Profinite.asLimit', 'ProfiniteGrp.toLimit_injective', 'ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor']",
+   "date": "2026-10-18",
+   "verdict": "No direct lisse reduction equivalence; use normalized profinite coefficients and categorical universal properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible bases for a normalized inverse system of finite locally free sheaves modulo powers of a uniformizer on a pro-etale site",
+   "results": "BDeRham, BDeRhamPlus, StandardEtalePresentation, StandardEtalePresentation.P, Ideal.adic_basis, StandardEtalePresentation.toPresentation.sigma, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Ideal.adic_module_basis",
+   "date": "2026-10-19",
+   "verdict": "No compatible local basis theorem. Ordinary adic topology and standard etale deformation do not supply local bases of a module-sheaf tower. The available exact-sections declaration proves transition surjectivity; the compatible lift recursion is implemented in the same module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralLisseReductionEquivalence",
+  "date": "2026-10-19",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-lisse-tower-effective",
+   "place": "Compatible bases, the first part of the effectivity argument of Proposition 6.8.4(1)."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralLisseTowerLocalBases",
+  "file": "lean/Sheaf/SixFunctors/IntegralLisseTowerLocalBases.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralLisseTower_localBases",
+  "statement": "theorem integralLisseTower_localBases (F : IntegralReductionTower l E X) :\n    ∃ (I : Type (u + 1)) (U : I → X.ProEt) (κ : I → Type (u + 1)),\n      (Scheme.ProEt.topology X).CoversTop U ∧ (∀ i, Finite (κ i)) ∧\n      ∀ i, Nonempty (F.obj ⋙ SheafOfModules.overFunctor (integralLisseRing l E X) (U i) ≅\n        integralLisseCokernelTower l E X\n          (SheafOfModules.free (R := integralLisseRing l E X) (κ i)) ⋙\n            SheafOfModules.overFunctor (integralLisseRing l E X) (U i))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralLisseTower_localBases"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "independent cc review: item theorem (signature byte-identical to live) proved without sorry; moved def block byte-identical to live and re-exported via public import; 12 modules compile clean; axioms propext/choice/Quot.sound only; 4 direct importers compile exit 0; node diffs limited to proof fields and lean record"
+ }
+}

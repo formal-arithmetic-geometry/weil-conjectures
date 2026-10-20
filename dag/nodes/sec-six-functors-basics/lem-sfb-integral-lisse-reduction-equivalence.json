@@ -29,116 +29,34 @@
  ],
  "proof": [
   {
-   "text": "Identify the finite constant sheaf $A_{n,X}$ with $V\\mapsto C(|V|,A/\\varpi^n)$: the finite-set clause of [det-prop-sfb-qlbar-colimit-x-integral-limit] represents it by the disjoint union of copies of X, and a map to that disjoint union is exactly its clopen fibre partition. Completeness in [lem-pod-adic-limit-finite-modules](2), applied to the finite A-module A, gives $A=\\varprojlim A/\\varpi^n$. The DVR and absolute-value conventions of [def-weil-l-adic-coefficient-extension] show that its congruence cosets form an open neighbourhood basis: for $r=|\\varpi|<1$, $\\varpi^n A=\\{a:|a|\\leq r^n\\}$, these balls are open by the ultrametric inequality, and $r^n\\to0$. Thus compatible continuous residue functions give a unique continuous A-valued function, pointwise, and conversely. Limits of module sheaves are sectionwise by [lem-weil-pbc-module-sheaves-colimits-forgetful](2). This proves the ring limit identification, including its projections and restrictions.",
+   "text": "Construct actual scalar cokernel towers and their functorial maps. The completeness theorem gives normalization and full faithfulness by the universal property of the quotient cone. The effectivity theorem gives essential surjectivity: each projection from a tower limit induces an isomorphism from its scalar cokernel. Choose the resulting equivalence with this fixed reduction functor. Define completion by composing the quotient cone with the counit isomorphism; transport its limit property along the counit. Naturality of the quotient cone proves completion naturality. Quotient naturality applied to the unit and the triangle identity prove the unit projection formula; the counit projection formula is definitional. Fill the four coefficient fields using the constant comparison, coefficient limit, scalar quotient and localization theorems.",
    "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "lem-pod-adic-limit-finite-modules",
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-sfb-integral-lisse-finite-constant",
+    "lem-sfb-integral-lisse-coefficient-limit",
+    "lem-sfb-integral-lisse-coefficient-quotients",
+    "lem-sfb-integral-lisse-localization-colimit",
+    "lem-sfb-integral-lisse-cokernel-complete",
+    "lem-sfb-integral-lisse-tower-effective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1), pp. 58–59"
-   }
-  },
-  {
-   "text": "Reduction of continuous functions modulo $\\varpi^n$ is surjective even on sections: choose a lift in A for each of the finitely many residue values and compose the residue function with this finite discrete section. Its kernel consists exactly of $\\varpi^n$ times continuous A-valued functions, since division by $\\varpi^n$ is continuous on $\\varpi^n A$. Hence $A_X/\\varpi^n A_X\\cong A_{n,X}$. For localization, each continuous $f:|V|\\to E$ has the Zariski open covering $f^{-1}(\\ell^{-m}A)$, $m\\geq0$. These sets cover since $|\\ell|=\\ell^{-1}<1$; each is open since A is open. On the m-th member, $f=\\ell^{-m}(\\ell^mf)$ with $\\ell^mf$ A-valued. The resulting fraction map from the sheaf colimit of multiplication by $\\ell$ to $E_X$ is epic; it is monic because A embeds in E and multiplication by $\\ell$ is injective on A-valued functions. The sheafification-of-sectionwise-colimit description in [lem-weil-pbc-module-sheaves-colimits-forgetful](2) justifies checking this locally on fractions. Ring operations and the inclusion and reduction maps are the stated pointwise ones.",
-   "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1),(2), p. 59"
-   }
-  },
-  {
-   "text": "For a lisse $A_X$-module M restrict to a pro-etale covering on which $M=A_X^r$, with r finite on each member. Slice restriction is evaluation on the same objects, with the same coverings [def-pur-localized-ringed-site]; sectionwise limits and sheafified sectionwise quotients therefore commute with restriction. Step 2 gives $M/\\varpi^nM=A_{n,X}^r$ there, so its reductions are in the stated category and the normalization map is an isomorphism. Step 1 gives $M\\to\\varprojlim_n M/\\varpi^nM$ an isomorphism on that covering, hence globally: its inverse maps on the cover agree on overlaps since they invert the same map. These calculations include r=0 and require no bound on the ranks over different covering members.",
-   "uses": [
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1): full faithfulness and the unit (the source leaves the proof to the reader)"
-   }
-  },
-  {
-   "text": "Start with a normalized tower $(F_n,t_n)$. The coefficient map $A_{n+1,X}\\to A_{n,X}$ is surjective on sections by the finite representative lifting of step 2. Apply [lem-sfb-integral-tensor-quotient-epimorphism] to obtain an epimorphism $F_{n+1}\\to A_{n,X}\\otimes_{A_{n+1,X}}F_{n+1}$ of $A_{n+1,X}$-modules. Composing it with the normalization isomorphism gives $t_n:F_{n+1}\\to F_n$ epic. Its underlying abelian-sheaf map is epic by [lem-weil-pbc-module-sheaves-colimits-forgetful](1).",
-   "uses": [
-    "lem-sfb-integral-tensor-quotient-epimorphism",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1), p.59: omitted proof, compatible-basis construction"
-   }
-  },
-  {
-   "text": "Choose a cover trivializing $F_1$ with finite rank $r$ on each member, and refine it using [det-pe-wcb-cover] to objects $U=\\operatorname{Spec}D$ with $D$ w-contractible. By [det-pe-wc-sections-exact], the abelian-sheaf epimorphisms of step 4 give surjections $F_{n+1}(U)\\to F_n(U)$. Apply [lem-coef-well-ordered-inverse-system-section] with $J=\\mathbf N$, $G_m=F_{m+1}(U)^r$, successor maps acting coordinatewise, and initial tuple the chosen basis sections of $F_1$. Finite tuples lift by lifting their coordinates, and $\\mathbf N$ has no nonzero limit elements, so its hypotheses hold even for $r=0$. We obtain compatible sections $e_{i,n}\\in F_n(U)$. On every $V\\to U$ define $b_n((a_i))=\\sum_i a_i(e_{i,n}|_V)$. These formulas commute with restriction and are $A_{n,X}$-linear. Semilinearity of $t_n$ and compatibility of the sections give $t_n b_{n+1}=b_n\\rho_n^r$, where $\\rho_n$ is coefficient reduction. Thus we have compatible maps $b_n:A_{n,X}^r|_U\\to F_n|_U$ with $b_1$ the chosen trivialization. Their invertibility is proved next.",
-   "uses": [
-    "det-pe-wcb-cover",
-    "det-pe-wc-sections-exact",
-    "lem-coef-well-ordered-inverse-system-section"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1), p.59: omitted proof, compatible-basis construction"
-   }
-  },
-  {
-   "text": "We prove by induction that every $b_n$ is invertible. The base $b_1$ is the chosen trivialization. For the induction step trivialize $F_{n+1}$ on a further cover of $U$. Normalization identifies its reduction with $F_n$, so the reduction of $b_{n+1}$ is invertible. On a nonempty trivializing object $V$, its matrix has $s$ rows and $r$ columns. Reduce its inverse identities modulo $\\varpi$ and evaluate their continuous-function entries at any $x\\in|V|$: the resulting inverse maps $k^r\\rightleftarrows k^s$, with $k=A/\\varpi A$, give a bijection of finite sets of sizes $q^r$ and $q^s$, where $q=|k|>1$, hence $r=s$. On the empty object every module sheaf has zero sections. Thus, in the nonempty case, the matrix $B$ is square. Lift the entries of its inverse modulo $\\varpi^n$ using step 2, giving a matrix $C$ over $A_{n+1,X}(V)$. The reduction kernel is $I=\\varpi^nA_{n+1,X}(V)$, with $I^2=0$ because $2n\\geq n+1$. By [lem-sfb-integral-square-zero-matrix-lift], $C(1-(BC-1))$ and $(1-(CB-1))C$ are equal right and left inverses of $B$. Local inverses glue, proving $b_{n+1}$ invertible. This constructs a simultaneous trivialization without assuming one.",
-   "uses": [
-    "lem-sfb-integral-square-zero-matrix-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1), p.59: omitted proof, compatible-basis construction"
-   }
-  },
-  {
-   "text": "Regard every $F_n$ as an $A_X$-module through $A_X\\to A_{n,X}$; the $t_n$ are then $A_X$-linear. Define $F=\\varprojlim_n F_n$ sectionwise, with the componentwise action of $A_X=\\varprojlim A_{n,X}$, as permitted by [lem-weil-pbc-module-sheaves-colimits-forgetful](2). On each U from step 5 the compatible bases give $F|_U=\\varprojlim A_{n,X}^r|_U=A_X^r|_U$, since r is finite and a compatible tuple is precisely r compatible coordinate sequences. The defining projections become the usual coordinate reductions there. Consequently they induce $F/\\varpi^nF\\xrightarrow{\\sim}F_n$, respecting the transition maps. Slice restriction [def-pur-localized-ringed-site] preserves these limits and quotients by the sectionwise description. Thus F is lisse globally and the displayed isomorphisms are canonical: they are induced by the global projections, so their locally computed inverses agree on overlaps.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1): effectivity of the compatible tower"
-   }
-  },
-  {
-   "text": "For a compatible family of tower morphisms $(f_n)$ define the map on limits by $(x_n)\\mapsto(f_nx_n)$. This is $A_X$-linear and functorial. The unit $M\\to\\varprojlim M/\\varpi^nM$ of step 3 commutes with a module map because both composites have n-th coordinate its reduction. The counit $(\\varprojlim F_n)/\\varpi^n\\to F_n$ of step 7 commutes with a tower map by the same coordinate formula. Both are isomorphisms, so these two functors are quasi-inverse, proving the asserted equivalence and all naturality clauses. In particular a module map is recovered uniquely from its reductions, by the unit isomorphism and the fact that projections determine a limit map. For an empty base the zero sheaf and empty covering give the same formulas.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1): functoriality and natural unit/counit"
+    "place": "Lemma 6.8.2(1),(2), Definition 6.8.3, Proposition 6.8.4(1), p. 59; the reduction ring identification is the rank-one reduction in this proposition."
    }
   }
  ],
  "proof_deps": [
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-pod-adic-limit-finite-modules",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "def-pur-localized-ringed-site",
-  "lem-sfb-integral-tensor-quotient-epimorphism",
-  "det-pe-wcb-cover",
-  "det-pe-wc-sections-exact",
-  "lem-coef-well-ordered-inverse-system-section",
-  "lem-sfb-integral-square-zero-matrix-lift"
+  "lem-sfb-integral-lisse-finite-constant",
+  "lem-sfb-integral-lisse-coefficient-limit",
+  "lem-sfb-integral-lisse-coefficient-quotients",
+  "lem-sfb-integral-lisse-localization-colimit",
+  "lem-sfb-integral-lisse-cokernel-complete",
+  "lem-sfb-integral-lisse-tower-effective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.2 and Proposition 6.8.4(1), pp. 58–59. The proposition leaves its proof to the reader; steps 3–8 supply it using the weakly contractible basis."
+  "place": "Lemma 6.8.2 and Proposition 6.8.4(1); categorical assembly from concrete cokernels and limits"
  },
  "mathlib_searches": [
   {
@@ -300,13 +218,7 @@
    }
   ]
  },
- "tool_uses": [
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-pod-adic-limit-finite-modules",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "det-pe-wcb-cover",
-  "det-pe-wc-sections-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -330,31 +242,16 @@
  "lean": {
   "module": "Sheaf.SixFunctors.IntegralLisseReductionEquivalence",
   "declaration": "AlgebraicGeometry.ProEtale.integral_lisse_reduction_equivalence",
-  "statement": "theorem integral_lisse_reduction_equivalence (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) : Nonempty (IntegralLisseReductionEquivalence l E X)",
+  "statement": "theorem integral_lisse_reduction_equivalence (l : ℕ) [Fact l.Prime] (E : Type (u + 1))\n    [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) :\n    Nonempty (IntegralLisseReductionEquivalence l E X)",
   "branch": "newtargets-dag",
   "by": "Q26",
   "date": "2026-10-17",
   "existing": false,
   "file": "lean/Sheaf/SixFunctors/IntegralLisseReductionEquivalence.lean",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.integralLisseRing",
-   "AlgebraicGeometry.ProEtale.integralLisseFiniteRing",
-   "AlgebraicGeometry.ProEtale.integralLisseReduction",
-   "AlgebraicGeometry.ProEtale.integralLisseFiniteConstant",
-   "AlgebraicGeometry.ProEtale.integralLisseFiniteTransition",
-   "AlgebraicGeometry.ProEtale.integralLisseFiniteDiagram",
-   "AlgebraicGeometry.ProEtale.integralLisseFiniteRestriction",
-   "AlgebraicGeometry.ProEtale.integralLisseScalar",
-   "AlgebraicGeometry.ProEtale.IsIntegralLisseQuotient",
-   "AlgebraicGeometry.ProEtale.IntegralLisseModule",
-   "AlgebraicGeometry.ProEtale.IsIntegralReductionTower",
-   "AlgebraicGeometry.ProEtale.IntegralReductionTower",
-   "AlgebraicGeometry.ProEtale.integralLisseRingMap",
-   "AlgebraicGeometry.ProEtale.integralLisseFraction",
-   "AlgebraicGeometry.ProEtale.IntegralLisseReductionEquivalence",
    "AlgebraicGeometry.ProEtale.integral_lisse_reduction_equivalence"
   ],
-  "note": "Second reading: replaced the abstract carriers and tautological naturality fields by actual full categories of finite locally free module sheaves and normalized towers. The equivalence is characterized by the scalar-cokernel reduction universal properties, sheaf-limit completion, genuine naturality, and the canonical unit/counit projection identities at every positive level. Includes the canonical coefficient limit, quotient and localization identifications. Towers use restriction of scalars along the actual continuous-function quotient map; quotient normalization is the sheaf tensor quotient of the node, expressed by its cokernel universal property. All helper definitions belong to this node and have real data; only its theorem is postponed."
+  "note": "The original statement is preserved and proved from the canonical scalar-cokernel functor, completeness, effectivity and coefficient identifications. The supporting definitions are re-exported unchanged from IntegralLisseReductionData."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
@@ -363,5 +260,15 @@
   "group": "Q26",
   "result": "pass",
   "note": "Read the node, all 7 stmt-dep records and their declarations (LisseLatticeCoefficientsSized, CoefficientExtension, IsFiniteLocallyFree, RingedSiteModules, TensorProductOfUniverses, Mathlib constantSheaf), the BS Lemma 6.8.2 / Def 6.8.3 / Prop 6.8.4(1) source place, the module and the report. Every clause matches: any scheme X; the finite extension uses the recorded A, ϖ, A/ϖ^n; A_X, E_X are the recorded sized sheaves; constant finite rings are pinned on constant sections; the coefficient limit, quotient and localization are given by universal properties with fixed legs; Loc is the existing isFiniteLocallyFree (varying rank, rank 0); towers are restrictions of finite locally free A_n-modules with cokernel normalization; the equivalence, quasi-inverse, unit and counit are pinned by reduction/completion/projection equations at all levels. Accepted finding: tensor normalization is written as the cokernel of ϖ^{n+1}, which is equivalent because A_{n} = A_{n+1}/ϖ^n sectionwise; no private copy. E : Type (u+1) is the recorded dependency's own universe. Edge cases (empty X, zero module, varying rank, ℓ = residue char) covered. No hollow defs, only the theorem is sorry, docstrings and proof steps present, statement verbatim, only the lean field changed, lines ≤100. nt_compile.py --json on the snapshot file: exit 0, no messages, 7.7 s, reproduced twice."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aa835",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T122138-L-486451",
+  "kind": "interface",
+  "note": "independent cc review: item theorem (signature byte-identical to live) proved without sorry; moved def block byte-identical to live and re-exported via public import; 12 modules compile clean; axioms propext/choice/Quot.sound only; 4 direct importers compile exit 0; node diffs limited to proof fields and lean record"
  }
 }
