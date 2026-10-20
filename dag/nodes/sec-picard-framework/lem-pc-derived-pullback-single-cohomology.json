@@ -115,14 +115,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-perfect",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackSingleCohomology",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackSingleCohomology.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedPullbackSingleCohomology",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedPullbackSingleCohomology.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_homology_derivedPullback_iso_of_locally_single",
-  "statement": "theorem nonempty_homology_derivedPullback_iso_of_locally_single [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {T T' : Scheme.{u}} (g : T' ⟶ T) (E : schemeDerivedCategory T) (i : ℕ) (hneg : ∀ n : ℤ, n < 0 → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj E)) (hloc : ∀ t ∈ Set.range g.base, ∃ U : T.Opens, t ∈ U ∧ ∃ r : ℕ, IsFiniteLocallyFreeInDegree (fun q : ℕ ↦ (Modules.restrictFunctor U.ι).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj E)) i r) : Nonempty ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) i).obj ((derivedPullback g).obj E) ≅ (Modules.pullback g).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj E))",
+  "statement": "theorem nonempty_homology_derivedPullback_iso_of_locally_single [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {T T' : Scheme.{u}} (g : T' ⟶ T) (E : schemeDerivedCategory T) (i : ℕ) (hneg : ∀ n : ℤ, n < 0 → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj E)) (hloc : ∀ t ∈ Set.range g.base, ∃ U : T.Opens, t ∈ U ∧ ∃ r : ℕ, IsFiniteLocallyFreeInDegree (fun q : ℕ ↦ (Modules.restrictFunctor U.ι).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj E)) i r) : Nonempty ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) i).obj ((AlgebraicGeometry.derivedPullback g).obj E) ≅ (Modules.pullback g).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj E))",
   "branch": "sheaf-dag",
-  "by": "C2",
-  "date": "2026-10-12"
+  "by": "A7",
+  "date": "2026-10-21",
+  "note": "Reconciled quarantined duplicate with the complete adopted source theorem of the same name and statement. The Sheaf module now publicly imports that source module. The source explicitly qualifies AlgebraicGeometry.derivedPullback to distinguish it from Scheme.Modules.derivedPullback. All mathematical hypotheses, conclusion, proof steps and proof dependencies are retained; the live PerfectLocusOfRank consumer already imports the source module."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -135,14 +136,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y2",
+  "reviewer": "C-1dc45",
+  "group": "A7",
   "result": "pass",
-  "landing": "20261012T095932-L-328005",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T211621-L-3479230",
+  "kind": "proof",
+  "note": "independent cc review: restored Sheaf module (single public import) and node lean record vs upstream WeilConjectures.AlgebraicGeometry.DerivedPullbackSingleCohomology theorem (same name, statement byte-equal after normalization; quarantined original differs only by AlgebraicGeometry. qualification of the same constant); compiles, axioms clean, no importers"
  },
  "lean_audit": {
   "master": {
