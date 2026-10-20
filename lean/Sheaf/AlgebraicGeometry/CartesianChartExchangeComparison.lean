@@ -1,7 +1,7 @@
 module
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
 import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeAdjunction
-import all Sheaf.AlgebraicGeometry.CartesianChartExchangeTransport
+import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeTransport
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeEvaluation
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 -- This module shares private comparison lemmas through proof imports.

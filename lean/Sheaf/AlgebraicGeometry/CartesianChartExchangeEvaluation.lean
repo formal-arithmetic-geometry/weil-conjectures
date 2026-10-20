@@ -1,6 +1,6 @@
 module
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
-import all Sheaf.AlgebraicGeometry.CartesianChartExchangeTransport
+import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeTransport
 set_option linter.privateModule false
 
 @[expose] public section
