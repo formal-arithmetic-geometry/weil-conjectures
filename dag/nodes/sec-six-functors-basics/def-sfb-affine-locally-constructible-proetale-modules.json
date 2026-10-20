@@ -103,7 +103,7 @@
   "by": "NL",
   "date": "2026-10-17",
   "existing": false,
-  "note": "§1(B): the recorded affine-local predicate restricts R to Type u while X : Scheme.{u}; it cannot state the item with an independently sized Noetherian coefficient ring. Retain and publicly reexport that predicate, and state the identical affine-local stratification and finitely presented local-model condition on the existing equivalent coefficient-sized AsSmall sites. Constant-ring modules use the existing ConstantCompletion.Mod and coefficientModelFixedScalars. The fixed-scalar pullback helper is the actual Kan extension and sheafification along coefficientProEtaleModelBaseChange, not an arbitrary map or chosen module. No site object, cover, coefficient ring, or stratum is restricted; no universe equality or set-finiteness assumption is imposed."
+  "note": "§1(B): the recorded affine-local predicate restricts R to Type u while X : Scheme.{u}; it cannot state the item with an independently sized Noetherian coefficient ring. Retain and publicly reexport that predicate, and state the identical affine-local stratification and finitely presented local-model condition on the existing equivalent coefficient-sized AsSmall sites. Constant-ring modules use the existing ConstantCompletion.Mod and coefficientModelFixedScalars. The fixed-scalar pullback helper is the actual Kan extension and sheafification along coefficientProEtaleModelBaseChange, not an arbitrary map or chosen module. No site object, cover, coefficient ring, or stratum is restricted; no universe equality or set-finiteness assumption is imposed. G3 repair, 2026-10-21: restore the quarantined module and replace the retired LocallyClosedStratification name by the current upstream Scheme.Stratification. The old structure extended Topology.Stratification, as the def-constructible-stratification record documents. The current upstream structure has the same finite partition and immersed scheme data, including constructibility already required explicitly in this predicate. Keep that explicit conjunct, the coefficient universes, all local models, the fixed-scalar pullback construction and all public imports unchanged. No change to the mathematical statement or the node dependencies; zero sorry bodies."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -120,5 +120,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Both statements match the node clause by clause: IsNoetherian X; R : Type (max v (u+1)) with CommRing and IsNoetherianRing, the landed coefficient-size convention with no Finite R; F a module over the constant ring sheaf. (i) is the landed IsCoefficientConstructibleEtaleModule on the étale side and the new IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf on the pro-étale side. (ii) is one LocallyClosedStratification X with constructible strata and locally constant finitely presented models (Module.Finite is equivalent over Noetherian R). Edge cases checked: empty X or U, R=0, R=Z with M=Z, non-separated X, non-reduced strata. The §1(B) repair of def-sfb-affine-locally-constructible-proetale-modules changes only lean, with a note; it keeps the old module, which the Serre citer still uses; the helper is a real sheafified Kan extension along canonical base change. stmt_deps gained only two landed nodes; both lean.statement fields are verbatim; only theorem bodies are sorry; docstrings have source and blueprint; no duplicate found. Compile: nt_compile.py hit its 60 s timeout twice on the upstream ConstantCompletionEquivalence (load average about 200); a /tmp copy of the same script with a 600 s limit gave rc 0 with no diagnostics, delivered files 10.6 s and 7.1 s. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261020T221155-L-4153708",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
