@@ -28,184 +28,62 @@
  ],
  "proof": [
   {
-   "text": "Fix a compactification $c=(j,p)$ at every coefficient level. The exact $\\mathcal O_E$-linear strict coefficient-tower functor [lem-weil-compact-support-reduction-tower-functor], followed by the exact total derived inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit], defines the integral functor $F_E^{\\rm int}$, including its natural shift maps, triangles and morphisms. Its object formula is [def-weil-integral-rational-qbar-compact-support], and [lem-sf-integral-compact-support-constructible] puts its values in the integral constructible category. By [lem-fin-finite-type-fibre-dimension-bound], choose $e$ bounding the dimensions of the fibres $X_y$ of $f$ ($Y$ is quasi-compact). A geometric fibre over $\\bar y\\to y$ is the base change of $X_y$ along $\\kappa(y)\\to\\kappa(\\bar y)$, with the same local dimensions at points over each other by [lem-sc-fibre-dimension-after-base-change]; its dimension, the supremum of its local dimensions, is therefore also at most $e$. The finite-level exact triangulated functors have the uniform bound $[a,b]\\mapsto[a,b+2e]$ by [prop-finite-compact-support-constructibility]; in particular they preserve the lower bound of any bounded finite-coefficient complex.",
+   "text": "Use the projection-normalized realization of the integral action as exact open extension followed by proper derived image. Pullback is exact on ringed modules, so its derived functor preserves upper bounds. Adjunction orthogonality therefore makes derived image preserve lower bounds. Transport across the realization isomorphism gives the integral lower bound.",
    "uses": [
-    "lem-weil-compact-support-reduction-tower-functor",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "def-weil-integral-rational-qbar-compact-support",
-    "lem-sf-integral-compact-support-constructible",
-    "lem-fin-finite-type-fibre-dimension-bound",
-    "prop-finite-compact-support-constructibility",
-    "lem-sc-fibre-dimension-after-base-change"
+    "def-weil-compact-support-finite-action",
+    "lem-pur-compact-support-integral-coefficient-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7; Stacks Tag 0G2A, lemma-derived-lower-shriek-bounded (3)"
-   }
+   "elementary": false
   },
   {
-   "text": "We identify this tower construction with the completed-coefficient compactification composite used in the scalar-coherence theorem below. Write $K_n=K\\otimes^L A_{E,n}$. Derived completeness gives $K\\simeq R\\lim_n\\operatorname{Res}_nK_n$ [def-weil-derived-complete]. By [lem-weil-pbc-completed-constant-sheaf-reduction], reduction is computed by the two-term complex $[B\\xrightarrow{\\varpi^n}B]$. The exact, termwise functor $j_!$ of [det-sf-open-closed-extension-zero-limits] commutes with this two-term cone, including its quotient-induced transition maps; restriction of coefficient actions does not change the underlying extension-by-zero sheaf. That same node (2) gives preservation of sequential derived limits. Thus $j_!K\\simeq R\\lim_n\\operatorname{Res}_nj_!K_n$. Apply [lem-pur-completed-coefficient-pushforward-comparison] to the proper map $p$ and the complete object $j_!K$: it gives the canonical comparison\n$$Rp_*j_!K\\simeq R\\lim_n\\operatorname{Res}_nRp_{*,n}j_!K_n,$$\nwith the specified quotient projections and transition maps. The finite-level identifications in [lem-weil-proetale-direct-image-restriction-of-scalars] identify these terms with $\\operatorname{Res}_nR p_{*,n}j_!K_n$ and commute with successive reductions. Hence this is exactly the prescribed $F_E^{\\rm int}K$, naturally in $K$ and compatibly with shifts. For the category domains, finite-type schemes over $k$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field is Noetherian since its only ideals are $0$ and $k$), and finite-dimensional by [lem-fin-finite-type-fibre-dimension-bound] applied to their structure maps. The same holds for the proper finite-type compactification. The equivalence of the integral conventions here and the compatible PBC integral category is stated in [lem-weil-pbc-integral-stratified-perfect-characterization]. Thus these are the actual completed-category functors, on the same domains.",
+   "text": "Transport the ambient shift comparison through the fully faithful constructible inclusion. The ambient functor is triangulated; reflection along that inclusion gives integral triangulatedness. Apply raw scalar-localization transport to this integral-linear functor. Its objects and tensor Hom maps are definitionally the recorded finite-field functor.",
    "uses": [
-    "def-weil-derived-complete",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "det-sf-open-closed-extension-zero-limits",
-    "lem-pur-completed-coefficient-pushforward-comparison",
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-fin-finite-type-fibre-dimension-bound",
-    "lem-weil-pbc-integral-stratified-perfect-characterization"
+    "def-weil-compact-support-finite-action",
+    "prop-weil-pbc-rational-transport"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemmas 6.1.13, 6.5.9 and 6.5.11; Definition 6.7.6; Stacks Tag 0A07, lemma-Rf-commutes-with-Rlim"
-   }
+   "elementary": false
   },
   {
-   "text": "The rational categories of [def-weil-rationalization-karoubi] are raw scalar localizations of the integral categories, with the same objects. Apply [prop-weil-pbc-rational-transport] to the exact $\\mathcal O_E$-linear integral functor from Step 1. It gives an exact $E$-linear functor $F_E$ with the localized natural shift comparison. Explicitly it sends a rational morphism $u/\\varpi^m$ to $F_E^{\\rm int}(u)/\\varpi^m$. On objects it is precisely the rational compact-support formula of [def-weil-integral-rational-qbar-compact-support]. Step 2 identifies it with the rationalization of $Rp_*j_!$. This proves both triangle preservation and the natural shift comparison at every finite field stage, including their compatibility on rational morphisms.",
+   "text": "The specified rational standard lower class is the isomorphism closure of integral representatives. Choose such a representative and use the integral bound; map its isomorphism by the rational functor. The common-stage standard lower class is similarly the isomorphism closure of stagewise lower classes. Choose a finite-stage representative and map its isomorphism using the stage-inclusion comparison of the given action.",
    "uses": [
-    "def-weil-rationalization-karoubi",
-    "prop-weil-pbc-rational-transport",
-    "def-weil-integral-rational-qbar-compact-support"
+    "def-weil-constructible-heart",
+    "def-weil-compact-support-coefficient-action",
+    "def-weil-algebraically-closed-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), with the exact scalar-localization interface of prop-weil-pbc-rational-transport"
-   }
+   "elementary": false
   },
   {
-   "text": "The two coefficient presentations must be compared before descent. [lem-weil-pbc-integral-stratified-perfect-characterization] identifies the completed integral category used by PBC with the derived-complete integral category used in [def-weil-rationalization-karoubi]. For $E\\subset L$, [lem-weil-finite-free-completed-scalar-comparison] gives a natural isomorphism $\\chi_{L/E,K}$ from ordinary completed derived scalar extension to strict quotient-tower scalar extension. After rationalization, its inverse is a natural comparison\n$$j_{Y,L/E}:J_{Y,L}T^{\\rm sf}_{L/E}\\xrightarrow{\\sim}T^{\\rm pbc}_{L/E}J_{Y,E},$$\nwhere $J_{Y,E}$ is the identity on integral objects and localized Hom groups. The $L=E$ clause gives the unit equation; naturality of $\\chi$, [lem-weil-scalar-extension-composition], and the associator and shift equations in [prop-weil-pbc-scalar-extension] give the successive-extension, associator, and shift equations for $j$. The common-stage arrow and cone formulas of [def-weil-pbc-finite-stage-pair-category] and [def-weil-pbc-common-stage-cones] therefore yield an exact equivalence $J_Y$ from the framework category [def-weil-algebraically-closed-coefficients] to the PBC pair category [def-weil-pbc-qbar-category], by conjugating each common-stage arrow by the relevant $j$. Apply [lem-cbc-rational-compact-support-coefficient-coherence] to the identity base-change square $X'=X$, $Y'=Y$, $g'=1_X$, $g=1_Y$, with compactification $c'=c$. Its hypotheses hold: Step 2 gives Noetherian, finite-dimensional, separated finite type, and $\\ell\\ne\\operatorname{char}k$ is invertible. [prop-weil-pbc-descent-functors] therefore gives an exact PBC common-stage functor. Transporting it by $J_X$ and $J_Y^{-1}$ gives the required exact functor on [def-weil-algebraically-closed-coefficients]; on $(E,K)$ it is $(E,F_EK)$, with arrows given by the $j$-conjugated formula.",
+   "text": "For a bounded-below object K with cohomology zero below c, start at an existing lower bound a. If a exceeds c, monotonicity suffices. Otherwise induct from a to c. Given K in D^{>=b}, the canonical map tau^{<=b}K to tau^{>=b}tau^{<=b}K is invertible. Vanishing of H^b(K), and faithfulness of shift, make the latter object zero. Thus tau^{<=b}K is zero and K lies in D^{>=b+1}. Conversely a lower bound c makes tau^{<=i}K zero for i<c, hence its cohomology zero. Apply these implications before and after the bounds already proved.",
    "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "def-weil-rationalization-karoubi",
-    "lem-weil-scalar-extension-composition",
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-pbc-finite-stage-pair-category",
-    "def-weil-pbc-common-stage-cones",
-    "lem-cbc-rational-compact-support-coefficient-coherence",
-    "prop-weil-pbc-descent-functors",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-pbc-qbar-category"
+    "def-weil-constructible-heart",
+    "prop-constructible-truncations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
-    "place": "Opening scalar-extension paragraph; existing completed-coefficient coherence interface, specialized to the identity square"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $H$ be an integral constructible sheaf placed in degree zero. Clause (iii) of [lem-weil-pbc-integral-stratified-perfect-characterization] gives a finite stratification on which $H$ is pro-etale locally $B_X\\otimes_{\\mathcal O_E}N_s$ for a finitely presented $\\mathcal O_E$-module $N_s$. The valuation ring is a DVR, hence a Noetherian PID, by [lem-weil-l-adic-extension-integers-dvr](2). By [lem-weil-pbc-noetherian-submodule-finite] the torsion submodule of each $N_s$ has finitely many generators; each generator is killed by a power of $\\varpi$, so their maximum kills that torsion submodule. Take the maximum over the finitely many strata. Flatness of the completed coefficient sheaf over the constant ring [lem-weil-pbc-completed-constant-sheaf-reduction] identifies the kernels of multiplication by $\\varpi^n$ with the base changes of $N_s[\\varpi^n]$. The same local description, finite generation of submodules, and the Noetherian quotient argument show that both $T_n=H[\\varpi^n]$ and $H/\\varpi^nH$ are constructible finite-coefficient sheaves. Therefore one exponent $N\\geq1$ kills all sheaves $H[\\varpi^n]$, for every $n$. This bound comes from the constructible cohomology models, not from a finite-module inverse-limit criterion.",
+   "text": "Apply the separate normalized common-stage exactness theorem to S. Combine its coherent integer-shift and triangle preservation with the common-stage lower bound. Combine finite-stage exactness with the finite-stage lower bound, obtaining both conjuncts.",
    "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "lem-weil-pbc-completed-constant-sheaf-reduction"
+    "lem-zl-field-shriek-lower-bound-common-stage-exactness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.10 and Proposition 6.8.11(3); clause (iii) of the integral characterization"
-   }
-  },
-  {
-   "text": "The two-term free resolution $[B_X\\xrightarrow{\\varpi^n}B_X]$ of $(A_{E,n})_X$ is valid by [lem-weil-pbc-completed-constant-sheaf-reduction]. It computes $H_n=H\\otimes^L A_{E,n}$ with cohomology only in degrees $-1,0$, namely $T_n=H[\\varpi^n]$ and $H/\\varpi^nH$. By Step 5's local-model argument and [lem-weil-pbc-integral-stratified-perfect-characterization], these two sheaves are constructible; the truncation triangle below therefore lies in the finite constructible category. The quotient $A_{E,n+1}\\to A_{E,n}$ lifts to the map of these resolutions which is multiplication by $\\varpi$ in degree $-1$ and identity in degree $0$: $\\varpi^n\\varpi=\\varpi^{n+1}$. Hence the transition $T_{n+1}\\to T_n$ is multiplication by $\\varpi$. Apply the canonical truncation triangle $T_n[1]\\to H_n\\to(H/\\varpi^nH)[0]\\to$ of [lem-sf-derived-truncation-triangle]. The finite-level exactness and lower interval bound supplied by [prop-finite-compact-support-constructibility], together with the integral output comparison [lem-sf-integral-compact-support-constructible], show for $L_n=\\operatorname{Res}_nRf_{!,n}H_n$ that $\\mathcal H^q(L_n)=0$ for $q<-1$ and $\\mathcal H^{-1}(L_n)=\\operatorname{Res}_n\\mathcal H^0(Rf_{!,n}T_n)$. These identifications are natural for quotient-induced transitions. Indeed [lem-sf-compact-support-restriction-of-scalars] identifies the finite-level functors across coefficient restriction, so truncation naturality identifies the transition with the map induced by $T_{n+1}\\to T_n$. The composite from $n+N$ to $n$ is induced by $\\varpi^N:T_{n+N}\\to T_n$, which is zero by Step 5. Thus the degree $-1$ cohomology tower of $L_n$ is pro-zero.",
-   "uses": [
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-sf-derived-truncation-triangle",
-    "prop-finite-compact-support-constructibility",
-    "lem-sf-integral-compact-support-constructible",
-    "lem-sf-compact-support-restriction-of-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0G2A, lemma-derived-lower-shriek-bounded (3), and the explicit two-term resolution computation"
-   }
-  },
-  {
-   "text": "Use the sheaf-valued Milnor sequence [det-pe-milnor-sequence] for $L=F_E^{\\rm int}H=R\\lim_nL_n$ on $Y_{\\mathrm{proet}}$, with its completed ring sheaf; the equality with the defining compact-support tower is [def-weil-integral-rational-qbar-compact-support]. For $q<-1$ both adjacent cohomology towers in that sequence are zero by Step 6, so $\\mathcal H^q(L)=0$. For $q=-1$ its left term is $R^1\\lim\\mathcal H^{-2}(L_n)=0$ and its right term is $\\lim\\mathcal H^{-1}(L_n)=0$: any compatible family has $n$-th component equal to its image from $n+N$, and that transition is zero. Consequently $\\mathcal H^{-1}(L)=0$ integrally, not merely torsion. We have proved $F_E^{\\rm int}H\\in D^{\\ge0}$ for every integral heart object.",
-   "uses": [
-    "det-pe-milnor-sequence",
-    "def-weil-integral-rational-qbar-compact-support"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.md",
-    "place": "Clause (1), the natural Milnor sequence of pro-etale module sheaves"
-   }
-  },
-  {
-   "text": "The schemes $X,Y$ are Noetherian, finite-dimensional, with $\\ell$ invertible (Steps 2 and 4), and [lem-weil-pbc-integral-stratified-perfect-characterization] identifies their integral categories, completed ring sheaf and cohomology sheaves with those of [prop-weil-localized-tstructure]; so its rational categories are those of [def-weil-rationalization-karoubi], and its $\\mathcal C_E^{\\ge0}$ is the class of [def-weil-constructible-standard-tstructure](2). Every rational heart object is isomorphic to $QH$ for an integral heart object $H$, by the heart assertion of [prop-weil-localized-tstructure]. Its t-exact localization functor sends the conclusion of Step 7 into the rational $D^{\\ge0}$; Step 3 identifies this image with $F_E(QH)$. This proves the rational heart lower bound. For a common-stage heart object represented by $(E,K)$, [prop-constructible-truncations] says that cohomology and truncation commute with finite scalar extension and with the common-stage construction. Since the object is its own zeroth cohomology, it is isomorphic to the image of the rational heart object $\\mathcal H^0(K)$. Its compact-support image is therefore represented by the rational $F_E\\mathcal H^0(K)$, which is in $D^{\\ge0}$. The common-stage $D^{\\ge0}$ is the isomorphism closure of such stagewise objects by [def-weil-constructible-standard-tstructure](3). This proves the heart lower bound over $\\overline{\\mathbf Q}_\\ell$ using the actual functor of Step 4.",
-   "uses": [
-    "prop-weil-localized-tstructure",
-    "prop-constructible-truncations",
-    "def-weil-constructible-standard-tstructure",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-weil-rationalization-karoubi"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Propositions 6.8.11(3) and 6.8.14, with the stated localized/common-stage standard t-structure comparisons"
-   }
-  },
-  {
-   "text": "For arbitrary $K\\in D^b_c(X,\\Lambda)$ with $\\mathcal H^i(K)=0$ for $i<c$, use the bounded canonical truncation triangles $\\tau^{\\le q-1}K\\to\\tau^{\\le q}K\\to\\mathcal H^q(K)[-q]\\to$ of [prop-constructible-truncations]. Step 8 puts $Rf_!\\mathcal H^q(K)$ in $D^{\\ge0}$; the natural shift comparisons of Steps 3–4 put the image of the $q$-th heart layer in $D^{\\ge q}$. Starting from $\\tau^{\\le c-1}K=0$, induct through the finite cohomological range. At each step exactness from Steps 3–4 gives the image triangle, and the long exact sequence of t-structure cohomology in [lem-weil-heart-short-exact-triangles](5) implies that the image of $\\tau^{\\le q}K$ has no cohomology below $c$. At the top truncation this is $K$, which proves the asserted lower bound.",
-   "uses": [
-    "prop-constructible-truncations",
-    "lem-weil-heart-short-exact-triangles"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle; BBD 1.3.3–1.3.6"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-constructible-standard-tstructure",
-  "def-weil-derived-complete",
   "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-pbc-common-stage-cones",
-  "def-weil-pbc-finite-stage-pair-category",
-  "def-weil-pbc-qbar-category",
-  "def-weil-rationalization-karoubi",
-  "det-pe-milnor-sequence",
-  "det-sf-open-closed-extension-zero-limits",
-  "lem-cbc-rational-compact-support-coefficient-coherence",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-pur-completed-coefficient-pushforward-comparison",
-  "lem-sc-fibre-dimension-after-base-change",
-  "lem-sf-compact-support-restriction-of-scalars",
-  "lem-sf-derived-truncation-triangle",
-  "lem-sf-integral-compact-support-constructible",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-heart-short-exact-triangles",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "lem-weil-scalar-extension-composition",
-  "prop-constructible-truncations",
-  "prop-finite-compact-support-constructibility",
-  "prop-weil-localized-tstructure",
-  "prop-weil-pbc-descent-functors",
+  "def-weil-compact-support-finite-action",
+  "lem-pur-compact-support-integral-coefficient-comparison",
   "prop-weil-pbc-rational-transport",
-  "prop-weil-pbc-scalar-extension"
+  "def-weil-constructible-heart",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-algebraically-closed-coefficients",
+  "prop-constructible-truncations",
+  "lem-zl-field-shriek-lower-bound-common-stage-exactness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 6.7.6, Lemma 6.7.7 and Propositions 6.8.11/6.8.14; Stacks 0G2A (3). Expanded Tor-transition/Milnor argument and explicit exact scalar descent supplied here from the cited interfaces."
+  "place": "Definition 6.7.6 and Proposition 6.8.14; direct standard t-structure adjunction argument and representative transport, with common-stage exactness separated from the lower-bound proof."
  },
  "mathlib_searches": [
   {
@@ -410,27 +288,7 @@
   ]
  },
  "tool_uses": [
-  "lem-cbc-rational-compact-support-coefficient-coherence",
-  "det-sf-open-closed-extension-zero-limits",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "prop-weil-pbc-rational-transport",
-  "prop-weil-pbc-scalar-extension",
-  "prop-weil-pbc-descent-functors",
-  "det-pe-milnor-sequence",
-  "prop-weil-localized-tstructure",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "prop-finite-compact-support-constructibility",
-  "lem-pur-completed-coefficient-pushforward-comparison",
-  "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-scalar-extension-composition",
-  "def-weil-pbc-finite-stage-pair-category",
-  "def-weil-pbc-common-stage-cones",
-  "lem-sc-fibre-dimension-after-base-change"
+  "prop-weil-pbc-rational-transport"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -458,5 +316,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Uses the already normalized finite functor and every normalized common-stage coefficient action. The finite-stage fields use the existing canonical small coefficient models of all finite subextensions of the chosen closure. The added statement dependencies are already landed owning nodes of these morphism actions and the canonical standard t-structures."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261020T051229-L-1602093",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
