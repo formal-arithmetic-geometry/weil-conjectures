@@ -21,7 +21,10 @@
   "lem-weil-pbc-constant-completion-equivalence",
   "lem-sf-cbc-compact-support-composition-limit",
   "fix-lem-exchanges",
-  "lem-cbc-strict-tower-proper-open-calculus"
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-sf-integral-compactification-ordinary-site-transport",
+  "def-sf-integral-compactification-site-transport",
+  "def-sf-integral-compactification-word-comparisons"
  ],
  "proof": [
   {
@@ -338,5 +341,40 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-37be1433f (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sf-constant-semilinear-generator-comparison, every cited statement, the parent's use of the item (transport Steps 2-3), blueprint fix-lem-exchanges.proof.md Step 5 and Stacks 0E48 (remark-compatible-with-diagram). I re-derived Steps 2-8: (2) L(r_A)u = L(e)u d^{-1} = d^{-1}, by unit naturality and the right triangle; (3) r_v=(S_p r_j) r_{p,D} gives L(r_v)u = b Rp_*(d_j^{-1}) = d_v^{-1} by naturality of b and d_j = u^{-1} L(r_j)^{-1}, and the inverse transpose gives r_v = e R(d_v^{-1}); (4) the q_{VW} recursion matches U(r_v); (5) a_v = H(d_v^{-1}); (6) the two-word recursion with r_f substituted gives the stated factor order, and the types check; (7) Gamma_Q restricts to gamma_Q (system-realization and mate-pasting), and compositors are conjugates transported by the new node's unit/counit clause; (8) H is faithful on complete objects. Step 9 identity case: e_{RM} = R(u_M)^{-1}, consistent with the empty-word a = eta. My own small cases f=id, g=id (which is exactly the parent's formula) and X empty all agree. The item compares the semilinear and constant-tower coefficient categories explicitly through U and H; R = O_E with I = (t) meets the word theorem's hypotheses, and ell != char k meets the open-reduction node's. The new node is true, strictly smaller than the item and not a duplicate: I compared it with generator-reduction-coherence, proper-open-mate-pasting, system-realization, ring-sheaf-change-adjunction and completed-projection-coherence, and an rg search found nothing else. Its statement is self-contained, its source honestly marked as an agent obligation over 0E48, it has grep/LeanSearch/Loogle/LeanFinder searches, and its blueprint from/via is correct. There is no cycle and proof_deps equals the union of uses. I accept the ten tool_uses as black-box integral-coefficient tools that the identification unit does not supply; mate-pasting is a Mathlib leaf, so declaring it is superfluous. Nothing changed."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralCompactificationComparisonBridge",
+  "declaration": "WeilConjectures.IntegralCompactificationBridge.integralCompactificationComparisonBridge",
+  "declarations": [
+   "WeilConjectures.IntegralCompactificationBridge.directIdentification",
+   "WeilConjectures.IntegralCompactificationBridge.wordCoordinates",
+   "WeilConjectures.IntegralCompactificationBridge.wordComparison",
+   "WeilConjectures.IntegralCompactificationBridge.systemWordDomain",
+   "WeilConjectures.IntegralCompactificationBridge.singleDomain",
+   "WeilConjectures.IntegralCompactificationBridge.compositeWordComparison",
+   "WeilConjectures.IntegralCompactificationBridge.constantComparison",
+   "WeilConjectures.IntegralCompactificationBridge.completedComparison_existsUnique",
+   "WeilConjectures.IntegralCompactificationBridge.completedComparison",
+   "WeilConjectures.IntegralCompactificationBridge.semilinearComparison",
+   "WeilConjectures.IntegralCompactificationBridge.bridgeDomain",
+   "WeilConjectures.IntegralCompactificationBridge.comparisons_isIso",
+   "WeilConjectures.IntegralCompactificationBridge.coefficientPrimeUnit",
+   "WeilConjectures.IntegralCompactificationBridge.integralCompactificationComparisonBridge"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralCompactificationComparisonBridge.lean",
+  "statement": "theorem integralCompactificationComparisonBridge (o : IntegralSystemRealization.Operations l E) (r : Realizations l E D o) (t : Compactification.Triangle f g) [QuasiCompact t.cf.i] [QuasiCompact t.cg.i] [QuasiCompact t.cfg.i] [QuasiCompact t.q] (af : sfCbcModelExtension t.cf.i (constantRing l E) ⊣ (sfCbcMorphism t.cf.i).modulePull (ULift.{u + 1} (constantRing l E))) (ag : sfCbcModelExtension t.cg.i (constantRing l E) ⊣ (sfCbcMorphism t.cg.i).modulePull (ULift.{u + 1} (constantRing l E))) (ah : sfCbcModelExtension t.cfg.i (constantRing l E) ⊣ (sfCbcMorphism t.cfg.i).modulePull (ULift.{u + 1} (constantRing l E))) : (∀ (K : sfIntegralConstructibleCategory l E X) (lo hi torLo torHi : ℤ), bridgeDomain l E D.k (coefficientPrimeUnit l D hl) o t K lo hi torLo torHi → completedComparison l E D.k (coefficientPrimeUnit l D hl) t af ag ah K = semilinearComparison l E D.k (coefficientPrimeUnit l D hl) o r t K) ∧ (∀ (K K' : sfIntegralConstructibleCategory l E X) (m : K ⟶ K') (lo hi torLo torHi : ℤ), bridgeDomain l E D.k (coefficientPrimeUnit l D hl) o t K lo hi torLo torHi → bridgeDomain l E D.k (coefficientPrimeUnit l D hl) o t K' lo hi torLo torHi → (sfIntegralConstructible l E Z).ι.map ((sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) t.cf E ⋙ sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) t.cg E).map m) ≫ semilinearComparison l E D.k (coefficientPrimeUnit l D hl) o r t K' = semilinearComparison l E D.k (coefficientPrimeUnit l D hl) o r t K ≫ (sfIntegralConstructible l E Z).ι.map ((sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) t.cfg E).map m))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The constant-word and semilinear-counit morphisms are constructed independently from the recorded functors. The constant-word morphism is lifted uniquely through H on complete objects; no arbitrary comparison or equality hypothesis is assumed. Auxiliary definitions explicitly supply the missing normalized site-model transports and assembled beta maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1959ddf8e",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Re-delivery of PASSed 494c4ff8 after a landing 60 s timeout on IntegralCompactificationBridgeCoordinates. Item node, main module and Words module are byte-identical; prior clause-by-clause PASS stands. Delta: OrdinaryCoordinates adds 3 named inferInstance instances (harmless); Coordinates replaces the HEq pin with the published DirectSquareNormalization, checked equivalent by substitution (derivedTowerModel = mapDerivedCategory, modelFactors = mapDerivedCategoryFactors). Not dropped; not landed live. The repair is slower: back to back 45.0/45.6 s vs old 30.2/33.7 s, 55.8 s at load 100. Profiler: kernel typechecks the predicate application 3 times (existsUnique 15 s, .exists aux proof 16 s, directModel 7.7 s). FIX: fixes/IntegralCompactificationBridgeCoordinates.lean names it once as def DirectModelNormalization (∃! d, DirectModelNormalization l E f d; statement and choice unchanged); fixes/def-sf-integral-compactification-site-transport.json adds it to lean.declarations plus a note. All 4 files compile clean via nt_compile --json; Coordinates 9.2/9.5 s vs 35.7 s delivered back to back."
  }
 }

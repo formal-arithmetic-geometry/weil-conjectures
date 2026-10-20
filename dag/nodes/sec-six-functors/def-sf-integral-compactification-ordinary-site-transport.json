@@ -1,0 +1,134 @@
+{
+ "id": "def-sf-integral-compactification-ordinary-site-transport",
+ "kind": "definition",
+ "title": "Section-normalized constant-module small-site transport",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with $R=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. For a scheme $T$, use the original small pro-etale site [def-weil-pbc-proetale-site] and its exact small-model module equivalence $C_T=\\mathrm{sfCbcModelModules}(T,R)$ from [lem-sf-constant-semilinear-generator-comparison]. For $f:V\\to T$ there is a unique natural isomorphism $f_*C_T\\cong C_Vf_*^{\\rm model}$ whose underlying-section map, followed by the canonical constantDirectUnderlying comparison, is the identity on every section. Define ordinaryDirectModel to be this uniquely section-normalized isomorphism. Define towerModel to apply $C_T$ termwise to strict $\\mathbf N^{\\rm op}$-towers and derivedTowerModel to be its exact derived functor. These retain the original site object universe and morphism universe.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "lem-sf-constant-semilinear-generator-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Step 5: canonical small-site coordinates and proper/open construction required to state the explicit integral comparison obligation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical transport of derived strict constant module towers between a site and its equivalent small site model, compatible with direct image and open extension",
+   "results": "8 hits: CategoryTheory.Equivalence.transportIsoSheafToPresheaf, CategoryTheory.Functor.sheafPushforwardContinuous, CategoryTheory.Equivalence.transportAndSheafify, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.smallSheafify, SheafOfModules.pushforward, CategoryTheory.Monoidal.Transported, CategoryTheory.Equivalence.sheafCongrPrecoherent",
+   "date": "2026-10-19",
+   "verdict": "Generic site equivalence or proper/open results, not the section- and derived-unit-normalized constant-tower comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskeringRightObjCompIso",
+   "results": "3 hits: CategoryTheory.Functor.whiskeringRightObjCompIso, CategoryTheory.Functor.whiskeringRightObjCompIso_hom_app_app, CategoryTheory.Functor.whiskeringRightObjCompIso_inv_app_app",
+   "date": "2026-10-19",
+   "verdict": "No exact match: generic adjunction, sheaf or whiskering results do not define this normalized compactification coordinate construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison between constant module derived tower direct images on the pro etale site and on its small site model with identity on sections normalization",
+   "results": "8 hits: LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, SheafOfModules.Presentation.map_π_eq, CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CompHausLike.LocallyConstantModule.functor_map_val, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.functorIsoDiscreteComponents",
+   "date": "2026-10-19",
+   "verdict": "No exact match: generic adjunction, sheaf or whiskering results do not define this normalized compactification coordinate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "sfCbcModel|ordinaryDirectModel|towerDirectModel",
+   "results": "0 hits:  (Mathlib/CategoryTheory)",
+   "date": "2026-10-19",
+   "verdict": "No exact match: generic adjunction, sheaf or whiskering results do not define this normalized compactification coordinate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"towerDirectModel|ordinaryDirectModel|directModel_existsUnique\" lean/WeilConjectures lean/Sheaf",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "No existing specialized normalized transport or compactification beta; existing coefficient transport changes coefficients rather than the site model."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"strict.*tower.*model.*transport|normalized.*small.*site.*transport|constant.*tower.*site.*transport\" dag/nodes",
+   "results": "Inspected def-sp-semilinear-constant-ring-operations, def-sf-integral-system-operations, def-pur-semilinear-compact-support-coefficient-transport, lem-weil-pbc-strict-tower-exchange-mate-normalization, lem-pur-completed-coefficient-pushforward-comparison; none defines this notion",
+   "date": "2026-10-19",
+   "verdict": "No existing specialized normalized transport or compactification beta; existing coefficient transport changes coefficients rather than the site model."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search \"constant tower site transport\"",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "No existing specialized normalized transport or compactification beta; existing coefficient transport changes coefficients rather than the site model."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-integral-compactification-comparison-bridge",
+  "date": "2026-10-19",
+  "group": "Q03"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "Proof, normalized trace sentence: comparison of the specified completed compact-support composition with the actual reduction/total-limit counit formula before taking its right-adjoint mate.",
+   "via": [
+    "lem-sf-integral-compactification-comparison-bridge",
+    "lem-sf-identification-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralCompactificationBridgeOrdinaryCoordinates",
+  "declaration": "WeilConjectures.IntegralCompactificationBridge.ordinaryDirectModel",
+  "declarations": [
+   "WeilConjectures.IntegralCompactificationBridge.towerModel",
+   "WeilConjectures.IntegralCompactificationBridge.towerModel_additive",
+   "WeilConjectures.IntegralCompactificationBridge.towerModel_preservesFiniteLimits",
+   "WeilConjectures.IntegralCompactificationBridge.towerModel_preservesFiniteColimits",
+   "WeilConjectures.IntegralCompactificationBridge.derivedTowerModel",
+   "WeilConjectures.IntegralCompactificationBridge.ordinaryDirectModel_existsUnique",
+   "WeilConjectures.IntegralCompactificationBridge.ordinaryDirectModel"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralCompactificationBridgeOrdinaryCoordinates.lean",
+  "statement": "def ordinaryDirectModel {V T : Scheme.{u}} (f : V ⟶ T)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1959ddf8e",
+  "group": "Q03",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1959ddf8e",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Re-delivery of PASSed 494c4ff8 after a landing 60 s timeout on IntegralCompactificationBridgeCoordinates. Item node, main module and Words module are byte-identical; prior clause-by-clause PASS stands. Delta: OrdinaryCoordinates adds 3 named inferInstance instances (harmless); Coordinates replaces the HEq pin with the published DirectSquareNormalization, checked equivalent by substitution (derivedTowerModel = mapDerivedCategory, modelFactors = mapDerivedCategoryFactors). Not dropped; not landed live. The repair is slower: back to back 45.0/45.6 s vs old 30.2/33.7 s, 55.8 s at load 100. Profiler: kernel typechecks the predicate application 3 times (existsUnique 15 s, .exists aux proof 16 s, directModel 7.7 s). FIX: fixes/IntegralCompactificationBridgeCoordinates.lean names it once as def DirectModelNormalization (∃! d, DirectModelNormalization l E f d; statement and choice unchanged); fixes/def-sf-integral-compactification-site-transport.json adds it to lean.declarations plus a note. All 4 files compile clean via nt_compile --json; Coordinates 9.2/9.5 s vs 35.7 s delivered back to back."
+ }
+}

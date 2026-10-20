@@ -17775,3 +17775,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:06 L: merged deliver/Q02/lem-sf-identification-coefficient-transport (stage 2; reviewer PASS; parallel immutable checks)
 - 00:18 L: merged deliver/NK/fix-prop-projection-formula (stage 2; reviewer PASS; parallel immutable checks)
 - 00:25 L: merged deliver/Q07/lem-trf-finite-horizontal-shriek-mate (stage 2; reviewer PASS; parallel immutable checks)
+- 00:27 L: merged deliver/Q03/lem-sf-integral-compactification-comparison-bridge (stage 2; reviewer FIX; parallel immutable checks)
