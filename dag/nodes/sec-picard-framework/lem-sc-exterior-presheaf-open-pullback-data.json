@@ -97,14 +97,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorPresheafOpenPullbackData",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorPresheafOpenPullbackData.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorPresheafOpenPullbackData",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorPresheafOpenPullbackData.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorPresheaf_open_pullback_data",
-  "statement": "theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n : ℕ) (U : X.Opens) : ∃ (app : ∀ V : U.toScheme.Opensᵒᵖ, ((PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj (exteriorSheafPresheaf M n)).obj V ≅ (exteriorSheafPresheaf (M.restrict U.ι) n).obj V), ∀ {V W : U.toScheme.Opensᵒᵖ} (f : V ⟶ W), ((PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj (exteriorSheafPresheaf M n)).map f ≫ (ModuleCat.restrictScalars ((U.toScheme.ringCatSheaf.obj.map f).hom)).map (app W).hom = (app V).hom ≫ (exteriorSheafPresheaf (M.restrict U.ι) n).map f",
+  "statement": "theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n : ℕ) (U : X.Opens) : ∃ (app : ∀ V : U.toScheme.Opensᵒᵖ, ((PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).obj V ≅ (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).obj V), ∀ {V W : U.toScheme.Opensᵒᵖ} (f : V ⟶ W), ((PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).map f ≫ (ModuleCat.restrictScalars ((U.toScheme.ringCatSheaf.obj.map f).hom)).map (app W).hom = (app V).hom ≫ (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).map f",
   "branch": "sheaf-dag",
-  "by": "W3",
-  "date": "2026-10-13"
+  "by": "H6",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf twin in favor of the upstream exteriorPower API. The consumer proves equality of exteriorSheafPresheaf with PresheafOfModules.exteriorPower by uniqueness of restrictions on pure wedges, then uses this upstream theorem. No mathematical statement changes."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -117,13 +118,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "C-ccad5",
+  "group": "H6",
   "result": "pass",
-  "landing": "20261013T024039-L-3336055",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T141310-L-2033880",
+  "kind": "interface",
+  "note": "independent cc review: Retirement of Sheaf ExteriorPresheafOpenPullbackData matched with retire-items.tsv row 58 and the WeilConjectures twin; consumer signature byte-identical to the clone; private bridge lemma proved by uniqueness on pure wedges; node fields matched with the Lean; consumer and its importer ExteriorSheafRestrictHomData compile; axioms clean"
  }
 }
