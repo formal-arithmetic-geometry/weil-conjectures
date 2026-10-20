@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.OpenStalkFreeMapLocalLift
+import WeilConjectures.AlgebraicGeometry.OpenStalkFreeMapLocalLift
 import Mathlib.Data.Int.Interval
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
@@ -66,7 +66,9 @@ theorem exists_affine_perfect_open_stalk_degreewise_lift
   obtain ⟨a, b, hzero⟩ := hP.1
   choose m ι π hιπ using hP.2
   let T := openModuleStalkFunctor X U ⟨x, hxU⟩
-  obtain ⟨e, he⟩ := exists_open_stalk_free_map_local_lifts X U x hxU
+  let e := fun (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U) ↦
+    openModuleStalkRestrictionComparison X U W hWU x hxU hxW
+  have he := exists_open_stalk_free_map_local_lifts X U x hxU
   have lifts (n : ℤ) := he (m n) (Q.X n) (T.map (π n) ≫ t n)
   choose V hxV hVU lift using lifts
   let I := {n : ℤ // n ∈ Finset.Icc a b}

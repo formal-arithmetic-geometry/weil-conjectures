@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Obtain the comparison family e and its transport law from the open-stalk restriction transport lemma. The family is chosen before m, N and t.",
+   "text": "Use the canonical openModuleStalkRestrictionComparison as the family e, chosen before m, N and t. Its transport law is supplied by the open-stalk restriction transport lemma, including for an arbitrary intermediate comparison a.",
    "uses": [
     "lem-sc-open-stalk-restriction-transport"
    ],
@@ -43,10 +43,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "T3",
-  "date": "2026-10-13",
+  "group": "M2",
+  "date": "2026-10-20",
   "document": "Stacks Project",
-  "place": "Tag 01CP single-neighbourhood finite-free lifting; Tags 00A0 and 0096 restriction transport. The uniform further-restriction combination is completely proved in Lean. Second reader replaced a circular use of the downstream finite-projective lifting theorem."
+  "place": "Tags 01CP and 00A0. The existing source proof applies one-neighbourhood finite-free lifting and restriction transport, then proves the further-restriction formula by naturality and isomorphism cancellation. Its canonical comparison family realizes the original existential-family statement without extra hypotheses."
  },
  "mathlib_searches": [
   {
@@ -119,14 +119,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenStalkFreeMapLocalLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenStalkFreeMapLocalLift.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.OpenStalkFreeMapLocalLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenStalkFreeMapLocalLift.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_open_stalk_free_map_local_lifts",
-  "statement": "theorem exists_open_stalk_free_map_local_lifts\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) :\n    ∃ e : ∀ (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U),\n      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU) ⋙\n        openModuleStalkFunctor X W ⟨x, hxW⟩ ≅ openModuleStalkFunctor X U ⟨x, hxU⟩,\n      ∀ (m : ℕ) (N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n        (t : (openModuleStalkFunctor X U ⟨x, hxU⟩).obj\n          (SheafOfModules.free\n            (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ⟶\n          (openModuleStalkFunctor X U ⟨x, hxU⟩).obj N),\n        ∃ (V : X.Opens) (_hxV : x ∈ V) (_hVU : V ≤ U),\n          ∀ (W : X.Opens) (hxW : x ∈ W) (_hWV : W ≤ V) (hWU : W ≤ U),\n            let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n              (homOfLE hWU)\n            ∃ g : R.obj (SheafOfModules.free\n                (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ⟶\n                R.obj N,\n              (openModuleStalkFunctor X W ⟨x, hxW⟩).map g =\n                (e W hxW hWU).hom.app _ ≫ t ≫ (e W hxW hWU).inv.app N",
+  "statement": "theorem exists_open_stalk_free_map_local_lifts\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) :\n    ∀ (m : ℕ) (N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (t : (openModuleStalkFunctor X U ⟨x, hxU⟩).obj\n        (SheafOfModules.free\n          (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ⟶\n        (openModuleStalkFunctor X U ⟨x, hxU⟩).obj N),\n      ∃ (V : X.Opens) (_hxV : x ∈ V) (_hVU : V ≤ U),\n        ∀ (W : X.Opens) (hxW : x ∈ W) (_hWV : W ≤ V) (hWU : W ≤ U),\n          let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n            (homOfLE hWU)\n          ∃ g : R.obj (SheafOfModules.free\n              (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ⟶\n              R.obj N,\n            (openModuleStalkFunctor X W ⟨x, hxW⟩).map g =\n              (openModuleStalkRestrictionComparison X U W hWU x hxU hxW).hom.app _ ≫ t ≫\n                (openModuleStalkRestrictionComparison X U W hWU x hxU hxW).inv.app N",
   "branch": "sheaf-dag",
-  "by": "D4",
-  "date": "2026-10-13"
+  "by": "M2",
+  "date": "2026-10-20",
+  "note": "Retired the duplicate Sheaf module. The source theorem fixes the comparison family to openModuleStalkRestrictionComparison, independently of m, N and t. Choosing this explicit family proves the existential assertion of this node unchanged. The sole remaining Sheaf consumer is adapted in the same delivery; the mathematical dependency edges and unit route are preserved."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -139,13 +140,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "C-2a4fa",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T123548-L-3712376",
+  "landing": "20261020T160758-L-3407501",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf OpenStalkFreeMapLocalLift vs proved twin WeilConjectures.AlgebraicGeometry.OpenStalkFreeMapLocalLift (canonical-comparison strengthening of the node's existential family); adapted sole importer PerfectOpenStalkDegreewiseLift diffed vs live (import + 3 proof lines) and compiled; axioms clean"
  }
 }
