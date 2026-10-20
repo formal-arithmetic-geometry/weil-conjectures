@@ -1,299 +1,292 @@
 {
-  "id": "lem-asd-internal-adjunction-evaluation",
-  "kind": "statement",
-  "title": "Evaluation formula for the canonical internal compact-support adjunction",
-  "statement": "Let $A$ be a finite commutative ring, let $f:X\\to S$ be compactifiable [def-asd-compactifiable] between Noetherian schemes, and work in the ordinary unbounded etale derived categories [def-weil-pbc-derived-categories], with derived tensor [def-kun-derived-tensor] and internal Hom [def-pur-derived-internal-hom]. Let $M\\in D(X_{\\mathrm{et}},A)$ and $K,Q\\in D(S_{\\mathrm{et}},A)$. Write $\\alpha_{f,M,K}:Rf_*R\\mathcal Hom_A(M,f^\\times K)\\xrightarrow{\\sim}R\\mathcal Hom_A(Rf_!M,K)$ for the canonical internal adjunction [prop-asd-internal-adjunction], with $Rf_!$ the ordinary etale compact direct image [def-amb-etale-compact-support] and $f^\\times$ its right adjoint [thm-amb-etale-exceptional-adjoint], and $\\varepsilon_{f,K}:Rf_!f^\\times K\\to K$ for the exceptional counit. For a map $h:Q\\to Rf_*R\\mathcal Hom_A(M,f^\\times K)$ let $p:f^*Q\\otimes_A^L M\\to f^\\times K$ be its transpose under ordinary inverse-image and tensor--Hom adjunction. The tensor--Hom transpose of $\\alpha_{f,M,K}\\circ h$ is precisely\n$$Q\\otimes_A^L Rf_!M\\xrightarrow{\\Pi_{f,Q,M}}Rf_!(f^*Q\\otimes_A^L M)\\xrightarrow{Rf_!(p)}Rf_!f^\\times K\\xrightarrow{\\varepsilon_{f,K}}K.$$\nHere $\\Pi_{f,Q,M}$ is the canonical compact-support projection isomorphism: for a compactification $f=rj$, first apply the proper counit-defined projection map of [lem-amb-proper-coproducts-projection], then the extension-by-zero tensor identification [lem-pur-etale-open-derived-tensor] $r^*Q\\otimes_A^L j_!M\\cong j_!(f^*Q\\otimes_A^L M)$. This normalizes the displayed map on the ambient ordinary etale categories; it makes no constructibility assertion.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-    "place": "Proof, last paragraph: evaluation and exceptional counit underlying the internal adjunction; see also prop-asd-internal-adjunction proof, displayed Hom bijections"
-  },
-  "stmt_deps": [
-    "def-asd-compactifiable",
-    "def-weil-pbc-derived-categories",
-    "def-kun-derived-tensor",
-    "def-pur-derived-internal-hom",
-    "prop-asd-internal-adjunction",
-    "thm-amb-etale-exceptional-adjoint",
-    "lem-amb-proper-coproducts-projection",
-    "def-amb-etale-compact-support",
-    "lem-pur-etale-open-derived-tensor"
-  ],
-  "proof": [
-    {
-      "text": "Write $H=R\\mathcal Hom_A(M,f^\\times K)$ and $U=Rf_*H$. We first spell out the ordinary inverse-image transpose on the unbounded categories. By [prop-weil-pbc-inverse-image-modules-exact], $f^*=f^{-1}$ is exact on constant-$A$ modules and is left adjoint to $f_*$. Choose a complex $T$ for a test object $B$ and a K-injective complex $I$ for $H$ by [prop-pur-kinjective-resolutions-exist]. Degreewise adjunction gives\n$$\\operatorname{Hom}_{K(S)}(T,f_*I)=\\operatorname{Hom}_{K(X)}(f^*T,I):$$\nit carries a chain homotopy $a-b=ds+sd$ to the same equation, by naturality of the sheaf adjunction. For acyclic $T$, $f^*T$ is acyclic, so this equality says that $f_*I$ is K-injective. The two applications of [lem-weil-pbc-kinjective-hom-derived] therefore give\n$$\\operatorname{Hom}_{D(S)}(B,U)=\\operatorname{Hom}_{K(S)}(T,f_*I)=\\operatorname{Hom}_{D(X)}(f^*B,H).$$\nHere $f_*I$ computes $Rf_*H$ by [lem-weil-pbc-kinjective-total-derived]: the functor $Q_Sf_*$ on homotopy categories is exact because additive $f_*$ respects the finite-sum matrices defining shifts and cones. These are natural bijections, and their inverse-image counit is denoted $e:f^*U\\to H$.",
-      "uses": [
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "prop-pur-kinjective-resolutions-exist",
-        "lem-weil-pbc-kinjective-hom-derived",
-        "lem-weil-pbc-kinjective-total-derived"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 07A6, lemma-adjoint; explicit exact-inverse-image specialization using derived.tex Tag 070I, lemma-K-injective, and Tag 070K, lemma-enough-K-injectives-implies"
-      }
-    },
-    {
-      "text": "For either small etale ringed site, put $H_A(C,D)=R\\mathcal Hom_A(C,D)$. Apply $H^0$ of derived global sections to the natural isomorphism $H_A(B,H_A(C,D))\\cong H_A(B\\otimes_A^L C,D)$ of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Applying [lem-pur-rhom-global-sections] to its two sides gives the natural bijection\n$$c_{B,C,D}:\\operatorname{Hom}(B,H_A(C,D))\\xrightarrow{\\sim}\\operatorname{Hom}(B\\otimes_A^LC,D).$$\nIts evaluation is $\\operatorname{ev}_{C,D}=c_{H_A(C,D),C,D}(1)$. Naturality in $B$ gives $c(a)=\\operatorname{ev}_{C,D}\\circ(a\\otimes1_C)$, by substituting $a:B\\to H_A(C,D)$ into the naturality square for the identity. Thus this is exactly the tensor--Hom transpose convention of the statement.",
-      "uses": [
-        "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-        "lem-pur-rhom-global-sections"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 08J9, lemma-internal-hom, and 08JA, lemma-section-RHom-over-U; equation-internal-hom"
-      }
-    },
-    {
-      "text": "Choose a compactification $f=rj$ by [def-asd-compactifiable]. Its middle scheme is Noetherian: $r$ is of finite type by [def-weil-proper-morphism], hence locally of finite type and quasi-compact by [def-weil-finite-type-morphism]; [pqf-lem-locnoeth-lft] gives local Noetherianity. A finite affine cover of $S$, together with finite affine covers of its inverse images under $r$, gives quasi-compactness and a finite cover of the middle scheme by Noetherian affines. Apply [lem-amb-proper-coproducts-projection] to $j_!M$. Using $Rf_!=Rr_*j_!$ of [def-amb-etale-compact-support], compose its map with [lem-pur-etale-open-derived-tensor] to obtain\n$$\\Pi_{B,M}:B\\otimes_A^LRf_!M\\xrightarrow{\\sim}Rr_*(r^*B\\otimes_A^Lj_!M)\\xrightarrow{\\sim}Rf_!(f^*B\\otimes_A^LM).$$\nIn the second arrow interchange tensor factors, apply the cited open comparison, and interchange them back. This uses exactly the sign symmetries specified in the proper projection statement, not an independently chosen isomorphism. The identification $j^*r^*=f^*$ is composition of the ordinary inverse images. Both arrows are natural in $B,M$, and neither citation requires boundedness or constructibility. This is the projection map normalized in the item.",
-      "uses": [
-        "def-asd-compactifiable",
-        "def-weil-proper-morphism",
-        "def-weil-finite-type-morphism",
-        "pqf-lem-locnoeth-lft",
-        "lem-amb-proper-coproducts-projection",
-        "def-amb-etale-compact-support",
-        "lem-pur-etale-open-derived-tensor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
-        "place": "Proof, third displayed bijection: proper projection formula on a compactification, preceded by extension by zero"
-      }
-    },
-    {
-      "text": "The Noetherian compactification of step 3 satisfies [thm-amb-etale-exceptional-adjoint], so $F=Rf_!$ is left adjoint to $G=f^\\times$. Apply the inverse-Hom formula of [lem-weil-pbc-adjunction-of-natural-bijection] with $P=f^*B\\otimes_A^LM$. It sends a map $p_B:P\\to f^\\times K$ to exactly\n$$\\varepsilon_{f,K}\\circ Rf_!(p_B):Rf_!(f^*B\\otimes_A^LM)\\longrightarrow K.$$\nThis fixes the direction and the counit of the exceptional transposition. It uses the ordinary unbounded exceptional adjunction, with $A$ finite as assumed, and imposes no invertibility condition on $|A|$.",
-      "uses": [
-        "thm-amb-etale-exceptional-adjoint",
-        "lem-weil-pbc-adjunction-of-natural-bijection"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/categories.tex",
-        "place": "Tag 0037, definition-adjoint and following unit/counit formulas; blueprint prop-asd-internal-adjunction.proof.md, second displayed bijection"
-      }
-    },
-    {
-      "text": "Set $V=R\\mathcal Hom_A(Rf_!M,K)$. For every test object $B$ compose the bijections of steps 1, 2 and 4, precomposition with $\\Pi_{B,M}$ of step 3, and the inverse of the bijection of step 2 on $S$. This gives a bijection $\\Phi_B:\\operatorname{Hom}_S(B,U)\\to\\operatorname{Hom}_S(B,V)$. Explicitly, if $a:B\\to U$ and $p_B=c(e\\circ f^*a)$, then\n$$\\Phi_B(a)=c_{B,Rf_!M,K}^{-1}\\bigl(\\varepsilon_{f,K}\\circ Rf_!(p_B)\\circ\\Pi_{B,M}\\bigr).$$\nEach constituent is natural in $B$: the two adjunctions and $c$ are natural Hom bijections, and $\\Pi$ was shown natural in step 3. Their composite and its inverse are consequently natural in $B$. This is the full chain of Hom bijections in the blueprint, now with every arrow specified.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
-        "place": "Proof, full displayed chain of natural Hom bijections"
-      }
-    },
-    {
-      "text": "Define $\\theta=\\Phi_U(1_U):U\\to V$ and $\\psi=\\Phi_V^{-1}(1_V):V\\to U$. Naturality gives $\\Phi_B(a)=\\theta\\circ a$ and $\\Phi_B^{-1}(b)=\\psi\\circ b$. Taking $B=U,a=1_U$ and then $B=V,b=1_V$ in the inverse identities yields $\\psi\\theta=1_U$ and $\\theta\\psi=1_V$. Hence $\\theta$ is the isomorphism represented by the displayed Hom bijections. This construction identifies $\\theta$ with the canonical $\\alpha_{f,M,K}$ named in [prop-asd-internal-adjunction]: it is precisely the canonical representative of the chain in that source, rather than an arbitrary isomorphism between $U$ and $V$. No evaluation formula is taken from the proof of that node as a black box; the preceding steps constructed the representing map.",
-      "uses": [
-        "prop-asd-internal-adjunction"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
-        "place": "Proof, Yoneda sentence, expanded by evaluating the natural bijections and their inverses at identities"
-      }
-    },
-    {
-      "text": "Apply step 5 to $B=Q,a=h$. The map $p_Q=c(e\\circ f^*h)$ is the $p$ in the item, by steps 1 and 2. Step 6 gives $\\Phi_Q(h)=\\alpha_{f,M,K}\\circ h$. Apply $c_{Q,Rf_!M,K}$ to the equality of step 5; the consecutive $c,c^{-1}$ cancel. The resulting map is\n$$\\varepsilon_{f,K}\\circ Rf_!(p)\\circ\\Pi_{Q,M},$$\nwith the projection map of step 3 and the exceptional counit of step 4. This proves the asserted equality of morphisms for every $h$, on the ambient ordinary etale categories.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
-        "place": "Proof, final evaluation/counit sentence; specializes the explicit Hom-bijection calculation to the given h"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-asd-internal-adjunction-evaluation",
+ "kind": "statement",
+ "title": "Evaluation formula for the canonical internal compact-support adjunction",
+ "statement": "Let $A$ be a finite commutative ring, let $f:X\\to S$ be compactifiable [def-asd-compactifiable] between Noetherian schemes, and work in the ordinary unbounded etale derived categories [def-weil-pbc-derived-categories], with derived tensor [def-kun-derived-tensor] and internal Hom [def-pur-derived-internal-hom]. Let $M\\in D(X_{\\mathrm{et}},A)$ and $K,Q\\in D(S_{\\mathrm{et}},A)$. Write $\\alpha_{f,M,K}:Rf_*R\\mathcal Hom_A(M,f^\\times K)\\xrightarrow{\\sim}R\\mathcal Hom_A(Rf_!M,K)$ for the canonical internal adjunction [prop-asd-internal-adjunction], with $Rf_!$ the ordinary etale compact direct image [def-amb-etale-compact-support] and $f^\\times$ its right adjoint [thm-amb-etale-exceptional-adjoint], and $\\varepsilon_{f,K}:Rf_!f^\\times K\\to K$ for the exceptional counit. For a map $h:Q\\to Rf_*R\\mathcal Hom_A(M,f^\\times K)$ let $p:f^*Q\\otimes_A^L M\\to f^\\times K$ be its transpose under ordinary inverse-image and tensor--Hom adjunction. The tensor--Hom transpose of $\\alpha_{f,M,K}\\circ h$ is precisely\n$$Q\\otimes_A^L Rf_!M\\xrightarrow{\\Pi_{f,Q,M}}Rf_!(f^*Q\\otimes_A^L M)\\xrightarrow{Rf_!(p)}Rf_!f^\\times K\\xrightarrow{\\varepsilon_{f,K}}K.$$\nHere $\\Pi_{f,Q,M}$ is the canonical compact-support projection isomorphism: for a compactification $f=rj$, first apply the proper counit-defined projection map of [lem-amb-proper-coproducts-projection], then the extension-by-zero tensor identification [lem-pur-etale-open-derived-tensor] $r^*Q\\otimes_A^L j_!M\\cong j_!(f^*Q\\otimes_A^L M)$. This normalizes the displayed map on the ambient ordinary etale categories; it makes no constructibility assertion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+  "place": "Proof, last paragraph: evaluation and exceptional counit underlying the internal adjunction; see also prop-asd-internal-adjunction proof, displayed Hom bijections"
+ },
+ "stmt_deps": [
+  "def-asd-compactifiable",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-pur-derived-internal-hom",
+  "prop-asd-internal-adjunction",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-proper-coproducts-projection",
+  "def-amb-etale-compact-support",
+  "lem-pur-etale-open-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Write $H=R\\mathcal Hom_A(M,f^\\times K)$ and $U=Rf_*H$. We first spell out the ordinary inverse-image transpose on the unbounded categories. By [prop-weil-pbc-inverse-image-modules-exact], $f^*=f^{-1}$ is exact on constant-$A$ modules and is left adjoint to $f_*$. Choose a complex $T$ for a test object $B$ and a K-injective complex $I$ for $H$ by [prop-pur-kinjective-resolutions-exist]. Degreewise adjunction gives\n$$\\operatorname{Hom}_{K(S)}(T,f_*I)=\\operatorname{Hom}_{K(X)}(f^*T,I):$$\nit carries a chain homotopy $a-b=ds+sd$ to the same equation, by naturality of the sheaf adjunction. For acyclic $T$, $f^*T$ is acyclic, so this equality says that $f_*I$ is K-injective. The two applications of [lem-weil-pbc-kinjective-hom-derived] therefore give\n$$\\operatorname{Hom}_{D(S)}(B,U)=\\operatorname{Hom}_{K(S)}(T,f_*I)=\\operatorname{Hom}_{D(X)}(f^*B,H).$$\nHere $f_*I$ computes $Rf_*H$ by [lem-weil-pbc-kinjective-total-derived]: the functor $Q_Sf_*$ on homotopy categories is exact because additive $f_*$ respects the finite-sum matrices defining shifts and cones. These are natural bijections, and their inverse-image counit is denoted $e:f^*U\\to H$.",
+   "uses": [
     "prop-weil-pbc-inverse-image-modules-exact",
     "prop-pur-kinjective-resolutions-exist",
     "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; explicit exact-inverse-image specialization using derived.tex Tag 070I, lemma-K-injective, and Tag 070K, lemma-enough-K-injectives-implies"
+   }
+  },
+  {
+   "text": "For either small etale ringed site, put $H_A(C,D)=R\\mathcal Hom_A(C,D)$. Apply $H^0$ of derived global sections to the natural isomorphism $H_A(B,H_A(C,D))\\cong H_A(B\\otimes_A^L C,D)$ of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Applying [lem-pur-rhom-global-sections] to its two sides gives the natural bijection\n$$c_{B,C,D}:\\operatorname{Hom}(B,H_A(C,D))\\xrightarrow{\\sim}\\operatorname{Hom}(B\\otimes_A^LC,D).$$\nIts evaluation is $\\operatorname{ev}_{C,D}=c_{H_A(C,D),C,D}(1)$. Naturality in $B$ gives $c(a)=\\operatorname{ev}_{C,D}\\circ(a\\otimes1_C)$, by substituting $a:B\\to H_A(C,D)$ into the naturality square for the identity. Thus this is exactly the tensor--Hom transpose convention of the statement.",
+   "uses": [
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9, lemma-internal-hom, and 08JA, lemma-section-RHom-over-U; equation-internal-hom"
+   }
+  },
+  {
+   "text": "Choose a compactification $f=rj$ by [def-asd-compactifiable]. Its middle scheme is Noetherian: $r$ is of finite type by [def-weil-proper-morphism], hence locally of finite type and quasi-compact by [def-weil-finite-type-morphism]; [pqf-lem-locnoeth-lft] gives local Noetherianity. A finite affine cover of $S$, together with finite affine covers of its inverse images under $r$, gives quasi-compactness and a finite cover of the middle scheme by Noetherian affines. Apply [lem-amb-proper-coproducts-projection] to $j_!M$. Using $Rf_!=Rr_*j_!$ of [def-amb-etale-compact-support], compose its map with [lem-pur-etale-open-derived-tensor] to obtain\n$$\\Pi_{B,M}:B\\otimes_A^LRf_!M\\xrightarrow{\\sim}Rr_*(r^*B\\otimes_A^Lj_!M)\\xrightarrow{\\sim}Rf_!(f^*B\\otimes_A^LM).$$\nIn the second arrow interchange tensor factors, apply the cited open comparison, and interchange them back. This uses exactly the sign symmetries specified in the proper projection statement, not an independently chosen isomorphism. The identification $j^*r^*=f^*$ is composition of the ordinary inverse images. Both arrows are natural in $B,M$, and neither citation requires boundedness or constructibility. This is the projection map normalized in the item.",
+   "uses": [
     "def-asd-compactifiable",
     "def-weil-proper-morphism",
     "def-weil-finite-type-morphism",
     "pqf-lem-locnoeth-lft",
     "lem-amb-proper-coproducts-projection",
     "def-amb-etale-compact-support",
-    "lem-pur-etale-open-derived-tensor",
-    "thm-amb-etale-exceptional-adjoint",
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "prop-asd-internal-adjunction"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-pur-etale-open-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
-    "place": "Proof, full Hom-bijection chain, Yoneda, and evaluation/counit sentence; expanded using Stacks Tags 07A6, 08J9, 08JA and 0037"
+    "place": "Proof, third displayed bijection: proper projection formula on a compactification, preceded by extension by zero"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "The canonical internal adjunction for etale compact supports sends a pairing to compact direct image of evaluation followed by the exceptional counit",
-      "results": "CondensedSet.compactlyGeneratedAdjunction; CompHausLike.LocallyConstant.adjunction; CondensedSet.LocallyConstant.adjunction; CompHausLike.LocallyConstant.adjunction_counit; CompHausLike.LocallyConstant.adjunction_left_triangle; CondensedSet.topCatAdjunction; CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction; LightCondSet.LocallyConstant.adjunction",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Describe the Hom bijection of compact support internal duality by tensor evaluation and exceptional counit",
-      "results": "LightCondensed.ihomPoints; LightCondensed.ihomPoints_symm_apply; CharacterModule.homEquiv; LightCondensed.ihomPoints_apply; LightCondensed.ihomPoints_symm_comp; CategoryTheory.bijection; CharacterModule.dual_rTensor_conj_homEquiv; CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.homEquiv",
-      "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
-    },
-    {
-      "tool": "grep",
-      "query": "internalAdjunction|internal.*adjunction|exceptional.*counit",
-      "results": "0 hits",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Etale compact support internal adjunction evaluation pairing exceptional counit",
-      "results": "CategoryTheory.evaluationAdjunctionRight_counit_app_app; CategoryTheory.exp.ev; CategoryTheory.ihom.ev; CompHausLike.LocallyConstant.counit_app_val; CategoryTheory.ihom.ihom_adjunction_counit; CategoryTheory.Pi.closedCounit; CategoryTheory.evaluationAdjunctionLeft_counit_app; CompHausLike.LocallyConstant.counit",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Internal duality for etale compact direct image canonical evaluation formula",
-      "results": "LinearEquiv.trans_dualMap_symm_flip; LinearMap.IsPerfPair.dualEval; Module.evalEquiv_toLinearMap; Module.symm_dualMap_evalEquiv; Module.Dual.eval_comp_comp_evalEquiv_eq; Module.evalEquiv_apply; Module.evalEquiv; Module.Dual.eval_apply",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
-    },
-    {
-      "tool": "grep",
-      "query": "internalAdjunction|exceptional.*counit|compact.*support.*evaluation",
-      "results": "0 hits: ",
-      "date": "2026-10-17",
-      "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Internal adjunction for compact support direct image evaluation formula exceptional counit",
-      "results": "8 hits: CategoryTheory.evaluationAdjunctionRight_counit_app_app, CategoryTheory.ihom.ev, CondensedSet.topCatAdjunctionCounitEquiv, CategoryTheory.ObjectProperty.isColocal_adj_counit_app, CategoryTheory.Pi.closedCounit, CategoryTheory.evaluationAdjunctionLeft_counit_app, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.exp.ev",
-      "date": "2026-10-17",
-      "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.homEquiv_counit",
-      "results": "1 hits: CategoryTheory.Adjunction.homEquiv_counit",
-      "date": "2026-10-17",
-      "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Canonical internal adjunction for etale compact support sends a pairing to direct image of evaluation followed by the exceptional counit",
-      "results": "8 hits: CompHausLike.LocallyConstant.adjunction_left_triangle, CompHausLike.LocallyConstant.adjunction_counit, CompHausLike.LocallyConstant.adjunction, CompHausLike.LocallyConstant.adjunction_unit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, LightCondSet.topCatAdjunction",
-      "date": "2026-10-17",
-      "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
-    },
-    {
-      "tool": "leansearch",
-      "query": "For an adjunction the inverse hom equivalence sends a morphism to its left adjoint image composed with counit",
-      "results": "8 hits: CategoryTheory.Adjunction.homEquiv_symm_apply, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit, CategoryTheory.Adjunction.homEquiv, CategoryTheory.Monad.MonadicityInternal.comparisonLeftAdjointHomEquiv_symm_apply, CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.leftAdjointOfEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_unit",
-      "date": "2026-10-17",
-      "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Grothendieck internal duality projection formula tensor Hom adjunction identifies transpose with pushforward of a morphism followed by counit",
-      "results": "8 hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev_def, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, CategoryTheory.ExponentiableMorphism.coev_def, CategoryTheory.ExponentiableMorphism.pushforwardCurry, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.ExponentiableMorphism.coev",
-      "date": "2026-10-17",
-      "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-asd-smooth-generic-direct-image",
-    "date": "2026-10-17",
-    "group": "N6"
+  {
+   "text": "The Noetherian compactification of step 3 satisfies [thm-amb-etale-exceptional-adjoint], so $F=Rf_!$ is left adjoint to $G=f^\\times$. Apply the inverse-Hom formula of [lem-weil-pbc-adjunction-of-natural-bijection] with $P=f^*B\\otimes_A^LM$. It sends a map $p_B:P\\to f^\\times K$ to exactly\n$$\\varepsilon_{f,K}\\circ Rf_!(p_B):Rf_!(f^*B\\otimes_A^LM)\\longrightarrow K.$$\nThis fixes the direction and the counit of the exceptional transposition. It uses the ordinary unbounded exceptional adjunction, with $A$ finite as assumed, and imposes no invertibility condition on $|A|$.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; blueprint prop-asd-internal-adjunction.proof.md, second displayed bijection"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-cbc",
-  "blueprint": {
-    "from": {
-      "node": "lem-asd-smooth-generic-direct-image",
-      "place": "Proof, last paragraph, sentence beginning Naturality of internal adjunction: its evaluation formula",
-      "via": []
-    },
-    "same_as": [],
-    "is": null
+  {
+   "text": "Set $V=R\\mathcal Hom_A(Rf_!M,K)$. For every test object $B$ compose the bijections of steps 1, 2 and 4, precomposition with $\\Pi_{B,M}$ of step 3, and the inverse of the bijection of step 2 on $S$. This gives a bijection $\\Phi_B:\\operatorname{Hom}_S(B,U)\\to\\operatorname{Hom}_S(B,V)$. Explicitly, if $a:B\\to U$ and $p_B=c(e\\circ f^*a)$, then\n$$\\Phi_B(a)=c_{B,Rf_!M,K}^{-1}\\bigl(\\varepsilon_{f,K}\\circ Rf_!(p_B)\\circ\\Pi_{B,M}\\bigr).$$\nEach constituent is natural in $B$: the two adjunctions and $c$ are natural Hom bijections, and $\\Pi$ was shown natural in step 3. Their composite and its inverse are consequently natural in $B$. This is the full chain of Hom bijections in the blueprint, now with every arrow specified.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
+    "place": "Proof, full displayed chain of natural Hom bijections"
+   }
   },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-asd-internal-adjunction-evaluation",
-    "worker": "stage1",
-    "summary": "Expanded the canonical Hom-bijection construction and evaluated its action on an arbitrary map h. All ingredients are existing nodes; no new node, no changed statement, no Lean writing or compilation. Checked constant finite coefficients and unbounded ordinary etale typing, the proper/open projection normalization, and the direction of exceptional counit transposition.",
-    "blueprint": "Nearest ancestor lem-asd-smooth-generic-direct-image, final paragraph beginning Naturality of internal adjunction; steps 1-5 realize the Hom-bijection chain of prop-asd-internal-adjunction, step 6 the canonical representative and step 7 its evaluation/counit formula.",
-    "tool_uses": [
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "Small-ringed-site K-injective resolutions used to verify the unbounded ordinary inverse-image transpose; no replacement of the compact-support route."
-      },
-      {
-        "node": "lem-weil-pbc-kinjective-total-derived",
-        "why": "General unbounded K-injective computation of Rf_*; the compact-support unit does not state this foundational tool."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-        "why": "Only its natural internal tensor-Hom isomorphism is used, to recover the ordinary ringed-site tensor-Hom transpose."
-      },
-      {
-        "node": "lem-pur-rhom-global-sections",
-        "why": "Identifies H^0 of internal Hom with derived morphisms on a small ringed site; no coefficient comparison is inferred."
-      },
-      {
-        "node": "pqf-lem-locnoeth-lft",
-        "why": "Generic local Noetherianity under locally finite type morphisms verifies the compactification hypotheses."
-      }
-    ]
+  {
+   "text": "Define $\\theta=\\Phi_U(1_U):U\\to V$ and $\\psi=\\Phi_V^{-1}(1_V):V\\to U$. Naturality gives $\\Phi_B(a)=\\theta\\circ a$ and $\\Phi_B^{-1}(b)=\\psi\\circ b$. Taking $B=U,a=1_U$ and then $B=V,b=1_V$ in the inverse identities yields $\\psi\\theta=1_U$ and $\\theta\\psi=1_V$. Hence $\\theta$ is the isomorphism represented by the displayed Hom bijections. This construction identifies $\\theta$ with the canonical $\\alpha_{f,M,K}$ named in [prop-asd-internal-adjunction]: it is precisely the canonical representative of the chain in that source, rather than an arbitrary isomorphism between $U$ and $V$. No evaluation formula is taken from the proof of that node as a black box; the preceding steps constructed the representing map.",
+   "uses": [
+    "prop-asd-internal-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
+    "place": "Proof, Yoneda sentence, expanded by evaluating the natural bijections and their inverses at identities"
+   }
   },
-  "tool_uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections",
-    "pqf-lem-locnoeth-lft"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-Codex-Q18-f15e12c2d",
-    "group": "Q18",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-f15e12c2d (reviewer sub-agent of L); spot-checked: Reviewed item and all seven steps against every cited DAG statement, current/master blueprint proofs, and Stacks Tags 07A6, 08J9, 08JA, 0GL1, 070I, 070K, and 0037. Verified finite-coefficient ordinary unbounded etale categories, compactification/Noetherian hypotheses, projection-map normalization, counit direction, natural Hom-bijection evaluation, edge cases, and no duplicate or circular nodes. Full review written to review.md."
-  },
-  "lean": {
-    "module": "Sheaf.SmoothPurity.InternalAdjunctionEvaluation",
-    "declaration": "AlgebraicGeometry.Etale.internalAdjunctionEvaluation",
-    "statement": "theorem internalAdjunctionEvaluation (A : Type (u + 1)) [CommRing A] [Finite A] {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian S] [CompactSpace S] (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat A))) (K Q : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat A))) (h : Q ⟶ (R((f)_*[ModuleCat A])).obj (((RHom(X)[ModuleCat A]).obj (op M)).obj ((R(f)^![ModuleCat A]).obj K))) : ((derivedTensorSymmetry (ModuleCat A) S).hom.app Q).app ((R(f)_![ModuleCat A]).obj M) ≫ ((derivedTensorHomAdjunction (ModuleCat A) ((R(f)_![ModuleCat A]).obj M)).homEquiv Q K).symm (h ≫ (((derivedHomRightDerivedLowerShriekIsoOfFinite A f).app (op M)).app K).hom) = ((derivedTensorSymmetry (ModuleCat A) S).hom.app Q).app ((R(f)_![ModuleCat A]).obj M) ≫ ((projectionMap (ModuleCat A) f).app M).app Q ≫ (R(f)_![ModuleCat A]).map (((derivedTensorHomAdjunction (ModuleCat A) M).homEquiv (L((f)^*[ModuleCat A]).obj Q) ((R(f)^![ModuleCat A]).obj K)).symm (((derivedUpperStarLowerStarAdjunction (ModuleCat A) f).homEquiv Q (((RHom(X)[ModuleCat A]).obj (op M)).obj ((R(f)^![ModuleCat A]).obj K))).symm h)) ≫ (rightDerivedUpperShriekAdjunction (ModuleCat A) f).counit.app K",
-    "by": "Q74",
-    "date": "2026-10-17",
-    "existing": false,
-    "file": "lean/Sheaf/SmoothPurity/InternalAdjunctionEvaluation.lean",
-    "branch": "newtargets-dag",
-    "fixed_by": "NT-stage2-cc-ada15ea8a",
-    "note": "§1(B), module-format repair only: this recorded source lacks the module header, so Lean refuses its import from a module-format consumer. Add module and expose the existing three imports publicly; the declaration, its docstring, and its sorry proof are unchanged."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-24a2ff495",
-    "group": "Q74",
-    "result": "pass",
-    "note": "Reviewed the immutable node, dependencies, source, Lean modules, docstrings, edge cases, route-pivot compliance, report sections, scompile evidence, and deliver2 dry run; no substantive or mechanical faults found.; reverted the delivery's change of existing node(s) def-weil-pbc-constructible-complexes (--revert-nodes; kept as on newtargets-dag)"
+  {
+   "text": "Apply step 5 to $B=Q,a=h$. The map $p_Q=c(e\\circ f^*h)$ is the $p$ in the item, by steps 1 and 2. Step 6 gives $\\Phi_Q(h)=\\alpha_{f,M,K}\\circ h$. Apply $c_{Q,Rf_!M,K}$ to the equality of step 5; the consecutive $c,c^{-1}$ cancel. The resulting map is\n$$\\varepsilon_{f,K}\\circ Rf_!(p)\\circ\\Pi_{Q,M},$$\nwith the projection map of step 3 and the exceptional counit of step 4. This proves the asserted equality of morphisms for every $h$, on the ambient ordinary etale categories.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
+    "place": "Proof, final evaluation/counit sentence; specializes the explicit Hom-bijection calculation to the given h"
+   }
   }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
+  "place": "parametrized conjugate mate calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical internal adjunction for etale compact supports sends a pairing to compact direct image of evaluation followed by the exceptional counit",
+   "results": "CondensedSet.compactlyGeneratedAdjunction; CompHausLike.LocallyConstant.adjunction; CondensedSet.LocallyConstant.adjunction; CompHausLike.LocallyConstant.adjunction_counit; CompHausLike.LocallyConstant.adjunction_left_triangle; CondensedSet.topCatAdjunction; CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction; LightCondSet.LocallyConstant.adjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Describe the Hom bijection of compact support internal duality by tensor evaluation and exceptional counit",
+   "results": "LightCondensed.ihomPoints; LightCondensed.ihomPoints_symm_apply; CharacterModule.homEquiv; LightCondensed.ihomPoints_apply; LightCondensed.ihomPoints_symm_comp; CategoryTheory.bijection; CharacterModule.dual_rTensor_conj_homEquiv; CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "internalAdjunction|internal.*adjunction|exceptional.*counit",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale compact support internal adjunction evaluation pairing exceptional counit",
+   "results": "CategoryTheory.evaluationAdjunctionRight_counit_app_app; CategoryTheory.exp.ev; CategoryTheory.ihom.ev; CompHausLike.LocallyConstant.counit_app_val; CategoryTheory.ihom.ihom_adjunction_counit; CategoryTheory.Pi.closedCounit; CategoryTheory.evaluationAdjunctionLeft_counit_app; CompHausLike.LocallyConstant.counit",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal duality for etale compact direct image canonical evaluation formula",
+   "results": "LinearEquiv.trans_dualMap_symm_flip; LinearMap.IsPerfPair.dualEval; Module.evalEquiv_toLinearMap; Module.symm_dualMap_evalEquiv; Module.Dual.eval_comp_comp_evalEquiv_eq; Module.evalEquiv_apply; Module.evalEquiv; Module.Dual.eval_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state this ordinary etale compact-support assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "internalAdjunction|exceptional.*counit|compact.*support.*evaluation",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal adjunction for compact support direct image evaluation formula exceptional counit",
+   "results": "8 hits: CategoryTheory.evaluationAdjunctionRight_counit_app_app, CategoryTheory.ihom.ev, CondensedSet.topCatAdjunctionCounitEquiv, CategoryTheory.ObjectProperty.isColocal_adj_counit_app, CategoryTheory.Pi.closedCounit, CategoryTheory.evaluationAdjunctionLeft_counit_app, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.exp.ev",
+   "date": "2026-10-17",
+   "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_counit",
+   "date": "2026-10-17",
+   "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical internal adjunction for etale compact support sends a pairing to direct image of evaluation followed by the exceptional counit",
+   "results": "8 hits: CompHausLike.LocallyConstant.adjunction_left_triangle, CompHausLike.LocallyConstant.adjunction_counit, CompHausLike.LocallyConstant.adjunction, CompHausLike.LocallyConstant.adjunction_unit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, LightCondSet.topCatAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an adjunction the inverse hom equivalence sends a morphism to its left adjoint image composed with counit",
+   "results": "8 hits: CategoryTheory.Adjunction.homEquiv_symm_apply, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit, CategoryTheory.Adjunction.homEquiv, CategoryTheory.Monad.MonadicityInternal.comparisonLeftAdjointHomEquiv_symm_apply, CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.leftAdjointOfEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_unit",
+   "date": "2026-10-17",
+   "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck internal duality projection formula tensor Hom adjunction identifies transpose with pushforward of a morphism followed by counit",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev_def, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, CategoryTheory.ExponentiableMorphism.coev_def, CategoryTheory.ExponentiableMorphism.pushforwardCurry, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.ExponentiableMorphism.coev",
+   "date": "2026-10-17",
+   "verdict": "no match for the etale compact-support evaluation statement; abstract adjunction counit formulas are existing DAG ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-asd-smooth-generic-direct-image",
+  "date": "2026-10-17",
+  "group": "N6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "lem-asd-smooth-generic-direct-image",
+   "place": "Proof, last paragraph, sentence beginning Naturality of internal adjunction: its evaluation formula",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-asd-internal-adjunction-evaluation",
+  "worker": "stage1",
+  "summary": "Expanded the canonical Hom-bijection construction and evaluated its action on an arbitrary map h. All ingredients are existing nodes; no new node, no changed statement, no Lean writing or compilation. Checked constant finite coefficients and unbounded ordinary etale typing, the proper/open projection normalization, and the direction of exceptional counit transposition.",
+  "blueprint": "Nearest ancestor lem-asd-smooth-generic-direct-image, final paragraph beginning Naturality of internal adjunction; steps 1-5 realize the Hom-bijection chain of prop-asd-internal-adjunction, step 6 the canonical representative and step 7 its evaluation/counit formula.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Small-ringed-site K-injective resolutions used to verify the unbounded ordinary inverse-image transpose; no replacement of the compact-support route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "General unbounded K-injective computation of Rf_*; the compact-support unit does not state this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Only its natural internal tensor-Hom isomorphism is used, to recover the ordinary ringed-site tensor-Hom transpose."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Identifies H^0 of internal Hom with derived morphisms on a small ringed site; no coefficient comparison is inferred."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic local Noetherianity under locally finite type morphisms verifies the compactification hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q18-f15e12c2d",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-f15e12c2d (reviewer sub-agent of L); spot-checked: Reviewed item and all seven steps against every cited DAG statement, current/master blueprint proofs, and Stacks Tags 07A6, 08J9, 08JA, 0GL1, 070I, 070K, and 0037. Verified finite-coefficient ordinary unbounded etale categories, compactification/Noetherian hypotheses, projection-map normalization, counit direction, natural Hom-bijection evaluation, edge cases, and no duplicate or circular nodes. Full review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.SmoothPurity.InternalAdjunctionEvaluation",
+  "declaration": "AlgebraicGeometry.Etale.internalAdjunctionEvaluation",
+  "statement": "theorem internalAdjunctionEvaluation (A : Type (u + 1)) [CommRing A] [Finite A] {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian S] [CompactSpace S] (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat A))) (K Q : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat A))) (h : Q ⟶ (R((f)_*[ModuleCat A])).obj (((RHom(X)[ModuleCat A]).obj (op M)).obj ((R(f)^![ModuleCat A]).obj K))) : ((derivedTensorSymmetry (ModuleCat A) S).hom.app Q).app ((R(f)_![ModuleCat A]).obj M) ≫ ((derivedTensorHomAdjunction (ModuleCat A) ((R(f)_![ModuleCat A]).obj M)).homEquiv Q K).symm (h ≫ (((derivedHomRightDerivedLowerShriekIsoOfFinite A f).app (op M)).app K).hom) = ((derivedTensorSymmetry (ModuleCat A) S).hom.app Q).app ((R(f)_![ModuleCat A]).obj M) ≫ ((projectionMap (ModuleCat A) f).app M).app Q ≫ (R(f)_![ModuleCat A]).map (((derivedTensorHomAdjunction (ModuleCat A) M).homEquiv (L((f)^*[ModuleCat A]).obj Q) ((R(f)^![ModuleCat A]).obj K)).symm (((derivedUpperStarLowerStarAdjunction (ModuleCat A) f).homEquiv Q (((RHom(X)[ModuleCat A]).obj (op M)).obj ((R(f)^![ModuleCat A]).obj K))).symm h)) ≫ (rightDerivedUpperShriekAdjunction (ModuleCat A) f).counit.app K",
+  "by": "Q74",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/SmoothPurity/InternalAdjunctionEvaluation.lean",
+  "branch": "newtargets-dag",
+  "fixed_by": "NT-stage2-cc-ada15ea8a",
+  "note": "§1(B), module-format repair only: this recorded source lacks the module header, so Lean refuses its import from a module-format consumer. Add module and expose the existing three imports publicly; the declaration, its docstring, and its sorry proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-24a2ff495",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source, Lean modules, docstrings, edge cases, route-pivot compliance, report sections, scompile evidence, and deliver2 dry run; no substantive or mechanical faults found.; reverted the delivery's change of existing node(s) def-weil-pbc-constructible-complexes (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261020T221117-L-4145759",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

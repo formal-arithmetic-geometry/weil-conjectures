@@ -1,0 +1,144 @@
+{
+ "id": "lem-asd-internal-adjunction-evaluation-mate-core",
+ "kind": "statement",
+ "title": "Parametrized mate core for internal adjunction evaluation",
+ "statement": "The tensor-Hom transpose of the parametrized conjugate of the projection map is projection followed by tensor transpose and exceptional counit.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+  "place": "Proof, last paragraph: evaluation and exceptional counit underlying the internal adjunction; see also prop-asd-internal-adjunction proof, displayed Hom bijections"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Expand the parametrized conjugate and use conjugateEquiv counit naturality to identify its transpose with projection followed by tensor transpose and exceptional counit.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adjunction conjugate projection tensor counit",
+   "results": "no direct match",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction homEquiv conjugateEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv",
+   "date": "2026-10-21",
+   "verdict": "used"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit",
+   "results": "Mathlib CategoryTheory.Adjunction.Mates",
+   "date": "2026-10-21",
+   "verdict": "used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SmoothPurity.InternalAdjunctionEvaluation",
+  "date": "2026-10-21",
+  "group": "D3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-internal-adjunction-evaluation",
+   "place": "parametrized conjugate mate calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-asd-internal-adjunction-evaluation",
+  "worker": "stage1",
+  "summary": "Expanded the canonical Hom-bijection construction and evaluated its action on an arbitrary map h. All ingredients are existing nodes; no new node, no changed statement, no Lean writing or compilation. Checked constant finite coefficients and unbounded ordinary etale typing, the proper/open projection normalization, and the direction of exceptional counit transposition.",
+  "blueprint": "Nearest ancestor lem-asd-smooth-generic-direct-image, final paragraph beginning Naturality of internal adjunction; steps 1-5 realize the Hom-bijection chain of prop-asd-internal-adjunction, step 6 the canonical representative and step 7 its evaluation/counit formula.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Small-ringed-site K-injective resolutions used to verify the unbounded ordinary inverse-image transpose; no replacement of the compact-support route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "General unbounded K-injective computation of Rf_*; the compact-support unit does not state this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Only its natural internal tensor-Hom isomorphism is used, to recover the ordinary ringed-site tensor-Hom transpose."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Identifies H^0 of internal Hom with derived morphisms on a small ringed site; no coefficient comparison is inferred."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic local Noetherianity under locally finite type morphisms verifies the compactification hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261020T221117-L-4145759",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SmoothPurity.InternalAdjunctionEvaluation",
+  "declaration": "AlgebraicGeometry.Etale.internalAdjunctionEvaluation_mate_core",
+  "statement": "theorem internalAdjunctionEvaluation_mate_core (A : Type (u + 1)) [CommRing A] [Finite A] {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat A))) (K Q : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat A))) (h : Q ⟶ (R((f)_*[ModuleCat A])).obj (((RHom(X)[ModuleCat A]).obj (op M)).obj ((R(f)^![ModuleCat A]).obj K))) : ((derivedTensorHomAdjunction (ModuleCat A) ((R(f)_![ModuleCat A]).obj M)).homEquiv Q K).symm (h ≫ (((derivedHomRightDerivedLowerShriekIsoOfFinite A f).app (op M)).app K).hom) = ((projectionMap (ModuleCat A) f).app M).app Q ≫ (R(f)_![ModuleCat A]).map (((derivedTensorHomAdjunction (ModuleCat A) M).homEquiv (L((f)^*[ModuleCat A]).obj Q) ((R(f)^![ModuleCat A]).obj K)).symm (((derivedUpperStarLowerStarAdjunction (ModuleCat A) f).homEquiv Q (((RHom(X)[ModuleCat A]).obj (op M)).obj ((R(f)^![ModuleCat A]).obj K))).symm h)) ≫ (rightDerivedUpperShriekAdjunction (ModuleCat A) f).counit.app K",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-21",
+  "existing": false,
+  "file": "lean/Sheaf/SmoothPurity/InternalAdjunctionEvaluation.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-24a2ff495",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source, Lean modules, docstrings, edge cases, route-pivot compliance, report sections, scompile evidence, and deliver2 dry run; no substantive or mechanical faults found.; reverted the delivery's change of existing node(s) def-weil-pbc-constructible-complexes (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261020T221117-L-4145759",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
