@@ -1,0 +1,137 @@
+{
+ "id": "lemma-weil-pbc-projection-formula-open-piece-existence",
+ "kind": "statement",
+ "title": "Existence of the normalized open-immersion tensor map",
+ "statement": "Under the hypotheses of lemma-weil-pbc-projection-formula-open-piece, there exists a natural isomorphism beta from openTensorSource to openTensorTarget whose inverse satisfies the displayed normalized adjunction equation for every derived object and every strict-perfect coefficient.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-open-piece.md",
+  "place": "The existence portion of the proof of node lemma-weil-pbc-projection-formula-open-piece, order 1269"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projection-compactification",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-projection-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized comparison for finite-free coefficients by transposing the adjunction unit and the ordinary restriction-tensor comparison, then prove it is invertible by the finite-sum coproduct universal property.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the finite-free comparison across the degreewise strict-perfect retracts, form the signed finite total map, and use the K-flat resolution and derived tensor descent interfaces to obtain the required derived natural isomorphism.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-open-piece.md",
+  "place": "Proof steps 1-5, finite-free retract and signed-totalization construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized open immersion tensor projection formula for extension by zero and strict-perfect derived coefficients",
+   "results": "No exact declaration; results concern generic tensor and adjunction maps but do not state this sheaf-theoretic normalized comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero tensor bounded finite projective derived sheaf",
+   "results": "No exact projection-formula declaration; only internally projective condensed tensor results.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "extension by zero tensor",
+   "results": "No matching declaration.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection formula tensor extension",
+   "results": "No exact match in Mathlib or existing source modules.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OpenImmersionTensorPiece",
+  "date": "2026-10-21",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-projection-formula-open-piece",
+   "place": "Existence part of the imported proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenImmersionTensorPiece",
+  "file": "lean/Sheaf/Paper/OpenImmersionTensorPiece.lean",
+  "declaration": "SheafOfModules.openImmersionTensor_exists",
+  "statement": "theorem openImmersionTensor_exists {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) [QuasiCompact c.i] (R : Sheaf (ProEt.topology c.Z) CommRingCat.{u + 1}) (a : TensorModel R) (b : TensorModel (R.over (ProEt.mk c.i))) (r : Restriction R (ProEt.mk c.i)) (t : openTensorRestrictionComparison R (ProEt.mk c.i) a b r) : letI : (localizedModuleRestriction R (ProEt.mk c.i)).Additive := localizedModuleRestriction_additive R (ProEt.mk c.i) ∃ beta : openTensorSource R (ProEt.mk c.i) a ≅ openTensorTarget R (ProEt.mk c.i) b, ∀ (E : Der (R.over (ProEt.mk c.i))) (F : (openTensorCoefficients R).FullSubcategory), (localizedModuleDerivedAdjunction R (ProEt.mk c.i)).homEquiv _ _ (beta.inv.app (E, F)) = b.functor.map (CategoryTheory.Prod.mkHom ((localizedModuleDerivedAdjunction R (ProEt.mk c.i)).unit.app E) (𝟙 ((localizedModuleRestriction R (ProEt.mk c.i)).mapDerivedCategory.obj F.obj))) ≫ t.comparison.inv.app ((localizedModuleExtension R (ProEt.mk c.i)).mapDerivedCategory.obj E, F.obj)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T230725-L-605152",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T230725-L-605152",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

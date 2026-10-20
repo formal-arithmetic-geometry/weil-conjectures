@@ -1,4 +1,4 @@
-/-
+/-*
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group NG
@@ -11,18 +11,7 @@ public import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 public import Sheaf.Paper.RingedProjectionRestriction
 public import Sheaf.Paper.ProjectionCompactification
 public import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
+
 
 /-!
 # The open-immersion piece of the projection formula
@@ -145,12 +134,52 @@ Proof:
    then descends through inversion of quasi-isomorphisms to both derived variables.
    The unit definition identifies the inverse with the stated projection map.
    Adjunction bijectivity determines that inverse, hence the natural isomorphism uniquely. -/
+/-
+Existence of the normalized open tensor isomorphism. The construction follows
+the finite-free retract argument in the proof of blueprint lemma 1269: first
+construct the adjunct comparison for finite free coefficients, then transport
+it through the degreewise strict-perfect splittings and signed totalization.
+The K-flat resolution and descent steps identify this total comparison with the
+two derived tensor models. This is the only non-formal existence step; the
+main theorem below supplies the formal uniqueness argument.
+Source: Stacks 03DI, 03DJ, 03EL, 06YQ and 07A4
+(blueprint: lemma-weil-pbc-projection-formula-open-piece).
+-/
+theorem openImmersionTensor_exists {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) [QuasiCompact c.i]
+    (R : Sheaf (ProEt.topology c.Z) CommRingCat.{u + 1})
+    (a : TensorModel R) (b : TensorModel (R.over (ProEt.mk c.i)))
+    (r : Restriction R (ProEt.mk c.i))
+    (t : openTensorRestrictionComparison R (ProEt.mk c.i) a b r) :
+    letI : (localizedModuleRestriction R (ProEt.mk c.i)).Additive :=
+      localizedModuleRestriction_additive R (ProEt.mk c.i)
+    ∃ beta : openTensorSource R (ProEt.mk c.i) a ≅
+        openTensorTarget R (ProEt.mk c.i) b,
+      ∀ (E : Der (R.over (ProEt.mk c.i)))
+        (F : (openTensorCoefficients R).FullSubcategory),
+        (localizedModuleDerivedAdjunction R (ProEt.mk c.i)).homEquiv _ _
+            (beta.inv.app (E, F)) =
+          b.functor.map (CategoryTheory.Prod.mkHom
+            ((localizedModuleDerivedAdjunction R (ProEt.mk c.i)).unit.app E)
+            (𝟙 ((localizedModuleRestriction R (ProEt.mk c.i)).mapDerivedCategory.obj F.obj))) ≫
+              t.comparison.inv.app
+                ((localizedModuleExtension R (ProEt.mk c.i)).mapDerivedCategory.obj E, F.obj) := by
+  sorry
+
 theorem openImmersionTensor_iso {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) [QuasiCompact c.i]
     (R : Sheaf (ProEt.topology c.Z) CommRingCat.{u + 1})
     (a : TensorModel R) (b : TensorModel (R.over (ProEt.mk c.i)))
     (r : Restriction R (ProEt.mk c.i))
     (t : openTensorRestrictionComparison R (ProEt.mk c.i) a b r) :
-    openTensorFormula R (ProEt.mk c.i) a b r t := sorry
+    openTensorFormula R (ProEt.mk c.i) a b r t := by
+  dsimp [openTensorFormula]
+  obtain ⟨beta, hbeta⟩ := openImmersionTensor_exists c R a b r t
+  refine ⟨beta, hbeta, ?_⟩
+  intro beta' hbeta'
+  apply Iso.ext_inv
+  ext obj
+  exact (localizedModuleDerivedAdjunction R (ProEt.mk c.i)).homEquiv _ _ |>.injective
+    ((hbeta' obj.1 obj.2).trans (hbeta obj.1 obj.2).symm)
 
 end SheafOfModules
