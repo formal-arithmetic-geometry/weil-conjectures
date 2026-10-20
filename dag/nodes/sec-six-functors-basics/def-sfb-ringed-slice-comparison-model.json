@@ -122,7 +122,7 @@
   }
  ],
  "lean": {
-  "module": "Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose",
+  "module": "Sheaf.Algebra.Homology.RingedSliceEvaluationModels",
   "declaration": "CategoryTheory.RingedSliceEvaluationNormalized",
   "declarations": [
    "CategoryTheory.ringedSliceComplexRestriction",
@@ -143,7 +143,8 @@
   "by": "Q30",
   "date": "2026-10-18",
   "existing": true,
-  "note": "The existing definitions are recorded by this definition node, not by the evaluation-transpose theorem: no theorem conclusion is used as a definition. Existing:true reuses their single published implementation, with no private copy or duplicate declaration."
+  "note": "The existing definitions are recorded by this definition node, not by the evaluation-transpose theorem: no theorem conclusion is used as a definition. Existing:true reuses their single published implementation, with no private copy or duplicate declaration.",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceEvaluationModels.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -160,5 +161,15 @@
   "group": "Q30",
   "result": "pass",
   "note": "Third delivery; fixes F1-F3 of the f471 RETURN. F1: the slice clause now uses the framework's native local derived tensor (Mod.derivedMonoidalCategory), MonoidalClosed.internalHom (DerivedCategory.monoidalClosed, same construction as the global CondensedRing.derivedHom) and the native counit, none of them transported from S_U. SliceTensorComparison is pinned on K-flat representatives by the unique summand/pure-tensor total comparison (exists-unique with HEq). SliceHomComparison gives theta^U on all local objects with the native evaluation equation and the Step-5 restriction square (variances checked: (c K).inv.op contravariant, (c N).hom covariant); r_U is its unique lift. Global theta/evaluation clause unchanged and correct. No extra hypotheses or universe restrictions; edge cases (empty scheme, zero ring, U=X, unbounded complexes) admitted. lean.statement verbatim for the item and the 3 owned def nodes; all declarations exist; item stmt_deps only gain def nodes used in the Lean. F2: the second reading is substantive. F3: nt_compile --json clean, no errors or warnings: 31.3/3.8/47.4/16.4 s (limit 60 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-13f8a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261020T221240-L-4163737",
+  "kind": "interface",
+  "note": "independent cc review: item Lean and 5 new/moved modules vs live RingedSliceEvaluationTranspose (12 defs moved byte-identical to RingedSliceEvaluationModels, theorem signature identical) and the item/def/new node records; 5 direct importers compiled against the delivery"
  }
 }

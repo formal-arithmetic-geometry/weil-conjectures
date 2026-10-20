@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-ringed-slice-evaluation-coherence",
+ "kind": "statement",
+ "title": "The normalized slice comparisons preserve the evaluation counit",
+ "statement": "Under the independent-universe ringed-site hypotheses and closed structures S,S_U with canonical representative models T,T_U [def-coef-ringed-tensor-hom-model], let d be slice comparison data [def-sfb-ringed-slice-comparison-model]. Assume only its pure-tensor normalization and local Hom-family normalization. For every pair L,M in D(A), the tensor-Hom counits satisfy rho(H(L,M),L)^(-1) followed by r(ev(L,M)) = (eta(L,M) tensor identity) followed by ev_U(rL,rM). This statement does not construct d, assert transpose compatibility, or use either Koszul normalization.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 (lemma-internal-hom and equation-internal-hom), 08JB (lemma-restriction-RHom-to-U), and canonical complex evaluation in lemma-compose."
+ },
+ "stmt_deps": [
+  "def-sfb-ringed-slice-comparison-model",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation is natural in an isomorphism e:P≅L and a target map g:Q→M: tensor(H(e.inv,g),e.hom) followed by ev(L,M) equals ev(P,Q) followed by g. This follows from the source extranaturality field of the closed structure, naturality of the adjunction counit in the target, functoriality of tensor and H, and e.hom≫e.inv=identity.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Using this identity on both categories and simultaneous naturality of rho and eta, transport a normalized evaluation square along isomorphisms in both arguments. Precompose by tensor(rH(e.inv,eprime.hom),r(e.hom)), an isomorphism. Naturality of rho moves its inverse to the left, evaluation naturality identifies the left side with restricted old evaluation followed by r(eprime.hom), and eta naturality plus slice evaluation naturality identifies the right side with old slice evaluation followed by the same map. Apply the old square and cancel only the precomposed isomorphism.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-sfb-ringed-slice-comparison-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose complex representatives X,Y of L,M. Take a flat-term K-flat resolution P→X and the fixed functorial K-injective replacement I of Y. Their augmentations are quasi-isomorphisms, so localization supplies Q(P)≅L and Q(I)≅M. Convert the resolution theorem's exactness-of-tensor-right property to the recorded flatness using siteSheafTensorRightIso. Apply the representative evaluation theorem to P,I and the preceding transport lemma to the two isomorphisms.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ringed-slice-representative-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-sfb-ringed-slice-comparison-model",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-slice-representative-evaluation",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 and 08JB. The representative computation is separate; the Lean proof constructs resolutions and proves categorical transport to arbitrary objects."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction to a slice preserves the normalized derived tensor and internal Hom comparisons",
+   "results": "Eight hits: restrict-scalars normed spaces, homological-complex restriction, LightCondensed.ihomPoints; no ringed-site derived normalization theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A restriction functor on complexes preserves the Koszul symmetry of a sheafified total tensor complex",
+   "results": "Eight hits: HomologicalComplex HasGoodTensor, HasTensor, tensorObj and ιTensorObj. These provide total tensor infrastructure, not the slice normalized square.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_symm_apply",
+   "results": "One match: the generic counit expression for inverse transposition; used in the item proof.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientTensorGenerator|RingedSliceHomModel|RingedSliceTensorModel",
+   "results": "Mathlib search returned no hits. Local project search finds only the existing model definitions and their consumers; no comparison-existence or evaluation-coherence theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose",
+  "date": "2026-10-21",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-delta-restriction",
+   "place": "Tags 08J9 (lemma-internal-hom and equation-internal-hom), 08JB (lemma-restriction-RHom-to-U), and canonical complex evaluation in lemma-compose.",
+   "via": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSliceEvaluationCoherence",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceEvaluationCoherence.lean",
+  "declaration": "CategoryTheory.ringedSlice_evaluation_coherence",
+  "statement": "theorem ringedSlice_evaluation_coherence\n    (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂\n      CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]\n    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J A))\n    (T : CoefficientTensorModels.{u, c, v, w} J A S)\n    (SU : CoefficientClosedStructure\n      (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)))\n    (TU : CoefficientTensorModels.{u, max c v, v, w'} (J.over U) (A.over U) SU)\n    (d : RingedSliceEvaluationComparisons (derivedInternalHomOfUniverses.{c, v, u, w} J A)\n      (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U))\n      (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U) S SU (RingedSliceFlatRestriction.{c, v,\n      u} J A U))\n      (ht : RingedSliceTensorModel.{c, v, u, w, w'} J A U S T SU TU d)\n      (hh : RingedSliceHomModel.{c, v, u, w, w'} J A U S T SU TU d)\n      (L M : DerivedCategory (SheafOfModules.{max c v u} ((sheafCompose J (forget₂\n        CommRingCat.{max c v u} RingCat.{max c v u})).obj A))) :\n    (d.rho ((derivedInternalHomOfUniverses.{c, v, u, w} J A).obj (op L, M)) L).inv ≫\n        (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).map\n            (S.evaluation L M) =\n      SU.tensor.map (X := ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj\n        ((derivedInternalHomOfUniverses.{c, v, u, w} J A).obj (op L, M)),\n        (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L)) (Y :=\n        ((derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)).obj (op\n        ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L),\n        (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj M),\n        (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L)) ((d.eta L M).hom, 𝟙 _) ≫\n        SU.evaluation\n          ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L)\n          ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj M)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-13f8a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261020T221240-L-4163737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-13f8a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261020T221240-L-4163737",
+  "kind": "interface",
+  "note": "independent cc review: item Lean and 5 new/moved modules vs live RingedSliceEvaluationTranspose (12 defs moved byte-identical to RingedSliceEvaluationModels, theorem signature identical) and the item/def/new node records; 5 direct importers compiled against the delivery"
+ }
+}

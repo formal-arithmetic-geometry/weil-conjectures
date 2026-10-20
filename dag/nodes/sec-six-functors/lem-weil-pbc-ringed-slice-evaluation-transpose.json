@@ -27,111 +27,46 @@
  ],
  "proof": [
   {
-   "text": "Choose a flat-term K-flat complex $P$ representing $L$, a K-injective complex $I$ representing $M$, and put $A=\\mathcal Hom^\\bullet(P,I)$. Then $A$ represents $H(L,M)$ by the derived-Hom definition. Choose also a flat-term K-flat resolution $q:Q\\to A$. These resolutions exist for arbitrary unbounded complexes by the two cited existence statements. Apply the K-flat pullback clause to the localization morphism with identity ring map: $rP,rQ$ are K-flat with flat terms. The restriction theorem makes $rI$ K-injective. Exact restriction represents $r$ on these complexes and takes $q$ to a quasi-isomorphism. Thus the tensor of the two K-flat models $Q,P$, and the Hom models $A$ and $\\mathcal Hom^\\bullet(rP,rI)$, compute all objects in the evaluation square.",
+   "text": "Construct the normalized comparison datum by the independent existence theorem. This is exactly the existence conjunct; no equations are used to choose the comparison data.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "lem-pur-kinjective-restrict-localized",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-pbc-ringed-derived-restriction",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-pbc-ringed-slice-normalized-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 08FI (lemma-restrict-K-injective-to-open), 08J7 (section-internal-hom); K-injectives via injectives.tex Tag 079P"
-   }
+   "elementary": false
   },
   {
-   "text": "For a test object $V\\to U$, relocalization identifies $(\\mathcal C/U)/(V/U)$ with $\\mathcal C/V$, with the same covering families. A degree-$n$ local section of $rA$ is therefore exactly the family of local module maps $P^p|_V\\to I^{p+n}|_V$ defining a degree-$n$ section of $\\mathcal Hom^\\bullet(rP,rI)$. This identification commutes with every restriction map and with $d(h)=d_Ih-(-1)^n h d_P$, since both sides have identical components. It is precisely the normalized comparison $\\eta$ in the statement and the restriction isomorphism of the cited internal-Hom theorem. On the tensor side, $\\rho$ is well defined and natural. For K-flat flat-term $P,R$, [lem-sfb-localized-site-tensor-restriction] gives summand isomorphisms sending $x\\otimes y$ to $x\\otimes y$, natural in both factors. Restriction commutes with the direct sums of $\\operatorname{Tot}$: a sheaf sum is the sheafified presheaf sum (sheafification is a left adjoint), presheaf sums restrict sectionwise, and slice restriction commutes with sheafification [lem-cbc-sieve-slice-sheafification, def-weil-presheaf-modules-sheafification]. The summand maps preserve $d\\otimes1$ and $(-1)^p1\\otimes d$ by naturality and additivity, so they form a chain isomorphism natural in chain maps and homotopies. The descent statement extends it uniquely to a natural isomorphism on $D(\\mathcal O)\\times D(\\mathcal O)$; this is the 07A4 comparison.",
+   "text": "For any normalized datum, its tensor and Hom normalizations give the evaluation equation by the separate counit-coherence theorem.",
    "uses": [
-    "def-pur-localized-ringed-site",
-    "def-pur-hom-complex",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sfb-localized-site-tensor-restriction",
-    "lem-cbc-sieve-slice-sheafification",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-pbc-ringed-slice-evaluation-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 0A8X (section-hom-complexes), 07A4 (lemma-pullback-tensor-product); sites.tex Tag 03EH (lemma-relocalize)"
-   }
+   "elementary": false
   },
   {
-   "text": "Compute evaluation using $q:Q\\to A$ and the canonical representative normalization of the tensor-Hom counit: it is represented by the chain map $\\operatorname{Tot}(Q\\otimes P)\\to I$ with local formula $x\\otimes p\\mapsto q(x)(p)$. This is the normalization of [def-coef-ringed-tensor-hom-model] applied with target complex $I$; replacing the fixed K-injective model of $I$ by $I$ uses the canonical independence in the derived-Hom definition. The formula is a chain map: for $|x|=a$, $d_I(q(x)(p))=q(dx)(p)+(-1)^a q(x)(d_Pp)$, exactly the total differential. Restricting gives the identical formula $x\\otimes p\\mapsto (rq)(x)(p)$ into $rI$. By step 2, this is also slice evaluation after $\\eta\\otimes1$, on the common model $\\operatorname{Tot}(rQ\\otimes rP)$. The tensor comparison of step 2 identifies that model with the restriction of the source. Local pure tensors generate the sheafified tensor and its total-complex summands; hence these chain maps agree. Passing to the derived categories and cancelling the model isomorphisms proves the first equation. No claim that $A$ itself is K-flat is needed.",
+   "text": "Put $g=\\operatorname{tr}(f)$, so by the definition of the adjunction counit $\\operatorname{ev}_{L,M}\\circ(g\\otimes1)=f$. Untranspose the proposed right side $\\eta_{L,M}\\circ r(g)$ in the slice. Step 2 and bifunctoriality of tensor give\n$$\\operatorname{ev}_{rL,rM}\\circ((\\eta\\circ r(g))\\otimes1)=r(\\operatorname{ev}_{L,M})\\circ\\rho_{H(L,M),L}^{-1}\\circ(r(g)\\otimes1).$$\nNaturality of $\\rho$ (a field of the comparison datum), applied to the actual derived arrow $g$, identifies the last two factors with $r(g\\otimes1)\\circ\\rho_{T,L}^{-1}$. Functoriality of $r$ and the displayed counit identity therefore make this composite $r(f)\\circ\\rho_{T,L}^{-1}$. The slice adjunction bijection is injective, so transposing proves the second equation. This calculation takes place in the derived category and covers arbitrary derived morphisms $f$.",
    "uses": [
     "def-coef-ringed-tensor-hom-model",
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "def-sfb-ringed-slice-comparison-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), its canonical tensor-Hom identification from the complex adjunction in lemma-compose; Tag 0A95 (lemma-RHom-well-defined). The counit formula is evaluated on the K-flat model Q of the Hom object."
-   }
+   "elementary": true
   },
   {
-   "text": "Put $g=\\operatorname{tr}(f)$, so by the definition of the adjunction counit $\\operatorname{ev}_{L,M}\\circ(g\\otimes1)=f$. Untranspose the proposed right side $\\eta_{L,M}\\circ r(g)$ in the slice. Step 3 and bifunctoriality of tensor give\n$$\\operatorname{ev}_{rL,rM}\\circ((\\eta\\circ r(g))\\otimes1)=r(\\operatorname{ev}_{L,M})\\circ\\rho_{H(L,M),L}^{-1}\\circ(r(g)\\otimes1).$$\nNaturality of $\\rho$ (step 2), applied to the actual derived arrow $g$, identifies the last two factors with $r(g\\otimes1)\\circ\\rho_{T,L}^{-1}$. Functoriality of $r$ and the displayed counit identity therefore make this composite $r(f)\\circ\\rho_{T,L}^{-1}$. The slice adjunction bijection is injective, so transposing proves the second equation. This calculation takes place in the derived category and covers arbitrary derived morphisms $f$.",
+   "text": "Apply the proved Koszul-coherence theorem to the tensor and both signed-exchange normalizations. Its proof compares actual local generators and transports the square through K-flat resolutions.",
    "uses": [
-    "def-coef-ringed-tensor-hom-model",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-pbc-ringed-derived-restriction",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-pbc-ringed-slice-koszul-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), equation-internal-hom and its counit; Tag 07A4 naturality. Formal counit calculation realizing the transpose sentence of lem-weil-delta-restriction.proof.md"
-   }
-  },
-  {
-   "text": "For the symmetry equation choose flat-term K-flat models $P,R$ of $L,M$ using the resolution theorem. Their restrictions are flat-term K-flat by the pullback theorem, so by the normalization of $\\rho$ (summand isomorphisms of [lem-sfb-localized-site-tensor-restriction]) the tensor comparisons are represented on $\\operatorname{Tot}(P\\otimes R)$ and $\\operatorname{Tot}(R\\otimes P)$. In degrees $a,b$, both composites send a local $p\\otimes z$ to $(-1)^{ab}z\\otimes p$: restriction changes neither degrees nor the scalar $(-1)^{ab}$. The map respects differentials because the tensor differentials have signs $(-1)^a$ and $(-1)^b$, respectively, and the two resulting exponents agree modulo two. Equality on these local generators gives equality on the sheafified tensors and direct-sum total complexes. Their images in the derived categories are the canonical Koszul symmetries and tensor comparisons, proving the third equation.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pur-localized-ringed-site",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sfb-localized-site-tensor-restriction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 07A4 and Section 06YL; sites-modules.tex Section 03EK (section-tensor-product); homology.tex Definition 012Z (definition-associated-simple-complex). Direct Koszul-sign calculation."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-coef-ringed-tensor-hom-model",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-pur-localized-ringed-site",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-ringed-derived-restriction",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-cbc-sieve-slice-sheafification",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-sfb-localized-site-tensor-restriction",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-pur-kinjective-resolutions-exist"
+  "def-sfb-ringed-slice-comparison-model",
+  "lem-weil-pbc-ringed-slice-evaluation-coherence",
+  "lem-weil-pbc-ringed-slice-koszul-coherence",
+  "lem-weil-pbc-ringed-slice-normalized-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-delta-restriction.proof.md",
-  "place": "Proof paragraph on exact monoidal restriction, evaluation, and tensor–Hom transpose; the representative-level normalization is made explicit here"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9 and 08JB; construction and evaluation separated into their own lemmas, transpose proved from the counit bijection, and Koszul compatibility proved on generators."
  },
  "mathlib_searches": [
   {
@@ -414,18 +349,6 @@
   "module": "Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose",
   "declaration": "CategoryTheory.ringedSlice_evaluation_transpose",
   "declarations": [
-   "CategoryTheory.ringedSliceComplexRestriction",
-   "CategoryTheory.coefficientHomAugmentation",
-   "CategoryTheory.ringedSliceDerivedRestriction",
-   "CategoryTheory.ringedSliceLocalizationIso",
-   "CategoryTheory.RingedKInjectiveHomModel",
-   "CategoryTheory.RingedSliceFlatRestriction",
-   "CategoryTheory.RingedSliceEvaluationComparisons",
-   "CategoryTheory.RingedSliceTensorModel",
-   "CategoryTheory.RingedSliceHomModel",
-   "CategoryTheory.RingedSliceKoszulModel",
-   "CategoryTheory.RingedSliceKoszulModelU",
-   "CategoryTheory.RingedSliceEvaluationNormalized",
    "CategoryTheory.ringedSlice_evaluation_transpose"
   ],
   "file": "lean/Sheaf/Algebra/Homology/RingedSliceEvaluationTranspose.lean",
@@ -444,5 +367,15 @@
   "group": "Q03",
   "result": "fix",
   "note": "Full review recorded in review.md. Mathematics, canonical normalizations, universes and signatures are correct. Complete fixes repair H9 missing proof-dependency imports and update the report. Original and replacement modules compile cleanly through scompile.py. Branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-13f8a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261020T221240-L-4163737",
+  "kind": "interface",
+  "note": "independent cc review: item Lean and 5 new/moved modules vs live RingedSliceEvaluationTranspose (12 defs moved byte-identical to RingedSliceEvaluationModels, theorem signature identical) and the item/def/new node records; 5 direct importers compiled against the delivery"
  }
 }

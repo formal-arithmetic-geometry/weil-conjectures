@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-ringed-slice-representative-evaluation",
+ "kind": "statement",
+ "title": "Normalized slice evaluation on K-flat and K-injective representatives",
+ "statement": "Fix a small ringed site (J,A), a slice U, independent coefficient and derived-category universes, and closed structures S,S_U with the canonical tensor and uncurrying models [def-coef-ringed-tensor-hom-model]. Let d be slice comparison data [def-sfb-ringed-slice-comparison-model] satisfying its tensor and Hom normalization predicates. Let P be a K-flat complex whose terms are flat sheaves, and I a K-injective complex. For L=Q(P) and M=Q(I), the tensor-Hom counits obey rho(H(L,M),L)^(-1) followed by r(ev(L,M)) = (eta(L,M) tensor identity) followed by ev_U(rL,rM). This is only the representative counit computation: it neither constructs comparison data nor asserts compatibility for arbitrary objects, arbitrary transposes, or symmetries.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U), and the evaluation calculation in lemma-compose."
+ },
+ "stmt_deps": [
+  "def-sfb-ringed-slice-comparison-model",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Let A0=Hom(P,I) and choose a flat-term K-flat resolution q:Q→A0. Apply the Hom normalization to P,I, obtaining the canonically augmented kappa, kappa_U and the chain isomorphism gamma to Hom(rP,rI). Apply the tensor normalization to Q,P. The kflat field guarantees that the restricted complexes are valid tensor representatives. Exact restriction takes q to a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-sfb-ringed-slice-comparison-model",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose q with Hom(P,augmentation(I)) and use T.uncurry_model to obtain the representative evaluation into the fixed K-injective replacement of I. On the slice compose the restricted q and gamma with the augmentation of rI and use T_U.uncurry_model. On every local pure tensor x⊗p these chain maps evaluate the same local Hom-family component on p. The gamma formula holds on every further slice object. The two chain maps target r(F(I)) and F_U(rI), respectively. Postcompose the first by augmentation r(F(I))→F_U(r(F(I))) and the second by F_U(r(augmentation(I))):F_U(rI)→F_U(r(F(I))). Use homComplexFunctor_obj_map_f_π for postcomposition of Hom components. The fixed coefficientHomComponent agrees with homComplexπ by proof irrelevance on their existential specifications, unfolding homComplexFunctor and Exists.choose. Naturality of augmentation says r(augmentation(I)) followed by augmentation(r(F(I))) equals augmentation(rI) followed by F_U(r(augmentation(I))). Thus the local pure-tensor values agree in this common target. The sheafification and total-summand universal properties give equality of these common-target chain maps. Localize, substitute the tensor and Hom representative squares and the two kappa augmentation equations, then cancel the resolving and comparison isomorphisms. This is exactly the stated counit identity; neither evaluation nor an arbitrary map is cancelled.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-sfb-ringed-slice-comparison-model",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-ringed-slice-comparison-model",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U), and the evaluation calculation in lemma-compose."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction to a slice preserves the normalized derived tensor and internal Hom comparisons",
+   "results": "Eight hits: restrict-scalars normed spaces, homological-complex restriction, LightCondensed.ihomPoints; no ringed-site derived normalization theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A restriction functor on complexes preserves the Koszul symmetry of a sheafified total tensor complex",
+   "results": "Eight hits: HomologicalComplex HasGoodTensor, HasTensor, tensorObj and ιTensorObj. These provide total tensor infrastructure, not the slice normalized square.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_symm_apply",
+   "results": "One match: the generic counit expression for inverse transposition; used in the item proof.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientTensorGenerator|RingedSliceHomModel|RingedSliceTensorModel",
+   "results": "Mathlib search returned no hits. Local project search finds only the existing model definitions and their consumers; no comparison-existence or evaluation-coherence theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose",
+  "date": "2026-10-21",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-delta-restriction",
+   "place": "The representative calculation of the tensor-Hom counit, Stacks 08J9 and 08JB.",
+   "via": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-weil-pbc-ringed-slice-evaluation-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSliceRepresentativeEvaluation",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceRepresentativeEvaluation.lean",
+  "declaration": "CategoryTheory.ringedSlice_representativeEvaluation",
+  "statement": "theorem ringedSlice_representativeEvaluation\n    (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂\n      CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]\n    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J A))\n    (T : CoefficientTensorModels.{u, c, v, w} J A S)\n    (SU : CoefficientClosedStructure\n      (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)))\n    (TU : CoefficientTensorModels.{u, max c v, v, w'} (J.over U) (A.over U) SU)\n    (d : RingedSliceEvaluationComparisons (derivedInternalHomOfUniverses.{c, v, u, w} J A)\n      (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U))\n      (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U) S SU (RingedSliceFlatRestriction.{c, v,\n      u} J A U))\n      (ht : RingedSliceTensorModel.{c, v, u, w, w'} J A U S T SU TU d)\n      (hh : RingedSliceHomModel.{c, v, u, w, w'} J A U S T SU TU d)\n    (P I : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J (forget₂\n      CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := A) P)\n    (fP : ∀ n, SheafOfModules.IsFlatOnSite (J := J) (R := A) (P.X n))\n    [I.IsKInjective] :\n    (d.rho ((derivedInternalHomOfUniverses.{c, v, u, w} J A).obj (op (DerivedCategory.Q.obj P),\n      (DerivedCategory.Q.obj I))) (DerivedCategory.Q.obj P)).inv ≫\n        (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).map\n            (S.evaluation (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj I)) =\n      SU.tensor.map (X := ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj\n        ((derivedInternalHomOfUniverses.{c, v, u, w} J A).obj (op (DerivedCategory.Q.obj P),\n      (DerivedCategory.Q.obj I))),\n        (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj (DerivedCategory.Q.obj P))) (Y :=\n        ((derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)).obj (op\n        ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj (DerivedCategory.Q.obj P)),\n        (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj (DerivedCategory.Q.obj I)),\n        (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj (DerivedCategory.Q.obj P)))\n      ((d.eta (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj I)).hom, 𝟙 _) ≫\n        SU.evaluation\n          ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj (DerivedCategory.Q.obj P))\n          ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj (DerivedCategory.Q.obj I))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-13f8a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261020T221240-L-4163737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-13f8a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261020T221240-L-4163737",
+  "kind": "interface",
+  "note": "independent cc review: item Lean and 5 new/moved modules vs live RingedSliceEvaluationTranspose (12 defs moved byte-identical to RingedSliceEvaluationModels, theorem signature identical) and the item/def/new node records; 5 direct importers compiled against the delivery"
+ }
+}

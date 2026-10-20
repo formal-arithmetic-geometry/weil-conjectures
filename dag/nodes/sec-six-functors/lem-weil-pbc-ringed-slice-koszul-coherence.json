@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-ringed-slice-koszul-coherence",
+ "kind": "statement",
+ "title": "Normalized slice restriction preserves Koszul exchange",
+ "statement": "Under the independent-universe ringed-site hypotheses and closed tensor-Hom structures S,S_U with representative models T,T_U [def-coef-ringed-tensor-hom-model], let d be comparison data satisfying the four normalizations [def-sfb-ringed-slice-comparison-model]. For arbitrary L,M in D(A), r(sigma(L,M)) followed by rho(M,L) equals rho(L,M) followed by sigma_U(rL,rM). The proof uses no evaluation or transposition identity.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN and 07A4; direct comparison of the two signed exchanges on total-complex summands."
+ },
+ "stmt_deps": [
+  "def-sfb-ringed-slice-comparison-model",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "On flat-term K-flat representatives P,Q, use the tensor normalization to obtain gamma and gamma-prime, and the two Koszul normalizations to obtain beta and beta_U. After precomposing by gamma inverse compare chain maps out of Tot(rP tensor rQ). HomologicalComplex.mapBifunctor.hom_ext, the sheafification adjunction and ModuleCat tensor extensionality reduce equality to local pure tensors. The gamma inverse formula follows by applying gamma inverse to the gamma generator formula. Both composites then give (-1)^(pq) times the reversed generator, proving r(beta) composed with gamma-prime = gamma composed with beta_U.",
+   "uses": [
+    "def-sfb-ringed-slice-comparison-model",
+    "def-coef-ringed-tensor-hom-model",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the representative localization squares for rho and sigma on each site. Naturality of the exact restriction localization isomorphism and functoriality of Q turn the chain-map square into the symmetry square on QP,QQ. Cancel only the tensor model isomorphisms and the tensor of the two localization isomorphisms. This is the categorical helper symmetry_of_models in Lean.",
+   "uses": [
+    "def-sfb-ringed-slice-comparison-model",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose flat-term K-flat resolutions mapping quasi-isomorphically to arbitrary complex representatives of L,M. Q sends these maps to isomorphisms. Convert the exact-tensor-right term property of the resolution theorem to IsFlatOnSite using siteSheafTensorRightIso. Naturality of rho, sigma and sigma_U transports the proved square along the resulting isomorphisms QP≅L and QQ≅M. No symmetry or evaluation map is cancelled.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-sfb-ringed-slice-comparison-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-tensor-complex-sheaves",
+  "def-sfb-ringed-slice-comparison-model",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN and 07A4; direct comparison of the two signed exchanges on total-complex summands. A separate part of the existing evaluation-transpose argument; its full construction is described in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction to a slice preserves the normalized derived tensor and internal Hom comparisons",
+   "results": "Eight hits: restrict-scalars normed spaces, homological-complex restriction, LightCondensed.ihomPoints; no ringed-site derived normalization theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A restriction functor on complexes preserves the Koszul symmetry of a sheafified total tensor complex",
+   "results": "Eight hits: HomologicalComplex HasGoodTensor, HasTensor, tensorObj and ιTensorObj. These provide total tensor infrastructure, not the slice normalized square.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_symm_apply",
+   "results": "One match: the generic counit expression for inverse transposition; used in the item proof.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientTensorGenerator|RingedSliceHomModel|RingedSliceTensorModel",
+   "results": "Mathlib search returned no hits. Local project search finds only the existing model definitions and their consumers; no comparison-existence or evaluation-coherence theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose",
+  "date": "2026-10-21",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-delta-restriction",
+   "place": "Tags 06YN and 07A4; direct comparison of the two signed exchanges on total-complex summands.",
+   "via": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSliceKoszulCoherence",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceKoszulCoherence.lean",
+  "declaration": "CategoryTheory.ringedSlice_koszul_coherence",
+  "statement": "theorem ringedSlice_koszul_coherence\n    (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂\n      CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]\n    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J A))\n    (T : CoefficientTensorModels.{u, c, v, w} J A S)\n    (SU : CoefficientClosedStructure\n      (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)))\n    (TU : CoefficientTensorModels.{u, max c v, v, w'} (J.over U) (A.over U) SU)\n    (d : RingedSliceEvaluationComparisons (derivedInternalHomOfUniverses.{c, v, u, w} J A)\n      (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U))\n      (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U) S SU\n      (RingedSliceFlatRestriction.{c, v, u} J A U))\n    (hd : RingedSliceEvaluationNormalized.{c, v, u, w, w'} J A U S T SU TU d)\n    (L M : DerivedCategory (SheafOfModules.{max c v u} ((sheafCompose J (forget₂\n      CommRingCat.{max c v u} RingCat.{max c v u})).obj A))) :\n    (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).map (d.sigma L M).hom ≫\n        (d.rho M L).hom =\n      (d.rho L M).hom ≫\n        (d.sigmaU ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L)\n          ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj M)).hom",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-13f8a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261020T221240-L-4163737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-13f8a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261020T221240-L-4163737",
+  "kind": "interface",
+  "note": "independent cc review: item Lean and 5 new/moved modules vs live RingedSliceEvaluationTranspose (12 defs moved byte-identical to RingedSliceEvaluationModels, theorem signature identical) and the item/def/new node records; 5 direct importers compiled against the delivery"
+ }
+}

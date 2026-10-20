@@ -1,0 +1,164 @@
+{
+ "id": "lem-weil-pbc-ringed-slice-normalized-comparisons",
+ "kind": "statement",
+ "title": "Existence of normalized slice tensor, Hom and Koszul comparisons",
+ "statement": "For a site J small relative to the module universe, a commutative ring sheaf A, and U in the site, fix the independent-universe derived internal Homs and exact slice restriction. Fix closed tensor-Hom structures S and S_U together with their canonical K-flat tensor and uncurrying models [def-coef-ringed-tensor-hom-model]. There exists comparison data d as in [def-sfb-ringed-slice-comparison-model] satisfying all four representative normalizations: pure-tensor restriction with its localization square, local Hom-family restriction with its fixed K-injective augmentation square, and the source and slice Koszul formulas. No evaluation or transposition compatibility is asserted here.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08JB, 08FI and 03EL; the tensor and Hom comparison constructions, and the signed total-complex exchange."
+ },
+ "stmt_deps": [
+  "def-sfb-ringed-slice-comparison-model",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat complex $P$ representing $L$, a K-injective complex $I$ representing $M$, and put $A=\\mathcal Hom^\\bullet(P,I)$. Then $A$ represents $H(L,M)$ by the derived-Hom definition. Choose also a flat-term K-flat resolution $q:Q\\to A$. These resolutions exist for arbitrary unbounded complexes by the two cited existence statements. Apply the K-flat pullback clause to the localization morphism with identity ring map: $rP,rQ$ are K-flat with flat terms. The restriction theorem makes $rI$ K-injective. Exact restriction represents $r$ on these complexes and takes $q$ to a quasi-isomorphism. Thus the tensor of the two K-flat models $Q,P$, and the Hom models $A$ and $\\mathcal Hom^\\bullet(rP,rI)$, compute all objects in the evaluation square.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 08FI (lemma-restrict-K-injective-to-open), 08J7 (section-internal-hom); K-injectives via injectives.tex Tag 079P"
+   }
+  },
+  {
+   "text": "For a test object $V\\to U$, relocalization identifies $(\\mathcal C/U)/(V/U)$ with $\\mathcal C/V$, with the same covering families. A degree-$n$ local section of $rA$ is therefore exactly the family of local module maps $P^p|_V\\to I^{p+n}|_V$ defining a degree-$n$ section of $\\mathcal Hom^\\bullet(rP,rI)$. This identification commutes with every restriction map and with $d(h)=d_Ih-(-1)^n h d_P$, since both sides have identical components. It is precisely the normalized comparison $\\eta$ in the statement and the restriction isomorphism of the cited internal-Hom theorem. On the tensor side, $\\rho$ is well defined and natural. For K-flat flat-term $P,R$, [lem-sfb-localized-site-tensor-restriction] gives summand isomorphisms sending $x\\otimes y$ to $x\\otimes y$, natural in both factors. Restriction commutes with the direct sums of $\\operatorname{Tot}$: a sheaf sum is the sheafified presheaf sum (sheafification is a left adjoint), presheaf sums restrict sectionwise, and slice restriction commutes with sheafification [lem-cbc-sieve-slice-sheafification, def-weil-presheaf-modules-sheafification]. The summand maps preserve $d\\otimes1$ and $(-1)^p1\\otimes d$ by naturality and additivity, so they form a chain isomorphism natural in chain maps and homotopies. The descent statement extends it uniquely to a natural isomorphism on $D(\\mathcal O)\\times D(\\mathcal O)$; this is the 07A4 comparison.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-hom-complex",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-cbc-sieve-slice-sheafification",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 0A8X (section-hom-complexes), 07A4 (lemma-pullback-tensor-product); sites.tex Tag 03EH (lemma-relocalize)"
+   }
+  },
+  {
+   "text": "Construct the source and slice signed total-tensor exchanges. In bidegree (p,q) use (-1)^(pq) times exchange, whose inverse is the same exchange with reversed degrees. The differential identities show these are chain maps. Descend their natural isomorphisms along the K-flat presentations and conjugate with T and T_U. The representative squares hold by construction, giving both Koszul normalization predicates. Together with the preceding tensor and Hom constructions this gives the normalized comparison datum.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-cbc-sieve-slice-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08JB, 08FI and 03EL; the tensor and Hom comparison constructions, and the signed total-complex exchange. A separate part of the existing evaluation-transpose argument; its full construction is described in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction to a slice preserves the normalized derived tensor and internal Hom comparisons",
+   "results": "Eight hits: restrict-scalars normed spaces, homological-complex restriction, LightCondensed.ihomPoints; no ringed-site derived normalization theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A restriction functor on complexes preserves the Koszul symmetry of a sheafified total tensor complex",
+   "results": "Eight hits: HomologicalComplex HasGoodTensor, HasTensor, tensorObj and ιTensorObj. These provide total tensor infrastructure, not the slice normalized square.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_symm_apply",
+   "results": "One match: the generic counit expression for inverse transposition; used in the item proof.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientTensorGenerator|RingedSliceHomModel|RingedSliceTensorModel",
+   "results": "Mathlib search returned no hits. Local project search finds only the existing model definitions and their consumers; no comparison-existence or evaluation-coherence theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib theorem; use generic categorical APIs and the recorded ringed-site models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose",
+  "date": "2026-10-21",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-delta-restriction",
+   "place": "Tags 07A4, 08JB, 08FI and 03EL; the tensor and Hom comparison constructions, and the signed total-complex exchange.",
+   "via": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceNormalizedComparisons.lean",
+  "declaration": "CategoryTheory.ringedSlice_normalizedComparisons",
+  "statement": "theorem ringedSlice_normalizedComparisons\n    (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂\n      CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]\n    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J A))\n    (T : CoefficientTensorModels.{u, c, v, w} J A S)\n    (SU : CoefficientClosedStructure\n      (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U)))\n    (TU : CoefficientTensorModels.{u, max c v, v, w'} (J.over U) (A.over U) SU) :\n    Nonempty {d : RingedSliceEvaluationComparisons (derivedInternalHomOfUniverses.{c, v, u, w} J A)\n      (derivedInternalHomOfUniverses.{max c v, v, u, w'} (J.over U) (A.over U))\n      (ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U) S SU (RingedSliceFlatRestriction.{c, v,\n      u} J A U) // RingedSliceEvaluationNormalized.{c, v, u, w, w'} J A U S T SU TU d}",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-13f8a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261020T221240-L-4163737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-13f8a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261020T221240-L-4163737",
+  "kind": "interface",
+  "note": "independent cc review: item Lean and 5 new/moved modules vs live RingedSliceEvaluationTranspose (12 defs moved byte-identical to RingedSliceEvaluationModels, theorem signature identical) and the item/def/new node records; 5 direct importers compiled against the delivery"
+ }
+}
