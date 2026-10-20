@@ -94,15 +94,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of M1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 01RS-01RV read, the claims inside the definition elementary, citers checked, no cycle"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.RationalFunctionRing",
+  "module": "WeilConjectures.AlgebraicGeometry.RationalFunctions",
   "declaration": "AlgebraicGeometry.Scheme.rationalFunctionRing",
-  "file": "lean/Sheaf/AlgebraicGeometry/RationalFunctionRing.lean",
-  "statement": "def rationalFunctionRing (X : Scheme.{v}) : CommRingCat.{v}",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RationalFunctions.lean",
+  "statement": "noncomputable def rationalFunctionRing (X : Scheme.{u}) : CommRingCat.{u}",
   "branch": "sheaf-dag",
-  "by": "M1",
-  "date": "2026-10-11",
-  "existing": false,
-  "note": "Rule (B): the previous declaration Scheme.rationalFunctions takes only Scheme.{0}, as server elaboration demonstrated. The node quantifies over arbitrary schemes. This module states the same colimit ring with explicit arbitrary universe v and reuses DenseOpens and denseOpenSections from the previous module; no diagram or equivalence relation is copied."
+  "by": "T1",
+  "date": "2026-10-20",
+  "existing": true,
+  "note": "The upstream universe-polymorphic colimit reuses the identical dense-open diagram. Retired the Sheaf dense-open copy and made RationalFunctionRing a compatibility re-export; no mathematical statement changes."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -112,5 +112,15 @@
   "result": "pass",
   "note": "X:Scheme.{u}; n+Fin n equiv irreducibleComponents; eta IsGenericPoint; dense opens contain eta (conclusion); e: rationalFunctionRing ≃+* Pi stalks with germ values on colimit.ι classes; IsIntegral (AlgebraicGeometry.IsIntegral by #check) -> n=1, X_1=univ, IsField R(X) and stalk, ei compatible; old rationalFunctions verified Scheme.{0} so rule (B) module justified"
  },
- "lead_note": "2026-10-11 08:34 UTC L (T-rat): H4 duplicate removed. lean/Sheaf/AlgebraicGeometry/RationalFunctions.lean (this node's E1 statement, commit 7f30d11fd) defined Scheme.rationalFunctions and abbrev Scheme.RationalFunction only for Scheme.{0}; the universe-polymorphic Scheme.rationalFunctionRing (M1, RationalFunctionRing.lean) is the same colimit over denseOpenSections and is the recorded declaration. No record or Lean file used the old two, so both were deleted; DenseOpens, DenseOpens.inter, denseOpensInclusion, denseOpenSections stay (imported by RationalFunctionRing). File, RationalFunctionRing and RationalFunctionsGenericStalks recompiled."
+ "lead_note": "2026-10-11 08:34 UTC L (T-rat): H4 duplicate removed. lean/Sheaf/AlgebraicGeometry/RationalFunctions.lean (this node's E1 statement, commit 7f30d11fd) defined Scheme.rationalFunctions and abbrev Scheme.RationalFunction only for Scheme.{0}; the universe-polymorphic Scheme.rationalFunctionRing (M1, RationalFunctionRing.lean) is the same colimit over denseOpenSections and is the recorded declaration. No record or Lean file used the old two, so both were deleted; DenseOpens, DenseOpens.inter, denseOpensInclusion, denseOpenSections stay (imported by RationalFunctionRing). File, RationalFunctionRing and RationalFunctionsGenericStalks recompiled.",
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-9516c",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261020T135426-L-1822122",
+  "kind": "interface",
+  "note": "independent cc review: removed Sheaf DenseOpens/inter/denseOpensInclusion/denseOpenSections/rationalFunctionRing vs WeilConjectures.AlgebraicGeometry.RationalFunctions (identical bodies; universe variable renamed); RationalFunctionRing re-export + RationalFunctionsGenericStalks compile clean"
+ }
 }
