@@ -18459,3 +18459,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:55 L: merged deliver/Y9/Sheaf.AlgebraicGeometry.ProjectiveLineTwistCoherentPowers (stage 3; reviewer PASS; first push; landing 20261020T145553-L-2414203 (interface); batch 20261020T145440; modules 1; new nodes 0; change records: coord/changes/Y9-retire-projective-line-coherent-powers.md)
 
 - 23:03 L: batch 20261020T145440 dependency take-out
+- 15:03 L: returned deliver/E8/Sheaf.AlgebraicGeometry.ProEtaleReplete (reviewer RETURN: (reviewer C-13030, head 13030976d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pr)
