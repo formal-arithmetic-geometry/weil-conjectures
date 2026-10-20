@@ -15,9 +15,9 @@
  ],
  "proof": [
   {
-   "text": "Use the proved upstream instance SheafOfModules.isGrothendieckAbelian directly; the stronger localized-generator theorem is not used. Sheaf modules have K-injective resolutions. Test any derived target against a K-injective representative. Lift maps from each summand to chain maps using the bijectivity of Qh on maps into K-injectives. Assemble these maps by the complex coproduct universal property. Equality on each summand gives homotopies which assemble degreewise into a homotopy of the two sum maps, so the factorization is unique. This proves the coproduct universal property for Q of the complex sum.",
+   "text": "The sheaf-module category is Grothendieck abelian and has AB4 in universe u. Transport exact coproducts indexed by ULift J along its discrete equivalence with J to obtain CountableAB4 explicitly. Apply the already-proved isColimit_mapCocone_countableSum of lem-kun-derived-countable-sums-exact to E. The explicit degreewise complex cocone is a colimit, so Q preserves this diagram. Consequently the chosen complex coproduct, with exactly Q of its coprojections, is a coproduct in the derived category. The Qh carrier and cofan families are explicit to avoid costly model inference; these annotations preserve the original elaborated statement.",
    "uses": [
-    "lem-weil-pbc-kinjective-functorial-existence"
+    "lem-kun-derived-countable-sums-exact"
    ],
    "elementary": false
   },
@@ -32,15 +32,15 @@
  ],
  "proof_deps": [
   "def-pc-derived-pullback",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-weil-pbc-kinjective-functorial-existence"
+  "lem-kun-derived-countable-sums-exact",
+  "lem-pc-ringed-spaces-derived-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "E1",
-  "date": "2026-10-14",
-  "document": "dag/nodes/sec-picard-framework/lem-sc-flat-telescope-normalization-morphisms.json",
-  "place": "Derived pullback of a complex coproduct and its translate"
+  "group": "A8",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A5L via the proved countable-sum theorem, followed by Tag 079W and shift preservation; canonical derived-pullback restoration."
  },
  "mathlib_searches": [
   {
@@ -99,10 +99,11 @@
   "module": "Sheaf.AlgebraicGeometry.FlatTelescopePullbackSumColimit",
   "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopePullbackSumColimit.lean",
   "declaration": "AlgebraicGeometry.flat_telescope_pullback_sum_colimit",
-  "statement": "theorem flat_telescope_pullback_sum_colimit\n    {Z Y : Scheme.{u}} (f : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (E : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :\n    let q := HomotopyCategory.quotient\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)\n    let L := DerivedCategory.Qh ⋙ derivedPullback f\n    Nonempty (IsColimit (Cofan.mk (L.obj (q.obj (∐ E)))\n      (fun n ↦ L.map (q.map (Sigma.ι E n))))) ∧\n    Nonempty (IsColimit (Cofan.mk (L.obj ((q.obj (∐ E))⟦(1 : ℤ)⟧))\n      (fun n ↦ L.map ((q.map (Sigma.ι E n))⟦(1 : ℤ)⟧'))))",
+  "statement": "theorem flat_telescope_pullback_sum_colimit\n    {Z Y : Scheme.{u}} (f : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (E : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :\n    let q := HomotopyCategory.quotient\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)\n    let L := DerivedCategory.Qh\n      (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ⋙ derivedPullback f\n    Nonempty (IsColimit (Cofan.mk (f := fun n ↦ L.obj (q.obj (E n)))\n      (L.obj (q.obj (∐ E)))\n      (fun n ↦ L.map (q.map (Sigma.ι E n))))) ∧\n    Nonempty (IsColimit (Cofan.mk (f := fun n ↦ L.obj ((q.obj (E n))⟦(1 : ℤ)⟧))\n      (L.obj ((q.obj (∐ E))⟦(1 : ℤ)⟧))\n      (fun n ↦ L.map ((q.map (Sigma.ι E n))⟦(1 : ℤ)⟧'))))",
   "branch": "sheaf-dag",
   "by": "E1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "A8 restored the quarantined module using the adopted WeilConjectures derivedPullback. The coproduct step now reuses DerivedCategory.isColimit_mapCocone_countableSum; CountableAB4 is obtained explicitly by universe transport. Explicit Qh carriers and cofan families preserve the archived theorem type, verified by a compiling client with that exact archived statement. No holes are added; the old direct K-injective dependency remains transitively used by DerivedAdjoint."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -115,14 +116,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "C-5eaec",
+  "group": "A8",
   "result": "pass",
-  "landing": "20261014T082418-L-4009213",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221042-L-4137785",
+  "kind": "proof",
+  "note": "independent cc review: delivered FlatTelescopePullbackSumColimit.lean and node vs quarantined archive and live node; archived signature proved verbatim by the new theorem; cited isColimit_mapCocone_countableSum sorry-free"
  },
  "lean_audit": {
   "master": {
