@@ -21,78 +21,39 @@
  ],
  "proof": [
   {
-   "text": "The hypothesis makes $M$ flat in the injectivity sense of [def-weil-pbc-flat-ring-map]: for an injection $A\\to B$, apply preservation of the short exact sequence $0\\to A\\to B\\to B/A\\to0$. Its tensor image starts with an injection $A\\otimes_R M\\to B\\otimes_R M$. No converse characterization of flatness is needed.",
+   "text": "Apply preservation of short exact sequences to an injective linear map f:A → B followed by the quotient B/range(f). The injectivity clause and Mathlib Module.Flat.iff_rTensor_preserves_injective_linearMap give flatness in the sense of [def-weil-pbc-flat-ring-map].",
    "uses": [
     "def-weil-pbc-flat-ring-map"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HB (definition-flat), comparison of the hypothesis with flatness"
-   }
+   "elementary": true
   },
   {
-   "text": "We first extract a finite-relation consequence of [lem-weil-pbc-flat-equational-criterion]. Let $p:R^n\\to M$ and let $v=(v_i)\\in\\ker p$. Write $x_i=p(e_i)$. The relation $\\sum_i v_ix_i=0$ is trivial, so the cited statement gives $k$, $y_j\\in M$ and $a_{ij}\\in R$ with $x_i=\\sum_j a_{ij}y_j$ and $\\sum_i v_ia_{ij}=0$. Define $A:R^n\\to R^k$ by $A(e_i)=(a_{ij})_j$ and $g:R^k\\to M$ by $g(e_j)=y_j$. These formulas give $p=gA$ and $A(v)=0$. For any finite list $v_1,\\ldots,v_t\\in\\ker p$, repeat this construction by induction. For $t=0$ take $A=1$ and $g=p$. If $p=g_tA_t$ and $A_t(v_i)=0$ for $i\\le t$, apply the one-vector construction to $g_t$ and $A_t(v_{t+1})\\in\\ker g_t$, obtaining $g_t=g_{t+1}B$. Then $A_{t+1}=BA_t$ still kills the first $t$ vectors and also kills $v_{t+1}$. Thus $p$ factors through a finite free module by a map killing any prescribed finitely generated submodule of its kernel. For a finite set $J$, choose an enumeration giving a linear isomorphism $u:R^n\\to R^J$. Apply the construction to $pu$ and the generators $u^{-1}(v_i)$ of $u^{-1}(N)$. If $pu=gA$ and $A(u^{-1}(N))=0$, then $p=g(Au^{-1})$ and $(Au^{-1})(N)=0$, giving exactly the required factorization for $R^J$.",
+   "text": "Let C have objects (n,p) with n a natural number and p:ULift(R^n) → M linear, and arrows the linear maps commuting with p. Objects and arrows are in the universe max(u,v). C is nonempty by the zero module. Direct sums, reidentified with coordinate modules by a finite basis, give common successors. For parallel arrows f,g:i → j, we have p_j(f-g)=0. The finite-relation factorization consequence of [lem-weil-pbc-flat-equational-criterion], Mathlib Module.Flat.exists_factorization_of_comp_eq_zero_of_free (Stacks 058D), gives p_j=y a with a(f-g)=0 and a landing in a finite free module. Thus a defines an arrow from j equalizing f and g. Consequently C is filtered.",
    "uses": [
     "lem-weil-pbc-flat-equational-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058D (lemma-flat-factors-free), finite-relation argument expanded directly from Tag 00HK (lemma-flat-eq)"
+    "place": "Tag 058D (lemma-flat-factors-free), finite free factorization of a map annihilating a finite free relation module"
    }
   },
   {
-   "text": "Set $S=M\\times\\mathbf Z$ and let $P=R^{(S)}$ denote the module of finitely supported functions $S\\to R$, with coordinate vectors $e_s$. Define $f:P\\to M$ by $f(e_{(m,z)})=m$; it is surjective since $f(e_{(m,0)})=m$. Put $K=\\ker f$. Let $E$ be the set of pairs $e=(J,N)$ where $J\\subset S$ is finite and $N\\subset R^J\\subset P$ is the span of a finite list of elements of $K\\cap R^J$. Order $E$ by inclusion of both $J$ and $N$ inside $P$. This is a partial order. It is nonempty, containing $(\\varnothing,0)$, and directed: $(J\\cup J',N+N')$ is an upper bound, and concatenating generators proves the required finiteness of $N+N'$. Each of these generators lies in $K\\cap R^{J\\cup J'}$, so the upper bound is an object of $E$. All these are sets in a universe containing $R$ and $M$, so $E$ is small. For $e=(J,N)$ put $M_e=R^J/N$ and let $p_e:M_e\\to M$ be induced by $f$; this is well-defined because $N\\subset K$. Inclusions induce $M_e\\to M_{e'}$ for $e\\le e'$; the identity, composition and compatibility laws follow from the inclusions and quotient maps.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058G (theorem-lazard), directed finite-presentation system in the second and third proof paragraphs"
-   }
+   "text": "The forgetful functor C → Mod_R has its canonical cocone with vertex M. Prove it colimiting in the sense of [def-weil-pbc-category-colimit]. Given a compatible cocone s, define u(m) as the value of s on the basis vector of the rank-one object p_m:R → M sending 1 to m. For every p_i:F_i → M and vector x, the linear map R → F_i sending 1 to x is an arrow p_(p_i(x)) → i, so compatibility gives u(p_i(x))=s_i(x). To prove additivity choose a common successor of p_a and p_b, with vectors x,y mapping to a,b. The formula on x,y,x+y proves u(a+b)=u(a)+u(b). The same formula in p_a on 1 and r gives u(ra)=r u(a). This defines a linear map, the formula proves all cocone equations, and rank-one objects prove uniqueness. No flatness is needed for this universal property.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
   },
   {
-   "text": "The cocone $(M,(p_e))$ is a colimit in the precise sense of [def-weil-pbc-category-colimit]. Indeed let $c_e:M_e\\to T$ be any compatible cocone of linear maps. Define a linear map $h:P\\to T$ by $h(e_s)=c_{(\\{s\\},0)}([e_s])$. For every $e=(J,N)$, the arrows $(\\{s\\},0)\\to e$ for $s\\in J$ show on coordinate vectors that $h|_{R^J}=c_e q_e$, where $q_e:R^J\\to M_e$ is the quotient. If $v\\in K$, its support is contained in a finite $J$ and $(J,Rv)\\in E$; the preceding equality gives $h(v)=c_{(J,Rv)}([v])=0$. Consequently $h$ descends to a unique linear map $u:M\\to T$: set $u(f(v))=h(v)$, which is well-defined since differences of preimages lie in $K$. The formula $h|_{R^J}=c_e q_e$ implies $up_e=c_e$. Uniqueness follows from the objects $(\\{(m,0)\\},0)$, whose canonical maps hit every $m\\in M$. This proves the universal property without assuming a theorem on elementwise module colimits.",
+   "text": "Apply Mathlib CategoryTheory.IsFiltered.exists_directed (Stacks Categories 0032) to C, obtaining a nonempty directed partial order I in the same universe and a final functor G:I → C. Restrict the canonical cocone along G. Mathlib Functor.Final.isColimitWhiskerEquiv transports the universal property from the previous step, so the restricted cocone is colimiting. Each object is ULift(R^n), linearly equivalent to Fin n → R by ULift.moduleEquiv followed by Finsupp.linearEquivFunOnFinite. Uniqueness of colimits [def-weil-pbc-category-colimit] shows that colimit.desc is an isomorphism. These are all clauses of the original statement.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058G (theorem-lazard), verification of the asserted directed-presentation colimit"
-   }
-  },
-  {
-   "text": "Fix $e=(J,N)\\in E$. Apply the finite-relation construction of step 2, from [lem-weil-pbc-flat-equational-criterion], to $p=f|_{R^J}$ and a finite generating list of $N$. It gives $A:R^J\\to F=R^r$ and $g:F\\to M$ with $p=gA$ and $A(N)=0$. Choose pairwise distinct $s_1,\\ldots,s_r\\in S\\setminus J$ with $f(e_{s_l})=g(b_l)$, where $b_l$ is the $l$th coordinate vector of $F$. This is possible because each $m\\in M$ has the infinitely many labels $(m,z)$ and only finitely many labels are forbidden. Put $J'=J\\cup\\{s_1,\\ldots,s_r\\}$ and define $q:R^{J'}\\to F$ by $q(e_j)=A(e_j)$ for $j\\in J$ and $q(e_{s_l})=b_l$. Its section $b_l\\mapsto e_{s_l}$ proves surjectivity. Its kernel $N'$ is generated by the finitely many vectors $w_j=e_j-\\sum_l A(e_j)_l e_{s_l}$ for $j\\in J$: subtracting $\\sum_{j\\in J}v_jw_j$ from any $v\\in\\ker q$ leaves a vector on the new coordinates whose coefficients are $q(v)=0$. Moreover $f|_{R^{J'}}=gq$, so $N'\\subset K$, and $A(N)=0$ implies $N\\subset N'$. Hence $e'=(J',N')\\in E$ and $e'\\ge e$. Write $s:F\\to R^{J'}$ for the section on the new coordinates. Define $\\bar q:R^{J'}/N'\\to F$ by $\\bar q([v])=q(v)$, which is well-defined since $N'=\\ker q$, and define $\\bar s:F\\to R^{J'}/N'$ by $\\bar s(x)=[s(x)]$. We have $\\bar q\\bar s=1$ since $qs=1$. For $v\\in R^{J'}$, $v-sq(v)=\\sum_{j\\in J}v_jw_j\\in N'$, so $\\bar s\\bar q([v])=[v]$. Thus $M_{e'}=R^{J'}/N'\\simeq F$. We have therefore constructed a free finite stage above every $e$, without assuming finite generation of a general submodule of a finite free module.",
-   "uses": [
-    "lem-weil-pbc-flat-equational-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058G (theorem-lazard), free cofinal stage construction and assertions (1)-(3); kernel generators written explicitly"
-   }
-  },
-  {
-   "text": "Let $I\\subset E$ consist of the pairs $e$ for which $M_e\\simeq R^r$ for some integer $r\\ge0$, with its inherited order. Step 5 makes $I$ cofinal in $E$. It is small and nonempty; for any $i,j\\in I$, first take an upper bound $e\\in E$ by step 3 and then a free upper stage $k\\in I$ by step 5. Thus $I$ is a directed partial order. Restrict $M_e$ and $p_e$ to $I$. To check directly that $M$ is still its colimit [def-weil-pbc-category-colimit], extend any compatible cocone $c_i:M_i\\to T$ to $E$ by setting $c_e=c_i\\circ(M_e\\to M_i)$ for any $i\\in I$ above $e$. Write $t_{ab}:M_a\\to M_b$ for the transition map. If $i,j\\in I$ both lie above $e$, choose $k\\in I$ above $i,j$. Cocone compatibility gives $c_i t_{ei}=c_k t_{ik}t_{ei}=c_k t_{ek}=c_k t_{jk}t_{ej}=c_j t_{ej}$, proving independence. For $e\\le e'$, choose $i\\in I$ above $e'$; then $c_{e'}t_{ee'}=c_i t_{e'i}t_{ee'}=c_i t_{ei}=c_e$. Taking $i=e$ when $e\\in I$ shows that the extension restricts to the original cocone. Any compatible extension must satisfy $c_e=c_i t_{ei}$ for each $i\\in I$ above $e$, proving uniqueness. Step 4 supplies a unique $u:M\\to T$ inducing the extended cocone, hence the original restricted cocone. Conversely, if $v:M\\to T$ induces the restricted cocone, then for $e\\in E$ choose $i\\in I$ above $e$ and compute $vp_e=vp_i t_{ei}=c_i t_{ei}=c_e$. Thus $v$ induces the extended cocone and equals $u$ by step 4. This proves the restricted universal property in both directions.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058G (theorem-lazard), passage to the cofinal subset of free stages with the universal-property argument supplied"
-   }
-  },
-  {
-   "text": "For $i=(J_i,N_i)\\in I$ take $F_i=M_i=R^{J_i}/N_i$ with the transition maps already constructed and the compatible maps $F_i\\to M$. By the definition of $I$, each $F_i$ is isomorphic to $R^{r_i}$ for some finite $r_i\\ge0$; choose such data for each $i$ if desired. Step 6 says this is a colimit cocone. Any chosen categorical colimit is uniquely isomorphic to $M$ by [def-weil-pbc-category-colimit], and that isomorphism is its canonical induced map to $M$. This is every clause of the item.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058G (theorem-lazard), forward implication concluded"
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0032 (lemma-directed-category-system); final-functor invariance of colimits"
    }
   }
  ],
@@ -103,8 +64,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 058G (theorem-lazard), forward direction, expanded from the official online text; Tag 00HK supplies the finite-relation calculation. The listed local Stacks checkout is absent on this machine; see report WANTED."
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/categories.tex",
+  "place": "Tags 058G and 058D (finite free factorization), with the finite-free comma-category colimit argument written by C9 and directed replacement by Tag 0032, already proved as Mathlib CategoryTheory.IsFiltered.exists_directed. All Lean proofs complete."
  },
  "mathlib_searches": [
   {
@@ -253,5 +214,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261020T051115-L-1563136",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
