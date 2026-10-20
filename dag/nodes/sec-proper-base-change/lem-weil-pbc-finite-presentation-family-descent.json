@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-family-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-spread-marked-curve-diagram",
+   "place": "Tag 01ZM(1), finite-family common refinement"
+  }
+ },
+ "kind": "statement",
+ "title": "Common-stage descent of finite families of finitely presented schemes",
+ "statement": "For a cofiltered affine-transition inverse system D of qcqs schemes, with limit c, every finite family of finitely presented schemes X_a over c has a simultaneous finite-presentation qcqs model Y_a over one stage. The original X_a occur in cartesian squares. Empty families are allowed. [def-pc-scheme] [pqf-def-affine-morphism] [lem-weil-pbc-limit-affine-transition] [def-weil-pbc-scheme-conventions] [def-sbc-locally-finite-presentation]",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM(1), finite-family common refinement"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Descend each object by 01ZM(1). Take a common lower bound of the finitely many stages and pull the models back. Pullback pasting gives the required squares, and finite presentation and qcqs are stable under base change. The empty family uses any object of the cofiltered category.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-finite-presentation-base-change-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM(1), finite-family common refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite family of finitely presented schemes over a cofiltered inverse limit descends to one common stage",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.isAffine_of_isLimit, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; no exact statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite families of schemes morphisms and equality descend to a common inverse limit stage; finite radicial model from universally injective limit",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.IsFinite, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.IsFinite.instDescScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'",
+   "date": "2026-10-21",
+   "verdict": "individual limit and equality APIs only; no exact finite-family or radicial model theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyInjective.iff_diagonal",
+   "results": "1 hits: AlgebraicGeometry.UniversallyInjective.iff_diagonal",
+   "date": "2026-10-21",
+   "verdict": "exact diagonal criterion, used for radicial descent; not the new statement"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isPullback_of_finitePresentation|exists_pullback_hom_of_isLimit|exists_pullback_fst_comp_eq_of_isLimit|universallyInjective.*stage",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GoodCurvesGenericDiagram",
+  "date": "2026-10-21",
+  "group": "A8"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationFamilyDescent",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_family_stage",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationFamilyDescent.lean",
+  "statement": "theorem exists_finitePresentation_family_stage\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Scheme.{u})\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a)]\n    [∀ i : I, CompactSpace (D.obj i)]\n    [∀ i : I, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c)\n    {κ : Type v} [Finite κ] (X : κ → Scheme.{u}) (p : ∀ a, X a ⟶ c.pt)\n    [∀ a, LocallyOfFinitePresentation (p a)] [∀ a, QuasiCompact (p a)]\n    [∀ a, QuasiSeparated (p a)] :\n    ∃ (i : I) (Y : κ → Scheme.{u}) (q : ∀ a, Y a ⟶ D.obj i)\n      (h : ∀ a, X a ⟶ Y a),\n      (∀ a, LocallyOfFinitePresentation (q a)) ∧\n      (∀ a, QuasiCompact (q a)) ∧ (∀ a, QuasiSeparated (q a)) ∧\n      ∀ a, IsPullback (h a) (p a) (q a) (c.π.app i)",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261020T211624-L-3479953",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261020T211624-L-3479953",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

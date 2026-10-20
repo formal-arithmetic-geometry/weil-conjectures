@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-arrows-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-spread-marked-curve-diagram",
+   "place": "Tag 01ZM(2), finite-family common refinement"
+  }
+ },
+ "kind": "statement",
+ "title": "Common-stage descent of a finite family of specified arrows",
+ "statement": "For a cofiltered affine-transition qcqs inverse system with limit c, fix finitely presented qcqs source and target models V_a,W_a over one stage. A finite family of arrows from the limit base changes of V_a to W_a, compatible with the base, descends to a single later stage, with equality to each original arrow after limit base change. Empty families are allowed. [def-pc-scheme] [pqf-def-affine-morphism] [lem-weil-pbc-limit-affine-transition] [def-weil-pbc-scheme-conventions] [def-sbc-locally-finite-presentation]",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM(2), finite-family common refinement"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Descend each arrow separately by 01ZM(2). A finite wide cospan in the cofiltered category gives one stage whose arrows commute with all maps to the original stage. Precompose each descended arrow with the induced pullback map. Pullback projection identities and cone naturality prove both required equalities.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM(2), finite-family common refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite family of morphisms between specified finite presentation scheme models descends to a common stage",
+   "results": "8 hits: CategoryTheory.EffectiveEpiFamily.desc, CategoryTheory.EffectiveEpiFamilyStruct.desc, CategoryTheory.EffectiveEpiFamily.fac, CategoryTheory.EffectiveEpiFamilyStruct.fac, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; no exact statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite families of schemes morphisms and equality descend to a common inverse limit stage; finite radicial model from universally injective limit",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.IsFinite, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.IsFinite.instDescScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'",
+   "date": "2026-10-21",
+   "verdict": "individual limit and equality APIs only; no exact finite-family or radicial model theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyInjective.iff_diagonal",
+   "results": "1 hits: AlgebraicGeometry.UniversallyInjective.iff_diagonal",
+   "date": "2026-10-21",
+   "verdict": "exact diagonal criterion, used for radicial descent; not the new statement"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isPullback_of_finitePresentation|exists_pullback_hom_of_isLimit|exists_pullback_fst_comp_eq_of_isLimit|universallyInjective.*stage",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GoodCurvesGenericDiagram",
+  "date": "2026-10-21",
+  "group": "A8"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationArrowsDescent",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_arrows_stage",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationArrowsDescent.lean",
+  "statement": "theorem exists_finitePresentation_arrows_stage\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Scheme.{u})\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a)]\n    [∀ i : I, CompactSpace (D.obj i)]\n    [∀ i : I, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c) (i : I)\n    {κ : Type v} [Finite κ] (V W : κ → Scheme.{u})\n    (pV : ∀ a, V a ⟶ D.obj i) (pW : ∀ a, W a ⟶ D.obj i)\n    [∀ a, LocallyOfFinitePresentation (pV a)] [∀ a, QuasiCompact (pV a)]\n    [∀ a, QuasiSeparated (pV a)]\n    [∀ a, LocallyOfFinitePresentation (pW a)] [∀ a, QuasiCompact (pW a)]\n    [∀ a, QuasiSeparated (pW a)]\n    (ψ : ∀ a, pullback (pV a) (c.π.app i) ⟶ W a)\n    (hψ : ∀ a, ψ a ≫ pW a = pullback.fst (pV a) (c.π.app i) ≫ pV a) :\n    ∃ (j : I) (f : j ⟶ i) (θ : ∀ a, pullback (pV a) (D.map f) ⟶ W a),\n      (∀ a, θ a ≫ pW a = pullback.fst (pV a) (D.map f) ≫ pV a) ∧\n      ∀ a, pullback.map (pV a) (c.π.app i) (pV a) (D.map f)\n        (𝟙 _) (c.π.app j) (𝟙 _) (by simp) (by simp) ≫ θ a = ψ a",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261020T211624-L-3479953",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261020T211624-L-3479953",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

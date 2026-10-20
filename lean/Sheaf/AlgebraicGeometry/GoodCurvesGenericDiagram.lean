@@ -16,27 +16,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Thickening
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.FieldTheory.PurelyInseparableDegreePIntermediate
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import WeilConjectures.RingTheory.LocalizationColimitPrincipalLocalizations
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import WeilConjectures.AlgebraicGeometry.DescendFinite
-import WeilConjectures.AlgebraicGeometry.DescendSurjective
-import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
-import WeilConjectures.AlgebraicGeometry.EventuallyProper
-import WeilConjectures.AlgebraicGeometry.DescendClosedImmersion
-import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
-import Mathlib.AlgebraicGeometry.Properties
-import Sheaf.AlgebraicGeometry.DescendSmoothQcqs
 import Sheaf.AlgebraicGeometry.FieldCurveCompletionInsep
-import Sheaf.AlgebraicGeometry.OpenImmersionInverseLimitDescent
-import Sheaf.AlgebraicGeometry.ProperFibreDimensionUpperSemicontinuous
-import Sheaf.AlgebraicGeometry.ProperSmoothGeometricComponentsLocallyConstant
-import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
+import Sheaf.AlgebraicGeometry.FieldCurveNormalizationGoodOpen
+import Sheaf.AlgebraicGeometry.SpreadMarkedCurveDiagram
+import Sheaf.AlgebraicGeometry.GoodCurvesFibreDensity
 
 /-!
 # Good curve diagrams near a generic point
@@ -53,9 +36,15 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- (blueprint: lem-weil-pbc-good-curves-generic-diagram)
 Stacks Project, Tag 0GK7: a separated finitely presented family with generic fibre of
 dimension at most one admits a good curve diagram after a finite radicial base cover.
+
+Formalization: the proof below constructs the field normalization and its dense thickening
+locus, invokes spreading of the supplied marked diagram, and proves the two fibrewise density
+clauses. The DAG node records this revised dependency route. The original ten-step plan is
+retained below as the source argument.
 
 Proof plan:
 
@@ -228,6 +217,66 @@ theorem exists_good_curves_generic_diagram
           (∀ (i : Fin n) (s : T i),
             Dense (((j i ≫ p i).fiberι s ≫ Sigma.ι Y i ≫ ν) ⁻¹' (W : Set _))) ∧
           IsThickening (pullback.snd ν W.ι) := by
-  sorry
+  let k : Type u := S.residueField η
+  let Z := f.fiber η
+  let : Z.Over (Spec (.of k)) := f.fiberOverSpecResidueField η
+  have : IsSeparated (Z ↘ Spec (.of k)) := by
+    change IsSeparated (pullback.snd f (S.fromSpecResidueField η))
+    infer_instance
+  have : LocallyOfFiniteType (Z ↘ Spec (.of k)) := by
+    change LocallyOfFiniteType (pullback.snd f (S.fromSpecResidueField η))
+    infer_instance
+  have : QuasiCompact (Z ↘ Spec (.of k)) := by
+    change QuasiCompact (pullback.snd f (S.fromSpecResidueField η))
+    infer_instance
+  obtain ⟨K, hK, hkK, hfin, hinsep, n, C, hC, c, Y, B, e, j, L, hLF, hLA,
+    q, p, ν, hc, hinj, hcover, hν, hprops, _⟩ :=
+    exists_field_curve_completion_insep k Z hdim
+  let := hK
+  let := hkK
+  have := hfin
+  have := hinsep
+  let := hLF
+  let := hLA
+  let ZK := pullback (Z ↘ Spec (.of k))
+    (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  have : LocallyOfFiniteType (f.fiberToSpecResidueField η) := by
+    change LocallyOfFiniteType (pullback.snd f (S.fromSpecResidueField η))
+    infer_instance
+  have hgood := field_curve_normalization_good_open ZK (pullback.snd _ _)
+    n C Y hC c e hc hinj hcover
+  dsimp only at hgood
+  dsimp only [ZK] at hgood
+  rw [← hν] at hgood
+  obtain ⟨hνfin, hνsurj, W, _, hWcomp, hWthick⟩ := hgood
+  have hcomm (i : Fin n) : Sigma.ι Y i ≫ ν ≫ pullback.snd _ _ =
+      j i ≫ q i ≫ Spec.map (CommRingCat.ofHom (algebraMap K (L i))) := by
+    obtain ⟨_, _, _, _, _, _, _, _, _, hcp, hjp, _⟩ := hprops i
+    rw [hν, Sigma.ι_desc_assoc]
+    exact hcp.trans hjp.symm
+  have hL (i : Fin n) : Module.Finite K (L i) ∧ Algebra.IsSeparable K (L i) :=
+    ⟨(hprops i).1, (hprops i).2.1⟩
+  have hj (i : Fin n) : IsOpenImmersion (j i) ∧ Nonempty (Y i) := by
+    obtain ⟨_, _, ho, _, hn, _⟩ := hprops i
+    exact ⟨ho, hn⟩
+  have hq (i : Fin n) : Smooth (q i) ∧ IsProper (q i) ∧
+      GeometricallyIrreducible (q i) ∧ topologicalKrullDim (B i) ≤ 1 := by
+    obtain ⟨_, _, _, _, _, hsm, hproj, hgeom, hdimB, _⟩ := hprops i
+    have := hproj
+    exact ⟨hsm, inferInstance, hgeom, hdimB⟩
+  have hW : (∀ i, Dense ((Sigma.ι Y i ≫ ν) ⁻¹' (W : Set _))) ∧
+      IsThickening (pullback.snd ν W.ι) := by
+    refine ⟨?_, hWthick⟩
+    intro i
+    simpa only [hν, Sigma.ι_desc] using hWcomp i
+  obtain ⟨U, hηU, V, g, hgfin, hgsurj, hgrad, T, Y', B', t, j', p', ν', hrest⟩ :=
+    exists_spread_marked_curve_diagram f η hη K n L Y B j q ν
+      ⟨hνfin, hνsurj⟩ hcomm hL hj hq W hW
+  obtain ⟨hν'fin, hν'surj, hcomm', ht, hj', hsm, hp', _, W', hW'surj, hW'thick⟩ := hrest
+  have := hν'surj
+  have hd := good_curves_fibre_density (pullback.snd f (g ≫ U.ι)) n T Y' B' t j' p' ν'
+    hcomm' hj' (fun i ↦ (hp' i).1) (fun i s ↦ (hp' i).2.2 s |>.1) W' hW'surj
+  exact ⟨U, hηU, V, g, hgfin, hgsurj, hgrad, n, T, Y', B', t, j', p', ν',
+    hν'fin, hν'surj, hcomm', ht, hj', hsm, hp', W', hd.1, hd.2, hW'thick⟩
 
 end AlgebraicGeometry

@@ -1,355 +1,198 @@
 {
-  "id": "lem-weil-pbc-good-curves-generic-diagram",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-direct-image-finiteness-proper",
-      "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7).",
-      "via": [
-        "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-        "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
-        "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
-        "lem-weil-pbc-etale-compactification-constructibility",
-        "lem-weil-pbc-etale-proper-direct-image-finiteness"
-      ]
-    },
-    "same_as": []
+ "id": "lem-weil-pbc-good-curves-generic-diagram",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7).",
+   "via": [
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
   },
-  "kind": "statement",
-  "title": "Good curve models near a generic point",
-  "statement": "Let $S$ be a scheme and $f:X\\to S$ a separated morphism of finite presentation [def-pc-scheme] [def-weil-pbc-scheme-conventions]. Let $\\eta$ be the generic point of an irreducible component of $S$ [def-weil-irreducible-components] [def-sc-generic-point], and assume $\\dim X_\\eta\\leq1$ [def-pc-scheme-fibre] [def-kun-topological-krull-dimension]. There exist an open neighbourhood $U\\subset S$ of $\\eta$, a finite surjective universally injective morphism $V\\to U$, a finite family of finite etale morphisms $T_i\\to V$, and commutative diagrams over $V$ $$\\coprod_iY_i\\xrightarrow{\\nu}X_V:=X\\times_SV,\\qquad Y_i\\xrightarrow{j_i}\\overline Y_i\\to T_i\\to V$$ [def-pc-fibre-product] [lem-weil-pbc-scheme-coproduct-family] [def-weil-pbc-finite-etale-category], with the following properties. The map $\\nu$ is finite and surjective; each $j_i$ is an open immersion; $Y_i\\to T_i$ is smooth and surjective; $\\overline Y_i\\to T_i$ is smooth and proper with geometrically connected fibres of dimension at most one [def-sbc-smooth-morphisms] [def-pc-geometrically-irreducible]. There is an open $W\\subset X_V$ dense in every fibre of $X_V\\to V$ such that $W_i:=\\nu^{-1}(W)\\cap Y_i$ is dense in every fibre of $Y_i\\to T_i$, and $\\nu^{-1}(W)\\to W$ is a thickening, meaning a closed immersion surjective on underlying points [def-sbc-first-order-thickening]. The finite family may be empty.",
-  "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0GK7, label lemma-make-good-curves, assertions (1)-(8)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Good curve models near a generic point",
+ "statement": "Let $S$ be a scheme and $f:X\\to S$ a separated morphism of finite presentation [def-pc-scheme] [def-weil-pbc-scheme-conventions]. Let $\\eta$ be the generic point of an irreducible component of $S$ [def-weil-irreducible-components] [def-sc-generic-point], and assume $\\dim X_\\eta\\leq1$ [def-pc-scheme-fibre] [def-kun-topological-krull-dimension]. There exist an open neighbourhood $U\\subset S$ of $\\eta$, a finite surjective universally injective morphism $V\\to U$, a finite family of finite etale morphisms $T_i\\to V$, and commutative diagrams over $V$ $$\\coprod_iY_i\\xrightarrow{\\nu}X_V:=X\\times_SV,\\qquad Y_i\\xrightarrow{j_i}\\overline Y_i\\to T_i\\to V$$ [def-pc-fibre-product] [lem-weil-pbc-scheme-coproduct-family] [def-weil-pbc-finite-etale-category], with the following properties. The map $\\nu$ is finite and surjective; each $j_i$ is an open immersion; $Y_i\\to T_i$ is smooth and surjective; $\\overline Y_i\\to T_i$ is smooth and proper with geometrically connected fibres of dimension at most one [def-sbc-smooth-morphisms] [def-pc-geometrically-irreducible]. There is an open $W\\subset X_V$ dense in every fibre of $X_V\\to V$ such that $W_i:=\\nu^{-1}(W)\\cap Y_i$ is dense in every fibre of $Y_i\\to T_i$, and $\\nu^{-1}(W)\\to W$ is a thickening, meaning a closed immersion surjective on underlying points [def-sbc-first-order-thickening]. The finite family may be empty.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7, label lemma-make-good-curves, assertions (1)-(8)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-irreducible-components",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-finite-etale-category",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-sbc-first-order-thickening",
+  "def-sc-generic-point"
+ ],
+ "proof": [
+  {
+   "text": "Apply the field completion theorem to the generic fibre, which remains separated and finite type over its residue field. It supplies a finite purely inseparable extension, the component enumeration, normalization identifications, open immersions and smooth projective completions over finite separable fields.",
+   "uses": [
+    "lem-weil-pbc-field-curve-completion-insep"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-irreducible-components",
-    "def-pc-scheme-fibre",
-    "def-kun-topological-krull-dimension",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "def-weil-pbc-finite-etale-category",
-    "def-sbc-smooth-morphisms",
-    "def-pc-geometrically-irreducible",
-    "def-sbc-first-order-thickening",
-    "def-sc-generic-point"
-  ],
-  "proof": [
-    {
-      "text": "Choose an affine neighbourhood of $\\eta$ and replace it by its reduction $\\operatorname{Spec}A$. Its map to the original neighbourhood is a surjective closed immersion, hence finite and universally injective; it will be included in the eventual map $V\\to U$. The point $\\eta$ corresponds to a minimal prime $\\mathfrak p$ of the reduced ring $A$, and $A_{\\mathfrak p}=\\kappa(\\mathfrak p)=k$. Base changing $f$ keeps its separated finite-presentation hypotheses: affine-local finite-presentation base change is the cited ring lemma; the diagonal and the finite affine covers base change. The geometric generic fibre is unchanged by reduction of the base.",
-      "uses": [
-        "def-weil-pbc-scheme-reduction",
-        "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-        "lem-weil-pbc-minimal-prime-reduced-localization-field",
-        "lem-weil-pbc-finite-presentation-base-change-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0GK7, label lemma-make-good-curves"
-      }
-    },
-    {
-      "text": "Apply the field completion lemma to $X_\\eta/k$, obtaining $k'/k$, the normalization components $Y_{i,\\eta}$, their dense open immersions into smooth projective geometrically irreducible $\\overline Y_{i,\\eta}$, and finite separable constant fields $k_i/k'$. A projective morphism is proper. Restriction to the dense open makes $Y_{i,\\eta}\\to\\operatorname{Spec}k_i$ smooth, and its nonemptiness makes it surjective. If the family is empty the generic fibre is empty; the descent argument below still applies to the empty scheme.",
-      "uses": [
-        "lem-weil-pbc-field-curve-completion-insep",
-        "lem-pc-projective-proper",
-        "lem-weil-pbc-smooth-restrict-open-subschemes"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0GK7, label lemma-make-good-curves"
-      }
-    },
-    {
-      "text": "Realize $k'/k$ on a finite radicial base cover, using a finite tower of degree-$p$ extensions: induct on $[k'/k]$, apply the intermediate-field lemma to write $k'=M(z)$ with $[k':M]=p$, construct the tower for the smaller extension $M/k$, and append $M(z)/M$; in characteristic zero the tower is empty. At a stage with reduced affine base $\\operatorname{Spec}B$ and generic residue field $l$, first shrink to make $p=0$ in $B$, since $p=0$ in $B_{\\mathfrak q}=l$. For the next generator $\\beta$ with $\\beta^p=a\\in l$, shrink again to represent $a$ in $B$, and put $C=B[t]/(t^p-a)$. This is finite free on $1,t,\\ldots,t^{p-1}$. Every field-valued point lifts after adjoining a root of $t^p-a$, and two roots in any field are equal because $(u-v)^p=0$. Thus $\\operatorname{Spec}C\\to\\operatorname{Spec}B$ is surjective and universally injective by the field-point criterion. At $\\mathfrak q$, $C\\otimes_B l=l(\\beta)$, a field, so the unique point above $\\mathfrak q$ has that local ring. Reducing $C$ preserves this local field and gives another finite radicial surjection. Induct on the tower length; its terminal residue field is $k'$.",
-      "uses": [
-        "lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate",
-        "def-weil-pbc-finite-purely-inseparable-extension",
-        "def-weil-radicial-morphism",
-        "def-weil-finite-integral-morphism",
-        "def-weil-pbc-scheme-reduction",
-        "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0GK7, label lemma-make-good-curves"
-      }
-    },
-    {
-      "text": "All shrinkings on an intermediate finite radicial cover can be effected by shrinking the original base: if $h:Z\\to U$ is that cover and $O\\subset Z$ contains the unique point over $\\eta$, remove the closed set $h(Z\\setminus O)$ from $U$. Choose a principal open neighbourhood of $\\eta$ inside that remaining open of the original affine base. Its inverse image is contained in $O$ and is affine by finiteness of $h$. Thus both the original base and its finite cover remain affine at each stage. Finiteness and closedness of $h$ justify this operation without a Noetherian assumption. Finite composition and base change preserve finiteness; the pointwise injectivity after every base change and surjectivity persist under composition. We now have a reduced affine base $V$ finite, surjective, universally injective over an open $U$ of the original $S$, whose generic residue field is $k'$. Any later shrinking of $V$ is handled in the same way, restricting all the diagram objects by base change. For readability call this reduced affine base $\\operatorname{Spec}A$ and its generic field $k$.",
-      "uses": [
-        "lem-weil-pbc-finite-closed-map-finite-fibres",
-        "lem-weil-pbc-finite-composition",
-        "lem-weil-pbc-finite-morphism-permanence",
-        "def-weil-radicial-morphism",
-        "lem-weil-pbc-surjective-base-change"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0GK7, label lemma-make-good-curves"
-      }
-    },
-    {
-      "text": "Express $k=A_{\\mathfrak p}$ as the filtered colimit of $A_a$ for $a\\notin\\mathfrak p$. The affine-transition limit of $\\operatorname{Spec}A_a$ is therefore $\\operatorname{Spec}k$. Apply object descent to the finitely many $Y_{i,\\eta}$, $\\overline Y_{i,\\eta}$ and $\\operatorname{Spec}k_i$, keeping $X$ as its already specified model. Apply morphism descent to their finitely many arrows, and eventual equality to the finitely many commuting triangles. A common later principal localization gives a diagram $\\coprod_iY_i\\to X$, $Y_i\\to\\overline Y_i\\to T_i\\to\\operatorname{Spec}A$, whose generic fibre is the chosen diagram. Every object is of finite presentation over the affine base and hence qcqs. Every arrow is locally of finite presentation: on affine charts apply the cited theorem on finite presentation over a finite-type intermediate algebra.",
-      "uses": [
-        "lem-weil-pbc-localization-colimit-principal-localizations",
-        "lem-weil-pbc-limit-affine-transition",
-        "thm-pd-spreading-out",
-        "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0GK7, label lemma-make-good-curves"
-      }
-    },
-    {
-      "text": "Over the generic field $\\nu$ is finite and surjective: it is the normalization of the reduction followed by the surjective closed immersion of the reduction. Use the existing normalization theorem and finite composition for this assertion. Descend finiteness and surjectivity of $\\nu$, openness of each $j_i$, finite etaleness of $T_i\\to V$, smoothness and surjectivity of $Y_i\\to T_i$, and smoothness and properness of $\\overline Y_i\\to T_i$, using the respective cited descent statements. Their qcqs and local finite-presentation hypotheses were established in the preceding step; the weaker local finite-type hypotheses also hold. There are only finitely many maps, so take common refinements successively. Finiteness and surjectivity persist by their base-change lemmas, smoothness and open immersion by the eventual conclusions of the two new descent statements; etaleness is smooth relative dimension zero and is unchanged under restriction of base. Properness, defined using the diagonal and universal closedness, is likewise unchanged under base restriction.",
-      "uses": [
-        "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-        "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-        "lem-weil-pbc-finite-composition",
-        "lem-weil-pbc-descend-finite",
-        "lem-weil-pbc-descend-surjective",
-        "lem-weil-pbc-descend-etale",
-        "lem-weil-pbc-descend-smooth-qcqs",
-        "lem-weil-pbc-descend-open-immersion-qcqs",
-        "lem-weil-pbc-eventually-proper",
-        "lem-weil-pbc-finite-morphism-permanence",
-        "lem-weil-pbc-surjective-base-change",
-        "def-weil-proper-morphism",
-        "def-sbc-smooth-morphisms"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0GK7, label lemma-make-good-curves"
-      }
-    },
-    {
-      "text": "For each $i$, $T_i$ has precisely one point $\\eta_i$ above $\\eta$, with residue field $k_i$. Apply local constancy of geometric component count to the proper smooth finite-presentation morphism $\\overline Y_i\\to T_i$. The count at $\\eta_i$ is one, so there is an open neighbourhood on which all fibres are geometrically connected. Apply upper semicontinuity of proper fibre dimension to obtain an open neighbourhood on which the fibres have dimension at most one. Remove from $V$ the images under the finite maps $T_i\\to V$ of the closed complements of these neighbourhoods. Those images are closed and avoid $\\eta$, so this is an allowed shrinking. Thus all fibres now have both required properties. Properness plus smoothness gives finite presentation here: the objects are qcqs and smooth implies locally of finite presentation.",
-      "uses": [
-        "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
-        "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
-        "lem-weil-pbc-finite-closed-map-finite-fibres",
-        "lem-pc-smooth-flat"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0GK7, label lemma-make-good-curves"
-      }
-    },
-    {
-      "text": "Apply the reduced algebraic normalization theorem to $(X_\\eta)_{\\mathrm{red}}$. Its dense normal open has normalization an isomorphism. View this open on $X_\\eta$, whose reduction has the same underlying space. The normalization map above this open is then the inclusion of its reduction, a closed immersion surjective on points. Choose a quasi-compact dense subopen $W_\\eta$ there: take finitely many affine neighbourhoods, inside that normal open, of the generic points of the finitely many components indexed by the normalization. Its inverse image meets every $Y_{i,\\eta}$. By the scheme-over-limit lemma $X_\\eta$ is the inverse limit of the qcqs $X_{A_a}$. Descend $W_\\eta$ to a quasi-compact open $W$ at a stage using quasi-compact-open descent. The inverse image of $W$ under the finite $\\nu$ is also qcqs, and its map to $W$ is locally of finite type. Closed-immersion descent therefore makes $\\nu^{-1}(W)\\to W$ a closed immersion after a further localization. It is surjective by base change of the surjective $\\nu$, so is a thickening, with no square-zero assertion.",
-      "uses": [
-        "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-        "def-weil-pbc-scheme-reduction",
-        "lem-weil-pbc-scheme-over-limit",
-        "pqf-lem-limit-qc-open-descends",
-        "lem-weil-pbc-descend-closed-immersion",
-        "lem-weil-pbc-surjective-base-change",
-        "def-sbc-first-order-thickening"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0GK7, label lemma-make-good-curves"
-      }
-    },
-    {
-      "text": "Put $W_i=\\nu^{-1}(W)\\cap Y_i$. The map $W_i\\to T_i$ is open: it is the restriction of a smooth morphism, smooth implies flat and locally of finite presentation, and such maps are open. Its image contains $\\eta_i$ by construction of $W_\\eta$. Since $T_i\\to V$ is finite, remove from $V$ the closed images of the complements of these open images. After this shrinking every $W_i\\to T_i$ is surjective. Each fibre of $\\overline Y_i\\to T_i$ is smooth and geometrically connected and hence geometrically irreducible: after any field extension apply the integral-geometry core with base the spectrum of that field (integral, with integrally closed local rings), smooth source the nonempty connected fibre. Its conclusion that the source is integral gives irreducibility. The nonempty open fibre of $Y_i$ is therefore irreducible too. Its nonempty open subspace $(W_i)_t$ is dense. For smoothness after a field extension $F/\\kappa(t)$, take affine first-order thickening test data over $F$ and forget the $F$-structure. Formal smoothness over $\\kappa(t)$ supplies a lift to the original fibre; pair it with the given map of the thickening to $\\operatorname{Spec}F$ to obtain a lift to the fibre product. Local finite presentation follows on affine charts from the cited finite-presentation base-change lemma.",
-      "uses": [
-        "lem-weil-pbc-smooth-restrict-open-subschemes",
-        "lem-pc-smooth-flat",
-        "lem-weil-pbc-flat-lfp-open",
-        "lem-weil-pbc-finite-closed-map-finite-fibres",
-        "lem-sbc-smooth-connected-generic-geometry-core",
-        "def-pc-geometrically-irreducible",
-        "def-pc-integral-scheme",
-        "def-sbc-smooth-morphisms",
-        "lem-weil-pbc-finite-presentation-base-change-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0GK7, label lemma-make-good-curves"
-      }
-    },
-    {
-      "text": "Fix $v\\in V$ and a nonempty open in the fibre $(Y_i)_v$ of $Y_i\\to V$. Choose a point in it and let $t$ be its image in $T_i$, necessarily above $v$. Intersection with the fibre $(Y_i)_t$ is a nonempty open, so meets the dense open $(W_i)_t$. Thus $(W_i)_v$ is dense in $(Y_i)_v$. Taking the finite disjoint union shows $\\nu^{-1}(W)$ is dense in every fibre of $\\coprod_iY_i\\to V$. The map of this fibre onto $(X_V)_v$ is surjective by surjective base change. The image of a dense subset under a continuous surjection is dense: the inverse image of every nonempty open is nonempty open and meets the dense subset. Its image is exactly $W_v$ since $\\nu$ is surjective. Consequently $W$ is dense in every fibre of $X_V\\to V$. This proves all clauses. If $I$ is empty, the descended surjection from the empty scheme forces $X_V$ to be empty; choose $W=\\varnothing$.",
-      "uses": [
-        "lem-weil-pbc-surjective-base-change",
-        "lem-weil-pbc-scheme-coproduct-family",
-        "def-pc-scheme-fibre"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0GK7, label lemma-make-good-curves"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-scheme-reduction",
-    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-    "lem-weil-pbc-minimal-prime-reduced-localization-field",
-    "lem-weil-pbc-finite-presentation-base-change-composition",
-    "lem-weil-pbc-field-curve-completion-insep",
-    "lem-pc-projective-proper",
-    "lem-weil-pbc-smooth-restrict-open-subschemes",
-    "lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate",
-    "def-weil-pbc-finite-purely-inseparable-extension",
-    "def-weil-radicial-morphism",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-finite-closed-map-finite-fibres",
-    "lem-weil-pbc-finite-composition",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-surjective-base-change",
-    "lem-weil-pbc-localization-colimit-principal-localizations",
-    "lem-weil-pbc-limit-affine-transition",
-    "thm-pd-spreading-out",
-    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
-    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-    "lem-weil-pbc-descend-finite",
-    "lem-weil-pbc-descend-surjective",
-    "lem-weil-pbc-descend-etale",
-    "lem-weil-pbc-descend-smooth-qcqs",
-    "lem-weil-pbc-descend-open-immersion-qcqs",
-    "lem-weil-pbc-eventually-proper",
-    "def-weil-proper-morphism",
-    "def-sbc-smooth-morphisms",
-    "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
-    "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
-    "lem-pc-smooth-flat",
-    "lem-weil-pbc-scheme-over-limit",
-    "pqf-lem-limit-qc-open-descends",
-    "lem-weil-pbc-descend-closed-immersion",
-    "def-sbc-first-order-thickening",
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-sbc-smooth-connected-generic-geometry-core",
-    "def-pc-geometrically-irreducible",
-    "def-pc-integral-scheme",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "def-pc-scheme-fibre"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0GK7, label lemma-make-good-curves, complete proof; explicit shrinking, induction, dimension and density details supplied"
+  {
+   "text": "Apply the componentwise normalization good-open theorem to the extended generic fibre. It proves finiteness, surjectivity and a dense thickening locus, whose inverse image is dense in each Y_i.",
+   "uses": [
+    "lem-weil-pbc-field-curve-normalization-good-open"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "separated finitely presented relative curve admits smooth proper curve compactifications after finite radicial base change near generic point",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "generic curve normalization smooth projective completion after purely inseparable field extension spread out",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.IsIntegral.integral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {K : Type u_2} {inst_1 : Field K} {inst_2 : Algebra R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsIntegral R W], ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For any commutative ring $ R $, field $ K $ equipped with an $ R $-algebra structure, and integral Weierstrass curve $ W $ over $ K $, there exists a Weierstrass curve $ W_{\\\\text{int}} $ over $ R $ su\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.isIntegral_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K),\\n  WeierstrassCurve.IsIntegral R W ↔ ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve $ W $ over $ K $, the curve $ W $ is integral (i.e., its coordinate ring is an integral do\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism. For a projective Weierstrass curve $ W' $ over $ A $, a point $ P $ on $ W' $ is nonsingular if and only if the base-changed point $ f \\\\circ P $ \"}\n  {\"name\": \"WeierstrassCurve.baseChange_integralModel_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W], (WeierstrassCurve.integralModel R W).baseChange K = W\", \"doc\": \"For an integral Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, the base change of its integral model over $ R $ to $ K $ recovers the original curve $ W $, i.e., \"}\n  {\"name\": \"WeierstrassCurve.integralModel\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    {K : Type u_2} →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra R K] → (W : WeierstrassCurve K) → [hW : WeierstrassCurve.IsIntegral R W] → WeierstrassCurve R\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and an integral Weierstrass curve $ W $ over $ K $, this constructs the integral model of $ W $ as a Weierstrass\"}\n  {\"name\": \"WeierstrassCurve.Projective.map_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W' : WeierstrassCurve.Projective R} {f : R →+* S}\\n  (P : Fin 3 → R),\\n  Function.Injective ⇑f → ((WeierstrassCurve.map W' f).toProjective.Nonsingular (⇑f ∘ P) ↔ W'.Nonsingular P)\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism, and let $ W' $ be a Weierstrass curve over $ A $. For a point $ P $ on $ W' $, the point $ f \\\\circ P $ is nonsingular on the projective Weierstra\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"smooth\", \"proper\"",
-      "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"RingHom.Smooth.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \" : RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"Smoothness is a local property of ring homomorphisms. \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertySmoothSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" : AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Smooth fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"The property of scheme morphisms `Smooth` is associated with the ring\\nhomomorphism property `Smooth`. \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertySmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" (n : ℕ) : AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.SmoothOfRelativeDimension n) fun {R S} [CommRing R] [CommRing S] => RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"The property of scheme morphisms `SmoothOfRelativeDimension n` is associated with the ring\\nhomomorphism property `Locally (IsStandardSmoothOfRelativeDimension n)`. \"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeSmoothMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Smooth) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "shriek|constructible.*sheaf|makeGoodCurves|good_curves",
-      "results": "[grep] OK 0 hit(s)",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "separated finitely presented relative curve admits smooth proper curve compactifications after finite radicial base change near generic point",
-      "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "normalization and compactification of a one dimensional scheme over a field after radicial extension",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-    "by": "worker",
-    "date": "2026-10-14"
+  {
+   "text": "Projective completions are proper. The two structure-map equations supplied by field completion give the commuting triangles for the specified field diagram.",
+   "uses": [
+    "lem-pc-projective-proper"
+   ],
+   "elementary": true
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "merged_into": null,
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-weil-pbc-good-curves-generic-diagram",
-    "worker": "stage1",
-    "summary": "Read Tag 0GK7 and all cited input statements. Reused limit and normalization inputs; added five statement-only auxiliary results. Wrote the radicial root tower, common-stage descent, proper-family shrinking and fibrewise density arguments, including the empty generic fibre. No mathematical change to the statement; repaired doubled TeX escapes. Independent second reading made affine refinements and the tower induction and field-base-change lifting explicit; the cross-unit fibre-integrality tool is declared for maintainer review.",
-    "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7).",
-    "tool_uses": [
-      {
-        "node": "lem-sbc-smooth-connected-generic-geometry-core",
-        "why": "Step 9 applies its integrality conclusion to each nonempty smooth geometrically connected fibre over the spectrum of a field, and after each field extension, to obtain geometric irreducibility. The proper-base-change unit has no general smooth-connected-fibre integrality statement; this geometry input checks density of W_i and does not replace a step of the unit route."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sbc-smooth-connected-generic-geometry-core"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NS-fe446a106",
-    "group": "NS",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-fe446a106 (reviewer sub-agent of L); spot-checked: Read the complete item, all five new nodes, every cited statement, source locations, and unit/chapter route. Checked all ten steps and small cases against Stacks 0GK7, 0GK5, 0C0C, 0EUU, 0E0N and 0D4I. No duplicates, circular dependencies or mathematical gaps found. Accepted the declared smooth-fibre integrality tool. Archived master target hypotheses, coefficient categories and base-change directions remain unchanged. Full checks recorded in review.md; no fixes required."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-492edd1fd",
-    "group": "NL",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable files, all statement dependencies, source clauses, edge cases, docstrings, and verbatim signature. Server-only compilation reproduced cleanly in 1.5 seconds. No findings; branch and project clones unchanged."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.GoodCurvesGenericDiagram",
-    "declaration": "AlgebraicGeometry.exists_good_curves_generic_diagram",
-    "file": "lean/Sheaf/AlgebraicGeometry/GoodCurvesGenericDiagram.lean",
-    "statement": "theorem exists_good_curves_generic_diagram {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (η : S) (hη : ∃ Z ∈ irreducibleComponents S, IsGenericPoint η Z) (hdim : topologicalKrullDim (f.fiber η) ≤ 1) : ∃ (U : S.Opens) (_ : η ∈ U) (V : Scheme.{u}) (g : V ⟶ U.toScheme), IsFinite g ∧ Surjective g ∧ UniversallyInjective g ∧ ∃ (n : ℕ) (T Y Ybar : Fin n → Scheme.{u}) (t : ∀ i, T i ⟶ V) (j : ∀ i, Y i ⟶ Ybar i) (p : ∀ i, Ybar i ⟶ T i) (ν : (∐ Y) ⟶ pullback f (g ≫ U.ι)), IsFinite ν ∧ Surjective ν ∧ (∀ i, Sigma.ι Y i ≫ ν ≫ pullback.snd f (g ≫ U.ι) = j i ≫ p i ≫ t i) ∧ (∀ i, IsFinite (t i) ∧ Etale (t i)) ∧ (∀ i, IsOpenImmersion (j i)) ∧ (∀ i, Smooth (j i ≫ p i) ∧ Surjective (j i ≫ p i)) ∧ (∀ i, Smooth (p i) ∧ IsProper (p i) ∧ ∀ s : T i, GeometricallyConnected ((p i).fiberToSpecResidueField s) ∧ topologicalKrullDim ((p i).fiber s) ≤ 1) ∧ ∃ W : (pullback f (g ≫ U.ι)).Opens, (∀ v : V, Dense ((pullback.snd f (g ≫ U.ι)).fiberι v ⁻¹' (W : Set _))) ∧ (∀ (i : Fin n) (s : T i), Dense (((j i ≫ p i).fiberι s ≫ Sigma.ι Y i ≫ ν) ⁻¹' (W : Set _))) ∧ IsThickening (pullback.snd ν W.ι)",
-    "branch": "newtargets-dag",
-    "by": "NL",
-    "date": "2026-10-15",
-    "existing": false
+  {
+   "text": "Apply the marked-diagram spreading theorem to the specified field diagram and marked thickening locus. It retains the number n of components and gives all geometric clauses, plus surjectivity of each marked open onto T_i. Apply the proved fibre-density theorem to the resulting commuting cover, using smoothness and geometric connectedness of the proper curve fibres. This gives both density clauses. Package the resulting data with the same n. This works for n=0 as well.",
+   "uses": [
+    "lem-weil-pbc-spread-marked-curve-diagram",
+    "lem-weil-pbc-good-curves-fibre-density"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-curve-completion-insep",
+  "lem-weil-pbc-field-curve-normalization-good-open",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-spread-marked-curve-diagram",
+  "lem-weil-pbc-good-curves-fibre-density"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7; field completion and normalization locus are assembled in Lean before the separate marked-diagram spreading argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "separated finitely presented relative curve admits smooth proper curve compactifications after finite radicial base change near generic point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic curve normalization smooth projective completion after purely inseparable field extension spread out",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.IsIntegral.integral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {K : Type u_2} {inst_1 : Field K} {inst_2 : Algebra R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsIntegral R W], ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For any commutative ring $ R $, field $ K $ equipped with an $ R $-algebra structure, and integral Weierstrass curve $ W $ over $ K $, there exists a Weierstrass curve $ W_{\\\\text{int}} $ over $ R $ su\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.isIntegral_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K),\\n  WeierstrassCurve.IsIntegral R W ↔ ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve $ W $ over $ K $, the curve $ W $ is integral (i.e., its coordinate ring is an integral do\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism. For a projective Weierstrass curve $ W' $ over $ A $, a point $ P $ on $ W' $ is nonsingular if and only if the base-changed point $ f \\\\circ P $ \"}\n  {\"name\": \"WeierstrassCurve.baseChange_integralModel_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W], (WeierstrassCurve.integralModel R W).baseChange K = W\", \"doc\": \"For an integral Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, the base change of its integral model over $ R $ to $ K $ recovers the original curve $ W $, i.e., \"}\n  {\"name\": \"WeierstrassCurve.integralModel\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    {K : Type u_2} →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra R K] → (W : WeierstrassCurve K) → [hW : WeierstrassCurve.IsIntegral R W] → WeierstrassCurve R\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and an integral Weierstrass curve $ W $ over $ K $, this constructs the integral model of $ W $ as a Weierstrass\"}\n  {\"name\": \"WeierstrassCurve.Projective.map_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W' : WeierstrassCurve.Projective R} {f : R →+* S}\\n  (P : Fin 3 → R),\\n  Function.Injective ⇑f → ((WeierstrassCurve.map W' f).toProjective.Nonsingular (⇑f ∘ P) ↔ W'.Nonsingular P)\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism, and let $ W' $ be a Weierstrass curve over $ A $. For a point $ P $ on $ W' $, the point $ f \\\\circ P $ is nonsingular on the projective Weierstra\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smooth\", \"proper\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"RingHom.Smooth.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \" : RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"Smoothness is a local property of ring homomorphisms. \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertySmoothSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" : AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Smooth fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"The property of scheme morphisms `Smooth` is associated with the ring\\nhomomorphism property `Smooth`. \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertySmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" (n : ℕ) : AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.SmoothOfRelativeDimension n) fun {R S} [CommRing R] [CommRing S] => RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"The property of scheme morphisms `SmoothOfRelativeDimension n` is associated with the ring\\nhomomorphism property `Locally (IsStandardSmoothOfRelativeDimension n)`. \"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeSmoothMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Smooth) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|constructible.*sheaf|makeGoodCurves|good_curves",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "separated finitely presented relative curve admits smooth proper curve compactifications after finite radicial base change near generic point",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization and compactification of a one dimensional scheme over a field after radicial extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-good-curves-generic-diagram",
+  "worker": "stage1",
+  "summary": "Read Tag 0GK7 and all cited input statements. Reused limit and normalization inputs; added five statement-only auxiliary results. Wrote the radicial root tower, common-stage descent, proper-family shrinking and fibrewise density arguments, including the empty generic fibre. No mathematical change to the statement; repaired doubled TeX escapes. Independent second reading made affine refinements and the tower induction and field-base-change lifting explicit; the cross-unit fibre-integrality tool is declared for maintainer review.",
+  "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7).",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Step 9 applies its integrality conclusion to each nonempty smooth geometrically connected fibre over the spectrum of a field, and after each field extension, to obtain geometric irreducibility. The proper-base-change unit has no general smooth-connected-fibre integrality statement; this geometry input checks density of W_i and does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-fe446a106",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-fe446a106 (reviewer sub-agent of L); spot-checked: Read the complete item, all five new nodes, every cited statement, source locations, and unit/chapter route. Checked all ten steps and small cases against Stacks 0GK7, 0GK5, 0C0C, 0EUU, 0E0N and 0D4I. No duplicates, circular dependencies or mathematical gaps found. Accepted the declared smooth-fibre integrality tool. Archived master target hypotheses, coefficient categories and base-change directions remain unchanged. Full checks recorded in review.md; no fixes required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-492edd1fd",
+  "group": "NL",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, source clauses, edge cases, docstrings, and verbatim signature. Server-only compilation reproduced cleanly in 1.5 seconds. No findings; branch and project clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GoodCurvesGenericDiagram",
+  "declaration": "AlgebraicGeometry.exists_good_curves_generic_diagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/GoodCurvesGenericDiagram.lean",
+  "statement": "theorem exists_good_curves_generic_diagram {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (η : S) (hη : ∃ Z ∈ irreducibleComponents S, IsGenericPoint η Z) (hdim : topologicalKrullDim (f.fiber η) ≤ 1) : ∃ (U : S.Opens) (_ : η ∈ U) (V : Scheme.{u}) (g : V ⟶ U.toScheme), IsFinite g ∧ Surjective g ∧ UniversallyInjective g ∧ ∃ (n : ℕ) (T Y Ybar : Fin n → Scheme.{u}) (t : ∀ i, T i ⟶ V) (j : ∀ i, Y i ⟶ Ybar i) (p : ∀ i, Ybar i ⟶ T i) (ν : (∐ Y) ⟶ pullback f (g ≫ U.ι)), IsFinite ν ∧ Surjective ν ∧ (∀ i, Sigma.ι Y i ≫ ν ≫ pullback.snd f (g ≫ U.ι) = j i ≫ p i ≫ t i) ∧ (∀ i, IsFinite (t i) ∧ Etale (t i)) ∧ (∀ i, IsOpenImmersion (j i)) ∧ (∀ i, Smooth (j i ≫ p i) ∧ Surjective (j i ≫ p i)) ∧ (∀ i, Smooth (p i) ∧ IsProper (p i) ∧ ∀ s : T i, GeometricallyConnected ((p i).fiberToSpecResidueField s) ∧ topologicalKrullDim ((p i).fiber s) ≤ 1) ∧ ∃ W : (pullback f (g ≫ U.ι)).Opens, (∀ v : V, Dense ((pullback.snd f (g ≫ U.ι)).fiberι v ⁻¹' (W : Set _))) ∧ (∀ (i : Fin n) (s : T i), Dense (((j i ≫ p i).fiberι s ≫ Sigma.ι Y i ≫ ν) ⁻¹' (W : Set _))) ∧ IsThickening (pullback.snd ν W.ι)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261020T211624-L-3479953",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
