@@ -5,9 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleTorsorReflection
 import Sheaf.AlgebraicGeometry.FiniteEtaleTorsorLifting
 import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality

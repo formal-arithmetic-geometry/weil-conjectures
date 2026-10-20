@@ -9,9 +9,7 @@ public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
-import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.AlgebraicGeometry.GeometricStalkComparisonConstant
 
 /-!
 # Descent of open direct image and exchange along finite radicial covers

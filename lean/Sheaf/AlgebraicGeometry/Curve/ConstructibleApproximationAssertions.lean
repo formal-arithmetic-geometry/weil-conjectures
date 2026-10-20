@@ -10,10 +10,6 @@ import Sheaf.AlgebraicGeometry.ConstructibleSubobjectPresentation
 import WeilConjectures.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
 import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
-import Mathlib.CategoryTheory.Presentable.Directed
-import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Constructible approximation for the eight assertions
 
