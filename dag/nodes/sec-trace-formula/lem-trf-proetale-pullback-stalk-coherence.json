@@ -32,7 +32,7 @@
    }
   },
   {
-   "text": "The representative formulas are natural in $M$: a sheaf map applies to the section $a$ and commutes with both displayed restrictions, while the pointed morphisms and their composites are unchanged. For the identity morphism the base-change functor, its pointed-neighbourhood category, and its unit section are the identity, so the same formula gives $c_{\\mathrm{id},u,M}=\\mathrm{id}_{M_u}$. The module and complex versions inherit this naturality term by term from the module stalk construction in [def-weil-proetale-geometric-stalk].",
+   "text": "The representative formulas are natural in M: a sheaf map applies to the section a and commutes with both restrictions, while the pointed morphisms are unchanged. For the identity morphism use the normalized identity-pullback comparison. Restricting its unit along the diagonal gives the inverse comparison. Apply the inverse germ formula, the forward germ formula, and the diagonal projection identity; colimit extensionality gives the stated identity-pullback equation with its point transport. Naturality of the module stalk construction in [def-weil-proetale-geometric-stalk] then gives the natural-isomorphism equation, and the complex version is termwise.",
    "uses": [
     "def-weil-proetale-geometric-stalk",
     "def-weil-proetale-inverse-image"
@@ -44,11 +44,12 @@
    }
   },
   {
-   "text": "Let $h:Z\\to Y$ and $f:Y\\to X$ be composable. The direct constant-section identification for $fh$ agrees with the composite identifications: both send every constant $a$ to $a$, and maps out of the sheafification of the constant presheaf are determined by those sections, as in [def-weil-proetale-inverse-image]. Apply the representative formula of Step 1 first to the comparison for $h$ and then to the comparison for $f$. The two successive base-change objects are canonically identified with the single object $Z\\times_XV$ by the associativity and universal property of fibre products; under this identification both composites send a representative to the same germ $[V,\\operatorname{pr}_V\\theta u',a]$ at $fhv$. The comparison $\\chi_{h,f}$ of [lem-weil-pbc-proetale-derived-pullback-composition] is, on a K-flat complex with flat terms, the termwise canonical module-pullback map, so its stalk is precisely the reassociation used here. Therefore the displayed composition identity holds on representatives and is natural in $M$.",
+   "text": "Let $h:Z\\to Y$ and $f:Y\\to X$ be composable. The direct constant-section identification for $fh$ agrees with the composite identifications: both send every constant $a$ to $a$, and maps out of the sheafification of the constant presheaf are determined by those sections, as in [def-weil-proetale-inverse-image]. Apply the representative formula of Step 1 first to the comparison for $h$ and then to the comparison for $f$. The two successive base-change objects are canonically identified with the single object $Z\\times_XV$ by the associativity and universal property of fibre products; under this identification both composites send a representative to the same germ $[V,\\operatorname{pr}_V\\theta u',a]$ at $fhv$. The comparison $\\chi_{h,f}$ of [lem-weil-pbc-proetale-derived-pullback-composition] is, on a K-flat complex with flat terms, the termwise canonical module-pullback map, so its stalk is precisely the reassociation used here. Therefore the displayed composition identity holds on representatives and is natural in $M$. In Lean, use proEtaleConstantRingPullbackComposition_ordinary from [lem-trf-derived-pullback-coherence]. It supplies an abstract ordinary comparison with its unit-section formula and identifies its exact-derived image with the prescribed compositor. Apply that formula to the inverse stalk germs, then use two forward germ formulas and the fibre-product projection identity. This avoids unfolding the uniquely normalized comparison witnesses.",
    "uses": [
     "def-weil-proetale-geometric-stalk",
     "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-derived-pullback-coherence"
    ],
    "elementary": false,
    "source": {
@@ -68,12 +69,13 @@
    }
   },
   {
-   "text": "The inverse-image functors for the identified constant coefficient sheaves are exact and their derived pullbacks are the termwise functors by [def-weil-pbc-proetale-operations]. The abelian stalk functors are exact by [lem-cbc-proetale-classical-stalk]; hence their termwise functors preserve quasi-isomorphisms (their cohomology is the stalk of the cohomology sheaf). The same holds for fixed-$A$ module sheaves on forgetting the action. Apply Steps 1--4 in every degree of a representative complex: all maps commute with differentials by naturality, so the formulas are equalities of chain maps. The comparison in Step 3 is the normalized derived comparison of [lem-weil-pbc-proetale-derived-pullback-composition]. Since quasi-isomorphisms are inverted in the ordinary derived category, the localization universal property [lem-weil-pbc-localization-universal-property] carries these natural chain-map equalities to the asserted equalities for bounded derived complexes, with no choice of representative affecting them.",
+   "text": "The inverse-image functors for the identified constant coefficient sheaves are exact and their derived pullbacks are the termwise functors by [def-weil-pbc-proetale-operations]. The abelian stalk functors are exact by [lem-cbc-proetale-classical-stalk]; hence their termwise functors preserve quasi-isomorphisms (their cohomology is the stalk of the cohomology sheaf). The same holds for fixed-$A$ module sheaves on forgetting the action. Apply Steps 1--4 in every degree of a representative complex: all maps commute with differentials by naturality, so the formulas are equalities of chain maps. The comparison in Step 3 is the normalized derived comparison of [lem-weil-pbc-proetale-derived-pullback-composition]. Since quasi-isomorphisms are inverted in the ordinary derived category, the localization universal property [lem-weil-pbc-localization-universal-property] carries these natural chain-map equalities to the asserted equalities for bounded derived complexes, with no choice of representative affecting them. The generic exact-derived functor factorization, cocycle, identity and whiskering lemmas descend the proved module equalities directly. The characterization of the ordinary comparison identifies this descent with the prescribed canonical derived compositor.",
    "uses": [
     "def-weil-pbc-proetale-operations",
     "lem-weil-pbc-proetale-derived-pullback-composition",
     "lem-weil-pbc-localization-universal-property",
-    "lem-cbc-proetale-classical-stalk"
+    "lem-cbc-proetale-classical-stalk",
+    "lem-trf-derived-pullback-coherence"
    ],
    "elementary": false,
    "source": {
@@ -89,15 +91,16 @@
   "lem-cbc-proetale-classical-stalk",
   "lem-cbc-proetale-sheafification-geometric-stalk",
   "lem-pur-proetale-inverse-image-stalk",
+  "lem-trf-derived-pullback-coherence",
   "lem-weil-pbc-localization-universal-property",
   "lem-weil-pbc-proetale-derived-pullback-composition",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-weil-pbc-ring-sheaf-change-adjunction"
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "prop-weil-pbc-proetale-constant-ring-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 05V1 and 0F4F; reuse ringUnitComparison in ProEtaleRingSheafChangeAdjunction for the underlying mate and module-colimit representatives for linearity. Steps 3 and 5 remain in the original combined coherence theorem."
+  "place": "Tags 05V1 and 0F4F; normalized module stalk germs, the ordinary-comparison characterization in ProEtaleDerivedPullbackCoherence, and generic exact-derived coherence. Lean proof by G8, 2026-10-21."
  },
  "mathlib_match": null,
  "status": "split",
@@ -240,10 +243,10 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "G8",
   "result": "pass",
-  "landing": "20261020T131202-L-1255335",
-  "kind": "proof",
+  "landing": "20261020T233146-L-900134",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -143,7 +143,7 @@ Source: the composition clause of
 literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/
 pur713-def-pullback-comparison.md (blueprint: pur713-def-pullback-comparison).
 -/
-noncomputable def proEtaleConstantRingPullbackComposition
+@[no_expose] noncomputable def proEtaleConstantRingPullbackComposition
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (A : Type u) [CommRing A] :
     proEtaleConstantRingDerivedPullback A k ⋙
@@ -158,6 +158,26 @@ noncomputable def proEtaleConstantRingPullbackComposition
       proEtaleRingDerivedPullback (h ≫ k)
         (proEtaleConstantRing V A) (proEtaleConstantRing Z A) c)
       (proEtaleConstantRingCompositeCoefficients_eq h k A))
+
+/-- The normalized coefficient compositor, characterized by the canonical ring-sheaf
+comparison and the constant-section coefficient transport. Source: blueprint
+(blueprint: pur713-def-pullback-comparison). -/
+theorem proEtaleConstantRingPullbackComposition_eq
+    {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
+    (A : Type u) [CommRing A] :
+    proEtaleConstantRingPullbackComposition h k A =
+  (proEtaleCanonicalPullbackComposition h k
+    (proEtaleConstantRing V A) (proEtaleConstantRing W A)
+    (proEtaleConstantRing Z A)
+    (proEtaleConstantRingComparison k A)
+    (proEtaleConstantRingComparison h A)).symm ≪≫
+    eqToIso (congrArg (fun c ↦
+      proEtaleRingDerivedPullback (h ≫ k)
+        (proEtaleConstantRing V A) (proEtaleConstantRing Z A) c)
+      (proEtaleConstantRingCompositeCoefficients_eq h k A)) := by
+  unfold proEtaleConstantRingPullbackComposition
+  rfl
+
 
 /--
 The specified comparison around the Cartesian square, formed from the two

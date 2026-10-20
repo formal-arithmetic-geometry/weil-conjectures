@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "Compare any two normalized ordinary module adjunctions by equality of their units on every section. Hence a is the inverse of leftAdjointCompIso for fixed normalized adjunctions and d. Apply leftAdjointCompIso_assoc to the six adjunctions and the direct-image coherence equation. Equality induction handles the triple-composite transport. Invert the natural-isomorphism equality and evaluate it on modules to obtain the ordinary pullback cocycle.",
+   "text": "Compare any two normalized ordinary module adjunctions by equality of their units on every section. Hence a is the inverse of leftAdjointCompIso for fixed normalized adjunctions and d. Apply leftAdjointCompIso_assoc to the six adjunctions and the direct-image coherence equation. Equality induction handles the triple-composite transport. Invert the natural-isomorphism equality and evaluate it on modules to obtain the ordinary pullback cocycle. The same conjugate-unit identity gives the ordinary comparison on successive unit sections. Equality of normalized adjunction units identifies the actual supplied adjunctions; the direct-image section formula then gives restriction along fibre-product pasting. Expose this unit formula together with the ordinary comparison and its exact-derived identification as proEtaleConstantRingPullbackComposition_ordinary, without exposing the chosen witnesses.",
    "uses": [
     "lem-trf-adjoint-composition-coherence",
     "def-weil-pbc-composite-adjunction",
@@ -80,6 +80,18 @@
     "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryMate.lean",
     "place": "mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_isoWhiskerLeft/Right, and mapDerivedCategoryCompIso_assoc"
    }
+  },
+  {
+   "text": "For the underlying abelian inverse-image comparison used to normalize the stalk calculation, specialize ringUnitComparison of the ring-sheaf change adjunction to the specified constant coefficient identification and its module adjunction. This proves proEtaleConstantRingPullback_underlyingUnit_isIso. Its public statement lets the stalk proof use the unit comparison without importing all private implementation details of the ring-sheaf adjunction module.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingSheafChangeAdjunction.lean",
+    "place": "ringUnitComparison; specialization to constant ring sheaves"
+   }
   }
  ],
  "proof_deps": [
@@ -90,7 +102,8 @@
   "def-weil-proetale-inverse-image",
   "lem-trf-adjoint-composition-coherence",
   "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation"
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
@@ -198,7 +211,12 @@
   "by": "Q139",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Uses the already landed constant-coefficient specialization proEtaleConstantRingPullbackComposition in the inverse direction. That definition is exactly the selected normalized composition comparison, with the canonical constant-coefficient transport. Explicit eqToIso along Category.assoc identifies the triple composite arrows; at components the canonical functor associator is definitionally identity. Added the landed owning node pur713-def-pullback-comparison to stmt_deps for this reused helper."
+  "note": "Uses the already landed constant-coefficient specialization proEtaleConstantRingPullbackComposition in the inverse direction. That definition is exactly the selected normalized composition comparison, with the canonical constant-coefficient transport. Explicit eqToIso along Category.assoc identifies the triple composite arrows; at components the canonical functor associator is definitionally identity. Added the landed owning node pur713-def-pullback-comparison to stmt_deps for this reused helper.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingDerivedPullback_composition_coherence",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingPullbackComposition_ordinary",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingPullback_underlyingUnit_isIso"
+  ]
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -212,9 +230,9 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P5",
+  "group": "G8",
   "result": "pass",
-  "landing": "20261020T122122-L-480633",
+  "landing": "20261020T233146-L-900134",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

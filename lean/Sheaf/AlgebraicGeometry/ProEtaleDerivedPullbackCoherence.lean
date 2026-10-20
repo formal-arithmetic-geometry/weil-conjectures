@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
+import all Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
@@ -31,9 +33,16 @@ set_option synthInstance.maxSize 2048
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
+
+private noncomputable instance (priority := 10000) fixedAbelianStalkSite (T : Scheme.{u}) :
+    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} := by
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
+  exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1,
+    u + 1, u + 2, u + 1} _
+
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
@@ -41,7 +50,7 @@ attribute [local irreducible] proEtaleRingModuleAdjunctionNormalized
   proEtaleRingModuleUnitSection proEtaleRingCompositeCoefficients proEtaleRingDerivedPullbackFactors
   CochainComplex.IsAcyclicTensorKFlat SheafOfModules.IsFlatOnSite
   proEtaleRingModulePullback proEtaleConstantRingComparison
-  proEtaleCanonicalPullbackComposition proEtaleConstantRingPullbackComposition
+  proEtaleCanonicalPullbackComposition
   proEtaleRingDirectImageMap
 
 -- All data selected below are fixed by the existing normalization: the units fix the
@@ -181,7 +190,7 @@ private theorem pullbackData_transport
           proEtaleCanonicalPullbackComposition h k (proEtaleConstantRing V A)
             (proEtaleConstantRing W A) (proEtaleConstantRing Z A)
             (proEtaleConstantRingComparison k A) (proEtaleConstantRingComparison h A) := by
-    unfold proEtaleConstantRingPullbackComposition
+    rw [proEtaleConstantRingPullbackComposition_eq]
     rfl
   rw [he]
   exact pullbackData_transport h k
@@ -628,5 +637,119 @@ theorem proEtaleConstantRingDerivedPullback_composition_coherence
   simp only [constantComparison_eq, Iso.trans_hom, NatTrans.comp_app,
     Functor.map_comp, Category.assoc]
   exact hm
+
+private theorem moduleAdj_normalized
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S) :
+    proEtaleRingModuleAdjunctionNormalized f R S c (proEtaleRingModuleAdjunction f R S c) := by
+  let : (proEtaleModelBaseChange f).IsContinuous
+      (proEtaleModelTopology Y) (proEtaleModelTopology X) := proEtaleModelBaseChange_isContinuous f
+  unfold proEtaleRingModuleAdjunctionNormalized
+  intro M U m
+  have hp := (Classical.choose_spec (proEtaleRingModuleAdjunction_existsUnique f R S c)).1
+  obtain ⟨g, hg, hf⟩ := hp M _ (𝟙 _)
+  have h := hf (op U) m
+  rw [Adjunction.homEquiv_id] at h
+  rw [Adjunction.homEquiv_unit] at h
+  dsimp only [SheafOfModules.comp_val, PresheafOfModules.comp_app] at h
+  erw [hg] at h
+  unfold proEtaleRingModuleAdjunction proEtaleRingModuleUnitSection
+  exact h
+
+private theorem ordinaryComp_unit
+    {X Y Z : Scheme.{u}} (h : Z ⟶ Y) (f : Y ⟶ X) (A : Type u) [CommRing A]
+    (M : proEtaleRingModules X (proEtaleConstantRing X A)) :
+    ((proEtaleConstantRingAdjunction A f).comp
+      (proEtaleConstantRingAdjunction A h)).unit.app M ≫
+        (directComp h f A).hom.app
+          (((proEtaleConstantRingPullback A f) ⋙ proEtaleConstantRingPullback A h).obj M) =
+      (proEtaleConstantRingAdjunction A (h ≫ f)).unit.app M ≫
+        (proEtaleConstantRingPushforward A (h ≫ f)).map
+          ((ordinaryComp h f A).hom.app M) := by
+  have hk := normalizedAdj_eq f A (proEtaleConstantRingAdjunction A f)
+    (moduleAdj_normalized f _ _ _)
+  have hh := normalizedAdj_eq h A (proEtaleConstantRingAdjunction A h)
+    (moduleAdj_normalized h _ _ _)
+  have hc := normalizedAdj_eq (h ≫ f) A (proEtaleConstantRingAdjunction A (h ≫ f))
+    (moduleAdj_normalized (h ≫ f) _ _ _)
+  rw [hk, hh, hc, ordinaryComp_eq]
+  have q := unit_conjugateEquiv ((normalizedAdj f A).comp (normalizedAdj h A))
+    (normalizedAdj (h ≫ f) A)
+    (Adjunction.leftAdjointCompIso (normalizedAdj f A) (normalizedAdj h A)
+      (normalizedAdj (h ≫ f) A) (directComp h f A)).inv M
+  rw [Adjunction.conjugateEquiv_leftAdjointCompIso_inv] at q
+  exact q
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem ordinaryComp_unit_section
+    {X Y Z : Scheme.{u}} (h : Z ⟶ Y) (f : Y ⟶ X) (A : Type u) [CommRing A]
+    (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEt)
+    (a : M.val.obj (op U)) :
+    (((ordinaryComp h f A).hom.app M).val.app
+      (op ((proEtaleBaseChange (h ≫ f)).obj U)))
+        ((((proEtaleConstantRingAdjunction A (h ≫ f)).unit.app M).val.app (op U)) a) =
+      (((proEtaleConstantRingPullback A h).obj
+        ((proEtaleConstantRingPullback A f).obj M)).val.map
+          ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale.{u}) (Q := ⊤) h f).hom.app
+              U).op)
+        ((((proEtaleConstantRingAdjunction A h).unit.app
+          ((proEtaleConstantRingPullback A f).obj M)).val.app
+            (op ((proEtaleBaseChange f).obj U)))
+          ((((proEtaleConstantRingAdjunction A f).unit.app M).val.app (op U)) a)) := by
+  have q := congrArg (fun k ↦ k.val.app (op U) a) (ordinaryComp_unit h f A M)
+  rw [Adjunction.comp_unit_app] at q
+  dsimp only [SheafOfModules.comp_val, PresheafOfModules.comp_app] at q
+  erw [directComp_hom_apply, directImage_map_apply] at q
+  exact q.symm
+
+/-- The canonical derived compositor is induced by an ordinary pullback isomorphism
+whose unit sections restrict along fibre-product pasting. This packages the normalization
+without exposing its chosen witnesses. Source: Stacks Tags 05V1 and 0D6D
+(blueprint: lem-trf-derived-pullback-coherence). -/
+theorem proEtaleConstantRingPullbackComposition_ordinary
+    {X Y Z : Scheme.{u}} (h : Z ⟶ Y) (f : Y ⟶ X) (A : Type u) [CommRing A] :
+    ∃ a : proEtaleConstantRingPullback A (h ≫ f) ≅
+        proEtaleConstantRingPullback A f ⋙ proEtaleConstantRingPullback A h,
+      (∀ (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEt)
+        (z : M.val.obj (Opposite.op U)),
+        ((a.hom.app M).val.app (Opposite.op ((proEtaleBaseChange (h ≫ f)).obj U)))
+          ((((proEtaleConstantRingAdjunction A (h ≫ f)).unit.app M).val.app
+            (Opposite.op U)) z) =
+        (((proEtaleConstantRingPullback A h).obj
+          ((proEtaleConstantRingPullback A f).obj M)).val.map
+            ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale.{u}) (Q := ⊤) h f).hom.app
+              U).op)
+          ((((proEtaleConstantRingAdjunction A h).unit.app
+            ((proEtaleConstantRingPullback A f).obj M)).val.app
+              (Opposite.op ((proEtaleBaseChange f).obj U)))
+            ((((proEtaleConstantRingAdjunction A f).unit.app M).val.app (Opposite.op U)) z))) ∧
+      Functor.mapDerivedCategoryNatIso a ≪≫
+          Functor.mapDerivedCategoryCompIso (proEtaleConstantRingPullback A f)
+            (proEtaleConstantRingPullback A h) =
+        (proEtaleConstantRingPullbackComposition h f A).symm := by
+  exact ⟨ordinaryComp h f A, ordinaryComp_unit_section h f A,
+    (constantComparison_eq h f A).symm⟩
+
+/-- Forgetting the constant coefficient action identifies the module-pullback unit
+with an invertible underlying abelian inverse-image comparison. Source: Stacks,
+Modules on Sites, lemma-adjoint-push-pull-modules
+(blueprint: lem-trf-derived-pullback-coherence).
+Proof: apply the underlying-sheaf comparison for the ring-module adjunction to the
+constant coefficient identification. Extension along that ring isomorphism is an
+equivalence, so its unit and the resulting underlying comparison are invertible. -/
+theorem proEtaleConstantRingPullback_underlyingUnit_isIso
+    (A : Type u) [CommRing A] {T S : Scheme.{u}} (t : T ⟶ S)
+    (M : proEtaleRingModules S (proEtaleConstantRing S A)) :
+    IsIso (((proEtaleSheafAdjunction t AddCommGrpCat.{u + 1}).homEquiv
+      ((SheafOfModules.toSheaf _).obj M)
+      ((SheafOfModules.toSheaf _).obj ((proEtaleConstantRingPullback A t).obj M))).symm
+        ((SheafOfModules.toSheaf _).map
+          ((proEtaleConstantRingAdjunction A t).unit.app M))) := by
+  exact ringUnitComparison t (proEtaleConstantRing S A) (proEtaleConstantRing T A)
+    (proEtaleConstantRingComparison t A) (proEtaleConstantRingAdjunction A t) M
 
 end AlgebraicGeometry.Scheme

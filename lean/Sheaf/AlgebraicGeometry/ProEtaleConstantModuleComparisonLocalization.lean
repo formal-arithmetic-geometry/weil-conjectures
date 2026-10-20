@@ -39,7 +39,7 @@ attribute [local irreducible] proEtaleRingModuleAdjunctionNormalized
   proEtaleRingModuleUnitSection proEtaleRingCompositeCoefficients proEtaleRingDerivedPullbackFactors
   CochainComplex.IsAcyclicTensorKFlat SheafOfModules.IsFlatOnSite
   proEtaleRingModulePullback proEtaleConstantRingComparison
-  proEtaleCanonicalPullbackComposition proEtaleConstantRingPullbackComposition
+  proEtaleCanonicalPullbackComposition
   proEtaleRingDirectImageMap
 
 -- All data selected below are fixed by the existing normalization: the units fix the
@@ -179,7 +179,7 @@ private theorem pullbackData_transport
           proEtaleCanonicalPullbackComposition h k (proEtaleConstantRing V A)
             (proEtaleConstantRing W A) (proEtaleConstantRing Z A)
             (proEtaleConstantRingComparison k A) (proEtaleConstantRingComparison h A) := by
-    unfold proEtaleConstantRingPullbackComposition
+    rw [proEtaleConstantRingPullbackComposition_eq]
     rfl
   rw [he]
   exact pullbackData_transport h k

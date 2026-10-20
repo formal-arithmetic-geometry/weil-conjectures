@@ -6,7 +6,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison
-import all Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImageStalk
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalStalk
@@ -17,7 +16,12 @@ import Sheaf.AlgebraicGeometry.ProEtaleSheafificationGeometricStalk
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackCoherence
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
+import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+import Mathlib.AlgebraicGeometry.Pullbacks
+import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-!
 # Coherence of pro-etale pullback stalk comparisons
@@ -28,11 +32,20 @@ Source: Stacks Project, Tags 05V1 and 0F4F, and proetale.tex Tag 0993
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.unusedTactic false
+set_option linter.unreachableTactic false
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
+
+private noncomputable instance (priority := 10000) fixedAbelianStalkSite (T : Scheme.{u}) :
+    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} := by
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
+  exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1,
+    u + 1, u + 2, u + 1} _
+
 
 
 /-- The stalk functor on cochain complexes, obtained term by term from the
@@ -174,8 +187,7 @@ private theorem pullbackStalkAdditive (A : Type u) [CommRing A]
   let b (M : proEtaleRingModules S (proEtaleConstantRing S A)) :=
     (a.homEquiv (P.obj M) (Q.obj (L.obj M))).symm (P.map (adj.unit.app M))
   have (M : proEtaleRingModules S (proEtaleConstantRing S A)) : IsIso (b M) :=
-    ringUnitComparison t (proEtaleConstantRing S A) (proEtaleConstantRing T A)
-      (proEtaleConstantRingComparison t A) adj M
+    proEtaleConstantRingPullback_underlyingUnit_isIso A t M
   have h (M : proEtaleRingModules S (proEtaleConstantRing S A)) :=
     stalkOfUnitComparison t x (P.obj M) (Q.obj (L.obj M)) (P.map (adj.unit.app M))
   choose d hd using h
@@ -914,6 +926,419 @@ def ProEtalePullbackStalkCoherent (A : Type u) [CommRing A] [Finite A] : Prop :=
           (fun w ↦ (proEtaleFiniteCoefficientDerivedStalk A w).obj (DerivedCategory.Q.obj H))
           (Category.assoc (Spec.map (CommRingCat.ofHom α.toRingHom)) x t)))
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjunction
+  proEtaleConstantRingComparison
+set_option linter.unusedTactic false
+set_option linter.unreachableTactic false
+
+private theorem coefficientGerm_map
+    {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ T) (A : Type u) [CommRing A]
+    {M Q : proEtaleRingModules T (proEtaleConstantRing T A)} (f : M ⟶ Q)
+    (N : ProEtaleGeometricNeighbourhood x) (a : M.val.obj (op N.right)) :
+    (finiteCoefficientModuleStalkFunctor x A).map f
+        (proEtaleCoefficientModuleGerm x A M N a) =
+      proEtaleCoefficientModuleGerm x A Q N (f.val.app (op N.right) a) := by
+  exact ConcreteCategory.congr_hom
+    (colimit.ι_map (Functor.whiskerLeft
+      (proEtaleGeometricNeighbourhoodForget x).op
+      ((SheafOfModules.toSheaf _).map f).hom) (op N)) a
+
+private theorem module_restrict_id
+    {T : Scheme.{u}} (A : Type u) [CommRing A]
+    (M : proEtaleRingModules T (proEtaleConstantRing T A)) (V : T.ProEt)
+    (a : M.val.obj (op V)) : M.val.map (𝟙 (op V)) a = a :=
+  ConcreteCategory.congr_hom (M.val.presheaf.map_id (op V)) a
+
+private theorem coefficientGerm_repoint
+    {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    {x y : Spec (.of Ω) ⟶ T} (e : x = y) (A : Type u) [CommRing A]
+    (M : proEtaleRingModules T (proEtaleConstantRing T A)) (V : T.ProEt)
+    (l : Over.mk x ⟶ (ProEt.forget T).obj V)
+    (l' : Over.mk y ⟶ (ProEt.forget T).obj V) (hl : l.left = l'.left)
+    (a : M.val.obj (op V)) :
+    eqToHom (congrArg (fun w ↦ (finiteCoefficientModuleStalkFunctor w A).obj M) e)
+        (proEtaleCoefficientModuleGerm x A M (StructuredArrow.mk l) a) =
+      proEtaleCoefficientModuleGerm y A M (StructuredArrow.mk l') a := by
+  subst y
+  have h : l = l' := Over.OverMorphism.ext hl
+  subst l'
+  rfl
+
+private theorem pullbackStalk_normalized (A : Type u) [CommRing A]
+    {T S : Scheme.{u}} (t : T ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ T) :
+    ProEtalePullbackStalkGermNormalized A t x (proEtalePullbackStalkComparison A t x) :=
+  (proEtalePullbackStalkComparison_existsUnique A t x).exists.choose_spec
+
+private theorem stalkReparam_germ (A : Type u) [CommRing A]
+    {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ T) (α : Ω ≃+* Ω)
+    (M : proEtaleRingModules T (proEtaleConstantRing T A))
+    (N : ProEtaleGeometricNeighbourhood x) (a : M.val.obj (op N.right)) :
+    (proEtaleStalkReparam A x α).hom.app M (proEtaleCoefficientModuleGerm x A M N a) =
+      proEtaleCoefficientModuleGerm _ A M ((proEtaleStalkNeighbourhoodReparam x α).obj N) a :=
+  (proEtaleStalkReparam_existsUnique A x α).exists.choose_spec M N a
+
+private theorem cancel_mapped_iso {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {M N : C} (e : M ≅ N) {P : D} {a b : F.obj N ⟶ P}
+    (h : F.map e.hom ≫ a = F.map e.hom ≫ b) : a = b :=
+  (cancel_epi (F.map e.hom)).mp h
+
+private theorem inverse_mapped_iso {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {M N : C} (e : M ≅ N) {P : D}
+    {a : F.obj N ⟶ P} {b : F.obj M ⟶ P} (h : F.map e.hom ≫ a = b) :
+    a = F.map e.inv ≫ b := by
+  rw [← h, ← Functor.map_comp_assoc, e.inv_hom_id, F.map_id, Category.id_comp]
+
+private theorem stalk_identity (A : Type u) [CommRing A]
+    {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ T)
+    (M : proEtaleRingModules T (proEtaleConstantRing T A)) :
+    (proEtalePullbackStalkComparison A (𝟙 T) x).hom.app M ≫
+        eqToHom (congrArg (fun w ↦ (finiteCoefficientModuleStalkFunctor w A).obj M)
+          (Category.comp_id x)) =
+      (finiteCoefficientModuleStalkFunctor x A).map
+        ((proEtaleStalkIdentityPullback A T).hom.app M) := by
+  let S : proEtaleRingModules T (proEtaleConstantRing T A) ⥤
+      ModuleCat.{u + 1} (ULift.{u + 1, u} A) := finiteCoefficientModuleStalkFunctor x A
+  let e : proEtaleConstantRingPullback A (𝟙 T) ≅
+      𝟭 (proEtaleRingModules T (proEtaleConstantRing T A)) :=
+    proEtaleStalkIdentityPullback A T
+  apply cancel_mapped_iso S ((e.app M).symm)
+  change S.map (e.inv.app M) ≫
+      (proEtalePullbackStalkComparison A (𝟙 T) x).hom.app M ≫ eqToHom _ =
+    S.map (e.inv.app M) ≫ S.map (e.hom.app M)
+  rw [← S.map_comp, e.inv_hom_id_app, S.map_id]
+  apply (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+    AddCommGrpCat.{u + 1}).map_injective
+  apply colimit.hom_ext
+  intro N
+  ext a
+  change M.val.obj (op N.unop.right) at a
+  change (eqToHom (congrArg
+      (fun w ↦ (finiteCoefficientModuleStalkFunctor w A).obj M) (Category.comp_id x)))
+      ((proEtalePullbackStalkComparison A (𝟙 T) x).hom.app M
+      (S.map (e.inv.app M) (proEtaleCoefficientModuleGerm x A M N.unop a))) =
+    proEtaleCoefficientModuleGerm x A M N.unop a
+  erw [coefficientGerm_map x A (e.inv.app M) N.unop a]
+  have he := (proEtaleStalkIdentityPullback_existsUnique A T).exists.choose_spec
+  erw [he M N.unop.right a]
+  let l : Over.mk (x ≫ 𝟙 T) ⟶ (ProEt.forget T).obj N.unop.right :=
+    Over.homMk N.unop.hom.left (by
+      change N.unop.hom.left ≫ N.unop.right.hom = x ≫ 𝟙 T
+      exact (Over.w N.unop.hom).trans (Category.comp_id x).symm)
+  have hc := (pullbackStalk_normalized A (𝟙 T) x).1 M
+    (StructuredArrow.mk l) N.unop
+    ((MorphismProperty.Over.pullbackId @WeaklyEtale.{u} ⊤ T).inv.app N.unop.right) a
+    (by dsimp [l]
+        erw [MorphismProperty.Over.pullbackId_inv_app_left_fst, Category.comp_id])
+  erw [hc]
+  exact coefficientGerm_repoint (Category.comp_id x) A M N.unop.right l N.unop.hom rfl a
+
+private theorem stalk_reparam (A : Type u) [CommRing A]
+    {T S : Scheme.{u}} (t : T ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ T) (α : Ω ≃+* Ω)
+    (M : proEtaleRingModules S (proEtaleConstantRing S A)) :
+    (proEtalePullbackStalkComparison A t x).hom.app M ≫
+        (proEtaleStalkReparam A (x ≫ t) α).hom.app M =
+      (proEtaleStalkReparam A x α).hom.app ((proEtaleConstantRingPullback A t).obj M) ≫
+        (proEtalePullbackStalkComparison A t
+          (Spec.map (CommRingCat.ofHom α.toRingHom) ≫ x)).hom.app M ≫
+        eqToHom (congrArg (fun w ↦ (finiteCoefficientModuleStalkFunctor w A).obj M)
+          (Category.assoc (Spec.map (CommRingCat.ofHom α.toRingHom)) x t)) := by
+  apply (cancel_epi ((proEtalePullbackStalkComparison A t x).inv.app M)).mp
+  rw [Iso.inv_hom_id_app_assoc]
+  apply (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+    AddCommGrpCat.{u + 1}).map_injective
+  apply colimit.hom_ext
+  intro N
+  ext a
+  change M.val.obj (op N.unop.right) at a
+  change (proEtaleStalkReparam A (x ≫ t) α).hom.app M
+      (proEtaleCoefficientModuleGerm (x ≫ t) A M N.unop a) =
+    (eqToHom (congrArg (fun w ↦ (finiteCoefficientModuleStalkFunctor w A).obj M)
+      (Category.assoc (Spec.map (CommRingCat.ofHom α.toRingHom)) x t)))
+      ((proEtalePullbackStalkComparison A t
+        (Spec.map (CommRingCat.ofHom α.toRingHom) ≫ x)).hom.app M
+      ((proEtaleStalkReparam A x α).hom.app _
+        ((proEtalePullbackStalkComparison A t x).inv.app M
+          (proEtaleCoefficientModuleGerm (x ≫ t) A M N.unop a))))
+  rw [(pullbackStalk_normalized A t x).2 M N.unop (pairedLift t x N.unop) a
+    (pairedLift_fst t x N.unop)]
+  rw [stalkReparam_germ A (x ≫ t) α M N.unop a,
+    stalkReparam_germ A x α ((proEtaleConstantRingPullback A t).obj M)
+      (StructuredArrow.mk (pairedLift t x N.unop))
+      (((proEtaleConstantRingAdjunction A t).unit.app M).val.app (op N.unop.right) a)]
+  let z := Spec.map (CommRingCat.ofHom α.toRingHom)
+  let l : Over.mk ((z ≫ x) ≫ t) ⟶ (ProEt.forget S).obj N.unop.right :=
+    Over.homMk (z ≫ N.unop.hom.left) (by
+      simpa only [Over.mk_hom, Category.assoc] using
+        congrArg (fun f ↦ z ≫ f) (Over.w N.unop.hom))
+  have hc := (pullbackStalk_normalized A t (z ≫ x)).1 M (StructuredArrow.mk l)
+    ((proEtaleStalkNeighbourhoodReparam x α).obj
+      (StructuredArrow.mk (pairedLift t x N.unop))) (𝟙 _) a
+    (by change (z ≫ (pairedLift t x N.unop).left) ≫
+          (𝟙 (((proEtaleBaseChange t).obj N.unop.right).left)) ≫
+          pullback.fst N.unop.right.hom t = z ≫ N.unop.hom.left
+        erw [Category.id_comp]
+        exact (Category.assoc z (pairedLift t x N.unop).left
+          (pullback.fst N.unop.right.hom t)).trans
+            (congrArg (fun q ↦ z ≫ q) (pairedLift_fst t x N.unop)))
+  change (proEtalePullbackStalkComparison A t (z ≫ x)).hom.app M
+    (proEtaleCoefficientModuleGerm (z ≫ x) A ((proEtaleConstantRingPullback A t).obj M)
+      ((proEtaleStalkNeighbourhoodReparam x α).obj
+        (StructuredArrow.mk (pairedLift t x N.unop)))
+      (((proEtaleConstantRingPullback A t).obj M).val.map
+        (𝟙 (op ((proEtaleBaseChange t).obj N.unop.right)))
+          (((proEtaleConstantRingAdjunction A t).unit.app M).val.app (op N.unop.right) a))) = _
+    at hc
+  erw [module_restrict_id A ((proEtaleConstantRingPullback A t).obj M)
+    ((proEtaleBaseChange t).obj N.unop.right)] at hc
+  change (proEtalePullbackStalkComparison A t (z ≫ x)).hom.app M
+    (proEtaleCoefficientModuleGerm (z ≫ x) A _
+      ((proEtaleStalkNeighbourhoodReparam x α).obj
+        (StructuredArrow.mk (pairedLift t x N.unop)))
+      (((proEtaleConstantRingAdjunction A t).unit.app M).val.app (op N.unop.right) a)) = _
+    at hc
+  erw [hc]
+  exact (coefficientGerm_repoint (Category.assoc z x t) A M N.unop.right l
+    ((proEtaleStalkNeighbourhoodReparam (x ≫ t) α).obj N.unop).hom rfl a).symm
+
+
+private theorem stalk_composition (A : Type u) [CommRing A]
+    {X Y Z : Scheme.{u}} (h : Z ⟶ Y) (f : Y ⟶ X)
+    (c : proEtaleConstantRingPullback A (h ≫ f) ≅
+      proEtaleConstantRingPullback A f ⋙ proEtaleConstantRingPullback A h)
+    (ha : (∀ (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEt)
+        (z : M.val.obj (Opposite.op U)),
+        ((c.hom.app M).val.app (Opposite.op ((proEtaleBaseChange (h ≫ f)).obj U)))
+          ((((proEtaleConstantRingAdjunction A (h ≫ f)).unit.app M).val.app
+            (Opposite.op U)) z) =
+        (((proEtaleConstantRingPullback A h).obj
+          ((proEtaleConstantRingPullback A f).obj M)).val.map
+            ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale.{u}) (Q := ⊤) h f).hom.app
+              U).op)
+          ((((proEtaleConstantRingAdjunction A h).unit.app
+            ((proEtaleConstantRingPullback A f).obj M)).val.app
+              (Opposite.op ((proEtaleBaseChange f).obj U)))
+            ((((proEtaleConstantRingAdjunction A f).unit.app M).val.app (Opposite.op U)) z))))
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (v : Spec (.of Ω) ⟶ Z)
+    (M : proEtaleRingModules X (proEtaleConstantRing X A)) :
+    (proEtalePullbackStalkComparison A (h ≫ f) v).hom.app M =
+      (finiteCoefficientModuleStalkFunctor v A).map (c.hom.app M) ≫
+        (proEtalePullbackStalkComparison A h v).hom.app
+          ((proEtaleConstantRingPullback A f).obj M) ≫
+        (proEtalePullbackStalkComparison A f (v ≫ h)).hom.app M ≫
+        eqToHom (congrArg (fun w ↦ (finiteCoefficientModuleStalkFunctor w A).obj M)
+          (Category.assoc v h f)) := by
+  apply (cancel_epi ((proEtalePullbackStalkComparison A (h ≫ f) v).inv.app M)).mp
+  rw [Iso.inv_hom_id_app]
+  apply (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+    AddCommGrpCat.{u + 1}).map_injective
+  apply colimit.hom_ext
+  intro N
+  ext a
+  change M.val.obj (op N.unop.right) at a
+  change proEtaleCoefficientModuleGerm (v ≫ h ≫ f) A M N.unop a =
+    (eqToHom (congrArg (fun w ↦ (finiteCoefficientModuleStalkFunctor w A).obj M)
+      (Category.assoc v h f)))
+    ((proEtalePullbackStalkComparison A f (v ≫ h)).hom.app M
+      ((proEtalePullbackStalkComparison A h v).hom.app _
+        ((finiteCoefficientModuleStalkFunctor v A).map (c.hom.app M)
+          ((proEtalePullbackStalkComparison A (h ≫ f) v).inv.app M
+            (proEtaleCoefficientModuleGerm (v ≫ h ≫ f) A M N.unop a)))))
+  rw [(pullbackStalk_normalized A (h ≫ f) v).2 M N.unop
+    (pairedLift (h ≫ f) v N.unop) a (pairedLift_fst (h ≫ f) v N.unop)]
+  erw [coefficientGerm_map v A (c.hom.app M)]
+  erw [ha M N.unop.right a]
+  let P := StructuredArrow.mk (pairedLift (h ≫ f) v N.unop)
+  let β := (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale.{u}) (Q := ⊤) h f).hom.app
+    N.unop.right
+  let l : Over.mk (v ≫ h) ⟶ (ProEt.forget Y).obj
+      ((proEtaleBaseChange f).obj N.unop.right) :=
+    Over.homMk (P.hom.left ≫ β.left ≫
+      pullback.fst ((proEtaleBaseChange f).obj N.unop.right).hom h) (by
+        change (P.hom.left ≫ β.left ≫ pullback.fst _ h) ≫
+          pullback.snd N.unop.right.hom f = v ≫ h
+        calc
+          (P.hom.left ≫ β.left ≫ pullback.fst _ h) ≫ pullback.snd _ f =
+              P.hom.left ≫ β.left ≫ pullback.snd _ h ≫ h := by
+                erw [Category.assoc, Category.assoc, pullback.condition]
+          _ = (P.hom.left ≫ β.left ≫ pullback.snd _ h) ≫ h := by
+            simp only [Category.assoc]
+          _ = (P.hom.left ≫ pullback.snd _ (h ≫ f)) ≫ h := by
+            exact congrArg (fun q ↦ P.hom.left ≫ q ≫ h)
+              (MorphismProperty.Over.w β)
+          _ = v ≫ h := by
+            exact congrArg (fun q ↦ q ≫ h) (Over.w P.hom))
+  have ch := (pullbackStalk_normalized A h v).1
+    ((proEtaleConstantRingPullback A f).obj M) (StructuredArrow.mk l) P β
+    ((((proEtaleConstantRingAdjunction A f).unit.app M).val.app (op N.unop.right)) a)
+    (by rfl)
+  erw [ch]
+  let n : Over.mk ((v ≫ h) ≫ f) ⟶ (ProEt.forget X).obj N.unop.right :=
+    Over.homMk N.unop.hom.left (by
+      change N.unop.hom.left ≫ N.unop.right.hom = (v ≫ h) ≫ f
+      exact (Over.w N.unop.hom).trans (Category.assoc v h f).symm)
+  have cf := (pullbackStalk_normalized A f (v ≫ h)).1 M (StructuredArrow.mk n)
+    (StructuredArrow.mk l) (𝟙 _) a (by
+      change (P.hom.left ≫ β.left ≫ pullback.fst _ h) ≫
+        (𝟙 ((proEtaleBaseChange f).obj N.unop.right).left) ≫
+        pullback.fst N.unop.right.hom f = N.unop.hom.left
+      erw [Category.id_comp]
+      calc
+        (P.hom.left ≫ β.left ≫ pullback.fst _ h) ≫ pullback.fst _ f =
+            P.hom.left ≫ (β.left ≫ pullback.fst _ h ≫ pullback.fst _ f) := by
+              simp only [Category.assoc]
+        _ = P.hom.left ≫ pullback.fst _ (h ≫ f) := by
+          erw [MorphismProperty.Over.pullbackComp_left_fst_fst]
+        _ = N.unop.hom.left := pairedLift_fst (h ≫ f) v N.unop)
+  change (proEtalePullbackStalkComparison A f (v ≫ h)).hom.app M
+    (proEtaleCoefficientModuleGerm (v ≫ h) A _ (StructuredArrow.mk l)
+      (((proEtaleConstantRingPullback A f).obj M).val.map
+        (𝟙 (op ((proEtaleBaseChange f).obj N.unop.right)))
+          ((((proEtaleConstantRingAdjunction A f).unit.app M).val.app
+            (op N.unop.right)) a))) = _ at cf
+  erw [module_restrict_id] at cf
+  erw [cf]
+  exact (coefficientGerm_repoint (Category.assoc v h f) A M N.unop.right n N.unop.hom
+    rfl a).symm
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local irreducible] finiteCoefficientModuleStalkFunctor
+  geometricRingModuleStalkFunctor Functor.mapDerivedCategory
+  proEtaleCanonicalPullbackComposition
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem factor_generic {C D E : Type*} [Category C] [Category D] [Category E]
+  [Abelian C] [Abelian D] [Abelian E]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+  (F : C ⥤ D) (G : D ⥤ E) (J : C ⥤ E)
+  [F.Additive] [G.Additive] [J.Additive]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    (γ : F ⋙ G ≅ J) (K : CochainComplex C ℤ) :
+    (Functor.mapDerivedCategoryCompNatIso γ).hom.app (DerivedCategory.Q.obj K) ≫
+        J.mapDerivedCategoryFactors.hom.app K =
+      G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
+        G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex _).obj K) ≫
+        DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex γ (ComplexShape.up ℤ)).hom.app K) := by
+  have h := Functor.mapDerivedCategoryCompNatIso_hom_app_Q γ K
+  have he : Functor.mapHomologicalComplexCompIsoHomOfIso γ K =
+      (NatIso.mapHomologicalComplex γ (ComplexShape.up ℤ)).hom.app K := by
+    ext n
+    simp only [Functor.mapHomologicalComplexCompIsoHomOfIso,
+      HomologicalComplex.comp_f, Functor.mapHomologicalComplexCompIso_hom_app_f,
+      Iso.refl_hom, NatTrans.id_app]
+    erw [Category.id_comp]
+    rfl
+  rw [he] at h
+  exact h
+
+private theorem descend_square
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    (F : C ⥤ D) (G G' : D ⥤ E) (J J' : C ⥤ E)
+    [F.Additive] [G.Additive] [G'.Additive] [J.Additive] [J'.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
+    [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    [PreservesFiniteLimits J'] [PreservesFiniteColimits J']
+    (c : F ⋙ G ≅ J) (c' : F ⋙ G' ≅ J') (r : G ≅ G') (q : J ≅ J')
+    (hc : ∀ M, c.hom.app M ≫ q.hom.app M = r.hom.app (F.obj M) ≫ c'.hom.app M)
+    (K : DerivedCategory C) :
+    (Functor.mapDerivedCategoryCompNatIso c).hom.app K ≫
+        (Functor.mapDerivedCategoryNatIso q).hom.app K =
+      (Functor.mapDerivedCategoryNatIso r).hom.app (F.mapDerivedCategory.obj K) ≫
+        (Functor.mapDerivedCategoryCompNatIso c').hom.app K := by
+  have hi : c ≪≫ q = Functor.isoWhiskerLeft F r ≪≫ c' := by
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    exact hc M
+  have hd := congrArg (fun e ↦ (Functor.mapDerivedCategoryNatIso e).hom.app K) hi
+  simp only [Functor.mapDerivedCategoryNatIso_trans, NatTrans.comp_app] at hd
+  have hw := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F r) K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hw
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app K)).mp
+  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, ← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+  rw [hd, ← hw]
+  simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+
+private theorem descend_identity
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ C) (G J : C ⥤ D)
+    [F.Additive] [G.Additive] [J.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    (c : F ⋙ G ≅ J) (e : F ≅ 𝟭 C) (q : J ≅ G)
+    (hc : ∀ M, c.hom.app M ≫ q.hom.app M = G.map (e.hom.app M))
+    (K : DerivedCategory C) :
+    (Functor.mapDerivedCategoryCompNatIso c).hom.app K ≫
+        (Functor.mapDerivedCategoryNatIso q).hom.app K =
+      G.mapDerivedCategory.map
+        ((Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C).hom.app K) := by
+  have hi : c ≪≫ q = Functor.isoWhiskerRight e G := by
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    exact hc M
+  have hd := congrArg (fun e ↦ (Functor.mapDerivedCategoryNatIso e).hom.app K) hi
+  simp only [Functor.mapDerivedCategoryNatIso_trans, NatTrans.comp_app] at hd
+  have hw := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight e G) K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hw
+  have hu := NatTrans.congr_app (Functor.mapDerivedCategoryCompIso_id_comp G) K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app] at hu
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app K)).mp
+  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, ← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+  rw [hd, Functor.map_comp]
+  rw [← Category.assoc, ← hw, Category.assoc, hu]
+  erw [Category.comp_id]
+
+private theorem derived_stalk_factor (A : Type u) [CommRing A]
+    {T S : Scheme.{u}} (t : T ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ T)
+    (H : CochainComplex (proEtaleRingModules S (proEtaleConstantRing S A)) ℤ) :
+    (proEtaleDerivedPullbackStalkComparison A t x).hom.app (DerivedCategory.Q.obj H) ≫
+        (finiteCoefficientModuleStalkFunctor.{u} (x ≫ t) A).mapDerivedCategoryFactors.hom.app H =
+      (proEtaleFiniteCoefficientDerivedStalk A x).map
+        ((proEtaleConstantRingPullback.{u} A t).mapDerivedCategoryFactors.hom.app H) ≫
+        (finiteCoefficientModuleStalkFunctor.{u} x A).mapDerivedCategoryFactors.hom.app
+          (((proEtaleConstantRingPullback.{u} A t).mapHomologicalComplex
+            (ComplexShape.up ℤ)).obj H) ≫
+        DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex (proEtalePullbackStalkComparison A t x)
+            (ComplexShape.up ℤ)).hom.app H) := by
+  exact factor_generic (proEtaleConstantRingPullback.{u} A t)
+    (finiteCoefficientModuleStalkFunctor.{u} x A)
+    (finiteCoefficientModuleStalkFunctor.{u} (x ≫ t) A)
+    (proEtalePullbackStalkComparison A t x) H
+
+private theorem derived_stalk_transport (A : Type u) [CommRing A]
+    {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    {x y : Spec (.of Ω) ⟶ T} (e : x = y) :
+    (Functor.mapDerivedCategoryNatIso
+      (eqToIso (congrArg (fun w ↦ finiteCoefficientModuleStalkFunctor w A) e))).hom =
+      eqToHom (congrArg (fun w ↦ proEtaleFiniteCoefficientDerivedStalk A w) e) := by
+  cases e
+  exact Functor.mapDerivedCategoryNatIso_refl
+
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Coherence of the canonical finite-coefficient pro-etale pullback--stalk comparison.
 Source: Stacks Tags 05V1, 0F4F, 0993 and 0D6D
 (blueprint: lem-trf-proetale-pullback-stalk-coherence).
@@ -957,6 +1382,93 @@ Proof:
 theorem proEtalePullbackStalkCoherence :
     ∀ (A : Type u) [CommRing A] [Finite A],
       ProEtalePullbackStalkCoherent A := by
-  sorry
+  intro A _ _
+  refine ⟨pullbackStalk_normalized A, stalkReparam_germ A, stalk_identity A,
+    stalk_reparam A, ?_, ?_, ?_, ?_⟩
+  · intro T S t Ω _ _ x H _
+    exact derived_stalk_factor A t x H
+  · intro X Y Z h f Ω _ _ v H _
+    obtain ⟨c, hcunit, hcderived⟩ :=
+      proEtaleConstantRingPullbackComposition_ordinary h f A
+    let p := eqToIso (congrArg (fun w ↦ finiteCoefficientModuleStalkFunctor w A)
+      (Category.assoc v h f))
+    have hc (M : proEtaleRingModules X (proEtaleConstantRing X A)) :
+        (finiteCoefficientModuleStalkFunctor v A).map
+            (c.inv.app M) ≫
+          (proEtalePullbackStalkComparison A (h ≫ f) v).hom.app M =
+        (proEtalePullbackStalkComparison A h v).hom.app
+          ((proEtaleConstantRingPullback A f).obj M) ≫
+          (proEtalePullbackStalkComparison A f (v ≫ h) ≪≫ p).hom.app M := by
+      rw [stalk_composition A h f c hcunit v M]
+      simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+        CategoryTheory.Functor.map_id, Category.id_comp, Iso.trans_hom, NatTrans.comp_app,
+        p, eqToIso.hom, eqToHom_app]
+    have hd := Functor.mapDerivedCategoryCompNatIso_cocycle
+      c.symm (proEtalePullbackStalkComparison A (h ≫ f) v)
+      (proEtalePullbackStalkComparison A h v)
+      (proEtalePullbackStalkComparison A f (v ≫ h) ≪≫ p) hc (DerivedCategory.Q.obj H)
+    have hp := NatTrans.congr_app (derived_stalk_transport A (Category.assoc v h f))
+      (DerivedCategory.Q.obj H)
+    simp only [eqToHom_app] at hp
+    have hχ : (Functor.mapDerivedCategoryCompNatIso c.symm).hom =
+        (proEtaleConstantRingPullbackComposition h f A).hom := by
+      have he := congrArg Iso.inv hcderived
+      simpa only [Functor.mapDerivedCategoryCompNatIso,
+        Functor.mapDerivedCategoryNatIso_symm, Iso.trans_inv, Iso.symm_inv,
+        Iso.trans_hom, Iso.symm_hom] using he
+    rw [hχ] at hd
+    simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans, Category.assoc] at hd
+    rw [hp] at hd
+    apply inverse_mapped_iso (proEtaleFiniteCoefficientDerivedStalk A v)
+      ((proEtaleConstantRingPullbackComposition h f A).app (DerivedCategory.Q.obj H))
+    simpa only [proEtaleDerivedPullbackStalkComparison, Iso.app_hom,
+      proEtaleFiniteCoefficientDerivedStalk, proEtaleConstantRingDerivedPullback,
+      Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Category.assoc] using hd
+  · intro T Ω _ _ x H _
+    let p := eqToIso (congrArg (fun w ↦ finiteCoefficientModuleStalkFunctor w A)
+      (Category.comp_id x))
+    have hc (M : proEtaleRingModules T (proEtaleConstantRing T A)) :
+        (proEtalePullbackStalkComparison A (𝟙 T) x).hom.app M ≫ p.hom.app M =
+          (finiteCoefficientModuleStalkFunctor x A).map
+            ((proEtaleStalkIdentityPullback A T).hom.app M) := by
+      simpa only [p, eqToIso.hom, eqToHom_app] using stalk_identity A x M
+    have hd := descend_identity (proEtaleConstantRingPullback A (𝟙 T))
+      (finiteCoefficientModuleStalkFunctor x A) (finiteCoefficientModuleStalkFunctor (x ≫ 𝟙 T) A)
+      (proEtalePullbackStalkComparison A (𝟙 T) x) (proEtaleStalkIdentityPullback A T) p hc
+      (DerivedCategory.Q.obj H)
+    have hp := NatTrans.congr_app (derived_stalk_transport A (Category.comp_id x))
+      (DerivedCategory.Q.obj H)
+    simp only [eqToHom_app] at hp
+    rw [hp] at hd
+    exact hd
+  · intro T S t Ω _ _ x α H _
+    let z := Spec.map (CommRingCat.ofHom α.toRingHom)
+    let p := eqToIso (congrArg (fun w ↦ finiteCoefficientModuleStalkFunctor w A)
+      (Category.assoc z x t))
+    have hc (M : proEtaleRingModules S (proEtaleConstantRing S A)) :
+        (proEtalePullbackStalkComparison A t x).hom.app M ≫
+          (proEtaleStalkReparam A (x ≫ t) α).hom.app M =
+        (proEtaleStalkReparam A x α).hom.app ((proEtaleConstantRingPullback A t).obj M) ≫
+          (proEtalePullbackStalkComparison A t (z ≫ x) ≪≫ p).hom.app M := by
+      simpa only [p, eqToIso.hom, eqToHom_app, Iso.trans_hom, NatTrans.comp_app]
+        using stalk_reparam A t x α M
+    have hd := descend_square (proEtaleConstantRingPullback A t)
+      (finiteCoefficientModuleStalkFunctor x A) (finiteCoefficientModuleStalkFunctor (z ≫ x) A)
+      (finiteCoefficientModuleStalkFunctor (x ≫ t) A)
+      (finiteCoefficientModuleStalkFunctor (z ≫ x ≫ t) A)
+      (proEtalePullbackStalkComparison A t x)
+      (proEtalePullbackStalkComparison A t (z ≫ x) ≪≫ p)
+      (proEtaleStalkReparam A x α) (proEtaleStalkReparam A (x ≫ t) α) hc
+      (DerivedCategory.Q.obj H)
+    have hp := NatTrans.congr_app (derived_stalk_transport A (Category.assoc z x t))
+      (DerivedCategory.Q.obj H)
+    simp only [eqToHom_app] at hp
+    simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans, Category.assoc] at hd
+    rw [hp] at hd
+    simpa only [proEtaleDerivedPullbackStalkComparison, proEtaleDerivedStalkReparam,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using hd
 
 end AlgebraicGeometry.Scheme
