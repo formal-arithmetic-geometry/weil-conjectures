@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-dualizing-complex-bounded-duality",
+ "kind": "statement",
+ "title": "Bounded coherent duality for a dualizing complex",
+ "statement": "Let R be a commutative Noetherian ring, and let Omega belong to the derived category of R-modules [def-weil-abstract-derived-category]. Assume Omega has a bounded representative of injective modules [def-sp-injective-resolutions], all its cohomology modules are finitely generated [def-weil-finitely-generated-module], and the scalar-action map R[0] -> RHom_R(Omega,Omega), transposed from the right unitor, is invertible. Then RHom_R(-,Omega) restricts to an anti-equivalence on the full subcategory of bounded complexes with finite cohomology [def-sf-coefficient-duality]. The restricted functor has a natural isomorphism, after inclusion into the ambient derived category, with the ambient internal Hom into Omega. No localness, completeness, Artinianity, or perfectness assumption is imposed on R or the input complexes.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7C, lemma-dualizing, bounded clause; Definition 0A7B gives the three hypotheses."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-weil-finitely-generated-module",
+  "def-sf-coefficient-duality"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact equivalence between ordinary modules and modules on the one-object bottom-topology ringed site. The constant module functor and evaluation at its unique object are inverse: every restriction is an identity. They identify Hom and tensor products and preserve bounded complexes, injective terms, and finite cohomology. Their derived functors are inverse; uniqueness of tensor-Hom right adjoints identifies the existing ambient internal Hom and the ringed-site presentation in the cited lemmas. The component of the homothety is scalar multiplication, since it is the transpose of the right unitor.",
+   "uses": [
+    "def-sf-coefficient-duality",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the finite-injective-dimension coherent RHom lemma to a coherent input K and Omega. It gives finite cohomology of D(K). If the chosen injective model I is supported in [a,b], good truncations represent K zero above c or below c; Hom into I is then zero below a-c or above b-c, respectively. These bounds show D exchanges bounded-below and bounded-above complexes, hence preserves bounded finite cohomology.",
+   "uses": [
+    "lem-trf-coherent-rhom-finite-injective-dimension",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each bounded-above good truncation of a finite-cohomology input is pseudo-coherent over the Noetherian ring. Apply the finite-injective evaluation lemma with L=M=Omega. The scalar-action isomorphism makes RHom(Omega,Omega) the tensor unit and supplies Tor amplitude [0,0]. Thus evaluation composed with scalar action and the inverse left unitor gives an invertible natural biduality map K -> D(D(K)). Its uncurrying is evaluation after Koszul interchange: scalar 1 acts as identity on Omega. Restrict D to the bounded finite subcategory. The natural bidual isomorphisms give its contravariant quasi-inverse; the ambient comparison is identity on objects and maps. The zero ring and empty cohomological support obey the same calculations.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-trf-derived-evaluation-finite-injective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-coefficient-duality",
+  "def-weil-abstract-derived-category",
+  "lem-trf-coherent-rhom-finite-injective-dimension",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-trf-derived-evaluation-finite-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Lemma 0A7C, lemma-dualizing, bounded clause; 0G4H for finiteness and More on Algebra 0A69 for canonical evaluation. Ordinary-module presentation and tensor-Hom identification spelled out by J1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizingComplex_bounded|dualizing.*duality|finiteInjectiveEvaluation",
+   "results": "[]; ",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Module.Injective",
+   "results": "[]; ",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizing complex over a Noetherian commutative ring gives an anti equivalence on the derived category of bounded complexes with finite cohomology",
+   "results": "['DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE', 'DerivedCategory.IsGE', 'DerivedCategory.TStructure.t', 'DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE', 'DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE', 'CochainComplex.isKProjective_of_op', 'DerivedCategory', 'DerivedCategory.isGE_Q_obj_iff']; ",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dualizing complex induces an anti equivalence on the derived category of bounded complexes with finite cohomology over a Noetherian commutative ring",
+   "results": "8 hits; no directly applicable theorem",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientFrobenius",
+  "date": "2026-10-19",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-coefficient-frobenius",
+   "place": "Step 6, derived anti-equivalence, via the separate Stacks dualizing-complex lemma 0A7C",
+   "via": [
+    "lem-weil-coefficient-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.DualizingComplexBoundedDuality",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/DualizingComplexBoundedDuality.lean",
+  "declaration": "DerivedCategory.dualizingComplex_bounded_duality",
+  "statement": "theorem dualizingComplex_bounded_duality\n    (R : Type u) [CommRing R] [IsNoetherianRing R]\n    (Ω : DerivedCategory (ModuleCat.{u} R))\n    (hI : ∃ I : CochainComplex (ModuleCat.{u} R) ℤ,\n      (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (I.X i)) ∧\n      (∀ i : ℤ, Injective (I.X i)) ∧ Nonempty (Q.obj I ≅ Ω))\n    (hfinite : ∀ i : ℤ,\n      Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj Ω))\n    (hscalar : IsIso (MonoidalClosed.curry (ρ_ Ω).hom)) :\n    ∃ F : (WeilConjectures.boundedFiniteCoefficientComplex R).FullSubcategoryᵒᵖ ⥤\n        (WeilConjectures.boundedFiniteCoefficientComplex R).FullSubcategory,\n      F.IsEquivalence ∧\n        Nonempty (F ⋙ (WeilConjectures.boundedFiniteCoefficientComplex R).ι ≅\n          (WeilConjectures.boundedFiniteCoefficientComplex R).ι.op ⋙\n            MonoidalClosed.internalHom.flip.obj Ω)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261020T051408-L-1665775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261020T051408-L-1665775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
