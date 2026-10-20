@@ -49,13 +49,12 @@
    }
   },
   {
-   "text": "Write bar g_i:overline X_i'->overline X_i for the base-change projections. The cofilteredness node states that base change preserves supplied compactifications and refinement arrows, so Q_u pulls back to Q_u'. Apply the proper/open calculus base-change identity with p=u, r=1_X, k=j_1, i=j_2 and b=bar g_2; the identity mate E_{1_X} is the identity. Apply R_{p_2'}^{\\mathcal T} to this identity and precompose with E_{p_2}^{\\mathcal T}J_{j_2}. Naturality of E_{p_2} moves gamma_{Q_u} across this precomposition. The mate-pasting law for the proper maps u,p_2 identifies the resulting composite (R_{p_2'}E_u)(E_{p_2}R_u) with E_{p_2u}=E_{p_1}, using the canonical direct-image compositors from the operation definition. The two resulting paths are therefore exactly C_u' e_2 and e_1 G_g C_u. Their equality is an equality of strict-tower transformations from the cited calculus, not an inference from evaluations.",
+   "text": "Write bar g_i:overline X_i'->overline X_i for the base-change projections. The supplied primed compactifications, refinement arrow and pullback squares identify the pullback square with Q_u'. Apply the proper/open calculus base-change identity with p=u, r=1_X, k=j_1, i=j_2 and b=bar g_2; the identity mate E_{1_X} is normalized by the unit equation in [lem-cbc-strict-tower-direct-image-coherence]. Apply R_{p_2'}^{\\mathcal T} to this identity and precompose with E_{p_2}^{\\mathcal T}J_{j_2}. Naturality of E_{p_2} moves gamma_{Q_u} across this precomposition. The mate-pasting law for the proper maps u,p_2 identifies the resulting composite (R_{p_2'}E_u)(E_{p_2}R_u) with E_{p_2u}=E_{p_1}, using the canonical direct-image compositors from the operation definition. The two resulting paths are therefore exactly C_u' e_2 and e_1 G_g C_u. Their equality is an equality of strict-tower transformations from the cited calculus, not an inference from evaluations. In Lean the identity and horizontal-pasting normalizations for the concrete strict-tower operations are supplied explicitly by [lem-cbc-strict-tower-direct-image-coherence]; the generic mate-pasting theorem alone does not state these identifications.",
    "uses": [
-    "lem-cbc-compactifiable-cofiltered",
     "lem-cbc-strict-tower-proper-open-calculus",
     "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-mate-pasting",
-    "def-cbc-strict-constant-tower-operations"
+    "def-cbc-strict-constant-tower-operations",
+    "lem-cbc-strict-tower-direct-image-coherence"
    ],
    "elementary": false,
    "source": {
@@ -64,10 +63,11 @@
    }
   },
   {
-   "text": "For the identity refinement, Q_u has identity vertical maps, so the identity clause of the calculus gives C_{\\mathrm{id}}=1. If c_1\\xrightarrow{u}c_2\\xrightarrow{v}c_3 are refinements, the pasted square is Q_{v\\circ u}; the vertical pasting identity for \\gamma, followed by the canonical direct-image compositors, gives C_{v\\circ u}=C_uC_v. These are equalities of strict-tower transformations before any evaluation.",
+   "text": "For the identity refinement, Q_u has identity vertical maps, so the identity clause of the calculus gives C_{\\mathrm{id}}=1. If c_1\\xrightarrow{u}c_2\\xrightarrow{v}c_3 are refinements, the pasted square is Q_{v\\circ u}; the vertical pasting identity for \\gamma, followed by the canonical direct-image compositors, gives C_{v\\circ u}=C_uC_v. These are equalities of strict-tower transformations before any evaluation. Apply the two unit equations and the associative compositor equation of [lem-cbc-strict-tower-direct-image-coherence] to include the outer proper direct image.",
    "uses": [
     "lem-cbc-strict-tower-proper-open-calculus",
-    "def-cbc-strict-constant-tower-operations"
+    "def-cbc-strict-constant-tower-operations",
+    "lem-cbc-strict-tower-direct-image-coherence"
    ],
    "elementary": false,
    "source": {
@@ -76,7 +76,7 @@
    }
   },
   {
-   "text": "Let d,d' be common refinements, with arrows u_i:d->c_i and u_i':d'->c_i. Cofilteredness gives e with arrows a:e->d and b:e->d'. For i=1 the composites u_1a,u_1'b:e->c_1 are parallel, so an equalizing refinement h_1:e_1->e exists. Equalize the remaining parallel composites u_2ah_1,u_2'bh_1 by h_2:e_2->e_1. Put t=h_1h_2; then u_iat=u_i'bt for both i. The composition law gives C_{at}C_{u_i}=C_{bt}C_{u_i'}. All factors are invertible by step 2, and therefore (C_{u_2})^{-1}C_{u_1}=(C_{u_2'})^{-1}C_{u_1'}. This proves independence of the common refinement and of its arrows, including d=d' with different choices of arrows.",
+   "text": "First prove equality for two parallel refinement arrows: cofilteredness equalizes them after a refinement t, the composition law identifies the resulting comparisons, and cancellation of C_t gives equality. For two common-refinement objects choose a common domination. Replacing either leg by a parallel leg leaves the ratio unchanged; the composition law cancels the common domination from the two ratios. Thus the common comparison is independent of the object and of both arrows.",
    "uses": [
     "lem-cbc-compactifiable-cofiltered",
     "lem-cbc-strict-tower-proper-open-calculus"
@@ -88,7 +88,7 @@
    }
   },
   {
-   "text": "Repeatedly taking common refinements gives one d with arrows u_i:d->c_i for any three compactifications. By step 5 every I_{ij} may be computed there. Associativity and cancellation give I_{23}I_{12}=C_{u_3}^{-1}C_{u_2}C_{u_2}^{-1}C_{u_1}=I_{13}. For base change, d' with arrows u_i' is a common refinement by the base-change clause of cofilteredness; step 2 guarantees that C_{u_i'} is invertible on G_{g'}M. The equation of step 3 for each u_i reads C_{u_i'}e_i=e_d G_g C_{u_i}. Consequently C_{u_2'} e_2 G_g I_{12}=e_d G_g(C_{u_2}I_{12})=e_d G_g C_{u_1}=C_{u_1'}e_1. Cancel C_{u_2'} to obtain e_2 G_g I_{12}=I_{12}'e_1, as required. All cancellations take place in the derived strict-tower categories.",
+   "text": "Repeatedly taking common refinements gives one d with arrows u_i:d->c_i for any three compactifications. By step 5 every I_{ij} may be computed there. Associativity and cancellation give I_{23}I_{12}=C_{u_3}^{-1}C_{u_2}C_{u_2}^{-1}C_{u_1}=I_{13}. For base change the supplied d' with arrows u_i' is a common refinement; step 2 guarantees that C_{u_i'} is invertible on G_{g'}M. The equation of step 3 for each u_i reads C_{u_i'}e_i=e_d G_g C_{u_i}. Consequently C_{u_2'} e_2 G_g I_{12}=e_d G_g(C_{u_2}I_{12})=e_d G_g C_{u_1}=C_{u_1'}e_1. Cancel C_{u_2'} to obtain e_2 G_g I_{12}=I_{12}'e_1, as required. All cancellations take place in the derived strict-tower categories.",
    "uses": [
     "lem-cbc-strict-tower-proper-open-calculus",
     "lem-cbc-compactifiable-cofiltered"
@@ -107,15 +107,15 @@
   "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-projection-compactification",
   "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-strict-tower-direct-image-coherence",
   "lem-cbc-strict-tower-proper-open-calculus",
   "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-mate-pasting",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
-  "place": "Proof, last sentence: independence of the compactification and compatibility of the compactification comparisons with the completed maps; strict-tower refinement, exchange and cocycle argument"
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7C and 0F7F, with the concrete strict-tower compositor/mate normalization isolated as lem-cbc-strict-tower-direct-image-coherence; H4 implements the six-step refinement and cancellation proof."
  },
  "mathlib_searches": [
   {
@@ -231,19 +231,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "P3",
+  "reviewer": "COMPILER",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261020T122118-L-478631",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.StrictTower.refinementComparison_isIso",
-   "AlgebraicGeometry.ProEtale.StrictTower.refinementExchangeCoherence",
-   "AlgebraicGeometry.ProEtale.StrictTower.refinementFiniteOrigin_pullback"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.StrictTower.refinementExchangeCoherence"
-  ]
+  "landing": "20261020T233148-L-900775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,153 @@
+{
+ "id": "lem-cbc-strict-tower-direct-image-coherence",
+ "kind": "statement",
+ "title": "Coherence of canonical strict-tower direct image and its square mates",
+ "statement": "For a commutative ring B in the coefficient universe and arbitrary scheme maps, use the actual operations G,R,gComp,rComp,gId,rId of [def-cbc-strict-constant-tower-operations] and square mates exchange of [def-cbc-strict-tower-proper-open-arrows]. Let κ(f,g,h,w) be rComp(f,g) followed by transport along w:f≫g=h. Then κ(1,f,f) is R(f) applied to rId, and κ is associative, including arbitrary supplied equations for both intermediate composites and the total composite. The mate of the identity-vertical square a≫1=1≫a becomes G(a) applied to rId after postcomposition with rId. For two vertically adjacent commuting squares with vertical maps f,g, and f',g', arbitrary transverse maps a,b,c, and supplied composites h=f≫g, h'=f'≫g', exchange for h is the paste of the two exchanges conjugated by κ and κ'. Explicitly G(c)(κ(f,g,h)_M)≫exchange(a,h',h,c)_M = exchange(b,g',g,c)_(R(f)M)≫R(g')(exchange(a,f',f,b)_M)≫κ(f',g',h')_(G(a)M). All schemes and maps are arbitrary; no properness, finiteness or cartesianness is assumed. The public predicate DirectImageCoherence and its two public mate-law definitions give the four equations and all their transports verbatim; strictTowerDirectImageCoherence proves that predicate.",
+ "stmt_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-proper-open-arrows"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-pullback-composition, lemma-derived-pushforward-composition, remark-base-change and remark-compose-base-change (Tags 0D6D, 0D6E and 07A7); canonical normalization specialized to strict towers."
+ },
+ "proof": [
+  {
+   "text": "On ordinary modules the chosen direct-image identity and composition maps act by restriction along Over.pullbackId.inv and Over.pullbackComp.hom. Their section formulas and extensionality identify each chosen map uniquely. Apply the two unit laws and associativity of these site pullback isomorphisms to obtain the direct-image triangle and pentagon equations.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the ordinary comparisons through the normalized module adjunctions. The left-adjoint composition-isomorphism laws transfer their unit and associativity equations to module pullback. Whisker termwise to towers, then apply exact derived localization. Its identity, compositor and whiskering coherence equations transfer these equations to gId and gComp. Conjugate through the derived adjunctions: conjugation preserves composites, unitors and associators, giving the first two displayed equations for rId and rComp, with equality transports.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand squareG for an identity vertical map. The pullback unit equations identify the square with the identity unitors. Taking its two proper-adjunction mates and using the adjunction triangle equations gives the third displayed equation on every object. No cartesian or properness assumption is needed.",
+   "uses": [
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two adjacent commuting squares, expand squareG for the outer rectangle. The gComp associativity equation, with the three supplied commuting equations and the two supplied composite equations, identifies it with the pasted inner squares. Apply horizontal mate pasting and conjugation for composite adjunctions. The result is the fourth displayed equality, including both rComp equality transports. This is an equality in the derived category before any evaluation. Package the pasting equation as a property of the full compositor and exchange families; the proved family equalities identify it with the published maps before evaluating at objects.",
+   "uses": [
+    "def-cbc-strict-tower-proper-open-arrows",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Canonical derived composition and base-change mate construction; section normalization and formal mate pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical right derived direct image composition is associative and respects identity and base change mates",
+   "results": "Eight generic derived-functor hits, including CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc, rightDerived_fac_assoc and rightDerivedNatTrans_comp. None identifies the concrete section-normalized strict-tower compositors or square mates.",
+   "date": "2026-10-21",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical right derived direct image composition is associative and respects identity and base change mates",
+   "results": "Generic rightDerived_fac_assoc, ExponentiableMorphism.pushforwardComp and sheafPushforwardContinuousComp; no exact strict-tower theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_comp",
+   "results": "CategoryTheory.conjugateEquiv_comp; formal component only.",
+   "date": "2026-10-21",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|conjugateEquiv_associator|leftAdjointCompIso_assoc",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates and CompositionIso provide generic mate pasting, conjugation and left-adjoint coherence; no strict-tower normalization.",
+   "date": "2026-10-21",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RefinementExchangeCoherence",
+  "date": "2026-10-21",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-complete-proetale-refinement-exchange-coherence",
+   "place": "Proof steps 3 and 4: normalization of the canonical R compositors and identity and pasting of proper-square mates",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictTowerDirectImageCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictTowerDirectImageCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.strictTowerDirectImageCoherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.rCompEq_existsUnique",
+   "AlgebraicGeometry.ProEtale.StrictTower.rCompEq",
+   "AlgebraicGeometry.ProEtale.StrictTower.rCompEq_spec",
+   "AlgebraicGeometry.ProEtale.StrictTower.rCompEq_eq",
+   "AlgebraicGeometry.ProEtale.StrictTower.InverseImageFamily",
+   "AlgebraicGeometry.ProEtale.StrictTower.DirectImageFamily",
+   "AlgebraicGeometry.ProEtale.StrictTower.RightCompositionFamily",
+   "AlgebraicGeometry.ProEtale.StrictTower.ExchangeFamily",
+   "AlgebraicGeometry.ProEtale.StrictTower.mateIdentityLaw",
+   "AlgebraicGeometry.ProEtale.StrictTower.matePastingLaw",
+   "AlgebraicGeometry.ProEtale.StrictTower.strictTowerMatePasting",
+   "AlgebraicGeometry.ProEtale.StrictTower.strictTowerMateIdentity",
+   "AlgebraicGeometry.ProEtale.StrictTower.DirectImageCoherence",
+   "AlgebraicGeometry.ProEtale.StrictTower.strictTowerDirectImageCoherence"
+  ],
+  "statement": "theorem strictTowerDirectImageCoherence : DirectImageCoherence B",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261020T233148-L-900775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261020T233148-L-900775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
