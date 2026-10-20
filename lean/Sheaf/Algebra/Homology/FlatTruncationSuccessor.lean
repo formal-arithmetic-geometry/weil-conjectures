@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import WeilConjectures.Algebra.Homology.RelativeFlatExtension
-import Sheaf.Algebra.Homology.FlatAugmentationEpicification
+import WeilConjectures.Algebra.Homology.FlatAugmentationEpicification
 
 /-!
 # One extension of a flat replacement of a good truncation
@@ -89,6 +89,7 @@ theorem exists_flat_truncation_successor
       (∀ i : ℤ, Epi (q'.f i)) ∧
       t ≫ q' ≫ G.ιTruncLE ((n + 1 : ℕ) : ℤ) = q ≫ G.ιTruncLE (n : ℤ) := by
   -- The relative cone construction and all-degree disks do not need these assumptions.
+  have _hc := hcover
   have _hq := hquasi
   have _he := hepi
   let m : ℤ := ((n + 1 : ℕ) : ℤ)
@@ -123,7 +124,7 @@ theorem exists_flat_truncation_successor
     exists_relative_boundedAbove_flat_extension E (G.truncLE m) (q ≫ j)
       ⟨b, hbE⟩ hflat (Q.obj X) (ε.app X) ⟨N, hboundQ⟩ hflatQ hquasiQ
   obtain ⟨F', s, g', hb', hf', hs, he', hsg⟩ :=
-    exists_boundedAbove_flat_epicification hcover F (G.truncLE m) g hb hH hf
+    exists_boundedAbove_flat_epicification F (G.truncLE m) g hb hH hf
   have : QuasiIso s := hs
   have : QuasiIso (s ≫ g') := by rw [hsg]; exact hg
   have hg' : QuasiIso g' := quasiIso_of_comp_left s g'
