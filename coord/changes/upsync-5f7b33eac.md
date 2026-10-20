@@ -41,3 +41,11 @@ Importers taken out with them (2336): `Sheaf.Algebra.Homology.DerivedTensorTrunc
 The global build of 4d32546529 failed in 1 module(s); they and their importers, 1 module(s), were moved to quarantine/ (tools/rework.py, coord/rework.tsv):
 
 - `Sheaf.AlgebraicGeometry.EtaleSumExtensionTensor`: error: Sheaf/AlgebraicGeometry/EtaleSumExtensionTensor.lean: bad import 'Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality' (nodes lem-asd-etale-sum-extension-tensor)
+
+## Aborted (2026-10-20T07:18Z)
+
+Build 3 (all 121 waiting landings) failed again in WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.SubalgebraLimit, whose importers include Comparator/Weil/Solution.lean (kept root). Every landing of the run was dropped; quarantine/ and coord/rework.tsv emptied; coord/upstream-base.txt back to e9ba49ac4.
+
+## Status
+
+reverted
