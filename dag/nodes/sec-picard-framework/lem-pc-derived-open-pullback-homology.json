@@ -103,14 +103,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-perfect",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedOpenPullbackHomology",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenPullbackHomology.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedOpenPullbackHomology",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedOpenPullbackHomology.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_homology_derivedOpenPullback_iso_restrict",
-  "statement": "theorem nonempty_homology_derivedOpenPullback_iso_restrict\n    {T : Scheme.{u}} (W : T.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    (E : schemeDerivedCategory T) (n : ℤ) :\n    Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) n).obj\n        ((derivedPullback W.ι).obj E) ≅\n      (restrictFunctor W.ι).obj ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj E))",
+  "statement": "theorem nonempty_homology_derivedOpenPullback_iso_restrict {T : Scheme.{u}} (W : T.Opens) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] (E : schemeDerivedCategory T) (n : ℤ) : Nonempty ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) n).obj ((AlgebraicGeometry.derivedPullback W.ι).obj E) ≅ (restrictFunctor W.ι).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj E))",
   "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-12"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Retired duplicate Sheaf module and redirected its live consumers to the adopted source declaration. Mathematical statement and unit route retained; source API uses IsKFlatTensor/IsKFlatTensorResolution where applicable."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -123,14 +124,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K1",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T112843-L-769139",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  },
  "lean_audit": {
   "master": {

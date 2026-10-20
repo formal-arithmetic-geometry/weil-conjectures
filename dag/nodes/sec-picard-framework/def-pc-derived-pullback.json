@@ -54,7 +54,7 @@
    "elementary": false
   },
   {
-   "text": "Store exactly the original chosen functor behind the non-exposed data definition, and let derivedPullback refer to it. Unfolding the interface and data proves derivedPullback_eq_choose; rewriting this equation in Classical.choose_spec yields derivedPullback_spec. This changes no functor or counit properties.",
+   "text": "Use the adopted source derivedPullback, the module derived pullback transported across schemeDerivedCategoryEquiv. The source comparison theorem identifies tensor pullback with module pullback by uniqueness of left adjoints. Uniqueness of left derived functors gives a natural isomorphism to the resolving-class construction above. Transport its counit, shift and triangulated structure across that isomorphism, and compose the counit components with the isomorphism to retain invertibility on K-flat complexes. This is the complete existing source proof of derivedPullback_spec; no new choice-based derivedPullback is defined.",
    "uses": [],
    "elementary": true
   }
@@ -68,10 +68,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "D3",
-  "date": "2026-10-18",
+  "agent": "B2",
+  "date": "2026-10-20",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 06YJ and 0D5S; retain the existing resolving-class proof and add its fixed-data interface."
+  "place": "Tags 06YJ and 0D5S; reuse the adopted canonical transported derived pullback and its proved tensor specification."
  },
  "mathlib_searches": [
   {
@@ -193,22 +193,21 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ddp1839 (reviewer sub-agent of L); spot-checked: Read packet; checked no cycle (stmt/proof deps exclude derived-pullback-composition and derived-adjoint; lem-pc-kflat-pullback-preservation and lem-pur-derived-change-of-rings do not depend on this item); checked Stacks 06YI/06YJ/06YC/06YG text. FIX more, RETURN less: C1/E7 the delivered definition asserted 'computed by a K-flat resolution' with no argument for independence of the resolution and left ambiguous which complex is resolved; restated precisely as Lg^* = L(g^sharp)^* o g^{-1} with the derived change of rings of lem-pur-derived-change-of-rings (generic tool, other unit) and added three proof steps (g^{-1} exact via lem-weil-pbc-topological-inverse-image-stalk; derived change of rings; g^{-1}P K-flat over g^{-1}O_S via lem-pc-kflat-pullback-preservation (06YC) on (T,g^{-1}O_S)->(S,O_S), so Lg^*E = g^*P independently of P, Stacks 06YJ). Dropped the unsupported phrase 'the left derived functor' (E7). Second reading by F1 missed this.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.DerivedPullback",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedPullback",
   "declaration": "AlgebraicGeometry.derivedPullback",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullback.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedPullback.lean",
   "statement": "def derivedPullback {T S : Scheme.{u}} (g : T ⟶ S) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] : schemeDerivedCategory S ⥤ schemeDerivedCategory T",
   "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-11",
-  "existing": false,
+  "by": "B2",
+  "date": "2026-10-20",
+  "existing": true,
   "declarations": [
    "AlgebraicGeometry.exists_derivedPullback",
-   "AlgebraicGeometry.derivedPullbackData",
    "AlgebraicGeometry.derivedPullback",
-   "AlgebraicGeometry.derivedPullback_eq_choose",
-   "AlgebraicGeometry.derivedPullback_spec"
+   "AlgebraicGeometry.derivedPullback_spec",
+   "AlgebraicGeometry.derivedPullbackIso"
   ],
-  "note": "The chosen functor satisfies the left-derived universal property for the recorded tensor pullback, is triangulated, and has a natural counit invertible on every K-flat complex; exact inverse image preserves K-flat resolutions. The shared SheafOfModules category instances are used throughout. The original fixed choice is stored behind derivedPullbackData; derivedPullback_eq_choose proves equality with that original choice, and derivedPullback_spec exposes exactly its original properties."
+  "note": "Retired the duplicate Sheaf construction in favor of the adopted source construction. The source irreducible derivedPullback transports Scheme.Modules.derivedPullback across schemeDerivedCategoryEquiv; derivedPullback_spec proves the same exact inverse-image, universal tensor-counit, triangulated and K-flat clauses. The unused derivedPullbackData and equality-to-choice API are removed, not asserted for the canonical transported functor. Target meanings require definition review."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -219,13 +218,13 @@
   "note": "g:T⟶S on Scheme.{u}; source/target schemeDerivedCategory S/T on the moduleRings carrier with sibling HasDerivedCategory.{w} binders; L pinned by IsLeftDerivedFunctor ε for E pinned (obj/map eqToHom) to tensorPullbackObj/Map g; CommShift+IsTriangulated; ε invertible on every IsKFlat P (Lg*E ≅ g*P); I pinned to inverseImageModule/Map, exact, carries K-flat resolutions to K-flat resolutions over inverseImageRing (06YC); def = Classical.choose as exists_tensorPullbackAdjunction; no source/Mathlib O_X-module derived pullback (source only étale upperStar.leftDerivedFunctor); recompiled on sheaf-dag c77be01c6 with #check"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D3",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261017T191956-L-3002698",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  }
 }

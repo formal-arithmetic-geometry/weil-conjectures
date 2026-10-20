@@ -5,13 +5,13 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.AffineFreeKernelRankLocus
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
@@ -32,7 +32,7 @@ private theorem pullback_Q_iso {X Y : Scheme.{u}} (g : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P) :
+    (hP : CochainComplex.IsKFlatTensor (R := Y.sheaf) P) :
     Nonempty ((derivedPullback g).obj (DerivedCategory.Q.obj P) ≅
       DerivedCategory.Q.obj (((Modules.pullback g).mapHomologicalComplex (.up ℤ)).obj P)) := by
   set_option backward.isDefEq.respectTransparency false in

@@ -107,14 +107,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IsomorphismPullbackCounit",
-  "file": "lean/Sheaf/AlgebraicGeometry/IsomorphismPullbackCounit.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.IsomorphismPullbackCounit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IsomorphismPullbackCounit.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.isIso_counit_of_isIso",
-  "statement": "theorem isIso_counit_of_isIso\n    [d : ∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]\n    (M : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :\n    IsIso ((counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj M))",
+  "statement": "theorem isIso_counit_of_isIso [d : ∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j] (M : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) : IsIso ((counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj M))",
   "branch": "sheaf-dag",
-  "by": "P4",
-  "date": "2026-10-13"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Retired duplicate Sheaf module and redirected its live consumers to the adopted source declaration. Mathematical statement and unit route retained; source API uses IsKFlatTensor/IsKFlatTensorResolution where applicable."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -127,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-3b4fb",
-  "group": "P4",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T142900-L-499164",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered packet, DAG records, Lean files, change record, report, and direct importer against the stage-3 brief; all delivered files and the adapted direct importer compile without errors or warnings, with only the named compatibility theorem sorry remaining."
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  }
 }

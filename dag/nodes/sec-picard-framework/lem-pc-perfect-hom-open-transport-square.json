@@ -105,14 +105,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenTransportSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenTransportSquare.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectHomOpenTransportSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectHomOpenTransportSquare.lean",
   "declaration": "AlgebraicGeometry.perfect_hom_open_transport_square",
-  "statement": "theorem perfect_hom_open_transport_square\n    {S Y : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens)\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)\n    {T T' : Over S} (g : T' ⟶ T) (M Q : schemeDerivedCategory Y)\n    (f : (derivedPullback (pullback.fst s T.hom)).obj M ⟶\n      (derivedPullback (pullback.fst s T.hom)).obj Q) :\n    let b (r : Over S) :=\n      pullback.map (B.ι ≫ s) r.hom s r.hom B.ι (𝟙 r.left) (𝟙 S) (by simp) (by simp)\n    let σ : schemeMVDerivedRestriction Y B ≅ derivedPullback B.ι :=\n      (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)\n    let he (r : Over S) :\n        b r ≫ pullback.fst s r.hom = pullback.fst (B.ι ≫ s) r.hom ≫ B.ι := by\n      simp [b, pullback.map]\n    let κ₀ (r : Over S) := perfectHomComposition (b r) (pullback.fst s r.hom) ≪≫\n      eqToIso (congrArg (fun f ↦ derivedPullback f) (he r)) ≪≫\n      (perfectHomComposition (pullback.fst (B.ι ≫ s) r.hom) B.ι).symm ≪≫\n      Functor.isoWhiskerRight σ.symm (derivedPullback (pullback.fst (B.ι ≫ s) r.hom))\n    ∀ κ : (r : Over S) →\n        derivedPullback (pullback.fst s r.hom) ⋙ derivedPullback (b r) ≅\n          schemeMVDerivedRestriction Y B ⋙ derivedPullback (pullback.fst (B.ι ≫ s) r.hom),\n      (∀ r, κ r = κ₀ r) →\n    (κ T').inv.app M ≫ (derivedPullback (b T')).map (perfectHomMap s g f) ≫\n        (κ T').hom.app Q =\n      perfectHomMap (B.ι ≫ s) g\n        ((κ T).inv.app M ≫ (derivedPullback (b T)).map f ≫ (κ T).hom.app Q)",
+  "statement": "theorem perfect_hom_open_transport_square {S Y : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) {T T' : Over S} (g : T' ⟶ T) (M Q : schemeDerivedCategory Y) (f : (derivedPullback (pullback.fst s T.hom)).obj M ⟶ (derivedPullback (pullback.fst s T.hom)).obj Q) : let b (r : Over S) := pullback.map (B.ι ≫ s) r.hom s r.hom B.ι (𝟙 r.left) (𝟙 S) (by simp) (by simp) let σ : schemeMVDerivedRestriction Y B ≅ derivedPullback B.ι := (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _) let he (r : Over S) : b r ≫ pullback.fst s r.hom = pullback.fst (B.ι ≫ s) r.hom ≫ B.ι := by simp [b, pullback.map] let κ₀ (r : Over S) := perfectHomComposition (b r) (pullback.fst s r.hom) ≪≫ eqToIso (congrArg (fun f ↦ derivedPullback f) (he r)) ≪≫ (perfectHomComposition (pullback.fst (B.ι ≫ s) r.hom) B.ι).symm ≪≫ Functor.isoWhiskerRight σ.symm (derivedPullback (pullback.fst (B.ι ≫ s) r.hom)) ∀ κ : (r : Over S) → derivedPullback (pullback.fst s r.hom) ⋙ derivedPullback (b r) ≅ schemeMVDerivedRestriction Y B ⋙ derivedPullback (pullback.fst (B.ι ≫ s) r.hom), (∀ r, κ r = κ₀ r) → (κ T').inv.app M ≫ (derivedPullback (b T')).map (perfectHomMap s g f) ≫ (κ T').hom.app Q = perfectHomMap (B.ι ≫ s) g ((κ T).inv.app M ≫ (derivedPullback (b T)).map f ≫ (κ T).hom.app Q)",
   "branch": "sheaf-dag",
-  "by": "E2",
-  "date": "2026-10-14"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Retired duplicate Sheaf module and redirected its live consumers to the adopted source declaration. Mathematical statement and unit route retained; source API uses IsKFlatTensor/IsKFlatTensorResolution where applicable."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -125,14 +126,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-b6a41",
-  "group": "V1",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261014T025144-L-158979",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged full theorem signature with the node and repository; checked proof steps, dependencies, pruning, and prior repair. Delivery and both direct importers compile cleanly; all four proved declarations use only the three allowed axioms."
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  },
  "lean_audit": {
   "master": {

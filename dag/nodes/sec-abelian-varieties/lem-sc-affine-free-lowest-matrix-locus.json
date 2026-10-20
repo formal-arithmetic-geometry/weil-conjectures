@@ -105,10 +105,11 @@
   "module": "Sheaf.AlgebraicGeometry.AffineFreeLowestMatrixLocus",
   "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeLowestMatrixLocus.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_affineFreeLowestMatrixLocus",
-  "statement": "theorem exists_affineFreeLowestMatrixLocus\n    [∀ T : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toRingedSpace))]\n    (X : Scheme.{u}) [IsAffine X]\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (a : ℤ) (s r : ℕ) (hsr : s ≤ r)\n    (hbounded : ∃ c : ℤ, ∀ j : ℤ, c < j → IsZero (K.X j))\n    (hlower : ∀ j : ℤ, j < a → IsZero (K.X j))\n    (hfree : ∀ j : ℤ, ∃ n : ℕ, Nonempty (K.X j ≅ SheafOfModules.free\n      (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin n))))\n    (ha : Nonempty (K.X a ≅ SheafOfModules.free\n      (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin s)))) :\n    ∃ (Z : Scheme.{u}) (i : Z ⟶ X),\n      IsClosedImmersion i ∧ LocallyOfFinitePresentation i ∧\n      (∀ (T : Scheme.{u}) (h : T ⟶ X),\n        (∃ g : T ⟶ Z, g ≫ i = h) ↔\n          SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n            ((DerivedCategory.homologyFunctor\n              (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj\n                ((derivedPullback h).obj (DerivedCategory.Q.obj K))) r)",
+  "statement": "theorem exists_affineFreeLowestMatrixLocus [∀ T : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] (X : Scheme.{u}) [IsAffine X] (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (a : ℤ) (s r : ℕ) (hsr : s ≤ r) (hbounded : ∃ c : ℤ, ∀ j : ℤ, c < j → IsZero (K.X j)) (hlower : ∀ j : ℤ, j < a → IsZero (K.X j)) (hfree : ∀ j : ℤ, ∃ n : ℕ, Nonempty (K.X j ≅ SheafOfModules.free (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin n)))) (ha : Nonempty (K.X a ≅ SheafOfModules.free (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin s)))) : ∃ (Z : Scheme.{u}) (i : Z ⟶ X), IsClosedImmersion i ∧ LocallyOfFinitePresentation i ∧ (∀ (T : Scheme.{u}) (h : T ⟶ X), (∃ g : T ⟶ Z, g ≫ i = h) ↔ SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj ((derivedPullback h).obj (DerivedCategory.Q.obj K))) r)",
   "branch": "sheaf-dag",
-  "by": "P2",
-  "date": "2026-10-13"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Migrated to the canonical source derived pullback and source IsKFlatTensor predicates; logical statement and complete proof retained."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -121,14 +122,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T111848-L-3051415",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  },
  "lean_audit": {
   "master": {

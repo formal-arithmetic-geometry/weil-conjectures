@@ -85,14 +85,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomComparisonTriangle.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectHomComparisonTriangle",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectHomComparisonTriangle.lean",
   "declaration": "AlgebraicGeometry.perfectHomComparison_triangle",
   "statement": "theorem perfectHomComparison_triangle {X S : Scheme.{u}} (s : X ⟶ S) {T T' T'' : Over S} (g : T' ⟶ T) (h : T'' ⟶ T') (t : T'' ⟶ T) (ht : h ≫ g = t) (P : schemeDerivedCategory X) : (derivedPullback (baseChangeMap s h)).mapIso ((perfectHomComparison s g).app P).symm ≪≫ ((perfectHomComparison s h).app P).symm = (perfectHomComposition (baseChangeMap s h) (baseChangeMap s g) ≪≫ eqToIso (congrArg (fun f ↦ derivedPullback f) ((baseChangeMap_comp s h g).symm.trans (congrArg (baseChangeMap s) ht)))).app ((derivedPullback (pullback.fst s T.hom)).obj P) ≪≫ ((perfectHomComparison s t).app P).symm",
   "branch": "sheaf-dag",
-  "by": "U2",
-  "date": "2026-10-14"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "The main triangle theorem is supplied by the adopted source. The Sheaf module retains only public composition helpers needed by its additional consumers; the source helpers are private."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -105,14 +106,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-ff028",
-  "group": "U2",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261014T084702-L-89554",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, constructions and remaining obligation with all three node records, source arguments, change record and report; verified compilation and axioms."
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  },
  "lean_audit": {
   "master": {

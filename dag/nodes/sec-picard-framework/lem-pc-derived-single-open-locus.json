@@ -106,14 +106,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-perfect",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedSingleOpenLocus",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedSingleOpenLocus.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedSingleOpenLocus",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedSingleOpenLocus.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flat_single_open_locus",
-  "statement": "theorem exists_flat_single_open_locus\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {T : Scheme.{u}} (S : Set T) (E : schemeDerivedCategory T) (i : ℕ)\n    (hneg : ∀ n : ℤ, n < 0 → IsZero ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj E))\n    (hloc : ∀ t ∈ S, ∃ U : T.Opens, t ∈ U ∧ ∃ r : ℕ,\n      IsFiniteLocallyFreeInDegree\n        (fun q : ℕ ↦ (Modules.restrictFunctor U.ι).obj\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj E)) i r) :\n    ∃ W : T.Opens, S ⊆ W ∧\n      SheafOfModules.IsFlat ((Modules.restrictFunctor W.ι).obj\n        ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj E)) ∧\n      Nonempty ((derivedPullback W.ι).obj E ≅\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj\n            ((Modules.restrictFunctor W.ι).obj ((DerivedCategory.homologyFunctor\n              (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj E)))",
+  "statement": "theorem exists_flat_single_open_locus [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {T : Scheme.{u}} (S : Set T) (E : schemeDerivedCategory T) (i : ℕ) (hneg : ∀ n : ℤ, n < 0 → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj E)) (hloc : ∀ t ∈ S, ∃ U : T.Opens, t ∈ U ∧ ∃ r : ℕ, IsFiniteLocallyFreeInDegree (fun q : ℕ ↦ (Modules.restrictFunctor U.ι).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj E)) i r) : ∃ W : T.Opens, S ⊆ W ∧ SheafOfModules.IsFlat ((Modules.restrictFunctor W.ι).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj E)) ∧ Nonempty ((AlgebraicGeometry.derivedPullback W.ι).obj E ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj ((Modules.restrictFunctor W.ι).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj E)))",
   "branch": "sheaf-dag",
-  "by": "Y2",
-  "date": "2026-10-12"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Retired duplicate Sheaf module and redirected its live consumers to the adopted source declaration. Mathematical statement and unit route retained; source API uses IsKFlatTensor/IsKFlatTensorResolution where applicable."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -126,14 +127,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K1",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T112843-L-769139",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  },
  "lean_audit": {
   "master": {

@@ -1,13 +1,13 @@
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedPullbackShiftedUnitIsoData
+public import WeilConjectures.AlgebraicGeometry.DerivedPullback
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackShiftedUnitIsoData
 public import Sheaf.AlgebraicGeometry.SchemeCanonicalShiftUnitIso
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Sheaf.Algebra.Homology.KFlat
+public import WeilConjectures.Algebra.Homology.KFlat
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 @[expose] public section
@@ -40,7 +40,7 @@ theorem exists_derivedPullback_kFlat_counit_data
               schemeDerivedCategory Z),
     ∀ P : CochainComplex
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-          CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
+          CochainComplex.IsKFlatTensor (R := Y.sheaf) P →
           IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   obtain ⟨e⟩ := exists_derivedPullback_shifted_unit_iso f
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,

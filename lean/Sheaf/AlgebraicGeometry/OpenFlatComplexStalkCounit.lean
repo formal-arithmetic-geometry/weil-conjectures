@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
-import all Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+import all WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import all Sheaf.Algebra.Homology.StalkKFlatTensorHomology
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso

@@ -19,6 +19,8 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
+omit [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] in
 private theorem iso_triangle_cancel {C : Type*} [Category C]
     {P Q R S : C} (x : P ≅ Q) (y : Q ≅ R)
     (z : P ≅ S) (t : S ≅ R) (h : x ≪≫ y = z ≪≫ t) :
@@ -28,8 +30,7 @@ private theorem iso_triangle_cancel {C : Type*} [Category C]
   simp only [Iso.trans_hom] at hh
   simp only [← Category.assoc]
   rw [hh]
-  simp only [Category.assoc, Iso.hom_inv_id_assoc,
-    Category.id_comp, Iso.hom_inv_id]
+  simp only [Category.assoc, Category.id_comp, Iso.hom_inv_id]
 
 /-- Composing a cartesian comparison with its first projection agrees with
 pulling the first projection through base change. Source: Stacks Project,

@@ -102,14 +102,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RelativeTensorPullbackHomologyComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTensorPullbackHomologyComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RelativeTensorPullbackHomologyComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RelativeTensorPullbackHomologyComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.relativeTensorPullback_homology_comparison",
-  "statement": "theorem relativeTensorPullback_homology_comparison {X S : Scheme.{u}} (f : X ⟶ S) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (E : schemeDerivedCategory X) (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (eK : DerivedCategory.Q.obj K ≅ E) (P : CochainComplex (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj (TopCat.Sheaf.inverseImageRing f.base S.sheaf))) ℤ) (hP : CochainComplex.IsAcyclicTensorKFlat (R := TopCat.Sheaf.inverseImageRing f.base S.sheaf) P) (q : P ⟶ ((SheafOfModules.restrictScalars ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).map (Modules.tensorPullbackRingMap f))).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) (hq : QuasiIso q) (F : SheafOfModules.{u} (moduleRings S.toRingedSpace)) (i : ℤ) : Nonempty ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj ((DerivedCategory.homologyFunctor _ i).obj (E ⊗ (derivedPullback f).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ≅ (SheafOfModules.toSheaf ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj (TopCat.Sheaf.inverseImageRing f.base S.sheaf))).obj ((CochainComplex.mapBifunctor P ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj (TopCat.Sheaf.inverseImageModule f.base S.sheaf F)) (@curriedTensor _ _ (SheafOfModules.monoidalCategory (TopCat.Sheaf.inverseImageRing f.base S.sheaf)))).homology i))",
+  "statement": "theorem relativeTensorPullback_homology_comparison {X S : Scheme.{u}} (f : X ⟶ S) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (E : schemeDerivedCategory X) (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (eK : DerivedCategory.Q.obj K ≅ E) (P : CochainComplex (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj (TopCat.Sheaf.inverseImageRing f.base S.sheaf))) ℤ) (hP : CochainComplex.IsKFlatTensor (R := TopCat.Sheaf.inverseImageRing f.base S.sheaf) P) (q : P ⟶ ((SheafOfModules.restrictScalars ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).map (Modules.tensorPullbackRingMap f))).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) (hq : QuasiIso q) (F : SheafOfModules.{u} (moduleRings S.toRingedSpace)) (i : ℤ) : Nonempty ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj ((DerivedCategory.homologyFunctor _ i).obj (E ⊗ (derivedPullback f).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ≅ (SheafOfModules.toSheaf ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj (TopCat.Sheaf.inverseImageRing f.base S.sheaf))).obj ((CochainComplex.mapBifunctor P ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj (TopCat.Sheaf.inverseImageModule f.base S.sheaf F)) (@curriedTensor _ _ (SheafOfModules.monoidalCategory (TopCat.Sheaf.inverseImageRing f.base S.sheaf)))).homology i))",
   "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-13"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Retired duplicate Sheaf module and redirected its live consumers to the adopted source declaration. Mathematical statement and unit route retained; source API uses IsKFlatTensor/IsKFlatTensorResolution where applicable."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -122,14 +123,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-f8256",
-  "group": "B4",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T131323-L-4033143",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records and Stacks Tag 08DE; existing signature unchanged, delivery and direct importer compile cleanly, axiom probes pass."
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  },
  "lean_audit": {
   "master": {

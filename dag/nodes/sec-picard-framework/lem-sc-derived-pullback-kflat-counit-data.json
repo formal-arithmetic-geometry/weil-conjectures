@@ -88,10 +88,11 @@
   "module": "Sheaf.AlgebraicGeometry.DerivedPullbackKFlatCounitData",
   "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackKFlatCounitData.lean",
   "declaration": "AlgebraicGeometry.exists_derivedPullback_kFlat_counit_data",
-  "statement": "theorem exists_derivedPullback_kFlat_counit_data\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)]\n    [(Scheme.Modules.tensorPullback f).Additive] :\n    ∃ e : (derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅\n        (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧,\n      ∃ ε : DerivedCategory.Qh ⋙ derivedPullback f ⟶\n          (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n            (DerivedCategory.Qh : HomotopyCategory\n              (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n              schemeDerivedCategory Z),\n        ∀ P : CochainComplex\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,\n          CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →\n          IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))",
+  "statement": "theorem exists_derivedPullback_kFlat_counit_data {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [Functor.Monoidal (derivedPullback f)] [(Scheme.Modules.tensorPullback f).Additive] : ∃ e : (derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅ (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧, ∃ ε : DerivedCategory.Qh ⋙ derivedPullback f ⟶ (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ (DerivedCategory.Qh : HomotopyCategory (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤ schemeDerivedCategory Z), ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ, CochainComplex.IsKFlatTensor (R := Y.sheaf) P → IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))",
   "branch": "sheaf-dag",
-  "by": "X2",
-  "date": "2026-10-14"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Migrated to the canonical source derived pullback and source IsKFlatTensor predicates; logical statement and complete proof retained."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -104,14 +105,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-f59d8",
-  "group": "D2",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T201742-L-3966550",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules and both direct importers compiled cleanly; target signature and existing declaration signatures are unchanged, with the named shifted-unit sorry and node metadata aligned."
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  },
  "lean_audit": {
   "master": {

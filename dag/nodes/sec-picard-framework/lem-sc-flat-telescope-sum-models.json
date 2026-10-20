@@ -134,10 +134,11 @@
   "module": "Sheaf.AlgebraicGeometry.FlatTelescopeSumModels",
   "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeSumModels.lean",
   "declaration": "AlgebraicGeometry.exists_flat_telescope_sum_models",
-  "statement": "theorem exists_flat_telescope_sum_models (Y : Scheme.{u})\n    (E : ℕ → CochainComplex\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n    (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) :\n    ∃ (R : CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (hR : isFlatTelescope Y R)\n      (T : ℕ → CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (hT : ∀ n, isFlatTelescope Y (T n))\n      (s : ∀ n, (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (T n) ⟶\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R),\n      Nonempty ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E) ≅\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) ∧\n      (∀ n, boundedFlatShiftRepresentative Y\n        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (T n))) ∧\n      Nonempty (IsColimit (Cofan.mk\n        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) s))",
+  "statement": "theorem exists_flat_telescope_sum_models (Y : Scheme.{u}) (E : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i)) (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) : ∃ (R : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hR : isFlatTelescope Y R) (T : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hT : ∀ n, isFlatTelescope Y (T n)) (s : ∀ n, (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (T n) ⟶ (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R), Nonempty ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E) ≅ (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) ∧ (∀ n, boundedFlatShiftRepresentative Y ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (T n))) ∧ Nonempty (IsColimit (Cofan.mk ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) s))",
   "branch": "sheaf-dag",
-  "by": "Y3",
-  "date": "2026-10-14"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Migrated to the canonical source derived pullback and source IsKFlatTensor predicates; logical statement and complete proof retained."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -150,13 +151,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-f0c83",
-  "group": "J4",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261014T092318-L-534072",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem with its node and definitions, the proof with its recorded dependencies, and the scope changes with the change record; delivery and sole direct importer compile cleanly, with only standard axioms."
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  }
 }

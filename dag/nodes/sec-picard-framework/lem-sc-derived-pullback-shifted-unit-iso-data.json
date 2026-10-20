@@ -51,14 +51,15 @@
  ],
  "mathlib_match": null,
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackShiftedUnitIsoData",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackShiftedUnitIsoData.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedPullbackShiftedUnitIsoData",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedPullbackShiftedUnitIsoData.lean",
   "declaration": "AlgebraicGeometry.exists_derivedPullback_shifted_unit_iso",
-  "statement": "theorem exists_derivedPullback_shifted_unit_iso\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)] :\n    Nonempty ((derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅\n        (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧)",
+  "statement": "theorem exists_derivedPullback_shifted_unit_iso {Z Y : Scheme.{u}} (f : Z ⟶ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [Functor.Monoidal (derivedPullback f)] : Nonempty ((derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅ (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧)",
   "branch": "sheaf-dag",
-  "by": "D2",
-  "date": "2026-10-14"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Retired duplicate Sheaf module and redirected its live consumers to the adopted source declaration. Mathematical statement and unit route retained; source API uses IsKFlatTensor/IsKFlatTensorResolution where applicable."
  },
  "mathlib_searches": [
   {
@@ -101,18 +102,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-ad1a2",
-  "group": "U2",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T215614-L-902053",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "independent Codex review: Delivered module and direct importer compiled cleanly; proof, axioms, unchanged target signature, node metadata, import change record, and report satisfy the stage-3 brief.",
-  "sorry_before": [
-   "AlgebraicGeometry.exists_derivedPullback_shifted_unit_iso"
-  ],
-  "sorry_after": []
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  },
  "lean_audit": {
   "master": {

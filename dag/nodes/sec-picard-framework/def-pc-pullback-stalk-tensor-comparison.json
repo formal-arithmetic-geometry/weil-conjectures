@@ -116,14 +116,14 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison",
+  "module": "WeilConjectures.AlgebraicGeometry.PullbackStalkTensorComparison",
   "declaration": "AlgebraicGeometry.PullbackStalkTensor.IsComparisonIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/PullbackStalkTensorComparison.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PullbackStalkTensorComparison.lean",
   "statement": "def IsComparisonIso [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Limits.pullback f g).toRingedSpace))] (P : schemeDerivedCategory X) (z : ↥(Limits.pullback f g)) : Prop",
   "branch": "sheaf-dag",
-  "by": "Z2",
-  "date": "2026-10-12",
-  "existing": false,
+  "by": "B2",
+  "date": "2026-10-20",
+  "existing": true,
   "declarations": [
    "AlgebraicGeometry.PullbackStalkTensor.point_eq",
    "AlgebraicGeometry.PullbackStalkTensor.R",
@@ -149,7 +149,7 @@
    "AlgebraicGeometry.PullbackStalkTensor.stalkTensorComplex",
    "AlgebraicGeometry.PullbackStalkTensor.IsComparisonIso"
   ],
-  "note": "Definition repair: tensorToStalk is the explicit Algebra.TensorProduct.lift of the two projection stalk maps, not an existentially chosen map. Its restrictions and uniqueness are proved; all pre-existing signatures and the mathematical statement remain unchanged."
+  "note": "Retired duplicate Sheaf module and redirected its live consumers to the adopted source declaration. Mathematical statement and unit route retained; source API uses IsKFlatTensor/IsKFlatTensorResolution where applicable."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -168,13 +168,13 @@
   "note": "f,g arbitrary; X'=pullback f g, g_X=fst; IsTorIndependent over all x,t with f x=g t, Tor'_i i>0 over O_{S,f x}, B's algebra via stalkCongr (= E1 hRB); P : schemeDerivedCategory X, Scheme.IsPerfect; all z, all i:ℤ; R,A,B,C actual stalks; E->C tensorToStalk tied to fst/snd stalkMaps; c_i = baseDerivedTensorCohomologyModel.localizedComparison (E1 form); target via derivedPullback fst, ∀ e iso ⇒ equivalent to IsIso c_i; combined compile + #check ok, hTor not inferInstance"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-361aa",
-  "group": "Z2",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T135340-L-1703431",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "independent Codex review: Delivered module, node record, change record, report, and direct importers match the stated proof and compile cleanly with allowed axioms."
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  }
 }

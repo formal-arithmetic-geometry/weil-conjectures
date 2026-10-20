@@ -100,9 +100,9 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectHomTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomTransport.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectHomTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectHomTransport.lean",
   "declaration": "AlgebraicGeometry.perfectLimitMap_stage",
   "declarations": [
    "AlgebraicGeometry.perfectHomComposition",
@@ -120,8 +120,9 @@
   ],
   "statement": "theorem perfectLimitMap_stage {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i)) {j k : I} (hij : i ≤ j) (hjk : j ≤ k) {P Q : schemeDerivedCategory X} (f : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj P ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj Q) : perfectLimitMap R c s (hij.trans hjk) (perfectStageMap R s hij hjk f) = perfectLimitMap R c s hij f",
   "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-13"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Retired duplicate Sheaf module and redirected its live consumers to the adopted source declaration. Mathematical statement and unit route retained; source API uses IsKFlatTensor/IsKFlatTensorResolution where applicable."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -134,13 +135,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-aa353",
-  "group": "G1",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T022414-L-3213338",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records and Stacks 09RE/0D5S; all delivery modules and direct importer PerfectComplexDescent compile cleanly; comparison unchanged by rfl; axioms checked."
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  }
 }

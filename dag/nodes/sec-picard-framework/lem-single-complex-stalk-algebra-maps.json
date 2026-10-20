@@ -77,14 +77,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition",
-  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexBaseChangeStalkCondition.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SingleComplexBaseChangeStalkCondition.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_stalk_algebra_maps",
-  "statement": "theorem exists_stalk_algebra_maps (z : X') :\n    letI := leftAlgebra f g' z\n    letI := rightAlgebra f f' g g' sq z\n    letI := (f.stalkMap (g' z) ≫ g'.stalkMap z).hom.toAlgebra\n    ∃ l : A g' z →ₐ[R f g' z] C z,\n      ∃ r : B f' z →ₐ[R f g' z] C z,\n        (∀ a, l a = (g'.stalkMap z).hom a) ∧\n        (∀ b, r b = (f'.stalkMap z).hom b) ∧\n        ∀ a b, Commute (l a) (r b)",
+  "statement": "theorem exists_stalk_algebra_maps (z : X') : letI := leftAlgebra f g' z letI := rightAlgebra f f' g g' sq z letI := (f.stalkMap (g' z) ≫ g'.stalkMap z).hom.toAlgebra ∃ l : A g' z →ₐ[R f g' z] C z, ∃ r : B f' z →ₐ[R f g' z] C z, (∀ a, l a = (g'.stalkMap z).hom a) ∧ (∀ b, r b = (f'.stalkMap z).hom b) ∧ ∀ a b, Commute (l a) (r b)",
   "branch": "sheaf-dag",
-  "by": "T4",
-  "date": "2026-10-13"
+  "by": "B2",
+  "date": "2026-10-20",
+  "note": "Retired duplicate Sheaf module and redirected its live consumers to the adopted source declaration. Mathematical statement and unit route retained; source API uses IsKFlatTensor/IsKFlatTensorResolution where applicable."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -97,14 +98,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T4",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T015617-L-3027912",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T163313-L-3724832",
+  "kind": "interface",
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  },
  "lean_audit": {
   "master": {

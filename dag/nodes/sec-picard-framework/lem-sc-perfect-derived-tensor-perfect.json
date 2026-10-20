@@ -135,15 +135,16 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptp2826 (reviewer sub-agent of L); spot-checked: Statement matches lem-sc-affine-perfect-map-lift step 3 use (A, I perfect on scheme X). FIX more, RETURN less: (1) C4: lem-pc-perfect-affine-bounded-projective needs E in D_QCoh, not shown for K|_U; replaced the affine-model route by strictly perfect models from def-pc-perfect-complex on a common refinement W=U_i cap V_j (sheaf-level, no QCoh needed); (2) C1: restriction of derived tensor to opens was uncited; now cites lem-pc-affine-derived-pullback-tensor-tilde (1), declared as tool use; (3) B4: plain-text 'P tensor_A Q' etc. rewritten in TeX. Step 2 K-flat via lem-pc-bounded-above-flat-kflat checked; step 3 elementary termwise summand argument kept. The Second reading by F1 missed faults (1) and (2).; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.PerfectDerivedTensor",
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectDerivedTensor",
   "declaration": "AlgebraicGeometry.perfect_derivedTensor",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDerivedTensor.lean",
-  "statement": "theorem perfect_derivedTensor (X : Scheme.{uT}) [HasDerivedCategory.{wT} (SheafOfModules.{uT} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{wT} (SheafOfModules.{uT} ((moduleRings X.toRingedSpace).over U))] (K L : schemeDerivedCategory X) (hK : Scheme.IsPerfect X K) (hL : Scheme.IsPerfect X L) (P N : CochainComplex (SheafOfModules.{uT} (moduleRings X.toRingedSpace)) ℤ) (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N) (eP : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj N ≅ L) : Scheme.IsPerfect X (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))",
-  "by": "G1",
-  "date": "2026-10-11",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectDerivedTensor.lean",
+  "statement": "theorem perfect_derivedTensor (X : Scheme.{uT}) [HasDerivedCategory.{wT} (SheafOfModules.{uT} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{wT} (SheafOfModules.{uT} ((moduleRings X.toRingedSpace).over U))] (K L : schemeDerivedCategory X) (hK : Scheme.IsPerfect X K) (hL : Scheme.IsPerfect X L) (P N : CochainComplex (SheafOfModules.{uT} (moduleRings X.toRingedSpace)) ℤ) (hP : CochainComplex.IsKFlatTensor (R := X.sheaf) P) (hN : CochainComplex.IsKFlatTensor (R := X.sheaf) N) (eP : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj N ≅ L) : Scheme.IsPerfect X (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))",
+  "by": "B2",
+  "date": "2026-10-20",
   "branch": "sheaf-dag",
-  "existing": false,
-  "fixed_by": "R-pdt"
+  "existing": true,
+  "fixed_by": "R-pdt",
+  "note": "Retired duplicate Sheaf module and redirected its live consumers to the adopted source declaration. Mathematical statement and unit route retained; source API uses IsKFlatTensor/IsKFlatTensorResolution where applicable."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -166,13 +167,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
+  "reviewer": "C-46795",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T100108-L-2481206",
+  "landing": "20261020T163313-L-3724832",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Repair of PASSed head 20359895ce: Lean files byte-identical except the AffineDerivedPullbackTensorTilde stub (already retired on live by P5); delivered AffineDerivedPullbackModuleModel stub supersedes the pruned live file; retained modules differ from live only by twin import redirects, the IsAcyclicTensorKFlat→IsKFlatTensor rename (identical bodies) and the PerfectHomComparisonTriangle de-dup; 38 modules compile clean; outside importers FlatTelescopeSumModels/PerfectHomCompositionPrism compile; axioms on 13 declarations propext/choice/Quot.sound; 36 node lean records resolve"
  }
 }
