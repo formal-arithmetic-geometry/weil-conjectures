@@ -212,5 +212,5 @@ theorem open_injective_coefficient_lower_comparison_factorization
     J
   have hm := congrArg ((DerivedCategory.Plus.homologyFunctor _ n).map) h.symm
   rw [baseChange_app_eq_mateEquiv]
-  simpa [pullbackSquareComparison_def, upperStarPlusComp] using hm
+  simpa [pullbackSquareComparison, upperStarPlusComp] using hm
 end AlgebraicGeometry.Etale
