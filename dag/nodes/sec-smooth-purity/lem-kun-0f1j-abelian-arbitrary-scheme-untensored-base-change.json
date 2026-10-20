@@ -1,0 +1,152 @@
+{
+ "id": "lem-kun-0f1j-abelian-arbitrary-scheme-untensored-base-change",
+ "kind": "statement",
+ "title": "Abelian untensored base change for arbitrary affine schemes",
+ "statement": "Let K be a field, Z an affine K-scheme, S′ a K-scheme, and g:T→S′ a quasi-compact quasi-separated morphism. For every abelian sheaf A on the small etale site of T whose geometric-stalk elements have finite order invertible in K [def-kun-torsion-invertible], the canonical bounded-below derived exchange (Z×_K S′→S′)^* Rg_* A[0] → R(pullback.fst)_* (pullback.snd)^* A[0] is an isomorphism [def-weil-pbc-derived-exchange]. No finite-type condition is imposed on Z.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0F1I and 0EZT, arbitrary-scheme reduction in Tag 0F1J"
+ },
+ "stmt_deps": [
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Give the coordinate algebra B of Z its K-algebra structure from z. The finitely generated K-subalgebras form a nonempty directed set with union B. Use the source library’s CommRingCat.isColimitFGSubalgebraCocone to obtain the actual ring colimit; Spec preserves the opposite limit. Extend this limit cone across the canonical affine isomorphism Z ≅ Spec B. The structure maps to Spec K commute with its projections by naturality of isoSpec. Each stage is finite type over K.",
+   "uses": [
+    "lem-kun-algebra-union",
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1I, first paragraph of proof; Tag 0EZT, assertion (2)"
+   }
+  },
+  {
+   "text": "Build the systems X_i=Z_i×_K S′ and Y_i=X_i×_{S′}T using pointwise pullbacks. Construct their limit cones directly: their universal lifts are pullback lifts of the three limit lifts, and uniqueness follows by both pullback projections and limit hom-ext. Their transition morphisms are affine by the affine fibre-product transition lemma.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1I, first paragraph of proof; Tag 0EZT, assertion (2)"
+   }
+  },
+  {
+   "text": "Apply finite-type field base change to each Z_i and A. Identify its unbounded exchange with the bounded-below exchange, cancel the endpoint comparison isomorphisms, and reflect invertibility along the full inclusion D+ into D.",
+   "uses": [
+    "lem-kun-0f1i",
+    "lem-kun-unbounded-exchange-agrees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1I, first paragraph of proof; Tag 0EZT, assertion (2)"
+   }
+  },
+  {
+   "text": "Apply continuity of higher direct images in each nonnegative degree. The S′ and T diagrams are constant with identity transitions. Their limit cones use the connectedness of a nonempty directed index, and the coefficient cocone is the identity after the inverse-image identity isomorphism. Verify its unit and composition coherence using upperStarComp_id_right and naturality; this identifies the canonical maps, not just the endpoints. Stalkwise finite order implies A.IsTorsion. Thus the degree-q exchange at the limit is invertible. Negative cohomology of both endpoints vanishes by left exactness and exact inverse image; the derived cohomology criterion proves invertibility.",
+   "uses": [
+    "lem-kun-0ezt"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1I, first paragraph of proof; Tag 0EZT, assertion (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-algebra-union",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-fibre-product-affine-transition",
+  "lem-kun-0f1i",
+  "lem-kun-unbounded-exchange-agrees",
+  "lem-kun-0ezt"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1I, first paragraph of proof; Tag 0EZT, assertion (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale higher direct image base change by arbitrary scheme over a field with invertible prime torsion coefficients",
+   "results": "{\"t\": \"2026-10-19T19:02:43Z\", \"tool\": \"leanfinder\", \"query\": \"Etale higher direct image base change by arbitrary scheme over a field with invertible prime torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"Algebra.Etale.baseChange\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\"], \"digest\": \"b6818e2b1bff3228\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match; use the existing finite-type and continuity declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "punctual|higherDirectImage|baseChangeHomologyMap",
+   "results": "{\"t\": \"2026-10-19T19:03:18Z\", \"tool\": \"grep\", \"query\": \"punctual|higherDirectImage|baseChangeHomologyMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match; use the existing finite-type and continuity declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-19T19:03:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small\", \"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange\"], \"digest\": \"b16df769ac229669\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match; use the existing finite-type and continuity declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale derived direct image base change for an arbitrary affine scheme over a field by continuity from finitely generated subalgebras",
+   "results": "{\"t\": \"2026-10-20T01:34:22Z\", \"tool\": \"leansearch\", \"query\": \"Etale derived direct image base change for an arbitrary affine scheme over a field by continuity from finitely generated subalgebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.FormallyEtale\", \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"RingHom.Etale.isStableUnderBaseChange\"], \"digest\": \"444a9293ad23032c\"}",
+   "date": "2026-10-20",
+   "verdict": "No exact match; the results concern etale algebras, rather than sheaf cohomology."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ArbitrarySchemeUntensoredBaseChange",
+  "date": "2026-10-20",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f1j-arbitrary-scheme-untensored-base-change",
+   "place": "Affine approximation and continuity steps 3 through 7",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianArbitrarySchemeUntensoredBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianArbitrarySchemeUntensoredBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelian_affineScheme_untensored_baseChange",
+  "statement": "theorem abelian_affineScheme_untensored_baseChange\n    {K : Type u} [Field K] {Z S' T : Scheme.{u}} [IsAffine Z]\n    (z : Z ⟶ Spec (.of K)) [S'.Over (Spec (.of K))]\n    (g : T ⟶ S') [QuasiCompact g] [QuasiSeparated g]\n    (A : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hA : IsTorsionOfInvertibleOrder K (Over.mk (g ≫ (S' ↘ Spec (.of K)))) A) :\n    IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}\n      (CommSq.mk (pullback.condition\n        (f := pullback.snd z (S' ↘ Spec (.of K))) (g := g)).symm)).app\n      ((_root_.DerivedCategory.Plus.singleFunctor\n        (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj A))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T051442-L-1685408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T051442-L-1685408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
