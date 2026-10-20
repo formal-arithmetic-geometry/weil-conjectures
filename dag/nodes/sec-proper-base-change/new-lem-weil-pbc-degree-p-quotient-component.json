@@ -98,14 +98,15 @@
   "same_as": []
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.FormalFiberDegreePQuotient",
-  "file": "lean/Sheaf/RingTheory/FormalFiberDegreePQuotient.lean",
-  "declaration": "MvPowerSeries.FormalFiberDegreePQuotient",
-  "statement": "theorem FormalFiberDegreePQuotient\n    (K L : Type u) [Field K] [Field L] [Algebra K L]\n    (M : IntermediateField K L)\n    (F : Type u) [CommRing F] [Algebra K F]\n    (p : ℕ) [Fact p.Prime] (z : L)\n    (hz : IntermediateField.adjoin M ({z} : Set L) = ⊤)\n    (a : M) (ha : z ^ p = (a : L)) (hdeg : Module.finrank M L = p) :\n    Nonempty ((Polynomial (TensorProduct K M F) ⧸\n      Ideal.span ({Polynomial.X ^ p - Polynomial.C\n        (Algebra.TensorProduct.includeLeftRingHom a)} :\n          Set (Polynomial (TensorProduct K M F)))) ≃+* TensorProduct K L F)",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.FormalFiberDegreePQuotient",
+  "file": "lean/WeilConjectures/RingTheory/FormalFiberDegreePQuotient.lean",
+  "declaration": "MvPowerSeries.nonempty_quotient_X_pow_sub_C_ringEquiv_tensorProduct",
+  "statement": "theorem nonempty_quotient_X_pow_sub_C_ringEquiv_tensorProduct\n    (K L : Type u) [Field K] [Field L] [Algebra K L]\n    (M : IntermediateField K L)\n    (F : Type u) [CommRing F] [Algebra K F]\n    (p : ℕ) [Fact p.Prime] (z : L)\n    (hz : IntermediateField.adjoin M ({z} : Set L) = ⊤)\n    (a : M) (ha : z ^ p = (a : L)) (hdeg : Module.finrank M L = p) :\n    Nonempty ((Polynomial (TensorProduct K M F) ⧸\n      Ideal.span ({Polynomial.X ^ p - Polynomial.C\n        (Algebra.TensorProduct.includeLeftRingHom a)} :\n          Set (Polynomial (TensorProduct K M F)))) ≃+* TensorProduct K L F)",
   "branch": "sheaf-dag",
-  "by": "J2",
-  "date": "2026-10-13"
+  "by": "M1",
+  "date": "2026-10-20",
+  "note": "Retired the duplicate Sheaf module in favour of the official upstream twin. The theorem is renamed; its complete signature and proof are otherwise identical. The remaining degree-p presentation consumer already uses the upstream name and import."
  },
  "stmt_deps": [
   "def-pc-field-extension",
@@ -137,14 +138,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "C-9fd95",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T225331-L-1813531",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T135415-L-1820138",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf.RingTheory.FormalFiberDegreePQuotient vs upstream twin WeilConjectures.RingTheory.FormalFiberDegreePQuotient (diff: header + theorem name only); node lean block vs twin signature; 0 importers of the retired module"
  },
  "lean_audit": {
   "master": {
