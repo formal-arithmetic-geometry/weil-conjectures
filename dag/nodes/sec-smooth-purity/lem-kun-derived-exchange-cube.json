@@ -18,50 +18,27 @@
  ],
  "proof": [
   {
-   "text": "By [def-kun-commutative-derived-exchange], each of $E_0$, $E_1$, $P$ and $Q$ is the mate of its displayed inverse-image comparison. In the orientation of that definition, $E_b$ is the mate of $\\theta_b:h_b^{-1}f_b^{-1}\\xrightarrow{\\sim}e_b^{-1}g_b^{-1}$, $P$ is the mate of $\\theta_P:g_1^{-1}s^{-1}\\xrightarrow{\\sim}a^{-1}g_0^{-1}$, and $Q$ is the mate of $\\theta_Q:h_1^{-1}x^{-1}\\xrightarrow{\\sim}y^{-1}h_0^{-1}$. These comparisons are defined for arbitrary commutative faces, so no cartesian or invertibility hypothesis has been introduced.",
+   "text": "Apply horizontal derived base-change pasting twice at an arbitrary object K. First paste CommSq e₀ h₀ g₀ f₀ (the exchange E₀) with CommSq y h₁ h₀ x (the exchange Q). Then paste CommSq a g₁ g₀ s (the exchange P) with CommSq e₁ h₁ g₁ f₁ (the exchange E₁). Use e₀y and f₀x to identify both outer squares with CommSq (y ≫ e₀) h₁ g₀ (x ≫ f₀). Its commutativity follows from h₀e₀ and h₀y by associativity. The private helper pasteHoriz specializes derivedBaseChangeMapPlus_paste_horiz to specified composites and evaluates it at K.",
    "uses": [
-    "def-kun-commutative-derived-exchange"
+    "lemma-weil-pbc-derived-exchange-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change; Tag 0E47, remark-compose-base-change-horizontal"
-   }
+   "elementary": false
   },
   {
-   "text": "Paste the inverse-image comparisons in the two possible orders. The composite corresponding to the left-hand side is $\\gamma=(e_1^{-1}\\theta_P)\\circ(\\theta_1\\,s^{-1})$, from $h_1^{-1}f_1^{-1}s^{-1}$ to $e_1^{-1}a^{-1}g_0^{-1}$. The composite corresponding to the right-hand side is $\\gamma'=(y^{-1}\\theta_0)\\circ(\\theta_Q\\,f_0^{-1})$, from $h_1^{-1}x^{-1}f_0^{-1}$ to $y^{-1}e_0^{-1}g_0^{-1}$. Let $\\sigma:x^{-1}f_0^{-1}\\xrightarrow{\\sim}f_1^{-1}s^{-1}$ be $(c^D_{s,f_1})^{-1}$ composed with transport along $f_0x=sf_1$ and with $c^D_{f_0,x}$, and let $\\tau:y^{-1}e_0^{-1}\\xrightarrow{\\sim}e_1^{-1}a^{-1}$ be defined in the same way from $e_0y=ae_1$. Each of $\\gamma\\circ(h_1^{-1}\\sigma)$ and $(\\tau\\,g_0^{-1})\\circ\\gamma'$ is a composite of whiskered isomorphisms $c^D$, their inverses and transports along the cube equations. By clause (3) of [lem-weil-pbc-derived-inverse-image-composition], the derived composition isomorphisms satisfy the associativity and unit identities. Hence both composites equal the transformation $h_1^{-1}x^{-1}f_0^{-1}\\to(f_0xh_1)^{-1}=(g_0ae_1)^{-1}\\to e_1^{-1}a^{-1}g_0^{-1}$ obtained from the triple composition isomorphisms, so $\\gamma\\circ(h_1^{-1}\\sigma)=(\\tau\\,g_0^{-1})\\circ\\gamma'$.",
+   "text": "The two pasting expressions are equal because they are both the derived base-change map of the same outer square. Precompose their equality with the inverse of the derived inverse-image composition isomorphism for `x,f₀` and postcompose with the direct-image map of the derived inverse-image composition isomorphism for `e₁,a`. The hom/inv identities and functoriality cancel the added factors, yielding exactly the displayed equality. This uses no cartesian or invertibility hypothesis.",
    "uses": [
-    "lem-weil-pbc-derived-inverse-image-composition"
+    "lemma-weil-pbc-derived-exchange-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47, remark-compose-base-change-horizontal; Tag 07A7, remark-base-change"
-   }
-  },
-  {
-   "text": "Apply the mate-pasting identity [lem-weil-pbc-mate-pasting], clause 1, to the two pastings, with the adjunctions for $h_1$ and $g_0$ on the outside. The mate of $\\gamma$ is $E_1(a^{-1}K)\\circ f_1^{-1}P(K)$ and the mate of $\\gamma'$ is $Q(e_0^{-1}K)\\circ x^{-1}E_0(K)$. By the explicit unit-counit formula in [def-weil-pbc-adjunction-mate], mates are compatible with whiskering the two side functors by natural transformations. For $\\sigma$ this uses naturality of the unit $\\eta_{h_1}$, and for $\\tau$ it uses naturality of $\\tau$ against the counit $\\varepsilon_{g_0}$. So the mate of $\\gamma\\circ(h_1^{-1}\\sigma)$ is $(E_1(a^{-1}K)\\circ f_1^{-1}P(K))\\circ\\sigma_{Rg_{0,*}K}$, and the mate of $(\\tau g_0^{-1})\\circ\\gamma'$ is $Rh_{1,*}(\\tau_K)\\circ Q(e_0^{-1}K)\\circ x^{-1}E_0(K)$. Since mates are a well-defined assignment and the two transformations are equal by step 2, these two mates are equal. This is the displayed equality under the identifications $\\sigma$ and $\\tau$, for every $K$. The argument uses only units, counits and composition isomorphisms; no exchange map is cancelled or assumed invertible.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47, remark-compose-base-change-horizontal; Mathlib CategoryTheory.Adjunction.Mates mateEquiv_vcomp and mateEquiv_hcomp"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-kun-commutative-derived-exchange",
-  "lem-weil-pbc-derived-inverse-image-composition",
-  "lem-weil-pbc-mate-pasting",
-  "def-weil-pbc-adjunction-mate"
+  "lemma-weil-pbc-derived-exchange-coherence"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker W2",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0E47, remark-compose-base-change-horizontal (the verification omitted there), together with Tag 07A7 and the mate identities in Mathlib/CategoryTheory/Adjunction/Mates.lean"
+  "place": "Tag 0E47, remark-compose-base-change-horizontal, combined with the existing derived horizontal pasting theorem"
  },
  "mathlib_searches": [
   {
@@ -143,10 +120,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-derived-inverse-image-composition",
-  "lem-weil-pbc-mate-pasting"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -172,5 +146,15 @@
   "file": "lean/Sheaf/SecSmoothPurity/DerivedExchangeCube.lean",
   "branch": "newtargets-dag",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261020T131216-L-1260461",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,13 +1,51 @@
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group W2
+-/
+module
+
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+
+/-! # Coherence of derived exchange around a commutative cube -/
+
+@[expose] public section
 
 universe u
+
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
 set_option autoImplicit false
+
+-- Horizontal pasting with specified diagonals, evaluated at an arbitrary complex.
+private lemma pasteHoriz
+    {X'' X' X Y'' Y' Y : Scheme.{u}}
+    {g'' : X'' ⟶ X'} {g' : X' ⟶ X} {f'' : X'' ⟶ Y''}
+    {f' : X' ⟶ Y'} {f : X ⟶ Y} {h : Y'' ⟶ Y'} {g : Y' ⟶ Y}
+    (sq₁ : CommSq g' f' f g) (sq₂ : CommSq g'' f'' f' h)
+    (top : X'' ⟶ X) (bottom : Y'' ⟶ Y)
+    (ht : top = g'' ≫ g') (hb : bottom = h ≫ g)
+    (sq : CommSq top f'' f bottom)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
+    (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq).app K =
+      (upperStarCompDerivedPlus AddCommGrpCat.{u + 1} h g bottom hb).hom.app
+          ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctorPlus.obj K) ≫
+        (upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryPlus.map
+          ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq₁).app K) ≫
+        (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq₂).app
+          ((upperStar AddCommGrpCat.{u + 1} g').mapDerivedCategoryPlus.obj K) ≫
+        (lowerStar AddCommGrpCat.{u + 1} f'').rightDerivedFunctorPlus.map
+          ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} g'' g' top ht).inv.app K) := by
+  subst top bottom
+  simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj,
+    Category.id_comp] using
+      NatTrans.congr_app
+        (derivedBaseChangeMapPlus_paste_horiz AddCommGrpCat.{u + 1} sq₁ sq₂ sq) K
 
 /-- The four derived exchange maps in a commutative cube satisfy the canonical
 cube-pasting identity.  This is the statement corresponding to the two
@@ -42,6 +80,23 @@ theorem derivedExchangeCube
       Functor.whiskerRight E₀ (upperStar A x).mapDerivedCategoryPlus ≫
           Functor.whiskerLeft (upperStar A e₀).mapDerivedCategoryPlus Q ≫
           Functor.whiskerRight β.hom (lowerStar A h₁).rightDerivedFunctorPlus := by
-  sorry
+  dsimp only
+  let outer : CommSq (y ≫ e₀) h₁ g₀ (x ≫ f₀) := ⟨by
+    rw [Category.assoc, ← h₀e₀, ← Category.assoc, h₀y, Category.assoc]⟩
+  apply NatTrans.ext
+  funext K
+  have hp₀ := pasteHoriz (CommSq.mk h₀e₀.symm) (CommSq.mk h₀y)
+    (y ≫ e₀) (x ≫ f₀) rfl rfl outer K
+  have hp₁ := pasteHoriz (CommSq.mk g₀a) (CommSq.mk h₁e₁.symm)
+    (y ≫ e₀) (x ≫ f₀) e₀y f₀x outer K
+  have hp := hp₁.symm.trans hp₀
+  have hw := congrArg (fun m ↦
+    (upperStarCompDerivedPlus AddCommGrpCat.{u + 1} x f₀).inv.app
+        ((lowerStar AddCommGrpCat.{u + 1} g₀).rightDerivedFunctorPlus.obj K) ≫ m ≫
+      (lowerStar AddCommGrpCat.{u + 1} h₁).rightDerivedFunctorPlus.map
+        ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} e₁ a (y ≫ e₀) e₀y).hom.app K)) hp
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
+    Iso.inv_hom_id_app_assoc] at hw
+  simpa using hw
 
 end AlgebraicGeometry.Etale
