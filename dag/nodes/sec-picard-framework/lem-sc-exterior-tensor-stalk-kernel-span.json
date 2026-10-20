@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Map the short exact sequence by the module-to-abelian-sheaf forgetful functor, using lem-weil-pbc-module-sheaves-colimits-forgetful for finite limits and colimits, and then by the exact abelian stalk functor. This gives range(f_x)=ker(g_x) and surjectivity of g_x. To use the upstream exterior stalk comparison of lem-sc-exterior-sheaf-stalk-comparison for the retained exteriorSheaf API, identify the sectionwise exterior presheaves by identity section maps: their restrictions agree by uniqueness on pure wedges. Sheafify this isomorphism; naturality of the sheafification unit identifies exteriorSheafSection with the upstream wedge. The induced linear stalk isomorphism then transports the upstream comparisons. Compose the tensor stalk comparison of lem-pc-ringed-space-module-stalk-tensor with their tensor product.",
+   "text": "Map the short exact sequence by the module-to-abelian-sheaf forgetful functor, using lem-weil-pbc-module-sheaves-colimits-forgetful for finite limits and colimits, and then by the exact abelian stalk functor. This gives range(f_x)=ker(g_x) and surjectivity of g_x. Use the upstream exteriorPower stalk comparison of lem-sc-exterior-sheaf-stalk-comparison and compose the tensor stalk comparison of lem-pc-ringed-space-module-stalk-tensor with their tensor product. This is the upstream exteriorPower and wedge formulation; the retained exteriorSheaf consumer compares its constructions before applying this theorem.",
    "uses": [
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "lem-sc-exterior-sheaf-stalk-comparison",
@@ -46,7 +46,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph: quotient lift independence; stalk algebra portion of lem-sc-exterior-tensor-kernel-locally-spanned"
+  "place": "Proof of (*), determinant paragraph: upstream tensor exterior stalk-kernel calculation, used through an explicit sheaf and section comparison in the retained exteriorSheaf consumer."
  },
  "mathlib_searches": [
   {
@@ -129,13 +129,14 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorTensorStalkKernelSpan",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorTensorStalkKernelSpan.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorStalkKernelSpan",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorTensorStalkKernelSpan.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorTensor_stalk_kernel_le_relationSpan",
-  "statement": "theorem exteriorTensor_stalk_kernel_le_relationSpan {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (hS : S.ShortExact) (A : X.Modules) (r s : ℕ) (hs : s ≠ 0)\n    (q : exteriorSheaf A r ⊗ exteriorSheaf S.X₂ s ⟶\n      exteriorSheaf A r ⊗ exteriorSheaf S.X₃ s)\n    (hq : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))\n      (c : Fin s → S.X₂.val.obj (op U)),\n      q.val.app (op U)\n        (tmulSection (exteriorSheafSection A r U a)\n          (exteriorSheafSection S.X₂ s U c)) =\n        tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf S.X₃ s)\n          (exteriorSheafSection A r U a)\n          (exteriorSheafSection S.X₃ s U (fun i ↦ S.g.val.app (op U) (c i))))\n    (x : X) :\n    LinearMap.ker (q.stalkLinearMap x) ≤ exteriorTensorRelationStalkSpan S A r s x",
+  "statement": "theorem exteriorTensor_stalk_kernel_le_relationSpan {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (hS : S.ShortExact) (A : X.Modules) (r s : ℕ) (hs : s ≠ 0)\n    (q : exteriorPower A r ⊗ exteriorPower S.X₂ s ⟶\n      exteriorPower A r ⊗ exteriorPower S.X₃ s)\n    (hq : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))\n      (c : Fin s → S.X₂.val.obj (op U)),\n      q.val.app (op U)\n        (tmulSection (wedge (M := A) (r := r) (U := U) a)\n          (wedge (M := S.X₂) (r := s) (U := U) c)) =\n        tmulSection (M := exteriorPower A r) (N := exteriorPower S.X₃ s)\n          (wedge (M := A) (r := r) (U := U) a)\n          (wedge (M := S.X₃) (r := s) (U := U) (fun i ↦ S.g.val.app (op U) (c i))))\n    (x : X) :\n    LinearMap.ker (q.stalkLinearMap x) ≤ exteriorTensorRelationStalkSpan S A r s x",
   "branch": "sheaf-dag",
   "by": "M3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "Q4: retirement row 533. Use the proved upstream theorem on exteriorPower and wedge. The sole consumer ExteriorTensorKernelLocallySpanned transports its quotient map and sectionwise spans through a sheafified identity-on-sections isomorphism from exteriorSheaf to exteriorPower; its public signature remains unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -150,12 +151,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-1bc1b",
-  "group": "C3",
+  "reviewer": "C-19643",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261020T152948-L-2856050",
+  "landing": "20261020T160800-L-3408349",
   "kind": "interface",
-  "note": "independent cc review: Withdrawn stub of Sheaf ExteriorSheafStalkComparison + consumer ExteriorTensorStalkKernelSpan bridged to WeilConjectures twin via sheafified identity-on-sections iso, against retire row 278, node lean.statement = twin signature, change record users"
+  "note": "independent cc review: Withdrawn Sheaf ExteriorTensorStalkKernelSpan vs WeilConjectures twin (retire row 533); node lean.statement = twin signature verbatim; adapted unclaimed consumer ExteriorTensorKernelLocallySpanned (public header and imports identical, private sheafified identity-on-sections comparison) compiled with axioms propext/choice/Quot.sound; importer ExteriorTensorKernelRelations compiles"
  },
  "lean_audit": {
   "master": {

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorStalkKernelSpan
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorStalkKernelSpan
 
 /-!
 # Local generators of an exterior tensor quotient kernel
@@ -81,9 +81,9 @@ set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency false in
 private theorem relationSpan_map {X : Scheme.{v}} (S : ShortComplex X.Modules)
     (A : X.Modules) (r s : ℕ) {U V : X.Opens} (h : V ≤ U)
-    (t : (exteriorSheaf A r ⊗ exteriorSheaf S.X₂ s).val.obj (op U))
+    (t : (exteriorPower A r ⊗ exteriorPower S.X₂ s).val.obj (op U))
     (ht : t ∈ exteriorTensorRelationSpan S A r s U) :
-    (exteriorSheaf A r ⊗ exteriorSheaf S.X₂ s).val.map (homOfLE h).op t ∈
+    (exteriorPower A r ⊗ exteriorPower S.X₂ s).val.map (homOfLE h).op t ∈
       exteriorTensorRelationSpan S A r s V := by
   induction ht using Submodule.span_induction with
   | mem z hz =>
@@ -95,26 +95,12 @@ private theorem relationSpan_map {X : Scheme.{v}} (S : ShortComplex X.Modules)
     · dsimp only
       rw [hj]
       exact (PresheafOfModules.naturality_apply S.f.val (homOfLE h).op d).symm
-    · change (exteriorSheaf A r ⊗ exteriorSheaf S.X₂ s).presheaf.map
+    · change (exteriorPower A r ⊗ exteriorPower S.X₂ s).presheaf.map
         (homOfLE h).op _ = _
       rw [tmulSection_map]
-      change tmulSection
-        ((exteriorSheaf A r).val.map (homOfLE h).op (exteriorSheafSection A r U a))
-        ((exteriorSheaf S.X₂ s).val.map (homOfLE h).op
-          (exteriorSheafSection S.X₂ s U c)) = _
-      apply congrArg₂ (tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf S.X₂ s))
-      · let η := (PresheafOfModules.sheafificationAdjunction.{v}
-          (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf A r)
-        exact (PresheafOfModules.naturality_apply η (homOfLE h).op
-          (exteriorPower.ιMulti (X.presheaf.obj (op U)) r a)).symm.trans
-            (congrArg (η.app (op V)) ((Classical.choose_spec
-              (exteriorSheafRestriction_existsUnique A r (homOfLE h).op)).1 a))
-      · let η := (PresheafOfModules.sheafificationAdjunction.{v}
-          (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf S.X₂ s)
-        exact (PresheafOfModules.naturality_apply η (homOfLE h).op
-          (exteriorPower.ιMulti (X.presheaf.obj (op U)) s c)).symm.trans
-            (congrArg (η.app (op V)) ((Classical.choose_spec
-              (exteriorSheafRestriction_existsUnique S.X₂ s (homOfLE h).op)).1 c))
+      apply congrArg₂ (tmulSection (M := exteriorPower A r) (N := exteriorPower S.X₂ s))
+      · exact wedge_map (homOfLE h) a
+      · exact wedge_map (homOfLE h) c
   | zero => rw [map_zero]; exact (exteriorTensorRelationSpan S A r s V).zero_mem
   | add a b _ _ ha hb =>
     rw [map_add]
@@ -122,6 +108,55 @@ private theorem relationSpan_map {X : Scheme.{v}} (S : ShortComplex X.Modules)
   | smul c a _ ha =>
     rw [PresheafOfModules.map_smul]
     exact (exteriorTensorRelationSpan S A r s V).smul_mem _ ha
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorSheaf_comparison {X : Scheme.{v}} (M : X.Modules) (n : ℕ) :
+    ∃ e : exteriorSheaf M n ≅ exteriorPower M n,
+      ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U)),
+        e.hom.app U (exteriorSheafSection M n U a) = wedge a := by
+  have hr {U V : X.Opensᵒᵖ} (f : U ⟶ V) :
+      exteriorSheafRestriction M n f =
+        (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).map f := by
+    apply ((Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f)).2 _ ?_).symm
+    intro a
+    exact PresheafOfModules.ExteriorPower.map_ιMulti M.val n f a
+  let e₀ : exteriorSheafPresheaf M n ≅
+      PresheafOfModules.exteriorPower (R := X.presheaf) M.val n :=
+    PresheafOfModules.isoMk (fun _ ↦ Iso.refl _) (by
+      intro U V f
+      change exteriorSheafRestriction M n f = _
+      exact hr f)
+  let e : exteriorSheaf M n ≅ exteriorPower M n :=
+    (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).mapIso e₀
+  refine ⟨e, ?_⟩
+  intro U a
+  have h := (PresheafOfModules.sheafificationAdjunction
+    (𝟙 X.ringCatSheaf.obj)).unit_naturality e₀.hom
+  exact congrArg (fun f ↦ f.app (op U)
+    (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)) h
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorTensor_comparison {X : Scheme.{v}} (A B : X.Modules) (r s : ℕ) :
+    ∃ e : exteriorSheaf A r ⊗ exteriorSheaf B s ≅ exteriorPower A r ⊗ exteriorPower B s,
+      (∀ (U : X.Opens) (a : Fin r → A.val.obj (op U)) (b : Fin s → B.val.obj (op U)),
+        e.hom.app U (tmulSection (exteriorSheafSection A r U a)
+          (exteriorSheafSection B s U b)) = tmulSection (wedge a) (wedge b)) ∧
+      (∀ (U : X.Opens) (a : Fin r → A.val.obj (op U)) (b : Fin s → B.val.obj (op U)),
+        e.inv.app U (tmulSection (wedge a) (wedge b)) =
+          tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf B s)
+            (exteriorSheafSection A r U a) (exteriorSheafSection B s U b)) := by
+  obtain ⟨eA, hA⟩ := exteriorSheaf_comparison A r
+  obtain ⟨eB, hB⟩ := exteriorSheaf_comparison B s
+  let e := eA ⊗ᵢ eB
+  have he (U : X.Opens) (a : Fin r → A.val.obj (op U)) (b : Fin s → B.val.obj (op U)) :
+      e.hom.app U (tmulSection (exteriorSheafSection A r U a)
+        (exteriorSheafSection B s U b)) = tmulSection (wedge a) (wedge b) := by
+    change (eA.hom ⊗ₘ eB.hom).app U _ = _
+    rw [tensorHom_app_tmulSection, hA, hB]
+  refine ⟨e, he, ?_⟩
+  intro U a b
+  rw [← he U a b]
+  exact inv_app_hom_app_apply_of_iso e _
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A section killed by an exterior tensor quotient is locally a linear combination of
@@ -173,14 +208,54 @@ theorem exteriorTensor_kernel_locally_mem_span {X : Scheme.{v}}
               z = tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf S.X₂ s)
                 (exteriorSheafSection A r V a)
                 (exteriorSheafSection S.X₂ s V c)} := by
-  let M := exteriorSheaf A r ⊗ exteriorSheaf S.X₂ s
-  have hk : M.presheaf.germ U x hx t ∈ LinearMap.ker (q.stalkLinearMap x) := by
-    rw [LinearMap.mem_ker, Hom.stalkLinearMap_germ]
-    change (exteriorSheaf A r ⊗ exteriorSheaf S.X₃ s).presheaf.germ U x hx
-      (q.val.app (op U) t) = 0
+  obtain ⟨eB, _, hiB⟩ := exteriorTensor_comparison A S.X₂ r s
+  obtain ⟨eC, heC, _⟩ := exteriorTensor_comparison A S.X₃ r s
+  let q' := eB.inv ≫ q ≫ eC.hom
+  have hq' (V : X.Opens) (a : Fin r → A.val.obj (op V))
+      (c : Fin s → S.X₂.val.obj (op V)) :
+      q'.app V (tmulSection (wedge a) (wedge c)) =
+        tmulSection (wedge a) (wedge (fun i ↦ S.g.val.app (op V) (c i))) := by
+    change eC.hom.app V (q.app V (eB.inv.app V _)) = _
+    rw [hiB]
+    exact (congrArg (eC.hom.app V) (hq V a c)).trans (heC V a _)
+  have ht' : q'.app U (eB.hom.app U t) = 0 := by
+    change eC.hom.app U (q.app U (eB.inv.app U (eB.hom.app U t))) = 0
+    rw [inv_app_hom_app_apply_of_iso]
+    change eC.hom.val.app (op U) (q.val.app (op U) t) = 0
     rw [ht, map_zero]
-  have hg := exteriorTensor_stalk_kernel_le_relationSpan S hS A r s hs q hq x hk
-  exact locally_mem_of_germ_mem_span M (exteriorTensorRelationSpan S A r s)
-    (fun h t ht ↦ relationSpan_map S A r s h t ht) U t x hx hg
+  let M := exteriorPower A r ⊗ exteriorPower S.X₂ s
+  have hk : M.presheaf.germ U x hx (eB.hom.app U t) ∈
+      LinearMap.ker (q'.stalkLinearMap x) := by
+    rw [LinearMap.mem_ker, Hom.stalkLinearMap_germ]
+    change (exteriorPower A r ⊗ exteriorPower S.X₃ s).presheaf.germ U x hx
+      (q'.app U (eB.hom.app U t)) = 0
+    rw [ht', map_zero]
+  have hg := exteriorTensor_stalk_kernel_le_relationSpan S hS A r s hs q' hq' x hk
+  obtain ⟨V, hVU, hxV, hV⟩ := locally_mem_of_germ_mem_span M
+    (exteriorTensorRelationSpan S A r s)
+    (fun h t ht ↦ relationSpan_map S A r s h t ht) U (eB.hom.app U t) x hx hg
+  have htransfer (z : M.val.obj (op V)) (hz : z ∈ exteriorTensorRelationSpan S A r s V) :
+      eB.inv.app V z ∈ Submodule.span (X.presheaf.obj (op V))
+        {z | ∃ (a : Fin r → A.val.obj (op V))
+          (c : Fin s → S.X₂.val.obj (op V)) (j : Fin s)
+          (d : S.X₁.val.obj (op V)), c j = S.f.val.app (op V) d ∧
+            z = tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf S.X₂ s)
+              (exteriorSheafSection A r V a) (exteriorSheafSection S.X₂ s V c)} := by
+    induction hz using Submodule.span_induction with
+    | mem z hz =>
+      obtain ⟨a, c, j, d, hj, rfl⟩ := hz
+      rw [hiB]
+      exact Submodule.subset_span ⟨a, c, j, d, hj, rfl⟩
+    | zero => rw [map_zero]; exact Submodule.zero_mem _
+    | add a b _ _ ha hb => rw [map_add]; exact Submodule.add_mem _ ha hb
+    | smul c a _ ha =>
+      rw [Hom.app_smul]
+      exact Submodule.smul_mem _ c ha
+  refine ⟨V, hVU, hxV, ?_⟩
+  have h := htransfer _ hV
+  have hn := Hom.app_presheaf_map eB.hom (homOfLE hVU) t
+  change eB.inv.app V (M.presheaf.map (homOfLE hVU).op (eB.hom.app U t)) ∈ _ at h
+  rw [← hn, inv_app_hom_app_apply_of_iso] at h
+  exact h
 
 end AlgebraicGeometry.Scheme.Modules
