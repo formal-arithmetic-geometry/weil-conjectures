@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!

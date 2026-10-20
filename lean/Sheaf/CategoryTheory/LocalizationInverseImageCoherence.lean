@@ -24,9 +24,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.GeometricModuleTransport
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 
 /-!

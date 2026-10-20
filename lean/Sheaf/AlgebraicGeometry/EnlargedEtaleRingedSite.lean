@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 import Sheaf.CategoryTheory.Sites.SliceSubtoposSitePresentation
 import Sheaf.CategoryTheory.SpecialCocontinuousSheafEquivalence
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.CategoryTheory.RingedToposMorphism

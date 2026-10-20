@@ -30,7 +30,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.CategoryTheory.Functor.Flat
 import Mathlib.Topology.Separation.Profinite
 import Mathlib.Topology.Sheaves.Stalks
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 
 /-!
 # The component-site projection of an affine scheme

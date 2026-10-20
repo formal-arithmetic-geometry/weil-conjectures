@@ -18,7 +18,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.Algebra.Homology.CochainComplexPlus
 import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
 import Sheaf.CategoryTheory.ContinuousCocontinuousToposAdjunctionForCoverings
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

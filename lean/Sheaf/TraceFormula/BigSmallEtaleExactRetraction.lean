@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Sheaf.TraceFormula.BigSmallEtaleRetractionData
 import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.TraceFormula.BiggerSiteRetraction
 
