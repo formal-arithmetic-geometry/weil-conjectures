@@ -6,7 +6,7 @@ Authors: SHEAF group T3
 module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictHomData
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictHomData
 
 /-!
 # Exterior sheaves commute with open restriction
@@ -22,6 +22,29 @@ universe v
 open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The two sectionwise constructions have the same restriction maps by uniqueness on wedges. -/
+private theorem exteriorSheafPresheaf_eq_exteriorPower {X : Scheme.{v}}
+    (M : X.Modules) (n : ℕ) :
+    exteriorSheafPresheaf M n = _root_.PresheafOfModules.exteriorPower M.val n := by
+  have hmap : ∀ {V W : X.Opensᵒᵖ} (f : V ⟶ W),
+      exteriorSheafRestriction M n f =
+        (_root_.PresheafOfModules.exteriorPower M.val n).map f := by
+    intro V W f
+    apply ((Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f)).2 _ ?_).symm
+    intro a
+    exact _root_.PresheafOfModules.exteriorPower_map_ιMulti M.val n f a
+  unfold exteriorSheafPresheaf _root_.PresheafOfModules.exteriorPower
+  congr 1
+  funext V W f
+  exact hmap f
+
+/-- Sheafifying the equal exterior presheaves identifies the two exterior sheaves. -/
+private theorem exteriorSheaf_eq_exteriorPower {X : Scheme.{v}}
+    (M : X.Modules) (n : ℕ) : exteriorSheaf M n = exteriorPower M n := by
+  unfold exteriorSheaf exteriorPower sheafificationObj
+  rw [exteriorSheafPresheaf_eq_exteriorPower M n]
 
 /-- Formation of the exterior sheaf commutes with restriction to an open subscheme.
 
@@ -43,7 +66,10 @@ also applies to degree zero and to the empty open subscheme. -/
 theorem exteriorSheaf_restrict_iso {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     (U : X.Opens) :
     Nonempty ((exteriorSheaf M n).restrict U.ι ≅ exteriorSheaf (M.restrict U.ι) n) := by
-  obtain ⟨e, f, hef, hfe⟩ := exteriorSheaf_restrict_hom_data M n U
+  have h := exteriorSheaf_restrict_hom_data M n U
+  rw [← exteriorSheaf_eq_exteriorPower M n,
+    ← exteriorSheaf_eq_exteriorPower (M.restrict U.ι) n] at h
+  obtain ⟨e, f, hef, hfe⟩ := h
   exact ⟨{ hom := e, inv := f, hom_inv_id := hef, inv_hom_id := hfe }⟩
 
 end AlgebraicGeometry.Scheme.Modules

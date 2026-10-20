@@ -14,11 +14,12 @@
  ],
  "proof": [
   {
-   "text": "Apply the two-sided morphism data from [lem-sc-exterior-sheaf-restrict-hom-data] and package the mutually inverse morphisms as a categorical isomorphism.",
+   "text": "The old exteriorSheafPresheaf and upstream PresheafOfModules.exteriorPower agree: their objects are definitionally equal and their restriction maps agree by uniqueness on pure wedges. Sheafification carries this equality to exteriorSheaf M n = exteriorPower M n. Rewrite the two-sided morphism data from [lem-sc-exterior-sheaf-restrict-hom-data] using this equality at M and at its restriction, then package the mutually inverse morphisms as an isomorphism.",
    "uses": [
-    "lem-sc-exterior-sheaf-restrict-hom-data"
+    "lem-sc-exterior-sheaf-restrict-hom-data",
+    "def-sc-sheaf-exterior-power"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
     "place": "Proof of (*), determinant paragraph"
@@ -26,12 +27,14 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-exterior-sheaf-restrict-hom-data"
+  "lem-sc-exterior-sheaf-restrict-hom-data",
+  "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "F1",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph"
+  "place": "Proof of (*), determinant paragraph",
+  "note": "Retirement adaptation: use the upstream hom-data theorem via proved equalities of the exterior constructions, preserving the consumer signature and public imports."
  },
  "mathlib_searches": [
   {
@@ -111,13 +114,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "C-cfdcd",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T165540-L-2942483",
+  "landing": "20261020T162911-L-3673822",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered stub + adapted ExteriorSheafRestrictIso vs live clone and the WeilConjectures twin (signature verbatim in node lean record); retire-items row 532 and hand-off note; row-275 precedent; lcompile --all exit 0; axioms clean"
  }
 }

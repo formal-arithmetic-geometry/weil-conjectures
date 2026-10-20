@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "The old exteriorSheafPresheaf and upstream PresheafOfModules.exteriorPower have definitionally identical section modules, and their restrictions agree by uniqueness on pure wedges. Prove equality of the presheaves and rewrite the upstream exteriorPresheaf_open_pullback isomorphism into the old API. Apply sheafification compatibility with pullback and the restriction pullback isomorphism; package the resulting categorical isomorphism as two mutually inverse morphisms.",
+   "text": "Use exteriorPresheaf_open_pullback for the sectionwise exterior-power presheaf. Apply sheafification compatibility with pullback, compose with the restriction-pullback isomorphism, and package the resulting categorical isomorphism as mutually inverse morphisms. The upstream exteriorPower is the sheafification of that presheaf.",
    "uses": [
     "lem-sc-exterior-presheaf-open-pullback",
     "def-sc-sheaf-exterior-power"
@@ -29,10 +29,10 @@
   "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
-  "by": "B3",
+  "by": "F1",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph",
-  "note": "Retirement adaptation: use the proved upstream presheaf theorem, moving the existing private equality bridge to the sole consumer without changing its public signature. The unit route and mathematical statements are preserved."
+  "note": "Retirement row 532: retain the already-proved upstream theorem, move the private presheaf equality bridge to ExteriorSheafRestrictIso, and extend it by congruence through sheafification. No mathematical statement or unit route changes."
  },
  "mathlib_searches": [
   {
@@ -76,14 +76,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictHomData",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafRestrictHomData.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictHomData",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafRestrictHomData.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_restrict_hom_data",
-  "statement": "theorem exteriorSheaf_restrict_hom_data {X : Scheme.{v}} (M : X.Modules) (n : ℕ)\n    (U : X.Opens) : ∃ (e : (exteriorSheaf M n).restrict U.ι ⟶ exteriorSheaf (M.restrict U.ι) n),\n      ∃ f : exteriorSheaf (M.restrict U.ι) n ⟶ (exteriorSheaf M n).restrict U.ι,\n        e ≫ f = 𝟙 _ ∧ f ≫ e = 𝟙 _",
+  "statement": "theorem exteriorSheaf_restrict_hom_data {X : Scheme.{v}} (M : X.Modules) (n : ℕ)\n    (U : X.Opens) : ∃ (e : (exteriorPower M n).restrict U.ι ⟶ exteriorPower (M.restrict U.ι) n),\n      ∃ f : exteriorPower (M.restrict U.ι) n ⟶ (exteriorPower M n).restrict U.ι,\n        e ≫ f = 𝟙 _ ∧ f ≫ e = 𝟙 _",
   "branch": "sheaf-dag",
-  "by": "X2",
-  "date": "2026-10-13"
+  "by": "F1",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf twin under coord/retire-items.tsv row 532. The upstream exteriorPower is the same sheafification construction; the sole consumer proves equality with exteriorSheaf and rewrites the upstream theorem without changing its public statement."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -98,12 +99,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-62d66",
-  "group": "B3",
+  "reviewer": "C-cfdcd",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261020T154036-L-3031447",
+  "landing": "20261020T162911-L-3673822",
   "kind": "interface",
-  "note": "independent cc review: Retirement row 275 (Sheaf ExteriorPresheafOpenPullback → WeilConjectures twin) matched with the clone: sole importer ExteriorSheafRestrictHomData has its signature byte-identical, the private bridge moved verbatim, and node lean record = upstream signature verbatim; delivered set + importer ExteriorSheafRestrictIso compile; axioms clean"
+  "note": "independent cc review: delivered stub + adapted ExteriorSheafRestrictIso vs live clone and the WeilConjectures twin (signature verbatim in node lean record); retire-items row 532 and hand-off note; row-275 precedent; lcompile --all exit 0; axioms clean"
  },
  "lean_audit": {
   "master": {
