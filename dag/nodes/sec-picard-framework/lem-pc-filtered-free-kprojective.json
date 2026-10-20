@@ -32,8 +32,8 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "lean/Sheaf/Algebra/Homology/FilteredFreeKProjective.lean",
-  "place": "The target proof applies the finite-stage and telescope intermediate theorems."
+  "document": "lean/WeilConjectures/Algebra/Homology/FilteredFreeKProjective.lean",
+  "place": "2026-10-21 (J9): reuse the already proved upstream theorem with the identical signature and the same finite-stage and telescope proof dependencies; retire the redundant Sheaf copy. No mathematical dependency is pruned."
  },
  "mathlib_searches": [
   {
@@ -106,14 +106,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.FilteredFreeKProjective",
-  "file": "lean/Sheaf/Algebra/Homology/FilteredFreeKProjective.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.FilteredFreeKProjective",
+  "file": "lean/WeilConjectures/Algebra/Homology/FilteredFreeKProjective.lean",
   "declaration": "CochainComplex.isKProjective_of_filtered_free",
   "statement": "theorem isKProjective_of_filtered_free {A : Type u} [CommRing A]\n    (P : CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (ι : ∀ n, F n ⟶ P) (step : ∀ n, F n ⟶ F (n + 1))\n    (hzero : IsZero (F 0)) (hmono : ∀ n, Mono (ι n))\n    (hcompat : ∀ n, step n ≫ ι (n + 1) = ι n)\n    (hexhaustive : ∀ (k : ℤ) (x : P.X k),\n      ∃ (n : ℕ) (y : (F n).X k), (ι n).f k y = x)\n    (hsplit : ∀ (n : ℕ) (k : ℤ),\n      ∃ r : (F (n + 1)).X k ⟶ (F n).X k,\n        (step n).f k ≫ r = 𝟙 ((F n).X k))\n    (hquot : ∀ n, ∃ (I : Type (max u v)) (degree : I → ℤ),\n      Nonempty (cokernel (step n) ≅\n        ∐ (fun i : I ↦\n          (HomologicalComplex.single (ModuleCat.{max u v} A) (.up ℤ) (degree i)).obj\n            (ModuleCat.of A (ULift.{v} A))))) :\n    P.IsKProjective",
   "branch": "sheaf-dag",
-  "by": "W2",
-  "date": "2026-10-13"
+  "by": "J9",
+  "date": "2026-10-21",
+  "note": "2026-10-21 (J9): retired the redundant Sheaf twin under coord/changes/retire-sheaf-twins-20261020.md. The upstream theorem has the identical full signature and a complete proof with only propext, Classical.choice and Quot.sound. All parent nodes retain this same statement and proof route."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -128,13 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "K6",
+  "reviewer": "C-c2e58",
+  "group": "J9",
   "result": "pass",
-  "landing": "20261020T174815-L-800769",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261020T221227-L-4161255",
+  "kind": "interface",
+  "note": "independent cc review: the delivered Sheaf withdrawal stub and the three nodes now pointing upstream, against the live upstream WeilConjectures.Algebra.Homology.FilteredFreeKProjective (same signatures, axioms only propext/Classical.choice/Quot.sound, no importers of the Sheaf module)"
  }
 }
