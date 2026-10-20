@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-coefficient-level-ordinary-images",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-coefficient-system-derived-comparison",
+   "place": "Stacks 00YV, 03D2, 03DA, 03DB and 03D7; ordinary coefficient lifts in the paragraph before Zheng Lemma 4.10.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary geometric images at the constant quotient levels",
+ "statement": "Given the sites, coefficient ring O, element ell, and left exact geometric adjunction L⊣V of [def-pur-coefficient-system-image-data], there exist simultaneous algebraic inverse images on the specified constant quotient-ring module categories. Their underlying ring maps fix each constant generator; their module functors are additive and exact, have normalized right adjoints over V, and commute with every scalar restriction. The corresponding right-restriction comparisons are invertible and satisfy the explicit ordinary-transpose mate equation. This statement involves only the individual module categories; it does not assert an adjunction on systems or construct any derived functors. No regularity or completeness of O is needed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Stacks 00YV, 03D2, 03DA, 03DB and 03D7; ordinary coefficient lifts in the paragraph before Zheng Lemma 4.10."
+ },
+ "stmt_deps": [
+  "def-pur-coefficient-system-image-data",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Construct the constant-sheaf comparison from copowers of the terminal object: L preserves copowers by adjunction and the terminal object by left exactness. It fixes all scalar generators. Transport ring and module operations through the finite-product comparison and identify the transported quotient ring with the specified constant quotient ring.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the underlying set-sheaf adjunction to modules by transposing addition and scalar-action diagrams; the normalization on underlying maps is the original Hom bijection. The geometric inverse image is exact.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-trf-geometric-inverse-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restricting a scalar action before or after transport gives the same operation. The identity on the underlying sheaf gives the inverse-image comparison and the direct-image comparison. Transpose that identity to obtain the stated mate equation for each quotient map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Stacks 00YV, 03D2, 03DA, 03DB and 03D7; ordinary coefficient lifts in the paragraph before Zheng Lemma 4.10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact left adjoint between categories of sheaves lifts to an exact functor on sheaves of modules over constant rings and acts levelwise on inverse systems",
+   "results": "HasSheafify.isLeftExact; constantSheafΓAdj; Sheaf.instPreservesSheafificationOfIsLeftAdjoint; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "The ordinary continuous-site pullback API is useful but does not supply the arbitrary geometric morphism, independent site universes, constant coefficient normalization and strict-system transition comparison here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"IsIso\", \"homEquiv\"",
+   "results": "CategoryTheory.Functor.isIso_ranAdjunction_homEquiv_iff; CategoryTheory.Functor.isIso_lanAdjunction_homEquiv_symm_iff",
+   "date": "2026-10-21",
+   "verdict": "These concern Kan extension adjunctions, not this scalar square or exact derived essential-image argument."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*[Ii]so|[Ii]so.*homEquiv|[Bb]ounded.*[Ff]aithful",
+   "results": "25 hits including localization Hom equivalences and CategoryTheory.Triangulated.Adjunction; no exact statement. Local rg found WeilConjectures exact derived functors, right-derived adjunctions, ConstantLeftModuleTransport and SemilinearOperationsExistence.",
+   "date": "2026-10-21",
+   "verdict": "The exact-derived and adjunction APIs are used in the proved formal lemmas. ConstantLeftModuleTransport uses SmallCategory sites and RingCat constant sheaves in one universe; SemilinearOperationsExistence uses sequence-site systems, unspecified transported coefficient rings and one common site universe. Neither directly gives these normalized prescribed-coefficient packages."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientSystemDerivedComparison",
+  "date": "2026-10-21",
+  "group": "V5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientLevelOrdinaryImages",
+  "file": "lean/Sheaf/Paper/CoefficientLevelOrdinaryImages.lean",
+  "declaration": "SheafOfModules.coefficientLevelOrdinaryImage_exists",
+  "declarations": [
+   "SheafOfModules.coefficientLevelOrdinaryImage_exists",
+   "SheafOfModules.CoefficientLevelOrdinaryImage"
+  ],
+  "statement": "theorem coefficientLevelOrdinaryImage_exists [PreservesFiniteLimits L] :\n    Nonempty (CoefficientLevelOrdinaryImage (J := J) (K := K) O ell L V adj)",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-37a5c",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261020T221359-L-4180199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-37a5c",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261020T221359-L-4180199",
+  "kind": "interface",
+  "note": "independent cc review: Delivered modules + 23 downstream importers/users compiled in one sandbox (all rc=0); old 20-field CoefficientSystemDerivedImage re-declared from live clone and converted both ways against the new grouped abbrev; 6 moved decls byte-identical; #print axioms clean except expected sorryAx"
+ }
+}

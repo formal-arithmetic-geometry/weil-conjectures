@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-coefficient-system-ordinary-images",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-coefficient-system-derived-comparison",
+   "place": "Zheng Construction 4.1 and the paragraph before Lemma 4.10: applying the geometric morphism levelwise to the ringed sequence topos.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Assembling level adjunctions into strict-system images",
+ "statement": "Under the sites, ring and geometric-adjunction hypotheses of [def-pur-coefficient-system-image-data], a left exact L admits an ordinary image package CoefficientSystemOrdinaryImage on the strict coefficient systems. The inverse and direct functors are formed from the normalized level functors and their scalar-restriction comparisons. Their adjunction is exactly the componentwise level transposition, and the inverse image is additive and exact. No derived category, coefficient regularity or completeness is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Construction 4.1 and the paragraph before Lemma 4.10: applying the geometric morphism levelwise to the ringed sequence topos."
+ },
+ "stmt_deps": [
+  "def-pur-coefficient-system-image-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose the level lifts, adjunctions and restriction comparisons. On systems set (FM)n=Fn(Mn) and (GN)n=Gn(Nn), with transitions obtained by mapping the original transition and composing with the corresponding restriction comparison. Their naturality proves compatibility for mapped system morphisms.",
+   "uses": [
+    "lem-pur-coefficient-level-ordinary-images"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose each component of a system morphism. The restriction-transpose equation identifies the two transition equations, so these component transposes give inverse natural Hom bijections. Construct the system adjunction with that Hom equivalence. Addition is detected componentwise; the right adjoint is additive too.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation functors are exact. They jointly reflect isomorphisms because a componentwise inverse family satisfies the transition equation by cancellation. Apply the exactness-detection square to the componentwise exact inverse images. The evaluation isomorphisms and required transition and transpose normalizations are the identity comparisons by construction.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-coefficient-level-ordinary-images"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Construction 4.1 and the paragraph before Lemma 4.10: applying the geometric morphism levelwise to the ringed sequence topos."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact left adjoint between categories of sheaves lifts to an exact functor on sheaves of modules over constant rings and acts levelwise on inverse systems",
+   "results": "HasSheafify.isLeftExact; constantSheafΓAdj; Sheaf.instPreservesSheafificationOfIsLeftAdjoint; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "The ordinary continuous-site pullback API is useful but does not supply the arbitrary geometric morphism, independent site universes, constant coefficient normalization and strict-system transition comparison here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"IsIso\", \"homEquiv\"",
+   "results": "CategoryTheory.Functor.isIso_ranAdjunction_homEquiv_iff; CategoryTheory.Functor.isIso_lanAdjunction_homEquiv_symm_iff",
+   "date": "2026-10-21",
+   "verdict": "These concern Kan extension adjunctions, not this scalar square or exact derived essential-image argument."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*[Ii]so|[Ii]so.*homEquiv|[Bb]ounded.*[Ff]aithful",
+   "results": "25 hits including localization Hom equivalences and CategoryTheory.Triangulated.Adjunction; no exact statement. Local rg found WeilConjectures exact derived functors, right-derived adjunctions, ConstantLeftModuleTransport and SemilinearOperationsExistence.",
+   "date": "2026-10-21",
+   "verdict": "The exact-derived and adjunction APIs are used in the proved formal lemmas. ConstantLeftModuleTransport uses SmallCategory sites and RingCat constant sheaves in one universe; SemilinearOperationsExistence uses sequence-site systems, unspecified transported coefficient rings and one common site universe. Neither directly gives these normalized prescribed-coefficient packages."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientSystemDerivedComparison",
+  "date": "2026-10-21",
+  "group": "V5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientSystemOrdinaryImages",
+  "file": "lean/Sheaf/Paper/CoefficientSystemOrdinaryImages.lean",
+  "declaration": "SheafOfModules.coefficientSystemOrdinaryImage_exists",
+  "declarations": [
+   "SheafOfModules.coefficientSystemOrdinaryImage_exists"
+  ],
+  "statement": "theorem coefficientSystemOrdinaryImage_exists [PreservesFiniteLimits L] :\n    Nonempty (CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj)",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-37a5c",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261020T221359-L-4180199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-37a5c",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261020T221359-L-4180199",
+  "kind": "interface",
+  "note": "independent cc review: Delivered modules + 23 downstream importers/users compiled in one sandbox (all rc=0); old 20-field CoefficientSystemDerivedImage re-declared from live clone and converted both ways against the new grouped abbrev; 6 moved decls byte-identical; #print axioms clean except expected sorryAx"
+ }
+}

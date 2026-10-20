@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-scalar-adjunction-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-coefficient-system-derived-comparison",
+   "place": "Formal adjunction-mate argument for the normalization consequence of Construction 4.1 and Lemma 4.10, original comparison proof step 11.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Isomorphism descent through a scalar adjunction square",
+ "statement": "Let CY:A→B and CX:C→D have right adjoints RY and RX; let Fm:A→C and Fn:B→D have right adjoints Gm and Gn. Suppose Fn reflects isomorphisms, γ:CY Fn≅Fm CX and δ:RX Gm≅Gn RY are isomorphisms satisfying the displayed iterated-transpose mate identity. Given Nm≅Gm(Mm), Nn≅Gn(Mn), transitions τN:Nm→RY(Nn), τM:Mm→RX(Mn) satisfying the δ comparison square, assume the counits at Mm and Mn and the CX-adjoint transpose of τM are invertible. Then the CY-adjoint transpose of τN is invertible. No boundedness or faithfulness on the scalar-extension objects is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Formal adjunction-mate argument for the normalization consequence of Construction 4.1 and Lemma 4.10, original comparison proof step 11."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Let z be the CY-adjoint transpose of τN, and transpose z followed by the evaluation identification under Fn⊣Gn to obtain f. Apply the mate identity and the transition square. Naturality under Fm⊣Gm identifies γ⁻¹f with CX applied to Fm(em) followed by the counit, and then the scalar transpose of τM. All factors are invertible, so f is invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The Fn-adjunction counit formula gives f=Fn(z) Fn(en) εn. Cancel the invertible last factors and use reflection by Fn to conclude that z is invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Formal adjunction-mate argument for the normalization consequence of Construction 4.1 and Lemma 4.10, original comparison proof step 11."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact left adjoint between categories of sheaves lifts to an exact functor on sheaves of modules over constant rings and acts levelwise on inverse systems",
+   "results": "HasSheafify.isLeftExact; constantSheafΓAdj; Sheaf.instPreservesSheafificationOfIsLeftAdjoint; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "The ordinary continuous-site pullback API is useful but does not supply the arbitrary geometric morphism, independent site universes, constant coefficient normalization and strict-system transition comparison here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"IsIso\", \"homEquiv\"",
+   "results": "CategoryTheory.Functor.isIso_ranAdjunction_homEquiv_iff; CategoryTheory.Functor.isIso_lanAdjunction_homEquiv_symm_iff",
+   "date": "2026-10-21",
+   "verdict": "These concern Kan extension adjunctions, not this scalar square or exact derived essential-image argument."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*[Ii]so|[Ii]so.*homEquiv|[Bb]ounded.*[Ff]aithful",
+   "results": "25 hits including localization Hom equivalences and CategoryTheory.Triangulated.Adjunction; no exact statement. Local rg found WeilConjectures exact derived functors, right-derived adjunctions, ConstantLeftModuleTransport and SemilinearOperationsExistence.",
+   "date": "2026-10-21",
+   "verdict": "The exact-derived and adjunction APIs are used in the proved formal lemmas. ConstantLeftModuleTransport uses SmallCategory sites and RingCat constant sheaves in one universe; SemilinearOperationsExistence uses sequence-site systems, unspecified transported coefficient rings and one common site universe. Neither directly gives these normalized prescribed-coefficient packages."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientSystemDerivedComparison",
+  "date": "2026-10-21",
+  "group": "V5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ScalarAdjunctionDescent",
+  "file": "lean/Sheaf/CategoryTheory/ScalarAdjunctionDescent.lean",
+  "declaration": "CategoryTheory.isIso_scalar_transpose_of_mate",
+  "declarations": [
+   "CategoryTheory.isIso_scalar_transpose_of_mate"
+  ],
+  "statement": "theorem isIso_scalar_transpose_of_mate\n    {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]\n    {C : Type c} [Category.{cv} C] {D : Type d} [Category.{dv} D]\n    {CY : A ⥤ B} {RY : B ⥤ A} (ay : CY ⊣ RY)\n    {CX : C ⥤ D} {RX : D ⥤ C} (ax : CX ⊣ RX)\n    {Fm : A ⥤ C} {Gm : C ⥤ A} (am : Fm ⊣ Gm)\n    {Fn : B ⥤ D} {Gn : D ⥤ B} (an : Fn ⊣ Gn)\n    [Fn.ReflectsIsomorphisms]\n    (γ : CY ⋙ Fn ≅ Fm ⋙ CX) (δ : RX ⋙ Gm ≅ Gn ⋙ RY)\n    (hδ : ∀ (P : A) (Q : D) (f : Fn.obj (CY.obj P) ⟶ Q),\n      ay.homEquiv P (Gn.obj Q) (an.homEquiv _ Q f) =\n        am.homEquiv P (RX.obj Q)\n          (ax.homEquiv (Fm.obj P) Q (γ.inv.app P ≫ f)) ≫ δ.hom.app Q)\n    {Nm : A} {Nn : B} {Mm : C} {Mn : D}\n    (em : Nm ≅ Gm.obj Mm) (en : Nn ≅ Gn.obj Mn)\n    (τN : Nm ⟶ RY.obj Nn) (τM : Mm ⟶ RX.obj Mn)\n    (hτ : τN ≫ RY.map en.hom = em.hom ≫ Gm.map τM ≫ δ.hom.app Mn)\n    [IsIso (am.counit.app Mm)] [IsIso (an.counit.app Mn)]\n    [IsIso ((ax.homEquiv Mm Mn).symm τM)] :\n    IsIso ((ay.homEquiv Nm Nn).symm τN)",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-37a5c",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261020T221359-L-4180199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-37a5c",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261020T221359-L-4180199",
+  "kind": "interface",
+  "note": "independent cc review: Delivered modules + 23 downstream importers/users compiled in one sandbox (all rc=0); old 20-field CoefficientSystemDerivedImage re-declared from live clone and converted both ways against the new grouped abbrev; 6 moved decls byte-identical; #print axioms clean except expected sorryAx"
+ }
+}

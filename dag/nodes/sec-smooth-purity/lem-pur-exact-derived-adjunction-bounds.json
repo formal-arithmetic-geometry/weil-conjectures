@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-exact-derived-adjunction-bounds",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-coefficient-system-derived-comparison",
+   "place": "Formal consequences of the exactness and adjunction used in Lemma 4.10, corresponding to original proof steps 9–11; Stacks 05TC for the lower-bound assertion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exact derived adjunctions: lower bounds, reflection and counits",
+ "statement": "Let A and B be abelian categories with derived categories, F:A→B an exact additive functor and FD:D(A)→D(B) a functor equipped with Q_A FD≅F_complex Q_B. Then (1) if FD is left adjoint to RD, RD preserves every standard cohomological lower bound; (2) if FD is faithful on morphisms between bounded-below objects, it reflects isomorphisms on the entire unbounded derived category; (3) if FD is fully faithful on morphisms between bounded-below objects, then the counit is invertible at any object isomorphic to FD(X) for bounded-below X. The hypotheses in (2) and (3) concern all pairs of bounded-below objects, with possibly different bounds.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Formal consequences of the exactness and adjunction used in Lemma 4.10, corresponding to original proof steps 9–11; Stacks 05TC for the lower-bound assertion."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Localization identifies FD with the standard mapDerivedCategory of F, which commutes with cohomology and both standard bounds. Orthogonality and the adjunction show that RD preserves each lower bound.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Degree-zero single functors are fully faithful. Restricting the bounded-below faithfulness assumption to them makes F faithful. A faithful functor between abelian categories is conservative; use the homology comparison and homology detection to reflect arbitrary derived isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For bounded-below X, both X and RD(FD(X)) are bounded below. The adjunction and assumed bijections make postcomposition with the unit bijective on the Hom sets from both objects. Obtain a two-sided inverse of the unit. The triangle identity makes the counit at FD(X) invertible, and counit naturality transports this to any isomorphic object.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Formal consequences of the exactness and adjunction used in Lemma 4.10, corresponding to original proof steps 9–11; Stacks 05TC for the lower-bound assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact left adjoint between categories of sheaves lifts to an exact functor on sheaves of modules over constant rings and acts levelwise on inverse systems",
+   "results": "HasSheafify.isLeftExact; constantSheafΓAdj; Sheaf.instPreservesSheafificationOfIsLeftAdjoint; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "The ordinary continuous-site pullback API is useful but does not supply the arbitrary geometric morphism, independent site universes, constant coefficient normalization and strict-system transition comparison here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"IsIso\", \"homEquiv\"",
+   "results": "CategoryTheory.Functor.isIso_ranAdjunction_homEquiv_iff; CategoryTheory.Functor.isIso_lanAdjunction_homEquiv_symm_iff",
+   "date": "2026-10-21",
+   "verdict": "These concern Kan extension adjunctions, not this scalar square or exact derived essential-image argument."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*[Ii]so|[Ii]so.*homEquiv|[Bb]ounded.*[Ff]aithful",
+   "results": "25 hits including localization Hom equivalences and CategoryTheory.Triangulated.Adjunction; no exact statement. Local rg found WeilConjectures exact derived functors, right-derived adjunctions, ConstantLeftModuleTransport and SemilinearOperationsExistence.",
+   "date": "2026-10-21",
+   "verdict": "The exact-derived and adjunction APIs are used in the proved formal lemmas. ConstantLeftModuleTransport uses SmallCategory sites and RingCat constant sheaves in one universe; SemilinearOperationsExistence uses sequence-site systems, unspecified transported coefficient rings and one common site universe. Neither directly gives these normalized prescribed-coefficient packages."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientSystemDerivedComparison",
+  "date": "2026-10-21",
+  "group": "V5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactDerivedAdjunctionBounds",
+  "file": "lean/Sheaf/CategoryTheory/ExactDerivedAdjunctionBounds.lean",
+  "declaration": "CategoryTheory.exactDerivedAdjunction_isGE",
+  "declarations": [
+   "CategoryTheory.exactDerivedAdjunction_isGE",
+   "CategoryTheory.exactDerived_reflectsIso_of_boundedBelow_faithful",
+   "CategoryTheory.exactDerivedAdjunction_counit_isIso_of_origin"
+  ],
+  "statement": "theorem exactDerivedAdjunction_isGE\n    {RD : DerivedCategory B ⥤ DerivedCategory A} (adj : FD ⊣ RD)\n    (X : DerivedCategory B) (n : ℤ) [X.IsGE n] : (RD.obj X).IsGE n",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-37a5c",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261020T221359-L-4180199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-37a5c",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261020T221359-L-4180199",
+  "kind": "interface",
+  "note": "independent cc review: Delivered modules + 23 downstream importers/users compiled in one sandbox (all rc=0); old 20-field CoefficientSystemDerivedImage re-declared from live clone and converted both ways against the new grouped abbrev; 6 moved decls byte-identical; #print axioms clean except expected sorryAx"
+ }
+}
