@@ -64,9 +64,8 @@
    }
   },
   {
-   "text": "Write a,b,c,d for the top, left, right and bottom arrows. By the K-flat and flat-term hypotheses, P,C lie in the resolving class of the derived-tensor descent statement. It identifies Q(Tot(P tensor C)) with Q(P) tensor_R^L Q(C); applying the isomorphisms Q(q),Q(epsilon) identifies this object with L tensor_R^L M. The canonical derived-to-ordinary comparison is represented on these resolutions by their tensor augmentation Q(q tensor epsilon) to (L tensor M)[0]. Since q tensor epsilon = c a, and Q(a) is invertible by step 3, we may identify the derived tensor instead with Q(P tensor M[0]) using Q(a). In this model the comparison is Q(q tensor epsilon) Q(a)^{-1} = Q(c), exactly the right arrow. Naturality follows from the representative identifications in the descent statement and the augmentation square of step 4; no flatness of L or M is asserted or needed.",
+   "text": "The natural representative comparison rho is supplied in the theorem hypotheses. Compose its component with T applied to the quasi-isomorphisms Q(q), Q(epsilon) to obtain the representative isomorphism. Invert the image of the top arrow and compose with this representative to define e. Functoriality cancels the top arrow against the full augmentation, giving precisely the stated comparison normalization. Naturality of rho, the commuting augmentation squares and the degree-zero tensor identification give naturality of e and comparison.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
     "def-pc-kflat-complex",
     "def-pc-flat-sheaf-modules",
     "def-weil-abstract-derived-category"
@@ -97,13 +96,12 @@
   "def-pc-tensor-complex-sheaves",
   "def-weil-abstract-derived-category",
   "lem-pc-tensor-mapping-cone-iso",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-pur-quasi-iso-cone-acyclic"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 06YT, 06YU and 07A3; two-resolution augmentation square and cone comparison"
+  "place": "Tags 06YS, 06YT, 06YU and 07A3; two-resolution augmentation square and cone comparison; direct simultaneous total-map construction preserves the uncurry functor, with generic degree-zero and signed-symmetry APIs and explicit cone-map naturality."
  },
  "mathlib_searches": [
   {
@@ -230,8 +228,7 @@
  },
  "tool_uses": [
   "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pc-tensor-mapping-cone-iso",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-pc-tensor-mapping-cone-iso"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -259,7 +256,11 @@
    "SheafOfModules.KFlatConeComparison.resolvedTensor",
    "SheafOfModules.KFlatConeComparison.resolvedPair",
    "SheafOfModules.KFlatConeComparison.comparison",
-   "SheafOfModules.KFlatConeComparison.augmentation_square"
+   "SheafOfModules.KFlatConeComparison.augmentation_square",
+   "SheafOfModules.KFlatConeComparison.uncurry_map_eq",
+   "SheafOfModules.KFlatConeComparison.totalBifunctor",
+   "SheafOfModules.KFlatConeComparison.totalSwap",
+   "SheafOfModules.KFlatConeComparison.totalSingleIso"
   ],
   "file": "lean/Sheaf/Paper/KFlatConeComparison.lean",
   "statement": "theorem augmentation_square (T : DerivedCategory (Modules R) × DerivedCategory (Modules R) ⥤ DerivedCategory (Modules R)) (ρ : resolvedTensor R ≅ localizationPair R ⋙ T) : ∃ (topCone : ∀ r : Pair R, CochainComplex.mappingCone ((total R).map (𝟙 r.P ×ₘ r.ε)) ≅ (total R).obj (CochainComplex.mappingCone r.ε, r.P)) (leftCone : ∀ r : Pair R, CochainComplex.mappingCone ((total R).map (r.q ×ₘ 𝟙 r.K)) ≅ (total R).obj (CochainComplex.mappingCone r.q, r.K)) (e : ∀ r : Pair R, DerivedCategory.Q.obj ((total R).obj (r.P, (single R).obj r.M)) ≅ T.obj (DerivedCategory.Q.obj ((single R).obj r.L), DerivedCategory.Q.obj ((single R).obj r.M))), ∀ r : Pair R, (total R).map (r.q ×ₘ 𝟙 r.K) ≫ (total R).map (𝟙 _ ×ₘ r.ε) = (total R).map (𝟙 r.P ×ₘ r.ε) ≫ (total R).map (r.q ×ₘ 𝟙 _) ∧ QuasiIso ((total R).map (𝟙 r.P ×ₘ r.ε)) ∧ QuasiIso ((total R).map (r.q ×ₘ 𝟙 r.K)) ∧ CochainComplex.mappingCone.inr ((total R).map (𝟙 r.P ×ₘ r.ε)) ≫ (topCone r).hom = (total R).map (𝟙 r.P ×ₘ CochainComplex.mappingCone.inr r.ε) ≫ (swap R r.P (CochainComplex.mappingCone r.ε)).hom ∧ CochainComplex.mappingCone.inr ((total R).map (r.q ×ₘ 𝟙 r.K)) ≫ (leftCone r).hom = (total R).map (CochainComplex.mappingCone.inr r.q ×ₘ 𝟙 r.K) ∧ DerivedCategory.Q.map ((total R).map (𝟙 r.P ×ₘ r.ε)) ≫ (e r).hom = ρ.hom.app (resolvedPair R r) ≫ T.map (DerivedCategory.Q.map r.q ×ₘ DerivedCategory.Q.map r.ε) ∧ (e r).hom ≫ comparison R T ρ r = DerivedCategory.Q.map ((total R).map (r.q ×ₘ 𝟙 _)) ≫ DerivedCategory.Q.map (ordinaryIso R r.L r.M).hom ∧ (QuasiIso ((total R).map (𝟙 ((single R).obj r.L) ×ₘ r.ε)) → IsIso (comparison R T ρ r)) ∧ ∀ (s : Pair R) (f : Hom r s), (∃ (ht : (total R).map (f.p ×ₘ 𝟙 r.K) ≫ (total R).map (𝟙 s.P ×ₘ f.k) ≫ (total R).map (𝟙 s.P ×ₘ s.ε) = (total R).map (𝟙 r.P ×ₘ r.ε) ≫ (total R).map (f.p ×ₘ (single R).map f.m)) (hl : (total R).map (f.p ×ₘ f.k) ≫ (total R).map (s.q ×ₘ 𝟙 s.K) = (total R).map (r.q ×ₘ 𝟙 r.K) ≫ (total R).map ((single R).map f.l ×ₘ f.k)), coneMap R ((total R).map (f.p ×ₘ 𝟙 r.K) ≫ (total R).map (𝟙 s.P ×ₘ f.k)) ((total R).map (f.p ×ₘ (single R).map f.m)) ht ≫ (topCone s).hom = (topCone r).hom ≫ (total R).map (coneMap R f.k ((single R).map f.m) f.ε_comm ×ₘ f.p) ∧ coneMap R ((total R).map (f.p ×ₘ f.k)) ((total R).map ((single R).map f.l ×ₘ f.k)) hl ≫ (leftCone s).hom = (leftCone r).hom ≫ (total R).map (coneMap R f.p ((single R).map f.l) f.q_comm ×ₘ f.k)) ∧ DerivedCategory.Q.map ((total R).map (f.p ×ₘ (single R).map f.m)) ≫ (e s).hom = (e r).hom ≫ T.map (DerivedCategory.Q.map ((single R).map f.l) ×ₘ DerivedCategory.Q.map ((single R).map f.m)) ∧ T.map (DerivedCategory.Q.map ((single R).map f.l) ×ₘ DerivedCategory.Q.map ((single R).map f.m)) ≫ comparison R T ρ s = comparison R T ρ r ≫ DerivedCategory.Q.map ((single R).map (((tensor R).map f.l).app r.M ≫ ((tensor R).obj s.L).map f.m))",
@@ -275,5 +276,15 @@
   "group": "Q109",
   "result": "pass",
   "note": "Wrote review.md. Checked all statement dependencies, source alignment, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. scompile.py reproduced clean sandbox and library compiles. No findings; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261020T131938-L-1393372",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
