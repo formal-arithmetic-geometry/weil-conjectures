@@ -18796,3 +18796,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:48 L: returned deliver/G7/Sheaf.AlgebraicGeometry.OrdinaryKunnethFiniteRing (reviewer RETURN: (reviewer C-f9baa, head f9baa9189) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Or)
 - 20:53 L: returned deliver/NA/lem-weil-pbc-residue-perfect-finite-quotient-models (reviewer RETURN: L: independent stage-2 immutable head 3f532b32d618: H4: head 3f532b32 (module byte-identical to the PASSed 04e5e132) is )
 - 21:03 L: returned deliver/A4/Sheaf.Paper.SfHomTriangulated (reviewer RETURN: (reviewer C-4f0c7, head 4f0c7d6df) G1 / brief point 2: the red-build repair note named 4 failing modules; 3 still fail a)
+- 21:03 L: returned deliver/R6/Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint (reviewer RETURN: (reviewer C-ba7a0, head ba7a09eeb) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CoefficientEva)
