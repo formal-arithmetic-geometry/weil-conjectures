@@ -50,9 +50,9 @@
    }
   },
   {
-   "text": "For the induction step $m>0$, write $u_p=g(e_p)\\in N(W)$ and let $(a_p)$ be the last column of $A$. The relation $\\sum_p a_pu_p=0$ satisfies exactly the hypotheses of [lem-weil-pbc-site-flat-equational-criterion], applied to the original flat sheaf $N$ on $\\mathcal C$ and the object $W$. This gives a covering $\\{W_i\\to W\\}$, integers $l_i\\ge0$, coefficients $b_{ipq}\\in\\mathcal O(W_i)$ and sections $t_{iq}\\in N(W_i)$ such that $u_p|_{W_i}=\\sum_q b_{ipq}t_{iq}$ and $\\sum_p a_p|_{W_i}b_{ipq}=0$. Define $B_i(e_p)=\\sum_q b_{ipq}e_q$ and $p_i(e_q)=t_{iq}$, extended by the sectionwise linear formulas of Step 1. Then $p_iB_i=g|_{W_i}$ and the last column of $B_iA|_{W_i}$ is zero. The criterion is used only for a single relation, exactly as its statement provides; no assertion about flatness of section modules is made.",
+   "text": "For the induction step $m>0$, write $u_p=g(e_p)\\in N(W)$ and let $(a_p)$ be the last column of $A$. The relation $\\sum_p a_pu_p=0$ satisfies exactly the hypotheses of [lem-weil-pbc-flat-local-relations-universes], applied to the original flat sheaf $N$ on $\\mathcal C$ and the object $W$. This gives a covering $\\{W_i\\to W\\}$, integers $l_i\\ge0$, coefficients $b_{ipq}\\in\\mathcal O(W_i)$ and sections $t_{iq}\\in N(W_i)$ such that $u_p|_{W_i}=\\sum_q b_{ipq}t_{iq}$ and $\\sum_p a_p|_{W_i}b_{ipq}=0$. Define $B_i(e_p)=\\sum_q b_{ipq}e_q$ and $p_i(e_q)=t_{iq}$, extended by the sectionwise linear formulas of Step 1. Then $p_iB_i=g|_{W_i}$ and the last column of $B_iA|_{W_i}$ is zero. The criterion is used only for a single relation, exactly as its statement provides; no assertion about flatness of section modules is made.",
    "uses": [
-    "lem-weil-pbc-site-flat-equational-criterion"
+    "lem-weil-pbc-flat-local-relations-universes"
    ],
    "elementary": false,
    "source": {
@@ -73,11 +73,11 @@
    }
   },
   {
-   "text": "Apply the established claim to the presentation $A,q$ from Step 1, with $m=r$ and $n=s$. On a covering $V\\to W$ it gives maps $B:\\mathcal O_V^{\\oplus s}\\to\\mathcal O_V^{\\oplus l}$ and $p:\\mathcal O_V^{\\oplus l}\\to N|_V$ with $pB=q|_V$ and $BA|_V=0$. By [lem-pur-site-restriction-module-adjunction-exact], applied to the ringed slice $(\\mathcal C/W,\\mathcal O_W)$ and its object $V/W$, restriction preserves the exact presentation, so $\\mathcal O_V^{\\oplus r}\\xrightarrow{A|_V}\\mathcal O_V^{\\oplus s}\\xrightarrow{q|_V}N|_V\\to0$ is exact. Relocalization and the finite-tuple description in Step 1 identify the restricted modules and maps with those displayed. In particular $q|_V$ is a cokernel of $A|_V$ in the abelian category of module sheaves.",
+   "text": "Apply the finite-relation induction to the presentation from Step 1. Restriction along f:V→W is Mathlib's overMap. On underlying abelian sheaves it is pushforward along Over.map f, which is cocontinuous and continuous. Mathlib's sheafAdjunctionCocontinuous makes this functor a left adjoint, so it preserves colimits. The forgetful functor from module sheaves preserves colimits (the existing library instance preservesColimitsOfShape_toSheaf) and reflects them, so overMap preserves colimits as well. In particular the restricted presentation map remains the cokernel of the restricted relation map. The proof uses mapIsColimit on the presentation cofork and does not assume sectionwise surjectivity.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
     "def-pur-localized-ringed-site",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": false,
    "source": {
@@ -112,13 +112,13 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-localized-ringed-site",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-flat-equational-criterion",
-  "lem-pur-site-restriction-module-adjunction-exact"
+  "lem-weil-pbc-flat-local-relations-universes",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 08FD (lemma-flat-locally-finite-presentation), using the explicit induction (2) to (3) in Tag 08FC (lemma-flat-eq); the cokernel section in the final sentence is written out."
+  "place": "Tag 08FD (lemma-flat-locally-finite-presentation), using the explicit induction (2) to (3) in Tag 08FC (lemma-flat-eq); the cokernel section in the final sentence is written out. Lean implementation: use the independent-universe local relation criterion and establish preservation of colimits for overMap directly from the cocontinuous sheaf adjunction and the module-sheaf forgetful functor."
  },
  "mathlib_searches": [
   {
@@ -273,10 +273,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-site-flat-equational-criterion",
-  "lem-pur-site-restriction-module-adjunction-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -302,5 +299,15 @@
   "group": "NO",
   "result": "pass",
   "note": "Immutable delivery matches Stacks 08FD and its node; dependencies, universes, edge cases, docstrings, report sections, and no-hollow-proof requirements checked. scompile.py passed sandbox and library compilations with exit 0; no fixes needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261020T122139-L-487392",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
