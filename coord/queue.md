@@ -1,8 +1,8 @@
 # Work queue
 
-82 items; claim with `tools/claim.py next <group> [--stage N]`.
+79 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (29 clusters, 2203 modules)
+## Rework: quarantined by the upstream sync (27 clusters, 2184 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -10,13 +10,11 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 |---|---|---|---|
 | `Sheaf.CategoryTheory.RingedCechKoszulDualLimit` | 1 |  | error: Sheaf/CategoryTheory/RingedCechKoszulDualLimit.lean:452:11: error(lean.unknownIdentifier): Unknown constant `CochainComplex.telescopeShiftColimit` | Shea |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
-| `Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelData` | 1 |  | error: Sheaf/AlgebraicGeometry/PerfectFiniteFreeResidueModelData.lean:1:0: error: import Sheaf.AlgebraicGeometry.PerfectComplex failed, environment already cont |
 | `Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalLocalizedHomGerm.lean:57:6: error: Application type mismatch: The argument | ((Scheme.strictHenselizationStructuralMap |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
 | `Sheaf.Paper.GlobalTensorPullbackDerivedData` | 1 |  | error: Sheaf/Paper/GlobalTensorPullbackDerivedData.lean:100:9: error(lean.unknownIdentifier): Unknown constant `CochainComplex.tensorPullbackRingMap` | | Note:  |
 | `Sheaf.Paper.GlobalTensorPullbackUnderivedData` | 1 |  | error: Sheaf/Paper/GlobalTensorPullbackUnderivedData.lean:6:0: error: import WeilConjectures.Algebra.Homology.KFlatPullback failed, environment already contains |
-| `Sheaf.AlgebraicGeometry.DerivedFiberCohomologyBaseChange` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedFiberCohomologyBaseChange.lean:6:0: error: object file '/home/ubuntu/weil-conjectures-sheaf/local/build/RW/Sheaf/Algebraic |
 | `Sheaf.RingTheory.AuslanderBuchsbaum` | 1 |  | error: Sheaf/RingTheory/AuslanderBuchsbaum.lean:52:8: error(lean.unknownIdentifier): Unknown identifier `depth_subsingleton` | Sheaf/RingTheory/AuslanderBuchsba |
 | `Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso` | 1 |  | error: Sheaf/AlgebraicGeometry/QCohTensorResolutionChartComparisonIso.lean:1:0: error: import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde failed, environment a |
 | `Sheaf.AlgebraicGeometry.StrictLocalDerivedExchangeLeray` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalDerivedExchangeLeray.lean:6:0: error: import Sheaf.AlgebraicGeometry.StrictHenselization failed, environment already c |
@@ -31,14 +29,14 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescentRepresentative.lean:51:10: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange` | 1 |  | error: Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison fail |
-| `Sheaf.AlgebraicGeometry.TensorRoofTransposition` | 1 |  | error: Sheaf/AlgebraicGeometry/TensorRoofTransposition.lean:6:0: error: import Sheaf.Algebra.Homology.DerivedInternalHom failed, environment already contains 'C |
+| `Sheaf.AlgebraicGeometry.TensorRoofTransposition` | 1 |  | error: Sheaf/AlgebraicGeometry/TensorRoofTransposition.lean:106:9: error(lean.unknownIdentifier): Unknown identifier `Scheme` | | Note: A public declaration `Sc |
 | `Sheaf.RingTheory.ResidueFieldProjectiveDimensionDepth` | 1 |  | error: Sheaf/RingTheory/ResidueFieldProjectiveDimensionDepth.lean:1:0: error: import WeilConjectures.RingTheory.GlobalDimension failed, environment already cont |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 1 |  | error: Sheaf/Algebra/Homology/AffinePushforwardCohomologyEdgeIdentity.lean:5:0: error: import Sheaf.AlgebraicGeometry.AffineDerivedCohomologyPresentation failed |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumUnitNormalization` | 1 |  | error: Sheaf/AlgebraicGeometry/AffineSpectrumUnitNormalization.lean:29:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irreduci |
 | `Sheaf.AlgebraicGeometry.FieldFibreHomology` | 1 |  | error: Sheaf/AlgebraicGeometry/FieldFibreHomology.lean:41:6: error: Application type mismatch: The argument | (derivedPullback g).obj (DerivedCategory.Q.obj K)  |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/BaseChange/SmoothBaseChange.lean:1:0: error: import Sheaf.SixFunctors.ProEtale.BaseChange.Smooth |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 145 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 144 items.
 
 ## Stage 1: nodes to split (1)
 
