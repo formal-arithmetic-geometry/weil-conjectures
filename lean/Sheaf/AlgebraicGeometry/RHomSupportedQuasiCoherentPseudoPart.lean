@@ -4,7 +4,7 @@ public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQC
-import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartBound
+import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartBound
 
 /-! # PseudoPart of derived internal Hom
 
