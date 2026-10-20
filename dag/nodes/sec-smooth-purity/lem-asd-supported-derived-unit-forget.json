@@ -1,0 +1,113 @@
+{
+ "id": "lem-asd-supported-derived-unit-forget",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof second and third paragraphs: the ordinary projective-line adjunction uses the supported Cartier Kummer class",
+   "via": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral evaluation of the exact derived closed unit",
+ "statement": "Let A be any commutative ring, i:D→T a closed immersion of schemes, F an A-module sheaf on the small etale site of T, and κ in Ext²(i_*A_D,F). Use the canonical exact-direct-image single comparison, derived adjunction unit, integral generator, and coefficient forgetting of [def-asd-ordinary-supported-kummer-boundary, def-asd-ordinary-supported-kummer-system]. The integral evaluation of the derived composite u_D followed by κ equals the integral supported unit Z_T→i_*Z_D followed by the supported coefficient generator and the underlying abelian Ext class of κ. This is the displayed equality in the attached Lean statement; no finiteness, Cartier, invertibility or flatness hypothesis on A occurs.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Paragraph 4: the support-Hom map and its forgetting-support unit normalization"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-asd-ordinary-supported-kummer-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved generic exact-single unit comparison [lem-asd-derived-single-unit-exact] to the inverse-image/direct-image adjunction. The concrete unit is the cached explicit generic unit [def-asd-derived-single-unit]. A closed immersion supplies exactness of direct image. Express the result through Ext.homEquiv.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-asd-derived-single-unit-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forgetting coefficients commutes with the constant unit: evaluate the two adjuncts on each constant integer r. Both give its image r in A on the pulled-back etale object. Apply Ext.homEquiv, functoriality of Ext under exact forgetting, and Yoneda associativity to obtain the displayed equality. Empty schemes and supports are covered by the same functorial identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-asd-derived-single-unit-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Paragraph 4: the support-Hom map and its forgetting-support unit normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived adjunction unit on a constant sheaf agrees with the single complex of the underived unit, naturally after forgetting module coefficients",
+   "results": "CategoryTheory.constantPresheafAdj_unit_app; CategoryTheory.constantSheafAdj_counit_app; CategoryTheory.constantSheafΓAdj. These supply constant-adjunction APIs, but not this derived coefficient compatibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedη_fac_app\"",
+   "results": "CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedη_fac_app_assoc. These give the derived unit factorization, but still require the exact single and coefficient comparisons.",
+   "date": "2026-10-21",
+   "verdict": "generic ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*(chern|scalar|boundary)|supported.*Kummer",
+   "results": "No hits in Mathlib. Local library search finds the boundary interfaces, boundary existence, Cartier pair pullback and supported-Hom naturality, but no theorem of the three compatibility clauses.",
+   "date": "2026-10-21",
+   "verdict": "no specialized Mathlib theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer",
+  "date": "2026-10-21",
+  "group": "B3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedDerivedUnitForget",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedDerivedUnitForget.lean",
+  "declaration": "AlgebraicGeometry.Etale.supported_derived_unit_forget",
+  "statement": "theorem supported_derived_unit_forget (A : Type (u + 1)) [CommRing A]\n    {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]\n    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (κ : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) F 2) :\n    (Ext.mk₀ (ordinaryFiniteIntegralGenerator A T)).comp\n      ((Ext.homEquiv.symm (supportedDerivedUnit A i ≫ supportedExactDerivedMap\n        (lowerStar (ModuleCat.{u + 1} A) i) (ordinaryFiniteConstant A D) F κ)).mapExactFunctor\n          (RawModuleScalarComparison.forget A T)) (zero_add 2) =\n    (Ext.mk₀ (supportedIntegralUnit i)).comp\n      ((Ext.mk₀ (supportedIntegralGenerator A i)).comp\n        (κ.mapExactFunctor (RawModuleScalarComparison.forget A T)) (zero_add 2))\n      (zero_add 2)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261020T211631-L-3481036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261020T211631-L-3481036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

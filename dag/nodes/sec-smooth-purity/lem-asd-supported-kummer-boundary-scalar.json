@@ -1,0 +1,129 @@
+{
+ "id": "lem-asd-supported-kummer-boundary-scalar",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof second and third paragraphs: the ordinary projective-line adjunction uses the supported Cartier Kummer class",
+   "via": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived scalar extension of a normalized Cartier Kummer boundary",
+ "statement": "Let N>0 be invertible on a scheme T, A a finite commutative ring with N=0 in A, and i:D→T an effective Cartier closed immersion. Put R=ULift(Z/N) and let φ:R→A be the canonical coefficient map. Let κ_R and κ_A be normalized supported relative Kummer boundary classes [def-asd-ordinary-supported-kummer-boundary]. They satisfy SupportedKummerScalar of [def-asd-ordinary-supported-kummer-scalar]: there are coefficient maps η:R_D→Resφ A_D and θ:R_T(1)→Resφ A_T(1), fixed on constants and pure root tensors, whose pushed source and target single maps have the unbounded derived scalar-unit universal properties, and whose Ext square carries κ_R to κ_A. A need not be flat over R.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Final paragraph: apply derived scalar extension from Z/n to A; no flatness of A is needed"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-asd-ordinary-supported-kummer-system",
+  "def-asd-ordinary-supported-kummer-scalar"
+ ],
+ "proof": [
+  {
+   "text": "The supported-constant scalar-source theorem supplies the normalized η. Its geometric stalk is the coefficient map R→A on D and the zero map between zero modules off D. Exact closed direct image and K-flatness of the supported constant identify the pushed η as the unbounded derived scalar unit.",
+   "uses": [
+    "lem-asd-supported-kummer-scalar-source"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The roots line is locally free of rank one over R. Its degree-zero complex is K-flat, so derived scalar extension computes its ordinary sectionwise scalar tensor line over A. The unit θ sends r tensor z to φ(r) tensor z. The derived change-of-rings adjunction gives the required universal property against all unbounded complexes, including when A is nonflat.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived scalar extension to the relative torsor Kummer boundary. Its extension and abelian Kummer connecting morphism are unchanged, while the root coefficient map is extended on pure tensors. The resulting class is the A-normalized relative boundary. Boundary uniqueness identifies it with κ_A; similarly the original normalized class is κ_R. Functoriality of the scalar unit then gives exactly the displayed Ext square. The argument applies for an empty divisor or scheme and N=1.",
+   "uses": [
+    "lem-amb-relative-torsor-cohomology",
+    "lem-amb-kummer-any-base",
+    "lem-asd-cartier-boundary-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-supported-kummer-scalar-source",
+  "lem-asd-finite-etale-twist-line",
+  "lem-pur-derived-change-of-rings",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-amb-kummer-any-base",
+  "lem-asd-cartier-boundary-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Final paragraph: apply derived scalar extension from Z/n to A; no flatness of A is needed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an effective Cartier divisor, the supported Kummer boundary forgets to its first Chern class and commutes with pullback and derived scalar extension",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; KaehlerDifferential.tensorKaehlerEquiv; Algebra.Extension.cotangentComplex; Algebra.unramifiedLocus_eq_compl_support. None concerns a supported etale Kummer class.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"comp\"",
+   "results": "Only unrelated Std.ExtDTreeMap entries; no supported Kummer normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*(chern|scalar|boundary)|supported.*Kummer",
+   "results": "No hits in Mathlib. Local library search finds the boundary interfaces, boundary existence, Cartier pair pullback and supported-Hom naturality, but no theorem of the three compatibility clauses.",
+   "date": "2026-10-21",
+   "verdict": "no specialized Mathlib theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer",
+  "date": "2026-10-21",
+  "group": "B3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedKummerBoundaryScalar",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKummerBoundaryScalar.lean",
+  "declaration": "AlgebraicGeometry.Etale.supported_kummer_boundary_scalar",
+  "statement": "theorem supported_kummer_boundary_scalar (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)\n    [NeZero N]\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)\n    [IsClosedImmersion i] (hI : i.ker.IsInvertible)\n    (κ : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D))\n      (Scheme.finiteEtaleTateLine T N A hA) 2)\n    (hκ : SupportedKummerBoundary A N hA i hI hT κ)\n    (κ₀ : Ext\n      ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod N))) i).obj\n        (ordinaryFiniteConstant (ULift.{u + 1} (ZMod N)) D))\n      (Scheme.finiteEtaleTateLine T N (ULift.{u + 1} (ZMod N))\n        (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N))\n          (ZMod.natCast_self N))) 2)\n    (hκ₀ : SupportedKummerBoundary (ULift.{u + 1} (ZMod N)) N\n      (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N))\n        (ZMod.natCast_self N)) i hI hT κ₀) :\n    SupportedKummerScalar\n      ((Scheme.finiteEtaleTwistScalar N A hA).comp ULift.ringEquiv.toRingHom) N\n      (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N))\n        (ZMod.natCast_self N)) hA i κ₀ κ",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261020T211631-L-3481036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261020T211631-L-3481036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

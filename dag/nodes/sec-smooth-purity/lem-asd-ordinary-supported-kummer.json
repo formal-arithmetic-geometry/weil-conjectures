@@ -34,178 +34,52 @@
  ],
  "proof": [
   {
-   "text": "Put $\\Lambda=\\mathbf Z/N$ and $V=T-D$. The dual ideal $L$ of [def-pc-divisor-line-bundle] has a canonical section $s_D$, dual to $\\mathcal I_D\\hookrightarrow\\mathcal O_T$. On an open chart where $\\mathcal I_D=(f_a)$ with $f_a$ a nonzerodivisor, the ideal is free on $f_a$, its dual is free on $e_a=f_a^{-1}$, and $s_D=f_ae_a$. On $V=T-D$, $f_a$ is a unit, so $s_D$ is a nowhere zero section and gives a specified trivialization $\\tau_D:\\mathcal O_V\\cong L|_V$. On overlaps $e_b=(f_a/f_b)e_a$, hence these formulas agree. The frame torsor $P_D=\\underline{\\operatorname{Isom}}(\\mathcal O_T,L)$ of [lem-sc-line-bundle-torsor] is therefore a $\\mathbf G_m$-torsor with the specified section $\\tau_D$ on $V$.",
+   "text": "Choose the unique normalized boundary κ by [lem-asd-cartier-boundary-existence]. Choose normalized roots and line transport t from [lem-asd-etale-finite-twist-pullback], taking degree one of its tensor comparisons.",
    "uses": [
-    "def-pc-divisor-line-bundle",
-    "lem-sc-line-bundle-torsor"
+    "lem-asd-cartier-boundary-existence",
+    "lem-asd-etale-finite-twist-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof paragraph 1: divisor section and trivialization"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-amb-relative-torsor-cohomology] to $(P_D,\\tau_D)$ with $G=\\mathbf G_m$. This gives a specified class $\\alpha_D\\in H^1(T,V;\\mathbf G_m)$, independent of chart equations and refinements, whose forgotten-support image is the torsor class of $L$. For explicit changes of equations, $f'_a=u_af_a$ gives $e'_a=u_a^{-1}e_a$ and $f'_ae'_a=f_ae_a$; it is the same line bundle with the same section, not just an unspecified lift of its Picard class. The relative lemma supplies the comparison with derived sections; no assertion that an arbitrary ordinary Cech cover computes all derived cohomology is needed.",
+   "text": "Set c to the exact derived realization of κ and c₁ to Ext.homEquiv.symm of the derived unit composed with c. Their realization equality is Ext.homEquiv.apply_symm_apply. The Chern clause follows from [lem-asd-supported-kummer-chern-realization].",
    "uses": [
-    "lem-amb-relative-torsor-cohomology"
+    "lem-asd-supported-kummer-chern-realization",
+    "lem-asd-supported-derived-unit-forget"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof paragraphs 1-2: relative torsor class"
-   }
+   "elementary": false
   },
   {
-   "text": "Since $N$ is invertible on $T$, [lem-amb-kummer-any-base] supplies the short exact Kummer sequence $0\\to\\mu_N\\to\\mathbf G_m\\xrightarrow{N}\\mathbf G_m\\to0$. Apply its relative connecting map, provided by [lem-amb-relative-torsor-cohomology], to $\\alpha_D$: $\\beta_D=\\delta_{T,V}(\\alpha_D)\\in H^2(T,V;\\mu_N)$. The relative lemma's compatibility with forgetting support gives $\\operatorname{forget}(\\beta_D)=\\delta_T([L])$, exactly $c_{1,\\Lambda}(L)$. Only the abelian-sheaf Kummer sequence is used: $\\mathbf G_m$ is not a $\\Lambda$-module and is never tensored over $\\Lambda$.",
+   "text": "For every Cartier pullback choose its unique normalized κ′. Finite sheaf base change makes baseChangeMap invertible; composing with the constant inverse-image isomorphism proves invertibility of supportedConstantExchange. Apply [lem-asd-supported-kummer-boundary-pullback] for the Ext equation.",
    "uses": [
-    "lem-amb-kummer-any-base",
-    "lem-amb-relative-torsor-cohomology"
+    "lem-asd-cartier-boundary-existence",
+    "lemma-weil-pbc-finite-exchange",
+    "lem-asd-supported-kummer-boundary-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof paragraph 3: Kummer boundary; Stacks Tag 03PL, lemma-kummer-sequence"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the canonical comparisons from module-derived sections to abelian-derived sections for the sheaf $\\mu_N$ on $T$ and its restriction on $V$. By [lem-weil-pbc-etale-module-cohomology-forget] they induce isomorphisms on every cohomology group, hence are quasi-isomorphisms. They commute with restriction because both restriction maps send a section to its restriction. Taking their cones therefore identifies $H^2(T,V;\\mu_N)$ with the relative cohomology computed in $\\Lambda$-module sheaves; the projection from the shifted cone to the $T$-sections complex also commutes with these comparisons. Taking degree two in [lem-amb-closed-support-hom], with coefficient ring $\\Lambda$ and $K=\\mu_N[0]$, identifies it with $\\operatorname{Hom}_{D(T_{\\mathrm{et}},\\Lambda)}(i_*\\Lambda_D,\\mu_{N,T}[2])$. Define $c_{D,\\Lambda}$ to be the morphism corresponding to $\\beta_D$. The forget-support map is precomposition with $\\Lambda_T\\to i_*\\Lambda_D$: applying derived Hom to this map is the first arrow into the ordinary sections complex in the support cone. Thus step 3 is precisely the required first Chern class assertion. This is a support-Hom identification and uses no purity isomorphism. The forget-support compatibility can be checked directly using [lem-weil-pbc-open-closed-short-exact] for $F=\\Lambda_T$. Apply derived Hom into $\\mu_N$ to $j_!\\Lambda_V\\to\\Lambda_T\\to i_*\\Lambda_D$. [lem-weil-pbc-extension-by-zero-adjunction] identifies Hom out of $j_!\\Lambda_V$ with sections on $V$, and the counit induces restriction. Thus the relative fibre projects to sections on $T$ by precomposition with the displayed unit. This fixes the maps, not just an abstract isomorphism of cohomology groups.",
+   "text": "For coefficients ULift(Z/N), choose the unique normalized κ₀ by boundary existence. Apply [lem-asd-supported-kummer-boundary-scalar] to κ₀ and κ. Assemble all existential witnesses and conjunctions. The uniqueBoundary declaration continues to use boundary existence directly.",
    "uses": [
-    "lem-weil-pbc-etale-module-cohomology-forget",
-    "lem-amb-closed-support-hom",
-    "lem-weil-pbc-open-closed-short-exact",
-    "lem-weil-pbc-extension-by-zero-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof paragraphs 3-4: support-Hom; Stacks Tag 0A45, lemma-cohomology-with-support-triangle"
-   }
-  },
-  {
-   "text": "The closed immersion $i$ is finite because locally it is induced by a quotient ring. Therefore [lemma-weil-pbc-finite-direct-image-exact] gives exactness of $i_*$ on abelian sheaves. The module kernels and sheafified cokernels of [def-weil-sheaf-of-modules-category] have these underlying abelian kernels and cokernels, so $i_*$ is exact on module sheaves too. This identifies $Ri_*$ with $i_*$ on degree-zero objects. The derived scalar-extension comparison [lem-asd-supported-kummer-scalar-source] identifies $i_*\\Lambda_D\\otimes^L_\\Lambda A$ with $i_*A_D$ and carries the constant unit to $u_D:A_T\\to i_*A_D$.",
-   "uses": [
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-asd-supported-kummer-scalar-source",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof last paragraph: derived scalar extension; Stacks Tag 07A4, lemma-pullback-tensor-product"
-   }
-  },
-  {
-   "text": "Apply the triangulated change-of-rings functor [lem-pur-derived-change-of-rings]. With $A=\\Lambda$, [lem-asd-finite-etale-twist-line] says that $\\mu_{N,T}$ is flat over $\\Lambda_T$. Its degree-zero complex is K-flat: tensoring an acyclic complex with this exact tensor functor preserves kernels and images, so the resulting cohomology is zero in every degree. The K-flat computation therefore identifies the target $(\\mu_{N,T}\\otimes^L_\\Lambda A_T)[2]$ with the ordinary tensor $A_T(1)[2]$.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-asd-finite-etale-twist-line"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof last paragraph: derived scalar extension; Stacks Tag 07A4, lemma-pullback-tensor-product"
-   }
-  },
-  {
-   "text": "Extending $c_{D,\\Lambda}$ through these canonical source and target identifications defines $c_{D,A}$. The unit comparison of step 5 transports the equality $c_{D,\\Lambda}u_D=c_1(\\mathcal O_T(D))$ to $c_{D,A}u_D=c_1(\\mathcal O_T(D))$ and proves the stated scalar-extension clause. No flatness of $A$ over $\\Lambda$ is used. Here the transport is functoriality of the exact triangulated functor $-\\otimes^{\\mathbf L}_{\\Lambda_T}A_T$ of [lem-pur-derived-change-of-rings]: it carries the composite $c_{D,\\Lambda}\\circ u_{D,\\Lambda}$ to the composite of the extended maps, and the identification $\\Lambda_T\\otimes^{\\mathbf L}_{\\Lambda_T}A_T=A_T$ (the degree-zero complex $\\Lambda_T$ is K-flat over itself) is the one used in the definition of $c_1$.",
-   "uses": [
-    "lem-asd-supported-kummer-scalar-source",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof last paragraph: derived scalar extension; Stacks Tag 07A4, lemma-pullback-tensor-product"
-   }
-  },
-  {
-   "text": "Let $h:T'\\to T$ and assume $D'$ is Cartier. The Cartier pullback lemma [lem-asd-supported-kummer-cartier-pullback] identifies $(h^*L,h^*s_D)$ with $(\\mathcal O_{T'}(D'),s_{D'})$, including their complement trivializations. Pulling local equations back gives the same transition units; no flatness of $h$ is required.",
-   "uses": [
-    "lem-asd-supported-kummer-cartier-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof penultimate paragraph: Cartier-preserving base change"
-   }
-  },
-  {
-   "text": "Naturality of the relative torsor class and its Kummer connecting map in [lem-amb-relative-torsor-cohomology] sends $\\alpha_D,\\beta_D$ to $\\alpha_{D'},\\beta_{D'}$. The coefficient map $h^{-1}\\mathbf G_m\\to\\mathbf G_m$ sends units and their $N$th powers to their pullbacks, so the Kummer sequence comparison commutes. The image of $(P_D,\\tau_D)$ under the pullback of [lem-amb-relative-torsor-cohomology] followed by $h^{-1}\\mathbf G_m\\to\\mathbf G_m$ is the frame torsor of $h^*L$ with the section $h^*\\tau_D$: a local frame $e:\\mathcal O_U\\cong L|_U$ pulls back to the frame $h^*e$, equivariantly for the coefficient map, so the contracted product maps isomorphically to $\\underline{\\operatorname{Isom}}(\\mathcal O_{T'},h^*L)$; by step 8 this pair is $(P_{D'},\\tau_{D'})$. Finally the module-to-abelian comparisons of step 4 commute with these pullbacks: the pullback on derived sections is $R\\Gamma(T,K)\\to R\\Gamma(T,Rh_*h^{-1}K)=R\\Gamma(T',h^{-1}K)$ induced by the adjunction unit, forgetting coefficients commutes with $h^{-1}$ by the natural isomorphism of [lem-weil-pbc-etale-module-pullback-forget-naturality], and with $Rh_*$ by the unit-compatible isomorphism of [lem-weil-pbc-module-abelian-derived-direct-image-comparison], on $T$ and on $V$ compatibly with restriction. Hence the module relative classes defining $c_{D,\\Lambda}$ and $c_{D',\\Lambda}$ correspond under pullback as the abelian ones do.",
-   "uses": [
-    "lem-amb-relative-torsor-cohomology",
-    "lem-amb-kummer-any-base",
-    "lem-weil-pbc-etale-module-pullback-forget-naturality",
-    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof penultimate paragraph: Cartier-preserving base change"
-   }
-  },
-  {
-   "text": "Apply [lem-asd-etale-finite-twist-pullback] with coefficient ring $\\Lambda$ to identify the canonical map $h^{-1}\\mu_{N,T}\\to\\mu_{N,T'}$ with an isomorphism induced by pullback of roots, and with coefficient ring $A$ to identify the twists. The support-Hom naturality lemma [lem-asd-supported-kummer-support-hom-naturality] supplies the canonical invertible closed-constant exchange, so the supported sources are identified as well.",
-   "uses": [
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-asd-supported-kummer-support-hom-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof penultimate paragraph: Cartier-preserving base change"
-   }
-  },
-  {
-   "text": "Apply the naturality of the supported-Hom identification [lem-asd-supported-kummer-support-hom-naturality] to the equality of the relative classes. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact], monoidality [lem-kun-inverse-image-monoidal], and pullback of constants [lem-kun-pullback-constant] transport the scalar-extension comparison. Substitution into the definition of $c_{D,A}$ gives $h^{-1}c_{D,A}=c_{D',A}$, including equality after forgetting support.",
-   "uses": [
-    "lem-asd-supported-kummer-support-hom-naturality",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-kun-inverse-image-monoidal",
-    "lem-kun-pullback-constant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-    "place": "Proof penultimate paragraph: Cartier-preserving base change"
-   }
-  },
-  {
-   "text": "The auxiliary unique-boundary declaration in this module is proved by applying the separately proved normalized-boundary existence and uniqueness theorem [lem-asd-cartier-boundary-existence]. This does not discharge the remaining Chern, pullback, scalar and derived-arrow witnesses of the main theorem.",
-   "uses": [
-    "lem-asd-cartier-boundary-existence"
+    "lem-asd-cartier-boundary-existence",
+    "lem-asd-supported-kummer-boundary-scalar"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-divisor-line-bundle",
-  "def-weil-sheaf-of-modules-category",
-  "lem-amb-closed-support-hom",
-  "lem-amb-kummer-any-base",
-  "lem-amb-relative-torsor-cohomology",
+  "lem-asd-cartier-boundary-existence",
   "lem-asd-etale-finite-twist-pullback",
-  "lem-asd-finite-etale-twist-line",
-  "lem-asd-supported-kummer-cartier-pullback",
-  "lem-asd-supported-kummer-scalar-source",
-  "lem-asd-supported-kummer-support-hom-naturality",
-  "lem-kun-inverse-image-monoidal",
-  "lem-kun-pullback-constant",
-  "lem-pur-derived-change-of-rings",
-  "lem-sc-line-bundle-torsor",
-  "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-weil-pbc-etale-module-pullback-forget-naturality",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-asd-cartier-boundary-existence"
+  "lem-asd-supported-kummer-chern-realization",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-asd-supported-kummer-boundary-pullback",
+  "lem-asd-supported-kummer-boundary-scalar",
+  "lem-asd-supported-derived-unit-forget"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
-  "place": "Proof relative-cone route, entirely on the ordinary small etale site, for Z/N and arbitrary finite A"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Relative construction and Chern normalization, Cartier pullback, and final scalar-extension paragraph; assemble unique normalized classes and canonical derived realizations"
  },
  "mathlib_searches": [
   {
@@ -396,24 +270,7 @@
   ]
  },
  "tool_uses": [
-  "def-pc-divisor-line-bundle",
-  "def-weil-sheaf-of-modules-category",
-  "lem-kun-inverse-image-monoidal",
-  "lem-kun-pullback-constant",
-  "lem-kun-stalk-as-pullback",
-  "lem-pur-derived-change-of-rings",
-  "lem-sc-line-bundle-torsor",
-  "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-weil-pbc-etale-module-pullback-forget-naturality",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+  "lem-asd-etale-finite-twist-pullback"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -462,9 +319,9 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C7",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261020T051055-L-1552413",
+  "landing": "20261020T211631-L-3481036",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
