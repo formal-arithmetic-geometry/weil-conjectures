@@ -77,14 +77,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SingleRightDerivedExactComposition",
-  "file": "lean/Sheaf/AlgebraicGeometry/SingleRightDerivedExactComposition.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SingleRightDerivedExactComposition",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SingleRightDerivedExactComposition.lean",
   "declaration": "CategoryTheory.Functor.single_rightDerived_exact_composition",
   "statement": "theorem single_rightDerived_exact_composition (F : C ⥤ A) (T : A ⥤ B)\n    [F.Additive] [T.Additive] [PreservesFiniteLimits T] [PreservesFiniteColimits T]\n    (M : C) :\n    (T.mapDerivedCategorySingleFunctor 0).inv.app (F.obj M) ≫\n      T.mapDerivedCategory.map\n        (DerivedCategory.Q.map\n          ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) 0).inv.app M) ≫\n          F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj\n            ((CochainComplex.singleFunctor C 0).obj M))) ≫\n      (rightDerivedFunctorCompMapDerivedCategoryIso F T).inv.app\n        ((DerivedCategory.singleFunctor C 0).obj M) =\n    DerivedCategory.Q.map\n      ((HomologicalComplex.singleMapHomologicalComplex (F ⋙ T)\n        (ComplexShape.up ℤ) 0).inv.app M) ≫\n      (F ⋙ T).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj\n        ((CochainComplex.singleFunctor C 0).obj M))",
   "branch": "sheaf-dag",
-  "by": "K2",
-  "date": "2026-10-13"
+  "by": "R4",
+  "date": "2026-10-20",
+  "note": "Retired the duplicate Sheaf module in favor of the adopted source-library theorem. The upstream theorem has the same conclusion and does not require K-injective resolutions on A; its application proves the former Sheaf statement verbatim. The canonical comparison argument and unit route are unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -97,18 +98,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "J3",
+  "reviewer": "C-58b7a",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T005054-L-2551204",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.Functor.single_rightDerived_exact_composition"
-  ],
-  "sorry_after": []
+  "landing": "20261020T144302-L-2261553",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf.AlgebraicGeometry.SingleRightDerivedExactComposition (retire-items.tsv:95) vs WeilConjectures twin theorem: identical statement with weaker context, which proves the old statement in its old context (scratch compile, axioms clean); node lean attachment redirected only; 0 importers"
  },
  "lean_audit": {
   "master": {
