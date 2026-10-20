@@ -5,7 +5,7 @@ Authors: SHEAF group Y2
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-public import Sheaf.AlgebraicGeometry.DerivedTensorShiftIndependentUniverse
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorShiftIndependentUniverse
 
 /-! # Canonical tensor shifts on schemes
 Source: Stacks Project, Tag 06YH, total tensor localization.
@@ -35,7 +35,7 @@ noncomputable def schemeCanonicalTensorShift (X : Scheme.{u})
   haveI := schemeModule_hasFunctorialFlatResolution X
   haveI := DerivedCategory.hasDerivedMonoidalCategory
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))
-  exact DerivedCategory.IndependentTensorShift.commShift₂CurriedTensor
+  exact DerivedCategory.commShift₂CurriedTensor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))
 
 end AlgebraicGeometry

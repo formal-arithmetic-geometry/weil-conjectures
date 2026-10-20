@@ -31,7 +31,7 @@ attribute [local instance] commShift₂CurriedTensor
 
 set_option maxHeartbeats 400000 in
 -- Elaborating the shifted K-flat representative exceeds the default heartbeat limit.
-open DerivedCategory.IndependentTensorShift.TensorCommShift₂ in
+open DerivedCategory.TensorCommShift₂ in
 private lemma rightUnitor_shift (P : CochainComplex.KFlat C) (n : ℤ) :
     (((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).commShiftIso n).hom.app
         ((LKFlat C).obj P) ≫ (ρ_ ((LKFlat C).obj P)).hom⟦n⟧' =
@@ -124,7 +124,7 @@ variable (C : Type u) [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{s} C]
 
 attribute [local instance] commShift₂CurriedTensor
 
-open DerivedCategory.IndependentTensorShift.TensorCommShift₂ in
+open DerivedCategory.TensorCommShift₂ in
 private lemma rightUnitor_shift_all (K : DerivedCategory C) (n : ℤ) :
     ((tensorRight (𝟙_ (DerivedCategory C))).commShiftIso n).hom.app K ≫
         (ρ_ K).hom⟦n⟧' =

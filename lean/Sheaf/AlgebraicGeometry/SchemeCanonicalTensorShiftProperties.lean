@@ -28,7 +28,7 @@ variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{s} C]
   [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (.up ℤ))]
 
 attribute [local instance] commShift₂CurriedTensor
-open DerivedCategory.IndependentTensorShift.TensorCommShift₂
+open DerivedCategory.TensorCommShift₂
 
 private lemma independent_tensorRight_eq (P : CochainComplex.KFlat C) :
     Functor.CommShift₂.commShiftFlipObj (G := curriedTensor (DerivedCategory C))
