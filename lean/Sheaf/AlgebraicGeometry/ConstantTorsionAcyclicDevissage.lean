@@ -12,7 +12,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 import Mathlib.GroupTheory.FiniteAbelian.Basic
 import Mathlib.Algebra.Category.Grp.Biproducts
 import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
+import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimitExtension
 
 /-!
 # Extending acyclic constant coefficients from cyclic groups to torsion groups

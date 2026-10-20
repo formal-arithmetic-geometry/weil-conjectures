@@ -128,14 +128,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDirectedCohomologyColimit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleDirectedCohomologyColimit.lean",
   "declaration": "AlgebraicGeometry.Scheme.etaleCohomology_isColimit_of_isDirected",
   "statement": "theorem etaleCohomology_isColimit_of_isDirected (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] {I : Type (u + 1)} [PartialOrder I] [IsDirected I (· ≤ ·)] [Nonempty I] {D : I ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D} (hc : IsColimit c) (q : ℕ) : Nonempty (IsColimit ((DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙ Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)).mapCocone c))",
   "branch": "sheaf-dag",
   "by": "U1",
   "date": "2026-10-12",
-  "note": "Same mathematics as the abelian clause of lem-weil-pbc-cohomology-filtered-colimit, restricted to directed orders but with an index of universe u+1. Its current Lean theorem fixes the index to universe u and cannot be applied here. No module inverse image or module coefficients occur in this auxiliary statement."
+  "note": "Same mathematics as the abelian clause of lem-weil-pbc-cohomology-filtered-colimit, restricted to directed orders but with an index of universe u+1. Its current Lean theorem fixes the index to universe u and cannot be applied here. No module inverse image or module coefficients occur in this auxiliary statement. 2026-10-21 (E9): retired the duplicate Sheaf module in favor of the upstream module with exactly the same directed-index declaration. The general filtered-index declaration used by ConstantTorsionAcyclicDevissage is in WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimitExtension, which publicly imports this module. No mathematical statement or proof dependency changed."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -148,13 +148,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
+  "reviewer": "C-65979",
+  "group": "E9",
   "result": "pass",
-  "landing": "20261012T035753-L-1605198",
+  "landing": "20261020T211703-L-3488750",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: removed Sheaf copy's two theorem signatures vs upstream WeilConjectures EtaleDirectedCohomologyColimit(:86) and ...Extension(:89), byte-identical; consumer import swap vs live; node lean repoint vs retire-sheaf-twins hand-off; compiles of adapted consumer + 3 transitive consumers (rc 0, 560 s limit under load ~210)"
  }
 }
