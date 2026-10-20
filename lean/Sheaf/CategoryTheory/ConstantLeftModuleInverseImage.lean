@@ -22,6 +22,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresObjects
 
 /-!
 # Exact inverse image for constant left-module sheaves

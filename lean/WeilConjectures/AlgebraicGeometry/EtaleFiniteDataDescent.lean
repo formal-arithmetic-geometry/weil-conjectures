@@ -13,6 +13,7 @@ public import Mathlib.Data.Fintype.Order
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 import WeilConjectures.AlgebraicGeometry.FiniteFamilyJointSurjectivityStage
+import WeilConjectures.AlgebraicGeometry.FiniteDiagramLiftOfModels
 
 /-!
 # Blueprint statements

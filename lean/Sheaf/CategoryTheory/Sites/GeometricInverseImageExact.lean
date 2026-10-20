@@ -18,6 +18,7 @@ import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresObjects
 
 /-!
 # Exactness of geometric inverse image on abelian sheaves and modules

@@ -12,6 +12,7 @@ import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
 import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuitySections
 import Sheaf.RepresentationTheory.ProfiniteStableLattice
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.Paper.GaloisLisseRepresentations
 
 /-! # Normalized rational monodromy before exactness
 

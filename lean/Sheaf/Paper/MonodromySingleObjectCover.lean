@@ -10,6 +10,8 @@ import Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal
 import Sheaf.SixFunctors.IntegralLisseReductionEquivalence
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist
 import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
+import Sheaf.AlgebraicGeometry.LisseLatticeCoefficientsSized
+import Sheaf.Paper.GaloisLisseRepresentations
 
 /-! # Etale-local monodromy models for a single lisse module
 

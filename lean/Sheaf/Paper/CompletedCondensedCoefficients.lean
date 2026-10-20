@@ -21,6 +21,7 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+import Sheaf.Paper.ContinuousIntegralCoefficients
 
 /-!
 # Comparison with completed condensed coefficients

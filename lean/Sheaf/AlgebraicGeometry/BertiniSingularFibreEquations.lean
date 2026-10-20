@@ -13,6 +13,10 @@ public import Mathlib.LinearAlgebra.Dual.Defs
 public import WeilConjectures.ZetaSeries
 import Sheaf.AlgebraicGeometry.ConormalSequenceSmoothImmersion
 import Sheaf.AlgebraicGeometry.HypersurfaceNonzeroRelativeDifferential
+import Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension
+import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
+import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 
 /-!
 # First-order equations vanish on a Bertini singular fibre

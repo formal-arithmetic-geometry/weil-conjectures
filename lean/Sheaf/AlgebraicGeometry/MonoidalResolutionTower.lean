@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.FunctorialFanDesingularization
+import Sheaf.AlgebraicGeometry.FunctorialLogBlowupEtaleDescent
+import Sheaf.AlgebraicGeometry.LogFanChartBlowup
+import Sheaf.AlgebraicGeometry.StrictFanChartLocalComparison
 
 /-!
 # Monoidal resolution tower for fine saturated log schemes

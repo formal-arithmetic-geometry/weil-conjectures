@@ -26,6 +26,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
 import Sheaf.CategoryTheory.GeometricModuleTransport
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresObjects
 
 /-!
 # Localization and geometric inverse image

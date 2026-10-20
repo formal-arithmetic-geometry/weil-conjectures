@@ -10,6 +10,12 @@ public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Functor.OfSequence
 import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
 
 /-!
 # Finite open exchange and coefficient restriction
