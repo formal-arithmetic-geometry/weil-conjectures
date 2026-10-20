@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.Algebra.Homology.HomotopyCategory
 public import Mathlib.Algebra.Category.Grp.Abelian
-import WeilConjectures.Algebra.Homology.HomComplexProjections
+import WeilConjectures.Algebra.Homology.HomComplexComponents
 import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 
 /-!
@@ -104,15 +104,13 @@ attribute [local irreducible] rhomNormalizedHomGlobalCochainsOfFan
 private noncomputable def rhomNormalizedHomProjection (A B : CochainComplex Mod ℤ)
     (n p q : ℤ) (h : p + n = q) :
     (homComplex (R := R) A B).X n ⟶ SheafOfModules.homObj (R := R) (A.X p) (B.X q) :=
-  (Classical.choose
-    (homComplex_projections_exists.{c, v, max c v r, max c v r} (J := J) (R := R))) A B n p q h
+  homComplexπ.{c, v, max c v r, max c v r} (J := J) (R := R) A B n p q h
 
 /-- The canonical product projections of the chosen Hom complex form a limit cone. -/
 private theorem rhomNormalizedHomProjection_isLimit (A B : CochainComplex Mod ℤ) (n : ℤ) :
     Nonempty (IsLimit (Fan.mk ((homComplex (R := R) A B).X n)
       (fun p ↦ rhomNormalizedHomProjection.{c, v, r} (R := R) A B n p (p + n) rfl))) := by
-  exact (Classical.choose_spec
-    (homComplex_projections_exists.{c, v, max c v r, max c v r} (J := J) (R := R))).1 A B n
+  exact ⟨homComplexIsLimit.{c, v, max c v r, max c v r} (R := R) A B n⟩
 
 /-- The explicit product-projection comparison with ordinary cochains.
 Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z.
@@ -202,9 +200,9 @@ private theorem rhomNormalizedHomGlobalCochains_comm
       (rhomNormalizedHomProjection_isLimit.{c, v, r} A B i).some
       (rhomNormalizedHomProjection_isLimit.{c, v, r} A B j).some
       ((homComplex (R := R) A B).d i j)
-      (fun p q q' p' hpq hq' hp' ↦ (Classical.choose_spec
-        (homComplex_projections_exists.{c, v, max c v r, max c v r} (J := J) (R := R))).2.1
-            A B i j p q q' p' hij hpq hq' hp') s
+      (fun p q q' p' hpq hq' hp' ↦
+        homComplex_d_π.{c, v, max c v r, max c v r} (R := R)
+          A B i j p q q' p' hij hpq hq' hp') s
   · rw [(homComplex (R := R) A B).shape i j
         (by simpa [ComplexShape.up_Rel] using hij), comp_zero, map_zero,
         CochainComplex.HomComplex.δ_shape i j hij]
@@ -297,9 +295,8 @@ private lemma globalComplexIso_naturality
           rhomNormalizedHomProjection.{c, v, r} (R := R) A' B' n p q hpq =
       rhomNormalizedHomProjection.{c, v, r} (R := R) A B n p q hpq ≫
         SheafOfModules.homObjMap (R := R) (f.f p) (g.f q) := by
-    exact (Classical.choose_spec
-      (homComplex_projections_exists.{c, v, max c v r, max c v r} (J := J) (R := R))).2.2
-        A A' B B' f g n p q hpq
+    exact homComplexFunctor_map_f_π.{c, v, max c v r, max c v r} (R := R)
+      f g n p q hpq
   rw [hm]
   rw [← Category.assoc, rhomNormalizedHomFactorEquiv_comp.{c, v, r}]
   rw [← rhomNormalizedHomGlobalCochains_v.{c, v, r}]

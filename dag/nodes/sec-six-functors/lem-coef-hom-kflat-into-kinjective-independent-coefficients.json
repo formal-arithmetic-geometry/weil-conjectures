@@ -1,0 +1,162 @@
+{
+ "id": "lem-coef-hom-kflat-into-kinjective-independent-coefficients",
+ "kind": "statement",
+ "title": "Hom from K-flat to K-injective with independent coefficient universes",
+ "statement": "Let C be a category in object universe c and morphism universe v, J a Grothendieck topology, and R a sheaf of commutative rings in universe max(c,v,u). Assume additive sheafification and that its weak equivalences are the locally bijective maps. For any unbounded cochain complexes L and I of R-module sheaves [def-weil-sheaf-of-modules-category], if L is K-flat [def-pc-kflat-complex] and I is K-injective [def-pur-kinjective-complex], then the actual sheaf Hom complex Hom(L,I) [def-pur-hom-complex] is K-injective. No boundedness or termwise injectivity assumption is imposed.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A96, lemma-RHom-from-K-flat-into-K-injective; its tensor-Hom and null-homotopy proof."
+ },
+ "proof": [
+  {
+   "text": "Construct the actual tensor-Hom adjunction on module sheaves from the presheaf tensor-Hom equivalence and sheafification adjunction. Naturality under both tensor inputs and the Hom target is proved componentwise; the resulting closed structure uses the existing internal Hom sheaf, without choosing a witness of an existence statement.",
+   "uses": [
+    "lem-sc-hom-tensor-degreewise-iso",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the recorded sheaf Hom complex with the monoidal internal-Hom complex degreewise. Multiply the (p,n)-component by (-1)^(p*n). The differential projection formula and the parity identities prove that these product maps and their inverses are chain maps; the product universal property gives the inverse equations.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pur-independent-ringed-tensorator-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any acyclic complex Z, K-flatness of L makes Z tensor L acyclic, and symmetry makes L tensor Z acyclic. Tensor-Hom adjunction identifies a map Z to internalHom(L,I) with a map L tensor Z to I. K-injectivity of I gives a null homotopy; the explicit cochain adjunction carries it back to a null homotopy. Hence internalHom(L,I) is K-injective, and transport across the preceding complex isomorphism proves the assertion. The argument allows arbitrary unbounded complexes, zero complexes, and an empty site.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pur-kinjective-complex",
+    "lem-pur-independent-ringed-tensorator-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-tensor-degreewise-iso",
+  "lem-pc-kflat-resolution",
+  "def-pur-hom-complex",
+  "lem-pur-independent-ringed-tensorator-existence",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A96",
+  "description": "D4 formalizes the tensor-Hom null-homotopy proof, including the signed comparison with the recorded sheaf Hom differential."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Hom complex from a K-flat complex into a K-injective complex is K-injective over a ringed site with independent universes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CochainComplex.IsKInjective",
+     "CochainComplex.isKInjective_of_injective",
+     "CochainComplex.IsKInjective.rightOrthogonal"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "K-injectivity and homotopy APIs are available, but no sheaf internal-Hom assertion at independent universes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "CochainComplex.isKInjective_of_iso",
+     "CochainComplex.IsKInjective.homotopyZero",
+     "CochainComplex.IsKInjective.eq_δ_of_cocycle"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "Provides the K-injectivity and null-homotopy APIs, but no independent-universe sheaf Hom tensor-adjunction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "isKInjective.*[Hh]om|[Hh]om.*[Kk][Ff]lat",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CochainComplex.IsKInjective.homotopyZero",
+     "CochainComplex.IsKInjective.nonempty_homotopy_zero"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "Use the existing null-homotopy API; the adopted sheaf theorem at coefficients max(c,v) does not cover max(c,v,u)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules on a ringed site the internal Hom complex from a K-flat complex into a K-injective complex is K-injective",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CochainComplex.IsKInjective",
+     "CochainComplex.IsKInjective.mk",
+     "CochainComplex.IsKInjective.rightOrthogonal",
+     "CochainComplex.isKInjective_of_iso"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "Finds the general K-injectivity and transport APIs used in the proof, but no sheaf tensor-Hom theorem with independent coefficient universes."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientHomZeroClass",
+  "date": "2026-10-21",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coef-hom-zero-cycle-class",
+   "place": "The universal derived-sections unit is invertible on Hom from K-flat sources into the fixed K-injective replacement."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KInjectiveHomComplexOfUniverses",
+  "file": "lean/Sheaf/Algebra/Homology/KInjectiveHomComplexOfUniverses.lean",
+  "declaration": "CochainComplex.isKInjective_homComplex_of_isKFlatOfUniverses",
+  "statement": "theorem isKInjective_homComplex_of_isKFlatOfUniverses\n    {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasSheafify J AddCommGrpCat.{max c v u}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]\n    {R : Sheaf J CommRingCat.{max c v u}}\n    (L I : CochainComplex (SheafOfModules.{max c v u}\n      ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R)) ℤ)\n    (hL : IsKFlatIndependentCoefficients (R := R) L) [I.IsKInjective] :\n    (homComplex (R := R) L I).IsKInjective",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261020T233114-L-894219",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261020T233114-L-894219",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
