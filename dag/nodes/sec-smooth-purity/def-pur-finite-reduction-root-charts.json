@@ -1,123 +1,168 @@
 {
-  "id": "def-pur-finite-reduction-root-charts",
-  "kind": "definition",
-  "title": "Primitive-root charts for the finite purity coefficient sources",
-  "status": "split",
-  "statement": "In [def-pur-conventions], for $1\\le m\\le n$ use the actual quotient $A_{E,n}\\to A_{E,m}$ and its derived scalar extension. Finite-Tor constructible inputs retain that property [def-weil-finite-tor-amplitude]. For every primitive $\\ell^n$ root $\\zeta$ in the fixed algebraically closed base, define the coefficient-root-line chart by $a\\mapsto a\\otimes\\zeta$ on constant sections of the finite twist [def-coefficient-twists-detailed]. Use the ordered tensor and shift composites of [def-pur-finite-reduction-chart-calculus] to obtain its $d$th shifted power chart. Comparison inverse image and intrinsic realization give the chart $Lf^*K(d)[2d]\\simeq(Lf^*K)[2d]$ for the exact source of [def-pur-smooth-purity-map]. This construction uses roots, tensor, shifts and ordinary pullback only, independently of purity or exceptional inverse image.",
-  "stmt_deps": [
+ "id": "def-pur-finite-reduction-root-charts",
+ "kind": "definition",
+ "title": "Primitive-root charts for the finite purity coefficient sources",
+ "status": "split",
+ "statement": "In [def-pur-conventions], for $1\\le m\\le n$ use the actual quotient $A_{E,n}\\to A_{E,m}$ and its derived scalar extension. Finite-Tor constructible inputs retain that property [def-weil-finite-tor-amplitude]. For every primitive $\\ell^n$ root $\\zeta$ in the fixed algebraically closed base, define the coefficient-root-line chart by $a\\mapsto a\\otimes\\zeta$ on constant sections of the finite twist [def-coefficient-twists-detailed]. Use the ordered tensor and shift composites of [def-pur-finite-reduction-chart-calculus] to obtain its $d$th shifted power chart. Comparison inverse image and intrinsic realization give the chart $Lf^*K(d)[2d]\\simeq(Lf^*K)[2d]$ for the exact source of [def-pur-smooth-purity-map]. This construction uses roots, tensor, shifts and ordinary pullback only, independently of purity or exceptional inverse image.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-pur-smooth-purity-map",
+  "def-pur-finite-reduction-chart-calculus",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.md",
+  "place": "Operation, root-line, twist and shift comparisons; finite-reduction proof"
+ },
+ "proof": [
+  {
+   "text": "For finiteReduction_preserves_ctf, apply the constructibility and same-Tor-interval clause of det-sp-scalar-extension-functor to the actual quotient ring homomorphism. The two quotient rings are finite and are killed by ell^n and ell^m, respectively: diagonalExponent_annihilates gives the zero scalar, hence its action on every ring element vanishes. Unpack and repack the bounded-constructibility and finite-Tor predicates.",
+   "uses": [
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the forward root-line map by sheafifying the linear map a ↦ a times the root section. For the inverse, compose the inverse primitive-root isomorphism with the scalar map Z/N → A and the constant-sheaf unit; the extension/restriction adjunction and sheafification give the inverse linear sheaf map. The first inverse identity is checked on constant A sections. The second is checked on pure tensors: the root sheaf map identity is checked after the primitive-root isomorphism and on constant Z/N sections, which are natural multiples of 1. Sheafification uniqueness also proves that the displayed section formula determines the isomorphism uniquely.",
+   "uses": [
     "def-pur-conventions",
-    "def-coefficient-twists-detailed",
-    "def-pur-smooth-purity-map",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the existing Tate reassociation, the tensor image of the root-power chart followed by the coefficient-unit chart, and the native tensor-unit shift comparison. These are the three required factors. Each normalization HEq fixes its factor, so equality of the factors gives uniqueness of their composite. Transport this chart through the existing intrinsic realization and shift comparison. Cache this ordered composite over an abstract coefficient ring. The normalization is its exact heterogeneous equality; the proved generic factor-normalization equivalence identifies this with the original existential three-factor presentation, without changing its meaning.",
+   "uses": [
     "def-pur-finite-reduction-chart-calculus",
-    "def-weil-finite-tor-amplitude"
-  ],
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.md",
-    "place": "Operation, root-line, twist and shift comparisons; finite-reduction proof"
-  },
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_match": null,
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Primitive root trivializations uniquely characterize canonical derived finite coefficient reduction comparisons of Tate twisted pullbacks",
-      "results": "[leansearch] OK 8 hit(s): IsPrimitiveRoot.isPrimitiveRoot_iff, IsPrimitiveRoot.iff_def, IsPrimitiveRoot.isPrimitiveRoot_iff', mem_primitiveRoots, primitiveRoots, IsPrimitiveRoot, IsPrimitiveRoot.mk, IsPrimitiveRoot.coe_units_iff. These are primitive-root facts, not the derived comparison construction.",
-      "date": "2026-10-18",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "IsPrimitiveRoot, Functor.mapIso",
-      "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.mapIso'",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "finiteReductionSourceComparison|finiteReductionRootTrivialization|OrderedPower",
-      "results": "[grep] OK 0 hit(s)",
-      "date": "2026-10-18",
-      "verdict": "no Mathlib match"
-    },
-    {
-      "tool": "grep",
-      "query": "finiteReduction(OrderedPower|SourceComparison|RootTrivialization)",
-      "results": "rg in /home/ubuntu/weil-src-slopmaster2/WeilConjectures and /home/ubuntu/weil-newtargets-shared/lean/Sheaf: no hits. tools/blueprint_refs.py search root trivialization: 0 blueprint nodes match.",
-      "date": "2026-10-18",
-      "verdict": "no project or upstream match"
-    }
-  ],
-  "created": {
-    "by": "worker",
-    "item": "thm-pur-finite-reduction-of-purity",
-    "date": "2026-10-18",
-    "group": "ND"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-pur-finite-reduction-of-purity",
-      "place": "finite-reduction proof, operation/twist/shift comparison",
-      "via": []
-    },
-    "same_as": []
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-purity-transport",
-  "lean": {
-    "module": "Sheaf.Paper.FiniteReductionRootCharts",
-    "declaration": "WeilConjectures.PurityFiniteSetting.finiteReductionSourceTrivialization",
-    "declarations": [
-      "WeilConjectures.PurityFiniteSetting.finiteReductionSetting",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionRingHom",
-      "WeilConjectures.PurityFiniteSetting.finiteReduction",
-      "WeilConjectures.PurityFiniteSetting.finiteReduction_preserves_ctf",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionAdjunction",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionExponentNeZero",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionRootSection",
-      "WeilConjectures.PurityFiniteSetting.existsUnique_finiteReductionRootTrivialization",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionRootTrivialization",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionShiftedLineChart",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionEtalePowerTrivialization",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionPowerTrivialization",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionPullback",
-      "WeilConjectures.PurityFiniteSetting.FiniteReductionFixedChartStage",
-      "WeilConjectures.PurityFiniteSetting.FiniteReductionFixedChartNormalized",
-      "WeilConjectures.PurityFiniteSetting.existsUnique_finiteReductionFixedChart",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionFixedChart",
-      "WeilConjectures.PurityFiniteSetting.finiteReductionSourceTrivialization"
-    ],
-    "file": "lean/Sheaf/Paper/FiniteReductionRootCharts.lean",
-    "statement": "def finiteReductionSourceTrivialization (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] (f : X ⟶ Y) (d : ℕ) (ζ : P.field.k) (hζ : IsPrimitiveRoot ζ P.diagonalExponent) (K : Scheme.proEtaleDerivedCategory Y P.Ring) : (P.compositionShiftedPullback f d).obj K ≅ ((P.finiteReductionPullback f).obj K)⟦2 * (d : ℤ)⟧",
-    "branch": "newtargets-dag",
-    "by": "ND",
-    "date": "2026-10-18",
-    "existing": false
-  },
-  "reviewed": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-861cad2e9",
-    "group": "ND",
-    "result": "pass",
-    "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-861cad2e9",
-    "group": "ND",
-    "result": "pass",
-    "note": "Read item, source (master + main-20261015), all 6 delivered modules, the cited declarations (SmoothPurityMap, PurityCompositionCoherence, SmoothTrace, FixedFinitePositiveCoefficientTwist, ordinary_supported_kummer, affineLine_orientation) and both replaced upstream records (map_smoothPurityIso_hom_comp takes the constituent compatibilities as hypotheses; Etale.smoothPullbackExchange takes arbitrary supplied θ/φ on the étale site; neither states its node). Lean matches every clause: main square with node directions; affine orientation; trace for general K and the unit; composition = exact RHS of smoothPurityCompositionCoherence; base change (b_□ and exchange; v arbitrary). No added hypotheses, no e|n or flatness, universes as the deps, autoImplicit off. Every ∃! spec checked true: root-chart source/base-change comparisons (roots exist since k alg closed and ℓ≠p; independent of the root choice), counit-normalised exceptional maps via a genuine adjunction, unique Kummer class. Chart HEq factor types confirmed by test compiles; tests for the two pieces resting on upstream smoothPurityTensorPresentation timed out at 60 s (project's propositional-equality pattern). No hollow defs; theorems sorry. Records verbatim; stmt_deps additions allowed; report sections present; docstrings present. nt_compile of all 6 modules clean (6.5–24.3 s). Notes: finiteReductionPurityIsIso duplicates landed isIso_smoothPurityMap (not citable: dependency stmt_deps fixed in S2); new nodes use plain defs from PurityCompositionCoherence without citing thm-pur-composition-coherence (item already cites it); new orientation should be identified with affineLine_orientation (e|n only) in stage 3; proof-only imports; global Sheaf.monoidalCategory has precedent."
+    "def-pur-smooth-purity-map"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "det-sp-scalar-extension-functor",
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-pur-finite-reduction-chart-calculus",
+  "def-pur-smooth-purity-map"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "D8",
+  "date": "2026-10-19",
+  "source": "Existing declaration docstrings and the finite-reduction source; explicit scalar-extension, sheafification, and generic ordered-composite arguments."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Primitive root trivializations uniquely characterize canonical derived finite coefficient reduction comparisons of Tate twisted pullbacks",
+   "results": "[leansearch] OK 8 hit(s): IsPrimitiveRoot.isPrimitiveRoot_iff, IsPrimitiveRoot.iff_def, IsPrimitiveRoot.isPrimitiveRoot_iff', mem_primitiveRoots, primitiveRoots, IsPrimitiveRoot, IsPrimitiveRoot.mk, IsPrimitiveRoot.coe_units_iff. These are primitive-root facts, not the derived comparison construction.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPrimitiveRoot, Functor.mapIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.mapIso'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteReductionSourceComparison|finiteReductionRootTrivialization|OrderedPower",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteReduction(OrderedPower|SourceComparison|RootTrivialization)",
+   "results": "rg in /home/ubuntu/weil-src-slopmaster2/WeilConjectures and /home/ubuntu/weil-newtargets-shared/lean/Sheaf: no hits. tools/blueprint_refs.py search root trivialization: 0 blueprint nodes match.",
+   "date": "2026-10-18",
+   "verdict": "no project or upstream match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-finite-reduction-of-purity",
+  "date": "2026-10-18",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "finite-reduction proof, operation/twist/shift comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteReductionRootCharts",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReductionSourceTrivialization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteReductionChartComposite",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionSetting",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionRingHom",
+   "WeilConjectures.PurityFiniteSetting.finiteReduction",
+   "WeilConjectures.PurityFiniteSetting.finiteReduction_preserves_ctf",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionAdjunction",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionExponentNeZero",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionRootSection",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_finiteReductionRootTrivialization",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionRootTrivialization",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionShiftedLineChart",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionEtalePowerTrivialization",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionPowerTrivialization",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionPullback",
+   "WeilConjectures.PurityFiniteSetting.FiniteReductionFixedChartStage",
+   "WeilConjectures.PurityFiniteSetting.FiniteReductionFixedChartNormalized",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_finiteReductionFixedChart",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionFixedChart",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionSourceTrivialization"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteReductionRootCharts.lean",
+  "statement": "def finiteReductionSourceTrivialization (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] (f : X ⟶ Y) (d : ℕ) (ζ : P.field.k) (hζ : IsPrimitiveRoot ζ P.diagonalExponent) (K : Scheme.proEtaleDerivedCategory Y P.Ring) : (P.compositionShiftedPullback f d).obj K ≅ ((P.finiteReductionPullback f).obj K)⟦2 * (d : ℤ)⟧",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-861cad2e9",
+  "group": "ND",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-861cad2e9",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read item, source (master + main-20261015), all 6 delivered modules, the cited declarations (SmoothPurityMap, PurityCompositionCoherence, SmoothTrace, FixedFinitePositiveCoefficientTwist, ordinary_supported_kummer, affineLine_orientation) and both replaced upstream records (map_smoothPurityIso_hom_comp takes the constituent compatibilities as hypotheses; Etale.smoothPullbackExchange takes arbitrary supplied θ/φ on the étale site; neither states its node). Lean matches every clause: main square with node directions; affine orientation; trace for general K and the unit; composition = exact RHS of smoothPurityCompositionCoherence; base change (b_□ and exchange; v arbitrary). No added hypotheses, no e|n or flatness, universes as the deps, autoImplicit off. Every ∃! spec checked true: root-chart source/base-change comparisons (roots exist since k alg closed and ℓ≠p; independent of the root choice), counit-normalised exceptional maps via a genuine adjunction, unique Kummer class. Chart HEq factor types confirmed by test compiles; tests for the two pieces resting on upstream smoothPurityTensorPresentation timed out at 60 s (project's propositional-equality pattern). No hollow defs; theorems sorry. Records verbatim; stmt_deps additions allowed; report sections present; docstrings present. nt_compile of all 6 modules clean (6.5–24.3 s). Notes: finiteReductionPurityIsIso duplicates landed isIso_smoothPurityMap (not citable: dependency stmt_deps fixed in S2); new nodes use plain defs from PurityCompositionCoherence without citing thm-pur-composition-coherence (item already cites it); new orientation should be identified with affineLine_orientation (e|n only) in stage 3; proof-only imports; global Sheaf.monoidalCategory has precedent."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261020T051152-L-1584661",
+  "kind": "interface"
+ }
 }
