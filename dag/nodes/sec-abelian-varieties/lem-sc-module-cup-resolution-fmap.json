@@ -23,15 +23,16 @@
    "elementary": true
   },
   {
-   "text": "Keep D.I and E.I. Reuse the nonnegative injective replacement and augmentation lifting construction of ModuleCohomologyFMap to replace the termwise pushforward of E.I by J and lift the coefficient map from D.I to J. Its sections quasi-isomorphism and canonical sections isomorphism supply C : ModuleCohomologyFMapData with these fixed resolutions. Independence identifies C.map with the defined cohomology f-map.",
+   "text": "Use the system C already selected by moduleCohomologyFMap. Lift the identities from D.I to C.J and from E.I to C.I with InjectiveResolution.desc. Composing with D.comparison and E.comparison gives maps from the computing resolutions to these fixed injective resolutions. The resolutionSectionsIso naturality identity follows from isoRightDerivedObj_hom_naturality and mapHomologyIso_inv_naturality.",
    "uses": [
+    "def-sc-module-cup-resolution-data",
     "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-module-cohomology-fmap-functorial"
+    "def-sp-injective-resolutions"
    ],
    "elementary": false
   },
   {
-   "text": "The two maps D.K to J agree on the augmentation by u's augmentation equation and D.over and E.over. Construct their homotopy explicitly: descend the degree-zero difference across the exact augmentation short complex by injectivity; at the next degree subtract the previous homotopy term and descend by exactness and injectivity again. Inductively the cochain equations and d composed with d equal to zero give the necessary vanishing. Apply global sections and homology to get equality of the two homology composites.",
+   "text": "The two maps D.K to C.K, obtained via D.comparison, the identity lift and C.beta, or via u, the pushforward of E.comparison and the identity lift, and C.lambda, agree on the augmentation by hu, D.over, E.over and C.compatible. Construct their homotopy explicitly: descend the degree-zero difference across the exact augmentation short complex by injectivity; at the next degree subtract the previous homotopy term and descend by exactness and injectivity again. Inductively the cochain equations and d composed with d equal to zero give the necessary vanishing. Apply global sections and homology to get equality of the two homology composites.",
    "uses": [
     "def-sc-module-cup-resolution-data",
     "def-sp-injective-resolutions"
@@ -39,7 +40,7 @@
    "elementary": false
   },
   {
-   "text": "The sections isomorphisms commute with E.comparison by presheaf naturality. Combine with the homotopy equality, and evaluate on the source cycle. The natural cycles map and homology projection identify its image with the target kernel cycle across scalar rings. The natural forgetting-scalars homology isomorphisms identify the stored class formulas. Cancel the replacement homology isomorphism and the two injective-resolution identifications to obtain the asserted equation.",
+   "text": "The sections isomorphisms commute with the comparison from E.K to C.I by presheaf naturality; C.sections identifies C.a with the canonical sections isomorphism. Combine this with the homotopy equality and naturality of the injective-resolution identifications. Cancel the invertible replacement homology map to obtain the equality of maps on additive global homology. Naturality of the cycles map and homology projection identifies the image of the source cycle with the specified target cycle, across scalar rings. Naturality of mapHomologyIso identifies the resulting formulas with D.class and E.class, giving the asserted equation.",
    "uses": [
     "def-sc-module-cup-resolution-data"
    ],
@@ -49,13 +50,12 @@
  "proof_deps": [
   "def-sc-module-cup-resolution-data",
   "def-weil-pbc-module-cohomology-fmap",
-  "lem-weil-pbc-module-cohomology-fmap-functorial",
   "def-sp-injective-resolutions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01FD",
-  "place": "cohomology-lemma-functoriality-cech, injective resolution comparison diagram; Remark 01FB; E1 explicit construction and comparison argument"
+  "place": "cohomology-lemma-functoriality-cech, injective resolution comparison diagram; Remark 01FB; M1 compares directly with the choices in moduleCohomologyFMap, using augmented homotopy and naturality of resolution and scalar-forgetting identifications"
  },
  "mathlib_searches": [
   {
@@ -136,13 +136,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261014T033104-L-603179",
-  "kind": "interface",
+  "landing": "20261020T145524-L-2406615",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
