@@ -82,20 +82,21 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback",
-  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawTrianglePullback.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTrianglePullbackExtension",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/HigherDirectImageRawTrianglePullbackExtension.lean",
   "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawTrianglePullback_restriction",
   "statement": "theorem higherDirectImageRawTrianglePullback_restriction (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}} (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (K' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (v : D+((a)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ K') (U : S.Etale) (z : (higherDirectImagePresheaf Λ h q K).obj (op U)) (T : S.Etale) (b : T ⟶ U) : higherDirectImageRawTrianglePullback Λ a h h' w q K K' v T ((higherDirectImagePresheaf Λ h q K).map b.op z) = (higherDirectImagePresheaf Λ h' q K').map b.op (higherDirectImageRawTrianglePullback Λ a h h' w q K K' v U z)",
   "branch": "sheaf-dag",
-  "by": "E2",
-  "date": "2026-10-12",
+  "by": "D2",
+  "date": "2026-10-20",
   "declarations": [
    "AlgebraicGeometry.Etale.higherDirectImageRawTrianglePullback_restriction",
    "AlgebraicGeometry.Etale.rawTriangleSource",
    "AlgebraicGeometry.Etale.rawTriangleMap",
    "AlgebraicGeometry.Etale.higherDirectImageRawTrianglePullback"
-  ]
+  ],
+  "note": "The upstream extension defines rawTriangleSource verbatim and publicly imports the upstream triangle module providing the remaining declarations. The Sheaf path re-exports this combined API."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -108,14 +109,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-4376a",
-  "group": "W4",
+  "reviewer": "C-37f71",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261014T164643-L-2302992",
+  "landing": "20261020T153746-L-2987711",
   "kind": "interface",
-  "note": "independent Codex review: Delivered packet, DAG nodes, Lean files, proofs, forced adaptations, and reader importers matched and compiled against the changed overlay."
+  "note": "independent cc review: 8 Sheaf shims vs their WeilConjectures twins (source diff: same signatures, defs identical up to rawTriangleMap associativity), 12 node lean repoints vs upstream declarations, delivered --all compile + 13 direct importers compiled against delivery, axioms clean"
  },
  "lean_audit": {
   "master": {

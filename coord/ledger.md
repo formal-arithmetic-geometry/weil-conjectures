@@ -18552,3 +18552,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:30 L: returned deliver/P7/Sheaf.AlgebraicGeometry.DerivedPullbackCompositionLocalizedCounit (reviewer RETURN: (reviewer C-35952, head 35952e6c2) H4: lean/Sheaf/AlgebraicGeometry/DerivedPullbackCompositionCounitNormalization.lean ()
 
 - 23:35 L: batch 20261020T152943 dependency take-out
+- 15:37 L: merged deliver/D2/Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram (stage 3; reviewer PASS; first push; landing 20261020T153746-L-2987711 (interface); batch 20261020T153742; modules 12; new nodes 0; change records: coord/changes/D2-raw-cohomology-canonical-upstream.md)

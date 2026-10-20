@@ -75,14 +75,15 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison",
+  "module": "WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison",
   "declaration": "AlgebraicGeometry.Etale.moduleAbelianForget",
   "branch": "newtargets-dag",
-  "by": "Q72",
-  "date": "2026-10-18",
+  "by": "D2",
+  "date": "2026-10-20",
   "existing": true,
-  "note": "The published comparison module defines the exact sectionwise forgetful functor before its theorem; no delivery module is needed.",
-  "statement": "abbrev moduleAbelianForget (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})"
+  "note": "Canonical upstream declaration after the 2026-10-20 sync; the old Sheaf module re-exports it. No mathematical statement, proof dependency, or unit route is withdrawn.",
+  "statement": "abbrev moduleAbelianForget (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ModuleAbelianCoefficientComparison.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -99,5 +100,15 @@
   "group": "Q72",
   "result": "pass",
   "note": "Re-delivery after d22a5c0338c1 (PASS, landing failed because two proof_deps were in no step's uses). Diffed the full snapshot against d22a: the only changes are Step 6 citing lem-sp-grothendieck-edge-maps (its left edge R^n(GF)->G R^nF is the grothendieckLeftEdgeMap used in relativeSupportEdge), Step 8 citing lem-weil-pbc-module-abelian-derived-direct-image-comparison (holds for any f and any Lambda, so it applies to the open complement), the matching uses, statement_change.old_proof plus an extended 'what', and two docstring lines in the module (no signature change). proof_deps now equals the union of uses exactly; steps are under 2000 chars; old_proof/old_statement/old_stmt_deps/old_proof_deps equal the live/side base exactly; both citers hold, statement mathematically unchanged. Re-checked hypotheses (frame = Ideal.span of the c functions via IsPullback, ringKrullDim codimension, smooth/etale/closed immersion) and all six clauses against the node; edge cases c=0, empty cover, negative r, no universe restriction. Statement verbatim, 36 declarations match, 16/16 proofs sorry, docstrings ok. nt_compile --json exit 0 in 16.4 s, no diagnostics."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-37f71",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T153746-L-2987711",
+  "kind": "interface",
+  "note": "independent cc review: 8 Sheaf shims vs their WeilConjectures twins (source diff: same signatures, defs identical up to rawTriangleMap associativity), 12 node lean repoints vs upstream declarations, delivered --all compile + 13 direct importers compiled against delivery, axioms clean"
  }
 }

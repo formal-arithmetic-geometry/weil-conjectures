@@ -1,198 +1,199 @@
 {
-  "id": "sbc-lem-higher-direct-image-presheaf",
-  "blueprint": {
-    "is": "sbc-lem-higher-direct-image-presheaf",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Higher direct image as a sheafified cohomology presheaf",
-  "statement": "Let $h:Y\\to X$ be a morphism of schemes and $F\\in\\Ab(Y_{\\Et})$. Then\n$R^qh_*F$ is the sheaf associated with the presheaf\n\n$$\n(U\\to X)\\longmapsto H^q\\bigl(U\\times_XY,F|_{U\\times_XY}\\bigr)\n$$\n\non $X_{\\Et}$; more generally for $K\\in\\Dplus(Y_{\\Et})$ the cohomology sheaf\n$R^qh_*K$ is associated with $U\\mapsto H^q(U\\times_XY,K|_{U\\times_XY})$.\n(*Stacks Project, Lemma Tag 03Q8.*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-higher-direct-image-presheaf.md",
-    "place": "node sbc-lem-higher-direct-image-presheaf, order 1388",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 03Q8"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-derived-categories"
-  ],
-  "proof": [
-    {
-      "text": "Let A(U) be the sheafification of the free abelian presheaf on the representable U. The free-forgetful adjunction, the sheafification adjunction and Yoneda give Hom(A(U),G) = G(U), naturally in both U and G. The exact pullback functor commutes with single complexes; the bounded below derived adjunction therefore identifies the displayed presheaf with U ↦ Hom(A(U)[0], Rh_*(K[q])). This is the Lean isomorphism higherDirectImagePresheafIso, assembled from mapDerivedCategoryPlusSingleFunctor and Adjunction.derivedPlus.",
-      "uses": [
-        "def-weil-pbc-derived-inverse-image",
-        "prop-weil-pbc-derived-inverse-image-adjunction",
-        "def-weil-pbc-direct-image",
-        "def-weil-pbc-sheafification"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Lemma Tag 072W proof; Tag 03Q8 etale specialization; derived-adjunction reformulation of the sectionwise comparison"
-      }
-    },
-    {
-      "text": "For any bounded below derived object L on X_et, choose a bounded below K-injective representative M. The natural map Hom(A(U)[0],L) → H^0(L)(U) is locally surjective: the epimorphism Z^0(M) → H^0(M) is locally surjective, so a section locally lifts to a cycle; the free-sheaf Hom equivalence turns that cycle into a morphism of complexes A(U)[0] → M. It is locally injective: represent the difference of two maps by a chain map f using K-injectivity. If its cohomology section is zero, its cycle map factors through the kernel of Z^0(M) → H^0(M). The epimorphism from M^{-1} onto this kernel locally lifts that factorization, giving a local b with f^0 = b d^{-1}. The explicitly constructed single-complex homotopy then makes the local derived morphism zero. Naturality transports both properties along Q(M) ≅ L. These arguments are the private local comparison lemmas in the delivered module and use the K-injective fully faithful comparison, not restriction of injectives to U.",
-      "uses": [
-        "lem-weil-pbc-dplus-injective-representative",
-        "lem-weil-pbc-kinjective-hom-derived"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Lemma Tag 0BKV proof, K-injective sectionwise cycles and boundaries; Tag 03Q8"
-      }
-    },
-    {
-      "text": "A locally injective and locally surjective map P → G from a presheaf to a sheaf induces an isomorphism P^# ≅ G: its adjoint ψ satisfies η_P ≫ ψ = φ, and local surjectivity of η_P transfers local injectivity and local surjectivity to ψ; Mathlib Sheaf.isLocallyBijective_iff_isIso gives invertibility. Apply this to the preceding comparison for L = Rh_*(K[q]), and apply sheafification to the adjunction presheaf isomorphism from the first step. Compose with the shift isomorphisms H^0(Rh_*(K[q])) ≅ H^0((Rh_*K)[q]) ≅ H^q(Rh_*K). The sheaf clause is the specialization K = F[0].",
-      "uses": [
-        "def-weil-pbc-sheafification",
-        "lem-weil-pbc-derived-direct-image-triangulated"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Lemma Tag 072W proof, cohomology sheaf paragraph; Tag 03Q8"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "sbc-lem-higher-direct-image-presheaf",
+ "blueprint": {
+  "is": "sbc-lem-higher-direct-image-presheaf",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Higher direct image as a sheafified cohomology presheaf",
+ "statement": "Let $h:Y\\to X$ be a morphism of schemes and $F\\in\\Ab(Y_{\\Et})$. Then\n$R^qh_*F$ is the sheaf associated with the presheaf\n\n$$\n(U\\to X)\\longmapsto H^q\\bigl(U\\times_XY,F|_{U\\times_XY}\\bigr)\n$$\n\non $X_{\\Et}$; more generally for $K\\in\\Dplus(Y_{\\Et})$ the cohomology sheaf\n$R^qh_*K$ is associated with $U\\mapsto H^q(U\\times_XY,K|_{U\\times_XY})$.\n(*Stacks Project, Lemma Tag 03Q8.*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-higher-direct-image-presheaf.md",
+  "place": "node sbc-lem-higher-direct-image-presheaf, order 1388",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03Q8"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Let A(U) be the sheafification of the free abelian presheaf on the representable U. The free-forgetful adjunction, the sheafification adjunction and Yoneda give Hom(A(U),G) = G(U), naturally in both U and G. The exact pullback functor commutes with single complexes; the bounded below derived adjunction therefore identifies the displayed presheaf with U ↦ Hom(A(U)[0], Rh_*(K[q])). This is the Lean isomorphism higherDirectImagePresheafIso, assembled from mapDerivedCategoryPlusSingleFunctor and Adjunction.derivedPlus.",
+   "uses": [
     "def-weil-pbc-derived-inverse-image",
     "prop-weil-pbc-derived-inverse-image-adjunction",
     "def-weil-pbc-direct-image",
-    "def-weil-pbc-sheafification",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W proof; Tag 03Q8 etale specialization; derived-adjunction reformulation of the sectionwise comparison"
+   }
+  },
+  {
+   "text": "For any bounded below derived object L on X_et, choose a bounded below K-injective representative M. The natural map Hom(A(U)[0],L) → H^0(L)(U) is locally surjective: the epimorphism Z^0(M) → H^0(M) is locally surjective, so a section locally lifts to a cycle; the free-sheaf Hom equivalence turns that cycle into a morphism of complexes A(U)[0] → M. It is locally injective: represent the difference of two maps by a chain map f using K-injectivity. If its cohomology section is zero, its cycle map factors through the kernel of Z^0(M) → H^0(M). The epimorphism from M^{-1} onto this kernel locally lifts that factorization, giving a local b with f^0 = b d^{-1}. The explicitly constructed single-complex homotopy then makes the local derived morphism zero. Naturality transports both properties along Q(M) ≅ L. These arguments are the private local comparison lemmas in the delivered module and use the K-injective fully faithful comparison, not restriction of injectives to U.",
+   "uses": [
     "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0BKV proof, K-injective sectionwise cycles and boundaries; Tag 03Q8"
+   }
+  },
+  {
+   "text": "A locally injective and locally surjective map P → G from a presheaf to a sheaf induces an isomorphism P^# ≅ G: its adjoint ψ satisfies η_P ≫ ψ = φ, and local surjectivity of η_P transfers local injectivity and local surjectivity to ψ; Mathlib Sheaf.isLocallyBijective_iff_isIso gives invertibility. Apply this to the preceding comparison for L = Rh_*(K[q]), and apply sheafification to the adjunction presheaf isomorphism from the first step. Compose with the shift isomorphisms H^0(Rh_*(K[q])) ≅ H^0((Rh_*K)[q]) ≅ H^q(Rh_*K). The sheaf clause is the specialization K = F[0].",
+   "uses": [
+    "def-weil-pbc-sheafification",
     "lem-weil-pbc-derived-direct-image-triangulated"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
-    "place": "Adapted DerivedSections and higherDirectImagePresheafIso to abelian coefficients, generic site helpers, and composition of sheafification and shift isomorphisms; Stacks 072W/03Q8."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "higher direct image sheafification of presheaf of cohomology for a morphism of sites",
-      "results": "sheafification declarations only; no higher direct image theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Sheaf",
-      "results": "none",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rn -i 'higher direct image\\|directImage.*rightDerived\\|pushforward.*rightDerived' Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry",
-      "results": "none",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1388,
-  "blueprint_uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-cohomology"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-lem-failure-field",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "sbc-lem-higher-direct-image-presheaf",
-    "worker": "stage1",
-    "summary": "Expanded the imported proof into the Stacks 03Q8 morphism-of-sites argument. The sheaf clause cites the item source directly; the derived-complex clause is written from the direct-image definition, K-injective resolution, and exact sheafification. No new nodes were needed.",
-    "blueprint": "The three steps realize the blueprint proof sentence invoking Stacks 03Q8: site-level sheafification for F, the K-injective extension to K, and the exact sheafification/cohomology identification.",
-    "tool_uses": []
-  },
-  "tool_uses": [
-    "prop-weil-pbc-inverse-image-exact"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-hdp2541",
-    "group": "G1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hdp2541 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 03Q8 (orientation, both clauses); class b: lem-weil-pbc-higher-direct-image-presheaf is the Zariski/O_X-module 01E4 version, sites differ, no restatement; downstream users (sbc-lem-higher-direct-image-limit, sbc-thm-universal-test-vanishing, lem-weil-pbc-unrestricted-strict-henselization-stalk) use only the sheaf clause. FIX more, RETURN less: (1) C1 steps 1-2: H^q(I(U x_X Y)) = H^q(U x_X Y, F|) needed that restriction v^{-1} along the etale W->Y is exact and keeps injectives, and Gamma(W,v^{-1}I)=I(W); now cited prop-weil-pbc-inverse-image-exact (generic tool), lem-weil-pbc-etale-restriction-injectives, lem-weil-pbc-dplus-injective-representative (bounded below injectives are K-injective), lem-weil-pbc-etale-inverse-image-restriction (1); steps 1-2 merged into one resolution step plus one restriction step; (2) stmt_deps: removed lem-weil-pbc-qcqs-higher-direct-image (whose own proof cites this item: cycle risk, and the statement uses neither) and lem-weil-pbc-site-higher-direct-image-sheafified-presheaf; added def-weil-pbc-derived-categories; (3) E7 statement D(Y_Et) -> D^+(Y_Et) to match the D^+-only definitions the proof uses.; 1 file(s) fixed by the reviewer"
-  },
-  "lead_note": "2026-10-10 L (R-hdp2541): Statement complex clause narrowed from D(Y_Et) to D^+(Y_Et) (E7): the project's Rh_* (def-weil-pbc-direct-image) and H^q(T,K) (def-weil-pbc-etale-cohomology) are defined only on D^+, and no consumer uses unbounded K. Not a restatement of lem-weil-pbc-higher-direct-image-presheaf (Zariski site, O_X-modules, Stacks 01E4); different site. Tool use prop-weil-pbc-inverse-image-exact (exactness of etale inverse image) accepted as a generic tool (C7).",
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf",
-    "declaration": "AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafification_abelian",
-    "declarations": [
-      "AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafification_abelian",
-      "AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafification_abelian_single"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/AbelianHigherDirectImagePresheaf.lean",
-    "statement": "theorem nonempty_higherDirectImage_iso_sheafification_abelian {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) : Nonempty ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (((uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙ presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ upperStar AddCommGrpCat.{u + 1} h ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj (K⟦q⟧))) ≅ (DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h).obj K))",
-    "branch": "sheaf-dag",
-    "by": "N1",
-    "date": "2026-10-11",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "AUTO",
-    "group": "N1",
-    "result": "pass",
-    "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-dc6e3",
-    "group": "A3",
-    "result": "pass",
-    "landing": "20261012T060730-L-2903589",
-    "kind": "interface",
-    "note": "independent Codex review: Both public signatures are byte-identical to the library; the derived-adjunction, local cycles-and-boundaries, and shift proofs match the node metadata. Compilation is clean, and both axiom closures contain only propext, Classical.choice, and Quot.sound."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $h:Y\\to X$ be a morphism of schemes and $F\\in\\Ab(Y_{\\Et})$. Then\n$R^qh_*F$ is the sheaf associated with the presheaf\n\n$$\n(U\\to X)\\longmapsto H^q\\bigl(U\\times_XY,F|_{U\\times_XY}\\bigr)\n$$\n\non $X_{\\Et}$; more generally for $K\\in D(Y_{\\Et})$ the cohomology sheaf\n$R^qh_*K$ is associated with $U\\mapsto H^q(U\\times_XY,K|_{U\\times_XY})$.",
-    "proof": [
-      {
-        "text": "The cohomology of\n[def-weil-pbc-etale-cohomology] of the fibre products\n$U\\times_XY$ computes the sections of the higher direct images of\n[def-weil-pbc-direct-image] on the basis of etale $U\\to X$; both\nthe direct image and the associated sheaf have the same\nsheafification, which is the statement.",
-        "uses": [
-          "def-weil-pbc-etale-cohomology",
-          "def-weil-pbc-direct-image"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W proof, cohomology sheaf paragraph; Tag 03Q8"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-inverse-image",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-derived-direct-image-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
+  "place": "Adapted DerivedSections and higherDirectImagePresheafIso to abelian coefficients, generic site helpers, and composition of sheafification and shift isomorphisms; Stacks 072W/03Q8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image sheafification of presheaf of cohomology for a morphism of sites",
+   "results": "sheafification declarations only; no higher direct image theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Sheaf",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'higher direct image\\|directImage.*rightDerived\\|pushforward.*rightDerived' Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1388,
+ "blueprint_uses": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "sbc-lem-higher-direct-image-presheaf",
+  "worker": "stage1",
+  "summary": "Expanded the imported proof into the Stacks 03Q8 morphism-of-sites argument. The sheaf clause cites the item source directly; the derived-complex clause is written from the direct-image definition, K-injective resolution, and exact sheafification. No new nodes were needed.",
+  "blueprint": "The three steps realize the blueprint proof sentence invoking Stacks 03Q8: site-level sheafification for F, the K-injective extension to K, and the exact sheafification/cohomology identification.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hdp2541",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hdp2541 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 03Q8 (orientation, both clauses); class b: lem-weil-pbc-higher-direct-image-presheaf is the Zariski/O_X-module 01E4 version, sites differ, no restatement; downstream users (sbc-lem-higher-direct-image-limit, sbc-thm-universal-test-vanishing, lem-weil-pbc-unrestricted-strict-henselization-stalk) use only the sheaf clause. FIX more, RETURN less: (1) C1 steps 1-2: H^q(I(U x_X Y)) = H^q(U x_X Y, F|) needed that restriction v^{-1} along the etale W->Y is exact and keeps injectives, and Gamma(W,v^{-1}I)=I(W); now cited prop-weil-pbc-inverse-image-exact (generic tool), lem-weil-pbc-etale-restriction-injectives, lem-weil-pbc-dplus-injective-representative (bounded below injectives are K-injective), lem-weil-pbc-etale-inverse-image-restriction (1); steps 1-2 merged into one resolution step plus one restriction step; (2) stmt_deps: removed lem-weil-pbc-qcqs-higher-direct-image (whose own proof cites this item: cycle risk, and the statement uses neither) and lem-weil-pbc-site-higher-direct-image-sheafified-presheaf; added def-weil-pbc-derived-categories; (3) E7 statement D(Y_Et) -> D^+(Y_Et) to match the D^+-only definitions the proof uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-hdp2541): Statement complex clause narrowed from D(Y_Et) to D^+(Y_Et) (E7): the project's Rh_* (def-weil-pbc-direct-image) and H^q(T,K) (def-weil-pbc-etale-cohomology) are defined only on D^+, and no consumer uses unbounded K. Not a restatement of lem-weil-pbc-higher-direct-image-presheaf (Zariski site, O_X-modules, Stacks 01E4); different site. Tool use prop-weil-pbc-inverse-image-exact (exactness of etale inverse image) accepted as a generic tool (C7).",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImagePresheaf",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafification_abelian",
+  "declarations": [
+   "AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafification_abelian",
+   "AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafification_abelian_single"
+  ],
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AbelianHigherDirectImagePresheaf.lean",
+  "statement": "theorem nonempty_higherDirectImage_iso_sheafification_abelian {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) : Nonempty ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (((uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙ presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ upperStar AddCommGrpCat.{u + 1} h ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj (K⟦q⟧))) ≅ (DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h).obj K))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-20",
+  "existing": true,
+  "note": "Canonical upstream declaration after the 2026-10-20 sync; the old Sheaf module re-exports it. No mathematical statement, proof dependency, or unit route is withdrawn."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-37f71",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T153746-L-2987711",
+  "kind": "interface",
+  "note": "independent cc review: 8 Sheaf shims vs their WeilConjectures twins (source diff: same signatures, defs identical up to rawTriangleMap associativity), 12 node lean repoints vs upstream declarations, delivered --all compile + 13 direct importers compiled against delivery, axioms clean"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $h:Y\\to X$ be a morphism of schemes and $F\\in\\Ab(Y_{\\Et})$. Then\n$R^qh_*F$ is the sheaf associated with the presheaf\n\n$$\n(U\\to X)\\longmapsto H^q\\bigl(U\\times_XY,F|_{U\\times_XY}\\bigr)\n$$\n\non $X_{\\Et}$; more generally for $K\\in D(Y_{\\Et})$ the cohomology sheaf\n$R^qh_*K$ is associated with $U\\mapsto H^q(U\\times_XY,K|_{U\\times_XY})$.",
+  "proof": [
+   {
+    "text": "The cohomology of\n[def-weil-pbc-etale-cohomology] of the fibre products\n$U\\times_XY$ computes the sections of the higher direct images of\n[def-weil-pbc-direct-image] on the basis of etale $U\\to X$; both\nthe direct image and the associated sheaf have the same\nsheafification, which is the statement.",
+    "uses": [
+     "def-weil-pbc-etale-cohomology",
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }
