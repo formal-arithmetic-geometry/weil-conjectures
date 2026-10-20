@@ -428,7 +428,7 @@ def reconcile(commit: bool = True) -> int:
 TRIED = ROOT / "local" / "rework-tried.json"   # module -> blob of the quarantined text autorestore compiled without success
 
 
-def autorestore(workers: int = 4, limit: int = 60) -> int:
+def autorestore(workers: int = 4, limit: int = 60, recheck: bool = False) -> int:
     """The human, 2026-10-20: once a root is back, its dependents are no longer the cluster worker's job. Every rework
     module that imports no open rework module any more (a new root) and that no group has claimed is compiled as it
     is, alone, against the last green build (tools/lean_file.sh, 60 s, private mirror RW); those that compile go back
@@ -451,7 +451,8 @@ def autorestore(workers: int = 4, limit: int = 60) -> int:
         return hashlib.sha1(p.read_bytes()).hexdigest() if p.is_file() else None
     claimed = lambda m: (ROOT / "coord" / "claims" / (m + ".lock")).is_file()   # noqa: E731
     cand = sorted(m for m in live if not (rimp.get(m, set()) - {m}) and not claimed(m)
-                  and tried.get(m) != blob(m) and not (rows[m].get("cause") or "").startswith("error:"))[:limit]
+                  and tried.get(m) != blob(m) and (not (rows[m].get("cause") or "").startswith("error:")
+                                                   or (recheck and "no message located" in rows[m].get("cause", ""))))[:limit]
     if not cand:
         return 0
     box = li.LEAN / ".sandbox" / "rework"
@@ -463,8 +464,13 @@ def autorestore(workers: int = 4, limit: int = 60) -> int:
         r = subprocess.run(["bash", str(ROOT / "tools" / "lean_file.sh"), str(dst)], cwd=ROOT, capture_output=True, text=True,
                            env=dict(os.environ, SHEAF_GROUP="RW"), timeout=900)
         out = r.stdout + r.stderr
-        errs = [l for l in out.splitlines() if ": error" in l or l.startswith("error")]
-        return m, r.returncode == 0 and not errs, (errs[0] if errs else out.strip().splitlines()[-1:] or ["?"])[0] if not (r.returncode == 0 and not errs) else ""
+        lines = out.splitlines()
+        k = next((i for i, l in enumerate(lines) if ": error" in l or l.startswith("error")), None)
+        good = r.returncode == 0 and k is None
+        if good:
+            return m, True, ""
+        msg = " | ".join(x.strip() for x in lines[k:k + 4]) if k is not None else (lines[-1] if lines else "?")
+        return m, False, msg.replace(str(box) + "/", "")
     t = time.time()
     with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
         res = list(ex.map(compile_one, cand))
@@ -512,7 +518,9 @@ def main() -> int:
     if cmd == "reconcile":
         reconcile(); return 0
     if cmd == "autorestore":
-        autorestore(); return 0
+        autorestore(workers=int(a[a.index("--workers") + 1]) if "--workers" in a else 4,
+                    limit=int(a[a.index("--limit") + 1]) if "--limit" in a else 60,
+                    recheck="--recheck-unlocated" in a); return 0
     if cmd == "status":
         t = time.time()
         rows = load()
