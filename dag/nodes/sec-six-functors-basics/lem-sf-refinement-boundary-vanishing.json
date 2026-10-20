@@ -1,0 +1,197 @@
+{
+ "id": "lem-sf-refinement-boundary-vanishing",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-refinement",
+   "place": "(2) Isomorphism: only the all-continuous-map algebraic-closure coefficient case of the generator closed-complement calculation in parent proof step 5.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Boundary vanishing for continuous algebraic-closure constructible sheaves",
+ "statement": "Let $\\ell$ be prime and $k$ a field of characteristic $p>0$ with $p\\ne\\ell$. Let $\\Lambda$ be a commutative condensed coefficient ring isomorphic, as a ring object, to the all-continuous-map ring $S\\mapsto C(S,\\overline{\\mathbf Q}_\\ell)$ for the valuation topology on the fixed algebraic closure of $\\mathbf Q_\\ell$. This is the continuous coefficient construction of [def-weil-pbc-condensed-e-module-category], and is not identified with its finite-subextension-valued subsheaf. Let $X,Y$ be separated finite-type $k$-schemes in the universe convention [def-weil-size-convention], and $f:X\\to Y$ a separated finite-type $k$-morphism [sk-def-sfb-dc-setting]. Let $c=(X\\xrightarrow{j}Z\\xrightarrow{q}Y)$ and $d=(X\\xrightarrow{j\\prime}Z\\prime\\xrightarrow{q\\prime}Y)$ be dense compactifications with quasi-compact open immersions, and $r:d\\to c$ a boundary-preserving refinement: its ambient proper map $h:Z\\prime\\to Z$ satisfies $j\\prime h=j$, $hq=q\\prime$, and $h^{-1}(j(X))=j\\prime(X)$ [sk-def-nagata-sketch-data]. Put $i:B\\hookrightarrow Z$ equal to the reduced complementary closed immersion. In the ordinary unbounded module-object derived categories [sk-def-sfb-module-derived-pushpull], for every constructible module sheaf $M$ with finite constant scalar models [sk-def-sfb-constructible], one has $D(i^*)\\mathbf R h_*D(j\\prime_!)(M[0])\\simeq0$. Here the exact inverse image and extension by zero are the module operations of [sk-def-sfb-module-pushforward-pullback] and [sk-def-sfb-module-lower-shriek]. No assertion about a refinement comparison morphism or the localizing closure is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2) Isomorphism: only the all-continuous-map algebraic-closure coefficient case of the generator closed-complement calculation in parent proof step 5."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-size-convention",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-nagata-sketch-data",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Let i be the reduced closed complement of j and form its pullback along the proper refinement h. The inverse-image-open equality in the boundary-refinement definition identifies the underlying closed subset of the pullback with the complement of jprime. No equality with the reduced closed-complement scheme is required; the pullback may be nonreduced. The pullback of a proper morphism is proper, and the two complements are separated finite-type schemes over k.",
+   "uses": [
+    "sk-def-nagata-sketch-data",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, closed-complement square in step 5."
+   }
+  },
+  {
+   "text": "Exact inverse image of jprime_!M on the complementary closed subscheme vanishes. Extension by zero preserves constructibility here: extend a finite constructible stratification of X by the closed boundary with zero constant model. The exact extension by zero of M[0] is therefore bounded constructible, as needed by bounded proper base change.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, vanishing on the source boundary and generator preservation."
+   }
+  },
+  {
+   "text": "For the all-continuous-map compatibility coefficient, perform bounded proper base change on the constructible sheaves with finite constant models after scalar extension to this coefficient ring. The finite presentation matrices are over the coefficient ring at the point; the finite set of algebraic scalars in any such matrix belongs to a finite extension. Rational proper base change over that finite extension supplies the finite-model calculation. The comparison to all-continuous coefficients must commute with the relevant proper direct images and closed restriction on these finite constructible models; it is not the finite-subextension colimit comparison, and it does not identify the two coefficient sheaves. This coefficient-specific finite-model comparison is the remaining content retained in this support lemma. The resulting proper base-change comparison identifies the closed restriction of Rh_*jprime_!(M[0]) with proper pushforward of the zero restriction in step 2.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-rational"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, coefficient-specific proper-base-change calculation of step 5."
+   }
+  },
+  {
+   "text": "Exactness of the inverse image identifies its termwise derived functor with the left derived functor in proper base change. Functors carry the zero object to zero, giving the displayed conclusion. The zero generator and empty complement are included. No arbitrary bounded-complex descent is retained: the parent proves the passage from sheaves M[0] to bounded complexes by the existing source-library bounded truncation devissage theorem, applied to the triangulated vanishing kernel.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, conclusion of step 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-nagata-sketch-data",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "sk-def-sfb-constructible",
+  "det-thm-sfb-proper-base-change-rational",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Only the continuous algebraic-closure compatibility coefficient remains from parent step 5. The standard admissible cases are proved in the parent from properOpenInterchange; the distinct coefficient-model comparison on generators is retained here. The retained assertion is further restricted to constructible sheaves in degree zero; the parent proves bounded truncation devissage."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of extension by zero has zero restriction to the complementary closed subscheme",
+   "sub": "",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.RingedSpace.res_zero; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.IdealSheafData.support_comap; AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal",
+   "date": "2026-10-19",
+   "verdict": "no match: these are underived scheme module comparisons, vanishing ideals, or generic zero-object facts, not the proper-refinement support calculation for pro-etale condensed module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of extension by zero has zero restriction to the complementary closed subscheme",
+   "sub": "",
+   "results": "AlgebraicGeometry.Scheme.zeroLocus_map; AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal; AlgebraicGeometry.Scheme.image_zeroLocus; AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.Scheme.preimage_zeroLocus; AlgebraicGeometry.Scheme.Hom.range_subset_ker_support",
+   "date": "2026-10-19",
+   "verdict": "no match: these are underived scheme module comparisons, vanishing ideals, or generic zero-object facts, not the proper-refinement support calculation for pro-etale condensed module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isZero",
+   "sub": "",
+   "results": "CategoryTheory.Functor.map_isZero",
+   "date": "2026-10-19",
+   "verdict": "no match: these are underived scheme module comparisons, vanishing ideals, or generic zero-object facts, not the proper-refinement support calculation for pro-etale condensed module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero.*(proper|Proper|LowerShriek)|proper.*isZero",
+   "sub": "",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean; Mathlib/Probability/Kernel/Composition/MapComap.lean; Mathlib/CategoryTheory/Abelian/EpiWithInjectiveKernel.lean; Mathlib/CategoryTheory/Preadditive/Injective/LiftingProperties.lean; Mathlib/CategoryTheory/Preadditive/Injective/LiftingProperties.lean; Mathlib/CategoryTheory/Preadditive/Injective/LiftingProperties.lean; Mathlib/CategoryTheory/Preadditive/Projective/LiftingProperties.lean; Mathlib/CategoryTheory/Preadditive/Projective/LiftingProperties.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: these are underived scheme module comparisons, vanishing ideals, or generic zero-object facts, not the proper-refinement support calculation for pro-etale condensed module objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of extension by zero with continuous functions into the l-adic algebraic closure has zero restriction to the closed boundary",
+   "sub": "",
+   "results": "ContinuousLinearMap.extend_zero; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; HasCompactSupport.extend_zero; HasCompactSupport.continuous_extend_zero; AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; HasCompactSupport.tsupport_extend_zero; Filter.zeroAtFilterSubmodule",
+   "date": "2026-10-19",
+   "verdict": "no match: continuous functions and extension of functions, or no hits in CategoryTheory; no proper-refinement boundary theorem for this coefficient model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of extension by zero with continuous functions into the l-adic algebraic closure has zero restriction to the closed boundary",
+   "sub": "",
+   "results": "ContinuousLinearMap.extend_zero; Profinite.NobelingProof.CC_comp_zero; HasCompactSupport.extend_zero; Profinite.NobelingProof.CC_exact; HasCompactSupport.continuous_extend_zero; ContinuousMap.mem_idealOfSet; HasCompactSupport.tsupport_extend_zero; ContDiffMapSupportedInClass.map_zero_on_compl",
+   "date": "2026-10-19",
+   "verdict": "no match: continuous functions and extension of functions, or no hits in CategoryTheory; no proper-refinement boundary theorem for this coefficient model"
+  },
+  {
+   "tool": "grep",
+   "query": "PadicAlgCl|lowerShriek",
+   "sub": "CategoryTheory",
+   "results": "none",
+   "date": "2026-10-19",
+   "verdict": "no match: continuous functions and extension of functions, or no hits in CategoryTheory; no proper-refinement boundary theorem for this coefficient model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactificationRefinementLocalizing",
+  "date": "2026-10-19",
+  "group": "H3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RefinementBoundaryVanishing",
+  "file": "lean/Sheaf/Paper/RefinementBoundaryVanishing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousAlgCl_refinementBoundaryVanishing",
+  "statement": "theorem continuousAlgCl_refinementBoundaryVanishing\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]\n    (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ)\n    (hΛ : Nonempty\n      (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ))))\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c d : Compactification.DenseBoundaryCompactification f) (r : d ⟶ c)\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (hM : IsConstantModelConstructible Λ X M) :\n    IsZero ((upperStar Λ c.obj.obj.obj.i.closedComplement).mapDerivedCategory.obj\n      ((lowerStar Λ r.hom.hom.hom.hom).rightDerivedFunctor.obj\n        ((openImmersionLowerShriek Λ d.obj.obj.obj.i).mapDerivedCategory.obj\n          ((DerivedCategory.singleFunctor _ 0).obj M))))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a5ecc",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T051352-L-1655069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a5ecc",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T051352-L-1655069",
+  "kind": "interface",
+  "note": "independent cc review: a5ecc401 vs returned f6e8b6dd: only the CharP.Lemmas import deleted and lem-weil-pbc-profinite-point-pullback removed from node step 1/proof_deps; delivered modules plus 3 direct importers and CompactificationRefinementIdentity compile cleanly against live"
+ }
+}
