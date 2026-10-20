@@ -23,10 +23,13 @@
  ],
  "proof": [
   {
-   "text": "The strict henselization regular-divisor quotient and structural flatness give the required regularity and regularity of b(f). The root-algebra theorem supplies regular local rings at primes containing the root coordinate, using invertibility of the group order.",
+   "text": "The strict henselization regular-divisor quotient gives Noetherianness and a regular domain quotient. Prove flatness for the actual small coordinate-ring colimit directly: its pointed affine etale neighbourhood maps are flat, their maps from R are natural, and the defining structural-map equations identify their common composite with b. RingHom.Flat.of_isColimit supplies flatness of b; flat base change preserves regularity of f. The root-algebra theorem then gives regular local rings at primes containing the root coordinate.",
    "uses": [
     "lem-sbc-strict-hensel-regular-divisor-quotient",
-    "lem-sbc-affine-strict-henselization-structural-flat",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-ring-map-iff-ind-flat",
     "lem-sbc-root-algebra-regular-at-root"
    ],
    "elementary": false
@@ -53,18 +56,21 @@
   "def-sbc-normal-dominant-galois",
   "def-weil-etale-morphism",
   "def-weil-finite-integral-morphism",
-  "lem-sbc-affine-strict-henselization-structural-flat",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
   "lem-sbc-root-algebra-regular-at-root",
+  "lem-sbc-root-normalization-generic-source-etale",
   "lem-sbc-strict-hensel-regular-divisor-quotient",
-  "lem-weil-pbc-relative-normalization",
-  "lem-sbc-root-normalization-generic-source-etale"
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-ring-map-iff-ind-flat",
+  "lem-weil-pbc-relative-normalization"
  ],
  "proof_origin": {
   "kind": "from-document",
   "by": "worker",
-  "group": "B2",
-  "document": "Stacks Project and Mathlib",
-  "place": "Tags 09EB, 0BRM, and 0EYG; finite-source openness of etaleness."
+  "group": "F3",
+  "document": "Stacks Project and the existing Lean filtered-colimit API",
+  "place": "Tags 04HX and 07QM for the structural flatness argument; Tags 09EB, 0BRM and 0EYG for generic etaleness. Restored the quarantined small-colimit statement after sync and proved its structural flatness privately with RingHom.Flat.of_isColimit, avoiding the incompatible upstream structural-map API."
  },
  "mathlib_searches": [
   {
@@ -138,13 +144,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T172650-L-2097646",
-  "kind": "interface",
+  "landing": "20261020T160753-L-3405407",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
