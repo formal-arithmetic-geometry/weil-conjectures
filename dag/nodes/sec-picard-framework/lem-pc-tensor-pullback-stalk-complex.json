@@ -91,14 +91,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.TensorPullbackStalkComplex",
-  "file": "lean/Sheaf/Algebra/Homology/TensorPullbackStalkComplex.lean",
-  "declaration": "CochainComplex.exists_tensorPullback_stalk_complex_iso",
-  "statement": "theorem exists_tensorPullback_stalk_complex_iso\n    (X Y : RingedSpace.{u}) (f : X.carrier ⟶ Y.carrier)\n    (α : TopCat.Sheaf.inverseImageRing f Y.sheaf ⟶ X.sheaf)\n    (K : CochainComplex (RingedSpace.Modules Y) ℤ)\n    (P : CochainComplex (RingedSpace.Modules X) ℤ)\n    (e : ∀ i : ℤ, P.X i ≅\n      SheafOfModules.changeOfRings.{u, u, u} α\n        (TopCat.Sheaf.inverseImageModule f Y.sheaf (K.X i)))\n    (he : ∀ i j : ℤ, P.d i j ≫ (e j).hom =\n      (e i).hom ≫ SheafOfModules.changeOfRingsHom.{u, u, u} α\n        (TopCat.Sheaf.inverseImageModule f Y.sheaf (K.X i))\n        (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf (K.X i) (K.d i j)))\n    (x : X) :\n    ∃ ρ : Y.presheaf.stalk (f x) →+* X.presheaf.stalk x,\n      Nonempty\n        ((((ModuleCat.extendScalars ρ).mapHomologicalComplex (.up ℤ)).obj\n          (((RingedSpace.moduleStalkFunctor Y (f x)).mapHomologicalComplex (.up ℤ)).obj K)) ≅\n        (((RingedSpace.moduleStalkFunctor X x).mapHomologicalComplex (.up ℤ)).obj P))",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.TensorPullbackStalkComplex",
+  "file": "lean/WeilConjectures/Algebra/Homology/TensorPullbackStalkComplex.lean",
+  "declaration": "CochainComplex.tensorPullbackStalkComplexIso",
+  "statement": "def tensorPullbackStalkComplexIso\n    (X Y : RingedSpace.{u}) (f : X.carrier ⟶ Y.carrier)\n    (α : TopCat.Sheaf.inverseImageRing f Y.sheaf ⟶ X.sheaf)\n    (K : CochainComplex (RingedSpace.Modules Y) ℤ)\n    (P : CochainComplex (RingedSpace.Modules X) ℤ)\n    (e : ∀ i : ℤ, P.X i ≅\n      SheafOfModules.changeOfRings.{u, u, u} α\n        (TopCat.Sheaf.inverseImageModule f Y.sheaf (K.X i)))\n    (he : ∀ i j : ℤ, P.d i j ≫ (e j).hom =\n      (e i).hom ≫ SheafOfModules.changeOfRingsHom.{u, u, u} α\n        (TopCat.Sheaf.inverseImageModule f Y.sheaf (K.X i))\n        (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf (K.X i) (K.d i j)))\n    (x : X) :\n    ((ModuleCat.extendScalars\n        (RingedSpace.tensorPullbackStalkRingHom X Y f α x)).mapHomologicalComplex (.up ℤ)).obj\n      (((RingedSpace.moduleStalkFunctor Y (f x)).mapHomologicalComplex (.up ℤ)).obj K) ≅\n    ((RingedSpace.moduleStalkFunctor X x).mapHomologicalComplex (.up ℤ)).obj P",
   "branch": "sheaf-dag",
-  "by": "R2",
-  "date": "2026-10-12"
+  "by": "N4",
+  "date": "2026-10-20",
+  "note": "Retirement of the Sheaf twin: the upstream definition supplies the complex isomorphism at the explicitly constructed tensorPullbackStalkRingHom. This witnesses the node's original existential statement with the same parameters and differential square."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -111,14 +112,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "C-35724",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261012T095925-L-325114",
+  "landing": "20261020T135418-L-1820678",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: the withdrawn Sheaf existential theorem with the upstream WeilConjectures tensorPullbackStalkRingHom + tensorPullbackStalkComplexIso (same hypotheses, explicit ρ = node's canonical composite); KFlatPullback adaptation diffed against clone and upstream twin (2 forced edits only); node diff = lean field only"
  },
  "lean_audit": {
   "master": {

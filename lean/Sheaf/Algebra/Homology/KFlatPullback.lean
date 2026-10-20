@@ -10,7 +10,7 @@ public import WeilConjectures.Topology.InverseImageModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import Sheaf.Algebra.Homology.TensorPullbackStalkComplex
+import WeilConjectures.Algebra.Homology.TensorPullbackStalkComplex
 
 /-!
 # Pullback preserves K-flat complexes
@@ -211,7 +211,9 @@ theorem isKFlat_pullback
   apply (AlgebraicGeometry.RingedSpace.isKFlat_iff_stalk_isKFlat RX
     (tensorPullbackComplex f OX OY φ K)).mpr
   intro x L hL
-  obtain ⟨ρ, ⟨e⟩⟩ := exists_tensorPullback_stalk_complex_iso RX RY f
+  let ρ := AlgebraicGeometry.RingedSpace.tensorPullbackStalkRingHom RX RY f
+    (tensorPullbackRingMap f OX OY φ) x
+  let e := tensorPullbackStalkComplexIso RX RY f
     (tensorPullbackRingMap f OX OY φ) K (tensorPullbackComplex f OX OY φ K)
     (fun i ↦ Iso.refl _)
     (by
