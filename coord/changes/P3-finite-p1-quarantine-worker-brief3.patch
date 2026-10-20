@@ -1,0 +1,31 @@
+--- a/briefs/batch1/stage3-worker.md
++++ b/briefs/batch1/stage3-worker.md
+@@ -91,6 +91,15 @@
+ 
+ ## The work
+ 
++Before copying a missing item source, read its row in `coord/rework.tsv`, if any.
++A quarantined module is preserved at the row’s quarantine path for restoration by
++the rework assignment; its absence from `lean/` is not evidence of withdrawal or
++unused mathematics. Preserve its Lean attachment and dependencies. An old return
++asking to rebase a pre-sync delivery does not authorize deleting that archive or
++replacing it with an empty module. Check the current return and claim records.
++Do not put an already-absent quarantined path in `deleted.txt` to satisfy the
++item-source gate.
++
+ 1. Copy the module into the sandbox (`mkdir -p` its directory under lean/). Read it whole. Find its node(s): `grep -rl '"module": "ITEM"' dag/nodes`, and `grep -n "blueprint:" <the file>` for the node ids in its docstrings. Read the node's statement, its proof steps and the nodes they use; for each of those its statement and its `lean` record (module, declaration) or `mathlib_match`; open the Lean of each and read its signature.
+ 2. Before following the plan, look for a shorter route: `python3 /home/ubuntu/weil-launcher/msearch.py GROUP ITEM leanfinder "<the statement in plain words>"`, `... loogle "<names>"`, `... grep "<regex>"`, and `rg` on lean/WeilConjectures and lean/Sheaf.
+ 3. Write the proof. Compile locally as often as you like: `python3 /home/ubuntu/weil-launcher/lcompile.py <file.lean>` (seconds to a minute; an unfinished proof prints its goals; while you work, put `sorry` at the parts you have not reached and read the goals). With new modules beside yours: `python3 /home/ubuntu/weil-launcher/lcompile.py --all /home/ubuntu/weil-sandbox/GROUP/ITEM` compiles all files of the sandbox in import order. When the proof compiles, remove every import it does not use.
+@@ -101,6 +110,12 @@
+ 8. Write report.md with exactly the sections of coord/brief-stage3.md §6: `## What changed`, `## Proved and sorry left` (every `sorry` left, by the name of its declaration), `## No longer needed` (imports removed; nodes and modules the proof does not need: this is the pruning, be complete), `## Where the brief, the DAG or earlier work was wrong`, and `## New nodes` if any. (There is no second reader: do not write a section `## Second reading by GROUP`; deliver3.py records its absence itself.) No server address, key or token in any file.
+ 8b. Withdrawing a module (a false split, a duplicate, a reviewer-ordered rollback): delete its file from the sandbox and list its path (`lean/Sheaf/....lean`) in a file `deleted.txt` at the top of the sandbox, one path per line, and change every module that imported it in the same delivery. Only Lean files may be deleted; DAG nodes are never deleted. The dry run refuses the delivery while anything still imports a deleted module. The delivery then lands the withdrawn file as an empty module (no declarations); that is expected.
+ 8d. If your route makes the item module itself unnecessary (its statement is no longer used by any parent), withdraw it as in 8b instead of leaving its `sorry`: that is a complete delivery.
++Zero current Lean importers is insufficient for step 8d: a parent with an
++unfinished proof may still cite this node in `stmt_deps`, `proof_deps`, or a proof
++step’s `uses`. Check those parents and the unit route, including quarantined
++parents. Withdrawal needs the actual replacement argument and corresponding
++parent dependency updates in the same delivery, or an explicit reviewed
++withdrawal request reconciled with the current source.
+ 8c. To remove a field of an existing node that you may change (for example a `lean` attachment a reviewer orders removed), set it to `null` in the sandbox copy of the node; omitting it changes nothing.
+ 9. Dry run: `python3 /home/ubuntu/weil-launcher/deliver3.py GROUP ITEM --no-push` until it prints OK.
+ 10. Deliver: `python3 /home/ubuntu/weil-launcher/deliver3.py GROUP ITEM` .

@@ -13,6 +13,22 @@ In force from the line `STAGE 3 READY` (written by S3-C, 2026-10-12; adjusted to
 - `coord/changes/`: every open or landed change record that names your module or a declaration you use (`roles/lead.md` §2.6). The library's version of a module adapted by another group is the one you work from.
 - The source checkout and Mathlib, read-only, as in stage 2 (`~/weil-conjectures-slopmaster2`, its `.lake/packages/mathlib/Mathlib/`). A proof there of the same statement is used, not rewritten.
 
+Before copying a missing item source, read its row in `coord/rework.tsv`, if any.
+A quarantined module is preserved at the row’s quarantine path for restoration by
+the rework assignment; its absence from `lean/` is not evidence of withdrawal or
+unused mathematics. Preserve its Lean attachment and dependencies. An old return
+asking to rebase a pre-sync delivery does not authorize deleting that archive or
+replacing it with an empty module. Check the current return and claim records.
+Do not put an already-absent quarantined path in `deleted.txt` to satisfy the
+item-source gate.
+
+Zero current Lean importers is insufficient for a withdrawal: a parent with an
+unfinished proof may still cite this node in `stmt_deps`, `proof_deps`, or a proof
+step’s `uses`. Check those parents and the unit route, including quarantined
+parents. Withdrawal needs the actual replacement argument and corresponding
+parent dependency updates in the same delivery, or an explicit reviewed
+withdrawal request reconciled with the current source.
+
 ## 1. Your item
 
 Prove every `sorry` of the module by the shortest route (stage 3 §2): a special case, a Mathlib lemma, a simpler argument, below the unit level. A route that would bypass a unit that the chapter's route passes through is not taken: a node that realizes a unit's statement or a step (`dag/units/<unit>.json` `realized`) is still used where the unit's proof uses it, and its module stays imported.
