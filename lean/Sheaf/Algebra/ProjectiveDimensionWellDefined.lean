@@ -5,7 +5,8 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.RingTheory.GlobalDimension
+public import WeilConjectures.RingTheory.GlobalDimension
+import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
 
 /-!
 # Projective and global dimension are well defined
@@ -77,6 +78,9 @@ theorem projective_and_global_dimension_well_defined
     refine ⟨Nat.find hex, Nat.find_spec hex, fun k ↦ ⟨?_, ?_⟩⟩
     · exact fun hk ↦ Nat.find_min' hex hk
     · intro hk N
-      exact pad N hk (Nat.find_spec hex N)
+      apply (hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE N k).mp
+      exact pad N hk
+        ((hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE N _).mpr
+          (Nat.find_spec hex N))
 
 end ModuleCat
