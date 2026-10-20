@@ -38,6 +38,7 @@ Usage:
 """
 from __future__ import annotations
 import collections, datetime, pathlib, re, subprocess, sys, time
+import concurrent.futures  # noqa: F401  (before tools/ is on sys.path: tools/queue.py shadows the stdlib `queue`)
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import leanindex as li  # noqa: E402

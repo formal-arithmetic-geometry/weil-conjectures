@@ -41,6 +41,9 @@ The packages in lean/.lake/packages are shared with the copy through a link and 
 build does not start if Lake would rebuild Mathlib. A dependency given by a relative path is not supported.
 """
 from __future__ import annotations
+# 2026-10-20: the stdlib modules that import `queue` come BEFORE tools/ goes on sys.path (tools/queue.py shadows it;
+# a ThreadPoolExecutor created later crashed the build: "module 'queue' has no attribute 'SimpleQueue'")
+import concurrent.futures  # noqa: F401
 import fcntl, hashlib, json, os, pathlib, re, shutil, signal, subprocess, sys, time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
