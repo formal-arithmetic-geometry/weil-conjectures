@@ -78,15 +78,27 @@ theorem strictHenselization_chart_maximalIdeal
     strictHenselizationAffineInclusion s
   have : (strictHenselizationAffineInclusion s).IsEquivalence :=
     strictHenselizationAffineInclusion_isEquivalence s
+  let : HasColimit D := ⟨⟨cn, hcn⟩⟩
+  let cmp₀ : strictHenselizationRing s ≅ colimit D :=
+    Functor.Final.colimitIso G.op D
   let e₁ : strictHenselizationRing s ≅ cn.pt :=
-    (colimit.isColimit (strictHenselizationAffineDiagram s)).coconePointUniqueUpToIso
-      ((Functor.Final.isColimitWhiskerEquiv G.op cn).symm hcn)
+    cmp₀ ≪≫ colimit.isoColimitCocone ⟨cn, hcn⟩
   have hleg (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) :
       colimit.ι (strictHenselizationAffineDiagram s) (op j) ≫ e₁.hom =
-        cn.ι.app (op (G.obj j)) :=
-    IsColimit.comp_coconePointUniqueUpToIso_hom
-      (colimit.isColimit (strictHenselizationAffineDiagram s))
-      ((Functor.Final.isColimitWhiskerEquiv G.op cn).symm hcn) (op j)
+        cn.ι.app (op (G.obj j)) := by
+    change colimit.ι (G.op ⋙ D) (op j) ≫ e₁.hom = _
+    dsimp [e₁, cmp₀]
+    have hfinal := Functor.Final.ι_colimitIso_hom (F := G.op) (G := D) (op j)
+    change colimit.ι (G.op ⋙ D) (op j) ≫
+      (Functor.Final.colimitIso G.op D).hom =
+      colimit.ι D (op (G.obj j)) at hfinal
+    calc
+      _ = colimit.ι D (op (G.obj j)) ≫
+          (colimit.isoColimitCocone ⟨cn, hcn⟩).hom := by
+        rw [← hfinal]
+        simp only [Category.assoc]
+      _ = cn.ι.app (op (G.obj j)) :=
+        colimit.isoColimitCocone_ι_hom ⟨cn, hcn⟩ (op (G.obj j))
   let e₂ : ct.pt ≅ c.pt := hct.coconePointUniqueUpToIso hc
   let e : strictHenselizationRing s ≅ c.pt := e₁ ≪≫ t ≪≫ e₂
   let chart : N := ⟨⟨Etale.mk i, Over.homMk xR rfl⟩, inferInstanceAs (IsAffine (Spec R))⟩

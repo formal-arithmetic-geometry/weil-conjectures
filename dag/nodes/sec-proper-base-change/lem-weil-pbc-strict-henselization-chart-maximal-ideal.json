@@ -21,7 +21,7 @@
    "elementary": false
   },
   {
-   "text": "Let G be the inverse small-model equivalence followed by strictHenselizationAffineInclusion. Both functors are equivalences. Whisker the full affine colimit cocone cn by G.op; finality makes it a colimit cocone on strictHenselizationAffineDiagram. Colimit uniqueness gives e1 : strictHenselizationRing(s) isomorphic to cn.pt, with coprojection formula colimit.iota(j) followed by e1.hom = cn.iota(G(j)). Compose e1 with the chart-to-triples isomorphism t and the unique comparison ct.pt isomorphic to c.pt to obtain e. No equality between the chosen small colimit and the full affine colimit is assumed.",
+   "text": "Let G be the inverse small-model equivalence followed by strictHenselizationAffineInclusion. Both functors are equivalences. Supply the full affine diagram D with the returned cocone cn as a HasColimit instance. The explicit final-functor colimit isomorphism Functor.Final.colimitIso G.op D identifies the chosen small ring with colimit D; compose it with colimit.isoColimitCocone ⟨cn,hcn⟩ to obtain e1. Its coprojection formula is Functor.Final.ι_colimitIso_hom followed by the cocone formula, giving colimit.iota(j) followed by e1.hom = cn.iota(G(j)). Compose e1 with the chart-to-triples isomorphism t and the unique comparison ct.pt isomorphic to c.pt to obtain e.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit"
    ],
@@ -49,9 +49,9 @@
  ],
  "proof_origin": {
   "kind": "agent",
-  "by": "J3",
+  "by": "J2",
   "date": "2026-10-20",
-  "note": "Repair of the returned colimit comparison. The actual chosen ring uses the small representative diagram, so finality transports cn before colimit uniqueness is applied. The chart map is transported through a representative isomorphism and the defining structural cone equation. Simplified comparison orientation and removed two redundant private imports which caused duplicate declarations against the published build. No signature, definition or docstring changes; no new proof holes."
+  "note": "Repair of the returned comparison: construct the full affine colimit comparison using an explicit HasColimit instance from cn, Functor.Final.colimitIso, and colimit.isoColimitCocone. The chart and maximal-ideal arguments are unchanged; no new proof holes or statement changes."
  },
  "mathlib_searches": [
   {
@@ -132,9 +132,9 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261020T151222-L-2648620",
+  "landing": "20261020T153748-L-2988463",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
