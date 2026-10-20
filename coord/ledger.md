@@ -19066,3 +19066,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:06 L: returned deliver/J2/Sheaf.Paper.PbcUniformReductionCriterion (reviewer RETURN: (the landing tools, head 3b1d2cc6d) the delivery did not land: missing import source modules: Sheaf.Paper.PbcUniformRedu)
 - 23:06 L: returned deliver/Q3/Sheaf.CategoryTheory.RingedSiteCechRefinementSquare (reviewer RETURN: (the landing tools, head cd69869e1) the delivery did not land: lean/Sheaf/CategoryTheory/RingedSiteCechRefinementSquare.)
 - 23:06 L: returned deliver/R6/Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint (reviewer RETURN: (the landing tools, head 81039679e) the delivery did not land: (d) user Sheaf.Paper.CoefficientLevelOrdinaryImages (ment)
+- 23:06 L: returned deliver/T3/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (the landing tools, head 39e48f366) the delivery did not land: lean/Sheaf/Paper/RingedProjectionRestriction.lean changed)
