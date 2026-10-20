@@ -12,40 +12,12 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
-import Sheaf.Paper.ProEtaleProjectionFormulaArrows
-import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel
-import Sheaf.CategoryTheory.RingedCechKoszulDualLimit
-import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Paper.CoefficientRingedTensorHomModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import Sheaf.Paper.WeilCompletedTensorReflector
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedStrictTowerProjectionMorphism
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.CategoryTheory.RingedToposSitePresentation
-import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
-import Sheaf.Paper.ProjectionFormulaTotalization
+import Mathlib.CategoryTheory.Adjunction.Unique
+import Sheaf.Paper.AugmentedCechTensorPullback
+import Sheaf.CategoryTheory.RingedToposDerivedAdjunctionOfUniverses
+import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 
-import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.CategoryTheory.RingedPresentationTransport
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.Sites.UnboundedSectionsLocalization
-import Sheaf.Paper.RingedDerivedSliceLocalization
--- The high-priority successor-universe sheafification instance gets stuck on coefficient-universe goals.
+-- The successor-universe sheafification instance gets stuck on coefficient-universe goals.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 /-! # Direct image commutes with locally derived completion
@@ -69,6 +41,182 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
+set_option backward.defeqAttrib.useBackward true in
+private theorem exists_inverseTranspose
+    {A : Type*} [Category A] (F G : A ⥤ A) (b : F ⊣ G) (η : 𝟭 A ⟶ G) :
+    ∃ σ : F ⟶ 𝟭 A, ∀ T, σ.app T = (b.homEquiv T T).symm (η.app T) := by
+  let σ := F.leftUnitor.inv ≫ Functor.whiskerRight η F ≫ b.counit
+  refine ⟨σ, ?_⟩
+  intro T
+  rw [Adjunction.homEquiv_counit]
+  change 𝟙 _ ≫ F.map (η.app T) ≫ b.counit.app T = _
+  exact Category.id_comp _
+
+set_option backward.defeqAttrib.useBackward true in
+private theorem normalizedRightAdjoints
+    {A B : Type*} [Category A] [Category B]
+    (L : A ⥤ B) (R : B ⥤ A) (a : L ⊣ R)
+    (F G : A ⥤ A) (b : F ⊣ G)
+    (F' G' : B ⥤ B) (b' : F' ⊣ G')
+    (σ : F ⟶ 𝟭 A) (σ' : F' ⟶ 𝟭 B)
+    (η : 𝟭 A ⟶ G) (η' : 𝟭 B ⟶ G')
+    (hη : ∀ T : A, b.homEquiv T T (σ.app T) = η.app T)
+    (hη' : ∀ T : B, b'.homEquiv T T (σ'.app T) = η'.app T)
+    (c : F ⋙ L ≅ L ⋙ F')
+    (hc : ∀ T : A, c.hom.app T ≫ σ'.app (L.obj T) = L.map (σ.app T)) :
+    ∃ e : R ⋙ G ≅ G' ⋙ R,
+      ∀ M : B, η.app (R.obj M) ≫ e.hom.app M = R.map (η'.app M) := by
+  let p := (b.comp a).ofNatIsoLeft c
+  let q := a.comp b'
+  let e := p.rightAdjointUniq q
+  refine ⟨e, ?_⟩
+  intro M
+  have he (T : A) (f : (L ⋙ F').obj T ⟶ M) :
+      p.homEquiv T M f ≫ e.hom.app M = q.homEquiv T M f := by
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    have hn := e.hom.naturality f
+    dsimp only [Functor.comp_map] at hn ⊢
+    rw [Category.assoc, hn, ← Category.assoc]
+    rw [Adjunction.unit_rightAdjointUniq_hom_app]
+  have ac : a.homEquiv (R.obj M) M (a.counit.app M) = 𝟙 _ := by
+    rw [← a.homEquiv_symm_id]
+    exact Equiv.apply_symm_apply _ _
+  have hleft : p.homEquiv (R.obj M) M
+      (σ'.app (L.obj (R.obj M)) ≫ a.counit.app M) = η.app (R.obj M) := by
+    rw [Adjunction.homEquiv_ofNatIsoLeft_apply]
+    rw [← Category.assoc, hc]
+    rw [Adjunction.comp_homEquiv]
+    change b.homEquiv _ _ (a.homEquiv _ _
+      (L.map (σ.app (R.obj M)) ≫ a.counit.app M)) = _
+    rw [a.homEquiv_naturality_left]
+    dsimp only [Functor.id_obj]
+    rw [ac]
+    rw [Category.comp_id, hη]
+  have hright : q.homEquiv (R.obj M) M
+      (σ'.app (L.obj (R.obj M)) ≫ a.counit.app M) = R.map (η'.app M) := by
+    rw [Adjunction.comp_homEquiv]
+    change a.homEquiv _ _ (b'.homEquiv _ _
+      (σ'.app (L.obj (R.obj M)) ≫ a.counit.app M)) = _
+    rw [b'.homEquiv_naturality_right]
+    dsimp only [Functor.id_obj]
+    rw [hη']
+    have hn := η'.naturality (a.counit.app M)
+    dsimp only [Functor.id_map, Functor.id_obj, Functor.comp_obj] at hn
+    rw [← hn, a.homEquiv_naturality_right, ac]
+    exact Category.id_comp _
+  exact hleft.symm ▸ (he (R.obj M) _).trans hright
+
+set_option backward.defeqAttrib.useBackward true in
+private theorem reflectorComparison
+    {A : Type*} [Category A] (P : A → Prop)
+    (F G : A ⥤ A) (η : 𝟭 A ⟶ F) (ε : 𝟭 A ⟶ G)
+    (hF : ∀ M, P (F.obj M)) (hG : ∀ M, P (G.obj M))
+    (rF : ∀ M L, P L → Function.Bijective (fun a : F.obj M ⟶ L ↦ η.app M ≫ a))
+    (rG : ∀ M L, P L → Function.Bijective (fun a : G.obj M ⟶ L ↦ ε.app M ≫ a)) :
+    ∃ e : F ≅ G, ∀ M, η.app M ≫ e.hom.app M = ε.app M := by
+  classical
+  choose f hf using fun M ↦ (rF M (G.obj M) (hG M)).surjective (ε.app M)
+  choose g hg using fun M ↦ (rG M (F.obj M) (hF M)).surjective (η.app M)
+  change ∀ M, η.app M ≫ f M = ε.app M at hf
+  change ∀ M, ε.app M ≫ g M = η.app M at hg
+  have hfg (M : A) : f M ≫ g M = 𝟙 (F.obj M) := by
+    apply (rF M (F.obj M) (hF M)).injective
+    change η.app M ≫ (f M ≫ g M) = η.app M ≫ 𝟙 _
+    rw [← Category.assoc, hf, hg, Category.comp_id]
+  have hgf (M : A) : g M ≫ f M = 𝟙 (G.obj M) := by
+    apply (rG M (G.obj M) (hG M)).injective
+    change ε.app M ≫ (g M ≫ f M) = ε.app M ≫ 𝟙 _
+    rw [← Category.assoc, hg, hf, Category.comp_id]
+  refine ⟨NatIso.ofComponents (fun M ↦ ⟨f M, g M, hfg M, hgf M⟩) ?_, hf⟩
+  intro M N a
+  apply (rF M (G.obj N) (hG N)).injective
+  change η.app M ≫ (F.map a ≫ f N) = η.app M ≫ (f M ≫ G.map a)
+  rw [← Category.assoc, ← η.naturality a, Category.assoc, hf,
+    ← Category.assoc, hf]
+  exact ε.naturality a
+
+set_option backward.defeqAttrib.useBackward true in
+private theorem reflectorUnit_isIso
+    {A : Type*} [Category A] (P : A → Prop) (F : A ⥤ A) (η : 𝟭 A ⟶ F)
+    (hF : ∀ M, P (F.obj M))
+    (rF : ∀ M L, P L → Function.Bijective (fun a : F.obj M ⟶ L ↦ η.app M ≫ a))
+    (M : A) (hM : P M) : IsIso (η.app M) := by
+  obtain ⟨g, hg⟩ := (rF M M hM).surjective (𝟙 M)
+  change η.app M ≫ g = 𝟙 M at hg
+  refine ⟨⟨g, hg, ?_⟩⟩
+  apply (rF M (F.obj M) (hF M)).injective
+  change η.app M ≫ (g ≫ η.app M) = η.app M ≫ 𝟙 _
+  rw [← Category.assoc, hg]
+  exact (Category.id_comp (η.app M)).trans (Category.comp_id _).symm
+
+set_option backward.defeqAttrib.useBackward true in
+private theorem reflectorCommutation
+    {A B : Type*} [Category A] [Category B] (R : A ⥤ B)
+    (P : A → Prop) (Q : B → Prop)
+    (qIso : ∀ {M N : B}, (M ≅ N) → Q N → Q M)
+    (F C : A ⥤ A) (G D : B ⥤ B)
+    (η : 𝟭 A ⟶ F) (α : 𝟭 A ⟶ C)
+    (ε : 𝟭 B ⟶ G) (β : 𝟭 B ⟶ D)
+    (hF : ∀ M, P (F.obj M)) (hC : ∀ M, P (C.obj M))
+    (hG : ∀ M, Q (G.obj M)) (hD : ∀ M, Q (D.obj M))
+    (rF : ∀ M L, P L → Function.Bijective (fun a : F.obj M ⟶ L ↦ η.app M ≫ a))
+    (rC : ∀ M L, P L → Function.Bijective (fun a : C.obj M ⟶ L ↦ α.app M ≫ a))
+    (rG : ∀ M L, Q L → Function.Bijective (fun a : G.obj M ⟶ L ↦ ε.app M ≫ a))
+    (rD : ∀ M L, Q L → Function.Bijective (fun a : D.obj M ⟶ L ↦ β.app M ≫ a))
+    (δ : R ⋙ D ≅ C ⋙ R)
+    (hδ : ∀ M, β.app (R.obj M) ≫ δ.hom.app M = R.map (α.app M)) :
+    (∀ M, P M → Q (R.obj M)) ∧
+    ∃ γ : R ⋙ G ≅ F ⋙ R,
+      (∀ M, ε.app (R.obj M) ≫ γ.hom.app M = R.map (η.app M)) ∧
+      ∀ M (a : G.obj (R.obj M) ⟶ R.obj (F.obj M)),
+        ε.app (R.obj M) ≫ a = R.map (η.app M) → a = γ.hom.app M := by
+  obtain ⟨x, hx⟩ := reflectorComparison P F C η α hF hC rF rC
+  obtain ⟨y, hy⟩ := reflectorComparison Q G D ε β hG hD rG rD
+  let γ := Functor.isoWhiskerLeft R y ≪≫ δ ≪≫ Functor.isoWhiskerRight x.symm R
+  have hγ (M : A) : ε.app (R.obj M) ≫ γ.hom.app M = R.map (η.app M) := by
+    change ε.app (R.obj M) ≫
+      (y.hom.app (R.obj M) ≫ δ.hom.app M ≫ R.map (x.inv.app M)) = _
+    rw [← Category.assoc, hy, ← Category.assoc, hδ, ← R.map_comp, ← hx]
+    rw [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+  have hp (M : A) (hM : P M) : Q (R.obj M) := by
+    have : IsIso (η.app M) := reflectorUnit_isIso P F η hF rF M hM
+    have : IsIso (ε.app (R.obj M) ≫ γ.hom.app M) := by
+      rw [hγ]
+      infer_instance
+    have : IsIso (ε.app (R.obj M)) :=
+      IsIso.of_isIso_comp_right _ (γ.hom.app M)
+    exact qIso (asIso (ε.app (R.obj M))) (hG (R.obj M))
+  refine ⟨hp, γ, hγ, ?_⟩
+  intro M a ha
+  apply (rG (R.obj M) (R.obj (F.obj M)) (hp (F.obj M) (hF M))).injective
+  exact ha.trans (hγ M).symm
+
+set_option backward.defeqAttrib.useBackward true in
+private theorem locallyComplete_of_iso
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    (O : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{wY} (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]
+    [∀ U : C, HasDerivedCategory.{wY} (ringedSiteModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))]
+    (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
+    (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
+    {M N : ringedSiteDerived.{u, wY} O} (e : M ≅ N)
+    (hN : IsLocallyDerivedRingedIdealComplete O I ι N) :
+    IsLocallyDerivedRingedIdealComplete O I ι M := by
+  intro U f hf
+  let F := (ringedDerivedRestriction O U) ⋙
+    (Functor.curry.obj (derivedInternalHom (J.over U) (O.over U))).obj
+      (Opposite.op ((DerivedCategory.singleFunctor _ 0).obj
+        (ringedSectionLocalization (O.over U) (ringedSliceSection O U f))))
+  exact (hN U f hf).of_iso (F.mapIso e)
+
+
+attribute [-instance] hasSheafCompose_of_preservesMulticospan
+  hasSheafComposeEssentiallySmallSite in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
 -- The expanded image-ideal and reflector interfaces repeat several derived localizations.
 /-- Direct image preserves local completeness and commutes naturally with completion.
@@ -84,127 +232,16 @@ The `hComplete` and `hReflect` hypotheses specify the reflection meant by `Λ` a
 the extended Cech completion theorem supplies them. Neither finite type on the source
 ideal nor invertibility of the structural map is assumed.
 
-Proof (the twelve steps of the DAG node):
-
-1. The source ideal is locally finitely generated: inverse image carries a covering epimorphism
-onto the target ring to a covering epimorphism, and the images of each finite generating list
-generate its image ideal. Use [lem-weil-pbc-ringed-topos-site-presentation] to obtain $e\circ
-f\cong h\circ g$ with $g,e$ ringed equivalences and $h$ induced by a continuous
-finite-limit-preserving functor $u:\mathcal D\to\mathcal C$. The module-equivalence lemma
-[lem-weil-pbc-ringed-presentation-transport] gives exact derived equivalences and identifies the
-local Hom tests, hence the full subcategories of locally complete objects. Completion exists by
-[lem-weil-pbc-extended-cech-completion-model]. An equivalence $E$ identifying these subcategories
-carries the unit to a reflector unit: for complete $L'$, $\operatorname{Hom}(E\Lambda
-M,L')=\operatorname{Hom}(\Lambda
-M,E^{-1}L')=\operatorname{Hom}(M,E^{-1}L')=\operatorname{Hom}(EM,L')$. Thus there is a unique
-unit-preserving isomorphism $E\Lambda\cong\Lambda' E$. The derived composition comparison
-[lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies $e_*Rf_*$ with $Rh_*g_*$.
-Conjugating an arrow and its unit equation by these equivalences preserves existence, uniqueness
-and invertibility. It suffices to prove the assertions for $h$; rename it $f$.
-
-2. Suppose $M$ is locally $\mathcal J_X$-complete
-[def-weil-pbc-locally-derived-ringed-ideal-complete]. For $V\in\mathcal D$, $a\in\mathcal J_Y(V)$
-and $q\in\mathbf Z$, put $U=u(V)$ and $a'=f^\sharp(a)\in\mathcal J_X(U)$. The slice formulas and
-localized-ring pullback in [lem-weil-pbc-ringed-derived-slice-localization], with the derived
-adjunction of [lem-weil-pbc-ringed-projection-mate-exact], give
-$$\operatorname{Hom}_{D(R_Y|_V)}(R_Y|_V[1/a],(Rf_*M)|_V[q])\cong
-\operatorname{Hom}_{D(R_X|_U)}(R_X|_U[1/a'],M|_U[q]).$$
-Local completeness makes the source-side internal Hom zero, so the sectionwise Hom formula
-[lem-sfb-derived-internal-hom-sections-model] makes this group zero. The calculation applies to
-every object over $V$, using its restricted section and localized morphism.
-
-3. Put $H=R\mathcal Hom_{R_Y|_V}(R_Y|_V[1/a],(Rf_*M)|_V)$. Its restriction to any $W\to V$ is the
-corresponding internal Hom by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. The
-sectionwise formula [lem-sfb-derived-internal-hom-sections-model] and Step 2 give
-$H^qR\Gamma(W,H|_W)=0$ for all $q,W$. Choose a K-injective representative $I$ of $H$ by
-[prop-pur-kinjective-resolutions-exist]. The derived-evaluation identification
-[lem-sfb-unbounded-sections-localization] computes $R\Gamma(W,H|_W)$ by the actual section complex
-$I(W)$. Every cycle in $I^q(W)$ is a boundary, since its class is in this zero group. The
-cohomology presheaf is therefore zero, and so is its sheafification $\mathcal H^q(H)$ for all $q$.
-Thus $H=0$ in the derived category [def-weil-abstract-derived-category], proving that $Rf_*M$ is
-locally complete.
-
-4. The object $Rf_*\Lambda_XM$ is complete by Step 3. The reflector bijection in
-[lem-weil-pbc-extended-cech-completion-model] gives a unique $\gamma_{f,M}:\Lambda_YRf_*M\to
-Rf_*\Lambda_XM$ with $\gamma_{f,M}\eta_{Y,Rf_*M}=Rf_*\eta_{X,M}$. For $M\to M'$, the two
-naturality composites out of $\Lambda_YRf_*M$ have equal composites with $\eta_{Y,Rf_*M}$ by
-naturality of the units. The same bijection makes them equal. This constructs the natural
-comparison with exactly the required normalization and uniqueness.
-
-5. For a slice $V$, let $K_Y$ be the augmented complex of
-[lem-weil-pbc-extended-cech-completion-model]. Its restriction has the same augmented extended
-Cech local description for $\mathcal J_Y|_V$. The restriction comparison in
-[lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies $(R\mathcal Hom(K_Y,N))|_V$ with
-$R\mathcal Hom(K_Y|_V,N|_V)$ and identifies the maps induced by the augmentation. The reflector
-characterization in the Cech-model statement therefore identifies $(\Lambda_YN)|_V$ with
-$\Lambda_{Y/V}(N|_V)$, with its unit. The same argument applies on $X$ and further slices. This
-establishes localization compatibility without assuming that restriction commutes with arbitrary
-derived limits.
-
-6. Use [lem-weil-pbc-ringed-derived-slice-localization] on $M$ and $\Lambda_XM$, and Step 5 on
-both units. Restricting Step 4 gives $\gamma|_V\,\eta_{Y/V}=R(f_V)_*\eta_{X/u(V)}$. Uniqueness in
-Step 4 on the slice identifies $\gamma|_V$ with $\gamma_{f_V,M|_{u(V)}}$. For invertibility, take
-its cone. Exact restriction [def-weil-pbc-ringed-derived-restriction] identifies its cohomology
-with restricted cohomology sheaves. If these vanish on a covering family of each target object,
-every section of every cohomology sheaf restricts to zero on that cover and is zero by sheaf
-separatedness [def-weil-pbc-sites-and-cohomology]. The cone is then zero. Since $\mathcal J_Y$ is
-locally finitely generated, it suffices to work on slices with $\mathcal J_Y=(b_1,\ldots,b_r)$,
-where its image ideal is $(c_1,\ldots,c_r)$ for $c_i=f^\sharp(b_i)$.
-
-7. On such a slice put $Q_n^Y=\bigotimes_i[R_Y\xrightarrow{b_i^n}R_Y]$ in degrees $[-r,0]$ and
-$Q_n^X=\bigotimes_i[R_X\xrightarrow{c_i^n}R_X]$. Take the strict transitions $(b_i,1)$ and
-$(c_i,1)$ in degrees $(-1,0)$ and degree-zero chain maps $z_n:R_Y[0]\to Q_n^Y$, $z'_n:R_X[0]\to
-Q_n^X$ from [lem-weil-pbc-ringed-koszul-completion-reflector]. That statement identifies
-$\Lambda_YRf_*M$ and $\Lambda_XM$ with the strict total derived limits $L_Y S_\bullet$ and $L_X
-T_\bullet$ for $S_n=Rf_*M\otimes^L Q_n^Y$, $T_n=M\otimes^L Q_n^X$, with exactly the units induced
-by $z_n,z'_n$. The representative-independent strict-tower comparison and its unit normalization
-are also explicit in [lem-weil-pbc-ringed-cech-koszul-dual-limit].
-
-8. The K-flat pullback computation [lem-weil-pbc-ringed-topoi-derived-pullback] and tensor
-comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identify $Lf^*Q_n^Y$ with $Q_n^X$:
-the entries $b_i^n$ of each finite free differential become $c_i^n$. The transition $(b_i,1)$
-becomes $(c_i,1)$, and the degree-zero map $1$ remains $1$. Tensoring these identities gives
-identifications of the entire augmented strict Koszul towers, including their tensor-differential
-signs, since transitions have degree zero. The explicit two-term factors, transitions and units
-used here are those of [lem-weil-pbc-ringed-koszul-completion-reflector].
-
-9. The complex $Q_n^Y$ is bounded with finite free terms, so it carries the strict-perfect package
-$i_r=p_r=\mathrm{id}$ of [def-weil-pbc-projection-formula-arrows], whose arrow $\pi_{f,M,Q_n^Y}$
-is the adjunct of $(\varepsilon_M\otimes1)$ after the canonical tensor/pullback comparison, i.e.
-the projection transformation $\alpha$ of [lem-weil-pbc-ringed-projection-mate-exact] at
-$P=Q_n^Y$. By [lemma-weil-pbc-projection-formula-totalization] it is an isomorphism
-$\alpha_n:S_n\xrightarrow{\sim}Rf_*T_n$ (with $Lf^*Q_n^Y=Q_n^X$ from Step 8). Naturality of the
-canonical projection transformation in [lem-weil-pbc-ringed-projection-mate-exact], applied to the
-transitions $t_n^Y,t_n^X$ identified in Step 8, gives the actual equation $$Rf_*(1_M\otimes
-t_n^X)\alpha_{n+1}=\alpha_n(1_{Rf_*M}\otimes t_n^Y).$$ Its naturality at $z_n:R_Y[0]\to Q_n^Y$ and
-its tensor-unit equation $\alpha_{M,R_Y}=1$ give $\alpha_n(1\otimes z_n)=Rf_*(1\otimes z'_n)$.
-These are the Koszul-transition and levelwise-unit squares.
-
-10. Apply [lem-weil-pbc-ringed-strict-tower-projection-morphism] to the augmented finite free
-tower $P_\bullet=Q_\bullet^Y$. Step 8 identifies its pullback with $Q_\bullet^X$, with the actual
-transitions and units. The resulting $u:S_\bullet\to Rf_*^{\operatorname{Tow}}T_\bullet$ in
-$D(\operatorname{Tow}(R_Y))$ evaluates to the specific $\alpha_n$ of Step 9. For
-$a_{f,T}:Rf_*L_XT\cong L_YRf_*^{\operatorname{Tow}}T$ of
-[lem-weil-ringed-tower-pushforward-limit-comparison], set $\delta=a_{f,T}^{-1}L_Y(u)$. The use of
-an actual strict derived-tower morphism supplies the coherent derived-limit map and its connecting
-square.
-
-11. Every evaluation of $u$ is invertible by Step 9. Kernels and cokernels in the tower category
-are levelwise [lem-weil-tower-category-levelwise-abelian], hence so is cohomology. The cone of $u$
-has zero cohomology at each index, thus zero cohomology as a tower object. Therefore $u$ is
-invertible in $D(\operatorname{Tow}(R_Y))$. The exact functor $L_Y$ of
-[lem-weil-pbc-ringed-strict-tower-homotopy-limit] preserves its inverse. Since $a_{f,T}$ is
-invertible, so is $\delta$. This does not require exact countable products.
-
-12. The augmented-tower equation in [lem-weil-pbc-ringed-strict-tower-projection-morphism] is
-$L_Y(u)\zeta_Y=a_{f,T}Rf_*(\zeta_X)$. The unit-preserving Koszul identifications of
-[lem-weil-pbc-ringed-koszul-completion-reflector] give $\zeta_Y=\eta_{Y,Rf_*M}$ and
-$\zeta_X=\eta_{X,M}$. Hence $$\delta\eta_{Y,Rf_*M}=a_{f,T}^{-1}L_Y(u)\zeta_Y=Rf_*\eta_{X,M}.$$ The
-reflector bijection of [lem-weil-pbc-extended-cech-completion-model], with complete target
-$Rf_*\Lambda_XM$ from Step 3, identifies $\delta$ with the unique $\gamma_{f,M}$ of Step 4. Thus
-that specific comparison is invertible on each generating slice, globally by Step 6, and in the
-original presentation by Step 1. The unit equation and naturality were already proved in Step 4.
-The argument allows the empty Koszul list and places no boundedness condition on $M$.
+Proof: use the augmented Cech tensor-pullback comparison. Taking right adjoints of
+its tensor square gives an isomorphism between direct image followed by Cech internal
+Hom and Cech internal Hom followed by direct image. The transpose normalization of
+the augmentations proves its unit equation. The reflector bijections identify the
+given completion functors with the Cech functors, uniquely preserving their units.
+Conjugating the preceding isomorphism gives gamma. For a complete source object its
+source unit is an isomorphism, hence the unit equation makes the target unit an
+isomorphism as well. Its target is complete, so direct image is complete. Finally,
+the target reflector bijection makes every arrow with the specified unit equation
+equal to gamma.
 -/
 theorem ringedPushforward_completion
     {C X : Type u} [SmallCategory C] [SmallCategory X]
@@ -279,6 +316,61 @@ theorem ringedPushforward_completion
         ηY.app (Rf.obj M) ≫ γ.hom.app M = Rf.map (ηX.app M)) ∧
       ∀ (M : ringedSiteDerived.{u, wX} RX) (a : ΛY.obj (Rf.obj M) ⟶ Rf.obj (ΛX.obj M)),
         ηY.app (Rf.obj M) ≫ a = Rf.map (ηX.app M) → a = γ.hom.app M := by
-  sorry
+  let : J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+  let : K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+  let AY := ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY)
+  let AX := ringedSiteModules.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)
+  let : Category AY := inferInstance
+  let : Category AX := inferInstance
+  let : Abelian AY := inferInstance
+  let : Abelian AX := inferInstance
+  let : HasDerivedCategory.{wY} AY := inferInstance
+  let : HasDerivedCategory.{wX} AX := inferInstance
+  obtain ⟨L, ⟨a⟩, _⟩ := f.exists_derivedLeftAdjoint RY RX Rf ρ hRf hCompute
+  obtain ⟨SY, _, _, _⟩ := ringedDerived_closed_symmetric_monoidal.{u, u, u, wY} J RY
+  obtain ⟨SX, _, _, _⟩ := ringedDerived_closed_symmetric_monoidal.{u, u, u, wX} K RX
+  let SY' : WeilConjectures.CoefficientClosedStructure (derivedInternalHom.{u, wY} J RY) := SY
+  let SX' : WeilConjectures.CoefficientClosedStructure (derivedInternalHom.{u, wX} K RX) := SX
+  obtain ⟨hfin, hcech⟩ :=
+    ringed_augmentedCech_tensor_pullback RY RX f IY ιY IX ιX hImage Rf ρ hRf hCompute L a SY' SX'
+  let : IX.IsFiniteType := hfin
+  obtain ⟨KX, εX, hKX⟩ := exists_ringedExtendedCech_global_model.{u, wX} K RX IX ιX
+  obtain ⟨KY, εY, hKY⟩ := exists_ringedExtendedCech_global_model.{u, wY} J RY IY ιY
+  obtain ⟨c, hc⟩ := hcech KX εX hKX KY εY hKY
+  let CX := ringedCechCompletionFunctor.{u, wX} RX KX
+  let CY := ringedCechCompletionFunctor.{u, wY} RY KY
+  let α : 𝟭 (ringedSiteDerived.{u, wX} RX) ⟶ CX :=
+    { app := ringedCechCompletionUnit.{u, wX} RX KX εX
+      naturality := fun {_ _} g ↦ (completion_unit_natural.{u, wX} RX KX εX _ _ g).symm }
+  let β : 𝟭 (ringedSiteDerived.{u, wY} RY) ⟶ CY :=
+    { app := ringedCechCompletionUnit.{u, wY} RY KY εY
+      naturality := fun {_ _} g ↦ (completion_unit_natural.{u, wY} RY KY εY _ _ g).symm }
+  let bY : @MonoidalCategory.tensorRight _ _ SY'.monoidal
+      (DerivedCategory.Q.obj KY) ⊣ CY := SY'.adjunction (DerivedCategory.Q.obj KY)
+  let bX : @MonoidalCategory.tensorRight _ _ SX'.monoidal
+      (DerivedCategory.Q.obj KX) ⊣ CX := SX'.adjunction (DerivedCategory.Q.obj KX)
+  obtain ⟨σY, hσY⟩ := exists_inverseTranspose _ CY bY β
+  obtain ⟨σX, hσX⟩ := exists_inverseTranspose _ CX bX α
+  have hnY (T) : bY.homEquiv T T (σY.app T) = β.app T := by
+    rw [hσY]
+    exact Equiv.apply_symm_apply _ _
+  have hnX (T) : bX.homEquiv T T (σX.app T) = α.app T := by
+    rw [hσX]
+    exact Equiv.apply_symm_apply _ _
+  have hcompat (T) : c.hom.app T ≫ σX.app (L.obj T) = L.map (σY.app T) := by
+    rw [hσX, hσY]
+    exact hc T
+  obtain ⟨δ, hδ⟩ := normalizedRightAdjoints L Rf a _ CY bY _ CX bX
+    σY σX β α hnY hnX c hcompat
+  obtain ⟨hCX, _, rCX, _⟩ :=
+    ringedExtendedCech_reflector_properties.{u, wX} K RX IX ιX KX εX hKX
+  obtain ⟨hCY, _, rCY, _⟩ :=
+    ringedExtendedCech_reflector_properties.{u, wY} J RY IY ιY KY εY hKY
+  exact reflectorCommutation Rf
+    (IsLocallyDerivedRingedIdealComplete RX IX ιX)
+    (IsLocallyDerivedRingedIdealComplete RY IY ιY)
+    (fun e h ↦ locallyComplete_of_iso RY IY ιY e h)
+    ΛX CX ΛY CY ηX α ηY β hCompleteX hCX hCompleteY hCY
+    hReflectX rCX hReflectY rCY δ hδ
 
 end CategoryTheory

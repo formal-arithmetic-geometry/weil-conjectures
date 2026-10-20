@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-ringed-derived-adjunction-independent-universes",
+ "kind": "statement",
+ "title": "Derived module inverse image is left adjoint to a supplied derived direct image",
+ "statement": "Let $f:(X,R_X)\\to(Y,R_Y)$ be a morphism of ringed topoi presented by small sites [def-weil-pbc-ringed-topos-morphism], with their module categories [def-weil-sheaf-of-modules-category]. Choose unbounded derived categories $D(R_Y)$ and $D(R_X)$ in independent localization universes [def-weil-abstract-derived-category]. Write $q_T$ for localization of complexes and $Q_T$ for localization of the homotopy category. Let $Rf:D(R_X)\\to D(R_Y)$ have a natural comparison $\\rho:q_Y\\circ f_*^{\\mathrm{complex}}\\to Rf\\circ q_X$ universal as a right derived functor at quasi-isomorphisms. Assume $\\rho_I$ is invertible for every K-injective complex $I$ [def-pur-kinjective-complex]. Then there exist $L:D(R_Y)\\to D(R_X)$ with $L\\dashv Rf$ and an additive module functor $G:\\operatorname{Mod}(R_Y)\\to\\operatorname{Mod}(R_X)$ with $G\\dashv f_*$. There is a comparison $\\epsilon:L\\circ Q_Y\\to Q_X\\circ G^{K}$ universal as a left derived functor on homotopy categories, where $G^K$ is induced termwise by $G$. This comparison is invertible on every K-flat complex with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. No ideal or completion hypotheses are imposed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN (lemma-find-existence-computes), dual resolving-class construction; Tag 09T5 (lemma-derived-adjoint-functors), derived adjunction"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-kinjective-complex",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "The supplied ringed-topos K-flat pullback theorem constructs an additive module left adjoint G to f.modules which preserves quasi-isomorphisms between flat-term K-flat complexes.",
+   "uses": [
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every complex has a flat-term K-flat resolution. Their homotopy images form a resolving class; the resolving-class theorem constructs L and its homotopy left-derived comparison. Its comparison is invertible on the resolving class, which is retained in the conclusion. Fullness of the homotopy quotient transfers this universal property to complexes.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The denominator pro-diagrams are essentially constant, so postcomposition by Rf preserves this left-derived comparison. K-injective derivability and the supplied computation property show that postcomposition of Rf by L is still right derived. Use Mathlib Adjunction.derived on the original complex adjunction.",
+   "uses": [
+    "lem-pur-resolving-class-essential-constancy",
+    "new-derived-adjunction-compatibility",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "new-derived-adjunction-compatibility",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN (lemma-find-existence-computes), dual resolving-class construction; Tag 09T5 (lemma-derived-adjoint-functors), derived adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive adjunction descends to an adjunction of unbounded derived categories when K-flat resolutions compute the left derived functor and K-injective resolutions compute the right derived functor",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "Mathlib derived adjunction is used after verifying absolute derived properties."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Aa]djoint|[Aa]djoint.*derived",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "Mathlib derived adjunction is used after verifying absolute derived properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "3 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-21",
+   "verdict": "Mathlib derived adjunction is used after verifying absolute derived properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive adjunction induces an adjunction between unbounded derived categories if the left and right derived functors are absolute and computed by K-flat and K-injective resolutions",
+   "results": "8 hits: CategoryTheory.Functor.leftDerived, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Functor.rightDerived, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_unit",
+   "date": "2026-10-21",
+   "verdict": "Mathlib derived adjunction is used after verifying absolute derived properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedPushforwardCompletion",
+  "date": "2026-10-21",
+  "group": "X5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Final sentence: scalar extension of the E-exchange is the E-prime-exchange; construct the derived adjunction and augmented Cech pullback for the direct-image/completion comparison in the specified ambient mate.",
+   "via": [
+    "lem-weil-pbc-ringed-pushforward-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedToposDerivedAdjunctionOfUniverses",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposDerivedAdjunctionOfUniverses.lean",
+  "declaration": "CategoryTheory.RingedToposMorphism.exists_derivedLeftAdjoint",
+  "statement": "theorem RingedToposMorphism.exists_derivedLeftAdjoint\n    {C X : Type u} [SmallCategory C] [SmallCategory X]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology X}\n    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]\n    [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]\n    (RY : Sheaf J CommRingCat.{u}) (RX : Sheaf K CommRingCat.{u})\n    [HasDerivedCategory.{wY} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY))]\n    [HasDerivedCategory.{wX} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX))]\n    (f : RingedToposMorphism\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY))\n    (Rf : ringedSiteDerived.{u, wX} RX ⥤ ringedSiteDerived.{u, wY} RY)\n    (ρ : f.modules.mapHomologicalComplex (ComplexShape.up ℤ) ⋙\n      DerivedCategory.Q.{wY} (C := ringedSiteModules.{u, u, u, u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY)) ⟶\n      DerivedCategory.Q.{wX} (C := ringedSiteModules.{u, u, u, u}\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)) ⋙ Rf)\n    (hRf : Rf.IsRightDerivedFunctor ρ\n      (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u}\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)) (ComplexShape.up ℤ)))\n    (hCompute : ∀ I : CochainComplex (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)) ℤ,\n      I.IsKInjective → IsIso (ρ.app I)) :\n    ∃ L : ringedSiteDerived.{u, wY} RY ⥤ ringedSiteDerived.{u, wX} RX,\n      Nonempty (L ⊣ Rf) ∧\n      ∃ G : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY) ⥤\n          ringedSiteModules.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX),\n        Nonempty (G ⊣ f.modules) ∧ ∃ hG : G.Additive,\n        letI := hG\n        ∃ ε : DerivedCategory.Qh.{wY} ⋙ L ⟶\n            G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh.{wX},\n          L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso\n            (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY))\n            (.up ℤ)) ∧\n          ∀ P : CochainComplex (ringedSiteModules.{u}\n              ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY)) ℤ,\n            P.IsAcyclicTensorKFlat →\n            (∀ n : ℤ, (P.X n).IsFlat) →\n            IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261020T211858-L-3513524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261020T211858-L-3513524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

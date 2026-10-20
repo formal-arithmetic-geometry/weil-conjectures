@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-augmented-cech-tensor-pullback",
+ "kind": "statement",
+ "title": "Augmented Cech tensor actions commute with derived inverse image",
+ "statement": "Let $f:(X,R_X)\\to(Y,R_Y)$ be a morphism of ringed topoi presented by small sites [def-weil-pbc-ringed-topos-morphism]. Let $I_Y\\hookrightarrow R_Y$ be a monic ideal sheaf locally of finite type, and let $I_X\\hookrightarrow R_X$ be the least ideal containing the structural image of $f^{-1}I_Y$ [def-weil-pbc-ringed-ideal-generators]. Fix unbounded derived categories on each site and its object slices, with independent localization universes for $X$ and $Y$ [def-weil-abstract-derived-category]. Let $Rf:D(R_X)\\to D(R_Y)$ be right derived module direct image, with a universal comparison invertible on all K-injective complexes [def-pur-kinjective-complex], and fix $L\\dashv Rf$. Fix closed monoidal structures $S_Y,S_X$ for the recorded derived internal Homs [def-coef-ringed-tensor-hom-model]. Then $I_X$ is locally of finite type. For every pair of augmented complexes $K_X\\to R_X[0]$, $K_Y\\to R_Y[0]$ with the local extended Cech descriptions [def-weil-pbc-local-extended-cech-description], let $\\sigma_{T,A}:A\\otimes^L K_T\\to A$ be the inverse tensor-Hom transpose of the canonical augmentation-induced unit $A\\to R\\mathcal Hom(K_T,A)$ [def-weil-pbc-ringed-completion-unit]. There is a natural isomorphism $$c:L(-\\otimes^L K_Y)\\xrightarrow{\\sim}L(-)\\otimes^L K_X$$ satisfying $$c_A\\,;\\,\\sigma_{X,L(A)}=L(\\sigma_{Y,A})$$ for every $A\\in D(R_Y)$, where a semicolon means composition in written order. This concerns augmented tensor actions and has no conclusion about completion reflectors or their direct images.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0G, final pullback identity, together with the augmented extended Cech construction in Tags 099E and 099F; sites-cohomology.tex Tags 07A4 and 08J9 for derived tensor pullback and tensor-Hom"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-kinjective-complex",
+  "def-weil-pbc-local-extended-cech-description",
+  "def-weil-pbc-ringed-ideal-generators",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof": [
+  {
+   "text": "The inverse image of a covering finite generating family is covering. Extension of scalars sends its generators to their structural images; the least-ideal property identifies the resulting image ideal with IX. This proves IX finite type. The supplied augmented extended Cech models have the recorded local descriptions.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-extended-cech-global-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "When using the common-derived-universe tensor API, first transport both derived categories and all slice derived categories to their standard localization models via the universal property. Uniqueness of localization lifts identifies restriction functors and the localized Hom-complex bifunctors, including their unit maps. This transports the supplied closed adjunctions and local augmented descriptions. Use K-flat inverse image and its canonical tensor comparison in those standard models, then transport back. Uniqueness of left adjoints identifies that derived inverse image with L. Work on sheaf slices, using the presentation transport comparisons to compare them to site-object slices. For each finite generating list, existsUnique_localizationInverseImage commutes algebraic inverse image with scalar localization. Then ringedSliceLocalizationModel at the identity site functor and the structural ring map handles extension of scalars. Thus localization pulls back to localization at the image section, including its unit map. Therefore the tensor product of the two-term localization complexes pulls back to the corresponding source augmented Cech complex. These are compatible with restrictions and changes of generating lists. On canonical global models these formulas commute with gluing. For any supplied model, its local tensor-Hom reflection property identifies its completion functor with the canonical one, preserving the unit; uniqueness of left adjoints then transports the normalized tensor action. Thus the comparison holds for all supplied models.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-weil-pbc-ringed-slice-localization-model",
+    "def-weil-abstract-derived-category",
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical closed tensor models have the usual augmentation maps after tensoring and applying the right unitor. Their transposes are inverse evaluation at one followed by precomposition with the augmentation, exactly the recorded units. For the supplied closed structures, uniqueness of left adjoints to the same internal Hom gives tensor-action isomorphisms preserving the inverse-transposed units. Conjugate the canonical tensor/Cech comparison by these isomorphisms to obtain c. The augmentation squares give c_T≫σX_LT=L(σY_T), including the empty-list and unit-ideal cases.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-weil-pbc-ringed-completion-unit",
+    "lem-weil-pbc-extended-cech-reflector-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-completion-unit",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-extended-cech-global-model",
+  "lem-weil-pbc-extended-cech-reflector-properties",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-weil-pbc-ringed-slice-localization-model",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0G, final pullback identity, together with the augmented extended Cech construction in Tags 099E and 099F; sites-cohomology.tex Tags 07A4 and 08J9 for derived tensor pullback and tensor-Hom"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image of the augmented extended Cech complex of a finite ideal is the extended Cech complex of the image ideal, compatible with the tensor Hom adjunction",
+   "results": "8 hits: localCohomology.diagram, localCohomology.diagramComp, localCohomology.ofDiagram, localCohomology, localCohomology.ofSelfLERadical, localCohomology.isoSelfLERadical, localCohomology.isoOfFinal, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of",
+   "date": "2026-10-21",
+   "verdict": "Mathlib derived adjunction is used after verifying absolute derived properties."
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]ech|[Cc]ech).*(tensor|pullback)|(pullback|tensor).*[Cc]ech",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No generic augmented extended Cech pullback theorem; hits inspected are ordinary Cech nerves or module local cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"pullback\"",
+   "results": "2 hits: CategoryTheory.CechNerveTerminalFrom.hasWidePullback', CategoryTheory.CechNerveTerminalFrom.hasWidePullback",
+   "date": "2026-10-21",
+   "verdict": "No generic augmented extended Cech pullback theorem; hits inspected are ordinary Cech nerves or module local cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image carries the augmented extended Cech complex of a finitely generated ideal to the augmented extended Cech complex of its image ideal, compatibly with tensor products and augmentation",
+   "results": "8 hits: ChainComplex.truncateAugment_inv_f, CochainComplex.truncateAugment_inv_f, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, CochainComplex.augmentTruncate, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom, CategoryTheory.Arrow.mapAugmentedCechConerve, CochainComplex.augmentTruncate_inv_f_succ, HomologicalComplex.pOpcycles_extendOpcyclesIso_inv_assoc",
+   "date": "2026-10-21",
+   "verdict": "No generic augmented extended Cech pullback theorem; hits inspected are ordinary Cech nerves or module local cohomology."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedPushforwardCompletion",
+  "date": "2026-10-21",
+  "group": "X5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Final sentence: scalar extension of the E-exchange is the E-prime-exchange; construct the derived adjunction and augmented Cech pullback for the direct-image/completion comparison in the specified ambient mate.",
+   "via": [
+    "lem-weil-pbc-ringed-pushforward-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AugmentedCechTensorPullback",
+  "file": "lean/Sheaf/Paper/AugmentedCechTensorPullback.lean",
+  "declaration": "CategoryTheory.ringed_augmentedCech_tensor_pullback",
+  "statement": "theorem ringed_augmentedCech_tensor_pullback\n    {C X : Type u} [SmallCategory C] [SmallCategory X]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology X}\n    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]\n    [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]\n    (RY : Sheaf J CommRingCat.{u}) (RX : Sheaf K CommRingCat.{u})\n    [HasDerivedCategory.{wY} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY))]\n    [HasDerivedCategory.{wX} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX))]\n    [∀ U : C, HasDerivedCategory.{wY} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (RY.over U)))]\n    [∀ U : X, HasDerivedCategory.{wX} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose (K.over U) (forget₂ CommRingCat RingCat)).obj (RX.over U)))]\n    (f : RingedToposMorphism\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY))\n    (IY : ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY))\n    (ιY : IY ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY))\n    [Mono ιY] [IY.IsFiniteType]\n    (IX : ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX))\n    (ιX : IX ⟶ SheafOfModules.unit ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX))\n    [Mono ιX]\n    (hImage : ∀ (N : ringedSiteModules.{u, u, u, u}\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX))\n      (j : N ⟶ SheafOfModules.unit ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)),\n      Mono j →\n      (∃ k : f.inverse.obj ((SheafOfModules.toSheaf\n          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY) ⋙\n          sheafCompose J (forget AddCommGrpCat)).obj IY) ⟶\n          (SheafOfModules.toSheaf ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX) ⋙\n            sheafCompose K (forget AddCommGrpCat)).obj N,\n        (k ≫ (SheafOfModules.toSheaf ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX) ⋙\n            sheafCompose K (forget AddCommGrpCat)).map j : _ ⟶ (sheafCompose K (forget RingCat)).obj\n              ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)) =\n          (f.inverse.map ((SheafOfModules.toSheaf\n          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY) ⋙\n            sheafCompose J (forget AddCommGrpCat)).map ιY) : _ ⟶ f.inverse.obj\n              ((sheafCompose J (forget RingCat)).obj\n                ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY))) ≫ f.ringMap) ↔\n      ∃ a : IX ⟶ N, a ≫ j = ιX)\n    (Rf : ringedSiteDerived.{u, wX} RX ⥤ ringedSiteDerived.{u, wY} RY)\n    (ρ : f.modules.mapHomologicalComplex (ComplexShape.up ℤ) ⋙\n      DerivedCategory.Q.{wY} (C := ringedSiteModules.{u, u, u, u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj RY)) ⟶\n      DerivedCategory.Q.{wX} (C := ringedSiteModules.{u, u, u, u}\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)) ⋙ Rf)\n    (hRf : Rf.IsRightDerivedFunctor ρ\n      (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u}\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)) (ComplexShape.up ℤ)))\n    (hCompute : ∀ I : CochainComplex (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RX)) ℤ,\n      I.IsKInjective → IsIso (ρ.app I))\n    (L : ringedSiteDerived.{u, wY} RY ⥤ ringedSiteDerived.{u, wX} RX)\n    (a : L ⊣ Rf)\n    (SY : CoefficientClosedStructure (derivedInternalHom.{u, wY} J RY))\n    (SX : CoefficientClosedStructure (derivedInternalHom.{u, wX} K RX)) :\n    IX.IsFiniteType ∧\n    ∀ (KX : ringedSiteComplex RX) (εX : KX ⟶ ringedSiteRingComplex RX),\n      HasLocalExtendedCechDescription.{u, wX} RX IX ιX KX εX →\n    ∀ (KY : ringedSiteComplex RY) (εY : KY ⟶ ringedSiteRingComplex RY),\n      HasLocalExtendedCechDescription.{u, wY} RY IY ιY KY εY →\n    ∃ c : @MonoidalCategory.tensorRight _ _ SY.monoidal\n          (DerivedCategory.Q.{wY}.obj KY) ⋙ L ≅\n        L ⋙ @MonoidalCategory.tensorRight _ _ SX.monoidal\n          (DerivedCategory.Q.{wX}.obj KX),\n      ∀ T : ringedSiteDerived.{u, wY} RY, c.hom.app T ≫\n          ((SX.adjunction (DerivedCategory.Q.{wX}.obj KX)).homEquiv (L.obj T) (L.obj T)).symm\n            (ringedCechCompletionUnit.{u, wX} RX KX εX (L.obj T)) =\n        L.map (((SY.adjunction (DerivedCategory.Q.{wY}.obj KY)).homEquiv T T).symm\n          (ringedCechCompletionUnit.{u, wY} RY KY εY T))",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261020T211858-L-3513524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261020T211858-L-3513524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
