@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-completed-constructible-reduction-control",
+ "kind": "statement",
+ "title": "Uniform constructible finite reductions of the four completed operations",
+ "statement": "Let d=(A,I) be [def-weil-pbc-adic-coefficient-datum], and square be [def-weil-pbc-cartesian-square] with noetherian finite-dimensional vertices, both vertical maps proper, a positive N annihilating A/I and invertible on every vertex, and all geometric fibres of f bounded in dimension by e. For an input K satisfying [def-weil-pbc-bounded-constructible-complete], let H be any of Rf_*K, completed Lg* of Rf_*K, completed Lg-prime* of K, or Rf-prime* of completed Lg-prime* of K, on Y, Y-prime, X-prime, or Y-prime respectively. Its canonical quotient-coefficient reductions have constructible cohomology in one common integer window [a,b], with a <= b. Constructibility means [def-weil-pbc-proetale-modules] in the constant coefficient presentation obtained by restricting along pbcLevelConstantComparison. No intrinsic completeness, etale origin, common local model, or normalization compatibility is asserted. These are exactly the fields of PbcConstructibleReductionControl in the attached Lean module.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "the AMP, WIT and TOW assembly and the four displayed outputs; uniform interval from cor-weil-pbc-constructible-complete, proof step 2"
+ },
+ "proof": [
+  {
+   "text": "Use the common local term window [d0,d1] supplied by the input uniform tower. The uniform perfect-quotient resolution bound [-r,0], sheafified using the flat constant/completed comparison, computes each local reduction by a total tensor complex supported in [d0-r,d1]. Each stratum covering detects this vanishing. Every geometric point belongs to a stratum; use the retained bounded-below etale origin and geometric stalk conservativity for its cohomology to obtain the same global interval. Local finite-lisse cohomology gives constructibility. This does not assert that the strata cover in the pro-etale topology.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-uniform-perfect-quotient-bound",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-cbc-proetale-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+    "place": "the AMP, WIT and TOW assembly and the four displayed outputs; uniform interval from cor-weil-pbc-constructible-complete, proof step 2"
+   }
+  },
+  {
+   "text": "The first quotient is killed by N and its higher quotients by the corresponding powers of N. The image of a unit global section in every stalk is a unit. Apply amplification_of_isProper to obtain finite-level amplification with bound 2e for this same datum, including proper direct images and exact finite pullbacks. It applies to the base-changed proper arrow with the same geometric fibre bound.",
+   "uses": [
+    "thm-weil-pbc-amplification-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+    "place": "the AMP, WIT and TOW assembly and the four displayed outputs; uniform interval from cor-weil-pbc-constructible-complete, proof step 2"
+   }
+  },
+  {
+   "text": "Use the quotient-linear finite-projection comparison for direct image and the canonical completed-pullback reduction comparison. Finite amplification gives constructibility and a single interval for the four reductions, in the finite coefficient module categories, including the quotient scalar action. Apply this first to K, then its direct image, and repeat direct image for the pulled-back K. The direct-image and pullback comparisons transport the bounds and constructibility to the canonical reductions.",
+   "uses": [
+    "lemma-weil-pbc-perfect-projection-formula",
+    "lemma-weil-pbc-completed-pullback-reduction",
+    "thm-weil-pbc-amplification-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+    "place": "the AMP, WIT and TOW assembly and the four displayed outputs; uniform interval from cor-weil-pbc-constructible-complete, proof step 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-uniform-perfect-quotient-bound",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-cbc-proetale-stalk-conservative",
+  "thm-weil-pbc-amplification-proper",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lemma-weil-pbc-completed-pullback-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "the AMP, WIT and TOW assembly and the four displayed outputs; uniform interval from cor-weil-pbc-constructible-complete, proof step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Constructible derived complete complexes preserved by proper direct image and completed pullback for finite adic coefficients",
+   "results": "Condensed.profiniteSolid; localCohomology.diagram; AdicCompletion.map_exact; CondensedMod.IsSolid; IsAdicComplete; IsAdicComplete.of_comp_lift; AdicCompletion.piEquivFin; IsAdicComplete.toIsPrecomplete",
+   "date": "2026-10-19",
+   "verdict": "no matching preservation statement; generic category or adic algebra results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\"",
+   "results": "CategoryTheory.IsTriangulated; CategoryTheory.IsTriangulated.mk; CategoryTheory.IsTriangulated.octahedron_axiom; CategoryTheory.IsTriangulated.mk'; CategoryTheory.Functor.IsTriangulated.instId; CategoryTheory.Functor.IsTriangulated; CategoryTheory.Functor.IsTriangulated.instAdditive; CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair",
+   "date": "2026-10-19",
+   "verdict": "no matching preservation statement; generic category or adic algebra results only"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*complete.*preserv|preserv.*constructible.*complete",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "no matching preservation statement; generic category or adic algebra results only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite reductions of completed proper direct images have constructible cohomology in a common bounded interval",
+   "results": "AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.IsFinite.recOn; Topology.IsConstructible.biInter; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; Topology.IsConstructible.iInter; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme",
+   "date": "2026-10-19",
+   "verdict": "no match: generic sheaf adjunctions, properness or topological constructibility; no finite-coefficient derived preservation result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "group": "K1",
+  "item": "Sheaf.Paper.ConstructibleCompleteBaseChange",
+  "date": "2026-10-19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-actual-coefficient-constructible-preservation",
+   "place": "finite-level cohomological control, before completeness and normalized assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedConstructibleReductionControl",
+  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.constructible_reduction_control",
+  "file": "lean/Sheaf/Paper/CompletedConstructibleReductionControl.lean",
+  "existing": false,
+  "statement": "theorem AdicCoefficientDatum.constructible_reduction_control\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    {X' X Y' Y : Scheme.{u}}\n    {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}\n    (sq : ChosenCartesianSquare g' f' f g)\n    [IsNoetherian X] [IsNoetherian Y] [IsNoetherian X'] [IsNoetherian Y']\n    (hDimX : ∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞))\n    (hDimY : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞))\n    (hDimX' : ∃ n : ℕ, topologicalKrullDim X' ≤ (n : WithBot ℕ∞))\n    (hDimY' : ∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞))\n    [IsProper f] [IsProper f']\n    (N : ℕ) (hN : 0 < N) (hAnn : (N : A ⧸ d.ideal) = 0)\n    (hNX : IsUnit (N : Γ(X, ⊤))) (hNY : IsUnit (N : Γ(Y, ⊤)))\n    (hNX' : IsUnit (N : Γ(X', ⊤))) (hNY' : IsUnit (N : Γ(Y', ⊤)))\n    (e : ℕ)\n    (hFibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n      (y : Spec (.of Ω) ⟶ Y),\n      topologicalKrullDim (pullback f y : Scheme.{u}) ≤ (e : WithBot ℕ∞))\n    (K : d.derived X) (hK : PbcIsBoundedConstructibleComplete X d K) :\n    PbcConstructibleReductionControl Y d ((d.push f).obj K) ∧\n      PbcConstructibleReductionControl Y' d\n        ((d.completedPull g).obj ((d.push f).obj K)) ∧\n      PbcConstructibleReductionControl X' d ((d.completedPull g').obj K) ∧\n      PbcConstructibleReductionControl Y' d\n        ((d.push f').obj ((d.completedPull g').obj K))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-19",
+  "note": "Strictly finite-level cohomology: excludes intrinsic completeness, etale origins, uniform local models and normalization compatibility. These are proved in the preservation module."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261020T051434-L-1681519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261020T051434-L-1681519",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
