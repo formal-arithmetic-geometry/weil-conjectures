@@ -1,0 +1,175 @@
+{
+ "id": "lem-weil-point-sections-integral-cohomology-control",
+ "kind": "statement",
+ "title": "Bounded complete integral point cohomology with finite residue",
+ "statement": "For D,l,E and an integral constructible complex C, let R=ULift O_E, I=(ULift uniformizer), and M be the derived object of canonical integral point sections. Then M has finite cohomological support and is derived I-complete, and for every i the quotient of H^i(M) by I H^i(M) is a finite set.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "the assertion that evaluation at the geometric point lands in $D^b_{\\mathrm{fin}}$, $D^b_{\\mathrm{fg}}$, $D^b_{\\mathrm{fd}}$"
+ },
+ "stmt_deps": [
+  "def-weil-point-section-scalar-functors",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-point-derived-complete-module-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use exact countable products of pro-etale module sheaves and of ordinary modules. The derived product theorem supplies countable products in both derived categories and commutation of homology with these products. Exact integral sections preserve the products, by descent from termwise products through the localization. Conjugating the tower transition endomorphism by the product comparison sends the defining sheaf Roos triangle to the Roos triangle of its section tower. The common support interval [a,b] of the reductions and the long exact homology sequence bound integral section cohomology in [a,b+1].",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-limit",
+    "lem-weil-derived-limit-products-core",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each a in the principal uniformizer ideal, a^(n+1) vanishes in the quotient at level n. The projection of the integral constant-section scalar map is the finite constant-section scalar map applied to the quotient: this follows from the limit-cone projection equation and naturality of sheafification. Hence a^(n+1) annihilates the restricted section complex termwise, and therefore its derived object. Apply the nilpotent-torsion derived-limit completeness theorem to the section Roos triangle. Transport the conclusion through the exact-sections localization comparison.",
+   "uses": [
+    "def-weil-point-section-scalar-functors",
+    "def-weil-completed-integral-coefficients",
+    "def-weil-integral-derived-reduction",
+    "lem-weil-pbc-nilpotent-torsion-derived-limit-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the existing natural point-sections derived-reduction comparison at n=0, namely exponent one, and use its cone assertion. Exact finite sections identify homology of the reduced section object with sections of reduced cohomology sheaves. The latter are finite by finite-torsion constructibility and the finite-section lemma. Restriction of quotient scalars preserves the underlying finite sets and commutes with homology. Thus the homology of the uniformizer mapping cone is finite. The long exact sequence of the mapping-cone triangle identifies the kernel of H^i(M) to its cone homology with the uniformizer image. The induced linear map from H^i(M)/I H^i(M) is injective, so this quotient is a finite set.",
+   "uses": [
+    "lem-pod-point-sections-derived-reduction",
+    "lem-weil-point-sections-finite-torsion",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-limit",
+  "def-weil-integral-derived-reduction",
+  "def-weil-point-section-scalar-functors",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-finite-torsion",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "P3 Lean proof: exact sections preserve Roos products; scalar nilpotence; existing point derived-reduction comparison at exponent one and the mapping-cone homology injection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, TensorProduct",
+   "results": "instNontrivialTensorProduct; Module.Finite.tensorProduct; Module.Finite.base_change; IsAzumaya.mk; TensorProduct.exists_finite_submodule_left_of_setFinite; TensorProduct.exists_finite_submodule_right_of_setFinite; TensorProduct.exists_finite_submodule_of_setFinite; TensorProduct.exists_finite_submodule_left_of_setFinite'",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of scalars commutes with cohomology and preserves bounded finitely generated cohomology",
+   "results": "groupCohomologyIsoExt; groupCohomology.coindIso; Algebra.Extension.tensorH1Cotangent; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; groupCohomology.map_cochainsFunctor_shortExact; groupCohomology; Algebra.FormallyUnramified.flat_of_restrictScalars; Module.Flat.isBaseChange",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|AdicCompletion.of",
+   "results": "Mathlib/NumberTheory/LocalField/Basic.lean; Mathlib/NumberTheory/Padics/PadicIntegers.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/Teichmuller.lean",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete cohomology modules and finite residues of integral constructible point sections",
+   "results": "IsLocalRing.finite_residueField_of_compactSpace; IsAdicComplete.mk; IsAdicComplete.casesOn; AdicCompletion.module; IsAdicComplete.toIsHausdorff; Algebra.instFiniteResidueFieldOfFormallyUnramified; IsAdicComplete; IsAdicComplete.rec",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete",
+   "results": "IsAdicComplete; IsAdicComplete.of_subsingleton; IsAdicComplete.toIsHausdorff; IsAdicComplete.toIsPrecomplete; IsAdicComplete.mk; isAdicComplete_iff; IsAdicComplete.bot; IsAdicComplete.subsingleton",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections over an algebraically closed point of a constructible finite torsion module sheaf are finite",
+   "results": "SheafOfModules.GeneratingSections.IsFiniteType.finite; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.GeneratingSections.IsFiniteType; AlgebraicGeometry.IsFinite.finite_app; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; SheafOfModules.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; AlgebraicGeometry.Scheme.Hom.finite_app",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsFiniteness",
+  "date": "2026-10-18",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "finite/integral/rational evaluation landing assertions",
+   "via": [
+    "lem-weil-point-sections-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSectionsIntegralCohomologyControl",
+  "file": "lean/Sheaf/Paper/PointSectionsIntegralCohomologyControl.lean",
+  "declaration": "WeilConjectures.point_sections_integral_cohomology_control",
+  "statement": "theorem point_sections_integral_cohomology_control (D : FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (C : CochainComplex (scalarReductionSource.{u, u} l E (Spec (.of D.k))) ℤ)\n    (hC : sfIntegralConstructible l E (Spec (.of D.k)) (DerivedCategory.Q.obj C)) :\n    let R := ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E)\n    let I : Ideal R := Ideal.span {ULift.up (Padic.coefficientExtensionUniformizer l E)}\n    let M := DerivedCategory.Q.obj\n      (((pointIntegralSections.{u} l E D.k).mapHomologicalComplex (.up ℤ)).obj C)\n    (∃ s : Finset ℤ, ∀ i : ℤ, i ∉ s →\n      IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} R) i).obj M)) ∧\n    DerivedCategory.IsDerivedComplete I M ∧\n    ∀ i : ℤ, let N := (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} R) i).obj M\n      Finite (N ⧸ (I • ⊤ : Submodule R N))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7c3be",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261020T230819-L-616466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7c3be",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261020T230819-L-616466",
+  "kind": "interface",
+  "note": "independent cc review: 7c3bea26 vs PASSed 4ab662d2 (Lean+DAG byte-identical; only change record + report differ, adding the missing PointSectionsReconstruction user row); change-record Users vs source scan of lean/ and quarantine/; --all compile (8 modules clean); 12 direct importers compiled against sandbox .lbuild (all exit 0); #print axioms vs pre-existing sorry holes; derived-reduction node deps vs item node (no cycle)"
+ }
+}

@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-point-sections-finite-torsion",
+ "kind": "statement",
+ "title": "Finite torsion point sections have finite cohomology",
+ "statement": "For the finite-field datum D, prime l different from D.p, finite extension E of Q_l, and n >= 1, termwise canonical point sections of any complex with intrinsic finite-torsion constructible derived object have bounded finite cohomology over ULift A_(E,n).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "the assertion that evaluation at the geometric point lands in $D^b_{\\mathrm{fin}}$, $D^b_{\\mathrm{fg}}$, $D^b_{\\mathrm{fd}}$"
+ },
+ "stmt_deps": [
+  "def-weil-point-section-scalar-functors",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-point-finite-cohomology-complexes",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Use finite-ring etale origin. For its etale antecedent, constructibility gives finite generation of global sections at the algebraically closed point by Etale.finite_Γ_of_isConstructibleSheaf. The coefficient ring is finite, so the section module is a finite set. The finite-level comparison unit and the origin equivalence counit transport finiteness to pro-etale final-object sections. Exact evaluation and scalar restriction commute with complex homology, hence with derived homology through homologyFunctorFactors. Preserve the original finite support and transport finiteness along these homology isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-weil-point-proetale-sections-exact",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Point evaluation, finite/integral/rational landing assertions; original six-step proof, specialized as recorded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, TensorProduct",
+   "results": "instNontrivialTensorProduct; Module.Finite.tensorProduct; Module.Finite.base_change; IsAzumaya.mk; TensorProduct.exists_finite_submodule_left_of_setFinite; TensorProduct.exists_finite_submodule_right_of_setFinite; TensorProduct.exists_finite_submodule_of_setFinite; TensorProduct.exists_finite_submodule_left_of_setFinite'",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of scalars commutes with cohomology and preserves bounded finitely generated cohomology",
+   "results": "groupCohomologyIsoExt; groupCohomology.coindIso; Algebra.Extension.tensorH1Cotangent; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; groupCohomology.map_cochainsFunctor_shortExact; groupCohomology; Algebra.FormallyUnramified.flat_of_restrictScalars; Module.Flat.isBaseChange",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|AdicCompletion.of",
+   "results": "Mathlib/NumberTheory/LocalField/Basic.lean; Mathlib/NumberTheory/Padics/PadicIntegers.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/Teichmuller.lean",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete cohomology modules and finite residues of integral constructible point sections",
+   "results": "IsLocalRing.finite_residueField_of_compactSpace; IsAdicComplete.mk; IsAdicComplete.casesOn; AdicCompletion.module; IsAdicComplete.toIsHausdorff; Algebra.instFiniteResidueFieldOfFormallyUnramified; IsAdicComplete; IsAdicComplete.rec",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete",
+   "results": "IsAdicComplete; IsAdicComplete.of_subsingleton; IsAdicComplete.toIsHausdorff; IsAdicComplete.toIsPrecomplete; IsAdicComplete.mk; isAdicComplete_iff; IsAdicComplete.bot; IsAdicComplete.subsingleton",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections over an algebraically closed point of a constructible finite torsion module sheaf are finite",
+   "results": "SheafOfModules.GeneratingSections.IsFiniteType.finite; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.GeneratingSections.IsFiniteType; AlgebraicGeometry.IsFinite.finite_app; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; SheafOfModules.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; AlgebraicGeometry.Scheme.Hom.finite_app",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsFiniteness",
+  "date": "2026-10-18",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "finite/integral/rational evaluation landing assertions",
+   "via": [
+    "lem-weil-point-sections-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSectionsFinitenessFiniteTorsion",
+  "file": "lean/Sheaf/Paper/PointSectionsFinitenessFiniteTorsion.lean",
+  "declaration": "WeilConjectures.point_sections_finiteness_finiteTorsion",
+  "statement": "theorem point_sections_finiteness_finiteTorsion (D : FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (n : ℕ) (hn : 1 ≤ n) :\n    (∀ C : CochainComplex\n        (SheafOfModules.{u + 1}\n          ((sheafCompose (ProEt.topology (Spec (.of D.k)))\n            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n              ((constantSheaf (ProEt.topology (Spec (.of D.k))) CommRingCat.{u + 1}).obj\n                (CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))))) ℤ,\n      intrinsicFiniteTorsionConstructible l E n hn (Spec (.of D.k)) (DerivedCategory.Q.obj C) →\n        DerivedCategory.pointFiniteCohomology\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))\n          (DerivedCategory.Q.obj\n            (((pointFiniteSections D.k (Padic.coefficientExtensionRing l E n)).mapHomologicalComplex\n              (.up ℤ)).obj C)))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-18",
+  "declarations": [
+   "WeilConjectures.point_finiteSections_finite_of_constructible",
+   "WeilConjectures.point_sections_finiteness_finiteTorsion"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7c3be",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261020T230819-L-616466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7c3be",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261020T230819-L-616466",
+  "kind": "interface",
+  "note": "independent cc review: 7c3bea26 vs PASSed 4ab662d2 (Lean+DAG byte-identical; only change record + report differ, adding the missing PointSectionsReconstruction user row); change-record Users vs source scan of lean/ and quarantine/; --all compile (8 modules clean); 12 direct importers compiled against sandbox .lbuild (all exit 0); #print axioms vs pre-existing sorry holes; derived-reduction node deps vs item node (no cycle)"
+ }
+}

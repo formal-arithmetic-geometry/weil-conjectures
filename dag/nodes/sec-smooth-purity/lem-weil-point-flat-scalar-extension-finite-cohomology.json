@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-point-flat-scalar-extension-finite-cohomology",
+ "kind": "statement",
+ "title": "Flat extension to a field preserves bounded finite cohomology",
+ "statement": "For commutative R, field S and a flat ring map f:R to S, a complex of R-modules whose derived cohomology has finite support and is finitely generated in every degree has termwise f-scalar extension with bounded finite-dimensional S-cohomology.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "the assertion that evaluation at the geometric point lands in $D^b_{\\mathrm{fin}}$, $D^b_{\\mathrm{fg}}$, $D^b_{\\mathrm{fd}}$"
+ },
+ "stmt_deps": [
+  "def-weil-point-fd-complexes"
+ ],
+ "proof": [
+  {
+   "text": "Flat scalar extension preserves finite limits, and its left adjoint property preserves finite colimits. Additivity and exactness give (C.sc i).mapHomologyIso; compose with homologyFunctorFactors on both sides. Map zero objects to retain the finite support. Tensor base change of a finite module is finite over S by Module.Finite.base_change, and transport this property through the homology linear equivalence. Over a field this is finite dimensionality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Point evaluation, finite/integral/rational landing assertions; original six-step proof, specialized as recorded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, TensorProduct",
+   "results": "instNontrivialTensorProduct; Module.Finite.tensorProduct; Module.Finite.base_change; IsAzumaya.mk; TensorProduct.exists_finite_submodule_left_of_setFinite; TensorProduct.exists_finite_submodule_right_of_setFinite; TensorProduct.exists_finite_submodule_of_setFinite; TensorProduct.exists_finite_submodule_left_of_setFinite'",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of scalars commutes with cohomology and preserves bounded finitely generated cohomology",
+   "results": "groupCohomologyIsoExt; groupCohomology.coindIso; Algebra.Extension.tensorH1Cotangent; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; groupCohomology.map_cochainsFunctor_shortExact; groupCohomology; Algebra.FormallyUnramified.flat_of_restrictScalars; Module.Flat.isBaseChange",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|AdicCompletion.of",
+   "results": "Mathlib/NumberTheory/LocalField/Basic.lean; Mathlib/NumberTheory/Padics/PadicIntegers.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean; Mathlib/RingTheory/Teichmuller.lean",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete cohomology modules and finite residues of integral constructible point sections",
+   "results": "IsLocalRing.finite_residueField_of_compactSpace; IsAdicComplete.mk; IsAdicComplete.casesOn; AdicCompletion.module; IsAdicComplete.toIsHausdorff; Algebra.instFiniteResidueFieldOfFormallyUnramified; IsAdicComplete; IsAdicComplete.rec",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete",
+   "results": "IsAdicComplete; IsAdicComplete.of_subsingleton; IsAdicComplete.toIsHausdorff; IsAdicComplete.toIsPrecomplete; IsAdicComplete.mk; isAdicComplete_iff; IsAdicComplete.bot; IsAdicComplete.subsingleton",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections over an algebraically closed point of a constructible finite torsion module sheaf are finite",
+   "results": "SheafOfModules.GeneratingSections.IsFiniteType.finite; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.GeneratingSections.IsFiniteType; AlgebraicGeometry.IsFinite.finite_app; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; SheafOfModules.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; AlgebraicGeometry.Scheme.Hom.finite_app",
+   "date": "2026-10-18",
+   "verdict": "components only; no combined point-sections theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsFiniteness",
+  "date": "2026-10-18",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "finite/integral/rational evaluation landing assertions",
+   "via": [
+    "lem-weil-point-sections-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FlatScalarExtensionFiniteCohomology",
+  "file": "lean/Sheaf/Paper/FlatScalarExtensionFiniteCohomology.lean",
+  "declaration": "DerivedCategory.pointFiniteDimensional_of_flat_scalar_extension",
+  "statement": "theorem pointFiniteDimensional_of_flat_scalar_extension\n    {R S : Type u} [CommRing R] [Field S] (f : R →+* S) (hf : f.Flat)\n    (C : CochainComplex (ModuleCat.{u} R) ℤ)\n    (hs : ∃ s : Finset ℤ, ∀ i : ℤ, i ∉ s →\n      IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj (Q.obj C)))\n    (hfinite : ∀ i : ℤ,\n      Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj (Q.obj C))) :\n    pointFiniteDimensional S\n      (Q.obj (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj C))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7c3be",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261020T230819-L-616466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7c3be",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261020T230819-L-616466",
+  "kind": "interface",
+  "note": "independent cc review: 7c3bea26 vs PASSed 4ab662d2 (Lean+DAG byte-identical; only change record + report differ, adding the missing PointSectionsReconstruction user row); change-record Users vs source scan of lean/ and quarantine/; --all compile (8 modules clean); 12 direct importers compiled against sandbox .lbuild (all exit 0); #print axioms vs pre-existing sorry holes; derived-reduction node deps vs item node (no cycle)"
+ }
+}

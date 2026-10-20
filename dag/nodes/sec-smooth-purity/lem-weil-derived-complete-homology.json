@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-derived-complete-homology",
+ "kind": "statement",
+ "title": "Derived completeness passes to cohomology modules",
+ "statement": "Let $A$ be a commutative ring, let $I$ be an ideal, and let $K$ be an object of $D(A)$. If $K$ is derived $I$-complete [def-weil-point-derived-complete-module-complex], then for every integer $i$, the module $H^i(K)$, regarded as a complex concentrated in degree zero, is derived $I$-complete.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 091P, lemma-hom-from-Af, equivalence of conditions (3), (4) and (7)"
+ },
+ "stmt_deps": [
+  "def-weil-point-derived-complete-module-complex"
+ ],
+ "proof": [
+  {
+   "text": "Products of modules are exact: coordinatewise lifts show that the forgetful functor preserves epimorphisms and reflects exact products. Use the derived product theorem to obtain countable products in D(A), preservation by localization of termwise product cones, and product preservation by every homology functor.",
+   "uses": [
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Roos triangle identifies derived completeness with invertibility of one minus the multiplication-by-f shift on a constant countable tower, for every f in I. A product-preserving additive A-linear functor conjugates that operator to the corresponding operator on its image, by the product projection equations.",
+   "uses": [
+    "def-weil-point-derived-complete-module-complex",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding conjugacy first to H^i, then to the degree-zero single functor. The first is linear by descending short-complex homology linearity through localization; the second is linear by Mathlib. The single functor preserves countable products because termwise single complexes do and localization preserves their product cones. Thus its Roos operator is invertible, which is derived completeness of the cohomology module.",
+   "uses": [
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-limit",
+  "def-weil-point-derived-complete-module-complex",
+  "lem-weil-derived-limit-products-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 091P, lemma-hom-from-Af; direct Roos product proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology modules of a derived complete complex are derived complete",
+   "results": "IsAdicComplete.bot; AdicCompletion; IsAdicComplete.toIsPrecomplete; IsAdicComplete; IsAdicComplete.toIsHausdorff; IsAdicComplete.mk; AdicCompletion.module; AdicCompletion.of_surjective",
+   "date": "2026-10-19",
+   "verdict": "No exact match; Mathlib supplies the linear homology component lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology modules of a derived complete complex are derived complete",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; IsAdicComplete.toIsPrecomplete; CochainComplex.cm5b.instInjectiveXIntI; IsAdicComplete; IsPrecomplete; CochainComplex.IsKInjective; AdicCompletion.module; AdicCompletion.map_exact",
+   "date": "2026-10-19",
+   "verdict": "No exact match; Mathlib supplies the linear homology component lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctor.*Linear|IsDerivedComplete",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/Linear.lean; Mathlib/Algebra/Homology/ShortComplex/Linear.lean; Mathlib/Algebra/Homology/ShortComplex/Linear.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact match; Mathlib supplies the linear homology component lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsFiniteness",
+  "date": "2026-10-19",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "integral evaluation landing assertion; cohomological derived completeness in step 5 of lem-weil-point-sections-finiteness",
+   "via": [
+    "lem-weil-point-sections-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DerivedCompleteHomology",
+  "file": "lean/Sheaf/RingTheory/DerivedCompleteHomology.lean",
+  "declaration": "DerivedCategory.isDerivedComplete_homology",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-19",
+  "statement": "theorem isDerivedComplete_homology {A : Type u} [CommRing A]\n    [HasDerivedCategory.{w} (ModuleCat.{v} A)]\n    (I : Ideal A) (K : DerivedCategory (ModuleCat.{v} A))\n    (hK : IsDerivedComplete I K) (i : ℤ) :\n    ModuleCat.IsDerivedComplete I ((homologyFunctor (ModuleCat.{v} A) i).obj K)"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7c3be",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261020T230819-L-616466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7c3be",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261020T230819-L-616466",
+  "kind": "interface",
+  "note": "independent cc review: 7c3bea26 vs PASSed 4ab662d2 (Lean+DAG byte-identical; only change record + report differ, adding the missing PointSectionsReconstruction user row); change-record Users vs source scan of lean/ and quarantine/; --all compile (8 modules clean); 12 direct importers compiled against sandbox .lbuild (all exit 0); #print axioms vs pre-existing sorry holes; derived-reduction node deps vs item node (no cycle)"
+ }
+}

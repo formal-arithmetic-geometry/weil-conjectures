@@ -6,7 +6,6 @@ Authors: SHEAF group Q04
 module
 
 public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.Paper.PointSectionsFiniteness
 public import Sheaf.Paper.PointProEtaleSectionsExact
 public import Sheaf.Paper.SfIntegralConstructible
 public import Sheaf.Paper.CompletedIntegralCoefficientGerm
