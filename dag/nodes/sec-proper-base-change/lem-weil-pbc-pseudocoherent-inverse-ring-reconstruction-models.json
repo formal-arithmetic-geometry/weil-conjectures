@@ -9,32 +9,59 @@
  },
  "proof": [
   {
-   "text": "Perform the induction over nilpotent transitions using the marked finite-free lifting theorem, choose compatible bases degreewise, take the termwise inverse limit, and verify the derived-limit and scalar-extension comparison equations.",
+   "text": "Normalize the supplied derived adjunctions using the universal derived scalar extension of modules, preservation of right Kan extensions by a right adjoint, and uniqueness of left adjoints. This gives a universal counit whose adjoint is the ordinary scalar-extension unit.",
    "uses": [
-    "lem-weil-pbc-nilpotent-marked-free-complex-lift",
-    "lem-weil-pbc-surjective-module-complex-tower-limit",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+    "lem-pc-base-derived-extension-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0CQF"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply nilpotent invariance to propagate pseudo-coherence from level zero. Transport marked finite-free lifting along the quotient ring isomorphism and inductively choose bounded-above finite-free models with one common cutoff, together with marked transition isomorphisms. Their adjoints are surjective in every degree.",
+   "uses": [
+    "lem-weil-pbc-pseudo-coherent-nilpotent-invariance",
+    "lem-weil-pbc-nilpotent-marked-free-complex-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a fixed finite basis through each transition. Nilpotent Nakayama makes the lifted basis map surjective; an arbitrary finite-free basis and the Orzech property make it injective. Compatible basis coordinates and the stated universal property of A identify the module of compatible tuples with a finite power of A. This argument also handles zero rings and the empty basis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the complex of compatible tuples with coordinatewise differential, and its evaluation projections. These form a limit cone. The compatible bases give finite freeness of every term and prove that the adjoint scalar extensions of the projections are isomorphisms. The common upper cutoff holds coordinatewise.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the surjective-tower kernel/one-minus-shift short exact sequence and exact countable products to obtain a derived-limit triangle in the chosen derived-category universe. Invert the stipulated restriction-composition compatibility equation and use naturality to identify its marked transition maps with those of E. A product isomorphism and the triangulated-category comparison axiom give beta with the required projection equations.",
+   "uses": [
+    "lem-weil-pbc-surjective-module-complex-tower-limit",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized universal scalar-extension counit is invertible on the bounded-above finite-free limit complex, by the bounded-flat computation reused from nilpotent invariance. Use this counit as gamma and the ordinary adjunction unit as eta. Apply the derived adjunction bijection and the projection equations to prove the last comparison identity; the component unit and projection identities follow from the chain adjunction.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-weil-pbc-pseudo-coherent-nilpotent-invariance"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-base-derived-extension-resolution",
+  "lem-weil-pbc-pseudo-coherent-nilpotent-invariance",
   "lem-weil-pbc-nilpotent-marked-free-complex-lift",
   "lem-weil-pbc-surjective-module-complex-tower-limit",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+  "lem-weil-derived-limit-products-core",
+  "lem-pc-module-bounded-flat-kflat"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0CQF"
+  "place": "Tag 0CQF; compatible basis construction and normalized adjunction comparison, G3"
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
@@ -111,12 +138,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261018T102813-L-4138048",
+  "landing": "20261020T132003-L-1399619",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
