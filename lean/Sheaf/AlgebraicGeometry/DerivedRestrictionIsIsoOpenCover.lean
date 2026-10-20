@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Topology.SheafIsomorphismLocalOpenCover
+import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 @[expose] public section
 

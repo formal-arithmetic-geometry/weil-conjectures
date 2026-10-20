@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Abelian.Images
-import Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistMono
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistMono
 import Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistImage
 
 /-! # Restricting a disjoint ideal times an invertible module

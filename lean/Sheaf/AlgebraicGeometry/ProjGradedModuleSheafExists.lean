@@ -12,9 +12,10 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import WeilConjectures.Algebra.Module.GradedModuleAwayRestriction
 import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExtension
-import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafStalks
+import WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafStalks
 import WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafGlobalSections
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # The module sheaf associated to a graded module on Proj

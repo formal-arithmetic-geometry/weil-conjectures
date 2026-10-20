@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
 import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
-import Sheaf.CategoryTheory.Triangulated.MilnorSequence
+import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 import Sheaf.Paper.CoefficientCohomologyModules
 import Sheaf.Paper.FiniteCoefficientPoint
 import Sheaf.Paper.GaloisLisseRepresentations

@@ -2,8 +2,8 @@ module
 
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.Algebra.Homology.ModuleRestrictionStalkComponents
-import Sheaf.Algebra.Homology.ModuleRestrictionStalkNaturality
+import WeilConjectures.Algebra.Homology.ModuleRestrictionStalkComponents
+import WeilConjectures.Algebra.Homology.ModuleRestrictionStalkNaturality
 public import Mathlib.Topology.Sheaves.Module
 public import Mathlib.Geometry.RingedSpace.Stalks
 

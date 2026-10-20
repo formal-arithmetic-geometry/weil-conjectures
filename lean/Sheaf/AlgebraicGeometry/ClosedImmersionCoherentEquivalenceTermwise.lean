@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.ClosedImmersionFormalPushforwardConditions
 import Sheaf.AlgebraicGeometry.FormalSystemsPullback
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 @[expose] public section

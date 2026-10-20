@@ -9,7 +9,8 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeSubKernel
-import Sheaf.Topology.FiniteTypeSurjectiveNearStalk
+import WeilConjectures.Topology.FiniteTypeSurjectiveNearStalk
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Local isomorphism criterion for coherent modules

@@ -9,7 +9,7 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.SquareZeroTensorPowerBoundary
 
 /-! # The obstruction-and-lifting conjunct

@@ -104,13 +104,14 @@
  ],
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleStalkMap",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleStalkMap.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ProjGradedModuleStalkMap",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjGradedModuleStalkMap.lean",
   "declaration": "AlgebraicGeometry.Proj.gradedModuleStalkMap",
   "statement": "theorem gradedModuleStalkMap\n    (𝓜 : ℤ → AddSubgroup M)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),\n      a ∈ 𝒜 n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (Z : ∀ f : Fidx, Submodule R[f] N[f])\n    (hZ : (∀ f : Fidx, (Z f : Set N[f]) = degreeZeroFractions\n        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M))\n        (Submonoid.powers f.val.1)))\n    (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])\n    (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)\n    (hlaws : (∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n        (∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1) ∧\n        (∀ (r : R[f]) (q : Z f), rho f g i (r • q) = rhoS f g i r • rho f g i q) ∧\n        (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k → g.val.1 ^ e = a * f.val.1 →\n          ∀ (m : ℕ) (y : M) (q : Z f),\n            (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) →\n            (rho f g i q : N[g]) = mk (a ^ m • y)\n              (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1))) ∧\n      (∀ (f : Fidx) (i : D[f] ≤ D[f]) (q : Z f), rho f f i q = q) ∧\n      (∀ (f g h : Fidx) (i : D[g] ≤ D[f]) (j : D[h] ≤ D[g]) (q : Z f),\n        rho g h j (rho f g i q) = rho f h (j.trans i) q) ∧\n      (∀ (f g : Fidx) (i : D[g] ≤ D[f]), D[f] = D[g] →\n        Function.Bijective (rho f g i)))\n    (F : ModX) (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f)\n    (hchart : (∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])),\n        alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s) ∧\n      (∀ (f g : Fidx) (i : D[g] ≤ D[f]) (s : F.val.obj (op D[f])),\n        alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s)))\n    (Zp : ∀ x : Proj 𝒜, Submodule Rp[x] Np[x])\n    (hZp : ∀ x : Proj 𝒜, (Zp x : Set Np[x]) = degreeZeroFractions\n      (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M)) T[x]) :\n    ∃ (tau : ∀ x : Proj 𝒜,\n      (RingedSpace.moduleStalkFunctor (Proj 𝒜).toRingedSpace x).obj F →+ Zp x),\n      (∀ (x : Proj 𝒜) (r : (Proj 𝒜).presheaf.stalk x)\n        (s : (RingedSpace.moduleStalkFunctor (Proj 𝒜).toRingedSpace x).obj F),\n        tau x (r • s) = (stalkIso 𝒜 x).hom r • tau x s) ∧\n      (∀ (x : Proj 𝒜) (f : Fidx) (hx : x ∈ D[f]) (m : ℕ) (y : M)\n        (q : Z f) (t : T[x]),\n        (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) →\n        (t : S) = f.val.1 ^ m →\n        (tau x (TopCat.Presheaf.germ F.val.presheaf D[f] x hx\n          ((alpha f).symm q)) : Np[x]) = mk y t)",
   "branch": "sheaf-dag",
   "by": "R2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ProjGradedModuleStalkMap; points at its upstream twin."
  },
  "stmt_deps": [
   "def-nagata-affine-proj",

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
+import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import Mathlib.CategoryTheory.Sites.Adjunction

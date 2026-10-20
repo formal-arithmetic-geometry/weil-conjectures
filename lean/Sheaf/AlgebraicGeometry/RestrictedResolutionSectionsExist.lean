@@ -6,7 +6,7 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
+import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 
 /-! # Actual restricted resolutions with section comparison
 

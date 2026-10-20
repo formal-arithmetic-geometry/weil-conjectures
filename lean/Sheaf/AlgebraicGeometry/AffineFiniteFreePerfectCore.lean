@@ -5,9 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.AffineFiniteFreeModelComplex
-import Sheaf.AlgebraicGeometry.AffineFiniteFreeModelBounded
-import Sheaf.AlgebraicGeometry.AffineFiniteFreeModelRetracts
+public import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeModelComplex
+import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeModelBounded
+import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeModelRetracts
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Strict perfectness of the explicit affine finite free model
 

@@ -25,7 +25,7 @@ import Sheaf.AlgebraicGeometry.PullbackConstantModule
 import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
-import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
+import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.Finite.Exact

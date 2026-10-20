@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType
 import WeilConjectures.RingTheory.FlatOfFlatClosedFiber
-import Sheaf.Topology.FiniteTypeSurjectiveNearStalk
+import WeilConjectures.Topology.FiniteTypeSurjectiveNearStalk
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Relative flatness and a flat fibre stalk give a free neighbourhood

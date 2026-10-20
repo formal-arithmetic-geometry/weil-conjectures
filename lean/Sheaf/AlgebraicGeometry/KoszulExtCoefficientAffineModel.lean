@@ -15,9 +15,10 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import WeilConjectures.RingTheory.KoszulProjectiveResolution
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import Sheaf.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
+import WeilConjectures.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
 import Sheaf.AlgebraicGeometry.LocalFiniteFreeHomologyNatural
 import Sheaf.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates
+import Sheaf.Paper.DerivedHomMayerVietoris
 /-! # Affine sheaf model of the Koszul Ext coefficient morphism
 
 Source: Stacks Project, Tag 0BQZ, affine computation of regular immersion Ext. -/

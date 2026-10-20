@@ -5,11 +5,12 @@ Authors: SHEAF group H4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
+public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.DerivedFiberCohomologyFunctor
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffineResidueEvaluationHomologyNaturality
 import Sheaf.AlgebraicGeometry.AffinePerfectResidueModelNaturality
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Naturality of strictly perfect affine residue models
 

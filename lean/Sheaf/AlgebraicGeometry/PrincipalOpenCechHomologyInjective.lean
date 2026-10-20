@@ -9,7 +9,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
-import Sheaf.AlgebraicGeometry.PrincipalOpenCechInjectiveComparison
+import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechInjectiveComparison
 import Sheaf.AlgebraicGeometry.PrincipalOpenCechInjectiveTerms
 
 /-! # injective on cohomology for the principal-open Čech augmentation

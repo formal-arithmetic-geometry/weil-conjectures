@@ -32,7 +32,7 @@ import WeilConjectures.Topology.InverseImageModule
 import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Topology.Sheaves.Functors
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Mathlib.LinearAlgebra.TensorProduct.Map
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses

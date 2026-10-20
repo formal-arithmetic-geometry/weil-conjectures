@@ -10,8 +10,9 @@ public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsPushforwardCoproductComparison
-import Sheaf.AlgebraicGeometry.ModuleSheafificationAffineRestriction
+import WeilConjectures.AlgebraicGeometry.ModuleSheafificationAffineRestriction
 import Mathlib.CategoryTheory.Adjunction.Limits
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Coproduct presentation of the ordinary external direct image
 

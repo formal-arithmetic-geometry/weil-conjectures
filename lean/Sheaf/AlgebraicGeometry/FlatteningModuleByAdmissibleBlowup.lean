@@ -33,7 +33,7 @@ import WeilConjectures.AlgebraicGeometry.AffineChartRelativeFlatCriterion
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Mathlib.RingTheory.Spectrum.Prime.Chevalley
-import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel
+import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationCokernel
 import Sheaf.AlgebraicGeometry.GenericFreeBlowup
 import Sheaf.AlgebraicGeometry.ModuleAdmissibleBlowupCalculus
 import Sheaf.AlgebraicGeometry.ModuleStrictTransformAffinePushforward
@@ -44,6 +44,7 @@ import Sheaf.RingTheory.FreeSubtractionFlatness
 import Sheaf.TraceFormula.ElementaryModuleDevissage
 import Sheaf.TraceFormula.EtaleFlatteningDescent
 import Sheaf.TraceFormula.FlatFiniteTypeDensePresentation
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Flattening a module by an admissible blowup

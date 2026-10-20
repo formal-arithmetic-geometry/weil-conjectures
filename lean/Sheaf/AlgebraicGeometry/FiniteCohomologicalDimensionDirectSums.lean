@@ -21,7 +21,7 @@ import all WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
-import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
+import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 
 /-!
 # Direct sums and finite cohomological dimension

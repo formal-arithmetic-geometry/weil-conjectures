@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.ThickeningSystemsDictionary
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Mathlib.CategoryTheory.Whiskering

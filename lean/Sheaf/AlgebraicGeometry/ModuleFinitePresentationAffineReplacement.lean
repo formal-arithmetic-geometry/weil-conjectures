@@ -13,8 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineCapture
 import all Sheaf.AlgebraicGeometry.QuasiCoherentExtensionQcOpen
 import Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType
-import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel
+import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationCokernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # A finitely presented replacement on one affine open
 

@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
-import Sheaf.CategoryTheory.Triangulated.MilnorSequence
+import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-!

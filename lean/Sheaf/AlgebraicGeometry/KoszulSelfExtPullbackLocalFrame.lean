@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtQuotientFrame
-import Sheaf.AlgebraicGeometry.ClosedImmersionQuotientFramePullback
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionQuotientFramePullback
 
 /-! # A finite free chart for self Ext after tensor pullback
 

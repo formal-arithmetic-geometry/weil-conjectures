@@ -7,7 +7,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.Topology.IrreducibleConstantSections
 
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Sheaf.Topology.FlasqueZariskiAcyclic
+import WeilConjectures.Topology.FlasqueZariskiAcyclic
 
 @[expose] public section
 

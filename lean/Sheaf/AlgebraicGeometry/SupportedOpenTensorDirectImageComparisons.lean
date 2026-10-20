@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
-import Sheaf.Topology.SheafIsomorphismLocalOpenCover
+import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive

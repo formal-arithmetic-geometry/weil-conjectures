@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
-import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
+import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Sheaf.CategoryTheory.RightDerivedFunctorUpperBound
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections

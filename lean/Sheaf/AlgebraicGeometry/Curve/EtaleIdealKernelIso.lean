@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsRightExact
 import Sheaf.AlgebraicGeometry.Curve.EtaleIdealSectionsKernel
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 

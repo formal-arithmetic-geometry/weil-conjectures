@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FinitePresentationRepresentatives
 import Sheaf.AlgebraicGeometry.FinitePresentationBiprod
-import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel
+import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationCokernel
 import Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension
 import Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit

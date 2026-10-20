@@ -6,7 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
-import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
+import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 import Sheaf.AlgebraicGeometry.BasicPropertiesDegreeZero
 import Sheaf.AlgebraicGeometry.ResolutionSectionClassZeroAugmentation
 import Sheaf.AlgebraicGeometry.TensorUnitOpenDegreeZero

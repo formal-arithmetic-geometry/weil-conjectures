@@ -5,11 +5,12 @@ Authors: SHEAF group H4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
+public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.AlgebraicGeometry.AffineResidueQuotientHomologyNaturality
 import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Natural residue homology after transport to the scheme residue field
 

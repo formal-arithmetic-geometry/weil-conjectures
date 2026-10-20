@@ -16,7 +16,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Sites.GlobalSections
 import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
+import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf

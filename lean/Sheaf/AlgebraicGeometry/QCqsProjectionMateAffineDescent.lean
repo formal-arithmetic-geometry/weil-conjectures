@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 import Sheaf.AlgebraicGeometry.ProjectionMateAffineChartCertificate
-import Sheaf.Topology.SheafIsomorphismLocalOpenCover
+import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 /-! # Affine descent for supplied derived projection mates
 

@@ -27,7 +27,7 @@ import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 import Sheaf.AlgebraicGeometry.FiniteTypeGeometryFibreBound
-import Sheaf.CategoryTheory.Triangulated.MilnorSequence
+import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import Sheaf.NumberTheory.Padics.LocalFieldIntegralBasis

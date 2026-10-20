@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.StalkInternalHomEvaluation
-import Sheaf.AlgebraicGeometry.FinitePresentationStalkKernel
+import WeilConjectures.AlgebraicGeometry.FinitePresentationStalkKernel
 
 /-!
 # Stalk of internal Hom with finitely presented source

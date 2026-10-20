@@ -7,8 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.FinitePresentationLocalComparison
-import Sheaf.AlgebraicGeometry.FinitePresentationKernelComparison
+import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalComparison
+import WeilConjectures.AlgebraicGeometry.FinitePresentationKernelComparison
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Finite type of kernels of finite free surjections

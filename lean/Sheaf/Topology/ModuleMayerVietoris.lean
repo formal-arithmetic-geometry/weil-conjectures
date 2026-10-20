@@ -7,10 +7,11 @@ module
 
 public import Sheaf.Topology.OpenModuleCohomology
 public import Mathlib.Algebra.Exact.Basic
-import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
+import WeilConjectures.AlgebraicGeometry.InjectiveRestrictionSurjective
 import Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundaryExact
 import Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundaryNaturality
 import Mathlib.Topology.Sheaves.MayerVietoris
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Mayer--Vietoris for modules on a ringed space
 

@@ -3,7 +3,7 @@ public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal

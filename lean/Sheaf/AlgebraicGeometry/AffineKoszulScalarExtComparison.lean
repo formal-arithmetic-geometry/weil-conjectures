@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import Sheaf.AlgebraicGeometry.LocalFiniteFreeScalarHomology
-import Sheaf.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
+import WeilConjectures.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
 import Sheaf.AlgebraicGeometry.AffineKoszulHomCoordinates
 
 /-! # Affine scalar Ext and dual Koszul cohomology

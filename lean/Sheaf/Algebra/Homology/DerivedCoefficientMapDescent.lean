@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.Basic
 import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
-import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 
 /-! # Descent of a termwise coefficient map
