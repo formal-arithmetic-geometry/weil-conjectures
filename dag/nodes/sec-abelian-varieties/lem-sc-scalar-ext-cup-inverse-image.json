@@ -12,25 +12,40 @@
  },
  "proof": [
   {
-   "text": "Expand scalarExtCup into its two Yoneda tensor transports. Ext.mapExactFunctor_comp transports that composition. Reassociate the final degree-zero coefficient map to the second transport, and apply the second-factor formula. Move its degree-zero source comparison to the first transport using Ext associativity, then apply the first-factor formula. The result is precisely the expanded cup product of the two pulled-back coefficient classes.",
+   "text": "For scalar sheaves on either scheme, apply exactFunctorIdentityComparisonSheaf to tensorRight of the tensor unit and rightUnitorNatIso. Postcompose by the inverse right unitor, cancel the resulting degree-zero Ext factors, and use unitors_equal. This gives the private rightUnitTransport formula, expressing the first tensor transport as postcomposition by the inverse right unitor.",
    "uses": [
-    "lem-sc-scalar-ext-cup-inverse-image-first",
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-ext-exact-functor-identity-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove privately that scalarInverseUnitIso.hom equals the oplax unit of the inverse-image adjunction. Cancel inverse image of constantScalarUnitIso.hom and apply the composite constant-sheaf adjunction. Its homEquiv identifies leftAdjointUniq with the constant-sheaf comparison. The sheafification monoidal unit identity and the lax unit compatibility of sheaf pushforward identify both adjoints. Rewrite the two first transports by rightUnitTransport, map composition and degree-zero Ext classes, and use this unit comparison, oplax right_unitality_assoc, and rightUnitor_inv_naturality. This proves the private firstTransport equality without importing the duplicate upstream scalar-operation definitions.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand scalarExtCup and use Ext.mapExactFunctor_comp. Reassociate its final degree-zero coefficient map to the second transport and apply scalarExtCup_inverseImage_second. Move the resulting degree-zero source comparison to the first transport by Ext associativity, then apply the privately proved firstTransport. Reassociate once more to obtain the cup product of the two pulled-back classes. All degree equalities are zero_add or add_zero, so the same calculation includes p=0, q=0, zero coefficient maps, zero sheaves, and empty schemes.",
+   "uses": [
     "lem-sc-scalar-ext-cup-inverse-image-second"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-scalar-ext-cup-inverse-image-first",
-  "lem-sc-scalar-ext-cup-inverse-image-second"
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-sc-scalar-ext-cup-inverse-image-second",
+  "lem-weil-pbc-ext-exact-functor-identity-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S2",
-  "date": "2026-10-13",
+  "group": "M4",
+  "date": "2026-10-20",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology Tags 01FD, 07MB, 0FKV; generic exact inverse-image and tensor pairing argument. Official text read at https://stacks.math.columbia.edu/tag/01F7 and the indicated tag pages.",
-  "note": "Compiling reduction into the two separate tensor-transport squares; final combination is Ext composition preservation and associativity."
+  "place": "Cohomology Tags 01FD, 07MB, 0FKV; first-factor coherence proof adapted from WeilConjectures.AlgebraicGeometry.ScalarExtCupInverseImageFirst.",
+  "note": "Restore the quarantined theorem with its signature unchanged. Prove first-factor coherence privately from the recorded generic Ext identity comparison, avoiding the upstream/local duplicate scalar-operation environment. The final Ext associativity calculation and existing second-factor theorem are retained."
  },
  "mathlib_searches": [
   {
@@ -120,13 +135,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T100121-L-2485574",
-  "kind": "interface",
+  "landing": "20261020T145527-L-2407280",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
