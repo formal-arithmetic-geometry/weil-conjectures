@@ -9,6 +9,9 @@ public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Mathlib.CategoryTheory.Sites.Point.Basic
 public import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
+import Mathlib.CategoryTheory.ObjectProperty.FunctorCategory.PreservesLimits
+import Mathlib.CategoryTheory.Functor.TypeValuedFlat
+import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-!
 # Inverse-system site points
@@ -27,7 +30,6 @@ Grothendieck topology, as in the dependency def-weil-pbc-sites-and-cohomology.
 @[expose] public section
 
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe w u
 
@@ -82,6 +84,121 @@ noncomputable def inverseSystemSectionColimitFunctor {C : Type u} [Category.{u} 
     (Functor.whiskeringLeft I Cᵒᵖ (Type (max u w))).obj (inverseSystemOppositeDiagram U) ⋙
       colim
 
+private theorem hom_preservesFiniteLimits {C : Type u} [Category.{u} C]
+    {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
+    (U : Iᵒᵖ ⥤ C) : PreservesFiniteLimits (inverseSystemHomFunctor U) := by
+  exact ObjectProperty.preservesFiniteLimits.prop_colimit
+    (inverseSystemRepresentableDiagram U) (fun i ↦ by
+      change PreservesFiniteLimits (coyoneda.obj (op (U.obj (op i))))
+      infer_instance)
+
+private noncomputable def homMk {C : Type u} [Category.{u} C]
+    {I : Type u} [PartialOrder I] (U : Iᵒᵖ ⥤ C) {i : I} {X : C}
+    (f : U.obj (op i) ⟶ X) : (inverseSystemHomFunctor U).obj X :=
+  (colimit.ι (inverseSystemRepresentableDiagram U) i).app X f
+
+private theorem homMk_surjective {C : Type u} [Category.{u} C]
+    {I : Type u} [PartialOrder I] (U : Iᵒᵖ ⥤ C) {X : C}
+    (x : (inverseSystemHomFunctor U).obj X) :
+    ∃ (i : I) (f : U.obj (op i) ⟶ X), homMk U f = x := by
+  exact Types.jointly_surjective_of_isColimit
+    (isColimitOfPreserves ((evaluation C (Type u)).obj X)
+      (colimit.isColimit (inverseSystemRepresentableDiagram U))) x
+
+private theorem homMk_map {C : Type u} [Category.{u} C]
+    {I : Type u} [PartialOrder I] (U : Iᵒᵖ ⥤ C) {i : I} {X Y : C}
+    (f : U.obj (op i) ⟶ X) (g : X ⟶ Y) :
+    (inverseSystemHomFunctor U).map g (homMk U f) = homMk U (f ≫ g) := by
+  exact (ConcreteCategory.congr_hom
+    ((colimit.ι (inverseSystemRepresentableDiagram U) i).naturality g) f).symm
+
+private theorem homMk_transition {C : Type u} [Category.{u} C]
+    {I : Type u} [PartialOrder I] (U : Iᵒᵖ ⥤ C) {i j : I}
+    (q : j ⟶ i) {X : C} (f : U.obj (op j) ⟶ X) :
+    homMk U (U.map q.op ≫ f) = homMk U f := by
+  exact ConcreteCategory.congr_hom
+    (NatTrans.congr_app (colimit.w (inverseSystemRepresentableDiagram U) q) X) f
+
+private theorem homMk_eq {C : Type u} [Category.{u} C]
+    {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
+    (U : Iᵒᵖ ⥤ C) {i : I} {X : C} {f g : U.obj (op i) ⟶ X}
+    (h : homMk U f = homMk U g) :
+    ∃ (j : I) (q : i ⟶ j), U.map q.op ≫ f = U.map q.op ≫ g := by
+  exact (Types.FilteredColimit.isColimit_eq_iff'
+    (isColimitOfPreserves ((evaluation C (Type u)).obj X)
+      (colimit.isColimit (inverseSystemRepresentableDiagram U))) f g).1 h
+
+private theorem lift_saturated {C : Type u} [Category.{u} C]
+    (F : C ⥤ Type u) [IsCofiltered F.Elements] (J : Precoverage C)
+    (h : ∀ (X : C) (R : Presieve X), R ∈ J X → ∀ x : F.obj X,
+      ∃ (Y : C) (f : Y ⟶ X), R f ∧ ∃ y : F.obj Y, F.map f y = x)
+    {X : C} (R : Sieve X) (hR : R ∈ J.toGrothendieck X) :
+    ∀ x : F.obj X, ∃ (Y : C) (f : Y ⟶ X), R f ∧ ∃ y : F.obj Y, F.map f y = x := by
+  induction hR with
+  | of X S hS =>
+    intro x
+    obtain ⟨Y, f, hf, y, hy⟩ := h X S hS x
+    exact ⟨Y, f, Sieve.le_generate S Y f hf, y, hy⟩
+  | top X =>
+    intro x
+    exact ⟨X, 𝟙 X, trivial, x, by simp⟩
+  | pullback X S hS Y f ih =>
+    intro y
+    obtain ⟨Z, g, hg, z, hz⟩ := ih (F.map f y)
+    let a : F.elementsMk Z z ⟶ F.elementsMk X (F.map f y) := ⟨g, hz⟩
+    let b : F.elementsMk Y y ⟶ F.elementsMk X (F.map f y) := ⟨f, rfl⟩
+    obtain ⟨T, p, q, _⟩ := IsCofilteredOrEmpty.cone_objs (F.elementsMk Z z) (F.elementsMk Y y)
+    obtain ⟨V, r, hr⟩ := IsCofilteredOrEmpty.cone_maps (p ≫ a) (q ≫ b)
+    refine ⟨V.1, r.1 ≫ q.1, ?_, V.2, ?_⟩
+    · change S ((r.1 ≫ q.1) ≫ f)
+      have eq := congrArg (fun t ↦ t.1) hr
+      change r.1 ≫ (p.1 ≫ g) = r.1 ≫ (q.1 ≫ f) at eq
+      rw [Category.assoc, ← eq, ← Category.assoc]
+      exact S.downward_closed hg _
+    · exact (r ≫ q).2
+  | transitive X S R hS hR ihS ihR =>
+    intro x
+    obtain ⟨Y, f, hf, y, hy⟩ := ihS x
+    obtain ⟨Z, g, hg, z, hz⟩ := ihR hf y
+    refine ⟨Z, g ≫ f, hg, z, ?_⟩
+    simp [Functor.map_comp, ← hy, ← hz]
+
+private noncomputable def systemElements {C : Type u} [Category.{u} C]
+    {I : Type u} [PartialOrder I] (U : Iᵒᵖ ⥤ C) :
+    Iᵒᵖ ⥤ (inverseSystemHomFunctor U).Elements where
+  obj i := (inverseSystemHomFunctor U).elementsMk (U.obj i) (homMk U (𝟙 _))
+  map {i j} q := ⟨U.map q, by
+    rw [homMk_map]
+    simpa using homMk_transition U q.unop (𝟙 _)⟩
+
+private theorem systemElements_initial {C : Type u} [Category.{u} C]
+    {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
+    (U : Iᵒᵖ ⥤ C) : (systemElements U).Initial := by
+  refine Functor.initial_of_exists_of_isCofiltered _ ?_ ?_
+  · rintro ⟨X, x⟩
+    obtain ⟨i, f, rfl⟩ := homMk_surjective U x
+    exact ⟨op i, ⟨f, by simp [systemElements, homMk_map]⟩⟩
+  · rintro ⟨X, x⟩ i ⟨f, hf⟩ ⟨g, hg⟩
+    obtain ⟨j, q, hq⟩ := homMk_eq U
+      (f := f) (g := g) (by simpa [systemElements, homMk_map] using hf.trans hg.symm)
+    exact ⟨op j, q.op, by ext; exact hq⟩
+
+private noncomputable def stalkComparison {C : Type u} [Category.{u} C]
+    {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
+    (U : Iᵒᵖ ⥤ C) {J : GrothendieckTopology C}
+    (p : J.Point) (hp : p.fiber = inverseSystemHomFunctor U) :
+    p.sheafFiber (A := Type (max u w)) ≅ inverseSystemSectionColimitFunctor J U := by
+  rcases p with ⟨F, hF, hs, hl⟩
+  dsimp at hp
+  subst F
+  have := systemElements_initial U
+  let T := (opOpEquivalence I).inverse ⋙ (systemElements U).op
+  have : T.Final := inferInstance
+  exact Functor.isoWhiskerLeft (sheafToPresheaf J (Type (max u w)))
+    (Functor.isoWhiskerLeft
+      ((Functor.whiskeringLeft _ _ _).obj (CategoryOfElements.π (inverseSystemHomFunctor U)).op)
+      (Functor.Final.colimIso T)).symm
+
 /-- Inverse-system criterion for a point of a small site.
 Source: Stacks Project, Sites, Tags 00YC (Proposition proposition-point-limits),
 00YA (Lemma lemma-point-site-topos), and 00YQ (Proposition proposition-criterion-points)
@@ -95,13 +212,18 @@ Proof sketch (the node's steps):
 3. `S(F) = colim_i F(U_i)` preserves finite limits: finite limits of sheaves are
    computed sectionwise, and the same commutation applies.
 4. The covering hypothesis is joint surjectivity; an empty covering forces `u(W)` empty.
-5. The neighbourhood stalk `T(F) = colim_{(W, x)} F(W)` is canonically `S(F)`, by
-   `[W, x, t] ↦ [i, F(a) t]` for `x = [i, a]` and `[i, t] ↦ [U_i, [i, id], t]`.
-6. The three clauses of Tag 00Y5 hold, so `u` is a point (Tag 00YC).
-7. `R(E)(W) = Map(u(W), E)` is a sheaf: lifts over a covering are glued using lifts of
-   pairs to the fibre products `W_k ×_W W_l`; empty coverings give one function.
-8. Currying gives `T ⊣ R`, hence `S ⊣ R`; with step 3 this is a geometric morphism
-   `Set → Sh(C)` with inverse image `S`, the construction of Tag 00YA(1).
+5. The functor `i ↦ (U_i, [i, id])` to the neighbourhood category is initial:
+   representatives provide arrows to every neighbourhood, and eventual equality
+   equalizes parallel such arrows. Its opposite computes the neighbourhood stalk
+   `T(F)` as `S(F)`, naturally in `F`, by Mathlib's `Functor.Final.colimIso`.
+6. Finite-limit preservation makes the category of elements cofiltered. The
+   covering-lifting property extends to the generated topology by induction on
+   saturation: cofiltered cones and equalizers handle pullbacks, and successive
+   lifts handle transitivity. This constructs a Mathlib site point with fibre `u`.
+7. Mathlib's `Point.skyscraperSheafFunctor` supplies the sheaf
+   `R(E)(W) = Map(u(W), E)` and `Point.skyscraperSheafAdjunction` gives `T ⊣ R`.
+8. Transport this adjunction across `T ≅ S`. With step 3 this is a geometric
+   morphism `Set → Sh(C)` whose inverse image is exactly `S`.
 -/
 theorem inverseSystemSitePoint {C : Type u} [Category.{u} C]
     [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings)
@@ -121,6 +243,33 @@ theorem inverseSystemSitePoint {C : Type u} [Category.{u} C]
       ∃ (p : GeometricMorphism (Type (max u w))
           (Sheaf J.toGrothendieck (Type (max u w)))),
         Nonempty (p.inverse ≅ inverseSystemSectionColimitFunctor.{w} J.toGrothendieck U) := by
-  sorry
+  have _ := hJ
+  have hlim := hom_preservesFiniteLimits U
+  have := (inverseSystemHomFunctor U).isCofiltered_elements
+  have hpre : ∀ (X : C) (R : Presieve X), R ∈ J X →
+      ∀ x : (inverseSystemHomFunctor U).obj X,
+        ∃ (Y : C) (f : Y ⟶ X), R f ∧
+          ∃ y : (inverseSystemHomFunctor U).obj Y,
+            (inverseSystemHomFunctor U).map f y = x := by
+    intro X R hR x
+    obtain ⟨K, V, a, rfl⟩ := R.exists_eq_ofArrows
+    obtain ⟨k, y, hy⟩ := hcover V a hR x
+    exact ⟨V k, a k, ⟨k⟩, y, hy⟩
+  have := systemElements_initial U
+  have : InitiallySmall.{u} (inverseSystemHomFunctor U).Elements :=
+    initiallySmall_of_initial_of_essentiallySmall (systemElements U)
+  let p : J.toGrothendieck.Point :=
+    { fiber := inverseSystemHomFunctor U
+      jointly_surjective R hR x := by
+        obtain ⟨Y, f, hf, y, hy⟩ := lift_saturated _ J hpre R hR x
+        exact ⟨Y, f, hf, y, hy⟩ }
+  refine ⟨hlim, fun K W V a ha f ↦ hcover V a ha f, ?_⟩
+  refine ⟨{ inverse := inverseSystemSectionColimitFunctor J.toGrothendieck U
+            direct := p.skyscraperSheafFunctor
+            adj := p.skyscraperSheafAdjunction.ofNatIsoLeft (stalkComparison U p rfl)
+            leftExact := ?_ }, ?_⟩
+  · unfold inverseSystemSectionColimitFunctor
+    infer_instance
+  · exact ⟨Iso.refl _⟩
 
 end CategoryTheory

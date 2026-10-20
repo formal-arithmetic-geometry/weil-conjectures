@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Use the universes of [def-weil-size-convention] for all index sets and colimits. For any directed diagram of sets $(A_i)$, its colimit [def-weil-pbc-category-colimit] can be constructed from pairs $(i,a)$, $a\\in A_i$, by the relation $(i,a)\\sim(j,b)$ if their images agree at some $k\\geq i,j$. This is an equivalence relation: symmetry and reflexivity are immediate, and transitivity follows by moving the two witnessing equalities to a common upper bound. A map out of this quotient is exactly a family of maps $A_i\\to E$ compatible with transitions, proving its colimit universal property. Thus every colimit class has a representative, and equality is witnessed at a common later index. These observations apply to both $\\operatorname{Hom}(U_i,W)$, with precomposition transitions, and $\\mathcal F(U_i)$, with restriction transitions.",
+   "text": "Use the stated size convention and the chosen colimit of representables. Evaluation preserves this colimit. Types.jointly_surjective_of_isColimit gives representatives [i,a], and Types.FilteredColimit.isColimit_eq_iff' gives eventual equality for representatives at the same index. The canonical coprojections commute with postcomposition and with transition maps; these are homMk_map and homMk_transition in the Lean proof.",
    "uses": [
     "def-weil-size-convention",
     "def-weil-pbc-category-colimit"
@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "For $h:W\\to W'$, define $u(h)([i,a])=[i,h\\circ a]$. Composition and identities follow on representatives, and postcomposition commutes with the precomposition transitions, so this is a functor. If $D$ is a finite diagram in $\\mathcal C$, the limit universal property gives $\\operatorname{Hom}(U_i,\\lim D)\\cong\\lim_j\\operatorname{Hom}(U_i,D_j)$, naturally in $i$. By [lem-weil-pbc-filtered-colimits-commute-finite-limits], taking the colimit over the nonempty directed poset $I$ gives\n$$u(\\lim D)\\cong\\varinjlim_i\\lim_j\\operatorname{Hom}(U_i,D_j)\\cong\\lim_j u(D_j).$$\nThese are the canonical comparison maps. Hence $u$ preserves finite limits, including the terminal object and all fibre products.",
+   "text": "Each representable Hom(U_i,-) preserves finite limits. The filtered-colimit/finite-limit interchange [lem-weil-pbc-filtered-colimits-commute-finite-limits] makes the property of preserving finite limits closed under I-shaped colimits. Apply ObjectProperty.preservesFiniteLimits.prop_colimit to the representable diagram. This proves PreservesFiniteLimits u.",
    "uses": [
     "lem-weil-pbc-filtered-colimits-commute-finite-limits"
    ],
@@ -38,7 +38,7 @@
    }
   },
   {
-   "text": "For a sheaf of sets $\\mathcal F$, put $S(\\mathcal F)=\\varinjlim_i\\mathcal F(U_i)$, and for a sheaf morphism $a:\\mathcal F\\to\\mathcal G$ put $S(a)([i,t])=[i,a_{U_i}(t)]$. Naturality of $a$ respects transitions, so $S$ is a functor. For a finite diagram $(\\mathcal F_j)$, [lem-weil-pbc-presheaf-finite-limits-objectwise], clauses (1) and (2), identify $(\\lim_j\\mathcal F_j)(U_i)$ with $\\lim_j\\mathcal F_j(U_i)$. Apply [lem-weil-pbc-filtered-colimits-commute-finite-limits] to obtain\n$$S(\\lim_j\\mathcal F_j)\\cong\\varinjlim_i\\lim_j\\mathcal F_j(U_i)\\cong\\lim_j S(\\mathcal F_j).$$\nThus $S$ preserves finite limits.",
+   "text": "The functor S is the composite of inclusion of sheaves into presheaves, restriction along the opposite inverse-system diagram, and the I-colimit functor. Inclusion and restriction preserve finite limits by [lem-weil-pbc-presheaf-finite-limits-objectwise]. The final factor preserves finite limits by [lem-weil-pbc-filtered-colimits-commute-finite-limits]. Thus S preserves finite limits also for sets in the larger stated universe.",
    "uses": [
     "lem-weil-pbc-presheaf-finite-limits-objectwise",
     "lem-weil-pbc-filtered-colimits-commute-finite-limits"
@@ -50,7 +50,7 @@
    }
   },
   {
-   "text": "For a covering $\\{W_k\\to W\\}_{k\\in K}$, the stated hypothesis says that each $x\\in u(W)$ is the image of some $y\\in u(W_k)$. This is precisely joint surjectivity, and the maps are those given by postcomposition in Step 2. If the covering is empty, the hypothesis forces $u(W)=\\varnothing$, so it also gives the required empty jointly surjective family. Step 2 additionally gives the pullback bijections $u(W_k\\times_W V)\\cong u(W_k)\\times_{u(W)}u(V)$ for every $V\\to W$.",
+   "text": "The given hcover is exactly joint surjectivity for every covering family. Every covering presieve has a presentation Presieve.ofArrows with a small indexing type (Presieve.exists_eq_ofArrows), so this gives lifting for every covering presieve. Empty coverings are included: a lift cannot exist, so the target fibre is empty.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -59,7 +59,7 @@
    }
   },
   {
-   "text": "Define the neighbourhood category $\\mathcal N_u$ to have objects $(W,x)$ with $x\\in u(W)$ and arrows $h:(V,y)\\to(W,x)$ with $u(h)(y)=x$. Its stalk colimit $T(\\mathcal F)=\\varinjlim_{\\mathcal N_u^{\\mathrm{op}}}\\mathcal F(W)$ [def-weil-pbc-category-colimit] consists of triples $(W,x,t)$ with relations $(W,x,t)\\sim(V,y,\\mathcal F(h)(t))$. Define\n$$\\alpha:T(\\mathcal F)\\to S(\\mathcal F),\\qquad [W,x,t]\\mapsto[i,\\mathcal F(a)(t)],\\quad x=[i,a:U_i\\to W].$$\nIf $a$ and $a'$ represent the same $x$, Step 1 gives a common $j$ with $a f_{ji}=a'f_{ji'}$; applying $\\mathcal F$ makes the two output classes equal. For a pointed arrow $h:(V,y)\\to(W,x)$, represent $y$ by $b:U_i\\to V$; then $x=[i,hb]$ and $\\mathcal F(b)\\mathcal F(h)=\\mathcal F(hb)$ verifies the stalk relation. In the other direction set $\\beta([i,t])=[U_i,[i,\\mathrm{id}_{U_i}],t]$. For $j\\geq i$, the arrow $f_{ji}$ is pointed because $[j,f_{ji}]=[i,\\mathrm{id}]$, so $\\beta$ respects transitions. We have $\\alpha\\beta=1$; the pointed arrow $a:(U_i,[i,\\mathrm{id}])\\to(W,x)$ gives $\\beta\\alpha[W,x,t]=[W,x,t]$. Both formulas commute with sheaf morphisms. This proves the canonical natural isomorphism $T\\cong S$ without a cofinality theorem.",
+   "text": "Define e:I^op -> Elements(u) by i |-> (U_i,[i,id]) and the transition morphisms. It is initial: a representative x=[i,a] gives a pointed arrow e(i)->(W,x); if two pointed arrows from e(i) have the same target, their representing maps have equal colimit classes, so a later transition equalizes them. This is Functor.initial_of_exists_of_isCofiltered, applied using homMk_surjective and homMk_eq. Consequently the opposite of e, precomposed with the double-opposite equivalence, is final. Its composite with the neighbourhood projection is definitionally inverseSystemOppositeDiagram U. Functor.Final.colimIso, whiskered with restriction and then the sheaf inclusion, gives a canonical natural isomorphism T ≅ S, not just separate bijections on objects. The initial functor also gives initial smallness of Elements(u).",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
@@ -70,7 +70,7 @@
    }
   },
   {
-   "text": "The three clauses defining a site point (Tag 00Y5, definition-point) are now verified: joint surjectivity over coverings is Step 4; the covering pullback comparisons are bijections by Steps 2 and 4; and the associated stalk functor $T$ preserves finite limits by Steps 3 and 5. This is the point whose existence is expressed by Tag 00YC. We next construct its geometric morphism explicitly, rather than using a further point-construction lemma.",
+   "text": "Finite-limit preservation gives cofilteredness of Elements(u) by Functor.isCofiltered_elements. Extend the covering-presieve lifting property to the generated topology by induction on Precoverage.Saturate. Generated coverings inherit the chosen lift; the maximal sieve lifts by the identity. For a pullback, first lift the image of the chosen element, then take a cone over the two resulting pointed objects and equalize their parallel maps to the original pointed object. Their underlying composites coincide, so the resulting arrow lies in the pullback sieve and lifts the element. For transitivity lift first along the first sieve, then along the covering pullback of the second sieve, and compose. These are all cases of saturation. Together with cofilteredness and initial smallness this constructs a Mathlib GrothendieckTopology.Point with fibre u.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -79,7 +79,7 @@
    }
   },
   {
-   "text": "For a set $E$, put $R(E)(W)=\\operatorname{Map}(u(W),E)$, with restriction along $h:V\\to W$ given by precomposition with $u(h)$, and with a set map $E\\to E'$ acting by postcomposition. We verify the sheaf equalizer condition [def-weil-pbc-sites-and-cohomology]. Given compatible functions $q_k:u(W_k)\\to E$ on a covering, choose, for $x\\in u(W)$, a lift $y\\in u(W_k)$ using Step 4 and assign $q(x)=q_k(y)$. If $y'\\in u(W_l)$ is another lift, Step 2 lifts $(y,y')$ to $u(W_k\\times_W W_l)$; compatibility of the functions there gives $q_k(y)=q_l(y')$. Thus the value is independent of the lift and defines a function whose restrictions are the $q_k$. It is unique by joint surjectivity. For an empty cover, $u(W)=\\varnothing$ and there is exactly one function. Hence $R(E)$ is a sheaf, and $R$ is a functor $\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$.",
+   "text": "For the constructed site point, use Mathlib Point.skyscraperSheafFunctor and Point.skyscraperSheafAdjunction. Their direct image is R(E)(W)=Map(u(W),E), with the gluing and currying proof of Stacks Tags 00Y7 and 00Y8 already proved in Mathlib.CategoryTheory.Sites.Point.Skyscraper. This gives T ⊣ R for the neighbourhood stalk T.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
@@ -90,7 +90,7 @@
    }
   },
   {
-   "text": "A function $\\phi:T(\\mathcal F)\\to E$ is, by the colimit universal property [def-weil-pbc-category-colimit], precisely a family $\\phi_{W,x}:\\mathcal F(W)\\to E$ satisfying $\\phi_{V,y}(\\mathcal F(h)(t))=\\phi_{W,x}(t)$ for each pointed arrow $h:(V,y)\\to(W,x)$. Curry this family to $\\tau_W(t)(x)=\\phi_{W,x}(t)$. For any arrow $h:V\\to W$ and $y\\in u(V)$, the pointed arrow to $(W,u(h)y)$ makes that identity exactly\n$$\\tau_V(\\mathcal F(h)t)(y)=\\tau_W(t)(u(h)y),$$\nwhich is naturality of $\\tau:\\mathcal F\\to R(E)$. Evaluation at $x$ reverses currying, so these are inverse bijections. Precomposing a sheaf morphism changes $t$ by its section map in both formulas, and postcomposing $E\\to E'$ changes their output in the same way. Thus they are natural in both variables and give $T\\dashv R$, and Step 5 gives $S\\dashv R$. With Step 3, this is a geometric-morphism datum [def-trf-geometric-morphism] from $\\mathbf{Set}$ to $\\operatorname{Sh}(\\mathcal C)$, with $p^{-1}=S$ and $p_*=R$. Its inverse image therefore has the claimed canonical formula $p^{-1}\\mathcal F=\\varinjlim_i\\mathcal F(U_i)$. Since $T$ is the stalk and $R(E)(W)=\\operatorname{Map}(u(W),E)$, this is exactly the point-to-topos construction of Tag 00YA(1).",
+   "text": "Transport the skyscraper adjunction across the canonical natural isomorphism T ≅ S from Step 5 using Adjunction.ofNatIsoLeft. With finite-limit preservation of S from Step 3, this defines the geometric morphism [def-trf-geometric-morphism] with inverse image exactly S. The required natural isomorphism of its inverse image with inverseSystemSectionColimitFunctor is therefore the identity.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "def-trf-geometric-morphism"
@@ -111,9 +111,9 @@
   "lem-weil-pbc-presheaf-finite-limits-objectwise"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 00Y5, 00Y7, 00Y8, 00YA(1), 00YC and the inverse-system colimits preceding 00YQ; Categories 002W and 04AX. The quotient, comparison, gluing and adjunction computations are written out."
+  "place": "Tags 00YC, 00Y7, 00Y8, 00YA(1), and the inverse-system construction used in 00YQ; formalized by M1 using Mathlib colimit representatives, an initial neighbourhood functor, saturation induction, and the proved skyscraper adjunction."
  },
  "mathlib_searches": [
   {
@@ -263,5 +263,15 @@
   "group": "Q19",
   "result": "fix",
   "note": "Read the node, its 4 statement dependencies and their modules (GeometricMorphism, SiteCoveringAxioms), Stacks 00YC/00YA/00YQ, the citer finitarySite_enoughPoints and Mathlib Point.ofIsCofiltered (candidate only, no duplicate). The node copy changes only the lean record. The delivered file compiles cleanly (nt_compile --json, 5.1 s). Findings, all fixed: (1) the inverse-image clause was a per-sheaf Nonempty isomorphism of sets, which only says equal cardinality and is not natural; it is replaced by a natural isomorphism p.inverse ≅ inverseSystemSectionColimitFunctor (new helper, F ↦ colim_i F(U_i)). (2) Sheaf values were silently restricted to Type u; they are now Type (max u w), as the size convention allows and the citer needs. (3) A bare GrothendieckTopology replaced the recorded site notion; it is now Precoverage J with J.IsSiteForCoverings, Presieve.ofArrows coverings and Sheaf J.toGrothendieck. Fixes: the full module (compiles cleanly), a lean-record.json override (declarations, note) and the full report. Edge cases checked: empty I excluded by Nonempty, one-element I, empty coverings, non-mono transitions, universes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261020T162315-L-3588610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
