@@ -10,10 +10,11 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "K3",
-  "date": "2026-10-14",
-  "document": "Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
-  "place": "Functor.mapDerivedCategoryFactorsh and Functor.mapHomotopyCategoryFactors"
+  "group": "X2",
+  "date": "2026-10-21",
+  "document": "lean/WeilConjectures/Algebra/Homology/DerivedExtensionRingEquivRawTransport.lean",
+  "place": "ModuleCat.exists_raw_transport; exact restriction-of-scalars construction from Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+  "note": "Retirement uses the already proved upstream theorem; the full old signature was separately derived and compiled, and the existing upstream counit consumer was compiled unchanged."
  },
  "mathlib_searches": [
   {
@@ -62,7 +63,7 @@
  "statement": "For compatible ring equivalences and universal derived scalar extensions, every termwise scalar-extension isomorphism admits a derived restriction functor and localization factorization isomorphism.",
  "proof": [
   {
-   "text": "Use the exact restriction-of-scalars functor induced on derived categories. Its mapDerivedCategoryFactorsh iso and mapHomotopyCategoryFactors iso, whiskered by the homotopy quotient and followed by DerivedCategory.Qh, compose to the required localization factorization. The termwise isomorphism t is unused because the existential conclusion is unconditional.",
+   "text": "Use the official upstream ModuleCat.exists_raw_transport. It constructs the exact restriction-of-scalars functor on derived categories and composes mapDerivedCategoryFactorsh, whiskered by the homotopy quotient, with mapHomotopyCategoryFactors, whiskered by DerivedCategory.Qh. This gives the functor E and a Nonempty localization factorization isomorphism. The original more specialized statement follows by unpacking Nonempty and adjoining True; all R-side, scalar-extension, compatibility and termwise-isomorphism data are unused.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-module-base-change"
@@ -75,14 +76,15 @@
   "def-weil-module-base-change"
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawTransport",
-  "file": "lean/Sheaf/Algebra/Homology/DerivedExtensionRingEquivRawTransport.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivRawTransport",
+  "file": "lean/WeilConjectures/Algebra/Homology/DerivedExtensionRingEquivRawTransport.lean",
   "declaration": "ModuleCat.exists_raw_transport",
-  "statement": "theorem exists_raw_transport\n    {R₀ B₀ R B : Type u}\n    [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]\n    [Algebra R₀ B₀] [Algebra R B]\n    [HasDerivedCategory.{w} (ModuleCat.{u} R₀)]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} B)]\n    (L₀ : DerivedCategory (ModuleCat.{u} R₀) ⥤ DerivedCategory (ModuleCat.{u} B₀))\n    (L : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))\n    (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶\n      (extendScalars (algebraMap R₀ B₀)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      (extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (h₀ : L₀.IsLeftDerivedFunctor ε₀ (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (h : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (eR : R₀ ≃+* R) (eB : B₀ ≃+* B)\n    (hRB : eB.toRingHom.comp (algebraMap R₀ B₀) =\n      (algebraMap R B).comp eR.toRingHom) :\n    let π₀ := HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ)\n    let π := HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)\n    let S₀ := HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh\n    let S := HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ) ⋙ DerivedCategory.Qh\n    let V := (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ)\n    let U := restrictScalars.{u} eB.toRingHom\n    let T₀ := (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ)\n    let T := (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)\n    ∀ t : V ⋙ T₀ ≅ T ⋙ U.mapHomologicalComplex (.up ℤ),\n      ∃ (E : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} B₀))\n        (q : S ⋙ E ≅ U.mapHomologicalComplex (.up ℤ) ⋙ S₀), True",
+  "statement": "theorem exists_raw_transport {B₀ B : Type u} [CommRing B₀] [CommRing B]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} B)]\n    (eB : B₀ ≃+* B) :\n    let S₀ := HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh\n    let S := HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ) ⋙ DerivedCategory.Qh\n    let U := restrictScalars.{u} eB.toRingHom\n    ∃ E : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} B₀),\n      Nonempty (S ⋙ E ≅ U.mapHomologicalComplex (.up ℤ) ⋙ S₀)",
   "branch": "sheaf-dag",
-  "by": "E1",
-  "date": "2026-10-14"
+  "by": "X2",
+  "date": "2026-10-21",
+  "note": "Retired the unused Sheaf copy in favor of the official upstream twin (human retirement hand-off, 2026-10-20). The upstream theorem drops unused R-side, derived-extension and termwise-isomorphism parameters, and packages the factorization isomorphism with Nonempty. It implies the entire original statement: after introducing the original lets and t, obtain ⟨E, ⟨q⟩⟩ := exists_raw_transport eB and return ⟨E, q, trivial⟩. The sole DAG parent already imports and applies the upstream theorem."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -95,14 +97,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-f1619",
-  "group": "K3",
+  "reviewer": "C-44997",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261014T004106-L-2835751",
+  "landing": "20261020T233234-L-909796",
   "kind": "interface",
-  "note": "independent Codex review: Delivered module, node, report, and change record matched the packet; delivery and direct importer compile successfully, with only allowed axioms and no remaining sorry."
+  "note": "independent cc review: retired Sheaf exists_raw_transport (old full signature) against upstream WeilConjectures exists_raw_transport (record statement verbatim); legacy signature re-derived from upstream and compiled, axioms clean; zero importers of the Sheaf module"
  },
  "lean_audit": {
   "master": {
