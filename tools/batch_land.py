@@ -797,6 +797,14 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
     or None when nothing landed."""
     target = target or OPEN
     if (BD / 'proof-imports.json').exists(): return None
+    # 2026-10-21 (the human): putting quarantined modules back is a landing like any other, in the same batch: every
+    # module no unfixed root blocks lands here with this batch; the batch's global build verifies it, the merge queue
+    # takes out what fails (tools/rework.py settle_restores puts those back in quarantine)
+    try:
+        import rework
+        rework.cluster_restore(wait=False)
+    except Exception as exc:
+        log("rework restore failed, the next batch tries again |", repr(exc)[:300])
     cands = candidates(cache)
     if not cands:
         return None

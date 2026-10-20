@@ -994,8 +994,9 @@ def main() -> int:
     cmd = a[0] if a else "status"
     if cmd == "reconcile":
         reconcile(); return 0
-    if cmd == "autorestore" and not ({"--from-loop", "--level-wise", "--recheck-unlocated", "--recheck-errors"} & set(a)):
-        cluster_restore(wait=False); return 0
+    if cmd == "autorestore" and not ({"--level-wise", "--recheck-unlocated", "--recheck-errors"} & set(a)):
+        print("rework autorestore: restores land with every batch of tools/batch_land.py (2026-10-21); nothing done here")
+        return 0
     if cmd == "autorestore":
         autorestore(workers=int(a[a.index("--workers") + 1]) if "--workers" in a else 24,
                     limit=int(a[a.index("--limit") + 1]) if "--limit" in a else 2000,
