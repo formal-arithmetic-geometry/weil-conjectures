@@ -95,18 +95,19 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/SchemeOrdinaryEvaluationLocalization.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SchemeOrdinaryEvaluationLocalization.lean",
   "declaration": "AlgebraicGeometry.schemeOrdinaryEvaluation_localization",
   "declarations": [
    "AlgebraicGeometry.schemeOrdinaryHomComparison",
    "AlgebraicGeometry.schemeOrdinaryEvaluation_localization"
   ],
-  "statement": "theorem schemeOrdinaryEvaluation_localization (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (K N : schemeDerivedCategory Y)\n    (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (eK : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj F ≅ N)\n    (f : pullbackTensorTotal Y F\n        (homComplex (R := Y.sheaf) P\n          ((HomologicalComplex.single _ (.up ℤ) 0).obj\n            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))) ⟶\n      homComplex (R := Y.sheaf) P F)\n    (hf : IsSchemeOrdinaryEvaluation Y P F f) :\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf\n    let O := (HomologicalComplex.single _ (.up ℤ) 0).obj\n      (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))\n    let V := homComplex (R := Y.sheaf) P O\n    let c := schemeOrdinaryHomComparison Y P F ≫ H.map (eK.inv.op, eN.hom)\n    let d := schemeOrdinaryHomComparison Y P O ≫\n      H.map (eK.inv.op, ((DerivedCategory.quotientCompQhIso _).app O).inv)\n    schemeDerivedTensorHomEquiv Y (N ⊗ DerivedCategory.Q.obj V) K N\n        ((eN.inv ▷ DerivedCategory.Q.obj V) ≫ pullbackTensorModelMap Y F V ≫\n          DerivedCategory.Q.map f ≫ c) =\n      (α_ N (DerivedCategory.Q.obj V) K).hom ≫ N ◁\n        (schemeDerivedTensorHomEquiv Y (DerivedCategory.Q.obj V) K\n          (𝟙_ (schemeDerivedCategory Y)) d) ≫ (ρ_ N).hom",
+  "statement": "theorem schemeOrdinaryEvaluation_localization (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (K N : schemeDerivedCategory Y)\n    (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (eK : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj F ≅ N)\n    (f : pullbackTensorTotal Y F\n        (homComplex.{u, u, u, u} (R := Y.sheaf) P\n          ((HomologicalComplex.single _ (.up ℤ) 0).obj\n            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))) ⟶\n      homComplex.{u, u, u, u} (R := Y.sheaf) P F)\n    (hf : IsSchemeOrdinaryEvaluation Y P F f) :\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf\n    let O := (HomologicalComplex.single _ (.up ℤ) 0).obj\n      (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))\n    let V := homComplex.{u, u, u, u} (R := Y.sheaf) P O\n    let c := schemeOrdinaryHomComparison Y P F ≫ H.map (eK.inv.op, eN.hom)\n    let d := schemeOrdinaryHomComparison Y P O ≫\n      H.map (eK.inv.op, ((DerivedCategory.quotientCompQhIso _).app O).inv)\n    schemeDerivedTensorHomEquiv Y (N ⊗ DerivedCategory.Q.obj V) K N\n        ((eN.inv ▷ DerivedCategory.Q.obj V) ≫ pullbackTensorModelMap Y F V ≫\n          DerivedCategory.Q.map f ≫ c) =\n      (α_ N (DerivedCategory.Q.obj V) K).hom ≫ N ◁\n        (schemeDerivedTensorHomEquiv Y (DerivedCategory.Q.obj V) K\n          (𝟙_ (schemeDerivedCategory Y)) d) ≫ (ρ_ N).hom",
   "branch": "sheaf-dag",
-  "by": "U4",
-  "date": "2026-10-14"
+  "by": "C7",
+  "date": "2026-10-20",
+  "note": "Restored the quarantined compatibility module by re-exporting this proved upstream implementation; original public signatures checked against the upstream declarations. Explicit Hom-complex universes fix inference; the K-flat predicate rename is definitionally equal on these scheme module complexes. No mathematical statement or proof route changed."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -119,14 +120,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "C-3e833",
+  "group": "C7",
   "result": "pass",
-  "landing": "20261014T001726-L-2552299",
+  "landing": "20261020T154042-L-3034341",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 9 re-export shims + 10 node lean attachments (vs live sheaf-dag nodes and upstream WeilConjectures twins); only delta from PASSed 689fc8ee2 is the ExactSourceEvaluationLocalComparisons docstring now matching the quarantined original"
  },
  "lean_audit": {
   "master": {

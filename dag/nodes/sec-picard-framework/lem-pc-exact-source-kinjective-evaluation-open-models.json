@@ -119,14 +119,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ExactSourceKInjectiveEvaluationOpenModels",
-  "file": "lean/Sheaf/AlgebraicGeometry/ExactSourceKInjectiveEvaluationOpenModels.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ExactSourceKInjectiveEvaluationOpenModels",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ExactSourceKInjectiveEvaluationOpenModels.lean",
   "declaration": "AlgebraicGeometry.exists_exactSource_kInjective_evaluation_open_models",
-  "statement": "theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K N : schemeDerivedCategory U.toScheme)\n    (P F : CochainComplex (localEvaluationModules X U) ℤ)\n    (_hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),\n      QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t))\n    (_hdual : (localEvaluationDual X U P).IsAcyclicTensorKFlat)\n    (_eK : (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj\n      (DerivedCategory.Q.obj P) ≅ K)\n    (_eN : (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj\n      (DerivedCategory.Q.obj F) ≅ N)\n    (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)\n    (_hf : IsLocalOrdinaryEvaluation X U P F f) [F.IsKInjective] :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let H := derivedInternalHom\n      (Opens.grothendieckTopology U.toScheme.toRingedSpace) U.toScheme.sheaf\n    let D := H.obj (op K, 𝟙_ (schemeDerivedCategory U.toScheme))\n    let g := ((schemeDerivedTensorHomEquiv U.toScheme) (N ⊗ D) K N).symm\n      ((α_ N D K).hom ≫ N ◁\n        ((schemeDerivedTensorHomEquiv U.toScheme) D K\n          (𝟙_ (schemeDerivedCategory U.toScheme)) (𝟙 D)) ≫ (ρ_ N).hom)\n    ∃ a : N ⊗ D ≅ E.obj (DerivedCategory.Q.obj (localEvaluationTensor X U P F)),\n      ∃ b : H.obj (op K, N) ≅\n          E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),\n        g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f)",
+  "statement": "theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K N : schemeDerivedCategory U.toScheme)\n    (P F : CochainComplex (localEvaluationModules X U) ℤ)\n    (_hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),\n      QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t))\n    (_hdual : (localEvaluationDual X U P).IsKFlatTensor)\n    (_eK : (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj\n      (DerivedCategory.Q.obj P) ≅ K)\n    (_eN : (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj\n      (DerivedCategory.Q.obj F) ≅ N)\n    (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)\n    (_hf : IsLocalOrdinaryEvaluation X U P F f) [F.IsKInjective] :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let H := derivedInternalHom\n      (Opens.grothendieckTopology U.toScheme.toRingedSpace) U.toScheme.sheaf\n    let D := H.obj (op K, 𝟙_ (schemeDerivedCategory U.toScheme))\n    let g := ((schemeDerivedTensorHomEquiv U.toScheme) (N ⊗ D) K N).symm\n      ((α_ N D K).hom ≫ N ◁\n        ((schemeDerivedTensorHomEquiv U.toScheme) D K\n          (𝟙_ (schemeDerivedCategory U.toScheme)) (𝟙 D)) ≫ (ρ_ N).hom)\n    ∃ a : N ⊗ D ≅ E.obj (DerivedCategory.Q.obj (localEvaluationTensor X U P F)),\n      ∃ b : H.obj (op K, N) ≅\n          E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),\n        g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f)",
   "branch": "sheaf-dag",
-  "by": "P4",
-  "date": "2026-10-13"
+  "by": "C7",
+  "date": "2026-10-20",
+  "note": "Restored the quarantined compatibility module by re-exporting this proved upstream implementation; original public signatures checked against the upstream declarations. Explicit Hom-complex universes fix inference; the K-flat predicate rename is definitionally equal on these scheme module complexes. No mathematical statement or proof route changed."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -139,14 +140,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W2",
+  "reviewer": "C-3e833",
+  "group": "C7",
   "result": "pass",
-  "landing": "20261013T164050-L-1668798",
+  "landing": "20261020T154042-L-3034341",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 9 re-export shims + 10 node lean attachments (vs live sheaf-dag nodes and upstream WeilConjectures twins); only delta from PASSed 689fc8ee2 is the ExactSourceEvaluationLocalComparisons docstring now matching the quarantined original"
  },
  "lean_audit": {
   "master": {

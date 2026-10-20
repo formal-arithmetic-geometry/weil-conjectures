@@ -135,14 +135,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KInjectiveSchemeEvaluationModels",
-  "file": "lean/Sheaf/AlgebraicGeometry/KInjectiveSchemeEvaluationModels.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.KInjectiveSchemeEvaluationModels",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/KInjectiveSchemeEvaluationModels.lean",
   "declaration": "AlgebraicGeometry.exists_kInjective_scheme_evaluation_models",
-  "statement": "theorem exists_kInjective_scheme_evaluation_models (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (K N : schemeDerivedCategory Y)\n    (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hhom : ∀ (M M' : CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (t : M ⟶ M'),\n      QuasiIso t → QuasiIso (((homComplexFunctor (R := Y.sheaf)).obj (op P)).map t))\n    (hdual : (homComplex (R := Y.sheaf) P\n      ((HomologicalComplex.single _ (.up ℤ) 0).obj\n        (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))).IsAcyclicTensorKFlat)\n    (eK : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj F ≅ N)\n    (f : pullbackTensorTotal Y F\n        (homComplex (R := Y.sheaf) P\n          ((HomologicalComplex.single _ (.up ℤ) 0).obj\n            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))) ⟶\n      homComplex (R := Y.sheaf) P F)\n    (hf : IsSchemeOrdinaryEvaluation Y P F f) [F.IsKInjective] :\n    let H := derivedInternalHom (Opens.grothendieckTopology Y.toRingedSpace) Y.sheaf\n    let D := H.obj (op K, 𝟙_ (schemeDerivedCategory Y))\n    let g := ((schemeDerivedTensorHomEquiv Y) (N ⊗ D) K N).symm\n      ((α_ N D K).hom ≫ N ◁\n        ((schemeDerivedTensorHomEquiv Y) D K\n          (𝟙_ (schemeDerivedCategory Y)) (𝟙 D)) ≫ (ρ_ N).hom)\n    ∃ a : N ⊗ D ≅ DerivedCategory.Q.obj (pullbackTensorTotal Y F\n          (homComplex (R := Y.sheaf) P\n            ((HomologicalComplex.single _ (.up ℤ) 0).obj\n              (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))))),\n      ∃ b : H.obj (op K, N) ≅ DerivedCategory.Q.obj (homComplex (R := Y.sheaf) P F),\n        g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f",
+  "statement": "theorem exists_kInjective_scheme_evaluation_models (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (K N : schemeDerivedCategory Y)\n    (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hhom : ∀ (M M' : CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (t : M ⟶ M'),\n      QuasiIso t → QuasiIso (((homComplexFunctor (R := Y.sheaf)).obj (op P)).map t))\n    (hdual : (homComplex.{u, u, u, u} (R := Y.sheaf) P\n      ((HomologicalComplex.single _ (.up ℤ) 0).obj\n        (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))).IsKFlatTensor)\n    (eK : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj F ≅ N)\n    (f : pullbackTensorTotal Y F\n        (homComplex.{u, u, u, u} (R := Y.sheaf) P\n          ((HomologicalComplex.single _ (.up ℤ) 0).obj\n            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))) ⟶\n      homComplex.{u, u, u, u} (R := Y.sheaf) P F)\n    (hf : IsSchemeOrdinaryEvaluation Y P F f) [F.IsKInjective] :\n    let H := derivedInternalHom (Opens.grothendieckTopology Y.toRingedSpace) Y.sheaf\n    let D := H.obj (op K, 𝟙_ (schemeDerivedCategory Y))\n    let g := ((schemeDerivedTensorHomEquiv Y) (N ⊗ D) K N).symm\n      ((α_ N D K).hom ≫ N ◁\n        ((schemeDerivedTensorHomEquiv Y) D K\n          (𝟙_ (schemeDerivedCategory Y)) (𝟙 D)) ≫ (ρ_ N).hom)\n    ∃ a : N ⊗ D ≅ DerivedCategory.Q.obj (pullbackTensorTotal Y F\n          (homComplex.{u, u, u, u} (R := Y.sheaf) P\n            ((HomologicalComplex.single _ (.up ℤ) 0).obj\n              (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))))),\n      ∃ b : H.obj (op K, N) ≅ DerivedCategory.Q.obj (homComplex.{u, u, u, u} (R := Y.sheaf) P F),\n        g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f",
   "branch": "sheaf-dag",
-  "by": "W2",
-  "date": "2026-10-14"
+  "by": "C7",
+  "date": "2026-10-20",
+  "note": "Restored the quarantined compatibility module by re-exporting this proved upstream implementation; original public signatures checked against the upstream declarations. Explicit Hom-complex universes fix inference; the K-flat predicate rename is definitionally equal on these scheme module complexes. No mathematical statement or proof route changed."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -155,13 +156,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U4",
+  "reviewer": "C-3e833",
+  "group": "C7",
   "result": "pass",
-  "landing": "20261013T172659-L-2101415",
+  "landing": "20261020T154042-L-3034341",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 9 re-export shims + 10 node lean attachments (vs live sheaf-dag nodes and upstream WeilConjectures twins); only delta from PASSed 689fc8ee2 is the ExactSourceEvaluationLocalComparisons docstring now matching the quarantined original"
  }
 }

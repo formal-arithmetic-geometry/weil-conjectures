@@ -150,14 +150,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/SchemeOrdinaryEvaluationLocalization.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SchemeOrdinaryEvaluationLocalization.lean",
   "declaration": "AlgebraicGeometry.schemeDerivedTensorHomEquiv_naturality",
   "statement": "theorem schemeDerivedTensorHomEquiv_naturality (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (K K' L L' M M' : schemeDerivedCategory Y)\n    (a : K' ⟶ K) (b : L' ⟶ L) (c : M ⟶ M')\n    (g : K ⟶ (derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf).obj\n      (op L, M)) :\n    schemeDerivedTensorHomEquiv Y K' L' M'\n        (a ≫ g ≫ (derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf).map\n          (b.op, c)) =\n      (a ⊗ₘ b) ≫ schemeDerivedTensorHomEquiv Y K L M g ≫ c",
   "branch": "sheaf-dag",
-  "by": "K3",
-  "date": "2026-10-14"
+  "by": "C7",
+  "date": "2026-10-20",
+  "note": "Restored the quarantined compatibility module by re-exporting this proved upstream implementation; original public signatures checked against the upstream declarations. Explicit Hom-complex universes fix inference; the K-flat predicate rename is definitionally equal on these scheme module complexes. No mathematical statement or proof route changed."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -168,14 +169,14 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-89c0b359a (reviewer sub-agent of L); spot-checked: Read the item, cited definition, unit/chapter route, Tag 08DJ source, and reports in full. The three-variable naturality formula has correct variance, typing, identity specializations, coefficient category, and edge cases. No new nodes or repairs are needed; no cycle is introduced by this delivery."
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "C-3e833",
+  "group": "C7",
   "result": "pass",
-  "landing": "20261014T001726-L-2552299",
+  "landing": "20261020T154042-L-3034341",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 9 re-export shims + 10 node lean attachments (vs live sheaf-dag nodes and upstream WeilConjectures twins); only delta from PASSed 689fc8ee2 is the ExactSourceEvaluationLocalComparisons docstring now matching the quarantined original"
  },
  "split_report": {
   "date": "2026-10-14",
