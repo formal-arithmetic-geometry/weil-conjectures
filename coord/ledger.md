@@ -18931,3 +18931,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:10 L: returned deliver/N1/Sheaf.AlgebraicGeometry.FinitePresentationLocalMapDatum (reviewer RETURN: (the landing tools, head 0909c0424) the delivery did not land: lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalMapDa)
 - 22:10 L: returned deliver/N2/Sheaf.AlgebraicGeometry.ConormalGradedAlgebra (reviewer RETURN: (the landing tools, head 07ff8649a) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.ConormalAlgebraAffineGen)
 - 22:10 L: returned deliver/P2/WeilConjectures.WeilSheaf.PoincareDualityLisse (reviewer RETURN: (the landing tools, head b6a3626ac) the delivery did not land: lean/WeilConjectures/WeilSheaf/PoincareDualityLisse.lean )
+- 22:10 L: returned deliver/P9/Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality (reviewer RETURN: (the landing tools, head c74d09ba8) the delivery did not land: lean/Sheaf/AlgebraicGeometry/StalkComparisonPullbackNatur)
