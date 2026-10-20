@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 import WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
-import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearBijective
+import WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitLinearBijective
 
 /-!
 # Construction of the determinant comparison on a split open
@@ -38,6 +38,7 @@ private theorem exteriorSheafPowerIso_hom_wedge {X : Scheme.{v}} (M : X.Modules)
   exact congrArg (fun k ↦ k.app W (wedge (M := M) (r := n) (U := W) a))
     (exteriorSheafPowerIso M n).inv_hom_id
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Construct the comparison independently of any proposed determinant morphism.
 
 Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
@@ -141,8 +142,19 @@ theorem determinant_split_comparison_exists {X : Scheme.{v}}
           (congrArg (d' Z (hZW.trans hW))
             (PresheafOfModules.naturality_apply i.val (homOfLE hZW).op y).symm)))
   intro x hx
-  obtain ⟨V, hVU, hxV, hbij⟩ :=
-    determinant_split_linear_maps_locally_bijective S r₁ r₂ r₃ hr U e hf hg l hl d₀ hd₀ x hx
+  obtain ⟨V, hVU, hxV, hbij'⟩ :=
+    determinant_split_linear_maps_locally_bijective S r₁ r₂ r₃ hr U e hf hg l hl d' hd' x hx
+  let eT : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ ≅
+      exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃ :=
+    tensorIso (C := X.Modules) (exteriorSheafPowerIso S.X₁ r₁)
+      (exteriorSheafPowerIso S.X₃ r₃)
+  let a := fun W : X.Opens ↦
+    ((SheafOfModules.evaluation _ (op W)).mapIso eT).toLinearEquiv
+  let b := fun W : X.Opens ↦ ((SheafOfModules.evaluation _ (op W)).mapIso
+    (exteriorSheafPowerIso S.X₂ r₂)).toLinearEquiv
+  have hbij (W : X.Opens) (hW : W ≤ V) :
+      Function.Bijective (d₀ W (hW.trans hVU)) :=
+    (b W).symm.bijective.comp ((hbij' W hW).comp (a W).bijective)
   let d (W : X.Opens) (hW : W ≤ V) :
       (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)
         ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W) :=

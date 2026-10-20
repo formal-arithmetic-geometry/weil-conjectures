@@ -15,10 +15,9 @@
  ],
  "proof": [
   {
-   "text": "Apply the common free-chart comparison to obtain outside section bases, the section splitting eW, and bijectivity of the middle exterior unit and outside tensor comparison. Transport the given d along these actual comparisons. Its formula transports to the algebraic wedge formula. Use the official upstream chart comparison. Its middle unit transports by exteriorSheafPresheaf_eq_exteriorPower. In the tensor comparison first unfold the sheaf exteriorPower definition, so both the tensor sheaves and the unit codomains are expressed as sheafifications of their presheaves. Rewrite both presheaves by the same equality to obtain exactly the legacy tensor comparison. The rest of the argument is unchanged.",
+   "text": "Apply the adopted upstream common free-chart comparison to obtain outside section bases, the section splitting eW, and bijectivity of the middle exterior unit and outside tensor comparison. The adopted upstream theorem uses exteriorPower and PresheafOfModules.exteriorPower directly, so no legacy-presheaf transport is needed. Transport the given d along these comparisons to the algebraic wedge formula.",
    "uses": [
-    "new-y3-determinant-split-chart-comparison",
-    "lem-sc-exterior-sheaf-presheaf-upstream-comparison"
+    "new-y3-determinant-split-chart-comparison"
    ],
    "elementary": false
   },
@@ -29,13 +28,12 @@
   }
  ],
  "proof_deps": [
-  "new-y3-determinant-split-chart-comparison",
-  "lem-sc-exterior-sheaf-presheaf-upstream-comparison"
+  "new-y3-determinant-split-chart-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Y3 stage-3 reduction: common-chart comparison followed by a proved triangular splitting from lifts of quotient basis vectors and a singleton exterior-basis comparison. V1 retirement, 2026-10-20: replace the chart-comparison twin by the upstream theorem, transporting the comparison units and tensor codomains by the proved presheaf equality. All consumer signatures and the remaining proof are unchanged."
+  "place": "C7 retirement repaired against C8 landing 4453be244d6: attach to the fully proved adopted upstream theorem with the same triangular basis argument in canonical exterior powers. The consumer uses canonical bijectivity before transporting to legacy exterior sheaves."
  },
  "mathlib_searches": [
   {
@@ -90,14 +88,14 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearBijective",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitLinearBijective.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitLinearBijective",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/DeterminantSplitLinearBijective.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_linear_maps_locally_bijective",
-  "statement": "theorem determinant_split_linear_maps_locally_bijective {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b)\n    (d : ∀ (W : X.Opens), W ≤ U →\n      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n        →ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))\n    (hd : ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W hW (b j)) (Fin.cast hr i))) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∀ (W : X.Opens) (hW : W ≤ V), Function.Bijective (d W (hW.trans hVU))",
+  "statement": "theorem determinant_split_linear_maps_locally_bijective {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b)\n    (d : ∀ (W : X.Opens), W ≤ U →\n      (exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.obj (op W)\n        →ₗ[X.presheaf.obj (op W)] (exteriorPower S.X₂ r₂).val.obj (op W))\n    (hd : ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a)\n          (wedge (M := S.X₃) (r := r₃) (U := W) b)) =\n        wedge (M := S.X₂) (r := r₂) (U := W)\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W hW (b j)) (Fin.cast hr i))) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∀ (W : X.Opens) (hW : W ≤ V), Function.Bijective (d W (hW.trans hVU))",
   "branch": "sheaf-dag",
-  "by": "V1",
-  "date": "2026-10-13"
+  "by": "C7",
+  "date": "2026-10-21"
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -112,12 +110,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-fb998",
-  "group": "V1",
+  "reviewer": "C-54f8f",
+  "group": "C7",
   "result": "pass",
-  "landing": "20261020T155631-L-3269315",
+  "landing": "20261020T233108-L-893264",
   "kind": "interface",
-  "note": "independent cc review: Retirement of the Sheaf twin (retire-items.tsv:274) against upstream WeilConjectures determinant_split_chart_comparison (statement identical to the node's lean.statement, sorry-free); the forced adaptation of DeterminantSplitLinearBijective is minimal with signatures unchanged; delivered modules plus the next importer DeterminantSplitComparison compile clean; axioms clean; node edits limited to proof/proof_deps/proof_origin and the lean block, covered by the change record"
+  "note": "independent cc review: node lem-sc-split-determinant-linear-bijective lean.statement verbatim vs WC DeterminantSplitLinearBijective source; adapted DeterminantSplitComparison vs live text (only import, proof-local option, bijectivity block); retire-items.tsv:529"
  },
  "lean_audit": {
   "master": {

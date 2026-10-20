@@ -23,9 +23,10 @@
    "elementary": false
   },
   {
-   "text": "Choose a common chart V containing x on which each transported linear map is bijective. Combine its existing LinearMap structure with Equiv.ofBijective to construct a linear equivalence. This makes the inverse concrete from bijectivity and leaves the forward function unchanged.",
+   "text": "Apply the adopted upstream local bijectivity theorem to the original canonical linear family d′ and its wedge formula. Evaluate the tensor of the outside canonical comparison isomorphisms to a linear equivalence a, and the middle comparison to b. The transported family d₀ is b inverse composed with d′ composed with a; composition of these bijections proves d₀ bijective. Combine its existing LinearMap with Equiv.ofBijective, preserving the forward function.",
    "uses": [
-    "lem-sc-split-determinant-linear-bijective"
+    "lem-sc-split-determinant-linear-bijective",
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
    "elementary": false
   },
@@ -41,10 +42,10 @@
   "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
-  "by": "C8",
+  "by": "C7",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph; retain naturality while converting the original linear maps into equivalences; inline the definitional naturality step (K3 second reading)",
-  "note": "Retirement of the duplicate linear-map module: use the fully proved upstream split determinant construction, transport through the existing canonical exterior-sheaf comparison, and preserve the consumer signature verbatim."
+  "note": "Repair of returned delivery: retain C8 landing 4453be244d6 verbatim except the private bijectivity import, proof-local transparency option, and canonical bijectivity plus sectionwise composition. No transport of the legacy family back to canonical powers is needed."
  },
  "mathlib_searches": [
   {
@@ -127,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-389b3",
-  "group": "C8",
+  "reviewer": "C-54f8f",
+  "group": "C7",
   "result": "pass",
-  "landing": "20261020T211648-L-3485841",
+  "landing": "20261020T233108-L-893264",
   "kind": "interface",
-  "note": "independent cc review: node lem-sc-split-determinant-linear-maps lean.statement verbatim vs WC DeterminantSplitLinearMaps source; retire-items row 530 (after-modules withdrawn); adapted DeterminantSplitComparison signature unchanged, compiles 15.6 s (orig 12.9 s); importer DeterminantWedgeMorphismSplit compiles 76.3 s (published 72.3 s, 60 s timeout pre-existing under load); axioms propext/choice/Quot.sound"
+  "note": "independent cc review: node lem-sc-split-determinant-linear-bijective lean.statement verbatim vs WC DeterminantSplitLinearBijective source; adapted DeterminantSplitComparison vs live text (only import, proof-local option, bijectivity block); retire-items.tsv:529"
  }
 }
