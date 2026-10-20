@@ -20,7 +20,7 @@
    "elementary": false
   },
   {
-   "text": "The derived restriction isomorphism commutes with shifts by the existing exact-functor composition and natural-isomorphism compatibility instances. The derived section pullback commutes with shifts because its adjunction unit does, and because the Leray comparison commutes with shifts when its three right-derived units do. Use Adjunction.commShift_rightDerivedFunctorUnit for the direct-image unit and the preceding private proof for both global-section units. Whisker and compose these compatibilities, inserting associators and the bounded-below lift comparison, to prove shift compatibility of tau.",
+   "text": "In the adopted source module WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionsShiftTransport, prove canonical_adjunction_unit_commShift by checking the adjunction unit degreewise on complexes, descending through the homotopy quotient, and then through DerivedCategory.Qh using the right-derived unit and derivedη_fac_app. The derived restriction isomorphism commutes with shifts by exact-functor composition compatibility. The derived section pullback commutes with shifts because this canonical adjunction unit does, and because the Leray comparison commutes with shifts when its three right-derived units do; canonical_unit_commShift supplies these three compatibilities. Whisker and compose them with associators and the bounded-below lift comparison to obtain shift compatibility of tau. No shift structure transported from a separately chosen right adjoint is required.",
    "uses": [
     "lem-sbc-restricted-derived-section-zero-comparison",
     "def-sbc-raw-restricted-cohomology-comparison-map",
@@ -50,9 +50,9 @@
   "lem-weil-pbc-inverse-image-composition"
  ],
  "proof_origin": {
-  "by": "agent B3",
-  "document": "Stacks Project, Tags 07A6 and 0D6F; existing library shift compatibility lemmas",
-  "place": "The original shift-coherence and conjugation plan, implemented through K-injective equivalence, derived adjunction shift compatibility, and an abstract evaluation calculation."
+  "by": "agent P5",
+  "document": "Stacks Project, Tags 07A6 and 0D6F; adopted source-library proof",
+  "place": "WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionsShiftTransport: canonical_unit_commShift, canonical_adjunction_unit_commShift, restriction_commShift, pullback_commShift, lift_composite_commShift, transport_homology and evaluation_shift_transport. Identical public shift-transport formula; only the Lean attachment and the canonical-adjunction proof description are migrated."
  },
  "mathlib_searches": [
   {
@@ -120,14 +120,16 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RestrictedDerivedSectionsShiftTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedDerivedSectionsShiftTransport.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionsShiftTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RestrictedDerivedSectionsShiftTransport.lean",
   "declaration": "AlgebraicGeometry.Etale.RawRestrictedComparison.restrictedDerivedSections_shiftTransport",
   "statement": "theorem restrictedDerivedSections_shiftTransport {S Y Y' : Scheme.{v}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)\n    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (f : D+(upperStar AddCommGrpCat.{v + 1} a).obj\n      ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ⟶\n        (DerivedCategory.Plus.singleFunctor _ 0).obj F') (U : S.Etale) :\n    let T' := sectionsFunctor ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U)\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj F\n    let τ := Functor.whiskerLeft\n      (DerivedCategory.Plus.ι ⋙\n        D(upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)))\n      (derivedSectionPullback (rawAffineRestrictedMap a h h' w U)) ≫\n      Functor.whiskerRight\n        (Functor.whiskerLeft DerivedCategory.Plus.ι\n          (derivedRestrictionIso a h h' w U).hom)\n        (rightDerivedGlobalSections AddCommGrpCat.{v + 1} (Limits.pullback U.hom h'))\n    let e := Evaluation.singleIso\n      (upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h))\n      (Sheaf.Γ (Limits.pullback U.hom h).smallEtaleTopology AddCommGrpCat.{v + 1}) F\n    let e' := Evaluation.singleIso\n      (upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h'))\n      (Sheaf.Γ (Limits.pullback U.hom h').smallEtaleTopology AddCommGrpCat.{v + 1}) F'\n    (restrictedSectionPullback a h h' w U).app (K⟦(p : ℤ)⟧) ≫\n      (T' ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).map\n        ((D+(upperStar AddCommGrpCat.{v + 1} a).commShiftIso (p : ℤ)).hom.app K ≫\n          (shiftFunctor _ (p : ℤ)).map f) ≫ (shiftIso h' p F' U).hom =\n      (shiftIso h p F U).hom ≫\n        (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} (p : ℤ)).map\n          (e.inv ≫ τ.app K ≫ T'.map f ≫ e'.hom)",
   "branch": "sheaf-dag",
-  "by": "W3",
-  "date": "2026-10-13"
+  "by": "P5",
+  "date": "2026-10-21",
+  "sorry_free": true,
+  "note": "Retired the duplicate Sheaf module in favor of the adopted source module. The public theorem signature is textually identical; the source theorem has only propext, Classical.choice and Quot.sound. Its canonical_adjunction_unit_commShift proves the canonical unit compatibility directly, without the duplicate private restrictedCommShiftLowerStar instance. Existing parent nodes and unit route are retained."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -140,13 +142,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-f0b4c",
-  "group": "B3",
+  "reviewer": "C-03df2",
+  "group": "P5",
   "result": "pass",
-  "landing": "20261013T095931-L-2451897",
+  "landing": "20261020T211812-L-3503756",
   "kind": "interface",
-  "note": "independent Codex review: Delivered module, node proof metadata, report, and documented local interface changes match the stated item; delivery and direct importer compile successfully, with permitted axioms only."
+  "note": "independent cc review: Retired Sheaf copy vs WeilConjectures twin: identical restrictedDerivedSections_shiftTransport signature, twin proved with propext/Classical.choice/Quot.sound only; node lean/proof/proof_origin vs twin source; zero importers of the Sheaf module"
  }
 }
