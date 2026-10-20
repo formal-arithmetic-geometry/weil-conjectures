@@ -116,14 +116,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mct0024 (reviewer sub-agent of L); spot-checked: Expanded (1+eX)(1+dY)(1-eX)(1-dY) by hand: 1+eX+dY+edXY, then 1+dY+ed(XY-YX), then 1+ed(XY-YX) (step 2 correct, 1-eX inverse by e^2=0); step 1 base change along k[e],k[d]->A and subgroup closure is exactly def-sc-group-scheme-subgroup (C4 ok); step 3 descends membership via defining equations: entries in k+k*ed with (ed)^2=0 give f=c+ed*d, same c,d for eta, linear independence of 1,e,d,ed forces c=d=0, inverse 1-eta Z: closed-subscheme condition used explicitly; citer lem-wf-lie-algebra-derivation-bracket (0645b5857) uses only G(A) membership, the value 1+ed[X,Y], the eta-preimage in G(k[eta]) and the case GL(M) in GL(M), all stated; no duplicate (lem-ag-closure-commutators is a degree-datum statement). Second reading by C1: no missed fault found. No repairs."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.MixedCommutatorTangent",
+  "module": "WeilConjectures.AlgebraicGeometry.MixedCommutatorTangent",
   "declaration": "AlgebraicGeometry.GeneralLinearGroup.mixedCommutator_tangent",
-  "file": "lean/Sheaf/AlgebraicGeometry/MixedCommutatorTangent.lean",
-  "statement": "theorem mixedCommutator_tangent {k n : Type u} {V : Type v} [Field k] [AddCommGroup V] [Module k V] [FiniteDimensional k V] [Fintype n] [DecidableEq n] (b : Module.Basis n k V) (G : Over (Spec (.of k))) [GrpObj G] (i : G ⟶ AlgebraicGeometry.GeneralLinearGroup n k) [IsClosedSubgroupScheme i] (X Y : Module.End k V) (x y : AlgebraicGeometry.points G (DualNumber k)) (hx : homMulEquiv n k (DualNumber k) (x ≫ i) = dualUnit (LinearMap.toMatrix b b X)) (hy : homMulEquiv n k (DualNumber k) (y ≫ i) = dualUnit (LinearMap.toMatrix b b Y)) : ∃ p q : AlgebraicGeometry.points G (DualNumber (DualNumber k)), homMulEquiv n k (DualNumber (DualNumber k)) (p ≫ i) = Matrix.GeneralLinearGroup.map (inlHom (DualNumber k) (DualNumber k)) (dualUnit (LinearMap.toMatrix b b X)) ∧ homMulEquiv n k (DualNumber (DualNumber k)) (q ≫ i) = Matrix.GeneralLinearGroup.map (DualNumber.mapRingHom (inlHom k k)) (dualUnit (LinearMap.toMatrix b b Y)) ∧ (homMulEquiv n k (DualNumber (DualNumber k)) ((p * q * p⁻¹ * q⁻¹) ≫ i) : Matrix n n (DualNumber (DualNumber k))) = (1 + (LinearMap.toMatrix b b X).map (fun a ↦ inl (inr a))) * (1 + (LinearMap.toMatrix b b Y).map (fun a ↦ inr (inl a))) * (1 - (LinearMap.toMatrix b b X).map (fun a ↦ inl (inr a))) * (1 - (LinearMap.toMatrix b b Y).map (fun a ↦ inr (inl a))) ∧ (homMulEquiv n k (DualNumber (DualNumber k)) ((p * q * p⁻¹ * q⁻¹) ≫ i) : Matrix n n (DualNumber (DualNumber k))) = 1 + (LinearMap.toMatrix b b (X * Y - Y * X)).map (fun a ↦ inr (inr a)) ∧ Function.Injective (DualNumber.mulRingHom (R := k)) ∧ ∃ z : AlgebraicGeometry.points G (DualNumber k), homMulEquiv n k (DualNumber k) (z ≫ i) = dualUnit (LinearMap.toMatrix b b (X * Y - Y * X))",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/MixedCommutatorTangent.lean",
+  "statement": "theorem mixedCommutator_tangent\n    {n : Type u} {V : Type v} [AddCommGroup V] [Module k V]\n    [FiniteDimensional k V] [Fintype n] [DecidableEq n] (b : Module.Basis n k V)\n    (i : G ⟶ AlgebraicGeometry.GeneralLinearGroup n k) [IsClosedSubgroupScheme i]\n    (X Y : Module.End k V) (x y : AlgebraicGeometry.points G (DualNumber k))\n    (hx : homMulEquiv n k (DualNumber k) (x ≫ i) = dualUnit (LinearMap.toMatrix b b X))\n    (hy : homMulEquiv n k (DualNumber k) (y ≫ i) = dualUnit (LinearMap.toMatrix b b Y)) :\n    ∃ p q : AlgebraicGeometry.points G (DualNumber (DualNumber k)),\n      homMulEquiv n k (DualNumber (DualNumber k)) (p ≫ i) =\n        Matrix.GeneralLinearGroup.map (inlHom (DualNumber k) (DualNumber k))\n          (dualUnit (LinearMap.toMatrix b b X)) ∧\n      homMulEquiv n k (DualNumber (DualNumber k)) (q ≫ i) =\n        Matrix.GeneralLinearGroup.map\n          (DualNumber.mapRingHom (inlHom k k)) (dualUnit (LinearMap.toMatrix b b Y)) ∧\n      (homMulEquiv n k (DualNumber (DualNumber k)) ((p * q * p⁻¹ * q⁻¹) ≫ i) :\n        Matrix n n (DualNumber (DualNumber k))) =\n        1 + (LinearMap.toMatrix b b (X * Y - Y * X)).map (fun a ↦ inr (inr a)) ∧\n      ∃ z : AlgebraicGeometry.points G (DualNumber k),\n        homMulEquiv n k (DualNumber k) (z ≫ i) =\n          dualUnit (LinearMap.toMatrix b b (X * Y - Y * X))",
   "branch": "sheaf-dag",
   "by": "R1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (G6): retired Sheaf twin Sheaf.AlgebraicGeometry.MixedCommutatorTangent; points at its upstream twin (k, G are section variables; the twin omits the old four-factor and injectivity conjuncts, which the node does not claim)."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -144,5 +145,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-750a7",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261020T154615-L-3136321",
+  "kind": "interface",
+  "note": "independent cc review: Withdrawn Sheaf MixedCommutatorTangent + its sole importer MatrixSubgroupLieBracket vs live import graph (no other references), retire rule retire-sheaf-twins-20261020 and retire-items rows 55/259; both nodes' new lean.statement vs the WeilConjectures twins' source (byte-identical, twins sorry-free); node JSONs differ from live only in lean"
  }
 }
