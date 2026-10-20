@@ -41,10 +41,11 @@
   "lem-sbc-relative-normalization-smooth-base-change"
  ],
  "proof_origin": {
-  "kind": "written-by-agent",
-  "by": "F4",
-  "document": "Stacks Project and Mathlib",
-  "place": "Tags 0EYJ and 0BQM; section splitting on U followed by explicit normalization, restriction and coproduct pullback comparisons."
+  "kind": "from-source",
+  "by": "G6",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StalkNormalizationFormalZeroSliceSplit.lean",
+  "place": "GaloisCover.stalk_normalization_formal_zero_slice_split and its private proved helpers.",
+  "note": "The upstream proof implements the same three recorded steps with no sorry. Reuse it, specialized to the node hypotheses, rather than retain a duplicate public name."
  },
  "mathlib_searches": [
   {
@@ -114,14 +115,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalZeroSliceSplit",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationFormalZeroSliceSplit.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFormalZeroSliceSplit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StalkNormalizationFormalZeroSliceSplit.lean",
   "declaration": "AlgebraicGeometry.Scheme.GaloisCover.stalk_normalization_formal_zero_slice_split",
-  "statement": "theorem GaloisCover.stalk_normalization_formal_zero_slice_split {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)\n    (G : Type (u + 1)) [Group G] [Finite G]\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)\n    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)\n    (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη)\n    (U : S.Opens) (hηU : genericPoint S ∈ U)\n    (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)\n    (hψ : IsPullback ψ Z.π PA.obj.hom jU)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=\n      pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])\n    ∀ (d : ℕ)\n      (t : Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s))) ⟶ pullback c a),\n      t ≫ pullback.snd c a =\n        Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin d))) →\n      Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d))) ≫ t = τ →\n      let T := Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s)))\n      let F : Scheme.{u} := pullback n t\n      let E : Scheme.{u} := ∐ (fun _ : G ↦ T)\n      let V := (t ≫ pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U)\n      let r : F ⟶ T := pullback.snd n t\n      let p : E ⟶ T := Sigma.desc (fun _ : G ↦ 𝟙 T)\n      let z := (Spec.map (CommRingCat.ofHom\n        (MvPowerSeries.constantCoeff (σ := Fin d)))) ∣_ V\n      ∃ e : pullback (p ∣_ V) z ≅ pullback (r ∣_ V) z,\n        e.hom ≫ pullback.snd (r ∣_ V) z = pullback.snd (p ∣_ V) z",
+  "statement": "theorem GaloisCover.stalk_normalization_formal_zero_slice_split {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)\n    (G : Type (u + 1)) [Group G] [Finite G]\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)\n    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)\n    (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη)\n    (U : S.Opens) (hηU : genericPoint S ∈ U)\n    (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)\n    (hψ : IsPullback ψ Z.π PA.obj.hom jU)\n    (s : S) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=\n      pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])\n    ∀ (d : ℕ)\n      (t : Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s))) ⟶ pullback c a),\n      t ≫ pullback.snd c a =\n        Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin d))) →\n      Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d))) ≫ t = τ →\n      let T := Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s)))\n      let F : Scheme.{u} := pullback n t\n      let E : Scheme.{u} := ∐ (fun _ : G ↦ T)\n      let V := (t ≫ pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U)\n      let r : F ⟶ T := pullback.snd n t\n      let p : E ⟶ T := Sigma.desc (fun _ : G ↦ 𝟙 T)\n      let z := (Spec.map (CommRingCat.ofHom\n        (MvPowerSeries.constantCoeff (σ := Fin d)))) ∣_ V\n      ∃ e : pullback (p ∣_ V) z ≅ pullback (r ∣_ V) z,\n        e.hom ≫ pullback.snd (r ∣_ V) z = pullback.snd (p ∣_ V) z",
   "branch": "sheaf-dag",
-  "by": "D2",
-  "date": "2026-10-13"
+  "by": "G6",
+  "date": "2026-10-21",
+  "note": "Retire the Sheaf twin in favour of the proved upstream theorem. The upstream statement omits only hs and hmin; its conclusion is identical. A compiled one-line application recovers the old full statement, and the current upstream punctured-split consumer already uses the shorter argument list. The node statement and proof dependencies stay."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -134,13 +136,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F4",
+  "reviewer": "C-655d1",
+  "group": "G6",
   "result": "pass",
-  "landing": "20261013T163535-L-1619838",
+  "landing": "20261020T211722-L-3492543",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Retired Sheaf zero-slice-split module (withdrawn placeholder) and its node's lean record matched with the unchanged upstream WeilConjectures theorem (signature identical except dropped unused hs/hmin; old signature reproved from it in a scratch file; axioms clean); no importers; parent punctured-split node/Lean already use the upstream theorem"
  }
 }
