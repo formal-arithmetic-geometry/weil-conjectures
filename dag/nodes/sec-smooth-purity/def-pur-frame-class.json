@@ -38,9 +38,31 @@
   "def-pur-frame-kummer-class",
   "def-pur-frame-principal-boundary"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The range of a tuple of length d+1 is the union of its prefix range and its last singleton (Fin.lastCases). Ideal.span_union identifies the generated ideals. Apply the already proved Scheme.isPullback_zeroLocusSubschemeι_union and take its canonical isoPullback. Its equation over X follows from isoPullback_hom_fst and IdealSheafData.inclusion_subschemeι. The intersection immersion is monic, so cancellation proves uniqueness. The selected isomorphism satisfies its equation by choose_spec.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an empty tuple, factor the identity of X through its zero subscheme by liftZeroLocusSubscheme; its vanishing condition is vacuous. Monicity supplies the other inverse equation. For any isomorphism c, its pro-etale pullback functor is naturally isomorphic to the over-map along inv c, hence cocontinuous. The constant-sheaf adjunction identifies cupCoefficientRestriction with the pushforward/sheafification compatibility isomorphism, conjugated by cupConstantIso. It is therefore invertible, including for the empty scheme.",
+   "uses": [
+    "def-pur-supported-cup"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Integer casts distribute over addition, and multiplication by two distributes over d+1, giving frameDegreeNext. Retain the specified ordered recursive product. Express its tensor comparison through frameSingleTensorMap (the existing cupDerivedCoefficientMap with an explicitly named single functor), and use supportedCup on the same single objects with their degree-zero lower bounds proved explicitly. These presentations are definitionally equal to the originals. frameFold is the same dependent Nat.rec with its result family abstract; specializing it gives exactly the original frameBoundaryProduct recurrence. frameSingleUnit implements the same mapped inverse coefficient restriction and zero-shift comparison, after substituting the coefficient equality in the generic sheaf category; its objects are explicit in frameEmptyClass.",
+   "uses": [
+    "def-pur-supported-cup"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-supported-cup"
+ ],
+ "proof_origin": "K6 stage 3: existing zero-locus pullback theorem and constant-sheafification compatibility; elementary tuple and degree arithmetic; canonical supported cup retained.",
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -186,7 +208,10 @@
    "WeilConjectures.PurityFiniteSetting.frameCupTransport",
    "WeilConjectures.PurityFiniteSetting.frameCupNext",
    "WeilConjectures.PurityFiniteSetting.frameBoundaryProduct",
-   "WeilConjectures.PurityFiniteSetting.frameClass"
+   "WeilConjectures.PurityFiniteSetting.frameClass",
+   "WeilConjectures.PurityFiniteSetting.frameSingleTensorMap",
+   "WeilConjectures.PurityFiniteSetting.frameFold",
+   "WeilConjectures.PurityFiniteSetting.frameSingleUnit"
   ],
   "file": "lean/Sheaf/Paper/PurityFrameClass.lean",
   "statement": "def frameClass (P : PurityFiniteSetting.{u}) {B V Z : Scheme.{u}} (b : B ⟶ Spec (.of P.field.k)) (v : V ⟶ B) [SmoothOfRelativeDimension P.level v] (i : Z ⟶ V) [IsClosedImmersion i] [Smooth (i ≫ v)] (c : ℕ) (_hcodim : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) = ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞)) (F : i.EtaleFrame c) : cupSupportedHom P (F.U.zeroLocusSubschemeι (Set.range F.f)) ((cupSingle P F.U).obj (P.frameTwist F.U c)) (2 * (c : ℤ))",
@@ -195,5 +220,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The recorded module timed out at 60 s in both overlay and server confirmation. Profiling identified generated recursive frameBoundaryProduct wrappers and a 51 s private-module linter pass. This interface-preserving repair writes the identical dependent left fold directly with Nat.rec, avoiding generated recursive wrappers; all public signatures and canonical constructions are retained."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261020T051458-L-1693305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
