@@ -11,6 +11,8 @@ public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 import Sheaf.Algebra.Homology.SignedDoubleHomCone
+import Mathlib.CategoryTheory.Monoidal.Linear
+import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
@@ -90,6 +92,100 @@ def ScalarCompatibility (A : Type k) [CommRing A] [Linear A E]
             ((ScalarLocalization.localization A E s).commShiftIso n).hom.app (F.obj X)) ∧
         TriangleCompatibility (ScalarLocalization.map A E s F) delta) (_shiftInst := S)
 end General
+
+section ClosedLinearity
+open MonoidalCategory
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+/-- A closed symmetric tensor product is additive on a category with finite biproducts. -/
+private theorem coefficientClosed_monoidalPreadditive
+    {D : Type a} [Category.{b} D] [Preadditive D]
+    [Limits.HasZeroObject D] [Limits.HasBinaryBiproducts D]
+    {H : Dᵒᵖ × D ⥤ D} (S : WeilConjectures.CoefficientClosedStructure H)
+    (s : @SymmetricCategory D _ S.monoidal) :
+    @MonoidalPreadditive D _ _ S.monoidal := by
+  let _ := S.monoidal
+  let _ := s
+  have addR (X : D) : (tensorRight X).Additive := by
+    let _ : (tensorRight X).IsLeftAdjoint := (S.adjunction X).isLeftAdjoint
+    let _ := Limits.preservesBinaryBiproducts_of_preservesBinaryCoproducts (tensorRight X)
+    exact Functor.additive_of_preservesBinaryBiproducts (tensorRight X)
+  let _ : ∀ X : D, (tensorRight X).Additive := addR
+  let _ : ∀ X : D, (tensorLeft X).Additive := fun X ↦
+    Functor.additive_of_iso (BraidedCategory.tensorLeftIsoTensorRight X).symm
+  constructor
+  · intro X Y Z
+    exact (tensorLeft X).map_zero Y Z
+  · intro X Y Z
+    exact (tensorRight X).map_zero Y Z
+  · intro X Y Z f g
+    exact (tensorLeft X).map_add
+  · intro X Y Z f g
+    exact (tensorRight X).map_add
+
+/-- The central tensor-unit action determines linearity of tensoring. -/
+private theorem monoidalLinear_of_unitAction
+    {D : Type a} [Category.{b} D] [Preadditive D]
+    (A : Type k) [CommRing A] [Linear A D]
+    [MonoidalCategory D] [BraidedCategory D] [MonoidalPreadditive D]
+    (e : A → End (𝟙_ D))
+    (h : ∀ (a : A) (X : D),
+      a • 𝟙 X = (ρ_ X).inv ≫ X ◁ e a ≫ (ρ_ X).hom) :
+    MonoidalLinear A D := by
+  have leftLinear (X : D) : (tensorLeft X).Linear A := by
+    apply (Functor.linear_iff A (tensorLeft X)).mpr
+    intro Y a
+    change X ◁ (a • 𝟙 Y) = a • 𝟙 (X ⊗ Y)
+    rw [h a Y, h a (X ⊗ Y)]
+    simp only [whiskerLeft_comp, whiskerLeft_rightUnitor_inv, whiskerLeft_rightUnitor,
+      Category.assoc]
+    rw [← associator_naturality_right_assoc]
+    simp
+  let _ : ∀ X : D, (tensorLeft X).Linear A := leftLinear
+  let _ : ∀ X : D, (tensorRight X).Linear A :=
+    fun X ↦ Functor.linear_of_iso A (BraidedCategory.tensorLeftIsoTensorRight X)
+  constructor
+  · intro X Y Z a f
+    exact (tensorLeft X).map_smul a f
+  · intro a Y Z f X
+    exact (tensorRight X).map_smul a f
+
+/-- Contravariant internal Hom is additive and linear when tensor is linear in both variables.
+Source: Stacks 0A8X, by transposing natural evaluation. -/
+private theorem coefficientClosedDual_linear
+    {D : Type a} [Category.{b} D] [Preadditive D]
+    (A : Type k) [CommRing A] [Linear A D] {H : Dᵒᵖ × D ⥤ D}
+    (S : WeilConjectures.CoefficientClosedStructure H) (O : D)
+    (hadd : @MonoidalPreadditive D _ _ S.monoidal)
+    (hlin : @MonoidalLinear A _ D _ _ _ S.monoidal hadd) :
+    (Prod.sectL Dᵒᵖ O ⋙ H).Additive ∧
+      ∀ {X Y : D} (f : X ⟶ Y) (a : A),
+        H.map (Prod.mkHom (a • f).op (𝟙 O)) =
+          a • H.map (Prod.mkHom f.op (𝟙 O)) := by
+  let _ := S.monoidal
+  let _ := hadd
+  let _ := hlin
+  constructor
+  · constructor
+    intro X Y f g
+    apply ((S.adjunction Y.unop).homEquiv (H.obj (X, O)) O).symm.injective
+    change ((S.adjunction Y.unop).homEquiv _ _).symm
+        (H.map (Prod.mkHom (f + g) (𝟙 O))) =
+      ((S.adjunction Y.unop).homEquiv _ _).symm
+        (H.map (Prod.mkHom f (𝟙 O)) + H.map (Prod.mkHom g (𝟙 O)))
+    simp only [Adjunction.homEquiv_counit, Functor.map_add, Preadditive.add_comp]
+    erw [S.evaluation_naturality X.unop Y.unop O (f + g).unop,
+      S.evaluation_naturality X.unop Y.unop O f.unop,
+      S.evaluation_naturality X.unop Y.unop O g.unop]
+    simp
+  · intro X Y f a
+    apply ((S.adjunction X).homEquiv (H.obj (op Y, O)) O).symm.injective
+    simp only [Adjunction.homEquiv_counit, Functor.map_smul, Linear.smul_comp]
+    erw [S.evaluation_naturality Y X O (a • f),
+      S.evaluation_naturality Y X O f]
+    simp
+end ClosedLinearity
 
 section Site
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
@@ -317,6 +413,45 @@ def subcategoryEvaluation (M : RingedSiteDualityModel.{c, v, r, w} J R) :
   naturality _ _ f := ObjectProperty.hom_ext _
     ((evaluation.{c, v, r, w} J R M).naturality f.hom)
 
+/-- The ambient coefficient bidual is additive and linear under a central scalar action.
+Source: Stacks 0A8X and 0A97.
+(blueprint: lem-coef-rational-bidual-triangle-compatibility).
+Proof: on Hom complexes, precomposition is additive and commutes with the central scalar
+action by transposing evaluation; tensor additivity follows from adjunction, and tensor
+linearity from the central unit action. Apply this calculation twice. -/
+private theorem ambient_bidual_linearity (M : RingedSiteDualityModel.{c, v, r, w} J R)
+    (A : Type k) [CommRing A] [Linear A (D.{c, v, r, w} J R)]
+    (rho : A →+* End (ringedSiteDualityUnit.{c, v, r, w} J R))
+    (hcentral : ∀ (a : A) (X : D.{c, v, r, w} J R),
+      a • 𝟙 X = coefficientScalar.{c, v, r, w} J R M (rho a) X) :
+    ∃ add : (bidual.{c, v, r, w} J R).Additive,
+      (fun [_addInst : (bidual.{c, v, r, w} J R).Additive] ↦
+        (bidual.{c, v, r, w} J R).Linear A) (_addInst := add) := by
+  let _ := M.closed.monoidal
+  let _ := M.symmetric
+  let _ : MonoidalPreadditive (D.{c, v, r, w} J R) :=
+    coefficientClosed_monoidalPreadditive M.closed M.symmetric
+  let _ : MonoidalLinear A (D.{c, v, r, w} J R) :=
+    monoidalLinear_of_unitAction A
+      (fun a ↦ M.unitIso.hom ≫ rho a ≫ M.unitIso.inv) (by
+        intro a X
+        simpa only [coefficientScalar,
+          WeilConjectures.CoefficientClosedStructure.tensor,
+          MonoidalCategory.tensor_map, MonoidalCategory.id_tensorHom] using hcentral a X)
+  obtain ⟨hadd, hsmul⟩ := coefficientClosedDual_linear A M.closed
+    (ringedSiteDualityUnit.{c, v, r, w} J R) inferInstance inferInstance
+  let _ : (dual.{c, v, r, w} J R).Additive := hadd
+  refine ⟨inferInstanceAs ((dual.{c, v, r, w} J R).rightOp ⋙
+    dual.{c, v, r, w} J R).Additive, ?_⟩
+  constructor
+  intro X Y f a
+  change (derivedInternalHomOfUniverses.{c, v, r, w} J R).map
+      (Prod.mkHom ((derivedInternalHomOfUniverses.{c, v, r, w} J R).map
+        (Prod.mkHom (a • f).op (𝟙 _))).op (𝟙 _)) = _
+  rw [hsmul, hsmul]
+  rfl
+
+set_option linter.unusedVariables false in
 /-- Central coefficient scalars make the actual restricted double dual linear.
 Source: Stacks 0A8X, 0A97
 (blueprint: lem-coef-rational-bidual-triangle-compatibility).
@@ -333,7 +468,21 @@ theorem subcategory_linearity (M : RingedSiteDualityModel.{c, v, r, w} J R)
     ∃ add : (subcategoryBidual.{c, v, r, w} J R P hdual).Additive,
       (fun [addInst : (subcategoryBidual.{c, v, r, w} J R P hdual).Additive] ↦
         (subcategoryBidual.{c, v, r, w} J R P hdual).Linear A) (addInst := add) := by
-  sorry
+  obtain ⟨ambientAdd, ambientLinear⟩ := ambient_bidual_linearity
+    (J := J) (R := R) M A rho hcentral
+  let _ : (bidual.{c, v, r, w} J R).Additive := ambientAdd
+  let _ : (bidual.{c, v, r, w} J R).Linear A := ambientLinear
+  let subAdd : (subcategoryBidual.{c, v, r, w} J R P hdual).Additive := by
+    constructor
+    intro X Y f g
+    apply P.hom_ext
+    exact Functor.Additive.map_add (F := bidual.{c, v, r, w} J R)
+  refine ⟨subAdd, ?_⟩
+  let _ : (subcategoryBidual.{c, v, r, w} J R P hdual).Additive := subAdd
+  constructor
+  intro X Y f a
+  apply P.hom_ext
+  exact Functor.Linear.map_smul (F := bidual.{c, v, r, w} J R) f.hom a
 
 /-- Descent through the raw scalar localization with precisely its induced shift and image
 distinguished triangles. The structural parameters describe the triangulation supplied by
