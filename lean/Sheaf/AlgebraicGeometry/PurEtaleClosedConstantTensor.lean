@@ -30,6 +30,9 @@ import WeilConjectures.ConstructibleSheaf.ConstantModuleLocallyConstant
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.OpenClosed.Stalk
+import WeilConjectures.SixFunctors.OpenClosed.Vanishing
+import WeilConjectures.SixFunctors.OpenClosed.Points
+import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 /-!
 # Closed constant coefficient tensors on the small étale site
@@ -317,7 +320,37 @@ this to sheaves. This is step 6 of the node's proof. -/
 theorem closedConstantModule_flat (A : Type (u + 1)) [CommRing A]
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
     ObjectProperty.flat (closedConstantModule A i) := by
-  sorry
+  rw [closedConstantModule]
+  have hfree : ObjectProperty.flat (ModuleCat.of A A) :=
+    (ModuleCat.flat_iff_flat _).2 (inferInstance : Module.Flat A A)
+  apply (flat_iff_forall_flat_sheafFiber_obj _).2
+  intro Ω _ _ s
+  apply ObjectProperty.prop_of_iso ObjectProperty.flat
+    (((pointSmallEtale s).uliftSheafFiberIso (ModuleCat.{u + 1} A)).symm.app _)
+  by_cases hs : s.base (IsLocalRing.closedPoint Ω) ∈ Set.range i.base
+  · obtain ⟨t, ht, _⟩ := IsClosedImmersion.existsUnique_fac_of_field i s hs
+    subst s
+    let e := (lowerStarCompSheafFiberIso (ModuleCat.{u + 1} A) i t).app
+      (constantModuleSheaf A C) ≪≫
+      ((pointSmallEtale t).uliftSheafFiberIso (ModuleCat.{u + 1} A)).symm.app
+        (constantModuleSheaf A C) ≪≫
+      (pointSmallEtale t).ulift.{u + 1}.sheafFiberConstantSheafIso (ModuleCat.of A A)
+    exact ObjectProperty.prop_of_iso ObjectProperty.flat e.symm hfree
+  · let U := i.openComplement
+    have hr : Set.range s.base ⊆ Set.range U.ι.base := by
+      rw [Scheme.Opens.range_ι]
+      exact Scheme.range_base_subset_of_closedPoint_mem s hs
+    let t := IsOpenImmersion.lift U.ι s hr
+    have ht : t ≫ U.ι = s := IsOpenImmersion.lift_fac _ _ _
+    have hz := isZero_upperStar_lowerStar_of_disjoint_range
+      (ModuleCat.{u + 1} A) U.ι i
+      (disjoint_range_of_range_eq_compl U.ι i
+        i.range_eq_compl_range_openComplement_ι) (constantModuleSheaf A C)
+    have hz' := (pointSmallEtale t).sheafFiber.map_isZero hz
+    have e := (upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) U.ι t).app
+      ((lowerStar (ModuleCat.{u + 1} A) i).obj (constantModuleSheaf A C))
+    rw [ht] at e
+    exact ObjectProperty.flat_of_isZero (hz'.of_iso e.symm)
 
 /-- The degree-zero derived object associated to a supported constant module.
 Source: Stacks Tag 06YQ; (blueprint: lem-pur-etale-closed-constant-tensor). -/

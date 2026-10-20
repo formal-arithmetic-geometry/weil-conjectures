@@ -93,18 +93,19 @@
    }
   },
   {
-   "text": "Let $0\\to F\\to G\\to H\\to0$ be any short exact sequence of $A_X$-module sheaves. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels [def-weil-sheaf-of-modules-category], so the underlying abelian sequence is exact. Its stalk sequence is exact by [prop-weil-pbc-geometric-stalks-exact]. By [lem-pod-etale-stalk-tensor-scalar] and step 2, after tensoring with $P_C$ the stalk sequence identifies with the original stalk sequence when $\\bar x\\in C$, and with the zero sequence otherwise. It is exact in both cases. To reflect this to sheaves, take the kernel, the middle homology $\\ker(g)/\\operatorname{im}(f)$, and the cokernel of the resulting three-term sequence. Exactness of stalks makes all their stalks zero, and [lemma-weil-pbc-geometric-stalk-conservative] applied to each object's map to zero makes those objects zero. Thus the tensored sequence is short exact, which is precisely flatness in [def-pc-flat-sheaf-modules]. This proves flatness for arbitrary $A$, including the zero ring.",
+   "text": "Apply the existing stalkwise flatness criterion [lem-sfb-etale-flat-geometric-fibers] to P_C. Compare universe-lifted and ordinary stalks by the canonical uliftSheafFiberIso. If the geometric point lies on C, factor its field-valued morphism through the closed immersion, as in [lem-weil-pbc-geometric-point-open-or-closed]. The closed-direct-image stalk comparison [lemma-openclosed-stalk-lowerstar], the universe-lift comparison on C, and the constant-sheaf stalk comparison identify this stalk with A. The free rank-one A-module is flat (ModuleCat.flat_iff_flat and Module.Flat A A). Otherwise the geometric point factors through the open complement of C. The two supports have disjoint ranges, so [lemma-openclosed-vanishing-lowerstar] makes the inverse image of P_C on that complement zero. Apply the stalk functor, and transport by the inverse-image stalk comparison, to obtain a zero stalk. A zero object is flat. Thus every geometric stalk is flat, and the criterion concludes flatness. This includes the zero ring, empty supports, and empty X.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-pc-flat-sheaf-modules"
+    "lem-sfb-etale-flat-geometric-fibers",
+    "lem-weil-pbc-geometric-point-open-or-closed",
+    "lemma-openclosed-stalk-lowerstar",
+    "lemma-openclosed-vanishing-lowerstar",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-inverse-image-stalk-germ"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PU, exactness on geometric stalks; tensor comparison and elementary identity-or-zero argument."
+    "place": "Tags 04FX and 03PU; existing source-library stalkwise flatness criterion in WeilConjectures/SixFunctors/Etale/UpperLowerStar/FlatModuleCat.lean; identity-or-zero stalk calculation."
    }
   },
   {
@@ -164,11 +165,12 @@
   "lem-weil-pbc-inverse-image-composition",
   "def-pur-sheaf-tensor-product",
   "lem-pod-etale-stalk-tensor-scalar",
-  "def-weil-sheaf-of-modules-category",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "def-pc-flat-sheaf-modules",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "lem-weil-pbc-geometric-point-open-or-closed",
+  "lemma-openclosed-vanishing-lowerstar",
   "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
   "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "prop-weil-pbc-geometric-stalks-exact",
   "lem-pc-bounded-above-flat-kflat-site",
   "lem-weil-pbc-site-derived-tensor-descent",
   "def-pc-tensor-complex-sheaves"
@@ -176,7 +178,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Agent-formulated refinement of Tags 03P5, 03Q1 (3), 04FX and 03PU; tensor and degree-zero derived calculations also use sites-modules Tag 03EL and sites-cohomology Tag 06YQ."
+  "place": "The original nine-step plan is retained, with step 6 implemented by D7 using the proved source-library stalkwise flatness criterion, closed-support stalk comparison, and open-complement vanishing. The remaining bundled theorem is unchanged and still sorry."
  },
  "mathlib_searches": [
   {
@@ -378,5 +380,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Repair R1-R4: all support coherences use equalities after named canonical support-change maps, never HEq. Derived multiplication is singleFunctorObjTensorIso with closedConstantModule_flat followed by singleFunctor.map of the ordinary multiplication; derived associativity, symmetry and the canonical derived pullback square are stated. The noncanonical constantRingedModel and its IsFlatOnSite conjuncts were removed as authorized by R3. The global GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall is the published wrapper of Sheaf.monoidalCategory (its equality lemma is rfl); this specializes the sheafified sectionwise tensor to fixed ModuleCat A coefficients: locally every scalar in the constant ring sheaf is represented by an element of A, so after sheafification A-balancing and constant-ring-sheaf balancing agree. Its tensor functors therefore encode exactly the site tensor and exact tensoring recorded by def-pur-sheaf-tensor-product and def-pc-flat-sheaf-modules, in the accepted fixed-coefficient encoding; no alternative tensor construction is introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261020T211655-L-3487271",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
