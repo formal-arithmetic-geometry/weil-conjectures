@@ -26,73 +26,83 @@
  ],
  "proof": [
   {
-   "text": "Fix a pointed etale neighbourhood $(U,\\bar u)$ of $\\bar y$ and $s\\in G(U)$. Put $V=U\\times_Y Y'$ with marked point $(\\bar u,\\bar y')$, $t=\\eta_{b,G}(U)(s)\\in(b^{-1}G)(V)$, and $z=\\operatorname{germ}_{\\bar y'}(t)$. By [lem-weil-pbc-inverse-image-stalk-germ], $c(z)=\\operatorname{germ}_{\\bar y}(s)$. Apply that abelian-sheaf statement to the underlying abelian sheaf of $G$: [prop-weil-pbc-inverse-image-modules-exact], clauses (2) and (3), identifies the module inverse image and its unit with the abelian ones. The normalization in [lem-cbc-proper-support-geometric-stalk] therefore gives $(\\rho_G\\circ c)(z)=s|_{X_{\\bar y}}$.",
+   "text": "Use properSupport_geometricStalk twice, for f at y' composed with b and for f' at y'. Base-change stability supplies the separated and locally finite type instances for f'. Retain the normalized restriction transformations, their proper-support submodules, and their inclusion equations.",
    "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "prop-weil-pbc-inverse-image-modules-exact",
     "lem-cbc-proper-support-geometric-stalk"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), first commutative diagram and its section-pullback explanation; Tag 0F76 (lemma-stalk-f-shriek-separated), first two proof paragraphs"
+    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), construction and geometric-stalk verification"
    }
   },
   {
-   "text": "The adjunction $b^{-1}\\dashv b_*$ of [def-weil-pbc-inverse-image] gives $b_*\\beta\\circ\\eta_{b,G}=\\alpha$, since $\\beta$ is the adjunct of $\\alpha$. This is the defining unit equation for adjuncts. Its component at $U$ reads $\\beta_V(t)=\\alpha_U(s)$; the component of $b_*\\beta$ at $U$ is precisely $\\beta_V$. The module adjunction has the same unit by [prop-weil-pbc-inverse-image-modules-exact], clause (3). By [lem-cbc-proper-support-pullback-section-map], the section $\\alpha_U(s)\\in H(V)$ is the unit pullback of $s$ on $W'=X'\\times_{Y'}V\\cong(X\\times_YU)\\times_YY'$. Thus $\\beta_{\\bar y'}(z)$ is the germ of this explicitly specified section.",
-   "uses": [
-    "def-weil-pbc-inverse-image",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-cbc-proper-support-pullback-section-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), first commutative diagram and its section-pullback explanation; Tag 0F76 (lemma-stalk-f-shriek-separated), first two proof paragraphs"
-   }
-  },
-  {
-   "text": "Put $W=X\\times_YU$, $Z=X_{\\bar y}$, $Z'=X'_{\\bar y'}$, and let $d:Z'\\xrightarrow{\\sim}Z$ be the canonical fibre isomorphism. Let $q:W'\\to W$ be the projection, $r:Z\\to W$ the lift defined by $\\bar u$, and $r':Z'\\to W'$ the lift defined by $(\\bar u,\\bar y')$. Their projections give $q\\circ r'=r\\circ d$ by [def-pc-fibre-product]. The restriction normalization of [lem-cbc-proper-support-geometric-stalk] sends the germ from step 2 to $(\\alpha_U(s))|_{Z'}$. Write $i':Z'\\to X'$ and $i:Z\\to X$ for the fibre projections. Clause (1) of [lem-weil-pbc-sets-etale-inverse-image-composition-units] sends the iterated unit pullback $i'^*(a^*s)$ to $(a\\circ i')^*s$. Restrict this equality along the marked lift to the pullback of the etale object $W$; clause (0) permits these restrictions. Since $a\\circ i'=i\\circ d$ and $q\\circ r'=r\\circ d$, the resulting section is exactly the pullback by $d$ of $s|_Z$. The set-level equality applies to our coefficients: [lem-weil-pbc-etale-inverse-image-algebraic-structures], clauses (2) and (3), identifies underlying abelian inverse images and their units with the set ones, and [prop-weil-pbc-inverse-image-modules-exact], clauses (2) and (3), does the same for modules. After the coefficient and fibre identifications in the statement, $(\\rho_H\\circ\\beta_{\\bar y'})(z)=s|_Z$.",
+   "text": "Paste the Cartesian square with the pullback defining the fibre over y'. Its universal property gives the canonical isomorphism d from the new fibre to the original fibre, with both projection equations. Compose the ModuleCat inverse-image composition isomorphisms to identify i'^* a^* F with d^* i^* F. Evaluation on the terminal etale object and inverse pullback along d give the ambient section isomorphism k.",
    "uses": [
     "def-pc-fibre-product",
-    "lem-cbc-proper-support-geometric-stalk",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), first commutative diagram and its section-pullback explanation; Tag 0F76 (lemma-stalk-f-shriek-separated), first two proof paragraphs"
+    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), construction and geometric-stalk verification"
    }
   },
   {
-   "text": "The computations in steps 1 and 3 prove the requested explicit formula for every $U,\\bar u,s$. They give equality in the submodule of properly supported fibre sections: both expressions lie there by the specified codomains of $\\rho_G,\\rho_H$, and equality of their underlying sections is equality in that submodule. To obtain equality of maps, precompose both maps with $c^{-1}$ and then with every canonical map $G(U)\\to G_{\\bar y}$. Step 1 identifies $c^{-1}(\\operatorname{germ}_{\\bar y}s)$ with the $z$ used above, so these composites agree. By the colimit definition of the stalk [def-weil-pbc-geometric-stalks], maps out of $G_{\\bar y}$ are determined by all these canonical maps. The composites with $c^{-1}$ are equal; cancel this isomorphism to get $\\rho_H\\circ\\beta_{\\bar y'}=\\rho_G\\circ c$.",
+   "text": "The inverse-image unit and geometric-germ comparison identify zero germs after pullback along an isomorphism with the original zero germs. Using the geometric characterization of closed support, sheaf isomorphisms preserve supports and pullback along d carries the support to its inverse image. Properness over Spec Omega is invariant under this isomorphism by proper_iso_image. Thus k carries the H-fibre proper-support submodule isomorphically to the G-fibre proper-support submodule. Restrict k to obtain kappa and its inclusion equation.",
    "uses": [
-    "def-weil-pbc-geometric-stalks"
+    "def-weil-pbc-geometric-stalks",
+    "lem-cbc-etale-module-section-closed-support",
+    "lem-cbc-proper-support-section-locality"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), first commutative diagram and its section-pullback explanation; Tag 0F76 (lemma-stalk-f-shriek-separated), first two proof paragraphs"
+    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), construction and geometric-stalk verification"
+   }
+  },
+  {
+   "text": "Apply upperStarComp_hom_app_unit_app directly with ModuleCat coefficients. Naturality of the units gives the formula for two successive unit pullbacks followed by restriction. Compare the two resulting pointed lifts into the same pullback: their first projections agree by the marked-point and canonical fibre-isomorphism equations, and their second projections agree because both maps lie over the fibre. This proves that k sends the restriction of properSupportUnitPullback(s) to the restriction of s, for every ambient representative.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-cbc-proper-support-pullback-section-map",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), construction and geometric-stalk verification"
+   }
+  },
+  {
+   "text": "Compute the ModuleCat unit-germ identity directly using the point comap comparison and uniqueness of left adjoints. The adjunct unit equation then identifies the stalk image of the inverse pullback germ with the germ of alpha(s). Cancel the proper-support submodule inclusion, precompose with the inverse source stalk comparison, and test on every pointed neighbourhood. Germ naturality, the two normalized restriction equations, the assumed section equation for alpha, and the representative identity from the preceding step give equal underlying sections. The colimit universal property of the geometric stalk and monicity of the submodule inclusion give the required equality.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-geometric-stalks",
+    "lem-cbc-proper-support-geometric-stalk",
+    "lem-cbc-proper-support-pullback-section-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), construction and geometric-stalk verification"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "prop-weil-pbc-inverse-image-modules-exact",
   "lem-cbc-proper-support-geometric-stalk",
-  "def-weil-pbc-inverse-image",
-  "lem-cbc-proper-support-pullback-section-map",
   "def-pc-fibre-product",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "def-weil-pbc-geometric-stalks"
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-geometric-stalks",
+  "lem-cbc-etale-module-section-closed-support",
+  "lem-cbc-proper-support-section-locality",
+  "lem-cbc-proper-support-pullback-section-map",
+  "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), first commutative diagram and its section-pullback explanation; Tag 0F76 (lemma-stalk-f-shriek-separated), first two proof paragraphs"
+  "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), first commutative diagram and its section-pullback explanation; Tag 0F76 (lemma-stalk-f-shriek-separated), first two proof paragraphs; direct ModuleCat implementation via inverse-image composition coherence and point-comap units"
  },
  "mathlib_searches": [
   {
@@ -213,12 +223,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -244,5 +249,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Commit changes only the new module, the node's lean field and the report; lean.statement matches the file verbatim; no statement_change. Hypotheses match node and Tag 0F55 (Cartesian sq, f separated+LFT, nothing on f'; mono ιG/ιH with SectionHasProperSupport descriptions; α fixed by hα via properSupportUnitPullback; β = adjunct via upperStarLowerStarAdjunction; Ω alg closed Type u; Λ:Type(u+1) is the dependency encoding). Conclusion: qG/qH carry the geometricFibreSectionRestriction normalization of properSupport_geometricStalk, eG/eH its inclusion equations, c = canonical Etale.upperStarCompSheafFiberIso; κ₀ is pinned on unit-pullback representatives, which determines κ on the image of β, so the final equation ρ_H∘β = ρ_G∘c is the node's; canonical transport satisfies it, no arbitrary iso remains. Edge cases (empty Y', zero sheaf, Λ=0, universes) ok. No defs, sorry only, docstrings give source and blueprint, no pro-etale. nt_compile.py --json exit 0, no errors, 4.3 s; error injection confirms the tool reports errors. Minor non-blocking notes: report's 'Statement corrected' text describes a Lean revision and wrongly mentions a holds:false citer record; Second-reading section is the standard post-10-17 notice."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261020T131231-L-1264012",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
