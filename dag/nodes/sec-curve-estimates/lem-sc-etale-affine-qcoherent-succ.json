@@ -37,6 +37,11 @@
     "new-sheaf-cohomology-derived-evaluation"
    ],
    "elementary": true
+  },
+  {
+   "text": "The adopted source theorem etale_affine_qcoherent carries out the preceding argument for every positive q. Specialize it to q = n + 1 with Nat.zero_lt_succ n. Thus the successor statement needs no separate Sheaf module; the arbitrary-positive-degree wrapper is also already the source theorem.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -46,8 +51,8 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/03P2",
-  "place": "Affine Cech/Amitsur argument supplied by the existing lifted-coefficient theorem; coefficient-universe descent through injective resolutions uses Stacks 01DO and Mathlib homology preservation by ULift."
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-etale-affine-qcoherent.md",
+  "place": "Affine Cech/Amitsur argument, implemented in WeilConjectures.AlgebraicGeometry.EtaleAffineQcoherent; specialize its positive-degree theorem to n + 1. C9 retirement, 2026-10-20."
  },
  "mathlib_searches": [
   {
@@ -147,14 +152,15 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleAffineQcoherent",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineQcoherent.lean",
-  "declaration": "AlgebraicGeometry.Etale.etale_affine_qcoherent_succ",
-  "statement": "theorem etale_affine_qcoherent_succ (X : Scheme.{u}) [IsAffine X] (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) : Subsingleton (Sheaf.H (AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsSheaf F) (n + 1))",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleAffineQcoherent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleAffineQcoherent.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_affine_qcoherent",
+  "statement": "theorem etale_affine_qcoherent\n    (X : Scheme.{u}) [IsAffine X]\n    (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) (hq : 0 < q) :\n    Subsingleton (Sheaf.H (AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsSheaf F) q)",
   "branch": "sheaf-dag",
-  "by": "U1",
-  "date": "2026-10-12"
+  "by": "C9",
+  "date": "2026-10-20",
+  "note": "The adopted source theorem proves every positive degree. Specialize q to n + 1 and hq to Nat.zero_lt_succ n to realize this successor-degree node. The unused Sheaf twin and its successor wrapper are retired; no source declaration changes."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -165,14 +171,14 @@
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
+  "reviewer": "C-3f2b5",
+  "group": "C9",
   "result": "pass",
-  "landing": "20261012T085245-L-17401",
+  "landing": "20261020T135354-L-1815537",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf twin (empty Withdrawn module, 0 importers, queue retire/consumers 0) against live WeilConjectures etale_affine_qcoherent (q)(hq:0<q), whose n+1 specialization is the node lem-sc-etale-affine-qcoherent-succ; delivered files compile (exit 0)"
  },
  "created": {
   "by": "worker",
