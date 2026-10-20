@@ -1,0 +1,178 @@
+{
+ "id": "lem-sfb-ringed-site-strict-perfect-hom",
+ "kind": "statement",
+ "title": "Ordinary Hom calculation for bounded finite-projective complexes on a ringed site",
+ "statement": "Let (C,J,R) be a small ringed site with commutative coefficient sheaf and the universe convention [def-weil-size-convention]. Let E be a bounded cochain complex of module sheaves with a degreewise finite-free retract package [def-weil-pbc-strict-perfect-coefficient-package]. Write O for the coefficient complex in degree zero and D=Hom-complex(E,O) [def-pur-hom-complex]. Then D is bounded and admits a finite-free retract package, and ordinary Hom out of E and D sends the fixed K-injective augmentation to a quasi-isomorphism (for arbitrary target complexes for E and for O for D). The actual ordinary signed bidual E to Hom-complex(D,O) and every actual ordinary evaluation Tot(F tensor D) to Hom-complex(E,F), characterized in [lem-sfb-ringed-site-duality-maps], are isomorphisms of complexes.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-hom-complex",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
+ },
+ "proof": [
+  {
+   "text": "For any term $T=E^i$, choose its splitting $T\\xrightarrow{i}\\mathcal O^{\\oplus r}\\xrightarrow{p}T$. With the standard sections $u_j$ and coordinate functionals $u_j^*$ put $t_j=p(u_j)$ and $\\lambda_j=u_j^*i$, so $\\sum_jt_j\\lambda_j=1_T$. The sheaf Hom and tensor definitions [def-pur-sheaf-hom, def-pur-sheaf-tensor-product] give, for every module sheaf $B$, mutually inverse maps\n$$B\\otimes T^\\vee\\longrightarrow\\mathcal Hom(T,B),\\quad b\\otimes\\phi\\longmapsto(t\\mapsto b\\phi(t)),\\qquad h\\longmapsto\\sum_jh(t_j)\\otimes\\lambda_j.$$\nIndeed their composites send $h$ to $h\\sum_jt_j\\lambda_j=h$ and $b\\otimes\\phi$ to $b\\otimes\\sum_j\\phi(t_j)\\lambda_j=b\\otimes\\phi$. All formulas are compatible with further restriction. The dual maps $p^\\vee,i^\\vee$ exhibit $T^\\vee$ as a summand of $(\\mathcal O^{\\oplus r})^\\vee=\\mathcal O^{\\oplus r}$. The double-dual map $t\\mapsto(\\phi\\mapsto\\phi(t))$ has inverse $\\alpha\\mapsto\\sum_j\\alpha(\\lambda_j)t_j$. Finally $\\mathcal Hom(T,-)$ is a retract, naturally in its argument, of $\\mathcal Hom(\\mathcal O^{\\oplus r},-)=(-)^{\\oplus r}$. The latter is exact by [lem-sc-finite-free-internal-hom-exact]. Applying the retraction to any short exact sequence splits its kernels, images and cokernels, so its retract sequence is exact too.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "lem-sc-finite-free-internal-hom-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, final finite-free/direct-summand calculation; dual splittings and termwise evaluation"
+   }
+  },
+  {
+   "text": "For the fixed K-injective augmentation F to I(F), Hom(E^i,-) is exact by step 1. The bounded exact-source Hom calculation [lem-pc-bounded-exact-term-hom-quasi-iso] therefore gives a quasi-isomorphism Hom-complex(E,F) to Hom-complex(E,I(F)). Equivalently, filter by the finitely many source degrees of E: the successive quotients are shifted exact termwise Hom functors, so induction and the cohomology long exact sequence apply to arbitrary unbounded F. This finite filtration proof works with independent site and coefficient universes; no exactness of infinite products is used.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect, ordinary-to-derived Hom comparison; bounded exact-source proof instead of its local-actual-map argument"
+   }
+  },
+  {
+   "text": "The Hom-product description [def-pur-hom-complex] and the fact that O is concentrated in degree zero identify D^q with Hom(E^(-q),O), and d_D^q with (-1)^(q+1) times the dual of d_E^(-q-1). If E is supported in [a,b], then D is supported in [-b,-a]. Step 1 dualizes the chosen finite-free retractions, producing a finite-free retract package for D. Step 2 applied to D gives its augmentation comparison at O.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, second paragraph, model of the dual and finite-free-summand dual terms"
+   }
+  },
+  {
+   "text": "For the ordinary signed bidual map characterized in [lem-sfb-ringed-site-duality-maps], the Hom-product projections identify its degree-i component with (-1)^i times termwise double-dual evaluation. The dual basis identity of step 1 gives the inverse, including for odd i and in characteristic two. This proves invertibility as an actual chain map, not merely of its localization.",
+   "uses": [
+    "lem-sfb-ringed-site-duality-maps",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, second paragraph: canonical bidual map is termwise evaluation up to sign; Tag 0A97 for the canonical map"
+   }
+  },
+  {
+   "text": "In degree n, the ordinary evaluation of [lem-sfb-ringed-site-duality-maps] is the finite sum, over p+q=n, of F^p tensor (E^(-q))^dual to Hom(E^(-q),F^p), y tensor phi mapping to (x mapping to phi(x)y). The dual basis inverse of step 1 inverts every summand; both sides have the same finite indexing because E is bounded. Expanding the differentials gives d_F y tensor phi + (-1)^(p+q+1)y tensor (phi d_E) on the tensor side, exactly d_F f-(-1)^n f d_E on the Hom side. Thus the componentwise inverse is an inverse chain map. The formula also covers zero ranks, the zero ring and unbounded F.",
+   "uses": [
+    "lem-sfb-ringed-site-duality-maps",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, last three displays and final sentence, including the evaluation map; section-hom-complexes for signs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "lem-sc-finite-free-internal-hom-exact",
+  "def-pur-derived-internal-hom",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "def-pur-hom-complex",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-ringed-site-duality-maps",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH and 08JJ; the local ordinary calculation, without local-to-global descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite projective sheaves on a ringed site has ordinary tensor Hom evaluation isomorphisms",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-21",
+   "verdict": "No match: these do not give the ordinary signed chain maps for arbitrary ringed sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.HasRightDual",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-21",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*dual|dual.*perfect|isIso.*evaluation",
+   "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Shift/SingleFunctors.lean\", \"line\": \"201\", \"text\": \"  inferInstanceAs <| IsIso ((evaluation C D n).map f)\"}\n  {\"file\": \"Mathlib/Geometry/Convex/Cone/Dual.lean\", \"line\": \"17\", \"text\": \"When the pairing is perfect, this gives us the algebraic dual of a cone. This is developed here.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"line\": \"56\", \"text\": \"/-- Turn a perfect pairing between `M` and `N` into an isomorphism between `M` and the dual of `N`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"line\": \"83\", \"text\": \"/-- A reflexive module has a perfect pairing with its dual. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"line\": \"88\", \"text\": \"/-- A reflexive module has a perfect pairing with its dual. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"line\": \"140\", \"text\": \"`V` in `N` are perfectly complementary w.r.t. `p` if their dual annihilators are complementary,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"line\": \"186\", \"text\": \"`M ≃ₗ[R] Dual R N`. Such equivalences are known as perfect pairings. -/\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/PerfectPairing.lean\", \"line\": \"21\", \"text\": \"there is a continuous perfect pairing between `M` and `WeakDual R M`, even though the map\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/TopDualPairing.lean\", \"line\": \"14\", \"text\": \"# Continuous Perfect Pairing for `topDualPairing`\"}\n  {\"file\"",
+   "date": "2026-10-21",
+   "verdict": "No direct match; reuse the finite-free, bounded-Hom and K-flat tools in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a bounded complex of finite projective sheaves on a ringed site, its ordinary dual is bounded finite projective and its ordinary tensor Hom evaluation is an isomorphism",
+   "results": "dualTensorHomEquivOfBasis; Module.dual_projective; dualTensorHomEquiv; Module.dual_finite; Module.instIsReflexiveOfFiniteOfProjective; LinearMap.IsPerfPair.dualEval; FGModuleCat.FGModuleCatDual; HomologicalComplex.instHasBinaryBiproductObjEval",
+   "date": "2026-10-21",
+   "verdict": "No match: ordinary module duality does not identify the signed sheaf Hom-complex maps or prove their augmentation comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSitePerfectDuality",
+  "date": "2026-10-21",
+  "group": "U6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Second paragraph, final sentence: coefficient duality from local strictly perfect representatives; specifically the ordinary bounded-complex calculation of lem-sfb-ringed-site-perfect-duality proof steps 2-7.",
+   "via": [
+    "lem-sfb-ringed-site-perfect-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSiteStrictPerfectHom",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteStrictPerfectHom.lean",
+  "declaration": "CategoryTheory.ringedSiteStrictPerfectHom",
+  "statement": "theorem ringedSiteStrictPerfectHom\n    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}\n      ((sheafCompose J\n        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))]\n    (E : CochainComplex (SheafOfModules.{max c v r}\n      ((sheafCompose J\n        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)\n    (hE : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n))\n    (pE : SheafOfModules.StrictPerfectCoefficientPackageOnSite _ E) :\n    let D := homComplex.{c, v, max c v r, max c v r} (R := R) E\n      (ringedSiteDualityUnitComplex.{c, v, r} J R)\n    (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (D.X n)) ∧\n    Nonempty (SheafOfModules.StrictPerfectCoefficientPackageOnSite _ D) ∧\n    (∀ F, QuasiIso (ringedSiteHomComplexMap.{c, v, r} J R (𝟙 E)\n      ((ringedSiteHomAugmentation.{c, v, r} J R).app F))) ∧\n    QuasiIso (ringedSiteHomComplexMap.{c, v, r} J R (𝟙 D)\n      ((ringedSiteHomAugmentation.{c, v, r} J R).app\n        (ringedSiteDualityUnitComplex.{c, v, r} J R))) ∧\n    IsIso (ringedSiteOrdinaryBidual.{c, v, r} J R E) ∧\n    (∀ F, IsIso (ringedSiteOrdinaryEvaluation.{c, v, r} J R E F))",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261020T221355-L-4179459",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261020T221355-L-4179459",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
