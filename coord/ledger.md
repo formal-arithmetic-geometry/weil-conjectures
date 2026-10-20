@@ -17749,3 +17749,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:11 L: merged deliver/C9/Sheaf.AlgebraicGeometry.FiniteConstantLocalModel (stage 3; reviewer PASS; first push; landing 20261020T051112-L-1561764 (interface); batch 20261020T050952; modules 1; new nodes 0; change records: coord/changes/finite-constant-local-model-private-helpers.md)
 - 05:11 L: merged deliver/C9/Sheaf.RingTheory.Flat.LazardPresentation (stage 3; reviewer PASS; first push; landing 20261020T051115-L-1563136 (proof); batch 20261020T050952; modules 1; new nodes 0)
 - 05:11 L: merged deliver/D2/Sheaf.Paper.CompletedTensorHomTranspose (stage 3; reviewer PASS; first push; landing 20261020T051118-L-1564430 (interface); batch 20261020T050952; modules 4; new nodes 3)
+- 05:11 L: merged deliver/D3/Sheaf.Paper.CompactificationLocalizing (stage 3; reviewer PASS; first push; landing 20261020T051121-L-1566224 (interface); batch 20261020T050952; modules 8; new nodes 7)

@@ -1,0 +1,131 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented sheaves of modules over a condensed totally disconnected normed field on a noetherian scheme are locally finite free",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, Condensed.finFree, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFiniteType.",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib theorem; the generic rank/descent and Gaussian elimination lemmas are proved in the source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstant, Matrix.rank",
+   "results": "0 hits.",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "locally.*finite.*free|finite.*presentation.*locally",
+   "results": "8 hits in Mathlib.AlgebraicGeometry.Noetherian, Morphisms.FlatRank and Morphisms.FinitePresentation, concerning scheme morphisms.",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib theorem for condensed module objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally finitely presented sheaves of modules over a condensed totally disconnected normed field on a noetherian scheme are locally finite free",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.free, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.ιFree, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib theorem for the stated condensed coefficient result. The hits provide generic infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactificationLocalizing",
+  "date": "2026-10-20",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-single",
+   "place": "Proper-image paragraph; rational coefficients have local finite free constant models. This common ingredient is used in finite Tor amplitude and the bounded-complex finiteness devissage.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "det-sf-comp-continuous-algcl-local-free",
+ "title": "Local finite freeness over the full continuous algebraic closure",
+ "statement": "Let ell be prime and X a scheme whose underlying topological space is Noetherian. For the actual condensed ring of all continuous maps into the topological algebraic closure PadicAlgCl ell, every locally finitely presented internal module on X admits a pro-etale cover on which its pullback is finite free. No finite-dimensionality of PadicAlgCl over Q_ell and no finite-subextension-valued interpretation of its sections is assumed. Rank zero and the empty scheme are included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 continuous-function realization, with the rank/descent proof of lem-weil-pbc-condensed-lfp-local-triviality generalized from finite extensions to totally disconnected normed fields; local-freeness component of rational coefficient constructibility."
+ },
+ "proof": [
+  {
+   "text": "Use the stated continuous-function realization and presentation matrix for a totally disconnected normed field. The presentation-corank compatibility theorem identifies coranks over the same base point. A continuous function into a totally disconnected field has equal values at specializations, so these coranks are specialization invariant. Apply the stated rank descent theorem on a topologically Noetherian scheme, and the stated Gaussian elimination/cokernel local-freeness theorem. Bind the refinements to obtain the finite free cover. Apply this to the universe lift of PadicAlgCl, with total disconnectedness transported by the lift homeomorphism. Transport back through the coefficient isomorphism, using the proved coefficient-comap helpers from CondensedConstructibleSerre.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "def-weil-pbc-condensed-field-presentation-matrix",
+    "lem-weil-pbc-condensed-field-presentation-corank",
+    "lem-weil-pbc-condensed-field-rank-descent",
+    "lem-weil-pbc-continuous-field-cokernel-local-free",
+    "lem-weil-pbc-condensed-constructible-serre"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-weil-pbc-condensed-field-presentation-matrix",
+  "lem-weil-pbc-condensed-field-presentation-corank",
+  "lem-weil-pbc-condensed-field-rank-descent",
+  "lem-weil-pbc-continuous-field-cokernel-local-free",
+  "lem-weil-pbc-condensed-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 continuous-function realization, with the rank/descent proof of lem-weil-pbc-condensed-lfp-local-triviality generalized from finite extensions to totally disconnected normed fields; local-freeness component of rational coefficient constructibility."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousAlgClLocalFree",
+  "file": "lean/Sheaf/Paper/ContinuousAlgClLocalFree.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousAlgCl_lf",
+  "statement": "theorem continuousAlgCl_lf (ℓ : ℕ) [Fact ℓ.Prime]\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X))\n    (hM : IsLocallyFinitelyPresented\n      (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X) M) :\n    ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i,\n      Mod.IsFree ((upperStar Ab.{u + 1} (U.f i)).obj\n        (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X))\n        (((upperStar Ab.{u + 1} (U.f i)).mapMod\n          (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261020T051121-L-1566224",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261020T051121-L-1566224",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
