@@ -18,7 +18,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import WeilConjectures.RingTheory.MvPowerSeriesFlat
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwo
-import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalPart
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationNormalPart
 import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import WeilConjectures.RingTheory.NormalLocalDepthTwo
 
