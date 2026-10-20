@@ -1,0 +1,170 @@
+{
+ "id": "def-trf-point-system-diagram",
+ "kind": "definition",
+ "title": "The category of poset-indexed diagrams and its filtered unions",
+ "statement": "For a category C and universe w, form the category of diagrams U:I→C with I a partial order in Type w. A morphism (I,U)→(J,V) is an order embedding e:I↪oJ with equality U=e⋙V; composition composes embeddings and these equalities. This category has colimits indexed by any small filtered category A in Type w, and its index functor to PartOrdEmb preserves these colimits. The index colimit embeddings are jointly surjective on elements.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Take the filtered colimit of the index posets in Mathlib PartOrdEmb. Its underlying type is the filtered colimit of their underlying types. The object assignments agree on transition embeddings, so their cocone descends to an object assignment on the union.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  },
+  {
+   "text": "For i≤j in the union, choose a stage representing both elements and their order relation. Define the transition by the stage diagram, transported through the object equalities. Two such representatives agree after mapping to a common stage: injectivity of its embedding identifies the endpoints, and equality of restricted diagrams identifies the arrows. A common stage containing three indices proves composition; the diagonal proves identity.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  },
+  {
+   "text": "Stage diagrams agree with the restricted union functor. For a competing cocone, descend its index embeddings by the PartOrdEmb colimit property. Joint surjectivity and the same order-pair representation show equality of the restricted functors. This gives the unique morphism from the union and proves the colimit property and preservation by the index functor.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO",
+  "note": "K3, formal implementation of the strict-union and transfinite argument of Tag 00YP using Mathlib colimits and successor structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimits of diagrams indexed by posets with strict order embeddings",
+   "results": "[leanfinder] OK 8 hit(s); PartOrdEmb.Limits.instHasColimit (Mathlib/Order/Category/PartOrdEmb); PartOrdEmb.Limits.instHasColimitsOfShape (Mathlib/Order/Category/PartOrdEmb); PartOrdEmb.Limits.instHasFilteredColimitsOfSize (Mathlib/Order/Category/PartOrdEmb); PartOrdEmb.Limits.isColimitCocone (Mathlib/Order/Category/PartOrdEmb); PartOrdEmb.Limits.cocone (Mathlib/Order/Category/PartOrdEmb)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "PartOrdEmb",
+   "results": "[loogle] OK 12 hit(s); PartOrdEmb (Mathlib.Order.Category.PartOrdEmb); PartOrdEmb.carrier (Mathlib.Order.Category.PartOrdEmb); PartOrdEmb.instCategory (Mathlib.Order.Category.PartOrdEmb); PartOrdEmb.Hom (Mathlib.Order.Category.PartOrdEmb); PartOrdEmb.instCoeSortType (Mathlib.Order.Category.PartOrdEmb)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "PartOrdEmb|pointSystemdiagram",
+   "results": "[grep] OK 10 hit(s); Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean: public import Mathlib.Order.Category.PartOrdEmb; Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean: namespace PartOrdEmb; Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean: /-- The property of objects in `PartOrdEmb` that are; Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean: abbrev isCardinalFiltered : ObjectProperty PartOrdEmb.{u} :=; Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean: lemma isCardinalFiltered_iff (X : PartOrdEmb.{u}) :",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the category of diagrams indexed by partially ordered sets with strict order embedding refinements has filtered colimits",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Limits.HasFilteredColimits (Mathlib.CategoryTheory.Limits.Filtered); CategoryTheory.Limits.HasFilteredColimitsOfSize (Mathlib.CategoryTheory.Limits.Filtered); MonCat.FilteredColimits.colimit (Mathlib.Algebra.Category.MonCat.FilteredColimits); AddMonCat.FilteredColimits.M (Mathlib.Algebra.Category.MonCat.FilteredColimits); PartOrdEmb.Limits.instHasFilteredColimitsOfSize (Mathlib.Order.Category.PartOrdEmb)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general colimit and transfinite-iteration infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PointSystemRefineAll",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-point-system-refine-all",
+   "place": "A fully proved component of the strict-refinement iteration in Tag 00YP.",
+   "via": [
+    "lem-trf-finitary-site-enough-points"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PointSystemDiagram",
+  "file": "lean/Sheaf/CategoryTheory/PointSystemDiagram.lean",
+  "declaration": "CategoryTheory.PointSystemDiagram.unionIsColimit",
+  "declarations": [
+   "CategoryTheory.PointSystemDiagram",
+   "CategoryTheory.PointSystemDiagram.Hom",
+   "CategoryTheory.PointSystemDiagram.indexFunctor",
+   "CategoryTheory.PointSystemDiagram.unionIndex",
+   "CategoryTheory.PointSystemDiagram.unionEmbedding",
+   "CategoryTheory.PointSystemDiagram.unionEmbedding_jointly_surjective",
+   "CategoryTheory.PointSystemDiagram.objectCocone",
+   "CategoryTheory.PointSystemDiagram.unionObject",
+   "CategoryTheory.PointSystemDiagram.unionObject_embedding",
+   "CategoryTheory.PointSystemDiagram.unionEmbedding_naturality",
+   "CategoryTheory.PointSystemDiagram.union_le_rep",
+   "CategoryTheory.PointSystemDiagram.stageMap",
+   "CategoryTheory.PointSystemDiagram.stageMap_naturality",
+   "CategoryTheory.PointSystemDiagram.stageMap_congr",
+   "CategoryTheory.PointSystemDiagram.stageMap_eq_of_eq",
+   "CategoryTheory.PointSystemDiagram.TransitionRep",
+   "CategoryTheory.PointSystemDiagram.transitionRep_nonempty",
+   "CategoryTheory.PointSystemDiagram.TransitionRep.hom",
+   "CategoryTheory.PointSystemDiagram.unionMap",
+   "CategoryTheory.PointSystemDiagram.unionMap_embedding",
+   "CategoryTheory.PointSystemDiagram.union_triple_rep",
+   "CategoryTheory.PointSystemDiagram.unionDiagram",
+   "CategoryTheory.PointSystemDiagram.unionRestriction",
+   "CategoryTheory.PointSystemDiagram.unionCocone",
+   "CategoryTheory.PointSystemDiagram.functor_ext",
+   "CategoryTheory.PointSystemDiagram.unionDescIndex",
+   "CategoryTheory.PointSystemDiagram.unionDescIndex_fac",
+   "CategoryTheory.PointSystemDiagram.unionDesc_restriction",
+   "CategoryTheory.PointSystemDiagram.unionDesc",
+   "CategoryTheory.PointSystemDiagram.unionIsColimit"
+  ],
+  "statement": "def unionIsColimit : IsColimit (unionCocone F)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "independent cc review: delivered 9 modules + 9 nodes + change record against node lem-trf-point-system-refine-all, Stacks 00YP plan, live PointSystemRefineAll/PointSystemSaturation; compiled delivered set, direct importer PointSystemSaturation (failed as delivered, compiles after fix), #print axioms"
+ }
+}

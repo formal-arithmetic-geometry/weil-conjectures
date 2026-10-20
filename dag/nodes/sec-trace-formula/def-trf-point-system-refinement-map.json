@@ -1,0 +1,125 @@
+{
+ "id": "def-trf-point-system-refinement-map",
+ "kind": "definition",
+ "title": "Canonical maps for strict refinements",
+ "statement": "Let C be a category, J and I preorders, V:J→Cᵒᵖ and U:I→Cᵒᵖ diagrams, e:J↪oI an order embedding, and h:V=e⋙U. For a presheaf P with the indicated colimits [def-weil-pbc-category-colimit], define the refinement map colim(V⋙P)→colim(U⋙P) by the colimit map of h followed by colimit.pre along e. On partial orders J and I it is the unchanged earlier map pointSystemRefinementMap, by definition. This map carries a representative at j to its transported representative at e(j), is compatible with composition of refinements, and commutes with natural transformations P→Q.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Use the natural transformation induced by h and the associator to identify V⋙P with e⋙(U⋙P), then apply the colimit cocone of U⋙P. The colimit universal property proves the representative formula, composition, and naturality.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO",
+  "note": "K3, formal implementation of the strict-union and transfinite argument of Tag 00YP using Mathlib colimits and successor structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical colimit maps for order embeddings commute with composition and natural transformations",
+   "results": "[leanfinder] OK 8 hit(s); PartOrdEmb.Limits.CoconePt.fac_apply (Mathlib/Order/Category/PartOrdEmb); PartOrdEmb.Limits.cocone_ι_app (Mathlib/Order/Category/PartOrdEmb); PartOrdEmb.Limits.isColimitCocone (Mathlib/Order/Category/PartOrdEmb); PartOrdEmb.Limits.cocone (Mathlib/Order/Category/PartOrdEmb); PartOrdEmb.Limits.CoconePt.desc (Mathlib/Order/Category/PartOrdEmb)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimit.pre",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Limits.colimit.pre (Mathlib.CategoryTheory.Limits.HasLimits); CategoryTheory.Limits.colimit.pre_desc (Mathlib.CategoryTheory.Limits.HasLimits); CategoryTheory.Limits.colimit.ι_pre (Mathlib.CategoryTheory.Limits.HasLimits); CategoryTheory.Limits.colimit.pre_id (Mathlib.CategoryTheory.Limits.HasLimits); CategoryTheory.Limits.colimit.pre_pre (Mathlib.CategoryTheory.Limits.HasLimits)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; these colimit/under-category APIs are used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "pre|pointSystemmap",
+   "results": "[grep] OK 25 hit(s); Mathlib/NumberTheory/Primorial.lean: @[deprecated (since := \"2026-03-21\")] alias primorial_le_4_pow := primorial_le_four_pow; Mathlib/Logic/Unique.lean: which expresses that a type has a unique term.; Mathlib/Logic/Unique.lean: * `Unique`: a typeclass that expresses that a type has a unique term.; Mathlib/Logic/Unique.lean: rather than a `Prop`-valued predicate,; Mathlib/Logic/Unique.lean: /-- `Unique α` expresses that `α` is a type with a unique term `default`.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical maps on colimits of diagrams along order embeddings with strict restriction, compatible with composition and natural transformations",
+   "results": "[leansearch] OK 8 hit(s); PartOrdEmb.Limits.CoconePt.desc (Mathlib.Order.Category.PartOrdEmb); CategoryTheory.Limits.ι_colimMap (Mathlib.CategoryTheory.Limits.HasLimits); CategoryTheory.Limits.colimMap (Mathlib.CategoryTheory.Limits.HasLimits); CategoryTheory.Limits.ColimitPresentation.ι (Mathlib.CategoryTheory.Limits.Presentation); CategoryTheory.Limits.Types.Colimit.ι_map_apply (Mathlib.CategoryTheory.Limits.Types.Colimits)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general colimit and transfinite-iteration infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PointSystemRefineAll",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-point-system-refine-all",
+   "place": "A fully proved component of the strict-refinement iteration in Tag 00YP.",
+   "via": [
+    "lem-trf-finitary-site-enough-points"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PointSystemRefinementMap",
+  "file": "lean/Sheaf/CategoryTheory/PointSystemRefinementMap.lean",
+  "declaration": "CategoryTheory.pointSystemRefinementMapOfPreorder",
+  "declarations": [
+   "CategoryTheory.pointSystemRefinementMapOfPreorder",
+   "CategoryTheory.pointSystemRefinementMap",
+   "CategoryTheory.pointSystemRefinementMap_eq_ofPreorder",
+   "CategoryTheory.pointSystemRefinementMapOfPreorder_ι",
+   "CategoryTheory.pointSystemRefinementMapOfPreorder_eq",
+   "CategoryTheory.pointSystemRefinementMapOfPreorder_comp",
+   "CategoryTheory.pointSystemRefinementMapOfPreorder_naturality"
+  ],
+  "statement": "def pointSystemRefinementMapOfPreorder {C : Type u} [Category.{v} C] {J : Type w} [Preorder J] {I : Type r} [Preorder I] (V : J ⥤ Cᵒᵖ) (U : I ⥤ Cᵒᵖ) (e : J ↪o I) (h : V = e.monotone.functor ⋙ U) (P : Cᵒᵖ ⥤ Type t) [HasColimit (V ⋙ P)] [HasColimit (e.monotone.functor ⋙ (U ⋙ P))] [HasColimit (U ⋙ P)] : colimit (V ⋙ P) ⟶ colimit (U ⋙ P)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "independent cc review: delivered 9 modules + 9 nodes + change record against node lem-trf-point-system-refine-all, Stacks 00YP plan, live PointSystemRefineAll/PointSystemSaturation; compiled delivered set, direct importer PointSystemSaturation (failed as delivered, compiles after fix), #print axioms"
+ }
+}

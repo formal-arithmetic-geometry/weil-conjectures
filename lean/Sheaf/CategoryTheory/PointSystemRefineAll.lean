@@ -6,11 +6,10 @@ Authors: SHEAF group Q07
 module
 
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
-public import Mathlib.CategoryTheory.Category.Preorder
-public import Mathlib.CategoryTheory.Limits.Types.Colimits
+public import Sheaf.CategoryTheory.PointSystemRefinementMap
 public import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Limits.Types.Filtered
 import Sheaf.Paper.PointSystemRefine
+import Sheaf.CategoryTheory.PointSystemRefinementChainExists
 
 /-!
 # Simultaneous refinement of an inverse system on a site
@@ -31,21 +30,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, the refinement maps preceding Tag 00YO
-(blueprint: lem-trf-point-system-refine-all).
-The canonical map on colimits induced by an inclusion of inverse systems, after applying
-any presheaf. The equality `h` identifies the old diagram with the restricted new one. -/
-noncomputable def pointSystemRefinementMap
-    {C : Type u} [Category.{v} C]
-    {J : Type w} [PartialOrder J] {I : Type r} [PartialOrder I]
-    (V : J ⥤ Cᵒᵖ) (U : I ⥤ Cᵒᵖ) (e : J ↪o I)
-    (h : V = e.monotone.functor ⋙ U) (P : Cᵒᵖ ⥤ Type t)
-    [HasColimit (V ⋙ P)] [HasColimit (e.monotone.functor ⋙ (U ⋙ P))]
-    [HasColimit (U ⋙ P)] : colimit (V ⋙ P) ⟶ colimit (U ⋙ P) :=
-  colimMap (Functor.whiskerRight (eqToHom h) P ≫
-    (Functor.associator e.monotone.functor U P).hom) ≫
-      colimit.pre (U ⋙ P) e.monotone.functor
-
 /-- Source: Stacks Project, Sites, Tag 00YP, Lemma `lemma-refine-all-at-once`
 (blueprint: lem-trf-point-system-refine-all).
 For a sheaf and two distinct germs in a directed inverse system, there is a refinement
@@ -53,18 +37,15 @@ preserving distinctness and lifting every original germ of a representable funct
 some member of every finite covering. `uliftYoneda` only places Hom sets in the common set
 universe and its elements are exactly lifted morphisms.
 
-Proof: Form the set E of all pairs of a finite covering and an element of the original
-Hom colimit. Well-order E. Start with the original system and recurse through the order,
-maintaining distinctness and the lifting conditions already processed. At a successor use
-Tag 00YO (lem-trf-point-system-refine), applied to the current images of the two germs and
-the selected original Hom germ. At a limit take the union of the nested index systems,
-orders, objects and transitions. Two indices lie in one previous system, which supplies
-an upper bound, so the union is still directed. If the two germs became equal in this
-union, the filtered-colimit equality criterion
-(lem-weil-pbc-filtered-colimit-sets-elementwise) would witness equality in a single earlier
-system, a contradiction. Finally take the union over E. Each finite-cover/germ pair was
-processed at one stage, and its factorization survives in the final colimit. The same
-filtered-colimit criterion ensures the two final germs remain distinct. -/
+Proof: Form the set of finite-covering/original-Hom-germ pairs. Apply the general
+refinement scheduling theorem, with the one-cover refinement Tag 00YO as its successor
+step. It constructs strict refinements, retaining distinctness at limit unions by the
+filtered-colimit equality criterion, and replaces preorder indices by cofinal posets
+without changing the original indices. Naturality makes each lifting condition persist.
+A transfinite iteration solving a missing request must terminate before a well-order
+larger than the request set. Passing through its chain presentation preserves the two
+distinct germs and the lifting equations. Represent the lifted Hom-colimit element at
+one index; naturality of the colimit cocone gives the required composite b ≫ a k. -/
 theorem exists_pointSystem_refinement_all
     {C : Type u} [Category.{v} C] (K : Precoverage C)
     (hK : K.IsSiteForCoverings)
@@ -82,6 +63,61 @@ theorem exists_pointSystem_refinement_all
           ∃ (k : Fin n) (i : I) (b : (U.obj i).unop ⟶ Wk k),
             pointSystemRefinementMap V U e h (uliftYoneda.{max u v}.obj W) f =
               colimit.ι (U ⋙ uliftYoneda.{max u v}.obj W) i (ULift.up (b ≫ a k)) := by
-  sorry
+  classical
+  simp only [pointSystemRefinementMap_eq_ofPreorder]
+  let D : Type (max u v) :=
+    Σ n : ℕ, Σ W : C, Σ Wk : Fin n → C,
+      {a : ∀ k, Wk k ⟶ W // Presieve.ofArrows Wk a ∈ K W} ×
+        colimit (V ⋙ uliftYoneda.{max u v}.obj W)
+  let Choices (d : D) : Type (max u v) := ULift (Fin d.1)
+  let Q (d : D) := uliftYoneda.{max u v}.obj d.2.1
+  let R (d : D) (k : Choices d) := uliftYoneda.{max u v}.obj (d.2.2.1 k.down)
+  let q (d : D) (k : Choices d) : R d k ⟶ Q d :=
+    uliftYoneda.map (d.2.2.2.1.val k.down)
+  let x (d : D) : colimit (V ⋙ Q d) := d.2.2.2.2
+  obtain ⟨c, hsep, hlift⟩ :=
+    exists_pointSystem_refinement_chain V F.obj s s' hne Choices Q R q x (by
+      intro L _ _ _ T t t' ht d y
+      rcases d with ⟨n, W, Wk, ⟨a, ha⟩, f⟩
+      obtain ⟨M, hM, hnonempty, hdir, S, e, h, hne', k, z, hz⟩ :=
+        pointSystemRefine K hK T.leftOp F Wk a ha t t' ht y
+      refine ⟨M, hM, hnonempty, hdir, S.rightOp, e, h.symm, ?_, ?_⟩
+      · rw [pointSystemRefinementMapOfPreorder_eq T S.rightOp e h.symm F.obj]
+        exact hne'
+      · refine ⟨ULift.up k, z, ?_⟩
+        rw [pointSystemRefinementMapOfPreorder_eq T S.rightOp e h.symm (Q _)]
+        exact hz)
+  refine ⟨c.Index, c.indexOrder, inferInstance, inferInstance,
+    c.diagram, c.embedding, c.restriction, c.ne_of_stage_ne F.obj s s' hsep, ?_⟩
+  intro n W Wk a ha f
+  obtain ⟨d, k, z, hz⟩ := hlift ⟨n, W, Wk, ⟨a, ha⟩, f⟩
+  obtain ⟨i, b, hb⟩ := Types.jointly_surjective' z
+  refine ⟨k.down, i.val, b.down, ?_⟩
+  have hfac :
+      colimMap (c.diagram.whiskerLeft (uliftYoneda.map (a k.down)))
+          (colimit.pre (c.diagram ⋙ uliftYoneda.{max u v}.obj (Wk k.down))
+            (c.stageInclusion d).monotone.functor z) =
+        pointSystemRefinementMapOfPreorder V c.diagram c.embedding c.restriction
+          (uliftYoneda.{max u v}.obj W) f := by
+    have hm := ConcreteCategory.congr_hom
+      (colimit.pre_map (c.diagram.whiskerLeft (uliftYoneda.map (a k.down)))
+        (c.stageInclusion d).monotone.functor) z
+    have hc := ConcreteCategory.congr_hom
+      (c.map_stage_comp d (uliftYoneda.{max u v}.obj W)) f
+    exact hm.trans ((congrArg
+      (colimit.pre (c.diagram ⋙ uliftYoneda.{max u v}.obj W)
+        (c.stageInclusion d).monotone.functor) hz).trans hc)
+  rw [← hb] at hfac
+  calc
+    _ = _ := hfac.symm
+    _ = colimMap (c.diagram.whiskerLeft (uliftYoneda.map (a k.down)))
+        (colimit.ι (c.diagram ⋙ uliftYoneda.{max u v}.obj (Wk k.down)) i.val b) := by
+      congr 1
+      exact ConcreteCategory.congr_hom (colimit.ι_pre
+        (c.diagram ⋙ uliftYoneda.{max u v}.obj (Wk k.down))
+        (c.stageInclusion d).monotone.functor i) b
+    _ = _ := by
+      exact ConcreteCategory.congr_hom (ι_colimMap
+        (c.diagram.whiskerLeft (uliftYoneda.map (a k.down))) i.val) b
 
 end CategoryTheory

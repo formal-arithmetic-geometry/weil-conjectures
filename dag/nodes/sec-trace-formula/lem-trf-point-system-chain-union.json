@@ -1,0 +1,138 @@
+{
+ "id": "lem-trf-point-system-chain-union",
+ "kind": "statement",
+ "title": "Separation in a directed union of nested systems",
+ "statement": "Let J be a nonempty directed partial order and V:J→Cᵒᵖ a diagram. A chain presentation consists of a partial order I, a nonempty directed partial order A of stages, an embedding e:J↪oI, a diagram U:I→Cᵒᵖ restricting to V, and increasing nonempty directed subsets I_a⊆I covering I and containing e(J). Then I is nonempty and directed. For any P:Cᵒᵖ→Type, if the canonical images [def-trf-point-system-refinement-map] of s,s′∈colim(V⋙P) are distinct in every colim(U|I_a⋙P), they are distinct in colim(U⋙P). Passing through any stage gives the canonical map to the union.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+ },
+ "stmt_deps": [
+  "def-trf-point-system-refinement-map"
+ ],
+ "proof": [
+  {
+   "text": "Two indices of I belong to stages a,b; a common larger stage contains them and supplies an upper bound. Stage inclusions and original embeddings give the composition formula.",
+   "uses": [
+    "def-trf-point-system-refinement-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  },
+  {
+   "text": "Represent s,s′ at one original index j. Equality of their union images has a common-index witness by the filtered-colimit elementwise criterion. Choose a stage containing this witness; it already contains e(j). Restricting the witness arrows and their equality to this stage contradicts its separation hypothesis.",
+   "uses": [
+    "def-trf-point-system-refinement-map",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-point-system-refinement-map",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO",
+  "note": "K3, formal implementation of the strict-union and transfinite argument of Tag 00YP using Mathlib colimits and successor structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "distinct elements stay distinct in a directed union of nested filtered diagrams",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.ranges_directed (Mathlib/CategoryTheory/Filtered/Basic); CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.sup (Mathlib/CategoryTheory/Presentable/Directed); CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.iSup (Mathlib/CategoryTheory/Presentable/Directed); CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.isCardinalFiltered_aux (Mathlib/CategoryTheory/Presentable/Directed); CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.sup_W (Mathlib/CategoryTheory/Presentable/Directed)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff",
+   "results": "[loogle] OK 1 hit(s); CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff (Mathlib.CategoryTheory.Limits.Types.Filtered)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; these colimit/under-category APIs are used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit_eq_iff|pointSystemchain",
+   "results": "[grep] OK 25 hit(s); Mathlib/Order/Category/PartOrdEmb.lean:       (Types.FilteredColimit.isColimit_eq_iff _ hc (xi := y₁) (xj := y₂)).1; Mathlib/Order/Category/PartOrdEmb.lean:         (Types.FilteredColimit.isColimit_eq_iff _ hc (xi := x₁) (xj := x₂)).1; Mathlib/Order/Category/PartOrdEmb.lean:         (Types.FilteredColimit.isColimit_eq_iff _ hc (xi := y₁) (xj := y₂)).1; Mathlib/Order/Category/PartOrdEmb.lean:         obtain ⟨k, a, ha⟩ := (Types.FilteredColimit.isColimit_eq_iff' hc x y).1 h; Mathlib/Order/Category/PartOrdEmb.lean:         obtain ⟨l₁, a₁, b₁, hl₁⟩ := (Types.FilteredColimit.isColimit_eq_iff _ hc).1 hx",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "distinct colimit elements remain distinct in a directed union of nested diagrams if they remain distinct in every stage",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Limits.Types.FilteredColimit.isColimitOf' (Mathlib.CategoryTheory.Limits.Types.Filtered); CategoryTheory.Limits.preservesColimit_subsingleton (Mathlib.CategoryTheory.Limits.Preserves.Basic); CategoryTheory.Limits.Types.FilteredColimit.isColimitOf (Mathlib.CategoryTheory.Limits.Types.Filtered); CategoryTheory.ObjectProperty.ColimitOfShape.noConfusion (Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape); CategoryTheory.ObjectProperty.ColimitOfShape.noConfusionType (Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general colimit and transfinite-iteration infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PointSystemRefineAll",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-point-system-refine-all",
+   "place": "A fully proved component of the strict-refinement iteration in Tag 00YP.",
+   "via": [
+    "lem-trf-finitary-site-enough-points"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PointSystemChain",
+  "file": "lean/Sheaf/CategoryTheory/PointSystemChain.lean",
+  "declaration": "CategoryTheory.PointSystemChain.ne_of_stage_ne",
+  "declarations": [
+   "CategoryTheory.PointSystemChain",
+   "CategoryTheory.PointSystemChain.stageInclusion",
+   "CategoryTheory.PointSystemChain.stageDiagram",
+   "CategoryTheory.PointSystemChain.stageEmbedding",
+   "CategoryTheory.PointSystemChain.stageRestriction",
+   "CategoryTheory.PointSystemChain.map_stage_comp",
+   "CategoryTheory.PointSystemChain.ne_of_stage_ne"
+  ],
+  "statement": "theorem ne_of_stage_ne [Nonempty J] [IsDirectedOrder J] (P : Cᵒᵖ ⥤ Type (max w t)) (s s' : colimit (V ⋙ P)) (hne : ∀ a, pointSystemRefinementMapOfPreorder V (c.stageDiagram a) (c.stageEmbedding a) (c.stageRestriction a) P s ≠ pointSystemRefinementMapOfPreorder V (c.stageDiagram a) (c.stageEmbedding a) (c.stageRestriction a) P s') : pointSystemRefinementMapOfPreorder V c.diagram c.embedding c.restriction P s ≠ pointSystemRefinementMapOfPreorder V c.diagram c.embedding c.restriction P s'",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "independent cc review: delivered 9 modules + 9 nodes + change record against node lem-trf-point-system-refine-all, Stacks 00YP plan, live PointSystemRefineAll/PointSystemSaturation; compiled delivered set, direct importer PointSystemSaturation (failed as delivered, compiles after fix), #print axioms"
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "id": "lem-trf-point-system-posetal-refine",
+ "kind": "statement",
+ "title": "Retaining a lifting equation under posetal replacement",
+ "statement": "Let V:J→Cᵒᵖ be indexed by a nonempty partial order, and S:M→Cᵒᵖ by a directed preorder. Suppose e:J↪oM and h:V=e⋙S define a refinement, the images of two given P-colimit classes are distinct, and a given Q-colimit class from V is the image of z∈colim(S⋙R) under a natural transformation q:R→Q. There exists a nonempty directed partial-order refinement U:N→Cᵒᵖ of V, with N in the same index universe, in which the two images remain distinct and the Q-class still lifts to colim(U⋙R). Canonical maps are those of [def-trf-point-system-refinement-map].",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+ },
+ "stmt_deps": [
+  "def-trf-point-system-refinement-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose the posetal replacement r:N↪oM and d:J↪oN fixing e, and restrict S along r. The composite refinement map from V through N is the original map into M. Equality of the two classes in N would imply equality in M, so separation holds.",
+   "uses": [
+    "lem-trf-point-system-posetal-replacement",
+    "def-trf-point-system-refinement-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  },
+  {
+   "text": "The embedding r is cofinal since each i is ≤ an equivalent representative. Thus colimit.pre along r is an isomorphism. Take the inverse image z′ of z. Naturality of refinement maps with q, together with the composition formula, gives the desired equation after the isomorphism on Q-colimits; its injectivity gives the equation already over N.",
+   "uses": [
+    "lem-trf-point-system-posetal-replacement",
+    "def-trf-point-system-refinement-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-system-posetal-replacement",
+  "def-trf-point-system-refinement-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO",
+  "note": "K3, formal implementation of the strict-union and transfinite argument of Tag 00YP using Mathlib colimits and successor structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cofinal restriction to poset representatives preserves a colimit lifting equation",
+   "results": "[leanfinder] OK 8 hit(s); PartOrdEmb.Limits.CoconePt.fac_apply (Mathlib/Order/Category/PartOrdEmb); CategoryTheory.Limits.Concrete.isColimit_exists_of_rep_eq (Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic); CategoryTheory.Limits.Concrete.colimit_exists_of_rep_eq (Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic); CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone (Mathlib/CategoryTheory/SmallObject/Iteration/FunctorOfCocone); PartOrdEmb.Limits.cocone_ι_app (Mathlib/Order/Category/PartOrdEmb)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimit.pre",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Limits.colimit.pre (Mathlib.CategoryTheory.Limits.HasLimits); CategoryTheory.Limits.colimit.pre_desc (Mathlib.CategoryTheory.Limits.HasLimits); CategoryTheory.Limits.colimit.ι_pre (Mathlib.CategoryTheory.Limits.HasLimits); CategoryTheory.Limits.colimit.pre_id (Mathlib.CategoryTheory.Limits.HasLimits); CategoryTheory.Limits.colimit.pre_pre (Mathlib.CategoryTheory.Limits.HasLimits)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; these colimit/under-category APIs are used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "pre|pointSystemposetal",
+   "results": "[grep] OK 25 hit(s); Mathlib/Lean/Expr.lean: deprecated_module (since := \"2026-01-27\"); Mathlib/NumberTheory/Primorial.lean: @[deprecated (since := \"2026-03-21\")] alias primorial_le_4_pow := primorial_le_four_pow; Mathlib/Lean/Environment.lean: def findConstValWithKind? (env : Environment) (decl : Name) (skipRealize := false) :; Mathlib/Lean/Environment.lean:   let info ← env.findAsync? decl skipRealize; Mathlib/Lean/Environment.lean:     (skipRealize := false) : Option ConstantVal := do",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "replace a preorder refinement by a cofinal partial order while retaining separation and a lifting equation in filtered colimits",
+   "results": "[leansearch] OK 8 hit(s); PartOrdEmb.Limits.instHasFilteredColimitsOfSize (Mathlib.Order.Category.PartOrdEmb); PartOrdEmb.Limits.instHasColimit (Mathlib.Order.Category.PartOrdEmb); Order.Cofinal (Mathlib.Order.Ideal); Order.Cofinal.rec (Mathlib.Order.Ideal); PartOrdEmb.Limits.cocone (Mathlib.Order.Category.PartOrdEmb)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general colimit and transfinite-iteration infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PointSystemRefineAll",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-point-system-refine-all",
+   "place": "A fully proved component of the strict-refinement iteration in Tag 00YP.",
+   "via": [
+    "lem-trf-finitary-site-enough-points"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PointSystemPosetalRefine",
+  "file": "lean/Sheaf/CategoryTheory/PointSystemPosetalRefine.lean",
+  "declaration": "CategoryTheory.exists_pointSystem_posetal_refine",
+  "declarations": [
+   "CategoryTheory.exists_pointSystem_posetal_refine"
+  ],
+  "statement": "theorem exists_pointSystem_posetal_refine {C : Type u} [Category.{v} C] {J M : Type w} [PartialOrder J] [Nonempty J] [Preorder M] [IsDirected M (· ≤ ·)] (V : J ⥤ Cᵒᵖ) (S : M ⥤ Cᵒᵖ) (e : J ↪o M) (h : V = e.monotone.functor ⋙ S) (P : Cᵒᵖ ⥤ Type (max w t)) (s s' : colimit (V ⋙ P)) (hne : pointSystemRefinementMapOfPreorder V S e h P s ≠ pointSystemRefinementMapOfPreorder V S e h P s') (R Q : Cᵒᵖ ⥤ Type w) (q : R ⟶ Q) (y : colimit (V ⋙ Q)) (z : colimit (S ⋙ R)) (hz : colimMap (S.whiskerLeft q) z = pointSystemRefinementMapOfPreorder V S e h Q y) : ∃ (N : Type w) (_ : PartialOrder N) (_ : Nonempty N) (_ : IsDirectedOrder N) (U : N ⥤ Cᵒᵖ) (d : J ↪o N) (g : V = d.monotone.functor ⋙ U), pointSystemRefinementMapOfPreorder V U d g P s ≠ pointSystemRefinementMapOfPreorder V U d g P s' ∧ ∃ z' : colimit (U ⋙ R), colimMap (U.whiskerLeft q) z' = pointSystemRefinementMapOfPreorder V U d g Q y",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "independent cc review: delivered 9 modules + 9 nodes + change record against node lem-trf-point-system-refine-all, Stacks 00YP plan, live PointSystemRefineAll/PointSystemSaturation; compiled delivered set, direct importer PointSystemSaturation (failed as delivered, compiles after fix), #print axioms"
+ }
+}

@@ -1,0 +1,150 @@
+{
+ "id": "lem-trf-point-system-refinement-chain-exists",
+ "kind": "statement",
+ "title": "Scheduling all single-step refinement requests",
+ "statement": "Fix a nonempty directed partial-order system V:J→Cᵒᵖ, a presheaf P and distinct s,s′∈colim(V⋙P). Let A be a set of requests, Choices(d) a set of alternatives for each request, Q(d),R(d,k):Cᵒᵖ→Type, q(d,k):R(d,k)→Q(d) natural transformations, and x(d)∈colim(V⋙Q(d)). All indices and request data lie in Type w; P may take values in Type(max w t). Suppose any nonempty directed preorder system T with two distinct P-classes can be refined, for any d and y∈colim(T⋙Q(d)), to a nonempty directed preorder system preserving those classes and lifting y through some q(d,k). Then there is a chain presentation [lem-trf-point-system-chain-union] of a refinement of V, with distinct images in every stage, such that every original x(d) lifts through q(d,k) in some stage.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+ },
+ "stmt_deps": [
+  "def-trf-point-system-refinement-map",
+  "lem-trf-point-system-chain-union"
+ ],
+ "proof": [
+  {
+   "text": "Use the full category of good extensions of V: nonempty directed indices and distinct images of the original two classes. Its directed colimits exist. A request is satisfied when the current image of x(d) lifts through one of its q(d,k). Naturality and composition show persistence along morphisms.",
+   "uses": [
+    "lem-trf-point-system-extension-union",
+    "def-trf-point-system-refinement-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  },
+  {
+   "text": "For a missing request, apply the assumed single-step property to its current image and the current two distinct classes. Use the posetal replacement theorem to retain that lift and separation in a partial-order refinement. Compose its embedding with the original embedding, obtaining a new good extension and a morphism from the previous one.",
+   "uses": [
+    "lem-trf-point-system-posetal-refine",
+    "def-trf-point-system-refinement-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  },
+  {
+   "text": "Apply the scheduling theorem to obtain a good extension satisfying all requests. Present it as a chain with a single stage equal to its entire index. The stage subtype is order-isomorphic to the index; composition and naturality transfer separation and every lifting equation to that stage.",
+   "uses": [
+    "lem-trf-point-system-schedule",
+    "lem-trf-point-system-chain-union",
+    "def-trf-point-system-refinement-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-system-extension-union",
+  "def-trf-point-system-refinement-map",
+  "lem-trf-point-system-posetal-refine",
+  "lem-trf-point-system-schedule",
+  "lem-trf-point-system-chain-union"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO",
+  "note": "K3, formal implementation of the strict-union and transfinite argument of Tag 00YP using Mathlib colimits and successor structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "schedule all lifting requirements from single-step refinements of directed systems",
+   "results": "[leanfinder] OK 8 hit(s); DirectLimit.lift (Mathlib/Order/DirectedInverseSystem); FirstOrder.Language.DirectLimit.lift_of (Mathlib/ModelTheory/DirectLimit); DirectLimit.lift₂ (Mathlib/Order/DirectedInverseSystem); FirstOrder.Language.DirectLimit.lift_quotient_mk'_sigma_mk' (Mathlib/ModelTheory/DirectLimit); DirectLimit.lift_def (Mathlib/Order/DirectedInverseSystem)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SmallObject.SuccStruct",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.SmallObject.SuccStruct (Mathlib.CategoryTheory.SmallObject.Iteration.Basic); CategoryTheory.SmallObject.SuccStruct.X₀ (Mathlib.CategoryTheory.SmallObject.Iteration.Basic); CategoryTheory.SmallObject.SuccStruct.succ (Mathlib.CategoryTheory.SmallObject.Iteration.Basic); CategoryTheory.SmallObject.SuccStruct.toSuccArrow (Mathlib.CategoryTheory.SmallObject.Iteration.Basic); CategoryTheory.SmallObject.SuccStruct.prop (Mathlib.CategoryTheory.SmallObject.Iteration.Basic)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "SuccStruct|pointSystemchainexists",
+   "results": "[grep] OK 25 hit(s); Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean: Given a successor structure `Φ : SuccStruct C`; Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean: namespace CategoryTheory.SmallObject.SuccStruct; Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean: variable {C : Type u} [Category.{v} C] (Φ : SuccStruct C); Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean: /-- Given `Φ : SuccStruct C` and an element `j : J` in a well-ordered type,; Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean: /-- Given `Φ : SuccStruct C` and a well-ordered type `J`, this",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "construct a directed refinement satisfying all lifting requests by transfinite iteration of single-step refinements",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingProperty_ι_app_bot (Mathlib.CategoryTheory.SmallObject.TransfiniteCompositionLifting); CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData (Mathlib.CategoryTheory.SmallObject.TransfiniteCompositionLifting); CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData.liftHom_fac_assoc (Mathlib.CategoryTheory.SmallObject.TransfiniteCompositionLifting); CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData.map_lift (Mathlib.CategoryTheory.SmallObject.TransfiniteCompositionLifting); CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData.liftHom_fac (Mathlib.CategoryTheory.SmallObject.TransfiniteCompositionLifting)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general colimit and transfinite-iteration infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PointSystemRefineAll",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-point-system-refine-all",
+   "place": "A fully proved component of the strict-refinement iteration in Tag 00YP.",
+   "via": [
+    "lem-trf-finitary-site-enough-points"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PointSystemRefinementChainExists",
+  "file": "lean/Sheaf/CategoryTheory/PointSystemRefinementChainExists.lean",
+  "declaration": "CategoryTheory.exists_pointSystem_refinement_chain",
+  "declarations": [
+   "CategoryTheory.exists_pointSystem_refinement_chain"
+  ],
+  "statement": "theorem exists_pointSystem_refinement_chain {C : Type u} [Category.{v} C] {J : Type w} [PartialOrder J] [Nonempty J] [IsDirectedOrder J] (V : J ⥤ Cᵒᵖ) (P : Cᵒᵖ ⥤ Type (max w t)) (s s' : colimit (V ⋙ P)) (hne : s ≠ s') {A : Type w} (Choices : A → Type w) (Q : A → Cᵒᵖ ⥤ Type w) (R : ∀ d, Choices d → Cᵒᵖ ⥤ Type w) (q : ∀ d k, R d k ⟶ Q d) (x : ∀ d, colimit (V ⋙ Q d)) (step : ∀ {L : Type w} [Preorder L] [Nonempty L] [IsDirected L (· ≤ ·)] (T : L ⥤ Cᵒᵖ) (t t' : colimit (T ⋙ P)), t ≠ t' → ∀ (d : A) (y : colimit (T ⋙ Q d)), ∃ (M : Type w) (_ : Preorder M) (_ : Nonempty M) (_ : IsDirected M (· ≤ ·)) (S : M ⥤ Cᵒᵖ) (e : L ↪o M) (h : T = e.monotone.functor ⋙ S), pointSystemRefinementMapOfPreorder T S e h P t ≠ pointSystemRefinementMapOfPreorder T S e h P t' ∧ ∃ (k : Choices d) (z : colimit (S ⋙ R d k)), colimMap (S.whiskerLeft (q d k)) z = pointSystemRefinementMapOfPreorder T S e h (Q d) y) : ∃ c : PointSystemChain V, (∀ a, pointSystemRefinementMapOfPreorder V (c.stageDiagram a) (c.stageEmbedding a) (c.stageRestriction a) P s ≠ pointSystemRefinementMapOfPreorder V (c.stageDiagram a) (c.stageEmbedding a) (c.stageRestriction a) P s') ∧ ∀ d, ∃ (a : c.Stage) (k : Choices d) (z : colimit (c.stageDiagram a ⋙ R d k)), colimMap ((c.stageDiagram a).whiskerLeft (q d k)) z = pointSystemRefinementMapOfPreorder V (c.stageDiagram a) (c.stageEmbedding a) (c.stageRestriction a) (Q d) (x d)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "independent cc review: delivered 9 modules + 9 nodes + change record against node lem-trf-point-system-refine-all, Stacks 00YP plan, live PointSystemRefineAll/PointSystemSaturation; compiled delivered set, direct importer PointSystemSaturation (failed as delivered, compiles after fix), #print axioms"
+ }
+}

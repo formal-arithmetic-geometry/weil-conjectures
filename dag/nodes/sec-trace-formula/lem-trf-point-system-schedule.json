@@ -1,0 +1,122 @@
+{
+ "id": "lem-trf-point-system-schedule",
+ "kind": "statement",
+ "title": "Transfinite scheduling of persistent requirements",
+ "statement": "Let D be a nonempty category admitting colimits of all nonempty linearly ordered shapes in Type w, and let A be a type in Type w. For every object X and a∈A let S(X,a) be a proposition. Assume S persists along every morphism X→Y. Assume that whenever not all S(X,a) hold, there are Y, a morphism X→Y and an a such that S(X,a) is false and S(Y,a) holds. Then there is an object X for which every S(X,a) holds.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Argue by contradiction that every object misses a requirement. Choose for each X a successor object, an arrow to it, and a requirement absent in X but present in the successor. This is a Mathlib SmallObject.SuccStruct. Let κ be the successor cardinal of max(aleph0,|A|), and iterate along κ.ord.ToType. This well-order has no maximum. Colimits of the whole order and of each nonempty initial segment exist by hypothesis, so Mathlib’s transfinite iteration applies.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  },
+  {
+   "text": "The selected task at b holds at succ(b) by the successor identity of the iteration. If b<c, persistence makes it hold at c, whereas the selected task at c is absent there. Hence the selections define an injection from κ.ord.ToType to A. Its cardinality is κ>|A|, a contradiction. The empty A case is included: the assumption that every object misses a requirement already fails.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO",
+  "note": "K3, formal implementation of the strict-union and transfinite argument of Tag 00YP using Mathlib colimits and successor structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "transfinite iteration satisfies a small set of persistent requirements by cardinality contradiction",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.SmallObject.hasIterationOfShape (Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument); CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.hasIterationOfShape (Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument); CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.top_mem_range (Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives); CategoryTheory.SmallObject.iteration (Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument); top_mem_range_transfiniteIterate (Mathlib/Order/TransfiniteIteration)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SmallObject.SuccStruct",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.SmallObject.SuccStruct (Mathlib.CategoryTheory.SmallObject.Iteration.Basic); CategoryTheory.SmallObject.SuccStruct.X₀ (Mathlib.CategoryTheory.SmallObject.Iteration.Basic); CategoryTheory.SmallObject.SuccStruct.succ (Mathlib.CategoryTheory.SmallObject.Iteration.Basic); CategoryTheory.SmallObject.SuccStruct.toSuccArrow (Mathlib.CategoryTheory.SmallObject.Iteration.Basic); CategoryTheory.SmallObject.SuccStruct.prop (Mathlib.CategoryTheory.SmallObject.Iteration.Basic)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "SuccStruct|pointSystemschedule",
+   "results": "[grep] OK 25 hit(s); Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean: define `succStruct W Z₀ : SuccStruct C` for any `Z₀ : C`. By applying; Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean: a transfinite iteration to this `SuccStruct`, we obtain the following results; Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean: noncomputable def succStruct (Z₀ : C) : SuccStruct C where; Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean: /-- The transfinite iteration of `succStruct W Z` to the power `κ.ord.ToType`. -/; Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean: noncomputable def reflectionObj : C := (succStruct W Z).iteration κ.ord.ToType",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a category with linearly ordered colimits admits an object satisfying a small set of persistent requirements if every missing requirement can be added",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.ObjectProperty.colimitsOfShape_monotone (Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape); CategoryTheory.Limits.instHasIterationOfShapeOfHasColimitsOfSize (Mathlib.CategoryTheory.Limits.Shapes.Preorder.HasIterationOfShape); CategoryTheory.Limits.HasIterationOfShape.mk (Mathlib.CategoryTheory.Limits.Shapes.Preorder.HasIterationOfShape); CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone (Mathlib.CategoryTheory.SmallObject.Iteration.FunctorOfCocone); CategoryTheory.Limits.HasIterationOfShape.hasColimitsOfShape_of_isSuccLimit (Mathlib.CategoryTheory.Limits.Shapes.Preorder.HasIterationOfShape)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general colimit and transfinite-iteration infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PointSystemRefineAll",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-point-system-refine-all",
+   "place": "A fully proved component of the strict-refinement iteration in Tag 00YP.",
+   "via": [
+    "lem-trf-finitary-site-enough-points"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PointSystemSchedule",
+  "file": "lean/Sheaf/CategoryTheory/PointSystemSchedule.lean",
+  "declaration": "CategoryTheory.exists_object_all_requirements",
+  "declarations": [
+   "CategoryTheory.exists_object_all_requirements"
+  ],
+  "statement": "theorem exists_object_all_requirements {D : Type u} [Category.{v} D] [Nonempty D] {A : Type w} (hcolim : ∀ (B : Type w) [LinearOrder B] [Nonempty B], HasColimitsOfShape B D) (Satisfied : D → A → Prop) (persist : ∀ {X Y : D}, (X ⟶ Y) → ∀ a, Satisfied X a → Satisfied Y a) (extend : ∀ (X : D), (¬ ∀ a, Satisfied X a) → ∃ (Y : D) (_ : X ⟶ Y) (a : A), ¬ Satisfied X a ∧ Satisfied Y a) : ∃ X : D, ∀ a, Satisfied X a",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "independent cc review: delivered 9 modules + 9 nodes + change record against node lem-trf-point-system-refine-all, Stacks 00YP plan, live PointSystemRefineAll/PointSystemSaturation; compiled delivered set, direct importer PointSystemSaturation (failed as delivered, compiles after fix), #print axioms"
+ }
+}

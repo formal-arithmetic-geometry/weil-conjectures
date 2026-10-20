@@ -1,0 +1,165 @@
+{
+ "id": "lem-trf-point-system-extension-union",
+ "kind": "statement",
+ "title": "Directed unions of pointed refinements preserving two classes",
+ "statement": "Fix a diagram X:J→Cᵒᵖ with J nonempty directed, a presheaf P and two classes s,s′ in colim(X⋙P). In the category of strict diagram refinements [def-trf-point-system-diagram], take the under-category of X. Call an extension good when its index is nonempty directed and the canonical images of s,s′ [def-trf-point-system-refinement-map] are distinct. For any nonempty directed partial order A in Type w, a colimit cocone of A-indexed good extensions has good apex. Consequently the full category of good extensions has colimits of every such shape.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+ },
+ "stmt_deps": [
+  "def-trf-point-system-diagram",
+  "def-trf-point-system-refinement-map"
+ ],
+ "proof": [
+  {
+   "text": "Forget the under-category cocone to index posets. The under forgetful functor preserves connected colimits, the diagram-index functor preserves filtered colimits, and PartOrdEmb→Type preserves them. Hence every index in the apex comes from a stage.",
+   "uses": [
+    "def-trf-point-system-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  },
+  {
+   "text": "The ranges of the stage embeddings form increasing directed subsets of the apex, cover it, and contain the original indices by the under-category triangle. They are a chain presentation. Each stage is order-isomorphic to its range; the inverse parametrization identifies the range diagram with the old diagram, and maps on colimits compose. Equality of original images in a range stage would therefore contradict goodness of the old stage. Apply separation in a chain union.",
+   "uses": [
+    "lem-trf-point-system-chain-union",
+    "def-trf-point-system-refinement-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  },
+  {
+   "text": "The colimit apex is good by the preceding steps. Lift its cocone and its universal maps to the full subcategory of good objects; fullness and faithfulness give the colimit universal property there.",
+   "uses": [
+    "def-trf-point-system-diagram",
+    "lem-trf-point-system-chain-union"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-point-system-diagram",
+  "lem-trf-point-system-chain-union",
+  "def-trf-point-system-refinement-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO",
+  "note": "K3, formal implementation of the strict-union and transfinite argument of Tag 00YP using Mathlib colimits and successor structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "directed colimit of pointed diagram refinements preserves distinct colimit elements",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone.injective (Mathlib/CategoryTheory/Presentable/Limits); CategoryTheory.Limits.Concrete.colimit_exists_of_rep_eq (Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic); CategoryTheory.Limits.Types.FilteredColimit.jointly_surjective_of_isColimit₂ (Mathlib/CategoryTheory/Limits/Types/Filtered); AlgebraicGeometry.Scheme.IsLocallyDirected.ι_eq_ι_iff (Mathlib/AlgebraicGeometry/Gluing); CategoryTheory.Limits.Concrete.colimit_rep_eq_iff_exists (Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Under",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Under (Mathlib.CategoryTheory.Comma.Over.Basic); CategoryTheory.instCategoryUnder (Mathlib.CategoryTheory.Comma.Over.Basic); CategoryTheory.Under.right (Mathlib.CategoryTheory.Comma.Over.Basic); CategoryTheory.Under.inhabited (Mathlib.CategoryTheory.Comma.Over.Basic); CategoryTheory.Under.Hom (Mathlib.CategoryTheory.Comma.Over.Basic)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; these colimit/under-category APIs are used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "Under|pointSystemextension",
+   "results": "[grep] OK 25 hit(s); Mathlib/InformationTheory/Coding/UniquelyDecodable.lean: Released under Apache 2.0 license as described in the file LICENSE.; Mathlib/InformationTheory/Coding/KraftMcMillan.lean: Released under Apache 2.0 license as described in the file LICENSE.; Mathlib/NumberTheory/Primorial.lean: Released under Apache 2.0 license as described in the file LICENSE.; Mathlib/InformationTheory/Hamming.lean: Released under Apache 2.0 license as described in the file LICENSE.; Mathlib/NumberTheory/Modular.lean: Released under Apache 2.0 license as described in the file LICENSE.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "directed unions of extensions of a fixed poset-indexed diagram preserve distinct images of two original colimit classes",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Limits.isColimitOfPreserves (Mathlib.CategoryTheory.Limits.Preserves.Basic); AlgebraicGeometry.Scheme.IsLocallyDirected.V (Mathlib.AlgebraicGeometry.Gluing); CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum (Mathlib.CategoryTheory.Limits.MonoCoprod); CategoryTheory.Limits.PreservesColimit.mk (Mathlib.CategoryTheory.Limits.Preserves.Basic); CategoryTheory.Limits.isColimitCofanMkObjOfIsColimit (Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general colimit and transfinite-iteration infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PointSystemRefineAll",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-point-system-refine-all",
+   "place": "A fully proved component of the strict-refinement iteration in Tag 00YP.",
+   "via": [
+    "lem-trf-finitary-site-enough-points"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PointSystemExtensions",
+  "file": "lean/Sheaf/CategoryTheory/PointSystemExtensions.lean",
+  "declaration": "CategoryTheory.PointSystemDiagram.Extension.good_of_isColimit",
+  "declarations": [
+   "CategoryTheory.PointSystemDiagram.Hom.colimitMap",
+   "CategoryTheory.PointSystemDiagram.Hom.colimitMap_comp",
+   "CategoryTheory.PointSystemDiagram.Hom.colimitMap_id",
+   "CategoryTheory.PointSystemDiagram.Extension",
+   "CategoryTheory.PointSystemDiagram.Extension.embedding",
+   "CategoryTheory.PointSystemDiagram.Extension.restriction",
+   "CategoryTheory.PointSystemDiagram.Extension.map",
+   "CategoryTheory.PointSystemDiagram.Extension.map_comp",
+   "CategoryTheory.PointSystemDiagram.Extension.embedding_comp",
+   "CategoryTheory.PointSystemDiagram.Extension.chain",
+   "CategoryTheory.PointSystemDiagram.Extension.rangeIso",
+   "CategoryTheory.PointSystemDiagram.Extension.stageEmbedding_rangeIso",
+   "CategoryTheory.PointSystemDiagram.Extension.stageDiagram_rangeIso",
+   "CategoryTheory.PointSystemDiagram.Extension.chain_stage_ne",
+   "CategoryTheory.PointSystemDiagram.Extension.index_jointly_surjective",
+   "CategoryTheory.PointSystemDiagram.Extension.Good",
+   "CategoryTheory.PointSystemDiagram.Extension.good_of_isColimit",
+   "CategoryTheory.PointSystemDiagram.Extension.GoodExtension",
+   "CategoryTheory.PointSystemDiagram.Extension.GoodExtension.cocone",
+   "CategoryTheory.PointSystemDiagram.Extension.GoodExtension.isColimit"
+  ],
+  "statement": "theorem good_of_isColimit (hc : IsColimit c) (hF : ∀ a, Good P s s' (F.obj a)) : Good P s s' c.pt",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "independent cc review: delivered 9 modules + 9 nodes + change record against node lem-trf-point-system-refine-all, Stacks 00YP plan, live PointSystemRefineAll/PointSystemSaturation; compiled delivered set, direct importer PointSystemSaturation (failed as delivered, compiles after fix), #print axioms"
+ }
+}

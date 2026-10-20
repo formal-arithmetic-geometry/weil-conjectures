@@ -1,0 +1,122 @@
+{
+ "id": "lem-trf-point-system-posetal-replacement",
+ "kind": "statement",
+ "title": "Preorder representatives retaining an embedded poset",
+ "statement": "Let J be a nonempty partial order, I a directed preorder, and e:J↪oI an order embedding, all in Type w. There is a nonempty directed partial order M in Type w, embeddings r:M↪oI and d:J↪oM with d.trans(r)=e, and for every i∈I there exists m∈M with i≤r(m) and r(m)≤i.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Take M to be the antisymmetrization of I. The composite d of e with the quotient map is injective: equality of its values means e(j)≤e(j′) and conversely, hence j=j′ by the embedding and antisymmetry of J. It preserves and reflects order.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  },
+  {
+   "text": "Define r by extending the prescribed values r(d(j))=e(j) to the other quotient classes using Mathlib’s representative function. Its quotient is the identity, so r preserves and reflects order. The old embedding is fixed exactly. An upper bound in I for two representatives gives an upper bound of their classes in M. Every i is equivalent to the representative of its own class.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO",
+  "note": "K3, formal implementation of the strict-union and transfinite argument of Tag 00YP using Mathlib colimits and successor structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "replace directed preorder by representatives of antisymmetrization fixing an embedded partial order",
+   "results": "[leanfinder] OK 8 hit(s); OrderEmbedding.ofAntisymmetrization_apply (Mathlib/Order/Antisymmetrization); OrderEmbedding.ofAntisymmetrization (Mathlib/Order/Antisymmetrization); toAntisymmetrization (Mathlib/Order/Antisymmetrization); antisymmetrization_fibration (Mathlib/Order/Antisymmetrization); ofAntisymmetrization (Mathlib/Order/Antisymmetrization)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Antisymmetrization",
+   "results": "[loogle] OK 12 hit(s); Antisymmetrization (Mathlib.Order.Antisymmetrization); ofAntisymmetrization (Mathlib.Order.Antisymmetrization); toAntisymmetrization (Mathlib.Order.Antisymmetrization); instInhabitedAntisymmetrization (Mathlib.Order.Antisymmetrization); instSubsingletonAntisymmetrization (Mathlib.Order.Antisymmetrization)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "Antisymmetrization|pointSystemreplacement",
+   "results": "[grep] OK 25 hit(s); Mathlib/Computability/TuringDegree.lean: public import Mathlib.Order.Antisymmetrization; Mathlib/Computability/TuringDegree.lean:   Antisymmetrization _ TuringReducible; Mathlib/Computability/TuringDegree.lean:   instPartialOrderAntisymmetrization; Mathlib/Algebra/Order/Archimedean/Class.lean: public import Mathlib.Order.Antisymmetrization; Mathlib/Algebra/Order/Archimedean/Class.lean: synonym (`Mul`-)`ArchimedeanOrder`, and define (`Mul`-)`ArchimedeanClass` as `Antisymmetrization` of",
+   "date": "2026-10-21",
+   "verdict": "no exact match; related APIs used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "choose representatives of a preorder antisymmetrization while fixing an embedded partial order",
+   "results": "[leansearch] OK 8 hit(s); ofAntisymmetrization (Mathlib.Order.Antisymmetrization); ofAntisymmetrization_le_ofAntisymmetrization_iff (Mathlib.Order.Antisymmetrization); Antisymmetrization (Mathlib.Order.Antisymmetrization); preordToPartOrd (Mathlib.Order.Category.PartOrd); instPartialOrderAntisymmetrization (Mathlib.Order.Antisymmetrization)",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general colimit and transfinite-iteration infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PointSystemRefineAll",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-point-system-refine-all",
+   "place": "A fully proved component of the strict-refinement iteration in Tag 00YP.",
+   "via": [
+    "lem-trf-finitary-site-enough-points"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PointSystemPosetalReplacement",
+  "file": "lean/Sheaf/CategoryTheory/PointSystemPosetalReplacement.lean",
+  "declaration": "CategoryTheory.exists_pointSystem_posetal_replacement",
+  "declarations": [
+   "CategoryTheory.exists_pointSystem_posetal_replacement"
+  ],
+  "statement": "theorem exists_pointSystem_posetal_replacement {J I : Type w} [PartialOrder J] [Preorder I] [Nonempty J] [IsDirected I (· ≤ ·)] (e : J ↪o I) : ∃ (M : Type w) (_ : PartialOrder M) (_ : Nonempty M) (_ : IsDirectedOrder M) (r : M ↪o I) (d : J ↪o M), d.trans r = e ∧ ∀ i, ∃ m, i ≤ r m ∧ r m ≤ i",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "independent cc review: delivered 9 modules + 9 nodes + change record against node lem-trf-point-system-refine-all, Stacks 00YP plan, live PointSystemRefineAll/PointSystemSaturation; compiled delivered set, direct importer PointSystemSaturation (failed as delivered, compiles after fix), #print axioms"
+ }
+}

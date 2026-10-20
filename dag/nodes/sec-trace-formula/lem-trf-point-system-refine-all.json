@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Let $E$ be the set of pairs $(\\{W_k\\to W\\},f\\in u'(W))$ consisting of a finite covering and an element of the original functor $u'$. It is a set because the site has sets of objects, morphisms, and covering families, and each $u'(W)$ is a set-valued filtered colimit. We construct, for each initial segment of a well-ordering of $E$, a refinement system together with the invariant that the images of $s,s'$ are distinct and all pairs in that initial segment have the required lifting property. The empty initial segment is realized by the original system $(J,V_j,g_{jj'})$.",
+   "text": "Form the Type(max u v) of finite-covering/original-Hom-germ pairs. Use uliftYoneda for their presheaves and ULift(Fin n) for their alternatives. These data give the request family of the scheduling theorem.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
     "def-weil-pbc-category-colimit"
@@ -21,40 +21,33 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YP, proof: define E and the class S of partial refinements"
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
    }
   },
   {
-   "text": "At a successor stage for $e=(\\{W_k\\to W\\},f)$, apply [lem-trf-point-system-refine] to the current system and the still-distinct images of $s,s'$. It produces a refinement preserving distinctness and making the image of $f$ factor through one member $W_k$. At a limit stage, take the union of the previously constructed nested index systems, with the induced order, objects, and transition maps. The union is again a directed inverse system: two indices already occur together in one earlier system, which supplies an upper bound, and the transition maps agree because the systems form a chain of refinements.",
+   "text": "Supply the single-step callback by pointSystemRefine (Tag 00YO), applied to the current images of the two sections and the requested Hom class. The canonical-map identity translates its colimit.pre formulation. The scheduling theorem constructs the partial-order refinement: it replaces preorder refinements cofinally, proves separation in limit unions, and iterates missing requests until all hold.",
    "uses": [
-    "lem-trf-point-system-refine"
+    "lem-trf-point-system-refine",
+    "def-trf-point-system-refinement-map",
+    "lem-trf-point-system-refinement-chain-exists"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YP, proof: successor step by Lemma 00YO and union at limit stages"
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
    }
   },
   {
-   "text": "The distinctness invariant survives a limit union. If the two classes became equal in the union colimit, [lem-weil-pbc-filtered-colimit-sets-elementwise] would give a common later index witnessing equality. That index and the two representatives occur in some member of the nested chain, where distinctness was maintained, a contradiction. Thus every stage of the recursion has a valid invariant and the transfinite recursion is defined for the whole well-order of $E$.",
+   "text": "The chain-union separation theorem yields distinct final images. Each requested lift in a stage maps to the final colimit by composition and naturality of colimit maps. Represent that Hom-colimit element at an index, using joint surjectivity of the colimit cocone. Cocone naturality gives exactly the class of b composed with the selected covering arrow.",
    "uses": [
+    "lem-trf-point-system-chain-union",
+    "def-trf-point-system-refinement-map",
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YP, proof: chain-union condition (2) and directed-colimit equality criterion"
-   }
-  },
-  {
-   "text": "Take the union over all $e\\in E$. It is a refinement of the original system and its two images of $s,s'$ remain distinct by the preceding argument. For any pair $(\\{W_k\\to W\\},f)\\in E$, the stage at which that pair was processed supplied a representative through some $W_k$; passing to the final union preserves that factorization. Therefore every finite covering and every $f\\in u'(W)$ has the required lift in the final $u(W)$, proving the statement.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YP, proof: final union over the well-order E"
+    "place": "Tag 00YP, proof of lemma-refine-all-at-once; strict refinements preceding Tag 00YO"
    }
   }
  ],
@@ -62,12 +55,15 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-category-colimit",
   "lem-trf-point-system-refine",
+  "def-trf-point-system-refinement-map",
+  "lem-trf-point-system-refinement-chain-exists",
+  "lem-trf-point-system-chain-union",
   "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 00YP (Lemma lemma-refine-all-at-once)"
+  "place": "Tag 00YP; strict filtered unions and missing-request transfinite iteration, K3 2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -145,7 +141,6 @@
   "module": "Sheaf.CategoryTheory.PointSystemRefineAll",
   "declaration": "CategoryTheory.exists_pointSystem_refinement_all",
   "declarations": [
-   "CategoryTheory.pointSystemRefinementMap",
    "CategoryTheory.exists_pointSystem_refinement_all"
   ],
   "file": "lean/Sheaf/CategoryTheory/PointSystemRefineAll.lean",
@@ -162,5 +157,15 @@
   "group": "Q07",
   "result": "pass",
   "note": "Stacks sites.tex 9237-9400 (00YO/00YP) read; node diff is lean-only and lean.statement is verbatim in the file. Every hypothesis and conclusion matches: IsSiteForCoverings site, nonempty directed PartialOrder J, V : J ⥤ Cᵒᵖ, sheaf F, s ≠ s' in colimit; refinement as J ↪o I plus a functor equality (induced order, objects, transitions); canonical colimMap/colimit.pre helper with real data; f in the original u'(W); stage representative b ≫ a k for some k. Edge cases: n=0 is vacuous because the stalk would be a singleton; one-element J and repeated arrows are covered; u and v stay independent; I : Type (max u v) can be built and fits the citer's iteration. Docstrings with source and blueprint, proof steps in the docstring, sorry only, no duplicate in Mathlib or project. nt_compile --json rc 0, clean in 2.5-4.7 s; a probe confirmed errors are reported. Only remark: the Q07 second reading is a self-audit, stated openly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-409c0",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261020T221232-L-4162099",
+  "kind": "interface",
+  "note": "independent cc review: delivered 9 modules + 9 nodes + change record against node lem-trf-point-system-refine-all, Stacks 00YP plan, live PointSystemRefineAll/PointSystemSaturation; compiled delivered set, direct importer PointSystemSaturation (failed as delivered, compiles after fix), #print axioms"
  }
 }
