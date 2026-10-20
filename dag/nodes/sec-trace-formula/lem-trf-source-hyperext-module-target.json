@@ -15,9 +15,112 @@
   "def-pc-ext",
   "def-sp-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a representative $M^\\bullet$ of $K$ with $M^a=0$ for $a>u$, using the equivalence between cohomological and representative upper bounds in [def-sbc-standard-tstructure-derived-category]. Its cohomology is $H^a(K)$. Concretely, for any representative $C^\\bullet$, replace it by $\\tau_{\\leq u}C^\\bullet$: the inclusion induces the identity on cohomology in degrees at most $u$ and an isomorphism $0\\to H^a(C)=0$ above $u$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations; upper canonical truncation"
+   }
+  },
+  {
+   "text": "Construct a nonnegative injective resolution $N[0]\\to I^\\bullet$ [def-sp-injective-resolutions] from [lem-weil-pbc-ring-modules-enough-injectives]. Set $C^0=N$ and, for $r\\geq0$, choose an injection $e_r:C^r\\hookrightarrow I^r$ into an injective module and set $C^{r+1}=\\operatorname{coker}(e_r)$. Define $d_I^r$ as $I^r\\twoheadrightarrow C^{r+1}\\xrightarrow{e_{r+1}}I^{r+1}$, and set $I^r=0$ for $r<0$. Then $\\ker d_I^0=e_0(N)$ and $\\ker d_I^r=e_r(C^r)=\\operatorname{im}d_I^{r-1}$ for $r>0$, proving that this is the required resolution. This is the elementary recursive construction in Tag 013K, lemma-injective-resolutions-exist (1).",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-ring-modules-enough-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist, proof of (1)"
+   }
+  },
+  {
+   "text": "The bounded-below complex of injectives $I^\\bullet$ is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Consequently [def-pur-derived-internal-hom] computes $R\\operatorname{Hom}_A(K,N[0])$ by the actual Hom complex $T^\\bullet=\\operatorname{Hom}_A^\\bullet(M^\\bullet,I^\\bullet)$, with the differential of [def-pur-hom-complex]. The one-object identity-covering site identifies module sheaves and their internal Hom with $A$-modules and $\\operatorname{Hom}_A$, respectively: the only section and restriction are the module itself and its identity. Thus no comparison with scheme quasi-coherent sheaves is being assumed.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070J, lemma-bounded-below-injectives-K-injective; the Hom-complex model in Injectives, Tag 0G1Z, remark-ext-from-filtered-complex"
+   }
+  },
+  {
+   "text": "Form the first-quadrant double complex [def-sp-double-complex-total] $D^{i,b}=\\operatorname{Hom}_A(M^{u-b},I^i)$ for $i,b\\geq0$, zero otherwise. Set $d_I(f)=d_I^i\\circ f$ (raising $i$), and $d_{II}(f)=(-1)^{b-u+1}f\\circ d_M^{u-b-1}$ (raising $b$). Their squares vanish because $d_M^2=d_I^2=0$, and they commute because precomposition and postcomposition commute and the displayed sign depends only on $b$. In degree $t$, only $-t\\leq a\\leq u$ can contribute to $T^t=\\prod_a\\operatorname{Hom}_A(M^a,I^{a+t})$, so this product is a finite direct sum. Writing $a=u-b$ and $i=a+t$ identifies $T^t$ with $\\operatorname{Tot}(D)^{t+u}$. The total differential $d_I+(-1)^i d_{II}$ has source-precomposition coefficient $(-1)^{i+b-u+1}=(-1)^{t+1}$, exactly the coefficient $-(-1)^t$ in [def-pur-hom-complex]. Hence this degree translation identifies differentials as well, and $H^t(T)=H^{t+u}(\\operatorname{Tot}D)$. This assertion uses degree translation with the same differential, not a convention for signed shift functors.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012X, section-double-complex; double complexes, associated total complexes and their two filtrations"
+   }
+  },
+  {
+   "text": "For fixed $i$, compute the cohomology in $b$ directly from injectivity [def-sp-injective-resolutions]. Put $a=u-b$, $Z^a=\\ker d_M^a$ and $B^a=\\operatorname{im}d_M^{a-1}$. A cocycle $f:M^a\\to I^i$ kills $B^a$, so restriction induces a map to $\\operatorname{Hom}_A(Z^a/B^a,I^i)$. Every map $Z^a/B^a\\to I^i$ extends across $Z^a/B^a\\hookrightarrow M^a/B^a$, proving surjectivity. A cocycle restricting to zero on $Z^a/B^a$ factors through $M^a/Z^a\\cong B^{a+1}$; extending that map across $B^{a+1}\\hookrightarrow M^{a+1}$ expresses it as a boundary (up to the invertible sign in $d_{II}$). Therefore $H^b_{II}(D^{i,\\bullet})=\\operatorname{Hom}_A(H^{u-b}(K),I^i)$. This also covers $b=0$: $M^{u+1}=0$ forces $Z^u=M^u$, so the restriction map has zero kernel. Restriction, quotient factorization and postcomposition commute, so this identification is $A$-linear and compatible with $d_I$.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 0G20, remark-spectral-sequences-ext-variant; elementary injective-dual cohomology calculation in the module-target double-complex realization"
+   }
+  },
+  {
+   "text": "Apply the first spectral sequence of [thm-sp-double-complex-spectral-sequences] in the abelian category of $A$-modules (its abelianity is part of [lem-weil-pbc-ring-modules-enough-injectives]). Step 5 gives $\\widetilde E_1^{i,b}=\\operatorname{Hom}_A(H^{u-b}(K),I^i)$, with differential induced by postcomposition with $d_I$. Hence $\\widetilde E_2^{i,b}=H^i\\operatorname{Hom}_A(H^{u-b}(K),I^\\bullet)$. Since $I^\\bullet$ is the K-injective resolution fixed in step 3, [def-pur-derived-internal-hom] identifies this with $H^iR\\operatorname{Hom}_A(H^{u-b}(K)[0],N[0])$, and [lem-sc-rhom-cohomology-ext-ring] identifies it with $\\operatorname{Ext}^i_A(H^{u-b}(K),N)$ for $i\\geq0$. These are $A$-linear identifications: the maps send a cocycle to its localized shifted map, and multiplication by $a\\in A$ is postcomposition with $a\\operatorname{id}_{I^\\bullet}$ throughout. All pages and filtration maps are in $\\operatorname{Mod}(A)$, so their kernels, images and quotients are $A$-submodules. The spectral-sequence page isomorphisms [def-sp-spectral-sequence] give $\\widetilde E_{s+1}=H(\\widetilde E_s,d_s)$.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-weil-pbc-ring-modules-enough-injectives",
+    "def-pur-derived-internal-hom",
+    "lem-sc-rhom-cohomology-ext-ring",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0130, lemma-ss-double-complex, first spectral sequence; Injectives Tag 0G20, remark-spectral-sequences-ext-variant"
+   }
+  },
+  {
+   "text": "Set $E_s^{i,j}=\\widetilde E_s^{i,j+u}$ for $s\\geq2$. This translation preserves the differential bidegree $(s,1-s)$ and the next-page kernel/image formula. It gives $E_2^{i,j}=\\operatorname{Ext}^i_A(H^{-j}(K),N)$, with support $i\\geq0$, $j\\geq-u$ on every page. By [thm-sp-double-complex-spectral-sequences], $\\widetilde E_s^{i,b}$ stabilizes, and in degree $n=t+u\\geq0$ the first image filtration has $F^0H^n=H^n$, $F^{n+1}H^n=0$ and $\\operatorname{gr}^i_FH^n=\\widetilde E_\\infty^{i,n-i}$. Through step 4 this is a finite exhaustive separated filtration [def-sp-filtration] of $H^tR\\operatorname{Hom}_A(K,N[0])$, whose quotients are $E_\\infty^{i,t-i}$ for $0\\leq i\\leq t+u$, equivalently $E_\\infty^{t-j,j}$ for $-u\\leq j\\leq t$. If $t+u<0$, the first-quadrant total complex is zero in that degree, so its cohomology, and thus the abutment, is zero. The construction imposed no condition on $A$ or its modules beyond those in the statement.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0132, lemma-first-quadrant-ss; finite image filtrations and convergence, with the elementary index translation b=j+u"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-sp-double-complex-total",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-sc-rhom-cohomology-ext-ring",
+  "def-sp-spectral-sequence",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 0G20, remark-spectral-sequences-ext-variant, module-target case: explicit Hom-double-complex realization using Homology Tags 0130 and 0132, instead of leaving the filtered-complex details implicit."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -62,10 +165,46 @@
    "date": "2026-10-19",
    "verdict": "no match: semantic hits are Ext exact sequences, resolution-to-cohomology comparisons, small Ext, and generic spectral objects; grep finds only SpectralSequence.hom_ext or no hits. None constructs this source-truncation spectral sequence or its finite abutment filtration.",
    "subdirectory": "Algebra/Category/ModuleCat/Ext"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered Hom complex spectral sequence Ext of cohomology modules bounded above complex injective resolution",
+   "results": "{\"t\": \"2026-10-20T05:32:39Z\", \"tool\": \"leanfinder\", \"query\": \"filtered Hom complex spectral sequence Ext of cohomology modules bounded above complex injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extMk_surjective\", \"CategoryTheory.hasExt_of_enoughInjectives\", \"CategoryTheory.InjectiveResolution.extMk_zero\", \"CategoryTheory.Abelian.Ext\", \"CategoryTheory.InjectiveResolution.extMk_hom\"], \"digest\": \"452b5d54ffd9d719\"}",
+   "date": "2026-10-20",
+   "verdict": "no match: Ext/resolution comparisons and the Ext definition do not construct this hyper-Ext spectral sequence or its finite filtration; the spectral-sequence grep hit is only SpectralSequence.hom_ext."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]yper.?[Ee]xt|spectral.?[Ss]equence.*[Ee]xt|[Ee]xt.*spectral.?[Ss]equence",
+   "results": "{\"t\": \"2026-10-20T05:34:11Z\", \"tool\": \"grep\", \"query\": \"[Hh]yper.?[Ee]xt|spectral.?[Ss]equence.*[Ee]xt|[Ee]xt.*spectral.?[Ss]equence\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/SpectralSequence/Basic.lean\"], \"digest\": \"91073572df98a9ba\"}",
+   "date": "2026-10-20",
+   "verdict": "no match: Ext/resolution comparisons and the Ext definition do not construct this hyper-Ext spectral sequence or its finite filtration; the spectral-sequence grep hit is only SpectralSequence.hom_ext.",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a bounded above complex and a module the source hyper Ext spectral sequence converges to derived Hom",
+   "results": "{\"t\": \"2026-10-20T05:34:12Z\", \"tool\": \"leansearch\", \"query\": \"For a bounded above complex and a module the source hyper Ext spectral sequence converges to derived Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext\", \"CategoryTheory.Abelian.Ext.contravariantSequence_exact\", \"CategoryTheory.Abelian.Ext.homEquiv\", \"CategoryTheory.Abelian.Ext.covariantSequence_exact\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂'\", \"CategoryTheory.Abelian.Ext.hom\", \"CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo\"], \"digest\": \"6061fa204952b27a\"}",
+   "date": "2026-10-20",
+   "verdict": "no match: Ext/resolution comparisons and the Ext definition do not construct this hyper-Ext spectral sequence or its finite filtration; the spectral-sequence grep hit is only SpectralSequence.hom_ext."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence, CategoryTheory.Abelian.Ext",
+   "results": "{\"t\": \"2026-10-20T05:34:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SpectralSequence, CategoryTheory.Abelian.Ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-20",
+   "verdict": "no match: Ext/resolution comparisons and the Ext definition do not construct this hyper-Ext spectral sequence or its finite filtration; the spectral-sequence grep hit is only SpectralSequence.hom_ext."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A first quadrant Hom double complex of a bounded above complex and injective resolution yields Ext of source cohomology and finite abutment filtrations",
+   "results": "{\"t\": \"2026-10-20T05:38:05Z\", \"tool\": \"leanfinder\", \"query\": \"A first quadrant Hom double complex of a bounded above complex and injective resolution yields Ext of source cohomology and finite abutment filtrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extMk\", \"CategoryTheory.Abelian.Ext\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extMk_surjective\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CategoryTheory.hasExt_of_enoughInjectives\", \"CategoryTheory.InjectiveResolution.extMk_zero\", \"CategoryTheory.InjectiveResolution.mk₀_comp_extMk\"], \"digest\": \"ba29a4a13661043c\"}",
+   "date": "2026-10-20",
+   "verdict": "no match: Ext/resolution comparisons and the Ext definition do not construct this hyper-Ext spectral sequence or its finite filtration; the spectral-sequence grep hit is only SpectralSequence.hom_ext."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-bounded-above-coherent-rhom",
@@ -100,5 +239,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-20",
+  "item": "lem-trf-source-hyperext-module-target",
+  "worker": "stage1",
+  "summary": "Kept the full statement and all original statement dependencies. Proved it by a signed first-quadrant Hom double complex, explicitly computing injective-dual cohomology and the total-complex degree translation; reused the existing spectral-sequence convergence theorem, injective/K-injective tools and Ext comparison. No new nodes. Repeated item searches with two semantic phrasings and recorded their actual outputs.",
+  "blueprint": "Retains the existing precise lem-trf-local-term-locality proof (1)--(2) auxiliary-source ancestry via bounded-above coherent RHom. This split realizes exactly the source-hyper-Ext algebra input of Injectives Tag 0G20 in that ancestry; it changes neither the chapter route nor the contracting-local-term unit. No blueprint node states this module-target source spectral sequence (blueprint_refs searches hyper-Ext and 0G20).",
+  "tool_uses": [
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic first-quadrant spectral-sequence construction and finite abutment filtration for the explicit Hom double complex; the local-term unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic bounded-below injective-complex criterion to compute module RHom with the chosen nonnegative resolution; no local-term unit lemma supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-enough-injectives",
+    "why": "Generic abelianity and enough-injectives theorem for modules over an arbitrary ring, used in the explicit resolution construction; not a replacement for a geometric route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-ring-modules-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-cc-ND-85797176f",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-85797176f (reviewer sub-agent of L); spot-checked: Read the item and all 14 cited statements. The statement matches Stacks injectives.tex Tag 0G20 (remark-spectral-sequences-ext-variant, with 0G1Z) specialised to K bounded above and N[0], and is unchanged from live, where the node is still unsplit. Small cases agree: K=M[-a] gives E_2 in row j=-a with abutment Ext^{t+a}; t<-u gives zero; K=0, N=0 and A=0 are trivial. Step 1: the tau_{<=u} inclusion is a quasi-isomorphism. Step 2: the recursive injective resolution has ker d^r = im d^{r-1}, since e_{r+1} is injective and pi is surjective. Step 3: bounded-below injectives give Hom^•(A,I) acyclic; H^0 = homotopy classes then gives the def-pur K-injective notion (elementary); def-pur-derived-internal-hom allows any K-injective I. Step 4: recomputed the total sign (-1)^{i+b-u+1} = -(-1)^t, which matches def-pur-hom-complex; T^t is a finite sum over -t<=a<=u; H^t(T) = H^{t+u}(Tot). Step 5: the injective-dual column cohomology argument (extensions over Z/B ⊂ M/B and over B^{a+1} ⊂ M^{a+1}) checks, including b=0. Step 6: first spectral sequence E_1 = H_II with d_1 from d_I and no filtration swap; Ext identified through lem-sc-rhom-cohomology-ext-ring and def-pc-ext. Step 7: b=j+u reindexing; F^0=H, F^{n+1}=0; the filtration is finite, exhaustive and separated. No new nodes and no duplicates: lem-per-bounded-above-rhom-hyperext is the target-cohomology sequence and is correctly not cited; blueprint_refs finds nothing for 0G20 or hyper-Ext. No SGA, no cycle. review_split PASS. The declared generic algebraic tool uses are accepted: thm-sp-double-complex-spectral-sequences, plus the Mathlib leaves bounded-below-injectives-kinjective and ring-modules-enough-injectives. No fixes."
  }
 }
