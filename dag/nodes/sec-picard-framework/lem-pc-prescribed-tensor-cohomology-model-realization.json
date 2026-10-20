@@ -14,50 +14,49 @@
  },
  "proof": [
   {
-   "text": "Put V(M)=resolution_R(restrict_R(Q(M))). This is an R-K-flat complex with quasi-isomorphism augmentation to restrict_R(Q(M)). The universal counit of L(M) is invertible on V(M) by the K-flat counit theorem; applying the derived functor to the augmentation and then taking cohomology identifies L(M) cohomology at Q(M) with ordinary extension of V(M). Since restriction of pi is a quasi-isomorphism, resolution_R(restrict_R(pi)) is a quasi-isomorphism between R-K-flat complexes and remains so after extension to B: apply clause (i) of [lem-pc-mixed-tensor-kflat-quasi-iso] with the B-complex B[0]; the natural single-complex tensor and unit isomorphisms identify the induced mixed tensor map with scalar extension of this resolution map. Its cohomology identifies this model with source(U(M)). Conjugate by eS and L(M).cohomologyIso to obtain sigma. Naturality for multiplication by a and hS show commutation with a tensor 1. B-linearity gives commutation with 1 tensor b; tensor induction proves C-linearity. Naturality of counits and augmentations makes the source identification natural before its tensor-algebra upgrade.",
+   "text": "Apply extendScalars_preservesKFlatQuasiIso to the resolution functors. Their augmentations are quasi-isomorphisms and their values are K-flat. The characterization isLeftDerivedFunctor_iff_isIso_app_of_kFlat makes every supplied universal counit invertible at the resolving R-complex. Taking cohomology and inverting the derived image of the augmentation gives a natural source isomorphism. Compose it with eS, the inverse of source(pi), and L.cohomologyIso inverse. Naturality for scalar multiples of the identity and hS show commutation with a tensor 1; B-linearity and tensor induction give a C-linear isomorphism sigma.",
    "uses": [
-    "lem-pc-kflat-scalar-extension-counit",
-    "lem-pc-mixed-tensor-kflat-quasi-iso",
-    "lem-pc-base-derived-tensor-cohomology-model-map"
+    "lem-pc-extension-kflat-quasi-iso"
    ],
    "elementary": false
   },
   {
-   "text": "For target(U), use the common K-flat span resolution_A(Q(M)) to Q(M) and resolution_A(U(M)). Its two maps are augmentation_A(Q(M)) and resolution_A(pi(M)); they are quasi-isomorphisms between A-K-flat complexes, hence remain so after extension from A to C: apply clause (i) of [lem-pc-mixed-tensor-kflat-quasi-iso] with the C-complex C[0]; the natural single-complex tensor and unit isomorphisms identify the induced mixed tensor maps with scalar extension of the two span maps. The ordinary balanced tensor isomorphism identifies B tensor_R resolution_A(U(M)) with restriction of C tensor_A resolution_A(U(M)). Conjugate by eT and upgrade to C-linearity using hT and the two tensor generators, obtaining T(M) isomorphic to H^i(C tensor_A Q(M)). Flatness of C to D and the canonical scalar-extension homology adjunct now give gamma:T(M) extended to D isomorphic to H^i(D tensor_A Q(M)). Each span map, balanced tensor map and homology adjunct is natural in M, giving the displayed gamma naturality.",
+   "text": "Choose the ordinary balanced tensor isomorphisms on complexes and prove their naturality on 1 tensor q. Passing to homology and exact restriction of scalars gives ordinaryH. Its composite with homology of the A-resolution augmentation is the natural transformation targetH from target to restricted ordinary C-tensor cohomology. targetH is invertible on Q because Q is A-K-flat; target(pi) is invertible by K-flat invariance as well. Compose eT, inverse target(pi), and targetH(Q); upgrade B-linearity to C-linearity using hT, naturality under a times identity, and tensor induction. This gives tau:T(M) to H^i(C tensor_A Q(M)), naturally in M. The canonical flat scalar-extension homology adjunct lambda is invertible. Set gamma to extension of tau followed by lambda. Prove lambda natural using scalar-extension adjunction, the generator formula for ordinaryToLocalized, and naturality of the exact restriction homology isomorphism. Thus gamma is natural.",
    "uses": [
-    "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "lem-pc-extension-kflat-quasi-iso",
     "lem-pc-base-tensor-ordinary-iso",
     "lem-pc-flat-scalar-extension-homology-adjunct"
    ],
    "elementary": false
   },
   {
-   "text": "For g:M to N, use the unique counit-compatible isomorphism delta:L(M).derived to L(N).derived. Under sigma, the prescribed map S.map g agrees with cohomology of L(M).derived applied to Q.map g followed by delta. This is the model-map equation; it follows from the natural derived identification of the first step. All identities are morphism identities, so no functorial choice of the model family is assumed.",
+   "text": "Obtain a counit-compatible delta from exists_baseDerivedTensorCohomologyModelMap. Compatibility of delta with the natural source isomorphisms follows by cancelling the invertible counit and using naturality at the resolution augmentation. Combine this with naturality of eS and inverse source(pi); cancel sigma(M) to obtain the exact displayed model-map equation. No functorial choice of the model family is needed.",
    "uses": [
     "lem-pc-base-derived-tensor-cohomology-model-map"
    ],
    "elementary": false
   },
   {
-   "text": "The equation hc identifies c with the canonical comparison computed on the common R-K-flat span of the A-resolution. The model comparison_eq identifies L.comparison with the universal counit on the same span. Its counit is invertible on the resolving K-flat complex, so the span comparison is preserved by the above identifications. Extend the comparison to D and compose with the canonical flat homology adjunct used to construct gamma. The adjunction identity localized_eq in L identifies this composite exactly with L.localizedComparison. This gives EL(c) followed by gamma equals EL(sigma) followed by L.localizedComparison.",
+   "text": "Show that comparison followed by targetH equals homology of the extended R-resolution augmentation followed by ordinaryH. Cancel spanLeft, and use naturality of the resolution augmentation. The tensor-generator formula identifies the ordinary isomorphism in each supplied model with the one used in ordinaryH. Using model.comparison_eq, identify the restricted model comparison with cohomologyIso, the counit cohomology map, and ordinaryH. The source factorization and hc then give c followed by tau equals sigma followed by model.comparison. Apply extension to D and compose with lambda. Scalar-extension adjunction and model.localized_eq identify model.comparison followed by lambda with localizedComparison, proving the final equation.",
    "uses": [
-    "lem-pc-kflat-scalar-extension-counit",
+    "lem-pc-base-tensor-ordinary-iso",
     "lem-pc-flat-scalar-extension-homology-adjunct"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-scalar-extension-counit",
-  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-pc-extension-kflat-quasi-iso",
   "lem-pc-base-derived-tensor-cohomology-model-map",
   "lem-pc-base-tensor-ordinary-iso",
   "lem-pc-flat-scalar-extension-homology-adjunct"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "N1",
+  "date": "2026-10-20",
   "document": "Stacks Project",
-  "place": "Tags 06Y6, 064L, 065Z, 00HD and 0DJ8; explicit single-ring prescribed-lift realization written by G2"
+  "place": "Tags 06Y6, 064L, 065Z and 00HD; complete Lean proof using K-flat scalar extension, natural counit cohomology, tensor-generator linearity, and the canonical flat homology adjunct."
  },
  "mathlib_searches": [
   {
@@ -127,14 +126,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-924a1",
-  "group": "G2",
+  "reviewer": "COMPILER",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T145119-L-695927",
-  "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, DAG records, change record, direct importer, and lcompile checks all agree; delivery compiles cleanly with only the declared sorryAx dependency."
+  "landing": "20261020T153012-L-2862762",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
