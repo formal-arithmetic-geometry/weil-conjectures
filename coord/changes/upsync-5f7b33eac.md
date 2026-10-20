@@ -194,3 +194,16 @@ Importers taken out with them (9): `Sheaf.AlgebraicGeometry.BoundedConstructible
 ## Prefer upstream, round 3
 
 The upstream module(s) `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit`, `WeilConjectures.WeilSheaf.Finiteness` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit`, `WeilConjectures.WeilSheaf.Finiteness`.
+
+## Quarantine, round 3 (2026-10-20T10:49:04Z)
+
+The global build of 673c934f6c failed in 6 module(s); they and their importers, 26 module(s), were moved to quarantine/ (tools/rework.py, coord/rework.tsv):
+
+- `Sheaf.AlgebraicGeometry.LocallyFreeTensorSingle`: error: failed in the global build (no message located) (nodes lem-sfb-locally-free-tensor-single)
+- `Sheaf.Paper.ContinuousAlgClConstructibleTor`: error: failed in the global build (no message located) (nodes det-sf-comp-continuous-algcl-constructible-tor)
+- `Sheaf.Paper.IntegralConstructibleKernels`: error: failed in the global build (no message located) (nodes lem-weil-pbc-integral-constructible-kernels)
+- `Sheaf.Paper.LisseFiniteHomLift`: error: failed in the global build (no message located) (nodes lem-sfb-lisse-finite-hom-lift)
+- `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareEtalePathNormalization`: error: failed in the global build (no message located) (nodes stage3-proetale-comparison-square-etale-path-normalization)
+- `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility`: error: failed in the global build (no message located) (nodes lem-weil-pbc-condensed-qbar-bounded-push)
+
+Importers taken out with them (20): `Sheaf.AlgebraicGeometry.BoundedConstructibleTensorSingle`, `Sheaf.AlgebraicGeometry.CompactSupportProperFactor`, `Sheaf.AlgebraicGeometry.CompactSupportSiteComparisonOpen`, `Sheaf.AlgebraicGeometry.EllAdicBoundedTriangulated`, `Sheaf.AlgebraicGeometry.LfpTensorSingle`, `Sheaf.AlgebraicGeometry.PadicIntegersBoundedTriangulated`, `Sheaf.Paper.CoefficientFiniteDescentLisse`, `Sheaf.Paper.CondensedFlatCoefficientCalculus`, `Sheaf.Paper.IntegralConstantModelHeartClosure`, `Sheaf.Paper.IntegralConstructibleSerre`, `Sheaf.Paper.IntegralLfpEventualFreeImage`, `Sheaf.Paper.IntegralLfpFiniteQuotientCharts`, `Sheaf.Paper.IntegralLfpLocalTorsionCharts`, `Sheaf.Paper.IntegralLfpLocallyFreeResolution`, `Sheaf.Paper.IntegralMatrixKernelLocallyFree`, `Sheaf.Paper.IntegralReductionConservative`, `Sheaf.Paper.IntegralReductionConstructible`, `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare`, `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport`, `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange`
