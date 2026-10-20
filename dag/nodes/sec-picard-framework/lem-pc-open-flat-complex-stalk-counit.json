@@ -16,46 +16,49 @@
  },
  "proof": [
   {
-   "text": "Bounded-above flatness gives K-flatness of K. Use the existing pinned pullback counit invertibility proof from SingleComplexBaseChangeStalkCondition. The stalk criterion gives K-flatness of Q; the proved ringIso_kFlat helper of StalkKFlatTensorHomology transports it along the inverse open stalk-ring isomorphism to P. Convert its categorical K-flat predicate to the acyclic-tensor condition and apply scalarExtensionCounit_isIso_of_kFlat to the given LF and epsilon.",
+   "text": "Bounded-above flatness gives K-flatness of K. Use the pinned pullback counit invertibility proof from SingleComplexBaseChangeStalkCondition. The stalk criterion gives K-flatness of Q; ringIso_kFlat from StalkKFlatTensorHomology transports it along the inverse open stalk-ring isomorphism to categorical K-flatness of P. The proved scalarExtension_quasiIso_of_kFlat helper from KFlatScalarExtensionDerivedIso supplies PreservesKFlatQuasiIso for scalar extension. Apply the source-library Functor.isLeftDerivedFunctor_iff_isIso_app_of_kFlat directly to hLF and P to make the given scalar counit invertible, without a round trip through the acyclic-tensor predicate.",
    "uses": [
     "lem-pc-bounded-above-flat-kflat",
     "lem-pc-kflat-stalk-criterion",
     "lem-pc-stalk-kflat-tensor-homology",
-    "lem-pc-kflat-scalar-extension-counit",
+    "lem-sc-kflat-scalar-extension-derived-iso",
     "def-pc-single-complex-base-change-stalk-condition"
    ],
    "elementary": false
   },
   {
-   "text": "Use Mathlib resLEStalkMap and stalkMap_congr_point to identify the conjugated open stalk map with g.stalkMap a. The proved exists_extensionComplexIso helper of BaseDerivedTensorOrdinaryRingComparison transports ordinary scalar extension along both ring isomorphisms. Compose with the natural tensor-pullback stalk chain isomorphism; the private tensorStalkIsoAt helper performs the equal-point transport and termwise-composition factors. Apply derived homology and exact stalk/restriction homology factors to obtain the target isomorphism r.",
+   "text": "The private proved extensionComplexIso uses the equivalences given by scalar restriction along the two ring isomorphisms. Mathlib restrictScalarsComp and restrictScalarsComp′ identify the right adjoints of the two composite scalar functors, using the commuting ring-map square. Mathlib conjugateIsoEquiv gives the corresponding isomorphism of left adjoints. Apply it termwise with NatIso.mapHomologicalComplex and the composition factors, then compose with extension of the supplied input chain isomorphism q. This constructs the ordinary chain isomorphism without using any base-derived tensor cohomology model or comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use Mathlib resLEStalkMap and stalkMap_congr_point to identify the conjugated open stalk map with g.stalkMap a. Apply extensionComplexIso, then compose with the tensor-pullback stalk chain isomorphism. The private tensorStalkIsoAt helper performs equal-point transport and termwise-composition factors. Apply derived homology and the exact stalk/restriction homology factors to obtain the target isomorphism r.",
    "uses": [
-    "lem-pc-base-derived-tensor-ordinary-ring-comparison",
     "lem-weil-pbc-module-stalk-pullback",
     "lem-pc-stalk-kflat-tensor-homology"
    ],
    "elementary": false
   },
   {
-   "text": "Let c be the stalk of degree-n homology of the invertible pinned sheaf counit, and e degree-n homology of the invertible scalar counit. Define l = c followed by inverse r followed by inverse e. Then l.hom followed by e.hom followed by r.hom equals c.hom by the inverse identities and associativity. This proves the requested existential equation without requiring a chosen natural derived comparison.",
+   "text": "Let c be the stalk of degree-n homology of the invertible pinned sheaf counit, and e degree-n homology of the invertible scalar counit. Define l = c followed by inverse r followed by inverse e. Then l.hom followed by e.hom followed by r.hom equals c.hom by inverse identities and associativity. This is the existing cancellation proof; no chosen natural derived comparison is required.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-base-derived-tensor-ordinary-ring-comparison",
   "lem-pc-bounded-above-flat-kflat",
-  "lem-pc-kflat-scalar-extension-counit",
   "lem-pc-kflat-stalk-criterion",
   "lem-pc-stalk-kflat-tensor-homology",
+  "lem-sc-kflat-scalar-extension-derived-iso",
   "lem-weil-pbc-module-stalk-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "E1",
-  "date": "2026-10-14",
+  "group": "H3",
+  "date": "2026-10-20",
   "document": "Stacks Project, cohomology.tex and perfect.tex; existing Lean proofs; Mathlib",
-  "place": "Tags 06YB, 06YD, 0D5S, 0DJ7 and 0098; counit invertibility and ordinary stalk transport, followed by categorical cancellation"
+  "place": "Tags 06YB, 06YD, 0D5S, 0DJ7 and 0098; repair after upstream sync 5f7b33eac: ordinary coefficient transport by adjoint uniqueness, scalar counit by the lower K-flat API, followed by the existing categorical cancellation"
  },
  "mathlib_searches": [
   {
@@ -126,12 +129,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261014T030643-L-342573",
+  "landing": "20261020T150642-L-2552112",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
