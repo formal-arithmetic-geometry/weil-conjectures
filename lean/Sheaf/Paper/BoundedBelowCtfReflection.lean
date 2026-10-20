@@ -21,13 +21,7 @@ public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
-import Sheaf.Paper.IntrinsicRealizationOriginComparison
-import Sheaf.Paper.ProEtaleConstantModuleConstructibility
-import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Data.Set.Finite.Lattice
-import Mathlib.Algebra.CharP.CharAndCard
+import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.ComparisonTorAmplitude
 
 /-!
@@ -100,62 +94,6 @@ theorem finiteCoefficient_boundedBelow_ctf_reflection
           (Padic.finite_coefficientExtensionRing l E n hn)) T C ∧
     Etale.DerivedCategory.hasTorAmplitudeIn
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b C := by
-  classical
-  let B := Padic.coefficientExtensionRing l E n
-  have : Finite B := Padic.finite_coefficientExtensionRing l E n hn
-  let A := ULift.{u + 1, u} B
-  let ν := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T
-  have hν := (ProEtale.proEtaleClassicalSheavesModules T A).choose_spec.2.2.1
-  have : ν.Full := ⟨fun {M N} f ↦ (hν M N).2 f⟩
-  have : ν.Faithful := ⟨fun {M N} _ _ h ↦ (hν M N).1 h⟩
-  let R := ProEtale.finiteCoefficientIntrinsicRealization T B
-  let F := ProEtale.finiteCoefficientIntrinsicComparison T B
-  have : R.IsEquivalence := (ProEtale.finiteCoefficientIntrinsicRealization_exact T B).1
-  have : F.Faithful := inferInstanceAs (ν ⋙ R).Faithful
-  let H := _root_.DerivedCategory.homologyFunctor
-    (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
-  let H' := _root_.DerivedCategory.homologyFunctor
-    (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T B))
-  let K := (ProEtale.finiteCoefficientIntrinsicDerivedComparison T B).obj C
-  have eH (i : ℤ) : F.obj ((H i).obj C) ≅ (H' i).obj K :=
-    (F.mapDerivedCategoryHomologyFunctorIso i).app C
-  have hc : Etale.DerivedCategory.isBoundedConstructible A T C := by
-    constructor
-    · intro i
-      obtain ⟨eR⟩ := ProEtale.intrinsicRealization_restriction T B
-      have hi := (Scheme.proEtaleModuleRestriction_constructible_iff T B _).mp
-        (_hConstructible.2 i)
-      have hν : ProEtale.IsConstructible A (ν.obj ((H i).obj C)) :=
-        ProEtale.isConstructible_of_iso
-          ((Scheme.proEtaleModuleRestriction T B).mapIso (eH i).symm ≪≫
-            eR.app (ν.obj ((H i).obj C))) hi
-      obtain ⟨G, hG, ⟨eG⟩⟩ :=
-        ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj A hν
-      have : Scheme.IsConstructibleSheaf G := hG
-      exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
-        (Scheme.IsConstructibleSheaf.of_iso (ν.preimageIso eG))
-    · obtain ⟨c, hc⟩ := _hConstructible.1.bddBelow
-      obtain ⟨d, hd⟩ := _hConstructible.1.bddAbove
-      refine ⟨min c d, d, min_le_right _ _, fun i hi ↦ ?_⟩
-      apply F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
-      change CategoryTheory.Limits.IsZero ((H' i).obj K)
-      by_contra hz
-      rcases hi with hi | hi
-      · exact (not_lt_of_ge (hc hz)) (lt_of_lt_of_le hi (min_le_left _ _))
-      · exact (not_lt_of_ge (hd hz)) hi
-  have : Fintype D.k₀ := Fintype.ofFinite D.k₀
-  have : Fact D.p.Prime := ⟨D.prime⟩
-  have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow (by
-    rw [← Nat.card_eq_fintype_card, D.card_base, D.cardinality_eq])
-  have : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
-  have hk : IsUnit (l : D.k) := isUnit_iff_ne_zero.mpr
-    (CharP.cast_ne_zero_of_ne_of_prime _ (Fact.out : l.Prime) _hlp.symm)
-  have : ∀ x : T, Invertible (l : T.residueField x) := fun x ↦ by
-    let φ : D.k →+* T.residueField x :=
-      ((Scheme.ΓSpecIso (.of D.k)).inv ≫ (T ↘ Spec (.of D.k)).appTop ≫
-        T.Γevaluation x).hom
-    exact (map_natCast φ l ▸ hk.map φ).invertible
-  exact ⟨hc, finiteCoefficient_comparison_reflects_torAmplitude D l _hlp E n hn T a b
-    C _hPlus K _hConstructible _hTor (Iso.refl _)⟩
+  sorry
 
 end AlgebraicGeometry

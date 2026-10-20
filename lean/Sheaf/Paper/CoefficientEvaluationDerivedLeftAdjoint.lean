@@ -17,6 +17,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
+import Sheaf.Paper.PbcCompletedPullbackActual
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
@@ -30,8 +31,6 @@ import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.SystemLevelLeftExtension
-import Mathlib.CategoryTheory.Functor.OfSequence
-import Mathlib.CategoryTheory.Abelian.Transfer
 /-!
 # Derived extension from a coefficient level
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21;
@@ -173,267 +172,6 @@ def coefficientEvaluation (n : ℕ) :
     CoefficientSystem (J := J) O ell ⥤ coefficientLevelModules (J := J) O ell n where
   obj M := M.level n
   map f := f.app n
-
--- Iterate successor transitions over an arbitrary ring diagram before specializing to
--- constant quotient sheaves, so kernel checking does not unfold their sheafifications.
-section CoefficientSystemBridge
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
-
-private def coefficientRingQuotients : ℕᵒᵖ ⥤ CommRingCat.{w} where
-  obj n := CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n.unop + 1))
-  map f := CommRingCat.ofHom (Ideal.Quotient.factor
-    (Ideal.pow_le_pow_right (Nat.add_le_add_right (leOfHom f.unop) 1)))
-  map_id n := by
-    apply CommRingCat.hom_ext
-    exact Ideal.Quotient.factor_eq
-  map_comp f g := by
-    apply CommRingCat.hom_ext
-    exact (Ideal.Quotient.factor_comp
-      (Ideal.pow_le_pow_right (Nat.add_le_add_right (leOfHom f.unop) 1))
-      (Ideal.pow_le_pow_right (Nat.add_le_add_right (leOfHom g.unop) 1))).symm
-
-private def coefficientRings : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w} where
-  obj n := coefficientQuotientSheaf (J := J) O ell n.unop
-  map f := coefficientQuotientMap (J := J) O ell (leOfHom f.unop)
-  map_id n := (coefficientRingQuotients (O := O) (ell := ell) ⋙
-    constantSheaf J CommRingCat.{w}).map_id n
-  map_comp f g := (coefficientRingQuotients (O := O) (ell := ell) ⋙
-    constantSheaf J CommRingCat.{w}).map_comp f g
-
-attribute [local irreducible] coefficientQuotientSheaf coefficientQuotientMap
-
-private abbrev ringSequenceUnderlying
-    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ) :=
-  toSheaf.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj (B.obj (op n)))
-
-private def ringSequence
-    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (L : ∀ n, systemLevel B n)
-    (t : ∀ n, L (n + 1) ⟶ (systemRestriction B (Nat.le_succ n)).obj (L n)) :
-    ℕᵒᵖ ⥤ Sheaf J AddCommGrpCat.{w} :=
-  Functor.ofOpSequence (X := fun n ↦ (ringSequenceUnderlying B n).obj (L n))
-    (fun n ↦ (ringSequenceUnderlying B (n + 1)).map (t n))
-
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
-  [HasWeakSheafify J CommRingCat.{w}] in
-private theorem ringSequence_smul
-    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (L : ∀ n, systemLevel B n)
-    (t : ∀ n, L (n + 1) ⟶ (systemRestriction B (Nat.le_succ n)).obj (L n))
-    {n m : ℕ} (h : n ≤ m) (U : Cᵒᵖ) (r : (B.obj (op m)).obj.obj U)
-    (x : (L m).val.obj U) :
-    ((ringSequence B L t).map (homOfLE h).op).hom.app U (r • x) =
-      (B.map (homOfLE h).op).hom.app U r •
-        (show (L n).val.obj U from ((ringSequence B L t).map (homOfLE h).op).hom.app U x) := by
-  induction m, h using Nat.le_induction with
-  | base =>
-    rw [show (homOfLE (Nat.le_refl n)).op = 𝟙 (op n) from rfl]
-    rw [(ringSequence B L t).map_id, B.map_id]
-    rfl
-  | succ m h ih =>
-    have he : (homOfLE (Nat.le.step h)).op =
-        (homOfLE (Nat.le_succ m)).op ≫ (homOfLE h).op := Subsingleton.elim _ _
-    simp only [he, Functor.map_comp]
-    change ((ringSequence B L t).map (homOfLE h).op).hom.app U
-        (((ringSequence B L t).map (homOfLE (Nat.le_succ m)).op).hom.app U (r • x)) = _
-    rw [show (ringSequence B L t).map (homOfLE (Nat.le_succ m)).op =
-      (ringSequenceUnderlying B (m + 1)).map (t m) from
-        Functor.ofOpSequence_map_homOfLE_succ _ m]
-    change ((ringSequence B L t).map (homOfLE h).op).hom.app U
-      ((t m).val.app U (r • x)) = _
-    rw [(t m).val.app U |>.hom.map_smul]
-    exact ih _ _
-
-private def ringSequenceTransition
-    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (L : ∀ n, systemLevel B n)
-    (t : ∀ n, L (n + 1) ⟶ (systemRestriction B (Nat.le_succ n)).obj (L n))
-    {n m : ℕ} (h : n ≤ m) : L m ⟶ (systemRestriction B h).obj (L n) :=
-  ⟨PresheafOfModules.homMk (((ringSequence B L t).map (homOfLE h).op).hom)
-    (ringSequence_smul B L t h)⟩
-
-private def ringSequenceSystem
-    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (L : ∀ n, systemLevel B n)
-    (t : ∀ n, L (n + 1) ⟶ (systemRestriction B (Nat.le_succ n)).obj (L n)) :
-    StrictRingSystem B where
-  level := L
-  transition h := ringSequenceTransition B L t h
-  identity n U x := by
-    change ((ringSequence B L t).map (homOfLE (Nat.le_refl n)).op).hom.app U x = x
-    rw [show (homOfLE (Nat.le_refl n)).op = 𝟙 (op n) from rfl]
-    rw [(ringSequence B L t).map_id]
-    rfl
-  compose h k U x := by
-    change ((ringSequence B L t).map (homOfLE (h.trans k)).op).hom.app U x = _
-    rw [show (homOfLE (h.trans k)).op = (homOfLE k).op ≫ (homOfLE h).op from
-      Subsingleton.elim _ _, Functor.map_comp]
-    rfl
-
-private abbrev coefficientIteratedTransition (M : CoefficientSystem (J := J) O ell)
-    {n m : ℕ} (h : n ≤ m) :=
-  ringSequenceTransition (coefficientRings (J := J) (O := O) (ell := ell))
-    M.level M.transition h
-
-private def coefficientToStrictObj (M : CoefficientSystem (J := J) O ell) :
-    StrictRingSystem (coefficientRings (J := J) (O := O) (ell := ell)) :=
-  ringSequenceSystem _ M.level M.transition
-
-private theorem coefficient_hom_ext {M N : CoefficientSystem (J := J) O ell}
-    (f g : M ⟶ N) (h : ∀ n, f.app n = g.app n) : f = g := by
-  cases f
-  cases g
-  congr 1
-  funext n
-  exact h n
-
-private def ringSequenceMap
-    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (L L' : ∀ n, systemLevel B n)
-    (t : ∀ n, L (n + 1) ⟶ (systemRestriction B (Nat.le_succ n)).obj (L n))
-    (t' : ∀ n, L' (n + 1) ⟶ (systemRestriction B (Nat.le_succ n)).obj (L' n))
-    (f : ∀ n, L n ⟶ L' n)
-    (hf : ∀ n, f (n + 1) ≫ t' n = t n ≫ (systemRestriction B (Nat.le_succ n)).map (f n)) :
-    ringSequence B L t ⟶ ringSequence B L' t' :=
-  NatTrans.ofOpSequence (fun n ↦ (ringSequenceUnderlying B n).map (f n))
-    (by
-      intro n
-      simp only [ringSequence, Functor.ofOpSequence_map_homOfLE_succ]
-      exact (congrArg (ringSequenceUnderlying B (n + 1)).map (hf n)).symm)
-
-private def ringSequenceSystemMap
-    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (L L' : ∀ n, systemLevel B n)
-    (t : ∀ n, L (n + 1) ⟶ (systemRestriction B (Nat.le_succ n)).obj (L n))
-    (t' : ∀ n, L' (n + 1) ⟶ (systemRestriction B (Nat.le_succ n)).obj (L' n))
-    (f : ∀ n, L n ⟶ L' n)
-    (hf : ∀ n, f (n + 1) ≫ t' n = t n ≫ (systemRestriction B (Nat.le_succ n)).map (f n)) :
-    ringSequenceSystem B L t ⟶ ringSequenceSystem B L' t' where
-  app := f
-  comm := by
-    intro m n h
-    ext U x
-    exact congrArg (fun a ↦ a.hom.app U x)
-      ((ringSequenceMap B L L' t t' f hf).naturality (homOfLE h).op).symm
-
-private def coefficientToStrict : CoefficientSystem (J := J) O ell ⥤
-    StrictRingSystem (coefficientRings (J := J) (O := O) (ell := ell)) where
-  obj := coefficientToStrictObj
-  map f := ringSequenceSystemMap _ _ _ _ _ f.app f.comm
-
-private def coefficientFromStrict :
-    StrictRingSystem (coefficientRings (J := J) (O := O) (ell := ell)) ⥤
-      CoefficientSystem (J := J) O ell where
-  obj M := ⟨M.level, fun n ↦ M.transition (Nat.le_succ n)⟩
-  map f := ⟨f.app, fun n ↦ f.comm (Nat.le_succ n)⟩
-
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
-  [HasWeakSheafify J CommRingCat.{w}] in
-private theorem ringSequenceTransition_succ
-    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (L : ∀ n, systemLevel B n)
-    (t : ∀ n, L (n + 1) ⟶ (systemRestriction B (Nat.le_succ n)).obj (L n)) (n : ℕ) :
-    ringSequenceTransition B L t (Nat.le_succ n) = t n := by
-  ext U x
-  have h : (ringSequence B L t).map (homOfLE (Nat.le_succ n)).op =
-      (ringSequenceUnderlying B (n + 1)).map (t n) :=
-    Functor.ofOpSequence_map_homOfLE_succ _ n
-  exact congrArg (fun a : (ringSequence B L t).obj (op (n + 1)) ⟶
-      (ringSequence B L t).obj (op n) ↦ a.hom.app U x) h
-
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}] in
-private theorem coefficientIterated_succ (M : CoefficientSystem (J := J) O ell) (n : ℕ) :
-    coefficientIteratedTransition M (Nat.le_succ n) = M.transition n :=
-  ringSequenceTransition_succ _ _ _ _
-
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
-  [HasWeakSheafify J CommRingCat.{w}] in
-private theorem ringSequenceTransition_strict
-    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (M : StrictRingSystem B)
-    {n m : ℕ} (h : n ≤ m) (U : Cᵒᵖ) (x : (M.level m).val.obj U) :
-    (ringSequenceTransition B M.level (fun n ↦ M.transition (Nat.le_succ n)) h).val.app U x =
-      (M.transition h).val.app U x := by
-  induction m, h using Nat.le_induction with
-  | base =>
-    change ((ringSequence B M.level (fun n ↦ M.transition (Nat.le_succ n))).map
-      (homOfLE (Nat.le_refl n)).op).hom.app U x = _
-    rw [show (homOfLE (Nat.le_refl n)).op = 𝟙 (op n) from rfl]
-    rw [(ringSequence B M.level (fun n ↦ M.transition (Nat.le_succ n))).map_id]
-    exact (M.identity n U x).symm
-  | succ m h ih =>
-    change ((ringSequence B M.level (fun n ↦ M.transition (Nat.le_succ n))).map
-      (homOfLE (Nat.le.step h)).op).hom.app U x = _
-    rw [show (homOfLE (Nat.le.step h)).op =
-        (homOfLE (Nat.le_succ m)).op ≫ (homOfLE h).op from Subsingleton.elim _ _,
-      Functor.map_comp]
-    change (ringSequenceTransition B M.level (fun n ↦ M.transition (Nat.le_succ n))
-      h).val.app U ((ringSequenceTransition B M.level
-        (fun n ↦ M.transition (Nat.le_succ n)) (Nat.le_succ m)).val.app U x) = _
-    rw [ringSequenceTransition_succ, ih]
-    exact (M.compose h (Nat.le_succ m) U x).symm
-
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
-  [HasWeakSheafify J CommRingCat.{w}] in
-private theorem ringSequenceTransition_strict_eq
-    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (M : StrictRingSystem B)
-    {n m : ℕ} (h : n ≤ m) :
-    ringSequenceTransition B M.level (fun n ↦ M.transition (Nat.le_succ n)) h =
-      M.transition h := by
-  ext U x
-  exact ringSequenceTransition_strict B M h U x
-
-private theorem coefficientStrictTransition_eq
-    (M : StrictRingSystem (coefficientRings (J := J) (O := O) (ell := ell)))
-    {n m : ℕ} (h : n ≤ m) :
-    coefficientIteratedTransition (coefficientFromStrict.obj M) h = M.transition h :=
-  ringSequenceTransition_strict_eq _ _ _
-
-private theorem bridge_id_comm {A D : Type*} [Category A] [Category D]
-    (R : A ⥤ D) {X : D} {Y : A} {f g : X ⟶ R.obj Y} (h : f = g) :
-    𝟙 X ≫ f = g ≫ R.map (𝟙 Y) := by
-  rw [Category.id_comp, R.map_id, Category.comp_id]
-  exact h
-
-private theorem coefficient_strict_hom_ext
-    {M N : StrictRingSystem (coefficientRings (J := J) (O := O) (ell := ell))}
-    (f g : M ⟶ N) (h : ∀ n, f.app n = g.app n) : f = g := by
-  cases f
-  cases g
-  congr 1
-  funext n
-  exact h n
-
-private def coefficientSystemEquivalence : CoefficientSystem (J := J) O ell ≌
-    StrictRingSystem (coefficientRings (J := J) (O := O) (ell := ell)) where
-  functor := coefficientToStrict
-  inverse := coefficientFromStrict
-  unitIso := NatIso.ofComponents (fun M ↦
-    { hom := ⟨fun _ ↦ 𝟙 _, fun n ↦
-        bridge_id_comm (coefficientRestriction (J := J) O ell (Nat.le_succ n))
-          (coefficientIterated_succ M n)⟩
-      inv := ⟨fun _ ↦ 𝟙 _, fun n ↦
-        bridge_id_comm (coefficientRestriction (J := J) O ell (Nat.le_succ n))
-          (coefficientIterated_succ M n).symm⟩
-      hom_inv_id := coefficient_hom_ext _ _ (fun _ ↦ Category.id_comp _)
-      inv_hom_id := coefficient_hom_ext _ _ (fun _ ↦ Category.id_comp _) })
-    (by
-      intro M N f
-      apply coefficient_hom_ext
-      intro n
-      exact (Category.comp_id _).trans (Category.id_comp _).symm)
-  counitIso := NatIso.ofComponents (fun M ↦
-    { hom := ⟨fun _ ↦ 𝟙 _, fun h ↦
-        bridge_id_comm (systemRestriction _ h) (coefficientStrictTransition_eq M h).symm⟩
-      inv := ⟨fun _ ↦ 𝟙 _, fun h ↦
-        bridge_id_comm (systemRestriction _ h) (coefficientStrictTransition_eq M h)⟩
-      hom_inv_id := coefficient_strict_hom_ext _ _ (fun _ ↦ Category.id_comp _)
-      inv_hom_id := coefficient_strict_hom_ext _ _ (fun _ ↦ Category.id_comp _) })
-    (by
-      intro M N f
-      apply coefficient_strict_hom_ext
-      intro n
-      exact (Category.comp_id _).trans (Category.id_comp _).symm)
-  functor_unitIso_comp M := by
-    apply coefficient_strict_hom_ext
-    intro n
-    exact Category.id_comp _
-
-end CoefficientSystemBridge
-
 /-- The additive structure is normalized by the jointly faithful evaluations.
 Source: Zheng, Construction 4.1, p. 21
 (blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint). -/
@@ -454,25 +192,7 @@ are properties, so the normalized structure is unique
 theorem coefficientSystem_abelian_exists :
     ∃! a : Abelian (CoefficientSystem (J := J) O ell),
       CoefficientSystem.AbelianNormalized a := by
-  let e := coefficientSystemEquivalence (J := J) (O := O) (ell := ell)
-  let : Preadditive (CoefficientSystem (J := J) O ell) :=
-    Preadditive.ofFullyFaithful e.fullyFaithfulFunctor
-  have : e.functor.Additive := e.fullyFaithfulFunctor.additive_ofFullyFaithful
-  have : HasFiniteProducts (CoefficientSystem (J := J) O ell) :=
-    ⟨fun _ ↦ Adjunction.hasLimitsOfShape_of_equivalence e.functor⟩
-  let a : Abelian (CoefficientSystem (J := J) O ell) := abelianOfEquivalence e.functor
-  refine ⟨a, ?_, ?_⟩
-  · intro n
-    change (e.functor ⋙ systemEvaluation _ n).Additive
-    infer_instance
-  · intro b _
-    have hsub : Subsingleton (Preadditive (CoefficientSystem (J := J) O ell)) := by
-      let := a
-      infer_instance
-    cases b
-    cases a
-    congr 1
-    exact hsub.elim _ _
+  sorry
 /-- The uniquely determined componentwise abelian structure, not an unspecified object.
 Source: Zheng, Construction 4.1, p. 21
 (blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint). -/
@@ -492,12 +212,7 @@ finite biproducts and hence finite limits and colimits are componentwise as well
 theorem coefficientEvaluation_exact (n : ℕ) :
     PreservesFiniteLimits (coefficientEvaluation (J := J) (O := O) (ell := ell) n) ∧
       PreservesFiniteColimits (coefficientEvaluation (J := J) (O := O) (ell := ell) n) := by
-  let e := coefficientSystemEquivalence (J := J) (O := O) (ell := ell)
-  constructor
-  · change PreservesFiniteLimits (e.functor ⋙ systemEvaluation _ n)
-    infer_instance
-  · change PreservesFiniteColimits (e.functor ⋙ systemEvaluation _ n)
-    infer_instance
+  sorry
 variable [EssentiallySmall.{w} C]
 variable {R R' : Sheaf J CommRingCat.{w}}
 

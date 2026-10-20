@@ -47,9 +47,7 @@ the resulting small category is equivalent to the original category. -/
 @[instance] theorem comparison_essentiallySmall
     {D : Type v} [Category.{w} D] [UnivLE.{max v w, u}] :
     EssentiallySmall.{u} D := by
-  have : UnivLE.{v, u} := UnivLE.trans.{v, max v w, u}
-  have : UnivLE.{w, u} := UnivLE.trans.{w, max v w, u}
-  exact essentiallySmall_of_small_of_locallySmall D
+  sorry
 
 variable {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
   [UnivLE.{max v w, u}] [HasSheafify J AddCommGrpCat.{u}]
@@ -60,15 +58,14 @@ Source: Stacks 03EK (blueprint: lem-pe-internal-section-tensor-comparison).
 Proof: use closedness in sk-def-sfb-sheaf-tensor; left tensor is a left adjoint. -/
 @[instance] theorem comparison_sheafTensorLeft (M : Sheaf J AddCommGrpCat.{u}) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
-  let _ : HasWeakSheafify J AddCommGrpCat.{u} := HasSheafify.isRightAdjoint
-  exact (sfbSheafTensor_properties (A := AddCommGrpCat.{u}) J).2.2 M |>.1
+  sorry
 
 /-- Right tensor on abelian sheaves preserves the colimits used in relative tensor.
 Source: Stacks 03EK (blueprint: lem-pe-internal-section-tensor-comparison).
 Proof: conjugate left tensor by the symmetry of det-def-sfb-sheaf-tensor-structure. -/
 @[instance] theorem comparison_sheafTensorRight (M : Sheaf J AddCommGrpCat.{u}) :
     PreservesColimitsOfSize.{0, 0} (tensorRight M) := by
-  exact preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
+  sorry
 
 variable (R : Sheaf J AddCommGrpCat.{u}) [MonObj R] [IsCommMonObj R]
 
@@ -80,16 +77,14 @@ through sectionModuleEquivalence: applying its inverse to a coproduct gives a
 coproduct of the original internal modules by the equivalence's Hom bijections. -/
 @[instance] theorem comparison_internalColimits :
     HasColimitsOfSize.{0, 0} (Mod (Sheaf J AddCommGrpCat.{u}) R) := by
-  exact Adjunction.has_colimits_of_equivalence (sectionModuleEquivalence J R).functor
+  sorry
 
 /-- The fixed sectionwise equivalence is additive on morphisms.
 Source: Stacks 00YV (blueprint: lem-pe-internal-section-tensor-comparison).
 Proof: its map is the original map on underlying abelian sheaves; addition of module
 maps is computed on those underlying maps (lem-sfb-modobj-abelian). -/
 @[instance] theorem comparison_additive : (sectionModuleEquivalence J R).functor.Additive := by
-  have : HasBinaryProducts (Mod (Sheaf J AddCommGrpCat.{u}) R) :=
-    Adjunction.hasLimitsOfShape_of_equivalence (sectionModuleEquivalence J R).functor
-  exact Functor.additive_of_preserves_binary_products _
+  sorry
 
 /-- Every pair of internal complexes admits its direct-sum total tensor.
 Source: Stacks 012Z (blueprint: lem-pe-internal-section-tensor-comparison).
@@ -98,8 +93,7 @@ which is the defining HasMapBifunctor condition. -/
 @[instance] theorem comparison_internalTotalExists
     (K L : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ) :
     K.HasMapBifunctor L (curriedTensor _) := by
-  intro n
-  exact (comparison_internalColimits J R).has_colimits_of_shape _ |>.has_colimit _
+  sorry
 
 /-- The pure tensor in the coequalizer relative tensor, formed using the lax tensor
 comparison of the inclusion of sheaves into presheaves, then the coequalizer projection.

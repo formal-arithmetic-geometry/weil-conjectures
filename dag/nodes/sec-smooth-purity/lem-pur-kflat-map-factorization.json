@@ -1,244 +1,234 @@
 {
- "id": "lem-pur-kflat-map-factorization",
- "kind": "statement",
- "title": "Factor a chain map with K-flat source through a K-flat target",
- "statement": "Let $\\mathcal C$ be a site small relative to the module universe [def-weil-size-convention] and $R$ a sheaf of commutative rings. Use sheaves of $R$-modules [def-weil-sheaf-of-modules-category], cochain complexes [def-pc-cochain-complex-modules], K-flat complexes [def-pc-kflat-complex], and quasi-isomorphisms [def-pc-quasi-iso-modules]. For every chain map $t:D^\\bullet\\to I^\\bullet$ with $D^\\bullet$ K-flat, there are a K-flat complex $N^\\bullet$ and chain maps $u:D^\\bullet\\to N^\\bullet$ and $c:N^\\bullet\\to I^\\bullet$ such that $c$ is a quasi-isomorphism and $t$ is chain homotopic to $c\\circ u$. Chain homotopic means that there are maps $h^i:D^i\\to I^{i-1}$ with $t^i-(c\\circ u)^i=d_I^{i-1}h^i+h^{i+1}d_D^i$ for every $i$. If every term of $D^\\bullet$ is flat [def-pc-flat-sheaf-modules], then $N^\\bullet$ can also be chosen with flat terms.",
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0G7D, lemma-factor-through-K-flat, including its final flat-terms assertion."
- },
- "stmt_deps": [
-  "def-weil-size-convention",
-  "def-weil-sheaf-of-modules-category",
-  "def-pc-cochain-complex-modules",
-  "def-pc-kflat-complex",
-  "def-pc-quasi-iso-modules",
-  "def-pc-flat-sheaf-modules"
- ],
- "proof": [
-  {
-   "text": "The category $\\mathcal A=\\operatorname{Mod}(R)$ is abelian by [def-weil-sheaf-of-modules-category], since the site is small in the specified universe. In its homotopy category, [lem-pur-homotopy-category-triangulated] gives the distinguished cone triangle $D^\\bullet\\xrightarrow{t}I^\\bullet\\xrightarrow{j}C^\\bullet\\xrightarrow{\\delta}D^\\bullet[1]$. Use the actual cone complex and chain maps, with $C=\\operatorname{Cone}(t)$ and $\\delta=-p$ in the convention of [def-weil-abstract-derived-category].",
-   "uses": [
+  "id": "lem-pur-kflat-map-factorization",
+  "kind": "statement",
+  "title": "Factor a chain map with K-flat source through a K-flat target",
+  "statement": "Let $\\mathcal C$ be a site small relative to the module universe [def-weil-size-convention] and $R$ a sheaf of commutative rings. Use sheaves of $R$-modules [def-weil-sheaf-of-modules-category], cochain complexes [def-pc-cochain-complex-modules], K-flat complexes [def-pc-kflat-complex], and quasi-isomorphisms [def-pc-quasi-iso-modules]. For every chain map $t:D^\\bullet\\to I^\\bullet$ with $D^\\bullet$ K-flat, there are a K-flat complex $N^\\bullet$ and chain maps $u:D^\\bullet\\to N^\\bullet$ and $c:N^\\bullet\\to I^\\bullet$ such that $c$ is a quasi-isomorphism and $t$ is chain homotopic to $c\\circ u$. Chain homotopic means that there are maps $h^i:D^i\\to I^{i-1}$ with $t^i-(c\\circ u)^i=d_I^{i-1}h^i+h^{i+1}d_D^i$ for every $i$. If every term of $D^\\bullet$ is flat [def-pc-flat-sheaf-modules], then $N^\\bullet$ can also be chosen with flat terms.",
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7D, lemma-factor-through-K-flat, including its final flat-terms assertion."
+  },
+  "stmt_deps": [
+    "def-weil-size-convention",
     "def-weil-sheaf-of-modules-category",
-    "lem-pur-homotopy-category-triangulated",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7D, first two sentences of proof; Derived Categories, cone convention and homotopy-category triangulated structure"
-   }
-  },
-  {
-   "text": "Apply [lem-pc-kflat-resolution] to $C^\\bullet$. Obtain a chain map $m:M^\\bullet\\to C^\\bullet$ which is a quasi-isomorphism, where $M^\\bullet$ is K-flat in the acyclic-total-tensor sense and every $M^n$ is flat. Its degreewise surjectivity is not needed. Put $g=\\delta\\circ m:M^\\bullet\\to D^\\bullet[1]$, an actual chain map.",
-   "uses": [
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7D, choice of the resolution of the cone; Tag 06YS, lemma-K-flat-resolution"
-   }
-  },
-  {
-   "text": "We will use shift stability in precisely the notion [def-pc-kflat-complex]. For $s=1,-1$, the total differential in [def-pc-tensor-complex-sheaves] gives a chain isomorphism $\\operatorname{Tot}(F\\otimes K[s])\\cong\\operatorname{Tot}(F\\otimes K)[s]$: reindex the summand $F^p\\otimes K^{q+s}$ and multiply it by $(-1)^{sp}$. The two differential terms agree because this multiplier changes by $(-1)^s$ when $p$ increases by one. The shift differential is $(-1)^s d$ [def-weil-abstract-derived-category], so its kernels and images are those in the shifted degrees. Thus $H^n(T[s])\\cong H^{n+s}(T)$ by [def-pc-acyclic-complex-modules]. For every acyclic $F$, the right side is acyclic when $K$ is K-flat; hence $K[1]$ and $K[-1]$ are K-flat.",
-   "uses": [
+    "def-pc-cochain-complex-modules",
     "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category",
-    "def-pc-acyclic-complex-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7D, K-flatness of the second triangle; Definition 06YN and the total-tensor differential, expanded shift calculation"
-   }
-  },
-  {
-   "text": "Set $W=\\operatorname{Cone}(g)$ and $N=W[-1]$. The cone formula [def-weil-abstract-derived-category] gives $N^n=D^n\\oplus M^n$ and $d_N^n=\\begin{pmatrix}d_D^n&-g^n\\\\0&d_M^n\\end{pmatrix}$, where $g^n:M^n\\to D^{n+1}$. The cone triangle $M\\xrightarrow{g}D[1]\\xrightarrow{i}W\\xrightarrow{-p}M[1]$ is distinguished by [lem-pur-homotopy-category-triangulated]. Rotating backwards twice (TR2 of [def-weil-triangulated-category]) gives the distinguished triangle $D\\xrightarrow{u=-i[-1]}N\\xrightarrow{v=p[-1]}M\\xrightarrow{g}D[1]$. Thus the chosen model has the required outer terms and connecting map, including their signs. By step 3, $D[1]$ is K-flat. For every acyclic $F$, the additive total tensor bifunctor identifies $\\operatorname{Tot}(F\\otimes\\operatorname{Cone}(g))$ with the cone of the tensored map. The two outer tensor complexes are acyclic by K-flatness of $M$ and $D[1]$. The distinguished cone triangle and the triangulated subcategory of acyclic complexes therefore make this tensor cone acyclic. This proves K-flatness of $W$ directly from [def-pc-kflat-complex], using the actual tensor of [def-pc-tensor-complex-sheaves] and acyclicity of [def-pc-acyclic-complex-modules]; step 3 then makes $N=W[-1]$ K-flat. This uses only the ringed-site total-tensor notion of K-flatness.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pur-homotopy-category-triangulated",
-    "def-weil-triangulated-category",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-acyclic-complex-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0G6C, proof: cone on the connecting chain map, rotated backwards twice; Tag 0G7D second triangle and Tag 07A3 cone closure"
-   }
-  },
-  {
-   "text": "Rotate the two triangles to start with $M\\xrightarrow{g}D[1]$ and $C\\xrightarrow{\\delta}D[1]$. The maps $m:M\\to C$ and $1:D[1]\\to D[1]$ make the first square commute, since $g=\\delta m$. TR3 of [def-weil-triangulated-category], in the triangulated homotopy category [lem-pur-homotopy-category-triangulated], completes them to a morphism of the rotated triangles. Undoing the rotations gives a morphism from $(D,N,M,u,v,g)$ to $(D,I,C,t,j,\\delta)$ with vertical maps $(1,c,m)$. Choose a chain map $c:N\\to I$ representing the middle homotopy class; morphisms of this homotopy category are chain maps modulo homotopy. The first square says $[c][u]=[t]$. By the meaning of homotopy, there are maps $h^n:D^n\\to I^{n-1}$ satisfying $t^n-c^n u^n=d_I^{n-1}h^n+h^{n+1}d_D^n$ in every degree.",
-   "uses": [
-    "def-weil-triangulated-category",
-    "lem-pur-homotopy-category-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7D, morphism of distinguished triangles; TR3 applied after rotation"
-   }
-  },
-  {
-   "text": "Apply the exact localization $Q:K(\\mathcal A)\\to D(\\mathcal A)$ of [lem-pur-homotopy-category-triangulated] to this morphism of triangles. Both image triangles are distinguished. By [def-weil-abstract-derived-category], $Q(m)$ is invertible because $m$ is a quasi-isomorphism; $Q(1)$ is the identity. Apply [lem-sf-triangle-morphism-iso] in the triangulated category $D(\\mathcal A)$: its first and third vertical arrows are isomorphisms, hence so is $Q(c)$. For every integer $r$, the functor $H^r:D(\\mathcal A)\\to\\mathcal A$ takes this isomorphism to an isomorphism. The natural identification $H^r\\circ Q\\cong H^r$ in [def-weil-abstract-derived-category] identifies that map with $H^r(c)$ on complexes. Thus every $H^r(c)$ is invertible, which is exactly that $c$ is a quasi-isomorphism. Together with steps 4 and 5 this proves all three assertions without any change of model.",
-   "uses": [
-    "lem-pur-homotopy-category-triangulated",
-    "def-weil-abstract-derived-category",
-    "lem-sf-triangle-morphism-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7D, parenthetical derived-category proof; Derived Categories Tag 014A, lemma-third-isomorphism-triangle"
-   }
-  },
-  {
-   "text": "If every $D^n$ is flat, the already chosen $N^n=D^n\\oplus M^n$ is flat. Indeed [def-pur-sheaf-tensor-product] gives $F\\otimes_R(D^n\\oplus M^n)\\cong(F\\otimes_R D^n)\\oplus(F\\otimes_R M^n)$: the mutually inverse maps are $x\\otimes(d,m)\\mapsto(x\\otimes d,x\\otimes m)$ and the sum of the two maps induced by the summand inclusions, first on presheaf tensors and then on their sheafifications. The two summand functors preserve short exact sequences by [def-pc-flat-sheaf-modules]; their finite direct sum preserves them because kernels and images in a finite direct sum are computed componentwise in an abelian category. This is the exactness defining flatness of $N^n$. The complex $N$ and the chain maps $u,c$ are exactly those of steps 4-6, so their K-flatness, quasi-isomorphism and homotopy equation already proved apply to this flat-term choice.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
+    "def-pc-quasi-iso-modules",
     "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
+  ],
+  "proof": [
+    {
+      "text": "The category $\\mathcal A=\\operatorname{Mod}(R)$ is abelian by [def-weil-sheaf-of-modules-category], since the site is small in the specified universe. In its homotopy category, [lem-pur-homotopy-category-triangulated] gives the distinguished cone triangle $D^\\bullet\\xrightarrow{t}I^\\bullet\\xrightarrow{j}C^\\bullet\\xrightarrow{\\delta}D^\\bullet[1]$. Use the actual cone complex and chain maps, with $C=\\operatorname{Cone}(t)$ and $\\delta=-p$ in the convention of [def-weil-abstract-derived-category].",
+      "uses": [
+        "def-weil-sheaf-of-modules-category",
+        "lem-pur-homotopy-category-triangulated",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0G7D, first two sentences of proof; Derived Categories, cone convention and homotopy-category triangulated structure"
+      }
+    },
+    {
+      "text": "Apply [lem-pc-kflat-resolution] to $C^\\bullet$. Obtain a chain map $m:M^\\bullet\\to C^\\bullet$ which is a quasi-isomorphism, where $M^\\bullet$ is K-flat in the acyclic-total-tensor sense and every $M^n$ is flat. Its degreewise surjectivity is not needed. Put $g=\\delta\\circ m:M^\\bullet\\to D^\\bullet[1]$, an actual chain map.",
+      "uses": [
+        "lem-pc-kflat-resolution"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0G7D, choice of the resolution of the cone; Tag 06YS, lemma-K-flat-resolution"
+      }
+    },
+    {
+      "text": "We will use shift stability in precisely the notion [def-pc-kflat-complex]. For $s=1,-1$, the total differential in [def-pc-tensor-complex-sheaves] gives a chain isomorphism $\\operatorname{Tot}(F\\otimes K[s])\\cong\\operatorname{Tot}(F\\otimes K)[s]$: reindex the summand $F^p\\otimes K^{q+s}$ and multiply it by $(-1)^{sp}$. The two differential terms agree because this multiplier changes by $(-1)^s$ when $p$ increases by one. The shift differential is $(-1)^s d$ [def-weil-abstract-derived-category], so its kernels and images are those in the shifted degrees. Thus $H^n(T[s])\\cong H^{n+s}(T)$ by [def-pc-acyclic-complex-modules]. For every acyclic $F$, the right side is acyclic when $K$ is K-flat; hence $K[1]$ and $K[-1]$ are K-flat.",
+      "uses": [
+        "def-pc-kflat-complex",
+        "def-pc-tensor-complex-sheaves",
+        "def-weil-abstract-derived-category",
+        "def-pc-acyclic-complex-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0G7D, K-flatness of the second triangle; Definition 06YN and the total-tensor differential, expanded shift calculation"
+      }
+    },
+    {
+      "text": "Set $W=\\operatorname{Cone}(g)$ and $N=W[-1]$. The cone formula [def-weil-abstract-derived-category] gives $N^n=D^n\\oplus M^n$ and $d_N^n=\\begin{pmatrix}d_D^n&-g^n\\\\0&d_M^n\\end{pmatrix}$, where $g^n:M^n\\to D^{n+1}$. The cone triangle $M\\xrightarrow{g}D[1]\\xrightarrow{i}W\\xrightarrow{-p}M[1]$ is distinguished by [lem-pur-homotopy-category-triangulated]. Rotating backwards twice (TR2 of [def-weil-triangulated-category]) gives the distinguished triangle $D\\xrightarrow{u=-i[-1]}N\\xrightarrow{v=p[-1]}M\\xrightarrow{g}D[1]$. Thus the chosen model has the required outer terms and connecting map, including their signs. By step 3, $D[1]$ is K-flat. The cone clause of [lem-pc-kflat-cone-direct-sum], applied to $g$ between the K-flat complexes $M$ and $D[1]$, makes $W$ K-flat; step 3 then makes $N=W[-1]$ K-flat. This uses only the ringed-site total-tensor notion of K-flatness.",
+      "uses": [
+        "def-weil-abstract-derived-category",
+        "lem-pur-homotopy-category-triangulated",
+        "def-weil-triangulated-category",
+        "lem-pc-kflat-cone-direct-sum"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 0G6C, proof: cone on the connecting chain map, rotated backwards twice; Tag 0G7D second triangle and Tag 07A3 cone closure"
+      }
+    },
+    {
+      "text": "Rotate the two triangles to start with $M\\xrightarrow{g}D[1]$ and $C\\xrightarrow{\\delta}D[1]$. The maps $m:M\\to C$ and $1:D[1]\\to D[1]$ make the first square commute, since $g=\\delta m$. TR3 of [def-weil-triangulated-category], in the triangulated homotopy category [lem-pur-homotopy-category-triangulated], completes them to a morphism of the rotated triangles. Undoing the rotations gives a morphism from $(D,N,M,u,v,g)$ to $(D,I,C,t,j,\\delta)$ with vertical maps $(1,c,m)$. Choose a chain map $c:N\\to I$ representing the middle homotopy class; morphisms of this homotopy category are chain maps modulo homotopy. The first square says $[c][u]=[t]$. By the meaning of homotopy, there are maps $h^n:D^n\\to I^{n-1}$ satisfying $t^n-c^n u^n=d_I^{n-1}h^n+h^{n+1}d_D^n$ in every degree.",
+      "uses": [
+        "def-weil-triangulated-category",
+        "lem-pur-homotopy-category-triangulated"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0G7D, morphism of distinguished triangles; TR3 applied after rotation"
+      }
+    },
+    {
+      "text": "Apply the exact localization $Q:K(\\mathcal A)\\to D(\\mathcal A)$ of [lem-pur-homotopy-category-triangulated] to this morphism of triangles. Both image triangles are distinguished. By [def-weil-abstract-derived-category], $Q(m)$ is invertible because $m$ is a quasi-isomorphism; $Q(1)$ is the identity. Apply [lem-sf-triangle-morphism-iso] in the triangulated category $D(\\mathcal A)$: its first and third vertical arrows are isomorphisms, hence so is $Q(c)$. For every integer $r$, the functor $H^r:D(\\mathcal A)\\to\\mathcal A$ takes this isomorphism to an isomorphism. The natural identification $H^r\\circ Q\\cong H^r$ in [def-weil-abstract-derived-category] identifies that map with $H^r(c)$ on complexes. Thus every $H^r(c)$ is invertible, which is exactly that $c$ is a quasi-isomorphism. Together with steps 4 and 5 this proves all three assertions without any change of model.",
+      "uses": [
+        "lem-pur-homotopy-category-triangulated",
+        "def-weil-abstract-derived-category",
+        "lem-sf-triangle-morphism-iso"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0G7D, parenthetical derived-category proof; Derived Categories Tag 014A, lemma-third-isomorphism-triangle"
+      }
+    },
+    {
+      "text": "If every $D^n$ is flat, the already chosen $N^n=D^n\\oplus M^n$ is flat. Indeed [def-pur-sheaf-tensor-product] gives $F\\otimes_R(D^n\\oplus M^n)\\cong(F\\otimes_R D^n)\\oplus(F\\otimes_R M^n)$: the mutually inverse maps are $x\\otimes(d,m)\\mapsto(x\\otimes d,x\\otimes m)$ and the sum of the two maps induced by the summand inclusions, first on presheaf tensors and then on their sheafifications. The two summand functors preserve short exact sequences by [def-pc-flat-sheaf-modules]; their finite direct sum preserves them because kernels and images in a finite direct sum are computed componentwise in an abelian category. This is the exactness defining flatness of $N^n$. The complex $N$ and the chain maps $u,c$ are exactly those of steps 4-6, so their K-flatness, quasi-isomorphism and homotopy equation already proved apply to this flat-term choice.",
+      "uses": [
+        "def-pur-sheaf-tensor-product",
+        "def-pc-flat-sheaf-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0G7D, final assertion; explicit cone model as in Derived Categories Tag 0G6C and the definition of flatness"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-pc-acyclic-complex-modules",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-triangulated-category",
+    "lem-pc-kflat-cone-direct-sum",
+    "lem-pc-kflat-resolution",
+    "lem-pur-homotopy-category-triangulated",
+    "lem-sf-triangle-morphism-iso"
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7D, final assertion; explicit cone model as in Derived Categories Tag 0G6C and the definition of flatness"
-   }
-  }
- ],
- "proof_deps": [
-  "def-pc-acyclic-complex-modules",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-abstract-derived-category",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-triangulated-category",
-  "lem-pc-kflat-resolution",
-  "lem-pur-homotopy-category-triangulated",
-  "lem-sf-triangle-morphism-iso"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0G7D, lemma-factor-through-K-flat; use the explicit shifted-cone model in the proof of Derived Categories Tag 0G6C and the Tag 014A derived-category argument"
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "factor.*K.?flat|K.?flat.*factor|IsKFlat.*homotop|homotop.*IsKFlat",
-   "results": "{\"t\": \"2026-10-17T16:54:55Z\", \"tool\": \"grep\", \"query\": \"factor.*K.?flat|K.?flat.*factor|IsKFlat.*homotop|homotop.*IsKFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-18",
-   "verdict": "no match"
+    "place": "Tag 0G7D, lemma-factor-through-K-flat; use the explicit shifted-cone model in the proof of Derived Categories Tag 0G6C and the Tag 014A derived-category argument"
   },
-  {
-   "tool": "leansearch",
-   "query": "A map of complexes with K-flat source factors up to homotopy through a quasi-isomorphism from a K-flat target",
-   "results": "{\"t\": \"2026-10-17T16:54:55Z\", \"tool\": \"leansearch\", \"query\": \"A map of complexes with K-flat source factors up to homotopy through a quasi-isomorphism from a K-flat target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"quasiIso_comp\", \"DerivedCategory.Q_map_eq_of_homotopy\", \"quasiIsoAt_comp\", \"HomotopyCategory.quasiIso\", \"isoOfQuasiIsoAt_inv_hom_id_assoc\", \"HomotopyCategory.mem_quasiIso_iff\"], \"digest\": \"f2d11ff4a088ddfd\"}",
-   "date": "2026-10-18",
-   "verdict": "no match"
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "factor.*K.?flat|K.?flat.*factor|IsKFlat.*homotop|homotop.*IsKFlat",
+      "results": "{\"t\": \"2026-10-17T16:54:55Z\", \"tool\": \"grep\", \"query\": \"factor.*K.?flat|K.?flat.*factor|IsKFlat.*homotop|homotop.*IsKFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-18",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "A map of complexes with K-flat source factors up to homotopy through a quasi-isomorphism from a K-flat target",
+      "results": "{\"t\": \"2026-10-17T16:54:55Z\", \"tool\": \"leansearch\", \"query\": \"A map of complexes with K-flat source factors up to homotopy through a quasi-isomorphism from a K-flat target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"quasiIso_comp\", \"DerivedCategory.Q_map_eq_of_homotopy\", \"quasiIsoAt_comp\", \"HomotopyCategory.quasiIso\", \"isoOfQuasiIsoAt_inv_hom_id_assoc\", \"HomotopyCategory.mem_quasiIso_iff\"], \"digest\": \"f2d11ff4a088ddfd\"}",
+      "date": "2026-10-18",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"KFlat\", \"Homotopy\"",
+      "results": "{\"t\": \"2026-10-17T16:54:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"KFlat\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-18",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "K flat complexes form a resolving subcategory: factor a morphism through a quasi isomorphic K flat complex",
+      "results": "{\"t\": \"2026-10-17T16:54:56Z\", \"tool\": \"leanfinder\", \"query\": \"K flat complexes form a resolving subcategory: factor a morphism through a quasi isomorphic K flat complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac\", \"DerivedCategory.left_fac\", \"CategoryTheory.Abelian.LeftResolution.chainComplexMap\", \"CategoryTheory.Abelian.LeftResolution\", \"CategoryTheory.HasInjectiveResolutions\", \"CategoryTheory.Abelian.LeftResolution.chainComplex\", \"CategoryTheory.Abelian.LeftResolution.F\", \"CategoryTheory.Abelian.LeftResolution.chainComplexXIso\"], \"digest\": \"e8f2e2b4028a087d\"}",
+      "date": "2026-10-18",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Every chain map from a K-flat complex factors up to homotopy through a K-flat resolution of its target",
+      "results": "{\"t\": \"2026-10-17T16:54:58Z\", \"tool\": \"leanfinder\", \"query\": \"Every chain map from a K-flat complex factors up to homotopy through a K-flat resolution of its target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.liftHomotopy\", \"CategoryTheory.InjectiveResolution.descHomotopy\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZero\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroOne\", \"CategoryTheory.InjectiveResolution.descHomotopyZero\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroZero\", \"CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne\"], \"digest\": \"7b29560d5b64e2ad\"}",
+      "date": "2026-10-18",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-pur-external-rhom-cone-pairing",
+    "date": "2026-10-18",
+    "group": "Q110"
   },
-  {
-   "tool": "loogle",
-   "query": "\"KFlat\", \"Homotopy\"",
-   "results": "{\"t\": \"2026-10-17T16:54:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"KFlat\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-18",
-   "verdict": "no match"
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-a1-kummer",
+  "blueprint": {
+    "from": {
+      "node": "lem-pur-kunneth-supported",
+      "place": "Proof paragraph 3: the support-triangle comparison for the specified exterior product, via the external-RHom/cone-pairing auxiliary construction; the present item supplies its K-flat map factorization (Stacks 0G7D).",
+      "via": [
+        "lem-pur-external-rhom-cone-pairing",
+        "lem-pur-supported-product-localization"
+      ]
+    },
+    "same_as": [],
+    "is": null
   },
-  {
-   "tool": "leanfinder",
-   "query": "K flat complexes form a resolving subcategory: factor a morphism through a quasi isomorphic K flat complex",
-   "results": "{\"t\": \"2026-10-17T16:54:56Z\", \"tool\": \"leanfinder\", \"query\": \"K flat complexes form a resolving subcategory: factor a morphism through a quasi isomorphic K flat complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac\", \"DerivedCategory.left_fac\", \"CategoryTheory.Abelian.LeftResolution.chainComplexMap\", \"CategoryTheory.Abelian.LeftResolution\", \"CategoryTheory.HasInjectiveResolutions\", \"CategoryTheory.Abelian.LeftResolution.chainComplex\", \"CategoryTheory.Abelian.LeftResolution.F\", \"CategoryTheory.Abelian.LeftResolution.chainComplexXIso\"], \"digest\": \"e8f2e2b4028a087d\"}",
-   "date": "2026-10-18",
-   "verdict": "no match"
+  "split_report": {
+    "date": "2026-10-18",
+    "item": "lem-pur-kflat-map-factorization",
+    "worker": "stage1",
+    "summary": "Repaired all six returned faults. Construct N=Cone(delta m)[-1] directly, establish K-flat shift stability by the signed total-tensor reindexing, apply ringed-site cone closure, and deduce quasi-isomorphism via exact Q, Tag 014A and the cohomology factorization through Q. Flat terms hold for this same complex. Removed the incorrect degreewise-split Mathlib leaf and the two mismatched tool citations. The statement and retained search records are unchanged.",
+    "blueprint": "The ancestor lem-pur-kunneth-supported proof paragraph 3 compares support triangles for the specified exterior product; its descendant external-RHom/cone-pairing construction uses this auxiliary K-flat map factorization. Steps 1-6 realize Stacks 0G7D and step 7 its flat-term clause, with the direct cone calculation from the proof of 0G6C.",
+    "tool_uses": [
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "The generic ringed-site resolution with flat terms used by Stacks 0G7D; no a1-Kummer node gives this resolution."
+      },
+      {
+        "node": "lem-pc-kflat-cone-direct-sum",
+        "why": "Only the mapping-cone closure clause for the same acyclic-total-tensor definition is used; no a1-Kummer node supplies it. This replaces the incompatible sfb closure citation as requested in the return."
+      }
+    ]
   },
-  {
-   "tool": "leanfinder",
-   "query": "Every chain map from a K-flat complex factors up to homotopy through a K-flat resolution of its target",
-   "results": "{\"t\": \"2026-10-17T16:54:58Z\", \"tool\": \"leanfinder\", \"query\": \"Every chain map from a K-flat complex factors up to homotopy through a K-flat resolution of its target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.liftHomotopy\", \"CategoryTheory.InjectiveResolution.descHomotopy\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZero\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroOne\", \"CategoryTheory.InjectiveResolution.descHomotopyZero\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroZero\", \"CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne\"], \"digest\": \"7b29560d5b64e2ad\"}",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "lem-pur-external-rhom-cone-pairing",
-  "date": "2026-10-18",
-  "group": "Q110"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer",
- "blueprint": {
-  "from": {
-   "node": "lem-pur-kunneth-supported",
-   "place": "Proof paragraph 3: the support-triangle comparison for the specified exterior product, via the external-RHom/cone-pairing auxiliary construction; the present item supplies its K-flat map factorization (Stacks 0G7D).",
-   "via": [
-    "lem-pur-external-rhom-cone-pairing",
-    "lem-pur-supported-product-localization"
-   ]
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-18",
-  "item": "lem-pur-kflat-map-factorization",
-  "worker": "stage1",
-  "summary": "Repaired all six returned faults. Construct N=Cone(delta m)[-1] directly, establish K-flat shift stability by the signed total-tensor reindexing, apply ringed-site cone closure, and deduce quasi-isomorphism via exact Q, Tag 014A and the cohomology factorization through Q. Flat terms hold for this same complex. Removed the incorrect degreewise-split Mathlib leaf and the two mismatched tool citations. The statement and retained search records are unchanged.",
-  "blueprint": "The ancestor lem-pur-kunneth-supported proof paragraph 3 compares support triangles for the specified exterior product; its descendant external-RHom/cone-pairing construction uses this auxiliary K-flat map factorization. Steps 1-6 realize Stacks 0G7D and step 7 its flat-term clause, with the direct cone calculation from the proof of 0G6C.",
   "tool_uses": [
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "The generic ringed-site resolution with flat terms used by Stacks 0G7D; no a1-Kummer node gives this resolution."
-   },
-   {
-    "node": "lem-pc-kflat-cone-direct-sum",
-    "why": "Only the mapping-cone closure clause for the same acyclic-total-tensor definition is used; no a1-Kummer node supplies it. This replaces the incompatible sfb closure citation as requested in the return."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-pc-kflat-resolution"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-Q41-d2338cb6f",
-  "group": "Q41",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-d2338cb6f (reviewer sub-agent of L); spot-checked: I read the item in full, with every cited statement and Stacks sites-cohomology 0G7D (lines 3417-3480: statement, proof and the flat-terms paragraph). I also checked 06YS, 07A3, 0G6C and 014A against the tags file. The item's hypotheses and conclusions match 0G7D. The delivery has no new nodes and leaves the statement unchanged. Step 3 (shift stability of K-flatness): multiplying the summand by (-1)^{sp} makes the two differentials agree on both the d_F and d_K terms, so it is honestly elementary. Step 4: N=Cone(g)[-1] has the stated terms D^n+M^n and differential [[d_D,-g],[0,d_M]]. Two backward rotations by TR2 give D -(-i[-1])-> N -(p[-1])-> M -g-> D[1]. N is K-flat by the cone clause of lem-pc-kflat-cone-direct-sum, which uses the same K-flat definition, together with step 3. Step 5: TR3 on (M,D[1],W) and the rotated (C,D[1],I[1]) gives c with cu=t in K(A), since g=delta m holds exactly. Step 6: Q is exact and Q(m) is invertible, so 014A makes Q(c) invertible, and H^r of Q(c) is H^r(c). This is Stacks' own alternative argument. Step 7: flat terms of the same N, by finite direct sums. Edge cases checked: D=0, t=id and g=0. An rg search found no duplicate statement of 0G7D. I accept two tool uses from sk-thm-picard-semicon, lem-pc-kflat-resolution and lem-pc-kflat-cone-direct-sum, used as generic black boxes. The other citations are Mathlib leaves or definitions. No SGA is used and there is no cycle. One maintainer note on existing metadata outside this delivery: lem-pc-kflat-cone-direct-sum names 06YS as its source, but the operative tag for the cone clause is 07A3. No fixes were written."
- },
- "lean": {
-  "module": "Sheaf.Paper.KFlatMapFactorization",
-  "declaration": "CochainComplex.exists_kFlat_map_factorization",
-  "statement": "theorem exists_kFlat_map_factorization {D I : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ} (t : D ⟶ I) (hD : IsKFlatIndependentCoefficients (J := J) (R := R) D) : ∃ (N : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (u : D ⟶ N) (c : N ⟶ I), IsKFlatIndependentCoefficients (J := J) (R := R) N ∧ QuasiIso c ∧ Nonempty (Homotopy t (u ≫ c)) ∧ ((∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (D.X i)) → ∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (N.X i))",
-  "by": "Q03",
-  "date": "2026-10-18",
-  "file": "lean/Sheaf/Paper/KFlatMapFactorization.lean",
-  "branch": "newtargets-dag",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-048233005",
-  "group": "Q03",
-  "result": "pass",
-  "note": "Read node, 6 stmt_deps, Stacks 0G7D (sites-cohomology.tex 3418-3433), module, report. Every clause matches: EssentiallySmall.{r} site with independent u,v,r; R : Sheaf J CommRingCat.{r}; complexes of SheafOfModules over R; hD/N use the recorded IsKFlatIndependentCoefficients (real 06YN body); QuasiIso c; Nonempty (Homotopy t (u ≫ c)) matches the node's homotopy equation; flat-terms implication for the same N via recorded IsFlatOnSite. No extra assumptions or universe restriction; no definitions, only a sorry proof; source and blueprint docstrings present; lean.statement equals the signature verbatim; no duplicate 0G7D theorem found. nt_compile --json: rc=0, 8.3 s, no errors; a #print axioms probe shows the only sorry is the theorem's own proof. Second-reading section is the standard post-2026-10-17 placeholder, accepted. No blocking findings."
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J9",
-  "result": "pass",
-  "landing": "20261020T174809-L-798891",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-cone-direct-sum"
+  ],
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-Q41-d2338cb6f",
+    "group": "Q41",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-d2338cb6f (reviewer sub-agent of L); spot-checked: I read the item in full, with every cited statement and Stacks sites-cohomology 0G7D (lines 3417-3480: statement, proof and the flat-terms paragraph). I also checked 06YS, 07A3, 0G6C and 014A against the tags file. The item's hypotheses and conclusions match 0G7D. The delivery has no new nodes and leaves the statement unchanged. Step 3 (shift stability of K-flatness): multiplying the summand by (-1)^{sp} makes the two differentials agree on both the d_F and d_K terms, so it is honestly elementary. Step 4: N=Cone(g)[-1] has the stated terms D^n+M^n and differential [[d_D,-g],[0,d_M]]. Two backward rotations by TR2 give D -(-i[-1])-> N -(p[-1])-> M -g-> D[1]. N is K-flat by the cone clause of lem-pc-kflat-cone-direct-sum, which uses the same K-flat definition, together with step 3. Step 5: TR3 on (M,D[1],W) and the rotated (C,D[1],I[1]) gives c with cu=t in K(A), since g=delta m holds exactly. Step 6: Q is exact and Q(m) is invertible, so 014A makes Q(c) invertible, and H^r of Q(c) is H^r(c). This is Stacks' own alternative argument. Step 7: flat terms of the same N, by finite direct sums. Edge cases checked: D=0, t=id and g=0. An rg search found no duplicate statement of 0G7D. I accept two tool uses from sk-thm-picard-semicon, lem-pc-kflat-resolution and lem-pc-kflat-cone-direct-sum, used as generic black boxes. The other citations are Mathlib leaves or definitions. No SGA is used and there is no cycle. One maintainer note on existing metadata outside this delivery: lem-pc-kflat-cone-direct-sum names 06YS as its source, but the operative tag for the cone clause is 07A3. No fixes were written."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.KFlatMapFactorization",
+    "declaration": "CochainComplex.exists_kFlat_map_factorization",
+    "statement": "theorem exists_kFlat_map_factorization {D I : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ} (t : D ⟶ I) (hD : IsKFlatIndependentCoefficients (J := J) (R := R) D) : ∃ (N : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (u : D ⟶ N) (c : N ⟶ I), IsKFlatIndependentCoefficients (J := J) (R := R) N ∧ QuasiIso c ∧ Nonempty (Homotopy t (u ≫ c)) ∧ ((∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (D.X i)) → ∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (N.X i))",
+    "by": "Q03",
+    "date": "2026-10-18",
+    "file": "lean/Sheaf/Paper/KFlatMapFactorization.lean",
+    "branch": "newtargets-dag",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-048233005",
+    "group": "Q03",
+    "result": "pass",
+    "note": "Read node, 6 stmt_deps, Stacks 0G7D (sites-cohomology.tex 3418-3433), module, report. Every clause matches: EssentiallySmall.{r} site with independent u,v,r; R : Sheaf J CommRingCat.{r}; complexes of SheafOfModules over R; hD/N use the recorded IsKFlatIndependentCoefficients (real 06YN body); QuasiIso c; Nonempty (Homotopy t (u ≫ c)) matches the node's homotopy equation; flat-terms implication for the same N via recorded IsFlatOnSite. No extra assumptions or universe restriction; no definitions, only a sorry proof; source and blueprint docstrings present; lean.statement equals the signature verbatim; no duplicate 0G7D theorem found. nt_compile --json: rc=0, 8.3 s, no errors; a #print axioms probe shows the only sorry is the theorem's own proof. Second-reading section is the standard post-2026-10-17 placeholder, accepted. No blocking findings."
+  }
 }

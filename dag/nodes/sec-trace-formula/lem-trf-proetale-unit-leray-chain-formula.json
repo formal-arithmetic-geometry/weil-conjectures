@@ -1,312 +1,345 @@
 {
- "id": "lem-trf-proetale-unit-leray-chain-formula",
- "kind": "statement",
- "title": "Chain representative for ordinary pro-etale module cohomology pullback",
- "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-pc-scheme], and let $A$ be a finite commutative ring. Use the small pro-etale sites [def-weil-pbc-proetale-site], constant coefficient sheaves $A_X,A_Y$ and the canonical structure isomorphism $h^{-1}A_Y\\cong A_X$ [prop-weil-pbc-proetale-constant-ring-map]. Write $h^*\\dashv h_*$ and $Lh^*\\dashv Rh_*$ for the module adjunctions of [def-weil-pbc-proetale-operations]; $h^*$ is exact and $Lh^*$ is its termwise derived functor. For $T=X,Y$, let $\\Gamma_T$ be global sections of module sheaves, valued in $A$-modules, and define $R\\Gamma_T(Q_TK)=Q_A\\Gamma_T I(K)$ using K-injective resolutions [def-pur-kinjective-complex, prop-pur-kinjective-resolutions-exist], where $Q_T$ and $Q_A$ are localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Let $I$ be a K-injective complex of $A_Y$-modules, $J$ a K-injective complex of $A_X$-modules, and $j:h^*I\\to J$ any chain map. Denote the canonical comparisons by $a_I:R\\Gamma_Y(Q_YI)\\xrightarrow{\\sim}Q_A\\Gamma_YI$, $a_J:R\\Gamma_X(Q_XJ)\\xrightarrow{\\sim}Q_A\\Gamma_XJ$ and $c_I:Lh^*(Q_YI)\\xrightarrow{\\sim}Q_X(h^*I)$. Let $e_{h,F}:\\Gamma_YF\\to\\Gamma_X(h^*F)$ be the sheaf-adjunction unit followed by the terminal-object identification $\\Gamma_Yh_*\\cong\\Gamma_X$, and put $w=\\Gamma_X(j)\\circ e_{h,I}$, degree by degree. Write $\\eta_h$ for the derived adjunction unit and $\\lambda_{h,N}:R\\Gamma_Y(Rh_*N)\\xrightarrow{\\sim}R\\Gamma_XN$ for the canonical derived terminal-object (Leray) identification. Then the following equality holds in $D(A)$:\n$$\n a_J^{-1}\\circ Q_A(w)\\circ a_I\n =R\\Gamma_X(Q_X(j)\\circ c_I)\\circ\\lambda_{h,Lh^*(Q_YI)}\\circ R\\Gamma_Y(\\eta_{h,Q_YI}).\n$$\nNo quasi-isomorphism hypothesis on $j$ is required.",
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A6 (lemma-adjoint), canonical derived adjunction; Tag 08J6 (remark-before-Leray), derived terminal-object identification; combined with derived.tex Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives) and 0FND (lemma-pre-derived-adjoint-functors-general)"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-proetale-site",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "def-weil-pbc-proetale-operations",
-  "def-pur-kinjective-complex",
-  "def-weil-abstract-derived-category",
-  "prop-pur-kinjective-resolutions-exist"
- ],
- "proof": [
-  {
-   "text": "Use the recorded exact module adjunction L = h^*, F = h_* and the additive sections functors G = Gamma_Y, H = Gamma_X from [def-weil-pbc-proetale-operations]. F preserves K-injective complexes by [lem-weil-pbc-right-adjoint-preserves-kinjective]. For e = proEtaleUnitLerayTerminalIso, use the existing proved composition construction [lem-fin-kinjective-derived-composition], which is exactly the definition of the Leray isomorphism in the item. Its universal-unit factorization gives beta_comp followed by lambda = Qh(e) followed by beta_H. In Lean this follows by unfolding rightDerivedFunctorCompIso' and cancelling rightDerivedUnique with its inverse, then applying rightDerivedNatTrans_fac. This is the private helper unitLeray_fac. All K-injective resolution instances are already supplied by the recorded operations.",
-   "uses": [
+  "id": "lem-trf-proetale-unit-leray-chain-formula",
+  "kind": "statement",
+  "title": "Chain representative for ordinary pro-etale module cohomology pullback",
+  "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-pc-scheme], and let $A$ be a finite commutative ring. Use the small pro-etale sites [def-weil-pbc-proetale-site], constant coefficient sheaves $A_X,A_Y$ and the canonical structure isomorphism $h^{-1}A_Y\\cong A_X$ [prop-weil-pbc-proetale-constant-ring-map]. Write $h^*\\dashv h_*$ and $Lh^*\\dashv Rh_*$ for the module adjunctions of [def-weil-pbc-proetale-operations]; $h^*$ is exact and $Lh^*$ is its termwise derived functor. For $T=X,Y$, let $\\Gamma_T$ be global sections of module sheaves, valued in $A$-modules, and define $R\\Gamma_T(Q_TK)=Q_A\\Gamma_T I(K)$ using K-injective resolutions [def-pur-kinjective-complex, prop-pur-kinjective-resolutions-exist], where $Q_T$ and $Q_A$ are localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Let $I$ be a K-injective complex of $A_Y$-modules, $J$ a K-injective complex of $A_X$-modules, and $j:h^*I\\to J$ any chain map. Denote the canonical comparisons by $a_I:R\\Gamma_Y(Q_YI)\\xrightarrow{\\sim}Q_A\\Gamma_YI$, $a_J:R\\Gamma_X(Q_XJ)\\xrightarrow{\\sim}Q_A\\Gamma_XJ$ and $c_I:Lh^*(Q_YI)\\xrightarrow{\\sim}Q_X(h^*I)$. Let $e_{h,F}:\\Gamma_YF\\to\\Gamma_X(h^*F)$ be the sheaf-adjunction unit followed by the terminal-object identification $\\Gamma_Yh_*\\cong\\Gamma_X$, and put $w=\\Gamma_X(j)\\circ e_{h,I}$, degree by degree. Write $\\eta_h$ for the derived adjunction unit and $\\lambda_{h,N}:R\\Gamma_Y(Rh_*N)\\xrightarrow{\\sim}R\\Gamma_XN$ for the canonical derived terminal-object (Leray) identification. Then the following equality holds in $D(A)$:\n$$\n a_J^{-1}\\circ Q_A(w)\\circ a_I\n =R\\Gamma_X(Q_X(j)\\circ c_I)\\circ\\lambda_{h,Lh^*(Q_YI)}\\circ R\\Gamma_Y(\\eta_{h,Q_YI}).\n$$\nNo quasi-isomorphism hypothesis on $j$ is required.",
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), canonical derived adjunction; Tag 08J6 (remark-before-Leray), derived terminal-object identification; combined with derived.tex Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives) and 0FND (lemma-pre-derived-adjoint-functors-general)"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-proetale-site",
+    "prop-weil-pbc-proetale-constant-ring-map",
     "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-fin-kinjective-derived-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Pass the recorded adjunction to homotopy categories using [lem-weil-pbc-termwise-adjunction-homotopy]. The absolute derived adjunction construction of [lem-sc-derived-adjunction-from-underived] is precisely mapDerivedCategoryRightDerivedAdjunction. Its defining unit equation derivedη_fac_app says eta at Qh(K), followed by RF(c_K), equals Qh(eta_h,K), followed by beta_F at L(K). These are the specified ordinary and derived units, with no change of adjunction.",
-   "uses": [
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-sc-derived-adjunction-from-underived"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Naturality of lambda at c_K moves RH(c_K) across lambda. Substitute the unit equation from step 2 inside RG, use naturality of beta_G at the homotopy-adjunction unit, and substitute the factorization in step 1. Functoriality of Qh gives beta_G,K;RG(eta);lambda;RH(c_K) = Qh(G(eta_h,K);e_LK);beta_H,LK. The inverse component of mapHomotopyCategoryCompIso for the identity is identity, by its proved refl_hom_app equation and the inverse law. This is the private helper unitLeray_h and uses no K-injectivity of K.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Take K to be the homotopy quotient of I and append RH(Q(j)). Naturality of beta_H at the quotient of j changes the right side to Qh of the ordinary sections unit followed by H(j), then beta_H,J. The termwise adjunction quotient equation of [lem-weil-pbc-termwise-adjunction-homotopy] identifies this Qh arrow with Q(w). Unfold the quotient lifting comparisons, whose components on representatives are identities, to identify c_K with the recorded mapDerivedCategoryFactors at I.",
-   "uses": [
-    "lem-weil-pbc-termwise-adjunction-homotopy"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Unfold the existing rightDerivedFunctorObjQIso at I and J. Its quotient comparison components on representatives are identities, so it is the inverse of beta_G,I and beta_H,J respectively. Cancel the invertible beta_G,I in the equation of step 4 and use functoriality RH(c_I;Q(j)) = RH(c_I);RH(Q(j)). This proves the displayed equality. The private generic helper unitLeray_chain carries out this cancellation; specialize it to the unchanged recorded pro-etale functors and terminal isomorphism. No map j, section unit, or derived adjunction unit is inverted.",
-   "uses": [],
-   "elementary": true
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-proetale-operations",
-  "lem-fin-kinjective-derived-composition",
-  "lem-sc-derived-adjunction-from-underived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-termwise-adjunction-homotopy"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 0FND and 09T5, defining unit compatibility of the derived adjunction, combined with sites-cohomology.tex Tags 07A6, 08J6 and 0D6E. Categorical proof adapted from the proved Sheaf.Paper.EtaleKInjectiveUnitLeray, with arbitrary additive coefficient functors; no comparison of etale and pro-etale coefficient categories."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "unit.*(leray|globalSections)|kinjective.*(pullback|sections)",
-   "results": "{\"t\": \"2026-10-17T14:11:46Z\", \"tool\": \"grep\", \"query\": \"unit.*(leray|globalSections)|kinjective.*(pullback|sections)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
-  },
-  {
-   "tool": "leansearch",
-   "query": "K-injective resolution formula for derived global sections pullback induced by the adjunction unit",
-   "results": "{\"t\": \"2026-10-17T14:11:46Z\", \"tool\": \"leansearch\", \"query\": \"K-injective resolution formula for derived global sections pullback induced by the adjunction unit\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, \"unit\"",
-   "results": "{\"t\": \"2026-10-17T14:11:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.unit\", \"CategoryTheory.Adjunction.ext_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_unit\", \"CategoryTheory.Adjunction.ofNatIsoRight_counit\", \"CategoryTheory.Adjunction.ofNatIsoRight_unit\"], \"digest\": \"659d48bed469f8ac\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Derived cohomology pullback along a morphism of ringed topoi is computed by the adjunction section map on a K-injective resolution followed by a chain map to a target K-injective resolution",
-   "results": "{\"t\": \"2026-10-17T14:11:57Z\", \"tool\": \"leanfinder\", \"query\": \"Derived cohomology pullback along a morphism of ringed topoi is computed by the adjunction section map on a K-injective resolution followed by a chain map to a target K-injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"1c4276988934c4a0\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
-  },
-  {
-   "tool": "grep",
-   "query": "KInjective|K.injective",
-   "results": "{\"t\": \"2026-10-17T14:12:45Z\", \"tool\": \"grep\", \"query\": \"KInjective|K.injective\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Cohomology pullback as the chain map on sections of injective resolutions using the pullback pushforward adjunction",
-   "results": "{\"t\": \"2026-10-17T14:12:45Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology pullback as the chain map on sections of injective resolutions using the pullback pushforward adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"SheafOfModules.pullback\", \"PresheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"3befffc74be172f2\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"rightDerived\", \"unit\"",
-   "results": "{\"t\": \"2026-10-17T14:12:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnith\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnit\", \"CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnithInt\", \"CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnitInt\"], \"digest\": \"2bae92ef36c9f6a4\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The Leray isomorphism and derived adjunction unit on pro-etale module sheaves can be calculated by the ordinary adjoint chain map between K-injective complexes",
-   "results": "{\"t\": \"2026-10-17T14:12:56Z\", \"tool\": \"leanfinder\", \"query\": \"The Leray isomorphism and derived adjunction unit on pro-etale module sheaves can be calculated by the ordinary adjoint chain map between K-injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"CategoryTheory.Adjunction.derived_unit\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"PresheafOfModules.sheafificationAdjunction\"], \"digest\": \"55e7513e1033eac6\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
-  },
-  {
-   "tool": "grep",
-   "query": "def pullbackObjUnitToUnit|lemma pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
-   "results": "{\"t\": \"2026-10-17T14:13:22Z\", \"tool\": \"grep\", \"query\": \"def pullbackObjUnitToUnit|lemma pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"89b90ebd8cff0b56\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
-  },
-  {
-   "tool": "grep",
-   "query": "def totalRightDerivedUnit|def rightDerivedFunctorPlusUnit|lemma rightDerivedFunctorPlusUnit_app",
-   "results": "{\"t\": \"2026-10-17T14:13:22Z\", \"tool\": \"grep\", \"query\": \"def totalRightDerivedUnit|def rightDerivedFunctorPlusUnit|lemma rightDerivedFunctorPlusUnit_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"b2dddfb040689f1b\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
-  },
-  {
-   "tool": "grep",
-   "query": "lemma derived.*unit|theorem derived.*unit",
-   "results": "{\"t\": \"2026-10-17T14:13:38Z\", \"tool\": \"grep\", \"query\": \"lemma derived.*unit|theorem derived.*unit\", \"sub\": \"CategoryTheory/Functor/Derived/Adjunction.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
-  },
-  {
-   "tool": "grep",
-   "query": "unit.*[Ll]eray|[Ll]eray.*unit|KInjective.*globalSections",
-   "results": "{\"t\": \"2026-10-17T15:11:26Z\", \"tool\": \"grep\", \"query\": \"unit.*[Ll]eray|[Ll]eray.*unit|KInjective.*globalSections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived global sections pullback using K-injective resolutions and the derived adjunction unit",
-   "results": "{\"t\": \"2026-10-17T15:11:27Z\", \"tool\": \"leansearch\", \"query\": \"Derived global sections pullback using K-injective resolutions and the derived adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Sheaf.Γ\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.constantSheafΓAdj\", \"SheafOfModules.pullbackObjUnitToUnit\", \"CategoryTheory.Over.toOverSectionsAdj_unit_app\"], \"digest\": \"5b798de6fd65aba9\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Derived global sections pullback for module sheaves via adjunction unit and Leray is computed by a chain map between K-injective complexes",
-   "results": "{\"t\": \"2026-10-17T15:11:28Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections pullback for module sheaves via adjunction unit and Leray is computed by a chain map between K-injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.sheafificationCompPullback\"], \"digest\": \"a959a732b3d2b71d\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, \"unit\"",
-   "results": "{\"t\": \"2026-10-17T15:11:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.unit\", \"CategoryTheory.Adjunction.ext_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_unit\", \"CategoryTheory.Adjunction.ofNatIsoRight_counit\", \"CategoryTheory.Adjunction.ofNatIsoRight_unit\"], \"digest\": \"659d48bed469f8ac\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
-  },
-  {
-   "tool": "grep",
-   "query": "derived.*unit|derivedη_fac_app",
-   "results": "{\"t\": \"2026-10-17T15:11:47Z\", \"tool\": \"grep\", \"query\": \"derived.*unit|derivedη_fac_app\", \"sub\": \"CategoryTheory/Functor/Derived/Adjunction.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"103\"], \"digest\": \"1a5f9ef9b5ead8e2\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"rightDerived\", \"unit\"",
-   "results": "{\"t\": \"2026-10-17T15:11:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnith\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnit\", \"CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnithInt\", \"CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnitInt\"], \"digest\": \"2bae92ef36c9f6a4\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Canonical Leray composition isomorphism and adjunction unit computed on cochain complexes of module sheaves",
-   "results": "{\"t\": \"2026-10-17T15:11:48Z\", \"tool\": \"leansearch\", \"query\": \"Canonical Leray composition isomorphism and adjunction unit computed on cochain complexes of module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.unitAsIsoOfIso\", \"CategoryTheory.Adjunction.compCoyonedaIso_hom_app_app\", \"SheafOfModules.pullbackComp\", \"CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit\", \"SheafOfModules.pushforwardComp\", \"CategoryTheory.sheafComposeNatIso\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.unitHomEquiv_comp_apply\"], \"digest\": \"82741cf98bb9defd\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For an exact left adjoint and its right adjoint, derive the adjunction and compute maps on global sections by K-injective resolution representatives",
-   "results": "{\"t\": \"2026-10-17T15:11:52Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact left adjoint and its right adjoint, derive the adjunction and compute maps on global sections by K-injective resolution representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Sheaf.adjunction\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"24009a25991a1c57\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "lem-trf-graph-frobenius-unit-comparison",
-  "date": "2026-10-17",
-  "group": "Q27"
- },
- "chapter": "sec-trace-formula",
- "unit": "sk-d-weil",
- "blueprint": {
-  "from": {
-   "node": "prop-trf-graph-frobenius-operator",
-   "place": "Step 1, identification of the functors and of the units: calculating the ordinary cohomology map induced by the derived adjunction unit on actual resolutions",
-   "via": [
-    "lem-trf-graph-frobenius-unit-comparison"
-   ]
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-trf-proetale-unit-leray-chain-formula",
-  "worker": "stage1",
-  "summary": "Preserved the statement and all imported metadata. Six explicit steps identify the ordinary chain adjunct, its canonical derived adjunct, the sections representative and the normalized Leray comparison. Reused seven existing generic tool statements and the existing pro-etale operations definition; created no nodes and made no coefficient-category identification with the abelian-etale analogue.",
-  "blueprint": "Realizes prop-trf-graph-frobenius-operator proof Step 1, identification of the functors and units, through the chain representative used in step 6 of lem-trf-graph-frobenius-unit-comparison. Historical ancestry via that node is retained.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "why": "Generic exact-left-adjoint criterion proves h_*J is K-injective; the Weil unit has no resolution-preservation replacement."
-   },
-   {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Generic resolution existence on small ringed sites supplies the module resolutions required by all derived constructions."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-total-derived",
-    "why": "Generic unbounded derivability and evaluation on K-injectives fixes the canonical comparison isomorphisms."
-   },
-   {
-    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
-    "why": "Generic termwise adjunction identifies the chain adjunct of j before deriving."
-   },
-   {
-    "node": "lem-pc-pre-derived-adjoint-functors-general",
-    "why": "Its canonical fraction-representative equation fixes the precise derived adjunct of the chain map, including both comparison isomorphisms."
-   },
-   {
-    "node": "lem-sf-kinjective-derived-map-computation",
-    "why": "Generic unbounded derived-map computation evaluates RΓ_Y on the map between the two K-injectives I and h_*J."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Generic ringed-topos direct-image composition, specialized to the terminal ringed topos, fixes the Leray normalization and its naturality."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-termwise-adjunction-homotopy"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-Q111-3bf373c5e",
-  "group": "Q111",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-3bf373c5e (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes, and proof_deps equals the union of the step uses. The statement is unchanged and type-checks; it uses the module/pro-étale coefficients of def-weil-pbc-proetale-operations, which matches parent step 6, and does not identify them with the abelian-étale analogue lem-weil-pbc-kinjective-unit-leray. Step 1: 08BJ applies with v=h^* (exact) and u=h_*, so h_*J is K-injective; resolutions come from prop-pur on small sites. Step 2: the termwise adjunct is u=h_*(j)η_I, and t_JΓ_Y(u)=w holds degreewise by naturality of t. Step 3: 0FND (derived.tex l.9517) with s=t=id gives p_id=b_J^{-1} and u_id=c_I, hence Rh_*(f)η=b_J^{-1}Q(u). Step 4: the K-injective map computation with identity resolutions applies to any derived morphism. Step 5: 0D6E (l.4011) with the terminal ringed topos (Set,A). I recomputed κ=RΓ_Y(b_J^{-1})a_H^{-1}Q(t_J^{-1})a_J, so λ=κ^{-1} matches the stated formula, and naturality gives the square for f. Step 6: I redid the substitution and it is correct. Edge cases tested: h=id, j=0, empty X or Y, non-quasi-isomorphism j, A=0. The tag/label mapping is correct for 0FND, 08BJ, 08J6 (l.2305), 07A6 (l.3990) and 0D6E. blueprint from.place matches main-20261015 prop-trf-graph-frobenius-operator, Step 1. No duplicate found in the DAG. No SGA source is used. I accept all seven declared tool_uses as generic homological-algebra tools outside sk-d-weil's cited units (sk-d-corr/operator/setup/six). No fixes written."
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-83b7a5d93",
-  "group": "Q13",
-  "result": "pass",
-  "note": "Canonical pro-etale interfaces and statement match the node; helpers are non-hollow, universes and edge cases checked, and scompile.py passed with only the permitted theorem sorry."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleUnitLerayChainFormula",
-  "declaration": "AlgebraicGeometry.Scheme.proEtale_unit_leray_chain_formula",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleUnitLeraySections",
-   "AlgebraicGeometry.Scheme.proEtaleUnitLeraySections_additive",
-   "AlgebraicGeometry.Scheme.proEtaleUnitLerayDirectImageIso",
-   "AlgebraicGeometry.Scheme.proEtaleUnitLerayPushforward_preservesKInjective",
-   "AlgebraicGeometry.Scheme.proEtaleUnitLerayFixedTerminalIso",
-   "AlgebraicGeometry.Scheme.proEtaleUnitLerayTerminalIso",
-   "AlgebraicGeometry.Scheme.proEtaleUnitLerayIso",
-   "AlgebraicGeometry.Scheme.proEtaleUnitLeraySectionUnit",
-   "AlgebraicGeometry.Scheme.proEtale_unit_leray_chain_formula"
+    "def-pur-kinjective-complex",
+    "def-weil-abstract-derived-category",
+    "prop-pur-kinjective-resolutions-exist"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleUnitLerayChainFormula.lean",
-  "statement": "theorem proEtale_unit_leray_chain_formula {X Y : Scheme.{u}} (h : X ⟶ Y) (I : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ) (J : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ) [I.IsKInjective] [J.IsKInjective] (j : ((proEtaleConstantRingPullback A h).mapHomologicalComplex (.up ℤ)).obj I ⟶ J) : ((proEtaleUnitLeraySections A Y).rightDerivedFunctorObjQIso I).hom ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (proEtaleUnitLeraySectionUnit A h) (.up ℤ)).app I ≫ ((proEtaleUnitLeraySections A X).mapHomologicalComplex (.up ℤ)).map j) ≫ ((proEtaleUnitLeraySections A X).rightDerivedFunctorObjQIso J).inv = (proEtaleUnitLeraySections A Y).rightDerivedFunctor.map ((proEtaleConstantRingAdjunction A h).mapDerivedCategoryRightDerivedAdjunction.unit.app (DerivedCategory.Q.obj I)) ≫ (proEtaleUnitLerayIso A h).hom.app ((proEtaleConstantRingDerivedPullback A h).obj (DerivedCategory.Q.obj I)) ≫ (proEtaleUnitLeraySections A X).rightDerivedFunctor.map ((proEtaleConstantRingPullback A h).mapDerivedCategoryFactors.hom.app I ≫ DerivedCategory.Q.map j)",
-  "branch": "newtargets-dag",
-  "by": "Q13",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "Repair of return L at immutable head 3d3dc164808d: both ordinary and derived units now use proEtaleConstantRingAdjunction, j and c_I use proEtaleConstantRingPullback, and Lh^* is proEtaleConstantRingDerivedPullback. Deleted the private direct image and adjunction. The terminal iso for proEtaleConstantRingPushforward is constructed from adjunction cancellation of the coefficient map, the existing section-normalized realization comparison and actual terminal base change. Leray is rightDerivedFunctorCompIso' of that iso. No statement correction or dependency repair."
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G9",
-  "result": "pass",
-  "landing": "20261020T174757-L-795374",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof": [
+    {
+      "text": "Put $M=Q_YI$, $P=Lh^*M$, and $f=Q_X(j)\\circ c_I:P\\to Q_XJ$. Write $\\eta^{\\mathrm{sh}}$ for the underived module unit. By [def-weil-pbc-proetale-operations], $h^*$ is exact and left adjoint to $h_*$. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $v=h^*$, $u=h_*$: the complex $H=h_*J$ is K-injective in $\\operatorname{Mod}(A_Y)$. The small-site convention and [prop-pur-kinjective-resolutions-exist] give K-injective resolutions in both module categories. Applying [lem-weil-pbc-kinjective-total-derived] to the termwise direct-image and sections functors gives their canonical evaluation isomorphisms; in addition to $a_I,a_J$, write\n$$b_J:Rh_*(Q_XJ)\\xrightarrow{\\sim}Q_YH,\\qquad a_H:R\\Gamma_Y(Q_YH)\\xrightarrow{\\sim}Q_A\\Gamma_YH.$$\nThese use the identity resolutions of the already K-injective complexes. Sections and direct image are additive; their degreewise extensions preserve shifts and mapping cones since these involve only finite biproducts and the differentials. Thus the exact-functor hypothesis of the total-derived criterion is satisfied.",
+      "uses": [
+        "def-weil-pbc-proetale-operations",
+        "lem-weil-pbc-right-adjoint-preserves-kinjective",
+        "prop-pur-kinjective-resolutions-exist",
+        "lem-weil-pbc-kinjective-total-derived"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070Y (lemma-K-injective-defined) and 070K (lemma-enough-K-injectives-implies)"
+      }
+    },
+    {
+      "text": "The termwise adjunction [lem-weil-pbc-termwise-adjunction-homotopy] applied to the module adjunction of [def-weil-pbc-proetale-operations] takes $j:h^*I\\to J$ to the chain map\n$$u=h_*(j)\\circ\\eta^{\\mathrm{sh}}_I:I\\to H.$$\nLet $t_N:\\Gamma_Y(h_*N)\\xrightarrow{\\sim}\\Gamma_XN$ denote evaluation of the direct-image formula at the terminal object. In degree $n$ this is evaluation at $X\\times_Y Y=X$ with the same $A$-action, so for a map $v:N\\to N'$ its two composites are the identical section map: $t_{N'}\\Gamma_Y(h_*v)=\\Gamma_X(v)t_N$. Consequently\n$$t_J\\circ\\Gamma_Y(u)=\\Gamma_X(j)\\circ t_{h^*I}\\circ\\Gamma_Y(\\eta^{\\mathrm{sh}}_I)=\\Gamma_X(j)\\circ e_{h,I}=w.$$\nThe equality holds as a chain map because the identity holds in every degree; all maps commute with the differentials by naturality.",
+      "uses": [
+        "lem-weil-pbc-termwise-adjunction-homotopy",
+        "def-weil-pbc-proetale-operations"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), componentwise adjunction; sites-cohomology.tex Tag 08J6 (remark-before-Leray), terminal sections"
+      }
+    },
+    {
+      "text": "Apply [lem-pc-pre-derived-adjoint-functors-general] to $F=h_*$, $G=h^*$, target complex $K=J$ and source complex $I$. The derived adjunction used here is exactly its canonical bijection, as specified by [def-weil-pbc-proetale-operations]. In its representative formula choose the identity quasi-isomorphisms $s:J\\to J$ and $t:I\\to I$, and the map $u:I\\to h_*J$. The value of the right-derived representing cocone at $s$ is $b_J^{-1}$, since $J$ is K-injective; the value of the left-derived cone at $t$ is $c_I$, since $h^*$ is exact. Both derived functors are everywhere defined by the operations node, so the essential-constancy hypotheses of the cited formula hold. The termwise adjunct of $u$ is $j$ by step 2. Thus that formula says the derived adjunct of $b_J^{-1}\\circ Q_Y(u)$ is $Q_X(j)\\circ c_I=f$. The inverse Hom bijection for an adjunction sends $f$ to $Rh_*(f)\\circ\\eta_{h,M}$, hence\n$$Rh_*(f)\\circ\\eta_{h,M}=b_J^{-1}\\circ Q_Y(u).$$\nThis is a specialization of the cited representative equation, with no invertibility requirement on $u$ or $j$.",
+      "uses": [
+        "lem-pc-pre-derived-adjoint-functors-general",
+        "def-weil-pbc-proetale-operations"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), displayed canonical Hom comparison, with sites-cohomology.tex Tag 07A6 (lemma-adjoint)"
+      }
+    },
+    {
+      "text": "Use [lem-sf-kinjective-derived-map-computation] with the additive functor $\\Gamma_Y$, complexes $I,H$, their identity K-injective resolutions, and derived morphism $Q_Y(u)$. The representative between the two resolutions is $u$ itself. Its comparison formula gives\n$$a_H\\circ R\\Gamma_Y(Q_Y(u))\\circ a_I^{-1}=Q_A(\\Gamma_Y(u)).$$\nThe needed resolutions exist by step 1. In particular this formula applies to this arbitrary chain map $u$, and not just to quasi-isomorphisms.",
+      "uses": [
+        "lem-sf-kinjective-derived-map-computation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined) and 070K (lemma-enough-K-injectives-implies)"
+      }
+    },
+    {
+      "text": "Use [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] for the ringed-topos morphism $h$ and the terminal ringed-topos morphism $g_Y:(\\operatorname{Sh}(Y_{\\mathrm{proet}}),A_Y)\\to(\\operatorname{Set},A)$. Represent the latter by the one-object site with its trivial topology and ring $A$; its inverse image on rings is the constant sheaf $A_Y$, and its module direct image is $\\Gamma_Y$. The composite direct image is $\\Gamma_X$, through the identification $t$ of step 2. The site-size hypotheses hold by the small representatives already chosen. In the normalization of the cited composition comparison take the K-injective complex $J$ on $X$ and the identity resolution $H=h_*J\\to H$, which is permitted by step 1. The comparison $\\kappa:R\\Gamma_X\\to R\\Gamma_YRh_*$ is then represented by the identity on $\\Gamma_YH$, after identifying $\\Gamma_XJ$ by $t_J^{-1}$. Taking its inverse, the canonical Leray map, gives\n$$\\lambda_{h,Q_XJ}\\circ R\\Gamma_Y(b_J^{-1})=a_J^{-1}\\circ Q_A(t_J)\\circ a_H.$$\nThe cited comparison is natural in the derived argument, so its inverse satisfies\n$$R\\Gamma_X(f)\\circ\\lambda_{h,P}=\\lambda_{h,Q_XJ}\\circ R\\Gamma_Y(Rh_*(f)).$$",
+      "uses": [
+        "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0D6E (lemma-derived-pushforward-composition), with Tag 08J6 (remark-before-Leray); derived.tex Tag 05T2 (lemma-compose-derived-functors-general)"
+      }
+    },
+    {
+      "text": "Now substitute the equalities of steps 3, 5, 4 and 2, in that order:\n$$\\begin{aligned}\nR\\Gamma_X(f)\\lambda_{h,P}R\\Gamma_Y(\\eta_{h,M})\n&=\\lambda_{h,Q_XJ}R\\Gamma_Y(Rh_*(f)\\eta_{h,M})\\\\\n&=\\lambda_{h,Q_XJ}R\\Gamma_Y(b_J^{-1})R\\Gamma_Y(Q_Y(u))\\\\\n&=a_J^{-1}Q_A(t_J)a_H R\\Gamma_Y(Q_Y(u))\\\\\n&=a_J^{-1}Q_A(t_J)Q_A(\\Gamma_Y(u))a_I\\\\\n&=a_J^{-1}Q_A(w)a_I.\n\\end{aligned}$$\nHere juxtaposition denotes composition, rightmost first. These are functoriality, associativity, substitution and cancellation of the displayed isomorphisms. Since $f=Q_X(j)c_I$ and $P=Lh^*(Q_YI)$, this is the required equality. No step inverted $j$, $u$ or $w$.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 07A6 (lemma-adjoint), 08J6 (remark-before-Leray) and 0D6E (lemma-derived-pushforward-composition), substitution of the preceding representative formulas"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-proetale-operations",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-sf-kinjective-derived-map-computation",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "prop-pur-kinjective-resolutions-exist"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0FND, 070I, 070Y, 070K and 08BJ; combined with sites-cohomology.tex Tags 07A6, 08J6 and 0D6E. Explicit adjunct and resolution computation of the specified pro-etale module map."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "unit.*(leray|globalSections)|kinjective.*(pullback|sections)",
+      "results": "{\"t\": \"2026-10-17T14:11:46Z\", \"tool\": \"grep\", \"query\": \"unit.*(leray|globalSections)|kinjective.*(pullback|sections)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
+    },
+    {
+      "tool": "leansearch",
+      "query": "K-injective resolution formula for derived global sections pullback induced by the adjunction unit",
+      "results": "{\"t\": \"2026-10-17T14:11:46Z\", \"tool\": \"leansearch\", \"query\": \"K-injective resolution formula for derived global sections pullback induced by the adjunction unit\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction, \"unit\"",
+      "results": "{\"t\": \"2026-10-17T14:11:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.unit\", \"CategoryTheory.Adjunction.ext_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_unit\", \"CategoryTheory.Adjunction.ofNatIsoRight_counit\", \"CategoryTheory.Adjunction.ofNatIsoRight_unit\"], \"digest\": \"659d48bed469f8ac\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Derived cohomology pullback along a morphism of ringed topoi is computed by the adjunction section map on a K-injective resolution followed by a chain map to a target K-injective resolution",
+      "results": "{\"t\": \"2026-10-17T14:11:57Z\", \"tool\": \"leanfinder\", \"query\": \"Derived cohomology pullback along a morphism of ringed topoi is computed by the adjunction section map on a K-injective resolution followed by a chain map to a target K-injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"1c4276988934c4a0\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
+    },
+    {
+      "tool": "grep",
+      "query": "KInjective|K.injective",
+      "results": "{\"t\": \"2026-10-17T14:12:45Z\", \"tool\": \"grep\", \"query\": \"KInjective|K.injective\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Cohomology pullback as the chain map on sections of injective resolutions using the pullback pushforward adjunction",
+      "results": "{\"t\": \"2026-10-17T14:12:45Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology pullback as the chain map on sections of injective resolutions using the pullback pushforward adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"SheafOfModules.pullback\", \"PresheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"3befffc74be172f2\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"rightDerived\", \"unit\"",
+      "results": "{\"t\": \"2026-10-17T14:12:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnith\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnit\", \"CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnithInt\", \"CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnitInt\"], \"digest\": \"2bae92ef36c9f6a4\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The Leray isomorphism and derived adjunction unit on pro-etale module sheaves can be calculated by the ordinary adjoint chain map between K-injective complexes",
+      "results": "{\"t\": \"2026-10-17T14:12:56Z\", \"tool\": \"leanfinder\", \"query\": \"The Leray isomorphism and derived adjunction unit on pro-etale module sheaves can be calculated by the ordinary adjoint chain map between K-injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"CategoryTheory.Adjunction.derived_unit\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"PresheafOfModules.sheafificationAdjunction\"], \"digest\": \"55e7513e1033eac6\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
+    },
+    {
+      "tool": "grep",
+      "query": "def pullbackObjUnitToUnit|lemma pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+      "results": "{\"t\": \"2026-10-17T14:13:22Z\", \"tool\": \"grep\", \"query\": \"def pullbackObjUnitToUnit|lemma pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"89b90ebd8cff0b56\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
+    },
+    {
+      "tool": "grep",
+      "query": "def totalRightDerivedUnit|def rightDerivedFunctorPlusUnit|lemma rightDerivedFunctorPlusUnit_app",
+      "results": "{\"t\": \"2026-10-17T14:13:22Z\", \"tool\": \"grep\", \"query\": \"def totalRightDerivedUnit|def rightDerivedFunctorPlusUnit|lemma rightDerivedFunctorPlusUnit_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"b2dddfb040689f1b\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
+    },
+    {
+      "tool": "grep",
+      "query": "lemma derived.*unit|theorem derived.*unit",
+      "results": "{\"t\": \"2026-10-17T14:13:38Z\", \"tool\": \"grep\", \"query\": \"lemma derived.*unit|theorem derived.*unit\", \"sub\": \"CategoryTheory/Functor/Derived/Adjunction.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: underived module pullback, generic derived units and right-derived maps do not identify the specified pro-etale module unit/Leray composite with the sectionwise chain map in D(A)"
+    },
+    {
+      "tool": "grep",
+      "query": "unit.*[Ll]eray|[Ll]eray.*unit|KInjective.*globalSections",
+      "results": "{\"t\": \"2026-10-17T15:11:26Z\", \"tool\": \"grep\", \"query\": \"unit.*[Ll]eray|[Ll]eray.*unit|KInjective.*globalSections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived global sections pullback using K-injective resolutions and the derived adjunction unit",
+      "results": "{\"t\": \"2026-10-17T15:11:27Z\", \"tool\": \"leansearch\", \"query\": \"Derived global sections pullback using K-injective resolutions and the derived adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Sheaf.Γ\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.constantSheafΓAdj\", \"SheafOfModules.pullbackObjUnitToUnit\", \"CategoryTheory.Over.toOverSectionsAdj_unit_app\"], \"digest\": \"5b798de6fd65aba9\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Derived global sections pullback for module sheaves via adjunction unit and Leray is computed by a chain map between K-injective complexes",
+      "results": "{\"t\": \"2026-10-17T15:11:28Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections pullback for module sheaves via adjunction unit and Leray is computed by a chain map between K-injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.sheafificationCompPullback\"], \"digest\": \"a959a732b3d2b71d\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction, \"unit\"",
+      "results": "{\"t\": \"2026-10-17T15:11:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.unit\", \"CategoryTheory.Adjunction.ext_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_unit\", \"CategoryTheory.Adjunction.ofNatIsoRight_counit\", \"CategoryTheory.Adjunction.ofNatIsoRight_unit\"], \"digest\": \"659d48bed469f8ac\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
+    },
+    {
+      "tool": "grep",
+      "query": "derived.*unit|derivedη_fac_app",
+      "results": "{\"t\": \"2026-10-17T15:11:47Z\", \"tool\": \"grep\", \"query\": \"derived.*unit|derivedη_fac_app\", \"sub\": \"CategoryTheory/Functor/Derived/Adjunction.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"103\"], \"digest\": \"1a5f9ef9b5ead8e2\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"rightDerived\", \"unit\"",
+      "results": "{\"t\": \"2026-10-17T15:11:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnith\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnit\", \"CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnithInt\", \"CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnitInt\"], \"digest\": \"2bae92ef36c9f6a4\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Canonical Leray composition isomorphism and adjunction unit computed on cochain complexes of module sheaves",
+      "results": "{\"t\": \"2026-10-17T15:11:48Z\", \"tool\": \"leansearch\", \"query\": \"Canonical Leray composition isomorphism and adjunction unit computed on cochain complexes of module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.unitAsIsoOfIso\", \"CategoryTheory.Adjunction.compCoyonedaIso_hom_app_app\", \"SheafOfModules.pullbackComp\", \"CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit\", \"SheafOfModules.pushforwardComp\", \"CategoryTheory.sheafComposeNatIso\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.unitHomEquiv_comp_apply\"], \"digest\": \"82741cf98bb9defd\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For an exact left adjoint and its right adjoint, derive the adjunction and compute maps on global sections by K-injective resolution representatives",
+      "results": "{\"t\": \"2026-10-17T15:11:52Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact left adjoint and its right adjoint, derive the adjunction and compute maps on global sections by K-injective resolution representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Sheaf.adjunction\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"24009a25991a1c57\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: generic derived adjunctions, right-derived units and underived module-sheaf comparisons do not give the specified pro-etale module unit/Leray chain formula by a one-line specialization"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-trf-graph-frobenius-unit-comparison",
+    "date": "2026-10-17",
+    "group": "Q27"
+  },
+  "chapter": "sec-trace-formula",
+  "unit": "sk-d-weil",
+  "blueprint": {
+    "from": {
+      "node": "prop-trf-graph-frobenius-operator",
+      "place": "Step 1, identification of the functors and of the units: calculating the ordinary cohomology map induced by the derived adjunction unit on actual resolutions",
+      "via": [
+        "lem-trf-graph-frobenius-unit-comparison"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "lem-trf-proetale-unit-leray-chain-formula",
+    "worker": "stage1",
+    "summary": "Preserved the statement and all imported metadata. Six explicit steps identify the ordinary chain adjunct, its canonical derived adjunct, the sections representative and the normalized Leray comparison. Reused seven existing generic tool statements and the existing pro-etale operations definition; created no nodes and made no coefficient-category identification with the abelian-etale analogue.",
+    "blueprint": "Realizes prop-trf-graph-frobenius-operator proof Step 1, identification of the functors and units, through the chain representative used in step 6 of lem-trf-graph-frobenius-unit-comparison. Historical ancestry via that node is retained.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+        "why": "Generic exact-left-adjoint criterion proves h_*J is K-injective; the Weil unit has no resolution-preservation replacement."
+      },
+      {
+        "node": "prop-pur-kinjective-resolutions-exist",
+        "why": "Generic resolution existence on small ringed sites supplies the module resolutions required by all derived constructions."
+      },
+      {
+        "node": "lem-weil-pbc-kinjective-total-derived",
+        "why": "Generic unbounded derivability and evaluation on K-injectives fixes the canonical comparison isomorphisms."
+      },
+      {
+        "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+        "why": "Generic termwise adjunction identifies the chain adjunct of j before deriving."
+      },
+      {
+        "node": "lem-pc-pre-derived-adjoint-functors-general",
+        "why": "Its canonical fraction-representative equation fixes the precise derived adjunct of the chain map, including both comparison isomorphisms."
+      },
+      {
+        "node": "lem-sf-kinjective-derived-map-computation",
+        "why": "Generic unbounded derived-map computation evaluates RΓ_Y on the map between the two K-injectives I and h_*J."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+        "why": "Generic ringed-topos direct-image composition, specialized to the terminal ringed topos, fixes the Leray normalization and its naturality."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-sf-kinjective-derived-map-computation",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  ],
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-Q111-3bf373c5e",
+    "group": "Q111",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-3bf373c5e (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes, and proof_deps equals the union of the step uses. The statement is unchanged and type-checks; it uses the module/pro-étale coefficients of def-weil-pbc-proetale-operations, which matches parent step 6, and does not identify them with the abelian-étale analogue lem-weil-pbc-kinjective-unit-leray. Step 1: 08BJ applies with v=h^* (exact) and u=h_*, so h_*J is K-injective; resolutions come from prop-pur on small sites. Step 2: the termwise adjunct is u=h_*(j)η_I, and t_JΓ_Y(u)=w holds degreewise by naturality of t. Step 3: 0FND (derived.tex l.9517) with s=t=id gives p_id=b_J^{-1} and u_id=c_I, hence Rh_*(f)η=b_J^{-1}Q(u). Step 4: the K-injective map computation with identity resolutions applies to any derived morphism. Step 5: 0D6E (l.4011) with the terminal ringed topos (Set,A). I recomputed κ=RΓ_Y(b_J^{-1})a_H^{-1}Q(t_J^{-1})a_J, so λ=κ^{-1} matches the stated formula, and naturality gives the square for f. Step 6: I redid the substitution and it is correct. Edge cases tested: h=id, j=0, empty X or Y, non-quasi-isomorphism j, A=0. The tag/label mapping is correct for 0FND, 08BJ, 08J6 (l.2305), 07A6 (l.3990) and 0D6E. blueprint from.place matches main-20261015 prop-trf-graph-frobenius-operator, Step 1. No duplicate found in the DAG. No SGA source is used. I accept all seven declared tool_uses as generic homological-algebra tools outside sk-d-weil's cited units (sk-d-corr/operator/setup/six). No fixes written."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-83b7a5d93",
+    "group": "Q13",
+    "result": "pass",
+    "note": "Canonical pro-etale interfaces and statement match the node; helpers are non-hollow, universes and edge cases checked, and scompile.py passed with only the permitted theorem sorry."
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.ProEtaleUnitLerayChainFormula",
+    "declaration": "AlgebraicGeometry.Scheme.proEtale_unit_leray_chain_formula",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.proEtaleUnitLeraySections",
+      "AlgebraicGeometry.Scheme.proEtaleUnitLeraySections_additive",
+      "AlgebraicGeometry.Scheme.proEtaleUnitLerayDirectImageIso",
+      "AlgebraicGeometry.Scheme.proEtaleUnitLerayPushforward_preservesKInjective",
+      "AlgebraicGeometry.Scheme.proEtaleUnitLerayFixedTerminalIso",
+      "AlgebraicGeometry.Scheme.proEtaleUnitLerayTerminalIso",
+      "AlgebraicGeometry.Scheme.proEtaleUnitLerayIso",
+      "AlgebraicGeometry.Scheme.proEtaleUnitLeraySectionUnit",
+      "AlgebraicGeometry.Scheme.proEtale_unit_leray_chain_formula"
+    ],
+    "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleUnitLerayChainFormula.lean",
+    "statement": "theorem proEtale_unit_leray_chain_formula {X Y : Scheme.{u}} (h : X ⟶ Y) (I : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ) (J : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ) [I.IsKInjective] [J.IsKInjective] (j : ((proEtaleConstantRingPullback A h).mapHomologicalComplex (.up ℤ)).obj I ⟶ J) : ((proEtaleUnitLeraySections A Y).rightDerivedFunctorObjQIso I).hom ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (proEtaleUnitLeraySectionUnit A h) (.up ℤ)).app I ≫ ((proEtaleUnitLeraySections A X).mapHomologicalComplex (.up ℤ)).map j) ≫ ((proEtaleUnitLeraySections A X).rightDerivedFunctorObjQIso J).inv = (proEtaleUnitLeraySections A Y).rightDerivedFunctor.map ((proEtaleConstantRingAdjunction A h).mapDerivedCategoryRightDerivedAdjunction.unit.app (DerivedCategory.Q.obj I)) ≫ (proEtaleUnitLerayIso A h).hom.app ((proEtaleConstantRingDerivedPullback A h).obj (DerivedCategory.Q.obj I)) ≫ (proEtaleUnitLeraySections A X).rightDerivedFunctor.map ((proEtaleConstantRingPullback A h).mapDerivedCategoryFactors.hom.app I ≫ DerivedCategory.Q.map j)",
+    "branch": "newtargets-dag",
+    "by": "Q13",
+    "date": "2026-10-17",
+    "existing": false,
+    "note": "Repair of return L at immutable head 3d3dc164808d: both ordinary and derived units now use proEtaleConstantRingAdjunction, j and c_I use proEtaleConstantRingPullback, and Lh^* is proEtaleConstantRingDerivedPullback. Deleted the private direct image and adjunction. The terminal iso for proEtaleConstantRingPushforward is constructed from adjunction cancellation of the coefficient map, the existing section-normalized realization comparison and actual terminal base change. Leray is rightDerivedFunctorCompIso' of that iso. No statement correction or dependency repair."
+  }
 }

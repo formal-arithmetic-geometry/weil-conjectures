@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DoubleComplexTotal
+public import Sheaf.CategoryTheory.DoubleComplexTotal
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import Sheaf.CategoryTheory.GoodTruncationTotalBoundaryImage

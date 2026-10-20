@@ -1,368 +1,346 @@
 {
- "id": "lem-pe-internal-section-tensor-comparison",
- "kind": "statement",
- "title": "Relative tensor and K-flatness under the internal-to-sectionwise module equivalence",
- "statement": "Let $C$ be a site whose objects and morphisms lie in the coefficient universe. Assume abelian sheafification exists, its local equivalences are monoidal, and the category $\\mathcal A=\\operatorname{Sh}(C,\\operatorname{Ab})$ has the closed symmetric monoidal structure given by sheafified objectwise tensor over $\\mathbf Z$ [det-def-sfb-sheaf-tensor-structure, sk-def-sfb-sheaf-tensor]. Let $R$ be a commutative ring object of $\\mathcal A$, let $R_{\\mathrm{sec}}$ be its reconstructed section-ring sheaf, and let\n$$E_R:\\operatorname{Mod}_R(\\mathcal A)\\simeq\\operatorname{Mod}(R_{\\mathrm{sec}})$$\nbe the equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence], which leaves underlying abelian sheaves and maps unchanged. Give the source the coequalizer relative tensor [def-sfb-modobj-relative-tensor] and the target the sheafification of sectionwise balanced tensor [def-pur-sheaf-tensor-product]. Then $E_R$ is exact and has natural isomorphisms\n$$E_R(M\\otimes_RN)\\cong E_R(M)\\otimes_{R_{\\mathrm{sec}}}E_R(N),\\qquad E_R(R)\\cong R_{\\mathrm{sec}},$$\ncharacterized on local pure tensors by $m\\otimes n\\mapsto m\\otimes n$. These comparisons respect associators, unitors and symmetry. Applied termwise to cochain complexes [def-weil-abstract-derived-category], $E_R$ identifies the direct-sum total tensor complexes [def-pc-tensor-complex-sheaves] and preserves and reflects acyclicity, flat modules [def-pc-flat-sheaf-modules] and K-flat complexes [def-pc-kflat-complex]; in the internal category, flatness and K-flatness mean the same exact-tensor and acyclic-total-tensor tests.",
- "source": {
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 0GMW, lemma-sheafification-tensor. Internal-module comparison and passage to total complexes are the extracted agent argument."
- },
- "stmt_deps": [
-  "det-def-sfb-sheaf-tensor-structure",
-  "sk-def-sfb-sheaf-tensor",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-sfb-modobj-relative-tensor",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-abstract-derived-category",
-  "def-pc-tensor-complex-sheaves",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex"
- ],
- "proof": [
-  {
-   "text": "The equivalence in [def-weil-pbc-internal-abelian-sheaf-module-equivalence] is obtained by evaluating the internal multiplication and action on sections and reconstructing the section-ring sheaf; its forward functor preserves the underlying abelian sheaves, section groups, restriction maps, and morphisms identically. The sheaf tensor and its local pure tensors are the sheafified objectwise tensors of [det-def-sfb-sheaf-tensor-structure]. Thus for every internal module the object, every map, and every local pure tensor have the displayed sectionwise interpretation under $E_R$.",
-   "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "det-def-sfb-sheaf-tensor-structure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, algebraic structures in a ringed topos; literature/stacks-project/sites-modules.tex, section-tensor-product"
-   }
+  "id": "lem-pe-internal-section-tensor-comparison",
+  "kind": "statement",
+  "title": "Relative tensor and K-flatness under the internal-to-sectionwise module equivalence",
+  "statement": "Let $C$ be a site whose objects and morphisms lie in the coefficient universe. Assume abelian sheafification exists, its local equivalences are monoidal, and the category $\\mathcal A=\\operatorname{Sh}(C,\\operatorname{Ab})$ has the closed symmetric monoidal structure given by sheafified objectwise tensor over $\\mathbf Z$ [det-def-sfb-sheaf-tensor-structure, sk-def-sfb-sheaf-tensor]. Let $R$ be a commutative ring object of $\\mathcal A$, let $R_{\\mathrm{sec}}$ be its reconstructed section-ring sheaf, and let\n$$E_R:\\operatorname{Mod}_R(\\mathcal A)\\simeq\\operatorname{Mod}(R_{\\mathrm{sec}})$$\nbe the equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence], which leaves underlying abelian sheaves and maps unchanged. Give the source the coequalizer relative tensor [def-sfb-modobj-relative-tensor] and the target the sheafification of sectionwise balanced tensor [def-pur-sheaf-tensor-product]. Then $E_R$ is exact and has natural isomorphisms\n$$E_R(M\\otimes_RN)\\cong E_R(M)\\otimes_{R_{\\mathrm{sec}}}E_R(N),\\qquad E_R(R)\\cong R_{\\mathrm{sec}},$$\ncharacterized on local pure tensors by $m\\otimes n\\mapsto m\\otimes n$. These comparisons respect associators, unitors and symmetry. Applied termwise to cochain complexes [def-weil-abstract-derived-category], $E_R$ identifies the direct-sum total tensor complexes [def-pc-tensor-complex-sheaves] and preserves and reflects acyclicity, flat modules [def-pc-flat-sheaf-modules] and K-flat complexes [def-pc-kflat-complex]; in the internal category, flatness and K-flatness mean the same exact-tensor and acyclic-total-tensor tests.",
+  "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 0GMW, lemma-sheafification-tensor. Internal-module comparison and passage to total complexes are the extracted agent argument."
   },
-  {
-   "text": "By [sk-def-sfb-sheaf-tensor], tensor on abelian sheaves preserves colimits in either variable and is additive; in particular $R\\otimes-$ preserves finite colimits. Thus [lem-sfb-modobj-abelian] applies, and the source is abelian. Its forgetful functor preserves finite limits and finite colimits by [lem-sfb-modobj-forget-left-exact] and [lem-sfb-modobj-forget-right-exact]. The target is abelian with sectionwise kernels and sheafified sectionwise cokernels by [def-weil-sheaf-of-modules-category], and its forgetful functor is faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Both underlying sheaf functors therefore compute kernels and cokernels. The sectionwise equivalence of step 1 preserves addition on morphisms and identifies these sheaves and their induced actions. Hence it preserves and reflects kernels, cokernels and exact sequences: $E_R$ is an exact additive equivalence.",
-   "uses": [
+  "stmt_deps": [
+    "det-def-sfb-sheaf-tensor-structure",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-modobj-relative-tensor",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex"
+  ],
+  "proof": [
+    {
+      "text": "The equivalence in [def-weil-pbc-internal-abelian-sheaf-module-equivalence] is obtained by evaluating the internal multiplication and action on sections and reconstructing the section-ring sheaf; its forward functor preserves the underlying abelian sheaves, section groups, restriction maps, and morphisms identically. The sheaf tensor and its local pure tensors are the sheafified objectwise tensors of [det-def-sfb-sheaf-tensor-structure]. Thus for every internal module the object, every map, and every local pure tensor have the displayed sectionwise interpretation under $E_R$.",
+      "uses": [
+        "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+        "det-def-sfb-sheaf-tensor-structure"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Tag 00YV, algebraic structures in a ringed topos; literature/stacks-project/sites-modules.tex, section-tensor-product"
+      }
+    },
+    {
+      "text": "By [sk-def-sfb-sheaf-tensor], tensor on abelian sheaves preserves colimits in either variable and is additive; in particular $R\\otimes-$ preserves finite colimits. Thus [lem-sfb-modobj-abelian] applies, and the source is abelian. Its forgetful functor preserves finite limits and finite colimits by [lem-sfb-modobj-forget-left-exact] and [lem-sfb-modobj-forget-right-exact]. The target is abelian with sectionwise kernels and sheafified sectionwise cokernels by [def-weil-sheaf-of-modules-category], and its forgetful functor is faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Both underlying sheaf functors therefore compute kernels and cokernels. The sectionwise equivalence of step 1 preserves addition on morphisms and identifies these sheaves and their induced actions. Hence it preserves and reflects kernels, cokernels and exact sequences: $E_R$ is an exact additive equivalence.",
+      "uses": [
+        "sk-def-sfb-sheaf-tensor",
+        "lem-sfb-modobj-abelian",
+        "lem-sfb-modobj-forget-left-exact",
+        "lem-sfb-modobj-forget-right-exact",
+        "def-weil-sheaf-of-modules-category",
+        "lem-weil-pbc-module-sheaves-colimits-forgetful"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tags 03DA and 03DB, abelian module sheaves and exact forgetful functor; literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md, Part 1"
+      }
+    },
+    {
+      "text": "The relative tensor in [def-sfb-modobj-relative-tensor] is the coequalizer $M\\otimes R\\otimes N\\rightrightarrows M\\otimes N$, with the action through $M$. A map from it to an internal module $P$ is therefore a map from $M\\otimes N$ to $P$ satisfying $b(rm,n)=b(m,rn)$, and linear for the action on the first factor. By [det-def-sfb-sheaf-tensor-structure] and the universal property of sheafification [def-weil-pbc-sheafification], maps out of the sheaf tensor correspond to restriction-compatible sectionwise biadditive maps. The two conditions just displayed say exactly that $b$ is sectionwise $R_{\\mathrm{sec}}$-bilinear. Conversely any such bilinear map has these properties, so factors uniquely through the coequalizer. A map from the sheafification of $U\\mapsto M(U)\\otimes_{R_{\\mathrm{sec}}(U)}N(U)$ to $E_RP$ likewise corresponds, by [def-pur-sheaf-tensor-product] and the universal property of module sheafification [def-weil-presheaf-modules-sheafification] (whose underlying abelian sheaf is the abelian sheafification), to precisely these compatible bilinear maps. The universal maps in each direction are mutually inverse because their composites fix $m\\otimes n$; uniqueness follows from the same universal properties. This gives the natural comparison, with pure tensors sent to identically named pure tensors. These constructions use abelian sheaves and their sheafification, rather than requiring a section functor to preserve cokernels.",
+      "uses": [
+        "def-sfb-modobj-relative-tensor",
+        "det-def-sfb-sheaf-tensor-structure",
+        "def-weil-pbc-sheafification",
+        "def-pur-sheaf-tensor-product",
+        "def-weil-presheaf-modules-sheafification"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 0GMW, lemma-sheafification-tensor"
+      }
+    },
+    {
+      "text": "The regular module $R$ is sent to $R_{\\mathrm{sec}}$ by the action construction in [def-weil-pbc-internal-abelian-sheaf-module-equivalence], giving the unit comparison. The source associator and unitors are induced from those before the coequalizer [def-sfb-modobj-relative-tensor]; its symmetry descends from the ambient braiding [def-sfb-modobj-symmetric-tensor]. The target structures are the sectionwise ones of [lem-pc-sheaf-modules-tensor-closed]. On local pure tensors the associativity comparison sends $(m\\otimes n)\\otimes p$ to $m\\otimes(n\\otimes p)$ on both sides, symmetry sends $m\\otimes n$ to $n\\otimes m$, and the unitors send $r\\otimes m$ and $m\\otimes r$ to $rm$. Equality on these tensors implies equality of the sheaf maps by the sheafification and coequalizer universal properties used in step 3. Thus all comparison diagrams for associators, unitors and symmetry commute.",
+      "uses": [
+        "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+        "def-sfb-modobj-relative-tensor",
+        "def-sfb-modobj-symmetric-tensor",
+        "lem-pc-sheaf-modules-tensor-closed"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 03EK, associativity and symmetry of the section tensor; Tag 00YV, regular module"
+      }
+    },
+    {
+      "text": "Apply $E_R$ degreewise to cochain complexes; it preserves addition and composition, hence the differential equations. The target has all small direct sums by [lem-weil-pbc-module-sheaves-colimits-forgetful]. If $G$ is a quasi-inverse of $E_R$, a coproduct $S=\\bigoplus_i E_R M_i$ supplies a source coproduct $GS$: the bijections $\\operatorname{Hom}(GS,P)\\cong\\operatorname{Hom}(S,E_RP)\\cong\\prod_i\\operatorname{Hom}(E_RM_i,E_RP)\\cong\\prod_i\\operatorname{Hom}(M_i,P)$ identify its universal maps. Thus $E_R$ identifies these direct sums. For each degree $n$, apply this with the countable index $p+q=n$ and the tensor comparisons of step 3. Naturality of those comparisons in each differential, and additivity of $E_R$, make the resulting degreewise isomorphisms commute with $d_M\\otimes1+(-1)^p1\\otimes d_N$, including its sign. By [def-pc-tensor-complex-sheaves] this is exactly the direct-sum total tensor differential. Hence the degreewise isomorphisms form a natural isomorphism of total complexes.",
+      "uses": [
+        "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+        "lem-weil-pbc-module-sheaves-colimits-forgetful",
+        "def-pc-tensor-complex-sheaves"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/homology.tex",
+        "place": "Definition 012Z; literature/stacks-project/sites-cohomology.tex, Section 06YL"
+      }
+    },
+    {
+      "text": "Because $E_R$ is exact and additive, kernels, images, and cokernels of every differential are carried to the corresponding target objects. The cohomology definition in [def-weil-abstract-derived-category] therefore gives natural isomorphisms $H^n(E_RK)\\cong E_R(H^nK)$. An equivalence reflects the zero object, so a complex is acyclic in the internal category exactly when its image is acyclic in the section-module category.",
+      "uses": [
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/homology.tex",
+        "place": "Section 012Z, homology of a complex"
+      }
+    },
+    {
+      "text": "For a module $F$, flatness in the internal category means that $-\\otimes_RF$ is exact, while flatness in the section category means that $-\\otimes_{R_{\\mathrm{sec}}}E_R(F)$ is exact, as in [def-pc-flat-sheaf-modules]. The natural tensor isomorphism of step 3 identifies these two functors after applying the exact equivalence $E_R$. Since $E_R$ preserves and reflects exact sequences by step 2, one functor is exact if and only if the other is. This proves preservation and reflection of flat modules.",
+      "uses": [
+        "def-pc-flat-sheaf-modules",
+        "def-sfb-modobj-relative-tensor"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Definition 03ER, flat module sheaves"
+      }
+    },
+    {
+      "text": "Let $K$ be an internal cochain complex. For every acyclic internal complex $A$, step 5 gives a natural isomorphism between $E_R(\\operatorname{Tot}(A\\otimes_RK))$ and $\\operatorname{Tot}(E_RA\\otimes_{R_{\\mathrm{sec}}}E_RK)$. Step 6 says that $A$ is acyclic exactly when $E_RA$ is acyclic, and the same step says that total-complex acyclicity is preserved and reflected. Consequently the defining test in [def-pc-kflat-complex] holds for $K$ exactly when it holds for $E_RK$. Hence $E_R$ preserves and reflects K-flat complexes; the assertion about internal flatness and K-flatness is precisely the two defining exact-tensor and acyclic-total-tensor tests. To check that the forward implication tests every target acyclic complex $B$, apply the quasi-inverse $G$ termwise to $B$ and its differentials. The counit gives a chain isomorphism $E_R(GB)\\cong B$; step 6 makes $GB$ acyclic. Step 5 then identifies the tested target tensor with the image of the corresponding source tensor. For the reverse implication, test directly on $E_RA$ for each acyclic source complex $A$ and reflect its tensor's acyclicity using step 6.",
+      "uses": [
+        "def-pc-kflat-complex",
+        "def-pc-tensor-complex-sheaves"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Definition 06YN, K-flat complexes"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "det-def-sfb-sheaf-tensor-structure",
     "sk-def-sfb-sheaf-tensor",
     "lem-sfb-modobj-abelian",
     "lem-sfb-modobj-forget-left-exact",
     "lem-sfb-modobj-forget-right-exact",
     "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA and 03DB, abelian module sheaves and exact forgetful functor; literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md, Part 1"
-   }
-  },
-  {
-   "text": "The relative tensor in [def-sfb-modobj-relative-tensor] is the coequalizer $M\\otimes R\\otimes N\\rightrightarrows M\\otimes N$, with the action through $M$. A map from it to an internal module $P$ is therefore a map from $M\\otimes N$ to $P$ satisfying $b(rm,n)=b(m,rn)$, and linear for the action on the first factor. By [det-def-sfb-sheaf-tensor-structure] and the universal property of sheafification [def-weil-pbc-sheafification], maps out of the sheaf tensor correspond to restriction-compatible sectionwise biadditive maps. The two conditions just displayed say exactly that $b$ is sectionwise $R_{\\mathrm{sec}}$-bilinear. Conversely any such bilinear map has these properties, so factors uniquely through the coequalizer. A map from the sheafification of $U\\mapsto M(U)\\otimes_{R_{\\mathrm{sec}}(U)}N(U)$ to $E_RP$ likewise corresponds, by [def-pur-sheaf-tensor-product] and the universal property of module sheafification [def-weil-presheaf-modules-sheafification] (whose underlying abelian sheaf is the abelian sheafification), to precisely these compatible bilinear maps. The universal maps in each direction are mutually inverse because their composites fix $m\\otimes n$; uniqueness follows from the same universal properties. This gives the natural comparison, with pure tensors sent to identically named pure tensors. These constructions use abelian sheaves and their sheafification, rather than requiring a section functor to preserve cokernels.",
-   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "def-sfb-modobj-relative-tensor",
-    "det-def-sfb-sheaf-tensor-structure",
     "def-weil-pbc-sheafification",
     "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; Tag 0GMW, lemma-sheafification-tensor"
-   }
-  },
-  {
-   "text": "The regular module $R$ is sent to $R_{\\mathrm{sec}}$ by the action construction in [def-weil-pbc-internal-abelian-sheaf-module-equivalence], giving the unit comparison. The source associator and unitors are induced from those before the coequalizer [def-sfb-modobj-relative-tensor]; its symmetry descends from the ambient braiding [def-sfb-modobj-symmetric-tensor]. The target structures are the sectionwise ones of [lem-pc-sheaf-modules-tensor-closed]. On local pure tensors the associativity comparison sends $(m\\otimes n)\\otimes p$ to $m\\otimes(n\\otimes p)$ on both sides, symmetry sends $m\\otimes n$ to $n\\otimes m$, and the unitors send $r\\otimes m$ and $m\\otimes r$ to $rm$. Equality on these tensors implies equality of the sheaf maps by the sheafification and coequalizer universal properties used in step 3. Thus all comparison diagrams for associators, unitors and symmetry commute.",
-   "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "def-sfb-modobj-relative-tensor",
+    "def-weil-presheaf-modules-sheafification",
     "def-sfb-modobj-symmetric-tensor",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, associativity and symmetry of the section tensor; Tag 00YV, regular module"
-   }
-  },
-  {
-   "text": "Apply $E_R$ degreewise to cochain complexes; it preserves addition and composition, hence the differential equations. The target has all small direct sums by [lem-weil-pbc-module-sheaves-colimits-forgetful]. If $G$ is a quasi-inverse of $E_R$, a coproduct $S=\\bigoplus_i E_R M_i$ supplies a source coproduct $GS$: the bijections $\\operatorname{Hom}(GS,P)\\cong\\operatorname{Hom}(S,E_RP)\\cong\\prod_i\\operatorname{Hom}(E_RM_i,E_RP)\\cong\\prod_i\\operatorname{Hom}(M_i,P)$ identify its universal maps. Thus $E_R$ identifies these direct sums. For each degree $n$, apply this with the countable index $p+q=n$ and the tensor comparisons of step 3. Naturality of those comparisons in each differential, and additivity of $E_R$, make the resulting degreewise isomorphisms commute with $d_M\\otimes1+(-1)^p1\\otimes d_N$, including its sign. By [def-pc-tensor-complex-sheaves] this is exactly the direct-sum total tensor differential. Hence the degreewise isomorphisms form a natural isomorphism of total complexes.",
-   "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Definition 012Z; literature/stacks-project/sites-cohomology.tex, Section 06YL"
-   }
-  },
-  {
-   "text": "Because $E_R$ is exact and additive, kernels, images, and cokernels of every differential are carried to the corresponding target objects. The cohomology definition in [def-weil-abstract-derived-category] therefore gives natural isomorphisms $H^n(E_RK)\\cong E_R(H^nK)$. An equivalence reflects the zero object, so a complex is acyclic in the internal category exactly when its image is acyclic in the section-module category.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Section 012Z, homology of a complex"
-   }
-  },
-  {
-   "text": "For a module $F$, flatness in the internal category means that $-\\otimes_RF$ is exact, while flatness in the section category means that $-\\otimes_{R_{\\mathrm{sec}}}E_R(F)$ is exact, as in [def-pc-flat-sheaf-modules]. The natural tensor isomorphism of step 3 identifies these two functors after applying the exact equivalence $E_R$. Since $E_R$ preserves and reflects exact sequences by step 2, one functor is exact if and only if the other is. This proves preservation and reflection of flat modules.",
-   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
     "def-pc-flat-sheaf-modules",
-    "def-sfb-modobj-relative-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Definition 03ER, flat module sheaves"
-   }
+    "def-pc-kflat-complex"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
+    "place": "statement, coefficient sheaves and ambient derived category: interpretation of Layer B relative tensor and K-flat representatives"
   },
-  {
-   "text": "Let $K$ be an internal cochain complex. For every acyclic internal complex $A$, step 5 gives a natural isomorphism between $E_R(\\operatorname{Tot}(A\\otimes_RK))$ and $\\operatorname{Tot}(E_RA\\otimes_{R_{\\mathrm{sec}}}E_RK)$. Step 6 says that $A$ is acyclic exactly when $E_RA$ is acyclic, and the same step says that total-complex acyclicity is preserved and reflected. Consequently the defining test in [def-pc-kflat-complex] holds for $K$ exactly when it holds for $E_RK$. Hence $E_R$ preserves and reflects K-flat complexes; the assertion about internal flatness and K-flatness is precisely the two defining exact-tensor and acyclic-total-tensor tests. To check that the forward implication tests every target acyclic complex $B$, apply the quasi-inverse $G$ termwise to $B$ and its differentials. The counit gives a chain isomorphism $E_R(GB)\\cong B$; step 6 makes $GB$ acyclic. Step 5 then identifies the tested target tensor with the image of the corresponding source tensor. For the reverse implication, test directly on $E_RA$ for each acyclic source complex $A$ and reflect its tensor's acyclicity using step 6.",
-   "uses": [
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Definition 06YN, K-flat complexes"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "det-def-sfb-sheaf-tensor-structure",
-  "sk-def-sfb-sheaf-tensor",
-  "lem-sfb-modobj-abelian",
-  "lem-sfb-modobj-forget-left-exact",
-  "lem-sfb-modobj-forget-right-exact",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "def-sfb-modobj-relative-tensor",
-  "def-weil-pbc-sheafification",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
-  "def-sfb-modobj-symmetric-tensor",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
-  "place": "statement, coefficient sheaves and ambient derived category: interpretation of Layer B relative tensor and K-flat representatives"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "equivalence of internal modules over a commutative ring object and sectionwise sheaf modules preserves relative tensor and K-flatness",
-   "results": "8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; Module.Flat.iff_preservesFiniteLimits_tensorLeft; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; Module.Flat.iff_rTensor_exact'; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_flat_tensorProduct; Module.Flat.of_flat_tensorProduct; Module.Flat.iff_rTensor_preserves_injective_linearMap'. None concerns sheaf internal-module equivalences.",
-   "date": "2026-10-17",
-   "verdict": "no match"
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "equivalence of internal modules over a commutative ring object and sectionwise sheaf modules preserves relative tensor and K-flatness",
+      "results": "8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; Module.Flat.iff_preservesFiniteLimits_tensorLeft; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; Module.Flat.iff_rTensor_exact'; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_flat_tensorProduct; Module.Flat.of_flat_tensorProduct; Module.Flat.iff_rTensor_preserves_injective_linearMap'. None concerns sheaf internal-module equivalences.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.ModuleObject, tensor, KFlat",
+      "results": "0 hits; loogle reported unknown identifier CategoryTheory.ModuleObject.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "internal.*module|section.*tensor|KFlat [Mathlib/CategoryTheory]",
+      "results": "No hits in Mathlib/CategoryTheory.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "internal module sheaf equivalence relative tensor product K-flat complexes",
+      "results": "8 hits: LinearMap.tensorKerEquiv_apply; Module.Flat.iff_flat_tensorProduct; LinearMap.tensorKerEquiv; Module.Flat.tensorSubmoduleAlgebraEquivMul; Module.Flat.rTensor_shortComplex_exact; LinearMap.tensorEqLocusEquiv_apply; LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm; LinearMap.tensorEqLocusEquiv. None states the requested sheaf equivalence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "KFlat|Flat|relativeTensor|tensor.*coequalizer [Mathlib/CategoryTheory]",
+      "results": "No hits in Mathlib/CategoryTheory.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "Module.Flat, CategoryTheory.Equivalence, tensor",
+      "results": "0 hits; loogle reported unknown identifier tensor.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "exact equivalence of module object categories preserves relative tensor products and flatness",
+      "results": "8 hits: Module.FaithfullyFlat.iff_exact_iff_rTensor_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_exact; Module.Flat.iff_rTensor_exact'; Module.FaithfullyFlat.iff_exact_iff_lTensor_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_exact; Module.Flat.rTensor_exact. None states the requested categorical equivalence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "sectionModuleEquivalence|internal.*module|module.*internal",
+      "results": "No hits. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence. Searched Mathlib/CategoryTheory/Sites.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"sheaf\", \"module\", \"tensor\"",
+      "results": "Hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "An equivalence between internal modules over a ring object in abelian sheaves and ordinary sheaves of modules preserves relative tensor products, exactness, flat objects and K-flat complexes.",
+      "results": "Hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_lTensor_exact'. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "ModuleObject|SheafOfModules|monoidal.*equiv|equiv.*monoidal",
+      "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence. Searched Mathlib/Algebra/Category/ModuleCat/Sheaf.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Equivalence between internal modules in abelian sheaves and sheaves of modules over a ring sheaf preserves relative tensor products.",
+      "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence.",
+      "date": "2026-10-17",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The sectionwise module equivalence for a commutative ring object in tensor abelian sheaves is a symmetric monoidal equivalence for the balanced sheaf tensor product.",
+      "results": "Hits: CategoryTheory.Sheaf.symmetricCategory, LightCondensed.instSymmetricCategoryLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.monoidalCategoryStruct, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.monoidalCategory. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "internal.*module|sectionModuleEquivalence|monoidal.*equivalence",
+      "results": "Hits: Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/DirectSum/LinearMap.lean, Mathlib/Algebra/DirectSum/LinearMap.lean, Mathlib/Algebra/DirectSum/Basic.lean. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "sk-def-pe-derived-completion",
+    "date": "2026-10-17",
+    "group": "Q30"
   },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.ModuleObject, tensor, KFlat",
-   "results": "0 hits; loogle reported unknown identifier CategoryTheory.ModuleObject.",
-   "date": "2026-10-17",
-   "verdict": "no match"
+  "chapter": "sec-proetale-coefficients",
+  "unit": "sk-def-pe-derived-completion",
+  "blueprint": {
+    "from": {
+      "node": "sk-def-pe-derived-completion",
+      "place": "statement, coefficient sheaves and ambient derived category: interpretation of Layer B relative tensor and K-flat representatives",
+      "via": []
+    },
+    "same_as": [],
+    "is": null
   },
-  {
-   "tool": "grep",
-   "query": "internal.*module|section.*tensor|KFlat [Mathlib/CategoryTheory]",
-   "results": "No hits in Mathlib/CategoryTheory.",
-   "date": "2026-10-17",
-   "verdict": "no match"
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "lem-pe-internal-section-tensor-comparison",
+    "worker": "stage1",
+    "summary": "Checked the comparison using the existing module equivalence, exact forgetful functors, sheafification universal property, relative tensor coequalizer and its symmetry. Eight steps give exactness, the normalized tensor and unit comparisons, coherence, direct-sum totalization, acyclicity, flatness and K-flatness in both directions. No new nodes were needed. Coproducts are transferred by the equivalence with their universal property written out; no Grothendieck hypothesis is needed beyond the stated assumptions.",
+    "blueprint": "The steps realize the parent blueprint statement's interpretation of Layer B relative tensor and K-flat representatives: sectionwise module equivalence and tensor comparison (steps 1–4), then termwise totalization and the flat/K-flat tests (steps 5–8).",
+    "tool_uses": [
+      {
+        "node": "lem-sfb-modobj-abelian",
+        "why": "The item needs the generic abelian structure of internal module objects to compare kernels and cokernels under the equivalence."
+      },
+      {
+        "node": "lem-sfb-modobj-forget-left-exact",
+        "why": "The item uses the generic fact that internal-module kernels are computed on the underlying sheaf."
+      },
+      {
+        "node": "lem-sfb-modobj-forget-right-exact",
+        "why": "The item uses the generic fact that internal-module cokernels and finite colimits are computed on the underlying sheaf."
+      },
+      {
+        "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+        "why": "The item uses exactness and small-colimit computation for section-module sheaves to identify the sectionwise coequalizer and totalization."
+      },
+      {
+        "node": "lem-pc-sheaf-modules-tensor-closed",
+        "why": "The item uses the generic balanced tensor universal property and coherence of sheaf modules."
+      }
+    ]
   },
-  {
-   "tool": "leansearch",
-   "query": "internal module sheaf equivalence relative tensor product K-flat complexes",
-   "results": "8 hits: LinearMap.tensorKerEquiv_apply; Module.Flat.iff_flat_tensorProduct; LinearMap.tensorKerEquiv; Module.Flat.tensorSubmoduleAlgebraEquivMul; Module.Flat.rTensor_shortComplex_exact; LinearMap.tensorEqLocusEquiv_apply; LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm; LinearMap.tensorEqLocusEquiv. None states the requested sheaf equivalence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "KFlat|Flat|relativeTensor|tensor.*coequalizer [Mathlib/CategoryTheory]",
-   "results": "No hits in Mathlib/CategoryTheory.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "Module.Flat, CategoryTheory.Equivalence, tensor",
-   "results": "0 hits; loogle reported unknown identifier tensor.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "exact equivalence of module object categories preserves relative tensor products and flatness",
-   "results": "8 hits: Module.FaithfullyFlat.iff_exact_iff_rTensor_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_exact; Module.Flat.iff_rTensor_exact'; Module.FaithfullyFlat.iff_exact_iff_lTensor_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_exact; Module.Flat.rTensor_exact. None states the requested categorical equivalence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "sectionModuleEquivalence|internal.*module|module.*internal",
-   "results": "No hits. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence. Searched Mathlib/CategoryTheory/Sites.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"sheaf\", \"module\", \"tensor\"",
-   "results": "Hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "An equivalence between internal modules over a ring object in abelian sheaves and ordinary sheaves of modules preserves relative tensor products, exactness, flat objects and K-flat complexes.",
-   "results": "Hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_lTensor_exact'. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "ModuleObject|SheafOfModules|monoidal.*equiv|equiv.*monoidal",
-   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence. Searched Mathlib/Algebra/Category/ModuleCat/Sheaf.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Equivalence between internal modules in abelian sheaves and sheaves of modules over a ring sheaf preserves relative tensor products.",
-   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence.",
-   "date": "2026-10-17",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The sectionwise module equivalence for a commutative ring object in tensor abelian sheaves is a symmetric monoidal equivalence for the balanced sheaf tensor product.",
-   "results": "Hits: CategoryTheory.Sheaf.symmetricCategory, LightCondensed.instSymmetricCategoryLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.monoidalCategoryStruct, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.monoidalCategory. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "internal.*module|sectionModuleEquivalence|monoidal.*equivalence",
-   "results": "Hits: Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/DirectSum/LinearMap.lean, Mathlib/Algebra/DirectSum/LinearMap.lean, Mathlib/Algebra/DirectSum/Basic.lean. Read Mathlib/CategoryTheory/Sites/Monoidal.lean:160-205, Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:25-100, and RingTheory/Flat/CategoryTheory.lean:30-90: monoidal sheaves, presheaf tensors and flat ordinary modules do not give this internal-to-sectionwise relative tensor equivalence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "sk-def-pe-derived-completion",
-  "date": "2026-10-17",
-  "group": "Q30"
- },
- "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-pe-derived-completion",
- "blueprint": {
-  "from": {
-   "node": "sk-def-pe-derived-completion",
-   "place": "statement, coefficient sheaves and ambient derived category: interpretation of Layer B relative tensor and K-flat representatives",
-   "via": []
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-pe-internal-section-tensor-comparison",
-  "worker": "stage1",
-  "summary": "Checked the comparison using the existing module equivalence, exact forgetful functors, sheafification universal property, relative tensor coequalizer and its symmetry. Eight steps give exactness, the normalized tensor and unit comparisons, coherence, direct-sum totalization, acyclicity, flatness and K-flatness in both directions. No new nodes were needed. Coproducts are transferred by the equivalence with their universal property written out; no Grothendieck hypothesis is needed beyond the stated assumptions.",
-  "blueprint": "The steps realize the parent blueprint statement's interpretation of Layer B relative tensor and K-flat representatives: sectionwise module equivalence and tensor comparison (steps 1–4), then termwise totalization and the flat/K-flat tests (steps 5–8).",
   "tool_uses": [
-   {
-    "node": "lem-sfb-modobj-abelian",
-    "why": "The item needs the generic abelian structure of internal module objects to compare kernels and cokernels under the equivalence."
-   },
-   {
-    "node": "lem-sfb-modobj-forget-left-exact",
-    "why": "The item uses the generic fact that internal-module kernels are computed on the underlying sheaf."
-   },
-   {
-    "node": "lem-sfb-modobj-forget-right-exact",
-    "why": "The item uses the generic fact that internal-module cokernels and finite colimits are computed on the underlying sheaf."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "why": "The item uses exactness and small-colimit computation for section-module sheaves to identify the sectionwise coequalizer and totalization."
-   },
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "The item uses the generic balanced tensor universal property and coherence of sheaf modules."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sfb-modobj-abelian",
-  "lem-sfb-modobj-forget-left-exact",
-  "lem-sfb-modobj-forget-right-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-pc-sheaf-modules-tensor-closed"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-Q155-a222d6e3b",
-  "group": "Q155",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-a222d6e3b (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, all 17 cited statements (plus det-def-sfb-sheaf-tensor-local-iso and def-weil-presheaf-modules-sheafification), Stacks sites-modules.tex:3551-3640 (03EK section-tensor-product, 0GMW lemma-sheafification-tensor, the Bilin characterisation; tags 03DA/03DB/03ER/06YN checked), the unit sk-def-pe-derived-completion (no steps) and its citers. Not a target and no new nodes. Hypotheses hold: the equivalence node's universe, sheafification and monoidal-local-equivalence conditions, sk-def-sfb-sheaf-tensor colimit preservation (which gives the additivity and finite colimits lem-sfb-modobj-abelian needs), coequalizers for the relative tensor, and R_sec commutative. I rederived step 3: the triple sheaf tensor is a(M⊗_pR⊗_pN) by strong monoidality, the coequalizer arrows are rm⊗n and m⊗rn, so both sides corepresent compatible sectionwise R(U)-balanced maps, and Yoneda gives the comparison. This needs only the sheafification universal property, not the plus construction or the locally-bijective hypothesis of lem-c2. Coherence (step 4), the (-1)^p total sign (step 5), cohomology, flatness and K-flatness in both directions (steps 6-8) are correct. Small cases checked: R=0, R=Z, M=R, degree-0 complexes, empty degrees. lem-c2-internal-section-module-flatness overlaps the flatness clause only, so it is not a duplicate; the item restates no clause of its parent. I accept the 5 declared generic tool_uses. One fault repaired (C1/C4): step 3 used the universal property of module sheafification over R_sec without a node, and def-weil-pbc-sheafification does not state it. I cited def-weil-presheaf-modules-sheafification in the step text, its uses and proof_deps; corrected file at fixes/dag/nodes/sec-proetale-coefficients/lem-pe-internal-section-tensor-comparison.json.; 1 file(s) fixed by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-1ec2f8eb2",
-  "group": "N8",
-  "result": "pass",
-  "note": "Read the item, all 9 statement dependencies and their sources (equivalence lines 290-431, ModuleObjects/Monoidal 50-200, CochainTensorUniverses, FlatOnSite, KFlat 287-346, SheafTensorStructure 73), and Stacks 03EK/0GMW. Hypotheses equal the equivalence dependency's binders (UnivLE.{max v w,u}, HasSheafify, J.W monoidal, comm MonObj R), with independent universes and nothing added. Probe rfl confirms the tensor structures are Sheaf.monoidalCategory, Mod.monoidalCategory (coequalizer tensorObj_X, regular unit) and cochainModulesMonoidal. All clauses are present and correct: exactness; tensor and unit isos pinned by real canonical pure-tensor maps; naturality, associator, unitor and braiding equations checked for direction; total complex iso pinned on each summand; acyclicity, flatness (exact tensorRight vs IsFlatOnSite) and K-flatness iffs. The six sorry'd helper instances are true consequences of the hypotheses, listed and documented, as in the landed CochainTensorUniverses. The new def-sfb-modobj-relative-tensor lean record (existing upstream Mod.monoidalCategory, audit closed) matches its node. Only lean fields changed; statement verbatim; docstrings carry all 8 steps; lines <=100. nt_compile clean in 7.4 s and 6.9 s. Edge cases R=0, empty site, unit factors, degree-0 and unbounded complexes covered. No findings."
- },
- "lean": {
-  "module": "Sheaf.CategoryTheory.InternalSectionTensorComparison",
-  "declaration": "CategoryTheory.InternalAbelianSheafModule.internal_section_tensor_comparison",
-  "declarations": [
-   "CategoryTheory.InternalAbelianSheafModule.comparison_essentiallySmall",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_sheafTensorLeft",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_sheafTensorRight",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_internalColimits",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_additive",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_internalTotalExists",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_internalTmul",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_sectionTmul",
-   "CategoryTheory.InternalAbelianSheafModule.internal_section_tensor_comparison"
+    "lem-sfb-modobj-abelian",
+    "lem-sfb-modobj-forget-left-exact",
+    "lem-sfb-modobj-forget-right-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-sheaf-modules-tensor-closed"
   ],
-  "file": "lean/Sheaf/CategoryTheory/InternalSectionTensorComparison.lean",
-  "statement": "theorem internal_section_tensor_comparison : exactFunctor _ _ (sectionModuleEquivalence J R).functor ∧ ∃ e : ∀ M N : Mod (Sheaf J AddCommGrpCat.{u}) R, (sectionModuleEquivalence J R).functor.obj (M ⊗ N) ≅ (sectionModuleEquivalence J R).functor.obj M ⊗ (sectionModuleEquivalence J R).functor.obj N, ∃ e₀ : (sectionModuleEquivalence J R).functor.obj (𝟙_ (Mod (Sheaf J AddCommGrpCat.{u}) R)) ≅ 𝟙_ (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (sectionRingSheaf J R))), (∀ (M N : Mod (Sheaf J AddCommGrpCat.{u}) R) (U : Cᵒᵖ) (x : M.X.obj.obj U) (y : N.X.obj.obj U), ((e M N).hom.val.app U) (comparison_internalTmul J R M N U x y) = comparison_sectionTmul J R ((sectionModuleEquivalence J R).functor.obj M) ((sectionModuleEquivalence J R).functor.obj N) U x y) ∧ (∀ (U : Cᵒᵖ) (r : R.obj.obj U), (e₀.hom.val.app U) r = r) ∧ (∀ (M M' N N' : Mod (Sheaf J AddCommGrpCat.{u}) R) (f : M ⟶ M') (g : N ⟶ N'), (sectionModuleEquivalence J R).functor.map (f ⊗ₘ g) ≫ (e M' N').hom = (e M N).hom ≫ ((sectionModuleEquivalence J R).functor.map f ⊗ₘ (sectionModuleEquivalence J R).functor.map g)) ∧ (∀ M N P : Mod (Sheaf J AddCommGrpCat.{u}) R, (e (M ⊗ N) P).hom ≫ (e M N).hom ▷ (sectionModuleEquivalence J R).functor.obj P ≫ (α_ _ _ _).hom = (sectionModuleEquivalence J R).functor.map (α_ M N P).hom ≫ (e M (N ⊗ P)).hom ≫ (sectionModuleEquivalence J R).functor.obj M ◁ (e N P).hom) ∧ (∀ M : Mod (Sheaf J AddCommGrpCat.{u}) R, (e (𝟙_ _) M).hom ≫ e₀.hom ▷ (sectionModuleEquivalence J R).functor.obj M ≫ (λ_ _).hom = (sectionModuleEquivalence J R).functor.map (λ_ M).hom) ∧ (∀ M : Mod (Sheaf J AddCommGrpCat.{u}) R, (e M (𝟙_ _)).hom ≫ (sectionModuleEquivalence J R).functor.obj M ◁ e₀.hom ≫ (ρ_ _).hom = (sectionModuleEquivalence J R).functor.map (ρ_ M).hom) ∧ (∀ M N : Mod (Sheaf J AddCommGrpCat.{u}) R, (e M N).hom ≫ (β_ _ _).hom = (sectionModuleEquivalence J R).functor.map (β_ M N).hom ≫ (e N M).hom) ∧ (∀ K L : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ, ∃ t : ((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj (CochainComplex.mapBifunctor K L (curriedTensor _)) ≅ CochainComplex.mapBifunctor (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj L) (curriedTensor _), ∀ (p q n : ℤ) (h : p + q = n), (sectionModuleEquivalence J R).functor.map (CochainComplex.ιMapBifunctor K L (curriedTensor _) p q n h) ≫ t.hom.f n = (e (K.X p) (L.X q)).hom ≫ CochainComplex.ιMapBifunctor (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj L) (curriedTensor _) p q n h) ∧ (∀ K : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ, K.Acyclic ↔ (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj K).Acyclic) ∧ (∀ M : Mod (Sheaf J AddCommGrpCat.{u}) R, exactFunctor _ _ (tensorRight M) ↔ SheafOfModules.IsFlatOnSite ((sectionModuleEquivalence J R).functor.obj M)) ∧ (∀ K : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ, (∀ A : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ, A.Acyclic → (CochainComplex.mapBifunctor A K (curriedTensor _)).Acyclic) ↔ CochainComplex.IsKFlatIndependentCoefficients (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))",
-  "branch": "newtargets-dag",
-  "by": "N8",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "The comparison is existentially packaged with explicit local-pure-tensor and unit normalization, naturality, associator, both unitors and symmetry equations. The total-complex isomorphism is pinned by each coproduct summand. Auxiliary named infrastructure theorems are consequences of the same node hypotheses; no extra assumptions or arbitrary comparison maps are introduced."
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "S8",
-  "result": "pass",
-  "landing": "20261020T174846-L-811115",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.InternalAbelianSheafModule.comparison_additive",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_essentiallySmall",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_internalColimits",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_internalTotalExists",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_sheafTensorLeft",
-   "CategoryTheory.InternalAbelianSheafModule.comparison_sheafTensorRight",
-   "CategoryTheory.InternalAbelianSheafModule.internal_section_tensor_comparison"
-  ],
-  "sorry_after": [
-   "CategoryTheory.InternalAbelianSheafModule.internal_section_tensor_comparison"
-  ]
- }
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-Q155-a222d6e3b",
+    "group": "Q155",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-a222d6e3b (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, all 17 cited statements (plus det-def-sfb-sheaf-tensor-local-iso and def-weil-presheaf-modules-sheafification), Stacks sites-modules.tex:3551-3640 (03EK section-tensor-product, 0GMW lemma-sheafification-tensor, the Bilin characterisation; tags 03DA/03DB/03ER/06YN checked), the unit sk-def-pe-derived-completion (no steps) and its citers. Not a target and no new nodes. Hypotheses hold: the equivalence node's universe, sheafification and monoidal-local-equivalence conditions, sk-def-sfb-sheaf-tensor colimit preservation (which gives the additivity and finite colimits lem-sfb-modobj-abelian needs), coequalizers for the relative tensor, and R_sec commutative. I rederived step 3: the triple sheaf tensor is a(M⊗_pR⊗_pN) by strong monoidality, the coequalizer arrows are rm⊗n and m⊗rn, so both sides corepresent compatible sectionwise R(U)-balanced maps, and Yoneda gives the comparison. This needs only the sheafification universal property, not the plus construction or the locally-bijective hypothesis of lem-c2. Coherence (step 4), the (-1)^p total sign (step 5), cohomology, flatness and K-flatness in both directions (steps 6-8) are correct. Small cases checked: R=0, R=Z, M=R, degree-0 complexes, empty degrees. lem-c2-internal-section-module-flatness overlaps the flatness clause only, so it is not a duplicate; the item restates no clause of its parent. I accept the 5 declared generic tool_uses. One fault repaired (C1/C4): step 3 used the universal property of module sheafification over R_sec without a node, and def-weil-pbc-sheafification does not state it. I cited def-weil-presheaf-modules-sheafification in the step text, its uses and proof_deps; corrected file at fixes/dag/nodes/sec-proetale-coefficients/lem-pe-internal-section-tensor-comparison.json.; 1 file(s) fixed by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-1ec2f8eb2",
+    "group": "N8",
+    "result": "pass",
+    "note": "Read the item, all 9 statement dependencies and their sources (equivalence lines 290-431, ModuleObjects/Monoidal 50-200, CochainTensorUniverses, FlatOnSite, KFlat 287-346, SheafTensorStructure 73), and Stacks 03EK/0GMW. Hypotheses equal the equivalence dependency's binders (UnivLE.{max v w,u}, HasSheafify, J.W monoidal, comm MonObj R), with independent universes and nothing added. Probe rfl confirms the tensor structures are Sheaf.monoidalCategory, Mod.monoidalCategory (coequalizer tensorObj_X, regular unit) and cochainModulesMonoidal. All clauses are present and correct: exactness; tensor and unit isos pinned by real canonical pure-tensor maps; naturality, associator, unitor and braiding equations checked for direction; total complex iso pinned on each summand; acyclicity, flatness (exact tensorRight vs IsFlatOnSite) and K-flatness iffs. The six sorry'd helper instances are true consequences of the hypotheses, listed and documented, as in the landed CochainTensorUniverses. The new def-sfb-modobj-relative-tensor lean record (existing upstream Mod.monoidalCategory, audit closed) matches its node. Only lean fields changed; statement verbatim; docstrings carry all 8 steps; lines <=100. nt_compile clean in 7.4 s and 6.9 s. Edge cases R=0, empty site, unit factors, degree-0 and unbounded complexes covered. No findings."
+  },
+  "lean": {
+    "module": "Sheaf.CategoryTheory.InternalSectionTensorComparison",
+    "declaration": "CategoryTheory.InternalAbelianSheafModule.internal_section_tensor_comparison",
+    "declarations": [
+      "CategoryTheory.InternalAbelianSheafModule.comparison_essentiallySmall",
+      "CategoryTheory.InternalAbelianSheafModule.comparison_sheafTensorLeft",
+      "CategoryTheory.InternalAbelianSheafModule.comparison_sheafTensorRight",
+      "CategoryTheory.InternalAbelianSheafModule.comparison_internalColimits",
+      "CategoryTheory.InternalAbelianSheafModule.comparison_additive",
+      "CategoryTheory.InternalAbelianSheafModule.comparison_internalTotalExists",
+      "CategoryTheory.InternalAbelianSheafModule.comparison_internalTmul",
+      "CategoryTheory.InternalAbelianSheafModule.comparison_sectionTmul",
+      "CategoryTheory.InternalAbelianSheafModule.internal_section_tensor_comparison"
+    ],
+    "file": "lean/Sheaf/CategoryTheory/InternalSectionTensorComparison.lean",
+    "statement": "theorem internal_section_tensor_comparison : exactFunctor _ _ (sectionModuleEquivalence J R).functor ∧ ∃ e : ∀ M N : Mod (Sheaf J AddCommGrpCat.{u}) R, (sectionModuleEquivalence J R).functor.obj (M ⊗ N) ≅ (sectionModuleEquivalence J R).functor.obj M ⊗ (sectionModuleEquivalence J R).functor.obj N, ∃ e₀ : (sectionModuleEquivalence J R).functor.obj (𝟙_ (Mod (Sheaf J AddCommGrpCat.{u}) R)) ≅ 𝟙_ (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (sectionRingSheaf J R))), (∀ (M N : Mod (Sheaf J AddCommGrpCat.{u}) R) (U : Cᵒᵖ) (x : M.X.obj.obj U) (y : N.X.obj.obj U), ((e M N).hom.val.app U) (comparison_internalTmul J R M N U x y) = comparison_sectionTmul J R ((sectionModuleEquivalence J R).functor.obj M) ((sectionModuleEquivalence J R).functor.obj N) U x y) ∧ (∀ (U : Cᵒᵖ) (r : R.obj.obj U), (e₀.hom.val.app U) r = r) ∧ (∀ (M M' N N' : Mod (Sheaf J AddCommGrpCat.{u}) R) (f : M ⟶ M') (g : N ⟶ N'), (sectionModuleEquivalence J R).functor.map (f ⊗ₘ g) ≫ (e M' N').hom = (e M N).hom ≫ ((sectionModuleEquivalence J R).functor.map f ⊗ₘ (sectionModuleEquivalence J R).functor.map g)) ∧ (∀ M N P : Mod (Sheaf J AddCommGrpCat.{u}) R, (e (M ⊗ N) P).hom ≫ (e M N).hom ▷ (sectionModuleEquivalence J R).functor.obj P ≫ (α_ _ _ _).hom = (sectionModuleEquivalence J R).functor.map (α_ M N P).hom ≫ (e M (N ⊗ P)).hom ≫ (sectionModuleEquivalence J R).functor.obj M ◁ (e N P).hom) ∧ (∀ M : Mod (Sheaf J AddCommGrpCat.{u}) R, (e (𝟙_ _) M).hom ≫ e₀.hom ▷ (sectionModuleEquivalence J R).functor.obj M ≫ (λ_ _).hom = (sectionModuleEquivalence J R).functor.map (λ_ M).hom) ∧ (∀ M : Mod (Sheaf J AddCommGrpCat.{u}) R, (e M (𝟙_ _)).hom ≫ (sectionModuleEquivalence J R).functor.obj M ◁ e₀.hom ≫ (ρ_ _).hom = (sectionModuleEquivalence J R).functor.map (ρ_ M).hom) ∧ (∀ M N : Mod (Sheaf J AddCommGrpCat.{u}) R, (e M N).hom ≫ (β_ _ _).hom = (sectionModuleEquivalence J R).functor.map (β_ M N).hom ≫ (e N M).hom) ∧ (∀ K L : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ, ∃ t : ((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj (CochainComplex.mapBifunctor K L (curriedTensor _)) ≅ CochainComplex.mapBifunctor (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj L) (curriedTensor _), ∀ (p q n : ℤ) (h : p + q = n), (sectionModuleEquivalence J R).functor.map (CochainComplex.ιMapBifunctor K L (curriedTensor _) p q n h) ≫ t.hom.f n = (e (K.X p) (L.X q)).hom ≫ CochainComplex.ιMapBifunctor (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj L) (curriedTensor _) p q n h) ∧ (∀ K : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ, K.Acyclic ↔ (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj K).Acyclic) ∧ (∀ M : Mod (Sheaf J AddCommGrpCat.{u}) R, exactFunctor _ _ (tensorRight M) ↔ SheafOfModules.IsFlatOnSite ((sectionModuleEquivalence J R).functor.obj M)) ∧ (∀ K : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ, (∀ A : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ, A.Acyclic → (CochainComplex.mapBifunctor A K (curriedTensor _)).Acyclic) ↔ CochainComplex.IsKFlatIndependentCoefficients (((sectionModuleEquivalence J R).functor.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))",
+    "branch": "newtargets-dag",
+    "by": "N8",
+    "date": "2026-10-18",
+    "existing": false,
+    "note": "The comparison is existentially packaged with explicit local-pure-tensor and unit normalization, naturality, associator, both unitors and symmetry equations. The total-complex isomorphism is pinned by each coproduct summand. Auxiliary named infrastructure theorems are consequences of the same node hypotheses; no extra assumptions or arbitrary comparison maps are introduced."
+  }
 }

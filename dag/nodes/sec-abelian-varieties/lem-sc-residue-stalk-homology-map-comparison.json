@@ -1,188 +1,186 @@
 {
- "id": "lem-sc-residue-stalk-homology-map-comparison",
- "kind": "statement",
- "title": "Naturality of residue homology for a localized perfect representative",
- "statement": "Let S be a scheme [def-pc-scheme], E an object of its derived module category [def-pc-derived-category], a: O_S[0] → E, and s ∈ U. Let P be strictly perfect on the localized module site [def-pc-perfect-complex]. Write A for the complex with the restricted structure sheaf in degree zero and zero elsewhere. Fix e: E|_U ≅ Q(P), c: (O_S[0])|_U ≅ Q(A), and α: A → P with Q(α) = c⁻¹ ≫ a|_U ≫ e. Assume H⁰(Li_s* a) is invertible, where i_s is the residue morphism [def-pc-base-change, def-pc-derived-pullback]. Let F be the composite of the over-site equivalence to U, the module stalk functor at (s,hs) [def-pc-module-stalk-functor], and extension of scalars along O_{U,s} → κ(s). Then H⁰(F(α)) is an isomorphism of κ(s)-modules. No vanishing condition on the negative terms of P, and no linear frames, are assumed.",
- "source": {
-  "document": "Stacks Project",
-  "place": "Tags 0E62 (residue-field arrow argument), 06YJ (K-flat derived pullback), 0D5S (composition), and 0098 (stalk pullback)"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-pc-derived-category",
-  "def-pc-perfect-complex",
-  "def-pc-base-change",
-  "def-pc-derived-pullback",
-  "def-pc-module-stalk-functor"
- ],
- "proof": [
-  {
-   "text": "The restricted structure sheaf concentrated in any integer degree i is strictly perfect: its support bounds are i and i, its term at i is the rank-one finite free module, and its other terms are zero. Specialize the generalized private helper at i = 0. Apply the simultaneous natural strictly-perfect residue homology comparison to this source and P.",
-   "uses": [
-    "lem-sc-localized-strict-perfect-residue-homology"
-   ],
-   "elementary": true,
-   "source": {
+  "id": "lem-sc-residue-stalk-homology-map-comparison",
+  "kind": "statement",
+  "title": "Naturality of residue homology for a localized perfect representative",
+  "statement": "Let S be a scheme [def-pc-scheme], E an object of its derived module category [def-pc-derived-category], a: O_S[0] → E, and s ∈ U. Let P be strictly perfect on the localized module site [def-pc-perfect-complex]. Write A for the complex with the restricted structure sheaf in degree zero and zero elsewhere. Fix e: E|_U ≅ Q(P), c: (O_S[0])|_U ≅ Q(A), and α: A → P with Q(α) = c⁻¹ ≫ a|_U ≫ e. Assume H⁰(Li_s* a) is invertible, where i_s is the residue morphism [def-pc-base-change, def-pc-derived-pullback]. Let F be the composite of the over-site equivalence to U, the module stalk functor at (s,hs) [def-pc-module-stalk-functor], and extension of scalars along O_{U,s} → κ(s). Then H⁰(F(α)) is an isomorphism of κ(s)-modules. No vanishing condition on the negative terms of P, and no linear frames, are assumed.",
+  "source": {
     "document": "Stacks Project",
-    "place": "Tags 06YJ, 0D5S and 0098"
-   }
+    "place": "Tags 0E62 (residue-field arrow argument), 06YJ (K-flat derived pullback), 0D5S (composition), and 0098 (stalk pullback)"
   },
-  {
-   "text": "The natural open restriction comparison conjugates localizedResidueHomology(R(a)) to the global residue homology arrow followed by global sections and residue-field scalar extension. These functors preserve isomorphisms, so ha makes that arrow invertible.",
-   "uses": [
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-perfect-complex",
+    "def-pc-base-change",
+    "def-pc-derived-pullback",
+    "def-pc-module-stalk-functor"
+  ],
+  "proof": [
+    {
+      "text": "The restricted structure sheaf concentrated in any integer degree i is strictly perfect: its support bounds are i and i, its term at i is the rank-one finite free module, and its other terms are zero. Specialize the generalized private helper at i = 0. Apply the simultaneous natural strictly-perfect residue homology comparison to this source and P.",
+      "uses": [
+        "lem-sc-localized-strict-perfect-residue-homology"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "Stacks Project",
+        "place": "Tags 06YJ, 0D5S and 0098"
+      }
+    },
+    {
+      "text": "The natural open restriction comparison conjugates localizedResidueHomology(R(a)) to the global residue homology arrow followed by global sections and residue-field scalar extension. These functors preserve isomorphisms, so ha makes that arrow invertible.",
+      "uses": [
+        "lem-sc-localized-residue-homology-restriction"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "Stacks Project",
+        "place": "Tags 06YJ, 0D5S and 0098"
+      }
+    },
+    {
+      "text": "Apply localizedResidueHomology to hα. Functoriality expresses its image of Q(alpha) as the images of c.inv, R(a) and e.hom. Each factor is invertible. The termwise comparison square then makes H^0(F(alpha)) followed by its invertible target comparison invertible; cancellation of that isomorphism proves the conclusion.",
+      "uses": [
+        "lem-sc-localized-strict-perfect-residue-homology"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "Stacks Project",
+        "place": "Tags 06YJ, 0D5S and 0098"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-localized-strict-perfect-residue-homology",
     "lem-sc-localized-residue-homology-restriction"
-   ],
-   "elementary": true,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "group": "R2",
+    "date": "2026-10-13",
     "document": "Stacks Project",
-    "place": "Tags 06YJ, 0D5S and 0098"
-   }
+    "place": "Tags 06YJ, 0D5S, 0098, 06YB and 064K",
+    "note": "Source-based assembly of the chosen derived counit, exact localization and stalk tensor comparisons. Repair: generalized the private single-complex helper to every integer degree; importing the existing degree-zero helper would close a cycle through ConnectiveRankOneModelStalk."
   },
-  {
-   "text": "Apply localizedResidueHomology to hα. Functoriality expresses its image of Q(alpha) as the images of c.inv, R(a) and e.hom. Each factor is invertible. The termwise comparison square then makes H^0(F(alpha)) followed by its invertible target comparison invertible; cancellation of that isomorphism proves the conclusion.",
-   "uses": [
-    "lem-sc-localized-strict-perfect-residue-homology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tags 06YJ, 0D5S and 0098"
-   }
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Injectivity of degree zero map from a single complex when the map on degree zero homology is injective",
+      "results": "Eight hits including HomologicalComplex.instMonoHomologyι; none provides the geometric natural comparison.",
+      "date": "2026-10-13",
+      "verdict": "No exact match; component monomorphism from homology proved in parent."
+    },
+    {
+      "tool": "loogle",
+      "query": "HomologicalComplex.homologyMap",
+      "results": "Twelve hits including homologyπ_naturality and homologyι_naturality; no local scheme derived-residue comparison.",
+      "date": "2026-10-13",
+      "verdict": "Naturality API used to prove algebraic step; geometric comparison still missing."
+    },
+    {
+      "tool": "grep",
+      "query": "residue.*homology|homology.*residue|single_obj_d",
+      "results": "Seven single-complex differential hits in Mathlib. Local rg inspected KFlatStalkResidueCohomology, StalkFreeResidueCohomologyComparison, and LocalizedHomologyStalkComparison: first two are object isomorphisms, third has no residue tensor derived comparison.",
+      "date": "2026-10-13",
+      "verdict": "No exact morphism comparison."
+    },
+    {
+      "tool": "leansearch",
+      "query": "The homology map of the residue tensor of a strictly perfect stalk complex agrees with the derived residue pullback map",
+      "results": "UNAVAILABLE: service unavailable: Internal Server Error. Search attempted through msearch.py; other kinds and local source grep inspected.",
+      "date": "2026-10-13",
+      "unavailable": true
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Naturality of derived tensor base change for morphisms of bounded complexes of flat modules at a scheme point",
+      "results": "Second reader: eight tensor, pullback-carrier and completion naturality results; none is the derived residue arrow comparison.",
+      "date": "2026-10-13",
+      "verdict": "No exact match for the geometric comparison."
+    },
+    {
+      "tool": "loogle",
+      "query": "HomologicalComplex.homologyMap, CategoryTheory.IsIso",
+      "results": "Second reader: six generic homology isomorphism and quasi-isomorphism results; none connects the representing arrow to geometric residue pullback.",
+      "date": "2026-10-13",
+      "verdict": "No exact match for the geometric comparison."
+    },
+    {
+      "tool": "grep",
+      "query": "mapHomologyIso_hom_naturality|homologyπ_naturality|cyclesMap_i",
+      "results": "Second reader: 25 generic homology naturality hits. Read KFlatStalkResidueCohomology and StalkFreeResidueCohomologyComparison and searched Sheaf and upstream WeilConjectures; object comparisons are not the required morphism comparison.",
+      "date": "2026-10-13",
+      "verdict": "No exact match for the geometric comparison."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.ResidueHomologyRankOneCoefficient",
+    "date": "2026-10-13",
+    "group": "K3"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-residue-homology-rank-one-coefficient",
+      "place": "Proof step 1: residue homology arrow of α is invertible",
+      "via": [
+        "lem-sc-residue-homology-rank-one-coefficient",
+        "lem-sc-rank-one-residue-stalk-component",
+        "lem-sc-connective-rank-one-model-stalk",
+        "lem-sc-perfect-local-degree-zero-unit",
+        "lem-sc-proper-flat-structure-sheaf-stalk-surjective",
+        "lem-sc-proper-flat-structure-sheaf-stalk",
+        "lem-sc-proper-flat-global-sections-criterion",
+        "lem-sc-general-theorem-of-cube"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-cube",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.ResidueStalkHomologyMapComparison",
+    "file": "lean/Sheaf/AlgebraicGeometry/ResidueStalkHomologyMapComparison.lean",
+    "declaration": "AlgebraicGeometry.isIso_residue_stalk_homologyMap",
+    "statement": "theorem isIso_residue_stalk_homologyMap (S : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ U : S.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    [∀ x : S, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (S.residueField x)).toRingedSpace))]\n    (E : schemeDerivedCategory S)\n    (a : (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj\n        (SheafOfModules.unit S.ringCatSheaf) ⟶ E) (s : S)\n    (U : S.Opens) (hs : s ∈ U)\n    (P : CochainComplex\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) ℤ)\n    (hP : Scheme.IsStrictlyPerfect S U P)\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj P)\n    (ha : IsIso ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (S.residueField s)).toRingedSpace)) 0).map\n        ((derivedPullback (S.fromSpecResidueField s)).map a)))\n    (c : (SheafOfModules.overFunctor.{u}\n        (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj\n          (SheafOfModules.unit S.ringCatSheaf)) ≅\n      DerivedCategory.Q.obj\n        ((CochainComplex.singleFunctor\n          (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj\n            ((SheafOfModules.overFunctor.{u}\n              (moduleRings S.toRingedSpace) U).obj (SheafOfModules.unit S.ringCatSheaf))))\n    (α : (CochainComplex.singleFunctor\n        (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj\n          ((SheafOfModules.overFunctor.{u}\n            (moduleRings S.toRingedSpace) U).obj (SheafOfModules.unit S.ringCatSheaf)) ⟶ P)\n    (hα : DerivedCategory.Q.map α = c.inv ≫\n      (SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory.map a ≫\n        e.hom)\n :\n    letI : (Scheme.Modules.overEquiv U).functor.Additive :=\n      Functor.additive_of_preserves_binary_products _\n    letI : (ModuleCat.extendScalars (IsLocalRing.residue\n        (U.toScheme.presheaf.stalk ⟨s, hs⟩))).Additive :=\n      (ModuleCat.extendRestrictScalarsAdj (IsLocalRing.residue\n        (U.toScheme.presheaf.stalk ⟨s, hs⟩))).left_adjoint_additive\n    letI : (RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace\n        ⟨s, hs⟩).PreservesZeroMorphisms :=\n      RingedSpace.moduleStalkFunctor_preservesZeroMorphisms U.toScheme.toRingedSpace ⟨s, hs⟩\n    letI : ((Scheme.Modules.overEquiv U).functor ⋙\n        RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace ⟨s, hs⟩ ⋙\n        ModuleCat.extendScalars (IsLocalRing.residue\n          (U.toScheme.presheaf.stalk ⟨s, hs⟩))).PreservesZeroMorphisms :=\n      { map_zero := by\n          intro M N\n          simp only [Functor.comp_map]\n          rw [Functor.map_zero, Functor.map_zero, Functor.map_zero] }\n    IsIso (HomologicalComplex.homologyMap\n      ((((Scheme.Modules.overEquiv U).functor ⋙\n        RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace ⟨s, hs⟩ ⋙\n        ModuleCat.extendScalars (IsLocalRing.residue\n          (U.toScheme.presheaf.stalk ⟨s, hs⟩))).mapHomologicalComplex\n            (ComplexShape.up ℤ)).map α) 0)",
+    "branch": "sheaf-dag",
+    "by": "K3",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "K3",
+    "result": "pass",
+    "landing": "20261013T072355-L-1121607",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "R2",
+    "result": "pass",
+    "landing": "20261013T111917-L-3061035",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   }
- ],
- "proof_deps": [
-  "lem-sc-localized-strict-perfect-residue-homology",
-  "lem-sc-localized-residue-homology-restriction"
- ],
- "proof_origin": {
-  "by": "worker",
-  "group": "R2",
-  "date": "2026-10-13",
-  "document": "Stacks Project",
-  "place": "Tags 06YJ, 0D5S, 0098, 06YB and 064K",
-  "note": "Source-based assembly of the chosen derived counit, exact localization and stalk tensor comparisons. Repair: generalized the private single-complex helper to every integer degree; importing the existing degree-zero helper would close a cycle through ConnectiveRankOneModelStalk."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Injectivity of degree zero map from a single complex when the map on degree zero homology is injective",
-   "results": "Eight hits including HomologicalComplex.instMonoHomologyι; none provides the geometric natural comparison.",
-   "date": "2026-10-13",
-   "verdict": "No exact match; component monomorphism from homology proved in parent."
-  },
-  {
-   "tool": "loogle",
-   "query": "HomologicalComplex.homologyMap",
-   "results": "Twelve hits including homologyπ_naturality and homologyι_naturality; no local scheme derived-residue comparison.",
-   "date": "2026-10-13",
-   "verdict": "Naturality API used to prove algebraic step; geometric comparison still missing."
-  },
-  {
-   "tool": "grep",
-   "query": "residue.*homology|homology.*residue|single_obj_d",
-   "results": "Seven single-complex differential hits in Mathlib. Local rg inspected KFlatStalkResidueCohomology, StalkFreeResidueCohomologyComparison, and LocalizedHomologyStalkComparison: first two are object isomorphisms, third has no residue tensor derived comparison.",
-   "date": "2026-10-13",
-   "verdict": "No exact morphism comparison."
-  },
-  {
-   "tool": "leansearch",
-   "query": "The homology map of the residue tensor of a strictly perfect stalk complex agrees with the derived residue pullback map",
-   "results": "UNAVAILABLE: service unavailable: Internal Server Error. Search attempted through msearch.py; other kinds and local source grep inspected.",
-   "date": "2026-10-13",
-   "unavailable": true
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Naturality of derived tensor base change for morphisms of bounded complexes of flat modules at a scheme point",
-   "results": "Second reader: eight tensor, pullback-carrier and completion naturality results; none is the derived residue arrow comparison.",
-   "date": "2026-10-13",
-   "verdict": "No exact match for the geometric comparison."
-  },
-  {
-   "tool": "loogle",
-   "query": "HomologicalComplex.homologyMap, CategoryTheory.IsIso",
-   "results": "Second reader: six generic homology isomorphism and quasi-isomorphism results; none connects the representing arrow to geometric residue pullback.",
-   "date": "2026-10-13",
-   "verdict": "No exact match for the geometric comparison."
-  },
-  {
-   "tool": "grep",
-   "query": "mapHomologyIso_hom_naturality|homologyπ_naturality|cyclesMap_i",
-   "results": "Second reader: 25 generic homology naturality hits. Read KFlatStalkResidueCohomology and StalkFreeResidueCohomologyComparison and searched Sheaf and upstream WeilConjectures; object comparisons are not the required morphism comparison.",
-   "date": "2026-10-13",
-   "verdict": "No exact match for the geometric comparison."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.ResidueHomologyRankOneCoefficient",
-  "date": "2026-10-13",
-  "group": "K3"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-residue-homology-rank-one-coefficient",
-   "place": "Proof step 1: residue homology arrow of α is invertible",
-   "via": [
-    "lem-sc-residue-homology-rank-one-coefficient",
-    "lem-sc-rank-one-residue-stalk-component",
-    "lem-sc-connective-rank-one-model-stalk",
-    "lem-sc-perfect-local-degree-zero-unit",
-    "lem-sc-proper-flat-structure-sheaf-stalk-surjective",
-    "lem-sc-proper-flat-structure-sheaf-stalk",
-    "lem-sc-proper-flat-global-sections-criterion",
-    "lem-sc-general-theorem-of-cube"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ResidueStalkHomologyMapComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/ResidueStalkHomologyMapComparison.lean",
-  "declaration": "AlgebraicGeometry.isIso_residue_stalk_homologyMap",
-  "statement": "theorem isIso_residue_stalk_homologyMap (S : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ U : S.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    [∀ x : S, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (S.residueField x)).toRingedSpace))]\n    (E : schemeDerivedCategory S)\n    (a : (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj\n        (SheafOfModules.unit S.ringCatSheaf) ⟶ E) (s : S)\n    (U : S.Opens) (hs : s ∈ U)\n    (P : CochainComplex\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) ℤ)\n    (hP : Scheme.IsStrictlyPerfect S U P)\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj P)\n    (ha : IsIso ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (S.residueField s)).toRingedSpace)) 0).map\n        ((derivedPullback (S.fromSpecResidueField s)).map a)))\n    (c : (SheafOfModules.overFunctor.{u}\n        (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj\n          (SheafOfModules.unit S.ringCatSheaf)) ≅\n      DerivedCategory.Q.obj\n        ((CochainComplex.singleFunctor\n          (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj\n            ((SheafOfModules.overFunctor.{u}\n              (moduleRings S.toRingedSpace) U).obj (SheafOfModules.unit S.ringCatSheaf))))\n    (α : (CochainComplex.singleFunctor\n        (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj\n          ((SheafOfModules.overFunctor.{u}\n            (moduleRings S.toRingedSpace) U).obj (SheafOfModules.unit S.ringCatSheaf)) ⟶ P)\n    (hα : DerivedCategory.Q.map α = c.inv ≫\n      (SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory.map a ≫\n        e.hom)\n :\n    letI : (Scheme.Modules.overEquiv U).functor.Additive :=\n      Functor.additive_of_preserves_binary_products _\n    letI : (ModuleCat.extendScalars (IsLocalRing.residue\n        (U.toScheme.presheaf.stalk ⟨s, hs⟩))).Additive :=\n      (ModuleCat.extendRestrictScalarsAdj (IsLocalRing.residue\n        (U.toScheme.presheaf.stalk ⟨s, hs⟩))).left_adjoint_additive\n    letI : (RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace\n        ⟨s, hs⟩).PreservesZeroMorphisms :=\n      RingedSpace.moduleStalkFunctor_preservesZeroMorphisms U.toScheme.toRingedSpace ⟨s, hs⟩\n    letI : ((Scheme.Modules.overEquiv U).functor ⋙\n        RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace ⟨s, hs⟩ ⋙\n        ModuleCat.extendScalars (IsLocalRing.residue\n          (U.toScheme.presheaf.stalk ⟨s, hs⟩))).PreservesZeroMorphisms :=\n      { map_zero := by\n          intro M N\n          simp only [Functor.comp_map]\n          rw [Functor.map_zero, Functor.map_zero, Functor.map_zero] }\n    IsIso (HomologicalComplex.homologyMap\n      ((((Scheme.Modules.overEquiv U).functor ⋙\n        RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace ⟨s, hs⟩ ⋙\n        ModuleCat.extendScalars (IsLocalRing.residue\n          (U.toScheme.presheaf.stalk ⟨s, hs⟩))).mapHomologicalComplex\n            (ComplexShape.up ℤ)).map α) 0)",
-  "branch": "sheaf-dag",
-  "by": "K3",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
-  "result": "pass",
-  "landing": "20261013T072355-L-1121607",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P4",
-  "result": "pass",
-  "landing": "20261020T174832-L-805953",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- }
 }

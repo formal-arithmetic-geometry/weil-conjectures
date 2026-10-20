@@ -1,251 +1,311 @@
 {
- "id": "sk-lem-base-field-cd",
- "blueprint": {
-  "is": "sk-lem-base-field-cd",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Cohomological dimension of the base field",
- "statement": "If $K$ is an algebraically closed field, then $\\operatorname{cd}_\\ell(K)=0$. If\n$K$ is a finite field, then $\\operatorname{cd}_\\ell(K)\\leq1$.",
- "source": {
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/_section.md",
-  "place": "node sk-lem-base-field-cd, order 1507",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 03QQ"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 010T"
-   }
-  ]
- },
- "stmt_deps": [
-  "sk-def-cd"
- ],
- "proof": [
-  {
-   "text": "For algebraically closed K, use [lem-sf-separably-closed-torsion-cd] and [det-cd-etale-comparison] at c=0, with the identity of the affine spectrum as auxiliary qcqs morphism. The result takes values in WithTop ℕ; zero_le and the upper bound imply equality. No separate nonzero degree-zero sheaf is needed.",
-   "uses": [
+  "id": "sk-lem-base-field-cd",
+  "blueprint": {
+    "is": "sk-lem-base-field-cd",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Cohomological dimension of the base field",
+  "statement": "If $K$ is an algebraically closed field, then $\\operatorname{cd}_\\ell(K)=0$. If\n$K$ is a finite field, then $\\operatorname{cd}_\\ell(K)\\leq1$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/_section.md",
+    "place": "node sk-lem-base-field-cd, order 1507",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 03QQ"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 010T"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "sk-def-cd"
+  ],
+  "proof": [
+    {
+      "text": "Let $K$ be a field, choose a separable closure inside an algebraic closure $\\Omega$, and put $G=\\operatorname{Gal}(K^{\\rm sep}/K)$. By [lem-exc-abelian-sheaves-gmodules], geometric stalks give an additive equivalence $E$ from all abelian étale sheaves to discrete $G$-modules. With $L=K$, [lem-exc-field-sections-stalk-invariants] identifies sections naturally with $E(F)^G$; the germ maps preserve addition. Here is the formal derived comparison explicitly: an additive equivalence and its inverse preserve kernels and cokernels by their universal properties, hence preserve exact complexes; the identification of Hom groups with those under the inverse equivalence preserves the defining acyclicity condition for K-injective complexes. Thus, if $F\\to I^\\bullet$ is the resolution used in [def-weil-pbc-etale-cohomology], then $E(F)\\to E(I^\\bullet)$ is a K-injective resolution of $E(F)$, and the two complexes obtained by sections and invariants are termwise naturally isomorphic. Part (1) of [det-base-field-cd-cochains] identifies the latter derived invariants with continuous-cochain cohomology. Consequently $H^s(K_{\\Et},F)\\cong H^s(G,E(F))$ for every $s\\geq0$, with no finite coefficient ring or uniform annihilator assumption.",
+      "uses": [
+        "lem-exc-abelian-sheaves-gmodules",
+        "lem-exc-field-sections-stalk-invariants",
+        "def-weil-pbc-etale-cohomology",
+        "det-base-field-cd-cochains"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 04JQ, lemma-equivalence-abelian-sheaves-point; Tag 04JM, lemma-global-sections-point; Tag 03QU, lemma-compare-cohomology-point; continuous cochains as in the cited blueprint lemma"
+      }
+    },
+    {
+      "text": "Suppose $K$ is algebraically closed. It is separably closed, so [lem-sf-separably-closed-torsion-cd] gives vanishing for every torsion étale sheaf in positive degrees. Apply part (4) of [det-cd-etale-comparison] with $S=\\operatorname{Spec}K$ and $c=0$ to obtain $\\operatorname{cd}_\\ell(K)\\leq0$. The spectrum of a field is affine, hence qcqs; instantiate the auxiliary qcqs morphism in that comparison as $g=\\mathrm{id}_{\\operatorname{Spec}K}$.",
+      "uses": [
+        "lem-sf-separably-closed-torsion-cd",
+        "det-cd-etale-comparison"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd.proof.md",
+        "place": "first paragraph, algebraically closed case; sk-def-cd/sk-def-cd-etale-comparison.md, part (4)"
+      }
+    },
+    {
+      "text": "For the reverse inequality, take the trivial discrete $G$-module $A=\\mathbf Z/\\ell\\mathbf Z\\neq0$ and its inverse image $F$ under [lem-exc-abelian-sheaves-gmodules]. Additivity and faithfulness show $\\ell\\,\\mathrm{id}_F=0$, since $\\ell\\,\\mathrm{id}_A=0$; therefore $F$ is an $\\ell$-power torsion sheaf. The section formula of [lem-exc-field-sections-stalk-invariants] with $L=K$ gives $H^0(K_{\\Et},F)=A^G=A\\neq0$. Part (2) of [det-cd-etale-comparison] then puts degree zero in the supremum defining $\\operatorname{cd}_\\ell(K)$, so the upper bound from step 2 is equality. This argument works also when $\\ell=\\operatorname{char}K$.",
+      "uses": [
+        "lem-exc-abelian-sheaves-gmodules",
+        "lem-exc-field-sections-stalk-invariants",
+        "det-cd-etale-comparison"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+        "place": "Consequences, last paragraph: nonzero degree-zero sheaf; explicit inverse-equivalence construction"
+      }
+    },
+    {
+      "text": "Now let $K$ be finite. By [det-base-field-cd-galois-group], its absolute Galois group is isomorphic as a profinite group to $\\widehat{\\mathbf Z}=\\varprojlim_n\\mathbf Z/n\\mathbf Z$, with transition maps given by reduction when the indices divide. We may compute continuous cohomology on this group: pull back the action and each continuous cochain along the topological group isomorphism. The cochain differential uses only the group product and action, so this pullback commutes with the differential and has inverse given by the inverse isomorphism. By part (1) of [det-base-field-cd-cochains], it also identifies the cohomology groups.",
+      "uses": [
+        "det-base-field-cd-galois-group",
+        "det-base-field-cd-cochains"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd.proof.md",
+        "place": "first paragraph, finite-field Galois group"
+      }
+    },
+    {
+      "text": "Let $M$ be any torsion discrete $\\widehat{\\mathbf Z}$-module. For $x\\in M$, its open stabilizer contains the kernel of projection to some finite cyclic quotient, since a basic neighbourhood of the identity restricts finitely many coordinates and their least common multiple dominates them. Its orbit is therefore an image of this finite cyclic quotient and is finite. If $ex=0$, every element of the orbit is killed by $e$; the subgroup generated by an orbit of size $t$ is a quotient of $(\\mathbf Z/e\\mathbf Z)^t$, hence finite and stable. For a finite list of elements take the sum of their finite stable subgroups, which is finite as an image of their finite product. These subgroups, ordered by inclusion, form a small nonempty directed partially ordered set: they are a subset of the power set of $M$, contain the zero subgroup, and the sum contains any given pair. Their union equals $M$. Part (2) of [det-base-field-cd-cochains] gives $H^s(\\widehat{\\mathbf Z},M)=\\varinjlim_A H^s(\\widehat{\\mathbf Z},A)$ over its finite stable submodules $A$. It therefore suffices to prove vanishing in degrees $s\\geq2$ for finite $A$.",
+      "uses": [
+        "det-base-field-cd-cochains"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+        "place": "Reduction to finite modules"
+      }
+    },
+    {
+      "text": "Let $A$ be a finite discrete $\\widehat{\\mathbf Z}$-module and choose $e\\geq1$ with $eA=0$ (take $e=1$ if $A=0$). The intersection of the open stabilizers of its finitely many elements is an open action kernel. From the inverse-limit topology, this kernel contains the kernel of $\\widehat{\\mathbf Z}\\to C_m=\\mathbf Z/m\\mathbf Z$ for some $m\\geq1$: a basic neighbourhood restricts finitely many coordinates, and their least common multiple gives such an $m$. Every projection to $C_n$ is surjective: a residue represented by an integer $a$ is the image of the compatible family of residues of $a$ in all cyclic quotients. Thus $\\widehat{\\mathbf Z}/K_n\\cong C_n$ for its coordinate kernel $K_n$, and the action factors through $C_m$. The projections to $C_n$ with $m\\mid n$ still present $\\widehat{\\mathbf Z}$ as an inverse limit: any finite list of coordinates is dominated by an index divisible both by $m$ and all those indices. Their kernels all act trivially on $A$. They are cofinal, under reverse inclusion, among all open normal subgroups acting trivially on $A$: for any such subgroup $N$, the same finite-coordinate argument gives a coordinate kernel $K_d\\subseteq N$, and $K_{\\operatorname{lcm}(m,d)}\\subseteq K_d\\subseteq N$. Thus the inverse-limit hypothesis in part (3) holds over the whole family as well. Restricting its colimit to these coordinate kernels changes no classes or equalities: each representative at $N$ inflates to one of them, and any equality witnessed at another subgroup inflates to a common multiple of its coordinate index and the finitely many indices already in use. Part (3) of [det-base-field-cd-cochains] therefore gives $H^s(\\widehat{\\mathbf Z},A)=\\varinjlim_{m\\mid n}H^s(C_n,A)$ along inflation.",
+      "uses": [
+        "det-base-field-cd-cochains"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+        "place": "Finite modules, action kernel and cyclic quotient colimit"
+      }
+    },
+    {
+      "text": "Fix $s\\geq2$. For every index $n$ divisible by $m$, apply only the final clause of [det-base-field-cd-inflation] to $C_{en}\\to C_n$, with $r=e$ and module $A$. Its hypotheses hold because $eA=0$, so the inflation $H^s(C_n,A)\\to H^s(C_{en},A)$ is zero. Every element of the colimit in step 6 has a representative at one index $n$ and becomes zero at $en$; hence that colimit is zero. Step 5 then gives $H^s(\\widehat{\\mathbf Z},M)=0$ for every torsion discrete $M$ and $s\\geq2$. The current inflation statement explicitly uses source norm differential $N_n$ and target norm differential $eN_n$; its degree-$s$ map is multiplication by $e^{\\lfloor s/2\\rfloor}$ between those different complexes, and is zero because $eA=0$ and $s\\geq2$.",
+      "uses": [
+        "det-base-field-cd-inflation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+        "place": "Finite modules, inflation from level n to en; sk-lem-base-field-cd-inflation.proof.md, chain-map formula"
+      }
+    },
+    {
+      "text": "For every torsion étale sheaf $F$ on $\\operatorname{Spec}K$, its stalk $M=E(F)$ is torsion: each germ is represented by a local section, and an integer killing that section kills its germ. Steps 1 and 4 identify $H^s(K_{\\Et},F)$ with $H^s(\\widehat{\\mathbf Z},M)$, which step 7 shows is zero for $s\\geq2$. In particular this holds for every $\\ell$-power torsion étale sheaf. Applying part (2) of [det-cd-etale-comparison] on the qcqs scheme $\\operatorname{Spec}K$, with auxiliary morphism $g=\\mathrm{id}_{\\operatorname{Spec}K}$, the supremum of degrees of nonzero cohomology is at most one. Thus $\\operatorname{cd}_\\ell(K)\\leq1$, as required. No restriction on the characteristic or uniform exponent has entered this conclusion.",
+      "uses": [
+        "det-cd-etale-comparison"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+        "place": "Consequences, finite-field torsion bound and étale/pro-étale comparison"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-exc-field-sections-stalk-invariants",
+    "def-weil-pbc-etale-cohomology",
+    "det-base-field-cd-cochains",
+    "lem-sf-separably-closed-torsion-cd",
+    "det-cd-etale-comparison",
+    "det-base-field-cd-galois-group",
+    "det-base-field-cd-inflation"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd.proof.md",
+    "place": "All four proof paragraphs, expanded using the finite-field detail proof, Stacks Tags 04JQ/04JM/03QU, and the comparison node"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Cohomological dimension of a finite field is at most one",
+      "results": "ringKrullDim_eq_zero_of_isField, ringKrullDim_eq_zero_of_field, groupCohomology.H1ofAutOnUnitsUnique, FiniteField.finrank_extension, IsLocalRing.finrank_cotangentSpace_eq_zero, FiniteField.finrank_zmod_extension, CSA.fin_dim, FiniteField.pow_finrank_eq_card",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "cohomologicalDimension|cohomological_dimension|procyclic|finiteField.*cohom|cohom.*finiteField",
+      "results": "0 hits",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "groupCohomology, IsAlgClosed",
+      "results": "0 hits",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The etale ell cohomological dimension of an algebraically closed field is zero and of a finite field is at most one",
+      "results": "IsAlgClosed.perfectRing, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.FormallySmooth.of_perfectField, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.iff_exists_algEquiv_prod",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "continuousCohomology|H1ofAutOnUnitsUnique",
+      "results": "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "continuousCohomology",
+      "results": "continuousCohomology, ContinuousCohomology.map_id, ContinuousCohomology.map, ContinuousCohomology.π_map, ContinuousCohomology.map_comp, ContinuousCohomology.π_map_assoc, ContinuousCohomology.map_comp_assoc, ContinuousCohomology.zeroIso",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Higher continuous cohomology of the profinite completion of the integers with discrete torsion coefficients vanishes in degrees at least two",
+      "results": "ContinuousCohomology.MultiInd.d_comp_d, ContinuousCohomology.continuousCohomologyZeroIso, isZero_groupCohomology_succ_of_subsingleton, continuousCohomology, ContinuousCohomology.MultiInd.complex, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "profinite.*cohomology|cohomology.*profinite|IsProcyclic|cohomologicalDimension",
+      "results": "Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For a finite discrete representation of the profinite integers, continuous group cohomology is zero above degree one",
+      "results": "isZero_groupCohomology_succ_of_subsingleton, groupCohomology.d₀₁_eq_zero, ContinuousCohomology.continuousCohomologyZeroIso, groupCohomology.subtype_comp_d₀₁_apply, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology.H1, groupCohomology.map_1_one, groupCohomology.map₁_one",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "cohomology.*(Profinite|Procyclic|ZHat)|((Profinite|Procyclic|ZHat).*cohomology)|isZero_groupCohomology_succ",
+      "results": "Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Continuous cohomology of a procyclic profinite group with discrete torsion abelian group coefficients vanishes in degrees greater than one",
+      "results": "ContinuousCohomology.continuousCohomologyZeroIso, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, continuousCohomology, isZero_groupCohomology_succ_of_subsingleton, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, Rep.FiniteCyclicGroup.groupCohomologyπEven, Rep.FiniteCyclicGroup.groupCohomologyIsoEven, Rep.FiniteCyclicGroup.groupCohomologyIsoOdd",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1507,
+  "blueprint_uses": [
+    "sk-def-cd"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-def-cd"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015",
+  "chapter": "sec-six-functors-basics",
+  "unit": "sk-lem-base-field-cd",
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "sk-lem-base-field-cd",
+    "worker": "stage1",
+    "summary": "Rechecked the retained eight-step split against the current main DAG and the landing return at 9c1382d49c. The unit record is now an explicit delivery file, with changes confined to realized and realized_by, so landing needs no out-of-delivery unit fix. All eight current cited statements support all fifteen verbatim step/node quotations. The second reader refreshed the inflation citation and step 7 to use its repaired source and target norm complexes; the citation audit records current hashes. Expanded the finite-orbit argument in step 5 using coordinate kernels. The two-clause statement, blueprint route, existing dependencies and eleven logged Mathlib searches are retained; no new node or foreign-node edit is introduced.",
+    "blueprint": "Step 1 realizes the opening étale/Galois comparison; steps 2–3 the algebraically closed clause; step 4 the Galois-group sentence; steps 5–6 the reduction-to-finite-cyclic-groups paragraph using parts (2) and (3) of the existing cochains node; step 7 the inflation-kills-high-degrees paragraph; step 8 the finite-field conclusion. No restatement node det-base-field-cd-finite-field is created.",
+    "tool_uses": [
+      {
+        "node": "lem-exc-abelian-sheaves-gmodules",
+        "why": "General additive geometric-stalk equivalence for all abelian sheaves, needed for the field/Galois bridge without a finite-ring restriction."
+      },
+      {
+        "node": "lem-exc-field-sections-stalk-invariants",
+        "why": "General natural section formula, applied at L=K to identify global sections with invariants."
+      },
+      {
+        "node": "lem-sf-separably-closed-torsion-cd",
+        "why": "The blueprint explicitly uses the general separably closed torsion bound for the algebraically closed case."
+      },
+      {
+        "node": "det-cd-etale-comparison",
+        "why": "The blueprint explicitly uses this comparison to interpret the pro-étale dimension in terms of ordinary étale sheaves."
+      }
+    ],
+    "second_reading": "Q35: independently checked all eight steps against current statements and local source texts; refreshed step 7 and its quotation after the shared inflation node was corrected, and retained the unit realization repair. No new nodes or leaves."
+  },
+  "tool_uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-exc-field-sections-stalk-invariants",
     "lem-sf-separably-closed-torsion-cd",
     "det-cd-etale-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For finite K, [det-base-field-cd-galois-group] gives Frobenius τ and an isomorphism e from Gal(Ksep/K) to the profinite completion of ℤ, with e(τ)=η(1). The image of ℤ is dense in its completion, hence the powers of τ are dense. For each N>0, extend integer reduction modulo N through the completion universal property and compose with e. This gives a continuous cyclic quotient taking τ to one.",
-   "uses": [
-    "det-base-field-cd-galois-group"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a torsion étale sheaf F, its geometric fibre M is torsion: the fibre preserves filtered colimits and addition, so every germ is locally represented by a torsion section. Apply [lem-base-field-profinite-cyclic-torsion-cohomology] using the generator and quotients from the previous step. It gives vanishing of discrete Galois H^q for q≥2, via finite cyclic partial sums at level ae, norm cancellation and coinduced dimension shifting.",
-   "uses": [
-    "lem-base-field-profinite-cyclic-torsion-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use [lem-base-field-etale-galois-cohomology] to identify sheaf H with this discrete Galois cohomology. The existing source nonempty_sheafH_extDerivedIso identifies sheaf H with the Ext-derived étale cohomology in HasTorsionEtaleCohomologicalDimensionLE. Therefore every torsion étale sheaf vanishes above degree one. Apply [det-cd-etale-comparison] at c=1, with the identity of the affine spectrum as auxiliary qcqs morphism.",
-   "uses": [
-    "lem-base-field-etale-galois-cohomology",
-    "det-cd-etale-comparison"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-sf-separably-closed-torsion-cd",
-  "det-cd-etale-comparison",
-  "det-base-field-cd-galois-group",
-  "lem-base-field-profinite-cyclic-torsion-cohomology",
-  "lem-base-field-etale-galois-cohomology"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "lean/Sheaf/AlgebraicGeometry/BaseFieldCohomologicalDimension.lean",
-  "place": "W2: existing field/Galois comparison; compact coinduced finite cyclic partial sums; torsion étale/pro-étale bound. The coinduced proof retains finite cyclic refinement and e-times-norm cancellation, while avoiding the cohomology colimit and explicit periodic inflation complexes."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Cohomological dimension of a finite field is at most one",
-   "results": "ringKrullDim_eq_zero_of_isField, ringKrullDim_eq_zero_of_field, groupCohomology.H1ofAutOnUnitsUnique, FiniteField.finrank_extension, IsLocalRing.finrank_cotangentSpace_eq_zero, FiniteField.finrank_zmod_extension, CSA.fin_dim, FiniteField.pow_finrank_eq_card",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "cohomologicalDimension|cohomological_dimension|procyclic|finiteField.*cohom|cohom.*finiteField",
-   "results": "0 hits",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "groupCohomology, IsAlgClosed",
-   "results": "0 hits",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The etale ell cohomological dimension of an algebraically closed field is zero and of a finite field is at most one",
-   "results": "IsAlgClosed.perfectRing, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.FormallySmooth.of_perfectField, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.iff_exists_algEquiv_prod",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "continuousCohomology|H1ofAutOnUnitsUnique",
-   "results": "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "continuousCohomology",
-   "results": "continuousCohomology, ContinuousCohomology.map_id, ContinuousCohomology.map, ContinuousCohomology.π_map, ContinuousCohomology.map_comp, ContinuousCohomology.π_map_assoc, ContinuousCohomology.map_comp_assoc, ContinuousCohomology.zeroIso",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Higher continuous cohomology of the profinite completion of the integers with discrete torsion coefficients vanishes in degrees at least two",
-   "results": "ContinuousCohomology.MultiInd.d_comp_d, ContinuousCohomology.continuousCohomologyZeroIso, isZero_groupCohomology_succ_of_subsingleton, continuousCohomology, ContinuousCohomology.MultiInd.complex, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "profinite.*cohomology|cohomology.*profinite|IsProcyclic|cohomologicalDimension",
-   "results": "Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a finite discrete representation of the profinite integers, continuous group cohomology is zero above degree one",
-   "results": "isZero_groupCohomology_succ_of_subsingleton, groupCohomology.d₀₁_eq_zero, ContinuousCohomology.continuousCohomologyZeroIso, groupCohomology.subtype_comp_d₀₁_apply, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology.H1, groupCohomology.map_1_one, groupCohomology.map₁_one",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "cohomology.*(Profinite|Procyclic|ZHat)|((Profinite|Procyclic|ZHat).*cohomology)|isZero_groupCohomology_succ",
-   "results": "Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Continuous cohomology of a procyclic profinite group with discrete torsion abelian group coefficients vanishes in degrees greater than one",
-   "results": "ContinuousCohomology.continuousCohomologyZeroIso, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, continuousCohomology, isZero_groupCohomology_succ_of_subsingleton, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, Rep.FiniteCyclicGroup.groupCohomologyπEven, Rep.FiniteCyclicGroup.groupCohomologyIsoEven, Rep.FiniteCyclicGroup.groupCohomologyIsoOdd",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "cites_outside_uses",
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 1507,
- "blueprint_uses": [
-  "sk-def-cd"
- ],
- "blueprint_tags": [
-  "sketch"
- ],
- "uses_not_cited": [
-  "sk-def-cd"
- ],
- "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015",
- "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-base-field-cd",
- "split_report": {
-  "date": "2026-10-17",
-  "item": "sk-lem-base-field-cd",
-  "worker": "stage1",
-  "summary": "Rechecked the retained eight-step split against the current main DAG and the landing return at 9c1382d49c. The unit record is now an explicit delivery file, with changes confined to realized and realized_by, so landing needs no out-of-delivery unit fix. All eight current cited statements support all fifteen verbatim step/node quotations. The second reader refreshed the inflation citation and step 7 to use its repaired source and target norm complexes; the citation audit records current hashes. Expanded the finite-orbit argument in step 5 using coordinate kernels. The two-clause statement, blueprint route, existing dependencies and eleven logged Mathlib searches are retained; no new node or foreign-node edit is introduced.",
-  "blueprint": "Step 1 realizes the opening étale/Galois comparison; steps 2–3 the algebraically closed clause; step 4 the Galois-group sentence; steps 5–6 the reduction-to-finite-cyclic-groups paragraph using parts (2) and (3) of the existing cochains node; step 7 the inflation-kills-high-degrees paragraph; step 8 the finite-field conclusion. No restatement node det-base-field-cd-finite-field is created.",
-  "tool_uses": [
-   {
-    "node": "lem-exc-abelian-sheaves-gmodules",
-    "why": "General additive geometric-stalk equivalence for all abelian sheaves, needed for the field/Galois bridge without a finite-ring restriction."
-   },
-   {
-    "node": "lem-exc-field-sections-stalk-invariants",
-    "why": "General natural section formula, applied at L=K to identify global sections with invariants."
-   },
-   {
-    "node": "lem-sf-separably-closed-torsion-cd",
-    "why": "The blueprint explicitly uses the general separably closed torsion bound for the algebraically closed case."
-   },
-   {
-    "node": "det-cd-etale-comparison",
-    "why": "The blueprint explicitly uses this comparison to interpret the pro-étale dimension in terms of ordinary étale sheaves."
-   }
   ],
-  "second_reading": "Q35: independently checked all eight steps against current statements and local source texts; refreshed step 7 and its quotation after the shared inflation node was corrected, and retained the unit realization repair. No new nodes or leaves."
- },
- "tool_uses": [
-  "lem-sf-separably-closed-torsion-cd",
-  "det-cd-etale-comparison"
- ],
- "reviewed": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-Codex-Q35-622004b57",
-  "group": "Q35",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-622004b57 (reviewer sub-agent of L); spot-checked: Read all eight steps, cited statements, blueprint proofs and Stacks sources in full. Coefficient categories, finite-module reduction, cyclic inflation and unit realization check out. The reused DAG inflation lemma already corrects the blueprint’s norm error. No new nodes or repairs; detailed checks and accepted tool uses are in review.md."
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "reviewed": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-Codex-Q35-622004b57",
+    "group": "Q35",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-622004b57 (reviewer sub-agent of L); spot-checked: Read all eight steps, cited statements, blueprint proofs and Stacks sources in full. Coefficient categories, finite-module reduction, cyclic inflation and unit realization check out. The reused DAG inflation lemma already corrects the blueprint’s norm error. No new nodes or repairs; detailed checks and accepted tool uses are in review.md."
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.BaseFieldCohomologicalDimension",
+    "declaration": "AlgebraicGeometry.ProEtale.cohomologicalDimension_baseField",
+    "file": "lean/Sheaf/AlgebraicGeometry/BaseFieldCohomologicalDimension.lean",
+    "statement": "theorem cohomologicalDimension_baseField (ℓ : ℕ) (hℓ : Nat.Prime ℓ) (K : Type u) [Field K] : (IsAlgClosed K → cohomologicalDimension ℓ hℓ (Spec (.of K)) = 0) ∧ (Finite K → cohomologicalDimension ℓ hℓ (Spec (.of K)) ≤ 1)",
+    "branch": "newtargets-dag",
+    "by": "NX",
+    "date": "2026-10-17",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-9dd01bd15",
+    "group": "NX",
+    "result": "pass",
+    "note": "Delivery touches only report, item node lean field, and one module. Lean theorem cohomologicalDimension_baseField (ℓ prime, K : Type u field): (IsAlgClosed K → cd = 0) ∧ (Finite K → cd ≤ 1) matches node/blueprint order 1507 verbatim; uses landed sk-def-cd ProEtale.cohomologicalDimension (sSup in WithTop ℕ over classical ℓ-power-torsion pro-étale sheaves, degree 0 included); no extra hypotheses (qcqs inferred from affine Spec), ℓ=char K included, arbitrary universe. lean.statement verbatim in file; one theorem, sorry only, no defs; source/blueprint docstrings with all 8 proof steps; private imports are exactly the recorded proof-dependency modules; no duplicate found. nt_compile.py --json on local side overlay: exit 0, no errors/warnings (1.8 s)."
   }
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.BaseFieldCohomologicalDimension",
-  "declaration": "AlgebraicGeometry.ProEtale.cohomologicalDimension_baseField",
-  "file": "lean/Sheaf/AlgebraicGeometry/BaseFieldCohomologicalDimension.lean",
-  "statement": "theorem cohomologicalDimension_baseField (ℓ : ℕ) (hℓ : Nat.Prime ℓ) (K : Type u) [Field K] : (IsAlgClosed K → cohomologicalDimension ℓ hℓ (Spec (.of K)) = 0) ∧ (Finite K → cohomologicalDimension ℓ hℓ (Spec (.of K)) ≤ 1)",
-  "branch": "newtargets-dag",
-  "by": "NX",
-  "date": "2026-10-17",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-9dd01bd15",
-  "group": "NX",
-  "result": "pass",
-  "note": "Delivery touches only report, item node lean field, and one module. Lean theorem cohomologicalDimension_baseField (ℓ prime, K : Type u field): (IsAlgClosed K → cd = 0) ∧ (Finite K → cd ≤ 1) matches node/blueprint order 1507 verbatim; uses landed sk-def-cd ProEtale.cohomologicalDimension (sSup in WithTop ℕ over classical ℓ-power-torsion pro-étale sheaves, degree 0 included); no extra hypotheses (qcqs inferred from affine Spec), ℓ=char K included, arbitrary universe. lean.statement verbatim in file; one theorem, sorry only, no defs; source/blueprint docstrings with all 8 proof steps; private imports are exactly the recorded proof-dependency modules; no duplicate found. nt_compile.py --json on local side overlay: exit 0, no errors/warnings (1.8 s)."
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W2",
-  "result": "pass",
-  "landing": "20261020T174917-L-820235",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }
