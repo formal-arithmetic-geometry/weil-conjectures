@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
-import Sheaf.AlgebraicGeometry.Curve.GenericFinitePrimaryDecomposition
+import WeilConjectures.AlgebraicGeometry.Curve.GenericFinitePrimaryDecomposition
 import Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseTraceRetraction
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 
@@ -102,8 +102,9 @@ theorem exists_generic_finite_coarse_trace_filtration_data
               (F i (n i))) 2,
           Function.Injective j := by
   classical
+  have _ := hM
   obtain ⟨r, p, N, hp, hNfinite, hNprimary, a, b, hab⟩ :=
-    Scheme.exists_finite_primary_sheaf_decomposition C.functionField M hM hfinite
+    Scheme.exists_finite_primary_sheaf_decomposition C.functionField M hfinite
   have hdata (i : Fin r) :=
     exists_generic_primary_coarse_trace_retraction f hmodel (N i) (p i) (hp i)
       (hNfinite i) (hNprimary i)

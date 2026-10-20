@@ -9,7 +9,7 @@ import Sheaf.AlgebraicGeometry.BaseFieldCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.CategoryTheory.Sites.Point.Linear
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.Curve.GenericFinitePrimaryDecomposition
+import WeilConjectures.AlgebraicGeometry.Curve.GenericFinitePrimaryDecomposition
 import WeilConjectures.AlgebraicGeometry.Curve.FiniteStalkSubobjectsCover
 import Mathlib.Order.Shrink
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
@@ -146,8 +146,9 @@ private theorem finite_stalk_vanishing (K : Type u) [Field K] [Finite K]
     IsZero ((DerivedCategory.singleFunctor _ 0 ⋙
       Etale.cohomology AddCommGrpCat.{u + 1} (Spec (.of K)) (q : ℤ)).obj M) := by
   classical
+  have _ := hM
   obtain ⟨r, p, N, hp, hfin, hprimary, a, b, hab⟩ :=
-    Scheme.exists_finite_primary_sheaf_decomposition K M hM hfinite
+    Scheme.exists_finite_primary_sheaf_decomposition K M hfinite
   let T := DerivedCategory.singleFunctor _ 0 ⋙
     Etale.cohomology AddCommGrpCat.{u + 1} (Spec (.of K)) (q : ℤ)
   obtain ⟨e⟩ := Scheme.nonempty_sheafH_extDerivedIso (Spec (.of K)) q
