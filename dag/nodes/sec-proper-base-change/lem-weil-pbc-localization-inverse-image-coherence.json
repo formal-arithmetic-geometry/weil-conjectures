@@ -17,19 +17,17 @@
  ],
  "proof": [
   {
-   "text": "Work first on either of the two small sites, with ring sheaf $A$, global section $s$ and module sheaf $N$. Write $P_s(A)(U)=A(U)[1/s_U]$ and $P_s(N)(U)=N(U)[1/s_U]$. The definition of ring localization gives $A[1/s]=P_s(A)^\\#$. Applying the sheafification--tensor comparison to the presheaves $P_s(A)$ and $N$, and then the ordinary module localization--tensor isomorphism objectwise, gives\n$$A[1/s]\\otimes_A N\\cong(P_s(A)\\otimes_{p,A}N)^\\#\\cong P_s(N)^\\#.$$\nBoth maps send $1\\otimes n$ to $n/1$. Ring and abelian sheafification have the same underlying set sheaf; module sheafification is abelian sheafification with its uniquely extended action. Thus the specified localization carries the usual ring structure and its module localization has precisely the displayed fraction model, including its unit. These are sheafifications, not assertions that localization already satisfies the sheaf condition sectionwise.",
+   "text": "Use the declared localization-away sequential-colimit theorem for the regular module. The usual algebra equivalence from localization of the regular module to the away-localized ring identifies its stage-n leg with r/t^n. Evaluation and the presheaf-module colimit theorem make this a colimit of presheaf modules. Tensor on the left by the given module presheaf, using its right-unitor identification on the diagram. This gives the colimit with vertex M tensor P_t(R). Module sheafification preserves it. Its vertex is isomorphic to the actual site tensor M tensor P_t(R)^#: the sheafification unit of P_t(R) is a local equivalence, tensoring preserves local equivalences, and sheafification inverts them. Naturality of the sheafification unit proves that stage zero is exactly the specified map m to m tensor 1.",
    "uses": [
+    "lem-sc-module-localization-filtered-colimit",
     "def-weil-pbc-ringed-section-localization",
     "def-pur-sheaf-tensor-product",
-    "lem-pc-sites-module-sheafification-tensor",
-    "lem-weil-pbc-localization-tensor",
-    "lem-pc-sites-sheafification-underlying-sets",
     "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW (lemma-sheafification-tensor); Tags 03CY and 03EK; algebra.tex Tag 00DK (lemma-tensor-localization)"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, localization by powers; Tag 00CP, localization universal property; sites-modules.tex Tags 03CY and 03DB"
    }
   },
   {
@@ -46,7 +44,7 @@
    }
   },
   {
-   "text": "Likewise, let $H$ be an $A$-module sheaf on which multiplication by $s$ is an isomorphism. Every $A$-linear $h:N\\to H$ extends uniquely to an $A$-linear map $N[1/s]\\to H$: on presheaf fractions it is\n$$n/s^e\\longmapsto (s_H)^{-e}h(n).$$\nFor well-definedness, if $n/s^e=n'/s^{e'}$, some $s^k(s^{e'}n-s^e n')$ is zero. Apply $h$ and cancel the invertible operator $s_H^{k+e+e'}$ to obtain equality of the two displayed values. The formulas are additive, $A$-linear and commute with restrictions, so module sheafification gives the extension. Uniqueness follows by multiplying any fraction by $s^e$ and then using the sheafification adjunction. This proves that $N\\to N[1/s]$ is initial among maps to $s$-invertible module sheaves. An $A$-linear map between such sheaves commutes with $s_H^{-1}$; if both sheaves carry their localized scalar actions, it is $A[1/s]$-linear, since on a scalar $r/s^e$ the action is $r(s_H)^{-e}$ and these formulas extend through sheafification.",
+   "text": "In any colimit of the repeated scalar endomorphism, multiplication by the scalar is invertible: the map induced by shifting the legs one place is its inverse. For a module sheaf N with invertible scalar, two maps from this colimit agreeing at stage zero agree at every stage, by induction, scalar-linearity, the cocone relation and cancellation of the target scalar. Thus the stage-zero unit determines a map uniquely. Apply this to the tensor-localization colimit from step 1.",
    "uses": [
     "def-weil-pbc-module-localization",
     "def-weil-presheaf-modules-sheafification"
@@ -54,30 +52,36 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Section Tag 00CM, Definition 07JZ (definition-localization-module), fraction relation; sites-modules.tex Tag 03CY"
+    "place": "Tag 00CM, localization by powers; Tag 00CP, localization universal property; sites-modules.tex Tags 03CY and 03DB"
    }
   },
   {
-   "text": "Put $I=f^{-1}$ and $V=f_*$. The finite-product-preserving adjunction lifts to commutative ring objects, hence to ring sheaves. Fix a ring map $a:R'\\to B$ on $\\mathcal X$, with adjunct $b:R\\to VB$. Under the adjunction on global sections $\\operatorname{Hom}(1,VB)=\\operatorname{Hom}(I1,B)$ and $I1\\cong1$, the section $b(t)$ corresponds to $a(t')$. Their invertibility is equivalent: an inverse section on either side corresponds to an inverse on the other, because the lifted adjunction respects multiplication and one. Therefore the ring adjunction and step 2 give a unique extension $I(R[1/t])\\to B$ of $a$ exactly when $a$ inverts $t'$. Also $I(R[1/t])$ itself inverts $t'$, by applying $I$ to the inverse of $t$ and using transport of ring operations. Hence it and $R'[1/t']$ have the same initial property. The unique maps in the two directions over $R'$ have identity composites by uniqueness. This constructs the required canonical ring isomorphism $\\alpha_f:I(R[1/t])\\xrightarrow{\\sim}R'[1/t']$ preserving the unit.",
+   "text": "Transport any morphism of source ring sheaves through the specified underlying-set isomorphisms. Its additive and multiplicative compatibility follows by choosing a preimage of a pair under the invertible finite-product comparison and applying the two ring graph equations. The one graph equation gives preservation of one. Apply this construction to R to R[1/t], obtaining c:S to A. The source inverse of t is a compatible family by uniqueness of inverses; the ring graph equations and the assumed scalar normalization show c(s) is invertible. Step 2 produces a ring map S[1/s] to A extending c. The regular-module colimit from step 1, after forgetting to set sheaves and applying the proved ring/module localization comparison, is the underlying set-sheaf colimit for the ring localization. The set inverse image preserves it. Transport its diagram by the ring underlying isomorphism and the scalar graph equation. This is a second colimit of the S-multiplication-by-s diagram, now with vertex the underlying set sheaf of A and zero leg c. The extension map respects every leg: the zero case is its unit equation, and the successor case follows by multiplication with the invertible c(s), the cocone relations, and multiplicativity. Consequently its underlying map is the unique isomorphism between the two colimits. The forgetful functor reflects isomorphisms, so it is a ring isomorphism. Invert it for the displayed comparison. Step 2 gives uniqueness from the same unit equation.",
    "uses": [
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-pbc-ringed-section-localization",
+    "lem-weil-pbc-localization-away-universal-property",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-sites-sheafification-underlying-sets"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi), ring-object adjunction, together with algebra.tex Tag 00CP"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, localization by powers; Tag 00CP, localization universal property; sites-modules.tex Tags 03CY and 03DB"
    }
   },
   {
-   "text": "Use the geometric module transport with $A=S=R'$ and coefficient map the identity. It gives $I:\\operatorname{Mod}(R)\\rightleftarrows\\operatorname{Mod}(R'):V$, with the transported actions and underlying adjunction specified in its statement. For an $R'$-module $H$ with invertible $t'$, multiplication by $t$ on $VH$ is $V$ of multiplication by $t'$ (by the prescribed action through the adjunction unit); it is invertible. The module adjunction and step 3 therefore give bijections\n$$\\operatorname{Hom}_{R'}(I(M[1/t]),H)\\cong\\operatorname{Hom}_R(M[1/t],VH)\\cong\\operatorname{Hom}_R(M,VH)\\cong\\operatorname{Hom}_{R'}(IM,H).$$\nThey are restriction along $I(\\eta_M)$, where $\\eta_M:M\\to M[1/t]$. Moreover $t'$ acts invertibly on $I(M[1/t])$, since $I$ transports the scalar action and preserves an inverse. Thus $I(\\eta_M)$ has the initial property of step 3 for $IM$. The unique maps between it and $(IM)[1/t']$ extending the unit are inverse, giving $\\beta_{f,M}$ with\n$$\\beta_{f,M}\\,I(\\eta_M)=\\eta_{IM}.$$\nThe source is a module over $I(R[1/t])$ by transported action. Use $\\alpha_f$ to regard it as an $R'[1/t']$-module; the last assertion of step 3 makes $\\beta_{f,M}$ linear for this ring. This identifies the actual tensor-defined localization of the statement.",
+   "text": "The module-to-abelian-sheaf functor preserves colimits by the declared forgetful-colimit theorem. Forgetting abelian sheaves to set sheaves preserves sequential filtered colimits: the abelian-group forgetful functor preserves filtered colimits and commutes with sheafification. Hence the module-underlying-set functor preserves these colimits. The underlying-set isomorphism for the specified module inverse image and preservation of colimits by the set left adjoint imply preservation of sequential colimits by the module inverse image, since the target underlying functor reflects them. The module scalar graph and the section normalization identify the image diagram with the repeated target-scalar diagram. The unique isomorphism between this colimit and the tensor-localization colimit gives beta. Stage zero proves unit normalization; the uniqueness lemma of step 3 proves naturality in M and uniqueness of beta.",
    "uses": [
-    "lem-weil-pbc-geometric-module-transport"
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D2 and 03D3 (lemma-pullback-module and lemma-adjoint-push-pull-modules), with the elementary fraction extension of step 3"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, localization by powers; Tag 00CP, localization universal property; sites-modules.tex Tags 03CY and 03DB"
    }
   },
   {
@@ -111,7 +115,8 @@
     "def-weil-presheaf-modules-sheafification",
     "lem-weil-pbc-localization-flat",
     "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-pc-sites-module-sheafification-tensor"
    ],
    "elementary": false,
    "source": {
@@ -168,25 +173,23 @@
   "def-weil-sheaf-of-modules-category",
   "lem-pc-sites-module-sheafification-tensor",
   "lem-pc-sites-sheafification-underlying-sets",
+  "lem-sc-module-localization-filtered-colimit",
   "lem-trf-geometric-inverse-image-exact",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-geometric-module-transport",
   "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-localization-away-universal-property",
   "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-localization-tensor",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03CY, 03D2, 03D3, 03D7, 03DA, 03DB, 03EI, 04JC and 0GMW, with sites.tex Tag 00YV; algebra.tex Tags 00CP, 00CS and 00DK; derived.tex Tag 015F",
-  "note": "Explicit fraction universal-property proof of the extracted statement and of its identity/composition and coefficient-identification equations; not a verbatim Stacks theorem. Stage-3 Y7: the five clauses proved in this delivery use graph-equation fraction transport, the existing universal geometric exactness theorem, flat presheaf tensor and monoidal sheafification, local-surjectivity descent for localized scalars, and direct localization of arbitrary natural transformations. Steps 1--5 retain the intended argument for the two original comparison holes; no new holes or statements are introduced."
+  "place": "Tags 03CY, 03D2, 03D3, 03D7, 03DA, 03DB, 03EI, 04JC and 0GMW, with sites.tex Tag 00YV; algebra.tex Tags 00CP, 00CS and 00DK; derived.tex Tag 015F; algebra.tex Tag 00CM; sites-modules.tex Tag 03DB",
+  "note": "Extracted comparison and coherence statement, not a verbatim Stacks theorem. The exactness, generalized-fraction, derived and localized-scalar clauses retain the existing proofs. Stage-3 A4 proves both original comparison holes through normalized sequential colimits and direct transport of ring morphisms from the specified graph equations. The regular-module colimit is an existing declared algebra lemma. All public signatures and definition bodies remain unchanged; no new nodes or unfinished intermediate statements are introduced."
  },
  "mathlib_searches": [
   {
@@ -350,9 +353,9 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y7",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261020T131238-L-1265414",
+  "landing": "20261020T150635-L-2550220",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
