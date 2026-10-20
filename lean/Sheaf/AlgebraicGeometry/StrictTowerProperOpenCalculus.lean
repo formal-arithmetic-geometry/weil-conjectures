@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.StrictTowerPullbackSquarePasting
 import Mathlib.CategoryTheory.Adjunction.Triple
 import all Sheaf.AlgebraicGeometry.ProEtaleOperations
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison
@@ -751,6 +752,53 @@ private theorem alpha_identities :
 
 end NormalizedIdentities
 
+private theorem transposed_pasting
+    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
+    [Category* C₀] [Category* C₁] [Category* C₂]
+    [Category* D₀] [Category* D₁] [Category* D₂]
+    {L₀ : C₀ ⥤ D₀} {R₀ : D₀ ⥤ C₀} {L₁ : C₁ ⥤ D₁} {R₁ : D₁ ⥤ C₁}
+    {L₂ : C₂ ⥤ D₂} {R₂ : D₂ ⥤ C₂}
+    (a₀ : L₀ ⊣ R₀) (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂)
+    {A : C₀ ⥤ C₁} {B : C₁ ⥤ C₂} {C : C₀ ⥤ C₂}
+    {F : D₀ ⥤ D₁} {H : D₁ ⥤ D₂} {K : D₀ ⥤ D₂}
+    (c : C ⟶ A ⋙ B) (d : K ⟶ F ⋙ H)
+    (t₁ : R₀ ⋙ A ⟶ F ⋙ R₁) (t₂ : R₁ ⋙ B ⟶ H ⋙ R₂)
+    (t : R₀ ⋙ C ⟶ K ⋙ R₂)
+    (v₁ : A ⋙ L₁ ⟶ L₀ ⋙ F) (v₂ : B ⋙ L₂ ⟶ L₁ ⋙ H)
+    (v : C ⋙ L₂ ⟶ L₀ ⋙ K)
+    (h₁ : ∀ M, a₁.unit.app (A.obj M) ≫ R₁.map (v₁.app M) =
+      A.map (a₀.unit.app M) ≫ t₁.app (L₀.obj M))
+    (h₂ : ∀ M, a₂.unit.app (B.obj M) ≫ R₂.map (v₂.app M) =
+      B.map (a₁.unit.app M) ≫ t₂.app (L₁.obj M))
+    (hv : ∀ M, a₂.unit.app (C.obj M) ≫ R₂.map (v.app M) =
+      C.map (a₀.unit.app M) ≫ t.app (L₀.obj M))
+    (ht : ∀ N, c.app (R₀.obj N) ≫ B.map (t₁.app N) ≫ t₂.app (F.obj N) =
+      t.app N ≫ R₂.map (d.app N)) (M : C₀) :
+    L₂.map (c.app M) ≫ v₂.app (A.obj M) ≫ H.map (v₁.app M) =
+      v.app M ≫ d.app (L₀.obj M) := by
+  apply (a₂.homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  rw [← reassoc_of% (a₂.unit.naturality (c.app M))]
+  rw [reassoc_of% (h₂ (A.obj M)), reassoc_of% (hv M)]
+  erw [← t₂.naturality (v₁.app M)]
+  dsimp only [Functor.comp_map, Functor.comp_obj]
+  rw [← Category.assoc (B.map _), ← B.map_comp, h₁ M, B.map_comp]
+  rw [Category.assoc, ← reassoc_of% (c.naturality (a₀.unit.app M))]
+  rw [ht]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem betaInv_unit {A A' Y Y' : Scheme.{u}}
+    (a : A' ⟶ A) (j' : A' ⟶ Y') (j : A ⟶ Y) (g : Y' ⟶ Y)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
+    (M : Derived B A) :
+    (jAdj B j').unit.app ((G B a).obj M) ≫
+        (G B j').map ((betaInv B a j' j g w).app M) =
+      (G B a).map ((jAdj B j).unit.app M) ≫
+        (squareG B a j' j g w).inv.app ((J B j).obj M) := by
+  change (jAdj B j').homEquiv _ _ (betaInvApp B a j' j g w M) = _
+  exact ((jAdj B j').homEquiv _ _).apply_symm_apply _
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Successive base changes of beta agree with the composite, before evaluation.
 Source: Stacks, Tag 09AE and blueprint, second proof step
 (blueprint: lem-cbc-strict-tower-proper-open-calculus).
@@ -770,7 +818,29 @@ theorem beta_comp {U U₁ U₂ X X₁ X₂ : Scheme.{u}}
         (beta B b j₂ j₁ h w₂ s₂).hom.app ((G B a).obj M) =
       (beta B (b ≫ a) j₂ j (h ≫ g) w s).hom.app M ≫
         (J B j₂).map ((gComp B b a).hom.app M) := by
-  sorry
+  let e₁ := beta B a j₁ j g w₁ s₁
+  let e₂ := beta B b j₂ j₁ h w₂ s₂
+  let e := beta B (b ≫ a) j₂ j (h ≫ g) w s
+  have hInv : (J B j₂).map ((gComp B b a).hom.app M) ≫
+      e₂.inv.app ((G B a).obj M) ≫ (G B h).map (e₁.inv.app M) =
+        e.inv.app M ≫ (gComp B h g).hom.app ((J B j).obj M) := by
+    exact transposed_pasting (jAdj B j) (jAdj B j₁) (jAdj B j₂)
+      (gComp B b a).hom (gComp B h g).hom
+      (squareG B a j₁ j g w₁).inv (squareG B b j₂ j₁ h w₂).inv
+      (squareG B (b ≫ a) j₂ j (h ≫ g) w).inv
+      (betaInv B a j₁ j g w₁) (betaInv B b j₂ j₁ h w₂)
+      (betaInv B (b ≫ a) j₂ j (h ≫ g) w)
+      (betaInv_unit B a j₁ j g w₁) (betaInv_unit B b j₂ j₁ h w₂)
+      (betaInv_unit B (b ≫ a) j₂ j (h ≫ g) w)
+      (squareG_pasting_inv B j j₁ j₂ g h a b w₁ w₂ w) M
+  change _ ≫ (G B h).map (e₁.hom.app M) ≫ e₂.hom.app _ =
+    e.hom.app M ≫ _
+  apply (cancel_epi (e.inv.app M)).1
+  rw [← Category.assoc, ← Category.assoc, ← hInv]
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+  erw [(G B h).map_id]
+  erw [Category.id_comp, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app, Category.comp_id]
+
 
 /-- Beta commutes with composition of open immersions, before evaluation.
 Source: Stacks, Tag 09AE and blueprint, second proof step

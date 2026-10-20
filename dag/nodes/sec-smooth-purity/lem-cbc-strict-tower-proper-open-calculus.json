@@ -105,12 +105,13 @@
    }
   },
   {
-   "text": "For successive base changes, transpose both inverse comparisons under the final open adjunction. Both transposes are $G_{hg,V}\\eta_j$ followed by the same iterated inverse-image compositor; naturality of the unit identifies the successive transpose with this one. For successive opens transpose under the composite open adjunction: the unit is $G_{j_1}\\eta_{j_2}j_{1!}\\circ\\eta_{j_1}$, so again the two transposes coincide. For an identity base change the transpose is the open unit, so the comparison is identity under the open-unit identification. Injectivity of the adjunction Hom bijections proves the base-change, open-composition and identity laws, with the canonical compositors, before any evaluation. At finite $B$ this is the canonical extension-by-zero base change of the existing node, since its restriction comparison and open unit are the same ones. In the Lean identity case, first check the two unit equations of moduleRComp on sections using Over.pullbackComp_id_left and Over.pullbackComp_id_right. Adjunction.leftAdjointCompIso transfers them to module pullback. Evaluate the whiskered tower comparisons at each index, and use the naturality and unit laws of mapDerivedCategoryCompIso to obtain the derived pullback unit equations. Transposition under the open adjunction then proves beta_id and the analogous identity-open beta equation.",
+   "text": "For successive base changes, transpose both inverse comparisons under the final open adjunction. Both transposes are $G_{hg,V}\\eta_j$ followed by the same iterated inverse-image compositor; naturality of the unit identifies the successive transpose with this one. For successive opens transpose under the composite open adjunction: the unit is $G_{j_1}\\eta_{j_2}j_{1!}\\circ\\eta_{j_1}$, so again the two transposes coincide. For an identity base change the transpose is the open unit, so the comparison is identity under the open-unit identification. Injectivity of the adjunction Hom bijections proves the base-change, open-composition and identity laws, with the canonical compositors, before any evaluation. At finite $B$ this is the canonical extension-by-zero base change of the existing node, since its restriction comparison and open unit are the same ones. In the Lean identity case, first check the two unit equations of moduleRComp on sections using Over.pullbackComp_id_left and Over.pullbackComp_id_right. Adjunction.leftAdjointCompIso transfers them to module pullback. Evaluate the whiskered tower comparisons at each index, and use the naturality and unit laws of mapDerivedCategoryCompIso to obtain the derived pullback unit equations. Transposition under the open adjunction then proves beta_id and the analogous identity-open beta equation. The Lean beta_comp proof uses the general inverse-image square pasting identity of [lem-cbc-strict-tower-pullback-square-pasting]. A proved abstract adjunction lemma transposes the inverse beta composites: unit naturality, square naturality, and the defining betaInv unit equations reduce them to this identity. Cancelling the invertible beta maps recovers the stated forward comparison equality.",
    "uses": [
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-proetale-derived-pullback-composition",
     "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-cbc-proetale-extension-zero-base-change"
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-cbc-strict-tower-pullback-square-pasting"
    ],
    "elementary": false,
    "source": {
@@ -400,12 +401,13 @@
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-proper-base-change",
   "lem-pc-quasi-compact-base-change",
-  "lem-weil-pbc-proetale-ringed-open-comparison"
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-cbc-strict-tower-pullback-square-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
-  "place": "Final sentence on comparison compatibility before derived limits; expanded via the cited Stacks sources, clopen projection and adjunction arguments; Lean refinements: normalized module/tower/derived pullback unit equations, adjoint-triple projection calculation, disjoint-open zero objects, and abstract identity-mate transport"
+  "place": "Final sentence on comparison compatibility before derived limits; expanded via the cited Stacks sources, clopen projection and adjunction arguments; Lean refinements: normalized module/tower/derived pullback unit equations, adjoint-triple projection calculation, disjoint-open zero objects, and abstract identity-mate transport; T4: beta_comp reduced by a proved adjunction calculation to general inverse-image square pasting"
  },
  "mathlib_searches": [
   {
@@ -941,9 +943,9 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U5",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261020T211839-L-3510121",
+  "landing": "20261020T233223-L-907908",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
