@@ -17,9 +17,58 @@
   "document": "literature/stacks-project/derived.tex",
   "place": "Section 13.13, Tag 05S2 (definition-filtered-derived), filtered-injective definition before Tag 05TP, Tags 05TW and 015Q; filtration and graded maps from Homology Tag 0121."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify filtered maps with the subgroup of underlying maps preserving the steps. Uniqueness after the monic step inclusions proves that restriction maps preserve identities, composition and addition. The canonical cokernel projection equations then prove the same laws for graded maps, by epi cancellation. Hence forgetting and every graded functor are additive.",
+   "uses": [
+    "lem-sp-finite-filtration-induction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct a binary sum with underlying object K plus L and p-th step the subobject represented by the biproduct of the step inclusions. Biprod.map is monic. The biproduct of successive inclusions proves decreasingness. The minimum of lower bounds and maximum of upper bounds give a finite filtration, and fixed bounds are retained. The underlying biproduct projections and inclusions preserve this filtration.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the additive graded functor on the category with inj=false. Apply it to the identity pi1;iota1 + pi2;iota2 = id of the constructed binary sum. Given a map into its graded object and a monomorphism, extend its two graded projections using injectivity of the original graded objects. Sum the extended maps followed by the graded inclusions. The displayed identity proves the required factorization, so the sum has injective grades. Construct the zero filtered object explicitly; all its steps and grades are zero. The biproduct identities prove the binary product universal property; terminal plus binary products gives all finite products.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each integer p pull back the ordinary acyclic triangulated subcategory along the additive graded homotopy functor. Their intersection is closed under isomorphisms and shifts, contains zero, and is closed under the middle term of a distinguished triangle. For any distinguished cone triangle, the ordinary quasi-isomorphism cone criterion shows that its first map is a graded quasi-isomorphism exactly when the cone belongs to this intersection. Thus W is its trW class. Apply Mathlib ObjectProperty.trW.HasLeftCalculusOfFractions and ObjectProperty.trW.IsCompatibleWithTriangulation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "To prove that forgetting sends a graded-acyclic complex to an acyclic complex, fix a degree n and use the three-term filtered complex X^(n-1) -> X^n -> X^(n+1). Every term has a finite filtration; acyclicity of each graded complex is exactness of each graded three-term sequence. Apply finite_filtered_graded_exactness to obtain underlying exactness at n. No uniform bound on filtration across cochain degrees is needed. Transfer this statement to homotopy objects using a quotient representative.",
+   "uses": [
+    "lem-trf-finite-filtered-graded-exactness"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Grading followed by ordinary derived localization inverts W by definition. For forgetting, complete a map in W to a distinguished triangle, whose cone is graded acyclic by the trW characterization. The preceding step makes the underlying cone acyclic. The ordinary cone criterion makes the underlying map a quasi-isomorphism, and ordinary derived localization inverts it. The derived evaluation functors are consequently the canonical localization lifts already defined in the module.",
+   "uses": [
+    "lem-trf-finite-filtered-graded-exactness"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-finite-filtration-induction",
+  "def-sp-filtration",
+  "lem-trf-finite-filtered-graded-exactness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Section 13.13: lemma-filtered-acyclic, definition-filtered-derived, lemma-filtered-derived-functors; finite graded exactness from homology.tex Tag 05QH. E2 implemented the additive binary-product and Verdier-class arguments using Mathlib."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -138,5 +187,15 @@
   "group": "Q03",
   "result": "pass",
   "note": "Checked every clause of the node against the six parts of filteredLocalization_injectiveModel and against Stacks derived.tex 05TW/05TY/015Q: real filtered quasi-isomorphism to a bounded-below graded-injective complex; localization Hom bijection for every bounded-below K; comparison K+(I^f)->DF+ is IsEquivalence and IsTriangulated (Mathlib's standard localization triangulation, confirmed by #synth); forgetting and every gr^p give ordinary injectives; comparison squares with DerivedCategory.Plus.Qh; B = none or some (a,b) covers all fixed intervals. No extra hypotheses; universes u, v, w independent. New def node def-trf-finite-filtered-localization has real data; its six postponed validity theorems are true, stated in the node, and carry source/proof docstrings. Edge cases checked: zero object, b<a, a=b, filtration bounds varying with cochain degree. No name clashes and no duplicate Preadditive instance. The lean-only §1(B) record repair of def-sp-filtration (Sheaf.CategoryTheory.Filtration / DecreasingFiltration) passes stage2_delivery.check_existing; it is contested with NA's PBC record but matches about 110 of roughly 125 consumers. Item node changes only by the added stmt_dep; both lean.statement fields appear verbatim in their files. nt_compile of both files: clean, no warnings; axioms are standard plus sorryAx. Report has real '## Worker report' and '## Second reading by Q03' sections.; reverted the delivery's change of existing node(s) def-sp-filtration (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261020T051210-L-1592588",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
