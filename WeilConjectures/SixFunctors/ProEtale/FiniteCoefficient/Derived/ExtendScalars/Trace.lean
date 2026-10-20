@@ -32,8 +32,7 @@ traces, and the induced map on the endomorphisms of the unit sends `a • 𝟙` 
   being lax braided.
 - `AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsMonoidal`: the monoidal structure on
   `Ψ`, with comonoidal structure `Functor.leftDerivedTensorComparison`.
-- `AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalars_μ_map_braiding_hom` and
-  `AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsBraided`: `Ψ` is braided.
+- `AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsBraided`: `Ψ` is braided.
 - `AlgebraicGeometry.ProEtale.trace_leftDerivedSheafExtendScalars_map`: `Ψ` preserves traces.
 - `AlgebraicGeometry.ProEtale.ε_comp_leftDerivedSheafExtendScalars_map_smul_id_comp_η`: on the
   endomorphisms of the unit, `Ψ` is the ring map `algebraMap R S`.
@@ -85,8 +84,8 @@ lemma sheafExtendScalars_map_smul_id
   apply ((sheafExtendScalarsAdjunction φ X).homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   erw [← (sheafExtendScalarsAdjunction φ X).unit.naturality]
-  rw [sheafComposeRestrictScalars_map_smul_id, Functor.id_map, Linear.smul_comp, Linear.comp_smul,
-    Category.id_comp, Category.comp_id]
+  rw [sheafComposeRestrictScalars_map_smul_id, Functor.id_map]
+  simp
 
 end Sheaf
 
@@ -95,38 +94,13 @@ variable {R S : Type (u + 1)} [CommRing R] [CommRing S] [Algebra R S] (X : Schem
 
 /-- Derived scalar extension `Ψ = L(S ⊗_R -) : D(X_proét, R) ⥤ D(X_proét, S)` along a flat
 algebra as a monoidal functor, with comonoidal structure the tensor comparison
-`Functor.leftDerivedTensorComparison` (`leftDerivedSheafExtendScalarsMonoidal_δ`). -/
+`Functor.leftDerivedTensorComparison`. -/
 @[instance_reducible]
 noncomputable def leftDerivedSheafExtendScalarsMonoidal :
     L(sheafExtendScalars (algebraMap R S) X).Monoidal :=
   (sheafExtendScalars (algebraMap R S) X).leftDerivedFunctorMonoidal
 
-set_option maxHeartbeats 1600000 in
-/-- The comonoidal structure of `leftDerivedSheafExtendScalarsMonoidal` is the tensor
-comparison `Functor.leftDerivedTensorComparison`. -/
-lemma leftDerivedSheafExtendScalarsMonoidal_δ
-    (K M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
-    letI := leftDerivedSheafExtendScalarsMonoidal (R := R) (S := S) X
-    δ L(sheafExtendScalars (algebraMap R S) X) K M =
-      ((sheafExtendScalars (algebraMap R S) X).leftDerivedTensorComparison.app K).app M :=
-  rfl
-
 attribute [local instance] DerivedCategory.braidedCategory'
-
-set_option maxHeartbeats 1600000 in
-/-- **Derived scalar extension is braided.** For the monoidal structure
-`leftDerivedSheafExtendScalarsMonoidal` of `Ψ = L(S ⊗_R -)` and the Koszul braidings
-`DerivedCategory.braidedCategory'`, `μ_{K, M} ≫ Ψ β_{K, M} = β_{Ψ K, Ψ M} ≫ μ_{M, K}`. -/
-theorem leftDerivedSheafExtendScalars_μ_map_braiding_hom
-    (K M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
-    letI := leftDerivedSheafExtendScalarsMonoidal (R := R) (S := S) X
-    μ L(sheafExtendScalars (algebraMap R S) X) K M ≫
-        L(sheafExtendScalars (algebraMap R S) X).map (β_ K M).hom =
-      (β_ (L(sheafExtendScalars (algebraMap R S) X).obj K)
-          (L(sheafExtendScalars (algebraMap R S) X).obj M)).hom ≫
-        μ L(sheafExtendScalars (algebraMap R S) X) M K :=
-  (sheafExtendScalars (algebraMap R S) X).leftDerivedFunctor_μ_map_braiding_hom
-    (sheafExtendScalars_map_braiding_hom_δ (algebraMap R S) X) K M
 
 /-- The braided structure on derived scalar extension `Ψ = L(S ⊗_R -)`, for the Koszul braidings
 `DerivedCategory.braidedCategory'`, whose monoidal structure is
