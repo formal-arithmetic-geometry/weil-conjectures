@@ -108,14 +108,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationResidueSeparableModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationResidueSeparableModel.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictHenselizationResidueSeparableModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationResidueSeparableModel.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselization_residue_separable_model",
-  "statement": "theorem strictHenselization_residue_separable_model\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]\n    [HenselianLocalRing A]\n    (z : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictHenselizationScheme z) :\n    ∃ (s : S) (f : S.residueField s →+* IsLocalRing.ResidueField A),\n      (letI := f.toAlgebra; ∀ x : IsLocalRing.ResidueField A,\n        IsSeparable (S.residueField s) x) ∧\n      Spec.map (CommRingCat.ofHom f) ≫ S.fromSpecResidueField s =\n        Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ e.hom ≫\n          strictHenselizationStructuralMap z",
+  "statement": "theorem strictHenselization_residue_separable_model\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]\n    [HenselianLocalRing A]\n    (z : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictLocalization z) :\n    ∃ (s : S) (f : S.residueField s →+* IsLocalRing.ResidueField A),\n      (letI := f.toAlgebra; ∀ x : IsLocalRing.ResidueField A,\n        IsSeparable (S.residueField s) x) ∧\n      Spec.map (CommRingCat.ofHom f) ≫ S.fromSpecResidueField s =\n        Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ e.hom ≫\n          strictLocalizationToBase z",
   "branch": "sheaf-dag",
-  "by": "B3",
-  "date": "2026-10-13"
+  "by": "K4",
+  "date": "2026-10-20",
+  "note": "Retirement of the legacy Sheaf duplicate: use the already proved upstream declaration on strictLocalization and strictLocalizationToBase. Its binders and conclusion agree with the retired signature after replacing the legacy strictHenselizationScheme and strictHenselizationStructuralMap names. The canonical smallStrictHenselizationColimitIso identifies the two coordinate constructions. All public declarations in the upstream module are preserved verbatim."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -128,14 +129,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-c863d",
-  "group": "B3",
+  "reviewer": "C-bfb45",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261012T225257-L-1800483",
+  "landing": "20261020T155201-L-3206299",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules and DAG/change/report records matched against the packet and clone; all delivered modules compiled, the original caller failed with the documented forced error, the adapted caller compiled, signatures and imports were verified, and permitted axioms were confirmed."
+  "note": "independent cc review: 6 withdrawn Sheaf copies (closed dead chain, no outside importer in live lean/) vs their WeilConjectures twins: 7 node lean.statements verbatim in upstream files, upstream sorry-free, axioms propext/choice/Quot.sound; delivered stubs compile; polynomial node proof/proof_deps match the upstream proof"
  },
  "lean_audit": {
   "master": {

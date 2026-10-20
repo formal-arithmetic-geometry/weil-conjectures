@@ -130,14 +130,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResidues",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineCompatibleStrictHenselizationResidues.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResidues",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveLineCompatibleStrictHenselizationResidues.lean",
   "declaration": "AlgebraicGeometry.Etale.projectiveLine_compatibleStrictHenselizationResidues",
-  "statement": "theorem Etale.projectiveLine_compatibleStrictHenselizationResidues {S T : Scheme.{u}} {g : T ⟶ S} {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] [Field Ω] [IsAlgClosed Ω] (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g) (hσ : ∃ (s : S) (ψ : S.residueField s ⟶ .of k), ψ.hom.IsIntegral ∧ Spec.map ψ ≫ S.fromSpecResidueField s = σ) (hτ : ∃ (t : T) (ψ : T.residueField t ⟶ .of k'), ψ.hom.IsIntegral ∧ Spec.map ψ ≫ T.fromSpecResidueField t = τ) (ν : Spec (.of Ω) ⟶ Spec (.of k')) : let s := ν ≫ ι ≫ σ let t := ν ≫ τ ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B), letI := cA letI := cB ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B), letI := hA letI := hB ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A)) (sB : IsSepClosed (IsLocalRing.ResidueField B)), letI := sA letI := sB ∃ (φ : A →+* B) (hφ : IsLocalHom φ), letI := hφ ∃ (eA : Spec (.of A) ≅ strictHenselizationScheme s) (eB : Spec (.of B) ≅ strictHenselizationScheme t) (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A))) (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))), IsUniversalHomeomorphism ρA ∧ IsUniversalHomeomorphism ρB ∧ Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫ strictHenselizationStructuralMap s = eB.hom ≫ strictHenselizationStructuralMap t ≫ g ∧ ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ eA.hom ≫ strictHenselizationStructuralMap s = σ ∧ ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫ eB.hom ≫ strictHenselizationStructuralMap t = τ ∧ ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA",
+  "statement": "theorem Etale.projectiveLine_compatibleStrictHenselizationResidues\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (hσ : ∃ (s : S) (ψ : S.residueField s ⟶ .of k),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ S.fromSpecResidueField s = σ)\n    (hτ : ∃ (t : T) (ψ : T.residueField t ⟶ .of k'),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ T.fromSpecResidueField t = τ)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k')) :\n    let s := ν ≫ ι ≫ σ\n    let t := ν ≫ τ\n    ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B),\n      letI := cA\n      letI := cB\n      ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B),\n        letI := hA\n        letI := hB\n        ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A))\n          (sB : IsSepClosed (IsLocalRing.ResidueField B)),\n          letI := sA\n          letI := sB\n          ∃ (φ : A →+* B) (hφ : IsLocalHom φ),\n            letI := hφ\n            ∃ (eA : Spec (.of A) ≅ strictLocalization s)\n              (eB : Spec (.of B) ≅ strictLocalization t)\n              (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n              (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))),\n              IsUniversalHomeomorphism ρA ∧ IsUniversalHomeomorphism ρB ∧\n              Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫ strictLocalizationToBase s =\n                eB.hom ≫ strictLocalizationToBase t ≫ g ∧\n              ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n                eA.hom ≫ strictLocalizationToBase s = σ ∧\n              ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n                eB.hom ≫ strictLocalizationToBase t = τ ∧\n              ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) =\n                ι ≫ ρA",
   "branch": "sheaf-dag",
-  "by": "Q1",
-  "date": "2026-10-12"
+  "by": "K4",
+  "date": "2026-10-20",
+  "note": "Retirement of the legacy Sheaf duplicate: use the already proved upstream declaration on strictLocalization and strictLocalizationToBase. Its binders and conclusion agree with the retired signature after replacing the legacy strictHenselizationScheme and strictHenselizationStructuralMap names. The canonical smallStrictHenselizationColimitIso identifies the two coordinate constructions. All public declarations in the upstream module are preserved verbatim."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -150,14 +151,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-2636a",
-  "group": "G3",
+  "reviewer": "C-bfb45",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261012T154243-L-2434686",
+  "landing": "20261020T155201-L-3206299",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with DAG statements, dependencies, change record, report, sources, and forced-adaptation compiler checks."
+  "note": "independent cc review: 6 withdrawn Sheaf copies (closed dead chain, no outside importer in live lean/) vs their WeilConjectures twins: 7 node lean.statements verbatim in upstream files, upstream sorry-free, axioms propext/choice/Quot.sound; delivered stubs compile; polynomial node proof/proof_deps match the upstream proof"
  },
  "lean_audit": {
   "master": {

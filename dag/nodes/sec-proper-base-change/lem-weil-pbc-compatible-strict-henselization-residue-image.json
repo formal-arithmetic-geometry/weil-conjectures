@@ -97,14 +97,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueImage",
-  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationResidueImage.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationResidueImage",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CompatibleStrictHenselizationResidueImage.lean",
   "declaration": "AlgebraicGeometry.Etale.compatibleStrictHenselization_residue_image",
-  "statement": "theorem Etale.compatibleStrictHenselization_residue_image {S T : Scheme.{u}} {g : T ⟶ S} {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B] [HenselianLocalRing A] [HenselianLocalRing B] [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)] (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g) (ν : Spec (.of Ω) ⟶ Spec (.of k')) (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ)) (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ)) (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A))) (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))) (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ) (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫ eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ) : ∀ x : IsLocalRing.ResidueField A, ∃ y : IsLocalRing.ResidueField B, (Spec.preimage ρB).hom y = (Spec.preimage (ι ≫ ρA)).hom x",
+  "statement": "theorem Etale.compatibleStrictHenselization_residue_image\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B]\n    [HenselianLocalRing A] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)]\n    [IsSepClosed (IsLocalRing.ResidueField B)]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    (eA : Spec (.of A) ≅ strictLocalization (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictLocalization (ν ≫ τ))\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictLocalizationToBase (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictLocalizationToBase (ν ≫ τ) = τ)\n    : ∀ x : IsLocalRing.ResidueField A,\n      ∃ y : IsLocalRing.ResidueField B,\n        (Spec.preimage ρB).hom y = (Spec.preimage (ι ≫ ρA)).hom x",
   "branch": "sheaf-dag",
-  "by": "G3",
-  "date": "2026-10-12"
+  "by": "K4",
+  "date": "2026-10-20",
+  "note": "Retirement of the legacy Sheaf duplicate: use the already proved upstream declaration on strictLocalization and strictLocalizationToBase. Its binders and conclusion agree with the retired signature after replacing the legacy strictHenselizationScheme and strictHenselizationStructuralMap names. The canonical smallStrictHenselizationColimitIso identifies the two coordinate constructions. All public declarations in the upstream module are preserved verbatim."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -117,14 +118,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "C-bfb45",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261012T163614-L-2785234",
+  "landing": "20261020T155201-L-3206299",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 6 withdrawn Sheaf copies (closed dead chain, no outside importer in live lean/) vs their WeilConjectures twins: 7 node lean.statements verbatim in upstream files, upstream sorry-free, axioms propext/choice/Quot.sound; delivered stubs compile; polynomial node proof/proof_deps match the upstream proof"
  },
  "lean_audit": {
   "master": {
