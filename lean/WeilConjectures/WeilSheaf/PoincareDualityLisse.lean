@@ -11,7 +11,6 @@ public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.VerdierDualFinite
 import WeilConjectures.WeilSheaf.StalkRationalPoint
-import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 
 /-!
 # Degreewise Poincaré duality for lisse Weil sheaves
@@ -177,26 +176,25 @@ theorem exists_isPerfPair_compactlySupportedCohomology_dual (d : ℕ)
     (X ↘ Spec (CommRingCat.of k₀))
   let := WeilComplex.isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l)
     (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
+  -- Smooth purity identifies the Verdier dual with the twisted coefficient dual.
+  -- Verdier exchange then identifies its cohomology with the dual of compact cohomology.
+  let a := X ↘ Spec (CommRingCat.of k₀)
+  let K := toComplex.obj F
   let G := (F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d)
-  let A := (WeilComplex.derivedLowerShriek k₀ l
-    (X ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F)
-  obtain ⟨eD⟩ := homology_verdierDual_equiv A i
-  obtain ⟨eX⟩ := WeilComplex.nonempty_verdierDual_toComplex_iso_of_isLisse d F hF
+  obtain ⟨eD⟩ := WeilComplex.nonempty_verdierDual_toComplex_iso_of_isLisse d F hF
   obtain ⟨eT⟩ := nonempty_dual_tensorObj_tateTwistSheaf_iso F hF (d : ℤ)
-  let eT' : (F.dual hF).tensorObj
-      ((tateTwistSheaf k₀ l X d).tensorObj (adicConstant k₀ l X)
-        (isLisse_tateTwistSheaf k₀ l X d)) hF.dual ≅ G := by
-    simpa only [zpow_natCast] using eT
-  obtain ⟨eE⟩ := WeilComplex.nonempty_verdierDual_derivedLowerShriek_iso
-    (X ↘ Spec (CommRingCat.of k₀)) (toComplex.obj F)
-  let R := WeilComplex.derivedLowerStar (k₀ := k₀) (l := l)
-    (X ↘ Spec (CommRingCat.of k₀))
-  let eR := eE ≪≫ R.mapIso eX ≪≫ (R.commShiftIso (2 * d : ℤ)).app _ ≪≫
-    (shiftFunctor _ (2 * d : ℤ)).mapIso (R.mapIso (toComplex.mapIso eT'))
-  let eH := (WeilComplex.homologySheaf (-i)).mapIso eR ≪≫
-    WeilComplex.homologySheafShiftIso (R.obj (toComplex.obj G)) (2 * d : ℤ) (-i) j (by lia)
-  let e : (G.cohomology j).Equiv (F.compactlySupportedCohomology i).dual :=
-    (globalSectionsEquivOfIso eH).symm.trans eD
-  exact exists_pairing_of_equiv_dual e
+  let eG : (WeilComplex.verdierDual k₀ l X).obj (Opposite.op K) ≅
+      (toComplex.obj G)⟦(2 * d : ℤ)⟧ :=
+    eD ≪≫ (shiftFunctor _ (2 * d : ℤ)).mapIso
+      (toComplex.mapIso (by simpa only [zpow_natCast] using eT))
+  obtain ⟨eE⟩ := WeilComplex.nonempty_verdierDual_derivedLowerShriek_iso a K
+  let eS := ((WeilComplex.derivedLowerStar a).commShiftIso (2 * d : ℤ)).app
+    (toComplex.obj G)
+  let e := eE ≪≫ (WeilComplex.derivedLowerStar a).mapIso eG ≪≫ eS
+  let eh := (WeilComplex.homologySheaf (-i)).mapIso e ≪≫
+    WeilComplex.homologySheafShiftIso _ (2 * d : ℤ) (-i) j (by lia)
+  obtain ⟨ed⟩ := homology_verdierDual_equiv
+    ((WeilComplex.derivedLowerShriek k₀ l a).obj K) i
+  exact exists_pairing_of_equiv_dual ((globalSectionsEquivOfIso eh).symm.trans ed)
 
 end AlgebraicGeometry.WeilSheaf
