@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.OpenTensorNormalizationData
+import Sheaf.SixFunctors.FiniteComparisonsExistence
+import Sheaf.SixFunctors.FiniteCompatibilityTransport
 import Sheaf.SixFunctors.OpenOperationModels
 import Sheaf.SixFunctors.OpenPullbackSupport
 import Sheaf.SixFunctors.OpenTensorSupport
@@ -396,7 +398,9 @@ theorem finite_compatibility (A : Type (u + 1)) [CommRing A] [Finite A]
     ∃ (t : SiteSquare (finiteInput A gU j' j g sq))
       (o : Operations (finiteInput A gU j' j g sq) t) (a : Assertion o)
       (e : FiniteComparisons A o), FiniteCompatibility A o a e := by
-  sorry
+  obtain ⟨t, o, ⟨a⟩⟩ := exists_normalized .ordinary (finiteInput A gU j' j g sq)
+  obtain ⟨e⟩ := finite_comparisons_exists A gU j' j g sq o
+  exact ⟨t, o, a, e, finite_compatibility_of_comparisons A gU j' j g sq o a e⟩
 
 end SheafOfModules.OpenTensorNormalization
 

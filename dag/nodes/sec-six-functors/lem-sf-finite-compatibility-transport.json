@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-finite-compatibility-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The open factor in the projection and base-change compatibility: finite constant-coefficient specialization of lem-sf-open-tensor-normalization.",
+   "via": [
+    "lem-sf-open-tensor-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pinned finite comparisons preserve canonical open arrows",
+ "statement": "Let A be a finite commutative ring, gU,j',j,g an open Cartesian square, t a SiteSquare, o its Operations for finiteInput, a : Assertion o and e : FiniteComparisons A o [def-sf-open-normalization-data]. Then FiniteCompatibility A o a e holds: the two transported published finite arrows finiteBetaLeft and finiteGammaLeft equal the corresponding normalized routes finiteBetaRight and finiteGammaRight, for all M and N. The input e already supplies every comparison and pin; the conclusion asserts only the two equalities.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 00YV, 03D7, 0F6Z; derived tensor comparison via sites-cohomology.tex Tags 06YU and 0GL1. Canonical finite map constructions in ProEtaleDerivedExtensionZeroBaseChange and OpenLowerShriekProj."
+ },
+ "stmt_deps": [
+  "def-sf-open-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the inverse of the published finite base-change arrow through the given pull and open comparisons. On complex representatives its adjunction transpose is fixed by the two pull-pin mate equations and the open-pin unit equations. Section normalization identifies the right square with Operations.rightSquare, whose mate is Operations.ordinaryTheta. The model equations and theta_model identify the derived transpose with a.beta_inverse. Injectivity of the adjunction Hom equivalence gives equality of inverse arrows; cancel the comparison isomorphisms to obtain the beta route equation.",
+   "uses": [
+    "def-sf-open-normalization-data",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse of finiteGamma is the canonical open projection map and its transpose is the tensor of the unit and identity. The open pin identifies its unit. The tensor pins identify its map on every pure bidegree summand and its derived representatives; Operations.restrictionTensor preserves the same pure tensors. Bilinearity, sheafification and the total coproduct universal property extend this equality to the signed total complexes. The model equations descend it, identifying its transpose with a.gamma_inverse. Adjunction injectivity and cancellation give the gamma route equation. Pair the two equations to obtain FiniteCompatibility.",
+   "uses": [
+    "def-sf-open-normalization-data",
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-open-normalization-data",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit finite realization and comparison argument expanding the finite specialization of lem-sf-open-tensor-normalization; derived tensor and projection use sites-cohomology.tex 06YU and 0GL1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adjunction conjugate natural isomorphism unit equation unique mate",
+   "results": "Adjunction.unit_leftAdjointUniq_hom_app; conjugateEquiv_of_iso. These supply mate uniqueness but not the finite derived route equations.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_conjugateEquiv_symm",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates: unit_conjugateEquiv_symm; a generic unit equation for the inverse conjugation.",
+   "date": "2026-10-21",
+   "verdict": "tool lemma, not the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateIsoEquiv; finiteBetaLeft|finiteGammaLeft",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates and Unique contain the generic bijections. The project contains only the finite route definitions, without their equality theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorNormalization",
+  "date": "2026-10-21",
+  "group": "Q9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteCompatibilityTransport",
+  "file": "lean/Sheaf/SixFunctors/FiniteCompatibilityTransport.lean",
+  "declaration": "SheafOfModules.OpenTensorNormalization.finite_compatibility_of_comparisons",
+  "statement": "theorem finite_compatibility_of_comparisons (A : Type (u + 1)) [CommRing A]\n    [Finite A] {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')\n    (j : U ⟶ X) (g : X' ⟶ X) (sq : OpenImmersionSquare gU j' j g)\n    {t : SiteSquare (finiteInput A gU j' j g sq)}\n    (o : Operations (finiteInput A gU j' j g sq) t) (a : Assertion o)\n    (e : FiniteComparisons A o) : FiniteCompatibility A o a e",
+  "branch": "sheaf-dag",
+  "by": "Q9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261020T233215-L-905455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261020T233215-L-905455",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

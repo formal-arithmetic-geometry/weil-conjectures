@@ -69,40 +69,30 @@
    "elementary": true
   },
   {
-   "text": "For constant finite $A$ use [prop-weil-pbc-proetale-constant-ring-map] and [prop-weil-pbc-proetale-constant-exact]: with the canonical constant-section structural map, module pullback is exact inverse image. The canonical arrow in [lem-cbc-proetale-extension-zero-base-change] is the isomorphism of left adjoints induced by the sectionwise equality $j^*g_*=g_{U*}j'^*$; this is the section-normalized right square of Step 1. Uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] identifies it with $\\beta$, in the stated forward direction. The canonical projection arrow in [lem-cbc-extension-zero-projection-formula] is the inverse of the open-adjunction projection map: its inverse is the transpose of $u_M\\otimes1$ using restriction/tensor. Step 5 has exactly this transpose, so injectivity of the adjunction bijection identifies it with $\\gamma^{-1}$, and the forward arrows agree. This uses the source's definition of its canonical arrows, not its proof of an additional theorem. In particular no arbitrary automorphism of the finite ring is identified with the fixed-scalar inverse image.",
+   "text": "Specialize exists_normalized to the finite constant input to obtain t, o and a. Construct the finite comparisons independently by [lem-sf-finite-comparisons-existence], then apply [lem-sf-finite-compatibility-transport] to the resulting e and a. Return t, o, a, e and the two canonical route equations. The original finite specialization statement is unchanged.",
    "uses": [
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-cbc-extension-zero-projection-formula"
+    "lem-sf-finite-comparisons-existence",
+    "lem-sf-finite-compatibility-transport"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero-base-change.md",
-    "place": "Canonical comparison of the two right adjoints; lem-cbc-extension-zero-projection-formula.md, canonical projection arrow. Its inverse orientation is explicit in WeilConjectures/SixFunctors/ProEtale/Derived/OpenImmersionLowerShriekProjection.lean:175-214."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-cbc-open-immersion-square",
   "def-sf-open-normalization-data",
   "def-weil-exact-derived-adjunction",
-  "lem-cbc-extension-zero-projection-formula",
-  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-sf-finite-comparisons-existence",
+  "lem-sf-finite-compatibility-transport",
   "lem-sf-open-operation-models",
   "lem-sf-open-pullback-support",
   "lem-sf-open-tensor-support",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-resolving-representative-whiskering",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-weil-pbc-proetale-constant-exact",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "X8: normalized categorical assembly from the separate operation-construction and open-support subarguments; ordinary and derived units, full faithfulness, natural transposes and both restriction equations are formalized. Finite compatibility remains the existing named hole."
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Retains the existing geometric normalization proof; Q9 proves finite realization construction and separates operation comparison construction from canonical-arrow transport in the finite specialization."
  },
  "mathlib_searches": [
   {
@@ -664,11 +654,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-9ffe9",
-  "group": "X8",
-  "result": "fix",
-  "landing": "20261020T221404-L-4182007",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261020T233215-L-905455",
   "kind": "interface",
-  "note": "independent cc review: delivered Data/item/3 new modules vs live OpenTensorNormalization.lean (diff), 4 new + 2 changed node files vs live dag, new sorry statements vs Operations/TensorModel definitions, 33 importers compiled"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
