@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import WeilConjectures.RingTheory.CoverModuleExact
 
-import Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalRepresentatives
+import WeilConjectures.AlgebraicGeometry.ProjTwistFiniteLocalRepresentatives
 import WeilConjectures.AlgebraicGeometry.ProjTwistLocalOverlapCompatibility
 
 import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
