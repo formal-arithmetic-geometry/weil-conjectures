@@ -147,14 +147,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.IdealPowerHomLift",
-  "file": "lean/Sheaf/RingTheory/IdealPowerHomLift.lean",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.IdealPowerHomLift",
+  "file": "lean/WeilConjectures/RingTheory/IdealPowerHomLift.lean",
   "declaration": "LinearMap.exists_ideal_power_hom_lift",
-  "statement": "theorem exists_ideal_power_hom_lift\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]\n    (_hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG)\n    (_hquot : Function.Bijective\n      (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map))\n    (n : ℕ) (_hn : 1 ≤ n)\n    {N : Type w} [AddCommGroup N] [Module R N]\n    (d : ↥(I ^ n) →ₗ[R] S ⊗[R] N) :\n    ∃ (l : ↥(I ^ n) →ₗ[R] N) (m : S ⊗[R] N),\n      ∀ r : ↥(I ^ n), 1 ⊗ₜ[R] l r = d r + (r : R) • m",
+  "statement": "theorem exists_ideal_power_hom_lift\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]\n    (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)\n    (hquot : Function.Bijective\n      (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map))\n    (n : ℕ) (hn : 1 ≤ n)\n    {N : Type w} [AddCommGroup N] [Module R N]\n    (d : ↥(I ^ n) →ₗ[R] S ⊗[R] N) :\n    ∃ (l : ↥(I ^ n) →ₗ[R] N) (m : S ⊗[R] N),\n      ∀ r : ↥(I ^ n), 1 ⊗ₜ[R] l r = d r + (r : R) • m",
   "branch": "sheaf-dag",
   "by": "M4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "Retired the duplicate Sheaf module in favour of the upstream theorem; the statement differs only in binder names. The consumer imports the upstream module directly."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -167,13 +168,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "C-d0677",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261013T111931-L-3066128",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T145534-L-2408894",
+  "kind": "interface",
+  "note": "independent cc review: Sheaf copy vs WeilConjectures.RingTheory.IdealPowerHomLift (identical up to _ binder names, same imports); consumer CyclicExtensionFlatDescent positional use + one-line import swap; node lean pointer = upstream signature; delivered set + TorsionExtensionFlatDescent compile; original consumer fails without the edit"
  }
 }

@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Sheaf.RingTheory.IdealPowerHomLift
+import WeilConjectures.RingTheory.IdealPowerHomLift
 import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
