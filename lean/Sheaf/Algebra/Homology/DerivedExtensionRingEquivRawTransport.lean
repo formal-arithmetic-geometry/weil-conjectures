@@ -1,5 +1,5 @@
 module
-public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 @[expose] public section
 set_option autoImplicit false

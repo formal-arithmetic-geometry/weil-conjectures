@@ -15,7 +15,7 @@
  },
  "proof": [
   {
-   "text": "Extension of scalars is additive: use ExtendScalars.hom_ext to test equality on 1 tensor m; map_tmul and tmul_add identify the map of a sum with the sum of the maps. This is independent of any module-carrier lower bound on the target ring universe.",
+   "text": "Extension of scalars is additive by the upstream theorem ModuleCat.baseDerivedTensor_extendScalars_additive. Its proof tests equality on 1 tensor m using ExtendScalars.hom_ext; map_tmul and tmul_add identify the map of a sum with the sum of the maps. The independent ring and module universes are unchanged.",
    "uses": [
     "def-weil-module-base-change"
    ],
@@ -80,7 +80,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 06Y6 and 08IB; two strict intermediate statements, direct termwise extension and adjunction assembly"
+  "place": "Tags 06Y6 and 08IB; reuse the verbatim upstream model construction and its proof; retire the duplicate Sheaf implementation and redirect its consumers to upstream"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -148,16 +148,16 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel",
+  "module": "WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel",
   "declaration": "ModuleCat.baseDerivedTensorCohomologyModel",
-  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorCohomologyModel.lean",
+  "file": "lean/WeilConjectures/Algebra/Homology/BaseDerivedTensorCohomologyModel.lean",
   "statement": "def baseDerivedTensorCohomologyModel (Q : CochainComplex (ModuleCat.{max uR uA uB uD v} A) ℤ) (D : Type uD) [CommRing D] [Algebra (A ⊗[R] B) D] : BaseDerivedTensorCohomologyModel R A B Q D",
   "branch": "sheaf-dag",
-  "by": "J1",
-  "date": "2026-10-11",
-  "existing": false,
+  "by": "P1",
+  "date": "2026-10-20",
+  "existing": true,
   "declarations": [
-   "ModuleCat.extendScalars_additive_sheaf",
+   "ModuleCat.baseDerivedTensor_extendScalars_additive",
    "ModuleCat.BaseDerivedTensorCohomologyModel",
    "ModuleCat.nonempty_baseDerivedTensorCohomologyModel",
    "ModuleCat.baseDerivedTensorCohomologyModel"
@@ -181,13 +181,13 @@
   "note": "R,A,B CommRing + Algebra R A/B; hTor Tor' over ULift R of ULift A, ULift B (ULift.module = canonical action, checked; Mathlib monoidal ModuleCat needs same universe), 0<i; Q CochainComplex (ModuleCat A) Z, bounded as IsZero outside [m,n]; Module.Finite+Projective = summand of A^m; D CommRing, Algebra E D, IsLocalization S D; Q(x)^L_R B = IsLeftDerivedFunctor of extendScalars R->B on Q_R (no recorded module derived tensor; def-weil-derived-tensor unrecorded); Q(x)_A D termwise extendScalars along A->E->D; conclusion IsIso localizedComparison i for all i. FIX: model pinned only the B-action on T_i, so for non-injective beta_i the E-action and c_i were not canonical; added field cohomologyIso_smul (a(x)1 acts as H^i(L(a.id_Q))) + node statement/docstrings"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "C-5a225",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T085304-L-25468",
+  "landing": "20261020T144257-L-2260881",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf BaseDerivedTensorCohomologyModel vs upstream WeilConjectures twin (diff: header + instance rename only); 5 import switches + 1 renamed call vs live clone; node lean attachment vs upstream decls; all 8 modules incl. 2 indirect importers compiled clean"
  }
 }

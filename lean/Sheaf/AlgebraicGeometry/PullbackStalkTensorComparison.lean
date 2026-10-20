@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.CategoryTheory.Monoidal.Tor

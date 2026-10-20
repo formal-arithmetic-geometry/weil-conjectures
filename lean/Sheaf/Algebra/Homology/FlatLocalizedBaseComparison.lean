@@ -5,7 +5,7 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.RingTheory.Flat.Basic
 
 /-! # Flat extension of an invertible base-tensor comparison

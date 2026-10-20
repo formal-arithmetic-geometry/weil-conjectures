@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat

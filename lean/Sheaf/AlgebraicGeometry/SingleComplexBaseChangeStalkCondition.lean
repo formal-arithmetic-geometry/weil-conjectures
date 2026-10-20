@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
-public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
@@ -221,7 +221,7 @@ theorem exists_tensorStalkIso (z : X')
               (P.X i) := by
     subst a
     have : (ModuleCat.extendScalars.{uSC, uSC, uSC} (g'.stalkMap z).hom).Additive :=
-      ModuleCat.extendScalars_additive_sheaf _
+      ModuleCat.baseDerivedTensor_extendScalars_additive _
     -- Pin zero-preservation at the universe of the stalk modules.
     have hs0 : (RingedSpace.moduleStalkFunctor X.toRingedSpace
         (g' z)).PreservesZeroMorphisms := inferInstance
