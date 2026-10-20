@@ -84,9 +84,9 @@ theorem sf_internalHom_triangulated (A : Type (u + 1)) [CommRing A] (X : Scheme.
         (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology
           ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj
             (CommRingCat.of A)))).obj (op K)).IsTriangulated) := by
-  let R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj
-    (CommRingCat.of A)
-  exact CategoryTheory.RingedHomUniverses.ringedInternalHom_exact.{u + 1, u, u + 1, w}
-    X.smallEtaleTopology R
+  simpa only using
+    (CategoryTheory.RingedHomUniverses.ringedInternalHom_exact.{u + 1, u, u + 1, w}
+      X.smallEtaleTopology
+      ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))
 
 end AlgebraicGeometry.Etale
