@@ -11,11 +11,6 @@ public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.KInjectiveDerivedMapComputation
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-!
@@ -128,6 +123,160 @@ noncomputable def proEtaleUnitLeraySectionUnit {X Y : Scheme.{u}} (h : X ⟶ Y) 
   whiskerRight (proEtaleConstantRingAdjunction A h).unit (proEtaleUnitLeraySections A Y) ≫
     whiskerLeft (proEtaleConstantRingPullback A h) (proEtaleUnitLerayTerminalIso A h).hom
 
+section UnitLerayCalculation
+
+variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
+  [Abelian C] [Abelian D] [Abelian E]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+  [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
+  {L : D ⥤ C} {F : C ⥤ D} {G : D ⥤ E} {H : C ⥤ E}
+  [L.Additive] [F.Additive] [G.Additive] [H.Additive]
+  [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+  [F.PreservesKInjectiveComplexes] (a : L ⊣ F) (e : F ⋙ G ≅ H)
+
+-- The composition comparison carries the composite derived unit to the derived unit.
+private lemma unitLerayFac :
+    Functor.rightDerivedFunctorCompUnit F G ≫
+      Functor.whiskerLeft DerivedCategory.Qh
+        (Functor.rightDerivedFunctorCompIso' F G e).hom =
+    Functor.whiskerRight
+        (NatTrans.mapHomotopyCategory
+          e.hom (.up ℤ))
+        DerivedCategory.Qh ≫
+      H.rightDerivedFunctorUnit := by
+  have hc : (F ⋙ G).rightDerivedFunctorUnit ≫
+      Functor.whiskerLeft DerivedCategory.Qh
+        (Functor.rightDerivedFunctorCompIso F G).hom =
+      Functor.rightDerivedFunctorCompUnit F G := by
+    simp [Functor.rightDerivedFunctorCompIso]
+  rw [← hc, Category.assoc, ← Functor.whiskerLeft_comp]
+  simp only [Functor.rightDerivedFunctorCompIso',
+    Iso.trans_hom, Iso.symm_hom]
+  rw [Iso.hom_inv_id_assoc]
+  exact Functor.rightDerivedNatTrans_fac
+    (F ⋙ G).rightDerivedFunctor
+    H.rightDerivedFunctor
+    (F ⋙ G).rightDerivedFunctorUnit
+    H.rightDerivedFunctorUnit
+    (HomotopyCategory.quasiIso C (.up ℤ)) _
+
+-- Compute before inverting units; no K-injectivity is required at this stage.
+private lemma unitLerayHomotopy
+    (K : HomotopyCategory D (.up ℤ)) :
+    G.rightDerivedFunctorUnit.app K ≫
+        G.rightDerivedFunctor.map
+          (a.mapDerivedCategoryRightDerivedAdjunction.unit.app (DerivedCategory.Qh.obj K)) ≫
+        (Functor.rightDerivedFunctorCompIso' F G e).hom.app
+            (L.mapDerivedCategory.obj (DerivedCategory.Qh.obj K)) ≫
+      H.rightDerivedFunctor.map (L.mapDerivedCategoryFactorsh.hom.app K) =
+      DerivedCategory.Qh.map
+        ((G.mapHomotopyCategory (.up ℤ)).map ((a.mapHomotopyCategory (.up ℤ)).unit.app K) ≫
+          (NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app
+            ((L.mapHomotopyCategory (.up ℤ)).obj K)) ≫
+        H.rightDerivedFunctorUnit.app ((L.mapHomotopyCategory (.up ℤ)).obj K) := by
+  let T := (L.mapHomotopyCategory (.up ℤ)).obj K
+  have hu := (a.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
+    (HomotopyCategory.quasiIso _ (.up ℤ)) L.mapDerivedCategoryFactorsh.hom
+    F.rightDerivedFunctorUnit K
+  have hn := (Functor.rightDerivedFunctorCompIso' F G e).hom.naturality
+    (L.mapDerivedCategoryFactorsh.hom.app K)
+  have hg := G.rightDerivedFunctorUnit.naturality
+    ((a.mapHomotopyCategory (.up ℤ)).unit.app K)
+  have hc := NatTrans.congr_app (unitLerayFac e) T
+  have hi : (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app T =
+      𝟙 _ := by
+    have h := Iso.inv_hom_id_app
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)) T
+    erw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id] at h
+    exact h
+  dsimp only [Functor.comp_map] at hn hg
+  dsimp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app] at hc
+  simp only [Category.id_comp, Category.comp_id, Category.assoc] at hc
+  change DerivedCategory.Qh.map
+      ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app T) ≫
+      G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj T) ≫
+      G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app T) ≫
+      (Functor.rightDerivedFunctorCompIso' F G e).hom.app (DerivedCategory.Qh.obj T) = _ at hc
+  rw [hi, DerivedCategory.Qh.map_id, Category.id_comp] at hc
+  erw [← hn]
+  erw [← Functor.map_comp_assoc, hu]
+  simp only [Functor.map_comp, Category.assoc]
+  erw [← reassoc_of% hg, hc, ← DerivedCategory.Qh.map_comp_assoc]
+
+-- Naturality in j and inversion of the units at I and J give the chain representative.
+private theorem unitLerayChain
+    (I : CochainComplex D ℤ)
+    (J : CochainComplex C ℤ)
+    [I.IsKInjective] [J.IsKInjective]
+    (j : (L.mapHomologicalComplex (.up ℤ)).obj I ⟶ J) :
+    (G.rightDerivedFunctorObjQIso I).hom ≫
+        DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex
+              (whiskerRight a.unit G ≫ whiskerLeft L e.hom) (.up ℤ)).app I ≫
+            (H.mapHomologicalComplex (.up ℤ)).map j) ≫
+      (H.rightDerivedFunctorObjQIso J).inv =
+    G.rightDerivedFunctor.map
+        (a.mapDerivedCategoryRightDerivedAdjunction.unit.app
+          (DerivedCategory.Q.obj I)) ≫
+      (Functor.rightDerivedFunctorCompIso' F G e).hom.app
+        (L.mapDerivedCategory.obj (DerivedCategory.Q.obj I)) ≫
+      H.rightDerivedFunctor.map
+        (L.mapDerivedCategoryFactors.hom.app I ≫
+          DerivedCategory.Q.map j) := by
+  let K := (HomotopyCategory.quotient _ (.up ℤ)).obj I
+  let U := (L.mapHomotopyCategory (.up ℤ)).obj K
+  let v := (G.mapHomologicalComplex (.up ℤ)).map
+      ((a.mapHomologicalComplex (.up ℤ)).unit.app I) ≫
+    (NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app
+      ((L.mapHomologicalComplex (.up ℤ)).obj I)
+  have hfactor : L.mapDerivedCategoryFactorsh.hom.app K =
+      L.mapDerivedCategoryFactors.hom.app I := by
+    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+    simp only [DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+    repeat erw [CategoryTheory.Functor.map_id]
+    repeat erw [Category.comp_id]
+    repeat erw [Category.id_comp]
+  have hquotient : DerivedCategory.Qh.map
+      (((G.mapHomotopyCategory (.up ℤ)).map
+          ((a.mapHomotopyCategory (.up ℤ)).unit.app K) ≫
+        (NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app U) ≫
+        (H.mapHomotopyCategory (.up ℤ)).map
+          ((HomotopyCategory.quotient _ (.up ℤ)).map j)) =
+      DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex (whiskerRight a.unit G ≫ whiskerLeft L e.hom)
+          (.up ℤ)).app I ≫ (H.mapHomologicalComplex (.up ℤ)).map j) := by
+    rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+    change DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
+      (v ≫ (H.mapHomologicalComplex (.up ℤ)).map j)) = _
+    rfl
+  have hc := unitLerayHomotopy a e K
+  rw [hfactor] at hc
+  have hj := H.rightDerivedFunctorUnit.naturality
+    ((HomotopyCategory.quotient _ (.up ℤ)).map j)
+  dsimp only [Functor.comp_map] at hj
+  have hc' := congrArg (fun t ↦ t ≫ H.rightDerivedFunctor.map (DerivedCategory.Q.map j)) hc
+  simp only [Category.assoc] at hc'
+  erw [← hj, ← DerivedCategory.Qh.map_comp_assoc] at hc'
+  erw [hquotient] at hc'
+  simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv, Functor.mapIso_hom,
+    Functor.mapIso_inv, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv, asIso_hom, asIso_inv]
+  repeat erw [CategoryTheory.Functor.map_id]
+  repeat erw [Category.id_comp]
+  repeat erw [Category.comp_id]
+  rw [← cancel_epi (G.rightDerivedFunctorUnit.app K)]
+  erw [IsIso.hom_inv_id_assoc]
+  simp only [Functor.map_comp, Category.assoc] at hc' ⊢
+  exact hc'.symm
+
+end UnitLerayCalculation
+
 /-- An arbitrary chain map represents the derived unit--Leray composite on sections.
 Source: Stacks Tags 07A6, 08J6, 0D6E, 070I, 08BJ and 0FND
 (blueprint: lem-trf-proetale-unit-leray-chain-formula).
@@ -171,6 +320,7 @@ theorem proEtale_unit_leray_chain_formula
       (proEtaleUnitLeraySections A X).rightDerivedFunctor.map
         ((proEtaleConstantRingPullback A h).mapDerivedCategoryFactors.hom.app I ≫
           DerivedCategory.Q.map j) := by
-  sorry
+  exact unitLerayChain (proEtaleConstantRingAdjunction A h)
+    (proEtaleUnitLerayTerminalIso A h) I J j
 
 end AlgebraicGeometry.Scheme
