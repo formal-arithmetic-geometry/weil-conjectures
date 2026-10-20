@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Sheaf.AlgebraicGeometry.DeterminantDualAlternatingFamily
+import WeilConjectures.AlgebraicGeometry.DeterminantDualAlternatingFamily
 import Sheaf.AlgebraicGeometry.ExteriorSheafComparison
 
 /-! # Construction of the exterior dual pairing
@@ -54,7 +54,21 @@ theorem exterior_dual_pairing_exists (X : Scheme.{u}) (M : X.Modules) (n : ℕ) 
         (show X.presheaf.obj (op U) from
           (φ j).app (op (Over.mk (𝟙 U))) (a i))).det := by
   classical
-  choose A hA huniq using exterior_dual_pairing_local X M n
+  choose A₀ hA₀ huniq₀ using exterior_dual_pairing_local X M n
+  let e := Scheme.Modules.exteriorSheafIsoExteriorPower M n
+  let A (U : X.Opens) :
+      ((Scheme.Modules.dual M).val.obj (op U)) [⋀^Fin n]→ₗ[X.presheaf.obj (op U)]
+        ((Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U)) :=
+    ((Scheme.Modules.dualMap e.hom).val.app (op U)).hom.compAlternatingMap (A₀ U)
+  have hA (U V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V))
+      (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)) :
+      (A U φ).app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a) =
+        (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from
+          (φ j).app (op (Over.mk g)) (a i))).det := by
+    change (A₀ U φ).app (op (Over.mk g))
+      (e.hom.val.app (op V) (Scheme.Modules.exteriorSheafSection M n V a)) = _
+    rw [Scheme.Modules.exteriorSheafIsoExteriorPower_hom_wedge]
+    exact hA₀ U V g a φ
   have hnat (U V : X.Opens) (g : V ⟶ U)
       (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)) :
       A V (fun i ↦ (Scheme.Modules.dual M).val.map g.op (φ i)) =

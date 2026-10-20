@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "For each open choose the uniquely characterized alternating family of local determinant functionals. Prove compatibility under restriction by the all-subopen wedge extensionality theorem: for W→V→U, both sides evaluate to the determinant of the original tuple on W. The internal Hom restriction maps identify the components definitionally. Here the upstream extensionality theorem is transported through the canonical wedge-preserving isomorphism exteriorSheafIsoExteriorPower, as exteriorSheaf_dual_ext_compat; this preserves the original exteriorSheaf statement.",
+   "text": "For each open choose the uniquely characterized upstream alternating family on exteriorPower from exterior_dual_pairing_local. Compose it with the linear map on sections of dualMap(exteriorSheafIsoExteriorPower.hom), using LinearMap.compAlternatingMap. This gives an alternating family of functionals on exteriorSheaf. The comparison hom preserves pure wedges, so the upstream formula gives its determinant formula on every subopen. Prove compatibility under restriction by exteriorSheaf_dual_ext_compat: for W→V→U both sides evaluate to the same determinant, since internal Hom restriction identifies their components definitionally.",
    "uses": [
     "lem-sc-exterior-dual-pairing-local",
     "lem-sc-exterior-sheaf-dual-ext",
@@ -53,7 +53,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/duality.tex; Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean",
-  "place": "N1 Lean reduction of the determinant pairing construction: fixed-open alternating functionals, proved wedge extensionality, restriction compatibility, and sheafification adjunction. C6 (2026-10-20): use the upstream dual extensionality theorem through the proved exterior-sheaf comparison."
+  "place": "N1 Lean reduction of the determinant pairing construction: fixed-open alternating functionals, proved wedge extensionality, restriction compatibility, and sheafification adjunction. C6 (2026-10-20): use the upstream dual extensionality theorem through the proved exterior-sheaf comparison. B4 (2026-10-20): consume the upstream alternating-family theorem on exteriorPower and transport with dualMap of the canonical comparison; LinearMap.compAlternatingMap preserves alternation and the hom-wedge formula proves the same evaluation identity."
  },
  "mathlib_searches": [
   {
@@ -134,12 +134,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-288ff",
-  "group": "C6",
+  "reviewer": "C-7f331",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261020T144238-L-2258197",
+  "landing": "20261020T163938-L-3832985",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf exteriorSheaf_dual_ext vs upstream WeilConjectures twin (exteriorPower encoding) via proved ExteriorSheafComparison iso + exteriorSheaf_dual_ext_compat (old statement byte-identical); 3 unclaimed importers adapted only at import + 6 call sites, all compile clean; node lean record = upstream signature verbatim"
+  "note": "independent cc review: withdrawn Sheaf exterior_dual_pairing_local vs upstream WeilConjectures twin (node lean.statement verbatim); adapted DeterminantDualPairing vs live original (import + transport lines 57-71 only, import-only counterfactual fails at 61/80/92/116); compiles clean, importer DeterminantExteriorDualIso clean, axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {

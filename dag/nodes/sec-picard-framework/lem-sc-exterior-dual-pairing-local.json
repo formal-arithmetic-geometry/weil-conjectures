@@ -14,41 +14,37 @@
  ],
  "proof": [
   {
-   "text": "For each tuple phi choose the unique upstream functional on exteriorPower. Precompose it on Over U with the hom of exteriorSheafIsoExteriorPower to obtain a functional on exteriorSheaf. The comparison sends each exteriorSheafSection to wedge, so exteriorSheafIsoExteriorPower_hom_wedge and the upstream determinant formula give the required formula on every subopen. The upstream functional is uniquely determined; its transport uses the explicitly constructed comparison.",
+   "text": "For each tuple phi choose the unique upstream functional on exteriorPower from exterior_dual_pairing_functional. Its defining equation gives the determinant formula on every subopen. This unique-existence theorem determines the chosen functional.",
    "uses": [
-    "lem-sc-exterior-dual-pairing-functional",
-    "lem-sc-exterior-sheaf-comparison"
+    "lem-sc-exterior-dual-pairing-functional"
    ],
    "elementary": false
   },
   {
-   "text": "Prove additivity and scalar compatibility in each argument by the all-subopen wedge extensionality theorem. On such a wedge, the defining formula reduces these identities to Matrix.det_updateCol_add and Matrix.det_updateCol_smul; a scalar r restricts to O_X(g)(r). If two arguments agree, two columns agree, so Matrix.det_zero_of_column_eq proves the alternating condition. All three identities are implemented in Lean. Columns are rewritten explicitly using Function.update. Here the upstream extensionality theorem is transported through the canonical wedge-preserving isomorphism exteriorSheafIsoExteriorPower, as exteriorSheaf_dual_ext_compat; this preserves the original exteriorSheaf statement.",
+   "text": "Prove additivity and scalar compatibility in each argument by the all-subopen wedge extensionality theorem. On such a wedge, the defining formula reduces these identities to Matrix.det_updateCol_add and Matrix.det_updateCol_smul; a scalar r restricts to O_X(g)(r). If two arguments agree, two columns agree, so Matrix.det_zero_of_column_eq proves the alternating condition. All three identities are implemented in Lean. Columns are rewritten explicitly using Function.update.",
    "uses": [
     "lem-sc-exterior-sheaf-dual-ext",
-    "lem-sc-exterior-dual-pairing-functional",
-    "lem-sc-exterior-sheaf-comparison"
+    "lem-sc-exterior-dual-pairing-functional"
    ],
    "elementary": false
   },
   {
-   "text": "The construction has the desired formula by the fixed-tuple theorem. Any other alternating map with that formula agrees on every tuple by all-subopen wedge extensionality, so AlternatingMap.ext gives uniqueness. Here the upstream extensionality theorem is transported through the canonical wedge-preserving isomorphism exteriorSheafIsoExteriorPower, as exteriorSheaf_dual_ext_compat; this preserves the original exteriorSheaf statement.",
+   "text": "The construction has the desired formula by the fixed-tuple theorem. Any other alternating map with that formula agrees on every tuple by all-subopen wedge extensionality, so AlternatingMap.ext gives uniqueness.",
    "uses": [
     "lem-sc-exterior-sheaf-dual-ext",
-    "lem-sc-exterior-dual-pairing-functional",
-    "lem-sc-exterior-sheaf-comparison"
+    "lem-sc-exterior-dual-pairing-functional"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-exterior-dual-pairing-functional",
-  "lem-sc-exterior-sheaf-comparison",
   "lem-sc-exterior-sheaf-dual-ext"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/duality.tex; Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean",
-  "place": "Tags 03CY and 0BRT (determinant inversion); pairingDual and pairingDual_ιMulti_ιMulti. Expanded local argument written by N1; Stacks pages read at https://stacks.math.columbia.edu/tag/03CY and https://stacks.math.columbia.edu/tag/0BRT. C6 (2026-10-20): use the upstream dual extensionality theorem through the proved exterior-sheaf comparison. T1 (2026-10-20): transport the fixed-tuple upstream functional across the canonical comparison before forming the alternating map."
+  "place": "B4 (2026-10-20): retire the Sheaf copy and attach to the unchanged upstream proof: uniquely characterized fixed-tuple functionals, exteriorSheaf_dual_ext in the exteriorPower encoding, and the determinant column identities. The former exteriorSheaf encoding is recovered in the sole consumer using the canonical comparison."
  },
  "mathlib_searches": [
   {
@@ -101,14 +97,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DeterminantDualAlternatingFamily",
-  "file": "lean/Sheaf/AlgebraicGeometry/DeterminantDualAlternatingFamily.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DeterminantDualAlternatingFamily",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DeterminantDualAlternatingFamily.lean",
   "declaration": "AlgebraicGeometry.exterior_dual_pairing_local",
-  "statement": "theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)\n    (U : X.Opens) :\n    ∃! A : ((Scheme.Modules.dual M).val.obj (op U)) [⋀^Fin n]→ₗ[X.presheaf.obj (op U)]\n        ((Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U)),\n      ∀ (V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V))\n        (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)),\n        (A φ).app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a) =\n          (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from\n            (φ j).app (op (Over.mk g)) (a i))).det",
+  "statement": "theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)\n    (U : X.Opens) :\n    ∃! A : ((Scheme.Modules.dual M).val.obj (op U)) [⋀^Fin n]→ₗ[X.presheaf.obj (op U)]\n        ((Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op U)),\n      ∀ (V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V))\n        (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)),\n        (A φ).app (op (Over.mk g)) (wedge (M := M) (r := n) (U := V) a) =\n          (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from\n            (φ j).app (op (Over.mk g)) (a i))).det",
   "branch": "sheaf-dag",
-  "by": "N1",
-  "date": "2026-10-12"
+  "by": "B4",
+  "date": "2026-10-20",
+  "note": "B4 retirement: attach to the unchanged, proved upstream theorem on exteriorPower. The sole Sheaf consumer transports its alternating family by composing with the sectionwise linear map of dualMap exteriorSheafIsoExteriorPower.hom; the hom-wedge identity preserves the determinant formula."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -123,12 +120,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-afe7e",
-  "group": "T1",
+  "reviewer": "C-7f331",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261020T154939-L-3175302",
+  "landing": "20261020T163938-L-3832985",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf exterior_dual_pairing_functional (exteriorSheaf) vs upstream WeilConjectures twin (exteriorPower); node lean record = upstream signature verbatim; sole consumer DeterminantDualAlternatingFamily adapted by precomposition with exteriorSheafIsoExteriorPower.hom, compiles 4.0 s, axioms clean; import-only counterfactual fails at 56:15 (forced)"
+  "note": "independent cc review: withdrawn Sheaf exterior_dual_pairing_local vs upstream WeilConjectures twin (node lean.statement verbatim); adapted DeterminantDualPairing vs live original (import + transport lines 57-71 only, import-only counterfactual fails at 61/80/92/116); compiles clean, importer DeterminantExteriorDualIso clean, axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {
