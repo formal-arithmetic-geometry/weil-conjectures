@@ -12,7 +12,9 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
-import Sheaf.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative
+import WeilConjectures.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative
+import Mathlib.CategoryTheory.Limits.Preserves.Ulift
+import Mathlib.Algebra.Group.Action.TransferInstance
 
 /-!
 # Sections over finite separable fields and geometric stalk invariants
@@ -357,9 +359,45 @@ theorem fieldSections_stalkInvariants
         exact (congrArg (algebraMap Ks Ω) hg').symm.trans ht
       exact haction F g τ hτ _ (lift L) (lift L) hx z
     · intro m hm
-      obtain ⟨z, hz⟩ := exists_fieldSection_of_invariant_germ K Ks Ω s hs F
-        (action F) (haction F) L (lift L) (hlift L) m hm
-      exact ⟨z, Set.mem_univ _, hz⟩
+      let U := uliftFunctor.{u + 1, max u v}
+      let F' := (sheafCompose (Spec (.of K)).smallEtaleTopology U).obj F
+      let eIso := ((pointSmallEtale s).presheafFiberCompIso U).app F.obj
+      let e := eIso.toEquiv.trans Equiv.ulift
+      have he (X : (Spec (.of K)).Etale) (x : (pointSmallEtale s).fiber.obj X)
+          (z : F'.obj.obj (op X)) :
+          e ((pointSmallEtale s).toPresheafFiber X x F'.obj z) =
+            (pointSmallEtale s).toPresheafFiber X x F.obj z.down := by
+        exact congrArg ULift.down (ConcreteCategory.congr_hom
+          ((pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app
+            U X x F.obj) z)
+      let a : MulAction Gal(Ks/K) ((pointSmallEtale s).presheafFiber.obj F.obj) :=
+        action F
+      let a' : MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F') :=
+        e.mulAction Gal(Ks/K)
+      have haction' (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
+          (hτ : (algebraMap Ks Ω).comp g.toRingHom =
+            τ.toRingHom.comp (algebraMap Ks Ω))
+          (X : (Spec (.of K)).Etale) (x x' : (pointSmallEtale s).fiber.obj X)
+          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)
+          (z : F'.obj.obj (op X)) :
+          a'.smul g ((pointSmallEtale s).toPresheafFiber X x F'.obj z) =
+            (pointSmallEtale s).toPresheafFiber X x' F'.obj z := by
+        apply e.injective
+        change e (e.symm (a.smul g (e _))) = _
+        rw [e.apply_symm_apply, he, he]
+        exact haction F g τ hτ X x x' hx z.down
+      have hm' : ∀ g ∈ L.fixingSubgroup, a'.smul g (e.symm m) = e.symm m := by
+        intro g hg
+        apply e.injective
+        change e (e.symm (a.smul g (e (e.symm m)))) = e (e.symm m)
+        simp only [e.apply_symm_apply]
+        exact hm g hg
+      obtain ⟨z, hz⟩ := exists_fieldSection_of_invariant_germ K Ks Ω s hs F'
+        a' haction' L (lift L) (hlift L) (e.symm m) hm'
+      refine ⟨z.down, Set.mem_univ _, ?_⟩
+      have h := congrArg e hz
+      rw [he, e.apply_symm_apply] at h
+      exact h
   have hemb
       (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
       (L L' : IntermediateField K Ks) [FiniteDimensional K L]

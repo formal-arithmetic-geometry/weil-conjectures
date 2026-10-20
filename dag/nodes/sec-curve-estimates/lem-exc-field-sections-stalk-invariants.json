@@ -61,7 +61,7 @@
    }
   },
   {
-   "text": "If g fixes L, its extension fixes the canonical lift through Spec L. The lift-change formula therefore puts every section germ in the H_L-fixed subset. The new invariant-germ representative theorem proves surjectivity onto that subset. Combining this with germ injectivity gives Set.BijOn.",
+   "text": "If g fixes L, its extension fixes the canonical lift through Spec L. The lift-change formula puts every section germ in the H_L-fixed subset. For surjectivity, compose F with ULift to reach the upstream invariant-germ representative theorem's coefficient universe. The stalk comparison isomorphism followed by ULift.down gives an equivalence e from the lifted stalk to the original stalk. Transfer the original action through e using Equiv.mulAction. The comparison formula on germs proves the transported action satisfies the lift-change formula, and e.symm sends fixed elements to fixed elements. Apply the upstream representative theorem and lower its section; the same comparison formula recovers the prescribed original germ. Combine this with germ injectivity to give Set.BijOn.",
    "uses": [
     "lem-exc-field-invariant-germ-representative"
    ],
@@ -105,7 +105,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03QW and 04JM; read at https://stacks.math.columbia.edu/tag/03QW and https://stacks.math.columbia.edu/tag/04JM; X2 constructs the action by presheafFiberDesc and proves the combination in Lean"
+  "place": "Tags 03QW and 04JM; read at https://stacks.math.columbia.edu/tag/03QW and https://stacks.math.columbia.edu/tag/04JM; X2 constructs the action by presheafFiberDesc and proves the combination in Lean; Q2 uses the unchanged upstream representative through ULift and Equiv.mulAction, preserving the smaller coefficient universe."
  },
  "mathlib_searches": [
   {
@@ -217,11 +217,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a97e8",
-  "group": "D5",
+  "reviewer": "C-f25e0",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261020T051137-L-1575484",
+  "landing": "20261020T163315-L-3728615",
   "kind": "interface",
-  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
+  "note": "independent cc review: withdrawn Sheaf item vs upstream WeilConjectures.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative (node lean.statement verbatim, proof steps match upstream proof); adapted FieldSectionsStalkInvariants vs live (signature/public imports unchanged, only the surjectivity branch rewritten with a ULift/Equiv.mulAction bridge); original consumer fails against the withdrawn item (forced); delivered modules + 4 importers compile; axioms clean"
  }
 }

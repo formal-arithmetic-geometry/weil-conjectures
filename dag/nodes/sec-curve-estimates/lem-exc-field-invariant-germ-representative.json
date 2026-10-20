@@ -16,14 +16,14 @@
  ],
  "proof": [
   {
-   "text": "Apply the upstream finite Galois representative theorem to F composed with the ULift functor. Use presheafFiberCompIso and its formula on germ maps to lower the resulting section and recover a finite Galois E containing L, its canonical lift y, and a section z of the original smaller-universe sheaf whose germ is m. This preserves the ULift construction landed by T2 and uses no invariance.",
+   "text": "Apply exists_finiteGalois_germ_representative to obtain a finite Galois E containing L, its canonical geometric lift y, and a section z with germ m.",
    "uses": [
     "lem-exc-field-invariant-germ-representative-construction"
    ],
    "elementary": false
   },
   {
-   "text": "Prove germ injectivity locally: Point.toPresheafFiber_eq_iff' supplies a common pointed refinement witnessing equality of restrictions. The refinement is nonempty because of its geometric lift, so its map to the one-point Spec E is surjective. By ofArrows_mem_smallEtaleTopology_iff it is a singleton cover; the separated sheaf condition gives equality of the original sections.",
+   "text": "Equality of two germs over Spec E holds on a common pointed refinement. This refinement is nonempty and its map to the one-point Spec E is a singleton etale cover. The separated sheaf condition makes restriction injective.",
    "uses": [
     "def-weil-pbc-geometric-stalks",
     "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
@@ -32,18 +32,9 @@
    "elementary": false
   },
   {
-   "text": "For each L-automorphism q of E, lift q to a K-automorphism g of Ks. Its restriction fixes L by liftNormal_commutes and q.commutes. Extend g to Omega. The canonical-lift formula, toPresheafFiber_w_apply and haction identify the germ of q-pullback(z) with g acting on germ(z). Rewrite germ(z)=m and use the fixed-germ hypothesis. The injectivity from step 2 implies q-pullback(z)=z.",
+   "text": "Rewrite the fixed-germ condition using germ(z)=m and apply exists_fieldSection_of_finiteGalois_invariant_representative with the injectivity just established. It returns a section w over L with germ(w)=germ(z); transitivity gives germ(w)=m.",
    "uses": [
-    "lem-exc-galois-automorphism-extension",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict F to Spec L by the continuous etale composition functor. Identity-on-scheme isomorphisms identify the E and L objects with their original K-site objects. Transport z, use its invariance from step 3, and apply finiteGaloisSectionsDescent over E/L. Transport the descended section w back; functoriality and the comparison isomorphisms give restriction(w)=z. The canonical lift y maps to x. Thus toPresheafFiber_w_apply gives germ(w)=germ(z)=m. This argument retains the smaller coefficient universe max u v without invoking the larger-universe upstream representative-descent theorem.",
-   "uses": [
-    "lem-exc-finite-galois-sections-descent",
-    "def-weil-pbc-geometric-stalks"
+    "lem-exc-field-invariant-germ-representative-identification"
    ],
    "elementary": false
   }
@@ -53,13 +44,12 @@
   "def-weil-pbc-geometric-stalks",
   "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
   "def-weil-pbc-etale-sheaf-of-sets",
-  "lem-exc-galois-automorphism-extension",
-  "lem-exc-finite-galois-sections-descent"
+  "lem-exc-field-invariant-germ-representative-identification"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04JM direct proof, lines 8698-8738: finite Galois representative, local germ injectivity, automorphism invariance and sections descent. U1 inlines the former identification node to retire its duplicate while preserving the smaller coefficient universe."
+  "place": "Tag 04JM direct proof, lemma-global-sections-point. Q2 records the unchanged upstream proof after retirement of the Sheaf twin; the smaller-universe consumer is bridged via ULift."
  },
  "mathlib_searches": [
   {
@@ -120,14 +110,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative",
-  "file": "lean/Sheaf/AlgebraicGeometry/Sites/FieldInvariantGermRepresentative.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Sites/FieldInvariantGermRepresentative.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_fieldSection_of_invariant_germ",
-  "statement": "theorem exists_fieldSection_of_invariant_germ (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω] (s : Spec (.of Ω) ⟶ Spec (.of K)) (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω))) (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v))) (action : MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F)) (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω) (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : (Spec (.of K)).Etale) (x x' : (pointSmallEtale s).fiber.obj X) (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), action.smul g ((pointSmallEtale s).toPresheafFiber X x F.obj z) = (pointSmallEtale s).toPresheafFiber X x' F.obj z) (L : IntermediateField K Ks) [FiniteDimensional K L] [Algebra.IsSeparable K L] (x : (pointSmallEtale s).fiber.obj (etaleSpec K L)) (hx : x.left = Spec.map (CommRingCat.ofHom ((algebraMap Ks Ω).comp L.subtype))) (m : (pointSmallEtale s).sheafFiber.obj F) (hm : ∀ g ∈ L.fixingSubgroup, action.smul g m = m) : ∃ z : F.obj.obj (op (etaleSpec K L)), (pointSmallEtale s).toPresheafFiber (etaleSpec K L) x F.obj z = m",
+  "statement": "theorem exists_fieldSection_of_invariant_germ\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω]\n    (s : Spec (.of Ω) ⟶ Spec (.of K))\n    (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))\n    (action : MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F))\n    (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),\n      (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω) →\n      ∀ (X : (Spec (.of K)).Etale) (x x' : (pointSmallEtale s).fiber.obj X),\n      x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left →\n      ∀ (z : F.obj.obj (op X)),\n      action.smul g ((pointSmallEtale s).toPresheafFiber X x F.obj z) =\n        (pointSmallEtale s).toPresheafFiber X x' F.obj z)\n    (L : IntermediateField K Ks) [FiniteDimensional K L] [Algebra.IsSeparable K L]\n    (x : (pointSmallEtale s).fiber.obj (etaleSpec K L))\n    (hx : x.left = Spec.map\n      (CommRingCat.ofHom ((algebraMap Ks Ω).comp L.subtype)))\n    (m : (pointSmallEtale s).sheafFiber.obj F)\n    (hm : ∀ g ∈ L.fixingSubgroup, action.smul g m = m) :\n    ∃ z : F.obj.obj (op (etaleSpec K L)),\n      (pointSmallEtale s).toPresheafFiber (etaleSpec K L) x F.obj z = m",
   "branch": "sheaf-dag",
-  "by": "X2",
-  "date": "2026-10-13"
+  "by": "Q2",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf twin. The unchanged upstream theorem has coefficient universe max (u+1) v. FieldSectionsStalkInvariants retains max u v by a proved ULift/action-transport bridge in its proof."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -142,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-25a2b",
-  "group": "U1",
+  "reviewer": "C-f25e0",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261020T153023-L-2864800",
+  "landing": "20261020T163315-L-3728615",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf FiniteGaloisInvariantGermDescent (empty module) vs upstream WeilConjectures twin (node lean.statement matches upstream verbatim, universe max (u+1) v); consumer FieldInvariantGermRepresentative diffed against live: only private import swap plus the inlined descent proof, signature/public imports/T2 ULift block unchanged; delivered modules + importer FieldSectionsStalkInvariants compile; axioms propext/choice/Quot.sound"
+  "note": "independent cc review: withdrawn Sheaf item vs upstream WeilConjectures.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative (node lean.statement verbatim, proof steps match upstream proof); adapted FieldSectionsStalkInvariants vs live (signature/public imports unchanged, only the surjectivity branch rewritten with a ULift/Equiv.mulAction bridge); original consumer fails against the withdrawn item (forced); delivered modules + 4 importers compile; axioms clean"
  }
 }
