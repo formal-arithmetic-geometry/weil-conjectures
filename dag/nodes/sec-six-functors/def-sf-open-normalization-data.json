@@ -1,0 +1,196 @@
+{
+ "id": "def-sf-open-normalization-data",
+ "kind": "definition",
+ "title": "Geometric and operation data for open tensor normalization",
+ "statement": "For a Cartesian square of open immersions, define the ordinary pro-etale site and its vertical natural-number diagram site, arbitrary coefficient ring sheaves and their structural map, the site square fixing both fibre-product projections, the actual sectionwise restriction and direct-image functors, exact open extensions with their adjunction and section unit, and module pullbacks with their total left-derived presentations [def-cbc-open-immersion-square, def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-exact-derived-adjunction]. The Operations record retains the ordinary mate, derived representative equation and pure-tensor normalized restriction comparison using TensorModel [lem-weil-pbc-ringed-projection-restriction]. Assertion records the invertible units, full faithfulness and normalized beta and gamma equations. For constant finite coefficients retain the section/scalar-preserving realizations, ordinary and derived comparison pins, total-tensor representative pins, and the equations of the two finite comparison routes. These are exactly the data formerly defined in lem-sf-open-tensor-normalization, with no added hypotheses or changed conclusions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 0F6Z, 03D7, 04J0 and 03EL; sites-cohomology.tex Tags 015F, 06YY, 06YU, 07A4. The simultaneous Operations, Assertion and finite-comparison records are the existing agent-formulated normalization interface, moved without changing their mathematical data."
+ },
+ "stmt_deps": [
+  "def-cbc-open-immersion-square",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-projection-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived tensor product with an object extended by zero from an open is again in the essential image of extension by zero",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "TensorProduct.tmul_zero",
+     "CategoryTheory.MonoidalPreadditive.tensor_zero",
+     "CategoryTheory.Limits.prodZeroIso"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "No derived open-extension support theorem. The results concern tensors and zero objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived module pullback of extension by zero is supported on the base changed open for an arbitrary ringed site",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullback"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "General underived module pullback APIs; no derived open-support conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.essImage, Adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Functor.essImage'"
+   },
+   "date": "2026-10-21",
+   "verdict": "No match; local Mathlib search instead finds Adjunction.isIso_counit_app_iff_mem_essImage, used in the normalization assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "rg TensorModel|OpenExtension|FiniteComparisons|finite_compatibility|exists_normalized lean/Sheaf lean/WeilConjectures; targeted inspection of RingedSliceExtensionTensor, LocalizeRingedSiteMorphismGeneral and SiteDerivedTensorDescentIndependentCoefficients",
+   "results": "Tensor descent supplies the four tensor models (proved in the item). Existing slice extension/tensor and localized ringed-site comparisons are underived, and use slice/element-site presentations; none states support for the ordinary or vertical pro-etale derived operation records.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the proved descent and categorical adjunction APIs. State the missing geometric construction and the two unnormalized support consequences separately."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorNormalization",
+  "date": "2026-10-21",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-tensor-normalization",
+   "place": "Factor the existing data interface to allow its construction and support lemmas to be imported by the original theorem without an import cycle."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorNormalizationData",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorNormalizationData.lean",
+  "declaration": "SheafOfModules.OpenTensorNormalization.Operations",
+  "declarations": [
+   "SheafOfModules.OpenTensorNormalization.Site",
+   "SheafOfModules.OpenTensorNormalization.verticalCoverage",
+   "SheafOfModules.OpenTensorNormalization.topology",
+   "SheafOfModules.OpenTensorNormalization.forgetIndex",
+   "SheafOfModules.OpenTensorNormalization.baseChange",
+   "SheafOfModules.OpenTensorNormalization.openInclusion",
+   "SheafOfModules.OpenTensorNormalization.baseChange_continuous",
+   "SheafOfModules.OpenTensorNormalization.openInclusion_continuous",
+   "SheafOfModules.OpenTensorNormalization.restrictRing",
+   "SheafOfModules.OpenTensorNormalization.restrict",
+   "SheafOfModules.OpenTensorNormalization.direct",
+   "SheafOfModules.OpenTensorNormalization.Pullback",
+   "SheafOfModules.OpenTensorNormalization.openRingMap",
+   "SheafOfModules.OpenTensorNormalization.OpenExtension",
+   "SheafOfModules.OpenTensorNormalization.Input",
+   "SheafOfModules.OpenTensorNormalization.ordinaryInput",
+   "SheafOfModules.OpenTensorNormalization.baseFirst",
+   "SheafOfModules.OpenTensorNormalization.SiteSquare",
+   "SheafOfModules.OpenTensorNormalization.cornerCoefficient",
+   "SheafOfModules.OpenTensorNormalization.restriction_exact",
+   "SheafOfModules.OpenTensorNormalization.OpenDerived",
+   "SheafOfModules.OpenTensorNormalization.OpenDerived.jShriek",
+   "SheafOfModules.OpenTensorNormalization.OpenDerived.jShriek'",
+   "SheafOfModules.OpenTensorNormalization.OpenDerived.jStar",
+   "SheafOfModules.OpenTensorNormalization.OpenDerived.jStar'",
+   "SheafOfModules.OpenTensorNormalization.OpenDerived.adj",
+   "SheafOfModules.OpenTensorNormalization.OpenDerived.adj'",
+   "SheafOfModules.OpenTensorNormalization.restrictionModel",
+   "SheafOfModules.OpenTensorNormalization.Operations",
+   "SheafOfModules.OpenTensorNormalization.Assertion",
+   "SheafOfModules.OpenTensorNormalization.FiniteModules",
+   "SheafOfModules.OpenTensorNormalization.FiniteD",
+   "SheafOfModules.OpenTensorNormalization.finiteShriek",
+   "SheafOfModules.OpenTensorNormalization.finitePull",
+   "SheafOfModules.OpenTensorNormalization.FiniteRealization",
+   "SheafOfModules.OpenTensorNormalization.FiniteRealization.derived",
+   "SheafOfModules.OpenTensorNormalization.finiteInput",
+   "SheafOfModules.OpenTensorNormalization.square_isPullback",
+   "SheafOfModules.OpenTensorNormalization.finiteGamma",
+   "SheafOfModules.OpenTensorNormalization.finiteBetaCanonical",
+   "SheafOfModules.OpenTensorNormalization.finiteBetaLeft",
+   "SheafOfModules.OpenTensorNormalization.finiteBetaRight",
+   "SheafOfModules.OpenTensorNormalization.finiteGammaLeft",
+   "SheafOfModules.OpenTensorNormalization.finiteGammaRight",
+   "SheafOfModules.OpenTensorNormalization.FiniteComparisonsCore",
+   "SheafOfModules.OpenTensorNormalization.FiniteComparisons",
+   "SheafOfModules.OpenTensorNormalization.FiniteCompatibility",
+   "SheafOfModules.OpenTensorNormalization.FiniteExactPin",
+   "SheafOfModules.OpenTensorNormalization.FinitePullPin",
+   "SheafOfModules.OpenTensorNormalization.FiniteOpenPin",
+   "SheafOfModules.OpenTensorNormalization.finitePure",
+   "SheafOfModules.OpenTensorNormalization.FiniteTensorPin",
+   "SheafOfModules.OpenTensorNormalization.finitePullModel",
+   "SheafOfModules.OpenTensorNormalization.openExtensionDerived",
+   "SheafOfModules.OpenTensorNormalization.finiteOpenModels",
+   "SheafOfModules.OpenTensorNormalization.tensorRepresentative",
+   "SheafOfModules.OpenTensorNormalization.FiniteTensorTotal",
+   "SheafOfModules.OpenTensorNormalization.finiteTensorPure",
+   "SheafOfModules.OpenTensorNormalization.finiteTensorModel",
+   "SheafOfModules.OpenTensorNormalization.Mode",
+   "SheafOfModules.OpenTensorNormalization.finiteTensor",
+   "SheafOfModules.OpenTensorNormalization.finiteComplexRealization",
+   "SheafOfModules.OpenTensorNormalization.finiteTotal",
+   "SheafOfModules.OpenTensorNormalization.FiniteTensorPin.totalIso",
+   "SheafOfModules.OpenTensorNormalization.FiniteTensorPin.pure_summands",
+   "SheafOfModules.OpenTensorNormalization.FiniteTensorPin.model",
+   "SheafOfModules.OpenTensorNormalization.FiniteTensorPin.mk"
+  ],
+  "statement": "structure Operations {m : Mode} (d : Input.{u} m) (t : SiteSquare d)",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-21",
+  "note": "Existing public data are reexported by OpenTensorNormalization. The two original holed theorems and final theorem remain in their original module. Finite closed-record projections are replaced by their definitionally equal fields to reduce elaboration work. The finite tensor pin uses the equivalent subtype of total comparisons satisfying the original two equations, with named accessors; typed finite tensor and complex aliases avoid repeated kernel expansion. See coord/changes/open-tensor-normalization-data.md for old/new definitions and consumer review."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-9ffe9",
+  "group": "X8",
+  "result": "fix",
+  "landing": "20261020T221404-L-4182007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-9ffe9",
+  "group": "X8",
+  "result": "fix",
+  "landing": "20261020T221404-L-4182007",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item/3 new modules vs live OpenTensorNormalization.lean (diff), 4 new + 2 changed node files vs live dag, new sorry statements vs Operations/TensorModel definitions, 33 importers compiled"
+ }
+}

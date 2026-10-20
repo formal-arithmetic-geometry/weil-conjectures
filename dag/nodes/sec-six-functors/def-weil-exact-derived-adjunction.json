@@ -107,14 +107,15 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-rf-shriek-preservation",
  "lean": {
-  "module": "Sheaf.SixFunctors.OpenTensorNormalization",
+  "module": "Sheaf.SixFunctors.OpenTensorNormalizationData",
   "declaration": "SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction",
   "statement": "def exactDerivedAdjunction {C D : Type v} [Category.{h} C] [Category.{h} D]\n    [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]\n    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (a : F ⊣ G) :\n    F.mapDerivedCategory ⊣ G.mapDerivedCategory",
   "branch": "newtargets-dag",
   "by": "Q22",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Definition-node ownership of the exact termwise-localized adjunction formerly cited only through lem-sf-open-tensor-normalization. Uses the existing definition verbatim; no duplicate is introduced."
+  "note": "Definition-node ownership of the exact termwise-localized adjunction formerly cited only through lem-sf-open-tensor-normalization. Uses the existing definition verbatim; no duplicate is introduced.",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorNormalizationData.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -133,26 +134,13 @@
   "note": "Fifth delivery (after 661a RETURN, bf9d RETURN, 6bd5 FIX returned at landing, de4b RETURN). Both de4b findings repaired, checked by snapshot diff and against live records: (1) no prop-compactification-coherence-detailed record delivered (the snapshot copy is identical to Q116's live record); landed Sheaf.Paper.CompactificationCoherence imported; intrinsic-coordinate helpers moved unchanged into FrobeniusSquareExchange and owned by def-weil-operation-exchange-coefficient-descent; new refinementIntrinsicOrigin (keeps O.2.L, canonical alpha) and postponed theorem intrinsicCompactificationComparison_refinement equating the intrinsic comparison at a witness with the landed refinementComparisonIsomorphism conjugated by fixedCompactModel (factors match refinementComparisonAtWitness; new stmt_dep def-sf-refinement-comparison-isomorphism is landed). (2) SystemOperationExchangeRealization.lean is byte-identical (sha256) to the 6bd5 reviewer fix: canonical systemDirectEvaluation/systemPullEvaluation.inv. Mechanical theorem stmt_dep lem-trf-integral-pullback-comparison-realization: PASS on that point, models/scalarModels are .choose of the object its conclusion constructs. Ownership 13/68/74, each declaration owned once, all three statements verbatim, sorry only in theorems, docstrings/line lengths ok, no added hypotheses, edge cases covered. nt_compile --json clean: 14.0/28.7/4.1 s."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V6",
-  "result": "pass",
-  "landing": "20261019T034328-L-421903",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "SheafOfModules.OpenTensorNormalization.baseChange_continuous",
-   "SheafOfModules.OpenTensorNormalization.exists_normalized",
-   "SheafOfModules.OpenTensorNormalization.finite_compatibility",
-   "SheafOfModules.OpenTensorNormalization.openInclusion_continuous",
-   "SheafOfModules.OpenTensorNormalization.restriction_exact",
-   "SheafOfModules.OpenTensorNormalization.square_isPullback",
-   "SheafOfModules.openTensorNormalization"
-  ],
-  "sorry_after": [
-   "SheafOfModules.OpenTensorNormalization.exists_normalized",
-   "SheafOfModules.OpenTensorNormalization.finite_compatibility"
-  ]
+  "reviewer": "C-9ffe9",
+  "group": "X8",
+  "result": "fix",
+  "landing": "20261020T221404-L-4182007",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item/3 new modules vs live OpenTensorNormalization.lean (diff), 4 new + 2 changed node files vs live dag, new sorry statements vs Operations/TensorModel definitions, 33 importers compiled"
  }
 }

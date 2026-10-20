@@ -1,0 +1,158 @@
+{
+ "id": "lem-sf-open-tensor-support",
+ "kind": "statement",
+ "title": "Derived tensor preserves open support in either factor",
+ "statement": "Let d, t and o be the ordinary or vertical pro-etale geometric and operation data [def-sf-open-normalization-data]. For every derived restricted-ring module M on U and every derived ambient-ring module N on X, the object tensorX(j! M,N) belongs to the essential image of j!. No projection-formula arrow or normalization is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I; resolving-class interpretation by Tags 06YS and 06YU."
+ },
+ "stmt_deps": [
+  "def-sf-open-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "The underived localized extension/tensor formula applies in every bidegree. Exact open extension preserves direct sums, so these comparisons sum to a chain isomorphism and commute with both differentials, including the total sign.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same chain formula against an acyclic test complex proves that extension preserves K-flatness. The underived formula and the exactness criterion for tensor prove preservation of flat terms. Restriction preserves the resolving class. Resolve both factors and use the representative comparisons to obtain an isomorphism from the ambient derived tensor to extension of an object on the open.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the vertical ringed diagram site itself for systems, so the whole construction is compatible with arbitrary semilinear transitions. Essential-image membership is independent of the supplied compatible tensor and exact extension presentations.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I; resolving-class interpretation by Tags 06YS and 06YU. Explicit subargument of lem-sf-open-tensor-normalization; no normalized beta or gamma is assumed."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived tensor product with an object extended by zero from an open is again in the essential image of extension by zero",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "TensorProduct.tmul_zero",
+     "CategoryTheory.MonoidalPreadditive.tensor_zero",
+     "CategoryTheory.Limits.prodZeroIso"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "No derived open-extension support theorem. The results concern tensors and zero objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived module pullback of extension by zero is supported on the base changed open for an arbitrary ringed site",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullback"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "General underived module pullback APIs; no derived open-support conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.essImage, Adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Functor.essImage'"
+   },
+   "date": "2026-10-21",
+   "verdict": "No match; local Mathlib search instead finds Adjunction.isIso_counit_app_iff_mem_essImage, used in the normalization assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "rg TensorModel|OpenExtension|FiniteComparisons|finite_compatibility|exists_normalized lean/Sheaf lean/WeilConjectures; targeted inspection of RingedSliceExtensionTensor, LocalizeRingedSiteMorphismGeneral and SiteDerivedTensorDescentIndependentCoefficients",
+   "results": "Tensor descent supplies the four tensor models (proved in the item). Existing slice extension/tensor and localized ringed-site comparisons are underived, and use slice/element-site presentations; none states support for the ordinary or vertical pro-etale derived operation records.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the proved descent and categorical adjunction APIs. State the missing geometric construction and the two unnormalized support consequences separately."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorNormalization",
+  "date": "2026-10-21",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-tensor-normalization",
+   "place": "Derived tensor preserves open support in either factor"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorSupport",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorSupport.lean",
+  "declaration": "SheafOfModules.OpenTensorNormalization.derivedTensor_openSupported",
+  "statement": "theorem derivedTensor_openSupported {m : Mode} {d : Input.{u} m} {t : SiteSquare d}\n    (o : Operations d t) (M : Der (restrictRing m d.j d.R)) (N : Der d.R) :\n    o.opens.jShriek.essImage (o.tensorX.functor.obj (o.opens.jShriek.obj M, N))",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-9ffe9",
+  "group": "X8",
+  "result": "fix",
+  "landing": "20261020T221404-L-4182007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-9ffe9",
+  "group": "X8",
+  "result": "fix",
+  "landing": "20261020T221404-L-4182007",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item/3 new modules vs live OpenTensorNormalization.lean (diff), 4 new + 2 changed node files vs live dag, new sorry statements vs Operations/TensorModel definitions, 33 importers compiled"
+ }
+}

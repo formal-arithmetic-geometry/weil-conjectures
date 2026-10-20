@@ -1,0 +1,175 @@
+{
+ "id": "lem-sf-open-operation-models",
+ "kind": "statement",
+ "title": "Open operation comparisons with fixed tensor models and right square",
+ "statement": "For either the ordinary pro-etale site or its vertical inverse-system site, let d be a Cartesian open square with arbitrary ring sheaves and arbitrary coefficient map, and let t be its site comparison fixing the first projection [def-sf-open-normalization-data]. Given four TensorModels for the four coefficient sheaves and a direct-image/restriction natural isomorphism whose map on sections is restriction along t inverse, there is an Operations record with exactly those four tensor models and that direct-image square. In particular it contains exact open extensions with the specified invertible section units, total left derived pullbacks, the ordinary comparison as the specified adjunction mate, the normalized derived theta, and the pure-tensor normalized restriction comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 0F6Z, 04J0 and 03EL; sites-cohomology.tex Tags 06YS, 06YY, 0G7E and 07A4. The simultaneous presentation is an agent-formulated construction from these results."
+ },
+ "stmt_deps": [
+  "def-sf-open-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify open restriction with localization of the ordinary pro-etale site. For systems localize the vertical site at the sheaf of open objects. Direct-sum extension and module sheafification give exact additive extension, the specified adjunction and its invertible section unit.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-cbc-sieve-slice-sheafification",
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct both ordinary module pullbacks as inverse image followed by extension of scalars and use their adjunctions to the specified direct images. Flat-term K-flat resolutions give the left derived functors and flat-model comparisons. For equal-universe APIs, first lift the site hom types to its object universe and transport topology, ring sheaves and module functors through that category equivalence; then transport back. These exact equivalences preserve the resolving class and sectionwise normalizations.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the ringed-site morphism. Its ordinary pullback comparison is the mate of the given section-normalized right square. Restriction preserves the resolving class, so descent gives theta with its representative equation.",
+   "uses": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction keeps both sections on every simple tensor. Sheafification gives the underived tensor comparison, and the canonical tensor pullback theorem descends its signed total comparison for the supplied tensor models. Assemble the Operations record retaining the four supplied models and supplied right square.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-cbc-sieve-slice-sheafification",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-cbc-sieve-slice-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 0F6Z, 04J0 and 03EL; sites-cohomology.tex Tags 06YS, 06YY, 0G7E and 07A4. The simultaneous presentation is an agent-formulated construction from these results. Explicit subargument of lem-sf-open-tensor-normalization; no normalized beta or gamma is assumed."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived tensor product with an object extended by zero from an open is again in the essential image of extension by zero",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "TensorProduct.tmul_zero",
+     "CategoryTheory.MonoidalPreadditive.tensor_zero",
+     "CategoryTheory.Limits.prodZeroIso"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "No derived open-extension support theorem. The results concern tensors and zero objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived module pullback of extension by zero is supported on the base changed open for an arbitrary ringed site",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullback"
+    ]
+   },
+   "date": "2026-10-21",
+   "verdict": "General underived module pullback APIs; no derived open-support conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.essImage, Adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Functor.essImage'"
+   },
+   "date": "2026-10-21",
+   "verdict": "No match; local Mathlib search instead finds Adjunction.isIso_counit_app_iff_mem_essImage, used in the normalization assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "rg TensorModel|OpenExtension|FiniteComparisons|finite_compatibility|exists_normalized lean/Sheaf lean/WeilConjectures; targeted inspection of RingedSliceExtensionTensor, LocalizeRingedSiteMorphismGeneral and SiteDerivedTensorDescentIndependentCoefficients",
+   "results": "Tensor descent supplies the four tensor models (proved in the item). Existing slice extension/tensor and localized ringed-site comparisons are underived, and use slice/element-site presentations; none states support for the ordinary or vertical pro-etale derived operation records.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the proved descent and categorical adjunction APIs. State the missing geometric construction and the two unnormalized support consequences separately."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorNormalization",
+  "date": "2026-10-21",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-tensor-normalization",
+   "place": "Open operation comparisons with fixed tensor models and right square"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenOperationModels",
+  "file": "lean/Sheaf/SixFunctors/OpenOperationModels.lean",
+  "declaration": "SheafOfModules.OpenTensorNormalization.normalizedOperations_exists",
+  "statement": "theorem normalizedOperations_exists {m : Mode} (d : Input.{u} m) (t : SiteSquare d)\n    (tx : TensorModel d.R) (tu : TensorModel (restrictRing m d.j d.R))\n    (tx' : TensorModel d.S) (tu' : TensorModel (restrictRing m d.j' d.S))\n    (s : direct m d.g d.R d.S d.coefficient ⋙ restrict m d.j d.R ≅\n      restrict m d.j' d.S ⋙ direct m d.gU _ _ (cornerCoefficient t))\n    (hs : ∀ (N : Mod d.S) (W : (Site m d.U)ᵒᵖ)\n      (x : N.val.obj ((openInclusion m d.j ⋙ baseChange m d.g).op.obj W)),\n      (s.hom.app N).val.app W x = N.val.map (t.iso.inv.app W.unop).op x) :\n    ∃ o : Operations d t, o.tensorX = tx ∧ o.tensorU = tu ∧\n      o.tensorX' = tx' ∧ o.tensorU' = tu' ∧ o.rightSquare = s",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-9ffe9",
+  "group": "X8",
+  "result": "fix",
+  "landing": "20261020T221404-L-4182007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-9ffe9",
+  "group": "X8",
+  "result": "fix",
+  "landing": "20261020T221404-L-4182007",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item/3 new modules vs live OpenTensorNormalization.lean (diff), 4 new + 2 changed node files vs live dag, new sorry statements vs Operations/TensorModel definitions, 33 importers compiled"
+ }
+}
