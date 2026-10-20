@@ -17864,3 +17864,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:20 L: returned deliver/H4/Sheaf.Paper.PurityGeneralAdmissibility (reviewer RETURN: (the landing tools, head 2cc120e8d) the delivery did not land: lean/Sheaf/Paper/PurityGeneralAdmissibility.lean changed )
 - 12:20 L: returned deliver/K2/Sheaf.Paper.IntegralComparisonSequenceSystems (reviewer RETURN: (the landing tools, head fe5112702) the delivery did not land: lean/Sheaf/Paper/IntegralComparisonSequenceSystems.lean c)
 - 12:20 L: returned deliver/R4/Sheaf.Paper.CompactificationCoherenceCocycle (reviewer RETURN: (reviewer C-4dba1, head 4dba186f5) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.Compactificati)
+- 12:20 L: returned deliver/N3/Sheaf.Paper.BrownExceptionalAdjoint (reviewer RETURN: (reviewer C-542ac, head 542acc86e) Brief 2/6 (H2/H7 pattern, theorem-node plain def in a recorded statement def without )
