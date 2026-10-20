@@ -6,6 +6,7 @@ Authors: SHEAF group H4
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitKFlat
+public import WeilConjectures.Algebra.Homology.KFlat
 
 /-! # Unit laws on K-flat representatives
 
