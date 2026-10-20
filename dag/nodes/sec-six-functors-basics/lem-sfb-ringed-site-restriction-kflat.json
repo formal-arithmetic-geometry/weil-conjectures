@@ -27,10 +27,9 @@
    }
   },
   {
-   "text": "Let $K^\\bullet$ be K-flat and let $G^\\bullet$ be an arbitrary acyclic complex of $R_U$-modules. Acyclicity means exactness of every consecutive triple $G^{n-1}\\to G^n\\to G^{n+1}$. Apply the forward implication of lem-weil-pbc-ringed-slice-extension-exactness to each triple: $LG^\\bullet$ is acyclic. The defining property of the given K-flat $K^\\bullet$, applied to this complex of $R$-modules, therefore makes $T^\\bullet=\\operatorname{Tot}(LG^\\bullet\\otimes_R K^\\bullet)$ acyclic.",
+   "text": "Let G be an arbitrary acyclic complex on the slice. The additive exact extension L preserves exactness of each short complex, by the Mathlib exact-functor API. Thus LG is acyclic. Apply the defining K-flatness of K to LG to obtain acyclicity of Tot(LG tensor K).",
    "uses": [
     "def-pc-acyclic-complex-modules",
-    "lem-weil-pbc-ringed-slice-extension-exactness",
     "def-pc-kflat-complex"
    ],
    "elementary": false,
@@ -64,11 +63,11 @@
    }
   },
   {
-   "text": "Since $T^\\bullet$ is acyclic by step 2 and $LA^\\bullet\\cong T^\\bullet$ by step 4, every consecutive triple of $LA^\\bullet$ is exact. Apply the reverse implication of lem-weil-pbc-ringed-slice-extension-exactness to the triple $A^{n-1}\\to A^n\\to A^{n+1}$ for each integer $n$. Every such triple is exact, so $A^\\bullet$ is acyclic. This holds for every acyclic $G^\\bullet$ of $R_U$-modules; by def-pc-kflat-complex it is exactly K-flatness of $K^\\bullet|_U$. The argument used K-flatness of $K^\\bullet$ alone, and imposed neither boundedness nor flatness of its terms.",
+   "text": "The extension L is faithful: evaluate equality of extended maps on the summand indexed by the structure arrow X to U. Equality after sheafification gives local equality by local injectivity of the unit. Projection to that summand gives local equality of the original maps, hence equality by sheaf separatedness. An additive exact faithful functor between abelian categories reflects exactness (Mathlib ShortComplex.exact_map_iff_of_faithful). Apply this to each short complex of Tot(G tensor K|U), whose extension is acyclic by the signed total-complex isomorphism. Thus the original total complex is acyclic. Quantification over all acyclic G is precisely K-flatness of the restriction; no boundedness or termwise flatness is used.",
    "uses": [
-    "lem-weil-pbc-ringed-slice-extension-exactness",
     "def-pc-acyclic-complex-modules",
-    "def-pc-kflat-complex"
+    "def-pc-kflat-complex",
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": false,
    "source": {
@@ -82,13 +81,12 @@
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-slice-extension-exactness",
   "lem-weil-pbc-ringed-slice-extension-tensor"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0E8K, lemma-restriction-K-flat; exactness and adjunction for localization from sites-modules.tex Tags 04IX, 03DJ and 0E8G; tensor formula Tag 0E8I."
+  "place": "Tag 0E8K, lemma-restriction-K-flat; exactness and adjunction for localization from sites-modules.tex Tags 04IX, 03DJ and 0E8G; tensor formula Tag 0E8I. Lean proof by E8 uses exact faithful extension to reflect exactness directly, and HomologicalComplex₂.mapTotalIso for the additive coproduct comparison of signed total complexes."
  },
  "mathlib_searches": [
   {
@@ -215,7 +213,6 @@
  },
  "tool_uses": [
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-slice-extension-exactness",
   "lem-weil-pbc-ringed-slice-extension-tensor"
  ],
  "reviewed": {
@@ -243,5 +240,15 @@
   "group": "Q06",
   "result": "pass",
   "note": "Statement matches the node and Stacks 0E8K clause by clause: exactness of restriction (PreservesFiniteLimits and PreservesFiniteColimits of localizedSystemRestriction, an abbrev of Mathlib overFunctor), and for every unbounded K, IsKFlatIndependentCoefficients over R implies the same over R.over U for the termwise restriction. Recorded dependency declarations used, no extra hypotheses (no boundedness, flatness, subterminal U or universe equality; coefficient universe max u v w with w free). Single sorry theorem, no definitions; docstrings carry source, blueprint and all five proof steps; lean.statement verbatim; Worker report and Second reading sections present. nt_compile.py --json on the snapshot: exit 0, no diagnostics, 3.0 s; a control mutation (R.over U replaced by R) fails as expected. Minor: two imports used only by the docstring's proof plan and the stmt-dep site-axioms import; not blocking."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-72eda",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261020T144246-L-2259197",
+  "kind": "interface",
+  "note": "independent cc review: delivered RingedSiteRestrictionKFlat proof + universe-generalised RingedSliceExtensionTensor/HomData vs live clone, nodes and change record; compiled the 3 modules and 4 direct importers clean; axioms clean"
  }
 }

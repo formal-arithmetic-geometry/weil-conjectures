@@ -15,71 +15,76 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 @[expose] public section
 
 
-universe uC u
+universe uC u v
 
 open CategoryTheory
 
 namespace SheafOfModules
 
 noncomputable def ringedSliceTensorLeft
-    {C : Type uC} [Category.{u} C] (J : GrothendieckTopology C)
-    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-    [HasWeakSheafify J AddCommGrpCat.{u}]
-    (R : Sheaf J CommRingCat.{u}) (U : C)
-    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{u}]
-    [HasWeakSheafify (J.over U) AddCommGrpCat.{u}] :
-    (SheafOfModules.{u} (((sheafCompose J
-      (forget₂ CommRingCat RingCat)).obj R).over U) ×
-      SheafOfModules.{u} ((sheafCompose J
-        (forget₂ CommRingCat RingCat)).obj R)) ⥤
-      SheafOfModules.{u} ((sheafCompose J
-        (forget₂ CommRingCat RingCat)).obj R) :=
+    {C : Type uC} [Category.{v} C] (J : GrothendieckTopology C)
+    [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
+    [HasWeakSheafify J AddCommGrpCat.{max u v}]
+    (R : Sheaf J CommRingCat.{max u v}) (U : C)
+    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]
+    [HasWeakSheafify (J.over U) AddCommGrpCat.{max u v}] :
+    (SheafOfModules.{max u v} (((sheafCompose J
+      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U) ×
+      SheafOfModules.{max u v} ((sheafCompose J
+        (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ⥤
+      SheafOfModules.{max u v} ((sheafCompose J
+        (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) :=
   letI := siteTensor_identity_locallyInjective
-    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+    ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
   letI := siteTensor_identity_locallySurjective
-    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
-  ((forget.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)).prod
-      (overFunctor.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U ⋙ forget.{u}
-        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) ⋙
+    ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
+  ((forget.{max u v} (((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj
+    R).over U)).prod
+      (overFunctor.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u
+        v})).obj R) U ⋙ forget.{max u v}
+        (((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U)) ⋙
     MonoidalCategory.tensor
-      (C := PresheafOfModules.{u} ((R.over U).obj ⋙
-        forget₂ CommRingCat RingCat)) ⋙
-    PresheafOfModules.sheafification (J := J.over U)
-      (R := ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U) (𝟙 _) ⋙
-    extensionByZeroPresheaf.{u} ((sheafCompose J
-      (forget₂ CommRingCat RingCat)).obj R) U ⋙
-    PresheafOfModules.sheafification (𝟙 ((sheafCompose J
-      (forget₂ CommRingCat RingCat)).obj R).obj))
+      (C := PresheafOfModules.{max u v} ((R.over U).obj ⋙
+        forget₂ CommRingCat.{max u v} RingCat.{max u v})) ⋙
+    PresheafOfModules.sheafification.{max u v} (J := J.over U)
+      (R := ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U) (𝟙
+        _) ⋙
+    extensionByZeroPresheaf.{max u v} ((sheafCompose J
+      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U ⋙
+    PresheafOfModules.sheafification.{max u v} (𝟙 ((sheafCompose J
+      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).obj))
 
 noncomputable def ringedSliceTensorRight
-    {C : Type uC} [Category.{u} C] (J : GrothendieckTopology C)
-    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-    [HasWeakSheafify J AddCommGrpCat.{u}]
-    (R : Sheaf J CommRingCat.{u}) (U : C)
-    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{u}]
-    [HasWeakSheafify (J.over U) AddCommGrpCat.{u}] :
-    (SheafOfModules.{u} (((sheafCompose J
-      (forget₂ CommRingCat RingCat)).obj R).over U) ×
-      SheafOfModules.{u} ((sheafCompose J
-        (forget₂ CommRingCat RingCat)).obj R)) ⥤
-      SheafOfModules.{u} ((sheafCompose J
-        (forget₂ CommRingCat RingCat)).obj R) :=
+    {C : Type uC} [Category.{v} C] (J : GrothendieckTopology C)
+    [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
+    [HasWeakSheafify J AddCommGrpCat.{max u v}]
+    (R : Sheaf J CommRingCat.{max u v}) (U : C)
+    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]
+    [HasWeakSheafify (J.over U) AddCommGrpCat.{max u v}] :
+    (SheafOfModules.{max u v} (((sheafCompose J
+      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U) ×
+      SheafOfModules.{max u v} ((sheafCompose J
+        (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ⥤
+      SheafOfModules.{max u v} ((sheafCompose J
+        (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) :=
   letI := siteTensor_identity_locallyInjective
-    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+    ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
   letI := siteTensor_identity_locallySurjective
-    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
-  (((extensionByZeroPresheaf.{u} ((sheafCompose J
-      (forget₂ CommRingCat RingCat)).obj R) U ⋙
-        PresheafOfModules.sheafification (𝟙 ((sheafCompose J
-          (forget₂ CommRingCat RingCat)).obj R).obj) ⋙
-        forget.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).prod
-      (forget.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) ⋙
+    ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
+  (((extensionByZeroPresheaf.{max u v} ((sheafCompose J
+      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U ⋙
+        PresheafOfModules.sheafification.{max u v} (𝟙 ((sheafCompose J
+          (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).obj) ⋙
+        forget.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj
+          R)).prod
+      (forget.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj
+        R))) ⋙
     MonoidalCategory.tensor
-      (C := PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) ⋙
-    PresheafOfModules.sheafification (𝟙 ((sheafCompose J
-      (forget₂ CommRingCat RingCat)).obj R).obj))
+      (C := PresheafOfModules.{max u v} (R.obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v})) ⋙
+    PresheafOfModules.sheafification.{max u v} (𝟙 ((sheafCompose J
+      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).obj))
 
 namespace RingedSliceTensor
 
@@ -141,9 +146,9 @@ private structure HomData (A : D ⥤ B) (T : E ⥤ B) (A' : D ⥤ K) (T' : E ⥤
 end HomData
 
 section
-variable {R : Type u} [CommRing R] {ι : Type u} [DecidableEq ι]
-  {M : ι → Type u} [∀ i, AddCommGroup (M i)] [∀ i, Module R (M i)]
-  {N P : Type u} [AddCommGroup N] [Module R N] [AddCommGroup P] [Module R P]
+variable {R : Type (max u v)} [CommRing R] {ι : Type v} [DecidableEq ι]
+  {M : ι → Type (max u v)} [∀ i, AddCommGroup (M i)] [∀ i, Module R (M i)]
+  {N P : Type (max u v)} [AddCommGroup N] [Module R N] [AddCommGroup P] [Module R P]
 -- Keep the direct-sum/tensor construction behind its generator formula.
 @[irreducible] private noncomputable def sumTensorLift
     (a : ∀ i, TensorProduct R (M i) N →ₗ[R] P) :
@@ -152,7 +157,7 @@ variable {R : Type u} [CommRing R] {ι : Type u} [DecidableEq ι]
     (fun i ↦ TensorProduct.curry (a i)))
 private theorem sumTensorLift_of (a : ∀ i, TensorProduct R (M i) N →ₗ[R] P)
     (i : ι) (x : M i) (y : N) :
-    sumTensorLift a (DirectSum.of M i x ⊗ₜ[R] y) = a i (x ⊗ₜ[R] y) := by
+    sumTensorLift.{u, v} a (DirectSum.of M i x ⊗ₜ[R] y) = a i (x ⊗ₜ[R] y) := by
   unfold sumTensorLift
   simp only [TensorProduct.lift.tmul]
   erw [DirectSum.toModule_lof]
@@ -164,9 +169,9 @@ end
 -- object and coefficient universes. No exactness or precoverage hypotheses are needed.
 open Classical in
 private theorem extensionRestrict_of
-    {C : Type uC} [Category.{u} C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{u}) (U : C)
-    (F : SheafOfModules.{u} (R.over U)) {V W : Cᵒᵖ} (a : V ⟶ W)
+    {C : Type uC} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{max u v}) (U : C)
+    (F : SheafOfModules.{max u v} (R.over U)) {V W : Cᵒᵖ} (a : V ⟶ W)
     (φ : V.unop ⟶ U) (ψ : W.unop ⟶ U) (h : a.unop ≫ φ = ψ)
     (x : F.val.obj (Opposite.op (Over.mk φ))) :
     extensionByZeroPresheafRestrictAdd R U F a
@@ -183,11 +188,11 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 open Classical in
 private noncomputable def extensionPresheafToHom
-    {C : Type uC} [Category.{u} C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{u}) (U : C)
-    (F : SheafOfModules.{u} (R.over U)) (G : SheafOfModules.{u} R)
+    {C : Type uC} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{max u v}) (U : C)
+    (F : SheafOfModules.{max u v} (R.over U)) (G : SheafOfModules.{max u v} R)
     (a : extensionByZeroPresheafObj R U F ⟶ G.val) :
-    F ⟶ (overFunctor R U).obj G where
+    F ⟶ (overFunctor.{max u v} R U).obj G where
   val.app X := ModuleCat.ofHom
     ((a.app (Opposite.op X.unop.left)).hom.comp
       (DirectSum.lof (R.obj.obj (Opposite.op X.unop.left)) (X.unop.left ⟶ U)
@@ -200,7 +205,7 @@ private noncomputable def extensionPresheafToHom
     change a.app (Opposite.op Y.unop.left)
         (extensionByZeroPresheafRestrictAdd R U F ((Over.forget U).op.map f)
           (DirectSum.of _ X.unop.hom x)) = _ at h
-    have hr := extensionRestrict_of R U F ((Over.forget U).op.map f)
+    have hr := extensionRestrict_of.{uC, u, v} R U F ((Over.forget U).op.map f)
       X.unop.hom Y.unop.hom (Over.w f.unop) x
     erw [hr] at h
     have hf : (Over.homMk f.unop.left (Over.w f.unop) : Y.unop ⟶ X.unop) =
@@ -219,10 +224,10 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 open Classical in
 private noncomputable def extensionHomToPresheaf
-    {C : Type uC} [Category.{u} C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{u}) (U : C)
-    (F : SheafOfModules.{u} (R.over U)) (G : SheafOfModules.{u} R)
-    (a : F ⟶ (overFunctor R U).obj G) :
+    {C : Type uC} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{max u v}) (U : C)
+    (F : SheafOfModules.{max u v} (R.over U)) (G : SheafOfModules.{max u v} R)
+    (a : F ⟶ (overFunctor.{max u v} R U).obj G) :
     extensionByZeroPresheafObj R U F ⟶ G.val where
   app V := ModuleCat.ofHom (DirectSum.toModule _ _ _
     (fun φ : V.unop ⟶ U ↦ (a.val.app (Opposite.op (Over.mk φ))).hom))
@@ -238,7 +243,7 @@ private noncomputable def extensionHomToPresheaf
           G.val.map f ((DirectSum.toModule (R.obj.obj V) _ (G.val.obj V)
             (fun ψ : V.unop ⟶ U ↦ (a.val.app (Opposite.op (Over.mk ψ))).hom))
             (DirectSum.of (fun ψ : V.unop ⟶ U ↦ F.val.obj (Opposite.op (Over.mk ψ))) φ x))
-      erw [extensionRestrict_of R U F f φ (f.unop ≫ φ) rfl]
+      erw [extensionRestrict_of.{uC, u, v} R U F f φ (f.unop ≫ φ) rfl]
       erw [DirectSum.toModule_lof, DirectSum.toModule_lof]
       exact PresheafOfModules.naturality_apply a.val
         (Opposite.op (Over.homMk f.unop : Over.mk (f.unop ≫ φ) ⟶ Over.mk φ)) x
@@ -247,13 +252,13 @@ private noncomputable def extensionHomToPresheaf
 set_option backward.isDefEq.respectTransparency false in
 open Classical in
 private noncomputable def extensionPresheafHomEquiv
-    {C : Type uC} [Category.{u} C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{u}) (U : C)
-    (F : SheafOfModules.{u} (R.over U)) (G : SheafOfModules.{u} R) :
+    {C : Type uC} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{max u v}) (U : C)
+    (F : SheafOfModules.{max u v} (R.over U)) (G : SheafOfModules.{max u v} R) :
     (extensionByZeroPresheafObj R U F ⟶ G.val) ≃
-      (F ⟶ (overFunctor R U).obj G) where
-  toFun := extensionPresheafToHom R U F G
-  invFun := extensionHomToPresheaf R U F G
+      (F ⟶ (overFunctor.{max u v} R U).obj G) where
+  toFun := extensionPresheafToHom.{uC, u, v} R U F G
+  invFun := extensionHomToPresheaf.{uC, u, v} R U F G
   left_inv a := by
     ext V x
     change (DirectSum.toModule (R.obj.obj V) _ (G.val.obj V)
@@ -271,24 +276,25 @@ private noncomputable def extensionPresheafHomEquiv
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem extensionPresheafHomEquiv_naturality_right
-    {C : Type uC} [Category.{u} C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{u}) (U : C)
-    (F : SheafOfModules.{u} (R.over U)) (G H : SheafOfModules.{u} R)
+    {C : Type uC} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{max u v}) (U : C)
+    (F : SheafOfModules.{max u v} (R.over U)) (G H : SheafOfModules.{max u v} R)
     (a : extensionByZeroPresheafObj R U F ⟶ G.val) (b : G ⟶ H) :
-    extensionPresheafHomEquiv R U F H (a ≫ b.val) =
-      extensionPresheafHomEquiv R U F G a ≫ (overFunctor R U).map b := by
+    extensionPresheafHomEquiv.{uC, u, v} R U F H (a ≫ b.val) =
+      extensionPresheafHomEquiv.{uC, u, v} R U F G a ≫ (overFunctor.{max u v} R U).map b := by
   ext X x
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
 open Classical in
 private theorem extensionPresheafHomEquiv_naturality_left
-    {C : Type uC} [Category.{u} C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{u}) (U : C)
-    (F H : SheafOfModules.{u} (R.over U)) (G : SheafOfModules.{u} R)
+    {C : Type uC} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{max u v}) (U : C)
+    (F H : SheafOfModules.{max u v} (R.over U)) (G : SheafOfModules.{max u v} R)
     (a : H ⟶ F) (b : extensionByZeroPresheafObj R U F ⟶ G.val) :
-    extensionPresheafHomEquiv R U H G ((extensionByZeroPresheaf R U).map a ≫ b) =
-      a ≫ extensionPresheafHomEquiv R U F G b := by
+    extensionPresheafHomEquiv.{uC, u, v} R U H G ((extensionByZeroPresheaf.{max u v} R U).map a ≫
+      b) =
+      a ≫ extensionPresheafHomEquiv.{uC, u, v} R U F G b := by
   ext X x
   change b.app (Opposite.op X.unop.left)
     ((DirectSum.lmap (R := R.obj.obj (Opposite.op X.unop.left))
@@ -300,46 +306,48 @@ private theorem extensionPresheafHomEquiv_naturality_left
   rfl
 
 @[irreducible] private noncomputable def extensionHomData
-    {C : Type uC} [Category.{u} C] {J : GrothendieckTopology C}
+    {C : Type uC} [Category.{v} C] {J : GrothendieckTopology C}
     {D : Type*} [Category* D]
-    (R : Sheaf J RingCat.{u}) (U : C) (F : D ⥤ SheafOfModules.{u} (R.over U)) :
-    HomData (F ⋙ extensionByZeroPresheaf R U) (forget R) F (overFunctor R U) where
-  equiv X H := extensionPresheafHomEquiv R U (F.obj X) H
-  post X H H' f h := extensionPresheafHomEquiv_naturality_right R U (F.obj X) H H' f h
-  pre X Y H f a := extensionPresheafHomEquiv_naturality_left R U (F.obj Y) (F.obj X) H
+    (R : Sheaf J RingCat.{max u v}) (U : C) (F : D ⥤ SheafOfModules.{max u v} (R.over U)) :
+    HomData (F ⋙ extensionByZeroPresheaf.{max u v} R U) (forget.{max u v} R) F (overFunctor.{max u
+      v} R U) where
+  equiv X H := extensionPresheafHomEquiv.{uC, u, v} R U (F.obj X) H
+  post X H H' f h := extensionPresheafHomEquiv_naturality_right.{uC, u, v} R U (F.obj X) H H' f h
+  pre X Y H f a := extensionPresheafHomEquiv_naturality_left.{uC, u, v} R U (F.obj Y) (F.obj X) H
     (F.map f) a
 
 section RawTensor
 
 open Opposite MonoidalCategory
 
-variable {C : Type uC} [Category.{u} C] {J : GrothendieckTopology C}
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  (R : Sheaf J CommRingCat.{u}) (U : C)
+variable {C : Type uC} [Category.{v} C] {J : GrothendieckTopology C}
+  [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]
+  (R : Sheaf J CommRingCat.{max u v}) (U : C)
 
 set_option backward.isDefEq.respectTransparency false
 
 set_option hygiene false in
-local notation "A" => (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
+local notation "A" => (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R
 
 private abbrev rawRestrict
-    (M : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
-    PresheafOfModules.{u} ((R.over U).obj ⋙ forget₂ CommRingCat RingCat) :=
+    (M : PresheafOfModules.{max u v} (R.obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v})) :
+    PresheafOfModules.{max u v} ((R.over U).obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v})
+      :=
   (PresheafOfModules.pushforward₀OfCommRingCat (Over.forget U) R.obj).obj M
 
-variable (F : SheafOfModules.{u} ((A).over U)) (G H : SheafOfModules.{u} A)
+variable (F : SheafOfModules.{max u v} ((A).over U)) (G H : SheafOfModules.{max u v} A)
 
 open Classical in
 @[irreducible] private noncomputable def rawFromSlice
     (a : (PresheafOfModules.Monoidal.tensorObj (R := (R.over U).obj)
-      F.val (rawRestrict R U G.val)) ⟶ (rawRestrict R U H.val)) :
+      F.val (rawRestrict.{uC, u, v} R U G.val)) ⟶ (rawRestrict.{uC, u, v} R U H.val)) :
     (PresheafOfModules.Monoidal.tensorObj (R := R.obj)
-      ((extensionByZeroPresheaf A U).obj F) G.val) ⟶ H.val where
+      ((extensionByZeroPresheaf.{max u v} A U).obj F) G.val) ⟶ H.val where
   app V := by
     change ModuleCat.of (R.obj.obj V)
       (TensorProduct (R.obj.obj V) (extensionByZeroPresheafSection A U F V)
         (G.val.obj V)) ⟶ H.val.obj V
-    exact ModuleCat.ofHom (sumTensorLift (R := R.obj.obj V)
+    exact ModuleCat.ofHom (sumTensorLift.{u, v} (R := R.obj.obj V)
       (fun φ ↦ by exact (a.app (op (Over.mk φ))).hom))
   naturality {V W} i := by
     apply ModuleCat.hom_ext
@@ -348,14 +356,14 @@ open Classical in
     induction x using DirectSum.induction_on with
     | zero => simp
     | of φ x =>
-      change sumTensorLift (R := R.obj.obj W)
+      change sumTensorLift.{u, v} (R := R.obj.obj W)
         (fun ψ ↦ by exact (a.app (op (Over.mk ψ))).hom)
           (extensionByZeroPresheafRestrictAdd A U F i (DirectSum.of _ φ x) ⊗ₜ[R.obj.obj W]
-            G.val.map i y) = H.val.map i (sumTensorLift (R := R.obj.obj V)
+            G.val.map i y) = H.val.map i (sumTensorLift.{u, v} (R := R.obj.obj V)
               (fun ψ ↦ by exact (a.app (op (Over.mk ψ))).hom)
                 (DirectSum.of (fun ψ ↦ F.val.obj (op (Over.mk ψ))) φ x ⊗ₜ[R.obj.obj V] y))
-      erw [extensionRestrict_of A U F i φ (i.unop ≫ φ) rfl]
-      erw [sumTensorLift_of, sumTensorLift_of]
+      erw [extensionRestrict_of.{uC, u, v} A U F i φ (i.unop ≫ φ) rfl]
+      erw [sumTensorLift_of.{u, v}, sumTensorLift_of.{u, v}]
       exact PresheafOfModules.naturality_apply a
         (op (Over.homMk i.unop : Over.mk (i.unop ≫ φ) ⟶ Over.mk φ))
           (x ⊗ₜ[R.obj.obj V] y)
@@ -365,27 +373,27 @@ open Classical in
 open Classical in
 private theorem rawFromSlice_of
     (a : (PresheafOfModules.Monoidal.tensorObj (R := (R.over U).obj)
-      F.val (rawRestrict R U G.val)) ⟶ (rawRestrict R U H.val))
+      F.val (rawRestrict.{uC, u, v} R U G.val)) ⟶ (rawRestrict.{uC, u, v} R U H.val))
     (V : Cᵒᵖ) (φ : V.unop ⟶ U) (x : F.val.obj (op (Over.mk φ)))
     (y : G.val.obj V) :
-    (rawFromSlice R U F G H a).app V
+    (rawFromSlice.{uC, u, v} R U F G H a).app V
         (DirectSum.of (fun ψ ↦ F.val.obj (op (Over.mk ψ))) φ x ⊗ₜ[R.obj.obj V] y) =
       a.app (op (Over.mk φ)) (x ⊗ₜ[R.obj.obj V] y) := by
   unfold rawFromSlice
-  change sumTensorLift (R := R.obj.obj V)
+  change sumTensorLift.{u, v} (R := R.obj.obj V)
     (M := fun ψ : V.unop ⟶ U ↦ F.val.obj (op (Over.mk ψ)))
     (N := G.val.obj V) (P := H.val.obj V)
     (fun ψ ↦ by exact (a.app (op (Over.mk ψ))).hom) _ = _
-  exact sumTensorLift_of (R := R.obj.obj V)
+  exact sumTensorLift_of.{u, v} (R := R.obj.obj V)
     (M := fun ψ : V.unop ⟶ U ↦ F.val.obj (op (Over.mk ψ)))
     (N := G.val.obj V) (P := H.val.obj V) _ φ x y
 
 open Classical in
 private noncomputable def rawToSlice
     (b : (PresheafOfModules.Monoidal.tensorObj (R := R.obj)
-      ((extensionByZeroPresheaf A U).obj F) G.val) ⟶ H.val) :
+      ((extensionByZeroPresheaf.{max u v} A U).obj F) G.val) ⟶ H.val) :
     (PresheafOfModules.Monoidal.tensorObj (R := (R.over U).obj)
-      F.val (rawRestrict R U G.val)) ⟶ (rawRestrict R U H.val) where
+      F.val (rawRestrict.{uC, u, v} R U G.val)) ⟶ (rawRestrict.{uC, u, v} R U H.val) where
   app X := ModuleCat.ofHom ((b.app (op X.unop.left)).hom.comp
     (TensorProduct.map
       (DirectSum.lof (R.obj.obj (op X.unop.left)) (X.unop.left ⟶ U)
@@ -400,7 +408,7 @@ private noncomputable def rawToSlice
         (extensionByZeroPresheafRestrictAdd A U F ((Over.forget U).op.map i)
           (DirectSum.of _ X.unop.hom x) ⊗ₜ[R.obj.obj (op Y.unop.left)]
             G.val.map ((Over.forget U).op.map i) y) = _ at h
-    erw [extensionRestrict_of A U F ((Over.forget U).op.map i)
+    erw [extensionRestrict_of.{uC, u, v} A U F ((Over.forget U).op.map i)
       X.unop.hom Y.unop.hom (Over.w i.unop) x] at h
     have hi : (Over.homMk i.unop.left (Over.w i.unop) : Y.unop ⟶ X.unop) =
         i.unop := by ext; rfl
@@ -409,18 +417,18 @@ private noncomputable def rawToSlice
 
 private noncomputable def rawTensorHomEquiv :
     ((PresheafOfModules.Monoidal.tensorObj (R := (R.over U).obj)
-      F.val (rawRestrict R U G.val)) ⟶ (rawRestrict R U H.val)) ≃
+      F.val (rawRestrict.{uC, u, v} R U G.val)) ⟶ (rawRestrict.{uC, u, v} R U H.val)) ≃
       ((PresheafOfModules.Monoidal.tensorObj (R := R.obj)
-      ((extensionByZeroPresheaf A U).obj F) G.val) ⟶ H.val) where
-  toFun := rawFromSlice R U F G H
-  invFun := rawToSlice R U F G H
+      ((extensionByZeroPresheaf.{max u v} A U).obj F) G.val) ⟶ H.val) where
+  toFun := rawFromSlice.{uC, u, v} R U F G H
+  invFun := rawToSlice.{uC, u, v} R U F G H
   left_inv a := by
     classical
     ext X : 1
     apply ModuleCat.hom_ext
     apply TensorProduct.ext' (R := R.obj.obj (op X.unop.left))
     intro x y
-    exact rawFromSlice_of R U F G H a (op X.unop.left) X.unop.hom x y
+    exact rawFromSlice_of.{uC, u, v} R U F G H a (op X.unop.left) X.unop.hom x y
   right_inv b := by
     classical
     ext V : 1
@@ -430,35 +438,38 @@ private noncomputable def rawTensorHomEquiv :
     induction x using DirectSum.induction_on with
     | zero => simp
     | of φ x =>
-      erw [rawFromSlice_of R U F G H]
+      erw [rawFromSlice_of.{uC, u, v} R U F G H]
       rfl
     | add x z hx hz =>
       simpa only [map_add, TensorProduct.add_tmul] using congrArg₂ (· + ·) hx hz
 
 private noncomputable def rawSliceTensor :
-    (SheafOfModules.{u} ((A).over U) × SheafOfModules.{u} A) ⥤
-      PresheafOfModules.{u} ((R.over U).obj ⋙ forget₂ CommRingCat RingCat) :=
-  (forget ((A).over U)).prod
-      (forget A ⋙ PresheafOfModules.pushforward₀OfCommRingCat (Over.forget U) R.obj) ⋙
+    (SheafOfModules.{max u v} ((A).over U) × SheafOfModules.{max u v} A) ⥤
+      PresheafOfModules.{max u v} ((R.over U).obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u
+        v}) :=
+  (forget.{max u v} ((A).over U)).prod
+      (forget.{max u v} A ⋙ PresheafOfModules.pushforward₀OfCommRingCat (Over.forget U) R.obj) ⋙
     MonoidalCategory.tensor
-      (C := PresheafOfModules.{u} ((R.over U).obj ⋙ forget₂ CommRingCat RingCat))
+      (C := PresheafOfModules.{max u v} ((R.over U).obj ⋙ forget₂ CommRingCat.{max u v}
+        RingCat.{max u v}))
 
 private noncomputable def rawBaseTensor :
-    (SheafOfModules.{u} ((A).over U) × SheafOfModules.{u} A) ⥤
-      PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat) :=
-  (extensionByZeroPresheaf A U).prod (forget A) ⋙
+    (SheafOfModules.{max u v} ((A).over U) × SheafOfModules.{max u v} A) ⥤
+      PresheafOfModules.{max u v} (R.obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v}) :=
+  (extensionByZeroPresheaf.{max u v} A U).prod (forget.{max u v} A) ⋙
     MonoidalCategory.tensor
-      (C := PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat))
+      (C := PresheafOfModules.{max u v} (R.obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v}))
 
 @[irreducible] private noncomputable def rawHomData :
-    HomData (rawSliceTensor R U) (overFunctor A U ⋙ forget ((A).over U))
-      (rawBaseTensor R U) (forget A) where
-  equiv X H := rawTensorHomEquiv R U X.1 X.2 H
+    HomData (rawSliceTensor.{uC, u, v} R U) (overFunctor.{max u v} A U ⋙ forget.{max u v} ((A).over
+      U))
+      (rawBaseTensor.{uC, u, v} R U) (forget.{max u v} A) where
+  equiv X H := rawTensorHomEquiv.{uC, u, v} R U X.1 X.2 H
   post X H H' a h := by
     classical
-    apply (rawTensorHomEquiv R U X.1 X.2 H').symm.injective
-    change (rawTensorHomEquiv R U X.1 X.2 H').symm
-      ((rawTensorHomEquiv R U X.1 X.2 H') _) = _
+    apply (rawTensorHomEquiv.{uC, u, v} R U X.1 X.2 H').symm.injective
+    change (rawTensorHomEquiv.{uC, u, v} R U X.1 X.2 H').symm
+      ((rawTensorHomEquiv.{uC, u, v} R U X.1 X.2 H') _) = _
     rw [Equiv.symm_apply_apply]
     ext V : 1
     apply ModuleCat.hom_ext
@@ -466,15 +477,15 @@ private noncomputable def rawBaseTensor :
     intro x y
     change (h.val.app (op V.unop.left)) (a.app V (x ⊗ₜ[R.obj.obj (op V.unop.left)] y)) =
       (h.val.app (op V.unop.left))
-        ((rawFromSlice R U X.1 X.2 H a).app (op V.unop.left)
+        ((rawFromSlice.{uC, u, v} R U X.1 X.2 H a).app (op V.unop.left)
           (DirectSum.of _ V.unop.hom x ⊗ₜ[R.obj.obj (op V.unop.left)] y))
-    erw [rawFromSlice_of R U X.1 X.2 H]
+    erw [rawFromSlice_of.{uC, u, v} R U X.1 X.2 H]
     rfl
   pre X Y H f a := by
     classical
-    apply (rawTensorHomEquiv R U X.1 X.2 H).symm.injective
-    change (rawTensorHomEquiv R U X.1 X.2 H).symm
-      ((rawTensorHomEquiv R U X.1 X.2 H) _) = _
+    apply (rawTensorHomEquiv.{uC, u, v} R U X.1 X.2 H).symm.injective
+    change (rawTensorHomEquiv.{uC, u, v} R U X.1 X.2 H).symm
+      ((rawTensorHomEquiv.{uC, u, v} R U X.1 X.2 H) _) = _
     rw [Equiv.symm_apply_apply]
     ext V : 1
     apply ModuleCat.hom_ext
@@ -483,22 +494,25 @@ private noncomputable def rawBaseTensor :
     change a.app V
       ((f.1.val.app V) x ⊗ₜ[R.obj.obj (op V.unop.left)]
         (f.2.val.app (op V.unop.left)) y) =
-      (rawFromSlice R U Y.1 Y.2 H a).app (op V.unop.left)
+      (rawFromSlice.{uC, u, v} R U Y.1 Y.2 H a).app (op V.unop.left)
         ((DirectSum.lmap (R := R.obj.obj (op V.unop.left))
           (fun ψ ↦ (f.1.val.app (op (Over.mk ψ))).hom))
           (DirectSum.of _ V.unop.hom x) ⊗ₜ[R.obj.obj (op V.unop.left)]
             (f.2.val.app (op V.unop.left)) y)
-    erw [DirectSum.lmap_of, rawFromSlice_of R U Y.1 Y.2 H]
+    erw [DirectSum.lmap_of, rawFromSlice_of.{uC, u, v} R U Y.1 Y.2 H]
     rfl
 
 private noncomputable def publicSliceTensor :
-    (SheafOfModules.{u} ((A).over U) × SheafOfModules.{u} A) ⥤
-      PresheafOfModules.{u} ((R.over U).obj ⋙ forget₂ CommRingCat RingCat) :=
-  (forget ((A).over U)).prod (overFunctor A U ⋙ forget ((A).over U)) ⋙
+    (SheafOfModules.{max u v} ((A).over U) × SheafOfModules.{max u v} A) ⥤
+      PresheafOfModules.{max u v} ((R.over U).obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u
+        v}) :=
+  (forget.{max u v} ((A).over U)).prod (overFunctor.{max u v} A U ⋙ forget.{max u v} ((A).over U)) ⋙
     MonoidalCategory.tensor
-      (C := PresheafOfModules.{u} ((R.over U).obj ⋙ forget₂ CommRingCat RingCat))
+      (C := PresheafOfModules.{max u v} ((R.over U).obj ⋙ forget₂ CommRingCat.{max u v}
+        RingCat.{max u v}))
 
-private noncomputable def rawSliceTensorIso : publicSliceTensor R U ≅ rawSliceTensor R U :=
+private noncomputable def rawSliceTensorIso : publicSliceTensor.{uC, u, v} R U ≅
+  rawSliceTensor.{uC, u, v} R U :=
   NatIso.ofComponents (fun X ↦ PresheafOfModules.isoMk (fun V ↦ Iso.refl _) (by
     intro V W i
     apply ModuleCat.hom_ext
@@ -518,22 +532,22 @@ section SheafifyTensor
 
 open Opposite MonoidalCategory
 
-variable {C : Type uC} [Category.{u} C] {J : GrothendieckTopology C}
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}]
-  (R : Sheaf J CommRingCat.{u}) (U : C)
+variable {C : Type uC} [Category.{v} C] {J : GrothendieckTopology C}
+  [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
+  [HasWeakSheafify J AddCommGrpCat.{max u v}]
+  (R : Sheaf J CommRingCat.{max u v}) (U : C)
 
 set_option backward.isDefEq.respectTransparency false
 
 set_option hygiene false in
-local notation "A" => (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
+local notation "A" => (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R
 
 variable [Presheaf.IsLocallyInjective J (𝟙 (A).obj)]
   [Presheaf.IsLocallySurjective J (𝟙 (A).obj)]
 
 private noncomputable def siteTensorIso
-    (P N : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
+    (P N : PresheafOfModules.{max u v} (R.obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v})) :
     siteTensorPresheaf P N ≅ P ⊗ N :=
   PresheafOfModules.isoMk (fun V ↦ Iso.refl _) (by
     intro V W i
@@ -543,35 +557,36 @@ private noncomputable def siteTensorIso
     rfl)
 
 @[irreducible] private noncomputable def tensorUnitMap
-    (P : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
-    P ⟶ ((PresheafOfModules.sheafification (R := A) (𝟙 _)).obj P).val :=
+    (P : PresheafOfModules.{max u v} (R.obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v})) :
+    P ⟶ ((PresheafOfModules.sheafification.{max u v} (R := A) (𝟙 _)).obj P).val :=
   PresheafOfModules.toSheafify (R := A) (𝟙 _)
     (CategoryTheory.toSheafify J P.presheaf)
 
 private theorem tensorUnitMap_naturality
-    {P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)} (f : P ⟶ Q) :
-    f ≫ tensorUnitMap R Q = tensorUnitMap R P ≫
-      ((PresheafOfModules.sheafification (R := A) (𝟙 _)).map f).val := by
+    {P Q : PresheafOfModules.{max u v} (R.obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v})}
+      (f : P ⟶ Q) :
+    f ≫ tensorUnitMap.{uC, u, v} R Q = tensorUnitMap.{uC, u, v} R P ≫
+      ((PresheafOfModules.sheafification.{max u v} (R := A) (𝟙 _)).map f).val := by
   unfold tensorUnitMap
-  exact (PresheafOfModules.sheafificationAdjunction (R := A) (𝟙 _)).unit.naturality f
+  exact (PresheafOfModules.sheafificationAdjunction.{max u v} (R := A) (𝟙 _)).unit.naturality f
 
 private theorem tensorUnitMap_isIso
-    (P N : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
-    IsIso ((PresheafOfModules.sheafification (R := A) (𝟙 _)).map
-      (tensorUnitMap R P ▷ N)) := by
-  have : PresheafOfModules.IsLocallyInjective J (tensorUnitMap R P) := by
+    (P N : PresheafOfModules.{max u v} (R.obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v})) :
+    IsIso ((PresheafOfModules.sheafification.{max u v} (R := A) (𝟙 _)).map
+      (tensorUnitMap.{uC, u, v} R P ▷ N)) := by
+  have : PresheafOfModules.IsLocallyInjective J (tensorUnitMap.{uC, u, v} R P) := by
     unfold tensorUnitMap
     infer_instance
-  have : PresheafOfModules.IsLocallySurjective J (tensorUnitMap R P) := by
+  have : PresheafOfModules.IsLocallySurjective J (tensorUnitMap.{uC, u, v} R P) := by
     unfold tensorUnitMap
     infer_instance
-  have ht : IsIso ((PresheafOfModules.sheafification (R := A) (𝟙 _)).map
-      (siteTensorHom (tensorUnitMap R P) N)) :=
+  have ht : IsIso ((PresheafOfModules.sheafification.{max u v} (R := A) (𝟙 _)).map
+      (siteTensorHom (tensorUnitMap.{uC, u, v} R P) N)) :=
     PresheafOfModules.sheafification_tensorHom_isIso (J := J)
-    (f := tensorUnitMap R P) (N := N) (A).property
-  have heq : tensorUnitMap R P ▷ N =
-      (siteTensorIso R P N).inv ≫ siteTensorHom (tensorUnitMap R P) N ≫
-        (siteTensorIso R _ N).hom := by
+    (f := tensorUnitMap.{uC, u, v} R P) (N := N) (A).property
+  have heq : tensorUnitMap.{uC, u, v} R P ▷ N =
+      (siteTensorIso.{uC, u, v} R P N).inv ≫ siteTensorHom (tensorUnitMap.{uC, u, v} R P) N ≫
+        (siteTensorIso.{uC, u, v} R _ N).hom := by
     ext V : 1
     apply ModuleCat.hom_ext
     apply TensorProduct.ext' (R := R.obj.obj V)
@@ -581,26 +596,29 @@ private theorem tensorUnitMap_isIso
   infer_instance
 
 private noncomputable def rawSheafTensor :
-    (SheafOfModules.{u} ((A).over U) × SheafOfModules.{u} A) ⥤
-      PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat) :=
-  (extensionByZeroPresheaf A U ⋙ PresheafOfModules.sheafification (R := A) (𝟙 (A).obj) ⋙
-    forget A).prod (forget A) ⋙ MonoidalCategory.tensor
-      (C := PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat))
+    (SheafOfModules.{max u v} ((A).over U) × SheafOfModules.{max u v} A) ⥤
+      PresheafOfModules.{max u v} (R.obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v}) :=
+  (extensionByZeroPresheaf.{max u v} A U ⋙ PresheafOfModules.sheafification.{max u v} (R := A) (𝟙
+    (A).obj) ⋙
+    forget.{max u v} A).prod (forget.{max u v} A) ⋙ MonoidalCategory.tensor
+      (C := PresheafOfModules.{max u v} (R.obj ⋙ forget₂ CommRingCat.{max u v} RingCat.{max u v}))
 
-private noncomputable def rawSheafTensorMap : rawBaseTensor R U ⟶ rawSheafTensor R U where
-  app X := tensorUnitMap R ((extensionByZeroPresheaf A U).obj X.1) ▷ X.2.val
+private noncomputable def rawSheafTensorMap : rawBaseTensor.{uC, u, v} R U ⟶ rawSheafTensor.{uC, u,
+  v} R U where
+  app X := tensorUnitMap.{uC, u, v} R ((extensionByZeroPresheaf.{max u v} A U).obj X.1) ▷ X.2.val
   naturality {X Y} f := by
     change (_ ⊗ₘ _) ≫ (_ ▷ _) = (_ ▷ _) ≫ (_ ⊗ₘ _)
     rw [tensorHom_comp_whiskerRight, whiskerRight_comp_tensorHom]
     congr 1
-    exact tensorUnitMap_naturality R ((extensionByZeroPresheaf A U).map f.1)
+    exact tensorUnitMap_naturality.{uC, u, v} R ((extensionByZeroPresheaf.{max u v} A U).map f.1)
 
 @[irreducible] private noncomputable def sheafTensorIso :
-    rawBaseTensor R U ⋙ PresheafOfModules.sheafification (R := A) (𝟙 (A).obj) ≅
-      rawSheafTensor R U ⋙ PresheafOfModules.sheafification (R := A) (𝟙 (A).obj) := by
-  let t := Functor.whiskerRight (rawSheafTensorMap R U)
-    (PresheafOfModules.sheafification (R := A) (𝟙 (A).obj))
-  have : ∀ X, IsIso (t.app X) := fun X ↦ tensorUnitMap_isIso R _ _
+    rawBaseTensor.{uC, u, v} R U ⋙ PresheafOfModules.sheafification.{max u v} (R := A) (𝟙 (A).obj) ≅
+      rawSheafTensor.{uC, u, v} R U ⋙ PresheafOfModules.sheafification.{max u v} (R := A) (𝟙
+        (A).obj) := by
+  let t := Functor.whiskerRight (rawSheafTensorMap.{uC, u, v} R U)
+    (PresheafOfModules.sheafification.{max u v} (R := A) (𝟙 (A).obj))
+  have : ∀ X, IsIso (t.app X) := fun X ↦ tensorUnitMap_isIso.{uC, u, v} R _ _
   have : IsIso t := NatIso.isIso_of_isIso_app t
   exact asIso t
 
@@ -630,28 +648,28 @@ Each factor commutes with precomposition in the parameter pair and postcompositi
 in the test module, so their composite has both displayed naturality laws.
 -/
 theorem ringedSlice_extension_tensor_hom_data
-    {C : Type uC} [Category.{u} C] (J : GrothendieckTopology C)
-    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-    [HasWeakSheafify J AddCommGrpCat.{u}]
-    (R : Sheaf J CommRingCat.{u}) (U : C)
-    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{u}]
-    [HasWeakSheafify (J.over U) AddCommGrpCat.{u}] :
-    let S := SheafOfModules.{u} ((sheafCompose J
-      (forget₂ CommRingCat RingCat)).obj R)
-    let T := SheafOfModules.{u} (((sheafCompose J
-      (forget₂ CommRingCat RingCat)).obj R).over U)
+    {C : Type uC} [Category.{v} C] (J : GrothendieckTopology C)
+    [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
+    [HasWeakSheafify J AddCommGrpCat.{max u v}]
+    (R : Sheaf J CommRingCat.{max u v}) (U : C)
+    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]
+    [HasWeakSheafify (J.over U) AddCommGrpCat.{max u v}] :
+    let S := SheafOfModules.{max u v} ((sheafCompose J
+      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
+    let T := SheafOfModules.{max u v} (((sheafCompose J
+      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U)
     ∃ e : ∀ X : T × S, ∀ H : S,
-      (((ringedSliceTensorLeft J R U).obj X ⟶ H) ≃
-        ((ringedSliceTensorRight J R U).obj X ⟶ H)),
+      (((ringedSliceTensorLeft.{uC, u, v} J R U).obj X ⟶ H) ≃
+        ((ringedSliceTensorRight.{uC, u, v} J R U).obj X ⟶ H)),
       (∀ (X : T × S) (H K : S)
-          (φ : (ringedSliceTensorLeft J R U).obj X ⟶ H) (h : H ⟶ K),
+          (φ : (ringedSliceTensorLeft.{uC, u, v} J R U).obj X ⟶ H) (h : H ⟶ K),
         e X K (φ ≫ h) = e X H φ ≫ h) ∧
       (∀ (X Y : T × S) (H : S) (f : X ⟶ Y)
-          (φ : (ringedSliceTensorLeft J R U).obj Y ⟶ H),
-        e X H ((ringedSliceTensorLeft J R U).map f ≫ φ) =
-          (ringedSliceTensorRight J R U).map f ≫ e Y H φ) := by
-  let A := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
+          (φ : (ringedSliceTensorLeft.{uC, u, v} J R U).obj Y ⟶ H),
+        e X H ((ringedSliceTensorLeft.{uC, u, v} J R U).map f ≫ φ) =
+          (ringedSliceTensorRight.{uC, u, v} J R U).map f ≫ e Y H φ) := by
+  let A := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R
   have : Presheaf.IsLocallyInjective J (𝟙 A.obj) :=
     siteTensor_identity_locallyInjective A
   have : Presheaf.IsLocallySurjective J (𝟙 A.obj) :=
@@ -660,40 +678,45 @@ theorem ringedSlice_extension_tensor_hom_data
     siteTensor_identity_locallyInjective (A.over U)
   have : Presheaf.IsLocallySurjective (J.over U) (𝟙 (A.over U).obj) :=
     siteTensor_identity_locallySurjective (A.over U)
-  let S := SheafOfModules.{u} A
-  let Q := overFunctor.{u} A U
-  let a := PresheafOfModules.sheafification (J := J) (R := A) (𝟙 A.obj)
-  let b := PresheafOfModules.sheafification (J := J.over U) (R := A.over U) (𝟙 _)
-  let adj : a ⊣ forget A :=
-    PresheafOfModules.sheafificationAdjunction (J := J) (R := A) (𝟙 A.obj)
-  let adjU : b ⊣ forget (A.over U) :=
-    PresheafOfModules.sheafificationAdjunction (J := J.over U) (R := A.over U) (𝟙 _)
-  let TL := RingedSliceTensor.publicSliceTensor R U ⋙ b ⋙ extensionByZeroPresheaf A U ⋙ a
-  let TR := RingedSliceTensor.rawSheafTensor R U ⋙ a
-  have hL : ringedSliceTensorLeft J R U = TL := by rfl
-  have hR : ringedSliceTensorRight J R U = TR := by rfl
+  let S := SheafOfModules.{max u v} A
+  let Q := overFunctor.{max u v} A U
+  let a := PresheafOfModules.sheafification.{max u v} (J := J) (R := A) (𝟙 A.obj)
+  let b := PresheafOfModules.sheafification.{max u v} (J := J.over U) (R := A.over U) (𝟙 _)
+  let adj : a ⊣ forget.{max u v} A :=
+    PresheafOfModules.sheafificationAdjunction.{max u v} (J := J) (R := A) (𝟙 A.obj)
+  let adjU : b ⊣ forget.{max u v} (A.over U) :=
+    PresheafOfModules.sheafificationAdjunction.{max u v} (J := J.over U) (R := A.over U) (𝟙 _)
+  let TL := RingedSliceTensor.publicSliceTensor.{uC, u, v} R U ⋙ b ⋙ extensionByZeroPresheaf.{max u
+    v} A U ⋙ a
+  let TR := RingedSliceTensor.rawSheafTensor.{uC, u, v} R U ⋙ a
+  have hL : ringedSliceTensorLeft.{uC, u, v} J R U = TL := by rfl
+  have hR : ringedSliceTensorRight.{uC, u, v} J R U = TR := by rfl
   rw [hL, hR]
   let e₀ : RingedSliceTensor.HomData TL (𝟭 S)
-      (RingedSliceTensor.publicSliceTensor R U ⋙ b ⋙ extensionByZeroPresheaf A U) (forget A) :=
-    RingedSliceTensor.HomData.adj a (forget A) adj
-      (RingedSliceTensor.publicSliceTensor R U ⋙ b ⋙ extensionByZeroPresheaf A U) (𝟭 S)
+      (RingedSliceTensor.publicSliceTensor.{uC, u, v} R U ⋙ b ⋙ extensionByZeroPresheaf.{max u v} A
+        U) (forget.{max u v} A) :=
+    RingedSliceTensor.HomData.adj a (forget.{max u v} A) adj
+      (RingedSliceTensor.publicSliceTensor.{uC, u, v} R U ⋙ b ⋙ extensionByZeroPresheaf.{max u v} A
+        U) (𝟭 S)
   let e₁ : RingedSliceTensor.HomData
-      (RingedSliceTensor.publicSliceTensor R U ⋙ b ⋙ extensionByZeroPresheaf A U) (forget A)
-      (RingedSliceTensor.publicSliceTensor R U ⋙ b) Q :=
-    RingedSliceTensor.extensionHomData A U (RingedSliceTensor.publicSliceTensor R U ⋙ b)
-  let e₂ : RingedSliceTensor.HomData (RingedSliceTensor.publicSliceTensor R U ⋙ b) Q
-      (RingedSliceTensor.publicSliceTensor R U) (Q ⋙ forget (A.over U)) :=
-    RingedSliceTensor.HomData.adj b (forget (A.over U)) adjU
-      (RingedSliceTensor.publicSliceTensor R U) Q
-  let e₃ := (RingedSliceTensor.HomData.iso (RingedSliceTensor.rawSliceTensorIso R U)
-    (Q ⋙ forget (A.over U))).trans (RingedSliceTensor.rawHomData R U)
-  let e₄ : RingedSliceTensor.HomData (RingedSliceTensor.rawBaseTensor R U) (forget A)
-      (RingedSliceTensor.rawBaseTensor R U ⋙ a) (𝟭 S) :=
-    (RingedSliceTensor.HomData.adj a (forget A) adj
-      (RingedSliceTensor.rawBaseTensor R U) (𝟭 S)).symm
-  let e₅ : RingedSliceTensor.HomData (RingedSliceTensor.rawBaseTensor R U ⋙ a) (𝟭 S)
+      (RingedSliceTensor.publicSliceTensor.{uC, u, v} R U ⋙ b ⋙ extensionByZeroPresheaf.{max u v} A
+        U) (forget.{max u v} A)
+      (RingedSliceTensor.publicSliceTensor.{uC, u, v} R U ⋙ b) Q :=
+    RingedSliceTensor.extensionHomData A U (RingedSliceTensor.publicSliceTensor.{uC, u, v} R U ⋙ b)
+  let e₂ : RingedSliceTensor.HomData (RingedSliceTensor.publicSliceTensor.{uC, u, v} R U ⋙ b) Q
+      (RingedSliceTensor.publicSliceTensor.{uC, u, v} R U) (Q ⋙ forget.{max u v} (A.over U)) :=
+    RingedSliceTensor.HomData.adj b (forget.{max u v} (A.over U)) adjU
+      (RingedSliceTensor.publicSliceTensor.{uC, u, v} R U) Q
+  let e₃ := (RingedSliceTensor.HomData.iso (RingedSliceTensor.rawSliceTensorIso.{uC, u, v} R U)
+    (Q ⋙ forget.{max u v} (A.over U))).trans (RingedSliceTensor.rawHomData R U)
+  let e₄ : RingedSliceTensor.HomData (RingedSliceTensor.rawBaseTensor.{uC, u, v} R U) (forget.{max
+    u v} A)
+      (RingedSliceTensor.rawBaseTensor.{uC, u, v} R U ⋙ a) (𝟭 S) :=
+    (RingedSliceTensor.HomData.adj a (forget.{max u v} A) adj
+      (RingedSliceTensor.rawBaseTensor.{uC, u, v} R U) (𝟭 S)).symm
+  let e₅ : RingedSliceTensor.HomData (RingedSliceTensor.rawBaseTensor.{uC, u, v} R U ⋙ a) (𝟭 S)
       TR (𝟭 S) :=
-    RingedSliceTensor.HomData.iso (RingedSliceTensor.sheafTensorIso R U) (𝟭 S)
+    RingedSliceTensor.HomData.iso (RingedSliceTensor.sheafTensorIso.{uC, u, v} R U) (𝟭 S)
   let e := ((((e₀.trans e₁).trans e₂).trans e₃).trans e₄).trans e₅
   exact ⟨e.equiv, e.post, e.pre⟩
 

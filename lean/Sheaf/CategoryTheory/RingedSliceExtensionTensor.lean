@@ -23,14 +23,14 @@ of the coefficient universe and does not require a chosen monoidal structure on 
 
 @[expose] public section
 
-universe uC u
+universe uC u v uD vD uE vE
 
 open CategoryTheory
 
 namespace SheafOfModules
 
 private theorem iso_of_hom_data
-    {D : Type uC} [Category.{u} D] {E : Type (max u uC)} [Category.{u} E]
+    {D : Type uD} [Category.{vD} D] {E : Type uE} [Category.{vE} E]
     (A B : D ⥤ E)
     (e : ∀ X : D, ∀ H : E, ((A.obj X ⟶ H) ≃ (B.obj X ⟶ H)))
     (hH : ∀ (X : D) (H K : E) (φ : A.obj X ⟶ H) (h : H ⟶ K),
@@ -89,35 +89,46 @@ Proof:
    gives a after u = u' after b. Composing with the inverses gives v' after a = b after v.
    These component isomorphisms therefore form the displayed natural isomorphism. -/
 theorem ringedSlice_extension_tensor
-    {C : Type uC} [Category.{u} C] (J : GrothendieckTopology C)
-    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-    [HasWeakSheafify J AddCommGrpCat.{u}]
-    (R : Sheaf J CommRingCat.{u}) (U : C)
-    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{u}]
-    [HasWeakSheafify (J.over U) AddCommGrpCat.{u}] :
+    {C : Type uC} [Category.{v} C] (J : GrothendieckTopology C)
+    [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
+    [HasWeakSheafify J AddCommGrpCat.{max u v}]
+    (R : Sheaf J CommRingCat.{max u v}) (U : C)
+    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]
+    [HasWeakSheafify (J.over U) AddCommGrpCat.{max u v}] :
     Nonempty (
-      ((forget.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)).prod
-          (overFunctor.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U ⋙ forget.{u}
-          (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) ⋙
+      ((forget.{max u v} (((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj
+        R).over U)).prod
+          (overFunctor.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u
+            v})).obj R) U ⋙ forget.{max u v}
+          (((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U)) ⋙
         MonoidalCategory.tensor
-          (C := PresheafOfModules.{u} ((R.over U).obj ⋙ forget₂ CommRingCat RingCat)) ⋙
-        PresheafOfModules.sheafification (J := J.over U)
-          (R := ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U) (𝟙 _) ⋙
-        extensionByZeroPresheaf.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U ⋙
-        PresheafOfModules.sheafification (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
+          (C := PresheafOfModules.{max u v} ((R.over U).obj ⋙ forget₂ CommRingCat.{max u v}
+            RingCat.{max u v})) ⋙
+        PresheafOfModules.sheafification.{max u v} (J := J.over U)
+          (R := ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U)
+            (𝟙 _) ⋙
+        extensionByZeroPresheaf.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v}
+          RingCat.{max u v})).obj R) U ⋙
+        PresheafOfModules.sheafification.{max u v} (𝟙 ((sheafCompose J (forget₂ CommRingCat.{max u
+          v} RingCat.{max u v})).obj
           R).obj)) ≅
-      (((extensionByZeroPresheaf.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U ⋙
-          PresheafOfModules.sheafification (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
+      (((extensionByZeroPresheaf.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v}
+        RingCat.{max u v})).obj R) U ⋙
+          PresheafOfModules.sheafification.{max u v} (𝟙 ((sheafCompose J (forget₂ CommRingCat.{max
+            u v} RingCat.{max u v})).obj
           R).obj) ⋙
-          forget.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).prod (forget.{u}
-          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) ⋙
-        MonoidalCategory.tensor (C := PresheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat
-          RingCat)).obj R).obj) ⋙
-        PresheafOfModules.sheafification (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
+          forget.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj
+            R)).prod (forget.{max u v}
+          ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))) ⋙
+        MonoidalCategory.tensor (C := PresheafOfModules.{max u v} ((sheafCompose J (forget₂
+          CommRingCat.{max u v}
+          RingCat.{max u v})).obj R).obj) ⋙
+        PresheafOfModules.sheafification.{max u v} (𝟙 ((sheafCompose J (forget₂ CommRingCat.{max u
+          v} RingCat.{max u v})).obj
           R).obj))) := by
-  obtain ⟨e, hH, hX⟩ := ringedSlice_extension_tensor_hom_data J R U
-  exact iso_of_hom_data (ringedSliceTensorLeft J R U)
-    (ringedSliceTensorRight J R U) e hH hX
+  obtain ⟨e, hH, hX⟩ := ringedSlice_extension_tensor_hom_data.{uC, u, v} J R U
+  exact iso_of_hom_data (ringedSliceTensorLeft.{uC, u, v} J R U)
+    (ringedSliceTensorRight.{uC, u, v} J R U) e hH hX
 
 end SheafOfModules

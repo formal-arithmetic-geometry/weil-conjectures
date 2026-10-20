@@ -65,7 +65,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 0E8I, with the sectionwise direct-sum construction of Tag 03DI and tensor descent (Tags 03EK and 05V4); explicit Lean glue by H4."
+  "place": "Tag 0E8I, with the sectionwise direct-sum construction of Tag 03DI and tensor descent (Tags 03EK and 05V4); explicit Lean glue by H4. The same construction uses independent site morphism universe v and coefficient/module universe max u v (E8)."
  },
  "mathlib_searches": [
   {
@@ -112,10 +112,10 @@
   "module": "Sheaf.CategoryTheory.RingedSliceExtensionTensorHomData",
   "declaration": "SheafOfModules.ringedSlice_extension_tensor_hom_data",
   "file": "lean/Sheaf/CategoryTheory/RingedSliceExtensionTensorHomData.lean",
-  "statement": "theorem ringedSlice_extension_tensor_hom_data\n    {C : Type uC} [Category.{u} C] (J : GrothendieckTopology C)\n    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{u}]\n    [HasWeakSheafify J AddCommGrpCat.{u}]\n    (R : Sheaf J CommRingCat.{u}) (U : C)\n    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{u}]\n    [HasWeakSheafify (J.over U) AddCommGrpCat.{u}] :\n    let S := SheafOfModules.{u} ((sheafCompose J\n      (forget₂ CommRingCat RingCat)).obj R)\n    let T := SheafOfModules.{u} (((sheafCompose J\n      (forget₂ CommRingCat RingCat)).obj R).over U)\n    ∃ e : ∀ X : T × S, ∀ H : S,\n      (((ringedSliceTensorLeft J R U).obj X ⟶ H) ≃\n        ((ringedSliceTensorRight J R U).obj X ⟶ H)),\n      (∀ (X : T × S) (H K : S)\n          (φ : (ringedSliceTensorLeft J R U).obj X ⟶ H) (h : H ⟶ K),\n        e X K (φ ≫ h) = e X H φ ≫ h) ∧\n      (∀ (X Y : T × S) (H : S) (f : X ⟶ Y)\n          (φ : (ringedSliceTensorLeft J R U).obj Y ⟶ H),\n        e X H ((ringedSliceTensorLeft J R U).map f ≫ φ) =\n          (ringedSliceTensorRight J R U).map f ≫ e Y H φ)",
+  "statement": "theorem ringedSlice_extension_tensor_hom_data\n    {C : Type uC} [Category.{v} C] (J : GrothendieckTopology C)\n    [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    [HasWeakSheafify J AddCommGrpCat.{max u v}]\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    [HasWeakSheafify (J.over U) AddCommGrpCat.{max u v}] :\n    let S := SheafOfModules.{max u v} ((sheafCompose J\n      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)\n    let T := SheafOfModules.{max u v} (((sheafCompose J\n      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U)\n    ∃ e : ∀ X : T × S, ∀ H : S,\n      (((ringedSliceTensorLeft.{uC, u, v} J R U).obj X ⟶ H) ≃\n        ((ringedSliceTensorRight.{uC, u, v} J R U).obj X ⟶ H)),\n      (∀ (X : T × S) (H K : S)\n          (φ : (ringedSliceTensorLeft.{uC, u, v} J R U).obj X ⟶ H) (h : H ⟶ K),\n        e X K (φ ≫ h) = e X H φ ≫ h) ∧\n      (∀ (X Y : T × S) (H : S) (f : X ⟶ Y)\n          (φ : (ringedSliceTensorLeft.{uC, u, v} J R U).obj Y ⟶ H),\n        e X H ((ringedSliceTensorLeft.{uC, u, v} J R U).map f ≫ φ) =\n          (ringedSliceTensorRight.{uC, u, v} J R U).map f ≫ e Y H φ)",
   "branch": "sheaf-dag",
-  "by": "S2",
-  "date": "2026-10-16",
+  "by": "E8",
+  "date": "2026-10-20",
   "existing": false
  },
  "reviewed": {
@@ -129,14 +129,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H4",
+  "reviewer": "C-72eda",
+  "group": "E8",
   "result": "pass",
-  "landing": "20261018T071157-L-1669729",
+  "landing": "20261020T144246-L-2259197",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered RingedSiteRestrictionKFlat proof + universe-generalised RingedSliceExtensionTensor/HomData vs live clone, nodes and change record; compiled the 3 modules and 4 direct importers clean; axioms clean"
  },
  "lean_audit": {
   "master": {
