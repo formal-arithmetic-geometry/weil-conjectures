@@ -121,14 +121,15 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-curveestimate",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlapSheaf",
-  "file": "lean/Sheaf/AlgebraicGeometry/SectionRingQuotientChartOverlapSheaf.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartOverlapSheaf",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SectionRingQuotientChartOverlapSheaf.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.sectionRing_overlap_sheaf_map",
-  "statement": "theorem sectionRing_overlap_sheaf_map\n    (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]\n    (d e : ℕ) (s : sectionRingGrade L d) (t : sectionRingGrade L e)\n    (hd : 0 < d) (he : 0 < e) (U V : X.Opens)\n    (hU : (U : Set X) = nonvanishingLocus (L.tensorPow d) (s.val d))\n    (hV : (V : Set X) = nonvanishingLocus (L.tensorPow e) (t.val e))\n    (g : U.toScheme ⟶ Proj (sectionRingGrade L))\n    (h : V.toScheme ⟶ Proj (sectionRingGrade L))\n    (hg : ∀ (e : ℕ) (_he : 0 < e) (t : sectionRingGrade L e)\n          (n : ℕ) (ξ : sectionRingGrade L (n • e)),\n          (show Γ(X, U.ι ''ᵁ (g ⁻¹ᵁ\n              Proj.basicOpen (sectionRingGrade L) t.val)) from\n            g.app (Proj.basicOpen (sectionRingGrade L) t.val)\n            (Proj.awayToSection (sectionRingGrade L) t.val\n              (HomogeneousLocalization.Away.mk (sectionRingGrade L) t.property n\n                ξ.val ξ.property))) •\n            (L.tensorPow (n • e)).presheaf.map (homOfLE\n              (le_top : U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤\n                ⊤)).op ((t.val ^ n) (n • e)) =\n          (L.tensorPow (n • e)).presheaf.map (homOfLE\n            (le_top : U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤\n              ⊤)).op (ξ.val (n • e)))\n    (hh : ∀ (e : ℕ) (_he : 0 < e) (t : sectionRingGrade L e)\n          (n : ℕ) (ξ : sectionRingGrade L (n • e)),\n          (show Γ(X, V.ι ''ᵁ (h ⁻¹ᵁ\n              Proj.basicOpen (sectionRingGrade L) t.val)) from\n            h.app (Proj.basicOpen (sectionRingGrade L) t.val)\n            (Proj.awayToSection (sectionRingGrade L) t.val\n              (HomogeneousLocalization.Away.mk (sectionRingGrade L) t.property n\n                ξ.val ξ.property))) •\n            (L.tensorPow (n • e)).presheaf.map (homOfLE\n              (le_top : V.ι ''ᵁ (h ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤\n                ⊤)).op ((t.val ^ n) (n • e)) =\n          (L.tensorPow (n • e)).presheaf.map (homOfLE\n            (le_top : V.ι ''ᵁ (h ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤\n              ⊤)).op (ξ.val (n • e)))\n    (hbase : (X.homOfLE (inf_le_left : U ⊓ V ≤ U) ≫ g).base =\n      (X.homOfLE (inf_le_right : U ⊓ V ≤ V) ≫ h).base) :\n    ∀ W, (X.homOfLE (inf_le_left : U ⊓ V ≤ U) ≫ g).app W ≫\n      (U ⊓ V).toScheme.presheaf.map\n        (eqToHom congr((TopologicalSpace.Opens.map $hbase.symm).obj W)).op =\n      (X.homOfLE (inf_le_right : U ⊓ V ≤ V) ≫ h).app W",
+  "statement": "theorem sectionRing_overlap_sheaf_map\n    (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]\n    (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U V : X.Opens)\n    (hU : (U : Set X) = nonvanishingLocus (L.tensorPow d) (s.val d))\n    (g : U.toScheme ⟶ Proj (sectionRingGrade L))\n    (h : V.toScheme ⟶ Proj (sectionRingGrade L))\n    (hg : ∀ (e : ℕ), 0 < e → ∀ (t : sectionRingGrade L e)\n          (n : ℕ) (ξ : sectionRingGrade L (n • e)),\n          (show Γ(X, U.ι ''ᵁ (g ⁻¹ᵁ\n              Proj.basicOpen (sectionRingGrade L) t.val)) from\n            g.app (Proj.basicOpen (sectionRingGrade L) t.val)\n            (Proj.awayToSection (sectionRingGrade L) t.val\n              (HomogeneousLocalization.Away.mk (sectionRingGrade L) t.property n\n                ξ.val ξ.property))) •\n            (L.tensorPow (n • e)).presheaf.map (homOfLE\n              (le_top : U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤\n                ⊤)).op ((t.val ^ n) (n • e)) =\n          (L.tensorPow (n • e)).presheaf.map (homOfLE\n            (le_top : U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤\n              ⊤)).op (ξ.val (n • e)))\n    (hh : ∀ (e : ℕ), 0 < e → ∀ (t : sectionRingGrade L e)\n          (n : ℕ) (ξ : sectionRingGrade L (n • e)),\n          (show Γ(X, V.ι ''ᵁ (h ⁻¹ᵁ\n              Proj.basicOpen (sectionRingGrade L) t.val)) from\n            h.app (Proj.basicOpen (sectionRingGrade L) t.val)\n            (Proj.awayToSection (sectionRingGrade L) t.val\n              (HomogeneousLocalization.Away.mk (sectionRingGrade L) t.property n\n                ξ.val ξ.property))) •\n            (L.tensorPow (n • e)).presheaf.map (homOfLE\n              (le_top : V.ι ''ᵁ (h ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤\n                ⊤)).op ((t.val ^ n) (n • e)) =\n          (L.tensorPow (n • e)).presheaf.map (homOfLE\n            (le_top : V.ι ''ᵁ (h ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤\n              ⊤)).op (ξ.val (n • e)))\n    (hbase : (X.homOfLE (inf_le_left : U ⊓ V ≤ U) ≫ g).base =\n      (X.homOfLE (inf_le_right : U ⊓ V ≤ V) ≫ h).base) :\n    ∀ W, (X.homOfLE (inf_le_left : U ⊓ V ≤ U) ≫ g).app W ≫\n      (U ⊓ V).toScheme.presheaf.map\n        (eqToHom congr((TopologicalSpace.Opens.map $hbase.symm).obj W)).op =\n      (X.homOfLE (inf_le_right : U ⊓ V ≤ V) ≫ h).app W",
   "branch": "sheaf-dag",
-  "by": "X3",
-  "date": "2026-10-13"
+  "by": "D4",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf copy in favor of the adopted source-library theorem. The upstream statement drops the unused e, t, he and hV hypotheses; applying it proves the node statement unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -141,14 +142,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K1",
+  "reviewer": "C-20010",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T025304-L-3423552",
+  "landing": "20261020T135357-L-1816705",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: node lem-sc-section-ring-quotient-chart-overlap-sheaf-map lean.statement matched verbatim with WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartOverlapSheaf.sectionRing_overlap_sheaf_map; consumer Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlap adapted (import + 4 dropped args) and compiled; axioms clean"
  },
  "lean_audit": {
   "master": {

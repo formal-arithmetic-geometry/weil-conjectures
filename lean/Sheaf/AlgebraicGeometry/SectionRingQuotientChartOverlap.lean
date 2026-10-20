@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartOverlapBase
-import Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlapSheaf
+import WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartOverlapSheaf
 
 /-! # Uniqueness of section-ring quotient charts on overlaps
 
@@ -90,6 +90,6 @@ theorem sectionRing_quotient_charts_overlap
       X.homOfLE (inf_le_right : U ⊓ V ≤ V) ≫ h := by
   have hbase := sectionRing_overlap_base_map X L d e s t hd he U V hU hV g h hg hh
   apply Scheme.Hom.ext hbase
-  exact sectionRing_overlap_sheaf_map X L d e s t hd he U V hU hV g h hg hh hbase
+  exact sectionRing_overlap_sheaf_map X L d s hd U V hU g h hg hh hbase
 
 end AlgebraicGeometry.Scheme.Modules
