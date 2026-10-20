@@ -18795,3 +18795,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:05 L: returned deliver/X7/Sheaf.SecSmoothPurity.DirectImageScalarExchange (reviewer RETURN: (reviewer C-fbd33, head fbd33a5d8) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.SecSmoothPurity.Dire)
 
 - 05:11 L: batch 20261020T165437 dependency take-out
+- 21:12 L: returned deliver/G5/Sheaf.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals (reviewer RETURN: (reviewer C-b7764, head b77640285) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fi)
