@@ -29,7 +29,7 @@
  ],
  "proof": [
   {
-   "text": "For augmentation_spec apply the unique extension property to the zero module map. This gives vanishing on generators and uniqueness. Identify its composite with the sectionwise sheafification unit with algebraMapInv by SymmetricAlgebra.induction: Under.w gives the scalar case, generator vanishing gives the degree-one case, and both sides preserve sums and products.",
+   "text": "For augmentation_spec apply the unique extension property to the zero module map. This gives vanishing on generators and uniqueness. Identify its composite with the sectionwise sheafification unit with algebraMapInv by SymmetricAlgebra.induction: Under.w gives the scalar case, generator vanishing gives the degree-one case, and both sides preserve sums and products. For efficient reduction, construct the structure-algebra functor on objects and section maps, prove it naturally isomorphic to the characterized functor of the relative-spectrum theorem, and use its equivalence with the resulting quasi-inverse. This realizes the same relative-spectrum construction up to the unique algebra-compatible isomorphism.",
    "uses": [
     "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
     "lem-weil-pbc-symmetric-algebra-sheaf-construction"
@@ -61,7 +61,7 @@
    "elementary": false
   },
   {
-   "text": "The remaining trivializationMap_spec applies the basis-to-polynomial identification on affine opens in the framed open. The affine charts identify the defined homOfVector with these isomorphisms, whose coordinates agree on overlaps and hence glue. The augmentation kills all the frame sections, identifying the zero section with the origin.",
+   "text": "For trivializationMap_spec, transport the free-sheaf frame to a basis of sections on each affine open of the framed open. SymmetricAlgebra.equivMvPolynomial sends the basis generators to polynomial variables. Naturality of the frame sections, the symmetric-algebra inclusion, and the counit shows that the resulting affineChart composite is the restriction of trivializationMap. The affine-space maps of the affine cover form an open cover of the target, and the comparison squares are pullbacks. Isomorphisms are Zariski local at the target, so trivializationMap is an isomorphism. The augmentation kills each frame section, and AffineSpace.hom_ext identifies the zero section with the origin.",
    "uses": [
     "lem-weil-pbc-affine-morphism-relative-spec",
     "lem-weil-pbc-symmetric-algebra-free-module-polynomial"
@@ -69,7 +69,7 @@
    "elementary": false
   },
   {
-   "text": "The remaining transition_spec expresses the two mutually inverse composites of frame isomorphisms by matrices on the global sections of the finite free sheaf. Their composites give both inverse-matrix equations. Applying the degree-one linear map and the structure-algebra isomorphism to the frame relation gives the coordinate relation, with scalars pulled back along the projection. This includes rank zero, when the matrices and sums are empty.",
+   "text": "For transition_spec, take the two bases of global sections of the restricted locally free sheaf induced by the frames. Their change-of-basis matrices are inverse by Basis.toMatrix_mul_toMatrix_flip. Transport coefficients along the top-section ring isomorphism and frame vectors along restrictAppIso to obtain the frame relation on the original open. Apply the semilinear degree-one coordinate map to the finite sum to obtain the coordinate relation. This includes rank zero and empty opens without additional hypotheses.",
    "uses": [
     "def-amb-finite-locally-free-module",
     "lem-weil-pbc-symmetric-algebra-sheaf-construction"
@@ -89,7 +89,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-asd-vector-bundle-zero-section.md",
-  "place": "Definition def-asd-vector-bundle-zero-section (current blueprint update main-20261015); the three completed Lean arguments use the stated universal property, categorical section identity, and naturality. Remaining clauses retain the proof plans in their declaration docstrings."
+  "place": "Definition def-asd-vector-bundle-zero-section (current blueprint update main-20261015). All compatibility, trivialization, and transition clauses are proved from the stated universal property, relative-spectrum characterization, affine symmetric-algebra comparison, and Mathlib basis-to-polynomial identification. The frame charts are checked by projection and coordinate extensionality and descended using locality of isomorphisms at the target. The functor is now concrete; its equivalence property is transported from the stated object/map characterizations, avoiding reduction of the large chosen existential during geometry."
  },
  "mathlib_searches": [
   {
@@ -218,6 +218,8 @@
   "file": "lean/Sheaf/AlgebraicGeometry/VectorBundleZeroSection.lean",
   "declaration": "AlgebraicGeometry.VectorBundleZeroSection.scheme",
   "declarations": [
+   "AlgebraicGeometry.VectorBundleZeroSection.structureAlgebraFunctor_isEquivalence",
+   "AlgebraicGeometry.VectorBundleZeroSection.structureAlgebraFunctor",
    "AlgebraicGeometry.VectorBundleZeroSection.antiEquivalence",
    "AlgebraicGeometry.VectorBundleZeroSection.baseObject",
    "AlgebraicGeometry.VectorBundleZeroSection.algebraObject",
@@ -265,10 +267,10 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A6",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261020T154034-L-3030587",
-  "kind": "proof",
+  "landing": "20261020T211804-L-3502452",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

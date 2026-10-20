@@ -18,8 +18,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Mathlib.LinearAlgebra.Matrix.Basis
+import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
 import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # The vector bundle Spec Sym(F), its augmentation and zero section
@@ -46,13 +47,91 @@ noncomputable section
 
 namespace AlgebraicGeometry.VectorBundleZeroSection
 
-/-- The relative-spectrum anti-equivalence characterized on objects and morphisms in
-Stacks Tags 01LW and 01LX (blueprint: def-asd-vector-bundle-zero-section). -/
+/-- The concrete structure-algebra functor, with sectionwise pullback on morphisms.
+Source: Stacks Tag 01LX (blueprint: def-asd-vector-bundle-zero-section). -/
+def structureAlgebraFunctor (S : Scheme.{u}) :
+    (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ⥤
+      ObjectProperty.FullSubcategory
+        (fun A : S.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent) := by
+  refine {
+    obj := fun Y ↦ ⟨Under.mk (⟨Y.unop.obj.hom.c⟩ : S.sheaf ⟶
+        (TopCat.Sheaf.pushforward CommRingCat.{u} Y.unop.obj.hom.base).obj
+          Y.unop.obj.left.sheaf), (affine_morphism_relative_spec S).1
+      Y.unop.obj.hom Y.unop.property⟩
+    map := fun {Y Y'} h ↦ ⟨Under.homMk ⟨{
+      app := fun V ↦ h.unop.hom.left.appLE (Y.unop.obj.hom ⁻¹ᵁ V.unop)
+        (Y'.unop.obj.hom ⁻¹ᵁ V.unop)
+        (by rw [← Over.w h.unop.hom, Scheme.Hom.comp_preimage])
+      naturality := ?_ }⟩ ?_⟩
+    map_id := ?_
+    map_comp := ?_ }
+  · intro U V i
+    change Y.unop.obj.left.presheaf.map
+        ((Opens.map Y.unop.obj.hom.base).map i.unop).op ≫ _ = _ ≫
+      Y'.unop.obj.left.presheaf.map ((Opens.map Y'.unop.obj.hom.base).map i.unop).op
+    simp only [Scheme.Hom.map_appLE, Scheme.Hom.appLE_map]
+  · apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    change Y.unop.obj.hom.app V.unop ≫ h.unop.hom.left.appLE _ _ _ =
+      Y'.unop.obj.hom.app V.unop
+    rw [← Scheme.Hom.comp_appLE]
+    exact (Scheme.Hom.congr_app (Over.w h.unop.hom).symm V.unop).symm
+  · intro Y
+    apply InducedCategory.hom_ext
+    apply StructuredArrow.hom_ext
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    change Scheme.Hom.appLE (𝟙 Y.unop.obj.left) _ _ _ = 𝟙 _
+    simp only [Scheme.Hom.appLE, Scheme.Hom.id_base, Scheme.Hom.id_app,
+      homOfLE_refl, op_id, Category.id_comp]
+    exact CategoryTheory.Functor.map_id _ _
+  · intro Y Y' Y'' h k
+    apply InducedCategory.hom_ext
+    apply StructuredArrow.hom_ext
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    change (k.unop.hom.left ≫ h.unop.hom.left).appLE _ _ _ =
+      h.unop.hom.left.appLE _ _ _ ≫ k.unop.hom.left.appLE _ _ _
+    rw [Scheme.Hom.appLE_comp_appLE]
+
+/-- The structure-algebra functor is an equivalence. Source: Stacks Tag 01LX
+(blueprint: def-asd-vector-bundle-zero-section).
+Proof: the relative-spectrum theorem provides an equivalence whose object and morphism
+characterizations give a natural isomorphism to this concrete functor. -/
+theorem structureAlgebraFunctor_isEquivalence (S : Scheme.{u}) :
+    (structureAlgebraFunctor S).IsEquivalence := by
+  obtain ⟨E, hobj, ρ, hmap, _⟩ := (affine_morphism_relative_spec S).2
+  let η : E.functor ≅ structureAlgebraFunctor S :=
+    NatIso.ofComponents (fun Y ↦ ObjectProperty.isoMk _ (eqToIso (hobj Y.unop))) (by
+      intro Y Y' f
+      apply InducedCategory.hom_ext
+      apply StructuredArrow.hom_ext
+      apply Sheaf.hom_ext
+      apply NatTrans.ext
+      funext U
+      have htransport {C D : TopCat.Sheaf CommRingCat.{u} S} (e : C = D) :
+          (eqToHom e).hom.app U =
+            eqToHom (congrArg (fun G ↦ G.obj.obj U) e) := by cases e; rfl
+      change (E.functor.map f).hom.right.hom.app U ≫
+        (eqToHom (hobj Y'.unop)).right.hom.app U =
+        (eqToHom (hobj Y.unop)).right.hom.app U ≫
+          f.unop.hom.left.appLE _ _ _
+      erw [hmap Y'.unop Y.unop f.unop U.unop]
+      simp only [Under.eqToHom_right, htransport, Category.assoc, eqToHom_trans,
+        eqToHom_refl, Category.comp_id])
+  exact Functor.isEquivalence_of_iso η
+
+/-- The relative-spectrum equivalence with its concrete structure-algebra functor.
+Source: Stacks Tag 01LX (blueprint: def-asd-vector-bundle-zero-section). -/
 def antiEquivalence (S : Scheme.{u}) :
     (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ≌
       ObjectProperty.FullSubcategory
-        (fun A : S.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent) :=
-  (affine_morphism_relative_spec S).2.choose
+        (fun A : S.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent) := by
+  letI := structureAlgebraFunctor_isEquivalence S
+  exact (structureAlgebraFunctor S).asEquivalence
 
 /-- The base itself as an affine scheme over itself, Stacks Tag 01LX
 (blueprint: def-asd-vector-bundle-zero-section). -/
@@ -122,8 +201,8 @@ def algebraIso (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
         (TopCat.Sheaf.pushforward CommRingCat.{u} (π S d F).base).obj
           (scheme S d F).sheaf) :=
   ((ObjectProperty.ι (fun A : S.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent)).mapIso
-    ((antiEquivalence S).counitIso.app (algebraObject S d F))).symm ≪≫
-      eqToIso ((affine_morphism_relative_spec S).2.choose_spec.choose (over S d F))
+    ((antiEquivalence S).counitIso.app (algebraObject S d F))).symm
+
 
 /-- The chart over an affine open is induced by the sheafification unit and the
 symmetric-algebra identification. Source: Stacks Tag 01LX
@@ -203,6 +282,43 @@ def zeroRestricted (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
   (zero S d F).resLE ((π S d F) ⁻¹ᵁ V) V
     (by rw [← Scheme.Hom.comp_preimage, (zero_spec S d F).1]; simp)
 
+private def zeroOver (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
+    [F.IsFiniteLocallyFreeOfRank d] : baseObject S ⟶ over S d F :=
+  ((antiEquivalence S).functor.preimage
+    (((antiEquivalence S).counitIso.app (algebraObject S d F)).hom ≫
+      ObjectProperty.homMk (augmentationToBase S F))).unop
+
+private theorem zeroOver_map (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
+    [F.IsFiniteLocallyFreeOfRank d] :
+    (antiEquivalence S).functor.map (zeroOver S d F).op =
+      ((antiEquivalence S).counitIso.app (algebraObject S d F)).hom ≫
+        ObjectProperty.homMk (augmentationToBase S F) :=
+  (antiEquivalence S).functor.map_preimage _
+
+private theorem zero_pullback (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
+    [F.IsFiniteLocallyFreeOfRank d] (U : S.Opens) :
+    (algebraIso S d F).hom.right.hom.app (op U) ≫
+      (zero S d F).appLE ((π S d F) ⁻¹ᵁ U) U
+        (by rw [← Scheme.Hom.comp_preimage, (zero_spec S d F).1]; simp) =
+      (augmentation S F).right.hom.app (op U) := by
+  have hn := congrArg (fun t ↦ t.hom.right.hom.app (op U)) (zeroOver_map S d F)
+  simp only [ObjectProperty.FullSubcategory.comp_hom, Under.comp_right,
+    TopCat.Sheaf.comp_app] at hn
+  change (zero S d F).appLE ((π S d F) ⁻¹ᵁ U) U _ =
+    ((antiEquivalence S).counitIso.app (algebraObject S d F)).hom.hom.right.hom.app (op U) ≫
+      (augmentation S F).right.hom.app (op U) at hn
+  have hc := congrArg (fun t ↦ t.hom.right.hom.app (op U))
+    ((antiEquivalence S).counitIso.app (algebraObject S d F)).inv_hom_id
+  simp only [ObjectProperty.FullSubcategory.comp_hom, Under.comp_right,
+    TopCat.Sheaf.comp_app, ObjectProperty.FullSubcategory.id_hom, Under.id_right,
+    TopCat.Sheaf.id_app] at hc
+  change ((antiEquivalence S).counitIso.app (algebraObject S d F)).inv.hom.right.hom.app
+    (op U) ≫ _ = _
+  rw [hn, ← Category.assoc, hc, Category.id_comp]
+
+-- Geometry uses the equivalence API, not the choice of its quasi-inverse.
+attribute [local irreducible] antiEquivalence
+
 /-- The two compatibility equations for the affine relative-spectrum chart.
 This is the equation portion of `affineChart_spec`; it is split out because the
 relative-spectrum construction and the zero-section comparison are independent of
@@ -220,19 +336,47 @@ theorem affineChart_equations (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S
       U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
         (SymmetricAlgebra.algebraMapInv (R := S.presheaf.obj (op U.1))
           (M := F.val.obj (op U.1))).toRingHom)) := by
-  sorry
+  constructor
+  · have hscalar : CommRingCat.ofHom (algebraMap (S.presheaf.obj (op U.1))
+        (SymmetricAlgebraSheaf.sections F (op U.1))) ≫
+        CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap F (op U.1)) ≫
+        (algebraIso S d F).hom.right.hom.app (op U.1) = (π S d F).app U.1 := by
+      exact congrArg (fun q ↦ q.hom.app (op U.1)) (Under.w (algebraIso S d F).hom)
+    change (((π S d F) ⁻¹ᵁ U.1).toSpecΓ ≫
+      Spec.map (CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap F (op U.1)) ≫
+        (algebraIso S d F).hom.right.hom.app (op U.1))) ≫
+      Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.obj (op U.1))
+        (SymmetricAlgebraSheaf.sections F (op U.1)))) ≫ U.2.isoSpec.inv = _
+    simp only [Category.assoc, ← Spec.map_comp_assoc]
+    rw [hscalar, Scheme.Opens.toSpecΓ_naturality_assoc]
+    simp
+  · have hzero : CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap F (op U.1)) ≫
+        (algebraIso S d F).hom.right.hom.app (op U.1) ≫
+        (zero S d F).appLE ((π S d F) ⁻¹ᵁ U.1) U.1
+          (by rw [← Scheme.Hom.comp_preimage, (zero_spec S d F).1]; simp) =
+        CommRingCat.ofHom (SymmetricAlgebra.algebraMapInv
+          (R := S.presheaf.obj (op U.1)) (M := F.val.obj (op U.1))).toRingHom := by
+      rw [zero_pullback]
+      apply CommRingCat.hom_ext
+      exact RingHom.ext ((augmentation_spec S F).2.2 U.1)
+    change (zero S d F).resLE ((π S d F) ⁻¹ᵁ U.1) U.1 _ ≫
+      ((π S d F) ⁻¹ᵁ U.1).toSpecΓ ≫
+        Spec.map (CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap F (op U.1)) ≫
+          (algebraIso S d F).hom.right.hom.app (op U.1)) = _
+    rw [← Scheme.Opens.toSpecΓ_SpecMap_appLE_assoc]
+    simp only [← Spec.map_comp, Category.assoc] at hzero ⊢
+    rw [hzero]
+    rfl
 
 set_option linter.style.haveILetI false in
 /-- The affine charts are isomorphisms over the corresponding base affine opens, and the
 zero section in these charts is exactly the spectrum of the augmentation.
 Source: Stacks Tags 01LX and 01M2 (blueprint: def-asd-vector-bundle-zero-section).
 Proof: quasiCoherentSymmetricAlgebra_affine_comparison identifies affine algebra sections
-with Sym_R(F(U)). Apply the counit chart characterization in affine_morphism_relative_spec
-and compose with the spectrum of that ring isomorphism. The counit is an O_S-algebra map,
-which gives the equation with the structural projection. The zero map was defined as the
-fully faithful inverse image of the unique zero-generator extension. The morphism-chart
-clause of affine_morphism_relative_spec thus identifies its restriction with the spectrum
-of SymmetricAlgebra.algebraMapInv, using augmentation_spec. -/
+with Sym_R(F(U)). Since the structural projection is affine, its inverse image of an affine
+open is affine. Its toSpecΓ map, the counit on sections, and the section comparison are
+isomorphisms, so their spectra give the chart isomorphism. The two compatibility equations
+are exactly affineChart_equations, using scalar compatibility and the augmentation. -/
 theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (U : S.affineOpens) :
     IsIso (affineChart S d F U) ∧
@@ -247,22 +391,16 @@ theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modu
   have hq := quasiCoherentSymmetricAlgebra_affine_comparison S F
   have hsec : IsIso (CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap F (op U.1))) :=
     (ConcreteCategory.isIso_iff_bijective _).mpr (hq.2 U)
-  have hchart := (affine_morphism_relative_spec S).2.choose_spec.choose_spec.choose_spec.2.1
-    (algebraObject S d F) U.1 U.2
   letI := hsec
+  haveI : IsAffineHom (π S d F) := (over S d F).property
+  haveI : IsIso (((π S d F) ⁻¹ᵁ U.1).toSpecΓ) :=
+    (U.2.preimage (π S d F)).isoSpec.isIso_hom
   haveI : IsIso ((algebraIso S d F).hom.right.hom) := by infer_instance
   haveI : IsIso ((algebraIso S d F).hom.right.hom.app (op U.1)) := by infer_instance
-  have hrel : IsIso (((π S d F) ⁻¹ᵁ U.1).toSpecΓ ≫
-      Spec.map ((algebraIso S d F).hom.right.hom.app (op U.1))) := by
-    change IsIso (((π S d F) ⁻¹ᵁ U.1).toSpecΓ ≫
-      Spec.map ((algebraIso S d F).hom.right.hom.app (op U.1))) at hchart
-    exact hchart
-  letI := hrel
-  haveI : IsIso (Spec.map (CommRingCat.ofHom
-      (SymmetricAlgebraSheaf.sectionMap F (op U.1)))) := by infer_instance
   have hi : IsIso (affineChart S d F U) := by
-    dsimp [affineChart]
-    rw [Spec.map_comp, ← Category.assoc]
+    change IsIso (((π S d F) ⁻¹ᵁ U.1).toSpecΓ ≫
+      Spec.map (CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap F (op U.1)) ≫
+        (algebraIso S d F).hom.right.hom.app (op U.1)))
     infer_instance
   have heq := affineChart_equations S d F U
   exact ⟨hi, heq.1, heq.2⟩
@@ -310,6 +448,152 @@ def frameSection (S : Scheme.{u}) (d : ℕ) (F : S.Modules) (V : S.Opens)
         (ULift.up i)).val.app (op ⊤)
           (1 : V.toScheme.ringCatSheaf.obj.obj (op ⊤)))))
 
+private def frameBasis (S : Scheme.{u}) (d : ℕ) (F : S.Modules) (V : S.Opens)
+    (e : Trivialization S d F V) :
+    Module.Basis (Fin d) Γ(V.toScheme, ⊤) Γ(F.restrict V.ι, ⊤) :=
+  ((((Pi.basisFun Γ(V.toScheme, ⊤) (ULift.{u} (Fin d))).map
+    (Scheme.Modules.freeSectionsEquiv (X := V.toScheme) (ULift.{u} (Fin d))).symm).reindex
+      Equiv.ulift).map (Scheme.Modules.appLinearEquivOfIso e.symm ⊤))
+
+private theorem frameBasis_apply (S : Scheme.{u}) (d : ℕ) (F : S.Modules) (V : S.Opens)
+    (e : Trivialization S d F V) (i : Fin d) :
+    frameBasis S d F V e i = e.inv.val.app (op ⊤)
+      ((SheafOfModules.ιFree (R := V.toScheme.ringCatSheaf) (ULift.up i)).val.app (op ⊤)
+        (1 : Γ(V.toScheme, ⊤))) := by
+  classical
+  unfold frameBasis
+  erw [Module.Basis.map_apply, Module.Basis.reindex_apply, Module.Basis.map_apply,
+    Pi.basisFun_apply]
+  change e.inv.val.app (op ⊤) (∑ j : ULift.{u} (Fin d),
+    (SheafOfModules.ιFree (R := V.toScheme.ringCatSheaf) j).val.app (op ⊤)
+      ((Pi.single (ULift.up i) 1 : ULift.{u} (Fin d) → Γ(V.toScheme, ⊤)) j)) = _
+  congr 1
+  simp only [Pi.single_apply]
+  rw [Finset.sum_eq_single (ULift.up i)]
+  · simp
+  · intro j _ hj
+    simp [hj]
+  · simp
+
+private def frameTransport (S : Scheme.{u}) (F : S.Modules) (V : S.Opens) :
+    Γ(F.restrict V.ι, ⊤) →ₛₗ[V.topIso.hom.hom] Γ(F, V) where
+  toFun x := F.presheaf.map (eqToHom V.ι_image_top.symm).op
+    ((F.restrictAppIso V.ι ⊤).hom x)
+  map_add' x y := by simp
+  map_smul' r x := by
+    rw [Scheme.Modules.smul_restrictAppIso_hom_apply]
+    simp only [Scheme.Opens.ι_appIso, Iso.refl_inv]
+    exact F.val.map_smul (eqToHom V.ι_image_top.symm).op r
+      ((F.restrictAppIso V.ι ⊤).hom x)
+
+private theorem frameTransport_basis (S : Scheme.{u}) (d : ℕ) (F : S.Modules)
+    (V : S.Opens) (e : Trivialization S d F V) (i : Fin d) :
+    frameTransport S F V (frameBasis S d F V e i) = frameSection S d F V e i := by
+  rw [frameBasis_apply]
+  rfl
+
+private def freeSectionEquivAt (T : Scheme.{u}) (I : Type u) [Fintype I] [DecidableEq I]
+    (U : T.Opens) :
+    Γ(SheafOfModules.free (R := T.ringCatSheaf) I, U) ≃ₗ[Γ(T, U)] (I → Γ(T, U)) where
+  toFun x i := (Scheme.Modules.freeπ i).val.app (op U) x
+  map_add' x y := by ext i; exact map_add _ _ _
+  map_smul' r x := by ext i; exact (Scheme.Modules.freeπ i).val.app (op U) |>.hom.map_smul r x
+  invFun c := ∑ i, (SheafOfModules.ιFree (R := T.ringCatSheaf) i).val.app (op U) (c i)
+  left_inv x := by
+    change ∑ i : I, (Scheme.Modules.Hom.app
+      (Scheme.Modules.freeπ i ≫ SheafOfModules.ιFree i) U) x = x
+    rw [← Scheme.Modules.Hom.sum_app_apply, Scheme.Modules.sum_freeπ_ιFree]
+    rfl
+  right_inv c := by
+    ext j
+    change (Scheme.Modules.freeπ j).val.app (op U) (∑ i,
+      (SheafOfModules.ιFree (R := T.ringCatSheaf) i).val.app (op U) (c i)) = c j
+    rw [map_sum, Finset.sum_eq_single j _ (by simp)]
+    · have h := congrArg (fun f ↦ f.val.app (op U) (c j))
+        (Scheme.Modules.ιFree_freeπ (X := T) j j)
+      rw [if_pos rfl] at h
+      exact h
+    · intro i _ hij
+      have h := congrArg (fun f ↦ f.val.app (op U) (c i))
+        (Scheme.Modules.ιFree_freeπ (X := T) i j)
+      rw [if_neg hij] at h
+      exact h
+
+section LocalFrames
+
+private local instance restrictedSectionsModule (S : Scheme.{u}) (F : S.Modules) (V : S.Opens)
+    (U : V.toScheme.Opens) : Module Γ(V.toScheme, U) Γ(F, V.ι ''ᵁ U) := by
+  change Module Γ(S, V.ι ''ᵁ U) Γ(F, V.ι ''ᵁ U)
+  infer_instance
+
+private def restrictedSectionsEquiv (S : Scheme.{u}) (F : S.Modules) (V : S.Opens)
+    (U : V.toScheme.Opens) :
+    Γ(F.restrict V.ι, U) ≃ₗ[Γ(V.toScheme, U)] Γ(F, V.ι ''ᵁ U) where
+  toFun := (F.restrictAppIso V.ι U).hom
+  invFun := (F.restrictAppIso V.ι U).inv
+  left_inv := Iso.hom_inv_id_apply _
+  right_inv := Iso.inv_hom_id_apply _
+  map_add' := map_add _
+  map_smul' r x := by
+    rw [Scheme.Modules.smul_restrictAppIso_hom_apply]
+    simp only [Scheme.Opens.ι_appIso, Iso.refl_inv]
+    rfl
+
+private def frameBasisAt (S : Scheme.{u}) (d : ℕ) (F : S.Modules) (V : S.Opens)
+    (e : Trivialization S d F V) (U : V.toScheme.Opens) :
+    Module.Basis (ULift.{u} (Fin d)) Γ(S, V.ι ''ᵁ U) Γ(F, V.ι ''ᵁ U) := by
+  classical
+  change Module.Basis (ULift.{u} (Fin d)) Γ(V.toScheme, U) Γ(F, V.ι ''ᵁ U)
+  exact (((Pi.basisFun Γ(V.toScheme, U) (ULift.{u} (Fin d))).map
+    (freeSectionEquivAt V.toScheme (ULift.{u} (Fin d)) U).symm).map
+      (Scheme.Modules.appLinearEquivOfIso e.symm U)).map (restrictedSectionsEquiv S F V U)
+
+private theorem frameBasisAt_apply (S : Scheme.{u}) (d : ℕ) (F : S.Modules) (V : S.Opens)
+    (e : Trivialization S d F V) (U : V.toScheme.Opens) (i : ULift.{u} (Fin d)) :
+    frameBasisAt S d F V e U i = (F.restrictAppIso V.ι U).hom
+      (e.inv.val.app (op U)
+        ((SheafOfModules.ιFree (R := V.toScheme.ringCatSheaf) i).val.app (op U)
+          (1 : Γ(V.toScheme, U)))) := by
+  classical
+  unfold frameBasisAt
+  erw [Module.Basis.map_apply, Module.Basis.map_apply, Module.Basis.map_apply,
+    Pi.basisFun_apply]
+  change (F.restrictAppIso V.ι U).hom
+    (e.inv.val.app (op U) (∑ j : ULift.{u} (Fin d),
+      (SheafOfModules.ιFree (R := V.toScheme.ringCatSheaf) j).val.app (op U)
+        ((Pi.single i 1 : ULift.{u} (Fin d) → Γ(V.toScheme, U)) j))) = _
+  congr 2
+  simp only [Pi.single_apply]
+  rw [Finset.sum_eq_single i]
+  · simp
+  · intro j _ hj
+    simp [hj]
+  · simp
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem frameSection_restrict (S : Scheme.{u}) (d : ℕ) (F : S.Modules)
+    (V : S.Opens) (e : Trivialization S d F V) (U : V.toScheme.Opens)
+    (i : ULift.{u} (Fin d)) :
+    F.presheaf.map (homOfLE (V.ι_image_le U)).op (frameSection S d F V e i.down) =
+      frameBasisAt S d F V e U i := by
+  rw [frameBasisAt_apply]
+  dsimp only [frameSection]
+  rw [← ConcreteCategory.comp_apply, ← F.presheaf.map_comp]
+  have he := PresheafOfModules.naturality_apply e.inv.val (homOfLE (le_top : U ≤ ⊤)).op
+    ((SheafOfModules.ιFree (R := V.toScheme.ringCatSheaf) i).val.app (op ⊤)
+      (1 : Γ(V.toScheme, ⊤)))
+  have hi := PresheafOfModules.naturality_apply
+    (SheafOfModules.ιFree (R := V.toScheme.ringCatSheaf) i).val
+    (homOfLE (le_top : U ≤ ⊤)).op (1 : Γ(V.toScheme, ⊤))
+  change (SheafOfModules.ιFree (R := V.toScheme.ringCatSheaf) i).val.app (op U)
+    (V.toScheme.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op 1) = _ at hi
+  rw [map_one] at hi
+  have h := congrArg ((F.restrictAppIso V.ι U).hom) he
+  rw [← hi] at h
+  exact h.symm
+
+end LocalFrames
+
 /-- The coordinate x_i = j(e_i), transported to the restricted total space's global ring.
 Source: blueprint order 1968 (blueprint: def-asd-vector-bundle-zero-section). -/
 def coordinate (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
@@ -319,12 +603,244 @@ def coordinate (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     ((algebraIso S d F).hom.right.hom.app (op V)
       ((SymmetricAlgebraSheaf.inclusion F).val.app (op V) (frameSection S d F V e i)))
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem homOfLE_topIso_inv {X : Scheme.{u}} {U V : X.Opens} (h : U ≤ V)
+    (r : Γ(X, V)) :
+    (X.homOfLE h).appTop (V.topIso.inv r) =
+      U.topIso.inv (X.presheaf.map (homOfLE h).op r) := by
+  simp only [Scheme.homOfLE_appTop, Scheme.Opens.topIso_inv]
+  simp only [← CommRingCat.comp_apply, ← Functor.map_comp]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem coordinate_restrict (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
+    (e : Trivialization S d F V) (U : V.toScheme.Opens) (i : ULift.{u} (Fin d)) :
+    ((scheme S d F).homOfLE ((π S d F).preimage_mono (V.ι_image_le U))).appTop
+      (coordinate S d F V e i.down) =
+    ((π S d F) ⁻¹ᵁ (V.ι ''ᵁ U)).topIso.inv
+      ((algebraIso S d F).hom.right.hom.app (op (V.ι ''ᵁ U))
+        ((SymmetricAlgebraSheaf.inclusion F).val.app (op (V.ι ''ᵁ U))
+          (frameBasisAt S d F V e U i))) := by
+  rw [coordinate, homOfLE_topIso_inv]
+  have ha := CategoryTheory.congr_fun
+    ((algebraIso S d F).hom.right.hom.naturality (homOfLE (V.ι_image_le U)).op)
+    ((SymmetricAlgebraSheaf.inclusion F).val.app (op V) (frameSection S d F V e i.down))
+  have hj := PresheafOfModules.naturality_apply (SymmetricAlgebraSheaf.inclusion F).val
+    (homOfLE (V.ι_image_le U)).op (frameSection S d F V e i.down)
+  change (SymmetricAlgebraSheaf.inclusion F).val.app (op (V.ι ''ᵁ U))
+    (F.presheaf.map (homOfLE (V.ι_image_le U)).op (frameSection S d F V e i.down)) =
+    (SymmetricAlgebraSheaf.algebra F).right.obj.map (homOfLE (V.ι_image_le U)).op
+      ((SymmetricAlgebraSheaf.inclusion F).val.app (op V)
+        (frameSection S d F V e i.down)) at hj
+  rw [frameSection_restrict] at hj
+  exact congrArg (((π S d F) ⁻¹ᵁ (V.ι ''ᵁ U)).topIso.inv)
+    (ha.symm.trans (congrArg ((algebraIso S d F).hom.right.hom.app (op (V.ι ''ᵁ U))) hj.symm))
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem affineChart_appTop (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] (U : S.affineOpens)
+    (a : SymmetricAlgebraSheaf.sections F (op U.1)) :
+    (affineChart S d F U).appTop
+      ((Scheme.ΓSpecIso (.of (SymmetricAlgebraSheaf.sections F (op U.1)))).inv a) =
+    ((π S d F) ⁻¹ᵁ U.1).topIso.inv
+      ((algebraIso S d F).hom.right.hom.app (op U.1)
+        (SymmetricAlgebraSheaf.sectionMap F (op U.1) a)) := by
+  dsimp only [affineChart]
+  rw [Scheme.Hom.comp_appTop]
+  change (π S d F ⁻¹ᵁ U.1).toSpecΓ.appTop
+    ((Spec.map (CommRingCat.ofHom (((algebraIso S d F).hom.right.hom.app (op U.1)).hom.comp
+      (SymmetricAlgebraSheaf.sectionMap F (op U.1))))).appTop
+      ((Scheme.ΓSpecIso (.of (SymmetricAlgebraSheaf.sections F (op U.1)))).inv a)) = _
+  rw [← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality,
+    CommRingCat.comp_apply, Scheme.Opens.toSpecΓ_appTop]
+  change (π S d F ⁻¹ᵁ U.1).topIso.inv
+    ((Scheme.ΓSpecIso _).hom ((Scheme.ΓSpecIso _).inv _)) = _
+  rw [Iso.inv_hom_id_apply]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem projection_appTop (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
+    (r : S.presheaf.obj (op V)) :
+    ((π S d F) ∣_ V).appTop (V.topIso.inv r) =
+      ((π S d F) ⁻¹ᵁ V).topIso.inv ((π S d F).app V r) := by
+  have h := Scheme.Hom.resLE_app_top (π S d F)
+    (le_rfl : (π S d F) ⁻¹ᵁ V ≤ (π S d F) ⁻¹ᵁ V)
+  rw [Scheme.Hom.resLE_eq_morphismRestrict] at h
+  simp only [Scheme.Hom.appLE, homOfLE_refl, op_id] at h
+  rw [(scheme S d F).presheaf.map_id, Category.comp_id] at h
+  simp only [Scheme.Hom.appTop, h, CommRingCat.comp_apply, Iso.inv_hom_id_apply]
+
+set_option backward.isDefEq.respectTransparency false in
+private def coordinateMap (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
+    [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) :
+    Γ(F, V) →ₛₗ[((π S d F) ∣_ V).appTop.hom.comp V.topIso.inv.hom]
+      Γ(((π S d F) ⁻¹ᵁ V).toScheme, ⊤) where
+  toFun x := ((π S d F) ⁻¹ᵁ V).topIso.inv
+    ((algebraIso S d F).hom.right.hom.app (op V)
+      ((SymmetricAlgebraSheaf.inclusion F).val.app (op V) x))
+  map_add' x y := by simp only [map_add]
+  map_smul' r x := by
+    rw [RingHom.comp_apply, projection_appTop]
+    have hs := congrArg (fun q ↦ q.hom.app (op V) r) (Under.w (algebraIso S d F).hom)
+    change (algebraIso S d F).hom.right.hom.app (op V)
+      ((SymmetricAlgebraSheaf.algebra F).hom.hom.app (op V) r) =
+      (π S d F).app V r at hs
+    change ((π S d F) ⁻¹ᵁ V).topIso.inv
+      ((algebraIso S d F).hom.right.hom.app (op V)
+        ((SymmetricAlgebraSheaf.inclusion F).val.app (op V) (r • x))) = _
+    rw [map_smul]
+    let jx : (SymmetricAlgebraSheaf.algebra F).right.obj.obj (op V) :=
+      (SymmetricAlgebraSheaf.inclusion F).val.app (op V) x
+    change ((π S d F) ⁻¹ᵁ V).topIso.inv
+      ((algebraIso S d F).hom.right.hom.app (op V)
+        ((SymmetricAlgebraSheaf.algebra F).hom.hom.app (op V) r * jx)) = _
+    simp only [map_mul]
+    rw [hs]
+    rfl
+
+private theorem coordinateMap_frame (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
+    (e : Trivialization S d F V) (i : Fin d) :
+    coordinateMap S d F V (frameSection S d F V e i) = coordinate S d F V e i := rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem zero_coordinateMap (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) (x : Γ(F, V)) :
+    (zeroRestricted S d F V).appTop (coordinateMap S d F V x) = 0 := by
+  have hp := congrArg (fun q ↦ q ((SymmetricAlgebraSheaf.inclusion F).val.app (op V) x))
+    (zero_pullback S d F V)
+  change (zero S d F).appLE ((π S d F) ⁻¹ᵁ V) V _
+    ((algebraIso S d F).hom.right.hom.app (op V)
+      ((SymmetricAlgebraSheaf.inclusion F).val.app (op V) x)) = _ at hp
+  have h0 := hp.trans ((augmentation_spec S F).1 V x)
+  change ((zero S d F).resLE _ _ _).app ⊤ _ = 0
+  rw [Scheme.Hom.resLE_app_top]
+  change V.topIso.inv ((zero S d F).appLE _ _ _
+    (((π S d F) ⁻¹ᵁ V).topIso.hom (((π S d F) ⁻¹ᵁ V).topIso.inv _))) = 0
+  rw [Iso.inv_hom_id_apply, h0, map_zero]
+
 /-- The map to affine space induced by a module frame and its degree-one coordinates.
 Source: Stacks Tag 01M2 (blueprint: def-asd-vector-bundle-zero-section). -/
 def trivializationMap (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) (e : Trivialization S d F V) :
     ((π S d F) ⁻¹ᵁ V).toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) V.toScheme :=
   AffineSpace.homOfVector ((π S d F) ∣_ V) (fun i ↦ coordinate S d F V e i.down)
+
+private def frameChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
+    [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) (e : Trivialization S d F V)
+    (U : V.toScheme.affineOpens) :
+    ((π S d F) ⁻¹ᵁ (V.ι ''ᵁ U.1)).toScheme ⟶
+      AffineSpace (ULift.{u} (Fin d)) (Spec Γ(V.toScheme, U.1)) :=
+  affineChart S d F ⟨V.ι ''ᵁ U.1, U.2.image_of_isOpenImmersion V.ι⟩ ≫
+    Spec.map (CommRingCat.ofHom
+      (SymmetricAlgebra.equivMvPolynomial (frameBasisAt S d F V e U.1)).symm.toRingHom) ≫
+      (AffineSpace.SpecIso (ULift.{u} (Fin d)) Γ(V.toScheme, U.1)).inv
+
+private theorem frameChart_isIso (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
+    [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) (e : Trivialization S d F V)
+    (U : V.toScheme.affineOpens) : IsIso (frameChart S d F V e U) := by
+  have : IsIso (affineChart S d F
+      ⟨V.ι ''ᵁ U.1, U.2.image_of_isOpenImmersion V.ι⟩) := (affineChart_spec S d F _).1
+  have : IsIso (CommRingCat.ofHom
+      (SymmetricAlgebra.equivMvPolynomial (frameBasisAt S d F V e U.1)).symm.toRingHom) :=
+    (RingEquiv.toCommRingCatIso
+      (SymmetricAlgebra.equivMvPolynomial (frameBasisAt S d F V e U.1)).symm.toRingEquiv).isIso_hom
+  dsimp only [frameChart]
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem frameChart_comp_map (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
+    (e : Trivialization S d F V) (U : V.toScheme.affineOpens) :
+    (scheme S d F).homOfLE ((π S d F).preimage_mono (V.ι_image_le U.1)) ≫
+      trivializationMap S d F V e =
+    frameChart S d F V e U ≫ AffineSpace.map (ULift.{u} (Fin d)) U.2.fromSpec := by
+  let W : S.affineOpens := ⟨V.ι ''ᵁ U.1, U.2.image_of_isOpenImmersion V.ι⟩
+  let b := frameBasisAt S d F V e U.1
+  have hc : CommRingCat.ofHom (MvPolynomial.C : Γ(S, W.1) →+* _) ≫
+      CommRingCat.ofHom (SymmetricAlgebra.equivMvPolynomial b).symm.toRingHom =
+      CommRingCat.ofHom (algebraMap Γ(S, W.1) (SymmetricAlgebraSheaf.sections F (op W.1))) := by
+    apply CommRingCat.hom_ext
+    exact RingHom.ext (SymmetricAlgebra.equivMvPolynomial b).symm.commutes
+  have hbase : U.2.fromSpec ≫ V.ι = W.2.fromSpec := by
+    have h := IsAffineOpen.SpecMap_appLE_fromSpec V.ι W.2 U.2
+      ((V.ι.preimage_image_eq U.1).ge)
+    have ha : V.ι.appLE W.1 U.1 ((V.ι.preimage_image_eq U.1).ge) = 𝟙 _ := by
+      rw [Scheme.Opens.ι_appLE]
+      change S.presheaf.map (𝟙 (op W.1)) = 𝟙 _
+      exact S.presheaf.map_id _
+    rw [ha, Spec.map_id] at h
+    change 𝟙 (Spec Γ(S, W.1)) ≫ W.2.fromSpec = U.2.fromSpec ≫ V.ι at h
+    rw [Category.id_comp] at h
+    exact h.symm
+  apply AffineSpace.hom_ext
+  · dsimp only [trivializationMap, frameChart]
+    simp only [Category.assoc, AffineSpace.map_over, AffineSpace.homOfVector_over,
+      AffineSpace.SpecIso_inv_over_assoc, ← Spec.map_comp_assoc]
+    rw [hc]
+    apply (cancel_mono V.ι).mp
+    simp only [Category.assoc, morphismRestrict_ι, Scheme.homOfLE_ι_assoc]
+    rw [hbase]
+    have h := congrArg (fun q ↦ q ≫ W.1.ι) (affineChart_spec S d F W).2.1
+    simpa only [Category.assoc, IsAffineOpen.isoSpec_inv_ι, morphismRestrict_ι] using h.symm
+  · intro i
+    dsimp only [trivializationMap, frameChart]
+    simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+      AffineSpace.homOfVector_appTop_coord, AffineSpace.map_appTop_coord]
+    rw [coordinate_restrict]
+    change _ = (affineChart S d F W).appTop
+      ((Spec.map (CommRingCat.ofHom (SymmetricAlgebra.equivMvPolynomial b).symm.toRingHom)).appTop
+        ((AffineSpace.SpecIso (ULift.{u} (Fin d)) Γ(V.toScheme, U.1)).inv.appTop
+          (AffineSpace.coord _ i)))
+    rw [AffineSpace.SpecIso_inv_appTop_coord]
+    have hn := CategoryTheory.congr_fun (Scheme.ΓSpecIso_inv_naturality
+      (CommRingCat.ofHom (SymmetricAlgebra.equivMvPolynomial b).symm.toRingHom))
+        (MvPolynomial.X i)
+    change (Scheme.ΓSpecIso (.of (SymmetricAlgebraSheaf.sections F (op W.1)))).inv
+        ((SymmetricAlgebra.equivMvPolynomial b).symm (MvPolynomial.X i)) =
+      (Spec.map (CommRingCat.ofHom (SymmetricAlgebra.equivMvPolynomial b).symm.toRingHom)).appTop
+        ((Scheme.ΓSpecIso (.of (MvPolynomial (ULift.{u} (Fin d)) Γ(S, W.1)))).inv
+          (MvPolynomial.X i)) at hn
+    refine Eq.trans ?_ (congrArg ((affineChart S d F W).appTop) hn)
+    rw [SymmetricAlgebra.equivMvPolynomial_symm_X, affineChart_appTop]
+    rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem affineSpaceChartRange {T : Scheme.{u}} (I : Type u) (U : T.affineOpens) :
+    (AffineSpace.map I U.2.fromSpec).opensRange =
+      (AffineSpace I T ↘ T) ⁻¹ᵁ U.1 := by
+  have h := IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback
+    (AffineSpace.isPullback_map (n := I) U.2.fromSpec).flip (⊤ : (Spec Γ(T, U.1)).Opens)
+  simpa only [Scheme.Hom.preimage_top, Scheme.Hom.image_top_eq_opensRange,
+    IsAffineOpen.opensRange_fromSpec] using h
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem isIso_of_affineSpace_charts {T X : Scheme.{u}} (I : Type u)
+    (f : X ⟶ T) (h : X ⟶ AffineSpace I T) (w : h ≫ AffineSpace I T ↘ T = f)
+    (ht : ∀ U : T.affineOpens,
+      ∃ t : (f ⁻¹ᵁ U.1).toScheme ⟶ AffineSpace I (Spec Γ(T, U.1)),
+        IsIso t ∧ (f ⁻¹ᵁ U.1).ι ≫ h = t ≫ AffineSpace.map I U.2.fromSpec) : IsIso h := by
+  let 𝒰 : (AffineSpace I T).OpenCover := Scheme.Cover.mkOfCovers
+    T.affineOpens (fun U ↦ AffineSpace I (Spec Γ(T, U.1)))
+    (fun U ↦ AffineSpace.map I U.2.fromSpec) (by
+      intro y
+      obtain ⟨U, hU, hy, _⟩ := exists_isAffineOpen_mem_and_subset
+        (show (AffineSpace I T ↘ T) y ∈ (⊤ : T.Opens) from trivial)
+      have hm : y ∈ (AffineSpace.map I hU.fromSpec).opensRange := by
+        rw [affineSpaceChartRange I ⟨U, hU⟩]
+        exact hy
+      exact ⟨⟨U, hU⟩, hm⟩)
+  apply IsZariskiLocalAtTarget.of_openCover (P := MorphismProperty.isomorphisms Scheme) 𝒰
+  intro U
+  obtain ⟨t, hi, he⟩ := ht U
+  have hp : IsPullback t (f ⁻¹ᵁ U.1).ι (AffineSpace.map I U.2.fromSpec) h := by
+    apply IsOpenImmersion.isPullback _ _ _ _ he
+    rw [affineSpaceChartRange, ← Scheme.Hom.comp_preimage, w, Scheme.Opens.opensRange_ι]
+  change IsIso (pullback.snd h (AffineSpace.map I U.2.fromSpec))
+  rw [← hp.flip.isoPullback_inv_snd]
+  infer_instance
 
 /-- The frame induces an affine-space isomorphism over V with the zero section at the origin.
 Source: blueprint order 1968 and Stacks Tag 01M2
@@ -343,7 +859,36 @@ theorem trivializationMap_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : 
       AffineSpace (ULift.{u} (Fin d)) V.toScheme ↘ V.toScheme = (π S d F) ∣_ V) ∧
     (zeroRestricted S d F V ≫ trivializationMap S d F V e =
       AffineSpace.zeroSection (ULift.{u} (Fin d)) V.toScheme) := by
-  sorry
+  have ho : trivializationMap S d F V e ≫
+      AffineSpace (ULift.{u} (Fin d)) V.toScheme ↘ V.toScheme = (π S d F) ∣_ V :=
+    AffineSpace.homOfVector_over _ _
+  refine ⟨?_, ho, ?_⟩
+  · apply isIso_of_affineSpace_charts (ULift.{u} (Fin d)) ((π S d F) ∣_ V) _ ho
+    intro U
+    let eX := (((π S d F) ⁻¹ᵁ V).ι.isoImage (((π S d F) ∣_ V) ⁻¹ᵁ U.1)).trans
+      ((scheme S d F).isoOfEq (image_morphismRestrict_preimage (π S d F) V U.1))
+    have hi : eX.hom ≫ (scheme S d F).homOfLE
+        ((π S d F).preimage_mono (V.ι_image_le U.1)) =
+        (((π S d F) ∣_ V) ⁻¹ᵁ U.1).ι := by
+      apply (cancel_mono ((π S d F) ⁻¹ᵁ V).ι).mp
+      dsimp only [eX, Iso.trans_hom]
+      simp only [Category.assoc, Scheme.homOfLE_ι, Scheme.isoOfEq_hom_ι,
+        Scheme.Hom.isoImage_hom_ι]
+    refine ⟨eX.hom ≫ frameChart S d F V e U, ?_, ?_⟩
+    · have := frameChart_isIso S d F V e U
+      infer_instance
+    · rw [← hi, Category.assoc, frameChart_comp_map, Category.assoc]
+  · apply AffineSpace.hom_ext
+    · rw [Category.assoc, ho, AffineSpace.zeroSection_over]
+      apply (cancel_mono V.ι).mp
+      simp only [morphismRestrict_ι, zeroRestricted,
+        Scheme.Hom.resLE_comp_ι_assoc, Category.assoc, (zero_spec S d F).1,
+        Category.comp_id, Category.id_comp]
+    · intro i
+      dsimp only [trivializationMap]
+      rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+        AffineSpace.homOfVector_appTop_coord, AffineSpace.zeroSection_appTop_coord]
+      exact zero_coordinateMap S d F V (frameSection S d F V e i.down)
 
 /-- Two frames on an overlap differ by an invertible matrix of regular functions, and the
 same matrix changes their degree-one coordinates (with no transpose or dual convention).
@@ -365,6 +910,25 @@ theorem transition_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modul
       (∀ j : Fin d,
         coordinate S d F W e' j = ∑ i : Fin d,
           ((π S d F) ∣_ W).appTop (W.topIso.inv (G i j)) * coordinate S d F W e i) := by
-  sorry
+  classical
+  let b := frameBasis S d F W e
+  let b' := frameBasis S d F W e'
+  let G := (b.toMatrix b').map W.topIso.hom
+  let H := (b'.toMatrix b).map W.topIso.hom
+  have hG : G * H = 1 := by
+    rw [← Matrix.map_mul, Module.Basis.toMatrix_mul_toMatrix_flip]
+    exact Matrix.map_one _ (map_zero _) (map_one _)
+  have hH : H * G = 1 := by
+    rw [← Matrix.map_mul, Module.Basis.toMatrix_mul_toMatrix_flip]
+    exact Matrix.map_one _ (map_zero _) (map_one _)
+  have hf (j : Fin d) :
+      frameSection S d F W e' j = ∑ i : Fin d, G i j • frameSection S d F W e i := by
+    have h := congrArg (frameTransport S F W) (b.sum_toMatrix_smul_self b' j)
+    simpa only [map_sum, map_smulₛₗ, b, b', frameTransport_basis, G, Matrix.map_apply] using h.symm
+  refine ⟨G, H, hG, hH, hf, ?_⟩
+  intro j
+  have h := congrArg (coordinateMap S d F W) (hf j)
+  simpa only [map_sum, map_smulₛₗ, RingHom.comp_apply, smul_eq_mul,
+    coordinateMap_frame] using h
 
 end AlgebraicGeometry.VectorBundleZeroSection

@@ -41,9 +41,7 @@ def coneAlgebraIso {V S : Scheme.{u}} (s : S ⟶ V) [IsClosedImmersion s] :
             (PurityNormalBundle.normalCone s).sheaf) :=
   ((ObjectProperty.ι (fun B : S.CommAlgebraSheaf ↦ B.toModule.IsQuasicoherent)).mapIso
     ((VectorBundleZeroSection.antiEquivalence S).counitIso.app
-      (PurityNormalBundle.algebraObject s))).symm ≪≫
-    eqToIso ((affine_morphism_relative_spec S).2.choose_spec.choose
-      (PurityNormalBundle.over s))
+      (PurityNormalBundle.algebraObject s))).symm
 
 /-- The affine-chart inclusion in the actual Rees zero fibre.
 Source: extended-Rees gluing, sk-thm-dnc

@@ -77,8 +77,7 @@ private theorem relativeSpec_obj (S : Scheme.{u})
     ((VectorBundleZeroSection.antiEquivalence S).functor.obj (op Y)).obj =
       Under.mk (⟨Y.obj.hom.c⟩ : S.sheaf ⟶
         (TopCat.Sheaf.pushforward CommRingCat.{u} Y.obj.hom.base).obj Y.obj.left.sheaf) := by
-  simpa only [VectorBundleZeroSection.antiEquivalence] using
-    (affine_morphism_relative_spec S).2.choose_spec.choose Y
+  rfl
 
 private theorem relativeSpec_map (S : Scheme.{u})
     (Y Y' : ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))
@@ -89,8 +88,8 @@ private theorem relativeSpec_map (S : Scheme.{u})
         h.hom.left.appLE (Y'.obj.hom ⁻¹ᵁ U) (Y.obj.hom ⁻¹ᵁ U)
           (by rw [← Over.w h.hom, Scheme.Hom.comp_preimage]) ≫
         eqToHom (by rw [relativeSpec_obj S Y]; rfl) := by
-  simpa only [VectorBundleZeroSection.antiEquivalence] using
-    (affine_morphism_relative_spec S).2.choose_spec.choose_spec.choose_spec.1 Y Y' h U
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+  rfl
 
 private theorem functor_section_app (S : Scheme.{u})
     {P : ObjectProperty S.CommAlgebraSheaf}
@@ -163,7 +162,8 @@ theorem coneZeroSection_app {V S : Scheme.{u}} (s : S ⟶ V)
   have h6 := h5 (hmap B Y h U)
   have hs := h6 he
   simpa only [coneAlgebraIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_inv,
-    ObjectProperty.ι_map, eqToIso.hom, PurityNormalBundle.over,
+    ObjectProperty.ι_map, eqToIso.hom, eqToHom_refl, Category.comp_id,
+    PurityNormalBundle.over,
     VectorBundleZeroSection.antiEquivalence, A, B, Y, h, ε, E,
     PurityNormalBundle.zeroSection, PurityNormalBundle.projection,
     VectorBundleZeroSection.baseObject, Over.mk_hom, Scheme.Hom.id_preimage] using hs
