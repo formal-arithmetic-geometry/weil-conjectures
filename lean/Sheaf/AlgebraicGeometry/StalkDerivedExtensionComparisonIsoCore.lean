@@ -7,8 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
 public import Sheaf.Algebra.Homology.KFlat
 import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
+import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 
 /-! Natural comparison transformation for the derived stalk extension.
 (blueprint: lem-pc-stalk-derived-extension-comparison-core) -/
@@ -170,22 +169,40 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
     have : (derivedPullback g').IsLeftDerivedFunctor (counit g') W :=
       (Classical.choose (Classical.choose_spec
         (Classical.choose_spec exists_derivedPullbackComposition))) g'
-    have : G.PreservesKFlatQuasiIso := by
-      refine ⟨?_⟩
-      intro P Q hP hQ s hs
-      have toIsKFlat (P : CochainComplex A₀ ℤ)
-          (hP : (HomologicalComplex.quasiIso A₀ (.up ℤ)).kFlat P) :
-          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P := by
-        intro F hF
-        have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
-          ((HomotopyCategory.quotient A₀ (.up ℤ)).obj P)).mp
-            ((HomotopyCategory.kFlat_quotient_obj_iff P).mpr hP)
-        exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
-          (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF)).2
-      exact tensorPullback_quasiIso_of_isKFlat g' s (toIsKFlat P hP) (toIsKFlat Q hQ) hs
+    obtain ⟨_, _, _, _, _, _, _, E₀, hE₀, hE₀map, _, ε₀, hε₀, _, hK₀⟩ :=
+      derivedPullback_spec g'
+    have hE : E₀ = G := CategoryTheory.Functor.ext hE₀ (fun _ _ a ↦ hE₀map a)
+    subst E₀
+    have := hε₀
+    let e := Functor.leftDerivedNatIso (derivedPullback g') (derivedPullback g')
+      (counit g') ε₀ W (Iso.refl _)
     exact W.localizerMorphismKFlat
       |>.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure (counit g')
-        (fun P ↦ G.derives_kFlat.isIso_of_isLeftDerivedFunctor (counit g') P)
+        (by
+          rintro ⟨P, hP⟩
+          obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+          have hK : CochainComplex.IsKFlatTensor (R := X.sheaf) K := by
+            intro F hF
+            have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
+              ((HomotopyCategory.quotient A₀ (.up ℤ)).obj K)).mp hP
+            exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
+              (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr
+                hF)).2
+          have := hK₀ K hK
+          have he := Functor.leftDerivedNatTrans_app (derivedPullback g')
+            (derivedPullback g') (counit g') ε₀ W (𝟙 _)
+            ((HomotopyCategory.quotient A₀ (.up ℤ)).obj K)
+          change e.hom.app (DerivedCategory.Q.obj K) ≫ ε₀.app _ =
+            (counit g').app _ ≫ 𝟙 _ at he
+          rw [Category.comp_id] at he
+          change IsIso ((counit g').app
+            ((HomotopyCategory.quotient A₀ (.up ℤ)).obj K))
+          have hcomp : IsIso (e.hom.app (DerivedCategory.Q.obj K) ≫
+              ε₀.app ((HomotopyCategory.quotient A₀ (.up ℤ)).obj K)) := by
+            have : IsIso (e.hom.app (DerivedCategory.Q.obj K)) :=
+              (e.app (DerivedCategory.Q.obj K)).isIso_hom
+            infer_instance
+          exact he ▸ hcomp)
         (comparisonDerivedStalk X' z)
   have := hT
   let Sc := St.mapHomologicalComplex (.up ℤ)

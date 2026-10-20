@@ -25,10 +25,10 @@
    "elementary": true
   },
   {
-   "text": "Install the sheaf tensor, closed and Grothendieck structures and schemeModule_hasFunctorialFlatResolution. Translate the upstream K-flat predicate to the recorded sheaf IsKFlat predicate. Tensor pullback preserves quasi-isomorphisms between such complexes. Its universal counit therefore computes it on the K-flat left derivability structure. Apply the proved upstream LocalizerMorphism.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure to postcompose with comparisonDerivedStalk; this gives the universal property of derivedPullback followed by exact stalk, with the whiskered recorded counit.",
+   "text": "Install the sheaf tensor, closed and Grothendieck structures and schemeModule_hasFunctorialFlatResolution, giving the K-flat left derivability structure. Obtain from derivedPullback_spec a left-derived tensor-pullback counit epsilon_0 which is invertible on sheaf K-flat complexes. Identify its underived functor with the recorded tensorPullback by its object and map equations. The recorded composition counit and epsilon_0 are universal pairs for the same functor, so leftDerivedNatIso gives a counit-compatible automorphism of derivedPullback. For a categorical K-flat homotopy object choose a complex representative and translate its K-flat property using kFlat_iff_preserves_acyclic. The compatibility equation expresses the recorded counit component as the isomorphism component followed by epsilon_0. Thus it too is invertible on the K-flat left derivability structure. Apply LocalizerMorphism.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure to postcompose with comparisonDerivedStalk, obtaining the universal property for the whiskered recorded counit. No separate tensor-pullback quasi-isomorphism preservation result is used.",
    "uses": [
     "def-pc-scheme-derived-tensor-structure",
-    "lem-pc-tensor-pullback-kflat-quasi-iso",
+    "def-pc-derived-pullback",
     "lem-pc-ringed-spaces-derived-pullback-composition",
     "lem-pc-stalk-comparison-source-transport"
    ],
@@ -44,19 +44,19 @@
   }
  ],
  "proof_deps": [
+  "def-pc-derived-pullback",
   "def-pc-scheme-derived-tensor-structure",
   "def-pc-single-complex-base-change-stalk-condition",
   "lem-pc-ringed-spaces-derived-pullback-composition",
   "lem-pc-stalk-comparison-source-transport",
-  "lem-pc-tensor-pullback-kflat-quasi-iso",
   "lem-weil-pbc-module-stalk-pullback"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A3",
-  "date": "2026-10-13",
+  "group": "J6",
+  "date": "2026-10-20",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "equation-bc preceding Tag 0DJ8; existing K-flat derivability and left-derived universal-property constructions in the Lean library"
+  "place": "equation-bc preceding Tag 0DJ8; use derivedPullback_spec and uniqueness of left derived functors for the K-flat counit, then the existing localization lift"
  },
  "mathlib_searches": [
   {
@@ -138,13 +138,11 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "J6",
   "result": "pass",
-  "landing": "20261020T145526-L-2407137",
+  "landing": "20261020T150648-L-2559364",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
