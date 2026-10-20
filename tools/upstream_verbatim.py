@@ -8,7 +8,10 @@ source's tip takes the tip's text. What only our version had moves out of the up
     the tip has; our modules that import the upstream file and name one of those declarations import the companion
     too, and the DAG nodes recording them point at it;
   * a proof of ours of a declaration whose tip body is only `sorry`, with the same statement, is kept (filling an
-    upstream sorry is the one change of an upstream file allowed in live).
+    upstream sorry is the one change of an upstream file allowed in live). A file keeping such a proof also keeps our
+    `WeilConjectures.*` and `Mathlib.*` import lines the tip lacks, after the tip's last import. No `Sheaf.*` import
+    goes into an upstream file (the human, 2026-10-21): a proof naming a declaration of a `Sheaf` module our file
+    imports is not kept, and the declaration stays `sorry` as upstream has it.
 
 Files listed in coord/upstream-statement-exceptions.tsv keep our version. Upstream files we deleted stay deleted, and
 lean/WeilConjectures.lean takes the tip's text without the imports of modules not in lean/. What does not compile
@@ -91,6 +94,42 @@ def companion(mod: str, ours: str, extra_keys: set[str], decl_o) -> str:
               "tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live). -/\n\n" + rest.lstrip("\n"))
 
 
+def sheaf_names(ours: str) -> set[str]:
+    """the declarations of the Sheaf modules our file imports (transitively through Sheaf modules), as every dotted
+    suffix of their names: the ways a proof can name them"""
+    seen, todo, names = set(), [m for m in IMPORT.findall(ours) if m.startswith("Sheaf.")], set()
+    while todo:
+        m = todo.pop()
+        if m in seen:
+            continue
+        seen.add(m)
+        f = li.file_of(m)
+        if not f.is_file():
+            continue
+        t = f.read_text(errors="replace")
+        names |= {".".join(q.split(".")[i:]) for q in li.decls_in_text(t) for i in range(q.count(".") + 1)}
+        todo += [i for i in IMPORT.findall(t) if i.startswith("Sheaf.")]
+    return names
+
+
+def with_imports(new: str, ours: str, tipt: str, mod: str) -> str:
+    """`new` with our WeilConjectures.* and Mathlib.* import lines that the tip lacks, after the tip's last import"""
+    have = set(IMPORT.findall(tipt)) | {mod}
+    add, seen = [], set()
+    for l in ours.split("\n"):
+        m = IMPORT.match(l)
+        if m and m.group(1) not in have and m.group(1) not in seen and m.group(1).split(".")[0] in ("WeilConjectures", "Mathlib"):
+            add.append(l.rstrip()); seen.add(m.group(1))
+    if not add:
+        return new
+    lines = new.split("\n")
+    last = max((i for i, l in enumerate(lines) if IMPORT.match(l)), default=None)
+    if last is None:
+        return new
+    lines[last + 1:last + 1] = add
+    return "\n".join(lines)
+
+
 def run(tip: str, up: str, write: bool = True) -> dict:
     exc = exceptions()
     tf = tip_files(up, tip)
@@ -103,7 +142,7 @@ def run(tip: str, up: str, write: bool = True) -> dict:
     tipb = blobs(up, [tf[r] for r in cand] + ([tf["WeilConjectures.lean"]] if "WeilConjectures.lean" in tf else []))
     prev: dict[str, bytes | None] = {}
     moved: dict[str, dict[str, str]] = {}      # upstream module -> {declaration key: companion module}
-    fills = 0
+    fills = sheaf_dropped = 0
     stats = collections.Counter()
     for rel in cand:
         p = live[rel]
@@ -122,6 +161,8 @@ def run(tip: str, up: str, write: bool = True) -> dict:
         new = tipt
         ok = {key(d): d for d in do}
         xshort = {k.split(".")[-1] for k in extra if not k.startswith("instance ")}
+        sheaf = sheaf_names(ours)
+        kept = 0
         for d in sorted(dt, key=lambda d: d["start"], reverse=True):
             o = ok.get(key(d))
             body_o = ours[o["start"]:o["end"]] if o else ""
@@ -129,8 +170,15 @@ def run(tip: str, up: str, write: bool = True) -> dict:
                     " ".join((o["statement"] or "").split()) == " ".join((d["statement"] or "").split()) and \
                     not any(re.search(r"(?<![\w'])" + re.escape(n) + r"(?![\w'])", body_o) for n in xshort):
                 # (a proof that uses a declaration moved to the companion cannot stay in the upstream file)
+                if any(re.search(r"(?<![\w'.])" + re.escape(n) + r"(?![\w'])", body_o) for n in sheaf):
+                    sheaf_dropped += 1      # it needs a Sheaf module: no Sheaf import in an upstream file
+                    continue
                 new = new[:d["start"]] + ours[o["start"]:o["end"]] + new[d["end"]:]
-                fills += 1
+                fills += 1; kept += 1
+        if kept:
+            new = with_imports(new, ours, tipt, mod)
+        if new == ours:
+            continue
         prev[rel] = ours_b
         stats["to tip"] += 1
         if write:
@@ -202,7 +250,7 @@ def run(tip: str, up: str, write: bool = True) -> dict:
             nodes.append(str(p.relative_to(ROOT)))
             if write:
                 p.write_text(json.dumps(n, ensure_ascii=False, indent=1) + "\n")
-    return {"lean": prev, "nodes": nodes, "moved": {m: sorted(v) for m, v in moved.items()}, "fills": fills,
+    return {"lean": prev, "nodes": nodes, "moved": {m: sorted(v) for m, v in moved.items()}, "fills": fills, "sheaf_dropped": sheaf_dropped,
             "consumers": consumers, "stats": dict(stats)}
 
 
@@ -213,7 +261,8 @@ def main() -> int:
     if "--json" in a:
         pathlib.Path(a[a.index("--json") + 1]).write_text(json.dumps({k: v for k, v in r.items() if k != "lean"}, indent=1))
     print(f"upstream verbatim: {r['stats']}; {sum(len(v) for v in r['moved'].values())} declarations of ours moved to "
-          f"{len(r['moved'])} companion modules; {r['fills']} proofs of upstream sorries kept; {r['consumers']} consumers "
+          f"{len(r['moved'])} companion modules; {r['fills']} proofs of upstream sorries kept, "
+          f"{r['sheaf_dropped']} not kept (they need a Sheaf module); {r['consumers']} consumers "
           f"import a companion; {len(r['nodes'])} DAG nodes re-pointed" + (" (dry run)" if "--dry-run" in a else ""))
     return 0
 
