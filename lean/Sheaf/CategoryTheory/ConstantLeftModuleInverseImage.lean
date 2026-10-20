@@ -5,6 +5,8 @@ Authors: SHEAF group Q43
 -/
 module
 
+public import Sheaf.CategoryTheory.ConstantLeftModuleTransport
+
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -16,214 +18,22 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.Algebra.Homology.CochainComplexPlus
-import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
-import Sheaf.CategoryTheory.ContinuousCocontinuousToposAdjunctionForCoverings
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImageCoherence
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresObjects
 
-/-!
-# Exact inverse image for constant left-module sheaves
+/-! # Coherent and derived constant left-module inverse image
 
-Source: Stacks Project, Sites, Proposition 00YV (2), (5), (6), its fixed-ring
-scalar-endomorphism proof, and Section 00XZ; Derived Categories, Tag 015F
-(blueprint: lem-pe-constant-left-module-inverse-image).
-
-The lift is characterized by its underlying-set comparison, addition and scalar
-endomorphisms, and the original geometric adjunction unit. Comparisons have a
-normalization equation and uniqueness; arbitrary unrelated functors are never compared.
+Source: Stacks Project, Sites, Proposition 00YV and Section 00XZ; Derived Categories,
+Tag 015F (blueprint: lem-pe-constant-left-module-inverse-image).
 -/
 
 @[expose] public noncomputable section
 
 set_option autoImplicit false
 universe u w
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
-namespace ConstantLeftModuleInverseImage
-
-/-- Constant-coefficient module sheaves, using the recorded general-site category.
-Source: Stacks, 00YV (6) (blueprint: lem-pe-constant-left-module-inverse-image). -/
-abbrev Modules {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] :=
-  ringedSiteModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))
-
-/-- Forget constant scalars, retaining the abelian sheaf.
-Source: Stacks, 00YV (6) (blueprint: lem-pe-constant-left-module-inverse-image). -/
-abbrev V {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] :
-    Modules J Λ ⥤ Sheaf J AddCommGrpCat.{u} :=
-  SheafOfModules.toSheaf ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))
-
-/-- Forget the abelian group structure.
-Source: Stacks, 00YV (2) (blueprint: lem-pe-constant-left-module-inverse-image). -/
-abbrev U {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) :
-    Sheaf J AddCommGrpCat.{u} ⥤ Sheaf J (Type u) :=
-  sheafCompose J (forget AddCommGrpCat.{u})
-
-/-- The underlying-set functor on constant-coefficient modules.
-Source: Stacks, 00YV (6) (blueprint: lem-pe-constant-left-module-inverse-image). -/
-abbrev W {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] :
-    Modules J Λ ⥤ Sheaf J (Type u) := V J Λ ⋙ U J
-
-/-- Characterization of a sheaf's addition map by its values on sections.
-The projections allow arbitrary choices of categorical products.
-Source: Stacks, discussion preceding 00YV
-(blueprint: lem-pe-constant-left-module-inverse-image). -/
-def IsAddition {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    (A : Sheaf J AddCommGrpCat.{u})
-    (a : (U J).obj A ⨯ (U J).obj A ⟶ (U J).obj A) : Prop :=
-  ∀ (T : Cᵒᵖ) (x : ((U J).obj A ⨯ (U J).obj A).obj.obj T),
-    a.hom.app T x =
-      @id (A.obj.obj T)
-        ((prod.fst : (U J).obj A ⨯ (U J).obj A ⟶ (U J).obj A).hom.app T x) +
-      @id (A.obj.obj T)
-        ((prod.snd : (U J).obj A ⨯ (U J).obj A ⟶ (U J).obj A).hom.app T x)
-
-/-- A constant scalar endomorphism of the underlying abelian sheaf. This is
-not required to be a module morphism when the ring is noncommutative.
-Source: Stacks, fixed-ring paragraph in the proof of 00YV
-(blueprint: lem-pe-constant-left-module-inverse-image). -/
-def IsScalar {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}]
-    (M : Modules J Λ) (r : Λ) (a : (V J Λ).obj M ⟶ (V J Λ).obj M) : Prop :=
-  ∀ (T : Cᵒᵖ) (x : M.val.obj T),
-    a.hom.app T x =
-      ((toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).app T r) • x
-
-/-- The underlying set sheaf of the sheafified constant ring `Λ_C`.
-Source: Stacks, 00YV (2) and 0H7J (blueprint: lem-pe-constant-left-module-inverse-image). -/
-abbrev CoeffSet {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] : Sheaf J (Type u) :=
-  (sheafCompose J (forget RingCat.{u})).obj ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))
-
-/-- Characterization of the addition map of the constant ring sheaf by its values
-on sections. Source: Stacks, ring paragraph of the proof of 00YV
-(blueprint: lem-pe-constant-left-module-inverse-image). -/
-def IsRingAdd {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}]
-    (m : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ) : Prop :=
-  ∀ (T : Cᵒᵖ) (x : (CoeffSet J Λ ⨯ CoeffSet J Λ).obj.obj T),
-    m.hom.app T x =
-      @id (((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)).obj.obj T)
-        ((prod.fst : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ).hom.app T x) +
-      @id (((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)).obj.obj T)
-        ((prod.snd : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ).hom.app T x)
-
-/-- Characterization of the multiplication map of the constant ring sheaf by its
-values on sections, in the given order (no commutativity). Source: Stacks, ring
-paragraph of the proof of 00YV (blueprint: lem-pe-constant-left-module-inverse-image). -/
-def IsRingMul {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}]
-    (m : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ) : Prop :=
-  ∀ (T : Cᵒᵖ) (x : (CoeffSet J Λ ⨯ CoeffSet J Λ).obj.obj T),
-    m.hom.app T x =
-      @id (((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)).obj.obj T)
-        ((prod.fst : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ).hom.app T x) *
-      @id (((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)).obj.obj T)
-        ((prod.snd : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ).hom.app T x)
-
-end ConstantLeftModuleInverseImage
 open ConstantLeftModuleInverseImage
-
-/-- A normalized lift of the given geometric morphism. The set comparisons and
-unit equations connect both adjunctions to `L ⊣ R`; addition and scalar equations
-specify the transported operations. Zero and negation are determined by addition.
-The ring comparison is normalized on every scalar summand of the constant sheaf
-(these summands determine it uniquely) and carries the addition and multiplication
-transported by `L` to those of the target constant ring.
-Source: Stacks, 00YV (2), (5), (6), 0H7J, and the node's proof steps 1--6
-(blueprint: lem-pe-constant-left-module-inverse-image). -/
-structure ConstantLeftModuleInverseImageLift
-    {C D : Type u} [SmallCategory C] [SmallCategory D]
-    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
-    (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}]
-    [HasWeakSheafify K RingCat.{u}]
-    (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
-    (R : Sheaf K (Type u) ⥤ Sheaf J (Type u))
-    (adj : L ⊣ R) (hL : PreservesFiniteLimits L) where
-  /-- The comparison `f⁻¹|Λ_C| ≅ |Λ_D|`, written on `L` of the constant set sheaf. -/
-  ringUnderlying :
-    L.obj ((constantSheaf J (Type u)).obj Λ) ≅
-      (sheafCompose K (forget RingCat.{u})).obj
-        ((constantSheaf K RingCat.{u}).obj (RingCat.of Λ))
-  /-- The comparison carries the addition `L(+) ∘ p⁻¹` transported by `L` to the
-  addition of `Λ_D`. -/
-  ring_add : ∀ (m : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ)
-    (m' : CoeffSet K Λ ⨯ CoeffSet K Λ ⟶ CoeffSet K Λ),
-    IsRingAdd J Λ m → IsRingAdd K Λ m' →
-      inv (prodComparison L (CoeffSet J Λ) (CoeffSet J Λ)) ≫ L.map m ≫
-          L.map ((constantCommuteCompose J (forget RingCat.{u})).hom.app (RingCat.of Λ)) ≫
-          ringUnderlying.hom =
-        prod.map
-          (L.map ((constantCommuteCompose J (forget RingCat.{u})).hom.app (RingCat.of Λ)) ≫
-            ringUnderlying.hom)
-          (L.map ((constantCommuteCompose J (forget RingCat.{u})).hom.app (RingCat.of Λ)) ≫
-            ringUnderlying.hom) ≫ m'
-  /-- The comparison carries the multiplication `L(μ) ∘ p⁻¹` transported by `L`
-  to the multiplication of `Λ_D`. With `ring_add`, the bijectivity of the
-  comparison and `constant_scalar` at `0` and `1`, it is a ring-sheaf isomorphism
-  from the transported ring structure on `f⁻¹Λ_C` to `Λ_D`. -/
-  ring_mul : ∀ (m : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ)
-    (m' : CoeffSet K Λ ⨯ CoeffSet K Λ ⟶ CoeffSet K Λ),
-    IsRingMul J Λ m → IsRingMul K Λ m' →
-      inv (prodComparison L (CoeffSet J Λ) (CoeffSet J Λ)) ≫ L.map m ≫
-          L.map ((constantCommuteCompose J (forget RingCat.{u})).hom.app (RingCat.of Λ)) ≫
-          ringUnderlying.hom =
-        prod.map
-          (L.map ((constantCommuteCompose J (forget RingCat.{u})).hom.app (RingCat.of Λ)) ≫
-            ringUnderlying.hom)
-          (L.map ((constantCommuteCompose J (forget RingCat.{u})).hom.app (RingCat.of Λ)) ≫
-            ringUnderlying.hom) ≫ m'
-  pointIso : L.obj ((constantSheaf J (Type u)).obj PUnit.{u+1}) ≅
-    (constantSheaf K (Type u)).obj PUnit.{u+1}
-  constant_scalar : ∀ r : Λ,
-    L.map ((constantSheaf J (Type u)).map
-      (TypeCat.ofHom (fun _ : PUnit.{u+1} ↦ r))) ≫ ringUnderlying.hom ≫
-      (constantCommuteCompose K (forget RingCat.{u})).hom.app (RingCat.of Λ) =
-      pointIso.hom ≫ (constantSheaf K (Type u)).map
-        (TypeCat.ofHom (fun _ : PUnit.{u+1} ↦ r))
-  moduleFunctor : Modules J Λ ⥤ Modules K Λ
-  moduleDirect : Modules K Λ ⥤ Modules J Λ
-  moduleAdj : moduleFunctor ⊣ moduleDirect
-  additive : moduleFunctor.Additive
-  preservesFiniteLimits : PreservesFiniteLimits moduleFunctor
-  preservesFiniteColimits : PreservesFiniteColimits moduleFunctor
-  abelianInverse : Sheaf J AddCommGrpCat.{u} ⥤ Sheaf K AddCommGrpCat.{u}
-  abelianDirect : Sheaf K AddCommGrpCat.{u} ⥤ Sheaf J AddCommGrpCat.{u}
-  abelianAdj : abelianInverse ⊣ abelianDirect
-  abelianSetIso : abelianInverse ⋙ U K ≅ U J ⋙ L
-  abelianDirectSetIso : abelianDirect ⋙ U J ≅ U K ⋙ R
-  abelian_addition : ∀ (A : Sheaf J AddCommGrpCat.{u})
-    (a : (U J).obj A ⨯ (U J).obj A ⟶ (U J).obj A)
-    (b : (U K).obj (abelianInverse.obj A) ⨯ (U K).obj (abelianInverse.obj A) ⟶
-      (U K).obj (abelianInverse.obj A)),
-    IsAddition J A a → IsAddition K (abelianInverse.obj A) b →
-      b ≫ abelianSetIso.hom.app A =
-        prod.map (abelianSetIso.hom.app A) (abelianSetIso.hom.app A) ≫
-          inv (prodComparison L ((U J).obj A) ((U J).obj A)) ≫ L.map a
-  abelian_unit : ∀ A : Sheaf J AddCommGrpCat.{u},
-    (U J).map (abelianAdj.unit.app A) ≫
-      abelianDirectSetIso.hom.app (abelianInverse.obj A) ≫
-      R.map (abelianSetIso.hom.app A) = adj.unit.app ((U J).obj A)
-  underlyingIso : moduleFunctor ⋙ V K Λ ≅ V J Λ ⋙ abelianInverse
-  directUnderlyingIso : moduleDirect ⋙ V J Λ ≅ V K Λ ⋙ abelianDirect
-  moduleSetIso : moduleFunctor ⋙ W K Λ ≅ W J Λ ⋙ L
-  moduleSetIso_compatibility : ∀ M : Modules J Λ,
-    (U K).map (underlyingIso.hom.app M) ≫ abelianSetIso.hom.app ((V J Λ).obj M) =
-      moduleSetIso.hom.app M
-  scalar_compatibility : ∀ (M : Modules J Λ) (r : Λ)
-    (a : (V J Λ).obj M ⟶ (V J Λ).obj M)
-    (b : (V K Λ).obj (moduleFunctor.obj M) ⟶ (V K Λ).obj (moduleFunctor.obj M)),
-    IsScalar J Λ M r a → IsScalar K Λ (moduleFunctor.obj M) r b →
-      b ≫ underlyingIso.hom.app M = underlyingIso.hom.app M ≫ abelianInverse.map a
-  unit_compatibility : ∀ M : Modules J Λ,
-    (V J Λ).map (moduleAdj.unit.app M) ≫
-      directUnderlyingIso.hom.app (moduleFunctor.obj M) ≫
-      abelianDirect.map (underlyingIso.hom.app M) = abelianAdj.unit.app ((V J Λ).obj M)
 
 /-- The lift with its normalized comparisons and actual termwise derived descent.
 Composition compares only lifts of `L ⋙ L₂`, and change of presentation compares
@@ -293,6 +103,16 @@ structure ConstantLeftModuleInverseImageData
       ∃ Fplus : DerivedCategory.Plus (Modules J Λ) ⥤ DerivedCategory.Plus (Modules K Λ),
         Nonempty (DerivedCategory.Plus.Q ⋙ Fplus ≅
           moduleFunctor.mapCochainComplexPlus ⋙ DerivedCategory.Plus.Q)
+
+private def boundedDerivedComparison
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    DerivedCategory.Plus.Q ⋙ F.mapDerivedCategoryPlus ≅
+      F.mapCochainComplexPlus ⋙ DerivedCategory.Plus.Q := by
+  apply Functor.fullyFaithfulCancelRight DerivedCategory.Plus.ι
+  exact NatIso.ofComponents (fun X ↦ F.mapDerivedCategoryFactors.app X.1)
+    (fun f ↦ F.mapDerivedCategoryFactors.hom.naturality f.hom)
 
 /-- A geometric inverse image canonically lifts to exact inverse image on left
 modules over the sheafified constant ring, with normalized ring, abelian, unit,
@@ -463,6 +283,43 @@ theorem constant_left_module_inverse_image
     (R : Sheaf K (Type u) ⥤ Sheaf J (Type u))
     (adj : L ⊣ R) (hL : PreservesFiniteLimits L) :
     Nonempty (ConstantLeftModuleInverseImageData.{u, w} J K Λ L R adj hL) := by
-  sorry
+  classical
+  obtain ⟨d⟩ := constantLeftModuleTransport J K Λ L R adj hL
+  let := d.additive
+  let := d.preservesFiniteLimits
+  let := d.preservesFiniteColimits
+  obtain ⟨coh⟩ := constantLeftModuleInverseImageCoherence J K Λ L R adj hL d
+  refine ⟨{ d with
+    composition_coherence := ?_
+    presentation_coherence := ?_
+    localization_coherence := ?_
+    termwise_quasiIso := ?_
+    derivedFunctor := ?_ }⟩
+  · intro E _ H _ L₂ R₂ adj₂ hL₂ d₂ d₃
+    obtain ⟨i, hi⟩ := coh.composition_coherence H L₂ R₂ adj₂ hL₂ d₂ d₃
+    refine ⟨i, hi, ?_⟩
+    intro j hj
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply (W H Λ).map_injective
+    apply (cancel_mono (d₂.moduleSetIso.hom.app (d.moduleFunctor.obj M) ≫
+      L₂.map (d.moduleSetIso.hom.app M))).mp
+    simpa only [Category.assoc] using (hj M).trans (hi M).symm
+  · intro L' R' adj' hL' d' e
+    obtain ⟨i, hi⟩ := coh.presentation_coherence L' R' adj' hL' d' e
+    refine ⟨i, hi, ?_⟩
+    intro j hj
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply (W K Λ).map_injective
+    apply (cancel_mono (d'.moduleSetIso.hom.app M)).mp
+    exact (hj M).trans (hi M).symm
+  · exact coh.localization_coherence
+  · intro _ X Y f hf
+    exact d.moduleFunctor.preservesQuasiIso_mapHomologicalComplex (ComplexShape.up ℤ) f hf
+  · intro _ _ _
+    exact ⟨d.moduleFunctor.mapDerivedCategoryPlus, ⟨boundedDerivedComparison d.moduleFunctor⟩⟩
 
 end CategoryTheory

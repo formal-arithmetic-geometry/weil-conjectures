@@ -1,0 +1,148 @@
+{
+ "id": "lem-pe-constant-left-module-inverse-image-coherence",
+ "kind": "statement",
+ "title": "Existence of normalized constant left-module comparisons",
+ "statement": "Given a normalized exact lift d over small sites J,K and an arbitrary ring Λ, normalized module isomorphisms exist for composition and a specified isomorphism of set inverse images. For each object X of the source site, restriction to J.over X admits a geometric adjunction and a lift identified sectionwise with module restriction followed by restriction of scalars along the constant-ring localization isomorphism. No uniqueness is assumed here; the parent proves uniqueness by faithful forgetting and cancellation. The underlying notions are [def-weil-sheaf-of-modules-category], [def-weil-pbc-constant-sheaf], [def-weil-pbc-sites-and-cohomology] and [def-weil-size-convention].",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, parts (2), (5), (6), and its fixed-ring scalar-endomorphism proof; constant objects via the composite inverse image from the point"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Apply AddCommGrpCat.leftExactFunctorForgetEquivalence sectionwise to lift a natural transformation between the underlying sets of finite-limit-preserving module functors to an abelian transformation. If it commutes with each constant scalar endomorphism, restrictHomEquivOfIsLocallySurjective for toSheafify extends the map uniquely to a module morphism. Faithful forgetting proves naturality; reflection of isomorphisms lifts a set natural isomorphism.",
+   "uses": [
+    "lem-exc-left-exact-functor-forget-equivalence",
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a presentation comparison, conjugate the specified set natural isomorphism by the two moduleSetIso comparisons. Naturality and scalar_compatibility show that this transformation commutes with constant scalar endomorphisms, so the preceding lifting construction gives the required normalized module isomorphism. For composition use the composite of the two moduleSetIso comparisons and apply scalar_compatibility twice. The stated normalization equations follow by cancellation.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the over-site, use Mathlib overPullback, sheafAdjunctionCocontinuous and its finite-limit preservation, and apply constantLeftModuleTransport. Use pushforwardContinuousSheafificationCompatibility for the over-forgetful functor to identify the restricted constant ring with the constant ring on the over-site; the toSheafify compatibility equation proves its normalization on scalars. Sectionwise module restriction followed by restrictScalars along the inverse ring comparison has the same underlying set functor and constant scalar maps. It preserves finite limits by reflection through forgetting. Lift the normalized set comparison by the preceding construction, obtaining the claimed module isomorphism and section equation.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-pe-constant-left-module-transport",
+    "lem-pur-ring-presheaf-sheafification-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-exc-left-exact-functor-forget-equivalence",
+  "lem-pe-constant-left-module-transport",
+  "lem-pur-ring-presheaf-sheafification-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00YV and 00XZ/00Y0, implemented using the fully faithful sectionwise left-exact-functor equivalence, locally-surjective scalar restriction, and the over-site adjunction and sheafification compatibility APIs. All comparison existence clauses are proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image for constant left module sheaves and normalized composition comparisons",
+   "results": "CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.mem_essImage_of_isConstant; CategoryTheory.constantCommuteCompose; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.constantSheafΓAdj; CategoryTheory.instIsConstantObjSheafSheafCompose; CategoryTheory.Sheaf.IsConstant.mem_essImage; SheafOfModules.pullbackComp",
+   "date": "2026-10-18",
+   "verdict": "No complete theorem for the required arbitrary-ring lift and comparisons; use the existing exact-derived and local-linearity APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite limit preserving left adjoint on sheaves of sets lifts to exact functor of sheaves of modules over constant ring",
+   "results": "SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.Finite.evaluationPreservesFiniteLimits; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf; CategoryTheory.HasSheafify.isLeftExact; PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf; SheafOfModules.Finite.forgetPreservesFiniteLimits; SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-18",
+   "verdict": "No complete theorem for the required arbitrary-ring lift and comparisons; use the existing exact-derived and local-linearity APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryFactors",
+   "results": "loogle: unknown identifier 'Functor.mapDerivedCategoryFactors'",
+   "date": "2026-10-18",
+   "verdict": "No complete theorem for the required arbitrary-ring lift and comparisons; use the existing exact-derived and local-linearity APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "mapCommGrp|ConstantLeftModule|constant.*[Mm]odule.*[Ii]nverse",
+   "results": "Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean; Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean",
+   "date": "2026-10-18",
+   "verdict": "No complete theorem for the required arbitrary-ring lift and comparisons; use the existing exact-derived and local-linearity APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ConstantLeftModuleInverseImage",
+  "date": "2026-10-19",
+  "group": "H3"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comparison-affine-continuity",
+   "place": "Blueprint proof Step 1, termwise exact comparison inverse image; the sentence asserting exact constant-coefficient module inverse image and compatibility with composition and localization.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantLeftModuleInverseImageCoherence",
+  "file": "lean/Sheaf/CategoryTheory/ConstantLeftModuleInverseImageCoherence.lean",
+  "declaration": "CategoryTheory.constantLeftModuleInverseImageCoherence",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-19",
+  "statement": "theorem constantLeftModuleInverseImageCoherence {C D : Type u} [SmallCategory C] [SmallCategory D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] [HasWeakSheafify K RingCat.{u}] (L : Sheaf J (Type u) ⥤ Sheaf K (Type u)) (R : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ R) (hL : PreservesFiniteLimits L) (d : ConstantLeftModuleInverseImageLift J K Λ L R adj hL) : Nonempty (ConstantLeftModuleInverseImageCoherence J K Λ L R adj hL d)",
+  "declarations": [
+   "CategoryTheory.ConstantLeftModuleInverseImageCoherence",
+   "CategoryTheory.constantLeftModuleInverseImageCoherence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-81273",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T154618-L-3136826",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-81273",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T154618-L-3136826",
+  "kind": "interface",
+  "note": "independent cc review: 81273bf3 Lean/DAG byte-identical to PASSed b1473c27/1afa1abf; only delta is the added ConstantTowerDirectImageNormalization Users row; all 21 mentioning modules and 19 direct importers are in the Users table; 10 moved declarations verbatim vs the live item; Data and theorem signature unchanged; --all compile clean (35.3/11.6/5.9 s); axioms propext/choice/Quot.sound for all 3 theorems; all 19 direct importers compile clean against the delivery"
+ }
+}

@@ -17,173 +17,38 @@
  ],
  "proof": [
   {
-   "text": "Write $L=f^{-1}$, $R=f_*$. By the constant-sheaf definition and sheafification universal property, maps from the constant set sheaf $\\underline E$ to a sheaf $H$ are families, indexed by $e\\in E$, of compatible sections of $H$, equivalently maps $*\\to H$. Thus $\\underline E$, with its scalar-section inclusions, is the coproduct of $E$ copies of the terminal sheaf $*$. The new ring-sheafification comparison identifies $|\\Lambda_{\\mathcal C}|$ and $|\\Lambda_{\\mathcal D}|$ with these constant set sheaves, including their scalar-section inclusions. The index set $\\Lambda$ is small in the chosen coefficient universe. Since $L$ is a left adjoint it preserves this coproduct, and since it preserves finite limits it sends $*$ to $*$. The coproduct universal properties therefore give mutually inverse maps $c:L|\\Lambda_{\\mathcal C}|\\to|\\Lambda_{\\mathcal D}|$ and $d$ carrying every scalar inclusion to the same scalar inclusion: each composite is the identity because it is so on every summand. No presheaf inverse image is used.",
+   "text": "Apply the normalized exact constant-left-module transport theorem to obtain the lift with its scalar and adjunction equations.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification",
-    "def-weil-size-convention",
-    "lem-pe-ring-sheafification-underlying-sets",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+    "lem-pe-constant-left-module-transport"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J, example-constant-sheaf; Tag 00YR (gamma); coproduct preservation is Categories Tag 0038, lemma-adjoint-exact"
-   }
+   "elementary": false
   },
   {
-   "text": "Transport the ring operations by $L$ using its canonical terminal and product comparisons. For example the multiplication is $L(\\mu)\\circ p^{-1}$, where $p:L(A\\times A)\\cong LA\\times LA$ and $A=|\\Lambda_{\\mathcal C}|$; zero and one use $L*\\cong *$. Applying the functor to each ring-axiom diagram gives the same identities after these comparisons, so this is an associative unital ring sheaf, with no commutativity requirement. Check that $c$ respects operations. For constant scalar maps $s_a,s_b:*\\to A$, functoriality and the product comparison give $L(\\mu)p^{-1}(Ls_a,Ls_b)=L(s_{ab})$; after $c$ this is $s_{ab}$ on $\\mathcal D$. The identical equation for addition has $a+b$ in place of $ab$, and constants and negation give $0,1,-a$. By the new comparison and the local-section theorem, sections of either constant ring are locally represented by constants. Two sections admit a common covering refinement; on it the preceding equations prove compatibility with each binary operation, and the sheaf uniqueness axiom then proves it globally. Thus $c$ is a ring-sheaf isomorphism carrying each scalar to itself.",
+   "text": "Obtain normalized composition, presentation and localization comparisons from the existence theorem. Prove uniqueness of composition and presentation comparisons by applying the faithful underlying-set functor and cancelling their normalized set isomorphisms.",
    "uses": [
-    "lem-pe-ring-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+    "lem-pe-constant-left-module-inverse-image-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, ring sextuple paragraph; Tag 00WK, lemma-sections-sheafification"
-   }
+   "elementary": false
   },
   {
-   "text": "The right adjoint $R$ preserves finite products. Apply the abelian-group-object adjunction lemma, and the equivalence between abelian sheaves and abelian group objects, to obtain $L_{\\rm Ab}\\dashv R_{\\rm Ab}$ with the original underlying set functors, unit and counit. For a module sheaf $M$, its action is a sheaf map $a_M:\\Lambda_{\\mathcal C}\\times M\\to M$: this is sectionwise the action in the module definition, and semilinearity is precisely its naturality. On $LM$ define the action by $L(a_M)p^{-1}(c^{-1}\\times1)$. Each module-axiom diagram uses only finite products, the ring operations and the action; applying $L$ and the comparisons proves its commutativity. Consequently this action, with the transported abelian operations, is a left $\\Lambda_{\\mathcal D}$-module sheaf. Applying $L$ to the action-compatibility equation for a module map proves that its image is linear, so this defines $f^*_{\\Lambda}$. Forgetting its action leaves exactly $L_{\\rm Ab}M$. Evaluating the action on a constant scalar $a$ shows that its unary scalar map is $L(\\lambda_a)$, as in the statement.",
-   "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-limits",
-    "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, proof of (2), ring paragraph, and fixed-ring module paragraph"
-   }
-  },
-  {
-   "text": "Define the module direct image as follows. The canonical ring map $\\gamma:\\Lambda_{\\mathcal C}\\to R\\Lambda_{\\mathcal D}$ is $R(c)\\circ\\eta_{\\Lambda_{\\mathcal C}}$. Naturality of $\\eta$ with respect to each ring operation, together with its product comparison, shows it is a ring map; composing with $R(c)$ preserves this property. Explicitly for a binary operation $m$ the identity is $\\eta_A m=R(L(m)p^{-1})\\,\\rho^{-1}(\\eta_A\\times\\eta_A)$, where $\\rho:R(LA\\times LA)\\cong RLA\\times RLA$; zero and one use the terminal comparison. These identities follow by naturality of $\\eta$ for $m$ and for the two projections. For a module $N$ on $\\mathcal D$, give $RN$ the action $R(a_N)\\rho^{-1}(\\gamma\\times1)$. The product-preserving functor $R$ sends the module-axiom diagrams to commuting diagrams, and restriction along the ring map $\\gamma$ gives the asserted module axioms. The same formula on maps defines a functor $f_{*,\\Lambda}$ with underlying $R_{\\rm Ab}$. On constant scalars its unary action is $R(\\lambda_a)$, since $\\gamma$ carries a constant scalar to its direct-image scalar section.",
-   "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-limits",
-    "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, induced adjunction and its fixed-ring module paragraph; unit naturality with finite products"
-   }
-  },
-  {
-   "text": "For an abelian map $\\alpha:L_{\\rm Ab}M\\to N$, put $\\beta=R_{\\rm Ab}(\\alpha)\\eta_M$. Naturality of the abelian adjunction bijection gives $\\operatorname{adj}(\\alpha\\circ L\\lambda_a)=\\beta\\circ\\lambda_a$ and $\\operatorname{adj}(\\lambda_a\\circ\\alpha)=R\\lambda_a\\circ\\beta$. Its injectivity therefore says that $\\alpha$ commutes with every constant scalar if and only if $\\beta$ does. A natural abelian map between constant-ring module sheaves commuting with the constant scalars commutes with every scalar section: represent that section by constants on a cover using the new sheafification comparison and the local-section theorem, use naturality and constant-scalar linearity there, and glue the equality. This applies on both sites, so the abelian hom bijection restricts to module maps, with the same inverse. It gives $f^*_{\\Lambda}\\dashv f_{*,\\Lambda}$; its unit is the image of the identity under this restricted bijection, hence has underlying map $\\eta_M$. Thus $Vf^*_{\\Lambda}\\cong L_{\\rm Ab}V$ is natural and carries the module unit to the abelian unit.",
-   "uses": [
-    "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
-    "lem-pe-ring-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, adjunction assertion (2), (6) and fixed-ring proof; Tag 00WK, lemma-sections-sheafification"
-   }
-  },
-  {
-   "text": "We prove exactness for the given geometric morphism, without assuming a presenting continuous functor between these particular sites. Kernels of abelian-sheaf maps are sectionwise kernels and their underlying sets are equalizers of the given map and zero. The finite-limit-preserving $L$ sends this equalizer and its transported group operations to the kernel of the transported map. Hence $L_{\\rm Ab}$ preserves kernels. It preserves cokernels because it is a left adjoint, by the preceding abelian adjunction and preservation of colimits. It is additive: addition of maps is addition on the target composed with their pair, and both addition and the product pairing are transported by $L$. Thus $L_{\\rm Ab}$ is exact. The forgetful module functor is faithful and preserves kernels and cokernels, and its statement identifies them with those in abelian sheaves. Since $Vf^*_{\\Lambda}=L_{\\rm Ab}V$, a sequence and its module inverse image have the corresponding abelian exact sequences. Faithfulness detects the vanishing of the kernel/image quotient. Therefore $f^*_{\\Lambda}$ is additive and exact.",
-   "uses": [
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04JC, lemma-flat-pullback-exact, first assertion and its proof; Tag 03DA, lemma-abelian"
-   }
-  },
-  {
-   "text": "For composable geometric morphisms, take the canonical direct-image comparison and the composite adjunction. The composite unit is $\\eta^{gf}_M=g_*(\\eta^f_{g^{-1}M})\\circ\\eta^g_M$, with the appropriate direct-image identification. The conjugate-isomorphism lemma characterizes the inverse-image comparison as the unique map satisfying its unit equation. Applying this lemma first to abelian and then to module adjunctions gives the same underlying comparison, since step 5 identifies their hom bijections and units. In particular it commutes with scalar maps and gives the natural module comparison. The coefficient-ring comparisons also agree: the two possible maps on the constant ring agree on every terminal-sheaf scalar summand of step 1, hence agree. For three morphisms both parenthesized comparisons satisfy the same composite-unit equation, so uniqueness identifies them; the identity comparison follows from the identity adjunction. This proves the claimed composition coherence, including that for the forgotten units.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Categories Tag 0DV0, lemma-compose-counits; Tag 0B65, lemma-transformation-between-functors-and-adjoints; Sites Tag 00YV"
-   }
-  },
-  {
-   "text": "For an object $U$ of $\\mathcal C$, let $u:\\mathcal C/U\\to\\mathcal C$ forget the structure map. It is continuous: a covering over $V/U$ is exactly an underlying covering of $V$, and base change of that covering along $W/U\\to V/U$ has underlying objects $W\\times_VV_i$ and structure maps to $U$. It is cocontinuous: any covering $\\{V_i\\to V\\}$ of the underlying object of $V/U$ lifts to the covering $\\{(V_i\\to V\\to U)\\to(V\\to U)\\}$ with exactly the same image family. These verify the two hypotheses of the continuous-cocontinuous topos-adjunction theorem. Applying that theorem gives an adjunction $j_U^{-1}\\dashv j_{U*}$ with $j_U^{-1}H(V/U)=H(V)$ and $j_U^{-1}$ preserving finite limits. Thus restriction on sets is indeed the inverse image of a geometric morphism, so the preceding construction applies to it. The slice remains small because its objects and morphisms are specified by objects and morphisms of the small site.",
-   "uses": [
-    "def-pur-localized-ringed-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-special-cocontinuous-functor",
-    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00XZ (section-localize), 00Y0 (definition-localize), and 00XR (lemma-when-shriek); the forgetful functor is continuous and cocontinuous by the displayed covering and base-change checks."
-   }
-  },
-  {
-   "text": "For the localization geometric morphism established in step 8, its inverse image is sectionwise restriction. The localized-ringed-site definition gives the corresponding sectionwise ring and module operations. The restriction of the constant ring presheaf is the constant ring presheaf on $\\mathcal C/U$, and the ring-sheafification-localization comparison identifies its sheafification with $\\Lambda_{\\mathcal C}|_U$, preserving the unit and thus each constant scalar. Consequently applying the construction to $j_U$ gives exactly restriction: its transported action is $a_{M,V}$ at $V/U$, and its underlying map on a morphism is that morphism at $V$. Apply step 7 to composites involving these localization inverse images. The coefficient identifications agree on constant sections, and the module comparisons are the uniquely unit-compatible comparisons. Hence the construction and its forgotten-unit comparison commute with restriction whenever the inverse-image composite is restricted to localized sites. This asserts compatibility of the canonical localization/composition comparisons; it does not identify unrelated site objects on the two sites.",
-   "uses": [
-    "def-pur-localized-ringed-site",
-    "lem-pur-ring-presheaf-sheafification-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites Tags 00XZ, section-localize, and 00Y0, definition-localization; Modules on Sites Tag 04IX, definition-localize-ringed-site"
-   }
-  },
-  {
-   "text": "Apply the exact-functor-derived-factorization theorem to the exact additive functor of step 6 between the abelian module-sheaf categories. It sends quasi-isomorphisms of complexes to quasi-isomorphisms, so termwise application induces the derived inverse image, with its canonical termwise comparison and triangulated structure. The bounded-below theorem gives $H^r(f^*_{\\Lambda}K)\\cong f^*_{\\Lambda}H^r(K)$ and hence preservation of every lower cohomological bound. Restricting therefore gives the functor on $D^+$. All comparisons already constructed are natural chain maps when applied degreewise, so they survive localization at quasi-isomorphisms with their same equations.",
+   "text": "Exact additive functors preserve quasi-isomorphisms. Use mapDerivedCategoryPlus; cancel the fully faithful inclusion of the bounded-below derived category to restrict mapDerivedCategoryFactors to its required termwise comparison.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "def-weil-abstract-derived-category",
-    "def-weil-pbc-bounded-derived-subcategories"
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; Tag 014X, lemma-additive-exact-homotopy-category; Tag 05RU, definition-unbounded-derived-category"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-localized-ringed-site",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-bounded-derived-subcategories",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-special-cocontinuous-functor",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-size-convention",
-  "lem-pe-ring-sheafification-underlying-sets",
-  "lem-pur-ring-presheaf-sheafification-localization",
-  "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-pe-constant-left-module-inverse-image-coherence",
+  "lem-pe-constant-left-module-transport",
   "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-right-adjoint-preserves-limits",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-sheafification-exact",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 00YV, finite-product transport and fixed-ring module proof, with Tag 0H7J for constant objects, Tag 04JC for the exactness argument, and the composition, localization and derived sources named in the steps; the omitted adjunction checks are written out."
+  "place": "Original steps 1–6: fully proved normalized transport; steps 7–9: fully proved normalized comparisons; step 10: exact derived descent. Faithful cancellation proves uniqueness. No split-off hole remains."
  },
  "mathlib_searches": [
   {
@@ -285,11 +150,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+  "lem-weil-pbc-exact-functor-bounded-below"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -309,16 +170,6 @@
   "date": "2026-10-18",
   "existing": false,
   "declarations": [
-   "CategoryTheory.ConstantLeftModuleInverseImage.Modules",
-   "CategoryTheory.ConstantLeftModuleInverseImage.V",
-   "CategoryTheory.ConstantLeftModuleInverseImage.U",
-   "CategoryTheory.ConstantLeftModuleInverseImage.W",
-   "CategoryTheory.ConstantLeftModuleInverseImage.IsAddition",
-   "CategoryTheory.ConstantLeftModuleInverseImage.IsScalar",
-   "CategoryTheory.ConstantLeftModuleInverseImage.CoeffSet",
-   "CategoryTheory.ConstantLeftModuleInverseImage.IsRingAdd",
-   "CategoryTheory.ConstantLeftModuleInverseImage.IsRingMul",
-   "CategoryTheory.ConstantLeftModuleInverseImageLift",
    "CategoryTheory.ConstantLeftModuleInverseImageData",
    "CategoryTheory.constant_left_module_inverse_image"
   ],
@@ -332,5 +183,15 @@
   "group": "Q43",
   "result": "fix",
   "note": "Read the node, all 6 stmt_deps, Stacks 00YV/0H7J/00XZ, the module, the report and the previous return. H3: the repair fields ringSheaf/ringSheafUnderlyingIso/ringSheafIso/ringUnderlying_is_ring are trivially satisfiable (ringSheaf := Λ_D, Iso.refl), so the ring-sheaf isomorphism clause was still vacuous. Fixed by replacing them with ring_add/ring_mul: inv(prodComparison L A A) ≫ L.map m ≫ c = prod.map c c ≫ m', with the sectionwise predicates IsRingAdd/IsRingMul (order kept) and the new abbreviation CoeffSet. Universe: derivedFunctor used only HasDerivedCategory.{u+2}, which excludes the standard u+1 and the project's polymorphic w; fixed to HasDerivedCategory.{w} with Data.{u, w}. All other clauses (abelian/scalar transport, exactness, V f*≅f⁻¹V, unit, composition/presentation uniqueness, localization via J.over/overPullback/overFunctor⋙restrictScalars, quasi-iso, D⁺ factorization) and the edge cases checked. One sorry, docstrings and the full H8 proof present, node fields unchanged. nt_compile: delivered clean (34.7 s); fixed module clean (31.3 s). Fixes: module, lean-record.json (verbatim statement and declarations), report.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-81273",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T154618-L-3136826",
+  "kind": "interface",
+  "note": "independent cc review: 81273bf3 Lean/DAG byte-identical to PASSed b1473c27/1afa1abf; only delta is the added ConstantTowerDirectImageNormalization Users row; all 21 mentioning modules and 19 direct importers are in the Users table; 10 moved declarations verbatim vs the live item; Data and theorem signature unchanged; --all compile clean (35.3/11.6/5.9 s); axioms propext/choice/Quot.sound for all 3 theorems; all 19 direct importers compile clean against the delivery"
  }
 }
