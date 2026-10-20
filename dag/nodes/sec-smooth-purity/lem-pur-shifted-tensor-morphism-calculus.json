@@ -44,10 +44,12 @@
    }
   },
   {
-   "text": "Use $\\mathcal P_{\\mathcal O}$ from [lem-weil-pbc-site-derived-tensor-descent]. Its localization is equivalent to $D(\\mathcal O)$, and its representative comparison identifies total tensor with derived tensor, including arbitrary derived morphisms. Step 1's natural isomorphism, and Step 2's associator, therefore descend uniquely to derived natural isomorphisms. For the signed swap $x_i\\otimes y_j\\mapsto(-1)^{ij}y_j\\otimes x_i$, the chain-map check is also direct: the coefficients of $y\\otimes dx$ are $ij+j$ on both sides, and those of $dy\\otimes x$ are $ij$ on both sides, modulo $2$. Its inverse is the reverse swap and it is natural. It too descends, giving the symmetry specified in the statement. The natural-transformation clause of the cited descent node shows that equations between these transformations can be checked on resolving models. For three variables, apply that clause with one variable fixed, then again in the remaining variable (a constant second variable gives the one-variable case). Thus the computations below establish equations for arbitrary derived objects and maps; we never assume that $f,g,h$ have chain-map representatives on the degree-zero source sheaves.",
+   "text": "Use $\\mathcal P_{\\mathcal O}$ from [lem-weil-pbc-site-derived-tensor-descent]. Its localization is equivalent to $D(\\mathcal O)$, and its representative comparison identifies total tensor with derived tensor, including arbitrary derived morphisms. Step 1's natural isomorphism, and Step 2's associator, therefore descend uniquely to derived natural isomorphisms. For the signed swap $x_i\\otimes y_j\\mapsto(-1)^{ij}y_j\\otimes x_i$, the chain-map check is also direct: the coefficients of $y\\otimes dx$ are $ij+j$ on both sides, and those of $dy\\otimes x$ are $ij$ on both sides, modulo $2$. Its inverse is the reverse swap and it is natural. It too descends, giving the symmetry specified in the statement. The natural-transformation clause of the cited descent node shows that equations between these transformations can be checked on resolving models. For three variables, apply that clause with one variable fixed, then again in the remaining variable (a constant second variable gives the one-variable case). Thus the computations below establish equations for arbitrary derived objects and maps; we never assume that $f,g,h$ have chain-map representatives on the degree-zero source sheaves. Lean implementation of the symmetry: use the bicomplex braiding and total-complex flip, whose summand coefficient is Int.negOnePow, and identify it with (-1)^(pq). The signed summand equations determine each component by the total coproduct universal property. Apply lem-pc-kflat-resolution and lem-weil-pbc-resolving-representative-whiskering to make restriction to resolving complex pairs fully faithful. Transport the chain swap through the representative isomorphism, take its unique preimage under this restriction, and use the same summand uniqueness to prove the required normalized uniqueness.",
    "uses": [
     "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering"
    ],
    "elementary": false,
    "source": {
@@ -160,12 +162,14 @@
   "def-pur-sheaf-tensor-product",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0FPL, 0FPM, 0FPQ, 0FPT and 07A4; explicit signed-Hom refinement using the prescribed shifted-degree normalization, K-flat localization, biproducts, and normalized ordinary pullback."
+  "place": "Tags 0FPL, 0FPM, 0FPQ, 0FPT and 07A4; explicit signed-Hom refinement using the prescribed shifted-degree normalization, K-flat localization, biproducts, and normalized ordinary pullback. E6 Lean implementation: the published model is obtained by composing the homotopy representative comparisons with quotientCompQhIso; the signed symmetry is transported by fully faithful restriction to resolving pairs. The exact comparison specializes the independent-universe canonical derived pullback theorem and cancels the homotopy/complex quotient comparison isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -359,5 +363,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Repair of b1f365161867: all four clauses, canonical signed resolving-model normalizations, canonical associator and exact ringed-topos comparison with explicit coherence. ShiftedTensorModel is the natural representative presentation of the recorded derived tensor; shiftedTensorPublishedModel_exists connects it to siteDerivedTensorIndependentCoefficients. No arbitrary shift, symmetry, associator or pullback isomorphism is assumed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261020T221136-L-4148659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

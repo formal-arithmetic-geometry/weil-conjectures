@@ -14,15 +14,11 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatTelescopeClosure
-import Sheaf.CategoryTheory.AlgebraicInverseImageOfUniverses
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
-import Sheaf.Paper.RingedTopoiTensorComparisonData
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import Sheaf.Paper.ResolvingRepresentativeWhiskering
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-!
 # Signed calculus of shifted derived tensor morphisms
@@ -34,12 +30,187 @@ Source: literature/stacks-project/sites-cohomology.tex, Tags 0FPL and 0FPM
 @[expose] public section
 noncomputable section
 set_option autoImplicit false
-set_option warn.sorry false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency false
+-- Keep the tensor and localization APIs folded during elaboration.
+set_option backward.isDefEq.respectTransparency true
 universe u v w
 
-open CategoryTheory CategoryTheory.Limits MonoidalCategory
+open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits MonoidalCategory
+
+universe u₁ v₁ u₂ v₂ w₁ w₂
+
+private theorem descendTensorSwap
+    {A : Type u₁} [Category.{v₁} A] {D : Type u₂} [Category.{v₂} D]
+    (q : A ⥤ D) (P : ObjectProperty A) (t : A × A ⥤ A) (T : D × D ⥤ D)
+    (r : (P.ι.prod P.ι) ⋙ t ⋙ q ≅ ((P.ι ⋙ q).prod (P.ι ⋙ q)) ⋙ T)
+    (c : t ≅ CategoryTheory.Prod.swap _ _ ⋙ t)
+    (ff : ((whiskeringLeft _ _ D).obj ((P.ι ⋙ q).prod (P.ι ⋙ q))).FullyFaithful) :
+    ∃! σ : T ≅ CategoryTheory.Prod.swap _ _ ⋙ T,
+      ∀ (X Y : A) (hx : P X) (hy : P Y),
+        r.hom.app (⟨X, hx⟩, ⟨Y, hy⟩) ≫ σ.hom.app (q.obj X, q.obj Y) =
+          q.map (c.hom.app (X, Y)) ≫ r.hom.app (⟨Y, hy⟩, ⟨X, hx⟩) := by
+  let e : ((P.ι ⋙ q).prod (P.ι ⋙ q)) ⋙ T ≅
+      ((P.ι ⋙ q).prod (P.ι ⋙ q)) ⋙ (CategoryTheory.Prod.swap _ _ ⋙ T) :=
+    r.symm ≪≫
+    isoWhiskerRight (isoWhiskerLeft (P.ι.prod P.ι) c) q ≪≫
+    isoWhiskerLeft (CategoryTheory.Prod.swap P.FullSubcategory P.FullSubcategory) r
+  let σ : T ≅ CategoryTheory.Prod.swap _ _ ⋙ T := ff.preimageIso e
+  have hs (X Y : A) (hx : P X) (hy : P Y) :
+      r.hom.app (⟨X, hx⟩, ⟨Y, hy⟩) ≫ σ.hom.app (q.obj X, q.obj Y) =
+        q.map (c.hom.app (X, Y)) ≫ r.hom.app (⟨Y, hy⟩, ⟨X, hx⟩) := by
+    have ha := congrArg (fun z ↦ z.app (⟨X, hx⟩, ⟨Y, hy⟩)) (ff.map_preimage (X := T)
+      (Y := CategoryTheory.Prod.swap _ _ ⋙ T) e.hom)
+    change σ.hom.app (q.obj X, q.obj Y) = _ at ha
+    rw [ha]
+    simp only [e, Iso.trans_hom, Iso.symm_hom, isoWhiskerLeft_hom,
+      isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app, NatTrans.comp_app,
+      Iso.hom_inv_id_app_assoc]
+    rfl
+  refine ⟨σ, hs, ?_⟩
+  intro σ' hσ'
+  apply Iso.ext
+  apply ff.map_injective
+  ext X
+  obtain ⟨⟨X, hx⟩, ⟨Y, hy⟩⟩ := X
+  exact (cancel_epi (r.hom.app (⟨X, hx⟩, ⟨Y, hy⟩))).1
+    ((hσ' X Y hx hy).trans (hs X Y hx hy).symm)
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem totalSwapNaturality
+    {A : Type u₁} [Category.{v₁} A] [Abelian A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [BraidedCategory A]
+    [∀ E F : CochainComplex A ℤ,
+      CochainComplex.HasMapBifunctor E F (curriedTensor A)]
+    (χ : ∀ E F : CochainComplex A ℤ,
+      CochainComplex.mapBifunctor E F (curriedTensor A) ≅
+        CochainComplex.mapBifunctor F E (curriedTensor A))
+    (hχ : ∀ (E F : CochainComplex A ℤ) (p q : ℤ),
+      CochainComplex.ιMapBifunctor E F (curriedTensor A) p q (p + q) rfl ≫
+          (χ E F).hom.f (p + q) =
+        ((-1 : ℤ) ^ (p * q).natAbs) • ((β_ (E.X p) (F.X q)).hom ≫
+          CochainComplex.ιMapBifunctor F E (curriedTensor A) q p (p + q) (add_comm q p)))
+    {E E' F F' : CochainComplex A ℤ} (f : E ⟶ E') (g : F ⟶ F') :
+    HomologicalComplex.mapBifunctorMap f g (curriedTensor A) (.up ℤ) ≫ (χ E' F').hom =
+      (χ E F).hom ≫ HomologicalComplex.mapBifunctorMap g f (curriedTensor A) (.up ℤ) := by
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  subst n
+  simp only [HomologicalComplex.comp_f,
+    HomologicalComplex.ι_mapBifunctorMap_assoc]
+  erw [hχ E' F' p q]
+  conv_rhs => erw [← Category.assoc, hχ E F p q]
+  simp only [Preadditive.comp_zsmul, Preadditive.zsmul_comp, Category.assoc]
+  erw [HomologicalComplex.ι_mapBifunctorMap]
+  simp only [curriedTensor]
+  rw [← tensorHom_def_assoc, BraidedCategory.braiding_naturality_assoc]
+  rw [tensorHom_def, Category.assoc]
+
+@[irreducible]
+private def totalSwapNatIso
+    {A : Type u₁} [Category.{v₁} A] [Abelian A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [BraidedCategory A]
+    [∀ E F : CochainComplex A ℤ,
+      CochainComplex.HasMapBifunctor E F (curriedTensor A)]
+    (χ : ∀ E F : CochainComplex A ℤ,
+      CochainComplex.mapBifunctor E F (curriedTensor A) ≅
+        CochainComplex.mapBifunctor F E (curriedTensor A))
+    (hχ : ∀ (E F : CochainComplex A ℤ) (p q : ℤ),
+      CochainComplex.ιMapBifunctor E F (curriedTensor A) p q (p + q) rfl ≫
+          (χ E F).hom.f (p + q) =
+        ((-1 : ℤ) ^ (p * q).natAbs) • ((β_ (E.X p) (F.X q)).hom ≫
+          CochainComplex.ιMapBifunctor F E (curriedTensor A) q p (p + q) (add_comm q p))) :
+    Functor.uncurry.obj ((curriedTensor A).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ)) ≅
+      CategoryTheory.Prod.swap _ _ ⋙ Functor.uncurry.obj
+        ((curriedTensor A).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ)) := by
+  let t := Functor.uncurry.obj
+    ((curriedTensor A).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))
+  have hm {E E' F F' : CochainComplex A ℤ} (f : E ⟶ E') (g : F ⟶ F') :
+      t.map (Prod.mkHom f g) =
+        HomologicalComplex.mapBifunctorMap f g (curriedTensor A) (.up ℤ) := by
+    simp [t, Functor.map₂HomologicalComplex, Functor.uncurry_obj_map,
+      HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp]
+  refine NatIso.ofComponents (F := t) (G := CategoryTheory.Prod.swap _ _ ⋙ t)
+    (fun X ↦ χ X.1 X.2) ?_
+  intro X Y f
+  change t.map (Prod.mkHom f.1 f.2) ≫ (χ Y.1 Y.2).hom =
+    (χ X.1 X.2).hom ≫ t.map (Prod.mkHom f.2 f.1)
+  rw [hm f.1 f.2, hm f.2 f.1]
+  exact totalSwapNaturality χ hχ f.1 f.2
+
+private theorem totalSwapNatIso_hom_app
+    {A : Type u₁} [Category.{v₁} A] [Abelian A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [BraidedCategory A]
+    [∀ E F : CochainComplex A ℤ,
+      CochainComplex.HasMapBifunctor E F (curriedTensor A)]
+    (χ : ∀ E F : CochainComplex A ℤ,
+      CochainComplex.mapBifunctor E F (curriedTensor A) ≅
+        CochainComplex.mapBifunctor F E (curriedTensor A))
+    (hχ : ∀ (E F : CochainComplex A ℤ) (p q : ℤ),
+      CochainComplex.ιMapBifunctor E F (curriedTensor A) p q (p + q) rfl ≫
+          (χ E F).hom.f (p + q) =
+        ((-1 : ℤ) ^ (p * q).natAbs) • ((β_ (E.X p) (F.X q)).hom ≫
+          CochainComplex.ιMapBifunctor F E (curriedTensor A) q p (p + q) (add_comm q p)))
+    (E F : CochainComplex A ℤ) :
+    (totalSwapNatIso χ hχ).hom.app (E, F) = (χ E F).hom := by
+  unfold totalSwapNatIso
+  rfl
+
+@[irreducible]
+private def totalComplexSwap
+    {A : Type u₁} [Category.{v₁} A] [Abelian A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [BraidedCategory A]
+    [∀ E F : CochainComplex A ℤ,
+      CochainComplex.HasMapBifunctor E F (curriedTensor A)]
+    (E F : CochainComplex A ℤ) :
+    CochainComplex.mapBifunctor E F (curriedTensor A) ≅
+      CochainComplex.mapBifunctor F E (curriedTensor A) :=
+  HomologicalComplex₂.total.mapIso (CochainComplex.Monoidal.braidingBicomplexIso E F)
+    (.up ℤ) ≪≫ HomologicalComplex.mapBifunctorFlipIso F E (curriedTensor A) (.up ℤ)
+
+private theorem totalComplexSwap_signed
+    {A : Type u₁} [Category.{v₁} A] [Abelian A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [BraidedCategory A]
+    [∀ E F : CochainComplex A ℤ,
+      CochainComplex.HasMapBifunctor E F (curriedTensor A)]
+    (E F : CochainComplex A ℤ) (p q : ℤ) :
+    CochainComplex.ιMapBifunctor E F (curriedTensor A) p q (p + q) rfl ≫
+        (totalComplexSwap E F).hom.f (p + q) =
+      ((-1 : ℤ) ^ (p * q).natAbs) • ((β_ (E.X p) (F.X q)).hom ≫
+        CochainComplex.ιMapBifunctor F E (curriedTensor A) q p (p + q) (add_comm q p)) := by
+  have h₁ : CochainComplex.ιMapBifunctor E F (curriedTensor A) p q (p + q) rfl ≫
+      (HomologicalComplex₂.total.map
+        (CochainComplex.Monoidal.braidingBicomplexIso E F).hom (.up ℤ)).f (p + q) =
+      (β_ (E.X p) (F.X q)).hom ≫
+        CochainComplex.ιMapBifunctor E F (curriedTensor A).flip p q (p + q) rfl := by
+    erw [HomologicalComplex₂.ιTotal_map]
+    rfl
+  simp only [totalComplexSwap, Iso.trans_hom, HomologicalComplex.comp_f,
+    HomologicalComplex₂.total.mapIso_hom]
+  erw [← Category.assoc, h₁]
+  erw [Category.assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom, Units.smul_def,
+    Preadditive.comp_zsmul]
+  change ((q * p).negOnePow : ℤ) • _ = _
+  rw [mul_comm q p]
+  have hsign : ((p * q).negOnePow : ℤ) = (-1 : ℤ) ^ (p * q).natAbs :=
+    Int.coe_negOnePow ℤ (p * q)
+  erw [hsign]
+
+private theorem exactDerivedComparison
+    {A : Type u₁} [Category.{v₁} A] [Abelian A]
+    {B : Type u₂} [Category.{v₂} B] [Abelian B]
+    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]
+    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (E : CochainComplex A ℤ) :
+    derivedPullbackComplexComparison F F.mapDerivedCategory F.mapDerivedCategoryFactorsh.hom E =
+      F.mapDerivedCategoryFactors.hom.app E := by
+  simp only [derivedPullbackComplexComparison,
+    Functor.mapDerivedCategoryFactorsh_hom_app, Category.assoc,
+    ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+  simp only [Category.id_comp, Iso.inv_hom_id_app]
+  exact Category.comp_id _
 
 namespace SheafOfModules
 
@@ -88,6 +259,12 @@ abbrev shiftedTotalTensor :=
   Functor.uncurry.obj ((shiftedOrdinaryTensor R).map₂HomologicalComplex
     (.up ℤ) (.up ℤ) (.up ℤ))
 
+omit [HasDerivedCategory.{w} (ShiftedModuleCategory R)] in
+private theorem shiftedTotalTensor_obj
+    (E F : CochainComplex (ShiftedModuleCategory R) ℤ) :
+    (shiftedTotalTensor R).obj (E, F) =
+      CochainComplex.mapBifunctor E F (shiftedOrdinaryTensor R) := rfl
+
 /-- A presentation of the derived tensor by the natural resolving comparison.
 This is precisely the tensor and its representative isomorphism from site-derived-tensor
  descent; quantifying over presentations makes the statement independent of this choice.
@@ -110,7 +287,32 @@ The resulting natural comparison supplies the displayed model of the recorded te
 theorem shiftedTensorPublishedModel_exists :
     ∃ T : ShiftedTensorModel R,
       T.tensor = siteDerivedTensorIndependentCoefficients J R := by
-  sorry
+  let A := ShiftedModuleCategory R
+  let H := HomotopyCategory.quotient A (.up ℤ)
+  let h := site_derived_tensor_descent_independentCoefficients.{u, v, max u v, w, 0, 0}
+    J R
+  let P := h.choose
+  let B := h.choose_spec.2.2.1.choose
+  let tensor := siteDerivedTensorIndependentCoefficients J R
+  let q : (shiftedTensorResolving R).FullSubcategory ⥤ P.FullSubcategory :=
+    P.lift ((shiftedTensorResolving R).ι ⋙ H) (fun E ↦
+      (h.choose_spec.1 _).2 E.property)
+  let eB : (H.prod H) ⋙ B ≅ shiftedTotalTensor R ⋙ H :=
+    h.choose_spec.2.2.1.choose_spec.1.some
+  let eT : (P.ι.prod P.ι) ⋙ B ⋙ DerivedCategory.Qh ≅
+      ((P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)) ⋙ tensor :=
+    h.choose_spec.2.2.1.choose_spec.2.choose_spec.some
+  refine ⟨⟨tensor, ?_⟩, rfl⟩
+  exact isoWhiskerLeft ((shiftedTensorResolving R).ι.prod
+      (shiftedTensorResolving R).ι)
+      (isoWhiskerLeft (shiftedTotalTensor R) (DerivedCategory.quotientCompQhIso A)).symm ≪≫
+    isoWhiskerLeft ((shiftedTensorResolving R).ι.prod
+      (shiftedTensorResolving R).ι) (isoWhiskerRight eB.symm DerivedCategory.Qh) ≪≫
+    isoWhiskerLeft (q.prod q) eT ≪≫
+    isoWhiskerRight (NatIso.prod
+      (isoWhiskerLeft (shiftedTensorResolving R).ι (DerivedCategory.quotientCompQhIso A))
+      (isoWhiskerLeft (shiftedTensorResolving R).ι (DerivedCategory.quotientCompQhIso A)))
+      tensor
 
 /-- Move the second shift first, then the first shift. Thus the only sign is
 `(-1)^(bp)` with p the degree in E[a], exactly the node's convention.
@@ -194,6 +396,61 @@ def IsCanonicalDerivedTensorSymmetry
         DerivedCategory.Q.map χ.hom ≫
           T.representative.hom.app (⟨F, hF⟩, ⟨E, hE⟩)
 
+private theorem shiftedRepresentativesFullyFaithful :
+    Nonempty (((whiskeringLeft _ _ (ShiftedDerivedCategory R)).obj
+      (((shiftedTensorResolving R).ι ⋙ DerivedCategory.Q).prod
+        ((shiftedTensorResolving R).ι ⋙ DerivedCategory.Q))).FullyFaithful) := by
+  let A := ShiftedModuleCategory R
+  let P := shiftedTensorResolving R
+  let H : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦ P X.as
+  have hres : ∀ X : HomotopyCategory A (.up ℤ),
+      ∃ (Y : H.FullSubcategory) (f : Y.obj ⟶ X), HomotopyCategory.quasiIso A (.up ℤ) f := by
+    intro X
+    obtain ⟨K, f, hK, hf, hq, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients X.as
+    have hflat : ∀ n, IsFlatOnSite (J := J) (R := R) (K.X n) := fun n ↦
+      (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R (K.X n)).symm (hf n)
+    refine ⟨⟨(HomotopyCategory.quotient A (.up ℤ)).obj K, hK, hflat⟩,
+      (HomotopyCategory.quotient A (.up ℤ)).map f, ?_⟩
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff f).2 hq
+  obtain ⟨ff⟩ := resolvingRepresentativesFullyFaithfulWhiskering
+    (K := CochainComplex A ℤ) (H := HomotopyCategory A (.up ℤ))
+    (D := DerivedCategory A) (DerivedCategory A)
+    (HomotopyCategory.quotient A (.up ℤ)) HomotopyCategory.quotient_obj_surjective
+    (HomotopyCategory.quasiIso A (.up ℤ)) DerivedCategory.Qh P H (fun _ ↦ Iff.rfl) hres
+  exact ⟨ff.ofIso ((whiskeringLeft _ _ (DerivedCategory A)).mapIso
+    (NatIso.prod (isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A))
+      (isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A))))⟩
+
+private def shiftedComplexSwap
+    (E F : CochainComplex (ShiftedModuleCategory R) ℤ) :
+    (shiftedTotalTensor R).obj (E, F) ≅ (shiftedTotalTensor R).obj (F, E) :=
+  letI := monoidalCategory R
+  letI := symmetricCategory R
+  letI := CanonicalTensorPullbackOfUniverses.ringedTensorPreadditive R
+  totalComplexSwap E F
+
+omit [HasDerivedCategory.{w} (ShiftedModuleCategory R)] in
+private theorem shiftedComplexSwap_signed (E F : CochainComplex (ShiftedModuleCategory R) ℤ) :
+    IsSignedComplexSwap R E F (shiftedComplexSwap R E F) := by
+  let := monoidalCategory R
+  let := symmetricCategory R
+  let := CanonicalTensorPullbackOfUniverses.ringedTensorPreadditive R
+  intro p q
+  exact totalComplexSwap_signed E F p q
+
+omit [HasDerivedCategory.{w} (ShiftedModuleCategory R)] in
+private theorem shiftedComplexSwap_unique (E F : CochainComplex (ShiftedModuleCategory R) ℤ)
+    (χ χ' : (shiftedTotalTensor R).obj (E, F) ≅ (shiftedTotalTensor R).obj (F, E))
+    (hχ : IsSignedComplexSwap R E F χ) (hχ' : IsSignedComplexSwap R E F χ') : χ = χ' := by
+  apply Iso.ext
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  subst n
+  exact (hχ p q).trans (hχ' p q).symm
+
 /-- Existence and uniqueness of the signed derived symmetry.
 Source: Stacks 0FPQ and 06YU (blueprint: lem-pur-shifted-tensor-morphism-calculus).
 Proof (Step 3): define the swap by its summand equations. The differential coefficients
@@ -203,7 +460,28 @@ The summand equations determine the chain map and descent determines the natural
 theorem derivedTensorSymmetry_exists :
     ∃! σ : T.tensor ≅ CategoryTheory.Prod.swap _ _ ⋙ T.tensor,
       IsCanonicalDerivedTensorSymmetry R T σ := by
-  sorry
+  let := monoidalCategory R
+  let := symmetricCategory R
+  let := CanonicalTensorPullbackOfUniverses.ringedTensorPreadditive R
+  let c : shiftedTotalTensor R ≅ CategoryTheory.Prod.swap _ _ ⋙ shiftedTotalTensor R :=
+    totalSwapNatIso (shiftedComplexSwap R) (shiftedComplexSwap_signed R)
+  obtain ⟨ff⟩ := shiftedRepresentativesFullyFaithful R
+  obtain ⟨σ, hs, hu⟩ := descendTensorSwap DerivedCategory.Q (shiftedTensorResolving R)
+    (shiftedTotalTensor R) T.tensor T.representative c ff
+  refine ⟨σ, ?_, ?_⟩
+  · intro E F hE hF
+    refine ⟨shiftedComplexSwap R E F, shiftedComplexSwap_signed R E F, ?_⟩
+    simpa only [c, totalSwapNatIso_hom_app (shiftedComplexSwap R)
+      (shiftedComplexSwap_signed R)] using hs E F hE hF
+  · intro σ' hσ'
+    apply hu σ'
+    intro E F hE hF
+    obtain ⟨χ, hχ, hsq⟩ := hσ' E F hE hF
+    have hχeq : χ = shiftedComplexSwap R E F :=
+      shiftedComplexSwap_unique R E F χ _ hχ (shiftedComplexSwap_signed R E F)
+    subst χ
+    simpa only [c, totalSwapNatIso_hom_app (shiftedComplexSwap R)
+      (shiftedComplexSwap_signed R)] using hsq
 
 /-- Canonical Koszul symmetry, fixed by the signed representative equations.
 Source: Stacks 0FPQ (blueprint: lem-pur-shifted-tensor-morphism-calculus). -/
@@ -399,6 +677,7 @@ variable {C' : Type u} [Category.{v} C'] {J' : GrothendieckTopology C'}
   (k : CanonicalTensorPullbackOfUniverses.CanonicalRingedTensorComparison.{u, v}
     R S RI uInv I c uStar hobj)
 
+set_option backward.isDefEq.respectTransparency true in
 include uPush adj hmap hlex in
 /-- The exact pullback comparison is uniquely fixed by the total-complex comparison.
 No arbitrary natural isomorphism is assumed. The square uses the canonical ordinary
@@ -426,7 +705,20 @@ theorem shiftedExactTensorPullback_exists :
           uStar.mapDerivedCategoryFactors.hom.app ((shiftedTotalTensor R).obj (E, F)) ≫
             DerivedCategory.Q.map (k.totalIso R S RI uInv I c uStar hobj V am E F).inv ≫
             TS.representative.hom.app (⟨_, hE'⟩, ⟨_, hF'⟩) := by
-  sorry
+  let LF := uStar.mapDerivedCategory
+  let ε := uStar.mapDerivedCategoryFactorsh.hom
+  have hLF : LF.IsLeftDerivedFunctor ε
+      (HomotopyCategory.quasiIso (ShiftedModuleCategory R) (.up ℤ)) :=
+    Functor.isLeftDerivedFunctor_of_inverts _ LF uStar.mapDerivedCategoryFactorsh
+  have hc (E : CochainComplex (ShiftedModuleCategory R) ℤ) :
+      derivedPullbackComplexComparison uStar LF ε E =
+        uStar.mapDerivedCategoryFactors.hom.app E := exactDerivedComparison uStar E
+  have h := CanonicalTensorPullbackOfUniverses.ringedTopoiCanonicalDerivedTensorPullback
+    uInv uPush adj I c uStar
+    hobj hmap LF ε hLF (shiftedTensorResolving R) (shiftedTensorResolving S)
+    (fun _ ↦ Iff.rfl) (fun _ ↦ Iff.rfl) T.tensor TS.tensor
+    T.representative TS.representative k V am
+  simpa only [hc, Functor.mapIso_inv, LF, shiftedTotalTensor_obj R] using h.2
 
 /-- The canonical exact derived tensor comparison, fixed by its representative square.
 Source: Stacks 07A4 (blueprint: lem-pur-shifted-tensor-morphism-calculus). -/
