@@ -121,14 +121,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounitCore",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardTermwiseCompositeCounitCore.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PicardTermwiseCompositeCounitCore",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PicardTermwiseCompositeCounitCore.lean",
   "declaration": "AlgebraicGeometry.Scheme.picard_termwise_counit_composition",
   "statement": "theorem picard_termwise_counit_composition\n    (W : Scheme.{v}) (U : W.Opens)\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    {T T' : Scheme.{v}} (i : T' ⟶ T) (s : T ⟶ U.toScheme) :\n    let c : ∀ {X Y Z : Scheme.{v}} (f : X ⟶ Y) (g : Y ⟶ Z),\n        derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=\n      fun f g ↦ Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition))) f g\n    let P := ((Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K\n    (c i s).inv.app (DerivedCategory.Q.obj P) ≫\n        (derivedPullback i).map ((picardTermwiseCounit s).app P) ≫\n          (picardTermwiseCounit i).app (picardTermwiseModel W U K s) =\n      (picardTermwiseCounit (i ≫ s)).app P ≫\n        DerivedCategory.Q.map\n          (picardTermwiseModelRestrictionIso W U K i s (i ≫ s) rfl).hom",
   "branch": "sheaf-dag",
-  "by": "N4",
-  "date": "2026-10-13"
+  "by": "R6",
+  "date": "2026-10-20",
+  "note": "Restored the quarantined Sheaf module as a public reexport of the identical proved upstream declaration. The statement and proof route are unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -141,13 +142,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-23f59",
-  "group": "V3",
+  "reviewer": "C-77951",
+  "group": "R6",
   "result": "pass",
-  "landing": "20261013T201811-L-3977963",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged Lean signature and proof with the node, dependency declarations, change record and report; delivery and sole direct importer compile cleanly; axiom probe reports only propext, Classical.choice and Quot.sound."
+  "landing": "20261020T154622-L-3137737",
+  "kind": "proof",
+  "note": "independent cc review: delivered reexport module + node lean attachment (existing:true → WeilConjectures.AlgebraicGeometry.PicardTermwiseCompositeCounitCore) with the live upstream theorem (statement verbatim, proof byte-identical to the quarantined copy) and the change record; compiles clean, axioms propext/Classical.choice/Quot.sound, no importers"
  }
 }
