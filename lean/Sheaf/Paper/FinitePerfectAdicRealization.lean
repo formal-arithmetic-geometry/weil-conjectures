@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.FinitePerfectQuotientModels
 public import Sheaf.Paper.KoszulReconstruction
 public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 
 import Sheaf.Paper.CompatibleFiniteDerivedTrivializations
 import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
