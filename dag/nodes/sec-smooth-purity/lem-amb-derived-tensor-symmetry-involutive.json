@@ -1,0 +1,131 @@
+{
+ "id": "lem-amb-derived-tensor-symmetry-involutive",
+ "kind": "statement",
+ "title": "Opposite canonical derived tensor symmetries cancel",
+ "statement": "Let $X$ be any scheme and $\\Lambda$ any commutative ring. Let $K,M$ be objects of the unbounded derived category $D(X_{\\mathrm{et}},\\Lambda)$ of ordinary étale $\\Lambda$-module sheaves [def-weil-pbc-derived-categories], with derived tensor product [def-kun-derived-tensor]. Write $\\sigma_{K,M}:K\\otimes^L_\\Lambda M\\xrightarrow{\\sim}M\\otimes^L_\\Lambda K$ for the fixed canonical signed symmetry [lem-kun-tensor-sym]. Then $\\sigma_{M,K}\\circ\\sigma_{K,M}=\\operatorname{id}_{K\\otimes^L_\\Lambda M}$. No boundedness, characteristic, finiteness or nonzero-ring hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-kun-tensor-sym",
+  "def-kun-derived-tensor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, definition-derived-tor and its following symmetry paragraph; Tag 0FPT, lemma-symmetric-monoidal-derived; cancellation step of lem-amb-tensor-projection-adjunct"
+ },
+ "proof": [
+  {
+   "text": "For cochain complexes K,M, use the coproduct universal property to test the double braiding on each summand K.X p tensor M.X q. Apply CochainComplex.Monoidal.ι_braiding_hom twice. Coefficient-category symmetry cancels the two ordinary braidings, and Int.units_coe_mul_self cancels the two identical signs after commuting p*q and q*p. Thus the composite is identity in each degree, hence as a cochain map.",
+   "uses": [
+    "lem-kun-tensor-sym",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every homotopy-category object is represented by a cochain complex. The canonical homotopy braiding is the quotient image of the cochain braiding. Functoriality therefore carries the double-swap identity to the homotopy category, and Iso.inv_ext' identifies the opposite hom with the inverse.",
+   "uses": [
+    "lem-kun-tensor-sym",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Functor.leftDerived₂_ext to the two canonical derived lifts braidingNatTrans and braidingInvNatTrans. Their factorization equations differ only by the homotopy braiding hom versus the opposite inverse, already equal by the preceding step. The lifts are equal. Replace the second braiding in the desired composite by the inverse lift and apply the existing braidingNatTrans_comp_braidingInvNatTrans component identity. Specialize to ordinary etale module sheaves. Package the double-swap equation as the private predicate swapInvolutive on the whole natural isomorphism. Rewrite canonicalTensorSymmetry_eq at that level, then specialize the proved generic property to sheaves and modules. This avoids repeated unfolding of component monoidal instances and changes no map.",
+   "uses": [
+    "lem-kun-tensor-sym",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-tensor-sym",
+  "def-kun-derived-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, explicit cancellation of the signed symmetry"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "braiding.*involutive|derivedTensorSymmetry.*symmetry|braidingNatTrans_comp_braidingInvNatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SymmetricCategory.symmetry",
+   "results": "1 hits: CategoryTheory.SymmetricCategory.symmetry",
+   "date": "2026-10-19",
+   "verdict": "coefficient-category symmetry used in the summand calculation; no derived-category involutivity result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical braiding on the derived tensor product of sheaves of modules is involutive: swapping the two factors twice gives the identity.",
+   "results": "8 hits: CategoryTheory.Sheaf.braidedCategory, CategoryTheory.Sheaf.symmetricCategory, CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf, LightCondensed.instSymmetricCategoryLightCondMod, ModuleCat.MonoidalCategory.braiding_inv_apply, ModuleCat.MonoidalCategory.braiding_hom_apply, ModuleCat.MonoidalCategory.instBraidedCategory, CategoryTheory.BraidedCategory.tensorLeftIsoTensorRight_inv_app",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The braiding on the unbounded derived tensor product of module sheaves is symmetric, so the composite of the two opposite canonical swaps is the identity.",
+   "results": "8 hits: CategoryTheory.Limits.biprod.symmetry, CategoryTheory.SymmetricCategory.symmetry, CategoryTheory.Monoidal.functorCategorySymmetric, ModuleCat.MonoidalCategory.braiding_hom_apply, CategoryTheory.Limits.prod.symmetry_assoc, CategoryTheory.Prod.braiding, SemimoduleCat.braiding, CategoryTheory.SymmetricCategory.ofCurried",
+   "date": "2026-10-19",
+   "verdict": "no exact match: coefficient-category symmetry is used, but no symmetric instance for the fixed derived braiding is provided"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.TensorProjectionAdjunct",
+  "date": "2026-10-18",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-p1-decomposition",
+   "place": "Final tensor/projection-formula sentence; cancellation of the two symmetries in the adjunct calculation",
+   "via": [
+    "lem-amb-tensor-projection-adjunct"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.DerivedTensorSymmetryInvolutive",
+  "file": "lean/Sheaf/SixFunctors/DerivedTensorSymmetryInvolutive.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedTensorSymmetry_involutive",
+  "statement": "theorem derivedTensorSymmetry_involutive\n    (Λ : Type (u + 1)) [CommRing Λ] (X : AlgebraicGeometry.Scheme.{u})\n    (K M : DerivedCategoryModule Λ X) :\n    ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) X).hom.app K).app M ≫\n      ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) X).hom.app M).app K = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261020T131233-L-1264467",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261020T131233-L-1264467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
