@@ -12,5 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolut
 The adopted source library supplies `exists_tensorPullback_leftDerived` and
 `leftDerived_tensorPullback_absolute`, with their K-flat resolving-class proofs.
 Re-export that implementation so that existing imports use a single declaration of
-both the tensor pullback construction and its derived comparison.
+both the tensor pullback construction and its derived comparison.  In particular,
+the wrapper does not recreate either theorem, avoiding the duplicate declarations
+that caused the upstream synchronization conflict.
 -/
