@@ -1,6 +1,6 @@
 # Work queue
 
-273 items; claim with `tools/claim.py next <group> [--stage N]`.
+272 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (23 clusters, 1726 modules)
 
@@ -37,11 +37,8 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1)
+## Stage 2: nodes to state (0)
 
-| node | distance to Mathlib | kind | blockers |
-|---|---|---|---|
-| `det-sp-p1-trace` | 1 | state | 0 |
 
 Not open yet: 302 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
