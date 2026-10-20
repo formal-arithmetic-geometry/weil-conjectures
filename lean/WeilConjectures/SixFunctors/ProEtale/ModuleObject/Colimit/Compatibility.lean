@@ -155,6 +155,8 @@ instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl
     (E : FiniteIntermediateField ℓ) :
     PreservesFiniteLimits
       (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)) :=
+  sorry
+
 end Flat
 
 /-! ### (Push) and (Shriek) -/
@@ -168,6 +170,8 @@ is finite free over `E_X`, so both sides are finite direct sums of copies of `Rf
 module docstring. -/
 instance isIso_derivedPushHom_padicSubfieldRingObjMap {E F : FiniteIntermediateField ℓ}
     (h : E ≤ F) : IsIso (derivedPushHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
+  sorry
+
 /-- **(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
 then admits a right adjoint `Rf^!`, hence commutes with the coproducts through which the derived
 extension of scalars along the flat `E_X ⟶ ℚ̄_ℓ,X` is computed. See the module docstring. -/
