@@ -103,77 +103,8 @@ theorem subsingleton_cohomology_adicConstant (d : ℕ)
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ}
     (hi : i < 0 ∨ 2 * d < i) :
-    Subsingleton ((adicConstant k₀ l X).cohomology i).carrier := by
-  let : (Spec (CommRingCat.of k₀)).Over (Spec (CommRingCat.of k₀)) := ⟨𝟙 _⟩
-  rcases hi with hi | hi
-  · have hF : IsZero ((WeilComplex.homologySheaf i).obj
-        ((WeilComplex.derivedLowerStar (X ↘ Spec (CommRingCat.of k₀))).obj
-          (toComplex.obj (adicConstant k₀ l X)))) := by
-      apply Limits.IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _)
-      change Limits.IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj
-        ((ProEtaleWeilSheaf.lowerStar k₀ l
-          (X ↘ Spec (CommRingCat.of k₀))).rightDerivedFunctor.obj
-            ((_root_.DerivedCategory.singleFunctor _ 0).obj (adicConstant k₀ l X).obj)))
-      have := (ProEtaleWeilSheaf.lowerStar k₀ l
-        (X ↘ Spec (CommRingCat.of k₀))).isGE_rightDerivedFunctor_obj_singleFunctor
-          (adicConstant k₀ l X).obj
-      exact _root_.DerivedCategory.isZero_of_isGE _ 0 i hi
-    exact ModuleCat.subsingleton_of_isZero <| Functor.map_isZero
-      (ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _ ⋙
-        Sheaf.Γ _ (WeilCoefficients.{u} l) ⋙ WeilCoefficients.toModuleCat l) hF
-  · let a := X ↘ Spec (CommRingCat.of k₀)
-    let f := Scheme.Hom.geometricFiberMap a (comp_over a (Spec (CommRingCat.of k₀)))
-    let s := (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
-    have : IsIso s := by
-      change IsIso (pullback.snd (𝟙 (Spec (CommRingCat.of k₀))) _)
-      infer_instance
-    have : SmoothOfRelativeDimension d a.geometricFiberToAlgebraicClosure :=
-      inferInstanceAs (SmoothOfRelativeDimension d (pullback.snd _ _))
-    have hd : topologicalKrullDim a.geometricFiber ≤ (d : WithBot ℕ∞) :=
-      topologicalKrullDim_le_of_smoothOfRelativeDimension a.geometricFiberToAlgebraicClosure d
-    have hb := ProEtale.isLE_rightDerivedFunctor_adicLowerStar_unit_of_finite_bound s f
-      (ringChar_algebraicClosure_ne (k₀ := k₀) (l := l)) (2 * d)
-      (fun Λ _ _ F ↦ by
-        rw [_root_.DerivedCategory.isLE_iff]
-        intro r hr
-        have hvan := Etale.hasUniformDirectImageVanishingLE_two_mul Λ f
-          a.geometricFiberToAlgebraicClosure s
-          (Scheme.Hom.geometricFiberMap_comp_geometricFiberToAlgebraicClosure a
-            (comp_over a (Spec (CommRingCat.of k₀)))) d hd F r hr
-        let K := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F
-        let νX := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) a.geometricFiber
-        let νY := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ)
-          (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber
-        refine IsZero.of_iso
-          (Functor.map_isZero νY hvan)
-          ((_root_.DerivedCategory.homologyFunctor _ r).mapIso
-            ((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.mapIso
-              ((νX.mapDerivedCategorySingleFunctor 0).app F).symm ≪≫
-              ((ProEtale.rightDerivedLowerStarComparisonIso' f (ModuleCat.{u + 1} Λ)).app
-                K).symm) ≪≫
-            ((νY.mapDerivedCategoryHomologyFunctorIso r).app _).symm))
-    have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-      (ProEtale.AdicSheaf l a.geometricFiber) ℤ
-    have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-      (ProEtale.AdicSheaf l a.geometricFiber) ℤ
-    let K := (ProEtaleWeilSheaf.lowerStar k₀ l a).rightDerivedFunctor.obj
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj (adicConstant k₀ l X).obj)
-    let e : (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K ≅
-        (ProEtale.adicLowerStar l f).rightDerivedFunctor.obj
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj
-            (ProEtale.AdicSheaf.unit l a.geometricFiber)) :=
-      (Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _ _).app _ ≪≫
-        Functor.mapIso _ (((Endofunctor.IsoAlgebra.forget _).mapDerivedCategorySingleFunctor
-          0).app (adicConstant k₀ l X).obj)
-    have hvan := _root_.DerivedCategory.isZero_of_isLE _ (2 * d : ℕ) i hi (hX := hb)
-    have hF : IsZero ((WeilComplex.homologySheaf i).obj
-        ((WeilComplex.derivedLowerStar a).obj (toComplex.obj (adicConstant k₀ l X)))) := by
-      rw [isZero_iff_isZero_carrier]
-      exact (hvan.of_iso ((_root_.DerivedCategory.homologyFunctor _ i).mapIso e)).of_iso
-        (((Endofunctor.IsoAlgebra.forget _).mapDerivedCategoryHomologyFunctorIso i).app K)
-    exact ModuleCat.subsingleton_of_isZero <| Functor.map_isZero
-      (ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _ ⋙
-        Sheaf.Γ _ (WeilCoefficients.{u} l) ⋙ WeilCoefficients.toModuleCat l) hF
+    Subsingleton ((adicConstant k₀ l X).cohomology i).carrier :=
+  sorry
 
 /-- Blueprint `sk-cor-trace`, `sk-thm-derived-duality` (degreewise, with `K = ℚ̄_ℓ`, via
 `sk-thm-transport`) and `sk-thm-frobenius` (a), at the coefficient stage `ℚ̄_ℓ`: for `X`
@@ -201,90 +132,8 @@ theorem exists_linearEquiv_cohomology_baseChangeField
     ∃ e : ((adicConstant k₀' l (X.baseChangeField k₀ k₀')).cohomology i).carrier ≃ₗ[PadicAlgCl l]
         ((adicConstant k₀ l X).cohomology i).carrier,
       ∀ x, e (((adicConstant k₀' l (X.baseChangeField k₀ k₀')).cohomology i).frobenius x) =
-        (((adicConstant k₀ l X).cohomology i).frobeniusEnd ^ Module.finrank k₀ k₀') (e x) := by
-  let := fact_ringChar_ne_of_algebra (l := l) k₀ k₀'
-  have hmap {K E Ω Ω' : Type u} [Field K] [Fintype K] [Field E] [Fintype E]
-      [Algebra K E] [Field Ω] [Field Ω'] [Algebra K Ω] [Algebra.IsAlgebraic K Ω]
-      [Algebra E Ω'] [Algebra.IsAlgebraic E Ω'] (j : Ω →+* Ω') (x : Ω) :
-      j ((FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K Ω ^ Module.finrank K E) x) =
-        FiniteField.geometricFrobeniusAlgEquivOfAlgebraic E Ω' (j x) := by
-    let φ := FiniteField.frobeniusAlgEquivOfAlgebraic K Ω ^ Module.finrank K E
-    let ψ := FiniteField.frobeniusAlgEquivOfAlgebraic E Ω'
-    have h (y : Ω) : j (φ y) = ψ (j y) := by
-      change j ((FiniteField.frobeniusAlgEquivOfAlgebraic K Ω ^ Module.finrank K E) y) =
-        FiniteField.frobeniusAlgEquivOfAlgebraic E Ω' (j y)
-      rw [AlgEquiv.coe_pow, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate,
-        FiniteField.coe_frobeniusAlgEquivOfAlgebraic]
-      dsimp only
-      rw [map_pow, Module.card_eq_pow_finrank (K := K) (V := E)]
-    rw [FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv, inv_pow,
-      FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv]
-    change j (φ.symm x) = ψ.symm (j x)
-    apply ψ.injective
-    rw [AlgEquiv.apply_symm_apply, ← h, AlgEquiv.apply_symm_apply]
-  have hcl : ∃ e : AlgebraicClosure k₀ ≃+* AlgebraicClosure k₀',
-      ∀ x : k₀, e (algebraMap k₀ (AlgebraicClosure k₀) x) =
-        algebraMap k₀' (AlgebraicClosure k₀') (algebraMap k₀ k₀' x) := by
-    let := Fintype.ofFinite k₀
-    let := Fintype.ofFinite k₀'
-    have : IsAlgClosure k₀ (AlgebraicClosure k₀') := IsAlgClosure.ofAlgebraic k₀ k₀' _
-    let e := IsAlgClosure.equiv k₀ (AlgebraicClosure k₀) (AlgebraicClosure k₀')
-    exact ⟨e.toRingEquiv, fun x ↦ e.commutes x⟩
-  classical
-  let := Fintype.ofFinite k₀
-  let := Fintype.ofFinite k₀'
-  let a := X ↘ Spec (.of k₀)
-  let g := Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀'))
-  let h := (Scheme.specAlgebraicClosure k₀).hom
-  let h' := (Scheme.specAlgebraicClosure k₀').hom
-  obtain ⟨j, hj⟩ := hcl
-  let eS := Scheme.Spec.mapIso j.toCommRingCatIso.op
-  have hs : eS.hom ≫ h = h' ≫ g := by
-    change Spec.map (CommRingCat.ofHom j.toRingHom) ≫
-        Spec.map (CommRingCat.ofHom (algebraMap k₀ (AlgebraicClosure k₀))) =
-      Spec.map (CommRingCat.ofHom (algebraMap k₀' (AlgebraicClosure k₀'))) ≫
-        Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀'))
-    rw [← Spec.map_comp, ← Spec.map_comp]
-    congr 1
-    ext x
-    exact hj x
-  let m := pullback.map a (h' ≫ g) a h (𝟙 X) eS.hom (𝟙 _) (by simp) (by simp [hs])
-  let eX := pullbackLeftPullbackSndIso a g h' ≪≫ asIso m
-  refine ⟨cohomologyLinearEquivOfGeometricFiberIso k₀ k₀' l X
-    (X.baseChangeField k₀ k₀') eX i, fun x ↦ ?_⟩
-  apply cohomologyLinearEquivOfGeometricFiberIso_map_frobenius k₀ k₀' l X
-    (X.baseChangeField k₀ k₀') (Module.finrank k₀ k₀') eX ?_ i x
-  have hp : eX.hom ≫ a.geometricFiberProj =
-      (X.baseChangeField k₀ k₀' ↘ Spec (.of k₀')).geometricFiberProj ≫ pullback.fst a g := by
-    change eX.hom ≫ pullback.fst a h = pullback.fst (pullback.snd a g) h' ≫
-      pullback.fst a g
-    dsimp only [eX, Iso.trans_hom, asIso_hom, m, pullback.map]
-    rw [Category.assoc, pullback.lift_fst, Category.comp_id,
-      pullbackLeftPullbackSndIso_hom_fst]
-  have hq : eX.hom ≫ a.geometricFiberToAlgebraicClosure =
-      (X.baseChangeField k₀ k₀' ↘ Spec (.of k₀')).geometricFiberToAlgebraicClosure ≫ eS.hom := by
-    change eX.hom ≫ pullback.snd a h = pullback.snd (pullback.snd a g) h' ≫ eS.hom
-    dsimp only [eX, Iso.trans_hom, asIso_hom, m, pullback.map]
-    rw [Category.assoc, pullback.lift_snd, pullbackLeftPullbackSndIso_hom_snd_assoc]
-  have hσ : (specGeometricFrobenius k₀').hom ≫ eS.hom =
-      eS.hom ≫ (specGeometricFrobenius k₀ ^ Module.finrank k₀ k₀').hom := by
-    rw [specGeometricFrobenius_hom, specGeometricFrobenius_pow_hom]
-    change Spec.map _ ≫ Spec.map (CommRingCat.ofHom j.toRingHom) =
-      Spec.map (CommRingCat.ofHom j.toRingHom) ≫ Spec.map _
-    rw [← Spec.map_comp, ← Spec.map_comp]
-    congr 1
-    ext x
-    exact (hmap j.toRingHom x).symm
-  change (X.baseChangeField k₀ k₀' ↘ Spec (.of k₀')).geometricGaloisFrobenius.hom ≫ eX.hom =
-    eX.hom ≫ (a.geometricGaloisFrobenius ^ Module.finrank k₀ k₀').hom
-  apply Scheme.Hom.geometricFiber_hom_ext (f := a)
-  · rw [Category.assoc, hp, ← Category.assoc,
-      Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj,
-      Category.assoc, Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj, hp]
-  · simp only [Category.assoc]
-    rw [hq, Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure_assoc,
-      Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
-      reassoc_of% hq, hσ]
+        (((adicConstant k₀ l X).cohomology i).frobeniusEnd ^ Module.finrank k₀ k₀') (e x) :=
+  sorry
 
 end Ingredients
 

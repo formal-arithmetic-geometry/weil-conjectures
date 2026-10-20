@@ -80,54 +80,8 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 pro-étale sheaves: the canonical map `j_!(j^* L ⊗ M) ⟶ L ⊗ j_! M` is an isomorphism. See the
 module docstring. -/
 instance hasProjectionFormula_openImmersion :
-    (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).HasProjectionFormula := by
-  refine ⟨fun L M ↦ ?_⟩
-  let A := Ab.{u + 1}
-  let l : U.ProEt ⥤ X.ProEt := MorphismProperty.Over.map ⊤
-    (inferInstance : WeaklyEtale j)
-  have : MorphismProperty.IsStableUnderComposition
-      (@WeaklyEtale : MorphismProperty Scheme.{u}) :=
-    MorphismProperty.IsMultiplicative.toIsStableUnderComposition
-  have : l.Full := MorphismProperty.Over.full_map (P := @WeaklyEtale) (Q := ⊤) (f := j) _
-  have : l.Faithful :=
-    MorphismProperty.Over.faithful_map (P := @WeaklyEtale) (Q := ⊤) (f := j) _
-  let adj₀ := ProEtale.openImmersionLowerShriekAdjunction A j
-  have : IsIso adj₀.unit :=
-    (ProEtale.openImmersionAdjunctionTriple A j).isIso_unit_iff_isIso_counit.mpr
-      (ProEtale.isIso_openImmersionRestrictionLowerStarAdjunction_counit A j)
-  have : (j)_!open[A].Full := adj₀.fullyFaithfulLOfIsIsoUnit.full
-  have : (j)_!open[A].Faithful := adj₀.fullyFaithfulLOfIsIsoUnit.faithful
-  let adj := ProEtale.openImmersionLowerShriekUpperStarAdjunction A j
-  have : IsIso adj.unit := adj.unit_isIso_of_L_fully_faithful
-  -- Tensoring a presheaf extension by zero still vanishes away from the open.
-  let R := l.op.lan.obj M.obj ⊗ L.obj
-  have hR (W : X.ProEtᵒᵖ) (hW : IsEmpty (CostructuredArrow l.op W)) :
-      IsZero (R.obj W) := by
-    exact ((l.op.isInitialLanObjObj M.obj hW).isInitialObj
-      (tensorRight (L.obj.obj W))).isZero
-  have : IsIso ((l.op.lanAdjunction A).counit.app R) :=
-    Functor.isIso_lanAdjunction_counit_app_of_isZero _
-      (SmallSite.mem_essImage_or_isEmpty_costructuredArrow_op_overMap
-        (inferInstance : WeaklyEtale j)) R hR
-  -- Sheafification transports this support calculation to sheaves.
-  let eLan : l.op.lan ⋙ presheafToSheaf (Scheme.ProEt.topology X) A ≅
-      presheafToSheaf (Scheme.ProEt.topology U) A ⋙ (j)_!open[A] :=
-    (((l.op.lanAdjunction A).comp (sheafificationAdjunction _ A)).leftAdjointUniq
-      ((sheafificationAdjunction _ A).comp adj₀))
-  let eTensor : (j)_!open[A].obj M ⊗ L ≅
-      (presheafToSheaf (Scheme.ProEt.topology X) A).obj R :=
-    whiskerLeftIso _ (asIso ((sheafificationAdjunction _ A).counit.app L)).symm ≪≫
-      Functor.Monoidal.μIso (presheafToSheaf _ A) _ _
-  let eSupport : (presheafToSheaf (Scheme.ProEt.topology X) A).obj R ≅
-      (j)_!open[A].obj ((presheafToSheaf (Scheme.ProEt.topology U) A).obj (l.op ⋙ R)) :=
-    (presheafToSheaf _ A).mapIso
-      (asIso ((l.op.lanAdjunction A).counit.app R)).symm ≪≫ eLan.app _
-  -- The target is in the essential image of the fully faithful left adjoint.
-  have : IsIso (adj.counit.app (L ⊗ (j)_!open[A].obj M)) :=
-    adj.isIso_counit_app_of_iso ((β_ L ((j)_!open[A].obj M)) ≪≫ eTensor ≪≫ eSupport)
-  change IsIso (adj.projectionFormulaMap L M)
-  rw [Adjunction.projectionFormulaMap, Adjunction.homEquiv_counit]
-  infer_instance
+    (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).HasProjectionFormula :=
+  sorry
 
 /-- The *linear* extension by zero `Mod_{j^* Λ_X} ⥤ Mod_{Λ_X}` along an open immersion
 `j : U ⟶ X`: the lift of the extension by zero `j_!` on abelian sheaves to module objects

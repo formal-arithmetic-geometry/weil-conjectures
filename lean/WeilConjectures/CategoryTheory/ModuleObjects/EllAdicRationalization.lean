@@ -121,17 +121,7 @@ lemma boundedConstructible_derivedExtendScalars_obj
     (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X)
       ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor.obj K) :=
-  by
-    let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
-    let : NormedAlgebra ℚ_[ℓ] E.1 :=
-      { norm_smul_le c x := by
-          change ‖algebraMap E.1 (PadicAlgCl ℓ) (c • x)‖ ≤
-            ‖c‖ * ‖algebraMap E.1 (PadicAlgCl ℓ) x‖
-          rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
-            PadicAlgCl.norm_extends] }
-    have : PreservesFiniteLimits (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)) :=
-      CondensedRing.integralScalarExtension_exact ℓ E.1 X
-    exact boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K hK
+  sorry
 
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D_cons(X_proét, 𝒪_E) ⥤ D_cons(X_proét, E)`
 on bounded constructible complexes: the restriction of

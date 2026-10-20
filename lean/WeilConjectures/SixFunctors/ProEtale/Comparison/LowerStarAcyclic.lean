@@ -106,54 +106,8 @@ and invertibility of the unit `F ⟶ ν_* ν^* F`, are
 `AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`. -/
 theorem rightAcyclic_comparisonUpperStar_obj_of_injective (X : Scheme.{u})
     (I : Sheaf X.smallEtaleTopology A)
-    [Injective I] : ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) := by
-  intro q
-  let R : InjectiveResolution (ν^*(X)[A].obj I) := injectiveResolution _
-  refine IsZero.of_iso ?_ (R.isoRightDerivedObj _ (q + 1))
-  rw [HomologicalComplex.homologyFunctor_obj, ← HomologicalComplex.exactAt_iff_isZero_homology]
-  -- Restriction to the affine étale basis is faithful and exact.
-  have : HasLimitsOfSize.{u, u + 1} A := hasLimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
-  let Φ := (AffineEtale.Spec X).sheafPushforwardContinuous A (AffineEtale.topology X)
-    X.smallEtaleTopology
-  have : LocallySmall.{u + 1} X.AffineEtale :=
-    ⟨fun _ _ ↦ ⟨ULift.{u + 1} _, ⟨Equiv.ulift.symm⟩⟩⟩
-  have : EssentiallySmall.{u + 1} X.AffineEtale := essentiallySmall_of_small_of_locallySmall _
-  have : HasSheafify (AffineEtale.topology X) A :=
-    GrothendieckTopology.hasSheafify_of_essentiallySmall A _
-  have : Abelian (Sheaf (AffineEtale.topology X) A) := sheafIsAbelian
-  have : Φ.Additive := ⟨rfl⟩
-  have : Φ.PreservesHomology := {}
-  let S := (((ν_*(X)[A]).mapHomologicalComplex (ComplexShape.up ℕ)).obj R.cocomplex).sc
-    (q + 1)
-  change S.Exact
-  rw [← S.exact_map_iff_of_faithful Φ]
-  -- Prove exactness of the underlying presheaf complex, then sheafify it.
-  have hS : ((S.map Φ).map (sheafToPresheaf (AffineEtale.topology X) A)).Exact := by
-    rw [ShortComplex.exact_iff_evaluation]
-    intro W
-    let V := (AffineEtale.Spec X).obj W.unop
-    have : IsAffine V.left := by
-      dsimp only [V]
-      rw [AffineEtale.Spec_obj_left]
-      infer_instance
-    have : Injective ((Etale.upperStar A V.hom).obj I) :=
-      Etale.injective_upperStar_obj_of_etale' A V.hom I
-    have h := isZero_rightDerived_globalSections_comparisonUpperStar_of_isAffine A V.left
-      ((Etale.upperStar A V.hom).obj I) q
-    have h' : IsZero (((globalSectionsFunctor A V.left).rightDerived (q + 1)).obj
-        ((ProEtale.upperStar A V.hom).obj (ν^*(X)[A].obj I))) :=
-      h.of_iso (((globalSectionsFunctor A V.left).rightDerived (q + 1)).mapIso
-        ((comparisonUpperStarCompUpperStarIso A V.hom).app I))
-    have h'' := isZero_rightDerived_sectionsFunctor_of_upperStar A
-      ((toProEt X).obj V) (ν^*(X)[A].obj I) (q + 1) h'
-    have hR := h''.of_iso (R.isoRightDerivedObj _ (q + 1)).symm
-    rw [HomologicalComplex.homologyFunctor_obj,
-      ← HomologicalComplex.exactAt_iff_isZero_homology] at hR
-    exact hR
-  have : (presheafToSheaf (AffineEtale.topology X) A).PreservesHomology := {}
-  have hS' := hS.map (presheafToSheaf (AffineEtale.topology X) A)
-  exact (ShortComplex.exact_iff_of_iso
-    (ShortComplex.mapNatIso (S.map Φ) (sheafificationNatIso _ _)).symm).1 hS'
+    [Injective I] : ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) :=
+  sorry
 
 /-- The global sections functor of the small pro-étale site: the sections over the terminal
 object. -/

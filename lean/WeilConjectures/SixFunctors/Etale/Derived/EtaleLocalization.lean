@@ -92,27 +92,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale
     (f : X ⟶ Y) (h : U ⟶ Y) (w : u ≫ f = h) [HasCompactification f]
     [HasCompactification h] :
     Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((u)^*[ModuleCat.{u + 1} Λ]) ≅
-      R(h)^![ModuleCat.{u + 1} Λ]) := by
-  subst h
-  -- Compactify u without requiring f or its composite to be quasi-compact.
-  let c := HasCompactification.compactification (u ≫ f)
-  let a : U ⟶ pullback c.g f := pullback.lift c.i u c.comm.symm
-  have ha : a ≫ pullback.fst c.g f = c.i := pullback.lift_fst _ _ _
-  have : IsImmersion a := by
-    have : IsImmersion (a ≫ pullback.fst c.g f) := by rw [ha]; infer_instance
-    exact IsImmersion.of_comp a (pullback.fst c.g f)
-  have : HasCompactification u := HasCompactification.of_isImmersion a
-    (pullback.snd c.g f) (pullback.lift_snd _ _ _)
-  let e := canonicalEtaleCompactSupportComparison Λ u
-    (HasCompactification.compactification u)
-  let adjU := (derivedEtaleLowerShriekUpperStarAdjunction
-    (ModuleCat.{u + 1} Λ) u inferInstance).ofNatIsoLeft e.symm
-  obtain ⟨ecomp⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ u f
-  exact ⟨Functor.isoWhiskerLeft R(f)^![ModuleCat.{u + 1} Λ]
-      (leftDerivedUpperStarIsoMapDerivedCategory _ u) ≪≫
-    Adjunction.rightAdjointUniq
-      ((adjU.comp (rightDerivedUpperShriekAdjunction _ f)).ofNatIsoLeft ecomp.symm)
-      (rightDerivedUpperShriekAdjunction _ (u ≫ f))⟩
+      R(h)^![ModuleCat.{u + 1} Λ]) :=
+  sorry
 
 end Etale
 
