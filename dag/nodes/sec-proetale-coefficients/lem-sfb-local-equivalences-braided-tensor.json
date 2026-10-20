@@ -1,0 +1,80 @@
+{
+ "id": "lem-sfb-local-equivalences-braided-tensor",
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+  "place": "First sentence: tensor product of sheaves is sheafification of the objectwise tensor; abstract braided ingredient."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.W.monoidal",
+  "file": "Mathlib/CategoryTheory/Sites/Monoidal.lean",
+  "how": "specializes in one line: instance W.monoidal, lines 152-154, including its IsMultiplicative parent; left and right stability are W.whiskerLeft (134-144) and W.whiskerRight (147-150). The two enriched-end hypothesis families are inferred from V-small completeness: HasEnrichedHom is HasEnd (Enriched/FunctorCategory.lean:54); HasFunctorEnrichedHom is the same over Under j (295-296). Since C and each Under j are V-small, these are V-small limits by the abbreviations HasEnd (Limits/Shapes/End.lean:209) and HasMultiequalizer = HasLimit (Limits/Shapes/Multiequalizer.lean:1046-1047). No symmetry, abelian structure, concreteness or sheafification is assumed.",
+  "line": 152
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-braided-sheaf-tensor-generators",
+  "date": "2026-10-20",
+  "group": "ND"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-module-pushforward-pullback",
+ "title": "Local presheaf maps are stable under braided tensor",
+ "statement": "Fix a universe $\\mathcal V$. Let $(C,J)$ be a $\\mathcal V$-small site [def-weil-pbc-sites-and-cohomology]. Let $\\mathcal A$ be a category with $\\mathcal V$-small Hom sets and all $\\mathcal V$-small limits, equipped with a monoidal structure [def-sfb-monoidal-category] which is closed (each $M\\otimes-$ has a right adjoint) and braided (natural isomorphisms $M\\otimes N\\cong N\\otimes M$ satisfying both hexagon identities). Give $\\mathrm{PSh}=\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal A)$ its pointwise tensor $\\otimes_p$.\n\nFor a presheaf $H$, being a sheaf means that $\\operatorname{Hom}_{\\mathcal A}(T,H(-))$ is a sheaf of sets for every $T\\in\\mathcal A$. Define $W$ to consist of presheaf maps $f:P\\to Q$ such that precomposition $\\operatorname{Nat}(Q,H)\\to\\operatorname{Nat}(P,H)$ is bijective for every sheaf $H$.\n\nThe class $W$ contains identities, is closed under composition, and is stable under tensoring on either side: if $f\\in W$ and $R$ is any presheaf, then $\\mathrm{id}_R\\otimes_p f\\in W$ and $f\\otimes_p\\mathrm{id}_R\\in W$.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-monoidal-category"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lemma whiskerLeft|lemma whiskerRight|instance monoidal|isSheaf_functorEnrichedHom",
+   "results": "{\"t\": \"2026-10-20T13:16:42Z\", \"tool\": \"grep\", \"query\": \"lemma whiskerLeft|lemma whiskerRight|instance monoidal|isSheaf_functorEnrichedHom\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\"], \"digest\": \"f5ec2ae914ae9cb9\"}",
+   "date": "2026-10-20",
+   "verdict": "match: declarations and hypotheses checked at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The morphisms inverted by sheafification are stable under tensoring with arbitrary presheaves in a closed braided complete category",
+   "results": "{\"t\": \"2026-10-20T13:16:43Z\", \"tool\": \"leansearch\", \"query\": \"The morphisms inverted by sheafification are stable under tensoring with arbitrary presheaves in a closed braided complete category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.presheafToSheaf\", \"CategoryTheory.sheafifyMap\", \"PresheafOfModules.sheafification\", \"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\", \"CategoryTheory.GrothendieckTopology.isoSheafify_inv\", \"CategoryTheory.toSheafify\", \"CategoryTheory.plusPlusAdjunction\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\"], \"digest\": \"2232aa349c08d4fa\"}",
+   "date": "2026-10-20",
+   "verdict": "match: declarations and hypotheses checked at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.W.monoidal",
+   "results": "{\"t\": \"2026-10-20T13:16:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.GrothendieckTopology.W.monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.W.monoidal\"], \"digest\": \"42eebc0e55fe9a64\"}",
+   "date": "2026-10-20",
+   "verdict": "match: declarations and hypotheses checked at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local equivalences of presheaves valued in a complete closed braided monoidal category are closed under tensoring on either side",
+   "results": "{\"t\": \"2026-10-20T13:16:44Z\", \"tool\": \"leanfinder\", \"query\": \"Local equivalences of presheaves valued in a complete closed braided monoidal category are closed under tensoring on either side\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.W.monoidal\", \"CategoryTheory.GrothendieckTopology.W.whiskerRight\", \"CategoryTheory.GrothendieckTopology.W.whiskerLeft\", \"instMonoidalClosedCondensedSet\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.GrothendieckTopology.W.transport_isMonoidal\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\"], \"digest\": \"014d9316fcf92861\"}",
+   "date": "2026-10-20",
+   "verdict": "match: declarations and hypotheses checked at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev HasEnd|abbrev HasMultiequalizer",
+   "results": "{\"t\": \"2026-10-20T13:18:33Z\", \"tool\": \"grep\", \"query\": \"abbrev HasEnd|abbrev HasMultiequalizer\", \"sub\": \"CategoryTheory/Limits/Shapes\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Multiequalizer.lean\"], \"digest\": \"6925ec027db4fcea\"}",
+   "date": "2026-10-20",
+   "verdict": "match: declarations and hypotheses checked at the lines in mathlib_match.how"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-pushforward-comp-monoidal",
+   "place": "Proof, first sentence: the tensor product of sheaves is the sheafification of the objectwise tensor product; closed braided coefficient generality of its statement.",
+   "via": [
+    "lem-sfb-braided-sheaf-tensor-generators"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

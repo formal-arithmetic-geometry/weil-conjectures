@@ -1,0 +1,80 @@
+{
+ "id": "lem-sfb-braided-monoidal-localization",
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+  "place": "First sentence: tensor product of sheaves is sheafification of the objectwise tensor; abstract braided ingredient."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal; CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory; CategoryTheory.Localization.Monoidal.instBraidedCategoryLocalizedMonoidal; CategoryTheory.Localization.Monoidal.instBraidedLocalizedMonoidalToMonoidalCategory",
+  "file": "Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean",
+  "how": "exact, one declaration per structure: Basic.lean:447-465 supplies the localized monoidal category; Basic.lean:472-477 makes toMonoidalCategory strong monoidal with epsilonIso = epsilon.symm and muIso = Monoidal.mu. Braided.lean:124-129 supplies the braiding and both hexagons, and Braided.lean:138-139 supplies its braided functor equation. Specialize the unit parameter to L.obj(1) and epsilon to Iso.refl, so the unit comparison is the identity. LocalizedMonoidal is the type synonym for D (Basic.lean:89-94), with unchanged objects and morphisms.",
+  "line": 447
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-braided-sheaf-tensor-generators",
+  "date": "2026-10-20",
+  "group": "ND"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-module-pushforward-pullback",
+ "title": "Braided monoidal localization of an ordinary category",
+ "statement": "Let $\\mathcal P$ and $\\mathcal D$ be categories [def-nagata-category], and give $\\mathcal P$ a monoidal structure [def-sfb-monoidal-category] and a braiding $\\beta_{P,Q}:P\\otimes Q\\xrightarrow{\\sim}Q\\otimes P$ satisfying the two hexagon identities. Let $W$ be a class of morphisms of $\\mathcal P$ containing identities, closed under composition and stable under tensoring on the left and right by every object. Suppose $L:\\mathcal P\\to\\mathcal D$ is a localization at $W$: it sends $W$ to isomorphisms, and for every category $\\mathcal E$ precomposition identifies $\\operatorname{Fun}(\\mathcal D,\\mathcal E)$ with the full subcategory of $\\operatorname{Fun}(\\mathcal P,\\mathcal E)$ of functors sending $W$ to isomorphisms.\n\nThen $\\mathcal D$ admits a braided monoidal structure, with tensor denoted $\\diamond$ and unit chosen to be $L\\mathbf1_{\\mathcal P}$, for which $L$ is strong braided monoidal. In particular there are natural isomorphisms $\\mu_{P,Q}:LP\\diamond LQ\\xrightarrow{\\sim}L(P\\otimes Q)$ and $\\mu_0:\\mathbf1_{\\mathcal D}\\xrightarrow{\\sim}L\\mathbf1_{\\mathcal P}$ obeying the strong monoidal associativity and unit equations and the braided equation\n$$L(\\beta_{P,Q})\\circ\\mu_{P,Q}=\\mu_{Q,P}\\circ\\beta^{\\mathcal D}_{LP,LQ}.$$\nThe chosen unit comparison $\\mu_0$ is the identity.",
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-sfb-monoidal-category"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "noncomputable instance|def toMonoidalCategory|def μ|def ε",
+   "results": "{\"t\": \"2026-10-20T13:16:53Z\", \"tool\": \"grep\", \"query\": \"noncomputable instance|def toMonoidalCategory|def μ|def ε\", \"sub\": \"CategoryTheory/Localization/Monoidal\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\"], \"digest\": \"95d8b10c8f1e34c4\"}",
+   "date": "2026-10-20",
+   "verdict": "match: declarations and hypotheses checked at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a braided monoidal category at a monoidal class of morphisms is braided and the localization functor is monoidal",
+   "results": "{\"t\": \"2026-10-20T13:16:54Z\", \"tool\": \"leansearch\", \"query\": \"Localization of a braided monoidal category at a monoidal class of morphisms is braided and the localization functor is monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.instBraidedLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instBraidedCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.β_hom_app\", \"CategoryTheory.Localization.Monoidal.braidingNatIso_hom_app\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1\"], \"digest\": \"e78d4b8dbede2630\"}",
+   "date": "2026-10-20",
+   "verdict": "match: declarations and hypotheses checked at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Monoidal.toMonoidalCategory",
+   "results": "{\"t\": \"2026-10-20T13:16:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.ε'\", \"CategoryTheory.Localization.Monoidal.isInvertedBy₂\", \"CategoryTheory.Localization.Monoidal.μ\", \"CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorLeftObjFunctorTensorBifunctor\"], \"digest\": \"785cecb3be7fac5d\"}",
+   "date": "2026-10-20",
+   "verdict": "match: declarations and hypotheses checked at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization of a braided monoidal category at morphisms stable under tensoring inherits a braided monoidal structure and the localization functor is strong braided",
+   "results": "{\"t\": \"2026-10-20T13:16:55Z\", \"tool\": \"leanfinder\", \"query\": \"A localization of a braided monoidal category at morphisms stable under tensoring inherits a braided monoidal structure and the localization functor is strong braided\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.instBraidedCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instBraidedLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.braidingNatIso_hom_app\", \"CategoryTheory.Localization.Monoidal.β_hom_app\", \"CategoryTheory.Localization.Monoidal.braidingNatIso_hom_app_naturality_μ_left_assoc\", \"CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.braidingNatIso_hom_app_naturality_μ_right_assoc\", \"CategoryTheory.Localization.Monoidal.braidingNatIso\"], \"digest\": \"03d70dd58e6b59b3\"}",
+   "date": "2026-10-20",
+   "verdict": "match: declarations and hypotheses checked at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalCategory \\(LocalizedMonoidal|toMonoidalCategory L W ε\\).(Monoidal|Braided)|BraidedCategory \\(LocalizedMonoidal",
+   "results": "{\"t\": \"2026-10-20T13:18:33Z\", \"tool\": \"grep\", \"query\": \"MonoidalCategory \\\\(LocalizedMonoidal|toMonoidalCategory L W ε\\\\).(Monoidal|Braided)|BraidedCategory \\\\(LocalizedMonoidal\", \"sub\": \"CategoryTheory/Localization/Monoidal\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\"], \"digest\": \"e9d4abcab2b92d22\"}",
+   "date": "2026-10-20",
+   "verdict": "match: declarations and hypotheses checked at the lines in mathlib_match.how"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-pushforward-comp-monoidal",
+   "place": "Proof, first sentence: the tensor product of sheaves is the sheafification of the objectwise tensor product; closed braided coefficient generality of its statement.",
+   "via": [
+    "lem-sfb-braided-sheaf-tensor-generators"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

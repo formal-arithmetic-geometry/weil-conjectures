@@ -13,9 +13,116 @@
   "def-sfb-monoidal-category",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal P=\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal A)$, $I=\\underline{\\mathbf1}$ and $\\eta_P:P\\to UaP$ for the unit of [def-weil-pbc-sheafification]. The pointwise tensor is a bifunctor: its identity and composition equations are those of the coefficient tensor at each $V$. Applying the coefficient associator, unitors and braiding at each $V$ gives natural presheaf isomorphisms. Each pentagon, triangle and hexagon is the corresponding coefficient equation at $V$, so these give a braided monoidal structure on $\\mathcal P$ [def-sfb-monoidal-category].",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "First sentence; pointwise braided tensor and notation."
+   }
+  },
+  {
+   "text": "Define $W$ by the Hom test in [lem-sfb-local-equivalences-braided-tensor]. The adjunction [def-weil-pbc-sheafification] identifies that test for $f:P\\to Q$ with bijectivity of $\\operatorname{Hom}(af,H)$ for every sheaf $H$. This is equivalent to $af$ being invertible: surjectivity for $H=aP$ produces $g:aQ\\to aP$ with $g(af)=1$; injectivity for $H=aQ$ then gives $(af)g=1$. Also $\\eta_P\\in W$, since its Hom test is exactly unique extension into every sheaf. Since $U$ is a full inclusion, its counit $\\epsilon_F:aUF\\to F$ is invertible: the inverse is the unique extension of $1_{UF}$, and both composites are identities by that same uniqueness.",
+   "uses": [
+    "lem-sfb-local-equivalences-braided-tensor",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "First sentence; sheafification units and local maps."
+   }
+  },
+  {
+   "text": "By [lem-coef-grothendieck-small-limits], $\\mathcal A$ has all $\\mathcal V$-small limits: its Hom universe and Grothendieck colimit universe are exactly $\\mathcal V$. Thus [lem-sfb-local-equivalences-braided-tensor] applies with this small $C$ and gives left and right tensor stability of $W$, without symmetry. In particular $\\eta_P\\otimes_p\\eta_Q=(1\\otimes_p\\eta_Q)(\\eta_P\\otimes_p1)$ lies in $W$. Consequently\n$$\\Delta_{P,Q}=a(\\eta_P\\otimes_p\\eta_Q):a(P\\otimes_pQ)\\xrightarrow{\\sim}a(UaP\\otimes_pUaQ)$$\nis a natural isomorphism, by step 2.",
+   "uses": [
+    "lem-coef-grothendieck-small-limits",
+    "lem-sfb-local-equivalences-braided-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "First sentence; closed braided tensor stability and the two-unit comparison."
+   }
+  },
+  {
+   "text": "Sheafification is a localization at $W$. Indeed it inverts $W$ by step 2. If $T:\\mathcal P\\to\\mathcal E$ inverts $W$, extend it by $\\overline T=TU$; the maps $T\\eta_P$ give a natural isomorphism $T\\xrightarrow{\\sim}\\overline T a$. Conversely for $S:\\operatorname{Sh}\\to\\mathcal E$, $S\\epsilon$ identifies $(Sa)U$ with $S$. These two natural isomorphisms give inverse equivalences on functor categories: the same formulas on a natural transformation commute by naturality of $\\eta$ and $\\epsilon$, and the triangle identities make the composites identities. This proves the full localization property, including morphisms, from the adjunction [def-weil-pbc-sheafification].",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "First sentence; reflector as a localization, with the factorization written out."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-braided-monoidal-localization] to $L=a$, the pointwise braided category of step 1, and the class $W$ of steps 2--3. Step 4 verifies its localization hypothesis. Denote its tensor on sheaves by $\\diamond$, with unit $aI$ and strong braided tensor comparison $\\mu_{P,Q}:aP\\diamond aQ\\xrightarrow{\\sim}a(P\\otimes_pQ)$. The lemma supplies the coherent associator, unitors and braiding for this tensor, and its unit comparison for $a$ is the identity.",
+   "uses": [
+    "lem-sfb-braided-monoidal-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "First sentence; abstract braided localization, before identifying the prescribed tensor."
+   }
+  },
+  {
+   "text": "Put $F*G=a(UF\\otimes_pUG)$ and $(f*g)=a(Uf\\otimes_pUg)$, exactly the bifunctor in the statement. There is a natural isomorphism\n$$c_{F,G}:F*G\\xrightarrow{\\mu_{UF,UG}^{-1}}aUF\\diamond aUG\\xrightarrow{\\epsilon_F\\diamond\\epsilon_G}F\\diamond G.$$\nHere is explicitly how to use the coherent structure from step 5 on this prescribed bifunctor. For every parenthesized tensor expression $B$, define $c_B:B_*\\to B_\\diamond$ recursively: at a variable and the unit take the identity, and at $(D,E)$ take $(c_D\\diamond c_E)c_{D_*,E_*}$. Define its associator, unitors and braiding by $c_{B'}^{-1}s^\\diamond c_B$, where $s^\\diamond:B_\\diamond\\to B'_\\diamond$ is the corresponding old constraint. Naturality of $c_{F,G}$ shows that tensoring a constraint in any larger expression gives this same conjugation formula. Hence along every path in a pentagon, triangle or hexagon, successive factors $c_Bc_B^{-1}$ cancel. The path is $c_{\\mathrm{target}}^{-1}$ times the old path times $c_{\\mathrm{source}}$; the old paths agree by step 5. Thus all required coherence equations hold. This defines the braided structure on exactly $*$ with unit $aI$, rather than identifying the localization's chosen tensor with it by equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "First sentence; explicit natural tensor comparison and cancellation proof of coherence."
+   }
+  },
+  {
+   "text": "For the structure of step 6, the strong tensor map of $a$ is $\\mu_{P,Q}c_{aP,aQ}$. It equals $\\Delta_{P,Q}^{-1}$. To check this, naturality of $\\mu$ gives\n$$\\Delta_{P,Q}\\mu_{P,Q}=\\mu_{UaP,UaQ}(a\\eta_P\\diamond a\\eta_Q).$$\nSubstitute the formula for $c_{aP,aQ}$ and use $\\epsilon_{aP}a\\eta_P=1$ and $\\epsilon_{aQ}a\\eta_Q=1$, the two triangle identities. The resulting composite $\\mu_{P,Q}c_{aP,aQ}\\Delta_{P,Q}$ is the identity. The unit comparison remains the identity of $aI$. Conjugation by the same $c$ in the associativity, unit and braided functor equations reduces each to the equation for $\\mu$ in step 5, so $a$ is strong braided for this tensor. In particular its braiding is the canonical $a(\\beta^p_{UF,UG})$: naturality of $\\mu$ and of $\\epsilon$ identifies this map, after $c$, with the old braiding. We henceforth write $\\otimes$ for $*$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "First sentence; canonical strong braided comparisons on the prescribed tensor."
+   }
+  },
+  {
+   "text": "By definition $t_{F,G}=\\eta_{UF\\otimes_pUG}$ and $u=\\eta_I$. The unit $\\eta$ is a natural transformation of presheaves, so each of these is a presheaf map. For sheaf maps $f:F\\to F'$ and $g:G\\to G'$, its naturality at $Uf\\otimes_pUg$ reads\n$$U(f\\otimes g)t_{F,G}=t_{F',G'}(Uf\\otimes_pUg),$$\nwhich is the required simultaneous naturality. For a sheaf $H$, the unique-extension property [def-weil-pbc-sheafification] applied to $P=UF\\otimes_pUG$ gives the first displayed Hom bijection by $h\\mapsto U(h)t_{F,G}$. Applied to $P=I$ it gives the second by $h\\mapsto U(h)u$. These are bijections of whole Hom sets, so their injectivity detects equality; no claim about generating individual sections is used.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "First sentence and the use of objectwise tensor maps; the two universal generator tests."
+   }
+  },
+  {
+   "text": "For an essentially $\\mathcal V$-small site choose a $\\mathcal V$-small skeleton and equip it with the induced covering topology. The assertion in the statement is expressly made after this passage: apply steps 1--8 on that small site. All diagrams for limits and all presheaf Hom tests above are then indexed in $\\mathcal V$. This avoids taking ends over the original possibly larger object type.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "First sentence; small-skeleton convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "def-weil-pbc-sheafification",
+  "lem-coef-grothendieck-small-limits",
+  "lem-sfb-braided-monoidal-localization",
+  "lem-sfb-local-equivalences-braided-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+  "place": "First sentence, expanded in braided generality using Mathlib local-map stability and ordinary braided monoidal localization; explicit comparison to the prescribed sheafified tensor and adjunction Hom maps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +165,45 @@
    "results": "3 hits: Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean; ; digest 2c7c6a3c6bc3924b",
    "date": "2026-10-20",
    "verdict": "No match for the full statement. Sites/Continuous.lean 383-429 gives composition and component formulas, without monoidality; the site lax structure lives in the project extension, not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "W.monoidal|def monoidalCategory|def braidedCategory|sheafificationAdjunction",
+   "results": "{\"t\": \"2026-10-20T13:16:42Z\", \"tool\": \"grep\", \"query\": \"W.monoidal|def monoidalCategory|def braidedCategory|sheafificationAdjunction\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Abelian.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\"], \"digest\": \"81b7567f6b216931\"}",
+   "date": "2026-10-20",
+   "verdict": "no full match: Sites/Monoidal gives a localization-lift tensor; the explicit comparison to a(UF tensor UG) and the unit Hom maps are proved in this split"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.monoidalCategory",
+   "results": "{\"t\": \"2026-10-20T13:16:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.monoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Sheaf.braidedCategory\", \"CategoryTheory.Sheaf.symmetricCategory\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf\", \"CategoryTheory.GrothendieckTopology.Point.instMonoidalSheafSheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.instIsMonoidalFunctorOppositeHomPresheafToSheafCompSheafFiberIso\"], \"digest\": \"24eaa004175c7728\"}",
+   "date": "2026-10-20",
+   "verdict": "no full match: Sites/Monoidal gives a localization-lift tensor; the explicit comparison to a(UF tensor UG) and the unit Hom maps are proved in this split"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification is strong braided monoidal and maps from the sheafified tensor correspond to presheaf morphisms",
+   "results": "{\"t\": \"2026-10-20T13:16:43Z\", \"tool\": \"leansearch\", \"query\": \"Sheafification is strong braided monoidal and maps from the sheafified tensor correspond to presheaf morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafification\", \"CategoryTheory.plusPlusSheaf\", \"CategoryTheory.sheafify\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"PresheafOfModules.sheafification\", \"PresheafOfModules.sheafify\", \"CategoryTheory.presheafToSheaf\", \"TopCat.Presheaf.sheafify\"], \"digest\": \"0daab68d965d41f8\"}",
+   "date": "2026-10-20",
+   "verdict": "no full match: Sites/Monoidal gives a localization-lift tensor; the explicit comparison to a(UF tensor UG) and the unit Hom maps are proved in this split"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed braided monoidal Grothendieck abelian coefficients give sheafified pointwise tensor, strong braided sheafification, and Hom bijections detecting equality",
+   "results": "{\"t\": \"2026-10-20T13:16:45Z\", \"tool\": \"leanfinder\", \"query\": \"Closed braided monoidal Grothendieck abelian coefficients give sheafified pointwise tensor, strong braided sheafification, and Hom bijections detecting equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.braidedCategory\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Sheaf.symmetricCategory\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"instMonoidalClosedCondensedSet\"], \"digest\": \"ceada941cd4ed015\"}",
+   "date": "2026-10-20",
+   "verdict": "no full match: Sites/Monoidal gives a localization-lift tensor; the explicit comparison to a(UF tensor UG) and the unit Hom maps are proved in this split"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf tensor defined literally as a(UF tensor UG), rather than the localization lift, with its canonical braided structure and sheafification unit Hom bijections",
+   "results": "{\"t\": \"2026-10-20T13:18:24Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaf tensor defined literally as a(UF tensor UG), rather than the localization lift, with its canonical braided structure and sheafification unit Hom bijections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.Sheaf.braidedCategory\", \"CategoryTheory.sheafToPresheafMonoidal\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf\", \"CategoryTheory.Sheaf.symmetricCategory\"], \"digest\": \"40c0cb45b9d6f4cd\"}",
+   "date": "2026-10-20",
+   "verdict": "no full match: Sites/Monoidal gives a localization-lift tensor; the explicit comparison to a(UF tensor UG) and the unit Hom maps are proved in this split"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-pushforward-comp-monoidal",
@@ -83,5 +225,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-20",
+  "item": "lem-sfb-braided-sheaf-tensor-generators",
+  "worker": "stage1",
+  "summary": "Preserved all hypotheses and clauses, including braided rather than symmetric coefficients. Proved the local-map criterion, tensor-unit comparisons, localization property, identification of the prescribed sheafified tensor with the localized tensor by explicit natural isomorphisms, coherence by cancellation, strong braided sheafification, and both Hom generator tests. Two strictly smaller Mathlib leaves record local-map tensor stability and abstract ordinary braided monoidal localization.",
+  "blueprint": "Nearest ancestor lem-sfb-pushforward-comp-monoidal, first proof sentence. Steps 1--7 justify its sheafified tensor in the closed braided coefficient generality of its statement; step 8 provides the natural objectwise maps and equality tests used by the remainder of that ancestor proof; step 9 states the small-skeleton convention.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-grothendieck-small-limits",
+    "why": "General small-limit existence for Grothendieck coefficients, needed to satisfy the enriched-end hypotheses of the Mathlib tensor-stability leaf; the current unit supplies no such limit theorem."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Universal-property definition of sheafification; no unit-specific construction or proof route is substituted."
+   },
+   {
+    "node": "def-sfb-monoidal-category",
+    "why": "Generic definition of a monoidal category, used to check the pointwise constraints."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-grothendieck-small-limits",
+  "def-weil-pbc-sheafification",
+  "def-sfb-monoidal-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-cc-ND-ebb9dc243",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-ebb9dc243 (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it. The item statement is byte-identical to the live node. The blueprint source is lem-sfb-pushforward-comp-monoidal.proof.md, first sentence; its statement has closed braided coefficients. The existing sk-def-sfb-sheaf-tensor and det-def-sfb-sheaf-tensor-* nodes are all symmetric, so they cannot be cited at braided generality and the split fills a real gap. Leaf lem-sfb-local-equivalences-braided-tensor matches Mathlib: J.W = isLocal(IsSheaf) (Sites/Localization.lean:34) and the multiplicative parent is at Bousfield.lean:82. W.monoidal is at Sites/Monoidal.lean:126-154 and needs MonoidalClosed + Braided + the enriched-end instances, which follow from V-small completeness through lem-coef-grothendieck-small-limits. Leaf lem-sfb-braided-monoidal-localization matches Mathlib: LocalizedMonoidal is at Basic.lean:80-105 and 447-477 and the braided instances at Braided.lean:124-139. Taking epsilon = Iso.refl makes the unit comparison the identity. Step checks: step 2 shows Hom test <=> a(f) iso and eta in W. Step 4 is localization by a reflective subcategory. I checked step 6 (transport along c = (eps◇eps)mu^{-1}) and step 7 (mu c Delta = 1 via naturality of mu and the triangle identity, braiding a(beta^p)) by hand. Step 8 is unit naturality plus unique extension. Step 9 is the small skeleton, as the statement says. Edge cases: trivial topology, empty site, and a non-symmetric 2^{mn}-braided graded category. Project GrothendieckAbelian/Monoidal/Defs.lean has the monoidal/braided instances but not the Hom-bijection clauses, so B10 does not apply. Accepted tool_uses: lem-coef-grothendieck-small-limits, def-weil-pbc-sheafification, def-sfb-monoidal-category. Advisory: (1) the localization leaf uses the 2-universal-property form rather than Mathlib's IsLocalization; the Lean instance presheafToSheaf.IsLocalization supplies it. (2) det-def-sfb-sheaf-tensor-local-iso clause 1 is the symmetric special case of the new leaf. (3) The report names citations.json, but that file is not in the commit."
  }
 }
