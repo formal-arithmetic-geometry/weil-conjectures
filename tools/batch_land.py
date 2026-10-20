@@ -204,9 +204,15 @@ def candidates(cache: dict) -> list[dict]:
             continue
         live.add(marker(g, item).name)
         try:
-            if json.loads((ROOT / "coord" / "claims" / f"{item}.lock").read_text()).get("who") != g:
-                continue
+            who = json.loads((ROOT / "coord" / "claims" / f"{item}.lock").read_text()).get("who")
         except (OSError, ValueError):
+            who = None
+        if who != g:
+            # 2026-10-21: a delivery branch whose group no longer holds the claim (released, taken out, handed off) made
+            # the dispatcher count the item as taken, so nobody worked it again (21 items, 3 h): kept under refs/orphaned/
+            br = f"refs/heads/deliver/{g}/{item}"
+            if subprocess.run(["git", "update-ref", "refs/orphaned/deliver/" + g + "/" + item, br], cwd=ROOT).returncode == 0:
+                subprocess.run(["git", "update-ref", "-d", br, head], cwd=ROOT)
             continue
         if g.startswith('XR'):
             job = repairs.read(repairs.JOBS / (g[2:] + '.json'))
