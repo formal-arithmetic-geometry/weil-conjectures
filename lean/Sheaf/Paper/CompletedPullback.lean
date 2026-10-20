@@ -10,6 +10,8 @@ public import Sheaf.Paper.CompletedRlimFunctor
 public import Sheaf.Paper.IntrinsicCompletion
 public import Sheaf.Paper.CompletedTowerPullback
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Sheaf.Paper.CompletedKoszulQuotientComparison
 
 /-!
 # Completed pullback through strict completed-coefficient towers
@@ -90,7 +92,25 @@ theorem AdicCoefficientDatum.towerComplete_iff_intrinsic (T : Scheme.{t})
         ∀ (C : CochainComplex (reductionModules T (d.completedRing T)) ℤ)
           (e : DerivedCategory.Q.obj C ≅ K),
           IsDerivedCompleteIntrinsic T d r a ha K C e := by
-  sorry
+  classical
+  have hcomparison (r : ℕ) (a : Fin r → A)
+      (ha : Ideal.span (Set.range a) = d.ideal)
+      (C : CochainComplex (reductionModules T (d.completedRing T)) ℤ)
+      (e : DerivedCategory.Q.obj C ≅ K) :
+      IsDerivedCompleteIntrinsic T d r a ha K C e ↔ d.TowerComplete T K := by
+    obtain ⟨c, hc⟩ := completedKoszulQuotientComparison T d r a ha K C e
+    change IsIso (intrinsicCompletionUnit T d r a ha K C e) ↔ IsIso (d.completionUnit T K)
+    change intrinsicCompletionUnit T d r a ha K C e ≫ c.hom = d.completionUnit T K at hc
+    rw [← hc]
+    exact (isIso_comp_right_iff _ c.hom).symm
+  constructor
+  · intro h r a ha C e
+    exact (hcomparison r a ha C e).mpr h
+  · intro h
+    obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp d.finitelyGenerated
+    exact (hcomparison r a ha (DerivedCategory.Q.objPreimage K)
+      (DerivedCategory.Q.objObjPreimageIso K)).mp
+        (h r a ha _ _)
 
 /-- Apply actual module pullback to every level and transition of a strict tower.
 Source: blueprint completed pullback (blueprint: def-weil-pbc-completed-pullback). -/
@@ -107,7 +127,10 @@ ringed pullback at every level and the pointwise kernels and cokernels of towers
 theorem AdicCoefficientDatum.towerModulePull_exact {U V : Scheme.{t}} (f : U ⟶ V) :
     PreservesFiniteLimits (d.towerModulePull f) ∧
       PreservesFiniteColimits (d.towerModulePull f) := by
-  sorry
+  unfold AdicCoefficientDatum.towerModulePull
+  constructor
+  · exact ⟨fun J _ _ ↦ inferInstance⟩
+  · exact ⟨fun J _ _ ↦ inferInstance⟩
 
 /-- Exact tower pullback preserves finite limits.
 Source: blueprint completed pullback (blueprint: def-weil-pbc-completed-pullback). -/
