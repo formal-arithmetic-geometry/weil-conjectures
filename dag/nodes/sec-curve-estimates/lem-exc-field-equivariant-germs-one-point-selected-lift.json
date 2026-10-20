@@ -27,7 +27,7 @@
    "elementary": false
   },
   {
-   "text": "Apply fieldSections_stalkInvariants at A. Its lift is prescribed by the embedding of each intermediate field, and its action is prescribed by the germ formula. For any g, extend g to tau on Omega, explicitly restrict tau and its inverse to A (integrality is preserved by algebra maps), and use the action formula on an arbitrary germ representative. The representative-preserving stalk comparison then gives e(action(g,m)) = rho(g,e(m)). Joint surjectivity of the germ maps proves this identity for every stalk element.",
+   "text": "Compose F with ULift into coefficient universe max (u + 1) v and apply the unchanged upstream fieldSections_stalkInvariants at A to this lifted sheaf. Mathlib presheafFiberCompIso and Equiv.ulift identify its A-stalk with the original A-stalk; compose this equivalence with the comparison to the Omega-stalk. The germ comparison formula lowers lifted sections. For any g, extend g to tau on Omega, explicitly restrict tau and its inverse to A, and use the upstream action formula on an arbitrary lifted germ. After lowering the section, the assumed rho germ formula gives e(action(g,m)) = rho(g,e(m)). Joint surjectivity proves this for every lifted stalk element.",
    "uses": [
     "lem-exc-field-sections-stalk-invariants",
     "lem-exc-galois-automorphism-extension"
@@ -42,7 +42,7 @@
    "elementary": false
   },
   {
-   "text": "The surjectivity clause of fieldSections_stalkInvariants produces a section zL over Spec L with germ e.symm(f(x0)). Pull it back along the pointed isomorphism X -> Spec L. Mathlib toPresheafFiber_w_apply and the representative formula for e identify its germ at x0 with f(x0), proving the selected-lift conclusion.",
+   "text": "The surjectivity clause of the upstream fieldSections_stalkInvariants produces a lifted section zL over Spec L with germ e.symm(f(x0)). Lower it by ULift.down and pull it back along the pointed isomorphism X -> Spec L. Mathlib toPresheafFiber_w_apply and the germ comparison formula for the composite equivalence e identify its original-sheaf germ at x0 with f(x0). No coefficient universe or statement of this consumer changes.",
    "uses": [
     "lem-exc-field-sections-stalk-invariants"
    ],
@@ -59,7 +59,7 @@
   "group": "F1",
   "date": "2026-10-13",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04JM, direct invariant-section proof; Tag 03QW, action on germ representatives; Tag 04FN, change of geometric-point field. Lean proof combines the existing stated theorems with proved residue-field and action-compatibility glue."
+  "place": "Tag 04JM, direct invariant-section proof; Tag 03QW, action on germ representatives; Tag 04FN, change of geometric-point field. Lean proof combines the existing stated theorems with proved residue-field and action-compatibility glue. B9 transports through the ULift stalk comparison to use the unchanged upstream theorem while preserving the smaller coefficient universe."
  },
  "mathlib_searches": [
   {
@@ -132,12 +132,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a97e8",
-  "group": "D5",
+  "reviewer": "C-6d7c3",
+  "group": "B9",
   "result": "pass",
-  "landing": "20261020T051137-L-1575484",
+  "landing": "20261020T230721-L-604799",
   "kind": "interface",
-  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
+  "note": "independent cc review: retired twin vs upstream WeilConjectures fieldSections_stalkInvariants (node lean record = upstream source signature); 3 direct importers vs live (import swaps; ULift bridge in onePoint proof), all compiled, axioms clean"
  },
  "lean_audit": {
   "master": {

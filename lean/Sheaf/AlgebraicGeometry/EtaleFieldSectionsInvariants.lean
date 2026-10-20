@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.RepresentationTheory.Invariants
-import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
+import WeilConjectures.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
 import Sheaf.AlgebraicGeometry.GaloisPointAction
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 

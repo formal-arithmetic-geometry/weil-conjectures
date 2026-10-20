@@ -9,7 +9,7 @@ public import Mathlib.FieldTheory.KrullTopology
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.RepresentationTheory.Invariants
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
+import WeilConjectures.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
 import Sheaf.AlgebraicGeometry.GaloisPointAction
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 

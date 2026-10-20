@@ -7,8 +7,9 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
-import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
+import WeilConjectures.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
 import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismStalkBijection
+import Mathlib.CategoryTheory.Limits.Preserves.Ulift
 import Mathlib.FieldTheory.AlgebraicClosure
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 
@@ -295,8 +296,9 @@ The invariant-section reconstruction
 for the selected geometric lift of a one-point etale scheme.
 (blueprint: lem-exc-field-equivariant-germs-one-point-selected-lift).
 The proof chooses the finite separable residue field of the unique point, applies
-`fieldSections_stalkInvariants`, and transports the resulting invariant section
-across the pointed isomorphism. -/
+`fieldSections_stalkInvariants` to the sheaf composed with `ULift`. The stalk
+comparison lowers its germ representatives; lower the invariant section and
+transport it across the pointed isomorphism. -/
 theorem onePoint_selected_lift_section
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -349,16 +351,24 @@ theorem onePoint_selected_lift_section
   obtain ⟨_, hc, _⟩ := geometricPointMorphism_stalk_bijection.{u, max u v}
     sΩ sA a ha
   obtain ⟨⟨c, hcg, _⟩, hcb⟩ := hc F
-  let e := Equiv.ofBijective c (hcb c hcg)
+  let U := uliftFunctor.{u + 1, max u v}
+  let F' := (sheafCompose (Spec (.of K)).smallEtaleTopology U).obj F
+  let eU := (((q.presheafFiberCompIso U).app F.obj).toEquiv.trans Equiv.ulift)
+  let e := eU.trans (Equiv.ofBijective c (hcb c hcg))
   obtain ⟨lift, act, hlift, hact, _⟩ := fieldSections_stalkInvariants K Ks A sA rfl
-  obtain ⟨hactg, hbij, _, _⟩ := hact F
+  obtain ⟨hactg, hbij, _, _⟩ := hact F'
   have he (Y : (Spec (.of K)).Etale) (y : q.fiber.obj Y)
-      (z : F.obj.obj (op Y)) :
-      e (q.toPresheafFiber Y y F.obj z) =
-        p.toPresheafFiber Y (α.app Y y) F.obj z := hcg Y y z
-  have heact (g : Gal(Ks/K)) (m : q.sheafFiber.obj F) :
-      e ((act F).smul g m) = ρ g (e m) := by
-    obtain ⟨Y, y, z, rfl⟩ := q.toPresheafFiber_jointly_surjective (P := F.obj) m
+      (z : F'.obj.obj (op Y)) :
+      e (q.toPresheafFiber Y y F'.obj z) =
+        p.toPresheafFiber Y (α.app Y y) F.obj z.down := by
+    have heU : eU (q.toPresheafFiber Y y F'.obj z) =
+        q.toPresheafFiber Y y F.obj z.down :=
+      congrArg ULift.down (ConcreteCategory.congr_hom
+        (q.toPresheafFiber_presheafFiberCompIso_hom_app U Y y F.obj) z)
+    exact (congrArg (Equiv.ofBijective c (hcb c hcg)) heU).trans (hcg Y y z.down)
+  have heact (g : Gal(Ks/K)) (m : q.sheafFiber.obj F') :
+      e ((act F').smul g m) = ρ g (e m) := by
+    obtain ⟨Y, y, z, rfl⟩ := q.toPresheafFiber_jointly_surjective (P := F'.obj) m
     obtain ⟨τ, hτ⟩ := exists_algEquiv_extending_separableClosure K Ks Ω g
     let τA : A ≃ₐ[K] A :=
       { toFun := fun x ↦ ⟨τ x, mem_algebraicClosure_iff'.mpr
@@ -386,7 +396,7 @@ theorem onePoint_selected_lift_section
         ((congrArg (fun t ↦ Spec.map (CommRingCat.ofHom τA.toRingHom) ≫ t)
           (show y.left ≫ Y.hom = sA from Over.w y)).trans htA))
     rw [hactg g τA hτA Y y y' rfl z, he, he]
-    apply (hρ g τ hτ Y (α.app Y y) (α.app Y y') ?_ z).symm
+    apply (hρ g τ hτ Y (α.app Y y) (α.app Y y') ?_ z.down).symm
     change a ≫ (Spec.map (CommRingCat.ofHom τA.toRingHom) ≫ y.left) =
       Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ (a ≫ y.left)
     rw [← Category.assoc, ← Category.assoc, ← Spec.map_comp, ← Spec.map_comp]
@@ -401,7 +411,7 @@ theorem onePoint_selected_lift_section
     rw [hd, hlift, ← Spec.map_comp]
     congr 1
   let m := e.symm (f x₀)
-  have hm : ∀ g ∈ L.fixingSubgroup, (act F).smul g m = m := by
+  have hm : ∀ g ∈ L.fixingSubgroup, (act F').smul g m = m := by
     intro g hg
     apply e.injective
     rw [heact]
@@ -419,8 +429,8 @@ theorem onePoint_selected_lift_section
       exact (h.symm.trans (congrArg (algebraMap Ks Ω) hgk)).symm
     exact (hf g τ hτ x₀ x₀ hx).symm
   obtain ⟨zL, _, hzL⟩ := (hbij L).surjOn hm
-  refine ⟨F.obj.map d.hom.op zL, ?_⟩
-  have hw := p.toPresheafFiber_w_apply d.hom x₀ F.obj zL
+  refine ⟨F.obj.map d.hom.op zL.down, ?_⟩
+  have hw := p.toPresheafFiber_w_apply d.hom x₀ F.obj zL.down
   rw [hdLift] at hw
   exact hw.trans ((he (etaleSpec K L) (lift L) zL).symm.trans
     ((congrArg e hzL).trans (e.apply_symm_apply (f x₀))))
