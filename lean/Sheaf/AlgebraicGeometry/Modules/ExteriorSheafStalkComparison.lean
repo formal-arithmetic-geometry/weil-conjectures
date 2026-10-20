@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Sheaf.AlgebraicGeometry.Modules.ExteriorPresheafStalkWedge
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPresheafStalkWedge
 import Mathlib.Topology.Sheaves.Sheafify
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
@@ -25,7 +25,83 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
-private noncomputable def exteriorGermMap {X : Scheme.{v}} (M : X.Modules)
+private theorem exteriorSheafRestriction_eq {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
+    {U V : X.Opensᵒᵖ} (f : U ⟶ V) :
+    exteriorSheafRestriction M n f =
+      (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).map f := by
+  apply ((Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f)).2 _ ?_).symm
+  intro a
+  change PresheafOfModules.ExteriorPower.map M.val n f
+      (exteriorPower.ιMulti _ n a) =
+    exteriorPower.ιMulti _ n (fun i ↦ M.val.restrictₛₗ f (a i))
+  exact PresheafOfModules.ExteriorPower.map_ιMulti M.val n f a
+
+set_option backward.isDefEq.respectTransparency false in
+@[no_expose, irreducible] private noncomputable def exteriorPresheafStalkMap {Y : TopCat.{v}}
+    {R : Y.Presheaf CommRingCat.{v}} {P Q : _root_.PresheafOfModules.{v}
+      (R ⋙ forget₂ CommRingCat RingCat)} (θ : P ⟶ Q) (x : Y) :
+    TopCat.Presheaf.stalk (C := Ab.{v}) P.presheaf x →ₗ[R.stalk x]
+      TopCat.Presheaf.stalk (C := Ab.{v}) Q.presheaf x :=
+  { toFun := PresheafOfModules.stalkAddMap θ
+    map_add' := (PresheafOfModules.stalkAddMap θ).map_add
+    map_smul' := by
+      intro r z
+      obtain ⟨U, hxU, r, rfl⟩ := R.exists_germ_eq r
+      obtain ⟨V, hxV, z, rfl⟩ := TopCat.Presheaf.exists_germ_eq P.presheaf z
+      have hx : x ∈ U ⊓ V := ⟨hxU, hxV⟩
+      rw [← R.germ_res_apply (homOfLE inf_le_left : U ⊓ V ⟶ U) x hx r,
+        ← TopCat.Presheaf.germ_res_apply P.presheaf
+          (homOfLE inf_le_right : U ⊓ V ⟶ V) x hx z,
+        ← PresheafOfModules.germ_smul]
+      dsimp only [PresheafOfModules.stalkAddMap]
+      erw [TopCat.Presheaf.stalkFunctor_map_germ_apply,
+        TopCat.Presheaf.stalkFunctor_map_germ_apply]
+      change TopCat.Presheaf.germ Q.presheaf _ x hx
+        ((θ.app _).hom (R.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op r •
+          P.map (homOfLE inf_le_right : U ⊓ V ⟶ V).op z)) = _
+      rw [(θ.app _).hom.map_smul]
+      exact PresheafOfModules.germ_smul (R := R) Q x _ hx _ _ }
+
+private theorem exteriorPresheafStalkMap_germ {Y : TopCat.{v}}
+    {R : Y.Presheaf CommRingCat.{v}} {P Q : _root_.PresheafOfModules.{v}
+      (R ⋙ forget₂ CommRingCat RingCat)} (θ : P ⟶ Q) (x : Y)
+    (U : TopologicalSpace.Opens Y) (hx : x ∈ U) (z : P.obj (op U)) :
+    exteriorPresheafStalkMap θ x (TopCat.Presheaf.germ P.presheaf U x hx z) =
+      TopCat.Presheaf.germ Q.presheaf U x hx (θ.app (op U) z) := by
+  unfold exteriorPresheafStalkMap
+  exact TopCat.Presheaf.stalkFunctor_map_germ_apply U x hx
+    ((PresheafOfModules.toPresheaf _).map θ) z
+
+set_option backward.isDefEq.respectTransparency false in
+@[no_expose, irreducible] private noncomputable def exteriorWedgeComparison
+    {X : Scheme.{v}} (M : X.Modules) (n : ℕ) (x : X) :
+    (M.presheaf.stalk x) [⋀^Fin n]→ₗ[X.presheaf.stalk x]
+      (TopCat.Presheaf.stalk (C := Ab.{v}) (exteriorSheafPresheaf M n).presheaf x) := by
+  let θ : PresheafOfModules.exteriorPower (R := X.presheaf) M.val n ⟶
+      exteriorSheafPresheaf M n :=
+    { app U := 𝟙 _
+      naturality {U V} f := by
+        change (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).map f =
+          exteriorSheafRestriction M n f
+        exact (exteriorSheafRestriction_eq M n f).symm }
+  exact (exteriorPresheafStalkMap (R := X.presheaf) θ x).compAlternatingMap
+    (exteriorPresheaf_stalk_wedge M n x).choose
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorWedgeComparison_germ {X : Scheme.{v}} (M : X.Modules)
+    (n : ℕ) (x : X) (U : X.Opens) (hx : x ∈ U) (a : Fin n → M.val.obj (op U)) :
+    exteriorWedgeComparison M n x (fun i ↦ M.presheaf.germ U x hx (a i)) =
+      TopCat.Presheaf.germ (exteriorSheafPresheaf M n).presheaf U x hx
+        (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a) := by
+  unfold exteriorWedgeComparison
+  change exteriorPresheafStalkMap _ x
+    ((exteriorPresheaf_stalk_wedge M n x).choose
+      (fun i ↦ M.presheaf.germ U x hx (a i))) = _
+  rw [(exteriorPresheaf_stalk_wedge M n x).choose_spec U hx a]
+  exact exteriorPresheafStalkMap_germ _ x U hx _
+
+set_option backward.isDefEq.respectTransparency false in
+@[no_expose, irreducible] private noncomputable def exteriorGermMap {X : Scheme.{v}} (M : X.Modules)
     (n : ℕ) (x : X) (U : X.Opens) (hx : x ∈ U) :
     ⋀[X.presheaf.obj (op U)]^n (M.val.obj (op U)) →ₗ[X.presheaf.obj (op U)]
       (ModuleCat.restrictScalars (X.presheaf.germ U x hx).hom).obj
@@ -69,6 +145,7 @@ private theorem exteriorGermMap_wedge {X : Scheme.{v}} (M : X.Modules)
     exteriorGermMap M n x U hx (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a) =
       exteriorPower.ιMulti (X.presheaf.stalk x) n
         (fun i ↦ M.presheaf.germ U x hx (a i)) := by
+  unfold exteriorGermMap
   exact exteriorPower.alternatingMapLinearEquiv_apply_ιMulti _ a
 
 set_option maxHeartbeats 800000 in
@@ -90,13 +167,22 @@ private theorem exteriorGermMap_res {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
   induction hz using Submodule.span_induction with
   | mem z hz =>
     obtain ⟨a, rfl⟩ := hz
-    change exteriorGermMap M n x V hx
-      ((exteriorSheafRestriction M n f.op).hom (exteriorPower.ιMulti _ n a)) = _
-    erw [(Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f.op)).1 a]
-    erw [exteriorGermMap_wedge, exteriorGermMap_wedge]
-    congr 1
-    funext k
-    exact M.presheaf.germ_res_apply f x hx (a k)
+    have hr := (Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f.op)).1 a
+    calc
+      K (r (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)) =
+          exteriorGermMap M n x V hx
+            (exteriorPower.ιMulti (X.presheaf.obj (op V)) n
+              (fun i ↦ M.val.map f.op (a i))) := congrArg K hr
+      _ = exteriorPower.ιMulti (X.presheaf.stalk x) n
+          (fun i ↦ M.presheaf.germ V x hx (M.val.map f.op (a i))) :=
+        exteriorGermMap_wedge M n x V hx _
+      _ = exteriorPower.ιMulti (X.presheaf.stalk x) n
+          (fun i ↦ M.presheaf.germ U x (f.le hx) (a i)) := by
+        apply congrArg (exteriorPower.ιMulti (X.presheaf.stalk x) n)
+        funext i
+        exact M.presheaf.germ_res_apply f x hx (a i)
+      _ = L (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a) :=
+        (exteriorGermMap_wedge M n x U (f.le hx) a).symm
   | zero => simp only [map_zero]
   | add z w hz hw ihz ihw => simpa only [map_add] using congrArg₂ (· + ·) ihz ihw
   | smul a z hz ih =>
@@ -148,7 +234,8 @@ private theorem exteriorPresheaf_stalk_comparison {X : Scheme.{v}} (M : X.Module
   let P := exteriorSheafPresheaf M n
   let T := TopCat.Presheaf.stalk (C := Ab.{v}) P.presheaf x
   let W := ⋀[X.presheaf.stalk x]^n (M.presheaf.stalk x)
-  obtain ⟨b, hb⟩ := exteriorPresheaf_stalk_wedge M n x
+  let b := exteriorWedgeComparison M n x
+  have hb := exteriorWedgeComparison_germ M n x
   let q : W →ₗ[X.presheaf.stalk x] T := exteriorPower.alternatingMapLinearEquiv b
   let c : CategoryTheory.Limits.Cocone ((TopologicalSpace.OpenNhds.inclusion x).op ⋙ P.presheaf) :=
     { pt := AddCommGrpCat.of W

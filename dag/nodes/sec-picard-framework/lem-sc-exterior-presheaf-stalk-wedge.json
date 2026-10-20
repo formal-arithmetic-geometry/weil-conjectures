@@ -100,14 +100,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorPresheafStalkWedge",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorPresheafStalkWedge.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorPresheafStalkWedge",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorPresheafStalkWedge.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorPresheaf_stalk_wedge",
-  "statement": "theorem exteriorPresheaf_stalk_wedge {X : Scheme.{v}} (M : X.Modules)\n    (n : ℕ) (x : X) :\n    ∃ b : (M.presheaf.stalk x) [⋀^Fin n]→ₗ[X.presheaf.stalk x]\n        (TopCat.Presheaf.stalk (C := Ab.{v}) (exteriorSheafPresheaf M n).presheaf x),\n      ∀ (U : X.Opens) (hx : x ∈ U) (a : Fin n → M.val.obj (op U)),\n        b (fun i ↦ M.presheaf.germ U x hx (a i)) =\n          TopCat.Presheaf.germ (exteriorSheafPresheaf M n).presheaf U x hx\n            (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)",
+  "statement": "theorem exteriorPresheaf_stalk_wedge {X : Scheme.{v}} (M : X.Modules)\n    (n : ℕ) (x : X) :\n    ∃ b : (M.presheaf.stalk x) [⋀^Fin n]→ₗ[X.presheaf.stalk x]\n        (TopCat.Presheaf.stalk (C := Ab.{v})\n          (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).presheaf x),\n      ∀ (U : X.Opens) (hx : x ∈ U) (a : Fin n → M.val.obj (op U)),\n        b (fun i ↦ M.presheaf.germ U x hx (a i)) =\n          TopCat.Presheaf.germ\n            (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).presheaf U x hx\n            (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)",
   "branch": "sheaf-dag",
-  "by": "V4",
-  "date": "2026-10-13"
+  "by": "J5",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf copy in favor of the upstream theorem. The upstream statement uses PresheafOfModules.exteriorPower; the retained consumer constructs the identity-on-sections morphism to exteriorSheafPresheaf using uniqueness of restrictions on pure wedges, and composes the upstream alternating map with its linear stalk map. Its germ formula gives exactly the old wedge-germ formula."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -120,14 +121,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V4",
+  "reviewer": "C-189b6",
+  "group": "J5",
   "result": "pass",
-  "landing": "20261013T121841-L-3558710",
+  "landing": "20261020T141311-L-2034208",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Retirement row 59 (DIFFERENT): Sheaf copy reduced to a withdrawn stub; the sole consumer ExteriorSheafStalkComparison (unclaimed) now uses the proved WeilConjectures twin through an identity-on-sections bridge; public signatures and imports unchanged; delivered files and importer ExteriorTensorStalkKernelSpan compile; original consumer fails against the stub (forced); axioms clean; node lean.statement matches the twin verbatim"
  },
  "lean_audit": {
   "master": {
