@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.FieldTheory.GaloisUnitsTwoCocycles
 import WeilConjectures.FieldTheory.GaloisUnitsCohomology
-import Sheaf.FieldTheory.GaloisUnitsHomogeneousCocycleDescent
+import WeilConjectures.FieldTheory.GaloisUnitsHomogeneousCocycleDescent
 
 /-!
 # Homogeneous and inhomogeneous continuous unit cohomology
@@ -54,7 +54,6 @@ change of variables and its compatibility are the explicit argument above.
 (blueprint: lem-sc-galois-units-homogeneous-comparison). -/
 theorem nonempty_equiv_galoisUnitsH2_twoCocycleClasses (K : Type u) [Field K] :
     Nonempty (GaloisUnitsH2 K ≃ GaloisUnitsTwoCocycleClasses K)  := by
-  apply nonempty_equiv_galoisUnitsH2_twoCocycleClasses_of_cocycle_equiv K
-  exact nonempty_equiv_galoisUnitsHomogeneousCocycles_twoCocycle K
+  exact ⟨galoisUnitsH2EquivTwoCocycleClasses K⟩
 
 end Field
