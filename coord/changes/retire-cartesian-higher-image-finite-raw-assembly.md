@@ -162,3 +162,15 @@ withdrawn stubs; a new retirement delivery for this item is unnecessary.
 Backups of both edited files are adjacent `*.maintenance-<UTC timestamp>.bak` files.
 Validation uses tools/lean_file.sh sequentially with SHEAF_FILE_TIMEOUT=60 for the
 stub and the three official consumers, plus the queue and dispatcher predicates.
+
+Validation completed during maintenance: the stub compiled in 0.2 s; the official
+CartesianHigherImageFiniteRawClassVanishing, CartesianRawClassChartNaturality and
+CartesianRawClassChartRepresentative modules compiled in 2.4 s, 9.7 s and 41.7 s,
+respectively, sequentially under a 60 s file limit. `rework._present` is false and
+the item is absent from both retire row selections. The refreshed coord/queue.tsv
+and coord/queue.md no longer list it. The launcher's refreshed shared clone makes
+its actual `done_now` and `withdrawn` expressions both true.
+
+The automatic build snapshot 97ed399177 picked up the marker and this maintenance
+record under the merge lock while the single-file checks were running. This
+follow-up records their successful completion in a dedicated maintenance commit.
