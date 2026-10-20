@@ -17,7 +17,7 @@
  },
  "proof": [
   {
-   "text": "Use the adopted-source construction picardConstantTensorBalancedSections for M = scalarObj f F(top), with its _smul and _map theorems. This directly supplies the balanced equivalences and laws of the same dependency node, without the retired Sheaf existential wrapper. Compose each with externalSectionsComponent. On pure tensors, Hom.app_smul for the second pullback adjunction unit and tmulSection_smul prove structure-ring linearity; tensor induction proves it on all elements. The restriction identity of the balanced equivalences and externalSectionsComponent_naturality assemble the components into a presheaf morphism. Bijectivity of composition with an additive equivalence gives the required iff.",
+   "text": "Use the adopted-source externalConstantSectionsTensorMap construction and its externalConstantSectionsTensorMap_app_bijective_iff theorem. The construction composes picardConstantTensorBalancedSections at each open with externalSectionsComponent. Hom.app_smul for the second pullback adjunction unit and tmulSection_smul prove structure-ring linearity on pure tensors; tensor induction gives linearity on all elements. The balanced equivalences restriction identity and externalSectionsComponent_naturality give presheaf naturality. The component formula identifies the map with the external section component composed with a bijective additive equivalence, proving the bijectivity iff. Taking this constructed morphism as the witness gives the original existential statement with all hypotheses unchanged, without the duplicate Sheaf wrapper.",
    "uses": [
     "lem-sc-picard-constant-tensor-balanced-sections",
     "lem-sc-external-sections-components",
@@ -32,9 +32,9 @@
   "def-sc-field-linear-module-cohomology-operations"
  ],
  "proof_origin": {
-  "by": "U4 second reader, algebraic reduction",
+  "by": "M8 stage-3 retirement, upstream construction and complete proof",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, degree-zero external section map; linearity and presheaf assembly formalized directly. R2 retirement: bind the balanced equivalences and their two laws directly to the adopted-source API; all linearity, naturality, and bijectivity proofs are unchanged."
+  "place": "Tag 0BED, degree-zero external section map. The adopted-source map and its component bijectivity theorem realize exactly the existing node. The original existential statement is recovered by the witness externalConstantSectionsTensorMap; this recovery and the existing parent compile with only propext, Classical.choice and Quot.sound for the recovery."
  },
  "mathlib_searches": [
   {
@@ -102,14 +102,20 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ExternalConstantSectionsTensorMap",
-  "file": "lean/Sheaf/AlgebraicGeometry/ExternalConstantSectionsTensorMap.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_external_constant_sections_tensor_map",
-  "statement": "theorem exists_external_constant_sections_tensor_map\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (F : X.Modules) (G : Y.Modules) :\n    ∃ φ : picardConstantSectionsTensor k Y g (scalarObj f F (op ⊤)) G ⟶\n      ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj\n        (externalCupCoefficients f g F G)).val,\n      ∀ V : Y.Opens, Function.Bijective (φ.app (op V)) ↔\n        Function.Bijective (externalSectionsComponent f g F G V)",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ExternalConstantSectionsTensorMap",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ExternalConstantSectionsTensorMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.externalConstantSectionsTensorMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.externalConstantSectionsTensorMap",
+   "AlgebraicGeometry.Scheme.Modules.externalConstantSectionsTensorMap_app",
+   "AlgebraicGeometry.Scheme.Modules.externalConstantSectionsTensorMap_app_bijective_iff"
+  ],
+  "statement": "noncomputable def externalConstantSectionsTensorMap\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (F : X.Modules) (G : Y.Modules) :\n    picardConstantSectionsTensor k Y g (scalarObj f F (op ⊤)) G ⟶\n      ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj\n        (externalCupCoefficients f g F G)).val",
   "branch": "sheaf-dag",
-  "by": "J3",
-  "date": "2026-10-13"
+  "by": "M8",
+  "date": "2026-10-21",
+  "note": "The adopted-source construction is an explicit presheaf morphism, and its _app_bijective_iff theorem gives precisely the componentwise equivalence of the retired Sheaf existential wrapper. The sole DAG parent already uses this named construction and theorem directly. No hypothesis, mathematical statement, proof dependency, or unit route is changed."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -124,12 +130,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-add6d",
-  "group": "R2",
+  "reviewer": "C-3c5f0",
+  "group": "M8",
   "result": "pass",
-  "landing": "20261020T162322-L-3589734",
+  "landing": "20261020T221256-L-4167998",
   "kind": "interface",
-  "note": "independent cc review: removed Sheaf exists_picard_constant_tensor_balanced_sections vs live upstream WeilConjectures picardConstantTensorBalancedSections + _smul/_map (identical laws); adapted unclaimed consumer ExternalConstantSectionsTensorMap compiles (10.7 s), axioms clean; node changes limited to lean/proof_origin/proof text"
+  "note": "independent cc review: retired Sheaf exists_external_constant_sections_tensor_map vs upstream WeilConjectures externalConstantSectionsTensorMap + _app_bijective_iff (old existential recovered verbatim, axioms clean); no importers; node lean record verbatim vs upstream source; parent proof text matches its Lean"
  },
  "lean_audit": {
   "master": {
