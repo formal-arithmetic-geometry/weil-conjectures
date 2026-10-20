@@ -18811,3 +18811,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:43 L: returned deliver/D4/Sheaf.CategoryTheory.DiscreteContinuousRepToCommGrpEssSurj (reviewer RETURN: (reviewer C-c5d74, head c5d746f88) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Discr)
 - 19:49 L: returned deliver/K2/Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitPresentation (reviewer RETURN: (reviewer C-d8b18, head d8b187c1a) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Mo)
 - 20:11 L: returned deliver/W6/Sheaf.Paper.KoszulReconstruction (reviewer RETURN: (reviewer C-373e2, head 373e2cba8) D1/D2 (brief point 4): koszulReconstructionComparison restates the item; the worker m)
+- 20:11 L: returned deliver/NA/lem-weil-pbc-residue-perfect-finite-quotient-models (reviewer RETURN: L: independent stage-2 immutable head 1edabf9b815b: H3 R1: the predicate ResidueFiniteQuotientModel asks for a single co)
