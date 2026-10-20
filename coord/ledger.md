@@ -18793,3 +18793,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:47 L: returned deliver/K2/Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitPresentation (reviewer RETURN: (reviewer C-de9f6, head de9f6dca6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Mo)
 
 - 04:48 L: batch 20261020T165437 dependency take-out
+- 20:48 L: returned deliver/G7/Sheaf.AlgebraicGeometry.OrdinaryKunnethFiniteRing (reviewer RETURN: (reviewer C-f9baa, head f9baa9189) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Or)
