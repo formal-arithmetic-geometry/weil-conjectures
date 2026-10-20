@@ -20,6 +20,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+import WeilConjectures.AlgebraicGeometry.ProjSheafificationExact
+
 /-!
 # Serre duality on the projective line
 

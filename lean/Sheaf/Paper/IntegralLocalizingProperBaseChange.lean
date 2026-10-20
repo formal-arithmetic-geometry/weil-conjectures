@@ -26,7 +26,7 @@ import Sheaf.Paper.UnboundedBaseChangeExtension
 import Sheaf.Paper.UnboundedLocalizingPullback
 import Sheaf.SixFunctors.ProperImageLocalizingProper
 import Sheaf.Paper.IntegralModels
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Integral proper base change on localizing categories

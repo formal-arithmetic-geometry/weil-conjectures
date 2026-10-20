@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.Stalk
+
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
@@ -70,20 +71,10 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 namespace WeilComplex
 
 -- TODO(unify): thm:proetale-weil-perfectness
-/-- Blueprint `def-weil-ordinary-compact-cohomology`: Ordinary and compactly supported
-cohomology.
-
-The compactly supported cohomology `H_c^r(X ⊗ k̄, K) := Hʳ(Spec k̄, Ra_! K)` of a Weil
+/-- The compactly supported cohomology `H_c^r(X ⊗ k̄, K) := Hʳ(Spec k̄, Ra_! K)` of a Weil
 complex `K` on a separated `k₀`-scheme `a : X ⟶ Spec k₀` of finite type, with its geometric
 Frobenius: the cohomology of the direct image with compact support of `K` along `a`, a Weil
-complex on `Spec k₀`. Here `Hʳ(Spec k̄, -)` is the evaluation `Fib_s` at the geometric point
-followed by `Hʳ` (`AlgebraicGeometry.WeilComplex.cohomologyFrobeniusModule`). The ordinary
-cohomology is `AlgebraicGeometry.WeilComplex.cohomology`, the versions for Weil sheaves are
-`AlgebraicGeometry.WeilSheaf.compactlySupportedCohomology` and
-`AlgebraicGeometry.WeilSheaf.cohomology`, and the constant coefficients `H_c^i(Y, ℚ̄_ℓ)` are
-those of the constant Weil sheaf `AlgebraicGeometry.WeilSheaf.adicConstant`. The finite
-coefficient stages are `AlgebraicGeometry.Etale.compactlySupportedCohomology` and
-`AlgebraicGeometry.Etale.cohomology`. -/
+complex on `Spec k₀`. -/
 noncomputable def compactlySupportedCohomology (K : WeilComplex k₀ l X) (r : ℤ) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj K).cohomologyFrobeniusModule r
@@ -96,9 +87,7 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `def-weil-ordinary-compact-cohomology` (ordinary cohomology).
-
-The ordinary cohomology `Hʳ(Y ⊗ k̄, K) := Hʳ(Spec k̄, Ra_* K)` of a Weil complex `K` on a
+/-- The ordinary cohomology `Hʳ(Y ⊗ k̄, K) := Hʳ(Spec k̄, Ra_* K)` of a Weil complex `K` on a
 `k₀`-scheme `a : Y ⟶ Spec k₀` of finite type, with its geometric Frobenius: the cohomology of the
 derived direct image of `K` along `a`, a Weil complex on `Spec k₀`. For `a` proper it agrees with
 `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology`. -/

@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Sheaf.AlgebraicGeometry.VectorBundleIntegration
 public import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

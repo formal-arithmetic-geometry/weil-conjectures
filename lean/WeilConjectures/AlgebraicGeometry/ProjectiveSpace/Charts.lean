@@ -258,7 +258,7 @@ def affineChart : 𝔸(PUnit.{u + 1}; S) ⟶ ProjectiveLine S :=
   AffineSpace.reindex (fun _ : {j : ULift.{u} (Fin 2) // j ≠ ⟨1⟩} ↦ PUnit.unit) S ≫
     (standardOpenIso (ULift.{u} (Fin 2)) S ⟨1⟩).inv ≫ (standardOpen (ULift.{u} (Fin 2)) S ⟨1⟩).ι
 
-instance : IsIso (AffineSpace.reindex (fun _ : {j : ULift.{u} (Fin 2) // j ≠ ⟨1⟩} ↦
+instance Charts_isIso : IsIso (AffineSpace.reindex (fun _ : {j : ULift.{u} (Fin 2) // j ≠ ⟨1⟩} ↦
     PUnit.unit.{u + 1}) S) := by
   have := subsingleton_ne_one.{u}
   refine ⟨AffineSpace.reindex (fun _ ↦ ⟨⟨0⟩, by simp⟩) S, ?_, ?_⟩ <;>

@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
+import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 
 /-!
 # Total complexes of first quadrant double complexes

@@ -29,7 +29,7 @@ namespace DerivedCategory
 
 variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
 
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance DerivedCategory_hasColimitsOfSize : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
 
 variable [HasDerivedCategory.{w} C]
 

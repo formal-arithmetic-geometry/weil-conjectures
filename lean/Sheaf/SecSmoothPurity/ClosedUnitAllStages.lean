@@ -43,7 +43,7 @@ import Sheaf.Paper.SfIntegralDirectImageConstructible
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
 
 /-!
 # Closed direct image is fully faithful at every coefficient stage

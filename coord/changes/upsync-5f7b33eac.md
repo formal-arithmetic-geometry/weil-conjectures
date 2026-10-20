@@ -31,3 +31,13 @@ The upstream module(s) `WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.S
 ## Prefer upstream, round 2
 
 The upstream module(s) `WeilConjectures.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparisonFactorization` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparisonFactorization`, `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange`.
+
+## Aborted (2026-10-20T09:24:31Z)
+
+the failures reach Weil.Solution (the six target statements, never changed) through Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparisonFactorization
+
+Every landing of the run was dropped; the library is the one from before the sync.
+
+## Status
+
+reverted

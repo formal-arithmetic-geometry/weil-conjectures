@@ -27,6 +27,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
+import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-!
 # Serre's theorems on the cohomology of projective schemes
@@ -114,6 +116,36 @@ theorem ProjectiveSpace.nonempty_cechComplex_twist_iso_monomialCechComplex (k : 
         (ProjectiveSpace.twist n (Spec (.of k)) m).presheafModuleCat) ≅
       ProjectiveSpace.monomialCechComplex n k m) :=
   ⟨ProjectiveSpace.cechComplexTwistIso n k m⟩
+
+private def opensSiteCech (X : Scheme.{u}) (U : n → X.Opens) :
+    SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)) where
+  W p t := ⨅ k, U (t k)
+  pr p t k := homOfLE (iInf_le _ k)
+  comm _ _ _ := Subsingleton.elim _ _
+  universal p t Z a _ := by
+    refine ⟨homOfLE (le_iInf fun k ↦ (a k).le), ?_, ?_⟩
+    · intro k
+      apply Subsingleton.elim
+    · intro b _
+      apply Subsingleton.elim
+  W_zero t := by simp
+  pr_zero _ := Subsingleton.elim _ _
+  indexMap t α := homOfLE (le_iInf fun k ↦ iInf_le _ (α k))
+  indexMap_pr _ _ _ := Subsingleton.elim _ _
+
+private noncomputable def opensSiteCechIso (X : Scheme.{u}) (U : n → X.Opens)
+    (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{u}) :
+    (opensSiteCech n X U).complex F ≅ (TopCat.Presheaf.cechComplex U).obj F :=
+  HomologicalComplex.Hom.isoOfComponents (fun _ ↦ Iso.refl _) (by
+    intro p q hpq
+    obtain rfl : p + 1 = q := hpq
+    simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
+    apply AddCommGrpCat.ext
+    intro s
+    funext t
+    rw [TopCat.Presheaf.cechComplex_d_apply]
+    simp only [SiteCechComplex.complex, CochainComplex.of_d]
+    rfl)
 
 /-- **Cohomology vanishes above the number of projective coordinates.** For a commutative
 ring `A`, `n` with `Nat.card n = d + 1` and a quasi-coherent module `ℱ` on `ℙᵈ_A = ℙ(n; Spec A)`,

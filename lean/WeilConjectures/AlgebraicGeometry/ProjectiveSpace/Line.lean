@@ -91,7 +91,7 @@ private lemma subsingleton_ne_zero : Subsingleton {j : ULift.{u} (Fin 2) // j �
     subst ha hb
     rfl⟩
 
-instance : IsIso (AffineSpace.reindex (fun _ : {j : ULift.{u} (Fin 2) // j ≠ ⟨0⟩} ↦
+instance Line_isIso : IsIso (AffineSpace.reindex (fun _ : {j : ULift.{u} (Fin 2) // j ≠ ⟨0⟩} ↦
     PUnit.unit.{u + 1}) S) := by
   have := subsingleton_ne_zero.{u}
   refine ⟨AffineSpace.reindex (fun _ ↦ ⟨⟨1⟩, by simp⟩) S, ?_, ?_⟩ <;>

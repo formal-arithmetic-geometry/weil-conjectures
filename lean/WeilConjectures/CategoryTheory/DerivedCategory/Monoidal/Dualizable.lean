@@ -34,7 +34,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{v} A] [Abelian.HasFunctorialFlatResolution A]
 
-local instance localInstance_Dualizable_1 : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+local instance Dualizable_hasColimitsOfSize : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
 /-- The lax monoidal structure `Qh K ⊗ᴸ Qh L ⟶ Qh (K ⊗ L)` is an isomorphism when `K` is
 K-flat. -/
