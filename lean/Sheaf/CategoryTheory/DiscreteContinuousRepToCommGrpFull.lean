@@ -5,7 +5,7 @@ Authors: SHEAF worker K3
 -/
 module
 
-public import Sheaf.CategoryTheory.DiscreteContinuousRepToCommGrp
+public import WeilConjectures.CategoryTheory.DiscreteContinuousRepToCommGrp
 
 /-!
 # Fullness of the internal group object functor
@@ -18,6 +18,9 @@ Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-poi
 universe u w
 open CategoryTheory
 namespace Rep
+
+attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 open scoped CategoryTheory.MonObj
 open CartesianMonoidalCategory

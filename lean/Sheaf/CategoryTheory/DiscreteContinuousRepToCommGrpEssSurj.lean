@@ -5,7 +5,7 @@ Authors: SHEAF worker K3
 -/
 module
 
-public import Sheaf.CategoryTheory.DiscreteContinuousRepToCommGrp
+public import WeilConjectures.CategoryTheory.DiscreteContinuousRepToCommGrp
 import Mathlib.CategoryTheory.Monoidal.Internal.Types.CommGrp_
 
 /-!
@@ -19,6 +19,9 @@ Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-poi
 universe u w
 open CategoryTheory
 namespace Rep
+
+attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
