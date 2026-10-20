@@ -120,14 +120,15 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.PerfectCommonAffineModels",
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectCommonAffineModels",
   "declaration": "AlgebraicGeometry.Scheme.perfect_common_affine_models",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectCommonAffineModels.lean",
-  "statement": "theorem perfect_common_affine_models (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (E F : schemeDerivedCategory X) (hE : IsPerfect X E) (hF : IsPerfect X F) (x : X) : ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧ ∃ A B : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ, IsStrictlyPerfect X U A ∧ IsStrictlyPerfect X U B ∧ Nonempty ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj A) ∧ Nonempty ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj F ≅ DerivedCategory.Q.obj B)",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectCommonAffineModels.lean",
+  "statement": "theorem perfect_common_affine_models (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E F : schemeDerivedCategory X) (hE : IsPerfect X E) (hF : IsPerfect X F) (x : X) :\n    ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧\n      ∃ A B : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,\n        IsStrictlyPerfect X U A ∧ IsStrictlyPerfect X U B ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj A) ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj F ≅\n          DerivedCategory.Q.obj B)",
   "branch": "sheaf-dag",
   "by": "T3",
   "date": "2026-10-13",
-  "existing": false
+  "existing": true,
+  "note": "A7 retirement, 2026-10-20: the adopted upstream twin contains the same proved theorem and private helpers. Its explicit overFunctor.{u} universes agree with the universes inferred by the Sheaf copy. Consumers now import the upstream module."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -140,13 +141,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "C-8ba36",
+  "group": "A7",
   "result": "pass",
-  "landing": "20261012T194144-L-465996",
+  "landing": "20261020T135347-L-1813671",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf copy vs live WeilConjectures twin (identical up to explicit overFunctor.{u}); adapted PerfectDerivedTensor import swap compiled; node lean record = twin signature verbatim; twin axioms clean"
  }
 }
