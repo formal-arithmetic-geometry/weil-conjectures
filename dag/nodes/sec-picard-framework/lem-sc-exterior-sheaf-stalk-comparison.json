@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Construct the identity-on-sections morphism from the upstream PresheafOfModules.exteriorPower to exteriorSheafPresheaf. Naturality follows because their restriction maps agree on pure wedges by the uniqueness in exteriorSheafRestriction_existsUnique. Compose the upstream alternating wedge-germ map with the induced linear stalk map; the stalk-map germ formula recovers exactly the required wedge germs. Use the alternating wedge-germ map of lem-sc-exterior-presheaf-stalk-wedge and the exterior-power universal property to construct a linear map q from the exterior power of M_x to the presheaf exterior stalk. Construct the reverse additive map p by the stalk colimit universal property, using the alternating map sending section tuples to wedges of their germs on each neighborhood. Naturality follows on wedge generators and then by span induction, with scalars restricted along the section ring maps. The germ scalar formula makes p linear. The two composites are identities by span induction; in the stalk exterior power represent a finite tuple on a common neighborhood. This yields the presheaf comparison and its wedge-germ formula.",
+   "text": "Use the alternating wedge-germ map of lem-sc-exterior-presheaf-stalk-wedge and the exterior-power universal property to construct a linear map q from the exterior power of M_x to the stalk of the upstream sectionwise exterior presheaf. Construct the reverse additive map p by the stalk colimit universal property, sending section tuples to wedges of their germs on each neighborhood. Naturality follows on wedge generators and then by span induction, with scalars restricted along the section ring maps. The germ scalar formula makes p linear. The two composites are identities by span induction; in the stalk exterior power represent a finite tuple on a common neighborhood. This yields the presheaf comparison and its wedge-germ formula.",
    "uses": [
     "lem-sc-exterior-presheaf-stalk-wedge",
     "def-sc-sheaf-exterior-power",
@@ -127,14 +127,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafStalkComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafStalkComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafStalkComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafStalkComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_stalk_comparison",
-  "statement": "theorem exteriorSheaf_stalk_comparison {X : Scheme.{v}} (M : X.Modules)\n    (n : ℕ) (x : X) :\n    ∃ e : (exteriorSheaf M n).presheaf.stalk x ≃ₗ[X.presheaf.stalk x]\n        ⋀[X.presheaf.stalk x]^n (M.presheaf.stalk x),\n      ∀ (U : X.Opens) (hx : x ∈ U) (a : Fin n → M.val.obj (op U)),\n        e ((exteriorSheaf M n).presheaf.germ U x hx (exteriorSheafSection M n U a)) =\n          exteriorPower.ιMulti (X.presheaf.stalk x) n\n            (fun i ↦ M.presheaf.germ U x hx (a i))",
+  "statement": "theorem exteriorSheaf_stalk_comparison {X : Scheme.{v}} (M : X.Modules)\n    (n : ℕ) (x : X) :\n    ∃ e : (exteriorPower M n).presheaf.stalk x ≃ₗ[X.presheaf.stalk x]\n        ⋀[X.presheaf.stalk x]^n (M.presheaf.stalk x),\n      ∀ (U : X.Opens) (hx : x ∈ U) (a : Fin n → M.val.obj (op U)),\n        e ((exteriorPower M n).presheaf.germ U x hx (wedge (M := M) (r := n) (U := U) a)) =\n          exteriorPower.ιMulti (X.presheaf.stalk x) n\n            (fun i ↦ M.presheaf.germ U x hx (a i))",
   "branch": "sheaf-dag",
-  "by": "S2",
-  "date": "2026-10-13"
+  "by": "C3",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf copy in favor of the proved upstream theorem. The upstream theorem uses exteriorPower and wedge. In the sole consumer ExteriorTensorStalkKernelSpan, the private retainedExteriorSheaf_stalk_comparison identifies exteriorSheafPresheaf with the upstream exterior presheaf by an identity-on-sections isomorphism, sheafifies it, and uses unit naturality to identify wedge sections. Its linear stalk equivalence transports the upstream theorem to the retained exteriorSheaf API without any new hypothesis or hole."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -149,11 +150,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-189b6",
-  "group": "J5",
+  "reviewer": "C-1bc1b",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261020T141311-L-2034208",
+  "landing": "20261020T152948-L-2856050",
   "kind": "interface",
-  "note": "independent cc review: Retirement row 59 (DIFFERENT): Sheaf copy reduced to a withdrawn stub; the sole consumer ExteriorSheafStalkComparison (unclaimed) now uses the proved WeilConjectures twin through an identity-on-sections bridge; public signatures and imports unchanged; delivered files and importer ExteriorTensorStalkKernelSpan compile; original consumer fails against the stub (forced); axioms clean; node lean.statement matches the twin verbatim"
+  "note": "independent cc review: Withdrawn stub of Sheaf ExteriorSheafStalkComparison + consumer ExteriorTensorStalkKernelSpan bridged to WeilConjectures twin via sheafified identity-on-sections iso, against retire row 278, node lean.statement = twin signature, change record users"
  }
 }

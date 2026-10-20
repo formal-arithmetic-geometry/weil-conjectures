@@ -9,13 +9,12 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafStalkComparison
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafStalkComparison
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorQuotientKernel
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Topology.Sheaves.Abelian
-import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalk generators of an exterior tensor quotient kernel
@@ -80,6 +79,53 @@ private theorem shortExact_stalk {X : Scheme.{v}} (S : ShortComplex X.Modules)
   · exact hg
 
 set_option backward.isDefEq.respectTransparency false in
+private theorem retainedExteriorSheaf_stalk_comparison {X : Scheme.{v}} (M : X.Modules)
+    (n : ℕ) (x : X) :
+    ∃ e : (exteriorSheaf M n).presheaf.stalk x ≃ₗ[X.presheaf.stalk x]
+        ⋀[X.presheaf.stalk x]^n (M.presheaf.stalk x),
+      ∀ (U : X.Opens) (hx : x ∈ U) (a : Fin n → M.val.obj (op U)),
+        e ((exteriorSheaf M n).presheaf.germ U x hx (exteriorSheafSection M n U a)) =
+          exteriorPower.ιMulti (X.presheaf.stalk x) n
+            (fun i ↦ M.presheaf.germ U x hx (a i)) := by
+  have hr {U V : X.Opensᵒᵖ} (f : U ⟶ V) :
+      exteriorSheafRestriction M n f =
+        (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).map f := by
+    apply ((Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f)).2 _ ?_).symm
+    intro a
+    exact PresheafOfModules.ExteriorPower.map_ιMulti M.val n f a
+  let e₀ : exteriorSheafPresheaf M n ≅
+      PresheafOfModules.exteriorPower (R := X.presheaf) M.val n :=
+    PresheafOfModules.isoMk (fun _ ↦ Iso.refl _) (by
+      intro U V f
+      change exteriorSheafRestriction M n f = _
+      exact hr f)
+  let e : exteriorSheaf M n ≅ exteriorPower M n :=
+    (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).mapIso e₀
+  have he (U : X.Opens) (a : Fin n → M.val.obj (op U)) :
+      e.hom.val.app (op U) (exteriorSheafSection M n U a) =
+        wedge (M := M) (r := n) (U := U) a := by
+    have h := (PresheafOfModules.sheafificationAdjunction
+      (𝟙 X.ringCatSheaf.obj)).unit_naturality e₀.hom
+    exact congrArg (fun f ↦ f.app (op U)
+      (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)) h
+  let L := e.hom.stalkLinearMap x
+  have hL : Function.Bijective L := by
+    let F := SheafOfModules.toSheaf X.ringCatSheaf ⋙
+      TopCat.Sheaf.forget Ab.{v} X.toTopCat ⋙ TopCat.Presheaf.stalkFunctor Ab.{v} x
+    change Function.Bijective (F.map e.hom)
+    exact ConcreteCategory.bijective_of_isIso (F.map e.hom)
+  obtain ⟨E, hE⟩ := exteriorSheaf_stalk_comparison M n x
+  refine ⟨(LinearEquiv.ofBijective L hL).trans E, ?_⟩
+  intro U hx a
+  change E (e.hom.stalkLinearMap x
+    ((exteriorSheaf M n).presheaf.germ U x hx (exteriorSheafSection M n U a))) = _
+  rw [Hom.stalkLinearMap_germ]
+  change E ((exteriorPower M n).presheaf.germ U x hx
+    (e.hom.val.app (op U) (exteriorSheafSection M n U a))) = _
+  rw [he]
+  exact hE U hx a
+
+set_option backward.isDefEq.respectTransparency false in
 private theorem tensor_exterior_stalk {X : Scheme.{v}} (A B : X.Modules)
     (r s : ℕ) (x : X) :
     ∃ e : (exteriorSheaf A r ⊗ exteriorSheaf B s).presheaf.stalk x ≃ₗ[X.presheaf.stalk x]
@@ -94,8 +140,8 @@ private theorem tensor_exterior_stalk {X : Scheme.{v}} (A B : X.Modules)
           (fun i ↦ A.presheaf.germ U x hx (a i)) ⊗ₜ[X.presheaf.stalk x]
         exteriorPower.ιMulti (X.presheaf.stalk x) s
           (fun i ↦ B.presheaf.germ U x hx (b i)) := by
-  obtain ⟨eA, hA⟩ := exteriorSheaf_stalk_comparison A r x
-  obtain ⟨eB, hB⟩ := exteriorSheaf_stalk_comparison B s x
+  obtain ⟨eA, hA⟩ := retainedExteriorSheaf_stalk_comparison A r x
+  obtain ⟨eB, hB⟩ := retainedExteriorSheaf_stalk_comparison B s x
   obtain ⟨Φ, hΦ, _⟩ := SheafOfModules.stalkTensorIso X.toRingedSpace x
   let e := (Φ (exteriorSheaf A r) (exteriorSheaf B s)).toLinearEquiv.trans
     (TensorProduct.congr eA eB)

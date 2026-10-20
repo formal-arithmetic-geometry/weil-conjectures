@@ -14,11 +14,12 @@
  ],
  "proof": [
   {
-   "text": "Map the short exact sequence by the module-to-abelian-sheaf forgetful functor, using lem-weil-pbc-module-sheaves-colimits-forgetful for finite limits and colimits, and then by the exact abelian stalk functor. This gives range(f_x)=ker(g_x) and surjectivity of g_x. Obtain exterior stalk comparisons from lem-sc-exterior-sheaf-stalk-comparison and compose the tensor stalk comparison of lem-pc-ringed-space-module-stalk-tensor with their tensor product.",
+   "text": "Map the short exact sequence by the module-to-abelian-sheaf forgetful functor, using lem-weil-pbc-module-sheaves-colimits-forgetful for finite limits and colimits, and then by the exact abelian stalk functor. This gives range(f_x)=ker(g_x) and surjectivity of g_x. To use the upstream exterior stalk comparison of lem-sc-exterior-sheaf-stalk-comparison for the retained exteriorSheaf API, identify the sectionwise exterior presheaves by identity section maps: their restrictions agree by uniqueness on pure wedges. Sheafify this isomorphism; naturality of the sheafification unit identifies exteriorSheafSection with the upstream wedge. The induced linear stalk isomorphism then transports the upstream comparisons. Compose the tensor stalk comparison of lem-pc-ringed-space-module-stalk-tensor with their tensor product.",
    "uses": [
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "lem-sc-exterior-sheaf-stalk-comparison",
-    "lem-pc-ringed-space-module-stalk-tensor"
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "def-sc-sheaf-exterior-power"
    ],
    "elementary": false
   },
@@ -39,7 +40,8 @@
   "lem-pc-ringed-space-module-stalk-tensor",
   "lem-sc-exterior-sheaf-stalk-comparison",
   "lem-sc-exterior-tensor-quotient-kernel-algebra",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
   "by": "agent",
@@ -146,14 +148,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "C-1bc1b",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T100120-L-2485042",
+  "landing": "20261020T152948-L-2856050",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Withdrawn stub of Sheaf ExteriorSheafStalkComparison + consumer ExteriorTensorStalkKernelSpan bridged to WeilConjectures twin via sheafified identity-on-sections iso, against retire row 278, node lean.statement = twin signature, change record users"
  },
  "lean_audit": {
   "master": {
