@@ -13,7 +13,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
 import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant

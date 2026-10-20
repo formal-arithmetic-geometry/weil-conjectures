@@ -125,8 +125,8 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.LocalizedResidueHomologyRestriction",
-  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedResidueHomologyRestriction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.LocalizedResidueHomologyRestriction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/LocalizedResidueHomologyRestriction.lean",
   "declaration": "AlgebraicGeometry.nonempty_localizedResidueHomology_restriction_iso",
   "statement": "theorem nonempty_localizedResidueHomology_restriction_iso (S : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ U : S.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    [∀ s : S, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (S.residueField s)).toRingedSpace))]\n    (U : S.Opens) (x : U.toScheme) :\n    Nonempty\n      ((SheafOfModules.overFunctor.{u}\n          (moduleRings S.toRingedSpace) U).mapDerivedCategory ⋙\n          localizedResidueHomology S U x ≅\n        derivedPullback (S.fromSpecResidueField (U.ι x)) ⋙\n          DerivedCategory.homologyFunctor\n            (SheafOfModules.{u}\n              (moduleRings (Spec (S.residueField (U.ι x))).toRingedSpace)) 0 ⋙\n          SheafOfModules.evaluation\n            (moduleRings (Spec (S.residueField (U.ι x))).toRingedSpace) (op ⊤) ⋙\n          ModuleCat.restrictScalars (Scheme.ΓSpecIso (S.residueField (U.ι x))).inv.hom ⋙\n          ModuleCat.extendScalars (U.ι.residueFieldMap x).hom)",
   "branch": "sheaf-dag",

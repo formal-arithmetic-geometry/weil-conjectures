@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.CategoryTheory.DoubleComplexTotal
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import WeilConjectures.Algebra.Homology.ExactCouple.DoubleComplex
 import WeilConjectures.CategoryTheory.Abelian.Filtration

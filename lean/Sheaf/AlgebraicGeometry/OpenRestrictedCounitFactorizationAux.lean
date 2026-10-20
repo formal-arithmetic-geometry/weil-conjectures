@@ -1,7 +1,7 @@
 module
-public import Sheaf.AlgebraicGeometry.OpenRestrictedTensorComplexIso
-public import Sheaf.AlgebraicGeometry.OpenRestrictedComparisonComposition
-import all Sheaf.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
+public import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorComplexIso
+public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
+import all WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

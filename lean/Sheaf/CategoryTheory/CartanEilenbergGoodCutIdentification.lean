@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexDecalageComplex
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSi
 import Sheaf.CategoryTheory.MapGoodUpperTruncation
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
 import all WeilConjectures.Algebra.Homology.UpperTruncationStepSES
-import Sheaf.CategoryTheory.CartanEilenbergAugmentationQuasiIso
+import WeilConjectures.CategoryTheory.CartanEilenbergAugmentationQuasiIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 import Sheaf.CategoryTheory.CartanEilenbergGoodCutDecalage
 

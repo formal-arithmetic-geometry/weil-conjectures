@@ -1,9 +1,9 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.RingTheory.Ideal.Operations
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineProjections
+import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAffineProjections
 import WeilConjectures.RingTheory.KernelCokernelAnnihilatedModIdeal
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 

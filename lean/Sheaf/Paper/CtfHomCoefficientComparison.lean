@@ -6,7 +6,7 @@ Authors: SHEAF group Q03
 module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Sheaf.CategoryTheory.LocallyConstantFiniteTypeModules
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry

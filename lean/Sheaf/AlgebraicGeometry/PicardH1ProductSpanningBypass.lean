@@ -1,7 +1,7 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
-public import Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupCochain
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupScalarComparison
 public import WeilConjectures.AlgebraicGeometry.ProperBasic
 public import WeilConjectures.Algebra.Homology.TensorKunnethNat
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
-import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestriction
+import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestriction
 import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 
 /-! # Sections on a finite power-series thickening

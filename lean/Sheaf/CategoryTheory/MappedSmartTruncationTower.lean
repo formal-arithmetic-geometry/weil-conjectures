@@ -6,7 +6,7 @@ module
 
 public import Sheaf.CategoryTheory.ExtendedTruncationMapIso
 public import Sheaf.CategoryTheory.SmartTruncationDecalageTower
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! Applying a left exact functor to all smart cuts of a CE bicomplex.

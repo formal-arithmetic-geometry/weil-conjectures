@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StalkComparisonSourceTransport
-public import Sheaf.Algebra.Homology.BaseDerivedTensorLocalizedNaturality
+public import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
+public import WeilConjectures.Algebra.Homology.BaseDerivedTensorLocalizedNaturality
 import all Mathlib.Algebra.Homology.Localization
-import Sheaf.Algebra.Homology.BaseDerivedExtensionLinear
-import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import WeilConjectures.Algebra.Homology.BaseDerivedExtensionLinear
+import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIso
 

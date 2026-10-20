@@ -5,10 +5,10 @@ Authors: SHEAF group J2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
+public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
 
 import Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram
-import Sheaf.Algebra.Homology.FlatTruncationTelescopeComparison
+import WeilConjectures.Algebra.Homology.FlatTruncationTelescopeComparison
 
 /-! # Refining a homotopy map to maps of flat towers
 

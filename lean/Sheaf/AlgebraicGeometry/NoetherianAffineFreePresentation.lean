@@ -25,7 +25,7 @@ import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.Topology.SpectralConstructibleFiniteIntersection
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.ConstructibleModuleSupportGeneral
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSupportGeneral
 import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 import Mathlib.CategoryTheory.Sites.LocallyBijective

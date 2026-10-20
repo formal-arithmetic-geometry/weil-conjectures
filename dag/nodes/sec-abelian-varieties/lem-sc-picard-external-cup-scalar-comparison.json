@@ -104,8 +104,8 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupScalarComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PicardExternalCupScalarComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PicardExternalCupScalarComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.picard_external_cup_scalar_comparison",
   "statement": "theorem picard_external_cup_scalar_comparison (k : Type u) [Field k] (X Y : Scheme.{u})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (hX : Function.Bijective (scalarMap f ⊤))\n    (hY : Function.Bijective (scalarMap g ⊤)) :\n    let F := SheafOfModules.unit X.ringCatSheaf\n    let G := SheafOfModules.unit Y.ringCatSheaf\n    ∃ (eX : scalarCohomology f F 1 ≃+ Sheaf.H (structureSheafAb X) 1)\n      (eY : scalarCohomology g G 1 ≃+ Sheaf.H (structureSheafAb Y) 1)\n      (eP : scalarCohomology (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) 1\n        ≃+ Sheaf.H (structureSheafAb (pullback f g)) 1)\n      (dX : scalarCohomology f F 0 ≃ₗ[k] k)\n      (dY : scalarCohomology g G 0 ≃ₗ[k] k),\n      (∀ (a : scalarCohomology f F 1) (b : scalarCohomology g G 0),\n        eP (externalCup f g F G 1 0 a b) =\n          structureSheafCohomologyPullback (pullback.fst f g) 1 (eX (dY b • a))) ∧\n      (∀ (a : scalarCohomology f F 0) (b : scalarCohomology g G 1),\n        eP (externalCup f g F G 0 1 a b) =\n          structureSheafCohomologyPullback (pullback.snd f g) 1 (eY (dX a • b)))",
   "branch": "sheaf-dag",

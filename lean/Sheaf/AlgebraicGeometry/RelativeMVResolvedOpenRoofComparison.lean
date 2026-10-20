@@ -3,13 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the LICENSE file.
 -/
 module
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
-public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainMap
-public import Sheaf.AlgebraicGeometry.DirectImageSquareUnitTransport
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainMap
+public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
 import Sheaf.AlgebraicGeometry.RelativeMVNormalizedCoefficientRoof
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection
-import Sheaf.AlgebraicGeometry.DerivedBaseChangeOpenTranspose
-import Sheaf.AlgebraicGeometry.RelativeMVInverseOpenMate
+import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection
+import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeOpenTranspose
+import WeilConjectures.AlgebraicGeometry.RelativeMVInverseOpenMate
 /-! # Comparison of a normalized roof for one open -/
 
 @[expose] public section

@@ -95,8 +95,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkChainMapLift.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteFreeStalkChainMapLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteFreeStalkChainMapLift.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_restrict_chainMap_of_stalk_eventually",
   "statement": "theorem exists_restrict_chainMap_of_stalk_eventually\n    {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)\n    (a b c e : ℤ)\n    (hPa : P.IsStrictlyGE a) (hPb : P.IsStrictlyLE b)\n    (hQc : Q.IsStrictlyGE c) (hQe : Q.IsStrictlyLE e)\n    (hPfree : ∀ n : ℤ, IsZero (P.X n) ∨ ∃ s : ℕ, Nonempty\n      (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (hQfree : ∀ n : ℤ, IsZero (Q.X n) ∨ ∃ s : ℕ, Nonempty\n      (Q.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (y : Y)\n    (f : ((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj P ⟶\n      ((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj Q) :\n    ∃ (U : Y.Opens), y ∈ U ∧ ∀ (V : Y.Opens) (hyV : y ∈ V), V ≤ U →\n      let R := (restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ)\n      let S := (Modules.pullback (V.fromSpecStalkOfMem y hyV)).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n      let eP := (stalkRestrictionComplexIso V y hyV).app P\n      let eQ := (stalkRestrictionComplexIso V y hyV).app Q\n      ∃ (fV : R.obj P ⟶ R.obj Q), S.map fV = eP.hom ≫ f ≫ eQ.inv",
   "branch": "sheaf-dag",

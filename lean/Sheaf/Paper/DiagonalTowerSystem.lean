@@ -31,7 +31,7 @@ import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 

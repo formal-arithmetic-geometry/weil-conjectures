@@ -5,11 +5,11 @@ Authors: SHEAF group Q4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
-import Sheaf.AlgebraicGeometry.QuasiCompactFiniteTorDimension
+import WeilConjectures.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
+import WeilConjectures.AlgebraicGeometry.QuasiCompactFiniteTorDimension
 import Mathlib.CategoryTheory.Localization.Equivalence
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison

@@ -12,7 +12,7 @@ import Mathlib.Algebra.Homology.BifunctorShift
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Sheaf.CategoryTheory.RingedToposMorphism
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows

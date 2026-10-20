@@ -117,8 +117,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionEvaluationMateIsIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionEvaluationMateIsIso.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenRestrictionEvaluationMateIsIso",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenRestrictionEvaluationMateIsIso.lean",
   "declaration": "AlgebraicGeometry.openRestriction_evaluationMate_isIso",
   "statement": "theorem openRestriction_evaluationMate_isIso (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let R := (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E\n    let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.sheaf\n    ∀ m : R.Monoidal,\n      letI := m\n      ∀ K N : schemeDerivedCategory X,\n        IsIso ((schemeDerivedTensorHomEquiv U.toScheme\n          (R.obj (H.obj (op K, N))) (R.obj K) (R.obj N)).symm\n            ((Functor.Monoidal.μIso R (H.obj (op K, N)) K).hom ≫\n              R.map (schemeDerivedTensorHomEquiv X (H.obj (op K, N)) K N (𝟙 _))))",
   "branch": "sheaf-dag",

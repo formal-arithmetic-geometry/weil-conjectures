@@ -6,9 +6,9 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import WeilConjectures.RingTheory.GRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import WeilConjectures.RingTheory.PolynomialCompleteLocalFibreReduction
-import Sheaf.RingTheory.PolynomialCompleteLocalGenericFibre
-import Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZero
-import Sheaf.RingTheory.PolynomialFormalFiber
+import WeilConjectures.RingTheory.PolynomialCompleteLocalGenericFibre
+import WeilConjectures.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZero
+import WeilConjectures.RingTheory.PolynomialFormalFiber
 
 @[expose] public section
 

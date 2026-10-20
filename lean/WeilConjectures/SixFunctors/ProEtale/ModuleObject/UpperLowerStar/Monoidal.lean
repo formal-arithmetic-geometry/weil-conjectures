@@ -5,9 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
-
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
 /-!

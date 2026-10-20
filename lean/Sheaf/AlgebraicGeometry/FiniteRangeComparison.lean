@@ -6,7 +6,7 @@ Authors: SHEAF groups NV and C3
 module
 
 public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
 import Sheaf.CategoryTheory.ExactFunctorHalfPlane

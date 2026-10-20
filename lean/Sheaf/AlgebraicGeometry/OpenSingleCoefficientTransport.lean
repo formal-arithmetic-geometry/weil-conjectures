@@ -6,11 +6,11 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
-import Sheaf.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
+import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors
 import Sheaf.AlgebraicGeometry.IsomorphismPullbackCounit
-import Sheaf.AlgebraicGeometry.PinnedPullbackCounitShifts
+import WeilConjectures.AlgebraicGeometry.PinnedPullbackCounitShifts
 
 /-! # Coefficient transport along an isomorphic apex over an open subscheme
 

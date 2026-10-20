@@ -1,6 +1,6 @@
 module
-public import Sheaf.AlgebraicGeometry.QCohTensorResolutionRestrictionTensor
-public import Sheaf.AlgebraicGeometry.QCohTensorResolutionHomologyZigzag
+public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionRestrictionTensor
+public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionHomologyZigzag
 
 @[expose] public section
 universe u

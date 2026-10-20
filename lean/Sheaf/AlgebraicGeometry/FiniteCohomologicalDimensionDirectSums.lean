@@ -8,7 +8,7 @@ module
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Ring.ULift
 public import Mathlib.CategoryTheory.Sites.GlobalSections
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -20,7 +20,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import all WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 
 /-!

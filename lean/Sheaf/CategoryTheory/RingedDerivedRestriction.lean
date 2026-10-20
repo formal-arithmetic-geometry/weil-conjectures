@@ -6,7 +6,7 @@ Authors: SHEAF group NE
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous

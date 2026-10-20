@@ -18,7 +18,7 @@ public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.Paper.IntegralCompactSupportUniformRestriction
 import Sheaf.Paper.PreservationConstructible
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
 import Sheaf.Paper.PbcUniformCompleteTriangulated
 import Sheaf.Paper.IntegralStratifiedPerfectCharacterization

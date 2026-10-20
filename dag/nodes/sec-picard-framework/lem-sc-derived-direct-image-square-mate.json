@@ -102,8 +102,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageSquareMate.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedDirectImageSquareMate.lean",
   "declaration": "AlgebraicGeometry.derivedDirectImage_square_mate",
   "statement": "theorem derivedDirectImage_square_mate\n    {X Y X' Y' : Scheme.{u}}\n    (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (gX : X' ⟶ X)\n    (h : gX ≫ f = f' ≫ g) :\n    let a := fun {A D : Scheme.{u}} (t : A ⟶ D) ↦ schemeHomPullbackAdjunction t\n    let p := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    let k := p f' g ≪≫\n      eqToIso (congrArg (fun t ↦ derivedPullback t) h.symm) ≪≫ (p gX f).symm\n    let e₁ : schemeDerivedDirectImage gX ⋙ schemeDerivedDirectImage f ≅\n        schemeDerivedDirectImage (gX ≫ f) :=\n      schemeNormalizedDirectImageCompIso gX f\n    let e₂ : schemeDerivedDirectImage f' ⋙ schemeDerivedDirectImage g ≅\n        schemeDerivedDirectImage (f' ≫ g) :=\n      schemeNormalizedDirectImageCompIso f' g\n    conjugateEquiv ((a f).comp (a gX)) ((a g).comp (a f')) k.hom =\n      e₁.hom ≫ eqToHom (congrArg (fun t ↦ schemeDerivedDirectImage t) h) ≫ e₂.inv",
   "branch": "sheaf-dag",

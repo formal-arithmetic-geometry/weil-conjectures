@@ -6,10 +6,10 @@ module
 
 public import Sheaf.CategoryTheory.MappedSmartTruncationTower
 public import Sheaf.CategoryTheory.SpecifiedResolutionDerivedSingle
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 import Sheaf.CategoryTheory.CartanEilenbergTruncationResolution
-import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
+import WeilConjectures.CategoryTheory.CartanEilenbergMappedTotal
 import Sheaf.CategoryTheory.DerivedInjectiveResolutionNaturality
 import Sheaf.CategoryTheory.DerivedUpperTruncationComparison
 import Sheaf.CategoryTheory.FilteredComplexDecalageTower

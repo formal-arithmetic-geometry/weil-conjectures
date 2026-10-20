@@ -97,8 +97,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineLimitEquivalence",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleAffineLimitEquivalence.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAffineLimitEquivalence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoherentFormalModuleAffineLimitEquivalence.lean",
   "declaration": "AlgebraicGeometry.coherentFormalModule_affine_limit_equivalence",
   "statement": "theorem coherentFormalModule_affine_limit_equivalence\n    (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens)\n    [IsNoetherian V.1.toScheme] :\n    ∃ E : CoherentFormalModule V.1.toScheme (I.comap V.1.ι) ≌\n      ObjectProperty.FullSubcategory\n        (fun N : ModuleCat.{u} (AdicCompletion (I.ideal V) Γ(X, V.1)) ↦\n          Module.Finite (AdicCompletion (I.ideal V) Γ(X, V.1)) N),\n    ∃ p : ∀ F : CoherentFormalModule V.1.toScheme (I.comap V.1.ι),\n      (Functor.const ℕᵒᵖ).obj\n        ((ModuleCat.restrictScalars\n          (algebraMap Γ(X, V.1) (AdicCompletion (I.ideal V) Γ(X, V.1)))).obj\n            (E.functor.obj F).obj) ⟶\n      F.obj ⋙ (SheafOfModules.evaluation V.1.toScheme.ringCatSheaf (op ⊤) ⋙\n        ModuleCat.restrictScalars V.1.topIso.inv.hom),\n    (∀ F, Nonempty (IsLimit (Cone.mk _ (p F)))) ∧\n    (∀ (F G : CoherentFormalModule V.1.toScheme (I.comap V.1.ι))\n      (f : F ⟶ G) (n : ℕ),\n      (ModuleCat.restrictScalars\n        (algebraMap Γ(X, V.1) (AdicCompletion (I.ideal V) Γ(X, V.1)))).map\n          (E.functor.map f).hom ≫ (p G).app (op n) =\n      (p F).app (op n) ≫\n        (SheafOfModules.evaluation V.1.toScheme.ringCatSheaf (op ⊤) ⋙\n        ModuleCat.restrictScalars V.1.topIso.inv.hom).map (f.hom.app (op n)))",
   "branch": "sheaf-dag",

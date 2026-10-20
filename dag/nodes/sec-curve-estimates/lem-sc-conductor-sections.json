@@ -117,9 +117,9 @@
  },
  "lead_note": "2026-10-10 L (R-cds): lem-sc-conductor-ideal-restriction's clause 'restriction identifies the conductor with I_1' uses the undefined word 'conductor'; whoever splits it should read it as I∩J_1 = I J_1 (both 0 for reduced Y). The report wrongly says the Stacks files are absent.",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ConductorSections",
+  "module": "WeilConjectures.AlgebraicGeometry.ConductorSections",
   "declaration": "AlgebraicGeometry.Scheme.Modules.conductor_sections",
-  "file": "lean/Sheaf/AlgebraicGeometry/ConductorSections.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ConductorSections.lean",
   "statement": "theorem conductor_sections {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι] (C : ι → Scheme.{u}) (i : ∀ b : ι, C b ⟶ Y) [∀ b : ι, IsReduced (C b)] [∀ b : ι, IsClosedImmersion (i b)] (hcomponents : ∀ b : ι, Set.range (i b) ∈ irreducibleComponents Y) (hdistinct : Function.Injective fun b : ι => Set.range (i b)) (hcover : (⋃ b : ι, Set.range (i b)) = Set.univ) (a : ι) {Z : Scheme.{u}} [IsReduced Z] (j : Z ⟶ Y) [IsClosedImmersion j] (hZ : Set.range j = ⋃ b : ι, ⋃ (_ : b ≠ a), Set.range (i b)) (M : Y.Modules) [M.IsInvertible] (m : ℕ) : let N := M.tensorPow m let N₁ := (tensorPullback (i a)).obj N let adj₁ := Classical.choose (exists_tensorPullbackAdjunction (i a)) let adjZ := Classical.choose (exists_tensorPullbackAdjunction j) let res₁ : Γ(N, ⊤) → Γ(N₁, ⊤) := fun t ↦ (adj₁.unit.app N).val.app (op ⊤) t let resZ : Γ(N, ⊤) → Γ((tensorPullback j).obj N, ⊤) := fun t ↦ (adjZ.unit.app N).val.app (op ⊤) t let I := j.ker let I₁ := I.comap (i a) let μ : I.toModules ⊗ N ⟶ N := I.toModulesι ▷ N ≫ (λ_ N).hom let μ₁ : I₁.toModules ⊗ N₁ ⟶ N₁ := I₁.toModulesι ▷ N₁ ≫ (λ_ N₁).hom ∃ e : Γ(I.toModules ⊗ N, ⊤) ≃+ Γ(I₁.toModules ⊗ N₁, ⊤), (∀ s, μ₁.app ⊤ (e s) = res₁ (μ.app ⊤ s)) ∧ ∀ s : Γ(I₁.toModules ⊗ N₁, ⊤), (∃! t : Γ(N, ⊤), res₁ t = μ₁.app ⊤ s ∧ resZ t = 0) ∧ ∀ t : Γ(N, ⊤), res₁ t = μ₁.app ⊤ s → resZ t = 0 → nonvanishingLocus N t = i a '' nonvanishingLocus N₁ (μ₁.app ⊤ s)",
   "branch": "sheaf-dag",
   "by": "H1",

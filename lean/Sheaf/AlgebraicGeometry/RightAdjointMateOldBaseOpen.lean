@@ -5,16 +5,16 @@ Authors: SHEAF group P4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.AlgebraicGeometry.RightAdjointMateAffineOpenIsIso
-import Sheaf.AlgebraicGeometry.RightAdjointMateOldBaseOpenFactorization
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
+import WeilConjectures.AlgebraicGeometry.RightAdjointMateOldBaseOpenFactorization
+import WeilConjectures.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # One-open compatibility of right-adjoint mates
 

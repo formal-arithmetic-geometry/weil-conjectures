@@ -5,15 +5,15 @@ Authors: SHEAF group Q3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DiagonalCounitAcrossUniverses
-import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesRetraction
-import Sheaf.AlgebraicGeometry.PerfectImmersionTensorAcrossUniverses
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackAcrossUniversesRetraction
+import WeilConjectures.AlgebraicGeometry.PerfectImmersionTensorAcrossUniverses
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Evaluation against the dualizing object of a perfect diagonal

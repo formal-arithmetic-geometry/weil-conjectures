@@ -11,9 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus
-import Sheaf.AlgebraicGeometry.LocalFinitelyPresentedImmersionLocus
+import WeilConjectures.AlgebraicGeometry.LocalFinitelyPresentedImmersionLocus
 import Sheaf.AlgebraicGeometry.PicardSingleRankUnrestrictedPerfectChart
-import Sheaf.AlgebraicGeometry.PicardSingleRankSourceLocal
+import WeilConjectures.AlgebraicGeometry.PicardSingleRankSourceLocal
 
 /-! # A finitely presented locus for one universal direct-image rank condition
 

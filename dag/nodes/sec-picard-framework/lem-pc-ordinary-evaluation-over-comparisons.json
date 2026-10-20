@@ -108,8 +108,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComparisons",
-  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationOverComparisons.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationOverComparisons",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OrdinaryEvaluationOverComparisons.lean",
   "declaration": "AlgebraicGeometry.exists_ordinaryEvaluation_over_comparisons",
   "statement": "theorem exists_ordinaryEvaluation_over_comparisons (X : Scheme.{u}) (U : X.Opens)\n    (P : CochainComplex (localEvaluationModules X U) ℤ) :\n    let L := Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)\n    let T := L.mapHomologicalComplex (.up ℤ)\n    let P' := T.obj P\n    let O' := (HomologicalComplex.single _ (.up ℤ) 0).obj\n      (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))\n    let D' := homComplex (R := U.toScheme.sheaf) P' O'\n    ∃ b : ∀ M : CochainComplex (localEvaluationModules X U) ℤ,\n        T.obj (homComplex (R := X.sheaf.over U) P M) ≅\n          homComplex (R := U.toScheme.sheaf) P' (T.obj M),\n      (∀ (M N : CochainComplex (localEvaluationModules X U) ℤ) (a : M ⟶ N),\n        T.map (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map a) ≫\n            (b N).hom =\n          (b M).hom ≫\n            ((homComplexFunctor (R := U.toScheme.sheaf)).obj (op P')).map (T.map a)) ∧\n      ∃ d : T.obj (localEvaluationDual X U P) ≅ D',\n        ∀ F : CochainComplex (localEvaluationModules X U) ℤ,\n          ∃ t : T.obj (localEvaluationTensor X U P F) ≅\n              pullbackTensorTotal U.toScheme (T.obj F) D',\n            ∀ f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F,\n              IsLocalOrdinaryEvaluation X U P F f →\n                IsSchemeOrdinaryEvaluation U.toScheme P' (T.obj F)\n                  (t.inv ≫ T.map f ≫ (b F).hom)",
   "branch": "sheaf-dag",

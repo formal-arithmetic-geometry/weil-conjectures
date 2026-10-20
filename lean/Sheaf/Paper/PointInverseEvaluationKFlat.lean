@@ -5,7 +5,7 @@ Authors: SHEAF group P2, SHEAF group M4
 -/
 module
 
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed

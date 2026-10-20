@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.RingTheory.IsStrictHenselization
-import Sheaf.RingTheory.PointedEtaleQuotientFinal
+import WeilConjectures.RingTheory.PointedEtaleQuotientFinal
 
 @[expose] public section
 universe u

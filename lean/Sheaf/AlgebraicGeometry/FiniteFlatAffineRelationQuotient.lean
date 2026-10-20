@@ -21,7 +21,7 @@ import Mathlib.RingTheory.Flat.Basic
 import WeilConjectures.RingTheory.FlatLocalExtensionGivenResidueField
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Flat.Localization
-import Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree
+import WeilConjectures.AlgebraicGeometry.FinitePushforwardLocallyFree
 import Sheaf.AlgebraicGeometry.FiniteFreeAlgebraSpectrum
 import Mathlib.RingTheory.Ideal.GoingUp
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant

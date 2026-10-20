@@ -5,7 +5,7 @@ Authors: SHEAF group U3
 -/
 module
 
-public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
 
 /-! # Maps of concrete graded cycles and their boundary quotients
 

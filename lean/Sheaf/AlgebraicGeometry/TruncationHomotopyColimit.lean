@@ -6,7 +6,6 @@ Authors: SHEAF group Q23
 module
 
 public import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

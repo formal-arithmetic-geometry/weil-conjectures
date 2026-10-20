@@ -106,8 +106,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenStalkRepresentativeCoherence",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenStalkRepresentativeCoherence.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenStalkRepresentativeCoherence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenStalkRepresentativeCoherence.lean",
   "declaration": "AlgebraicGeometry.openStalk_representative_coherence",
   "statement": "theorem openStalk_representative_coherence [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (X : Scheme.{u}) (U : X.Opens) (z : U.toScheme) (i : ℤ) (M : CochainComplex (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ) (N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) : letI : (schemeOpenRestriction X U).Additive := schemeOpenRestriction_additive X U let R := schemeOpenRestriction X U let L₀ := RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace z let L := RingedSpace.moduleStalkFunctor X.toRingedSpace z.val let F₀ := forget₂ (ModuleCat.{u} (U.toScheme.presheaf.stalk z)) AddCommGrpCat.{u} let F := forget₂ (ModuleCat.{u} (X.presheaf.stalk z.val)) AddCommGrpCat.{u} let S₀ := (L₀.mapHomologicalComplex (.up ℤ)).obj M let S := (L.mapHomologicalComplex (.up ℤ)).obj N let γ : R ⋙ L₀ ⋙ F₀ ≅ L ⋙ F := Functor.isoWhiskerRight (Scheme.Modules.overFunctorEquiv U) (L₀ ⋙ F₀) ≪≫ Scheme.Modules.restrictStalkNatIso U.ι z ∀ (a : M ⟶ (R.mapHomologicalComplex (.up ℤ)).obj N), let b := DerivedCategory.Q.map a ≫ R.mapDerivedCategoryFactors.inv.app N let ρ := (F₀.mapHomologicalComplex (.up ℤ)).map ((L₀.mapHomologicalComplex (.up ℤ)).map a) ≫ (NatTrans.mapHomologicalComplex γ.hom (.up ℤ)).app N F₀.map (comparisonStalkHomologyIso U.toScheme z M i).inv ≫ F₀.map ((comparisonStalkCohomology U.toScheme z i).map b) ≫ (openDerivedAdditiveStalkIso X U z i).hom.app (DerivedCategory.Q.obj N) = ((S₀.sc i).mapHomologyIso F₀).inv ≫ HomologicalComplex.homologyMap ρ i ≫ ((S.sc i).mapHomologyIso F).hom ≫ F.map (comparisonStalkHomologyIso X z.val N i).inv",
   "branch": "sheaf-dag",

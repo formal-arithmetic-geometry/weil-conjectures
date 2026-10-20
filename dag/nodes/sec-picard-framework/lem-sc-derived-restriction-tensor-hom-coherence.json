@@ -108,8 +108,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedRestrictionTensorHomCoherence.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedRestrictionTensorHomCoherence.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_derivedRestriction_tensorHom_coherence",
   "statement": "theorem exists_derivedRestriction_tensorHom_coherence\n    (X : Scheme.{uX}) (U : X.Opens)\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{wD} (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))] :\n    let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))\n        (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))\n        (Modules.overEquiv U)).mapDerivedCategory\n    let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n      X.toRingedSpace.sheaf\n    let HU := derivedInternalHom (Opens.grothendieckTopology U.toScheme.toRingedSpace)\n      U.toScheme.toRingedSpace.sheaf\n    ∃ (t : ∀ K L : schemeDerivedCategory X, R.obj (K ⊗ L) ≅ R.obj K ⊗ R.obj L)\n      (h : ∀ L E, R.obj (H.obj (op L, E)) ≅ HU.obj (op (R.obj L), R.obj E)),\n      (∀ K K' L L' (a : K ⟶ K') (b : L ⟶ L'),\n        R.map (a ⊗ₘ b) ≫ (t K' L').hom =\n          (t K L).hom ≫ (R.map a ⊗ₘ R.map b)) ∧\n      (∀ K L E (ξ : K ⟶ H.obj (op L, E)),\n        (t K L).hom ≫ schemeDerivedTensorHomEquiv U.toScheme\n          (R.obj K) (R.obj L) (R.obj E) (R.map ξ ≫ (h L E).hom) =\n        R.map (schemeDerivedTensorHomEquiv X K L E ξ))",
   "branch": "sheaf-dag",

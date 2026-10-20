@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality
+public import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality
 
 @[expose] public section
 

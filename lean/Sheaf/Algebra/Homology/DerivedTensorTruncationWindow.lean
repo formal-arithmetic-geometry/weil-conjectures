@@ -11,7 +11,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Paper.ProjectionMateExact
 import Mathlib.Algebra.Homology.BifunctorShift

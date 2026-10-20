@@ -8,9 +8,9 @@ public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import all Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import all Sheaf.Algebra.Homology.StalkKFlatTensorHomology
-import all Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryRingComparison
+import all WeilConjectures.Algebra.Homology.BaseDerivedTensorOrdinaryRingComparison
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 
 /-! # Local comparison factors
 

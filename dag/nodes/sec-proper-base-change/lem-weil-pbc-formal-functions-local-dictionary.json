@@ -113,8 +113,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsLocalDictionary",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsLocalDictionary.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalFunctionsLocalDictionary",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalFunctionsLocalDictionary.lean",
   "declaration": "AlgebraicGeometry.formalFunctions_local_dictionary",
   "statement": "theorem formalFunctions_local_dictionary {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]\n    [IsLocallyNoetherian Y] (F : X.Modules)\n    (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :\n    let X' := pullback (Y.fromSpecStalk y) f\n    let f' := pullback.fst (Y.fromSpecStalk y) f\n    let F' := (Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F\n    let J := (Scheme.IdealSheafData.ofIdealTop\n      ((maximalIdeal (Y.presheaf.stalk y)).map\n        (Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv.hom)).comap f'\n    let C := RingedSpace.moduleCohomology X'.toRingedSpace p ⋙\n      ModuleCat.restrictScalars\n        ((Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv ≫ f'.appTop).hom\n    RingedSpace.IsCoherent X'.toRingedSpace F' ∧\n      ∃ a : formalFunctionsStalk f y F p ≃ₗ[Y.presheaf.stalk y] C.obj F',\n      ∃ b : formalCompletionSystem J F' ⋙ C ≅\n        formalFibreCohomologySystem f y F p ⋙ ModuleCat.restrictScalars\n          (algebraMap (Y.presheaf.stalk y)\n            (AdicCompletion (maximalIdeal (Y.presheaf.stalk y)) (Y.presheaf.stalk y))),\n      ∃ κ : ∀ n : ℕ, formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y]\n        formalFibreCohomologyLocal f y F p n,\n        (∀ n : ℕ, IsFormalFunctionsTheta f y F p n (κ n)) ∧\n        ∀ (n : ℕ) (z : formalFunctionsStalk f y F p),\n          κ n z = (b.hom.app (op n))\n            ((C.map (formalModuleQuotientπ J (n + 1) F')) (a z))",
   "branch": "sheaf-dag",

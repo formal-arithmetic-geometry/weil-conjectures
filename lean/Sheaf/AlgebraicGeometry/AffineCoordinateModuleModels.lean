@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineCoordinateComparisonData
+public import WeilConjectures.AlgebraicGeometry.AffineCoordinateComparisonData
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import Sheaf.Algebra.Homology.KFlatPullback
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits

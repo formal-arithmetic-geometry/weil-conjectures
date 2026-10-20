@@ -5,8 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-import Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp
-
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 

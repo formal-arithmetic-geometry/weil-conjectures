@@ -118,8 +118,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SelfExtTorDualChart",
-  "file": "lean/Sheaf/AlgebraicGeometry/SelfExtTorDualChart.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SelfExtTorDualChart",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SelfExtTorDualChart.lean",
   "declaration": "AlgebraicGeometry.selfExt_tor_dual_chart",
   "statement": "theorem selfExt_tor_dual_chart\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (n : ℕ) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let Q := (Scheme.Modules.tensorPullback i).obj\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj\n          (S.obj B ⊗ S.obj B))\n    ∃ κ : (Scheme.Modules.tensorPullback i).obj G ⟶ Scheme.Modules.dual Q,\n      ∀ (V : Z.Opens) (U : Y.affineOpens)\n        (_hU : ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),\n          Ideal.span (Set.range f) = i.ker.ideal U ∧\n            RingTheory.Sequence.IsKoszulRegular f),\n        IsIso (((Scheme.Modules.restrictFunctor V.ι).map κ).over\n          (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1)))",
   "branch": "sheaf-dag",

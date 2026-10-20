@@ -11,7 +11,7 @@ public import Sheaf.Paper.FiniteTorAmplitudeProEtaleModule
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
 public import Sheaf.Paper.FiniteTorAmplitude
 public import Sheaf.Paper.DualityPairing
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
@@ -35,9 +35,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coh
 import Sheaf.AlgebraicGeometry.ProEtaleStalkConservative
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import Sheaf.Paper.ComparisonPullbackExact
 import Sheaf.Paper.ComparisonTorAmplitude
 import Sheaf.Paper.FiniteFreeHomComparison

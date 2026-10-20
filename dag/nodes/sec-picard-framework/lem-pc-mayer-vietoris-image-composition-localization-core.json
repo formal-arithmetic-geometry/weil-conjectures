@@ -84,8 +84,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.MayerVietorisImageCompositionLocalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisImageCompositionLocalization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.MayerVietorisImageCompositionLocalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/MayerVietorisImageCompositionLocalization.lean",
   "declaration": "AlgebraicGeometry.schemeMV_image_composition_localization_core",
   "statement": "theorem schemeMV_image_composition_localization_core\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (.up ℤ)\n    let R := schemeDerivedDirectImage W.ι\n    (schemeMVDirectImageLocalization h).app (schemeOpenModuleImageComplex X (h ⁻¹ᵁ W) I) ≫\n      (schemeDerivedDirectImage h).map (schemeMVOpenImageLocalization X (h ⁻¹ᵁ W) I) ≫\n      (schemeMVOpenComparison h W (DerivedCategory.Q.obj I)).hom =\n    DerivedCategory.Q.map (schemeMVImageComponent h W I (F.obj I) (𝟙 _)) ≫\n      schemeMVOpenImageLocalization Y W (F.obj I) ≫\n      R.map (schemeMVRestrictionLocalizationChain X Y h W I) ≫\n      R.map ((schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))",
   "branch": "sheaf-dag",

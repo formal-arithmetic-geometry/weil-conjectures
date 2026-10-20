@@ -6,7 +6,7 @@ Authors: SHEAF group G6
 module
 
 public import Sheaf.Paper.FiniteComparisonLocalizing
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 import Sheaf.AlgebraicGeometry.FiniteDiscreteCtfRealization
 import Sheaf.Paper.ConstantModelTorAmplitude

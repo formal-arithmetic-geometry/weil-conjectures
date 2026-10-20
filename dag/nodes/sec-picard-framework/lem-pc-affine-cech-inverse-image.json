@@ -87,8 +87,8 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage",
-  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/AffineCechInverseImage.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.AffineCechInverseImage",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/AffineCechInverseImage.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affineCech_inverseImage",
   "statement": "theorem exists_affineCech_inverseImage {R S : Type u} [CommRing R] [CommRing S] {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X) (f : X ⟶ Spec (.of R)) (f' : Y ⟶ Spec (.of S)) (U : ι → X.Opens) (V : ι → Y.Opens) (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l))) (hV : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, V (y l))) (hcover : iSup U = ⊤) (hcover' : iSup V = ⊤) (M : X.Modules) (N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent] (φ : M ⟶ (pushforward g).obj N) (q : ℕ) (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι), (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l))) : ∃ e : (cechOver f U M).homology q ≅ ModuleCat.of R (HOver f M q), ∃ e' : (cechOver f' V N).homology q ≅ ModuleCat.of S (HOver f' N q), ∀ (z : (cechOver f U M).cycles q) (z' : (cechOver f' V N).cycles q), (∀ y : Fin (q + 1) → ι, cechCoordinate f' V N q y ((cechOver f' V N).iCycles q z') = N.presheaf.map (homOfLE (hinter q y)).op (φ.val.app (op (⨅ l, U (y l))) (cechCoordinate f U M q y ((cechOver f U M).iCycles q z)))) → e'.hom ((cechOver f' V N).homologyπ q z') = Sheaf.H.map (coeff g φ) q (Sheaf.H.mapFunctor (invImage g) (constIso g).symm ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) q (e.hom ((cechOver f U M).homologyπ q z)))",
   "branch": "sheaf-dag",

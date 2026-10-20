@@ -90,8 +90,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionHorizontal",
-  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSubsetInsertionHorizontal.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionHorizontal",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PrincipalOpenCechSubsetInsertionHorizontal.lean",
   "declaration": "AlgebraicGeometry.principalSubsetInsertion_horizontal",
   "statement": "theorem principalSubsetInsertion_horizontal\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex (Spec (.of A)).Modules ℤ) :\n    let V := principalSubsetUnion A r f\n    let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)\n    let K := (alternatingCechDoubleFunctor U).obj (principalSubsetRestriction A r f J)\n    let H := forget₂\n      (ModuleCat.{u} ((moduleRings V.toScheme.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat\n    let D := principalSubsetOpen A r f\n    ∀ (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j))\n      (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ,\n        n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ))\n      (n : ℤ) (s : principalSubsetCoordinates A r f J n),\n      (H.map (K.D₁ (ComplexShape.up ℤ) n (n + 1)))\n        (principalSubsetInsertion A r f J n s) =\n      principalSubsetInsertion A r f J (n + 1) (fun S ↦\n          ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app\n                    (op (D (S.val.erase j.val))) (s ⟨S.val.erase j.val, h⟩))\n          else 0)",
   "branch": "sheaf-dag",

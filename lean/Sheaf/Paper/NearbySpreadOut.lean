@@ -10,8 +10,8 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Sheaf.RingTheory.ExcellentRing
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.IntegersExcellent
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleSetPullback
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit

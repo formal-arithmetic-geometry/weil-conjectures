@@ -17,11 +17,11 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.Paper.DualityPairing
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 import WeilConjectures.Compactification.NagataCompactification

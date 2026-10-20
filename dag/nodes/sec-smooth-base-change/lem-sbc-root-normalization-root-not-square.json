@@ -156,8 +156,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationRootNotSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootNormalizationRootNotSquare.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationRootNotSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RootNormalizationRootNotSquare.lean",
   "declaration": "AlgebraicGeometry.Scheme.root_normalization_root_not_square",
   "statement": "theorem root_normalization_root_not_square\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R)\n      (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R)\n      (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    (H : CommRingCat.{u}) [IsNoetherianRing H] (b : R ⟶ H)\n    (hG : IsUnit (Nat.card G : H)) (hg : IsSMulRegular H (b.hom f))\n    [IsDomain (H ⧸ Ideal.span {b.hom f})] :\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ∀ (hN : IsLocallyNoetherian N),\n    let := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)\n    ∀ (hp : IsFinite p),\n    let := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (x : a.normalization),\n      (a.fromNormalization x).asIdeal = Ideal.span\n        {AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)} →\n      IsRegularLocalRing (N.presheaf.stalk (a.fromNormalization x)) →\n      let C := a.normalization.presheaf.stalk x\n      let m := IsLocalRing.maximalIdeal C\n      let t := AlgebraicGeometry.StructureSheaf.toStalk A (a.fromNormalization x)\n        (AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g))\n      (a.fromNormalization.stalkMap x).hom t ∉ m * m",
   "branch": "sheaf-dag",

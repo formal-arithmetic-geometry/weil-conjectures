@@ -96,8 +96,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CanonicalEvaluationOpenRestriction",
-  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalEvaluationOpenRestriction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CanonicalEvaluationOpenRestriction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CanonicalEvaluationOpenRestriction.lean",
   "declaration": "AlgebraicGeometry.exists_canonicalEvaluation_open_restriction",
   "statement": "theorem exists_canonicalEvaluation_open_restriction (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K N : schemeDerivedCategory X) :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let R := (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E\n    let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.sheaf\n    let HU := derivedInternalHom\n      (Opens.grothendieckTopology U.toScheme.toRingedSpace) U.toScheme.sheaf\n    let KU := R.obj K\n    let NU := R.obj N\n    let D := H.obj (op K, 𝟙_ (schemeDerivedCategory X))\n    let DU := HU.obj (op KU, 𝟙_ (schemeDerivedCategory U.toScheme))\n    let g := ((schemeDerivedTensorHomEquiv X) (N ⊗ D) K N).symm\n      ((α_ N D K).hom ≫ N ◁\n        ((schemeDerivedTensorHomEquiv X) D K (𝟙_ (schemeDerivedCategory X)) (𝟙 D)) ≫\n          (ρ_ N).hom)\n    let gU := ((schemeDerivedTensorHomEquiv U.toScheme) (NU ⊗ DU) KU NU).symm\n      ((α_ NU DU KU).hom ≫ NU ◁\n        ((schemeDerivedTensorHomEquiv U.toScheme) DU KU\n          (𝟙_ (schemeDerivedCategory U.toScheme)) (𝟙 DU)) ≫ (ρ_ NU).hom)\n    ∃ a : R.obj (N ⊗ D) ≅ NU ⊗ DU,\n      ∃ b : R.obj (H.obj (op K, N)) ≅ HU.obj (op KU, NU),\n        R.map g ≫ b.hom = a.hom ≫ gU",
   "branch": "sheaf-dag",

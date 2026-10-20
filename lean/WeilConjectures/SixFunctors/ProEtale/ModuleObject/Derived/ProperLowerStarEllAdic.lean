@@ -10,11 +10,6 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 
-import Sheaf.AlgebraicGeometry.EllAdicProperBoundedBelowCoproducts
-import Sheaf.AlgebraicGeometry.EllAdicProperHeartUniformBound
-import Sheaf.AlgebraicGeometry.EllAdicProperConstructibleCohomology
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-
 /-!
 # The proper direct image for the `ℓ`-adic coefficient rings: the inputs
 
@@ -61,37 +56,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-private theorem properLowerStarHeartHypotheses_of_uniformBound
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] {Z Y : Scheme.{u}} (p : Z ⟶ Y)
-    [QuasiCompact p] [QuasiSeparated p]
-    (hb : ∃ d : ℤ, ∀ M, constructibleCoproductClosure Λ Z M →
-      (R((p)_*⟦Λ⟧).obj ((DerivedCategory.singleFunctor _ 0).obj M)).IsLE d) :
-    ProperLowerStarHeartHypotheses Λ p := by
-  refine ⟨hb, fun J N _ ↦ ?_⟩
-  have := condensed_boundedBelow_preservesCoproduct Λ p J 0
-    (fun j ↦ (DerivedCategory.singleFunctor _ 0).obj (N j))
-    (fun j ↦ inferInstance)
-  exact inferInstanceAs (IsIso (sigmaComparison R((p)_*⟦Λ⟧)
-    (fun j ↦ (DerivedCategory.singleFunctor _ 0).obj (N j))))
-
-private theorem bounded_rightDerivedLowerStar_of_uniformBound
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] {Z Y : Scheme.{u}} (p : Z ⟶ Y)
-    (hb : ∃ d : ℤ, ∀ M, constructibleCoproductClosure Λ Z M →
-      (R((p)_*⟦Λ⟧).obj ((DerivedCategory.singleFunctor _ 0).obj M)).IsLE d)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-      (condensedRingObj Λ Z))) (hK : boundedConstructible _ K) :
-    DerivedCategory.TStructure.t.bounded (R((p)_*⟦Λ⟧).obj K) := by
-  obtain ⟨d, hd⟩ := hb
-  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
-  have : K.IsGE a := ha
-  have : K.IsLE b := hb
-  refine ⟨⟨a, Functor.isGE_rightDerivedFunctor_obj _ K a⟩, ⟨b + d, ?_⟩⟩
-  exact DerivedCategory.isLE_obj_of_isLE_of_homologyProperty R((p)_*⟦Λ⟧) d
-    (constructibleCoproductClosure Λ Z) hd K hK.1
-    (fun n ↦ ObjectProperty.le_weakSerreCoproductClosure _ _ (hK.2 n)) b
-
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
 
 /-! ### The coefficient ring `E` -/
@@ -106,10 +70,8 @@ theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMap
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj.{u} E) Z)))
     (hK : boundedConstructible _ K) :
-    boundedConstructible _ (R((p)_*⟦Profinite.continuousMapRingObj.{u} E⟧).obj K) := by
-  exact ⟨bounded_rightDerivedLowerStar_of_uniformBound _ p
-    (properLowerStar_uniformBound_ellAdic ℓ _ aY p) K hK,
-    properLowerStar_constructible_cohomology_ellAdic ℓ _ aY p K hK⟩
+    boundedConstructible _ (R((p)_*⟦Profinite.continuousMapRingObj.{u} E⟧).obj K) :=
+  sorry
 
 include ℓ in
 /-- Blueprint `sk-lem-proper-heart-bound` (`det-proper-heart-bound-indcons`): for the coefficient
@@ -119,9 +81,8 @@ dimensions of the fibres) and commutes with direct sums of them. -/
 theorem properLowerStarHeartHypotheses_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p] :
-    ProperLowerStarHeartHypotheses (Profinite.continuousMapRingObj.{u} E) p := by
-  exact properLowerStarHeartHypotheses_of_uniformBound _ p
-    (properLowerStar_uniformBound_ellAdic ℓ _ aY p)
+    ProperLowerStarHeartHypotheses (Profinite.continuousMapRingObj.{u} E) p :=
+  sorry
 
 /-! ### The coefficient ring `𝒪_E` -/
 
@@ -136,10 +97,8 @@ theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegers
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) Z)))
     (hK : boundedConstructible _ K) :
-    boundedConstructible _ (R((p)_*⟦Profinite.padicIntegersRingObj.{u} ℓ E⟧).obj K) := by
-  exact ⟨bounded_rightDerivedLowerStar_of_uniformBound _ p
-    (properLowerStar_uniformBound_ellAdic ℓ _ aY p) K hK,
-    properLowerStar_constructible_cohomology_ellAdic ℓ _ aY p K hK⟩
+    boundedConstructible _ (R((p)_*⟦Profinite.padicIntegersRingObj.{u} ℓ E⟧).obj K) :=
+  sorry
 
 /-- Blueprint `det-prop-int-compactness-direct-sums` (1): for the coefficient ring `𝒪_E` of a
 finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to a noetherian
@@ -149,9 +108,8 @@ theorem properLowerStarHeartHypotheses_padicIntegersRingObj (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y]
     (p : Z ⟶ Y) [IsProper p] :
-    ProperLowerStarHeartHypotheses (Profinite.padicIntegersRingObj.{u} ℓ E) p := by
-  exact properLowerStarHeartHypotheses_of_uniformBound _ p
-    (properLowerStar_uniformBound_ellAdic ℓ _ aY p)
+    ProperLowerStarHeartHypotheses (Profinite.padicIntegersRingObj.{u} ℓ E) p :=
+  sorry
 
 /-! ### The coefficient ring `ℚ̄_ℓ` -/
 
@@ -163,10 +121,8 @@ theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRin
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) Z)))
     (hK : boundedConstructible _ K) :
-    boundedConstructible _ (R((p)_*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧).obj K) := by
-  exact ⟨bounded_rightDerivedLowerStar_of_uniformBound _ p
-    (properLowerStar_uniformBound_ellAdic ℓ _ aY p) K hK,
-    properLowerStar_constructible_cohomology_ellAdic ℓ _ aY p K hK⟩
+    boundedConstructible _ (R((p)_*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧).obj K) :=
+  sorry
 
 /-- Blueprint `sk-lem-proper-heart-bound` (`det-proper-heart-bound-indcons`): for the coefficient
 ring `ℚ̄_ℓ` and a proper morphism `p : Z ⟶ Y` to a noetherian `k`-scheme, `Rp_*` sends
@@ -174,8 +130,7 @@ ind-constructible sheaves into degrees `≤ 2d + 1` (`d` bounding the dimensions
 and commutes with direct sums of them. -/
 theorem properLowerStarHeartHypotheses_padicAlgClRingObj {Z Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p] :
-    ProperLowerStarHeartHypotheses (Profinite.padicAlgClRingObj.{u} ℓ) p := by
-  exact properLowerStarHeartHypotheses_of_uniformBound _ p
-    (properLowerStar_uniformBound_ellAdic ℓ _ aY p)
+    ProperLowerStarHeartHypotheses (Profinite.padicAlgClRingObj.{u} ℓ) p :=
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

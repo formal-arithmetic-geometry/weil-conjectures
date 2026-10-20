@@ -18,7 +18,7 @@ import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.RingTheory.StrictHenselizationTriples
-import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
+import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.RingTheory.IndPrincipalZariski
 import WeilConjectures.RingTheory.ProEtale.IndEtale
 import Sheaf.RingTheory.IndEtaleUniverseTransport

@@ -114,8 +114,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedComparisonCoproductSource",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedComparisonCoproductSource.lean",
+  "module": "WeilConjectures.Algebra.Homology.LocalizedComparisonCoproductSource",
+  "file": "lean/WeilConjectures/Algebra/Homology/LocalizedComparisonCoproductSource.lean",
   "declaration": "ModuleCat.exists_localizedComparison_coproduct_source",
   "statement": "theorem exists_localizedComparison_coproduct_source\n    (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]\n    [HasDerivedCategory (ModuleCat.{u} R)] [HasDerivedCategory (ModuleCat.{u} B)]\n    {I : Type u} (M : I → CochainComplex (ModuleCat.{u} A) ℤ)\n    (S : CochainComplex (ModuleCat.{u} A) ℤ) (s : ∀ j, M j ⟶ S)\n    (hs : IsColimit (Cofan.mk S s))\n    (m : ∀ j, BaseDerivedTensorCohomologyModel R A B (M j) C)\n    (mS : BaseDerivedTensorCohomologyModel R A B S C) (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    ∃ e : (∐ fun j ↦ (extendScalars (algebraMap (A ⊗[R] B) C)).obj\n        ((m j).cohomology i)) ≅\n      (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mS.cohomology i),\n      ∀ j, Sigma.ι _ j ≫ e.hom ≫ mS.localizedComparison i =\n        (m j).localizedComparison i ≫ HomologicalComplex.homologyMap (F.map (s j)) i",
   "branch": "sheaf-dag",

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 import Sheaf.AlgebraicGeometry.BoundaryExtensionComposition
 import Sheaf.AlgebraicGeometry.Modules.ExtYonedaAssociativity
 import Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality
-import Sheaf.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import WeilConjectures.Topology.RingedSpaceModuleCohomology
 

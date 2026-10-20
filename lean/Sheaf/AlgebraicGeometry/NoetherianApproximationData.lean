@@ -6,12 +6,12 @@ Authors: SHEAF group G1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Sheaf.AlgebraicGeometry.FilteredCartesianFlatComplexDescent
+import WeilConjectures.AlgebraicGeometry.FilteredCartesianFlatComplexDescent
 import Sheaf.AlgebraicGeometry.FilteredCartesianPerfectDescent
 import Sheaf.AlgebraicGeometry.TensorPullbackFlatProperSupport
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit

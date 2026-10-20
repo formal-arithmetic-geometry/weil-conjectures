@@ -125,8 +125,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionClosedMonoidal",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionClosedMonoidal.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenRestrictionClosedMonoidal",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenRestrictionClosedMonoidal.lean",
   "declaration": "AlgebraicGeometry.exists_openRestriction_closedMonoidal",
   "statement": "theorem exists_openRestriction_closedMonoidal (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let R := (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E\n    let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.sheaf\n    let HU := derivedInternalHom\n      (Opens.grothendieckTopology U.toScheme.toRingedSpace) U.toScheme.sheaf\n    ∃ m : R.Monoidal,\n      letI := m\n      ∃ h : ∀ K N : schemeDerivedCategory X,\n        R.obj (H.obj (op K, N)) ≅ HU.obj (op (R.obj K), R.obj N),\n        ∀ A K N (ξ : A ⟶ H.obj (op K, N)),\n          schemeDerivedTensorHomEquiv U.toScheme (R.obj A) (R.obj K) (R.obj N)\n            (R.map ξ ≫ (h K N).hom) =\n          (Functor.Monoidal.μIso R A K).hom ≫\n            R.map (schemeDerivedTensorHomEquiv X A K N ξ)",
   "branch": "sheaf-dag",

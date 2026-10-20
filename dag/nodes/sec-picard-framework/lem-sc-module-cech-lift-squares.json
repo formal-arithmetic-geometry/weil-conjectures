@@ -87,8 +87,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ModuleCechLiftSquares",
-  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCechLiftSquares.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ModuleCechLiftSquares",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ModuleCechLiftSquares.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCechLiftSquares",
   "statement": "theorem moduleCechLiftSquares {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)\n    {F G : X.Modules} (φ : F ⟶ G) (I : InjectiveResolution F)\n    (J : InjectiveResolution G) (ψ : I.cocomplex ⟶ J.cocomplex)\n    (hψ : I.ι.f 0 ≫ ψ.f 0 = φ ≫ J.ι.f 0) :\n    let T := HomologicalComplex₂.total.map\n      ((SheafOfModules.forget X.ringCatSheaf ⋙\n        PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op ⋙\n          CategoryTheory.cechComplexFunctor U).mapHomologicalComplex\n            (ComplexShape.up ℕ) |>.map ψ) (ComplexShape.up ℕ)\n    moduleCechAlpha U I ≫ T =\n      ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℕ)).map ψ ≫ moduleCechAlpha U J ∧\n    moduleCechBeta U I ≫ T =\n      (CategoryTheory.cechComplexFunctor U).map\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n          φ.val) ≫ moduleCechBeta U J",
   "branch": "sheaf-dag",

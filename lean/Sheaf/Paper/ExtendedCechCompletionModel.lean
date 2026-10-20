@@ -8,8 +8,8 @@ module
 public import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
 public import Sheaf.CategoryTheory.LocalExtendedCechDescription
 public import Sheaf.CategoryTheory.RingedCompletionUnit
-import Sheaf.Algebra.Homology.HomComplexUnitEvaluationNaturality
-import Sheaf.Algebra.Homology.DerivedInternalHom
+import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
+import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import Sheaf.Paper.ExtendedCechReflectorCore
 import Sheaf.Paper.FunctorialRingComplexDescentData
 import Sheaf.Paper.FunctorialRingComplexCechComparison

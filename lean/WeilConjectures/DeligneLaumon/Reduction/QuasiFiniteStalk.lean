@@ -15,7 +15,6 @@ public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Trace
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TracePow
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
-import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 
 /-!
 # Local Frobenius of quasi-finite direct images

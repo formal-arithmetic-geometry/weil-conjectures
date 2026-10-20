@@ -33,8 +33,8 @@
  ],
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SourceStageSectionsNaturality",
-  "file": "lean/Sheaf/AlgebraicGeometry/SourceStageSectionsNaturality.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SourceStageSectionsNaturality",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SourceStageSectionsNaturality.lean",
   "declaration": "AlgebraicGeometry.Etale.sourceStageSectionsIso_naturality",
   "statement": "theorem sourceStageSectionsIso_naturality {X S : Scheme.{v}} (f : X ⟶ S)\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    {i j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)} (a : i ⟶ j)\n    (M : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :\n    (NatTrans.mapHomologicalComplex\n      ((sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).map\n        ((strictLocalNeighbourhoods s).map a).op) (.up ℤ)).app\n          (((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M) ≫\n      (NatIso.mapHomologicalComplex (sourceStageSectionsIso f s i) (.up ℤ)).hom.app M =\n    (NatIso.mapHomologicalComplex (sourceStageSectionsIso f s j) (.up ℤ)).hom.app M ≫\n      ((NatTrans.mapHomologicalComplex\n        (sectionsPullbackNat ((strictLocalNeighbourhoodDiagram f s).map a))\n          (.up ℤ)).app\n            (((upperStar AddCommGrpCat.{v + 1}\n              ((strictLocalNeighbourhoodProjection f s).app j)).mapHomologicalComplex\n                (.up ℤ)).obj M) ≫\n        ((Sheaf.Γ ((strictLocalNeighbourhoodDiagram f s).obj i).smallEtaleTopology\n          AddCommGrpCat.{v + 1}).mapHomologicalComplex (.up ℤ)).map\n            ((NatIso.mapHomologicalComplex\n              (upperStarComp AddCommGrpCat.{v + 1}\n                ((strictLocalNeighbourhoodDiagram f s).map a)\n                ((strictLocalNeighbourhoodProjection f s).app j)\n                ((strictLocalNeighbourhoodProjection f s).app i)\n                ((Category.comp_id _).symm.trans\n                  ((strictLocalNeighbourhoodProjection f s).naturality a).symm))\n              (.up ℤ)).inv.app M))",
   "branch": "sheaf-dag",

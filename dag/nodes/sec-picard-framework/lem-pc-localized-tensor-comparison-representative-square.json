@@ -130,8 +130,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonRepresentativeSquare",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonRepresentativeSquare.lean",
+  "module": "WeilConjectures.Algebra.Homology.LocalizedTensorComparisonRepresentativeSquare",
+  "file": "lean/WeilConjectures/Algebra/Homology/LocalizedTensorComparisonRepresentativeSquare.lean",
   "declaration": "ModuleCat.exists_localizedTensorComparison_representative_square",
   "statement": "theorem exists_localizedTensorComparison_representative_square\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n    (U V : CochainComplex (ModuleCat.{u} A) ℤ)\n    (hU : ∀ W : CochainComplex (ModuleCat.{u} A) ℤ, W.Acyclic →\n      (CochainComplex.mapBifunctor W U (curriedTensor _)).Acyclic)\n    (hV : ∀ W : CochainComplex (ModuleCat.{u} A) ℤ, W.Acyclic →\n      (CochainComplex.mapBifunctor W V (curriedTensor _)).Acyclic)\n    (eUV : DerivedCategory.Q.obj U ≅ DerivedCategory.Q.obj V)\n    (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C)\n    (mV : BaseDerivedTensorCohomologyModel R A B (V ⊗ Q) C) (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    ∃ (e : (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mU.cohomology i) ≅\n        (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mV.cohomology i))\n      (d : (F.obj U ⊗ N).homology i ≅ (F.obj V ⊗ N).homology i),\n      (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) ≫ d.hom =\n      e.hom ≫ mV.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F V Q).inv ≫ (F.obj V ◁ t)) i",
   "branch": "sheaf-dag",

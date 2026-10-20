@@ -4,8 +4,8 @@ Released under the Apache 2.0 license as described in the LICENSE file.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
-public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 import Sheaf.AlgebraicGeometry.RelativeMVResolvedRoofVertexNormalization
 
 /-! # Comparisons of canonical resolved Mayer--Vietoris rows -/

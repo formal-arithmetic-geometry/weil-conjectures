@@ -6,8 +6,8 @@ Authors: SHEAF group NK
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -22,13 +22,13 @@ import WeilConjectures.RingTheory.FiniteProjectiveStandardFreeCover
 import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.RingTheory.Ideal.Span
 import WeilConjectures.AlgebraicGeometry.Descent
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.SecTraceFormula.SurjectiveTwoTermDeterminantCalculus
 

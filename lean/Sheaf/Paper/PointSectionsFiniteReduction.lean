@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf

@@ -18,6 +18,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+public import Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-! # Constructibility of locally closed lisse extensions
 Source: blueprint generation, Converse paragraph.

@@ -5,8 +5,8 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import all Sheaf.CategoryTheory.FilteredQuotientPageMaps
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+import all WeilConjectures.CategoryTheory.FilteredQuotientPageMaps
 
 /-! # Canonical decalage of a filtered cochain complex
 

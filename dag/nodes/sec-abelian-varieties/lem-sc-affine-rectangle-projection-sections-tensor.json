@@ -102,8 +102,8 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineRectangleProjectionSectionsTensor",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineRectangleProjectionSectionsTensor.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineRectangleProjectionSectionsTensor",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineRectangleProjectionSectionsTensor.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_rectangle_projection_sections_tensor",
   "statement": "theorem exists_affine_rectangle_projection_sections_tensor\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (U : X.Opens) (V : Y.Opens) (hU : IsAffineOpen U) (hV : IsAffineOpen V)\n    (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] :\n    let W := pullback.fst f g ⁻¹ᵁ U ⊓ pullback.snd f g ⁻¹ᵁ V\n    ∃ e : (scalarObj f F (op U) ⊗[k] scalarObj g G (op V)) ≃+\n        (Γ((tensorPullback (pullback.fst f g)).obj F, W) ⊗[Γ(Limits.pullback f g, W)]\n          Γ((tensorPullback (pullback.snd f g)).obj G, W)),\n      ∀ (s : scalarObj f F (op U)) (t : scalarObj g G (op V)),\n        e (s ⊗ₜ[k] t) =\n          (((tensorPullback (pullback.fst f g)).obj F).presheaf.map\n            (homOfLE (show W ≤ pullback.fst f g ⁻¹ᵁ U from inf_le_left)).op\n            (((Classical.choose (exists_tensorPullbackAdjunction\n              (pullback.fst f g))).unit.app F).app U s)) ⊗ₜ[Γ(Limits.pullback f g, W)]\n            (((tensorPullback (pullback.snd f g)).obj G).presheaf.map\n            (homOfLE (show W ≤ pullback.snd f g ⁻¹ᵁ V from inf_le_right)).op\n            (((Classical.choose (exists_tensorPullbackAdjunction\n              (pullback.snd f g))).unit.app G).app V t))",
   "branch": "sheaf-dag",

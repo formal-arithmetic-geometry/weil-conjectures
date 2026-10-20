@@ -21,11 +21,11 @@ import Mathlib.Algebra.Homology.BifunctorShift
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
 import Sheaf.AlgebraicGeometry.CompactSupportRestrictionOfScalars

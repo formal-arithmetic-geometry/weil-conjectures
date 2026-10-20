@@ -6,9 +6,9 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.AlgebraizeFiniteStructureAlgebra
-import Sheaf.AlgebraicGeometry.CoherentAlgebraAffineFiniteProper
+import WeilConjectures.AlgebraicGeometry.CoherentAlgebraAffineFiniteProper
 import WeilConjectures.AlgebraicGeometry.AffineAlgebraReductionsCartesian
-import Sheaf.AlgebraicGeometry.RelativeSpectrumAffineRealization
+import WeilConjectures.AlgebraicGeometry.RelativeSpectrumAffineRealization
 
 /-!
 # Algebraization of finite schemes over thickenings of a proper scheme

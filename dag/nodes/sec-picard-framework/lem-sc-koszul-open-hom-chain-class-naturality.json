@@ -137,8 +137,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KoszulOpenHomChainClassNaturality",
-  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenHomChainClassNaturality.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.KoszulOpenHomChainClassNaturality",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/KoszulOpenHomChainClassNaturality.lean",
   "declaration": "AlgebraicGeometry.koszulOpenHom_chain_class_naturality",
   "statement": "theorem koszulOpenHom_chain_class_naturality\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [HasDerivedCategory.{v} (ModuleCat.{u} A)]\n    (L F : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (e : ℕ) (s : koszulOpenSheafComplex A r f e ⟶ L) (t : L ⟶ F) :\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0\n    let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor\n    H.map (G.map (DerivedCategory.Q.map t))\n      (H.map (koszulCechDerivedComparison A r f L)\n        (H.map (DerivedCategory.Q.map (colimit.ι\n          (koszulCechHomDiagram A r f\n            (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj L)) e))\n          (koszulOpenHomStageClass A r f L e s))) =\n    H.map (koszulCechDerivedComparison A r f F)\n      (H.map (DerivedCategory.Q.map (colimit.ι\n        (koszulCechHomDiagram A r f\n          (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F)) e))\n        (koszulOpenHomStageClass A r f F e (s ≫ t)))",
   "branch": "sheaf-dag",

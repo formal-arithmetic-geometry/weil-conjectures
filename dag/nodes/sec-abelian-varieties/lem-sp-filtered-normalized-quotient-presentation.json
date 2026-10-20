@@ -102,8 +102,8 @@
  "unit": "sk-prop-av-pqf-finite",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.FilteredNormalizedQuotientPresentation",
-  "file": "lean/Sheaf/CategoryTheory/FilteredNormalizedQuotientPresentation.lean",
+  "module": "WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation",
+  "file": "lean/WeilConjectures/CategoryTheory/FilteredNormalizedQuotientPresentation.lean",
   "declaration": "CategoryTheory.DecreasingFiltration.normalizedStationaryQuotient_presentation",
   "statement": "theorem normalizedStationaryQuotient_presentation\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K) (p n : ℤ) :\n  let A := L.complexStep p n\n  let A' := L.complexStep (p + 1) n\n  let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥\n  let B := imageSubobject (K.d (n - 1) n)\n  let q := (L.complexQuotientπ p (p + 1) (Int.le_add_one le_rfl)).f n\n  let P := Subobject.pullback ((L.step p).arrow.f n)\n  let Zbar := (Subobject.«exists» q).obj (P.obj ((A ⊓ Z) ⊔ A'))\n  let Bbar := (Subobject.«exists» q).obj (P.obj ((A ⊓ B) ⊔ A'))\n  ∀ hBZ : Bbar ≤ Zbar,\n    Nonempty (cokernel (Subobject.ofLE Bbar Zbar hBZ) ≅\n      cokernel ((Subobject.pullback (A ⊓ Z).arrow).obj\n        ((A ⊓ B) ⊔ (A' ⊓ Z))).arrow)",
   "branch": "sheaf-dag",

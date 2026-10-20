@@ -108,8 +108,8 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ScalarInverseImageCompositionCoherence",
-  "file": "lean/Sheaf/AlgebraicGeometry/ScalarInverseImageCompositionCoherence.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ScalarInverseImageCompositionCoherence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ScalarInverseImageCompositionCoherence.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.scalarInverseImageCompIso_coherence",
   "statement": "theorem scalarInverseImageCompIso_coherence\n    (k : Type w) [Field k] (A B C : Scheme.{w})\n    (fA : A ⟶ Spec (CommRingCat.of k)) (fB : B ⟶ Spec (CommRingCat.of k))\n    (fC : C ⟶ Spec (CommRingCat.of k)) (a : A ⟶ B) (b : B ⟶ C)\n    (ha : a ≫ fB = fA) (hb : b ≫ fC = fB) (F : C.Modules) :\n    (scalarInverseUnitIso (a ≫ b)).inv ≫\n        (scalarInverseImageCompIso k a b).hom.app (𝟙_ (KSheaf C k)) =\n      (scalarInverseUnitIso a).inv ≫\n        (scalarInverseImage a).map (scalarInverseUnitIso b).inv ∧\n    (scalarInverseImageCompIso k a b).hom.app (scalarSheaf fC F) ≫\n        (scalarInverseImage a).map (scalarPullbackCoefficient fC fB b hb F) ≫\n        scalarPullbackCoefficient fB fA a ha ((tensorPullback b).obj F) ≫\n        scalarHom fA ((scalarPullbackCompIso a b).app F).inv =\n      scalarPullbackCoefficient fC fA (a ≫ b)\n        (by rw [Category.assoc, hb, ha]) F",
   "branch": "sheaf-dag",

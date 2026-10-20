@@ -97,8 +97,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate",
-  "file": "lean/Sheaf/AlgebraicGeometry/QCohInverseBaseChangeMate.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.QCohInverseBaseChangeMate",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/QCohInverseBaseChangeMate.lean",
   "declaration": "AlgebraicGeometry.dualityEquationBaseChangeMap_eq_inverseSquareMate",
   "statement": "theorem dualityEquationBaseChangeMap_eq_inverseSquareMate\n    {X Y Y' : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']\n    (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (g : Y' ⟶ Y)\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (a' : schemeDerivedQCohCategory Y' ⥤ schemeDerivedQCohCategory (pullback f g))\n    (adjf : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)\n      (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst\n        E.obj E.property) ⊣ a)\n    (adjf' : (schemeDerivedQCohProperty Y').lift\n      ((schemeDerivedQCohProperty (pullback f g)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f g))\n      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n        (pullback.snd f g) _ _).fst E.obj E.property) ⊣ a')\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition E.obj))\n    (K : schemeDerivedQCohCategory Y) :\n    dualityEquationBaseChangeMap f g a a' adjf adjf' hβ K =\n      (mateEquiv adjf adjf' (qcInverseBaseChange f g hβ)).app K",
   "branch": "sheaf-dag",

@@ -102,8 +102,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SelfTorChartSquareDualization",
-  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorChartSquareDualization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SelfTorChartSquareDualization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SelfTorChartSquareDualization.lean",
   "declaration": "AlgebraicGeometry.selfTor_affine_chart_square_dualization",
   "statement": "theorem selfTor_affine_chart_square_dualization\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) (U : Y.affineOpens) (n : ℕ)\n    (E Q : Z.Modules) (τ : E ⟶ Q)\n    (hτ : IsAffineSelfTorChartMap i U n E Q (τ.over (i ⁻¹ᵁ U.1)))\n    (V : Z.Opens) :\n    let W := V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1)\n    let T := tilde.functor Γ(Y, U.1) ⋙\n      Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n      Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    let F := T.op ⋙ Scheme.Modules.dualFunctor Z ⋙\n      Scheme.Modules.restrictFunctor V.ι ⋙ SheafOfModules.overFunctor _ W\n    let c := selfTorConormalComparison (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    ∃ (a : (((Scheme.Modules.restrictFunctor V.ι).obj\n          (Scheme.Modules.dual Q)).over W) ≅ F.obj (op _))\n      (b : F.obj (op _) ≅ (((Scheme.Modules.restrictFunctor V.ι).obj\n          (Scheme.Modules.dual E)).over W)),\n      ((Scheme.Modules.restrictFunctor V.ι).map (Scheme.Modules.dualMap τ)).over W =\n        a.hom ≫ F.map c.op ≫ b.hom",
   "branch": "sheaf-dag",

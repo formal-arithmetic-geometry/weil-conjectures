@@ -104,8 +104,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.StupidTailHomShortExact",
-  "file": "lean/Sheaf/Algebra/Homology/StupidTailHomShortExact.lean",
+  "module": "WeilConjectures.Algebra.Homology.StupidTailHomShortExact",
+  "file": "lean/WeilConjectures/Algebra/Homology/StupidTailHomShortExact.lean",
   "declaration": "CategoryTheory.exists_homComplex_stupid_tail_shortExact",
   "statement": "theorem exists_homComplex_stupid_tail_shortExact\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    (P : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)\n    (k : ℤ) (hbelow : ∀ n : ℤ, n < k → IsZero (P.X n))\n    {M N : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ}\n    (f : M ⟶ N) : ∃ S T : ShortComplex (CochainComplex (SheafOfModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ),\n      ∃ φ : S ⟶ T, S.ShortExact ∧ T.ShortExact ∧\n        Nonempty (Arrow.mk φ.τ₁ ≅ Arrow.mk (((homComplexFunctor (R := R)).obj\n          (op ((HomologicalComplex.single _ (ComplexShape.up ℤ) k).obj\n            (P.X k)))).map f)) ∧\n        Nonempty (Arrow.mk φ.τ₂ ≅ Arrow.mk\n          (((homComplexFunctor (R := R)).obj (op P)).map f)) ∧\n        Nonempty (Arrow.mk φ.τ₃ ≅ Arrow.mk (((homComplexFunctor (R := R)).obj\n          (op (P.stupidTrunc (ComplexShape.embeddingUpIntGE (k + 1))))).map f))",
   "branch": "sheaf-dag",

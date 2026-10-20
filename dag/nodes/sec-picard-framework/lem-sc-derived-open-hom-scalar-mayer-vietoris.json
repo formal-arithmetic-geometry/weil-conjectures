@@ -104,8 +104,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedOpenHomScalarMayerVietoris",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenHomScalarMayerVietoris.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedOpenHomScalarMayerVietoris",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedOpenHomScalarMayerVietoris.lean",
   "declaration": "AlgebraicGeometry.derived_open_hom_scalar_mayer_vietoris",
   "statement": "theorem derived_open_hom_scalar_mayer_vietoris\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (U V : X.Opens) (E E' : schemeDerivedCategory X) (k : ℤ) :\n    let R := fun W : X.Opens ↦\n      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory\n    ∃ δ : ((R (U ⊓ V)).obj E ⟶ (R (U ⊓ V)).obj (E'⟦k - 1⟧)) →+\n        ((R (U ⊔ V)).obj E ⟶ (R (U ⊔ V)).obj (E'⟦k⟧)),\n      (∀ β : (R (U ⊔ V)).obj E ⟶ (R (U ⊔ V)).obj (E'⟦k⟧),\n        derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_left) β = 0 →\n        derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_right) β = 0 →\n        ∃ γ, δ γ = β) ∧\n      ∀ (r : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u})) γ,\n        δ ((R (U ⊓ V)).map (schemeDerivedScalar X r (𝟙 E)) ≫ γ) =\n          (R (U ⊔ V)).map (schemeDerivedScalar X r (𝟙 E)) ≫ δ γ",
   "branch": "sheaf-dag",

@@ -5,10 +5,10 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
-import Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
+import WeilConjectures.CategoryTheory.FilteredComplexSpectralSequence
+import WeilConjectures.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
 import Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison
 
 /-!

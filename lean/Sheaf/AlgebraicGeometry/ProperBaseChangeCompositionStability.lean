@@ -5,7 +5,6 @@ public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
 public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 import Sheaf.AlgebraicGeometry.EtaleGrothendieckSpectralSequence
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.CategoryTheory.ExactCoupleConvergence
 import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange

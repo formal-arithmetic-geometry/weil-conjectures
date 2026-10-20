@@ -96,8 +96,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProperPerfectCompactTests",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProperPerfectCompactTests.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ProperPerfectCompactTests",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProperPerfectCompactTests.lean",
   "declaration": "AlgebraicGeometry.properPerfect_compactTests",
   "statement": "theorem properPerfect_compactTests\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (f : X ⟶ Y) [IsProper f]\n    (hTor : ∀ x : X, ∃ n : ℕ,\n      ∀ (N : ModuleCat.{u} (Y.presheaf.stalk (f x))) (i : ℕ), n < i →\n        IsZero (((Tor (ModuleCat.{u} (Y.presheaf.stalk (f x))) i).obj\n          ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj\n            (ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x)))).obj N))\n    (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y)\n    (eR : R ⋙ (schemeDerivedQCohProperty Y).ι ≅\n      (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) :\n    let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X\n    let _ : HasCoproducts.{u} (schemeDerivedQCohCategory Y) := derivedQCohDirectSums Y\n    ∃ (S : Type u) (G : S → schemeDerivedQCohCategory X),\n      (∀ s, IsCompactObject (G s) ∧ IsCompactObject (R.obj (G s))) ∧\n      ∀ (A B : schemeDerivedQCohCategory X) (g : A ⟶ B),\n        (∀ s, Function.Bijective (fun a : G s ⟶ A ↦ a ≫ g)) → IsIso g",
   "branch": "sheaf-dag",

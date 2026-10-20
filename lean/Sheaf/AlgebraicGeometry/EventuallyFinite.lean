@@ -5,7 +5,7 @@ Authors: SHEAF group ND
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import WeilConjectures.AlgebraicGeometry.EventuallyAffine

@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
-public import Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
 import WeilConjectures.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem
 import WeilConjectures.AlgebraicGeometry.RawAffineComplexSystemMapCoherence
 

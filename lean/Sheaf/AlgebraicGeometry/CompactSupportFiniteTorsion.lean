@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 public import WeilConjectures.Compactification.CategoryBaseChange
 public import Sheaf.AlgebraicGeometry.ProperOpenComparison
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalismComparison
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import Sheaf.AlgebraicGeometry.ProperOpenIdentificationNormalization

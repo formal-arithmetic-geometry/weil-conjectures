@@ -2,7 +2,7 @@ module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartTensorComponents
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComponents
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTotalCoherence
-public import Sheaf.AlgebraicGeometry.QCohTensorResolutionRestrictionTensorCompose
+public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionRestrictionTensorCompose
 
 @[expose] public section
 universe u

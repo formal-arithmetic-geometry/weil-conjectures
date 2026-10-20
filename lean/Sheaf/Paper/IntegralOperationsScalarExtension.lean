@@ -33,7 +33,7 @@ import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 
 /-! # Integral operations and finite coefficient extension
 

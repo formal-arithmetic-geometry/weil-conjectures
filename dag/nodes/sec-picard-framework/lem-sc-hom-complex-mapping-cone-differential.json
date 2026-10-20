@@ -98,8 +98,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.HomComplexMappingConeDifferential",
-  "file": "lean/Sheaf/Algebra/Homology/HomComplexMappingConeDifferential.lean",
+  "module": "WeilConjectures.Algebra.Homology.HomComplexMappingConeDifferential",
+  "file": "lean/WeilConjectures/Algebra/Homology/HomComplexMappingConeDifferential.lean",
   "declaration": "CategoryTheory.homComplex_mappingCone_differential",
   "statement": "theorem homComplex_mappingCone_differential\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    (E G I : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)\n    (f : G ⟶ I) :\n    let π := Classical.choose\n      (homComplex_projections_exists.{u, u, u, u} (C := C) (J := J) (R := R))\n    let hf := ((homComplexFunctor (R := R)).obj (op E)).map f\n    let K := HomologicalComplex.homotopyCofiber hf\n    let cf := HomologicalComplex.homotopyCofiber f\n    let H := ((homComplexFunctor (R := R)).obj (op E)).obj cf\n    ∀ (e : ∀ n : ℤ, K.X n ≅ H.X n),\n      (∀ n p : ℤ, (e n).hom ≫ π E cf n p (p + n) rfl =\n        (show K.X n ⟶ SheafOfModules.homObj (R := R) (E.X p) (cf.X (p + n)) from\n        HomologicalComplex.homotopyCofiber.fstX hf n (n + 1) rfl ≫\n          π E G (n + 1) p (p + (n + 1)) rfl ≫\n          SheafOfModules.homObjMap (R := R) (𝟙 (E.X p))\n            (HomologicalComplex.homotopyCofiber.inlX f (p + (n + 1)) (p + n)\n              (by change (p + n) + 1 = p + (n + 1); omega)) +\n        HomologicalComplex.homotopyCofiber.sndX hf n ≫ π E I n p (p + n) rfl ≫\n          SheafOfModules.homObjMap (R := R) (𝟙 (E.X p))\n            (HomologicalComplex.homotopyCofiber.inrX f (p + n)))) →\n      ∀ n m : ℤ, n + 1 = m →\n        (e n).hom ≫ H.d n m = K.d n m ≫ (e m).hom",
   "branch": "sheaf-dag",

@@ -5,11 +5,11 @@ Authors: SHEAF group U4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation
+public import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
+import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation
 import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationUncurryCalculation
+import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationUncurryCalculation
 
 /-! # Localization of the ordinary evaluation equation
 Source: Stacks Project, Tags 08DJ, 08DM and 08DQ.

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import Sheaf.AlgebraicGeometry.EtaleSupport
+public import WeilConjectures.AlgebraicGeometry.EtaleSupport
 public import Mathlib.Topology.JacobsonSpace
 public import Sheaf.AlgebraicGeometry.EtaleGloballyGenerated
 import Sheaf.AlgebraicGeometry.ClosedPointSheafApproximation

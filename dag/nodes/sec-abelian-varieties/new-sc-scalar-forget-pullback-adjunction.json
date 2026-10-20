@@ -92,8 +92,8 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ScalarForgetPullbackAdjunction",
-  "file": "lean/Sheaf/AlgebraicGeometry/ScalarForgetPullbackAdjunction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ScalarForgetPullbackAdjunction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ScalarForgetPullbackAdjunction.lean",
   "declaration": "AlgebraicGeometry.Scheme.scalar_forget_pullback_adjunction",
   "statement": "theorem scalar_forget_pullback_adjunction (k : Type u) [Field k]\n    {X Y : Scheme.{u}} (a : Y ⟶ X) :\n    let L := (Opens.map a.base).sheafPullback AddCommGrpCat.{u}\n      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)\n    ∃ c : scalarInverseImage (k := k) a ⋙ scalarAbelianForget k Y ≅\n        scalarAbelianForget k X ⋙ L,\n      (∀ (F : KSheaf X k) (G : KSheaf Y k)\n        (q : (scalarInverseImage a).obj F ⟶ G),\n        (((Opens.map a.base).sheafAdjunctionContinuous AddCommGrpCat.{u} _ _).homEquiv\n          _ _) (c.inv.app F ≫ (scalarAbelianForget k Y).map q) =\n        (scalarAbelianForget k X).map\n          ((((Opens.map a.base).sheafAdjunctionContinuous (ModuleCat.{u} k) _ _).homEquiv\n            _ _) q)) ∧\n      Abelian.Ext.homEquiv₀ (scalarAbelianUnitClass k Y) ≫\n          (scalarAbelianForget k Y).map (scalarInverseUnitIso a).inv ≫\n          c.hom.app (𝟙_ (KSheaf X k)) =\n        (((Opens.map a.base).constantSheafsheafPullbackIso AddCommGrpCat.{u}\n          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)\n          isTerminalTop isTerminalTop).symm.app (AddCommGrpCat.of (ULift ℤ))).hom ≫\n        L.map (Abelian.Ext.homEquiv₀ (scalarAbelianUnitClass k X))",
   "branch": "sheaf-dag",

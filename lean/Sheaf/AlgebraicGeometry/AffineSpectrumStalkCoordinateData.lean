@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-import Sheaf.AlgebraicGeometry.StalkComparisonSourceTransport
+import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Stalk coordinates for affine spectrum replacement

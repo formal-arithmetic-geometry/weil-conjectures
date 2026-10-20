@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.ProjectiveLineOriginalStalkTotalCohomologyExchange
-import Sheaf.AlgebraicGeometry.StrictLocalTotalCohomologyExchange
+import WeilConjectures.AlgebraicGeometry.StrictLocalTotalCohomologyExchange
 
 /-! # Stalk exchange under compatible strict localization
 

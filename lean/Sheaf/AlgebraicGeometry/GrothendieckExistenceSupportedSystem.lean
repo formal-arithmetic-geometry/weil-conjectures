@@ -6,17 +6,17 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.SupportedThickeningDictionary
-import Sheaf.AlgebraicGeometry.ClosedSupportedFormalAlgebraization
-import Sheaf.AlgebraicGeometry.GrothendieckExistenceProper
-import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
+import WeilConjectures.AlgebraicGeometry.ClosedSupportedFormalAlgebraization
+import WeilConjectures.AlgebraicGeometry.GrothendieckExistenceProper
+import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 
 /-! # Algebraization of a system on a fixed proper closed subscheme
 

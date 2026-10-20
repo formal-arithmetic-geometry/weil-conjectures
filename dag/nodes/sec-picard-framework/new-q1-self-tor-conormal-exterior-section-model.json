@@ -120,8 +120,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SelfTorConormalExteriorSectionModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorConormalExteriorSectionModel.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SelfTorConormalExteriorSectionModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SelfTorConormalExteriorSectionModel.lean",
   "declaration": "AlgebraicGeometry.exists_selfTor_conormal_exterior_section_model",
   "statement": "theorem exists_selfTor_conormal_exterior_section_model\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (n : ℕ) (U : Y.affineOpens) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n      Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    ∃ e : (⋀[Z.presheaf.obj (op (i ⁻¹ᵁ U.1))]^n\n        (N.val.obj (op (i ⁻¹ᵁ U.1)))) ≃ₗ[Z.presheaf.obj (op (i ⁻¹ᵁ U.1))]\n        (T.obj M).val.obj (op (i ⁻¹ᵁ U.1)),\n      ∀ b : Fin n → i.ker.toModules.val.obj (op U.1),\n        e (exteriorPower.ιMulti (Z.presheaf.obj (op (i ⁻¹ᵁ U.1))) n\n          (fun j ↦ ((Classical.choose\n            (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app\n              i.ker.toModules).val.app (op U.1) (b j))) =\n          selfTorAffineSection i U M (selfTorIdealWedge i U n b)",
   "branch": "sheaf-dag",

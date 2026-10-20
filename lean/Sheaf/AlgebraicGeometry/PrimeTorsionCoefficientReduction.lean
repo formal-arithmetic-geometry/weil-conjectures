@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PrimeTorsionCoefficientReductionCompat
 public import Sheaf.AlgebraicGeometry.PunctualTensorBaseChange
 public import Sheaf.Paper.EtaleUnboundedRestrictionComparison
-import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
+import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback

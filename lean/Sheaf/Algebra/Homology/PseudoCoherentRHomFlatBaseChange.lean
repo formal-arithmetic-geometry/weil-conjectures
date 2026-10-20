@@ -11,7 +11,7 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.AlgebraicGeometry.MixedGlobalExtension
+import WeilConjectures.AlgebraicGeometry.MixedGlobalExtension
 import Sheaf.Algebra.Homology.ProjectiveHomEvaluationModel
 import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.NormalizedRingHomExtension

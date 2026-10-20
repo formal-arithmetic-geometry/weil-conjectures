@@ -111,8 +111,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSheafSingletonContraction",
-  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSheafSingletonContraction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AlternatingCechSheafSingletonContraction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AlternatingCechSheafSingletonContraction.lean",
   "declaration": "AlgebraicGeometry.alternatingCechSheafAugmentation_restrict_singleton_contraction",
   "statement": "theorem alternatingCechSheafAugmentation_restrict_singleton_contraction\n    {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :\n    let F := Scheme.Modules.restrictFunctor (U i).ι\n    let A := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      (((CochainComplex.single₀ X.Modules).obj G).extend ComplexShape.embeddingUpNat)\n    let C := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      ((alternatingCechSheafComplex U G).extend ComplexShape.embeddingUpNat)\n    let a : A ⟶ C := (F.mapHomologicalComplex (ComplexShape.up ℤ)).map\n      (HomologicalComplex.extendMap (alternatingCechSheafAugmentation U G)\n        ComplexShape.embeddingUpNat)\n    ∃ π : C.X 0 ⟶ A.X 0,\n      ∃ h : ∀ k : ℤ, C.X (k + 1) ⟶ C.X k,\n        (C.d (0 : ℤ) (0 + 1) ≫ h 0 + π ≫ a.f 0 = 𝟙 (C.X 0)) ∧\n        ∀ k : ℤ, 0 < k → C.d k (k + 1) ≫ h k +\n          (C.XIsoOfEq (show k = k - 1 + 1 by omega)).hom ≫\n            h (k - 1) ≫ C.d (k - 1) k = 𝟙 (C.X k)",
   "branch": "sheaf-dag",

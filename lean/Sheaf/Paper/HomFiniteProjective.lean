@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.SixFunctorDatum
 public import Sheaf.Paper.SitePerfectComplex
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-public import Sheaf.Algebra.Homology.HomComplexProjections
+public import WeilConjectures.Algebra.Homology.HomComplexProjections
 
 /-!
 # Internal Hom out of locally finite projective coefficient modules

@@ -5,17 +5,17 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+public import WeilConjectures.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
+import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Mathlib.CategoryTheory.MorphismProperty.Retract
-import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferential
+import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
 import Sheaf.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComparisons
-import Sheaf.Algebra.Homology.DerivedInternalHom
+import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import WeilConjectures.Algebra.Homology.HomComplex
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.PerfectComplex
+import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+import WeilConjectures.AlgebraicGeometry.PerfectComplex
 
 /-! # Compatible comparison isomorphisms for an ordinary evaluation map
 

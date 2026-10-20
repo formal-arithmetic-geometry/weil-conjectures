@@ -111,8 +111,8 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.PrincipalThickeningCokernelSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PrincipalThickeningCokernelSections.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.PrincipalThickeningCokernelSections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/PrincipalThickeningCokernelSections.lean",
   "declaration": "AlgebraicGeometry.Scheme.principal_thickening_cokernel_sections",
   "statement": "theorem principal_thickening_cokernel_sections\n    (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens) :\n    let p := fun n : ℕ ↦ Modules.smulHom (SheafOfModules.unit W.toScheme.ringCatSheaf)\n      ((((ΓSpecIso (.of R)).inv ≫ W.ι.appTop) g) ^ (n + 1))\n    let i := fun n : ℕ ↦ image.ι (p n)\n    ∃ e : ∀ n : ℕ, Modules.H (cokernel (i n)) 0 ≃+\n        Γ(FiniteEtale.Adic.openThickening\n          (Ideal.Quotient.mk (Ideal.span {g})) W n, ⊤),\n      (∀ n (a : Γ(W.toScheme, ⊤)),\n        e n (Modules.H.map (cokernel.π (i n)) 0\n          ((Modules.H.zeroLinearEquiv _).symm a)) =\n        (FiniteEtale.Adic.openThickeningMap\n          (Ideal.Quotient.mk (Ideal.span {g})) W n).appTop a) ∧\n      (∀ (n m : ℕ) (κ : image (p m) ⟶ image (p n))\n        (h : FiniteEtale.Adic.openThickening\n            (Ideal.Quotient.mk (Ideal.span {g})) W n ⟶\n          FiniteEtale.Adic.openThickening (Ideal.Quotient.mk (Ideal.span {g})) W m)\n        (hk : κ ≫ i n = i m),\n        h ≫ FiniteEtale.Adic.openThickeningMap\n            (Ideal.Quotient.mk (Ideal.span {g})) W m =\n          FiniteEtale.Adic.openThickeningMap\n            (Ideal.Quotient.mk (Ideal.span {g})) W n →\n        ∀ x, e n (Modules.H.map\n          (cokernel.map (i m) (i n) κ (𝟙 _) (by simpa using hk.symm)) 0 x) =\n          h.appTop (e m x))",
   "branch": "sheaf-dag",

@@ -106,8 +106,8 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComplexes",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAffineCechComplexes.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComplexes",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PicardExternalCoefficientsAffineCechComplexes.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCupCoefficients_affine_cech_complexes",
   "statement": "theorem picardExternalCupCoefficients_affine_cech_complexes\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent]\n    {ι : Type w} [Finite ι] (U : ι → X.Opens)\n    (hU : ∀ (n : ℕ) (y : Fin (n + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (V : Y.Opens) (hV : IsAffineOpen V) :\n    let Z := Limits.pullback f g\n    let W : Z.Opens := (pullback.snd f g) ⁻¹ᵁ V\n    let E := (externalCupCoefficients f g F G).restrict W.ι\n    let U' : ι → W.toScheme.Opens := fun i ↦ W.ι ⁻¹ᵁ ((pullback.fst f g) ⁻¹ᵁ U i)\n    let B := (cechComplexFunctor U').obj E.presheafModuleCat\n    let R := ModuleCat.restrictScalars (scalarMap f ⊤)\n    let C := (R.mapHomologicalComplex (.up ℕ)).obj\n      ((cechComplexFunctor U).obj F.presheafModuleCat)\n    let T := tensorRight (scalarObj (V.ι ≫ g) (G.restrict V.ι) (Opposite.op ⊤))\n    Nonempty\n        (((forget₂ (ModuleCat.{w} Γ(W.toScheme, ⊤)) AddCommGrpCat.{w}).mapHomologicalComplex\n            (.up ℕ)).obj B ≅\n          ((forget₂ (ModuleCat.{w} k) AddCommGrpCat.{w}).mapHomologicalComplex\n            (.up ℕ)).obj ((T.mapHomologicalComplex (.up ℕ)).obj C))",
   "branch": "sheaf-dag",

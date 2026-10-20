@@ -5,9 +5,9 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardConstantSectionsTensor
+public import WeilConjectures.AlgebraicGeometry.PicardConstantSectionsTensor
 public import Sheaf.Paper.PQFCohomology
-public import Sheaf.AlgebraicGeometry.ExternalSectionsComponents
+public import WeilConjectures.AlgebraicGeometry.ExternalSectionsComponents
 import Sheaf.AlgebraicGeometry.PicardConstantTensorBalancedSections
 
 /-! # The ordinary external section map on constant tensor coefficients

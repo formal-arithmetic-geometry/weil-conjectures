@@ -18,9 +18,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancell
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
 
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
-import WeilConjectures.ConstructibleSheaf.ExtensionByZero
-
 /-!
 # Constructibility of projective direct images
 

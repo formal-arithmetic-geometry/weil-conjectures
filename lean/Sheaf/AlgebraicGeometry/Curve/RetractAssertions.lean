@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
-import Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficients
+import WeilConjectures.AlgebraicGeometry.ConstructibleIntegralCoefficients
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!

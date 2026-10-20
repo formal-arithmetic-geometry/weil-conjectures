@@ -98,8 +98,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenRestrictedOrdinaryComparisonSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictedOrdinaryComparisonSquare.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenRestrictedOrdinaryComparisonSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenRestrictedOrdinaryComparisonSquare.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_open_restricted_ordinary_comparison_square",
   "statement": "theorem exists_open_restricted_ordinary_comparison_square\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) (U : X.Opens)\n    (sqU : IsPullback (pullback.snd g' U.ι) (pullback.fst g' U.ι ≫ f') (U.ι ≫ f) g)\n    (z : (pullback g' U.ι : Scheme.{u})) (i : ℤ)\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let Q := ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P\n    let Pg := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P\n    let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk (pullback.fst g' U.ι z)))\n      AddCommGrpCat.{u}\n    let FU := forget₂ (ModuleCat.{u} ((pullback g' U.ι).presheaf.stalk z))\n      AddCommGrpCat.{u}\n    let HU := comparisonStalkCohomology (pullback g' U.ι) z i ⋙ FU\n    let a := F.map (comparisonIntoTensorPullback f f' g g' sq\n      (pullback.fst g' U.ι z) P i)\n    let b := FU.map (comparisonIntoTensorPullback (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')\n      g (pullback.snd g' U.ι) sqU z Q i)\n    ∃ l : (Arrow.mk a).left ≅ (Arrow.mk b).left,\n      a ≫ (openDerivedStalkIso (pullback.fst g' U.ι) z i).hom.app\n          (DerivedCategory.Q.obj Pg) =\n        l.hom ≫ b ≫ HU.map (openRestrictedTensorDerivedIso g' U P).inv",
   "branch": "sheaf-dag",

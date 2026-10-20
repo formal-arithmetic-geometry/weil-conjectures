@@ -94,8 +94,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoefficientSquarePasting",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientSquarePasting.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoefficientSquarePasting",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoefficientSquarePasting.lean",
   "declaration": "AlgebraicGeometry.coefficient_square_pasting",
   "statement": "theorem coefficient_square_pasting\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' W A P B : Scheme.{u}}\n    (g : X' ⟶ X) (w : W ⟶ X) (a : A ⟶ W)\n    (p : P ⟶ X') (q : P ⟶ W) (r : B ⟶ P) (t : B ⟶ A)\n    (h : q ≫ w = p ≫ g) (h2 : t ≫ a = r ≫ q)\n    (hrect : t ≫ (a ≫ w) = (r ≫ p) ≫ g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (phi : (derivedPullback g).obj K ⟶ K') :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))\n    let KW := (derivedPullback w).obj K\n    let phiW := (c q w).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K) h) ≫\n      (c p g).inv.app K ≫ (derivedPullback p).map phi\n    let phiA := (c t a).hom.app KW ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj KW) h2) ≫\n      (c r q).inv.app KW ≫ (derivedPullback r).map phiW\n    let phiRect := (c t (a ≫ w)).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K) hrect) ≫\n      (c (r ≫ p) g).inv.app K ≫ (derivedPullback (r ≫ p)).map phi\n    phiA = (derivedPullback t).map ((c a w).hom.app K) ≫ phiRect ≫\n      (c r p).inv.app K'",
   "branch": "sheaf-dag",

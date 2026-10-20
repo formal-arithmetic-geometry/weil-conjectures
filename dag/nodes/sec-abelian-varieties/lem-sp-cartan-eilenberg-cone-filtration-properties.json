@@ -109,8 +109,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.CartanEilenbergConeFiltrationProperties",
-  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergConeFiltrationProperties.lean",
+  "module": "WeilConjectures.CategoryTheory.CartanEilenbergConeFiltrationProperties",
+  "file": "lean/WeilConjectures/CategoryTheory/CartanEilenbergConeFiltrationProperties.lean",
   "declaration": "CategoryTheory.Functor.cartanEilenberg_cone_filtration_properties",
   "statement": "theorem cartanEilenberg_cone_filtration_properties {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] (K : CochainComplex A ℤ) (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (a : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ I) (b : ℤ) (hIbelow : ∀ s : ℤ, s < b → IsZero (I.X s)) (hKbelow : ∀ s : ℤ, s < b → IsZero (K.X s)) (aug : K ⟶ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total (ComplexShape.up ℤ)) (haug : ∀ n : ℤ, aug.f n = (a.f n).f 0 ≫ (HomologicalComplex.extendXIso (((𝟭 A).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X n)) ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal (ComplexShape.up ℤ) 0 n n (zero_add n)) (F : DecreasingFiltration (CochainComplex.mappingCone aug)) (hF : ∀ p n : ℤ, F.complexStep p n = (if p ≤ n + 1 then imageSubobject ((CochainComplex.mappingCone.inl aug).v (n + 1) n (by omega)) else ⊥) ⊔ (Finset.Icc (max b p) n).sup (fun s ↦ imageSubobject ((((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotalOrZero (ComplexShape.up ℤ) (n - s) s n ≫ (CochainComplex.mappingCone.inr aug).f n))) : (∀ n : ℤ, F.complexStep b n = ⊤ ∧ F.complexStep (n + 2) n = ⊥) ∧ ∀ p n : ℤ, Nonempty ((F.gradedPiece p).homology n ≅ (CochainComplex.mappingCone (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).homology (n - p))",
   "branch": "sheaf-dag",

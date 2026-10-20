@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationBaseChangeCone
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationBaseChangeCone
 
 /-! # Strict-local module restriction: one step of the comparison
 

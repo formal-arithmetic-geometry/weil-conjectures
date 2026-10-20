@@ -123,8 +123,8 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.BoundaryCoefficientDegreeSplit",
-  "file": "lean/Sheaf/AlgebraicGeometry/BoundaryCoefficientDegreeSplit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.BoundaryCoefficientDegreeSplit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/BoundaryCoefficientDegreeSplit.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.boundaryCoefficientDegreeIso_split",
   "statement": "theorem boundaryCoefficientDegreeIso_split {X Z : Scheme.{u}} (j : Z ⟶ X)\n    (L : X.Modules) (n e : ℕ) :\n    let a := n * (e + 1)\n    let b := n * (0 + 1)\n    let c := n * ((e + 1) + 1)\n    let k : (j.ker.toModules ⊗ L.tensorPow b) ⊗ L.tensorPow a ⟶\n        j.ker.toModules ⊗ L.tensorPow c :=\n      (α_ _ _ _).hom ≫ j.ker.toModules ◁ (L.tensorPowAddIso b a).inv ≫\n        j.ker.toModules ◁ (eqToHom (by\n          dsimp [a, b, c]\n          congr 1\n          simp only [Nat.mul_add, Nat.mul_one]\n          omega) : L.tensorPow (b + a) ⟶ L.tensorPow c)\n    (tensorPullback j).map k ≫ (boundaryCoefficientDegreeIso j L n (e + 1)).hom =\n      (boundaryPullbackTensorIso j (j.ker.toModules ⊗ L.tensorPow b)\n        (L.tensorPow a)).hom ≫\n        (((boundaryCoefficientDegreeIso j L n 0).hom ≫\n          (ρ_ ((tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n))).hom) ⊗ₘ\n          (boundarySectionDegreeIso j L n e).hom)",
   "branch": "sheaf-dag",

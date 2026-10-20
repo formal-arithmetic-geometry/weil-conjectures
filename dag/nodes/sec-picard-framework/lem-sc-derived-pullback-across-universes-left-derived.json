@@ -83,8 +83,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesLeftDerived",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackAcrossUniversesLeftDerived.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedPullbackAcrossUniversesLeftDerived",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedPullbackAcrossUniversesLeftDerived.lean",
   "declaration": "AlgebraicGeometry.exists_derivedPullbackAcrossUniverses_leftDerived",
   "statement": "theorem exists_derivedPullbackAcrossUniverses_leftDerived\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (P : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (h : ∀ M : SheafOfModules.{u} (moduleRings Y.toRingedSpace),\n      P.obj M = SheafOfModules.changeOfRings.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap f.base X.sheaf Y.sheaf ⟨f.c⟩)\n        (TopCat.Sheaf.inverseImageModule f.base Y.sheaf M))\n    (hm : ∀ {M N : SheafOfModules.{u} (moduleRings Y.toRingedSpace)} (a : M ⟶ N),\n      P.map a = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap f.base X.sheaf Y.sheaf ⟨f.c⟩)\n        (TopCat.Sheaf.inverseImageModule f.base Y.sheaf M)\n        (TopCat.Sheaf.inverseImageModuleMap f.base Y.sheaf M a) ≫\n        eqToHom (h N).symm)\n    [P.Additive] :\n    ∃ ε : DerivedCategory.Qh ⋙ derivedPullbackAcrossUniverses f ⟶\n        P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh,\n      (derivedPullbackAcrossUniverses f).IsLeftDerivedFunctor ε\n        (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n          (ComplexShape.up ℤ))",
   "branch": "sheaf-dag",

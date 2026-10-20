@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.ValuationProperCoherentSections
 import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
-import Sheaf.AlgebraicGeometry.FractionFieldSectionsBaseChange
+import WeilConjectures.AlgebraicGeometry.FractionFieldSectionsBaseChange
 import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.LinearAlgebra.Dimension.Free

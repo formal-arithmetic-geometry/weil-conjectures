@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.FiniteCoconeStationary
 
 /-! Finite diagonal tails yield stationary limiting subobjects.

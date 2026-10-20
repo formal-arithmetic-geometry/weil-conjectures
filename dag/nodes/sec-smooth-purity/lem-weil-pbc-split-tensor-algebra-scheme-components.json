@@ -101,8 +101,8 @@
  "unit": "sk-prop-sf-cbc",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SplitTensorAlgebraSchemeComponents",
-  "file": "lean/Sheaf/AlgebraicGeometry/SplitTensorAlgebraSchemeComponents.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SplitTensorAlgebraSchemeComponents",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SplitTensorAlgebraSchemeComponents.lean",
   "declaration": "AlgebraicGeometry.Scheme.finite_scheme_components_of_split_tensor_algebra",
   "statement": "theorem finite_scheme_components_of_split_tensor_algebra\n    (S : Scheme.{u}) [IsAffine S] {Z : Scheme.{u}} [IsAffine Z] (g : Z ⟶ S)\n    (c : Γ(S, ⊤)) (A' : Type u) [CommRing A']\n    [Algebra (Localization.Away c) A'] [Algebra Γ(S, ⊤) A']\n    [IsScalarTower Γ(S, ⊤) (Localization.Away c) A']\n    [Module.Finite (Localization.Away c) A']\n    [Algebra.Etale (Localization.Away c) A']\n    (hSurj : Surjective\n      (Spec.map (CommRingCat.ofHom (algebraMap (Localization.Away c) A'))))\n    (r : ℕ) (D : Fin r → Type u) [∀ j, CommRing (D j)] [∀ j, Algebra A' (D j)]\n    (hD : ∀ j, IsUniversalHomeomorphism\n      (Spec.map (CommRingCat.ofHom (algebraMap A' (D j)))))\n    (he : letI := g.appTop.hom.toAlgebra\n      letI := Algebra.TensorProduct.rightAlgebra (R := Γ(S, ⊤)) (A := Γ(Z, ⊤)) (B := A')\n      Nonempty (((Γ(Z, ⊤) ⊗[Γ(S, ⊤)] A') ⧸ _root_.nilradical (Γ(Z, ⊤) ⊗[Γ(S, ⊤)] A'))\n        ≃ₐ[A'] (∀ j, D j))) :\n    ∃ (T : Scheme.{u}) (p : T ⟶ (S.basicOpen c).toScheme),\n      IsFinite p ∧ Etale p ∧ Surjective p ∧\n      ∃ (W : Fin r → (pullback g (p ≫ (S.basicOpen c).ι)).Opens),\n        (⨆ i, W i) = ⊤ ∧ Pairwise (fun i j ↦ Disjoint (W i) (W j)) ∧\n        ∀ i, IsUniversalHomeomorphism\n          ((W i).ι ≫ pullback.snd g (p ≫ (S.basicOpen c).ι))",
   "branch": "sheaf-dag",

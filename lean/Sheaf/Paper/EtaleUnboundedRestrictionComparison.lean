@@ -5,7 +5,7 @@ Authors: SHEAF group Q158
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
+public import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate

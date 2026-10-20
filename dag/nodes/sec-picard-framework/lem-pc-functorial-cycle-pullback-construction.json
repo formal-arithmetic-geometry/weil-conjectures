@@ -83,8 +83,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.CyclePullbackResolution",
-  "file": "lean/Sheaf/Algebra/Homology/CyclePullbackResolution.lean",
+  "module": "WeilConjectures.Algebra.Homology.CyclePullbackResolution",
+  "file": "lean/WeilConjectures/Algebra/Homology/CyclePullbackResolution.lean",
   "declaration": "CochainComplex.exists_functorial_cyclePullback_construction",
   "statement": "theorem exists_functorial_cyclePullback_construction\n    {A : Type u} [Category.{v} A] [Abelian A] (S : ObjectProperty A)\n    (hzero : ∀ X : A, IsZero X → S X)\n    (T : A ⥤ A) (π : T ⟶ 𝟭 A)\n    (hT : ∀ X : A, S (T.obj X)) (hπ : ∀ X : A, Epi (π.app X)) (N : ℤ) :\n    let P : ObjectProperty (CochainComplex A ℤ) :=\n      fun F ↦ ∀ i : ℤ, N < i → IsZero (F.X i)\n    ∃ Q : P.FullSubcategory ⥤ CochainComplex A ℤ,\n      ∃ ε : Q ⟶ P.ι, ∀ F : P.FullSubcategory,\n        (∀ i : ℤ, S ((Q.obj F).X i)) ∧\n        (∀ i : ℤ, N < i → IsZero ((Q.obj F).X i)) ∧\n        ∀ (i : ℤ) (B : A) (x : B ⟶ (Q.obj F).X (i + 1))\n          (y : B ⟶ F.obj.X i),\n          x ≫ (Q.obj F).d (i + 1) (i + 1 + 1) = 0 →\n          x ≫ (ε.app F).f (i + 1) = y ≫ F.obj.d i (i + 1) →\n          ∃ (B' : A) (p : B' ⟶ B) (_ : Epi p) (z : B' ⟶ (Q.obj F).X i),\n            z ≫ (ε.app F).f i = p ≫ y ∧\n              z ≫ (Q.obj F).d i (i + 1) = p ≫ x",
   "branch": "sheaf-dag",

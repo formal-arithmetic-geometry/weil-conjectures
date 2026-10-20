@@ -5,11 +5,11 @@ Authors: SHEAF group T3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import WeilConjectures.AlgebraicGeometry.ResiduePullbackGlobalSections
-import Sheaf.Topology.PointModuleEvaluationEquivalence
+import WeilConjectures.Topology.PointModuleEvaluationEquivalence
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Mathlib.Algebra.Homology.Additive
 import Mathlib.CategoryTheory.Adjunction.Additive

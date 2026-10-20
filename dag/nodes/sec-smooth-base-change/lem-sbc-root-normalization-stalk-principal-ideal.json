@@ -165,8 +165,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationStalkPrincipalIdeal",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootNormalizationStalkPrincipalIdeal.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationStalkPrincipalIdeal",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RootNormalizationStalkPrincipalIdeal.lean",
   "declaration": "AlgebraicGeometry.Scheme.root_normalization_stalk_maximalIdeal_isPrincipal",
   "statement": "theorem root_normalization_stalk_maximalIdeal_isPrincipal\n    (H : CommRingCat.{u}) [IsNoetherianRing H] (g : H)\n    (hg : IsSMulRegular H g) [IsDomain (H ⧸ Ideal.span {g})]\n    (n : ℕ) (hn : 0 < n) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ∀ (hN : IsLocallyNoetherian N),\n    letI := hN\n    ∀ (P : Scheme.{u}) (p : P ⟶ V.toScheme) (hp : IsFinite p),\n    letI := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (x : a.normalization),\n      (a.fromNormalization x).asIdeal = Ideal.span\n        {AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ n - Polynomial.C g)} →\n      IsRegularLocalRing (N.presheaf.stalk (a.fromNormalization x)) →\n      (IsLocalRing.maximalIdeal (a.normalization.presheaf.stalk x)).IsPrincipal",
   "branch": "sheaf-dag",

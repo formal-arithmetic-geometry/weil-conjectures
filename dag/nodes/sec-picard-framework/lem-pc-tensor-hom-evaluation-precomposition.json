@@ -125,8 +125,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomEvaluationPrecomposition",
-  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomEvaluationPrecomposition.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CanonicalTensorHomEvaluationPrecomposition",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CanonicalTensorHomEvaluationPrecomposition.lean",
   "declaration": "AlgebraicGeometry.tensorHomEvaluation_precomposition",
   "statement": "theorem tensorHomEvaluation_precomposition (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (L L' M : CochainComplex\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (b : DerivedCategory.Q.obj L ≅ DerivedCategory.Q.obj L') :\n    letI := schemeDerivedTensorMonoidal X\n    let E := fun L M : CochainComplex\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ ↦\n      ((schemeDerivedInternalHomResolutionIso X L M).hom ⊗ₘ\n          𝟙 (DerivedCategory.Q.obj L)) ≫\n        pullbackTensorModelMap X (homComplex (R := X.sheaf) L\n          ((schemeHomKInjectiveResolution X).obj M)) L ≫\n        DerivedCategory.Q.map (schemeTensorHomUncurry X _ L M (𝟙 _)) ≫\n        schemeHomResolutionInverse X M\n    ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map\n        (b.hom.op, 𝟙 (DerivedCategory.Q.obj M)) ⊗ₘ 𝟙 (DerivedCategory.Q.obj L)) ≫ E L M =\n      (𝟙 _ ⊗ₘ b.hom) ≫ E L' M",
   "branch": "sheaf-dag",

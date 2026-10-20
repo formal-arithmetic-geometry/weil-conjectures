@@ -11,8 +11,8 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
 public import Mathlib.Topology.Connected.TotallyDisconnected
-import Sheaf.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure
-import Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable
+import WeilConjectures.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure
+import WeilConjectures.RepresentationTheory.LocallyConstantCochainsEffaceable
 import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 

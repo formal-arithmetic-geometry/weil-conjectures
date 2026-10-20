@@ -11,7 +11,7 @@ public import Sheaf.SecSmoothPurity.ReductionDirectImage
 public import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 public import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
 public import Sheaf.AlgebraicGeometry.SfOpenExceptionalBaseChange

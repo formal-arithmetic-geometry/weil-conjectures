@@ -113,8 +113,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.LocalFiniteFreeHomologyNatural",
-  "file": "lean/Sheaf/AlgebraicGeometry/LocalFiniteFreeHomologyNatural.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.LocalFiniteFreeHomologyNatural",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/LocalFiniteFreeHomologyNatural.lean",
   "declaration": "AlgebraicGeometry.local_finite_free_homology_natural",
   "statement": "theorem local_finite_free_homology_natural\n    {Y : Scheme.{u}}\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (U : Y.Opens) (B : Y.Modules)\n    (E : CochainComplex U.toScheme.Modules ℤ)\n    (hbounded : ∃ N : ℤ, ∀ p : ℤ, N < p → IsZero (E.X p))\n    (hbelow : ∃ M : ℤ, ∀ p : ℤ, p < M → IsZero (E.X p))\n    (hfree : ∀ p : ℤ, ∃ r : ℕ, Nonempty (E.X p ≅\n      SheafOfModules.free (R := moduleRings U.toScheme.toRingedSpace)\n        (ULift.{u} (Fin r))))\n    (ε : E ⟶ (CochainComplex.singleFunctor U.toScheme.Modules 0).obj\n      ((Scheme.Modules.restrictFunctor U.ι).obj B)) [QuasiIso ε] (q : ℤ) :\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    Nonempty (S ⋙ (Functor.curry.obj H).obj (op (S.obj B)) ⋙\n        DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q ⋙\n        Scheme.Modules.restrictFunctor U.ι ≅\n      Scheme.Modules.restrictFunctor U.ι ⋙\n        CochainComplex.singleFunctor U.toScheme.Modules 0 ⋙\n        (homComplexFunctor (R := U.toScheme.toRingedSpace.sheaf)).obj (op E) ⋙\n        HomologicalComplex.homologyFunctor U.toScheme.Modules (ComplexShape.up ℤ) q)",
   "branch": "sheaf-dag",

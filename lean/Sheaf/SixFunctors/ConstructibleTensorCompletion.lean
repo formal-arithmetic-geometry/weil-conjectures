@@ -25,7 +25,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.Paper.ConstantModuleSectionProperties

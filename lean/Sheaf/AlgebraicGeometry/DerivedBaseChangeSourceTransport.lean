@@ -5,7 +5,7 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeHorizontalMate
 
 /-! # Source and apex transport of a derived base-change mate

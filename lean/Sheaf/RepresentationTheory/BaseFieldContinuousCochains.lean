@@ -16,8 +16,8 @@ public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Data.Fin.Tuple.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure
-import Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable
+import WeilConjectures.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure
+import WeilConjectures.RepresentationTheory.LocallyConstantCochainsEffaceable
 import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Mathlib.Algebra.Category.Grp.AB

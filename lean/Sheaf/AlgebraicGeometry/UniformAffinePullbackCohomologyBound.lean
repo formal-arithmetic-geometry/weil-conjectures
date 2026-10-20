@@ -6,12 +6,12 @@ Authors: SHEAF group J2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.Topology.ModuleMayerVietoris
+import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.Topology.ModuleMayerVietoris
 
 /-! # Uniform open cohomology bounds under affine morphisms
 

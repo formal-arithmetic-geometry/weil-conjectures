@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison
 import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
 import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorFlat
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.Algebra.Homology.FlatBaseDerivedTensorComparison
+import WeilConjectures.Algebra.Homology.FlatBaseDerivedTensorComparison
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 

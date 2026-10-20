@@ -140,8 +140,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SelfTorConormalExteriorTensor",
-  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorConormalExteriorTensor.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SelfTorConormalExteriorTensor",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SelfTorConormalExteriorTensor.lean",
   "declaration": "AlgebraicGeometry.exists_selfTor_conormal_exterior_tensor",
   "statement": "theorem exists_selfTor_conormal_exterior_tensor\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (n : ℕ) (U : Y.affineOpens) :\n    letI : Algebra Γ(Y, U.1) Γ(Z, i ⁻¹ᵁ U.1) := (i.app U.1).hom.toAlgebra\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    ∃ e : (⋀[Γ(Z, i ⁻¹ᵁ U.1)]^n (N.val.obj (op (i ⁻¹ᵁ U.1))))\n        ≃ₗ[Γ(Z, i ⁻¹ᵁ U.1)] (Γ(Z, i ⁻¹ᵁ U.1) ⊗[Γ(Y, U.1)] M),\n      ∀ b : Fin n → i.ker.toModules.val.obj (op U.1),\n        e (exteriorPower.ιMulti (Γ(Z, i ⁻¹ᵁ U.1)) n\n          (fun j ↦ ((Classical.choose\n            (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app\n              i.ker.toModules).val.app (op U.1) (b j))) =\n          1 ⊗ₜ[Γ(Y, U.1)] selfTorIdealWedge i U n b",
   "branch": "sheaf-dag",

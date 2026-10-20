@@ -12,7 +12,7 @@ public import Mathlib.Topology.Connected.Basic
 
 import Mathlib.Topology.Constructible
 import Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet
-import Sheaf.AlgebraicGeometry.SectionComponentLocallyConstructible
+import WeilConjectures.AlgebraicGeometry.SectionComponentLocallyConstructible
 import Sheaf.AlgebraicGeometry.FlatReducedSectionComponentGeneralization
 
 /-!

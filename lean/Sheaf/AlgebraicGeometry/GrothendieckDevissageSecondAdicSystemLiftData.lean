@@ -1,10 +1,10 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import Mathlib.CategoryTheory.Functor.OfSequence
-import Sheaf.AlgebraicGeometry.ClosedSupportedFormalAlgebraization
-import Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientAdic
-import Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientSupported
+import WeilConjectures.AlgebraicGeometry.ClosedSupportedFormalAlgebraization
+import WeilConjectures.AlgebraicGeometry.FormalSecondIdealQuotientAdic
+import WeilConjectures.AlgebraicGeometry.FormalSecondIdealQuotientSupported
 import Sheaf.AlgebraicGeometry.FormalSecondIdealAlgebraizationTransitions
 
 @[expose] public section

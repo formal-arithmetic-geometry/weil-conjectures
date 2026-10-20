@@ -148,8 +148,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Curve.DenseOpenClosedTerm",
-  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DenseOpenClosedTerm.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.DenseOpenClosedTerm",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Curve/DenseOpenClosedTerm.lean",
   "declaration": "AlgebraicGeometry.IsCurve.dense_open_closed_term",
   "statement": "theorem dense_open_closed_term (Λ : Type (u + 1)) [CommRing Λ]\n    {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']\n    {X X' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]\n    {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : X' ⟶ Spec (.of k')}\n    {ι' : X' ⟶ X} (h : IsPullback ι' f' f ι)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (U : X.Opens) (hU : Dense (U : Set X)) :\n    let A := (sheafCompose X.smallEtaleTopology\n      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F\n    let ε := (sheafCompose X.smallEtaleTopology\n      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map\n        ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) U.ι).counit.app F)\n    ∃ (B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (b : A ⟶ B)\n      (w : ε ≫ b = 0),\n      (ShortComplex.mk ε b w).ShortExact ∧\n      Function.Bijective (cohomologyMap ι' B 0) ∧\n      Subsingleton (Sheaf.H B 1) ∧\n      Subsingleton (Sheaf.H (((ι')^*[AddCommGrpCat.{u + 1}]).obj B) 1)",
   "branch": "sheaf-dag",

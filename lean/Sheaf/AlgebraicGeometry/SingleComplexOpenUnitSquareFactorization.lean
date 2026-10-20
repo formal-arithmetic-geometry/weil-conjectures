@@ -1,10 +1,10 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedComposition
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedAdjunction
-public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
-import Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedCounitUnit
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedComposition
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedAdjunction
+public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
+import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedCounitUnit
 
 /-! # Normalizing the derived unit through the open pullback square
 

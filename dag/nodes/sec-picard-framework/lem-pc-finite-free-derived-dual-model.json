@@ -111,8 +111,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteFreeDerivedDualModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeDerivedDualModel.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteFreeDerivedDualModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteFreeDerivedDualModel.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_bounded_finiteFree_derived_dual_model",
   "statement": "theorem exists_bounded_finiteFree_derived_dual_model\n    (X : Scheme.{u}) (U : X.Opens) [IsAffine U.toScheme]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [hU : HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (F : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (F.X n))\n    (hfree : ∀ n : ℤ, ∃ r : ℕ, Nonempty (F.X n ≅ SheafOfModules.free\n      (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin r)))) :\n    ∃ D : CochainComplex\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,\n      (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (D.X n)) ∧\n      (∀ n : ℤ, ∃ r : ℕ, Nonempty (D.X n ≅ SheafOfModules.free\n        (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin r)))) ∧\n      Nonempty (DerivedCategory.Q.obj D ≅\n        (@derivedInternalHom.{u, w} (Over U) _\n          ((Opens.grothendieckTopology X.toRingedSpace).over U)\n          (X.toRingedSpace.sheaf.over U) hU).obj\n          (op ((DerivedCategory.Q (C := SheafOfModules.{u}\n              ((moduleRings X.toRingedSpace).over U))).obj F),\n            (SheafOfModules.overFunctor.{u}\n              (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj\n                (𝟙_ (schemeDerivedCategory X))))",
   "branch": "sheaf-dag",

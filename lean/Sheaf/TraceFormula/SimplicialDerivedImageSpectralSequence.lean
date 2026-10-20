@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.TotalEtaleAugmentationAdjunction
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Sheaf.CategoryTheory.DoubleComplexTotal
-public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
@@ -22,7 +22,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.CategoryTheory.KInjectiveComputes
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
+import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 import Sheaf.AlgebraicGeometry.TotalSimplicialEtaleSite
 import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
 import Sheaf.CategoryTheory.RingedSiteModules

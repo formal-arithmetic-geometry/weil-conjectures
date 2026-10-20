@@ -97,8 +97,8 @@
  "unit": "sk-thm-picard-coherence",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoefficientTargetScalarSpan",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientTargetScalarSpan.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoefficientTargetScalarSpan",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoefficientTargetScalarSpan.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.coefficientTarget_scalar_span",
   "statement": "theorem coefficientTarget_scalar_span\n    {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : T.Opens) (hU : IsAffineOpen U)\n    (Z : (f ⁻¹ᵁ U).toScheme.Opens) (hZ : IsAffineOpen Z)\n    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n    (sq : IsPullback g' f' f (g ≫ U.ι))\n    (W : X'.Opens) (hW : W = g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ Z))\n    (B : T'.Opens) (hB : IsAffineOpen B) :\n    letI : Algebra Γ(U.toScheme, ⊤) Γ(T', B) :=\n      (g.appLE ⊤ B (by simp)).hom.toAlgebra\n    let N := (ModuleCat.restrictScalars\n      (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫\n        ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom)).obj\n          ((F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat.obj (op Z))\n    let M := (pullback g').obj F\n    ∀ (a : Γ(X', W ⊓ f' ⁻¹ᵁ B)) (s : N),\n      (coefficientSupportIso f' M W B).inv\n        (a • (M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op\n            (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s))) ∈\n      Submodule.span (Γ(T', B)) (Set.range (fun t : N ↦\n        (coefficientSupportIso f' M W B).inv\n          (M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op\n            (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW t))))",
   "branch": "sheaf-dag",

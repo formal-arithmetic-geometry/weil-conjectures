@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Sheaf.RingTheory.CotangentResolutionCoherence
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 import Sheaf.RingTheory.LocalizationCotangentVanishing
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.RingTheory.Kaehler.Polynomial

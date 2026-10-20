@@ -91,8 +91,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPasting",
-  "file": "lean/Sheaf/AlgebraicGeometry/HorizontalOrdinaryForwardFixedPasting.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPasting",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/HorizontalOrdinaryForwardFixedPasting.lean",
   "declaration": "AlgebraicGeometry.horizontal_ordinary_forward_fixed_pasting_core",
   "statement": "theorem horizontal_ordinary_forward_fixed_pasting_core\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y Y' Z : Scheme.{u}}\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']\n    (g : Y' ⟶ Y) (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    [CompactSpace Z] [QuasiSeparatedSpace Z]\n    (h : Z ⟶ Y') :\n    letI : QuasiSeparatedSpace (pullback f (h ≫ g) : Scheme.{u}) :=\n      quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))\n    letI : QuasiSeparatedSpace (pullback (pullback.snd f g) h : Scheme.{u}) :=\n      quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h)\n    let s := horizontalOrdinaryUpperComparison f g h\n    let e := pullbackLeftPullbackSndIso f g h\n    let q := pullback.snd f (h ≫ g)\n    let p := pullback.snd (pullback.snd f g) h\n    let k := horizontalOrdinaryTransfer e q p (pullbackLeftPullbackSndIso_hom_snd f g h)\n    let β := qcBaseChange f (h ≫ g)\n    let γ := fun E : schemeDerivedQCohCategory X ↦\n      (qcPullback h).map ((qcBaseChange f g).app E) ≫\n        (@qcBaseChange _ (pullback f g) Y' Z _\n          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n          (pullback.snd f g) _ _ h).app ((qcPullback (pullback.fst f g)).obj E)\n    ∀ E : schemeDerivedQCohCategory X,\n      (horizontalOrdinaryBaseComparison g h).hom.app ((qcDirectImage f).obj E) ≫\n          β.app E =\n        γ E ≫ (qcDirectImage p).map (s.hom.app E) ≫\n          k.app ((qcPullback (pullback.fst f (h ≫ g))).obj E)",
   "branch": "sheaf-dag",

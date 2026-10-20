@@ -92,8 +92,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenImmersionTensorVanishingTest",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenImmersionTensorVanishingTest.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenImmersionTensorVanishingTest",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenImmersionTensorVanishingTest.lean",
   "declaration": "AlgebraicGeometry.openImmersion_tensor_vanishing_test",
   "statement": "theorem openImmersion_tensor_vanishing_test {X Y : Scheme.{u}} (j : Y ⟶ X)\n    [IsOpenImmersion j]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (E : schemeDerivedCategory X)\n    (G : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (i : ℤ)\n    (h : schemeDerivedTensorCohomologyVanishes X E ((Scheme.Modules.pushforward j).obj G) i) :\n    let R : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings Y.toRingedSpace) := Scheme.Modules.restrictFunctor j\n    letI : R.Additive := ⟨by intros; rfl⟩\n    letI : PreservesFiniteLimits R := by\n      dsimp [R, Scheme.Modules.restrictFunctor]\n      infer_instance\n    letI : PreservesFiniteColimits R := by\n      let H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤\n          SheafOfModules.{u} (moduleRings X.toRingedSpace) := Scheme.Modules.pushforward j\n      have adj : R ⊣ H := Scheme.Modules.restrictAdjunction j\n      have : R.IsLeftAdjoint := adj.isLeftAdjoint\n      infer_instance\n    schemeDerivedTensorCohomologyVanishes Y (R.mapDerivedCategory.obj E) G i",
   "branch": "sheaf-dag",

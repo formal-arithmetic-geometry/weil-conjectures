@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
 public import Sheaf.SixFunctors.FlatModel
 public import Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

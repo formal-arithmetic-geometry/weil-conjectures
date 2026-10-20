@@ -88,8 +88,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedOpenTensorTestObjects",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenTensorTestObjects.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedOpenTensorTestObjects",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedOpenTensorTestObjects.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_derivedOpen_tensorTestObject",
   "statement": "theorem exists_derivedOpen_tensorTestObject\n    (X : Scheme.{uX}) (U : X.Opens)\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{wD} (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))] :\n    let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))\n        (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))\n        (Modules.overEquiv U)).mapDerivedCategory\n    ∀ A : schemeDerivedCategory U.toScheme,\n      ∃ B : schemeDerivedCategory X, Nonempty (A ≅ R.obj B) ∧\n        (∀ E : schemeDerivedCategory X,\n          Function.Bijective (fun f : B ⟶ E ↦ R.map f)) ∧\n        (∀ L E : schemeDerivedCategory X,\n          Function.Bijective (fun f : B ⊗ L ⟶ E ↦ R.map f))",
   "branch": "sheaf-dag",

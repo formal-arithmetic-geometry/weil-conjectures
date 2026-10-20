@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
+public import WeilConjectures.Algebra.Homology.HomologyEvaluationDefinitions
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.RingTheory.KoszulRegularSequence

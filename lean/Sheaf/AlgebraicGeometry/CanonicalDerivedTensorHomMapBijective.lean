@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHomModel
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.AlgebraicGeometry.NormalizedHomotopyTensorHom
+import WeilConjectures.AlgebraicGeometry.NormalizedHomotopyTensorHom
 
 /-! # Bijectivity of normalized derived tensor-Hom maps
 Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex, Tag 0A90.

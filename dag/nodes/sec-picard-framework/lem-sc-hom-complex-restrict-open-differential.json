@@ -100,8 +100,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.HomComplexRestrictOpenDifferential",
-  "file": "lean/Sheaf/Algebra/Homology/HomComplexRestrictOpenDifferential.lean",
+  "module": "WeilConjectures.Algebra.Homology.HomComplexRestrictOpenDifferential",
+  "file": "lean/WeilConjectures/Algebra/Homology/HomComplexRestrictOpenDifferential.lean",
   "declaration": "CategoryTheory.homComplex_restrict_open_differential",
   "statement": "theorem homComplex_restrict_open_differential (X : RingedSpace.{u}) (U : Opens X)\n    (L M : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) :\n    let F := SheafOfModules.overFunctor.{u} (moduleRings X) U\n    let LF := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj L\n    let MF := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj M\n    let H := homComplex (R := X.sheaf) L M\n    let K := homComplex (R := X.sheaf.over U) LF MF\n    let π := Classical.choose (homComplex_projections_exists (R := X.sheaf))\n    let τ := Classical.choose (homComplex_projections_exists (R := X.sheaf.over U))\n    ∀ (e : ∀ n : ℤ, F.obj (H.X n) ≅ K.X n),\n      (∀ (n p q : ℤ) (hpq : p + n = q),\n        (e n).hom ≫ τ LF MF n p q hpq =\n          F.map (π L M n p q hpq) ≫\n            (SheafOfModules.overHomObjIso (L.X p) (M.X q) U).hom) →\n      ∀ (n m : ℤ), n + 1 = m →\n        (e n).hom ≫ K.d n m = F.map (H.d n m) ≫ (e m).hom",
   "branch": "sheaf-dag",

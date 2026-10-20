@@ -5,7 +5,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.ValuationClosedFibreDivisibility
+import WeilConjectures.AlgebraicGeometry.ValuationClosedFibreDivisibility
 import Sheaf.AlgebraicGeometry.ValuationGenericTrivializingGenerator
 import WeilConjectures.AlgebraicGeometry.ValuationZeroSectionRelativeCartier
 import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators

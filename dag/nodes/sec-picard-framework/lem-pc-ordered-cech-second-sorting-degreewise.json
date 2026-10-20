@@ -84,8 +84,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OrderedCechModuleSecondSortingLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/OrderedCechModuleSecondSortingLift.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OrderedCechModuleSecondSortingLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OrderedCechModuleSecondSortingLift.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.orderedCech_secondSorting_degreewise_exists",
   "statement": "theorem orderedCech_secondSorting_degreewise_exists {X' : Scheme.{u}}\n    (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)\n    (D : CochainComplex X'.Modules ℕ)\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor W₀).obj\n          ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj\n              M.presheafModuleCat)).X p)\n    (hlinear : ∀ (p : ℕ) (y : Fin (p + 1) → ULift.{u} (Fin r)) (B : X'.Opens),\n        let c : Γ(D.X p, B) → Γ(M, (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B) :=\n          fun s ↦ ((e p).hom ≫ Pi.π (fun y : Fin (p + 1) → ULift.{u} (Fin r) ↦\n            ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj\n                M.presheafModuleCat).obj\n                (op (∏ᶜ fun l ↦ W₀ (y l)))) y).app (op B) s\n        ∀ (a : Γ(X', B)) (s : Γ(D.X p, B)),\n          c (a • s) = X'.presheaf.map (prod.snd :\n            (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B ⟶ B).op a • c s)\n    : ∃ Q : ∀ p : ℕ, D.X (p + 1) ⟶ D.X p,\n      ∀ (p : ℕ) (B : X'.Opens) (s : Γ(D.X (p + 1), B))\n        (y : Fin (p + 1) → ULift.{u} (Fin r)),\n        orderedCechNaturalCoordinate M W₀ D e p B y ((Q p).app B s) =\n          orderedCechSecondSortingValue M W₀ D e p B y s",
   "branch": "sheaf-dag",

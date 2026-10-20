@@ -5,7 +5,7 @@ Authors: SHEAF group C4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
+public import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 

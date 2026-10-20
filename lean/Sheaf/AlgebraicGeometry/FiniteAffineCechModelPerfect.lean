@@ -7,10 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.FiniteAffineCechModel
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison
+import WeilConjectures.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison
 import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 
 /-! # Perfection of the specified finite affine Čech complex

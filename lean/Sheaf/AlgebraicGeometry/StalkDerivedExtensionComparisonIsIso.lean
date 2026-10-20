@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StalkComparisonSourceTransport
+public import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 
 /-! Invertibility of the derived stalk comparison from its K-flat equation.
 (blueprint: lem-pc-stalk-derived-extension-comparison-is-iso) -/

@@ -120,8 +120,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProperPerfectTransportCompact",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProperPerfectTransportCompact.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ProperPerfectTransportCompact",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProperPerfectTransportCompact.lean",
   "declaration": "AlgebraicGeometry.properPerfect_transport_compact",
   "statement": "theorem properPerfect_transport_compact\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{wX} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ U : Y.Opens,\n      HasDerivedCategory.{wY} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (f : X ⟶ Y) [IsProper f]\n    (hTor : ∀ x : X, ∃ n : ℕ,\n      ∀ (N : ModuleCat.{u} (Y.presheaf.stalk (f x))) (i : ℕ), n < i →\n        IsZero (((Tor (ModuleCat.{u} (Y.presheaf.stalk (f x))) i).obj\n          ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj\n            (ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x)))).obj N))\n    (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y)\n    (eR : R ⋙ (schemeDerivedQCohProperty Y).ι ≅\n      (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)\n    (P : schemeDerivedQCohCategory X) (hP : Scheme.IsPerfect X P.1) :\n    let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X\n    let _ : HasCoproducts.{u} (schemeDerivedQCohCategory Y) := derivedQCohDirectSums Y\n    IsCompactObject (R.obj P)",
   "branch": "sheaf-dag",

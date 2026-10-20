@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Sheaf.AlgebraicGeometry.AffineExtensionSectionsUnderivedModel
-import Sheaf.AlgebraicGeometry.AffineExtensionSectionsModelFactorization
+import WeilConjectures.AlgebraicGeometry.AffineExtensionSectionsModelFactorization
 
 /-! # Invertibility of the affine unit mate on K-flat tilde models
 

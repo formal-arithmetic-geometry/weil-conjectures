@@ -4,9 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import all WeilConjectures.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelFactorization
+import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelFactorization
 
 /-! # Vanishing of a completed formal graph discrepancy
 

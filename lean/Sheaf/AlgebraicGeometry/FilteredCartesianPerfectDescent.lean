@@ -5,13 +5,13 @@ Authors: SHEAF group K3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import Sheaf.AlgebraicGeometry.PerfectComplexDescent
-import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackPerfect
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Mathlib.CategoryTheory.Presentable.Directed
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic

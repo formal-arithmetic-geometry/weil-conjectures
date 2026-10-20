@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.FieldTheory.IsSepClosed
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne
-import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.EffectiveCartier

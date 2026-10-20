@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.QbarProperBaseChange
 public import Sheaf.Paper.GeometricFiberFiniteExtension
-public import Sheaf.AlgebraicGeometry.Dimension
+public import WeilConjectures.AlgebraicGeometry.Dimension
 import Sheaf.Paper.PbcScalarExtension
 
 /-! # Geometric-fiber proper base change with Qbar_l coefficients

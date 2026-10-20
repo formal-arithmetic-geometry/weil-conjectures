@@ -101,8 +101,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalKernelGradedActionExists",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalKernelGradedActionExists.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalKernelGradedActionExists",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalKernelGradedActionExists.lean",
   "declaration": "AlgebraicGeometry.formalKernel_graded_action_exists",
   "statement": "theorem formalKernel_graded_action_exists {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F : CoherentFormalModule X I)\n    (A : GradedSheafAlgebra (formalAssociatedGradedPiece I))\n    (hunit : A.unit = formalAssociatedGradedπ I 0)\n    (hmul : ∀ (m n : ℕ) (U : X.Opens)\n        (a : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op U))\n        (b : (Scheme.idealSheafPower I.toModulesι n).1.val.obj (op U)),\n        ∃ c : (Scheme.idealSheafPower I.toModulesι (m + n)).1.val.obj (op U),\n          (Scheme.idealSheafPower I.toModulesι (m + n)).2.val.app (op U) c =\n            (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op U) a)) *\n              (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι n).2.val.app (op U) b)) ∧\n          A.mul m n U ((formalAssociatedGradedπ I m).val.app (op U) a)\n            ((formalAssociatedGradedπ I n).val.app (op U) b) =\n              (formalAssociatedGradedπ I (m + n)).val.app (op U) c) :\n    ∃ M : GradedSheafModule A (formalKernelPiece F),\n        ∀ (m n : ℕ) (U : X.Opens)\n          (a : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op U))\n          (x : (formalKernelPiece F n).val.obj (op U))\n          (t : (F.obj.obj (op (m + n))).val.obj (op U)),\n          (F.obj.map (homOfLE (Nat.le_add_left n m)).op).val.app (op U) t =\n            (formalKernelι F n).val.app (op U) x →\n          (formalKernelι F (m + n)).val.app (op U)\n            (M.act m n U ((formalAssociatedGradedπ I m).val.app (op U) a) x) =\n              (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op U) a)) • t",
   "branch": "sheaf-dag",

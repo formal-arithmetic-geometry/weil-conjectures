@@ -128,8 +128,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.LocalStrictPerfectStalkProjectiveModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/LocalStrictPerfectStalkProjectiveModel.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.LocalStrictPerfectStalkProjectiveModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/LocalStrictPerfectStalkProjectiveModel.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_localStrictPerfect_stalk_projective_model",
   "statement": "theorem exists_localStrictPerfect_stalk_projective_model\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X) (x : X)\n    [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]\n    (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (eG : DerivedCategory.Q.obj G ≅ E)\n    (hlocal : ∃ V : X.Opens, x ∈ V ∧\n      ∃ P : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) ℤ,\n        IsStrictlyPerfect X V P ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj E ≅\n          DerivedCategory.Q.obj P))\n    : ∃ (L : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ)\n      (a b : ℤ),\n      (∀ j : ℤ, j < a ∨ b < j → IsZero (L.X j)) ∧\n      (∀ j : ℤ, Module.Finite (X.presheaf.stalk x) (L.X j) ∧\n        Module.Projective (X.presheaf.stalk x) (L.X j)) ∧\n      Nonempty (DerivedCategory.Q.obj L ≅ DerivedCategory.Q.obj\n        (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj G))",
   "branch": "sheaf-dag",

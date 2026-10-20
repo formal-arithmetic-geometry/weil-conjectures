@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.Paper.BoundaryCechCompatibility
-import Sheaf.AlgebraicGeometry.CechH1MapNatural
+import WeilConjectures.AlgebraicGeometry.CechH1MapNatural
 import WeilConjectures.CategoryTheory.Abelian.RightDerivedTriangleConnecting
 import WeilConjectures.Topology.Sheaves.CechComparison
 

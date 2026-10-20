@@ -242,19 +242,11 @@ noncomputable def derivedPullIso :
     (derivedUpperStarLowerStarAdjunction Λ f) (derivedUpperStarLowerStarAdjunction Λ' f)
     (derivedComapLowerStarIso a f)
 
-/-- The source composite of the derived coefficient pushforward comparison. Keeping the
-composite as a named functor avoids repeated expansion of derived-functor data in signatures. -/
-noncomputable def derivedPushSource :=
-  R((f)_*⟦Λ⟧) ⋙ L(Mod.extendScalars (coefficientMap a Y))
-
-/-- The target composite of the derived coefficient pushforward comparison. -/
-noncomputable def derivedPushTarget :=
-  L(Mod.extendScalars (coefficientMap a X)) ⋙ R((f)_*⟦Λ'⟧)
-
 /-- **(Push)**: the canonical comparison `Rf_*^Λ ⋙ T^Y ⟶ T^X ⋙ Rf_*^Λ'`, the mate of
 `derivedComapLowerStarIso` along `L(Ext) ⊣ D(Res)`. It is not an isomorphism in general. -/
 noncomputable def derivedPushHom :
-    derivedPushSource a f ⟶ derivedPushTarget a f :=
+    R((f)_*⟦Λ⟧) ⋙ L(Mod.extendScalars (coefficientMap a Y)) ⟶
+      L(Mod.extendScalars (coefficientMap a X)) ⋙ R((f)_*⟦Λ'⟧) :=
   Adjunction.pushHomOfComapIso
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y))
@@ -317,20 +309,13 @@ section LowerShriek
 variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- The source composite of the derived lower-shriek coefficient comparison. -/
-noncomputable def derivedLowerShriekSource :=
-  R(f)_!⟦Λ⟧ ⋙ L(Mod.extendScalars (coefficientMap a Y))
-
-/-- The target composite of the derived lower-shriek coefficient comparison. -/
-noncomputable def derivedLowerShriekTarget :=
-  L(Mod.extendScalars (coefficientMap a X)) ⋙ R(f)_!⟦Λ'⟧
-
 /-- **(Shriek)**: the canonical comparison `Rf_!^Λ ⋙ T^Y ⟶ T^X ⋙ Rf_!^Λ'` for
 `Rf_! = Di_! ⋙ Rg_*` attached to the chosen compactification `X ⟶[i] Z ⟶[g] Y` of `f`: the
 derived (Push) comparison for the proper `g` followed by the derived (Shriek) isomorphism for
 the open immersion `i`. -/
 noncomputable def derivedLowerShriekHom :
-    derivedLowerShriekSource a f ⟶ derivedLowerShriekTarget a f :=
+    R(f)_!⟦Λ⟧ ⋙ L(Mod.extendScalars (coefficientMap a Y)) ⟶
+      L(Mod.extendScalars (coefficientMap a X)) ⋙ R(f)_!⟦Λ'⟧ :=
   (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft D(((HasCompactification.compactification f).i)_!open⟦Λ⟧)
       (derivedPushHom a (HasCompactification.compactification f).g) ≫

@@ -96,8 +96,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenRestrictedCounitCompatibility",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictedCounitCompatibility.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitCompatibility",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenRestrictedCounitCompatibility.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openRestricted_counit_compatibility",
   "statement": "theorem openRestricted_counit_compatibility\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens)\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let Q := ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P\n    (derivedPullback (pullback.snd g' U.ι)).map (openRestrictionRepresentativeIso U.ι P).hom ≫\n        openRestrictedCompositionMap g' U (DerivedCategory.Q.obj P) ≫\n        (derivedPullback (pullback.fst g' U.ι)).map\n          ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =\n      (counit (pullback.snd g' U.ι)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) ≫\n        (openRestrictedTensorDerivedIso g' U P).inv",
   "branch": "sheaf-dag",

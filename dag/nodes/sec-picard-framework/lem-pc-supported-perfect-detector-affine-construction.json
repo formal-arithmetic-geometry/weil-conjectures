@@ -108,8 +108,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffineConstruction",
-  "file": "lean/Sheaf/AlgebraicGeometry/SupportedPerfectDetectorAffineConstruction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SupportedPerfectDetectorAffineConstruction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SupportedPerfectDetectorAffineConstruction.lean",
   "declaration": "AlgebraicGeometry.supported_perfect_detector_affine_construction",
   "statement": "theorem supported_perfect_detector_affine_construction\n    (X : Scheme.{u}) [IsAffine X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ)\n    (U : X.Opens) (hU : (U : Set X) = Tᶜ) :\n    ∃ (E : schemeDerivedQCohCategory X)\n      (R : DerivedCategory\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n        schemeDerivedCategory X)\n      (adj : (SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R),\n      Scheme.IsPerfect X E.obj ∧\n      (∀ (n : ℤ) (x : X), x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E.obj).val.presheaf x))) ∧\n      ∀ K : schemeDerivedQCohCategory X,\n        (∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj)) → IsIso (adj.unit.app K.obj)",
   "branch": "sheaf-dag",

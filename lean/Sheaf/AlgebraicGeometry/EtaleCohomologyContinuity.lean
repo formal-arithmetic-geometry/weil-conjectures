@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
-import Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyCocone
+import WeilConjectures.AlgebraicGeometry.CofilteredEtaleCohomologyCocone
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 import Sheaf.AlgebraicGeometry.EtaleCohomologyClassDescent
 

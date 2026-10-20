@@ -10,7 +10,7 @@ public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.AlgebraicGeometry.Dimension
+import WeilConjectures.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport
 import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 import Sheaf.AlgebraicGeometry.NagataAffineProjScalarExtension

@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 

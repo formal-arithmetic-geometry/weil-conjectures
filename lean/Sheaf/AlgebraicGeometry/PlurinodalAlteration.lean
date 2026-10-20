@@ -27,7 +27,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
 import Mathlib.RingTheory.FiniteType
 import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.ComponentsFiniteSeparableDescent
+import WeilConjectures.AlgebraicGeometry.ComponentsFiniteSeparableDescent
 import WeilConjectures.AlgebraicGeometry.SubsetGeometricIrreducibility
 import Sheaf.AlgebraicGeometry.FiniteInseparableGeometricReduction
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

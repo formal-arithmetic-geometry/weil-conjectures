@@ -6,7 +6,6 @@ Authors: SHEAF group NX
 module
 
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

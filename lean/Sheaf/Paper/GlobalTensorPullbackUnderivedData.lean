@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E4
 -/
 module
-public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+public import WeilConjectures.AlgebraicGeometry.GlobalDerivedHom
 public import Sheaf.Paper.ModuleCupNaiveMap
 public import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.Paper.GlobalTensorPullbackMonoidalNormalization
-import Sheaf.Topology.PointModuleEvaluationEquivalence
-import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
+import WeilConjectures.Topology.PointModuleEvaluationEquivalence
+import WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
 
 /-! # Transport of the ordinary global pullback
 

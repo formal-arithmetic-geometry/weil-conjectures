@@ -89,8 +89,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTorsion",
-  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckDevissageSecondAdicSystemTorsion.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTorsion",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GrothendieckDevissageSecondAdicSystemTorsion.lean",
   "declaration": "AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_torsion",
   "statement": "theorem grothendieckDevissage_secondAdicSystem_torsion\n    {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)\n    (M : CoherentFormalModule X I)\n    (hthick : ∀ (e : ℕ), 1 ≤ e →\n      ∀ (hZ : IsNoetherian (K ^ e).subscheme),\n        Functor.IsEquivalence\n          (@completion ((K ^ e).subscheme) hZ (I.comap (K ^ e).subschemeι)))\n    (H : CoherentModules X) (α : M ⟶ (completion X I).obj H)\n    (θ : formalCompletionSystem K H.obj ⋙ formalCompletionFunctor I ≅\n      (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip)\n    (N : CoherentFormalModule X K) (δ : N ⟶ (completion X K).obj H)\n    (σ : N.obj ⋙ formalCompletionFunctor I ≅\n      (M.obj ⋙ formalCompletionFunctor K).flip)\n    (hsquare : ∀ e n : ℕ,\n        (σ.hom.app (op e)).app (op n) ≫\n          formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) =\n        formalModuleQuotientMap I (δ.hom.app (op e)) (Nat.le_refl (n + 1)) ≫\n          (θ.hom.app (op e)).app (op n))\n    (t : ℕ) (ht : 1 ≤ t)\n    (hα : ∀ n : ℕ,\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2\n        (kernel (α.hom.app (op n)))) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2\n        (cokernel (α.hom.app (op n))))) :\n    ∀ e : ℕ,\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (4 * t)).2\n        (kernel (δ.hom.app (op e)))) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (4 * t)).2\n        (cokernel (δ.hom.app (op e))))",
   "branch": "sheaf-dag",

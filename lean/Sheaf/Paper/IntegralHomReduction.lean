@@ -14,13 +14,13 @@ public import Sheaf.Paper.IntegralDerivedReduction
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.BifunctorShift
-public import Sheaf.Algebra.Homology.HomComplexProjections
+public import WeilConjectures.Algebra.Homology.HomComplexProjections
 
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.Paper.CompletedConstantSheafReduction
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Algebra.Homology.RhomGlobalSections
+import WeilConjectures.Algebra.Homology.RhomGlobalSections
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.Paper.ProjectionMateExact
 import Sheaf.Paper.ProEtaleCanonicalTensorPullback

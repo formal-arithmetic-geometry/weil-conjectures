@@ -107,8 +107,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/ClopenRankStrataHomologyLift.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ClopenRankStrataHomologyLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ClopenRankStrataHomologyLift.lean",
   "declaration": "AlgebraicGeometry.clopenRankStrata_homology_presentation",
   "statement": "theorem clopenRankStrata_homology_presentation\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u}\n      (moduleRings (directImageAlgebraSpace i)))]\n    (r : LocallyConstant Z ℕ)\n    (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules)\n    (T : ℤ → Z.Modules)\n    (hT : ∀ n : ℤ, T n = if 0 ≤ n then\n      (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj\n        (E n.toNat) else 0)\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))\n    (n : ℤ)\n    (hother : ∀ m : ℤ, m ≠ n → Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj K ≅\n        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T m))) :\n    ∃ (L : DerivedCategory\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))\n      (ι : L ⟶ K) (π : K ⟶ L),\n      ι ≫ π = 𝟙 L ∧\n      (∀ m : ℤ, m ≠ n → IsZero ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj L)) ∧\n      (∀ a : (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n) ⟶\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K,\n        a ≫ (DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map π ≫\n          (DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map ι = a)",
   "branch": "sheaf-dag",

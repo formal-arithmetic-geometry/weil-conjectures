@@ -5,7 +5,7 @@ Authors: SHEAF groups E1 and N2
 -/
 module
 
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
@@ -17,9 +17,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 import all Sheaf.CategoryTheory.SecondFiltrationTwoColumnImage
-import Sheaf.CategoryTheory.BoundedBelowSecondFiltration
+import WeilConjectures.CategoryTheory.BoundedBelowSecondFiltration
 import Sheaf.CategoryTheory.FilteredCohomologyImage
-import Sheaf.CategoryTheory.DegreewiseFilteredStableQuotient
+import WeilConjectures.CategoryTheory.DegreewiseFilteredStableQuotient
 import Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison
 import Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy
 import Sheaf.CategoryTheory.FilteredHomotopySpectralSequence

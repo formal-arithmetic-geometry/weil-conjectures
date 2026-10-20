@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeRepresentative
-import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
+import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 public import Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization
 
 /-! # Ordinary affine exchange in tensor coordinates

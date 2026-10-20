@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
 public import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenSquareComparison
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenSquareComparison
 
 /-! # The restricted composite uses the fixed pullback comparison -/
 

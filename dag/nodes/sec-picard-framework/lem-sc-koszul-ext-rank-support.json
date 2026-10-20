@@ -109,8 +109,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KoszulExtRankSupport",
-  "file": "lean/Sheaf/AlgebraicGeometry/KoszulExtRankSupport.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.KoszulExtRankSupport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/KoszulExtRankSupport.lean",
   "declaration": "AlgebraicGeometry.koszulRegularImmersion_ext_rankSupport",
   "statement": "theorem koszulRegularImmersion_ext_rankSupport {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧ ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)), Ideal.span (Set.range f) = i.ker.ideal U ∧ RingTheory.Sequence.IsKoszulRegular f) (r : LocallyConstant Z ℕ) (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z) ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj ((Scheme.Modules.tensorPullback i).obj i.ker.toModules))) {q : ℤ} (hq : 0 ≤ q) : let F : Y.Modules := (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q).obj ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj (op ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))), (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.unit Y.ringCatSheaf))) IsIso ((Scheme.Modules.restrictAdjunction (Scheme.Modules.exteriorRankOpen r q.toNat).ι).unit.app ((Scheme.Modules.tensorPullback i).obj F))",
   "branch": "sheaf-dag",

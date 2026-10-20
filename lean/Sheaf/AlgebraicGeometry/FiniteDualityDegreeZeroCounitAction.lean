@@ -4,14 +4,14 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.FiniteSheafHomAffine
-import Sheaf.AlgebraicGeometry.FiniteAlgebraHomExact
+import WeilConjectures.AlgebraicGeometry.FiniteSheafHomAffine
+import WeilConjectures.AlgebraicGeometry.FiniteAlgebraHomExact
 import Sheaf.AlgebraicGeometry.FiniteExactHomDegreeZeroLift
 
 /-! # FiniteDualityDegreeZeroCounitAction

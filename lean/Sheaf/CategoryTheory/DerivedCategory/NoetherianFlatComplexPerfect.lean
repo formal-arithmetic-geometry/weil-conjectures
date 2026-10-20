@@ -6,7 +6,7 @@ Authors: SHEAF group NI
 module
 
 public import Mathlib.RingTheory.Flat.Basic
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
 
 /-! # Bounded flat complexes with finite cohomology over a Noetherian ring

@@ -107,8 +107,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CohomologyPowersIdealImageBound",
-  "file": "lean/Sheaf/AlgebraicGeometry/CohomologyPowersIdealImageBound.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CohomologyPowersIdealImageBound",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CohomologyPowersIdealImageBound.lean",
   "declaration": "AlgebraicGeometry.cohomology_powers_ideal_image_bound",
   "statement": "theorem cohomology_powers_ideal_image_bound\n    (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}}\n    (I : Ideal A) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (J : X.IdealSheafData)\n    (hJ : J = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (q : ℕ)\n    (i : ∀ (k n : ℕ), n ≤ k →\n      (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι k).2 F ⟶\n        Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F))\n    (hi : ∀ (k n : ℕ) (h : n ≤ k),\n      i k n h ≫ Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι n).2 F =\n        Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι k).2 F) :\n    ∃ c0 : ℕ, ∀ c : ℕ, c0 ≤ c →\n        (∀ (n m : ℕ), c ≤ n + m →\n          LinearMap.range ((ModuleCat.restrictScalars\n              ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map\n            ((RingedSpace.moduleCohomology X.toRingedSpace q).map\n              (i (n + m) n (Nat.le_add_right n m)))).hom ≤\n            I ^ (m - (c - n)) • (⊤ : Submodule A ((ModuleCat.restrictScalars\n              ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj\n                ((RingedSpace.moduleCohomology X.toRingedSpace q).obj\n                  (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F)))))",
   "branch": "sheaf-dag",

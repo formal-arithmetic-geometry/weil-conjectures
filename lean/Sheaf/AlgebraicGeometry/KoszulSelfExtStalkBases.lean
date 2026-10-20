@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
@@ -20,9 +20,9 @@ public import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame
+import WeilConjectures.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame
 import WeilConjectures.RingTheory.KoszulConormalBasis
-import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
 
 /-! # Finite bases for self Ext and exterior stalks on a Koszul chart

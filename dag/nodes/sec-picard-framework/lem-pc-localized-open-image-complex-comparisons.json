@@ -116,8 +116,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.LocalizedOpenImageComplexComparisons",
-  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedOpenImageComplexComparisons.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.LocalizedOpenImageComplexComparisons",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/LocalizedOpenImageComplexComparisons.lean",
   "declaration": "AlgebraicGeometry.schemeOpenModuleImageComplex_localized_comparisons",
   "statement": "theorem schemeOpenModuleImageComplex_localized_comparisons\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ W : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]\n    (G : ∀ W : X.Opens,\n      DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W)) ⥤\n        schemeDerivedCategory X)\n    (adj : ∀ W : X.Opens,\n      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory ⊣\n        G W)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    [I.IsKInjective]\n    (E : schemeDerivedCategory X) (e : DerivedCategory.Q.obj I ≅ E) :\n    let R := fun W : X.Opens ↦\n      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory\n    ∃ eT : ∀ T : X.Opens, DerivedCategory.Q.obj (schemeOpenModuleImageComplex X T I) ≅\n        (G T).obj ((R T).obj E),\n      ∀ (T W : X.Opens) (i : W ⟶ T),\n        let A := (G T).obj ((R T).obj E)\n        let β := ((adj T).homEquiv A ((R T).obj E)).symm (𝟙 A)\n        DerivedCategory.Q.map (schemeOpenModuleImageComplexRestriction X i I) ≫\n            (eT W).hom =\n          (eT T).hom ≫ (adj W).homEquiv A ((R W).obj E)\n            (derivedOpenHomRestriction X.toRingedSpace i β)",
   "branch": "sheaf-dag",

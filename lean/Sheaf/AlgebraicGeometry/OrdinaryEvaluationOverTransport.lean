@@ -5,10 +5,10 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
+public import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComparisons
-import Sheaf.AlgebraicGeometry.TotalTensorOverEquivIso
+import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationOverComparisons
+import WeilConjectures.AlgebraicGeometry.TotalTensorOverEquivIso
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Transport of ordinary evaluation across the open-site equivalence

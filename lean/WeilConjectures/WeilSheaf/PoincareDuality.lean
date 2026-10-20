@@ -11,10 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeField
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.ZetaLinearAlgebra.TraceCup
-import Sheaf.WeilSheaf.AdicFiniteCoefficientBound
-import WeilConjectures.WeilSheaf.CohomologyGeometricConjugacy
-import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
-import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 
 /-!
 # Poincaré duality for smooth proper varieties over a finite field
@@ -65,14 +61,14 @@ a Frobenius-compatible graded-commutative cup product and a trace on which Frobe
 `i + j = 2 * d`, since `2 * d - (2 * d - i)` is not definitionally `i`. Outside `[0, 2d]` both
 groups vanish and perfectness is automatic.
 
-*Ingredients.* The trace-isomorphism and perfectness input
-`AlgebraicGeometry.WeilSheaf.exists_traceCup_isPerfect` remains stated with `sorry`.
-The range lemma is reduced to finite-coefficient cohomological dimension and the passage
-from finite coefficients to the constant adic unit. The base-change lemma constructs an
-isomorphism of geometric fibers conjugating Frobenius, constructs its cohomology equivalence,
-and uses the compatibility of that explicit equivalence with Frobenius. These remaining
-coefficient and compatibility obligations are stated separately in proof-only imports.
-The final Poincare statements follow by the existing trace-cup linear algebra
+*Ingredients.* Three inputs from other subsections of the blueprint are not yet available for
+Weil sheaves and are stated here as separate lemmas, with `sorry`:
+`AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant` (vanishing outside
+`[0, 2d]`, `sk-lem-finite`), `AlgebraicGeometry.WeilSheaf.exists_traceCup_isPerfect` (trace
+isomorphism and perfectness, `sk-cor-trace`, `sk-thm-derived-duality`, `sk-thm-transport`,
+`sk-thm-frobenius`) and
+`AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField` (the Frobenius of
+`k₀'` is `F^r`, `sk-def-weil`). Everything else is deduced from these by linear algebra
 (`WeilConjectures.ZetaLinearAlgebra.TraceCup`).
 -/
 

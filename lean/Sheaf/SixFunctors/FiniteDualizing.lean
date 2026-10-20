@@ -46,7 +46,7 @@ import Sheaf.Paper.ComparisonTorAmplitude
 import Sheaf.Paper.FiniteClosedShriek
 import Sheaf.CategoryTheory.FullyFaithfulCounitDescent
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
@@ -56,7 +56,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.SiteClosedCounitTransport
 import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
 import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients

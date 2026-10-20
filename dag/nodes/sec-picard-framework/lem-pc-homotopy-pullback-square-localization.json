@@ -86,8 +86,8 @@
  "unit": "sk-thm-picard-f-representable",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.HomotopyPullbackSquareLocalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/HomotopyPullbackSquareLocalization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.HomotopyPullbackSquareLocalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/HomotopyPullbackSquareLocalization.lean",
   "declaration": "AlgebraicGeometry.homotopyPullbackSquare_localization",
   "statement": "theorem homotopyPullbackSquare_localization\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (p : X' ⟶ X)\n    (h : p ≫ f = f' ≫ g)\n    [(Scheme.Modules.tensorPullback f).Additive]\n    [(Scheme.Modules.tensorPullback f').Additive]\n    [(Scheme.Modules.tensorPullback g).Additive]\n    [(Scheme.Modules.tensorPullback p).Additive]\n    (M : HomotopyCategory S.Modules (.up ℤ))\n    (K : HomotopyCategory X.Modules (.up ℤ))\n    (a : ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ)).obj M ⟶ K) :\n    let ε := @Classical.choose _ _ (Classical.choose_spec\n      exists_derivedPullbackComposition.{u, w})\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    (c f' g).hom.app (DerivedCategory.Qh.obj M) ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj (DerivedCategory.Qh.obj M)) h.symm) ≫\n      (c p f).inv.app (DerivedCategory.Qh.obj M) ≫\n      (derivedPullback p).map ((ε f).app M ≫ DerivedCategory.Qh.map a) ≫\n      (ε p).app K =\n    (derivedPullback f').map ((ε g).app M) ≫\n      (ε f').app\n        (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj M) ≫\n      DerivedCategory.Qh.map ((moduleHomotopyPullbackSquare f f' g p h).app M ≫\n        ((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).map a)",
   "branch": "sheaf-dag",

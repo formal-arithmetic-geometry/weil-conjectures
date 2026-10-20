@@ -130,8 +130,8 @@
  "unit": "sk-thm-picard-coherence",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoefficientTargetGeneratorScalar",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientTargetGeneratorScalar.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoefficientTargetGeneratorScalar",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoefficientTargetGeneratorScalar.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.coefficientTarget_generator_scalar",
   "statement": "theorem coefficientTarget_generator_scalar\n    {X T : Scheme.{u}} (f : X ⟶ T)\n    (F : X.Modules)\n    (U : T.Opens)\n    (Z : (f ⁻¹ᵁ U).toScheme.Opens)\n    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n    (w : g' ≫ f = f' ≫ (g ≫ U.ι))\n    (W : X'.Opens) (hW : W = g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ Z))\n    (B : T'.Opens) :\n    letI : Algebra Γ(U.toScheme, ⊤) Γ(T', B) :=\n      (g.appLE ⊤ B (by simp)).hom.toAlgebra\n    let N := (ModuleCat.restrictScalars\n      (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫\n        ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom)).obj\n          ((F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat.obj (op Z))\n    let M := (pullback g').obj F\n    ∀ (a : Γ(U.toScheme, ⊤)) (s : N),\n      (coefficientSupportIso f' M W B).inv\n        (M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op\n          (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW (a • s))) =\n      (algebraMap Γ(U.toScheme, ⊤) Γ(T', B) a) •\n        (coefficientSupportIso f' M W B).inv\n          (M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op\n            (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s))",
   "branch": "sheaf-dag",

@@ -5,11 +5,11 @@ Authors: SHEAF group H4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectHomContinuityOn
+public import WeilConjectures.AlgebraicGeometry.PerfectHomContinuityOn
 public import Mathlib.Algebra.Category.Grp.Preadditive
 public import Mathlib.Algebra.Homology.ExactSequence
 
-import Sheaf.AlgebraicGeometry.PerfectHomStageColimit
+import WeilConjectures.AlgebraicGeometry.PerfectHomStageColimit
 import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisLocalRows
 import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 

@@ -24,11 +24,11 @@ import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 import Sheaf.RingTheory.ExcellentRing
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.IntegersExcellent
-import Sheaf.RingTheory.CompleteLocalGRing
+import WeilConjectures.RingTheory.CompleteLocalGRing
 import WeilConjectures.RingTheory.GRingCompletionRegular
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.RingTheory.LocalizationRegular
-import Sheaf.RingTheory.PopescuSmoothing
+import WeilConjectures.RingTheory.PopescuSmoothing
 import WeilConjectures.RingTheory.RegularComposition
 
 /-! # Relative étale approximation from an isomorphism of completed local rings

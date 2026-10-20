@@ -112,8 +112,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SelfTorTargetRestrictionCoordinates",
-  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorTargetRestrictionCoordinates.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SelfTorTargetRestrictionCoordinates",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SelfTorTargetRestrictionCoordinates.lean",
   "declaration": "AlgebraicGeometry.exists_selfTor_target_restriction_coordinates",
   "statement": "theorem exists_selfTor_target_restriction_coordinates {Z Y : Scheme.{u}} (i : Z ⟶ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [IsClosedImmersion i] (n : ℕ) : let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf) let S := DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0 let Q := (Scheme.Modules.tensorPullback i).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj (S.obj B ⊗ S.obj B)) let T := fun U : Y.affineOpens ↦ tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙ Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i ∃ t : ∀ U : Y.affineOpens, ((T U).obj _).over (i ⁻¹ᵁ U.1) ≅ Q.over (i ⁻¹ᵁ U.1), ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1) (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1), ∃ q : (((Tor' (ModuleCat.{u} (Γ(Y, U.1) : Type u)) n).obj (ModuleCat.of _ ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).obj (ModuleCat.of _ ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))) → (((Tor' (ModuleCat.{u} (Γ(Y, V.1) : Type u)) n).obj (ModuleCat.of _ ((Γ(Y, V.1) : Type u) ⧸ i.ker.ideal V))).obj (ModuleCat.of _ ((Γ(Y, V.1) : Type u) ⧸ i.ker.ideal V))), IsSelfTorRestrictionMap (Γ(Y, U.1) : Type u) (Γ(Y, V.1) : Type u) (i.ker.ideal U) (i.ker.ideal V) (Y.presheaf.map (homOfLE h).op).hom n q ∧ ∀ x, (t U).hom.val.app (op (Over.mk (homOfLE (i.preimage_mono h)))) (((T U).obj _).val.map (homOfLE (i.preimage_mono h)).op (selfTorAffineSection i U _ x)) = (t V).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1)))) (selfTorAffineSection i V _ (q x))",
   "branch": "sheaf-dag",

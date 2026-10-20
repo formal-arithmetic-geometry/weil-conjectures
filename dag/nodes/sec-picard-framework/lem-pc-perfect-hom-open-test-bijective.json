@@ -89,8 +89,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenTestBijective",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenTestBijective.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectHomOpenTestBijective",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectHomOpenTestBijective.lean",
   "declaration": "AlgebraicGeometry.perfect_hom_open_test_bijective",
   "statement": "theorem perfect_hom_open_test_bijective\n    {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)\n    (M Q : schemeDerivedCategory Y)\n    (hM : ∀ E : schemeDerivedCategory Y,\n      Function.Bijective (fun f : M ⟶ E ↦ (schemeMVDerivedRestriction Y B).map f)) :\n    let b := pullback.map (B.ι ≫ s) r s r B.ι (𝟙 T) (𝟙 S) (by simp) (by simp)\n    let σ : schemeMVDerivedRestriction Y B ≅ derivedPullback B.ι :=\n      (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)\n    let he : b ≫ pullback.fst s r = pullback.fst (B.ι ≫ s) r ≫ B.ι := by\n      simp [b, pullback.map]\n    let κ₀ := perfectHomComposition b (pullback.fst s r) ≪≫\n      eqToIso (congrArg (fun f ↦ derivedPullback f) he) ≪≫\n      (perfectHomComposition (pullback.fst (B.ι ≫ s) r) B.ι).symm ≪≫\n      Functor.isoWhiskerRight σ.symm (derivedPullback (pullback.fst (B.ι ≫ s) r))\n    ∀ κ : derivedPullback (pullback.fst s r) ⋙ derivedPullback b ≅\n        schemeMVDerivedRestriction Y B ⋙ derivedPullback (pullback.fst (B.ι ≫ s) r),\n      κ = κ₀ →\n    Function.Bijective (fun f : (derivedPullback (pullback.fst s r)).obj M ⟶\n        (derivedPullback (pullback.fst s r)).obj Q ↦\n      κ.inv.app M ≫ (derivedPullback b).map f ≫ κ.hom.app Q)",
   "branch": "sheaf-dag",

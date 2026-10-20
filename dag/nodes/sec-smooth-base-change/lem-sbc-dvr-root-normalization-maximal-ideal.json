@@ -95,8 +95,8 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.DvrRootNormalizationMaximalIdeal",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DvrRootNormalizationMaximalIdeal.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.DvrRootNormalizationMaximalIdeal",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/DvrRootNormalizationMaximalIdeal.lean",
   "declaration": "AlgebraicGeometry.Scheme.dvr_root_normalization_maximalIdeal",
   "statement": "theorem dvr_root_normalization_maximalIdeal\n    (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]\n    (pi : B) (hpi : Irreducible pi)\n    (G : Type (u + 1)) [Group G] [Finite G]\n    (T : GaloisCover G (Spec (CommRingCat.of (FractionRing B))))\n    (hn : IsUnit (Nat.card G : B)) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap B A))\n    let j := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n    let a := pullback.snd (T.π ≫ j) q\n    ∀ (hqc : QuasiCompact a) (hqs : QuasiSeparated a),\n    letI := hqc\n    letI := hqs\n    IsFinite a.fromNormalization →\n    ∀ (x : a.normalization),\n      (a.fromNormalization x).asIdeal = Ideal.span\n        {AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)} →\n      let C := a.normalization.presheaf.stalk x\n      let tau := (a.fromNormalization.stalkMap x).hom\n        (AlgebraicGeometry.StructureSheaf.toStalk A (a.fromNormalization x)\n          (AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)))\n      IsLocalRing.maximalIdeal C = Ideal.span {tau}",
   "branch": "sheaf-dag",

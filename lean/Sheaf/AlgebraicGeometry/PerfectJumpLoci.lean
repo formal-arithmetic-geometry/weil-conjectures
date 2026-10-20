@@ -5,8 +5,8 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.Topology.Constructible
 public import Mathlib.Topology.Semicontinuity.Basic
 import WeilConjectures.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous

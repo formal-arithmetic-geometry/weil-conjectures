@@ -90,8 +90,8 @@
  "unit": "sk-thm-picard-cech",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.InjectiveCechTotalSections",
-  "file": "lean/Sheaf/CategoryTheory/InjectiveCechTotalSections.lean",
+  "module": "WeilConjectures.CategoryTheory.InjectiveCechTotalSections",
+  "file": "lean/WeilConjectures/CategoryTheory/InjectiveCechTotalSections.lean",
   "declaration": "CategoryTheory.injective_cech_total_sections",
   "statement": "theorem injective_cech_total_sections\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasFiniteWidePullbacks C] [HasSheafify J AddCommGrpCat.{v}]\n    (K : CochainComplex (Sheaf J AddCommGrpCat.{v}) ℕ)\n    (hK : ∀ q : ℕ, Injective (K.X q)) (X : C)\n    {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X)\n    (hπ : Sieve.ofArrows U π ∈ J X) (n : ℕ) :\n    Nonempty\n      (((HomologicalComplex₂.flip\n        (((sheafToPresheaf J AddCommGrpCat.{v} ⋙\n          (Functor.whiskeringLeft _ _ AddCommGrpCat.{v}).obj (Over.forget X).op ⋙\n          cechComplexFunctor (fun i ↦ Over.mk (π i))).mapHomologicalComplex\n            (.up ℕ)).obj K)).total (.up ℕ)).homology n ≅\n        (((sheafToPresheaf J AddCommGrpCat.{v} ⋙\n          (evaluation Cᵒᵖ AddCommGrpCat.{v}).obj (op X)).mapHomologicalComplex\n            (.up ℤ)).obj (K.extend ComplexShape.embeddingUpNat)).homology (n : ℤ))",
   "branch": "sheaf-dag",

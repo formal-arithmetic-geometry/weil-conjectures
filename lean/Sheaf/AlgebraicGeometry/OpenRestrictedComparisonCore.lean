@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
-public import Sheaf.AlgebraicGeometry.OpenRestrictedComparisonComposition
+public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
 import Sheaf.AlgebraicGeometry.OpenRestrictedCanonicalSquare
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
 

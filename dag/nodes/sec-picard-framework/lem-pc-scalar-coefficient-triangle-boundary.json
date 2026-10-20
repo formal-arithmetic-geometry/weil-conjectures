@@ -80,8 +80,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.ScalarCoefficientTriangleBoundary",
-  "file": "lean/Sheaf/Algebra/Homology/ScalarCoefficientTriangleBoundary.lean",
+  "module": "WeilConjectures.Algebra.Homology.ScalarCoefficientTriangleBoundary",
+  "file": "lean/WeilConjectures/Algebra/Homology/ScalarCoefficientTriangleBoundary.lean",
   "declaration": "ModuleCat.scalarCoefficient_triangle_boundary",
   "statement": "theorem scalarCoefficient_triangle_boundary\n    {A E C : Type u} [CommRing A] [CommRing E] [CommRing C]\n    (f : A →+* E) (g : E →+* C)\n    (T : Pretriangulated.Triangle (CochainComplex (ModuleCat.{u} A) ℤ))\n    (φ₁ : ((extendScalars f).mapHomologicalComplex (.up ℤ)).obj T.obj₁ ⟶\n      ((restrictScalars g).mapHomologicalComplex (.up ℤ)).obj\n        (((extendScalars (g.comp f)).mapHomologicalComplex (.up ℤ)).obj T.obj₁))\n    (φ₃ : ((extendScalars f).mapHomologicalComplex (.up ℤ)).obj T.obj₃ ⟶\n      ((restrictScalars g).mapHomologicalComplex (.up ℤ)).obj\n        (((extendScalars (g.comp f)).mapHomologicalComplex (.up ℤ)).obj T.obj₃))\n    (hφ₁ : ∀ (j : ℤ) (e : E) (q : T.obj₁.X j),\n      φ₁.f j (e ⊗ₜ[A,f] q) = g e ⊗ₜ[A,g.comp f] q)\n    (hφ₃ : ∀ (j : ℤ) (e : E) (q : T.obj₃.X j),\n      φ₃.f j (e ⊗ₜ[A,f] q) = g e ⊗ₜ[A,g.comp f] q) (i : ℤ) :\n    let J := (extendScalars.{u, u, u} f).mapHomologicalComplex (.up ℤ)\n    let F := (extendScalars.{u, u, u} (g.comp f)).mapHomologicalComplex (.up ℤ)\n    CochainComplex.homologyδOfTriangle (J.mapTriangle.obj T) i (i + 1) ≫\n        HomologicalComplex.homologyMap φ₁ (i + 1) ≫\n        (((F.obj T.obj₁).sc (i + 1)).mapHomologyIso (restrictScalars g)).hom =\n      HomologicalComplex.homologyMap φ₃ i ≫\n        (((F.obj T.obj₃).sc i).mapHomologyIso (restrictScalars g)).hom ≫\n        (restrictScalars g).map\n          (CochainComplex.homologyδOfTriangle (F.mapTriangle.obj T) i (i + 1))",
   "branch": "sheaf-dag",

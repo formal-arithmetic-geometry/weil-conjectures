@@ -142,8 +142,8 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardRankMatchOrdinaryRanks",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardRankMatchOrdinaryRanks.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PicardRankMatchOrdinaryRanks",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PicardRankMatchOrdinaryRanks.lean",
   "declaration": "AlgebraicGeometry.Scheme.picardRankMatch_ordinary_ranks",
   "statement": "theorem picardRankMatch_ordinary_ranks {X S T : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)\n    (hR : PicardUniversalRankMatch f E g)\n    (F : X.Modules) (hF : F = E ∨ F = Modules.dual E) :\n    let G := (Modules.tensorPullback (pullback.fst f g)).obj F\n    let M := (Modules.pushforward (pullback.snd f g)).obj G\n    M.IsFiniteLocallyFree ∧\n      ∀ s : T, ∃ U : T.Opens, s ∈ U ∧ ∃ r : ℕ,\n        ∀ (Y : Scheme.{u}) (k : Y ⟶ U.toScheme),\n          SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n            ((Modules.pushforward (pullback.snd (pullback.snd f g) (k ≫ U.ι))).obj\n              ((Modules.tensorPullback (pullback.fst (pullback.snd f g) (k ≫ U.ι))).obj G))\n            r",
   "branch": "sheaf-dag",

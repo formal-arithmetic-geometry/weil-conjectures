@@ -6,7 +6,6 @@ Authors: SHEAF group N5
 module
 
 public import Sheaf.AlgebraicGeometry.OrdinaryKunnethFiniteRing
-public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.FiniteFieldFiber
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -35,7 +34,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel

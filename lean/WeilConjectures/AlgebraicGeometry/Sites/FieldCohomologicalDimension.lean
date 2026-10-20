@@ -15,9 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationField
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
-import WeilConjectures.AlgebraicGeometry.Sites.LerayVanishing
 
 /-!
 # Torsion cohomological dimension and the ground field

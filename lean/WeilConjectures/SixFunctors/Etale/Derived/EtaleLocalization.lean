@@ -8,9 +8,6 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphDerivedIso
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 
 /-!
 # Étale localization of the derived categories of étale sheaves
@@ -24,7 +21,7 @@ Two facts about a surjective or arbitrary étale morphism `u : U ⟶ X` and the 
   jointly surjective family of étale maps reflect isomorphisms of sheaves;
 * the exceptional inverse image localizes along étale maps,
   `Lu^* Rf^! ≅ R(u ≫ f)^!` (blueprint `lem-amb-etale-adjoint-locality`, a node of the blueprint
-  subsection `sk-prop-sf-cbc`).
+  subsection `sk-prop-sf-cbc`, recorded here without proof).
 
 ## Main statements
 
@@ -85,17 +82,11 @@ For a separated étale morphism `u : U ⟶ X` of finite type, and `f : X ⟶ Y` 
 `Lu^* Rf^! K ≅ R(u ≫ f)^! K`,
 
 naturally in `K`. The blueprint also records that the extension by zero `u_!` along `u` is
-exact and left adjoint to `u^*`; the graph comparison identifies its degreewise derived
-functor with compact-support pushforward. The canonical isomorphism is the mate of the
+exact and left adjoint to `u^*`; the extension by zero along an étale map that is not an open
+immersion is not available in the library. The canonical isomorphism is the mate of the
 composition `R(u ≫ f)_! ≅ Rf_! ⋙ Ru_!` with `Ru_! ⊣ Lu^*`; only its existence is recorded.
 
-This is a node of the blueprint subsection `sk-prop-sf-cbc`.
-(blueprint: lem-etale-exceptional-locality-arbitrary-schemes)
-
-Proof: construct a compactification of `u` by its graph in the proper base change of a
-compactification of `u ≫ f`. The graph comparison identifies `Ru_!` with exact sum extension.
-Compose its adjunction with the exceptional adjunction for `f`, use compact-support
-composition, and apply uniqueness of right adjoints. -/
+This is a node of the blueprint subsection `sk-prop-sf-cbc`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale
     {U X Y : Scheme.{u}} (u : U ⟶ X) [Etale u] [IsSeparated u] [QuasiCompact u]
     (f : X ⟶ Y) (h : U ⟶ Y) (w : u ≫ f = h) [HasCompactification f]

@@ -5,7 +5,7 @@ Authors: SHEAF group Q07
 -/
 module
 
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed

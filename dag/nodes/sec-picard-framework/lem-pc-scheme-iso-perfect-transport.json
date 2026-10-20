@@ -111,8 +111,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoPerfectTransport.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SchemeIsoPerfectTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SchemeIsoPerfectTransport.lean",
   "declaration": "AlgebraicGeometry.Scheme.scheme_iso_derived_inverse_preserves_perfect",
   "statement": "theorem scheme_iso_derived_inverse_preserves_perfect {X Y : Scheme.{u}}\n    (s : X ≅ Y)\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w₁} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ V : Y.Opens,\n      HasDerivedCategory.{w₂} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))]\n    (e : schemeDerivedCategory X ≌ schemeDerivedCategory Y)\n    (he : DerivedCategory.Q ⋙ e.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward s.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (E : schemeDerivedCategory Y) (hE : IsPerfect Y E) :\n    IsPerfect X (e.inverse.obj E)",
   "branch": "sheaf-dag",

@@ -5,7 +5,7 @@ Authors: SHEAF group NX
 -/
 module
 
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Data.Int.Interval

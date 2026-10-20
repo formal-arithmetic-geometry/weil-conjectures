@@ -108,8 +108,8 @@
  "unit": "sk-thm-picard-coherence",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AdditiveAlternatingCechCoordinates",
-  "file": "lean/Sheaf/AlgebraicGeometry/AdditiveAlternatingCechCoordinates.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AdditiveAlternatingCechCoordinates",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AdditiveAlternatingCechCoordinates.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.additive_alternatingCech_coordinates",
   "statement": "theorem additive_alternatingCech_coordinates {Y S : Scheme.{u}} {r : ℕ}\n    (V : Fin r → Y.Opens)\n    (G : Y.Opensᵒᵖ ⥤ ModuleCat.{u} Γ(Y, ⊤))\n    (H : ModuleCat.{u} Γ(Y, ⊤) ⥤ S.Modules) [H.Additive] :\n    let L := (H.mapHomologicalComplex _).obj\n      ((alternatingCechComplex V G).extend ComplexShape.embeddingUpNat)\n    ∃ e : ∀ (p : ℕ) (B : S.Opens), Γ(L.X (p : ℤ), B) ≃+\n        (∀ t : Fin (p + 1) ↪o Fin r,\n          Γ(H.obj (G.obj (op (alternatingCechIntersection V t))), B)),\n      (∀ (p : ℕ) {B C : S.Opens} (i : B ⟶ C)\n        (s : Γ(L.X (p : ℤ), C)) (t : Fin (p + 1) ↪o Fin r),\n        e p B ((L.X (p : ℤ)).presheaf.map i.op s) t =\n          (H.obj (G.obj (op (alternatingCechIntersection V t)))).presheaf.map i.op\n            (e p C s t)) ∧\n      (∀ (p : ℕ) (B : S.Opens) (b : Γ(S, B))\n        (s : Γ(L.X (p : ℤ), B)) (t : Fin (p + 1) ↪o Fin r),\n        e p B (b • s) t = b • e p B s t) ∧\n      (∀ (p : ℕ) (B : S.Opens) (s : Γ(L.X (p : ℤ), B))\n        (t : Fin (p + 2) ↪o Fin r),\n        e (p + 1) B ((L.d (p : ℤ) ((p + 1 : ℕ) : ℤ)).app B s) t =\n          ∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •\n            (H.map (G.map (homOfLE\n              (alternatingCechIntersection_face_le V p t j)).op)).app B\n                (e p B s ((Fin.succAboveOrderEmb j).trans t)))",
   "branch": "sheaf-dag",

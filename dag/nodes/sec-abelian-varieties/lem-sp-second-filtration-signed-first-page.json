@@ -109,8 +109,8 @@
  "unit": "sk-prop-av-pqf-finite",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.SecondFiltrationSignedFirstPage",
-  "file": "lean/Sheaf/CategoryTheory/SecondFiltrationSignedFirstPage.lean",
+  "module": "WeilConjectures.CategoryTheory.SecondFiltrationSignedFirstPage",
+  "file": "lean/WeilConjectures/CategoryTheory/SecondFiltrationSignedFirstPage.lean",
   "declaration": "CategoryTheory.Functor.secondFiltration_signed_firstPage",
   "statement": "theorem secondFiltration_signed_firstPage\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s))\n    (L : DecreasingFiltration\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n        (ComplexShape.up ℤ)))\n    (hL : ∀ p n : ℤ, L.complexStep p n =\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).secondFiltration n).step\n        p)\n    (D : FilteredComplexPageDifferential\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n        (ComplexShape.up ℤ)) L 1) :\n    ∃ e : ∀ (r : ℕ) (s : ℤ), D.page.X (s, (r : ℤ)) ≅\n        ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).homology r,\n      ∀ (r : ℕ) (s : ℤ),\n        D.page.d (s, (r : ℤ)) (s + 1, (r : ℤ)) ≫ (e r (s + 1)).hom =\n          (r : ℤ).negOnePow • ((e r s).hom ≫ HomologicalComplex.homologyMap\n            ((F.mapHomologicalComplex (ComplexShape.up ℕ)).map (I.d s (s + 1))) r)",
   "branch": "sheaf-dag",

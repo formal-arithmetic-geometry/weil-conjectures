@@ -96,8 +96,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.BoundedGradedModuleMapDescent",
-  "file": "lean/Sheaf/AlgebraicGeometry/BoundedGradedModuleMapDescent.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.BoundedGradedModuleMapDescent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/BoundedGradedModuleMapDescent.lean",
   "declaration": "AlgebraicGeometry.bounded_graded_module_map_descent",
   "statement": "theorem bounded_graded_module_map_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (M : ℤ → (pullback f (c.π.app (op i))).Modules)\n    (a b : ℤ) (hM_zero : ∀ n : ℤ, n < a ∨ b < n → IsZero (M n))\n    (hM_fp : ∀ n : ℤ, (M n).IsFinitePresentation)\n    (hM_qc : ∀ n : ℤ, (M n).IsQuasicoherent)\n    (d : ∀ n : ℤ, M n ⟶ M (n + 1)) :\n    ∃ (j : I) (hij : i ≤ j)\n      (F : ℤ → (pullback f (Spec.map (R.map (homOfLE hij)))).Modules)\n      (δ : ∀ n : ℤ, F n ⟶ F (n + 1)),\n      (∀ n : ℤ, n < a ∨ b < n → IsZero (F n)) ∧\n      (∀ n : ℤ, (F n).IsFinitePresentation) ∧\n      (∀ n : ℤ, (F n).IsQuasicoherent) ∧\n      ∃ e : ∀ n : ℤ,\n          (Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj (F n) ≅ M n,\n        ∀ n : ℤ,\n          (Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (δ n) ≫\n              (e (n + 1)).hom = (e n).hom ≫ d n",
   "branch": "sheaf-dag",

@@ -114,8 +114,8 @@
  "unit": "sk-thm-vanishing",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawDerivedClassAffineDescent",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawDerivedClassAffineDescent.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.RawDerivedClassAffineDescent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawDerivedClassAffineDescent.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_rawDerivedClass_affine_descent",
   "statement": "theorem exists_rawDerivedClass_affine_descent\n    {k : Type u} [Field k]\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Over (Spec (.of k)))\n    [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    (q : ℕ) (i : I) (V : c.pt.left.Etale) [IsAffine V.left]\n    (K : DerivedCategory.Plus (Sheaf (D.obj i).left.smallEtaleTopology\n      AddCommGrpCat.{u + 1}))\n    (z : (DerivedCategory.Plus.singleFunctor _ 0).obj\n      ((abelianComparisonFree c.pt.left).obj V) ⟶\n        ((D+(((c.π.app i).left)^*[AddCommGrpCat.{u + 1}])).obj K)⟦(q : ℤ)⟧) :\n    ∃ (j : I) (W : (D.obj j).left.Etale) (_ : IsAffine W.left)\n      (r : V.left ⟶ W.left)\n      (hr : IsPullback r V.hom W.hom (c.π.app j).left)\n      (l : Over j) (b : l.left ⟶ i)\n      (y : (DerivedCategory.Plus.singleFunctor _ 0).obj\n        ((((D.map l.hom).left)^*[AddCommGrpCat.{u + 1}]).obj\n          ((abelianComparisonFree (D.obj j).left).obj W)) ⟶\n        ((D+(((D.map b).left)^*[AddCommGrpCat.{u + 1}])).obj K)⟦(q : ℤ)⟧),\n      z ≫ (shiftFunctor _ (q : ℤ)).map\n          ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1}\n            (c.π.app l.left).left (D.map b).left (c.π.app i).left\n            (congrArg (fun t ↦ t.left) (c.w b)).symm).hom.app K) =\n        cartesianChartClassPullback (D.map l.hom).left (c.π.app l.left).left\n          (c.π.app j).left (congrArg (fun t ↦ t.left) (c.w l.hom)).symm\n          W V r hr _ (q : ℤ) y",
   "branch": "sheaf-dag",

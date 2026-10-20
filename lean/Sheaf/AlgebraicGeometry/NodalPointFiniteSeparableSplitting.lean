@@ -14,9 +14,9 @@ public import WeilConjectures.ZetaSeries
 public import Sheaf.AlgebraicGeometry.PureDimension
 public import Sheaf.Paper.OrgogozoInductionData
 import Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme
-import Sheaf.AlgebraicGeometry.DimensionBaseChange
-import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
-import Sheaf.AlgebraicGeometry.Dimension
+import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
+import WeilConjectures.AlgebraicGeometry.DimensionAffineOpenCover
+import WeilConjectures.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.UnramifiedOverFieldLocalCriterion
 import Sheaf.AlgebraicGeometry.RationalNodeQuadraticCompletion
 import Sheaf.RingTheory.SeparableClosedPointFormalPresentation

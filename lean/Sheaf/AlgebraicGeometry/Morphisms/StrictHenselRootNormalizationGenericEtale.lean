@@ -20,7 +20,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat
 import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
-import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtale
+import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtale
 
 /-! # Properties of the explicit root-cover normalization
 Source: Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH. -/

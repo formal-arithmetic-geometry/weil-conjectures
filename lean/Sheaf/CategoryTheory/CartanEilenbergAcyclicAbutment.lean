@@ -6,8 +6,8 @@ Authors: SHEAF group S2
 module
 
 public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.CategoryTheory.CartanEilenbergAugmentationComparison
 import Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation

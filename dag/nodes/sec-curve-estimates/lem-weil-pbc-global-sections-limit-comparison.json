@@ -99,8 +99,8 @@
  "unit": "sk-prop-h2",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.GlobalSectionsLimitComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/GlobalSectionsLimitComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.GlobalSectionsLimitComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GlobalSectionsLimitComparison.lean",
   "declaration": "AlgebraicGeometry.Etale.globalSections_limit_comparison",
   "statement": "theorem globalSections_limit_comparison {R : Scheme.{u}} {J : Type u}\n    [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u})\n    (π : D ⟶ (Functor.const J).obj R) (c : Cone D) (P : c.pt ⟶ R)\n    (hP : ∀ j, P = c.π.app j ≫ π.app j)\n    [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)]\n    [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)] (hc : IsLimit c)\n    (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    let A := AddCommGrpCat.{u + 1}\n    let Γ := fun X : Scheme.{u} ↦ Sheaf.Γ X.smallEtaleTopology A\n    let F := fun {X : Scheme.{u}} (f : X ⟶ R) ↦ (upperStar A f).obj G\n    let ρ := fun {X Y : Scheme.{u}} (h : X ⟶ Y) (f : Y ⟶ R) (g : X ⟶ R)\n      (w : g = h ≫ f) ↦ globalSectionsUpperStarMap A h (F f) ≫\n        (Γ X).map ((upperStarComp A h f g w).inv.app G)\n    (∀ t : (Γ c.pt).obj (F P), ∃ (j : J) (s : (Γ (D.obj j)).obj (F (π.app j))),\n      ρ (c.π.app j) (π.app j) P (hP j) s = t) ∧\n    ∀ (j : J) (s : (Γ (D.obj j)).obj (F (π.app j))),\n      ρ (c.π.app j) (π.app j) P (hP j) s = 0 →\n        ∃ (j' : J) (f : j' ⟶ j), ρ (D.map f) (π.app j) (π.app j') (by simp) s = 0",
   "branch": "sheaf-dag",

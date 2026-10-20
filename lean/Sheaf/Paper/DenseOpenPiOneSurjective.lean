@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteEtaleWeilTransport
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
 public import Sheaf.Paper.RealSheavesSetup
 public import Sheaf.Paper.CurveWeilMiddleExtension
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit
 import Sheaf.Paper.GaloisLisseRepresentations
 import Mathlib.CategoryTheory.Abelian.Basic

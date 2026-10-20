@@ -7,12 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentEtaleComparisonMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
-import Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
+import WeilConjectures.AlgebraicGeometry.EtaleZariskiQcohComparison
+import WeilConjectures.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
 import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
 import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsRightExact
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-import Sheaf.AlgebraicGeometry.EtaleQcoherentULiftCohomologyNatural
+import WeilConjectures.AlgebraicGeometry.EtaleQcoherentULiftCohomologyNatural
 import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
 
 /-! # Simultaneous effacement for the coherent comparison

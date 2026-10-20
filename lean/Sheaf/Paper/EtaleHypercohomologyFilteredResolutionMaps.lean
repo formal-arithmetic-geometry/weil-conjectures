@@ -9,7 +9,7 @@ public import Sheaf.Paper.EtaleTermwiseHypercohomology
 
 import Sheaf.Paper.EtaleHypercohomologyCETotalMaps
 import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
-import Sheaf.CategoryTheory.CartanEilenbergAugmentationQuasiIso
+import WeilConjectures.CategoryTheory.CartanEilenbergAugmentationQuasiIso
 
 /-! # Filtered resolution construction of étale hypercohomology pullback
 

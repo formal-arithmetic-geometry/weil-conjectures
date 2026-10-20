@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
-public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalenceFunctor
+public import WeilConjectures.AlgebraicGeometry.PerfectOverlapStageEquivalenceFunctor
 
 /-! # Derived transport with the cartesian stage interfaces -/
 

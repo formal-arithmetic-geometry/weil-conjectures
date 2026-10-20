@@ -5,7 +5,7 @@ Authors: SHEAF group N1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupLeftCechExact
 public import Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction
 import Sheaf.AlgebraicGeometry.PicardLeftCechCupNaturality
 

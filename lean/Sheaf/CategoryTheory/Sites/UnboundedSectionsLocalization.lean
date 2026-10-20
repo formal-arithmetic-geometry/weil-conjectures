@@ -6,7 +6,7 @@ Authors: SHEAF group NH
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+public import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective

@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.OpenClosed.Exact
+public import WeilConjectures.Algebra.Homology.KInjectiveResolution
 
 /-!
 # The support-localization triangle of a complex of injective sheaves
@@ -122,7 +123,9 @@ objects
 
 For a complex `I` of injective étale sheaves, `0 ⟶ s_* s^! I ⟶ I ⟶ j_* j^* I ⟶ 0` is a short exact
 sequence of complexes: the restriction `I ⟶ j_* j^* I` is a degreewise (split) epimorphism by
-`AlgebraicGeometry.Etale.isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective`. -/
+`AlgebraicGeometry.Etale.isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective`. This
+is the étale form, the site of the purity chapter (`def-pur-conventions`); the pro-étale form is
+`AlgebraicGeometry.ProEtale.shortExact_supportsShortComplex`. -/
 theorem shortExact_supportsShortComplex (hjs : Set.range s.base = (Set.range j.base)ᶜ)
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)] :
     (supportsShortComplex A j I).ShortExact := by
@@ -183,6 +186,58 @@ theorem supportLocalizationTriangle_distinguished
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)] :
     supportLocalizationTriangle A j s hjs I ∈ distTriang _ :=
   DerivedCategory.triangleOfSES_distinguished _
+
+section Resolution
+
+variable {X' : Scheme.{u}}
+
+/-- The specified resolution `K ⟶ I(K)` of a complex `K` of étale sheaves which is
+cohomologically concentrated in degrees `≥ n`: the truncation `K ⟶ τ_{≥ n} K` followed by a chosen
+K-injective resolution of `τ_{≥ n} K` by a complex of injective sheaves concentrated in degrees
+`≥ n` (`CochainComplex.KInjectiveResolution.exists_of_isStrictlyGE`). -/
+noncomputable def injectiveResolutionOfIsGE (K : CochainComplex (Sheaf X'.smallEtaleTopology A) ℤ)
+    (n : ℤ) [K.IsGE n] : K.KInjectiveResolution :=
+  let R := (CochainComplex.KInjectiveResolution.exists_of_isStrictlyGE (K.truncGE n) n).choose
+  ⟨R.I, K.πTruncGE n ≫ R.ι, inferInstance, inferInstance⟩
+
+/-- The terms of the specified resolution `I(K)` are injective. -/
+instance injective_injectiveResolutionOfIsGE_I_X
+    (K : CochainComplex (Sheaf X'.smallEtaleTopology A) ℤ) (n : ℤ) [K.IsGE n] (m : ℤ) :
+    Injective ((injectiveResolutionOfIsGE A K n).I.X m) :=
+  (CochainComplex.KInjectiveResolution.exists_of_isStrictlyGE (K.truncGE n) n).choose_spec.2 m
+
+/-- Blueprint `def-pur-support-triangle`: The support-localization triangle of a complex: the
+construction
+
+For a bounded below complex `K` of étale sheaves on `X` (cohomologically concentrated in degrees
+`≥ n`), with specified resolution `K ⟶ I(K)` by a K-injective complex of injective sheaves
+(`AlgebraicGeometry.Etale.injectiveResolutionOfIsGE`), the short complex
+
+`A(K) = s_* s^! I(K) ⟶ B(K) = I(K) ⟶ C(K) = j_* j^* I(K)`,
+
+whose first map is the inclusion `u : A(K) ⟶ B(K)` of the supported sections
+(`AlgebraicGeometry.Etale.supportsShortComplex`). Here `A(K)` is the kernel of the restriction
+`I(K) ⟶ j_* j^* I(K)`, which is `s_* s^! I(K)` by
+`AlgebraicGeometry.Etale.closedUpperShriekCompLowerStarIso`. The cone of `u` is
+`AlgebraicGeometry.Etale.supportsCone`. As throughout the purity chapter (`def-pur-conventions`)
+this is formalised on the small étale site. -/
+noncomputable def supportsShortComplexOfIsGE
+    (K : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) (n : ℤ) [K.IsGE n] :
+    ShortComplex (CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) :=
+  supportsShortComplex A j (injectiveResolutionOfIsGE A K n).I
+
+/-- Blueprint `def-pur-support-triangle`: The support-localization triangle of a complex: the
+construction
+
+The cone complex `Cone(u)` of the inclusion `u : A(K) ⟶ B(K)`, with
+`Cone(u)^m = A(K)^{m+1} ⊕ B(K)^m` and differential `d(a, b) = (-d_A a, u(a) + d_B b)`
+(`CochainComplex.mappingCone`; the blueprint lists the summands in the other order). -/
+noncomputable def supportsCone
+    (K : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) (n : ℤ) [K.IsGE n] :
+    CochainComplex (Sheaf X.smallEtaleTopology A) ℤ :=
+  CochainComplex.mappingCone (supportsShortComplexOfIsGE A j K n).f
+
+end Resolution
 
 end Etale
 

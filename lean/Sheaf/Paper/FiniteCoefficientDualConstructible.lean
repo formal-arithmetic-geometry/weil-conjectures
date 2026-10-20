@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import Mathlib.GroupTheory.Exponent
 

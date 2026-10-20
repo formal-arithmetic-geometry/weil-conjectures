@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCompositionCounitApex
+public import WeilConjectures.AlgebraicGeometry.DerivedCompositionCounitApex
 
 /-! # Counit calculations for pullback composition
 Source: Stacks Project, Tags 079W, 0D5S and 0D5T.

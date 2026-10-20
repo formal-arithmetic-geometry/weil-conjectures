@@ -100,8 +100,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationConstruction",
-  "file": "lean/Sheaf/AlgebraicGeometry/TorsionControlledAlgebraizationConstruction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.TorsionControlledAlgebraizationConstruction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TorsionControlledAlgebraizationConstruction.lean",
   "declaration": "AlgebraicGeometry.torsionControlled_algebraization_construction",
   "statement": "theorem torsionControlled_algebraization_construction\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    (H : CoherentModules X) (N : CoherentFormalModule X J)\n    (δ : N ⟶ (completion X J).obj H)\n    (hlocal : ∀ U : X.affineOpens, ∃ t : ℕ, 1 ≤ t ∧\n      J.ideal U ^ t ≤ Module.annihilator Γ(X, U.1) (LinearMap.ker\n        (lim.map (Functor.whiskerRight δ.hom\n          (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom) ∧\n      J.ideal U ^ t ≤ Module.annihilator Γ(X, U.1)\n        (↥(limit (((completion X J).obj H).obj ⋙\n          SheafOfModules.evaluation X.ringCatSheaf (op U.1)) :\n          ModuleCat Γ(X, U.1)) ⧸ LinearMap.range\n          (lim.map (Functor.whiskerRight δ.hom\n            (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom)) :\n    ∃ (F : CoherentModules X) (a : F ⟶ H) (β : N ≅ (completion X J).obj F),\n      δ = β.hom ≫ (completion X J).map a ∧\n      (∃ s : ℕ, 1 ≤ s ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (kernel a.hom)) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (cokernel a.hom)))",
   "branch": "sheaf-dag",

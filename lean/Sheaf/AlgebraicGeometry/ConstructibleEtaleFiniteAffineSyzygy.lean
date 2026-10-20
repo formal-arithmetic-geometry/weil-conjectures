@@ -6,13 +6,13 @@ Authors: SHEAF group Q119
 module
 
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteZeroCokernel
+public import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteZeroCokernel
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 import WeilConjectures.AlgebraicGeometry.FreeEtaleModuleShriekComparison
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-!

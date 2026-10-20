@@ -6,8 +6,7 @@ Authors: SHEAF group G3
 module
 
 import Sheaf.AlgebraicGeometry.ModuleCechZeroLemmas
-public import Sheaf.AlgebraicGeometry.ModuleCechComparison
-import all Sheaf.AlgebraicGeometry.ModuleCechComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
 
 /-! # Functorial augmentations of arbitrary module Cech total complexes
 

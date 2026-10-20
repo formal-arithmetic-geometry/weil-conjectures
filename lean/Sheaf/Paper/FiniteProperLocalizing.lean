@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Scheme
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
 import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
 import Sheaf.AlgebraicGeometry.ClassicalModuleWeakSerre

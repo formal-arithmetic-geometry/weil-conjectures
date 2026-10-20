@@ -6,7 +6,7 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction
-public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.DirectSum.Module
 import WeilConjectures.Algebra.Homology.TensorKunnethNaturalComplexes

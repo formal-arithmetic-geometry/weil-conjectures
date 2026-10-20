@@ -13,7 +13,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 public import Sheaf.Paper.SfDerivedComplete
 import Sheaf.Paper.FiniteConstructibleHom
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
@@ -35,7 +35,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.SixFunctors.EtaleHomThickLocus
 import Sheaf.SixFunctors.FlatModelGeneration
@@ -60,7 +60,7 @@ import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Topology.Defs.Filter
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.Paper.InternalAdjunctionPairingChange

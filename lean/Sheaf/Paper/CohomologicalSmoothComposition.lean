@@ -23,7 +23,7 @@ import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Sheaf.Paper.PbcActualScalarPullback
 import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

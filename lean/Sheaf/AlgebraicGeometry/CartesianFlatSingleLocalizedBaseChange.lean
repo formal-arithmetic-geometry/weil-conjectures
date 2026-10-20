@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-public import Sheaf.AlgebraicGeometry.LocalizedMixedDerivedPullback
+public import WeilConjectures.AlgebraicGeometry.LocalizedMixedDerivedPullback
 
 import Sheaf.AlgebraicGeometry.NestedOpenSingleDirectImageComparison
 import Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison

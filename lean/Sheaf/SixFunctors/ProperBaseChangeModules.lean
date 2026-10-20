@@ -6,7 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
+public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper

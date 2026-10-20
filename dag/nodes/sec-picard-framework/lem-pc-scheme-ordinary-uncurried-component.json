@@ -84,8 +84,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationUncurriedComponent",
-  "file": "lean/Sheaf/AlgebraicGeometry/SchemeOrdinaryEvaluationUncurriedComponent.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationUncurriedComponent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SchemeOrdinaryEvaluationUncurriedComponent.lean",
   "declaration": "AlgebraicGeometry.schemeOrdinaryEvaluation_uncurried_component",
   "statement": "theorem schemeOrdinaryEvaluation_uncurried_component (Y : Scheme.{u})\n    (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (f : pullbackTensorTotal Y F\n        (homComplex (R := Y.sheaf) P\n          ((HomologicalComplex.single _ (.up ℤ) 0).obj\n            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))) ⟶\n      homComplex (R := Y.sheaf) P F)\n    (hf : IsSchemeOrdinaryEvaluation Y P F f)\n    (p q r n k : ℤ) (hpq : p + q = n) (hnr : n + r = k) :\n    let O := (HomologicalComplex.single _ (.up ℤ) 0).obj\n      (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))\n    let V := homComplex (R := Y.sheaf) P O\n    let π := Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf))\n    (β_ (F.X p ⊗ V.X q) (P.X r)).hom ≫\n      (SheafOfModules.tensorHomEquiv (R := Y.sheaf) (P.X r) (F.X p ⊗ V.X q)\n        (F.X k)).symm\n        (HomologicalComplex.ιMapBifunctor F V (curriedTensor _) (.up ℤ) p q n hpq ≫\n          f.f n ≫ π P F n r k (by omega)) =\n    (if h : r + q = 0 then\n      (α_ (F.X p) (V.X q) (P.X r)).hom ≫\n        F.X p ◁ ((β_ (V.X q) (P.X r)).hom ≫\n          (SheafOfModules.tensorHomEquiv (R := Y.sheaf) (P.X r) (V.X q)\n            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).symm\n              (π P O q r 0 h ≫ SheafOfModules.homObjMap (R := Y.sheaf) (𝟙 (P.X r))\n                (HomologicalComplex.singleObjXSelf (.up ℤ) 0\n                  (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).hom)) ≫\n        (ρ_ (F.X p)).hom ≫ (F.XIsoOfEq (by omega : p = k)).hom\n    else 0)",
   "branch": "sheaf-dag",

@@ -7,12 +7,12 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.CategoryTheory.Triangulated.Functor
-public import Sheaf.CategoryTheory.CompactlyGenerated
+public import WeilConjectures.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Equivalence
 import Sheaf.CategoryTheory.DerivedModuleCompactGeneration
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
-import Sheaf.CategoryTheory.CompactGenerationEquivalence
+import WeilConjectures.CategoryTheory.CompactGenerationEquivalence
 import Mathlib.CategoryTheory.Category.ULift
 import Mathlib.CategoryTheory.Adjunction.Limits
 

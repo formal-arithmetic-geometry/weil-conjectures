@@ -115,8 +115,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.CartanEilenbergConeGradedNormalizedIso",
-  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergConeGradedNormalizedIso.lean",
+  "module": "WeilConjectures.CategoryTheory.CartanEilenbergConeGradedNormalizedIso",
+  "file": "lean/WeilConjectures/CategoryTheory/CartanEilenbergConeGradedNormalizedIso.lean",
   "declaration": "CategoryTheory.Functor.cartanEilenberg_cone_graded_normalized_iso",
   "statement": "theorem cartanEilenberg_cone_graded_normalized_iso\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    (K : CochainComplex A ℤ)\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (a : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      K ⟶ I)\n    (b : ℤ)\n    (hIbelow : ∀ s : ℤ, s < b → IsZero (I.X s))\n    (hKbelow : ∀ s : ℤ, s < b → IsZero (K.X s))\n    (aug : K ⟶ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total\n      (ComplexShape.up ℤ))\n    (F : DecreasingFiltration (CochainComplex.mappingCone aug))\n    (hF : ∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl aug).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Icc (max b p) n).sup (fun s ↦ imageSubobject\n          ((((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotalOrZero\n            (ComplexShape.up ℤ) (n - s) s n ≫\n              (CochainComplex.mappingCone.inr aug).f n)))\n    (p m : ℤ) (hm : p - 1 ≤ m) :\n    ∃ e : (F.gradedPiece p).X m ≅ (CochainComplex.mappingCone\n      (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).X (m - p),\n      CartanEilenbergConeGradedNormalized K I a aug F p m e",
   "branch": "sheaf-dag",

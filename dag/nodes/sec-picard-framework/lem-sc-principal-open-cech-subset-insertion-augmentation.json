@@ -90,8 +90,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionAugmentation",
-  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSubsetInsertionAugmentation.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionAugmentation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PrincipalOpenCechSubsetInsertionAugmentation.lean",
   "declaration": "AlgebraicGeometry.principalSubsetInsertion_augmentation",
   "statement": "theorem principalSubsetInsertion_augmentation (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (J : CochainComplex (Spec (.of A)).Modules ℤ) : let V := principalSubsetUnion A r f let D := principalSubsetOpen A r f ∀ (hls : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = 1 → D S.val ≤ V) (hes : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = 1 → ∀ n : ℤ, n = n + 1 - (S.val.card : ℤ)), let R := SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) V ⋙ (Scheme.Modules.overEquiv V).functor let J' := (R.mapHomologicalComplex (ComplexShape.up ℤ)).obj J let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i) let G := (forget₂ (ModuleCat.{u} ((moduleRings V.toScheme.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat).mapHomologicalComplex (ComplexShape.up ℤ) ∀ (n : ℤ) (s : (modulesSpecToSheaf.obj (J.X n)).obj.obj (op V)), principalSubsetInsertion A r f J n (fun S ↦ if h : S.val.card = 1 then (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.map (homOfLE (hls S h)).op ((modulesSpecToSheaf.map (eqToHom (congrArg J.X (hes S h n)))).hom.app (op V) s) else 0) = (G.map ((alternatingCechAugmentation U).app J')).f n (by change (forget₂ (ModuleCat.{u} ((moduleRings V.toScheme.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat).obj ((RingedSpace.globalSectionsFunctor V.toScheme.toRingedSpace).obj (R.obj (J.X n))) exact (principalOpenSectionTransport A V (J.X n)).hom s)",
   "branch": "sheaf-dag",

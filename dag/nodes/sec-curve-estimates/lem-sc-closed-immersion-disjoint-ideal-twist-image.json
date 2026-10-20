@@ -141,8 +141,8 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistImage",
-  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionDisjointIdealTwistImage.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistImage",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ClosedImmersionDisjointIdealTwistImage.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_disjointIdeal_twist_image",
   "statement": "theorem closedImmersion_disjointIdeal_twist_image {Y X : Scheme.{u}} (i : X ⟶ Y)\n    [IsClosedImmersion i] (I : Y.IdealSheafData)\n    (M : Y.Modules) [M.IsInvertible] (m : ℕ)\n    (e : (tensorPullback i).obj (M.tensorPow m) ≅\n      ((tensorPullback i).obj M).tensorPow m) :\n    let adj := Classical.choice (nonempty_tensorPullbackAdjunction i)\n    let φ := (adj.homEquiv I.toModules (SheafOfModules.unit X.ringCatSheaf)).symm\n      (I.toModulesι ≫ SheafOfModules.unitToPushforwardObjUnit i.toRingCatSheafHom)\n    let μ := I.toModulesι ▷ M.tensorPow m ≫ (λ_ (M.tensorPow m)).hom\n    let μ₁ := image.ι φ ▷ ((tensorPullback i).obj M).tensorPow m ≫\n      (λ_ (((tensorPullback i).obj M).tensorPow m)).hom\n    imageSubobject (image.ι μ ≫ adj.unit.app (M.tensorPow m) ≫\n      (pushforward i).map e.hom) = imageSubobject ((pushforward i).map (image.ι μ₁))",
   "branch": "sheaf-dag",

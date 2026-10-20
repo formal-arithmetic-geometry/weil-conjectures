@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyBoundary
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.Algebra.Homology.ConcreteCategory
 import WeilConjectures.CategoryTheory.Abelian.RightDerivedTriangleConnecting

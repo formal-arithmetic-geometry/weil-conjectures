@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-public import Sheaf.AlgebraicGeometry.Dimension
+public import WeilConjectures.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.CartierDivisorNowhereDense
 import Sheaf.AlgebraicGeometry.NowhereDenseDimZero
 import Sheaf.AlgebraicGeometry.ProperDimZeroFiniteOverField

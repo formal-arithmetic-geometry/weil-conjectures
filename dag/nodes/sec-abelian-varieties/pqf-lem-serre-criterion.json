@@ -1,257 +1,257 @@
 {
-  "id": "pqf-lem-serre-criterion",
-  "blueprint": {
-    "is": "pqf-lem-serre-criterion",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Serre's criterion for affineness",
-  "statement": "Let $X$ be a scheme. Assume that $X$ is quasi-compact, that $X$ is\nquasi-separated, and that $\\mathrm H^1(X,\\mathcal I)=0$ for every\nquasi-coherent sheaf of ideals $\\mathcal I\\subset\\mathcal O_X$ of\nfinite type. Then $X$ is affine.\n(*Stacks Project, Cohomology of Schemes, Lemma 30.3.2, Tag\n[01XG](https://stacks.math.columbia.edu/tag/01XG).*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-serre-criterion.md",
-    "place": "node pqf-lem-serre-criterion, order 540",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01XG"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "pqf-def-coherent",
-    "pqf-def-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "For each quasi-coherent ideal I and each first cohomology class x, use the finite-type representative theorem to choose K, its finite-type proof, an inclusion f, and y with H1(f)(y)=x. By the vanishing hypothesis H1(K) is a zero module and hence a subsingleton; y=0. The linear map H1(f) sends zero to zero, so x=0. Thus H1(I) is a subsingleton.",
-      "uses": [
-        "lem-pqf-finite-type-ideal-h1-representatives"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "Stacks Project",
-        "place": "Tag 01XG, first two sentences of proof, with Tags 01PG and 01FF",
-        "url": "https://stacks.math.columbia.edu/tag/01XG"
-      }
-    },
-    {
-      "text": "Apply quasiCompact_affine_of_h1_ideal_zero to this subsingleton statement for every quasi-coherent ideal. The required QuasiCompact identity-morphism instance follows from CompactSpace X and QuasiSeparatedSpace X. This concludes IsAffine X.",
-      "uses": [
-        "lem-pqf-quasicompact-h1-zero"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "Stacks Project",
-        "place": "Tag 01XG, last sentence of proof"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-pqf-finite-type-ideal-h1-representatives",
-    "lem-pqf-quasicompact-h1-zero"
-  ],
-  "proof_origin": {
-    "by": "document",
+ "id": "pqf-lem-serre-criterion",
+ "blueprint": {
+  "is": "pqf-lem-serre-criterion",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Serre's criterion for affineness",
+ "statement": "Let $X$ be a scheme. Assume that $X$ is quasi-compact, that $X$ is\nquasi-separated, and that $\\mathrm H^1(X,\\mathcal I)=0$ for every\nquasi-coherent sheaf of ideals $\\mathcal I\\subset\\mathcal O_X$ of\nfinite type. Then $X$ is affine.\n(*Stacks Project, Cohomology of Schemes, Lemma 30.3.2, Tag\n[01XG](https://stacks.math.columbia.edu/tag/01XG).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-serre-criterion.md",
+  "place": "node pqf-lem-serre-criterion, order 540",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01XG"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For each quasi-coherent ideal I and each first cohomology class x, use the finite-type representative theorem to choose K, its finite-type proof, an inclusion f, and y with H1(f)(y)=x. By the vanishing hypothesis H1(K) is a zero module and hence a subsingleton; y=0. The linear map H1(f) sends zero to zero, so x=0. Thus H1(I) is a subsingleton.",
+   "uses": [
+    "lem-pqf-finite-type-ideal-h1-representatives"
+   ],
+   "elementary": false,
+   "source": {
     "document": "Stacks Project",
     "place": "Tag 01XG, first two sentences of proof, with Tags 01PG and 01FF",
-    "url": "https://stacks.math.columbia.edu/tag/01XG",
-    "note": "The finite-type representative step is isolated in a new theorem; the vanishing argument and application of Tag 01XF are formal Lean proofs."
+    "url": "https://stacks.math.columbia.edu/tag/01XG"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Serre criterion: a quasi-compact quasi-separated scheme is affine if H^1 vanishes for every quasi-coherent finite type ideal",
-      "results": "AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen; no H^1/cohomological Serre criterion",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "IsAffine, H1, QuasiSeparated, QuasiCompact",
-      "results": "unknown identifier 'IsAffine' (0 hits)",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "Serre|quasi-separated.*affine|H\\^1 in Mathlib/AlgebraicGeometry",
-      "results": "no matching declaration",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 540,
-  "blueprint_uses": [
-    "pqf-def-coherent",
-    "pqf-def-cohomology"
-  ],
-  "uses_not_cited": [
-    "pqf-def-coherent",
-    "pqf-def-cohomology"
-  ],
-  "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Cohomology of Schemes, Lemma 30.3.2 ([Tag 01XG](https://stacks.math.columbia.edu/tag/01XG)): Serre's criterion, that a quasi-compact quasi-separated scheme is affine as soon as the first cohomology of every quasi-coherent sheaf of finite type ideals vanishes. No separate proof is given.",
-  "blueprint_proof_steps": [
-    {
-      "text": "This is the recorded classical input named in the statement, Stacks Project, Cohomology of Schemes, Lemma 30.3.2 ([Tag 01XG](https://stacks.math.columbia.edu/tag/01XG)): Serre's criterion, that a quasi-compact quasi-separated scheme is affine as soon as the first cohomology of every quasi-coherent sheaf of finite type ideals vanishes. No separate proof is given.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.IdealSheafData.surjective_subschemeι_appTop_of_subsingleton_H_one",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion",
-          "lines": [
-            56,
-            73
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.IdealSheafData.surjective_subschemeι_appTop_of_ofFiniteType",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion",
-          "lines": [
-            75,
-            132
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.span_eq_top_of_forall_mem_basicOpen",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion",
-          "lines": [
-            165,
-            224
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.exists_basicOpen_le_of_isClosed",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion",
-          "lines": [
-            226,
-            295
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.isAffine_of_subsingleton_H_one",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion",
-          "lines": [
-            297,
-            331
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-pqf-finite",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "pqf-lem-serre-criterion",
-    "worker": "stage1",
-    "summary": "Expanded the imported Tag 01XG proof into two steps. The first uses the directed-colimit decomposition of quasi-coherent ideal sheaves (Tag 01PG) and the existing quasi-compact/quasi-separated cohomology-colimit node to extend H^1-vanishing from finite-type ideals to all ideals. The second applies the quasi-compact Serre criterion (Tag 01XF). Added two unsplit statement-only children and verified that no sorry-free Lean declaration states the item or either child.",
-    "blueprint": "The two steps realize the sole blueprint proof sentence: the 01PG colimit reduction and the application of the quasi-compact vanishing criterion are the omitted proof behind the recorded Tag 01XG input.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
-        "why": "Step 1 uses its statement that cohomology on a quasi-compact open of a quasi-separated scheme commutes with directed colimits of sheaves of modules."
-      },
-      {
-        "node": "lemma-nagata-ideal-directed-union-finite-type",
-        "why": "Step 1 uses its first paragraph (Tag 01PG for ideals on a qcqs scheme) as a generic tool; reviewer R-psc0143 replaced the duplicate new node lem-pqf-qcoherent-ideal-colimit by it."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
-    "lemma-nagata-ideal-directed-union-finite-type",
-    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
-    "lemma-nagata-ideal-directed-union-finite-type"
-  ],
-  "reviewed": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-psc0143",
-    "group": "E1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psc0143 (reviewer sub-agent of L); spot-checked: Read Stacks 01XG/01XF/01PG; steps follow 01XG proof exactly; 01XF child is a real lemma (unsplit, deferred), statement matches Tag 01XF; item statement = blueprint, sole citer thm-pqf-finite-iff-proper-finite-fibres does not use it in a proof step; Mathlib has no Serre criterion (grep isAffine_of). FIX more, RETURN less: (1) class (b) duplicate: lem-pqf-qcoherent-ideal-colimit restates the first paragraph of existing lemma-nagata-ideal-directed-union-finite-type; dropped it and cited the existing node as a generic tool use in step 1; (2) C1/E: step 1 now states the elementary bridges (directed union of subsheaves is their colimit in Mod(O_X); qcqs gives the colimit node's hypotheses (1),(2)) and applies it with U=X, q=1.; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.SerreCriterionAffineness",
-    "declaration": "AlgebraicGeometry.Scheme.isAffine_of_finiteType_ideal_h1_zero",
-    "file": "lean/Sheaf/AlgebraicGeometry/SerreCriterionAffineness.lean",
-    "statement": "theorem isAffine_of_finiteType_ideal_h1_zero (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (h : ∀ I : X.IdealSheafData, I.toModules.IsFiniteType → IsZero ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj I.toModules)) : IsAffine X",
-    "branch": "sheaf-dag",
-    "by": "C1",
-    "date": "2026-10-11",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "AUTO",
-    "group": "C1",
-    "result": "pass",
-    "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "J1",
-    "result": "pass",
-    "landing": "20261012T144119-L-2098725",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be a scheme. Assume that $X$ is quasi-compact, that $X$ is\nquasi-separated, and that $\\mathrm H^1(X,\\mathcal I)=0$ for every\nquasi-coherent sheaf of ideals $\\mathcal I\\subset\\mathcal O_X$ of\nfinite type. Then $X$ is affine.",
-    "proof": [
-      {
-        "text": "*Reference: Stacks Project, Cohomology of Schemes, Lemma 30.3.2,\n[Tag 01XG](https://stacks.math.columbia.edu/tag/01XG).* We outline the\nargument of loc. cit.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "**Step 1: affine neighbourhoods of closed points of the form $X_f$.** Let\n$x\\in X$ be a closed point and $U\\ni x$ an affine open. Let\n$\\mathcal I\\supseteq\\mathcal I'$ be the quasi-coherent ideals of the\nreduced closed subschemes $Z=X\\smallsetminus U$ and $Z\\cup\\{x\\}$. Then\n$\\mathcal I/\\mathcal I'$ is the skyscraper sheaf $\\kappa(x)$ at $x$. As $X$\nis quasi-compact and quasi-separated, $\\mathcal I'$ is the filtered union of\nits quasi-coherent subideals of finite type, and $\\mathrm H^1(X,-)$ commutes\nwith filtered colimits on such $X$; so $\\mathrm H^1(X,\\mathcal I')=0$, and\n$\\Gamma(X,\\mathcal I)\\to\\kappa(x)$ is surjective. Choose\n$f\\in\\Gamma(X,\\mathcal I)\\subseteq\\Gamma(X,\\mathcal O_X)$ with $f(x)\\ne0$.\nThen $X_f\\subseteq U$, so $X_f=U_f$ is affine and contains $x$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "**Step 2: $X$ is affine.** Every nonempty closed subset of the quasi-compact\n$X$ contains a closed point, so the open sets $X_f$ of Step 1 cover $X$, and\nfinitely many, $X_{f_1},\\dots,X_{f_n}$, suffice. The morphism\n$\\mathcal O_X^{\\oplus n}\\to\\mathcal O_X$, $(g_i)\\mapsto\\sum_if_ig_i$, is\nsurjective; its kernel $\\mathcal K$ has a finite filtration\n$\\mathcal K\\cap\\mathcal O_X^{\\oplus i}$ whose graded pieces are\nquasi-coherent ideals of $\\mathcal O_X$, so by the same colimit argument\n$\\mathrm H^1(X,\\mathcal K)=0$. Hence $\\Gamma(X,\\mathcal O_X)^{\\oplus n}\\to\n\\Gamma(X,\\mathcal O_X)$ is surjective, i.e. $f_1,\\dots,f_n$ generate the\nunit ideal of $\\Gamma(X,\\mathcal O_X)$. A scheme covered by affine opens\n$X_{f_i}$ with $f_i\\in\\Gamma(X,\\mathcal O_X)$ generating the unit ideal is\naffine: the canonical morphism $X\\to\\Spec\\Gamma(X,\\mathcal O_X)$\nrestricts over each $D(f_i)$ to\n$X_{f_i}\\to\\Spec\\Gamma(X,\\mathcal O_X)_{f_i}$, which is an isomorphism\nbecause $\\Gamma(X_{f_i},\\mathcal O_X)=\\Gamma(X,\\mathcal O_X)_{f_i}$ for\nquasi-compact quasi-separated $X$ and $X_{f_i}$ is affine; and the $D(f_i)$\ncover the spectrum. So $X$ is affine.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Apply quasiCompact_affine_of_h1_ideal_zero to this subsingleton statement for every quasi-coherent ideal. The required QuasiCompact identity-morphism instance follows from CompactSpace X and QuasiSeparatedSpace X. This concludes IsAffine X.",
+   "uses": [
+    "lem-pqf-quasicompact-h1-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 01XG, last sentence of proof"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pqf-finite-type-ideal-h1-representatives",
+  "lem-pqf-quasicompact-h1-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 01XG, first two sentences of proof, with Tags 01PG and 01FF",
+  "url": "https://stacks.math.columbia.edu/tag/01XG",
+  "note": "The finite-type representative step is isolated in a new theorem; the vanishing argument and application of Tag 01XF are formal Lean proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Serre criterion: a quasi-compact quasi-separated scheme is affine if H^1 vanishes for every quasi-coherent finite type ideal",
+   "results": "AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen; no H^1/cohomological Serre criterion",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAffine, H1, QuasiSeparated, QuasiCompact",
+   "results": "unknown identifier 'IsAffine' (0 hits)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|quasi-separated.*affine|H\\^1 in Mathlib/AlgebraicGeometry",
+   "results": "no matching declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 540,
+ "blueprint_uses": [
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "uses_not_cited": [
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Cohomology of Schemes, Lemma 30.3.2 ([Tag 01XG](https://stacks.math.columbia.edu/tag/01XG)): Serre's criterion, that a quasi-compact quasi-separated scheme is affine as soon as the first cohomology of every quasi-coherent sheaf of finite type ideals vanishes. No separate proof is given.",
+ "blueprint_proof_steps": [
+  {
+   "text": "This is the recorded classical input named in the statement, Stacks Project, Cohomology of Schemes, Lemma 30.3.2 ([Tag 01XG](https://stacks.math.columbia.edu/tag/01XG)): Serre's criterion, that a quasi-compact quasi-separated scheme is affine as soon as the first cohomology of every quasi-coherent sheaf of finite type ideals vanishes. No separate proof is given.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.surjective_subschemeι_appTop_of_subsingleton_H_one",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion",
+     "lines": [
+      56,
+      73
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.surjective_subschemeι_appTop_of_ofFiniteType",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion",
+     "lines": [
+      75,
+      132
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.span_eq_top_of_forall_mem_basicOpen",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion",
+     "lines": [
+      165,
+      224
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_basicOpen_le_of_isClosed",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion",
+     "lines": [
+      226,
+      295
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.isAffine_of_subsingleton_H_one",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion",
+     "lines": [
+      297,
+      331
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-serre-criterion",
+  "worker": "stage1",
+  "summary": "Expanded the imported Tag 01XG proof into two steps. The first uses the directed-colimit decomposition of quasi-coherent ideal sheaves (Tag 01PG) and the existing quasi-compact/quasi-separated cohomology-colimit node to extend H^1-vanishing from finite-type ideals to all ideals. The second applies the quasi-compact Serre criterion (Tag 01XF). Added two unsplit statement-only children and verified that no sorry-free Lean declaration states the item or either child.",
+  "blueprint": "The two steps realize the sole blueprint proof sentence: the 01PG colimit reduction and the application of the quasi-compact vanishing criterion are the omitted proof behind the recorded Tag 01XG input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+    "why": "Step 1 uses its statement that cohomology on a quasi-compact open of a quasi-separated scheme commutes with directed colimits of sheaves of modules."
+   },
+   {
+    "node": "lemma-nagata-ideal-directed-union-finite-type",
+    "why": "Step 1 uses its first paragraph (Tag 01PG for ideals on a qcqs scheme) as a generic tool; reviewer R-psc0143 replaced the duplicate new node lem-pqf-qcoherent-ideal-colimit by it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "lemma-nagata-ideal-directed-union-finite-type",
+  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "lemma-nagata-ideal-directed-union-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psc0143",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psc0143 (reviewer sub-agent of L); spot-checked: Read Stacks 01XG/01XF/01PG; steps follow 01XG proof exactly; 01XF child is a real lemma (unsplit, deferred), statement matches Tag 01XF; item statement = blueprint, sole citer thm-pqf-finite-iff-proper-finite-fibres does not use it in a proof step; Mathlib has no Serre criterion (grep isAffine_of). FIX more, RETURN less: (1) class (b) duplicate: lem-pqf-qcoherent-ideal-colimit restates the first paragraph of existing lemma-nagata-ideal-directed-union-finite-type; dropped it and cited the existing node as a generic tool use in step 1; (2) C1/E: step 1 now states the elementary bridges (directed union of subsheaves is their colimit in Mod(O_X); qcqs gives the colimit node's hypotheses (1),(2)) and applies it with U=X, q=1.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.SerreCriterionAffineness",
+  "declaration": "AlgebraicGeometry.Scheme.isAffine_of_finiteType_ideal_h1_zero",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SerreCriterionAffineness.lean",
+  "statement": "theorem isAffine_of_finiteType_ideal_h1_zero (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (h : ∀ I : X.IdealSheafData, I.toModules.IsFiniteType → IsZero ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj I.toModules)) : IsAffine X",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T144119-L-2098725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be a scheme. Assume that $X$ is quasi-compact, that $X$ is\nquasi-separated, and that $\\mathrm H^1(X,\\mathcal I)=0$ for every\nquasi-coherent sheaf of ideals $\\mathcal I\\subset\\mathcal O_X$ of\nfinite type. Then $X$ is affine.",
+  "proof": [
+   {
+    "text": "*Reference: Stacks Project, Cohomology of Schemes, Lemma 30.3.2,\n[Tag 01XG](https://stacks.math.columbia.edu/tag/01XG).* We outline the\nargument of loc. cit.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**Step 1: affine neighbourhoods of closed points of the form $X_f$.** Let\n$x\\in X$ be a closed point and $U\\ni x$ an affine open. Let\n$\\mathcal I\\supseteq\\mathcal I'$ be the quasi-coherent ideals of the\nreduced closed subschemes $Z=X\\smallsetminus U$ and $Z\\cup\\{x\\}$. Then\n$\\mathcal I/\\mathcal I'$ is the skyscraper sheaf $\\kappa(x)$ at $x$. As $X$\nis quasi-compact and quasi-separated, $\\mathcal I'$ is the filtered union of\nits quasi-coherent subideals of finite type, and $\\mathrm H^1(X,-)$ commutes\nwith filtered colimits on such $X$; so $\\mathrm H^1(X,\\mathcal I')=0$, and\n$\\Gamma(X,\\mathcal I)\\to\\kappa(x)$ is surjective. Choose\n$f\\in\\Gamma(X,\\mathcal I)\\subseteq\\Gamma(X,\\mathcal O_X)$ with $f(x)\\ne0$.\nThen $X_f\\subseteq U$, so $X_f=U_f$ is affine and contains $x$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**Step 2: $X$ is affine.** Every nonempty closed subset of the quasi-compact\n$X$ contains a closed point, so the open sets $X_f$ of Step 1 cover $X$, and\nfinitely many, $X_{f_1},\\dots,X_{f_n}$, suffice. The morphism\n$\\mathcal O_X^{\\oplus n}\\to\\mathcal O_X$, $(g_i)\\mapsto\\sum_if_ig_i$, is\nsurjective; its kernel $\\mathcal K$ has a finite filtration\n$\\mathcal K\\cap\\mathcal O_X^{\\oplus i}$ whose graded pieces are\nquasi-coherent ideals of $\\mathcal O_X$, so by the same colimit argument\n$\\mathrm H^1(X,\\mathcal K)=0$. Hence $\\Gamma(X,\\mathcal O_X)^{\\oplus n}\\to\n\\Gamma(X,\\mathcal O_X)$ is surjective, i.e. $f_1,\\dots,f_n$ generate the\nunit ideal of $\\Gamma(X,\\mathcal O_X)$. A scheme covered by affine opens\n$X_{f_i}$ with $f_i\\in\\Gamma(X,\\mathcal O_X)$ generating the unit ideal is\naffine: the canonical morphism $X\\to\\Spec\\Gamma(X,\\mathcal O_X)$\nrestricts over each $D(f_i)$ to\n$X_{f_i}\\to\\Spec\\Gamma(X,\\mathcal O_X)_{f_i}$, which is an isomorphism\nbecause $\\Gamma(X_{f_i},\\mathcal O_X)=\\Gamma(X,\\mathcal O_X)_{f_i}$ for\nquasi-compact quasi-separated $X$ and $X_{f_i}$ is affine; and the $D(f_i)$\ncover the spectrum. So $X$ is affine.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

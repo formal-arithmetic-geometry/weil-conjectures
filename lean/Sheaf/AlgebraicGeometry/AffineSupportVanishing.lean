@@ -9,7 +9,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
-public import Sheaf.AlgebraicGeometry.EtaleSupport
+public import WeilConjectures.AlgebraicGeometry.EtaleSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import all Sheaf.AlgebraicGeometry.Sites.SupportedTorsionCohomologyBound
 import all WeilConjectures.AlgebraicGeometry.Sites.SupportDimension

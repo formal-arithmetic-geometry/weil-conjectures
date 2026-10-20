@@ -115,8 +115,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CyclicDerivedHomCohomologyComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/CyclicDerivedHomCohomologyComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CyclicDerivedHomCohomologyComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CyclicDerivedHomCohomologyComparison.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_cyclicDerivedHom_cohomology_comparison",
   "statement": "theorem exists_cyclicDerivedHom_cohomology_comparison {X Y : Scheme.{u}}\n    (h : Y ⟶ X) (e q : ℕ) :\n    let P := (uliftYoneda.{u + 1} ⋙\n      (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙\n      presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n      upperStar AddCommGrpCat.{u + 1} h ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙\n        preadditiveYoneda.obj\n          (((DerivedCategory.Plus.singleFunctor _ 0).obj (Y.constantZMod e))⟦(q : ℤ)⟧)\n    ∀ W : X.Etale,\n      ∃ E : P.obj (op W) ≃+ Sheaf.H ((pullback h W.hom).constantZMod e) q,\n        ∀ (V : X.Etale) (v : V ⟶ W) (ξ : P.obj (op W)),\n          cohomologyMap\n            (pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp)\n              (by simp)) _ q (E ξ) = 0 → P.map v.op ξ = 0",
   "branch": "sheaf-dag",

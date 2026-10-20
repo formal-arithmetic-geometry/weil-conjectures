@@ -125,9 +125,9 @@
  },
  "lead_note": "2026-10-10 L (R-chh1937): E7 statement change by reviewer: 'countable coproducts' -> 'arbitrary coproducts' so that def-pc-compact-object (defined only for arbitrary coproducts) applies; Tag 094A assumes only countable sums and countable compactness. Downstream users (lem-pc-brown-cohomological-representability, lem-pc-compact-generators-build-objects) assume set-indexed coproducts. The report at 77e5e80b1 still contradicts itself (Report and Review say arbitrary/strengthened, Second reading says countable restored); the merged statement follows the former.",
  "lean": {
-  "module": "Sheaf.CategoryTheory.CompactHomHocolim",
+  "module": "WeilConjectures.CategoryTheory.CompactHomHocolim",
   "declaration": "CategoryTheory.compact_hom_hocolim",
-  "file": "lean/Sheaf/CategoryTheory/CompactHomHocolim.lean",
+  "file": "lean/WeilConjectures/CategoryTheory/CompactHomHocolim.lean",
   "statement": "theorem compact_hom_hocolim {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [HasCoproducts.{w} C] (K : C) (hK : IsCompactObject K) (X : ℕ ⥤ C) (Y : C) (q : (∐ fun n : ULift.{w} ℕ ↦ X.obj n.down) ⟶ Y) (r : Y ⟶ (∐ fun n : ULift.{w} ℕ ↦ X.obj n.down)⟦(1 : ℤ)⟧) (hT : Triangle.mk (𝟙 (∐ fun n : ULift.{w} ℕ ↦ X.obj n.down) - Sigma.desc (fun n : ULift.{w} ℕ ↦ X.map (homOfLE (Nat.le_succ n.down)) ≫ Sigma.ι (fun k : ULift.{w} ℕ ↦ X.obj k.down) ⟨n.down + 1⟩)) q r ∈ distTriang C) : ∃ φ : colimit (X ⋙ coyoneda.obj (op K)) → (K ⟶ Y), (∀ (n : ℕ) (f : K ⟶ X.obj n), φ (colimit.ι (X ⋙ coyoneda.obj (op K)) n f) = f ≫ Sigma.ι (fun k : ULift.{w} ℕ ↦ X.obj k.down) ⟨n⟩ ≫ q) ∧ Function.Bijective φ",
   "branch": "sheaf-dag",
   "by": "G1",

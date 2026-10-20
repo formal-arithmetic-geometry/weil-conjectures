@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
+public import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction

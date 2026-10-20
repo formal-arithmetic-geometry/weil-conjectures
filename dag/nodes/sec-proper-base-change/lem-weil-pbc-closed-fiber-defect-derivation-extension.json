@@ -118,8 +118,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.ClosedFiberDefectDerivationExtension",
-  "file": "lean/Sheaf/RingTheory/ClosedFiberDefectDerivationExtension.lean",
+  "module": "WeilConjectures.RingTheory.ClosedFiberDefectDerivationExtension",
+  "file": "lean/WeilConjectures/RingTheory/ClosedFiberDefectDerivationExtension.lean",
   "declaration": "Algebra.exists_closedFiber_defect_derivation",
   "statement": "theorem exists_closedFiber_defect_derivation\n    (R : Type u) (T : Type v) [CommRing R] [CommRing T]\n    [IsLocalRing R] [IsLocalRing T] [IsNoetherianRing T]\n    [Algebra R T] [IsLocalHom (algebraMap R T)]\n    (t : List R) (ht : Ideal.span {r | r ∈ t} = maximalIdeal R) :\n    let L : Ideal T := (maximalIdeal R).map (algebraMap R T)\n    letI : Algebra (R ⧸ maximalIdeal R) (T ⧸ L) :=\n      Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :\n        maximalIdeal R ≤ L.comap (algebraMap R T))\n    FormallySmoothAdic (R ⧸ maximalIdeal R) (T ⧸ L)\n        ((maximalIdeal T).map (Ideal.Quotient.mk L)) →\n    ∀ (D : Type w) [CommRing D] [Algebra R D] (J : Ideal D), J ^ 2 = ⊥ →\n      ∀ (g : T →ₐ[R] D ⧸ J) (f : T →+* D),\n      (Ideal.Quotient.mk J).comp f = g.toRingHom →\n      (∀ r ∈ t, f (algebraMap R T r) = algebraMap R D r) →\n      (∀ x ∈ maximalIdeal T, ∀ d : D, Ideal.Quotient.mk J d = g x →\n        ∀ j ∈ J, d * j = 0) →\n      ∃ δ : T →+ D, δ 1 = 0 ∧ (∀ x, δ x ∈ J) ∧\n        (∀ x z, δ (x * z) = f x * δ z + f z * δ x) ∧\n        ∀ r : R, δ (algebraMap R T r) =\n          f (algebraMap R T r) - algebraMap R D r",
   "branch": "sheaf-dag",

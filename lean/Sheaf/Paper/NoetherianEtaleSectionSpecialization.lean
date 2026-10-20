@@ -23,7 +23,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality

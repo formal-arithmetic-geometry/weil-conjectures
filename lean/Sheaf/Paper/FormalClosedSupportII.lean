@@ -40,6 +40,7 @@ import all Sheaf.Paper.CondensedFiniteFreeTensorExact
 import all Sheaf.Paper.CondensedFiniteFreeInternalHomColimits
 import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+public import Sheaf.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 
 /-!
 # Closed support, truncation and sequential derived limits

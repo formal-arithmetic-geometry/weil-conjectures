@@ -6,7 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison
-import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceTransition
+import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceTransition
 import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceRestriction
 import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms

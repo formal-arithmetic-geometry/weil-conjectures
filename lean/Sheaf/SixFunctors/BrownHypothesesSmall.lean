@@ -7,7 +7,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.EssentiallySmall
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-import Sheaf.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
+import WeilConjectures.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
 import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization

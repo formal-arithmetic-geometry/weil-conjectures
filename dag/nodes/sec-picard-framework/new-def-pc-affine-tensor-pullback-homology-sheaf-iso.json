@@ -79,8 +79,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.AffineTensorPullbackHomologySheafIso",
-  "file": "lean/Sheaf/Algebra/Homology/AffineTensorPullbackHomologySheafIso.lean",
+  "module": "WeilConjectures.Algebra.Homology.AffineTensorPullbackHomologySheafIso",
+  "file": "lean/WeilConjectures/Algebra/Homology/AffineTensorPullbackHomologySheafIso.lean",
   "declaration": "AlgebraicGeometry.affineTensorPullbackHomologySheafIso",
   "statement": "def affineTensorPullbackHomologySheafIso\n    (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A')\n    (M : CochainComplex (ModuleCat.{u} A) ℤ) (i : ℤ) :\n    let P := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n      (@id (ModuleCat.{u} A ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)\n    let T := ((Scheme.Modules.tensorPullback\n      (Spec.map (CommRingCat.ofHom φ))).mapHomologicalComplex (.up ℤ)).obj P\n    let C := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M\n    (tilde.functor (.of A')).obj (C.homology i) ≅\n      (DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i).obj\n          (DerivedCategory.Q.obj T)",
   "branch": "sheaf-dag",

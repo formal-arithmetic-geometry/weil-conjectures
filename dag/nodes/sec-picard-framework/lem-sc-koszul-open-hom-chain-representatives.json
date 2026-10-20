@@ -104,8 +104,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KoszulOpenHomChainRepresentatives",
-  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenHomChainRepresentatives.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.KoszulOpenHomChainRepresentatives",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/KoszulOpenHomChainRepresentatives.lean",
   "declaration": "AlgebraicGeometry.koszulOpenHom_chain_representatives",
   "statement": "theorem koszulOpenHom_chain_representatives\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [HasDerivedCategory.{v} (ModuleCat.{u} A)]\n    (F : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent) :\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0\n    let D := koszulCechHomDiagram A r f\n      (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F)\n    ∃ a : ∀ e : ℕ, (koszulOpenObject A r f e ⟶ DerivedCategory.Q.obj F) ≃\n        H.obj (DerivedCategory.Q.obj (D.obj e)),\n      (∀ (e : ℕ) (t : koszulOpenSheafComplex A r f e ⟶ F),\n        a e (DerivedCategory.Q.map t) = koszulOpenHomStageClass A r f F e t) ∧\n      ∀ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ DerivedCategory.Q.obj F),\n        ∃ t : koszulOpenSheafComplex A r f e ⟶ F, DerivedCategory.Q.map t = φ",
   "branch": "sheaf-dag",

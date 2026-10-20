@@ -101,8 +101,8 @@
  "unit": "sk-prop-ext-invariance",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Curve.PicBoundaryBaseChangeTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicBoundaryBaseChangeTransport.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.PicBoundaryBaseChangeTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Curve/PicBoundaryBaseChangeTransport.lean",
   "declaration": "AlgebraicGeometry.pic_boundary_base_change_transport",
   "statement": "theorem pic_boundary_base_change_transport\n    {k k' : Type u} [Field k] [Field k'] [Algebra k k'] [IsAlgClosed k] [IsAlgClosed k']\n    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]\n    (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g]\n    [hsm : SmoothOfRelativeDimension 1 c.g]\n    [hsm' : SmoothOfRelativeDimension 1\n      (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).g]\n    (P₀ : closedPoints c.Z) (hP₀ : P₀.val ∉ Set.range c.i.base) :\n    let b := Spec.map (CommRingCat.ofHom (algebraMap k k'))\n    let c' := c.baseChange b\n    let j := Scheme.Pic.mapHom (pullback.fst c.g b)\n    ∃ Q₀ : closedPoints c'.Z, Q₀.val ∉ Set.range c'.i.base ∧\n      ∀ (G : Subgroup c.Z.Pic) (_ : (G : Set c.Z.Pic) = c.g.picZero)\n        (Λ : Subgroup G),\n        Subgroup.map G.subtype Λ = Subgroup.closure\n          {L | ∃ P : closedPoints c.Z, P.val ∉ Set.range c.i.base ∧\n            L = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P /\n              @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P₀} →\n      ∀ (G' : Subgroup c'.Z.Pic) (_ : (G' : Set c'.Z.Pic) = c'.g.picZero)\n        (Λ' : Subgroup G'),\n        Subgroup.map G'.subtype Λ' = Subgroup.closure\n          {L | ∃ P : closedPoints c'.Z, P.val ∉ Set.range c'.i.base ∧\n            L = @Scheme.Pic.ofClosedPoint k' _ c'.Z ⟨c'.g⟩ hsm' P /\n              @Scheme.Pic.ofClosedPoint k' _ c'.Z ⟨c'.g⟩ hsm' Q₀} →\n        (∀ L : G, j L.val ∈ G') ∧\n        ∃ ej : Λ ≃* Λ', ∀ L : Λ, (ej L : c'.Z.Pic) = j L.val",
   "branch": "sheaf-dag",

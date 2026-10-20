@@ -6,11 +6,11 @@ Authors: SHEAF groups V2, T2
 module
 
 public import Sheaf.CategoryTheory.FilteredHomologyExactCouple
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.CategoryTheory.FilteredHomologyTowerForwardRepresentatives
 import Sheaf.CategoryTheory.FilteredHomologyCoupleComputations
-import Sheaf.CategoryTheory.DerivedCoupleExact
+import WeilConjectures.CategoryTheory.DerivedCoupleExact
 import Sheaf.CategoryTheory.FiniteCycleFormula
 import all WeilConjectures.CategoryTheory.FiniteCycleDerivedComparison
 

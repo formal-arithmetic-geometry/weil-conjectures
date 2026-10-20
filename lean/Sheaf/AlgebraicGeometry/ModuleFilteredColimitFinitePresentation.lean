@@ -12,10 +12,9 @@ public import Mathlib.Topology.QuasiSeparated
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FinitePresentationRepresentatives
 import Sheaf.AlgebraicGeometry.FinitePresentationBiprod
 import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationCokernel
-import Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension
-import Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension
+import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationExtension
+import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension
 import Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-!

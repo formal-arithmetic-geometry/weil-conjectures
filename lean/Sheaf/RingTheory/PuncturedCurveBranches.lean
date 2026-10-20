@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.RingTheory.KrullDimension.Field
 import Mathlib.RingTheory.DiscreteValuationRing.TFAE
 import Sheaf.RingTheory.QuasiExcellentNagata
-import Sheaf.RingTheory.SemilocalNormalizationDimOne
+import WeilConjectures.RingTheory.SemilocalNormalizationDimOne
 import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.RingTheory.LocalCurvePrincipalTotalFractions
 import Mathlib.AlgebraicGeometry.OpenImmersion

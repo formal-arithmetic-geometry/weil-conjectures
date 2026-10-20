@@ -5,7 +5,7 @@ Authors: SHEAF group K4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
+public import WeilConjectures.AlgebraicGeometry.QCohInverseBaseChangeMate
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 

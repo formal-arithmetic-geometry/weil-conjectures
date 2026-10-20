@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
-import Sheaf.AlgebraicGeometry.FlatFibreDimensionStrata
+import WeilConjectures.AlgebraicGeometry.FlatFibreDimensionStrata
 
 /-! # FlatFibreComponentDimensionSpecialization
 

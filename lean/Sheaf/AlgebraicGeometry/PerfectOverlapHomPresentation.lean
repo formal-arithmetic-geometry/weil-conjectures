@@ -5,9 +5,9 @@ Authors: SHEAF group F4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuityData
-public import Sheaf.AlgebraicGeometry.PerfectHomPresentation
-import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
+public import WeilConjectures.AlgebraicGeometry.PerfectOverlapHomContinuityData
+public import WeilConjectures.AlgebraicGeometry.PerfectHomPresentation
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackPerfect
 import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization
 
 /-! # Geometric Hom presentation on a compact two-open overlap

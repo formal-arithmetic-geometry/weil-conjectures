@@ -1,8 +1,8 @@
 module
-public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
-public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+public import WeilConjectures.AlgebraicGeometry.PerfectHomPushPullCocone
+public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedCore
-import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectHomOpenRestrictedQCoh
 @[expose] public section
 universe u w
 open CategoryTheory CategoryTheory.Limits

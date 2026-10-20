@@ -68,8 +68,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RelativeMVRestrictionSecond",
-  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVRestrictionSecond.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionSecond",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RelativeMVRestrictionSecond.lean",
   "declaration": "AlgebraicGeometry.relativeMV_restriction_naturality",
   "statement": "theorem relativeMV_restriction_naturality\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') (W U : X.Opens) (i : W ≤ U) :\n    (derivedPullback g).map\n        (relativeMVRestriction (X.homOfLE i) U.ι W.ι (Scheme.homOfLE_ι X i) f K) ≫\n      (relativeMVLocalArrow f f' g g' hpull K K' φ W).hom =\n      (relativeMVLocalArrow f f' g g' hpull K K' φ U).hom ≫\n        relativeMVRestriction (relativeMVOpenLift g' i) (pullback.fst g' U.ι)\n          (pullback.fst g' W.ι) (pullback.lift_fst _ _ _) f' K'",
   "branch": "sheaf-dag",

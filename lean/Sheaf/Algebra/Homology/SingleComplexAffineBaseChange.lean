@@ -6,8 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import Sheaf.AlgebraicGeometry.SingleComplexQcqsInduction
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.SingleComplexQcqsInduction
 
 /-! # The affine single-complex base-change criterion
 

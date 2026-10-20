@@ -109,8 +109,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KoszulOpenSectionsUnit",
-  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenSectionsUnit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.KoszulOpenSectionsUnit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/KoszulOpenSectionsUnit.lean",
   "declaration": "AlgebraicGeometry.derivedOpenStructure_evaluation_unit",
   "statement": "theorem derivedOpenStructure_evaluation_unit\n    (A : Type u) [CommRing A] (U : (Spec (.of A)).Opens)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{v} (ModuleCat.{u} A)] :\n    let R := ((SheafOfModules.overFunctor.{u}\n      (moduleRings (Spec (.of A)).toRingedSpace) U) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))\n        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n        (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0\n    let G := (affineOpenSections A U).rightDerivedFunctor\n    ∃ b : ∀ E : schemeDerivedCategory (Spec (.of A)),\n      (R.obj (koszulOpenStructure A) ⟶ R.obj E) ≃ H.obj (G.obj E),\n      (∀ (E E' : schemeDerivedCategory (Spec (.of A))) (g : E ⟶ E')\n        (ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E),\n        b E' (ψ ≫ R.map g) = H.map (G.map g) (b E ψ)) ∧\n      b (koszulOpenStructure A) (𝟙 _) = derivedOpenStructureUnit A U",
   "branch": "sheaf-dag",

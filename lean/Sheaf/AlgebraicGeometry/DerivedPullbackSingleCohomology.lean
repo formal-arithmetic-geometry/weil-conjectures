@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.DerivedSingleOpenLocus
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 

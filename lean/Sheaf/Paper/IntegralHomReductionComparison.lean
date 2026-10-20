@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.IntegralDerivedReduction
 public import Sheaf.Paper.IntegralReductionTowerWellDefined
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.Algebra.Homology.HomComplexProjections
+public import WeilConjectures.Algebra.Homology.HomComplexProjections
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # The evaluation-defined integral Hom reduction comparison

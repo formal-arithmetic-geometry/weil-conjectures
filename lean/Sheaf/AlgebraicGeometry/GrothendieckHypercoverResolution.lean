@@ -8,7 +8,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
+import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 
 /-! # An explicit injective-resolution comparison for hypercover sections
 

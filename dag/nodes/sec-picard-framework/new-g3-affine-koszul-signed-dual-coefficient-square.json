@@ -101,8 +101,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineKoszulSignedDualCoefficientSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulSignedDualCoefficientSquare.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineKoszulSignedDualCoefficientSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineKoszulSignedDualCoefficientSquare.lean",
   "declaration": "AlgebraicGeometry.affine_koszul_signed_dual_coefficient_square",
   "statement": "theorem affine_koszul_signed_dual_coefficient_square\n    {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))\n    (n : ℕ) (f : Fin n → Γ(Y, U.1)) :\n    let A := (Γ(Y, U.1) : Type u)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let TC := T.mapHomologicalComplex (ComplexShape.up ℤ)\n    let E := TC.obj\n      ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)\n    ∃ (bO : signedSheafDualComplex (R := U.1.toScheme.toRingedSpace.sheaf)\n          E (T.obj (ModuleCat.of A A)) ≅\n        TC.obj ((ExteriorAlgebra.koszulDualComplex A n f).extend\n          ComplexShape.embeddingUpNat))\n      (bQ : signedSheafDualComplex (R := U.1.toScheme.toRingedSpace.sheaf)\n          E (T.obj (ModuleCat.of A (A ⧸ I))) ≅\n        TC.obj ((ExteriorAlgebra.koszulQuotientDualComplex A I n f).extend\n          ComplexShape.embeddingUpNat)),\n      signedSheafDualCoefficientMap E (T.map (ModuleCat.ofHom I.mkQ)) ≫ bQ.hom =\n        bO.hom ≫ TC.map (HomologicalComplex.extendMap\n          (ExteriorAlgebra.koszulCoefficientReduction A I n f)\n          ComplexShape.embeddingUpNat)",
   "branch": "sheaf-dag",

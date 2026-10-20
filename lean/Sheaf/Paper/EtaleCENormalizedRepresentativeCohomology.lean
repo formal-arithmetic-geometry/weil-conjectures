@@ -6,7 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import Sheaf.Paper.EtaleCETotalSections
-public import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+public import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
 import Sheaf.Paper.EtaleCENormalizedRowRepresentatives
 
 /-! # Normalized CE cohomology on representatives

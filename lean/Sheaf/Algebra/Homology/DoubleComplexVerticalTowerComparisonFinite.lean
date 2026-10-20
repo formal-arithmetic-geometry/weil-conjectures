@@ -5,7 +5,7 @@ import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplex
 import WeilConjectures.Algebra.Homology.FirstQuadrantExtendedTotalExact
 import Sheaf.Algebra.Homology.FirstQuadrantVerticalConeFiltration
-import Sheaf.CategoryTheory.DegreewiseFilteredAcyclic
+import WeilConjectures.CategoryTheory.DegreewiseFilteredAcyclic
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.Algebra.Homology.VerticalCutoffQuotientComparison
 @[expose] public section

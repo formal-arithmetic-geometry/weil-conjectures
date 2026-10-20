@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Abelian.Filtration
 public import Sheaf.Algebra.Homology.TwoStepFilteredModuleDerived
 public import Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.CategoryTheory.Localization.Construction

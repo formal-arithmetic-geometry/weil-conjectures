@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
-public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
+public import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
 
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

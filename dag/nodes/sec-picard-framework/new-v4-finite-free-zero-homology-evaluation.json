@@ -89,8 +89,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.FiniteFreeZeroHomologyEvaluation",
-  "file": "lean/Sheaf/Algebra/Homology/FiniteFreeZeroHomologyEvaluation.lean",
+  "module": "WeilConjectures.Algebra.Homology.FiniteFreeZeroHomologyEvaluation",
+  "file": "lean/WeilConjectures/Algebra/Homology/FiniteFreeZeroHomologyEvaluation.lean",
   "declaration": "CategoryTheory.finiteFreeZero_homologyEvaluation",
   "statement": "theorem finiteFreeZero_homologyEvaluation\n    {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}\n    (R : Sheaf S CommRingCat.{u})\n    (E K : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (n : ℤ) (hK : ∀ k : ℤ, k ≠ 0 → IsZero (K.homology k))\n    (hzero : ∀ a b : ℤ, E.d a b = 0)\n    (hsupp : ∃ a b : ℤ, ∀ k : ℤ, k < a ∨ b < k → IsZero (E.X k))\n    (hfree : ∀ k : ℤ, ∃ r : ℕ, Nonempty (E.X k ≅\n      SheafOfModules.free (ULift.{u} (Fin r)))) :\n    let P := homComplex (R := R) E K\n    let π := (Classical.choose (homComplex_projections_exists (R := R)))\n      E K n (-n) 0 (by omega)\n    ∃ f : P.homology n ⟶ SheafOfModules.homObj (R := R)\n        (E.homology (-n)) (K.homology 0),\n      IsIso f ∧ ∃ c : P.cycles n ⟶\n        SheafOfModules.homObj (R := R) (E.cycles (-n)) (K.cycles 0),\n      c ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.iCycles 0) =\n        P.iCycles n ≫ π ≫ SheafOfModules.homObjMap (R := R) (E.iCycles (-n)) (𝟙 _) ∧\n      c ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.homologyπ 0) =\n        P.homologyπ n ≫ f ≫ SheafOfModules.homObjMap (R := R) (E.homologyπ (-n)) (𝟙 _)",
   "branch": "sheaf-dag",

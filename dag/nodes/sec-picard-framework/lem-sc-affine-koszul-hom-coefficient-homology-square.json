@@ -105,8 +105,8 @@
  "title": "Homology transport of the affine Koszul coefficient square",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineKoszulHomCoefficientHomologySquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulHomCoefficientHomologySquare.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineKoszulHomCoefficientHomologySquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineKoszulHomCoefficientHomologySquare.lean",
   "declaration": "AlgebraicGeometry.affine_koszul_hom_coefficient_homology_square",
   "statement": "theorem affine_koszul_hom_coefficient_homology_square\n    {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))\n    (n m : ℕ) (f : Fin n → Γ(Y, U.1))\n    (H : CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ ⥤\n      CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ)\n    (hH : H =\n      let A := (Γ(Y, U.1) : Type u)\n      let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n      let E := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)\n      (homComplexFunctor (R := U.1.toScheme.toRingedSpace.sheaf)).obj (op E)) :\n    let A := (Γ(Y, U.1) : Type u)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let S := CochainComplex.singleFunctor U.1.toScheme.Modules 0\n    let D := HomologicalComplex.homologyFunctor U.1.toScheme.Modules\n      (ComplexShape.up ℤ) (m : ℤ)\n    let G := S ⋙ H ⋙ D\n    ∃ (cO : G.obj (T.obj (ModuleCat.of A A)) ≅\n        T.obj ((ExteriorAlgebra.koszulDualComplex A n f).homology m))\n      (cQ : G.obj (T.obj (ModuleCat.of A (A ⧸ I))) ≅\n        T.obj ((ExteriorAlgebra.koszulQuotientDualComplex A I n f).homology m)),\n      G.map (T.map (ModuleCat.ofHom I.mkQ)) ≫ cQ.hom = cO.hom ≫ T.map\n        (HomologicalComplex.homologyMap\n          (ExteriorAlgebra.koszulCoefficientReduction A I n f) m)",
   "branch": "sheaf-dag",

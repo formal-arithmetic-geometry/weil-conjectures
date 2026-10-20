@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.CategoryTheory.Limits.Final
 
 /-!

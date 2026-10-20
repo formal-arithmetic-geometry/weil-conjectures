@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLocalRingColimit
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyLocalRingColimit
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 

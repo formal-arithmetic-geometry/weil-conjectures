@@ -7,9 +7,9 @@ module
 
 public import Sheaf.CategoryTheory.FilteredComplexQuotientCoherence
 import Sheaf.CategoryTheory.FilteredComplexQuotientComponents
-import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
-import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover
-import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+import WeilConjectures.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
+import WeilConjectures.CategoryTheory.FilteredComplexSuccessorCyclesCover
+import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
 
 /-! # Descent of filtered maps to coherent quotient pages
 

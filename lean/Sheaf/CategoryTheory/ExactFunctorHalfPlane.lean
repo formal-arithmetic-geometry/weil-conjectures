@@ -5,7 +5,7 @@ Authors: SHEAF group C4
 -/
 module
 
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import all WeilConjectures.CategoryTheory.FinitePageGradedQuotient
 import all WeilConjectures.CategoryTheory.NormalizedGradedFiniteKernel
 

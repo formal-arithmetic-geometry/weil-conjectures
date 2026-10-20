@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardConstantSectionsTensor
+public import WeilConjectures.AlgebraicGeometry.PicardConstantSectionsTensor
 
 /-! # Pointwise scalar extension of a constant module presheaf
 

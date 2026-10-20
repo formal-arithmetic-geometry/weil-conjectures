@@ -107,8 +107,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.FiniteFreeZeroHomologyProduct",
-  "file": "lean/Sheaf/Algebra/Homology/FiniteFreeZeroHomologyProduct.lean",
+  "module": "WeilConjectures.Algebra.Homology.FiniteFreeZeroHomologyProduct",
+  "file": "lean/WeilConjectures/Algebra/Homology/FiniteFreeZeroHomologyProduct.lean",
   "declaration": "CategoryTheory.finiteFreeZero_homologyProduct",
   "statement": "theorem finiteFreeZero_homologyProduct\n    {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}\n    (R : Sheaf S CommRingCat.{u})\n    (E K : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (n : ℤ) (hzero : ∀ a b : ℤ, E.d a b = 0)\n    (hsupp : ∃ a b : ℤ, ∀ k : ℤ, k < a ∨ b < k → IsZero (E.X k))\n    (hfree : ∀ k : ℤ, ∃ r : ℕ, Nonempty (E.X k ≅\n      SheafOfModules.free (ULift.{u} (Fin r)))) :\n    let P := homComplex (R := R) E K\n    ∃ g : ∀ (p q : ℤ), p + n = q →\n        (P.homology n ⟶ SheafOfModules.homObj (R := R) (E.X p) (K.homology q)),\n      Nonempty (IsLimit (Fan.mk (P.homology n)\n        (fun p : ℤ ↦ g p (p + n) rfl))) ∧\n      ∀ (p q : ℤ) (hpq : p + n = q)\n        (d : P.cycles n ⟶ SheafOfModules.homObj (R := R) (E.X p) (K.cycles q)),\n        d ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.iCycles q) =\n          P.iCycles n ≫ (Classical.choose (homComplex_projections_exists (R := R)))\n            E K n p q hpq →\n        d ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.homologyπ q) =\n          P.homologyπ n ≫ g p q hpq",
   "branch": "sheaf-dag",

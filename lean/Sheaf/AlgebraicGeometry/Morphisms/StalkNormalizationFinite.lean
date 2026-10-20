@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import Mathlib.AlgebraicGeometry.Normalization
-import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
+import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosure
 
 /-!

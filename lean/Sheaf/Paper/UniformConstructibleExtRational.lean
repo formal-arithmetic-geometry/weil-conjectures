@@ -15,7 +15,7 @@ import Sheaf.Paper.ConstructibleExtContinuity
 import Sheaf.Paper.CoefficientHeartFiltration
 import Sheaf.Paper.PadicIntegersInvertEll
 import Sheaf.Paper.CartesianCoefficientsFiniteFree
-import Sheaf.Algebra.Homology.FilteredColimitsTensor
+import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
 import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
 import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients

@@ -7,14 +7,14 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 
 import Sheaf.AlgebraicGeometry.ProperFlatSingleOpenPseudoCoherent
 import Sheaf.AlgebraicGeometry.ProperFlatSingleLocalFiniteTor
-import Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension
-import Sheaf.AlgebraicGeometry.OpenRestrictionPerfectLocalModels
+import WeilConjectures.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension
+import WeilConjectures.AlgebraicGeometry.OpenRestrictionPerfectLocalModels
 import Mathlib.CategoryTheory.Localization.Equivalence
 
 /-! # Perfection of the direct image of a relatively flat single module

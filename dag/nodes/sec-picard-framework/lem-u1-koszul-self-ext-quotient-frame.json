@@ -113,8 +113,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KoszulSelfExtQuotientFrame",
-  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSelfExtQuotientFrame.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.KoszulSelfExtQuotientFrame",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/KoszulSelfExtQuotientFrame.lean",
   "declaration": "AlgebraicGeometry.koszul_self_ext_quotient_frame",
   "statement": "theorem koszul_self_ext_quotient_frame\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (U : Y.affineOpens) (n : ℕ)\n    (m : ℕ) (f : Fin m → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    Nonempty (G.over U.1 ≅\n      (∐ fun _ : ULift.{u} (Set.powersetCard (Fin m) n) ↦ B).over U.1)",
   "branch": "sheaf-dag",

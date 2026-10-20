@@ -1,8 +1,8 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-import Sheaf.AlgebraicGeometry.LocalStrictPerfectStalkProjectiveModel
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
+import WeilConjectures.AlgebraicGeometry.LocalStrictPerfectStalkProjectiveModel
 import Sheaf.AlgebraicGeometry.StalkFreeResidueCohomologyComparison
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.TensorProduct.Finite

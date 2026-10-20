@@ -112,8 +112,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedGlobalSectionsCohomologyCoproduct",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedGlobalSectionsCohomologyCoproduct.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedGlobalSectionsCohomologyCoproduct",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedGlobalSectionsCohomologyCoproduct.lean",
   "declaration": "AlgebraicGeometry.derivedGlobalSections_cohomology_coproduct",
   "statement": "theorem derivedGlobalSections_cohomology_coproduct (X : Scheme.{u})\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :\n    letI := HasDerivedCategory.standard\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))\n    let F := (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor ⋙\n      DerivedCategory.homologyFunctor\n        (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) 0 ⋙\n      forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat\n    ∀ (I : Type u) (E : I → schemeDerivedQCohCategory X)\n      (S : schemeDerivedCategory X) (ι : ∀ i, (E i).obj ⟶ S),\n      IsColimit (Cofan.mk S ι) →\n      Function.Bijective (DirectSum.toAddMonoid (fun i ↦ (F.map (ι i)).hom) :\n        (⨁ i : I, F.obj (E i).obj) →+ F.obj S) ",
   "branch": "sheaf-dag",

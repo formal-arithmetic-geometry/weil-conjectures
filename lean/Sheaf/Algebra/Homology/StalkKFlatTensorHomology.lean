@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
 import WeilConjectures.Algebra.Homology.TensorRestrictExtendScalars
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import Sheaf.Algebra.Homology.StalkTensorComplex
+import WeilConjectures.Algebra.Homology.StalkTensorComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful

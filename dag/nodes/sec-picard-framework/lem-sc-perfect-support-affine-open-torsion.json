@@ -98,8 +98,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectSupportAffineOpenTorsion",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectSupportAffineOpenTorsion.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectSupportAffineOpenTorsion",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectSupportAffineOpenTorsion.lean",
   "declaration": "AlgebraicGeometry.Scheme.perfect_support_affine_open_torsion",
   "statement": "theorem perfect_support_affine_open_torsion\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (f : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u}))\n    (E E' : schemeDerivedQCohCategory X)\n    (hE : X.IsPerfect E.obj)\n    (hSupport : ∀ (i : ℤ) (x : X), x ∉ X.zeroLocus (U := ⊤) {f.val (op ⊤)} →\n      Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E'.obj).val.presheaf x)))\n    (U : X.Opens) (hU : IsAffineOpen U) :\n    let R := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory\n    ∀ (k : ℤ) (β : R.obj E.obj ⟶ R.obj (E'.obj⟦k⟧)),\n      ∃ n : ℕ, R.map (schemeDerivedScalar X (f ^ n) (𝟙 E.obj)) ≫ β = 0",
   "branch": "sheaf-dag",

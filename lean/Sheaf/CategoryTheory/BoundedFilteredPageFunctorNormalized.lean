@@ -6,18 +6,18 @@ Authors: SHEAF group Q107
 module
 
 public import Sheaf.CategoryTheory.BoundedFilteredComplexPageCore
-public import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+public import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
 import Sheaf.CategoryTheory.FilteredQuotientComparisons
-import Sheaf.CategoryTheory.FilteredComplexPageDifferential
-import Sheaf.CategoryTheory.FilteredQuotientPageMaps
-import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover
+import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
+import WeilConjectures.CategoryTheory.FilteredQuotientPageMaps
+import WeilConjectures.CategoryTheory.FilteredComplexSuccessorCyclesCover
 import Sheaf.CategoryTheory.FilteredQuotientHomologyNaturality
 import Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison
 import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
 import Sheaf.CategoryTheory.FilteredQuotientMapRestrictions
 import Sheaf.CategoryTheory.FilteredQuotientCanonicalStructure
 import Sheaf.CategoryTheory.BoundedFilteredCoupleAbutment
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!

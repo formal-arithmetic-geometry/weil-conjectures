@@ -113,8 +113,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenDerivedStalkRepresentativeHomology",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenDerivedStalkRepresentativeHomology.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenDerivedStalkRepresentativeHomology",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenDerivedStalkRepresentativeHomology.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openDerivedStalk_representative_homology",
   "statement": "theorem openDerivedStalk_representative_homology\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsOpenImmersion j] (y : Y) (i : ℤ)\n    (N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :\n    let F := forget₂ (ModuleCat.{u} (Z.presheaf.stalk (j y))) AddCommGrpCat.{u}\n    let F0 := forget₂ (ModuleCat.{u} (Y.presheaf.stalk y)) AddCommGrpCat.{u}\n    let S := (RingedSpace.moduleStalkFunctor Z.toRingedSpace (j y)).mapHomologicalComplex\n      (.up ℤ)\n    let S0 := (RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapHomologicalComplex\n      (.up ℤ)\n    let R := (Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)\n    let HU := comparisonStalkCohomology Y y i ⋙ F0\n    F.map (comparisonStalkHomologyIso Z (j y) N i).inv ≫\n        (openDerivedStalkIso j y i).hom.app (DerivedCategory.Q.obj N) ≫\n        HU.map (openRestrictionRepresentativeIso j N).inv =\n      (((S.obj N).sc i).mapHomologyIso F).inv ≫\n        ShortComplex.homologyMap\n          ((N.sc i).mapNatTrans\n            (show (RingedSpace.moduleStalkFunctor Z.toRingedSpace (j y) ⋙ F) ⟶\n              (openRestrictionFunctor j ⋙\n                RingedSpace.moduleStalkFunctor Y.toRingedSpace y ⋙ F0) from\n              (Scheme.Modules.restrictStalkNatIso j y).inv)) ≫\n        (((S0.obj (R.obj N)).sc i).mapHomologyIso F0).hom ≫\n        F0.map (comparisonStalkHomologyIso Y y (R.obj N) i).inv",
   "branch": "sheaf-dag",

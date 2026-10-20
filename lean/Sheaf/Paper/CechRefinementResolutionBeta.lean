@@ -6,10 +6,10 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.Paper.CechRefinementCochainMap
-public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
 import Sheaf.Paper.CechRefinementPushforwardTotal
 import Sheaf.Paper.CechPushforwardLambdaColumns
-import Sheaf.Algebra.Homology.FirstQuadrantTotalComparison
+import WeilConjectures.Algebra.Homology.FirstQuadrantTotalComparison
 
 /-! # Augmentation compatibility for the canonical refinement map
 

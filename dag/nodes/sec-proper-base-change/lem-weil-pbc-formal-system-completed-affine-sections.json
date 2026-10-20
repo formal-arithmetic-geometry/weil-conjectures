@@ -94,8 +94,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalSystemCompletedAffineSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalSystemCompletedAffineSections.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalSystemCompletedAffineSections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalSystemCompletedAffineSections.lean",
   "declaration": "AlgebraicGeometry.formalSystem_completed_affine_sections",
   "statement": "theorem formalSystem_completed_affine_sections\n    {Y : Scheme.{u}} [IsNoetherian Y] (J : Y.IdealSheafData) (U : Y.affineOpens) :\n    let B := Γ(Y, U.1)\n    let R := AdicCompletion (J.ideal U) B\n    let S := Spec (CommRingCat.of R)\n    let g : S ⟶ Y := Spec.map (CommRingCat.ofHom (algebraMap B R)) ≫\n      U.2.isoSpec.inv ≫ U.1.ι\n    let T := Scheme.Modules.tensorPullback g\n    let E := moduleSpecΓFunctor (R := CommRingCat.of R)\n    let L := ModuleCat.restrictScalars (algebraMap B R)\n    ∃ e : ∀ G : CoherentFormalModule Y J,\n      G.obj ⋙ SheafOfModules.evaluation Y.ringCatSheaf (op U.1) ≅\n        (G.obj ⋙ T ⋙ E) ⋙ L,\n      ∀ (G H : CoherentFormalModule Y J) (a : G ⟶ H),\n        Functor.whiskerRight a.hom\n            (SheafOfModules.evaluation Y.ringCatSheaf (op U.1)) ≫ (e H).hom =\n          (e G).hom ≫ Functor.whiskerRight\n            (Functor.whiskerRight (Functor.whiskerRight a.hom T) E) L",
   "branch": "sheaf-dag",

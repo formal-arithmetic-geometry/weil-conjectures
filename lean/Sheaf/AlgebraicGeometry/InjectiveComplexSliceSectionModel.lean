@@ -13,7 +13,7 @@ public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Category.Ring.Limits
-import Sheaf.Algebra.Homology.LocalizedRestrictionAdjunction
+import WeilConjectures.Algebra.Homology.LocalizedRestrictionAdjunction
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 

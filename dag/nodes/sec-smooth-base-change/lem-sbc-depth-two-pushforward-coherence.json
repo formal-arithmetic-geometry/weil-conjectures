@@ -104,8 +104,8 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPushforwardCoherence",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoPushforwardCoherence.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoPushforwardCoherence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/DepthTwoPushforwardCoherence.lean",
   "declaration": "AlgebraicGeometry.Scheme.depth_two_pushforward_coherence",
   "statement": "theorem depth_two_pushforward_coherence\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (hboundary : ∀ y : L, y ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y) (L.presheaf.stalk y))\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) [IsFinite f] [Etale f] :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    B.toModule.IsQuasicoherent ∧\n      (∀ V : L.Opens, IsAffineOpen V → (B.hom.hom.app (op V)).hom.Finite) ∧\n      ∀ y : L, y ∉ U →\n        letI : Algebra (L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj) :=\n          ((TopCat.Presheaf.stalkFunctor CommRingCat y).map B.hom.hom).hom.toAlgebra\n        ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj),\n          letI := hfinite\n          (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj)",
   "branch": "sheaf-dag",

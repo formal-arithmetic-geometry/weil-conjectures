@@ -5,11 +5,11 @@ Authors: SHEAF group B4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenComparison
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.RelativeMayerVietoris
-import Sheaf.AlgebraicGeometry.SingleComplexOpenNestedComparison
+import WeilConjectures.AlgebraicGeometry.SingleComplexOpenNestedComparison
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Source-open union gluing for the single-complex comparison

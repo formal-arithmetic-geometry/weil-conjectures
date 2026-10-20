@@ -91,8 +91,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenExtensionProjectionFormulaAux",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenExtensionProjectionFormulaAux.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenExtensionProjectionFormulaAux",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenExtensionProjectionFormulaAux.lean",
   "declaration": "AlgebraicGeometry.openExtension_projection_formula_of_adjunction",
   "statement": "theorem openExtension_projection_formula_of_adjunction (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let R := (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E\n    ∀ (m : R.Monoidal),\n      letI := m\n      ∀ (J : schemeDerivedCategory U.toScheme ⥤ schemeDerivedCategory X)\n        (adj : J ⊣ R),\n        ∀ (A : schemeDerivedCategory U.toScheme) (K : schemeDerivedCategory X),\n          IsIso ((adj.homEquiv (A ⊗ R.obj K) (J.obj A ⊗ K)).symm\n            ((adj.unit.app A ⊗ₘ 𝟙 (R.obj K)) ≫\n              (Functor.Monoidal.μIso R (J.obj A) K).hom))",
   "branch": "sheaf-dag",

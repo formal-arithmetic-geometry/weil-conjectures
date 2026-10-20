@@ -99,8 +99,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalBeta",
-  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechPullbackTotalBeta.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalBeta",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Curve/EtaleAdditiveCechPullbackTotalBeta.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.additiveCech_pullback_total_beta",
   "statement": "theorem additiveCech_pullback_total_beta\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (I : InjectiveResolution X.etaleAdditiveSheaf)\n    (J : InjectiveResolution Y.etaleAdditiveSheaf)\n    (α : I.cocomplex ⟶\n      ((Etale.lowerStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex\n        (.up ℕ)).obj J.cocomplex)\n    (hα : I.ι.f 0 ≫ α.f 0 = Scheme.etaleAdditiveSheafToLowerStar g ≫\n      (Etale.lowerStar AddCommGrpCat.{u + 1} g).map (J.ι.f 0))\n    (n : ℕ) (t : additiveCechTotal U I ⟶ additiveCechTotal V J)\n    (ht : IsAdditiveCechPullbackTotalMap g U V hinter I J α t) :\n    ∀ (x : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).X n)\n      (x' : (cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).X n),\n      (∀ y : Fin (n + 1) → ι,\n        cechCoordinate Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf) n y x' =\n          (show Y.Modules from SheafOfModules.unit Y.ringCatSheaf).presheaf.map\n            (homOfLE (hinter n y)).op\n            ((SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom).val.app\n              (op (⨅ l, U (y l)))\n              (cechCoordinate X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf) n y x))) →\n      t.f n (additiveCechBeta U I n x) = additiveCechBeta V J n x'",
   "branch": "sheaf-dag",

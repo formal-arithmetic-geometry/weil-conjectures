@@ -18,7 +18,7 @@ import all Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
 import all Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
 /-! # Completed pullback on the published completed-coefficient categories
 

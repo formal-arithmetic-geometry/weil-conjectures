@@ -5,11 +5,11 @@ Authors: SHEAF group H4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitCounit
+public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitCounit
 import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
-import Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization
 
 /-! # Unit laws on K-flat representatives
 

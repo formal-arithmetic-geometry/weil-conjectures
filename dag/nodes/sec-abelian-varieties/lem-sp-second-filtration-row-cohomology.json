@@ -122,8 +122,8 @@
  "unit": "sk-prop-av-pqf-finite",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.SecondFiltrationRowCohomology",
-  "file": "lean/Sheaf/CategoryTheory/SecondFiltrationRowCohomology.lean",
+  "module": "WeilConjectures.CategoryTheory.SecondFiltrationRowCohomology",
+  "file": "lean/WeilConjectures/CategoryTheory/SecondFiltrationRowCohomology.lean",
   "declaration": "CategoryTheory.Functor.secondFiltration_row_cohomology",
   "statement": "theorem secondFiltration_row_cohomology\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s))\n    (L : DecreasingFiltration\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n        (ComplexShape.up ℤ)))\n    (hL : ∀ p n : ℤ, L.complexStep p n =\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).secondFiltration n).step\n        p) :\n    ∃ (E : CohomologicalSpectralSequence B 0)\n      (e₀ : ∀ p q : ℤ, (E.page 0).X (p, q) ≅ (L.gradedPiece p).X (p + q))\n      (e₁ : ∀ (r : ℕ) (s : ℤ), (E.page 1).X (s, (r : ℤ)) ≅\n        ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).homology r),\n      (∀ p q : ℤ, (E.page 0).d (p, q) (p, q + 1) ≫ (e₀ p (q + 1)).hom =\n        (e₀ p q).hom ≫ (L.gradedPiece p).d (p + q) (p + (q + 1))) ∧\n      (∀ (p q t : ℤ) (ht : 1 ≤ t),\n        ∃ hBZ : L.complexBoundaries p (p + q) t ≤ L.complexCycles p (p + q) t,\n          Nonempty ((E.page t (le_trans (by decide : (0 : ℤ) ≤ 1) ht)).X (p, q) ≅\n            cokernel (Subobject.ofLE _ _ hBZ))) ∧\n      (∀ (r : ℕ) (s : ℤ),\n        (E.page 1).d (s, (r : ℤ)) (s + 1, (r : ℤ)) ≫ (e₁ r (s + 1)).hom =\n          (r : ℤ).negOnePow • ((e₁ r s).hom ≫ HomologicalComplex.homologyMap\n            ((F.mapHomologicalComplex (ComplexShape.up ℕ)).map (I.d s (s + 1))) r)) ∧\n      (∀ p q : ℤ, q < 0 → IsZero ((E.page 1).X (p, q)))",
   "branch": "sheaf-dag",

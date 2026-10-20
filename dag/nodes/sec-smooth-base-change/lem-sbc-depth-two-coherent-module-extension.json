@@ -77,8 +77,8 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoCoherentModuleExtension",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoCoherentModuleExtension.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoCoherentModuleExtension",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/DepthTwoCoherentModuleExtension.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_depth_two_coherent_module_extension",
   "statement": "theorem exists_depth_two_coherent_module_extension\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (hboundary : ∀ y : L, y ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y) (L.presheaf.stalk y))\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) [IsFinite f] [Etale f] :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    ∃ N : L.Modules,\n      N.IsQuasicoherent ∧\n      (∀ V : L.Opens, IsAffineOpen V →\n        Module.Finite (L.presheaf.obj (op V)) (N.val.obj (op V))) ∧\n      (∀ y : L, y ∉ U →\n        ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y),\n          letI := hfinite\n          (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)) ∧\n      Nonempty (Modules.restrict N U.ι ≅ Modules.restrict B.toModule U.ι)",
   "branch": "sheaf-dag",

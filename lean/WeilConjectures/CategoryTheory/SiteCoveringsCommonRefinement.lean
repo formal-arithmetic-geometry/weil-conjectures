@@ -1,8 +1,9 @@
 /-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group F1
+Authors: Bin Wu
 -/
+
 module
 
 public import Mathlib.CategoryTheory.Sites.Hypercover.Zero
@@ -15,8 +16,6 @@ Source: Stacks Project, Sites, Lemma 7.10.5 (Tag 00W6) and its proof
 -/
 
 @[expose] public section
-
-set_option autoImplicit false
 
 universe u w w' t
 

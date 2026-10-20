@@ -131,8 +131,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenNestedComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenNestedComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SingleComplexOpenNestedComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SingleComplexOpenNestedComparison.lean",
   "declaration": "AlgebraicGeometry.singleComplexOpenComparison_nested_isIso_iff",
   "statement": "theorem singleComplexOpenComparison_nested_isIso_iff\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (h : g' ≫ f = f' ≫ g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (W Z : X.Opens) (hZW : Z ≤ W) :\n    let hW : pullback.snd g' W.ι ≫ (W.ι ≫ f) =\n        (pullback.fst g' W.ι ≫ f') ≫ g := by\n      rw [← pullback.condition_assoc, Category.assoc, h, ← Category.assoc]\n    let φW : (derivedPullback (pullback.snd g' W.ι)).obj\n        ((derivedPullback W.ι).obj K) ⟶\n        (derivedPullback (pullback.fst g' W.ι)).obj K' :=\n    (((Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition))))\n      (pullback.snd g' W.ι) W.ι).hom.app K ≫\n    eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)\n      (pullback.condition (f := g') (g := W.ι)).symm) ≫\n    ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition))))\n      (pullback.fst g' W.ι) g').inv.app K ≫\n    (derivedPullback (pullback.fst g' W.ι)).map φ)\n    IsIso (singleComplexOpenComparison f f' g g' h K K' φ Z) ↔\n      IsIso (singleComplexOpenComparison (W.ι ≫ f) (pullback.fst g' W.ι ≫ f')\n        g (pullback.snd g' W.ι) hW ((derivedPullback W.ι).obj K)\n        ((derivedPullback (pullback.fst g' W.ι)).obj K') φW (W.ι ⁻¹ᵁ Z))",
   "branch": "sheaf-dag",

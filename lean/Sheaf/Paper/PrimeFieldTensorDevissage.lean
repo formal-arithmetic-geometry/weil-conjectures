@@ -5,7 +5,7 @@ Authors: SHEAF group Q51
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Sheaf.CategoryTheory.LocallyConstantFiniteTypeModules
 public import WeilConjectures.Algebra.Homology.MixedTotalTensor

@@ -25,7 +25,7 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.AlgebraicGeometry.GlobalSectionsProper
 import Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable
-import Sheaf.AlgebraicGeometry.FractionFieldSectionsBaseChange
+import WeilConjectures.AlgebraicGeometry.FractionFieldSectionsBaseChange
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 import WeilConjectures.Mathlib.RingTheory.Etale.Field
@@ -34,7 +34,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
-import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
+import WeilConjectures.AlgebraicGeometry.SteinFactorizationAffine
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteProjectiveBundle
 

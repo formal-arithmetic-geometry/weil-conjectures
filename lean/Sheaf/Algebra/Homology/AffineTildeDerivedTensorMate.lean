@@ -6,7 +6,7 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeRepresentative
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison

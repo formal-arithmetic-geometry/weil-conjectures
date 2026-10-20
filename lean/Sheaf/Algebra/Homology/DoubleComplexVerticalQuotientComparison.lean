@@ -7,7 +7,7 @@ module
 public import WeilConjectures.Algebra.Homology.DoubleComplexVerticalTowerMaps
 import WeilConjectures.Algebra.Homology.RestrictedComplementaryTruncationComparison
 import Sheaf.Algebra.Homology.FirstQuadrantVerticalConeFiltration
-import Sheaf.CategoryTheory.DegreewiseFilteredAcyclic
+import WeilConjectures.CategoryTheory.DegreewiseFilteredAcyclic
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # The quotient of a smart vertical cutoff

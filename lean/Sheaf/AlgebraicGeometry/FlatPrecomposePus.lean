@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 import Mathlib.CategoryTheory.Adjunction.Mates

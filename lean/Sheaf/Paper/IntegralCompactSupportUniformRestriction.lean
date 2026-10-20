@@ -11,8 +11,8 @@ public import Sheaf.Paper.ProjectionCompactification
 public import Sheaf.Paper.ProperBaseChangeFourCorners
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Linear.LinearFunctor
-import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
-import Sheaf.AlgebraicGeometry.Dimension
+import WeilConjectures.AlgebraicGeometry.DimensionAffineOpenCover
+import WeilConjectures.AlgebraicGeometry.Dimension
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation

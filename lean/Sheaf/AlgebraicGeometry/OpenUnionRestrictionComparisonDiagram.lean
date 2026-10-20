@@ -6,7 +6,7 @@ Authors: SHEAF group F2
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonData
+import WeilConjectures.AlgebraicGeometry.OpenUnionRestrictionComparisonData
 import Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonCoherence
 
 /-! # Canonical comparison diagram on inverse image opens of an open union

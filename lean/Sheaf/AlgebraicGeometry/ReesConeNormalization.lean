@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.PurityNormalCone
 public import Sheaf.AlgebraicGeometry.VectorBundleZeroSection
-public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+public import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 
 /-! # The normalized extended-Rees and relative-Spec cone comparison
 

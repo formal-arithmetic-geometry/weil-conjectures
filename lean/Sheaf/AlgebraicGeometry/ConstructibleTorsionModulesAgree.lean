@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocalCyclicModuleForget
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
-import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 
 /-!
 # Constructibility of torsion abelian sheaves and of cyclic-coefficient module sheaves

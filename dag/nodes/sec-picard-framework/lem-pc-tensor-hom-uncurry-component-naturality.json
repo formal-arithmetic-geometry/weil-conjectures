@@ -110,8 +110,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryComponentNaturality",
-  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryComponentNaturality.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryComponentNaturality",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CanonicalTensorHomUncurryComponentNaturality.lean",
   "declaration": "AlgebraicGeometry.schemeTensorHomUncurryComponent_natural",
   "statement": "theorem schemeTensorHomUncurryComponent_natural (X : Scheme.{u})\n    (P P' L L' M M' : CochainComplex\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (a : P' ⟶ P) (b : L' ⟶ L) (c : M ⟶ M')\n    (φ : P ⟶ homComplex (R := X.sheaf) L\n      ((schemeHomKInjectiveResolution X).obj M))\n    (p q n : ℤ) (h : q + p = n) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    schemeTensorHomUncurryComponent X P' L' M'\n        (a ≫ φ ≫ (Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))).map\n          (X := (op L, (schemeHomKInjectiveResolution X).obj M))\n          (Y := (op L', (schemeHomKInjectiveResolution X).obj M'))\n          (b.op, (schemeHomKInjectiveResolution X).map c)) p q n h =\n      (a.f p ⊗ₘ b.f q) ≫ schemeTensorHomUncurryComponent X P L M φ p q n h ≫\n        ((schemeHomKInjectiveResolution X).map c).f n",
   "branch": "sheaf-dag",

@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import Sheaf.LinearAlgebra.FiniteIndexSplitting
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
@@ -77,6 +76,18 @@ lemma isUnit_of_forall_ne_zero (f : locallyFiniteFunctions l T) (hf : ∀ t, f.1
 section ConstantRank
 
 variable {κ ι : Type*} [Fintype κ] [Fintype ι] [DecidableEq κ] [DecidableEq ι]
+
+/-- The splitting `κ ≃ Fin r ⊕ (κ ∖ range ρ)` along an injection `ρ : Fin r → κ`. -/
+noncomputable def sumComplEquiv {r : ℕ} (ρ : Fin r → κ) (hρ : Function.Injective ρ) :
+    κ ≃ Fin r ⊕ {i // i ∉ Set.range ρ} :=
+  (Equiv.sumCompl (· ∈ Set.range ρ)).symm.trans
+    (Equiv.sumCongr (Equiv.ofInjective ρ hρ).symm (Equiv.refl _))
+
+omit [Fintype κ] in
+@[simp]
+lemma sumComplEquiv_symm_inl {r : ℕ} (ρ : Fin r → κ) (hρ : Function.Injective ρ) (a : Fin r) :
+    (sumComplEquiv ρ hρ).symm (Sum.inl a) = ρ a := by
+  simp [sumComplEquiv]
 
 /-- Pulled back along maps into a neighbourhood of a point, a matrix of locally finite functions
 of constant rank `r` is equivalent to the matrix `[[1, 0], [0, 0]]` with an `r × r` identity

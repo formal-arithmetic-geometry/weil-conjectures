@@ -12,9 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.SelfTorConormalDualChartIso
-import Sheaf.RingTheory.SelfTorConormalRegularIso
+import WeilConjectures.RingTheory.SelfTorConormalRegularIso
 
 /-! # The dual exterior-to-self-Tor comparison
 

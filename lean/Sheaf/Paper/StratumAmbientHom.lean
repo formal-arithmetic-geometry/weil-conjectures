@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -39,8 +39,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.HomTensorTotal
-import Sheaf.Algebra.Homology.RhomGlobalSections
+import WeilConjectures.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.RhomGlobalSections
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed

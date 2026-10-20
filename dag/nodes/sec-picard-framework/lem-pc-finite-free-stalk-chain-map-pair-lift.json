@@ -99,8 +99,8 @@
  "unit": "sk-thm-picard-perfect",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapPairLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkChainMapPairLift.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteFreeStalkChainMapPairLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteFreeStalkChainMapPairLift.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_restrict_chainMap_pair_of_stalk",
   "statement": "theorem exists_restrict_chainMap_pair_of_stalk\n    {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)\n    (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)\n    (hfree : ∀ n : ℤ, ∃ s : ℕ, Nonempty\n      (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (i : ℤ) (r : ℕ) (y : Y)\n    (f : (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj P) ⟶\n      (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj\n        ((CochainComplex.singleFunctor Y.Modules i).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))))\n    (g : (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj\n        ((CochainComplex.singleFunctor Y.Modules i).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))) ⟶\n      (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj P)) :\n    ∃ (V : Y.Opens) (hyV : y ∈ V),\n      let R := (restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ)\n      let S := (Modules.pullback (V.fromSpecStalkOfMem y hyV)).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n      let T := (Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n      let Q := ((CochainComplex.singleFunctor Y.Modules i).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))\n      ∃ (eP : S.obj (R.obj P) ≅ T.obj P) (eQ : S.obj (R.obj Q) ≅ T.obj Q)\n        (fV : R.obj P ⟶ R.obj Q) (gV : R.obj Q ⟶ R.obj P),\n        S.map fV = eP.hom ≫ f ≫ eQ.inv ∧ S.map gV = eQ.hom ≫ g ≫ eP.inv",
   "branch": "sheaf-dag",

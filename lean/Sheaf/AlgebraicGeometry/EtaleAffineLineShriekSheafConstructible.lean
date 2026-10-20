@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
@@ -17,7 +17,7 @@ import Mathlib.CategoryTheory.Filtered.Connected
 import WeilConjectures.AlgebraicGeometry.NoetherianApproximation
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.AlgebraicGeometry.CompactificationCategory
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence

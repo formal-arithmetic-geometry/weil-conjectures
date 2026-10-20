@@ -101,8 +101,8 @@
  "unit": "sk-prop-av-pqf-finite",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.DegreewiseFilteredStableQuotient",
-  "file": "lean/Sheaf/CategoryTheory/DegreewiseFilteredStableQuotient.lean",
+  "module": "WeilConjectures.CategoryTheory.DegreewiseFilteredStableQuotient",
+  "file": "lean/WeilConjectures/CategoryTheory/DegreewiseFilteredStableQuotient.lean",
   "declaration": "CategoryTheory.degreewiseFiltered_stable_quotient",
   "statement": "theorem degreewiseFiltered_stable_quotient\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : CochainComplex C ℤ) (L : DecreasingFiltration K)\n    (hfinite : ∀ n : ℤ, ∃ lo hi : ℤ,\n      L.complexStep lo n = ⊤ ∧ L.complexStep hi n = ⊥)\n    (Y : ℤ → C) (c : ∀ n : ℤ, K.homology n ≅ Y n) :\n    ∃ H : ∀ n : ℤ, DecreasingFiltration (Y n),\n      (∀ n : ℤ, (H n).IsFinite) ∧\n      (∀ p n : ℤ, (H n).step p =\n        (Subobject.«exists» (c n).hom).obj\n          (imageSubobject (HomologicalComplex.homologyMap (L.step p).arrow n))) ∧\n      (∀ p n : ℤ, ∃ (t : ℤ) (ht : 1 ≤ t), ∀ (r : ℤ) (hr : t ≤ r),\n        ∃ hBZ : L.complexBoundaries p n r ≤ L.complexCycles p n r,\n          Nonempty (cokernel (Subobject.ofLE _ _ hBZ) ≅ (H n).gradedPiece p))",
   "branch": "sheaf-dag",

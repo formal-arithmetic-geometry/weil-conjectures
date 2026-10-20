@@ -120,8 +120,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable",
-  "file": "lean/Sheaf/RepresentationTheory/LocallyConstantCochainsEffaceable.lean",
+  "module": "WeilConjectures.RepresentationTheory.LocallyConstantCochainsEffaceable",
+  "file": "lean/WeilConjectures/RepresentationTheory/LocallyConstantCochainsEffaceable.lean",
   "declaration": "Rep.exists_locallyConstantCochains_effaceable",
   "statement": "theorem exists_locallyConstantCochains_effaceable\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    (A : Type v) [Category.{w} A] [Abelian A]\n    (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G)\n    : ∃ C : A ⥤ CochainComplex AddCommGrpCat.{max u s} ℕ,\n      ∃ e : ∀ (M : A) (n : ℕ),\n          (C.obj M).X n ≃+ LocallyConstant (Fin n → G) (E.functor.obj M).obj.V,\n        (∀ (M N : A) (f : M ⟶ N) (n : ℕ) (x : (C.obj M).X n) (g : Fin n → G),\n          e N n (((C.map f).f n) x) g =\n            (E.functor.map f).hom.hom (e M n x g)) ∧\n        (∀ (M : A) (n : ℕ) (x : (C.obj M).X n) (g : Fin (n + 1) → G),\n          e M (n + 1) (((C.obj M).d n (n + 1)) x) g =\n            (E.functor.obj M).obj.ρ (g 0) (e M n x (fun k ↦ g k.succ)) +\n              ∑ k : Fin (n + 1),\n                (-1 : ℤ) ^ (k.val + 1) • e M n x (Fin.contractNth k (· * ·) g)) ∧\n        ∃ T : CohomologicalDeltaFunctor A AddCommGrpCat.{max u s},\n          T.F = (fun q ↦ C ⋙ HomologicalComplex.homologyFunctor\n            AddCommGrpCat.{max u s} (ComplexShape.up ℕ) q) ∧\n          Nonempty (T.F 0 ≅\n            (E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙\n              forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat)) ∧\n          (∀ (n : ℕ), 0 < n → ∀ (M : A),\n            ∃ (N : A) (f : M ⟶ N), Mono f ∧ (T.F n).map f = 0)",
   "branch": "sheaf-dag",

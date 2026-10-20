@@ -119,8 +119,8 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.TensorPullbackOpenSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackOpenSquare.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.TensorPullbackOpenSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TensorPullbackOpenSquare.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPullback_openSquare",
   "statement": "theorem exists_tensorPullback_openSquare {A B C : Scheme.{w}}\n    (j : A ⟶ B) [IsOpenImmersion j] (b : B ⟶ C) (V : C.Opens)\n    (a : A ⟶ V.toScheme) (hj : j ''ᵁ ⊤ = b ⁻¹ᵁ V)\n    (h : j ≫ b = a ≫ V.ι) (G : C.Modules) :\n    ∃ e : ((tensorPullback b).obj G).restrict j ≅\n        (tensorPullback a).obj (G.restrict V.ι),\n      ∀ (t : Γ(G, V)),\n        e.hom.app ⊤\n          (((tensorPullback b).obj G).presheaf.map (eqToHom hj).op\n            (((Classical.choose (exists_tensorPullbackAdjunction b)).unit.app G).app V t)) =\n          tensorPullbackTopSection a (G.restrict V.ι)\n            (G.presheaf.map (eqToHom (by simp : V.ι ''ᵁ ⊤ = V)).op t)",
   "branch": "sheaf-dag",

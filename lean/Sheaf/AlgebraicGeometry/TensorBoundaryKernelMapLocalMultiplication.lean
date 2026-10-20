@@ -6,8 +6,8 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.TensorBoundaryKernelMapNaturality
-import Sheaf.AlgebraicGeometry.BoundaryCoefficientTensorProduct
-import Sheaf.AlgebraicGeometry.BoundaryPullbackTensorUnit
+import WeilConjectures.AlgebraicGeometry.BoundaryCoefficientTensorProduct
+import WeilConjectures.AlgebraicGeometry.BoundaryPullbackTensorUnit
 
 /-! # Local tensor multiplication under the canonical kernel comparisons
 

@@ -6,7 +6,7 @@ Authors: SHEAF group Q69
 module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
-public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
+public import WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
 public import Mathlib.CategoryTheory.Subfunctor.Image

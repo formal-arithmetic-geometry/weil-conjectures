@@ -5,7 +5,7 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardTermwiseModels
+public import WeilConjectures.AlgebraicGeometry.PicardTermwiseModels
 import Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition
 
 /-! # Coherence of the termwise source single

@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.UniformFiniteFilteredLocalization
 public import Sheaf.Algebra.Homology.FilteredDerivedHomCalculus
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
 import Mathlib.CategoryTheory.Localization.Triangulated
 import Mathlib.CategoryTheory.Localization.CalculusOfFractions

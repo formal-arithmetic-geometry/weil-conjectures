@@ -6,7 +6,7 @@ Authors: SHEAF group NA
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSupport
 import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
 import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget

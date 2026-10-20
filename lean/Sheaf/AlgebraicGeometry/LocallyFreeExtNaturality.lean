@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
-import Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural
+import WeilConjectures.AlgebraicGeometry.AffineModuleCechComparisonNatural
 import WeilConjectures.AlgebraicGeometry.ExtEvaluation
 import WeilConjectures.CategoryTheory.RightDerivedExactComposite
 import Sheaf.CategoryTheory.RightDerivedExactCompositeNatural

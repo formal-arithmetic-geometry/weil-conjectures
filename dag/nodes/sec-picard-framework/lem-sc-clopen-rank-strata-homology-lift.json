@@ -97,8 +97,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/ClopenRankStrataHomologyLift.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ClopenRankStrataHomologyLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ClopenRankStrataHomologyLift.lean",
   "declaration": "AlgebraicGeometry.clopenRankStrata_homology_lift",
   "statement": "theorem clopenRankStrata_homology_lift\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u}\n      (moduleRings (directImageAlgebraSpace i)))]\n    (r : LocallyConstant Z ℕ)\n    (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules)\n    (T : ℤ → Z.Modules)\n    (hT : ∀ n : ℤ, T n = if 0 ≤ n then\n      (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj\n        (E n.toNat) else 0)\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))\n    (n : ℤ)\n    (hother : ∀ m : ℤ, m ≠ n → Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj K ≅\n        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T m)))\n    (a : (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n) ⟶\n      (DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K) :\n    ∃ f : (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj\n          ((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n)) ⟶ K,\n      (DerivedCategory.singleFunctorCompHomologyFunctorIso\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).inv.app\n          ((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n)) ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map f = a",
   "branch": "sheaf-dag",

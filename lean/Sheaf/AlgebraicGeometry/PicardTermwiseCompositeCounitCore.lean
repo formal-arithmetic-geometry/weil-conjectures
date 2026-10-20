@@ -5,7 +5,7 @@ Authors: SHEAF group N4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardTermwiseModels
+public import WeilConjectures.AlgebraicGeometry.PicardTermwiseModels
 
 /-! # Core counit composition calculation
 

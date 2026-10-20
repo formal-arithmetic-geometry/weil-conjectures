@@ -122,8 +122,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassRestriction",
-  "file": "lean/Sheaf/AlgebraicGeometry/LocalDirectImageStalkClassRestriction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkClassRestriction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/LocalDirectImageStalkClassRestriction.lean",
   "declaration": "AlgebraicGeometry.localDirectImage_stalk_class_restriction",
   "statement": "theorem localDirectImage_stalk_class_restriction\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (F : X.Modules) (p : ℕ)\n    (I : InjectiveResolution F)\n    (K : InjectiveResolution\n          ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F))\n    (V : Y.Opens) (hy : y ∈ V)\n    (D : Scheme.Modules.FlatBaseChangeOpenChoices f (Y.fromSpecStalk y) F I K V)\n    (eta : (RingedSpace.moduleCohomology (pullback (Y.fromSpecStalk y) f).toRingedSpace p ⋙\n        ModuleCat.restrictScalars\n          ((Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv ≫\n            (pullback.fst (Y.fromSpecStalk y) f).appTop).hom).obj\n        ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)) :\n    localDirectImage_stalk_class f y F p eta =\n      TopCat.Presheaf.germ\n            ((Scheme.Modules.pushforward (Y.fromSpecStalk y)).obj\n              (((Scheme.Modules.pushforward (pullback.fst (Y.fromSpecStalk y) f)).rightDerived\n                p).obj\n                ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj\n                  F))).presheaf V y hy (D.targetClass p\n          (Scheme.Modules.moduleCohomologyFMap\n          ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι\n          ((Scheme.Modules.restrictAdjunction\n            ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).unit.app\n              ((Scheme.Modules.tensorPullback\n                (pullback.snd (Y.fromSpecStalk y) f)).obj F)) p eta))",
   "branch": "sheaf-dag",

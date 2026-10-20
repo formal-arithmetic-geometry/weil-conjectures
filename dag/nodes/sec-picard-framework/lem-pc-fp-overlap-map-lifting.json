@@ -88,8 +88,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapMapLifting",
-  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationOverlapMapLifting.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapMapLifting",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FinitePresentationOverlapMapLifting.lean",
   "declaration": "AlgebraicGeometry.exists_finitePresentation_overlap_map_lifting",
   "statement": "theorem exists_finitePresentation_overlap_map_lifting {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (j : I) (hij : i ≤ j) (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u}) [Finite U.I₀] [∀ a, IsAffine (U.X a)] (N : (a : U.I₀) → (U.X a).Modules) (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent) (M : (pullback f (c.π.app (op i))).Modules) (e : ∀ a, (Scheme.Modules.pullback (U.pullbackHom (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) a)).obj (N a) ≅ (Scheme.Modules.pullback ((U.pullback₁ (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)))).f a)).obj M) : ∃ (k : I) (hjk : j ≤ k), let q := overlapStageMap R f hij hjk let V : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} := U.pullback₁ q let p := overlapLimitMap R c f (hij.trans hjk) ∃ T : modulesPseudofunctor.OverlapTransitions V.f, (∀ a, Nonempty ((T.obj a : (V.X a).Modules) ≅ (Scheme.Modules.pullback (U.pullbackHom q a)).obj (N a))) ∧ Nonempty ((T.pull (p := p) (α := fun a ↦ a) (fun a ↦ V.pullbackHom_map p a)).Comparison ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M))",
   "declarations": [

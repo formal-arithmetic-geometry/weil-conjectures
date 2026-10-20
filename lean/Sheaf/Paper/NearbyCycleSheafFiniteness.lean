@@ -16,7 +16,7 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Sheaf.AlgebraicGeometry.GabberStrictLocalTorsionBound
 import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
 import Sheaf.Paper.NearbyGeometricSlice
 import Sheaf.Paper.OrientedNearbyCycles

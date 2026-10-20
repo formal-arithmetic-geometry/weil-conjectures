@@ -166,8 +166,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit",
-  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedDirectImageSquareUnit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.NormalizedDirectImageSquareUnit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/NormalizedDirectImageSquareUnit.lean",
   "declaration": "AlgebraicGeometry.normalizedDirectImageSquare_unit",
   "statement": "theorem normalizedDirectImageSquare_unit\n    {X Y X' Y' : Scheme.{u}}\n    (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (gX : X' ⟶ X)\n    (h : gX ≫ f = f' ≫ g) :\n    let e₀ := Scheme.Modules.pushforwardComp gX f ≪≫\n      Scheme.Modules.pushforwardCongr h ≪≫ (Scheme.Modules.pushforwardComp f' g).symm\n    let e := schemeNormalizedDirectImageCompIso gX f ≪≫\n      eqToIso (congrArg (fun t ↦ schemeDerivedDirectImage t) h) ≪≫\n      (schemeNormalizedDirectImageCompIso f' g).symm\n    Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward gX)\n      (Scheme.Modules.pushforward f) ≫\n      Functor.whiskerLeft DerivedCategory.Qh e.hom =\n    Functor.whiskerRight (NatTrans.mapHomotopyCategory e₀.hom (.up ℤ))\n      DerivedCategory.Qh ≫\n      Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward f')\n        (Scheme.Modules.pushforward g)",
   "branch": "sheaf-dag",

@@ -6,7 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedOpenIntersectionMateIso
+import WeilConjectures.AlgebraicGeometry.DerivedOpenIntersectionMateIso
 
 /-! # Invertible cross components of the open difference map
 

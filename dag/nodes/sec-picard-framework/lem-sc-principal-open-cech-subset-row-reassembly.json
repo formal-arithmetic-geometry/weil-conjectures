@@ -96,8 +96,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetRowReassembly",
-  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSubsetRowReassembly.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetRowReassembly",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PrincipalOpenCechSubsetRowReassembly.lean",
   "declaration": "AlgebraicGeometry.principalSubsetRowReassembly",
   "statement": "theorem principalSubsetRowReassembly\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex (Spec (.of A)).Modules ℤ) (n : ℤ) (p : ℕ) (q : ℤ) :\n    let V := principalSubsetUnion A r f\n    let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)\n    let K := (alternatingCechDoubleFunctor U).obj (principalSubsetRestriction A r f J)\n    let H := forget₂\n      (ModuleCat.{u} ((moduleRings V.toScheme.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat\n    let P := alternatingCechModulePresheaf.obj ((principalSubsetRestriction A r f J).X q)\n    let L := alternatingCechComplex U P\n    let e : (K.X (p : ℤ)).X q ≅ L.X p :=\n      L.extendXIso ComplexShape.embeddingUpNat rfl\n    ∀ (hdeg : ComplexShape.π (ComplexShape.up ℤ) (ComplexShape.up ℤ)\n        (ComplexShape.up ℤ) ((p : ℤ), q) = n)\n      (w : L.X p) (s : principalSubsetCoordinates A r f J n),\n      (∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card ≠ p + 1 → s S = 0) →\n      (∀ (S : {S : Finset (Fin r) // S.Nonempty}) (hcard : S.val.card = p + 1),\n        HEq (w (S.val.orderEmbOfFin hcard))\n          ((principalSubsetSectionTransport A r f\n            (J.X (n + 1 - (S.val.card : ℤ))) S).hom (s S))) →\n      (H.map (e.inv ≫ K.ιTotal (ComplexShape.up ℤ) (p : ℤ) q n hdeg)) w =\n        principalSubsetInsertion A r f J n s",
   "branch": "sheaf-dag",

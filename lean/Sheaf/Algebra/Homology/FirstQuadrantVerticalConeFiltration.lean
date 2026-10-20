@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import Sheaf.Algebra.Homology.ConeHorizontalGradedIso
 import Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence

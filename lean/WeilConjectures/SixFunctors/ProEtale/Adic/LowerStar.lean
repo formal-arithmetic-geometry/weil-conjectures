@@ -21,10 +21,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
-import Sheaf.AlgebraicGeometry.AdicClosedImmersionFiniteness
-import Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness
-import Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness
-import WeilConjectures.Compactification.Affine
 
 /-!
 # Finiteness for the pushforward of constructible `ℓ`-adic sheaves
@@ -43,14 +39,14 @@ blueprint `sk-prop-sf-finiteness`) asserts that for a constructible `ℓ`-adic s
   (`AlgebraicGeometry.ProEtale.isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar`);
 - if moreover `Y` is quasi-compact, then `Rf_*(F[0])` is bounded
   (`AlgebraicGeometry.ProEtale.bounded_rightDerivedFunctor_lowerStar`). It is concentrated in
-  degrees `≥ 0`, and has a finite upper bound supplied by the finiteness theorem
-  over the finite-type target
+  degrees `≥ 0`, and bounded above since the cohomological dimension of `f_*` is at most twice
+  the dimension of the fibres, which is bounded on a quasi-compact `Y`
   (`AlgebraicGeometry.ProEtale.exists_isLE_rightDerivedFunctor_lowerStar`).
 
 These are the inputs for the finiteness of the pushforward of Weil sheaves and Weil complexes
 (`WeilConjectures.WeilSheaf.LowerStar`). All of them are deduced from the case of an affine
 source and an affine target, `AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine`,
-proved below by compactification from the open and projective cases:
+which is stated with `sorry`:
 
 - the objects with bounded constructible derived pushforward form a triangulated subcategory
   (`AlgebraicGeometry.ProEtale.finiteLowerStar`), so the statement is stable under extensions,
@@ -69,16 +65,17 @@ proved below by compactification from the open and projective cases:
 - the pushforward is the degree `0` case, `f_*` being left exact, and boundedness below holds for
   any sheaf.
 
-The affine proof (blueprint `sk-prop-sf-finiteness`) embeds the source into a relative
-projective space, factors the immersion through its scheme-theoretic image, and composes
-dense-open, closed and projective direct images. The open and projective inputs are separate
-statement modules; the closed step is proved using exactness and open-closed stratification.
+The proof of the remaining statement (blueprint `sk-prop-sf-finiteness`) proceeds by generic
+constructibility for open immersions (Deligne's dévissage) and the proper case.
 
 ## Missing infrastructure
 
-The open and projective inputs still need the comparison of `ℚ̄_ℓ,X`-modules with `ℓ`-adic
-towers of torsion étale sheaves (lattices, `Rf_*` commuting with `R lim` and with `⊗ ℚ`),
-together with the finiteness theorem for torsion étale coefficients
+The statement left with `sorry` needs, beyond this dévissage: the recollement for closed
+immersions on the pro-étale site (exactness of `i_*`, which rests on lifting weakly étale maps
+along henselian pairs), so as to reduce a constructible sheaf to lisse sheaves on strata; and,
+for the lisse case, a comparison of `ℚ̄_ℓ,X`-modules with `ℓ`-adic towers of torsion étale
+sheaves (lattices, `Rf_*` commuting with `R lim` and with `⊗ ℚ`) together with the finiteness
+theorem for torsion étale coefficients
 (`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`).
 -/
 
@@ -410,15 +407,7 @@ variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K] {X Y : 
 derived pushforward `Rg_* F` of a constructible `ℓ`-adic sheaf along a morphism `g` locally of
 finite type between affine schemes, with target of finite type, is bounded with constructible
 cohomology sheaves `Rⁿg_* F`. This is the affine `ℚ̄_ℓ` case of blueprint
-`sk-prop-sf-finiteness`.
-(blueprint: lem-sf-adic-affine-direct-image-finiteness)
-
-Embed the affine source into affine space and then its standard projective chart. Factor
-this immersion as a dense open immersion into its scheme-theoretic image followed by a
-closed immersion into projective space. Dense-open finiteness gives a bounded constructible
-complex, closed direct image preserves this by exactness, and projective finiteness extends
-from sheaves to this complex by truncation dévissage. Composition of the derived direct
-images identifies the result with `Rg_* F`. -/
+`sk-prop-sf-finiteness`. -/
 theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [IsAffine Y] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]
     {F : AdicSheaf l T} (hF : IsAdicConstructibleSheaf F) :

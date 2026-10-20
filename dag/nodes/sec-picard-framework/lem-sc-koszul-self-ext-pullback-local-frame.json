@@ -107,8 +107,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame",
-  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSelfExtPullbackLocalFrame.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/KoszulSelfExtPullbackLocalFrame.lean",
   "declaration": "AlgebraicGeometry.koszulRegularImmersion_self_ext_pullback_local_frame",
   "statement": "theorem koszulRegularImmersion_self_ext_pullback_local_frame\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (U : Y.affineOpens) (n : ℕ)\n    (m : ℕ) (f : Fin m → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    Nonempty ((((Scheme.Modules.tensorPullback i).obj G).over (i ⁻¹ᵁ U.1)) ≅\n      SheafOfModules.free (ULift.{u} (Set.powersetCard (Fin m) n)))",
   "branch": "sheaf-dag",

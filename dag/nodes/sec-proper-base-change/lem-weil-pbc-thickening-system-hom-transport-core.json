@@ -66,8 +66,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ThickeningSystemHomTransportCore",
-  "file": "lean/Sheaf/AlgebraicGeometry/ThickeningSystemHomTransportCore.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ThickeningSystemHomTransportCore",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ThickeningSystemHomTransportCore.lean",
   "declaration": "AlgebraicGeometry.thickeningSystem_hom_transport_d",
   "statement": "theorem thickeningSystem_hom_transport_d\n    {X : Scheme.{u}} {T : ℕ → Scheme.{u}} {i : ∀ n, T n ⟶ T (n + 1)}\n    (j : ∀ n, T n ⟶ X) (d : ∀ n, Scheme.Modules.tensorPullback (j (n + 1)) ⋙\n      Scheme.Modules.tensorPullback (i n) ≅ Scheme.Modules.tensorPullback (j n))\n    (R : CoherentModules X ⥤ CoherentThickeningSystem T i)\n    (r : ∀ n, R ⋙ CoherentThickeningSystem.evaluation T i n ≅\n      ObjectProperty.ι (RingedSpace.IsCoherent X.toRingedSpace) ⋙\n        Scheme.Modules.tensorPullback (j n))\n    (hr : ∀ (F : CoherentModules X) (n : ℕ),\n      ((R.obj F).comparison n).hom ≫ (r n).hom.app F =\n        (Scheme.Modules.tensorPullback (i n)).map ((r (n + 1)).hom.app F) ≫\n          (d n).hom.app F.obj)\n    (F G : CoherentModules X) :\n    ∃ e : (R.obj G ⟶ R.obj F) ≃\n      {v : ∀ n, (Scheme.Modules.tensorPullback (j n)).obj G.obj ⟶\n        (Scheme.Modules.tensorPullback (j n)).obj F.obj |\n        ∀ n, (d n).hom.app G.obj ≫ v n =\n          (Scheme.Modules.tensorPullback (i n)).map (v (n + 1)) ≫ (d n).hom.app F.obj},\n      ∀ w : G ⟶ F, e (R.map w) =\n        ⟨fun n ↦ (Scheme.Modules.tensorPullback (j n)).map w.hom,\n          fun n ↦ ((d n).hom.naturality w.hom).symm⟩",
   "branch": "sheaf-dag",

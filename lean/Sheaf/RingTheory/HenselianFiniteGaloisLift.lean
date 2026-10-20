@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.FieldTheory.Galois.Basic
-import Sheaf.RingTheory.EtaleNormalRing
+import WeilConjectures.RingTheory.EtaleNormalRing
 import Sheaf.RingTheory.HenselianFiniteEtaleMapBijective
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic

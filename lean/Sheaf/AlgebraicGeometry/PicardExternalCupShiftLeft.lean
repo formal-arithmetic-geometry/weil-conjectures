@@ -5,10 +5,10 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
-import Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
+import WeilConjectures.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.AlgebraicGeometry.PicardExternalCupLeftHomologyLadder

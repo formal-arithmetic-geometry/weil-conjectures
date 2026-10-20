@@ -97,8 +97,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.FiniteStripConeGradedMapEpi",
-  "file": "lean/Sheaf/Algebra/Homology/FiniteStripConeGradedMapEpi.lean",
+  "module": "WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapEpi",
+  "file": "lean/WeilConjectures/Algebra/Homology/FiniteStripConeGradedMapEpi.lean",
   "declaration": "HomologicalComplex₂.finiteStripGradedMap_epi",
   "statement": "theorem finiteStripGradedMap_epi\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ) (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (F : DecreasingFiltration (CochainComplex.mappingCone b))\n    (hsteps : ∀ p n : ℤ, F.complexStep p n =\n      (if p ≤ n + 1 then imageSubobject\n        ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n      (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n        if p ≤ n - i then imageSubobject\n          (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n            (CochainComplex.mappingCone.inr b).f n) else ⊥))\n    (p n : ℤ) : Epi (finiteStripGradedMap K r hsupport A b f F hsteps p n)",
   "branch": "sheaf-dag",

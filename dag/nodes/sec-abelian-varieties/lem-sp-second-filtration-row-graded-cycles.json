@@ -101,8 +101,8 @@
  "unit": "sk-prop-av-pqf-finite",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.SecondFiltrationRowGradedCycles",
-  "file": "lean/Sheaf/CategoryTheory/SecondFiltrationRowGradedCycles.lean",
+  "module": "WeilConjectures.CategoryTheory.SecondFiltrationRowGradedCycles",
+  "file": "lean/WeilConjectures/CategoryTheory/SecondFiltrationRowGradedCycles.lean",
   "declaration": "CategoryTheory.Functor.secondFiltration_row_graded_cycles",
   "statement": "theorem secondFiltration_row_graded_cycles\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    (F : A ⥤ B) [F.Additive]\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (L : DecreasingFiltration\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n        (ComplexShape.up ℤ)))\n    (hL : ∀ p n : ℤ, L.complexStep p n =\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).secondFiltration n).step\n        p)\n    (r : ℕ) (s : ℤ)\n    (t : ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).cycles r ⟶\n      (L.step s : CochainComplex B ℤ).X (s + (r : ℤ)))\n    (ht : t ≫ (L.step s).arrow.f (s + (r : ℤ)) =\n      ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).iCycles r ≫\n      ((((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).extendXIso\n        ComplexShape.embeddingUpNat (by rfl)).inv ≫\n        (((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).ιTotal\n          (ComplexShape.up ℤ) (r : ℤ) s (s + (r : ℤ)) (by\n            change (r : ℤ) + s = s + (r : ℤ)\n            omega))) :\n    ∃ c : ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).cycles r ≅\n        (L.complexCycles s (s + (r : ℤ)) 1 : B),\n      c.hom ≫ (L.complexCycles s (s + (r : ℤ)) 1).arrow =\n        t ≫ (L.complexQuotientπ s (s + 1) (by omega)).f (s + (r : ℤ))",
   "branch": "sheaf-dag",

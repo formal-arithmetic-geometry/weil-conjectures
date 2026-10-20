@@ -119,8 +119,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangePasting",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangePasting.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedBaseChangePasting",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedBaseChangePasting.lean",
   "declaration": "AlgebraicGeometry.schemeDerivedBaseChange_pasting",
   "statement": "theorem schemeDerivedBaseChange_pasting\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S P S' T : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (p : P ⟶ X) (q : P ⟶ S') (h : p ≫ f = q ≫ g) (t : T ⟶ P) :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))\n    let a := fun {A B : Scheme.{u}} (s : A ⟶ B) ↦\n      Classical.choose (exists_schemeDerivedAdjunction s\n        (hAdd := (Classical.choose exists_derivedPullbackComposition) s)\n        ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) s)\n        ((Classical.choose (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition))) s))\n    let k := conjugateIsoEquiv (a (t ≫ q)) ((a q).comp (a t)) (c t q)\n    ∀ E : schemeDerivedCategory X,\n      schemeDerivedBaseChangeMap f (t ≫ q) g (t ≫ p)\n          (by rw [Category.assoc, h, Category.assoc]) E ≫\n        k.hom.app ((derivedPullback (t ≫ p)).obj E) ≫\n        (schemeDerivedDirectImage q).map\n          ((schemeDerivedDirectImage t).map ((c t p).inv.app E)) =\n      schemeDerivedBaseChangeMap f q g p h E ≫\n        (schemeDerivedDirectImage q).map ((a t).unit.app ((derivedPullback p).obj E))",
   "branch": "sheaf-dag",

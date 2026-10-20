@@ -49,8 +49,8 @@
  ],
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SourceDerivedSectionsNaturalityCore",
-  "file": "lean/Sheaf/AlgebraicGeometry/SourceDerivedSectionsNaturalityCore.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SourceDerivedSectionsNaturalityCore",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SourceDerivedSectionsNaturalityCore.lean",
   "declaration": "AlgebraicGeometry.Etale.sourceDerivedSections_naturality_compose",
   "statement": "theorem sourceDerivedSections_naturality_compose\n    {C : Type (v + 1)} [Category.{v} C]\n    {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]\n    [HasDerivedCategory.{v + 1} (Sheaf T AddCommGrpCat.{v + 1})]\n    (K : DerivedCategory.Plus (Sheaf T AddCommGrpCat.{v + 1}))\n    (L : CochainComplex (Sheaf T AddCommGrpCat.{v + 1}) ℤ) [L.IsKInjective]\n    (q : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) {U V : C} (a : U ⟶ V) :\n    let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n\n    let e₀ := fun W : C ↦ sourcePlusHomIso ((strictLocalFreeSheaf T).obj W) K L q n\n    let e₁ := fun W : C ↦\n      (sourceClassDerivedHomIso ((strictLocalFreeSheaf T).obj W) L n).symm ≪≫\n      (leftHomologyData ((CochainComplex.singleFunctor _ 0).obj\n        ((strictLocalFreeSheaf T).obj W)) L n).homologyIso.symm ≪≫\n      H.mapIso (sourceFreeSectionsComplexIso W L)\n    AddCommGrpCat.ofHom (Preadditive.leftComp (K⟦n⟧)\n      ((DerivedCategory.Plus.singleFunctor _ 0).map ((strictLocalFreeSheaf T).map a))) ≫\n        (e₀ U).hom ≫ (e₁ U).hom =\n      (e₀ V).hom ≫ (e₁ V).hom ≫ H.map\n        ((NatTrans.mapHomologicalComplex\n          ((sheafSections T AddCommGrpCat.{v + 1}).map a.op) (.up ℤ)).app L)",
   "branch": "sheaf-dag",

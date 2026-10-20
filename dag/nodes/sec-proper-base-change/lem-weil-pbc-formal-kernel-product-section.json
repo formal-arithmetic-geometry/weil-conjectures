@@ -118,8 +118,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalKernelProductSection",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalKernelProductSection.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalKernelProductSection",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalKernelProductSection.lean",
   "declaration": "AlgebraicGeometry.formalKernel_product_section_existsUnique",
   "statement": "theorem formalKernel_product_section_existsUnique {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F : CoherentFormalModule X I) (m n : ℕ) (U : X.Opens)\n    (a : (formalAssociatedGradedPiece I m).val.obj (op U))\n    (x : (formalKernelPiece F n).val.obj (op U)) :\n    ∃! y : (formalKernelPiece F (m + n)).val.obj (op U),\n      ∀ (V : X.Opens) (h : V ≤ U)\n        (a' : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op V))\n        (t : (F.obj.obj (op (m + n))).val.obj (op V)),\n        (formalAssociatedGradedπ I m).val.app (op V) a' =\n          (formalAssociatedGradedPiece I m).val.map (homOfLE h).op a →\n        (F.obj.map (homOfLE (Nat.le_add_left n m)).op).val.app (op V) t =\n          (formalKernelι F n).val.app (op V)\n            ((formalKernelPiece F n).val.map (homOfLE h).op x) →\n        (formalKernelι F (m + n)).val.app (op V)\n          ((formalKernelPiece F (m + n)).val.map (homOfLE h).op y) =\n            (@id Γ(X, V)\n              ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op V) a')) • t",
   "branch": "sheaf-dag",

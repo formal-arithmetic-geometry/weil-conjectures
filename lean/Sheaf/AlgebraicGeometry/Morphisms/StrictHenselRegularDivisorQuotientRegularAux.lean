@@ -4,7 +4,7 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselDivisorQuotientPresentation
 import WeilConjectures.RingTheory.StrictHenselizationRegular
-import Sheaf.RingTheory.RegularLocalLocalization
+import WeilConjectures.RingTheory.RegularLocalLocalization
 
 /-! Local regularity and Noetherianity of the strict henselization divisor quotient. -/
 

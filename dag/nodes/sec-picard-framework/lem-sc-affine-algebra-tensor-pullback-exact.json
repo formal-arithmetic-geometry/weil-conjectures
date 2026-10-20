@@ -94,8 +94,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraTensorPullbackExact",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraTensorPullbackExact.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineAlgebraTensorPullbackExact",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineAlgebraTensorPullbackExact.lean",
   "declaration": "AlgebraicGeometry.affine_algebra_tensorModulePullback_exact",
   "statement": "theorem affine_algebra_tensorModulePullback_exact\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]\n    (P : SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (h : ∀ M, P.obj M = SheafOfModules.changeOfRings.{u, u, u}\n      (CochainComplex.tensorPullbackRingMap\n        (toDirectImageAlgebraSpace f).hom.base X.toRingedSpace.sheaf\n        (directImageAlgebraSpace f).sheaf ⟨(toDirectImageAlgebraSpace f).hom.c⟩)\n      (TopCat.Sheaf.inverseImageModule (toDirectImageAlgebraSpace f).hom.base\n        (directImageAlgebraSpace f).sheaf M))\n    (hm : ∀ {M N} (a : M ⟶ N),\n      P.map a = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap\n          (toDirectImageAlgebraSpace f).hom.base X.toRingedSpace.sheaf\n          (directImageAlgebraSpace f).sheaf ⟨(toDirectImageAlgebraSpace f).hom.c⟩)\n        (TopCat.Sheaf.inverseImageModule (toDirectImageAlgebraSpace f).hom.base\n          (directImageAlgebraSpace f).sheaf M)\n        (TopCat.Sheaf.inverseImageModuleMap (toDirectImageAlgebraSpace f).hom.base\n          (directImageAlgebraSpace f).sheaf M a) ≫ eqToHom (h N).symm) :\n    PreservesFiniteLimits P ∧ PreservesFiniteColimits P",
   "branch": "sheaf-dag",

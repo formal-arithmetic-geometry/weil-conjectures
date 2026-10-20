@@ -108,8 +108,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectDescentOpenEventualModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDescentOpenEventualModel.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectDescentOpenEventualModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectDescentOpenEventualModel.lean",
   "declaration": "AlgebraicGeometry.perfect_descent_open_eventual_model",
   "statement": "theorem perfect_descent_open_eventual_model\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)]\n    (c : Cocone R) (i : I) (Xi : Scheme.{u}) (s : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (W : Xi.Opens) (dW : PerfectDescentOnOpen R c i Xi s W)\n    (Z : Scheme.{u}) (f : Z ⟶ Xi) [IsOpenImmersion f] (hW : W ≤ f.opensRange)\n    (E : schemeDerivedCategory (pullback (f ≫ s) (Spec.map (c.ι.app i))))\n    (hE : (pullback (f ≫ s) (Spec.map (c.ι.app i))).IsPerfect E) :\n    ∃ (j : I) (hij : i ≤ j), ∀ (k : I) (hjk : j ≤ k),\n      let X := pullback (f ≫ s) (Spec.map (c.ι.app i))\n      let g := baseChangeMap (f ≫ s)\n        (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app k))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE (hij.trans hjk))]))\n      let U := (pullback.fst (f ≫ s)\n        (Spec.map (R.map (homOfLE (hij.trans hjk)))) ≫ f) ⁻¹ᵁ W\n      ∃ A : schemeDerivedCategory U.toScheme, U.toScheme.IsPerfect A ∧\n        Nonempty ((derivedPullback (g ∣_ U)).obj A ≅\n          (schemeOpenRestriction X (g ⁻¹ᵁ U)).mapDerivedCategory.obj E)",
   "branch": "sheaf-dag",

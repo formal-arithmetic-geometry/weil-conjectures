@@ -111,8 +111,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.FiniteStripConeFiltration",
-  "file": "lean/Sheaf/Algebra/Homology/FiniteStripConeFiltration.lean",
+  "module": "WeilConjectures.Algebra.Homology.FiniteStripConeFiltration",
+  "file": "lean/WeilConjectures/Algebra/Homology/FiniteStripConeFiltration.lean",
   "declaration": "HomologicalComplex₂.finite_strip_cone_filtration",
   "statement": "theorem finite_strip_cone_filtration\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ)\n    (a : ∀ n : ℤ, A.X n ⟶ (K.X 0).X n)\n    (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (hb : ∀ n : ℤ, b.f n =\n      a n ≫ K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (hf : ∀ p : ℤ, (f p).f 0 = (HomologicalComplex.singleObjXSelf\n      (ComplexShape.up ℤ) 0 (A.X p)).hom ≫ a p) :\n    ∃ F : DecreasingFiltration (CochainComplex.mappingCone b),\n      (∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n          if p ≤ n - i then imageSubobject\n            (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n              (CochainComplex.mappingCone.inr b).f n) else ⊥)) ∧\n      (∀ n : ℤ, F.complexStep (n - (r : ℤ)) n = ⊤ ∧ F.complexStep (n + 2) n = ⊥) ∧\n      (∀ p n : ℤ, Nonempty ((F.gradedPiece p).homology n ≅\n        (CochainComplex.mappingCone (f p)).homology (n - p)))",
   "branch": "sheaf-dag",

@@ -3,10 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the LICENSE file.
 -/
 module
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
-public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
-public import Sheaf.AlgebraicGeometry.DirectImageSquareUnitTransport
-import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
+public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 /-! # Complex localization of the normalized direct-image square -/
 
 @[expose] public section

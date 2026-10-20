@@ -26,7 +26,7 @@ import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import WeilConjectures.Algebra.Homology.HomComplex
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom

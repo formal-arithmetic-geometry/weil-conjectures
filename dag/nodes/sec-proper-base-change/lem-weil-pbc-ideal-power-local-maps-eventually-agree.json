@@ -156,8 +156,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree",
-  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerLocalMapsEventuallyAgree.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IdealPowerLocalMapsEventuallyAgree.lean",
   "declaration": "AlgebraicGeometry.Scheme.ideal_power_local_maps_eventually_agree",
   "statement": "theorem ideal_power_local_maps_eventually_agree\n    {X : Scheme.{u}} {I : X.Modules}\n    (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]\n    [I.IsQuasicoherent] [I.IsFiniteType]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : X.Opens) (one : ∀ n : ℕ, Γ((idealSheafPower ι n).1, U))\n    (r : ∀ (n m : ℕ), n ≤ m →\n      ((idealSheafPower ι m).1 ⟶ (idealSheafPower ι n).1))\n    (hU : ∀ x : X, x ∈ U ↔ Function.Surjective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom)\n    (hone : ∀ n : ℕ, (idealSheafPower ι n).2.app U (one n) = (1 : Γ(X, U)))\n    (hr : ∀ (n m : ℕ) (h : n ≤ m),\n      r n m h ≫ (idealSheafPower ι n).2 = (idealSheafPower ι m).2)\n    (V V' : X.Opens) (hcompact : IsCompact ((V : Set X) ∩ (V' : Set X)))\n    (n : ℕ)\n    (α : ((idealSheafPower ι n).1).over V ⟶ F.over V)\n    (β : ((idealSheafPower ι n).1).over V' ⟶ F.over V')\n    (heval : ∀ (W : X.Opens) (hWU : W ≤ U) (hWV : W ≤ V) (hWV' : W ≤ V'),\n      α.val.app (op (Over.mk (homOfLE hWV)))\n          (((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n)) =\n        β.val.app (op (Over.mk (homOfLE hWV')))\n          (((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n))) :\n    ∃ (m : ℕ) (h : n ≤ m),\n      ∀ (W : X.Opens) (hWV : W ≤ V) (hWV' : W ≤ V'),\n        (r n m h).val.app (op W) ≫ α.val.app (op (Over.mk (homOfLE hWV))) =\n          (r n m h).val.app (op W) ≫ β.val.app (op (Over.mk (homOfLE hWV')))",
   "branch": "sheaf-dag",

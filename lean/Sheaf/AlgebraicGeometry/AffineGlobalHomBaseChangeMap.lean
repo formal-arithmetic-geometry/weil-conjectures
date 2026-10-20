@@ -5,10 +5,10 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.GlobalDerivedHom
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
@@ -17,9 +17,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import Sheaf.AlgebraicGeometry.GlobalHomOriginalCounitNormalization
-import Sheaf.AlgebraicGeometry.OriginalCounitAdjunctionTransport
-import Sheaf.AlgebraicGeometry.NormalizedInternalHomPullbackComparison
-import Sheaf.AlgebraicGeometry.AffineSectionsPushforwardNormalization
+import WeilConjectures.AlgebraicGeometry.OriginalCounitAdjunctionTransport
+import WeilConjectures.AlgebraicGeometry.NormalizedInternalHomPullbackComparison
+import WeilConjectures.AlgebraicGeometry.AffineSectionsPushforwardNormalization
 
 /-!
 REPAIR: Construct canonicalPullbackAdjunction with the original shared derived counit;

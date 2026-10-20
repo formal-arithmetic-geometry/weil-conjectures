@@ -7,11 +7,11 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 
-import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
-import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelMap
+import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelMap
 import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
-import Sheaf.Algebra.Homology.FlatScalarExtensionHomologyAdjunct
+import WeilConjectures.Algebra.Homology.FlatScalarExtensionHomologyAdjunct
 
 /-! # Realization of prescribed tensor cohomology on a K-flat resolution
 

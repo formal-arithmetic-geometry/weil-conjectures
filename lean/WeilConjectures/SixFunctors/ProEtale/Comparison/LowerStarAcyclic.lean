@@ -7,16 +7,15 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
-import Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
 # Acyclicity for pro-étale direct images on the affine pro-étale basis
@@ -96,54 +95,6 @@ theorem rightAcyclic_lowerStar_of_isZero_rightDerived {U V : Scheme.{u}} (f : U 
 
 section Acyclicity
 
-/-- The global sections functor of the small pro-étale site: the sections over the terminal
-object. -/
-noncomputable abbrev globalSectionsFunctor (X : Scheme.{u}) :
-    Sheaf (ProEt.topology X) A ⥤ A :=
-  sectionsFunctor A (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem _ X))
-
-/-- **Derived sections over an object of the pro-étale site.** For `T` an object of the small
-pro-étale site of `X`, the derived sections over `T` of a pro-étale sheaf `G` on `X` are the
-derived global sections of its pullback to `T`: the pullback is the restriction to the
-localization `T_proét` of `X_proét`, which is exact and preserves injectives. -/
-lemma isZero_rightDerived_sectionsFunctor_of_upperStar {X : Scheme.{u}} (T : X.ProEt)
-    (G : Sheaf (ProEt.topology X) A) (q : ℕ)
-    (h : IsZero (((globalSectionsFunctor A T.left).rightDerived q).obj
-      ((ProEtale.upperStar A T.hom).obj G))) :
-    IsZero (((sectionsFunctor A T).rightDerived q).obj G) := by
-  have hT : WeaklyEtale T.hom := T.prop
-  let j := ProEtale.localizationRestriction A T.hom hT
-  -- `T` is the image of the terminal object of `T_proét` under the localization functor
-  let e : T ≅ (MorphismProperty.Over.map ⊤ hT).obj
-      (MorphismProperty.Over.mk ⊤ (𝟙 T.left) (MorphismProperty.id_mem _ T.left)) :=
-    MorphismProperty.Over.isoMk (Iso.refl _) (by exact Category.id_comp _)
-  have : j.Additive := { }
-  let eΓ : sectionsFunctor A T ≅ j ⋙ globalSectionsFunctor A T.left :=
-    NatIso.ofComponents (fun G ↦ G.obj.mapIso e.op) (fun φ ↦ (φ.hom.naturality e.inv.op).symm)
-  let eR : (sectionsFunctor A T).rightDerived q ≅
-      (j ⋙ globalSectionsFunctor A T.left).rightDerived q :=
-    { hom := NatTrans.rightDerived eΓ.hom q
-      inv := NatTrans.rightDerived eΓ.inv q
-      hom_inv_id := by rw [← NatTrans.rightDerived_comp, eΓ.hom_inv_id, NatTrans.rightDerived_id]
-      inv_hom_id := by rw [← NatTrans.rightDerived_comp, eΓ.inv_hom_id, NatTrans.rightDerived_id] }
-  have : PreservesFiniteColimits j :=
-    preservesFiniteColimits_of_natIso (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT)
-  have : PreservesFiniteLimits j :=
-    preservesFiniteLimits_of_natIso (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT)
-  refine IsZero.of_iso ?_ (eR.app G ≪≫
-    (Functor.rightDerivedCompIsoOfExact j (globalSectionsFunctor A T.left) q).app G)
-  exact h.of_iso (((globalSectionsFunctor A T.left).rightDerived q).mapIso
-    ((ProEtale.upperStarIsoLocalizationRestriction A T.hom hT).app G).symm)
-
-/-- The comparison pullbacks commute with pullback along any morphism `g : Y ⟶ X`:
-`g^* ν_X^* ≅ ν_Y^* g^*`, both being left adjoint to `ν_X_* g_* ≅ g_* ν_Y_*`. -/
-noncomputable def comparisonUpperStarCompUpperStarIso {Y X : Scheme.{u}} (g : Y ⟶ X) :
-    comparisonUpperStar A X ⋙ ProEtale.upperStar A g ≅
-      Etale.upperStar A g ⋙ comparisonUpperStar A Y :=
-  (conjugateIsoEquiv ((Etale.upperStarLowerStarAdjunction A g).comp (comparisonAdjunction A Y))
-    ((comparisonAdjunction A X).comp (ProEtale.upperStarLowerStarAdjunction A g))).symm
-    (lowerStarCompComparisonLowerStarIso g A).symm
-
 /-- Blueprint `prop-weil-pbc-site-comparison-finite-level`: Exactness and full faithfulness at
 finite level
 
@@ -203,6 +154,54 @@ theorem rightAcyclic_comparisonUpperStar_obj_of_injective (X : Scheme.{u})
   have hS' := hS.map (presheafToSheaf (AffineEtale.topology X) A)
   exact (ShortComplex.exact_iff_of_iso
     (ShortComplex.mapNatIso (S.map Φ) (sheafificationNatIso _ _)).symm).1 hS'
+
+/-- The global sections functor of the small pro-étale site: the sections over the terminal
+object. -/
+noncomputable abbrev globalSectionsFunctor (X : Scheme.{u}) :
+    Sheaf (ProEt.topology X) A ⥤ A :=
+  sectionsFunctor A (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem _ X))
+
+/-- **Derived sections over an object of the pro-étale site.** For `T` an object of the small
+pro-étale site of `X`, the derived sections over `T` of a pro-étale sheaf `G` on `X` are the
+derived global sections of its pullback to `T`: the pullback is the restriction to the
+localization `T_proét` of `X_proét`, which is exact and preserves injectives. -/
+lemma isZero_rightDerived_sectionsFunctor_of_upperStar {X : Scheme.{u}} (T : X.ProEt)
+    (G : Sheaf (ProEt.topology X) A) (q : ℕ)
+    (h : IsZero (((globalSectionsFunctor A T.left).rightDerived q).obj
+      ((ProEtale.upperStar A T.hom).obj G))) :
+    IsZero (((sectionsFunctor A T).rightDerived q).obj G) := by
+  have hT : WeaklyEtale T.hom := T.prop
+  let j := ProEtale.localizationRestriction A T.hom hT
+  -- `T` is the image of the terminal object of `T_proét` under the localization functor
+  let e : T ≅ (MorphismProperty.Over.map ⊤ hT).obj
+      (MorphismProperty.Over.mk ⊤ (𝟙 T.left) (MorphismProperty.id_mem _ T.left)) :=
+    MorphismProperty.Over.isoMk (Iso.refl _) (by exact Category.id_comp _)
+  have : j.Additive := { }
+  let eΓ : sectionsFunctor A T ≅ j ⋙ globalSectionsFunctor A T.left :=
+    NatIso.ofComponents (fun G ↦ G.obj.mapIso e.op) (fun φ ↦ (φ.hom.naturality e.inv.op).symm)
+  let eR : (sectionsFunctor A T).rightDerived q ≅
+      (j ⋙ globalSectionsFunctor A T.left).rightDerived q :=
+    { hom := NatTrans.rightDerived eΓ.hom q
+      inv := NatTrans.rightDerived eΓ.inv q
+      hom_inv_id := by rw [← NatTrans.rightDerived_comp, eΓ.hom_inv_id, NatTrans.rightDerived_id]
+      inv_hom_id := by rw [← NatTrans.rightDerived_comp, eΓ.inv_hom_id, NatTrans.rightDerived_id] }
+  have : PreservesFiniteColimits j :=
+    preservesFiniteColimits_of_natIso (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT)
+  have : PreservesFiniteLimits j :=
+    preservesFiniteLimits_of_natIso (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT)
+  refine IsZero.of_iso ?_ (eR.app G ≪≫
+    (Functor.rightDerivedCompIsoOfExact j (globalSectionsFunctor A T.left) q).app G)
+  exact h.of_iso (((globalSectionsFunctor A T.left).rightDerived q).mapIso
+    ((ProEtale.upperStarIsoLocalizationRestriction A T.hom hT).app G).symm)
+
+/-- The comparison pullbacks commute with pullback along any morphism `g : Y ⟶ X`:
+`g^* ν_X^* ≅ ν_Y^* g^*`, both being left adjoint to `ν_X_* g_* ≅ g_* ν_Y_*`. -/
+noncomputable def comparisonUpperStarCompUpperStarIso {Y X : Scheme.{u}} (g : Y ⟶ X) :
+    comparisonUpperStar A X ⋙ ProEtale.upperStar A g ≅
+      Etale.upperStar A g ⋙ comparisonUpperStar A Y :=
+  (conjugateIsoEquiv ((Etale.upperStarLowerStarAdjunction A g).comp (comparisonAdjunction A Y))
+    ((comparisonAdjunction A X).comp (ProEtale.upperStarLowerStarAdjunction A g))).symm
+    (lowerStarCompComparisonLowerStarIso g A).symm
 
 /-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
 `ν^* M` of an étale sheaf are those of `M`: `RΓ(X_proét, ν^* M) ≅ RΓ(X_ét, M)`, by the

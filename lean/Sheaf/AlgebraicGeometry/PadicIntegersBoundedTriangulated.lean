@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 import Sheaf.Paper.IntegralConstructibleSerre
+public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Triangulation for bounded constructible integral p-adic coefficients
 

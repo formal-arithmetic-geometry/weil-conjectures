@@ -4,14 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.ResidueField
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.AlgebraicGeometry.LocalizedResidueHomologyRestriction
+import WeilConjectures.AlgebraicGeometry.LocalizedResidueHomologyRestriction
 import Sheaf.AlgebraicGeometry.LocalizedStrictPerfectResidueHomology
 
 /-! # Naturality of residue derived homology in a local perfect representative

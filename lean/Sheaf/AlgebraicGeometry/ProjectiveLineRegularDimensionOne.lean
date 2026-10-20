@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-public import Sheaf.AlgebraicGeometry.Dimension
+public import WeilConjectures.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!

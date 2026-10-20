@@ -5,7 +5,7 @@ Authors: SHEAF group B4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.AlgebraicGeometry.RightAdjointMateNewBaseOpen
 import Sheaf.AlgebraicGeometry.RightAdjointMateOldBaseOpen
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
+import WeilConjectures.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
 
 /-! # Comparison of the global right-adjoint mate with an open-chart mate
 

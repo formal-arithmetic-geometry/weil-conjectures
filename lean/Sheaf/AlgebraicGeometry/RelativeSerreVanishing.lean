@@ -5,10 +5,10 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-import Sheaf.AlgebraicGeometry.CoherentSerreVanishing
+import WeilConjectures.AlgebraicGeometry.CoherentSerreVanishing
 import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison

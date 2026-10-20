@@ -89,8 +89,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorUnitNormalization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedPullbackTensorUnitNormalization.lean",
   "declaration": "AlgebraicGeometry.derivedPullback_tensorUnitIso_normalization",
   "statement": "theorem derivedPullback_tensorUnitIso_normalization {T X : Scheme.{uModel}} (g : T ⟶ X)\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]\n    (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤\n      SheafOfModules.{uModel} (moduleRings T.toRingedSpace)) [F.Additive]\n    (mF : F.CoreMonoidal)\n    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶\n      F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    [IsIso (ε.app (𝟙_ (HomotopyCategory\n      (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))))] :\n    IsIso (Functor.LaxMonoidal.ε (DerivedCategory.Q\n      (C := SheafOfModules.{uModel} (moduleRings T.toRingedSpace)))) ∧\n    (let AX := SheafOfModules.{uModel} (moduleRings X.toRingedSpace)\n     let AT := SheafOfModules.{uModel} (moduleRings T.toRingedSpace)\n     let U : CochainComplex AX ℤ := 𝟙_ _\n     let u := (HomologicalComplex.single AT (ComplexShape.up ℤ) 0).mapIso mF.εIso ≪≫\n       ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) 0).app _).symm\n     (derivedPullback_tensorUnitIso g F mF ε).inv ≫\n         Functor.LaxMonoidal.ε (DerivedCategory.Q (C := AT)) =\n       (derivedPullback g).map (Functor.LaxMonoidal.ε (DerivedCategory.Q (C := AX))) ≫\n         ε.app ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).obj U) ≫\n           (DerivedCategory.Q (C := AT)).map u.inv)",
   "branch": "sheaf-dag",

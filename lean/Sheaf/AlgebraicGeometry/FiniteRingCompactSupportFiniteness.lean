@@ -6,7 +6,7 @@ Authors: SHEAF group Q35
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.Compactification.Defs
@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Sheaf.AlgebraicGeometry.ProperTorsionDirectImageBound
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Sheaf.AlgebraicGeometry.EtaleCompactificationConstructibility
 import Mathlib.AlgebraicGeometry.Noetherian

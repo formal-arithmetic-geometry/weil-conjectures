@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy
 public import Sheaf.Algebra.Homology.FilteredTensorGradedComparison
 public import Mathlib.LinearAlgebra.FreeModule.Basic
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 import Sheaf.Algebra.Homology.FilteredQuasiIsoFractions
 import Sheaf.Algebra.Homology.SplitCellComplexKFlat
 import WeilConjectures.CategoryTheory.Abelian.Filtration

@@ -7,10 +7,10 @@ module
 
 public import Sheaf.Paper.RingedModelRestriction
 import WeilConjectures.Algebra.Homology.HomComplex
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.KFlatRHomCurrying
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.Paper.RingedModelCurrying
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems

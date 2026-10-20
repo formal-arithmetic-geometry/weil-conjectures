@@ -5,7 +5,7 @@ Authors: SHEAF group K3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardTermwiseModels
+public import WeilConjectures.AlgebraicGeometry.PicardTermwiseModels
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
 
 /-! # Composition of the canonical termwise single map

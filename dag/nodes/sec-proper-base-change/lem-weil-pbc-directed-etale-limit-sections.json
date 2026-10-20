@@ -100,8 +100,8 @@
  "unit": "sk-thm-iff",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DirectedEtaleLimitSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/DirectedEtaleLimitSections.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DirectedEtaleLimitSections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DirectedEtaleLimitSections.lean",
   "declaration": "AlgebraicGeometry.directedEtaleLimitSections",
   "statement": "theorem directedEtaleLimitSections {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] {R : Scheme.{u}} (B : Iᵒᵖ ⥤ R.Etale) (c : Cone (B ⋙ Scheme.Etale.forget R ⋙ Over.forget R)) (p : c.pt ⟶ R) (h : ∀ i, c.π.app i ≫ (B.obj i).hom = p) (H : Sheaf R.smallEtaleTopology (Type (u + 1))) [∀ i : Iᵒᵖ, CompactSpace (B.obj i).left] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (B.obj i).left] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (B.map a).left] (_hc : IsLimit c) (ν : B.op ⋙ H.obj ⟶ (Functor.const Iᵒᵖᵒᵖ).obj (((Scheme.etaleSetPullback p).obj H).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt))))) (_hν : ∀ i, ν.app i = (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ p) (Type (u + 1)) (R.smallGrothendieckTopology @Etale) (c.pt.smallGrothendieckTopology @Etale)).unit.app H).hom.app (op (B.obj i.unop))) ≫ ((Scheme.etaleSetPullback p).obj H).obj.map (MorphismProperty.Over.homMk (B := (MorphismProperty.Over.pullback @Etale ⊤ p).obj (B.obj i.unop)) (pullback.lift (c.π.app i.unop) (𝟙 _) (by simpa using h i.unop)) (pullback.lift_snd _ _ _)).op) : Nonempty (IsColimit (Cocone.mk _ ν))",
   "branch": "sheaf-dag",

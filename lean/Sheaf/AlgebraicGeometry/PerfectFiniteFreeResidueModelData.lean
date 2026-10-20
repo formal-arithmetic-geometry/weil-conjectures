@@ -1,7 +1,7 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 import Sheaf.AlgebraicGeometry.PerfectFiniteResidueCohomologyFinite
 import Sheaf.AlgebraicGeometry.PerfectFiniteResidueCohomologyBounded
 

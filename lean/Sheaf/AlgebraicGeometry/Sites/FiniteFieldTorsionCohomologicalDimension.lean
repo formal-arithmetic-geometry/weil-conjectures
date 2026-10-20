@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.Curve.GenericFinitePrimaryDecomposition
 import WeilConjectures.AlgebraicGeometry.Curve.FiniteStalkSubobjectsCover
 import Mathlib.Order.Shrink
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
-import Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
+import WeilConjectures.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
 
 /-!
 # The all-torsion cohomological dimension of a finite field

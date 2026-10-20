@@ -5,11 +5,11 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexDecalageComplex
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
+import WeilConjectures.CategoryTheory.CartanEilenbergMappedTotal
 import Sheaf.CategoryTheory.CartanEilenbergGoodCutIdentification
 import Mathlib.Algebra.Homology.TotalComplexSymmetry
 

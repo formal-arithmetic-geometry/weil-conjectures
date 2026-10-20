@@ -92,8 +92,8 @@
  "title": "Affine Koszul Hom coefficient complex square",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineKoszulHomCoefficientComplexSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulHomCoefficientComplexSquare.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineKoszulHomCoefficientComplexSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineKoszulHomCoefficientComplexSquare.lean",
   "declaration": "AlgebraicGeometry.affine_koszul_hom_coefficient_complex_square",
   "statement": "theorem affine_koszul_hom_coefficient_complex_square\n    {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))\n    (n : ℕ) (f : Fin n → Γ(Y, U.1))\n    (H : CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ ⥤\n      CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ)\n    (hH : H =\n      let A := (Γ(Y, U.1) : Type u)\n      let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n      let E := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)\n      (homComplexFunctor (R := U.1.toScheme.toRingedSpace.sheaf)).obj (op E)) :\n    let A := (Γ(Y, U.1) : Type u)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let TC := T.mapHomologicalComplex (ComplexShape.up ℤ)\n    let S := CochainComplex.singleFunctor U.1.toScheme.Modules 0\n    ∃ (cO : H.obj (S.obj (T.obj (ModuleCat.of A A))) ≅\n        TC.obj ((ExteriorAlgebra.koszulDualComplex A n f).extend\n          ComplexShape.embeddingUpNat))\n      (cQ : H.obj (S.obj (T.obj (ModuleCat.of A (A ⧸ I)))) ≅\n        TC.obj ((ExteriorAlgebra.koszulQuotientDualComplex A I n f).extend\n          ComplexShape.embeddingUpNat)),\n      H.map (S.map (T.map (ModuleCat.ofHom I.mkQ))) ≫ cQ.hom =\n        cO.hom ≫ TC.map (HomologicalComplex.extendMap\n          (ExteriorAlgebra.koszulCoefficientReduction A I n f)\n          ComplexShape.embeddingUpNat)",
   "branch": "sheaf-dag",

@@ -1,10 +1,10 @@
 module
-public import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedEquivFields
-import Sheaf.AlgebraicGeometry.PerfectHomOpenTestBijective
+public import WeilConjectures.AlgebraicGeometry.PerfectHomOpenRestrictedEquivFields
+import WeilConjectures.AlgebraicGeometry.PerfectHomOpenTestBijective
 import Sheaf.AlgebraicGeometry.PerfectHomOpenTransportSquare
-import Sheaf.AlgebraicGeometry.DerivedOpenTestObject
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
+import WeilConjectures.AlgebraicGeometry.DerivedOpenTestObject
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
 @[expose] public section
 universe u w
 open CategoryTheory CategoryTheory.Limits

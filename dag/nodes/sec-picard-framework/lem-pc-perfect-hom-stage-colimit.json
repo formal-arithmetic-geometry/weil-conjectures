@@ -107,8 +107,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectHomStageColimit",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomStageColimit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectHomStageColimit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectHomStageColimit.lean",
   "declaration": "AlgebraicGeometry.perfect_hom_stage_colimit",
   "statement": "theorem perfect_hom_stage_colimit\n    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (i : I)\n    (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (P Q : schemeDerivedCategory Y) :\n    ∃ (H : Set.Ici i ⥤ Type (max u w)) (d : Cocone H),\n      Nonempty (IsColimit d) ∧\n      ∃ (ident : ∀ j : Set.Ici i, H.obj j ≃\n          ((derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj P ⟶\n           (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj Q)),\n        (∀ (j k : Set.Ici i) (hjk : j ≤ k) (f : H.obj j),\n          ident k (H.map (homOfLE hjk) f) =\n            perfectStageMap R s j.property hjk (ident j f))",
   "branch": "sheaf-dag",

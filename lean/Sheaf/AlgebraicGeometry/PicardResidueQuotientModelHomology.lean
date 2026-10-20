@@ -1,7 +1,7 @@
 module
 public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
 public import Mathlib.CategoryTheory.Adjunction.Additive
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Sheaf.Paper.DerivedHomMayerVietoris

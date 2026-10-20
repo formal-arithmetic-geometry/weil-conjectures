@@ -126,8 +126,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.KoszulIdealAlternatingProducts",
-  "file": "lean/Sheaf/RingTheory/KoszulIdealAlternatingProducts.lean",
+  "module": "WeilConjectures.RingTheory.KoszulIdealAlternatingProducts",
+  "file": "lean/WeilConjectures/RingTheory/KoszulIdealAlternatingProducts.lean",
   "declaration": "AlgebraicGeometry.koszul_ideal_alternating_products",
   "statement": "theorem koszul_ideal_alternating_products (A : Type u) [CommRing A]\n    (I : Ideal A) (n : ℕ) (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I))) :\n    ∃ (b : ∀ (r : ℕ) (g : Fin r → I),\n      ExteriorAlgebra.koszulComplex A r (fun j ↦ (g j : A)) ⟶ P.complex)\n      (F : I [⋀^Fin n]→ₗ[A]\n        (Submodule.torsionBySet A\n          ((((tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)).obj\n            P.complex).homology n) (I : Set A))),\n      (∀ (r : ℕ) (g : Fin r → I), (b r g).f 0 ≫ P.π.f 0 =\n        ModuleCat.ofHom (I.mkQ.comp\n          (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap)) ∧\n      (∀ s : KoszulConormalWedgeCycle A I n,\n        (F (fun j ↦ Finsupp.linearCombination A s.g (s.v j))).val =\n          ((HomologicalComplex.homologyFunctor (ModuleCat.{u} A) (.down ℕ) n).map\n            (((tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)).map\n              (b s.r s.g)))\n            ((((tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n              (.down ℕ)).obj\n              (ExteriorAlgebra.koszulComplex A s.r\n                (fun j ↦ (s.g j : A)))).homologyπ n s.z))",
   "branch": "sheaf-dag",

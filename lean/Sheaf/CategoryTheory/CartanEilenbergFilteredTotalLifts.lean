@@ -5,9 +5,9 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import all Sheaf.CategoryTheory.BoundedBelowSecondFiltration
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+import all WeilConjectures.CategoryTheory.BoundedBelowSecondFiltration
 
 /-! # Filtered lifts of Cartan--Eilenberg total maps
 

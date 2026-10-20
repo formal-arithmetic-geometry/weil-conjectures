@@ -5,7 +5,7 @@ Authors: SHEAF group J2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupLeftCechExact
 public import Mathlib.Algebra.DirectSum.Module
 import Sheaf.AlgebraicGeometry.PicardLeftCechCupHomology
 import WeilConjectures.Algebra.Homology.TensorKunnethNat

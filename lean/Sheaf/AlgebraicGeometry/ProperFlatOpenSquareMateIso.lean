@@ -5,12 +5,12 @@ Authors: SHEAF group H4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-import all Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
+import all WeilConjectures.AlgebraicGeometry.QCohInverseBaseChangeMate
 import Mathlib.CategoryTheory.Adjunction.Restrict
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

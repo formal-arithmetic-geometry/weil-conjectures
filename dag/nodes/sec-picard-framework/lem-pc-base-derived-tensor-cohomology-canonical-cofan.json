@@ -121,8 +121,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyCofan",
-  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorCohomologyCofan.lean",
+  "module": "WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyCofan",
+  "file": "lean/WeilConjectures/Algebra/Homology/BaseDerivedTensorCohomologyCofan.lean",
   "declaration": "ModuleCat.baseDerivedTensorCohomology_canonical_cofan",
   "statement": "theorem baseDerivedTensorCohomology_canonical_cofan\n    {I : Type u} (M : I → CochainComplex (ModuleCat.{u} A) ℤ)\n    (S : CochainComplex (ModuleCat.{u} A) ℤ) (s : ∀ j, M j ⟶ S)\n    (hs : IsColimit (Cofan.mk S s))\n    (m : ∀ j, BaseDerivedTensorCohomologyModel R A B (M j) C)\n    (mS : BaseDerivedTensorCohomologyModel R A B S C) (i : ℤ)\n    (δ : ∀ j, (m j).derived ⟶ mS.derived)\n    (g : ∀ j, (m j).cohomology i ⟶ mS.cohomology i)\n    (hδ : ∀ j, Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} R)) (δ j) ≫\n      mS.counit = (m j).counit)\n    (hg : ∀ j, (restrictScalars.{u}\n        (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).map (g j) ≫\n          (mS.cohomologyIso i).hom =\n      ((m j).cohomologyIso i).hom ≫\n        (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n          ((m j).derived.map (DerivedCategory.Qh.map\n            ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map\n              (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex\n                (.up ℤ)).map (s j))))) ≫\n        (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n          ((δ j).app (DerivedCategory.Qh.obj\n            ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj\n              (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj S))))) :\n    Nonempty (IsColimit (Cofan.mk (mS.cohomology i) g))",
   "branch": "sheaf-dag",

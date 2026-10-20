@@ -135,8 +135,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SelfTorTargetBasicLocalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorTargetBasicLocalization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SelfTorTargetBasicLocalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SelfTorTargetBasicLocalization.lean",
   "declaration": "AlgebraicGeometry.exists_selfTor_target_basic_localization",
   "statement": "theorem exists_selfTor_target_basic_localization {Z Y : Scheme.{u}} (i : Z ⟶ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [IsClosedImmersion i] (n : ℕ) : let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf) let S := DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0 let Q := (Scheme.Modules.tensorPullback i).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj (S.obj B ⊗ S.obj B)) let T := fun U : Y.affineOpens ↦ tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙ Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i let c := fun U : Y.affineOpens ↦ selfTorConormalComparison (Γ(Y, U.1) : Type u) (i.ker.ideal U) n ∃ t : ∀ U : Y.affineOpens, ((T U).obj _).over (i ⁻¹ᵁ U.1) ≅ Q.over (i ⁻¹ᵁ U.1), ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1) (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1) (b : Fin n → i.ker.toModules.val.obj (op U.1)), (t U).hom.val.app (op (Over.mk (homOfLE (i.preimage_mono h)))) (((T U).obj _).val.map (homOfLE (i.preimage_mono h)).op (selfTorAffineSection i U _ ((c U) (selfTorIdealWedge i U n b)))) = (t V).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1)))) (selfTorAffineSection i V _ ((c V) (selfTorIdealWedge i V n (fun j ↦ i.ker.toModules.val.map (homOfLE h).op (b j)))))",
   "branch": "sheaf-dag",

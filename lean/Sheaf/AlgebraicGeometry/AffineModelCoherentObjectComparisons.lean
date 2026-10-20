@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.CategoryTheory.InducedCategory
 import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
-import Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence
+import WeilConjectures.AlgebraicGeometry.AffineCoordinateComparisonCoherence
 import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
 
 /-! # Coherent affine object comparisons

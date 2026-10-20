@@ -85,8 +85,8 @@
  "unit": "sk-prop-av-cube",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardBaseChangeStalkRanks",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardBaseChangeStalkRanks.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PicardBaseChangeStalkRanks",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PicardBaseChangeStalkRanks.lean",
   "declaration": "AlgebraicGeometry.Scheme.picardRankMatch_baseChange_stalk_ranks",
   "statement": "theorem picardRankMatch_baseChange_stalk_ranks {X S T : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)\n    (hR : PicardUniversalRankMatch f E g) {T' : Scheme.{u}} (h : T' ⟶ T)\n    (F : X.Modules) (hF : F = E ∨ F = Modules.dual E) (t : T') :\n    let P := (Modules.tensorPullback h).obj\n      ((Modules.pushforward (pullback.snd f g)).obj\n        ((Modules.tensorPullback (pullback.fst f g)).obj F))\n    let Q := (Modules.pushforward (pullback.snd (pullback.snd f g) h)).obj\n      ((Modules.tensorPullback (pullback.fst (pullback.snd f g) h)).obj\n        ((Modules.tensorPullback (pullback.fst f g)).obj F))\n    Module.Finite (T'.presheaf.stalk t) (Q.presheaf.stalk t) ∧\n      Nonempty (P.presheaf.stalk t ≃ₗ[T'.presheaf.stalk t] Q.presheaf.stalk t)",
   "branch": "sheaf-dag",

@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction
-public import Sheaf.AlgebraicGeometry.PicardExternalCupHomologyUnique
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupHomologyUnique
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.PicardRightCechCupGenerators
 import WeilConjectures.Algebra.Homology.TensorKunnethNat

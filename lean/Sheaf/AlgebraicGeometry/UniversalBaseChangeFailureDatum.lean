@@ -12,10 +12,10 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import Mathlib.CategoryTheory.Sites.Adjunction
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
 import Sheaf.AlgebraicGeometry.FieldFailureOfCumulativeBaseChange
 
 /-!

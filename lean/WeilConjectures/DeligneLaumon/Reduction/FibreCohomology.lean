@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
-import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 
 /-!
 # Higher direct images over a base quasi-finite over `k₀`

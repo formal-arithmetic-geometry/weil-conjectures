@@ -6,14 +6,14 @@ Authors: SHEAF group R1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.Paper.FiniteStructureAdjointTransitions
 
 import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
+import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 import Sheaf.Paper.FiniteStructureProperSupport

@@ -5,12 +5,12 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.OrdinaryEvaluationData
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
-import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferential
+import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
 import Mathlib.CategoryTheory.MorphismProperty.Retract
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 

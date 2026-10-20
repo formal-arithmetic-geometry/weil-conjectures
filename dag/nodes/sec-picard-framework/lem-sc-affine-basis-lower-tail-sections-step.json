@@ -153,8 +153,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsStep",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasisLowerTailSectionsStep.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineBasisLowerTailSectionsStep",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineBasisLowerTailSectionsStep.lean",
   "declaration": "AlgebraicGeometry.affineBasisLowerTail_sections_step_isIso",
   "statement": "theorem affineBasisLowerTail_sections_step_isIso\n    (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)\n    [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wA} AddCommGrpCat.{u}]\n    (F : CochainComplex X.Modules ℤ)\n    (hhomology : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((F.homology n).restrict W.ι).H (q + 1)))\n    (a i n : ℤ) (hn : 1 - i ≤ n) :\n    let S := SheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace) (op V)\n    letI : S.Additive := inferInstanceAs\n      ((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙\n        PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)\n    let G := S ⋙ forget₂\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op V))) AddCommGrpCat.{u}\n    let t := DerivedCategory.TStructure.t\n      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let E := (t.truncLT a).obj (DerivedCategory.Q.obj F)\n    IsIso ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map\n      (G.rightDerivedFunctor.map ((t.natTransTruncGEOfLE\n        (-n) (-n + 1) (Int.le_add_one (le_refl (-n)))).app E)))",
   "branch": "sheaf-dag",

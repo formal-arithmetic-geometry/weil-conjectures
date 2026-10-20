@@ -5,12 +5,12 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointAffineBaseChange
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
+import WeilConjectures.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeGlobal
 
 /-! # Base change for the right adjoint of proper flat direct image

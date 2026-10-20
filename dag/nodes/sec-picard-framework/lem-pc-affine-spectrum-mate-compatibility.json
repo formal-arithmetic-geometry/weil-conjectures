@@ -110,8 +110,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumMateCompatibility",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumMateCompatibility.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineSpectrumMateCompatibility",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineSpectrumMateCompatibility.lean",
   "declaration": "AlgebraicGeometry.affineSpectrum_baseChange_mate_compatibility",
   "statement": "theorem affineSpectrum_baseChange_mate_compatibility\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (h : g' ≫ f = f' ≫ g)\n    (h0 : Spec.map g'.appTop ≫ Spec.map f.appTop =\n      Spec.map f'.appTop ≫ Spec.map g.appTop)\n    (K : schemeDerivedCategory X) :\n    schemeDerivedBaseChangeMap f f' g g' h K ≫\n        (affineSpectrumDerivedDirectImageIso f').hom.app ((derivedPullback g').obj K) =\n      (affineSpectrumBaseChangeSourceIso f g).hom.app K ≫\n        (derivedPullback S'.toSpecΓ).map\n          (schemeDerivedBaseChangeMap (Spec.map f.appTop) (Spec.map f'.appTop)\n              (Spec.map g.appTop) (Spec.map g'.appTop) h0\n              (affineSpectrumDerivedObject X K) ≫\n            (schemeDerivedDirectImage (Spec.map f'.appTop)).map\n              ((affineSpectrumDerivedPullbackIso g').hom.app K))",
   "branch": "sheaf-dag",

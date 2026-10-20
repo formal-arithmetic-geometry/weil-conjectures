@@ -122,8 +122,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenTensorRestrictionSquareStalkUnit",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenTensorRestrictionSquareStalkUnit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenTensorRestrictionSquareStalkUnit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenTensorRestrictionSquareStalkUnit.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openTensorRestrictionSquare_stalk_unit",
   "statement": "theorem openTensorRestrictionSquare_stalk_unit\n    {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)\n    (M : X.Modules) (z0 : (pullback k U.ι : Scheme.{u})) :\n    let z := pullback.fst k U.ι z0\n    let q := pullback.snd k U.ι\n    let N := (Scheme.Modules.restrictFunctor U.ι).obj M\n    let L0 := RingedSpace.moduleStalkFunctor (pullback k U.ι).toRingedSpace z0\n    let F0 := forget₂ (ModuleCat.{u} ((pullback k U.ι).presheaf.stalk z0)) AddCommGrpCat.{u}\n    let hp : k z = U.ι (q z0) :=\n      congrArg (fun h : pullback k U.ι ⟶ X ↦ h z0) pullback.condition\n    (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (k z)).map\n        (Scheme.Modules.Hom.mapPresheaf\n          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)).unit.app M)) ≫\n      ((Scheme.Modules.tensorPullback k).obj M).presheaf.stalkPushforward\n        AddCommGrpCat.{u} k.base z ≫\n      (Scheme.Modules.restrictStalkNatIso (pullback.fst k U.ι) z0).inv.app\n        ((Scheme.Modules.tensorPullback k).obj M) ≫\n      F0.map (L0.map ((openTensorRestrictionSquareIso k U).hom.app M)) =\n    (M.presheaf.stalkCongr (.of_eq hp)).hom ≫\n      (Scheme.Modules.restrictStalkNatIso U.ι (q z0)).inv.app M ≫\n      (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (q z0)).map\n        (Scheme.Modules.Hom.mapPresheaf\n          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction q)).unit.app N)) ≫\n      ((Scheme.Modules.tensorPullback q).obj N).presheaf.stalkPushforward\n        AddCommGrpCat.{u} q.base z0",
   "branch": "sheaf-dag",

@@ -1,204 +1,204 @@
 {
-  "id": "pqf-lem-affine-vanishing",
-  "blueprint": {
-    "is": "pqf-lem-affine-vanishing",
-    "from": null,
-    "same_as": [
-      "lem-pc-affine-vanishing"
-    ]
-  },
-  "kind": "statement",
-  "title": "Vanishing of higher cohomology on affines",
-  "statement": "Let $X$ be a scheme and $\\mathcal F$ a quasi-coherent\n$\\mathcal O_X$-module. For any affine open $U\\subset X$ we have\n$\\mathrm H^p(U,\\mathcal F)=0$ for all $p>0$.\n(*Stacks Project, Cohomology of Schemes, Lemma 30.2.2, Tag\n[01XB](https://stacks.math.columbia.edu/tag/01XB).*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-affine-vanishing.md",
-    "place": "node pqf-lem-affine-vanishing, order 544",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01XB"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "pqf-def-coherent",
-    "pqf-def-cohomology",
-    "def-sc-open-module-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Write p=q+1 using p>0. Regard U as its induced scheme, with IsAffine U supplied by hU. Restrict F along U.ι; Mathlib’s isQuasicoherent_restrictFunctor gives quasi-coherence of this restricted module.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "Apply [lem-pc-affine-vanishing] to the restricted module on the affine scheme U. This gives Subsingleton of its underlying abelian-sheaf cohomology in degree q+1.",
-      "uses": [
-        "lem-pc-affine-vanishing"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Use [lem-pqf-open-module-cohomology-comparison] to obtain an additive equivalence from the displayed module-derived open cohomology to the group in Step 2. Its injectivity transports equality of any two elements, proving the displayed Subsingleton.",
-      "uses": [
-        "lem-pqf-open-module-cohomology-comparison"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-pc-affine-vanishing",
-    "lem-pqf-open-module-cohomology-comparison"
-  ],
-  "proof_origin": {
-    "by": "worker",
+ "id": "pqf-lem-affine-vanishing",
+ "blueprint": {
+  "is": "pqf-lem-affine-vanishing",
+  "from": null,
+  "same_as": [
+   "lem-pc-affine-vanishing"
+  ]
+ },
+ "kind": "statement",
+ "title": "Vanishing of higher cohomology on affines",
+ "statement": "Let $X$ be a scheme and $\\mathcal F$ a quasi-coherent\n$\\mathcal O_X$-module. For any affine open $U\\subset X$ we have\n$\\mathrm H^p(U,\\mathcal F)=0$ for all $p>0$.\n(*Stacks Project, Cohomology of Schemes, Lemma 30.2.2, Tag\n[01XB](https://stacks.math.columbia.edu/tag/01XB).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-affine-vanishing.md",
+  "place": "node pqf-lem-affine-vanishing, order 544",
+  "external": [
+   {
     "document": "Stacks Project",
-    "place": "Tags 01XB, 01E1 (2), 03FD; existing affine-scheme vanishing plus open-module comparison, formalized by B3 on 2026-10-12"
+    "place": "Tag 01XB"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Write p=q+1 using p>0. Regard U as its induced scheme, with IsAffine U supplied by hU. Restrict F along U.ι; Mathlib’s isQuasicoherent_restrictFunctor gives quasi-coherence of this restricted module.",
+   "uses": [],
+   "elementary": true
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "higher cohomology of a quasi-coherent sheaf on an affine open subscheme vanishes",
-      "results": "No matching theorem; hits concern affine transition limits and generic sheaf cohomology",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "subsingleton_H_succ_of_isAffine, IsAffineOpen, higher cohomology",
-      "results": "0 hits; unknown identifier in Mathlib search",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "subsingleton_H_succ_of_isAffine|IsAffineOpen.*H|affine.*cohomology in Mathlib/AlgebraicGeometry",
-      "results": "25 hits, none states the requested vanishing; the relevant theorem is project code",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "higher cohomology of quasi-coherent sheaf on affine open vanishes",
-      "results": "unavailable",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 544,
-  "blueprint_uses": [
-    "pqf-def-coherent",
-    "pqf-def-cohomology"
-  ],
-  "uses_not_cited": [
-    "pqf-def-coherent",
-    "pqf-def-cohomology"
-  ],
-  "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Cohomology of Schemes, Lemma 30.2.2 ([Tag 01XB](https://stacks.math.columbia.edu/tag/01XB)): a quasi-coherent module on an affine scheme has no higher cohomology. No separate proof is given.",
-  "blueprint_proof_steps": [
-    {
-      "text": "This is the recorded classical input named in the statement, Stacks Project, Cohomology of Schemes, Lemma 30.2.2 ([Tag 01XB](https://stacks.math.columbia.edu/tag/01XB)): a quasi-coherent module on an affine scheme has no higher cohomology. No separate proof is given.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_restrict_of_isAffineOpen",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.FiniteFibre",
-          "lines": [
-            109,
-            117
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-pqf-finite",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "pqf-lem-affine-vanishing",
-    "worker": "stage1",
-    "summary": "Split the affine-open statement into the elementary identification of an affine open with its induced affine scheme, application of the existing closed affine-scheme theorem lem-pc-affine-vanishing, and the elementary identification of the resulting cohomology group with H^p(U,F). The statement and Stacks Tag 01XB source are unchanged.",
-    "blueprint": "Realizes the sole blueprint proof sentence recording Stacks Tag 01XB: the reduction from an affine open to its induced affine scheme is Step 1, the affine-scheme vanishing input is Step 2, and the identification with the stated cohomology is Step 3.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-affine-vanishing",
-        "why": "Step 2 uses its closed theorem that a quasi-coherent module on an affine scheme has no higher cohomology."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pc-affine-vanishing",
+  {
+   "text": "Apply [lem-pc-affine-vanishing] to the restricted module on the affine scheme U. This gives Subsingleton of its underlying abelian-sheaf cohomology in degree q+1.",
+   "uses": [
     "lem-pc-affine-vanishing"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-pav2242",
-    "group": "G1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pav2242 (reviewer sub-agent of L); spot-checked: Packet read whole. Step 2 cites lem-pc-affine-vanishing (Spec A, quasi-coherent, H^p=0 p>0), a generic tool from another unit: accepted (C7/C8). Its declaration subsingleton_H_succ_of_isAffine (slopmaster2 Affine.lean:284) is stated for [IsAffine X] only; grep of slopmaster2 WeilConjectures and Mathlib AlgebraicGeometry found no affine-open (IsAffineOpen U) cohomology vanishing, so no B10 attachment and the item is not a duplicate of lem-pc-affine-vanishing (that node is the U=X special case; class b does not apply, split cites it in one step). Steps 1 and 3 (induced open subscheme, F|_U quasi-coherent, H^p(U,F)=H^p(U,F|_U) per pqf-def-cohomology, Stacks 01E3) are elementary. D: no cycle. No faults; second reading missed none."
+   ],
+   "elementary": false
   },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing",
-    "declaration": "AlgebraicGeometry.subsingleton_openModuleCohomology_of_isAffineOpen",
-    "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenModuleCohomologyVanishing.lean",
-    "statement": "theorem subsingleton_openModuleCohomology_of_isAffineOpen (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] (U : X.Opens) (hU : IsAffineOpen U) (p : ℕ) (hp : 0 < p) : Subsingleton ((RingedSpace.openModuleCohomology X.toRingedSpace p U).obj F)",
-    "branch": "sheaf-dag",
-    "by": "J1",
-    "date": "2026-10-11",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-pav",
-    "group": "J1",
-    "result": "pass",
-    "note": "X : Scheme.{u}; F : X.Modules [F.IsQuasicoherent] (STATE QC); U : X.Opens, IsAffineOpen U; p>0; H^p(U,F)=0 as Subsingleton of RingedSpace.openModuleCohomology X p U (STATE COHOMOLOGY ON OPENS); stmt_deps gain landed def-sc-open-module-cohomology justified, check_dag adds no cycle/error; no duplicate node or landed affine-open vanishing; single clause, no conjuncts"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "B3",
-    "result": "pass",
-    "landing": "20261012T060731-L-2904087",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be a scheme and $\\mathcal F$ a quasi-coherent\n$\\mathcal O_X$-module. For any affine open $U\\subset X$ we have\n$\\mathrm H^p(U,\\mathcal F)=0$ for all $p>0$.",
-    "proof": [
-      {
-        "text": "*Reference: Stacks Project, Cohomology of Schemes, Lemma 30.2.2,\n[Tag 01XB](https://stacks.math.columbia.edu/tag/01XB).* We outline the\nargument of loc. cit. Replacing $X$ by $U$ we may assume $X=\\Spec A$ affine\nand $\\mathcal F=\\widetilde M$. For a standard open covering\n$X=\\bigcup_{i=1}^nD(f_i)$ with $(f_1,\\dots,f_n)=A$, the Čech complex of\n$\\widetilde M$ is the complex\n$M\\to\\prod_iM_{f_i}\\to\\prod_{i<j}M_{f_if_j}\\to\\cdots$; it is exact,\nbecause exactness may be checked after localising at each $f_j$, and after\ninverting $f_j$ the covering contains the whole space, so the localised\ncomplex is contractible. Standard opens form a basis of $X$ stable under\nfinite intersections, each of them again affine, so the Čech cohomology of\n$\\mathcal F$ vanishes in positive degrees for every standard open covering of\nevery standard open. By Cartan's criterion (a sheaf whose higher Čech\ncohomology vanishes for all coverings in such a basis has vanishing higher\nderived-functor cohomology on the members of the basis; Stacks Project,\nCohomology of Sheaves, Section 20.11), we get\n$\\mathrm H^p(X,\\mathcal F)=0$ for $p>0$.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Use [lem-pqf-open-module-cohomology-comparison] to obtain an additive equivalence from the displayed module-derived open cohomology to the group in Step 2. Its injectivity transports equality of any two elements, proving the displayed Subsingleton.",
+   "uses": [
+    "lem-pqf-open-module-cohomology-comparison"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-vanishing",
+  "lem-pqf-open-module-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 01XB, 01E1 (2), 03FD; existing affine-scheme vanishing plus open-module comparison, formalized by B3 on 2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "higher cohomology of a quasi-coherent sheaf on an affine open subscheme vanishes",
+   "results": "No matching theorem; hits concern affine transition limits and generic sheaf cohomology",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "subsingleton_H_succ_of_isAffine, IsAffineOpen, higher cohomology",
+   "results": "0 hits; unknown identifier in Mathlib search",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H_succ_of_isAffine|IsAffineOpen.*H|affine.*cohomology in Mathlib/AlgebraicGeometry",
+   "results": "25 hits, none states the requested vanishing; the relevant theorem is project code",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher cohomology of quasi-coherent sheaf on affine open vanishes",
+   "results": "unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 544,
+ "blueprint_uses": [
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "uses_not_cited": [
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Cohomology of Schemes, Lemma 30.2.2 ([Tag 01XB](https://stacks.math.columbia.edu/tag/01XB)): a quasi-coherent module on an affine scheme has no higher cohomology. No separate proof is given.",
+ "blueprint_proof_steps": [
+  {
+   "text": "This is the recorded classical input named in the statement, Stacks Project, Cohomology of Schemes, Lemma 30.2.2 ([Tag 01XB](https://stacks.math.columbia.edu/tag/01XB)): a quasi-coherent module on an affine scheme has no higher cohomology. No separate proof is given.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_restrict_of_isAffineOpen",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.FiniteFibre",
+     "lines": [
+      109,
+      117
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-affine-vanishing",
+  "worker": "stage1",
+  "summary": "Split the affine-open statement into the elementary identification of an affine open with its induced affine scheme, application of the existing closed affine-scheme theorem lem-pc-affine-vanishing, and the elementary identification of the resulting cohomology group with H^p(U,F). The statement and Stacks Tag 01XB source are unchanged.",
+  "blueprint": "Realizes the sole blueprint proof sentence recording Stacks Tag 01XB: the reduction from an affine open to its induced affine scheme is Step 1, the affine-scheme vanishing input is Step 2, and the identification with the stated cohomology is Step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-vanishing",
+    "why": "Step 2 uses its closed theorem that a quasi-coherent module on an affine scheme has no higher cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-vanishing",
+  "lem-pc-affine-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pav2242",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pav2242 (reviewer sub-agent of L); spot-checked: Packet read whole. Step 2 cites lem-pc-affine-vanishing (Spec A, quasi-coherent, H^p=0 p>0), a generic tool from another unit: accepted (C7/C8). Its declaration subsingleton_H_succ_of_isAffine (slopmaster2 Affine.lean:284) is stated for [IsAffine X] only; grep of slopmaster2 WeilConjectures and Mathlib AlgebraicGeometry found no affine-open (IsAffineOpen U) cohomology vanishing, so no B10 attachment and the item is not a duplicate of lem-pc-affine-vanishing (that node is the U=X special case; class b does not apply, split cites it in one step). Steps 1 and 3 (induced open subscheme, F|_U quasi-coherent, H^p(U,F)=H^p(U,F|_U) per pqf-def-cohomology, Stacks 01E3) are elementary. D: no cycle. No faults; second reading missed none."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing",
+  "declaration": "AlgebraicGeometry.subsingleton_openModuleCohomology_of_isAffineOpen",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineOpenModuleCohomologyVanishing.lean",
+  "statement": "theorem subsingleton_openModuleCohomology_of_isAffineOpen (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] (U : X.Opens) (hU : IsAffineOpen U) (p : ℕ) (hp : 0 < p) : Subsingleton ((RingedSpace.openModuleCohomology X.toRingedSpace p U).obj F)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pav",
+  "group": "J1",
+  "result": "pass",
+  "note": "X : Scheme.{u}; F : X.Modules [F.IsQuasicoherent] (STATE QC); U : X.Opens, IsAffineOpen U; p>0; H^p(U,F)=0 as Subsingleton of RingedSpace.openModuleCohomology X p U (STATE COHOMOLOGY ON OPENS); stmt_deps gain landed def-sc-open-module-cohomology justified, check_dag adds no cycle/error; no duplicate node or landed affine-open vanishing; single clause, no conjuncts"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T060731-L-2904087",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be a scheme and $\\mathcal F$ a quasi-coherent\n$\\mathcal O_X$-module. For any affine open $U\\subset X$ we have\n$\\mathrm H^p(U,\\mathcal F)=0$ for all $p>0$.",
+  "proof": [
+   {
+    "text": "*Reference: Stacks Project, Cohomology of Schemes, Lemma 30.2.2,\n[Tag 01XB](https://stacks.math.columbia.edu/tag/01XB).* We outline the\nargument of loc. cit. Replacing $X$ by $U$ we may assume $X=\\Spec A$ affine\nand $\\mathcal F=\\widetilde M$. For a standard open covering\n$X=\\bigcup_{i=1}^nD(f_i)$ with $(f_1,\\dots,f_n)=A$, the Čech complex of\n$\\widetilde M$ is the complex\n$M\\to\\prod_iM_{f_i}\\to\\prod_{i<j}M_{f_if_j}\\to\\cdots$; it is exact,\nbecause exactness may be checked after localising at each $f_j$, and after\ninverting $f_j$ the covering contains the whole space, so the localised\ncomplex is contractible. Standard opens form a basis of $X$ stable under\nfinite intersections, each of them again affine, so the Čech cohomology of\n$\\mathcal F$ vanishes in positive degrees for every standard open covering of\nevery standard open. By Cartan's criterion (a sheaf whose higher Čech\ncohomology vanishes for all coverings in such a basis has vanishing higher\nderived-functor cohomology on the members of the basis; Stacks Project,\nCohomology of Sheaves, Section 20.11), we get\n$\\mathrm H^p(X,\\mathcal F)=0$ for $p>0$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients

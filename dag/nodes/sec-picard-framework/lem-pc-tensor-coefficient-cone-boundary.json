@@ -86,8 +86,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.TensorCoefficientConeBoundary",
-  "file": "lean/Sheaf/Algebra/Homology/TensorCoefficientConeBoundary.lean",
+  "module": "WeilConjectures.Algebra.Homology.TensorCoefficientConeBoundary",
+  "file": "lean/WeilConjectures/Algebra/Homology/TensorCoefficientConeBoundary.lean",
   "declaration": "ModuleCat.tensorCoefficient_cone_boundary",
   "statement": "theorem tensorCoefficient_cone_boundary\n    (A C : Type u) [CommRing A] [CommRing C] (ρ : A →+* C)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (N : CochainComplex (ModuleCat.{u} C) ℤ)\n    (t : ((extendScalars ρ).mapHomologicalComplex (.up ℤ)).obj Q ⟶ N)\n    (P₁ P₂ : CochainComplex (ModuleCat.{u} A) ℤ) (f : P₁ ⟶ P₂) (i : ℤ) :\n    let F := (extendScalars ρ).mapHomologicalComplex (.up ℤ)\n    let H := (curriedTensor (ModuleCat.{u} A)).map₂CochainComplex.flip.obj Q\n    let T := F.mapTriangle.obj (H.mapTriangle.obj (CochainComplex.mappingCone.triangle f))\n    let a := fun V ↦ (Functor.Monoidal.μIso F V Q).inv ≫ (F.obj V ◁ t)\n    CochainComplex.homologyδOfTriangle T i (i + 1) ≫\n        HomologicalComplex.homologyMap (a P₁) (i + 1) =\n      HomologicalComplex.homologyMap (a (CochainComplex.mappingCone f)) i ≫\n        CochainComplex.homologyδOfTriangle (tensorConeTriangle ρ f N) i (i + 1)",
   "branch": "sheaf-dag",

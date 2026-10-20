@@ -147,8 +147,8 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorGaloisRootSplitting",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularDivisorGaloisRootSplitting.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorGaloisRootSplitting",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RegularDivisorGaloisRootSplitting.lean",
   "declaration": "AlgebraicGeometry.Scheme.GaloisCover.regular_divisor_root_splitting",
   "statement": "theorem GaloisCover.regular_divisor_root_splitting\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (hG : IsUnit (Nat.card G : R))\n    [IsRegularRing R] (hf : IsSMulRegular R f)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    (y : Spec R) :\n    ∃ (S : CommRingCat.{u}) (a : R ⟶ S) (z : Spec S),\n      Etale (Spec.map a) ∧ (Spec.map a) z = y ∧\n      let g := a.hom f\n      ∃ (n : ℕ),\n        (0 < n ∧ IsUnit (n : S)) ∧\n        IsRegularRing S ∧ IsSMulRegular S g ∧\n        IsRegularRing (S ⧸ Ideal.span {g}) ∧\n        let p := pullback.snd (W.π ≫ i) (Spec.map a ≫ φ)\n        let A := AdjoinRoot ((Polynomial.X : Polynomial S) ^ n - Polynomial.C g)\n        let N := Spec (CommRingCat.of A)\n        let q := Spec.map (CommRingCat.ofHom (algebraMap S A))\n        let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap S A g)\n        ∃ (d : ℕ) (δ : pullback p (V.ι ≫ q) ≅ ∐ fun _ : Fin d ↦ V.toScheme),\n          δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 V.toScheme) =\n            pullback.snd p (V.ι ≫ q)",
   "branch": "sheaf-dag",

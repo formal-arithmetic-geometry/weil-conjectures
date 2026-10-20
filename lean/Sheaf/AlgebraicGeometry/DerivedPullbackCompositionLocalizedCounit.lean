@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCompositionCounitApex
-public import Sheaf.AlgebraicGeometry.SchemeDerivedMateEvaluation
+public import WeilConjectures.AlgebraicGeometry.DerivedCompositionCounitApex
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 
 /-! # Localized underived counits and the derived composition comparison
 Source: Stacks Project, Tags 0096, 079W and 0D5S.

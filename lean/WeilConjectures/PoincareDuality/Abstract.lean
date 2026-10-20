@@ -307,7 +307,7 @@ section Biduality
 
 /-!
 In the application, `ω` is the dualizing complex `ω_X = Ra^! Λ_S` of the structure morphism
-`a : X ⟶ S`, `ProEtale.CondensedRing.relativeDualizingComplex`.
+`a : X ⟶ S`, `ProEtale.CondensedRing.dualizingComplex`.
 -/
 
 variable [BraidedCategory C] (ω : C)
@@ -324,8 +324,8 @@ section AbsoluteExchange
 
 /-!
 In the application, `ωX` and `ωY` are the dualizing complexes `ω_X` and `ω_Y`
-(`ProEtale.CondensedRing.relativeDualizingComplex`) of the structure morphisms
-`a_X = f ≫ a_Y : X ⟶ S` and `a_Y : Y ⟶ S`, and `γ : Rf^! ω_Y ≅ ω_X` is the composition isomorphism
+(`ProEtale.CondensedRing.dualizingComplex`) of the structure morphisms `a_X = f ≫ a_Y : X ⟶ S`
+and `a_Y : Y ⟶ S`, and `γ : Rf^! ω_Y ≅ ω_X` is the composition isomorphism
 `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` at the unit,
 `ProEtale.CondensedRing.upperShriekDualizingComplexIso`.
 -/

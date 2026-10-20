@@ -19,10 +19,10 @@ import Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
 import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.Algebra.Homology.RhomGlobalSections
+import WeilConjectures.Algebra.Homology.RhomGlobalSections
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits

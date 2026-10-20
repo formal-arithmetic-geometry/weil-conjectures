@@ -9,9 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModel
-import Sheaf.AlgebraicGeometry.AffineFlatConnectiveTruncation
-import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
-import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import WeilConjectures.AlgebraicGeometry.AffineFlatConnectiveTruncation
+import WeilConjectures.Algebra.Homology.FlatOpcyclesTorCriterion
+import WeilConjectures.AlgebraicGeometry.PerfectAffineBoundedProjective
 import WeilConjectures.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 
 /-! # Finite-presentation flat models on a fixed affine base -/

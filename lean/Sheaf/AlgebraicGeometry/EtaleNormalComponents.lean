@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Restrict
-import Sheaf.RingTheory.EtaleNormalRing
+import WeilConjectures.RingTheory.EtaleNormalRing
 
 /-!
 # Normal integral components of a Noetherian etale scheme

@@ -95,8 +95,8 @@
  ],
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IdealTensorImageComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/IdealTensorImageComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.IdealTensorImageComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IdealTensorImageComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.ideal_tensor_image_comparison",
   "statement": "theorem ideal_tensor_image_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (I : Y.IdealSheafData) (N : Y.Modules) (P : X.Modules) [P.IsInvertible]\n    (adj : tensorPullback f ⊣ pushforward f)\n    (e : (tensorPullback f).obj N ≅ P) :\n    let φ := (adj.homEquiv I.toModules (SheafOfModules.unit X.ringCatSheaf)).symm\n      (I.toModulesι ≫ SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)\n    let μP := image.ι φ ▷ P ≫ (λ_ P).hom\n    let N₁ := (tensorPullback f).obj N\n    let μ₁ := (I.comap f).toModulesι ▷ N₁ ≫ (λ_ N₁).hom\n    let c := adj.leftAdjointUniq (Classical.choose (exists_tensorPullbackAdjunction f))\n    ∃ q : Γ(image μP, ⊤) ≃+ Γ((I.comap f).toModules ⊗ N₁, ⊤),\n      ∀ t, μ₁.app ⊤ (q t) =\n        (c.app N).hom.app ⊤ (e.inv.app ⊤ ((image.ι μP).app ⊤ t))",
   "branch": "sheaf-dag",

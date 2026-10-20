@@ -6,7 +6,7 @@ Authors: SHEAF groups NZ, M3
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison

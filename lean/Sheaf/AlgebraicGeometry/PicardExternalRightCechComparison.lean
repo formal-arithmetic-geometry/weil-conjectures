@@ -5,8 +5,8 @@ Authors: SHEAF group M4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
-public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
+public import WeilConjectures.AlgebraicGeometry.PicardExternalRightCechModels
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import Sheaf.AlgebraicGeometry.PicardRightCechCupHomology

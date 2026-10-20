@@ -55,7 +55,7 @@ import Mathlib.RingTheory.Flat.Localization
 import Sheaf.Algebra.Homology.BaseChangeRHomPerfect
 import Mathlib.RingTheory.Flat.Basic
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
+import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Sheaf.Paper.PointSectionsScalarExtension
 import Mathlib.Algebra.Colimit.Module

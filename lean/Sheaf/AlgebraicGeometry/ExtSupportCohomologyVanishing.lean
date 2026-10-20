@@ -5,15 +5,13 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.Dimension
+public import WeilConjectures.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Dimension
 public import Sheaf.AlgebraicGeometry.SheafExt
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import Sheaf.AlgebraicGeometry.SheafExtCoherent
 import Sheaf.AlgebraicGeometry.SheafExtStalkLocalization
 import Sheaf.Paper.SupportDimensionCohomologyVanishing

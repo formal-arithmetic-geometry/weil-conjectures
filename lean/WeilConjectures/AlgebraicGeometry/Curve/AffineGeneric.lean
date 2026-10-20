@@ -594,8 +594,7 @@ theorem subsingleton_sheafH_two_lowerStar (f : C ⟶ Spec (.of k)) [IsConnectedC
     exact ⟨⟨_, L, inferInstance, inferInstance, inferInstance, inferInstance, B, hB, ht, rfl⟩,
       ⟨x, hx⟩, hxdef⟩
   refine subsingleton_of_forall_eq 0 fun x ↦ ?_
-  obtain ⟨j, y, rfl⟩ :=
-    (Scheme.H_map_isColimit_of_isFiltered_of_large C hc 2).1 x
+  obtain ⟨j, y, rfl⟩ := (Scheme.H_map_isColimit_of_isFiltered C hc 2).1 x
   obtain ⟨L, _, _, _, _, hL, hfin⟩ := Scheme.SplitFamily.exists_isSplitBy j
   have := subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_finite f L _ hL
   rw [Subsingleton.elim (h := this) y 0, map_zero]

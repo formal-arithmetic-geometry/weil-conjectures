@@ -114,8 +114,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineKoszulScalarExtComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulScalarExtComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineKoszulScalarExtComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineKoszulScalarExtComparison.lean",
   "declaration": "AlgebraicGeometry.affine_koszul_scalar_ext_comparison",
   "statement": "theorem affine_koszul_scalar_ext_comparison\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (U : Y.affineOpens) (n : ℕ) (f : Fin n → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) (q : ℤ) :\n    let F : Y.Modules := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q).obj\n        ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj\n          (op ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n              ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))),\n            (DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n                (SheafOfModules.unit Y.ringCatSheaf)))\n    Nonempty (F.over U.1 ≅\n      (Scheme.Modules.overEquiv U.1).inverse.obj\n        ((tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).obj\n          ((ExteriorAlgebra.koszulDualCochainComplex (Γ(Y, U.1) : Type u) n f).homology q)))",
   "branch": "sheaf-dag",

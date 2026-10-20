@@ -5,7 +5,7 @@ Authors: SHEAF group T1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 
 import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension

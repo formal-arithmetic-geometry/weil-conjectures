@@ -111,8 +111,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StandardAbelianExtSectionDiagram",
-  "file": "lean/Sheaf/AlgebraicGeometry/StandardAbelianExtSectionDiagram.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.StandardAbelianExtSectionDiagram",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StandardAbelianExtSectionDiagram.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.standard_abelian_ext_section_diagram",
   "statement": "theorem standard_abelian_ext_section_diagram {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F) (K : CochainComplex Y.Modules ℕ)\n    (hK : ∀ n : ℕ, Injective (K.X n))\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l)\n    (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n      ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n        (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n    (ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n      (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op) (p : ℕ) :\n    (abelianResolutionIso Y (injectiveResolution ((pushforward f).obj F)) p).hom ≫\n        (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map\n          (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map\n            (standardSectionEdgeLift f I K hK l)) =\n      standardSectionExtHom f F p ≫\n        (abelianResolutionIso X I p).hom ≫\n        (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map\n          (a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l)",
   "branch": "sheaf-dag",

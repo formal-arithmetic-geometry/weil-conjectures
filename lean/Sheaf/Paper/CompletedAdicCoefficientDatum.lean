@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
 /-! # Completed adic coefficient datum
 

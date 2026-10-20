@@ -108,8 +108,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation",
-  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryLocalizedEvaluation.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CanonicalTensorHomUncurryLocalizedEvaluation.lean",
   "declaration": "AlgebraicGeometry.schemeTensorHomUncurry_localized_evaluation",
   "statement": "theorem schemeTensorHomUncurry_localized_evaluation (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (P P' L L' M M' : CochainComplex\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (a : P' ⟶ P) (b : L' ⟶ L) (c : M ⟶ M')\n    (φ : P ⟶ homComplex (R := X.sheaf) L\n      ((schemeHomKInjectiveResolution X).obj M)) :\n    letI := schemeDerivedTensorMonoidal X\n    pullbackTensorModelMap X P' L' ≫\n      DerivedCategory.Q.map (schemeTensorHomUncurry X P' L' M'\n        (a ≫ φ ≫ (Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))).map\n          (X := (op L, (schemeHomKInjectiveResolution X).obj M))\n          (Y := (op L', (schemeHomKInjectiveResolution X).obj M'))\n          (b.op, (schemeHomKInjectiveResolution X).map c))) ≫\n        schemeHomResolutionInverse X M' =\n      (DerivedCategory.Q.map a ⊗ₘ DerivedCategory.Q.map b) ≫\n        (pullbackTensorModelMap X P L ≫\n          DerivedCategory.Q.map (schemeTensorHomUncurry X P L M φ) ≫\n            schemeHomResolutionInverse X M) ≫ DerivedCategory.Q.map c",
   "branch": "sheaf-dag",

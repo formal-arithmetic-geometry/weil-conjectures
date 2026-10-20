@@ -7,8 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
 
 import Sheaf.CategoryTheory.FilteredHomologyCoupleQuotientPages

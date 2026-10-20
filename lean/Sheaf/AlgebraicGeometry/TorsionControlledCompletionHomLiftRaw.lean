@@ -1,8 +1,8 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentMapTorsionCompletionExtZero
-import Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftCompletion
+public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+import WeilConjectures.AlgebraicGeometry.CoherentMapTorsionCompletionExtZero
+import WeilConjectures.AlgebraicGeometry.TorsionControlledCompletionHomLiftCompletion
 
 @[expose] public section
 universe u

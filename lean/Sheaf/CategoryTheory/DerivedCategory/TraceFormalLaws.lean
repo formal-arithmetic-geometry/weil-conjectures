@@ -15,7 +15,7 @@ public import Mathlib.Algebra.BigOperators.Finprod
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Sheaf.CategoryTheory.DerivedCategory.ChainSupertrace
 import Sheaf.Algebra.Homology.FilteredProjectiveModel
-import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.LinearAlgebra.Basis.VectorSpace

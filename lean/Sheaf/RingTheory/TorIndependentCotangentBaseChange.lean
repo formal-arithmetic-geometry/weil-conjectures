@@ -13,9 +13,9 @@ public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 
 /-!
 # Polynomial resolutions under Tor-independent base change

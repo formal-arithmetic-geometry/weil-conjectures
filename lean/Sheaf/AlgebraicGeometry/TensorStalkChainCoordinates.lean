@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 
 import Sheaf.AlgebraicGeometry.TensorCoordinateIdentifications
-import Sheaf.AlgebraicGeometry.TensorPullbackStalkSquare
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStalkSquare
 
 /-! # Tensor coordinates and the chain-level stalk square
 

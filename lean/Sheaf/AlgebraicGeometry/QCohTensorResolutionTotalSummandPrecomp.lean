@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTotalSummandNaturality
+public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionTotalSummandNaturality
 
 @[expose] public section
 universe u

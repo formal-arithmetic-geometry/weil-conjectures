@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
+public import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect

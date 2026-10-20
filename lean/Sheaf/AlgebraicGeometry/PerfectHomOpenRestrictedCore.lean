@@ -1,6 +1,6 @@
 module
-public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
-public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+public import WeilConjectures.AlgebraicGeometry.PerfectHomPushPullCocone
+public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedMaps
 @[expose] public section
 universe u w

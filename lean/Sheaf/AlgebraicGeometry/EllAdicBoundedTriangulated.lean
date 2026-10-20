@@ -12,6 +12,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import Sheaf.Paper.IntegralConstructibleSerre
+public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Triangulated closure for the ell-adic finiteness coefficient class
 

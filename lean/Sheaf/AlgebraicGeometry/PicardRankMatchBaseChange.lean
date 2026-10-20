@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestricti
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.PicardBaseChangeStalkRanks
+import WeilConjectures.AlgebraicGeometry.PicardBaseChangeStalkRanks
 import Sheaf.AlgebraicGeometry.PicardBaseChangeStalkSurjective
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Mathlib.RingTheory.FiniteType

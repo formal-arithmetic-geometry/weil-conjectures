@@ -5,7 +5,7 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
+public import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
 import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryChainNaturality
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 

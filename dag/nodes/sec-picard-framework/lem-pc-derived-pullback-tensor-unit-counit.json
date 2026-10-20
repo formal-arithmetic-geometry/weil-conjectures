@@ -106,8 +106,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitCounit",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorUnitCounit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitCounit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedPullbackTensorUnitCounit.lean",
   "declaration": "AlgebraicGeometry.derivedPullback_tensor_unit_counit_isIso",
   "statement": "theorem derivedPullback_tensor_unit_counit_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]\n    (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤\n      SheafOfModules.{uModel} (moduleRings T.toRingedSpace))\n    (hF : ∀ M, F.obj M = Scheme.Modules.tensorPullbackObj g M)\n    (hmap : ∀ {M N} (a : M ⟶ N),\n      F.map a = eqToHom (hF M) ≫ Scheme.Modules.tensorPullbackMap g a ≫\n        eqToHom (hF N).symm)\n    [F.Additive]\n    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶\n      F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (hε : (derivedPullback g).IsLeftDerivedFunctor ε\n      (HomotopyCategory.quasiIso\n        (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)))\n    : IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj\n        (𝟙_ (CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ))))",
   "branch": "sheaf-dag",

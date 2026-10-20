@@ -5,11 +5,11 @@ Authors: SHEAF group R4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import Sheaf.AlgebraicGeometry.StrictlyPerfectLocalHomComputations
 import Sheaf.AlgebraicGeometry.ExactSourceEvaluationLocalComparisons
-import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferential
+import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
 
 /-! # A local section of canonical derived evaluation
 

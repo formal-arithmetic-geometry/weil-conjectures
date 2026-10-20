@@ -104,8 +104,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationComponentFactorization",
-  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationComponentFactorization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationComponentFactorization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OrdinaryEvaluationComponentFactorization.lean",
   "declaration": "AlgebraicGeometry.ordinaryEvaluation_component_factorization",
   "statement": "theorem ordinaryEvaluation_component_factorization (X : Scheme.{u}) (U : X.Opens)\n    (P F : CochainComplex (localEvaluationModules X U) ℤ)\n    (p q n r : ℤ) (hpq : p + q = n) (hr : r + q = 0) :\n    localEvaluationComponent X U P F p q n r hpq =\n      (F.X p ◁ (localEvaluationProjection X U P (localEvaluationUnit X U) q r 0 hr ≫\n        SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r))\n          (HomologicalComplex.singleObjXSelf (.up ℤ) 0\n            (𝟙_ (localEvaluationModules X U))).hom)) ≫\n      SheafOfModules.moduleDualEvaluation.{u}\n        (C := Over U) (J := (Opens.grothendieckTopology X).over U) (X.sheaf.over U)\n        (P.X r) (F.X p) ≫\n      SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r))\n        (F.XIsoOfEq (by omega : p = r + n)).hom",
   "branch": "sheaf-dag",

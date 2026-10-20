@@ -5,14 +5,14 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Topology.QuasiSeparated
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
-import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
-import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.AlgebraicGeometry.KoszulOpenOrthogonality
+import WeilConjectures.AlgebraicGeometry.PerfectSupportedMapLift
+import WeilConjectures.AlgebraicGeometry.SupportedOpenPushforward
 import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 
 /-! # Extending perfect generators across an affine open

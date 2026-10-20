@@ -15,8 +15,8 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
-import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
-import Sheaf.AlgebraicGeometry.ConstructibleColimitFactorization
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSheafColimit
+import WeilConjectures.AlgebraicGeometry.ConstructibleColimitFactorization
 import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.AlgebraicGeometry.DerivedPullbackPreservesQCoh
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackPreservesQCoh
 import Sheaf.AlgebraicGeometry.DerivedTensorPreservesQCoh
 
 /-! # Derived pullback and tensor preserve quasi-coherent cohomology

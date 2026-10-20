@@ -137,8 +137,8 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorSectionProductComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorSectionProductComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SquareZeroTensorSectionProductComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SquareZeroTensorSectionProductComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.tensorSectionProduct_comparison",
   "statement": "theorem tensorSectionProduct_comparison {X Z : Scheme.{u}} (j : Z ⟶ X)\n    [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)\n    (n : ℕ) (D : TensorBoundaryComparisonData j L n)\n    (hD : canonicalTensorBoundaryComparisons j L hI n = D)\n    (e : ℕ) (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n)\n    (x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1))\n    (hdeg : n * (0 + 1) + n * (e + 1) = n * ((e + 1) + 1)) :\n    ((tensorPullback j).map (eqToHom (congrArg L.tensorPow hdeg))).app ⊤\n      (((tensorPullback j).map\n        (L.tensorPowAddIso (n * (0 + 1)) (n * (e + 1))).inv).app ⊤\n        ((boundaryPullbackTensorIso j (L.tensorPow (n * (0 + 1)))\n          (L.tensorPow (n * (e + 1)))).inv.app ⊤\n          (tmulSection\n            ((tensorPowSection f 1 ≫ (D.a 0).inv).app ⊤ (1 : Γ(Z, ⊤)))\n            ((x ≫ (D.a e).inv).app ⊤ (1 : Γ(Z, ⊤)))))) =\n      ((((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x)) ≫ (D.a (e + 1)).inv).app ⊤\n        (1 : Γ(Z, ⊤)))",
   "branch": "sheaf-dag",

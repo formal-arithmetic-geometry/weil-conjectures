@@ -114,8 +114,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PrincipalCechFiniteColumnModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalCechFiniteColumnModel.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PrincipalCechFiniteColumnModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PrincipalCechFiniteColumnModel.lean",
   "declaration": "AlgebraicGeometry.principalCech_finiteColumn_model",
   "statement": "theorem principalCech_finiteColumn_model\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (F G : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (i : F ⟶ G) :\n    ∃ (K L : HomologicalComplex₂ (ModuleCat.{u} A) (ComplexShape.up ℤ)\n        (ComplexShape.up ℤ)) (φ : K ⟶ L),\n      CochainComplex.IsStrictlyGE K 0 ∧ CochainComplex.IsStrictlyLE K ((r : ℤ) - 1) ∧\n      CochainComplex.IsStrictlyGE L 0 ∧ CochainComplex.IsStrictlyLE L ((r : ℤ) - 1) ∧\n      (∀ p : ℤ, 0 ≤ p → p ≤ (r : ℤ) - 1 →\n        (∀ S : {S : Finset (Fin r) // S.Nonempty},\n          QuasiIso (((affineOpenSections A\n            (principalCechIntersection r f S.val)).mapHomologicalComplex\n              (ComplexShape.up ℤ)).map i)) → QuasiIso (φ.f p)) ∧\n      Nonempty (Arrow.mk ((principalCechFunctor r f).map i) ≅\n        Arrow.mk (HomologicalComplex₂.total.map φ (ComplexShape.up ℤ)))",
   "branch": "sheaf-dag",

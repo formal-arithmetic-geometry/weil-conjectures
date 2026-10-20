@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import Sheaf.AlgebraicGeometry.ExactFunctorAffinePullbackSections
-import Sheaf.AlgebraicGeometry.GlobalSectionsLimitComparison
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsLimitComparison
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits

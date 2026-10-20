@@ -23,7 +23,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.ComparisonTorAmplitude
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 
 /-!
 # Bounded-below reflection of finite-Tor constructibility

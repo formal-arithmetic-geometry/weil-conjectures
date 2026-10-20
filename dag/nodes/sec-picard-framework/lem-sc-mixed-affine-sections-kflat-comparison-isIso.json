@@ -120,8 +120,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.MixedAffineSectionsKFlatComparisonIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/MixedAffineSectionsKFlatComparisonIso.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.MixedAffineSectionsKFlatComparisonIso",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/MixedAffineSectionsKFlatComparisonIso.lean",
   "declaration": "AlgebraicGeometry.mixedAffineSections_kFlat_comparison_isIso",
   "statement": "theorem mixedAffineSections_kFlat_comparison_isIso\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]\n    {S T : Scheme.{u}} [IsAffine S] [IsAffine T]\n    (g : T ⟶ S) (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ)\n    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat P) :\n    let Q := DerivedCategory.Q.obj\n        ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n          (@id (SheafOfModules.{u} (moduleRings (Spec Γ(S, ⊤)).toRingedSpace) ⥤\n            SheafOfModules.{u} (moduleRings S.toRingedSpace))\n            (Scheme.Modules.restrictFunctor S.toSpecΓ))\n          (by change (Scheme.Modules.restrictFunctor S.toSpecΓ).PreservesZeroMorphisms\n              infer_instance) (.up ℤ)).obj\n            ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n              (@id (ModuleCat.{u} Γ(S, ⊤) ⥤\n                SheafOfModules.{u} (moduleRings (Spec Γ(S, ⊤)).toRingedSpace))\n                (tilde.functor Γ(S, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj P))\n    IsIso (((mixedGlobalExtensionAdjunction g).homEquiv _ _).symm\n      ((schemeDerivedGlobalSections S).map ((schemeHomPullbackAdjunction g).unit.app Q) ≫\n        (mixedGlobalSectionsDirectImageIso g).hom.app ((derivedPullback g).obj Q)))",
   "branch": "sheaf-dag",

@@ -7,9 +7,9 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Homology.ExactSequence
-public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
+public import WeilConjectures.AlgebraicGeometry.PerfectHomLocalComparison
 import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisStageRowsCore
-import Sheaf.AlgebraicGeometry.PerfectHomTrianglePresentedRowsExact
+import WeilConjectures.AlgebraicGeometry.PerfectHomTrianglePresentedRowsExact
 
 /-! # The geometric diagram before taking the exact filtered colimit
 

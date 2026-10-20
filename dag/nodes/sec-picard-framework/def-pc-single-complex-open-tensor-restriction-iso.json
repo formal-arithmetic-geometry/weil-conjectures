@@ -76,8 +76,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenTensorRestrictionIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenTensorRestrictionIso.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SingleComplexOpenTensorRestrictionIso",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SingleComplexOpenTensorRestrictionIso.lean",
   "declaration": "AlgebraicGeometry.singleComplexOpenTensorRestrictionMap",
   "statement": "def singleComplexOpenTensorRestrictionMap\n    [d : ∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' : Scheme.{u}} (g' : X' ⟶ X)\n    (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme)\n    (hj : j ≫ U.ι = U'.ι ≫ g')\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    letI : HasDerivedCategory.{w} X.Modules := d X\n    letI : HasDerivedCategory.{w} X'.Modules := d X'\n    letI : HasDerivedCategory.{w} U.toScheme.Modules := d U.toScheme\n    letI : HasDerivedCategory.{w} U'.toScheme.Modules := d U'.toScheme\n    letI : (schemeOpenRestriction X U).Additive := schemeOpenRestriction_additive X U\n    letI : (schemeOpenRestriction X' U').Additive := schemeOpenRestriction_additive X' U'\n    DerivedCategory.Q.{w}.obj (((Scheme.Modules.tensorPullback j).mapHomologicalComplex\n      (.up ℤ)).obj (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)) ⟶\n    (schemeOpenRestriction X' U').mapDerivedCategory.obj\n      (DerivedCategory.Q.{w}.obj\n        (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P))",
   "branch": "sheaf-dag",

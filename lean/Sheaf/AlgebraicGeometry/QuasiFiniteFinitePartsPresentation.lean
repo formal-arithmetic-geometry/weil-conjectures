@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.SixFunctors.BaseChange.Square
-public import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
+public import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 public import WeilConjectures.Algebra.Category.ModuleCat.RingScalarExtension
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.AlgebraicGeometry.Scheme

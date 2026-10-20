@@ -5,7 +5,7 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupLeftCechExact
 public import Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction
 import Sheaf.AlgebraicGeometry.PicardExternalCechCupComponent
 import Sheaf.Algebra.Homology.TensorTotalExtensionCoordinates

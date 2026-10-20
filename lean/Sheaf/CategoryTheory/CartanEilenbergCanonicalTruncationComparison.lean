@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.FilteredComplexCanonicalModel
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor
 import Sheaf.CategoryTheory.FilteredComplexDecalageComparison
 import Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObject

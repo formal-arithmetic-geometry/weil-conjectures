@@ -87,8 +87,8 @@
  "statement": "For a commutative ring A with the indicated derived categories, there exists an equivalence between the derived category of A-modules and the quasi-coherent derived category on Spec A, together with the termwise tilde comparison, the derived global-sections quasi-inverse, and triangulated structure.",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineQCohDerivedEquivalenceCore.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineQCohDerivedEquivalenceCore.lean",
   "declaration": "AlgebraicGeometry.exists_affineQCohDerivedEquivalence_core",
   "statement": "theorem exists_affineQCohDerivedEquivalence_core (A : Type u) [CommRing A]\n    [HasDerivedCategory.{wA} (ModuleCat.{u} A)]\n    [HasDerivedCategory.{wY}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] :\n    ∃ e : DerivedCategory (ModuleCat.{u} A) ≌ schemeDerivedQCohCategory (Spec (.of A)),\n      Nonempty (DerivedCategory.Q ⋙ e.functor ⋙\n        (schemeDerivedQCohProperty (Spec (.of A))).ι ≅\n        @Functor.mapHomologicalComplex _ _ _ _ _ _ _\n          (@id (ModuleCat.{u} A ⥤\n            SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n            (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ) ⋙\n          DerivedCategory.Q) ∧\n      Nonempty (e.inverse ≅ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n        (RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙\n          ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctor) ∧\n      (∃ (_h : (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).CommShift ℤ),\n        (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).IsTriangulated)",
   "branch": "sheaf-dag",

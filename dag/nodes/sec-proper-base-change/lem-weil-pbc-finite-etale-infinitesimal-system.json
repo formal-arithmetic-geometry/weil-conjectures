@@ -107,8 +107,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleInfinitesimalSystem",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleInfinitesimalSystem.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteEtaleInfinitesimalSystem",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteEtaleInfinitesimalSystem.lean",
   "declaration": "AlgebraicGeometry.exists_finiteEtale_infinitesimal_system",
   "statement": "theorem exists_finiteEtale_infinitesimal_system\n    {A : Type u} [CommRing A] (I : Ideal A)\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of A))\n    (V : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤\n      (pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) :\n    ∃ (Yn : ℕ → Scheme.{u})\n      (fnY : ∀ n, Yn n ⟶ pullback f\n        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))\n      (gn : ∀ n, Yn n ⟶ Yn (n + 1)),\n      (∀ n, IsFinite (fnY n) ∧ Etale (fnY n)) ∧\n      (∀ n, IsPullback (fnY n) (gn n)\n      (pullback.map f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))\n        f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))) (𝟙 X)\n        (Spec.map (CommRingCat.ofHom\n          (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ (n + 1))))))\n        (𝟙 _) (by simp)\n        (by rw [Category.comp_id, ← Spec.map_comp, ← CommRingCat.ofHom_comp,\n              Ideal.Quotient.factor_comp_mk]))\n      (fnY (n + 1))) ∧\n      Nonempty (Over.mk (show Yn 0 ⟶ pullback f\n        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) from\n          by rw [← pow_one I]; exact fnY 0) ≅ Over.mk V.hom)",
   "branch": "sheaf-dag",

@@ -7,8 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.RingedExtendedCech
 public import Sheaf.CategoryTheory.RingedDerivedRestriction
-public import Sheaf.Algebra.Homology.HomComplexUnitEvaluationIsIso
-public import Sheaf.Algebra.Homology.HomComplexUnitEvaluationComm
+public import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationIsIso
+public import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationComm
 
 /-!
 # The canonical internal-Hom completion unit

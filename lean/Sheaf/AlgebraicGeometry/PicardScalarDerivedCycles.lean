@@ -5,11 +5,11 @@ Authors: SHEAF group A2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PicardDerivedModelSections
 
 import Sheaf.AlgebraicGeometry.PicardConnectiveModelComparison
-import Sheaf.AlgebraicGeometry.PicardOrdinaryScalarCoordinates
+import WeilConjectures.AlgebraicGeometry.PicardOrdinaryScalarCoordinates
 
 /-! # Scalar cycles as derived test sections
 

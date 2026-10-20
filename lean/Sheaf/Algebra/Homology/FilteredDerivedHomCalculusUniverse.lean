@@ -13,7 +13,7 @@ import Sheaf.Algebra.Homology.UniformFilteredTruncation
 import Sheaf.Algebra.Homology.FilteredBoundedLocalizationComparison
 import Sheaf.Algebra.Homology.FilteredHomComplexInvariance
 import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!

@@ -5,7 +5,7 @@ Authors: SHEAF group NZ
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Geometric stalks of cohomology sheaves

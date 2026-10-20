@@ -146,8 +146,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationTensorSummands",
-  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationTensorSummands.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationTensorSummands",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OrdinaryEvaluationTensorSummands.lean",
   "declaration": "AlgebraicGeometry.exists_ordinaryEvaluation_tensor_summands",
   "statement": "theorem exists_ordinaryEvaluation_tensor_summands (X : Scheme.{u}) (U : X.Opens) :\n    let L := Equivalence.functor\n      (C := localEvaluationModules X U)\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)\n    let T := L.mapHomologicalComplex (.up ℤ)\n    ∃ m : L.CoreMonoidal,\n      m.εIso = Scheme.Modules.overEquivFunctorObjUnitIso U ∧\n      (∀ A B : localEvaluationModules X U,\n        L.map (β_ A B).hom ≫ (m.μIso B A).inv =\n          (m.μIso A B).inv ≫ (β_ (L.obj A) (L.obj B)).hom) ∧\n      ∀ P F : CochainComplex (localEvaluationModules X U) ℤ,\n        ∃ c : T.obj (localEvaluationTensor X U P F) ≅\n            pullbackTensorTotal U.toScheme (T.obj F) (T.obj (localEvaluationDual X U P)),\n          ∀ (p q n : ℤ) (h : p + q = n),\n            L.map (HomologicalComplex.ιMapBifunctor F (localEvaluationDual X U P)\n                (curriedTensor _) (.up ℤ) p q n h) ≫ c.hom.f n =\n              (m.μIso (F.X p) ((localEvaluationDual X U P).X q)).inv ≫\n                HomologicalComplex.ιMapBifunctor (T.obj F)\n                  (T.obj (localEvaluationDual X U P)) (curriedTensor _) (.up ℤ) p q n h",
   "branch": "sheaf-dag",

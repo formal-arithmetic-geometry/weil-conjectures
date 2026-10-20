@@ -89,8 +89,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.NormalizedHomotopyTensorHom",
-  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedHomotopyTensorHom.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.NormalizedHomotopyTensorHom",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/NormalizedHomotopyTensorHom.lean",
   "declaration": "AlgebraicGeometry.exists_normalizedHomotopyTensorHom",
   "statement": "theorem exists_normalizedHomotopyTensorHom (X : Scheme.{u})\n    (P L I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    letI := SheafOfModules.symmetricCategory X.sheaf\n    let q := HomotopyCategory.quotient\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)\n    ∃ e : (q.obj P ⟶ q.obj (homComplex (R := X.sheaf) L I)) ≃\n        (q.obj (pullbackTensorTotal X P L) ⟶ q.obj I),\n      ∀ φ : P ⟶ homComplex (R := X.sheaf) L I,\n        ∃ ψ : pullbackTensorTotal X P L ⟶ I,\n          (∀ (p r n : ℤ) (h : p + r = n) (h' : r + p = n),\n            HomologicalComplex.ιMapBifunctor P L (curriedTensor _) (.up ℤ) p r n h ≫\n              ψ.f n =\n              (β_ (P.X p) (L.X r)).hom ≫\n                (SheafOfModules.tensorHomEquiv (L.X r) (P.X p) (I.X n)).symm\n                  (φ.f p ≫ homTensorProjection X.sheaf L I p r n h')) ∧\n          e (q.map φ) = q.map ψ",
   "branch": "sheaf-dag",

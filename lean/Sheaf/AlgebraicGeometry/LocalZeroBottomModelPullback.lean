@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.LocalZeroBottomTruncation
+import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
+import WeilConjectures.AlgebraicGeometry.LocalZeroBottomTruncation
 import Sheaf.AlgebraicGeometry.ZeroBottomArrowPullbackLocal
 import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic

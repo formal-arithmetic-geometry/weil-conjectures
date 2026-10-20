@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
+import WeilConjectures.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
 
 /-!
 # Descent of an etale cohomology class to a finite stage

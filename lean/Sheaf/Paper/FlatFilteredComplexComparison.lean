@@ -8,7 +8,6 @@ module
 public import Sheaf.CategoryTheory.FlatFilteredScalarExtension
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.FiniteFiltrationInduction
 import Sheaf.CategoryTheory.SpectralSequencePageInduction
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence

@@ -5,7 +5,7 @@ Authors: SHEAF group M3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
+public import WeilConjectures.AlgebraicGeometry.PicardDerivedModelSections
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian

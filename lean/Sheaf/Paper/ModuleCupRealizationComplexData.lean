@@ -6,7 +6,7 @@ Authors: SHEAF group F4
 module
 
 public import Sheaf.Paper.ModuleCupResolutionData
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 

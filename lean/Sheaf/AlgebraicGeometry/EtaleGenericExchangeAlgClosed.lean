@@ -14,8 +14,8 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Topology.Sheaves.Functors
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -47,8 +47,8 @@ import Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.RhomGlobalSections
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.RhomGlobalSections
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import Sheaf.Paper.SfHomTriangulated
 import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

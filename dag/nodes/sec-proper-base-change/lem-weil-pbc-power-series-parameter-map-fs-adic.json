@@ -110,8 +110,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PowerSeriesParameterMapFormallySmoothAdic",
-  "file": "lean/Sheaf/RingTheory/PowerSeriesParameterMapFormallySmoothAdic.lean",
+  "module": "WeilConjectures.RingTheory.PowerSeriesParameterMapFormallySmoothAdic",
+  "file": "lean/WeilConjectures/RingTheory/PowerSeriesParameterMapFormallySmoothAdic.lean",
   "declaration": "MvPowerSeries.formallySmoothAdic_of_parameters_closedFiber",
   "statement": "theorem formallySmoothAdic_of_parameters_closedFiber\n    (ΛR : Type u) (ΛT : Type v) [CommRing ΛR] [CommRing ΛT] (n m : ℕ)\n    [IsRegularLocalRing (MvPowerSeries (Fin n) ΛR)]\n    [IsRegularLocalRing (MvPowerSeries (Fin m) ΛT)]\n    (i : MvPowerSeries (Fin n) ΛR →+* MvPowerSeries (Fin m) ΛT) [IsLocalHom i]\n    (t : List (MvPowerSeries (Fin n) ΛR))\n    (y : List (MvPowerSeries (Fin m) ΛT))\n    (ht : IsRegularSystemOfParameters t)\n    (hy : IsRegularSystemOfParameters (t.map i ++ y))\n    (hcoeff : (IsField ΛR ∧ IsField ΛT ∧ CharZero ΛR ∧ CharZero ΛT) ∨\n      ∃ p : ℕ, p.Prime ∧ IsCohenRing p ΛR ∧ IsCohenRing p ΛT ∧\n        t.head? = some (p : MvPowerSeries (Fin n) ΛR)) :\n    let R := MvPowerSeries (Fin n) ΛR\n    let T := MvPowerSeries (Fin m) ΛT\n    letI : Algebra R T := i.toAlgebra\n    let L : Ideal T := (maximalIdeal R).map i\n    letI : Algebra (R ⧸ maximalIdeal R) (T ⧸ L) :=\n      Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :\n        maximalIdeal R ≤ L.comap (algebraMap R T))\n    Algebra.FormallySmoothAdic (R ⧸ maximalIdeal R) (T ⧸ L)\n        ((maximalIdeal T).map (Ideal.Quotient.mk L)) →\n      Algebra.FormallySmoothAdic R T (maximalIdeal T)",
   "branch": "sheaf-dag",

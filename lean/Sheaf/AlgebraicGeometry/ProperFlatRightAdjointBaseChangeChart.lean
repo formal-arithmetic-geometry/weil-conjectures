@@ -5,12 +5,12 @@ Authors: SHEAF group M4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
+import WeilConjectures.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointChartMateComparison
 
 /-! # Proper-flat right-adjoint base change on one affine chart

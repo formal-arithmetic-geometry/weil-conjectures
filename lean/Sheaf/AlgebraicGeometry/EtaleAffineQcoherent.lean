@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
+import WeilConjectures.AlgebraicGeometry.EtaleAffineQcoherentULift
 import WeilConjectures.AlgebraicGeometry.EtaleULiftInjectiveResolution
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 

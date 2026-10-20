@@ -6,8 +6,8 @@ Authors: SHEAF group T3
 module
 
 public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
-import Sheaf.CategoryTheory.CartanEilenbergAugmentationQuasiIso
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
+import WeilConjectures.CategoryTheory.CartanEilenbergAugmentationQuasiIso
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import Mathlib.Algebra.Homology.TotalComplexSymmetry
 

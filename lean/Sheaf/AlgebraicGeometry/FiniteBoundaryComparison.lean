@@ -5,7 +5,7 @@ Authors: SHEAF group ND
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import WeilConjectures.SixFunctors.OpenClosed.Derived
 import WeilConjectures.SixFunctors.Finite.Counit

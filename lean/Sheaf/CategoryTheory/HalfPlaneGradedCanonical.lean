@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.CategoryTheory.HalfPlaneConvergence
+public import WeilConjectures.CategoryTheory.HalfPlaneConvergence
 
 /-!
 # Canonical half-plane graded identification

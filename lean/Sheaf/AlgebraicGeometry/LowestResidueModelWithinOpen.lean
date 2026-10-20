@@ -6,7 +6,7 @@ Authors: SHEAF groups P2 and P3
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.ResidueBettiZeroOfTensorVanishing

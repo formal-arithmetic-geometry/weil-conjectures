@@ -5,7 +5,7 @@ Authors: SHEAF group Q3
 -/
 module
 
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 

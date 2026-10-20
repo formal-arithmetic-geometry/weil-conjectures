@@ -11,10 +11,10 @@ import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 import Sheaf.Algebra.Homology.RationalTermHomComparison
-import Sheaf.Algebra.Homology.StupidTailHomShortExact
+import WeilConjectures.Algebra.Homology.StupidTailHomShortExact
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients

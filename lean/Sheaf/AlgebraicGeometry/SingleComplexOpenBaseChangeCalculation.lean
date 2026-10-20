@@ -1,9 +1,9 @@
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeComparisons
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Sheaf.AlgebraicGeometry.SingleComplexOpenCounitCompatibility
-import Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCube
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenBaseChangeComparisons
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import WeilConjectures.AlgebraicGeometry.SingleComplexOpenCounitCompatibility
+import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPullbackCube
 
 /-! # Residual calculation for explicit open base-change comparisons
 

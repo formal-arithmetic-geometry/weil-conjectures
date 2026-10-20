@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.FiniteCoefficientDirectImage
 public import Sheaf.SixFunctors.EtaleOpenTensor
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.SixFunctors.EtaleHomThickLocus
 import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 import Sheaf.SmoothPurity.InternalAdjunctionEvaluation

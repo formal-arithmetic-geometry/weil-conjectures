@@ -108,8 +108,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.MixedSectionsSquareComparisonCoherence",
-  "file": "lean/Sheaf/AlgebraicGeometry/MixedSectionsSquareComparisonCoherence.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.MixedSectionsSquareComparisonCoherence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/MixedSectionsSquareComparisonCoherence.lean",
   "declaration": "AlgebraicGeometry.mixedSections_square_comparison_coherence",
   "statement": "theorem mixedSections_square_comparison_coherence\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)\n    (F : schemeDerivedCategory (pullback f g)) :\n    let a := fun {A D : Scheme.{u}} (h : A ⟶ D) ↦ schemeHomPullbackAdjunction h\n    let p := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    let k := p (pullback.snd f g) g ≪≫\n      eqToIso (congrArg (fun h ↦ derivedPullback h)\n        (pullback.condition (f := f) (g := g)).symm) ≪≫\n          (p (pullback.fst f g) f).symm\n    let δ := conjugateEquiv ((a f).comp (a (pullback.fst f g)))\n      ((a g).comp (a (pullback.snd f g))) k.hom\n    (schemeDerivedGlobalSections Y).map (δ.app F) ≫\n        (mixedGlobalSectionsDirectImageIso g).hom.app\n          ((schemeDerivedDirectImage (pullback.snd f g)).obj F) ≫\n        (schemeGlobalScalarRestriction g).map\n          ((mixedGlobalSectionsDirectImageIso (pullback.snd f g)).hom.app F) =\n      (mixedGlobalSectionsDirectImageIso f).hom.app\n          ((schemeDerivedDirectImage (pullback.fst f g)).obj F) ≫\n        (schemeGlobalScalarRestriction f).map\n          ((mixedGlobalSectionsDirectImageIso (pullback.fst f g)).hom.app F) ≫\n        (schemeGlobalScalarSquareIso f (pullback.snd f g) g (pullback.fst f g)\n          pullback.condition).hom.app ((schemeDerivedGlobalSections (pullback f g)).obj F)",
   "branch": "sheaf-dag",

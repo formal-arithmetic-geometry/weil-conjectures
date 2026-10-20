@@ -69,8 +69,8 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ExistsGluedSection",
-  "file": "lean/Sheaf/AlgebraicGeometry/ExistsGluedSection.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ExistsGluedSection",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ExistsGluedSection.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.existsGluedSection",
   "statement": "theorem existsGluedSection\n    {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]\n    (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]\n    (hcover : (⋃ a : ι, Set.range (i a)) = Set.univ)\n    (hdiscrete : ∀ a b : ι, a ≠ b →\n      DiscreteTopology ↥(Set.range (i a) ∩ Set.range (i b)))\n    (M : ∀ a : ι, (Z a).Modules) [∀ a : ι, (M a).IsInvertible]\n    (s : ∀ a : ι, Γ(M a, ⊤))\n    (hs : ∀ a b : ι, a ≠ b → Set.range (i a) ∩ Set.range (i b) ⊆\n      i a '' nonvanishingLocus (M a) (s a)) :\n    let res : ∀ (N : Y.Modules) (a : ι), Γ(N, ⊤) → Γ((tensorPullback (i a)).obj N, ⊤) :=\n      fun N a t ↦ ((Classical.choose (exists_tensorPullbackAdjunction (i a))).unit.app N).val.app\n        (op ⊤) t\n    ∃ (N : Y.Modules) (t : Γ(N, ⊤)), N.IsInvertible ∧\n      ∀ a : ι, ∃ e : (tensorPullback (i a)).obj N ≅ M a,\n        e.hom.val.app (op ⊤) (res N a t) = s a",
   "branch": "sheaf-dag",

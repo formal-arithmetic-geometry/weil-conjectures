@@ -7,12 +7,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
-import Sheaf.AlgebraicGeometry.FiniteAffineCechModelFlatOver
-import Sheaf.AlgebraicGeometry.FiniteAffineCechModelComparison
-import Sheaf.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison
+import WeilConjectures.AlgebraicGeometry.FiniteAffineCechModelFlatOver
+import WeilConjectures.AlgebraicGeometry.FiniteAffineCechModelComparison
+import WeilConjectures.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison
 import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 
 /-! # A perfect nonnegative flat cohomology model on a specified affine open -/

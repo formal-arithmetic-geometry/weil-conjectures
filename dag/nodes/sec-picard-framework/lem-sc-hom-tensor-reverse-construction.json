@@ -143,8 +143,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.HomTensorReverseConstruction",
-  "file": "lean/Sheaf/Algebra/Homology/HomTensorReverseConstruction.lean",
+  "module": "WeilConjectures.Algebra.Homology.HomTensorReverseConstruction",
+  "file": "lean/WeilConjectures/Algebra/Homology/HomTensorReverseConstruction.lean",
   "declaration": "CategoryTheory.homTensorDegreewise_reverse_construct",
   "statement": "theorem homTensorDegreewise_reverse_construct (K L M : CochainComplex Mod ℤ) (n : ℤ) :\n    letI := SheafOfModules.monoidalCategory R\n    ∃ b : (homComplex (R := R)\n        (CochainComplex.mapBifunctor K L (curriedTensor Mod)) M).X n ⟶\n      (homComplex (R := R) K (homComplex (R := R) L M)).X n,\n      ∀ (p q : ℤ) (U : Cᵒᵖ)\n    (s : (homComplex (R := R)\n      (CochainComplex.mapBifunctor K L (curriedTensor Mod)) M).X n |>.val.obj U)\n    (W : (Over U.unop)ᵒᵖ) (x : (K.X p).val.obj (op W.unop.left))\n    (y : (L.X q).val.obj (op W.unop.left)),\n    let φ := ((homTensorCurryProjection R\n      (CochainComplex.mapBifunctor K L (curriedTensor Mod)) M\n      n (p + q) (p + q + n) rfl).val.app U).hom s\n    let ψ := ((homTensorCurryProjection R K (homComplex (R := R) L M)\n      n p (p + n) rfl).val.app U).hom ((b.val.app U).hom s)\n    let χ := ((homTensorCurryProjection R L M (p + n) q (p + q + n)\n      (by omega)).val.app (op W.unop.left)).hom ((ψ.app W).hom x)\n    (φ.app W).hom\n      (((CochainComplex.ιMapBifunctor K L (curriedTensor Mod)\n        p q (p + q) rfl).val.app (op W.unop.left)).hom\n        (((homTensorCurrySectionMap R (K.X p) (L.X q)).app (op W.unop.left)).hom\n          (x ⊗ₜ[R.obj.obj (op W.unop.left)] y))) =\n      (χ.app (op (Over.mk (𝟙 W.unop.left)))).hom y",
   "branch": "sheaf-dag",

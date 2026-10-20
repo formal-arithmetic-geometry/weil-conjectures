@@ -34,7 +34,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 
 import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
 import Sheaf.RingTheory.RelativeRegularEquationsBaseChange
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
+import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import WeilConjectures.RingTheory.RegularSequenceConormal

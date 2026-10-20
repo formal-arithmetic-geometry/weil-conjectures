@@ -123,8 +123,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RelativeTensorRoofComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTensorRoofComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.RelativeTensorRoofComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RelativeTensorRoofComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictPerfect_relativeTensor_roof_comparison",
   "statement": "theorem strictPerfect_relativeTensor_roof_comparison\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X)\n    (G K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (eK : DerivedCategory.Q.obj K ≅ E ⊗ DerivedCategory.Q.obj G)\n    (U : X.Opens)\n    (L : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hL : IsStrictlyPerfect X U L)\n    (eL : (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj L) :\n    let R := TopCat.Sheaf.inverseImageRing f.base S.sheaf\n    let A := (sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R\n    letI : HasDerivedCategory.{u + 1} (SheafOfModules.{u} (A.over U)) :=\n      HasDerivedCategory.standard _\n    Nonempty\n      (DerivedCategory.Q.obj\n        (((SheafOfModules.overFunctor.{u} A U).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj\n          (((SheafOfModules.restrictScalars\n            ((sheafCompose (Opens.grothendieckTopology X)\n              (forget₂ CommRingCat.{u} RingCat.{u})).map\n                (Modules.tensorPullbackRingMap f))).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K)) ≅\n        DerivedCategory.Q.obj (strictPerfectRelativeTensorComplex f U L G))",
   "branch": "sheaf-dag",

@@ -109,8 +109,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OrderedCechDegreewiseProjection",
-  "file": "lean/Sheaf/AlgebraicGeometry/OrderedCechDegreewiseProjection.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OrderedCechDegreewiseProjection",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OrderedCechDegreewiseProjection.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.orderedCech_degreewise_projection_exists",
   "statement": "theorem orderedCech_degreewise_projection_exists {X' : Scheme.{u}}\n    (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)\n    (D : CochainComplex X'.Modules ℕ)\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor W₀).obj\n          ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj\n              M.presheafModuleCat)).X p)\n    (hlinear : ∀ (p : ℕ) (y : Fin (p + 1) → ULift.{u} (Fin r)) (B : X'.Opens),\n        let c : Γ(D.X p, B) → Γ(M, (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B) :=\n          fun s ↦ ((e p).hom ≫ Pi.π (fun y : Fin (p + 1) → ULift.{u} (Fin r) ↦\n            ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj\n                M.presheafModuleCat).obj\n                (op (∏ᶜ fun l ↦ W₀ (y l)))) y).app (op B) s\n        ∀ (a : Γ(X', B)) (s : Γ(D.X p, B)),\n          c (a • s) = X'.presheaf.map (prod.snd :\n            (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B ⟶ B).op a • c s)\n    : ∃ Q : ∀ p : ℕ, D.X p ⟶ D.X p,\n      IsOrderedCechNaturalProjection M W₀ D e Q",
   "branch": "sheaf-dag",

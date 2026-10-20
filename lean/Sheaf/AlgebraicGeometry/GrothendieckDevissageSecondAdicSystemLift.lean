@@ -5,12 +5,12 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftData
-import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftCompatibility
+import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftCompatibility
 
 /-! # Compatible algebraization before the torsion estimate
 

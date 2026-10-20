@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
 public import Mathlib.RingTheory.Localization.Defs
-import Sheaf.RingTheory.KoszulCoefficientExtension
+import WeilConjectures.RingTheory.KoszulCoefficientExtension
 import WeilConjectures.RingTheory.KoszulRegularFlatBaseChange
 import Mathlib.RingTheory.Flat.Localization
 import WeilConjectures.RingTheory.KoszulExtRoofRepresentatives

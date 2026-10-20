@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.BoundedConstructibleTensorSingle
 import Sheaf.AlgebraicGeometry.BoundedConstructibleDevissage
 import Sheaf.AlgebraicGeometry.EllAdicBoundedTriangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # BoundedConstructibleTensorPreservation
 

@@ -106,8 +106,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.HomTensorPair",
-  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/HomTensorPair.lean",
+  "module": "WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomTensorPair",
+  "file": "lean/WeilConjectures/Algebra/Category/ModuleCat/Sheaf/HomTensorPair.lean",
   "declaration": "SheafOfModules.homTensorPair_construct",
   "statement": "theorem homTensorPair_construct (S A H B D : Mod)\n    (f : S ⟶ homObj (R := R) A H) (g : H ⟶ homObj (R := R) B D) :\n    let := monoidalCategory R\n    ∃ b : S ⟶ homObj (R := R) (A ⊗ B) D,\n      ∀ (U : Cᵒᵖ) (s : S.val.obj U) (W : (Over U.unop)ᵒᵖ)\n        (x : A.val.obj (op W.unop.left)) (y : B.val.obj (op W.unop.left)),\n        (((b.val.app U).hom s).app W).hom\n          (((PresheafOfModules.sheafificationAdjunction\n            (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app\n              (A.val ⊗ B.val) ≫ (tensorObjIsoSheafification (R := R) A B).inv.val).app\n                (op W.unop.left) |>.hom (x ⊗ₜ[R.obj.obj (op W.unop.left)] y)) =\n        ((((g.val.app (op W.unop.left)).hom\n          ((((f.val.app U).hom s).app W).hom x)).app\n            (op (Over.mk (𝟙 W.unop.left)))).hom y)",
   "branch": "sheaf-dag",

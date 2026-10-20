@@ -27,7 +27,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
-import Sheaf.AlgebraicGeometry.GenericComponentsSplit
+import WeilConjectures.AlgebraicGeometry.GenericComponentsSplit
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.RingTheory.RingHom.Flat

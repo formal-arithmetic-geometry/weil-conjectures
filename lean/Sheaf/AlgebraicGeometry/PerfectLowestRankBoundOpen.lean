@@ -5,8 +5,8 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Properties
@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 import WeilConjectures.Topology.ConstructibleIsRetrocompact
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.PerfectJumpLoci
-import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
+import WeilConjectures.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 
 /-! # The rank-bound open for lowest perfect cohomology
 

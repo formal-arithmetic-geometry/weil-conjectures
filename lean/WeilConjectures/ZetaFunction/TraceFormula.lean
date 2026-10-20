@@ -11,8 +11,6 @@ public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.WeilSheaf.StalkPairing
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr
 public import WeilConjectures.ZetaSeries
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.WeilSheaf.LowerShriekOperations
 
 /-!
 # The Grothendieck–Lefschetz trace formula and point counts
@@ -250,15 +248,7 @@ theorem WeilSheaf.pointCount_eq_sum_trace_cohomology (d : ℕ)
       by_contra hc
       exact h (Finset.mem_map.2 ⟨i.toNat, Finset.mem_range.2 (by omega),
         by rw [Nat.castEmbedding_apply, Int.toNat_of_nonneg (by omega)]⟩)
-    have he : topologicalKrullDim (X ↘ Spec (.of k₀)).geometricFiber ≤
-        (d : WithBot ℕ∞) := by
-      have : SmoothOfRelativeDimension d
-          (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure := by
-        dsimp only [Scheme.Hom.geometricFiberToAlgebraicClosure]
-        infer_instance
-      exact topologicalKrullDim_le_of_smoothOfRelativeDimension
-        (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure d
-    have := WeilSheaf.subsingleton_cohomology_adicConstant_of_isProper k₀ l X d he i hi'
+    have := WeilSheaf.subsingleton_cohomology_adicConstant k₀ l X d hi'
     exact hi (by
       dsimp only
       rw [Subsingleton.elim (((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd ^ n) 0,

@@ -1,8 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeMap
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeSourceTransport
 import Sheaf.AlgebraicGeometry.OpenSingleCoefficientTransport
 

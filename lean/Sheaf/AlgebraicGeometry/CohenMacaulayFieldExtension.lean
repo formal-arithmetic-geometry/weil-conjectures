@@ -29,7 +29,7 @@ import Mathlib.Algebra.Category.ModuleCat.Stalk
 import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
-import Sheaf.AlgebraicGeometry.PolynomialChartFibreFlatCriterion
+import WeilConjectures.AlgebraicGeometry.PolynomialChartFibreFlatCriterion
 import WeilConjectures.RingTheory.FlatLocalizedModuleBaseChange
 
 /-! # Cohen-Macaulay loci under extension of fields and base change

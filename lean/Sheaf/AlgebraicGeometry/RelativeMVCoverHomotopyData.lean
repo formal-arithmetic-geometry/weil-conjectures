@@ -5,7 +5,7 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 import Sheaf.AlgebraicGeometry.RelativeMVCoverRows
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 

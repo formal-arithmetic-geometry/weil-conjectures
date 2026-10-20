@@ -91,8 +91,8 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImage",
-  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechComparisonInverseImage.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImage",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/CechComparisonInverseImage.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cechComparison_inverseImage",
   "statement": "theorem exists_cechComparison_inverseImage {R S : Type u} [CommRing R] [CommRing S] {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X) (f : X ⟶ Spec (.of R)) (f' : Y ⟶ Spec (.of S)) (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤) (hcover' : iSup V = ⊤) (M : X.Modules) (N : Y.Modules) (φ : M ⟶ (pushforward g).obj N) (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι), (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l))) : ∃ c : CechComparisonSystem U hcover, ∃ c' : CechComparisonSystem V hcover', ∀ (q : ℕ) (z : (cechOver f U M).cycles q) (z' : (cechOver f' V N).cycles q), (∀ y : Fin (q + 1) → ι, cechCoordinate f' V N q y ((cechOver f' V N).iCycles q z') = N.presheaf.map (homOfLE (hinter q y)).op (φ.val.app (op (⨅ l, U (y l))) (cechCoordinate f U M q y ((cechOver f U M).iCycles q z)))) → c'.overMap f' N q ((cechOver f' V N).homologyπ q z') = Sheaf.H.map (coeff g φ) q (Sheaf.H.mapFunctor (invImage g) (constIso g).symm ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) q (c.overMap f M q ((cechOver f U M).homologyπ q z)))",
   "branch": "sheaf-dag",

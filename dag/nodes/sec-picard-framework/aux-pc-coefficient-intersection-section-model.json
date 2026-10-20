@@ -131,8 +131,8 @@
  ],
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoefficientIntersectionSectionModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientIntersectionSectionModel.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoefficientIntersectionSectionModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoefficientIntersectionSectionModel.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_coefficientIntersection_section_model",
   "statement": "theorem exists_coefficientIntersection_section_model\n    {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : T.Opens) (hU : IsAffineOpen U)\n    (Z : (f ⁻¹ᵁ U).toScheme.Opens) (hZ : IsAffineOpen Z)\n    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n    (sq : IsPullback g' f' f (g ≫ U.ι))\n    (W : X'.Opens) (hW : W = g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ Z))\n    (B : T'.Opens) (hB : IsAffineOpen B) :\n    let D := Γ((f ⁻¹ᵁ U).toScheme, Z)\n    let S := Γ(X', W ⊓ f' ⁻¹ᵁ B)\n    let : Algebra D S := (coefficientIntersectionRingMap f U Z g g' f' sq W hW B).toAlgebra\n    let M := (pullback g').obj F\n    ∃ e : Γ(M, W ⊓ f' ⁻¹ᵁ B) →ₗ[S]\n        (S ⊗[D] Γ(F.restrict (f ⁻¹ᵁ U).ι, Z)),\n      ∀ s : Γ(F.restrict (f ⁻¹ᵁ U).ι, Z),\n        e (M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op\n          (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s)) =\n        (1 : S) ⊗ₜ[D] s",
   "branch": "sheaf-dag",

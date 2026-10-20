@@ -111,8 +111,8 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoPushforwardHull",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineDepthTwoPushforwardHull.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.AffineDepthTwoPushforwardHull",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/AffineDepthTwoPushforwardHull.lean",
   "declaration": "AlgebraicGeometry.Scheme.affine_depth_two_pushforward_hull",
   "statement": "theorem affine_depth_two_pushforward_hull\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (hboundary : ∀ y : L, y ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y) (L.presheaf.stalk y))\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) [IsFinite f] [Etale f]\n    (V : L.Opens) (hV : IsAffineOpen V) :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    let N := Modules.restrict B.toModule hV.fromSpec\n    N.IsQuasicoherent ∧\n      Module.Finite (L.presheaf.obj (op V)) Γ(N, ⊤) ∧\n      (∀ x : Spec (L.presheaf.obj (op V)), hV.fromSpec x ∉ U →\n        ∃ hfinite : Module.Finite ((Spec (L.presheaf.obj (op V))).presheaf.stalk x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) N.val.presheaf x),\n          letI := hfinite\n          (2 : ℕ∞) ≤ IsLocalRing.depth\n            (R := (Spec (L.presheaf.obj (op V))).presheaf.stalk x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) N.val.presheaf x))",
   "branch": "sheaf-dag",

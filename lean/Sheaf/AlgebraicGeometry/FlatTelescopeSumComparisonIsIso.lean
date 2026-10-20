@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
+public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
 public import Sheaf.AlgebraicGeometry.BoundedFlatShiftRepresentative
 import Sheaf.AlgebraicGeometry.FlatTelescopeSumModels
 import Sheaf.AlgebraicGeometry.FlatComparisonPreservesCountableCoproducts

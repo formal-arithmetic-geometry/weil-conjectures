@@ -130,8 +130,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalAffineMorphismRealization",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalAffineMorphismRealization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalAffineMorphismRealization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalAffineMorphismRealization.lean",
   "declaration": "AlgebraicGeometry.formal_affine_morphism_realization",
   "statement": "theorem formal_affine_morphism_realization\n    {Y : Scheme.{u}} [IsNoetherian Y] (J : Y.IdealSheafData)\n    (G H : CoherentFormalModule Y J) (α : G ⟶ H) :\n    ∀ U : Y.affineOpens,\n      let B := Γ(Y, U.1)\n      let R := AdicCompletion (J.ideal U) B\n      ∃ (A D : CoherentModules (Spec (CommRingCat.of R))) (c : A.obj ⟶ D.obj),\n        ∃ eA : limit (G.obj ⋙ SheafOfModules.evaluation Y.ringCatSheaf (op U.1)) ≅\n            (ModuleCat.restrictScalars (algebraMap B R)).obj\n              ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj A.obj),\n        ∃ eD : limit (H.obj ⋙\n              SheafOfModules.evaluation Y.ringCatSheaf (op U.1)) ≅\n            (ModuleCat.restrictScalars (algebraMap B R)).obj\n              ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj D.obj),\n          lim.map (Functor.whiskerRight α.hom\n            (SheafOfModules.evaluation Y.ringCatSheaf (op U.1))) ≫ eD.hom =\n          eA.hom ≫ (ModuleCat.restrictScalars (algebraMap B R)).map\n            ((moduleSpecΓFunctor (R := CommRingCat.of R)).map c)",
   "branch": "sheaf-dag",

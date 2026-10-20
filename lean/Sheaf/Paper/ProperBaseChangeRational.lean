@@ -34,7 +34,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.Algebra.Homology.FilteredColimitsTensor
+import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
 import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuityDirectImage
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
@@ -61,6 +61,7 @@ import Sheaf.Paper.CondensedModuleDerivedPushpull
 import Sheaf.Paper.IntegralProperBaseChange
 import Sheaf.SixFunctors.IntegralModelsGenerators
 import Sheaf.SixFunctors.ScalarSixPullback
+public import Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 
 /-!
 # Proper direct image with rational condensed coefficients

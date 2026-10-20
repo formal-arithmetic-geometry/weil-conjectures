@@ -16,7 +16,7 @@ public import Sheaf.RingTheory.StrictHenselizationPresentationIn
 public import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.RingTheory.IndEtaleUniverseTransport
-import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
+import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.RingTheory.HenselianFiniteEtaleEquivalence
 import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Sheaf.RingTheory.ValuationRingNormal

@@ -102,8 +102,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumBaseChangeComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumBaseChangeComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineSpectrumBaseChangeComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineSpectrumBaseChangeComparison.lean",
   "declaration": "AlgebraicGeometry.affineSpectrumCoordinates_comparison",
   "statement": "theorem affineSpectrumCoordinates_comparison\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']\n    (sq0 : IsPullback (Spec.map g'.appTop) (Spec.map f'.appTop)\n      (Spec.map f.appTop) (Spec.map g.appTop))\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') :\n    let K0 := affineSpectrumDerivedObject X K\n    let K0' := affineSpectrumDerivedObject X' K'\n    let φ0 := affineSpectrumDerivedMorphism g' K K' φ\n    ∃ (eL : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj K) ≅\n        (derivedPullback S'.toSpecΓ).obj\n          ((derivedPullback (Spec.map g.appTop)).obj\n            ((schemeDerivedDirectImage (Spec.map f.appTop)).obj K0)))\n      (eR : (schemeDerivedDirectImage f').obj K' ≅\n        (derivedPullback S'.toSpecΓ).obj\n          ((schemeDerivedDirectImage (Spec.map f'.appTop)).obj K0')),\n      schemeDerivedBaseChangeMap f f' g g' sq.w K ≫\n          (schemeDerivedDirectImage f').map φ =\n        eL.hom ≫ (derivedPullback S'.toSpecΓ).map\n          (schemeDerivedBaseChangeMap\n              (Spec.map f.appTop) (Spec.map f'.appTop)\n              (Spec.map g.appTop) (Spec.map g'.appTop) sq0.w K0 ≫\n            (schemeDerivedDirectImage (Spec.map f'.appTop)).map φ0) ≫ eR.inv",
   "branch": "sheaf-dag",

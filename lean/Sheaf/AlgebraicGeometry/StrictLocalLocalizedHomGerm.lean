@@ -5,7 +5,7 @@ Authors: SHEAF group J3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 import Sheaf.AlgebraicGeometry.SourceCocycleExactRestriction
 
 /-! # Localized Hom classes and restriction of a complex on the base

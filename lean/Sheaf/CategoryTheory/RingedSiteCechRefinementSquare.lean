@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.Algebra.Homology.ModelCategory.Injective
 import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
 import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
-import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
+import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import Sheaf.CategoryTheory.SitePullbackAbelianExact

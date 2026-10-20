@@ -82,8 +82,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.MayerVietorisOpenCompositionRestrictionFactors",
-  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisOpenCompositionRestrictionFactors.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.MayerVietorisOpenCompositionRestrictionFactors",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/MayerVietorisOpenCompositionRestrictionFactors.lean",
   "declaration": "AlgebraicGeometry.schemeMVOpenComposition_restriction_factors",
   "statement": "theorem schemeMVOpenComposition_restriction_factors\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)\n    let J := (LX.mapHomologicalComplex (.up ℤ)).obj I\n    let β := (schemeMVDirectImageComposition (h ⁻¹ᵁ W).ι h).symm ≪≫\n      eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h W).symm) ≪≫\n      schemeMVDirectImageComposition (h ∣_ W) W.ι\n    (schemeDerivedDirectImage h).map (schemeMVOpenImageLocalization X (h ⁻¹ᵁ W) I) ≫\n      (schemeMVOpenComparison h W (DerivedCategory.Q.obj I)).hom =\n    (schemeDerivedDirectImage h).map ((schemeMVDirectImageLocalization (h ⁻¹ᵁ W).ι).app J) ≫\n      β.hom.app (DerivedCategory.Q.obj J) ≫\n      (schemeDerivedDirectImage W.ι).map\n        ((schemeDerivedDirectImage (h ∣_ W)).map (LX.mapDerivedCategoryFactors.inv.app I) ≫\n          (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))",
   "branch": "sheaf-dag",

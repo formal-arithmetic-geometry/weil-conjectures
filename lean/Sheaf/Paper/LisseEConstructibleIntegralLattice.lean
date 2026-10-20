@@ -45,7 +45,7 @@ import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import Mathlib.Topology.NoetherianSpace
 import Mathlib.AlgebraicGeometry.Properties
 import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
-import Sheaf.Algebra.Homology.DerivedInternalHomShiftRight
+import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftRight
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction
 import Sheaf.CategoryTheory.DerivedCountableSumsExact

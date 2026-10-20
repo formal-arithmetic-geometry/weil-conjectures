@@ -5,7 +5,7 @@ Authors: SHEAF group N9
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 public import Sheaf.SixFunctors.EtaleHomThickLocus

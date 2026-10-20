@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -13,8 +13,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.LinearAlgebra.Dimension.Finite
-import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
-import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
+import WeilConjectures.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
+import WeilConjectures.AlgebraicGeometry.CoherentGenericPointIdealInclusion
 import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 

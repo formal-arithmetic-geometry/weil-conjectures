@@ -11,7 +11,7 @@ public import Sheaf.RingTheory.GlobalDimension
 public import WeilConjectures.RingTheory.Depth
 import Mathlib.RingTheory.Nakayama
 import Mathlib.RingTheory.Regular.RegularSequence
-import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal
+import WeilConjectures.RingTheory.MinimalFiniteFreeResolutionLocal
 import Mathlib.LinearAlgebra.FreeModule.Basic
 import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.AlgebraicGeometry.ExactFreeComplexLastMinors

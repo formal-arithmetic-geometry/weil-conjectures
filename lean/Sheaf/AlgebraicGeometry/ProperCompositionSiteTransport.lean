@@ -20,7 +20,6 @@ import Sheaf.AlgebraicGeometry.ProperOpenComparison
 import Sheaf.AlgebraicGeometry.OpenSectionClopen
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import Sheaf.AlgebraicGeometry.DerivedCategories
 import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 import Sheaf.Paper.ComparisonPullbackExact

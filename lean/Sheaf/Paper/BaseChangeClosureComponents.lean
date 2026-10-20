@@ -7,7 +7,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.FieldTheory.SeparableExtension
 import Sheaf.AlgebraicGeometry.ClopenSmoothProper
-import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
 import Sheaf.AlgebraicGeometry.GlobalSectionsProperVariety
 import Sheaf.AlgebraicGeometry.GlobalSectionsSeparable
 import Sheaf.FieldTheory.SeparableTensorAlgebraicClosure

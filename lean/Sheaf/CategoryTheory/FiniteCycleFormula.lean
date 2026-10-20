@@ -5,7 +5,7 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import Mathlib.CategoryTheory.Subobject.Lattice
 import all WeilConjectures.CategoryTheory.FinitePageImageLift
 import WeilConjectures.CategoryTheory.DerivedCoupleKernelIdentities

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Smooth.Fiber
 import Mathlib.RingTheory.Smooth.Flat
 import Mathlib.RingTheory.Localization.LocalizationLocalization
-import Sheaf.RingTheory.OpenFlatLocus
+import WeilConjectures.RingTheory.OpenFlatLocus
 
 /-!
 # Étale at a prime and flat unramifiedness

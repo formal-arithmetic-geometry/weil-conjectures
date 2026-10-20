@@ -8,9 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
 import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization
-import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
-import Sheaf.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange
+import WeilConjectures.AlgebraicGeometry.PerfectRHomTensorComparison
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange
 
 /-!
 # Affine base change for global Hom out of a perfect complex

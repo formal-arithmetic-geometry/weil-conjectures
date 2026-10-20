@@ -118,8 +118,8 @@
  ],
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentGermLifts",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSurjectiveSetDescentGermLifts.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescentGermLifts",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteSurjectiveSetDescentGermLifts.lean",
   "declaration": "AlgebraicGeometry.finiteSurjectiveSetDescent_compatible_germ_lifts",
   "statement": "theorem finiteSurjectiveSetDescent_compatible_germ_lifts\n    {X X' : Scheme.{u}} (f : X' ⟶ X) [IsFinite f] [Surjective f]\n    (G : Sheaf X.smallEtaleTopology (Type (u + 1))) :\n    ∀ s' : ((Scheme.etaleSetPullback f).obj G).obj.obj\n          (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj\n            (Scheme.Etale.mk (𝟙 X)))),\n        etaleSetDescentComparison f (pullback.fst f f) G (Scheme.Etale.mk (𝟙 X)) s' =\n          eqToHom (congrArg\n            (fun k : pullback f f ⟶ X ↦ ((Scheme.etaleSetPullback k).obj G).obj.obj\n              (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj\n                (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := f) (g := f)).symm)\n            (etaleSetDescentComparison f (pullback.snd f f) G\n              (Scheme.Etale.mk (𝟙 X)) s') →\n          ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n            (x : Spec (.of Ω) ⟶ X)\n            (z : (Scheme.pointSmallEtale x).fiber.obj (Scheme.Etale.mk (𝟙 X))),\n            ∃ a : (Scheme.pointSmallEtale x).sheafFiber.obj G,\n              (Scheme.pointSmallEtale x).sheafFiber.map\n                ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n              (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1))\n              (X.smallGrothendieckTopology @Etale)\n              (X'.smallGrothendieckTopology @Etale)).unit.app G) a =\n                (Scheme.pointSmallEtale x).toPresheafFiber (Scheme.Etale.mk (𝟙 X)) z\n                  ((f.Etale.sheafPushforwardContinuous (Type (u + 1))\n                    X.smallEtaleTopology X'.smallEtaleTopology).obj\n                      ((Scheme.etaleSetPullback f).obj G)).obj s'",
   "branch": "sheaf-dag",

@@ -10,6 +10,7 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Finite truncation dévissage for constructible module objects
 

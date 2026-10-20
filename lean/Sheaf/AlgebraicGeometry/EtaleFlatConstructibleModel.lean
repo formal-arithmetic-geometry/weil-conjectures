@@ -5,7 +5,7 @@ Authors: SHEAF group NC
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 

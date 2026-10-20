@@ -110,8 +110,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteQuotientComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalFunctionsFiniteQuotientComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalFunctionsFiniteQuotientComparison.lean",
   "declaration": "AlgebraicGeometry.formalFunctions_finite_quotient_comparison",
   "statement": "theorem formalFunctions_finite_quotient_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [IsProper f] [IsLocallyNoetherian Y] (F : X.Modules)\n    (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :\n    let X' := pullback (Y.fromSpecStalk y) f\n    let f' := pullback.fst (Y.fromSpecStalk y) f\n    let F' := (Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F\n    let J := (Scheme.IdealSheafData.ofIdealTop\n      ((maximalIdeal (Y.presheaf.stalk y)).map\n        (Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv.hom)).comap f'\n    let C := RingedSpace.moduleCohomology X'.toRingedSpace p ⋙\n      ModuleCat.restrictScalars\n        ((Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv ≫ f'.appTop).hom\n    ∃ b : formalCompletionSystem J F' ⋙ C ≅\n      formalFibreCohomologySystem f y F p ⋙ ModuleCat.restrictScalars\n        (algebraMap (Y.presheaf.stalk y)\n          (AdicCompletion (maximalIdeal (Y.presheaf.stalk y)) (Y.presheaf.stalk y))),\n    ∃ r : ∀ n : ℕ, formalFunctionsLocalCohomology f y F p →ₗ[Y.presheaf.stalk y]\n      formalFibreCohomologyLocal f y F p n,\n      (∀ (n : ℕ) (z : formalFunctionsLocalCohomology f y F p),\n        r n z = (b.hom.app (op n)) ((C.map (formalModuleQuotientπ J (n + 1) F')) z)) ∧\n      ∀ a : formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y]\n          formalFunctionsLocalCohomology f y F p,\n        IsFormalFunctionsLocalComparison f y F p a →\n          ∀ n : ℕ, IsFormalFunctionsTheta f y F p n ((r n).comp a)",
   "branch": "sheaf-dag",

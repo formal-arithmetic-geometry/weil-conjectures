@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Constant group schemes and their points

@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
+public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeCoefficients
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc

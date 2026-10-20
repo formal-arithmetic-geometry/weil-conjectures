@@ -18,7 +18,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
 import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
 import WeilConjectures.FieldTheory.GenericSeparableAlgebraSplitting

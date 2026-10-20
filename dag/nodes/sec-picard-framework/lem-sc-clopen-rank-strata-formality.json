@@ -114,8 +114,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ClopenRankStrataFormality",
-  "file": "lean/Sheaf/AlgebraicGeometry/ClopenRankStrataFormality.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ClopenRankStrataFormality",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ClopenRankStrataFormality.lean",
   "declaration": "AlgebraicGeometry.clopenRankStrata_formality",
   "statement": "theorem clopenRankStrata_formality\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u}\n      (moduleRings (directImageAlgebraSpace i)))]\n    (r : LocallyConstant Z ℕ) (hfinite : (Set.range r).Finite)\n    (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules)\n    (T : ℤ → Z.Modules)\n    (hT : ∀ n : ℤ, T n = if 0 ≤ n then\n      (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj\n        (E n.toNat) else 0)\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))\n    (hK : ∀ n : ℤ, Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K ≅\n        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n))) :\n    Nonempty (DerivedCategory.Q.obj\n      (((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj\n          (CochainComplex.of T (fun _ => 0) (fun _ => zero_comp))) ≅ K)",
   "branch": "sheaf-dag",

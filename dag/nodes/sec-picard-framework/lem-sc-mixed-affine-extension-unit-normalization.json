@@ -119,8 +119,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.MixedAffineSectionsExtensionUnitNormalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/MixedAffineSectionsExtensionUnitNormalization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.MixedAffineSectionsExtensionUnitNormalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/MixedAffineSectionsExtensionUnitNormalization.lean",
   "declaration": "AlgebraicGeometry.exists_mixedAffineSections_extension_unit_normalization",
   "statement": "theorem exists_mixedAffineSections_extension_unit_normalization\n    {S T : Scheme.{u}} [IsAffine S] (g : T ⟶ S) :\n    let F : ModuleCat.{u} Γ(S, ⊤) ⥤\n        SheafOfModules.{u} (moduleRings S.toRingedSpace) :=\n      tilde.functor Γ(S, ⊤) ⋙ Scheme.Modules.restrictFunctor S.toSpecΓ\n    let H := RingedSpace.globalSectionsFunctor S.toRingedSpace\n    let E := ModuleCat.extendScalars.{u, u, u} g.appTop.hom\n    let R := ModuleCat.restrictScalars.{u} g.appTop.hom\n    ∀ [F.Additive] [H.Additive] [E.Additive]\n      (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ)\n      (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat P),\n    let C := (F.mapHomologicalComplex (.up ℤ)).obj P\n    let X := ((F ⋙ H).mapHomologicalComplex (.up ℤ)).obj P\n    ∃ a : (mixedGlobalExtension g).obj\n        ((schemeDerivedGlobalSections S).obj (DerivedCategory.Q.obj C)) ≅\n      DerivedCategory.Q.obj (((F ⋙ H ⋙ E).mapHomologicalComplex (.up ℤ)).obj P),\n    ∀ (Z : CochainComplex (ModuleCat.{u} Γ(T, ⊤)) ℤ)\n      (f : ((E.mapHomologicalComplex (.up ℤ)).obj X) ⟶ Z),\n      mixedSectionsComplexUnit S C ≫\n          (mixedGlobalExtensionAdjunction g).homEquiv _ _\n            (a.hom ≫ DerivedCategory.Q.map f) =\n        DerivedCategory.Q.map\n          (((ModuleCat.extendRestrictScalarsAdj g.appTop.hom).mapHomologicalComplex\n            (.up ℤ)).unit.app X ≫\n              (R.mapHomologicalComplex (.up ℤ)).map f) ≫\n          R.mapDerivedCategoryFactors.inv.app Z",
   "branch": "sheaf-dag",

@@ -103,8 +103,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationNormalDense.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StalkNormalizationNormalDense.lean",
   "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_normal_and_dense",
   "statement": "theorem stalk_normalization_normal_and_dense {S C : Scheme.{u}}\n    [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens)\n    (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι\n    let l := pullback.fst c (S.fromSpecStalk s)\n    let n := pullback.snd f.fromNormalization l\n    (∀ z : (pullback f.fromNormalization l : Scheme.{u}),\n      IsDomain ((pullback f.fromNormalization l : Scheme.{u}).presheaf.stalk z) ∧\n      IsIntegrallyClosed ((pullback f.fromNormalization l : Scheme.{u}).presheaf.stalk z)) ∧\n    Dense (↑(n ⁻¹ᵁ (l ⁻¹ᵁ (c ⁻¹ᵁ U))) :\n      Set (pullback f.fromNormalization l : Scheme.{u}))",
   "branch": "sheaf-dag",

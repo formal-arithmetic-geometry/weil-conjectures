@@ -6,7 +6,7 @@ Authors: SHEAF group Q118
 module
 
 public import Sheaf.CategoryTheory.Filtration
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Category.Grp.Abelian

@@ -114,8 +114,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeEtaleModuleArrowDescent.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineFreeEtaleModuleArrowDescent.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_affine_free_etaleModule_arrow_descent",
   "statement": "theorem exists_affine_free_etaleModule_arrow_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c)\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (n m : ℕ) (U : Fin n → c.pt.Etale) (V : Fin m → c.pt.Etale)\n    (hU : ∀ k : Fin n, IsAffine (U k).left)\n    (hV : ∀ k : Fin m, IsAffine (V k).left) :\n    let P : c.pt.Etale → Sheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=\n      fun W => (presheafToSheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n        (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ)\n    ∀ f : (∐ fun j : Fin m => P (V j)) ⟶ (∐ fun k : Fin n => P (U k)),\n      ∃ (i : I)\n        (A B : Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ))\n        (a : A ⟶ B),\n        IsConstructibleEtaleModuleSheaf A ∧ IsConstructibleEtaleModuleSheaf B ∧\n        ∃ (eA : (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj A ≅\n            (∐ fun j : Fin m => P (V j)))\n          (eB : (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj B ≅\n            (∐ fun k : Fin n => P (U k))),\n          (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).map a ≫ eB.hom =\n            eA.hom ≫ f",
   "branch": "sheaf-dag",

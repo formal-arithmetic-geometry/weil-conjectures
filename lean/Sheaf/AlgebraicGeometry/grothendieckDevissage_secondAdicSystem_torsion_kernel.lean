@@ -1,10 +1,10 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Sheaf.AlgebraicGeometry.CoherentMapReductionTorsion
-import Sheaf.AlgebraicGeometry.CoherentMapCompletionTorsionKernelReflection
+import WeilConjectures.AlgebraicGeometry.CoherentMapReductionTorsion
+import WeilConjectures.AlgebraicGeometry.CoherentMapCompletionTorsionKernelReflection
 
 @[expose] public section
 

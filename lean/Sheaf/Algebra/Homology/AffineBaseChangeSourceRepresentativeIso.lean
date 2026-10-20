@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.Algebra.Homology.AffineBaseChangeIntoPullback
+public import WeilConjectures.Algebra.Homology.AffineBaseChangeIntoPullback
 import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
 
 /-! # Independence of the source-only stalk comparison from its representative

@@ -130,8 +130,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalKernelPolynomialAction",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalKernelPolynomialAction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalKernelPolynomialAction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalKernelPolynomialAction.lean",
   "declaration": "AlgebraicGeometry.formalKernel_polynomial_action",
   "statement": "theorem formalKernel_polynomial_action {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) {X : Scheme.{u}} [IsNoetherian X] (f : X ⟶ Spec (CommRingCat.of A)) (F : CoherentFormalModule X ((Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)) : ∃ r : ℕ, ∃ mu : ∀ (m k : ℕ), MvPolynomial.homogeneousSubmodule (Fin r) A k → (formalKernelPiece F m ⟶ formalKernelPiece F (m + k)), (∀ (m k : ℕ) (b b' : MvPolynomial.homogeneousSubmodule (Fin r) A k), mu m k (b + b') = mu m k b + mu m k b') ∧ (∀ (m k l : ℕ) (b : MvPolynomial.homogeneousSubmodule (Fin r) A k) (b' : MvPolynomial.homogeneousSubmodule (Fin r) A l), HEq (mu m l b' ≫ mu (m + l) k b) (mu m (k + l) ⟨b.val * b'.val, b.property.mul b'.property⟩)) ∧ (∀ (m : ℕ) (a : A) (U : X.Opens) (t : (formalKernelPiece F m).val.obj (op U)), HEq ((mu m 0 ⟨MvPolynomial.C a, MvPolynomial.isHomogeneous_C (Fin r) a⟩).val.app (op U) t) ((X.presheaf.map (homOfLE (le_top (a := U))).op).hom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) • t)) ∧ (∀ x : X, ∃ (U : X.Opens), x ∈ U ∧ ∃ (s : ℕ) (t : Fin s → (formalKernelPiece F 0).val.obj (op U)), ∀ (m : ℕ) (V : X.Opens) (hVU : V ≤ U) (v : (formalKernelPiece F m).val.obj (op V)) (y : X), y ∈ V → ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧ (formalKernelPiece F m).val.map (homOfLE hWV).op v ∈ Submodule.span ((moduleRings X.toRingedSpace).obj.obj (op W)) {z | ∃ (i : Fin s) (b : MvPolynomial.homogeneousSubmodule (Fin r) A m), HEq z ((mu 0 m b).val.app (op W) ((formalKernelPiece F 0).val.map (homOfLE (hWV.trans hVU)).op (t i)))})",
   "branch": "sheaf-dag",

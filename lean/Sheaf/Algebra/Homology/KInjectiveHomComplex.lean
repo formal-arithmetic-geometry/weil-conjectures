@@ -8,8 +8,8 @@ module
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.Algebra.Homology.HomTensorTotal
-import Sheaf.Algebra.Homology.HomComplexGlobalCochains
+import WeilConjectures.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomComplexGlobalCochains
 
 /-!
 # K-injectivity of the sheaf Hom complex

@@ -5,15 +5,15 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineDerivedCohomologyPresentation
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import Sheaf.Algebra.Homology.AffineBaseChangeIntoPullback
-import Sheaf.Algebra.Homology.AffineBaseChangeTildeSourceModel
+public import WeilConjectures.AlgebraicGeometry.AffineDerivedCohomologyPresentation
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.Algebra.Homology.AffineBaseChangeIntoPullback
+import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeSourceModel
 import Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso
 import WeilConjectures.Algebra.Homology.RingTensorCohomology
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import all Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # Source model for the affine derived base-change arrow
 

@@ -5,15 +5,15 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenSectionsCohomologyModel
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.OpenSectionsCohomologyModel
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonDiagram
-import Sheaf.AlgebraicGeometry.TwoOpenComparisonRealization
+import WeilConjectures.AlgebraicGeometry.TwoOpenComparisonRealization
 
 /-! # Descent of the prescribed overlap transition
 

@@ -5,13 +5,13 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 import Sheaf.AlgebraicGeometry.SmoothProperCurveDualizing
-import Sheaf.AlgebraicGeometry.ProperUpperShriekComposition
-import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
+import WeilConjectures.AlgebraicGeometry.ProperUpperShriekComposition
+import WeilConjectures.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Mathlib.CategoryTheory.ObjectProperty.Shift
 import Mathlib.CategoryTheory.Shift.Adjunction

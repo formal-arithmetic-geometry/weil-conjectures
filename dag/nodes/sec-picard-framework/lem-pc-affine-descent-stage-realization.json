@@ -97,8 +97,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineDescentStageRealization",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineDescentStageRealization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineDescentStageRealization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineDescentStageRealization.lean",
   "declaration": "AlgebraicGeometry.affine_descent_stage_realization",
   "statement": "theorem affine_descent_stage_realization\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)\n    (Z : Scheme.{u}) [IsAffine Z] (t : Z ⟶ Spec (R.obj i))\n    [hDer : ∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{u}) (U : Y.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (j : Set.Ici i)\n    (P : CochainComplex (ModuleCat.{u} ((affineDescentRings R i t).obj j)) ℤ)\n    (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))\n    (hf : ∀ n : ℤ, Module.Finite ((affineDescentRings R i t).obj j) (P.X n))\n    (hp : ∀ n : ℤ, Module.Projective ((affineDescentRings R i t).obj j) (P.X n)) :\n    (affineDescentStage R i t j).IsPerfect\n      ((affineDescentRealization (affineDescentStage R i t j)\n        ((affineDescentRings R i t).obj j) (𝟙 _)).obj P) ∧\n    Nonempty ((derivedPullback (affineDescentLimitMap R i t c j)).obj\n      ((affineDescentRealization (affineDescentStage R i t j)\n        ((affineDescentRings R i t).obj j) (𝟙 _)).obj P) ≅\n      (affineDescentRealization (pullback t (Spec.map (c.ι.app i)))\n        (colimit (affineDescentRings R i t) : CommRingCat.{u})\n        (colimit.desc _ (affineDescentRingCocone R i t c))).obj\n          (((ModuleCat.extendScalars\n            (colimit.ι (affineDescentRings R i t) j).hom).mapHomologicalComplex\n              (.up ℤ)).obj P))",
   "branch": "sheaf-dag",

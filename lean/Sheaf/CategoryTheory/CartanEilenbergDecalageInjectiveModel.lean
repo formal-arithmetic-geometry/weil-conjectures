@@ -5,13 +5,13 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexDecalageComplex
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 import Sheaf.CategoryTheory.CartanEilenbergHorizontalCutTerms
 import Sheaf.CategoryTheory.CartanEilenbergTotalInjectiveTerms
 import Sheaf.CategoryTheory.CartanEilenbergHorizontalCutComparison
-import Sheaf.CategoryTheory.CartanEilenbergTotalResolution
+import WeilConjectures.CategoryTheory.CartanEilenbergTotalResolution
 
 /-! # Injective models of the horizontal good truncation
 

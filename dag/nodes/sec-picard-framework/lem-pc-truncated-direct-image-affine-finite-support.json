@@ -99,8 +99,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.TruncatedDirectImageAffineFiniteSupport",
-  "file": "lean/Sheaf/AlgebraicGeometry/TruncatedDirectImageAffineFiniteSupport.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.TruncatedDirectImageAffineFiniteSupport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TruncatedDirectImageAffineFiniteSupport.lean",
   "declaration": "AlgebraicGeometry.truncated_directImage_affine_finiteSupport",
   "statement": "theorem truncated_directImage_affine_finiteSupport\n    {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))]\n    (I : Type u₁) (E : I → schemeDerivedQCohCategory X)\n    (S : schemeDerivedCategory X) (ι : ∀ i, (E i).obj ⟶ S)\n    (hc : IsColimit (Cofan.mk S ι)) (a q : ℤ) (U : Y.Opens) (hU : IsAffineOpen U) :\n    Function.Surjective\n      (DirectSum.toModule ((moduleRings Y.toRingedSpace).obj.obj (op U)) I\n        (((SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op U)).obj\n          ((schemeHigherDirectImage f q).obj\n            ((DerivedCategory.TStructure.t.truncGE a).obj S))))\n        (fun i ↦ ((SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op U)).map\n          ((schemeHigherDirectImage f q).map\n            ((DerivedCategory.TStructure.t.truncGE a).map (ι i)))).hom))",
   "branch": "sheaf-dag",

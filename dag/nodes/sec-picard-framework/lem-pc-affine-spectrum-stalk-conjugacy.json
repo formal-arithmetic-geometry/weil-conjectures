@@ -106,8 +106,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumStalkConjugacy",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumStalkConjugacy.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineSpectrumStalkConjugacy",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineSpectrumStalkConjugacy.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.nonempty_affineSpectrum_stalkComparison_arrow_iso",
   "statement": "theorem nonempty_affineSpectrum_stalkComparison_arrow_iso\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']\n    (sq0 : IsPullback (Spec.map g'.appTop) (Spec.map f'.appTop)\n      (Spec.map f.appTop) (Spec.map g.appTop))\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') (c : Coordinates g' K K' φ)\n    (d : Coordinates (Spec.map g'.appTop)\n      (affineSpectrumDerivedObject X K) (affineSpectrumDerivedObject X' K')\n      (affineSpectrumDerivedMorphism g' K K' φ))\n    (hP : d.P = ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex\n      (.up ℤ)).obj c.P)\n    (hN : d.N = ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex\n      (.up ℤ)).obj c.N)\n    (z0 : Spec Γ(X', ⊤)) (i : ℤ) :\n    Nonempty\n      (Arrow.mk ((forget₂ (ModuleCat.{u} (X'.presheaf.stalk (X'.isoSpec.inv z0)))\n          AddCommGrpCat.{u}).map\n            (stalkComparison f f' g g' sq c (X'.isoSpec.inv z0) i)) ≅\n        Arrow.mk ((forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0))\n          AddCommGrpCat.{u}).map\n            (stalkComparison (Spec.map f.appTop) (Spec.map f'.appTop)\n              (Spec.map g.appTop) (Spec.map g'.appTop) sq0 d z0 i)))",
   "branch": "sheaf-dag",

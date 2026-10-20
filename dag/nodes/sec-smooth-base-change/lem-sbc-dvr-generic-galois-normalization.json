@@ -110,8 +110,8 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.DvrGenericGaloisNormalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DvrGenericGaloisNormalization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.DvrGenericGaloisNormalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/DvrGenericGaloisNormalization.lean",
   "declaration": "AlgebraicGeometry.Scheme.dvr_generic_galois_normalization",
   "statement": "theorem dvr_generic_galois_normalization\n    (B A : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]\n    [IsDomain A] [IsDiscreteValuationRing A]\n    (q : Spec A ⟶ Spec B)\n    (r : ℕ) (E : Fin r → Type u) [∀ i, Field (E i)]\n    [∀ i, Algebra (FractionRing B) (E i)]\n    (hE : ∀ i, FiniteDimensional (FractionRing B) (E i) ∧\n      IsGalois (FractionRing B) (E i))\n    (X : Scheme.{u}) (p : X ⟶ Spec (CommRingCat.of (FractionRing B)))\n    (e : X ≅ ∐ fun i : Fin r ↦ Spec (CommRingCat.of (E i)))\n    (he : e.hom ≫ Sigma.desc (fun i : Fin r ↦\n      Spec.map (CommRingCat.ofHom (algebraMap (FractionRing B) (E i)))) = p) :\n    let j := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n    let a := pullback.snd (p ≫ j) q\n    ∀ (hqc : QuasiCompact a) (hqs : QuasiSeparated a),\n    letI := hqc\n    letI := hqs\n    IsFinite a.fromNormalization ∧\n      ∀ x : a.normalization, IsDomain (a.normalization.presheaf.stalk x) ∧\n        IsIntegrallyClosed (a.normalization.presheaf.stalk x)",
   "branch": "sheaf-dag",

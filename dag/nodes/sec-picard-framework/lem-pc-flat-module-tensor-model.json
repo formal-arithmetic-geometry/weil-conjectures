@@ -133,8 +133,8 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.RingTheory.FlatModuleTensorModel",
-  "file": "lean/Sheaf/RingTheory/FlatModuleTensorModel.lean",
+  "module": "WeilConjectures.RingTheory.FlatModuleTensorModel",
+  "file": "lean/WeilConjectures/RingTheory/FlatModuleTensorModel.lean",
   "declaration": "AlgebraicGeometry.exists_flat_module_tensor_model",
   "statement": "theorem exists_flat_module_tensor_model\n    {R C : Type v} {A B M : Type w}\n    [CommRing R] [CommRing C] [CommRing A] [CommRing B] [AddCommMonoid M]\n    [Algebra R C] [Algebra R A] [Algebra R B]\n    [Algebra.FinitePresentation R A] [Algebra.FinitePresentation R B]\n    [Module B M] [Module.FinitePresentation B M] (f : A →ₐ[R] B)\n    (hflat : letI : Module A M := Module.compHom M f.toRingHom\n      letI : Algebra A (C ⊗[R] A) := Algebra.TensorProduct.rightAlgebra\n      Module.Flat (C ⊗[R] A) ((C ⊗[R] A) ⊗[A] M)) :\n    ∃ (P Q L : Type (max v w)) (_ : CommRing P) (_ : CommRing Q)\n      (_ : Algebra P Q) (_ : AddCommMonoid L) (_ : Module Q L)\n      (_ : Algebra P (C ⊗[R] A)),\n      Algebra.FinitePresentation ℤ P ∧ Algebra.FinitePresentation P Q ∧\n      Module.FinitePresentation Q L ∧\n      (letI : Module P L := Module.compHom L (algebraMap P Q); Module.Flat P L) ∧\n      ∃ e : (C ⊗[R] A) ⊗[P] Q ≃+* C ⊗[R] B,\n        e.toRingHom.comp Algebra.TensorProduct.includeLeftRingHom =\n          (Algebra.TensorProduct.map (Algebra.ofId C C) f).toRingHom ∧\n        (letI : Algebra Q (C ⊗[R] B) :=\n          (e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom).toAlgebra\n         letI : Algebra B (C ⊗[R] B) := Algebra.TensorProduct.rightAlgebra\n         Nonempty ((C ⊗[R] B) ⊗[Q] L ≃ₗ[C ⊗[R] B] (C ⊗[R] B) ⊗[B] M))",
   "branch": "sheaf-dag",

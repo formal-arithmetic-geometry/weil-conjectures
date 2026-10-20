@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
 
 /-! # A global derived model for relatively flat higher direct images
 

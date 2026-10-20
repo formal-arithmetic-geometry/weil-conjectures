@@ -111,8 +111,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFibrePurity",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationFibrePurity.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFibrePurity",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StalkNormalizationFibrePurity.lean",
   "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_etale_of_fibre_neighbourhood",
   "statement": "theorem stalk_normalization_etale_of_fibre_neighbourhood {S C : Scheme.{u}}\n    [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (U : S.Opens) (hηU : genericPoint S ∈ U)\n    (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι\n    let l := pullback.fst c (S.fromSpecStalk s)\n    let n := pullback.snd f.fromNormalization l\n    IsFinite n → Etale (f.fromNormalization ∣_ (c ⁻¹ᵁ U)) →\n    (∃ (W : (pullback c (S.fromSpecStalk s)).Opens)\n      (x : (pullback c (S.fromSpecStalk s) : Scheme.{u})),\n      x ∈ W ∧ (l ≫ c) x = s ∧ Etale (n ∣_ W)) → Etale n",
   "branch": "sheaf-dag",

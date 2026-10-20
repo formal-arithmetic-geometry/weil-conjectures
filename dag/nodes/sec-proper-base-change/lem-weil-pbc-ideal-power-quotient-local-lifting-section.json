@@ -134,8 +134,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IdealPowerQuotientLiftingSection",
-  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerQuotientLiftingSection.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.IdealPowerQuotientLiftingSection",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IdealPowerQuotientLiftingSection.lean",
   "declaration": "AlgebraicGeometry.Scheme.ideal_power_quotient_local_lifting_section",
   "statement": "theorem ideal_power_quotient_local_lifting_section\n    {X : Scheme.{u}} {I : X.Modules}\n    (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]\n    [I.IsQuasicoherent] [I.IsFiniteType] [CompactSpace X] [QuasiSeparatedSpace X]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : X.Opens) (one : ∀ n : ℕ, Γ((idealSheafPower ι n).1, U))\n    (r : ∀ (n m : ℕ), n ≤ m →\n      ((idealSheafPower ι m).1 ⟶ (idealSheafPower ι n).1))\n    (hU : ∀ x : X, x ∈ U ↔ Function.Surjective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom)\n    (hone : ∀ n : ℕ, (idealSheafPower ι n).2.app U (one n) = (1 : Γ(X, U)))\n    (hr : ∀ (n m : ℕ) (h : n ≤ m),\n      r n m h ≫ (idealSheafPower ι n).2 = (idealSheafPower ι m).2)\n    (A : ℕ → X.Modules) (a : ∀ n : ℕ, A n ⟶ F)\n    (hmono : ∀ n : ℕ, Mono (a n))\n    (hqc : ∀ n : ℕ, (A n).IsQuasicoherent)\n    (hann : ∀ (n : ℕ) (W : X.Opens) (s : Γ(F, W)),\n      s ∈ Set.range ((a n).app W) ↔\n        ∀ (W' : X.Opens) (h : W' ≤ W)\n          (b : Γ((idealSheafPower ι n).1, W')),\n          (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom\n            (F.presheaf.map (homOfLE h).op s) = 0)\n    (hquot : ∀ (n : ℕ) (W : X.Opens), W ≤ U →\n      Function.Bijective ((cokernel.π (a n)).app W))\n    (q : ∀ (n m : ℕ), n ≤ m → (cokernel (a n) ⟶ cokernel (a m)))\n    (hq : ∀ (n m : ℕ) (h : n ≤ m),\n      cokernel.π (a n) ≫ q n m h = cokernel.π (a m)) :\n    ∀ s : Γ(F, U), ∃ (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ cokernel (a n)),\n      (cokernel.π (a n)).app U s = φ.app U (one n)",
   "branch": "sheaf-dag",

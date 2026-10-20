@@ -10,18 +10,18 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 import Sheaf.Paper.FiniteStructureAlgebraLift
 import Sheaf.Paper.FiniteStructureProperSupport
 import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import all Sheaf.AlgebraicGeometry.SupportedThickeningDictionary
-import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
+import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
+import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 import Sheaf.AlgebraicGeometry.GrothendieckExistence
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Algebraization of the structure algebras of a finite formal system
 

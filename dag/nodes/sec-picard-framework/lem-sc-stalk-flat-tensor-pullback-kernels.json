@@ -98,8 +98,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StalkFlatTensorPullbackKernels",
-  "file": "lean/Sheaf/AlgebraicGeometry/StalkFlatTensorPullbackKernels.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.StalkFlatTensorPullbackKernels",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StalkFlatTensorPullbackKernels.lean",
   "declaration": "AlgebraicGeometry.RingedSpace.stalkFlat_tensorModulePullback_preservesKernels",
   "statement": "theorem stalkFlat_tensorModulePullback_preservesKernels\n    {X Y : RingedSpace.{u}} (g : X ⟶ Y)\n    (hg : ∀ x : X, (g.hom.stalkMap x).hom.Flat)\n    (P : SheafOfModules.{u} (moduleRings Y) ⥤\n      SheafOfModules.{u} (moduleRings X))\n    (h : ∀ M, P.obj M = SheafOfModules.changeOfRings.{u, u, u}\n      (CochainComplex.tensorPullbackRingMap\n        g.hom.base X.sheaf\n        Y.sheaf ⟨g.hom.c⟩)\n      (TopCat.Sheaf.inverseImageModule g.hom.base\n        Y.sheaf M))\n    (hm : ∀ {M N} (a : M ⟶ N),\n      P.map a = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap\n          g.hom.base X.sheaf\n          Y.sheaf ⟨g.hom.c⟩)\n        (TopCat.Sheaf.inverseImageModule g.hom.base\n          Y.sheaf M)\n        (TopCat.Sheaf.inverseImageModuleMap g.hom.base\n          Y.sheaf M a) ≫ eqToHom (h N).symm)\n    [P.Additive] :\n    ∀ {M N : SheafOfModules.{u} (moduleRings Y)} (a : M ⟶ N),\n      PreservesLimit (parallelPair a 0) P",
   "branch": "sheaf-dag",

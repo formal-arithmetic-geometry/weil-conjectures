@@ -94,8 +94,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonInheritance",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonInheritance.lean",
+  "module": "WeilConjectures.Algebra.Homology.LocalizedTensorComparisonInheritance",
+  "file": "lean/WeilConjectures/Algebra/Homology/LocalizedTensorComparisonInheritance.lean",
   "declaration": "ModuleCat.localizedTensorComparison_inheritance",
   "statement": "theorem localizedTensorComparison_inheritance\n    (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (U Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (N : CochainComplex (ModuleCat.{u} C) ℤ)\n    (hU : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :\n    letI := HasDerivedCategory.standard (ModuleCat.{u} R)\n    letI := HasDerivedCategory.standard (ModuleCat.{u} B)\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    ∀ (t : F.obj Q ⟶ N)\n      (m : BaseDerivedTensorCohomologyModel R A B Q C)\n      (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C),\n      (∀ i : ℤ, IsIso (m.localizedComparison i ≫ HomologicalComplex.homologyMap t i)) →\n      ∀ i : ℤ, IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i)",
   "branch": "sheaf-dag",

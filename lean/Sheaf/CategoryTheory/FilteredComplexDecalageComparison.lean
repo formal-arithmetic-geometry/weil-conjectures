@@ -10,7 +10,7 @@ public import Sheaf.CategoryTheory.FilteredComplexDecalageTower
 public import Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor
 import Sheaf.CategoryTheory.FilteredComplexDecalagePageCoherence
 import all Sheaf.CategoryTheory.FilteredComplexCanonicalModel
-import all Sheaf.CategoryTheory.FilteredQuotientPageMaps
+import all WeilConjectures.CategoryTheory.FilteredQuotientPageMaps
 import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
 
 /-! # Decalage and the canonical quotient sequence

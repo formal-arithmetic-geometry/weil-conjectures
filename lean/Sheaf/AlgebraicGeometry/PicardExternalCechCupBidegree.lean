@@ -5,7 +5,7 @@ Authors: SHEAF group R4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
+public import WeilConjectures.AlgebraicGeometry.PicardExternalRightCechModels
 public import Sheaf.Paper.CechCupProduct
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Sheaf.Paper.RingedSiteIdeal
@@ -17,8 +17,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Sheaf.CategoryTheory.LocalExtendedCechDescription
 public import Sheaf.CategoryTheory.RingedCompletionUnit
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.HomComplexUnitEvaluationNaturality
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
 import Sheaf.Paper.ExtendedCechCompletionModel
 import Sheaf.Paper.FlatRingedCechBaseChange
 import Sheaf.Paper.CoefficientHomAugmentation

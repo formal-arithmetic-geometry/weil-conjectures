@@ -89,8 +89,8 @@
  ],
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineAlternatingCechResolutionExchange",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlternatingCechResolutionExchange.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineAlternatingCechResolutionExchange",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineAlternatingCechResolutionExchange.lean",
   "declaration": "AlgebraicGeometry.affineAlternatingCech_resolution_exchange",
   "statement": "theorem affineAlternatingCech_resolution_exchange\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)\n    [IsSeparated f] (g : Spec B ⟶ Spec A)\n    [(Scheme.Modules.tensorPullback g).Additive]\n    [(Scheme.Modules.tensorPullback (pullback.fst f g)).Additive]\n    (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G]\n    (D : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))\n    (hterms : ∃ C : CochainComplex\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,\n        Nonempty (D ≅ (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj C) ∧\n        ∀ k : ℤ, ∃ (n : ℕ) (W : Fin n → X.Opens),\n          (∀ j, IsAffineOpen (W j)) ∧\n          Nonempty (C.X k ≅ ∏ᶜ fun j : Fin n ↦\n            (Scheme.Modules.pushforward (W j).ι).obj (G.restrict (W j).ι))) :\n    IsIso ((DerivedCategory.Qh (C := SheafOfModules.{u}\n      (moduleRings (Spec B).toRingedSpace))).map\n      ((moduleHomotopyBaseChange f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition).app D))",
   "branch": "sheaf-dag",

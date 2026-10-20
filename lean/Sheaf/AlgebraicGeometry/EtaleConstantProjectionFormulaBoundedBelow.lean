@@ -15,7 +15,7 @@ import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.FilteredColimitDerivedTensor
-import Sheaf.Algebra.Homology.FilteredColimitsTensor
+import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact

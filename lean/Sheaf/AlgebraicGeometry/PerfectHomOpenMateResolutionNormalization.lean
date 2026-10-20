@@ -4,14 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectHomOpenModuleMate
+public import WeilConjectures.AlgebraicGeometry.PerfectHomOpenModuleMate
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Sheaf.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
-import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 import WeilConjectures.CategoryTheory.DerivedExactMateCompatibility
-import Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit
+import WeilConjectures.AlgebraicGeometry.NormalizedDirectImageSquareUnit
 
 /-! # Normalization of the open-square comparison on K-injective representatives
 

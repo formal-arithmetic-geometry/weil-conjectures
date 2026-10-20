@@ -1,17 +1,17 @@
 module
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
-import Sheaf.AlgebraicGeometry.PerfectTensorHomDuality
+import WeilConjectures.AlgebraicGeometry.PerfectTensorHomDuality
 import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
-import Sheaf.AlgebraicGeometry.PerfectRightAdjointTensorHomComparison
+import WeilConjectures.AlgebraicGeometry.PerfectRightAdjointTensorHomComparison
 import Mathlib.CategoryTheory.Yoneda
 @[expose] public section
 set_option autoImplicit false

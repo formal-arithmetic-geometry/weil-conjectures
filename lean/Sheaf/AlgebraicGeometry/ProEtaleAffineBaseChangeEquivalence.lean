@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
-import Sheaf.AlgebraicGeometry.SurjectiveUniversallyClosedAffineTarget
+import WeilConjectures.AlgebraicGeometry.SurjectiveUniversallyClosedAffineTarget
 
 /-! Base change of affine ind-etale objects along universal homeomorphisms. -/
 

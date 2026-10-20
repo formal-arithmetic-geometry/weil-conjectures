@@ -4,7 +4,7 @@ public import Sheaf.RingTheory.GlobalDimension
 public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal
+import WeilConjectures.RingTheory.MinimalFiniteFreeResolutionLocal
 import WeilConjectures.AlgebraicGeometry.ExactFreeComplexLastMinors
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 

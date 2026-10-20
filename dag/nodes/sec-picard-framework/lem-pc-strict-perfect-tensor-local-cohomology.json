@@ -126,8 +126,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalCohomology",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictPerfectTensorLocalCohomology.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.StrictPerfectTensorLocalCohomology",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictPerfectTensorLocalCohomology.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictPerfect_tensor_local_cohomology",
   "statement": "theorem strictPerfect_tensor_local_cohomology\n    {X : Scheme.{u}} [IsLocallyNoetherian X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X)\n    (K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect X U K)\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K)\n    (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (a b c d : ℤ)\n    (hKb : ∀ n : ℤ, n < a ∨ b < n → IsZero (K.X n))\n    (hGb : ∀ n : ℤ, n < c ∨ d < n → IsZero (G.X n))\n    (hGcoherent : ∀ n : ℤ, RingedSpace.IsCoherent X.toRingedSpace (G.X n)) :\n    ∀ i : ℤ,\n      (i < a + c ∨ b + d < i →\n        IsZero ((Modules.restrictFunctor U.ι).obj\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj\n              (E ⊗ DerivedCategory.Q.obj G)))) ∧\n      RingedSpace.IsCoherent U.toScheme.toRingedSpace\n        ((Modules.restrictFunctor U.ι).obj\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj\n              (E ⊗ DerivedCategory.Q.obj G)))",
   "branch": "sheaf-dag",

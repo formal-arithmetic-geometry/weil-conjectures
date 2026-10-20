@@ -54,7 +54,6 @@ import Sheaf.Paper.PointFibreEquivalence
 import Sheaf.Paper.WeilVerdierPreservationStrata
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import Sheaf.Paper.ConstantCoefficientScalarNormalization
 import Sheaf.SixFunctors.CoefTowerEvaluationPairing

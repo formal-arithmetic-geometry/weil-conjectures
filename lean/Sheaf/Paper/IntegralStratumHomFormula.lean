@@ -33,7 +33,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.FilteredColimitsTensor
+import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import Mathlib.Algebra.Homology.BifunctorShift
 import Mathlib.RingTheory.FiniteType

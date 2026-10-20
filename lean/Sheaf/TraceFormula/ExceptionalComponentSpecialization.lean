@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
-import Sheaf.AlgebraicGeometry.PerfectComplex
+import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.GlobalSectionsProper
 import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange

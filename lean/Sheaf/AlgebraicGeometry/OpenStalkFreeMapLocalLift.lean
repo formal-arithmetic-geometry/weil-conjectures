@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Sheaf.AlgebraicGeometry.OpenStalkFreeMapOneLift
+import WeilConjectures.AlgebraicGeometry.OpenStalkFreeMapOneLift
 import Sheaf.AlgebraicGeometry.OpenStalkRestrictionTransport
 public import Sheaf.Paper.DerivedHomMayerVietoris
 

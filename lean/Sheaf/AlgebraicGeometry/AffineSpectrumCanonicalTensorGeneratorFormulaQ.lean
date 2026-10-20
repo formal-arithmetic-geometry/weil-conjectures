@@ -1,7 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
-public import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkRingCoordinates
-public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
+public import WeilConjectures.AlgebraicGeometry.AffineSpectrumCanonicalStalkRingCoordinates
+public import WeilConjectures.AlgebraicGeometry.IsoPullbackStalkCohomology
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 @[expose] public section

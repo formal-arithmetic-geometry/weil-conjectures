@@ -6,7 +6,7 @@ Authors: SHEAF group NH
 module
 
 public import Sheaf.AlgebraicGeometry.LocalAcyclicityAbelianSheaf
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreStalks
 import Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreUnitGerm

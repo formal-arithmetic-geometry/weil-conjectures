@@ -118,8 +118,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoherentIdealPatchingGenericEmbeddingCore",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoherentIdealPatchingGenericEmbeddingCore.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoherentIdealPatchingGenericEmbeddingCore",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoherentIdealPatchingGenericEmbeddingCore.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_ideal_patching_generic_embedding_core",
   "statement": "theorem coherent_ideal_patching_generic_embedding_core\n    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]\n    (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]\n    (ξ : X) (hclosure : closure ({ξ} : Set X) = Set.range i.base)\n    (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G)\n    (hsupport : {x : X | ¬ Subsingleton (G.presheaf.stalk x)} = Set.range i.base)\n    (hkill : ∀ g : X.presheaf.stalk ξ,\n      ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj G,\n        g ∈ IsLocalRing.maximalIdeal _ → g • m = 0)\n    (I : Z.IdealSheafData) :\n    ∃ (r : ℕ), 1 ≤ r ∧\n      let M := @biproduct (Fin r) X.Modules _ _\n        (fun _ : Fin r ↦ (pushforward i).obj I.toModules)\n        (HasBiproduct.of_hasProduct (fun _ : Fin r ↦ (pushforward i).obj I.toModules))\n      (IsZero M ∨\n        ∃ (J : X.Modules) (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf),\n          Mono ι ∧ J.IsQuasicoherent ∧\n          Function.Surjective\n            ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map ι).hom ∧\n          ∃ (τ : idealModuleProduct ι G ⟶ M), Mono τ ∧\n            Function.Surjective\n              ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map τ).hom)",
   "branch": "sheaf-dag",

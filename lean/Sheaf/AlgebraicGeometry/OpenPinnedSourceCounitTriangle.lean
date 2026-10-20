@@ -1,9 +1,9 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
-public import Sheaf.AlgebraicGeometry.PinnedPullbackCompositionShifts
-import all Sheaf.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
+public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
+public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCompositionShifts
+import all WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
 
 /-! # Counit comparison for one open leg
 Source: Stacks Project, Tags 08DW and 0D5S. -/

@@ -109,8 +109,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.HomologyEvaluation",
-  "file": "lean/Sheaf/Algebra/Homology/HomologyEvaluation.lean",
+  "module": "WeilConjectures.Algebra.Homology.HomologyEvaluation",
+  "file": "lean/WeilConjectures/Algebra/Homology/HomologyEvaluation.lean",
   "declaration": "CategoryTheory.exists_homologyEvaluation",
   "statement": "theorem exists_homologyEvaluation (X : AlgebraicGeometry.Scheme.{u})\n    (T J : CochainComplex X.Modules ℤ) (n : ℤ)\n    (hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k)) :\n    ∃! e : (homComplex (R := X.sheaf) T J).homology n ⟶\n      SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0),\n      IsHomologyEvaluation X T J n e ∧\n        ∀ (V : X.Opens) (W : V.toScheme.Opens),\n          let Fc := moduleOpenOverComplexFunctor X V W\n          CochainComplex.IsKInjective (Fc.obj J) →\n          HasFiniteFreeZeroModel (V.toScheme.ringCatSheaf.over W) (Fc.obj T) →\n          IsIso (((Scheme.Modules.restrictFunctor V.ι).map e).over W)",
   "branch": "sheaf-dag",

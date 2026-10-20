@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
-import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 
 /-!
 # Compactly supported cohomology along a finite map

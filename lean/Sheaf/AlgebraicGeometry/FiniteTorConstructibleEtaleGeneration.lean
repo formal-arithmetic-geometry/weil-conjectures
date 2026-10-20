@@ -7,13 +7,13 @@ module
 
 public import Sheaf.Paper.FiniteFieldFiber
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
 
-import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
+import WeilConjectures.CategoryTheory.CompactGeneratorsBuildObjects
 import Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact
 import Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators
 import Mathlib.Algebra.CharP.CharAndCard

@@ -1,11 +1,11 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonCompat
+import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonCompat
 
 /-! # Open restriction of the canonical single-module derived arrow
 

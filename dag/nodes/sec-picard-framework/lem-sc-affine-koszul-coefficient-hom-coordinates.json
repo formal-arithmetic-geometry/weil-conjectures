@@ -107,8 +107,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulCoefficientHomCoordinates.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineKoszulCoefficientHomCoordinates.lean",
   "declaration": "AlgebraicGeometry.affine_koszul_coefficient_hom_coordinates",
   "statement": "theorem affine_koszul_coefficient_hom_coordinates\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (U : Y.affineOpens) (n m : ℕ) (f : Fin n → Γ(Y, U.1))\n    (a : SheafOfModules.unit Y.ringCatSheaf ⟶\n      (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))\n    (ha : a = (Scheme.Modules.pullbackPushforwardAdjunction i).unit.app _ ≫\n      (Scheme.Modules.pushforward i).map (Scheme.Modules.pullbackObjUnitIso i).hom) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let R := Scheme.Modules.restrictFunctor U.1.ι\n    let S := CochainComplex.singleFunctor U.1.toScheme.Modules 0\n    let A := (Γ(Y, U.1) : Type u)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let E := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)\n    let H := (homComplexFunctor (R := U.1.toScheme.toRingedSpace.sheaf)).obj (op E)\n    let D := HomologicalComplex.homologyFunctor U.1.toScheme.Modules\n      (ComplexShape.up ℤ) (m : ℤ)\n    let P := (ExteriorAlgebra.koszulDualComplex A n f).homology m\n    let Q := (ExteriorAlgebra.koszulQuotientDualComplex A (i.ker.ideal U) n f).homology m\n    let q := HomologicalComplex.homologyMap\n      (ExteriorAlgebra.koszulCoefficientReduction A (i.ker.ideal U) n f) m\n    ∃ (eF : D.obj (H.obj (S.obj (R.obj (SheafOfModules.unit Y.ringCatSheaf)))) ≅ T.obj P)\n      (eG : D.obj (H.obj (S.obj (R.obj B))) ≅ T.obj Q),\n      D.map (H.map (S.map (R.map a))) ≫ eG.hom = eF.hom ≫ T.map q",
   "branch": "sheaf-dag",

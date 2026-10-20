@@ -3,7 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.ConstructibleCurveAnnihilator
-import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
+import WeilConjectures.AlgebraicGeometry.ConstructibleSubsheafNoetherian
 import Sheaf.AlgebraicGeometry.ConstructibleTorsionModulesAgree
 
 @[expose] public section

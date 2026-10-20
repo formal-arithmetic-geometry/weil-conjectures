@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.ExactSequence
 import Mathlib.Algebra.Category.Grp.AB
 import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisStageRows
 
-public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
+public import WeilConjectures.AlgebraicGeometry.PerfectHomLocalComparison
 
 /-! # Exact geometric rows for the perfect Hom comparison
 Source: Stacks Project, Tag 09RE, Mayer--Vietoris step, and Tag 08BW.

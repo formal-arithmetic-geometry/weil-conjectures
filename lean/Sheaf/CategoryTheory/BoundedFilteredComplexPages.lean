@@ -5,8 +5,8 @@ Authors: SHEAF group E2
 -/
 module
 
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory

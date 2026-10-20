@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 
 /-! # The fixed scalar-forgetting map on raw derived Hom
 

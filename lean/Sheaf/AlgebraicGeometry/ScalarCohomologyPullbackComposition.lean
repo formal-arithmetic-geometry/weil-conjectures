@@ -6,8 +6,8 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-import Sheaf.AlgebraicGeometry.ScalarInverseImageCompositionCoherence
-import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
+import WeilConjectures.AlgebraicGeometry.ScalarInverseImageCompositionCoherence
+import WeilConjectures.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
 import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 

@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.FiniteCoconeLimits
 import Sheaf.CategoryTheory.FiniteCoconeWeakMaps
 

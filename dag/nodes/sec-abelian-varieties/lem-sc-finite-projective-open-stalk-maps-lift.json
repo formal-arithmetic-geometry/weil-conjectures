@@ -101,8 +101,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteProjectiveOpenStalkMapsLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteProjectiveOpenStalkMapsLift.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteProjectiveOpenStalkMapsLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteProjectiveOpenStalkMapsLift.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_finite_projective_open_stalk_maps_lift",
   "statement": "theorem exists_finite_projective_open_stalk_maps_lift\n    (X : Scheme.{u}) (V : X.Opens) (x : X) (hxV : x ∈ V)\n    (T : X.Opens) (hTV : T ≤ V) (hxT : x ∈ T)\n    (I : Type u) [Finite I]\n    (M N : I → SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n    (hM : ∀ q, ∃ m : ℕ,\n      ∃ (ι : M q ⟶ SheafOfModules.free\n          (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin m)))\n        (π : SheafOfModules.free\n          (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin m)) ⟶ M q),\n        ι ≫ π = 𝟙 (M q))\n    (h : ∀ q, (openModuleStalkFunctor X V ⟨x, hxV⟩).obj (M q) ⟶\n      (openModuleStalkFunctor X V ⟨x, hxV⟩).obj (N q)) :\n    ∃ (Z : X.Opens) (hZT : Z ≤ T) (hxZ : x ∈ Z),\n      let R := SheafOfModules.overMap (moduleRings X.toRingedSpace)\n        (homOfLE (hZT.trans hTV))\n      let S := openModuleStalkFunctor X Z ⟨x, hxZ⟩\n      let F := openModuleStalkFunctor X V ⟨x, hxV⟩\n      ∃ (e : R ⋙ S ≅ F) (k : ∀ q, R.obj (M q) ⟶ R.obj (N q)),\n        ∀ q, S.map (k q) = (e.app (M q)).hom ≫ h q ≫ (e.app (N q)).inv",
   "branch": "sheaf-dag",

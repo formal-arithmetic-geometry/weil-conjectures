@@ -12,14 +12,14 @@ public import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Sheaf.Paper.IntegralHomReduction
-public import Sheaf.Algebra.Homology.HomComplexProjections
+public import WeilConjectures.Algebra.Homology.HomComplexProjections
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Mathlib.CategoryTheory.Sites.Sheafification

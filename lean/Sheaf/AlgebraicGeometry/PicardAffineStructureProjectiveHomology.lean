@@ -9,11 +9,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.AlgebraicGeometry.PicardAffineProjectiveBaseChange
-import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
+import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeCoordinates
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives

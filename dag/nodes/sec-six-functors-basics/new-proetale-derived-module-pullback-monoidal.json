@@ -1,126 +1,126 @@
 {
-  "id": "new-proetale-derived-module-pullback-monoidal",
-  "kind": "statement",
-  "title": "Canonical monoidal derived pullback of pro-etale internal modules",
-  "statement": "Let Λ be a commutative condensed ring, X and Y schemes, and f : X → Y. The left derived pullback L(f*Λ) on unbounded derived categories of internal module objects is strong monoidal. Its comonoidal tensor map is the universal left-derived tensor comparison, and its unit map is the derived counit on the unit followed by the ordinary unit comparison in degree zero. Both tensor counits are natural transformations, and the comparison between their two derived bifunctors is invertible.",
-  "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.9(3), Proposition 6.8.11(3); canonical derived tensor construction as formalized by new-integral-residue-derived-monoidal"
-  },
-  "stmt_deps": [
+ "id": "new-proetale-derived-module-pullback-monoidal",
+ "kind": "statement",
+ "title": "Canonical monoidal derived pullback of pro-etale internal modules",
+ "statement": "Let Λ be a commutative condensed ring, X and Y schemes, and f : X → Y. The left derived pullback L(f*Λ) on unbounded derived categories of internal module objects is strong monoidal. Its comonoidal tensor map is the universal left-derived tensor comparison, and its unit map is the derived counit on the unit followed by the ordinary unit comparison in degree zero. Both tensor counits are natural transformations, and the comparison between their two derived bifunctors is invertible.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3); canonical derived tensor construction as formalized by new-integral-residue-derived-monoidal"
+ },
+ "stmt_deps": [
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Construct the homotopy tensor counit as the lax tensorator of Qh followed by Qh of the inverse natural comonoidal comparison for the exact monoidal pullback. Tensor the derived pullback counit in both arguments and compose with this homotopy counit. The opposite derived counit is the existing leftDerivedDerivedTensorCounit. Composition and whiskering prove all four naturality laws.",
+   "uses": [
     "lem-sfb-derived-monoidal"
-  ],
-  "proof": [
-    {
-      "text": "Construct the homotopy tensor counit as the lax tensorator of Qh followed by Qh of the inverse natural comonoidal comparison for the exact monoidal pullback. Tensor the derived pullback counit in both arguments and compose with this homotopy counit. The opposite derived counit is the existing leftDerivedDerivedTensorCounit. Composition and whiskering prove all four naturality laws.",
-      "uses": [
-        "lem-sfb-derived-monoidal"
-      ],
-      "elementary": true
-    },
-    {
-      "text": "Identify pullback with mapModComap along the inverse of the coefficient comparison. Transport flatness along extendScalarsIsoComapInv and apply inverseImageModule_preservesFlat. On the kFlatMap left derivability structure, the tensor counit is invertible. The two-variable derived universal property gives the comparison, and uniqueness identifies it with an isomorphism of derived bifunctors.",
-      "uses": [
-        "new-proetale-inverse-image-module-flat"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Use the proved generic residueDerivedMonoidal construction. Its canonical tensor comparison and counit satisfy the lax square, its coherence descends along kFlatMap resolutions, and its tensor and unit maps are invertible. The unit of Qh is the identity. Expand the homotopy functor unit comparison and its single-complex comparison to identify the descended unit map with leftDerivedTensorUnitIso. Copy the monoidal structure using these equal explicit unit maps. Specialize this constructed structure to the exact monoidal pullback using the flatness result of the preceding step. The abstract leftDerivedLift_eq_of_inverse lemma cancels the postcomposed natural isomorphism in the universal property. This proves leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison, identifying the original lift with the descended comonoidal map.",
-      "uses": [
-        "new-integral-residue-derived-monoidal"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-sfb-derived-monoidal",
-    "new-proetale-inverse-image-module-flat",
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify pullback with mapModComap along the inverse of the coefficient comparison. Transport flatness along extendScalarsIsoComapInv and apply inverseImageModule_preservesFlat. On the kFlatMap left derivability structure, the tensor counit is invertible. The two-variable derived universal property gives the comparison, and uniqueness identifies it with an isomorphism of derived bifunctors.",
+   "uses": [
+    "new-proetale-inverse-image-module-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved generic residueDerivedMonoidal construction. Its canonical tensor comparison and counit satisfy the lax square, its coherence descends along kFlatMap resolutions, and its tensor and unit maps are invertible. The unit of Qh is the identity. Expand the homotopy functor unit comparison and its single-complex comparison to identify the descended unit map with leftDerivedTensorUnitIso. Copy the monoidal structure using these equal explicit unit maps. Specialize this constructed structure to the exact monoidal pullback using the flatness result of the preceding step. The abstract leftDerivedLift_eq_of_inverse lemma cancels the postcomposed natural isomorphism in the universal property. This proves leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison, identifying the original lift with the descended comonoidal map.",
+   "uses": [
     "new-integral-residue-derived-monoidal"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
-    "place": "Tensor counits, flatness transport, unit compatibility and monoidal_leftDerivedUpperStar",
-    "note": "C2: complete proofs, reusing the existing generic descent construction; no new unproved statement."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "The left derived functor of an exact strong monoidal functor preserving flat objects is strong monoidal",
-      "date": "2026-10-17",
-      "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor_obj, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_obj, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp, CategoryTheory.Localization.Monoidal.lifting_isMonoidal, CategoryTheory.Localization.Monoidal.functorMonoidalOfComp",
-      "verdict": "Use existing CoreMonoidal and the library's proved residueDerivedMonoidal construction; no new existence axiom or unproved coherence lemma is needed."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal",
-      "date": "2026-10-17",
-      "results": "[loogle] OK 3 hit(s) CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_εIso, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_μIso",
-      "verdict": "Use existing CoreMonoidal and the library's proved residueDerivedMonoidal construction; no new existence axiom or unproved coherence lemma is needed."
-    },
-    {
-      "tool": "grep",
-      "query": "leftDerived.*UnitIso|leftDerived.*Monoidal",
-      "date": "2026-10-17",
-      "results": "[grep] OK 0 hit(s) ",
-      "verdict": "Use existing CoreMonoidal and the library's proved residueDerivedMonoidal construction; no new existence axiom or unproved coherence lemma is needed."
-    },
-    {
-      "tool": "leansearch",
-      "query": "The left derived functor of an exact strong monoidal functor preserving flat objects is strong monoidal",
-      "date": "2026-10-17",
-      "results": "[leansearch] OK 8 hit(s) CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Functor.totalLeftDerived",
-      "verdict": "No exact specialized result; use the existing library construction residueDerivedMonoidal and CoreMonoidal.ofOplaxMonoidal."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal",
-    "date": "2026-10-17",
-    "group": "C2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "sk-def-sfb-module-derived-pushpull",
-      "place": "The K-flat construction of total derived module pullback and the canonical tensor and unit comparisons.",
-      "via": []
-    },
-    "same_as": []
-  },
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-def-sfb-module-derived-pushpull",
-  "lean": {
-    "existing": false,
-    "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal",
-    "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
-    "declarations": [
-      "CategoryTheory.Functor.tensorCounitOfNatTrans",
-      "CategoryTheory.Functor.homotopyTensorCounit",
-      "CategoryTheory.Functor.homotopyTensorLeftDerivedCounit",
-      "CategoryTheory.Functor.leftDerivedTensorUnitIso",
-      "CategoryTheory.Functor.residueDerivedOplax_η_eq_tensorUnitIso",
-      "CategoryTheory.Functor.leftDerivedMonoidalWithUnit",
-      "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_preservesFlat",
-      "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
-      "CategoryTheory.Functor.homotopyTensorLeftDerivedLift_eq",
-      "AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison"
-    ],
-    "statement": "instance monoidal_leftDerivedUpperStar : L((f)^*⟦Λ⟧).Monoidal",
-    "branch": "sheaf-dag",
-    "by": "C2",
-    "date": "2026-10-17"
-  },
-  "import_flags": [
-    "unreachable"
-  ],
-  "maintenance": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reason": "Apply the retained C2 complete implementation as a module maintenance repair; close seven pre-existing nested proof fields without changing public signatures. The Lean import closure reaches this module; this new DAG attachment has no incoming DAG edge."
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-monoidal",
+  "new-proetale-inverse-image-module-flat",
+  "new-integral-residue-derived-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
+  "place": "Tensor counits, flatness transport, unit compatibility and monoidal_leftDerivedUpperStar",
+  "note": "C2: complete proofs, reusing the existing generic descent construction; no new unproved statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The left derived functor of an exact strong monoidal functor preserving flat objects is strong monoidal",
+   "date": "2026-10-17",
+   "results": "[leanfinder] OK 8 hit(s) CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor_obj, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_obj, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp, CategoryTheory.Localization.Monoidal.lifting_isMonoidal, CategoryTheory.Localization.Monoidal.functorMonoidalOfComp",
+   "verdict": "Use existing CoreMonoidal and the library's proved residueDerivedMonoidal construction; no new existence axiom or unproved coherence lemma is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal",
+   "date": "2026-10-17",
+   "results": "[loogle] OK 3 hit(s) CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_εIso, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_μIso",
+   "verdict": "Use existing CoreMonoidal and the library's proved residueDerivedMonoidal construction; no new existence axiom or unproved coherence lemma is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*UnitIso|leftDerived.*Monoidal",
+   "date": "2026-10-17",
+   "results": "[grep] OK 0 hit(s) ",
+   "verdict": "Use existing CoreMonoidal and the library's proved residueDerivedMonoidal construction; no new existence axiom or unproved coherence lemma is needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The left derived functor of an exact strong monoidal functor preserving flat objects is strong monoidal",
+   "date": "2026-10-17",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Functor.totalLeftDerived",
+   "verdict": "No exact specialized result; use the existing library construction residueDerivedMonoidal and CoreMonoidal.ofOplaxMonoidal."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal",
+  "date": "2026-10-17",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-module-derived-pushpull",
+   "place": "The K-flat construction of total derived module pullback and the canonical tensor and unit comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-module-derived-pushpull",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal",
+  "file": "lean/Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
+  "declarations": [
+   "CategoryTheory.Functor.tensorCounitOfNatTrans",
+   "CategoryTheory.Functor.homotopyTensorCounit",
+   "CategoryTheory.Functor.homotopyTensorLeftDerivedCounit",
+   "CategoryTheory.Functor.leftDerivedTensorUnitIso",
+   "CategoryTheory.Functor.residueDerivedOplax_η_eq_tensorUnitIso",
+   "CategoryTheory.Functor.leftDerivedMonoidalWithUnit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_preservesFlat",
+   "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
+   "CategoryTheory.Functor.homotopyTensorLeftDerivedLift_eq",
+   "AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison"
+  ],
+  "statement": "instance monoidal_leftDerivedUpperStar : L((f)^*⟦Λ⟧).Monoidal",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-17"
+ },
+ "import_flags": [
+  "unreachable"
+ ],
+ "maintenance": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reason": "Apply the retained C2 complete implementation as a module maintenance repair; close seven pre-existing nested proof fields without changing public signatures. The Lean import closure reaches this module; this new DAG attachment has no incoming DAG edge."
+ }
 }

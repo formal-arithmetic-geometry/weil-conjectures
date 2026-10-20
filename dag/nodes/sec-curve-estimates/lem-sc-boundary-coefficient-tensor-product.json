@@ -151,8 +151,8 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.BoundaryCoefficientTensorProduct",
-  "file": "lean/Sheaf/AlgebraicGeometry/BoundaryCoefficientTensorProduct.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.BoundaryCoefficientTensorProduct",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/BoundaryCoefficientTensorProduct.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.boundaryCoefficientDegreeIso_tensor_product",
   "statement": "theorem boundaryCoefficientDegreeIso_tensor_product {X Z : Scheme.{u}} (j : Z ⟶ X)\n    (L : X.Modules) [L.IsInvertible] (n e : ℕ) (V : Z.Opens)\n    (q : Γ((tensorPullback j).obj (L.tensorPow (n * (e + 1))), V))\n    (s : Γ((tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow (n * (0 + 1))), V)) :\n    let a := n * (e + 1)\n    let b := n * (0 + 1)\n    let c := n * ((e + 1) + 1)\n    let m := boundaryIdealTensorProduct j.ker.toModules L a b ≫\n      j.ker.toModules ◁ (eqToHom (by\n        dsimp [a, b, c]\n        congr 1\n        simp only [Nat.mul_add, Nat.mul_one]) : L.tensorPow (a + b) ⟶ L.tensorPow c)\n    (boundaryCoefficientDegreeIso j L n (e + 1)).hom.app V\n        (((tensorPullback j).map m).app V\n          ((boundaryPullbackTensorIso j (L.tensorPow a)\n            (j.ker.toModules ⊗ L.tensorPow b)).inv.app V (tmulSection q s))) =\n      tmulSection\n        ((ρ_ ((tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n))).hom.app V\n          ((boundaryCoefficientDegreeIso j L n 0).hom.app V s))\n        ((boundarySectionDegreeIso j L n e).hom.app V q)",
   "branch": "sheaf-dag",

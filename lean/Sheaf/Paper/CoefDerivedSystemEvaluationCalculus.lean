@@ -37,10 +37,10 @@ import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import WeilConjectures.Algebra.Homology.HomComplex
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients

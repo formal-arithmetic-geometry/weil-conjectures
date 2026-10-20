@@ -1,7 +1,7 @@
 module
 
-public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 

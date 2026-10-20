@@ -120,8 +120,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.CartanEilenbergConeGradedShortComplex",
-  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergConeGradedShortComplex.lean",
+  "module": "WeilConjectures.CategoryTheory.CartanEilenbergConeGradedShortComplex",
+  "file": "lean/WeilConjectures/CategoryTheory/CartanEilenbergConeGradedShortComplex.lean",
   "declaration": "CategoryTheory.Functor.cartanEilenberg_cone_graded_shortComplex_iso",
   "statement": "theorem cartanEilenberg_cone_graded_shortComplex_iso\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    (K : CochainComplex A ℤ)\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (a : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      K ⟶ I)\n    (b : ℤ)\n    (hIbelow : ∀ s : ℤ, s < b → IsZero (I.X s))\n    (hKbelow : ∀ s : ℤ, s < b → IsZero (K.X s))\n    (aug : K ⟶ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total\n      (ComplexShape.up ℤ))\n    (haug : ∀ n : ℤ, aug.f n = (a.f n).f 0 ≫\n      (HomologicalComplex.extendXIso\n        (((𝟭 A).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X n))\n        ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫\n      (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal\n        (ComplexShape.up ℤ) 0 n n (zero_add n))\n    (F : DecreasingFiltration (CochainComplex.mappingCone aug))\n    (hF : ∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl aug).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Icc (max b p) n).sup (fun s ↦ imageSubobject\n          ((((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotalOrZero\n            (ComplexShape.up ℤ) (n - s) s n ≫\n              (CochainComplex.mappingCone.inr aug).f n)))\n    (p n : ℤ) :\n    Nonempty ((F.gradedPiece p).sc n ≅\n      (CochainComplex.mappingCone\n        (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).sc (n - p))",
   "branch": "sheaf-dag",

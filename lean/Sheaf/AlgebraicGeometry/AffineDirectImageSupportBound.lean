@@ -8,16 +8,15 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Over
-public import Sheaf.AlgebraicGeometry.EtaleSupport
+public import WeilConjectures.AlgebraicGeometry.EtaleSupport
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyContinuity
+import WeilConjectures.AlgebraicGeometry.CofilteredEtaleCohomologyContinuity
 import Sheaf.AlgebraicGeometry.AffineSupportVanishing
 import Sheaf.AlgebraicGeometry.StrictLocalAlgebraicResidueModels
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations

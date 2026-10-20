@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax

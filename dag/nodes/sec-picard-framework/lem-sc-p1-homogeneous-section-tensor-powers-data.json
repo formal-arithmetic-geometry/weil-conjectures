@@ -96,8 +96,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersData",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProjHomogeneousSectionTensorPowersData.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersData",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjHomogeneousSectionTensorPowersData.lean",
   "declaration": "AlgebraicGeometry.proj_homogeneous_section_tensor_powers_data",
   "statement": "theorem proj_homogeneous_section_tensor_powers_data (k : Type u) [Field k]\n    {d : ℕ} (hd : 0 < d) {f : MvPolynomial (Fin 2) k}\n    (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k d) :\n    let L := Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (0 + (d : ℤ))\n    ∃ (a : ∀ n : ℕ, L.tensorPow n ≅\n          Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k)\n            (0 + ((n • d : ℕ) : ℤ)))\n        (b : ∀ (m : ℤ) (n : ℕ),\n          Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ⊗ L.tensorPow n ≅\n            Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k)\n              (m + ((n • d : ℕ) : ℤ))),\n        (∀ n : ℕ, tensorPowSection\n            (homOfGlobalSection L ((Proj.unitToTwist hf).app ⊤ (unitSectionsEquiv ⊤ 1)))\n            n ≫ (a n).hom =\n          Proj.unitToTwist (SetLike.pow_mem_graded n hf)) ∧\n        (∀ (m : ℤ) (n : ℕ),\n          (ρ_ (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m)).inv ≫\n            Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ◁\n              tensorPowSection\n                (homOfGlobalSection L ((Proj.unitToTwist hf).app ⊤ (unitSectionsEquiv ⊤ 1)))\n                n ≫ (b m n).hom =\n            Proj.twistMul m (SetLike.pow_mem_graded n hf))",
   "branch": "sheaf-dag",

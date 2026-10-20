@@ -14,8 +14,6 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FibreSections
 public import WeilConjectures.SixFunctors.BaseChange.Sections
 public import WeilConjectures.SixFunctors.BaseChange.Forget
 public import WeilConjectures.SixFunctors.Finite.Descent
-import WeilConjectures.SixFunctors.BaseChange.Pasting
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # The underived proper base change

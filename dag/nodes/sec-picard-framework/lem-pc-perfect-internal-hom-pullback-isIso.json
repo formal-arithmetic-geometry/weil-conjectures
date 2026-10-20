@@ -109,8 +109,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectInternalHomPullbackIsIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectInternalHomPullbackIsIso.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectInternalHomPullbackIsIso",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectInternalHomPullbackIsIso.lean",
   "declaration": "AlgebraicGeometry.perfect_internalHom_pullback_isIso",
   "statement": "theorem perfect_internalHom_pullback_isIso\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]\n    {T X : Scheme.{u}} (g : T ⟶ X)\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (M K : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M)\n    (t : tensor (schemeDerivedCategory X) ⋙ derivedPullback g ≅\n      (derivedPullback g).prod (derivedPullback g) ⋙ tensor (schemeDerivedCategory T))\n    (ht : IsCanonicalPullbackTensorComparison g (fun E K => t.hom.app (E, K))) :\n    IsIso\n      ((canonicalTensorHomAdjunction T ((derivedPullback g).obj M)).homEquiv\n        ((derivedPullback g).obj\n          ((derivedInternalHom (Opens.grothendieckTopology X)\n            X.toRingedSpace.sheaf).obj (op M, K))) ((derivedPullback g).obj K)\n        (t.inv.app\n            ((derivedInternalHom (Opens.grothendieckTopology X)\n              X.toRingedSpace.sheaf).obj (op M, K), M) ≫\n          (derivedPullback g).map ((canonicalTensorHomAdjunction X M).counit.app K)))",
   "branch": "sheaf-dag",

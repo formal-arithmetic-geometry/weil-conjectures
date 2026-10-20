@@ -15,6 +15,7 @@ import all Sheaf.Paper.ConstructibleCokernelsExtensions
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Tensoring a locally finite free sheaf with a sheaf in degree zero
 

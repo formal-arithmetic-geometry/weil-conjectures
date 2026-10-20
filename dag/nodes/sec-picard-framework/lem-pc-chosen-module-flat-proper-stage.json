@@ -111,8 +111,8 @@
  ],
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ChosenModuleFlatProperStage",
-  "file": "lean/Sheaf/AlgebraicGeometry/ChosenModuleFlatProperStage.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ChosenModuleFlatProperStage",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ChosenModuleFlatProperStage.lean",
   "declaration": "AlgebraicGeometry.exists_eventually_chosen_module_flat_proper",
   "statement": "theorem exists_eventually_chosen_module_flat_proper\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (M : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules)\n    [M.IsFinitePresentation]\n    (hflat : ((Scheme.Modules.moduleBaseChange f\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (c.π.app (op i)))\n      (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj M).IsFlatOver\n        (pullback.snd f (c.π.app (op i))))\n    (hproper : Scheme.Modules.HasSupportProperOver\n      (pullback.snd f (c.π.app (op i)))\n      ((Scheme.Modules.moduleBaseChange f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj M)) :\n    ∃ (k : I) (hjk : j ≤ k), ∀ (l : I) (hkl : k ≤ l),\n      let hjl := hjk.trans hkl\n      let B := Scheme.Modules.moduleBaseChange f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjl)))))\n        (Over.homMk (Spec.map (R.map (homOfLE hjl)))\n          (by simp [← Functor.map_comp, ← Spec.map_comp]))\n      (B.obj M).IsFlatOver\n        (pullback.snd f (Spec.map (R.map (homOfLE (hij.trans hjl))))) ∧\n      Scheme.Modules.HasSupportProperOver\n        (pullback.snd f (Spec.map (R.map (homOfLE (hij.trans hjl)))))\n        (B.obj M)",
   "branch": "sheaf-dag",

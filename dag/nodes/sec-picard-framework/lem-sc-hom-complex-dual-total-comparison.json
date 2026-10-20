@@ -101,8 +101,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.HomComplexDualTotalComparison",
-  "file": "lean/Sheaf/Algebra/Homology/HomComplexDualTotalComparison.lean",
+  "module": "WeilConjectures.Algebra.Homology.HomComplexDualTotalComparison",
+  "file": "lean/WeilConjectures/Algebra/Homology/HomComplexDualTotalComparison.lean",
   "declaration": "CochainComplex.homComplex_sc_iso_dual_total",
   "statement": "theorem homComplex_sc_iso_dual_total\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n    {R : Sheaf J CommRingCat.{w}}\n    (E A : CochainComplex (SheafOfModules.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)\n    (K : HomologicalComplex₂ (SheafOfModules.{max u v w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))ᵒᵖ\n        (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)]\n    (e : ∀ p q : ℤ, (K.X p).X q ≅ op (SheafOfModules.homObj (E.X p) (A.X (-q))))\n    (h₁ : ∀ p p' q : ℤ,\n      (K.d p p').f q ≫ (e p' q).hom = (e p q).hom ≫\n        (SheafOfModules.homObjMap (E.d p p') (𝟙 (A.X (-q)))).op)\n    (h₂ : ∀ p q q' : ℤ,\n      (K.X p).d q q' ≫ (e p q').hom = (e p q).hom ≫\n        (SheafOfModules.homObjMap (𝟙 (E.X p)) (A.d (-q') (-q))).op)\n    (n : ℤ) :\n    Nonempty ((CategoryTheory.homComplex E A).sc n ≅\n      ((K.total (ComplexShape.up ℤ)).sc (-n)).unop)",
   "branch": "sheaf-dag",

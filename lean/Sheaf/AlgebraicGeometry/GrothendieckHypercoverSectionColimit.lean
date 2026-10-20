@@ -8,6 +8,7 @@ public import Sheaf.AlgebraicGeometry.GrothendieckEtaleSectionColimit
 import all WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 import all WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 import Sheaf.AlgebraicGeometry.FiniteSplitHypercoverTruncation
+public import Sheaf.UpstreamExtra.WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 /-! # Coherent-site continuity of the three hypercover section terms -/
 @[expose] public section
 universe u' u

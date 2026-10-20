@@ -69,8 +69,6 @@ lemma isZero_of_forall_isZero_upperStar_obj (F : Sheaf (Scheme.ProEt.topology X)
   have : IsIso (0 : F ⟶ 0) := by
     refine ProEtale.isIso_of_isIso_localizationRestriction A (0 : F ⟶ 0) (fun i ↦ (U i).ι)
       (ofArrows_opens_ι_mem_proetalePrecoverage U hU) fun i ↦ ?_
-    refine (show IsIso ((ProEtale.localizationRestriction A (U i).ι inferInstance).map
-      (0 : F ⟶ 0)) from ?_)
     let e := ProEtale.upperStarIsoLocalizationRestriction A (U i).ι inferInstance
     exact isIso_of_source_target_iso_zero _ ((h i).of_iso (e.app F).symm).isoZero
       (((ProEtale.upperStar A (U i).ι).map_isZero (isZero_zero _)).of_iso (e.app 0).symm).isoZero

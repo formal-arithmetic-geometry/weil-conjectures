@@ -124,8 +124,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OrdinaryFlatExchangePrescribedAdjunction",
-  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFlatExchangePrescribedAdjunction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OrdinaryFlatExchangePrescribedAdjunction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OrdinaryFlatExchangePrescribedAdjunction.lean",
   "declaration": "AlgebraicGeometry.ordinary_flat_exchange_prescribed_adjunction",
   "statement": "theorem ordinary_flat_exchange_prescribed_adjunction\n    {X Y S : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (g : S ⟶ Y) [Flat g]\n    (adj : Scheme.Modules.tensorPullback f ⊣ Scheme.Modules.pushforward f) :\n    let p := pullback.snd f g\n    let q := pullback.fst f g\n    let adjR := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p)\n    let c := (conjugateIsoEquiv\n      (adj.comp (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction q)))\n      ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp adjR)).symm\n        (Scheme.Modules.pushforwardComp q f ≪≫\n          Scheme.Modules.pushforwardCongr pullback.condition ≪≫\n          (Scheme.Modules.pushforwardComp p g).symm)\n    let B : Scheme.Modules.pushforward f ⋙ Scheme.Modules.tensorPullback g ⟶\n        Scheme.Modules.tensorPullback q ⋙ Scheme.Modules.pushforward p :=\n      { app := fun M ↦ Scheme.Modules.moduleBaseChangeMap f p g q pullback.condition M\n        naturality := fun _ _ a ↦\n          Scheme.Modules.moduleBaseChangeMap_naturality f p g q pullback.condition a }\n    (∀ (M : X.Modules), M.IsQuasicoherent → IsIso (B.app M)) ∧\n      (∀ (N : Y.Modules),\n        (Scheme.Modules.tensorPullback g).map (adj.unit.app N) ≫\n          B.app ((Scheme.Modules.tensorPullback f).obj N) =\n        adjR.unit.app ((Scheme.Modules.tensorPullback g).obj N) ≫\n          (Scheme.Modules.pushforward p).map (c.hom.app N))",
   "branch": "sheaf-dag",

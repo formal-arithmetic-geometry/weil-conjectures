@@ -12,8 +12,8 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardConstructibleDescent
-import Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficients
-import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.AlgebraicGeometry.ConstructibleIntegralCoefficients
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-! # Coefficient hypotheses for finite direct images

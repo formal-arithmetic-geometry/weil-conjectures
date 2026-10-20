@@ -91,8 +91,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryTriangleRows",
-  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorOrdinaryTriangleRows.lean",
+  "module": "WeilConjectures.Algebra.Homology.BaseDerivedTensorOrdinaryTriangleRows",
+  "file": "lean/WeilConjectures/Algebra/Homology/BaseDerivedTensorOrdinaryTriangleRows.lean",
   "declaration": "ModuleCat.exists_baseDerivedTensorCohomologyModel_ordinary_triangle_rows",
   "statement": "theorem exists_baseDerivedTensorCohomologyModel_ordinary_triangle_rows\n    (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]\n    [HasDerivedCategory (ModuleCat.{u} R)] [HasDerivedCategory (ModuleCat.{u} A)]\n    [HasDerivedCategory (ModuleCat.{u} B)]\n    (T : Pretriangulated.Triangle (CochainComplex (ModuleCat.{u} A) ℤ))\n    (hT : DerivedCategory.Q.mapTriangle.obj T ∈ Pretriangulated.distinguishedTriangles)\n    (m₁ : BaseDerivedTensorCohomologyModel R A B T.obj₁ C)\n    (m₂ : BaseDerivedTensorCohomologyModel R A B T.obj₂ C)\n    (m₃ : BaseDerivedTensorCohomologyModel R A B T.obj₃ C) (i : ℤ) :\n    let F := (extendScalars.{u, u, u} (algebraMap A (A ⊗[R] B))).mapHomologicalComplex\n      (.up ℤ)\n    ∃ (s₀ : m₁.cohomology i ⟶ m₂.cohomology i)\n      (s₁ : m₂.cohomology i ⟶ m₃.cohomology i)\n      (s₂ : m₃.cohomology i ⟶ m₁.cohomology (i + 1))\n      (s₃ : m₁.cohomology (i + 1) ⟶ m₂.cohomology (i + 1)),\n      (ComposableArrows.mk₄ s₀ s₁ s₂ s₃).Exact ∧\n      s₀ ≫ m₂.comparison i =\n        m₁.comparison i ≫ HomologicalComplex.homologyMap (F.map T.mor₁) i ∧\n      s₁ ≫ m₃.comparison i =\n        m₂.comparison i ≫ HomologicalComplex.homologyMap (F.map T.mor₂) i ∧\n      s₂ ≫ m₁.comparison (i + 1) = m₃.comparison i ≫\n        CochainComplex.homologyδOfTriangle (F.mapTriangle.obj T) i (i + 1) ∧\n      s₃ ≫ m₂.comparison (i + 1) = m₁.comparison (i + 1) ≫\n        HomologicalComplex.homologyMap (F.map T.mor₁) (i + 1)",
   "branch": "sheaf-dag",

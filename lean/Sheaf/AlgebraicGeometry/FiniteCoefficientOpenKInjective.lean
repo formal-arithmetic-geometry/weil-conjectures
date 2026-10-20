@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.AlgebraicGeometry.FiniteCoefficientOpenRestriction
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import Mathlib.CategoryTheory.Sites.CoverLifting
 
 /-!

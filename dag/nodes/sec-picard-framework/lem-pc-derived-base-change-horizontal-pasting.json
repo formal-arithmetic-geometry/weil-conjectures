@@ -98,8 +98,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeHorizontalPasting",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeHorizontalPasting.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedBaseChangeHorizontalPasting",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedBaseChangeHorizontalPasting.lean",
   "declaration": "AlgebraicGeometry.schemeDerivedBaseChange_horizontal_pasting",
   "statement": "theorem schemeDerivedBaseChange_horizontal_pasting\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y P S I T : Scheme.{u}}\n    (f : X ⟶ Y) (g : S ⟶ Y) (h : T ⟶ S)\n    (p : P ⟶ X) (q : P ⟶ S) (t : I ⟶ P) (r : I ⟶ T)\n    (hs : p ≫ f = q ≫ g) (hi : t ≫ q = r ≫ h) :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))\n    ∀ E : schemeDerivedCategory X,\n      (derivedPullback h).map (schemeDerivedBaseChangeMap f q g p hs E) ≫\n          schemeDerivedBaseChangeMap q r h t hi ((derivedPullback p).obj E) =\n        (c h g).hom.app ((schemeDerivedDirectImage f).obj E) ≫\n          schemeDerivedBaseChangeMap f r (h ≫ g) (t ≫ p)\n            (by rw [Category.assoc, hs, ← Category.assoc t q g, hi, Category.assoc]) E ≫\n          (schemeDerivedDirectImage r).map ((c t p).inv.app E) ",
   "branch": "sheaf-dag",

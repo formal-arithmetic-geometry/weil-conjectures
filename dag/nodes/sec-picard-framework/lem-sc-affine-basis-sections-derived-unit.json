@@ -90,8 +90,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineBasisSectionsDerivedUnit",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasisSectionsDerivedUnit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineBasisSectionsDerivedUnit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineBasisSectionsDerivedUnit.lean",
   "declaration": "AlgebraicGeometry.affineBasisSections_isIso_derivedUnit",
   "statement": "theorem affineBasisSections_isIso_derivedUnit\n    (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)\n    (F : CochainComplex X.Modules ℤ)\n    [HasDerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op V)))]\n    (hterms : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((F.X n).restrict W.ι).H (q + 1)))\n    (hcokernels : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((cokernel (F.d (n - 1) n)).restrict W.ι).H (q + 1)))\n    (hhomology : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((F.homology n).restrict W.ι).H (q + 1))) :\n    let S := SheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace) (op V)\n    letI : S.Additive := inferInstanceAs\n      ((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙\n        PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)\n    IsIso (S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj F))",
   "branch": "sheaf-dag",

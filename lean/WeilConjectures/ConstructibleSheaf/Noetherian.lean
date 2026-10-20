@@ -12,11 +12,6 @@ public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.StalkCardinality
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
 
-import WeilConjectures.AlgebraicGeometry.IrreducibleStratificationRefinement
-import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
-import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
-import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
-
 /-!
 # Constructible sheaves on Noetherian schemes
 

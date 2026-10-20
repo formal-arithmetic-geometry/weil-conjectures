@@ -17,7 +17,7 @@ import Mathlib.AlgebraicGeometry.FunctionField
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
-import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
+import WeilConjectures.AlgebraicGeometry.SteinFactorizationAffine
 
 /-!
 # Geometrically connected fibres over a normal base

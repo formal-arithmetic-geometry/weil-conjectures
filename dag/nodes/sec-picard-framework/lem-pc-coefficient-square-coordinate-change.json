@@ -94,8 +94,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoefficientSquareCoordinateChange",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientSquareCoordinateChange.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoefficientSquareCoordinateChange",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoefficientSquareCoordinateChange.lean",
   "declaration": "AlgebraicGeometry.coefficient_square_coordinate_change",
   "statement": "theorem coefficient_square_coordinate_change\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' A Z B PZ : Scheme.{u}}\n    (g : X' ⟶ X) (v : A ⟶ X) (z : Z ⟶ X)\n    (t : B ⟶ A) (s : B ⟶ X') (qz : PZ ⟶ Z) (pz : PZ ⟶ X')\n    (e : A ⟶ Z) (b : B ⟶ PZ)\n    (hv : e ≫ z = v) (ht : b ≫ qz = t ≫ e) (hs : b ≫ pz = s)\n    (hz : qz ≫ z = pz ≫ g) (hrect : t ≫ v = s ≫ g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (phi : (derivedPullback g).obj K ⟶ K') :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))\n    let phiRect := (c t v).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K) hrect) ≫\n      (c s g).inv.app K ≫ (derivedPullback s).map phi\n    let phiZ := (c qz z).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K) hz) ≫\n      (c pz g).inv.app K ≫ (derivedPullback pz).map phi\n    (derivedPullback t).map ((c e z).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K) hv)) ≫ phiRect =\n      (c t e).hom.app ((derivedPullback z).obj K) ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj\n        ((derivedPullback z).obj K)) ht.symm) ≫\n      (c b qz).inv.app ((derivedPullback z).obj K) ≫\n      (derivedPullback b).map phiZ ≫ (c b pz).hom.app K' ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K') hs)",
   "branch": "sheaf-dag",

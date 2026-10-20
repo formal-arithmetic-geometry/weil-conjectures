@@ -146,8 +146,8 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineKoszulSectionColimit",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulSectionColimit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineKoszulSectionColimit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineKoszulSectionColimit.lean",
   "declaration": "AlgebraicGeometry.Scheme.affine_koszul_section_colimit",
   "statement": "theorem affine_koszul_section_colimit\n    (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{wD} (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))]\n    (E : schemeDerivedQCohCategory X) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    letI := (SheafOfModules.tensorClosed X.sheaf).1.some\n    let T := HomologicalComplex.tensorUnit\n      (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)\n    let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))\n        (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))\n        (Modules.overEquiv U)).mapDerivedCategory\n    ∃ (P : ℕ → schemeDerivedCategory X)\n      (a : ∀ n : ℕ, P n ⟶ DerivedCategory.Q.obj T),\n      (∀ n : ℕ, IsPerfect X (P n)) ∧\n      ∃ v : ∀ n : ℕ, R.obj (DerivedCategory.Q.obj T) ⟶ R.obj (P n),\n        (∀ n : ℕ, R.map (a n) ≫ v n = 𝟙 _) ∧\n        (∀ n : ℕ, v n ≫ R.map (a n) = 𝟙 _) ∧\n        ∃ (D : ℕ ⥤ Type wD) (hD : ∀ n : ℕ, D.obj n = (P n ⟶ E.obj)),\n        ∃ ι : D ⟶ (Functor.const ℕ).obj\n            (R.obj (DerivedCategory.Q.obj T) ⟶ R.obj E.obj),\n          (∀ (n : ℕ) (ξ : P n ⟶ E.obj),\n            ι.app n (cast (hD n).symm ξ) = v n ≫ R.map ξ) ∧\n          Nonempty (IsColimit (Cocone.mk _ ι))",
   "branch": "sheaf-dag",

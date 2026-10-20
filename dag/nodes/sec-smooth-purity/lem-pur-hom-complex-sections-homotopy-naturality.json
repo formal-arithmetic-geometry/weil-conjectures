@@ -92,8 +92,8 @@
  "unit": "sk-def-sf-operations",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.HomComplexSectionsHomotopyNaturality",
-  "file": "lean/Sheaf/Algebra/Homology/HomComplexSectionsHomotopyNaturality.lean",
+  "module": "WeilConjectures.Algebra.Homology.HomComplexSectionsHomotopyNaturality",
+  "file": "lean/WeilConjectures/Algebra/Homology/HomComplexSectionsHomotopyNaturality.lean",
   "declaration": "CategoryTheory.homComplex_sections_homotopy_naturality",
   "statement": "theorem homComplex_sections_homotopy_naturality\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    {I' I L' L : CochainComplex\n      (SheafOfModules.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ}\n    (s : I' ⟶ I) (t : L' ⟶ L) (n : ℤ) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let E := (SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n    letI := module_overFunctor_preservesZero R₀ U\n    let res := (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex\n      (ComplexShape.up ℤ)\n    let Q := HomotopyCategory.quotient (SheafOfModules.{max u v} (R₀.over U))\n      (ComplexShape.up ℤ)\n    let f := E.map (((homComplexFunctor (R := R)).map t.op).app I' ≫\n      ((homComplexFunctor (R := R)).obj (op L')).map s)\n    ∃ a : (E.obj (homComplex (R := R) L I')).homology n ≃\n        (Q.obj (res.obj L) ⟶ Q.obj ((res.obj I')⟦n⟧)),\n      ∃ b : (E.obj (homComplex (R := R) L' I)).homology n ≃\n          (Q.obj (res.obj L') ⟶ Q.obj ((res.obj I)⟦n⟧)),\n        ∀ x, b (HomologicalComplex.homologyMap f n x) =\n          Q.map (res.map t) ≫ a x ≫ Q.map ((shiftFunctor _ n).map (res.map s))",
   "branch": "sheaf-dag",

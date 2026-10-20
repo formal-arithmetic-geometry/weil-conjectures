@@ -14,8 +14,8 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
-import Sheaf.AlgebraicGeometry.SelfTorNonpositiveFlatSections
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import WeilConjectures.AlgebraicGeometry.SelfTorNonpositiveFlatSections
+import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison

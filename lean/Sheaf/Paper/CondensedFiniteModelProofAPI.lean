@@ -10,6 +10,7 @@ import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import all Sheaf.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Shared proof API for finite coefficient descent
 
