@@ -23,7 +23,7 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import all Sheaf.Algebra.Homology.KFlatResolutionGeneral
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-!
@@ -109,11 +109,15 @@ theorem finiteCoefficient_torAmplitude_iff_flatModel
         (BraidedCategory.tensorLeftIsoTensorRight M).symm hr, hr⟩
     · intro h
       exact ObjectProperty.prop_of_iso (exactFunctor _ _) e.symm h.2
+  -- Fix the complex tensor structure before comparing the two K-flat predicates.
+  let : MonoidalCategory (CochainComplex C ℤ) :=
+    HomologicalComplex.monoidalCategory C (.up ℤ)
   have hk (P : CochainComplex C ℤ)
       (hP : CochainComplex.IsAcyclicTensorKFlat (R := R) P) :
       (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P := by
-    rw [← HomotopyCategory.kFlat_quotient_obj_iff,
-      HomotopyCategory.kFlat_iff_preserves_acyclic]
+    apply (HomotopyCategory.kFlat_quotient_obj_iff P).mp
+    apply (HomotopyCategory.kFlat_iff_preserves_acyclic
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P)).mpr
     intro N hN
     obtain ⟨N, rfl⟩ := N.quotient_obj_surjective
     rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hN
@@ -216,7 +220,7 @@ theorem finiteCoefficient_hasTorAmplitude_iff_flatModel
     refine ⟨⟨⟨c, ?_⟩, ⟨d, ?_⟩⟩, fun q ↦ ?_⟩
     · exact (_root_.DerivedCategory.isGE_iff _ c).2 fun q hq ↦ hcd q (.inl hq)
     · exact (_root_.DerivedCategory.isLE_iff _ d).2 fun q hq ↦ hcd q (.inr hq)
-    · exact (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (_hK.1 q)
+    · exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (_hK.1 q)
   exact hasTorAmplitudeIn_iff_exists_flatModel _ a b _hab K hK'
 
 

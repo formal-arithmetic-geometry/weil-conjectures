@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Copy the partition, domains, immersions, immersion proofs and range equalities between LocallyClosedStratification and Scheme.Stratification. Their topological stratification fields coincide. The explicit constructibility condition is already a field of the topological record.",
+   "text": "Use the identical Scheme.Stratification witness in both directions; its topological record already contains constructibility of each stratum.",
    "uses": [
     "def-constructible-stratification",
     "def-weil-pbc-etale-constructible-sheaf"
@@ -38,7 +38,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Definitions 095E (3), 03RU and 09XZ; the comparison is the stratumwise equivalence of lem-weil-pbc-finite-locally-constant-module-values, packaged over the identical global stratification records."
+  "place": "The complete proof of isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf in the adopted source module: use the same stratification and apply finite_locally_constant_module_values_iff on each stratum. Duplicate Sheaf module retired; all DAG parent dependencies retain this node."
  },
  "mathlib_searches": [
   {
@@ -90,14 +90,14 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleEtaleModuleSheafComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ConstructibleEtaleModuleSheafComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf",
-  "statement": "theorem isConstructibleEtaleModuleSheaf_iff\n    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    IsConstructibleEtaleModuleSheaf F ↔\n      IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ => M →ₗ[Λ] N)\n        (CA := fun M : ModuleCat.{u + 1} Λ => M) F",
+  "statement": "theorem isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf\n    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    IsConstructibleEtaleModuleSheaf F ↔\n      IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ => M →ₗ[Λ] N)\n        (CA := fun M : ModuleCat.{u + 1} Λ => M) F",
   "branch": "sheaf-dag",
-  "by": "Q1",
-  "date": "2026-10-12"
+  "by": "D9",
+  "date": "2026-10-21"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -110,14 +110,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-42374",
-  "group": "Q1",
-  "result": "pass",
-  "landing": "20261012T022914-L-1083815",
+  "reviewer": "C-10dcb",
+  "group": "D9",
+  "result": "fix",
+  "landing": "20261020T233120-L-895651",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures and proofs matched all three node records, cited dependencies, sources, unit route, report, compilation and axiom checks."
+  "note": "independent cc review: removed Sheaf isConstructibleEtaleModuleSheaf_iff vs live WeilConjectures isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf (identical signature, axioms clean); 23 delivered adaptations vs live texts and live user list"
  },
  "lean_audit": {
   "master": {

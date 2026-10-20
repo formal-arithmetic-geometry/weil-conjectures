@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Recovering bounded constructibility at a finite boundary
@@ -80,11 +80,11 @@ theorem isBoundedConstructible_of_finite_boundary
     constructor
     · rintro ⟨hc, r, s, hrs, hv⟩
       refine ⟨⟨⟨r, ?_⟩, ⟨s, ?_⟩⟩, fun q ↦
-        (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hc q)⟩
+        (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hc q)⟩
       · exact (_root_.DerivedCategory.isGE_iff L r).2 fun q hq ↦ hv q (Or.inl hq)
       · exact (_root_.DerivedCategory.isLE_iff L s).2 fun q hq ↦ hv q (Or.inr hq)
     · rintro ⟨⟨⟨r, hr⟩, ⟨s, hs⟩⟩, hc⟩
-      refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hc q),
+      refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hc q),
         min r s, max r s, min_le_max, fun q hq ↦ ?_⟩
       rcases hq with hq | hq
       · exact (_root_.DerivedCategory.isGE_iff L r).1 hr q

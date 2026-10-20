@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Constructibility and vanishing in the proper case
@@ -56,16 +56,18 @@ theorem properCase_constructible_and_vanishing
   classical
   by_cases hS : IsEmpty S
   · let := hS
-    exact ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
+    exact ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
       (Scheme.IsConstructibleSheaf.of_isZero (Scheme.Etale.isZero_sheaf_of_isEmpty _)),
       fun q hq ↦ Scheme.Etale.isZero_sheaf_of_isEmpty _⟩
   have : Nonempty S := not_isEmpty_iff.mp hS
   have : HasInvertibleExponent Λ S := ⟨N, hcoeff.1, hcoeff.2.2.1, hcoeff.2.2.2⟩
   have : HasInvertibleExponent Λ (Spec (.of k)) :=
     .of_hom_of_nonempty (S ↘ Spec (.of k))
-  have : Scheme.IsConstructibleSheaf F := (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
+  have : Scheme.IsConstructibleSheaf F :=
+    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).1 hF
   let A := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F
-  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 ?_, fun q hq ↦ ?_⟩
+  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 ?_,
+    fun q hq ↦ ?_⟩
   · have : Scheme.IsConstructibleSheaf
         ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
           ((_root_.DerivedCategory.Plus.ι ⋙

@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Constructible coefficients on the projective line
@@ -90,8 +90,9 @@ theorem isConstructibleEtaleModuleSheaf_higherDirectImage_projectiveLine
     ⟨N, hcoeff.1, hcoeff.2.2.1, hcoeff.2.2.2⟩
   -- The source library already proves the projective-line argument for these coefficients.
   have hC := hasConstructibleDirectImages_projectiveLine (Λ := Λ)
-    (S ↘ Spec (.of k)) F ((Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF) q
-  apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
+    (S ↘ Spec (.of k)) F
+    ((Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).1 hF) q
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
   let R := lowerStar (ModuleCat.{u + 1} Λ) (ProjectiveLine S ↘ S)
   exact @Scheme.IsConstructibleSheaf.of_iso _ _ _ _ _ _ _ _ _ _ _
     ((_root_.DerivedCategory.homologyFunctor _ q).mapIso

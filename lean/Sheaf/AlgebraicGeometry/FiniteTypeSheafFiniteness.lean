@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportAmplitude
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Finiteness of finite-type direct images of constructible etale sheaves
@@ -39,8 +39,8 @@ private theorem isBoundedConstructible_single
     DerivedCategory.isBoundedConstructible Λ X
       ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
   have : Scheme.IsConstructibleSheaf F :=
-    (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
-  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 ?_,
+    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).1 hF
+  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 ?_,
     0, 0, le_rfl, fun q hq ↦ ?_⟩
   · by_cases hq : q = 0
     · subst q
@@ -61,10 +61,10 @@ private theorem isBoundedConstructible_of_iso
     (hL : DerivedCategory.isBoundedConstructible Λ X L) :
     DerivedCategory.isBoundedConstructible Λ X K := by
   obtain ⟨hc, a, b, hab, hv⟩ := hL
-  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 ?_,
+  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 ?_,
     a, b, hab, fun q hq ↦ (hv q hq).of_iso
       ((_root_.DerivedCategory.homologyFunctor _ q).mapIso e)⟩
-  have := (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hc q)
+  have := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hc q)
   exact Scheme.IsConstructibleSheaf.of_iso
     ((_root_.DerivedCategory.homologyFunctor _ q).mapIso e).symm
 
@@ -146,10 +146,10 @@ theorem finiteType_directImages_finiteConstructible
         k Λ X Y f d hd F q hq⟩
     have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
     have : Scheme.IsConstructibleSheaf F :=
-      (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).1 hF
     have hjF : Scheme.IsConstructibleEtaleModuleSheaf
         ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).obj F) :=
-      (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
         (Scheme.IsConstructibleSheaf.openImmersionLowerShriek c.i c.i.closedComplement
           c.i.range_closedComplement F)
     have hcoeff (T : Scheme.{u}) (aT : T ⟶ Spec (.of k)) :

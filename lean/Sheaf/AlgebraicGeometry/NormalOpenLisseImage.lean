@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.ConstructibleSubsheafNoetherian
 import WeilConjectures.ConstructibleSheaf.FiniteMorphism
 import WeilConjectures.ConstructibleSheaf.FinitePushforward
@@ -159,7 +159,7 @@ theorem isConstructibleEtaleModuleSheaf_lowerStar_of_normal_open
   let F := (Etale.upperStar (ModuleCat.{u + 1} Λ) t).obj L
   have : IsFiniteLocallyConstantSheaf F := IsFiniteLocallyConstantSheaf.upperStar t L
   have hF : IsConstructibleEtaleModuleSheaf F :=
-    (isConstructibleEtaleModuleSheaf_iff F).mpr
+    (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mpr
       (IsFiniteLocallyConstantSheaf.isConstructibleSheaf inferInstance)
   obtain ⟨E, hE, hAlg, hfin, _, M, hM, ⟨e⟩⟩ :=
     constructible_field_finite_separable_constant X.functionField Λ F hF
@@ -250,6 +250,6 @@ theorem isConstructibleEtaleModuleSheaf_lowerStar_of_normal_open
     IsFiniteLocallyConstantSheaf.isConstructibleSheaf inferInstance
   have hpush := IsConstructibleSheaf.lowerStar_of_isFinite ν MY
   exact isConstructibleEtaleModuleSheaf_of_mono_noetherian ψ
-    ((isConstructibleEtaleModuleSheaf_iff _).mpr hpush)
+    ((isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr hpush)
 
 end AlgebraicGeometry.Scheme
