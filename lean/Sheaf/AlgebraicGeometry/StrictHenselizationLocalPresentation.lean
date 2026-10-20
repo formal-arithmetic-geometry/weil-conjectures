@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group U2, SHEAF group J4
+Authors: SHEAF group U2, SHEAF group J4, SHEAF group K1
 -/
 module
 
@@ -10,8 +10,6 @@ public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-! # Geometric strict henselization as a local-base algebra
 
@@ -87,11 +85,13 @@ theorem strictHenselizationRing_local_presentation
   let k : Cocone (strictHenselizationAffineDiagram barY) :=
     colimit.cocone (strictHenselizationAffineDiagram barY)
   have hk : IsColimit k := colimit.isColimit _
+  -- Specify the cocone before Lean infers it from the reducible colimit vertex.
   let eN : cn.pt ≅ strictHenselizationRing barY :=
-    ((Functor.Final.isColimitWhiskerEquiv G.op cn).symm hcn).coconePointUniqueUpToIso hk
+    ((Functor.Final.isColimitWhiskerEquiv G.op cn).symm hcn).coconePointUniqueUpToIso
+      (t := k) hk
   have hleg (j : SmallModel.{u} (strictHenselizationNeighbourhoods barY)) :
       cn.ι.app (op (G.obj j)) ≫ eN.hom = k.ι.app (op j) :=
-    IsColimit.comp_coconePointUniqueUpToIso_hom _ hk (op j)
+    IsColimit.comp_coconePointUniqueUpToIso_hom _ (t := k) hk (op j)
   let e : ct.pt ≅ strictHenselizationRing barY := s.symm ≪≫ eN
   -- The identity triple determines the common structural map from R.
   let t0 : EtaleResidueTriples R p K χ :=
