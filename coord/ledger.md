@@ -18614,3 +18614,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 23:59 L: batch 20261020T155823 dependency take-out
 - 16:00 L: returned deliver/M2/Sheaf.AlgebraicGeometry.StrictHenselizationSchemeFunctoriality (reviewer RETURN: (reviewer C-07e72, head 07e72618c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.St)
+- 16:00 L: merged deliver/NA/new-proetale-derived-module-pullback-monoidal (reviewer PASS; first push; new nodes: 0)
