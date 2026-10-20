@@ -6,7 +6,8 @@ Authors: SHEAF group M2
 module
 
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawOverCoefficient
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 
 /-! # Coefficient factors of the derived scalar pullback square
 
@@ -29,10 +30,8 @@ noncomputable def moduleCoefficientFactor
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
     (A B : Over W) (f : A ⟶ B) :
     (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.obj
-        (((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G))⟦q⟧) ⟶
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj
-        ((upperStar (ModuleCat.{u + 1} Λ) A.hom).obj G))⟦q⟧ :=
+        ((higherDirectImageRawOverComplex Λ G B)⟦q⟧) ⟶
+      (higherDirectImageRawOverComplex Λ G A)⟦q⟧ :=
   ((moduleUpperStar Λ f.left).mapDerivedCategoryPlus.commShiftIso q).hom.app
     (higherDirectImageRawOverComplex Λ G B) ≫
     (shiftFunctor _ q).map (higherDirectImageRawOverCoefficient Λ G f)

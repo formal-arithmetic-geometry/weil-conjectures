@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
-import WeilConjectures.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
 import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackAbelianFormula
 
@@ -23,6 +22,21 @@ universe u
 open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
+
+private theorem rawTriangleMap_factorization
+    {C₀ C D E D' E' : Type*}
+    [Category C₀] [Category C] [Category D] [Category E] [Category D'] [Category E']
+    [Preadditive D'] [Preadditive E']
+    (Q : C₀ ⥤ C) (H : C ⥤ D) (H' : C ⥤ E) (P : D ⥤ E)
+    (A : D ⥤ D') (B : E ⥤ E') (F : D' ⥤ E')
+    (c : H' ⟶ H ⋙ P) (e : P ⋙ B ⟶ A ⋙ F)
+    (U : C₀) {K : D'} {K' : E'}
+    (z : A.obj (H.obj (Q.obj U)) ⟶ K)
+    (s : F.obj K ⟶ K') :
+    rawTriangleMap (Q ⋙ H) (Q ⋙ H') P A B F (Functor.whiskerLeft Q c) e U z s =
+      rawTriangleSource H H' P A B F c e (Q.obj U) ≫ F.map z ≫ s := by
+  exact (Category.assoc (B.map (c.app (Q.obj U)))
+    (e.app (H.obj (Q.obj U))) (F.map z ≫ s)).symm
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Factorization of the two explicit raw pullbacks.
@@ -46,23 +60,33 @@ theorem rawModuleScalar_pullback_formulas
     (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :
     ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z =
       moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)
-        (by rw [← Category.assoc, Over.w]) ((freeSheaf Λ S).obj U) ≫
+        (Over.w_assoc f k) ((freeSheaf Λ S).obj U) ≫
       (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z ≫
         moduleCoefficientFactor Λ G (q : ℤ) A B f) ∧
     (∀ (x : (abelianHigherDirectImageRawPresheaf (B.hom ≫ k) q
       (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B)).obj
         (op U)),
       abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)
-        (by rw [← Category.assoc, Over.w]) q _ _
+        (Over.w_assoc f k) q _ _
         ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom
           (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G)) U x =
       abelianSourceFactor f.left (B.hom ≫ k) (A.hom ≫ k)
-        (by rw [← Category.assoc, Over.w]) (RawModuleScalarComparison.freeAbelian S U) ≫
+        (Over.w_assoc f k) (RawModuleScalarComparison.freeAbelian S U) ≫
       (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map x ≫
       abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G)
         (q : ℤ) A B f) := by
   constructor
-  · exact rawModuleScalar_pullback_module_formula Λ k G q U A B f z
+  · exact rawTriangleMap_factorization
+      (freeSheaf Λ S)
+      (upperStar (ModuleCat.{u + 1} Λ) (B.hom ≫ k))
+      (upperStar (ModuleCat.{u + 1} Λ) (A.hom ≫ k))
+      (upperStar (ModuleCat.{u + 1} Λ) f.left)
+      (DerivedCategory.Plus.singleFunctor _ 0) (DerivedCategory.Plus.singleFunctor _ 0)
+      (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus
+      (upperStarComp (ModuleCat.{u + 1} Λ) f.left (B.hom ≫ k) (A.hom ≫ k)
+        (Over.w_assoc f k).symm).hom
+      ((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlusSingleFunctor 0).inv
+      U z (moduleCoefficientFactor Λ G (q : ℤ) A B f)
   · exact rawModuleScalar_pullback_abelian_formula Λ k G q U A B f
 
 end AlgebraicGeometry.Etale
