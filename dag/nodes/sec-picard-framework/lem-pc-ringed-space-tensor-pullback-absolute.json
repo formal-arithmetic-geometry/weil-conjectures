@@ -16,30 +16,28 @@
  ],
  "proof": [
   {
-   "text": "Take K-flat resolutions. Exact inverse image preserves quasi-isomorphisms and preserves K-flatness over the inverse-image ring by the identity-ring-map case of pullback preservation. Derived change of rings implies that the prescribed termwise tensor pullback inverts quasi-isomorphisms between K-flat complexes. The resolving-class theorem constructs L and its comparison invertible on K-flat objects. In the localization resolution category the cofinal K-flat resolution diagram is essentially constant. Its limiting cone is therefore absolute, so every H preserves the derived comparison. No adjunction is assumed or concluded in this step.",
+   "text": "Apply exists_tensorPullback_leftDerived to g, P and the object and morphism formulas. Obtain L and epsilon, the total left derived universal property and invertibility of epsilon on K-flat complexes.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-pullback-preservation",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-left-derived-from-kflat-class"
+    "q3-ringed-space-tensor-pullback-left-derived"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 06YJ and 079W; Derived Categories Tag 06XN"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply leftDerived_tensorPullback_absolute to the same data and the obtained universal property and K-flat comparison. Package its postcomposition conclusion with L, epsilon and the first two properties.",
+   "uses": [
+    "q3-ringed-space-tensor-pullback-absolute-postcomposition"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-pullback-preservation",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class"
+  "q3-ringed-space-tensor-pullback-left-derived",
+  "q3-ringed-space-tensor-pullback-absolute-postcomposition"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 06YJ and 079W; Derived Categories Tag 06XN"
+  "place": "Tags 06YJ and 079W; Derived Categories Tag 06XN. Assembly of the two proved auxiliary declarations in the adopted source RingedSpaceTensorPullbackAbsolute module."
  },
  "mathlib_searches": [
   {
@@ -105,14 +103,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute",
-  "file": "lean/Sheaf/AlgebraicGeometry/RingedSpaceTensorPullbackAbsolute.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RingedSpaceTensorPullbackAbsolute.lean",
   "declaration": "AlgebraicGeometry.RingedSpace.exists_absolute_leftDerived_tensorModulePullback",
-  "statement": "theorem exists_absolute_leftDerived_tensorModulePullback\n    {X Y : RingedSpace.{u}}\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y))]\n    (g : X ⟶ Y)\n    (P : SheafOfModules.{u} (moduleRings Y) ⥤ SheafOfModules.{u} (moduleRings X))\n    (h : ∀ M : SheafOfModules.{u} (moduleRings Y),\n      P.obj M = SheafOfModules.changeOfRings.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)\n        (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M))\n    (hm : ∀ {M N : SheafOfModules.{u} (moduleRings Y)} (a : M ⟶ N),\n      P.map a = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)\n        (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M)\n        (TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a) ≫\n        eqToHom (h N).symm)\n    [P.Additive] :\n    ∃ (L : DerivedCategory (SheafOfModules.{u} (moduleRings Y)) ⥤\n        DerivedCategory (SheafOfModules.{u} (moduleRings X)))\n      (ε : DerivedCategory.Qh ⋙ L ⟶\n        P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh),\n      L.IsLeftDerivedFunctor ε\n        (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))\n          (ComplexShape.up ℤ)) ∧\n      (∀ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ,\n        K.IsAcyclicTensorKFlat → IsIso\n          (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧\n      ∀ H : DerivedCategory (SheafOfModules.{u} (moduleRings X)) ⥤\n          DerivedCategory (SheafOfModules.{u} (moduleRings Y)),\n        (L ⋙ H).IsLeftDerivedFunctor\n          ((Functor.associator _ _ _).inv ≫ Functor.whiskerRight ε H)\n          (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))\n            (ComplexShape.up ℤ))",
+  "statement": "theorem exists_absolute_leftDerived_tensorModulePullback\n    {X Y : RingedSpace.{u}}\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y))]\n    (g : X ⟶ Y)\n    (P : SheafOfModules.{u} (moduleRings Y) ⥤ SheafOfModules.{u} (moduleRings X))\n    (h : ∀ M : SheafOfModules.{u} (moduleRings Y),\n      P.obj M = SheafOfModules.changeOfRings.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)\n        (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M))\n    (hm : ∀ {M N : SheafOfModules.{u} (moduleRings Y)} (a : M ⟶ N),\n      P.map a = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)\n        (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M)\n        (TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a) ≫\n        eqToHom (h N).symm)\n    [P.Additive] :\n    ∃ (L : DerivedCategory (SheafOfModules.{u} (moduleRings Y)) ⥤\n        DerivedCategory (SheafOfModules.{u} (moduleRings X)))\n      (ε : DerivedCategory.Qh ⋙ L ⟶\n        P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh),\n      L.IsLeftDerivedFunctor ε\n        (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))\n          (ComplexShape.up ℤ)) ∧\n      (∀ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ,\n        K.IsKFlatTensor → IsIso\n          (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧\n      ∀ H : DerivedCategory (SheafOfModules.{u} (moduleRings X)) ⥤\n          DerivedCategory (SheafOfModules.{u} (moduleRings Y)),\n        (L ⋙ H).IsLeftDerivedFunctor\n          ((Functor.associator _ _ _).inv ≫ Functor.whiskerRight ε H)\n          (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))\n            (ComplexShape.up ℤ))",
   "branch": "sheaf-dag",
-  "by": "N3",
-  "date": "2026-10-12"
+  "by": "B3",
+  "date": "2026-10-21",
+  "note": "Restored Sheaf compatibility import re-exports the adopted source theorem. IsKFlatTensor is definitionally equal to the archived IsAcyclicTensorKFlat predicate; the full archived signature is checked by direct application in a compile probe. No mathematical statement changes."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -125,17 +124,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q3",
+  "reviewer": "C-be27b",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T112848-L-770947",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.RingedSpace.exists_absolute_leftDerived_tensorModulePullback"
-  ],
-  "sorry_after": []
+  "landing": "20261020T164440-L-3930427",
+  "kind": "proof",
+  "note": "independent cc review: Re-export module vs live WeilConjectures exists_absolute_leftDerived_tensorModulePullback; archived node signature (IsAcyclicTensorKFlat) closed by the new theorem in a probe; node proof_deps vs the two Aux calls in the source proof"
  }
 }
