@@ -31,10 +31,11 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the morphism $a_Y$).* By [def-weil-finite-field-fiber] $k$ is an algebraic closure of $\\mathbf F_q$, of characteristic $p\\neq\\ell$, so $\\ell$ is invertible in $k$, and every $A_{E,n}$ is a finite ring annihilated by $\\ell^{n}$ (as $\\varpi_E^{e}\\mathcal O_E=\\ell\\mathcal O_E$ for the ramification index $e$, $\\ell^n\\in\\varpi_E^n\\mathcal O_E$). The point $s=\\operatorname{Spec}k$ is a finite-type $k$-scheme, and $a_Y:Y\\to s$ is the structure morphism of the separated finite-type $k$-scheme $Y$, hence a separated finite-type morphism between finite-type $k$-schemes [def-weil-scheme-morphism-properties]. These are the hypotheses of every finiteness result used below, with base field $K_0=k$, source $Y$ and target $s$.",
+   "text": "*Step 1 (the morphism $a_Y$).* By [def-weil-finite-field-fiber] $k$ is an algebraic closure of $\\mathbf F_q$, of characteristic $p\\neq\\ell$, so $\\ell$ is invertible in $k$, and every $A_{E,n}$ is a finite ring annihilated by $\\ell^{n}$ (as $\\varpi_E^{e}\\mathcal O_E=\\ell\\mathcal O_E$ for the ramification index $e$, $\\ell^n\\in\\varpi_E^n\\mathcal O_E$). The point $s=\\operatorname{Spec}k$ is a finite-type $k$-scheme, and $a_Y:Y\\to s$ is the structure morphism of the separated finite-type $k$-scheme $Y$, hence a separated finite-type morphism between finite-type $k$-schemes [def-weil-scheme-morphism-properties]. These are the hypotheses of every finiteness result used below, with base field $K_0=k$, source $Y$ and target $s$. In Lean, finiteFieldDatumPrimeUnit proves the unit condition from the cardinality/characteristic lemmas. The existing extension-integers DVR theorem identifies the maximal ideal with the uniformizer ideal, proving that the finite quotient is annihilated by l^n without choosing any new data.",
    "uses": [
     "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties"
+    "def-weil-scheme-morphism-properties",
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
    "elementary": true,
    "source": {
@@ -43,15 +44,14 @@
    }
   },
   {
-   "text": "*Step 2 ($\\Lambda=A_{E,n}$, ordinary direct image).* Put $A=A_{E,n}$ and let $K\\in D^b_c(Y,A)$. By [lem-sf-proetale-constructible-origin] (ii) there are a bounded complex $K'$ on $Y_{\\mathrm{et}}$ with constructible cohomology sheaves, i.e. $K'\\in D^b_c(Y_{\\mathrm{et}},A)$ in the sense of [def-weil-pbc-constructible-complexes], and an isomorphism $K\\cong\\nu_Y^*K'$. By Step 1 and [thm-dg-finite-type-constructibility] (applied to $a_Y$ and the finite ring $A$), $Ra_{Y,\\mathrm{et}*}K'\\in D^b_c(s_{\\mathrm{et}},A)$. The morphism $a_Y$ is of finite type, hence quasi-compact and quasi-separated, and $K'$ is bounded below, so [prop-weil-pbc-comparison-direct-image] gives $\\nu_s^*Ra_{Y,\\mathrm{et}*}K'\\cong Ra_{Y,\\mathrm{proet}*}\\nu_Y^*K'$; the right side is $Ra_{Y*,n}K$ of [def-weil-derived-direct-image] (the total right-derived functor of the pro-etale direct image, both built on [def-weil-pbc-proetale-operations]). Finally $\\nu_s^*$ carries $D^b_c(s_{\\mathrm{et}},A)$ into $D^b_c(s,A)$ of [def-weil-finite-torsion-constructibility], again by [lem-sf-proetale-constructible-origin] (ii). Hence $Ra_{Y*}K\\in D^b_c(s,A)$.",
+   "text": "*Step 2 ($\\Lambda=A_{E,n}$, ordinary direct image).* Put $A=A_{E,n}$ and let $K\\in D^b_c(Y,A)$. By [lem-sf-proetale-constructible-origin] (ii) there are a bounded complex $K'$ on $Y_{\\mathrm{et}}$ with constructible cohomology sheaves, i.e. $K'\\in D^b_c(Y_{\\mathrm{et}},A)$ in the sense of [def-weil-pbc-constructible-complexes], and an isomorphism $K\\cong\\nu_Y^*K'$. By Step 1 and [thm-dg-finite-type-constructibility] (applied to $a_Y$ and the finite ring $A$), $Ra_{Y,\\mathrm{et}*}K'\\in D^b_c(s_{\\mathrm{et}},A)$. The morphism $a_Y$ is of finite type, hence quasi-compact and quasi-separated, and $K'$ is bounded below, so [prop-weil-pbc-comparison-direct-image] gives $\\nu_s^*Ra_{Y,\\mathrm{et}*}K'\\cong Ra_{Y,\\mathrm{proet}*}\\nu_Y^*K'$; the right side is $Ra_{Y*,n}K$ of [def-weil-derived-direct-image] (the total right-derived functor of the pro-etale direct image, both built on [def-weil-pbc-proetale-operations]). Finally $\\nu_s^*$ carries $D^b_c(s_{\\mathrm{et}},A)$ into $D^b_c(s,A)$ of [def-weil-finite-torsion-constructibility], again by [lem-sf-proetale-constructible-origin] (ii). Hence $Ra_{Y*}K\\in D^b_c(s,A)$. The fixedDerivedOrigin helper supplies the etale complex without a new existence statement. The module restriction constructibility equivalence and restrictionDerivedDirectImageIso align the constant-module and fixed-coefficient encodings. The plus/full derived-functor compatibility isomorphisms implement the bounded-below comparison; the homology isomorphisms transfer both constructibility and zero objects.",
    "uses": [
     "lem-sf-proetale-constructible-origin",
-    "def-weil-pbc-constructible-complexes",
     "thm-dg-finite-type-constructibility",
     "prop-weil-pbc-comparison-direct-image",
     "def-weil-derived-direct-image",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-finite-torsion-constructibility"
+    "lem-pe-classical-direct-image-preservation",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
    ],
    "elementary": false,
    "source": {
@@ -60,10 +60,8 @@
    }
   },
   {
-   "text": "*Step 3 ($\\Lambda=A_{E,n}$, compact support).* Let $K\\in D^b_c(Y,A_{E,n})$. By [lem-sf-proetale-constructible-origin] (ii) $K$ is of etale origin, so $K$ lies in the domain on which the compactification-independent functor $Ra_{Y!,n}$ of [def-compact-support-direct-image-detailed] is defined. By Step 1, [prop-finite-compact-support-constructibility] applies with $K_0=k$, $f=a_Y:Y\\to s$ and $A=A_{E,n}$: the functor $Ra_{Y!,n}$ restricts to $D^b_c(Y,A_{E,n})\\to D^b_c(s,A_{E,n})$. Hence $Ra_{Y!}K\\in D^b_c(s,A_{E,n})$.",
+   "text": "*Step 3 (finite compact support).* Apply finiteCompactSupportConstructibility directly to the given intrinsic finite constructible input and compactification. This proves the second clause.",
    "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "def-compact-support-direct-image-detailed",
     "prop-finite-compact-support-constructibility"
    ],
    "elementary": false,
@@ -86,11 +84,9 @@
    }
   },
   {
-   "text": "*Step 5 ($\\Lambda=\\mathcal O_E$, compact support).* Let $K\\in D^b_c(Y,\\mathcal O_E)$ and let $c=(j,\\bar a)$ be the compactification of $a_Y$ chosen in [def-weil-integral-rational-qbar-compact-support]. There $Ra_{Y!}K=R\\varprojlim_n\\operatorname{Res}_nRa_{Y!,n}K_n$ is defined as a derived limit of the inverse system $\\operatorname{Res}_nRa_{Y!,n}K_n$ with the transition maps built from [lem-sf-compact-support-restriction-of-scalars]. By Step 1, [lem-sf-integral-compact-support-constructible] applies with $K_0=k$, $f=a_Y:Y\\to s$ and this $c$: every derived limit of this system lies in $D^b_c(s,\\mathcal O_E)$. Hence $Ra_{Y!}K\\in D^b_c(s,\\mathcal O_E)$.",
+   "text": "*Step 5 (integral compact support).* The already constructed sfIntegralCompactSupportValue is an object of the integral constructible full subcategory. Its stored property proves clause four. No independent application of integral compact-support constructibility or restriction-of-scalars compatibility is needed here.",
    "uses": [
-    "def-weil-integral-rational-qbar-compact-support",
-    "lem-sf-compact-support-restriction-of-scalars",
-    "lem-sf-integral-compact-support-constructible"
+    "def-weil-integral-rational-qbar-compact-support"
    ],
    "elementary": false,
    "source": {
@@ -125,10 +121,8 @@
    }
   },
   {
-   "text": "*Step 8 (the fibre functor).* By Steps 2 to 7, for each $\\Lambda$ the objects $Ra_{Y*}K$ and $Ra_{Y!}K$ lie in $D^b_c(s,\\Lambda)$, which is the domain of $\\operatorname{Fib}_s$ in [def-weil-finite-coefficient-point]; so $\\operatorname{Fib}_s(Ra_{Y*}K)$ and $\\operatorname{Fib}_s(Ra_{Y!}K)$ are defined, with values in $D^b_{\\mathrm{fin}}(A_{E,n})$, $D^b_{\\mathrm{fg}}(\\mathcal O_E)$, $D^b_{\\mathrm{fd}}(E)$, $D^b_{\\mathrm{fd}}(\\Qlb)$ respectively.",
-   "uses": [
-    "def-weil-finite-coefficient-point"
-   ],
+   "text": "*Step 8 (the fibre functor).* The previous clauses give exactly the bounded constructible input objects required by the point-fibre functors. The Lean conclusion only records membership and underlying-object identifications; no point-fibre equivalence theorem is used in this proof.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
@@ -139,28 +133,24 @@
  "proof_deps": [
   "def-weil-finite-field-fiber",
   "def-weil-scheme-morphism-properties",
+  "lem-weil-l-adic-extension-integers-dvr",
   "lem-sf-proetale-constructible-origin",
-  "def-weil-pbc-constructible-complexes",
   "thm-dg-finite-type-constructibility",
   "prop-weil-pbc-comparison-direct-image",
   "def-weil-derived-direct-image",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-finite-torsion-constructibility",
-  "def-compact-support-direct-image-detailed",
+  "lem-pe-classical-direct-image-preservation",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
   "prop-finite-compact-support-constructibility",
   "lem-sf-integral-direct-image-constructible",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-integral-rational-qbar-compact-support",
-  "lem-sf-compact-support-restriction-of-scalars",
-  "lem-sf-integral-compact-support-constructible",
   "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-finite-coefficient-point"
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "§6.7 (Theorem 6.7.1, Lemma 6.7.2, p. 55; Definition 6.7.6, Lemma 6.7.7, p. 56), with Lemma 5.4.3 (p. 39), Lemma 6.5.9 (p. 50), Lemma 6.5.11 (p. 51) and §6.8 (Proposition 6.8.14, Remark 6.8.15, pp. 61-62); finite level through the DAG nodes thm-dg-finite-type-constructibility and prop-finite-compact-support-constructibility (Stacks Project Tag 0GL0)"
+  "place": "§6.7 (Theorem 6.7.1, Lemma 6.7.2, p. 55; Definition 6.7.6, Lemma 6.7.7, p. 56), with Lemma 5.4.3 (p. 39), Lemma 6.5.9 (p. 50), Lemma 6.5.11 (p. 51) and §6.8 (Proposition 6.8.14, Remark 6.8.15, pp. 61-62); finite level through the DAG nodes thm-dg-finite-type-constructibility and prop-finite-compact-support-constructibility (Stacks Project Tag 0GL0); formalized by G1 using fixedDerivedOrigin, the bounded-below comparison and full/plus compatibility, the finite and integral constructibility declarations, and the stored compact-support property; rational/common-stage objects are constructed by localization and pairing."
  },
  "mathlib_searches": [
   {
@@ -220,11 +210,22 @@
    "WeilConjectures.finiteFieldDatumPrimeUnit",
    "WeilConjectures.directImages_constructible"
   ],
-  "statement": "theorem directImages_constructible (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (E₀ : Padic.FiniteCoefficientFields l Ω) (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of D.k))] (c : Compactification (Y ↘ Spec (CommRingCat.of D.k))) {Kₙ : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n)} (hKₙ : intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y Kₙ) {K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E₀) Y} (L : @SfIntegralDirectImage l inferInstance (Coefficient.{u} l Ω E₀) inferInstance inferInstance inferInstance Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by let : HasCountableProducts (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)))) := integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) infer_instance)) : intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn (Spec (CommRingCat.of D.k)) ((proEtaleConstantDerivedDirectImage (Y ↘ Spec (CommRingCat.of D.k)) (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n)).obj Kₙ) ∧ intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn (Spec (CommRingCat.of D.k)) ((@AlgebraicGeometry.Scheme.sfIntrinsicCompactSupport Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) c (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n) _ (Padic.finite_coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n hn)).obj Kₙ) ∧ sfIntegralConstructible l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) (@SfIntegralDirectImage.obj l inferInstance (Coefficient.{u} l Ω E₀) inferInstance inferInstance inferInstance Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by let : HasCountableProducts (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)))) := integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) infer_instance) L) ∧ sfIntegralConstructible l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) (sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (by exact finiteFieldDatumPrimeUnit D l hl) c K).obj ∧ ∃ M : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)), M.obj.obj = (@SfIntegralDirectImage.obj l inferInstance (Coefficient.{u} l Ω E₀) inferInstance inferInstance inferInstance Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by let : HasCountableProducts (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)))) := integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) infer_instance) L) ∧ ∃ M : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)), M.obj.obj = (sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (finiteFieldDatumPrimeUnit D l hl) c K).obj ∧ ∃ M : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (CommRingCat.of D.k)), M.stage = E₀ ∧ HEq M.obj.obj (@SfIntegralDirectImage.obj l inferInstance (Coefficient.{u} l Ω E₀) inferInstance inferInstance inferInstance Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by let : HasCountableProducts (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)))) := integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)) infer_instance) L) ∧ ∃ M : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (CommRingCat.of D.k)), M.stage = E₀ ∧ HEq M.obj.obj ((sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (finiteFieldDatumPrimeUnit D l hl) c K).obj)",
+  "statement": "theorem directImages_constructible\n    (D : FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω]\n    (E₀ : Padic.FiniteCoefficientFields l Ω)\n    (n : ℕ) (hn : 1 ≤ n)\n    (Y : Scheme.{u})\n    [Y.Over (Spec (CommRingCat.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))]\n    [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))]\n    [IsSeparated (Y ↘ Spec (CommRingCat.of D.k))]\n    (c : Compactification (Y ↘ Spec (CommRingCat.of D.k)))\n    {Kₙ : proEtaleDerivedCategory Y\n      (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n)}\n    (hKₙ : intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀)\n      n hn Y Kₙ)\n    {K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E₀) Y}\n    (L : @SfIntegralDirectImage l inferInstance (Coefficient.{u} l Ω E₀)\n      inferInstance inferInstance inferInstance\n      Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by\n        let : HasCountableProducts\n            (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀)\n              (Spec (CommRingCat.of D.k)))) :=\n          integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀)\n            (Spec (CommRingCat.of D.k))\n        infer_instance))\n    : intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn\n          (Spec (CommRingCat.of D.k))\n          ((proEtaleConstantDerivedDirectImage (Y ↘ Spec (CommRingCat.of D.k))\n            (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n)).obj Kₙ) ∧\n      intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn\n          (Spec (CommRingCat.of D.k))\n          ((@AlgebraicGeometry.Scheme.sfIntrinsicCompactSupport Y (Spec (CommRingCat.of D.k))\n            (Y ↘ Spec (CommRingCat.of D.k)) c\n            (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n) _\n            (Padic.finite_coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n hn)).obj Kₙ) ∧\n      sfIntegralConstructible l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k))\n        (@SfIntegralDirectImage.obj l inferInstance (Coefficient.{u} l Ω E₀)\n          inferInstance inferInstance inferInstance\n          Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by\n            let : HasCountableProducts\n                (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀)\n                  (Spec (CommRingCat.of D.k)))) :=\n              integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀)\n                (Spec (CommRingCat.of D.k))\n            infer_instance) L) ∧\n      sfIntegralConstructible l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k))\n        (sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (by\n          exact finiteFieldDatumPrimeUnit D l hl) c K).obj ∧\n      ∃ M : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)),\n        M.obj.obj = (@SfIntegralDirectImage.obj l inferInstance (Coefficient.{u} l Ω E₀)\n          inferInstance inferInstance inferInstance\n          Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by\n            let : HasCountableProducts\n                (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀)\n                  (Spec (CommRingCat.of D.k)))) :=\n              integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀)\n                (Spec (CommRingCat.of D.k))\n            infer_instance) L) ∧\n      ∃ M : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E₀) (Spec (CommRingCat.of D.k)),\n        M.obj.obj = (sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k\n          (finiteFieldDatumPrimeUnit D l hl) c K).obj ∧\n      ∃ M : generalAlgebraicallyClosedConstructibleCategory l Ω\n          (Spec (CommRingCat.of D.k)),\n        M.stage = E₀ ∧ HEq M.obj.obj.obj\n          (@SfIntegralDirectImage.obj l inferInstance (Coefficient.{u} l Ω E₀)\n          inferInstance inferInstance inferInstance\n          Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) K.obj (by\n            let : HasCountableProducts\n                (DerivedCategory (scalarReductionSource.{u, u} l (Coefficient.{u} l Ω E₀)\n                  (Spec (CommRingCat.of D.k)))) :=\n              integralOperationsDerivedCountableProducts l (Coefficient.{u} l Ω E₀)\n                (Spec (CommRingCat.of D.k))\n            infer_instance) L) ∧\n      ∃ M : generalAlgebraicallyClosedConstructibleCategory l Ω\n          (Spec (CommRingCat.of D.k)),\n        M.stage = E₀ ∧ HEq M.obj.obj.obj\n          ((sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k\n            (finiteFieldDatumPrimeUnit D l hl) c K).obj)",
   "branch": "newtargets-dag",
   "by": "Q33",
   "date": "2026-10-17",
   "existing": false,
-  "fixed_by": "NT-stage2-Codex-9d5af3845"
+  "fixed_by": "NT-stage2-Codex-9d5af3845",
+  "note": "Stage-3 G1: proved both declarations. Repaired only the two common-stage projections HEq M.obj.obj to HEq M.obj.obj.obj, to compare the ambient derived objects as required by the unchanged mathematical statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-239d9",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051305-L-1622630",
+  "kind": "interface",
+  "note": "independent cc review: directImages_constructible HEq M.obj.obj→M.obj.obj.obj repair vs Pair/sfRationalConstructibleCategory types and node statement; proof vs proof_deps; axioms (sorryAx only via still-sorry library deps); 6 of 7 importers compile, InternalHomPullback fails identically before the delivery"
  }
 }
