@@ -17,30 +17,29 @@
  ],
  "proof": [
   {
-   "text": "Fix the coefficient field, prime power q > 1 and field isomorphism iota of [def-weil-frobenius-module-weights]. Choose the finite F-stable filtration of V with pure graded pieces of weights w_r <= w. Iterate the current characteristic-polynomial factorization of [p-linear-filtration] along this filtration: det(T-F|V) is the product of det(T-F|V_r/V_{r-1}). Thus each eigenvalue of V is a root of one graded characteristic polynomial, hence an eigenvalue on that graded piece. Its iota-modulus is q^(w_r/2) <= q^(w/2). The zero module has no eigenvalues and admits the empty filtration.",
+   "text": "Unpack the finite stable filtration of [def-weil-frobenius-module-weights]. Fix an ambient eigenvalue alpha and a nonzero eigenvector. Induct over r in Fin (m+1) to bound the norm of alpha whenever a nonzero alpha-eigenvector lies in V_r. At r=0 the vector is zero, a contradiction. At r+1, if the vector lies in V_r use induction. Otherwise its class in V_(r+1)/(V_r comap subtype) is nonzero. The defining action-compatibility clause makes that class an eigenvector of the specified graded automorphism. Purity gives norm(iota(alpha)) = (p^a)^(w_r/2). Since p is prime, p^a >= 1, so w_r <= w gives the desired upper bound by monotonicity of real powers. V_m = top supplies the ambient bound. This works for a length-zero filtration and zero graded pieces.",
    "uses": [
-    "def-weil-frobenius-module-weights",
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.proof.md",
+    "place": "Proof: finite filtration, eigenvalue transfer, and the filtered mixedness criterion"
+   }
+  },
+  {
+   "text": "Let N be S with its canonical restricted automorphism. An eigenvector of N remains a nonzero eigenvector of M under the injective subtype map, so N has the ambient eigenvalue bound. For Q = S/U the canonical quotient map U.mkQ is surjective and intertwines N.frobeniusEnd and Q.frobeniusEnd by the defining equation of Submodule.Quotient.equiv. Apply the proved Module.End.hasEigenvalue_of_comp_eq_comp in WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic (the quotient-eigenvalue transfer implementing [p-linear-filtration]) to send every eigenvalue of Q to N. Hence Q has the same bound. Neither characteristic-polynomial factorization nor a stable complement is needed. Zero spaces, S=top, U=bot and U=top are included.",
+   "uses": [
     "p-linear-filtration"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.proof.md",
-    "place": "Proof: eigenvalue bound from the mixed filtration and the characteristic-polynomial factorization"
+    "place": "Proof: finite filtration, eigenvalue transfer, and the filtered mixedness criterion"
    }
   },
   {
-   "text": "Write the stable subquotient as Q=S/U for F-stable subspaces U contained in S contained in V. Finite dimension and invertibility of F imply F(U)=U and F(S)=S, so the restrictions and quotient actions are automorphisms. Apply the current statement of [p-linear-filtration] first to S in V and then to U in S, obtaining det(T-F|V)=det(T-F|U) det(T-F|Q) det(T-F|V/S). If alpha is an eigenvalue on Q, substituting T=alpha makes this product zero; hence F-alpha on V is singular, so alpha is an eigenvalue on V. Step 1 gives |iota(alpha)| <= q^(w/2). This also covers U=0, S=V, U=S and V=0.",
-   "uses": [
-    "p-linear-filtration"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.proof.md",
-    "place": "Proof: eigenvalues on a stable submodule or quotient occur among those on the ambient module"
-   }
-  },
-  {
-   "text": "The subquotient Q is a finite-dimensional vector space over the same algebraically closed coefficient field, with the induced Frobenius automorphism. Step 2 verifies every hypothesis of [lem-a1-punctual-bound-module-mixed], applied to Q with the same q, iota and real w. Its conclusion is precisely that Q admits a finite stable filtration with pure graded pieces of weights at most w, in the sense of [def-weil-frobenius-module-weights]. Thus every stable subquotient has the required mixedness; no semisimplicity or stable complement is assumed.",
+   "text": "Apply [lem-a1-punctual-bound-module-mixed] to the canonical quotient Frobenius module Q with exactly the given p, a, ell, algebraic closure, iota and real w. Finite dimensionality is inherited by S and its quotient, and the required invertible Frobenius is Submodule.Quotient.equiv. The eigenvalue bound from the preceding steps gives every hypothesis. Its conclusion is exactly the stated finite-filtration mixedness of Q.",
    "uses": [
     "lem-a1-punctual-bound-module-mixed",
     "def-weil-frobenius-module-weights"
@@ -48,7 +47,7 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.proof.md",
-    "place": "Proof: Jordan--Holder filtration and the filtered criterion"
+    "place": "Proof: finite filtration, eigenvalue transfer, and the filtered mixedness criterion"
    }
   }
  ],
@@ -60,7 +59,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.proof.md",
-  "place": "Expanded from the blueprint proof into ambient eigenvalue bound, stable-subquotient transfer, and an invariant composition filtration"
+  "place": "X2 Lean proof: direct eigenvector induction replaces characteristic-polynomial iteration; canonical quotient eigenvalue transfer and the existing filtered criterion complete the argument."
  },
  "mathlib_searches": [
   {
@@ -159,5 +158,15 @@
   "group": "Q46",
   "result": "pass",
   "note": "Read node (master/main-20261015/main-20261017 identical), dependency IsMixedOfWeightsAtMost and FrobeniusModule structure, module, report, commit stat (3 files, node changes only lean field, statement verbatim). Hypotheses/conclusion match: full coefficient context, independent universes u v, w:ℝ, S stable in V, U stable in S with equality-form stability (equivalent in finite dimension), canonical induced quotient Frobenius, same filtration-based mixedness in the conclusion, no extra assumptions. Edge cases V=0, U=⊥, S=⊤, U=S, w≤0, a=1 covered; statement true. Docstrings carry source place, blueprint tag and 3-step proof; sorry only; no hollow defs; no existing duplicate (upstream HasWeightsAtMost is eigenvalue-only). Second-reading section is the accepted 2026-10-17 placeholder. nt_compile.py --json on snapshot file: clean compile in 16.0 s, no errors or warnings. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261020T131229-L-1263767",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
