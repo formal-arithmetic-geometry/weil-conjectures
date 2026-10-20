@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 
 /-!
 # Vanishing of higher direct images at geometric points

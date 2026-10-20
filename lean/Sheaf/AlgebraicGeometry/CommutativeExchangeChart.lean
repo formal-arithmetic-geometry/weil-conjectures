@@ -25,7 +25,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 
 /-!
 # Commutative-square exchange on etale cohomology charts
