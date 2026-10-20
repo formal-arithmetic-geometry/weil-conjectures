@@ -718,14 +718,14 @@ PROJECT_PREFIXES = ("Sheaf.", "WeilConjectures.", "Comparator.", "Weil.")
 
 def cluster_set(rows=None) -> tuple[list[str], set[str]]:
     """(the modules a cluster restore puts back, the blocked seeds). Seeds: quarantined modules whose fix has not
-    landed and that are error roots (`cause` error:) or claimed by a group. Everything quarantined that imports no
+    landed and that are error roots (`cause` error:). Everything quarantined that imports no
     seed, transitively through quarantined modules, and no project module that exists neither in lean/ nor in the
     restore set, comes back."""
     rows = load() if rows is None else rows
     live = {m for m in rows if not landed(m)}
     allimp = rework_imports({m: rows[m] for m in live})
-    claimed = lambda m: (ROOT / "coord" / "claims" / (m + ".lock")).is_file()   # noqa: E731
-    seeds = {m for m in live if (rows[m].get("cause") or "").startswith("error:") or claimed(m)}
+    # an importer's claim (a delivery from before the quarantine, waiting) does not block: only unfixed error roots do
+    seeds = {m for m in live if (rows[m].get("cause") or "").startswith("error:")}
     bad = set(seeds)
     for m in live:     # a project import that is nowhere (neither in lean/ nor quarantined)
         if any(i.startswith(PROJECT_PREFIXES) and i not in live and not li.file_of(i).is_file() for i in allimp[m] - {m}):
@@ -790,7 +790,7 @@ def cluster_restore(rounds: int = 4, dry: bool = False) -> int:
     rows = load()
     put, seeds = cluster_set(rows)
     print(f"{time.strftime('%F %T')} cluster restore: {len(put)} quarantined module(s) to put back "
-          f"({len(seeds)} unfixed/claimed roots block {sum(1 for m in rows if not landed(m)) - len(put)})", flush=True)
+          f"({len(seeds)} unfixed roots block {sum(1 for m in rows if not landed(m)) - len(put)})", flush=True)
     if dry or not put:
         return len(put)
     restored: set[str] = set()
