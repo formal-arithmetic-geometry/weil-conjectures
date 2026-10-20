@@ -16,141 +16,108 @@
  ],
  "proof": [
   {
-   "text": "Empty affine charts contribute empty schemes and can be omitted. On a nonempty affine open $U=\\operatorname{Spec}A\\subseteq X$, the relative-spectrum chart gives $Y_q|_U=\\operatorname{Spec}B_q$, $B_q=A[y]/(P_q)$, $P_q=y^q-y-f|_U$, and likewise $B_{p,b}=A[t]/(P_{p,b})$. Localization of these polynomial quotients agrees with quotient after localization on generators, so their algebra sheaves are locally associated to the displayed modules and are quasi-coherent by the cited definition. Both polynomials are monic, of positive degrees $q,p$. The monic-quotient theorem makes $B_q$ finite free with basis $1,y,\\ldots,y^{q-1}$. Since $q=p^r$ and $p=0$ in $A$, $P_q^\\prime=-1$. The standard-étale theorem identifies $A[y]_{P_q^\\prime}/(P_q)$ with $B_q$ (localizing at $-1$ changes nothing) and proves its spectrum étale over $U$. Thus $\\pi_q$ is finite by the affine-chart definition, and étale by the affine-local characterization in the cited definition. The same argument also applies to $\\pi_{p,b}$.",
+   "text": "Use the already proved upstream AffineSpace.isFinite_artinSchreierMap and AffineSpace.etale_artinSchreierMap and stability under pullback. The cardinality q of a field is greater than one, and q=p^r vanishes on X because r is positive. This proves finiteness and etaleness of the actual pullback cover without relative-Spec algebra sheaves.",
    "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-standard-etale-monic-derivative",
     "def-weil-finite-integral-morphism",
     "def-weil-etale-morphism",
-    "pqf-def-coherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00UB (definition-standard-etale), 00UC (lemma-standard-etale); relative-spectrum charts: Constructions Tag 01LX (lemma-spec-properties)."
-   }
-  },
-  {
-   "text": "For any $h:X^\\prime\\to X$, apply relative-Spec base change to the two quotient algebra sheaves. Locally a ring map $A\\to A^\\prime$ sends $f$ to $f^\\prime$. For affine opens $U^\\prime\\subseteq h^{-1}(U)$, the affine-sections theorem for pullbacks identifies the sections of $h^*$ of each quotient algebra sheaf over $U^\\prime$ with $A^\\prime\\otimes_A$ its sections over $U$, by $s\\otimes a^\\prime\\mapsto a^\\prime h^*s$; this map is multiplicative on such simple tensors. There is an isomorphism $$A^\\prime\\otimes_A A[y]/(y^q-y-f)\\;\\cong\\; A^\\prime[y]/(y^q-y-f^\\prime).$$ It sends $a^\\prime\\otimes y$ to $a^\\prime y$. Its inverse sends $a^\\prime$ to $a^\\prime\\otimes1$ and $y$ to $1\\otimes y$; the relation is zero on both sides. These maps are inverse on the coefficient ring and generator, hence on the whole algebra. The same maps with $t$ and $bf$ give the prime-degree version. These formulas commute with restrictions and supply the canonical identifications $Y_q^\\prime\\cong Y_q\\times_X X^\\prime$ and $Y_{p,b}^\\prime\\cong Y_{p,b}\\times_X X^\\prime$. This also identifies a geometric fibre with the same quotient over its algebraically closed residue field.",
-   "uses": [
-    "lem-weil-pbc-relative-spec-base-change",
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-module-pullback-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01LX (lemma-spec-properties), base-change clause; the displayed polynomial-quotient identification is the explicit algebra calculation."
-   }
-  },
-  {
-   "text": "Frobenius is additive, and $c^q=c$ for $c\\in k_0$. Consequently $(y+c)^q-(y+c)-f=y^q-y-f$. Substitution $y\\mapsto y+c$ defines a quotient algebra automorphism, with inverse $y\\mapsto y-c$. The substitutions respect restrictions, so the relative-Spec anti-equivalence gives $\\sigma_c$ globally. Their compositions obey $\\sigma_c\\sigma_e=\\sigma_{c+e}$. The identical calculation using $d^p=d$ gives $\\tau_d$ on $Y_{p,b}$. No assertion about the full automorphism group of a disconnected cover is needed.",
-   "uses": [
-    "def-weil-ring-frobenius",
-    "lem-weil-finite-field-pow-card",
-    "lem-weil-pbc-affine-morphism-relative-spec"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00UB polynomial presentation; explicit substitutions and inverses (agent calculation)."
-   }
-  },
-  {
-   "text": "Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be geometric and $a=f(\\bar x)$. By step 2 its $q$-cover fibre is $\\operatorname{Spec}\\Omega[y]/(y^q-y-a)$. The derivative is $-1$; the Bézout identity $0\\cdot P+(-1)P^\\prime=1$ proves separability. The cited root theorem, with $F=\\Omega$ and the identity embedding into $\\Omega$, gives $q$ distinct roots. The root theorem also factors $P$ as the product of $y-\\rho$ over those roots. Every prime ideal of the quotient contains one factor, so is $(y-\\rho)$, with residue field $\\Omega$. Thus its points and geometric points are exactly these roots. For a chosen root $\\alpha$, the $q$ distinct values $\\alpha+c$ ($c\\in k_0$) are roots by step 3; they exhaust the root set. Translation is therefore simply transitive. The same reasoning for $t^p-t-ba$ gives its $p$ distinct roots, a simply transitive $\\mathbf F_p$-set. This proves clause 1.",
-   "uses": [
-    "def-pc-separable-polynomial",
-    "lem-pc-separable-polynomial-distinct-roots-alg-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01LX geometric base-change chart; separability and the root count are the cited polynomial statements."
-   }
-  },
-  {
-   "text": "In every $k_0$-algebra of sections, Frobenius gives $$\\Theta_b(y)^p-\\Theta_b(y)=\\sum_{i=1}^{r}(by)^{p^i}-\\sum_{i=0}^{r-1}(by)^{p^i}=(by)^{p^r}-by=b(y^q-y),$$ where the last equality uses $b^q=b$. This is an identity already in $\\mathcal O_X[y]$. Reducing modulo $y^q-y-f$ gives $\\Theta_b(y)^p-\\Theta_b(y)=bf$. Therefore the algebra map on each affine chart fixing coefficients and sending $t$ to $\\Theta_b(y)$ factors through $B_{p,b}\\to B_q$. The formulas agree on restrictions, hence define a map of the quotient algebra sheaves. The relative-Spec anti-equivalence supplies the claimed $X$-morphism $\\theta_b$. This proves clause 2.",
-   "uses": [
-    "def-weil-ring-frobenius",
-    "lem-weil-finite-field-pow-card",
-    "lem-weil-pbc-affine-morphism-relative-spec"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-    "place": "(1.1.3), pp. 139–140, Lang torsor and pullback; explicit trace-polynomial realization and telescoping calculation supplied by the agent."
-   }
-  },
-  {
-   "text": "The new trace-formula leaf with $K=\\mathbf F_p$, $L=k_0$ gives $\\sum_{i=0}^{r-1}(bc)^{p^i}=\\operatorname{Tr}(bc)$ in $k_0$. Here $[k_0:\\mathbf F_p]=r$: a basis of size $n$ identifies its underlying set with $\\mathbf F_p^n$, so $p^n=q=p^r$ implies $n=r$. Additivity of the Frobenius iterates now gives $$\\Theta_b(y+c)=\\Theta_b(y)+\\sum_{i=0}^{r-1}(bc)^{p^i}=\\Theta_b(y)+\\operatorname{Tr}(bc).$$ On coordinate algebras the two composites in clause 3 fix all coefficients and send $t$ to the two equal displayed expressions. Faithfulness of the relative-Spec anti-equivalence gives $\\theta_b\\circ\\sigma_c=\\tau_{\\operatorname{Tr}(bc)}\\circ\\theta_b$ globally.",
-   "uses": [
-    "lem-a1-finite-field-trace-frobenius-sum",
-    "def-weil-ring-frobenius",
-    "lem-weil-pbc-affine-morphism-relative-spec"
+    "def-weil-ring-frobenius"
    ],
    "elementary": false,
    "source": {
     "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-    "place": "(1.1.3), Lang torsor pushout; explicit equivariance calculation using Mathlib/FieldTheory/Finite/Trace.lean:49–56."
+    "place": "(1.1.3), pp. 139–140: Lang torsor pushout; explicit polynomial calculation."
    }
   },
   {
-   "text": "Put $T_b(c)=\\operatorname{Tr}(bc)$. The polynomial expression from step 6 and Frobenius additivity show $T_b$ additive. For $d\\in\\mathbf F_p$, $d^{p^i}=d$ by the finite-field power identity, so $T_b(dc)=dT_b(c)$. Since $b\\ne0$, trace-pairing nondegeneracy supplies $c_0$ with $e=T_b(c_0)\\ne0$. Each $d\\in\\mathbf F_p$ has preimage $(d/e)c_0$, proving surjectivity. If $c_d$ is a preimage of $d$, the map $u\\mapsto c_d+u$ is a bijection $\\ker T_b\\to T_b^{-1}(d)$ with inverse $c\\mapsto c-c_d$. These $p$ fibres partition the $q$-element set $k_0$, hence $\\#\\ker T_b=q/p$. This argument does not use $\\operatorname{Tr}(1)\\ne0$, which fails when $p$ divides $r$.",
+   "text": "The pullback universal property represents maps into a cover by a map to X and a global section y satisfying y^n-y=f. Equality of maps follows from equality over X and on y, using AffineSpace.hom_ext. Construct translations by the explicit section y+c; Frobenius additivity and c^q=c prove the equation, composition, and the inverse translation by -c. This works on the zero ring too.",
    "uses": [
-    "lem-a1-trace-pairing-nondegenerate",
     "def-weil-ring-frobenius",
     "lem-weil-finite-field-pow-card"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-    "place": "(0.2), p. 135, finite-field trace character; nondegeneracy from the existing Mathlib leaf, followed by the explicit linear and coset calculations."
+    "place": "(1.1.3), pp. 139–140: Lang torsor pushout; explicit polynomial calculation."
    }
   },
   {
-   "text": "On a geometric fibre choose $\\alpha$ in the $q$-cover as in step 4 and set $\\beta=\\Theta_b(\\alpha)$, a root of $t^p-t-ba$ by step 5. Every point of the target fibre is uniquely $\\beta+d$, $d\\in\\mathbf F_p$. By step 6, $\\theta_b(\\alpha+c)=\\beta+T_b(c)$. The surjectivity from step 7 therefore lifts every target point. Two source points $\\alpha+c$ and $\\alpha+c^\\prime$ have the same image exactly when $T_b(c^\\prime-c)=0$. Their difference belongs to $\\ker T_b$ exactly in this case, which says that every fibre is a single orbit of that subgroup under the translations. Its order is $q/p$ by step 7. This proves clause 4.",
+   "text": "Over an algebraically closed field, the equation y^q-y=a has a root since it is a polynomial of positive degree. Two roots have difference d satisfying d^q=d. Evaluate the factorization X^q-X=product over c in k of (X-c) using FiniteField.prod_sub_eq_zero_of_pow_card_eq: in a domain one factor is zero, so the roots differ by a unique k-constant. A finite geometric fibre is locally Artinian, so each of its points is closed. Mathlib pointOfClosedPoint supplies its rational section, and ext_of_apply_closedPoint_eq makes that section unique. The cover universal property shows its root coordinate determines the point. Therefore translations act simply transitively on each geometric fibre; the orbit bijection with k proves cardinality q.",
+   "uses": [
+    "lem-weil-finite-field-pow-card",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "(1.1.3), pp. 139–140: Lang torsor pushout; explicit polynomial calculation."
+   }
+  },
+  {
+   "text": "The ring homomorphism iterateFrobeniusOfPrime is additive even for a zero ring when p vanishes. Induction on r telescopes the sum to obtain Theta_b^p-Theta_b=b(X^q-X), using b^q=b. Applying the quotient map gives bf. Evaluating this identity at the tautological root constructs theta by the same cover universal property; its root formula is definitionally the displayed trace polynomial.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "lem-weil-finite-field-pow-card"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "(1.1.3), pp. 139–140: Lang torsor pushout; explicit polynomial calculation."
+   }
+  },
+  {
+   "text": "Module.card_eq_pow_finrank and q=p^r imply finrank over ZMod p is r. FiniteField.algebraMap_trace_eq_sum_pow then identifies the sum of Frobenius powers of bc with Tr(bc). Apply Frobenius additivity to Theta_b(y+c) and compare the base map and root of the two composites to prove equivariance.",
+   "uses": [
+    "lem-a1-finite-field-trace-frobenius-sum",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "(1.1.3), pp. 139–140: Lang torsor pushout; explicit polynomial calculation."
+   }
+  },
+  {
+   "text": "Algebra.trace_surjective for finite separable fields makes the trace onto ZMod p. Multiplication by nonzero b is a bijection with inverse multiplication by b inverse, so T(c)=Tr(bc) is onto too. The additive subgroup index of its kernel is the cardinality p of its range. The identity card(kernel) times index=card(k) yields card(kernel)=q/p.",
+   "uses": [
+    "lem-a1-trace-pairing-nondegenerate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "(1.1.3), pp. 139–140: Lang torsor pushout; explicit polynomial calculation."
+   }
+  },
+  {
+   "text": "Apply the simply transitive result to both covers. If z is in the q-cover then every target point is a unique translate of theta(z) by some d in ZMod p. Surjectivity of T and equivariance lift it by a translation of z. Two source points differ by a unique translation c; their images agree if and only if T(c)=0, since the prime-field action is free. This proves geometric surjectivity and the kernel-orbit clause.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-    "place": "(1.1.3), pushout of a Lang torsor; explicit calculation on the two geometric torsor fibres."
+    "place": "(1.1.3), pp. 139–140: Lang torsor pushout; explicit polynomial calculation."
    }
   },
   {
-   "text": "It remains to check the maps in clause 5 under the canonical cover identifications of step 2. On a chart with coefficient map $\\varphi:A\\to A^\\prime$, every $k_0$-constant is fixed and $\\varphi(f)=f^\\prime$. Thus the base-changed substitutions for $\\sigma_c$ and $\\tau_d$ are literally $y\\mapsto y+c$ and $t\\mapsto t+d$. For the third map, $$\\varphi\\!\\left(\\sum_{i=0}^{r-1}b^{p^i}y^{p^i}\\right)=\\sum_{i=0}^{r-1}b^{p^i}y^{p^i}$$ in $A^\\prime[y]$, which is the polynomial defining $\\theta_b^\\prime$. These equalities on the coefficient ring and coordinate generator give equality of the quotient algebra maps. By the naturality clause of the affine-sections theorem for pullbacks, the pullbacks of the substitution maps become $\\varphi$-tensored substitutions under those identifications. They commute with restriction, so the affine-morphism anti-equivalence and the canonical relative-Spec base-change isomorphisms identify the global maps too. This proves clause 5 for every stated $h$; the algebra calculation requires no flatness.",
-   "uses": [
-    "lem-weil-pbc-relative-spec-base-change",
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-module-pullback-affine-sections"
-   ],
-   "elementary": false,
+   "text": "For arbitrary h:Xprime to X, construct the comparison cover map by the tautological root and projection composed with h. Prove its square cartesian directly: any compatible pair of maps admits the unique lift prescribed by its coordinate. Pullback of k-constants along a k-morphism preserves them. Comparing projection and root now proves that both translations and the trace map commute with these comparisons. Map preservation of finite sums, products, and powers proves trace-polynomial naturality without flatness.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01LX (lemma-spec-properties), canonical base change, with the generator calculation and Tag 01SA affine-morphism anti-equivalence."
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "(1.1.3), pp. 139–140: Lang torsor pushout; explicit polynomial calculation."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-standard-etale-monic-derivative",
   "def-weil-finite-integral-morphism",
   "def-weil-etale-morphism",
-  "pqf-def-coherent",
-  "lem-weil-pbc-relative-spec-base-change",
   "def-weil-ring-frobenius",
   "lem-weil-finite-field-pow-card",
-  "def-pc-separable-polynomial",
-  "lem-pc-separable-polynomial-distinct-roots-alg-closed",
   "lem-a1-finite-field-trace-frobenius-sum",
-  "lem-a1-trace-pairing-nondegenerate",
-  "lem-weil-pbc-module-pullback-affine-sections"
+  "lem-a1-trace-pairing-nondegenerate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
-  "place": "(1.1.3), pp. 139–140: Lang torsor pushout and pullback. The trace-polynomial map, equivariance, kernel and naturality are supplied explicitly here, not quoted as assertions of Laumon."
+  "place": "(1.1.3), pp. 139–140: Lang torsor pushout; explicit polynomial calculation. Lean proof uses the existing affine-space Artin–Schreier map and its pullback universal property, the finite geometric-point API, and finite-field trace algebra."
  },
  "mathlib_searches": [
   {
@@ -315,11 +282,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-relative-spec-base-change",
-  "lem-weil-pbc-module-pullback-affine-sections"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-18",
   "by": "L",
@@ -356,5 +319,15 @@
   "group": "NE",
   "result": "pass",
   "note": "Independent reading of the node, stmt_dep records, report and module. All five clauses match: finite étale plus a simply transitive k-action on every geometric fibre with q points; both Θ_b identities on every open; θ_b specified by t ↦ Θ_b(y); equivariance (σ_c ≫ θ = θ ≫ τ_Tr(bc)) checked to agree with θ∘σ_c = τ∘θ; geometric surjectivity, fibres equal to ker-orbits, and #ker = p^r/p; base change along any k-morphism with comparisons pinned by cartesian squares and root preservation. No stronger hypotheses. Upstream artinSchreierMap gives y^q−y=f, so the sign is right. The packaged maps are unique by AffineSpace.hom_ext, so the ∃ M is canonical. Edge cases checked: r=1, p=2 r=2 b=1 with Tr(1)=0, f=0, empty X/U, universes, identity/empty h. No duplicate cover definition in the DAG or Lean sources. No hollow defs; sorry only in the theorem. Docstrings and the proof steps are present, lines are ≤100 characters, and the statement is verbatim. nt_compile.py --json: rc 0 at 8.4 s and 7.5 s, no errors or warnings. Observations only: the NE second-reading section is thin (author's own pass, H11 style) and two stmt_dep modules are public imports the statement doesn't use."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261020T131212-L-1259071",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
