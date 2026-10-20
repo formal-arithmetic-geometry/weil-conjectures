@@ -1,0 +1,194 @@
+{
+ "id": "lem-sp-proetale-units-comparison",
+ "kind": "statement",
+ "title": "The full units sheaf is preserved by etale/pro-etale comparison",
+ "statement": "For every scheme Z, the counit of the etale/pro-etale comparison adjunction on abelian sheaves, evaluated at the full pro-etale units sheaf, is an isomorphism. Here the adjunction is [def-weil-pbc-site-comparison-morphism] and the units sheaf is [def-pur-proetale-units-sheaf].",
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-pur-proetale-units-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-describe-pullback-from-etale (Tag 0GLZ), with affine limit sections and descent of a unit and its inverse"
+ },
+ "proof": [
+  {
+   "text": "Units commute with filtered colimits of commutative rings. Descend a unit and its inverse to a common stage and descend the equation ab=1 to a later stage. This gives surjectivity; equality of units descends because equality of their underlying ring elements descends. The proof constructs the colimit comparison and uses the filtered-colimit equality criterion in Mathlib.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-describe-pullback-from-etale (Tag 0GLZ), with affine limit sections and descent of a unit and its inverse"
+   }
+  },
+  {
+   "text": "For an affine pro-etale presentation U=lim U_i, the existing source-library theorem isColimit_comparisonUpperStar_mapCocone_of_isAffine identifies sections of the comparison inverse image with the filtered colimit of etale sections. Mathlib nonempty_isColimit_Γ_mapCocone identifies global rings of the affine limit. Apply the preceding units calculation and the lifted units functor to obtain the same colimit description for the full units sheaf.",
+   "uses": [
+    "lem-cbc-comparison-pullback-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-describe-pullback-from-etale (Tag 0GLZ), with affine limit sections and descent of a unit and its inverse"
+   }
+  },
+  {
+   "text": "The comparison unit is invertible, hence the counit is invertible after restriction to every etale object by the triangular identities. Naturality gives a map between the two colimit cocones above. Uniqueness of colimits makes its component at U invertible. Every affine pro-etale object has such a presentation; restriction to the affine dense subsite detects isomorphisms, as implemented by isIso_of_isIso_app_affineProEt.",
+   "uses": [
+    "lem-weil-pbc-comparison-grothendieck-unit",
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-describe-pullback-from-etale (Tag 0GLZ), with affine limit sections and descent of a unit and its inverse"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-comparison-pullback-sections",
+  "lem-weil-pbc-comparison-grothendieck-unit",
+  "lem-weil-pbc-ind-etale-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-describe-pullback-from-etale (Tag 0GLZ), with affine limit sections and descent of a unit and its inverse; direct proof from the existing source-library affine comparison and Mathlib filtered-colimit APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proEtaleUnitsCounit|units.*preservesFilteredColimits|units.*isColimit",
+   "results": {
+    "t": "2026-10-19T22:03:11Z",
+    "tool": "grep",
+    "query": "proEtaleUnitsCounit|units.*preservesFilteredColimits|units.*isColimit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-19",
+   "verdict": "No direct units comparison theorem; use filtered colimits and the source-library comparison APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"units\", \"PreservesFilteredColimits\"",
+   "results": {
+    "t": "2026-10-19T22:03:12Z",
+    "tool": "loogle",
+    "query": "\"units\", \"PreservesFilteredColimits\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-19",
+   "verdict": "No direct units comparison theorem; use filtered colimits and the source-library comparison APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of the etale sheaf of units is the full proetale sheaf of units",
+   "results": {
+    "t": "2026-10-19T22:03:13Z",
+    "tool": "leanfinder",
+    "query": "The inverse image of the etale sheaf of units is the full proetale sheaf of units",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "StandardEtalePair.homEquiv_symm_apply",
+     "StandardEtalePair.hasMap_X",
+     "AlgebraicGeometry.Scheme.Etale.forget",
+     "StandardEtalePair.inv_aeval_X_g",
+     "StandardEtalePresentation.hasMap",
+     "Algebra.instEtaleOfIsStandardEtale",
+     "Algebra.basicOpen_subset_etaleLocus_iff",
+     "Algebra.mem_etaleLocus_iff"
+    ],
+    "digest": "7eb380aa0b2f82f4"
+   },
+   "date": "2026-10-19",
+   "verdict": "No direct units comparison theorem; use filtered colimits and the source-library comparison APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image from etale to proetale sheaves carries the units sheaf to the units sheaf",
+   "results": {
+    "t": "2026-10-19T22:07:20Z",
+    "tool": "leansearch",
+    "query": "The inverse image from etale to proetale sheaves carries the units sheaf to the units sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "CategoryTheory.Equivalence.sheafCongr.unitIso_inv_app_val_app",
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "AlgebraicGeometry.Scheme.Modules.inv_app",
+     "CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_hom_app_val_app",
+     "SheafOfModules.unitHomEquiv_symm_comp"
+    ],
+    "digest": "c57f09bab8c0c773"
+   },
+   "date": "2026-10-19",
+   "verdict": "No direct units comparison theorem; use filtered colimits and the source-library comparison APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "date": "2026-10-19",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cartier-reduction-site-comparison",
+   "place": "Opening comparison paragraph; identification of the roots kernel"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleUnitsComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleUnitsComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleUnitsCounit_isIso",
+  "statement": "theorem proEtaleUnitsCounit_isIso (Z : Scheme.{u}) :\n    IsIso ((comparisonAdjunction AddCommGrpCat.{u + 1} Z).counit.app\n      (Scheme.proEtaleUnitsSheaf Z))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261020T051223-L-1598955",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261020T051223-L-1598955",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
