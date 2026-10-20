@@ -52,7 +52,8 @@ theorem rhom_supported_quasiCoherent_pseudo_part
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj
               ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
                 X.toRingedSpace.sheaf).obj (op K, L)))) := by
-  exact ⟨rhom_supported_quasiCoherent_pseudo_part_qc X K L hL hK hGE,
-    rhom_supported_quasiCoherent_pseudo_part_bound X K L hL hK hGE⟩
+  constructor
+  · exact rhom_supported_quasiCoherent_pseudo_part_qc X K L hL hK hGE
+  · exact rhom_supported_quasiCoherent_pseudo_part_bound X K L hL hK hGE
 
 end AlgebraicGeometry
