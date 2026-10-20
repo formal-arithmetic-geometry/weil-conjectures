@@ -1,0 +1,72 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the LICENSE.
+Authors: SHEAF group G1
+-/
+module
+public import Sheaf.Paper.FiniteCoefficientFlatModel
+public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
+public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
+public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.IntrinsicComparisonConstructibility
+import Sheaf.Paper.IntrinsicRealizationFlat
+import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+/-! The Tor-amplitude component of finite-coefficient comparison.
+Source: blueprint `lem-sf-comparison-tor-amplitude`, flat-model and tensor clauses
+(blueprint: lem-sf-intrinsic-comparison-tor-amplitude).
+
+Proof plan: choose the bounded étale flat model, apply exact comparison termwise,
+use preservation of flatness, and compare the resulting K-flat tensor complexes.
+The support interval is unchanged, giving the displayed pro-étale predicate. -/
+@[expose] public section
+set_option autoImplicit false
+universe u
+open CategoryTheory AlgebraicGeometry
+namespace AlgebraicGeometry
+/-- Exact comparison preserves the specified Tor interval.
+Source: blueprint `lem-sf-comparison-tor-amplitude`, steps 3 and 4
+(blueprint: lem-sf-intrinsic-comparison-tor-amplitude).
+
+Proof: choose an étale flat model in the given interval using the flat-model
+characterization. Comparison preserves the flatness of each term; intrinsic
+realization converts it to site flatness. An additive functor preserves zero objects,
+so support is unchanged. The exact derived functor factorization gives the required
+isomorphism of the comparison image with the localized termwise model. Apply the
+pro-étale flat-model characterization, using preserved bounded constructibility. -/
+theorem intrinsicComparison_torAmplitude
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hlp : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})
+    [∀ x : T, Invertible (l : T.residueField x)] (a b : ℤ) (_hab : a ≤ b)
+    (K' : Etale.DerivedCategoryModule
+      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T)
+    (_hK' : @Etale.DerivedCategory.isBoundedConstructible.{u}
+      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) inferInstance
+      ((Equiv.ulift : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n) ≃
+        Padic.coefficientExtensionRing l E n).finite_iff.mpr
+          (Padic.finite_coefficientExtensionRing l E n hn)) T K')
+    (_hTor' : Etale.DerivedCategory.hasTorAmplitudeIn
+      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b K') :
+    Scheme.HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E n)
+      ((@ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
+        (Padic.coefficientExtensionRing l E n) inferInstance
+        (Padic.finite_coefficientExtensionRing l E n hn)).obj K') a b := by
+  let B := Padic.coefficientExtensionRing l E n
+  have : Finite B := Padic.finite_coefficientExtensionRing l E n hn
+  have : Finite (ULift.{u + 1, u} B) := Finite.of_equiv B Equiv.ulift.symm
+  let F := ProEtale.finiteCoefficientIntrinsicComparison T B
+  have hc := intrinsicComparison_boundedConstructible D l _hlp E n hn T K' _hK'
+  apply (Scheme.finiteCoefficient_torAmplitude_iff_flatModel
+    D l _hlp E n hn T _ hc a b _hab).mpr
+  obtain ⟨P, hP, ⟨eP⟩⟩ :=
+    (Etale.finiteCoefficient_hasTorAmplitude_iff_flatModel
+      D l _hlp E n hn T K' _hK' a b _hab).mp _hTor'
+  refine ⟨(F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P, ?_, ?_, ?_⟩
+  · intro q
+    exact ProEtale.intrinsicRealization_flat T B _
+      (ProEtale.flat_comparisonUpperStar_obj (hP.2 q))
+  · intro q hq
+    exact F.map_isZero (hP.1 q hq)
+  · exact ⟨F.mapDerivedCategory.mapIso eP ≪≫ F.mapDerivedCategoryFactors.app P⟩
+end AlgebraicGeometry

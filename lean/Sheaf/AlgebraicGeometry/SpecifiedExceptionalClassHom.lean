@@ -1,0 +1,96 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Q02
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass
+public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
+public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+
+/-!
+# The relative Hom bijection at a specified compactification
+
+Source: blueprint thm-sf-ambient-adjoint-class, clauses (2)--(3)
+(blueprint: thm-sf-ambient-adjoint-class).
+
+The original existence, dimension-bound and coherent-comparison interface is reexported.
+These helpers realize its normalized Hom chain for the right adjoint of the actual
+specified compactification, rather than the opaque choice inside HasCompactification.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+universe u
+open CategoryTheory
+open scoped CategoryTheory.Functor
+
+namespace AlgebraicGeometry.ProEtale
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+  {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] [CompactSpace Y]
+  (c : Compactification f)
+  [(Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).IsLeftAdjoint]
+
+/-- The specified ordinary etale compact-support right adjoint takes R-nu-star of
+bounded-below inputs to bounded-below objects. This is the finite-amplitude step of
+the relative adjunction, with the compactification retained literally.
+Source: blueprint thm-sf-ambient-adjoint-class (2), its finite-dimension argument
+(blueprint: thm-sf-ambient-adjoint-class).
+
+Proof: on the quasi-compact target, the proper finite-type part of c has a uniform
+finite bound on its geometric fibre dimensions. Ordinary etale direct image for finite
+coefficients has the corresponding finite cohomological amplitude. Exact extension
+by zero gives the same upper bound for the compact-support functor. By the ordinary
+etale adjunction and t-structure orthogonality, its right adjoint shifts a lower bound
+by at most this finite amplitude. Right derived comparison direct image preserves a
+lower bound. Combining the two bounds proves the assertion. On the finite-type
+field-scheme domain of the node, lem-kun-dimension-finite-type supplies the stated
+finite bound; no all-sheaf pro-etale cohomological bound is used. -/
+theorem specifiedExceptionalEtale_boundedBelow
+    (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :
+    DerivedCategory.TStructure.t.plus
+      ((Etale.rightDerivedLowerShriekOfCompactification
+          (ModuleCat.{u + 1} Λ) c).rightAdjoint.obj
+        ((comparisonLowerStar (ModuleCat.{u + 1} Λ) Y).rightDerivedFunctor.obj K.obj)) := by
+  let : HasCompactification f := ⟨⟨c⟩⟩
+  let adj₁ := Adjunction.ofIsLeftAdjoint
+    (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c)
+  let adj₂ := (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).ofNatIsoLeft
+    (Etale.rightDerivedLowerShriekIso Λ c).symm
+  let e := adj₁.rightAdjointUniq adj₂
+  have hR : DerivedCategory.TStructure.t.plus
+      ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj
+        ((comparisonLowerStar (ModuleCat.{u + 1} Λ) Y).rightDerivedFunctor.obj K.obj)) := by
+    apply Etale.plus_rightDerivedUpperShriek_obj
+    exact plus_rightDerivedFunctor_comparisonLowerStar_obj K.property
+  exact DerivedCategory.TStructure.t.plus.prop_of_iso (e.app _).symm hR
+
+/-- The normalized Hom chain of the class adjunction, evaluated at an explicit retained
+etale origin. The successive factors are alpha, the normalized compact-support
+comparison, the comparison adjunction, the specified etale adjunction, full faithfulness
+of comparison on a bounded-below target, and alpha again. Every factor is an existing
+canonical bijection; this does not choose an arbitrary equivalence from existence.
+Source: blueprint thm-sf-ambient-adjoint-class (2), the four natural Hom identifications
+and their chosen-compactification normalization (blueprint: thm-sf-ambient-adjoint-class). -/
+def specifiedExceptionalHomEquiv
+    (M : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+    (W : Scheme.FixedEtaleOriginWitness X Λ M)
+    (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :
+    ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).obj M.obj ⟶ K.obj) ≃
+      (M.obj ⟶ (sfFiniteExceptionalAt Λ c).obj K.obj) :=
+  ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).mapIso
+      W.iso).symm.homFromEquiv.trans
+    (((fixedCompactSupportComparisonIso Λ c).app W.complex).homFromEquiv.trans
+      (((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).homEquiv _ K.obj).trans
+        (((Adjunction.ofIsLeftAdjoint
+          (Etale.rightDerivedLowerShriekOfCompactification
+            (ModuleCat.{u + 1} Λ) c)).homEquiv _ _).trans
+          ((Equiv.ofBijective
+            (fun a ↦ (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map a)
+            (bijective_comparisonUpperStar_mapDerivedCategory_map _ _
+              (specifiedExceptionalEtale_boundedBelow Λ c K))).trans
+            W.iso.homFromEquiv))))
+
+end AlgebraicGeometry.ProEtale
