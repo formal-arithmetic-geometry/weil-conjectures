@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import Sheaf.AlgebraicGeometry.FixedPullbackDegreeZeroDescent
+import WeilConjectures.AlgebraicGeometry.FixedPullbackDegreeZeroDescent
 
 /-! # Degree reduction for etale limit cohomology
 

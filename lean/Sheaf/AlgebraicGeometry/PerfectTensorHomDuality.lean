@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison

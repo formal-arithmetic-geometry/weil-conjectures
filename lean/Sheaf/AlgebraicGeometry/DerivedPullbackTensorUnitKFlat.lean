@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitCounit
 import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization
 

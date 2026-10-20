@@ -21,7 +21,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Data.Set.Finite.Basic
 import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
-import Sheaf.AlgebraicGeometry.EventuallyProper
+import WeilConjectures.AlgebraicGeometry.EventuallyProper
 import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.TraceFormula.MultipointedCurve
 import Sheaf.TraceFormula.ContractedComponentNoExtraGeneric

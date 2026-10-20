@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 

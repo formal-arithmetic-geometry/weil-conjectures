@@ -20,7 +20,7 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import WeilConjectures.AlgebraicGeometry.FpqcDescentEtale
 import WeilConjectures.AlgebraicGeometry.DescendClosedImmersion
-import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
+import WeilConjectures.AlgebraicGeometry.DescendFlatFinitePresentation
 import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit

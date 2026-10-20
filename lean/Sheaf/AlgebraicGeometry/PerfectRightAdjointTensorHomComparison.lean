@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 

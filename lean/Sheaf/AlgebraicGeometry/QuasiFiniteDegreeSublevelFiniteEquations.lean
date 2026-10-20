@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
-import Sheaf.AlgebraicGeometry.FiniteEquationsOfClosedAffine
+import WeilConjectures.AlgebraicGeometry.FiniteEquationsOfClosedAffine
 
 /-! # Finite equations for the closed fibre-degree sublevel locus -/
 

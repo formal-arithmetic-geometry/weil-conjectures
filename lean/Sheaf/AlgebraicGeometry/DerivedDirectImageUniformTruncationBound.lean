@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import Sheaf.AlgebraicGeometry.UniformDirectImageBoundCore
-import Sheaf.AlgebraicGeometry.DirectImageTruncationTailBound
+import WeilConjectures.AlgebraicGeometry.DirectImageTruncationTailBound
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 

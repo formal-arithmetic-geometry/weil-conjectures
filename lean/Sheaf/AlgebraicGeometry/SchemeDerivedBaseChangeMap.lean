@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedAdjoint
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 

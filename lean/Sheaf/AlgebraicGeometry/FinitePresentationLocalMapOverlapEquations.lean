@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.LocalMapPullbackFamily
 public import WeilConjectures.AlgebraicGeometry.LocalMapRecovery
-import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventually
+import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapPairEventually
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import Mathlib.Data.Finset.Order
 

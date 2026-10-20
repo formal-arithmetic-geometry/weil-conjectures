@@ -4,7 +4,7 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.DerivedOpenTestObject
 import Sheaf.AlgebraicGeometry.DerivedOpenTensorHomBijective
 

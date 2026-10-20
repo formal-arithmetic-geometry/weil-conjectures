@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.UniformInverseAffineSectionsBound
-import Sheaf.AlgebraicGeometry.DirectImageHomologyAffineDetection
+import WeilConjectures.AlgebraicGeometry.DirectImageHomologyAffineDetection
 import WeilConjectures.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 

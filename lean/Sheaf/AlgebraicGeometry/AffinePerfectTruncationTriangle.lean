@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.AffineLiftEventualFreeKernels
-import Sheaf.AlgebraicGeometry.FiniteFreeStupidTailPerfect
+import WeilConjectures.AlgebraicGeometry.FiniteFreeStupidTailPerfect
 import WeilConjectures.AlgebraicGeometry.ExactFunctorStupidTailTriangle
 
 /-! # Arbitrarily low perfect truncation triangles on affine schemes

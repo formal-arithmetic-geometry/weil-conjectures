@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.EventuallyProper
+import WeilConjectures.AlgebraicGeometry.EventuallyProper
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import Sheaf.Paper.SchemeTheoreticSupport
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier

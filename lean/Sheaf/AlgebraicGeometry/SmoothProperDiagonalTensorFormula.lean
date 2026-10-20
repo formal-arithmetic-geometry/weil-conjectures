@@ -5,7 +5,7 @@ Authors: SHEAF group S1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.ProperPerfectRightAdjointCoproducts
 import Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCase
 import Sheaf.AlgebraicGeometry.PerfectImmersionStalkwiseTorBounds
 import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonNatural
-import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
+import WeilConjectures.AlgebraicGeometry.DerivedTensorRightCoproducts
 import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Sheaf.AlgebraicGeometry.PerfectLocalizingIsoLocus
 import Sheaf.AlgebraicGeometry.DerivedExactStructures

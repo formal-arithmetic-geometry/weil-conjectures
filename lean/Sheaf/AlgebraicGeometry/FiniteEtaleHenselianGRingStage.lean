@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Sheaf.AlgebraicGeometry.FiniteEtaleFiniteTypeClosedFibreStage
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleFiniteTypeClosedFibreStage
 import Sheaf.RingTheory.FiniteTypeIntGRing
 import Sheaf.RingTheory.HenselizationPairGRing
 import WeilConjectures.RingTheory.HenselizationUniversalProperty

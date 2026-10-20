@@ -5,7 +5,7 @@ Authors: SHEAF group V3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso
 import all Sheaf.AlgebraicGeometry.DerivedOpenTensorHomBijective
 

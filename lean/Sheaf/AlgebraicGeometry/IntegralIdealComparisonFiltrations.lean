@@ -13,7 +13,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finite
 public import Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.IntegralIdealCommonSubmodule
-import Sheaf.AlgebraicGeometry.FinitePresentationIntegralFiltration
+import WeilConjectures.AlgebraicGeometry.FinitePresentationIntegralFiltration
 import WeilConjectures.CategoryTheory.FiniteFiltrationRefinement
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed

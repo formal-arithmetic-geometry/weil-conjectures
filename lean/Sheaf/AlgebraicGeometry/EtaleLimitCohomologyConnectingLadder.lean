@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleLimitAcyclicReplacement
+import WeilConjectures.AlgebraicGeometry.EtaleLimitAcyclicReplacement
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.UnboundedProperOpenInterchange
 public import Sheaf.AlgebraicGeometry.OpenSectionClopen
-public import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
+public import WeilConjectures.AlgebraicGeometry.EtaleSheafClopenProduct
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import Sheaf.AlgebraicGeometry.DerivedCounitKInjectiveTermwise
 import Sheaf.AlgebraicGeometry.ExactUnboundedExchange

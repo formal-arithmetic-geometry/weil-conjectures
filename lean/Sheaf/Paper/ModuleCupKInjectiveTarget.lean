@@ -6,7 +6,7 @@ Authors: SHEAF group G4
 module
 
 public import Sheaf.Paper.ModuleCupNaiveMap
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import Sheaf.Paper.ModuleCupGlobalTensorPullback

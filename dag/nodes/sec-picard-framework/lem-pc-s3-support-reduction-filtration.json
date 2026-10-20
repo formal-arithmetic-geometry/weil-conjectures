@@ -156,13 +156,14 @@
  "unit": "sk-thm-picard-coherence",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FinitePresentationSupportReductionFiltration",
-  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationSupportReductionFiltration.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FinitePresentationSupportReductionFiltration",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FinitePresentationSupportReductionFiltration.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finitePresentation_support_reduction_filtration",
   "statement": "theorem exists_finitePresentation_support_reduction_filtration\n    (X : Scheme.{u}) [IsNoetherian X] (F : X.Modules) [F.IsFinitePresentation] :\n    ∃ (m : ℕ) (c : Fin (m + 1) → Subobject F) (hc : Monotone c),\n      c 0 = ⊥ ∧ c (Fin.last m) = ⊤ ∧\n      ∀ j : Fin m,\n        let Q := cokernel (Subobject.ofLE (c j.castSucc) (c j.succ)\n          (hc j.castSucc_le_succ))\n        (∃ (Z : Scheme.{u}) (i : Z ⟶ X),\n          IsClosedImmersion i ∧ IsIntegral Z ∧\n          ∃ I : Z.IdealSheafData, Nonempty (Q ≅ (pushforward i).obj I.toModules)) ∨\n        (Q.IsFinitePresentation ∧\n          closure {x : X | ¬ Subsingleton (Q.presheaf.stalk x)} ⊂\n            closure {x : X | ¬ Subsingleton (F.presheaf.stalk x)})",
   "branch": "sheaf-dag",
   "by": "S3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.FinitePresentationSupportReductionFiltration; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
 import Sheaf.Algebra.Homology.KFlatResolution

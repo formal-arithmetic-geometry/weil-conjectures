@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric

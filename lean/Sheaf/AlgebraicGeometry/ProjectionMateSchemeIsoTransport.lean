@@ -5,7 +5,7 @@ Authors: SHEAF group T3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage

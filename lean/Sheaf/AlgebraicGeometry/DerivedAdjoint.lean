@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction

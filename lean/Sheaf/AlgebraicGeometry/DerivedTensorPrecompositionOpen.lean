@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniverses
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh

@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
@@ -17,7 +17,7 @@ public import Mathlib.CategoryTheory.Retract
 import Mathlib.CategoryTheory.Triangulated.Yoneda
 import Mathlib.CategoryTheory.Triangulated.Adjunction
 import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
-import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
+import WeilConjectures.AlgebraicGeometry.DerivedTensorRightCoproducts
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure

@@ -6,7 +6,7 @@ Authors: SHEAF group P3
 module
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftProperties
 import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated

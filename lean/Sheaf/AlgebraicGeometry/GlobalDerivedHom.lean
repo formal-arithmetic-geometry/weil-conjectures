@@ -12,7 +12,7 @@ public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import Sheaf.Topology.PointModuleEvaluationEquivalence
+import WeilConjectures.Topology.PointModuleEvaluationEquivalence
 
 /-!
 # Global derived Hom on a scheme

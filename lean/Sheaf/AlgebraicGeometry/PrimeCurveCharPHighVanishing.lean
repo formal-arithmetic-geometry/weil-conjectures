@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
-import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
+import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf

@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCoefficientMap
 import WeilConjectures.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
-import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
+import WeilConjectures.AlgebraicGeometry.EtaleAffineTensorCechVanishing
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleAffineOpenCechResolutionColumns
 

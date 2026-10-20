@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
 public import Sheaf.CategoryTheory.CompactObject
 import WeilConjectures.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology

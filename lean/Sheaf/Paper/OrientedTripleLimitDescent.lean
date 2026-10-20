@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
-import Sheaf.AlgebraicGeometry.ExistsIsSeparatedOverPullbackMap
+import WeilConjectures.AlgebraicGeometry.ExistsIsSeparatedOverPullbackMap
 import Sheaf.TraceFormula.QCQSEtaleFinitarySite
 import Sheaf.CategoryTheory.PseudofunctorSplitFamily
 import Sheaf.CategoryTheory.SiteInverseImageTensor

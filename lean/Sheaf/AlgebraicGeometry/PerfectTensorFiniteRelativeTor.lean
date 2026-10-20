@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.StrictPerfectTensorRelativeTorBound
 import Sheaf.Algebra.Homology.KFlatResolution
 

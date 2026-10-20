@@ -5,7 +5,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 import Mathlib.Algebra.Homology.SingleHomology

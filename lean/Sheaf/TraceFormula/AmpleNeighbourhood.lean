@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.LimitFibreProducts
 import Sheaf.AlgebraicGeometry.LimitResidueField
 import Sheaf.AlgebraicGeometry.NoetherianFibreAmpleNeighbourhood
-import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
+import WeilConjectures.AlgebraicGeometry.ProperLimitNoetherian
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.AmpleIso
 import WeilConjectures.AlgebraicGeometry.AmplePullback

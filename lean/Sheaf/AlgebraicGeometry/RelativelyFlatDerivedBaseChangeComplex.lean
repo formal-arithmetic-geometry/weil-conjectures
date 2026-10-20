@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition

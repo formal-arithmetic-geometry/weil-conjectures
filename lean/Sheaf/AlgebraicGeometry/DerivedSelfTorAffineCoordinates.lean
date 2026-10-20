@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 
 import Sheaf.AlgebraicGeometry.DerivedSelfTorChosenAffineCoordinates
 import Sheaf.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
