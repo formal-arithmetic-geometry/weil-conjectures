@@ -104,18 +104,18 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.FilteredCohomologyImage",
-  "file": "lean/Sheaf/CategoryTheory/FilteredCohomologyImage.lean",
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.FilteredCohomologyImage",
+  "file": "lean/WeilConjectures/CategoryTheory/FilteredCohomologyImage.lean",
   "declaration": "CategoryTheory.DecreasingFiltration.cohomologyImage_isFinite",
-  "statement": "theorem cohomologyImage_isFinite\n    (hfinite : ∀ n : ℤ, ∃ lo hi : ℤ,\n      L.complexStep lo n = ⊤ ∧ L.complexStep hi n = ⊥)\n    (n : ℤ) : (L.cohomologyImage n).IsFinite",
+  "statement": "theorem cohomologyImage_isFinite\n    (hfinite : ∀ n : ℤ, ∃ lo hi : ℤ,\n      L.complexStep lo n = ⊤ ∧ L.complexStep hi n = ⊥)\n    (n : ℤ) : (L.homologyFiltration n).IsFinite",
   "branch": "sheaf-dag",
   "by": "P1",
   "date": "2026-10-12",
   "declarations": [
-   "CategoryTheory.DecreasingFiltration.cohomologyImage",
    "CategoryTheory.DecreasingFiltration.cohomologyImage_isFinite"
-  ]
+  ],
+  "note": "2026-10-21 T1: retire the duplicate Sheaf module; the upstream theorem uses homologyFiltration, the same image of each subcomplex in cohomology. The image-filtration construction is CategoryTheory.DecreasingFiltration.homologyFiltration in WeilConjectures.Algebra.Homology.ExactCouple.FilteredComplex."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -128,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "C-6287a",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T144133-L-2103441",
+  "landing": "20261020T211827-L-3507818",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf cohomologyImage vs upstream homologyFiltration (verbatim copy = homologyFiltration by rfl); 5 adapted consumers + 2 Paper importers compiled; 5 node lean.* diffs vs compiled signatures; axioms standard"
  }
 }

@@ -93,7 +93,7 @@
   "module": "Sheaf.CategoryTheory.FilteredCohomologyImageNormalized",
   "file": "lean/Sheaf/CategoryTheory/FilteredCohomologyImageNormalized.lean",
   "declaration": "CategoryTheory.DecreasingFiltration.cohomologyImage_graded_normalized",
-  "statement": "theorem cohomologyImage_graded_normalized\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K) (p n : ℤ) :\n  let A := L.complexStep p n\n  let A' := L.complexStep (p + 1) n\n  let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥\n  let B := imageSubobject (K.d (n - 1) n)\n  let q := (L.complexQuotientπ p (p + 1) (Int.le_add_one le_rfl)).f n\n  let P := Subobject.pullback ((L.step p).arrow.f n)\n  let Zbar := (Subobject.«exists» q).obj (P.obj ((A ⊓ Z) ⊔ A'))\n  let Bbar := (Subobject.«exists» q).obj (P.obj ((A ⊓ B) ⊔ A'))\n  ∃ hBZ : Bbar ≤ Zbar,\n    Nonempty ((L.cohomologyImage n).gradedPiece p ≅\n      cokernel (Subobject.ofLE Bbar Zbar hBZ))",
+  "statement": "theorem cohomologyImage_graded_normalized\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K) (p n : ℤ) :\n  let A := L.complexStep p n\n  let A' := L.complexStep (p + 1) n\n  let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥\n  let B := imageSubobject (K.d (n - 1) n)\n  let q := (L.complexQuotientπ p (p + 1) (Int.le_add_one le_rfl)).f n\n  let P := Subobject.pullback ((L.step p).arrow.f n)\n  let Zbar := (Subobject.«exists» q).obj (P.obj ((A ⊓ Z) ⊔ A'))\n  let Bbar := (Subobject.«exists» q).obj (P.obj ((A ⊓ B) ⊔ A'))\n  ∃ hBZ : Bbar ≤ Zbar,\n    Nonempty ((L.homologyFiltration n).gradedPiece p ≅\n      cokernel (Subobject.ofLE Bbar Zbar hBZ))",
   "branch": "sheaf-dag",
   "by": "G1",
   "date": "2026-10-13"
@@ -109,14 +109,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E4",
+  "reviewer": "C-6287a",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261013T011925-L-2762348",
+  "landing": "20261020T211827-L-3507818",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf cohomologyImage vs upstream homologyFiltration (verbatim copy = homologyFiltration by rfl); 5 adapted consumers + 2 Paper importers compiled; 5 node lean.* diffs vs compiled signatures; axioms standard"
  },
  "lean_audit": {
   "master": {

@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.CategoryTheory.FilteredCohomologyImage
+public import WeilConjectures.CategoryTheory.FilteredCohomologyImage
 import WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
 import Sheaf.CategoryTheory.FilteredCohomologyImagePresentation
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
@@ -60,7 +60,7 @@ theorem stableSubquotient_at_bounds
     (hlower : L.complexStep (p - r + 1) (n - 1) = ⊤)
     (hBZ : L.complexBoundaries p n r ≤ L.complexCycles p n r) :
     Nonempty (cokernel (Subobject.ofLE _ _ hBZ) ≅
-      (L.cohomologyImage n).gradedPiece p) := by
+      (L.homologyFiltration n).gradedPiece p) := by
   have _hr := hr
   let A := L.complexStep p n
   let A' := L.complexStep (p + 1) n

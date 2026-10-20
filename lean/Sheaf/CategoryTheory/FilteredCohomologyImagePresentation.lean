@@ -5,7 +5,7 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.CategoryTheory.FilteredCohomologyImage
+public import WeilConjectures.CategoryTheory.FilteredCohomologyImage
 import WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
 import Sheaf.CategoryTheory.FilteredCohomologyImageNormalized
 
@@ -47,7 +47,7 @@ theorem cohomologyImage_graded_presentation
   let A' := L.complexStep (p + 1) n
   let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥
   let B := imageSubobject (K.d (n - 1) n)
-  Nonempty ((L.cohomologyImage n).gradedPiece p ≅
+  Nonempty ((L.homologyFiltration n).gradedPiece p ≅
     cokernel ((Subobject.pullback (A ⊓ Z).arrow).obj
       ((A ⊓ B) ⊔ (A' ⊓ Z))).arrow) := by
   dsimp only
