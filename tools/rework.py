@@ -817,7 +817,44 @@ def _drop_mine(ids: list[str], reason: str) -> list[dict]:
     return dropped
 
 
-def cluster_restore(rounds: int = 8, dry: bool = False) -> int:
+PENDING = ROOT / "local" / "rework-cluster-pending.json"
+
+
+def settle_restores() -> None:
+    """Restored modules whose landing the merge queue reverted (file gone again from lean/) are put back in quarantine:
+    their quarantined text is marked tried (so the next cluster restore does not put them back unchanged; the level-wise
+    recheck compiles them again once per published build). Landings verified green are forgotten."""
+    import hashlib, json
+    import landing as ld
+    try:
+        pend = json.loads(PENDING.read_text())
+    except (OSError, ValueError):
+        return
+    open_ids = {r["id"] for r in ld.records(ld.REQUESTS)}
+    rows = load()
+    try:
+        tried = json.loads(TRIED.read_text())
+    except (OSError, ValueError):
+        tried = {}
+    keep, back = {}, 0
+    for m, rid in pend.items():
+        if rid in open_ids:
+            keep[m] = rid; continue
+        if (ROOT / opath(m)).is_file():
+            continue                       # verified (or still in): reconcile closes the row
+        q = ROOT / ((rows.get(m) or {}).get("quarantine") or qpath(m))
+        if q.is_file():
+            tried[m] = hashlib.sha1(q.read_bytes()).hexdigest(); back += 1
+            if m in rows and not str(rows[m].get("cause", "")).startswith("error"):
+                rows[m]["cause"] = "error: reverted by the merge queue after a cluster restore (see the build log)"
+    if back:
+        save(rows)
+    TRIED.write_text(json.dumps(tried)); PENDING.write_text(json.dumps(keep))
+    if back:
+        print(f"{time.strftime('%F %T')} cluster restore settle: {back} reverted module(s) back in quarantine (marked tried)", flush=True)
+
+
+def cluster_restore(rounds: int = 8, dry: bool = False, wait: bool = False) -> int:
     """The human's design (2026-10-21): put back EVERY quarantined module no confirmed-unfixed root blocks (cluster_set,
     all levels at once) in one step, without compiling them one by one; the global build verifies them together.
     One landing record PER MODULE (its file, and its root import lines), all in one commit: a red build then takes out
@@ -828,6 +865,7 @@ def cluster_restore(rounds: int = 8, dry: bool = False) -> int:
     import hashlib, json, shutil
     import landing as ld, mergelock
     T0 = time.time()
+    settle_restores()
     rows = load()
     put, seeds = cluster_set(rows)
     print(f"{time.strftime('%F %T')} cluster restore: {len(put)} quarantined module(s) to put back "
@@ -867,6 +905,17 @@ def cluster_restore(rounds: int = 8, dry: bool = False) -> int:
     restored = set(rec_of)
     print(f"{time.strftime('%F %T')} cluster restore: {len(restored)} module(s) put back ({len(rec_of)} landings, one commit)",
           flush=True)
+    if not wait:
+        # the human, 2026-10-21: no waiting for the build; settle_restores() at the next run reads what the merge queue
+        # reverted and puts those modules back in quarantine
+        pend = {}
+        try:
+            pend = json.loads(PENDING.read_text())
+        except (OSError, ValueError):
+            pend = {}
+        pend.update(rec_of); PENDING.write_text(json.dumps(pend))
+        print(f"{time.strftime('%F %T')} cluster restore: not waiting for the build ({len(rec_of)} landing(s) pending)", flush=True)
+        return len(restored)
     state = {"start": time.strftime("%FT%TZ", time.gmtime()), "restored": len(restored), "builds": []}
     out: dict[str, str] = {}          # module -> cause, taken out again
     seen: set = set()
@@ -945,12 +994,14 @@ def main() -> int:
     cmd = a[0] if a else "status"
     if cmd == "reconcile":
         reconcile(); return 0
+    if cmd == "autorestore" and not ({"--from-loop", "--level-wise", "--recheck-unlocated", "--recheck-errors"} & set(a)):
+        cluster_restore(wait=False); return 0
     if cmd == "autorestore":
         autorestore(workers=int(a[a.index("--workers") + 1]) if "--workers" in a else 24,
                     limit=int(a[a.index("--limit") + 1]) if "--limit" in a else 2000,
                     recheck="--recheck-unlocated" in a, recheck_errors="--recheck-errors" in a, from_loop="--from-loop" in a); return 0
     if cmd == "cluster-restore":
-        cluster_restore(dry="--dry-run" in a); return 0
+        cluster_restore(dry="--dry-run" in a, wait="--wait" in a); return 0
     if cmd == "release-held":
         release_held(apply="--dry-run" not in a); return 0
     if cmd == "status":
