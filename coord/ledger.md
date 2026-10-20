@@ -18460,3 +18460,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 23:03 L: batch 20261020T145440 dependency take-out
 - 15:03 L: returned deliver/E8/Sheaf.AlgebraicGeometry.ProEtaleReplete (reviewer RETURN: (reviewer C-13030, head 13030976d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pr)
+- 15:06 L: returned deliver/V2/Sheaf.AlgebraicGeometry.ScalarAbelianExtFactorization (reviewer RETURN: (the landing tools, head cbfa7c163) the delivery did not land: lean/Sheaf/AlgebraicGeometry/ScalarAbelianExtFactorizatio)
