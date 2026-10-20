@@ -10,7 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
-import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitChartComparison
+import WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitChartComparison
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPresheafComparison
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Prod
 import Mathlib.LinearAlgebra.TensorProduct.Basis
@@ -173,6 +174,10 @@ theorem determinant_split_linear_maps_locally_bijective {X : Scheme.{v}}
   refine ⟨V, hVU, hxV, ?_⟩
   intro W hW
   obtain ⟨a, c, eW, hfW, hgW, hqB, hqT⟩ := hV W hW
+  rw [← exteriorSheafPresheaf_eq_exteriorPower S.X₂ (r₁ + r₃)] at hqB
+  unfold exteriorPower at hqT
+  rw [← exteriorSheafPresheaf_eq_exteriorPower S.X₁ r₁,
+    ← exteriorSheafPresheaf_eq_exteriorPower S.X₃ r₃] at hqT
   let qB := (((PresheafOfModules.sheafificationAdjunction
     (𝟙 X.ringCatSheaf.obj)).unit.app
     (exteriorSheafPresheaf S.X₂ (r₁ + r₃))).app (op W)).hom

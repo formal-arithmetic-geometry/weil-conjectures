@@ -23,11 +23,9 @@
    "elementary": false
   },
   {
-   "text": "Apply exteriorSheaf_local_free_comparison to the middle frame and the two outside frames. The second conclusions give bijectivity on every W inside V of the middle exterior unit and both outside exterior units. Apply the first conclusion only to C with degree s. The type of s-element subsets of Fin s is a singleton, since a subset with s elements is all of Fin s. Thus freeUniqueIso identifies the third top exterior sheaf over V with the unit, and exists_isFreeGenerator_of_iso supplies its free generator t. This includes s=0, and does not require a nonzero ring. Use the official local comparison and rewrite its conclusion to the legacy exterior constructions using lem-sc-exterior-sheaf-presheaf-upstream-comparison, lem-sc-exterior-sheaf-upstream-comparison. These are equalities of the actual presheaves and sheaves, so this transport changes no hypothesis or conclusion.",
+   "text": "Apply exteriorSheaf_local_free_comparison to the middle frame and the two outside frames. The second conclusions give bijectivity on every W inside V of the middle exterior unit and both outside exterior units. Apply the first conclusion only to C with degree s. The type of s-element subsets of Fin s is a singleton, since a subset with s elements is all of Fin s. Thus freeUniqueIso identifies the third top exterior sheaf over V with the unit, and exists_isFreeGenerator_of_iso supplies its free generator t. This includes s=0, and does not require a nonzero ring.",
    "uses": [
-    "lem-sc-exterior-sheaf-local-free-comparison",
-    "lem-sc-exterior-sheaf-presheaf-upstream-comparison",
-    "lem-sc-exterior-sheaf-upstream-comparison"
+    "lem-sc-exterior-sheaf-local-free-comparison"
    ],
    "elementary": false
   },
@@ -42,14 +40,12 @@
  "proof_deps": [
   "def-amb-finite-locally-free-module",
   "def-weil-pbc-free-module",
-  "lem-sc-exterior-sheaf-local-free-comparison",
-  "lem-sc-exterior-sheaf-presheaf-upstream-comparison",
-  "lem-sc-exterior-sheaf-upstream-comparison"
+  "lem-sc-exterior-sheaf-local-free-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "X2 stage-3 Lean proof, 2026-10-13: implements the common-chart, exterior-unit and free-generator tensor route. The tensor comparison needs a generator of the third top exterior sheaf only; no wedge generator of the first term is needed. All private helpers are proved. K5 retirement, 2026-10-20: retain the same proof and transport the official comparison along the proved exterior-construction equalities."
+  "place": "X2 stage-3 Lean proof, 2026-10-13: implements the common-chart, exterior-unit and free-generator tensor route. The tensor comparison needs a generator of the third top exterior sheaf only; no wedge generator of the first term is needed. All private helpers are proved. K5 retirement, 2026-10-20: retain the same proof and transport the official comparison along the proved exterior-construction equalities. V1 retirement, 2026-10-20: attach the same proved common-chart argument to the official upstream declaration, using canonical exteriorPower throughout. The consumer transports its conclusions through exteriorSheafPresheaf_eq_exteriorPower after unfolding the sheaf exteriorPower definition; no sheaf-level compatibility lemma is required."
  },
  "mathlib_searches": [
   {
@@ -117,14 +113,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitChartComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitChartComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitChartComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/DeterminantSplitChartComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_chart_comparison",
-  "statement": "theorem determinant_split_chart_comparison {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r s : ℕ)\n    [S.X₁.IsFiniteLocallyFreeOfRank r] [S.X₃.IsFiniteLocallyFreeOfRank s]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∀ (W : X.Opens), W ≤ V →\n        ∃ (a : Module.Basis (Fin r) (X.presheaf.obj (op W)) (S.X₁.val.obj (op W)))\n          (c : Module.Basis (Fin s) (X.presheaf.obj (op W)) (S.X₃.val.obj (op W)))\n          (eW : S.X₂.val.obj (op W) ≃ₗ[X.presheaf.obj (op W)]\n            (S.X₁.val.obj (op W) × S.X₃.val.obj (op W))),\n          (∀ z, eW (S.f.val.app (op W) z) = (z, 0)) ∧\n          (∀ z, (eW z).2 = S.g.val.app (op W) z) ∧\n          Function.Bijective\n            (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app\n              (exteriorSheafPresheaf S.X₂ (r + s))).app (op W)) ∧\n          Function.Bijective\n            ((tensorSectionsMap (exteriorSheaf S.X₁ r) (exteriorSheaf S.X₃ s) W).comp\n              (TensorProduct.map (R := X.presheaf.obj (op W))\n                (R₂ := X.presheaf.obj (op W)) (σ₁₂ := RingHom.id _)\n                (((PresheafOfModules.sheafificationAdjunction\n                  (𝟙 X.ringCatSheaf.obj)).unit.app\n                  (exteriorSheafPresheaf S.X₁ r)).app (op W)).hom\n                (((PresheafOfModules.sheafificationAdjunction\n                  (𝟙 X.ringCatSheaf.obj)).unit.app\n                  (exteriorSheafPresheaf S.X₃ s)).app (op W)).hom))",
+  "statement": "theorem determinant_split_chart_comparison {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r s : ℕ)\n    [S.X₁.IsFiniteLocallyFreeOfRank r] [S.X₃.IsFiniteLocallyFreeOfRank s]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∀ (W : X.Opens), W ≤ V →\n        ∃ (a : Module.Basis (Fin r) (X.presheaf.obj (op W)) (S.X₁.val.obj (op W)))\n          (c : Module.Basis (Fin s) (X.presheaf.obj (op W)) (S.X₃.val.obj (op W)))\n          (eW : S.X₂.val.obj (op W) ≃ₗ[X.presheaf.obj (op W)]\n            (S.X₁.val.obj (op W) × S.X₃.val.obj (op W))),\n          (∀ z, eW (S.f.val.app (op W) z) = (z, 0)) ∧\n          (∀ z, (eW z).2 = S.g.val.app (op W) z) ∧\n          Function.Bijective\n            (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app\n              ((S.X₂.val.exteriorPower (R := X.presheaf) (r + s)))).app (op W)) ∧\n          Function.Bijective\n            ((tensorSectionsMap (exteriorPower S.X₁ r) (exteriorPower S.X₃ s) W).comp\n              (TensorProduct.map (R := X.presheaf.obj (op W))\n                (R₂ := X.presheaf.obj (op W)) (σ₁₂ := RingHom.id _)\n                (((PresheafOfModules.sheafificationAdjunction\n                  (𝟙 X.ringCatSheaf.obj)).unit.app\n                  (S.X₁.val.exteriorPower (R := X.presheaf) r)).app (op W)).hom\n                (((PresheafOfModules.sheafificationAdjunction\n                  (𝟙 X.ringCatSheaf.obj)).unit.app\n                  (S.X₃.val.exteriorPower (R := X.presheaf) s)).app (op W)).hom))",
   "branch": "sheaf-dag",
-  "by": "Y3",
-  "date": "2026-10-13"
+  "by": "V1",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf duplicate; upstream gives the same comparison for canonical exterior powers. The only direct consumer is adapted using the proved presheaf equality, with its signature unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -139,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-5849a",
-  "group": "K5",
+  "reviewer": "C-fb998",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261020T144252-L-2260026",
+  "landing": "20261020T155631-L-3269315",
   "kind": "interface",
-  "note": "independent cc review: Retirement of the Sheaf twin against coord/retire-items.tsv:60; upstream WeilConjectures exteriorSheaf_local_free_comparison (sorry-free) plus two new proved equality lemmas; the 5 adapted direct importers diffed against live and compiled (all 8 modules exit 0); axioms clean; consumer nodes change only proof/proof_deps/proof_origin"
+  "note": "independent cc review: Retirement of the Sheaf twin (retire-items.tsv:274) against upstream WeilConjectures determinant_split_chart_comparison (statement identical to the node's lean.statement, sorry-free); the forced adaptation of DeterminantSplitLinearBijective is minimal with signatures unchanged; delivered modules plus the next importer DeterminantSplitComparison compile clean; axioms clean; node edits limited to proof/proof_deps/proof_origin and the lean block, covered by the change record"
  }
 }

@@ -15,9 +15,10 @@
  ],
  "proof": [
   {
-   "text": "Apply the common free-chart comparison to obtain outside section bases, the section splitting eW, and bijectivity of the middle exterior unit and outside tensor comparison. Transport the given d along these actual comparisons. Its formula transports to the algebraic wedge formula.",
+   "text": "Apply the common free-chart comparison to obtain outside section bases, the section splitting eW, and bijectivity of the middle exterior unit and outside tensor comparison. Transport the given d along these actual comparisons. Its formula transports to the algebraic wedge formula. Use the official upstream chart comparison. Its middle unit transports by exteriorSheafPresheaf_eq_exteriorPower. In the tensor comparison first unfold the sheaf exteriorPower definition, so both the tensor sheaves and the unit codomains are expressed as sheafifications of their presheaves. Rewrite both presheaves by the same equality to obtain exactly the legacy tensor comparison. The rest of the argument is unchanged.",
    "uses": [
-    "new-y3-determinant-split-chart-comparison"
+    "new-y3-determinant-split-chart-comparison",
+    "lem-sc-exterior-sheaf-presheaf-upstream-comparison"
    ],
    "elementary": false
   },
@@ -28,12 +29,13 @@
   }
  ],
  "proof_deps": [
-  "new-y3-determinant-split-chart-comparison"
+  "new-y3-determinant-split-chart-comparison",
+  "lem-sc-exterior-sheaf-presheaf-upstream-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Y3 stage-3 reduction: common-chart comparison followed by a proved triangular splitting from lifts of quotient basis vectors and a singleton exterior-basis comparison."
+  "place": "Y3 stage-3 reduction: common-chart comparison followed by a proved triangular splitting from lifts of quotient basis vectors and a singleton exterior-basis comparison. V1 retirement, 2026-10-20: replace the chart-comparison twin by the upstream theorem, transporting the comparison units and tensor codomains by the proved presheaf equality. All consumer signatures and the remaining proof are unchanged."
  },
  "mathlib_searches": [
   {
@@ -108,14 +110,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-75fec",
-  "group": "Y3",
+  "reviewer": "C-fb998",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261013T100230-L-2505776",
+  "landing": "20261020T155631-L-3269315",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proof routes with both DAG nodes, checked unchanged interfaces, chart-comparison edge cases, reports, clean compilation of both modules and both direct importers, and expected axioms."
+  "note": "independent cc review: Retirement of the Sheaf twin (retire-items.tsv:274) against upstream WeilConjectures determinant_split_chart_comparison (statement identical to the node's lean.statement, sorry-free); the forced adaptation of DeterminantSplitLinearBijective is minimal with signatures unchanged; delivered modules plus the next importer DeterminantSplitComparison compile clean; axioms clean; node edits limited to proof/proof_deps/proof_origin and the lean block, covered by the change record"
  },
  "lean_audit": {
   "master": {
