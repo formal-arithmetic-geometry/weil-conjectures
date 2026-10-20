@@ -18912,3 +18912,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:02 L: returned deliver/S3/Sheaf.CategoryTheory.FiniteFiltrationInduction (reviewer RETURN: (reviewer C-65938, head 6593810f0) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Finit)
 
 - 06:02 L: batch 20261020T211611 dependency take-out
+- 22:04 L: returned deliver/C4/Sheaf.CategoryTheory.FilteredCohomologyImageCycleMap (reviewer RETURN: (reviewer C-f460f, head f460ff075) Brief point 2 (no fitting letter in delivery-errors.md): importer Sheaf.CategoryTheor)
