@@ -2,126 +2,30 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Both $v_!$ and $v^*$ are additive exact functors on constant-$A$ module sheaves: use [lem-weil-pbc-etale-restriction-injectives] for sum extension and [prop-weil-pbc-inverse-image-modules-exact] for inverse image, including its identification with ringed-topos module pullback. By [lem-weil-pbc-exact-functor-derived-factorization], applying either functor degreewise represents its functor on the entire unbounded derived category and preserves quasi-isomorphisms. In particular the $v_!$ in this proof is sum extension, not a compactification-dependent candidate for compact supports.",
-   "uses": [
-    "lem-weil-pbc-etale-restriction-injectives",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek); derived.tex Tag 015F (lemma-right-derived-exact-functor)."
-   }
+   "text": "For canonical left derived pullback the oplax tensorator is leftDerivedUpperStarTensorIso.hom. The monoidal inverse identity therefore identifies its lax tensorator with leftDerivedUpperStarTensorIso.inv. Transport the monoidal structure through leftDerivedUpperStarIsoMapDerivedCategory. The formula for transport of the lax tensorator is exactly the composite defining etaleSumExtensionTensorPullbackIso, by the two whiskering formulas for derivedTensor.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Represent $B$ and $M$ by complexes and choose quasi-isomorphisms $P\\to B$ and $Q\\to M$ with $P,Q$ K-flat and with flat terms, by [lem-pc-kflat-resolution] on the two constant ringed sites. Here and below an arrow to a derived object abbreviates an arrow to its chosen complex representative. The preservation clause in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives that $v^*P$ is K-flat with flat terms; exactness in step 1 identifies its derived pullback with $v^*B$. By [lem-pur-etale-sum-flat-kflat], $v_!Q$ is also K-flat with flat terms. All hypotheses hold: $v$ is separated etale of finite type and the coefficient sheaves are constant; the cited results impose no boundedness or constructibility condition.",
+   "text": "Apply the existing source-library derived projection formula [lem-pur-source-etale-derived-projection] to coefficient category ModuleCat A. Projection invertibility is equivalent to invertibility of the internal-hom comparison of the monoidal right adjoint. Monoidal transport preserves that comparison, hence the projection for the exact termwise derived adjunction is invertible too, regardless of the choice of the adjunction on these fixed functors. Its component equals the specified adjoint transpose etaleSumExtensionTensorComparison.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-etale-sum-flat-kflat"
+    "lem-pur-source-etale-derived-projection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat); more-etale.tex Tag 0GKF (lemma-f-shriek-projection), with the existing sum-extension K-flat lemma."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $\\beta$ for signed tensor symmetry: in bidegree $(p,q)$ it sends $b\\otimes m$ to $(-1)^{pq}m\\otimes b$. From the differential of [def-pc-tensor-complex-sheaves], its two differential terms have signs $(-1)^{(p+1)q}$ and $(-1)^{p+p(q+1)}=(-1)^{pq}$, respectively, agreeing with the differential after symmetry; hence it is a chain isomorphism. Apply [lem-pur-etale-sum-tensor-totalization] to $(Q,P)$. The composite\n$$v_!\\operatorname{Tot}(v^*P\\otimes Q)\\xrightarrow{v_!\\beta}v_!\\operatorname{Tot}(Q\\otimes v^*P)\\xrightarrow{\\Psi_{Q,P}^{-1}}\\operatorname{Tot}(v_!Q\\otimes P)\\xrightarrow{\\beta}\\operatorname{Tot}(P\\otimes v_!Q)$$\nis a natural chain isomorphism $\\pi_{P,Q}$. The two symmetry signs are both $(-1)^{pq}$ and cancel. Consequently its inverse sends the lift-indexed generator $b\\otimes(s,m)$ to $(s,s^*b\\otimes m)$, with no sign. This follows directly from the component formula for $\\Psi$ in the cited statement. It uses direct-sum totalizations even in an unbounded total degree.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pur-etale-sum-tensor-totalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), pure-tensor construction; homology.tex Tag 012Z (definition-associated-simple-complex), signed tensor symmetry."
-   }
-  },
-  {
-   "text": "The model comparison in [lem-weil-pbc-site-derived-tensor-descent], together with step 2, identifies the two localizations in step 3 with $v_!(v^*B\\otimes_A^L M)$ and $B\\otimes_A^L v_!M$. This is the derived tensor of [def-kun-derived-tensor]. Thus $\\pi_{P,Q}$ represents the comparison specified in the item: its inverse is exactly the termwise sum-extension pure-tensor map, with the tensor factors in the stated order. Its naturality on homotopy categories is supplied by the totalization statement in step 3. To descend in both variables, use separately the equivalence from the localization of flat-term K-flat complexes to $D(T_{\\mathrm{et}},A)$ and to $D(V_{\\mathrm{et}},A)$ in [lem-weil-pbc-site-derived-tensor-descent]. For each fixed first variable, clause (2) of [lem-weil-pbc-localization-universal-property] descends the natural transformation in the second variable. Descend its naturality in the first variable by the same clause; uniqueness, clause (3), preserves these naturality equations. Apply the same process to $\\pi^{-1}$; the inverse equations descend by clause (3). This gives the specified natural isomorphism $P_{B,M}$, independently of resolutions, on the two entire derived categories.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-kun-derived-tensor",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 0G7D (lemma-factor-through-K-flat), 06YT, 06YU (definition-derived-tor); localization of the two resolving classes separately."
-   }
-  },
-  {
-   "text": "Here is the counit normalization needed for the equality. By [lem-weil-pbc-etale-inverse-image-restriction], an etale test object $(W,s)$ over $V$ identifies $(v^*H)(W,s)$ with $H(W)$; the comparison is $A$-linear because [prop-weil-pbc-inverse-image-modules-exact] transports the action through the constant-ring comparison. On the presheaf defining $v_!v^*H$ in [def-weil-pbc-etale-sum-extension], send the summand element $(s,h)$ to $h\\in H(W)$ and add over finitely supported summands. This is compatible with restrictions and $A$-linear, so factors uniquely through sheafification [def-weil-pbc-sheafification]. This fold is the counit: maps from the sum presheaf to $H$ are precisely restriction-compatible families of maps into $H(W)$, hence maps into $v^*H$; the displayed fold corresponds to $1_{v^*H}$. This identifies the adjunction of [lem-weil-pbc-etale-restriction-injectives]. By [lem-weil-pbc-termwise-adjunction-homotopy] its complex counit is degreewise this fold, and [lem-weil-pbc-localization-universal-property] descends it with its triangle identities. It is therefore the fold counit $\\epsilon$ of the termwise adjunction in the item.",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-etale-sum-extension",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S3 (definition-extension-zero), the restriction description and equation-j-p-shriek immediately following it; termwise fold-counit calculation."
-   }
-  },
-  {
-   "text": "Choose flat-term K-flat representatives $P,R$ of $B,C$ as in step 2. By [lem-pur-kflat-total-tensor-model], $\\operatorname{Tot}(P\\otimes R)$ is itself flat-term K-flat. The current statement of [lem-pur-cochain-pullback-tensor-coherence] includes the ordinary comparison, its pure-tensor formula and inverse, together with coefficient-change and quotient-transition equations; the ordinary clause gives the chain map sending $s^*b\\otimes s^*c$ to $s^*(b\\otimes c)$. On these K-flat models it represents the canonical $\\theta$ of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. We check the required identity before localization, after precomposing with $\\pi_{P,v^*R}^{-1}$. On the $(p,q)$ summand, take $b\\in P^p(W)$ and $c\\in R^q(W)$ in the summand indexed by a lift $s:W\\to V$. By steps 3 and 5, the left composite sends $b\\otimes(s,c)$ to $b\\otimes c$. The right composite sends it successively to $(s,s^*b\\otimes s^*c)$, then to $(s,s^*(b\\otimes c))$ under $v_!\\theta$, and finally to $b\\otimes c$ under the fold. There are no signs: no tensor factors are permuted in these composites. Equality on these generators gives equality of sheaf maps by the tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] and the uniqueness in [def-weil-pbc-sheafification]. Equality on every summand gives equality in each total degree; the direct-sum compatibility in [lem-pur-etale-sum-tensor-totalization] identifies those degree maps with the displayed complex composites. Since $\\pi^{-1}$ is invertible, this proves the desired equality of chain maps on these representatives.",
-   "uses": [
-    "lem-pur-kflat-total-tensor-model",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "def-weil-pbc-sheafification",
-    "lem-pur-etale-sum-tensor-totalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF, tensor generators; sites-cohomology.tex Tags 07A2 (lemma-tensor-product-K-flat), 07A4 (lemma-pullback-tensor-product), final displayed complex comparison; agent fold-counit computation."
-   }
-  },
-  {
-   "text": "Localize the equality of step 6. Steps 4 and 5 identify its terms with $P_{B,v^*C}$ and the specified derived counits, while the pullback comparison in step 6 is the canonical $\\theta_{B,C}$. Therefore it reads\n$$(1_B\\otimes\\epsilon_C)\\circ P_{B,v^*C}=\\epsilon_{B\\otimes_A^LC}\\circ v_!(\\theta_{B,C}).$$\nEvery $B,C$ has the flat-term K-flat representatives used above by [lem-pc-kflat-resolution]. The bifunctorial descent and detection clause of [lem-weil-pbc-site-derived-tensor-descent] makes this equality independent of representatives and valid for arbitrary derived morphisms. No boundedness or finite Tor amplitude was used, so both the isomorphism and its counit compatibility hold for all unbounded $B,M,C$.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 0G7D, 06YT, 06YU; descent of the explicit fold identity from K-flat models."
-   }
+   "text": "Expand the transpose as sum extension of tensor of the unit followed by the tensorator, then counit. Counit naturality moves tensor of the counit inside sum extension. Tensorator naturality and the right triangle identity cancel unit followed by pulled-back counit, leaving sum extension of the tensorator followed by counit at the tensor product. This proves the exact displayed fold-counit equation for arbitrary unbounded objects. The Lean calculation is performed over an abstract coefficient category before specializing to ModuleCat A, avoiding expansion of concrete derived functor data.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-kun-derived-tensor",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-pbc-sheafification",
-  "lem-pc-kflat-resolution",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-pur-etale-sum-flat-kflat",
-  "lem-pur-etale-sum-tensor-totalization",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-pur-source-etale-derived-projection"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GKF (lemma-f-shriek-projection), expanded to direct-sum totalizations and K-flat derived models using existing DAG lemmas; fold-counit identity proved explicitly."
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Perfect/SitePerfect.lean",
+  "place": "Existing proved etale derived projection formula, combined with monoidal transport, projection/internal-hom conjugacy, counit naturality, and the adjunction triangle identity."
  },
  "mathlib_match": null,
  "status": "split",
@@ -289,21 +193,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-pur-etale-sum-flat-kflat",
-  "lem-pur-etale-sum-tensor-totalization",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-exact-functor-derived-factorization"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -334,5 +224,15 @@
    "AlgebraicGeometry.Etale.etaleSumExtensionTensorComparison",
    "AlgebraicGeometry.Etale.isIso_etaleSumExtensionTensorComparison"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261020T051405-L-1663897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

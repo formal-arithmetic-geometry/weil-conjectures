@@ -9,34 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.Algebra.Homology.KFlatTotalTensorModel
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Paper.EtaleSumTensorTotalization
-import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
+import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 
 /-!
 # Tensor compatibility for étale sum extension
@@ -48,12 +21,16 @@ thm-asd-smooth-tensor.md, proof paragraph 3 (blueprint: lem-asd-etale-sum-extens
 @[expose] public section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency true
 
-universe u
+universe u u'
 
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry.Etale
+
+-- Prefer the direct sheaf-colimit construction when elaborating the derived adjunction.
+attribute [local instance 2000] Sheaf.instHasColimitsOfShape
 
 /-- The canonical tensor comparison for exact, termwise derived inverse image. Transport
 `leftDerivedUpperStarTensorIso` through `leftDerivedUpperStarIsoMapDerivedCategory` in both
@@ -99,91 +76,181 @@ noncomputable def etaleSumExtensionTensorComparison
       (etaleSumExtensionTensorPullbackIso A v B
         ((etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory.obj M)).hom)
 
+-- Projection invertibility is invariant under monoidal transport of the right adjoint.
+private theorem isIso_projectionMap_transport
+    {C D : Type*} [Category C] [Category D]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalClosed C] [MonoidalClosed D]
+    {F G : C ⥤ D} [F.Monoidal] (e : F ≅ G) {L : D ⥤ C}
+    (adjF : L ⊣ F) (adjG : L ⊣ G) (B : C)
+    [IsIso (Functor.Monoidal.projectionMap adjF B)] :
+    letI := Functor.Monoidal.transport e
+    IsIso (Functor.Monoidal.projectionMap adjG B) := by
+  let := Functor.Monoidal.transport e
+  have : NatTrans.IsMonoidal e.hom := Functor.Monoidal.natTransIsMonoidal_of_transport e
+  have : NatTrans.IsMonoidal e.symm.hom :=
+    inferInstanceAs (NatTrans.IsMonoidal e.inv)
+  have := Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap adjF B
+  have := Functor.LaxMonoidal.isIso_ihomComparison_of_iso e.symm B
+  exact Functor.Monoidal.isIso_projectionMap_of_isIso_ihomComparison adjG B
+
+-- The lax tensorator is the inverse of the specified oplax tensor comparison.
+private theorem leftDerivedUpperStar_mu_eq
+    (D : Type u') [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
+    [SymmetricCategory D] [MonoidalClosed D] [Abelian.HasFunctorialFlatResolution D]
+    {V T : Scheme.{u}} (v : V ⟶ T) [(upperStar D v).PreservesFlat]
+    (K N : _root_.DerivedCategory (Sheaf T.smallEtaleTopology D)) :
+    let _ := leftDerivedUpperStarMonoidal D v
+    Functor.LaxMonoidal.μ (upperStar D v).leftDerivedFunctor K N =
+      (leftDerivedUpperStarTensorIso D v K N).inv := by
+  let := leftDerivedUpperStarMonoidal D v
+  apply (cancel_mono (leftDerivedUpperStarTensorIso D v K N).hom).1
+  rw [Iso.inv_hom_id]
+  exact Functor.Monoidal.μ_δ (upperStar D v).leftDerivedFunctor K N
+
+private theorem exactUpperStar_mu_eq
+    (D : Type u') [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
+    [SymmetricCategory D] [MonoidalClosed D] [Abelian.HasFunctorialFlatResolution D]
+    {V T : Scheme.{u}} (v : V ⟶ T) [(upperStar D v).PreservesFlat]
+    (K N : _root_.DerivedCategory (Sheaf T.smallEtaleTopology D)) :
+    let _ := leftDerivedUpperStarMonoidal D v
+    let e := leftDerivedUpperStarIsoMapDerivedCategory D v
+    let _ := Functor.Monoidal.transport e
+    Functor.LaxMonoidal.μ (upperStar D v).mapDerivedCategory K N =
+      (((derivedTensor D V).mapIso (e.app K).symm).app
+          ((upperStar D v).mapDerivedCategory.obj N) ≪≫
+        ((derivedTensor D V).obj _).mapIso (e.app N).symm ≪≫
+        (leftDerivedUpperStarTensorIso D v K N).symm ≪≫ e.app _).hom := by
+  let := leftDerivedUpperStarMonoidal D v
+  have hLμ := leftDerivedUpperStar_mu_eq D v
+  let e := leftDerivedUpperStarIsoMapDerivedCategory D v
+  let := Functor.Monoidal.transport e
+  dsimp only
+  rw [Functor.Monoidal.transport_μ, hLμ]
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom,
+    derivedTensor_map_app, derivedTensor_obj_map, MonoidalCategory.tensorHom_def, Category.assoc]
+  rfl
+
+-- Keep exact functors and adjunctions folded during the transport calculation.
+attribute [local irreducible] Functor.mapDerivedCategory Adjunction.mapDerivedCategoryAdjunction
+    leftDerivedUpperStarIsoMapDerivedCategory etaleLowerShriek upperStar
+
+private theorem exactUpperStar_projection
+    (D : Type u') [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
+    [SymmetricCategory D] [MonoidalClosed D] [Abelian.HasFunctorialFlatResolution D]
+    [HasSmallSiteSheafify D]
+    {V T : Scheme.{u}} (v : V ⟶ T) [Etale v] [(upperStar D v).PreservesFlat]
+    [∀ N : D, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft N)]
+    [(V.smallEtaleTopology.W (A := D)).IsMonoidal]
+    [(T.smallEtaleTopology.W (A := D)).IsMonoidal]
+    (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology D)) :
+    let _ := leftDerivedUpperStarMonoidal D v
+    let e := leftDerivedUpperStarIsoMapDerivedCategory D v
+    let _ := Functor.Monoidal.transport e
+    IsIso (Functor.Monoidal.projectionMap
+      ((etaleLowerShriekUpperStarAdjunction D v inferInstance).mapDerivedCategoryAdjunction)
+      K) := by
+  let := leftDerivedUpperStarMonoidal D v
+  have := isIso_projectionMap_derivedEtaleLowerShriek (A := D) v K
+  exact isIso_projectionMap_transport (leftDerivedUpperStarIsoMapDerivedCategory D v)
+    (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction (A := D) v)
+    ((etaleLowerShriekUpperStarAdjunction D v inferInstance).mapDerivedCategoryAdjunction) K
+
+private theorem projection_formula
+    {C D : Type*} [Category C] [Category D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    {G : C ⥤ D} [G.Monoidal] {L : D ⥤ C} (adj : L ⊣ G)
+    (θ : ∀ X Y : C, G.obj X ⊗ G.obj Y ≅ G.obj (X ⊗ Y))
+    (hθ : ∀ X Y, Functor.LaxMonoidal.μ G X Y = (θ X Y).hom)
+    (B : C) (M : D) [IsIso (Functor.Monoidal.projectionMap adj B)] :
+    IsIso ((adj.homEquiv _ _).symm
+      (G.obj B ◁ adj.unit.app M ≫ (θ B (L.obj M)).hom)) ∧
+    ∀ N : C,
+      (adj.homEquiv _ _).symm
+          (G.obj B ◁ adj.unit.app (G.obj N) ≫ (θ B (L.obj (G.obj N))).hom) ≫
+          B ◁ adj.counit.app N =
+        L.map (θ B N).hom ≫ adj.counit.app (B ⊗ N) := by
+  have he (P : D) : (adj.homEquiv _ _).symm
+      (G.obj B ◁ adj.unit.app P ≫ (θ B (L.obj P)).hom) =
+      (Functor.Monoidal.projectionMap adj B).app P := by
+    simp only [Adjunction.homEquiv_counit, Functor.Monoidal.projectionMap, hθ]
+  constructor
+  · rw [he]
+    infer_instance
+  · intro N
+    rw [he, ← hθ]
+    simp only [Functor.Monoidal.projectionMap, Category.assoc]
+    rw [← adj.counit_naturality, ← Functor.map_comp_assoc]
+    congr 1
+    rw [Category.assoc, ← Functor.LaxMonoidal.μ_natural_right,
+      ← MonoidalCategory.whiskerLeft_comp_assoc, adj.right_triangle_components,
+      MonoidalCategory.whiskerLeft_id, Category.id_comp]
+    rfl
+
+-- Calculate over an abstract coefficient category before specializing to modules.
+private theorem exactUpperStar_formula
+    (D : Type u') [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
+    [SymmetricCategory D] [MonoidalClosed D] [Abelian.HasFunctorialFlatResolution D]
+    [HasSmallSiteSheafify D]
+    {V T : Scheme.{u}} (v : V ⟶ T) [Etale v] [(upperStar D v).PreservesFlat]
+    [∀ N : D, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft N)]
+    [(V.smallEtaleTopology.W (A := D)).IsMonoidal]
+    [(T.smallEtaleTopology.W (A := D)).IsMonoidal]
+    (B : _root_.DerivedCategory (Sheaf T.smallEtaleTopology D))
+    (M : _root_.DerivedCategory (Sheaf V.smallEtaleTopology D)) :
+    let e := leftDerivedUpperStarIsoMapDerivedCategory D v
+    let θ := fun K N ↦
+      ((derivedTensor D V).mapIso (e.app K).symm).app
+          ((upperStar D v).mapDerivedCategory.obj N) ≪≫
+        ((derivedTensor D V).obj _).mapIso (e.app N).symm ≪≫
+        (leftDerivedUpperStarTensorIso D v K N).symm ≪≫ e.app _
+    let adj := (etaleLowerShriekUpperStarAdjunction D v inferInstance).mapDerivedCategoryAdjunction
+    IsIso ((adj.homEquiv _ _).symm
+      (((derivedTensor D V).obj ((upperStar D v).mapDerivedCategory.obj B)).map
+        (adj.unit.app M) ≫
+        (θ B ((etaleLowerShriek D v inferInstance).mapDerivedCategory.obj M)).hom)) ∧
+    ∀ N : _root_.DerivedCategory (Sheaf T.smallEtaleTopology D),
+      (adj.homEquiv _ _).symm
+        (((derivedTensor D V).obj ((upperStar D v).mapDerivedCategory.obj B)).map
+          (adj.unit.app ((upperStar D v).mapDerivedCategory.obj N)) ≫
+          (θ B ((etaleLowerShriek D v inferInstance).mapDerivedCategory.obj
+            ((upperStar D v).mapDerivedCategory.obj N))).hom) ≫
+        ((derivedTensor D T).obj B).map (adj.counit.app N) =
+      (etaleLowerShriek D v inferInstance).mapDerivedCategory.map (θ B N).hom ≫
+        adj.counit.app (((derivedTensor D T).obj B).obj N) := by
+  let := leftDerivedUpperStarMonoidal D v
+  let e := leftDerivedUpperStarIsoMapDerivedCategory D v
+  let := Functor.Monoidal.transport e
+  have hp := exactUpperStar_projection D v B
+  have hμ := exactUpperStar_mu_eq D v
+  exact projection_formula
+    ((etaleLowerShriekUpperStarAdjunction D v inferInstance).mapDerivedCategoryAdjunction)
+    _ hμ B M
+
 /-- Sum extension commutes with arbitrary unbounded derived tensor products, compatibly
 with the fold counit. Source: blueprint thm-asd-smooth-tensor, proof paragraph 3;
 Stacks Tag 0GKF (blueprint: lem-asd-etale-sum-extension-tensor).
 
 Proof:
-1. Both $v_!$ and $v^*$ are additive exact functors on constant-$A$ module sheaves: use
-[lem-weil-pbc-etale-restriction-injectives] for sum extension and
-[prop-weil-pbc-inverse-image-modules-exact] for inverse image, including its identification with
-ringed-topos module pullback. By [lem-weil-pbc-exact-functor-derived-factorization], applying
-either functor degreewise represents its functor on the entire unbounded derived category and
-preserves quasi-isomorphisms. In particular the $v_!$ in this proof is sum extension, not a
-compactification-dependent candidate for compact supports.
-2. Represent $B$ and $M$ by complexes and choose quasi-isomorphisms $P\to B$ and $Q\to M$ with
-$P,Q$ K-flat and with flat terms, by [lem-pc-kflat-resolution] on the two constant ringed sites.
-Here and below an arrow to a derived object abbreviates an arrow to its chosen complex
-representative. The preservation clause in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]
-gives that $v^*P$ is K-flat with flat terms; exactness in step 1 identifies its derived pullback
-with $v^*B$. By [lem-pur-etale-sum-flat-kflat], $v_!Q$ is also K-flat with flat terms. All
-hypotheses hold: $v$ is separated etale of finite type and the coefficient sheaves are constant;
-the cited results impose no boundedness or constructibility condition.
-3. Write $\beta$ for signed tensor symmetry: in bidegree $(p,q)$ it sends $b\otimes m$ to
-$(-1)^{pq}m\otimes b$. From the differential of [def-pc-tensor-complex-sheaves], its two
-differential terms have signs $(-1)^{(p+1)q}$ and $(-1)^{p+p(q+1)}=(-1)^{pq}$, respectively,
-agreeing with the differential after symmetry; hence it is a chain isomorphism. Apply
-[lem-pur-etale-sum-tensor-totalization] to $(Q,P)$. The composite
-$$v_!\operatorname{Tot}(v^*P\otimes Q)\xrightarrow{v_!\beta}v_!\operatorname{Tot}(Q\otimes
-v^*P)\xrightarrow{\Psi_{Q,P}^{-1}}\operatorname{Tot}(v_!Q\otimes
-P)\xrightarrow{\beta}\operatorname{Tot}(P\otimes v_!Q)$$ is a natural chain isomorphism
-$\pi_{P,Q}$. The two symmetry signs are both $(-1)^{pq}$ and cancel. Consequently its inverse
-sends the lift-indexed generator $b\otimes(s,m)$ to $(s,s^*b\otimes m)$, with no sign. This
-follows directly from the component formula for $\Psi$ in the cited statement. It uses direct-sum
-totalizations even in an unbounded total degree.
-4. The model comparison in [lem-weil-pbc-site-derived-tensor-descent], together with step 2,
-identifies the two localizations in step 3 with $v_!(v^*B\otimes_A^L M)$ and $B\otimes_A^L v_!M$.
-This is the derived tensor of [def-kun-derived-tensor]. Thus $\pi_{P,Q}$ represents the comparison
-specified in the item: its inverse is exactly the termwise sum-extension pure-tensor map, with the
-tensor factors in the stated order. Its naturality on homotopy categories is supplied by the
-totalization statement in step 3. To descend in both variables, use separately the equivalence
-from the localization of flat-term K-flat complexes to $D(T_{\mathrm{et}},A)$ and to
-$D(V_{\mathrm{et}},A)$ in [lem-weil-pbc-site-derived-tensor-descent]. For each fixed first
-variable, clause (2) of [lem-weil-pbc-localization-universal-property] descends the natural
-transformation in the second variable. Descend its naturality in the first variable by the same
-clause; uniqueness, clause (3), preserves these naturality equations. Apply the same process to
-$\pi^{-1}$; the inverse equations descend by clause (3). This gives the specified natural
-isomorphism $P_{B,M}$, independently of resolutions, on the two entire derived categories.
-5. Here is the counit normalization needed for the equality. By
-[lem-weil-pbc-etale-inverse-image-restriction], an etale test object $(W,s)$ over $V$ identifies
-$(v^*H)(W,s)$ with $H(W)$; the comparison is $A$-linear because
-[prop-weil-pbc-inverse-image-modules-exact] transports the action through the constant-ring
-comparison. On the presheaf defining $v_!v^*H$ in [def-weil-pbc-etale-sum-extension], send the
-summand element $(s,h)$ to $h\in H(W)$ and add over finitely supported summands. This is
-compatible with restrictions and $A$-linear, so factors uniquely through sheafification
-[def-weil-pbc-sheafification]. This fold is the counit: maps from the sum presheaf to $H$ are
-precisely restriction-compatible families of maps into $H(W)$, hence maps into $v^*H$; the
-displayed fold corresponds to $1_{v^*H}$. This identifies the adjunction of
-[lem-weil-pbc-etale-restriction-injectives]. By [lem-weil-pbc-termwise-adjunction-homotopy] its
-complex counit is degreewise this fold, and [lem-weil-pbc-localization-universal-property]
-descends it with its triangle identities. It is therefore the fold counit $\epsilon$ of the
-termwise adjunction in the item.
-6. Choose flat-term K-flat representatives $P,R$ of $B,C$ as in step 2. By
-[lem-pur-kflat-total-tensor-model], $\operatorname{Tot}(P\otimes R)$ is itself flat-term K-flat.
-The current statement of [lem-pur-cochain-pullback-tensor-coherence] includes the ordinary
-comparison, its pure-tensor formula and inverse, together with coefficient-change and
-quotient-transition equations; the ordinary clause gives the chain map sending $s^*b\otimes s^*c$
-to $s^*(b\otimes c)$. On these K-flat models it represents the canonical $\theta$ of
-[lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. We check the required identity before
-localization, after precomposing with $\pi_{P,v^*R}^{-1}$. On the $(p,q)$ summand, take $b\in
-P^p(W)$ and $c\in R^q(W)$ in the summand indexed by a lift $s:W\to V$. By steps 3 and 5, the left
-composite sends $b\otimes(s,c)$ to $b\otimes c$. The right composite sends it successively to
-$(s,s^*b\otimes s^*c)$, then to $(s,s^*(b\otimes c))$ under $v_!\theta$, and finally to $b\otimes
-c$ under the fold. There are no signs: no tensor factors are permuted in these composites.
-Equality on these generators gives equality of sheaf maps by the tensor universal property
-[lem-pc-sites-sheaf-tensor-bilinear-universal] and the uniqueness in
-[def-weil-pbc-sheafification]. Equality on every summand gives equality in each total degree; the
-direct-sum compatibility in [lem-pur-etale-sum-tensor-totalization] identifies those degree maps
-with the displayed complex composites. Since $\pi^{-1}$ is invertible, this proves the desired
-equality of chain maps on these representatives.
-7. Localize the equality of step 6. Steps 4 and 5 identify its terms with $P_{B,v^*C}$ and the
-specified derived counits, while the pullback comparison in step 6 is the canonical
-$\theta_{B,C}$. Therefore it reads $$(1_B\otimes\epsilon_C)\circ
-P_{B,v^*C}=\epsilon_{B\otimes_A^LC}\circ v_!(\theta_{B,C}).$$ Every $B,C$ has the flat-term K-flat
-representatives used above by [lem-pc-kflat-resolution]. The bifunctorial descent and detection
-clause of [lem-weil-pbc-site-derived-tensor-descent] makes this equality independent of
-representatives and valid for arbitrary derived morphisms. No boundedness or finite Tor amplitude
-was used, so both the isomorphism and its counit compatibility hold for all unbounded $B,M,C$.
+1. Equip left derived pullback with `leftDerivedUpperStarMonoidal`, whose oplax tensorator
+is `leftDerivedUpperStarTensorIso.hom`. The monoidal inverse identity identifies its lax
+tensorator with `leftDerivedUpperStarTensorIso.inv`.
+2. Transport this monoidal structure along `leftDerivedUpperStarIsoMapDerivedCategory`.
+The transport formula for the lax tensorator is exactly
+`etaleSumExtensionTensorPullbackIso.hom`, by the two whiskering formulas for `derivedTensor`.
+3. The source library's `isIso_projectionMap_derivedEtaleLowerShriek` proves the projection
+formula for sum extension adjoint to left derived pullback. Projection invertibility is
+equivalent to invertibility of the right adjoint's internal-hom comparison. That comparison
+is preserved by a monoidal natural isomorphism, so the projection map for the exact termwise
+derived adjunction is invertible as well. Its component is the specified adjoint transpose.
+4. Expand that transpose. Naturality of the counit moves `1 ⊗ counit` inside sum extension;
+naturality of the tensorator then combines the unit with pulled-back counit. The right
+triangle identity cancels these maps, leaving exactly sum extension of the tensorator
+followed by the counit at the tensor product. This is the required fold-counit identity.
+All calculations apply to arbitrary objects of the unbounded derived categories.
 -/
 theorem isIso_etaleSumExtensionTensorComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -203,6 +270,6 @@ theorem isIso_etaleSumExtensionTensorComparison
             ((etaleLowerShriekUpperStarAdjunction
               (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategoryAdjunction).counit.app
               (((derivedTensor (ModuleCat.{u + 1} A) T).obj B).obj C) := by
-  sorry
+  exact exactUpperStar_formula (ModuleCat.{u + 1} A) v B M
 
 end AlgebraicGeometry.Etale
