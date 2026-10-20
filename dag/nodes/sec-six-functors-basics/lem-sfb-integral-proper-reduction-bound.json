@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-integral-proper-reduction-bound",
+ "kind": "statement",
+ "title": "Proper torsion bound for positive reductions of integral image",
+ "statement": "With the standing setting and coefficients of [sk-def-sfb-dc-setting], use bounded constant-model constructibility [sk-def-sfb-constructible], ordinary internal module derived pushforward [sk-def-sfb-module-derived-pushpull], and positive integral reduction levels [sk-def-pe-derived-completion]. Let p:X→Y be proper and let d≥0 bound the dimension of the fibre over an algebraic closure of each residue field of Y. If K is integral bounded constructible and K∈D^{≤b}, then for every n≥0, integralLevel_n Rp_*K∈D^{≤b+2d}. This statement neither reconstructs K from its reductions nor asserts an integral-image bound.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (1), finite torsion bound before derived inverse limit"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof": [
+  {
+   "text": "Take the classical finite R-module model L of the reduction and its ordinary direct-image comparison. The derived extension/restriction adjunction and exact restriction show right t-exactness of reduction by orthogonality. The faithful exact realization reflects the resulting upper bound b to L.",
+   "uses": [
+    "lem-sfb-integral-proper-reduction-model",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every finite R-module sheaf is torsion after forgetting coefficients. At each algebraic-closure point use exactly the supplied geometric-fibre dimension bound. Proper base change, exact inverse image, the torsion cohomology bound over the algebraic closure, and joint conservativity show vanishing of higher direct images above 2d. Forgetting the module structure reflects zero and commutes with the higher images.",
+   "uses": [
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite cohomological-dimension amplitude theorem to etale R-module direct image, obtaining Rp_*L∈D^{≤b+2d}. Exact forgetting and comparison inverse image preserve this bound. Transfer through the model isomorphism and reflect vanishing through the faithful exact internal-module forgetful functor.",
+   "uses": [
+    "lem-etale-derived-functor-upper-amplitude",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-proper-reduction-model",
+  "sk-def-pe-derived-completion",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-etale-derived-functor-upper-amplitude",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (1), finite torsion bound before derived inverse limit; categorical comparisons and amplitude glue formalized by F5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite quotient reduction of a constructible integral pro-etale complex has an etale model, and reduction commutes with proper derived direct image",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.Etale.comp; Algebra.IsEtaleAt.comp; StandardEtalePair.instFormallyEtaleRing; Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-19",
+   "verdict": "No matching geometric finite-reduction comparison in Mathlib. Use the existing library comparison and derived-functor APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Cc]omparison|[Rr]eduction.*[Dd]irect",
+   "results": "Mathlib/Computability/TuringMachine/PostTuringMachine.lean; Mathlib/CategoryTheory/Abelian/Basic.lean; Mathlib/CategoryTheory/Abelian/Basic.lean; Mathlib/CategoryTheory/Abelian/Basic.lean",
+   "date": "2026-10-19",
+   "verdict": "No matching geometric finite-reduction comparison in Mathlib. Use the existing library comparison and derived-functor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isLE_rightDerivedFunctor_obj",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.isLE_rightDerivedFunctor_obj'",
+   "date": "2026-10-19",
+   "verdict": "No matching geometric finite-reduction comparison in Mathlib. Use the existing library comparison and derived-functor APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient classical models of constructible integral complexes commute with proper derived direct image and preserve cohomological bounds",
+   "results": "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.instIsProperOfIsFinite; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; HomologicalComplex.instHasLimit; HomologicalComplex.instHasFiniteLimits; CategoryTheory.Functor.preservesHomologyOfExact; CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor",
+   "date": "2026-10-19",
+   "verdict": "No matching geometric finite-reduction comparison in Mathlib. Use the existing library comparison and derived-functor APIs."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProperDirectSums",
+  "date": "2026-10-19",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-compactness-direct-sums",
+   "place": "Proof (1), finite torsion bound before derived inverse limit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-compactness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProperReductionBound",
+  "file": "lean/Sheaf/Paper/IntegralProperReductionBound.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralProperReductionBound",
+  "statement": "theorem integralProperReductionBound\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]\n    [QuasiCompact (Y ↘ Spec (.of k))]\n    (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (d : ℕ)\n    (hd : ∀ y : Y, topologicalKrullDim\n      (pullback p (Spec.map (CommRingCat.ofHom\n        (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫\n          Y.fromSpecResidueField y) : Scheme.{u}) ≤ (d : WithBot ℕ∞))\n    (K : DerivedCategory (AdicCompletion.Modules l E X))\n    (hK : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K)\n    (b : ℤ) (hb : K.IsLE b) (n : ℕ) :\n    (AdicCompletion.integralLevel l E Y\n      ((CondensedRing.moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) p).obj K)\n      n).IsLE (b + 2 * (d : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261020T051239-L-1607821",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261020T051239-L-1607821",
+  "kind": "interface"
+ }
+}

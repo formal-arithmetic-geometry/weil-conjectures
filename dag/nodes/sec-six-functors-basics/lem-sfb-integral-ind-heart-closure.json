@@ -1,0 +1,171 @@
+{
+ "id": "lem-sfb-integral-ind-heart-closure",
+ "kind": "statement",
+ "title": "Weak Serre and coproduct closure of integral ind-constructible modules",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite intermediate extension in the fixed algebraic closure [def-weil-l-adic-coefficient-extension], and $k$ a field of characteristic $p_0>0$ with $p_0\\ne\\ell$. Let $X$ be a separated finite-type $k$-scheme [sk-def-sfb-dc-setting]. Write $\\Lambda=\\underline{\\mathcal O_E}$ for the continuous condensed ring of integers, $\\Lambda_X$ for its pullback to $X_{\\mathrm{pro\\acute et}}$, and $\\mathcal A_X=\\operatorname{Mod}_{\\Lambda_X}$ for its internal module category [sk-def-sfb-condensed-ring] [sk-def-sfb-pulled-back-coefficients] [sk-def-sfb-module-objects]. Let $H_X$ be the finite constant-model constructible predicate and $B_X$ the bounded constructible predicate in $D(\\mathcal A_X)$ [sk-def-sfb-constructible] [sk-def-sfb-derived-categories]. Define $\\operatorname{IndCons}_X=H_X.\\mathrm{ind}$ using small filtered diagrams in the hom universe, and $\\operatorname{Dic}_X=\\{K\\mid \\forall n\\in\\mathbf Z,\\ H^n(K)\\in\\operatorname{IndCons}_X\\}$ [def-weil-size-convention]. Then $\\operatorname{IndCons}_X$ contains zero, is closed under ambient kernels and cokernels of morphisms between its objects and under extensions, and is closed under every ambient coproduct indexed in the hom universe, including the empty coproduct.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (2)-(3), the structural part of the cited integral compactness assertion (2); compactness proof (1)-(2), without its higher Ext bound"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-size-convention",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Use integral constant-model constructible closure for kernels, cokernels and extensions. The zero scalar module on the identity cover and one-stratum stratification gives a constructible zero. Finite type over k makes X Noetherian.",
+   "uses": [
+    "lem-sfb-integral-constant-model-heart-closure",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integral Ext/Hom continuity to degree-zero inputs, using the fully faithful single functor and the zero shift to deduce finite presentability of each constructible module. Essential smallness of finite stratified models and the canonical filtered presentation then give the common presentation of arrows. Apply the coefficient-independent kernel/cokernel argument to those presentations and exact ambient filtered colimits. For extensions, use integral degree-one continuity and the general finitely-presentable extension descent argument: descend the extension class to a constructible kernel stage, push out, and take the filtered colimit.",
+   "uses": [
+    "det-lem-int-ext-continuity",
+    "det-ind-heart-full-faithfulness",
+    "det-ind-heart-canonical-presentation",
+    "det-ind-heart-kernels-cokernels",
+    "det-ind-heart-extensions",
+    "det-lem-coefficient-heart-small",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-weil-pbc-pushout-short-exact-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite sums are constructible by split extensions. An arbitrary sum is the filtered colimit of its finite partial sums. Flatten the filtered constructible presentations using finite tuples of presentation stages. Its cocones are exactly families of maps from the original summands. The zero model handles the empty family.",
+   "uses": [
+    "lem-sfb-ind-filtered-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-constant-model-heart-closure",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "det-lem-int-ext-continuity",
+  "det-ind-heart-full-faithfulness",
+  "det-ind-heart-canonical-presentation",
+  "det-ind-heart-kernels-cokernels",
+  "det-ind-heart-extensions",
+  "det-lem-coefficient-heart-small",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-sfb-ind-filtered-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (2)-(3), the structural part of the cited integral compactness assertion (2); compactness proof (1)-(2), without its higher Ext bound; categorical glue formalized by F5; completed integral continuity, canonical presentations, Serre closure and finite-subsum argument in Lean by F5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor with finite cohomological dimension preserves coproducts on unbounded complexes",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*[Cc]oproduct|[Cc]oproduct.*preserves",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Monoidal.lean; Mathlib/CategoryTheory/GradedObject/Monoidal.lean; Mathlib/CategoryTheory/Distributive/Monoidal.lean; Mathlib/CategoryTheory/Distributive/Monoidal.lean; Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper integral adic direct image cohomology upper bound 2d+1 and constructibility",
+   "results": "PrimeSpectrum.ConstructibleSetData.degBound; AdicCompletion; AdicCompletion.of_injective_iff; IsAdicComplete.casesOn; IsDedekindDomain.HeightOneSpectrum.intAdicAbv; IsDedekindDomain.HeightOneSpectrum.isNonarchimedean_adicAbv; IsAdicComplete.recOn; IsDedekindDomain.HeightOneSpectrum.isNonarchimedean_intAdicAbv",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complexes with ind constructible cohomology closed under coproducts and truncations contain the localizing closure of bounded constructible complexes",
+   "results": "DerivedCategory.TStructure.t; DerivedCategory.IsGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.IsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyProperty_truncLE|homologyProperty_isTriangulated|preservesColimitsOfShape_homologyFunctor",
+   "results": "No matches",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind constructible cohomology closed under coproducts truncation localizing closure",
+   "results": "CategoryTheory.instHasCoproductsIndOfHasFiniteCoproducts; CategoryTheory.Limits.closedUnderLimitsOfShape_walkingParallelPair_isIndObject; CategoryTheory.instHasFilteredColimitsInd; CategoryTheory.instCategoryInd; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated; AlgebraicGeometry.LocallyRingedSpace.coproduct; CategoryTheory.Limits.isClosedUnderLimitsOfShape_isIndObject_walkingParallelPair; CategoryTheory.Limits.isGrothendieckAbelian_ind",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimits of a full weak Serre subcategory closed under kernels cokernels extensions",
+   "results": "CategoryTheory.ObjectProperty.IsSerreClass; CategoryTheory.ObjectProperty.instIsSerreClassTop; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions; CategoryTheory.ObjectProperty.isoModSerre; CategoryTheory.ObjectProperty.monoModSerre; CategoryTheory.ObjectProperty.instIsMultiplicativeMonoModSerre; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderQuotients",
+   "date": "2026-10-18",
+   "verdict": "No theorem with these integral coefficients and all the required hypotheses; the generic derived and Ind APIs are used in the proved glue."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProperDirectSums",
+  "date": "2026-10-19",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-compactness-direct-sums",
+   "place": "Proof (2)-(3), the structural part of the cited integral compactness assertion (2); compactness proof (1)-(2), without its higher Ext bound",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-compactness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralIndConstructibleHeartClosure",
+  "file": "lean/Sheaf/Paper/IntegralIndConstructibleHeartClosure.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralIndConstructibleHeartClosure",
+  "statement": "theorem integralIndConstructibleHeartClosure\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] :\n    let Λ := Profinite.padicIntegersRingObj ℓ E\n    let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)\n    let P := ObjectProperty.ind.{u + 1} (IsConstantModelConstructible Λ X)\n    P.ContainsZero ∧ P.IsClosedUnderKernels ∧ P.IsClosedUnderCokernels ∧\n      P.IsClosedUnderExtensions ∧\n      (∀ (I : Type (u + 1)) (M : I → A) (c : Cofan M), IsColimit c →\n        (∀ i, P (M i)) → P c.pt)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261020T051239-L-1607821",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261020T051239-L-1607821",
+  "kind": "interface"
+ }
+}

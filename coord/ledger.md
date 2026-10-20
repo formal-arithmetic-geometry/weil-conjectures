@@ -17776,3 +17776,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:12 L: merged deliver/F3/Sheaf.AlgebraicGeometry.EtaleCoordinateSupport (stage 3; reviewer PASS; first push; landing 20261020T051231-L-1603328 (proof); batch 20261020T050952; modules 1; new nodes 0)
 - 05:12 L: merged deliver/F3/Sheaf.SixFunctors.SchemeGeometricFrobenius (stage 3; reviewer PASS; first push; landing 20261020T051233-L-1604446 (proof); batch 20261020T050952; modules 1; new nodes 0)
 - 05:12 L: merged deliver/F4/Sheaf.CategoryTheory.EnoughStrictFilteredInjectives (stage 3; reviewer PASS; first push; landing 20261020T051235-L-1605666 (interface); batch 20261020T050952; modules 1; new nodes 0; change records: coord/changes/F4-enough-strict-filtered-injectives-proof-commands.md)
+- 05:12 L: merged deliver/F5/Sheaf.Paper.IntegralProperDirectSums (stage 3; reviewer PASS; first push; landing 20261020T051239-L-1607821 (interface); batch 20261020T050952; modules 7; new nodes 6)
