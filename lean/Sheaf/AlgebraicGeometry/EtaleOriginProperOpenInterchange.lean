@@ -229,8 +229,8 @@ theorem etaleOriginProperOpenInterchange (A : Type u) [CommRing A] [Finite A]
     let ae := Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) i
     obtain ⟨le, hle, hge⟩ :=
-      (Etale.unboundedProperOpenInterchange (ULift.{u + 1, u} A)).choose_spec.choose_spec.2.2.1
-        (pullback.fst p i) (pullback.snd p i) p i (IsPullback.of_hasPullback p i)
+      (Etale.properOpenInterchange_normalization (ULift.{u + 1, u} A)
+        (IsPullback.of_hasPullback p i)).choose_spec.1
     have hgamma : ae.homEquiv _ _ ((etaleOriginOpenEtaleInterchange A p i).hom.app K.obj) =
         le.inv.app K.obj := by
       have hg := hge K.obj
