@@ -28,139 +28,54 @@
  ],
  "proof": [
   {
-   "text": "Put $V=\\mathcal O_E$, $\\pi=\\varpi_E$ and $R=A_n=V/(\\pi^n)$. The coefficient-ring theorem says that $V$ is a discrete valuation ring, a principal ideal domain, and every nonzero element is a unit times a power of $\\pi$. An ideal $I$ of $R$ pulls back to an ideal $(a)$ of $V$ containing $(\\pi^n)$; thus $a$ is a unit times $\\pi^r$ for some $0\\le r\\le n$. Therefore $I=(\\pi^r)$ and $R$ is Noetherian. Multiplication by $\\pi^r$ identifies $R/(\\pi^{n-r})$ with $I$: indeed $\\pi^rx\\in(\\pi^n)$ in $V$ if and only if $x\\in(\\pi^{n-r})$. This includes $r=0$ (the whole ideal) and $r=n$ (the zero ideal). The same conclusions hold with any positive index in place of $n$.",
+   "text": "Construct the bounded-above natural comparison functor isomorphism by resolving with bounded-above flat complexes, using exact point sections and the derived change-of-rings counits.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr"
+    "lem-trf-point-sections-finite-reduction-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
-    "place": "Coefficient datum; elementary ideal and annihilator calculation from the DVR theorem. No finite projective dimension over A_n is asserted."
-   }
+   "elementary": false
   },
   {
-   "text": "First justify the coefficient identification used in the statement. Give an abelian group $T$ the discrete topology. The continuous-function sheaf theorem makes $L_T(U)=C(|U|,T)$ an fpqc sheaf, hence a sheaf on $t_{\\mathrm{proet}}$, since its covers are fpqc. The map from the constant presheaf to $L_T$ exhibits it as the constant sheaf: a continuous function $f:|U|\\to T$ has open fibres $U_a=f^{-1}(a)$ forming a Zariski, hence pro-etale, cover; a map from the constant presheaf to any sheaf extends uniquely by gluing its constant sections on these fibres. Pullback of the fibres proves compatibility with restriction, and uniqueness follows on this cover. This is exactly the universal property of sheafification. For a ring $T$, pointwise operations give the same identification as ring sheaves. Since $|t|$ is a singleton, evaluation gives $\\Gamma(t,T_t)=T$, preserving constant sections and all coefficient maps. Apply this to every $A_m$ and to the zero quotient when it occurs below.\n\nFor any sheaf $F$ of $R_t$-modules and $0\\le r\\le n$, the constant-module exactness theorem, applicable because $R$ is Noetherian, turns $R\\xrightarrow{\\pi^r}R\\to R/(\\pi^r)\\to0$ into the corresponding exact sequence of constant sheaves. By the balanced tensor universal property, $F\\otimes_{R_t}(R/(\\pi^r))_t=F/\\pi^rF$: the maps are $x\\otimes\\bar a\\mapsto ax\\bmod\\pi^rF$ and $\\bar x\\mapsto x\\otimes1$, locally on sections and hence after sheafification. Write $J=\\pi^rF=\\operatorname{im}(\\pi^r:F\\to F)$. Exact sections of $F\\twoheadrightarrow J$ show $\\Gamma(t,J)=\\pi^r\\Gamma(t,F)$ inside $\\Gamma(t,F)$; exact sections of $0\\to J\\to F\\to F/J\\to0$ then give a natural $R/(\\pi^r)$-linear isomorphism\n$$\\eta_{r,F}:\\Gamma(t,F)/\\pi^r\\Gamma(t,F)\\xrightarrow{\\sim}\\Gamma(t,F/\\pi^rF).$$\nIt sends the class of a global section to its quotient section. This argument also proves the identification with $\\Gamma(t,F)\\otimes_R R/(\\pi^r)$, by the same two mutually inverse balanced maps for ordinary modules.",
+   "text": "Show that finite sheaf scalar extension preserves the bounded-above condition and that ordinary point sections after finite reduction have vanishing homology above a bound.",
    "uses": [
-    "lem-weil-pbc-constant-module-section-properties",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-cbc-continuous-functions-fpqc-sheaf",
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification"
+    "lem-trf-point-sections-finite-reduction-bounded"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093J, lemma-constant-exact; Section tensor-product, balanced tensor universal property. Exact point sections are the cited point theorem. The constant-sheaf identification is the displayed open-fibre gluing argument from the cited continuous-function sheaf theorem and sheafification universal property."
-   }
+   "elementary": false
   },
   {
-   "text": "If $F$ is flat over $R_t$, then $\\Gamma(t,F)$ is flat over $R$. To verify this, let $I=(\\pi^r)$ be any ideal as in step 1. Constant exactness gives an injection $I_t\\to R_t$ and identifies $I_t$ with $(R/(\\pi^{n-r}))_t$. Tensoring this injection with $F$ is injective by the definition of flatness; its source is $F/\\pi^{n-r}F$ and its map to $F$ is multiplication by $\\pi^r$. Apply exact sections and step 2 to obtain an injection\n$$\\Gamma(t,F)/\\pi^{n-r}\\Gamma(t,F)\\longrightarrow\\Gamma(t,F),\\qquad\\bar x\\longmapsto\\pi^rx.$$\nUnder $I=R/(\\pi^{n-r})$ this is exactly $I\\otimes_R\\Gamma(t,F)\\to\\Gamma(t,F)$. The finitely generated ideal criterion for flatness now proves the claim. No assertion that an arbitrary module sheaf is constant is used.",
+   "text": "For a bounded-above termwise flat complex, construct the quotient complex isomorphism, verify the pure tensor generator equation, and identify the counit square.",
    "uses": [
-    "lem-weil-pbc-constant-module-section-properties",
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-pbc-flat-fg-ideal-criterion"
+    "lem-trf-point-sections-finite-reduction-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HD, lemma-flat, (1) iff (4); sites-modules.tex Tag 093J, lemma-constant-exact. The cyclic ideal presentations are step 1."
-   }
-  },
-  {
-   "text": "Choose a complex $M$ representing $N$ and an integer $b$ above its nonzero cohomology. Replace $M$ by the complex equal to $M^q$ for $q<b$, to $\\ker(d_M^b)$ in degree $b$, and to zero above $b$. Its inclusion in $M$ is a quasi-isomorphism: cohomology is unchanged below $b$, is $H^b(M)$ in degree $b$, and is zero above $b$ on both sides. The bounded-above flat replacement theorem supplies $P\\to M$ with $P^q=0$ for $q>b$, flat terms and a quasi-isomorphism (here $M$ denotes this truncated representative). The site K-flatness criterion makes $P$ K-flat. Put $C=\\Gamma(t,P)$. Exact point sections show that $C$ represents $\\Gamma(t,N)$, and step 3 makes every $C^q$ flat over $R$. Since $C$ is bounded above, the ordinary-module K-flatness criterion makes $C$ K-flat too.",
-   "uses": [
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-pc-module-bounded-flat-kflat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-K-flat-resolution, bounded-above replacement construction, and Tag 06YQ, lemma-bounded-flat-K-flat; more-algebra.tex Tag 064K. The explicit good truncation is an elementary cohomology calculation."
-   }
-  },
-  {
-   "text": "Let $B=A_j=R/(\\pi^j)$. Derived change of rings on the site, computed using $P$, represents $N\\otimes_R^{\\mathbf L}B$ by the actual complex of $B_t$-modules $P_j=P\\otimes_{R_t}B_t=P/\\pi^jP$. Ordinary derived tensor, computed using the K-flat complex $C$, represents $\\Gamma(t,N)\\otimes_R^{\\mathbf L}B$ by $C\\otimes_R B=C/\\pi^jC$ as a complex of $B$-modules. Applying step 2 in every degree gives a chain isomorphism\n$$\\eta_{j,P}:C/\\pi^j C\\xrightarrow{\\sim}\\Gamma(t,P/\\pi^jP).$$\nIt commutes with differentials because it sends $[x]$ to the quotient of $x$. This produces the required isomorphism in $D(B)$ itself, with its $B$-action, rather than only an isomorphism after forgetting to $D(R)$.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-derived-tensor-second-factor-functor",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change; more-algebra.tex Tag 06Y6, lemma-derived-base-change. Quotient-to-sections chain map from step 2."
-   }
-  },
-  {
-   "text": "Here are choice independence and naturality on the bounded-above derived category. On bounded-above complexes use the functorial flat replacement $M\\mapsto P(M)$ supplied by the replacement theorem. For a chain map $f:M\\to M'$, the degreewise quotient-to-sections maps give a commuting square for $P(f)$. If $f$ is a quasi-isomorphism, so is $P(f)$ by its natural augmentation; the two sides of the square become isomorphisms, by derived change of rings and exact sections. Thus these squares descend through localization and remain commuting when a quasi-isomorphism is inverted. To justify using bounded-above representatives for every derived morphism, apply the bounded-below cochain localization theorem to the opposite abelian category and reverse degrees: $K^r\\mapsto(K^{-r})^{\\mathrm{op}}$, with reversed differentials. This exchanges bounded below with bounded above, preserves the quasi-isomorphism condition (kernels and cokernels are exchanged), and identifies the opposite derived localization with the localization of the reversed complexes by its universal property. It gives precisely localization of bounded-above complexes onto $D^-$. The localization universal property therefore yields a natural isomorphism on $D^-$. Finally for any other bounded-above flat resolution $S\\to M$, the natural maps $P(S)\\to S$ and $P(S)\\to P(M)$ are quasi-isomorphisms between bounded-above flat complexes. The commuting quotient-to-sections squares for these two maps identify the comparison computed with $S$ with the descended comparison. Hence the comparison is independent of the resolution and natural in every derived morphism of $N$.",
-   "uses": [
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-pbc-bounded-below-cochain-localization",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RW, lemma-bounded-derived, (2), obtained also by reversing degrees in (1), the statement of the cited bounded-below localization node; universal property of localization. Functorial flat replacements from sites-cohomology.tex Tag 06YS."
-   }
-  },
-  {
-   "text": "The reduced model $P_j$ is again bounded above and has flat $B_t$-module terms. Indeed for an injection $U\\to V$ of $B_t$-modules the maps $U\\otimes_{B_t}(P^q\\otimes_{R_t}B_t)\\to V\\otimes_{B_t}(P^q\\otimes_{R_t}B_t)$ identify with $U\\otimes_{R_t}P^q\\to V\\otimes_{R_t}P^q$ by $u\\otimes(x\\otimes b)\\mapsto bu\\otimes x$ and its inverse $u\\otimes x\\mapsto u\\otimes(x\\otimes1)$. They are injective by flatness of $P^q$; the same formulas and exactness prove tensor-flatness over $B_t$. The site K-flatness criterion applies to $P_j$. Step 3 with $j$ in place of $n$ makes $\\Gamma(t,P_j)$ termwise flat over $B$, and the ordinary K-flatness criterion applies to this bounded-above complex. In particular both reduced objects are bounded above; this explains the domain chosen in the statement and makes the next successive reduction legitimate.",
-   "uses": [
-    "def-pc-flat-sheaf-modules",
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pc-module-bounded-flat-kflat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; more-algebra.tex Tag 064K. Flatness under scalar extension is the displayed balanced-map calculation from the definition of flatness."
-   }
-  },
-  {
-   "text": "For $j=n$, $\\pi^n$ acts as zero and the quotient-to-sections map is the identity of $C$, under the usual unit identifications. For $n\\ge j\\ge i\\ge1$, use the single model $P$ and its reduced model $P_j$ of step 7. Both successive derived tensor operations are computed by ordinary quotients on these models, including on the ordinary-module side. The associators are the maps $((x\\otimes b)\\otimes c)\\mapsto x\\otimes bc$; equivalently $(P/\\pi^jP)/\\pi^i(P/\\pi^jP)=P/\\pi^iP$, and likewise for $C$. The direct quotient-to-sections map sends the class of $x\\in\\Gamma(t,P^q)$ to its class in $\\Gamma(t,P^q/\\pi^iP^q)$. The comparison for $(n,j)$ reduced to $A_i$, followed by the comparison for $(j,i)$ on $P_j$, sends $[[x]]$ to exactly that same class. The maps are therefore equal degreewise as $A_i$-linear maps, commute with the differentials, and are equal in $D(A_i)$. Choice independence from step 6 identifies these model computations with the asserted natural isomorphisms. This proves identity and successive-reduction compatibility without assigning an $A_j$-action to a free resolution over $A_n$.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-derived-tensor-second-factor-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section tensor-product, associativity formulas; sites-cohomology.tex Tag 06YY and more-algebra.tex Tag 06Y6 for the canonical K-flat comparisons. Equality is the explicit quotient calculation."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-module-section-properties",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-cbc-continuous-functions-fpqc-sheaf",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification",
   "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-flat-fg-ideal-criterion",
-  "lem-pc-kflat-bounded-flat-replacement",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "lem-cbc-continuous-functions-fpqc-sheaf",
   "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-bounded-flat-replacement",
   "lem-pc-module-bounded-flat-kflat",
   "lem-pur-derived-change-of-rings",
-  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-trf-point-sections-finite-reduction-bounded",
+  "lem-trf-point-sections-finite-reduction-complex",
+  "lem-trf-point-sections-finite-reduction-iso",
+  "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-bounded-below-cochain-localization",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-flat-fg-ideal-criterion",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-point-proetale-sections-exact"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "A7 stage 3",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
-  "place": "Proof (1), point evaluation after finite coefficient reduction; expanded via exact sections, the cyclic ideal criterion, bounded-above flat resolutions and explicit quotient maps."
+  "place": "Proof (1), decomposed into natural comparison, boundedness, and normalized flat-complex compatibility.",
+  "note": "The three intermediate statements are strict subresults of the original eight-step argument; the target combines them definitionally."
  },
  "mathlib_searches": [
   {
@@ -402,5 +317,15 @@
   "by": "NO",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261020T230709-L-602223",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

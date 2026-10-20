@@ -338,8 +338,87 @@ noncomputable abbrev pointFiniteReductionBoundedAbove (n : ℕ) :
 
 variable [IsAlgClosed k]
 
-set_option maxHeartbeats 800000 in
--- The normalization elaborates both universal derived comparisons and their localization maps.
+/-- Natural comparison on the bounded-above derived subcategory.
+Source: Steps 4--6 of the parent proof.
+(blueprint: lem-trf-point-sections-finite-reduction-iso).
+
+Proof: resolve bounded-above objects by functorial bounded-above flat complexes. Exact point
+sections identify the degreewise quotient complex with sections after sheaf scalar extension.
+The derived change-of-rings universal counits and localization universal property descend this
+comparison to a natural isomorphism on the bounded-above subcategory.
+-/
+theorem point_sections_finite_reduction_iso (_hl : IsUnit (l : k)) :
+    Nonempty (∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n),
+      (pointFiniteReductionBoundedAbove k l E n).ι ⋙
+          pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅
+        (pointFiniteReductionBoundedAbove k l E n).ι ⋙
+          pointFiniteReductionSheafTensor k l E n j hjn ⋙
+            pointFiniteReductionSections k l E j) := by
+  sorry
+
+/-- Boundedness and vanishing after finite coefficient reduction.
+Source: Steps 4 and 7 of the parent proof.
+(blueprint: lem-trf-point-sections-finite-reduction-bounded).
+
+Proof: finite scalar extension of a bounded-above flat model remains bounded above and termwise
+flat. Exact point sections preserve the resulting complexes and their homology, so the reduced
+sheaf object and the module tensor object have the asserted upper vanishing bound.
+-/
+theorem point_sections_finite_reduction_bounded (_hl : IsUnit (l : k)) :
+    ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n),
+      (∀ N : (pointFiniteReductionBoundedAbove k l E n).FullSubcategory,
+        pointFiniteReductionBoundedAbove k l E j
+          ((pointFiniteReductionSheafTensor k l E n j hjn).obj N.obj) ∧
+        ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero
+          ((DerivedCategory.homologyFunctor _ q).obj
+            ((pointFiniteReductionModuleTensor l E n j hjn).obj
+              ((pointFiniteReductionSections k l E n).obj N.obj)))) := by
+  sorry
+
+/-- Flat-complex model, generator normalization, and counit compatibility.
+Source: Steps 5, 6 and 8 of the parent proof.
+(blueprint: lem-trf-point-sections-finite-reduction-complex).
+
+Proof: apply the degreewise quotient-to-sections map to a bounded-above termwise flat complex.
+The balanced tensor associator proves the pure tensor generator equation, while the universal
+counits and localization factors give the displayed counit square.
+-/
+theorem point_sections_finite_reduction_complex (_hl : IsUnit (l : k))
+    (e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n),
+      (pointFiniteReductionBoundedAbove k l E n).ι ⋙
+          pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅
+        (pointFiniteReductionBoundedAbove k l E n).ι ⋙
+          pointFiniteReductionSheafTensor k l E n j hjn ⋙ pointFiniteReductionSections k l E j) :
+    ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n),
+      ∀ (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ)
+        (_hbound : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero (P.X q))
+        (_hflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+          (R := pointFiniteReductionRingSheaf k l E n) (P.X q)),
+      ∃ hP : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj P),
+      ∃ q :
+        (pointFiniteReductionComplexTensor l E n j hjn).obj
+          ((pointFiniteReductionSectionComplex k l E n).obj P) ≅
+        (pointFiniteReductionSectionComplex k l E j).obj
+          ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P),
+      (∀ (a : ℤ) (b c : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))
+        (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj (P.X a)),
+        q.hom.f a
+          (pointFiniteReductionTensorGenerator l E n j hjn
+            ((pointFiniteReductionSectionComplex k l E n).obj P) a b c x) =
+          (b * c) • pointFiniteReductionSectionGenerator k l E n j hjn (P.X a) x) ∧
+      (pointFiniteReductionModuleTensor l E n j hjn).map
+          (pointFiniteReductionSectionFactors k l E n P).hom ≫
+        (pointFiniteReductionModuleCounit l E n j hjn).app
+          ((pointFiniteReductionSectionComplex k l E n).obj P) ≫
+        DerivedCategory.Q.map q.hom =
+      (e n j hn hj hjn).hom.app ⟨DerivedCategory.Q.obj P, hP⟩ ≫
+        (pointFiniteReductionSections k l E j).map
+          (pointFiniteReductionSheafCounit k l E n j hjn P) ≫
+        (pointFiniteReductionSectionFactors k l E j
+          ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom := by
+  sorry
+
+
 /-- Sections at an algebraically closed point commute canonically with finite reduction.
 Source: blueprint `prop-trf-adic-coefficient-morphism-systems.proof.md`, Proof (1);
 Stacks Tags 093J, 00HD, 064L, 06YY and 06Y6
@@ -429,6 +508,12 @@ theorem point_sections_finite_reduction (_hl : IsUnit (l : k)) :
           (pointFiniteReductionSheafCounit k l E n j hjn P) ≫
         (pointFiniteReductionSectionFactors k l E j
           ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom := by
-  sorry
+  obtain ⟨e⟩ := point_sections_finite_reduction_iso k l E _hl
+  refine ⟨e, ?_⟩
+  intro n j hn hj hjn
+  constructor
+  · exact point_sections_finite_reduction_bounded k l E _hl n j hn hj hjn
+  · exact point_sections_finite_reduction_complex k l E _hl e n j hn hj hjn
+
 
 end WeilConjectures

@@ -1,0 +1,110 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+  "place": "Proof (1), strict intermediate result used to assemble lem-trf-point-sections-finite-reduction."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsFiniteReduction",
+  "date": "2026-10-21",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-point-sections-finite-reduction",
+   "place": "Proof (1) decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-sf-compatibility",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism derived sections commutes with tensor finite quotient",
+   "results": "no exact match",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\" \"IsLE\" \"mapDerivedCategory\"",
+   "results": "no exact match",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "point sections derived tensor finite reduction",
+   "results": "no exact match in library",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "proof_origin": {
+  "by": "A7 stage 3",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+  "place": "Proof (1)"
+ },
+ "id": "lem-trf-point-sections-finite-reduction-bounded",
+ "title": "Boundedness after finite coefficient reduction",
+ "statement": "theorem point_sections_finite_reduction_bounded (_hl : IsUnit (l : k)) : ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n), (∀ N : (pointFiniteReductionBoundedAbove k l E n).FullSubcategory, pointFiniteReductionBoundedAbove k l E j ((pointFiniteReductionSheafTensor k l E n j hjn).obj N.obj) ∧ ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((pointFiniteReductionModuleTensor l E n j hjn).obj ((pointFiniteReductionSections k l E n).obj N.obj))))",
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use bounded-above flat replacement and preservation of bounded-above complexes under termwise finite scalar extension; exact sections identify the resulting homology bound.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSectionsFiniteReduction",
+  "file": "lean/Sheaf/Paper/PointSectionsFiniteReduction.lean",
+  "declaration": "WeilConjectures.point_sections_finite_reduction_bounded",
+  "statement": "theorem point_sections_finite_reduction_bounded (_hl : IsUnit (l : k)) : ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n), (∀ N : (pointFiniteReductionBoundedAbove k l E n).FullSubcategory, pointFiniteReductionBoundedAbove k l E j ((pointFiniteReductionSheafTensor k l E n j hjn).obj N.obj) ∧ ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((pointFiniteReductionModuleTensor l E n j hjn).obj ((pointFiniteReductionSections k l E n).obj N.obj))))",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261020T230709-L-602223",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261020T230709-L-602223",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
