@@ -19056,3 +19056,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:56 L: batch 20261020T221035 dependency take-out
 - 22:56 L: returned deliver/A3/Sheaf.AlgebraicGeometry.NoetherianGlobalConstructibility (reviewer RETURN: (reviewer C-51ea0, head 51ea027b0) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.No)
 - 23:01 L: returned deliver/B7/Sheaf.AlgebraicGeometry.Morphisms.TraitDivisorChartSectionGenericFactor (reviewer RETURN: (reviewer C-9e3d2, head 9e3d245fd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Mo)
+- 23:03 L: returned deliver/C5/Sheaf.Algebra.Homology.LocalizedTensorComparisonDirectSumSquare (reviewer RETURN: (reviewer C-ac418, head ac4182551) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Loc)
