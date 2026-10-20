@@ -7,10 +7,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.AdjoinRoot
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitPresentation
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootLimitPresentation
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootBaseChange
 
 /-!
 # Descending a punctured root section to an etale neighbourhood
@@ -25,6 +27,53 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+/-- The unique comparison between the two ring colimits respects their structure maps.
+This follows from the two colimit coprojection equations and the defining structure-map
+leg equations (Stacks Project, Tags 0BSK and 03Q9). -/
+private theorem strictHenselization_colimit_comparison
+    (R : CommRingCat.{u})
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R) :
+    ∃ e : strictHenselizationRing barY ≅ strictHenselization barY,
+      Spec.map e.hom ≫ strictHenselizationStructuralMap barY =
+        strictLocalizationToBase barY := by
+  classical
+  let F := strictHenselizationAffineDiagram barY
+  let e : strictHenselizationRing barY ≅ strictHenselization barY :=
+    (colimit.isColimit F).coconePointUniqueUpToIso
+      (isColimitSmallStrictHenselizationCocone barY)
+  have hleg (j) : colimit.ι F j ≫ e.hom =
+      (smallStrictHenselizationCocone barY).ι.app j := by
+    exact (colimit.isColimit F).comp_coconePointUniqueUpToIso_hom
+      (isColimitSmallStrictHenselizationCocone barY) j
+  let := (strictHenselization_properties barY).2.1
+  let j := Classical.choice (IsCofiltered.nonempty (C :=
+    SmallModel.{u} (strictHenselizationNeighbourhoods barY)))
+  let k : Spec (F.obj (Opposite.op j)) ⟶ Spec R :=
+    Spec.map (ΓSpecIso
+      (((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj
+        j).1.left.unop)).inv ≫
+      ((AffineEtale.Spec (Spec R)).obj
+        (((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj
+          j).1)).hom
+  have hold : Spec.map (colimit.ι F (Opposite.op j)) ≫ k =
+      strictHenselizationStructuralMap barY :=
+    (exists_strictHenselizationStructuralMap barY).choose_spec j
+  have hnew : Spec.map ((smallStrictHenselizationCocone barY).ι.app
+      (Opposite.op j)) ≫ k = strictLocalizationToBase barY :=
+    strictHenselizationStructuralMap_eq barY j
+  refine ⟨e, ?_⟩
+  calc
+    Spec.map e.hom ≫ strictHenselizationStructuralMap barY =
+        Spec.map e.hom ≫ (Spec.map (colimit.ι F (Opposite.op j)) ≫ k) :=
+      congrArg (fun t ↦ Spec.map e.hom ≫ t) hold.symm
+    _ = Spec.map (colimit.ι F (Opposite.op j) ≫ e.hom) ≫ k := by
+      rw [Spec.map_comp, Category.assoc]
+    _ = Spec.map ((smallStrictHenselizationCocone barY).ι.app (Opposite.op j)) ≫ k := by
+      rw [hleg]
+    _ = strictLocalizationToBase barY := hnew
+
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
 /-- A section over the punctured root ring of a strict henselization descends.
 
 Source: Stacks Project, Tags 0BSK and 05N9, and the descent paragraph of 0EYG.
@@ -89,8 +138,34 @@ theorem punctured_root_section_etale_descent
   obtain ⟨s, hs⟩ := hs
   let r : V.toScheme ⟶ Spec R := V.ι ≫ q ≫ Spec.map b
   let l : V.toScheme ⟶ E := pullback.lift s r hs
-  obtain ⟨I, cat, cof, D, c, t, ⟨hc⟩, hD, e, he, hstage⟩ :=
-    punctured_root_limit_presentation R f n barY y hy b hb
+  -- Identify the two canonical strict henselization rings over the original base.
+  obtain ⟨eH, heH⟩ := strictHenselization_colimit_comparison R barY
+  let b' := b ≫ eH.hom
+  have hb' : Spec.map b' = strictLocalizationToBase barY := by
+    rw [Spec.map_comp, hb, heH]
+  obtain ⟨I, cat, cof, D, c, t, ⟨hc⟩, hD, e', he', hstage⟩ :=
+    punctured_root_limit_presentation R f n barY y hy b' hb'
+  -- The punctured chart pulls back along the spectrum of this ring isomorphism.
+  obtain ⟨dH, hdH⟩ := punctured_root_base_change H (strictHenselization barY) g n eH.hom
+  let η := dH ≪≫ asIso (pullback.snd (Spec.map eH.hom) (V.ι ≫ q))
+  let e := η.symm ≪≫ e'
+  have he : ∀ j, e.hom ≫ c.π.app j ≫ t.app j = r := by
+    intro j
+    have hη : η.hom ≫ r = e'.hom ≫ c.π.app j ≫ t.app j := by
+      rw [he']
+      change (dH.hom ≫ pullback.snd (Spec.map eH.hom) (V.ι ≫ q)) ≫
+        ((V.ι ≫ q) ≫ Spec.map b) = _
+      calc
+        _ = (dH.hom ≫ pullback.fst (Spec.map eH.hom) (V.ι ≫ q)) ≫
+            Spec.map eH.hom ≫ Spec.map b := by
+          rw [Category.assoc dH.hom, Category.assoc dH.hom]
+          rw [pullback.condition_assoc]
+        _ = _ := by
+          rw [hdH]
+          simp only [b', Spec.map_comp, Category.assoc]
+          rfl
+    change η.inv ≫ e'.hom ≫ c.π.app j ≫ t.app j = r
+    rw [← hη, Iso.inv_hom_id_assoc]
   let := cat
   have : IsCofiltered I := cof
   have : ∀ j, IsAffine (D.obj j) := hD

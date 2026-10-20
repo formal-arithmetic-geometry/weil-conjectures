@@ -26,7 +26,17 @@
    "elementary": true
   },
   {
-   "text": "Obtain the pointed etale limit presentation of the punctured root chart. All diagram terms are affine, hence qcqs, and their transitions are affine. Transport the lifted section through the inverse of the limit isomorphism e. The equations for the structure maps, canceled through e, show this is a morphism over Spec R. Apply the Mathlib finite-presentation map limit factorization theorem to p and this morphism.",
+   "text": "Compare strictHenselizationRing with the adopted strictHenselization by the unique isomorphism of colimits of the same representative affine diagram. Its coprojection equations and the structural-map leg equations prove compatibility over Spec R. Compose b with this isomorphism and apply the adopted punctured root limit presentation. The root base-change theorem along this ring isomorphism identifies the adopted punctured chart with the original one: the second pullback projection is an isomorphism because the spectrum of the ring comparison is an isomorphism. The pullback condition and first-projection equation identify the chart structure maps. Compose its inverse with the limit comparison to obtain the original-model limit isomorphism and its leg equations.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-sbc-punctured-root-base-change",
+    "lem-sbc-punctured-root-limit-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Using the transported limit presentation, all diagram terms are affine, hence qcqs, and their transitions are affine. Transport the lifted section through the inverse of the limit isomorphism e. The equations for the structure maps, canceled through e, show this is a morphism over Spec R. Apply the Mathlib finite-presentation map limit factorization theorem to p and this morphism.",
    "uses": [
     "lem-sbc-punctured-root-limit-presentation",
     "lem-weil-pbc-finite-presentation-map-limit-factorization"
@@ -45,14 +55,18 @@
  "proof_deps": [
   "def-weil-etale-morphism",
   "def-pc-fibre-product",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-sbc-punctured-root-base-change",
   "lem-sbc-punctured-root-limit-presentation",
   "lem-weil-pbc-finite-presentation-map-limit-factorization"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "C3",
+  "group": "K2",
   "document": "Stacks Project and Mathlib",
-  "place": "Root-limit construction separated from the section argument; Mathlib Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation supplies actual morphism descent."
+  "place": "Tags 0BSK, 03Q9 and 05N9; canonical colimit comparison and root base change; Mathlib finite-presentation map limit factorization",
+  "note": "Retirement adaptation preserves the complete section-descent theorem signature. All new glue is proved; the adopted root-limit theorem and root base-change theorem have no sorry. No source-library edits."
  },
  "mathlib_searches": [
   {
@@ -133,14 +147,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "C-0f651",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T132435-L-4127827",
+  "landing": "20261020T221230-L-4161573",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired stub + node re-pointed to WeilConjectures twin punctured_root_limit_presentation (statement verbatim); adapted consumer PuncturedRootSectionEtaleDescent (signature identical to live, compiles 5.2 s, axioms standard) vs original consumer failing on the stub (unknown identifier)"
  },
  "lean_audit": {
   "master": {
