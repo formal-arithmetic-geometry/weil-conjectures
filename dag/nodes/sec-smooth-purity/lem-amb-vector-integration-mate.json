@@ -1,0 +1,178 @@
+{
+ "id": "lem-amb-vector-integration-mate",
+ "kind": "lemma",
+ "title": "The normalized ordinary vector integration mate is invertible",
+ "statement": "Let $N>0$, let $A$ be a finite commutative ring with $NA=0$, and let $S$ be Noetherian with $N$ invertible. For a rank-$d$ vector bundle $\\pi:E\\to S$ and every $K\\in D(S_{et},A)$, the adjunct under the ordinary ambient compact-support adjunction of inverse canonical coefficient-first projection followed by $1_K\\otimes\\int_\\pi$ and the right unitor is invertible. The coefficient and trace are those of [def-amb-vector-integration], the bundle is [def-asd-vector-bundle-zero-section], and the ambient adjunction is [thm-amb-etale-exceptional-adjoint]. No boundedness restriction is imposed on $K$. The inverse projection is recorded by its local IsIso instance, supplied by finite projection formula.",
+ "source": {
+  "document": "dag/units/sk-prop-an.json",
+  "place": "Steps 5(c), 6, 7; parent thm-amb-vector-bundle-purity proof Steps 4--9"
+ },
+ "stmt_deps": [
+  "def-amb-vector-integration",
+  "def-asd-vector-bundle-zero-section",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified affine-space top trace and vector integration normalization. On every trivializing open, compact-support exchange, the coefficient comparison and the affine trace are isomorphisms. Exact inverse image and cohomology conservativity on a jointly surjective cover show that the actual global integration map is an isomorphism.",
+   "uses": [
+    "def-amb-vector-integration",
+    "lem-amb-affine-space-top-trace",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the affine coordinate tower to identify its ordered left functor with the chosen ambient compact support. The zero step uses the identity compactification; the successor uses compactification independence and composition. Transport the normalized affine adjunction through this isomorphism. Its counit at the unit is invertible by the existing affine-space trace theorem. The coefficient comparison identifies the pulled-back bundle coefficient with the right adjoint of the unit. For an adjunction with invertible counit at the unit, any isomorphism from that left-adjoint image to the unit has invertible adjunct: transport the other counit and factor off the resulting automorphism of the unit.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding unit argument in each bundle frame. The existing upstream isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion theorem gives invertibility of the canonical exceptional base-change mate against the open base immersion. Naturality of the adjunction Hom equivalences identifies the pullback of the actual global unit adjunct, followed by this base-change mate, with the local adjunct of the inverse compact-support exchange followed by the actual integration map. The unit pullback isomorphism reduces it to the affine unit calculation. The frame charts jointly cover the bundle, so exact inverse image and the derived cohomology criterion prove that the actual global unit adjunct is invertible.",
+   "uses": [
+    "def-amb-vector-integration",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a general adjunction F adjoint to G and a natural invertible projection pi_X: T_Y(F X) -> F(T_X X), use projection naturality at the adjunct of c and the counit equation to factor the adjunct of pi_X inverse followed by T_Y(c) and the unit constraint. It is T_X applied to the unit adjunct followed by the analogous adjunct with X replaced by G of the unit. Prove the coefficient-first projection naturality by naturality of signed symmetry and the existing projection natural transformation.",
+   "uses": [
+    "lem-asd-compact-projection-exchange",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bundle projection is smooth of relative dimension d: on a trivializing open it is an isomorphism followed by the d-dimensional affine-space projection, and smooth relative dimension is Zariski local on the target. Package the positive annihilator and its unit as HasInvertibleExponent, and pull it to the bundle. Reuse the source-library theorem exists_dualizingComplex_iso_and_tensor in WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality, the upstream result also used by thm-asd-smooth-tensor. Only its assertion that the canonical tensor mate is invertible is used; no Tate orientation is chosen from it. Braiding naturality and the unit constraints identify this mate with the coefficient-first tensor-counit adjunct. Thus the second factor from the preceding step is invertible for every unbounded K. The first is a functor image of the already proved unit adjunct. Their composite is exactly the required integration mate. The coefficient-first tensor-counit specialization is isolated as lem-amb-vector-integration-tensor-counit; that separate generic mate lemma is fully proved in this delivery.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "thm-asd-smooth-tensor",
+    "lem-kun-tensor-unit",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-amb-vector-integration-tensor-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration",
+  "def-asd-vector-bundle-zero-section",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-vector-integration-tensor-counit",
+  "lem-asd-compact-projection-exchange",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-kun-tensor-unit",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-asd-smooth-tensor"
+ ],
+ "proof_origin": {
+  "by": "F6 stage 3",
+  "document": "dag/units/sk-prop-an.json",
+  "place": "Steps 5(c), 6 and 7 at the coefficient unit, plus explicit naturality factorization for arbitrary K and the existing upstream orientation-free canonical tensor theorem. The affine adjunction and bundle-frame route are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For vector bundles integration identifies exceptional inverse image with pullback twisted and shifted in unbounded etale derived categories",
+   "results": "Eight hits about sheaf-of-modules pullback and monoidal coherence; none proves invertibility of this integration mate.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"rightAdjointUniq\"",
+   "results": "rightAdjointUniq and its counit compatibility are generic tools; they do not identify the named bundle integration counit.",
+   "date": "2026-10-19",
+   "verdict": "tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundlePurity|vectorBundleIntegration; vector bundle purity in lean/WeilConjectures and lean/Sheaf",
+   "results": "Existing VectorBundlePurity and VectorBundleIntegration are the parent and trace construction; no independent proof of the normalized ordinary unbounded mate was found.",
+   "date": "2026-10-19",
+   "verdict": "no duplicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integration along a vector bundle gives purity for the exceptional inverse image of unbounded etale complexes",
+   "results": "Eight hits about topological vector bundles, measurable integration and stability of etale morphisms under base change; none states the normalized unbounded etale integration mate.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Targets.VectorBundlePurity",
+  "date": "2026-10-19",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-vector-bundle-purity",
+   "place": "Proof Steps 4--9: normalized integration adjunct and local invertibility",
+   "via": [
+    "thm-amb-vector-bundle-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationMate.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegrationMate_isIso",
+  "statement": "theorem vectorIntegrationMate_isIso (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (M : SheafOfModules.{u} S.ringCatSheaf) [M.IsFiniteLocallyFreeOfRank d]\n    (K : DerivedCategoryModule A S) :\n    letI : IsAffineHom (VectorBundleZeroSection.π S d M) :=\n      (vectorIntegration_geometry S d M).1\n    letI : LocallyOfFiniteType (VectorBundleZeroSection.π S d M) :=\n      (vectorIntegration_geometry S d M).2.1\n    ∀ [IsIso (compactProjectionMapCoeffFirst A (VectorBundleZeroSection.π S d M) K\n        (vectorIntegrationCoefficient A N hA S d M))],\n    IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A)\n      (VectorBundleZeroSection.π S d M)).homEquiv _ K\n        (inv (compactProjectionMapCoeffFirst A (VectorBundleZeroSection.π S d M) K\n          (vectorIntegrationCoefficient A N hA S d M)) ≫\n          ((derivedTensor (ModuleCat.{u + 1} A) S).obj K).map\n            (vectorBundleIntegration N hN A hA S hS d M) ≫\n              (derivedTensorRightUnitor (ModuleCat.{u + 1} A) S K).hom))",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261020T051251-L-1615201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261020T051251-L-1615201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

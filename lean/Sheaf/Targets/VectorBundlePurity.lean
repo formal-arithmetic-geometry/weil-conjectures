@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Sheaf.AlgebraicGeometry.VectorBundleIntegration
 public import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
@@ -25,37 +25,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import Sheaf.Paper.FiniteTateSiteDescent
 public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+public import Sheaf.AlgebraicGeometry.CompactProjectionExchange
 
-import Sheaf.AlgebraicGeometry.CompactSupportSiteComparisonOpen
-import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import Sheaf.AlgebraicGeometry.EtaleShriekOpenExchangeAdjoint
-import Sheaf.AlgebraicGeometry.CompactSupportProjectionOpenRestriction
-import Sheaf.AlgebraicGeometry.ShriekTensorComposition
-import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
-import Sheaf.AlgebraicGeometry.VectorProjectiveCompletion
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization
-import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
-import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
-import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
-import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
-import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
-import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.VectorIntegrationMate
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
+import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 
 /-!
 # Vector-bundle purity before smooth orientation
@@ -84,6 +60,8 @@ set_option backward.isDefEq.respectTransparency false
 
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+
+attribute [local instance high] SymmetricCategory.toBraidedCategory
 
 namespace AlgebraicGeometry.Etale
 
@@ -148,14 +126,12 @@ def vectorBundlePurityProjectionMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
         (vectorIntegrationSource A N hA S d M) ⟶
       (vectorBundlePurityLower A S d M).obj
         (vectorBundlePurityTwistedPullback A N hA S d M K) :=
-  ((derivedTensorSymmetry (ModuleCat.{u + 1} A) S).hom.app K).app _ ≫
-    ((projectionMapOfCompactification (ModuleCat.{u + 1} A)
-      (vectorBundlePurityCompactification S d M)).app
-        (vectorIntegrationCoefficient A N hA S d M)).app K ≫
-    (vectorBundlePurityLower A S d M).map
-      (((derivedTensorSymmetry (ModuleCat.{u + 1} A)
-        (VectorBundleZeroSection.scheme S d M)).hom.app
-          (vectorIntegrationCoefficient A N hA S d M)).app _)
+  letI : IsAffineHom (VectorBundleZeroSection.π S d M) :=
+    (vectorIntegration_geometry S d M).1
+  letI : LocallyOfFiniteType (VectorBundleZeroSection.π S d M) :=
+    (vectorIntegration_geometry S d M).2.1
+  compactProjectionMapCoeffFirst A (VectorBundleZeroSection.π S d M) K
+    (vectorIntegrationCoefficient A N hA S d M)
 
 /-- The clauses at one annihilating, invertible modulus. The local normalization refers
 to the unique already defined integration map. A D+ representative is required only for
@@ -223,7 +199,127 @@ Source: blueprint vector-bundle purity, proof step 1
 theorem vectorBundlePurityInvertiblePower (ell : ℕ) (S : Scheme.{u})
     (hS : IsUnit (ell : Γ(S, ⊤))) (r : ℕ) :
     IsUnit ((ell ^ (r + 1) : ℕ) : Γ(S, ⊤)) :=
-  by sorry
+  by
+    simpa only [Nat.cast_pow] using hS.pow (r + 1)
+
+private theorem existsUnique_postcompose {C : Type*} [Category C] {X Y Z : C}
+    (a : X ≅ Y) (b : X ⟶ Z) : ∃! t : Y ⟶ Z, a.hom ≫ t = b := by
+  refine ⟨a.inv ≫ b, by simp, ?_⟩
+  intro t ht
+  apply (cancel_epi a.hom).1
+  simpa only [Category.assoc, Iso.hom_inv_id_assoc] using ht
+
+private theorem baseCoefficient_bounded (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (S : Scheme.{u})
+    (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
+    _root_.DerivedCategory.TStructure.t.bounded (affineLinearBaseCoefficient A N hA S d) := by
+  have hflat : ObjectProperty.flat (Scheme.finiteEtaleTateTwist S N A hA 1) := by
+    apply (ObjectProperty.flat_iff_preservesFiniteLimits _).2
+    exact (Scheme.finite_etale_torsion_twist_line S N hN
+      (fun x ↦ by
+        simpa only [map_natCast] using hS.map (S.presheaf.germ ⊤ x (by trivial)).hom) A hA 1).2.2.1
+  have ht := _root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat hflat
+  have hshift := DerivedCategory.torAmplitudeIn.shift ht (2 : ℤ)
+  induction d with
+  | zero =>
+    change _root_.DerivedCategory.TStructure.t.bounded (ordinaryFiniteUnit A S)
+    exact ⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩
+  | succ d ih =>
+    exact bounded_derivedTensor_of_finiteTorAmplitude (ModuleCat.{u + 1} A) S ih
+      ⟨_, _, hshift⟩
+
+private theorem coefficient_annihilator (ell : ℕ) [Fact ell.Prime]
+    (F : Type u) [Field F] [Algebra (Padic ell) F] [FiniteDimensional (Padic ell) F]
+    (n : ℕ) : ((ell ^ (n + 1) : ℕ) : Scheme.finiteTateCoefficient ell F n) = 0 := by
+  let O := Padic.coefficientExtensionIntegers ell F
+  let m := Padic.coefficientExtensionMaximalIdeal ell F
+  have hs := (Padic.extension_integers_dvr ell F
+    (Padic.coefficientExtensionAbsoluteValue ell F)
+    (spectralNorm_extends (K := Padic ell) (L := F))).choose_spec.choose_spec
+  have hm : (ell : O) ∈ m := by
+    apply (hs.2.1 (ell : O)).2
+    have he := spectralNorm_extends (K := Padic ell) (L := F) (ell : Padic ell)
+    change spectralNorm (Padic ell) F (ell : F) < 1
+    simpa only [map_natCast] using he.trans_lt (Padic.norm_p_lt_one (p := ell))
+  have hg : Ideal.span ({Padic.coefficientExtensionUniformizer ell F} : Set O) = m := by
+    exact hs.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  apply ULift.down_injective
+  change ((ell ^ (n + 1) : ℕ) : Padic.coefficientExtensionRing ell F (n + 1)) = 0
+  rw [← map_natCast (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal ell F (n + 1))),
+    Ideal.Quotient.eq_zero_iff_mem]
+  change ((ell ^ (n + 1) : ℕ) : O) ∈
+    Ideal.span ({Padic.coefficientExtensionUniformizer ell F} : Set O) ^ (n + 1)
+  rw [hg, Nat.cast_pow]
+  exact Ideal.pow_mem_pow hm (n + 1)
+
+attribute [local irreducible] VectorBundleZeroSection.scheme VectorBundleZeroSection.π
+  VectorBundleZeroSection.over VectorBundleZeroSection.antiEquivalence
+set_option backward.isDefEq.respectTransparency true
+private theorem purityAtModulus (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (M : SheafOfModules.{u} S.ringCatSheaf) [M.IsFiniteLocallyFreeOfRank d] :
+    VectorBundlePurityAtModulus N hN A hA S hS d M := by
+  dsimp only [VectorBundlePurityAtModulus]
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · exact (existsUnique_vectorIntegrationGluing _ _ _ _ _ _ _ _).2.exists.choose_spec.2
+  · apply (_root_.DerivedCategory.TStructure.t.bounded).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _
+        (VectorBundleZeroSection.π S d M)).app _).symm
+    exact Functor.bounded_mapDerivedCategory_obj _
+      (baseCoefficient_bounded _ _ (hN) _ S
+        (hS) d)
+  · let B := vectorIntegrationCoefficient _ _ (hA) S d M
+    have hb : _root_.DerivedCategory.TStructure.t.bounded B := by
+      apply (_root_.DerivedCategory.TStructure.t.bounded).prop_of_iso
+        ((leftDerivedUpperStarIsoMapDerivedCategory _
+          (VectorBundleZeroSection.π S d M)).app _).symm
+      exact Functor.bounded_mapDerivedCategory_obj _
+        (baseCoefficient_bounded _ _ (hN) _ S
+          (hS) d)
+    exact ⟨⟨B, hb.1⟩, ⟨Iso.refl _⟩⟩
+  · intro C a
+    let P := ProEtale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} (A))
+      (vectorBundlePurityCompactification S d M)
+    let Q := (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} (A))
+      (VectorBundleZeroSection.scheme S d M)).mapDerivedCategory
+    exact existsUnique_postcompose (P.mapIso (Q.mapIso a))
+      ((ProEtale.compactSupportSiteComparison _
+        (vectorBundlePurityCompactification S d M)).hom.app C ≫
+        (ProEtale.comparisonUpperStar
+          (ModuleCat.{u + 1} (A)) S).mapDerivedCategory.map
+          ((vectorBundlePurityLower _ S d M).map a.hom ≫
+            vectorBundleIntegration _ (hN) _ _ S
+              (hS) d M))
+  · intro K
+    let : IsAffineHom (VectorBundleZeroSection.π S d M) :=
+      (vectorIntegration_geometry S d M).1
+    let : LocallyOfFiniteType (VectorBundleZeroSection.π S d M) :=
+      (vectorIntegration_geometry S d M).2.1
+    have hp : IsIso (compactProjectionMapCoeffFirst A (VectorBundleZeroSection.π S d M) K
+        (vectorIntegrationCoefficient A N hA S d M)) := by
+      have := isIso_projectionMap_of_finite A (VectorBundleZeroSection.π S d M)
+      have hcomponent : IsIso (((projectionMap (ModuleCat.{u + 1} A)
+          (VectorBundleZeroSection.π S d M)).app
+            (vectorIntegrationCoefficient A N hA S d M)).app K) := inferInstance
+      unfold compactProjectionMapCoeffFirst
+      refine IsIso.comp_isIso' ?_ (IsIso.comp_isIso' hcomponent ?_)
+      · exact (((derivedTensorSymmetry (ModuleCat.{u + 1} A) S).app K).app
+          (vectorIntegrationSource A N hA S d M)).isIso_hom
+      · exact Functor.map_isIso _
+          (((derivedTensorSymmetry (ModuleCat.{u + 1} A)
+            (VectorBundleZeroSection.scheme S d M)).app
+              (vectorIntegrationCoefficient A N hA S d M)).app
+                ((ordinaryFinitePullback A (VectorBundleZeroSection.π S d M)).obj K)).hom
+    have hq : IsIso (vectorBundlePurityProjectionMap A N hA S d M K) := hp
+    refine ⟨(asIso (vectorBundlePurityProjectionMap A (N)
+      (hA) S d M K)).symm, rfl, ?_⟩
+    simp only [Iso.symm_hom, asIso_inv]
+    dsimp only [vectorBundlePurityAdjunction, vectorBundlePurityTwistedPullback]
+    exact vectorIntegrationMate_isIso (N) (hN) A
+      (hA) S (hS) d M K
 
 /-- Vector-bundle purity for the actual integration mate on ordinary unbounded
 etale derived categories. The positive level is indexed by its predecessor n.
@@ -421,6 +517,20 @@ theorem vectorBundlePurity (ell : ℕ) [Fact ell.Prime]
       VectorBundlePurityAtModulus (ell ^ (n + 1))
         (Nat.pow_pos (Fact.out : ell.Prime).pos) (Scheme.finiteTateCoefficient ell F n) hA
         S (vectorBundlePurityInvertiblePower ell S hS n) d M := by
-  sorry
+  constructor
+  · obtain ⟨b, hb, hpb, ht, hu⟩ := Scheme.finite_tate_site_descent ell F n
+    have hi (T : Scheme.{u}) (f : T ⟶ S) : IsUnit (ell : Γ(T, ⊤)) := by
+      simpa only [map_natCast] using hS.map f.appTop.hom
+    refine ⟨fun T f r hA k ↦ b T (hi T f) r hA k, ?_, ?_, ?_⟩
+    · intro T f r hA k
+      exact hb T (hi T f) r hA k
+    · intro T f r r' h hA hA' k
+      exact ht T (hi T f) r r' h hA hA' k
+    · intro T f r hA k G a
+      exact hu T (hi T f) r hA k G a
+  · refine ⟨coefficient_annihilator ell F n, ?_⟩
+    exact purityAtModulus (ell ^ (n + 1)) (Nat.pow_pos (Fact.out : ell.Prime).pos)
+      _ (coefficient_annihilator ell F n) S (vectorBundlePurityInvertiblePower ell S hS n) d M
+
 
 end AlgebraicGeometry.Etale
