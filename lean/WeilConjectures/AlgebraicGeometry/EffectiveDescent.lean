@@ -9,9 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
-import WeilConjectures.FieldTheory.CommonExtensionFields
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 public import Mathlib.CategoryTheory.Sites.Over
@@ -21,7 +19,6 @@ public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Group
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Neighbourhood
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
-public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
 # Effective descent for schemes
@@ -213,69 +210,6 @@ theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p]
 end CategoryTheory.Over.DescentDatum
 
 namespace AlgebraicGeometry
-
-private theorem integral_of_flat_surjective {A B : Scheme.{u}} (f : A ⟶ B)
-    [Flat f] [Surjective f] [IsIntegral A] : IsIntegral B := by
-  have : IrreducibleSpace B := f.surjective.irreducibleSpace f.continuous
-  have (b : B) : _root_.IsReduced (B.presheaf.stalk b) := by
-    obtain ⟨a, rfl⟩ := f.surjective b
-    let φ := (f.stalkMap a).hom
-    let := φ.toAlgebra
-    have : IsLocalHom (algebraMap (B.presheaf.stalk (f a)) (A.presheaf.stalk a)) :=
-      inferInstanceAs (IsLocalHom (f.stalkMap a).hom)
-    have : Module.Flat (B.presheaf.stalk (f a)) (A.presheaf.stalk a) := Flat.stalkMap f a
-    have : Module.FaithfullyFlat (B.presheaf.stalk (f a)) (A.presheaf.stalk a) :=
-      Module.FaithfullyFlat.of_flat_of_isLocalHom
-    exact isReduced_of_injective φ (FaithfulSMul.algebraMap_injective
-      (B.presheaf.stalk (f a)) (A.presheaf.stalk a))
-  have : IsReduced B := isReduced_of_isReduced_stalk B
-  exact isIntegral_of_irreducibleSpace_of_isReduced B
-
-private theorem geometricallyIntegral_of_field_pullback {k K : Type u}
-    [Field k] [Field K] [Algebra k K] {Z Z' : Scheme.{u}} (z : Z ⟶ Spec (.of k))
-    (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)
-    (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K))))
-    [GeometricallyIntegral z'] : GeometricallyIntegral z := by
-  rw [GeometricallyIntegral.eq_geometrically]
-  rw [geometrically_iff_of_commRing]
-  intro L _ _ A a b hs
-  obtain ⟨M, hM, hMk, i, j, _, _⟩ := Field.exists_common_extension k K L
-  let im := Spec.map (CommRingCat.ofHom i.toRingHom)
-  let jm := Spec.map (CommRingCat.ofHom j.toRingHom)
-  let pk := Spec.map (CommRingCat.ofHom (algebraMap k K))
-  let pl := Spec.map (CommRingCat.ofHom (algebraMap k L))
-  have hij : im ≫ pk = jm ≫ pl := by
-    rw [← Spec.map_comp, ← Spec.map_comp]
-    congr 1
-    ext x
-    exact (i.commutes x).trans (j.commutes x).symm
-  let W := pullback z' im
-  let w₁ : W ⟶ Z' := pullback.fst z' im
-  let w₂ : W ⟶ Spec (.of M) := pullback.snd z' im
-  have hw : IsPullback w₁ w₂ z' im := .of_hasPullback z' im
-  have hi : IsIntegral W := GeometricallyIntegral.geometrically_isIntegral
-    im w₁ w₂ hw
-  have ht : IsPullback (w₁ ≫ q) w₂ z (jm ≫ pl) := by
-    rw [← hij]
-    exact hw.paste_horiz h
-  let r : W ⟶ A := hs.lift (w₁ ≫ q) (w₂ ≫ jm) (by
-    simpa only [Category.assoc] using ht.w)
-  have hra : r ≫ a = w₁ ≫ q := by simp [r]
-  have hrb : r ≫ b = w₂ ≫ jm := by simp [r]
-  have hr : IsPullback r w₂ b jm := by
-    apply IsPullback.of_right (h₁₂ := a) (v₁₃ := z) (h₂₂ := pl)
-    · simpa only [hra] using ht
-    · exact hrb
-    · exact hs
-  have : Flat jm := by
-    dsimp [jm]
-    infer_instance
-  have : Surjective jm := by
-    dsimp [jm]
-    infer_instance
-  have : Flat r := MorphismProperty.of_isPullback hr.flip inferInstance
-  have : Surjective r := MorphismProperty.of_isPullback hr.flip inferInstance
-  exact integral_of_flat_surjective r
 
 /-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
 field extension and let `Z` be a scheme over `k` whose base change `Z_K` is proper, smooth of

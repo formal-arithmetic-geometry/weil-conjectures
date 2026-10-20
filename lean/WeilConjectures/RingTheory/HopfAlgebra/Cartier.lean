@@ -30,7 +30,6 @@ public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
 
-
 /-!
 # Cartier's theorem: Hopf algebras in characteristic zero are reduced
 

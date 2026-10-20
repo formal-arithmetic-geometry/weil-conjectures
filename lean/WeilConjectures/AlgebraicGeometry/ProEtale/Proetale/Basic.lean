@@ -52,15 +52,15 @@ def zariskiTopology : GrothendieckTopology X.ProEt :=
 
 
 
-instance Basic_hasIsos : (precoverage X).HasIsos := by
+instance precoverageHasIsos : (precoverage X).HasIsos := by
   dsimp [precoverage]
   infer_instance
 
-instance Basic_isStableUnderComposition : (precoverage X).IsStableUnderComposition := by
+instance precoverageStableUnderComposition : (precoverage X).IsStableUnderComposition := by
   dsimp [precoverage]
   infer_instance
 
-instance Basic_isStableUnderBaseChange : (precoverage X).IsStableUnderBaseChange := by
+instance precoverageStableUnderBaseChange : (precoverage X).IsStableUnderBaseChange := by
   dsimp [precoverage]
   infer_instance
 

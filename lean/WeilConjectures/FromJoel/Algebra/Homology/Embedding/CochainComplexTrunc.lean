@@ -27,7 +27,7 @@ namespace CochainComplex
 variable {C : Type*} [Category C] [Abelian C]
   (K L : CochainComplex C ℤ)
 
-instance CochainComplexTrunc_mono (n : ℤ) : Mono (K.ιTruncLE n) := by
+instance (n : ℤ) : Mono (K.ιTruncLE n) := by
   dsimp only [ιTruncLE]
   infer_instance
 

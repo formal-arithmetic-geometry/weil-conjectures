@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
-import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
+public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
 
 /-!
 # The Lie algebra of a group scheme

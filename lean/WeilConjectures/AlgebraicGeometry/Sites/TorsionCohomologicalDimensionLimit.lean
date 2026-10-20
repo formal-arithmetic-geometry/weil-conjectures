@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleZariskiComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
 public import WeilConjectures.SixFunctors.BaseChange.Sections
-import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-!
 # Torsion cohomological dimension of an inverse limit
