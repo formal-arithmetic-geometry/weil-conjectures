@@ -1,0 +1,189 @@
+{
+ "id": "lem-coef-normalized-dvr-adic-cone-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-dvr-effectivity",
+   "place": "Proof paragraphs 1--4, excluding the nilpotent fibre-limit calculation already proved in the adopted source",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strict adic cone model for derived finite reduction of a DVR Roos limit",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme X, a finite-field datum D of residue characteristic different from l, and a normalized finite-quotient tower T [def-coef-normalized-dvr-tower]. Let M with product map p and connecting map delta be its Roos derived limit [def-weil-derived-limit]. For any finite index n (exponent n+1) and tensor--restriction adjunction adj [lem-weil-derived-scalar-extension-restriction-adjunction], there are a commutative scalar ring S, an S-linear structure on the category of completed-coefficient module sheaves, countable products in its derived category, an element v of S, and a strict normalized adic complex tower U as defined in [lem-coef-strict-normalized-adic-cone-limit]. There are specified level isomorphisms Q(U_(j+1)) -> evaluation_j(T) for every j, commuting with all successor maps of the original tower. There is a homotopy-limit cone c on the tower cone(v^(n+1):U_(m+n+1)->U_(m+n+1)), together with isomorphisms a:Res_n(M tensor^L B_n)->c.pt and the specified level isomorphism followed by T.evaluationIso n:Q(U_(n+1))->Res_n(T_n). Under a and b, the restricted adjoint of the n-th original limit projection is exactly the zeroth cone projection followed by the canonical cokernel augmentation and normalized quotient comparison. The conclusion supplies this strict model and equality of actual maps; it asserts no invertibility of that projection.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "Proof paragraphs 1--4, excluding the nilpotent fibre-limit calculation already proved in the adopted source; Lean lean/Sheaf/Paper/NormalizedDVRAdicConeModel.lean, WeilConjectures.normalizedDVR_adic_cone_model"
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-derived-limit",
+  "lem-coef-strict-normalized-adic-cone-limit"
+ ],
+ "proof": [
+  {
+   "text": "Use the notation of [def-coef-normalized-dvr-tower]: $B_j=(\\mathcal O_E/\\varpi^j)_X$ and $R=\\varprojlim_jB_j$; the symbol $A_j$ in the conclusion means this coefficient sheaf when used in a sheaf tensor product. By [lem-weil-l-adic-extension-integers-dvr], $\\mathcal O_E$ is a domain and a principal ideal ring, hence Noetherian (each ideal has one generator). Multiplication by $\\varpi^n$ is injective on the discrete constant $\\mathcal O_E$-sheaf: a section is locally represented by constants, and its product can vanish only if those constants vanish. Apply [lem-weil-pbc-constant-completion-equivalence] with $I=(\\varpi)$: $R$ is flat over that constant sheaf and $R/\\varpi^nR=B_n$. Tensoring the injective multiplication map with this flat sheaf proves that $\\varpi^n:R\\to R$ is injective. Thus $K_n=[R\\xrightarrow{\\varpi^n}R]$, in degrees $[-1,0]$, with degree-zero augmentation to $B_n$, is a bounded free resolution. It is K-flat directly from [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]: tensoring an acyclic complex with $K_n$ gives a shifted cone of multiplication by $\\varpi^n$, which is acyclic by [lem-sf-derived-homology-long-exact].",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M, lemma-completion-flat; elementary one-generator Koszul resolution"
+   }
+  },
+  {
+   "text": "Choose K-flat representatives with flat terms by lem-pc-kflat-resolution. Induct on the positive level: express the derived transition to the already chosen smaller representative as a right fraction, and resolve the roof source by a K-flat complex with flat terms. This gives a strict semilinear chain map, preserving all previously chosen levels. Longer transitions are composites and represent the given cocycle. The level identifications commute with successor maps. Taking their product transfers the given Roos triangle and its projections to the strict model directly; no lift through derived evaluation is needed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic (right fractions); Tag 06YS in sites-cohomology.tex (K-flat resolutions); explicit successor induction"
+   }
+  },
+  {
+   "text": "Give the completed module category its action by the valuation ring and the chosen uniformizer. Insert U_0=0 and let U_j be the restricted flat-term K-flat representative of level j for j>0. DVR divisibility and flatness over B_j show exactness of U_(a+b) --v^a--> U_(a+b) --v^b--> U_(a+b). Normalization and preservation of K-flat base change give the quasi-isomorphisms from termwise quotients to smaller levels. These verify every field of the strict normalized adic tower interface.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "def-coef-normalized-dvr-tower",
+    "lem-coef-strict-normalized-adic-cone-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+    "place": "Proof: coefficient triangles, nilpotent fibres, finite free tensor comparison and canonical maps"
+   }
+  },
+  {
+   "text": "Exact countable products on the pro-etale site and their derived-category comparison compute the products of the strict complexes termwise. Tensoring with the two-term free resolution K_(n+1) commutes with these products: in each degree both sides consist of the same two product factors, and the differential and transition endomorphisms agree. The same bounded-free calculation commutes with shifts and the Roos cone, with the usual tensor signs. Removing the finite prefix gives a homotopy-limit cone of multiplication cones whose point is the restricted derived tensor of M with B_(n+1). The tensor unit formula identifies its augmented projection with the restricted adjoint of the original projection. This step constructs a and the displayed map equality; it does not assert the projection is invertible.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "def-pc-tensor-complex-sheaves",
+    "def-coef-normalized-dvr-tower",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-derived-adjoint-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+    "place": "Finite free resolution, tensor comparison with the Roos cone, and canonical comparison map"
+   }
+  },
+  {
+   "text": "The bounded-free tensor comparison transports the given Roos cone, after deletion of its finite prefix, to a homotopy-limit cone of multiplication cones. Its projections commute with the strict-model level isomorphisms. Under the cone augmentation and normalized cokernel comparison, the induced map is the adjoint of the original projection, by the tensor unit formula and adjunction naturality. Changing adjunctions conjugates this equation by the unique compatible left-adjoint isomorphism.",
+   "uses": [
+    "def-weil-derived-limit",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-coef-normalized-dvr-tower",
+    "lem-coef-strict-normalized-adic-cone-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+    "place": "Proof: coefficient triangles, nilpotent fibres, finite free tensor comparison and canonical maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pur-derived-change-of-rings",
+  "lem-coef-strict-normalized-adic-cone-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pc-derived-adjoint-functors",
+  "def-weil-derived-limit",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "Proof paragraphs 1--4, excluding the nilpotent fibre-limit calculation already proved in the adopted source"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived reduction of the homotopy inverse limit of a normalized tower of complexes modulo powers of a regular element is the corresponding finite level",
+   "results": "8 hits: HomologicalComplex.instHasLimit, DoldKan normalization, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, and ordinary limits; no derived DVR effectivity comparison.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; use the existing source-library adic cone theorem where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomotopyLimit\", \"IsIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; use the existing source-library adic cone theorem where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedAdicTower|normalized.*adic.*tower|KFlat.*[Cc]omparison|derived.*[Rr]estriction.*[Uu]nit",
+   "results": "0 Mathlib hits. Local source search finds CochainComplex.IsNormalizedAdicTower.isIso_π_comp in WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower; used through the attached source-library node.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; use the existing source-library adic cone theorem where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedDVREffectivity",
+  "date": "2026-10-21",
+  "group": "T6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedDVRAdicConeModel",
+  "file": "lean/Sheaf/Paper/NormalizedDVRAdicConeModel.lean",
+  "declaration": "WeilConjectures.normalizedDVR_adic_cone_model",
+  "statement": "theorem normalizedDVR_adic_cone_model\n    (T : NormalizedDVRTower l E X D hl)\n    (M : completedIntegralDerivedCategory l E X D hl)\n    [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)]\n    (p : M ⟶ ∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)\n    (δ : (∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower) ⟶\n      M⟦(1 : ℤ)⟧)\n    (hc : IsDerivedLimitTriangle\n      (fun n : ℕ ↦ (normalizedDVRTowerTransition l E X D hl n.le_succ).app T.tower)\n      M p δ) (n : ℕ)\n    (adj : scalarReductionDerivedExtension l E X n ⊣\n      scalarReductionDerivedRestriction l E X n) :\n    ∃ (S : Type (max u (t + 1))) (hS : CommRing S), letI := hS\n      ∃ (hlin : Linear S (completedIntegralModuleSheaves l E X D hl)), letI := hlin\n      ∃ (hprod : HasLimitsOfShape (Discrete ℕ)\n          (completedIntegralDerivedCategory l E X D hl)), letI := hprod\n      ∃ (ϖ : S)\n        (U : ℕᵒᵖ ⥤ CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)\n        (hU : CochainComplex.IsNormalizedAdicTower ϖ U)\n        (eU : ∀ j : ℕ, DerivedCategory.Q.obj (U.obj (op (j + 1))) ≅\n          (normalizedDVRTowerEvaluation l E X D hl j).obj T.tower),\n        (∀ j : ℕ,\n          DerivedCategory.Q.map (U.map\n              (homOfLE (Nat.succ_le_succ j.le_succ)).op) ≫ (eU j).hom =\n            (eU (j + 1)).hom ≫\n              (normalizedDVRTowerTransition l E X D hl j.le_succ).app T.tower) ∧\n        ∃ (c : Cone (CochainComplex.IsNormalizedAdicTower.arrowTower\n          (ϖ := ϖ) (T := U) (n + 1) ⋙ CochainComplex.ConeCoimage.cone ⋙ DerivedCategory.Q)),\n        CategoryTheory.Pretriangulated.IsHomotopyLimit c ∧\n        ∃ (a : (scalarReductionDerivedRestriction l E X n).obj\n              ((scalarReductionDerivedExtension l E X n).obj M) ≅ c.pt),\n          (scalarReductionDerivedRestriction l E X n).map\n              ((adj.homEquiv M (T.M n)).symm\n                (p ≫ Pi.π _ n ≫ (T.evaluationIso n).hom)) =\n            a.hom ≫ c.π.app (op 0) ≫ DerivedCategory.Q.map\n              (CochainComplex.ConeCoimage.ρ.app _ ≫ CochainComplex.ConeCoimage.desc.app _ ≫\n                hU.cokerDesc (n + 1) (op 0)) ≫ (eU n).hom ≫\n                (T.evaluationIso n).hom",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261020T211832-L-3509084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261020T211832-L-3509084",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

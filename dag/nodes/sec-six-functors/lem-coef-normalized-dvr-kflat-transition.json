@@ -1,0 +1,146 @@
+{
+ "id": "lem-coef-normalized-dvr-kflat-transition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-dvr-effectivity",
+   "place": "Proof last paragraph: identification with the canonical quotient tower, at K-flat representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical quotient transitions under normalized K-flat counits",
+ "statement": "Fix l,E,X,D as in [def-coef-normalized-dvr-tower]. Let P be a K-flat complex of completed-coefficient module sheaves [def-pc-kflat-complex], M a derived object, e:Q(P)~M and n a natural number. Write c_j:Res_j(F_j(QP))->Q(Res_j(B_j tensor P)) for the universal derived scalar-extension counit followed by the exact restriction comparison [lem-weil-derived-scalar-extension-restriction-adjunction]. Let adj_m and adj_n be tensor--restriction adjunctions at m=n+1 and n whose units on QP, followed by c_m and c_n, respectively equal the localized canonical tensor units [def-weil-integral-reduction-tower]. Then the adjoint transition at M, after completed restriction and the canonical composition isomorphism, commutes with Res_j(F_j(e.inv)) followed by c_j and the localized integralTowerTransition of P. Precisely this is the equation in the attached Lean declaration; c_j is the explicitly constructed map normalizedDVRKFlatComparison, with no choice of unproved data.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "Proof last paragraph: identification with the canonical quotient tower, at K-flat representatives; Lean lean/Sheaf/Paper/NormalizedDVRKFlatTransition.lean, WeilConjectures.normalizedDVR_kflat_transition"
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-pc-kflat-complex",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient projections commute with the quotient map. Form the finite-linear ordinary tensor quotient map b tensor x -> rho(b) tensor x. Its adjoint is the smaller tensor unit, since rho(1)=1. The pure-tensor characterization of integralTowerTransition identifies its restriction with that chain map.",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+    "place": "Proof: coefficient triangles, nilpotent fibres, finite free tensor comparison and canonical maps"
+   }
+  },
+  {
+   "text": "Localize the ordinary adjunction identity on P. The universal derived counits are invertible on P, and the supplied unit normalizations identify the localized adjoint with the displayed derived transition. The exact-restriction composition comparison accounts for the two ways to restrict to completed coefficients.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+    "place": "Proof: coefficient triangles, nilpotent fibres, finite free tensor comparison and canonical maps"
+   }
+  },
+  {
+   "text": "Use naturality of the two units and of the exact restriction composition comparison to conjugate the identity from QP to M through e. Reassociation gives exactly the stated square.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+    "place": "Proof: coefficient triangles, nilpotent fibres, finite free tensor comparison and canonical maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "Proof last paragraph: identification with the canonical quotient tower, at K-flat representatives"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived reduction of the homotopy inverse limit of a normalized tower of complexes modulo powers of a regular element is the corresponding finite level",
+   "results": "8 hits: HomologicalComplex.instHasLimit, DoldKan normalization, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, and ordinary limits; no derived DVR effectivity comparison.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; use the existing source-library adic cone theorem where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomotopyLimit\", \"IsIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; use the existing source-library adic cone theorem where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedAdicTower|normalized.*adic.*tower|KFlat.*[Cc]omparison|derived.*[Rr]estriction.*[Uu]nit",
+   "results": "0 Mathlib hits. Local source search finds CochainComplex.IsNormalizedAdicTower.isIso_π_comp in WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower; used through the attached source-library node.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; use the existing source-library adic cone theorem where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedDVREffectivity",
+  "date": "2026-10-21",
+  "group": "T6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedDVRKFlatTransition",
+  "file": "lean/Sheaf/Paper/NormalizedDVRKFlatTransition.lean",
+  "declaration": "WeilConjectures.normalizedDVR_kflat_transition",
+  "statement": "theorem normalizedDVR_kflat_transition\n    (P : CochainComplex (scalarReductionSource l E X) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (J := AlgebraicGeometry.Scheme.ProEt.topology X)\n      (R := completedIntegralCommRingSheafUnrestricted l E X) P)\n    (M : completedIntegralDerivedCategory l E X D hl)\n    (e : DerivedCategory.Q.obj P ≅ M) (n : ℕ)\n    (am : scalarReductionDerivedExtension l E X (n + 1) ⊣\n      scalarReductionDerivedRestriction l E X (n + 1))\n    (an : scalarReductionDerivedExtension l E X n ⊣ scalarReductionDerivedRestriction l E X n)\n    (hm : am.unit.app (DerivedCategory.Q.obj P) ≫\n        normalizedDVRKFlatComparison l E X (n + 1) P =\n      DerivedCategory.Q.map (integralTowerUnit l E X D hl P (n + 1)))\n    (hn : an.unit.app (DerivedCategory.Q.obj P) ≫\n        normalizedDVRKFlatComparison l E X n P =\n      DerivedCategory.Q.map (integralTowerUnit l E X D hl P n)) :\n    (scalarReductionDerivedRestriction l E X (n + 1)).map\n        ((am.homEquiv\n          M ((normalizedDVRRes l E X n.le_succ).obj\n            ((scalarReductionDerivedExtension l E X n).obj M))).symm\n          (an.unit.app M ≫\n            (normalizedDVRResCompletedComp l E X D hl n.le_succ).inv.app\n              ((scalarReductionDerivedExtension l E X n).obj M))) ≫\n      (normalizedDVRResCompletedComp l E X D hl n.le_succ).hom.app\n        ((scalarReductionDerivedExtension l E X n).obj M) ≫\n      (scalarReductionDerivedRestriction l E X n).map\n        ((scalarReductionDerivedExtension l E X n).map e.inv) ≫\n      normalizedDVRKFlatComparison l E X n P =\n    (scalarReductionDerivedRestriction l E X (n + 1)).map\n        ((scalarReductionDerivedExtension l E X (n + 1)).map e.inv) ≫\n      normalizedDVRKFlatComparison l E X (n + 1) P ≫\n      DerivedCategory.Q.map (integralTowerTransition l E X D hl P n)",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-21",
+  "declarations": [
+   "WeilConjectures.normalizedDVRKFlatComparison",
+   "WeilConjectures.normalizedDVR_kflat_transition"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261020T211832-L-3509084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261020T211832-L-3509084",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

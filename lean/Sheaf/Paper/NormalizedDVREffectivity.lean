@@ -8,28 +8,9 @@ module
 public import Sheaf.Paper.NormalizedDVRTower
 public import Sheaf.Paper.DerivedComplete
 public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.SequentialTowerEvaluationFull
-import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
-import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
-import Mathlib.Algebra.Homology.DerivedCategory.Fractions
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.DerivedCompleteOnSlices
-import Sheaf.Paper.PbcRoosTriangle
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.NormalizedDVRRoosFiniteReduction
+import Sheaf.Paper.NormalizedDVRKFlatReductionModel
+import Mathlib.Algebra.Homology.Functor
 
 /-! # Effectivity of normalized DVR towers
 
@@ -51,10 +32,29 @@ universe d t u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace WeilConjectures
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  scalarReductionExistence scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
+  normalizedDVRResCompletedComp
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
+
+/-- The canonical size witness, registered only in this file. -/
+abbrev normalizedDVREffectivityLocal1 :
+    EssentiallySmall.{max u (t + 1)} X.ProEt :=
+  essentiallySmallSelf.{u} X.ProEt
+attribute [local instance 4000] normalizedDVREffectivityLocal1
+/-- Canonical abelian sheafification, registered only in this file. -/
+abbrev normalizedDVREffectivityLocal2 :
+    HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)
+    AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} X
+attribute [local instance] normalizedDVREffectivityLocal2
+/-- The canonical locally bijective sheafification criterion, registered locally. -/
+abbrev normalizedDVREffectivityLocal3 :
+    (AlgebraicGeometry.Scheme.ProEt.topology X).WEqualsLocallyBijective
+    AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} X
+attribute [local instance] normalizedDVREffectivityLocal3
 
 /-- The actual completed-coefficient tensor-restriction adjunction, normalized on
 K-flat representatives by the tensor unit x ↦ x tensor 1.
@@ -91,53 +91,324 @@ def normalizedDVRCounitComparison (T : NormalizedDVRTower l E X D hl)
   ((normalizedDVRIntegralAdjunction l E X n).homEquiv M (T.M n)).symm
     (p ≫ Pi.π _ n ≫ (T.evaluationIso n).hom)
 
+attribute [local irreducible] normalizedDVRIntegralAdjunction
+  scalarReductionExtension scalarReductionDerivedExtension scalarReductionCounit
+  normalizedDVRKFlatComparison
+
+private theorem adjacentRoosProjection
+    {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {K : ℕ → C} [HasProduct K] (f : ∀ n, K (n + 1) ⟶ K n)
+    (L : C) (p : L ⟶ ∏ᶜ K) (δ : ∏ᶜ K ⟶ L⟦(1 : ℤ)⟧)
+    (hc : IsDerivedLimitTriangle f L p δ) (n : ℕ) :
+    p ≫ Pi.π K (n + 1) ≫ f n = p ≫ Pi.π K n := by
+  have hz : p ≫ towerTransitionEndomorphism f = 0 :=
+    Pretriangulated.comp_distTriang_mor_zero₁₂ _ hc
+  have hn := congrArg (fun a ↦ a ≫ Pi.π K n) hz
+  simp only [towerTransitionEndomorphism, Preadditive.comp_sub, Category.comp_id,
+    Preadditive.sub_comp, Category.assoc, towerProductShift, Pi.lift_π,
+    zero_comp] at hn
+  exact (sub_eq_zero.mp hn).symm
+
+private theorem adjointTransition
+    {C A B : Type*} [Category C] [Category A] [Category B]
+    {Lm : C ⥤ A} {Rm : A ⥤ C} {Ln : C ⥤ B} {Rn : B ⥤ C}
+    (am : Lm ⊣ Rm) (an : Ln ⊣ Rn) (S : B ⥤ A) (e : S ⋙ Rm ≅ Rn)
+    {M : C} {P : A} {Q : B} (a : M ⟶ Rm.obj P) (b : M ⟶ Rn.obj Q)
+    (v : P ⟶ S.obj Q) (h : a ≫ Rm.map v ≫ e.hom.app Q = b) :
+    (am.homEquiv M P).symm a ≫ v =
+      (am.homEquiv M (S.obj (Ln.obj M))).symm
+          (an.unit.app M ≫ e.inv.app (Ln.obj M)) ≫
+        S.map ((an.homEquiv M Q).symm b) := by
+  apply (am.homEquiv M (S.obj Q)).injective
+  rw [am.homEquiv_naturality_right, Equiv.apply_symm_apply,
+    am.homEquiv_naturality_right, Equiv.apply_symm_apply]
+  apply (cancel_mono (e.hom.app Q)).1
+  simp only [Category.assoc]
+  have he := e.hom.naturality ((an.homEquiv M Q).symm b)
+  dsimp only [Functor.comp_map] at he
+  rw [he]
+  rw [Iso.inv_hom_id_app_assoc]
+  rw [← an.homEquiv_unit, Equiv.apply_symm_apply]
+  exact h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem normalizedDVRTransition_comp {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m) :
+    normalizedDVRTowerTransition l E X D hl hrm ≫
+        normalizedDVRTowerTransition l E X D hl hmn =
+      normalizedDVRTowerTransition l E X D hl (le_trans hmn hrm) := by
+  dsimp only [normalizedDVRTowerTransition]
+  rw [Localization.comp_liftNatTrans]
+  congr 1
+  ext K
+  change DerivedCategory.Q.map (K.asFunctor.map (homOfLE hrm).op) ≫
+    DerivedCategory.Q.map (K.asFunctor.map (homOfLE hmn).op) =
+    DerivedCategory.Q.map (K.asFunctor.map (homOfLE (le_trans hmn hrm)).op)
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem normalizedDVRTransition_refl (n : ℕ) :
+    normalizedDVRTowerTransition l E X D hl (Nat.le_refl n) =
+      𝟙 (normalizedDVRTowerEvaluation l E X D hl n) := by
+  have he : (evaluation ℕᵒᵖ (completedIntegralModuleSheaves l E X D hl)).map
+      (homOfLE (Nat.le_refl n)).op = 𝟙 _ :=
+    (evaluation ℕᵒᵖ (completedIntegralModuleSheaves l E X D hl)).map_id (op n)
+  dsimp only [normalizedDVRTowerTransition]
+  rw [he, NatTrans.mapHomologicalComplex_id, Functor.whiskerRight_id',
+    Localization.liftNatTrans_id]
+
+private theorem normalizedDVRRoosProjection (T : NormalizedDVRTower l E X D hl)
+    (M : completedIntegralDerivedCategory l E X D hl)
+    [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)]
+    (p : M ⟶ ∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)
+    (δ : (∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower) ⟶
+      M⟦(1 : ℤ)⟧)
+    (hc : IsDerivedLimitTriangle
+      (fun n : ℕ ↦ (normalizedDVRTowerTransition l E X D hl n.le_succ).app T.tower)
+      M p δ) {m n : ℕ} (h : n ≤ m) :
+    p ≫ Pi.π _ m ≫ (normalizedDVRTowerTransition l E X D hl h).app T.tower =
+      p ≫ Pi.π _ n := by
+  induction m, h using Nat.le_induction with
+  | base => simp only [normalizedDVRTransition_refl, NatTrans.id_app, Category.comp_id]
+  | succ m h ih =>
+    rw [← normalizedDVRTransition_comp l E X D hl m.le_succ h, NatTrans.comp_app]
+    calc
+      _ = (p ≫ Pi.π _ (m + 1) ≫
+          (normalizedDVRTowerTransition l E X D hl m.le_succ).app T.tower) ≫
+          (normalizedDVRTowerTransition l E X D hl h).app T.tower := by
+        simp only [Category.assoc]
+      _ = _ := by rw [adjacentRoosProjection _ M p δ hc m]
+                  simpa only [Category.assoc] using ih
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem normalizedDVRCounitComparison_coherent
+    (T : NormalizedDVRTower l E X D hl)
+    (M : completedIntegralDerivedCategory l E X D hl)
+    [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)]
+    (p : M ⟶ ∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)
+    (δ : (∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower) ⟶
+      M⟦(1 : ℤ)⟧)
+    (hc : IsDerivedLimitTriangle
+      (fun n : ℕ ↦ (normalizedDVRTowerTransition l E X D hl n.le_succ).app T.tower)
+      M p δ) {m n : ℕ} (h : n ≤ m) :
+    normalizedDVRCounitComparison l E X D hl T M p m ≫ T.tau h =
+      normalizedDVRReductionTransition l E X D hl h M ≫
+        (normalizedDVRRes l E X h).map
+          (normalizedDVRCounitComparison l E X D hl T M p n) := by
+  apply adjointTransition (normalizedDVRIntegralAdjunction l E X m)
+    (normalizedDVRIntegralAdjunction l E X n) (normalizedDVRRes l E X h)
+    (normalizedDVRResCompletedComp l E X D hl h)
+  simp only [Category.assoc]
+  change p ≫ Pi.π _ m ≫ (T.evaluationIso m).hom ≫
+    (normalizedDVRResCompleted l E X D hl m).map (T.tau h) ≫
+      (normalizedDVRResCompletedComp l E X D hl h).hom.app (T.M n) = _
+  rw [← T.tower_tau h]
+  simpa only [Category.assoc] using congrArg (fun f ↦ f ≫ (T.evaluationIso n).hom)
+    (normalizedDVRRoosProjection l E X D hl T M p δ hc h)
+
+open CategoryTheory.Pretriangulated in
+private theorem roosTransport
+    {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {X Y : ℕ → C} [HasProduct X]
+    (f : ∀ n, X (n + 1) ⟶ X n) (g : ∀ n, Y (n + 1) ⟶ Y n)
+    (M : C) (p : M ⟶ ∏ᶜ X) (δ : (∏ᶜ X) ⟶ M⟦(1 : ℤ)⟧)
+    (hc : IsDerivedLimitTriangle f M p δ)
+    (a : ∀ n, X n ≅ Y n) (q : ∀ n, M ⟶ Y n)
+    (ht : ∀ n, f n ≫ (a n).hom = (a (n + 1)).hom ≫ g n)
+    (hp : ∀ n, p ≫ Pi.π X n ≫ (a n).hom = q n) :
+    ∃ hprod : HasProduct Y, letI := hprod
+      ∃ δ' : (∏ᶜ Y) ⟶ M⟦(1 : ℤ)⟧,
+        IsDerivedLimitTriangle g M (Pi.lift q) δ' := by
+  let : HasProduct Y :=
+    hasProduct_of_equiv_of_iso X Y (Equiv.refl ℕ) (fun n ↦ (a n).symm)
+  let A : (∏ᶜ X) ≅ (∏ᶜ Y) :=
+    { hom := Limits.Pi.map (fun n ↦ (a n).hom)
+      inv := Limits.Pi.map (fun n ↦ (a n).inv)
+      hom_inv_id := by
+        apply Pi.hom_ext
+        intro n
+        simp [Category.assoc]
+      inv_hom_id := by
+        apply Pi.hom_ext
+        intro n
+        simp [Category.assoc] }
+  refine ⟨inferInstance, A.inv ≫ δ, ?_⟩
+  apply isomorphic_distinguished _ hc _
+  refine Triangle.isoMk _ _ (Iso.refl M) A.symm A.symm ?_ ?_ ?_
+  · change Pi.lift q ≫ A.inv = 𝟙 M ≫ p
+    apply Pi.hom_ext
+    intro n
+    simp only [A, Category.assoc, Limits.Pi.map_π, Pi.lift_π_assoc,
+      Category.id_comp]
+    apply (cancel_mono (a n).hom).1
+    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using (hp n).symm
+  · exact (towerTransitionEndomorphism_natural_backward g f
+      (fun n ↦ (a n).inv) (fun n ↦ by
+        apply (cancel_mono (a n).hom).1
+        simpa [Category.assoc] using
+          congrArg (fun k ↦ (a (n + 1)).inv ≫ k) (ht n))).symm
+  · change (A.inv ≫ δ) ≫ (shiftFunctor C (1 : ℤ)).map (𝟙 M) = A.inv ≫ δ
+    rw [CategoryTheory.Functor.map_id, Category.comp_id]
+
+private theorem restrictionIsoSquare
+    {C A B : Type*} [Category C] [Category A] [Category B]
+    (Rm : A ⥤ C) (Rn : B ⥤ C) (S : B ⥤ A) (e : S ⋙ Rm ≅ Rn)
+    {L P : A} {N Q : B} (a : L ≅ P) (b : N ≅ Q)
+    (v : P ⟶ S.obj Q) (w : L ⟶ S.obj N)
+    (h : a.hom ≫ v = w ≫ S.map b.hom) :
+    Rm.map v ≫ e.hom.app Q ≫ (Rn.mapIso b).inv =
+      (Rm.mapIso a).inv ≫ Rm.map w ≫ e.hom.app N := by
+  have hh : (Rm.mapIso a).hom ≫ Rm.map v ≫ e.hom.app Q =
+      Rm.map w ≫ e.hom.app N ≫ (Rn.mapIso b).hom := by
+    change Rm.map a.hom ≫ Rm.map v ≫ e.hom.app Q = _
+    rw [← Rm.map_comp_assoc, h, Rm.map_comp]
+    have hn := e.hom.naturality b.hom
+    dsimp only [Functor.comp_map] at hn
+    simpa only [Category.assoc, Functor.mapIso_hom] using
+      congrArg (fun k ↦ Rm.map w ≫ k) hn
+  calc
+    _ = (Rm.mapIso a).inv ≫
+        ((Rm.mapIso a).hom ≫ Rm.map v ≫ e.hom.app Q) ≫ (Rn.mapIso b).inv := by
+      simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+    _ = _ := by rw [hh]; simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem normalizedDVRTower_tau (T : NormalizedDVRTower l E X D hl)
+    {m n : ℕ} (h : n ≤ m) :
+    (normalizedDVRTowerTransition l E X D hl h).app T.tower ≫ (T.evaluationIso n).hom =
+      (T.evaluationIso m).hom ≫ (scalarReductionDerivedRestriction l E X m).map (T.tau h) ≫
+        (normalizedDVRResCompletedComp l E X D hl h).hom.app (T.M n) := by
+  exact T.tower_tau h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem normalizedDVRKFlatUnit (n : ℕ)
+    (P : CochainComplex (scalarReductionSource l E X) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)}
+      (J := AlgebraicGeometry.Scheme.ProEt.topology X)
+      (R := completedIntegralCommRingSheafUnrestricted l E X) P) :
+    (normalizedDVRIntegralAdjunction l E X n).unit.app
+        (DerivedCategory.Q.obj P) ≫ normalizedDVRKFlatComparison l E X n P =
+      DerivedCategory.Q.map (integralTowerUnit l E X D hl P n) := by
+  have h := (derivedScalarExtensionRestrictionAdjunction l E X n).choose_spec P hP
+  have hu := Adjunction.mapHomotopyCategory_unit_app_quotient (.up ℤ)
+    (scalarReductionExtension_adjunction l E X n).choose P
+  have hq : DerivedCategory.Qh.map
+      (((scalarReductionExtension_adjunction l E X n).choose.mapHomotopyCategory
+        (.up ℤ)).unit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
+      DerivedCategory.Q.map (unrestrictedTowerUnit l E X P n) :=
+    congrArg (DerivedCategory.Qh.map) hu
+  have hg : integralTowerUnit l E X D hl P n = unrestrictedTowerUnit l E X P n := by
+    ext i U x
+    exact ((integralTowerMaps_existUnique l E X D hl P).exists.choose_spec.1 n i U x).trans
+      (unrestrictedTowerUnit_condition l E X P n i U x).symm
+  have h' := h.trans hq
+  unfold normalizedDVRKFlatComparison normalizedDVRIntegralAdjunction
+  dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
+    Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift, Functor.comp_obj] at h' ⊢
+  exact h'.trans (congrArg DerivedCategory.Q.map hg.symm)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem normalizedDVRComplete_of_isIso
+    (T : NormalizedDVRTower l E X D hl)
+    (M : completedIntegralDerivedCategory l E X D hl)
+    [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)]
+    (p : M ⟶ ∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)
+    (δ : (∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower) ⟶
+      M⟦(1 : ℤ)⟧)
+    (hc : IsDerivedLimitTriangle
+      (fun n : ℕ ↦ (normalizedDVRTowerTransition l E X D hl n.le_succ).app T.tower)
+      M p δ)
+    (hi : ∀ n : ℕ, IsIso (normalizedDVRCounitComparison l E X D hl T M p n)) :
+    IsDerivedComplete l E X D hl M := by
+  obtain ⟨P, hP, e, a, ha, ht⟩ := normalizedDVR_kflat_reduction_model l E X D hl
+    (fun n ↦ normalizedDVRIntegralAdjunction l E X n)
+    (normalizedDVRKFlatUnit l E X D hl) M
+  have hid : CochainComplex.IsKFlatResolutionIndependentCoefficients
+      (J := AlgebraicGeometry.Scheme.ProEt.topology X)
+      (R := completedIntegralCommRingSheaf l E X D hl) (𝟙 P) := ⟨inferInstance, hP⟩
+  let c (n : ℕ) := asIso (normalizedDVRCounitComparison l E X D hl T M p n)
+  let r (n : ℕ) := (scalarReductionDerivedRestriction l E X n).mapIso (c n)
+  let b (n : ℕ) := T.evaluationIso n ≪≫ (r n).symm ≪≫ a n
+  refine ⟨P, P, 𝟙 P, hid, e, ?_⟩
+  apply roosTransport _ _ M p δ hc b
+  · intro n
+    dsimp only [b, Iso.trans_hom, Iso.symm_hom]
+    simp only [Category.assoc]
+    change (normalizedDVRTowerTransition l E X D hl n.le_succ).app T.tower ≫
+      (T.evaluationIso n).hom ≫ (r n).inv ≫ (a n).hom =
+      (T.evaluationIso (n + 1)).hom ≫ (r (n + 1)).inv ≫
+        (a (n + 1)).hom ≫
+          (integralReductionTower l E X D hl P).map (homOfLE n.le_succ).op
+    have ht' := ht n
+    change (scalarReductionDerivedRestriction l E X (n + 1)).map
+      (normalizedDVRReductionTransition l E X D hl n.le_succ M) ≫
+      (normalizedDVRResCompletedComp l E X D hl n.le_succ).hom.app
+        ((scalarReductionDerivedExtension l E X n).obj M) ≫ (a n).hom = _ at ht'
+    simp only [integralReductionTower, Functor.ofOpSequence_map_homOfLE_succ]
+    rw [← ht']
+    have hτ := normalizedDVRTower_tau l E X D hl T n.le_succ
+    have hτ' := congrArg (fun k ↦ k ≫ (r n).inv ≫ (a n).hom) hτ
+    simp only [Category.assoc] at hτ'
+    rw [hτ']
+    have hs := restrictionIsoSquare
+      (scalarReductionDerivedRestriction l E X (n + 1))
+      (scalarReductionDerivedRestriction l E X n) (normalizedDVRRes l E X n.le_succ)
+      (normalizedDVRResCompletedComp l E X D hl n.le_succ)
+      (c (n + 1)) (c n) (T.tau n.le_succ)
+      (normalizedDVRReductionTransition l E X D hl n.le_succ M)
+      (normalizedDVRCounitComparison_coherent l E X D hl T M p δ hc n.le_succ)
+    dsimp only [Functor.mapIso_inv] at hs
+    dsimp only [r, Functor.mapIso_inv]
+    simpa only [Category.assoc] using
+      congrArg (fun k ↦ (T.evaluationIso (n + 1)).hom ≫ k ≫ (a n).hom) hs
+  · intro n
+    have hu : (normalizedDVRIntegralAdjunction l E X n).unit.app M ≫
+        (scalarReductionDerivedRestriction l E X n).map (c n).hom =
+      p ≫ Pi.π _ n ≫ (T.evaluationIso n).hom := by
+      change (normalizedDVRIntegralAdjunction l E X n).unit.app M ≫
+        (scalarReductionDerivedRestriction l E X n).map
+          (normalizedDVRCounitComparison l E X D hl T M p n) = _
+      erw [← Adjunction.homEquiv_unit]
+      exact ((normalizedDVRIntegralAdjunction l E X n).homEquiv M (T.M n)).apply_symm_apply _
+    change p ≫ Pi.π _ n ≫ (T.evaluationIso n).hom ≫ (r n).inv ≫ (a n).hom = _
+    have hu' := congrArg (fun k ↦ k ≫ (r n).inv ≫ (a n).hom) hu
+    simp only [Category.assoc] at hu'
+    rw [← hu']
+    change (normalizedDVRIntegralAdjunction l E X n).unit.app M ≫
+      (r n).hom ≫ (r n).inv ≫ (a n).hom = _
+    simpa only [Iso.hom_inv_id_assoc,
+      CategoryTheory.Functor.map_id, Category.id_comp, integralReductionTowerCone,
+      Cone.extend_π, integralReductionTowerMap, integralTowerAugmentationIso,
+      asIso_inv, IsIso.inv_id, NatTrans.comp_app, Functor.const_map_app,
+      Category.assoc] using ha n
+
 /-- A normalized DVR tower is recovered by derived reduction of its derived inverse
 limit, through coherent canonical counit isomorphisms; that inverse limit is derived
 complete. Source: blueprint order 2132; Bhatt--Scholze, Lemmas 3.5.4--3.5.7
 (blueprint: lem-coef-normalized-dvr-effectivity).
 
-Proof plan:
-1. The valuation ring is a DVR (lem-weil-l-adic-extension-integers-dvr). Flatness of
-its completed constant sheaf and its finite quotients
-(lem-weil-pbc-constant-completion-equivalence) show that [R →^{ϖ^n} R], in degrees
-[-1,0], is a two-term finite free resolution of B_n. It is K-flat since tensoring it
-with an acyclic complex gives an acyclic multiplication cone (def-pc-kflat-complex,
-def-pc-tensor-complex-sheaves, lem-sf-derived-homology-long-exact).
-2. Successively choose roofs for the finite transitions and K-flat resolutions with
-flat terms (lem-pc-quasi-isomorphisms-multiplicative-system, lem-pc-kflat-resolution).
-This gives strict semilinear chain maps. Longer maps are composites; the given
-cocycle identifies them with every specified transition. After restriction to R,
-lem-weil-pbc-sequential-tower-evaluation-full lifts the level identifications to an
-isomorphism of coherent derived towers, preserving all projections.
-3. Fix n and discard the finite initial segment, using the Roos triangle
-(prop-weil-pbc-roos-triangle). For m ≥ n the augmentation
-[B_m →^{ϖ^n} B_m] → B_n has fiber B_n[1], identified by multiplication by ϖ^(m-n).
-Reduction from m' to m acts on this fiber by ϖ^(m'-m).
-4. Tensor these strict coefficient triangles with the K-flat representatives Q_m.
-Tensor reassociation gives a triangle of strict towers with middle terms
-Q_m tensor_R [R →^{ϖ^n} R], right terms Q_m tensor_{B_m} B_n, and left terms the
-latter shifted by one with transitions multiplied by ϖ^(m'-m).
-Normalization identifies the right tower with the constant Q_n tower, compatibly
-with every transition (def-coef-normalized-dvr-tower, lem-pur-derived-change-of-rings).
-5. Every n successive left transitions are zero. Its product shift s satisfies
-s^n=0, so 1-s has inverse 1+s+...+s^(n-1). Its Roos limit is zero; exact derived
-inverse limit therefore identifies the middle and right limits
-(lem-weil-pbc-ringed-strict-tower-homotopy-limit). The constant-tower limit is Q_n:
-the difference map on products is split surjective by finite partial sums and has
-kernel the diagonal Q_n.
-6. Exact countable products on the pro-etale site and
-lem-weil-derived-limit-products-core compute these products termwise. Tensoring
-with the two-term finite free resolution commutes with products, shifts and the
-Roos cone, even for unbounded Q_m. Hence the middle limit is M tensor_R^L B_n.
-The map to Q_n is the adjoint of the original limit projection, by the ordinary
-tensor formulas and derived adjunction (lem-pc-derived-adjoint-functors).
-Restriction detects acyclic cones because it changes no underlying abelian sheaf
-(def-pc-sheaf-restrict-scalars), so this is an isomorphism in D(B_n).
-7. Composing a limit projection with any transition gives the smaller projection.
-Taking adjoints proves exactly the displayed coherence equation. Transporting the
-original Roos triangle through these comparisons makes the canonical reduction
-augmentation of M the first map of a Roos triangle, which is IsDerivedComplete.
-No constructibility or boundedness enters any step. -/
+Proof: use the strict normalized adic cone model for the restricted derived finite
+reduction. The adopted theorem on strict normalized adic towers makes its augmented
+projection invertible, and exact faithful scalar restriction detects isomorphisms in
+the derived category. This gives each canonical finite comparison.
+The Roos triangle says that consecutive projections commute with the transitions;
+induction gives this for every pair of levels. Naturality and injectivity of the
+adjunction Hom equivalences give exactly the stated coherence equation.
+Choose a K-flat representative of M. Its universal scalar-extension counits give
+isomorphisms to the termwise reductions, and the tensor-unit normalization identifies
+its units with the canonical chain-level units. The K-flat transition lemma makes
+these identifications commute with consecutive transitions. Conjugate the finite
+comparisons by these isomorphisms and transfer the original Roos triangle along their
+product. Its first map is precisely the canonical augmentation used in
+IsDerivedComplete. No boundedness or constructibility hypothesis is used. -/
 theorem normalizedDVRTower_effectivity (T : NormalizedDVRTower l E X D hl)
     (M : completedIntegralDerivedCategory l E X D hl)
     [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)]
@@ -154,6 +425,10 @@ theorem normalizedDVRTower_effectivity (T : NormalizedDVRTower l E X D hl)
             (normalizedDVRRes l E X h).map
               (normalizedDVRCounitComparison l E X D hl T M p n)) ∧
       IsDerivedComplete l E X D hl M := by
-  sorry
+  have hi (n : ℕ) : IsIso (normalizedDVRCounitComparison l E X D hl T M p n) :=
+    normalizedDVRRoos_finite_reduction l E X D hl T M p δ hc n
+      (normalizedDVRIntegralAdjunction l E X n)
+  exact ⟨hi, normalizedDVRCounitComparison_coherent l E X D hl T M p δ hc,
+    normalizedDVRComplete_of_isIso l E X D hl T M p δ hc hi⟩
 
 end WeilConjectures

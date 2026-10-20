@@ -37,6 +37,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace WeilConjectures
 
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  scalarReductionExistence scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
@@ -87,7 +90,34 @@ theorem integralReductionTowerMap_naturality
         integralReductionTowerMap l E Y D hl q hq j.unop =
       integralReductionTowerMap l E Y D hl q hq i.unop ≫
         (integralReductionTower l E Y D hl P).map f := by
-  sorry
+  have hcomp (n : ℕ) :
+      integralTowerUnit l E Y D hl P (n + 1) ≫ integralTowerTransition l E Y D hl P n =
+        integralTowerUnit l E Y D hl P n := by
+    have hunit : integralTowerUnitCondition l E Y D hl P (integralTowerUnit l E Y D hl P) :=
+      (integralTowerMaps_existUnique l E Y D hl P).exists.choose_spec.1
+    have hstep : integralTowerTransitionCondition l E Y D hl P
+        (integralTowerTransition l E Y D hl P) :=
+      (integralTowerMaps_existUnique l E Y D hl P).exists.choose_spec.2
+    ext a U x
+    change (((integralTowerTransition l E Y D hl P n).f a).val.app U)
+      ((((integralTowerUnit l E Y D hl P (n + 1)).f a).val.app U) x) =
+      (((integralTowerUnit l E Y D hl P n).f a).val.app U) x
+    erw [hunit (n + 1) a U x, hunit n a U x]
+    simpa only [map_one] using hstep n a U 1 x
+  let : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
+  let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
+  let α : (Functor.const ℕᵒᵖ).obj (DerivedCategory.Q.obj K) ⟶
+      integralReductionTower l E Y D hl P :=
+    NatTrans.ofOpSequence (fun n ↦ integralReductionTowerMap l E Y D hl q hq n)
+      (by
+        intro n
+        simp only [Functor.const_obj_map, integralReductionTower,
+          Functor.ofOpSequence_map_homOfLE_succ, integralReductionTowerMap,
+          Category.assoc, ← Functor.map_comp, hcomp]
+        exact Category.id_comp _)
+  exact α.naturality f
 
 /-- The reduction tower together with its compatible maps from K, as a cone.
 The comparison isomorphisms and both independence identities for another resolution
