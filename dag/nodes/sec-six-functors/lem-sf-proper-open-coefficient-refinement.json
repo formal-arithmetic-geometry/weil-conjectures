@@ -25,154 +25,66 @@
  ],
  "proof": [
   {
-   "text": "Use the fibre product and section in [def-weil-pbc-proper-open-comparison]: $V=T_1\\times_{T_2}X$, $b:V\\hookrightarrow T_1$, $p:V\\to X$, $s=(j_1,1):X\\hookrightarrow V$. By [lem-weil-pbc-proper-open-section], $s(X)$ is clopen, $ps=1$, $bs=j_1$, and $V=u^{-1}(j_2(X))$. Put $C=V\\setminus s(X)$. For either coefficient ring $D$, the actual cartesian square defining $V$ gives $L_{u,D}I_{j_2,D}\\cong I_{b,D}L_{p,D}$ by [cor-cbc-derived-extension-zero-base-change]; open-extension composition gives $I_{j_1,D}\\cong I_{b,D}I_{s,D}$ by [lem-cbc-extension-zero-composition]. These comparisons descend termwise because inverse image and open extension are exact. This uses the cartesian square with open $b$, not a cartesianness assertion about $uj_1=j_2$.",
+   "text": "Keep the existing proof that the inverse open coefficient map is invertible: conjugate scalar restriction/pullback through the two composite adjunctions, and use full faithfulness of open extension and counit invertibility on its essential image. The stipulated map is the open-adjunction inverse transpose, so the unit equation follows by Equiv.apply_symm_apply.",
    "uses": [
-    "def-weil-pbc-proper-open-comparison",
-    "lem-weil-pbc-proper-open-section",
-    "cor-cbc-derived-extension-zero-base-change",
-    "lem-cbc-extension-zero-composition",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-weil-pbc-extension-by-zero-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F50 (lemma-f-shriek-composition); open-square factorization of the refinement"
+    "place": "Tag 0F7I (lemma-shriek-well-defined), proper/open refinement construction, and Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings); agent-explicit coefficient naturality of that construction with the normalized comparison of def-weil-pbc-proper-open-comparison."
    }
   },
   {
-   "text": "Restriction to $s(X)$ and $C$ detects maps in the derived category on $V$, not merely maps of cohomology sheaves. Indeed [lem-weil-pbc-etale-sheaf-clopen-product] gives the sheaf equivalence; a $D$-module action is a pair of actions under that equivalence, so the same equivalence holds for module sheaves. Its inverse glues the two components, and both functors are exact, since kernels and cokernels are computed componentwise. Apply them termwise to complexes: they are inverse equivalences, preserve homotopies and quasi-isomorphisms, and hence remain inverse after localization [lem-weil-pbc-localization-universal-property]. In particular a morphism into $I_{s,D}M=(M,0)$ is specified by its first component. Also $I_{b,D}$ is fully faithful on the derived categories: the open unit is the identity on objects factoring through $V$, by [def-weil-pbc-extension-by-zero] and [lem-weil-pbc-extension-by-zero-adjunction], and therefore is an isomorphism termwise and after localization. Thus maps between two objects extended by $b$ are detected by restriction to $V$.",
+   "text": "Define t_A:R_v,A followed by j2*_A → j1*_A as the inverse-image compositor followed by j1*_A of the geometric counit. The already stated properOpenIdentification_unit gives theta followed by the open unit equals the bounded-below version of t_A. Transport it through the exact inverse-image and right-derived bounded/unbounded compatibility isomorphisms. Thus the open transpose of alpha_A followed by t_A(j1! K) is eta1,A(K), and t_A(j1! K) is invertible. Repeat for B and Q_X K; these are exactly the two supplied bounded-below objects.",
    "uses": [
-    "lem-weil-pbc-etale-sheaf-clopen-product",
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-proper-open-identification-unit",
+    "def-weil-pbc-proper-open-comparison",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I (lemma-shriek-well-defined), proper/open refinement construction, and Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings); agent-explicit coefficient naturality of that construction with the normalized comparison of def-weil-pbc-proper-open-comparison."
+   }
+  },
+  {
+   "text": "Apply scalarPullback_composition (lem-sf-scalar-pullback-composition) to the normalized scalar/pullback identifications. The defining mate equation gives L_v,B(chi) followed by the B-counit equals lambda_v followed by Q of the A-counit. Transport that equation along the exact inverse-image comparison and combine it with composition coherence and naturality to get j2*_B(chi) followed by t_B followed by lambda_j1 equals lambda_j2 followed by Q_X(t_A). This is restriction_coefficient_mate, a proved categorical identity.",
+   "uses": [
+    "lem-sf-scalar-pullback-composition",
+    "lem-pur-etale-scalar-mate-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I (lemma-shriek-well-defined), proper/open refinement construction, and Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings); agent-explicit coefficient naturality of that construction with the normalized comparison of def-weil-pbc-proper-open-comparison."
+   }
+  },
+  {
+   "text": "Precompose the desired square by beta_j2 inverse, apply injectivity of the B-open Hom equivalence, and postcompose with the invertible restriction t_B at j1! Q_X K. Naturality of t_B moves beta_j1 through the restriction. Substitute step 3 and the open-unit formula for beta_j2 inverse; naturality of lambda_j2 and the two normalization equations in step 2 reduce the left side to Q_X(eta1,A) followed by lambda_j1 inverse followed by j1*_B(beta_j1), which is eta1,B by the open-unit formula for beta_j1 inverse. This is the right side. The categorical lemma coefficient_refinement_of_restriction carries out these cancellations explicitly. No inverse to chi and no bound on Q of a direct image is used.",
+   "uses": [
     "lem-weil-pbc-extension-by-zero-adjunction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Clopen-section factorization of Tag 0F7B; elementary passage from the cited sheaf equivalence to complexes and localization"
-   }
-  },
-  {
-   "text": "For invertibility alone, use the shorter categorical argument now implemented in properOpenCoefficientOpenInverse_isIso. The canonical scalar-restriction/pullback isomorphism [lem-sbc-canonical-restrict-scalars-functor-comparisons], transported to left-derived inverse image, conjugates under the composite scalar and open adjunctions to an isomorphism between scalar extension after open extension and open extension after scalar extension. Thus the target of the specified inverse open coefficient map lies in the essential image of open extension. The open unit is invertible [lem-amb-etale-adjoint-locality], so open extension is fully faithful and its counit is invertible on this target. The prescribed open transpose is a composite of the open extension of an isomorphism (scalar extension of the A-open unit followed by inverse lambda) and that counit, hence is invertible. This argument proves only invertibility and needs no identification of the auxiliary conjugate with beta. For the representative calculation needed in Steps 4 and 6, retain the following K-flat computation: For every open $a:W\\hookrightarrow T$, the normalized scalar/open comparison can be computed on K-flat complexes with flat terms. Choose $P\\to M$ by [lem-pc-kflat-resolution]. Since $a_!$ is a left adjoint it preserves the direct sums in total tensor [lem-weil-pbc-left-adjoint-preserves-colimits]. The ordinary identity of [lem-weil-pbc-ringed-slice-extension-tensor] says $a_!P\\otimes_A N\\cong a_!(P\\otimes_A a^{-1}N)$. If $N$ is acyclic, $a^{-1}N$ is acyclic and the right side is acyclic, since $P$ is K-flat and $a_!$ is exact. This proves $a_!P$ is K-flat; the same identity in degree zero proves its terms flat. Hence [lem-pur-derived-change-of-rings] computes $Q_Ta_!M$ and $a_!Q_WM$ by $a_!P\\otimes_A B$ and $a_!(P\\otimes_A B)$. Their canonical $B$-linear identification sends $[m]\\otimes b_0$ to $[m\\otimes b_0]$ on open presheaf summands and then sheafifies. On $W$ it is the tensor/restriction identification. Its inverse therefore has open-adjunction transpose $\\lambda_{a,I_{a,A}M}^{-1}Q_W(\\eta_{a,A,M})$, exactly the stipulated normalization of $\\beta_a$. This also applies to $a=b,s$; it does not require $B$ flat over $A$.",
-   "uses": [
-    "lem-amb-etale-adjoint-locality",
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat); sites-modules.tex extension-by-zero tensor identity and Tag 03DJ"
-   }
-  },
-  {
-   "text": "The comparisons just computed have the required coherence on the two components of $V$. Compute $\\lambda_v$ on K-flat representatives: pullback preserves K-flat complexes with flat terms [lem-weil-pbc-ringed-pullback-preserves-kflat], and the canonical tensor comparison is that of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Restricting the formula of Step 3 and then pulling back a tensor, or first pulling back and then using that formula, sends the same generator $m\\otimes b_0$ to the same pulled-back generator with coefficient $b_0$. These are equal $B$-linear sheaf maps, hence equal maps of complexes and of derived objects [lem-weil-pbc-site-derived-tensor-descent]. Pullback-composition identifications are the canonical module ones of [lem-weil-pbc-inverse-image-composition-module-linear]; in particular $j_1^{-1}u^{-1}=j_2^{-1}$ and $s^{-1}p^{-1}=1$ carry those generators identically. Consequently, after identifying source and target by $\\lambda$, $\\beta$, and the open units, the restrictions to $s(X)$ of both ways of scalar-changing the identity there are the identity of $Q_XM$.",
-   "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-inverse-image-composition-module-linear"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (lemma-pullback-K-flat), derived tensor on K-flat representatives; sites-modules.tex Tag 03D8 (lemma-push-pull-composition-modules)"
-   }
-  },
-  {
-   "text": "For $D=A,B$ put $t_{D,M}=\\varepsilon_{u,D,I_{j_1,D}M}\\circ L_{u,D}(\\alpha_{u,D,M})$. This is a map $L_{u,D}I_{j_2,D}M\\to I_{j_1,D}M$. Its restriction inside $V$ is the projection $p^{-1}M\\to s_!M$ equal to identity on $s(X)$ and zero on $C$. To verify this for the specified $\\alpha$, apply [lem-cbc-proper-open-interchange-coherence] to the refinement square with left map $1_X$: it identifies exactly that $\\alpha$, including its theta normalization, with $j_{2!}J\\to u_*j_{1!}J\\to u_*I$, for a K-injective representative $J$ of $M$ and resolution $j_{1!}J\\to I$. The first arrow is the underlying-section identification of [lem-cbc-proper-support-sheaf-composition]. Its sheaf-adjunction transpose is identity over $j_1(X)$: restriction of a section supported there to that same component returns the section. On $C$ its target is zero. The derived Hom bijection of [def-kun-projection-formula-map] is the termwise sheaf adjunction with target $I$. Therefore the transpose of the displayed representative is the preceding sheaf transpose followed by $j_{1!}J\\to I$. Inverting that resolution gives exactly the asserted projection for $t_{D,M}$. All statements apply to both $M=K$ over $A$ and $M=Q_XK$ over $B$, since both are bounded below by hypothesis.",
-   "uses": [
-    "lem-cbc-proper-open-interchange-coherence",
-    "lem-cbc-proper-support-sheaf-composition",
-    "def-kun-projection-formula-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B (lemma-shriek-proper-and-open), first paragraph of proof; Tag 0F7I (lemma-shriek-well-defined), refinement map; specified comparison node fixes agreement with theta"
-   }
-  },
-  {
-   "text": "We now have the equality\n$$\\beta_{j_1,K}\\circ Q_{T_1}(t_{A,K})\\circ\\lambda_{u,I_{j_2,A}K}\n=t_{B,Q_XK}\\circ L_{u,B}(\\beta_{j_2,K}).$$\nBoth sides go from $L_{u,B}Q_{T_2}I_{j_2,A}K$ to $I_{j_1,B}Q_XK$. By Step 1 and the scalar/open comparisons of Step 3, source and target are extended from $V$. Restrict there, using full faithfulness from Step 2. In its two-component derived category the projection in Step 5 is $(1,0)$, and scalar extension acts componentwise: choose K-flat resolutions on the two components and glue them by the exact inverse equivalence of Step 2; tensoring the resulting pair with $B$ gives the pair of tensors. Thus scalar extension takes the two components of the projection to $(1,0)$. Step 4 identifies the first-component comparisons in the displayed equation with the same identity on $Q_XK$. The second-component target is zero, so both second-component maps are zero. Equality follows in the product derived category and hence on $T_1$.",
-   "uses": [
-    "lem-weil-pbc-etale-sheaf-clopen-product",
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-pbc-extension-by-zero",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-inverse-image-composition-module-linear"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings); explicit clopen-projection calculation using Steps 1-5"
-   }
-  },
-  {
-   "text": "Transpose the proposed equality under the unbounded derived adjunction $L_{u,B}\\dashv R_{u,B}$ of [def-kun-projection-formula-map]. This Hom bijection is injective. By counit naturality, the transpose of the left side is\n$$\\beta_{j_1,K}\\circ\\varepsilon_{u,B,Q_{T_1}I_{j_1,A}K}\\circ L_{u,B}(\\chi_{u,I_{j_1,A}K})\\circ L_{u,B}Q_{T_2}(\\alpha_{u,A,K}).$$\nThe definition of $\\chi$ and the adjunction triangle identity replace its middle pair by $Q_{T_1}(\\varepsilon_{u,A,I_{j_1,A}K})\\circ\\lambda_{u,R_{u,A}I_{j_1,A}K}$. Naturality of $\\lambda_u$ with respect to $\\alpha_{u,A,K}$ then gives\n$$\\beta_{j_1,K}\\circ Q_{T_1}(\\varepsilon_{u,A,I_{j_1,A}K}\\circ L_{u,A}(\\alpha_{u,A,K}))\\circ\\lambda_{u,I_{j_2,A}K}\n=\\beta_{j_1,K}\\circ Q_{T_1}(t_{A,K})\\circ\\lambda_{u,I_{j_2,A}K}.$$\nThis is the left side of Step 6; no inverse of $\\chi_u$ has been used.",
-   "uses": [
-    "def-kun-projection-formula-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6; agent-explicit adjunction calculation for the stated coefficient comparison"
-   }
-  },
-  {
-   "text": "The transpose of the right side is, again by the definition of a transpose,\n$$\\varepsilon_{u,B,I_{j_1,B}Q_XK}\\circ L_{u,B}(\\alpha_{u,B,Q_XK})\\circ L_{u,B}(\\beta_{j_2,K})\n=t_{B,Q_XK}\\circ L_{u,B}(\\beta_{j_2,K}).$$\nThis is the right side of Step 6. That equality and injectivity of the adjunction Hom bijection prove the required equality in $D(T_{2,\\mathrm{et}},B)$. Only $K$ and $Q_XK$ were required bounded below, to apply the specified proper/open comparisons; $Q_{T_2}R_{u,A}I_{j_1,A}K$ was never assumed bounded below. Neither finite Tor amplitude, constructibility nor an isomorphism theorem for arbitrary $\\chi_u$ enters the argument.",
-   "uses": [
-    "def-kun-projection-formula-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6; conclusion of the explicit adjunction calculation"
+    "place": "Tag 0F7I (lemma-shriek-well-defined), proper/open refinement construction, and Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings); agent-explicit coefficient naturality of that construction with the normalized comparison of def-weil-pbc-proper-open-comparison."
    }
   }
  ],
  "proof_deps": [
-  "cor-cbc-derived-extension-zero-base-change",
-  "def-kun-projection-formula-map",
-  "def-weil-pbc-extension-by-zero",
   "def-weil-pbc-proper-open-comparison",
-  "lem-amb-etale-adjoint-locality",
-  "lem-cbc-extension-zero-composition",
-  "lem-cbc-proper-open-interchange-coherence",
-  "lem-cbc-proper-support-sheaf-composition",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
+  "lem-pur-etale-scalar-mate-projection",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-sf-scalar-pullback-composition",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-proper-open-section",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-weil-pbc-proper-open-identification-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B, 0F7I and 0GL6; explicit clopen-section and adjunction proof of coefficient naturality, not a verbatim claim of these tags. S5: the auxiliary open-inverse invertibility is proved by composite-adjunction conjugacy and essential-image counit invertibility; the refinement equality and its representative calculations remain open."
+  "place": "Tags 0F7I and 0GL6; K3 shorter argument using the already stated unit normalization of properOpenIdentification, the independently isolated scalar/pullback composition lemma, and two explicit categorical cancellation arguments."
  },
  "mathlib_searches": [
   {
@@ -383,22 +295,7 @@
   ]
  },
  "tool_uses": [
-  "cor-cbc-derived-extension-zero-base-change",
-  "lem-cbc-extension-zero-composition",
-  "lem-cbc-proper-open-interchange-coherence",
-  "lem-cbc-proper-support-sheaf-composition",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-proper-open-section",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-weil-pbc-extension-by-zero-adjunction"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -436,13 +333,13 @@
   "note": "Reviewed node, dependencies, source, Lean declarations, report, edge cases, and pro-etale exclusion. scompile.py compiled the delivery successfully; no findings or fixes required."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S5",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261019T005423-L-2767350",
-  "kind": "proof",
+  "landing": "20261020T051447-L-1688209",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
