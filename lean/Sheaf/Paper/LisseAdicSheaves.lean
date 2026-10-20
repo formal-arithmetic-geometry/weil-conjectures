@@ -27,6 +27,9 @@ public import Mathlib.CategoryTheory.Bicategory.Grothendieck
 public import Mathlib.CategoryTheory.Localization.Construction
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import WeilConjectures.ConstructibleSheaf.InternalHom
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-! # Lisse adic sheaves
 
@@ -51,6 +54,161 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 noncomputable section
 
 namespace AlgebraicGeometry.Scheme
+
+attribute [local irreducible] GrothendieckTopology.Point.sheafFiber
+
+private theorem tensorComposition_exists {R A : Type*} [CommRing R] [CommRing A]
+    [Algebra R A] (C : Type*) [Category C] [Preadditive C] [Linear R C] :
+    ∃ c : ∀ F G H : C, TensorProduct R A (F ⟶ G) →ₗ[A]
+        TensorProduct R A (G ⟶ H) →ₗ[A] TensorProduct R A (F ⟶ H),
+      (∀ (F G H : C) (a b : A) (f : F ⟶ G) (g : G ⟶ H),
+        c F G H (TensorProduct.tmul R a f) (TensorProduct.tmul R b g) =
+          TensorProduct.tmul R (a * b) (f ≫ g)) ∧
+      (∀ (F G : C) (f : TensorProduct R A (F ⟶ G)),
+        c F F G (TensorProduct.tmul R 1 (𝟙 F)) f = f) ∧
+      (∀ (F G : C) (f : TensorProduct R A (F ⟶ G)),
+        c F G G f (TensorProduct.tmul R 1 (𝟙 G)) = f) ∧
+      (∀ (F G H K : C) (f : TensorProduct R A (F ⟶ G))
+        (g : TensorProduct R A (G ⟶ H)) (h : TensorProduct R A (H ⟶ K)),
+        c F H K (c F G H f g) h = c F G K f (c G H K g h)) := by
+  let c (F G H : C) :
+      TensorProduct R A (F ⟶ G) →ₗ[A]
+        TensorProduct R A (G ⟶ H) →ₗ[A] TensorProduct R A (F ⟶ H) :=
+    TensorProduct.AlgebraTensorModule.lift
+      (LinearMap.mk₂' A R
+        (fun a f ↦ a • ((LinearMap.baseChangeHom R A _ _).comp
+          (Linear.comp F G H)) f)
+        (by intros; exact add_smul _ _ _)
+        (by intro a b f; exact mul_smul a b _)
+        (by intros; rw [map_add, smul_add])
+        (by intros; rw [map_smul]; exact smul_comm _ _ _))
+  have ct (F G H : C) (a b : A)
+      (f : F ⟶ G) (g : G ⟶ H) :
+      c F G H (TensorProduct.tmul R a f) (TensorProduct.tmul R b g) =
+        TensorProduct.tmul R (a * b) (f ≫ g) := by
+    change a • (TensorProduct.tmul R b (f ≫ g)) = _
+    rw [TensorProduct.smul_tmul', smul_eq_mul]
+  refine ⟨c, ct, ?_, ?_, ?_⟩
+  · intro F G f
+    induction f using TensorProduct.induction_on with
+    | zero => exact map_zero _
+    | tmul a f => rw [ct, one_mul, Category.id_comp]
+    | add f g hf hg => rw [map_add, hf, hg]
+  · intro F G f
+    induction f using TensorProduct.induction_on with
+    | zero => rw [map_zero, LinearMap.zero_apply]
+    | tmul a f => rw [ct, mul_one, Category.comp_id]
+    | add f g hf hg => rw [map_add, LinearMap.add_apply, hf, hg]
+  · intro F G H K f g h
+    induction f using TensorProduct.induction_on with
+    | zero => simp only [map_zero, LinearMap.zero_apply]
+    | tmul a f =>
+      induction g using TensorProduct.induction_on with
+      | zero => simp only [map_zero, LinearMap.zero_apply]
+      | tmul b g =>
+        induction h using TensorProduct.induction_on with
+        | zero => simp only [map_zero]
+        | tmul d h => rw [ct, ct, ct, ct, mul_assoc, Category.assoc]
+        | add h k hh hk => simp only [map_add, hh, hk]
+      | add g h hg hh =>
+        simp only [map_add, LinearMap.add_apply, hg, hh]
+    | add f g hf hg => simp only [map_add, LinearMap.add_apply, hf, hg]
+
+
+private theorem tensor_transition_kernel {R : Type*} [CommRing R]
+    {M N M' N' : Type*} [AddCommGroup M] [AddCommGroup N]
+    [AddCommGroup M'] [AddCommGroup N'] [Module R M] [Module R N]
+    [Module R M'] [Module R N'] (I : Ideal R) (f : M →ₗ[R] M') (g : N →ₗ[R] N')
+    (hf : Function.Surjective f) (hg : Function.Surjective g)
+    (hkf : LinearMap.ker f = I • ⊤) (hkg : LinearMap.ker g = I • ⊤) :
+    Function.Surjective (TensorProduct.map f g) ∧
+      LinearMap.ker (TensorProduct.map f g) = I • ⊤ := by
+  constructor
+  · exact TensorProduct.map_surjective hf hg
+  · rw [TensorProduct.map_ker f.exact_subtype_ker_map hf g.exact_subtype_ker_map hg]
+    apply le_antisymm
+    · apply sup_le
+      · rintro _ ⟨z, rfl⟩
+        induction z using TensorProduct.induction_on with
+        | zero => simpa only [map_zero] using (I • (⊤ : Submodule R (TensorProduct R M N))).zero_mem
+        | tmul x y =>
+          change TensorProduct.tmul R x y.val ∈ I • ⊤
+          have hy : y.val ∈ I • (⊤ : Submodule R N) := by
+            rw [← hkg]; exact y.property
+          refine Submodule.smul_induction_on hy ?_ ?_
+          · intro a ha y _
+            rw [← TensorProduct.smul_tmul, ← TensorProduct.smul_tmul']
+            exact Submodule.smul_mem_smul ha Submodule.mem_top
+          · intro y z hy hz
+            rw [TensorProduct.tmul_add]
+            exact Submodule.add_mem _ hy hz
+        | add x y hx hy =>
+          rw [map_add]
+          exact Submodule.add_mem _ hx hy
+      · rintro _ ⟨z, rfl⟩
+        induction z using TensorProduct.induction_on with
+        | zero => simpa only [map_zero] using (I • (⊤ : Submodule R (TensorProduct R M N))).zero_mem
+        | tmul x y =>
+          change TensorProduct.tmul R x.val y ∈ I • ⊤
+          have hx : x.val ∈ I • (⊤ : Submodule R M) := by
+            rw [← hkf]; exact x.property
+          refine Submodule.smul_induction_on hx ?_ ?_
+          · intro a ha x _
+            rw [← TensorProduct.smul_tmul']
+            exact Submodule.smul_mem_smul ha Submodule.mem_top
+          · intro x z hx hz
+            rw [TensorProduct.add_tmul]
+            exact Submodule.add_mem _ hx hz
+        | add x y hx hy =>
+          rw [map_add]
+          exact Submodule.add_mem _ hx hy
+    · apply Submodule.smul_le.mpr
+      intro a ha z hz
+      clear hz
+      induction z using TensorProduct.induction_on with
+      | zero => rw [smul_zero]; exact Submodule.zero_mem _
+      | tmul x y =>
+        refine (le_sup_right : (LinearMap.rTensor N f.ker.subtype).range ≤ _) ?_
+        refine ⟨TensorProduct.tmul R ⟨a • x, ?_⟩ y, ?_⟩
+        · rw [hkf]
+          exact Submodule.smul_mem_smul ha Submodule.mem_top
+        · exact (TensorProduct.smul_tmul' a x y).symm
+      | add x y hx hy =>
+        rw [smul_add]
+        exact Submodule.add_mem _ hx hy
+
+private theorem quotientFactor_id {R : Type*} [CommRing R] (I : Ideal R) :
+    (Ideal.Quotient.factorₐ R (le_refl I)).toLinearMap = LinearMap.id := by
+  apply LinearMap.ext
+  intro x
+  obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective x
+  rfl
+
+private theorem quotientFactor_comp {R : Type*} [CommRing R]
+    (I J K : Ideal R) (h : I ≤ J) (k : J ≤ K) :
+    (Ideal.Quotient.factorₐ R (h.trans k)).toLinearMap =
+      (Ideal.Quotient.factorₐ R k).toLinearMap.comp
+        (Ideal.Quotient.factorₐ R h).toLinearMap := by
+  apply LinearMap.ext
+  intro x
+  obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective x
+  rfl
+
+private theorem quotientFactor_kernel {R : Type*} [CommRing R]
+    (I J : Ideal R) (h : J ≤ I) :
+    LinearMap.ker (Ideal.Quotient.factorₐ R h).toLinearMap =
+      I • (⊤ : Submodule R (R ⧸ J)) := by
+  apply le_antisymm
+  · intro x hx
+    obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective x
+    have hr : r ∈ I := Ideal.Quotient.eq_zero_iff_mem.mp hx
+    apply Submodule.map_le_smul_top I (Ideal.Quotient.mkₐ R J).toLinearMap
+    exact ⟨r, hr, rfl⟩
+  · apply Submodule.smul_le.mpr
+    intro a ha x _
+    change (Ideal.Quotient.factorₐ R h).toLinearMap (a • x) = 0
+    obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective x
+    exact Ideal.Quotient.eq_zero_iff_mem.mpr (I.mul_mem_right r ha)
 
 /-- Sheafification for module coefficients on the small étale site.
 Source: Weil II (1.1.1), coefficient sheaves
@@ -103,6 +261,13 @@ abbrev LisseIntegralSheaf [IsNoetherian Y] [Y.IsSeparated]
   ObjectProperty.FullSubcategory (IsLisseIntegralDiagram l E Y)
 
 variable [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)]
+
+local instance (priority := 10000) lisseIntegralPreadditive :
+    Preadditive (LisseIntegralSheaf l E Y) := inferInstance
+
+local instance (priority := 10000) lisseIntegralLinear :
+    Linear (Padic.coefficientExtensionIntegers l E) (LisseIntegralSheaf l E Y) :=
+  inferInstance
 
 /-- Cache the additive integral Hom structure inherited from module sheaves.
 Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
@@ -167,7 +332,13 @@ The balancing identities follow from scalar-linear integral composition; the cat
 laws follow on pure tensors from the integral laws and associativity of field multiplication,
 and hence hold everywhere by tensor induction and bilinearity. -/
 theorem lisseRationalComposition_exists : Nonempty (LisseRationalComposition l E Y) := by
-  sorry
+  obtain ⟨c, ht, hi, hc, ha⟩ := tensorComposition_exists
+    (R := Padic.coefficientExtensionIntegers l E) (A := E) (LisseIntegralSheaf l E Y)
+  exact ⟨{ comp F G H := c F.integral G.integral H.integral
+           comp_tmul F G H := ht F.integral G.integral H.integral
+           id_comp F G := hi F.integral G.integral
+           comp_id F G := hc F.integral G.integral
+           assoc F G H K := ha F.integral G.integral H.integral K.integral }⟩
 
 /-- The unique bilinear composition with the prescribed pure-tensor formula.
 Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
@@ -198,9 +369,24 @@ def lisseRationalFiber {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
   ModuleCat.of E (TensorProduct (Padic.coefficientExtensionIntegers l E) E
     (lisseIntegralFiber l E Y y F.integral))
 
+-- Cache the sheaf Hom actions before the tensor proof, rather than repeatedly
+-- unfolding the full-subcategory and presheaf linear-category instances.
+local instance (priority := 10000) lisseSheafHomAddCommGroup
+    {R : Type (u + 1)} [Ring R]
+    (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :
+    AddCommGroup (F ⟶ G) := inferInstance
+
+local instance (priority := 10000) lisseSheafHomModule
+    {R : Type (u + 1)} [CommRing R]
+    (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :
+    Module R (F ⟶ G) := inferInstance
+
+section TensorConstruction
+
 attribute [local instance] CategoryTheory.Sheaf.monoidalCategory
 attribute [local instance] CategoryTheory.Sheaf.braidedCategory
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Tensor of integral systems is lisse.
 Source: Weil II (1.1.1) b), SGA 5 VI
 (blueprint: def-pod-lisse-l-adic-sheaves).
@@ -211,7 +397,62 @@ scalar extension gives the reduction comparison at the next level. Thus the stal
 quotient condition and the annihilation condition are preserved. -/
 theorem lisseIntegralTensor_isLisse (F G : LisseIntegralSheaf l E Y) :
     IsLisseIntegralDiagram l E Y (F.obj ⊗ G.obj) := by
-  sorry
+  let R := Padic.coefficientExtensionIntegers l E
+  let I := Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set R)
+  refine ⟨?_, ?_, ?_⟩
+  · intro n
+    rw [CategoryTheory.Monoidal.tensorObj_obj]
+    exact (F.property.1 n).tensorObj (G.property.1 n)
+  · intro n U
+    apply bot_unique
+    apply Submodule.smul_le.mpr
+    intro a ha x _
+    change (F.obj.obj (op n) ⊗ G.obj.obj (op n)).obj.obj (op U) at x
+    have hz : a • (𝟙 (F.obj.obj (op n))) = 0 := by
+      apply Sheaf.hom_ext
+      apply NatTrans.ext
+      funext V
+      apply ModuleCat.hom_ext
+      apply LinearMap.ext
+      intro z
+      exact (Submodule.mem_bot R).mp ((F.property.2.1 n V.unop) ▸
+        Submodule.smul_mem_smul ha (Submodule.mem_top : z ∈ ⊤))
+    have hz' : a • (𝟙 (F.obj.obj (op n) ⊗ G.obj.obj (op n))) = 0 := by
+      rw [← MonoidalCategory.id_whiskerRight, ← MonoidalLinear.smul_whiskerRight,
+        hz, MonoidalPreadditive.zero_whiskerRight]
+    exact congrArg (fun f ↦ f.hom.app (op U) x) hz'
+  · intro Ω _ _ y n
+    let T := (pointSmallEtale y).ulift.{u + 1}.sheafFiber (A := ModuleCat.{u + 1} R)
+    let f := F.obj.map (homOfLE (Nat.le_succ n)).op
+    let g := G.obj.map (homOfLE (Nat.le_succ n)).op
+    let e₁ := (Functor.Monoidal.μIso T (F.obj.obj (op (n + 1)))
+      (G.obj.obj (op (n + 1)))).toLinearEquiv
+    let e₂ := (Functor.Monoidal.μIso T (F.obj.obj (op n))
+      (G.obj.obj (op n))).toLinearEquiv
+    let t := (T.map ((F.obj ⊗ G.obj).map (homOfLE (Nat.le_succ n)).op)).hom
+    let q := TensorProduct.map (T.map f).hom (T.map g).hom
+    have hF := F.property.2.2 Ω y n
+    have hG := G.property.2.2 Ω y n
+    obtain ⟨hq, hk⟩ := tensor_transition_kernel (I ^ (n + 1))
+      (T.map f).hom (T.map g).hom hF.1 hG.1 hF.2 hG.2
+    have hn (x) : t (e₁ x) = e₂ (q x) := by
+      dsimp only [t]
+      rw [CategoryTheory.Monoidal.tensorObj_map]
+      exact congrArg (fun f ↦ f x) (congrArg ModuleCat.Hom.hom
+        (Functor.LaxMonoidal.μ_natural T f g)).symm
+    constructor
+    · intro x
+      obtain ⟨z, hz⟩ := hq (e₂.symm x)
+      refine ⟨e₁ z, ?_⟩
+      rw [hn, hz, e₂.apply_symm_apply]
+    · have he : (I ^ (n + 1) • (⊤ : Submodule R _)).comap
+          e₁.symm.toLinearMap = I ^ (n + 1) • ⊤ := by
+        rw [Submodule.comap_smul_top_of_surjective _ _ e₁.symm.surjective,
+          LinearMap.ker_eq_bot.mpr e₁.symm.injective, sup_bot_eq]
+      rw [← he, ← hk]
+      ext x
+      change t x = 0 ↔ q (e₁.symm x) = 0
+      rw [← e₂.injective.eq_iff, map_zero, ← hn, e₁.apply_symm_apply]
 
 /-- Levelwise tensor, with the tensor of transition maps.
 Source: Weil II (1.1.1) b), SGA 5 VI
@@ -224,6 +465,8 @@ Source: Weil II (1.1.1) c), SGA 5 VI
 (blueprint: def-pod-lisse-l-adic-sheaves). -/
 def lisseRationalTensor (F G : LisseRationalSheaf l E Y) : LisseRationalSheaf l E Y :=
   ⟨lisseIntegralTensor l E Y F.integral G.integral⟩
+
+end TensorConstruction
 
 /-- The quotient transition viewed as an `𝒪_E`-linear map, for any two levels.
 Source: Weil II (1.1.1) b) (blueprint: def-pod-lisse-l-adic-sheaves). -/
@@ -241,7 +484,8 @@ Proof: each factor map sends the class of a scalar to the same class; quotient c
 exhaust the quotient, so the map for the identity index map is the identity. -/
 theorem lisseUnitModuleMap_id (i : ℕᵒᵖ) :
     lisseUnitModuleMap l E i i (𝟙 i) = 𝟙 _ := by
-  sorry
+  apply ModuleCat.hom_ext
+  exact quotientFactor_id _
 
 /-- The quotient maps preserve composition.
 Source: Weil II (1.1.1) b) (blueprint: def-pod-lisse-l-adic-sheaves).
@@ -250,7 +494,10 @@ Quotient classes exhaust the source quotient, so the maps agree. -/
 theorem lisseUnitModuleMap_comp (i j k : ℕᵒᵖ) (f : i ⟶ j) (g : j ⟶ k) :
     lisseUnitModuleMap l E i k (f ≫ g) =
       lisseUnitModuleMap l E i j f ≫ lisseUnitModuleMap l E j k g := by
-  sorry
+  apply ModuleCat.hom_ext
+  exact quotientFactor_comp _ _ _
+    (Ideal.pow_le_pow_right (Nat.add_le_add_right (leOfHom f.unop) 1))
+    (Ideal.pow_le_pow_right (Nat.add_le_add_right (leOfHom g.unop) 1))
 
 /-- The inverse diagram of constant coefficient sheaves.
 Source: Weil II (1.1.1) b), SGA 5 VI
@@ -263,6 +510,8 @@ def lisseIntegralUnitDiagram : AdicIntegralDiagram l E Y :=
       map_comp := lisseUnitModuleMap_comp l E _ _ _ }) ⋙
         constantSheaf Y.smallEtaleTopology _
 
+-- Keep the existing standing hypotheses of this public interface.
+set_option linter.unusedSectionVars false in
 /-- The constant coefficient system is lisse.
 Source: Weil II (1.1.1) b), SGA 5 VI
 (blueprint: def-pod-lisse-l-adic-sheaves).
@@ -271,7 +520,61 @@ by the prescribed power of the uniformizer. The quotient map is surjective with 
 generated by the indicated power; constant-sheaf stalks are the given modules. -/
 theorem lisseIntegralUnit_isLisse :
     IsLisseIntegralDiagram l E Y (lisseIntegralUnitDiagram l E Y) := by
-  sorry
+  let R := Padic.coefficientExtensionIntegers l E
+  let I := Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set R)
+  let Q (n : ℕ) := ModuleCat.of R (Padic.coefficientExtensionRing l E (n + 1))
+  let C := constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)
+  refine ⟨?_, ?_, ?_⟩
+  · intro n
+    have hc : Sheaf.IsConstant Y.smallEtaleTopology (C.obj (Q n)) :=
+      Sheaf.isConstant_of_iso _ (X := Q n) (Iso.refl _)
+    have hf := isFiniteSheaf_constantSheaf (X := Y) (Q n)
+    exact { toIsLocallyConstantSheaf := hc.isLocallyConstantSheaf
+            toIsFiniteSheaf := hf }
+  · intro n U
+    apply bot_unique
+    apply Submodule.smul_le.mpr
+    intro a ha x _
+    have hz : a • (𝟙 (Q n)) = 0 := by
+      apply ModuleCat.hom_ext
+      apply LinearMap.ext
+      intro z
+      change R ⧸ I ^ (n + 1) at z
+      change (Ideal.Quotient.mk (I ^ (n + 1)) a) * z = 0
+      rw [Ideal.Quotient.eq_zero_iff_mem.mpr ha, zero_mul]
+    have hz' : a • (𝟙 (C.obj (Q n))) = 0 := by
+      rw [← C.map_id, ← Functor.map_smul, hz, C.map_zero]
+    exact congrArg (fun f ↦ f.hom.app (op U) x) hz'
+  · intro Ω _ _ y n
+    let p := (pointSmallEtale y).ulift.{u + 1}
+    let e₁ := (p.sheafFiberConstantSheafIso (Q (n + 1))).toLinearEquiv
+    let e₂ := (p.sheafFiberConstantSheafIso (Q n)).toLinearEquiv
+    let t := (p.sheafFiber.map
+      ((lisseIntegralUnitDiagram l E Y).map (homOfLE (Nat.le_succ n)).op)).hom
+    let q := (lisseUnitModuleMap l E (op (n + 1)) (op n)
+      (homOfLE (Nat.le_succ n)).op).hom
+    have hn (x) : e₂ (t x) = q (e₁ x) := by
+      exact congrArg (fun f ↦ f x)
+        (congrArg ModuleCat.Hom.hom (p.sheafFiberConstantSheafIso_hom_naturality
+          (lisseUnitModuleMap l E (op (n + 1)) (op n)
+            (homOfLE (Nat.le_succ n)).op)))
+    constructor
+    · intro x
+      obtain ⟨r, hr⟩ := Ideal.Quotient.mk_surjective (e₂ x)
+      refine ⟨e₁.symm (Ideal.Quotient.mk (I ^ (n + 2)) r), e₂.injective ?_⟩
+      rw [hn, e₁.apply_symm_apply]
+      exact hr
+    · have hq : LinearMap.ker q = I ^ (n + 1) • (⊤ : Submodule R (Q (n + 1))) :=
+        quotientFactor_kernel (I ^ (n + 1)) (I ^ (n + 2))
+          (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))
+      have he : (I ^ (n + 1) • (⊤ : Submodule R (Q (n + 1)))).comap
+          e₁.toLinearMap = I ^ (n + 1) • ⊤ := by
+        rw [Submodule.comap_smul_top_of_surjective _ _ e₁.surjective,
+          LinearMap.ker_eq_bot.mpr e₁.injective, sup_bot_eq]
+      rw [← he, ← hq]
+      ext x
+      change t x = 0 ↔ q (e₁ x) = 0
+      rw [← e₂.injective.eq_iff, map_zero, hn]
 
 /-- The tensor unit, the constant coefficient system.
 Source: Weil II (1.1.1) b), SGA 5 VI
@@ -299,7 +602,25 @@ characterizes that restriction uniquely. -/
 theorem lisseIntegerInclusion_exists :
     ∃ f : Padic.coefficientExtensionIntegers l E →+*
       Padic.coefficientExtensionIntegers l L, ∀ x, (f x : L) = ι (x : E) := by
-  sorry
+  have hE := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1
+  have hL := (Padic.extension_integers_dvr l L (Padic.coefficientExtensionAbsoluteValue l L)
+    (spectralNorm_extends (K := ℚ_[l]) (L := L))).choose_spec.choose_spec.1
+  have hmap (a : E) : spectralNorm ℚ_[l] L (ι a) = spectralNorm ℚ_[l] E a := by
+    unfold spectralNorm
+    rw [minpoly.algHom_eq ι ι.injective]
+  let f : Padic.coefficientExtensionIntegers l E →+*
+      Padic.coefficientExtensionIntegers l L :=
+    { toFun := fun x ↦ ⟨ι (x : E), by
+        apply (hL _).mpr
+        change spectralNorm ℚ_[l] L (ι (x : E)) ≤ 1
+        rw [hmap]
+        exact (hE _).mp x.property⟩
+      map_one' := Subtype.ext (map_one ι)
+      map_mul' x y := Subtype.ext (map_mul ι (x : E) (y : E))
+      map_zero' := Subtype.ext (map_zero ι)
+      map_add' x y := Subtype.ext (map_add ι (x : E) (y : E)) }
+  exact ⟨f, fun _ ↦ rfl⟩
 
 /-- Restriction of the given field inclusion to the rings of integers.
 Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
@@ -317,7 +638,52 @@ theorem lisseRamificationIndex_exists :
     ∃ e : ℕ, 0 < e ∧
       Ideal.map (lisseIntegerInclusion l E L ι) (Padic.coefficientExtensionMaximalIdeal l E) =
         Padic.coefficientExtensionMaximalIdeal l L ^ e := by
-  sorry
+  have hE := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hL := (Padic.extension_integers_dvr l L (Padic.coefficientExtensionAbsoluteValue l L)
+    (spectralNorm_extends (K := ℚ_[l]) (L := L))).choose_spec.choose_spec
+  rcases hE with ⟨_, hmE, _, _, _, _, _, _, _, hneE, _⟩
+  rcases hL with ⟨_, hmL, _, _, hmaxL, _, _, hdvrL, _⟩
+  have : IsDiscreteValuationRing (Padic.coefficientExtensionIntegers l L) := hdvrL
+  have hi (x : Padic.coefficientExtensionIntegers l E) :
+      (lisseIntegerInclusion l E L ι x : L) = ι (x : E) :=
+    (lisseIntegerInclusion_exists l E L ι).choose_spec x
+  have hinj : Function.Injective (lisseIntegerInclusion l E L ι) := by
+    intro x y h
+    apply Subtype.ext
+    apply ι.injective
+    have hc := congrArg
+      (fun z : Padic.coefficientExtensionIntegers l L ↦ (z : L)) h
+    exact (hi x).symm.trans (hc.trans (hi y))
+  have hne : Ideal.map (lisseIntegerInclusion l E L ι)
+      (Padic.coefficientExtensionMaximalIdeal l E) ≠ ⊥ :=
+    (Ideal.map_eq_bot_iff_of_injective hinj).not.mpr hneE
+  have hle : Ideal.map (lisseIntegerInclusion l E L ι)
+      (Padic.coefficientExtensionMaximalIdeal l E) ≤
+        Padic.coefficientExtensionMaximalIdeal l L := by
+    apply Ideal.map_le_iff_le_comap.mpr
+    intro x hx
+    apply (hmL _).mpr
+    change spectralNorm ℚ_[l] L _ < 1
+    rw [hi]
+    have heq : spectralNorm ℚ_[l] L (ι (x : E)) = spectralNorm ℚ_[l] E (x : E) := by
+      unfold spectralNorm
+      rw [minpoly.algHom_eq ι ι.injective]
+    rw [heq]
+    exact (hmE _).mp hx
+  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible
+    (Padic.coefficientExtensionIntegers l L)
+  obtain ⟨e, he⟩ := IsDiscreteValuationRing.ideal_eq_span_pow_irreducible hne hπ
+  have hmax : Padic.coefficientExtensionMaximalIdeal l L =
+      Ideal.span ({π} : Set (Padic.coefficientExtensionIntegers l L)) :=
+    (IsLocalRing.eq_maximalIdeal hmaxL).trans hπ.maximalIdeal_eq
+  refine ⟨e, ?_, ?_⟩
+  · by_contra h
+    have hz : e = 0 := by omega
+    rw [he, hz, pow_zero, Ideal.span_singleton_one] at hle
+    exact hmaxL.ne_top (top_le_iff.mp hle)
+  · rw [hmax, Ideal.span_singleton_pow]
+    exact he
 
 /-- The ramification index of the coefficient inclusion.
 Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
@@ -336,7 +702,10 @@ Proof: the ramification index is positive; addition, division by a fixed positiv
 integer and truncated subtraction by one preserve order. Apply them to `m ≤ m+1`. -/
 theorem lisseScalarSourceIndex_le (m : ℕ) :
     lisseScalarSourceIndex l E L ι m ≤ lisseScalarSourceIndex l E L ι (m + 1) := by
-  sorry
+  unfold lisseScalarSourceIndex
+  apply Nat.sub_le_sub_right
+  apply Nat.div_le_div_right
+  omega
 
 /-- The scalar map to the target finite quotient.
 Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
@@ -463,6 +832,238 @@ structure LisseRationalScalarExtensionData where
         ⟨(lisseIntegralScalarExtension l E Y L ι).obj H.integral⟩
         (map F G f) (map G H g)
 
+set_option maxRecDepth 100 in
+private def quotientRestrictedHom {S A : Type (u + 1)} [CommRing S] [CommRing A]
+    (q : S →+* A) (hq : Function.Surjective q) (M N : ModuleCat.{u + 1} A)
+    (f : (ModuleCat.restrictScalars.{u + 1} q).obj M ⟶
+      (ModuleCat.restrictScalars.{u + 1} q).obj N) :
+    M ⟶ N :=
+  ModuleCat.ofHom (X := M) (Y := N)
+    { toFun := f
+      map_add' := f.hom.map_add
+      map_smul' := by
+        intro a x
+        obtain ⟨b, rfl⟩ := hq a
+        exact f.hom.map_smul b x }
+
+set_option maxRecDepth 100 in
+private def quotientRestrictedSheafHom {S A : Type (u + 1)} [CommRing S] [CommRing A]
+    (q : S →+* A) (hq : Function.Surjective q)
+    (M N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (f : (sheafCompose Y.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} q)).obj M ⟶
+      (sheafCompose Y.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} q)).obj N) : M ⟶ N :=
+  ⟨{ app U := quotientRestrictedHom q hq _ _ (f.hom.app U)
+     naturality U V v := by
+       apply ModuleCat.hom_ext
+       apply LinearMap.ext
+       intro x
+       exact congrArg (fun h ↦ h x) (congrArg ModuleCat.Hom.hom (f.hom.naturality v)) }⟩
+
+set_option maxRecDepth 100 in
+private theorem scalarLevel_hom_ext (F G : LisseIntegralSheaf l E Y) (m : ℕ)
+    (f g : lisseIntegralScalarLevel l E Y L ι F m ⟶
+      lisseIntegralScalarLevel l E Y L ι G m)
+    (h : ∀ (U : Y.Etale) (a : Padic.coefficientExtensionRing l L (m + 1))
+      (s : (F.obj.obj (op (lisseScalarSourceIndex l E L ι m))).obj.obj (op U)),
+      f.hom.app (op U) (lisseIntegralScalarGenerator l E Y L ι F m U a s) =
+        g.hom.app (op U) (lisseIntegralScalarGenerator l E Y L ι F m U a s)) : f = g := by
+  let q := Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l L (m + 1))
+  let r := lisseScalarCoefficientMap l E L ι m
+  let EF := ModuleCat.ringExtendScalars.{u + 1, u + 1} r
+  let P := (F.obj.obj (op (lisseScalarSourceIndex l E L ι m))).obj ⋙ EF
+  let Q := (G.obj.obj (op (lisseScalarSourceIndex l E L ι m))).obj ⋙ EF
+  let f' := quotientRestrictedSheafHom Y q Ideal.Quotient.mk_surjective
+    ((presheafToSheaf Y.smallEtaleTopology _).obj P)
+    ((presheafToSheaf Y.smallEtaleTopology _).obj Q) f
+  let g' := quotientRestrictedSheafHom Y q Ideal.Quotient.mk_surjective
+    ((presheafToSheaf Y.smallEtaleTopology _).obj P)
+    ((presheafToSheaf Y.smallEtaleTopology _).obj Q) g
+  have he : f' = g' := by
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext _ _ _ ((presheafToSheaf Y.smallEtaleTopology _).obj Q).property
+    apply NatTrans.ext
+    funext U
+    apply ((ModuleCat.ringExtendScalarsAdj.{u + 1, u + 1} r).homEquiv _ _).injective
+    simp only [Adjunction.homEquiv_apply]
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    simpa only [lisseIntegralScalarGenerator, ModuleCat.ringExtensionTmul, one_smul,
+      ModuleCat.comp_apply, NatTrans.comp_app, ModuleCat.restrictScalars.map_apply] using!
+      h U.unop 1 x
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  exact congrArg (fun h ↦ h.hom.app U x) he
+
+
+private theorem scalarFunctor_add (D : LisseIntegralScalarExtensionData l E Y L ι)
+    {F G : LisseIntegralSheaf l E Y} (f g : F ⟶ G) :
+    D.functor.map (f + g) = D.functor.map f + D.functor.map g := by
+  apply ObjectProperty.hom_ext
+  apply NatTrans.ext
+  funext m
+  apply (cancel_mono (D.levelIso G m.unop).hom).mp
+  apply (cancel_epi (D.levelIso F m.unop).inv).mp
+  apply scalarLevel_hom_ext l E Y L ι F G m.unop
+  intro U a s
+  change (D.levelIso G m.unop).hom.hom.app (op U)
+    (((D.functor.map (f + g)).hom.app m).hom.app (op U)
+      ((D.levelIso F m.unop).inv.hom.app (op U)
+        (lisseIntegralScalarGenerator l E Y L ι F m.unop U a s))) =
+    (D.levelIso G m.unop).hom.hom.app (op U)
+      ((((D.functor.map f).hom.app m).hom.app (op U)
+        ((D.levelIso F m.unop).inv.hom.app (op U)
+          (lisseIntegralScalarGenerator l E Y L ι F m.unop U a s))) +
+      (((D.functor.map g).hom.app m).hom.app (op U)
+        ((D.levelIso F m.unop).inv.hom.app (op U)
+          (lisseIntegralScalarGenerator l E Y L ι F m.unop U a s))))
+  rw [map_add]
+  rw [D.map, D.map, D.map]
+  change lisseIntegralScalarGenerator l E Y L ι G m.unop U a
+    (((f.hom.app (op (lisseScalarSourceIndex l E L ι m.unop))).hom.app (op U) s) +
+      ((g.hom.app (op (lisseScalarSourceIndex l E L ι m.unop))).hom.app (op U) s)) = _
+  simp only [lisseIntegralScalarGenerator, ModuleCat.ringExtensionTmul,
+    map_add, smul_add]
+
+private theorem scalarFunctor_smul (D : LisseIntegralScalarExtensionData l E Y L ι)
+    {F G : LisseIntegralSheaf l E Y} (r : Padic.coefficientExtensionIntegers l E)
+    (f : F ⟶ G) : D.functor.map (r • f) =
+      lisseIntegerInclusion l E L ι r • D.functor.map f := by
+  apply ObjectProperty.hom_ext
+  apply NatTrans.ext
+  funext m
+  apply (cancel_mono (D.levelIso G m.unop).hom).mp
+  apply (cancel_epi (D.levelIso F m.unop).inv).mp
+  apply scalarLevel_hom_ext l E Y L ι F G m.unop
+  intro U a s
+  let z := lisseIntegralScalarGenerator l E Y L ι F m.unop U a s
+  change (D.levelIso G m.unop).hom.hom.app (op U)
+    (((D.functor.map (r • f)).hom.app m).hom.app (op U)
+      ((D.levelIso F m.unop).inv.hom.app (op U) z)) =
+    (D.levelIso G m.unop).hom.hom.app (op U)
+      (lisseIntegerInclusion l E L ι r •
+        (((D.functor.map f).hom.app m).hom.app (op U)
+          ((D.levelIso F m.unop).inv.hom.app (op U) z)))
+  rw [map_smul]
+  dsimp only [z]
+  rw [D.map, D.map]
+  change lisseIntegralScalarGenerator l E Y L ι G m.unop U a
+    (r • ((f.hom.app (op (lisseScalarSourceIndex l E L ι m.unop))).hom.app (op U) s)) = _
+  let B := Padic.coefficientExtensionRing l L (m.unop + 1)
+  let k := lisseScalarCoefficientMap l E L ι m.unop
+  let M := (G.obj.obj (op (lisseScalarSourceIndex l E L ι m.unop))).obj.obj (op U)
+  let η := (ModuleCat.ringExtendScalarsAdj.{u + 1, u + 1} k).unit.app M
+  let t := ((toSheafification Y.smallEtaleTopology (ModuleCat.{u + 1} B)).app
+    ((G.obj.obj (op (lisseScalarSourceIndex l E L ι m.unop))).obj ⋙
+      ModuleCat.ringExtendScalars.{u + 1, u + 1} k)).app (op U)
+  let x := (f.hom.app (op (lisseScalarSourceIndex l E L ι m.unop))).hom.app (op U) s
+  change t (a • (show (ModuleCat.ringExtendScalars.{u + 1, u + 1} k).obj M from
+    η (r • x))) = k r • t (a • (show
+      (ModuleCat.ringExtendScalars.{u + 1, u + 1} k).obj M from η x))
+  have hh := η.hom.map_smul r x
+  have hh' : (show (ModuleCat.ringExtendScalars.{u + 1, u + 1} k).obj M from
+      η (r • x)) = k r • (show
+        (ModuleCat.ringExtendScalars.{u + 1, u + 1} k).obj M from η x) := hh
+  have hhh := congrArg (fun y : (ModuleCat.ringExtendScalars.{u + 1, u + 1} k).obj M ↦
+    t (a • y)) hh'
+  simpa only [smul_comm a (k r), map_smul] using! hhh
+
+private theorem scalarMap_add {F G : LisseIntegralSheaf l E Y} (f g : F ⟶ G) :
+    (lisseIntegralScalarExtension l E Y L ι).map (f + g) =
+      (lisseIntegralScalarExtension l E Y L ι).map f +
+        (lisseIntegralScalarExtension l E Y L ι).map g := by
+  let D := lisseIntegralScalarExtensionData l E Y L ι
+  have he : lisseIntegralScalarExtension l E Y L ι = D.functor := by
+    rw [lisseIntegralScalarExtension]
+  have h : ∀ S : LisseIntegralSheaf l E Y ⥤ LisseIntegralSheaf l L Y,
+      S = D.functor → S.map (f + g) = S.map f + S.map g := by
+    intro S h
+    subst S
+    exact scalarFunctor_add l E Y L ι D f g
+  exact h _ he
+
+private theorem scalarMap_smul {F G : LisseIntegralSheaf l E Y}
+    (r : Padic.coefficientExtensionIntegers l E) (f : F ⟶ G) :
+    (lisseIntegralScalarExtension l E Y L ι).map (r • f) =
+      lisseIntegerInclusion l E L ι r • (lisseIntegralScalarExtension l E Y L ι).map f := by
+  let D := lisseIntegralScalarExtensionData l E Y L ι
+  have he : lisseIntegralScalarExtension l E Y L ι = D.functor := by
+    rw [lisseIntegralScalarExtension]
+  have h : ∀ S : LisseIntegralSheaf l E Y ⥤ LisseIntegralSheaf l L Y,
+      S = D.functor → S.map (r • f) = lisseIntegerInclusion l E L ι r • S.map f := by
+    intro S h
+    subst S
+    exact scalarFunctor_smul l E Y L ι D r f
+  exact h _ he
+
+@[irreducible]
+private def scalarBilinear (F G : LisseRationalSheaf l E Y) :
+    E →+ (F.integral ⟶ G.integral) →+
+      lisseRationalHom l L Y
+        ⟨(lisseIntegralScalarExtension l E Y L ι).obj F.integral⟩
+        ⟨(lisseIntegralScalarExtension l E Y L ι).obj G.integral⟩ :=
+  { toFun := fun a ↦
+      { toFun := fun f ↦ TensorProduct.tmul _ (ι a)
+          ((lisseIntegralScalarExtension l E Y L ι).map f)
+        map_zero' := by
+          have h := scalarMap_add l E Y L ι (0 : F.integral ⟶ G.integral) 0
+          rw [zero_add] at h
+          have hz : (lisseIntegralScalarExtension l E Y L ι).map
+              (0 : F.integral ⟶ G.integral) = 0 := by
+            exact (add_eq_left.mp h.symm)
+          rw [hz, TensorProduct.tmul_zero]
+        map_add' := by intro f g; rw [scalarMap_add, TensorProduct.tmul_add] }
+    map_zero' := by
+      ext f
+      exact congrArg (fun x ↦ TensorProduct.tmul _ x
+        ((lisseIntegralScalarExtension l E Y L ι).map f)) ι.map_zero |>.trans
+          (TensorProduct.zero_tmul _ _)
+    map_add' := by
+      intro a b
+      ext f
+      exact congrArg (fun x ↦ TensorProduct.tmul _ x
+        ((lisseIntegralScalarExtension l E Y L ι).map f)) (ι.map_add a b) |>.trans
+          (TensorProduct.add_tmul _ _ _) }
+
+private theorem scalarBilinear_apply (F G : LisseRationalSheaf l E Y)
+    (a : E) (f : F.integral ⟶ G.integral) :
+    scalarBilinear l E Y L ι F G a f = TensorProduct.tmul _ (ι a)
+      ((lisseIntegralScalarExtension l E Y L ι).map f) := by
+  rw [scalarBilinear]
+  rfl
+
+private theorem scalarBilinear_balanced (F G : LisseRationalSheaf l E Y)
+    (r : Padic.coefficientExtensionIntegers l E) (a : E) (f : F.integral ⟶ G.integral) :
+    scalarBilinear l E Y L ι F G (r • a) f =
+      scalarBilinear l E Y L ι F G a (r • f) := by
+  rw [scalarBilinear_apply, scalarBilinear_apply, scalarMap_smul,
+    ← TensorProduct.smul_tmul]
+  congr 1
+  change ι ((r : E) * a) = (lisseIntegerInclusion l E L ι r : L) * ι a
+  have hi : (lisseIntegerInclusion l E L ι r : L) = ι (r : E) :=
+    (lisseIntegerInclusion_exists l E L ι).choose_spec r
+  rw [map_mul, hi]
+
+@[irreducible]
+private def rationalScalarMap (F G : LisseRationalSheaf l E Y) :
+    lisseRationalHom l E Y F G →+
+      lisseRationalHom l L Y
+        ⟨(lisseIntegralScalarExtension l E Y L ι).obj F.integral⟩
+        ⟨(lisseIntegralScalarExtension l E Y L ι).obj G.integral⟩ :=
+  TensorProduct.liftAddHom (scalarBilinear l E Y L ι F G)
+    (scalarBilinear_balanced l E Y L ι F G)
+
+private theorem rationalScalarMap_tmul (F G : LisseRationalSheaf l E Y)
+    (a : E) (f : F.integral ⟶ G.integral) :
+    rationalScalarMap l E Y L ι F G (TensorProduct.tmul _ a f) =
+      TensorProduct.tmul _ (ι a) ((lisseIntegralScalarExtension l E Y L ι).map f) := by
+  rw [rationalScalarMap, TensorProduct.liftAddHom_tmul, scalarBilinear_apply]
+
+set_option maxRecDepth 200 in
 /-- Scalar extension of rational morphisms exists with the stated formula.
 Source: Weil II (1.1.1) c), d) (blueprint: def-pod-lisse-l-adic-sheaves).
 Proof: the integral scalar functor respects the rings-of-integers scalar actions by
@@ -472,7 +1073,25 @@ composition follow on pure tensors from the corresponding integral functor laws 
 the rational composition formula, and then on all tensors by additivity. -/
 theorem lisseRationalScalarExtension_exists :
     Nonempty (LisseRationalScalarExtensionData l E Y L ι) := by
-  sorry
+  refine ⟨{ map := fun F G ↦ rationalScalarMap l E Y L ι F G
+            map_add := fun F G f g ↦ (rationalScalarMap l E Y L ι F G).map_add f g
+            map_tmul := rationalScalarMap_tmul l E Y L ι
+            map_id := ?_
+            map_comp := ?_ }⟩
+  · intro F
+    rw [rationalScalarMap_tmul, map_one, CategoryTheory.Functor.map_id]
+  · intro F G H f g
+    induction f using TensorProduct.induction_on with
+    | zero => simp only [map_zero, LinearMap.zero_apply]
+    | add f₁ f₂ ih₁ ih₂ => simp only [map_add, LinearMap.add_apply, ih₁, ih₂]
+    | tmul a f =>
+      induction g using TensorProduct.induction_on with
+      | zero => simp only [map_zero]
+      | add g₁ g₂ ih₁ ih₂ => simp only [map_add, ih₁, ih₂]
+      | tmul b g =>
+        rw [(lisseRationalComposition l E Y).comp_tmul, rationalScalarMap_tmul,
+          rationalScalarMap_tmul, rationalScalarMap_tmul,
+          (lisseRationalComposition l L Y).comp_tmul, map_mul, Functor.map_comp]
 
 /-- The prescribed additive scalar-extension maps.
 Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
