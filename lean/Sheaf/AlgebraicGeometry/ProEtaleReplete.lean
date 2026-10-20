@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.CategoryTheory.RepleteSheafTopos
-import Sheaf.AlgebraicGeometry.ProEtale.RepleteOnContractible
+import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteOnContractible
 import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 import Sheaf.AlgebraicGeometry.WContractibleAffineCover
 public import Sheaf.CategoryTheory.SiteCoveringAxioms

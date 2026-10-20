@@ -223,23 +223,24 @@
   "note": "Read node, blueprint source (main-20261015 det-pe-replete-on-contractible.md/.proof.md), 4 stmt_deps and their landed declarations (IsWeaklyContractible, IsReplete, proetale_weakContractible_equivalences, Mathlib ProEt), module, report (real Worker report and Second reading by N8). Node differs from base only in lean and a gained landed stmt_dep sk-def-pe-weak-contractible (permitted, no cycle); dependency nodes byte-identical. Clauses exact: arbitrary X, F : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) (Type (max (u+1) w)), categorical Epi transitions, arbitrary W with IsWeaklyContractible at the value universe (w=0 gives the Type (u+1) notion; universe-independent in substance), both conjuncts (transitions and every limit.π at op W). Universes u+1/u kept, value universe equals IsReplete.{u+1,u,w} (rfl probe), none unbound. Edge cases m=0, empty sections, empty or disconnected W fine. No definitions, proof sorry only, docstrings carry source, blueprint tag and 4 proof steps, statement field verbatim. nt_compile.py --json on the local overlay: module clean 2.2 s; probe clean, axioms propext/sorryAx/Classical.choice/Quot.sound. No findings."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtale.RepleteOnContractible",
+  "module": "WeilConjectures.AlgebraicGeometry.ProEtale.RepleteOnContractible",
   "declaration": "AlgebraicGeometry.Scheme.proetale_surjective_sections_of_epi_tower",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/RepleteOnContractible.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/RepleteOnContractible.lean",
   "statement": "theorem proetale_surjective_sections_of_epi_tower (X : Scheme.{u}) (F : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) (Type (max (u + 1) w))) (hF : ∀ n : ℕ, Epi (F.map (homOfLE (Nat.le_succ n)).op)) (W : X.ProEt) (hW : (ProEt.topology X).IsWeaklyContractible.{max (u + 1) w} W) : (∀ n : ℕ, Function.Surjective ((F.map (homOfLE (Nat.le_succ n)).op).hom.app (op W))) ∧ (∀ m : ℕ, Function.Surjective ((limit.π F (op m)).hom.app (op W)))",
-  "branch": "newtargets-dag",
-  "by": "N8",
-  "date": "2026-10-17",
-  "existing": false
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-20",
+  "existing": true,
+  "note": "Retired the duplicate Sheaf module in favor of the adopted source module. The theorem signature and complete proof are identical; the sole consumer now imports this module directly."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "C-50028",
+  "group": "V8",
   "result": "pass",
-  "landing": "20261019T132228-L-1204541",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T135434-L-1823527",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf copy vs WeilConjectures twin (identical theorem+proof); node lean pointer vs twin signature; sole importer ProEtaleReplete compiled against delivery (12.2 s clean); axioms propext/choice/Quot.sound"
  }
 }
