@@ -10,9 +10,6 @@ public import Sheaf.AlgebraicGeometry.ProEtaleAmbientRingedExchange
 public import Sheaf.Paper.ProjectionMateExact
 public import Sheaf.Paper.ProjectionFormulaArrows
 import Sheaf.Paper.ProjectionFormulaTotalization
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import Sheaf.Paper.CondensedAmbientExchange
-import Sheaf.Paper.ProEtaleProjectionFormulaArrows
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
@@ -50,7 +47,11 @@ theorem derivedProjectionFormulaMate_naturality
     derivedProjectionFormulaMate L V adj TR TS alpha E Q ≫
         V.map (TS.map (Prod.mkHom q (𝟙 (L.obj Q)))) =
       TR.map (Prod.mkHom (V.map q) (𝟙 Q)) ≫
-        derivedProjectionFormulaMate L V adj TR TS alpha E' Q := sorry
+        derivedProjectionFormulaMate L V adj TR TS alpha E' Q := by
+  exact (congrArg (fun t ↦ t.app Q)
+    ((adj.rightAdjointProjectionMap (T_C := Functor.curry.obj TS)
+      (T_D := Functor.curry.obj TR)
+      (Functor.curry.map alpha.hom ≫ (Functor.curryObjProdComp L L TS).hom)).naturality q)).symm
 
 /-- Transport the two arrows along the specified coefficient isomorphism and its pullback.
 These are the reduction identifications of blueprint order 1274, not new choices of maps.
@@ -68,6 +69,100 @@ noncomputable def transportTensorProjectionArrows
       V.map (TS.map (Prod.mkHom (𝟙 E) (L.map e.hom))),
     V.map (TS.map (Prod.mkHom (𝟙 E) (L.map e.inv))) ≫ arrows.2 ≫
       TR.map (Prod.mkHom (𝟙 (V.obj E)) e.hom)⟩
+
+private theorem transportTensorProjectionArrows_mate
+    {A : Type u} [Category.{v} A] {B : Type u'} [Category.{v'} B]
+    (L : A ⥤ B) (V : B ⥤ A) (adj : L ⊣ V)
+    (TR : A × A ⥤ A) (TS : B × B ⥤ B)
+    (alpha : TR ⋙ L ≅ (L.prod L) ⋙ TS)
+    (E : B) (F Q : A) (e : F ≅ Q)
+    (rho : V.obj (TS.obj (E, L.obj F)) ⟶ TR.obj (V.obj E, F)) :
+    (transportTensorProjectionArrows L V TR TS E F Q e
+      (derivedProjectionFormulaMate L V adj TR TS alpha E F, rho)).1 =
+        derivedProjectionFormulaMate L V adj TR TS alpha E Q := by
+  have hn := ((adj.rightAdjointProjectionMap (T_C := Functor.curry.obj TS)
+    (T_D := Functor.curry.obj TR)
+    (Functor.curry.map alpha.hom ≫ (Functor.curryObjProdComp L L TS).hom)).app E).naturality
+      e.hom
+  change TR.map (Prod.mkHom (𝟙 _) e.hom) ≫
+      derivedProjectionFormulaMate L V adj TR TS alpha E Q =
+    derivedProjectionFormulaMate L V adj TR TS alpha E F ≫
+      V.map (TS.map (Prod.mkHom (𝟙 _) (L.map e.hom))) at hn
+  dsimp only [transportTensorProjectionArrows]
+  rw [← hn, ← Category.assoc, ← TR.map_comp]
+  simp
+
+private theorem transportTensorProjectionArrows_inverse
+    {A : Type u} [Category.{v} A] {B : Type u'} [Category.{v'} B]
+    (L : A ⥤ B) (V : B ⥤ A) (TR : A × A ⥤ A) (TS : B × B ⥤ B)
+    (E : B) (F Q : A) (e : F ≅ Q)
+    (arrows : (TR.obj (V.obj E, F) ⟶ V.obj (TS.obj (E, L.obj F))) ×
+      (V.obj (TS.obj (E, L.obj F)) ⟶ TR.obj (V.obj E, F)))
+    (h : arrows.1 ≫ arrows.2 = 𝟙 _ ∧ arrows.2 ≫ arrows.1 = 𝟙 _) :
+    let t := transportTensorProjectionArrows L V TR TS E F Q e arrows
+    t.1 ≫ t.2 = 𝟙 _ ∧ t.2 ≫ t.1 = 𝟙 _ := by
+  let p : TR.obj (V.obj E, F) ≅ V.obj (TS.obj (E, L.obj F)) :=
+    ⟨arrows.1, arrows.2, h.1, h.2⟩
+  let t := (TR.mapIso ((Iso.refl (V.obj E)).prod e)).symm ≪≫ p ≪≫
+    V.mapIso (TS.mapIso ((Iso.refl E).prod (L.mapIso e)))
+  dsimp only [transportTensorProjectionArrows]
+  constructor
+  · simpa only [t, p, Iso.trans_hom, Iso.trans_inv, Functor.mapIso_hom,
+      Functor.mapIso_inv, Iso.symm_hom, Iso.symm_inv, Iso.prod_hom, Iso.prod_inv,
+      Iso.refl_hom, Iso.refl_inv, Category.assoc] using t.hom_inv_id
+  · simpa only [t, p, Iso.trans_hom, Iso.trans_inv, Functor.mapIso_hom,
+      Functor.mapIso_inv, Iso.symm_hom, Iso.symm_inv, Iso.prod_hom, Iso.prod_inv,
+      Iso.refl_hom, Iso.refl_inv, Category.assoc] using t.inv_hom_id
+
+private theorem transportTensorProjectionArrows_naturality
+    {A : Type u} [Category.{v} A] {B : Type u'} [Category.{v'} B]
+    (L : A ⥤ B) (V : B ⥤ A) (adj : L ⊣ V)
+    (TR : A × A ⥤ A) (TS : B × B ⥤ B)
+    (alpha : TR ⋙ L ≅ (L.prod L) ⋙ TS)
+    (E E' : B) (F Q : A) (e : F ≅ Q) (q : E ⟶ E')
+    (arrows : (TR.obj (V.obj E, F) ⟶ V.obj (TS.obj (E, L.obj F))) ×
+      (V.obj (TS.obj (E, L.obj F)) ⟶ TR.obj (V.obj E, F)))
+    (arrows' : (TR.obj (V.obj E', F) ⟶ V.obj (TS.obj (E', L.obj F))) ×
+      (V.obj (TS.obj (E', L.obj F)) ⟶ TR.obj (V.obj E', F)))
+    (hfst : arrows.1 = derivedProjectionFormulaMate L V adj TR TS alpha E F)
+    (hfst' : arrows'.1 = derivedProjectionFormulaMate L V adj TR TS alpha E' F)
+    (hi : arrows.1 ≫ arrows.2 = 𝟙 _ ∧ arrows.2 ≫ arrows.1 = 𝟙 _)
+    (hi' : arrows'.1 ≫ arrows'.2 = 𝟙 _ ∧ arrows'.2 ≫ arrows'.1 = 𝟙 _) :
+    let t := transportTensorProjectionArrows L V TR TS E F Q e arrows
+    let t' := transportTensorProjectionArrows L V TR TS E' F Q e arrows'
+    t.1 ≫ V.map (TS.map (Prod.mkHom q (𝟙 (L.obj Q)))) =
+        TR.map (Prod.mkHom (V.map q) (𝟙 Q)) ≫ t'.1 ∧
+      t.2 ≫ TR.map (Prod.mkHom (V.map q) (𝟙 Q)) =
+        V.map (TS.map (Prod.mkHom q (𝟙 (L.obj Q)))) ≫ t'.2 := by
+  let t := transportTensorProjectionArrows L V TR TS E F Q e arrows
+  let t' := transportTensorProjectionArrows L V TR TS E' F Q e arrows'
+  have ht : t.1 = derivedProjectionFormulaMate L V adj TR TS alpha E Q := by
+    change TR.map (Prod.mkHom (𝟙 _) e.inv) ≫ arrows.1 ≫ _ = _
+    rw [hfst]
+    exact transportTensorProjectionArrows_mate L V adj TR TS alpha E F Q e arrows.2
+  have ht' : t'.1 = derivedProjectionFormulaMate L V adj TR TS alpha E' Q := by
+    change TR.map (Prod.mkHom (𝟙 _) e.inv) ≫ arrows'.1 ≫ _ = _
+    rw [hfst']
+    exact transportTensorProjectionArrows_mate L V adj TR TS alpha E' F Q e arrows'.2
+  have hi := transportTensorProjectionArrows_inverse L V TR TS E F Q e arrows hi
+  have hi' := transportTensorProjectionArrows_inverse L V TR TS E' F Q e arrows' hi'
+  change t.1 ≫ t.2 = 𝟙 _ ∧ t.2 ≫ t.1 = 𝟙 _ at hi
+  change t'.1 ≫ t'.2 = 𝟙 _ ∧ t'.2 ≫ t'.1 = 𝟙 _ at hi'
+  change t.1 ≫ _ = _ ≫ t'.1 ∧ t.2 ≫ _ = _ ≫ t'.2
+  have hn : t.1 ≫ V.map (TS.map (Prod.mkHom q (𝟙 (L.obj Q)))) =
+      TR.map (Prod.mkHom (V.map q) (𝟙 Q)) ≫ t'.1 := by
+    rw [ht, ht']
+    exact derivedProjectionFormulaMate_naturality L V adj TR TS alpha E E' Q q
+  refine ⟨hn, ?_⟩
+  calc
+    t.2 ≫ TR.map (Prod.mkHom (V.map q) (𝟙 Q)) =
+        t.2 ≫ TR.map (Prod.mkHom (V.map q) (𝟙 Q)) ≫ t'.1 ≫ t'.2 := by
+          simp only [hi'.1, Category.comp_id]
+    _ = t.2 ≫ (t.1 ≫ V.map (TS.map (Prod.mkHom q (𝟙 (L.obj Q))))) ≫ t'.2 := by
+      simp only [Category.assoc] at hn ⊢
+      rw [← reassoc_of% hn]
+    _ = V.map (TS.map (Prod.mkHom q (𝟙 (L.obj Q)))) ≫ t'.2 := by
+      simp only [← Category.assoc, hi.2, Category.id_comp]
 
 end CategoryTheory
 
@@ -217,7 +312,27 @@ theorem ringedProjectionFormula_operator_naturality
         (transportTensorProjectionArrows LF RF TR TS E' (DerivedCategory.Q.obj F) Qn eQ
       (ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF
       PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
-      E' K' hK' repE' F P hbounded)).2 := sorry
+      E' K' hK' repE' F P hbounded)).2 := by
+  let alpha := ringedTopoiCanonicalDerivedTensorComparison uInv uPush adj I c uStar
+    hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am
+  let arrows := ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF
+    PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
+    E K hK repE F P hbounded
+  let arrows' := ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF
+    PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
+    E' K' hK' repE' F P hbounded
+  apply transportTensorProjectionArrows_naturality LF RF adjD TR TS alpha E E'
+    (DerivedCategory.Q.obj F) Qn eQ phi arrows arrows'
+  · unfold arrows ringedProjectionFormulaArrows
+    rfl
+  · unfold arrows' ringedProjectionFormulaArrows
+    rfl
+  · exact ringedProjectionFormula_totalization uInv uPush adj I c uStar hobj hmap LF epsilon hLF
+      PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
+      E K hK repE F P hbounded
+  · exact ringedProjectionFormula_totalization uInv uPush adj I c uStar hobj hmap LF epsilon hLF
+      PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
+      E' K' hK' repE' F P hbounded
 
 end SheafOfModules
 
@@ -293,3 +408,4 @@ theorem proEtaleProjectionFormula_baseChange
         ((proEtaleRingDerivedPullback g RY RY' cg).obj Q) := sorry
 
 end AlgebraicGeometry.Scheme
+
