@@ -9,13 +9,8 @@ public import Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized
 public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Functor.OfSequence
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
+import all Sheaf.AlgebraicGeometry.FiniteConstantCoefficientTransport
+import all Sheaf.SecSmoothPurity.OrdinaryRestrictionPullbackSquare
 
 /-!
 # Finite open exchange and coefficient restriction
@@ -31,6 +26,8 @@ transpose. All complex functors below are termwise, before derived localization.
 
 @[expose] public noncomputable section
 
+set_option linter.unusedTactic false
+set_option linter.unreachableTactic false
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency.types false
@@ -59,31 +56,34 @@ private theorem mate_unit_iso
   change G.map (adj₁.unit.app M) ≫ 𝟙 _ = G.map (adj₁.unit.app M)
   exact Category.comp_id _
 
+-- Explicit forward and inverse components avoid reducing dependent mapIso records.
 private theorem sequence_iso
     {C : Type*} [Category C] {X Y : ℕ → C}
     (s : ∀ n, X (n + 1) ⟶ X n) (t : ∀ n, Y (n + 1) ⟶ Y n)
-    (e : ∀ n, X n ≅ Y n)
-    (h : ∀ n, s n ≫ (e n).hom = (e (n + 1)).hom ≫ t n) :
+    (f : ∀ n, X n ⟶ Y n) (g : ∀ n, Y n ⟶ X n)
+    (fg : ∀ n, f n ≫ g n = 𝟙 _) (gf : ∀ n, g n ≫ f n = 𝟙 _)
+    (h : ∀ n, s n ≫ f n = f (n + 1) ≫ t n) :
     ∃ z : Functor.ofOpSequence s ≅ Functor.ofOpSequence t,
-      (∀ n, z.hom.app (Opposite.op n) = (e n).hom) ∧
-      (∀ n, z.inv.app (Opposite.op n) = (e n).inv) := by
-  let f : Functor.ofOpSequence s ⟶ Functor.ofOpSequence t :=
-    NatTrans.ofOpSequence (fun n ↦ (e n).hom) (by
+      (∀ n, z.hom.app (Opposite.op n) = f n) ∧
+      (∀ n, z.inv.app (Opposite.op n) = g n) := by
+  have (n : ℕ) : IsIso (f n) := ⟨⟨g n, fg n, gf n⟩⟩
+  let f' : Functor.ofOpSequence s ⟶ Functor.ofOpSequence t :=
+    NatTrans.ofOpSequence f (by
       intro n
       simpa only [Functor.ofOpSequence_map_homOfLE_succ] using h n)
-  let g : Functor.ofOpSequence t ⟶ Functor.ofOpSequence s :=
-    NatTrans.ofOpSequence (fun n ↦ (e n).inv) (by
+  let g' : Functor.ofOpSequence t ⟶ Functor.ofOpSequence s :=
+    NatTrans.ofOpSequence g (by
       intro n
       simp only [Functor.ofOpSequence_map_homOfLE_succ]
-      apply (cancel_epi (e (n + 1)).hom).mp
+      apply (cancel_epi (f (n + 1))).mp
       rw [← Category.assoc, ← h n]
-      simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id,
-        Iso.hom_inv_id_assoc])
-  refine ⟨⟨f, g, ?_, ?_⟩, fun _ ↦ rfl, fun _ ↦ rfl⟩
+      simp only [Category.assoc, fg, Category.comp_id]
+      rw [← Category.assoc, fg, Category.id_comp])
+  refine ⟨⟨f', g', ?_, ?_⟩, fun _ ↦ rfl, fun _ ↦ rfl⟩
   · ext n
-    exact (e n.unop).hom_inv_id
+    exact fg n.unop
   · ext n
-    exact (e n.unop).inv_hom_id
+    exact gf n.unop
 
 variable {B C : Type (u + 1)} [CommRing B] [CommRing C]
 
@@ -110,6 +110,29 @@ abbrev ringCoefficientMap (a : B →+* C) (X : Scheme.{u}) :
 Source: Stacks Tag 03CY (blueprint: lem-cbc-finite-open-exchange-scalars). -/
 abbrev res (a : B →+* C) (X : Scheme.{u}) : Modules C X ⥤ Modules B X :=
   Scheme.proEtaleRingRestrictScalars (coefficientMap a X)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem scalarUnit_naturality (a : B →+* C) (X : Scheme.{u})
+    (V : X.ProEtᵒᵖ) (b : B) :
+    ((ringCoefficientMap a X).hom.app V) ((scalarUnit B X).app V b) =
+      (scalarUnit C X).app V (a b) := by
+  have h := congr_app ((toSheafification (Scheme.ProEt.topology X)
+    CommRingCat.{u + 1}).naturality
+      ((Functor.const X.ProEtᵒᵖ).map (CommRingCat.ofHom a))) V
+  exact (ConcreteCategory.congr_hom h b).symm
+
+set_option backward.isDefEq.respectTransparency false in
+-- Change of constant-ring coordinates, with identity underlying section maps.
+private def resFixed (a : B →+* C) (X : Scheme.{u}) :
+    res a X ⋙ fixedRestriction B X ≅
+      fixedRestriction C X ⋙ Sheaf.restrictScalars (Scheme.ProEt.topology X) a :=
+  ringUnitLinearizeIso B (Scheme.ProEt.topology X) _ (scalarUnit B X)
+    C a (res a X) (fixedRestriction C X) (Iso.refl _) (by
+      intro M V b m
+      change ((ringCoefficientMap a X).hom.app V) ((scalarUnit B X).app V b) •
+          (show M.val.obj V from m) =
+        (scalarUnit C X).app V (a b) • (show M.val.obj V from m)
+      rw [scalarUnit_naturality])
 
 /-- The constant-preserving coefficient maps commute with a coefficient homomorphism.
 Source: Stacks Tags 03D2 and 03CY
@@ -146,6 +169,16 @@ def pushRes (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
     (coefficientSquare a f)
 
 set_option backward.isDefEq.respectTransparency false in
+private theorem pushRes_apply {B C : Type (u + 1)} [CommRing B] [CommRing C]
+    (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) (N : Modules C Y)
+    (W : X.ProEtᵒᵖ) (m : N.val.obj ((Scheme.proEtaleBaseChange f).op.obj W)) :
+    ((pushRes a f).hom.app N).val.app W m = m :=
+  (Classical.choose_spec (Scheme.proEtaleRingRestrictionDirectImage_existsUnique f
+    (coefficients B X) (coefficients C X) (coefficients B Y) (coefficients C Y)
+    (coefficientMap a X) (coefficientMap a Y) (constantRingIso B f) (constantRingIso C f)
+    (coefficientSquare a f))).1 N W m
+
+set_option backward.isDefEq.respectTransparency false in
 private theorem pullRes_mate (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
     (mateEquiv (Scheme.proEtaleRingModuleAdjunction f
         (coefficients C X) (coefficients C Y) (constantRingIso C f))
@@ -173,6 +206,164 @@ private theorem pullRes_mate (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
   simp only [Category.id_comp]
   exact congrArg (fun k ↦ _ ≫ _ ≫ k) (Category.comp_id _).symm
 
+section
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.defeqAttrib.useBackward true
+
+attribute [local instance] fixedRestriction_equivalence
+
+private def fixedPull {A : Type (u + 1)} [CommRing A]
+    {Y X : Scheme.{u}} (f : Y ⟶ X) :
+    TwoSquare (fixedRestriction A X) (modulePullback A f)
+      (upperStar (ModuleCat.{u + 1} A) f) (fixedRestriction A Y) :=
+  (mateEquiv (Scheme.proEtaleRingModuleAdjunction f
+    (coefficients A X) (coefficients A Y) (constantRingIso A f))
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)).symm
+    (TwoSquare.mk _ _ _ _ (fixedDirect A f).hom)
+
+private instance fixedPull_isIso {A : Type (u + 1)} [CommRing A]
+    {Y X : Scheme.{u}} (f : Y ⟶ X) : IsIso (fixedPull (A := A) f).natTrans :=
+  inverseMate_isIso_of_equivalences _ _ _
+
+-- The pullback square can be checked on the identity-on-sections direct-image mates.
+private theorem resPull_fixed (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
+    TwoSquare.hComp (TwoSquare.mk _ _ _ _ (pullRes a f).hom)
+        (fixedPull (A := B) f) =
+      ((TwoSquare.hComp (fixedPull (A := C) f)
+        (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a f).hom)).whiskerTop
+          (resFixed a X).hom).whiskerBottom (resFixed a Y).inv := by
+  let adjC : modulePullback C f ⊣ moduleDirectImage C f :=
+    Scheme.proEtaleRingModuleAdjunction f
+    (coefficients C X) (coefficients C Y) (constantRingIso C f)
+  let adjB : modulePullback B f ⊣ moduleDirectImage B f :=
+    Scheme.proEtaleRingModuleAdjunction f
+    (coefficients B X) (coefficients B Y) (constantRingIso B f)
+  let ordC := upperStarLowerStarAdjunction (ModuleCat.{u + 1} C) f
+  let ordB := upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f
+  apply (mateEquiv adjC ordB).injective
+  rw [mateEquiv_vcomp adjC adjB ordB, mateEquiv_whiskerTop_whiskerBottom adjC ordB,
+    mateEquiv_vcomp adjC ordC ordB]
+  have hp := pullRes_mate a f
+  change (mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom)).natTrans =
+    (pushRes a f).hom at hp
+  have hp' : mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom) =
+      TwoSquare.mk _ _ _ _ (pushRes a f).hom := by
+    exact (TwoSquare.equivNatTrans _ _ _ _).injective hp
+  rw [hp', show mateEquiv adjB ordB (fixedPull (A := B) f) =
+      TwoSquare.mk _ _ _ _ (fixedDirect B f).hom from Equiv.apply_symm_apply _ _,
+    show mateEquiv adjC ordC (fixedPull (A := C) f) =
+      TwoSquare.mk _ _ _ _ (fixedDirect C f).hom from Equiv.apply_symm_apply _ _]
+  have hs := scalar_direct_mate a f
+  change (mateEquiv ordC ordB
+    (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a f).hom)).natTrans = 𝟙 _ at hs
+  rw [show mateEquiv ordC ordB
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a f).hom) =
+      TwoSquare.mk _ _ _ _ (𝟙 _) from (TwoSquare.equivNatTrans _ _ _ _).injective hs]
+  apply (TwoSquare.equivNatTrans _ _ _ _).injective
+  apply (cancel_mono (Functor.whiskerRight (resFixed a Y).hom
+    (lowerStar (ModuleCat.{u + 1} B) f))).mp
+  simp only [TwoSquare.equivNatTrans, Equiv.coe_fn_mk, TwoSquare.natTrans,
+    TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk,
+    Category.assoc, ← Functor.whiskerRight_comp, Iso.inv_hom_id,
+    Functor.whiskerRight_id', Category.comp_id]
+  ext M V m
+  change ((pushRes a f).hom.app M).val.app V m = m
+  exact (Classical.choose_spec (Scheme.proEtaleRingRestrictionDirectImage_existsUnique
+    f (coefficients B X) (coefficients C X) (coefficients B Y) (coefficients C Y)
+    (coefficientMap a X) (coefficientMap a Y) (constantRingIso B f) (constantRingIso C f)
+    (coefficientSquare a f))).1 M V m
+
+end
+
+section
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.defeqAttrib.useBackward true
+
+private abbrev pullAdj (A : Type (u + 1)) [CommRing A]
+    {Y X : Scheme.{u}} (f : Y ⟶ X) : modulePullback A f ⊣ moduleDirectImage A f :=
+  Scheme.proEtaleRingModuleAdjunction f
+    (coefficients A X) (coefficients A Y) (constantRingIso A f)
+
+attribute [local irreducible] Scheme.proEtaleRingModulePullback
+
+-- Compare compositors on direct images, where their section formulas are explicit.
+private theorem pullRes_comp (a : B →+* C) {V W Z : Scheme.{u}}
+    (f : V ⟶ W) (g : W ⟶ Z) (M : Modules C Z) :
+    (moduleGComp B f g).hom.app ((res a Z).obj M) ≫
+        (modulePullback B f).map ((pullRes a g).hom.app M) ≫
+        (pullRes a f).hom.app ((modulePullback C g).obj M) =
+      (pullRes a (f ≫ g)).hom.app M ≫
+        (res a V).map ((moduleGComp C f g).hom.app M) := by
+  let q := (TwoSquare.mk _ _ _ _ (pullRes a g).hom).vComp
+    (TwoSquare.mk _ _ _ _ (pullRes a f).hom)
+  have hp {Y X : Scheme.{u}} (k : Y ⟶ X) :
+      mateEquiv (pullAdj C k) (pullAdj B k)
+          (TwoSquare.mk _ _ _ _ (pullRes a k).hom) =
+        TwoSquare.mk _ _ _ _ (pushRes a k).hom :=
+    (TwoSquare.equivNatTrans _ _ _ _).injective (pullRes_mate a k)
+  have hc : q.whiskerRight (moduleGComp B f g).hom =
+      (TwoSquare.mk _ _ _ _ (pullRes a (f ≫ g)).hom).whiskerLeft
+        (moduleGComp C f g).hom := by
+    apply mateSquare ((pullAdj C g).comp (pullAdj C f)) (pullAdj C (f ≫ g))
+      ((pullAdj B g).comp (pullAdj B f)) (pullAdj B (f ≫ g))
+    dsimp only [q]
+    rw [mateEquiv_hcomp, hp, hp, hp]
+    have hG (A : Type (u + 1)) [CommRing A] :
+        conjugateEquiv ((pullAdj A g).comp (pullAdj A f)) (pullAdj A (f ≫ g))
+            (moduleGComp A f g).hom = (moduleRComp A f g).hom :=
+      Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _
+    rw [hG B, hG C]
+    apply TwoSquare.ext
+    intro N
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro Y
+    ext n
+    simp only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop, TwoSquare.hComp,
+      TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+      Category.comp_id, SheafOfModules.comp_val, PresheafOfModules.comp_app]
+    simp only [ModuleCat.comp_apply, TwoSquare.natTrans]
+    erw [pushRes_apply a g ((moduleDirectImage C f).obj N) Y n]
+    change ((moduleRComp B f g).hom.app ((res a V).obj N)).val.app Y
+        (((pushRes a f).hom.app N).val.app ((Scheme.proEtaleBaseChange g).op.obj Y) n) =
+      ((pushRes a (f ≫ g)).hom.app N).val.app Y
+        (((moduleRComp C f g).hom.app N).val.app Y n)
+    rw [pushRes_apply, pushRes_apply]
+    exact ((Classical.choose_spec (moduleRComp_existsUnique B f g)).1
+      ((res a V).obj N) Y.unop n).trans
+        ((Classical.choose_spec (moduleRComp_existsUnique C f g)).1 N Y.unop n).symm
+  have hm := congrArg (fun z ↦ z.app M) hc
+  simpa only [q, TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id, Category.assoc] using hm
+
+private theorem pullRes_square (a : B →+* C)
+    {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
+    (j : U ⟶ X) (g : X' ⟶ X) (h : gU ≫ j = j' ≫ g) (M : Modules C X) :
+    (moduleSquareG B gU j' j g h).inv.app ((res a X).obj M) ≫
+        (modulePullback B j').map ((pullRes a g).hom.app M) ≫
+        (pullRes a j').hom.app ((modulePullback C g).obj M) =
+      (modulePullback B gU).map ((pullRes a j).hom.app M) ≫
+        (pullRes a gU).hom.app ((modulePullback C j).obj M) ≫
+        (res a U').map ((moduleSquareG C gU j' j g h).inv.app M) := by
+  exact pasteTransport (fun f ↦ modulePullback B f) (fun f ↦ modulePullback C f)
+    (res a X) (res a U') (fun f ↦ (pullRes a f).hom) h
+    (moduleGComp B gU j) (moduleGComp B j' g)
+    (moduleGComp C gU j) (moduleGComp C j' g)
+    (Functor.whiskerRight (pullRes a j).hom (modulePullback B gU))
+    (Functor.whiskerLeft (modulePullback C j) (pullRes a gU).hom)
+    (Functor.whiskerRight (pullRes a g).hom (modulePullback B j'))
+    (Functor.whiskerLeft (modulePullback C g) (pullRes a j').hom)
+    (pullRes_comp a gU j) (pullRes_comp a j' g)
+    (moduleSquareG B gU j' j g h) (moduleSquareG C gU j' j g h)
+    (moduleSquareG_eq _ _ _ _ _ _) (moduleSquareG_eq _ _ _ _ _ _) M
+
+end
+
 /-- The scalar comparison for extension is the mate of the inverse pullback comparison.
 Source: Stacks Tag 03DI, direct-sum adjunction construction
 (blueprint: lem-cbc-finite-open-exchange-scalars). -/
@@ -180,15 +371,89 @@ def openResMap (a : B →+* C) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion
     res a U ⋙ moduleJ B j ⟶ moduleJ C j ⋙ res a X :=
   (mateEquiv (moduleJAdj C j) (moduleJAdj B j)).symm (pullRes a j).inv
 
+section
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.defeqAttrib.useBackward true
+
 /-- The normalized open scalar mate is invertible, including for the empty open.
 Source: Stacks Tag 03DI (blueprint: lem-cbc-finite-open-exchange-scalars).
-Proof: restriction changes only the scalar action. The extension presheaf is the same
-direct sum on abelian groups and module sheafification extends the action uniquely.
-Thus the identity on that construction is invertible. Its transpose is exactly the
-restricted open unit, hence is openResMap by the adjunction bijection. -/
+Proof: transport the pullback comparison through the equivalence between constant-ring
+module sheaves and sheaves of modules over the coefficient ring. Its direct-image mate
+is identity on sections, so it agrees with the ordinary scalar comparison. The ordinary
+open mate is invertible. Inverse-mate pasting transports this fact back through the
+coordinate equivalences and identifies the resulting mate with openResMap. -/
 theorem openResMap_isIso [Finite B] [Finite C] (a : B →+* C)
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : IsIso (openResMap a j) := by
-  sorry
+  -- Paste through fixed coefficient coordinates, then take open inverse mates.
+  let α := TwoSquare.mk _ _ _ _ (pullRes a j).hom
+  let β := fixedPull (A := B) j
+  let γ := fixedPull (A := C) j
+  let δ := TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a j).hom
+  have : IsIso α.natTrans := by dsimp only [α, TwoSquare.mk]; infer_instance
+  have : IsIso β.natTrans := fixedPull_isIso j
+  have : IsIso γ.natTrans := fixedPull_isIso j
+  have : IsIso δ.natTrans := by dsimp only [δ, TwoSquare.mk]; infer_instance
+  have : IsIso (TwoSquare.hComp γ δ).natTrans := by
+    dsimp only [TwoSquare.hComp, TwoSquare.mk]
+    infer_instance
+  let oa := moduleJAdj C j
+  let ob := moduleJAdj B j
+  let oc := openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j
+  let od := openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} C) j
+  have := fixedRestriction_equivalence B U
+  have := fixedRestriction_equivalence B X
+  have := fixedRestriction_equivalence C U
+  have := fixedRestriction_equivalence C X
+  have : IsIso ((mateEquiv oa od).symm
+      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv γ.natTrans))).natTrans :=
+    inverseMate_isIso_of_equivalences oa od _
+  have : IsIso ((mateEquiv od oc).symm
+      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv δ.natTrans))).natTrans := by
+    simp only [δ, TwoSquare.mk, TwoSquare.natTrans, IsIso.Iso.inv_hom]
+    rw [← scalarPullbackModel_eq B j C a]
+    exact scalarOpenModel_isIso B j C a
+  have hw : IsIso ((mateEquiv oa oc).symm
+      (TwoSquare.mk _ _ _ _
+        (CategoryTheory.inv (TwoSquare.hComp γ δ).natTrans))).natTrans := by
+    rw [inv_hComp, inverseMate_vComp oa od oc]
+    dsimp only [TwoSquare.hComp, TwoSquare.mk]
+    infer_instance
+  let w := TwoSquare.mk _ _ _ _ (CategoryTheory.inv (TwoSquare.hComp γ δ).natTrans)
+  let t := TwoSquare.hComp α β
+  have : IsIso t.natTrans := by
+    dsimp only [t, TwoSquare.hComp, TwoSquare.mk]
+    infer_instance
+  let z := Functor.isoWhiskerRight (resFixed a X) _ ≪≫
+    asIso (TwoSquare.hComp γ δ).natTrans ≪≫
+    Functor.isoWhiskerLeft (modulePullback C j) (resFixed a U).symm
+  have ht : CategoryTheory.inv t.natTrans =
+      ((w.whiskerRight (resFixed a U).hom).whiskerLeft (resFixed a X).inv).natTrans := by
+    have hz : t.natTrans = z.hom := congrArg TwoSquare.natTrans (resPull_fixed a j)
+    calc
+      CategoryTheory.inv t.natTrans = CategoryTheory.inv z.hom :=
+        IsIso.inv_eq_inv.mpr hz
+      _ = _ := by
+        simp only [IsIso.Iso.inv_hom, z, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
+          Functor.isoWhiskerRight_inv, Iso.symm_inv, asIso_inv, w,
+          TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk, Category.assoc]
+  have hi : IsIso ((mateEquiv oa oc).symm
+      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t.natTrans))).natTrans := by
+    rw [ht]
+    exact inverseMate_iso_edges oa oc (resFixed a U) (resFixed a X).symm w
+  let x := (mateEquiv oa ob).symm (TwoSquare.mk _ _ _ _ (pullRes a j).inv)
+  let y := (mateEquiv ob oc).symm
+    (TwoSquare.mk _ _ _ _ (CategoryTheory.inv β.natTrans))
+  have : IsIso y.natTrans := inverseMate_isIso_of_equivalences ob oc _
+  have he : (mateEquiv oa oc).symm
+      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t.natTrans)) = TwoSquare.hComp x y := by
+    dsimp only [t]
+    rw [inv_hComp]
+    exact inverseMate_vComp oa ob oc _ _
+  rw [he] at hi
+  exact isIso_of_hComp x y
+
+end
 
 /-- The canonical scalar-restriction identification for open extension.
 Source: Stacks Tag 03DI (blueprint: lem-cbc-finite-open-exchange-scalars). -/
@@ -265,6 +530,7 @@ def targetResC [Finite B] [Finite C] (a : B →+* C)
       ((modulePullback C gU ⋙ moduleJ C j') ⋙ res a X').mapHomologicalComplex (.up ℤ) :=
   NatIso.mapHomologicalComplex (targetRes a gU j') (.up ℤ)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Degreewise scalar exchange for the finite open comparison.
 Source: the finite open exchange argument, before lifting to cochain complexes
 (blueprint: lem-cbc-finite-open-exchange-scalars).
@@ -281,7 +547,63 @@ theorem exchange_restrictScalars_component [Finite B] [Finite C] (a : B →+* C)
         (res a X').map ((beta C gU j' j g h hsq).hom.app M) =
       (beta B gU j' j g h hsq).hom.app ((res a U).obj M) ≫
         (targetRes a gU j').hom.app M := by
-  sorry
+  have hu (F : Modules C U) :
+      (moduleJAdj B j).unit.app ((res a U).obj F) ≫
+          (modulePullback B j).map ((openRes a j).hom.app F) ≫
+          (pullRes a j).hom.app ((moduleJ C j).obj F) =
+        (res a U).map ((moduleJAdj C j).unit.app F) :=
+    mate_unit_iso (moduleJAdj C j) (moduleJAdj B j) (pullRes a j).symm F
+  have hu' (F : Modules C U') :
+      (moduleJAdj B j').unit.app ((res a U').obj F) ≫
+          (modulePullback B j').map ((openRes a j').hom.app F) ≫
+          (pullRes a j').hom.app ((moduleJ C j').obj F) =
+        (res a U').map ((moduleJAdj C j').unit.app F) :=
+    mate_unit_iso (moduleJAdj C j') (moduleJAdj B j') (pullRes a j').symm F
+  have hb (A : Type (u + 1)) [CommRing A] [Finite A] (F : Modules A U) :
+      (moduleJAdj A j').unit.app ((modulePullback A gU).obj F) ≫
+          (modulePullback A j').map ((beta A gU j' j g h hsq).inv.app F) =
+        (modulePullback A gU).map ((moduleJAdj A j).unit.app F) ≫
+          (moduleSquareG A gU j' j g h).inv.app ((moduleJ A j).obj F) := by
+    exact ((moduleJAdj A j').homEquiv _ _).apply_symm_apply _
+  -- Compare the inverse exchanges under the open adjunction.
+  have hi : (targetRes a gU j').hom.app M ≫
+        (res a X').map ((beta C gU j' j g h hsq).inv.app M) =
+      (beta B gU j' j g h hsq).inv.app ((res a U).obj M) ≫
+        (sourceRes a j g).hom.app M := by
+    apply ((moduleJAdj B j').homEquiv _ _).injective
+    apply (cancel_mono ((pullRes a j').hom.app
+      ((modulePullback C g).obj ((moduleJ C j).obj M)))).mp
+    simp only [Adjunction.homEquiv_unit, sourceRes, targetRes, Iso.trans_hom,
+      Iso.symm_hom, Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.comp_app,
+      Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
+    have hnu := (moduleJAdj B j').unit.naturality ((pullRes a gU).hom.app M)
+    simp only [Functor.id_map, Functor.comp_map] at hnu
+    rw [← reassoc_of% hnu]
+    have hn := (pullRes a j').hom.naturality
+      ((beta C gU j' j g h hsq).inv.app M)
+    simp only [Functor.comp_map, Functor.comp_obj] at hn
+    slice_lhs 4 5 => rw [hn]
+    slice_lhs 2 4 => rw [hu']
+    slice_lhs 2 3 => rw [← Functor.map_comp, hb C M, Functor.map_comp]
+    slice_rhs 1 2 => rw [hb B ((res a U).obj M)]
+    have hs := (moduleSquareG B gU j' j g h).inv.naturality
+      ((openRes a j).hom.app M)
+    simp only [Functor.comp_map, Functor.comp_obj] at hs
+    slice_rhs 2 3 => rw [← hs]
+    slice_rhs 3 5 => rw [pullRes_square]
+    slice_rhs 1 3 => rw [← Functor.map_comp, ← Functor.map_comp, hu]
+    have hn' := (pullRes a gU).hom.naturality ((moduleJAdj C j).unit.app M)
+    simp only [Functor.comp_map, Functor.comp_obj] at hn'
+    rw [← reassoc_of% hn']
+    simp only [Category.assoc]
+  apply (cancel_mono ((res a X').map ((beta C gU j' j g h hsq).inv.app M))).mp
+  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  rw [hi]
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj]
+  exact (Category.id_comp _).symm
 
 /-- Restriction carries the finite C-exchange to the finite B-exchange, for every complex.
 Source: blueprint finite exchange paragraph; Stacks Tags 03DI and 03CY
@@ -570,15 +892,6 @@ private theorem resId_apply (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
     (M : Modules A X) (W : X.ProEtᵒᵖ) (m : M.val.obj W) :
     ((resId A X).hom.app M).val.app W m = m :=
   (Classical.choose_spec (resId_existsUnique A X)).1 M W m
-
-private theorem pushRes_apply {B C : Type (u + 1)} [CommRing B] [CommRing C]
-    (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) (N : Modules C Y)
-    (W : X.ProEtᵒᵖ) (m : N.val.obj ((Scheme.proEtaleBaseChange f).op.obj W)) :
-    ((pushRes a f).hom.app N).val.app W m = m :=
-  (Classical.choose_spec (Scheme.proEtaleRingRestrictionDirectImage_existsUnique f
-    (coefficients B X) (coefficients C X) (coefficients B Y) (coefficients C Y)
-    (coefficientMap a X) (coefficientMap a Y) (constantRingIso B f) (constantRingIso C f)
-    (coefficientSquare a f))).1 N W m
 
 private theorem push_identity (A : Type (u + 1)) [CommRing A]
     {Y X : Scheme.{u}} (f : Y ⟶ X) (N : Modules A Y) :
@@ -886,7 +1199,7 @@ def targetStep [Finite B] [Finite C] (a : B →+* C)
 section
 
 attribute [local irreducible] sourceStep targetStep sourceResC targetResC betaC
-  sourceRes targetRes openRes pullRes pushRes beta openResMap
+  sourceRes targetRes openRes pullRes pushRes beta openResMap Scheme.proEtaleRingModulePullback
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite exchanges and their inverses form inverse maps of the actual strict towers.
@@ -924,11 +1237,16 @@ theorem exchange_strict_towers
       (∀ n, e.inv.app (Opposite.op n) =
         ((forgetModules (A n) X').mapHomologicalComplex (.up ℤ)).map
           ((betaC (A n) gU j' j g h hsq).inv.app (F n))) := by
-  let e n := ((forgetModules (A n) X').mapHomologicalComplex (.up ℤ)).mapIso
-    ((betaC (A n) gU j' j g h hsq).app (F n))
-  apply sequence_iso _ _ e
+  refine sequence_iso _ _
+    (fun n ↦ ((forgetModules (A n) X').mapHomologicalComplex (.up ℤ)).map
+      ((betaC (A n) gU j' j g h hsq).hom.app (F n)))
+    (fun n ↦ ((forgetModules (A n) X').mapHomologicalComplex (.up ℤ)).map
+      ((betaC (A n) gU j' j g h hsq).inv.app (F n))) ?_ ?_ ?_
+  · intro n
+    rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
+  · intro n
+    rw [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
   intro n
-  dsimp only [e, Functor.mapIso_hom, Iso.app_hom]
   rw [sourceStep, targetStep]
   let P := (forgetModules (A (n + 1)) X').mapHomologicalComplex (.up ℤ)
   let q := NatIso.mapHomologicalComplex (resForget (a n) X') (.up ℤ)
@@ -991,7 +1309,7 @@ def ambientTargetStep [Finite B] [Finite C] (a : B →+* C)
 section
 
 attribute [local irreducible] ambientSourceStep ambientTargetStep ambientRes sourceStep targetStep
-  sourceResC targetResC betaC sourceRes targetRes openRes pullRes
+  sourceResC targetResC betaC sourceRes targetRes openRes pullRes Scheme.proEtaleRingModulePullback
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The same strict-tower isomorphism is linear over every compatible ambient ring sheaf.
@@ -1035,11 +1353,16 @@ theorem exchange_ambient_towers
       (∀ n, e.inv.app (Opposite.op n) =
         ((SheafOfModules.restrictScalars.{u + 1} (r n)).mapHomologicalComplex (.up ℤ)).map
           ((betaC (A n) gU j' j g h hsq).inv.app (F n))) := by
-  let e n := ((SheafOfModules.restrictScalars.{u + 1} (r n)).mapHomologicalComplex
-    (.up ℤ)).mapIso ((betaC (A n) gU j' j g h hsq).app (F n))
-  apply sequence_iso _ _ e
+  refine sequence_iso _ _
+    (fun n ↦ ((SheafOfModules.restrictScalars.{u + 1} (r n)).mapHomologicalComplex
+      (.up ℤ)).map ((betaC (A n) gU j' j g h hsq).hom.app (F n)))
+    (fun n ↦ ((SheafOfModules.restrictScalars.{u + 1} (r n)).mapHomologicalComplex
+      (.up ℤ)).map ((betaC (A n) gU j' j g h hsq).inv.app (F n))) ?_ ?_ ?_
+  · intro n
+    rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
+  · intro n
+    rw [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
   intro n
-  dsimp only [e, Functor.mapIso_hom, Iso.app_hom]
   rw [ambientSourceStep, ambientTargetStep]
   let P := (SheafOfModules.restrictScalars.{u + 1} (r (n + 1))).mapHomologicalComplex
     (.up ℤ)
