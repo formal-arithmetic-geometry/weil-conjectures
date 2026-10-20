@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 import Sheaf.Paper.CohomologyInWeakSerreSubcategory
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 
 /-!
 # Finite-filtration devissage through a triangulated derived functor
@@ -56,6 +57,27 @@ theorem cohomology_mem_of_filtration
           (cokernel (Subobject.ofLE (F i.castSucc) (F i.succ) (hF i))))))) :
     ∀ q : ℤ, S ((DerivedCategory.Plus.homologyFunctor B q).obj
       (Φ.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X))) := by
-  sorry
+  let := (cohomology_in_weak_serre_subcategory S).1
+  let W := (DerivedCategory.homologyProperty S).inverseImage
+    (Φ ⋙ DerivedCategory.Plus.ι)
+  have h : ∀ i : Fin (r + 1),
+      W ((DerivedCategory.Plus.singleFunctor A 0).obj (F i : A)) := by
+    intro i
+    induction i using Fin.induction with
+    | zero =>
+      apply W.prop_of_isZero
+      apply (DerivedCategory.Plus.singleFunctor A 0).map_isZero
+      rw [h₀]
+      exact (isZero_zero A).of_iso Subobject.botCoeIsoZero
+    | succ i ih =>
+      let f := Subobject.ofLE (F i.castSucc) (F i.succ) (hF i)
+      have hE : (ShortComplex.mk f (cokernel.π f) (cokernel.condition f)).ShortExact :=
+        { exact := ShortComplex.exact_cokernel f }
+      exact W.ext_of_isTriangulatedClosed₂ _ hE.singleTrianglePlus_distinguished ih (hQ i)
+  have hlast := h (Fin.last r)
+  rw [hᵣ] at hlast
+  exact W.prop_of_iso
+    ((DerivedCategory.Plus.singleFunctor A 0).mapIso
+      (asIso (⊤ : Subobject X).arrow)) hlast
 
 end CategoryTheory
