@@ -16,6 +16,7 @@ import Sheaf.Paper.PurityVectorBundleZeroSection
 import WeilConjectures.RingTheory.RegularSequenceConormal
 import Sheaf.RingTheory.RegularSequenceGradedPolynomial
 import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
+import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 
 /-! # The actual normal cone and its regular-immersion bundle description
 

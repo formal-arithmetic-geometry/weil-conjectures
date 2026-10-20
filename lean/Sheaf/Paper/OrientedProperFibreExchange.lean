@@ -30,6 +30,7 @@ import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
 import Sheaf.Paper.OrientedNearbyCycles
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.TraceFormula.OrientedDerivedCohomologyContinuity
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-!
 # Proper fibre formula and exchange on vanishing topoi

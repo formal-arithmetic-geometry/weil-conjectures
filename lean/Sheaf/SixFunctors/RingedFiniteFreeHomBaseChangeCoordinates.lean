@@ -7,6 +7,9 @@ module
 public import Sheaf.SixFunctors.RingedFiniteFreeHomBaseChangeData
 public import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 /-! # Finite-free coordinates for the scalar-Hom comparison
 
 Source: Stacks Project, Tags 08J9 and 08JA.

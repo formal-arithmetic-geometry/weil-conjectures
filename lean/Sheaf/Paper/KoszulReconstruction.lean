@@ -24,6 +24,9 @@ import Sheaf.CategoryTheory.RightFractionDenseSubcategory
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.IntrinsicCompletionCompleted
 
 /-! # Koszul and quotient reconstruction over completed coefficients
 

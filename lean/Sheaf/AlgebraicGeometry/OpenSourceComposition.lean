@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! Source-open normalization of compact-support composition. -/
 

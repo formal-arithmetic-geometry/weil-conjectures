@@ -25,6 +25,7 @@ import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.Paper.OrientedNearbyCycles
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.StrictHenselizationFunctoriality
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-!
 # The geometric generic slice of nearby cycles over a trait

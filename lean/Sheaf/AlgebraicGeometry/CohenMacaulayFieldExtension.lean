@@ -30,6 +30,7 @@ import WeilConjectures.AlgebraicGeometry.SeparatedLqfBaseChange
 import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
 import WeilConjectures.AlgebraicGeometry.PolynomialChartFibreFlatCriterion
 import WeilConjectures.RingTheory.FlatLocalizedModuleBaseChange
+import WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart
 
 /-! # Cohen-Macaulay loci under extension of fields and base change
 

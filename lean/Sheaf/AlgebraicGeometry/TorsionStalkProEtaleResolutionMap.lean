@@ -20,6 +20,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import WeilConjectures.Mathlib.RingTheory.Henselian
 import WeilConjectures.RingTheory.ProEtale.WContractible
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 
 /-!
 # Resolution model for the torsion pro-étale stalk comparison

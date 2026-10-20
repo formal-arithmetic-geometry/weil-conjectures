@@ -12,6 +12,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
 import WeilConjectures.CategoryTheory.Sites.ReductionFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import Sheaf.Paper.EtaleUnboundedRestrictionComparison
+import Sheaf.Paper.KFlatRingedToposPullback
 
 /-!
 # Composition coherence of the normalized scalar/pullback comparison

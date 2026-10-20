@@ -54,6 +54,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-!
 # Constant coefficients and their sheafwise adic completion
 

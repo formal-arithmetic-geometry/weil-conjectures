@@ -15,6 +15,7 @@ import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-!
 # Finite etale localization extension agrees with direct image

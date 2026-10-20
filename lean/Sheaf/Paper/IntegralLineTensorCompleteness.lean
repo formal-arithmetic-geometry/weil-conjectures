@@ -9,6 +9,11 @@ public import Sheaf.Paper.CoefficientTwistsDetailed
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.SfIntegralConstructible
 
 /-! # Exact line tensor preserves the canonical augmented reduction triangle
 

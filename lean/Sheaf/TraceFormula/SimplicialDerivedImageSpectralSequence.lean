@@ -17,6 +17,17 @@ public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.CategoryTheory.Functor.Currying
+import Sheaf.AlgebraicGeometry.TotalSimplicialEtaleSite
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.KInjectiveComputes
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Canonical simplicial direct images and their augmentation spectral sequence

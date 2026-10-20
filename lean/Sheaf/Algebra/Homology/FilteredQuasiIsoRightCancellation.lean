@@ -6,6 +6,9 @@ Authors: SHEAF group D6
 module
 
 public import Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy
+import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.CategoryTheory.Abelian.Filtration
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Right cancellation
 

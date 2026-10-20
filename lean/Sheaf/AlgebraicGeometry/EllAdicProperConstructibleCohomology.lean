@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLo
 import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Sheaf.Paper.CondensedQcqsPushforwardContinuity
+import Sheaf.Paper.IntegralConstructibleSerre
 
 /-!
 # Constructibility of proper ell-adic direct-image cohomology

@@ -10,6 +10,9 @@ public import Sheaf.Paper.BoundedConstructibleComplete
 public import Sheaf.CategoryTheory.RingedKoszulSystem
 public import Mathlib.CategoryTheory.Category.ULift
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.IntrinsicCompletionCompleted
 
 /-!
 # Finite exterior and tensor-dual Koszul comparison

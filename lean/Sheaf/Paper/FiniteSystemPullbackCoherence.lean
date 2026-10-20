@@ -7,6 +7,13 @@ public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.Paper.IntegralFinitePullbackComposition
 public import Sheaf.AlgebraicGeometry.ProEtaleModulePullbackComposition
 import Sheaf.AlgebraicGeometry.VaryingRingOperations
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.GeometricModuleTransport
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 
 /-! # Coherent composition of finite-coefficient pullback on strict systems
 

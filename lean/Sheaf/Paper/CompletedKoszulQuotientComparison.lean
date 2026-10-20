@@ -8,6 +8,12 @@ module
 public import Sheaf.Paper.CompletedRlimFunctor
 public import Sheaf.Paper.IntrinsicCompletion
 public import Sheaf.Paper.CompletedTowerPullback
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.IntrinsicCompletionCompleted
 
 /-!
 # The normalized Koszul-to-quotient comparison over completed coefficients

@@ -20,6 +20,7 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-!
 # Flat base change of the conormal graded algebra

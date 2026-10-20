@@ -6,6 +6,9 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.AffineTraceConstruction
+import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 
 /-!
 # Open counit compatibility for the standard affine-line exchange

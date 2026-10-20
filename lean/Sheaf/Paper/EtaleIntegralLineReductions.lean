@@ -16,6 +16,7 @@ public import Sheaf.Paper.SfIntegralReductionTower
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.Paper.ProEtaleLisseFiniteModels
+import Sheaf.Paper.CompletedConstantSheafReduction
 
 /-! # Finite derived reductions of a completed integral etale line
 

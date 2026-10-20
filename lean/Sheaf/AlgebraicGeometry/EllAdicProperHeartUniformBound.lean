@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLo
 import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Sheaf.Paper.CondensedQcqsPushforwardContinuity
+import Sheaf.Paper.IntegralConstructibleSerre
 
 /-!
 # Uniform proper heart amplitude over a Noetherian base

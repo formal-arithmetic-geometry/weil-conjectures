@@ -26,6 +26,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-! # Internal-module and ringed-site derived Hom
 
 Source: Stacks Project, Tags 08J9, 08JA and 08JB; blueprint module objects and

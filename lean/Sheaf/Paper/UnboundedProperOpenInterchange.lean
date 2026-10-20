@@ -49,6 +49,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChangeUnderivedCompatibility
 import Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 
 /-!
 # Unbounded proper/open interchange and its canonical normalizations

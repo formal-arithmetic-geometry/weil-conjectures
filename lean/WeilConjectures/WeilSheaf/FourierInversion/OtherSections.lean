@@ -20,6 +20,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunc
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Paper.PurityVectorBundleZeroSection
 
 /-!
 # Fourier inversion: inputs from other sections

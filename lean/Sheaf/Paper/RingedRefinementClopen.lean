@@ -7,6 +7,7 @@ import Sheaf.SixFunctors.OpenTensorNormalization
 import Sheaf.Paper.DerivedAdjunctionShift
 import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 import Sheaf.Paper.RingedCoefficientProjectionCocycle
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Normalized clopen comparisons and coherence

@@ -17,6 +17,7 @@ import Sheaf.Paper.GaloisLisseRepresentations
 import Sheaf.RepresentationTheory.ProfiniteStableLattice
 import Sheaf.SixFunctors.IntegralLisseReductionEquivalence
 import WeilConjectures.Mathlib.Topology.NoetherianSpace
+import Sheaf.Paper.LisseCompletedSystemComparison
 
 /-!
 # Integral models of lisse rational sheaves on normal schemes

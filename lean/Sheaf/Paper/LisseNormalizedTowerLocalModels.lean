@@ -33,6 +33,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Category.ModuleCat.EpiMono
 import Mathlib.RingTheory.Finiteness.Cardinality
 import Mathlib.RingTheory.AdicCompletion.Completeness
+import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 
 /-! # Reconstruction of a lisse normalized tower
 

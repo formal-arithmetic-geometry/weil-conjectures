@@ -21,6 +21,7 @@ public import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 /-! # Normalized tensor comparison for scalar extension
 
 Source: Stacks Project, Tags 07A4 and 08J9.

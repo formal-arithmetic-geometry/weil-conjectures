@@ -15,6 +15,8 @@ public import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
 public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
+import Sheaf.Paper.EtaleProEtaleScalarMate
 
 /-!
 # Canonical transport of the finite compact-support scalar mate

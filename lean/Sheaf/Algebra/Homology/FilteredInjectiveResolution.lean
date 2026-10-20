@@ -12,6 +12,8 @@ import Sheaf.CategoryTheory.DoubleComplexTotal
 import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 import Mathlib.Algebra.Homology.HomologySequence
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
+import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-! # Bounded-below filtered-injective resolutions
 

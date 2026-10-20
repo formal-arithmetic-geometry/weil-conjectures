@@ -39,6 +39,7 @@ import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.Algebra.Homology.HomComplex
+import Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 
 /-! # Finite exceptional internal adjunction
 
