@@ -33,74 +33,91 @@
  ],
  "proof": [
   {
-   "text": "The support of the coherent module is closed [lem-weil-pbc-finite-type-module-support-closed]. Since $X$ is finite type over $k$ and the support has dimension at most zero, [lem-sc-dim0-finite] makes it a finite set of closed points. The scheme-theoretic support construction [lem-weil-pbc-scheme-theoretic-support] gives a closed immersion $i:Z\\hookrightarrow X$ with underlying set this support and with annihilator ideal killing $\\mathcal F$.",
+   "text": "Finite type over the field makes X locally Noetherian. Apply isCoherent_iff_isQuasicoherent_and_isFiniteType to F and schemeTheoreticSupport to its quasi-coherent finite-type structure. The resulting annihilator ideal I has a closed subscheme j:Z -> X with image exactly Supp(F), and its sections annihilate F. A closed embedding identifies topologicalKrullDim Z with the dimension of this image. No preliminary enumeration of support points is needed.",
    "uses": [
-    "def-pc-morphism-conventions",
-    "pqf-def-coherent",
-    "def-kun-topological-krull-dimension",
-    "lem-weil-pbc-finite-type-module-support-closed",
-    "lem-sc-dim0-finite",
-    "lem-weil-pbc-scheme-theoretic-support"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-scheme-theoretic-support",
+    "def-kun-topological-krull-dimension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYT, proof of parts (3)--(5), and Tag 05JU"
+    "place": "Tag 0AYT (lemma-chi-tensor-finite), proof of parts (3)--(5), and Tag 06LH (lemma-algebraic-scheme-dim-0)"
    }
   },
   {
-   "text": "The closed subscheme $Z$ has zero-dimensional underlying space and is algebraic over $k$, so [lem-pc-zero-dimensional-closed-subscheme-finite] gives that $Z\\to\\operatorname{Spec}(k)$ is finite and affine, with $A:=\\Gamma(Z,\\mathcal O_Z)$ finite-dimensional over $k$ and $Z\\cong\\operatorname{Spec}(A)$.",
+   "text": "Apply closed_subscheme_finite_of_topologicalKrullDim_le_zero to j and the structure morphism of X. Set A = Gamma(Z,O_Z) with the algebra structure induced by j followed by X -> Spec(k). This is the actual ring of global sections and is finite-dimensional over k. The affine isomorphism Z = Spec(A) defines i = isoSpec.inv followed by j. Naturality of isoSpec identifies i followed by the structure map with Spec(algebraMap k A); surjectivity of isoSpec.inv preserves its image.",
    "uses": [
     "lem-pc-zero-dimensional-closed-subscheme-finite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYT, proof: the annihilator closed subscheme with zero-dimensional support is finite over the field"
+    "place": "Tag 0AYT (lemma-chi-tensor-finite), proof of parts (3)--(5), and Tag 06LH (lemma-algebraic-scheme-dim-0)"
    }
   },
   {
-   "text": "Since $X$ is of finite type over $k$, $X$ and its closed subscheme $Z$ are Noetherian. Because the annihilator ideal kills $\\mathcal F$, the closed-immersion coherent equivalence gives a coherent $\\mathcal O_Z$-module $\\mathcal G$ with $\\mathcal F\\cong i_*\\mathcal G$ [lem-weil-pbc-closed-immersion-coherent-equivalence]. The closed-immersion cohomology lemma [lem-pc-closed-immersion-coherent-cohomology] gives $H^q(X,\\mathcal F)\\cong H^q(Z,\\mathcal G)$ for every $q$ and, for the invertible module $\\mathcal N$ on $X$, the projection isomorphism $\\mathcal F\\otimes\\mathcal N\\cong i_*\\mathcal G\\otimes\\mathcal N\\cong i_*(\\mathcal G\\otimes i^*\\mathcal N)$; pullback preserves invertibility by the local definition [def-sc-invertible-module], so $\\mathcal G\\otimes i^*\\mathcal N$ is coherent and, by the same lemma, so is $\\mathcal F\\otimes\\mathcal N$, whose cohomology is $H^q(Z,\\mathcal G\\otimes i^*\\mathcal N)$. Tensoring by an invertible module preserves nonzero stalks, so the supports agree.",
+   "text": "The kernel ideal of i is the kernel ideal of j because isoSpec.inv is an isomorphism. Thus it annihilates F. The closed-immersion annihilation theorem says that G := tensorPullback(i)(F) is quasi-coherent and finite type and that the adjunction unit F -> i_*G is invertible. Both schemes are locally Noetherian, so G is coherent. This is the concrete essential-surjectivity argument inside the coherent-equivalence route; the full category/formal-module equivalence is unnecessary.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (lemma-chi-tensor-finite), proof of parts (3)--(5), and Tag 06LH (lemma-algebraic-scheme-dim-0)"
+   }
+  },
+  {
+   "text": "Uniqueness of left adjoints compares tensorPullback(i) with ordinary pullback. Pullback preserves invertibility, and the invertible projection formula identifies F tensor N with i_*(G tensor L), where L = tensorPullback(i)(N). Finite-dimensionality makes Spec(A) finite over k, so finite_and_discreteTopology_of_isFinite makes it a finite discrete scheme. On its singleton open cover, L is trivial; pullback compatibility with tensor and the right unitor identify the restrictions of G tensor L with G. The existing disjoint-cover biproduct isomorphisms and biproduct.mapIso assemble G tensor L = G, including the empty cover. Pushforward gives F tensor N = F. Transport quasi-coherence and finite local generators across this isomorphism to obtain coherence. Apply the module stalk functor to the isomorphism to obtain equal nonzero-stalk supports.",
+   "uses": [
+    "def-sc-invertible-module",
     "lem-pc-closed-immersion-coherent-cohomology",
-    "def-sc-invertible-module"
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pc-module-stalk-functor"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYT, proof of parts (3)--(5)"
+    "place": "Tag 0AYT (lemma-chi-tensor-finite), proof of parts (3)--(5), and Tag 06LH (lemma-algebraic-scheme-dim-0)"
    }
   },
   {
-   "text": "Apply [lem-pc-finite-scheme-cohomology-tensor] to $Z=\\operatorname{Spec}(A)$, $\\mathcal G$, and $i^*\\mathcal N$. This supplies the stated cohomology identifications, coherence and finite-dimensionality assertions, vanishing for $q>0$, and equality of the global-section dimensions after tensoring.",
+   "text": "For any quasi-coherent M on the affine source, prove the module-valued cohomology comparison for i_*M degree by degree. In degree zero, rightDerivedZeroIsoSelf identifies both sides with global sections; the direct-image global sections are the source global sections with scalars restricted along i.appTop. In positive degrees, affine vanishing kills H(M), and the affine-pushforward cohomology isomorphism kills H(i_*M). The natural comparison with source cohomology transfers these vanishings to RingedSpace.moduleCohomology. Both resulting modules are zero, hence have a unique isomorphism, which respects global-function scalars. Apply this to G and to G tensor L (quasi-coherent by its isomorphism with G), then compose with the two module pushforward isomorphisms.",
    "uses": [
-    "lem-pc-finite-scheme-cohomology-tensor"
+    "lem-pc-affine-vanishing",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-sc-module-cohomology-source-comparison",
+    "def-sc-ringed-space-module-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYT, parts (3)--(5), on the finite support scheme"
+    "place": "Tag 0AYT (lemma-chi-tensor-finite), proof of parts (3)--(5), and Tag 06LH (lemma-algebraic-scheme-dim-0)"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-morphism-conventions",
-  "pqf-def-coherent",
-  "def-kun-topological-krull-dimension",
-  "lem-weil-pbc-finite-type-module-support-closed",
-  "lem-sc-dim0-finite",
+  "pqf-lem-coherent-ft-locnoeth",
   "lem-weil-pbc-scheme-theoretic-support",
+  "def-kun-topological-krull-dimension",
   "lem-pc-zero-dimensional-closed-subscheme-finite",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
   "def-sc-invertible-module",
-  "lem-pc-finite-scheme-cohomology-tensor"
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-pc-module-stalk-functor",
+  "lem-pc-affine-vanishing",
+  "lem-sc-module-cohomology-source-comparison",
+  "def-sc-ringed-space-module-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), proof of parts (3)--(5)"
+  "place": "Tag 0AYT (lemma-chi-tensor-finite), proof of parts (3)--(5), and Tag 06LH (lemma-algebraic-scheme-dim-0)",
+  "note": "D2 formalized the annihilator/pullback/unit route and the finite-discrete tensor argument. Module-valued cohomology is compared in degree zero by derived global sections and in positive degrees by vanishing; no statement or definition changes."
  },
  "mathlib_searches": [
   {
@@ -161,9 +178,7 @@
  },
  "tool_uses": [
   "lem-pc-closed-immersion-coherent-cohomology",
-  "lem-weil-pbc-finite-type-module-support-closed",
   "lem-weil-pbc-scheme-theoretic-support",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
   "lem-pc-closed-immersion-coherent-cohomology"
  ],
  "reviewed": {
@@ -204,5 +219,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T152950-L-2856212",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
