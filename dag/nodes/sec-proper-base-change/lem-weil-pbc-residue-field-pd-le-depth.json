@@ -25,12 +25,13 @@
  ],
  "proof": [
   {
-   "text": "Let d be the projective dimension of the residue field. By the definition [def-weil-pbc-finite-global-dimension] as Nat.find, Nat.find_spec supplies a projective resolution of length at most d. If d = 0, nonnegativity of [def-weil-pbc-depth] proves the claim. Otherwise d >= 1. The residue field is finite over R [def-weil-finitely-generated-module]; apply [lem-weil-pbc-minimal-finite-free-resolution-local] to get a projective resolution P with finite free terms, zero above d, and differential images in the maximal ideal times their targets.",
+   "text": "Use the bounded-resolution/Ext-dimension bridge [lem-weil-pbc-projective-resolution-ext-degree] to turn finite categorical projective dimension into existence of a bounded projective resolution. Let d be Nat.find of this existence. Nat.find_spec supplies its resolution. If d=0, nonnegativity of depth suffices; otherwise apply the minimal finite free resolution theorem to the finite residue-field module.",
    "uses": [
     "def-weil-pbc-finite-global-dimension",
     "def-weil-pbc-depth",
     "def-weil-finitely-generated-module",
-    "lem-weil-pbc-minimal-finite-free-resolution-local"
+    "lem-weil-pbc-minimal-finite-free-resolution-local",
+    "lem-weil-pbc-projective-resolution-ext-degree"
    ],
    "elementary": false
   },
@@ -71,12 +72,19 @@
     "def-weil-pbc-depth"
    ],
    "elementary": true
+  },
+  {
+   "text": "The residue field is nonzero. ModuleCat.projectiveDimension_eq_of_hasProjectiveResolutionLE identifies its categorical projective dimension with d, using Nat.find_spec and Nat.find_min and the bounded-resolution bridge [lem-weil-pbc-projective-resolution-ext-degree]. Cast the proved bound d <= depth R into WithBot ENat. This is exactly the original finite-resolution dimension bound for the nonzero residue field.",
+   "uses": [
+    "lem-weil-pbc-projective-resolution-ext-degree"
+   ],
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "M3 stage 3 Lean formalization of the proof of Lemma Tag 00OB through the last-minor depth bound; use the least length directly instead of finding a last nonzero index, and reduce determinants modulo the maximal ideal instead of expanding the Leibniz formula. Source checked at https://stacks.math.columbia.edu/tag/00OB."
+  "place": "M3 stage 3 Lean formalization of the proof of Lemma Tag 00OB through the last-minor depth bound; use the least length directly instead of finding a last nonzero index, and reduce determinants modulo the maximal ideal instead of expanding the Leibniz formula. Source checked at https://stacks.math.columbia.edu/tag/00OB. M1 2026-10-20 rework: retain the adopted complete proof, with the proved bounded-resolution bridge converting the synchronized categorical projective dimension API; Sheaf compatibility modules publicly import the adopted modules."
  },
  "mathlib_match": null,
  "status": "split",
@@ -91,6 +99,7 @@
   "def-weil-pbc-depth",
   "def-weil-finitely-generated-module",
   "lem-weil-pbc-minimal-finite-free-resolution-local",
+  "lem-weil-pbc-projective-resolution-ext-degree",
   "def-weil-pbc-free-module",
   "def-weil-pbc-exact-sequence",
   "lem-weil-pbc-exact-free-complex-last-minors-regular-sequence",
@@ -128,14 +137,15 @@
   }
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.ResidueFieldProjectiveDimensionDepth",
-  "file": "lean/Sheaf/RingTheory/ResidueFieldProjectiveDimensionDepth.lean",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.ResidueFieldProjectiveDimensionDepth",
+  "file": "lean/WeilConjectures/RingTheory/ResidueFieldProjectiveDimensionDepth.lean",
   "declaration": "Ring.residueField_projectiveDimension_le_depth",
-  "statement": "theorem residueField_projectiveDimension_le_depth\n    (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R]\n    (h : ModuleCat.HasFiniteProjectiveDimension\n      (ModuleCat.of R (IsLocalRing.ResidueField R))) :\n    (ModuleCat.projectiveDimension\n      (ModuleCat.of R (IsLocalRing.ResidueField R)) h : ℕ∞) ≤\n        IsLocalRing.depth (R := R) R",
+  "statement": "theorem residueField_projectiveDimension_le_depth\n    (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R]\n    (h : ModuleCat.HasFiniteProjectiveDimension\n      (ModuleCat.of R (IsLocalRing.ResidueField R))) :\n    CategoryTheory.projectiveDimension (ModuleCat.of R (IsLocalRing.ResidueField R)) ≤\n      ((IsLocalRing.depth (R := R) R : ℕ∞) : WithBot ℕ∞)",
   "branch": "sheaf-dag",
-  "by": "R3",
-  "date": "2026-10-13"
+  "by": "M1",
+  "date": "2026-10-20",
+  "note": "Rework after the upstream synchronization: use the already proved adopted declaration and categorical projective dimension. The Sheaf module reexports it without duplicating the declaration; the proof and mathematical dependencies are retained."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -148,14 +158,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M3",
+  "reviewer": "C-e9def",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T214711-L-1271471",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T155433-L-3241987",
+  "kind": "interface",
+  "note": "independent cc review: Re-export Sheaf modules vs live WeilConjectures.RingTheory.ResidueFieldProjectiveDimension(Depth) signatures (byte-equal to the new node lean.statement); node diffs vs live (only lean/proof/proof_deps/proof_origin); change record vs the old quarantine signatures; --all compile clean; axioms only propext/choice/Quot.sound; no importers in live lean/"
  },
  "lean_audit": {
   "master": {
