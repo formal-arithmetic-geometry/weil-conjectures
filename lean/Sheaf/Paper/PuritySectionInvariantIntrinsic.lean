@@ -125,7 +125,7 @@ theorem sectionCompactifiable (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}}
     (g : V ⟶ B) [Smooth g] [IsSeparated g] [QuasiCompact g]
     (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] :
     HasCompactification g := by
-  sorry
+  exact (P.comparedCompactification g aB).hasCompactification
 
 /-- The section invariant on precisely the finite-type domain of the source.
 Compactifiability is a consequence, rather than an additional assumption.
@@ -156,6 +156,7 @@ theorem sectionInvariantFinite_invertible (P : PurityFiniteSetting.{u})
           (P.sectionInvariantFinite g aB s hs, Q) ≅ P.intrinsicCoefficientUnit B) ∧
         Nonempty ((P.intrinsicCoefficientTensor B).obj
           (Q, P.sectionInvariantFinite g aB s hs) ≅ P.intrinsicCoefficientUnit B) := by
-  sorry
+  let := P.sectionCompactifiable g aB
+  exact P.sectionInvariantIntrinsic_invertible g aB s hs
 
 end WeilConjectures.PurityFiniteSetting
