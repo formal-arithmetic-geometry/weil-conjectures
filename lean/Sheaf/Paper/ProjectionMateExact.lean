@@ -11,7 +11,7 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits

@@ -12,11 +12,10 @@ public import Mathlib.Algebra.Category.Grp.Colimits
 import Sheaf.AlgebraicGeometry.IdealPowerComplement
 import all Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero
 import all WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import WeilConjectures.Topology.GlueSheavesOfModules
+import Sheaf.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.IdealPowerAnnihilatorSystem
 import Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting
 import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Sections over the complement of a finite type ideal
 

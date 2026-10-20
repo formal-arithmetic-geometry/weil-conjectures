@@ -31,7 +31,7 @@ import Sheaf.NumberTheory.Padics.CoefficientExtension
 import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.ModuleCupNaiveMap
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import Sheaf.Paper.ModuleCupGlobalTensorPullback
 import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives

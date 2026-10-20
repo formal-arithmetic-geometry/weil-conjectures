@@ -11,9 +11,8 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
-import WeilConjectures.CategoryTheory.Triangulated.RingedSpaceDerivedProducts
+import Sheaf.CategoryTheory.Triangulated.RingedSpaceDerivedProducts
 import Sheaf.Topology.PointwiseTruncationLimit
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Reconstruction from lower truncations under a local cohomological bound
 

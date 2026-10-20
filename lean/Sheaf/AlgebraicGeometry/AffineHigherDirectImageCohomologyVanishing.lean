@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

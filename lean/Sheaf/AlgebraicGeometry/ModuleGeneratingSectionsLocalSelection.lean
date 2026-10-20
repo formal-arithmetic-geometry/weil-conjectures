@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.ModuleFiniteFreeLocalLift
-import WeilConjectures.AlgebraicGeometry.ModuleFiniteFreeLocalSupport
-import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalSupport
 
 /-! # Finite support of a generating family near a point
 

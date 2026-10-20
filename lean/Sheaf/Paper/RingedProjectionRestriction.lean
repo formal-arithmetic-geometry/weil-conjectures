@@ -21,7 +21,7 @@ import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective

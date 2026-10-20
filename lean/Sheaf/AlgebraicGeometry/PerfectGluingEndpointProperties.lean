@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
-public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Localized Mayer--Vietoris endpoint families
 

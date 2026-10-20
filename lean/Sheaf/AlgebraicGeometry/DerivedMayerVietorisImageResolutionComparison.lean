@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
-public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSplitTriangle
+public import Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection
 
 /-! # Comparing the concrete Mayer--Vietoris sequences after direct image

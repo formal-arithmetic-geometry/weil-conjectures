@@ -4,7 +4,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.CategoryTheory.Abelian.SerreClass.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.IdealModuleProductExactCalculus
+import Sheaf.AlgebraicGeometry.IdealModuleProductExactCalculus
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting

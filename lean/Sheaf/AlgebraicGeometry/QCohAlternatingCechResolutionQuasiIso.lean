@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso
 import Mathlib.Algebra.Category.ModuleCat.Products
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 import Sheaf.Paper.QCohAcyclicDerivedSectionsComparison
 
 /-! # Čech totalization of a quasi-coherent resolution
