@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.CoefficientDuality
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 
 /-! # Bounded coherent duality for a dualizing complex
 

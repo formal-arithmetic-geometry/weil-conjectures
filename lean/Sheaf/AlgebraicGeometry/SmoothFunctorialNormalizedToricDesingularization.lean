@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 import Sheaf.AlgebraicGeometry.MonoschemeToricRealization
 import Mathlib.Algebra.Field.ULift
+import Sheaf.AlgebraicGeometry.NormalizedBlowupCalculus
+import Sheaf.AlgebraicGeometry.SmoothFunctorialOrdinaryResolution
+import Sheaf.AlgebraicGeometry.ToricRealizationFiniteType
+import Sheaf.TraceFormula.ConductorSmoothBaseChange
 
 /-!
 # Smooth-functorial normalized toric desingularization over the rationals

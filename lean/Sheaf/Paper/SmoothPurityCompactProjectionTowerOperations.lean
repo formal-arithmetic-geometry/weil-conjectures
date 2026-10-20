@@ -6,6 +6,9 @@ Authors: SHEAF group F8
 module
 
 public import Sheaf.Paper.SmoothPurityCompactProjectionData
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.SixFunctors.OpenTensorNormalization
 
 /-! # Operations on a normalized varying coefficient system
 

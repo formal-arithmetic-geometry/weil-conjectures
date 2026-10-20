@@ -10,6 +10,12 @@ public import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 public import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
+import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 
 /-!
 # Comparison transport of the normalized open restriction map

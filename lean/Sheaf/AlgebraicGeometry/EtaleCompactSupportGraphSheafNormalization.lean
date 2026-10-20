@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalizationData
 import WeilConjectures.AlgebraicGeometry.EtaleSheafClopenProduct
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import Sheaf.AlgebraicGeometry.EtaleCompactificationGraphMap
 
 /-!
 # The graph map into the compactification sheaf

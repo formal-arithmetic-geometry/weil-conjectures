@@ -6,6 +6,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
+import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimesFlatBaseChange
 
 /-!
 # Associated primes of a flat tensor lie in the corresponding residue-field fibre

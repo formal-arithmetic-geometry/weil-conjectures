@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover
 public import Sheaf.AlgebraicGeometry.EtaleSheafAlgebraicSpaceRealization
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesUnit
 import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 
 /-!
 # Realization with arbitrary sheet sets after universe enlargement

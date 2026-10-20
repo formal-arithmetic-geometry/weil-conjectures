@@ -6,6 +6,11 @@ Authors: SHEAF group D7
 module
 
 public import Sheaf.CategoryTheory.RingedCoefficientChangePresentations
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 
 /-!
 # Naturality of normalized coefficient changes

@@ -8,6 +8,12 @@ public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 public import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+import Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionIdealTensorSections
+import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 /-!
 # The product-of-sections immersion criterion

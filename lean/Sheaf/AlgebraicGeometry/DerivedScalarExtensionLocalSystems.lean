@@ -6,6 +6,9 @@ Authors: SHEAF group G7
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedMorphismSheafComparison
+import Sheaf.CategoryTheory.DerivedMorphismPresheaf
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Localized derived extension of coefficients and comparison

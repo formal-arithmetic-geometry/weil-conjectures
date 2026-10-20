@@ -8,6 +8,13 @@ public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
+import Sheaf.Paper.CondensedCoefficientIsoConstructible
+import Sheaf.Paper.LocallyConstantTensor
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.ConstructibleSheaf.Refinement
 
 /-!
 # Tensor constructibility for admissible condensed coefficients

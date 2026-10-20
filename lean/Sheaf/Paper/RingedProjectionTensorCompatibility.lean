@@ -10,6 +10,7 @@ import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.Algebra.Homology.KFlatTotalTensorModel
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 
 /-! # Tensor compatibility in arbitrary representative presentations
 

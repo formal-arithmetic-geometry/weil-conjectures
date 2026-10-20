@@ -13,6 +13,10 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.Paper.GaloisLisseRepresentations
+import Sheaf.RepresentationTheory.ProfiniteStableLattice
+import Sheaf.SixFunctors.IntegralLisseReductionEquivalence
+import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-!
 # Integral models of lisse rational sheaves on normal schemes

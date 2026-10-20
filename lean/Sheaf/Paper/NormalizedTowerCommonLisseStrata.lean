@@ -25,6 +25,8 @@ import all Sheaf.AlgebraicGeometry.ProEtaleIntrinsicLisseFixed
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 
 /-! # Common lisse strata for a normalized tower
 

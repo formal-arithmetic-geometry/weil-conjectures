@@ -5,6 +5,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalData
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import Sheaf.AlgebraicGeometry.RelativeProjectiveSpace
+import Sheaf.CategoryTheory.SiteModuleSheafGluing
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
+import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 
 /-! # Projective bundles on frame charts

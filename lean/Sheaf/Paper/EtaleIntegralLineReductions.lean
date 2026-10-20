@@ -13,6 +13,9 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 public import Sheaf.Paper.SfIntegralReductionTower
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.ProEtaleLisseFiniteModels
 
 /-! # Finite derived reductions of a completed integral etale line
 

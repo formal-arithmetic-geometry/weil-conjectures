@@ -10,6 +10,9 @@ public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
+import Sheaf.AlgebraicGeometry.ProEtalePointPullback
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Base change for one normalized finite reduction

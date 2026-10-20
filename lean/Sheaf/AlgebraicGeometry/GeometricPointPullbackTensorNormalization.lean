@@ -6,6 +6,13 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction
+import Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap
+import Sheaf.AlgebraicGeometry.GeometricPointDerivedConstants
+import Sheaf.AlgebraicGeometry.PullbackConstantModule
+import Sheaf.Paper.EtaleFlatKFlatResolution
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-! # Tensor normalization for pullback at a geometric point
 

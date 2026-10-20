@@ -11,6 +11,11 @@ public import Sheaf.CategoryTheory.SiteConstantModuleHom
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.Paper.SfDerivedComplete
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.IntegralReductionTowerCanonical
 
 /-! # Derived completeness of a completed integral etale line
 

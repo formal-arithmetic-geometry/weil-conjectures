@@ -14,6 +14,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
+import Sheaf.Paper.FlatExtendedCechComparison
 
 /-! Quasi-isomorphism of the scalar-extended augmented model.
 

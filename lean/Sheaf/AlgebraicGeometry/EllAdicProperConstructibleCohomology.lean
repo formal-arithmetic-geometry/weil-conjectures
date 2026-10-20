@@ -9,6 +9,9 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoe
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
+import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.Paper.CondensedQcqsPushforwardContinuity
 
 /-!
 # Constructibility of proper ell-adic direct-image cohomology

@@ -22,6 +22,13 @@ import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.ProEtaleConstructibleSheaf
 
 /-! # Uniform perfect models of finite quotients
 

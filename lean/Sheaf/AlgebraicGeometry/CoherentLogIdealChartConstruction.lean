@@ -16,6 +16,8 @@ import Sheaf.TraceFormula.FsFaceSharpening
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.IsFiniteOfFpqcCover
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.GroupTheory.FineMonoidFiniteSaturation
 
 /-!
 # Coherent log ideals and their fine and saturated chart constructions

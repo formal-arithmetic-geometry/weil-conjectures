@@ -8,6 +8,14 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Category.ModuleCat.AB
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.UnramifiedMorphism
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Finite etale localization extension agrees with direct image

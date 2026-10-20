@@ -8,6 +8,16 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedMorphismSheafComparison
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
+import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.RingTheory.RingPseudoCoherent
 
 /-!
 # Comparison of local derived Hom with a bounded finite locally constant source

@@ -23,6 +23,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RightFractionDenseSubcategory
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
+import Sheaf.Paper.AdicCoefficientDatum
 
 /-! # Koszul and quotient reconstruction over completed coefficients
 

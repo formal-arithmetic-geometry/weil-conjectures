@@ -12,6 +12,8 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coh
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
 import Sheaf.AlgebraicGeometry.FixSiteOpenExchangeSquare
+import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
 
 /-!
 # The ordinary sheaf calculation for site comparison and open exchange

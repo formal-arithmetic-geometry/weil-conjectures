@@ -10,6 +10,8 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 
 /-!
 # Boundary vanishing for the continuous algebraic-closure compatibility coefficient

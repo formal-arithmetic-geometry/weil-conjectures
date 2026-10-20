@@ -9,6 +9,13 @@ public import Sheaf.Paper.WitnessCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import all Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 
 /-!
 # Direct image and finite coefficient restriction in the fixed scalar presentation

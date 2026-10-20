@@ -18,6 +18,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Mathlib.CategoryTheory.Monoidal.Limits.Colimits
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
 
 /-!
 # Comparison with completed condensed coefficients

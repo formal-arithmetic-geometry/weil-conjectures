@@ -9,6 +9,9 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoe
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
+import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.Paper.CondensedQcqsPushforwardContinuity
 
 /-!
 # Uniform proper heart amplitude over a Noetherian base

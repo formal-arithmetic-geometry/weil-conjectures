@@ -11,6 +11,17 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.FibreStalkQuotient
+import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula
+import Sheaf.AlgebraicGeometry.HypersurfaceNonzeroRelativeDifferential
+import Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension
+import Sheaf.RingTheory.SmoothOverFieldRegularLocal
+import WeilConjectures.AlgebraicGeometry.FibreCartierLocal
+import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
+import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Smooth separable hypersurface slice

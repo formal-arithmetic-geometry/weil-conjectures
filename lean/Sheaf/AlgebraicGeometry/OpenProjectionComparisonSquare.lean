@@ -12,6 +12,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
+import Sheaf.AlgebraicGeometry.OpenComparisonTensorNormalization
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 
 /-!
 # Site transport of the open projection formula

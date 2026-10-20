@@ -8,6 +8,21 @@ public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.ComparisonTorInterval
+import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
+import Sheaf.AlgebraicGeometry.OpenDirectImageClassicalAmplitude
+import Sheaf.AlgebraicGeometry.OpenDirectImageFiniteCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuityDirectImage
+import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Paper.CompletedCondensedCoefficients
+import Sheaf.Paper.CondensedCoefficientIsoConstructible
+import Sheaf.Paper.OpenTorBoundArbitraryField
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 
 /-!
 # Admissible-coefficient ordinary direct image

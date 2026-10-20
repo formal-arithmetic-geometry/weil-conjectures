@@ -6,6 +6,10 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 
 /-! # Restriction of the canonical exceptional base-change mate
 

@@ -19,6 +19,12 @@ import Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.Triangulated.Recollement
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Closed support for arbitrary condensed coefficients

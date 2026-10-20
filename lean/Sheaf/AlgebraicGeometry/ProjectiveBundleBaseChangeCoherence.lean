@@ -5,6 +5,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleFrameModels
+import Sheaf.AlgebraicGeometry.NagataAffineProjScalarExtension
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
+import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
 
 
 /-! # Coherence of projective-bundle base change

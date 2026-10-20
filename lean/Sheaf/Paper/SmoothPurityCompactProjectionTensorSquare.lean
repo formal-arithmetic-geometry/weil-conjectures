@@ -6,6 +6,9 @@ Authors: SHEAF group Q110
 module
 
 public import Sheaf.Paper.SmoothPurityCompactProjectionData
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Paper.RingedSquareTensorCompatibility
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! # Tensor compatibility of the section-normalized pullback square
 
