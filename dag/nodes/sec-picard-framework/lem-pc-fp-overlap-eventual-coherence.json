@@ -98,17 +98,18 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapCoherence",
-  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationOverlapCoherence.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapCoherence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FinitePresentationOverlapCoherence.lean",
   "declaration": "AlgebraicGeometry.exists_finitePresentation_overlap_eventual_coherence",
-  "statement": "theorem exists_finitePresentation_overlap_eventual_coherence {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (j : I) (hij : i ≤ j) (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u}) [Finite U.I₀] [∀ a, IsAffine (U.X a)] (N : (a : U.I₀) → (U.X a).Modules) (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent) (M : (pullback f (c.π.app (op i))).Modules) : ∀ (k : I) (hjk : j ≤ k), let q₀ := overlapStageMap R f hij hjk let V₀ : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} := U.pullback₁ q₀ let p₀ := overlapLimitMap R c f (hij.trans hjk) ∀ T : modulesPseudofunctor.OverlapTransitions V₀.f, (∀ a, Nonempty ((T.obj a : (V₀.X a).Modules) ≅ (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj (N a))) → Nonempty ((T.pull (p := p₀) (α := fun a ↦ a) (fun a ↦ V₀.pullbackHom_map p₀ a)).Comparison ((modulesPseudofunctor.toDescentData (V₀.pullback₁ p₀).f).obj M)) → ∃ (l : I) (hkl : k ≤ l), let q := overlapStageMap R f hij (hjk.trans hkl) let V : (pullback f (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkl)))))).OpenCover.{u} := U.pullback₁ q let r := overlapStageMap R f (hij.trans hjk) hkl let s := overlapRefinementHom U q₀ q r (overlapStageMap_comp R f hij hjk hkl) let T' := T.pull (p := r) (α := fun a ↦ a) (p' := s) (fun a ↦ overlapRefinementHom_map U q₀ q r (overlapStageMap_comp R f hij hjk hkl) a) let p := overlapLimitMap R c f (hij.trans (hjk.trans hkl)) T'.Coherent ∧ Nonempty ((T'.pull (p := p) (α := fun a ↦ a) (fun a ↦ V.pullbackHom_map p a)).Comparison ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M))",
+  "statement": "theorem exists_finitePresentation_overlap_eventual_coherence\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    [Finite U.I₀] [∀ a, IsAffine (U.X a)]\n    (N : (a : U.I₀) → (U.X a).Modules)\n    (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent)\n    (M : (pullback f (c.π.app (op i))).Modules) :\n    ∀ (k : I) (hjk : j ≤ k),\n      let q₀ := overlapStageMap R f hij hjk\n      let V₀ : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} :=\n        U.pullback₁ q₀\n      let p₀ := overlapLimitMap R c f (hij.trans hjk)\n      ∀ T : modulesPseudofunctor.OverlapTransitions V₀.f,\n        (∀ a, Nonempty ((T.obj a : (V₀.X a).Modules) ≅\n          (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj (N a))) →\n        Nonempty ((T.pull (p := p₀) (α := fun a ↦ a)\n          (fun a ↦ V₀.pullbackHom_map p₀ a)).Comparison\n          ((modulesPseudofunctor.toDescentData (V₀.pullback₁ p₀).f).obj M)) →\n        ∃ (l : I) (hkl : k ≤ l),\n          let q := overlapStageMap R f hij (hjk.trans hkl)\n          let V : (pullback f (Spec.map\n              (R.map (homOfLE (hij.trans (hjk.trans hkl)))))).OpenCover.{u} :=\n            U.pullback₁ q\n          let r := overlapStageMap R f (hij.trans hjk) hkl\n          let s := overlapRefinementHom U q₀ q r\n            (overlapStageMap_comp R f hij hjk hkl)\n          let T' := T.pull (p := r) (α := fun a ↦ a) (p' := s)\n            (fun a ↦ overlapRefinementHom_map U q₀ q r\n              (overlapStageMap_comp R f hij hjk hkl) a)\n          let p := overlapLimitMap R c f (hij.trans (hjk.trans hkl))\n          T'.Coherent ∧\n            Nonempty ((T'.pull (p := p) (α := fun a ↦ a)\n              (fun a ↦ V.pullbackHom_map p a)).Comparison\n              ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M))",
   "declarations": [
    "AlgebraicGeometry.exists_finitePresentation_overlap_eventual_coherence"
   ],
   "branch": "sheaf-dag",
-  "by": "W4",
-  "date": "2026-10-13"
+  "by": "C9",
+  "date": "2026-10-21",
+  "note": "Retire the duplicate Sheaf module listed in coord/retire-items.tsv. The existing upstream theorem proves the complete old statement without its unused Noetherian instance. Checked the exact old signature by remote compilation, with only standard axioms. The mathematical statement, proof, proof dependencies, and all parent dependencies are retained."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -121,14 +122,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G4",
+  "reviewer": "C-b6d0d",
+  "group": "C9",
   "result": "pass",
-  "landing": "20261013T141526-L-379026",
+  "landing": "20261020T211650-L-3486194",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: node lem-pc-fp-overlap-eventual-coherence lean.statement vs upstream WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapCoherence theorem (byte-identical); old Sheaf signature (with IsNoetherianRing) re-proved by applying upstream, axioms standard; no importers of the retired module"
  },
  "lean_audit": {
   "master": {
