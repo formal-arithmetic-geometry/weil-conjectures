@@ -15,64 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Let $a:\\mathcal F\\to\\mathcal G$ be a morphism whose inverse image under every $p_i$ is a bijection. For $t\\in\\mathcal F(U)$ one has $a\\circ\\tilde t=\\widetilde{a_U(t)}$: both restrict along $h_U\\to h_U^\\#$ to the Yoneda map of $a_U(t)$ (naturality of $a$), so they agree by the uniqueness in the universal property of sheafification [def-weil-pbc-sheafification]. Hence $p_i^{-1}(a)([U,x,t]_{p_i})=p_i^{-1}(a\\circ\\tilde t)(x)=[U,x,a_U(t)]_{p_i}$. If sections $s,s'\\in\\mathcal F(U)$ satisfy $a_U(s)=a_U(s')$, then they cannot be distinct: if they were, the section-separation hypothesis would give an index $i$ and $x\\in u_i(U)$ with $[U,x,s]_{p_i}\\ne[U,x,s']_{p_i}$, while $p_i^{-1}(a)$ sends both to $[U,x,a_U(s)]_{p_i}=[U,x,a_U(s')]_{p_i}$, contradicting injectivity of $p_i^{-1}(a)$. Thus $a_U$ is injective for every $U$; since morphisms of sheaves are natural transformations, a morphism with injective components is a monomorphism of $\\operatorname{Sh}(\\mathcal C)$.",
+   "text": "For a sheaf morphism a : F → G and t ∈ F(U), the Yoneda maps satisfy t~ ≫ a = (a_U(t))~ after sheafification: use the universal property [def-weil-pbc-sheafification] and naturality of the Yoneda equivalence. In Lean this is sheafifyLift_comp followed by uliftYonedaEquiv_symm_comp, giving the local equality hnat.",
    "uses": [
     "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YM (lemma-enough), converse proof: injectivity is an immediate consequence of the section-separation condition"
-   }
+   "elementary": true
   },
   {
-   "text": "Form the pushout $P=\\mathcal G\\amalg_{\\mathcal F}\\mathcal G$ in $\\operatorname{Sh}(\\mathcal C)$, with coprojections $j_1,j_2:\\mathcal G\\rightrightarrows P$: take the sectionwise pushout of presheaves of sets and sheafify; since sheafification is left adjoint to the inclusion [def-weil-pbc-sheafification], maps from the sheafification to a sheaf are the same as compatible pairs of maps from $\\mathcal G$, so this is a pushout in sheaves. Each $p_i^{-1}$ is a left adjoint in the geometric-morphism datum [def-trf-geometric-morphism], so it carries this pushout to a pushout $p_i^{-1}P$ of $p_i^{-1}(a)$ along itself with coprojections $p_i^{-1}(j_1),p_i^{-1}(j_2)$ [lem-weil-pbc-left-adjoint-preserves-colimits]. A bijection is an epimorphism of sets, so by the cokernel-pair criterion [lem-galois-epi-iff-cokernel-pair] $p_i^{-1}(j_1)=p_i^{-1}(j_2)$ for every $i$. If $j_1\\ne j_2$, there would be an object $U$ and $g\\in\\mathcal G(U)$ with $j_{1,U}(g)\\ne j_{2,U}(g)$ in $P(U)$. The section-separation hypothesis applied to $P$ gives $i$ and $x\\in u_i(U)$ with $[U,x,j_{1,U}(g)]_{p_i}\\ne[U,x,j_{2,U}(g)]_{p_i}$; but as in Step 1, $[U,x,j_{k,U}(g)]_{p_i}=p_i^{-1}(j_k)([U,x,g]_{p_i})$ for $k=1,2$, and these agree. Therefore $j_1=j_2$.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "def-trf-geometric-morphism",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-galois-epi-iff-cokernel-pair"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YM (lemma-enough), converse proof: use the pushout $\\mathcal G\\amalg_{\\mathcal F}\\mathcal G$ and stalkwise equality of its two maps to $\\mathcal G$"
-   }
+   "text": "Suppose a,b : F → G have equal inverse images at every point. If a_U(t) ≠ b_U(t), apply section separation to these two sections of G to obtain i,x distinguishing their pointSectionImage values. By the preceding naturality identity, those values are respectively p_i^{-1}(a)([U,x,t]) and p_i^{-1}(b)([U,x,t]); equality of the inverse-image morphisms contradicts their distinction. Hence a_U(t)=b_U(t) for all U,t, so a=b. This constructs JointlyFaithful for the family.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The cokernel-pair characterization of epimorphisms says that a morphism is an epimorphism exactly when the two coprojections into its pushout with itself are equal. Applying it to $a$ and the pushout above, the equality $j_1=j_2$ proves that $a$ is an epimorphism.",
-   "uses": [
-    "lem-galois-epi-iff-cokernel-pair"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YM (lemma-enough), converse proof, citing Categories Lemma 08LR (lemma-characterize-mono-epi)"
-   }
-  },
-  {
-   "text": "We have shown that $a$ is both monic and epic. A monomorphism and epimorphism of sheaves of sets is an isomorphism by the balancedness statement for $\\operatorname{Sh}(\\mathcal C)$, namely [lem-weil-pbc-sheaf-sets-mono-epi-iso]. Thus every morphism whose inverse images under all $p_i$ are bijections is an isomorphism, which is exactly joint reflection of isomorphisms.",
+   "text": "A jointly faithful family jointly reflects monomorphisms and epimorphisms: map a cancellation equation through every functor, cancel the image morphism and use joint faithfulness. Thus, if all images of a morphism are isomorphisms, it is both monic and epic. Balancedness of sheaves of sets [lem-weil-pbc-sheaf-sets-mono-epi-iso] makes it an isomorphism. The elementary cancellation argument together with balancedness is Mathlib JointlyFaithful.jointlyReflectsIsomorphisms, applied directly in the Lean proof.",
    "uses": [
     "lem-weil-pbc-sheaf-sets-mono-epi-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YM (lemma-enough), final step using Sites Lemma 00WN (lemma-mono-epi-sheaves)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-sheafification",
-  "def-trf-geometric-morphism",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-galois-epi-iff-cokernel-pair",
   "lem-weil-pbc-sheaf-sets-mono-epi-iso"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 00YM (lemma-enough), converse proof from the section-separation criterion through the pushout/cokernel-pair test and mono-plus-epi criterion"
+  "place": "Tag 00YM (lemma-enough), converse; K4 simplifies the argument using section separation to prove joint faithfulness, then elementary cancellation and balancedness, as implemented by Mathlib JointlyFaithful.jointlyReflectsIsomorphisms."
  },
  "mathlib_searches": [
   {
@@ -223,5 +192,15 @@
   "by": "Q21",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T160944-L-3429920",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

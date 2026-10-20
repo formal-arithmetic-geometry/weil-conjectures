@@ -51,11 +51,12 @@ noncomputable def pointSectionImage {C : Type u} [Category.{v} C] (J : Precovera
 isomorphisms. Source: Stacks, Tags 00YK and 00YM, with stalk identifications from Tags 00Y6
 and 00Y8 (blueprint: lem-trf-point-family-conservative).
 
-Proof: for a morphism whose inverse images are bijections, section separation gives injectivity
-on every object. Form the pushout of the morphism with itself; inverse images preserve it because
-they are left adjoints, and the same separation argument makes its coprojections equal. The
-cokernel-pair criterion gives epimorphy, and the balanced mono-plus-epi property of sheaves of
-sets gives an isomorphism. -/
+Proof: composition with a sheaf morphism carries the morphism represented by a section to
+that represented by its image, by Yoneda naturality and the universal property of
+sheafification. If two sheaf morphisms agree after every inverse image, section separation
+therefore makes their values on every section equal. Thus the inverse-image functors are
+jointly faithful. Mathlib's criterion for jointly faithful functors from a balanced category
+then gives joint reflection of isomorphisms, since sheaves of sets form a balanced category. -/
 lemma point_family_conservative
     {C : Type u} [Category.{v} C]
     (J : Precoverage C) (hJ : J.IsSiteForCoverings)
@@ -69,6 +70,26 @@ lemma point_family_conservative
           (uliftYoneda.{max u v w, v}.obj U))),
         pointSectionImage J (p i) F U x s ≠ pointSectionImage J (p i) F U x s') :
     JointlyReflectIsomorphisms (fun i : I ↦ (p i).inverse) := by
-  sorry
+  have _ := hJ
+  have hnat (F G : Sheaf J.toGrothendieck (Type (max u v w))) (a : F ⟶ G)
+      (U : C) (t : F.obj.obj (op U)) :
+      sectionMorphism J F U t ≫ a = sectionMorphism J G U (a.hom.app (op U) t) := by
+    apply Sheaf.hom_ext
+    dsimp [sectionMorphism]
+    rw [← sheafifyLift_comp, uliftYonedaEquiv_symm_comp]
+  apply JointlyFaithful.jointlyReflectsIsomorphisms
+  refine ⟨?_⟩
+  intro F G a b hab
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  apply ConcreteCategory.hom_ext
+  intro s
+  by_contra h
+  obtain ⟨i, x, hx⟩ := hsep G U.unop (a.hom.app U s) (b.hom.app U s) h
+  apply hx
+  unfold pointSectionImage
+  rw [← hnat F G a U.unop s, ← hnat F G b U.unop s,
+    Functor.map_comp, Functor.map_comp, hab i]
 
 end CategoryTheory
