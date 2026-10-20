@@ -1,0 +1,47 @@
+--- deliver3.py.bak
++++ deliver3.py
+@@ -20,16 +20,19 @@
+ def scrub(t):
+     t = re.sub(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b", "the project server", t)
+     t = re.sub(r"\S*(weil_formal|formal3)\.pem", "the key", t); return re.sub(r"ubuntu@\S+", "the project server", t)
+-def forced_adaptations(clone, sb, item, mods, group=None, compile_one=None):
++def forced_adaptations(clone, sb, item, mods, group=None, compile_one=None, deleted=()):
+     """Worker-side counterfactual single-file checks; no claim acquisition or server build.
+ 
+     The delivered dependencies are already compiled into sb/.lbuild. Compile each
+     original against that overlay without writing output or changing the sandbox.
++    An original that imports an explicitly withdrawn module cannot survive the
++    delivery, even when the baseline still supplies its compiled artifacts.
+     Semantic necessity/minimality remains the independent CODEX reader's check.
+     """
+     compile_one = compile_one or lcompile.run
+     import stage3_delivery as s3
+     rows = []
++    gone = {p[len('lean/'):-len('.lean')].replace('/', '.') for p in deleted}
+     for m in mods:
+         rel = m.relative_to(sb); old = clone / rel
+         name = lcompile.modname(m)
+@@ -45,6 +48,14 @@
+         # pass (P5 PbcConeIndependence, 4 sessions). Such a change is listed for the reviewer instead of compiled.
+         _imp = re.compile(r"^\s*(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?(\S+).*$", re.M)
+         o_txt, n_txt = old.read_text(), m.read_text()
++        retired = set(_imp.findall(o_txt)) & gone
++        if retired and not set(_imp.findall(n_txt)) & gone:
++            rows.append(f"### {name}\nOriginal imports module(s) explicitly withdrawn in deleted.txt: "
++                        f"{', '.join(sorted(retired))}. Those imports must be migrated in this delivery; "
++                        "the baseline's compiled copies are not valid counterfactual dependencies. "
++                        "Adapted module compiled in the delivered set. CODEX verifies the migration "
++                        "and every accompanying API adaptation is needed.\n")
++            continue
+         dropped = set(_imp.findall(o_txt)) - set(_imp.findall(n_txt))
+         if dropped and set(_imp.findall(n_txt)) <= set(_imp.findall(o_txt)) and _imp.sub("", o_txt).split() == _imp.sub("", n_txt).split():
+             rows.append(f"### {name}\nOnly imports removed ({', '.join(sorted(dropped))}), e.g. to break an import cycle; "
+@@ -246,7 +257,7 @@
+     if [l for l in out.split("\n") if "warning" in l.lower() and "declaration uses" not in l]: print("COMPILES WITH WARNINGS (local), nothing pushed:\n" + out[-6000:]); sys.exit(1)
+     # Counterfactuals reuse the compiled sandbox, one original module at a time.
+     sys.path.insert(0, str(clone / "tools"))
+-    forced = forced_adaptations(clone, sb, item, mods, group=g)
++    forced = forced_adaptations(clone, sb, item, mods, group=g, deleted=deleted)
+     if forced:
+         rt += "\n## Forced adaptations\n\n" + forced
+     # local: the maintainer's probe (the axioms of every declaration of the file), as the merge runs it
