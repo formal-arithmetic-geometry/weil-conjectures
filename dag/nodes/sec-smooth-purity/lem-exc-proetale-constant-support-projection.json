@@ -1,0 +1,122 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleConstantSupportProjection",
+  "date": "2026-10-21",
+  "group": "M3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-adjoint-admissibility",
+   "place": "proof step identifying scalar-restricted support mate with constant projection"
+  },
+  "same_as": [],
+  "is": null
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coproduct preserving derived pushforward satisfies the projection formula for constant complexes of modules",
+   "results": "8 ordinary sheaf/tensor hits; no exact pro-etale theorem",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "0 exact hits",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*constant|constant.*projection",
+   "results": "11 unrelated hits",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived constant coefficient projection formula for compact support",
+   "results": "8 unrelated hits about compactly supported functions and polynomial coefficients; no derived sheaf projection theorem.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-exc-proetale-constant-support-projection",
+ "title": "Constant-coefficient projection for compact support",
+ "statement": "For a noetherian commutative ring R, a compactification c whose compact-support direct image preserves all small discrete coproducts, a source complex K, and a coefficient complex M, the proper projection map at the open extension of K and the constant sheaf of M is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "projection formula and generation by free coefficient complexes, Tags 07A4 and 0G7E"
+ },
+ "stmt_deps": [
+  "def-weil-derived-tensor",
+  "def-weil-pbc-extension-by-zero"
+ ],
+ "proof": [
+  {
+   "text": "The source coefficient functor is tensoring with Rg*(Di!K). The inverse open-immersion projection isomorphism, followed by the compactification pullback-composition isomorphism, identifies the target coefficient functor with Lf* followed by tensoring with K and Rf!. Derived tensor closedness, the derived pullback adjunction, and the assumed coproduct preservation by Rf! show that both coefficient functors preserve the required coproducts. Derived constant sheaves also preserve these coproducts.",
+   "uses": [
+    "lem-sfb-derived-monoidal-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an exact monoidal pullback preserving flat objects, compute the canonical derived tensor comparison on common K-flat representatives. Its defining counit identity gives compatibility with shifts and its right-unit identity. Passing to the adjunction mate gives a shift-compatible projection transformation which is invertible on the tensor unit. Transport the shift and triangulated structures from the exact termwise derived pullback and its right adjoint.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Derived constant sheaves send the regular module in degree zero to the tensor unit, using the single-functor comparison and the monoidal unit isomorphism for constant sheaves. After restricting the projection transformation along derived constant sheaves, its isomorphism locus contains every shift of this generator, and is closed under coproducts, distinguished triangles and retracts. Apply derived module free generation.",
+   "uses": [
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-monoidal-closed",
+  "lem-pc-derived-module-free-generation"
+ ],
+ "proof_origin": "M3: proved by canonical tensor-comparison shift and unit calculations, transfer of coproduct preservation through open projection, and derived module free generation; no new obligations.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantSupportProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantSupportProjection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_constantSupportProjection",
+  "statement": "theorem isIso_constantSupportProjection (R₀ : Type (u + 1)) [CommRing R₀] [IsNoetherianRing R₀] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) [∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} R₀) c)] (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R₀))) (M : DerivedCategory (ModuleCat.{u + 1} R₀)) : IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} R₀) c.g).app ((openImmersionLowerShriek (ModuleCat.{u + 1} R₀) c.i).mapDerivedCategory.obj K)).app ((constantSheaf (ProEt.topology Y) (ModuleCat.{u + 1} R₀)).mapDerivedCategory.obj M))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-21"
+ },
+ "tool_uses": [
+  "lem-sfb-derived-monoidal-closed",
+  "lem-pc-derived-module-free-generation"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261020T230808-L-613545",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261020T230808-L-613545",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
