@@ -107,14 +107,15 @@
   "note": "Explicit reverse functor and counit assembly of the source identification."
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.DiscreteContinuousRepCommGrpAux",
-  "file": "lean/Sheaf/CategoryTheory/DiscreteContinuousRepCommGrpAux.lean",
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DiscreteContinuousRepCommGrpAux",
+  "file": "lean/WeilConjectures/CategoryTheory/DiscreteContinuousRepCommGrpAux.lean",
   "declaration": "Rep.discreteContinuousRep_equiv_with_compatible_objectwise_iso",
   "statement": "theorem discreteContinuousRep_equiv_with_compatible_objectwise_iso\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CartesianMonoidalCategory (DiscreteContAction (Type w) G)]\n    [BraidedCategory (DiscreteContAction (Type w) G)] :\n    let D := DiscreteContinuousRep.{0, u, w} ℤ G\n    let U : D ⥤ Rep.{w} ℤ G := ObjectProperty.ι _\n    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type w) (G := G)) ⋙\n      ObjectProperty.ι (Action.IsContinuous (V := Type w) (G := G))\n    ∃ E : CommGrp (DiscreteContAction (Type w) G) ≌ D,\n      ∃ e : ∀ X, (E.functor ⋙ U ⋙ RepToAction ℤ G ⋙\n        (CategoryTheory.forget (ModuleCat.{w} ℤ)).mapAction G).obj X ≅\n          (CommGrp.forget (DiscreteContAction (Type w) G) ⋙ V).obj X,\n      ∀ {X Y} (f : X ⟶ Y),\n        ((E.functor ⋙ U ⋙ RepToAction ℤ G ⋙\n          (CategoryTheory.forget (ModuleCat.{w} ℤ)).mapAction G).map f) ≫\n            (e Y).hom = (e X).hom ≫\n              ((CommGrp.forget (DiscreteContAction (Type w) G) ⋙ V).map f)",
   "branch": "sheaf-dag",
-  "by": "J2",
-  "date": "2026-10-12"
+  "by": "C8",
+  "date": "2026-10-21",
+  "note": "Retire the duplicate Sheaf module. Its theorem docstring, signature and complete proof are byte-identical to the official upstream twin. Redirect the sole direct consumer to that twin. The consumer already registers both forgetful instances itself; no exported instance is lost there. Preserve the mathematical node, proof, dependencies and unit route."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -127,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "C-1d2b8",
+  "group": "C8",
   "result": "pass",
-  "landing": "20261012T144126-L-2100952",
+  "landing": "20261020T233111-L-893661",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: the Sheaf Aux theorem against its WeilConjectures twin (identical docstring/signature/proof); the consumer's import swap against its own public imports and global instance registrations; the node diff against live (lean field only, existing:true)"
  }
 }

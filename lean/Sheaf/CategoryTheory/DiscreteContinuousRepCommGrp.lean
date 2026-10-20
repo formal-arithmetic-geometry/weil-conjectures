@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
-import Sheaf.CategoryTheory.DiscreteContinuousRepCommGrpAux
+import WeilConjectures.CategoryTheory.DiscreteContinuousRepCommGrpAux
 
 /-!
 # Commutative group objects in discrete continuous actions
