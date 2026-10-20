@@ -26,13 +26,12 @@
  "statement": "Let i:Z→Y be a closed immersion, V an open, n a natural number and assume Koszul-regular affine generators near V. Write B=i_*O_Z, G=H^n(RHom_Y(B[0],B[0])), T=(i*G)|V and F=dual(exteriorSheaf(i*ker(i),n))|V. Each point z of V has an open W containing z and an isomorphism F.over W ≅ T.over W. No overlap compatibility is asserted.",
  "proof": [
   {
-   "text": "At z choose the supplied chart U and its regular generators. The existing\nself-Ext pullback local frame identifies the target over i⁻¹U with the free sheaf\nindexed by increasing n-element subsets. The regular conormal basis and affine\nconormal frame identify i*ker(i) over i⁻¹U with the m-fold free sheaf. Apply the\nexterior local-free comparison, then overHomObjIso and homObjFreeUnitIso to identify\nits internal dual with the same subset-indexed free sheaf. Restrict both frames\nalong V.ι to V.ι⁻¹(i⁻¹U), using the over-to-restricted-site equivalence, composition\nof open restriction, and restriction of free sheaves. Compose the restricted source\nframe with the inverse restricted target frame. Membership is the original chart\nmembership. No generator comparison is required here. The already stated frame\nlemmas include all derived universes, n=0, n>m, and empty charts. Empty V is vacuous. Use the official local comparison and rewrite its conclusion to the legacy exterior constructions using lem-sc-exterior-sheaf-upstream-comparison. These are equalities of the actual presheaves and sheaves, so this transport changes no hypothesis or conclusion.",
+   "text": "At z choose the supplied chart U and its regular generators. The existing\nself-Ext pullback local frame identifies the target over i⁻¹U with the free sheaf\nindexed by increasing n-element subsets. The regular conormal basis and affine\nconormal frame identify i*ker(i) over i⁻¹U with the m-fold free sheaf. Apply the\nexterior local-free comparison, then overHomObjIso and homObjFreeUnitIso to identify\nits internal dual with the same subset-indexed free sheaf. Restrict both frames\nalong V.ι to V.ι⁻¹(i⁻¹U), using the over-to-restricted-site equivalence, composition\nof open restriction, and restriction of free sheaves. Compose the restricted source\nframe with the inverse restricted target frame. Membership is the original chart\nmembership. No generator comparison is required here. The already stated frame\nlemmas include all derived universes, n=0, n>m, and empty charts. Empty V is vacuous.",
    "uses": [
     "lem-sc-koszul-self-ext-pullback-local-frame",
     "lem-sc-affine-conormal-frame",
     "lem-sc-koszul-conormal-basis",
-    "lem-sc-exterior-sheaf-local-free-comparison",
-    "lem-sc-exterior-sheaf-upstream-comparison"
+    "lem-sc-exterior-sheaf-local-free-comparison"
    ],
    "elementary": false
   }
@@ -41,19 +40,17 @@
   "lem-sc-koszul-self-ext-pullback-local-frame",
   "lem-sc-affine-conormal-frame",
   "lem-sc-koszul-conormal-basis",
-  "lem-sc-exterior-sheaf-local-free-comparison",
-  "lem-sc-exterior-sheaf-upstream-comparison"
+  "lem-sc-exterior-sheaf-local-free-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "W4",
-  "date": "2026-10-13",
+  "agent": "Q9",
+  "date": "2026-10-21",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
   },
-  "note": "Proved from existing finite-free frames; no new hole for the affine calculation.",
-  "place": " K5 retirement, 2026-10-20: retain the same proof and transport the official comparison along the proved exterior-construction equalities."
+  "note": "The existing upstream theorem carries the same finite-free frame argument. Exterior construction transport is now only in the legacy consumer."
  },
  "mathlib_searches": [
   {
@@ -101,14 +98,15 @@
   "same_as": []
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalComparisonCore",
-  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSelfExtConormalLocalComparisonCore.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.KoszulSelfExtConormalLocalComparisonCore",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/KoszulSelfExtConormalLocalComparisonCore.lean",
   "declaration": "AlgebraicGeometry.koszulRegularImmersion_self_ext_conormal_local_iso",
-  "statement": "theorem koszulRegularImmersion_self_ext_conormal_local_iso\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (V : Z.Opens) (n : ℕ)\n    (hregular : ∀ z : Z, z ∈ V → ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let T := (Scheme.Modules.restrictFunctor V.ι).obj\n      ((Scheme.Modules.tensorPullback i).obj G)\n    let F := (Scheme.Modules.restrictFunctor V.ι).obj\n      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))\n    ∀ z : V.toScheme, ∃ W : V.toScheme.Opens,\n      z ∈ W ∧ Nonempty (F.over W ≅ T.over W)",
+  "statement": "theorem koszulRegularImmersion_self_ext_conormal_local_iso\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (V : Z.Opens) (n : ℕ)\n    (hregular : ∀ z : Z, z ∈ V → ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let T := (Scheme.Modules.restrictFunctor V.ι).obj\n      ((Scheme.Modules.tensorPullback i).obj G)\n    let F := (Scheme.Modules.restrictFunctor V.ι).obj\n      (Scheme.Modules.dual (Scheme.Modules.exteriorPower\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))\n    ∀ z : V.toScheme, ∃ W : V.toScheme.Opens,\n      z ∈ W ∧ Nonempty (F.over W ≅ T.over W)",
   "branch": "sheaf-dag",
-  "by": "W4",
-  "date": "2026-10-13"
+  "by": "Q9",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module. The existing upstream theorem uses exteriorPower; exteriorSheaf_eq_exteriorPower transports it to the unchanged legacy consumer signature."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -123,12 +121,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-5849a",
-  "group": "K5",
+  "reviewer": "C-d4838",
+  "group": "Q9",
   "result": "pass",
-  "landing": "20261020T144252-L-2260026",
+  "landing": "20261020T221317-L-4172109",
   "kind": "interface",
-  "note": "independent cc review: Retirement of the Sheaf twin against coord/retire-items.tsv:60; upstream WeilConjectures exteriorSheaf_local_free_comparison (sorry-free) plus two new proved equality lemmas; the 5 adapted direct importers diffed against live and compiled (all 8 modules exit 0); axioms clean; consumer nodes change only proof/proof_deps/proof_origin"
+  "note": "independent cc review: retirement of Sheaf core (retire-items.tsv:2183) vs upstream WeilConjectures core statement (byte-identical to node lean record) + consumer diff vs live (one import swap, one exteriorSheaf_eq_exteriorPower rw); both delivered modules and the sole importer compile, axioms clean"
  },
  "lean_audit": {
   "master": {

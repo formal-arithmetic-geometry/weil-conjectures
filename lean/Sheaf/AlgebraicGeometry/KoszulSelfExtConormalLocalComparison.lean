@@ -17,7 +17,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 
-import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalComparisonCore
+import WeilConjectures.AlgebraicGeometry.KoszulSelfExtConormalLocalComparisonCore
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafComparison
 import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalAlignment
 
 /-! # Compatible local Koszul comparison maps
@@ -100,6 +101,7 @@ theorem koszulRegularImmersion_self_ext_conormal_local_comparison
   classical
   dsimp only
   have hlocal := koszulRegularImmersion_self_ext_conormal_local_iso i V n hregular
+  rw [← Scheme.Modules.exteriorSheaf_eq_exteriorPower] at hlocal
   choose W hmem he using hlocal
   let e := fun z ↦ Classical.choice (he z)
   obtain ⟨a, ha⟩ :=
