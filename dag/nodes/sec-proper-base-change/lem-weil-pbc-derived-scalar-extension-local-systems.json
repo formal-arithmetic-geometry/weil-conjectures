@@ -26,54 +26,82 @@
  ],
  "proof": [
   {
-   "text": "Construct global and slice extension-of-scalars functors by resolving with K-flat flat-term complexes and applying sheafified tensor extension. The derived adjunction to exact restriction of scalars follows from the ordinary tensor-restriction adjunction. This works for arbitrary commutative rings and all unbounded complexes.",
+   "text": "Use the canonical left adjoint pbcFixedScalarExtension to actual derived restriction of scalars on the original site and every slice. Define the slice comparison as the inverse scalar-adjunction mate of sliceRestrictScalarsIso.inv. The mate unit identity gives both required slice unit equations.",
    "uses": [
-    "def-weil-pbc-derived-morphism-presheaves",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-weil-pbc-witness-compatibility",
+    "def-weil-pbc-derived-morphism-presheaves"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY and 0G7E, derived pullback on K-flat flat-term representatives"
+    "place": "Tags 06YY (derived-base-change), 0G7E (pullback-K-flat), 0D6D (derived-pullback-composition), 07A4 (pullback-tensor-product); localized construction part of the parent evaluation node step 10"
    }
   },
   {
-   "text": "Restriction to a slice and comparison inverse image preserve K-flat flat-term complexes. The ordinary balancing maps of tensor extension therefore compute the derived comparisons. On pure tensors they send a section to the same restricted or pulled-back tensor; the reverse balancing map is the inverse. Composition of pullbacks gives all coherence identities. These maps define the restrictionIso fields and hom_naturality and iso_naturality of both DerivedLocalFunctor structures. Fix each comparison as the adjunction transpose of the restricted global unit followed by the inverse canonical restriction-of-scalars comparison. Its naturality follows from unit naturality; the inverse law of the hom equivalence gives the slice unit equation. On flat resolutions this same mate is the balancing isomorphism, so the chosen canonical mate is invertible.",
+   "text": "Identify each slice with the site of its source scheme by the existing exact sheaf equivalence. Prove coefficient compatibility of this equivalence by transposing the localization unit. Derive this compatibility using mapDerivedCategorySquareIso_hom_app_comp. Transport the scalar mate across the two equivalences; the source-scheme scalarPullbackReverse_isIso theorem makes it invertible. Mates along equivalences are invertible by the opposite form of the fully faithful mate theorem. This applies on both sites for arbitrary coefficient maps.",
    "uses": [
-    "def-weil-pbc-derived-morphism-presheaves",
-    "def-weil-pbc-derived-morphism-sheaf-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "def-weil-pbc-source-derived-isomorphism-evaluation",
+    "def-weil-pbc-derived-normalization-arrows",
+    "lem-sfb-etale-proetale-scalar-mate",
+    "lem-weil-mate-iso-along-equivalences"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7E, 0D6D and 07A4"
+    "place": "Tags 06YY (derived-base-change), 0G7E (pullback-K-flat), 0D6D (derived-pullback-composition), 07A4 (pullback-tensor-product); localized construction part of the parent evaluation node step 10"
    }
   },
   {
-   "text": "The ordinary unit is m -> 1 tensor m. Its equality under each balancing map gives the two slice unit equations and the global comparison unit equation. Both routes on an actual localized derived morphism use its tensor-extension chain map and the same balancing comparisons. The chain-map equality descends to the final displayed Hom-presheaf equality. Functors carry isomorphisms to inverse pairs, so this suffices for both Hom and Isom consumers. To identify the derived units with the chain-level ones, compose the derived unit with restriction of the left-derived counit: the derived-adjunction factorization formula gives the localized ordinary unit followed by the exact restriction localization comparison. Mates paste compatibly for successive restrictions, which proves that the conjugated actual-map squares use precisely the displayed canonical maps.",
+   "text": "Restriction to successive slices commutes strictly with coefficient restriction before derivation. Lift this pasting identity to derived categories. Prove the inverse-mate transport and pasting formulas from Mathlib mateEquiv_vcomp; use their triangle form and naturality to prove the hom_naturality and iso_naturality fields of both DerivedLocalFunctor structures.",
    "uses": [
-    "def-weil-pbc-derived-morphism-presheaves",
+    "def-weil-pbc-derived-morphism-presheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (derived-base-change), 0G7E (pullback-K-flat), 0D6D (derived-pullback-composition), 07A4 (pullback-tensor-product); localized construction part of the parent evaluation node step 10"
+   }
+  },
+  {
+   "text": "Take pbcComparisonReduction as the global comparison. Identify its right scalar square with comparisonRestrictScalarsIso by expressing normalizationPullbackMate as the conjugate of the identity coextension/direct-image square. The inverse-mate unit formula gives the displayed comparison unit equation.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "def-weil-pbc-derived-normalization-arrows",
     "def-weil-pbc-derived-morphism-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY and 0D6D; unit-normalized naturality of the balancing comparisons"
+    "place": "Tags 06YY (derived-base-change), 0G7E (pullback-K-flat), 0D6D (derived-pullback-composition), 07A4 (pullback-tensor-product); localized construction part of the parent evaluation node step 10"
+   }
+  },
+  {
+   "text": "Prove the ordinary coefficient cube for comparisonSliceBaseIso by transposing under the slice comparison adjunction: both sides reduce to the restriction of the global comparison unit. Lift this cube to derived categories using the exact functor square-pasting API twice. The inverse-mate cube then identifies the scalar-extension comparisons. Naturality of the local comparison mate, followed by cancellation of the isomorphism supplied by this cube, proves the conjugated local-map equality and hence the required Hom-presheaf equation.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-sheaf-comparison",
+    "def-weil-pbc-derived-morphism-presheaves",
+    "def-weil-pbc-derived-normalization-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (derived-base-change), 0G7E (pullback-K-flat), 0D6D (derived-pullback-composition), 07A4 (pullback-tensor-product); localized construction part of the parent evaluation node step 10"
    }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-witness-compatibility",
   "def-weil-pbc-derived-morphism-presheaves",
-  "def-weil-pbc-derived-morphism-sheaf-comparison",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "def-weil-pbc-source-derived-isomorphism-evaluation",
+  "def-weil-pbc-derived-normalization-arrows",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "lem-weil-mate-iso-along-equivalences",
+  "def-weil-pbc-derived-morphism-sheaf-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "B7",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY (derived-base-change), 0G7E (pullback-K-flat), 0D6D (derived-pullback-composition), 07A4 (pullback-tensor-product); localized construction part of the parent evaluation node step 10; canonical-map and coherence assembly as written in the Lean docstring"
+  "place": "Tags 06YY, 0D6D, 07A4 and 0G7E; canonical scalar adjoints, source-site equivalence transport and explicit inverse-mate pasting/cube proofs in Lean"
  },
  "mathlib_searches": [
   {
@@ -166,13 +194,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-54794",
-  "group": "G7",
+  "reviewer": "COMPILER",
+  "group": "B7",
   "result": "pass",
-  "landing": "20261019T192743-L-1863090",
+  "landing": "20261020T131934-L-1392123",
   "kind": "interface",
-  "note": "independent cc review: item derivedMorphism_* proofs vs node lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation (only proof fields changed); new sorry statements lisse Hom comparison and scalar local systems vs their nodes and Stacks 08JI/094G/06YY; importer CompatibleFiniteDerivedTrivializations compiled against delivered modules"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
