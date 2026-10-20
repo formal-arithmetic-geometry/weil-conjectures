@@ -32,167 +32,83 @@
  ],
  "proof": [
   {
-   "text": "The Cartesian base changes preserve the geometric hypotheses needed below. By proper base change, $r:U\\to W$ is proper, and by open-immersion base change, $k:U\\hookrightarrow V$ is an open immersion. From the definition of properness, $p$ and $r$ are of finite type and separated; finite type gives quasi-compactness, while the diagonal of a separated morphism is a closed immersion and hence quasi-compact, so both maps are qcqs. The exactness of etale and pro-etale extension by zero means that $e_i$ and $e_k$ may be applied termwise to complexes and preserve the derived maps used in the composite.",
+   "text": "Use the specified unbounded etale proper/open interchange and its exchange/open-unit normalization. Properness supplies qcqs for p and r and base change supplies the open immersion k. The five-arrow comparison is an isomorphism by its definition as a composite of isomorphisms.",
    "uses": [
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "def-weil-closed-immersion",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
     "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-extension-by-zero-exact"
+    "lem-weil-pbc-open-immersion-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-    "place": "Step 7, domain check for the base-changed proper/open square; the proper and open base-change facts are the elementary scheme-theoretic part"
+    "place": "Retained repaired Step 7, open-restriction and mate-pasting calculation (current Step 8); comparison and open-unit sources: Stacks proetale.tex section-comparison (099R), lemma-jshriek-comparison (09AF), lemma-open-immersion (09BN)."
    }
   },
   {
-   "text": "For $M_0\\in D^+(U_{\\mathrm{et}},A)$, every arrow in the displayed five-arrow composite is an isomorphism. The maps $b_r^{-1}$ and $b_p$ are isomorphisms by the canonical-mate comparison; the maps $e_i$ and $e_k$ are isomorphisms by the canonical etale/pro-etale extension comparison; and $\\Gamma^e$ is an isomorphism by the unbounded proper/open interchange. The comparison pullback and the derived direct images are functors, so they preserve these isomorphisms and their composition. Hence $C_{a_UM_0}$ is an isomorphism. Naturality in $M_0$ is the composite of the naturality squares of the five named transformations.",
+   "text": "For any pair of adjunctions and an open-extension comparison c:L⋙B≅A⋙Lprime, expand homEquiv as unit followed by the right functor. Its naturality in endpoint isomorphisms and the unit equation for mateEquiv identify the transpose of Lprime(b.inv) followed by c.inv followed by B(f) followed by v.hom with b.inv followed by A of the original transpose, the restriction mate, and Rprime(v.hom). This is the proved private open_mate_transport lemma.",
    "uses": [
-    "def-sf-comparison-derived-pullback",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-amb-unbounded-proper-open-interchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-    "place": "Step 7, first sentence: the five-arrow site-transport composite; Stacks proetale.tex Tag 099R and more-etale.tex Tag 0F7B"
-   }
-  },
-  {
-   "text": "Let $(M_0,\\alpha)$ be an etale-origin witness for $M$, with $\\alpha:a_UM_0\\xrightarrow{\\sim}M$. The definition of $C_M$ is conjugation of $C_{a_UM_0}$ by $\\alpha$, so it is an isomorphism and natural in witnessed maps. If $(M_1,\\alpha_1)$ is a second witness, full faithfulness of $\\nu_U^*$ on $D^+$ gives a unique isomorphism $\\theta:M_0\\xrightarrow{\\sim}M_1$ with $\\alpha_1\\circ a_U\\theta=\\alpha$. Naturality of the five-arrow composite with respect to $\\theta$, followed by this equality and cancellation of $Rp_*k_!\\alpha_i$ and $i_!Rr_*\\alpha_i^{-1}$, identifies the two conjugates. Thus $C_M$ is independent of the witness.",
-   "uses": [
-    "def-weil-pbc-etale-origin-witness",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "def-sf-comparison-derived-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-    "place": "Step 7, witness independence clause; Stacks proetale.tex Tag 099R"
-   }
-  },
-  {
-   "text": "Identify the Cartesian square with the comparison-square notation by taking $(f,f',g,g')=(p,r,i,k)$. The canonical pullback comparison is compatible with this Cartesian identification, and the canonical direct-image maps have the counit normalization $\\varepsilon^p_{u,A_UK}\\circ p_u(b_{u,K})\\circ a_{u,r_uK}=A_U(\\varepsilon^e_{u,K})$. The transport theorem for the comparison square then states that conjugating the etale unit--square--counit exchange by the pullback comparisons and the normalized $b$-maps gives exactly the pro-etale ambient exchange $\\operatorname{Ex}^R$.",
-   "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-transport-identifies-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-    "place": "Step 7, comparison coherence in the Cartesian square; the transport identity is the required mate calculation"
-   }
-  },
-  {
-   "text": "The etale exchange in the preceding step is the same unit--square--counit mate as the unbounded module exchange: [def-kun-unbounded-exchange] defines $\\operatorname{Ex}_{p,i}$ by the unit of $i^{-1}\\dashv Ri_*$, the Cartesian inverse-image comparison, and the counit of $p^{-1}\\dashv Rp_*$. Restricting this formula to the bounded-below etale module input $M_0$ gives the etale exchange used to define $\\Gamma^e$; no second exchange map is being substituted.",
-   "uses": [
-    "def-kun-unbounded-exchange",
-    "lem-amb-unbounded-proper-open-interchange",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-    "place": "Step 7, identification of the etale exchange with the unbounded exchange used in the normalization of $\\Gamma^e$"
-   }
-  },
-  {
-   "text": "For each open edge, apply the unit-normalization statement for the canonical etale/pro-etale extension comparison. For $j=i$ and $j=k$ it gives, termwise and hence on the displayed complexes, $s(c_F)\\circ a_{eF}\\circ C(\\eta^e_F)=\\eta^d_{C F}$; thus $e_i$ and $e_k$ intertwine the etale and pro-etale open-adjunction units. Their naturality and composition compatibility are also the stated properties of the extension comparison, and exactness from Step 1 permits the termwise passage. This supplies the unit/counit compatibility required when the five arrows are transposed.",
-   "uses": [
-    "lem-sf-open-comparison-unit-normalization",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-extension-by-zero-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-    "place": "Step 7, open-comparison unit and counit coherence in the mate-pasting calculation"
-   }
-  },
-  {
-   "text": "First identify the current restriction normalization with the exchange used in Steps 4--5. For $L=k_!a_UM_0$ choose a K-injective representative $I$. The restriction lemma identifies $\\rho_L$ with $i^*p_*I=r_*k^*I$ and states that $k^*I$ is K-injective. Transposing this identification under $r^*\\dashv Rr_*$ gives $r^*i^*p_*I\\cong k^*p^*p_*I\\xrightarrow{k^*\\varepsilon_p}k^*I$: the counit evaluates a section after pullback, and both section maps use the same fibre product. This is precisely the defining transpose of the ambient exchange. Thus the current $\\lambda_{a_UM_0}$ is that exchange followed by the inverse open unit. Now take the $i_!\\dashv i^*$-transpose of the five-arrow map. Insert the open-unit equations from Step 6 at both open edges, the counit equations for $b_r,b_p$ from Step 4, and the Cartesian pullback comparison. The middle square becomes the etale exchange of Step 5, transported to the ambient exchange by Step 4. The normalization clause of $\\Gamma^e$ therefore identifies the transpose with $\\lambda_{a_UM_0}^{-1}$.",
-   "uses": [
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-weil-pbc-transport-identifies-exchange",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sf-open-comparison-unit-normalization",
-    "def-kun-unbounded-exchange",
-    "prop-exc-open-adjoint",
-    "lem-exc-proetale-derived-open-restriction",
-    "def-weil-pbc-ambient-ringed-exchange",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-    "place": "Step 7, mate-pasting normalization; Stacks more-etale.tex Tag 0F7B"
-   }
-  },
-  {
-   "text": "The open-adjunction transpose is unique, giving $C_{a_UM_0}=\\varepsilon_i\\circ i_!(\\lambda_{a_UM_0}^{-1})$. Conjugate by a witness $\\alpha:a_UM_0\\xrightarrow{\\sim}M$. Naturality of $\\lambda$ and the adjunction counit then gives $$C_M=\\varepsilon_i\\circ i_!(\\lambda_M^{-1}).$$ Applying $i^*$ and the triangle identity gives $$\\lambda_M\\circ i^*C_M=1_{Rr_*M}.$$",
-   "uses": [
-    "prop-exc-open-adjoint",
-    "lem-exc-proetale-derived-open-restriction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-    "place": "Step 7, final open-adjunction transpose and triangle-identity clause"
-   }
-  },
-  {
-   "text": "All constructions remain on the stated ordinary constant-$A$ module categories. The witness supplies $M_0\\in D^+(U_{\\mathrm{et}},A)$, while the comparison, open extension, restriction, and direct-image operations are the ordinary uncompleted pro-etale operations. Therefore the only input restriction is bounded-below etale origin; no ambient exceptional adjoint, constructibility condition, or finite-cohomological-dimension bound is used.",
-   "uses": [
-    "def-weil-pbc-etale-origin-witness",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-derived-categories",
     "prop-exc-open-adjoint"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-    "place": "Step 7, retained domain restriction"
+    "place": "Retained repaired Step 7, open-restriction and mate-pasting calculation (current Step 8); comparison and open-unit sources: Stacks proetale.tex section-comparison (099R), lemma-jshriek-comparison (09AF), lemma-open-immersion (09BN)."
+   }
+  },
+  {
+   "text": "Apply the preceding identity to the etale interchange, using b_r as the source isomorphism and the last three factors of the five-arrow comparison as the target isomorphism. Its original transpose is the specified inverse etale lambda. The general qcqs restriction-transport theorem identifies the other factors with b_r followed by intrinsic lambda inverse. Cancel b_r inverse against b_r. Thus the transpose of the five-arrow comparison is precisely the intrinsic lambda inverse. Injectivity of homEquiv gives the canonical counit formula.",
+   "uses": [
+    "lem-exc-etale-origin-open-restriction-transport",
+    "lem-amb-unbounded-proper-open-interchange",
+    "prop-exc-open-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Retained repaired Step 7, open-restriction and mate-pasting calculation (current Step 8); comparison and open-unit sources: Stacks proetale.tex section-comparison (099R), lemma-jshriek-comparison (09AF), lemma-open-immersion (09BN)."
+   }
+  },
+  {
+   "text": "Define c on all intrinsic objects by applying i! to lambda inverse and then the open counit. The preceding step identifies each etale-origin five-arrow map with c at that object. Conjugate by the retained witness alpha. Naturality of c moves alpha through the square, and functoriality cancels alpha.inv followed by alpha. Every witnessed map therefore equals c at M, so witness independence and naturality for every ambient morphism follow immediately. No lifting through full faithfulness is needed.",
+   "uses": [
+    "lem-exc-proetale-derived-open-restriction",
+    "prop-exc-open-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Retained repaired Step 7, open-restriction and mate-pasting calculation (current Step 8); comparison and open-unit sources: Stacks proetale.tex section-comparison (099R), lemma-jshriek-comparison (09AF), lemma-open-immersion (09BN)."
+   }
+  },
+  {
+   "text": "The equality homEquiv(symm(lambda inverse))=lambda inverse is the adjunction inverse identity. Postcompose it by lambda and cancel inverse followed by hom. This gives the first unit-normalized equation; the second is the canonical counit formula of step 3 transported in step 4. No unrestricted exceptional adjunction or all-sheaf finite-CD bound enters.",
+   "uses": [
+    "lem-exc-proetale-derived-open-restriction",
+    "prop-exc-open-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Retained repaired Step 7, open-restriction and mate-pasting calculation (current Step 8); comparison and open-unit sources: Stacks proetale.tex section-comparison (099R), lemma-jshriek-comparison (09AF), lemma-open-immersion (09BN)."
    }
   }
  ],
  "proof_deps": [
-  "def-kun-unbounded-exchange",
-  "def-sf-comparison-derived-pullback",
-  "def-weil-closed-immersion",
-  "def-weil-finite-type-morphism",
-  "def-weil-pbc-ambient-ringed-exchange",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-etale-origin-witness",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-proper-morphism",
   "lem-amb-unbounded-proper-open-interchange",
   "lem-cbc-proetale-extension-zero-comparison",
+  "lem-exc-etale-origin-open-restriction-transport",
   "lem-exc-proetale-derived-open-restriction",
-  "lem-sf-open-comparison-unit-normalization",
-  "lem-weil-extension-by-zero-exact",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-open-immersion-base-change",
   "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-transport-identifies-exchange",
-  "prop-exc-open-adjoint",
-  "thm-weil-pbc-site-comparison"
+  "prop-exc-open-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-  "place": "Retained repaired proof of prop-exc-base-change-proper, extracted Step 7 (now realized in its current Step 8); explicit site-transport mate calculation using Stacks 099R and 0F7B only as etale/comparison sources"
+  "place": "Retained repaired Step 7, open-restriction and mate-pasting calculation (current Step 8); comparison and open-unit sources: Stacks proetale.tex section-comparison (099R), lemma-jshriek-comparison (09AF), lemma-open-immersion (09BN)."
  },
  "mathlib_searches": [
   {
@@ -306,10 +222,8 @@
   "lem-sf-open-comparison-unit-normalization",
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-amb-unbounded-proper-open-interchange",
-  "thm-weil-pbc-site-comparison",
   "prop-exc-open-adjoint",
-  "def-kun-unbounded-exchange",
-  "def-weil-pbc-ambient-ringed-exchange"
+  "def-kun-unbounded-exchange"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -323,10 +237,6 @@
   "module": "Sheaf.AlgebraicGeometry.EtaleOriginProperOpenInterchange",
   "declaration": "AlgebraicGeometry.Scheme.etaleOriginProperOpenInterchange",
   "declarations": [
-   "AlgebraicGeometry.Scheme.etaleOriginOpenComparison",
-   "AlgebraicGeometry.Scheme.etaleOriginOpenCoordinates",
-   "AlgebraicGeometry.Scheme.etaleOriginOpenExtensionComparison",
-   "AlgebraicGeometry.Scheme.etaleOriginOpenDirectImageComparison",
    "AlgebraicGeometry.Scheme.etaleOriginOpenEtaleInterchange",
    "AlgebraicGeometry.Scheme.etaleOriginProperOpenIso",
    "AlgebraicGeometry.Scheme.witnessedEtaleOriginProperOpenIso",
@@ -335,9 +245,9 @@
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleOriginProperOpenInterchange.lean",
   "statement": "theorem etaleOriginProperOpenInterchange (A : Type u) [CommRing A] [Finite A] {V T W : Scheme.{u}} (p : V ⟶ T) (i : W ⟶ T) [IsProper p] [IsOpenImmersion i] [IsNoetherian V] [IsNoetherian T] [IsNoetherian W] [IsNoetherian (pullback p i)] : (∀ K, IsIso (etaleOriginProperOpenIso A p i K).hom) ∧ ∀ (M : proEtaleDerivedCategory (pullback p i) A) (K : DerivedCategory.Plus (Sheaf (pullback p i).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (alpha : (etaleOriginOpenComparison A (pullback p i)).obj K.obj ≅ M), IsIso (witnessedEtaleOriginProperOpenIso A p i K alpha).hom ∧ (∀ (L : DerivedCategory.Plus (Sheaf (pullback p i).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (beta : (etaleOriginOpenComparison A (pullback p i)).obj L.obj ≅ M), (witnessedEtaleOriginProperOpenIso A p i K alpha).hom = (witnessedEtaleOriginProperOpenIso A p i L beta).hom) ∧ (∀ (N : proEtaleDerivedCategory (pullback p i) A) (L : DerivedCategory.Plus (Sheaf (pullback p i).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (beta : (etaleOriginOpenComparison A (pullback p i)).obj L.obj ≅ N) (f : M ⟶ N), (sfIntrinsicDerivedOpen A i).map ((proEtaleConstantDerivedDirectImage (pullback.snd p i) A).map f) ≫ (witnessedEtaleOriginProperOpenIso A p i L beta).hom = (witnessedEtaleOriginProperOpenIso A p i K alpha).hom ≫ (proEtaleConstantDerivedDirectImage p A).map ((sfIntrinsicDerivedOpen A (pullback.fst p i)).map f)) ∧ ((exceptionalOpenAdjunction i A).unit.app ((proEtaleConstantDerivedDirectImage (pullback.snd p i) A).obj M) ≫ (sfIntrinsicDerivedPullback A i).map (witnessedEtaleOriginProperOpenIso A p i K alpha).hom ≫ (etaleOriginOpenLambda A p i).hom.app M = 𝟙 _) ∧ ((witnessedEtaleOriginProperOpenIso A p i K alpha).hom = (sfIntrinsicDerivedOpen A i).map ((proEtaleOpenRestrictionLambdaInverse p i A).app M) ≫ (exceptionalOpenAdjunction i A).counit.app ((proEtaleConstantDerivedDirectImage p A).obj ((sfIntrinsicDerivedOpen A (pullback.fst p i)).obj M)))",
-  "branch": "newtargets-dag",
-  "by": "Q113",
-  "date": "2026-10-17",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-20",
   "existing": false
  },
  "reviewed_lean": {
@@ -347,5 +257,15 @@
   "group": "Q113",
   "result": "pass",
   "note": "No substantive or mechanical findings; scompile reproduced cleanly in sandbox and library modes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-00d8e",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261020T051254-L-1616471",
+  "kind": "interface",
+  "note": "independent cc review: delivered EtaleOriginOpenRestrictionTransport + item vs live clone: 4 moved defs byte-identical (docstring id only), interchange body defeq to old choose (unfold;rfl compiled), item proof complete except new restriction-transport sorry; both modules and importer CompactSupportUniformTorBound compile (560 s limit, load 250-440; base item itself timed out at 560 s)"
  }
 }
