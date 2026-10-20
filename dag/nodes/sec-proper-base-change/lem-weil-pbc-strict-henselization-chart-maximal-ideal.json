@@ -21,14 +21,14 @@
    "elementary": false
   },
   {
-   "text": "The chosen strictHenselizationRing is the coordinate-ring colimit D on all affine pointed neighbourhoods in the consolidated upstream construction. Colimit uniqueness identifies it with cn.pt. Compose this isomorphism with t and the unique comparison ct.pt isomorphic to c.pt to obtain e. The comparison equation colimit.iota(D,n) followed by e.hom = cn.iota(n) followed by t.hom followed by the ct-to-c comparison is the coprojection formula for colimit uniqueness.",
+   "text": "Let G be the inverse small-model equivalence followed by strictHenselizationAffineInclusion. Both functors are equivalences. Whisker the full affine colimit cocone cn by G.op; finality makes it a colimit cocone on strictHenselizationAffineDiagram. Colimit uniqueness gives e1 : strictHenselizationRing(s) isomorphic to cn.pt, with coprojection formula colimit.iota(j) followed by e1.hom = cn.iota(G(j)). Compose e1 with the chart-to-triples isomorphism t and the unique comparison ct.pt isomorphic to c.pt to obtain e. No equality between the chosen small colimit and the full affine colimit is assumed.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit"
    ],
    "elementary": true
   },
   {
-   "text": "Use the actual pointed chart (Spec R, i, xR) as an affine neighbourhood, and put it in the chart subcategory using the identity map to Spec R. The compatibility formula for delta at the identity chart, the coprojection formula for t, and the ct-to-c colimit comparison give GammaSpecIso(R).inv followed by colimit.iota(chart) followed by e.hom = rho. Cancel e.hom to identify the canonical chart ring map with rho followed by e.inv. Apply Spec. The upstream strictLocalizationCone projection formula, its equation over S, and the fact that Spec.map(GammaSpecIso(R).inv) is the inverse of toSpecGamma prove that Spec(rho followed by e.inv) followed by i is the stated structural map.",
+   "text": "The pointed chart (Spec R, i, xR) is an object chart of the full affine category and belongs to the chart subcategory via the identity of Spec R. Choose a small representative j with an isomorphism phi : G(j) to chart. Define iota0 to be D(phi.op) followed by the small colimit coprojection at j. The coprojection formula for e1 and naturality of cn give iota0 followed by e1.hom = cn.iota(chart). Use the compatibility of delta with the identity chart, the formula for t and uniqueness of ct-to-c to obtain GammaSpecIso(R).inv followed by iota0 followed by e.hom = rho. Cancel e.hom. If u : Spec B to Spec R is the scheme map underlying phi, then u followed by i is the structure map of G(j). Naturality of toSpecGamma identifies the spectrum of the chart ring map with the limit leg at j followed by u. The defining equation strictHenselizationStructuralMap_eq at j therefore gives the required structural-map equality.",
    "uses": [
     "def-weil-pbc-strict-henselization-structural-map",
     "lem-weil-pbc-etale-local-ring-triples"
@@ -49,9 +49,9 @@
  ],
  "proof_origin": {
   "kind": "agent",
-  "by": "D2",
-  "date": "2026-10-17",
-  "note": "Complete Lean colimit-transport proof following Stacks 04HX, 04GW and 04GP. The consolidated upstream affine-neighbourhood colimit allows use of the actual chart, so the old small-representative comparison step is unnecessary. No new proof holes."
+  "by": "J3",
+  "date": "2026-10-20",
+  "note": "Repair of the returned colimit comparison. The actual chosen ring uses the small representative diagram, so finality transports cn before colimit uniqueness is applied. The chart map is transported through a representative isomorphism and the defining structural cone equation. Simplified comparison orientation and removed two redundant private imports which caused duplicate declarations against the published build. No signature, definition or docstring changes; no new proof holes."
  },
  "mathlib_searches": [
   {
@@ -129,12 +129,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261016T221602-L-1612596",
+  "landing": "20261020T151222-L-2648620",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

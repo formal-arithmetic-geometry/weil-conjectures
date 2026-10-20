@@ -8,8 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.RingTheory.StrictHenselizationTriples
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-! # The maximal ideal in an affine chart of the strict henselization
 
@@ -80,15 +78,15 @@ theorem strictHenselization_chart_maximalIdeal
     strictHenselizationAffineInclusion s
   have : (strictHenselizationAffineInclusion s).IsEquivalence :=
     strictHenselizationAffineInclusion_isEquivalence s
-  let eN : cn.pt ≅ strictHenselizationRing s :=
-    ((Functor.Final.isColimitWhiskerEquiv G.op cn).symm hcn).coconePointUniqueUpToIso
-      (colimit.isColimit (strictHenselizationAffineDiagram s))
-  have hleg (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) :
-      cn.ι.app (op (G.obj j)) ≫ eN.hom = colimit.ι (strictHenselizationAffineDiagram s) (op j) :=
-    IsColimit.comp_coconePointUniqueUpToIso_hom
+  let e₁ : strictHenselizationRing s ≅ cn.pt :=
+    (colimit.isColimit (strictHenselizationAffineDiagram s)).coconePointUniqueUpToIso
       ((Functor.Final.isColimitWhiskerEquiv G.op cn).symm hcn)
-      (colimit.isColimit (strictHenselizationAffineDiagram s)) (op j)
-  let e₁ : strictHenselizationRing s ≅ cn.pt := eN.symm
+  have hleg (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) :
+      colimit.ι (strictHenselizationAffineDiagram s) (op j) ≫ e₁.hom =
+        cn.ι.app (op (G.obj j)) :=
+    IsColimit.comp_coconePointUniqueUpToIso_hom
+      (colimit.isColimit (strictHenselizationAffineDiagram s))
+      ((Functor.Final.isColimitWhiskerEquiv G.op cn).symm hcn) (op j)
   let e₂ : ct.pt ≅ c.pt := hct.coconePointUniqueUpToIso hc
   let e : strictHenselizationRing s ≅ c.pt := e₁ ≪≫ t ≪≫ e₂
   let chart : N := ⟨⟨Etale.mk i, Over.homMk xR rfl⟩, inferInstanceAs (IsAffine (Spec R))⟩
@@ -98,12 +96,8 @@ theorem strictHenselization_chart_maximalIdeal
   let ι0 : D.obj (op chart) ⟶ strictHenselizationRing s :=
     D.map φ.op ≫ colimit.ι (strictHenselizationAffineDiagram s) (op j)
   have hι0 : ι0 ≫ e₁.hom = cn.ι.app (op chart) := by
-    have h := hleg j
-    have h' : colimit.ι (strictHenselizationAffineDiagram s) (op j) ≫ eN.inv =
-        cn.ι.app (op (G.obj j)) := by
-      rw [← h, Category.assoc, Iso.hom_inv_id, Category.comp_id]
-    simp only [ι0, e₁, Iso.symm_hom, Category.assoc]
-    rw [h']
+    simp only [ι0, Category.assoc]
+    rw [hleg]
     exact cn.w φ.op
   have he : ι0 ≫ e.hom = cn.ι.app (op chart) ≫ t.hom ≫ e₂.hom := by
     simp only [e, Iso.trans_hom, ← Category.assoc]
