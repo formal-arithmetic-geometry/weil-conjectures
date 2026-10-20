@@ -38,7 +38,7 @@
    "elementary": false
   },
   {
-   "text": "Choose the bound N_i on each compact stratum and take Finset.univ.sup N. For x in X, the stratification covers x, so choose i containing it. Scheme.exists_comp_eq_of_mem_range lifts X.algClosurePoint x through its immersion; immersions are surjective on stalks. The stratum finite-stalk hypothesis gives Finite at this lifted point. etaleSetInverseImageStalkGerm transfers finiteness and Nat.card to the original set stalk. Its cardinal is bounded by N_i and then by the finite supremum. Point.sheafFiberCompIso for forget AddCommGrpCat transfers these assertions to the original abelian stalk. Supply the size-u filtered-colimit-preservation instance with preservesFilteredColimitsOfSize_shrink. The empty scheme is vacuous and empty finite suprema are zero.",
+   "text": "Choose the bound N_i on each compact stratum and take Finset.univ.sup N. For x in X, the stratification covers x, so choose i containing it. Scheme.exists_comp_eq_of_mem_range lifts X.algClosurePoint x through its immersion; immersions are surjective on stalks. IsFiniteLocallyConstantSheafOfTypes.finite_sheafFiber gives Finite at this lifted point; the local constant-chart bound applies to all separably closed geometric points, including algebraically closed points. etaleSetInverseImageStalkGerm transfers finiteness and Nat.card to the original set stalk. Its cardinal is bounded by N_i and then by the finite supremum. Point.sheafFiberCompIso for forget AddCommGrpCat transfers these assertions to the original abelian stalk. Supply the size-u filtered-colimit-preservation instance with preservesFilteredColimitsOfSize_shrink. The empty scheme is vacuous and empty finite suprema are zero.",
    "uses": [
     "def-weil-pbc-etale-sheaves",
     "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
@@ -53,9 +53,9 @@
   "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
  ],
  "proof_origin": {
-  "by": "J1 stage-3 worker",
+  "by": "E6 stage-3 retirement worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03RW and 095E, finite trivializing-cover argument; fully implemented using the generic constant-sheaf, site-equivalence, inverse-image-stalk and forgetting comparisons. Finiteness is transferred separately, so no deletion of empty charts or choice of a point in every chart is required."
+  "place": "Tags 03RW and 095E, finite trivializing-cover argument; fully implemented using the generic constant-sheaf, site-equivalence, inverse-image-stalk and forgetting comparisons. Finiteness is transferred separately, so no deletion of empty charts or choice of a point in every chart is required. Retired the duplicate Sheaf implementation in favour of the already proved upstream theorem with the identical public signature; updated the consumer import and Lean attachment."
  },
  "mathlib_searches": [
   {
@@ -109,14 +109,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ConstructibleStalkCardinalityBound",
-  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleStalkCardinalityBound.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ConstructibleStalkCardinalityBound",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ConstructibleStalkCardinalityBound.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_stalk_cardinality_bound_of_constructible",
   "statement": "theorem exists_stalk_cardinality_bound_of_constructible\n    (X : Scheme.{u}) [IsNoetherian X]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hF : IsConstructibleEtaleSheafOfSets\n      ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F)) :\n    ∃ N : ℕ, ∀ x : X,\n      Finite (((pointSmallEtale (X.algClosurePoint x)).sheafFiber\n        (A := AddCommGrpCat.{u + 1})).obj F) ∧\n      Nat.card (((pointSmallEtale (X.algClosurePoint x)).sheafFiber\n        (A := AddCommGrpCat.{u + 1})).obj F) ≤ N",
   "branch": "sheaf-dag",
-  "by": "U2",
-  "date": "2026-10-12"
+  "by": "E6",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module in favour of the adopted source module. The public theorem has the identical signature; its upstream proof uses separably closed constant-chart stalk comparisons and the finite_sheafFiber API. The sole consumer now imports this upstream module directly."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -129,14 +130,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J1",
+  "reviewer": "C-a40d4",
+  "group": "E6",
   "result": "pass",
-  "landing": "20261012T110306-L-616753",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221134-L-4148411",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf module and node lean record vs upstream WeilConjectures.AlgebraicGeometry.ConstructibleStalkCardinalityBound (identical signature and imports); consumer diff = one plain import line; compiles + axioms checked"
  },
  "lean_audit": {
   "master": {
