@@ -45,3 +45,7 @@ F1/route-pivot. I confirmed the mechanical finding: Step 5 cites lem-per-snc-bou
 
 L: independent stage-2 immutable head 5dae6d09468e: file-only compilation failed: private overlay Sheaf.Paper.TensorAdjunctionExchange
 timeout after 60 s: the fault is usually a definition that is expensive to unfold, not the limit
+
+## lem-trf-derived-evaluation-canonical-map (2026-10-20 12:24 UTC, branch head no branch)
+
+(the landing tools, head 1df3eea78) the delivery did not land: (merge queue) your landing 20261020T121954-NJ-450639-0 was taken out of the candidate: the global build of be2d44de55 failed in Sheaf.Algebra.Homology.DerivedEvaluationCanonicalMap Sheaf.Algebra.Homology.HomTensorTotal Sheaf.Algebra.Homology.KFlatConeTrianglePresentation job job computation; this change is a possible cause
