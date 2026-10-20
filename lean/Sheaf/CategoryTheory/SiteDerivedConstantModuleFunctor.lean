@@ -50,7 +50,33 @@ theorem siteConstantModuleFunctorGeneral_exact :
     (siteConstantModuleFunctorGeneral J R).Additive ∧
       PreservesFiniteLimits (siteConstantModuleFunctorGeneral J R) ∧
       PreservesFiniteColimits (siteConstantModuleFunctorGeneral J R) := by
-  sorry
+  let P := siteConstantModulePresheafGeneral (C := C) R
+  have : PreservesFiniteLimits P := by
+    constructor
+    intro K _ _
+    constructor
+    intro F
+    constructor
+    intro c hc
+    exact ⟨PresheafOfModules.evaluationJointlyReflectsLimits _ _ (fun X ↦ hc)⟩
+  have : PreservesFiniteColimits P := by
+    constructor
+    intro K _ _
+    constructor
+    intro F
+    constructor
+    intro c hc
+    exact ⟨PresheafOfModules.evaluationJointlyReflectsColimits _ _ (fun X ↦ hc)⟩
+  let S := PresheafOfModules.sheafification
+    (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of R)))
+  change (P ⋙ S).Additive ∧ PreservesFiniteLimits (P ⋙ S) ∧
+    PreservesFiniteColimits (P ⋙ S)
+  have : PreservesFiniteLimits (P ⋙ S) := comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits (P ⋙ S) := comp_preservesFiniteColimits _ _
+  refine ⟨?_, inferInstance, inferInstance⟩
+  apply leftExactFunctor_le_additiveFunctor _ _
+  rw [leftExactFunctor_iff]
+  infer_instance
 
 /-- Apply the existing constant-module functor degreewise and descend at
 quasi-isomorphisms by Mathlib's canonical exact-functor localization.

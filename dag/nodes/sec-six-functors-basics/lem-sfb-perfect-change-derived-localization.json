@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-perfect-change-derived-localization",
+ "kind": "statement",
+ "title": "Perfectness is invariant under changing the derived localization universe",
+ "statement": "Let $R$ be a commutative ring and let two choices of its derived category [def-weil-abstract-derived-category] have arbitrary, independently chosen morphism universes. The canonical equivalence obtained by uniqueness of localization preserves and reflects perfectness [def-pc-perfect-ring-complex]. More precisely it preserves the actual bounded finite-projective representing cochain complex and both bounds: only its marking in the chosen localization changes.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05RU, derived category as localization; uniqueness of localization. Applied to the perfect representative in more-algebra.tex Tag 09AW when transporting its reconstruction to the standard localization in proetale.tex Tag 09C5."
+ },
+ "proof": [
+  {
+   "text": "Let E be the canonical equivalence between the two localization functors Q1 and Q2. Mathlib Localization.compUniqFunctor supplies Q1⋙E.functor≅Q2, and Localization.compUniqInverse supplies Q2⋙E.inverse≅Q1. If K≅Q1(P) is a bounded finite-projective marking, apply E.functor and its comparison to obtain E(K)≅Q2(P). Conversely, from E(K)≅Q2(P), compose the equivalence unit at K, E.inverse applied to the marking, and the inverse comparison at P. The same P, degree bounds, and projective finite terms prove both directions of [def-pc-perfect-ring-complex].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05RU, derived category as localization; uniqueness of localization. Applied to the perfect representative in more-algebra.tex Tag 09AW when transporting its reconstruction to the standard localization in proetale.tex Tag 09C5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes are invariant under the canonical equivalence between two choices of derived localization universe",
+   "results": "8 hits: CategoryTheory.Localization.uniq, CategoryTheory.Functor.IsLocalization.of_equivalence_target, CategoryTheory.Localization.SmallShiftedHom.chgUniv, CategoryTheory.Abelian.Ext.chgUniv, HasDerivedCategory.standard, CategoryTheory.Localization.compEquivalenceFromModelInverseIso, HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences, DerivedCategory.Q",
+   "date": "2026-10-21",
+   "verdict": "The canonical equivalence and its comparison are in Mathlib; the proof specializes them to the existing bounded finite-projective definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing the localization of a derived category preserves bounded finite projective representatives and perfectness",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HasDerivedCategory, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+   "date": "2026-10-21",
+   "verdict": "The canonical equivalence and its comparison are in Mathlib; the proof specializes them to the existing bounded finite-projective definition"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfectRingComplex|compUniqFunctor",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Prod.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean",
+   "date": "2026-10-21",
+   "verdict": "The canonical equivalence and its comparison are in Mathlib; the proof specializes them to the existing bounded finite-projective definition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WContractibleConstantReductionsML",
+  "date": "2026-10-21",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Tag 09C5 first paragraph, completion reconstruction by Tag 09AW: its perfect representative is transported from a small Grothendieck localization to the standard localization without changing any term.",
+   "via": [
+    "lem-sfb-constant-reductions-finite-projective-model",
+    "lem-sfb-wcontractible-constant-reductions-finite-comparison",
+    "lem-sfb-wcontractible-constant-reductions-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectLocalizationChange",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectLocalizationChange.lean",
+  "declaration": "DerivedCategory.isPerfectRingComplex_change_localization_iff",
+  "statement": "theorem isPerfectRingComplex_change_localization_iff {R : Type u} [CommRing R]\n    (h₁ : HasDerivedCategory.{w₁} (ModuleCat.{u} R))\n    (h₂ : HasDerivedCategory.{w₂} (ModuleCat.{u} R))\n    (K : @DerivedCategory (ModuleCat.{u} R) _ _ h₁) :\n    @IsPerfectRingComplex R _ h₂\n        ((Localization.uniq\n          (@DerivedCategory.Q (ModuleCat.{u} R) _ _ h₁)\n          (@DerivedCategory.Q (ModuleCat.{u} R) _ _ h₂)\n          (HomologicalComplex.quasiIso _ (.up ℤ))).functor.obj K) ↔\n      @IsPerfectRingComplex R _ h₁ K",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261020T230849-L-622677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261020T230849-L-622677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

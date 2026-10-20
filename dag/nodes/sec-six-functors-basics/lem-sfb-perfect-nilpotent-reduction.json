@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-perfect-nilpotent-reduction",
+ "kind": "statement",
+ "title": "Perfectness is reflected by a nilpotent derived reduction",
+ "statement": "Let $A$ be a commutative ring and $I\\subset A$ a nilpotent ideal, so $I^N=0$ for some $N\\geq1$. Let $L:D(A)\\to D(A/I)$ be derived extension of scalars [lem-pur-derived-change-of-rings], with its universal left-derived comparison. The two derived localization universes may be chosen independently [def-weil-abstract-derived-category]. If $L(C)$ is perfect [def-pc-perfect-ring-complex], then $C$ is perfect. No finiteness or boundedness hypothesis on $C$ is required.",
+ "stmt_deps": [
+  "lem-pur-derived-change-of-rings",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C5, first proof paragraph (perfection of the finite quotient models), using more-algebra.tex Tag 09AR (lemma-lift-complex-projectives) and algebra.tex Tag 00DV (lemma-NAK)."
+ },
+ "proof": [
+  {
+   "text": "Choose a bounded finite-projective representative E of L(C). Apply [lem-weil-pbc-nilpotent-projective-complex-lift] to obtain a projective complex P representing C, with an actual termwise reduction isomorphism to E.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-weil-pbc-nilpotent-projective-complex-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If E in degree i is zero, then the quotient of P in degree i by I is zero. Thus that term equals its product with I. Inductively it equals its product with every power of I, so it vanishes. Apply this below and above the bounds of E; P has both bounds.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any term, its reduction is finite over A/I and hence finite over A. Lift finitely many quotient generators to define a map f from a finite free A-module onto the quotient. The induced map modulo I is surjective, so [lem-weil-pbc-nakayama-nilpotent] makes f itself surjective. Every term of P is therefore finite. Together with projectivity and the bounds, this proves the conclusion.",
+   "uses": [
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "lem-weil-pbc-nilpotent-projective-complex-lift",
+  "lem-weil-pbc-nakayama-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C5, first proof paragraph (perfection of the finite quotient models), using more-algebra.tex Tag 09AR (lemma-lift-complex-projectives) and algebra.tex Tag 00DV (lemma-NAK)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived complex with perfect reduction modulo a nilpotent ideal is perfect",
+   "results": "8 hits: HasDerivedCategory.standard, PerfectRing.ofFiniteOfIsReduced, DerivedCategory, RingHom.pNilradical_le_ker_of_perfectRing, PerfectClosure.mk, PreTilt, perfectSpace_of_module, Perfection.perfectRing",
+   "date": "2026-10-21",
+   "verdict": "No perfect-complex theorem; search confused the coefficient ring perfection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes lift across a nilpotent quotient ring",
+   "results": "8 hits: PerfectRing.lift_lift, PerfectRing.lift_lift_apply, PerfectRing.comp_lift, PerfectRing.liftEquiv_apply, PerfectRing.lift_comp_lift, PerfectRing.lift_comp_lift_apply, PerfectRing.lift_comp_lift_apply_eq_self, PerfectRing.comp_lift_apply",
+   "date": "2026-10-21",
+   "verdict": "No perfect-complex lifting theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*nilpotent|nilpotent.*perfect",
+   "results": "6 hits: Mathlib/GroupTheory/IsPerfect.lean, Mathlib/LinearAlgebra/JordanChevalley.lean, Mathlib/LinearAlgebra/JordanChevalley.lean, Mathlib/LinearAlgebra/JordanChevalley.lean, Mathlib/LinearAlgebra/JordanChevalley.lean, Mathlib/LinearAlgebra/JordanChevalley.lean",
+   "date": "2026-10-21",
+   "verdict": "Only group perfectness and Jordan decomposition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WContractibleConstantReductionsML",
+  "date": "2026-10-21",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Tag 09C5 first paragraph: deducing perfection of each algebraic finite reduction from its perfect residue by nilpotent lifting; used by the geometric finite-projective-model node.",
+   "via": [
+    "lem-sfb-constant-reductions-finite-projective-model",
+    "lem-sfb-wcontractible-constant-reductions-finite-comparison",
+    "lem-sfb-wcontractible-constant-reductions-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PerfectNilpotentReduction",
+  "file": "lean/Sheaf/RingTheory/PerfectNilpotentReduction.lean",
+  "declaration": "DerivedCategory.perfect_of_nilpotent_reduction",
+  "statement": "theorem perfect_of_nilpotent_reduction\n    {A : Type u} [CommRing A] (I : Ideal A)\n    (hI : ∃ N : ℕ, 1 ≤ N ∧ I ^ N = ⊥)\n    [HasDerivedCategory.{w} (ModuleCat.{u} A)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} (A ⧸ I))]\n    (L : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} (A ⧸ I)))\n    (ε : Qh ⋙ L ⟶\n      @Functor.mapHomotopyCategory _ _ _ _ _ _ _\n        (ModuleCat.extendScalars (Ideal.Quotient.mk I))\n        (ModuleCat.extendRestrictScalarsAdj (Ideal.Quotient.mk I)).left_adjoint_additive\n        (.up ℤ) ⋙ Qh)\n    [L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ))]\n    (C : DerivedCategory (ModuleCat.{u} A))\n    (hC : IsPerfectRingComplex (L.obj C)) : IsPerfectRingComplex C",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261020T230849-L-622677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261020T230849-L-622677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
