@@ -19,7 +19,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # The vector bundle Spec Sym(F), its augmentation and zero section
@@ -203,6 +202,26 @@ def zeroRestricted (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
   (zero S d F).resLE ((π S d F) ⁻¹ᵁ V) V
     (by rw [← Scheme.Hom.comp_preimage, (zero_spec S d F).1]; simp)
 
+/-- The two compatibility equations for the affine relative-spectrum chart.
+This is the equation portion of `affineChart_spec`; it is split out because the
+relative-spectrum construction and the zero-section comparison are independent of
+chart invertibility. Source: Stacks Project, Constructions, Tags 01LX and 01M2.
+Proof: use the affine symmetric-algebra section bijection and the relative-spectrum chart
+characterization. Scalar compatibility gives the first equation, and augmentation_spec gives
+the second.
+(blueprint: lem-asd-vector-bundle-affine-chart-equations). -/
+theorem affineChart_equations (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
+    [F.IsFiniteLocallyFreeOfRank d] (U : S.affineOpens) :
+    (affineChart S d F U ≫
+      Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.obj (op U.1))
+        (SymmetricAlgebraSheaf.sections F (op U.1)))) ≫ U.2.isoSpec.inv = (π S d F) ∣_ U.1) ∧
+    (zeroRestricted S d F U.1 ≫ affineChart S d F U =
+      U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
+        (SymmetricAlgebra.algebraMapInv (R := S.presheaf.obj (op U.1))
+          (M := F.val.obj (op U.1))).toRingHom)) := by
+  sorry
+
+set_option linter.style.haveILetI false in
 /-- The affine charts are isomorphisms over the corresponding base affine opens, and the
 zero section in these charts is exactly the spectrum of the augmentation.
 Source: Stacks Tags 01LX and 01M2 (blueprint: def-asd-vector-bundle-zero-section).
@@ -222,8 +241,30 @@ theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modu
     (zeroRestricted S d F U.1 ≫ affineChart S d F U =
       U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
         (SymmetricAlgebra.algebraMapInv (R := S.presheaf.obj (op U.1))
-          (M := F.val.obj (op U.1))).toRingHom)) := by
-  sorry
+          (M := F.val.obj (op U.1))).toRingHom))   := by
+  letI := SheafOfModules.IsFiniteLocallyFreeOfRank.isLocallyFree F d
+  have hq := quasiCoherentSymmetricAlgebra_affine_comparison S F
+  have hsec : IsIso (CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap F (op U.1))) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr (hq.2 U)
+  have hchart := (affine_morphism_relative_spec S).2.choose_spec.choose_spec.choose_spec.2.1
+    (algebraObject S d F) U.1 U.2
+  letI := hsec
+  haveI : IsIso ((algebraIso S d F).hom.right.hom) := by infer_instance
+  haveI : IsIso ((algebraIso S d F).hom.right.hom.app (op U.1)) := by infer_instance
+  have hrel : IsIso (((π S d F) ⁻¹ᵁ U.1).toSpecΓ ≫
+      Spec.map ((algebraIso S d F).hom.right.hom.app (op U.1))) := by
+    change IsIso (((π S d F) ⁻¹ᵁ U.1).toSpecΓ ≫
+      Spec.map ((algebraIso S d F).hom.right.hom.app (op U.1))) at hchart
+    exact hchart
+  letI := hrel
+  haveI : IsIso (Spec.map (CommRingCat.ofHom
+      (SymmetricAlgebraSheaf.sectionMap F (op U.1)))) := by infer_instance
+  have hi : IsIso (affineChart S d F U) := by
+    dsimp [affineChart]
+    rw [Spec.map_comp, ← Category.assoc]
+    infer_instance
+  have heq := affineChart_equations S d F U
+  exact ⟨hi, heq.1, heq.2⟩
 
 /-- On an inclusion of affine opens, the chart change is the spectrum of the
 symmetric-algebra restriction, so these are exactly the affine pieces glued in the node.
