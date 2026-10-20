@@ -18008,3 +18008,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:11 L: merged deliver/ND/lem-sfb-pushforward-comp-monoidal (reviewer FIX; first push; new nodes: 1)
 - 13:11 L: returned deliver/X7/Sheaf.AlgebraicGeometry.PullbackConstantModelConstructible (reviewer RETURN: (the landing tools, head 104b983ad) the delivery did not land: lean/Sheaf/AlgebraicGeometry/PullbackConstantModelConstru)
 - 13:11 L: returned deliver/X7/Sheaf.AlgebraicGeometry.UnboundedCompactSupportProperComposition (reviewer RETURN: (the landing tools, head d2e5b68e9) the delivery did not land: lean/Sheaf/AlgebraicGeometry/UnboundedCompactSupportPrope)
+- 13:11 L: returned deliver/X8/Sheaf.Paper.AdicPurityTwistReduction (reviewer RETURN: (the landing tools, head b69f9b13f) the delivery did not land: lean/Sheaf/Paper/AdicPurityTwistReduction.lean changed on)
