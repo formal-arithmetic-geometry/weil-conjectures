@@ -17,42 +17,28 @@
  },
  "proof": [
   {
-   "text": "Apply exists_affineDerivedPushforwardSheafEdge to obtain the sheaf-level edge epsilon, with its derived-unit normalization. Transfer finite-limit and finite-colimit preservation from scalar restriction followed by tilde_B across the supplied sigma, so tilde_A followed by pushforward preserves homology.",
+   "text": "Apply exists_affinePushforwardCohomologyEdge_identity to obtain a natural transformation alpha and its normalization for every canonical representative. The complete identity theorem constructs alpha using the sheaf edge, the supplied ordinary comparison, and the tilde/Gamma counit, and proves its normalization by naturality, the adjunction triangle identity, and comparison factorization.",
    "uses": [
-    "lem-pc-affine-derived-pushforward-sheaf-edge",
-    "def-pc-affine-base-change-tilde-coordinates"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Construct alpha by whiskering sigma with Gamma_A H^i, followed by pushforward of the tilde/Gamma counit, then epsilon. These are composites of natural transformations. Eliminate the object equality in the normalization hypothesis and use Iso.ext to reduce t to the identity.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-pc-affine-pushforward-cohomology-edge-identity"
    ],
    "elementary": true
   },
   {
-   "text": "Naturality of sigma moves the representative coordinate map across sigma. Naturality of the counit and the left triangle identity cancel the tilde unit, leaving pushforward of the inverse exact-homology and Q/homology comparisons. Apply the sheaf-edge normalization. Finally homologyMap_mapNatTrans and naturality of homologyFunctorFactors identify the remaining composite with the specified q.",
-   "uses": [
-    "def-pc-affine-pushforward-comparison-coordinates",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
+   "text": "For a representative t whose hom is eqToHom of an object equality, unpack the target as (K, hK), eliminate that object equality, and use Iso.ext to identify t with Iso.refl. Apply the obtained canonical normalization to C and hK. This works for arbitrary complexes and rings, including zero complexes and the zero ring.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-affine-base-change-tilde-coordinates",
-  "def-pc-affine-pushforward-comparison-coordinates",
-  "lem-pc-affine-derived-pushforward-sheaf-edge",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  "lem-pc-affine-pushforward-cohomology-edge-identity"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q4",
-  "date": "2026-10-14",
+  "group": "E2",
+  "date": "2026-10-21",
   "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
   "place": "0AVW, proof, cohomology display; 08D4, bound-one truncation comparison, applied on inverse images of affine opens.",
-  "note": "Proposed coordinate calculation; independent homology and adjunction calculations compile, but the item cannot yet be checked because its pre-existing coordinate import is absent from the published compiled library."
+  "note": "Record the existing complete upstream proof verbatim: apply the identity-edge theorem, eliminate the object equality, identify the representative isomorphism with Iso.refl by Iso.ext, and specialize the normalization. This actual consumer imports the canonical upstream identity module directly and does not use the Sheaf compatibility re-export. The former direct proof dependencies remain reachable through the identity theorem and its coordinate dependencies; no mathematical lemma or unit route is bypassed. The proof compiles on the server and its axioms are propext, Classical.choice, and Quot.sound."
  },
  "mathlib_searches": [
   {
@@ -100,7 +86,7 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
+  "existing": true,
   "module": "WeilConjectures.Algebra.Homology.AffinePushforwardCohomologyEdgeExists",
   "file": "lean/WeilConjectures/Algebra/Homology/AffinePushforwardCohomologyEdgeExists.lean",
   "declaration": "AlgebraicGeometry.exists_affinePushforwardCohomologyEdge",
@@ -120,12 +106,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T222409-L-1225228",
+  "landing": "20261020T162303-L-3586464",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
