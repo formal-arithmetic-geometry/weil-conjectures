@@ -1,23 +1,11 @@
 module
 
-
-
-public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.CategoryTheory.Iso
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Sheaf.Paper.PurInverseImageTensorHomDefinitions
+import Sheaf.Paper.PurInverseImageTensorComparison
+import Sheaf.Paper.PurInverseImageHomComparison
+import Sheaf.Paper.PurInverseImageScalarComparison
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
 import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.AlgebraicGeometry.ProEtaleIsomorphismInverseImage
-import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 
 /-!
 # Inverse image, tensor products, and internal Hom on the small pro-etale site
@@ -38,80 +26,55 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
+attribute [local irreducible] AlgebraicGeometry.Scheme.proEtaleModuleInverseImage
+  Functor.sheafPullbackConstruction.sheafPullback
+  Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Extension of scalars after inverse image, for the coefficient-extension clause. Source:
-Stacks Tag 03EK (blueprint: lem-pur-isomorphism-inverse-image-tensor-hom). -/
-noncomputable abbrev inverseImageScalarExtension
-    {X Y : AlgebraicGeometry.Scheme.{u}} (g : X ⟶ Y)
-    (O O' : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (α : O ⟶ O')
+private instance commRingSheafify (Z : Scheme.{u}) :
+    HasWeakSheafify (ProEt.topology Z) CommRingCat.{u + 1} := inferInstance
+private instance abelianSheafify (Z : Scheme.{u}) :
+    HasWeakSheafify (ProEt.topology Z) AddCommGrpCat.{u + 1} := inferInstance
+
+private theorem positiveTensorPowerMixed_comparison
+    {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (σ : ∀ (F G : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O)),
+      (proEtaleModuleInverseImage g O).obj
+          ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} G).obj F) ≅
+        (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
+          ((proEtaleModuleInverseImage g O).obj G)).obj
+          ((proEtaleModuleInverseImage g O).obj F))
     (F : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O)) :
-    SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-      ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj O')) :=
-  SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} (J := ProEt.topology X)
-    ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).map α)
-    ((proEtaleModuleInverseImage g O).obj F)
+    ∀ (m : ℕ) (hm : 0 < m),
+      Nonempty ((proEtaleModuleInverseImage g O).obj
+          (positiveTensorPowerMixed O F m hm) ≅
+        positiveTensorPowerMixed
+          ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj O)
+          ((proEtaleModuleInverseImage g O).obj F) m hm) := by
+  intro m
+  induction m using Nat.twoStepInduction with
+  | zero => intro hm; exact False.elim (Nat.not_lt_zero 0 hm)
+  | one => intro _; exact ⟨Iso.refl _⟩
+  | more n _ ih =>
+    intro hm
+    obtain ⟨e⟩ := ih (Nat.succ_pos n)
+    exact ⟨σ (positiveTensorPowerMixed O F (n + 1) (Nat.succ_pos n)) F ≪≫
+      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
+        ((proEtaleModuleInverseImage g O).obj F)).mapIso e⟩
 
-/-- Positive tensor powers in the mixed-universe module category, using the sectionwise tensor
-product followed by sheafification.
-Source: Stacks Tag 03EK (blueprint: lem-pur-isomorphism-inverse-image-tensor-hom). -/
-noncomputable def positiveTensorPowerMixed {X : AlgebraicGeometry.Scheme.{u}}
-    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (M : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :
-    (n : ℕ) → 0 < n → SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
-  | 0, h => False.elim (Nat.not_lt_zero 0 h)
-  | 1, _ => M
-  | n + 2, _ =>
-      (show SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) from
-        (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} M).obj
-          (positiveTensorPowerMixed R M (n + 1) (Nat.succ_pos n)))
-
-/-- A pure tensor followed by module sheafification. Source: Stacks Tag 03EK
-(blueprint: lem-pur-isomorphism-inverse-image-tensor-hom). -/
-noncomputable def purTensorSection {X : AlgebraicGeometry.Scheme.{u}}
-    (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (F G : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O))
-    (V : X.ProEt) (s : F.val.obj (op V)) (t : G.val.obj (op V)) :
-    ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} G).obj F).val.obj
-      (op V) :=
-  (CategoryTheory.toSheafify (ProEt.topology X)
-    (SheafOfModules.siteTensorPresheaf F.val G.val).presheaf).app (op V)
-      (s ⊗ₜ[O.obj.obj (op V)] t)
-
-/-- The actual module inverse-image unit on sections, using the recorded small model.
-Source: Stacks Tags 03D2 and 09A5
-(blueprint: lem-pur-isomorphism-inverse-image-tensor-hom). -/
-noncomputable def purInverseImageSection {X Y : AlgebraicGeometry.Scheme.{u}}
-    (g : X ⟶ Y) (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (F : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O))
-    (V : Y.ProEt) (s : F.val.obj (op V)) :
-    ((proEtaleModuleInverseImage g O).obj F).val.obj
-      (op ((proEtaleBaseChange g).obj V)) :=
-  (((SheafOfModules.pullbackPushforwardAdjunction (proEtaleModelRingUnit g O)).unit.app
-    ((proEtaleModuleToModel ((sheafCompose (ProEt.topology Y)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O)).obj F)).val.app
-        (op (AsSmall.up.obj V))) s
-
-/-- Pure scalar-extension sections, in the recorded mixed-universe construction.
-Source: Stacks Tag 03EK (blueprint: lem-pur-isomorphism-inverse-image-tensor-hom). -/
-noncomputable def purScalarSection {X : AlgebraicGeometry.Scheme.{u}}
-    (O O' : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (α : O ⟶ O')
-    (F : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O))
-    (V : X.ProEt) (b : O'.obj.obj (op V)) (s : F.val.obj (op V)) :
-    (SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} α F).val.obj
-      (op V) :=
-  (CategoryTheory.toSheafify (ProEt.topology X)
-    (SheafOfModules.changeOfRingsPresheafOfUniverses α F).presheaf).app (op V)
-      (b ⊗ₜ[O.obj.obj (op V), (α.hom.app (op V)).hom] s)
+private theorem inverseImage_preservesTowers
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
+    PreservesLimitsOfShape ℕᵒᵖ (proEtaleModuleInverseImage g O) := by
+  obtain ⟨_, _, _, h, _⟩ := (proEtale_immersion_inverseImage_preservesLimits g).2.2 O
+  let : PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleModuleInverseImage g O) := h
+  have : PreservesLimitsOfSize.{0, 0} (proEtaleModuleInverseImage g O) :=
+    preservesSmallestLimits_of_preservesLimits (proEtaleModuleInverseImage g O)
+  infer_instance
 
 /-- Inverse image along a scheme isomorphism preserves tensor products and internal Hom,
 with the normalized functoriality, tensor-power, scalar-extension, and inverse-limit
@@ -233,6 +196,23 @@ theorem inverseImage_tensor_hom_iso
             ∀ (n : ℕᵒᵖ),
               e.hom ≫ (limit.π (D ⋙ proEtaleModuleInverseImage g O) n) =
                 (proEtaleModuleInverseImage g O).map (limit.π D n)) := by
-  sorry
+  exact ⟨Classical.choose (purInverseImageTensorComparison g O),
+    Classical.choose (purInverseImageHomComparison g O),
+    (Classical.choose_spec (purInverseImageTensorComparison g O)).1,
+    (Classical.choose_spec (purInverseImageHomComparison g O)).1,
+    (Classical.choose_spec (purInverseImageTensorComparison g O)).2,
+    (fun F G G' b V s t =>
+      (Classical.choose_spec (purInverseImageTensorComparison g O)).1 F G' V s
+        (b.val.app (op V) t)),
+    (Classical.choose_spec (purInverseImageHomComparison g O)).2,
+    positiveTensorPowerMixed_comparison g O
+      (Classical.choose (purInverseImageTensorComparison g O)),
+    purInverseImageScalarComparison g O,
+    by
+      let : PreservesLimitsOfShape ℕᵒᵖ (proEtaleModuleInverseImage g O) :=
+        inverseImage_preservesTowers g O
+      intro D
+      exact ⟨preservesLimitIso (proEtaleModuleInverseImage g O) D,
+        fun n => preservesLimitIso_hom_π (proEtaleModuleInverseImage g O) D n⟩⟩
 
 end AlgebraicGeometry.Scheme

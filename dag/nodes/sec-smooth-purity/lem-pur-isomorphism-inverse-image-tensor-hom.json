@@ -26,116 +26,43 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=X_{\\mathrm{proet}}$, $\\mathcal D=Y_{\\mathrm{proet}}$. Apply [lem-weil-proetale-isomorphism-inverse-image], part 1: $\\Phi:\\mathcal C\\to\\mathcal D$, $(U,u)\\mapsto(U,gu)$, and $\\Psi:(V,v)\\mapsto(V,g^{-1}v)$ are inverse site equivalences, and $g^{-1}F$ is naturally identified with $TF:=F\\circ\\Phi^{op}$. Write $SQ=Q\\circ\\Psi^{op}$. Both reindexings preserve sheaves since they and their inverses preserve coverings. Set $R=T\\mathcal O$. For a module sheaf the action on $TF(U)=F(\\Phi U)$ is precisely the $\\mathcal O(\\Phi U)=R(U)$-action. The same relabelling on morphisms has inverse $S$, using the unit and counit of the site equivalence to identify $SR$ with $\\mathcal O$. Thus $T$ and $S$ are inverse equivalences on module sheaves and also on module presheaves; linearity and the restriction law are the sectionwise conditions of [def-weil-sheaf-of-modules-category]. This argument allows an arbitrary sheaf $\\mathcal O$ of commutative rings, not just a constant sheaf.",
+   "text": "Obtain the normalized tensor comparison and its first-variable naturality from [lem-pur-inverse-image-tensor-comparison]. Obtain the normalized internal-Hom comparison and joint naturality from [lem-pur-inverse-image-hom-comparison]. The displayed second-variable tensor section equation is the tensor normalization applied to the section b(t).",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-sheaf-of-modules-category"
+    "lem-pur-inverse-image-tensor-comparison",
+    "lem-pur-inverse-image-hom-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CV (section-sheaves-modules), Definition 03CW (definition-sheaf-modules); site equivalence and section formula: proetale.tex Tag 09A5 (section-morphism), specialized by the cited lemma"
-   }
+   "elementary": true
   },
   {
-   "text": "For a presheaf $P$ of $\\mathcal O$-modules the reindexed sheafification map $TP\\to T(P^\\#)$ exhibits $T(P^\\#)$ as the sheafification of $TP$. Indeed, for any $R$-module sheaf $Q$, reindexing a linear map by $S$, applying the universal property in [def-weil-presheaf-modules-sheafification], and reindexing back give mutually inverse bijections\n$$\\operatorname{Hom}(TP,Q)\\cong\\operatorname{Hom}(P,SQ)\\cong\\operatorname{Hom}(P^\\#,SQ)\\cong\\operatorname{Hom}(T(P^\\#),Q).$$\nHere Hom from a presheaf means presheaf morphisms. Each inverse is the corresponding reverse reindexing or the unique factorization. In particular the two extensions of $TP\\to T(P^\\#)$ and $TP\\to(TP)^\\#$ give maps $(TP)^\\#\\rightleftarrows T(P^\\#)$ whose composites are identities by uniqueness. This gives a natural isomorphism $T(P^\\#)\\cong(TP)^\\#$, compatible with the sheafification maps.",
+   "text": "For positive tensor powers use two-step natural number induction: zero has no positive witness, one uses the identity, and at n+2 compose the tensor comparison for (F^(n+1),F) with the tensor functor applied to the inductive isomorphism. Use [lem-pur-inverse-image-scalar-comparison] for the normalized extension of scalars. The recorded definitions and unit-section conventions are those of [def-pur-inverse-image-tensor-hom-sections].",
    "uses": [
-    "def-weil-presheaf-modules-sheafification"
+    "lem-pur-inverse-image-tensor-comparison",
+    "lem-pur-inverse-image-scalar-comparison",
+    "def-pur-inverse-image-tensor-hom-sections"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), universal property; elementary reindexing argument"
-   }
+   "elementary": true
   },
   {
-   "text": "For $P=\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G$, the definition [def-pur-sheaf-tensor-product] gives, naturally in $U$,\n$$TP(U)=\\mathcal F(\\Phi U)\\otimes_{\\mathcal O(\\Phi U)}\\mathcal G(\\Phi U)=(T\\mathcal F\\otimes_{p,R}T\\mathcal G)(U).$$\nThe restriction maps are identical, since both send $s\\otimes t$ to $s|\\otimes t|$. Sheafify this identity and use step 2 to obtain $\\sigma:T(\\mathcal F\\otimes_{\\mathcal O}\\mathcal G)\\xrightarrow{\\sim}T\\mathcal F\\otimes_R T\\mathcal G$. Compatibility with the sheafification maps gives $T(s\\otimes t)\\mapsto Ts\\otimes Tt$. For later use, two maps out of this sheaf tensor are equal if they agree on the sectionwise pure tensors: precompose with the presheaf tensor to sheafification map, use that pure tensors generate each algebraic tensor product, then use uniqueness in the sheafification universal property. For the iterated criterion one can work locally: if $P\\to P^\\#$ is the sheafification map of an abelian presheaf, its sheafification is an isomorphism by the universal property (both sheafifications are $P^\\#$ with the same unit). Applying [lem-weil-pbc-site-sheafification-iso-locally-bijective] shows that every section of $P^\\#$ locally comes from $P$, and that two presheaf sections with the same image become equal on a covering. This applies to module sheafification because [def-weil-presheaf-modules-sheafification] constructs its underlying abelian sheaf by abelian sheafification. Thus a section of a sheaf tensor is locally a finite sum of pure tensors. In a nested tensor, locally express its finitely many inner tensor sections as finite sums, refining the finitely many coverings, and expand by bilinearity. Every nested tensor section is consequently locally a finite sum of nested pure tensors, so agreement there implies agreement everywhere by the sheaf separation axiom.",
+   "text": "Apply [lem-weil-pbc-proetale-immersion-limit-preservation] to the scheme isomorphism g, which is an immersion. Its module clause preserves all limits of the recorded size, hence countable inverse limits. Apply the canonical preservation-of-limit isomorphism to each tower; its projection equation gives precisely the requested clause [def-pur-sheaf-inverse-limit].",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), tensor definition and bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), comparison specialized to an equivalence; Tag 00WK (sites.tex lemma-sections-sheafification) and Mathlib Sites/LocallyBijective.lean:114,153 with Sites/Localization.lean:80, applied through the cited locally-bijective criterion"
-   }
-  },
-  {
-   "text": "For $U\\in\\mathcal C$, the functor $\\Phi_U:\\mathcal C/U\\to\\mathcal D/\\Phi U$ sends $(V\\to U)$ to $(\\Phi V\\to\\Phi U)$. Its inverse sends $(W\\to\\Phi U)$ to $(\\Psi W\\to\\Psi\\Phi U\\cong U)$; the unit and counit come from those of $\\Phi,\\Psi$. Coverings are the underlying coverings, by [def-pur-localized-ringed-site], so these reindexings also preserve sheaves. Reindexing an $\\mathcal O|_{\\Phi U}$-linear natural transformation along $\\Phi_U$ has inverse reindexing along this quasi-inverse, and identifies its source and target with $(T\\mathcal F)|_U,(T\\mathcal G)|_U$. Hence [def-pur-sheaf-hom] gives a bijective $R(U)$-linear map\n$$T\\mathcal Hom_{\\mathcal O}(\\mathcal F,\\mathcal G)(U)=\\operatorname{Hom}_{\\mathcal O|_{\\Phi U}}(\\mathcal F|_{\\Phi U},\\mathcal G|_{\\Phi U})\\xrightarrow{\\sim}\\operatorname{Hom}_{R|_U}((T\\mathcal F)|_U,(T\\mathcal G)|_U).$$\nExplicitly, the component of the image of $\\varphi$ at $(V\\to U)$ is $\\varphi_{\\Phi V}$. For $U'\\to U$, both restricting this map and first restricting $\\varphi$ have that same component at every $V\\to U'$. The bijections therefore define the sheaf isomorphism $\\eta$, with the required local-section rule. No finite-presentation hypothesis is used.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-pur-localized-ringed-site",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04IX (definition-localize-ringed-site), Tag 04TT (section-internal-hom) and Tag 0GMX (remark-pullback-internal-hom); elementary slice-equivalence calculation"
-   }
-  },
-  {
-   "text": "The constructions are natural in both variables. For module maps $a:\\mathcal F\\to\\mathcal F'$ and $b:\\mathcal G\\to\\mathcal G'$, both tensor-comparison composites send the sectionwise pure tensor $s\\otimes t$ to $T a(s)\\otimes T b(t)$, so they agree by the uniqueness criterion in step 3. For $a:\\mathcal F'\\to\\mathcal F$ and $b:\\mathcal G\\to\\mathcal G'$, the Hom-comparison square commutes because on every slice component reindexing sends $b\\varphi a$ to $(Tb)(T\\varphi)(Ta)$. These formulas are exactly covariant tensor naturality and contravariant/covariant Hom naturality.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product) and Tag 04TT (section-internal-hom), functoriality of the defining operations"
-   }
-  },
-  {
-   "text": "Use [lem-pc-sheaf-modules-tensor-closed] for the associativity, symmetry and unit isomorphisms of the sheaf tensor product over both $\\mathcal O$ and $R$. Its statement specifies that these are induced by the section-module maps, hence their formulas are $(s\\otimes t)\\otimes h\\mapsto s\\otimes(t\\otimes h)$, $s\\otimes t\\mapsto t\\otimes s$, $a\\otimes s\\mapsto as$, and $s\\otimes a\\mapsto as$. Check the comparison diagrams using the pure-tensor formula of step 3. In the associativity diagram both paths send $T((s\\otimes t)\\otimes h)$ to $Ts\\otimes(Tt\\otimes Th)$. In the symmetry diagram both paths send $T(s\\otimes t)$ to $Tt\\otimes Ts$. The left and right unit diagrams both give $Ta\\,Ts=T(as)$ from $T(a\\otimes s)$ and $T(s\\otimes a)$ respectively. By the iterated local generation criterion proved in step 3 these equalities imply equality of the sheaf morphisms. For tensor powers use the recursion of [def-pur-sheaf-tensor-product]: at $m=1$ take the identity; at $m+1$ follow $\\sigma_{\\mathcal F^{\\otimes m},\\mathcal F}$ by the tensor product of the $m$ comparison and the identity. Induction gives an isomorphism for every $m\\geq1$, with compatibility under rebracketing supplied by the associativity diagram just checked.",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), associativity of the sheaf tensor; Tag 03EO (lemma-internal-hom-adjoint-tensor), via the existing symmetric-monoidal-closed statement; explicit pure-tensor verification of the comparison diagrams"
-   }
-  },
-  {
-   "text": "Given $\\alpha:\\mathcal O\\to\\mathcal O'$, regard $\\mathcal O'$ as an $\\mathcal O$-module through $\\alpha$. Substitute $\\mathcal G=\\mathcal O'$ in step 3. The reindexed action is through $T\\alpha:R\\to T\\mathcal O'$, so the result is precisely $g^{-1}(\\mathcal F\\otimes_{\\mathcal O}\\mathcal O')\\cong g^{-1}\\mathcal F\\otimes_{g^{-1}\\mathcal O}g^{-1}\\mathcal O'$, with change of rings as in [def-pur-sheaf-tensor-product]. This proves the claimed $R$-linear isomorphism for any ring sheaf $\\mathcal O'$. When $\\mathcal O'$ is commutative, it also respects the $T\\mathcal O'$-actions: multiplication by a local section $b$ sends $s\\otimes t$ to $s\\otimes bt$ on both sides, and the equality extends by step 3. This extra linearity uses commutativity to commute $b$ with the image of $\\alpha$ in the tensor balancing relation. No flatness of $\\mathcal O'$ is required.",
-   "uses": [
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), change of rings definition"
-   }
-  },
-  {
-   "text": "Finally [def-pur-sheaf-inverse-limit] computes module inverse limits sectionwise. For every $U$, under step 1 the canonical comparison is the identity identification\n$$T(\\varprojlim_n\\mathcal F_n)(U)=(\\varprojlim_n\\mathcal F_n)(\\Phi U)=\\{(x_n):t_n(x_{n+1})=x_n\\}=\\varprojlim_n(T\\mathcal F_n)(U).$$\nBoth restrictions and the $R(U)=\\mathcal O(\\Phi U)$-action are componentwise, so the identifications give an $R$-linear sheaf isomorphism. Its composites with every projection are the reindexed projections, showing that it is the canonical map in the statement, naturally in the inverse system.",
-   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
     "def-pur-sheaf-inverse-limit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DB (lemma-limits-colimits) and Tag 03CO (lemma-limits-colimits-abelian-sheaves), sectionwise limits"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-presheaf-modules-sheafification",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-  "def-pur-localized-ringed-site",
-  "def-pur-sheaf-hom",
-  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-inverse-image-tensor-comparison",
+  "lem-pur-inverse-image-hom-comparison",
+  "lem-pur-inverse-image-scalar-comparison",
+  "def-pur-inverse-image-tensor-hom-sections",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
   "def-pur-sheaf-inverse-limit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03EK, 03CY, 04TT, 04IX and 03DB; explicit reindexing argument for the site equivalence of lem-weil-proetale-isomorphism-inverse-image. Tag 03EL supplies the general tensor comparison and Tag 0GMX the Hom comparison formula; 0GN2 is not applied. Local generation uses lem-weil-pbc-site-sheafification-iso-locally-bijective. The existing lem-pc-sheaf-modules-tensor-closed supplies the associativity, symmetry and unit isomorphisms; their compatibility with reindexing is checked explicitly."
+  "place": "Tags 03EL, 0GMX and 0GN2; normalized tensor and Hom comparisons, tensor-power induction, scalar comparison, and the existing all-limit preservation theorem for immersions."
  },
  "mathlib_searches": [
   {
@@ -333,8 +260,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-weil-proetale-isomorphism-inverse-image"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -356,11 +282,6 @@
   "module": "Sheaf.Paper.PurInverseImageTensorHom",
   "declaration": "AlgebraicGeometry.Scheme.inverseImage_tensor_hom_iso",
   "declarations": [
-   "AlgebraicGeometry.Scheme.inverseImageScalarExtension",
-   "AlgebraicGeometry.Scheme.positiveTensorPowerMixed",
-   "AlgebraicGeometry.Scheme.purTensorSection",
-   "AlgebraicGeometry.Scheme.purInverseImageSection",
-   "AlgebraicGeometry.Scheme.purScalarSection",
    "AlgebraicGeometry.Scheme.inverseImage_tensor_hom_iso"
   ],
   "file": "lean/Sheaf/Paper/PurInverseImageTensorHom.lean",
@@ -369,5 +290,15 @@
   "by": "NW",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d594b",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261020T122126-L-482098",
+  "kind": "interface",
+  "note": "independent cc review: Proof of inverseImage_tensor_hom_iso (statement byte-identical to live) checked against node lem-pur-isomorphism-inverse-image-tensor-hom, 4 new nodes, change record; 5 delivered modules + 6 importers (+PurityFiniteKummerLevel) compiled; moved defs reducibly defeq to originals; axioms only upstream sorryAx"
  }
 }
