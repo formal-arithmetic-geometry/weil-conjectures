@@ -32,41 +32,6 @@ open CategoryTheory
 
 namespace Rep
 
-private theorem universalDeltaFunctor_iso_all
-    {C D : Type*} [Category C] [Abelian C] [Category D] [Abelian D]
-    (T R : CohomologicalDeltaFunctor C D) (hT : T.IsUniversal) (hR : R.IsUniversal)
-    (e : T.F 0 ≅ R.F 0) : ∀ q : ℕ, Nonempty (T.F q ≅ R.F q) := by
-  intro q
-  obtain ⟨α, hα, _⟩ := hT R e.hom
-  obtain ⟨β, hβ, _⟩ := hR T e.inv
-  let idT : CohomologicalDeltaFunctor.Hom T T :=
-    ⟨fun n ↦ 𝟙 (T.F n), by intros; simp⟩
-  let idR : CohomologicalDeltaFunctor.Hom R R :=
-    ⟨fun n ↦ 𝟙 (R.F n), by intros; simp⟩
-  let αβ : CohomologicalDeltaFunctor.Hom T T :=
-    ⟨fun n ↦ α.app n ≫ β.app n, by
-      intro S hS n
-      simp only [NatTrans.comp_app, ← Category.assoc]
-      rw [α.naturality S hS n]
-      simp only [Category.assoc]
-      rw [β.naturality S hS n]⟩
-  let βα : CohomologicalDeltaFunctor.Hom R R :=
-    ⟨fun n ↦ β.app n ≫ α.app n, by
-      intro S hS n
-      simp only [NatTrans.comp_app, ← Category.assoc]
-      rw [β.naturality S hS n]
-      simp only [Category.assoc]
-      rw [α.naturality S hS n]⟩
-  have hαβ : αβ = idT := (hT T (𝟙 (T.F 0))).unique
-    (by change α.app 0 ≫ β.app 0 = _; rw [hα, hβ]; exact e.hom_inv_id)
-    rfl
-  have hβα : βα = idR := (hR R (𝟙 (R.F 0))).unique
-    (by change β.app 0 ≫ α.app 0 = _; rw [hβ, hα]; exact e.inv_hom_id)
-    rfl
-  refine ⟨⟨α.app q, β.app q, ?_, ?_⟩⟩
-  · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom T T ↦ f.app q) hαβ
-  · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom R R ↦ f.app q) hβα
-
 /-- Any complex with the locally constant inhomogeneous terms and differential computes
 invariants of an injective resolution transported through an abelian equivalence.
 
@@ -137,8 +102,38 @@ theorem nonempty_equiv_invariantResolution_inhomogeneous
   have hRzero' : R.F 0 ≅ V := by
     rw [hRF]
     exact hRzero
-  obtain ⟨comparison⟩ := universalDeltaFunctor_iso_all R T hR hT
-    (hRzero' ≪≫ hTzero.symm) q
+  have comparison0 : Nonempty (R.F q ≅ T.F q) := by
+    let e := hRzero' ≪≫ hTzero.symm
+    obtain ⟨α, hα, _⟩ := hR T e.hom
+    obtain ⟨β, hβ, _⟩ := hT R e.inv
+    let idR : CohomologicalDeltaFunctor.Hom R R :=
+      ⟨fun n ↦ 𝟙 (R.F n), by intros; simp⟩
+    let idT : CohomologicalDeltaFunctor.Hom T T :=
+      ⟨fun n ↦ 𝟙 (T.F n), by intros; simp⟩
+    let αβ : CohomologicalDeltaFunctor.Hom R R :=
+      ⟨fun n ↦ α.app n ≫ β.app n, by
+        intro S hS n
+        simp only [NatTrans.comp_app, ← Category.assoc]
+        rw [α.naturality S hS n]
+        simp only [Category.assoc]
+        rw [β.naturality S hS n]⟩
+    let βα : CohomologicalDeltaFunctor.Hom T T :=
+      ⟨fun n ↦ β.app n ≫ α.app n, by
+        intro S hS n
+        simp only [NatTrans.comp_app, ← Category.assoc]
+        rw [β.naturality S hS n]
+        simp only [Category.assoc]
+        rw [α.naturality S hS n]⟩
+    have hαβ : αβ = idR := (hR R (𝟙 (R.F 0))).unique
+      (by change α.app 0 ≫ β.app 0 = _; rw [hα, hβ]; exact e.hom_inv_id)
+      rfl
+    have hβα : βα = idT := (hT T (𝟙 (T.F 0))).unique
+      (by change β.app 0 ≫ α.app 0 = _; rw [hβ, hα]; exact e.inv_hom_id)
+      rfl
+    refine ⟨⟨α.app q, β.app q, ?_, ?_⟩⟩
+    · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom R R ↦ f.app q) hαβ
+    · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom T T ↦ f.app q) hβα
+  obtain ⟨comparison⟩ := comparison0
   rw [hRF, hTF] at comparison
   let coord : ∀ n : ℕ, (C.obj F).X n ≅ K.X n :=
     fun n ↦ ((e F n).trans (t n).symm).toAddCommGrpIso
