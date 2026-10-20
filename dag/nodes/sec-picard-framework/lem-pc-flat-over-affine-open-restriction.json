@@ -24,16 +24,16 @@
    "elementary": true
   },
   {
-   "text": "overFunctorEquiv identifies exact schemeOpenRestriction with ordinary restriction. Evaluate this module isomorphism on each affine open, restrict scalars along f.appLE and apply Module.Flat.equiv_iff to transport flatness.",
+   "text": "overFunctorEquiv identifies exact schemeOpenRestriction with ordinary restriction. Apply Scheme.Modules.IsFlatOver.of_iso to the inverse of this evaluated isomorphism, using flatness of ordinary restriction after postcomposition by the spectrum-chart isomorphism. This is the existing complete upstream proof; the mathematical node and both parent dependencies are retained.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "agent D3",
+  "by": "agent D3; upstream proof adopted; attachment repaired by K8",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Lemma flat-module-characterize, Tag 01U4, final assertion; direct affine-section proof"
+  "place": "Lemma flat-module-characterize, Tag 01U4, final assertion; existing upstream direct affine-section proof, with IsFlatOver.of_iso for transport"
  },
  "mathlib_searches": [
   {
@@ -100,14 +100,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FlatOverAffineOpenRestriction",
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatOverAffineOpenRestriction.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FlatOverAffineOpenRestriction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FlatOverAffineOpenRestriction.lean",
   "declaration": "AlgebraicGeometry.isFlatOver_affineOpenRestriction",
   "statement": "theorem isFlatOver_affineOpenRestriction {X S : Scheme.{u}} (f : X ⟶ S) (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G] (hflat : Scheme.Modules.IsFlatOver G f) (V : S.affineOpens) : Scheme.Modules.IsFlatOver ((schemeOpenRestriction X (f ⁻¹ᵁ V.1)).obj G) ((f ∣_ V.1) ≫ V.2.isoSpec.hom)",
   "branch": "sheaf-dag",
-  "by": "D3",
-  "date": "2026-10-13"
+  "by": "K8",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module. The adopted upstream declaration has the same statement and a complete proof; both existing DAG parents already import this upstream module. Verified the exact old statement by application and #print axioms (only propext, Classical.choice, Quot.sound)."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -120,13 +121,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D3",
+  "reviewer": "C-f8fec",
+  "group": "K8",
   "result": "pass",
-  "landing": "20261012T165509-L-2932087",
+  "landing": "20261020T221238-L-4163182",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf FlatOverAffineOpenRestriction vs the upstream WeilConjectures theorem with the same signature; node lean record and proof step 3 vs the upstream proof; importer search (none); scratch application to the old statement plus #print axioms"
  }
 }
