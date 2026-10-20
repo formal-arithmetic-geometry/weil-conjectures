@@ -27,13 +27,12 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\Lambda(*)$. Here $P_U$ and $R_U$ mean sheafified constant presheaves, not pullbacks of arbitrary condensed modules. A section $a\\in\\Lambda(*)$ is equivalently a map from the monoidal unit $\\mathbf Z$ to $\\Lambda$: the constant-presheaf and sheafification universal properties identify these maps with the image of $1$ at the final profinite set $*$. The scalar map $R\\to\\Gamma(U,\\Lambda_U)$ is obtained by applying the strong monoidal $p_U^*$ to a scalar section $\\mathbf Z\\to\\Lambda$ and using $p_U^*\\mathbf Z\\cong\\mathbf Z_U$; the coefficient ring structure is the transported structure of [sk-def-sfb-pulled-back-coefficients], so preservation of multiplication and unit, together with additivity (the left adjoint preserves finite biproducts), makes this a ring map. By the sheafification universal property it induces $R_U\\to\\Lambda_U$. The constant $R$-module $P$ gives an $R_U$-module $P_U$: the action on constant presheaves sheafifies using the strong monoidal sheafification in [sk-def-sfb-sheaf-tensor]. For any $R_U$-module $N$, sheafification gives\n$\\operatorname{Hom}_{R_U}(P_U,N)=\\operatorname{Hom}_R(P,N(U))$.\nIndeed a map from the constant presheaf is determined by its component at the final object $U$, all other components being restrictions; it extends uniquely to $P_U$. The extension is $R_U$-linear exactly when that component is $R$-linear, since the two action-compatibility maps agree on the constant presheaves and hence after sheafification. This also explains the stated scalar map without identifying the condensed inverse image with the constant-sheaf functor.",
+   "text": "Put $R=\\Lambda(*)$. Terminal sections are right adjoint to the sheafified constant functor. Transport braiding across that adjunction, preserving its existing lax monoidal structure, to prove scalarRingObj_comm. The lifted monoidal adjunction makes its counit a monoid morphism, and inverse image preserves this property; monObjObj_comp identifies the successive and composite transported ring structures. Thus scalarCoefficientHom preserves multiplication and unit, and braided constant sheafification followed by inverse image preserves commutativity. The constant-sheaf comparison is the inverse of constantSchemeIso from the module of [lem-weil-pbc-finite-discrete-scheme-ring-constant], whose inverse is monoidal. The published upperStarFromPoint and coefficient transport of [sk-def-sfb-pulled-back-coefficients] suffice; neither the separate point-pullback specification nor the separate sheaf-tensor specification is used. The constant-sheaf adjunction and inverse unit comparison make pointScalarSection surjective, so every regular condensed-module matrix entry is represented by an ordinary scalar. The composite unit comparison gives precisely scalarSection after inverse image.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-sheafification",
-    "sk-def-sfb-pullback-from-point",
-    "sk-def-sfb-sheaf-tensor",
-    "sk-def-sfb-pulled-back-coefficients"
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
    ],
    "elementary": false,
    "source": {
@@ -42,12 +41,11 @@
    }
   },
   {
-   "text": "On $U_{\\mathrm{proét}}$ set $E_U(P)=\\Lambda_U\\otimes_{R_U}P_U$. The hypotheses for extension of scalars hold: this is the symmetric monoidal category of abelian sheaves, its tensor functors preserve colimits by [sk-def-sfb-sheaf-tensor], and the ambient category has coequalizers: identify abelian sheaves with sheaves of modules over the constant ring $\\mathbf Z_U$, using the unique integer action, and apply [def-weil-sheaf-of-modules-category]; the coequalizer of $f,g$ is $\\operatorname{coker}(f-g)$. Apply [def-sfb-modobj-extend-restrict-adjunction] to the ring map $R_U\\to\\Lambda_U$. Together with Step 1 it gives, naturally in $P,N$,\n$\\operatorname{Hom}_{\\Lambda_U}(E_U(P),N)\\cong\\operatorname{Hom}_R(P,N(U))$,\nwhere $R$ acts on $N(U)$ through the scalar map. In particular $E_U(R^k)\\cong\\Lambda_U^k$: both objects have maps to $N$ specified by $k$ arbitrary global sections of $N$. Under this identification the map associated with a scalar matrix $A=(a_{rj})$ sends the $j$-th basis section to $\\sum_r a_{rj}e_r$, with each coefficient acting through $R\\to\\Gamma(U,\\Lambda_U)$. Thus the identification preserves the actual matrix, not merely the ranks.",
+   "text": "On $U_{\\mathrm{proét}}$ set $E_U(P)=\\Lambda_U\\otimes_{R_U}P_U$. Use the existing module-object categories, their finite-colimit instances and the extension/restriction adjunction [def-sfb-modobj-extend-restrict-adjunction]; no conversion to sheaves of modules on a ringed site is required. Mod.isoMk identifies mapMod of the regular module with the regular module. Apply Mod.regularExtensionIso and its naturality from [lem-weil-pbc-regular-extension-comparison] to obtain the extension-of-scalars comparison on regular modules, then Functor.mapBiproduct and biproduct.mapIso for finite free modules. Mod.regular_hom_ext and Mod.one_comp_regularLift verify each matrix entry under that comparison, including the composite monoidal unit. Therefore $E_U(R^k)\\cong\\Lambda_U^k$ with the actual scalar matrix preserved, rather than merely its ranks.",
    "uses": [
     "def-sfb-modobj-extension",
     "def-sfb-modobj-extend-restrict-adjunction",
-    "sk-def-sfb-sheaf-tensor",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-regular-extension-comparison"
    ],
    "elementary": false,
    "source": {
@@ -56,7 +54,7 @@
    }
   },
   {
-   "text": "For a finite scalar matrix $A:R^m\\to R^n$, put $P=\\operatorname{coker}A$. A map $P\\to N(U)$ is precisely a map $R^n\\to N(U)$ vanishing on $A$. By Step 2 these are precisely the maps $\\Lambda_U^n\\to N$ vanishing on the sheaf matrix $A$. Consequently $E_U(P)$, with its induced quotient map from $\\Lambda_U^n$, has the universal property of $\\operatorname{coker}(A:\\Lambda_U^m\\to\\Lambda_U^n)$. This proves the required cokernel identification without any flatness assumption. For $(1)\\Rightarrow(2)$ choose the finite scalar presentation of each $P_i$ and apply this calculation with $U=U_i$. For $(2)\\Rightarrow(1)$ take $P_i=\\operatorname{coker}(A_i:R^{m_i}\\to R^{n_i})$; this is finitely presented by definition, and the cokernel universal property just proved identifies $E_{U_i}(P_i)$ with the cokernel in (2), hence with $M|_{U_i}$.",
+   "text": "For a finite scalar matrix $A:R^m\\to R^n$, put $P=\\operatorname{coker}A$. A map $P\\to N(U)$ is precisely a map $R^n\\to N(U)$ vanishing on $A$. By Step 2 these are precisely the maps $\\Lambda_U^n\\to N$ vanishing on the sheaf matrix $A$. Consequently $E_U(P)$, with its induced quotient map from $\\Lambda_U^n$, has the universal property of $\\operatorname{coker}(A:\\Lambda_U^m\\to\\Lambda_U^n)$. This proves the required cokernel identification without any flatness assumption. For $(1)\\Rightarrow(2)$ choose the finite scalar presentation of each $P_i$ and apply this calculation with $U=U_i$. For $(2)\\Rightarrow(1)$ take $P_i=\\operatorname{coker}(A_i:R^{m_i}\\to R^{n_i})$; this is finitely presented by definition, and the cokernel universal property just proved identifies $E_{U_i}(P_i)$ with the cokernel in (2), hence with $M|_{U_i}$. Lean implementation: both functors preserve finite colimits and are additive, so PreservesCokernel.iso transports cokernels, and cokernel.mapIso conjugates the presentation through the free-module comparisons. Conversely use the scalar matrix cokernel itself as the finitely presented scalar module. For the comparison with HasFiniteConstantLocalModel, repeat the calculation for mapMod of upperStarFromPoint; surjectivity of pointScalarSection supplies the scalar entries of every condensed finite presentation. This keeps the same cover, including empty covers and zero ranks.",
    "uses": [
     "def-sfb-finitely-presented-module"
    ],
@@ -67,7 +65,7 @@
    }
   },
   {
-   "text": "The matrix presentation in (2) is in particular a cokernel presentation between finite free $\\Lambda_{U_i}$-modules, so each restriction is finitely presented. The same given pro-étale cover therefore witnesses local finite presentation by [def-sfb-locally-finitely-presented]. The coefficient identification needed in that definition is $u_i^*\\Lambda_X\\cong\\Lambda_{U_i}$ from [sk-def-sfb-coefficient-morphisms]; to regard a $\\Lambda_{U_i}$-action as a $u_i^*\\Lambda_X$-action, precompose it with this ring isomorphism, and to reverse the operation precompose with its inverse. These operations are inverse and preserve the regular module, finite direct sums, and cokernel diagrams, so the presentation is one in the module category required by the definition.",
+   "text": "The matrix presentation in (2) is in particular a cokernel presentation between finite free $\\Lambda_{U_i}$-modules, so each restriction is finitely presented. The same given pro-étale cover therefore witnesses local finite presentation by [def-sfb-locally-finitely-presented]. The coefficient identification needed in that definition is $u_i^*\\Lambda_X\\cong\\Lambda_{U_i}$ from [sk-def-sfb-coefficient-morphisms]; to regard a $\\Lambda_{U_i}$-action as a $u_i^*\\Lambda_X$-action, precompose it with this ring isomorphism, and to reverse the operation precompose with its inverse. These operations are inverse and preserve the regular module, finite direct sums, and cokernel diagrams, so the presentation is one in the module category required by the definition. Lean implementation: map_finitePresentation directly transports the existing finite presentation through mapMod of upperStarFromPoint, so no matrix equivalence is needed here. Restriction along the invertible condensedPullbackHom is an equivalence, and regularIsoOfIsIso, comapCongr, comapComp, comapId and extendScalarsIsoComapInv identify the required underlying pullback module. Transport its finite presentation along this isomorphism.",
    "uses": [
     "def-sfb-finitely-presented-module",
     "def-sfb-locally-finitely-presented",
@@ -80,18 +78,13 @@
    }
   },
   {
-   "text": "For the converse remark fix a prime $\\ell$, let $\\Lambda=\\underline{\\mathbf Q_\\ell}$, and let $S=\\mathbf N\\cup\\{\\infty\\}$ with the one-point compactification topology. It is profinite: use the finite partitions into the first $n$ singletons and one remaining tail. Every clopen neighbourhood of $\\infty$ contains a tail, so these partitions are cofinal among finite clopen quotients. Choose an algebraic closure $\\Omega$ of $\\mathbf Q$, put $B=\\operatorname{Spec}\\Omega$ and $X=B[S]$. The profinite-test-object, finite-affine-coproduct and affine-limit statements identify $X=\\operatorname{Spec}LC(S,\\Omega)$, where $\\Omega$ is discrete: the filtered union of $\\Omega^{S_n}$ is exactly the functions constant on some tail. Apply [lem-weil-pbc-locally-constant-prime-spectrum] with $R=\\Omega$. Since a field has just the zero prime, this identifies $|X|$ with $S$, the point $s$ being $\\ker(\\operatorname{ev}_s)$. Define $t(n)=\\ell^{n+1}$ and $t(\\infty)=0$. This is continuous: finite points are isolated and for every $\\varepsilon>0$ a sufficiently long tail has $|t(n)|_\\ell<\\varepsilon$. By [det-pe-condensed-point-coefficients] it determines $\\widetilde t\\in\\Lambda_B(B[S])$. The ring isomorphism $\\theta_X$ of [lem-sfb-coefficient-sections-localization] gives the global section $t=\\theta_X(\\widetilde t)\\in\\Gamma(X,\\Lambda_X)$. Set $M=\\operatorname{coker}(t:\\Lambda_X\\to\\Lambda_X)$, where the arrow is multiplication by $t$. The identity cover and this one-by-one presentation show that $M$ is locally finitely presented.",
+   "text": "For the converse take E to be the universe lift of the 2-adic field, S the universe lift of the one-point compactification of the natural numbers, K the universe lift of the rational field, and X=Spec LC(S,K). The locally constant spectrum homeomorphism [lem-weil-pbc-locally-constant-prime-spectrum], followed by the unique-point homeomorphism for Spec K, identifies X with S; X is compact and Hausdorff. The continuous function t(n)=2^n and t(infinity)=0 exists by OnePoint.continuousMapMkNat and Padic.norm_p_lt_one. The canonical continuous coefficient realization [lem-weil-pbc-condensed-field-continuous-realization] identifies regular endomorphisms with continuous scalar functions: use the multiplication construction and inverse calculation proved in the module of [lem-weil-pbc-continuous-field-matrix-sheaf-normal-form]. Let f be the multiplication endomorphism corresponding to t and M=coker f. The singleton identity cover and the one-by-one regular presentation prove local finite presentation, by [def-sfb-finitely-presented-module] and [def-sfb-locally-finitely-presented]. This replaces the longer route through profinite test objects over an algebraically closed field and coefficient-section localization.",
    "uses": [
-    "sk-def-sfb-condensed-ring",
-    "def-sfb-profinite-test-objects",
-    "lem-weil-pbc-finite-affine-coproduct-spectrum",
-    "lem-weil-pbc-spec-small-colimit-limit",
-    "det-pe-condensed-point-coefficients",
-    "def-sfb-finitely-presented-module",
-    "def-sfb-locally-finitely-presented",
-    "lem-pc-algebraic-closure-exists-unique",
     "lem-weil-pbc-locally-constant-prime-spectrum",
-    "lem-sfb-coefficient-sections-localization"
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "lem-weil-pbc-continuous-field-matrix-sheaf-normal-form",
+    "def-sfb-finitely-presented-module",
+    "def-sfb-locally-finitely-presented"
    ],
    "elementary": false,
    "source": {
@@ -100,13 +93,16 @@
    }
   },
   {
-   "text": "Let $q:\\operatorname{Spec}K\\to X$ be a geometric point over $s\\in S$. By [lem-weil-pbc-locally-constant-prime-spectrum], its ring map $LC(S,\\Omega)\\to K$ has kernel $\\ker(\\operatorname{ev}_s)$, and hence factors through the quotient $\\Omega$. Thus $q=q_s\\circ h$, where $q_s:B\\to B[S]$ is evaluation at $s$ and $h:\\operatorname{Spec}K\\to B$ comes from this field embedding. The map $q_s$ is the map of test objects induced by $*\\to S$, so naturality in [det-pe-condensed-point-coefficients] (an isomorphism of rings, $\\Lambda$ being a condensed ring) sends $\\widetilde t$ to the element $c_s\\in\\Lambda_B(B[*])$ corresponding to $t(s)\\in\\mathbf Q_\\ell$. Hence $c_\\infty=0$, and $c_n$ is a unit, with inverse corresponding to $\\ell^{-(n+1)}$. Since $\\theta_B$ of [lem-sfb-coefficient-sections-localization] is a ring isomorphism, $r_s=\\theta_B(c_s)\\in\\Gamma(B,\\Lambda_B)$ is $0$, respectively a unit, and by its module-pullback clause $q_s^*$ sends multiplication by $t$ to $m_{r_s}$ on $\\Lambda_B$. Module pullback is a left adjoint [sk-def-sfb-module-pushforward-pullback], so it preserves cokernels, zero objects and isomorphisms, and $q^*\\cong h^*q_s^*$ by its composition isomorphism. If $s=n$, $m_{r_n}$ is invertible with inverse $m_{r_n^{-1}}$, so $q_s^*M=0$ and $q^*M=0$. If $s=\\infty$, $m_0=0$, so $q_s^*M\\cong\\Lambda_B$ and $q^*M\\cong h^*\\Lambda_B=\\Lambda_{\\operatorname{Spec}K}\\otimes_{h^*\\Lambda_B}h^*\\Lambda_B\\cong\\Lambda_{\\operatorname{Spec}K}$: extension of scalars sends the regular module to the regular module, since by [def-sfb-modobj-extend-restrict-adjunction] both corepresent global sections. This is nonzero: $K$ is algebraically closed, and point-coefficient evaluation at $*$ gives sections $\\mathbf Q_\\ell$.",
+   "text": "For continuous E coefficients, identify the scalar ring with E by evaluating a continuous function on the terminal profinite singleton; verify that the adjunction's lax monoidal sections structure is the pointwise sections structure. Restriction along this ring isomorphism and [lem-weil-pbc-internal-module-ab-equivalence] turn finitely presented scalar modules into finite-dimensional E-vector spaces. Transport a finite basis back to conclude that every finite constant scalar model is finite free. At any point v of a covering member, take an algebraic closure Omega of its residue field and the resulting geometric point a:Spec Omega -> U_i over v. Compose its canonical condensed-module pullback with the additive, finite-colimit-preserving evaluation functor of [lem-weil-pbc-condensed-field-evaluation-functors]. The regular-module normalization identifies its regular coefficient with the continuous scalar at the image of v, by the naturality calculation proved in [lem-weil-pbc-condensed-field-geometric-regular-coefficient]. The extension/restriction isomorphism [def-sfb-modobj-extend-restrict-adjunction] identifies pullback of the regular module with the regular module, and its composition comparison identifies evaluation of M with evaluation of its local free model. The finite-biproduct coordinates constructed in [lem-weil-pbc-condensed-field-presentation-corank] show that this model has E-dimension n_i. On the other hand, preservation of cokernels reduces this dimension to the cokernel of a one-dimensional endomorphism. If its scalar is zero the dimension is one; if it is nonzero the endomorphism is surjective and the dimension is zero. Thus the function d(x)=1 if t(x)=0 and 0 otherwise is constant, equal to n_i, on each covering member's image. Coordinates are transported explicitly by the evaluation functor applied to the regular-module comparison; functoriality identifies the conjugated scalar. Private generic dimension lemmas separate this computation from the residue-field algebraic closure construction.",
    "uses": [
-    "lem-weil-pbc-locally-constant-prime-spectrum",
-    "lem-sfb-coefficient-sections-localization",
+    "lem-weil-pbc-internal-module-ab-equivalence",
+    "lem-weil-pbc-condensed-field-evaluation-functors",
+    "lem-weil-pbc-condensed-field-geometric-regular-coefficient",
+    "lem-weil-pbc-condensed-field-presentation-corank",
+    "def-sfb-modobj-extend-restrict-adjunction",
     "sk-def-sfb-module-pushforward-pullback",
-    "det-pe-condensed-point-coefficients",
-    "def-sfb-modobj-extend-restrict-adjunction"
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-pc-algebraic-closure-exists-unique"
    ],
    "elementary": false,
    "source": {
@@ -115,16 +111,10 @@
    }
   },
   {
-   "text": "Suppose this $M$ had finite constant local models on a cover $\\{U_i\\to X\\}$. A finite presentation of $P_i$ gives finitely many spanning vectors over the field $\\mathbf Q_\\ell$. Choose a maximal linearly independent subset of these finitely many vectors. Every omitted vector belongs to its span: a dependence with that subset must have a nonzero coefficient on the omitted vector, which can be divided out. This subset is therefore a basis, giving $P_i\\cong\\mathbf Q_\\ell^{d_i}$ for some finite $d_i\\ge0$. Step 2 makes its model $\\Lambda_{U_i}^{d_i}$. Pullback to any geometric point of $U_i$ gives $\\Lambda_{\\operatorname{Spec}K}^{d_i}$: the pullback formula and coefficient isomorphism preserve the regular module (as at $s=\\infty$ in Step 6), and its left-adjoint property preserves finite direct sums. For every point $u$ of $U_i$, [lem-pc-algebraic-closure-exists-unique] gives an algebraic closure $K$ of $\\kappa(u)$, and [def-weil-geometric-point] identifies the field inclusion $\\kappa(u)\\to K$ with a geometric point $\\operatorname{Spec}K\\to U_i$ over $u$. Taking sections at $\\operatorname{Spec}K$ of the pulled-back model gives $\\mathbf Q_\\ell^{d_i}$, which is zero exactly when $d_i=0$. Step 6 then shows that every nonempty $U_i$ with $d_i=0$ has image in $\\mathbf N$, while every nonempty $U_i$ with $d_i>0$ has image in $\\{\\infty\\}$. Since $X$ is affine, the covering definition supplies finitely many affine opens $V_j\\subset U_{i_j}$ whose images cover $X$. Each $|V_j|$ is quasi-compact by the existing Mathlib leaf [lem-weil-pbc-affine-scheme-qcqs], applied to the affine scheme $V_j$. Its continuous image in $S$ is compact and closed: for a point outside a compact subset of a Hausdorff space, separate it from each point of that subset and take a finite subcover to obtain a neighbourhood disjoint from the subset. The finite union of the images with $d_{i_j}=0$ must equal $\\mathbf N$. That would make $\\mathbf N$ closed in $S$, contrary to $\\infty$ being its limit point. Thus $M$ has no finite constant local model. This proves the claimed failure of the converse for a commutative condensed coefficient ring.",
+   "text": "Use the finite affine refinement in the pro-etale covering definition [def-weil-pbc-proetale-site]. Each affine member is compact by [lem-weil-pbc-affine-scheme-qcqs], so its continuous image in Hausdorff X is closed. A function constant on each member of a finite closed cover has both closed and open fibres: the fibre of b is the union of images carrying b, and its complement is the union of the other images. Hence d is locally constant. Pulling back along the spectrum homeomorphism gives a locally constant function on the convergent sequence with value zero at every natural number and one at infinity. Its zero fibre, the image of the natural numbers, would be closed. That image is dense and omits infinity (OnePoint.denseRange_coe and OnePoint.infty_notMem_range_coe), a contradiction. This proves failure of the universal converse without changing any quantified statement or excluding empty schemes or zero rings.",
    "uses": [
     "def-weil-pbc-proetale-site",
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-def-sfb-coefficient-morphisms",
-    "det-pe-condensed-point-coefficients",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-pc-algebraic-closure-exists-unique",
-    "def-weil-geometric-point",
-    "def-sfb-modobj-extend-restrict-adjunction"
+    "lem-weil-pbc-affine-scheme-qcqs"
    ],
    "elementary": false,
    "source": {
@@ -138,30 +128,28 @@
   "def-sfb-locally-finitely-presented",
   "def-sfb-modobj-extend-restrict-adjunction",
   "def-sfb-modobj-extension",
-  "def-sfb-profinite-test-objects",
-  "def-weil-geometric-point",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-sheafification",
-  "def-weil-sheaf-of-modules-category",
-  "det-pe-condensed-point-coefficients",
   "lem-pc-algebraic-closure-exists-unique",
-  "lem-sfb-coefficient-sections-localization",
   "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-weil-pbc-condensed-field-evaluation-functors",
+  "lem-weil-pbc-condensed-field-geometric-regular-coefficient",
+  "lem-weil-pbc-condensed-field-presentation-corank",
+  "lem-weil-pbc-continuous-field-matrix-sheaf-normal-form",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-weil-pbc-internal-module-ab-equivalence",
   "lem-weil-pbc-locally-constant-prime-spectrum",
-  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-regular-extension-comparison",
   "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-condensed-ring",
   "sk-def-sfb-module-pushforward-pullback",
-  "sk-def-sfb-pullback-from-point",
-  "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-sfb-sheaf-tensor"
+  "sk-def-sfb-pulled-back-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-local-model.proof.md",
-  "place": "three proof paragraphs, expanded by universal properties; explicit counterexample supplied for the statement final sentence"
+  "place": "Three blueprint proof paragraphs formalized through regular-module, finite-biproduct and cokernel comparisons. C9 proves all eight original holes, including the final converse remark by the convergent-sequence 2-adic counterexample, existing continuous realization and geometric evaluation, and a finite closed-cover argument. All auxiliary lemmas are proved privately in the item module; no statement is split off."
  },
  "mathlib_searches": [
   {
@@ -380,9 +368,7 @@
    }
   ]
  },
- "tool_uses": [
-  "det-pe-condensed-point-coefficients"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -442,5 +428,15 @@
   "group": "Q18",
   "result": "fix",
   "note": "Mathematics, dependencies, universes, edge cases, canonical constructions, and verbatim statement checked; scompile.py passed without diagnostics. Replaced the placeholder second-reading section with a substantive independent review in fixes/det-def-sfb-constructible-local-model.report.md. Full findings recorded in review.md; repository files and branch heads unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261020T051112-L-1561764",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
