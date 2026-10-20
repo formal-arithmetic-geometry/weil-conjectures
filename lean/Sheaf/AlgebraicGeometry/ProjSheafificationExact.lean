@@ -5,7 +5,7 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProjTildeFunctorial
+public import WeilConjectures.AlgebraicGeometry.ProjTildeFunctorial
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.Algebra.Module.ProjAwayDegreeZeroExact
