@@ -1,0 +1,144 @@
+{
+ "id": "lem-pur-independent-inverse-image-tensor-comparison",
+ "kind": "statement",
+ "title": "Normalized tensor comparison for an algebraic inverse image at independent site sizes",
+ "statement": "For sites (C,J) and (D,K) essentially small in a coefficient universe u, with independently sized object and morphism universes, let F be a finite-limit-preserving left adjoint between their sheaves of u-small sets. Let R and RI be commutative ring sheaves and I the specified algebraic inverse-image lift [def-weil-pbc-algebraic-inverse-image] of F from R to RI. For the sheaf tensor [def-pur-sheaf-tensor-product], there is a natural family I(M tensor_R N) isomorphic to I(M) tensor_RI I(N). For every test sheaf Z and generalized sections x,y,z with z equal to the pure tensor of x,y, the isomorphism sends the transported z to the pure tensor of the transported x,y. This asserts only the algebraic inverse-image comparison, without change of coefficients or scalar extension.",
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, third Hom/Bilin equality and its proof."
+ },
+ "proof": [
+  {
+   "text": "Reuse the existing generic geometric module construction and linear-map transport helpers, whose site object and morphism universes are independent. The auxiliary right-module construction specializes their operation comparisons to the adjunction-transposed structural ring map.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the RI-module direct image along the right adjoint using its product comparisons and the adjoint coefficient map R to F_*(RI). Its underlying sheaf is the specified direct image. Its addition and scalar action are the transported operations. The adjunction restricts to a natural bijection of linear maps because the graph equations of I preserve addition and scalar action on universal pairs and triples.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the same transposition to balanced bilinear maps. Test additivity on the two universal triples M times M times N and M times N times N, and balancing on R times M times N. Product preservation and the graph equations make transposition preserve and reflect each equation. Its inverse identities are those of the underlying set-sheaf adjunction.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the sheaf tensor universal property on both sides of the bilinear-map bijection. The resulting natural Hom bijection gives mutually inverse linear maps between I(M tensor N) and I(M) tensor I(N). Naturality in M and N follows from transposition. Evaluate at the universal pure pairing, and then precompose any test pair, to obtain the displayed generalized pure-tensor identity. The argument uses no points, nonzero-ring assumption, or equality of the site universes.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, third equality",
+  "note": "B9: fully implemented. Transport balanced pairings through the specified set adjunction and graph equations; the tensor universal property proves the comparison invertible. All five universes remain independent."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The specified algebraic inverse image along a geometric morphism of sheaf topoi preserves tensor products of modules",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-19",
+   "verdict": "These use functors of sites or special condensed categories, not the specified abstract inverse-image lift. The existing project comparison has shared site universes."
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesFiniteLimits, tensorObj",
+   "results": "0 hits; unknown identifier PreservesFiniteLimits",
+   "date": "2026-10-19",
+   "verdict": "The query parser did not resolve the class name; no match was obtained."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage.*tensor|inverseImageTensorComparison",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "No generalized comparison found by this search; direct local inspection found only the shared-universe theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic inverse image between sheaf topoi preserves tensor products with the pure tensor normalization",
+   "results": "8 hits: CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.tensorProd_isSheaf, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.Equivalence.sheafCongr_inverse, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, CategoryTheory.Equivalence.sheafCongrPreregular_inverse_map_val_app, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.sheafToPresheaf_μ",
+   "date": "2026-10-19",
+   "verdict": "The results concern site-induced or specialized functors, rather than the specified abstract algebraic inverse-image lift at independent site sizes."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CochainTensorCoherenceData",
+  "date": "2026-10-19",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Canonical pullback tensor comparison, algebraic inverse-image step before scalar extension.",
+   "via": [
+    "def-pur-cochain-tensor-coherence-data",
+    "lem-pur-independent-ringed-tensorator-existence",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.CochainInverseComparison",
+  "file": "lean/Sheaf/SecSmoothPurity/CochainInverseComparison.lean",
+  "declaration": "SheafOfModules.CochainInversePairing.exists_inverseImageTensorComparison",
+  "declarations": [
+   "SheafOfModules.CochainInversePairing.exists_inverseImageTensorComparison"
+  ],
+  "statement": "theorem exists_inverseImageTensorComparison\n    (uPush : Sheaf K (Type u) ⥤ Sheaf J (Type u))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] :\n    ∃ e : ∀ M N : SheafOfModules.{u} (𝓡 R),\n        I.modules.obj ((monoidalCategory R).tensorObj M N) ≅\n          (monoidalCategory RI).tensorObj (I.modules.obj M) (I.modules.obj N),\n      (∀ {M M' N N' : SheafOfModules.{u} (𝓡 R)} (f : M ⟶ M') (g : N ⟶ N'),\n        I.modules.map ((monoidalCategory R).tensorHom f g) ≫ (e M' N').hom =\n          (e M N).hom ≫ (monoidalCategory RI).tensorHom (I.modules.map f) (I.modules.map g)) ∧\n      ∀ (M N : SheafOfModules.{u} (𝓡 R)) (Z : Sheaf J (Type u))\n        (x : Z ⟶ (𝓤 R).obj M) (y : Z ⟶ (𝓤 R).obj N)\n        (z : Z ⟶ (𝓤 R).obj ((monoidalCategory R).tensorObj M N)),\n        (∀ W t, z.hom.app W t = (tensorObjIsoSheafification M N).inv.val.app W\n          (((PresheafOfModules.sheafificationAdjunction\n            (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app\n              (M.val ⊗ N.val)).app W\n                ((x.hom.app W t) ⊗ₜ[R.obj.obj W] (y.hom.app W t)))) →\n        ∀ W t, (e M N).hom.val.app W\n          ((uInv.map z ≫ I.moduleUnderlying.inv.app\n            ((monoidalCategory R).tensorObj M N)).hom.app W t) =\n          (tensorObjIsoSheafification (I.modules.obj M)\n            (I.modules.obj N)).inv.val.app W\n          (((PresheafOfModules.sheafificationAdjunction\n            (𝟙 ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RI).obj)).unit.app\n              ((I.modules.obj M).val ⊗ (I.modules.obj N).val)).app W\n                (((uInv.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t)\n                  ⊗ₜ[RI.obj.obj W]\n                  ((uInv.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t)))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T145450-L-2398089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T145450-L-2398089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

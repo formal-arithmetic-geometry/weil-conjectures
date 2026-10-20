@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-independent-ringed-tensorator-existence",
+ "kind": "statement",
+ "title": "Existence of the tensorator for fixed scalar insertion at independent site sizes",
+ "statement": "For essentially u-small sites (C,JC) and (D,JD) with independently sized object and morphism universes, let uInv be a finite-limit-preserving left adjoint between their sheaves of u-small sets. Let R, RI, S be commutative ring sheaves, I the specified algebraic inverse-image lift [def-weil-pbc-algebraic-inverse-image], c:RI→S, and L the specified functor whose objects and maps are scalar extension of I along c. Construct scalarInsertion on sections by m↦η(1 tensor m), followed by hobj. There exists a natural family mu:L(M tensor_R N)≅L(M) tensor_S L(N), for the actual sheaf tensor [def-pur-sheaf-tensor-product], satisfying the generalized pure-tensor formula with this fixed insertion. This asserts neither construction of insertion nor uniqueness of the tensorator.",
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback and its proof; scalar-extension insertion from Tags 03CY and 03D7."
+ },
+ "proof": [
+  {
+   "text": "Apply the independently sized inverse-image tensor comparison to the specified algebraic inverse image. It supplies natural isomorphisms I(M tensor N) to I(M) tensor I(N) with their generalized pure-tensor formula. No scalar extension has yet been performed.",
+   "uses": [
+    "lem-pur-independent-inverse-image-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the scalar-extension comparison on presheaf tensors by s tensor (m tensor n) maps to (s tensor m) tensor (1 tensor n), and construct its inverse by (s tensor m) tensor (t tensor n) maps to st tensor (m tensor n). The Lean proof descends the raw contraction through the two sheafification units using their adjunctions. Tensor induction, followed by the sheafification universal property, proves both inverse identities, naturality and the scalar-insertion formula. This entire step is proved in private helpers of the module.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply scalar extension to the first isomorphism, compose with the second, and conjugate by the object equalities hobj. Naturality of these two isomorphisms and the equation hmap give the required naturality for L. Their generalized pure formulas compose to the displayed formula with scalarInsertion. Degenerate modules and zero coefficient rings satisfy the same tensor identities; no flatness or nonzero hypothesis was used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, third Hom/Bilin equality followed by scalar extension",
+  "note": "The inverse-image step is isolated; scalar extension, its two inverse identities, naturality, and assembly for L are implemented in Lean."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.left_adjoint_additive",
+   "results": "1 hits: CategoryTheory.Adjunction.left_adjoint_additive",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized tensorator for arbitrary independent site sizes. The shared-size project comparison cannot instantiate the five independent universes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for sheaves of modules is left adjoint to restriction of scalars",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.restrictScalars, ModuleCat.extendRestrictScalarsAdj, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized tensorator for arbitrary independent site sizes. The shared-size project comparison cannot instantiate the five independent universes."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalRingedTensorComparison_existsUnique|canonicalRingedTensorComparison_exists|AlgebraicInverseImage.*tensor",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized tensorator for arbitrary independent site sizes. The shared-size project comparison cannot instantiate the five independent universes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric inverse image between sheaf topoi preserves the tensor product of sheaves of modules with the normalized pure tensor pairing",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorObjMap, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.sheafToPresheaf_μ",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized tensorator for arbitrary independent site sizes. The shared-size project comparison cannot instantiate the five independent universes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometric inverse image functor preserves tensor products of sheaves of modules and extension of scalars",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-18",
+   "verdict": "No complete normalized tensorator for arbitrary independent site sizes. The shared-size project comparison cannot instantiate the five independent universes."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CochainTensorCoherenceData",
+  "date": "2026-10-18",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Canonical pullback/tensor comparison: ordinary tensorator existence before signed totalization and coherence.",
+   "via": [
+    "def-pur-cochain-tensor-coherence-data",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.CochainTensoratorExistence",
+  "file": "lean/Sheaf/SecSmoothPurity/CochainTensoratorExistence.lean",
+  "declaration": "SheafOfModules.CochainTensorComparison.normalizedTensorator_exists",
+  "declarations": [
+   "SheafOfModules.CochainTensorComparison.scalarInsertion",
+   "SheafOfModules.CochainTensorComparison.normalizedTensorator_exists"
+  ],
+  "statement": "theorem normalizedTensorator_exists\n    (uPush : Sheaf JD (Type u) ⥤ Sheaf JC (Type u))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (hmap : ∀ {M N : SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat RingCat)).obj R)} (f : M ⟶ N),\n      L.map f = eqToHom (hobj M) ≫\n        changeOfRingsHom c (I.modules.obj M) (I.modules.map f) ≫ eqToHom (hobj N).symm) :\n    ∃ mu : ∀ M N : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj\n      R),\n    L.obj ((monoidalCategory R).tensorObj M N) ≅\n      (monoidalCategory S).tensorObj (L.obj M) (L.obj N),\n      (∀ {M M' N N' : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj R)} (f : M ⟶ M') (g : N ⟶ N'),\n    L.map ((monoidalCategory R).tensorHom f g) ≫ (mu M' N').hom =\n      (mu M N).hom ≫ (monoidalCategory S).tensorHom (L.map f) (L.map g)) ∧\n      ∀ (M N : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj\n      R)) (Z : Sheaf JC (Type u))\n    (x : Z ⟶ ((toSheaf ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙\n      sheafCompose JC\n      (CategoryTheory.forget AddCommGrpCat.{u})).obj M))\n    (y : Z ⟶ ((toSheaf ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙\n      sheafCompose JC\n      (CategoryTheory.forget AddCommGrpCat.{u})).obj N))\n    (z : Z ⟶ ((toSheaf ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙\n      sheafCompose JC\n      (CategoryTheory.forget AddCommGrpCat.{u})).obj\n        ((monoidalCategory R).tensorObj M N))),\n    (∀ (W : Cᵒᵖ) (t : Z.obj.obj W), z.hom.app W t =\n      (tensorObjIsoSheafification M N).inv.val.app W\n        (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose JC (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj R).obj)).unit.app\n          (M.val ⊗ N.val)).app W (x.hom.app W t ⊗ₜ[R.obj.obj W] y.hom.app W t))) →\n    ∀ (W : Dᵒᵖ) (t : (uInv.obj Z).obj.obj W),\n      (uInv.map z ≫ I.moduleUnderlying.inv.app ((monoidalCategory R).tensorObj M N) ≫\n        scalarInsertion R S RI uInv I c L hobj ((monoidalCategory R).tensorObj M N) ≫\n          (toSheaf ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⋙ sheafCompose JD\n            (CategoryTheory.forget AddCommGrpCat.{u})).map (mu M N).hom).hom.app W t =\n      (tensorObjIsoSheafification (L.obj M) (L.obj N)).inv.val.app W\n        (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose JD (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj S).obj)).unit.app\n          ((L.obj M).val ⊗ (L.obj N).val)).app W\n            ((uInv.map x ≫ I.moduleUnderlying.inv.app M ≫ scalarInsertion R S RI uInv I c L hobj\n              M).hom.app W t\n              ⊗ₜ[S.obj.obj W]\n              (uInv.map y ≫ I.moduleUnderlying.inv.app N ≫ scalarInsertion R S RI uInv I c L hobj\n                N).hom.app W t))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T145450-L-2398089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T145450-L-2398089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

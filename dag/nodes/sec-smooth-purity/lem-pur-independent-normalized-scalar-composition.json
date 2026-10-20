@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-independent-normalized-scalar-composition",
+ "kind": "statement",
+ "title": "Normalized composition of module scalar extensions",
+ "statement": "For three independently sized ringed sites, two finite-limit-preserving set-sheaf left adjoints with specified adjunctions, algebraic inverse-image lifts [def-weil-pbc-algebraic-inverse-image], and module functors presented as inverse image followed by change of rings, suppose a third algebraic inverse-image lift over the composed set functor has the composite underlying coefficient map. Given the three scalar insertions with their sectionwise 1 tensor x formula, the third module functor is naturally isomorphic to the composite of the first two. On each generalized inverse-image generator this isomorphism sends 1 tensor x to 1 tensor (1 tensor x).",
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 0D6D, scalar extension and composition."
+ },
+ "proof": [
+  {
+   "text": "Transport direct-image module addition and action through the adjunction and the coefficient map. Transposition preserves and reflects their linearity equations; scalar extension then gives a Hom equivalence with explicit value on insertion generators.",
+   "uses": [
+    "lem-pur-independent-module-adjunction",
+    "lem-pur-independent-ringed-tensorator-existence",
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The direct-image module operations compose by the product-comparison composition formula and the composite coefficient identity. Consequently the composite Hom equivalence and the third Hom equivalence are identified exactly by equality on scalar-insertion generators. Apply this bijection and its inverse to identities. Their composites agree with identities on generators, so bijectivity proves the inverse identities. The same generator test proves naturality; precomposition gives the normalization for every generalized element.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-independent-module-adjunction",
+  "lem-pur-independent-ringed-tensorator-existence",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 0D6D, scalar extension and composition.",
+  "note": "B9: completely proved from the finite-product transport and Hom adjunction APIs; no new holes."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of inverse image functors ringed topoi modules tensor scalar extension natural comparison",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.pushforwardComp_inv_app_val_app",
+   "date": "2026-10-20",
+   "verdict": "No matching independent-site ringed composition theorem. Use the generic product, Hom adjunction and conjugation APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_homEquiv",
+   "results": "1 hits: CategoryTheory.Adjunction.comp_homEquiv",
+   "date": "2026-10-20",
+   "verdict": "No matching independent-site ringed composition theorem. Use the generic product, Hom adjunction and conjugation APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCompose.*CommRing|CommRingObjCat|conjugateIsoEquiv",
+   "results": "25 hits: Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean",
+   "date": "2026-10-20",
+   "verdict": "No matching independent-site ringed composition theorem. Use the generic product, Hom adjunction and conjugation APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of inverse images of sheaves of modules has a natural comparison compatible with extension of scalars on pure tensors",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.pullback, PresheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-20",
+   "verdict": "The pullbackComp and conjugateEquiv_pullbackComp_inv results apply to continuous functors of sites. They do not supply the arbitrary geometric inverse-image lift at independent site universes used here. Retain their generic adjunction and conjugation APIs and construct the algebraic lift and normalized comparison explicitly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CochainTensorCoherenceData",
+  "date": "2026-10-20",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Normalized composition of module scalar extensions used by the normalized composite presentation.",
+   "via": [
+    "def-pur-cochain-tensor-coherence-data",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.CochainCompositeHom",
+  "file": "lean/Sheaf/SecSmoothPurity/CochainCompositeHom.lean",
+  "declaration": "CategoryTheory.CochainCompositeHom.normalizedScalarComposition_exists",
+  "declarations": [
+   "CategoryTheory.CochainCompositeHom.normalizedScalarComposition_exists"
+  ],
+  "statement": "theorem normalizedScalarComposition_exists\n    (F : Sheaf J (Type w) ⥤ Sheaf K (Type w))\n    (V : Sheaf K (Type w) ⥤ Sheaf J (Type w)) (aF : F ⊣ V)\n    [PreservesFiniteLimits F]\n    (RIf : Sheaf K CommRingCat.{w})\n    (If : AlgebraicInverseImage F R RIf) (cf : RIf ⟶ S)\n    (Lf : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⥤\n      ringedSiteModules.{w} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S))\n    (hof : ∀ M, Lf.obj M = changeOfRings cf (If.modules.obj M))\n    (hmf : ∀ {M N} (b : M ⟶ N), Lf.map b = eqToHom (hof M) ≫\n      changeOfRingsHom cf (If.modules.obj M) (If.modules.map b) ≫\n        eqToHom (hof N).symm)\n    (G : Sheaf K (Type w) ⥤ Sheaf H (Type w))\n    (W : Sheaf H (Type w) ⥤ Sheaf K (Type w)) (aG : G ⊣ W)\n    [PreservesFiniteLimits G]\n    (RIg : Sheaf H CommRingCat.{w})\n    (Ig : AlgebraicInverseImage G S RIg) (cg : RIg ⟶ T)\n    (Lg : ringedSiteModules.{w} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S) ⥤\n      ringedSiteModules.{w} ((sheafCompose H (forget₂ CommRingCat RingCat)).obj T))\n    (hog : ∀ M, Lg.obj M = changeOfRings cg (Ig.modules.obj M))\n    (hmg : ∀ {M N} (b : M ⟶ N), Lg.map b = eqToHom (hog M) ≫\n      changeOfRingsHom cg (Ig.modules.obj M) (Ig.modules.map b) ≫\n        eqToHom (hog N).symm)\n    (RIh : Sheaf H CommRingCat.{w})\n    (Ih : AlgebraicInverseImage (F ⋙ G) R RIh) (ch : RIh ⟶ T)\n    (Lh : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⥤\n      ringedSiteModules.{w} ((sheafCompose H (forget₂ CommRingCat RingCat)).obj T))\n    (hoh : ∀ M, Lh.obj M = changeOfRings ch (Ih.modules.obj M))\n    (hmh : ∀ {M N} (b : M ⟶ N), Lh.map b = eqToHom (hoh M) ≫\n      changeOfRingsHom ch (Ih.modules.obj M) (Ih.modules.map b) ≫\n        eqToHom (hoh N).symm)\n    (qf : ∀ M, (SheafOfModules.toSheaf ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RIf) ⋙\n        sheafCompose K (CategoryTheory.forget AddCommGrpCat.{w})).obj (If.modules.obj M) ⟶\n      (SheafOfModules.toSheaf ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S) ⋙\n        sheafCompose K (CategoryTheory.forget AddCommGrpCat.{w})).obj (Lf.obj M))\n    (hqf : ∀ M (U) (x : (If.modules.obj M).val.obj U),\n      (qf M).hom.app U x = (eqToHom (hof M).symm).val.app U\n        (((PresheafOfModules.sheafificationAdjunction\n          (𝟙 ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S).obj)).unit.app\n            (changeOfRingsPresheaf cf (If.modules.obj M))).app U\n              ((1 : S.obj.obj U) ⊗ₜ[RIf.obj.obj U,(cf.hom.app U).hom] x)))\n    (qg : ∀ M, (SheafOfModules.toSheaf ((sheafCompose H (forget₂ CommRingCat RingCat)).obj RIg) ⋙\n        sheafCompose H (CategoryTheory.forget AddCommGrpCat.{w})).obj (Ig.modules.obj M) ⟶\n      (SheafOfModules.toSheaf ((sheafCompose H (forget₂ CommRingCat RingCat)).obj T) ⋙\n        sheafCompose H (CategoryTheory.forget AddCommGrpCat.{w})).obj (Lg.obj M))\n    (hqg : ∀ M (U) (x : (Ig.modules.obj M).val.obj U),\n      (qg M).hom.app U x = (eqToHom (hog M).symm).val.app U\n        (((PresheafOfModules.sheafificationAdjunction\n          (𝟙 ((sheafCompose H (forget₂ CommRingCat RingCat)).obj T).obj)).unit.app\n            (changeOfRingsPresheaf cg (Ig.modules.obj M))).app U\n              ((1 : T.obj.obj U) ⊗ₜ[RIg.obj.obj U,(cg.hom.app U).hom] x)))\n    (qh : ∀ M, (SheafOfModules.toSheaf ((sheafCompose H (forget₂ CommRingCat RingCat)).obj RIh) ⋙\n        sheafCompose H (CategoryTheory.forget AddCommGrpCat.{w})).obj (Ih.modules.obj M) ⟶\n      (SheafOfModules.toSheaf ((sheafCompose H (forget₂ CommRingCat RingCat)).obj T) ⋙\n        sheafCompose H (CategoryTheory.forget AddCommGrpCat.{w})).obj (Lh.obj M))\n    (hqh : ∀ M (U) (x : (Ih.modules.obj M).val.obj U),\n      (qh M).hom.app U x = (eqToHom (hoh M).symm).val.app U\n        (((PresheafOfModules.sheafificationAdjunction\n          (𝟙 ((sheafCompose H (forget₂ CommRingCat RingCat)).obj T).obj)).unit.app\n            (changeOfRingsPresheaf ch (Ih.modules.obj M))).app U\n              ((1 : T.obj.obj U) ⊗ₜ[RIh.obj.obj U,(ch.hom.app U).hom] x)))\n    (hφ : Ih.ringUnderlying.hom ≫\n      (sheafCompose H (CategoryTheory.forget CommRingCat.{w})).map ch =\n      G.map (If.ringUnderlying.hom ≫\n        (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map cf) ≫\n        Ig.ringUnderlying.hom ≫\n          (sheafCompose H (CategoryTheory.forget CommRingCat.{w})).map cg) :\n    ∃ a : Lh ≅ Lf ⋙ Lg, ∀ M (Z : Sheaf J (Type w))\n      (x : Z ⟶ (SheafOfModules.toSheaf ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⋙\n        sheafCompose J (CategoryTheory.forget AddCommGrpCat.{w})).obj M),\n      (F ⋙ G).map x ≫ Ih.moduleUnderlying.inv.app M ≫\n        qh M ≫\n        (SheafOfModules.toSheaf ((sheafCompose H (forget₂ CommRingCat RingCat)).obj T) ⋙\n        sheafCompose H (CategoryTheory.forget AddCommGrpCat.{w})).map (a.hom.app M) =\n      G.map (F.map x ≫ If.moduleUnderlying.inv.app M ≫\n        qf M) ≫\n          Ig.moduleUnderlying.inv.app (Lf.obj M) ≫\n            qg (Lf.obj M)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T145450-L-2398089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T145450-L-2398089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

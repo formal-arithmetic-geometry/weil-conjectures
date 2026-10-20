@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-independent-composite-algebraic-image",
+ "kind": "statement",
+ "title": "Algebraic inverse image and coefficient map for a composite",
+ "statement": "For three independently sized sites essentially small in the coefficient universe, finite-limit-preserving set-sheaf functors F and G, algebraic inverse-image lifts I from R to RI and I' from S to SI [def-weil-pbc-algebraic-inverse-image], and coefficient maps RI to S and SI to T, there exist a ring sheaf RI', an algebraic inverse-image lift for F composed with G, and a coefficient map RI' to T. Its underlying structural map is G applied to the first underlying structural map, followed by the second.",
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 0D6D, algebraic inverse image and composition."
+ },
+ "proof": [
+  {
+   "text": "Construct the transported commutative ring object by the finite-product monoidal functor; reconstruct its presheaf of rings on sections. The small-model equivalence reflects the sheaf condition. Transport additive groups and scalar actions to construct the algebraic inverse-image module functor, with every graph equation checked by finite-product comparisons.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the underlying coefficient maps. Their addition, multiplication and one graph equations compose because G preserves the diagrams. Cancel the underlying ring isomorphism and test universal binary graphs and the constant-one graph to bundle a ring-sheaf morphism. Its underlying map has the required equality.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 0D6D, algebraic inverse image and composition.",
+  "note": "B9: completely proved from the finite-product transport and Hom adjunction APIs; no new holes."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of inverse image functors ringed topoi modules tensor scalar extension natural comparison",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.pushforwardComp_inv_app_val_app",
+   "date": "2026-10-20",
+   "verdict": "No matching independent-site ringed composition theorem. Use the generic product, Hom adjunction and conjugation APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_homEquiv",
+   "results": "1 hits: CategoryTheory.Adjunction.comp_homEquiv",
+   "date": "2026-10-20",
+   "verdict": "No matching independent-site ringed composition theorem. Use the generic product, Hom adjunction and conjugation APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCompose.*CommRing|CommRingObjCat|conjugateIsoEquiv",
+   "results": "25 hits: Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean",
+   "date": "2026-10-20",
+   "verdict": "No matching independent-site ringed composition theorem. Use the generic product, Hom adjunction and conjugation APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The composite of two algebraic inverse images of sheaves of modules is an algebraic inverse image of the composite geometric morphism",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, AlgebraicGeometry.LocallyRingedSpace.comp_c_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.SheafedSpace.comp_c_app', AlgebraicGeometry.SheafedSpace.comp_hom_c_app, SheafOfModules.pushforwardComp, AlgebraicGeometry.SheafedSpace.comp_c_app",
+   "date": "2026-10-20",
+   "verdict": "The pullbackComp and conjugateEquiv_pullbackComp_inv results apply to continuous functors of sites. They do not supply the arbitrary geometric inverse-image lift at independent site universes used here. Retain their generic adjunction and conjugation APIs and construct the algebraic lift and normalized comparison explicitly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CochainTensorCoherenceData",
+  "date": "2026-10-20",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Algebraic inverse image and coefficient map for a composite used by the normalized composite presentation.",
+   "via": [
+    "def-pur-cochain-tensor-coherence-data",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.CochainCompositeAlgebraic",
+  "file": "lean/Sheaf/SecSmoothPurity/CochainCompositeAlgebraic.lean",
+  "declaration": "SheafOfModules.CochainCompositeConstruction.compositeAlgebraicImage_exists",
+  "declarations": [
+   "SheafOfModules.CochainCompositeConstruction.compositeAlgebraicImage_exists"
+  ],
+  "statement": "theorem compositeAlgebraicImage_exists\n    (F : Sheaf J (Type w) ⥤ Sheaf K (Type w))\n    (G : Sheaf K (Type w) ⥤ Sheaf H (Type w))\n    [PreservesFiniteLimits F] [PreservesFiniteLimits G]\n    (R : Sheaf J CommRingCat.{w}) (S RI : Sheaf K CommRingCat.{w})\n    (T SI : Sheaf H CommRingCat.{w})\n    (I : AlgebraicInverseImage F R RI) (c : RI ⟶ S)\n    (I' : AlgebraicInverseImage G S SI) (c' : SI ⟶ T) :\n    ∃ (RI' : Sheaf H CommRingCat.{w})\n      (I'' : AlgebraicInverseImage (F ⋙ G) R RI') (d : RI' ⟶ T),\n      I''.ringUnderlying.hom ≫\n        (sheafCompose H (CategoryTheory.forget CommRingCat.{w})).map d =\n      G.map (I.ringUnderlying.hom ≫\n        (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map c) ≫\n      I'.ringUnderlying.hom ≫\n        (sheafCompose H (CategoryTheory.forget CommRingCat.{w})).map c'",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T145450-L-2398089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T145450-L-2398089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

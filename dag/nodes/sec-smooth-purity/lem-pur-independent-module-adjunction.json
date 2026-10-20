@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-independent-module-adjunction",
+ "kind": "statement",
+ "title": "Module adjunction for an independently sized algebraic inverse image",
+ "statement": "For independently sized sites essentially small in the coefficient universe u, let F be a finite-limit-preserving left adjoint between sheaves of u-small sets and let I be a specified algebraic inverse-image lift from a ring sheaf R to RI [def-weil-pbc-algebraic-inverse-image]. The functor I.modules has a right adjoint.",
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03D7, module inverse-image/direct-image adjunction."
+ },
+ "proof": [
+  {
+   "text": "Reuse the existing generic geometric module construction and linear-map transport helpers, whose site object and morphism universes are independent. The auxiliary right-module construction specializes their operation comparisons to the adjunction-transposed structural ring map.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the RI-module direct image along the right adjoint using its product comparisons and the adjoint coefficient map R to F_*(RI). Its underlying sheaf is the specified direct image. Its addition and scalar action are the transported operations. The adjunction restricts to a natural bijection of linear maps because the graph equations of I preserve addition and scalar action on universal pairs and triples.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the underlying Hom equivalence to the linear maps. The addition and scalar-action graph equations are preserved and reflected by transposition, so this restriction is bijective. Faithfulness supplies both inverse identities. Naturality follows from the set-sheaf adjunction and both underlying natural isomorphisms; assemble Adjunction.mkOfHomEquiv.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03D7, module inverse-image/direct-image adjunction.",
+  "note": "B9: a complete proof by restricting the natural set-sheaf Hom equivalence using the operation graph equations."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The specified algebraic inverse image along a geometric morphism of sheaf topoi preserves tensor products of modules",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-19",
+   "verdict": "These use functors of sites or special condensed categories, not the specified abstract inverse-image lift. The existing project comparison has shared site universes."
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesFiniteLimits, tensorObj",
+   "results": "0 hits; unknown identifier PreservesFiniteLimits",
+   "date": "2026-10-19",
+   "verdict": "The query parser did not resolve the class name; no match was obtained."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage.*tensor|inverseImageTensorComparison",
+   "results": "0 hits",
+   "date": "2026-10-19",
+   "verdict": "No generalized comparison found by this search; direct local inspection found only the shared-universe theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The algebraic inverse image of sheaves of modules for a geometric morphism is left adjoint to a module direct image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-19",
+   "verdict": "The results concern site-induced or specialized functors, rather than the specified abstract algebraic inverse-image lift at independent site sizes."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CochainTensorCoherenceData",
+  "date": "2026-10-19",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Module pullback adjunction used by the canonical ringed-pullback presentation, before extension of scalars.",
+   "via": [
+    "def-pur-cochain-tensor-coherence-data",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.CochainModuleAdjunction",
+  "file": "lean/Sheaf/SecSmoothPurity/CochainModuleAdjunction.lean",
+  "declaration": "SheafOfModules.CochainInversePairing.inverseImageModuleAdjunction_exists",
+  "declarations": [
+   "SheafOfModules.CochainInversePairing.inverseImageModuleAdjunction_exists"
+  ],
+  "statement": "theorem inverseImageModuleAdjunction_exists\n    (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})\n    (F : Sheaf J (Type u) ⥤ Sheaf K (Type u))\n    (V : Sheaf K (Type u) ⥤ Sheaf J (Type u))\n    (adj : F ⊣ V) [PreservesFiniteLimits F]\n    (I : AlgebraicInverseImage F R RI) :\n    ∃ P : SheafOfModules.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj RI) ⥤\n        SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R),\n      Nonempty (I.modules ⊣ P)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T145450-L-2398089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261020T145450-L-2398089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
