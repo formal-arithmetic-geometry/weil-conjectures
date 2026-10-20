@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-ringed-equivalence-slices",
+ "kind": "statement",
+ "title": "Ringed slice equivalences and module restriction squares",
+ "statement": "Let e:(Sh(C),R)→(Sh(D),S) be a ringed-topos equivalence with invertible structural map, for small sites and commutative coefficient sheaves [def-weil-pbc-ringed-topos-morphism]. Choose element-site slice adjunction data [lem-weil-pbc-ringed-sheaf-slice-adjunction] on both sides. For every sheaf A on D there is a ringed equivalence s_A from the element site of e.inverse(A) with R to the element site of A with S. Its inverse image is the conjugate, by the given fibre equivalences, of Over.post(e.inverse). There is a natural isomorphism e.inverse⋙j_eA*≅j_A*⋙s_A.inverse satisfying the restricted structural-map equation. For every whole and slice module-equivalence package tied to e and s_A as in [def-weil-pbc-ringed-presentation-comparison-data], these module equivalences commute with restriction to A and with further restriction along every B→A.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IE and 04J4, applied to an equivalence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-presentation-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply e.inverse to objects and arrows over A. The inverse on over-categories applies e.direct and uses the invertible adjunction unit to identify e.direct(e.inverse(A)) with A. The original unit and counit give the slice equivalence. Conjugate with the given element-site fibre equivalences. Finite-product comparisons identify the restricted ring, and the image of e.ringMap is the invertible structural map. The fibre comparison gives q and its displayed structural identity.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the induced module direct images from these geometric ring data. Both routes around a module restriction square have the same set-sheaf functor and scalar action, by the structural identity. The fibre comparison and its inverse are therefore linear and natural. For B→A the same argument uses the fibre product over A and gives the further-restriction square.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module functor in any supplied presentation package has inverse naturally isomorphic to the induced module direct image. Uniqueness of left adjoints transports the constructed module comparisons to those supplied functors. This proves the quantified assertion for all whole and slice packages and every continuous further restriction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IE and 04J4, applied to an equivalence; explicit comparison argument of the original nine-step presentation-transport proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sheaf topoi induces ringed equivalences on arbitrary sheaf slices and module restriction squares",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj, CategoryTheory.Equivalence.sheafCongr.functor_map_val_app, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_map, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.sheafCongr.unitIso_hom_app_val_app",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Over.post\", \"Equivalence\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Over.post.*[Ee]quiv|[Ee]quiv.*Over.post|ringed.*[Ss]lice",
+   "results": "[grep] OK 9 hit(s); Mathlib/AlgebraicGeometry/Group/Affine.lean:74, Mathlib/AlgebraicGeometry/Group/Affine.lean:84, Mathlib/AlgebraicGeometry/Group/Affine.lean:149, Mathlib/AlgebraicGeometry/Group/Affine.lean:154, Mathlib/CategoryTheory/Comma/Over/Basic.lean:482, Mathlib/CategoryTheory/Sites/Over.lean:220, Mathlib/CategoryTheory/Sites/Over.lean:221, Mathlib/CategoryTheory/Sites/Over.lean:236, Mathlib/CategoryTheory/Sites/Over.lean:238",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ringed topos equivalence induces ringed equivalences on arbitrary sheaf slices compatible with module restriction",
+   "results": "8 hits: ModuleCat.restrictScalars_isEquivalence_of_ringEquiv, SheafOfModules.over, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, SheafOfModules, CategoryTheory.Equivalence.sheafCongr, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.unitHomEquiv, PresheafOfModules.sheafifyHomEquiv'; ",
+   "date": "2026-10-21",
+   "verdict": "No match at the arbitrary ringed-topos and element-site scope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedPresentationTransport",
+  "date": "2026-10-21",
+  "group": "Z5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Final scalar-extension/exchange clause: invariance of the ambient direct-image/completion comparison under ringed-topos presentations. Ringed slice equivalences and module restriction squares",
+   "via": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-pushforward-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedEquivalenceSlices",
+  "file": "lean/Sheaf/CategoryTheory/RingedEquivalenceSlices.lean",
+  "declaration": "CategoryTheory.ringed_equivalence_slices",
+  "statement": "theorem ringed_equivalence_slices\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}\n    (e : RingedToposMorphism (localCoefficientRings R) (localCoefficientRings S))\n    [e.inverse.IsEquivalence] [IsIso e.ringMap]\n    (sourceSlices : ∀ A : Sheaf K (Type u),\n      RingedSheafSliceAdjunctionData (localCoefficientRings S) A)\n    (targetSlices : ∀ A : Sheaf J (Type u),\n      RingedSheafSliceAdjunctionData (localCoefficientRings R) A) :\n    ∃ (s : ∀ A : Sheaf K (Type u),\n        RingedToposMorphism\n          (localCoefficientRings (presentationElementRing R (e.inverse.obj A)))\n          (localCoefficientRings (presentationElementRing S A)))\n      (h : ∀ A : Sheaf K (Type u), (s A).inverse.IsEquivalence)\n      (k : ∀ A : Sheaf K (Type u), IsIso (s A).ringMap)\n      (q : ∀ A : Sheaf K (Type u),\n        e.inverse ⋙ elementSheafPullback (e.inverse.obj A) ≅\n          elementSheafPullback A ⋙ (s A).inverse),\n      (∀ A : Sheaf K (Type u), Nonempty ((s A).inverse ≅\n        (sourceSlices A).fibreEquivalence.functor ⋙ Over.post e.inverse ⋙\n          (targetSlices (e.inverse.obj A)).fibreEquivalence.inverse)) ∧\n      (∀ A : Sheaf K (Type u),\n        (q A).hom.app ((sheafCompose K (forget RingCat)).obj (localCoefficientRings S)) ≫\n          (s A).ringMap = (elementSheafPullback (e.inverse.obj A)).map e.ringMap) ∧\n      ∀ (whole : RingedPresentationAt e)\n        (T : ∀ A : Sheaf K (Type u), RingedPresentationAt (s A))\n        (rs : RingedPresentationRestrictions S) (rt : RingedPresentationRestrictions R),\n        (∀ A : Sheaf K (Type u),\n          Nonempty (whole.transport.modules.functor ⋙\n            elementModulePullback.{u, u} (localCoefficientRings R) (e.inverse.obj A) ≅\n              elementModulePullback.{u, u} (localCoefficientRings S) A ⋙\n                (T A).transport.modules.functor)) ∧\n        ∀ {A B : Sheaf K (Type u)} (b : B ⟶ A),\n          Nonempty ((T A).transport.modules.functor ⋙\n            elementModulePullbackOver.{u, u} (localCoefficientRings R) (e.inverse.map b)\n              (rt.overContinuous (e.inverse.map b)) ≅\n            elementModulePullbackOver.{u, u} (localCoefficientRings S) b\n              (rs.overContinuous b) ⋙ (T B).transport.modules.functor)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1ea02",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261020T221408-L-4183112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1ea02",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261020T221408-L-4183112",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved declarations in RingedPresentationData against the published item module (byte-identical, re-exported); the 4 new sorry statements against their nodes and the published structure fields; the item assembly against node lem-weil-pbc-ringed-presentation-transport; importer RingedPushforwardCompletion compiled against the delivery"
+ }
+}

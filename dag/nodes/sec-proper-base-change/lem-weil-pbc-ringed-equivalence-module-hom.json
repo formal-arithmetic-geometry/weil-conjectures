@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-ringed-equivalence-module-hom",
+ "kind": "statement",
+ "title": "Module and closed Hom transport under a ringed equivalence",
+ "statement": "Let (C,J),(D,K) be small sites, R,S commutative ring sheaves, and e:(Sh(C),R)→(Sh(D),S) a ringed-topos morphism [def-weil-pbc-ringed-topos-morphism] whose inverse-image functor and structural map are equivalences and isomorphisms. With the comparison data of [def-weil-pbc-ringed-presentation-comparison-data], there exists a module equivalence T:Mod(S)≌Mod(R), a forward rank-one isomorphism and a forward natural derived internal-Hom comparison. Its inverse is naturally isomorphic to e.modules. There is a natural isomorphism a:T.functor⋙forget_R≅forget_S⋙e.inverse whose component at the rank-one module, followed by e.ringMap, is the underlying forward rank-one isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CR and 03D7, equivalence case; sites-cohomology.tex Tags 07A4 and 08J9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-presentation-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Transport zero, addition, negation and scalar multiplication through the finite-product-preserving set-sheaf equivalence. The product comparisons and the structural isomorphism transport all identities. Apply the inverse equivalence to recover the module. The sheaf unit and counit commute with the transported operations, hence are linear and inverse. The generalized-element module_linear identity identifies the induced direct image with e.modules, naturally. The same construction on the regular module gives the structural rank-one equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module equivalence preserves balanced bilinear maps, so it preserves tensor products and regular units. The exact termwise functors induce mutually inverse functors on the unbounded derived categories. The canonical derived tensor comparison agrees with this tensor transport on K-flat representatives.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every derived test object C, the equivalence and closed tensor-Hom adjunction identify Hom(C,F RHom(L,M)) with Hom(G C tensor L,M), then Hom(C tensor F L,F M), and then Hom(C,RHom(F L,F M)). All bijections are natural in C,L,M. Their images of identity morphisms are mutually inverse by naturality, giving the natural internal-Hom comparison. Interchange F and G for the backward comparison.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CR and 03D7, equivalence case; sites-cohomology.tex Tags 07A4 and 08J9; explicit comparison argument of the original nine-step presentation-transport proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of ringed topoi induces an equivalence on categories of sheaves of modules and their unbounded derived categories",
+   "results": "8 hits including Functor.mapDerivedCategory, Equivalence.mapDerivedCategory and sheaf equivalence declarations; none treats variable-ring modules over arbitrary equivalent sheaf topoi.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "[loogle] OK 3 hit(s); SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "grep",
+   "query": "ringed.*equiv|equiv.*ringed|pushforwardPushforwardEquivalence",
+   "results": "[grep] OK 15 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:388, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:403, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:404, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:408, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:409, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:435, Mathlib/Topology/Sheaves/Module.lean:32, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean:658, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean:714, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:165, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean:370, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean:373, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean:376, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean:379, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean:383",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of ringed topoi induces an exact equivalence of module sheaves preserving derived internal Hom",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, ModuleCat.restrictScalars_isEquivalence_of_ringEquiv, SheafOfModules.hom_ext, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, PresheafOfModules.homEquivOfIsLocallyBijective, CategoryTheory.Equivalence.sheafCongrPrecoherent; ",
+   "date": "2026-10-21",
+   "verdict": "No match at the arbitrary ringed-topos and element-site scope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedPresentationTransport",
+  "date": "2026-10-21",
+  "group": "Z5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Final scalar-extension/exchange clause: invariance of the ambient direct-image/completion comparison under ringed-topos presentations. Module and closed Hom transport under a ringed equivalence",
+   "via": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-pushforward-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedEquivalenceModuleHom",
+  "file": "lean/Sheaf/CategoryTheory/RingedEquivalenceModuleHom.lean",
+  "declaration": "CategoryTheory.ringed_equivalence_module_hom",
+  "statement": "theorem ringed_equivalence_module_hom\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}\n    (e : RingedToposMorphism (localCoefficientRings R) (localCoefficientRings S))\n    [e.inverse.IsEquivalence] [IsIso e.ringMap] :\n    ∃ T : RingedPresentationEquivalenceCore S R,\n      Nonempty (T.modules.inverse ≅ e.modules) ∧\n      ∃ a : T.modules.functor ⋙ presentationForget R ≅\n          presentationForget S ⋙ e.inverse,\n        (presentationForget R).map T.forwardUnit.hom =\n          a.hom.app (SheafOfModules.unit (localCoefficientRings S)) ≫ e.ringMap",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1ea02",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261020T221408-L-4183112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1ea02",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261020T221408-L-4183112",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved declarations in RingedPresentationData against the published item module (byte-identical, re-exported); the 4 new sorry statements against their nodes and the published structure fields; the item assembly against node lem-weil-pbc-ringed-presentation-transport; importer RingedPushforwardCompletion compiled against the delivery"
+ }
+}

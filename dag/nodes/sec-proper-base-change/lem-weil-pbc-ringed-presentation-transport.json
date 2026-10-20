@@ -23,139 +23,63 @@
  ],
  "proof": [
   {
-   "text": "Put $F=e^*$ and $G=e_*$. Because the structural ring map is invertible, $FM$ is $e^{-1}M$ with its transported $R$-action, by the tensor formula in [lem-weil-pbc-ringed-topoi-module-adjunction]. Transport the addition, zero, inverse and scalar-action maps through the inverse equivalence of sheaves of sets; preservation of products ensures that all their defining diagrams remain commutative. This gives an inverse on module objects. Its unit and counit are the underlying equivalence isomorphisms and are linear, since the action maps were transported along them. The module adjunction therefore has invertible unit and counit. Both functors preserve sums of morphisms (addition is the diagonal followed by the product of the two maps followed by module addition). An additive equivalence preserves kernels and cokernels by their universal properties, hence is exact in the abelian categories of [def-weil-sheaf-of-modules-category].",
+   "text": "Use [lem-weil-pbc-ringed-equivalence-module-hom] for the module equivalence, its specified underlying comparison, regular-unit map and two derived internal-Hom comparisons. Equivalences preserve binary products and zero maps, so they are additive; they preserve all limits and colimits. The exact-inverse adjunction preserves K-injectives. Apply exact-functor localization for the termwise factorization and the derived unit and counit. The inverse regular-unit map is the inverse image of the forward map followed by the inverse module-equivalence unit. The inverse derived Hom comparison is obtained from the forward one by cancelling the equivalence on the output and its opposite-product equivalence on the inputs.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "lemma-adjoint-pullback-pushforward-modules, Tag 03D7; explicit equivalence argument for an invertible structural map"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact functors $F,G$. Their termwise unit and counit give inverse isomorphisms of complexes, and hence inverse natural isomorphisms after localization at quasi-isomorphisms [def-weil-abstract-derived-category]. This produces mutually inverse equivalences on the unbounded derived categories, represented termwise. Exactness gives $H^n(FK)\\cong F H^n(K)$ and the analogous equality for $G$, so acyclicity and zero objects are preserved and reflected; no boundedness is used.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "derived-category localization and exact termwise functors; natural unit and counit specialized to an equivalence"
-   }
-  },
-  {
-   "text": "If $I$ is K-injective and $C$ is acyclic, the termwise equivalence identifies $\\operatorname{Hom}_{K(R)}(C,FI)$ with $\\operatorname{Hom}_{K(R')}(GC,I)=0$, since $GC$ is acyclic. The identification respects homotopies: applying an additive functor to $f=dh+hd$ gives $Ff=(Fd)(Fh)+(Fh)(Fd)$. This is exactly K-injectivity [def-pur-kinjective-complex]. Interchanging $F,G$ proves the converse and preservation in the other direction.",
-   "uses": [
-    "def-pur-kinjective-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition 070H, derived-definition-K-injective; direct homotopy calculation"
-   }
-  },
-  {
-   "text": "For a sheaf $A'$ put $A=e^{-1}A'$. On slices the functor sends $(T'\\to A')$ to $(e^{-1}T'\\to A)$; its inverse applies $e_*$ and then the equivalence unit to identify $e_*A$ with $A'$. The original unit and counit give inverse natural isomorphisms on these slices. The restricted ring is $R_A=R\\times A\\to A$, which is identified with the inverse image of $R'_{A'}$ because $e^{-1}$ preserves products. Use [lem-weil-pbc-ringed-sheaf-slice-adjunction] for the small element-site presentations and their rings. Steps 1-3 apply to these ringed equivalences. For $B'\\to A'$, both iterated restrictions send a sheaf to its product with $e^{-1}B'$ over $e^{-1}A'$; the product comparison gives their canonical isomorphism. For a site object $U$, [lem-weil-pbc-localized-sheaves-over-representable] identifies this construction over $h_U^\\#$ with the localized site $\\mathcal C/U$, without assuming subcanonicity.",
-   "uses": [
-    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-    "lem-weil-pbc-localized-sheaves-over-representable"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 04IE and 04J4, lemma-localize-ringed-topos and lemma-relocalize-ringed-topos; slice equivalence constructed explicitly"
-   }
-  },
-  {
-   "text": "Here is the derived internal Hom comparison, on the whole topos and on each slice of step 4. Exactness means that $F$ computes $Le^*$: applying $F$ to a K-flat resolution gives a quasi-isomorphism to the termwise image. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $F$ preserves derived tensor. For every $C\\in D(R)$ the equivalence of step 2 and the closed adjunction of [lem-sf-ringed-derived-closed-symmetric-monoidal] give natural bijections\n$$\\begin{aligned}\n\\operatorname{Hom}(C,F R\\mathcal Hom(L,M))&\\cong\\operatorname{Hom}(GC,R\\mathcal Hom(L,M))\\\\\n&\\cong\\operatorname{Hom}(GC\\otimes^{\\mathbf L}L,M)\\\\\n&\\cong\\operatorname{Hom}(C\\otimes^{\\mathbf L}FL,FM)\\\\\n&\\cong\\operatorname{Hom}(C,R\\mathcal Hom(FL,FM)).\n\\end{aligned}$$\nThe third bijection uses $FGC\\cong C$ and tensor preservation. Applying the natural bijection and its inverse to the respective identity morphisms produces mutually inverse arrows, so $F R\\mathcal Hom(L,M)\\cong R\\mathcal Hom(FL,FM)$, naturally in $L,M$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product; Section 08J7 equation-internal-hom and Tag 08J9, lemma-internal-hom; explicit representing-object comparison"
-   }
-  },
-  {
-   "text": "To justify restriction of this calculation and the local tests to arbitrary sheaves, use [lem-weil-pbc-ringed-sheaf-slice-adjunction]. Since $j_{A!}$ is exact and left adjoint to restriction, [lem-weil-pbc-right-adjoint-preserves-kinjective] shows that $j_A^*I$ is K-injective whenever $I$ is. On the element site, further slicing at $(U,s)$ gives $\\mathcal C/U$: an object over $(U,s)$ is uniquely an arrow $V\\to U$, its section being forced to be the restriction of $s$. Thus the sheaf Hom formula of [def-pur-sheaf-hom] gives\n$$j_A^*\\mathcal Hom_R(L^p,I^q)\\cong\\mathcal Hom_{R_A}(j_A^*L^p,j_A^*I^q).$$\nRestriction commutes with products (both sides evaluate at $(U,s)$ as the product of the values at $U$). It therefore commutes with the Hom complex of [def-pur-hom-complex], including its differential $d\\phi=d_I\\phi-(-1)^n\\phi d_L$. Compute derived Hom with $I$ by [def-pur-derived-internal-hom]; its restricted complex is a valid K-injective representative, giving $j_A^*R\\mathcal Hom_R(L,M)\\cong R\\mathcal Hom_{R_A}(j_A^*L,j_A^*M)$. Applying this inside a slice proves the same assertion for every further restriction. These comparisons agree for two successive restrictions because on every $(V,t)$ they are the same restriction of linear maps and the same differential.",
-   "uses": [
-    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-ringed-equivalence-module-hom",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-pur-sheaf-hom",
-    "def-pur-hom-complex",
-    "def-pur-derived-internal-hom"
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; Tag 08JB, lemma-restriction-RHom-to-U; element-site extension of their representative calculations"
-   }
+   "elementary": false
   },
   {
-   "text": "The localization in [def-weil-pbc-ringed-section-localization] is the colimit of the multiplication sequence $R\\xrightarrow a R\\xrightarrow a\\cdots$ in module sheaves, as spelled out in [def-weil-pbc-local-coefficient-localization]. The global-section version on any element site has the same description: send $r$ at stage $n$ to $r/a^n$ in sectionwise localization; the fraction relations are exactly the filtered-colimit relations, and module sheafification is left adjoint to inclusion, hence computes the sheaf colimit. Both $F$ on a slice and restriction $j_B^*$ preserve these colimits: the first is an equivalence, and the second is the module pullback left adjoint to module pushforward by [lem-weil-pbc-ringed-topoi-module-adjunction]. Their ring comparisons send multiplication by $a$ to multiplication by its image. Consequently they identify the localization and its map from the ring, $F(R'_{A'}[1/a])\\cong R_A[1/Fa]$, and likewise after every further restriction. The comparison is fixed by the maps of the multiplication sequence, so agrees for iterated restrictions.",
+   "text": "A natural regular-unit isomorphism commuting with scalars gives an isomorphism of the two constant-object sequential diagrams by NatTrans.ofSequence. Compare their colimit cocones after applying the colimit-preserving functor. The stage-zero equation of [lem-weil-pbc-scalar-localization-regular-colimit] gives exactly the localization unit equation. This constructs the localization field for every equivalence and restriction core.",
    "uses": [
-    "def-weil-pbc-ringed-section-localization",
-    "def-weil-pbc-local-coefficient-localization",
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
+    "lem-weil-pbc-scalar-localization-regular-colimit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "coefficient localization in Tag 0997, lemma-hom-from-Af; explicit fraction/colimit computation"
-   }
+   "elementary": false
   },
   {
-   "text": "First express the tests independently of a chosen generating family. Suppose they hold on every object $U$ of a given site. For any sheaf $A$ and section $a:A\\to\\mathcal I$, form $Z=R\\mathcal Hom_{R_A}(R_A[1/a],N|_A)$. On the element site of [lem-weil-pbc-ringed-sheaf-slice-adjunction], restriction at $(U,s)$ identifies $Z|_{(U,s)}$, by steps 6-7, with $R\\mathcal Hom_{R_U}(R_U[1/a(s)],N|_U)=0$, since $a(s)\\in\\mathcal I(U)$. For each $n$, restriction is exact, so $(H^nZ)|_{(U,s)}=0$. Evaluating at the terminal object of that localized site shows $(H^nZ)(U,s)=0$. Every value of every cohomology sheaf is therefore zero, and $Z=0$ in the derived category [def-weil-abstract-derived-category]. Conversely, the arbitrary-sheaf tests include the original tests by taking $A=h_U^\\#$, using [lem-weil-pbc-localized-sheaves-over-representable]. Thus the two testing conventions are equivalent. This argument also covers an empty element site or an empty covering.",
+   "text": "Apply [lem-weil-pbc-element-restriction-hom] to both rings and complete its cores using the preceding sequential-colimit argument. Derive their termwise comparisons and relocalization in the derived categories by mapDerivedCategoryNatIso and mapDerivedCategoryCompIso. The actual restriction additivity, exactness, K-injective preservation, element-map continuity and relocalization are supplied by the five proved APIs of RingedPresentationData. The restriction lemma supplies only its nonformal Hom and further-restriction/site-object comparisons.",
+   "uses": [
+    "lem-weil-pbc-element-restriction-hom",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-pbc-ringed-presentation-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the actual element-site slice adjunctions from [lem-weil-pbc-ringed-sheaf-slice-adjunction]. Use [lem-weil-pbc-ringed-equivalence-slices] to construct the slice ringed morphisms with their set and structural comparisons and module squares. Complete each slice module equivalence as in step 1. Apply the functorial derived composition isomorphisms to the module squares to obtain the two derived squares.",
    "uses": [
     "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-localized-sheaves-over-representable"
+    "lem-weil-pbc-ringed-equivalence-slices",
+    "lem-weil-pbc-ringed-equivalence-module-hom",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Definition 0999, definition-derived-complete, and opening reduction of Tag 099J, lemma-pushforward-derived-complete; explicit arbitrary-sheaf testing argument"
-   }
+   "elementary": false
   },
   {
-   "text": "For $A=e^{-1}A'$, full faithfulness identifies sections $a:A'\\to\\mathcal I'$ with sections $b:A\\to e^{-1}\\mathcal I'=\\mathcal I$; the equality uses the invertible structural ring map, so these are the same ideal elements under the transported action [def-weil-pbc-ringed-ideal-generators]. Steps 5 and 7 identify the two corresponding derived Hom objects. They vanish simultaneously because the equivalence on the slice preserves and reflects zero objects. Every sheaf $A$ is isomorphic to the inverse image of some $A'$, and this identification also transports every section of $\\mathcal I$. Hence all arbitrary-sheaf tests hold on one side exactly when they hold on the other. Apply step 8 in each presentation to obtain precisely the two families of site-object tests in the statement. This proves the last clause for every $N\\in D(R')$ and every ideal sheaf, without finite-generation or boundedness assumptions.",
+   "text": "Use [lem-weil-pbc-ringed-equivalence-local-tests] for every unbounded N and every monomorphism of the ideal into the regular module. Assemble these fields into the original unchanged RingedPresentationTransport record.",
    "uses": [
-    "def-weil-pbc-ringed-ideal-generators"
+    "lem-weil-pbc-ringed-equivalence-local-tests"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099J, lemma-pushforward-derived-complete, opening presentation reduction; explicit equivalence case"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "def-weil-abstract-derived-category",
-  "def-pur-kinjective-complex",
-  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-  "lem-weil-pbc-localized-sheaves-over-representable",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-equivalence-module-hom",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "def-pur-sheaf-hom",
-  "def-pur-hom-complex",
-  "def-pur-derived-internal-hom",
-  "def-weil-pbc-ringed-section-localization",
-  "def-weil-pbc-local-coefficient-localization",
-  "def-weil-pbc-ringed-ideal-generators"
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-scalar-localization-regular-colimit",
+  "lem-weil-pbc-element-restriction-hom",
+  "def-weil-pbc-ringed-presentation-comparison-data",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-equivalence-slices",
+  "lem-weil-pbc-ringed-equivalence-local-tests"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 099J, opening presentation reduction, with the equivalence, slice and internal-Hom arguments supplied explicitly from the cited Stacks calculus"
+  "document": "lean/Sheaf/CategoryTheory/RingedPresentationTransport.lean",
+  "place": "Explicit Lean assembly from four separate geometric/closed comparison results, with sequential-colimit localization, exact derived composition and automatic equivalence properties proved in this module."
  },
  "mathlib_searches": [
   {
@@ -309,26 +233,10 @@
   "module": "Sheaf.CategoryTheory.RingedPresentationTransport",
   "declaration": "CategoryTheory.ringed_presentation_transport",
   "declarations": [
-   "CategoryTheory.PresentationModules",
-   "CategoryTheory.PresentationDerived",
-   "CategoryTheory.presentationQ",
-   "CategoryTheory.presentationRHom",
-   "CategoryTheory.presentationForget",
-   "CategoryTheory.presentationScalar",
-   "CategoryTheory.presentationComplexMap",
-   "CategoryTheory.presentationDerivedMap",
-   "CategoryTheory.RingedPresentationFunctor",
-   "CategoryTheory.RingedPresentationEquivalence",
-   "CategoryTheory.RingedPresentationFunctor.derived",
-   "CategoryTheory.presentationElementRing",
-   "CategoryTheory.presentationComplete",
-   "CategoryTheory.RingedPresentationRestrictions",
-   "CategoryTheory.RingedPresentationAt",
-   "CategoryTheory.RingedPresentationTransport",
    "CategoryTheory.ringed_presentation_transport"
   ],
   "file": "lean/Sheaf/CategoryTheory/RingedPresentationTransport.lean",
-  "statement": "theorem ringed_presentation_transport {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}} (e : RingedToposMorphism (localCoefficientRings R) (localCoefficientRings S)) [e.inverse.IsEquivalence] [IsIso e.ringMap] : Nonempty (RingedPresentationTransport e)",
+  "statement": "theorem ringed_presentation_transport\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}\n    (e : RingedToposMorphism (localCoefficientRings R) (localCoefficientRings S))\n    [e.inverse.IsEquivalence] [IsIso e.ringMap] :\n    Nonempty (RingedPresentationTransport e)",
   "branch": "newtargets-dag",
   "by": "NF",
   "date": "2026-10-17",
@@ -341,5 +249,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Clause-by-clause match: RingedToposMorphism direction (S=R'), [e.inverse.IsEquivalence][IsIso e.ringMap] only; module equivalence pinned to e via pushforward≅e.modules, underlying, structural; mapDerivedCategory derived equivalence with unit/counit; K-injectives both ways; slices pinned by sliceTopos/sliceSets/sliceStructural; restrictions, RHom, localization fields; localTests iff via landed IsLocallyDerivedRingedIdealComplete for all unbounded N and every mono ideal with I=F(I'). §1(B) repairs correct and unused elsewhere: localization_modules j_*⊣j^* (false) -> j^*⊣j_*; exists_localizedSheavesOverRepresentable generalized from Precoverage+HasPullbacks to GrothendieckTopology. stmt_deps additions correct. No hollow defs, only sorry, docstrings ok, single universe u per convention. nt_compile --json on 3 files rc=0, no errors (2.7/5.4/26.1 s). Remarks only: Nonempty-packaged isos, siteObject pinned via restrictions, Q23 lean note on slice node replaced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1ea02",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261020T221408-L-4183112",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved declarations in RingedPresentationData against the published item module (byte-identical, re-exported); the 4 new sorry statements against their nodes and the published structure fields; the item assembly against node lem-weil-pbc-ringed-presentation-transport; importer RingedPushforwardCompletion compiled against the delivery"
  }
 }

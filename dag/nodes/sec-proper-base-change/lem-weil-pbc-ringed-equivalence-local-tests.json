@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-ringed-equivalence-local-tests",
+ "kind": "statement",
+ "title": "Presentation invariance of local derived ideal tests",
+ "statement": "Let e:(Sh(C),R)→(Sh(D),S) be a ringed-topos equivalence with invertible structural map and w a module and derived comparison package tied to e as in [def-weil-pbc-ringed-presentation-comparison-data]. Let N∈D(S), I be an S-module sheaf and ι:I→S a monomorphism. With local derived ideal completeness of [def-weil-pbc-locally-derived-ringed-ideal-complete], N is locally derived I-complete if and only if w.forward(N) is locally derived w.functor(I)-complete for the inclusion w.functor(ι) followed by the specified rank-one isomorphism. No boundedness or finite-generation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099J opening presentation reduction, and Tag 0999 definition-derived-complete"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-presentation-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Replace site-object tests by arbitrary-sheaf tests indexed by generalized sections A→I. Restrict a generalized test to each (U,a) of the element site of A. The restriction-Hom comparison and the sequential-colimit localization comparison identify it with the ordinary local test on U. Thus all its cohomology sheaves vanish at every (U,a); the test object is zero. Conversely use A=h_U# and the site-object module comparison. Empty sites, initial A and empty covering sieves require no exception.",
+   "uses": [
+    "lem-weil-pbc-element-restriction-hom",
+    "lem-weil-pbc-scalar-localization-regular-colimit",
+    "def-weil-pbc-locally-derived-ringed-ideal-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For A=e.inverse(A′), full faithfulness of the sheaf equivalence and the underlying module comparison identify the generalized sections of I′ with those of F(I′). Naturality and the structural regular-unit equation identify the scalar induced by the ideal inclusion. The slice-equivalence restriction squares identify the restricted objects and ideals. The internal-Hom and localization comparisons then identify the two derived test objects up to the slice derived equivalence.",
+   "uses": [
+    "lem-weil-pbc-ringed-equivalence-module-hom",
+    "lem-weil-pbc-ringed-equivalence-slices",
+    "def-weil-pbc-ringed-ideal-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An equivalence preserves and reflects zero objects. Essential surjectivity of e.inverse supplies every test sheaf on the other side, including all its generalized ideal sections. Therefore the arbitrary-sheaf tests hold on one side exactly when they hold on the other. Apply the first step to recover exactly the two site-object completeness conditions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-element-restriction-hom",
+  "lem-weil-pbc-scalar-localization-regular-colimit",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "lem-weil-pbc-ringed-equivalence-module-hom",
+  "lem-weil-pbc-ringed-equivalence-slices",
+  "def-weil-pbc-ringed-ideal-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099J opening presentation reduction, and Tag 0999 definition-derived-complete; explicit comparison argument of the original nine-step presentation-transport proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local derived ideal completeness is invariant under equivalence of ringed topoi using internal Hom localization vanishing tests",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, SheafOfModules.isQuasicoherent, CategoryTheory.GrothendieckTopology.W_eq_isLocal_range_sheafToPresheaf_obj, CategoryTheory.GrothendieckTopology.W_eq_W_range_sheafToPresheaf_obj, CategoryTheory.Functor.hasPointwiseLeftDerivedFunctorAt_iff_of_mem, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Equivalence.hasSheafCompose, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsZero\", \"DerivedCategory\"",
+   "results": "[loogle] OK 4 hit(s); DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.Plus.isZero_homology_of_isGE, DerivedCategory.Plus.isZero_homology_of_isLE",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]erived.*[Cc]omplete|[Cc]omplete.*[Ee]quiv",
+   "results": "[grep] OK 25 hit(s); Mathlib/ModelTheory/Types.lean:201, Mathlib/ModelTheory/Satisfiability.lean:423, Mathlib/ModelTheory/Satisfiability.lean:424, Mathlib/ModelTheory/Satisfiability.lean:443, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean:376, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean:442, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean:443, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean:451, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean:470, Mathlib/Combinatorics/SimpleGraph/Clique.lean:402, Mathlib/Combinatorics/SimpleGraph/Clique.lean:417, Mathlib/Combinatorics/SimpleGraph/Clique.lean:422, Mathlib/Combinatorics/SimpleGraph/Clique.lean:493, Mathlib/Combinatorics/SimpleGraph/Extremal/Turan.lean:22, Mathlib/Combinatorics/SimpleGraph/Coloring/Vertex.lean:150, Mathlib/Combinatorics/SimpleGraph/Coloring/Vertex.lean:159, Mathlib/Analysis/InnerProductSpace/Dual.lean:63, Mathlib/Analysis/Calculus/ContDiff/Defs.lean:125, Mathlib/Analysis/Calculus/ContDiff/Defs.lean:469, Mathlib/Analysis/Calculus/ContDiff/Defs.lean:934, Mathlib/Analysis/Calculus/ContDiff/Defs.lean:1065, Mathlib/Analysis/Complex/Basic.lean:126, Mathlib/Analysis/Normed/Algebra/UnitizationL1.lean:58, Mathlib/Analysis/Normed/Module/FiniteDimension.lean:27, Mathlib/Topology/UniformSpace/UniformEmbedding.lean:295",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local derived completeness of a sheaf of modules is invariant under changing the site presentation of a ringed topos",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.localGeneratorsData_generators, SheafOfModules.IsFiniteType, SheafOfModules.Presentation, SheafOfModules.isSheaf, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.sheafificationCompPullback, SheafOfModules.LocalGeneratorsData.ctorIdx, SheafOfModules.IsQuasicoherent; ",
+   "date": "2026-10-21",
+   "verdict": "No match at the arbitrary ringed-topos and element-site scope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedPresentationTransport",
+  "date": "2026-10-21",
+  "group": "Z5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Final scalar-extension/exchange clause: invariance of the ambient direct-image/completion comparison under ringed-topos presentations. Presentation invariance of local derived ideal tests",
+   "via": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-pushforward-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedEquivalenceLocalTests",
+  "file": "lean/Sheaf/CategoryTheory/RingedEquivalenceLocalTests.lean",
+  "declaration": "CategoryTheory.ringed_equivalence_local_tests",
+  "statement": "theorem ringed_equivalence_local_tests\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}\n    (e : RingedToposMorphism (localCoefficientRings R) (localCoefficientRings S))\n    [e.inverse.IsEquivalence] [IsIso e.ringMap]\n    (w : RingedPresentationAt e)\n    (N : PresentationDerived S) (I : PresentationModules S)\n    (ι : I ⟶ SheafOfModules.unit (localCoefficientRings S)) [Mono ι] :\n    presentationComplete S I ι N ↔\n      presentationComplete R (w.transport.modules.functor.obj I)\n        (w.transport.modules.functor.map ι ≫ w.transport.forward.unit.hom)\n        (w.transport.forward.derived.obj N)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1ea02",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261020T221408-L-4183112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1ea02",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261020T221408-L-4183112",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved declarations in RingedPresentationData against the published item module (byte-identical, re-exported); the 4 new sorry statements against their nodes and the published structure fields; the item assembly against node lem-weil-pbc-ringed-presentation-transport; importer RingedPushforwardCompletion compiled against the delivery"
+ }
+}

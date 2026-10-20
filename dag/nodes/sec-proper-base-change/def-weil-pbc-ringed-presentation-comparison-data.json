@@ -1,0 +1,187 @@
+{
+ "id": "def-weil-pbc-ringed-presentation-comparison-data",
+ "kind": "definition",
+ "title": "Ringed presentation comparison data",
+ "statement": "For small ringed sites retain the original standard derived-category, module restriction, ringed presentation functor, equivalence, slice and local-completeness comparison records. RingedPresentationCore consists of an additive functor preserving finite limits, finite colimits and sequential colimits, with its regular-unit isomorphism, K-injective preservation and natural derived internal-Hom comparison. RingedPresentationEquivalenceCore consists only of a module equivalence with its forward regular-unit and derived internal-Hom comparisons; additivity, exactness, colimit and K-injective preservation will be derived from equivalence. All original records have literally their original fields and definitions; these are data for, not claims of, existence of a comparison. The actual element restriction is additive and preserves finite limits, finite colimits, sequential colimits and K-injective complexes, independently of those records; the named API theorems prove these properties from its two adjoints and exact extension by zero. Induced maps between element sites are continuous, and successive module restriction is canonically the direct restriction; both assertions are proved by the named API theorems.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CR, 04IE and 04J4; sites-cohomology.tex 08JB; algebraization.tex 099J"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-ideal-generators",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-local-coefficient-localization"
+ ],
+ "proof": [
+  {
+   "text": "Retain the definitions and field types from RingedPresentationTransport verbatim in a publicly imported module, so subordinate comparison theorems can use them without importing their parent. Add the two records by listing exactly their data; no existence theorem, choice or postponed proof is used in any definition.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-pur-kinjective-complex",
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-ringed-section-localization",
+    "def-weil-pbc-ringed-ideal-generators",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "def-weil-pbc-locally-derived-ringed-ideal-complete",
+    "def-weil-pbc-local-coefficient-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual element restriction is sectionwise additive. Its module extension adjunction makes it a right adjoint, and continuous-cocontinuous restriction makes it a left adjoint; this gives the asserted limits and colimits. Presheaf extension is a direct sum of fibres and preserves finite limits. Compose with exact module sheafification and use the canonical pullback isomorphism to obtain finite-limit preservation of module extension. It also preserves colimits by its adjunction and is additive. The right-adjoint K-injective theorem now applies to actual restriction. Continuity is the last assertion of element-site descent. Both successive module restriction functors are sectionwise identical, giving the identity natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-element-presheaf-extension",
+    "lem-weil-pbc-element-module-extension-adjunction",
+    "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "lem-weil-pbc-element-site-descent",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-ideal-generators",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-local-coefficient-localization",
+  "lem-weil-pbc-element-presheaf-extension",
+  "lem-weil-pbc-element-module-extension-adjunction",
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+  "lem-weil-pbc-element-site-descent",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CR, 04IE and 04J4; sites-cohomology.tex 08JB; algebraization.tex 099J; explicit comparison argument of the original nine-step presentation-transport proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact module equivalences with internal Hom comparison localization and restriction on arbitrary sheaf slices",
+   "results": "[leanfinder] OK 8 hit(s); PresheafOfModules.homEquivOfIsLocallyBijective, PresheafOfModules.homEquivOfIsLocallyBijective_apply, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply, PresheafOfModules.restrictHomEquivOfIsLocallySurjective, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"IsEquivalence\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|coconePointsIsoOfNatIso|PreservesKInjectiveComplexes",
+   "results": "[grep] OK 25 hit(s); Mathlib/CategoryTheory/Limits/FullSubcategory.lean:167, Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:779, Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:784, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:199, Mathlib/AlgebraicGeometry/ColimitsOver.lean:125, Mathlib/AlgebraicGeometry/ColimitsOver.lean:135, Mathlib/CategoryTheory/Limits/HasLimits.lean:733, Mathlib/CategoryTheory/Limits/HasLimits.lean:738, Mathlib/CategoryTheory/Limits/HasLimits.lean:745, Mathlib/CategoryTheory/Limits/HasLimits.lean:752, Mathlib/CategoryTheory/Limits/IsLimit.lean:350, Mathlib/CategoryTheory/Limits/IsLimit.lean:351, Mathlib/CategoryTheory/Limits/IsLimit.lean:355, Mathlib/CategoryTheory/Limits/IsLimit.lean:362, Mathlib/CategoryTheory/Limits/IsLimit.lean:367, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:41, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:47, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:48, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:49, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:51, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:62, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:64, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:69, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:75, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:96",
+   "date": "2026-10-21",
+   "verdict": "Use the existing generic comparisons where applicable; no matching whole ringed-site statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Data recording an exact equivalence of module sheaves with derived internal Hom and scalar localizations",
+   "results": "8 hits: PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, CategoryTheory.Localization.homEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.unitHomEquiv, PresheafOfModules.sheafificationHomEquiv; ",
+   "date": "2026-10-21",
+   "verdict": "No match at the arbitrary ringed-topos and element-site scope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedPresentationTransport",
+  "date": "2026-10-21",
+  "group": "Z5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Final scalar-extension/exchange clause: invariance of the ambient direct-image/completion comparison under ringed-topos presentations. Ringed presentation comparison data",
+   "via": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-pushforward-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedPresentationData",
+  "file": "lean/Sheaf/CategoryTheory/RingedPresentationData.lean",
+  "declaration": "CategoryTheory.RingedPresentationCore",
+  "declarations": [
+   "CategoryTheory.PresentationModules",
+   "CategoryTheory.PresentationDerived",
+   "CategoryTheory.presentationQ",
+   "CategoryTheory.presentationRHom",
+   "CategoryTheory.presentationForget",
+   "CategoryTheory.presentationScalar",
+   "CategoryTheory.presentationComplexMap",
+   "CategoryTheory.presentationDerivedMap",
+   "CategoryTheory.RingedPresentationFunctor",
+   "CategoryTheory.RingedPresentationEquivalence",
+   "CategoryTheory.RingedPresentationFunctor.derived",
+   "CategoryTheory.presentationElementRing",
+   "CategoryTheory.presentationComplete",
+   "CategoryTheory.RingedPresentationRestrictions",
+   "CategoryTheory.RingedPresentationAt",
+   "CategoryTheory.RingedPresentationTransport",
+   "CategoryTheory.RingedPresentationCore",
+   "CategoryTheory.RingedPresentationEquivalenceCore",
+   "CategoryTheory.presentationElementRestriction_additive",
+   "CategoryTheory.presentationElementRestriction_exact",
+   "CategoryTheory.presentationElementRestriction_kInjective",
+   "CategoryTheory.presentationElementRestriction_continuous",
+   "CategoryTheory.presentationElementRestriction_relocalization"
+  ],
+  "statement": "structure RingedPresentationCore\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u})\n    (F : PresentationModules R ⥤ PresentationModules S)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1ea02",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261020T221408-L-4183112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1ea02",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261020T221408-L-4183112",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved declarations in RingedPresentationData against the published item module (byte-identical, re-exported); the 4 new sorry statements against their nodes and the published structure fields; the item assembly against node lem-weil-pbc-ringed-presentation-transport; importer RingedPushforwardCompletion compiled against the delivery"
+ }
+}
