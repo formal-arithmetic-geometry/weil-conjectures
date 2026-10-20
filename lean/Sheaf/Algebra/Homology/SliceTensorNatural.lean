@@ -9,7 +9,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.Algebra.Homology.SliceModuleSheafification
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
-import Sheaf.Algebra.Homology.OpenRestrictionTensorNatural
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Natural tensor comparison for continuous cocontinuous restriction
 
@@ -29,6 +29,54 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 namespace SheafOfModules
+
+/-- Composing four commutative squares gives the outer commutative rectangle. -/
+theorem compose_four_squares {D : Type*} [Category* D]
+    {A₀ A₁ A₂ A₃ A₄ B₀ B₁ B₂ B₃ B₄ : D}
+    (a₀ : A₀ ⟶ A₁) (a₁ : A₁ ⟶ A₂) (a₂ : A₂ ⟶ A₃) (a₃ : A₃ ⟶ A₄)
+    (b₀ : B₀ ⟶ B₁) (b₁ : B₁ ⟶ B₂) (b₂ : B₂ ⟶ B₃) (b₃ : B₃ ⟶ B₄)
+    (f₀ : A₀ ⟶ B₀) (f₁ : A₁ ⟶ B₁) (f₂ : A₂ ⟶ B₂)
+    (f₃ : A₃ ⟶ B₃) (f₄ : A₄ ⟶ B₄)
+    (h₀ : f₀ ≫ b₀ = a₀ ≫ f₁) (h₁ : f₁ ≫ b₁ = a₁ ≫ f₂)
+    (h₂ : f₂ ≫ b₂ = a₂ ≫ f₃) (h₃ : f₃ ≫ b₃ = a₃ ≫ f₄) :
+    f₀ ≫ (b₀ ≫ b₁ ≫ b₂ ≫ b₃) = (a₀ ≫ a₁ ≫ a₂ ≫ a₃) ≫ f₄ := by
+  simp only [Category.assoc]
+  rw [reassoc_of% h₀, reassoc_of% h₁, reassoc_of% h₂, h₃]
+
+/-- A commutative square of isomorphisms also commutes with the inverses. -/
+theorem inverse_square {D : Type*} [Category* D]
+    {A B A' B' : D} (e : A ≅ B) (e' : A' ≅ B') (f : A ⟶ A') (g : B ⟶ B')
+    (h : f ≫ e'.hom = e.hom ≫ g) : g ≫ e'.inv = e.inv ≫ f := by
+  rw [Iso.comp_inv_eq, Category.assoc, h, Iso.inv_hom_id_assoc]
+
+/-- The tensor/sheafification comparison is natural in both module arguments. -/
+theorem tensorObjIsoSheafification_natural
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
+    (R : Sheaf J CommRingCat.{u})
+    {M M' N N' : SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)}
+    (f : M ⟶ M') (g : N ⟶ N') :
+    letI := monoidalCategory R
+    (f ⊗ₘ g) ≫ (tensorObjIsoSheafification (R := R) M' N').hom =
+      (tensorObjIsoSheafification (R := R) M N).hom ≫
+        (PresheafOfModules.sheafification.{u}
+          (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).map
+            (f.val ⊗ₘ g.val) := by
+  let := monoidalCategory R
+  rw [tensorHom_def, Category.assoc, whiskerLeft_tensorObjIsoSheafification_hom,
+    ← Category.assoc, whiskerRight_tensorObjIsoSheafification_hom,
+    Category.assoc, ← Functor.map_comp, ← tensorHom_def]
+
+/-- Tensoring two commutative squares of isomorphisms gives a commutative square. -/
+theorem tensor_square {D : Type*} [Category* D] [MonoidalCategory D]
+    {M N M' N' P Q P' Q' : D} (f : M ⟶ M') (g : N ⟶ N')
+    (f' : P ⟶ P') (g' : Q ⟶ Q')
+    (a : M ≅ P) (b : N ≅ Q) (a' : M' ≅ P') (b' : N' ≅ Q')
+    (ha : f ≫ a'.hom = a.hom ≫ f') (hb : g ≫ b'.hom = b.hom ≫ g') :
+    (f ⊗ₘ g) ≫ (a' ⊗ᵢ b').hom = (a ⊗ᵢ b).hom ≫ (f' ⊗ₘ g') := by
+  simp only [tensorIso_hom, tensorHom_comp_tensorHom, ha, hb]
 
 /-- Presheaf tensor restriction is the inverse monoidal structure map.
 Source: Stacks 01CD (blueprint: lem-weil-pbc-slice-tensor-natural). -/
