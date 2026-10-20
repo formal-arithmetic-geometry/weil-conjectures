@@ -17833,3 +17833,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:15 L: merged deliver/K7/Sheaf.Paper.AdicTorFlatCohomology (stage 3; reviewer PASS; first push; landing 20261020T051503-L-1695358 (interface); batch 20261020T050952; modules 4; new nodes 3)
 - 05:15 L: merged deliver/K7/Sheaf.Paper.QuasiFiniteCompactSupportWeights (stage 3; reviewer PASS; first push; landing 20261020T051507-L-1696332 (interface); batch 20261020T050952; modules 6; new nodes 5)
 - 05:15 L: merged deliver/K8/Sheaf.Paper.FiniteFreeProjectionExchange (stage 3; reviewer PASS; first push; landing 20261020T051511-L-1697688 (interface); batch 20261020T050952; modules 5; new nodes 4; change records: coord/changes/K8-finite-free-projection-exchange-data-location.md)
+- 05:15 L: merged deliver/M1/Sheaf.Paper.IntegralInverseImageComparisonComposition (stage 3; reviewer PASS; first push; landing 20261020T051513-L-1698169 (proof); batch 20261020T050952; modules 1; new nodes 0)
