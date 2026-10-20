@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
-import Sheaf.AlgebraicGeometry.LimitFibreProducts
+import WeilConjectures.AlgebraicGeometry.LimitFibreProducts
 import Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison
 import Sheaf.AlgebraicGeometry.SmoothBaseChangeLimit
 import Sheaf.AlgebraicGeometry.UnboundedExchangeAgrees
