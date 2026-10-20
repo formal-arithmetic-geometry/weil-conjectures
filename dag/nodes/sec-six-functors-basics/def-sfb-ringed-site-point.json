@@ -13,9 +13,38 @@
   "document": "literature/stacks-project/sites.tex",
   "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi; sites-modules.tex Tag 03D2, lemma-pullback-module; the ordinary-module point specialization in sites-cohomology.tex Tag 0DEN"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Use the cartesian monoidal structure on sheaves of sets. Finite-limit preservation gives the inverse-image functor F its canonical strong monoidal structure. For a binary operation o and generalized sections a,b from T, functoriality and Functor.Monoidal.lift_μ give F(lift(a,b) ≫ o)(x) = F(o)(μ(F)(F(a)(x),F(b)(x))). The corresponding terminal equation follows from Functor.Monoidal.toUnit_ε, and unary operations use functoriality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Every pair of elements of F(X),F(Y) is represented simultaneously by the projections of X × Y at μ(F)(x,y): this is Functor.Monoidal.μ_fst and μ_snd. Iterate this construction for triples. Thus universally quantified binary and ternary identities can be tested on generalized sections of a common test sheaf.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On the actual type F(|R|), construct zero and one using the inverse terminal comparison, negation by F of sectionwise negation, and addition and multiplication using the inverse binary-product comparison. Apply the evaluation equations and the simultaneous-representative lemmas to the sectionwise commutative-ring identities. This gives a commutative ring with underlying-set identification the identity. Construct the additive group on F(|M|) in exactly the same way for every module sheaf M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the action of F(|R|) on F(|M|) by F of the sectionwise scalar-action morphism after the inverse product comparison. Test one_smul, mul_smul, smul_add, add_smul, smul_zero and zero_smul on common generalized sections; the evaluation equations reduce all six to the original sectionwise module identities. This constructs actual ordinary modules over the previously constructed ring.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On a module morphism f, take F of its underlying sheaf map. Sectionwise linearity, followed by the evaluation equations and simultaneous representatives, proves this map additive and linear. Functoriality is that of F, so the underlying-set natural isomorphism has identity components. The underlying map of f+g is pointwise addition of the two underlying maps; its evaluation proves additivity of the module functor. Finally, identify any hypothesized sectionwise operation graph with the corresponding explicitly constructed generalized-section morphism and apply its evaluation equation. These are exactly all the fields of RingedSitePoint.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, proof for rings; sites-modules.tex, Tag 03D2, lemma-pullback-module; finite-product comparison calculations formalized directly by J1"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -103,5 +132,15 @@
   "group": "N8",
   "result": "pass",
   "note": "I checked the item theorem CochainComplex.ringedSite_kFlat_stalk_criterion clause by clause against the node and Stacks 0DEN. The site uses EssentiallySmall.{w} with a Precoverage and IsSiteForCoverings, R is a sheaf of commutative rings, K is an unbounded ℤ-complex in ringedSiteModules.{w} (w is the module universe). Points are GeometricMorphism (Type w) (Sheaf (Type w)). Both directions use the recorded IsKFlatIndependentCoefficients and MorphismProperty.kFlat predicates. The converse uses JointlyReflectIsomorphisms over a free index universe t with no Nonempty, the same form as lem-trf-point-family-conservative. There are no flatness, boundedness or finite-limit hypotheses. The new def-sfb-ringed-site-point (RingedSitePoint) is real data: because the point's inverse image preserves finite limits, its conditions on all test sheaves force the transported finite-product operations, and naturality fixes the maps. So the data are unique up to unique iso, quantifying over every presentation equals the natural statement, and the existence theorem is true. I found no existing equivalent in Mathlib Sites.Point, AlgebraicInverseImage, constant-coefficient point evaluation or topological stalks. Both statement fields are verbatim in their files. Imports match the proof dependencies with Lean records. Docstrings give sources, blueprint IDs and all six proof steps. Proofs are sorry only, lines are at most 98 characters, universes are bound, and edge cases are covered. nt_compile --json on both files in dependency order exited with rc 0, no errors and no warnings. I did not run the merge tool's dry run (write-capable), so the new node record fields are unverified until landing."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261020T162544-L-3621685",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
