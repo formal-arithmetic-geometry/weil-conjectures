@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-bounded-heart-amplitude-devissage",
+ "kind": "statement",
+ "title": "Existing bounded dévissage of a class-relative heart upper bound",
+ "statement": "Let C,D be abelian categories with unbounded derived categories [def-weil-abstract-derived-category]. Let Φ:D(C)→D(D) be triangulated and commute with integer shifts [def-weil-triangulated-category]. Let P be a replete class of C containing zero. Suppose d∈ℤ and Φ(M[0]) lies in degrees at most d for every M∈P. For any bounded K with all H^i(K)∈P, if K is at most n, then Φ(K) is at most n+d. Standard good truncations have the meaning of [def-kun-truncations].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+  "place": "Bounded below paragraph restricted to finite cohomological intervals; existing source bounded dévissage proof"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "For a one-degree complex K=H^n(K)[-n], commute Φ through the shift and use the heart upper bound. Repleteness transports membership through the canonical cohomology isomorphism. For general bounded K choose a lower bound a and induct on max(0,n-a). The triangle τ<n K→K→τ≥n K has its first term one degree shorter and its third term in degree n. Truncation preserves P-cohomology because surviving cohomology is unchanged and discarded cohomology is zero. Apply Φ; extension closure of D^{≤n+d} finishes the induction. A zero complex or an empty interval gives the zero case.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-sp-derived-cohomology-shift",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+  "place": "Bounded below paragraph restricted to finite cohomological intervals; existing source bounded dévissage proof; attach the existing source-library declaration without changing it"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A triangulated functor with uniformly bounded cohomological amplitude on a Serre class of heart objects has the shifted upper bound on bounded complexes with cohomology in that class",
+   "results": "Functor.IsTriangulated and its map_distinguished property, derived exact-functor instances; no amplitude theorem.",
+   "date": "2026-10-20",
+   "verdict": "No Mathlib match; use existing source declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform upper cohomological bound for proper pushforward of a lower truncation tail of an ell adic complex",
+   "results": "Truncation support lemmas and DerivedCategory.isZero_of_isGE; no proper heart or class-relative amplitude theorem.",
+   "date": "2026-10-20",
+   "verdict": "No Mathlib match; source grep found exact existing inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(IsLE|upperBound)|lowerTail; properLowerStarHeartHypotheses; isLE_obj_of_isLE_of_homologyProperty",
+   "results": "Mathlib search gives t-structure infrastructure only. Source search found ProperLowerStarEllAdic and CoproductsOfHomologyProperty. Full dag/nodes search found no attachment for these declarations. Blueprint heart search finds sk-lem-proper-heart-bound, which has a different, stronger dimensional conclusion on IndCons and is used below.",
+   "date": "2026-10-20",
+   "verdict": "Record the existing source input rather than introducing a Lean statement or hole."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound",
+  "date": "2026-10-20",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-proper-unbounded-window",
+   "place": "Arbitrary K paragraph: heart amplitude, bounded truncations, and left completeness; the discarded lower tail only needs an existential bound.",
+   "via": [
+    "lem-sfb-adic-proper-truncation-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfHomologyProperty",
+  "declaration": "DerivedCategory.isLE_obj_of_isLE_of_homologyProperty",
+  "statement": "lemma isLE_obj_of_isLE_of_homologyProperty (hΦ : ∀ F : C, P F → (Φ.obj ((singleFunctor C 0).obj F)).IsLE d) (M : DerivedCategory C) (hM : t.bounded M) (hMP : homologyProperty P M) (n : ℤ) [M.IsLE n] : (Φ.obj M).IsLE (n + d)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-20"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261020T051007-L-1521910",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261020T051007-L-1521910",
+  "kind": "proof"
+ }
+}
