@@ -17924,3 +17924,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:20 L: returned deliver/S4/Sheaf.Paper.IntegralConstructibleReductionFibres (reviewer RETURN: (the landing tools, head e4bab58e0) the delivery did not land: lean/Sheaf/Paper/IntegralConstructibleReductionFibres.lea)
 - 12:20 L: returned deliver/S6/Sheaf.Paper.ShiftedTensorMorphismCalculus (reviewer RETURN: (the landing tools, head f2a47c979) the delivery did not land: lean/Sheaf/Paper/ShiftedTensorMorphismCalculus.lean: <una)
 - 12:20 L: returned deliver/S6/Sheaf.SixFunctors.SynchronizedCanonicalMaps (reviewer RETURN: (the landing tools, head bd13197bf) the delivery did not land: lean/Sheaf/SixFunctors/SynchronizedCanonicalMaps.lean cha)
+- 12:20 L: returned deliver/S7/Sheaf.Paper.FiniteReductionChartCalculus (reviewer RETURN: (the landing tools, head 6e9c47f33) the delivery did not land: lean/Sheaf/Paper/FiniteReductionChartCalculus.lean change)
