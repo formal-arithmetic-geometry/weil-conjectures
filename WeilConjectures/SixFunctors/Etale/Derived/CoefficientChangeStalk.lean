@@ -51,7 +51,7 @@ lemma isDerivedBaseChange_leftDerivedUpperStar_map_comp
     {K' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))}
     {η : K ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).obj K'}
     (hη : Sheaf.IsDerivedBaseChange η) :
-    Sheaf.IsDerivedBaseChange ((L((x)^*[ModuleCat.{u + 1} Λ])).map η ≫
+    Sheaf.IsDerivedBaseChange (((x)^*[ModuleCat.{u + 1} Λ]).leftDerivedFunctor.map η ≫
       (leftDerivedUpperStarRestrictScalarsIso ρ x).hom.app K') := by
   let adj (Γ : Type (u + 1)) [CommRing Γ] :=
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Γ) x).mapDerivedCategoryAdjunction
@@ -75,7 +75,7 @@ lemma isDerivedBaseChange_leftDerivedUpperStar_map_comp
         (upperStarRestrictScalarsIso ρ x) hβ) η hη N
   have h := (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) x).hom.naturality η
   rw [leftDerivedUpperStarRestrictScalarsIso_hom_app, reassoc_of% h,
-    ← Category.assoc (((x)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map η)]
+    ← Category.assoc (((x)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.map η), ← Category.assoc]
   exact (Sheaf.IsDerivedBaseChange.of_iso
     ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) x).app K) hθ).comp_map_iso
     ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ') x).app K').symm
@@ -91,7 +91,7 @@ noncomputable abbrev globalSectionsConstantSheafAdjunction (Γ : Type (u + 1)) [
 
 /-- The identification `Γ(Spec k, Res -) = Res Γ(Spec k, -)` of the global sections with
 restriction of scalars, as a square. -/
-abbrev globalSectionsRestrictScalarsSquare :
+noncomputable abbrev globalSectionsRestrictScalarsSquare :
     TwoSquare (Sheaf.restrictScalars (Spec (.of k)).smallEtaleTopology ρ)
       ((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ')).obj
         (op (etalePoint k)))
@@ -115,17 +115,19 @@ noncomputable abbrev constantSheafRestrictScalarsMate :
 the mate of an isomorphism along equivalences. -/
 instance isIso_constantSheafRestrictScalarsMate :
     IsIso (constantSheafRestrictScalarsMate ρ (k := k)).natTrans := by
-  refine NatIso.isIso_of_isIso_app _ fun M ↦ ?_
-  have h := mateEquiv_counit (globalSectionsConstantSheafAdjunction Λ' (k := k))
-    (globalSectionsConstantSheafAdjunction Λ) (globalSectionsRestrictScalarsSquare ρ) M
-  simp only [Equivalence.toAdjunction_counit] at h
-  have : IsIso (((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-      (op (etalePoint k))).map ((constantSheafRestrictScalarsMate ρ).natTrans.app M)) := by
-    rw [(IsIso.eq_comp_inv _).2 h]
-    infer_instance
-  exact isIso_of_reflects_iso _
-    ((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-      (op (etalePoint k)))
+  have (M : ModuleCat.{u + 1} Λ') :
+      IsIso ((constantSheafRestrictScalarsMate ρ (k := k)).natTrans.app M) := by
+    have h := mateEquiv_counit (globalSectionsConstantSheafAdjunction Λ' (k := k))
+      (globalSectionsConstantSheafAdjunction Λ) (globalSectionsRestrictScalarsSquare ρ) M
+    simp only [Equivalence.toAdjunction_counit] at h
+    have : IsIso (((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (op (etalePoint k))).map ((constantSheafRestrictScalarsMate ρ).natTrans.app M)) := by
+      rw [(IsIso.eq_comp_inv _).2 h]
+      infer_instance
+    exact isIso_of_reflects_iso _
+      ((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (op (etalePoint k)))
+  exact NatIso.isIso_of_isIso_app _
 
 /-- The derived global sections on `Spec k`, for `k` separably closed, carry derived base
 changes to derived base changes: if `θ : M ⟶ Res M'` exhibits `M'` as `M ⊗ᴸ_Λ Λ'`, then
@@ -148,6 +150,9 @@ lemma isDerivedBaseChange_rightDerivedGlobalSections_map_comp
       (((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
           (op (etalePoint k))).mapDerivedCategory.map θ ≫
         (Functor.mapDerivedCategorySquareIso
+          (F₁ := Sheaf.restrictScalars (Spec (.of k)).smallEtaleTopology ρ)
+          (F₂ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+            (op (etalePoint k)))
           (G₁ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ')).obj
             (op (etalePoint k)))
           (G₂ := ModuleCat.restrictScalars.{u + 1} ρ) (Iso.refl _)).hom.app M') :=
@@ -162,7 +167,8 @@ lemma isDerivedBaseChange_rightDerivedGlobalSections_map_comp
     NatTrans.comp_app, NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     reassoc_of% h, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
     ← Category.assoc (((sheafSections (Spec (.of k)).smallEtaleTopology
-      (ModuleCat.{u + 1} Λ)).obj (op (etalePoint k))).mapDerivedCategory.map θ)]
+      (ModuleCat.{u + 1} Λ)).obj (op (etalePoint k))).mapDerivedCategory.map θ),
+    ← Category.assoc]
   exact (ModuleCat.IsDerivedBaseChange.of_iso
     ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ (k := k)).app M) hθ').comp_map_iso
     ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ' (k := k)).app M').symm

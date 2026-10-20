@@ -88,7 +88,7 @@ lemma surjective_app_of_epi_of_isSepClosed'
   have hlift (v : V.unop.left) : ∃ t, p.hom.app (op (W v)) t = G.obj.map (i v).op s := by
     have : Subsingleton (W v).left := (Set.subsingleton_singleton (a := v)).coe_sort
     have hsep (w : (W v).left) : IsSepClosed ((W v).left.residueField w) :=
-      isSepClosed_residueField_of_etale (W v).hom w
+      isSepClosed_residueField_of_etale (S := Spec (.of k)) (W v).hom w
     have hmem := id_mem_of_mem_smallEtaleTopology_of_subsingleton hsep
       ((Spec (.of k)).smallEtaleTopology.pullback_stable (i v) hR) ⟨v, Set.mem_singleton v⟩
     obtain ⟨t, ht⟩ := hmem
