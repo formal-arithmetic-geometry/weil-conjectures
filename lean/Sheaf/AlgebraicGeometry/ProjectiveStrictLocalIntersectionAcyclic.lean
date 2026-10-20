@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.ProjectiveFiniteAffineNeighbourhood

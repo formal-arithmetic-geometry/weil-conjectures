@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations

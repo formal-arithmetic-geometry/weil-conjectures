@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift

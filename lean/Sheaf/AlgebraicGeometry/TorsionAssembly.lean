@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf

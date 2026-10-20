@@ -6,7 +6,7 @@ Authors: SHEAF group NK
 module
 
 public import Sheaf.AlgebraicGeometry.InvertibleTorsionOrders
-public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
@@ -26,7 +26,7 @@ Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/`
 `lem-kun-invertible-orders-colimit.md` (blueprint: lem-kun-invertible-orders-colimit).
 
 The diagram, its cocone of kernel inclusions, and the induced comparison are explicit.
-The index inherits divisibility from `PositiveNat`; no bounded exponent is imposed.
+The index inherits divisibility from `PNat.DvdOrder`; no bounded exponent is imposed.
 -/
 
 @[expose] public section
@@ -45,7 +45,7 @@ Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/`
 noncomputable def fieldInvertibleTorsionDiagram (K : Type u) [Field K] {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     ObjectProperty.FullSubcategory
-      (fun n : PositiveNat ↦ n.val ∈ Etale.invertibleTorsionOrders K) ⥤
+      (fun n : PNat.DvdOrder ↦ n.val ∈ Etale.invertibleTorsionOrders K) ⥤
       Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} where
   obj n := Etale.etaleNTorsion F n.obj.val
   map {n m} hnm := kernel.lift (m.obj.val • 𝟙 F) (kernel.ι (n.obj.val • 𝟙 F))
@@ -79,15 +79,17 @@ noncomputable def fieldInvertibleTorsionComparison (K : Type u) [Field K] {T : S
 
 private theorem invertibleTorsionIndex_filtered (K : Type u) [Field K] :
     IsFiltered (ObjectProperty.FullSubcategory
-      (fun n : PositiveNat ↦ n.val ∈ Etale.invertibleTorsionOrders K)) where
+      (fun n : PNat.DvdOrder ↦ n.val ∈ Etale.invertibleTorsionOrders K)) where
   nonempty := ⟨⟨⟨1, Nat.one_pos⟩, by
     refine ⟨Nat.one_pos, ?_⟩
     norm_num [PNat.DvdOrder.val, PNat.DvdOrder.toPNat]⟩⟩
   cocone_objs n m := by
     let k : ObjectProperty.FullSubcategory
-        (fun n : PositiveNat ↦ n.val ∈ Etale.invertibleTorsionOrders K) :=
-      ⟨⟨n.obj.val * m.obj.val, Nat.mul_pos n.obj.pos m.obj.pos⟩,
-        Nat.mul_pos n.obj.pos m.obj.pos, by
+        (fun n : PNat.DvdOrder ↦ n.val ∈ Etale.invertibleTorsionOrders K) :=
+      ⟨⟨n.obj.val * m.obj.val, Nat.mul_pos (PNat.DvdOrder.val_pos n.obj)
+        (PNat.DvdOrder.val_pos m.obj)⟩,
+        Nat.mul_pos (PNat.DvdOrder.val_pos n.obj)
+        (PNat.DvdOrder.val_pos m.obj), by
           change ((n.obj.val * m.obj.val : ℕ) : K) ≠ 0
           rw [Nat.cast_mul]
           exact mul_ne_zero n.property.2 m.property.2⟩
@@ -110,7 +112,7 @@ private theorem invertibleTorsion_map_iff (K : Type u) [Field K] {T : Scheme.{u}
   let φ := fieldInvertibleTorsionComparison K F
   have hc := isColimitOfPreserves E (colimit.isColimit D)
   have hcomp (n : ObjectProperty.FullSubcategory
-      (fun n : PositiveNat ↦ n.val ∈ Etale.invertibleTorsionOrders K)) :
+      (fun n : PNat.DvdOrder ↦ n.val ∈ Etale.invertibleTorsionOrders K)) :
       E.map (colimit.ι D n) ≫ E.map φ = E.map (kernel.ι (n.obj.val • 𝟙 F)) := by
     rw [← E.map_comp]
     congr 1
@@ -160,7 +162,7 @@ private theorem invertibleTorsion_map_iff (K : Type u) [Field K] {T : Scheme.{u}
           AddCommGrpCat.kernelIsoKer_inv_comp_ι]
         rfl
       let i : ObjectProperty.FullSubcategory
-          (fun n : PositiveNat ↦ n.val ∈ Etale.invertibleTorsionOrders K) :=
+          (fun n : PNat.DvdOrder ↦ n.val ∈ Etale.invertibleTorsionOrders K) :=
         ⟨⟨n, hn.1⟩, hn⟩
       refine ⟨E.map (colimit.ι D i) y, ?_⟩
       change (E.map (colimit.ι D i) ≫ E.map φ) y = x

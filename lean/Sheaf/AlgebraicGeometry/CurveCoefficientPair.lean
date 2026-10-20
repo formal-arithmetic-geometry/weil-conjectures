@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
-public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 
 /-!
 # Curve coefficient pairs

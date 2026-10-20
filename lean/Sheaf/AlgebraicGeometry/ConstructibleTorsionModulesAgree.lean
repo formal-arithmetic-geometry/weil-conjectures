@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.AlgebraicGeometry.FiniteLocalCyclicModuleForget
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import WeilConjectures.ConstructibleSheaf.Pullback
-import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 
 /-!

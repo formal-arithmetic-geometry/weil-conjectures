@@ -6,7 +6,7 @@ Authors: SHEAF group Q14
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAcyclic
-public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.RingTheory.ProEtale.IndEtale

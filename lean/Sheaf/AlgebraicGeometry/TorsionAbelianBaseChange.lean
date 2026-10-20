@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 
 /-!
 # Proper base change for torsion abelian sheaves
