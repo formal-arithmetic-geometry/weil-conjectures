@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.RingTheory.Depth
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.DepthOneRestrictionInjective
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Equality detected on the open of a finite depth-two source

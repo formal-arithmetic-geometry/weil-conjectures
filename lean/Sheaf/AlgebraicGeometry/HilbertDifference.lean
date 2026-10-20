@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.MeromorphicDenominatorIdeal
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.RingTheory.Lasker
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian

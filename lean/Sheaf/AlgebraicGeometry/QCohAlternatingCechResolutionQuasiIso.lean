@@ -6,7 +6,7 @@ Authors: SHEAF groups D3 and T1
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import Sheaf.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso
 import Mathlib.Algebra.Category.ModuleCat.Products

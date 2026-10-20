@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 
 /-! # Coherent systems on a tower of schemes
 

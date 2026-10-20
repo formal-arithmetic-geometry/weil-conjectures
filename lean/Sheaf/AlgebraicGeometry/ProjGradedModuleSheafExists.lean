@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.Algebra.Module.DegreeZeroFractions
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import WeilConjectures.Algebra.Module.GradedModuleAwayRestriction

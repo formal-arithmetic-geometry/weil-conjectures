@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent
 import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian

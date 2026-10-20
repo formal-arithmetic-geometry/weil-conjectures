@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 import Sheaf.AlgebraicGeometry.AffineIdealIntersectionInclusion

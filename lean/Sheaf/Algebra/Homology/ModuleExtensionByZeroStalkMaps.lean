@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkOutside
+import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkInside
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkTransitions
 public import Mathlib.Topology.Sheaves.Module

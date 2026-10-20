@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
+public import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
 
 /-! # The direct-image algebra and its quasi-coherent derived category
 

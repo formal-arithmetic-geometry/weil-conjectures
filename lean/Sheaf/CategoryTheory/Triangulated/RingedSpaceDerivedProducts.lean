@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 

@@ -6,7 +6,7 @@ Authors: SHEAF group A2
 module
 
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 public import Sheaf.Paper.FiniteStructureAdjointTransitions

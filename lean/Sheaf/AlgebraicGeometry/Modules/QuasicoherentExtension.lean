@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.Modules.AffineExtensionSectionSurjectivity
 import Mathlib.CategoryTheory.Preadditive.LeftExact

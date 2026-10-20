@@ -6,7 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.Algebra.Homology.KFlat
 
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum

@@ -5,7 +5,7 @@ Authors: SHEAF group X3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import all Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
 

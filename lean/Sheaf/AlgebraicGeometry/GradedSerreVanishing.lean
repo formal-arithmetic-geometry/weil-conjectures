@@ -10,7 +10,7 @@ public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.Paper.PQFCohomology
 import Mathlib.Algebra.Category.Grp.Zero

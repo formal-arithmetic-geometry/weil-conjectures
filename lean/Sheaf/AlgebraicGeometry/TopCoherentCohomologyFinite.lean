@@ -5,7 +5,7 @@ Authors: SHEAF group NR
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.TopCoherentCohomologyFiniteQuotient

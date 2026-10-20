@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineGenerators
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 

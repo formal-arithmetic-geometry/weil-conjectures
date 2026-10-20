@@ -6,7 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.AffineBasisSectionsDerivedUnit
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech

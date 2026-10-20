@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraColimit
 import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected

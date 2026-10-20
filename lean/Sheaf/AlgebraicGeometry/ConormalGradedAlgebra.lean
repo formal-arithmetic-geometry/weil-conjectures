@@ -53,7 +53,7 @@ import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Mathlib.Algebra.Module.FinitePresentation
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
-import Sheaf.AlgebraicGeometry.Coherent
+import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.AffineConormalSections

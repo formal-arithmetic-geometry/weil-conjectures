@@ -6,7 +6,7 @@ Authors: SHEAF group V3
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
+import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 import WeilConjectures.Algebra.Homology.DerivedOpenShriekAdjunction
 import Mathlib.CategoryTheory.Monad.Adjunction
 

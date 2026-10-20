@@ -5,7 +5,7 @@ Authors: SHEAF group J3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 
 import Sheaf.AlgebraicGeometry.ModuleSubmoduleBinaryGluingProperties
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

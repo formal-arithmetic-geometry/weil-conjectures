@@ -9,7 +9,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Topology.Sheaves.Module
 public import Mathlib.Geometry.RingedSpace.Stalks
-import Sheaf.Algebra.Homology.ModuleRestrictionStalkComponents
+import WeilConjectures.Algebra.Homology.ModuleRestrictionStalkComponents
 
 /-! # Open restriction does not change a module stalk
 

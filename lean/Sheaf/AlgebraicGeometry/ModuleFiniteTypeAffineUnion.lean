@@ -6,7 +6,7 @@ Authors: SHEAF group S3
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineCapture
 import Sheaf.AlgebraicGeometry.ModuleSubmoduleBinaryGluing
 

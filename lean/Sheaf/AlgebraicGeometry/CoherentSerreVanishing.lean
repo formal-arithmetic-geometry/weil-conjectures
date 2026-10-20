@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Noetherian.Defs
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct

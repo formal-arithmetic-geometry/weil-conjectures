@@ -29,7 +29,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
@@ -42,7 +42,6 @@ import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # The comparison bound for sheaves of étale origin

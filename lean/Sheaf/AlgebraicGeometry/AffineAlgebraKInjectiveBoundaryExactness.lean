@@ -13,7 +13,7 @@ import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 

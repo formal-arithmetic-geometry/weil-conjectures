@@ -7,8 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.DirectSum.Module
-public import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
+public import WeilConjectures.AlgebraicGeometry.Coherent
+import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
 import Sheaf.AlgebraicGeometry.AffineModuleFiniteType
 import Sheaf.AlgebraicGeometry.GradedModuleAffineBaseChangeAlgebra
 

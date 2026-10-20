@@ -7,15 +7,14 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.AlgebraicGeometry.SheafExt
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.Grp.Basic
 import Sheaf.AlgebraicGeometry.CoherentHomInjectiveAcyclic
-import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses

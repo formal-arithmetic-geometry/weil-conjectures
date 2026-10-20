@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.Algebra.Homology.OpenExtensionRestrictionIso
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkOutside
+import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 

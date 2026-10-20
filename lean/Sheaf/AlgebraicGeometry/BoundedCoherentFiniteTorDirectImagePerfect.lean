@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent

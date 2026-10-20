@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TorsionSubsheafQuotient
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.RingTheory.RegularLocalRing.Defs
@@ -13,7 +13,6 @@ public import Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.FunctionField
 import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.CoherentFiniteType
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 

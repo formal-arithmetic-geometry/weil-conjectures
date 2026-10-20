@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.Dimension
 public import Sheaf.AlgebraicGeometry.SheafExt
 public import Mathlib.AlgebraicGeometry.Noetherian

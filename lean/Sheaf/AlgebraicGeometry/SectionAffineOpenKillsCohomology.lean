@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing

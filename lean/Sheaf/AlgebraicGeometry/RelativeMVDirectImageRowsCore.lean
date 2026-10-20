@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
 import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
 import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Resolved relative rows before the overlap mate -/
 

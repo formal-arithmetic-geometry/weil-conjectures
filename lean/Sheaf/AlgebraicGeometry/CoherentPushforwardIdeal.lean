@@ -5,7 +5,7 @@ Authors: SHEAF group F3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

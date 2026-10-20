@@ -30,7 +30,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
@@ -46,7 +46,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.AlgebraicGeometry.SfFullcdEtaleOrigin
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Cohomological dimension and closure of the etale-origin coefficient class

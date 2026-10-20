@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.RingTheory.Depth
 import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomExtension
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomEquality
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 
 /-!
 # Uniqueness of finite extensions with depth two at the boundary

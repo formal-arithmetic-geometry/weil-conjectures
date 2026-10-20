@@ -13,8 +13,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Mathlib.RingTheory.Flat.CategoryTheory
 import Sheaf.Algebra.Homology.OpenRestrictionTensorNatural
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkOutside
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
+import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
+import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 

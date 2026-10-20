@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.Constructible
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank

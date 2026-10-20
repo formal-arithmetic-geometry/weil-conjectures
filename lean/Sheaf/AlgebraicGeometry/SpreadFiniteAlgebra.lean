@@ -6,7 +6,7 @@ Authors: SHEAF group NX
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.RingTheory.Localization.Away.Basic

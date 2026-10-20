@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Topology.ModuleMayerVietoris
 import Sheaf.Paper.NonvanishingSectionTrivializes

@@ -6,7 +6,7 @@ Authors: SHEAF group Q1
 module
 
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties

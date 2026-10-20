@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore
 public import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraAffine
-public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+public import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Restrict
@@ -19,7 +19,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction
-import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
