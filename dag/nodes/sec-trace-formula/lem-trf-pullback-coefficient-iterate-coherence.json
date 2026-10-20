@@ -17,88 +17,30 @@
  ],
  "proof": [
   {
-   "text": "Work first with ordinary $A$-module sheaves. For composable scheme maps $f:S\\to T$, $g:T\\to V$, the direct-image formula in [def-weil-pbc-proetale-operations] identifies $(gf)_*$ with $g_*f_*$ by the canonical isomorphism $S\\times_V B\\cong S\\times_T(T\\times_V B)$, for each pro-etale $B\\to V$. Both maps of a threefold fibre product to the single fibre product preserve the projection to $S$ and the projection to $B$; hence they agree by the fibre-product universal property. The identity comparisons have the same property. Thus these direct-image comparisons are associative and unital. They are module-linear: the constant-ring structure maps of [def-weil-proetale-inverse-image] send a constant $a$ to the same $a$ on every base-changed object, so both composite ring actions agree. This also checks that the coefficient identification for a composite is the composite coefficient identification, rather than an independently chosen automorphism of $A$.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8, label lemma-push-pull-composition-modules; direct-image formula and fibre-product universal property"
-   }
-  },
-  {
-   "text": "Write $F_f=f^*$ on module sheaves and $R_f=f_*$. Use the adjunction in [def-weil-pbc-proetale-operations]. The composite adjunction of [def-weil-pbc-composite-adjunction] has unit $R_g(\\eta_{f,F_gM})\\circ\\eta_{g,M}$. Applying [lem-weil-pbc-conjugate-iso-unit-equation] with the direct-image comparison of Step 1 gives a unique natural isomorphism $a_{f,g}:F_{gf}\\to F_fF_g$ carrying $\\eta_{gf}$ to this composite unit (with the right-adjoint comparison inserted). This is the ordinary canonical module-pullback comparison: successive adjunctions identify maps out of $F_fF_gM$ with maps out of $M$ into $R_gR_f$, and the comparison identifies the latter with $R_{gf}$. Equivalently, in the inverse-image/tensor presentation it sends $m\\otimes r$ to $(m\\otimes1)\\otimes r$ after the inverse-image identification; the inverse multiplies the two scalar factors, using the coefficient identification. The balancing relation shows the two composites are identities. Under adjunction both maps carry $m$ to its two successive unit images, verifying the stated normalization.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8, label lemma-push-pull-composition-modules; categories.tex Tags 0B65 and 0DV0 for the adjunction normalization"
-   }
-  },
-  {
-   "text": "For three composable maps $f,g,k$, both composites from $F_{kgf}$ to $F_fF_gF_k$ carry its unit, under the direct-image identifications of Step 1, to\n$$R_kR_g(\\eta_fF_gF_k)\\circ R_k(\\eta_gF_k)\\circ\\eta_k.$$\nIndeed expand the composite unit twice using [def-weil-pbc-composite-adjunction]; reassociation gives exactly these three factors, and naturality moves each comparison through the next unit. The right-adjoint identifications agree by Step 1. Uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] therefore gives\n$$F_f(a_{g,k})\\circ a_{f,kg}=(a_{f,g}F_k)\\circ a_{gf,k}.$$\nFor an identity map, the same unit equation has the identity transformation as its solution after the identity adjunction identification, proving the unit laws. These are equalities of natural transformations on all module sheaves, not just on constant sheaves.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tags 0DV0 (lemma-compose-counits), 0B65 (lemma-transformation-between-functors-and-adjoints); explicit three-unit calculation"
-   }
-  },
-  {
-   "text": "Each $F_f$ is exact and $Lf^*$ is induced by its termwise action, by [def-weil-pbc-proetale-operations]. Apply [lem-weil-pbc-localization-universal-property](2) to the termwise natural isomorphisms $a_{f,g}$ and the identity comparisons; the termwise functors invert quasi-isomorphisms because they are exact. The same node says descent respects composition and is faithful on natural transformations, so the associativity and unit identities of Step 3 descend to the ordinary unbounded derived categories. These descended comparisons are the comparisons in [lem-weil-pbc-proetale-derived-pullback-composition]: choose for any complex a K-flat resolution with flat terms by [lem-pc-kflat-resolution]. On that resolution both comparisons are the class of the same termwise canonical module-pullback map, exactly the normalization in the cited binary-composition statement. Naturality along the resolution quasi-isomorphism, whose image is invertible under all these exact functors, gives equality at the original complex. Henceforth write $F_f=Lf^*$ and use $a$ for these derived comparisons.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, label lemma-derived-pullback-composition; localization of exact termwise pullbacks as specified in the cited nodes"
-   }
-  },
-  {
-   "text": "Put $H=Lh^*$, $T=t_W$ and continue to write $a_{f,g}:L(gf)^*\\to Lf^*Lg^*$. The equality $hT^m=t^mh$ follows by induction from $hT=th$. By the definition of the canonical square comparison,\n$$c_m=a_{h,t^m}\\circ a_{T^m,h}^{-1},\\quad d^X_m=a_{t,t^m},\\quad d^W_m=a_{T,T^m}.$$\nStep 4's associativity, for the triples $(h,t,t^m)$, $(T,h,t^m)$ and $(T,T^m,h)$, respectively, reads\n$$H(a_{t,t^m})a_{h,t^{m+1}}=(a_{h,t}P_m)a_{th,t^m},$$\n$$Q_1(a_{h,t^m})a_{T,t^mh}=(a_{T,h}P_m)a_{hT,t^m},$$\n$$Q_1(a_{T^m,h})a_{T,hT^m}=(a_{T,T^m}H)a_{T^{m+1},h}.$$\nHere juxtaposition denotes composition, rightmost factor first. Substitute $th=hT$ and $t^mh=hT^m$; eliminate $a_{hT,t^m}$ with the second equality and $a_{T,hT^m}$ with the third. Multiplying on the right by $a_{T^{m+1},h}^{-1}$ gives precisely\n$$H(d^X_m)c_{m+1}=(c_1P_m)Q_1(c_m)d^W_m.$$\nThis calculation is valid also at $m=0$, using the unit laws of Step 4.",
+   "text": "Prove the commuting-power equation by induction. At zero use identity laws. For m+1 expand both powers by pow_succ, reassociate, apply the induction hypothesis and then the original commuting square.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
-    "place": "Step 1, the pullback-identification cocycle, written as three associativity equations; Step 6 for noninvertible coefficient maps"
-   }
+   "elementary": true
   },
   {
-   "text": "Induct on $m\\geq1$ on the assertion $v_m=H(u_m)c_{m,K}$. For $m=1$ this is the definition $v=H(u)c_{1,K}$. For the induction step use functoriality of $Q_1$ and the induction hypothesis in the recursion:\n$$v_{m+1}=H(u)c_{1,K}\\,Q_1(H(u_m))\\,Q_1(c_{m,K})\\,d^W_{m,HK}.$$\nNaturality of $c_1:Q_1H\\to HP_1$ for the derived morphism $u_m:P_mK\\to K$ gives\n$$c_{1,K}Q_1(H(u_m))=H(P_1(u_m))c_{1,P_mK}.$$\nReplace this pair of factors and use Step 5 for the three remaining comparison factors. Functoriality of $H$ now gives\n$$v_{m+1}=H(u)H(P_1(u_m))H(d^X_{m,K})c_{m+1,K}=H(u_{m+1})c_{m+1,K}.$$\nThis uses naturality for arbitrary derived morphisms, not a choice of a chain representative of $u$. None of the argument in Steps 1–6 uses an inverse of $u$, a finite-type hypothesis on the schemes, or a Cartesian hypothesis on the commuting square.",
+   "text": "Use the existing normalized derived pullback associativity theorem for the triples (h,t,t^m), (tW,h,t^m), and (tW,tW^m,h). Equality induction gives compatibility of each binary comparison with transport of either scheme morphism. Expand the square and power-step comparisons; precompose with the inverse comparison for (tW^(m+1),h). Move the power transports through the binary comparisons, apply the three associativity equalities, use the commuting-power equation and the original square, and cancel the inverse comparisons. All remaining transports compose to the same scheme-morphism equality, so proof irrelevance identifies them. This works for m=0 without requiring separate unit comparisons.",
+   "uses": [
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the positive coefficient-iterate index n. For n=0 reduce t^1=t and the associated equality transports; the result is the defining restricted coefficient map. For the successor expand both recursive definitions, substitute the induction hypothesis, and use naturality of the square comparison for (tW,h,t) at the preceding coefficient iterate. Apply the comparison identity from the previous step and functoriality of h-pullback to obtain the next iterate. No coefficient morphism is inverted.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
-    "place": "Step 1, induction for restricted coefficient iterates; Step 6, the same recursion without invertibility"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-operations",
-  "def-weil-proetale-inverse-image",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-pc-kflat-resolution"
+  "lem-trf-derived-pullback-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
-  "place": "Step 1 and Step 6, supplied coherence and induction details; Stacks 03D8, 0B65, 0DV0 and 0D6D for the specified inputs"
+  "place": "Steps 1 and 6: the existing derived associativity cocycle supplies the former Steps 1–4; explicit three-cocycle cancellation and naturality induction in Lean by G3, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -230,8 +172,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-pc-kflat-resolution"
+  "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -266,5 +207,15 @@
   "group": "Q17",
   "result": "pass",
   "note": "Every clause matches the node in Lean: the finite comm ring, arbitrary h/t/tW with tW≫h=h≫t, the ordinary uncompleted proEtaleDerivedCategory with the recorded proEtaleConstantRingDerivedPullback, scheme powers via End.of. c_m = canonical composition(tW^m,h) ≫ eqToIso ≫ composition(h,t^m).symm, as the landed pur713 comparison is built. d_m = pow_succ transport ≫ canonical (t,t^m) comparison inverted, landing in P_1(P_m K). The first identity holds for all m≥0 (types checked factor by factor). The recursion u_{n+1} and v = c_1 ≫ H(u) are correct, and the second identity covers every positive exponent. No invertibility, finite-type or Cartesian hypothesis. Edge cases m=0, n=0, identities, empty schemes, zero ring and non-invertible f are covered. statement/proof unchanged; stmt_deps gains only the landed pur713-def-pullback-comparison. The def-weil-pbc-proetale-site lean-only §1(B) rebind to the existing proEtaleDerivedCategory is justified (the operations record acts on it; it is otherwise unowned). Maintainer observation: this record has oscillated Q27/Q01/Q103/Q17. No hollow defs, theorems are sorry only, docstrings carry source, blueprint id and six proof steps, no line over 100 chars, statement verbatim. nt_compile --json: rc=0, no errors/warnings, 3.7 s. No duplicates found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261020T211719-L-3491557",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
