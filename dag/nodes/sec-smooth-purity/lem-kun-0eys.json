@@ -45,57 +45,57 @@
  ],
  "proof": [
   {
-   "text": "Let $U_Z$ denote passage from abelian sheaves on $Z_{\\Et}$ to sheaves of sets. By clauses (2)--(3) of [lem-weil-pbc-etale-inverse-image-algebraic-structures], for each edge $u$ the identifications $Uu^{-1}\\cong u^{-1}U$ and $Uu_*=u_*U$ preserve the adjunction bijections and units. They also preserve counits: a counit is the adjoint of the identity, and the adjunction bijections agree. The abelian inverse-image composition comparison $c_{u,v}$ is the unique isomorphism carrying the unit of the composite adjunction to the unit of the composite, transported along the fibre-product identification of direct images, by clause (2) of [lem-weil-pbc-inverse-image-composition]; the set-valued one is the unique morphism with the same property on sections, by clause (1) of [lem-weil-pbc-sets-etale-inverse-image-composition-units]. Since forgetting preserves the units and the direct-image identifications, the forgotten abelian $c_{u,v}$ has the set-valued property, so it is the set-valued comparison by that uniqueness. The specified square isomorphism of the Cartesian square is $\\theta=c_{g,e}^{-1}\\circ c_{f,h}$ after $f\\circ h=g\\circ e$, by the description of $\\theta_\\square$ in [lem-weil-pbc-square-iso-pasting] (with its $f,g,f',g'$ equal to the present $g,f,h,e$); hence the canonical square comparison is preserved too. Therefore the underlying set morphism of $\\beta_F$ is the set-valued canonical base-change morphism for $U_TF$. Indeed, under $h^{-1}\\dashv h_*$ its transpose is exactly $h^{-1}f^{-1}g_*U_TF\\cong e^{-1}g^{-1}g_*U_TF\\xrightarrow{e^{-1}\\varepsilon_g}e^{-1}U_TF$, the defining transpose of [def-weil-pbc-underived-exchange]. Uniqueness of adjoint transposes gives equality of these arrows. This checks the canonical map as well as its source and target.",
+   "text": "Let U_Z forget abelian sheaves on Z to sets. Finite-limit preservation of set inverse image is supplied by [lem-weil-pbc-etale-inverse-image-algebraic-structures]. Apply [lem-weil-pbc-etale-inverse-image-abelian-lift-hom] to f and e, obtaining comparison isomorphisms ef:U_X L_f^a ≅ L_f U_S and ee:U_Y L_e^a ≅ L_e U_T with their hom-set comparison equations. Apply the equation for e to the identity of L_e^a F. Naturality of the set homEquiv and ee inverse followed by ee give U_T(η_e^a) followed by R_e(ee_F) = η_e at U_T F.",
    "uses": [
     "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "def-weil-pbc-underived-exchange",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-square-iso-pasting"
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian groups; Tag 03CB, lemma-composition-morphisms-sites; adjoint-transpose identification written out here"
+    "place": "Tag 00YV; abelian inverse image and underlying-set adjunction compatibility"
    }
   },
   {
-   "text": "To compare the two adjunction descriptions explicitly, put $G=U_TF$, $L_u=u^{-1}$ and $R_u=u_*$ for set sheaves, and identify $R_fR_h=R_gR_e$ by the canonical fibre-product identifications. Put $A=R_gG$, $B=L_eG$ and $\\alpha:L_hL_f\\cong L_eL_g$ as in Step 1. Let $m:L_fA\\to R_hB$ be the underlying arrow of $\\beta_F$; thus $m=R_h(L_e\\varepsilon_{g,G}\\circ\\alpha_A)\\circ\\eta_{h,L_fA}$. The composite-unit characterization in [lem-weil-pbc-sets-etale-inverse-image-composition-units] gives\n\\[\nR_fR_h(\\alpha_A)\\circ R_f(\\eta_{h,L_fA})\\circ\\eta_{f,A}\n=R_g(\\eta_{e,L_gA})\\circ\\eta_{g,A}.\n\\]\nIndeed both sides are the unit for $f\\circ h=g\\circ e$ after the indicated composition comparisons; clause (1) specifies their values on every section of $A$. Therefore the $L_f\\dashv R_f$ transpose of $m$ is\n\\[\n\\begin{aligned}\nR_f(m)\\circ\\eta_{f,A}\n&=R_gR_e(L_e\\varepsilon_{g,G})\\circ R_g(\\eta_{e,L_gA})\\circ\\eta_{g,A}\\\\\n&=R_g(\\eta_{e,G})\\circ R_g(\\varepsilon_{g,G})\\circ\\eta_{g,R_gG}\\\\\n&=R_g(\\eta_{e,G}).\n\\end{aligned}\n\\]\nThe second equality is naturality of $\\eta_e$ applied to $\\varepsilon_{g,G}$; the third is the $L_g\\dashv R_g$ triangle identity. This is precisely the transpose defining the canonical arrow in [sbc-lem-degree-zero-flat-base-change], so uniqueness of adjoint transposes identifies its arrow with $m$. Apply [sbc-lem-degree-zero-flat-base-change] to the underlying sheaf of sets $U_TF$ and the given Cartesian square. Its hypotheses are exactly flatness and local finite presentation of $f$ and geometric reducedness of every fibre; no condition on $g$ is required. Its conclusion says that the canonical set-valued arrow $f^{-1}g_*U_TF\\to h_*e^{-1}U_TF$ is an isomorphism. The preceding calculation identifies this with the underlying arrow of $\\beta_F$, so its map on sections over every object of $X_{\\Et}$ is bijective.",
+   "text": "Let β be the specified abelian exchange. Apply the injective set adjunction bijection for f to (ef inverse at R_g^a F) followed by U_X(β) followed by R_h(ee_F). The f hom-set comparison identifies its first part with U_S applied to the abelian adjunct of β. The proved library identity unit_map_baseChangeMap_app in the module of [def-weil-pbc-underived-exchange] expresses that adjunct as R_g^a(η_e^a) followed by the direct-image square comparison. The latter is the composite of the two pushforward composition isomorphisms [lem-weil-pbc-inverse-image-composition]; after forgetting, its maps on sections are definitionally the same set restriction maps. Naturality moves R_f R_h(ee_F) to the front as R_g R_e(ee_F), and the unit identity of the preceding step replaces the resulting composite by R_g(η_e). This is exactly the set adjunct of setBaseChangeArrow, whose definition is pullback of this map followed by the f counit. Injectivity proves that the conjugated forgotten β equals setBaseChangeArrow.",
    "uses": [
-    "sbc-lem-degree-zero-flat-base-change",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+    "sbc-def-base-change-map"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYS, lemma-fppf-reduced-fibres-base-change-f-star; its 0EZX/0EY5 proof is already realized by sbc-lem-degree-zero-flat-base-change"
+    "place": "Tag 0EZR, canonical base-change map by units, pushforward composition and counit; the iterated mate formula is already proved in BaseChange/Square.lean"
    }
   },
   {
-   "text": "For each etale object $V\\to X$ let $a_V$ be the inverse of the bijective group homomorphism $\\beta_F(V)$. It is additive: if $x,y$ have preimages $x',y'$, then $\\beta_F(V)(x'+y')=x+y$, so uniqueness of preimages gives $a_V(x+y)=a_V(x)+a_V(y)$; and $\\beta_F(V)(0)=0$ forces $a_V(0)=0$. For an etale-site arrow $W\\to V$, let $r_P,r_Q$ be the restriction maps of the source and target sheaves. Naturality of $\\beta_F$ gives $\\beta_F(W)r_Pa_V=r_Q\\beta_F(V)a_V=r_Q=\\beta_F(W)a_Wr_Q$. Injectivity of $\\beta_F(W)$ gives $r_Pa_V=a_Wr_Q$, the required naturality. Thus the $a_V$ form a morphism of abelian sheaves, since these are natural transformations of the underlying abelian presheaves [def-weil-pbc-abelian-etale-sheaves]. Objectwise the two composites with $\\beta_F$ are identities. Consequently $\\beta_F$ is an isomorphism of abelian sheaves.",
+   "text": "Apply [sbc-lem-degree-zero-flat-base-change] with the given square, the exact given flatness, local finite presentation and geometrically reduced fibre hypotheses, and the sheaf U_T F. The identified conjugated forgotten β is therefore invertible. Both comparison factors are isomorphisms, so cancellation of these factors gives invertibility of U_X(β). The forgetful functor on abelian sheaves reflects isomorphisms: the inverse of each bijective additive component is additive, and its naturality follows by cancellation. This is the Mathlib instance for sheafCompose applied to the forgetful functor from abelian groups. Hence β is an isomorphism. No new hypotheses on g or F enter.",
    "uses": [
+    "sbc-lem-degree-zero-flat-base-change",
     "def-weil-pbc-abelian-etale-sheaves"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, abelian-group structures; elementary reflection of isomorphisms expanded from the definition of abelian sheaves"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYS; elementary reflection of isomorphisms for abelian sheaves (sites.tex Tag 00YV)"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
   "def-weil-pbc-underived-exchange",
   "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-square-iso-pasting",
+  "sbc-def-base-change-map",
   "sbc-lem-degree-zero-flat-base-change",
   "def-weil-pbc-abelian-etale-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EYS, lemma-fppf-reduced-fibres-base-change-f-star, reused through its existing stronger set-valued node; transfer to abelian sheaves from sites.tex Tag 00YV, with canonical-arrow compatibility written out"
+  "place": "Tags 0EYS and 0EZR; transfer the existing set-valued theorem using the source-library pushforward-unit formula for exchange and the abelian lift hom-set equation. This avoids inverse-image composition-unit uniqueness and square-iso pasting."
  },
  "mathlib_searches": [
   {
@@ -251,9 +251,7 @@
  "tool_uses": [
   "sbc-lem-degree-zero-flat-base-change",
   "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-square-iso-pasting"
+  "lem-weil-pbc-inverse-image-composition"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -280,5 +278,15 @@
   "by": "NH",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261020T131223-L-1262295",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

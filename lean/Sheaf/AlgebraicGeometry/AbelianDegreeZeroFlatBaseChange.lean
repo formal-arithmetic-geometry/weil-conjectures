@@ -13,9 +13,7 @@ public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.BaseChange.Pasting
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
 import Sheaf.AlgebraicGeometry.EtaleSetDegreeZeroFlatBaseChange
 
 /-!
@@ -33,6 +31,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
 /-- Flat, locally finitely presented inverse image with geometrically reduced fibres
 commutes with direct image for every abelian étale sheaf, under arbitrary base change.
 The arrow is the recorded underived exchange for the transposed square: its transpose
@@ -74,6 +74,68 @@ theorem isIso_abelianBaseChangeMap_of_flat
     (hf : ∀ s : S, GeometricallyReduced (f.fiberToSpecResidueField s))
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     IsIso ((baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq.flip).app F) := by
-  sorry
+  let U (Z : Scheme.{u}) :=
+    sheafForget (D := AddCommGrpCat.{u + 1}) Z.smallEtaleTopology
+  let La {Z W : Scheme.{u}} (k : Z ⟶ W) := upperStar AddCommGrpCat.{u + 1} k
+  let Ra {Z W : Scheme.{u}} (k : Z ⟶ W) := lowerStar AddCommGrpCat.{u + 1} k
+  let Rs {Z W : Scheme.{u}} (k : Z ⟶ W) := lowerStar (Type (u + 1)) k
+  let aa {Z W : Scheme.{u}} (k : Z ⟶ W) :=
+    upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} k
+  obtain ⟨ef, hfadj⟩ := etaleInverseImageAbelianLift_hom X S f
+    (etaleInverseImageAlgebraicStructures X S f).1
+  obtain ⟨ee, headj⟩ := etaleInverseImageAbelianLift_hom Y T e
+    (etaleInverseImageAlgebraicStructures Y T e).1
+  let β := (baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq.flip).app F
+  -- The hom-set comparison sends the abelian unit to the set unit.
+  have heunit : (U T).map ((aa e).unit.app F) ≫
+      (Rs e).map (ee.hom.app F) = (setUpperLowerAdjunction e).unit.app ((U T).obj F) := by
+    have he := headj F _ (𝟙 _)
+    rw [Adjunction.homEquiv_id, CategoryTheory.Functor.map_id] at he
+    erw [Category.comp_id] at he
+    erw [he, ← Adjunction.homEquiv_naturality_right]
+    rw [ee.inv_hom_id_app]
+    exact (setUpperLowerAdjunction e).homEquiv_id _
+  -- Compare exchange by its adjunct under inverse image along f.
+  have hcomp :
+      (ef.inv.app ((Ra g).obj F) ≫ (U X).map β) ≫
+        (Rs h).map (ee.hom.app F) = setBaseChangeArrow sq ((U T).obj F) := by
+    apply ((setUpperLowerAdjunction f).homEquiv _ _).injective
+    rw [Adjunction.homEquiv_naturality_right]
+    erw [← hfadj]
+    rw [Adjunction.homEquiv_unit, unit_map_baseChangeMap_app]
+    rw [show setBaseChangeArrow sq ((U T).obj F) =
+      ((setUpperLowerAdjunction f).homEquiv _ _).symm
+        ((Rs g).map ((setUpperLowerAdjunction e).unit.app ((U T).obj F)) ≫
+          (lowerStarComp (Type (u + 1)) e g).hom.app _ ≫
+          (lowerStarComp (Type (u + 1)) h f (e ≫ g) sq.w.symm).inv.app _) from rfl]
+    erw [Equiv.apply_symm_apply]
+    -- Direct-image composition uses the same restriction maps after forgetting.
+    have hsq : (U S).map
+        ((squareLowerStarIso AddCommGrpCat.{u + 1} sq.toCommSq.flip).hom.app
+          ((La e).obj F)) =
+        (lowerStarComp (Type (u + 1)) e g).hom.app ((U Y).obj ((La e).obj F)) ≫
+          (lowerStarComp (Type (u + 1)) h f (e ≫ g) sq.w.symm).inv.app
+            ((U Y).obj ((La e).obj F)) := by
+      ext V x
+      rfl
+    rw [(U S).map_comp, hsq]
+    let cs := lowerStarComp (Type (u + 1)) e g ≪≫
+      (lowerStarComp (Type (u + 1)) h f (e ≫ g) sq.w.symm).symm
+    change ((Rs g).map ((U T).map ((aa e).unit.app F)) ≫
+        cs.hom.app ((U Y).obj ((La e).obj F))) ≫
+        (Rs h ⋙ Rs f).map (ee.hom.app F) =
+      (Rs g).map ((setUpperLowerAdjunction e).unit.app ((U T).obj F)) ≫
+        cs.hom.app ((Scheme.etaleSetPullback e).obj ((U T).obj F))
+    rw [Category.assoc, ← cs.hom.naturality, ← Category.assoc]
+    dsimp only [CategoryTheory.Functor.comp_map]
+    erw [← CategoryTheory.Functor.map_comp, heunit]
+    rfl
+  -- The forgetful functor reflects isomorphisms of abelian sheaves.
+  have := isIso_etaleSetDegreeZeroBaseChange_of_flat sq hf ((U T).obj F)
+  have : IsIso ((U X).map β) := by
+    have : IsIso ((ef.inv.app ((Ra g).obj F) ≫ (U X).map β) ≫
+        (Rs h).map (ee.hom.app F)) := hcomp ▸ inferInstance
+    simpa only [isIso_comp_right_iff, isIso_comp_left_iff] using this
+  exact isIso_of_reflects_iso β (U X)
 
 end AlgebraicGeometry.Etale
