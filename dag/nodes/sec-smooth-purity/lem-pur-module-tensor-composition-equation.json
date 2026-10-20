@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-module-tensor-composition-equation",
+ "kind": "statement",
+ "title": "Ordinary tensor square for composite module pullback",
+ "statement": "Let R,S,T be sheaves of commutative rings on three small sites. Use the categories of module sheaves, ringed pullbacks f:R to S, g:S to T, h:R to T, their normalized comparisons kf,kg,kh, and the normalized composite presentation a of [def-pur-cochain-tensor-coherence-data]. Write F=f.L, G=g.L, H=h.L, and let c:H to F composed with G be the natural isomorphism compositionModule(f,g,h,a.rightModules), obtained from the composite adjunction [def-weil-pbc-composite-adjunction]. For every pair of R-module sheaves M,N, the following equality of T-linear module-sheaf morphisms holds:\n$$k_h(M,N)\\,;\\,(c_M\\otimes c_N)=c_{M\\otimes_R N}\\,;\\,G(k_f(M,N))\\,;\\,k_g(FM,FN).$$\nHere a semicolon denotes composition in order of application, and k denotes the forward normalized module tensor isomorphism from the pullback of a tensor product to the tensor product of the two pullbacks. No complexes, boundedness, flatness, or nonzero-ring assumption is involved.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 03EL (sites-modules.tex) and 0D6D; explicit refinement of step 5 of lem-pur-cochain-pullback-tensor-coherence."
+ },
+ "stmt_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Construct a comparison on h by transporting the composite of kf and kg along compositionModule on the source tensor and both target factors. Naturality is the composite of the two naturality equations and the conjugate naturality. For the pure formula apply the normalized scalarAssociation field of a, generator naturality for g, and the two pure formulas. Tensoring the two inverse conjugates cancels the scalar associations on the generators. Uniqueness of the normalized comparison on h identifies this constructed comparison with kh. Postcompose by the tensor of the two forward conjugates and cancel each inverse to obtain the equation.",
+   "uses": [
+    "def-pur-cochain-tensor-coherence-data",
+    "def-pur-cochain-coefficient-arrows",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-cochain-coefficient-arrows",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-18",
+  "note": "Complete Lean proof by constructing the composite normalized comparison and applying its uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal additive functor induces coherent tensor comparison on unbounded cochain complexes preserving tensor associator braiding and unitors",
+   "results": "HomologicalComplex.monoidalCategory, HomologicalComplex.Monoidal.inducingFunctorData, HomologicalComplex.monoidalCategoryStruct, CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq, CategoryTheory.Monoidal.InducingFunctorData.μIso, CategoryTheory.Functor.Monoidal.commTensorRight, CategoryTheory.Functor.CoreMonoidal.μIso, CategoryTheory.Localization.Monoidal.tensorBifunctorIso",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"naturality\"",
+   "results": "HomologicalComplex.mapBifunctorFlipIso_hom_naturality, HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁_assoc, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂_assoc, CategoryTheory.GradedObject.mapBifunctorLeftUnitor_inv_naturality, CategoryTheory.GradedObject.mapBifunctorLeftUnitor_naturality",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullbackTotal|mapBifunctor.*[Nn]aturality|[Nn]aturality.*mapBifunctor",
+   "results": "Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized tensor comparison for pullback of module sheaves commutes with associators braiding and unitors",
+   "results": "PresheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp, TensorProduct.leftComm, SheafOfModules.pullback_assoc, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.MonoidalCategory.tensorMonoidal, Bimod.AssociatorBimod.homAux",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of ringed topos pullback tensor comparisons and scalar extension coefficient compatibility",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendScalars.smul_tmul, TensorProduct.CompatibleSMul.mk, SheafOfModules.pullbackComp, PiTensorProduct.smul_tprodCoeff, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, ModuleCat.extendScalars_id_comp, PolynomialLaw.comp_toFun'",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence",
+  "group": "Y3",
+  "date": "2026-10-18"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Canonical tensor comparison used for coefficient twists: parent cochain coherence proof step 5.",
+   "via": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ModuleTensorCompositionEquation",
+  "file": "lean/Sheaf/SecSmoothPurity/ModuleTensorCompositionEquation.lean",
+  "declaration": "CategoryTheory.CochainPullback.cochainModuleTensorComposition",
+  "statement": "theorem cochainModuleTensorComposition\n    {E : Type uE} [Category.{vE} E] [EssentiallySmall.{w} E]\n    {H : GrothendieckTopology E}\n    [H.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n    {T : Sheaf H CommRingCat.{w}} (f : RingedPullback R S)\n    (g : RingedPullback S T) (h : RingedPullback R T)\n    (kf : Comparison f) (kg : Comparison g) (kh : Comparison h)\n    (a : CompositePresentation f g h kf kg kh)\n :\n    ∀ M N : Modules R,\n      (kh.mu M N).hom ≫\n          ((compositionModule f g h a.rightModules).hom.app M ⊗ₘ\n            (compositionModule f g h a.rightModules).hom.app N) =\n        (compositionModule f g h a.rightModules).hom.app (M ⊗ N) ≫\n          g.L.map (kf.mu M N).hom ≫ (kg.mu (f.L.obj M) (f.L.obj N)).hom",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

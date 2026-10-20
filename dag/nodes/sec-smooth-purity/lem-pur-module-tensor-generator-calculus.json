@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-module-tensor-generator-calculus",
+ "kind": "statement",
+ "title": "Pure tensors and normalized insertion naturality for sheaf modules",
+ "statement": "For module sheaves over a sheaf of commutative rings on an essentially small site, let moduleTmul be the existing sheafification-unit pure tensor, identified with the existing sheaf tensor by tensorObjIsoSheafification. The tensor braiding exchanges the inputs of moduleTmul, and tensor morphisms apply their two component maps. For a ringed pullback f with normalized comparison k of [def-pur-cochain-tensor-coherence-data], scalar-unit insertion q is natural in module maps. Consequently generalized inverse-image generators [def-pur-cochain-coefficient-arrows] are natural in module maps, and comparison with k.mu carries the generator of a generalized pure pairing to the pairing of its generators. These formulas hold on arbitrary generalized sections, with no points or flatness assumption. The associator reassociates pure triples. Morphisms out of a triple tensor of scalar extensions are determined by pure triples with all three outer scalars equal to one.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL: tensor sheafification, tensor associativity and symmetry, and the normalized pure-tensor pullback formula."
+ },
+ "stmt_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-cochain-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Transport the sheafification monoidal tensorators and counits to tensorObjIsoSheafification. Naturality and braiding naturality give the tensor-map and symmetry formulas after applying the adjunction unit to a sectionwise pure tensor. For q, transport along hobj, apply hmap, and use naturality of the sheafification unit on scalar extension. Generalized generator naturality is then moduleUnderlying naturality followed by q naturality. The pure-pair formula is exactly the pure field of the normalized comparison, applied to the natural generalized pairing. The associator formula is the associativity axiom of the lax monoidal forgetful functor from the monoidal sheafification adjunction. For triple scalar-extension extensionality, sheafify the tensor of the three presheafification-unit maps; it is invertible since the tensor localization preserves these local equivalences. Cancel that isomorphism and use the sheafification hom equivalence, then curry sectionwise three times and apply scalar-extension hom extensionality in each argument.",
+   "uses": [
+    "def-pur-cochain-tensor-coherence-data",
+    "def-pur-cochain-coefficient-arrows",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-19",
+  "note": "Proved generator API for the ordinary symmetry and composition comparisons, using the existing sheafification monoidal and scalar-extension APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorObjIsoSheafification|scalarTensor_hom_ext",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No matching combined generator API. Use the existing sheafification adjunction, monoidal naturality and scalar-extension hom_ext; prove the specialized formulas by evaluating pure tensors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorHom\", \"sheafification\"",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No matching combined generator API. Use the existing sheafification adjunction, monoidal naturality and scalar-extension hom_ext; prove the specialized formulas by evaluating pure tensors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of module tensor products pure tensor map naturality braiding associator and scalar extension generator extensionality",
+   "results": "8 hits: PresheafOfModules.Sheafify.mul_smul, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.ιFree_mapFree_inv_assoc, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.Sheafify.map_smul, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.Monoidal.tensorHom",
+   "date": "2026-10-19",
+   "verdict": "No matching combined generator API. Use the existing sheafification adjunction, monoidal naturality and scalar-extension hom_ext; prove the specialized formulas by evaluating pure tensors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pure tensor of two sheaf module sections commutes with the tensor associator braiding and maps",
+   "results": "8 hits: TensorProduct.assoc, TensorProduct.leftComm, CategoryTheory.MonoidalCategory.tensorμ_natural_assoc, TensorProduct.map_map_assoc_symm, TensorProduct.tensorTensorTensorComm_comp_map, CategoryTheory.MonoidalCategory.tensor_associativity_assoc, LinearMap.lTensor_rTensor_comp_assoc, Commute.tmul",
+   "date": "2026-10-20",
+   "verdict": "No exact match. The linear algebra associator and generic monoidal identities do not state the normalized sheafification and scalar-extension generator formulas. The proof uses the existing sheafification monoidal adjunction and evaluates its naturality and associativity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence",
+  "group": "Y3",
+  "date": "2026-10-19"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Pure generator calculation underlying parent cochain comparison coherence and composition steps.",
+   "via": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ModuleTensorGenerators",
+  "file": "lean/Sheaf/SecSmoothPurity/ModuleTensorGenerators.lean",
+  "declaration": "CategoryTheory.CochainPullback.generator_tensorPair",
+  "declarations": [
+   "CategoryTheory.CochainPullback.moduleTmul",
+   "CategoryTheory.CochainPullback.moduleTmul_braiding",
+   "CategoryTheory.CochainPullback.comparison_q_naturality",
+   "CategoryTheory.CochainPullback.moduleTmul_map",
+   "CategoryTheory.CochainPullback.generator_naturality",
+   "CategoryTheory.CochainPullback.moduleTensorPair",
+   "CategoryTheory.CochainPullback.generator_tensorPair",
+   "CategoryTheory.CochainPullback.moduleTmul_associator",
+   "CategoryTheory.CochainPullback.scalarTensor_hom_ext₃"
+  ],
+  "statement": "theorem generator_tensorPair (f : RingedPullback R S) (k : Comparison f)\n    {M N : Modules R} {Z : Sheaf J (Type w)}\n    (x : Z ⟶ (underlying R).obj M) (y : Z ⟶ (underlying R).obj N) :\n    generator f k (moduleTensorPair x y) ≫ (underlying S).map (k.mu M N).hom =\n      moduleTensorPair (generator f k x) (generator f k y)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

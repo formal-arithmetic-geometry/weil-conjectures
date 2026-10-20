@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-module-tensor-monoidal-equations",
+ "kind": "statement",
+ "title": "Associativity and symmetry of the canonical ordinary module tensor comparison",
+ "statement": "Let R and S be sheaves of commutative rings on independently sized sites, f a ringed pullback and k its normalized ordinary tensor comparison as in [def-pur-cochain-tensor-coherence-data]. Write L=f.L and mu(M,N)=k.mu M N. For ordinary module sheaves M,N,H over R, with tensor product [def-pur-sheaf-tensor-product] and associator alpha and symmetry beta from [lem-pc-sheaf-modules-tensor-closed], the following equations of forward morphisms hold (a semicolon means composition in order of application):\nmu(M tensor N,H);(mu(M,N) tensor 1);alpha(LM,LN,LH) = L(alpha(M,N,H));mu(M,N tensor H);(1 tensor mu(N,H)),\nand L(beta(M,N));mu(N,M)=mu(M,N);beta(LM,LN). No complexes, totalization, flatness or boundedness occur.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, with tensor coherence from Tag 03EK; the ordinary generator calculation underlying parent proof step 4."
+ },
+ "stmt_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "For symmetry, swap both source and target factors to obtain another normalized comparison. Naturality follows from braiding naturality. Its pure formula follows from the sheafification braiding formula and naturality of q. Uniqueness of the normalized comparison identifies it with k; cancel the final symmetry to obtain the square. For associativity evaluate on generalized pure triples; finite-product preservation combines three inverse-image generators. The pure formula and the sheaf tensor associator identify the routes; scalar extension and sheafification extend equality to all sections.",
+   "uses": [
+    "def-pur-cochain-tensor-coherence-data",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-19",
+  "note": "Both symmetry and associativity proved. Associativity uses scalar-extension triple extensionality, finite-product preservation, the normalized pure formula and the sheaf tensor associator."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "canonicalRingedTensorComparison|braiding.*tensorObjIsoSheafification",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No exact match: presheaf braiding component formulas and continuous-site module pullback comparisons do not give coherence for this algebraically presented geometric inverse image."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"braiding\"",
+   "results": "2 hits: PresheafOfModulesOfCommRing.braiding_hom_app, PresheafOfModulesOfCommRing.braiding_inv_app",
+   "date": "2026-10-19",
+   "verdict": "No exact match: presheaf braiding component formulas and continuous-site module pullback comparisons do not give coherence for this algebraically presented geometric inverse image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor comparison of pullback of sheaves of modules on a ringed topos respects tensor associators and braiding",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-19",
+   "verdict": "No exact match: presheaf braiding component formulas and continuous-site module pullback comparisons do not give coherence for this algebraically presented geometric inverse image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical tensor comparison for ringed topos pullback of sheaves of modules respects associativity and symmetry",
+   "results": "8 hits: TensorProduct.map_map_assoc_symm, TensorProduct.AlgebraTensorModule.assoc_symm_tmul, TensorProduct.assoc, TensorProduct.map_map_comp_assoc_symm_eq, TensorProduct.assoc_tensor, SheafOfModules.pullback_assoc, TensorProduct.leftComm_symm_tmul, LinearMap.rTensor_lTensor_comp_assoc_symm",
+   "date": "2026-10-20",
+   "verdict": "No exact match. The tensor linear algebra identities do not concern the normalized geometric inverse image, and SheafOfModules.pullback_assoc is composition of continuous-site pullbacks rather than tensor associativity for an arbitrary algebraically presented ringed inverse image."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence",
+  "group": "Y3",
+  "date": "2026-10-19"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Ordinary tensor associativity and symmetry underlying the cochain comparison of parent proof step 4.",
+   "via": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ModuleTensorMonoidalEquations",
+  "file": "lean/Sheaf/SecSmoothPurity/ModuleTensorMonoidalEquations.lean",
+  "declaration": "CategoryTheory.CochainPullback.cochainModuleTensorAssociativity",
+  "statement": "theorem cochainModuleTensorAssociativity (f : RingedPullback R S) (k : Comparison f) :\n    ∀ M N H : Modules R,\n      (k.mu (M ⊗ N) H).hom ≫ ((k.mu M N).hom ⊗ₘ 𝟙 _) ≫\n        (α_ (f.L.obj M) (f.L.obj N) (f.L.obj H)).hom =\n      f.L.map (α_ M N H).hom ≫ (k.mu M (N ⊗ H)).hom ≫\n        (𝟙 _ ⊗ₘ (k.mu N H).hom)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-19",
+  "declarations": [
+   "CategoryTheory.CochainPullback.cochainModuleTensorAssociativity",
+   "CategoryTheory.CochainPullback.cochainModuleTensorBraiding"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

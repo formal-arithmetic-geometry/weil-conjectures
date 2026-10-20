@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-cochain-comparison-monoidal-equations",
+ "kind": "statement",
+ "title": "Monoidal equations for the canonical cochain pullback comparison",
+ "statement": "Let R and S be sheaves of commutative rings on two small sites, f a ringed pullback and k its normalized ordinary tensor comparison as in [def-pur-cochain-tensor-coherence-data]. Write F=pull(f) for termwise pullback of integer-indexed cochain complexes, c(P,Q)=comparison(f,k,P,Q), and j=unit(f,k). The tensor is direct-sum total tensor [def-pc-tensor-complex-sheaves], with its usual associator alpha, Koszul braiding beta, and left and right action unitors lambda,rho, built from the sheaf tensor [def-pur-sheaf-tensor-product]. For all possibly unbounded R-complexes P,Q,H, the comparison is natural in both arguments and the following four monoidal equations hold (a semicolon denotes composition in order of application):\n$$F(\\alpha_{P,Q,H});c(P,Q\\otimes H);(1\\otimes c(Q,H))=c(P\\otimes Q,H);(c(P,Q)\\otimes1);\\alpha_{FP,FQ,FH},$$\n$$F(\\beta_{P,Q});c(Q,P)=c(P,Q);\\beta_{FP,FQ},$$\n$$F(\\lambda_P)=c(R[0],P);(j\\otimes1);\\lambda_{FP},\\qquad F(\\rho_P)=c(P,R[0]);(1\\otimes j);\\rho_{FP}.$$\nAll isomorphisms in these equations mean their forward morphisms of complexes. No flatness or boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 03EL (sites-modules.tex) and 0D6D; explicit refinement of step 4 of lem-pur-cochain-pullback-tensor-coherence."
+ },
+ "stmt_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary module associativity and symmetry equations of lem-pur-module-tensor-monoidal-equations. The canonical unit theorem supplies the right unit equation; derive the left unit equation by braiding naturality and the relation between the braiding and the right unitor. Assemble an oplax monoidal structure on f.L and use the invertible tensor and unit maps to make it monoidal. Its coproduct-preserving additive lift to cochain complexes is the source library mapCochainComplexMonoidal. Identify its tensorator with comparison on each bidegree inclusion by cancelling the inverse total comparison, and identify its unit by the single-complex map. Generic oplax associativity and unit identities give three equations. For symmetry use coproduct extensionality, the signed braiding formula and ordinary symmetry, with additivity preserving the integer sign. The same generic oplax naturality equation supplies naturality in both complex arguments, yielding the full IsCoherent conjunction.",
+   "uses": [
+    "lem-pur-module-tensor-monoidal-equations",
+    "def-pur-cochain-tensor-coherence-data",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-module-tensor-monoidal-equations",
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-19",
+  "note": "Complete Lean proof using the existing generic monoidal lift, identifying its total tensorator, and checking Koszul braiding on summands. Its ordinary module equations are proved in this delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal additive functor induces coherent tensor comparison on unbounded cochain complexes preserving tensor associator braiding and unitors",
+   "results": "HomologicalComplex.monoidalCategory, HomologicalComplex.Monoidal.inducingFunctorData, HomologicalComplex.monoidalCategoryStruct, CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq, CategoryTheory.Monoidal.InducingFunctorData.μIso, CategoryTheory.Functor.Monoidal.commTensorRight, CategoryTheory.Functor.CoreMonoidal.μIso, CategoryTheory.Localization.Monoidal.tensorBifunctorIso",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"naturality\"",
+   "results": "HomologicalComplex.mapBifunctorFlipIso_hom_naturality, HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁_assoc, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂_assoc, CategoryTheory.GradedObject.mapBifunctorLeftUnitor_inv_naturality, CategoryTheory.GradedObject.mapBifunctorLeftUnitor_naturality",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullbackTotal|mapBifunctor.*[Nn]aturality|[Nn]aturality.*mapBifunctor",
+   "results": "Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized tensor comparison for pullback of module sheaves commutes with associators braiding and unitors",
+   "results": "PresheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp, TensorProduct.leftComm, SheafOfModules.pullback_assoc, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.MonoidalCategory.tensorMonoidal, Bimod.AssociatorBimod.homAux",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of ringed topos pullback tensor comparisons and scalar extension coefficient compatibility",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendScalars.smul_tmul, TensorProduct.CompatibleSMul.mk, SheafOfModules.pullbackComp, PiTensorProduct.smul_tprodCoeff, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, ModuleCat.extendScalars_id_comp, PolynomialLaw.comp_toFun'",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence",
+  "group": "Y3",
+  "date": "2026-10-18"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Canonical tensor comparison used for coefficient twists: parent cochain coherence proof step 4.",
+   "via": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.CochainComparisonMonoidalEquations",
+  "file": "lean/Sheaf/SecSmoothPurity/CochainComparisonMonoidalEquations.lean",
+  "declaration": "CategoryTheory.CochainPullback.cochainComparison_monoidal",
+  "statement": "theorem cochainComparison_monoidal (f : RingedPullback R S) (k : Comparison f) :\n    IsCoherent f k",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

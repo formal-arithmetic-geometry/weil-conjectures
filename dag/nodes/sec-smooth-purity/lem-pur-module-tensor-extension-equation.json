@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-module-tensor-extension-equation",
+ "kind": "statement",
+ "title": "Ordinary scalar-extension tensor equation",
+ "statement": "Let R,S be sheaves of commutative rings on two small sites, f a ringed pullback and k its normalized module tensor comparison [def-pur-cochain-tensor-coherence-data]. Let d be a compatible coefficient square R to Rprime and S to Sprime, fprime=changed(f,d), and kprime a normalized comparison for fprime [def-pur-cochain-coefficient-arrows]. Write F=f.L, Fprime=fprime.L, E_R=extensionFunctor(d.sourceMap), E_S=extensionFunctor(d.targetMap), and U=restrictionFunctor(d.targetMap). Let b:E_R composed with Fprime to F composed with E_S be scalarAssociation(f,k,d,kprime), and t=transitionModule(f,k,d,kprime):F to E_R composed with Fprime composed with U. Denote the extension tensor comparisons by e_R,e_S, and restrictionTensorModule(d.targetMap,A,B):UA tensor_S UB to U(A tensor_Sprime B) by r(A,B). Then for all R-module sheaves M,N the scalar-extension equation holds:\nF'(e_R(M,N));k'(E_R M,E_R N);(b_M tensor b_N) =\nb_(M tensor N);E_S(k(M,N));e_S(FM,FN).\nThis is an equation of Sprime-linear module maps, with no complexes or transitions.\nCoefficient maps need not be invertible; zero rings and modules are allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (sites-modules.tex), scalar association refinement of step 6 of lem-pur-cochain-pullback-tensor-coherence."
+ },
+ "stmt_deps": [
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "proof": [
+  {
+   "text": "First prove two-factor scalar-extension extensionality: sheafify the tensor of the two presheafification units, cancel its invertible sheafification, use the sheafification adjunction, and curry sectionwise twice to apply scalar-extension hom extensionality. Transport along hobj and q_one to obtain extensionality on pairs of normalized inverse-image generators. Finite-product preservation of the inverse image represents each such pair by one generalized element. On generalized pairs, naturality of generator and the normalized extension comparison identify insertion followed by tensor comparison with the pairing of the two insertions. The IsScalarAssociation property then identifies both coefficient routes on these generators. To pass to all morphisms, precompose by the inverse scalar-association isomorphism, take adjuncts under target extension/restriction, and precompose by the inverse original tensor comparison. Pair extensionality applies; the adjunction unit and IsScalarAssociation cancel the inserted inverse association, reducing exactly to the generalized-pair equality. This proves the scalar-extension square without an extra generation hypothesis or invertibility of coefficient maps.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows",
+    "def-pur-cochain-tensor-coherence-data",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-cochain-tensor-coherence-data",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-19",
+  "note": "Complete Lean proof using two-factor scalar-extension extensionality, generalized pairs and the normalized scalar-association equation. The transition square is proved separately by adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal additive functor induces coherent tensor comparison on unbounded cochain complexes preserving tensor associator braiding and unitors",
+   "results": "HomologicalComplex.monoidalCategory, HomologicalComplex.Monoidal.inducingFunctorData, HomologicalComplex.monoidalCategoryStruct, CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq, CategoryTheory.Monoidal.InducingFunctorData.μIso, CategoryTheory.Functor.Monoidal.commTensorRight, CategoryTheory.Functor.CoreMonoidal.μIso, CategoryTheory.Localization.Monoidal.tensorBifunctorIso",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"naturality\"",
+   "results": "HomologicalComplex.mapBifunctorFlipIso_hom_naturality, HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁_assoc, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂_assoc, CategoryTheory.GradedObject.mapBifunctorLeftUnitor_inv_naturality, CategoryTheory.GradedObject.mapBifunctorLeftUnitor_naturality",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullbackTotal|mapBifunctor.*[Nn]aturality|[Nn]aturality.*mapBifunctor",
+   "results": "Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized tensor comparison for pullback of module sheaves commutes with associators braiding and unitors",
+   "results": "PresheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp, TensorProduct.leftComm, SheafOfModules.pullback_assoc, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.MonoidalCategory.tensorMonoidal, Bimod.AssociatorBimod.homAux",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of ringed topos pullback tensor comparisons and scalar extension coefficient compatibility",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendScalars.smul_tmul, TensorProduct.CompatibleSMul.mk, SheafOfModules.pullbackComp, PiTensorProduct.smul_tprodCoeff, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, ModuleCat.extendScalars_id_comp, PolynomialLaw.comp_toFun'",
+   "date": "2026-10-18",
+   "verdict": "No exact match. Generic monoidal and total-complex identities do not state the normalized ringed-pullback equation; continuous-site pullbacks do not cover the independently sized geometric inverse images here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence",
+  "group": "Y3",
+  "date": "2026-10-19"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Scalar-extension compatibility of the tensor comparison used for coefficient twists; the scalar-extension half of parent cochain coherence proof step 6.",
+   "via": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ModuleTensorExtensionEquation",
+  "file": "lean/Sheaf/SecSmoothPurity/ModuleTensorExtensionEquation.lean",
+  "declaration": "CategoryTheory.CochainPullback.cochainModuleTensorExtensionCoefficient",
+  "statement": "theorem cochainModuleTensorExtensionCoefficient (f : RingedPullback R S) (k : Comparison f)\n    (d : CoefficientSquare f) (k' : Comparison (changed f d)) :\n    ∀ M N : Modules R,\n      (changed f d).L.map ((extensionComparison d.sourceMap).mu M N).hom ≫\n          (k'.mu ((extensionFunctor d.sourceMap).obj M)\n            ((extensionFunctor d.sourceMap).obj N)).hom ≫\n          ((scalarAssociation f k d k').hom.app M ⊗ₘ\n            (scalarAssociation f k d k').hom.app N) =\n        (scalarAssociation f k d k').hom.app (M ⊗ N) ≫\n          (extensionFunctor d.targetMap).map (k.mu M N).hom ≫\n          ((extensionComparison d.targetMap).mu (f.L.obj M) (f.L.obj N)).hom",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -17,110 +17,61 @@
  ],
  "proof": [
   {
-   "text": "For each pair of degrees p,q, take the S-linear module comparison of [lem-weil-pbc-ringed-topoi-module-pullback-tensor] for P^p and Q^q. Following its source (Stacks 03EL, the chain Hom_S(u^*(M tensor N),H) = Hom_R(M tensor N,u_*H) = Bilin(M x N,u_*H) = Bilin(u^{-1}M x u^{-1}N,H) = Hom_S(u^*M tensor u^*N,H)), it corresponds to the identity of u^*M tensor u^*N, i.e. to the u^{-1}R-bilinear map (x,y) |-> (1 tensor x) tensor (1 tensor y); by the module adjunction [lem-weil-pbc-ringed-topoi-module-adjunction] and the bilinear universal property of the sheaf tensor [lem-pc-sites-sheaf-tensor-bilinear-universal] its S-linear extension is s tensor (x tensor y) |-> s((1 tensor x) tensor (1 tensor y)) = (s tensor x) tensor (1 tensor y), the displayed insertion of 1. Likewise the contraction (s tensor x) tensor (t tensor y) |-> st tensor (x tensor y) is well defined: it is S-bilinear and balanced over u^{-1}R in each factor, so it is induced by [lem-pc-sites-sheaf-tensor-bilinear-universal] and the balancing relations of [def-pur-sheaf-tensor-product]. Since u^* is a left adjoint [lem-weil-pbc-ringed-topoi-module-adjunction], it preserves the (possibly infinite) direct sum over p+q=n in the total complex [def-pc-tensor-complex-sheaves]; the direct sum of the degreewise maps is the degree-n map c_{u;P,Q}.",
+   "text": "Use the existing normalized tensor total and its inverse. The monoidal lift in lem-pur-cochain-comparison-monoidal-equations identifies its tensorator on every bidegree inclusion and gives naturality in both complex arguments, associativity, signed symmetry and the two unit equations together.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback and its proof (the chain of Hom identifications); Tag 07A4 (sites-cohomology.tex, lemma-pullback-tensor-product), the displayed total-complex isomorphism with these constituents"
-   }
-  },
-  {
-   "text": "The degree-n map is a chain map. On a homogeneous tensor x in P^p and y in Q^q, the source differential is dx tensor y plus (-1)^p x tensor dy. Naturality of the module comparison gives the same two terms after applying c, while the target total differential has exactly the same Koszul sign (-1)^p. Direct-sum inclusions then prove equality in every degree, with no boundedness assumption.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-pur-cochain-comparison-monoidal-equations",
+    "def-pur-cochain-tensor-coherence-data",
     "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, total-complex differential and tensor comparison"
-   }
+   "elementary": true
   },
   {
-   "text": "The contraction formula followed by insertion of 1 and insertion followed by contraction are identities on every local pure tensor, so c is an isomorphism with the stated inverse. The same pure-tensor calculation after applying maps P to P' and Q to Q' proves naturality in both complex arguments; equality of sheaf morphisms follows from the sheaf tensor universal property and [def-pur-sheaf-tensor-product].",
+   "text": "Use the full IsCoherent conjunction supplied by lem-pur-cochain-comparison-monoidal-equations.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-pur-sheaf-tensor-product"
+    "lem-pur-cochain-comparison-monoidal-equations"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03EL, tensor-product-pullback inverse and naturality"
-   }
+   "elementary": false
   },
   {
-   "text": "For three complexes, compare the two reassociation composites on a homogeneous triple tensor: both send s tensor ((x tensor y) tensor z) to (s tensor x) tensor ((1 tensor y) tensor (1 tensor z)) after the canonical associators. For the symmetry square, both routes send a bidegree-(p,q) tensor to the swapped tensor multiplied by (-1)^{pq}; for the left and right unit squares, both routes multiply by the same scalar. These are the associativity, symmetry and unit maps of the symmetric monoidal sheaf-module structure [lem-pc-sheaf-modules-tensor-closed], and the total-complex signs are those of [def-pc-tensor-complex-sheaves]. Pure-tensor equality implies equality of the sheaf maps.",
+   "text": "Apply the ordinary module composition square lem-pur-module-tensor-composition-equation. In each total degree, test after the images under h.L of every bidegree inclusion. Naturality of the compositionModule isomorphism, the summand formula for comparison, and tensor-map summand formulas reduce the chain square to the ordinary module square. Left adjointness makes the mapped inclusions jointly determining.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pur-module-tensor-composition-equation",
+    "def-pur-cochain-tensor-coherence-data",
     "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03EK, tensor associativity and symmetry; Tag 07A4, compatibility of the total-complex comparison"
-   }
+   "elementary": true
   },
   {
-   "text": "For composable v and u, evaluate both sides of the displayed composition equation on a homogeneous pure tensor. The comparison a_P is obtained from the composite inverse-image adjunction; the composite-adjunction formula and the conjugate-adjunction uniqueness equation are [def-weil-pbc-composite-adjunction] and [lem-weil-pbc-conjugate-iso-unit-equation]. Under the scalar-association identification, each route inserts the two units in the same order and then sends t tensor (x tensor y) to (t tensor x) tensor (1 tensor y). Associativity of scalar multiplication and the associator of [def-pur-sheaf-tensor-product] make the routes equal, and naturality extends the equality to all complexes.",
+   "text": "Apply both ordinary module coefficient squares in lem-pur-module-tensor-coefficient-equations. For the extension square test the bidegree inclusions after the composite of source extension and changed pullback. For the transition square test after f.L. Use naturality of scalarAssociation and transitionModule, and the summand formulas for comparison and restrictionTensor. Functoriality of scalar restriction and coproduct extensionality give the two chain equations, including every quotient transition.",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, canonical pullback composition; Tag 03EL, scalar-association comparison"
-   }
-  },
-  {
-   "text": "Coefficient square. Each of epsilon, epsilon^S, kappa, tau is induced on generators by the bilinear universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] and is a chain map because it is applied termwise and commutes with the differentials d tensor 1 and 1 tensor d with the same sign (-1)^p, the scalar factor having degree 0 [def-pc-tensor-complex-sheaves]. Evaluate on a local generator s' tensor ((x tensor y) tensor 1) with x in P^p, y in Q^q (such elements generate, since r is moved across by balancing [def-pur-sheaf-tensor-product]). Left route: u'^*(epsilon) gives s' tensor ((x tensor 1) tensor (y tensor 1)); c_{u'} gives (s' tensor (x tensor 1)) tensor (1 tensor (y tensor 1)); kappa tensor kappa gives ((1 tensor x) tensor s') tensor ((1 tensor y) tensor 1). Right route: kappa gives (1 tensor (x tensor y)) tensor s'; c_u tensor S' gives ((1 tensor x) tensor (1 tensor y)) tensor s'; epsilon^S gives ((1 tensor x) tensor s') tensor ((1 tensor y) tensor 1). They agree. Transition equation: on s tensor (x tensor y), the left side gives (bar s tensor (x tensor 1)) tensor (1 tensor (y tensor 1)); the right side gives bar s tensor ((x tensor y) tensor 1), then bar s tensor ((x tensor 1) tensor (y tensor 1)), then the same element. For a quotient tower the transition K_m -> K_m tensor_{R_m} R_n is tau for R_m -> R_n, S_m -> S_n, so c_{u_m} and c_{u_n} commute with it; equality of sheaf maps follows from equality on generators.",
-   "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "def-pur-sheaf-tensor-product",
+    "lem-pur-module-tensor-coefficient-equations",
+    "def-pur-cochain-coefficient-arrows",
     "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03EL, change-of-rings compatibility of the pullback tensor comparison"
-   }
+   "elementary": true
   },
   {
-   "text": "All arguments are degreewise and use only direct sums indexed by p+q=n, which u^* preserves as a left adjoint (step 1), so they apply to arbitrary, possibly unbounded cochain complexes. The chain-map, inverse, naturality, coherence, composition, coefficient-square and transition equations therefore hold as equations of chain maps; by the transition equation of step 6 they are compatible with all transitions of quotient towers.",
+   "text": "Instantiate the common theorem at the ULift coefficient rings and universe max r m t. No new tensor, module or coefficient identification is introduced.",
    "uses": [
-    "def-pc-tensor-complex-sheaves"
+    "def-pur-cochain-coefficient-universe-transport"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, unbounded total-complex comparison"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-composite-adjunction",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-cochain-coefficient-universe-transport",
+  "def-pur-cochain-tensor-coherence-data",
+  "lem-pur-cochain-comparison-monoidal-equations",
+  "lem-pur-module-tensor-coefficient-equations",
+  "lem-pur-module-tensor-composition-equation"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 03EL (lemma-tensor-product-pullback), with the composition comparison normalized by Tag 0D6D; the cochain and coefficient coherence are the explicit homogeneous-tensor refinements."
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-19",
+  "note": "Complete Lean proof of total-complex naturality and lifts of the ordinary monoidal, composition and coefficient equations. All supporting modules in this delivery are proved."
  },
  "mathlib_searches": [
   {
@@ -227,14 +178,6 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal"
- ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -260,12 +203,22 @@
    "CategoryTheory.CochainPullback.cochainPullbackTensorCoherenceOfUniverses"
   ],
   "file": "lean/Sheaf/SecSmoothPurity/CochainPullbackTensorCoherence.lean",
-  "statement": "theorem cochainPullbackTensorCoherence (f : RingedPullback R S) (k : Comparison f) : HasTensorCoherence.{w, uC, vC, uD, vD, uE, vE} f k",
+  "statement": "theorem cochainPullbackTensorCoherence (f : RingedPullback R S) (k : Comparison f) :\n    HasTensorCoherence.{w, uC, vC, uD, vD, uE, vE} f k",
   "branch": "newtargets-dag",
   "by": "NA",
   "date": "2026-10-18",
   "existing": false,
   "note": "Returned-delivery repair: usual cochain monoidal maps, actual composable ringed morphisms, normalized coefficient maps and both chain-map equations. The primary declaration is the common theorem for arbitrary ring sheaves R, S with modules in the rings' universe w (the universe of the sheaf monoidal structure) and independent site object/Hom universes. cochainPullbackTensorCoherenceOfUniverses is its specialization to the ULift coefficient rings of the universe-transport node. The node statement is unchanged.",
   "fixed_by": "NT-stage2-cc-bfecfad67"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T132056-L-1410236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
