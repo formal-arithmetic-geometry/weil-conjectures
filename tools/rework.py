@@ -724,8 +724,19 @@ def cluster_set(rows=None) -> tuple[list[str], set[str]]:
     rows = load() if rows is None else rows
     live = {m for m in rows if not landed(m)}
     allimp = rework_imports({m: rows[m] for m in live})
-    # an importer's claim (a delivery from before the quarantine, waiting) does not block: only unfixed error roots do
-    seeds = {m for m in live if (rows[m].get("cause") or "").startswith("error:")}
+    # an importer's claim (a delivery from before the quarantine, waiting) does not block: only roots CONFIRMED unfixed
+    # do: an error root whose quarantined text is the one that failed (local/rework-tried.json) and whose error does not
+    # name a collision partner that is gone. A root never compiled with its present text is put back too: the build decides.
+    import hashlib, json
+    try:
+        tried = json.loads(TRIED.read_text())
+    except (OSError, ValueError):
+        tried = {}
+    def blob(m):
+        p = ROOT / (rows[m].get("quarantine") or qpath(m))
+        return hashlib.sha1(p.read_bytes()).hexdigest() if p.is_file() else None
+    seeds = {m for m in live if (rows[m].get("cause") or "").startswith("error:")
+             and tried.get(m) == blob(m) and not stale_cause(m, rows)}
     bad = set(seeds)
     for m in live:     # a project import that is nowhere (neither in lean/ nor quarantined)
         if any(i.startswith(PROJECT_PREFIXES) and i not in live and not li.file_of(i).is_file() for i in allimp[m] - {m}):
@@ -790,7 +801,7 @@ def cluster_restore(rounds: int = 4, dry: bool = False) -> int:
     rows = load()
     put, seeds = cluster_set(rows)
     print(f"{time.strftime('%F %T')} cluster restore: {len(put)} quarantined module(s) to put back "
-          f"({len(seeds)} unfixed roots block {sum(1 for m in rows if not landed(m)) - len(put)})", flush=True)
+          f"({len(seeds)} confirmed unfixed roots block {sum(1 for m in rows if not landed(m)) - len(put)})", flush=True)
     if dry or not put:
         return len(put)
     restored: set[str] = set()
@@ -846,6 +857,11 @@ def cluster_restore(rounds: int = 4, dry: bool = False) -> int:
         clos = (importer_closure(failing, imports) & (restored - requarantined)) | failing
         errs = _first_errors(failing)
         memo: dict = {}
+        import hashlib
+        try:
+            tried = json.loads(TRIED.read_text())
+        except (OSError, ValueError):
+            tried = {}
         with mergelock.merge_lock():
             rows = load()
             with ld.tree_lock():
@@ -863,6 +879,9 @@ def cluster_restore(rounds: int = 4, dry: bool = False) -> int:
                         else "imports " + next(iter(sorted(li.closure(m, imports, memo) & failing)), "?")
                     if m in rows:
                         rows[m]["cause"] = cause
+                    if m in failing:
+                        tried[m] = hashlib.sha1(prev[rel]).hexdigest()
+                TRIED.write_text(json.dumps(tried))
                 for r in IMPORT_ROOTS:
                     root = li.LEAN / f"{r}.lean"
                     if not root.is_file():
