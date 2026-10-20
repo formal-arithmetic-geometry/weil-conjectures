@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.RingTheory.AssociatedGradedRing
 import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Finiteness.Defs
+import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 import Sheaf.RingTheory.QuasiRegularPrefixQuotient
 
 /-!
@@ -33,6 +33,44 @@ namespace RingTheory
 namespace Sequence
 
 variable {A : Type u} [CommRing A]
+
+-- Stacks 061S: a zero product forces membership in every filtration level.
+set_option backward.isDefEq.respectTransparency false in
+private theorem regular_of_graded_variable
+    {B C σ : Type*} [CommRing B] [CommRing C]
+    (J : Ideal B) (φ : MvPolynomial σ C →+* Ideal.associatedGraded J)
+    (hφ : Function.Bijective φ) (j : σ) (a : B) (ha : a ∈ J)
+    (hj : φ (MvPolynomial.X j) =
+      DirectSum.of (Ideal.associatedGradedPiece J) 1
+        (Submodule.Quotient.mk (⟨a, by simpa using ha⟩ : (J ^ 1 : Ideal B))))
+    (hsep : (⨅ n : ℕ, J ^ n) = ⊥) : IsSMulRegular B a := by
+  apply IsSMulRegular.of_right_eq_zero_of_smul
+  intro x hx
+  have hax : a * x = 0 := hx
+  have hxpow (n : ℕ) : x ∈ J ^ n := by
+    induction n with
+    | zero => simp
+    | succ n ih =>
+      let z : Ideal.associatedGradedPiece J n :=
+        Submodule.Quotient.mk (⟨x, ih⟩ : (J ^ n : Ideal B))
+      obtain ⟨p, hp⟩ := hφ.2 (DirectSum.of (Ideal.associatedGradedPiece J) n z)
+      have hprod : φ (MvPolynomial.X j * p) = 0 := by
+        rw [map_mul, hj, hp]
+        rw [Ideal.associatedGraded_mul]
+        have hz : (⟨a * x, by rw [hax]; exact (J ^ (1 + n)).zero_mem⟩ :
+            (J ^ (1 + n) : Ideal B)) = 0 := Subtype.ext hax
+        simp only [hz, Submodule.Quotient.mk_zero, map_zero]
+      have hxp : MvPolynomial.X j * p = 0 :=
+        hφ.1 (hprod.trans (map_zero φ).symm)
+      have hpzero : p = 0 := MvPolynomial.isRegular_X.left
+        (hxp.trans (mul_zero _).symm)
+      have hz : z = 0 := DirectSum.of_injective n (by
+        rw [← hp, hpzero, map_zero, map_zero])
+      exact (Submodule.Quotient.mk_eq_zero
+        (Submodule.comap (J ^ n : Ideal B).subtype (J ^ (n + 1)))).mp hz
+  have hxall : x ∈ (⨅ n : ℕ, J ^ n : Ideal B) := Ideal.mem_iInf.mpr hxpow
+  rw [hsep] at hxall
+  exact hxall
 
 /-- In a Noetherian local ring, a polynomial associated graded algebra on
 generators in the maximal ideal forces those generators to be regular.
@@ -64,7 +102,70 @@ theorem quasiRegularNoetherianLocal
     (hf : ∀ j : Fin b, f j ∈ IsLocalRing.maximalIdeal A)
     (hiso : Function.Bijective (Ideal.regularSequenceGradedPolynomialMap f)) :
     RingTheory.Sequence.IsRegular A (List.ofFn f) := by
-  sorry
+  apply RingTheory.Sequence.IsRegular.of_isWeaklyRegular_of_mem_maximalIdeal
+  · intro r hr
+    obtain ⟨j, rfl⟩ := List.mem_ofFn.mp hr
+    exact hf j
+  · let J : Ideal A := Ideal.span (Set.range f)
+    have hJle : J ≤ IsLocalRing.maximalIdeal A := Ideal.span_le.mpr (by
+      rintro _ ⟨j, rfl⟩
+      exact hf j)
+    have hJ : J ≠ ⊤ := ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal A).ne_top hJle
+    have : Nontrivial (A ⧸ J) := Ideal.Quotient.nontrivial_iff.mpr hJ
+    constructor
+    intro i hi
+    have hib : i < b := by simpa only [List.length_ofFn] using hi
+    let I := Ideal.quasiRegularPrefixIdeal f i
+    have hIle : I ≤ J := Ideal.span_le.mpr (by
+      rintro _ ⟨j, _, rfl⟩
+      exact Ideal.subset_span (Set.mem_range_self j))
+    have hI : I ≠ ⊤ := ne_top_of_le_ne_top hJ hIle
+    have : Nontrivial (A ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr hI
+    have : IsLocalRing (A ⧸ I) :=
+      IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+    let g := Ideal.quasiRegularQuotientTail f i
+    let K := Ideal.span (Set.range g)
+    obtain ⟨e, _, hpoly⟩ := Ideal.quasiRegular_prefix_quotient f hiso i hib.le
+    have hK : K ≠ ⊤ := by
+      have : Nontrivial ((A ⧸ I) ⧸ K) := e.toEquiv.nontrivial
+      exact Ideal.Quotient.nontrivial_iff.mp inferInstance
+    have hsep := Ideal.iInf_pow_eq_bot_of_isLocalRing K hK
+    let j : {j : Fin b // i ≤ j.val} := ⟨⟨i, hib⟩, le_rfl⟩
+    have hreg : IsSMulRegular (A ⧸ I) (g j) := by
+      apply regular_of_graded_variable K
+        (MvPolynomial.aeval (R := (A ⧸ I) ⧸ K) (fun k ↦
+          DirectSum.of (Ideal.associatedGradedPiece K) 1
+            (Submodule.Quotient.mk
+              (⟨g k, by simpa using Ideal.subset_span (Set.mem_range_self k)⟩ :
+                (K ^ 1 : Ideal (A ⧸ I)))))).toRingHom hpoly j (g j)
+        (Ideal.subset_span (Set.mem_range_self j)) ?_ hsep
+      exact MvPolynomial.aeval_X _ j
+    have hprefix : Ideal.ofList ((List.ofFn f).take i) = I := by
+      apply congrArg Ideal.span
+      ext a
+      constructor
+      · intro ha
+        obtain ⟨k, hk, heq⟩ := List.mem_iff_getElem.mp ha
+        have hki : k < i := (lt_min_iff.mp (by
+          simpa only [List.length_take] using hk)).1
+        have hkb : k < b := hki.trans hib
+        refine ⟨⟨k, hkb⟩, hki, ?_⟩
+        simpa only [List.getElem_take, List.getElem_ofFn] using heq
+      · rintro ⟨k, hk, rfl⟩
+        apply List.mem_iff_getElem.mpr
+        refine ⟨k.val, ?_, ?_⟩
+        · simpa only [List.length_take, List.length_ofFn] using lt_min hk k.isLt
+        · simp only [List.getElem_take, List.getElem_ofFn]
+    have hsmul : (Ideal.ofList ((List.ofFn f).take i) • (⊤ : Submodule A A)) = I := by
+      change Ideal.ofList ((List.ofFn f).take i) • (⊤ : Ideal A) = I
+      rw [hprefix, Ideal.smul_eq_mul, Ideal.mul_top]
+    rw [hsmul]
+    simp only [List.getElem_ofFn]
+    apply IsSMulRegular.of_right_eq_zero_of_smul
+    intro x hx
+    apply hreg.right_eq_zero_of_smul
+    change Ideal.Quotient.mk I (f ⟨i, hib⟩) * x = 0 at hx ⊢
+    exact hx
 
 end Sequence
 

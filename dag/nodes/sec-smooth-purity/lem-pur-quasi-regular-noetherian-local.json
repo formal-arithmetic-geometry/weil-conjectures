@@ -17,62 +17,42 @@
  ],
  "proof": [
   {
-   "text": "Since every $f_j\\in\\mathfrak m$, we have $J\\subseteq\\mathfrak m$, so $1\\notin J$ and $C=A/J\\ne0$. The Jacobson radical is $\\mathfrak m$, since this is the unique maximal ideal. For $0\\leq i\\leq b$ put $I_i=(f_1,\\ldots,f_i)$ and $B_i=A/I_i$; let $q_i:A\\to B_i$ be the quotient map and put $\\overline J_i=(q_i(f_{i+1}),\\ldots,q_i(f_b))$. The module $B_i$ is finite over $A$: every class is $a\\cdot q_i(1)$. Because $q_i(f_j)=0$ for $j\\leq i$, the images of all the generators of $J$ generate precisely $\\overline J_i$. Thus $J^nB_i=\\overline J_i^{\\,n}$ as additive subgroups of $B_i$ for every $n\\geq0$: expand products of $n$ generators, with the case $n=0$ giving $B_i$. Also $B_i/\\overline J_i=C$: both send a representative $a$ to its class modulo $J$.",
+   "text": "Put J = span(range f). Since every f j belongs to the maximal ideal, J is proper. Hence A/J is nontrivial. Every prefix ideal I_i is contained in J, so A/I_i is a nontrivial Noetherian local quotient ring.",
    "uses": [
-    "def-weil-pbc-algebra-hom-quotient",
-    "def-weil-finitely-generated-module"
+    "def-weil-pbc-algebra-hom-quotient"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061S, lemma-quasi-regular-regular, setup and quotient stages of its induction; Tag 00IQ, lemma-intersection-powers-ideal-module (2), Jacobson hypothesis."
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-pur-quasi-regular-prefix-quotient] to the assumed canonical graded isomorphism, for each $0\\leq i<b$. It gives a canonical graded isomorphism\n$$\\Phi_i:C[T_{i+1},\\ldots,T_b]\\xrightarrow{\\sim}\\operatorname{gr}_{\\overline J_i}(B_i),\\qquad T_j\\longmapsto[q_i(f_j)]_1.$$\nThe coefficient identification and the prefix quotients are exactly those introduced in Step 1. No regularity of any prefix is assumed in this application.",
+   "text": "Apply the stated prefix-quotient theorem to obtain a bijective polynomial associated-graded map for the tail g in B=A/I_i. Its coefficient quotient B/K is isomorphic to A/J. Therefore K=span(range g) is proper.",
    "uses": [
     "lem-pur-quasi-regular-prefix-quotient"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 061R, lemma-truncate-quasi-regular, and 061S, lemma-quasi-regular-regular, last paragraph."
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $0\\leq i<b$. Apply [lem-weil-pbc-krull-intersection-jacobson] with ring $A$, ideal $J$, and finite $A$-module $B_i$. Its hypotheses hold: $A$ is Noetherian, $J\\subseteq\\mathfrak m$ is contained in its Jacobson radical, and $B_i$ is cyclic by Step 1. Hence $\\bigcap_{n\\geq0}J^nB_i=0$, equivalently $\\bigcap_{n\\geq0}\\overline J_i^{\\,n}=0$. For $x\\ne0$ in $B_i$, choose the least $n$ such that $x\\notin\\overline J_i^{\\,n}$. Since $\\overline J_i^{\\,0}=B_i$, we have $n\\geq1$; writing $r=n-1$ gives $x\\in\\overline J_i^{\\,r}\\setminus\\overline J_i^{\\,r+1}$. Thus its initial class $\\xi=[x]_r$ is nonzero in degree $r$ of the associated graded ring.",
+   "text": "Apply Mathlib Ideal.iInf_pow_eq_bot_of_isLocalRing to the proper ideal K in the Noetherian local ring B. This is the local-ring, M=B specialization of the Jacobson Krull-intersection theorem and gives intersection_n K^n=0.",
    "uses": [
     "lem-weil-pbc-krull-intersection-jacobson",
-    "def-weil-pbc-associated-graded-ring"
+    "def-weil-finitely-generated-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061S, lemma-quasi-regular-regular, first paragraph; Tag 00IQ, lemma-intersection-powers-ideal-module (2), which generalizes the cited Tag 00IP, lemma-intersect-powers-ideal-module-zero."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $P=\\Phi_i^{-1}(\\xi)$, a nonzero homogeneous polynomial of degree $r$. Multiplication by the variable $T_{i+1}$ is injective even if $C$ has zero divisors: it sends each coefficient at exponent $\\alpha$ to that at $\\alpha+e_{i+1}$, and distinct exponents remain distinct. Hence $T_{i+1}P\\ne0$. The homogeneous multiplication formula gives\n$$0\\ne\\Phi_i(T_{i+1}P)=[q_i(f_{i+1})]_1\\,[x]_r=[q_i(f_{i+1})x]_{r+1}.$$\nConsequently $q_i(f_{i+1})x\\ne0$. Since this holds for every nonzero $x\\in B_i$, multiplication by $f_{i+1}$ on $A/(f_1,\\ldots,f_i)$ has zero kernel and is injective (apply the zero-kernel assertion to the difference of two elements with equal products).",
+   "text": "Prove a generic initial-form lemma with separatedness explicit. If a*x=0 and x is in K^n, lift its degree-n class through the bijective polynomial map. Multiplying its preimage by the variable for a maps to the class of a*x, hence to zero, by the associated-graded product formula. Injectivity of the polynomial map and regularity of a polynomial variable make the preimage zero. Thus the degree-n class of x is zero and x lies in K^(n+1). Starting with K^0=B gives x in every power, so separatedness makes x=0. The zero-kernel criterion proves injectivity.",
    "uses": [
+    "def-weil-pbc-associated-graded-ring",
     "def-weil-pbc-mv-polynomial-ring",
     "lem-weil-pbc-associated-graded-ring-structure"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061S, lemma-quasi-regular-regular, nonzero initial-form argument; Tag 061N, equation-quasi-regular, multiplication by a variable."
-   }
+   "elementary": true
   },
   {
-   "text": "Step 4 gives exactly the required injectivity on every successive quotient, for $i=0,\\ldots,b-1$. Step 1 gives the remaining condition $A/(f_1,\\ldots,f_b)=C\\ne0$. By [def-weil-pbc-regular-sequence] these conditions mean that $f_1,\\ldots,f_b$ is an $A$-regular sequence. If $b=0$, there are no injectivity conditions, $J=0$, and the last condition is $A\\ne0$, which is assumed; hence the same conclusion holds for the empty sequence.",
+   "text": "Identify the ideal of List.take i (List.ofFn f) with I_i by the indexed membership descriptions; its product with the full ring module is itself. Transfer injectivity of multiplication by the next tail element to the original A-scalar action. These are exactly the weak-regularity conditions. Mathlib IsRegular.of_isWeaklyRegular_of_mem_maximalIdeal supplies the final nonzero-quotient condition from membership in the maximal ideal. For b=0 the weak-regularity conditions are empty, and the same criterion applies.",
    "uses": [
     "def-weil-pbc-regular-sequence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061S, lemma-quasi-regular-regular, conclusion using Tag 00LF, definition-regular-sequence; empty-sequence case made explicit."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -88,7 +68,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 061S, lemma-quasi-regular-regular, using Tag 061R, lemma-truncate-quasi-regular. The source induction is written by applying its initial-form argument separately to every prefix quotient, using Tag 00IQ (2) over A on the cyclic module A/I_i."
+  "place": "Tag 061S and Tag 061R. N2 formalization uses induction through all filtration levels for a zero product instead of choosing a least nonzero initial form, and applies Krull intersection directly over the Noetherian local prefix quotient."
  },
  "mathlib_searches": [
   {
@@ -236,5 +216,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Second reading by Q35 confirms the recorded canonical map and exact Stacks specialization; no statement change."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T122115-L-477883",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
