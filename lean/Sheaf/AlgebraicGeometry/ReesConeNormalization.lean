@@ -5,7 +5,8 @@ Authors: SHEAF group Q07
 -/
 module
 
-public import Sheaf.Paper.PurityNormalCone
+public import Sheaf.Paper.PurityNormalBundle
+public import Sheaf.Paper.PurityNormalProjection
 public import Sheaf.AlgebraicGeometry.VectorBundleZeroSection
 public import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 
@@ -30,6 +31,9 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale.FiniteSmoothPurity
 
+-- `first`: concrete relative-spectrum equivalence (live) or chosen one (stale build).
+set_option linter.unreachableTactic false in
+set_option linter.unusedTactic false in
 /-- The conormal algebra identified with functions on its relative spectrum.
 Source: Stacks 01LX and 0630
 (blueprint: def-pur-rees-cone-normalization). -/
@@ -41,7 +45,12 @@ def coneAlgebraIso {V S : Scheme.{u}} (s : S ⟶ V) [IsClosedImmersion s] :
             (PurityNormalBundle.normalCone s).sheaf) :=
   ((ObjectProperty.ι (fun B : S.CommAlgebraSheaf ↦ B.toModule.IsQuasicoherent)).mapIso
     ((VectorBundleZeroSection.antiEquivalence S).counitIso.app
-      (PurityNormalBundle.algebraObject s))).symm
+      (PurityNormalBundle.algebraObject s))).symm ≪≫
+    eqToIso (by
+      first
+        | rfl
+        | exact (affine_morphism_relative_spec S).2.choose_spec.choose
+            (PurityNormalBundle.over s))
 
 /-- The affine-chart inclusion in the actual Rees zero fibre.
 Source: extended-Rees gluing, sk-thm-dnc

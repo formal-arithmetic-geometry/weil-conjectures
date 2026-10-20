@@ -57,18 +57,42 @@
     "document": "literature/stacks-project/morphisms.tex",
     "place": "Tag 01SA (lemma-affine-equivalence-algebras), applied to the degree-zero augmentation of Divisors Tag 0630 (definition-conormal-sheaf)"
    }
+  },
+  {
+   "text": "On an affine U, the relative-gluing chart and the inverse image of U have the same open image and hence a canonical isomorphism. Apply the proved rees_associatedGraded_chart ring isomorphism. Its degree-zero representative formula fixes the structural ring map. Contravariance of Spec and the relative-gluing toBase equation give the required equality over U. No regularity, properness, or nonemptiness is used.",
+   "uses": [
+    "lem-pur-rees-associated-graded-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630 and 0632"
+   }
+  },
+  {
+   "text": "Apply reesConeComparison_exists, the proved normalized extended-Rees/relative-Spec comparison. Its normalization predicate contains projection compatibility as its first conjunct and zero-section compatibility as its second conjunct. Retain those two conjuncts and discard only the stronger degree-one formula. This proves purityNormalCone_comparison with exactly its original hypotheses.",
+   "uses": [
+    "lem-pur-rees-cone-normalized-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630, 0632 and 0636"
+   }
   }
  ],
  "proof_deps": [
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-sbc-ideal-sheaf-powers",
   "lem-pur-conormal-graded-algebra",
-  "lem-weil-pbc-affine-morphism-relative-spec"
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-pur-rees-associated-graded-chart",
+  "lem-pur-rees-cone-normalized-existence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tags 0630, 0631, 0633, 0636, with relative spectrum and its functoriality from Constructions 01LW/01LX and Morphisms 01SA; the augmentation identity is written explicitly."
+  "place": "Tags 0630, 0631, 0633, 0636, with relative spectrum and its functoriality from Constructions 01LW/01LX and Morphisms 01SA; the augmentation identity is written explicitly. H3 additionally identifies the actual extended-Rees presentation using the existing ring-chart theorem and the stronger normalized comparison."
  },
  "mathlib_searches": [
   {
@@ -164,19 +188,19 @@
   "note": "Existing-declaration delivery. Node unchanged apart from lean (existing: true): Sheaf.Paper.PurityNormalBundle.normalCone/projection/zeroSection. Checked each clause: only [IsClosedImmersion i] on Scheme.{u}; cone = relative Spec (antiEquivalence = affine_morphism_relative_spec choose, recorded for lem-weil-pbc-affine-morphism-relative-spec) of ConormalGradedAlgebra.presentation (recorded for lem-pur-conormal-graded-algebra, tied to i via pieces i^*(I^n), pushforwardPiece, product, affine chart gr_J R); projection = structure map; zeroSection = fully faithful preimage of the degree-0 augmentation, direction verified. Not hollow; universe u preserved; edge cases I=0, I=O_X/empty Z, nonregular dual numbers, infinitely generated I covered. The extended-Rees i.ker.normalCone (def-pur-normal-bundle) is a different presentation with the stated purityNormalCone_comparison; recording the literal relative-Spec cone here is correct. Docstrings have Stacks 0630/0636/01LX and a blueprint tag. Report has Worker report and Second reading by NV. nt_compile.py --json on PurityNormalBundle.lean: rc=0, no errors or warnings. check_existing resolves all names; the statement includes the body := (over i).obj.left, which only gives an informational note."
  },
  "lean": {
-  "module": "Sheaf.Paper.PurityNormalBundle",
-  "declaration": "AlgebraicGeometry.PurityNormalBundle.normalCone",
+  "module": "Sheaf.Paper.PurityNormalCone",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.purityNormalCone_comparison",
   "declarations": [
-   "AlgebraicGeometry.PurityNormalBundle.normalCone",
-   "AlgebraicGeometry.PurityNormalBundle.projection",
-   "AlgebraicGeometry.PurityNormalBundle.zeroSection"
+   "AlgebraicGeometry.Scheme.Hom.purityNormalCone_affineChart",
+   "AlgebraicGeometry.Scheme.Hom.purityNormalCone_comparison"
   ],
-  "statement": "def normalCone : Scheme.{u} := (over i).obj.left",
+  "statement": "theorem purityNormalCone_comparison {Z X : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] :\n    ∃ e : i.ker.normalCone ≅ PurityNormalBundle.normalCone i,\n      e.hom ≫ PurityNormalBundle.projection i = purityNormalProjection i ∧\n        i.normalConeZeroSection ≫ e.hom = PurityNormalBundle.zeroSection i",
   "branch": "newtargets-dag",
   "by": "NV",
   "date": "2026-10-17",
   "existing": true,
-  "note": "Existing exact project construction: `normalCone` is the relative spectrum over Z of the conormal graded algebra for an arbitrary closed immersion; `projection` and `zeroSection` are the associated structure morphism and degree-zero augmentation section. The declarations are in the module recorded for the already landed purity normal-bundle construction."
+  "note": "The unchanged relative-spectrum construction is publicly reexported. The two additional proved interfaces identify the actual extended-Rees cone with it, preserving both projection and augmentation. Projection foundations are supplied by def-pur-normal-bundle through PurityNormalProjection, so the normalized comparison has no dependency cycle.",
+  "file": "lean/Sheaf/Paper/PurityNormalCone.lean"
  },
  "lean_audit": {
   "master": {
@@ -191,19 +215,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
-  "result": "pass",
-  "landing": "20261019T112507-L-3947029",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.PurityNormalBundle.regular_spec",
-   "AlgebraicGeometry.PurityNormalBundle.vectorBundle_zeroSection",
-   "AlgebraicGeometry.PurityNormalBundle.zeroSection_spec"
-  ],
-  "sorry_after": []
+  "reviewer": "C-6a1fe",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261020T230748-L-610064",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules + importers FiniteSmoothCanonicalInterfaces, PurityDncComparisons compiled against the published build AND a sandbox built from live VectorBundleZeroSection/PurityVectorBundleZeroSection/PurityNormalBundle sources; moved decls diffed verbatim vs live PurityNormalCone; #print axioms on the 4 proved theorems"
  }
 }

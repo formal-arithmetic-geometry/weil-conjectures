@@ -5,7 +5,7 @@ Authors: SHEAF group K3
 -/
 module
 
-public import Sheaf.Paper.PurityNormalCone
+public import Sheaf.Paper.PurityNormalBundle
 import Sheaf.AlgebraicGeometry.ConormalGradedAlgebraHomExt
 
 /-! # Morphism uniqueness for relative conormal spectra

@@ -101,6 +101,15 @@
     "document": "literature/stacks-project/constructions.tex",
     "place": "Tag 01M2 (definition-vector-bundle), augmentation to degree zero; divisors.tex Tag 0637 (equation-normal-cone-in-normal-bundle)"
    }
+  },
+  {
+   "text": "For the actual extended-Rees cone, use the existing normalConeToQuotientSpec map. Its composite with the quotient-scheme structure map is the cone-to-X map, and the latter quotient map has kernel I. Thus I is contained in the kernel of cone-to-X. Define its canonical lift through the closed immersion. If g retracts i, compose lift_fac with g and use i followed by g equals the identity to recover normalConeProj. This factorization is independent of the comparison with the relative-Spec normal cone.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 062Z, 0630; existing WeilConjectures.AlgebraicGeometry.NormalBundle quotient-spectrum factorization"
+   }
   }
  ],
  "proof_deps": [
@@ -119,7 +128,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tags 0630/0631/0632/0633/0636/0637 and Lemma 063M, reduced explicitly to Algebra Lemma 00LN and the existing coherent free-stalk criterion. Lean proof by P2 uses the closed-section and commutative-ring-sheaf stalk criteria directly; affine conormal representatives use Morphisms Tags 01R2/01R3."
+  "place": "Tags 0630/0631/0632/0633/0636/0637 and Lemma 063M, reduced explicitly to Algebra Lemma 00LN and the existing coherent free-stalk criterion. Lean proof by P2 uses the closed-section and commutative-ring-sheaf stalk criteria directly; affine conormal representatives use Morphisms Tags 01R2/01R3. H3 proves the Rees projection factorization from the existing quotient-spectrum map; the regular-immersion construction remains unchanged and publicly imported."
  },
  "mathlib_searches": [
   {
@@ -257,31 +266,29 @@
   "note": "Wrote review.md. Checked immutable sources, all statement dependencies, canonical constructions, hypotheses, conclusions, edge cases, universes, report sections, and verbatim signatures. All five modules passed per-file scompile.py checks without diagnostics. No repairs required; branch unchanged."
  },
  "lean": {
-  "module": "Sheaf.Paper.PurityNormalCone",
+  "module": "Sheaf.Paper.PurityNormalProjection",
   "declaration": "AlgebraicGeometry.Scheme.Hom.purityNormalProjection",
   "declarations": [
    "AlgebraicGeometry.Scheme.Hom.purityNormalCone_kernel",
    "AlgebraicGeometry.Scheme.Hom.purityNormalProjection",
-   "AlgebraicGeometry.Scheme.Hom.purityNormalProjection_eq",
-   "AlgebraicGeometry.Scheme.Hom.purityNormalCone_affineChart",
-   "AlgebraicGeometry.Scheme.Hom.purityNormalCone_comparison"
+   "AlgebraicGeometry.Scheme.Hom.purityNormalProjection_eq"
   ],
-  "file": "lean/Sheaf/Paper/PurityNormalCone.lean",
+  "file": "lean/Sheaf/Paper/PurityNormalProjection.lean",
   "statement": "def purityNormalProjection {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : i.ker.normalCone ⟶ Z",
   "branch": "newtargets-dag",
   "by": "Q31",
   "date": "2026-10-16",
   "existing": false,
-  "note": "§1(B): retain and import the recorded PurityNormalBundle relative-spectrum cone, conormal algebra and regular vector bundle. The missing interface is its identification with the published extended-Rees quotient used in DNC geometry. This module supplies that comparison, preserving projection and augmentation, and the unique closed-immersion factorization of the Rees projection. No second conormal or vector-bundle definition is introduced."
+  "note": "Projection foundations are separated from the comparison to avoid an import cycle. PurityNormalProjection publicly imports the unchanged PurityNormalBundle construction realizing Steps 1-6. All original declaration signatures and the projection definition are preserved; PurityNormalCone publicly reexports them."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
-  "result": "pass",
-  "landing": "20261019T112507-L-3947029",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-6a1fe",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261020T230748-L-610064",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules + importers FiniteSmoothCanonicalInterfaces, PurityDncComparisons compiled against the published build AND a sandbox built from live VectorBundleZeroSection/PurityVectorBundleZeroSection/PurityNormalBundle sources; moved decls diffed verbatim vs live PurityNormalCone; #print axioms on the 4 proved theorems"
  }
 }

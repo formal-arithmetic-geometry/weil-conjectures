@@ -6,17 +6,11 @@ Authors: SHEAF group Q31
 module
 
 public import Sheaf.Paper.PurityNormalBundle
+public import Sheaf.Paper.PurityNormalProjection
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.RingTheory.AssociatedGradedRing
-import Sheaf.AlgebraicGeometry.ConormalGradedAlgebra
-import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks
-import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore
-import Sheaf.AlgebraicGeometry.RegularImmersionPureCodimension
-import Sheaf.Paper.PurityVectorBundleZeroSection
-import WeilConjectures.RingTheory.RegularSequenceConormal
-import Sheaf.RingTheory.RegularSequenceGradedPolynomial
-import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
-import WeilConjectures.AlgebraicGeometry.AffineConormalSections
+import Sheaf.RingTheory.ReesAssociatedGradedChart
+import Sheaf.AlgebraicGeometry.ReesConeNormalizedExistence
 
 /-! # The actual normal cone and its regular-immersion bundle description
 
@@ -38,35 +32,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 open AlgebraicGeometry.Scheme.AffineZariskiSite
 namespace AlgebraicGeometry.Scheme.Hom
 
-/-- The actual cone-to-X map factors through the closed immersion.
-Source: Stacks Tags 062Z and 0630 (blueprint: def-pur-normal-bundle).
-Proof: on Spec R its ring map kills J, because degree zero in gr_J R is R/J.
-The affine restrictions cover X, so the kernel inclusion glues. -/
-theorem purityNormalCone_kernel {Z X : Scheme.{u}} (i : Z ⟶ X) :
-    i.ker ≤ (relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase.ker := by
-  sorry
-
-/-- The projection of the actual normal cone to Z, using the unique closed-immersion
-factorization; its source is the extended-Rees quotient by t.
-Source: Stacks Tag 0630 (blueprint: def-pur-normal-bundle). -/
-noncomputable def purityNormalProjection {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] : i.ker.normalCone ⟶ Z :=
-  IsClosedImmersion.lift i
-    (relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase
-    (purityNormalCone_kernel i)
-
-/-- For a section, the canonical factorization to Z is precisely the published
-normal-cone projection formed using its retraction. Thus the normal object in the
-DNC statement uses this same associated-graded cone over Z.
-Source: blueprint normal bundle and sk-lem-geometry (1)
-(blueprint: def-pur-normal-bundle).
-Proof: the normal-cone map to X factors through i. Compose this factorization
-with g, and use i followed by g equals the identity. This gives the displayed
-identity with the published toBase followed by g definition. -/
-theorem purityNormalProjection_eq {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] (g : X ⟶ Z) (hs : i ≫ g = 𝟙 Z) :
-    purityNormalProjection i = normalConeProj g i := by
-  sorry
+-- Presentation interfaces for (blueprint: pur9-def-normal-cone).
 
 /-- Affine-chart characterization of the cone as the relative spectrum of the
 actual associated-graded algebra, with its structural ring map fixed.
@@ -85,7 +51,44 @@ theorem purityNormalCone_affineChart {Z X : Scheme.{u}} (i : Z ⟶ X)
           (Ideal.associatedGradedRingHom (i.ker.ideal U))) =
         ((relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase ∣_ U.1) ≫
           U.2.isoSpec.hom := by
-  sorry
+  let H := i.ker.coequifibered_toNormalConePresheaf
+  let d := relativeGluingData H
+  let W : X.AffineZariskiSite := ⟨U.1, U.2⟩
+  have hr : Set.range ((d.toBase ⁻¹ᵁ U.1).ι) =
+      Set.range (colimit.ι d.functor W) := by
+    rw [Scheme.Opens.range_ι, ← Scheme.Hom.coe_opensRange]
+    exact congrArg (fun V : d.glued.Opens ↦ (V : Set d.glued))
+      (by simpa using d.toBase_preimage_eq_opensRange_ι W)
+  let e := IsOpenImmersion.isoOfRangeEq (d.toBase ⁻¹ᵁ U.1).ι
+    (colimit.ι d.functor W) hr
+  obtain ⟨r, hr⟩ := Ideal.rees_associatedGraded_chart (i.ker.ideal U)
+  let q : CommRingCat.of (Ideal.associatedGraded (i.ker.ideal U)) ≅
+      i.ker.normalConePresheaf.obj (op W) :=
+    r.toCommRingCatIso
+  refine ⟨e ≪≫ Scheme.Spec.mapIso q.op, ?_⟩
+  have hc : CommRingCat.ofHom (Ideal.associatedGradedRingHom (i.ker.ideal U)) ≫ q.hom =
+      (i.ker.toReesPresheaf ≫ Scheme.toQuotientPresheaf
+        i.ker.tIdeal i.ker.map_tIdeal).app (op W) := by
+    ext a
+    change r (Ideal.associatedGradedRingHom (i.ker.ideal U) a) = _
+    obtain ⟨ha, hh⟩ := hr 0 ⟨a, by simp⟩
+    change r (Ideal.associatedGradedRingHom (i.ker.ideal U) a) = _ at hh
+    rw [hh]
+    apply congrArg (Ideal.Quotient.mk _)
+    apply Subtype.ext
+    simp only [Nat.cast_zero, neg_zero, LaurentPolynomial.T_zero, mul_one]
+    rfl
+  apply (cancel_mono (U.2.isoSpec.inv ≫ U.1.ι)).1
+  change (e.hom ≫ Spec.map q.hom ≫
+      Spec.map (CommRingCat.ofHom (Ideal.associatedGradedRingHom (i.ker.ideal U)))) ≫
+        (U.2.isoSpec.inv ≫ U.1.ι) = _
+  rw [Category.assoc e.hom, ← Spec.map_comp, hc]
+  have hd : Spec.map ((i.ker.toReesPresheaf ≫ Scheme.toQuotientPresheaf
+      i.ker.tIdeal i.ker.map_tIdeal).app (op W)) ≫ U.2.isoSpec.inv ≫ U.1.ι =
+      colimit.ι d.functor W ≫ d.toBase := (d.ι_toBase W).symm
+  simp only [Category.assoc, hd, Iso.hom_inv_id_assoc]
+  rw [← Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac]
+  exact (morphismRestrict_ι d.toBase U.1).symm
 
 /-- The actual extended-Rees zero fibre is the recorded relative-spectrum normal cone,
 with the same projection and degree-zero augmentation. In particular its regular
@@ -108,6 +111,8 @@ theorem purityNormalCone_comparison {Z X : Scheme.{u}} (i : Z ⟶ X)
     ∃ e : i.ker.normalCone ≅ PurityNormalBundle.normalCone i,
       e.hom ≫ PurityNormalBundle.projection i = purityNormalProjection i ∧
         i.normalConeZeroSection ≫ e.hom = PurityNormalBundle.zeroSection i := by
-  sorry
+  obtain ⟨e, he⟩ :=
+    AlgebraicGeometry.Etale.FiniteSmoothPurity.reesConeComparison_exists i
+  exact ⟨e, he.1, he.2.1⟩
 
 end AlgebraicGeometry.Scheme.Hom

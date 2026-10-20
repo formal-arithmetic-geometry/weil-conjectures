@@ -52,8 +52,11 @@ private theorem affineReesAlgebraIso_class {V S : Scheme.{u}} (s : S ⟶ V)
   refine ⟨hb', ha, ?_⟩
   change (Ideal.rees_associatedGraded_chart (s.ker.siteIdeal U)).choose
     (((ConormalGradedAlgebra.presentation s).affineChart ⟨U.1, U.2⟩).choose.hom _) = _
-  rw [he]
-  exact hclass
+  exact (congrArg
+    (Ideal.rees_associatedGraded_chart (s.ker.siteIdeal U)).choose he).trans hclass
+
+-- The representative lemma is the API; do not unfold the chosen chart isomorphism.
+attribute [irreducible] affineReesAlgebraIso
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem homogeneousClass_restrict {V S : Scheme.{u}} (s : S ⟶ V)
@@ -92,10 +95,11 @@ private theorem affineReesAlgebraIso_naturality {V S : Scheme.{u}} (s : S ⟶ V)
   apply RingHom.ext
   intro x
   obtain ⟨e, he⟩ := (ConormalGradedAlgebra.presentation s).affineChart ⟨W.1, W.2⟩
-  have hx : ∃ y, x = e.inv y := ⟨e.hom x, by simp⟩
+  have hx : ∃ y, x = e.inv y :=
+    ⟨e.hom x, by simp only [Iso.hom_inv_id_apply]⟩
   obtain ⟨x, rfl⟩ := hx
   induction x using DirectSum.induction_on with
-  | zero => simp
+  | zero => simp only [map_zero]
   | add x y ihx ihy => simp only [map_add, ihx, ihy]
   | of n a =>
     induction a using Submodule.Quotient.induction_on with
@@ -119,7 +123,7 @@ private theorem affineReesAlgebraIso_naturality {V S : Scheme.{u}} (s : S ⟶ V)
             (ConormalGradedAlgebra.presentation s).inclusion n W.1 b := by
         apply (ConcreteCategory.bijective_of_isIso e.hom).1
         obtain ⟨hb', he'⟩ := he n b
-        simp [he', hb]
+        simp only [Iso.inv_hom_id_apply, he', hb]
       change (affineReesAlgebraIso s U).hom
         ((ConormalGradedAlgebra.presentation s).algebra.right.obj.map
           (homOfLE (s.preimage_mono
@@ -278,6 +282,9 @@ private theorem reesSheafIso_hom_app {V S : Scheme.{u}} (s : S ⟶ V)
   exact NatTrans.congr_app
     (Functor.IsCoverDense.sheafHom_restrict_eq
       (G := ambientBasis s) (K := Opens.grothendieckTopology S) _) (Opposite.op U)
+
+-- Keep the cover-dense gluing construction behind its chart equation.
+attribute [irreducible] reesSheafIso
 
 private theorem reesSheafIso_structure {V S : Scheme.{u}} (s : S ⟶ V)
     [IsClosedImmersion s] :

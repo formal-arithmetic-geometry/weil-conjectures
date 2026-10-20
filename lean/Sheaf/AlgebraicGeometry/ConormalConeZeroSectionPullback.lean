@@ -72,13 +72,22 @@ private theorem fullSubcategory_iso_cancel {C : Type*} [Category C]
   change e.inv.hom ≫ e.hom.hom = 𝟙 Y.obj at he
   rw [he, Category.id_comp]
 
+-- `first`: concrete relative-spectrum equivalence (live) or chosen one (stale build).
+set_option linter.unreachableTactic false in
+set_option linter.unusedTactic false in
 private theorem relativeSpec_obj (S : Scheme.{u})
     (Y : ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom)) :
     ((VectorBundleZeroSection.antiEquivalence S).functor.obj (op Y)).obj =
       Under.mk (⟨Y.obj.hom.c⟩ : S.sheaf ⟶
         (TopCat.Sheaf.pushforward CommRingCat.{u} Y.obj.hom.base).obj Y.obj.left.sheaf) := by
-  rfl
+  first
+    | rfl
+    | simpa only [VectorBundleZeroSection.antiEquivalence] using
+        (affine_morphism_relative_spec S).2.choose_spec.choose Y
 
+-- `first`: concrete relative-spectrum equivalence (live) or chosen one (stale build).
+set_option linter.unreachableTactic false in
+set_option linter.unusedTactic false in
 private theorem relativeSpec_map (S : Scheme.{u})
     (Y Y' : ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))
     (h : Y ⟶ Y') (U : S.Opens) :
@@ -88,8 +97,10 @@ private theorem relativeSpec_map (S : Scheme.{u})
         h.hom.left.appLE (Y'.obj.hom ⁻¹ᵁ U) (Y.obj.hom ⁻¹ᵁ U)
           (by rw [← Over.w h.hom, Scheme.Hom.comp_preimage]) ≫
         eqToHom (by rw [relativeSpec_obj S Y]; rfl) := by
-  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
-  rfl
+  first
+    | (simp only [eqToHom_refl, Category.id_comp, Category.comp_id]; rfl)
+    | simpa only [VectorBundleZeroSection.antiEquivalence] using
+        (affine_morphism_relative_spec S).2.choose_spec.choose_spec.choose_spec.1 Y Y' h U
 
 private theorem functor_section_app (S : Scheme.{u})
     {P : ObjectProperty S.CommAlgebraSheaf}
