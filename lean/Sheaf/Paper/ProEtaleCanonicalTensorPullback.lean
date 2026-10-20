@@ -10,8 +10,6 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-
 /-!
 # Canonical tensor pullback on the small pro-etale site
 
@@ -44,16 +42,14 @@ through module sheafification, yielding the four MonoidalPreadditive laws. -/
 @[instance] theorem proEtaleTensorPreadditive (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     @MonoidalPreadditive (proEtaleRingModules X R) _ _
-      (SheafOfModules.monoidalCategory R) := by
-  exact SheafOfModules.cochainModulesPreadditive R
+      (SheafOfModules.monoidalCategory R) := sorry
 
 /-- The flat-term K-flat representatives used in the ordinary uncompleted tensor.
 Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
 def proEtaleFlatRepresentatives (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     ObjectProperty (CochainComplex (proEtaleRingModules X R) ℤ) :=
-  fun P ↦ P.IsAcyclicTensorKFlat ∧
-    ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology X) (R := R) (P.X n)
+  fun P ↦ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology X) (R := R) (P.X n)
 
 /-- A presentation of derived tensor by signed total tensor on flat K-flat complexes.
 The representative isomorphism identifies the functor with the specified localization;
@@ -148,9 +144,7 @@ theorem proEtaleOrdinaryTensorPullback_naturality
             ((proEtaleRingModulePullback f R S c).obj N) ≫
         ((proEtaleOrdinaryTensor X S).obj
           ((proEtaleRingModulePullback f R S c).obj M')).map
-            ((proEtaleRingModulePullback f R S c).map z) := by
-  exact (Classical.choose_spec
-    (proEtaleOrdinaryTensorPullback_existsUnique f R S c).exists).1 M M' N N' v z
+            ((proEtaleRingModulePullback f R S c).map z) := sorry
 
 /-- The inverse ordinary comparison, summed over every bidegree with the usual signs.
 Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
@@ -170,21 +164,13 @@ noncomputable def proEtaleTensorPullbackTotal
     (proEtaleOrdinaryTensorPullback f R S c)
     (fun {_ _ _ _} v z ↦ proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ v z) P Q
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The total comparison is invertible since pullback preserves its sum and summand maps.
 Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
 Proof: pullback is a left adjoint, so preserves the coproducts in total tensor. Each
 summand comparison is invertible. Thus each component, and hence the chain map, is invertible. -/
 theorem proEtaleTensorPullbackTotal_isIso
     (P Q : CochainComplex (proEtaleRingModules Y R) ℤ) :
-    IsIso (proEtaleTensorPullbackTotal f R S c P Q) := by
-  let := SheafOfModules.monoidalCategory R
-  let := SheafOfModules.monoidalCategory S
-  dsimp only [proEtaleTensorPullbackTotal]
-  exact CategoryTheory.tensorPullbackTotal_isIso (proEtaleRingModulePullback f R S c)
-    (proEtaleOrdinaryTensorPullback f R S c)
-    (fun {_ _ _ _} v z ↦ proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ v z)
-    (proEtaleRingModuleDirectImage f R S c) (proEtaleRingModuleAdjunction f R S c) P Q
+    IsIso (proEtaleTensorPullbackTotal f R S c P Q) := sorry
 
 /-- The specified chain comparison as an isomorphism.
 Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/

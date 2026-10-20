@@ -12,12 +12,32 @@ public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
-import all Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-import Sheaf.Paper.CompletedConstantAlgebraFlatQuotients
-import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
-import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Sheaf.CategoryTheory.DiagramSiteRealization
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Mathlib.CategoryTheory.Sites.Limits
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.Paper.ProEtaleCanonicalTensorPullback
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.PerfectProjectionFormula
+import Sheaf.Paper.FiniteLevelRectangle
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import all Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.CategoryTheory.FlatRingedDiagramRestriction
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.FourArrows
+import Sheaf.Paper.FourCorners
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! # Strict tower exchange and the canonical mate
 
@@ -42,7 +62,7 @@ comparisons retain their normalization on ordinary modules and K-injectives.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency.types false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -51,6 +71,92 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+
+private theorem exchangeAdjunctCompComparison {C D E : Type*}
+    [Category C] [Category D] [Category E]
+    {Lg : C ⥤ D} {Rg : D ⥤ C} {Lf : D ⥤ E} {Rf : E ⥤ D}
+    {L : C ⥤ E} {R : E ⥤ C}
+    (adjg : Lg ⊣ Rg) (adjf : Lf ⊣ Rf) (adj : L ⊣ R)
+    (e : Rf ⋙ Rg ≅ R) {A : C} {B : D} {T : E}
+    (h : A ⟶ Rg.obj B) (k : B ⟶ Rf.obj T) :
+    (adj.homEquiv A T).symm (h ≫ Rg.map k ≫ e.hom.app T) =
+      ((conjugateEquiv (adjg.comp adjf) adj).symm e.hom).app A ≫
+        Lf.map ((adjg.homEquiv A B).symm h) ≫ (adjf.homEquiv B T).symm k := by
+  apply (adj.homEquiv A T).injective
+  rw [Equiv.apply_symm_apply, adj.homEquiv_naturality_right]
+  change _ = (adj.unit.app A ≫ R.map _) ≫ R.map _
+  rw [← unit_conjugateEquiv_symm (adjg.comp adjf) adj e.hom A,
+    Category.assoc, ← e.hom.naturality]
+  conv_rhs => rw [← Category.assoc]
+  change _ = ((adjg.comp adjf).homEquiv A T)
+    (Lf.map ((adjg.homEquiv A B).symm h) ≫ (adjf.homEquiv B T).symm k) ≫ _
+  rw [Adjunction.comp_homEquiv]
+  change _ = (adjg.homEquiv _ _) ((adjf.homEquiv _ _) _) ≫ _
+  rw [adjf.homEquiv_naturality_left, Equiv.apply_symm_apply,
+    adjg.homEquiv_naturality_right, Equiv.apply_symm_apply]
+  simp only [Category.assoc]
+
+private theorem exchangeConstantComparisonComp {X Y Z : Scheme.{t}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (A : CommRingCat.{t + 1}) :
+    (proEtaleConstantComparison (f ≫ g)).app A =
+      (proEtaleRingInverseImageComp f g).hom.app
+        ((constantSheaf (ProEt.topology Z) CommRingCat.{t + 1}).obj A) ≫
+          (proEtaleSheafInverseImage f CommRingCat.{t + 1}).map
+            ((proEtaleConstantComparison g).app A) ≫
+          (proEtaleConstantComparison f).app A := by
+  let e := Functor.sheafPushforwardContinuousComp'
+    (eFG := (MorphismProperty.Over.pullbackComp
+      (P := @WeaklyEtale) (Q := ⊤) f g).symm) CommRingCat.{t + 1}
+        (ProEt.topology Z) (ProEt.topology Y) (ProEt.topology X)
+  have hρ : proEtaleConstantDirectImageMap (f ≫ g) CommRingCat.{t + 1} A =
+      proEtaleConstantDirectImageMap g CommRingCat.{t + 1} A ≫
+        (proEtaleSheafDirectImage g CommRingCat.{t + 1}).map
+          (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} A) ≫
+            e.hom.app ((constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).obj A) := by
+    apply ((sheafificationAdjunction (ProEt.topology Z) CommRingCat.{t + 1}).homEquiv
+      ((Functor.const Z.ProEtᵒᵖ).obj A) _).injective
+    rw [proEtaleConstantDirectImageMap, Equiv.apply_symm_apply,
+      Adjunction.homEquiv_naturality_right]
+    rw [proEtaleConstantDirectImageMap, Equiv.apply_symm_apply]
+    apply NatTrans.ext
+    funext U
+    have hf := Equiv.apply_symm_apply
+      ((sheafificationAdjunction (ProEt.topology Y) CommRingCat.{t + 1}).homEquiv
+        ((Functor.const Y.ProEtᵒᵖ).obj A)
+          ((proEtaleSheafDirectImage f CommRingCat.{t + 1}).obj
+            ((constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).obj A)))
+      (Functor.whiskerLeft (proEtaleBaseChange f).op
+        (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)))
+    have hfU := congrArg (fun t ↦ t.app ((proEtaleBaseChange g).op.obj U)) hf
+    change (toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app
+        ((proEtaleBaseChange g).op.obj U) ≫
+      (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} A).hom.app
+        ((proEtaleBaseChange g).op.obj U) =
+          (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).app
+            ((proEtaleBaseChange f).op.obj ((proEtaleBaseChange g).op.obj U)) at hfU
+    change (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).app
+        ((proEtaleBaseChange (f ≫ g)).op.obj U) =
+      ((toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app
+          ((proEtaleBaseChange g).op.obj U) ≫
+        (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} A).hom.app
+          ((proEtaleBaseChange g).op.obj U)) ≫
+            ((constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).obj A).obj.map
+              ((MorphismProperty.Over.pullbackComp
+                (P := @WeaklyEtale) (Q := ⊤) f g).hom.app U.unop).op
+    rw [hfU]
+    have h := (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).naturality
+      ((MorphismProperty.Over.pullbackComp
+        (P := @WeaklyEtale) (Q := ⊤) f g).hom.app U.unop).op
+    change 𝟙 A ≫ _ = _ at h
+    rw [Category.id_comp] at h
+    exact h
+  change ((proEtaleSheafAdjunction (f ≫ g) CommRingCat.{t + 1}).homEquiv _ _).symm _ = _
+  rw [hρ]
+  exact exchangeAdjunctCompComparison (proEtaleSheafAdjunction g CommRingCat.{t + 1})
+    (proEtaleSheafAdjunction f CommRingCat.{t + 1})
+    (proEtaleSheafAdjunction (f ≫ g) CommRingCat.{t + 1}) e
+    (proEtaleConstantDirectImageMap g CommRingCat.{t + 1} A)
+    (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} A)
 
 /-- Constant coefficient identifications agree around the chosen scheme square.
 Source: strict normalization, proof steps 5--6; Stacks 07A7
@@ -71,7 +177,7 @@ theorem exchangeConstant_coherent (sq : ChosenCartesianSquare g' f' f g) :
         (exchangeConstantIso k A) (exchangeConstantIso h A) =
       exchangeConstantIso (h ≫ k) A := by
     apply Iso.ext
-    exact (proEtaleConstantComparison_comp h k (CommRingCat.of A)).symm
+    exact (exchangeConstantComparisonComp h k (CommRingCat.of A)).symm
   have hw : HEq (exchangeConstantIso (g' ≫ f) A) (exchangeConstantIso (f' ≫ g) A) :=
     congr_arg_heq (fun u ↦ exchangeConstantIso u A) sq.w
   exact (heq_of_eq (hc g' f)).trans (hw.trans (heq_of_eq (hc f' g).symm))
@@ -147,47 +253,6 @@ abbrev exchangeTowerModuleRes (T : Scheme.{t}) :
     exchangeTowers T (d.completedRing T) ⥤ exchangeTowers T (exchangeConstantRing T A) :=
   (Functor.whiskeringRight _ _ _).obj (proEtaleRingRestrictScalars (exchangeScalar d T))
 
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem termwiseRightAdjoint_kinjective
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    {E : C ⥤ D} {F : D ⥤ C} [E.Additive] [F.Additive]
-    [PreservesFiniteLimits E] [PreservesFiniteColimits E] (adj : E ⊣ F) :
-    ((Functor.whiskeringRight ℕᵒᵖ D C).obj F).PreservesKInjectiveComplexes := by
-  have : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj E) :=
-    ⟨fun J _ _ ↦ whiskeringRight_preservesLimitsOfShape (C := ℕᵒᵖ) (J := J) E⟩
-  have : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj E) :=
-    ⟨fun J _ _ ↦ whiskeringRight_preservesColimitsOfShape (C := ℕᵒᵖ) (J := J) E⟩
-  exact (adj.whiskerRight ℕᵒᵖ).preservesKInjectiveComplexes
-
-set_option linter.style.haveILetI false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem exchangeTowerModuleRes_kinjective (T : Scheme.{t}) :
-    (exchangeTowerModuleRes d T).PreservesKInjectiveComplexes := by
-  letI : IsNoetherianRing A := d.noetherian
-  let c := exchangeScalar d T
-  have hc : ∀ n : ℕ, c ≫ (pbcCompletedComparison T d).inv ≫
-      limit.π (adicLisseRingSystem T d.ideal) (op n) =
-      (constantSheaf (ProEt.topology T) CommRingCat.{t + 1}).map
-        (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) := by
-    intro n
-    dsimp only [c, exchangeScalar]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc]
-    exact (adicDatumScalar_exists T
-      { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum,
-        quotientFinite := d.quotientFinite }).exists.choose_spec n
-  have he := (completed_constant_algebra_flat_quotients T d.ideal _
-    (pbcCompletedComparison T d) c hc).2.1
-  have : PreservesFiniteLimits (completedAdicChange T c) := he.1
-  have : PreservesFiniteColimits (completedAdicChange T c) := he.2
-  obtain ⟨_, _, h⟩ :=
-    SheafOfModules.sheafRingCoefficientOrdinaryAdjunction.{t + 1, t + 1, t} c
-  let adj : completedAdicChange T c ⊣ proEtaleRingRestrictScalars c :=
-    (h (completedAdicChange T c)
-      (completedAdicChangeData T c).choose_spec.choose
-      (completedAdicChangeData T c).choose_spec.choose_spec.choose).choose
-  exact termwiseRightAdjoint_kinjective
-    (E := completedAdicChange T c) (F := proEtaleRingRestrictScalars c) adj
-
 set_option backward.isDefEq.respectTransparency false in
 /-- Exactness of restriction on strict diagrams, with all transition maps retained.
 Source: strict normalization, proof step 5; Stacks 03D3
@@ -250,22 +315,6 @@ abbrev exchangeConstantPush {U V : Scheme.{t}} (f : U ⟶ V) :=
   exchangeTowerPush f (exchangeConstantRing V A) (exchangeConstantRing U A)
     (exchangeConstantIso f A)
 
-/-- Lift an ordinary coefficient square to strict diagrams. The functor types in this
-wrapper fix the parenthesization before inserting the coefficient sheaves; this keeps
-kernel checking from expanding their presentations.
-Source: Stacks 07A7, termwise diagram adjunctions
-(blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization). -/
-def exchangeWhiskerSquareIso {C D E F : Type (t + 2)}
-    [Category.{t + 1} C] [Category.{t + 1} D]
-    [Category.{t + 1} E] [Category.{t + 1} F]
-    {P : C ⥤ D} {Q : D ⥤ F} {R : C ⥤ E} {S : E ⥤ F}
-    (e : P ⋙ Q ≅ R ⋙ S) :
-    (Functor.whiskeringRight ℕᵒᵖ C D).obj P ⋙
-        (Functor.whiskeringRight ℕᵒᵖ D F).obj Q ≅
-      (Functor.whiskeringRight ℕᵒᵖ C E).obj R ⋙
-        (Functor.whiskeringRight ℕᵒᵖ E F).obj S :=
-  (Functor.whiskeringRight ℕᵒᵖ C F).mapIso e
-
 /-- The ordinary restriction/pullback comparison is the termwise normalized module mate.
 Source: strict normalization, proof step 5; Stacks 0D6D
 (blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization). -/
@@ -273,13 +322,7 @@ def exchangeModuleResPull {U V : Scheme.{t}} (f : U ⟶ V) :
     d.towerModulePull f ⋙ exchangeTowerModuleRes d U ≅
       exchangeTowerModuleRes d V ⋙ exchangeTowerModulePull f
         (exchangeConstantRing V A) (exchangeConstantRing U A) (exchangeConstantIso f A) :=
-  (exchangeWhiskerSquareIso
-    (P := proEtaleRingRestrictScalars (exchangeScalar d V))
-    (Q := proEtaleRingModulePullback f (exchangeConstantRing V A)
-      (exchangeConstantRing U A) (exchangeConstantIso f A))
-    (R := proEtaleRingModulePullback f (d.completedRing V) (d.completedRing U)
-      (d.integralRingIso f))
-    (S := proEtaleRingRestrictScalars (exchangeScalar d U))
+  ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso
     (@asIso _ _ _ _ (proEtaleRingRestrictionPullbackInv f
       (exchangeConstantRing V A) (d.completedRing V)
       (exchangeConstantRing U A) (d.completedRing U)
@@ -327,13 +370,7 @@ def exchangeModuleResPush {U V : Scheme.{t}} (f : U ⟶ V) :
     d.towerModulePush f ⋙ exchangeTowerModuleRes d V ≅
       exchangeTowerModuleRes d U ⋙ exchangeTowerModulePush f
         (exchangeConstantRing V A) (exchangeConstantRing U A) (exchangeConstantIso f A) :=
-  exchangeWhiskerSquareIso
-    (P := proEtaleRingModuleDirectImage f (d.completedRing V) (d.completedRing U)
-      (d.integralRingIso f))
-    (Q := proEtaleRingRestrictScalars (exchangeScalar d V))
-    (R := proEtaleRingRestrictScalars (exchangeScalar d U))
-    (S := proEtaleRingModuleDirectImage f (exchangeConstantRing V A)
-      (exchangeConstantRing U A) (exchangeConstantIso f A))
+  (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso
     (proEtaleRingRestrictionDirectImage f
       (exchangeConstantRing V A) (d.completedRing V)
       (exchangeConstantRing U A) (d.completedRing U)
@@ -362,108 +399,13 @@ def ExchangeResPushNormalized {U V : Scheme.{t}} (f : U ⟶ V)
         (exchangeConstantIso f A)
         (((exchangeTowerModuleRes d U).mapHomologicalComplex (.up ℤ)).obj C)
 
-set_option backward.isDefEq.respectTransparency.types false in
--- A normalized ordinary mate descends uniquely when the exact vertical functor
--- preserves K-injectives. Keeping this argument abstract avoids expanding coefficient models.
-private theorem exactDerivedMate_existsUnique
-    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
-    [HasDerivedCategory A] [HasDerivedCategory B]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    [Abelian.HasKInjectiveResolutions B] [Abelian.HasKInjectiveResolutions D]
-    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
-    {G : A ⥤ C} {H : B ⥤ D}
-    [L.Additive] [R.Additive] [L'.Additive] [R'.Additive] [G.Additive] [H.Additive]
-    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    [PreservesFiniteLimits L'] [PreservesFiniteColimits L']
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H) [H.PreservesKInjectiveComplexes]
-    (τ : R ⋙ G ≅ H ⋙ R')
-    (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = τ.hom) :
-    ∃! e : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
-        H.mapDerivedCategory ⋙ R'.rightDerivedFunctor,
-      ∀ K : CochainComplex B ℤ,
-    G.mapDerivedCategory.map (chainDerivedUnit R K) ≫
-      e.hom.app (DerivedCategory.Q.obj K) ≫
-      R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
-    G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
-      DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex τ (.up ℤ)).hom.app K) ≫
-      chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
-  let m := (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-    adj'.mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _
-      ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫
-        Functor.mapDerivedCategoryCompIso L H).hom)).natTrans
-  have hn (K : CochainComplex B ℤ) :
-    G.mapDerivedCategory.map (chainDerivedUnit R K) ≫
-      m.app (DerivedCategory.Q.obj K) ≫
-      R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
-    G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
-      DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex τ (.up ℤ)).hom.app K) ≫
-      chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
-    have h := derived_mate_factors adj adj' s K
-    rw [hs] at h
-    exact h
-  have hI (I : CochainComplex B ℤ) [I.IsKInjective] :
-      IsIso (m.app (DerivedCategory.Q.obj I)) := by
-    have : IsIso (chainDerivedUnit R I) := chainDerivedUnit_isIso R I
-    have : IsIso (chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj I)) :=
-      chainDerivedUnit_isIso R' _
-    have : IsIso (G.mapDerivedCategory.map (chainDerivedUnit R I) ≫
-        m.app (DerivedCategory.Q.obj I) ≫
-        R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I)) := by
-      rw [hn I]
-      infer_instance
-    have := IsIso.of_isIso_comp_left (G.mapDerivedCategory.map (chainDerivedUnit R I))
-      (m.app (DerivedCategory.Q.obj I) ≫
-        R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I))
-    exact IsIso.of_isIso_comp_right _
-      (R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I))
-  have (M : DerivedCategory B) : IsIso (m.app M) := by
-    obtain ⟨I, hInj, ⟨eI⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective M
-    have : I.IsKInjective := hInj
-    have : IsIso (m.app (DerivedCategory.Q.obj I)) := hI I
-    exact (NatTrans.isIso_app_iff_of_iso m eI).mpr inferInstance
-  have : IsIso m := NatIso.isIso_of_isIso_app m
-  refine ⟨asIso m, hn, ?_⟩
-  intro e he
-  apply Iso.ext
-  apply derived_comp_ext R G (H.mapDerivedCategory ⋙ R'.rightDerivedFunctor)
-  intro K
-  apply (cancel_mono (R'.rightDerivedFunctor.map
-    (H.mapDerivedCategoryFactors.hom.app K))).mp
-  simpa only [Category.assoc, asIso_hom] using (he K).trans (hn K).symm
-
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem exchangeModuleResPull_mate {U V : Scheme.{t}} (f : U ⟶ V) :
-    (mateEquiv (d.towerModuleAdjunction f)
-      (exchangeTowerModuleAdjunction f (exchangeConstantRing V A)
-        (exchangeConstantRing U A) (exchangeConstantIso f A))
-      (TwoSquare.mk _ _ _ _ (exchangeModuleResPull d f).inv)).natTrans =
-        (exchangeModuleResPush d f).hom := by
-  apply NatTrans.ext
-  funext M
-  apply NatTrans.ext
-  funext n
-  have h := restrictionPullback_mate f
-    (exchangeConstantRing V A) (d.completedRing V)
-    (exchangeConstantRing U A) (d.completedRing U)
-    (exchangeScalar d V) (exchangeScalar d U)
-    (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f)
-  exact congrArg (fun z ↦ z.app (M.obj n)) h
-
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction/direct-image comparison is uniquely determined by the universal units.
 Source: strict normalization, proof step 5; Stacks 0D6E and 099M
 (blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization).
 Proof: scalar extension from constant to completed coefficients is flat by
-constant-completion-equivalence. Exact scalar extension and its adjunction lift
-termwise to strict towers. Restriction, its right adjoint, preserves K-injectives.
-On one K-injective tower representative the ordinary comparison
+constant-completion-equivalence. This remains true on the diagram site, since
+its rings and tensor are fiberwise. Restriction, its right adjoint, preserves
+K-injectives. On one K-injective tower representative the ordinary comparison
 is identity on every section and transition, and both derived units are invertible.
 This defines the comparison uniquely there. K-injective resolutions and the
 universal property of the right-derived functor give its natural extension and
@@ -472,13 +414,7 @@ theorem exchangeResPush_existsUnique {U V : Scheme.{t}} (f : U ⟶ V) :
     ∃! e : d.towerPush f ⋙ exchangeTowerRes d V ≅
         exchangeTowerRes d U ⋙ exchangeConstantPush (A := A) f,
       ExchangeResPushNormalized d f e := by
-  have : (exchangeTowerModuleRes d U).PreservesKInjectiveComplexes :=
-    exchangeTowerModuleRes_kinjective d U
-  exact exactDerivedMate_existsUnique (d.towerModuleAdjunction f)
-    (exchangeTowerModuleAdjunction f (exchangeConstantRing V A)
-      (exchangeConstantRing U A) (exchangeConstantIso f A))
-    (exchangeModuleResPull d f).symm (exchangeModuleResPush d f)
-    (exchangeModuleResPull_mate d f)
+  sorry
 
 /-- The specified strict-tower direct-image comparison, with the unit normalization retained.
 Source: strict normalization, proof step 5; Stacks 0D6E

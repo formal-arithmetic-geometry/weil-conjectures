@@ -24,7 +24,6 @@ public import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.CompactSupportSiteComparisonOpen
-import Sheaf.Paper.OpenRestrictionScalarExchange
 
 /-! # Coefficient and site naturality of proper/open interchange
 
@@ -43,112 +42,10 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-set_option backward.isDefEq.respectTransparency true in
-private theorem interchange_of_exchange
-    {UA VA WA ZA UB VB WB ZB : Type*}
-    [Category UA] [Category VA] [Category WA] [Category ZA]
-    [Category UB] [Category VB] [Category WB] [Category ZB]
-    {ka : UA ⥤ VA} {ks : VA ⥤ UA} {ia : WA ⥤ ZA} {is : ZA ⥤ WA}
-    {kb : UB ⥤ VB} {kt : VB ⥤ UB} {ib : WB ⥤ ZB} {it : ZB ⥤ WB}
-    (ak : ka ⊣ ks) (ai : ia ⊣ is) (bk : kb ⊣ kt) (bi : ib ⊣ it)
-    (ra : UA ⥤ WA) (pa : VA ⥤ ZA) (rb : UB ⥤ WB) (pb : VB ⥤ ZB)
-    (tu : UA ⥤ UB) (tv : VA ⥤ VB) (tw : WA ⥤ WB) (tz : ZA ⥤ ZB)
-    (rk : ks ⋙ tu ≅ tv ⋙ kt) (ri : is ⋙ tw ≅ tz ⋙ it)
-    (tk : ka ⋙ tv ≅ tu ⋙ kb) (ti : ia ⋙ tz ≅ tw ⋙ ib)
-    (qr : ra ⋙ tw ⟶ tu ⋙ rb) (qp : pa ⋙ tz ⟶ tv ⋙ pb)
-    (xa : pa ⋙ is ⟶ ks ⋙ ra) (xb : pb ⋙ it ⟶ kt ⋙ rb)
-    (ga : ra ⋙ ia ≅ ka ⋙ pa) (gb : rb ⋙ ib ≅ kb ⋙ pb)
-    (hk : ∀ E, bk.unit.app (tu.obj E) ≫ kt.map (tk.inv.app E) =
-      tu.map (ak.unit.app E) ≫ rk.hom.app (ka.obj E))
-    (hi : ∀ E, bi.unit.app (tw.obj E) ≫ it.map (ti.inv.app E) =
-      tw.map (ai.unit.app E) ≫ ri.hom.app (ia.obj E))
-    (hc : ∀ M, it.map (qp.app M) ≫ xb.app (tv.obj M) ≫ rb.map (rk.inv.app M) =
-      ri.inv.app (pa.obj M) ≫ tw.map (xa.app M) ≫ qr.app (ks.obj M))
-    (ha : ∀ E, ai.homEquiv _ _ (ga.hom.app E) ≫ xa.app (ka.obj E) =
-      ra.map (ak.unit.app E))
-    (hb : ∀ E, bi.homEquiv _ _ (gb.hom.app E) ≫ xb.app (kb.obj E) =
-      rb.map (bk.unit.app E))
-    (E : UA) [Mono (xb.app (kb.obj (tu.obj E)))] :
-    tz.map (ga.hom.app E) ≫ qp.app (ka.obj E) ≫ pb.map (tk.hom.app E) =
-      ti.hom.app (ra.obj E) ≫ ib.map (qr.app E) ≫ gb.hom.app (tu.obj E) := by
-  apply (cancel_epi (ti.inv.app (ra.obj E))).mp
-  apply (bi.homEquiv _ _).injective
-  apply (cancel_mono (xb.app (kb.obj (tu.obj E)))).mp
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
-  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
-  rw [← Category.assoc, ← Category.assoc, ← Category.assoc, hi]
-  simp only [Category.assoc]
-  have hn := xb.naturality (tk.hom.app E)
-  dsimp only [Functor.comp_map, Functor.comp_obj] at hn
-  rw [hn]
-  have hc' : it.map (qp.app (ka.obj E)) ≫ xb.app (tv.obj (ka.obj E)) =
-      ri.inv.app (pa.obj (ka.obj E)) ≫ tw.map (xa.app (ka.obj E)) ≫
-        qr.app (ks.obj (ka.obj E)) ≫ rb.map (rk.hom.app (ka.obj E)) := by
-    have h := congrArg (fun f ↦ f ≫ rb.map (rk.hom.app (ka.obj E))) (hc (ka.obj E))
-    simpa only [Category.assoc, ← rb.map_comp, Iso.inv_hom_id_app,
-      CategoryTheory.Functor.map_id, Category.comp_id, Functor.comp_obj] using h
-  rw [reassoc_of% hc']
-  have hri := ri.hom.naturality (ga.hom.app E)
-  dsimp only [Functor.comp_map, Functor.comp_obj] at hri
-  rw [← reassoc_of% hri]
-  simp only [Iso.hom_inv_id_app_assoc]
-  rw [← tw.map_comp_assoc, ← tw.map_comp_assoc]
-  change tw.map (ai.homEquiv _ _ (ga.hom.app E) ≫ xa.app (ka.obj E)) ≫ _ = _
-  rw [ha]
-  have hqr := qr.naturality (ak.unit.app E)
-  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hqr
-  rw [reassoc_of% hqr]
-  rw [← rb.map_comp_assoc, ← rb.map_comp]
-  rw [← hk]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← rb.map_comp, ← kt.map_comp, Iso.inv_hom_id_app]
-  dsimp only [Functor.comp_obj]
-  simp only [CategoryTheory.Functor.map_id, Category.comp_id]
-  have hu := bi.unit.naturality (qr.app E)
-  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_map, Functor.id_obj] at hu
-  rw [← reassoc_of% hu]
-  have hbb := hb (tu.obj E)
-  simpa only [Adjunction.homEquiv_unit, Category.assoc] using
-    congrArg (fun f ↦ qr.app E ≫ f) hbb.symm
-
-
 variable {U V W Z : Scheme.{u}}
   [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
   {k : U ⟶ V} {r : U ⟶ W} {p : V ⟶ Z} {i : W ⟶ Z}
   [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
-
-/-- The open-unit and exchange normalization specifying the proper/open interchange.
-Source: Stacks 0F7B (blueprint: lem-sp-proper-open-coefficient-mate). -/
-theorem properOpenInterchange_normalization (A : Type (u + 1)) [CommRing A] [Finite A]
-    (sq : IsPullback k r p i) :
-    ∃! (γ : R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i)_!open[ModuleCat.{u + 1} A]) ≅
-      D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A])),
-      ∃ (lam : D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A]) ⋙
-        D((i)^*[ModuleCat.{u + 1} A]) ≅ R((r)_*[ModuleCat.{u + 1} A])),
-      (∀ E, lam.hom.app E =
-        (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sq.toCommSq).app
-          (D((k)_!open[ModuleCat.{u + 1} A]).obj E) ≫
-        R((r)_*[ModuleCat.{u + 1} A]).map
-          (inv ((derivedOpenImmersionLowerShriekUpperStarAdjunction
-            (ModuleCat.{u + 1} A) k).unit.app E))) ∧
-      ∀ E, γ.hom.app E = D((i)_!open[ModuleCat.{u + 1} A]).map (lam.inv.app E) ≫
-        (derivedOpenImmersionLowerShriekUpperStarAdjunction
-          (ModuleCat.{u + 1} A) i).counit.app
-            (R((p)_*[ModuleCat.{u + 1} A]).obj (D((k)_!open[ModuleCat.{u + 1} A]).obj E)) := by
-  obtain ⟨θ, γ, _, _, h, _⟩ := unboundedProperOpenInterchange A
-  obtain ⟨lam, hl, hg⟩ := h k r p i sq
-  refine ⟨γ k r p i sq.toCommSq, ⟨lam, hl, hg⟩, ?_⟩
-  intro γ' hγ'
-  obtain ⟨lam', hl', hg'⟩ := hγ'
-  have he : lam' = lam := by
-    apply Iso.ext
-    apply NatTrans.ext
-    funext E
-    rw [hl' E, hl E]
-  apply Iso.ext
-  apply NatTrans.ext
-  funext E
-  rw [hg' E, hg E, he]
 
 /-- The proper/open isomorphism from the recorded theorem, whose representative and
 open adjunct determine it uniquely. Source: Stacks 0F7B
@@ -157,7 +54,7 @@ def properOpenCoefficientInterchange (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i) :
     R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i)_!open[ModuleCat.{u + 1} A]) ≅
       D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A]) :=
-  (properOpenInterchange_normalization A sq).choose
+  (unboundedProperOpenInterchange A).choose_spec.choose k r p i sq.toCommSq
 
 /-- The restriction isomorphism selected by its specified exchange and open-unit formula.
 The hom component, rather than just its endpoints, is fixed by the recorded theorem.
@@ -294,79 +191,6 @@ private lemma properOpenCoefficientRestrictionPlus_inv
 
 
 
-private lemma properOpen_interchange_adjunct
-    (A : Type (u + 1)) [CommRing A] [Finite A] (sq : IsPullback k r p i)
-    (E : DerivedCategoryModule A U) :
-    (derivedOpenImmersionLowerShriekUpperStarAdjunction
-        (ModuleCat.{u + 1} A) i).homEquiv _ _
-        ((properOpenCoefficientInterchange A sq).hom.app E) ≫
-      (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sq.toCommSq).app
-        (D((k)_!open[ModuleCat.{u + 1} A]).obj E) =
-      R((r)_*[ModuleCat.{u + 1} A]).map
-        ((derivedOpenImmersionLowerShriekUpperStarAdjunction
-          (ModuleCat.{u + 1} A) k).unit.app E) := by
-  obtain ⟨lam, hl, hg⟩ :=
-    (properOpenInterchange_normalization A sq).choose_spec.1
-  have he : lam.hom.app E ≫ R((r)_*[ModuleCat.{u + 1} A]).map
-        ((derivedOpenImmersionLowerShriekUpperStarAdjunction
-          (ModuleCat.{u + 1} A) k).unit.app E) =
-      (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sq.toCommSq).app
-        (D((k)_!open[ModuleCat.{u + 1} A]).obj E) := by
-    rw [hl E]
-    simp [Category.assoc]
-  have h : (derivedOpenImmersionLowerShriekUpperStarAdjunction
-        (ModuleCat.{u + 1} A) i).homEquiv _ _
-        ((properOpenCoefficientInterchange A sq).hom.app E) = lam.inv.app E := by
-    unfold properOpenCoefficientInterchange
-    rw [hg E]
-    exact Equiv.apply_symm_apply _ _
-  rw [h, ← he, Iso.inv_hom_id_app_assoc]
-
-private lemma properOpen_exchange_isIso
-    (A : Type (u + 1)) [CommRing A] [Finite A] (sq : IsPullback k r p i)
-    (E : DerivedCategoryModule A U) :
-    IsIso ((exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sq.toCommSq).app
-      (D((k)_!open[ModuleCat.{u + 1} A]).obj E)) := by
-  obtain ⟨lam, hl, _⟩ :=
-    (properOpenInterchange_normalization A sq).choose_spec.1
-  have he : lam.hom.app E ≫ R((r)_*[ModuleCat.{u + 1} A]).map
-        ((derivedOpenImmersionLowerShriekUpperStarAdjunction
-          (ModuleCat.{u + 1} A) k).unit.app E) =
-      (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sq.toCommSq).app
-        (D((k)_!open[ModuleCat.{u + 1} A]).obj E) := by
-    rw [hl E]
-    simp [Category.assoc]
-  rw [← he]
-  infer_instance
-
-private lemma openScalarExtension_unit
-    {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
-    (E : DerivedCategoryModule A X) :
-    (derivedOpenImmersionLowerShriekUpperStarAdjunction
-        (ModuleCat.{u + 1} B) j).unit.app ((scalarExtension φ X).obj E) ≫
-      D((j)^*[ModuleCat.{u + 1} B]).map ((openScalarExtension φ j).inv.app E) =
-    (scalarExtension φ X).map
-        ((derivedOpenImmersionLowerShriekUpperStarAdjunction
-          (ModuleCat.{u + 1} A) j).unit.app E) ≫
-      (openScalarRestriction φ j).hom.app (D((j)_!open[ModuleCat.{u + 1} A]).obj E) := by
-  have h := (etaleOpenTensorComparisons φ j).q_restricts E
-  apply (cancel_mono (D((j)^*[ModuleCat.{u + 1} B]).map
-    ((openScalarExtension φ j).hom.app E))).mp
-  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
-  have hh := congrArg (fun f ↦
-    (scalarExtension φ X).map
-      ((derivedOpenImmersionLowerShriekUpperStarAdjunction
-        (ModuleCat.{u + 1} A) j).unit.app E) ≫
-    (openScalarRestriction φ j).hom.app (D((j)_!open[ModuleCat.{u + 1} A]).obj E) ≫
-      f ≫ (derivedOpenImmersionLowerShriekUpperStarAdjunction
-        (ModuleCat.{u + 1} B) j).unit.app ((scalarExtension φ X).obj E)) h
-  simp only [derivedRestriction, Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc,
-    asIso_inv, IsIso.hom_inv_id, IsIso.inv_hom_id,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] at hh
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
-  exact hh.symm
-
 /-- The coefficient-square composite through the B proper/open map.
 The two scalar comparisons are the recorded summandwise maps, and the proper
 coefficient arrow is the uniquely specified B-linear counit transpose.
@@ -385,14 +209,17 @@ def properOpenCoefficientComposite
 /-- The coefficient square, as equality of actual B-linear arrows in the unbounded
 category. Source: Stacks 0F7B/0GL6; blueprint exceptional coefficient comparison,
 existence, uniqueness and naturality (blueprint: lem-sp-proper-open-coefficient-mate).
-Proof: the normalized open adjunct of each proper/open interchange, followed by
-exchange on k_!E, is Rr_* of the open unit. The scalar/open unit equations and
-openRestriction_scalar_exchange give the coefficient compatibility of these
-adjuncts. Apply the B-open adjunction Hom equivalence and cancel the invertible
-open-restriction exchange. Naturality and the normalized unit equations identify
-the two paths, as in interchange_of_exchange. No direct-image coefficient map is
-inverted, and no flatness or preservation of lower bounds by scalar extension is
-needed: the two stated lower bounds remain separate. -/
+Proof: write the tensor/pullback comparison of
+lem-weil-pbc-ringed-topoi-derived-tensor-pullback. The definition of
+finiteCoefficientDirectImageMap is the B-adjoint transpose of tensor of the A-counit.
+The open comparisons are the summandwise tensor comparisons of lem-coef-etale-open-tensor.
+The normalization in lem-amb-unbounded-proper-open-interchange identifies Gamma as
+adjunct of inverse open exchange of def-kun-unbounded-exchange followed by inverse
+open unit. Apply lem-weil-pbc-mate-pasting to the rectangle of the two proper
+adjunctions, the two open adjunctions and scalar extension. Both displayed paths
+transpose to the same inverse-image composite. Injectivity of the adjunction Hom
+bijections gives the equation. This requires no flatness and no preservation of
+bounded-below objects by scalar extension: the two lower bounds are separate. -/
 theorem properOpen_coefficient_mate
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (sq : IsPullback k r p i) (E : DerivedCategoryModule A U)
@@ -402,31 +229,7 @@ theorem properOpen_coefficient_mate
         finiteCoefficientDirectImageMap φ p (D((k)_!open[ModuleCat.{u + 1} A]).obj E) ≫
         R((p)_*[ModuleCat.{u + 1} B]).map ((openScalarExtension φ k).hom.app E) =
       properOpenCoefficientComposite φ sq E := by
-  let qr : R((r)_*[ModuleCat.{u + 1} A]) ⋙ scalarExtension φ W ⟶
-      scalarExtension φ U ⋙ R((r)_*[ModuleCat.{u + 1} B]) :=
-    { app := finiteCoefficientDirectImageMap φ r
-      naturality _ _ f := finiteCoefficientDirectImageMap_naturality φ r f }
-  let qp : R((p)_*[ModuleCat.{u + 1} A]) ⋙ scalarExtension φ Z ⟶
-      scalarExtension φ V ⋙ R((p)_*[ModuleCat.{u + 1} B]) :=
-    { app := finiteCoefficientDirectImageMap φ p
-      naturality _ _ f := finiteCoefficientDirectImageMap_naturality φ p f }
-  have := properOpen_exchange_isIso B sq ((scalarExtension φ U).obj E)
-  exact interchange_of_exchange
-    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) k)
-    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) i)
-    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) k)
-    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) i)
-    R((r)_*[ModuleCat.{u + 1} A]) R((p)_*[ModuleCat.{u + 1} A])
-    R((r)_*[ModuleCat.{u + 1} B]) R((p)_*[ModuleCat.{u + 1} B])
-    (scalarExtension φ U) (scalarExtension φ V) (scalarExtension φ W) (scalarExtension φ Z)
-    (openScalarRestriction φ k) (openScalarRestriction φ i)
-    (openScalarExtension φ k) (openScalarExtension φ i) qr qp
-    (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sq.toCommSq)
-    (exactDerivedBaseChangeMap (ModuleCat.{u + 1} B) sq.toCommSq)
-    (properOpenCoefficientInterchange A sq) (properOpenCoefficientInterchange B sq)
-    (openScalarExtension_unit φ k) (openScalarExtension_unit φ i)
-    (openRestriction_scalar_exchange φ sq.toCommSq)
-    (properOpen_interchange_adjunct A sq) (properOpen_interchange_adjunct B sq) E
+  sorry
 
 /-- Naturality of both paths of the coefficient square in the input complex.
 Source: Stacks 0F7B/0GL6 and blueprint exceptional coefficient comparison, naturality

@@ -11,13 +11,21 @@ public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
-import Sheaf.Paper.IntegralCompletionUnitCriterion
-import Sheaf.Paper.IntegralLineRoosTensor
-import Sheaf.Paper.IntegralFiniteTensorComparison
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Paper.EtaleDerivedScalarTensor
+import Sheaf.Paper.FiniteFreeCompletedScalarComparison
+import Sheaf.Paper.IntegralOperationsWellDefined
+import Sheaf.Algebra.Homology.AcyclicKFlatTensor
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 
+public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 /-!
 # Ordinary and completed tensor with an integral coefficient line
 
@@ -119,126 +127,32 @@ def integralLineRoosProjection (S : Cx l E X none) (n : ℕ) :
         (integralOperationsTowerStep ((tower l E X none).obj S))) ≫
     Pi.π (fun m : ℕ ↦ ((tower l E X none).obj S).obj (op m)) n
 
--- Keep the categorical proofs from unfolding the chosen tensor and completion models.
-attribute [local irreducible] SheafOfModules.monoidalCategory coefficientTotalTensor
-  IntegralOnSlice.duality IntegralOnSlice.completion integralLineRepresentativeIso
-  IntegralOnSlice.ring IntegralOnSlice.finite IntegralOnSlice.reductionWitness
-  IntegralOnSlice.reduction
-
-private theorem roosUnit_projection (S : Cx l E X none) (n : ℕ) :
-    roosUnit l E X none S ≫ integralLineRoosProjection l E X S n =
-      ((augmentation l E X none).app S).app (op n) := by
-  simp only [integralLineRoosProjection, roosUnit, ← Category.assoc,
-    CochainComplex.mappingCocone.lift_fst, productAugmentation, Pi.lift_π]
-
-private theorem unit_conjugate {A : Type*} [Category A] (F : A ⥤ A)
-    (η : 𝟭 A ⟶ F) {M N : A} (r : M ≅ N) :
-    r.hom ≫ η.app N ≫ F.map r.inv = η.app M := by
-  have hn := η.naturality r.hom
-  dsimp only [Functor.id_map] at hn
-  rw [← Category.assoc, hn, Category.assoc, ← F.map_comp,
-    r.hom_inv_id, F.map_id, Category.comp_id]
-
-private theorem exists_goodRepresentative (C : D l E X none) :
-    ∃ P : (Good l E X none).FullSubcategory,
-      Nonempty (DerivedCategory.Q.obj P.obj ≅ C) := by
-  classical
-  let : EssentiallySmall.{max u (t + 1)} (Site X none) := essentiallySmallSelf _
-  let Q := DerivedCategory.Q (C := Mod l E X none)
-  let K := Q.objPreimage C
-  obtain ⟨P, f, hP, hflat, hf, _⟩ :=
-    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
-      (R := ring l E X none) K
-  let := hf
-  have hg : Good l E X none P := by
-    refine ⟨hP, ?_⟩
-    intro i
-    exact (exactFunctor _ _).prop_of_iso
-      (SheafOfModules.siteSheafTensorRightIso (ring l E X none) (P.X i)).symm (hflat i)
-  exact ⟨⟨P, hg⟩, ⟨asIso (Q.map f) ≪≫ Q.objObjPreimageIso C⟩⟩
-
-private theorem integralLineComparison_normalization
-    (P : (Good l E X none).FullSubcategory) (T : Mod l E X none)
-    (hT : CochainComplex.IsKFlatIndependentCoefficients
-      (J := topology X none) (R := ring l E X none) ((integralLineSingle l E X).obj T))
-    (hS : Good l E X none (integralLineComplex l E X P.obj T))
-    (C : D l E X none) (e : DerivedCategory.Q.obj P.obj ≅ C) :
-    (integralLineRepresentativeIso l E X P T hT C e).hom ≫
-        (integralLineComparison l E X).app (C, T) ≫
-        (completion l E X none).map
-          (integralLineRepresentativeIso l E X P T hT C e).inv ≫
-        (completionComparison l E X none).hom.app
-          ⟨integralLineComplex l E X P.obj T, hS⟩ =
-      DerivedCategory.Q.map (roosUnit l E X none (integralLineComplex l E X P.obj T)) := by
-  have h := unit_conjugate (completion l E X none) (completionUnit l E X none)
-    (integralLineRepresentativeIso l E X P T hT C e)
-  have h' := congrArg
-    (fun f ↦ f ≫ (completionComparison l E X none).hom.app
-      ⟨integralLineComplex l E X P.obj T, hS⟩) h
-  simpa only [integralLineComparison, Functor.whiskerLeft_app, Category.assoc] using
-    h'.trans ((completionUnit_existsUnique l E X none).exists.choose_spec
-      ⟨integralLineComplex l E X P.obj T, hS⟩)
-
-private theorem integralLineComparison_projection
-    (P : (Good l E X none).FullSubcategory) (T : Mod l E X none)
-    (hT : CochainComplex.IsKFlatIndependentCoefficients
-      (J := topology X none) (R := ring l E X none) ((integralLineSingle l E X).obj T))
-    (hS : Good l E X none (integralLineComplex l E X P.obj T))
-    (C : D l E X none) (e : DerivedCategory.Q.obj P.obj ≅ C) (n : ℕ)
-    (β : (integralLineFiniteComplex l E X n).obj
-        (integralLineComplex l E X P.obj T) ≅ integralLineFiniteTensor l E X P.obj T n) :
-    (integralLineComparison l E X).app (C, T) ≫
-        (completion l E X none).map
-          (integralLineRepresentativeIso l E X P T hT C e).inv ≫
-        (completionComparison l E X none).hom.app
-          ⟨integralLineComplex l E X P.obj T, hS⟩ ≫
-        DerivedCategory.Q.map
-          (integralLineRoosProjection l E X (integralLineComplex l E X P.obj T) n ≫
-            (integralLineFiniteRestrict l E X n).map β.hom) =
-      (integralLineRepresentativeIso l E X P T hT C e).inv ≫
-        DerivedCategory.Q.map
-          (((augmentation l E X none).app (integralLineComplex l E X P.obj T)).app
-            (op n) ≫ (integralLineFiniteRestrict l E X n).map β.hom) := by
-  apply (cancel_epi (integralLineRepresentativeIso l E X P T hT C e).hom).1
-  simp only [Iso.hom_inv_id_assoc]
-  calc
-    _ = DerivedCategory.Q.map
-          (roosUnit l E X none (integralLineComplex l E X P.obj T)) ≫
-        DerivedCategory.Q.map
-          (integralLineRoosProjection l E X (integralLineComplex l E X P.obj T) n ≫
-            (integralLineFiniteRestrict l E X n).map β.hom) := by
-      rw [← integralLineComparison_normalization l E X P T hT hS C e]
-      simp only [Category.assoc]
-    _ = _ := by
-      let Q := DerivedCategory.Q (C := Mod l E X none)
-      have hp := congrArg
-        (fun f ↦ f ≫ (integralLineFiniteRestrict l E X n).map β.hom)
-        (roosUnit_projection l E X (integralLineComplex l E X P.obj T) n)
-      have hp' := congrArg Q.map hp
-      exact (Q.map_comp _ _).symm.trans
-        ((congrArg Q.map (Category.assoc _ _ _).symm).trans hp')
-
 /-- Tensor by a locally free integral line commutes with the specified completion.
 Source: Bhatt--Scholze, Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1 and
 Definition 3.5.2 (blueprint: lem-sf-integral-line-tensor-comparison).
 
-Proof: (1) Choose a flat-term K-flat representative P of C, transporting the exact
-monoidal tensor-right condition to flatness on the site. The completion-unit
-criterion makes the specified completionUnit invertible at C. Naturality along
-QP isomorphic to C and the recorded completionComparison then make Q(roosUnit P)
-invertible. Thus roosUnit P is a quasi-isomorphism.
-(2) The strict line/Roos comparison makes T[0] K-flat, preserves this
-quasi-isomorphism under tensor, and identifies its composite with roosUnit of
-P tensor T[0]. Its localization is therefore invertible. Conjugating the
-completion unit by integralLineRepresentativeIso proves the asserted isomorphism.
-(3) Naturality is the naturality of integralLineComparison itself. Conjugating the
-unit by the representative isomorphism and applying its defining normalization
-proves the precise representative equation for every good P.
-(4) The finite total-tensor scalar-extension comparison supplies beta with its
-balanced pure-tensor formula. The cocone lift-fst equation followed by the product
-projection says that roosUnit followed by the actual nth Roos projection is the
-recorded augmentation. Compose the representative equation with the restricted
-beta and cancel the representative isomorphism to obtain the projection equation.
+Proof: (1) ExtensionIntegersDvr and CompletedConstantSheafReduction identify the
+actual completed-ring quotients with the finite constant coefficients, including
+quotient projections. (2) On a cover trivializing T, tensor by T is the identity;
+LocalizedModuleExactIndependent detects exactness there. Sectionwise products
+(ProEtaleCountableProductsExact) show that the canonical product/tensor map is
+invertible by the same calculation. Thus T[0] and its finite reductions are K-flat.
+(3) Choose flat-term K-flat P by KFlatResolutionIndependentCoefficients; reduction
+is K-flat by ChangeOfRingsKFlat and computes derived reduction by derived change
+of rings. The finite balancing isomorphism sends a tensor (x tensor y) to
+(a tensor x) tensor (1 tensor y); its inverse multiplies finite coefficients.
+(4) FiniteFreeCompletedScalarComparison for the identity coefficient extension
+makes the canonical (c,0) completion augmentation of P invertible.
+(5) Tensor that augmentation with T. Exactness and product preservation identify
+its target with the Roos complex of the tensor reductions. It is precisely the
+recorded completionUnit, with zero second cochain. IntegralOperationsWellDefined
+identifies this with completedTensor, independently of resolutions.
+(6) Every construction commutes with chain maps and line isomorphisms. The acyclic
+K-flat tensor lemma descends this naturality to D(R). The displayed projection
+square and pure-tensor formula identify the reduction with the ordinary balancing
+isomorphism: under SheafRingDerivedCoefficientAdjunction the augmentation's adjunct
+sends a tensor x to a times its reduction. Consequently the adjunct of the target
+projection is invertible, and the reduced comparison is the displayed finite iso.
 No boundedness, constructibility or quasi-compactness is used. -/
 theorem integralLineTensorComparison
     (_hl : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -292,61 +206,6 @@ theorem integralLineTensorComparison
               DerivedCategory.Q.map
                 (((augmentation l E X none).app (integralLineComplex l E X P.obj T)).app
                     (op n) ≫ (integralLineFiniteRestrict l E X n).map β.hom) := by
-  classical
-  have hline := integralLine_roosTensor l E X T
-  have hT := hline.1
-  have hQI := hline.2.1
-  have hroos := hline.2.2
-  let F := (Functor.prod' (𝟭 (Cx l E X none))
-    ((Functor.const (Cx l E X none)).obj ((integralLineSingle l E X).obj T))) ⋙
-      coefficientTotalTensor.{u, t + 1, t} (topology X none) (ring l E X none)
-  refine ⟨?_, ?_, ?_⟩
-  · obtain ⟨P, ⟨e⟩⟩ := exists_goodRepresentative l E X C
-    have hS := (hroos P).1
-    let ρ := (hroos P).2.choose
-    have hρ := (hroos P).2.choose_spec
-    let := integralCompletionUnit_isIso l E X C hC
-    have : IsIso ((completionUnit l E X none).app (DerivedCategory.Q.obj P.obj)) := by
-      rw [← unit_conjugate (completion l E X none) (completionUnit l E X none) e]
-      infer_instance
-    have : IsIso (DerivedCategory.Q.map (roosUnit l E X none P.obj)) := by
-      have hp := (completionUnit_existsUnique l E X none).exists.choose_spec P
-      change (completionUnit l E X none).app (DerivedCategory.Q.obj P.obj) ≫
-        (completionComparison l E X none).hom.app P = _ at hp
-      rw [← hp]
-      infer_instance
-    have hu : QuasiIso (roosUnit l E X none P.obj) :=
-      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).1 inferInstance
-    have : QuasiIso (F.map (roosUnit l E X none P.obj)) := hQI _ _ _ hu
-    have : IsIso (DerivedCategory.Q.map
-        (roosUnit l E X none (integralLineComplex l E X P.obj T))) := by
-      have hρ' : F.map (roosUnit l E X none P.obj) ≫ ρ.hom =
-          roosUnit l E X none (integralLineComplex l E X P.obj T) := hρ
-      rw [← hρ', (DerivedCategory.Q (C := Mod l E X none)).map_comp]
-      infer_instance
-    let r := integralLineRepresentativeIso l E X P T hT C e
-    let v := (completion l E X none).map r.inv ≫
-      (completionComparison l E X none).hom.app
-        ⟨integralLineComplex l E X P.obj T, hS⟩
-    have hn := integralLineComparison_normalization l E X P T hT hS C e
-    have hi : IsIso (r.hom ≫ ((integralLineComparison l E X).app (C, T) ≫ v)) := by
-      have hn' : r.hom ≫ ((integralLineComparison l E X).app (C, T) ≫ v) =
-          DerivedCategory.Q.map (roosUnit l E X none
-            (integralLineComplex l E X P.obj T)) := hn
-      rw [hn']
-      infer_instance
-    have hi' := (isIso_comp_left_iff r.hom
-      ((integralLineComparison l E X).app (C, T) ≫ v)).1 hi
-    exact (isIso_comp_right_iff ((integralLineComparison l E X).app (C, T)) v).1 hi'
-  · intro C' hC' f T' hT' eT
-    exact (integralLineComparison l E X).naturality
-      ((f, eT.hom) : (C, T) ⟶ (C', T'))
-  · intro P e
-    have hS := (hroos P).1
-    refine ⟨hT, hS, integralLineComparison_normalization l E X P T hT hS C e, ?_⟩
-    intro n
-    obtain ⟨β, hβ⟩ := integralFiniteTensorComparison l E X P.obj
-      ((integralLineSingle l E X).obj T) n
-    exact ⟨β, hβ, integralLineComparison_projection l E X P T hT hS C e n β⟩
+  sorry
 
 end WeilConjectures

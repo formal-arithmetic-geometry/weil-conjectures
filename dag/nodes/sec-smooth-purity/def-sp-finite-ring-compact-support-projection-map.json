@@ -1,93 +1,64 @@
 {
- "id": "def-sp-finite-ring-compact-support-projection-map",
- "kind": "definition",
- "title": "Compact-support projection arrow with finite primary coefficients",
- "statement": "In the setting of [lem-sp-finite-ring-compact-support-projection] ($k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$ [def-weil-finite-field-fiber], a finite commutative ring $R$ with $\\ell^nR=0$, separated finite-type $k$-schemes with $f=p\\circ j$ for an open immersion $j:X\\hookrightarrow\\bar X$ and a proper $p:\\bar X\\to Y$ [def-weil-scheme-morphism-properties, def-weil-open-immersion, def-weil-proper-morphism]), using the unbounded derived categories $D(T_{\\mathrm{proet}},R)$ [def-weil-pbc-proetale-modules], the K-flat derived tensor product [def-weil-derived-tensor], the derived inverse and direct images [def-weil-pbc-proetale-operations] and extension by zero [def-weil-extension-by-zero], the compact-support projection arrow $\\operatorname{PF}_{R;M,K}:Rf_{!,R}M\\otimes^{\\mathbf L}_RK\\to Rf_{!,R}(M\\otimes^{\\mathbf L}_RLf^*K)$ is the composite of the counit-defined proper projection $\\pi_p$, the inverse of the open projection for $j_!$ and the pullback-composition identification, transported by the canonical coefficient realization; it is natural in $M$ and $K$. Its invertibility is [lem-sp-finite-ring-compact-support-projection].",
- "stmt_deps": [
-  "def-weil-finite-field-fiber",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-open-immersion",
-  "def-weil-proper-morphism",
-  "def-weil-pbc-proetale-modules",
-  "def-weil-derived-tensor",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-extension-by-zero",
-  "def-weil-proetale-constructible-sheaf"
- ],
- "source": {
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-  "place": "the projection arrow of Proof (3) (the definition of the lemma's module)"
- },
- "proof": [
-  {
-   "text": "Store the existing abelian structure and derived-category model for fixed scalar sheaves, and derive the original canonical realization equivalence using those structures. Its functor and inverse are the original derived functors: Equivalence.mapDerivedCategory is constructed with exactly these two functors. Name the source and target bifunctors of the published fixed-coefficient compactification projection. Realize that same transformation by precomposition with inverse realization and postcomposition with realization. The generic realization API uses the original whiskering and postcomposition formula. Its component is the image of the original component, so Functor.map_isIso proves the component API. All these factorizations preserve the canonical morphism and introduce no choices of a projection-formula isomorphism. A local CommRing.toRing priority keeps abstract scalar rings and their ULift specializations on the same standard ring structure; it changes neither the coefficient ring nor the canonical arrow.",
-   "uses": [],
-   "elementary": true
-  }
- ],
- "proof_deps": [],
- "mathlib_match": null,
- "mathlib_searches": [],
- "created": {
-  "by": "L",
-  "item": "maintenance: definitions used by other statements",
-  "date": "2026-10-18",
-  "note": "the Lean definitions moved unchanged out of the lemma's module, so that statements using them do not rest on the lemma (the human, 2026-10-18)"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "sk-thm-sf-pf-proetale",
-   "place": "the finite-ring compact-support projection arrow named in the statement",
-   "via": [
-    "lem-sp-finite-ring-compact-support-projection"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-lem-sp-reduction",
- "status": "split",
- "reviewed": {
-  "date": "2026-10-18",
-  "by": "L",
-  "result": "pass",
-  "note": "maintenance definition node: the existing reviewed Lean declarations, moved unchanged, define exactly these notions"
- },
- "lean": {
-  "module": "Sheaf.Paper.FiniteRingCompactSupportProjectionMap",
-  "declaration": "AlgebraicGeometry.Scheme.finiteRingCompactSupportProjection",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.sfRealizeCompactificationProjection",
-   "AlgebraicGeometry.Scheme.isIso_sfRealizeCompactificationProjection_app_app",
-   "AlgebraicGeometry.Scheme.sfFixedSheafAbelian",
-   "AlgebraicGeometry.Scheme.sfFixedDerivedCategoryModel",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedModuleEquivalence",
-   "AlgebraicGeometry.Scheme.sfFixedCompactificationProjectionSource",
-   "AlgebraicGeometry.Scheme.sfFixedCompactificationProjectionTarget",
-   "AlgebraicGeometry.Scheme.sfFixedCompactificationProjection",
-   "AlgebraicGeometry.Scheme.finiteRingCompactSupportProjection"
+  "id": "def-sp-finite-ring-compact-support-projection-map",
+  "kind": "definition",
+  "title": "Compact-support projection arrow with finite primary coefficients",
+  "statement": "In the setting of [lem-sp-finite-ring-compact-support-projection] ($k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$ [def-weil-finite-field-fiber], a finite commutative ring $R$ with $\\ell^nR=0$, separated finite-type $k$-schemes with $f=p\\circ j$ for an open immersion $j:X\\hookrightarrow\\bar X$ and a proper $p:\\bar X\\to Y$ [def-weil-scheme-morphism-properties, def-weil-open-immersion, def-weil-proper-morphism]), using the unbounded derived categories $D(T_{\\mathrm{proet}},R)$ [def-weil-pbc-proetale-modules], the K-flat derived tensor product [def-weil-derived-tensor], the derived inverse and direct images [def-weil-pbc-proetale-operations] and extension by zero [def-weil-extension-by-zero], the compact-support projection arrow $\\operatorname{PF}_{R;M,K}:Rf_{!,R}M\\otimes^{\\mathbf L}_RK\\to Rf_{!,R}(M\\otimes^{\\mathbf L}_RLf^*K)$ is the composite of the counit-defined proper projection $\\pi_p$, the inverse of the open projection for $j_!$ and the pullback-composition identification, transported by the canonical coefficient realization; it is natural in $M$ and $K$. Its invertibility is [lem-sp-finite-ring-compact-support-projection].",
+  "stmt_deps": [
+    "def-weil-finite-field-fiber",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-open-immersion",
+    "def-weil-proper-morphism",
+    "def-weil-pbc-proetale-modules",
+    "def-weil-derived-tensor",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-extension-by-zero",
+    "def-weil-proetale-constructible-sheaf"
   ],
-  "file": "lean/Sheaf/Paper/FiniteRingCompactSupportProjectionMap.lean",
-  "branch": "newtargets-dag",
-  "by": "L",
-  "date": "2026-10-18",
-  "existing": true,
-  "note": "The original canonical projection is factored through a generic bifunctor-realization API. F6 stores the standard fixed-scalar sheaf abelian structure, its existing small derived-category model, the original derived realization equivalence, and the fixed projection endpoints, to keep repeated categorical data out of conversion. The canonical counit-defined arrow and all its mathematical assumptions are unchanged."
- },
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-  "place": "The projection arrow of Proof (3); implementation API by F6: the existing sheaf abelian structure and derived localization model, derivation of the existing realization equivalence, and functorial whiskering, postcomposition and map_isIso."
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F6",
-  "result": "pass",
-  "landing": "20261020T211710-L-3489856",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+    "place": "the projection arrow of Proof (3) (the definition of the lemma's module)"
+  },
+  "proof": [],
+  "proof_deps": [],
+  "mathlib_match": null,
+  "mathlib_searches": [],
+  "created": {
+    "by": "L",
+    "item": "maintenance: definitions used by other statements",
+    "date": "2026-10-18",
+    "note": "the Lean definitions moved unchanged out of the lemma's module, so that statements using them do not rest on the lemma (the human, 2026-10-18)"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "sk-thm-sf-pf-proetale",
+      "place": "the finite-ring compact-support projection arrow named in the statement",
+      "via": [
+        "lem-sp-finite-ring-compact-support-projection"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-lem-sp-reduction",
+  "status": "split",
+  "reviewed": {
+    "date": "2026-10-18",
+    "by": "L",
+    "result": "pass",
+    "note": "maintenance definition node: the existing reviewed Lean declarations, moved unchanged, define exactly these notions"
+  },
+  "lean": {
+    "module": "Sheaf.Paper.FiniteRingCompactSupportProjectionMap",
+    "declaration": "AlgebraicGeometry.Scheme.finiteRingCompactSupportProjection",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.finiteRingCompactSupportProjection"
+    ],
+    "file": "lean/Sheaf/Paper/FiniteRingCompactSupportProjectionMap.lean",
+    "branch": "newtargets-dag",
+    "by": "L",
+    "date": "2026-10-18",
+    "existing": true,
+    "note": "declarations moved unchanged from the lemma's module (maintenance, 2026-10-18)"
+  }
 }

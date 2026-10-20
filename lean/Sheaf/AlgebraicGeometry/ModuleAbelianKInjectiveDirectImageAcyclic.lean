@@ -5,7 +5,7 @@ Authors: SHEAF group F4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Sheaf.AlgebraicGeometry.EtaleModuleAbelianRingedPresentation
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp

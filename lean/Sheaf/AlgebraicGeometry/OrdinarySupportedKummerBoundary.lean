@@ -117,12 +117,6 @@ def supportedKummerChern (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (T.kummerδ₁ N hT (Scheme.Pic.toCohomologicalPicardGroup T
       (Scheme.Pic.ofIsInvertible (Scheme.Modules.dual i.ker.toModules))))
 
-section
-
--- Share the instance proofs used by the recorded unbounded derived category.
-set_option linter.auxLemma false in
-attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
-
 /-- The relative Kummer specification, in the extension model of relative cohomology.
 The lifting torsor of E at the supported section one is the frame torsor of O(D),
 and its specified section over the complementary open is sent to zero in E.
@@ -182,7 +176,5 @@ def supportedConstantExchange (A : Type (u + 1)) [CommRing A]
       ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) w).app
         (ModuleCat.of A A)).hom
 
-
-end
 
 end AlgebraicGeometry.Etale

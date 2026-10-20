@@ -1,310 +1,381 @@
 {
- "id": "lem-pur-integral-operations-well-defined",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-derived-pullback-tensor-hom",
-   "place": "Integral coefficients clause: defining Lf^* and the completed tensor product by derived limits of finite reductions; justification of independence and ambient functor typing",
-   "via": [
-    "def-pur-integral-derived-operations"
-   ]
+  "id": "lem-pur-integral-operations-well-defined",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-derived-pullback-tensor-hom",
+      "place": "Integral coefficients clause: defining Lf^* and the completed tensor product by derived limits of finite reductions; justification of independence and ambient functor typing",
+      "via": [
+        "def-pur-integral-derived-operations"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "The towers defining integral pullback and completed tensor product are invariant under change of K-flat resolution",
- "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($n\\geq1$) [def-weil-l-adic-coefficient-extension]. For a scheme $W$ let $\\widehat{\\mathcal O}_{E,W}=\\varprojlim_n(A_{E,n})_W$ be the completed coefficient sheaf on the small pro-etale site $W_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], with projections $\\pi_n$, restriction of scalars $\\operatorname{Res}_n$ along $\\pi_n$ [def-pc-sheaf-restrict-scalars] and derived category $D(W_{\\mathrm{proet}},\\mathcal O_E)$ [def-weil-completed-integral-coefficients, def-weil-abstract-derived-category]. For a tower $(C_n,t_n:C_{n+1}\\to C_n)_{n\\geq1}$ of complexes of $\\widehat{\\mathcal O}_{E,W}$-modules write $\\operatorname{Rlim}^{\\mathrm c}(C_\\bullet)$ for the complex $\\operatorname{Cone}(1-s)[-1]$, where $1-s:\\prod_nC_n\\to\\prod_nC_n$, $(c_n)\\mapsto(c_n-t_n(c_{n+1}))$, on the termwise products [lem-weil-proetale-countable-products-exact]. For a complex $P$ of $\\widehat{\\mathcal O}_{E,W}$-modules put $P_n=P\\otimes_{\\widehat{\\mathcal O}_{E,W}}(A_{E,n})_W$ (termwise change of rings [def-pur-sheaf-tensor-product]), with the maps $P_{n+1}\\to P_n$ induced by $A_{E,n+1}\\twoheadrightarrow A_{E,n}$. Let $f:X\\to Y$ be a morphism of schemes [def-weil-scheme-morphism-properties] and $f^*=f^{-1}(-)\\otimes_{f^{-1}(A_{E,n})_Y}(A_{E,n})_X$ the module inverse image on sheaves of $(A_{E,n})_Y$-modules [def-weil-proetale-inverse-image]. For complexes $P$ on $Y$ and $P,Q$ on $W$ define\n\n$$\n T_f(P)=\\operatorname{Rlim}^{\\mathrm c}_n\\operatorname{Res}_nf^*(P_n),\\qquad\n T(P,Q)=\\operatorname{Rlim}^{\\mathrm c}_n\\operatorname{Res}_n\\bigl(\\operatorname{Tot}(P_n\\otimes_{(A_{E,n})_W}Q_n)\\bigr),\n$$\n\nwith direct-sum total tensor [def-pc-tensor-complex-sheaves] and transition maps induced by those of $P_\\bullet$, $Q_\\bullet$. Then: (1) if $u:P\\to P'$ and $v:Q\\to Q'$ are quasi-isomorphisms between K-flat complexes of $\\widehat{\\mathcal O}_{E,-}$-modules with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules], the induced maps $T_f(P)\\to T_f(P')$ and $T(P,Q)\\to T(P',Q')$ are quasi-isomorphisms; (2) consequently, choosing for every object a K-flat resolution with flat terms [lem-pc-kflat-resolution], $K\\mapsto T_f(P_K)$ and $(M,N)\\mapsto T(P_M,P_N)$ define functors $D(Y_{\\mathrm{proet}},\\mathcal O_E)\\to D(X_{\\mathrm{proet}},\\mathcal O_E)$ and $D(W_{\\mathrm{proet}},\\mathcal O_E)^2\\to D(W_{\\mathrm{proet}},\\mathcal O_E)$, independent of the resolutions up to a unique isomorphism of functors compatible with their natural comparison isomorphisms on K-flat representatives (these comparisons identify the descended functor with the displayed complex construction after localization), and each value is a derived limit [def-weil-derived-limit] of the corresponding tower in $D(-_{\\mathrm{proet}},\\mathcal O_E)$.",
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Section 21.17 'Flat resolutions' (Tag 06YL: Lemma 06YS, Lemma 06YT), Lemma 0G7E, for the levelwise invariance; literature/stacks-project/derived.tex Definition 13.34.1 (Tag 08TC) for the derived limit; context: literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Definition 3.4.10 and Lemma 6.5.9 (4), pp. 22 and 50"
- },
- "stmt_deps": [
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-proetale-site",
-  "def-weil-completed-integral-coefficients",
-  "lem-weil-proetale-countable-products-exact",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-proetale-inverse-image",
-  "def-pc-kflat-complex",
-  "lem-pc-kflat-resolution",
-  "def-weil-derived-limit",
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-abstract-derived-category",
-  "def-pc-tensor-complex-sheaves",
-  "def-pc-flat-sheaf-modules",
-  "def-weil-integral-reduction-tower",
-  "lem-pur-derived-change-of-rings",
-  "def-weil-integral-derived-reduction",
-  "lem-weil-integral-reduction-tower-well-defined"
- ],
- "proof": [
-  {
-   "text": "The specified ordinary reduction functor preserves quasi-isomorphisms between K-flat complexes by the quasi-isomorphism conjunct of unrestrictedIntegralReductionExistence. Independent-universe tensor cancellation and change-of-rings K-flat preservation show that the reduced complexes are K-flat. Tensoring the acyclic mapping cone with a K-flat complex is acyclic. The tensor/mapping-cone comparison proves quasi-isomorphism invariance in the first variable. The signed total-complex flip and braiding prove it in the second variable. Compose these two maps to prove invariance for both reduced maps.",
-   "uses": [
+  "kind": "statement",
+  "title": "The towers defining integral pullback and completed tensor product are invariant under change of K-flat resolution",
+  "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($n\\geq1$) [def-weil-l-adic-coefficient-extension]. For a scheme $W$ let $\\widehat{\\mathcal O}_{E,W}=\\varprojlim_n(A_{E,n})_W$ be the completed coefficient sheaf on the small pro-etale site $W_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], with projections $\\pi_n$, restriction of scalars $\\operatorname{Res}_n$ along $\\pi_n$ [def-pc-sheaf-restrict-scalars] and derived category $D(W_{\\mathrm{proet}},\\mathcal O_E)$ [def-weil-completed-integral-coefficients, def-weil-abstract-derived-category]. For a tower $(C_n,t_n:C_{n+1}\\to C_n)_{n\\geq1}$ of complexes of $\\widehat{\\mathcal O}_{E,W}$-modules write $\\operatorname{Rlim}^{\\mathrm c}(C_\\bullet)$ for the complex $\\operatorname{Cone}(1-s)[-1]$, where $1-s:\\prod_nC_n\\to\\prod_nC_n$, $(c_n)\\mapsto(c_n-t_n(c_{n+1}))$, on the termwise products [lem-weil-proetale-countable-products-exact]. For a complex $P$ of $\\widehat{\\mathcal O}_{E,W}$-modules put $P_n=P\\otimes_{\\widehat{\\mathcal O}_{E,W}}(A_{E,n})_W$ (termwise change of rings [def-pur-sheaf-tensor-product]), with the maps $P_{n+1}\\to P_n$ induced by $A_{E,n+1}\\twoheadrightarrow A_{E,n}$. Let $f:X\\to Y$ be a morphism of schemes [def-weil-scheme-morphism-properties] and $f^*=f^{-1}(-)\\otimes_{f^{-1}(A_{E,n})_Y}(A_{E,n})_X$ the module inverse image on sheaves of $(A_{E,n})_Y$-modules [def-weil-proetale-inverse-image]. For complexes $P$ on $Y$ and $P,Q$ on $W$ define\n\n$$\n T_f(P)=\\operatorname{Rlim}^{\\mathrm c}_n\\operatorname{Res}_nf^*(P_n),\\qquad\n T(P,Q)=\\operatorname{Rlim}^{\\mathrm c}_n\\operatorname{Res}_n\\bigl(\\operatorname{Tot}(P_n\\otimes_{(A_{E,n})_W}Q_n)\\bigr),\n$$\n\nwith direct-sum total tensor [def-pc-tensor-complex-sheaves] and transition maps induced by those of $P_\\bullet$, $Q_\\bullet$. Then: (1) if $u:P\\to P'$ and $v:Q\\to Q'$ are quasi-isomorphisms between K-flat complexes of $\\widehat{\\mathcal O}_{E,-}$-modules with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules], the induced maps $T_f(P)\\to T_f(P')$ and $T(P,Q)\\to T(P',Q')$ are quasi-isomorphisms; (2) consequently, choosing for every object a K-flat resolution with flat terms [lem-pc-kflat-resolution], $K\\mapsto T_f(P_K)$ and $(M,N)\\mapsto T(P_M,P_N)$ define functors $D(Y_{\\mathrm{proet}},\\mathcal O_E)\\to D(X_{\\mathrm{proet}},\\mathcal O_E)$ and $D(W_{\\mathrm{proet}},\\mathcal O_E)^2\\to D(W_{\\mathrm{proet}},\\mathcal O_E)$, independent of the resolutions up to a unique isomorphism of functors compatible with their natural comparison isomorphisms on K-flat representatives (these comparisons identify the descended functor with the displayed complex construction after localization), and each value is a derived limit [def-weil-derived-limit] of the corresponding tower in $D(-_{\\mathrm{proet}},\\mathcal O_E)$.",
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 21.17 'Flat resolutions' (Tag 06YL: Lemma 06YS, Lemma 06YT), Lemma 0G7E, for the levelwise invariance; literature/stacks-project/derived.tex Definition 13.34.1 (Tag 08TC) for the derived limit; context: literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Definition 3.4.10 and Lemma 6.5.9 (4), pp. 22 and 50"
+  },
+  "stmt_deps": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-proetale-site",
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-proetale-countable-products-exact",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-proetale-inverse-image",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution",
+    "def-weil-derived-limit",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-flat-sheaf-modules",
     "def-weil-integral-reduction-tower",
     "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings-independent",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the exact specified constant-coefficient pro-etale pullback, transport the sites to coefficient-sized models, normalize the ring inverse-image comparison by the constant-section unit, and identify the underlying module pullback with exact inverse image of abelian sheaves. Restriction of scalars is exact because the underlying abelian sheaf is unchanged. Consequently the strict pullback and tensor tower maps are levelwise quasi-isomorphisms.",
-   "uses": [
-    "lem-pur-coefficient-pullback-exact",
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Prove strict Roos invariance first in an arbitrary abelian category with exact countable products. Exact products make the product map a quasi-isomorphism. The square for 1-s gives a map of mapping-cone triangles, and the first two components become isomorphisms under Q, hence so does the third. The recorded homotopyCofiber map agrees with mappingCone.map by its summand inclusions. Shift and reflection by Q give the generic result. Specialize it to the completed coefficient category using exact pro-etale countable products.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "def-weil-abstract-derived-category",
-    "def-weil-derived-limit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A functorial flat cover gives a reduced left-resolution functor with flat terms and K-flat values and a natural quasi-isomorphic augmentation. Mathlib LocalizerMorphism.isLocalizedEquivalence_of_functorial_left_resolutions proves that the inclusion of good complexes followed by Q is a localization. Apply Localization.lift and Localization.fac to the strict pullback and, using localization of products, to the strict tensor. Fully faithful precomposition (Localization.fullyFaithfulWhiskeringLeft) lifts the composite of two representative comparisons and proves the stated uniqueness.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "def-pc-kflat-complex",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In an arbitrary abelian category with exact countable products, the proved countable-product comparison identifies Q of a termwise product with the derived-category product, preserving its projections. Projection extensionality identifies Q(1-s) with the derived transition endomorphism. Transport the distinguished mapping-cocone triangle along this isomorphism to prove the generic Roos derived-limit property. Specialize it to completed coefficient modules. For an arbitrary representative isomorphism, apply the descended functor to its inverse, compose with its representative comparison, and transport the triangle. Repeat for the product of representatives in the tensor case. Conjunction introduction combines the clauses.",
-   "uses": [
-    "lem-weil-derived-limit-products-core",
-    "lem-weil-proetale-countable-products-exact",
-    "def-weil-derived-limit",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-integral-reduction-tower",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-kflat-change-of-rings-independent",
-  "def-pc-kflat-complex",
-  "lem-pur-coefficient-pullback-exact",
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-proetale-countable-products-exact",
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-limit",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-weil-derived-limit-products-core"
- ],
- "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 06YT and 0G7E; sites-modules Tags 03D2 and 05V4; derived.tex Tags 07KC, 08TC and 014A. Finite-level invariance, strict Roos triangles, functorial flat localization and universal descent; operation-specific glue is proved privately in the original module. R9 repair: use the direct K-flat cone argument for finite tensor invariance, rather than a finite derived-category comparison; generic private Roos arguments avoid unfolding coefficient constructions."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "K-flat resolutions completed tensor product inverse limit of reductions define functors on derived categories",
-   "results": "CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.Tor_obj; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'_obj_map; CategoryTheory.Tor_map; CategoryTheory.Functor.mapDerivedCategoryFactors",
-   "date": "2026-10-14",
-   "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem"
-  },
-  {
-   "tool": "grep",
-   "query": "KFlat|kflat|homotopyLimit|derivedLimit|Rlim|Roos",
-   "results": "Mathlib/CategoryTheory/ObjectProperty/Local.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem"
-  },
-  {
-   "tool": "leansearch",
-   "query": "completed derived tensor and pullback as homotopy inverse limits of finite coefficient reductions",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "CochainComplex.mappingCocone, CategoryTheory.Localization",
-   "results": "loogle: unknown identifier 'CategoryTheory.Localization'",
-   "date": "2026-10-14",
-   "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem; malformed first Loogle query replaced by second query"
-  },
-  {
-   "tool": "grep",
-   "query": "mappingCocone|IsKFlat|K-flat",
-   "results": "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean (subdirectory Algebra/Homology)",
-   "date": "2026-10-14",
-   "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Homotopy inverse limit of complexes of sheaves preserves levelwise quasi isomorphisms and descends through K flat localization",
-   "results": "CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; HomologicalComplexUpToQuasiIso.quotientCompQhIso; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app; HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso; CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso; HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso",
-   "date": "2026-10-14",
-   "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem"
-  },
-  {
-   "tool": "loogle",
-   "query": "CochainComplex.mappingCocone",
-   "results": "CochainComplex.mappingCocone.inl; CochainComplex.mappingCocone.inr; CochainComplex.mappingCocone.snd; CochainComplex.mappingCocone; CochainComplex.mappingCocone.descCochain; CochainComplex.mappingCocone.liftCochain; CochainComplex.mappingCocone.triangle_obj₁; CochainComplex.mappingCocone.inl_comp_descCochain",
-   "date": "2026-10-14",
-   "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem"
-  },
-  {
-   "tool": "grep",
-   "query": "adicCompletion|AdicCompletion|homotopyLimit|HomotopyLimit",
-   "results": "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic completion or local cohomology and bounded resolution functors, not completed operations on unbounded sheaf complexes"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived adic completion homotopy limit finite quotients of sheaves functor independent of resolution",
-   "results": "localCohomology.diagram; localCohomology.ofDiagram; localCohomology; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; localCohomology.isoOfFinal; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj; CategoryTheory.injectiveResolutions",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic completion or local cohomology and bounded resolution functors, not completed operations on unbounded sheaf complexes"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "def-pur-integral-derived-operations",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-pur-integral-operations-well-defined",
-  "worker": "stage1",
-  "summary": "Split without new nodes by reusing site-level K-flat change-of-rings and tensor descent, exact finite pullback, exact products and levelwise derived-limit invariance. Wrote strict transition and homotopy calculations and localization descent. Corrected unqualified uniqueness of comparison to uniqueness compatible with the K-flat model data. No Lean written or compiled.",
-  "blueprint": "Realizes the integral coefficients clause of def-weil-derived-pullback-tensor-hom and ambient operations clause (i) of sk-def-sf-operations; finite-reduction tower model from its child def-pur-integral-derived-operations.",
-  "tool_uses": [
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Generic Exactness of the pro-etale inverse image for constant coefficients used for the integral finite-reduction construction; this unit supplies no replacement for this categorical tool."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Generic Derived tensor and K-flat representative descent on a ringed site used for the integral finite-reduction construction; this unit supplies no replacement for this categorical tool."
-   },
-   {
-    "node": "lem-weil-derived-limit-existence",
-    "why": "Generic Existence and computation of derived limits used for the integral finite-reduction construction; this unit supplies no replacement for this categorical tool."
-   },
-   {
-    "node": "def-weil-derived-limit",
-    "why": "Generic Derived limit of an inverse system used for the integral finite-reduction construction; this unit supplies no replacement for this categorical tool."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic Existence of K-flat resolutions on a ringed site used for the integral finite-reduction construction; this unit supplies no replacement for this categorical tool."
-   }
-  ]
- },
- "tool_uses": [
-  "def-weil-derived-limit",
-  "lem-pc-kflat-resolution"
- ],
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NZ-3105b4ee9",
-  "group": "NZ",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-3105b4ee9 (reviewer sub-agent of L); spot-checked: Read the item, all eight steps, cited statements, source passages, and unit/chapter route in full. Verified strict transitions, homotopy signs, localization descent, edge cases, and exact master target coefficients and arrow orientation. Repaired one B3 fault by citing the existing flat sheaf-module definition. review.md and corrected whole JSON are written; no new nodes or target changes.; 1 file(s) fixed by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-06c02526a",
-  "group": "Q05",
-  "result": "pass",
-  "note": "Statement, dependencies, constructions, docstrings, edge cases, universes, source alignment, report sections, and server compiler evidence checked; no fixes required."
- },
- "lean": {
-  "module": "Sheaf.Paper.IntegralOperationsWellDefined",
-  "declaration": "WeilConjectures.integralOperationsWellDefined",
-  "declarations": [
-   "WeilConjectures.integralOperationsAbSheafify",
-   "WeilConjectures.integralOperationsAbLocallyBijective",
-   "WeilConjectures.integralOperationsFiniteModules",
-   "WeilConjectures.integralOperationsSiteSmall",
-   "WeilConjectures.integralOperationsCommHasDerivedCategory",
-   "WeilConjectures.integralOperationsFinitePresheafMonoidal",
-   "WeilConjectures.integralOperationsFiniteMonoidal",
-   "WeilConjectures.integralOperationsFiniteTensorZero",
-   "WeilConjectures.integralOperationsFiniteTensorObjZero",
-   "WeilConjectures.integralOperationsRestrict",
-   "WeilConjectures.integralOperationsLevelPullback",
-   "WeilConjectures.integralOperationsLevelPullback_additive",
-   "WeilConjectures.integralOperationsPullbackLevel",
-   "WeilConjectures.integralOperationsPullbackGenerator",
-   "WeilConjectures.integralOperationsPullbackTransition_existsUnique",
-   "WeilConjectures.integralOperationsPullbackTransition",
-   "WeilConjectures.integralOperationsTensorLevel",
-   "WeilConjectures.integralOperationsTensorSection",
-   "WeilConjectures.integralOperationsTotalTensorSection",
-   "WeilConjectures.integralOperationsTensorTransition_existsUnique",
-   "WeilConjectures.integralOperationsTensorTransition",
-   "WeilConjectures.integralOperationsTowerStep",
-   "WeilConjectures.integralOperationsRoos",
-   "WeilConjectures.integralOperationsRoos_square",
-   "WeilConjectures.integralOperationsRoosMap",
-   "WeilConjectures.integralOperationsRoosMap_id",
-   "WeilConjectures.integralOperationsRoosMap_comp",
-   "WeilConjectures.integralOperationsRoosFunctor",
-   "WeilConjectures.integralOperationsCountableProducts",
-   "WeilConjectures.integralOperationsDerivedCountableProducts",
-   "WeilConjectures.integralOperationsPullbackTowerFunctor",
-   "WeilConjectures.integralOperationsTensorTowerFunctor",
-   "WeilConjectures.integralOperationsPullbackComplexFunctor",
-   "WeilConjectures.integralOperationsTensorComplexFunctor",
-   "WeilConjectures.integralOperationsGoodComplex",
-   "WeilConjectures.integralOperationsGoodLocalization",
-   "WeilConjectures.integralOperationsPullbackOnGood",
-   "WeilConjectures.integralOperationsTensorOnGood",
-   "WeilConjectures.integralOperationsDerivedLimitProperty",
-   "WeilConjectures.integralOperationsWellDefined"
+    "def-weil-integral-derived-reduction",
+    "lem-weil-integral-reduction-tower-well-defined"
   ],
-  "file": "lean/Sheaf/Paper/IntegralOperationsWellDefined.lean",
-  "statement": "theorem integralOperationsWellDefined {X Y : AlgebraicGeometry.Scheme.{t}} (f : X ⟶ Y) (W : AlgebraicGeometry.Scheme.{t}) : (∀ (P P' : (integralOperationsGoodComplex l E Y).FullSubcategory) (α : P.obj ⟶ P'.obj), QuasiIso α → QuasiIso ((integralOperationsPullbackComplexFunctor l E f).map α)) ∧ (∀ (P P' Q Q' : (integralOperationsGoodComplex l E W).FullSubcategory) (α : P.obj ⟶ P'.obj) (β : Q.obj ⟶ Q'.obj), QuasiIso α → QuasiIso β → QuasiIso ((integralOperationsTensorComplexFunctor l E W).map (X := (P.obj, Q.obj)) (Y := (P'.obj, Q'.obj)) (α, β))) ∧ ∃ (F : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l E X)) (e : integralOperationsGoodLocalization l E Y ⋙ F ≅ integralOperationsPullbackOnGood l E f) (G : (DerivedCategory (integralTowerModules l E W)) × (DerivedCategory (integralTowerModules l E W)) ⥤ DerivedCategory (integralTowerModules l E W)) (d : ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ⋙ G ≅ integralOperationsTensorOnGood l E W), (∀ (F' : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l E X)) (e' : integralOperationsGoodLocalization l E Y ⋙ F' ≅ integralOperationsPullbackOnGood l E f), ∃! ι : F ≅ F', isoWhiskerLeft (integralOperationsGoodLocalization l E Y) ι ≪≫ e' = e) ∧ (∀ (G' : (DerivedCategory (integralTowerModules l E W)) × (DerivedCategory (integralTowerModules l E W)) ⥤ DerivedCategory (integralTowerModules l E W)) (d' : ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ⋙ G' ≅ integralOperationsTensorOnGood l E W), ∃! ι : G ≅ G', isoWhiskerLeft ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ι ≪≫ d' = d) ∧ (∀ (K : DerivedCategory (integralTowerModules l E Y)) (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (_e : DerivedCategory.Q.obj P.obj ≅ K), integralOperationsDerivedLimitProperty l E X ((integralOperationsPullbackTowerFunctor l E f).obj P.obj) (F.obj K)) ∧ (∀ (M N : DerivedCategory (integralTowerModules l E W)) (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (_e : DerivedCategory.Q.obj P.obj ≅ M) (_d : DerivedCategory.Q.obj Q.obj ≅ N), integralOperationsDerivedLimitProperty l E W ((integralOperationsTensorTowerFunctor l E W).obj (P.obj, Q.obj)) (G.obj (M, N)))",
-  "branch": "newtargets-dag",
-  "by": "Q05",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "§1(B): the published live KFlatIndependentCoefficients module already provides the exact independent-coefficient predicates and tensor infrastructure. Replace the specialized legacy IsKFlat, monoidal-localization and tensor-zero interface calls by those canonical independent-coefficient calls. Preserve every strict reduction, pullback and tensor generator, transition formula, Roos construction, quasi-isomorphism invariance clause, normalized descent and unique-compatible-isomorphism clause. No mathematical hypothesis or conclusion changes; this repair avoids colliding with the current published K-flat declarations."
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R9",
-  "result": "pass",
-  "landing": "20261020T211821-L-3505934",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof": [
+    {
+      "text": "For each n apply [lem-pur-change-of-rings-kflat-quasi-iso] to the additive extension-of-scalars functor along the coefficient projection pi_n on the same site: the termwise change-of-rings maps u_n:P_n→P′_n and v_n:Q_n→Q′_n are quasi-isomorphisms. By [lem-pur-kflat-change-of-rings], all four reduced complexes are K-flat over the finite coefficient sheaf with flat terms. The ring morphism need not be flat; these two results require K-flatness of the input, which is a hypothesis here.",
+      "uses": [
+        "lem-pur-change-of-rings-kflat-quasi-iso",
+        "lem-pur-kflat-change-of-rings"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and 0G7E (lemma-pullback-K-flat), identity-topos specializations"
+      }
+    },
+    {
+      "text": "Apply [prop-weil-pbc-proetale-constant-exact] with the finite commutative ring A_{E,n}. Its module inverse image is naturally the tensor-formula f^* used here and is exact, so H^i(f^*u_n)=f^*H^i(u_n) is invertible: f^*u_n is a quasi-isomorphism. No properness or flatness of the scheme morphism is used.",
+      "uses": [
+        "prop-weil-pbc-proetale-constant-exact"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-proetale-constant-exact.md",
+        "place": "Exactness statement of prop-weil-pbc-proetale-constant-exact; external source Stacks Tag 00WJ"
+      }
+    },
+    {
+      "text": "Use [lem-weil-pbc-site-derived-tensor-descent] on W_proet with ring sheaf (A_{E,n})_W. Its natural identifications Q Tot(P_n⊗Q_n)≅QP_n⊗^L QQ_n identify the image of Tot(u_n⊗v_n) with the derived tensor of the two isomorphisms Qu_n,Qv_n. A bifunctor takes isomorphisms in both variables to isomorphisms (apply it to their inverses). Thus this image is invertible; applying each cohomology functor of [def-weil-abstract-derived-category] proves Tot(u_n⊗v_n) is a quasi-isomorphism. This uses the site version of tensor descent, not the ordinary-ring-only lem-pc-kflat-tensor-quasi-iso.",
+      "uses": [
+        "lem-weil-pbc-site-derived-tensor-descent",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side), followed by K-flat construction of derived tensor"
+      }
+    },
+    {
+      "text": "Restriction of scalars [def-pc-sheaf-restrict-scalars] changes only the action on the same underlying abelian sheaf. Kernels, images and cokernels keep their underlying sheaves and inherit that restricted action; consequently restriction commutes with cohomology and preserves the quasi-isomorphisms just proved. The maps form strict maps of towers: on a tensor generator x⊗a, either reducing first and applying u, or applying u and then reducing, gives u(x)⊗ā. For total tensors the same calculation on x⊗a⊗y⊗b gives u(x)⊗ā⊗v(y)⊗b̄; the direct-sum differential has the same signs on either route. For pullback, write r_n:P_{n+1}→P_n and ρ_n:(A_{E,n+1})_X→(A_{E,n})_X. The transition in the tensor-formula model is f^{-1}(x)⊗a ↦ f^{-1}(r_n)(f^{-1}(x))⊗ρ_n(a). This is balanced: the structure maps c_{n+1},c_n of [def-weil-proetale-inverse-image] commute with coefficient reduction, since their adjoints send each constant coefficient to the corresponding constant section, and reduction commutes with that prescription before sheafification. Under the canonical identifications of [prop-weil-pbc-proetale-constant-exact] this is the underlying abelian-sheaf map f^{-1}(r_n). Naturality of f^{-1} gives f^{-1}(r′_n)f^{-1}(u_{n+1})=f^{-1}(u_n)f^{-1}(r_n); hence the pullback maps too commute strictly with transitions, including the restricted completed coefficient actions. The formulas are verified on presheaf tensor generators and descend by sheafification.",
+      "uses": [
+        "def-pc-sheaf-restrict-scalars",
+        "def-pc-tensor-complex-sheaves",
+        "def-weil-proetale-inverse-image",
+        "prop-weil-pbc-proetale-constant-exact"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Termwise coefficient-change construction preceding Tag 06YT; elementary compatibility with quotient ring maps"
+      }
+    },
+    {
+      "text": "For either strict tower map a_•:C_•→C′_• obtained above let A=∏C_n and A′=∏C′_n. Countable products are exact on the completed module-sheaf category by [lem-weil-proetale-countable-products-exact]; [lem-weil-derived-limit-existence] (2) therefore identifies A,A′ with products in the derived category. The shifted cone of 1−s has its cone triangle by [def-weil-abstract-derived-category]; rotated, this is exactly the triangle of [def-weil-derived-limit], so each displayed construction is a derived limit. Strict compatibility gives (∏a_n)s=s′(∏a_n); applying ∏a_n to both summands defines the cone map and a morphism of these triangles. Its level components are isomorphisms by steps 2–4. Hence [lem-weil-derived-limit-levelwise-iso] makes the cone map an isomorphism in the derived category. Its cohomology maps are isomorphisms, proving clause (1).",
+      "uses": [
+        "lem-weil-proetale-countable-products-exact",
+        "lem-weil-derived-limit-existence",
+        "def-weil-abstract-derived-category",
+        "def-weil-derived-limit",
+        "lem-weil-derived-limit-levelwise-iso"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tags 08TC (definition-derived-limit), 07KC (lemma-products) and 014A (lemma-third-isomorphism-triangle)"
+      }
+    },
+    {
+      "text": "The constructions are functors on complexes: tower maps go to the diagonal product maps on the shifted-cone summands, which preserve identities and compositions. They also respect homotopies. Additive coefficient change and inverse image send dh+hd to dF(h)+F(h)d. Explicitly, if u−u′=dh+hd and v−v′=dk+kd, the total-tensor homotopy from u⊗v to u′⊗v′ on the summand of first degree p is h⊗v+(−1)^p u′⊗k. In dH+Hd the mixed terms cancel by the differential of [def-pc-tensor-complex-sheaves], leaving (u−u′)⊗v+u′⊗(v−v′)=u⊗v−u′⊗v′. With one variable fixed at its identity this also proves the separate-variable assertions. These homotopies commute with the tower transitions. Put h=∏h_n. In the shifted-cone convention d(b,a)=(−db−(1−s)a,da), the degree −1 map H(b,a)=(−hb,ha) satisfies dH+Hd=(∏a_n−∏a′_n) on both summands, since h commutes with 1−s. Thus homotopic input maps give homotopic output maps; the constructions define a functor and a bifunctor on the full K-flat-with-flat-terms homotopy subcategories.",
+      "uses": [
+        "def-pc-tensor-complex-sheaves",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Elementary cochain calculation for the K-flat tensor construction and Tag 08TC shifted-cone model"
+      }
+    },
+    {
+      "text": "By [lem-weil-pbc-site-derived-tensor-descent], localization of the full K-flat-with-flat-terms homotopy subcategory at its quasi-isomorphisms is equivalent to the whole derived category. Step 5 shows the functor in step 6 inverts those maps. Apply [lem-weil-pbc-localization-universal-property] to descend T_f along this localization, then transport along the equivalence. For T descend first in one variable and then in the other. Naturality extends uniquely at each stage by clause (2) of that universal property; the resulting transformations preserve identities and compositions. This constructs a bifunctor on the product of the two derived categories and natural comparison isomorphisms on K-flat pairs. Inverting quasi-isomorphisms separately suffices: the map (u,v) factors as (u,1) followed by (1,v).",
+      "uses": [
+        "lem-weil-pbc-site-derived-tensor-descent",
+        "lem-weil-pbc-localization-universal-property"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "K-flat localization construction following Tag 06YT; universal property of localization, Stacks Tag 04VG (lemma-properties-left-localization)"
+      }
+    },
+    {
+      "text": "For a chosen resolution q_K:P_K→K from [lem-pc-kflat-resolution], Qq_K is an isomorphism. Compose its image under the descended functor with the comparison on P_K from step 7; this identifies the value at K with T_f(P_K), and likewise in both variables for T(P_M,P_N). Transport the action on morphisms along these identifications: a:K→L acts as i_L F(a)i_K^{-1}, where i_K:F(K)≅T_f(P_K) (and the same formula in each tensor variable). This makes arbitrary objectwise resolution choices into functors without requiring chosen lifts of all morphisms. For a second choice, i′_Ki_K^{-1} gives the natural comparison. [lem-weil-pbc-localization-universal-property] (2) makes it unique when compatible with the comparison data on K-flat representatives. The last assertion about derived limits was already verified in step 5; no canonical functor on bare towers in a triangulated category is asserted.",
+      "uses": [
+        "lem-pc-kflat-resolution",
+        "lem-weil-pbc-localization-universal-property"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YS (lemma-K-flat-resolution), localization construction following Tag 06YT, and Tag 04VG (lemma-properties-left-localization)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "lem-pur-kflat-change-of-rings",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-abstract-derived-category",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "def-weil-derived-limit",
+    "lem-weil-derived-limit-levelwise-iso",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pc-kflat-resolution"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YT, 0G7E combined with derived.tex Tag 08TC and localization universal property; explicit strict-tower and homotopy calculations by worker"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "K-flat resolutions completed tensor product inverse limit of reductions define functors on derived categories",
+      "results": "CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.Tor_obj; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'_obj_map; CategoryTheory.Tor_map; CategoryTheory.Functor.mapDerivedCategoryFactors",
+      "date": "2026-10-14",
+      "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem"
+    },
+    {
+      "tool": "grep",
+      "query": "KFlat|kflat|homotopyLimit|derivedLimit|Rlim|Roos",
+      "results": "Mathlib/CategoryTheory/ObjectProperty/Local.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean",
+      "date": "2026-10-14",
+      "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem"
+    },
+    {
+      "tool": "leansearch",
+      "query": "completed derived tensor and pullback as homotopy inverse limits of finite coefficient reductions",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex.mappingCocone, CategoryTheory.Localization",
+      "results": "loogle: unknown identifier 'CategoryTheory.Localization'",
+      "date": "2026-10-14",
+      "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem; malformed first Loogle query replaced by second query"
+    },
+    {
+      "tool": "grep",
+      "query": "mappingCocone|IsKFlat|K-flat",
+      "results": "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean (subdirectory Algebra/Homology)",
+      "date": "2026-10-14",
+      "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Homotopy inverse limit of complexes of sheaves preserves levelwise quasi isomorphisms and descends through K flat localization",
+      "results": "CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; HomologicalComplexUpToQuasiIso.quotientCompQhIso; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app; HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso; CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso; HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso",
+      "date": "2026-10-14",
+      "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem"
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex.mappingCocone",
+      "results": "CochainComplex.mappingCocone.inl; CochainComplex.mappingCocone.inr; CochainComplex.mappingCocone.snd; CochainComplex.mappingCocone; CochainComplex.mappingCocone.descCochain; CochainComplex.mappingCocone.liftCochain; CochainComplex.mappingCocone.triangle_obj₁; CochainComplex.mappingCocone.inl_comp_descCochain",
+      "date": "2026-10-14",
+      "verdict": "no match: general localization or cone ingredients only; no completed finite-reduction tower operations theorem"
+    },
+    {
+      "tool": "grep",
+      "query": "adicCompletion|AdicCompletion|homotopyLimit|HomotopyLimit",
+      "results": "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic completion or local cohomology and bounded resolution functors, not completed operations on unbounded sheaf complexes"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived adic completion homotopy limit finite quotients of sheaves functor independent of resolution",
+      "results": "localCohomology.diagram; localCohomology.ofDiagram; localCohomology; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; localCohomology.isoOfFinal; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj; CategoryTheory.injectiveResolutions",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic completion or local cohomology and bounded resolution functors, not completed operations on unbounded sheaf complexes"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "def-pur-integral-derived-operations",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-sf-operations",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-pur-integral-operations-well-defined",
+    "worker": "stage1",
+    "summary": "Split without new nodes by reusing site-level K-flat change-of-rings and tensor descent, exact finite pullback, exact products and levelwise derived-limit invariance. Wrote strict transition and homotopy calculations and localization descent. Corrected unqualified uniqueness of comparison to uniqueness compatible with the K-flat model data. No Lean written or compiled.",
+    "blueprint": "Realizes the integral coefficients clause of def-weil-derived-pullback-tensor-hom and ambient operations clause (i) of sk-def-sf-operations; finite-reduction tower model from its child def-pur-integral-derived-operations.",
+    "tool_uses": [
+      {
+        "node": "prop-weil-pbc-proetale-constant-exact",
+        "why": "Generic Exactness of the pro-etale inverse image for constant coefficients used for the integral finite-reduction construction; this unit supplies no replacement for this categorical tool."
+      },
+      {
+        "node": "lem-weil-pbc-site-derived-tensor-descent",
+        "why": "Generic Derived tensor and K-flat representative descent on a ringed site used for the integral finite-reduction construction; this unit supplies no replacement for this categorical tool."
+      },
+      {
+        "node": "lem-weil-derived-limit-existence",
+        "why": "Generic Existence and computation of derived limits used for the integral finite-reduction construction; this unit supplies no replacement for this categorical tool."
+      },
+      {
+        "node": "def-weil-derived-limit",
+        "why": "Generic Derived limit of an inverse system used for the integral finite-reduction construction; this unit supplies no replacement for this categorical tool."
+      },
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "Generic Existence of K-flat resolutions on a ringed site used for the integral finite-reduction construction; this unit supplies no replacement for this categorical tool."
+      }
+    ]
+  },
+  "tool_uses": [
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-derived-limit-existence",
+    "def-weil-derived-limit",
+    "lem-pc-kflat-resolution"
+  ],
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NZ-3105b4ee9",
+    "group": "NZ",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-3105b4ee9 (reviewer sub-agent of L); spot-checked: Read the item, all eight steps, cited statements, source passages, and unit/chapter route in full. Verified strict transitions, homotopy signs, localization descent, edge cases, and exact master target coefficients and arrow orientation. Repaired one B3 fault by citing the existing flat sheaf-module definition. review.md and corrected whole JSON are written; no new nodes or target changes.; 1 file(s) fixed by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-06c02526a",
+    "group": "Q05",
+    "result": "pass",
+    "note": "Statement, dependencies, constructions, docstrings, edge cases, universes, source alignment, report sections, and server compiler evidence checked; no fixes required."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.IntegralOperationsWellDefined",
+    "declaration": "WeilConjectures.integralOperationsWellDefined",
+    "declarations": [
+      "WeilConjectures.integralOperationsAbSheafify",
+      "WeilConjectures.integralOperationsAbLocallyBijective",
+      "WeilConjectures.integralOperationsFiniteModules",
+      "WeilConjectures.integralOperationsSiteSmall",
+      "WeilConjectures.integralOperationsCommHasDerivedCategory",
+      "WeilConjectures.integralOperationsFinitePresheafMonoidal",
+      "WeilConjectures.integralOperationsFiniteMonoidal",
+      "WeilConjectures.integralOperationsFiniteTensorZero",
+      "WeilConjectures.integralOperationsFiniteTensorObjZero",
+      "WeilConjectures.integralOperationsRestrict",
+      "WeilConjectures.integralOperationsLevelPullback",
+      "WeilConjectures.integralOperationsLevelPullback_additive",
+      "WeilConjectures.integralOperationsPullbackLevel",
+      "WeilConjectures.integralOperationsPullbackGenerator",
+      "WeilConjectures.integralOperationsPullbackTransition_existsUnique",
+      "WeilConjectures.integralOperationsPullbackTransition",
+      "WeilConjectures.integralOperationsTensorLevel",
+      "WeilConjectures.integralOperationsTensorSection",
+      "WeilConjectures.integralOperationsTotalTensorSection",
+      "WeilConjectures.integralOperationsTensorTransition_existsUnique",
+      "WeilConjectures.integralOperationsTensorTransition",
+      "WeilConjectures.integralOperationsTowerStep",
+      "WeilConjectures.integralOperationsRoos",
+      "WeilConjectures.integralOperationsRoos_square",
+      "WeilConjectures.integralOperationsRoosMap",
+      "WeilConjectures.integralOperationsRoosMap_id",
+      "WeilConjectures.integralOperationsRoosMap_comp",
+      "WeilConjectures.integralOperationsRoosFunctor",
+      "WeilConjectures.integralOperationsCountableProducts",
+      "WeilConjectures.integralOperationsDerivedCountableProducts",
+      "WeilConjectures.integralOperationsPullbackTowerFunctor",
+      "WeilConjectures.integralOperationsTensorTowerFunctor",
+      "WeilConjectures.integralOperationsPullbackComplexFunctor",
+      "WeilConjectures.integralOperationsTensorComplexFunctor",
+      "WeilConjectures.integralOperationsGoodComplex",
+      "WeilConjectures.integralOperationsGoodLocalization",
+      "WeilConjectures.integralOperationsPullbackOnGood",
+      "WeilConjectures.integralOperationsTensorOnGood",
+      "WeilConjectures.integralOperationsDerivedLimitProperty",
+      "WeilConjectures.integralOperationsWellDefined"
+    ],
+    "file": "lean/Sheaf/Paper/IntegralOperationsWellDefined.lean",
+    "statement": "theorem integralOperationsWellDefined {X Y : AlgebraicGeometry.Scheme.{t}} (f : X ⟶ Y) (W : AlgebraicGeometry.Scheme.{t}) : (∀ (P P' : (integralOperationsGoodComplex l E Y).FullSubcategory) (α : P.obj ⟶ P'.obj), QuasiIso α → QuasiIso ((integralOperationsPullbackComplexFunctor l E f).map α)) ∧ (∀ (P P' Q Q' : (integralOperationsGoodComplex l E W).FullSubcategory) (α : P.obj ⟶ P'.obj) (β : Q.obj ⟶ Q'.obj), QuasiIso α → QuasiIso β → QuasiIso ((integralOperationsTensorComplexFunctor l E W).map (X := (P.obj, Q.obj)) (Y := (P'.obj, Q'.obj)) (α, β))) ∧ ∃ (F : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l E X)) (e : integralOperationsGoodLocalization l E Y ⋙ F ≅ integralOperationsPullbackOnGood l E f) (G : (DerivedCategory (integralTowerModules l E W)) × (DerivedCategory (integralTowerModules l E W)) ⥤ DerivedCategory (integralTowerModules l E W)) (d : ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ⋙ G ≅ integralOperationsTensorOnGood l E W), (∀ (F' : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l E X)) (e' : integralOperationsGoodLocalization l E Y ⋙ F' ≅ integralOperationsPullbackOnGood l E f), ∃! ι : F ≅ F', isoWhiskerLeft (integralOperationsGoodLocalization l E Y) ι ≪≫ e' = e) ∧ (∀ (G' : (DerivedCategory (integralTowerModules l E W)) × (DerivedCategory (integralTowerModules l E W)) ⥤ DerivedCategory (integralTowerModules l E W)) (d' : ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ⋙ G' ≅ integralOperationsTensorOnGood l E W), ∃! ι : G ≅ G', isoWhiskerLeft ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ι ≪≫ d' = d) ∧ (∀ (K : DerivedCategory (integralTowerModules l E Y)) (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (_e : DerivedCategory.Q.obj P.obj ≅ K), integralOperationsDerivedLimitProperty l E X ((integralOperationsPullbackTowerFunctor l E f).obj P.obj) (F.obj K)) ∧ (∀ (M N : DerivedCategory (integralTowerModules l E W)) (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (_e : DerivedCategory.Q.obj P.obj ≅ M) (_d : DerivedCategory.Q.obj Q.obj ≅ N), integralOperationsDerivedLimitProperty l E W ((integralOperationsTensorTowerFunctor l E W).obj (P.obj, Q.obj)) (G.obj (M, N)))",
+    "branch": "newtargets-dag",
+    "by": "Q05",
+    "date": "2026-10-15",
+    "existing": false,
+    "note": "§1(B): the published live KFlatIndependentCoefficients module already provides the exact independent-coefficient predicates and tensor infrastructure. Replace the specialized legacy IsKFlat, monoidal-localization and tensor-zero interface calls by those canonical independent-coefficient calls. Preserve every strict reduction, pullback and tensor generator, transition formula, Roos construction, quasi-isomorphism invariance clause, normalized descent and unique-compatible-isomorphism clause. No mathematical hypothesis or conclusion changes; this repair avoids colliding with the current published K-flat declarations."
+  },
+  "reviewed_proof": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "AUTO",
+    "group": "P1",
+    "result": "pass",
+    "landing": "20261018T145107-L-3642362",
+    "kind": "proof",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+    "sorry_before": [
+      "WeilConjectures.integralOperationsDerivedCountableProducts",
+      "WeilConjectures.integralOperationsLevelPullback_additive",
+      "WeilConjectures.integralOperationsPullbackTransition_existsUnique",
+      "WeilConjectures.integralOperationsRoosMap_comp",
+      "WeilConjectures.integralOperationsRoosMap_id",
+      "WeilConjectures.integralOperationsRoos_square",
+      "WeilConjectures.integralOperationsTensorTransition_existsUnique",
+      "WeilConjectures.integralOperationsWellDefined"
+    ],
+    "sorry_after": [
+      "WeilConjectures.integralOperationsPullbackTransition_existsUnique",
+      "WeilConjectures.integralOperationsTensorTransition_existsUnique",
+      "WeilConjectures.integralOperationsWellDefined"
+    ]
+  }
 }

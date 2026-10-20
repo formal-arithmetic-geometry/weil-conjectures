@@ -26,8 +26,8 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import all Sheaf.Paper.IntegralReductionTowerUnrestricted
 
 /-! # Well-defined completed integral scalar extension
 
@@ -53,58 +53,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 open scoped ChangeOfRings
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
-
-namespace SheafOfModules.IntegralScalarProof
-
-universe a b r
-
--- A linear map over the finite target remains linear over the completed target
--- when the two projection maps form a commuting triangle.
-private noncomputable def restrictTriangle
-    {C : Type a} [Category.{b} C] {J : GrothendieckTopology C}
-    {R S T : Sheaf J RingCat.{r}} (p : R ⟶ S) (q : S ⟶ T) (p' : R ⟶ T)
-    (h : p ≫ q = p') (M : SheafOfModules.{r} S) (N : SheafOfModules.{r} T)
-    (k : M ⟶ (restrictScalars q).obj N) :
-    (restrictScalars p).obj M ⟶ (restrictScalars p').obj N where
-  val :=
-    { app := fun U ↦ ModuleCat.ofHom
-        (X := ((restrictScalars p).obj M).val.obj U)
-        (Y := ((restrictScalars p').obj N).val.obj U)
-        { toFun := k.val.app U
-          map_add' := _root_.map_add _
-          map_smul' := fun r x ↦ by
-            change M.val.obj U at x
-            change k.val.app U (p.hom.app U r • x) =
-              p'.hom.app U r • (show N.val.obj U from k.val.app U x)
-            rw [_root_.map_smul]
-            have he := congrArg (fun f ↦ (f.hom.app U).hom r) h
-            exact congrArg (fun a ↦ a • (show N.val.obj U from k.val.app U x)) he }
-      naturality := by
-        intro U V f
-        ext x
-        exact PresheafOfModules.naturality_apply k.val f x }
-
-universe a' b' r'
-
-variable {C : Type a'} [Category.{b'} C] {J : GrothendieckTopology C}
-  [J.HasSheafCompose (forget₂ CommRingCat.{r'} RingCat.{r'})]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{r'}] [HasWeakSheafify J AddCommGrpCat.{r'}]
-
--- Tensor balancing uses the source coefficient sheaf A; the restricted action
--- uses the independent target coefficient sheaf B.
-private noncomputable def scalarStep {A B S T : Sheaf J CommRingCat.{r'}}
-    (f : A ⟶ S) (g : A ⟶ T) (p : B ⟶ S) (q : S ⟶ T) (p' : B ⟶ T)
-    (hf : f ≫ q = g) (hp : p ≫ q = p')
-    (M : SheafOfModules.{r'} ((sheafCompose J (forget₂ CommRingCat.{r'} RingCat.{r'})).obj A)) :=
-  restrictTriangle.{a', b', r'}
-    ((sheafCompose J (forget₂ CommRingCat.{r'} RingCat.{r'})).map p)
-    ((sheafCompose J (forget₂ CommRingCat.{r'} RingCat.{r'})).map q)
-    ((sheafCompose J (forget₂ CommRingCat.{r'} RingCat.{r'})).map p')
-    (by rw [← Functor.map_comp, hp])
-    (SheafOfModules.changeOfRings.{b', a', r'} f M) (SheafOfModules.changeOfRings.{b', a', r'} g M)
-    (SheafOfModules.UnrestrictedTowerProof.sheafMap f g q hf M)
-
-end SheafOfModules.IntegralScalarProof
 
 namespace WeilConjectures
 
@@ -315,171 +263,6 @@ noncomputable def integralScalarTensorSection (n : ℕ)
           (s ⊗ₜ[(completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U,
             ((integralScalarRho l E L ι Y n).hom.app U).hom] x))
 
-section ScalarTransitions
-
-private theorem integralScalarQuotientSheafMap_transition (n : ℕ) :
-    integralScalarQuotientSheafMap l E L ι Y (n + 1) ≫
-        unrestrictedCoefficientStep l L Y n =
-      unrestrictedCoefficientStep l E Y n ≫ integralScalarQuotientSheafMap l E L ι Y n := by
-  unfold integralScalarQuotientSheafMap unrestrictedCoefficientStep
-  rw [← Functor.map_comp, ← Functor.map_comp]
-  congr 1
-  apply CommRingCat.hom_ext
-  apply RingHom.ext
-  intro x
-  cases x with
-  | up x =>
-    induction x using Quotient.inductionOn' with
-    | h x => rfl
-
-private theorem integralScalarRho_transition (n : ℕ) :
-    integralScalarRho l E L ι Y (n + 1) ≫ unrestrictedCoefficientStep l L Y n =
-      integralScalarRho l E L ι Y n := by
-  unfold integralScalarRho
-  rw [Category.assoc, integralScalarQuotientSheafMap_transition,
-    ← Category.assoc, unrestrictedCoefficientStep_comp]
-
-attribute [local irreducible] integralScalarReductionWitness
-
-private theorem integralScalarReduction_obj (n : ℕ) (M : integralTowerModules l E Y) :
-    (integralScalarReduction l E L ι Y n).obj M =
-      SheafOfModules.changeOfRings.{t, t + 1, max u (t + 1)} (integralScalarRho l E L ι Y n) M :=
-  (integralScalarReductionWitness l E L ι Y n).choose_spec.choose M
-
-private theorem integralScalarReduction_map (n : ℕ)
-    {M N : integralTowerModules l E Y} (a : M ⟶ N) :
-    (integralScalarReduction l E L ι Y n).map a =
-      eqToHom (integralScalarReduction_obj l E L ι Y n M) ≫
-        SheafOfModules.changeOfRingsHom (integralScalarRho l E L ι Y n) M a ≫
-          eqToHom (integralScalarReduction_obj l E L ι Y n N).symm :=
-  (integralScalarReductionWitness l E L ι Y n).choose_spec.choose_spec.choose a
-
-private noncomputable abbrev integralScalarRestrict (n : ℕ) :=
-  SheafOfModules.restrictScalars.{max u (t + 1)}
-    ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
-      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
-        (completedIntegralCommRingProjectionUnrestricted l L Y n))
-
-attribute [local irreducible] SheafOfModules.UnrestrictedTowerProof.sectionMap
-  SheafOfModules.UnrestrictedTowerProof.presheafMap SheafOfModules.UnrestrictedTowerProof.sheafMap
-
-private noncomputable def integralScalarModuleStepRaw (n : ℕ)
-    (M : integralTowerModules l E Y) :=
-  SheafOfModules.IntegralScalarProof.scalarStep.{t + 1, t, max u (t + 1)}
-    (A := completedIntegralCommRingSheafUnrestricted l E Y)
-    (B := completedIntegralCommRingSheafUnrestricted l L Y)
-    (S := integralCoefficientCommRingSheaf l L Y (n + 1))
-    (T := integralCoefficientCommRingSheaf l L Y n)
-    (integralScalarRho l E L ι Y (n + 1)) (integralScalarRho l E L ι Y n)
-    (completedIntegralCommRingProjectionUnrestricted l L Y (n + 1))
-    (unrestrictedCoefficientStep l L Y n)
-    (completedIntegralCommRingProjectionUnrestricted l L Y n)
-    (integralScalarRho_transition l E L ι Y n)
-    (unrestrictedCoefficientStep_comp l L Y n) M
-
--- The restriction functors have definitionally equal underlying section types.
-set_option backward.isDefEq.respectTransparency.types false
-
-private noncomputable def integralScalarModuleStep (n : ℕ)
-    (M : integralTowerModules l E Y) :
-    (integralScalarRestrict l L Y (n + 1)).obj
-        ((integralScalarReduction l E L ι Y (n + 1)).obj M) ⟶
-      (integralScalarRestrict l L Y n).obj
-        ((integralScalarReduction l E L ι Y n).obj M) :=
-  (integralScalarRestrict l L Y (n + 1)).map
-      (eqToHom (integralScalarReduction_obj l E L ι Y (n + 1) M)) ≫
-    integralScalarModuleStepRaw l E L ι Y n M ≫
-      (integralScalarRestrict l L Y n).map
-        (eqToHom (integralScalarReduction_obj l E L ι Y n M).symm)
-
-private theorem integralScalarModuleStep_tmul (n : ℕ) (M : integralTowerModules l E Y)
-    (U : Y.ProEtᵒᵖ) (s : (integralCoefficientCommRingSheaf l L Y (n + 1)).obj.obj U)
-    (x : M.val.obj U) :
-    (integralScalarModuleStep l E L ι Y n M).val.app U
-      (integralScalarTensorSection l E L ι Y (n + 1) M U s x) =
-    integralScalarTensorSection l E L ι Y n M U
-      ((integralCoefficientSheafTransition l L Y n).hom.app U s) x := by
-  have hc : ∀ z :
-      (SheafOfModules.changeOfRings.{t, t + 1, max u (t + 1)}
-        (integralScalarRho l E L ι Y (n + 1)) M).val.obj U,
-      (eqToHom (integralScalarReduction_obj l E L ι Y (n + 1) M)).val.app U
-        ((eqToHom (integralScalarReduction_obj l E L ι Y (n + 1) M).symm).val.app U z) = z := by
-    intro z
-    exact ConcreteCategory.congr_hom
-      (congrArg (fun k ↦ k.val.app U) (eqToHom_trans
-        (integralScalarReduction_obj l E L ι Y (n + 1) M).symm
-        (integralScalarReduction_obj l E L ι Y (n + 1) M))) z
-  change (eqToHom (integralScalarReduction_obj l E L ι Y n M).symm).val.app U
-    ((integralScalarModuleStepRaw l E L ι Y n M).val.app U
-      ((eqToHom (integralScalarReduction_obj l E L ι Y (n + 1) M)).val.app U
-        ((eqToHom (integralScalarReduction_obj l E L ι Y (n + 1) M).symm).val.app U _))) = _
-  rw [hc]
-  exact congrArg ((eqToHom (integralScalarReduction_obj l E L ι Y n M).symm).val.app U)
-    (SheafOfModules.UnrestrictedTowerProof.sheafMap_tmul
-      (integralScalarRho l E L ι Y (n + 1)) (integralScalarRho l E L ι Y n)
-      (unrestrictedCoefficientStep l L Y n) (integralScalarRho_transition l E L ι Y n) M U s x)
-
-private theorem integralScalarReduction_hom_ext (n : ℕ) (M : integralTowerModules l E Y)
-    (N : integralTowerModules l L Y)
-    (a b : (integralScalarRestrict l L Y n).obj
-      ((integralScalarReduction l E L ι Y n).obj M) ⟶ N)
-    (h : ∀ U s x, a.val.app U (integralScalarTensorSection l E L ι Y n M U s x) =
-      b.val.app U (integralScalarTensorSection l E L ι Y n M U s x)) : a = b := by
-  let e := (integralScalarRestrict l L Y n).map
-    (eqToHom (integralScalarReduction_obj l E L ι Y n M).symm)
-  have he : e ≫ a = e ≫ b := by
-    apply (SheafOfModules.toSheaf _).map_injective
-    apply Sheaf.hom_ext
-    apply CategoryTheory.sheafify_hom_ext _ _ _ N.isSheaf
-    ext U z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
-    | tmul s x => exact h U s x
-    | add z w hz hw => simpa only [_root_.map_add] using congrArg₂ (· + ·) hz hw
-  have hi := congrArg (fun k ↦ (integralScalarRestrict l L Y n).map
-    (eqToHom (integralScalarReduction_obj l E L ι Y n M)) ≫ k) he
-  dsimp only [e] at hi
-  simp only [← Category.assoc, ← Functor.map_comp, eqToHom_trans, eqToHom_refl] at hi
-  simpa only [(integralScalarRestrict l L Y n).map_id, Category.id_comp] using hi
-
-attribute [local irreducible] integralScalarModuleStepRaw integralScalarModuleStep
-
-private theorem integralScalarModuleStep_naturality (n : ℕ)
-    {M N : integralTowerModules l E Y} (a : M ⟶ N) :
-    (integralScalarRestrict l L Y (n + 1)).map
-        ((integralScalarReduction l E L ι Y (n + 1)).map a) ≫
-        integralScalarModuleStep l E L ι Y n N =
-      integralScalarModuleStep l E L ι Y n M ≫
-        (integralScalarRestrict l L Y n).map ((integralScalarReduction l E L ι Y n).map a) := by
-  apply integralScalarReduction_hom_ext l E L ι Y (n + 1) M
-  intro U s x
-  have hm (k : ℕ) (t : (integralCoefficientCommRingSheaf l L Y k).obj.obj U) :
-      ((integralScalarReduction l E L ι Y k).map a).val.app U
-        (integralScalarTensorSection l E L ι Y k M U t x) =
-      integralScalarTensorSection l E L ι Y k N U t (a.val.app U x) := by
-    rw [integralScalarReduction_map]
-    change (eqToHom (integralScalarReduction_obj l E L ι Y k N).symm).val.app U
-      ((SheafOfModules.changeOfRingsHom (integralScalarRho l E L ι Y k) M a).val.app U
-        ((eqToHom (integralScalarReduction_obj l E L ι Y k M)).val.app U
-          ((eqToHom (integralScalarReduction_obj l E L ι Y k M).symm).val.app U _))) = _
-    have hc := eqToHom_trans (integralScalarReduction_obj l E L ι Y k M).symm
-      (integralScalarReduction_obj l E L ι Y k M)
-    have hc' (z :
-        (SheafOfModules.changeOfRings.{t, t + 1, max u (t + 1)}
-          (integralScalarRho l E L ι Y k) M).val.obj U) :
-        (eqToHom (integralScalarReduction_obj l E L ι Y k M)).val.app U
-          ((eqToHom (integralScalarReduction_obj l E L ι Y k M).symm).val.app U z) = z :=
-      ConcreteCategory.congr_hom (congrArg (fun f ↦ f.val.app U) hc) z
-    rw [hc']
-    exact congrArg ((eqToHom (integralScalarReduction_obj l E L ι Y k N).symm).val.app U)
-      (SheafOfModules.UnrestrictedTowerProof.map_tensorSection
-        (integralScalarRho l E L ι Y k) M a U t x)
-  change (integralScalarModuleStep l E L ι Y n N).val.app U
-      (((integralScalarReduction l E L ι Y (n + 1)).map a).val.app U _) =
-    ((integralScalarReduction l E L ι Y n).map a).val.app U
-      ((integralScalarModuleStep l E L ι Y n M).val.app U _)
-  rw [hm, integralScalarModuleStep_tmul, integralScalarModuleStep_tmul, hm]
-
 /-- The transition is the unique natural chain map sending s⊗x to red(s)⊗x.
 Source: Bhatt--Scholze, Proposition 6.8.14(1); Stacks Tags 06YT and 08TC
 (blueprint: lem-weil-integral-scalar-extension-well-defined).
@@ -497,26 +280,7 @@ theorem integralScalarTransition_existsUnique (n : ℕ) :
           (integralScalarTensorSection l E L ι Y (n + 1) (P.X i) U s x) =
         integralScalarTensorSection l E L ι Y n (P.X i) U
           ((integralCoefficientSheafTransition l L Y n).hom.app U s) x := by
-  let τ : integralScalarLevel l E L ι Y (n + 1) ⟶ integralScalarLevel l E L ι Y n :=
-    { app := fun P ↦
-        { f := fun i ↦ integralScalarModuleStep l E L ι Y n (P.X i)
-          comm' := fun i j _ ↦ (integralScalarModuleStep_naturality l E L ι Y n
-            (P.d i j)).symm }
-      naturality := fun P Q a ↦ by
-        apply HomologicalComplex.hom_ext
-        intro i
-        exact integralScalarModuleStep_naturality l E L ι Y n (a.f i) }
-  refine ⟨τ, (fun P i U s x ↦ integralScalarModuleStep_tmul l E L ι Y n (P.X i) U s x), ?_⟩
-  intro τ' hτ'
-  apply NatTrans.ext
-  funext P
-  apply HomologicalComplex.hom_ext
-  intro i
-  apply integralScalarReduction_hom_ext l E L ι Y (n + 1) (P.X i)
-  intro U s x
-  exact (hτ' P i U s x).trans (integralScalarModuleStep_tmul l E L ι Y n (P.X i) U s x).symm
-
-end ScalarTransitions
+  sorry
 
 /-- The canonical transition, selected from a theorem that determines it uniquely.
 Source: Bhatt--Scholze, Proposition 6.8.14(1); Stacks Tags 06YT and 08TC

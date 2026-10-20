@@ -18,7 +18,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison
 import Sheaf.AlgebraicGeometry.SmoothBaseChangeLimit
 import Sheaf.AlgebraicGeometry.UnboundedExchangeAgrees

@@ -27,7 +27,7 @@ public import Mathlib.AlgebraicGeometry.Over
 import Sheaf.AlgebraicGeometry.EtaleLfpAndFiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import WeilConjectures.CategoryTheory.TruncationHypercohomology
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
@@ -56,6 +56,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 
 /-! # Scalar projection formula and Tor bound for an open immersion
 

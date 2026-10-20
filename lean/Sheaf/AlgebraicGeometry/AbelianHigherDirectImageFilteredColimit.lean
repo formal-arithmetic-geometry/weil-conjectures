@@ -5,7 +5,7 @@ Authors: SHEAF group F9
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 

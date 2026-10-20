@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 import all WeilConjectures.AlgebraicGeometry.RawRestrictedHomotopySectionsIso
-import all WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import all Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 
 /-! # Acyclicity for the pulled-back free abelian source
 

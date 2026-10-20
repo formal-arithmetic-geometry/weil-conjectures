@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import WeilConjectures.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
 import all WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
-import WeilConjectures.CategoryTheory.FilteredCohomologyImage
+import Sheaf.CategoryTheory.FilteredCohomologyImage
 
 /-! # A stationary quotient comparison characterized on actual cycles
 
@@ -88,7 +88,7 @@ private theorem filtered_class_preimage
       Subobject (K.X n)) : C) ⟶ K.cycles n)
     (hk : k ≫ K.iCycles n =
       (F.complexStep q n ⊓ (Subobject.pullback (K.d n (n + 1))).obj ⊥).arrow) :
-    (Subobject.pullback (k ≫ K.homologyπ n)).obj ((F.homologyFiltration n).step (q + 1)) =
+    (Subobject.pullback (k ≫ K.homologyπ n)).obj ((F.cohomologyImage n).step (q + 1)) =
       (Subobject.pullback
         (F.complexStep q n ⊓ (Subobject.pullback (K.d n (n + 1))).obj ⊥).arrow).obj
         ((F.complexStep q n ⊓ imageSubobject (K.d (n - 1) n)) ⊔
@@ -111,7 +111,7 @@ private theorem filtered_class_preimage
     exact hc.symm.trans (Subobject.mk_eq_mk_of_comm _ _ (Iso.refl _) (by
       simpa only [Iso.refl_hom, Category.id_comp, d] using
         HomologicalComplex.cyclesMap_i (F.step (q + 1)).arrow n))
-  have hnext : (F.homologyFiltration n).step (q + 1) =
+  have hnext : (F.cohomologyImage n).step (q + 1) =
       (Subobject.«exists» (K.homologyπ n)).obj T := by
     rw [hT, Subobject.exists_obj_eq_imageSubobject,
       ← Subobject.underlyingIso_hom_comp_eq_mk d, Category.assoc,
@@ -142,7 +142,7 @@ private theorem filtered_class_preimage
     have hZ : Z = Subobject.mk (K.iCycles n) := cycles_subobject K n
     rw [← hZ, inf_eq_right.mpr (inf_le_right : A' ⊓ Z ≤ Z)]
   have hpb : (Subobject.pullback (K.homologyπ n)).obj
-      ((F.homologyFiltration n).step (q + 1)) =
+      ((F.cohomologyImage n).step (q + 1)) =
       (Subobject.pullback (K.iCycles n)).obj (B ⊔ (A' ⊓ Z)) := by
     rw [hnext, hπ, ← hm, Subobject.pullback_map_self]
   rw [Subobject.pullback_comp, hpb, ← Subobject.pullback_comp, hk]
@@ -335,7 +335,7 @@ private theorem stationary_projection_kernel
     rw [HomologicalComplex.cyclesMap_i, Category.assoc, hk]
     exact (Subobject.factorThru_arrow _ _ hs).symm
   have hH (t : ℤ) : H.step t =
-      (Subobject.«exists» c.hom).obj ((F.homologyFiltration n).step t) := by
+      (Subobject.«exists» c.hom).obj ((F.cohomologyImage n).step t) := by
     have : Epi (a t) := hepi t
     change H.step t = (Subobject.«exists» c.hom).obj
       (imageSubobject (HomologicalComplex.homologyMap (F.step t).arrow n))
@@ -343,7 +343,7 @@ private theorem stationary_projection_kernel
       Subobject.exists_obj_top, ← ha t, imageSubobject_comp_of_epi,
       imageSubobject_mono, Subobject.mk_arrow]
   have htransport : (Subobject.pullback c.hom).obj (H.step (q + 1)) =
-      (F.homologyFiltration n).step (q + 1) := by
+      (F.cohomologyImage n).step (q + 1) := by
     rw [hH, Subobject.exists_iso_map, Subobject.pullback_map_self]
   have hkH : kernelSubobject (L.homologyπ n ≫ a q ≫
       cokernel.π (Subobject.ofLE (H.step (q + 1)) (H.step q)

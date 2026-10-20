@@ -669,84 +669,6 @@ end AlgebraicGeometry.Scheme.ProjectionRestriction
 
 namespace AlgebraicGeometry.Scheme
 open ProjectionRestriction
-/- The global operation/tensor data is the first independent construction in the
-   localization comparison argument. -/
-/-- Existence of the normalized global operation and tensor data.
-Source: Stacks 04J0, 0735, 07A4 and 07A6
-(blueprint: lem-weil-pbc-ringed-projection-restriction-global).
-
-The construction fixes the coefficient adjunct, exact pullback, K-injective right
-derived functor, and the signed K-flat tensor model together with all representative
-and shift normalizations. Start with the canonical pro-etale coefficient map and
-apply the localization construction to obtain the module adjunction. Use exactness
-of pullback and the existence of K-injective resolutions to define the right derived
-operation and its counit. Choose flat K-flat resolutions in both variables, form the
-signed total tensor, and descend it through the derived localization universal
-property. The representative and shift equations make these choices into the
-recorded `Global` structure. This is the global part of the localization comparison
-argument; local slice data and local detection are separate results below. -/
-theorem ringedProjectionRestriction_global
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X) :
-    Nonempty (Global f R_Y R_X c) := by
-  sorry
-
-/-- Existence of normalized local slice data and projection compatibility.
-Source: Stacks 03CF, 04J0, 08FI, 0FN5, 07A4 and 0B56
-(blueprint: lem-weil-pbc-ringed-projection-restriction-local).
-
-For a fixed global datum, restriction to every pro-etale slice admits the actual
-over-functor models, ordinary and derived comparison isomorphisms, and the mate
-equation for the projection map. The equations on sections and on signed total
-complexes are included in `Local`; this result supplies the data and its
-projection compatibility for every slice. For each `V`, localize the ringed site at
-`V` and at `X ×_Y V`. The ordinary restriction/direct-image square is identified
-sectionwise, while exact restriction transports the derived square. Restrict the
-K-injective and K-flat representatives from `g`, and use the tensor comparison and
-its two shift equations to obtain all fields of `Local`. The counit calculation on
-local sections identifies the two mates, giving `ProjectionCompatible`; choice over
-the set of slices gives the displayed family `data`. -/
-theorem ringedProjectionRestriction_local
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X)
-    (g : Global f R_Y R_X c) :
-    ∃ data : ∀ V : Y.ProEt, Local f R_Y R_X c g V,
-      ∀ V : Y.ProEt, (data V).ProjectionCompatible := by
-  sorry
-
-/-- Local slice isomorphisms detect isomorphisms in the derived category.
-Source: Stacks 0944 and the sheaf-gluing argument following 0B56
-(blueprint: lem-weil-pbc-ringed-projection-restriction-detection).
-
-Given the normalized slice data and its projection compatibility, a morphism whose
-restrictions are invertible on a covering sieve of every slice is invertible. The
-proof is the degreewise kernel/cokernel gluing argument followed by the right
-calculus of fractions for the ordinary derived localization. Represent the morphism
-by a complex map. Exactness of each restriction identifies the restricted kernels
-and cokernels; the covering-sieve hypothesis and the sheaf axiom make those
-cohomology objects vanish. Hence the cone is acyclic after the localizations. Apply
-the multiplicative-system characterization of quasi-isomorphisms and the stated
-right-fraction representation to lift the local inverses to a global inverse. The
-projection compatibility ensures that the restricted map is the map used by this
-calculation. -/
-theorem ringedProjectionRestriction_detection
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X)
-    (g : Global f R_Y R_X c)
-    (data : ∀ V : Y.ProEt, Local f R_Y R_X c g V)
-    (hcompat : ∀ V : Y.ProEt, (data V).ProjectionCompatible) :
-    ∀ {A B : Der R_Y} (a : A ⟶ B),
-      (∀ V : Y.ProEt, ∃ S : Sieve V, S ∈ ProEt.topology Y V ∧
-        ∀ (W : Y.ProEt) (h : W ⟶ V), S.arrows h →
-          IsIso (((data W).restrictionY.model).functor.map a)) → IsIso a := by
-  sorry
-
 /-- Canonical localization comparisons for the projection mate on ringed pro-etale sites.
 Source: Stacks 04J0, 08FI, 0FN5, 07A4, 0B56 and 0944
 (blueprint: lem-weil-pbc-ringed-projection-restriction).
@@ -795,8 +717,5 @@ theorem ringedProjectionRestriction
           (∀ V : Y.ProEt, ∃ S : Sieve V, S ∈ ProEt.topology Y V ∧
             ∀ (W : Y.ProEt) (h : W ⟶ V), S.arrows h →
               IsIso (((data W).restrictionY.model).functor.map a)) → IsIso a) := by
-  obtain ⟨g⟩ := ringedProjectionRestriction_global f R_Y R_X c
-  obtain ⟨data, hcompat⟩ := ringedProjectionRestriction_local f R_Y R_X c g
-  refine ⟨g, data, hcompat, ?_⟩
-  exact ringedProjectionRestriction_detection f R_Y R_X c g data hcompat
+  sorry
 end AlgebraicGeometry.Scheme

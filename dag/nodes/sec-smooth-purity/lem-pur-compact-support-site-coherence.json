@@ -1,337 +1,430 @@
 {
- "id": "lem-pur-compact-support-site-coherence",
- "kind": "statement",
- "title": "Compact-support site comparison respects compactification calculus",
- "statement": "Fix the finite-field and coefficient datum of [def-pur-conventions], with $A=A_{E,n}$, $n\\geq1$. All schemes below are finite-type $k$-schemes [def-weil-finite-type-morphism], without a separatedness assumption on their structure maps to $\\operatorname{Spec}k$. Every morphism $f:X\\to Y$ to which compact support is applied is separated and finite type and has a chosen compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ [def-weil-compactifications-refinements]. Use ordinary constant-$A$ module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], comparison $C_T=\\nu_T^*$ [def-sf-comparison-derived-pullback], and compact-support candidates $F_f^{e,c}=Rp_{e,*}j_!^e$, $F_f^{p,c}=Rp_{p,*}j_!^p$ [def-amb-etale-compact-support, def-compact-support-direct-image-detailed]. Define\n$$B_f^c=Rp_{p,*}(e_j)\\circ\\beta_{p,j_!^e}:C_YF_f^{e,c}\\longrightarrow F_f^{p,c}C_X,$$\nwhere $\\beta_p$ is the counit-mate direct-image comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] and $e_j:C_{\\overline X}j_!^e\\cong j_!^pC_X$ is the adjoint extension-by-zero comparison [lem-cbc-proetale-extension-zero-comparison]. On $D^+(X_{\\mathrm{et}},A)$, $B_f^c$ is invertible and has the following coherence with the canonical compactification maps. For composable separated finite-type morphisms $f:X\\to Y$, $g:Y\\to Z$ with chosen compactifications and compatible composition towers, and for two compactifications $c,c'$ of $f$ with a specified proper refinement, use the refinement comparisons $\\rho^{e}_{c',c}:F_f^{e,c}\\to F_f^{e,c'}$ and $\\rho^p_{c',c}:F_f^{p,c}\\to F_f^{p,c'}$, and composition comparisons $\\alpha^e_{g,f}:F_g^eF_f^e\\to F_{gf}^e$, $\\alpha^p_{g,f}:F_g^pF_f^p\\to F_{gf}^p$ of [lem-amb-etale-compact-comparisons, thm-sf-comp-composition],\n$$B_f^{c'}C_Y(\\rho^e_{c',c})=\\rho^p_{c',c}C_X\\circ B_f^c,$$\n$$B_{gf}C_Z(\\alpha^e_{g,f})=\\alpha^p_{g,f}C_X\\circ(F_g^pB_f)\\circ(B_gF_f^e).$$\nFor an open immersion $v:Y'\\hookrightarrow Y$ and its Cartesian pullback $u:X'\\hookrightarrow X$, let $f':X'\\to Y'$ be the pullback and use the pulled-back compactification. The canonical compact-support restriction exchanges $\\operatorname{Ex}^e:v_e^*F_f^e\\to F_{f'}^eu_e^*$ and $\\operatorname{Ex}^p:v_p^*F_f^p\\to F_{f'}^pu_p^*$ are invertible and obey\n$$\\operatorname{Ex}^p\\circ v_p^*B_f=B_{f'}u_e^*\\circ C_{Y'}(\\operatorname{Ex}^e),$$\nunder the canonical pullback comparisons. All these identities use the normalized proper/open interchanges in compatible compactification towers, including commutative proper/open squares which are not Cartesian, and the counit-mate normalization above; they hold on bounded-below etale witnesses. They respect identities and pasting.",
- "source": {
-  "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), 0F7F (lemma-shriek-proper-and-open-base-change). Agent-formulated site coherence for the canonical compactification calculus, using the finite-evaluation normalization of lem-cbc-strict-tower-proper-open-calculus; these tags alone assert the etale calculus."
- },
- "stmt_deps": [
-  "def-pur-conventions",
-  "def-weil-finite-type-morphism",
-  "def-weil-compactifications-refinements",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-proetale-modules",
-  "def-sf-comparison-derived-pullback",
-  "def-amb-etale-compact-support",
-  "def-compact-support-direct-image-detailed",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-amb-etale-compact-comparisons",
-  "thm-sf-comp-composition",
-  "def-cbc-compact-support-square",
-  "def-cbc-exchange-map",
-  "def-sf-refinement-comparison-isomorphism",
-  "lem-pur-co-smooth-exchange-transport",
-  "lem-sf-class-compact-support-comparison",
-  "lem-weil-pbc-comparison-pullback"
- ],
- "proof": [
-  {
-   "text": "Use the existing finite positive-level coefficient and the canonical isomorphism compactSupportSiteComparisonPlus. Finite-type schemes over the field are Noetherian, so the recorded etale refinement normalization applies. No separation hypothesis on a scheme structure morphism is introduced.",
-   "uses": [
-    "lem-sf-class-compact-support-comparison",
-    "lem-weil-pbc-finite-type-over-noetherian"
-   ],
-   "elementary": false,
-   "source": {
+  "id": "lem-pur-compact-support-site-coherence",
+  "kind": "statement",
+  "title": "Compact-support site comparison respects compactification calculus",
+  "statement": "Fix the finite-field and coefficient datum of [def-pur-conventions], with $A=A_{E,n}$, $n\\geq1$. All schemes below are finite-type $k$-schemes [def-weil-finite-type-morphism], without a separatedness assumption on their structure maps to $\\operatorname{Spec}k$. Every morphism $f:X\\to Y$ to which compact support is applied is separated and finite type and has a chosen compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ [def-weil-compactifications-refinements]. Use ordinary constant-$A$ module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], comparison $C_T=\\nu_T^*$ [def-sf-comparison-derived-pullback], and compact-support candidates $F_f^{e,c}=Rp_{e,*}j_!^e$, $F_f^{p,c}=Rp_{p,*}j_!^p$ [def-amb-etale-compact-support, def-compact-support-direct-image-detailed]. Define\n$$B_f^c=Rp_{p,*}(e_j)\\circ\\beta_{p,j_!^e}:C_YF_f^{e,c}\\longrightarrow F_f^{p,c}C_X,$$\nwhere $\\beta_p$ is the counit-mate direct-image comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] and $e_j:C_{\\overline X}j_!^e\\cong j_!^pC_X$ is the adjoint extension-by-zero comparison [lem-cbc-proetale-extension-zero-comparison]. On $D^+(X_{\\mathrm{et}},A)$, $B_f^c$ is invertible and has the following coherence with the canonical compactification maps. For composable separated finite-type morphisms $f:X\\to Y$, $g:Y\\to Z$ with chosen compactifications and compatible composition towers, and for two compactifications $c,c'$ of $f$ with a specified proper refinement, use the refinement comparisons $\\rho^{e}_{c',c}:F_f^{e,c}\\to F_f^{e,c'}$ and $\\rho^p_{c',c}:F_f^{p,c}\\to F_f^{p,c'}$, and composition comparisons $\\alpha^e_{g,f}:F_g^eF_f^e\\to F_{gf}^e$, $\\alpha^p_{g,f}:F_g^pF_f^p\\to F_{gf}^p$ of [lem-amb-etale-compact-comparisons, thm-sf-comp-composition],\n$$B_f^{c'}C_Y(\\rho^e_{c',c})=\\rho^p_{c',c}C_X\\circ B_f^c,$$\n$$B_{gf}C_Z(\\alpha^e_{g,f})=\\alpha^p_{g,f}C_X\\circ(F_g^pB_f)\\circ(B_gF_f^e).$$\nFor an open immersion $v:Y'\\hookrightarrow Y$ and its Cartesian pullback $u:X'\\hookrightarrow X$, let $f':X'\\to Y'$ be the pullback and use the pulled-back compactification. The canonical compact-support restriction exchanges $\\operatorname{Ex}^e:v_e^*F_f^e\\to F_{f'}^eu_e^*$ and $\\operatorname{Ex}^p:v_p^*F_f^p\\to F_{f'}^pu_p^*$ are invertible and obey\n$$\\operatorname{Ex}^p\\circ v_p^*B_f=B_{f'}u_e^*\\circ C_{Y'}(\\operatorname{Ex}^e),$$\nunder the canonical pullback comparisons. All these identities use the normalized proper/open interchanges in compatible compactification towers, including commutative proper/open squares which are not Cartesian, and the counit-mate normalization above; they hold on bounded-below etale witnesses. They respect identities and pasting.",
+  "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C, 0F7D, 0F7F and 0F7J; U4 calculation using the existing named Lean comparisons and their defining normalizations"
-   }
+    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), 0F7F (lemma-shriek-proper-and-open-base-change). Agent-formulated site coherence for the canonical compactification calculus, using the finite-evaluation normalization of lem-cbc-strict-tower-proper-open-calculus; these tags alone assert the etale calculus."
   },
-  {
-   "text": "For a refinement r:c to d, expand the etale d-to-c refinement map as the proper image of the etale proper/open map followed by the inverse proper compositor. Expand the specified pro-etale proper/open isomorphism into its four defining factors. Direct-image comparison composition, naturality of the comparison for d.g, and naturality of the pro-etale compositor identify the two expanded composites. The intermediate open comparison and its inverse cancel. Thus C(rho_etale.hom) followed by B_c equals B_d followed by the inverse actual pro-etale refinement. Invert this equation to obtain the stated c-to-d refinement square.",
-   "uses": [
+  "stmt_deps": [
+    "def-pur-conventions",
+    "def-weil-finite-type-morphism",
+    "def-weil-compactifications-refinements",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-proetale-modules",
+    "def-sf-comparison-derived-pullback",
+    "def-amb-etale-compact-support",
+    "def-compact-support-direct-image-detailed",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
     "lem-amb-etale-compact-comparisons",
-    "def-sf-refinement-comparison-isomorphism",
-    "lem-weil-pbc-proper-open-comparison-proetale",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C, 0F7D, 0F7F and 0F7J; U4 calculation using the existing named Lean comparisons and their defining normalizations"
-   }
-  },
-  {
-   "text": "Apply the bounded-below inclusions and their canonical compatibility isomorphisms to the refinement equation. The definition of compactExchangeTransportComparison expands into the inclusion of B_plus followed by compact-support inclusion compatibility. This gives the ambient refinement equation. Apply it to the two legs of the specified common refinement; the etale common-refinement formula gives the corresponding formula for coherenceCompactificationChange.",
-   "uses": [
-    "def-sf-refinement-comparison-isomorphism",
-    "lem-amb-etale-compact-comparisons",
-    "lem-pur-co-smooth-exchange-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C, 0F7D, 0F7F and 0F7J; U4 calculation using the existing named Lean comparisons and their defining normalizations"
-   }
-  },
-  {
-   "text": "The canonical origin compositor is obtained by the two fully faithful preimages of originCompositionModel. Their map_preimage equations identify its ambient value on a comparison witness with that model. Expand this recorded model: it is the etale compositor conjugated by the chosen-model site comparisons and canonical bounded-below compatibilities. Insert the just-proved common-refinement comparison formula in coherenceProEtaleCompositor. Naturality of B_d and cancellation of inverse comparisons give exactly the composition square for the supplied c,d,e.",
-   "uses": [
     "thm-sf-comp-composition",
-    "lem-amb-etale-compact-comparisons",
-    "lem-pur-co-smooth-exchange-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C, 0F7D, 0F7F and 0F7J; U4 calculation using the existing named Lean comparisons and their defining normalizations"
-   }
-  },
-  {
-   "text": "Evaluate the existing compactSupport_exchange_transport natural-transformation equation on L to obtain the restriction square with precisely the recorded source and target boundaries. The etale exchange is invertible by compactSupportFiniteTorsion. Both boundary comparisons are isomorphisms, so the restriction equation makes the actual pro-etale exchange invertible at the comparison of L.",
-   "uses": [
+    "def-cbc-compact-support-square",
+    "def-cbc-exchange-map",
+    "def-sf-refinement-comparison-isomorphism",
     "lem-pur-co-smooth-exchange-transport",
-    "thm-cbc-finite-torsion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C, 0F7D, 0F7F and 0F7J; U4 calculation using the existing named Lean comparisons and their defining normalizations"
-   }
-  },
-  {
-   "text": "Induct on CompactSupportSiteDiagram. The preceding refinement, composition and restriction equations handle the generators. Functoriality gives identity and concatenation; naturality of the compact-support site comparison and of the inverse-image comparison gives push and pull. Conjugate the induction equation by the compatible endpoint isomorphisms for change. Finally, equal etale routes give equal comparison-image composites; cancel the invertible source boundary comparison to obtain equality of the pro-etale routes.",
-   "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-pur-co-smooth-exchange-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C, 0F7D, 0F7F and 0F7J; U4 calculation using the existing named Lean comparisons and their defining normalizations"
-   }
-  }
- ],
- "proof_deps": [
-  "def-sf-refinement-comparison-isomorphism",
-  "lem-amb-etale-compact-comparisons",
-  "lem-pur-co-smooth-exchange-transport",
-  "lem-sf-class-compact-support-comparison",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-proper-open-comparison-proetale",
-  "prop-weil-pbc-comparison-direct-image",
-  "thm-cbc-finite-torsion",
-  "thm-sf-comp-composition"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/more-etale.tex",
-  "place": "U4: normalize the recorded refinement and origin-composition constructions, use canonical direct-image comparison composition and the existing compact-support exchange transport square, then induct on the formal diagram. The strict-tower calculus is not used directly by this proof."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "The etale proetale comparison for finite torsion sheaves commutes with compact support composition, compactification refinement and open restriction on Noetherian schemes",
-   "results": "Read returned signatures: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, LightCondensed.ihomPoints_symm_comp, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Condensed.profiniteSolidCounit, topCatToSheafCompHausLike_map_val_app. Ordinary scheme-module composition, etale ring morphisms, abstract adjunction transport and the proetale topology definitions do not state compact-support site coherence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, CategoryTheory.Iso",
-   "results": "Read returned signatures: CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoLeft_unit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.ofNatIsoRight_unit, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso. Ordinary scheme-module composition, etale ring morphisms, abstract adjunction transport and the proetale topology definitions do not state compact-support site coherence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "compactSupportComparison|properOpen|shriek.*compos|proetale",
-   "results": "Read returned signatures: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean. Ordinary scheme-module composition, etale ring morphisms, abstract adjunction transport and the proetale topology definitions do not state compact-support site coherence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Etale proetale comparison is coherent with compact support composition refinement and restriction",
-   "results": "Read returned signatures: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, Algebra.Etale.comp, Algebra.FormallyEtale.comp, RingHom.Etale.stableUnderComposition, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme. Ordinary scheme-module composition, etale ring morphisms, abstract adjunction transport and the proetale topology definitions do not state compact-support site coherence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A compactification defines a comparison between etale and proetale compactly supported derived direct images which respects all composition and open base change morphisms",
-   "results": "Read returned signatures: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, TopCat.Sheaf.pushforward_forget, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp. Ordinary scheme-module composition, etale ring morphisms, abstract adjunction transport and the proetale topology definitions do not state compact-support site coherence.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "lem-pur-vector-integration-site-comparison",
-  "date": "2026-10-17",
-  "group": "Q22"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-thm-smooth-purity",
- "blueprint": {
-  "from": {
-   "node": "cor-pur-dualizing-object-purity",
-   "place": "Final statement sentence of cor-pur-dualizing-object-purity in main-20261015: the identification is compatible with arbitrary base change and composition; via lem-pur-vector-integration-site-comparison Step 6, which needs the compact-support site-comparison calculus.",
-   "via": [
-    "lem-pur-vector-integration-site-comparison"
-   ]
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-pur-compact-support-site-coherence",
-  "worker": "stage1",
-  "summary": "Repaired every returned point: the refinement uses the inverse proper/open arrow; a constant finite-coefficient specialization of the existing strict-tower calculus gives the explicit site-normalization equation (N); the composition tower is expanded using (N); proper and open mate equations (P),(O) identify the specified exchange; identity and pasting follow by substitution and cancellation. The statement is unchanged. No new nodes.",
-  "blueprint": "Supports the base-change/composition compatibility sentence of cor-pur-dualizing-object-purity in main-20261015 via lem-pur-vector-integration-site-comparison Step 6. The compact-support calculus is the agent-supplied intermediate argument, not text written in that corollary.",
-  "tool_uses": [
-   {
-    "node": "cor-cbc-derived-extension-zero-base-change",
-    "why": "Provides the bounded-below etale open base-change comparison and its identity/pasting normalization."
-   },
-   {
-    "node": "lem-amb-etale-compact-comparisons",
-    "why": "It supplies etale compactification refinement and composition maps used as the source-side calculus."
-   },
-   {
-    "node": "lem-cbc-compactifiable-compatible-tower",
-    "why": "It supplies compatible compactification towers and common refinements for composition."
-   },
-   {
-    "node": "lem-cbc-extension-zero-base-change",
-    "why": "It identifies extension by zero after the Cartesian open pullback."
-   },
-   {
-    "node": "lem-cbc-extension-zero-composition",
-    "why": "Supplies the open-extension composition identification in the explicit compatible-tower formula."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero-base-change",
-    "why": "Provides the canonical pro-etale open-extension exchange used in the compact-support exchange formula."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero-comparison",
-    "why": "Provides the canonical adjoint site comparison for open extension and its compatibility with composition."
-   },
-   {
-    "node": "lem-cbc-proper-open-interchange-coherence",
-    "why": "It supplies bounded-below proper/open identity, refinement, and base-change coherence."
-   },
-   {
-    "node": "lem-cbc-strict-tower-proper-open-calculus",
-    "why": "Supplies the normalized pro-etale proper/open arrow, its finite-evaluation identification with the etale arrow, and non-Cartesian pasting; the smooth-purity unit does not establish this ambient calculus."
-   },
-   {
-    "node": "lem-sf-comparison-pullback-exact",
-    "why": "Exactness and bounded-below preservation of the site comparison are ambient functorial input."
-   },
-   {
-    "node": "lem-sf-proper-open-comparison-site-normalization",
-    "why": "Its normalized proper/open square equation is exactly the refinement component of the comparison."
-   },
-   {
-    "node": "lem-weil-pbc-coefficient-exchange-mates",
-    "why": "Formal coefficient-cube identity identifies the specified proper exchanges using their counit equations; this is a generic adjunction tool."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "The named direct-image comparison and its counit normalization are the map being transported."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "The canonical etale/pro-etale inverse-image compositor is needed to state every base-change square."
-   },
-   {
-    "node": "lem-weil-pbc-exchange-forget-coefficients",
-    "why": "Specifies the module-linear proper exchange as the actual adjunction mate."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Verifies Noetherian hypotheses for finite-type field schemes in the compactification calculus."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Supplies identity and horizontal/vertical pasting of adjunction mates, including composition of the named direct-image comparisons."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "why": "Verifies the quasi-compact-open hypotheses in compactifications and compatible towers; an ambient Noetherian-scheme tool."
-   },
-   {
-    "node": "thm-cbc-finite-torsion",
-    "why": "It supplies invertibility and pasting for the etale compact-support exchange under open base change."
-   },
-   {
-    "node": "thm-sf-comp-composition",
-    "why": "Identifies the canonical pro-etale composition isomorphism on bounded-below etale-origin witnesses; the explicit calculation uses the tower normalization stipulated in the item."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-amb-etale-compact-comparisons",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "thm-cbc-finite-torsion",
-  "thm-sf-comp-composition"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-Codex-NQ-365179848",
-  "group": "NQ",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-365179848 (reviewer sub-agent of L); spot-checked: Reviewed item, all ten proof steps, cited DAG statements, unit/chapter route, Stacks sources, blueprint, coefficient categories, edge cases, dependencies, and duplicates. No mathematical or structural faults found; review.md records the checks."
- },
- "lean": {
-  "module": "Sheaf.Paper.CompactSupportSiteCoherence",
-  "declaration": "AlgebraicGeometry.ProEtale.compactSupportSiteCoherence",
-  "statement": "theorem compactSupportSiteCoherence (P : WeilConjectures.PurityFiniteSetting.{u}) : (∀ {X Y : Over (Spec (.of P.field.k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (c : Compactification f.left) (L : DerivedCategory.Plus (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))), IsIso ((compactSupportSiteComparisonPlus P.Coefficient c).hom.app L)) ∧ (∀ {X X' Y Y' : Over (Spec (.of P.field.k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] {f : X ⟶ Y} {f' : X' ⟶ Y'} {u' : X' ⟶ X} {v : Y' ⟶ Y} [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] [IsOpenImmersion v.left] (sq : IsPullback u'.left f'.left f.left v.left) (c : Compactification f.left) (L : DerivedCategory.Plus (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))), IsIso ((Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap P.Coefficient sq c).app L) ∧ IsIso ((rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} P.Coefficient) sq c).app ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X.left).mapDerivedCategory.obj L.obj))) ∧ (∀ {T : Scheme.{u}} {b₀ b₁ : CompactSupportSiteBoundary P.Coefficient T} (D : CompactSupportSiteDiagram P b₀ b₁), (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategory.map (DerivedCategory.Plus.ι.map D.etaleMap) ≫ b₁.comparison.hom = b₀.comparison.hom ≫ D.proEtaleMap) ∧ (∀ {T : Scheme.{u}} {b₀ b₁ : CompactSupportSiteBoundary P.Coefficient T} (D E : CompactSupportSiteDiagram P b₀ b₁), D.etaleMap = E.etaleMap → D.proEtaleMap = E.proEtaleMap)",
-  "branch": "newtargets-dag",
-  "by": "Q18",
-  "date": "2026-10-17",
-  "existing": false,
-  "file": "lean/Sheaf/Paper/CompactSupportSiteCoherence.lean",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.compactSupportCoherenceCoefficientFinite",
-   "AlgebraicGeometry.ProEtale.coherenceEtaleCompositor",
-   "AlgebraicGeometry.ProEtale.coherenceCompactificationChange",
-   "AlgebraicGeometry.ProEtale.coherenceProEtaleCompositor",
-   "AlgebraicGeometry.ProEtale.coherenceCompositionSource",
-   "AlgebraicGeometry.ProEtale.CompactSupportSiteBoundary",
-   "AlgebraicGeometry.ProEtale.coherenceCompactificationBoundary",
-   "AlgebraicGeometry.ProEtale.coherenceCompositionBoundary",
-   "AlgebraicGeometry.ProEtale.coherenceRestrictionSource",
-   "AlgebraicGeometry.ProEtale.coherenceRestrictionTarget",
-   "AlgebraicGeometry.ProEtale.coherencePushBoundary",
-   "AlgebraicGeometry.ProEtale.coherencePullBoundary",
-   "AlgebraicGeometry.ProEtale.CompactSupportSiteDiagram",
-   "AlgebraicGeometry.ProEtale.CompactSupportSiteDiagram.etaleMap",
-   "AlgebraicGeometry.ProEtale.CompactSupportSiteDiagram.proEtaleMap",
-   "AlgebraicGeometry.ProEtale.compactSupportSiteCoherence"
+    "lem-sf-class-compact-support-comparison",
+    "lem-weil-pbc-comparison-pullback"
   ],
-  "note": "Repair of immutable head 2e698672a5d8: use the recorded actual properTransportRefinement, originComposition and compactification-relative pro-etale exchange. State all three equations, both exchange invertibilities, and the generated identity/whiskering/pasting calculus. The original tautological refinement conjugate and unused imports are removed."
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-997606dd8",
-  "group": "Q18",
-  "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, all 18 dependencies, sources, canonical maps, universes, edge cases, docstrings, route-pivot requirements, and verbatim signature. The sole delivered module compiled cleanly through scompile.py. No landing corrections required; branch unchanged."
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U4",
-  "result": "pass",
-  "landing": "20261020T211838-L-3509904",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof": [
+    {
+      "text": "All ambient schemes in the chosen compactifications and compatible towers are finite type over the field: their proper maps are finite type, and their targets are finite type. Since a field is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] makes these schemes Noetherian. Every open subscheme of a Noetherian scheme is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Applied also to the inverse images of affine opens, this verifies that the open immersions are quasi-compact. Thus the open maps in the towers satisfy the quasi-compact hypothesis below, and proper maps are qcqs. The definitions of the compact-support candidates give the bounded-below composites used here. Exactness and bounded-below preservation of \\(C_T\\) follow from [lem-sf-comparison-pullback-exact]; the canonical comparisons \\(C_Uu_e^*\\cong u_p^*C_V\\) respect identities, composites and squares by [lem-weil-pbc-comparison-pullback]. In the remaining equations these pullback comparisons and the canonical functor associators are inserted implicitly.",
+      "uses": [
+        "lem-weil-pbc-finite-type-over-noetherian",
+        "def-weil-finite-type-morphism",
+        "def-weil-compactifications-refinements",
+        "def-amb-etale-compact-support",
+        "def-compact-support-direct-image-detailed",
+        "lem-sf-comparison-pullback-exact",
+        "lem-weil-pbc-comparison-pullback",
+        "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/proetale.tex",
+        "place": "Tag 099R, section-comparison; Noetherian and bounded-below hypotheses for the stated DAG tools"
+      }
+    },
+    {
+      "text": "For \\(c=(j,p)\\), the named map \\(\\beta_p:C_YRp_{e,*}\\to Rp_{p,*}C_{\\overline X}\\) is invertible on bounded-below etale inputs by [lem-weil-pbc-comparison-direct-image-canonical-mate]. Its normalization is\n\\[\\varepsilon^p_p\\,p_p^*(\\beta_p)\\,a_p=C_{\\overline X}(\\varepsilon^e_p),\\]\nwhere \\(a_p:C_{\\overline X}p_e^*\\cong p_p^*C_Y\\). The canonical adjoint open comparison \\(e_j:C_{\\overline X}j_!^e\\cong j_!^pC_X\\) is the isomorphism of [lem-cbc-proetale-extension-zero-comparison], applied termwise. Consequently \\(B_f^c=Rp_{p,*}(e_j)\\,\\beta_{p,j_!^e}\\) is an isomorphism with exactly the specified normalization. Moreover, the direct-image comparisons compose by the composite-adjunction formula in [lem-weil-pbc-mate-pasting], since their pullback comparisons compose. The open comparisons compose by the open-composition clause of the cited extension comparison.",
+      "uses": [
+        "lem-weil-pbc-comparison-direct-image-canonical-mate",
+        "lem-cbc-proetale-extension-zero-comparison",
+        "lem-weil-pbc-mate-pasting",
+        "lem-weil-pbc-comparison-pullback"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/categories.tex",
+        "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; proetale.tex Tag 09AF, lemma-jshriek-comparison; agent combination"
+      }
+    },
+    {
+      "text": "Fix a commutative proper/open square \\(Q\\) with top \\(k:V\\hookrightarrow W\\), bottom \\(i:S\\hookrightarrow T\\), and proper sides \\(r:V\\to S\\), \\(p:W\\to T\\). Write \\(\\gamma_Q^s:i_!^sRr_{s,*}\\to Rp_{s,*}k_!^s\\), \\(s=e,p\\), for its normalized comparison. Apply [lem-cbc-strict-tower-proper-open-calculus] with \\(B=A\\), every finite ring \\(\\Lambda_m=A\\), every scalar map the identity, and the constant strict tower on \\(C_VL\\), for \\(L\\in D^+(V_{\\mathrm{et}},A)\\). Its finite-evaluation clause identifies the evaluated named pro-etale arrow, under the canonical direct-image and open comparisons, with \\(\\gamma_Q^e\\) of [lem-cbc-proper-open-interchange-coherence]. The scalar transport is the identity specialization of [def-cbc-finite-constant-coefficient-transport]. Writing those source and target identifications explicitly gives\n\\[\\gamma_Q^p\\,(i_!^p\\beta_r)\\,(e_iRr_{e,*})\n=(Rp_{p,*}e_k)\\,(\\beta_pk_!^e)\\,C_T(\\gamma_Q^e).\\tag{N}\\]\nBoth sides go from \\(C_Ti_!^eRr_{e,*}L\\) to \\(Rp_{p,*}k_!^pC_VL\\). This is a specialization of the stated finite-evaluation normalization, not an inference from faithfulness of tower evaluation. It includes non-Cartesian squares and the clopen-section refinement normalization. The tower lemma also supplies actual pro-etale horizontal, vertical and base-change pasting; its etale counterpart is [lem-cbc-proper-open-interchange-coherence].",
+      "uses": [
+        "lem-cbc-strict-tower-proper-open-calculus",
+        "def-cbc-finite-constant-coefficient-transport",
+        "lem-cbc-proper-open-interchange-coherence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-etale.tex",
+        "place": "Tags 0F7B, 0F7C, 0F7D, 0F7F for etale maps; the cited strict-tower node supplies the additional pro-etale finite-evaluation normalization (agent specialization)"
+      }
+    },
+    {
+      "text": "Let \\(u:c_1\\to c_2\\), so \\(uj_1=j_2\\) and \\(p_1=p_2u\\); put \\(c=c_1,c'=c_2\\). The proper/open arrow is\n\\(a_u^s:j_{2!}^s\\to Ru_{s,*}j_{1!}^s\\), directed opposite to the refinement comparison after proper pushforward. Precisely, if \\(\\kappa^s:R(p_2u)_{s,*}\\cong Rp_{2,s,*}Ru_{s,*}\\), then\n\\[\\rho^s_{c_2,c_1}=Rp_{2,s,*}((a_u^s)^{-1})\\,\\kappa^s.\\]\nThis is the formula in [def-sf-refinement-comparison-isomorphism] on the pro-etale identity witness, and the proper-refinement comparison of [lem-amb-etale-compact-comparisons] on the etale side. The specialization of (N) to \\(V=S=X,r=1,p=u,k=j_1,i=j_2\\) is exactly [lem-sf-proper-open-comparison-site-normalization]:\n\\[a_u^p e_{j_2}=(Ru_{p,*}e_{j_1})\\,\\beta_u\\,C(a_u^e).\\]\nMultiplying by the inverses of \\(a_u^p\\) and \\(C(a_u^e)\\) gives\n\\[e_{j_2}C((a_u^e)^{-1})=(a_u^p)^{-1}(Ru_{p,*}e_{j_1})\\beta_u.\\]\nApply \\(Rp_{2,p,*}\\), use naturality of \\(\\beta_{p_2}\\), and use its composition formula from Step 2 to replace the comparisons for \\(p_2,u\\) by that for \\(p_1\\). The left side becomes \\(B_f^{c_2}C_Y(\\rho^e_{c_2,c_1})\\), and the right side becomes \\((\\rho^p_{c_2,c_1}C_X)B_f^{c_1}\\). This proves the refinement identity without reversing either named arrow.",
+      "uses": [
+        "def-sf-refinement-comparison-isomorphism",
+        "lem-amb-etale-compact-comparisons",
+        "lem-sf-proper-open-comparison-site-normalization",
+        "lem-weil-pbc-mate-pasting"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-etale.tex",
+        "place": "Tags 0F7B and 0F7C; main-20261015 blueprint prop-compactification-coherence proof, inverse proper/open formula; agent inverse-and-pushforward calculation"
+      }
+    },
+    {
+      "text": "Choose a compatible tower from [lem-cbc-compactifiable-compatible-tower]: \\(Y\\xrightarrow{i}\\overline Y\\xrightarrow{q}Z\\), \\(X\\xrightarrow{a}\\overline X\\xrightarrow{p}\\overline Y\\), and \\(U=\\overline X\\times_{\\overline Y}Y\\), with \\(b:U\\hookrightarrow\\overline X\\), \\(r:U\\to Y\\) proper and \\(c:X\\hookrightarrow U\\), so \\(bc=a\\). For the Cartesian square \\(Q=(b,i;r,p)\\), the normalized tower convention in the item defines the chosen-model composition map on either site as\n\\[Rq_{s,*}i_!^sRr_{s,*}c_!^s\n \\xrightarrow{Rq_{s,*}(\\gamma_Q^s)c_!^s}\n Rq_{s,*}Rp_{s,*}b_!^sc_!^s\n \\xrightarrow{\\chi^s}R(qp)_{s,*}a_!^s,\\]\nwhere \\(\\chi^s\\) is the proper-composition and open-composition identification. This is the normalized compactification-tower construction of \\(\\alpha^s_{g,f}\\); its canonical choice-independent maps are [lem-amb-etale-compact-comparisons, thm-sf-comp-composition]. Apply (N) to \\(L=c_!^eK\\), then apply \\(Rq_{p,*}\\). Precompose with the comparisons for \\(q\\) and \\(c\\). Naturality of \\(\\beta_q\\) moves it through \\(\\gamma_Q^e\\); Step 2 identifies the proper factors with \\(\\beta_{qp}\\) and the open factors with \\(e_a\\). Thus the two boundary composites of this explicit diagram are\n\\[B_{gf}C_Z(\\alpha^e_{g,f})\n=\\alpha^p_{g,f}C_X\\,(F_g^pB_f)\\,(B_gF_f^e).\\]\nThe input \\(c_!^eK\\) is bounded below, and its proper pushforward \\(Rr_{e,*}c_!^eK\\) is bounded below, so every application of (N) or \\(\\beta\\) is in its stated domain.",
+      "uses": [
+        "lem-cbc-compactifiable-compatible-tower",
+        "lem-amb-etale-compact-comparisons",
+        "thm-sf-comp-composition",
+        "lem-cbc-extension-zero-composition",
+        "lem-weil-pbc-mate-pasting",
+        "lem-cbc-proetale-extension-zero-comparison"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-etale.tex",
+        "place": "Tag 0F7J, lemma-shriek-composition; main-20261015 thm-sf-comp-composition proof, construction; agent application of (N)"
+      }
+    },
+    {
+      "text": "Two compatible towers admit a common refining tower by [lem-cbc-compactifiable-compatible-tower]. On its comparison to either tower the intermediate proper/open squares may be non-Cartesian. Equation (N) applies to each of these squares as well. The horizontal and vertical laws of [lem-cbc-strict-tower-proper-open-calculus] identify their pasted pro-etale comparisons with the comparison of the rectangle; [lem-cbc-proper-open-interchange-coherence] does the same on the etale side. Substitute the refinement identity of Step 4 into these diagrams. The equations for the common tower and either chosen tower then have the same boundaries after conjugating by the invertible refinement maps. Hence Step 5 proves the displayed composition identity for the specified compactifications and is independent of the compatible tower. This uses the actual non-Cartesian normalization, not an etale theorem applied to a pro-etale functor.",
+      "uses": [
+        "lem-cbc-compactifiable-compatible-tower",
+        "lem-cbc-strict-tower-proper-open-calculus",
+        "lem-cbc-proper-open-interchange-coherence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-etale.tex",
+        "place": "Tags 0F7C, 0F7D and 0F7J; agent common-refinement calculation using the stated pro-etale pasting laws"
+      }
+    },
+    {
+      "text": "For the open pullback \\(v:Y'\\hookrightarrow Y\\), write \\(\\bar v:\\overline X'\\to\\overline X\\), \\(p':\\overline X'\\to Y'\\) for the pulled-back compactification of [def-cbc-compact-support-square]. Denote the specified proper mate exchanges by \\(E^s:v_s^*Rp_{s,*}\\to Rp'_{s,*}\\bar v_s^*\\). Their etale normalization is the module-mate formula in [def-cbc-exchange-map, lem-weil-pbc-exchange-forget-coefficients]; the pro-etale one is the same unit-square-counit formula, as for \\(E_p^{\\mathcal T}\\) in [lem-cbc-strict-tower-proper-open-calculus]. Apply [lem-weil-pbc-coefficient-exchange-mates] to the four adjunctions for \\(p,p'\\) on the two sites. Its push-comparison hypotheses are precisely the counit equations for \\(\\beta_p,\\beta_{p'}\\) in Step 2. Its pull-comparison cube is the Cartesian compatibility of [lem-weil-pbc-comparison-pullback]. Therefore its conclusion gives, with those pullback identifications,\n\\[E^p C_{\\overline X}\\,v_p^*(\\beta_p)\n=(\\beta_{p'}\\bar v_e^*)\\,C_{Y'}(E^e).\\tag{P}\\]\nIn particular (P) concerns the named exchanges: their transposes are \\(\\bar v_s^*\\varepsilon_p^s\\circ\\theta^s\\), and the counit equations turn both routes into the same transpose. No choice of an unspecified exchange isomorphism enters.",
+      "uses": [
+        "def-cbc-compact-support-square",
+        "def-cbc-exchange-map",
+        "lem-weil-pbc-exchange-forget-coefficients",
+        "lem-cbc-strict-tower-proper-open-calculus",
+        "lem-weil-pbc-coefficient-exchange-mates",
+        "lem-weil-pbc-comparison-direct-image-canonical-mate",
+        "lem-weil-pbc-comparison-pullback"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/categories.tex",
+        "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; explicit exchange mate of def-cbc-exchange-map; agent coefficient-cube specialization"
+      }
+    },
+    {
+      "text": "Let \\(h^s:\\bar v_s^*j_!^s\\cong j'_!{}^su_s^*\\) be the canonical extension-by-zero base-change map. On the etale side it is [cor-cbc-derived-extension-zero-base-change]; on the pro-etale side it is [lem-cbc-proetale-extension-zero-base-change]. Its precise normalization is the inverse of the open-adjunction transpose of the unit: [lem-cbc-extension-zero-base-change] gives this on the etale side, and [lem-cbc-strict-tower-proper-open-calculus] gives it on the pro-etale side after the constant finite specialization of Step 3. The comparison \\(e_j\\) is likewise the specified adjoint comparison. Take inverses and transpose under the open adjunctions. The two possible composites of these units are equal because the pullback square commutes with site comparison [lem-weil-pbc-comparison-pullback]; mate pasting [lem-weil-pbc-mate-pasting] then gives\n\\[h^pC_X\\,\\bar v_p^*(e_j)\n=(e_{j'}u_e^*)\\,C_{\\overline X'}(h^e).\\tag{O}\\]\nMore explicitly, after restriction to \\(X'\\), both inverse transposes send \\(C_{X'}u_e^*K\\) by the open unit into \\(j'^*\\bar v_p^*C_{\\overline X}j_!^eK\\); inserting the comparison of pullbacks makes both maps \\(C_{X'}u_e^*(\\eta^e_{j,K})\\). Thus (O) identifies the specified open factors, not just their sources and targets.",
+      "uses": [
+        "cor-cbc-derived-extension-zero-base-change",
+        "lem-cbc-proetale-extension-zero-base-change",
+        "lem-cbc-extension-zero-base-change",
+        "lem-cbc-strict-tower-proper-open-calculus",
+        "lem-cbc-proetale-extension-zero-comparison",
+        "lem-weil-pbc-comparison-pullback",
+        "lem-weil-pbc-mate-pasting"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/proetale.tex",
+        "place": "Tag 09AF, lemma-jshriek-comparison; the inverse-open-mate normalizations in the cited base-change statements; agent unit calculation"
+      }
+    },
+    {
+      "text": "The specified compact-support exchange on either site is\n\\[\\operatorname{Ex}^s=(Rp'_{s,*}h^s)\\,E^s_{j_!^s},\\]\nas in [def-cbc-exchange-map]. Expand the left side of the desired site-comparison equation using this formula and \\(B_f=Rp_{p,*}(e_j)\\beta_p\\). Naturality of \\(E^p\\) moves \\(e_j\\) past the proper exchange. Equation (P) replaces the remaining \\(E^p v_p^*\\beta_p\\) by \\(\\beta_{p'}C(E^e)\\); equation (O) replaces the open factor by \\(e_{j'}C(h^e)\\). Naturality of \\(\\beta_{p'}\\) then leaves exactly\n\\[\\operatorname{Ex}^p\\,v_p^*B_f\n=B_{f'}u_e^*\\,C_{Y'}(\\operatorname{Ex}^e).\\]\nThe etale exchange is invertible by [thm-cbc-finite-torsion], whose quasi-compact-open hypothesis was checked in Step 1. Since \\(B_f,B_{f'}\\) and the pullback comparisons are invertible, this same equality proves invertibility of this named \\(\\operatorname{Ex}^p\\) on the etale witnesses. For a witness isomorphism \\(C_XK\\cong M\\), naturality conjugates the formula by that isomorphism. No claim about arbitrary pro-etale inputs is needed.",
+      "uses": [
+        "def-cbc-exchange-map",
+        "thm-cbc-finite-torsion",
+        "lem-weil-pbc-comparison-direct-image-canonical-mate"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-etale.tex",
+        "place": "Tag 0F7F, lemma-shriek-proper-and-open-base-change; agent expansion of the two specified factors"
+      }
+    },
+    {
+      "text": "Here is also an explicit verification of identity and pasting. For each generator (refinement, composition, open restriction), Steps 4, 5 and 9 give a square \\(t^p B_0=B_1C(t^e)\\), where \\(B_0,B_1\\) include the appropriate whiskered comparisons. For two composable generators, substitution gives\n\\[t_2^pt_1^pB_0=t_2^pB_1C(t_1^e)\n=B_2C(t_2^e)C(t_1^e)=B_2C(t_2^et_1^e).\\]\nThe same substitution with functors whiskered proves horizontal pasting, using naturality of \\(B\\). Repeating it handles a finite pasted diagram. The corresponding etale identities, refinement transitivity and composition associativity are [lem-amb-etale-compact-comparisons]; identity and horizontal/vertical exchange pasting are explicitly in [thm-cbc-finite-torsion]. Mixed proper/open rectangles satisfy the base-change equation of [lem-cbc-proper-open-interchange-coherence] and its pro-etale version in [lem-cbc-strict-tower-proper-open-calculus]. Thus either route through each pasted diagram becomes \\(B_{\\rm out}C(t^e)\\) after precomposition with the same invertible \\(B_{\\rm in}\\). Cancel it to obtain the required pro-etale equality. For an identity diagram this reads \\(t^pB=B\\), hence \\(t^p=1\\). This proves pasting on witnesses directly from the equations for the named maps.",
+      "uses": [
+        "lem-amb-etale-compact-comparisons",
+        "thm-cbc-finite-torsion",
+        "lem-cbc-proper-open-interchange-coherence",
+        "lem-cbc-strict-tower-proper-open-calculus"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-etale.tex",
+        "place": "Tags 0F7C, 0F7D and 0F7F; agent substitution and cancellation of the comparison squares"
+      }
+    }
+  ],
+  "proof_deps": [
+    "cor-cbc-derived-extension-zero-base-change",
+    "def-amb-etale-compact-support",
+    "def-cbc-compact-support-square",
+    "def-cbc-exchange-map",
+    "def-cbc-finite-constant-coefficient-transport",
+    "def-compact-support-direct-image-detailed",
+    "def-sf-refinement-comparison-isomorphism",
+    "def-weil-compactifications-refinements",
+    "def-weil-finite-type-morphism",
+    "lem-amb-etale-compact-comparisons",
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-cbc-extension-zero-base-change",
+    "lem-cbc-extension-zero-composition",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-sf-comparison-pullback-exact",
+    "lem-sf-proper-open-comparison-site-normalization",
+    "lem-weil-pbc-coefficient-exchange-mates",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "thm-cbc-finite-torsion",
+    "thm-sf-comp-composition"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Agent-formulated site-coherence proof using the etale calculus of Tags 0F7B, 0F7C, 0F7D, 0F7F and 0F7J, and the additional finite-evaluation normalization explicitly stated in lem-cbc-strict-tower-proper-open-calculus; Stacks alone does not assert this site coherence."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "The etale proetale comparison for finite torsion sheaves commutes with compact support composition, compactification refinement and open restriction on Noetherian schemes",
+      "results": "Read returned signatures: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, LightCondensed.ihomPoints_symm_comp, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Condensed.profiniteSolidCounit, topCatToSheafCompHausLike_map_val_app. Ordinary scheme-module composition, etale ring morphisms, abstract adjunction transport and the proetale topology definitions do not state compact-support site coherence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction, CategoryTheory.Iso",
+      "results": "Read returned signatures: CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoLeft_unit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.ofNatIsoRight_unit, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso. Ordinary scheme-module composition, etale ring morphisms, abstract adjunction transport and the proetale topology definitions do not state compact-support site coherence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "compactSupportComparison|properOpen|shriek.*compos|proetale",
+      "results": "Read returned signatures: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean. Ordinary scheme-module composition, etale ring morphisms, abstract adjunction transport and the proetale topology definitions do not state compact-support site coherence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Etale proetale comparison is coherent with compact support composition refinement and restriction",
+      "results": "Read returned signatures: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, Algebra.Etale.comp, Algebra.FormallyEtale.comp, RingHom.Etale.stableUnderComposition, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme. Ordinary scheme-module composition, etale ring morphisms, abstract adjunction transport and the proetale topology definitions do not state compact-support site coherence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A compactification defines a comparison between etale and proetale compactly supported derived direct images which respects all composition and open base change morphisms",
+      "results": "Read returned signatures: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, TopCat.Sheaf.pushforward_forget, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp. Ordinary scheme-module composition, etale ring morphisms, abstract adjunction transport and the proetale topology definitions do not state compact-support site coherence.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-pur-vector-integration-site-comparison",
+    "date": "2026-10-17",
+    "group": "Q22"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-thm-smooth-purity",
+  "blueprint": {
+    "from": {
+      "node": "cor-pur-dualizing-object-purity",
+      "place": "Final statement sentence of cor-pur-dualizing-object-purity in main-20261015: the identification is compatible with arbitrary base change and composition; via lem-pur-vector-integration-site-comparison Step 6, which needs the compact-support site-comparison calculus.",
+      "via": [
+        "lem-pur-vector-integration-site-comparison"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "lem-pur-compact-support-site-coherence",
+    "worker": "stage1",
+    "summary": "Repaired every returned point: the refinement uses the inverse proper/open arrow; a constant finite-coefficient specialization of the existing strict-tower calculus gives the explicit site-normalization equation (N); the composition tower is expanded using (N); proper and open mate equations (P),(O) identify the specified exchange; identity and pasting follow by substitution and cancellation. The statement is unchanged. No new nodes.",
+    "blueprint": "Supports the base-change/composition compatibility sentence of cor-pur-dualizing-object-purity in main-20261015 via lem-pur-vector-integration-site-comparison Step 6. The compact-support calculus is the agent-supplied intermediate argument, not text written in that corollary.",
+    "tool_uses": [
+      {
+        "node": "cor-cbc-derived-extension-zero-base-change",
+        "why": "Provides the bounded-below etale open base-change comparison and its identity/pasting normalization."
+      },
+      {
+        "node": "lem-amb-etale-compact-comparisons",
+        "why": "It supplies etale compactification refinement and composition maps used as the source-side calculus."
+      },
+      {
+        "node": "lem-cbc-compactifiable-compatible-tower",
+        "why": "It supplies compatible compactification towers and common refinements for composition."
+      },
+      {
+        "node": "lem-cbc-extension-zero-base-change",
+        "why": "It identifies extension by zero after the Cartesian open pullback."
+      },
+      {
+        "node": "lem-cbc-extension-zero-composition",
+        "why": "Supplies the open-extension composition identification in the explicit compatible-tower formula."
+      },
+      {
+        "node": "lem-cbc-proetale-extension-zero-base-change",
+        "why": "Provides the canonical pro-etale open-extension exchange used in the compact-support exchange formula."
+      },
+      {
+        "node": "lem-cbc-proetale-extension-zero-comparison",
+        "why": "Provides the canonical adjoint site comparison for open extension and its compatibility with composition."
+      },
+      {
+        "node": "lem-cbc-proper-open-interchange-coherence",
+        "why": "It supplies bounded-below proper/open identity, refinement, and base-change coherence."
+      },
+      {
+        "node": "lem-cbc-strict-tower-proper-open-calculus",
+        "why": "Supplies the normalized pro-etale proper/open arrow, its finite-evaluation identification with the etale arrow, and non-Cartesian pasting; the smooth-purity unit does not establish this ambient calculus."
+      },
+      {
+        "node": "lem-sf-comparison-pullback-exact",
+        "why": "Exactness and bounded-below preservation of the site comparison are ambient functorial input."
+      },
+      {
+        "node": "lem-sf-proper-open-comparison-site-normalization",
+        "why": "Its normalized proper/open square equation is exactly the refinement component of the comparison."
+      },
+      {
+        "node": "lem-weil-pbc-coefficient-exchange-mates",
+        "why": "Formal coefficient-cube identity identifies the specified proper exchanges using their counit equations; this is a generic adjunction tool."
+      },
+      {
+        "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+        "why": "The named direct-image comparison and its counit normalization are the map being transported."
+      },
+      {
+        "node": "lem-weil-pbc-comparison-pullback",
+        "why": "The canonical etale/pro-etale inverse-image compositor is needed to state every base-change square."
+      },
+      {
+        "node": "lem-weil-pbc-exchange-forget-coefficients",
+        "why": "Specifies the module-linear proper exchange as the actual adjunction mate."
+      },
+      {
+        "node": "lem-weil-pbc-finite-type-over-noetherian",
+        "why": "Verifies Noetherian hypotheses for finite-type field schemes in the compactification calculus."
+      },
+      {
+        "node": "lem-weil-pbc-mate-pasting",
+        "why": "Supplies identity and horizontal/vertical pasting of adjunction mates, including composition of the named direct-image comparisons."
+      },
+      {
+        "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+        "why": "Verifies the quasi-compact-open hypotheses in compactifications and compatible towers; an ambient Noetherian-scheme tool."
+      },
+      {
+        "node": "thm-cbc-finite-torsion",
+        "why": "It supplies invertibility and pasting for the etale compact-support exchange under open base change."
+      },
+      {
+        "node": "thm-sf-comp-composition",
+        "why": "Identifies the canonical pro-etale composition isomorphism on bounded-below etale-origin witnesses; the explicit calculation uses the tower normalization stipulated in the item."
+      }
+    ]
+  },
+  "tool_uses": [
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-amb-etale-compact-comparisons",
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-cbc-extension-zero-base-change",
+    "lem-cbc-extension-zero-composition",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-sf-comparison-pullback-exact",
+    "lem-sf-proper-open-comparison-site-normalization",
+    "lem-weil-pbc-coefficient-exchange-mates",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "thm-cbc-finite-torsion",
+    "thm-sf-comp-composition"
+  ],
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-Codex-NQ-365179848",
+    "group": "NQ",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-365179848 (reviewer sub-agent of L); spot-checked: Reviewed item, all ten proof steps, cited DAG statements, unit/chapter route, Stacks sources, blueprint, coefficient categories, edge cases, dependencies, and duplicates. No mathematical or structural faults found; review.md records the checks."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.CompactSupportSiteCoherence",
+    "declaration": "AlgebraicGeometry.ProEtale.compactSupportSiteCoherence",
+    "statement": "theorem compactSupportSiteCoherence (P : WeilConjectures.PurityFiniteSetting.{u}) : (∀ {X Y : Over (Spec (.of P.field.k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (c : Compactification f.left) (L : DerivedCategory.Plus (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))), IsIso ((compactSupportSiteComparisonPlus P.Coefficient c).hom.app L)) ∧ (∀ {X X' Y Y' : Over (Spec (.of P.field.k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] {f : X ⟶ Y} {f' : X' ⟶ Y'} {u' : X' ⟶ X} {v : Y' ⟶ Y} [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] [IsOpenImmersion v.left] (sq : IsPullback u'.left f'.left f.left v.left) (c : Compactification f.left) (L : DerivedCategory.Plus (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))), IsIso ((Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap P.Coefficient sq c).app L) ∧ IsIso ((rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} P.Coefficient) sq c).app ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X.left).mapDerivedCategory.obj L.obj))) ∧ (∀ {T : Scheme.{u}} {b₀ b₁ : CompactSupportSiteBoundary P.Coefficient T} (D : CompactSupportSiteDiagram P b₀ b₁), (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategory.map (DerivedCategory.Plus.ι.map D.etaleMap) ≫ b₁.comparison.hom = b₀.comparison.hom ≫ D.proEtaleMap) ∧ (∀ {T : Scheme.{u}} {b₀ b₁ : CompactSupportSiteBoundary P.Coefficient T} (D E : CompactSupportSiteDiagram P b₀ b₁), D.etaleMap = E.etaleMap → D.proEtaleMap = E.proEtaleMap)",
+    "branch": "newtargets-dag",
+    "by": "Q18",
+    "date": "2026-10-17",
+    "existing": false,
+    "file": "lean/Sheaf/Paper/CompactSupportSiteCoherence.lean",
+    "declarations": [
+      "AlgebraicGeometry.ProEtale.compactSupportCoherenceCoefficientFinite",
+      "AlgebraicGeometry.ProEtale.coherenceEtaleCompositor",
+      "AlgebraicGeometry.ProEtale.coherenceCompactificationChange",
+      "AlgebraicGeometry.ProEtale.coherenceProEtaleCompositor",
+      "AlgebraicGeometry.ProEtale.coherenceCompositionSource",
+      "AlgebraicGeometry.ProEtale.CompactSupportSiteBoundary",
+      "AlgebraicGeometry.ProEtale.coherenceCompactificationBoundary",
+      "AlgebraicGeometry.ProEtale.coherenceCompositionBoundary",
+      "AlgebraicGeometry.ProEtale.coherenceRestrictionSource",
+      "AlgebraicGeometry.ProEtale.coherenceRestrictionTarget",
+      "AlgebraicGeometry.ProEtale.coherencePushBoundary",
+      "AlgebraicGeometry.ProEtale.coherencePullBoundary",
+      "AlgebraicGeometry.ProEtale.CompactSupportSiteDiagram",
+      "AlgebraicGeometry.ProEtale.CompactSupportSiteDiagram.etaleMap",
+      "AlgebraicGeometry.ProEtale.CompactSupportSiteDiagram.proEtaleMap",
+      "AlgebraicGeometry.ProEtale.compactSupportSiteCoherence"
+    ],
+    "note": "Repair of immutable head 2e698672a5d8: use the recorded actual properTransportRefinement, originComposition and compactification-relative pro-etale exchange. State all three equations, both exchange invertibilities, and the generated identity/whiskering/pasting calculus. The original tautological refinement conjugate and unused imports are removed."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-997606dd8",
+    "group": "Q18",
+    "result": "pass",
+    "note": "Wrote review.md. Checked immutable statements, all 18 dependencies, sources, canonical maps, universes, edge cases, docstrings, route-pivot requirements, and verbatim signature. The sole delivered module compiled cleanly through scompile.py. No landing corrections required; branch unchanged."
+  }
 }

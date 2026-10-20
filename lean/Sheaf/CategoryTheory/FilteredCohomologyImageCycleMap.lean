@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.CategoryTheory.FilteredCohomologyImage
+public import Sheaf.CategoryTheory.FilteredCohomologyImage
 import all WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
 import all WeilConjectures.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
 
@@ -76,7 +76,7 @@ private theorem cycle_class_image {C : Type u} [Category.{v} C] [Abelian C]
       Subobject (K.X n)) : C) ⟶ K.cycles n)
     (hc : c ≫ K.iCycles n =
       (L.complexStep p n ⊓ (Subobject.pullback (K.d n (n + 1))).obj ⊥).arrow) :
-    imageSubobject (c ≫ K.homologyπ n) = (L.homologyFiltration n).step p := by
+    imageSubobject (c ≫ K.homologyπ n) = (L.cohomologyImage n).step p := by
   let S := L.complexStep p n ⊓ (Subobject.pullback (K.d n (n + 1))).obj ⊥
   let g := HomologicalComplex.cyclesMap (L.step p).arrow n
   have h : S.Factors (g ≫ K.iCycles n) := by
@@ -155,8 +155,8 @@ theorem cohomologyImage_cycle_map
   let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥
   let B := imageSubobject (K.d (n - 1) n)
   let f := c ≫ K.homologyπ n
-  imageSubobject f = (L.homologyFiltration n).step p ∧
-    (Subobject.pullback f).obj ((L.homologyFiltration n).step (p + 1)) =
+  imageSubobject f = (L.cohomologyImage n).step p ∧
+    (Subobject.pullback f).obj ((L.cohomologyImage n).step (p + 1)) =
       (Subobject.pullback (A ⊓ Z).arrow).obj ((A ⊓ B) ⊔ (A' ⊓ Z)) := by
   dsimp only
   constructor
@@ -182,7 +182,7 @@ theorem cohomologyImage_cycle_map
       rw [map_pullback_mono, hi, inf_eq_right.mpr hTZ,
         ← Subobject.exists_iso_map, exists_image, hc', imageSubobject_mono,
         Subobject.mk_arrow]
-    have hnext : (L.homologyFiltration n).step (p + 1) =
+    have hnext : (L.cohomologyImage n).step (p + 1) =
         (Subobject.«exists» q).obj ((Subobject.pullback i).obj T) := by
       rw [← hT, exists_image]
       exact (cycle_class_image L (p + 1) n c' hc').symm
@@ -195,7 +195,7 @@ theorem cohomologyImage_cycle_map
         ((ShortComplex.exact_iff_image_eq_kernel Q).mp he).symm
       rw [hk, ← Subobject.exists_iso_map, exists_image, K.toCycles_i]
     have hpre : (Subobject.map i).obj
-        ((Subobject.pullback q).obj ((L.homologyFiltration n).step (p + 1))) = B ⊔ T := by
+        ((Subobject.pullback q).obj ((L.cohomologyImage n).step (p + 1))) = B ⊔ T := by
       rw [hnext, pullback_exists_epi, ← Subobject.exists_iso_map,
         Subobject.exists_obj_sup, Subobject.exists_iso_map, hbound,
         map_pullback_mono, hi, inf_eq_right.mpr hTZ]
@@ -223,7 +223,7 @@ theorem cohomologyImage_cycle_map
       (Subobject.pullback S.arrow).obj ((A ⊓ B) ⊔ T)
     rw [Subobject.pullback_comp]
     rw [← Subobject.pullback_map_self i
-      ((Subobject.pullback q).obj ((L.homologyFiltration n).step (p + 1))), hpre,
+      ((Subobject.pullback q).obj ((L.cohomologyImage n).step (p + 1))), hpre,
       ← Subobject.pullback_comp, hc]
     apply Subobject.map_obj_injective S.arrow
     rw [map_pullback_mono, map_pullback_mono, Subobject.mk_arrow, hmod,

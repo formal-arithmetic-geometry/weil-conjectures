@@ -1,144 +1,142 @@
 {
- "id": "lem-sbc-injective-module-forget-evaluation-acyclic",
- "kind": "statement",
- "title": "Existing evaluation acyclicity for large constant coefficients",
- "statement": "For any scheme X:Scheme.{u}, commutative Λ:Type(u+1), and injective ModuleCat.{u+1} Λ-valued sheaf I on X_et, every positive right derived evaluation at every W in X.Etale of its underlying abelian sheaf is zero. No assumption Λ:Type u or abelian injectivity of forget(I) is made.",
- "source": {
-  "document": "Stacks Project",
-  "place": "Tag 03FD, second paragraph via 03FC and 03F9; existing helper in ModuleAbelianDerivedDirectImageComparison"
- },
- "stmt_deps": [
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-abelian-etale-sheaves"
- ],
- "proof": [
-  {
-   "text": "Transport I through moduleSheaf_constantRing_equivalence; the underlying abelian sheaf is unchanged and the image is injective. Apply injective_module_sheaf_injective_presheaf.",
-   "uses": [
+  "id": "lem-sbc-injective-module-forget-evaluation-acyclic",
+  "kind": "statement",
+  "title": "Existing evaluation acyclicity for large constant coefficients",
+  "statement": "For any scheme X:Scheme.{u}, commutative Λ:Type(u+1), and injective ModuleCat.{u+1} Λ-valued sheaf I on X_et, every positive right derived evaluation at every W in X.Etale of its underlying abelian sheaf is zero. No assumption Λ:Type u or abelian injectivity of forget(I) is made.",
+  "source": {
+    "document": "Stacks Project",
+    "place": "Tag 03FD, second paragraph via 03FC and 03F9; existing helper in ModuleAbelianDerivedDirectImageComparison"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-abelian-etale-sheaves"
+  ],
+  "proof": [
+    {
+      "text": "Transport I through moduleSheaf_constantRing_equivalence; the underlying abelian sheaf is unchanged and the image is injective. Apply injective_module_sheaf_injective_presheaf.",
+      "uses": [
+        "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+        "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For every etale covering and positive degree use injective_presheaf_module_cech_cocycle_lift_max in coefficient universe u+1. Its boundary witness proves the SiteCech complex exact, hence zero homology. Transfer to the usual etale Cech complex.",
+      "uses": [
+        "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max",
+        "lem-weil-pbc-etale-site-cech-complex-comparison"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply the etale Cech vanishing criterion with all objects and all covers, each refining itself. Transport the resulting zero right derived evaluation through the underlying-sheaf comparison. This is the already proved private helper reused through import all.",
+      "uses": [
+        "lem-weil-pbc-cech-vanishing-criterion"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-cech-vanishing-criterion",
+    "lem-weil-pbc-etale-site-cech-complex-comparison",
+    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max",
     "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
     "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "agent R1",
+    "document": "Stacks Project",
+    "place": "Tag 03FD, second paragraph via 03FC and 03F9; existing helper in ModuleAbelianDerivedDirectImageComparison; existing library computations and the explicit comparison reduction"
   },
-  {
-   "text": "For every etale covering and positive degree use injective_presheaf_module_cech_cocycle_lift_max in coefficient universe u+1. Its boundary witness proves the SiteCech complex exact, hence zero homology. Transfer to the usual etale Cech complex.",
-   "uses": [
-    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max",
-    "lem-weil-pbc-etale-site-cech-complex-comparison"
-   ],
-   "elementary": false
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Exact functor derived Hom comparison is injective when source Hom comparisons are bijective on injectives and forgotten injectives are acyclic",
+      "date": "2026-10-13",
+      "results": "UNAVAILABLE: Internal Server Error."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A pulled back free abelian represented sheaf corepresents evaluation and underlying injective module sheaves are acyclic for its Hom functor",
+      "date": "2026-10-13",
+      "results": "Sheaf.H, cohomologyPresheafFunctor, GabrielPopescu.preservesInjectiveObjects; no matching scalar comparison.",
+      "verdict": "no complete match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass",
+      "date": "2026-10-13",
+      "results": "InjectiveResolution.extAddEquivCohomologyClass and its apply/symm lemmas exist in Mathlib.CategoryTheory.Abelian.Injective.Ext.",
+      "verdict": "use resolution infrastructure"
+    },
+    {
+      "tool": "grep",
+      "query": "rawModuleAbelianHomMap; preadditiveCoyoneda.*rightDerived; freeSheafHomEquiv; rightDerivedObjIsoOfResolution",
+      "date": "2026-10-13",
+      "results": "No duplicate raw injectivity theorem. Found the free sections adjunction, ExtRightDerivedHom, the acyclic-resolution API, representedEquiv in RawRestrictedHomotopySectionsIso, and the proved evaluation-acyclicity helper in ModuleAbelianDerivedDirectImageComparison. The common-universe generic ringed-site lemma does not directly fit coefficients in u+1.",
+      "verdict": "reuse existing constructions; isolate two missing comparison steps"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapInjective",
+    "date": "2026-10-13",
+    "group": "R1"
   },
-  {
-   "text": "Apply the etale Cech vanishing criterion with all objects and all covers, each refining itself. Transport the resulting zero right derived evaluation through the underlying-sheaf comparison. This is the already proved private helper reused through import all.",
-   "uses": [
-    "lem-weil-pbc-cech-vanishing-criterion"
-   ],
-   "elementary": false
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "sbc-lem-higher-direct-image-limit",
+      "place": "Resolution argument for the injective part of the explicit raw scalar comparison",
+      "via": [
+        "lem-sbc-raw-module-abelian-hom-map-injective"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-smooth-base-change",
+  "unit": "sk-lem-failure-field",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "lean": {
+    "existing": true,
+    "module": "Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison",
+    "declaration": "AlgebraicGeometry.Etale.moduleAbelianForget_injective_evaluation_acyclic",
+    "statement": "theorem moduleAbelianForget_injective_evaluation_acyclic\n    (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})\n    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective G]\n    (W : X.Etale) (n : ℕ) :\n    IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n      (evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (Opposite.op W)).rightDerived\n        (n + 1)).obj ((moduleAbelianForget Λ X).obj G))",
+    "branch": "sheaf-dag",
+    "by": "R1",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "R1",
+    "result": "pass",
+    "landing": "20261013T152019-L-954285",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "R1",
+    "result": "pass",
+    "landing": "20261013T152019-L-954285",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-weil-pbc-cech-vanishing-criterion",
-  "lem-weil-pbc-etale-site-cech-complex-comparison",
-  "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max",
-  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
-  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
- ],
- "proof_origin": {
-  "by": "agent R1",
-  "document": "Stacks Project",
-  "place": "Tag 03FD, second paragraph via 03FC and 03F9; existing helper in ModuleAbelianDerivedDirectImageComparison; existing library computations and the explicit comparison reduction"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Exact functor derived Hom comparison is injective when source Hom comparisons are bijective on injectives and forgotten injectives are acyclic",
-   "date": "2026-10-13",
-   "results": "UNAVAILABLE: Internal Server Error."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A pulled back free abelian represented sheaf corepresents evaluation and underlying injective module sheaves are acyclic for its Hom functor",
-   "date": "2026-10-13",
-   "results": "Sheaf.H, cohomologyPresheafFunctor, GabrielPopescu.preservesInjectiveObjects; no matching scalar comparison.",
-   "verdict": "no complete match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass",
-   "date": "2026-10-13",
-   "results": "InjectiveResolution.extAddEquivCohomologyClass and its apply/symm lemmas exist in Mathlib.CategoryTheory.Abelian.Injective.Ext.",
-   "verdict": "use resolution infrastructure"
-  },
-  {
-   "tool": "grep",
-   "query": "rawModuleAbelianHomMap; preadditiveCoyoneda.*rightDerived; freeSheafHomEquiv; rightDerivedObjIsoOfResolution",
-   "date": "2026-10-13",
-   "results": "No duplicate raw injectivity theorem. Found the free sections adjunction, ExtRightDerivedHom, the acyclic-resolution API, representedEquiv in RawRestrictedHomotopySectionsIso, and the proved evaluation-acyclicity helper in ModuleAbelianDerivedDirectImageComparison. The common-universe generic ringed-site lemma does not directly fit coefficients in u+1.",
-   "verdict": "reuse existing constructions; isolate two missing comparison steps"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapInjective",
-  "date": "2026-10-13",
-  "group": "R1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "sbc-lem-higher-direct-image-limit",
-   "place": "Resolution argument for the injective part of the explicit raw scalar comparison",
-   "via": [
-    "lem-sbc-raw-module-abelian-hom-map-injective"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-smooth-base-change",
- "unit": "sk-lem-failure-field",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "lean": {
-  "existing": true,
-  "module": "WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison",
-  "declaration": "AlgebraicGeometry.Etale.moduleAbelianForget_injective_evaluation_acyclic",
-  "statement": "theorem moduleAbelianForget_injective_evaluation_acyclic\n    (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})\n    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective G]\n    (W : X.Etale) (n : ℕ) :\n    IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n      (evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (Opposite.op W)).rightDerived\n        (n + 1)).obj ((moduleAbelianForget Λ X).obj G))",
-  "branch": "sheaf-dag",
-  "by": "R1",
-  "date": "2026-10-13",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ModuleAbelianDerivedDirectImageComparison.lean",
-  "note": "Canonical upstream declaration; the forwarding Sheaf module is retired. The private evaluation helper is accessed directly with import all. No statement, proof dependency or unit route changes."
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
-  "result": "pass",
-  "landing": "20261013T152019-L-954285",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J2",
-  "result": "pass",
-  "landing": "20261020T211739-L-3496230",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

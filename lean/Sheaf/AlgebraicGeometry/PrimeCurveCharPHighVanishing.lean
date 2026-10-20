@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierDimension
-import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.AlgebraicGeometry.Regular

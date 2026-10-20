@@ -10,12 +10,24 @@ public import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
+import Sheaf.Algebra.Homology.SignedDoubleHomCone
 
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.CategoryTheory.ScalarLocalization
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
+import Sheaf.Algebra.Homology.KInjectiveHomComplex
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Homology.HomTensorTotal
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 
 /-! # Coefficient biduality, signed shifts, triangles and scalar localization
 
@@ -120,7 +132,7 @@ def signedShift (X : D.{c, v, r, w} J R) :
     (sourceShift.{c, v, r, w} J R ((dual.{c, v, r, w} J R).obj (op X)) (-1)).inv.app
       (ringedSiteDualityUnit.{c, v, r, w} J R))
 
-/- The bidual map is compatible with the precisely signed exact structure.
+/-- The bidual map is compatible with the precisely signed exact structure.
 Source: Stacks 08JC, 0A97; derived.tex 0144
 (blueprint: lem-coef-rational-bidual-triangle-compatibility).
 Proof: (1) Fix a K-injective coefficient resolution I. Hom(-,I) inverts quasi-isomorphisms,
@@ -138,84 +150,6 @@ addition laws. (8) Naturality gives the first two squares. For the third, d_Z �
 ≫ d_{V[1]} ≫ psi_V = w ≫ d_V[1]. (13) Apply triangle two-out-of-three to id and bidual, then
 shift compatibility and its inverse to obtain the asserted invertibility locus. No general
 reflexivity assumption is used. Slice and scalar descent are stated separately below. -/
-/-- The signed shift and triangle data used by compatibility.
-Source: Stacks 08JC and 0A97.
-(blueprint: lem-coef-rational-bidual-data).
-Proof: choose the explicit signed double-Hom comparison and the induced cone
-comparison; the cited duality, restriction, and triangle lemmas give each
-conjunct, while the object-property shift and two-out-of-three lemmas give
-the invertibility-locus clauses. -/
-theorem compatibility_data (M : RingedSiteDualityModel.{c, v, r, w} J R) :
-    ∃ S : (bidual.{c, v, r, w} J R).CommShift ℤ,
-      (∀ X : D.{c, v, r, w} J R,
-        (@Functor.commShiftIso _ _ _ _ (bidual.{c, v, r, w} J R) ℤ _ _ _ S 1).hom.app X =
-          signedShift.{c, v, r, w} J R X) ∧
-      (bidual.{c, v, r, w} J R).IsTriangulated ∧
-      NatTrans.CommShift (evaluation.{c, v, r, w} J R M) ℤ ∧
-      (∀ T : Triangle (D.{c, v, r, w} J R), T ∈ distTriang _ →
-        ∃ m : T ⟶ (bidual.{c, v, r, w} J R).mapTriangle.obj T,
-          m.hom₁ = (evaluation.{c, v, r, w} J R M).app T.obj₁ ∧
-          m.hom₂ = (evaluation.{c, v, r, w} J R M).app T.obj₂ ∧
-          m.hom₃ = (evaluation.{c, v, r, w} J R M).app T.obj₃) ∧
-      ObjectProperty.IsTriangulated (fun X : D.{c, v, r, w} J R =>
-        IsIso ((evaluation.{c, v, r, w} J R M).app X)) ∧
-      ObjectProperty.IsClosedUnderIsomorphisms (fun X : D.{c, v, r, w} J R =>
-        IsIso ((evaluation.{c, v, r, w} J R M).app X)) := by
-  sorry
-
-/-- Assemble the triangle compatibility predicate from exactness and its isomorphism locus.
-(blueprint: lem-coef-rational-bidual-triangle-assembly).
-Proof: install the supplied exactness, commutation, and object-property
-instances, then apply their shift closure and triangle two-out-of-three
-lemmas componentwise. -/
-theorem compatibility_triangle (M : RingedSiteDualityModel.{c, v, r, w} J R)
-    (S : (bidual.{c, v, r, w} J R).CommShift ℤ)
-    (hF : (bidual.{c, v, r, w} J R).IsTriangulated)
-    (hd : NatTrans.CommShift (evaluation.{c, v, r, w} J R M) ℤ)
-    (htri : ∀ T : Triangle (D.{c, v, r, w} J R), T ∈ distTriang _ →
-      ∃ m : T ⟶ (bidual.{c, v, r, w} J R).mapTriangle.obj T,
-        m.hom₁ = (evaluation.{c, v, r, w} J R M).app T.obj₁ ∧
-        m.hom₂ = (evaluation.{c, v, r, w} J R M).app T.obj₂ ∧
-        m.hom₃ = (evaluation.{c, v, r, w} J R M).app T.obj₃)
-    (href : ObjectProperty.IsTriangulated (fun X : D.{c, v, r, w} J R =>
-      IsIso ((evaluation.{c, v, r, w} J R M).app X)))
-    (hiso : ObjectProperty.IsClosedUnderIsomorphisms (fun X : D.{c, v, r, w} J R =>
-      IsIso ((evaluation.{c, v, r, w} J R M).app X))) :
-    (fun [_shiftInst : (bidual.{c, v, r, w} J R).CommShift ℤ] ↦
-      TriangleCompatibility (bidual.{c, v, r, w} J R)
-        (evaluation.{c, v, r, w} J R M)) (_shiftInst := S) := by
-  let _ : (bidual.{c, v, r, w} J R).CommShift ℤ := S
-  let _ : (bidual.{c, v, r, w} J R).IsTriangulated := hF
-  let _ : NatTrans.CommShift (evaluation.{c, v, r, w} J R M) ℤ := hd
-  let P : ObjectProperty (D.{c, v, r, w} J R) := fun X =>
-    IsIso ((evaluation.{c, v, r, w} J R M).app X)
-  let _ : P.IsTriangulated := href
-  let _ : P.IsClosedUnderIsomorphisms := hiso
-  refine ⟨hF, hd, htri, ?_, ?_⟩
-  · intro X n
-    constructor
-    · intro h
-      exact P.le_shift n X h
-    · intro h
-      have h' := P.le_shift (-n) (X⟦n⟧) h
-      change P ((X⟦n⟧)⟦(-n)⟧) at h'
-      have hz := P.prop_of_iso
-        ((shiftFunctorAdd' _ n (-n) 0 (by abel)).app X).symm h'
-      exact P.prop_of_iso (shiftFunctorZero _ ℤ |>.app X) hz
-  · intro T hT
-    refine ⟨?_, ?_, ?_⟩
-    · intro h
-      exact NatTrans.isIso_app_obj₃_of_isIso_app_obj₁₂
-        (τ := evaluation.{c, v, r, w} J R M) (hT := hT) h.1 h.2
-    · intro h
-      exact NatTrans.isIso_app_obj₂_of_isIso_app_obj₁₃
-        (τ := evaluation.{c, v, r, w} J R M) (hT := hT) h.1 h.2
-    · intro h
-      exact NatTrans.isIso_app_obj₁_of_isIso_app_obj₂₃
-        (τ := evaluation.{c, v, r, w} J R M) (hT := hT) h.1 h.2
-
-/-- The bidual compatibility assembled from the explicit data and triangle lemma.
-(blueprint: lem-coef-rational-bidual-triangle-compatibility). -/
 theorem compatibility (M : RingedSiteDualityModel.{c, v, r, w} J R) :
     ∃ S : (bidual.{c, v, r, w} J R).CommShift ℤ,
       (∀ X : D.{c, v, r, w} J R,
@@ -224,8 +158,7 @@ theorem compatibility (M : RingedSiteDualityModel.{c, v, r, w} J R) :
       (fun [_shiftInst : (bidual.{c, v, r, w} J R).CommShift ℤ] ↦
         TriangleCompatibility (bidual.{c, v, r, w} J R) (evaluation.{c, v, r, w} J R M))
         (_shiftInst := S) := by
-  obtain ⟨S, hS, hF, hd, htri, href, hiso⟩ := compatibility_data (J := J) (R := R) M
-  exact ⟨S, hS, compatibility_triangle (J := J) (R := R) M S hF hd htri href hiso⟩
+  sorry
 
 section Slice
 set_option backward.isDefEq.respectTransparency false

@@ -5,7 +5,7 @@ Authors: SHEAF group F9
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Mathlib.Algebra.Module.ZMod
 
 /-! # Cyclic coefficients on a sheaf annihilated by an integer

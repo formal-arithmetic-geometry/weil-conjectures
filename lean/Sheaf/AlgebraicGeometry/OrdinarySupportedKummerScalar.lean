@@ -50,12 +50,6 @@ def SupportedDerivedScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
           G ≫
           (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategory.map f)
 
-section
-
--- Share the instance proofs used by the recorded unbounded derived category.
-set_option linter.auxLemma false in
-attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
-
 /-- The scalar-extension clause, with the comparison maps fixed on generators.
 Both displayed universal properties refer to the canonical sectionwise scalar maps:
 constants send r to φ(r), roots send a ⊗ z to φ(a) ⊗ z. The Ext square is the assertion
@@ -94,7 +88,5 @@ def SupportedKummerScalar {R S : Type (u + 1)} [CommRing R] [CommRing S]
         (cS.mapExactFunctor (Sheaf.restrictScalars T.smallEtaleTopology φ)) (zero_add 2) =
       cR.comp (Ext.mk₀ θ) (add_zero 2)
 
-
-end
 
 end AlgebraicGeometry.Etale

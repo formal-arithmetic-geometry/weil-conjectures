@@ -1,130 +1,118 @@
 {
- "id": "def-weil-pbc-derived-reduction-model-data",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "prop-weil-pbc-koszul-reconstruction",
-   "place": "Normalization of the derived reduction counit and completion unit on resolving complexes"
+  "id": "def-weil-pbc-derived-reduction-model-data",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "prop-weil-pbc-koszul-reconstruction",
+      "place": "Normalization of the derived reduction counit and completion unit on resolving complexes"
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "definition",
- "title": "Derived reduction model data and normalized complex comparisons",
- "statement": "Let B and C be abelian categories with derived categories, F : B → C an additive functor, and P a predicate on B-valued cochain complexes. DerivedReductionModelData records a total left derived functor of F, its homotopy-category counit, its universal property, and invertibility of that counit on P. The complex counit includes the canonical complex-to-homotopy-to-derived comparison isomorphisms. For an additive L : C → B, a functor RF : D(C) → D(B), a homotopy comparison δ from L to RF and an ordinary unit u : id → F ⋙ L, define the normalized unit on a P-complex K as Q(u_K), followed by the normalized δ on F(K), followed by RF of the inverse complex counit. For the completed adic tower [def-weil-pbc-adic-coefficient-datum], bundle the already chosen universal derived pair without changing either chosen functor or counit. This is a record and normalization interface, not an additional existence assertion.",
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY and 0941, derived functors and their normalized comparisons"
- },
- "stmt_deps": [
-  "def-weil-pbc-adic-coefficient-datum"
- ],
- "proof": [
-  {
-   "text": "Bundle the functor, counit, universal property and computation law from the given existential pair, using exactly its existing two choices. Compose the canonical localization isomorphisms with the counit to obtain the complex comparison. On a resolving complex, all four factors are invertible; typeclass composition proves invertibility. Define the normalized right-derived comparison with its four localization factors and compose it with the ordinary unit and inverse left-derived counit. Specialize to the existing completedAdicReduction_exists pair; unfolding the record projections recovers the original definitions.",
-   "uses": [
+  "kind": "definition",
+  "title": "Derived reduction model data and normalized complex comparisons",
+  "statement": "Let B and C be abelian categories with derived categories, F : B → C an additive functor, and P a predicate on B-valued cochain complexes. DerivedReductionModelData records a total left derived functor of F, its homotopy-category counit, its universal property, and invertibility of that counit on P. The complex counit includes the canonical complex-to-homotopy-to-derived comparison isomorphisms. For an additive L : C → B, a functor RF : D(C) → D(B), a homotopy comparison δ from L to RF and an ordinary unit u : id → F ⋙ L, define the normalized unit on a P-complex K as Q(u_K), followed by the normalized δ on F(K), followed by RF of the inverse complex counit. For the completed adic tower [def-weil-pbc-adic-coefficient-datum], bundle the already chosen universal derived pair without changing either chosen functor or counit. This is a record and normalization interface, not an additional existence assertion.",
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 0941, derived functors and their normalized comparisons"
+  },
+  "stmt_deps": [
     "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-adic-coefficient-datum"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY and 0941; exact localization factors retained from the existing reconstruction definitions"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "A left derived functor with its counit and its computation on a resolving class determines the normalized completion unit",
-   "results": "8 hits including IsLeftDerivedFunctor, totalLeftDerivedCounit and derived adjunction counits; no bundled resolving-class computation and normalized complex unit.",
-   "date": "2026-10-19",
-   "verdict": "No matching normalization API; Mathlib universal-property declarations are used as ingredients."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A left derived functor with its counit and its computation on a resolving class determines the normalized completion unit",
-   "results": "8 hits including leftDerivedUnique and leftDerived_ext; these give universal properties, not this model normalization record.",
-   "date": "2026-10-19",
-   "verdict": "No matching normalization API; Mathlib universal-property declarations are used as ingredients."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
-   "results": "12 hits including the class and Kan-extension equivalence; used as a record field.",
-   "date": "2026-10-19",
-   "verdict": "No matching normalization API; Mathlib universal-property declarations are used as ingredients."
-  },
-  {
-   "tool": "grep",
-   "query": "structure.*Derived.*Model|derivedCompletionModelUnit",
-   "results": "0 Mathlib hits.",
-   "date": "2026-10-19",
-   "verdict": "No matching normalization API; Mathlib universal-property declarations are used as ingredients."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.Paper.KoszulReconstruction",
-  "date": "2026-10-19",
-  "group": "M6"
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.CompletedAdicCoefficientDatum",
-  "file": "lean/Sheaf/Paper/CompletedAdicCoefficientDatum.lean",
-  "declaration": "AlgebraicGeometry.Scheme.DerivedReductionModelData",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.DerivedReductionModelData",
-   "AlgebraicGeometry.Scheme.derivedReductionModelDataOfExists",
-   "AlgebraicGeometry.Scheme.DerivedReductionModelData.complexCounit",
-   "AlgebraicGeometry.Scheme.DerivedReductionModelData.complexCounit_isIso",
-   "AlgebraicGeometry.Scheme.derivedLimitComplexComparison",
-   "AlgebraicGeometry.Scheme.derivedCompletionModelUnit",
-   "AlgebraicGeometry.Scheme.CompletedAdicReductionData",
-   "AlgebraicGeometry.Scheme.completedAdicReductionData"
   ],
-  "statement": "structure DerivedReductionModelData",
-  "branch": "sheaf-dag",
-  "by": "M6",
-  "date": "2026-10-19"
- },
- "reviewed": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M6",
-  "result": "pass",
-  "landing": "20261019T192806-L-1868443",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E3",
-  "result": "pass",
-  "landing": "20261020T211659-L-3487987",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.completedAdicBalance_exists",
-   "AlgebraicGeometry.Scheme.completedAdicCommProjection_comp",
-   "AlgebraicGeometry.Scheme.completedAdicFiniteModuleStep_exists",
-   "AlgebraicGeometry.Scheme.completedAdicFiniteReduction_comparison",
-   "AlgebraicGeometry.Scheme.completedAdicFiniteRing_mul_comm",
-   "AlgebraicGeometry.Scheme.completedAdicOrdinaryTower_additive",
-   "AlgebraicGeometry.Scheme.completedAdicReduction_exists",
-   "AlgebraicGeometry.Scheme.completedAdicRestriction_exact",
-   "AlgebraicGeometry.Scheme.completedAdicRing_mul_comm"
+  "proof": [
+    {
+      "text": "Bundle the functor, counit, universal property and computation law from the given existential pair, using exactly its existing two choices. Compose the canonical localization isomorphisms with the counit to obtain the complex comparison. On a resolving complex, all four factors are invertible; typeclass composition proves invertibility. Define the normalized right-derived comparison with its four localization factors and compose it with the ordinary unit and inverse left-derived counit. Specialize to the existing completedAdicReduction_exists pair; unfolding the record projections recovers the original definitions.",
+      "uses": [
+        "def-weil-pbc-adic-coefficient-datum"
+      ],
+      "elementary": false
+    }
   ],
-  "sorry_after": []
- }
+  "proof_deps": [
+    "def-weil-pbc-adic-coefficient-datum"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 0941; exact localization factors retained from the existing reconstruction definitions"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "A left derived functor with its counit and its computation on a resolving class determines the normalized completion unit",
+      "results": "8 hits including IsLeftDerivedFunctor, totalLeftDerivedCounit and derived adjunction counits; no bundled resolving-class computation and normalized complex unit.",
+      "date": "2026-10-19",
+      "verdict": "No matching normalization API; Mathlib universal-property declarations are used as ingredients."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A left derived functor with its counit and its computation on a resolving class determines the normalized completion unit",
+      "results": "8 hits including leftDerivedUnique and leftDerived_ext; these give universal properties, not this model normalization record.",
+      "date": "2026-10-19",
+      "verdict": "No matching normalization API; Mathlib universal-property declarations are used as ingredients."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+      "results": "12 hits including the class and Kan-extension equivalence; used as a record field.",
+      "date": "2026-10-19",
+      "verdict": "No matching normalization API; Mathlib universal-property declarations are used as ingredients."
+    },
+    {
+      "tool": "grep",
+      "query": "structure.*Derived.*Model|derivedCompletionModelUnit",
+      "results": "0 Mathlib hits.",
+      "date": "2026-10-19",
+      "verdict": "No matching normalization API; Mathlib universal-property declarations are used as ingredients."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Paper.KoszulReconstruction",
+    "date": "2026-10-19",
+    "group": "M6"
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Paper.CompletedAdicCoefficientDatum",
+    "file": "lean/Sheaf/Paper/CompletedAdicCoefficientDatum.lean",
+    "declaration": "AlgebraicGeometry.Scheme.DerivedReductionModelData",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.DerivedReductionModelData",
+      "AlgebraicGeometry.Scheme.derivedReductionModelDataOfExists",
+      "AlgebraicGeometry.Scheme.DerivedReductionModelData.complexCounit",
+      "AlgebraicGeometry.Scheme.DerivedReductionModelData.complexCounit_isIso",
+      "AlgebraicGeometry.Scheme.derivedLimitComplexComparison",
+      "AlgebraicGeometry.Scheme.derivedCompletionModelUnit",
+      "AlgebraicGeometry.Scheme.CompletedAdicReductionData",
+      "AlgebraicGeometry.Scheme.completedAdicReductionData"
+    ],
+    "statement": "structure DerivedReductionModelData",
+    "branch": "sheaf-dag",
+    "by": "M6",
+    "date": "2026-10-19"
+  },
+  "reviewed": {
+    "date": "2026-10-19",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "M6",
+    "result": "pass",
+    "landing": "20261019T192806-L-1868443",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-19",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "M6",
+    "result": "pass",
+    "landing": "20261019T192806-L-1868443",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  }
 }

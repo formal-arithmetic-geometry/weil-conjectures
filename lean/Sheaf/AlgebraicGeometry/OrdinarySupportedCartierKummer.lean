@@ -7,12 +7,27 @@ module
 
 public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerSystem
 import Sheaf.AlgebraicGeometry.SupportedCartierBoundaryExistence
-import Sheaf.AlgebraicGeometry.SupportedDerivedUnitForget
-import Sheaf.AlgebraicGeometry.SupportedKummerChernRealization
-import Sheaf.AlgebraicGeometry.SupportedKummerBoundaryPullback
-import Sheaf.AlgebraicGeometry.SupportedKummerBoundaryScalar
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.ClosedSupportHom
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import WeilConjectures.SixFunctors.Finite.BaseChange
+import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
+import Sheaf.AlgebraicGeometry.PullbackConstantModule
+import Sheaf.AlgebraicGeometry.RelativeTorsorCohomology
+import Sheaf.AlgebraicGeometry.SupportedKummerCartierPullback
+import Sheaf.AlgebraicGeometry.SupportedKummerScalarSource
+import Sheaf.AlgebraicGeometry.SupportedKummerSupportHomNaturality
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
+import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Finite.Exact
+import WeilConjectures.SixFunctors.OpenClosed.Exact
 
 /-!
 # Existence of an ordinary supported Cartier Kummer map
@@ -25,8 +40,6 @@ sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.defeqAttrib.useBackward true
 
 universe u
 
@@ -34,33 +47,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
-
-private theorem supportedConstantExchange_isIso
-    (A : Type (u + 1)) [CommRing A] {D D' T T' : Scheme.{u}}
-    (i : D ⟶ T) [IsClosedImmersion i] (i' : D' ⟶ T')
-    (v : T' ⟶ T) (w : D' ⟶ D) (sq : IsPullback w i' i v) :
-    IsIso (supportedConstantExchange A i i' v w sq.toCommSq) := by
-  let := isIso_baseChangeMap_of_isFinite (ModuleCat.{u + 1} A) sq
-  unfold supportedConstantExchange
-  infer_instance
-
-private theorem ordinaryTwistTransport_exists
-    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) :
-    Nonempty (OrdinaryFiniteTwistTransport A N hA) := by
-  obtain ⟨r, c, p, hcover, hr, hc, _⟩ := Scheme.etaleFiniteTwistPullback A N hN hA
-  let t : OrdinaryFiniteTwistTransport A N hA :=
-    { roots := r
-      line := fun v hT ↦ c v hT (by simpa using hT.map v.appTop.hom) 1
-      roots_normalization := hr
-      line_normalization := fun v hT ↦
-        hc v hT (by simpa using hT.map v.appTop.hom) }
-  exact ⟨t⟩
-
-section
-
--- Use the same category-instance proofs as the recorded derived module category.
-set_option linter.auxLemma false in
-attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 /-- The supported Cartier Kummer morphism, with its defining relative boundary,
 unit/Chern equation, Cartier-preserving pullback square, and derived scalar square.
@@ -72,29 +58,75 @@ Source: Stacks 03PL and 0A45; blueprint lem-amb-cartier-kummer-map
 (blueprint: lem-asd-ordinary-supported-kummer).
 
 Proof:
-1. Take the unique relative-boundary representative from
-   supported_cartier_boundary_existsUnique. It already contains the integral
-   torsor extension and the positive Kummer normalization.
-2. The normalized roots and tensor-line comparisons of etaleFiniteTwistPullback
-   give an OrdinaryFiniteTwistTransport; take its degree-one line comparison.
-3. Let c be supportedExactDerivedMap applied to that representative, and let c₁
-   be the inverse Ext realization of supportedDerivedUnit followed by c. The
-   generic exact-single adjunction comparison identifies this with Yoneda
-   precomposition by the ordinary constant unit. The integral generator commutes
-   with that unit. The boundary's equivariant map identifies the divisor frame
-   torsor with the lifting torsor of its extension over section one. Its H¹ class
-   is therefore the Picard class of the dual Cartier ideal. Composing with the
-   positive Kummer extension and the root tensor map gives the Chern equation,
-   as proved in supported_kummer_chern_realization. Ext.homEquiv supplies the
-   derived realization equation by its inverse identity.
-4. On a Cartier pullback take the uniquely normalized primed boundary. Closed
-   immersions are finite, so finite sheaf base change and the constant comparison
-   make supportedConstantExchange invertible. Apply the separate normalized
-   boundary pullback result to obtain the required Ext square.
-5. Take the uniquely normalized boundary over the lifted residue coefficient ring.
-   The separate scalar compatibility result supplies its unbounded scalar-unit
-   universal properties and the coefficient Ext square with the chosen class.
-No flatness of the coefficient map or the Cartier-preserving base map is assumed.
+
+1. By `def-pc-divisor-line-bundle`, the line is the dual of the Cartier ideal.
+On an affine chart with regular generator f, its dual basis is e = f⁻¹ and the
+canonical divisor section is f e. On the complement f is a unit, so this is a
+specified frame τ. If f changes to u f, the dual basis changes to u⁻¹ e and the
+section stays the same. `lem-sc-line-bundle-torsor` identifies these frames with
+the actual G_m-torsor of the line.
+
+2. Apply `lem-amb-relative-torsor-cohomology` to this torsor with its specified
+section on the complement. This gives the relative H¹ class, independent of charts
+and refinements. Equivalently, form the integral torsor extension and quotient by
+the splitting over the open complement. The result is an extension of i_* Z_D by
+G_m; its fibre over the supported section one is the frame torsor, and τ maps to
+zero. This is exactly the extension model in SupportedKummerBoundary.
+
+3. `lem-amb-kummer-any-base` supplies the actual short exact Kummer sequence.
+Its relative connecting map is the Yoneda product with that extension. Naturality
+of the relative connecting map from `lem-amb-relative-torsor-cohomology` identifies
+its forgotten-support class with the Kummer Chern class of the line. G_m is used
+only as an abelian sheaf; it is never treated as a ZMod N-module.
+
+4. `lem-weil-pbc-etale-module-cohomology-forget` identifies module and abelian
+derived sections of roots of unity, and these comparisons commute with restriction.
+Their relative cones therefore agree. `lem-amb-closed-support-hom` identifies the
+relative class with an Ext class from i_* (ZMod N)_D. The forget-support map is
+precomposition with the constant unit. Concretely,
+`lem-weil-pbc-open-closed-short-exact` and
+`lem-weil-pbc-extension-by-zero-adjunction` identify derived Hom from the open-closed
+triangle with the relative fibre of the restriction of sections. Thus the map out
+of the relative fibre is the specified unit, giving the Chern equality.
+
+5. A closed immersion is finite, so `lemma-weil-pbc-finite-direct-image-exact`
+identifies its derived direct image of a sheaf with its degree-zero direct image.
+Apply `lem-pur-derived-change-of-rings` along ZMod N → A. By
+`lemma-weil-pbc-finite-stalk-formula`, the supported constant has stalk ZMod N on D
+and zero elsewhere. `lem-kun-stalk-as-pullback`,
+`lem-kun-inverse-image-monoidal`, and `lem-kun-pullback-constant` compute the
+extended stalks as A and zero, and the canonical comparison is the identity there.
+`prop-weil-pbc-geometric-stalks-exact` and
+`lemma-weil-pbc-geometric-stalk-conservative` show that its cone is acyclic.
+`lem-asd-finite-etale-twist-line` makes the roots sheaf a flat rank-one ZMod N-line,
+so the extended target is the actual finite twist in degree zero. The same
+calculation extends the constant unit to the A-unit. This proves the Chern and
+scalar clauses, with the scalar maps fixed on constants and pure root tensors.
+The supported constant and the root line are flat over ZMod N, so their
+normalized scalar units have SupportedDerivedScalarUnit's unbounded derived
+universal property. Functoriality of derived scalar extension gives the Ext square.
+
+6. For Cartier-preserving pullback, the pulled-back chart equation f' is again
+regular: if (f') = (g) with g regular, write f' = a g and g = b f'; cancellation
+gives b a = 1. Thus the pulled-back line and its specified divisor section are
+those of D'. Naturality in `lem-amb-relative-torsor-cohomology` pulls back the
+relative torsor and Kummer boundaries. The roots comparison is an isomorphism:
+on a root-trivializing etale cover from `lem-asd-finite-etale-twist-line`, a
+primitive root and its pullback give the same rank-one generator (for N = 1 both
+root modules are zero). The canonical closed exchange is an isomorphism by the
+stalk formula and conservative geometric stalks. The support-Hom comparison of
+step 4 is natural: all comparisons send the constant generator one to one, on
+both the base and its open complement. Exact inverse image
+`prop-weil-pbc-inverse-image-modules-exact` preserves the open-closed triangle.
+Finally `lem-kun-inverse-image-monoidal` and `lem-kun-pullback-constant` commute
+pullback with derived scalar extension. Substitution gives the base-change Ext
+square with the specified roots-and-line transport.
+
+The relative support-Hom comparison and the coefficient-forgetting comparison
+are isomorphisms, so the specified relative boundary determines the Ext class
+uniquely. Apply the construction also to each Cartier pullback and to ZMod N.
+No regularity of T, flatness of A over ZMod N, or flatness of the Cartier-preserving
+base morphism is used.
 -/
 theorem ordinary_supported_kummer (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
@@ -145,38 +177,14 @@ theorem ordinary_supported_kummer (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
             ((Scheme.finiteEtaleTwistScalar N A hA).comp ULift.ringEquiv.toRingHom) N
             (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N))
               (ZMod.natCast_self N)) hA i κ₀ κ) := by
-  classical
-  obtain ⟨κ, hκ, huniq⟩ := supported_cartier_boundary_existsUnique T N hN A hA hT i hI
-  obtain ⟨t⟩ := ordinaryTwistTransport_exists A N hN hA
-  let d := supportedExactDerivedMap (lowerStar (ModuleCat.{u + 1} A) i)
-    (ordinaryFiniteConstant A D) (Scheme.finiteEtaleTateLine T N A hA) κ
-  let c₁ : Ext (ordinaryFiniteConstant A T) (Scheme.finiteEtaleTateLine T N A hA) 2 :=
-    Ext.homEquiv.symm (supportedDerivedUnit A i ≫ d)
-  refine ⟨κ, d, c₁, t, rfl, hκ, huniq, ?_, ?_, ?_, ?_⟩
-  · exact (supported_derived_unit_forget A i _ κ).trans
-      (supported_kummer_chern_realization T N A hA hT i hI κ hκ)
-  · exact Ext.homEquiv.apply_symm_apply _ |>.symm
-  · intro D' T' i' _ v w sq hI'
-    obtain ⟨κ', hκ', _⟩ := supported_cartier_boundary_existsUnique T' N hN A hA
-      (by simpa using hT.map v.appTop.hom) i' hI'
-    exact ⟨κ', hκ', supportedConstantExchange_isIso A i i' v w sq,
-      supported_kummer_boundary_pullback T N hN A hA hT i hI κ hκ
-      t i' v w sq hI' κ' hκ'⟩
-  · intro _
-    obtain ⟨κ₀, hκ₀, _⟩ := supported_cartier_boundary_existsUnique T N hN
-      (ULift.{u + 1} (ZMod N))
-      (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N))
-        (ZMod.natCast_self N)) hT i hI
-    exact ⟨κ₀, hκ₀, supported_kummer_boundary_scalar T N hN A hA hT i hI κ hκ κ₀ hκ₀⟩
+  sorry
 
-
-end
 
 /-- The unique-boundary clause of ordinary_supported_kummer, with its other witnesses hidden.
 Source: Stacks 03PL, 0A45 (blueprint: lem-asd-ordinary-supported-kummer).
-Proof: apply supported_cartier_boundary_existsUnique directly. Its unique representative
-is the boundary class used in ordinary_supported_kummer. This avoids normalizing the
-pullback and scalar witnesses in consumers.
+Proof: obtain κ and its relative boundary from ordinary_supported_kummer. Its third clause
+says every other representative with this boundary equals κ, which is exactly uniqueness.
+This typed projection prevents normalization of all pullback and scalar witnesses in consumers.
 -/
 theorem ordinary_supported_kummer_uniqueBoundary (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

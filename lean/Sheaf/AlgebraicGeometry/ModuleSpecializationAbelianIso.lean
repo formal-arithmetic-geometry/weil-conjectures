@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleModuleStalkSpecialization
 public import Sheaf.AlgebraicGeometry.SmoothProperPrimeSpecialization
-public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 
 /-!
 # Comparing module specialization with strict-local abelian specialization

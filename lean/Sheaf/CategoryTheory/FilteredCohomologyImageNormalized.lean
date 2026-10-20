@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.CategoryTheory.FilteredCohomologyImage
+public import Sheaf.CategoryTheory.FilteredCohomologyImage
 import all WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
 import Sheaf.CategoryTheory.FilteredCohomologyImageCycleMap
 
@@ -37,7 +37,7 @@ theorem cohomologyImage_graded_normalized
   let Zbar := (Subobject.«exists» q).obj (P.obj ((A ⊓ Z) ⊔ A'))
   let Bbar := (Subobject.«exists» q).obj (P.obj ((A ⊓ B) ⊔ A'))
   ∃ hBZ : Bbar ≤ Zbar,
-    Nonempty ((L.homologyFiltration n).gradedPiece p ≅
+    Nonempty ((L.cohomologyImage n).gradedPiece p ≅
       cokernel (Subobject.ofLE Bbar Zbar hBZ)) := by
   dsimp only
   have hBZ0 : imageSubobject (K.d (n - 1) n) ≤
@@ -78,9 +78,9 @@ theorem cohomologyImage_graded_normalized
   obtain ⟨himage, hpreimage⟩ := L.cohomologyImage_cycle_map p n c
     (K.liftCycles_i S.arrow (n + 1) (by simp) hz)
   obtain ⟨e⟩ := image_quotient (c ≫ K.homologyπ n)
-    ((L.homologyFiltration n).step p) ((L.homologyFiltration n).step (p + 1))
-    ((L.homologyFiltration n).antitone_step (Int.le_add_one le_rfl)) himage
-  have he : Nonempty ((L.homologyFiltration n).gradedPiece p ≅
+    ((L.cohomologyImage n).step p) ((L.cohomologyImage n).step (p + 1))
+    ((L.cohomologyImage n).antitone_step (Int.le_add_one le_rfl)) himage
+  have he : Nonempty ((L.cohomologyImage n).gradedPiece p ≅
       cokernel ((Subobject.pullback S.arrow).obj
         ((L.complexStep p n ⊓ imageSubobject (K.d (n - 1) n)) ⊔
           (L.complexStep (p + 1) n ⊓
