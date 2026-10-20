@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 import Sheaf.AlgebraicGeometry.IsRegularScheme
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalPresentation
+import Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation
 import WeilConjectures.RingTheory.Etale.LocalDimension
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat

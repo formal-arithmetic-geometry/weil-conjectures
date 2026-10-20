@@ -18652,6 +18652,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:11 L: merged deliver/G6/Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleEventually (stage 3; reviewer PASS; after a return; landing 20261020T161139-L-3455060 (interface); batch 20261020T161136; modules 2; new nodes 0; change records: coord/changes/retire-fp-overlap-triple-eventually-G6.md)
 - 16:11 L: merged deliver/K1/Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm (stage 3; reviewer PASS; first push; landing 20261020T161140-L-3455410 (proof); batch 20261020T161136; modules 1; new nodes 0; change records: coord/changes/K1-strict-local-localized-hom-germ-source-reuse.md)
 - 16:13 L: merged deliver/J2/Sheaf.CategoryTheory.Sites.ToposLocalizationSitePresentation (stage 3; reviewer PASS; first push; landing 20261020T161321-L-3476657 (proof); batch 20261020T161318; modules 1; new nodes 0)
-- 16:13 L: merged deliver/J3/Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation (stage 3; reviewer PASS; first push; landing 20261020T161323-L-3476889 (interface); batch 20261020T161318; modules 2; new nodes 0; change records: coord/changes/J3-strict-henselization-local-presentation-retirement.md)
 - 16:13 L: merged deliver/X3/Sheaf.CategoryTheory.Filtration (stage 3; reviewer PASS; after a return; landing 20261020T161325-L-3477155 (interface); batch 20261020T161318; modules 16; new nodes 0; change records: coord/changes/Filtration-official-api-retirement.md)
 - 16:13 L: returned deliver/P6/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafWedgeMapExists (reviewer RETURN: (reviewer C-991b0, head 991b061f9) C4/G1 dag/nodes/sec-picard-framework/new-local-wedge-at.json: the node was not rebase)
+
+- 00:15 L: batch 20261020T161318 dependency take-out
