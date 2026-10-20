@@ -22,111 +22,66 @@
  ],
  "proof": [
   {
-   "text": "The coefficient adjunction node supplies exact termwise restriction $U_T$ and the everywhere-defined unbounded functor $e_T^*$. Restriction changes neither the underlying abelian sheaf nor the differential. Thus $H^i(U_TC)=U_TH^i(C)$: kernels and images are the same underlying abelian sheaves with their restricted actions. If $U_TC$ is acyclic then $C$ is acyclic, since a module sheaf with zero underlying abelian sheaf is zero. Applied to the cone of a morphism, this shows that $U_T$ reflects isomorphisms on the derived category. It does not assert that $U_T$ preserves K-injectives. Choose a K-flat resolution $P$ with flat terms of $C$. Derived change of rings represents $e_T^*C$ by $A_T\\otimes_{R_T}P$. The natural underived restricted-tensor comparison, applied in every degree, identifies its restriction with the same total tensor regarded as an $R_T$-complex. This represents $A_T\\otimes_{R_T}^LC$ although the K-flat factor is the second one: choose a K-flat resolution $p':P'\\to A_T$; the definition of derived tensor gives $Q(P'\\otimes P)$, and $p'\\otimes1:P'\\otimes P\\to A_T\\otimes P$ is a quasi-isomorphism because its cone $\\operatorname{cone}(p')\\otimes P$ is acyclic, $P$ being K-flat in the sign-symmetric sense of [def-kun-derived-tensor]. The comparison is natural after localization, including for roofs, since the derived change-of-rings comparison is natural in maps of K-flat resolutions.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-change-of-rings-tensor-comparison",
-    "def-kun-derived-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 06YY (lemma-derived-base-change), 06YU (derived tensor construction); sites-modules.tex Section 03EK"
-   }
-  },
-  {
-   "text": "Write $F_R=f_R^{-1}$, $G_R=Rf_{*,R}$, and similarly $F_A,G_A$. Exact inverse image identifies $f^{-1}R_Y=R_X$ and $f^{-1}A_Y=A_X$, and commutes with restriction: both $F_RU_Y$ and $U_XF_A$ have the same inverse-image abelian sheaf, with the $R_X$-action through $\\varphi$. This gives $\\chi:F_RU_Y\\cong U_XF_A$. For $C\\in D(Y_{\\mathrm{et}},R)$ choose $P$ K-flat with flat terms. The tensor-pullback node says $F_RP$ is again K-flat with flat terms. The two complexes computing $F_Ae_Y^*C$ and $e_X^*F_RC$ are canonically the same sheafified tensor complex $A_X\\otimes_{R_X}F_RP$. This constructs the specified $A$-linear $\\tau_C:F_Ae_Y^*C\\xrightarrow{\\sim}e_X^*F_RC$. After restriction and the identifications of step 1, $U_X\\tau_C\\circ\\chi_{e_Y^*C}$ is exactly $c_C:F_R(A_Y\\otimes_R^LC)\\cong A_X\\otimes_R^LF_RC$, the inverse of the canonical inverse-image tensor comparison of [lem-kun-inverse-image-monoidal] at $(A_Y,C)$, using $f^{-1}A_Y=A_X$; for constant coefficients that comparison is the ringed-topos comparison of the tensor-pullback node for $f$ with $f^{-1}R_Y=R_X$. Indeed, on these representatives both send the inverse image of $a\\otimes p$ to $f^{-1}a\\otimes f^{-1}p$. The natural resolution comparisons give naturality on the entire derived category.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-change-of-rings-tensor-comparison",
-    "lem-kun-inverse-image-monoidal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), 06YY"
-   }
-  },
-  {
-   "text": "Regard restriction as the direct image of the identity-topos ring morphism $e_T:(T_{\\mathrm{et}},A_T)\\to(T_{\\mathrm{et}},R_T)$. Its right derived functor is $U_T$, since it is exact. The equality $e_Yf_A=f_Re_X$ and the two canonical direct-image composition comparisons give $\\kappa:U_YG_A\\xrightarrow{\\sim}G_RU_X$. We check its normalization. Represent $H$ by an $A_X$-K-injective complex $I$, and choose an $R_X$-K-injective resolution $j:U_XI\\to J$. The composition node and exact-derived-functor node identify $\\kappa_H$ with the class of $f_*j:f_*U_XI\\to f_*J$; this is a quasi-isomorphism by that composition theorem. The derived-adjunction normalization in the projection-map definition represents $\\varepsilon_{A,H}$ by termwise evaluation $F_Af_{*,A}I\\to I$. It represents $\\varepsilon_{R,U_XH}$ by the evaluation $F_Rf_{*,R}J\\to J$ followed in the derived category by $Q(j)^{-1}$. If $\\epsilon$ denotes termwise evaluation, its naturality gives\n$$j\\circ\\epsilon_{U_XI}=\\epsilon_J\\circ F_Rf_{*,R}j.$$\nMoreover $\\epsilon_{U_XI}=U_X\\epsilon_I\\circ\\chi_{f_{*,A}I}$: both evaluate the same inverse-image section in the same abelian sheaf, with the restricted action. Localizing the displayed equation and canceling $Q(j)$ therefore gives\n$$\\varepsilon_{R,U_XH}\\circ F_R(\\kappa_H)=U_X(\\varepsilon_{A,H})\\circ\\chi_{G_AH}.$$\nThis uses a separate resolution $J$ and never assumes $U_XI$ is K-injective. Naturality of the canonical composition comparisons makes the equation independent of these resolutions.",
+   "text": "Exact restriction of scalars reflects derived isomorphisms: its homology comparison identifies homology after restriction with restriction of homology, and restriction of module sheaves reflects isomorphisms. This is the generic exactFunctor_reflects_derived argument, applied to the actual sheaf restriction functor.",
    "uses": [
     "def-pc-sheaf-restrict-scalars",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-kun-projection-formula-map"
+    "lem-kun-unbounded-abelian-exchange-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E (lemma-derived-pushforward-composition); Tag 07A6 (lemma-adjoint); exact restriction and termwise evaluation on K-injective representatives"
-   }
+   "elementary": false
   },
   {
-   "text": "Define $\\beta_L$ by transposing $e_X^*\\varepsilon_{R,L}\\circ\\tau_{G_RL}$ under $F_A\\dashv G_A$, as in the statement. Set $b_L=\\kappa_{e_X^*L}\\circ U_Y\\beta_L$. Its transpose under $F_R\\dashv G_R$ is computed using the equation in step 3 and naturality of $\\chi$:\n$$\\varepsilon_{R,U_Xe_X^*L}\\circ F_Rb_L\n=U_X\\varepsilon_{A,e_X^*L}\\circ\\chi_{G_Ae_X^*L}\\circ F_RU_Y\\beta_L\n=U_X(\\varepsilon_{A,e_X^*L}\\circ F_A\\beta_L)\\circ\\chi_{e_Y^*G_RL}\n=U_X(e_X^*\\varepsilon_{R,L}\\circ\\tau_{G_RL})\\circ\\chi_{e_Y^*G_RL}.$$\nUnder step 1 the restriction of $e_X^*\\varepsilon_{R,L}$ is $1_A\\otimes\\varepsilon_{R,L}$, by naturality of the restricted-tensor identification. Step 2 identifies the preceding comparison with $c_{G_RL}$. Therefore the transpose of $b_L$ is exactly $(1_A\\otimes\\varepsilon_{R,L})\\circ c_{G_RL}$. This computation identifies morphisms by adjunction, rather than merely checking their effects on cohomology.",
+   "text": "Prove the unbounded restriction/direct-image comparison invertible without claiming that restriction preserves K-injectives. Given an A-module K-injective I, an R-module K-injective J and a quasi-isomorphism j:Res I to J, choose an abelian K-injective replacement k of the underlying J. The module-to-abelian acyclicity theorem applied with A and R shows that f_*(Uj followed by k) and f_*k are quasi-isomorphisms. Two-out-of-three gives that f_*Uj is a quasi-isomorphism; exact conservative forgetting reflects this back to R-module complexes. The generic derivedSquare_isIso and unit_isIso_of_resolution_quasiIso constructions therefore show invertibility of the exact-derived mate. The underived_mate identity identifies its input with the sectionwise restriction/direct-image identity. Transport the two adjunctions along leftDerivedUpperStarIsoMapDerivedCategory using isIso_mate_transport; the resulting square is exactly scalarRestrictionPullbackIso. Its mate is scalarRestrictionDirectImageMap, which is therefore invertible on every unbounded object.",
    "uses": [
-    "def-kun-projection-formula-map",
-    "lem-pur-change-of-rings-tensor-comparison"
+    "lem-kun-module-abelian-kinjective-direct-image-acyclic",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-kun-proper-base-change-forgetful-aux",
+    "lem-sbc-restrict-scalars-derived-adjunction-identities",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "prop-weil-pbc-inverse-image-modules-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map), explicit counit transpose calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-amb-tensor-projection-adjunct] with coefficient ring $R$, $K=A_Y$, $E=L$, $M=G_RL$ and $a=1_{G_RL}$, so $a^\\flat=\\varepsilon_{R,L}$. Its map $\\pi_f(A_Y,L)=G_R(\\sigma)\\circ\\mathrm{PF}_f(L,A_Y)\\circ\\sigma$ is literally the ordered projection morphism of [lem-amb-proper-coproducts-projection]: the same $\\mathrm{PF}$ of [def-kun-projection-formula-map] and the same symmetry $\\sigma$. That node says its transpose under $F_R\\dashv G_R$ is $(1\\otimes\\varepsilon_{R,L})\\circ c_{A_Y,G_RL}$, where $c$ is the inverse of the comparison of [lem-kun-inverse-image-monoidal] and $f^{-1}A_Y=A_X$. By step 2 this $c$ is $c_{G_RL}$. Thus it is the same transpose as in step 4. Injectivity of the adjunction Hom bijection of [def-kun-projection-formula-map] proves equality of the ordered projection map with $b_L$, including both symmetries. The proper projection theorem applies with finite ring $R$, arbitrary $K=A_Y$ and arbitrary $L$. Its Noetherian, proper and finite-type hypotheses are exactly those assumed here. Hence $b_L$ is an isomorphism without any assumption that $A$ is flat over $R$.",
+   "text": "Use scalarPullback_tensor_compatibility to identify the restricted scalar/pullback comparison with the inverse-image tensor comparison and the specified coefficient pullback isomorphism. This is a separate compatibility result for arbitrary derived objects, coefficient homomorphisms and morphisms of schemes; it has no properness, finiteness or direct-image assertion.",
    "uses": [
-    "def-kun-projection-formula-map",
-    "lem-amb-proper-coproducts-projection",
-    "lem-amb-tensor-projection-adjunct"
+    "lem-asd-scalar-pullback-tensor-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map); more-etale.tex Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), proper case; blueprint main-20261015 thm-amb-p1-decomposition.proof.md, last sentence"
-   }
+   "elementary": false
   },
   {
-   "text": "Since $\\kappa$ is an isomorphism, step 5 shows $U_Y\\beta_L$ is an isomorphism. Conservativity proved in step 1 makes $\\beta_L$ an isomorphism in $D(Y_{\\mathrm{et}},A)$. For $v:L\\to L'$ naturality of $\\tau$ and the counit gives\n$$e_X^*v\\circ(e_X^*\\varepsilon_{R,L}\\circ\\tau_{G_RL})=(e_X^*\\varepsilon_{R,L'}\\circ\\tau_{G_RL'})\\circ F_Ae_Y^*G_Rv.$$\nTransposing gives $G_Ae_X^*v\\circ\\beta_L=\\beta_{L'}\\circ e_Y^*G_Rv$. This proves the asserted naturality with the specified normalization. Every comparison was computed in the unbounded derived category and every resolution was K-flat or K-injective without a boundedness condition.",
+   "text": "Apply the generic restricted_mate_eq calculation. Transpose the composite sigma_Y inverse, U_Y beta, kappa and G_R sigma_X under F_R left adjoint to G_R. Naturality of the geometric counit, the counit equations for the two mates, naturality of chi and sigma_X, and the preceding pullback/tensor compatibility identify it with c_(G_R L) followed by tensoring the R-geometric counit. The actual homEquiv_symm_rightDerivedLowerStarProjectionMap formula and naturality of derivedTensor in the coefficient isomorphism identify that transpose with the projection morphism followed by direct image of the coefficient identification. Injectivity of homEquiv proves equality of these actual morphisms. Precompose with the specified symmetry at Y and postcompose with direct image of the specified symmetry at X; functoriality gives exactly the second conjunct, including both symmetries.",
    "uses": [
     "def-kun-projection-formula-map",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "lem-asd-scalar-pullback-tensor-compatibility"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL6 (more-etale.tex); Tag 0B56; concluding adjunction naturality calculation"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The existing unbounded finite-coefficient proper projection theorem makes the projection morphism invertible. Its specialization is isIso_rightDerivedLowerStarProjectionMap_of_finite. The preceding equality and invertibility of sigma, kappa and the coefficient pullback comparison imply that U_Y beta_L is invertible. Conservativity of exact derived restriction gives invertibility of beta_L. Finally mateEquiv_counit, followed by injectivity of the inverse adjunction Hom equivalence, proves the displayed counit-transpose normalization. This completes the first and third conjuncts and combines them with the second; the original statement and all its hypotheses remain unchanged.",
+   "uses": [
+    "lem-kun-0f0g",
+    "def-kun-projection-formula-map",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-kun-derived-tensor",
   "def-kun-projection-formula-map",
   "def-pc-sheaf-restrict-scalars",
-  "lem-amb-proper-coproducts-projection",
-  "lem-amb-tensor-projection-adjunct",
-  "lem-kun-inverse-image-monoidal",
-  "lem-pc-kflat-resolution",
-  "lem-pur-change-of-rings-tensor-comparison",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-asd-scalar-pullback-tensor-compatibility",
+  "lem-kun-0f0g",
+  "lem-kun-module-abelian-kinjective-direct-image-acyclic",
+  "lem-kun-proper-base-change-forgetful-aux",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, proper case; counit and symmetry calculations expanded from sites-cohomology.tex Tags 0B56 and 0D6E"
+  "place": "Tag 0GL6, proper coefficient change; sites-cohomology.tex Tags 0D6J(3), 0D6E, 07A4 and 0B56. K1 formal mate calculation and two-out-of-three acyclicity argument, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -277,8 +232,6 @@
   "lem-pc-kflat-resolution",
   "lem-pur-change-of-rings-tensor-comparison",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "prop-weil-pbc-inverse-image-modules-exact",
@@ -309,5 +262,15 @@
   "date": "2026-10-17",
   "existing": false,
   "file": "lean/Sheaf/SecSmoothPurity/ProperFiniteCoefficientExtension.lean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261020T211748-L-3497869",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
