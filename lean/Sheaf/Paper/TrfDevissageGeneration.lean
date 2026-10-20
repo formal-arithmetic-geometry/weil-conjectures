@@ -13,19 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Triangulated.Generators
-import Sheaf.AlgebraicGeometry.ConstructibleSheafDevissage
 import WeilConjectures.ConstructibleSheaf.OpenClosed
-import Sheaf.SixFunctors.FlatModelGeneration
-import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.ComparisonTorAmplitude
 import Sheaf.Paper.ComparisonPullbackExact
@@ -39,7 +27,6 @@ import Sheaf.AlgebraicGeometry.ProEtaleComparisonStalk
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.Triangulated.AmbientThickClosureEquivalence
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
-import Sheaf.CategoryTheory.Triangulated.GeneratingClassDetermination
 import Sheaf.AlgebraicGeometry.StandardGroupSchemes
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
 import Sheaf.Paper.GaloisLisseRepresentations
@@ -80,6 +67,51 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
+private theorem trf_coefficient_primary
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) :
+    ∃ r : ℕ, 0 < r ∧ (l ^ r) • (1 : Padic.coefficientExtensionRing l E n) = 0 := by
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) = Padic.coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hnorm : Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1 := by
+    have he := spectralNorm_extends (K := Padic l) (L := E) (l : Padic l)
+    change Padic.coefficientExtensionAbsoluteValue l E
+      (algebraMap (Padic l) E (l : Padic l)) = _ at he
+    simpa only [map_natCast] using he.trans_lt (Padic.norm_p_lt_one (p := l))
+  have hm : (l : Padic.coefficientExtensionIntegers l E) ∈
+      Padic.coefficientExtensionMaximalIdeal l E := (h.2.1 _).2 hnorm
+  have hp : (l : Padic.coefficientExtensionIntegers l E) ^ n ∈
+      Padic.coefficientExtensionIdeal l E n := by
+    unfold Padic.coefficientExtensionIdeal
+    rw [hgen]
+    exact Ideal.pow_mem_pow hm n
+  have hz : (l : Padic.coefficientExtensionRing l E n) ^ n = 0 := by
+    simpa only [map_pow, map_natCast] using (Ideal.Quotient.eq_zero_iff_mem.mpr hp)
+  exact ⟨n, hn, by simpa only [nsmul_eq_mul, Nat.cast_pow, mul_one] using hz⟩
+
+private theorem trf_finite_support_iff (P : ℤ → Prop) :
+    Set.Finite {q | ¬ P q} ↔
+      ∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q → P q := by
+  classical
+  constructor
+  · intro h
+    obtain ⟨a, ha⟩ := h.bddBelow
+    obtain ⟨b, hb⟩ := h.bddAbove
+    refine ⟨min a b, max a b, min_le_max, fun q hq ↦ ?_⟩
+    by_contra hn
+    rcases hq with hq | hq
+    · exact (not_lt_of_ge (ha hn)) (hq.trans_le (min_le_left a b))
+    · exact (not_lt_of_ge (hb hn)) ((le_max_right a b).trans_lt hq)
+  · rintro ⟨a, b, -, h⟩
+    apply (Set.finite_Icc a b).subset
+    intro q hq
+    exact ⟨le_of_not_gt (fun hqa ↦ hq (h q (.inl hqa))),
+      le_of_not_gt (fun hbq ↦ hq (h q (.inr hbq)))⟩
+
+
 /-- The constant-coefficient subfamily in the final sentence of the statement.
 The actual stratum immersion factors through its scheme-theoretic closure, and the
 coefficient sheaf is the sheafification of the constant regular module A. The canonical
@@ -107,35 +139,14 @@ conventions; X is any separated finite-type scheme over its algebraic closure k.
 Source: blueprint `lem-trf-devissage-generation`, statement and Steps 0--2
 (blueprint: lem-trf-devissage-generation).
 
-Proof plan, following the node's numbered steps:
-1. Finite type over k makes X and its locally closed subschemes Noetherian by
-lem-weil-pbc-finite-type-over-noetherian; the empty scheme has zero sheaf category.
-2. Over the finite ring, finite flat modules are finitely presented and projective by
-lem-weil-pbc-finitely-presented-flat-module-projective; projectives are flat by
-lem-weil-pbc-projective-module-flat. This identifies the allowed local models.
-3. Factor every stratum immersion through its closure. By lem-fin-constructible-devissage,
-lem-fin-extension-by-zero, lem-fin-closed-immersion and det-sf-flat-model-generation (3),
-the generators lie in the finite-Tor constructible category and that category is thick.
-4. For an etale finite-Tor complex choose a bounded flat constructible model using
-lem-sf-etale-flat-constructible, with its chosen Tor interval.
-5. Apply det-sf-flat-model-generation (1)--(2) to each term: its finite extension filtration
-has lisse finite-projective stratum factors. Use lem-weil-pbc-complex-ses-triangle to put
-each term in the thick closure. This does not truncate by the cohomology sheaves.
-6. The degreewise split sequences of stupid tails from def-kun-truncations give triangles
-with third vertex P^q[-q]. Descend from the zero tail above the bound to obtain P, hence K.
-7. lem-sf-proetale-constructible-origin and lem-sf-comparison-tor-amplitude give the exact
-ctf comparison equivalence. Exactness and inverse exactness use
-lem-sf-comparison-pullback-exact, lem-sf-exact-functor-derived-triangulated and
-lem-trf-exact-equivalence-inverse, with their shift comparisons.
-8. A closed immersion is qcqs: it is affine and a monomorphism.
-9. prop-weil-pbc-comparison-direct-image followed by
-lem-cbc-proetale-extension-zero-comparison identifies the actual immersion generators.
-10. lem-sf-proetale-locally-constant-origin and lem-cbc-proetale-comparison-stalk identify
-all lisse flat generators in both directions; constant coefficients also correspond.
-11. lem-trf-ambient-thick-closure-equivalence transports the ambient thick closure equality.
-12. The node's determination consequence then follows from
-lem-sf-triangle-two-out-of-three and lem-sf-generating-class-determination, with the
-specified shift compatibility; no additional determination assertion is included here. -/
+The existing `proEtaleThickGeneration_eq` proves generation with the same closure
+family, including its scheme-theoretic closure factorization. To apply it, the coefficient
+ring is finite by `Padic.finite_coefficientExtensionRing` and is annihilated by a positive
+power of l: the spectral absolute value puts l in the maximal ideal, so l^n belongs to
+its nth power, which is the coefficient quotient ideal. Finally a finite subset of the
+integers is bounded above and below, and every integer interval is finite. This identifies
+the finite support formulation of bounded cohomology with the interval formulation in
+`proEtaleThickGeneration_eq`. -/
 theorem trf_devissage_generation (T : WeilConjectures.TraceFormulaCoefficientConventions.{u})
     (X : Scheme.{u}) (aX : X ⟶ Spec (.of T.datum.k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
@@ -144,28 +155,45 @@ theorem trf_devissage_generation (T : WeilConjectures.TraceFormulaCoefficientCon
     (@sfProEtaleClosureGenerators X T.coefficientRing inferInstance
       (Padic.finite_coefficientExtensionRing T.coefficients.l T.coefficientField
         T.level T.level_pos)).triangEnvelope := by
-  sorry
+  let : X.Over (Spec (.of T.datum.k)) := ⟨aX⟩
+  let : LocallyOfFiniteType (X ↘ Spec (.of T.datum.k)) := ‹LocallyOfFiniteType aX›
+  let : QuasiCompact (X ↘ Spec (.of T.datum.k)) := ‹QuasiCompact aX›
+  let : Finite T.coefficientRing :=
+    Padic.finite_coefficientExtensionRing T.coefficients.l T.coefficientField
+      T.level T.level_pos
+  have he := proEtaleThickGeneration_eq T.datum T.coefficients.l
+    (Fact.out : T.coefficients.l.Prime) T.coefficients.different T.coefficientRing
+    (trf_coefficient_primary T.coefficients.l T.coefficientField T.level T.level_pos) X
+  refine Eq.trans ?_ he
+  funext K
+  apply propext
+  change ((Set.Finite _ ∧ _) ∧ _) ↔ ((_ ∧ _) ∧ _)
+  constructor
+  · rintro ⟨⟨hb, hc⟩, ht⟩
+    exact ⟨⟨hc, (trf_finite_support_iff _).mp hb⟩, ht⟩
+  · rintro ⟨⟨hc, hb⟩, ht⟩
+    exact ⟨⟨(trf_finite_support_iff _).mpr hb, hc⟩, ht⟩
 
 /-- Constant rank-one coefficients do not generate in general: there is a separated
 finite-type X with admissible coefficients and a ctf complex outside their thick closure.
 Source: blueprint `lem-trf-devissage-generation`, final sentence and Step 3
 (blueprint: lem-trf-devissage-generation).
 
-Proof plan, node steps 13--15 (with the comparison of steps 7--11):
-13. Take k = algebraic closure of F_5, X = G_m and A = F_3, realized at l = 3,
+Remaining proof plan, node Steps 8--10 (with the comparison of Steps 3--7):
+8. Take k = algebraic closure of F_5, X = G_m and A = F_3, realized at l = 3,
 E = Q_3, n = 1 in the coefficient conventions. The cover t = u^2 is finite etale of
 rank two: its derivative 2u is invertible by
 lem-weil-pbc-standard-etale-monic-derivative. thm-galois-fundamental and
 cor-galois-lisse-representations construct its rank-one sign local system L, which is
 free locally and hence an allowed flat generator.
-14. Pull back exactly to Spec k(t) by prop-weil-pbc-inverse-image-modules-exact and
+9. Pull back exactly to Spec k(t) by prop-weil-pbc-inverse-image-modules-exact and
 lem-sf-exact-functor-derived-triangulated, retaining the discrete Galois action via
 lem-exc-field-discrete-modules. Complexes whose bounded cohomology has a finite
 filtration with trivial one-dimensional quotients form a thick subcategory. Intersect
 filtrations with submodules, pass to their images for quotients, and concatenate for
 extensions. The long exact sequence of lem-sf-derived-homology-long-exact gives triangle
 closure; shifts and retracts preserve these conditions.
-15. Every constant generator has generic restriction either zero or trivial, by
+10. Every constant generator has generic restriction either zero or trivial, by
 lemma-weil-pbc-finite-stalk-formula, lem-weil-pbc-closed-immersion-finite,
 lem-weil-pbc-extension-by-zero-stalks and lem-fin-closed-immersion. The sign local system
 has nontrivial generic action: coprime polynomials cannot satisfy f(t)^2 = t g(t)^2,
@@ -173,7 +201,7 @@ so u^2 - t defines a separable quadratic field extension; transitivity follows f
 lem-exc-etale-field-galois-classification and agrees with the cover action by
 thm-galois-fundamental. Its nontrivial rank-one representation has no filtration by
 trivial quotients. Thus L is outside the constant-generated closure. The exact comparison
-and generator identifications of steps 7--11 transport both the constants and this
+and generator identifications of Steps 3--7 transport both the constants and this
 obstruction to the pro-etale site. -/
 theorem exists_trf_constant_coefficients_not_generating :
     ∃ (T : WeilConjectures.TraceFormulaCoefficientConventions.{u})
