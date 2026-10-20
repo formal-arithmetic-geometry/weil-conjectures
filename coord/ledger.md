@@ -17975,3 +17975,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:26 L: returned deliver/G2/Sheaf.Paper.ConstructibleExceptionalCoefficientCoherence (reviewer RETURN: (reviewer C-89ec6, head 89ec69eab) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.ConstructibleE)
 - 12:26 L: returned deliver/T2/Sheaf.Paper.RationalCoefficientCategoryComparison (reviewer RETURN: (reviewer C-b5fda, head b5fda20b1) H10: does not compile: every module of the delivery fails with 'object file Sheaf/Alg)
 - 12:26 L: returned deliver/V7/Sheaf.Paper.FiniteComparisonLocalizing (reviewer RETURN: (reviewer C-ca27b, head ca27bc3b1) A (base/compile): the delivered modules do not compile on the current build. Presenta)
+- 12:26 L: returned deliver/T5/Sheaf.AlgebraicGeometry.BertiniIrreducibleMember (reviewer RETURN: (the landing tools, head 61fa1d334) the delivery did not land: lean/Sheaf/AlgebraicGeometry/BertiniIrreducibleMember.lea)
