@@ -27,116 +27,51 @@
  ],
  "proof": [
   {
-   "text": "Write $B_h(V)=V\\times_{S,h}T$ for base change along $h:T\\to S$, with its projection to $T$, as in [def-weil-proetale-inverse-image]. An equality of maps into a fibre product is checked on its two projections, by [def-pc-fibre-product]. For any characteristic-$p$ scheme map $h:T\\to S$, its maps on sections satisfy $h^\\sharp(a^{p^b})=h^\\sharp(a)^{p^b}$; the underlying maps of both Frobenii are identities. Thus $hF_T^b=F_S^bh$, using [def-weil-absolute-frobenius-scheme]. In particular $r_{V/T}^{(b)}=(F_V^b,v)$ is defined. For $b=1$, the explicit geometric assertion in the statement of [lem-trf-absolute-frobenius-site] is precisely Stacks Tag 0F6W: relative Frobenius of a weakly etale object is an isomorphism. Every scheme over a characteristic-$p$ scheme is itself of characteristic $p$, since each structure ring map sends $p\\cdot1=0$ to $p\\cdot1=0$. For general $b$, start with $r^{(0)}=\\mathrm{id}$ under $B_{\\mathrm{id}}\\cong\\mathrm{id}$ and compose $r_V^{(b)}$ with $r_{B_{F_T^b}V}^{(1)}$. The latter is an isomorphism because $B_{F_T^b}V$ remains a weakly etale site object by [def-weil-proetale-inverse-image]. The base-change identification $B_{F_T}B_{F_T^b}\\cong B_{F_T^{b+1}}$ keeps the outermost projections; the composite has projections $F_V^{b+1}$ and $v$, hence is exactly $r^{(b+1)}$. This proves by induction that every $r^{(b)}$ is an isomorphism. For a site arrow $a:V\\to V'$, both $B_{F_T^b}(a)r_V^{(b)}$ and $r_{V'}^{(b)}a$ have projections $aF_V^b=F_{V'}^ba$ and $v$, so are equal. This is naturality in the site object, not a Cartesian assertion about $u$.",
+   "text": "Use the normalized witnesses r, comp and tau of [lem-trf-absolute-frobenius-site], including their projection, conjugate-section and unit-section equations. Retain its addition and exponent-zero clauses; only its open-restriction clause must be strengthened to arbitrary scheme morphisms.",
    "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-pc-fibre-product",
-    "def-weil-absolute-frobenius-scheme",
     "lem-trf-absolute-frobenius-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deductions using its specified relative-Frobenius map"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $H_T^{(b)}=(F_T^b)_*$ on $A_T$-module sheaves. By the direct-image formula and module adjunction of [def-weil-pbc-proetale-operations], its value on a sheaf $M$ at $V$ is $M(B_{F_T^b}V)$. Restriction defines a natural isomorphism $d_{T,M}^{(b)}:H_T^{(b)}M\\to M$, whose component is $M(r_{V/T}^{(b)})$. Step 1 proves compatibility with every restriction, and functoriality of $M$ proves naturality in $M$. These are $A_T$-linear maps: the constant-coefficient structure map of [prop-weil-pbc-proetale-constant-ring-map] preserves each constant section, as does restriction along $r$; locally every coefficient section is a constant, so the actions agree. The same argument shows that the coefficient identifications for a composite of scheme maps equal the composites of the coefficient identifications: their adjuncts send every constant $a$ to the constant $a$, and the constant sheaf is the sheafification of the constant presheaf [def-weil-pbc-proetale-site]. Let $P_T^{(b)}=(F_T^b)^*$ on module sheaves. Apply [lem-weil-pbc-conjugate-iso-unit-equation] to $P_T^{(b)}\\dashv H_T^{(b)}$ and the identity adjunction, with right-adjoint isomorphism $(d_T^{(b)})^{-1}:\\mathrm{id}\\to H_T^{(b)}$. It gives $s_T^{(b)}:P_T^{(b)}\\xrightarrow{\\sim}\\mathrm{id}$, characterized by $H_T^{(b)}(s_{T,N}^{(b)})\\eta_N=(d_{T,N}^{(b)})^{-1}$. This fixes the direction of the adjoint trivialization in the statement; for $b=0$ it is the identity under the identity-pullback identification.",
+   "text": "For a scheme morphism u in characteristic p, prove naturality of each iterated absolute Frobenius [def-weil-absolute-frobenius-scheme]. The underlying maps are identities; on sections the assertion is map_pow. This supplies w : F_X^b u = u F_Y^b.",
    "uses": [
-    "def-weil-pbc-proetale-operations",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-composite-adjunction"
+    "def-weil-absolute-frobenius-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deductions using its specified relative-Frobenius map"
-   }
+   "elementary": false
   },
   {
-   "text": "For a site object $v:V\\to Y$, set $W=B_uV=V\\times_YX$, with projections $\\pi_V,\\pi_X$. There is a canonical isomorphism $j_V:B_{F_X^b}(B_uV)\\xrightarrow{\\sim}B_u(B_{F_Y^b}V)$: both fibre products are identified with $V\\times_{Y,F_Y^bu}X$. In test-scheme coordinates it takes $((z,x_0),x)$, where $x_0=F_X^b(x)$, to $((z,u(x)),x)$. Its inverse inserts $x_0=F_X^b(x)$. The two maps $j_Vr_{W/X}^{(b)}$ and $B_u(r_{V/Y}^{(b)})$ from $W$ to $B_uB_{F_Y^b}V$ have the same $V$-projection $F_V^b\\pi_V$ and $X$-projection $\\pi_X$. Here $F_W^b$ has projections $F_V^b\\pi_V,F_X^b\\pi_X$ by Step 1. The fibre-product uniqueness in [def-pc-fibre-product] therefore gives $j_Vr_{W/X}^{(b)}=B_u(r_{V/Y}^{(b)})$. This equality holds on morphisms of schemes, including their structure-sheaf maps. Using [def-weil-proetale-inverse-image], restriction along $j_V^{-1}$ gives the canonical isomorphism $e:u_*H_X^{(b)}\\xrightarrow{\\sim}H_Y^{(b)}u_*$. Contravariance of sections applied to the displayed equality gives $d_Y^{(b)}u_*\\circ e=u_*d_X^{(b)}$. All maps are module maps by Step 2.",
+   "text": "Using base change [def-weil-proetale-inverse-image], compare the relative-Frobenius maps on B_u V under the two pullback-composition isomorphisms. Equality into the fibre product [def-pc-fibre-product] is checked on its projections. The first projection follows from the normalization of r and Frobenius naturality in step 2; the second is the structure-map equation. Invert this equality of isomorphisms to obtain the equality of maps used by contravariant restriction.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deductions using its specified relative-Frobenius map"
-   }
-  },
-  {
-   "text": "Write $L=u^*$, $R=u_*$, $P=P_Y^{(b)}$, $Q=H_Y^{(b)}$, $S=P_X^{(b)}$, $T=H_X^{(b)}$. The composite adjunctions are $LP\\dashv QR$ and $SL\\dashv RT$ [def-weil-pbc-composite-adjunction]. Their inverse-image composition comparisons preserve units by [lem-weil-pbc-site-morphism-composition](3); this applies to the small site functors of [def-weil-proetale-inverse-image]. The explicit tensor comparison preserves the module units by [lem-sf-proetale-tensor-composition-unit]. Its coefficient compatibility holds by Step 2. Apply it to $(u,F_Y^b)$ and $(F_X^b,u)$: composing one comparison with the inverse of the other has conjugate the restriction map $e:RT\\cong QR$ of Step 3. Indeed the two fibre-product associators compose to $j_V^{-1}$ there. Thus [lem-weil-pbc-conjugate-iso-unit-equation] identifies this ordinary comparison with $c^0:LP\\cong SL$, the left-adjoint comparison determined by $e$.\n\nStep 2 says the conjugates of $s_Y:P\\to\\mathrm{id}$ and $s_X:S\\to\\mathrm{id}$ are $d_Y^{-1}$ and $d_X^{-1}$. Pasting with $L\\dashv R$ by [lem-weil-pbc-mate-pasting](2) gives conjugates $(d_Y^{-1}R):R\\to QR$ for $Ls_Y:LP\\to L$, and $R(d_X^{-1}):R\\to RT$ for $s_XL:SL\\to L$. By composition of conjugates [def-weil-pbc-adjunction-conjugate], the conjugate of $(s_XL)c^0$ is $e\\circ R(d_X^{-1})$. Inverting the equality in Step 3 gives $e\\circ R(d_X^{-1})=d_Y^{-1}R$. Injectivity of the conjugation bijection therefore proves $(s_XL)c^0=Ls_Y$ on module sheaves. These are the same adjunction transposes used in the original Hom calculation, now supplied by the cited pasting theorem.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-site-morphism-composition",
     "def-weil-proetale-inverse-image",
-    "lem-sf-proetale-tensor-composition-unit",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-conjugate"
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deductions using its specified relative-Frobenius map"
-   }
+   "elementary": false
   },
   {
-   "text": "For $b_1,b_2\\geq0$, identify $B_{F_T^{b_1}}B_{F_T^{b_2}}V$ with $B_{F_T^{b_1+b_2}}V$ by keeping its $V$-projection and its last $T$-projection. The composite $V\\xrightarrow{r_V^{(b_2)}}B_{F_T^{b_2}}V\\xrightarrow{r_{B_{F_T^{b_2}}V}^{(b_1)}}B_{F_T^{b_1}}B_{F_T^{b_2}}V$ has these projections $F_V^{b_1+b_2}$ and $v$, so is $r_V^{(b_1+b_2)}$, by [def-pc-fibre-product] and [def-weil-absolute-frobenius-scheme]. Applying contravariant sections proves, under $H_T^{(b_1+b_2)}\\cong H_T^{(b_2)}H_T^{(b_1)}$, the identity $d_T^{(b_1+b_2)}=d_T^{(b_2)}\\circ H_T^{(b_2)}d_T^{(b_1)}$. Inverting gives $(d_T^{(b_1+b_2)})^{-1}=H_T^{(b_2)}((d_T^{(b_1)})^{-1})\\circ(d_T^{(b_2)})^{-1}$. The Hom bijection of the composite adjunction in [def-weil-pbc-composite-adjunction] is the composite of its two Hom bijections. To compute this bijection explicitly, abbreviate $P_i=P_T^{(b_i)}$, $H_i=H_T^{(b_i)}$, $s_i=s_T^{(b_i)}$, $d_i=d_T^{(b_i)}$, with unit $\\eta_i:\\mathrm{id}\\to H_iP_i$. The adjunct of $s_{2,N}\\circ s_{1,P_2N}$ under $P_1P_2\\dashv H_2H_1$ is $H_2H_1(s_{2,N})H_2H_1(s_{1,P_2N})H_2(\\eta_{1,P_2N})\\eta_{2,N}=H_2H_1(s_{2,N})H_2(d_{1,P_2N}^{-1})\\eta_{2,N}=H_2(d_{1,N}^{-1})H_2(s_{2,N})\\eta_{2,N}=H_2(d_{1,N}^{-1})d_{2,N}^{-1}$. These equalities use respectively the unit equation for $s_1$, naturality of $d_1^{-1}$, and the unit equation for $s_2$. Preceding this transformation by the canonical composition comparison, whose unit normalization was checked in Step 4, identifies this with its adjunct under $P_T^{(b_1+b_2)}\\dashv H_T^{(b_1+b_2)}$. The unit equation and uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] identify it with $s_T^{(b_1+b_2)}$. This proves the addition law with the order of factors in the statement. The case where either exponent is zero uses the identity adjunction and the identity $r^{(0)}$; induction with $b_1=1$ gives the $b$-fold iterate.",
+   "text": "Pass to direct images of module sheaves [def-weil-pbc-proetale-operations]. Mathlib unit_conjugateEquiv identifies the conjugate of tau with its unit-section formula. Transport the section normalization of comp along w by equality induction. On each module, site object and section, the two composite direct-image maps are equal by presheaf functoriality applied to step 3. Apply injectivity of Mathlib conjugateEquiv, its composition and whiskering formulae and its unitor formulae to deduce the ordinary inverse-image naturality square.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-weil-absolute-frobenius-scheme",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deductions using its specified relative-Frobenius map"
-   }
+   "elementary": false
   },
   {
-   "text": "All module pullbacks in Steps 2--5 are exact and their derived pullbacks are induced termwise on complexes, by [def-weil-pbc-proetale-operations]; no scheme-flatness assumption is required, since the coefficient maps are isomorphisms by [prop-weil-pbc-proetale-constant-ring-map]. Apply every $s$ and $c^0$ termwise. They commute with differentials by naturality, and the equalities of Steps 4 and 5 hold in each degree, hence on complexes. By [lem-weil-pbc-localization-universal-property](2) these natural isomorphisms descend to the unbounded derived categories, and by (3) the equalities remain equalities of natural transformations there. The descended $s_T^{(b)}$ is exactly $\\tau_T^{(b)}$ as defined in the item. The descended comparisons are the canonical composition maps of [lem-weil-pbc-proetale-derived-pullback-composition]: both are natural isomorphisms between the same functors on $D(V_{\\mathrm{proet}},A)$, and on a K-flat complex with flat terms both are the class of the termwise canonical isomorphism of module pullbacks (for the descended map by construction, for $c_{h,k}$ by its statement). Every complex $\\mathcal G^\\bullet$ receives a quasi-isomorphism $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ from a K-flat complex with flat terms [lem-pc-kflat-resolution], which is an isomorphism in the derived category; naturality of both transformations along it shows that they agree at $\\mathcal G^\\bullet$. Thus Step 4 gives $(\\tau_X^{(b)}Lu^*)c_{u,b}=Lu^*\\tau_Y^{(b)}$, and Step 5 gives exactly the asserted addition law. Every site and its module category uses the fixed small-skeleton convention of [def-weil-pbc-proetale-site], so the localizations and adjunctions are on the stated categories.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-weil-pbc-proetale-site",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deductions using its specified relative-Frobenius map"
-   }
+   "text": "Apply the exact termwise derived functor to the ordinary square. The proved source-library mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_symm and whiskering/composition/unitor coherence equations in WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate transport this equality to the specified derived comparison. Equality induction identifies the derived image of eqToIso w with eqToHom of the induced functor equality. This is exactly the required arbitrary-pullback clause. Combine it with the retained witnesses, addition law and zero normalization from step 1.",
+   "uses": [],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-trf-absolute-frobenius-site",
+  "def-weil-absolute-frobenius-scheme",
   "def-weil-proetale-inverse-image",
   "def-pc-fibre-product",
-  "def-weil-absolute-frobenius-scheme",
-  "lem-trf-absolute-frobenius-site",
-  "def-weil-pbc-proetale-operations",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-site-morphism-composition",
-  "lem-sf-proetale-tensor-composition-unit",
-  "lem-weil-pbc-mate-pasting",
-  "def-weil-pbc-adjunction-conjugate",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-pc-kflat-resolution"
+  "def-weil-pbc-proetale-operations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deductions using its specified relative-Frobenius map"
+  "place": "Tag 0F6W; B7 formalization reuses the normalized AbsoluteFrobeniusSite witnesses, proves arbitrary-map geometric naturality, and transports the resulting module square through the proved exact-derived coherence API."
  },
  "mathlib_searches": [
   {
@@ -237,13 +172,7 @@
   ]
  },
  "tool_uses": [
-  "lem-trf-absolute-frobenius-site",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-site-morphism-composition",
-  "lem-weil-pbc-mate-pasting"
+  "lem-trf-absolute-frobenius-site"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -271,5 +200,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "The canonical relative-Frobenius isomorphisms, ordinary comparisons and module trivializations are quantified with the same projection, conjugate-adjunction and section-unit normalizations as the recorded AbsoluteFrobeniusSite interface. Their exact derived descents give the arbitrary-pullback equality and addition law; the final identity-base-change clause fixes exponent zero. No new category, coefficient map, arbitrary trivialization or hypothesis is introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261020T131936-L-1392910",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
