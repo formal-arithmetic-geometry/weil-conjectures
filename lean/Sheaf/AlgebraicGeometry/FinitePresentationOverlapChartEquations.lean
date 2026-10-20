@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapDiagonalEventually
-import Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleEventually
+import WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapTripleEventually
 import Mathlib.Data.Finset.Order
 
 /-! # Eventual equations on diagonal and threefold overlap charts

@@ -16,24 +16,16 @@
  ],
  "proof": [
   {
-   "text": "On the universal threefold overlap at k subtract T13 from T12 composed with T23. Choose the\nusual iterated pullback at k. The source and target are pullbacks of the prescribed finitely\npresented quasi-coherent modules,\nup to the supplied component isomorphism. The source is therefore of finite type.\nThe triple overlap is quasi-compact over Spec(R_k): it is the intersection\nof three quasi-compact open charts in a quasi-separated scheme. The identity-base-change\ncomparison identifies this defect with a\nmap to which finitePresentation_zero_map_descent applies.",
+   "text": "Apply finitePresentation_overlap_triple_canonical_eventually to obtain a stage l and, at every later stage m, a family of chosen universal triple overlaps on which the composition equation holds.",
    "uses": [
-    "def-pc-local-overlap-transitions"
+    "lem-pc-fp-overlap-triple-canonical-eventually"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality of transitions,\nthe pullback composition comparisons, and limit coherence show that its limit\npullback is zero. Zero-map descent gives l.",
+   "text": "For each later stage m, use overlap_triple_transport to transport the equation from that family to every supplied family of chosen pairwise and triple pullbacks. The same l works for all choices.",
    "uses": [
-    "def-pc-local-overlap-transitions",
-    "lem-pc-fp-zero-map-descent"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At any m above l the defect is still\nzero since pullback is additive. The canonical chart refinement maps compose,\nby the pullback universal property, and pseudofunctor associativity identifies\nthis pullback defect with the composition defect of the prescribed T'.\nAt m the resulting iterated pullback is a universal threefold overlap.\nAny supplied sq and sq₃ are uniquely isomorphic to this overlap compatibly with\nall three chart projections. Apply transition naturality along this isomorphism;\nthe pseudofunctor comparison maps are isomorphisms, so cancellation transports\nthe composition equality to the supplied universal test. Thus the same stage\nworks for every choice of sq and sq₃, and the displayed equation holds. This also handles zero\nmodules and empty charts;\nthe theorem is only invoked for three actual cover indices.",
-   "uses": [
-    "def-pc-local-overlap-transitions"
+    "lem-pc-fp-overlap-triple-transport"
    ],
    "elementary": false
   }
@@ -45,7 +37,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/limits.tex",
-  "place": "split canonical defect and universal-property transport"
+  "place": "Tag 01ZR (3); canonical eventual equation followed by universal-property transport, as in the existing upstream proof; attachment reconciled by G6"
  },
  "mathlib_searches": [
   {
@@ -103,14 +95,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleEventually",
-  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationOverlapTripleEventually.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapTripleEventually",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FinitePresentationOverlapTripleEventually.lean",
   "declaration": "AlgebraicGeometry.finitePresentation_overlap_triple_eventually",
-  "statement": "theorem finitePresentation_overlap_triple_eventually\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    [Finite U.I₀] [∀ a, IsAffine (U.X a)]\n    (N : (a : U.I₀) → (U.X a).Modules)\n    (a b d : U.I₀)\n    (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent)\n    :\n    ∀ (k : I) (hjk : j ≤ k),\n      let q₀ := overlapStageMap R f hij hjk\n      let V₀ : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} :=\n        U.pullback₁ q₀\n      let p₀ := overlapLimitMap R c f (hij.trans hjk)\n      ∀ T : modulesPseudofunctor.OverlapTransitions V₀.f,\n        (∀ a, Nonempty ((T.obj a : (V₀.X a).Modules) ≅\n          (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj (N a))) →\n        (T.pull (p := p₀) (α := fun a ↦ a)\n          (fun a ↦ V₀.pullbackHom_map p₀ a)).Coherent →\n        ∃ (l : I) (hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →\n          let q := overlapStageMap R f hij (hjk.trans hkm)\n          let V : (pullback f (Spec.map\n              (R.map (homOfLE (hij.trans (hjk.trans hkm)))))).OpenCover.{u} :=\n            U.pullback₁ q\n          let r := overlapStageMap R f (hij.trans hjk) hkm\n          let s := overlapRefinementHom U q₀ q r\n            (overlapStageMap_comp R f hij hjk hkm)\n          let T' := T.pull (p := r) (α := fun a ↦ a) (p' := s)\n            (fun a ↦ overlapRefinementHom_map U q₀ q r\n              (overlapStageMap_comp R f hij hjk hkm) a)\n          ∀ sq : ∀ x y, ChosenPullback (V.f x) (V.f y),\n          ∀ sq₃ : ∀ x y z, ChosenPullback₃ (sq x y) (sq y z) (sq x z),\n            T'.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₂\n                (sq₃ a b d).w₁ (sq₃ a b d).w₂ ≫\n              T'.hom (sq₃ a b d).p (sq₃ a b d).p₂ (sq₃ a b d).p₃\n                (sq₃ a b d).w₂ (sq₃ a b d).w₃ =\n              T'.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₃\n                (sq₃ a b d).w₁ (sq₃ a b d).w₃",
+  "statement": "theorem finitePresentation_overlap_triple_eventually\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    [Finite U.I₀] [∀ a, IsAffine (U.X a)]\n    (N : (a : U.I₀) → (U.X a).Modules)\n    (a b d : U.I₀)\n    (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent)\n    :\n    ∀ (k : I) (hjk : j ≤ k),\n      let q₀ := overlapStageMap R f hij hjk\n      let V₀ : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} :=\n        U.pullback₁ q₀\n      let p₀ := overlapLimitMap R c f (hij.trans hjk)\n      ∀ T : modulesPseudofunctor.OverlapTransitions V₀.f,\n        (∀ a, Nonempty ((T.obj a : (V₀.X a).Modules) ≅\n          (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj (N a))) →\n        (T.pull (p := p₀) (α := fun a ↦ a)\n          (fun a ↦ V₀.pullbackHom_map p₀ a)).Coherent →\n        ∃ (l : I) (hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →\n          let q := overlapStageMap R f hij (hjk.trans hkm)\n          let V : (pullback f (Spec.map\n              (R.map (homOfLE (hij.trans (hjk.trans hkm)))))).OpenCover.{u} :=\n            U.pullback₁ q\n          let r := overlapStageMap R f (hij.trans hjk) hkm\n          let s := overlapRefinementHom U q₀ q r\n            (overlapStageMap_comp R f hij hjk hkm)\n          let T' := T.pull (p := r) (α := fun a ↦ a) (p' := s)\n            (fun a ↦ overlapRefinementHom_map U q₀ q r\n              (overlapStageMap_comp R f hij hjk hkm) a)\n          ∀ sq : ∀ x y, ChosenPullback (V.f x) (V.f y),\n          ∀ sq₃ : ∀ x y z, ChosenPullback₃ (sq x y) (sq y z) (sq x z),\n            T'.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₂\n                (sq₃ a b d).w₁ (sq₃ a b d).w₂ ≫\n              T'.hom (sq₃ a b d).p (sq₃ a b d).p₂ (sq₃ a b d).p₃\n                (sq₃ a b d).w₂ (sq₃ a b d).w₃ =\n              T'.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₃\n                (sq₃ a b d).w₁ (sq₃ a b d).w₃",
   "branch": "sheaf-dag",
-  "by": "P2",
-  "date": "2026-10-13"
+  "by": "G6",
+  "date": "2026-10-20",
+  "note": "The existing upstream theorem specializes directly to the original statement: its only signature difference is omission of the unused Noetherian instance. Retire the Sheaf duplicate and migrate its consumer."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -123,14 +116,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G3",
+  "reviewer": "C-578a9",
+  "group": "G6",
   "result": "pass",
-  "landing": "20261013T165641-L-1807989",
+  "landing": "20261020T161139-L-3455060",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf duplicate vs upstream WeilConjectures finitePresentation_overlap_triple_eventually (identical but drops unused Noetherian instance, same proof); consumer diff vs live = only line-14 import swap as ordered by the C-d0eea return; node lean.statement verbatim in upstream file; --all + Coherence importer compile, axioms clean"
  },
  "lean_audit": {
   "master": {
