@@ -110,14 +110,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeCalculation",
-  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenBaseChangeCalculation.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SingleComplexOpenBaseChangeCalculation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SingleComplexOpenBaseChangeCalculation.lean",
   "declaration": "AlgebraicGeometry.singleComplexOpen_baseChange_calculation",
   "statement": "theorem singleComplexOpen_baseChange_calculation [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (K : schemeDerivedCategory X) (V : S.Opens) (V' : S'.Opens) (hV' : V' ≤ g ⁻¹ᵁ V) (j : (f' ⁻¹ᵁ V').toScheme ⟶ (f ⁻¹ᵁ V).toScheme) (hj : j ≫ (f ⁻¹ᵁ V).ι = (f' ⁻¹ᵁ V').ι ≫ g') (sq₀ : IsPullback j (f' ∣_ V') (f ∣_ V) (g.resLE V V' hV')) : let K₀ := (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj K let R := (schemeOpenRestriction S' V').mapDerivedCategory let δ := singleComplexRestrictedCoefficient g' K ((derivedPullback g').obj K) (𝟙 _) (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj R.map (schemeDerivedBaseChangeMap f f' g g' sq.w K) = (singleComplexOpenBaseChangeSourceIso f g K V V' hV').hom ≫ schemeDerivedBaseChangeMap (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀.w K₀ ≫ (schemeDerivedDirectImage (f' ∣_ V')).map δ ≫ (singleComplexOpenDirectImageIso f' V').inv.app ((derivedPullback g').obj K)",
   "branch": "sheaf-dag",
   "by": "N3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "The restored Sheaf module re-exports the upstream module with the same declaration and complete mate calculation. The upstream module already omits the redundant local irreducibility attribute for derivedPullback."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -130,14 +131,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-8be00",
-  "group": "T2",
+  "reviewer": "C-43c0f",
+  "group": "S7",
   "result": "pass",
-  "landing": "20261013T161321-L-1424247",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target signature and existing declarations remain unchanged, interface importers compile, proofs and DAG/report metadata satisfy the stage-3 review rules."
+  "landing": "20261020T151232-L-2651895",
+  "kind": "proof",
+  "note": "independent cc review: node lem-pc-n3-open-base-change-calculation lean.statement vs upstream WeilConjectures theorem signature (identical); quarantined Sheaf file vs upstream twin (header + derivedPullback attribute only); delivered re-export module compiled, axioms clean"
  },
  "lean_audit": {
   "master": {
