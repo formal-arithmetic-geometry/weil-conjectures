@@ -1,0 +1,119 @@
+{
+ "kind": "definition",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Weil restriction, with the coefficient and ordinary/completed tensor comparison detailed in DAG proof step 13"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Tt]ensor|[Tt]ensor.*restrictScalars",
+   "results": "{\"t\": \"2026-10-19T18:28:10Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*[Tt]ensor|[Tt]ensor.*restrictScalars\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"8288bc7c971f847e\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match: field-theoretic tensor equalizers, ordinary ModuleCat scalar extension, or an unknown identifier. The comparison here is normalized on the actual constructible completion and coefficient realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, CategoryTheory.NatIso",
+   "results": "{\"t\": \"2026-10-19T18:28:10Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.restrictScalars, CategoryTheory.NatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match: field-theoretic tensor equalizers, ordinary ModuleCat scalar extension, or an unknown identifier. The comparison here is normalized on the actual constructible completion and coefficient realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical coefficient ring isomorphism comparison of derived tensor on flat K-flat representatives",
+   "results": "{\"t\": \"2026-10-19T18:28:11Z\", \"tool\": \"leanfinder\", \"query\": \"canonical coefficient ring isomorphism comparison of derived tensor on flat K-flat representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.kerTensorProductMapIdToAlgHomEquiv\", \"LinearMap.tensorEqLocusEquiv\", \"LinearMap.tensorKerEquiv\", \"Module.Flat.ker_lTensor_eq\", \"AlgHom.tensorEqualizerEquiv_apply\", \"LinearMap.tensorKerEquiv_apply\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_flat_tensorProduct\"], \"digest\": \"4826c52845bcb5af\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match: field-theoretic tensor equalizers, ordinary ModuleCat scalar extension, or an unknown identifier. The comparison here is normalized on the actual constructible completion and coefficient realization."
+  },
+  {
+   "tool": "blueprint_refs.py search; rg",
+   "query": "coefficient tensor; coefficient.*tensor|tensor.*coefficient",
+   "results": "Blueprint search returned def-pur-section-invariant, lem-coef-integral-residue-tor-residue-amplitude, lem-exc-constant-tensor; none defines this coefficient-presentation comparison. DAG/source searches found ordinary scalar-extension comparison in CompletedCoefficientPresentationTransport and Fd coefficient equivalences, but no object-level two-input tensor comparison. Those recorded transports and tensors are reused.",
+   "date": "2026-10-19",
+   "verdict": "No existing definition of this normalized two-input comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor compatibility of exact scalar restriction along an isomorphism of sheaves of coefficient rings",
+   "results": "{\"t\": \"2026-10-19T18:35:03Z\", \"tool\": \"leansearch\", \"query\": \"Canonical tensor compatibility of exact scalar restriction along an isomorphism of sheaves of coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"TensorProduct.AlgebraTensorModule.restrictScalars_rTensor\", \"TensorProduct.CompatibleSMul.mk\", \"PresheafOfModules.restrictScalarsObj\", \"TensorProduct.AlgebraTensorModule.restrictScalars_lTensor\", \"PresheafOfModules.restrictScalars\", \"LinearMap.restrictScalarsₗ\", \"RestrictScalars.moduleOrig\"], \"digest\": \"d4c9213f8d699e0a\"}",
+   "date": "2026-10-19",
+   "verdict": "The exact restrictScalars functor is found and reused; the remaining hits are underived ring/module tensor identities. No representative-normalized constructible two-input tensor comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-projection-formula",
+  "date": "2026-10-19",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof step 13: coefficient comparison on local pure tensors and signed total complexes, underlying the integral tensor compatibility.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "def-sf-projection-coefficient-tensor-total",
+ "title": "Pure-tensor coefficient comparison and its signed total",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite extension, and $X$ a scheme. Use the quotient-normalized completed coefficient ring isomorphism and its exact scalar-restriction functor $A$ [def-fd-coefficient-comparison-datum]. The ordinary coefficient tensor comparison is the unique natural family $A(M\\otimes N)\\simeq A(M)\\otimes A(N)$ for module sheaves [def-pur-sheaf-tensor-product] sending every local pure tensor $x\\otimes y$ to the same tensor of the restricted sections. On cochain complexes, define its inverse signed-total comparison by the universal direct-sum map: its restriction to the $(p,q)$-summand is the inverse ordinary module tensor comparison followed by $A$ applied to the $(p,q)$-summand inclusion. Exact scalar restriction preserves these direct sums, so this chain map is invertible; the forward total comparison is its inverse. The differential uses the recorded sign $d_P\\otimes1+(-1)^p1\\otimes d_Q$ [def-weil-derived-tensor]. No completion is applied in this comparison.",
+ "stmt_deps": [
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-derived-tensor",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionCoefficientTensorTotal",
+  "declaration": "WeilConjectures.ProjectionTensorCoefficient.moduleComparison",
+  "declarations": [
+   "WeilConjectures.ProjectionTensorCoefficient.complexTransport",
+   "WeilConjectures.ProjectionTensorCoefficient.totalTarget",
+   "WeilConjectures.ProjectionTensorCoefficient.module_existsUnique",
+   "WeilConjectures.ProjectionTensorCoefficient.moduleComparison",
+   "WeilConjectures.ProjectionTensorCoefficient.module_naturality",
+   "WeilConjectures.ProjectionTensorCoefficient.module_tensorHom_naturality",
+   "WeilConjectures.ProjectionTensorCoefficient.total",
+   "WeilConjectures.ProjectionTensorCoefficient.total_isIso",
+   "WeilConjectures.ProjectionTensorCoefficient.totalIso"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectionCoefficientTensorTotal.lean",
+  "statement": "def moduleComparison (M N : integralTowerModules l E X) : (fdCoefficientTransport l E X).obj (((constructibleTensorOrdinary l E X).obj M).obj N) ≅ ((proEtaleOrdinaryTensor X (pbcAdicCompletion X (pbcIntegralDatum l E))).obj ((fdCoefficientTransport l E X).obj M)).obj ((fdCoefficientTransport l E X).obj N)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e316c629",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e316c629",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery after c5b7cea9 RETURN (H3). tensor_identification now asserts ∃! Weil iso with e.hom.hom.f HEq tensorComparisonArrow (coefficient tensor comparison, R.ordinary of the actual W.finite counit cancellations, R.chi) plus explicit wfWeilCarrier = wfTensor carrier equality and structure-map HEq. Each piece is pinned by ∃!: cancellation (W.finite counit at fromExact), comparison (localization of integralComparison on integral reps), integralComparison (integralArrow for every OpenFactorCoherence.Tensor t; checked t-independent, presentations exist), ordinaryComparison (K-flat square via totalIso), moduleComparison (local pure tensors); completion_isIso true (BS 6.5). Carrier equality follows from Normalized + wfIntegralTensor/completedAmbient definitions. Rest of the module byte-identical to the accepted clauses (mates moved to def-sf-constructible-projection-mates verbatim). Statements verbatim, no hollow defs, no clashes, nothing dropped. nt_compile --json clean: 31.7/28.2/19.5/48.6 s. Advisory: def-sf-projection-tensor-coefficient-comparison cites theorem lem-fix-constructible-tensor-completion for plain abbrevs constructibleTensorOrdinary/Total (same as landed def-sf-tensor-completion-comparison; the -total node uses them uncited) — maintainer may give them an existing:true def node; pentagon/imports/rationalExchange identification advisories persist."
+ }
+}

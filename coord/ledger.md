@@ -17773,3 +17773,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:50 L: merged deliver/Q06/lem-sf-proper-product-counit-transpose (stage 2; reviewer PASS; parallel immutable checks)
 - 23:53 L: merged deliver/NL/def-sf-cup (stage 2; reviewer PASS; parallel immutable checks)
 - 00:06 L: merged deliver/Q02/lem-sf-identification-coefficient-transport (stage 2; reviewer PASS; parallel immutable checks)
+- 00:18 L: merged deliver/NK/fix-prop-projection-formula (stage 2; reviewer PASS; parallel immutable checks)
