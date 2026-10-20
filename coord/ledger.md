@@ -17793,3 +17793,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:13 L: merged deliver/G2/Sheaf.SixFunctors.FieldTensor (stage 3; reviewer PASS; first push; landing 20261020T051310-L-1626215 (interface); batch 20261020T050952; modules 1; new nodes 0; change records: coord/changes/G2-field-tensor-proof-context.md)
 - 05:13 L: merged deliver/G3/Sheaf.AlgebraicGeometry.OpenComplementKnown (stage 3; reviewer PASS; after a return; landing 20261020T051312-L-1627837 (proof); batch 20261020T050952; modules 1; new nodes 0)
 - 05:13 L: merged deliver/G3/Sheaf.CategoryTheory.BoundedInjectiveFibreDescent (stage 3; reviewer PASS; first push; landing 20261020T051314-L-1629447 (proof); batch 20261020T050952; modules 1; new nodes 0)
+- 05:13 L: merged deliver/G5/Sheaf.AlgebraicGeometry.OpenProjectionSiteTransport (stage 3; reviewer PASS; first push; landing 20261020T051317-L-1630859 (interface); batch 20261020T050952; modules 4; new nodes 3)

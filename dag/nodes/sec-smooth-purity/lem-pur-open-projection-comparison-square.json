@@ -1,0 +1,115 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-open-projection-site-transport",
+   "place": "Its boundedness and normalized comparison proof steps."
+  },
+  "same_as": []
+ },
+ "kind": "lemma",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenProjectionSiteTransport",
+  "date": "2026-10-19",
+  "group": "G5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFreeOfRank|projectionMap_mate",
+   "results": "No matches.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.flat",
+   "results": "loogle: unknown identifier 'ObjectProperty.flat'",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free sheaf over the constant ring sheaf is a flat object of fixed ring module sheaves",
+   "results": "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.IsFiniteType; SheafOfModules.Presentation.IsFinite; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact monoidal functor transports the projection formula for an open immersion and finite locally free sheaves are flat",
+   "results": "CategoryTheory.GrothendieckTopology.W.transport_isMonoidal; CategoryTheory.Functor.preservesMonomorphisms_of_map_exact; CategoryTheory.Functor.Monoidal.nonempty_monoidal_iff_preservesFiniteProducts; Module.Flat.of_projective; CategoryTheory.ExactPairing.ofFaithful; CategoryTheory.exactPairingOfFaithful; CategoryTheory.Functor.FullyFaithful.mon_Class; CategoryTheory.ExactPairing.ofFullyFaithful; inspected these signatures: none identifies this fixed-ring realization or this canonical derived open comparison.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-pur-open-projection-comparison-square",
+ "title": "Normalized comparison square for open projection",
+ "statement": "Let Λ be a finite commutative ring, j : U → X an open immersion [def-weil-open-immersion], and F in D(U_et,Λ), B in D(X_et,Λ) [def-weil-pbc-derived-categories,def-weil-pbc-proetale-modules]. Let C_U and C_X be the exact termwise comparison pullbacks [def-sf-comparison-derived-pullback]. Let e be the derived adjoint-normalized extension comparison obtained termwise from [lem-cbc-proetale-extension-zero-comparison], let r be the canonical comparison C_U Lj_et* ≅ Lj_proet* C_X obtained by conjugating the exact derived inverse-image square by the exact-to-left-derived isomorphisms, and let T be the canonical derived tensor comparison [def-kun-derived-tensor]. If κ_et and κ_proet denote the canonical open projection adjuncts, then C_X(κ_et(F,B)) followed by T_X and tensor(e_F,1) equals e_(F tensor Lj_et* B) followed by j!_proet(T_U followed by tensor(1,r_B)) and κ_proet(C_U F,C_X B). The exact canonical composites are fixed in lean.statement; the assertion is an equality for arbitrary unbounded objects with no local-freeness or boundedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "the corresponding proof step of lem-pur-open-projection-site-transport"
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-kun-derived-tensor",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-sf-comparison-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary unit normalization, converted from restriction to inverse image, identifies the inverse extension comparison as a mate. Derive that equality by mapDerivedCategoryAdjunction_mate. Compatibility of left-derived tensor comparisons with the inverse-image square is preserved when restriction is replaced by exact termwise restriction, giving compatibility of the mixed comparisons defining the projection maps. Apply Adjunction.projectionMap_mate. Cancel the inverse extension comparison and its tensor, and reassociate to obtain the displayed canonical square. No boundedness is involved.",
+   "uses": [
+    "lem-sf-open-comparison-tensor-normalization",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-comparison-tensor-normalization",
+  "lem-cbc-proetale-extension-zero-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "the corresponding proof step of lem-pur-open-projection-site-transport"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenProjectionComparisonSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenProjectionComparisonSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.openProjectionTransport_projection_square",
+  "statement": "theorem openProjectionTransport_projection_square\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}}\n    (j : U ⟶ X) [IsOpenImmersion j]\n    (F : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (B : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map\n        (((Etale.derivedOpenImmersionLowerShriekProjectionMap\n          (ModuleCat.{u + 1} Λ) j).app F).app B) ≫\n      ((derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso\n      (ModuleCat.{u + 1} Λ)\n      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj F)).app B ≪≫\n    ((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso\n      ((((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n    Functor.mapDerivedCategoryNatIso\n      (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j) ≪≫\n    Functor.mapDerivedCategoryCompIso _ _)).app F)).app _).hom =\n    ((((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n    Functor.mapDerivedCategoryNatIso\n      (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j) ≪≫\n    Functor.mapDerivedCategoryCompIso _ _)).app _ ≪≫\n    (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.mapIso\n      (((derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso\n        (ModuleCat.{u + 1} Λ) F).app _) ≪≫\n        ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj _).mapIso\n          (((Functor.isoWhiskerRight\n      (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j) _ ≪≫\n    ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n      Functor.mapDerivedCategoryNatIso\n        (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j) ≪≫\n      Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n    Functor.isoWhiskerLeft _\n      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).symm)).app B))).hom ≫\n      ((derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} Λ) j).app\n        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategory.obj F)).app\n        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.obj B)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051317-L-1630859",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051317-L-1630859",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

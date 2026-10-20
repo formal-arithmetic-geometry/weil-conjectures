@@ -17,14 +17,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.OpenComparisonTensorNormalization
-import Sheaf.AlgebraicGeometry.OrdinaryDerivedOpenClosedAdjunctions
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.SixFunctors.OpenTensorNormalization
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.OpenProjectionComparisonSquare
+import Sheaf.AlgebraicGeometry.OpenProjectionSourcePlus
 
 /-!
 # Site transport of the open projection formula
@@ -172,6 +166,8 @@ def OpenProjectionTransport (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
         (openProjectionSourceComparison Λ j F G).hom =
       (openProjectionTargetComparison Λ j F G).hom ≫ γp
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized open tensor projection and its forward inverse are transported
 from the small etale site to the pro-etale site, under the specified comparisons.
 
@@ -214,6 +210,76 @@ theorem openProjectionSiteTransport
       (((DerivedCategory.singleFunctor
         (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj L)⟦m⟧)
       (DerivedCategory.Plus.ι.obj G) := by
-  sorry
-
+  let F := ((DerivedCategory.singleFunctor
+    (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj L)⟦m⟧
+  let B := DerivedCategory.Plus.ι.obj G
+  let C := (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory
+  let Fp := (comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategory.obj F
+  let Gp := C.obj B
+  let e := ((Etale.derivedOpenImmersionLowerShriekProjectionIso
+    (ModuleCat.{u + 1} Λ) j).app F).app B
+  let p := ((derivedOpenImmersionLowerShriekProjectionIso
+    (ModuleCat.{u + 1} Λ) j).app Fp).app Gp
+  have hS : DerivedCategory.TStructure.t.plus
+      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj
+        (((Etale.derivedTensorWhiskeringRightLeftDerivedUpperStar
+          (ModuleCat.{u + 1} Λ) j).obj F).obj B)) := by
+    exact openProjectionTransport_source_plus Λ j L t hL m G
+  have hT : DerivedCategory.TStructure.t.plus
+      (((Etale.derivedTensorWhiskeringLeftOpenImmersionLowerShriek
+          (ModuleCat.{u + 1} Λ) j).obj F).obj B) :=
+    DerivedCategory.TStructure.t.plus.prop_of_iso e hS
+  have hCS : DerivedCategory.TStructure.t.plus
+      (C.obj ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj
+        (((Etale.derivedTensorWhiskeringRightLeftDerivedUpperStar
+          (ModuleCat.{u + 1} Λ) j).obj F).obj B))) := by
+    exact ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.obj
+      ⟨_, hS⟩).property
+  have hPS : DerivedCategory.TStructure.t.plus
+      ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj
+        (((derivedTensorWhiskeringRightLeftDerivedUpperStar
+          (ModuleCat.{u + 1} Λ) j).obj Fp).obj Gp)) :=
+    DerivedCategory.TStructure.t.plus.prop_of_iso
+      (openProjectionSourceComparison Λ j F B) hCS
+  have hPT : DerivedCategory.TStructure.t.plus
+      (((derivedTensorWhiskeringLeftOpenImmersionLowerShriek
+          (ModuleCat.{u + 1} Λ) j).obj Fp).obj Gp) :=
+    DerivedCategory.TStructure.t.plus.prop_of_iso p hPS
+  have hκ : C.map e.hom ≫ (openProjectionTargetComparison Λ j F B).hom =
+      (openProjectionSourceComparison Λ j F B).hom ≫ p.hom :=
+    by
+      simpa only [e, p, C, Fp, Gp, Iso.app_hom,
+        Etale.derivedTensorWhiskeringRightLeftDerivedUpperStar,
+        derivedTensorWhiskeringLeftOpenImmersionLowerShriek,
+        Functor.whiskeringLeft₂, Functor.whiskeringLeft, Functor.whiskeringRight,
+        Functor.comp_obj, Functor.id_obj,
+        Etale.derivedOpenImmersionLowerShriekProjectionIso_hom,
+        derivedOpenImmersionLowerShriekProjectionIso_hom,
+        openProjectionTargetComparison, openProjectionSourceComparison,
+        openProjectionExtensionComparison, openProjectionRestrictionComparison] using
+          openProjectionTransport_projection_square Λ j F B
+  have hγ : C.map e.inv ≫ (openProjectionSourceComparison Λ j F B).hom =
+      (openProjectionTargetComparison Λ j F B).hom ≫ p.inv := by
+    apply (cancel_epi (C.map e.hom)).1
+    simp only [← C.map_comp_assoc, e.hom_inv_id, C.map_id, Category.id_comp]
+    rw [← Category.assoc, hκ]
+    simp only [Category.assoc, p.hom_inv_id]
+    erw [Category.comp_id]
+  change DerivedCategory.TStructure.t.plus
+      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj
+        (((Etale.derivedTensorWhiskeringRightLeftDerivedUpperStar
+          (ModuleCat.{u + 1} Λ) j).obj F).obj B)) ∧
+    DerivedCategory.TStructure.t.plus (((Etale.derivedTensorWhiskeringLeftOpenImmersionLowerShriek
+          (ModuleCat.{u + 1} Λ) j).obj F).obj B) ∧
+    DerivedCategory.TStructure.t.plus
+      ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj
+        (((derivedTensorWhiskeringRightLeftDerivedUpperStar
+          (ModuleCat.{u + 1} Λ) j).obj Fp).obj Gp)) ∧
+    DerivedCategory.TStructure.t.plus (((derivedTensorWhiskeringLeftOpenImmersionLowerShriek
+          (ModuleCat.{u + 1} Λ) j).obj Fp).obj Gp) ∧
+    IsIso e.hom ∧ IsIso e.inv ∧ IsIso p.hom ∧ IsIso p.inv ∧
+    e.hom ≫ e.inv = 𝟙 _ ∧ e.inv ≫ e.hom = 𝟙 _ ∧
+    p.hom ≫ p.inv = 𝟙 _ ∧ p.inv ≫ p.hom = 𝟙 _ ∧ _
+  exact ⟨hS, hT, hPS, hPT, inferInstance, inferInstance, inferInstance, inferInstance,
+    e.hom_inv_id, e.inv_hom_id, p.hom_inv_id, p.inv_hom_id, hκ, hγ⟩
 end AlgebraicGeometry.ProEtale

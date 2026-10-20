@@ -1,0 +1,113 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-open-projection-site-transport",
+   "place": "Its boundedness and normalized comparison proof steps."
+  },
+  "same_as": []
+ },
+ "kind": "lemma",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenProjectionSiteTransport",
+  "date": "2026-10-19",
+  "group": "G5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFreeOfRank|projectionMap_mate",
+   "results": "No matches.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.flat",
+   "results": "loogle: unknown identifier 'ObjectProperty.flat'",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free sheaf over the constant ring sheaf is a flat object of fixed ring module sheaves",
+   "results": "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.IsFiniteType; SheafOfModules.Presentation.IsFinite; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact monoidal functor transports the projection formula for an open immersion and finite locally free sheaves are flat",
+   "results": "CategoryTheory.GrothendieckTopology.W.transport_isMonoidal; CategoryTheory.Functor.preservesMonomorphisms_of_map_exact; CategoryTheory.Functor.Monoidal.nonempty_monoidal_iff_preservesFiniteProducts; Module.Flat.of_projective; CategoryTheory.ExactPairing.ofFaithful; CategoryTheory.exactPairingOfFaithful; CategoryTheory.Functor.FullyFaithful.mon_Class; CategoryTheory.ExactPairing.ofFullyFaithful; inspected these signatures: none identifies this fixed-ring realization or this canonical derived open comparison.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-pur-open-projection-source-plus",
+ "title": "Boundedness of the open projection source",
+ "statement": "Let Λ be a finite commutative ring, j : U → X an open immersion [def-weil-open-immersion], L an etale sheaf of Λ-modules on U whose canonical coefficient realization [def-weil-pbc-proetale-modules] is finite locally free of rank t ≥ 0. For any integer m and any bounded-below derived etale sheaf G on X [def-weil-pbc-derived-categories], put F = L[0][m]. Then the open projection source j! (F tensor^L Lj* G), with the canonical derived tensor [def-kun-derived-tensor] and exact derived extension by zero, is bounded below. No flatness or Tor-amplitude assumption is made on G.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "the corresponding proof step of lem-pur-open-projection-site-transport"
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-kun-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "The flatness bridge makes L flat, so its single complex has Tor amplitude [0,0]. Exact pullback takes G to a bounded-below derived object. isGE_tensor_of_torAmplitudeIn bounds its tensor with the single complex. The shift changes the bound by -m; the tensor shift isomorphism transports that bound. Exact open extension preserves this lower bound by isGE_mapDerivedCategory_obj.",
+   "uses": [
+    "lem-pur-finite-locally-free-etale-flat",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-locally-free-etale-flat",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "the corresponding proof step of lem-pur-open-projection-site-transport"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenProjectionSourcePlus",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenProjectionSourcePlus.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.openProjectionTransport_source_plus",
+  "statement": "theorem openProjectionTransport_source_plus\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}}\n    (j : U ⟶ X) [IsOpenImmersion j]\n    (L : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (t : ℕ)\n    (hL : SheafOfModules.IsFiniteLocallyFreeOfRank.{u + 1, u, u + 1}\n      (R := finiteCoefficientEtaleRingSheaf U Λ)\n      ((finiteCoefficientEtaleRealization U Λ).obj L) t) (m : ℤ)\n    (G : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    DerivedCategory.TStructure.t.plus\n      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj\n        (((Etale.derivedTensorWhiskeringRightLeftDerivedUpperStar\n          (ModuleCat.{u + 1} Λ) j).obj\n            (((DerivedCategory.singleFunctor\n              (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj L)⟦m⟧)).obj\n                (DerivedCategory.Plus.ι.obj G)))",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051317-L-1630859",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051317-L-1630859",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
