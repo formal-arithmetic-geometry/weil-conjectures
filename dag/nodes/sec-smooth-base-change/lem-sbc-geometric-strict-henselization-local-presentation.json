@@ -16,32 +16,31 @@
  ],
  "proof": [
   {
-   "text": "Apply the affine neighbourhood/triples comparison to the identity chart of Spec R. Its prime is the image of the geometric point and K is the relative separable closure of its scheme residue field in Omega. Keep the comparison of ring diagrams and the specified equations for structural R-maps and colimit legs.",
+   "text": "Use the upstream private chart_local_presentation for an open affine chart. The affine neighbourhood/triples equivalence identifies the chart diagram with residue triples over the image prime and the relative separable closure. Keep the specified structural-map and colimit-leg equations.",
    "uses": [
     "lem-weil-pbc-etale-local-ring-triples"
    ],
    "elementary": false
   },
   {
-   "text": "Use the canonical colimit cocone k of the small affine coordinate-ring diagram, whose vertex is the given strict henselization ring. The representative equivalence transports the affine-neighbourhood cocone cn to a universal cocone on this diagram. Uniqueness of colimits gives eN: cn.pt isomorphic to k.pt, explicitly specifying the target cocone k both in the isomorphism and its leg formula. Compose the inverse chart/triples colimit comparison with eN.",
+   "text": "The canonical smallStrictHenselizationCocone, its colimit universal property, and finality of the representative equivalence identify the strictHenselization colimit with the affine-neighbourhood cocone. Compose with the chart/triples colimit comparison. The identity residue triple gives a common R-map by cocone naturality.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit"
    ],
    "elementary": false
   },
   {
-   "text": "The identity residue triple maps to every triple by its structural map. Cocone naturality makes the transported R-map bprime independent of the triple. Evaluate the comparison at one small representative. The specified structural-map equation of the affine/triples equivalence, its colimit-leg equation, and the leg formula for eN express bprime through that representative. Naturality of toSpecGamma and the representative structural-map characterization give Spec.map bprime = the strict-henselization structural map. Faithfulness of Spec and hb give bprime = b.",
+   "text": "Choose a representative of the pointed affine chart. The comparison preserves its structural R-map and colimit legs. Naturality of the affine scheme-spectrum isomorphism and strictHenselizationStructuralMap_eq identify the spectrum of the transported R-map with strictLocalizationToBase. Apply etaleResidueTriples_localized_isStrictHenselization to obtain the compatible prime-local algebra structures and strict-henselization property.",
    "uses": [
-    "def-weil-pbc-strict-henselization-structural-map"
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-sbc-etale-triples-localized-strict-henselization"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the localized strict-henselization theorem to the universal triple cocone, the constructed isomorphism and the common structural R-map. It returns the compatible local-base algebra structures and strict henselization property. Set q = p.asIdeal and use bprime = b in the elementwise structural-map equation.",
-   "uses": [
-    "lem-sbc-etale-triples-localized-strict-henselization"
-   ],
-   "elementary": false
+   "text": "Specialize the chart presentation to the identity chart of Spec R. Faithfulness of Spec and the assumed structural-map equation identify its R-map with b. Substitute this equality in the elementwise algebra-map equation and retain all witnesses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -52,10 +51,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "K1",
+  "group": "J3",
   "document": "Stacks Project",
-  "place": "Tag 04HX, etale-cohomology.tex, lemma-describe-etale-local-ring; Tag 04GW, algebra.tex, lemma-strict-henselization-different",
-  "note": "Repair of the complete identity-chart assembly: use the canonical small coordinate-ring colimit cocone and explicitly specify it in coconePointUniqueUpToIso and its leg equation, avoiding inference through the non-exposed getColimitCocone definition. The chart/triples comparison, structural-map calculation and localized presentation are unchanged."
+  "place": "Tag 04HX (lemma-describe-etale-local-ring), Tag 04GW (lemma-strict-henselization-different)",
+  "note": "Retirement to the existing proved upstream theorem; its general private chart presentation specializes to the identity chart, then Spec faithfulness identifies the prescribed structural map. No mathematical node is withdrawn."
  },
  "mathlib_searches": [
   {
@@ -107,14 +106,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationLocalPresentation.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalPresentation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationLocalPresentation.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselizationRing_local_presentation",
-  "statement": "theorem strictHenselizationRing_local_presentation\n    (R : CommRingCat.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    ∃ (q : Ideal R) (_ : q.IsPrime)\n      (K : Type u) (_ : Field K)\n      (_ : Algebra (IsLocalRing.ResidueField (Localization.AtPrime q)) K)\n      (_ : IsSepClosure (IsLocalRing.ResidueField (Localization.AtPrime q)) K)\n      (_ : Algebra (Localization.AtPrime q) K)\n      (_ : IsScalarTower (Localization.AtPrime q)\n        (IsLocalRing.ResidueField (Localization.AtPrime q)) K)\n      (_ : Algebra (Localization.AtPrime q) (strictHenselizationRing barY)),\n      (∀ r : R, algebraMap (Localization.AtPrime q) (strictHenselizationRing barY)\n        (algebraMap R (Localization.AtPrime q) r) = b.hom r) ∧\n      Algebra.IsStrictHenselization (Localization.AtPrime q) K\n        (strictHenselizationRing barY)",
+  "statement": "theorem strictHenselizationRing_local_presentation\n    (R : CommRingCat.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselization barY)\n    (hb : Spec.map b = strictLocalizationToBase barY) :\n    ∃ (q : Ideal R) (_ : q.IsPrime)\n      (K : Type u) (_ : Field K)\n      (_ : Algebra (IsLocalRing.ResidueField (Localization.AtPrime q)) K)\n      (_ : IsSepClosure (IsLocalRing.ResidueField (Localization.AtPrime q)) K)\n      (_ : Algebra (Localization.AtPrime q) K)\n      (_ : IsScalarTower (Localization.AtPrime q)\n        (IsLocalRing.ResidueField (Localization.AtPrime q)) K)\n      (_ : Algebra (Localization.AtPrime q) (strictHenselization barY)),\n      (∀ r : R, algebraMap (Localization.AtPrime q) (strictHenselization barY)\n        (algebraMap R (Localization.AtPrime q) r) = b.hom r) ∧\n      Algebra.IsStrictHenselization (Localization.AtPrime q) K\n        (strictHenselization barY)",
   "branch": "sheaf-dag",
-  "by": "U2",
-  "date": "2026-10-14"
+  "by": "J3",
+  "date": "2026-10-20",
+  "note": "Retired the duplicate Sheaf module in favor of the existing proved upstream theorem. The upstream theorem uses strictHenselization and strictLocalizationToBase, the canonical affine-neighbourhood colimit and its structural map. Its private chart_local_presentation proves the more general affine-chart case; the public theorem specializes to the identity chart and identifies the given map by Spec faithfulness."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -129,12 +129,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K1",
+  "reviewer": "C-6b7e1",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261020T151225-L-2649487",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T161323-L-3476889",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf copy (stub) vs twin WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalPresentation theorem (signature = node lean.statement, axioms clean); sole importer CoordinateMaximalBranchStratum compiles with one-line import swap; node changes only lean/proof/proof_origin"
  },
  "lean_audit": {
   "master": {
