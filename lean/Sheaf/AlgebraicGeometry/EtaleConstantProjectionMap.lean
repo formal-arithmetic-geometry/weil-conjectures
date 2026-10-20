@@ -92,26 +92,6 @@ theorem etaleConstantSheaf_preservesFlat (Λ : Type (u + 1)) [CommRing Λ]
 
 attribute [instance] etaleConstantSheaf_preservesFlat
 
-/-- A bifunctor transformation packaged with componentwise invertibility transport.
-Source: evaluation of natural transformations; Stacks Tag 0F12
-(blueprint: def-kun-constant-projection-morphism). -/
-structure ProjectionComponents {C D : Type*} [Category* C] [Category* D]
-    {F G : C ⥤ D ⥤ D} (τ : F ⟶ G) where
-  /-- The component maps. -/
-  component : ∀ (E : C) (K : D), (F.obj E).obj K ⟶ (G.obj E).obj K
-  /-- These are the specified components of the transformation. -/
-  component_eq : ∀ E K, component E K = (τ.app E).app K
-  /-- Invertibility is transported through evaluation. -/
-  isIso : (∀ E K, IsIso ((τ.app E).app K)) → ∀ E K, IsIso (component E K)
-
-/-- The components of a specified bifunctor transformation.
-Source: evaluation (blueprint: def-kun-constant-projection-morphism). -/
-def projectionComponents {C D : Type*} [Category* C] [Category* D]
-    {F G : C ⥤ D ⥤ D} (τ : F ⟶ G) : ProjectionComponents τ where
-  component E K := (τ.app E).app K
-  component_eq _ _ := rfl
-  isIso h := h
-
 variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
@@ -124,14 +104,6 @@ noncomputable def derivedConstantGlobalSectionsAdjunction (X : Scheme.{u}) :
     (constantSheaf X.smallEtaleTopology A).leftDerivedFunctor ⊣
       rightDerivedGlobalSections A X :=
   (constantSheafΓAdj X.smallEtaleTopology A).derivedAdjunction
-
-/-- The canonical projection transformation, with a stable evaluation interface.
-Source: Stacks Tag 0F12 (blueprint: def-kun-constant-projection-morphism). -/
-noncomputable def constantProjectionComponents (X : Scheme.{u})
-    [(constantSheaf X.smallEtaleTopology A).Monoidal]
-    [(constantSheaf X.smallEtaleTopology A).PreservesFlat] :=
-  projectionComponents ((derivedConstantGlobalSectionsAdjunction A X).rightAdjointProjectionMap
-    (constantSheaf X.smallEtaleTopology A).leftDerivedTensorComparison)
 
 /-- The canonical map `RΓ(E) ⊗ᴸ K → RΓ(E ⊗ᴸ K̲)`, defined as the adjunct of the
 canonical derived constant-sheaf tensor comparison followed by the counit on `E`.
@@ -149,7 +121,9 @@ noncomputable def constantDerivedProjectionMap (X : Scheme.{u})
       ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj
         (constantSheaf X.smallEtaleTopology A).leftDerivedFunctor).obj
           (curriedTensor _))).obj E).obj K :=
-  (constantProjectionComponents A X).component E K
+  (((derivedConstantGlobalSectionsAdjunction A X).rightAdjointProjectionMap
+    (constantSheaf X.smallEtaleTopology A).leftDerivedTensorComparison).app
+      E).app K
 
 end AlgebraicGeometry.Etale
 

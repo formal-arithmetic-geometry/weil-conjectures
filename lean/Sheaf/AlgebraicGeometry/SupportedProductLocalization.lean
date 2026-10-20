@@ -35,6 +35,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
+import Sheaf.AlgebraicGeometry.SupportRestrictionTriangle
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
