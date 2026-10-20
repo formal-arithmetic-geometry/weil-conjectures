@@ -1,6 +1,6 @@
 # Work queue
 
-186 items; claim with `tools/claim.py next <group> [--stage N]`.
+184 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (29 clusters, 1594 modules)
 
@@ -52,17 +52,15 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 302 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (110)
+## Stage 3: modules to prove (108)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 11 | 1 | repair | route |
-| `Sheaf.Paper.SfHomTriangulated` | - | 0 | repair | route |
 | `Sheaf.Paper.LisseAdicAutomorphismPullback` | 6 | 1 | disputed | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek` | 8 | 1 | disputed | route |
-| `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifUpperShriek` | 16 | 1 | disputed | route |
 | `Sheaf.Paper.CompletedIntegralCoefficientGerm` | 8 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer` | - | 1 | proof | 1 |
 | `Sheaf.Paper.CompletedDirectImageLimits` | - | 6 | proof | 1 |
