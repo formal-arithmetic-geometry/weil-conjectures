@@ -12,32 +12,12 @@ public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Sites.Limits
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import Sheaf.Paper.ProEtaleCanonicalTensorPullback
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.PerfectProjectionFormula
-import Sheaf.Paper.FiniteLevelRectangle
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import all Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import Sheaf.Paper.CompletedConstantAlgebraFlatQuotients
+import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.CategoryTheory.FlatRingedDiagramRestriction
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.CompletedDirectImageLimits
-import Sheaf.Paper.FourArrows
-import Sheaf.Paper.FourCorners
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! # Strict tower exchange and the canonical mate
 
@@ -253,6 +233,47 @@ abbrev exchangeTowerModuleRes (T : Scheme.{t}) :
     exchangeTowers T (d.completedRing T) ⥤ exchangeTowers T (exchangeConstantRing T A) :=
   (Functor.whiskeringRight _ _ _).obj (proEtaleRingRestrictScalars (exchangeScalar d T))
 
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem termwiseRightAdjoint_kinjective
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    {E : C ⥤ D} {F : D ⥤ C} [E.Additive] [F.Additive]
+    [PreservesFiniteLimits E] [PreservesFiniteColimits E] (adj : E ⊣ F) :
+    ((Functor.whiskeringRight ℕᵒᵖ D C).obj F).PreservesKInjectiveComplexes := by
+  have : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj E) :=
+    ⟨fun J _ _ ↦ whiskeringRight_preservesLimitsOfShape (C := ℕᵒᵖ) (J := J) E⟩
+  have : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj E) :=
+    ⟨fun J _ _ ↦ whiskeringRight_preservesColimitsOfShape (C := ℕᵒᵖ) (J := J) E⟩
+  exact (adj.whiskerRight ℕᵒᵖ).preservesKInjectiveComplexes
+
+set_option linter.style.haveILetI false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem exchangeTowerModuleRes_kinjective (T : Scheme.{t}) :
+    (exchangeTowerModuleRes d T).PreservesKInjectiveComplexes := by
+  letI : IsNoetherianRing A := d.noetherian
+  let c := exchangeScalar d T
+  have hc : ∀ n : ℕ, c ≫ (pbcCompletedComparison T d).inv ≫
+      limit.π (adicLisseRingSystem T d.ideal) (op n) =
+      (constantSheaf (ProEt.topology T) CommRingCat.{t + 1}).map
+        (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) := by
+    intro n
+    dsimp only [c, exchangeScalar]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    exact (adicDatumScalar_exists T
+      { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum,
+        quotientFinite := d.quotientFinite }).exists.choose_spec n
+  have he := (completed_constant_algebra_flat_quotients T d.ideal _
+    (pbcCompletedComparison T d) c hc).2.1
+  have : PreservesFiniteLimits (completedAdicChange T c) := he.1
+  have : PreservesFiniteColimits (completedAdicChange T c) := he.2
+  obtain ⟨_, _, h⟩ :=
+    SheafOfModules.sheafRingCoefficientOrdinaryAdjunction.{t + 1, t + 1, t} c
+  let adj : completedAdicChange T c ⊣ proEtaleRingRestrictScalars c :=
+    (h (completedAdicChange T c)
+      (completedAdicChangeData T c).choose_spec.choose
+      (completedAdicChangeData T c).choose_spec.choose_spec.choose).choose
+  exact termwiseRightAdjoint_kinjective
+    (E := completedAdicChange T c) (F := proEtaleRingRestrictScalars c) adj
+
 set_option backward.isDefEq.respectTransparency false in
 /-- Exactness of restriction on strict diagrams, with all transition maps retained.
 Source: strict normalization, proof step 5; Stacks 03D3
@@ -399,13 +420,108 @@ def ExchangeResPushNormalized {U V : Scheme.{t}} (f : U ⟶ V)
         (exchangeConstantIso f A)
         (((exchangeTowerModuleRes d U).mapHomologicalComplex (.up ℤ)).obj C)
 
+set_option backward.isDefEq.respectTransparency.types false in
+-- A normalized ordinary mate descends uniquely when the exact vertical functor
+-- preserves K-injectives. Keeping this argument abstract avoids expanding coefficient models.
+private theorem exactDerivedMate_existsUnique
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [Abelian.HasKInjectiveResolutions B] [Abelian.HasKInjectiveResolutions D]
+    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
+    {G : A ⥤ C} {H : B ⥤ D}
+    [L.Additive] [R.Additive] [L'.Additive] [R'.Additive] [G.Additive] [H.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [PreservesFiniteLimits L'] [PreservesFiniteColimits L']
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H) [H.PreservesKInjectiveComplexes]
+    (τ : R ⋙ G ≅ H ⋙ R')
+    (hs : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = τ.hom) :
+    ∃! e : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
+        H.mapDerivedCategory ⋙ R'.rightDerivedFunctor,
+      ∀ K : CochainComplex B ℤ,
+    G.mapDerivedCategory.map (chainDerivedUnit R K) ≫
+      e.hom.app (DerivedCategory.Q.obj K) ≫
+      R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
+    G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex τ (.up ℤ)).hom.app K) ≫
+      chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
+  let m := (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
+    adj'.mapDerivedCategoryRightDerivedAdjunction
+    (TwoSquare.mk _ _ _ _
+      ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
+        Functor.mapDerivedCategoryNatIso s ≪≫
+        Functor.mapDerivedCategoryCompIso L H).hom)).natTrans
+  have hn (K : CochainComplex B ℤ) :
+    G.mapDerivedCategory.map (chainDerivedUnit R K) ≫
+      m.app (DerivedCategory.Q.obj K) ≫
+      R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app K) =
+    G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex τ (.up ℤ)).hom.app K) ≫
+      chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
+    have h := derived_mate_factors adj adj' s K
+    rw [hs] at h
+    exact h
+  have hI (I : CochainComplex B ℤ) [I.IsKInjective] :
+      IsIso (m.app (DerivedCategory.Q.obj I)) := by
+    have : IsIso (chainDerivedUnit R I) := chainDerivedUnit_isIso R I
+    have : IsIso (chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj I)) :=
+      chainDerivedUnit_isIso R' _
+    have : IsIso (G.mapDerivedCategory.map (chainDerivedUnit R I) ≫
+        m.app (DerivedCategory.Q.obj I) ≫
+        R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I)) := by
+      rw [hn I]
+      infer_instance
+    have := IsIso.of_isIso_comp_left (G.mapDerivedCategory.map (chainDerivedUnit R I))
+      (m.app (DerivedCategory.Q.obj I) ≫
+        R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I))
+    exact IsIso.of_isIso_comp_right _
+      (R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I))
+  have (M : DerivedCategory B) : IsIso (m.app M) := by
+    obtain ⟨I, hInj, ⟨eI⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective M
+    have : I.IsKInjective := hInj
+    have : IsIso (m.app (DerivedCategory.Q.obj I)) := hI I
+    exact (NatTrans.isIso_app_iff_of_iso m eI).mpr inferInstance
+  have : IsIso m := NatIso.isIso_of_isIso_app m
+  refine ⟨asIso m, hn, ?_⟩
+  intro e he
+  apply Iso.ext
+  apply derived_comp_ext R G (H.mapDerivedCategory ⋙ R'.rightDerivedFunctor)
+  intro K
+  apply (cancel_mono (R'.rightDerivedFunctor.map
+    (H.mapDerivedCategoryFactors.hom.app K))).mp
+  simpa only [Category.assoc, asIso_hom] using (he K).trans (hn K).symm
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem exchangeModuleResPull_mate {U V : Scheme.{t}} (f : U ⟶ V) :
+    (mateEquiv (d.towerModuleAdjunction f)
+      (exchangeTowerModuleAdjunction f (exchangeConstantRing V A)
+        (exchangeConstantRing U A) (exchangeConstantIso f A))
+      (TwoSquare.mk _ _ _ _ (exchangeModuleResPull d f).inv)).natTrans =
+        (exchangeModuleResPush d f).hom := by
+  apply NatTrans.ext
+  funext M
+  apply NatTrans.ext
+  funext n
+  have h := restrictionPullback_mate f
+    (exchangeConstantRing V A) (d.completedRing V)
+    (exchangeConstantRing U A) (d.completedRing U)
+    (exchangeScalar d V) (exchangeScalar d U)
+    (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f)
+  exact congrArg (fun z ↦ z.app (M.obj n)) h
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction/direct-image comparison is uniquely determined by the universal units.
 Source: strict normalization, proof step 5; Stacks 0D6E and 099M
 (blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization).
 Proof: scalar extension from constant to completed coefficients is flat by
-constant-completion-equivalence. This remains true on the diagram site, since
-its rings and tensor are fiberwise. Restriction, its right adjoint, preserves
-K-injectives. On one K-injective tower representative the ordinary comparison
+constant-completion-equivalence. Exact scalar extension and its adjunction lift
+termwise to strict towers. Restriction, its right adjoint, preserves K-injectives.
+On one K-injective tower representative the ordinary comparison
 is identity on every section and transition, and both derived units are invertible.
 This defines the comparison uniquely there. K-injective resolutions and the
 universal property of the right-derived functor give its natural extension and
@@ -414,7 +530,13 @@ theorem exchangeResPush_existsUnique {U V : Scheme.{t}} (f : U ⟶ V) :
     ∃! e : d.towerPush f ⋙ exchangeTowerRes d V ≅
         exchangeTowerRes d U ⋙ exchangeConstantPush (A := A) f,
       ExchangeResPushNormalized d f e := by
-  sorry
+  have : (exchangeTowerModuleRes d U).PreservesKInjectiveComplexes :=
+    exchangeTowerModuleRes_kinjective d U
+  exact exactDerivedMate_existsUnique (d.towerModuleAdjunction f)
+    (exchangeTowerModuleAdjunction f (exchangeConstantRing V A)
+      (exchangeConstantRing U A) (exchangeConstantIso f A))
+    (exchangeModuleResPull d f).symm (exchangeModuleResPush d f)
+    (exchangeModuleResPull_mate d f)
 
 /-- The specified strict-tower direct-image comparison, with the unit normalization retained.
 Source: strict normalization, proof step 5; Stacks 0D6E

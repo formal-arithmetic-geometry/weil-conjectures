@@ -1,512 +1,519 @@
 {
-  "id": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-  "kind": "statement",
-  "title": "Strict tower exchange agrees with the canonical mate",
-  "statement": "Let $\\square=(f,f',g,g')$, with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$ and $g':X'\\to X$, be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f$ proper [def-weil-pbc-scheme-conventions]. Let $A,I,P_n=A/I^n,(P_n)_T,A_T$ be the Noetherian adic datum of [def-weil-pbc-adic-coefficient-datum], for all four corners $T$. Let $K\\in D(\\operatorname{Mod}(A_X))$ be derived complete, meaning its canonical map to the derived inverse limit of its strict reduction tower $K_\\bullet$ is an isomorphism [def-weil-pbc-derived-inverse-limit]. For every $n\\geq1$, fix an etale-origin witness $L_n\\in D^+(X_{\\Et},P_n)$ and $\\alpha_n:\\nu_X^*L_n\\simeq K_n$ [def-weil-pbc-etale-origin-witness]. Let $B_\\bullet,D_\\bullet$ and the specified morphism $v'_\\bullet:B_\\bullet\\to D_\\bullet$ be those of [def-weil-pbc-completed-base-change-map], as morphisms in the derived category of strict towers, not just families of maps in the derived categories at the individual levels.\n\nWrite $\\underline A_T$ for the constant ring sheaf [def-weil-pbc-constant-sheaf] on $T_{\\Proet}$ [def-weil-pbc-proetale-site], and $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(\\underline A_T))$ [def-weil-sheaf-of-modules-category, def-weil-inverse-system]. Write $\\operatorname{Res}_T$ for termwise restriction along $\\underline A_T\\to A_T$ [def-pc-sheaf-restrict-scalars, lem-weil-pbc-constant-completion-equivalence], and put $\\bar K_\\bullet=\\operatorname{Res}_XK_\\bullet$. For each edge $u$, let $G_u=u^{-1}$ on constant-coefficient modules, applied termwise to strict towers, and let $R_u^{\\mathcal T}$ be the total right derived termwise direct image. Their derived adjunction $G_u\\dashv R_u^{\\mathcal T}$ uses the termwise module adjunction of [def-weil-pbc-proetale-operations] and its derived adjunction [lem-pc-pre-derived-adjoint-functors-general]. Here $D(\\mathcal T_T)$ means localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Let $\\theta^{\\mathcal T}_\\square:G_{f'}G_g\\simeq G_{g'}G_f$ be the termwise canonical pullback composition square [lem-weil-pbc-proetale-derived-pullback-composition], and let $E^{\\mathcal T}_\\square:G_gR_f^{\\mathcal T}\\to R_{f'}^{\\mathcal T}G_{g'}$ be its adjunction mate [def-weil-pbc-adjunction-mate].\n\nMake the strict realization in this reference explicit as follows; this specifies the lift, rather than characterizing it by evaluations. Put $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, let $\\Delta$ denote the constant $J$-diagram, and use the ringed diagram sites of [lem-weil-pbc-diagram-site-realization] with coefficient ring $\\Delta A_T$. On these sites all tensor products below are derived tensor products. Let $Q_{T,\\bullet}=((P_n)_T)_n$ be the quotient diagram, and let $\\mathcal R_T(F)=\\Delta F\\otimes^L_{\\Delta A_T}Q_{T,\\bullet}$; this is the strict reduction functor of [def-weil-pbc-adic-coefficient-datum]. Write $\\mathscr L_u,\\mathscr R_u$ for derived termwise module pullback and direct image with completed coefficients. Set $E=Lg'^*K$, $M=Lg^*Rf_*K$, $N=Rf'_*E$, and $e=\\operatorname{Ex}^{A}_{\\square,K}:M\\to N$, the canonical ambient mate [def-weil-pbc-ambient-ringed-exchange]. The coefficient and tensor identifications in [def-weil-pbc-four-corners] give canonical maps\n$$H:\\mathcal R_{Y'}(M)\\longrightarrow\\mathscr L_g\\mathscr R_f\\mathcal R_X(K),\\qquad H':\\mathcal R_{Y'}(N)\\longrightarrow\\mathscr R_{f'}\\mathscr L_{g'}\\mathcal R_X(K).$$\nHere $H$ is $\\mathscr L_g$ of the diagram-site projection-formula map for $\\Delta K,Q_{Y,\\bullet}$, and $H'$ is the analogous map for $\\Delta E,Q_{Y',\\bullet}$ followed by the pullback/reduction identification. Projection-formula maps mean the adjuncts of counit tensored with the identity, as in [def-weil-pbc-projection-formula-map]. Their evaluations are exactly $h_n,h'_n$ of [def-weil-pbc-four-arrows], and they are isomorphisms by [lemma-weil-pbc-perfect-projection-formula] and [lem-weil-tower-category-levelwise-abelian]. Take the specified strict corners to be the targets of $H,H'$ and the specified strict exchange to be\n$$B_\\bullet=\\mathscr L_g\\mathscr R_f\\mathcal R_X(K),\\quad D_\\bullet=\\mathscr R_{f'}\\mathscr L_{g'}\\mathcal R_X(K),\\qquad v'_\\bullet=H'\\,\\mathcal R_{Y'}(e)\\,H^{-1}.$$\nEquivalently one may represent these corners by the source complexes of $H,H'$ and transport their evaluation identifications by $h_n,h'_n$. These are the projection-formula realizations used to supply the towers in [def-weil-pbc-completed-four-towers].\n\nThere are canonical natural isomorphisms of derived strict-tower objects\n$$b_{\\square,K}:\\operatorname{Res}_{Y'}B_\\bullet\\xrightarrow{\\sim}G_gR_f^{\\mathcal T}\\bar K_\\bullet,\\qquad d_{\\square,K}:\\operatorname{Res}_{Y'}D_\\bullet\\xrightarrow{\\sim}R_{f'}^{\\mathcal T}G_{g'}\\bar K_\\bullet,$$\ninduced by the constant-to-completed finite-reduction comparisons of [lem-weil-pbc-constant-completion-equivalence] and the canonical tower direct-image evaluation comparisons of [prop-weil-pbc-direct-image-limits]. With these specified comparisons, the equality\n$$d_{\\square,K}\\circ\\operatorname{Res}_{Y'}(v'_\\bullet)=E^{\\mathcal T}_{\\square,\\bar K_\\bullet}\\circ b_{\\square,K}$$\nholds in $D(\\mathcal T_{Y'})$, naturally for morphisms of the input $K$. The equality concerns the specified witness-transported tower map; it asserts no faithfulness of the family of derived evaluation functors.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.md",
-    "place": "Proof, first two sentences: finite exchange equations and their compatibility as tower morphisms; strict normalization supplied by an agent",
-    "external": [
-      {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 07A7, remark-base-change; unit-square-counit construction, applied to strict tower categories"
-      },
-      {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 09C9, theorem-proper-base-change, proof; map construction omitted, not a statement of this normalization"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-derived-inverse-limit",
-    "def-weil-pbc-etale-origin-witness",
-    "def-weil-pbc-completed-base-change-map",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-proetale-site",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-inverse-system",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-proetale-operations",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-weil-pbc-adjunction-mate",
-    "prop-weil-pbc-direct-image-limits",
-    "lem-weil-pbc-diagram-site-realization",
-    "def-weil-pbc-ambient-ringed-exchange",
-    "def-weil-pbc-four-corners",
-    "def-weil-pbc-projection-formula-map",
-    "def-weil-pbc-four-arrows",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-weil-pbc-completed-four-towers",
-    "def-weil-pbc-strict-tower-operations"
-  ],
-  "proof": [
-    {
-      "text": "Use [lem-weil-pbc-diagram-site-realization] at each corner with $J=\\mathbf N_{\\geq1}^{op}$. A termwise inverse image and termwise direct image form an adjunction on diagrams: transpose each component, and naturality of the original adjunction turns each transition square into the transposed transition square. The inverse image preserves finite limits componentwise, so these are morphisms of diagram topoi. The completed coefficient identifications of [def-weil-pbc-four-corners] give their ring maps and the commutative ringed square. Tensor products on this site are componentwise: the presheaf tensor has that formula and sheafification is fiberwise under the displayed equivalence. The exact equivalence extends to complexes and then localizations, since it preserves and reflects quasi-isomorphisms. Thus derived tensor and pullback on this one site are computed by its K-flat resolutions [lem-pc-kflat-resolution, lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-site-derived-tensor-descent]. Their evaluations compute the corresponding ordinary-site derived operations, since evaluation is the ringed inverse image in the diagram-site lemma and preserves flat-term K-flat complexes by the pullback theorem. The derived adjunction is the one characterized on fraction representatives in [lem-pc-pre-derived-adjoint-functors-general], not an independently chosen adjunction.",
-      "uses": [
-        "lem-weil-pbc-diagram-site-realization",
-        "def-weil-pbc-four-corners",
-        "lem-pc-kflat-resolution",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "lem-weil-pbc-site-derived-tensor-descent",
-        "lem-pc-pre-derived-adjoint-functors-general"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
-      }
-    },
-    {
-      "text": "The diagram categories are Grothendieck abelian by [lem-weil-pbc-small-module-diagrams-grothendieck], and hence have K-injective resolutions by [lem-weil-pbc-kinjective-functorial-existence]. The diagonal functor $\\Delta$ preserves K-injectives here: $J$ has terminal object $1$, so its colimit is evaluation at $1$, an exact functor, and $\\Delta$ is its right adjoint. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective]. Consequently derived termwise direct image of $\\Delta K$ is canonically $\\Delta Rf_*K$, using the same K-injective representative and [lem-weil-pbc-kinjective-total-derived]; For $E$, choose a K-injective representative $I_E$ on $X'$; $\\Delta I_E$ is K-injective by the identical exact left adjoint $\\operatorname{ev}_1$, and termwise $f'_*\\Delta I_E=\\Delta(f'_*I_E)$ computes $\\mathscr R_{f'}\\Delta E=\\Delta Rf'_*E$. Constant-diagram pullback is termwise pullback. A diagonal flat-term K-flat resolution is K-flat on the diagram site: its tensor with an acyclic diagram is acyclic at each level, hence acyclic by [lem-weil-tower-category-levelwise-abelian]. Therefore the diagram-site reduction $\\Delta F\\otimes^L Q_{T,\\bullet}$ is represented by the strict tensor complex $QF\\otimes_{A_T}(P_n)_T$ of [def-weil-pbc-adic-coefficient-datum]. The unit, counit and pullback composition on diagonal objects are the diagonal of the ordinary ones: the componentwise adjunction bijection sends the identity to these units and counits, and the derived bijection is characterized by those representatives. In particular the diagram-site mate on $\\Delta K$ is $\\Delta e$ by the formula in [def-weil-pbc-adjunction-mate].",
-      "uses": [
-        "lem-weil-pbc-small-module-diagrams-grothendieck",
-        "lem-weil-pbc-kinjective-functorial-existence",
-        "lem-weil-pbc-right-adjoint-preserves-kinjective",
-        "lem-weil-pbc-kinjective-total-derived",
-        "lem-weil-tower-category-levelwise-abelian",
-        "def-weil-pbc-adic-coefficient-datum",
-        "lem-pc-pre-derived-adjoint-functors-general",
-        "def-weil-pbc-adjunction-mate"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
-      }
-    },
-    {
-      "text": "Form $H,H'$ on the diagram sites using the counit-tensor adjunct formula in [def-weil-pbc-projection-formula-map], with the pullback/reduction balancing identifications of [def-weil-pbc-four-corners]. Evaluation of the tensor comparison and the counit gives the ambient projection-formula adjunct at level $n$. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] on the ordinary pro-etale sites with $R_T=A_T$, $S_T=(P_n)_T$, and $a_T=\\pi_{T,n}$: its required coefficient square is $\\pi_{U,n}c_u=c_{u,n}u^{-1}\\pi_{V,n}$ from [def-weil-pbc-four-corners]. Its adjunct compatibility identifies this evaluated ambient projection map with the restricted finite-coefficient adjunct $p_{f,K,n}$, and for $f'$ with $p_{f',E,n}$. The pullback comparison gives $Lg_n^*p_{f,K,n}=h_n$, and the target comparison gives $Rf'_{*,n}(\\delta_n)p_{f',E,n}=h'_n$, exactly as defined in [def-weil-pbc-four-arrows]; the direct-image evaluation comparison is the specified one of [prop-weil-pbc-direct-image-limits]. Each is invertible by [lemma-weil-pbc-perfect-projection-formula], also for $E$ (the projection formula has no completeness condition on its object variable). Hence $H,H'$ are invertible in the derived diagram category: their cones evaluate to acyclic complexes, so their cohomology diagrams vanish by levelwise kernels and cokernels [lem-weil-tower-category-levelwise-abelian]. This uses conservativity for isomorphisms, never faithfulness on morphisms. The prescribed $v'_\\bullet=H'\\mathcal R(e)H^{-1}$ evaluates to $h'_nv_nh_n^{-1}=v'_n$ by [lem-weil-pbc-finite-level-rectangle]. The last arrow is the canonical witness-transported one by [def-weil-pbc-four-arrows]; thus spelling out this construction preserves the specified finite exchange, without choosing transition maps between the unrelated $L_n$.",
-      "uses": [
-        "def-weil-pbc-projection-formula-map",
-        "def-weil-pbc-four-corners",
-        "def-weil-pbc-four-arrows",
-        "prop-weil-pbc-direct-image-limits",
-        "lemma-weil-pbc-perfect-projection-formula",
-        "lem-weil-tower-category-levelwise-abelian",
-        "lem-weil-pbc-finite-level-rectangle",
-        "lem-weil-pbc-ring-sheaf-change-adjunction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
-      }
-    },
-    {
-      "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the commutative square of completed-coefficient diagram topoi, the object $\\Delta K$ and the coefficient object $Q_{Y,\\bullet}$. These are small sites by step 1. For every edge $u:U\\to V$, the $n$-th component of the pullback identification $u^*Q_{V,\\bullet}\\cong Q_{U,\\bullet}$ is $c_{u,n}$ of [def-weil-pbc-four-corners]. Its compatibility with $P_{n+1}\\to P_n$ gives a map of the full quotient diagrams, and its composition compatibility identifies the two pullbacks to $X'$ in the square. Denote by $W$ the diagram-site exchange mate evaluated at $\\mathcal R_X(K)$. In the first composite of that coherence statement the projection-formula arrow is $H$ and the exchange arrow is $W$. In its second composite, tensoring the exchange at $\\Delta K$ with $Q_{Y',\\bullet}$ is $\\mathcal R_{Y'}(e)$ by step 2, and the projection-formula arrow followed by the pullback tensor identification is $H'$. Therefore that statement gives the equality $WH=H'\\mathcal R_{Y'}(e)$ in the derived diagram category itself. Right composition with $H^{-1}$ proves $W=v'_\\bullet$ under the specified completed-coefficient corner realization. No inference from evaluations is used to establish this equality.",
-      "uses": [
-        "lem-weil-pbc-ringed-exchange-tensor-coherence",
-        "def-weil-pbc-four-corners",
-        "def-weil-pbc-adjunction-mate"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
-      }
-    },
-    {
-      "text": "Restrict along $\\Delta\\underline A_T\\to\\Delta A_T$. The constant sheaf associated to a ring $B$ on the diagram site is $\\Delta\\underline B_T$: fiberwise sheafification of the constant presheaf has this value under [lem-weil-pbc-diagram-site-realization]. Limits have their componentwise universal property, so the completion of $\\Delta\\underline A_T$ is $\\Delta A_T$. Apply the flatness assertion of [lem-weil-pbc-constant-completion-equivalence] on this small site; thus $\\Delta A_T$ is flat over $\\Delta\\underline A_T$. By [lem-weil-pbc-profinite-coefficient-inverse-image], the finite coefficient identifications carry constant sections to the same constant sections and commute with all quotient projections. Consequently $\\pi_{U,n}c_u=c_{u,n}u^{-1}\\pi_{V,n}$ from [def-weil-pbc-four-corners] identifies both composites of the scalar square on every constant section. Sheafification and the universal property of the inverse limit give the commuting scalar square itself.",
-      "uses": [
-        "lem-weil-pbc-diagram-site-realization",
-        "lem-weil-pbc-constant-completion-equivalence",
-        "lem-weil-pbc-profinite-coefficient-inverse-image",
-        "def-weil-pbc-four-corners"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
-      }
-    },
-    {
-      "text": "Apply [lem-weil-pbc-flat-ringed-diagram-restriction] with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, $R_T=\\underline A_T$, $S_T=A_T$, the constant-section identification for $c_R$, and the completed coefficient identification of [def-weil-pbc-four-corners] for $c_S$. The sites are small by step 1; step 5 verifies flatness and the commuting coefficient square. Its normalized comparisons give $\\operatorname{Res}\\mathscr L_u\\simeq G_u\\operatorname{Res}$ and $\\operatorname{Res}\\mathscr R_u\\simeq R_u^{\\mathcal T}\\operatorname{Res}$. Compose first the pullback and then direct-image comparisons for $B_\\bullet$, and in the reverse order for $D_\\bullet$. This gives the stated $b,d$ as isomorphisms in the derived strict-tower category. Their normalizations use the same underlying scalar-restricted inverse image and the same K-injective diagram direct image. Hence their evaluations have the canonical direct-image comparison of [prop-weil-pbc-direct-image-limits]; the finite-reduction scalar identification is the balancing comparison of [lem-weil-pbc-constant-completion-equivalence]. These constructions retain every transition map, without asserting uniqueness from their evaluations.",
-      "uses": [
-        "lem-weil-pbc-flat-ringed-diagram-restriction",
-        "def-weil-pbc-four-corners",
-        "prop-weil-pbc-direct-image-limits",
-        "lem-weil-pbc-constant-completion-equivalence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
-      }
-    },
-    {
-      "text": "These restriction comparisons respect the adjunctions: for each edge $u$, the adjunct clause of [lem-weil-pbc-flat-ringed-diagram-restriction], applied with the data of step 6, states that for $t:\\mathscr L_uM\\to N$ the $G_u\\dashv R_u^{\\mathcal T}$ adjunct of $\\operatorname{Res}(t)b_M^{-1}$ is $d_N\\operatorname{Res}(t^\\sharp)$, where both derived adjunctions are the ones normalized by [lem-pc-pre-derived-adjoint-functors-general]; with $t$ a counit this identifies the restricted counit with the constant-coefficient counit. Pullback composition is also preserved, since its representative is the termwise composition identification of [lem-weil-pbc-proetale-derived-pullback-composition]. Transpose $d\\operatorname{Res}(W)b^{-1}$ under $G_{f'}\\dashv R_{f'}^{\\mathcal T}$. The two compatibilities just checked identify its transpose with $G_{g'}\\varepsilon_f^{\\mathcal T}\\circ\\theta^{\\mathcal T}_{\\square,R_f^{\\mathcal T}\\bar K_\\bullet}$. By the bijection and transpose characterization of [def-weil-pbc-adjunction-mate], this is precisely the transpose of $E^{\\mathcal T}_{\\square,\\bar K_\\bullet}$; hence $d\\operatorname{Res}(W)b^{-1}=E^{\\mathcal T}_{\\square,\\bar K_\\bullet}$. Substitute $W=v'_\\bullet$ from step 4 and compose with $b$. This yields the required ordered equality. Every comparison used is a natural transformation or its inverse, and reduction is a functor, so the equality and both corner isomorphisms are natural for morphisms of $K$. Properness and the etale witnesses ensure the prescribed finite arrows have the meaning in [def-weil-pbc-four-arrows]; the strict mate calculation itself requires neither a uniform lower bound nor witnesses compatible across levels.",
-      "uses": [
-        "lem-weil-pbc-flat-ringed-diagram-restriction",
-        "lem-pc-pre-derived-adjoint-functors-general",
-        "lem-weil-pbc-proetale-derived-pullback-composition",
-        "def-weil-pbc-adjunction-mate",
-        "def-weil-pbc-four-arrows"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+ "kind": "statement",
+ "title": "Strict tower exchange agrees with the canonical mate",
+ "statement": "Let $\\square=(f,f',g,g')$, with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$ and $g':X'\\to X$, be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f$ proper [def-weil-pbc-scheme-conventions]. Let $A,I,P_n=A/I^n,(P_n)_T,A_T$ be the Noetherian adic datum of [def-weil-pbc-adic-coefficient-datum], for all four corners $T$. Let $K\\in D(\\operatorname{Mod}(A_X))$ be derived complete, meaning its canonical map to the derived inverse limit of its strict reduction tower $K_\\bullet$ is an isomorphism [def-weil-pbc-derived-inverse-limit]. For every $n\\geq1$, fix an etale-origin witness $L_n\\in D^+(X_{\\Et},P_n)$ and $\\alpha_n:\\nu_X^*L_n\\simeq K_n$ [def-weil-pbc-etale-origin-witness]. Let $B_\\bullet,D_\\bullet$ and the specified morphism $v'_\\bullet:B_\\bullet\\to D_\\bullet$ be those of [def-weil-pbc-completed-base-change-map], as morphisms in the derived category of strict towers, not just families of maps in the derived categories at the individual levels.\n\nWrite $\\underline A_T$ for the constant ring sheaf [def-weil-pbc-constant-sheaf] on $T_{\\Proet}$ [def-weil-pbc-proetale-site], and $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(\\underline A_T))$ [def-weil-sheaf-of-modules-category, def-weil-inverse-system]. Write $\\operatorname{Res}_T$ for termwise restriction along $\\underline A_T\\to A_T$ [def-pc-sheaf-restrict-scalars, lem-weil-pbc-constant-completion-equivalence], and put $\\bar K_\\bullet=\\operatorname{Res}_XK_\\bullet$. For each edge $u$, let $G_u=u^{-1}$ on constant-coefficient modules, applied termwise to strict towers, and let $R_u^{\\mathcal T}$ be the total right derived termwise direct image. Their derived adjunction $G_u\\dashv R_u^{\\mathcal T}$ uses the termwise module adjunction of [def-weil-pbc-proetale-operations] and its derived adjunction [lem-pc-pre-derived-adjoint-functors-general]. Here $D(\\mathcal T_T)$ means localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Let $\\theta^{\\mathcal T}_\\square:G_{f'}G_g\\simeq G_{g'}G_f$ be the termwise canonical pullback composition square [lem-weil-pbc-proetale-derived-pullback-composition], and let $E^{\\mathcal T}_\\square:G_gR_f^{\\mathcal T}\\to R_{f'}^{\\mathcal T}G_{g'}$ be its adjunction mate [def-weil-pbc-adjunction-mate].\n\nMake the strict realization in this reference explicit as follows; this specifies the lift, rather than characterizing it by evaluations. Put $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, let $\\Delta$ denote the constant $J$-diagram, and use the ringed diagram sites of [lem-weil-pbc-diagram-site-realization] with coefficient ring $\\Delta A_T$. On these sites all tensor products below are derived tensor products. Let $Q_{T,\\bullet}=((P_n)_T)_n$ be the quotient diagram, and let $\\mathcal R_T(F)=\\Delta F\\otimes^L_{\\Delta A_T}Q_{T,\\bullet}$; this is the strict reduction functor of [def-weil-pbc-adic-coefficient-datum]. Write $\\mathscr L_u,\\mathscr R_u$ for derived termwise module pullback and direct image with completed coefficients. Set $E=Lg'^*K$, $M=Lg^*Rf_*K$, $N=Rf'_*E$, and $e=\\operatorname{Ex}^{A}_{\\square,K}:M\\to N$, the canonical ambient mate [def-weil-pbc-ambient-ringed-exchange]. The coefficient and tensor identifications in [def-weil-pbc-four-corners] give canonical maps\n$$H:\\mathcal R_{Y'}(M)\\longrightarrow\\mathscr L_g\\mathscr R_f\\mathcal R_X(K),\\qquad H':\\mathcal R_{Y'}(N)\\longrightarrow\\mathscr R_{f'}\\mathscr L_{g'}\\mathcal R_X(K).$$\nHere $H$ is $\\mathscr L_g$ of the diagram-site projection-formula map for $\\Delta K,Q_{Y,\\bullet}$, and $H'$ is the analogous map for $\\Delta E,Q_{Y',\\bullet}$ followed by the pullback/reduction identification. Projection-formula maps mean the adjuncts of counit tensored with the identity, as in [def-weil-pbc-projection-formula-map]. Their evaluations are exactly $h_n,h'_n$ of [def-weil-pbc-four-arrows], and they are isomorphisms by [lemma-weil-pbc-perfect-projection-formula] and [lem-weil-tower-category-levelwise-abelian]. Take the specified strict corners to be the targets of $H,H'$ and the specified strict exchange to be\n$$B_\\bullet=\\mathscr L_g\\mathscr R_f\\mathcal R_X(K),\\quad D_\\bullet=\\mathscr R_{f'}\\mathscr L_{g'}\\mathcal R_X(K),\\qquad v'_\\bullet=H'\\,\\mathcal R_{Y'}(e)\\,H^{-1}.$$\nEquivalently one may represent these corners by the source complexes of $H,H'$ and transport their evaluation identifications by $h_n,h'_n$. These are the projection-formula realizations used to supply the towers in [def-weil-pbc-completed-four-towers].\n\nThere are canonical natural isomorphisms of derived strict-tower objects\n$$b_{\\square,K}:\\operatorname{Res}_{Y'}B_\\bullet\\xrightarrow{\\sim}G_gR_f^{\\mathcal T}\\bar K_\\bullet,\\qquad d_{\\square,K}:\\operatorname{Res}_{Y'}D_\\bullet\\xrightarrow{\\sim}R_{f'}^{\\mathcal T}G_{g'}\\bar K_\\bullet,$$\ninduced by the constant-to-completed finite-reduction comparisons of [lem-weil-pbc-constant-completion-equivalence] and the canonical tower direct-image evaluation comparisons of [prop-weil-pbc-direct-image-limits]. With these specified comparisons, the equality\n$$d_{\\square,K}\\circ\\operatorname{Res}_{Y'}(v'_\\bullet)=E^{\\mathcal T}_{\\square,\\bar K_\\bullet}\\circ b_{\\square,K}$$\nholds in $D(\\mathcal T_{Y'})$, naturally for morphisms of the input $K$. The equality concerns the specified witness-transported tower map; it asserts no faithfulness of the family of derived evaluation functors.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.md",
+  "place": "Proof, first two sentences: finite exchange equations and their compatibility as tower morphisms; strict normalization supplied by an agent",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; unit-square-counit construction, applied to strict tower categories"
+   },
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C9, theorem-proper-base-change, proof; map construction omitted, not a statement of this normalization"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-completed-base-change-map",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-proetale-operations",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-adjunction-mate",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-diagram-site-realization",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-projection-formula-map",
+  "def-weil-pbc-four-arrows",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-pbc-completed-four-towers",
+  "def-weil-pbc-strict-tower-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-diagram-site-realization] at each corner with $J=\\mathbf N_{\\geq1}^{op}$. A termwise inverse image and termwise direct image form an adjunction on diagrams: transpose each component, and naturality of the original adjunction turns each transition square into the transposed transition square. The inverse image preserves finite limits componentwise, so these are morphisms of diagram topoi. The completed coefficient identifications of [def-weil-pbc-four-corners] give their ring maps and the commutative ringed square. Tensor products on this site are componentwise: the presheaf tensor has that formula and sheafification is fiberwise under the displayed equivalence. The exact equivalence extends to complexes and then localizations, since it preserves and reflects quasi-isomorphisms. Thus derived tensor and pullback on this one site are computed by its K-flat resolutions [lem-pc-kflat-resolution, lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-site-derived-tensor-descent]. Their evaluations compute the corresponding ordinary-site derived operations, since evaluation is the ringed inverse image in the diagram-site lemma and preserves flat-term K-flat complexes by the pullback theorem. The derived adjunction is the one characterized on fraction representatives in [lem-pc-pre-derived-adjoint-functors-general], not an independently chosen adjunction.",
+   "uses": [
     "lem-weil-pbc-diagram-site-realization",
     "def-weil-pbc-four-corners",
     "lem-pc-kflat-resolution",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
+   }
+  },
+  {
+   "text": "The diagram categories are Grothendieck abelian by [lem-weil-pbc-small-module-diagrams-grothendieck], and hence have K-injective resolutions by [lem-weil-pbc-kinjective-functorial-existence]. The diagonal functor $\\Delta$ preserves K-injectives here: $J$ has terminal object $1$, so its colimit is evaluation at $1$, an exact functor, and $\\Delta$ is its right adjoint. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective]. Consequently derived termwise direct image of $\\Delta K$ is canonically $\\Delta Rf_*K$, using the same K-injective representative and [lem-weil-pbc-kinjective-total-derived]; For $E$, choose a K-injective representative $I_E$ on $X'$; $\\Delta I_E$ is K-injective by the identical exact left adjoint $\\operatorname{ev}_1$, and termwise $f'_*\\Delta I_E=\\Delta(f'_*I_E)$ computes $\\mathscr R_{f'}\\Delta E=\\Delta Rf'_*E$. Constant-diagram pullback is termwise pullback. A diagonal flat-term K-flat resolution is K-flat on the diagram site: its tensor with an acyclic diagram is acyclic at each level, hence acyclic by [lem-weil-tower-category-levelwise-abelian]. Therefore the diagram-site reduction $\\Delta F\\otimes^L Q_{T,\\bullet}$ is represented by the strict tensor complex $QF\\otimes_{A_T}(P_n)_T$ of [def-weil-pbc-adic-coefficient-datum]. The unit, counit and pullback composition on diagonal objects are the diagonal of the ordinary ones: the componentwise adjunction bijection sends the identity to these units and counits, and the derived bijection is characterized by those representatives. In particular the diagram-site mate on $\\Delta K$ is $\\Delta e$ by the formula in [def-weil-pbc-adjunction-mate].",
+   "uses": [
     "lem-weil-pbc-small-module-diagrams-grothendieck",
     "lem-weil-pbc-kinjective-functorial-existence",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
     "lem-weil-pbc-kinjective-total-derived",
     "lem-weil-tower-category-levelwise-abelian",
     "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-adjunction-mate",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
+   }
+  },
+  {
+   "text": "Form $H,H'$ on the diagram sites using the counit-tensor adjunct formula in [def-weil-pbc-projection-formula-map], with the pullback/reduction balancing identifications of [def-weil-pbc-four-corners]. Evaluation of the tensor comparison and the counit gives the ambient projection-formula adjunct at level $n$. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] on the ordinary pro-etale sites with $R_T=A_T$, $S_T=(P_n)_T$, and $a_T=\\pi_{T,n}$: its required coefficient square is $\\pi_{U,n}c_u=c_{u,n}u^{-1}\\pi_{V,n}$ from [def-weil-pbc-four-corners]. Its adjunct compatibility identifies this evaluated ambient projection map with the restricted finite-coefficient adjunct $p_{f,K,n}$, and for $f'$ with $p_{f',E,n}$. The pullback comparison gives $Lg_n^*p_{f,K,n}=h_n$, and the target comparison gives $Rf'_{*,n}(\\delta_n)p_{f',E,n}=h'_n$, exactly as defined in [def-weil-pbc-four-arrows]; the direct-image evaluation comparison is the specified one of [prop-weil-pbc-direct-image-limits]. Each is invertible by [lemma-weil-pbc-perfect-projection-formula], also for $E$ (the projection formula has no completeness condition on its object variable). Hence $H,H'$ are invertible in the derived diagram category: their cones evaluate to acyclic complexes, so their cohomology diagrams vanish by levelwise kernels and cokernels [lem-weil-tower-category-levelwise-abelian]. This uses conservativity for isomorphisms, never faithfulness on morphisms. The prescribed $v'_\\bullet=H'\\mathcal R(e)H^{-1}$ evaluates to $h'_nv_nh_n^{-1}=v'_n$ by [lem-weil-pbc-finite-level-rectangle]. The last arrow is the canonical witness-transported one by [def-weil-pbc-four-arrows]; thus spelling out this construction preserves the specified finite exchange, without choosing transition maps between the unrelated $L_n$.",
+   "uses": [
     "def-weil-pbc-projection-formula-map",
+    "def-weil-pbc-four-corners",
     "def-weil-pbc-four-arrows",
     "prop-weil-pbc-direct-image-limits",
     "lemma-weil-pbc-perfect-projection-formula",
+    "lem-weil-tower-category-levelwise-abelian",
     "lem-weil-pbc-finite-level-rectangle",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "mateEquiv|derived.*exchange|exchange.*tower",
-      "results": "20 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
-      "date": "2026-10-14",
-      "verdict": "no match: generic mates and compositions do not identify the specified witness-transported strict tower exchange"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "derived base change mate in category of inverse sequences equals canonical compatible exchange morphism",
-      "results": "8 hits: CategoryTheory.mateEquiv_symm_apply, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.ComposableArrows.map'_inv_eq_inv_map', CategoryTheory.mateEquiv_apply, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, AlgebraicTopology.DoldKan.Compatibility.υ_inv_app",
-      "date": "2026-10-14",
-      "verdict": "no match: generic mates and compositions do not identify the specified witness-transported strict tower exchange"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.mateEquiv",
-      "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
-      "date": "2026-10-14",
-      "verdict": "no match: generic mates and compositions do not identify the specified witness-transported strict tower exchange"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "derived base change mate in category of inverse sequences equals canonical compatible exchange morphism",
-      "results": "{\"top\": [\"CategoryTheory.mateEquiv_symm_apply\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"CategoryTheory.ComposableArrows.map'_inv_eq_inv_map'\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.mateEquiv\", \"AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app\", \"AlgebraicTopology.DoldKan.Compatibility.υ_inv_app\"], \"note\": \"\", \"n_hits\": 8}",
-      "date": "2026-10-14",
-      "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.mateEquiv",
-      "results": "{\"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"note\": \"\", \"n_hits\": 12}",
-      "date": "2026-10-14",
-      "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
-    },
-    {
-      "tool": "grep",
-      "query": "mateEquiv|derived.*exchange|exchange.*tower",
-      "results": "{\"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"note\": \"\", \"n_hits\": 20}",
-      "date": "2026-10-14",
-      "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived base change exchange on strict inverse sequences is the adjunction mate of the inverse image square",
-      "results": "{\"top\": [], \"note\": \"service unavailable: Internal Server Error\", \"n_hits\": 0}",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Sheaves of modules on the product of a site with a small category with fiberwise topology are diagrams of module sheaves and ringed topos operations correspond to termwise operations",
-      "results": "{\"top\": [\"SheafOfModules.over\", \"LightCondMod.ofSheafLightProfinite\", \"PresheafOfModules.isSheaf_of_isLimit\", \"SheafOfModules.instAbelian\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.instCategory\", \"SheafOfModules.hasLimit\", \"SheafOfModules.Finite.hasFiniteLimits\"], \"note\": \"\", \"n_hits\": 8}",
-      "date": "2026-10-14",
-      "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Modules in a functor topos are functors to sheaves of modules and derived pullback tensor and direct image are transported by this exact equivalence",
-      "results": "{\"top\": [\"SheafOfModules.pullbackIso\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"note\": \"\", \"n_hits\": 8}",
-      "date": "2026-10-14",
-      "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Sheaf\", \"equivalence\"",
-      "results": "{\"top\": [\"CategoryTheory.sheafBotEquivalence\", \"CategoryTheory.sheafBotEquivalence_functor\", \"CategoryTheory.sheafBotEquivalence_inverse_obj_obj\", \"CategoryTheory.sheafBotEquivalence_inverse_map_hom\", \"CategoryTheory.sheafBotEquivalence_unitIso\", \"CategoryTheory.sheafBotEquivalence_counitIso\", \"CategoryTheory.Functor.IsDenseSubsite.hasWeakSheafify_of_isEquivalence\", \"CategoryTheory.Functor.IsDenseSubsite.hasSheafify_of_isEquivalence\"], \"note\": \"\", \"n_hits\": 12}",
-      "date": "2026-10-14",
-      "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
-    },
-    {
-      "tool": "grep",
-      "query": "diagram.*[Tt]opos|[Tt]opos.*diagram|sheaf.*[Cc]urry|[Cc]urry.*sheaf",
-      "results": "{\"top\": [], \"note\": \"\", \"n_hits\": 0}",
-      "date": "2026-10-14",
-      "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Sheaves of modules on a product site with fiberwise topology are functors to sheaves of modules",
-      "results": "{\"top\": [], \"note\": \"service unavailable: Internal Server Error\", \"n_hits\": 0}",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.mateEquiv",
-      "results": "{\"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"note\": \"\", \"n_hits\": 12}",
-      "date": "2026-10-17",
-      "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
-    },
-    {
-      "tool": "grep",
-      "query": "mateEquiv|derived.*exchange|exchange.*tower",
-      "results": "{\"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\"], \"note\": \"\", \"n_hits\": 20}",
-      "date": "2026-10-17",
-      "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Restriction of coefficients identifies the canonical derived base change mate on strict reduction towers",
-      "results": "{\"top\": [\"Polynomial.coeff_restriction'\", \"Polynomial.coeff_restriction\", \"Derivation.restrictScalars.congr_simp\", \"Module.Basis.restrictScalars_repr_apply\", \"Submodule.restrictScalars\", \"Submodule.coe_restrictScalars\", \"IsBaseChange.basis_repr_comp\", \"Derivation.coe_restrictScalars\"], \"note\": \"\", \"n_hits\": 8}",
-      "date": "2026-10-17",
-      "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived base change on strict inverse sequences equals the adjunction mate after restriction from completed adic coefficients to constant coefficients",
-      "results": "{\"top\": [\"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.of_lift\", \"AdicCompletion.mk_ofAlgEquiv_symm\", \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.transitionMap_comp_eval_apply\", \"AdicCompletion.congr_symm_apply\"], \"note\": \"\", \"n_hits\": 8}",
-      "date": "2026-10-17",
-      "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Canonical exchange on an inverse system of sheaf complexes is the counit and inverse image square mate and commutes with change of coefficients",
-      "results": "{\"top\": [\"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverse_obj_π_app\", \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIsoApp_inv_hom\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.w\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverseObj_π_app\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso_inv_app_hom\"], \"note\": \"\", \"n_hits\": 8}",
-      "date": "2026-10-17",
-      "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lemma-weil-pbc-completed-exchange-coherence",
-    "by": "worker",
-    "date": "2026-10-14"
+  {
+   "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the commutative square of completed-coefficient diagram topoi, the object $\\Delta K$ and the coefficient object $Q_{Y,\\bullet}$. These are small sites by step 1. For every edge $u:U\\to V$, the $n$-th component of the pullback identification $u^*Q_{V,\\bullet}\\cong Q_{U,\\bullet}$ is $c_{u,n}$ of [def-weil-pbc-four-corners]. Its compatibility with $P_{n+1}\\to P_n$ gives a map of the full quotient diagrams, and its composition compatibility identifies the two pullbacks to $X'$ in the square. Denote by $W$ the diagram-site exchange mate evaluated at $\\mathcal R_X(K)$. In the first composite of that coherence statement the projection-formula arrow is $H$ and the exchange arrow is $W$. In its second composite, tensoring the exchange at $\\Delta K$ with $Q_{Y',\\bullet}$ is $\\mathcal R_{Y'}(e)$ by step 2, and the projection-formula arrow followed by the pullback tensor identification is $H'$. Therefore that statement gives the equality $WH=H'\\mathcal R_{Y'}(e)$ in the derived diagram category itself. Right composition with $H^{-1}$ proves $W=v'_\\bullet$ under the specified completed-coefficient corner realization. No inference from evaluations is used to establish this equality.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
+   }
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-completed-exchange-coherence",
-      "place": "Proof, first two sentences: the finite-level exchange equations must hold for the specified strict tower morphism before Rlim is applied",
-      "via": []
-    },
-    "same_as": []
+  {
+   "text": "Restrict along $\\Delta\\underline A_T\\to\\Delta A_T$. The constant sheaf associated to a ring $B$ on the diagram site is $\\Delta\\underline B_T$: fiberwise sheafification of the constant presheaf has this value under [lem-weil-pbc-diagram-site-realization]. Limits have their componentwise universal property, so the completion of $\\Delta\\underline A_T$ is $\\Delta A_T$. Apply the flatness assertion of [lem-weil-pbc-constant-completion-equivalence] on this small site; thus $\\Delta A_T$ is flat over $\\Delta\\underline A_T$. By [lem-weil-pbc-profinite-coefficient-inverse-image], the finite coefficient identifications carry constant sections to the same constant sections and commute with all quotient projections. Consequently $\\pi_{U,n}c_u=c_{u,n}u^{-1}\\pi_{V,n}$ from [def-weil-pbc-four-corners] identifies both composites of the scalar square on every constant section. Sheafification and the universal property of the inverse limit give the commuting scalar square itself.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-four-corners"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
+   }
   },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-    "worker": "stage1",
-    "summary": "Repair of the long-step handoff: preserved the statement and steps 1–4, extracted the normalized flat coefficient-restriction comparison into a general small-site diagram lemma, and replaced step 5 by its hypotheses check and application. Former step 6 is retained with its step reference updated. No Lean edits or coefficient identifications by evaluation faithfulness.",
-    "blueprint": "The first two sentences of the completed-exchange-coherence proof in main-20261015: finite exchange equations and their compatibility as strict tower morphisms, before applying Rlim.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-pre-derived-adjoint-functors-general",
-        "why": "Generic fraction-normalized derived adjunction needed to identify units and counits on diagram sites and under restriction; no same-unit statement provides that characterization."
-      },
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "Generic ringed-site K-flat resolution applied on the small diagram site; needed to compute the tensor there."
-      }
-    ]
+  {
+   "text": "Apply [lem-weil-pbc-flat-ringed-diagram-restriction] with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, $R_T=\\underline A_T$, $S_T=A_T$, the constant-section identification for $c_R$, and the completed coefficient identification of [def-weil-pbc-four-corners] for $c_S$. The sites are small by step 1; step 5 verifies flatness and the commuting coefficient square. Its normalized comparisons give $\\operatorname{Res}\\mathscr L_u\\simeq G_u\\operatorname{Res}$ and $\\operatorname{Res}\\mathscr R_u\\simeq R_u^{\\mathcal T}\\operatorname{Res}$. Compose first the pullback and then direct-image comparisons for $B_\\bullet$, and in the reverse order for $D_\\bullet$. This gives the stated $b,d$ as isomorphisms in the derived strict-tower category. Their normalizations use the same underlying scalar-restricted inverse image and the same K-injective diagram direct image. Hence their evaluations have the canonical direct-image comparison of [prop-weil-pbc-direct-image-limits]; the finite-reduction scalar identification is the balancing comparison of [lem-weil-pbc-constant-completion-equivalence]. These constructions retain every transition map, without asserting uniqueness from their evaluations.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "def-weil-pbc-four-corners",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
+   }
   },
-  "tool_uses": [
+  {
+   "text": "These restriction comparisons respect the adjunctions: for each edge $u$, the adjunct clause of [lem-weil-pbc-flat-ringed-diagram-restriction], applied with the data of step 6, states that for $t:\\mathscr L_uM\\to N$ the $G_u\\dashv R_u^{\\mathcal T}$ adjunct of $\\operatorname{Res}(t)b_M^{-1}$ is $d_N\\operatorname{Res}(t^\\sharp)$, where both derived adjunctions are the ones normalized by [lem-pc-pre-derived-adjoint-functors-general]; with $t$ a counit this identifies the restricted counit with the constant-coefficient counit. Pullback composition is also preserved, since its representative is the termwise composition identification of [lem-weil-pbc-proetale-derived-pullback-composition]. Transpose $d\\operatorname{Res}(W)b^{-1}$ under $G_{f'}\\dashv R_{f'}^{\\mathcal T}$. The two compatibilities just checked identify its transpose with $G_{g'}\\varepsilon_f^{\\mathcal T}\\circ\\theta^{\\mathcal T}_{\\square,R_f^{\\mathcal T}\\bar K_\\bullet}$. By the bijection and transpose characterization of [def-weil-pbc-adjunction-mate], this is precisely the transpose of $E^{\\mathcal T}_{\\square,\\bar K_\\bullet}$; hence $d\\operatorname{Res}(W)b^{-1}=E^{\\mathcal T}_{\\square,\\bar K_\\bullet}$. Substitute $W=v'_\\bullet$ from step 4 and compose with $b$. This yields the required ordered equality. Every comparison used is a natural transformation or its inverse, and reduction is a functor, so the equality and both corner isomorphisms are natural for morphisms of $K$. Properness and the etale witnesses ensure the prescribed finite arrows have the meaning in [def-weil-pbc-four-arrows]; the strict mate calculation itself requires neither a uniform lower bound nor witnesses compatible across levels.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
     "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-pc-kflat-resolution"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-NP-8da6a19e8",
-    "group": "NP",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-8da6a19e8 (reviewer sub-agent of L); spot-checked: I read the full delivery and every cited statement; the mathematics is correct, and I made two small repairs. Shape: the statement and Lean record are byte-identical to before the delivery and steps 1-4 are unchanged; step 7 is old step 6 with only the step reference changed; proof_deps equals the union of the step uses; every step is now under 2000 characters (old step 5 was 2096). Route: same unit sk-thm-properbasechange, matching the first two proof sentences of completed-exchange-coherence in main-20261015 and in master; no SGA. Step 5: sheafification and limits on the diagram site are fiberwise, so the completion of Delta of the constant sheaf is Delta A_T. Flatness holds because constant-completion-equivalence works on any small site (Stacks 093M, sites-modules.tex:8261). The scalar square holds because both composites send a constant section a to a mod I^n (profinite-coefficient-inverse-image; P_n is finite by the adic datum). Step 6: every hypothesis of the new node holds with R the constant sheaf, S = A_T, c_S the four-corners c_u (an isomorphism), on small pro-etale sites; the composites give b and d, and Res R_X(K) is the restricted reduction tower. New node lem-weil-pbc-flat-ringed-diagram-restriction is true: flat scalar extension is an exact left adjoint, so restriction preserves K-injectives; b is u^{-1} with matching actions; d is the underived identity on K-injectives; the adjunct equation type-checks and holds. Edge cases checked: J empty, J terminal, a_T or u the identity, S = 0. It is not a restatement of the item. It generalizes lem-weil-pbc-ring-sheaf-change-adjunction (pro-etale sites, no diagrams, so that node does not apply); the sfb condensed comparisons, direct-image-restriction-of-scalars, pur coefficient-system, cbc strict-tower and kun square comparison do not state it. Its searches are real; sources 0FND/0DVC (derived.tex:9517/9570) and 03D3 (sites-modules.tex:1044) checked. Repairs: (1) Step 7 re-derived inline the derived adjunct compatibility that the new node now states (C1/C3), so it now cites lem-weil-pbc-flat-ringed-diagram-restriction; the rest of the step is unchanged. (2) The new node lacked lean_audit; I added the 'none' entries. The two tool uses (pre-derived-adjoint-functors-general, kflat-resolution) were already accepted and remain accepted.; 2 file(s) fixed by the reviewer"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "lean": {
-    "module": "Sheaf.Paper.StrictTowerExchangeMateNormalization",
-    "declaration": "AlgebraicGeometry.Scheme.strictTowerExchangeMateNormalization",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.exchangeConstant_coherent",
-      "AlgebraicGeometry.Scheme.exchangeConstantSquare",
-      "AlgebraicGeometry.Scheme.exchangeScalar",
-      "AlgebraicGeometry.Scheme.exchangeScalar_comm",
-      "AlgebraicGeometry.Scheme.exchangeTowerModuleRes",
-      "AlgebraicGeometry.Scheme.exchangeTowerModuleRes_exact",
-      "AlgebraicGeometry.Scheme.exchangeTowerModuleRes_finiteLimits",
-      "AlgebraicGeometry.Scheme.exchangeTowerModuleRes_finiteColimits",
-      "AlgebraicGeometry.Scheme.exchangeTowerRes",
-      "AlgebraicGeometry.Scheme.exchangeConstantPull",
-      "AlgebraicGeometry.Scheme.exchangeConstantPush",
-      "AlgebraicGeometry.Scheme.exchangeModuleResPull",
-      "AlgebraicGeometry.Scheme.exchangeResPull",
-      "AlgebraicGeometry.Scheme.exchangeTowerDerivedUnit",
-      "AlgebraicGeometry.Scheme.exchangeModuleResPush",
-      "AlgebraicGeometry.Scheme.ExchangeResPushNormalized",
-      "AlgebraicGeometry.Scheme.exchangeResPush_existsUnique",
-      "AlgebraicGeometry.Scheme.exchangeResPush",
-      "AlgebraicGeometry.Scheme.exchangeCornerB",
-      "AlgebraicGeometry.Scheme.exchangeCornerD",
-      "AlgebraicGeometry.Scheme.exchangeRealizationH",
-      "AlgebraicGeometry.Scheme.exchangeRealizationHPrime",
-      "AlgebraicGeometry.Scheme.exchangeStrict_naturality",
-      "AlgebraicGeometry.Scheme.exchangeStrictNatTrans",
-      "AlgebraicGeometry.Scheme.strictTowerExchangeMateNormalization"
-    ],
-    "file": "lean/Sheaf/Paper/StrictTowerExchangeMateNormalization.lean",
-    "statement": "theorem strictTowerExchangeMateNormalization (sq : ChosenCartesianSquare g' f' f g) [IsProper f] (K : d.derived X) (hK : d.TowerComplete X K) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)) : d.towerV' sq K = (exchangeRealizationH (f := f) (g := g) d K).inv ≫ (completedReductionTower Y' d).map ((d.integralExchange sq).app K) ≫ (exchangeRealizationHPrime (f' := f') (g' := g') d K).hom ∧ (∀ n : ℕ, ∃ α : ∀ i : Fin 4, (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).obj (d.fourTowerCorners (f := f) (f' := f') (g := g) (g' := g') K i) ≅ (reductionDerivedRestrict Y' (d.projection Y' n)).obj (d.fourCorners (f := f) (f' := f') (g := g) (g' := g') K n i), (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerH (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ (α 1).hom = (α 0).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).h.hom ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerH' (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ (α 3).hom = (α 2).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).h'.hom ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerV sq K) ≫ (α 2).hom = (α 0).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).v ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerV' sq K) ≫ (α 3).hom = (α 1).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).v'.hom) ∧ (exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (exchangeCornerD d g' f').hom.app ((completedReductionTower X d).obj K) = (exchangeCornerB d f g).hom.app ((completedReductionTower X d).obj K) ≫ (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app ((exchangeTowerRes d X).obj ((completedReductionTower X d).obj K))",
-    "branch": "newtargets-dag",
-    "by": "Q13",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Repair of return L at 8bd1b06c9256: the signature now explicitly asserts the H inverse / reduction of ambient e / H-prime formula, the finite-level corner and arrow comparisons using the retained witnesses, and the scalar-restricted equality in the derived category of strict towers. The H and H-prime definitions display B and D as their actual targets and use the canonical diagram projection adjunct."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-aabc57a4f",
-    "group": "Q13",
-    "result": "pass",
-    "note": "Checked statement clauses, dependencies, sources, canonical constructions, universes, edge cases, docstrings, and records. Both modules passed per-file scompile.py reproduction. No delivery defects found; branch unchanged."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "C-5bd48",
-    "group": "P8",
-    "result": "pass",
-    "landing": "20261019T093539-L-2325287",
-    "kind": "interface",
-    "note": "independent cc review: fourTowers_compatibility (statement byte-identical to live) vs strictTowerExchangeMateNormalization .2.1 + towerV' cancellation + exchangeStrict_naturality; moved defs diffed identical to live; CompletedBaseChangeMap import swap forced by the import cycle; 11 importers compiled against the delivered modules"
-  },
-  "statement_change": {
-    "date": "2026-10-19",
-    "by": "P8 stage 2",
-    "old_statement": "Let $\\square=(f,f',g,g')$, with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$ and $g':X'\\to X$, be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f$ proper [def-weil-pbc-scheme-conventions]. Let $A,I,P_n=A/I^n,(P_n)_T,A_T$ be the Noetherian adic datum of [def-weil-pbc-adic-coefficient-datum], for all four corners $T$. Let $K\\in D(\\operatorname{Mod}(A_X))$ be derived complete, meaning its canonical map to the derived inverse limit of its strict reduction tower $K_\\bullet$ is an isomorphism [def-weil-pbc-derived-inverse-limit]. For every $n\\geq1$, fix an etale-origin witness $L_n\\in D^+(X_{\\Et},P_n)$ and $\\alpha_n:\\nu_X^*L_n\\simeq K_n$ [def-weil-pbc-etale-origin-witness]. Let $B_\\bullet,D_\\bullet$ and the specified morphism $v'_\\bullet:B_\\bullet\\to D_\\bullet$ be those of [def-weil-pbc-completed-base-change-map], as morphisms in the derived category of strict towers, not just families of maps in the derived categories at the individual levels.\n\nWrite $\\underline A_T$ for the constant ring sheaf [def-weil-pbc-constant-sheaf] on $T_{\\Proet}$ [def-weil-pbc-proetale-site], and $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(\\underline A_T))$ [def-weil-sheaf-of-modules-category, def-weil-inverse-system]. Write $\\operatorname{Res}_T$ for termwise restriction along $\\underline A_T\\to A_T$ [def-pc-sheaf-restrict-scalars, lem-weil-pbc-constant-completion-equivalence], and put $\\bar K_\\bullet=\\operatorname{Res}_XK_\\bullet$. For each edge $u$, let $G_u=u^{-1}$ on constant-coefficient modules, applied termwise to strict towers, and let $R_u^{\\mathcal T}$ be the total right derived termwise direct image. Their derived adjunction $G_u\\dashv R_u^{\\mathcal T}$ uses the termwise module adjunction of [def-weil-pbc-proetale-operations] and its derived adjunction [lem-pc-pre-derived-adjoint-functors-general]. Here $D(\\mathcal T_T)$ means localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Let $\\theta^{\\mathcal T}_\\square:G_{f'}G_g\\simeq G_{g'}G_f$ be the termwise canonical pullback composition square [lem-weil-pbc-proetale-derived-pullback-composition], and let $E^{\\mathcal T}_\\square:G_gR_f^{\\mathcal T}\\to R_{f'}^{\\mathcal T}G_{g'}$ be its adjunction mate [def-weil-pbc-adjunction-mate].\n\nMake the strict realization in this reference explicit as follows; this specifies the lift, rather than characterizing it by evaluations. Put $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, let $\\Delta$ denote the constant $J$-diagram, and use the ringed diagram sites of [lem-weil-pbc-diagram-site-realization] with coefficient ring $\\Delta A_T$. On these sites all tensor products below are derived tensor products. Let $Q_{T,\\bullet}=((P_n)_T)_n$ be the quotient diagram, and let $\\mathcal R_T(F)=\\Delta F\\otimes^L_{\\Delta A_T}Q_{T,\\bullet}$; this is the strict reduction functor of [def-weil-pbc-adic-coefficient-datum]. Write $\\mathscr L_u,\\mathscr R_u$ for derived termwise module pullback and direct image with completed coefficients. Set $E=Lg'^*K$, $M=Lg^*Rf_*K$, $N=Rf'_*E$, and $e=\\operatorname{Ex}^{A}_{\\square,K}:M\\to N$, the canonical ambient mate [def-weil-pbc-ambient-ringed-exchange]. The coefficient and tensor identifications in [def-weil-pbc-four-corners] give canonical maps\n$$H:\\mathcal R_{Y'}(M)\\longrightarrow\\mathscr L_g\\mathscr R_f\\mathcal R_X(K),\\qquad H':\\mathcal R_{Y'}(N)\\longrightarrow\\mathscr R_{f'}\\mathscr L_{g'}\\mathcal R_X(K).$$\nHere $H$ is $\\mathscr L_g$ of the diagram-site projection-formula map for $\\Delta K,Q_{Y,\\bullet}$, and $H'$ is the analogous map for $\\Delta E,Q_{Y',\\bullet}$ followed by the pullback/reduction identification. Projection-formula maps mean the adjuncts of counit tensored with the identity, as in [def-weil-pbc-projection-formula-map]. Their evaluations are exactly $h_n,h'_n$ of [def-weil-pbc-four-arrows], and they are isomorphisms by [lemma-weil-pbc-perfect-projection-formula] and [lem-weil-tower-category-levelwise-abelian]. Take the specified strict corners to be the targets of $H,H'$ and the specified strict exchange to be\n$$B_\\bullet=\\mathscr L_g\\mathscr R_f\\mathcal R_X(K),\\quad D_\\bullet=\\mathscr R_{f'}\\mathscr L_{g'}\\mathcal R_X(K),\\qquad v'_\\bullet=H'\\,\\mathcal R_{Y'}(e)\\,H^{-1}.$$\nEquivalently one may represent these corners by the source complexes of $H,H'$ and transport their evaluation identifications by $h_n,h'_n$. These are the projection-formula realizations used to supply the towers in [lem-weil-pbc-tower-compatibility].\n\nThere are canonical natural isomorphisms of derived strict-tower objects\n$$b_{\\square,K}:\\operatorname{Res}_{Y'}B_\\bullet\\xrightarrow{\\sim}G_gR_f^{\\mathcal T}\\bar K_\\bullet,\\qquad d_{\\square,K}:\\operatorname{Res}_{Y'}D_\\bullet\\xrightarrow{\\sim}R_{f'}^{\\mathcal T}G_{g'}\\bar K_\\bullet,$$\ninduced by the constant-to-completed finite-reduction comparisons of [lem-weil-pbc-constant-completion-equivalence] and the canonical tower direct-image evaluation comparisons of [prop-weil-pbc-direct-image-limits]. With these specified comparisons, the equality\n$$d_{\\square,K}\\circ\\operatorname{Res}_{Y'}(v'_\\bullet)=E^{\\mathcal T}_{\\square,\\bar K_\\bullet}\\circ b_{\\square,K}$$\nholds in $D(\\mathcal T_{Y'})$, naturally for morphisms of the input $K$. The equality concerns the specified witness-transported tower map; it asserts no faithfulness of the family of derived evaluation functors.",
-    "what": "Separate references to the existing strict tower definitions from the compatibility assertion: those identical constructions now have the definition-only node def-weil-pbc-completed-four-towers. Mathematical hypotheses, conclusion, maps and Lean signatures are unchanged. The previous combined-node citation created an artificial dependency cycle when using the existing stronger normalization theorem.",
-    "source": {
-      "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
-      "place": "The four tower constructions before the evaluation and compatibility assertions"
-    },
-    "citers": [
-      {
-        "id": "def-cbc-completed-exchange-map",
-        "holds": true,
-        "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
-      },
-      {
-        "id": "def-weil-pbc-quotient-corner-frobenius-structures",
-        "holds": true,
-        "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
-      },
-      {
-        "id": "fix-lem-exchanges",
-        "holds": true,
-        "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
-      },
-      {
-        "id": "lem-cbc-complete-proetale-strict-tower-realization",
-        "holds": true,
-        "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
-      },
-      {
-        "id": "lem-pur-weil-basechange-semilinear-pasting",
-        "holds": true,
-        "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
-      },
-      {
-        "id": "lem-weil-pbc-condensed-e-realization",
-        "holds": true,
-        "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
-      },
-      {
-        "id": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-        "holds": true,
-        "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
-      },
-      {
-        "id": "lemma-weil-pbc-completed-exchange-coherence",
-        "holds": true,
-        "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
-      },
-      {
-        "id": "lemma-weil-pbc-completed-map-reduction",
-        "holds": true,
-        "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
-      }
-    ],
-    "old_stmt_deps": [
-      "def-weil-pbc-cartesian-square",
-      "def-weil-pbc-scheme-conventions",
-      "def-weil-pbc-adic-coefficient-datum",
-      "def-weil-pbc-derived-inverse-limit",
-      "def-weil-pbc-etale-origin-witness",
-      "def-weil-pbc-completed-base-change-map",
-      "def-weil-pbc-constant-sheaf",
-      "def-weil-pbc-proetale-site",
-      "def-weil-sheaf-of-modules-category",
-      "def-weil-inverse-system",
-      "def-pc-sheaf-restrict-scalars",
-      "lem-weil-pbc-constant-completion-equivalence",
-      "def-weil-pbc-proetale-operations",
-      "lem-pc-pre-derived-adjoint-functors-general",
-      "def-weil-abstract-derived-category",
-      "lem-weil-pbc-proetale-derived-pullback-composition",
-      "def-weil-pbc-adjunction-mate",
-      "prop-weil-pbc-direct-image-limits",
-      "lem-weil-pbc-diagram-site-realization",
-      "def-weil-pbc-ambient-ringed-exchange",
-      "def-weil-pbc-four-corners",
-      "def-weil-pbc-projection-formula-map",
-      "def-weil-pbc-four-arrows",
-      "lemma-weil-pbc-perfect-projection-formula",
-      "lem-weil-tower-category-levelwise-abelian",
-      "lem-weil-pbc-tower-compatibility",
-      "def-weil-pbc-strict-tower-operations"
-    ]
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-four-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-realization",
+  "def-weil-pbc-four-corners",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-projection-formula-map",
+  "def-weil-pbc-four-arrows",
+  "prop-weil-pbc-direct-image-limits",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lem-weil-pbc-finite-level-rectangle",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv|derived.*exchange|exchange.*tower",
+   "results": "20 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: generic mates and compositions do not identify the specified witness-transported strict tower exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived base change mate in category of inverse sequences equals canonical compatible exchange morphism",
+   "results": "8 hits: CategoryTheory.mateEquiv_symm_apply, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.ComposableArrows.map'_inv_eq_inv_map', CategoryTheory.mateEquiv_apply, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, AlgebraicTopology.DoldKan.Compatibility.υ_inv_app",
+   "date": "2026-10-14",
+   "verdict": "no match: generic mates and compositions do not identify the specified witness-transported strict tower exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-14",
+   "verdict": "no match: generic mates and compositions do not identify the specified witness-transported strict tower exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived base change mate in category of inverse sequences equals canonical compatible exchange morphism",
+   "results": "{\"top\": [\"CategoryTheory.mateEquiv_symm_apply\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"CategoryTheory.ComposableArrows.map'_inv_eq_inv_map'\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.mateEquiv\", \"AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app\", \"AlgebraicTopology.DoldKan.Compatibility.υ_inv_app\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"note\": \"\", \"n_hits\": 12}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|derived.*exchange|exchange.*tower",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"note\": \"\", \"n_hits\": 20}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change exchange on strict inverse sequences is the adjunction mate of the inverse image square",
+   "results": "{\"top\": [], \"note\": \"service unavailable: Internal Server Error\", \"n_hits\": 0}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules on the product of a site with a small category with fiberwise topology are diagrams of module sheaves and ringed topos operations correspond to termwise operations",
+   "results": "{\"top\": [\"SheafOfModules.over\", \"LightCondMod.ofSheafLightProfinite\", \"PresheafOfModules.isSheaf_of_isLimit\", \"SheafOfModules.instAbelian\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.instCategory\", \"SheafOfModules.hasLimit\", \"SheafOfModules.Finite.hasFiniteLimits\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules in a functor topos are functors to sheaves of modules and derived pullback tensor and direct image are transported by this exact equivalence",
+   "results": "{\"top\": [\"SheafOfModules.pullbackIso\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"equivalence\"",
+   "results": "{\"top\": [\"CategoryTheory.sheafBotEquivalence\", \"CategoryTheory.sheafBotEquivalence_functor\", \"CategoryTheory.sheafBotEquivalence_inverse_obj_obj\", \"CategoryTheory.sheafBotEquivalence_inverse_map_hom\", \"CategoryTheory.sheafBotEquivalence_unitIso\", \"CategoryTheory.sheafBotEquivalence_counitIso\", \"CategoryTheory.Functor.IsDenseSubsite.hasWeakSheafify_of_isEquivalence\", \"CategoryTheory.Functor.IsDenseSubsite.hasSheafify_of_isEquivalence\"], \"note\": \"\", \"n_hits\": 12}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "diagram.*[Tt]opos|[Tt]opos.*diagram|sheaf.*[Cc]urry|[Cc]urry.*sheaf",
+   "results": "{\"top\": [], \"note\": \"\", \"n_hits\": 0}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic mates, sheaf pullback, limits or trivial-topology equivalences do not identify this specified strict reduction-tower exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on a product site with fiberwise topology are functors to sheaves of modules",
+   "results": "{\"top\": [], \"note\": \"service unavailable: Internal Server Error\", \"n_hits\": 0}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"note\": \"\", \"n_hits\": 12}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|derived.*exchange|exchange.*tower",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\"], \"note\": \"\", \"n_hits\": 20}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of coefficients identifies the canonical derived base change mate on strict reduction towers",
+   "results": "{\"top\": [\"Polynomial.coeff_restriction'\", \"Polynomial.coeff_restriction\", \"Derivation.restrictScalars.congr_simp\", \"Module.Basis.restrictScalars_repr_apply\", \"Submodule.restrictScalars\", \"Submodule.coe_restrictScalars\", \"IsBaseChange.basis_repr_comp\", \"Derivation.coe_restrictScalars\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change on strict inverse sequences equals the adjunction mate after restriction from completed adic coefficients to constant coefficients",
+   "results": "{\"top\": [\"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.of_lift\", \"AdicCompletion.mk_ofAlgEquiv_symm\", \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.transitionMap_comp_eval_apply\", \"AdicCompletion.congr_symm_apply\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical exchange on an inverse system of sheaf complexes is the counit and inverse image square mate and commutes with change of coefficients",
+   "results": "{\"top\": [\"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverse_obj_π_app\", \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIsoApp_inv_hom\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.w\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverseObj_π_app\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso_inv_app_hom\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lemma-weil-pbc-completed-exchange-coherence",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Proof, first two sentences: the finite-level exchange equations must hold for the specified strict tower morphism before Rlim is applied",
+   "via": []
+  },
+  "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "worker": "stage1",
+  "summary": "Repair of the long-step handoff: preserved the statement and steps 1–4, extracted the normalized flat coefficient-restriction comparison into a general small-site diagram lemma, and replaced step 5 by its hypotheses check and application. Former step 6 is retained with its step reference updated. No Lean edits or coefficient identifications by evaluation faithfulness.",
+  "blueprint": "The first two sentences of the completed-exchange-coherence proof in main-20261015: finite exchange equations and their compatibility as strict tower morphisms, before applying Rlim.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic fraction-normalized derived adjunction needed to identify units and counits on diagram sites and under restriction; no same-unit statement provides that characterization."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site K-flat resolution applied on the small diagram site; needed to compute the tensor there."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NP-8da6a19e8",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-8da6a19e8 (reviewer sub-agent of L); spot-checked: I read the full delivery and every cited statement; the mathematics is correct, and I made two small repairs. Shape: the statement and Lean record are byte-identical to before the delivery and steps 1-4 are unchanged; step 7 is old step 6 with only the step reference changed; proof_deps equals the union of the step uses; every step is now under 2000 characters (old step 5 was 2096). Route: same unit sk-thm-properbasechange, matching the first two proof sentences of completed-exchange-coherence in main-20261015 and in master; no SGA. Step 5: sheafification and limits on the diagram site are fiberwise, so the completion of Delta of the constant sheaf is Delta A_T. Flatness holds because constant-completion-equivalence works on any small site (Stacks 093M, sites-modules.tex:8261). The scalar square holds because both composites send a constant section a to a mod I^n (profinite-coefficient-inverse-image; P_n is finite by the adic datum). Step 6: every hypothesis of the new node holds with R the constant sheaf, S = A_T, c_S the four-corners c_u (an isomorphism), on small pro-etale sites; the composites give b and d, and Res R_X(K) is the restricted reduction tower. New node lem-weil-pbc-flat-ringed-diagram-restriction is true: flat scalar extension is an exact left adjoint, so restriction preserves K-injectives; b is u^{-1} with matching actions; d is the underived identity on K-injectives; the adjunct equation type-checks and holds. Edge cases checked: J empty, J terminal, a_T or u the identity, S = 0. It is not a restatement of the item. It generalizes lem-weil-pbc-ring-sheaf-change-adjunction (pro-etale sites, no diagrams, so that node does not apply); the sfb condensed comparisons, direct-image-restriction-of-scalars, pur coefficient-system, cbc strict-tower and kun square comparison do not state it. Its searches are real; sources 0FND/0DVC (derived.tex:9517/9570) and 03D3 (sites-modules.tex:1044) checked. Repairs: (1) Step 7 re-derived inline the derived adjunct compatibility that the new node now states (C1/C3), so it now cites lem-weil-pbc-flat-ringed-diagram-restriction; the rest of the step is unchanged. (2) The new node lacked lean_audit; I added the 'none' entries. The two tool uses (pre-derived-adjoint-functors-general, kflat-resolution) were already accepted and remain accepted.; 2 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictTowerExchangeMateNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.strictTowerExchangeMateNormalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exchangeConstant_coherent",
+   "AlgebraicGeometry.Scheme.exchangeConstantSquare",
+   "AlgebraicGeometry.Scheme.exchangeScalar",
+   "AlgebraicGeometry.Scheme.exchangeScalar_comm",
+   "AlgebraicGeometry.Scheme.exchangeTowerModuleRes",
+   "AlgebraicGeometry.Scheme.exchangeTowerModuleRes_exact",
+   "AlgebraicGeometry.Scheme.exchangeTowerModuleRes_finiteLimits",
+   "AlgebraicGeometry.Scheme.exchangeTowerModuleRes_finiteColimits",
+   "AlgebraicGeometry.Scheme.exchangeTowerRes",
+   "AlgebraicGeometry.Scheme.exchangeConstantPull",
+   "AlgebraicGeometry.Scheme.exchangeConstantPush",
+   "AlgebraicGeometry.Scheme.exchangeModuleResPull",
+   "AlgebraicGeometry.Scheme.exchangeResPull",
+   "AlgebraicGeometry.Scheme.exchangeTowerDerivedUnit",
+   "AlgebraicGeometry.Scheme.exchangeModuleResPush",
+   "AlgebraicGeometry.Scheme.ExchangeResPushNormalized",
+   "AlgebraicGeometry.Scheme.exchangeResPush_existsUnique",
+   "AlgebraicGeometry.Scheme.exchangeResPush",
+   "AlgebraicGeometry.Scheme.exchangeCornerB",
+   "AlgebraicGeometry.Scheme.exchangeCornerD",
+   "AlgebraicGeometry.Scheme.exchangeRealizationH",
+   "AlgebraicGeometry.Scheme.exchangeRealizationHPrime",
+   "AlgebraicGeometry.Scheme.exchangeStrict_naturality",
+   "AlgebraicGeometry.Scheme.exchangeStrictNatTrans",
+   "AlgebraicGeometry.Scheme.strictTowerExchangeMateNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/StrictTowerExchangeMateNormalization.lean",
+  "statement": "theorem strictTowerExchangeMateNormalization (sq : ChosenCartesianSquare g' f' f g) [IsProper f] (K : d.derived X) (hK : d.TowerComplete X K) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)) : d.towerV' sq K = (exchangeRealizationH (f := f) (g := g) d K).inv ≫ (completedReductionTower Y' d).map ((d.integralExchange sq).app K) ≫ (exchangeRealizationHPrime (f' := f') (g' := g') d K).hom ∧ (∀ n : ℕ, ∃ α : ∀ i : Fin 4, (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).obj (d.fourTowerCorners (f := f) (f' := f') (g := g) (g' := g') K i) ≅ (reductionDerivedRestrict Y' (d.projection Y' n)).obj (d.fourCorners (f := f) (f' := f') (g := g) (g' := g') K n i), (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerH (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ (α 1).hom = (α 0).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).h.hom ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerH' (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ (α 3).hom = (α 2).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).h'.hom ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerV sq K) ≫ (α 2).hom = (α 0).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).v ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerV' sq K) ≫ (α 3).hom = (α 1).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).v'.hom) ∧ (exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (exchangeCornerD d g' f').hom.app ((completedReductionTower X d).obj K) = (exchangeCornerB d f g).hom.app ((completedReductionTower X d).obj K) ≫ (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app ((exchangeTowerRes d X).obj ((completedReductionTower X d).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of return L at 8bd1b06c9256: the signature now explicitly asserts the H inverse / reduction of ambient e / H-prime formula, the finite-level corner and arrow comparisons using the retained witnesses, and the scalar-restricted equality in the derived category of strict towers. The H and H-prime definitions display B and D as their actual targets and use the canonical diagram projection adjunct."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-aabc57a4f",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Checked statement clauses, dependencies, sources, canonical constructions, universes, edge cases, docstrings, and records. Both modules passed per-file scompile.py reproduction. No delivery defects found; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261020T230842-L-621031",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.exchangeResPush_existsUnique",
+   "AlgebraicGeometry.Scheme.strictTowerExchangeMateNormalization"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Scheme.strictTowerExchangeMateNormalization"
+  ]
+ },
+ "statement_change": {
+  "date": "2026-10-19",
+  "by": "P8 stage 2",
+  "old_statement": "Let $\\square=(f,f',g,g')$, with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$ and $g':X'\\to X$, be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f$ proper [def-weil-pbc-scheme-conventions]. Let $A,I,P_n=A/I^n,(P_n)_T,A_T$ be the Noetherian adic datum of [def-weil-pbc-adic-coefficient-datum], for all four corners $T$. Let $K\\in D(\\operatorname{Mod}(A_X))$ be derived complete, meaning its canonical map to the derived inverse limit of its strict reduction tower $K_\\bullet$ is an isomorphism [def-weil-pbc-derived-inverse-limit]. For every $n\\geq1$, fix an etale-origin witness $L_n\\in D^+(X_{\\Et},P_n)$ and $\\alpha_n:\\nu_X^*L_n\\simeq K_n$ [def-weil-pbc-etale-origin-witness]. Let $B_\\bullet,D_\\bullet$ and the specified morphism $v'_\\bullet:B_\\bullet\\to D_\\bullet$ be those of [def-weil-pbc-completed-base-change-map], as morphisms in the derived category of strict towers, not just families of maps in the derived categories at the individual levels.\n\nWrite $\\underline A_T$ for the constant ring sheaf [def-weil-pbc-constant-sheaf] on $T_{\\Proet}$ [def-weil-pbc-proetale-site], and $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(\\underline A_T))$ [def-weil-sheaf-of-modules-category, def-weil-inverse-system]. Write $\\operatorname{Res}_T$ for termwise restriction along $\\underline A_T\\to A_T$ [def-pc-sheaf-restrict-scalars, lem-weil-pbc-constant-completion-equivalence], and put $\\bar K_\\bullet=\\operatorname{Res}_XK_\\bullet$. For each edge $u$, let $G_u=u^{-1}$ on constant-coefficient modules, applied termwise to strict towers, and let $R_u^{\\mathcal T}$ be the total right derived termwise direct image. Their derived adjunction $G_u\\dashv R_u^{\\mathcal T}$ uses the termwise module adjunction of [def-weil-pbc-proetale-operations] and its derived adjunction [lem-pc-pre-derived-adjoint-functors-general]. Here $D(\\mathcal T_T)$ means localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Let $\\theta^{\\mathcal T}_\\square:G_{f'}G_g\\simeq G_{g'}G_f$ be the termwise canonical pullback composition square [lem-weil-pbc-proetale-derived-pullback-composition], and let $E^{\\mathcal T}_\\square:G_gR_f^{\\mathcal T}\\to R_{f'}^{\\mathcal T}G_{g'}$ be its adjunction mate [def-weil-pbc-adjunction-mate].\n\nMake the strict realization in this reference explicit as follows; this specifies the lift, rather than characterizing it by evaluations. Put $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, let $\\Delta$ denote the constant $J$-diagram, and use the ringed diagram sites of [lem-weil-pbc-diagram-site-realization] with coefficient ring $\\Delta A_T$. On these sites all tensor products below are derived tensor products. Let $Q_{T,\\bullet}=((P_n)_T)_n$ be the quotient diagram, and let $\\mathcal R_T(F)=\\Delta F\\otimes^L_{\\Delta A_T}Q_{T,\\bullet}$; this is the strict reduction functor of [def-weil-pbc-adic-coefficient-datum]. Write $\\mathscr L_u,\\mathscr R_u$ for derived termwise module pullback and direct image with completed coefficients. Set $E=Lg'^*K$, $M=Lg^*Rf_*K$, $N=Rf'_*E$, and $e=\\operatorname{Ex}^{A}_{\\square,K}:M\\to N$, the canonical ambient mate [def-weil-pbc-ambient-ringed-exchange]. The coefficient and tensor identifications in [def-weil-pbc-four-corners] give canonical maps\n$$H:\\mathcal R_{Y'}(M)\\longrightarrow\\mathscr L_g\\mathscr R_f\\mathcal R_X(K),\\qquad H':\\mathcal R_{Y'}(N)\\longrightarrow\\mathscr R_{f'}\\mathscr L_{g'}\\mathcal R_X(K).$$\nHere $H$ is $\\mathscr L_g$ of the diagram-site projection-formula map for $\\Delta K,Q_{Y,\\bullet}$, and $H'$ is the analogous map for $\\Delta E,Q_{Y',\\bullet}$ followed by the pullback/reduction identification. Projection-formula maps mean the adjuncts of counit tensored with the identity, as in [def-weil-pbc-projection-formula-map]. Their evaluations are exactly $h_n,h'_n$ of [def-weil-pbc-four-arrows], and they are isomorphisms by [lemma-weil-pbc-perfect-projection-formula] and [lem-weil-tower-category-levelwise-abelian]. Take the specified strict corners to be the targets of $H,H'$ and the specified strict exchange to be\n$$B_\\bullet=\\mathscr L_g\\mathscr R_f\\mathcal R_X(K),\\quad D_\\bullet=\\mathscr R_{f'}\\mathscr L_{g'}\\mathcal R_X(K),\\qquad v'_\\bullet=H'\\,\\mathcal R_{Y'}(e)\\,H^{-1}.$$\nEquivalently one may represent these corners by the source complexes of $H,H'$ and transport their evaluation identifications by $h_n,h'_n$. These are the projection-formula realizations used to supply the towers in [lem-weil-pbc-tower-compatibility].\n\nThere are canonical natural isomorphisms of derived strict-tower objects\n$$b_{\\square,K}:\\operatorname{Res}_{Y'}B_\\bullet\\xrightarrow{\\sim}G_gR_f^{\\mathcal T}\\bar K_\\bullet,\\qquad d_{\\square,K}:\\operatorname{Res}_{Y'}D_\\bullet\\xrightarrow{\\sim}R_{f'}^{\\mathcal T}G_{g'}\\bar K_\\bullet,$$\ninduced by the constant-to-completed finite-reduction comparisons of [lem-weil-pbc-constant-completion-equivalence] and the canonical tower direct-image evaluation comparisons of [prop-weil-pbc-direct-image-limits]. With these specified comparisons, the equality\n$$d_{\\square,K}\\circ\\operatorname{Res}_{Y'}(v'_\\bullet)=E^{\\mathcal T}_{\\square,\\bar K_\\bullet}\\circ b_{\\square,K}$$\nholds in $D(\\mathcal T_{Y'})$, naturally for morphisms of the input $K$. The equality concerns the specified witness-transported tower map; it asserts no faithfulness of the family of derived evaluation functors.",
+  "what": "Separate references to the existing strict tower definitions from the compatibility assertion: those identical constructions now have the definition-only node def-weil-pbc-completed-four-towers. Mathematical hypotheses, conclusion, maps and Lean signatures are unchanged. The previous combined-node citation created an artificial dependency cycle when using the existing stronger normalization theorem.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
+   "place": "The four tower constructions before the evaluation and compatibility assertions"
+  },
+  "citers": [
+   {
+    "id": "def-cbc-completed-exchange-map",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "def-weil-pbc-quotient-corner-frobenius-structures",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "fix-lem-exchanges",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lem-cbc-complete-proetale-strict-tower-realization",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lem-pur-weil-basechange-semilinear-pasting",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lem-weil-pbc-condensed-e-realization",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lemma-weil-pbc-completed-exchange-coherence",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   },
+   {
+    "id": "lemma-weil-pbc-completed-map-reduction",
+    "holds": true,
+    "note": "Only the citation locating the identical strict tower definitions changes; all mathematical data and assertions of this node remain unchanged, so this citer remains valid."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-cartesian-square",
+   "def-weil-pbc-scheme-conventions",
+   "def-weil-pbc-adic-coefficient-datum",
+   "def-weil-pbc-derived-inverse-limit",
+   "def-weil-pbc-etale-origin-witness",
+   "def-weil-pbc-completed-base-change-map",
+   "def-weil-pbc-constant-sheaf",
+   "def-weil-pbc-proetale-site",
+   "def-weil-sheaf-of-modules-category",
+   "def-weil-inverse-system",
+   "def-pc-sheaf-restrict-scalars",
+   "lem-weil-pbc-constant-completion-equivalence",
+   "def-weil-pbc-proetale-operations",
+   "lem-pc-pre-derived-adjoint-functors-general",
+   "def-weil-abstract-derived-category",
+   "lem-weil-pbc-proetale-derived-pullback-composition",
+   "def-weil-pbc-adjunction-mate",
+   "prop-weil-pbc-direct-image-limits",
+   "lem-weil-pbc-diagram-site-realization",
+   "def-weil-pbc-ambient-ringed-exchange",
+   "def-weil-pbc-four-corners",
+   "def-weil-pbc-projection-formula-map",
+   "def-weil-pbc-four-arrows",
+   "lemma-weil-pbc-perfect-projection-formula",
+   "lem-weil-tower-category-levelwise-abelian",
+   "lem-weil-pbc-tower-compatibility",
+   "def-weil-pbc-strict-tower-operations"
+  ]
+ }
 }
