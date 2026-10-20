@@ -52,11 +52,7 @@ private noncomputable def mapComplexComparison
     (B.mapHomologicalComplex (.up ℤ)).obj ((A.mapHomologicalComplex (.up ℤ)).obj F) ≅
       (L.mapHomologicalComplex (.up ℤ)).obj
         ((R.mapHomologicalComplex (.up ℤ)).obj ((S.mapHomologicalComplex (.up ℤ)).obj F)) :=
-  ((Functor.mapHomologicalComplexCompIso (Iso.refl (A ⋙ B)) (.up ℤ)).app F).symm ≪≫
-    (NatIso.mapHomologicalComplex α (.up ℤ)).app F ≪≫
-    (Functor.mapHomologicalComplexCompIso (Iso.refl ((S ⋙ R) ⋙ L)) (.up ℤ)).app F ≪≫
-    (L.mapHomologicalComplex (.up ℤ)).mapIso
-      ((Functor.mapHomologicalComplexCompIso (Iso.refl (S ⋙ R)) (.up ℤ)).app F)
+  (NatIso.mapHomologicalComplex α (.up ℤ)).app F
 
 set_option maxHeartbeats 800000 in
 -- The natural comparisons involve several composed functors on sheaves and complexes.
@@ -156,11 +152,8 @@ theorem affine_kFlat_residuePullback_model (X : Scheme.{u})
         ((HomotopyCategory.kFlat_quotient_obj_iff F).mpr hF)
     exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
       (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic G).mpr hG)).2
-  have : (Modules.tensorPullback hU.isoSpec.hom).Additive := by
-    let : (Modules.tensorPullback hU.isoSpec.hom).IsLeftAdjoint :=
-      ⟨_, Modules.nonempty_tensorPullbackAdjunction _⟩
-    exact rightExactFunctor_le_additiveFunctor _ _ _
-      (by rw [rightExactFunctor_iff]; infer_instance)
+  have : (Modules.tensorPullback hU.isoSpec.hom).Additive :=
+    (Modules.nonempty_tensorPullbackAdjunction _).some.left_adjoint_additive
   let θ : Modules.tensorPullback hU.isoSpec.hom ≅ R :=
     (Modules.nonempty_tensorPullbackAdjunction _).some.leftAdjointUniq
       (Modules.restrictAdjunction _)
@@ -178,21 +171,15 @@ theorem affine_kFlat_residuePullback_model (X : Scheme.{u})
       Functor.isoWhiskerLeft T (Functor.rightUnitor R)
   let ε : (V.mapHomologicalComplex (.up ℤ)).obj K ≅
       (R.mapHomologicalComplex (.up ℤ)).obj P :=
-    ((Functor.mapHomologicalComplexCompIso
-      (Iso.refl (affinePerfectSheafification X U hU ⋙ V)) (.up ℤ)).app F).symm ≪≫
-      (NatIso.mapHomologicalComplex δ (.up ℤ)).app F ≪≫
-      (Functor.mapHomologicalComplexCompIso (Iso.refl (T ⋙ R)) (.up ℤ)).app F
+    (NatIso.mapHomologicalComplex δ (.up ℤ)).app F
   have hK := Modules.kFlat_of_iso ε.symm hRP
   obtain ⟨q⟩ := derivedPullback_local_kFlat_model
     (X.fromSpecResidueField z) U g hg E K hK hmodel
   let η : ModuleCat.extendScalars e.inv.hom ≅ ModuleCat.restrictScalars e.hom.hom :=
     (ModuleCat.extendRestrictScalarsAdj e.inv.hom).leftAdjointUniq
       (ModuleCat.restrictScalarsEquivalenceOfRingEquiv e.commRingCatIsoToRingEquiv).toAdjunction
-  let : (ModuleCat.extendScalars ψ).IsLeftAdjoint :=
-    ⟨_, ⟨ModuleCat.extendRestrictScalarsAdj ψ⟩⟩
   have : (ModuleCat.extendScalars ψ).Additive :=
-    rightExactFunctor_le_additiveFunctor _ _ _
-      (by rw [rightExactFunctor_iff]; infer_instance)
+    (ModuleCat.extendRestrictScalarsAdj ψ).left_adjoint_additive
   let σ : ModuleCat.extendScalars φ ≅
       ModuleCat.extendScalars ψ ⋙ ModuleCat.restrictScalars e.hom.hom :=
     ModuleCat.extendScalarsComp ψ e.inv.hom ≪≫
