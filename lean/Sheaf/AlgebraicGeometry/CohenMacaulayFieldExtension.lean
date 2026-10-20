@@ -23,7 +23,6 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.Algebra.Category.ModuleCat.Stalk
 import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
