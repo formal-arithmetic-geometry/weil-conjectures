@@ -1,8 +1,8 @@
 # Work queue
 
-108 items; claim with `tools/claim.py next <group> [--stage N]`.
+102 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (45 clusters, 2435 modules)
+## Rework: quarantined by the upstream sync (38 clusters, 2382 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -13,14 +13,12 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean:1195:0: error: unexpected token 'by'; expected command | |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
 | `Sheaf.AlgebraicGeometry.KFlatStalkResidueCohomology` | 1 |  | error: Sheaf/AlgebraicGeometry/KFlatStalkResidueCohomology.lean:62:10: error(lean.unknownIdentifier): Unknown constant `CochainComplex.IsAcyclicTensorKFlat` | C |
-| `Sheaf.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CounitStalkConditionFromLocalizedComparison.lean:5:0: error: import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyM |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean:548:4: error: Type mismatch | isLeftDerivedFunctor₂_upperStar |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
 | `Sheaf.AlgebraicGeometry.ZeroSupportFiniteScheme` | 1 |  | error: Sheaf/AlgebraicGeometry/ZeroSupportFiniteScheme.lean:70:26: error(lean.unknownIdentifier): Unknown constant `AlgebraicGeometry.RingedSpace.IsCoherent` |  |
 | `Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIso` | 1 |  | error: Sheaf/AlgebraicGeometry/StalkDerivedExtensionComparisonIso.lean:83:16: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The environment do |
 | `Sheaf.RingTheory.BoundedProjectiveResolutionDimension` | 1 |  | error: Sheaf/RingTheory/BoundedProjectiveResolutionDimension.lean:6:0: error: import WeilConjectures.RingTheory.GlobalDimension failed, environment already cont |
-| `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonHelpers` | 1 |  | error: Sheaf/Algebra/Homology/AffineTildeTensorSourceComparisonHelpers.lean:6:0: error: import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel failed, e |
 | `Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso` | 1 |  | error: Sheaf/AlgebraicGeometry/QCohTensorResolutionChartComparisonIso.lean:1:0: error: import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde failed, environment a |
 | `Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization` | 1 |  | error: Sheaf/AlgebraicGeometry/SchemeOrdinaryEvaluationLocalization.lean:40:27: error: failed to solve universe constraint | ?u.43 + 1 =?= u | while trying to u |
 | `Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineLocalCohomology` | 1 |  | error: Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAffineLocalCohomology.lean:79:11: error(lean.invalidField): Invalid field `Modules`: The environment do |
@@ -32,7 +30,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.FormalSecondIdealAlgebraizationTransitions` | 1 |  | error: Sheaf/AlgebraicGeometry/FormalSecondIdealAlgebraizationTransitions.lean:117:22: error: type expected, got | (IsNoetherian ↥X : (M : Type ?u.3) → [inst :  |
 | `Sheaf.AlgebraicGeometry.TensorModelRestrictionComparisons` | 1 |  | error: Sheaf/AlgebraicGeometry/TensorModelRestrictionComparisons.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedTensorAugmentation failed, env |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
-| `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryRepresentativeCoherence` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryRepresentativeCoherence.lean:113:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The |
 | `Sheaf.AlgebraicGeometry.ScalarCohomologyPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarCohomologyPullbackSquare.lean:106:18: error(lean.unknownIdentifier): Unknown identifier `Field` | | Note: A public declarat |
 | `Sheaf.Algebra.Homology.AffinePushforwardComparisonFactorization` | 1 |  | error: Sheaf/Algebra/Homology/AffinePushforwardComparisonFactorization.lean:25:0: error: failed to solve universe constraint | u + 1 =?= u | while trying to uni |
 | `Sheaf.AlgebraicGeometry.AffineKoszulSectionRoof` | 1 |  | error: Sheaf/AlgebraicGeometry/AffineKoszulSectionRoof.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedTensorAugmentation failed, environment a |
@@ -47,12 +44,8 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.AffineSpectrumCompositionUnitSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/AffineSpectrumCompositionUnitSquare.lean:189:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irr |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumUnitNormalization` | 1 |  | error: Sheaf/AlgebraicGeometry/AffineSpectrumUnitNormalization.lean:29:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irreduci |
 | `Sheaf.AlgebraicGeometry.FieldFibreHomology` | 1 |  | error: Sheaf/AlgebraicGeometry/FieldFibreHomology.lean:41:6: error: Application type mismatch: The argument | (derivedPullback g).obj (DerivedCategory.Q.obj K)  |
-| `Sheaf.AlgebraicGeometry.OpenRestrictedCounitFactorizationAux` | 1 |  | error: Sheaf/AlgebraicGeometry/OpenRestrictedCounitFactorizationAux.lean:12:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irr |
 | `Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounitCore` | 1 |  | error: Sheaf/AlgebraicGeometry/PicardTermwiseCompositeCounitCore.lean:29:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irredu |
 | `Sheaf.AlgebraicGeometry.SchemeIsoPerfectLocalTransport` | 1 |  | error: Sheaf/AlgebraicGeometry/SchemeIsoPerfectLocalTransport.lean:171:2: error: failed to solve universe constraint | ?u.539 + 1 =?= u | while trying to unify  |
-| `Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeCalculation` | 1 |  | error: Sheaf/AlgebraicGeometry/SingleComplexOpenBaseChangeCalculation.lean:22:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[i |
-| `Sheaf.RingTheory.ProjectiveDimensionSESKernel` | 1 |  | error: Sheaf/RingTheory/ProjectiveDimensionSESKernel.lean:1:0: error: import WeilConjectures.RingTheory.GlobalDimension failed, environment already contains 'Ri |
-| `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean:104:0: error: Unexpected name `Unbounded` after `end`: The current section |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 1, stage 2 32, stage 3 135 items.
 
@@ -64,12 +57,13 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 302 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (3)
+## Stage 3: modules to prove (4)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
+| `WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek` | 8 | 1 | disputed | route |
 | `Sheaf.AlgebraicGeometry.VectorBundleZeroSection` | - | 3 | proof | 3 |
 | `Sheaf.CategoryTheory.ConstantLeftModuleInverseImage` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteFieldDerivedTensorSummand` | - | 1 | proof | 6 |
