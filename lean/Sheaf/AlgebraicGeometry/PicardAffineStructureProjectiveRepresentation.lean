@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 import all WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso

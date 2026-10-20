@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnit
 import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyCore

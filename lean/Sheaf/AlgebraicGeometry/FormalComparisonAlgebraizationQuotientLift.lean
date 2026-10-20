@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 import all WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Algebraizing a formal pullback isomorphism with quotient compatibility

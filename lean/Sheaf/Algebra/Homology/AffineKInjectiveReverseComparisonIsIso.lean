@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G2
 -/
 module
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.Algebra.Homology.LeftExactHomologyComparison
 import Sheaf.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
 import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore

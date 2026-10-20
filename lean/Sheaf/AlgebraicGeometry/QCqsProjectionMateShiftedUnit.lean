@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Sheaf.AlgebraicGeometry.DerivedPullbackStructureSheaf
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel

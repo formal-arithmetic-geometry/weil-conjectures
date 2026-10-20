@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import WeilConjectures.RingTheory.RingPseudoCoherentLocalizationGlue
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentLocalizationCover
 

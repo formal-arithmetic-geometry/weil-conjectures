@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
-import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
+import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison

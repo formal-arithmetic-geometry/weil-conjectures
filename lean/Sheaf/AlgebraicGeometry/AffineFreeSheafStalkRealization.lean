@@ -10,7 +10,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.AlgebraicGeometry.AffineFreeStalkComparisonBijective
-import Sheaf.AlgebraicGeometry.AffineFreeBasisGermMap
+import WeilConjectures.AlgebraicGeometry.AffineFreeBasisGermMap
 
 /-! # Realizing section modules on an affine open and comparing their stalks
 

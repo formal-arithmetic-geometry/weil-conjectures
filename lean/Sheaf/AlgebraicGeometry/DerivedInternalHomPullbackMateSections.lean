@@ -6,7 +6,7 @@ Authors: SHEAF group S4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.RhomGlobalSections

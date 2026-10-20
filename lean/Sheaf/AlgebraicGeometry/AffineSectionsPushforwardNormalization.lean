@@ -6,7 +6,7 @@ Authors: SHEAF group N2
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution

@@ -6,7 +6,7 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.AffineModelComparisonData
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Mathlib.CategoryTheory.HomCongr
 
 /-! # Hom transport from coherent affine object comparisons

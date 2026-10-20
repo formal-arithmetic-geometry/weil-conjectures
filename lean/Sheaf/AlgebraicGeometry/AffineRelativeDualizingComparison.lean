@@ -12,7 +12,7 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Defs
-public import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+public import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex

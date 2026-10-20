@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
 

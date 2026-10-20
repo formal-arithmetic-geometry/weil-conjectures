@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraColimit
 import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.AlgebraicGeometry.AffineOverLimitInclusion
+import WeilConjectures.AlgebraicGeometry.AffineOverLimitInclusion
 
 /-!
 # Existence of inverse limits with affine transition morphisms

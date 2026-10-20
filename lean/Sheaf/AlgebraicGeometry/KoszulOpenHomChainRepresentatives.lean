@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective

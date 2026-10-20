@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.AlgebraicGeometry.AffineSectionsComplexCounit
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
 

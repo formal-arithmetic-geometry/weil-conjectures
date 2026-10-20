@@ -5,8 +5,9 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineFreeBasisGerms
+public import WeilConjectures.AlgebraicGeometry.AffineFreeBasisGerms
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Bijectivity of the regular-module stalk comparison
 

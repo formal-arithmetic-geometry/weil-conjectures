@@ -5,8 +5,9 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineFreeBasisGerms
+public import WeilConjectures.AlgebraicGeometry.AffineFreeBasisGerms
 import Sheaf.AlgebraicGeometry.AffineRegularStalkComparisonBijective
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Bijectivity of the explicit finite free stalk comparison
 

@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

@@ -4,7 +4,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import all Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FormalCompletionAffineSections
 import Mathlib.RingTheory.AdicCompletion.Exactness

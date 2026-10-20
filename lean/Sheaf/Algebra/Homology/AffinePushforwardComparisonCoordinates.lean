@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Affine cohomology coordinates for a supplied ordinary comparison
 

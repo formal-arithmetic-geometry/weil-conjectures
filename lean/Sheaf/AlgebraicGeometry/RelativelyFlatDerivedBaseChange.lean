@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 import Sheaf.AlgebraicGeometry.BaseChangeMapCech

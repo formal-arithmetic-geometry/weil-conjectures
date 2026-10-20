@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShorteningConstruction
+import WeilConjectures.AlgebraicGeometry.AffineFinitePresentationFlatShorteningConstruction
 import WeilConjectures.AlgebraicGeometry.AffineFinitePresentationFlatPseudoCoherent
 
 /-! # Shortening a finite-presentation flat complex on an affine scheme -/

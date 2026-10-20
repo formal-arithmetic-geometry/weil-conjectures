@@ -5,7 +5,7 @@ Authors: SHEAF group V3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Equality transport of the ordinary direct-image square
 Source: Stacks Project, Tags 08HY and 0D5T.

@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison
 import Sheaf.AlgebraicGeometry.FiniteAffineCechModelFlatOver
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
+import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle

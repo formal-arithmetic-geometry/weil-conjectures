@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Subobject.Limits
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CoherentSupportUnionExactSequence
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationExtension
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationAdicReduction

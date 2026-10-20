@@ -49,7 +49,7 @@ import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Mathlib.Algebra.Module.FinitePresentation
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
@@ -60,7 +60,6 @@ import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-!
 # The conormal graded algebra of a closed immersion
 

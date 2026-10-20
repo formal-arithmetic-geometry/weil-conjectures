@@ -6,7 +6,7 @@ Authors: SHEAF group Q102
 module
 
 public import Sheaf.Algebra.Homology.SheafComplexDerivedTensorVanishes
-public import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+public import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 public import Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude

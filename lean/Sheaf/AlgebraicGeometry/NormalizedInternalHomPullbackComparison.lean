@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 
 /-! # Evaluation mates of normalized derived internal Hom

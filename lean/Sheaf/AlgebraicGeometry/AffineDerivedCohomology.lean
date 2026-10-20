@@ -5,7 +5,7 @@ Authors: SHEAF group R1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism

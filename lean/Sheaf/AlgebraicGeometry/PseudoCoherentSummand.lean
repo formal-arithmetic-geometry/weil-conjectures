@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 import WeilConjectures.Algebra.Homology.RingPseudoCoherentSummand
-import Sheaf.AlgebraicGeometry.AffineDerivedSummandModels
+import WeilConjectures.AlgebraicGeometry.AffineDerivedSummandModels
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Pseudo-coherence is preserved by direct summands

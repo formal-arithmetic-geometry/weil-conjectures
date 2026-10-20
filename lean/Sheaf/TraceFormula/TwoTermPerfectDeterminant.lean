@@ -22,7 +22,7 @@ import WeilConjectures.RingTheory.FiniteProjectiveStandardFreeCover
 import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.RingTheory.Spectrum.Prime.Topology

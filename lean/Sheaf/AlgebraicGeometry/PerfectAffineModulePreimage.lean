@@ -9,7 +9,7 @@ public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Mathlib.CategoryTheory.Localization.Equivalence
 import Sheaf.AlgebraicGeometry.QuasiCompactFiniteTorDimension
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion

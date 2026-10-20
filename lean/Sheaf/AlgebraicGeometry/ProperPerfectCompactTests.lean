@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 public import Sheaf.CategoryTheory.CompactObject
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

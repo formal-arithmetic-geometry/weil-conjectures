@@ -6,7 +6,7 @@ Authors: SHEAF group N3
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.FiniteAffineCechModelAcyclicResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility

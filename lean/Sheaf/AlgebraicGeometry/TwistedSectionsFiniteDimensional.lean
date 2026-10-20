@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 import WeilConjectures.AlgebraicGeometry.ProjectiveLinePolynomialProjectionChartIso
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-! # Finiteness of twisted sections for the canonical base-field action
 
 Source: Stacks Project, Lemma 01YS(3).

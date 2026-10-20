@@ -11,7 +11,7 @@ public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import Sheaf.AlgebraicGeometry.AffineTildeTotalTensor

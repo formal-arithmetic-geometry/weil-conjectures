@@ -15,7 +15,7 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import WeilConjectures.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.AlgebraicGeometry.AffineFiniteFreeResolutionPerfectModel
+import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeResolutionPerfectModel
 
 /-!
 # Koszul-regular closed immersions are perfect

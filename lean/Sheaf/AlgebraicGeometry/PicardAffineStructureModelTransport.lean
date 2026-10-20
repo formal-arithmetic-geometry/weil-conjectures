@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction

@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.Topology.GlueSheavesOfModules
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesLocalExactness
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Lifting compatible maps between coherent isogenies under a fixed module
 

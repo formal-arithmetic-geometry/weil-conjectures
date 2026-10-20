@@ -7,14 +7,14 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 import Sheaf.AlgebraicGeometry.QCqsProjectionMateAffineDescent
 import Sheaf.AlgebraicGeometry.QCqsProjectionMateShiftedUnit
 import Sheaf.AlgebraicGeometry.QCqsProjectionMateAffineLocus
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import WeilConjectures.CategoryTheory.DerivedModuleFreeGeneration
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction

@@ -6,7 +6,7 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Restrict
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization

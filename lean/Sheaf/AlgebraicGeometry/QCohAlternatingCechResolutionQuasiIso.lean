@@ -11,7 +11,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import Sheaf.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso
 import Mathlib.Algebra.Category.ModuleCat.Products
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 import Sheaf.Paper.QCohAcyclicDerivedSectionsComparison
 

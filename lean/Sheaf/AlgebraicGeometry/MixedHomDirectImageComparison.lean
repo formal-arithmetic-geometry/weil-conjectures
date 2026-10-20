@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.MixedHomTensorPullbackIso
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 import all Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
