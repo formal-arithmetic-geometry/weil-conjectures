@@ -1,9 +1,6 @@
 module
 
-public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplexTrunc
-public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
 public import WeilConjectures.FromJoel.Algebra.Homology.CochainComplexMinus
-public import WeilConjectures.FromJoel.CategoryTheory.Limits.Constructions.EventuallyConstant
 
 /-!
 Declarations of ours that lived in the upstream file

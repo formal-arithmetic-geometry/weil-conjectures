@@ -5,14 +5,10 @@ Authors: SHEAF group Q125
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 public import Sheaf.Paper.PurInverseImageTensorHom
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Mathlib.NumberTheory.Padics.RingHoms
-public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison
 public import Sheaf.Paper.StrictTowerOperations
-import Mathlib.Algebra.Module.Hom
 
 /-!
 # Base change of an inverse-limit tower and its finite tensor reduction

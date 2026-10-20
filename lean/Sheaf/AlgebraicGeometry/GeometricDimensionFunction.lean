@@ -5,9 +5,7 @@ Authors: SHEAF group Q29
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension functions defined by immediate geometric specializations

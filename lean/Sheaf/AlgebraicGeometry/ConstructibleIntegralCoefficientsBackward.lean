@@ -2,9 +2,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
-public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-public import Mathlib.Algebra.Ring.ULift
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.ConstructibleSheaf.Pullback

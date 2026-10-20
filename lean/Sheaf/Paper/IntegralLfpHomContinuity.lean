@@ -7,11 +7,9 @@ module
 
 public import Sheaf.Paper.CondensedFiniteFreeDerivedHom
 public import Sheaf.Paper.ContinuousIntegralCoefficients
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 import Sheaf.Paper.CondensedFiniteFreeHomContinuity
 import Sheaf.Paper.IntegralLfpLocallyFreeResolution
 import all Sheaf.CategoryTheory.HomColimitExtension
-import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 
 /-! # Hom continuity for locally finitely presented integral coefficients -/
 

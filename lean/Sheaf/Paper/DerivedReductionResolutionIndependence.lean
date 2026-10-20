@@ -5,33 +5,21 @@ Authors: SHEAF group NZ
 -/
 module
 
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Algebra.Homology.KFlat
-public import Mathlib.Algebra.Homology.HomologicalComplex
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 public import Sheaf.Algebra.Homology.MixedTensorPointwiseLeftDerived
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import Mathlib.Algebra.Homology.BifunctorShift
-public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
-import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import Mathlib.CategoryTheory.Abelian.ShortExact
 import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 /-!
 # Resolution independence of exact-sections derived reduction

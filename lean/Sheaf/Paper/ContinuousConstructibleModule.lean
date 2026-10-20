@@ -6,18 +6,8 @@ Authors: SHEAF group Q40
 module
 
 public import Sheaf.Paper.LatticeSheafLocallyConstant
-public import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
-public import Mathlib.Analysis.Normed.Field.WithAbs
-public import Mathlib.GroupTheory.Coset.Defs
-public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
-public import Mathlib.Topology.ContinuousMap.Algebra
-public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Sheaf.NumberTheory.Padics.CoefficientExtension
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Sheaf.Paper.AdicLisseModule
 public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
-public import WeilConjectures.Topology.Stratification
-public import Mathlib.Algebra.Module.FinitePresentation
 
 /-!
 # Constructible modules over continuous coefficient sheaves

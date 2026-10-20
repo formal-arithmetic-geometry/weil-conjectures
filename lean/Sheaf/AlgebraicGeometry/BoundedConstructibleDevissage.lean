@@ -6,10 +6,8 @@ Authors: SHEAF group B2
 module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Ab
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Finite truncation dévissage for constructible module objects

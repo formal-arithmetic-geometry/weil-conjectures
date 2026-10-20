@@ -9,8 +9,6 @@ public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
-public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
 import Sheaf.CategoryTheory.FilteredQuotientCanonicalFunctor
 import Sheaf.CategoryTheory.FilteredQuotientCanonicalStructure
 

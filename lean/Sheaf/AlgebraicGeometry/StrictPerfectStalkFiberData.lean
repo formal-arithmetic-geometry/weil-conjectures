@@ -7,13 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.RingTheory.RingPseudoCoherent
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 import WeilConjectures.AlgebraicGeometry.LocalStrictPerfectStalkProjectiveModel
 import Sheaf.AlgebraicGeometry.StalkFreeResidueCohomologyComparison
-import Mathlib.RingTheory.LocalRing.Module
 
 /-! # Strictly perfect stalks and derived residue cohomology
 

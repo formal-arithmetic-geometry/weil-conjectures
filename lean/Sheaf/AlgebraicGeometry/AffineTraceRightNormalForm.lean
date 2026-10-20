@@ -7,8 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineTraceConstruction
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
-import WeilConjectures.SixFunctors.Etale.Derived.Invertible
-import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
 import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
 

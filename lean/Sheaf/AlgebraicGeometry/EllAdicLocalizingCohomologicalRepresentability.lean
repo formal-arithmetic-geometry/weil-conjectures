@@ -7,8 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
 public import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
-public import Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
-public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 import Sheaf.AlgebraicGeometry.ConstructibleModuleObjectsEssentiallySmall
 import Sheaf.CategoryTheory.BoundedHomologyEssentiallySmall
 import Sheaf.CategoryTheory.CohomologicalSolutionSetRepresentability

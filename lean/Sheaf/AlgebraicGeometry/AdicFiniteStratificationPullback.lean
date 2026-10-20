@@ -5,15 +5,8 @@ Authors: SHEAF group Q25
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.CategoryTheory.FiniteTypeLocallyConstantModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
-public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-public import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import Mathlib.Algebra.Category.Ring.Colimits
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.AlgebraicGeometry.FiniteStratificationWidePullback
 import Sheaf.AlgebraicGeometry.FiniteTypeConstantModulePullback
 public import Sheaf.AlgebraicGeometry.NormalizedLocalModulePullback

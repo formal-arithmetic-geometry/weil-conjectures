@@ -6,9 +6,7 @@ Authors: SHEAF group Q139
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison
-import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
-import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Associativity of canonical finite-coefficient derived pro-etale pullback comparisons

@@ -2,14 +2,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
-public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.Paper.StrictHenselizationPointedMap
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiber
 import Sheaf.AlgebraicGeometry.StrictLocalFibreRestrictionCompatibility
 import WeilConjectures.AlgebraicGeometry.IntegralStrictHenselianGeometricFibreSections
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
-import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-! # Integral strict-local fibre comparison
 

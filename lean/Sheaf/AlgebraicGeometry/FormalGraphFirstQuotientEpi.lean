@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.FormalCompletionExact
 import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.FormalGraphDiscrepancyZero
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
 
 /-! # Reduction of a finite formal graph onto the closed fibre
 

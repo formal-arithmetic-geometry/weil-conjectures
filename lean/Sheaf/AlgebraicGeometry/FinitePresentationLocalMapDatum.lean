@@ -7,9 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
-public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Mathlib.RingTheory.Noetherian.Basic
-public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapLifts
 import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility
 

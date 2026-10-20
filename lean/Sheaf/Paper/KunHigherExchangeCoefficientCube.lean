@@ -6,13 +6,8 @@ Authors: SHEAF group NI
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-public import Mathlib.Algebra.Category.Grp.AB
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
-import Mathlib.CategoryTheory.Localization.Predicate
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyNatIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 

@@ -7,17 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.InvertibleTorsionOrders
 public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
-public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-public import Mathlib.CategoryTheory.Abelian.Basic
-public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
-public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-public import Mathlib.CategoryTheory.Limits.HasLimits
-public import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-!
 # The colimit description of invertible orders

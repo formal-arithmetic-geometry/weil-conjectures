@@ -5,16 +5,9 @@ Authors: SHEAF group NJ
 -/
 module
 
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Sheaf.Paper.RingedSiteIdeal
-public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
-public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Sheaf.CategoryTheory.LocalExtendedCechDescription
 public import Sheaf.CategoryTheory.RingedCompletionUnit
 import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
@@ -24,8 +17,6 @@ import Sheaf.Paper.FlatRingedCechBaseChange
 import Sheaf.Paper.CoefficientHomAugmentation
 import Sheaf.Paper.RestrictionLocalCompleteness
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
-import Sheaf.Paper.RestrictedCoefficientHom
 
 /-!
 # Flat ringed-site equivalence on locally derived complete objects

@@ -6,20 +6,12 @@ Authors: SHEAF group Q28
 module
 
 public import Sheaf.Paper.CondensedConstantConstructibility
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.Paper.IntegralLfpConstantModelComparison
 import Sheaf.Paper.IntegralConstructibleSerre
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import Mathlib.Algebra.Field.ULift
-import Mathlib.CategoryTheory.ObjectProperty.Kernels
-import Mathlib.CategoryTheory.ObjectProperty.Extensions
 
 /-!
 # Integral constant-model constructible heart closure

@@ -9,10 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.GlobalDerivedHom
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.Algebra.Homology.KFlatPullback
 import Sheaf.Paper.GlobalTensorPullbackKFlat
-import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.Derives
 import Sheaf.Paper.GlobalTensorPullbackTensorDescent
 
 /-! # Global ringed-space pullback comparisons

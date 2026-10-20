@@ -5,10 +5,7 @@ Authors: SHEAF group NQ
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.GeometricPointDerivedConstants
 public import Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction
-public import Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackTensorNormalization
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 
