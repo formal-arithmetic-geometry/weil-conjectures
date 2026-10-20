@@ -76,14 +76,15 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleComplexColimitBelow",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComplexColimitBelow.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleComplexColimitBelow",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleComplexColimitBelow.lean",
   "declaration": "AlgebraicGeometry.Etale.etaleComplex_colimit_below",
   "statement": "theorem etaleComplex_colimit_below {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u}) (c : Cone D) (F : ∀ i : I, CochainComplex (Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (a : ℤ) (hbelow : ∀ (i : I) (n : ℤ), n < a → IsZero ((F i).X n)) (G : Iᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (eG : ∀ i : I, G.obj (op i) ≅ ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (F i)) (L : Cocone G) (hL : IsColimit L) : ∀ n : ℤ, n < a → IsZero (L.pt.X n)",
   "branch": "sheaf-dag",
-  "by": "P3",
-  "date": "2026-10-13"
+  "by": "E8",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module in favour of the upstream twin. The declaration, signature and proof are unchanged; both current consumers already import the upstream twin. No DAG dependency is removed."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -96,14 +97,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
+  "reviewer": "C-67562",
+  "group": "E8",
   "result": "pass",
-  "landing": "20261012T184329-L-4014370",
+  "landing": "20261020T211702-L-3488563",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Retired Sheaf.AlgebraicGeometry.EtaleComplexColimitBelow against its byte-identical upstream twin WeilConjectures.AlgebraicGeometry.EtaleComplexColimitBelow (same theorem, axioms clean); zero importers of the Sheaf module; node lean record repointed with matching statement; delivered stub compiles"
  },
  "lean_audit": {
   "master": {
