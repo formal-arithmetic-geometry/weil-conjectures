@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-adic-reduction-cohomology-sequence",
+ "kind": "statement",
+ "title": "The completed DVR quotient universal-coefficient sequence",
+ "statement": "For a scheme T, a finite extension E of Q_l and every quotient exponent n+1, write B for the completed coefficient ring and phi:B→R_n for its quotient projection [def-weil-pbc-adic-coefficient-datum]. There is a monic endomorphism f of the unit B-module such that, for every unbounded B-complex K and every degree q, the scalar restriction of the canonical map H^q(K) tensor_B R_n → H^q(K tensor_B^L R_n) is the first arrow of a short exact sequence whose third object is the kernel of f tensor H^(q+1)(K). The canonical map is the ordinary adjunct of cohomology of the normalized derived scalar-extension unit. No boundedness, constructibility or flatness hypothesis on K is needed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
+  "place": "Proof steps 1 and 3: the completed uniformizer quotient resolution and its cohomology sequence.",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 051K, algebra.tex, lemma-artinian-variant-local-criterion-flatness; local Artinian module ingredient only, not the full sheaf-derived equivalence"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0539, more-algebra.tex, lemma-valuation-ring-torsion-free-flat; valuation-ring module ingredient only, not the full equivalence"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pc-flat-sheaf-modules",
+  "prop-weil-pbc-levelwise-truncations",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Let pi be the chosen DVR uniformizer. The exact sequence of ordinary valuation-ring modules 0→A→A→A/(pi^(n+1))→0, whose first map is multiplication by pi^(n+1), remains exact after constant sheafification. The completed constant sheaf is flat over the constant coefficient ring and its ordinary quotient is the actual finite coefficient sheaf. Thus it gives the monic unit endomorphism f and a two-term free B-resolution of R_n.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a flat-term K-flat representative of the arbitrary complex K. Tensor it with the two-term quotient resolution, which is itself K-flat. Its mapping-cone triangle computes scalar restriction of derived quotient extension. Apply the homology long exact sequence to get the exact cokernel-to-cohomology-to-kernel short exact sequence. The last object is the kernel of f tensored with H^(q+1)(K), with no flatness assumption on that cohomology.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Right exactness of ordinary scalar extension identifies the cokernel with the restricted ordinary extension of H^q(K). On a K-flat cocycle its arrow is z↦z tensor 1, so the normalization of the scalar adjunction identifies it with the displayed canonical map. This yields the asserted delta, zero-composite equality and short exactness in every degree.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
+  "place": "Proof steps 1 and 3: the completed uniformizer quotient resolution and its cohomology sequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a complex with flat cohomology, cohomology commutes with derived scalar extension and the resulting cohomology is flat",
+   "results": "Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Algebra.FormallyUnramified.flat_of_restrictScalars, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.isBaseChange, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.of_flat_tensorProduct",
+   "date": "2026-10-19",
+   "verdict": "No exact sheaf-derived statement; only general module flatness tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Function.Injective",
+   "results": "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right, TensorProduct.nontrivial_of_linearMap_injective_of_flat_left, TensorProduct.nontrivial_of_linearMap_injective_of_flat_right, Algebra.TensorProduct.includeRight_injective, Algebra.TensorProduct.includeLeft_injective, Module.Flat.lTensor_preserves_injective_linearMap, Module.Flat.rTensor_preserves_injective_linearMap",
+   "date": "2026-10-19",
+   "verdict": "No exact sheaf-derived statement; only general module flatness tools."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Ff]lat|[Ff]lat.*homology",
+   "results": "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact sheaf-derived statement; only general module flatness tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology commutes with derived quotient extension for a complex whose cohomology sheaves are flat",
+   "results": "Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; DerivedCategory.quotientCompQhIso; HasDerivedCategory.standard. No completed sheaf quotient cohomology criterion.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicTorFlatCohomology",
+  "date": "2026-10-20",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-integral-truncations",
+   "place": "Proof steps 1 and 3: the completed uniformizer quotient resolution and its cohomology sequence.",
+   "via": [
+    "lem-weil-pbc-adic-tor-flat-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReductionCohomologySequence",
+  "file": "lean/Sheaf/Paper/AdicReductionCohomologySequence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_adic_reduction_cohomology_sequence",
+  "statement": "theorem pbc_adic_reduction_cohomology_sequence\n    (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :\n    let d := pbcPadicCoefficientDatum l E\n    let B := pbcAdicCompletion T d\n    let φ := pbcAdicProjection T d n\n    let O := SheafOfModules.unit ((adicLisseForget T).obj B)\n    ∃ f : O ⟶ O, Mono f ∧\n      ∀ (K : PbcCompletedDerived T d) (q : ℤ),\n        let H := (DerivedCategory.homologyFunctor _ (q + 1)).obj K\n        let c := ((pbcScalarAdjunction φ).homEquiv _ _).symm\n          ((DerivedCategory.homologyFunctor _ q).map\n              ((pbcDerivedScalarAdjunction φ).unit.app K) ≫\n            ((pbcRestrict φ).mapDerivedCategoryHomologyFunctorIso q).inv.app\n              ((pbcDerivedExtend φ).obj K))\n        ∃ δ : (pbcRestrict φ).obj\n            ((DerivedCategory.homologyFunctor _ q).obj ((pbcDerivedExtend φ).obj K)) ⟶\n            kernel ((SheafOfModules.siteSheafTensorRight\n              (J := ProEt.topology T) (A := B) H).map f),\n          ∃ h : (pbcRestrict φ).map c ≫ δ = 0,\n            (ShortComplex.mk ((pbcRestrict φ).map c) δ h).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-20"
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261020T051503-L-1695358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261020T051503-L-1695358",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

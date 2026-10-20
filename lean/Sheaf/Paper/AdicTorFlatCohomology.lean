@@ -13,40 +13,12 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Paper.LevelwiseAdicTruncations
 public import Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Paper.AdicLisseModule
-import Sheaf.Paper.RefinementCoefficientRealization
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
-import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.CategoryTheory.SequentialTowerEvaluationFull
-import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
-import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
-import Sheaf.Paper.TorsionLimitSheafCompleteness
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.Paper.KoszulReconstruction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.Paper.AdicReductionCohomologySequence
+import Sheaf.Paper.AdicTorFlatCriterion
+import Sheaf.Paper.AdicSuppliedModelFlatCriterion
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
 
 /-!
 # Higher Tor and flat cohomology for complete integral coefficients
@@ -90,6 +62,106 @@ def pbcCohomologyScalarExtension
       ((pbcRestrict φ).mapDerivedCategoryHomologyFunctorIso q).inv.app
         ((pbcDerivedExtend φ).obj K))
 
+private theorem pbcExtend_flat
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (M : pbcModules T R) (hM : SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := R) M) :
+    SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := S)
+      ((pbcExtend φ).obj M) := by
+  let R' := (adicLisseForget T).obj R
+  let S' := (adicLisseForget T).obj S
+  let N := SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
+    (J := ProEt.topology T) φ M
+  obtain ⟨e⟩ := SheafOfModules.nonempty_scalarTensorComparisonOfUniverses.{u + 1, u, u + 1, u + 1}
+    (J := ProEt.topology T) φ M
+  have : PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight
+      (J := ProEt.topology T) (A := R) M) := hM.1
+  have : PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight
+      (J := ProEt.topology T) (A := R) M) := hM.2
+  have : PreservesFiniteLimits
+      (pbcRestrict φ ⋙ SheafOfModules.siteSheafTensorRight
+      (J := ProEt.topology T) (A := R) M ⋙
+        SheafOfModules.toSheaf R') := inferInstance
+  have : PreservesFiniteColimits
+      (pbcRestrict φ ⋙ SheafOfModules.siteSheafTensorRight
+      (J := ProEt.topology T) (A := R) M ⋙
+        SheafOfModules.toSheaf R') := inferInstance
+  have : PreservesFiniteLimits
+      (SheafOfModules.siteSheafTensorRight
+      (J := ProEt.topology T) (A := S) N ⋙ SheafOfModules.toSheaf S') :=
+    preservesFiniteLimits_of_natIso e
+  have : PreservesFiniteColimits
+      (SheafOfModules.siteSheafTensorRight
+      (J := ProEt.topology T) (A := S) N ⋙ SheafOfModules.toSheaf S') :=
+    preservesFiniteColimits_of_natIso e
+  have : ReflectsFiniteColimits (SheafOfModules.toSheaf.{u + 1} S') := inferInstance
+  have hN : SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := S) N :=
+    ⟨preservesFiniteLimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf S'),
+      preservesFiniteColimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf S')⟩
+  have hobj := (pbcExtensionExistence φ).choose_spec.choose M
+  exact hobj.symm ▸ hN
+
+private theorem pbcFlat_of_iso
+    {R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    {M N : pbcModules T R} (e : M ≅ N)
+    (h : SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := R) M) :
+    SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := R) N := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients.{u + 1, u, u + 1} R
+  let tensor : MonoidalCategory (pbcModules T R) :=
+    SheafOfModules.monoidalCategory.{u, u + 1, u + 1} R
+  let e₁ := SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1} R M
+  let e₂ := SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1} R N
+  let e₃ := (@MonoidalCategory.curriedTensor (pbcModules T R) _ tensor).flip.mapIso e
+  exact (CategoryTheory.exactFunctor _ _).prop_of_iso (e₁ ≪≫ e₃ ≪≫ e₂.symm) h
+
+private theorem pbcFlat_zero (T : Scheme.{u}) {R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (M : pbcModules T R) (hM : IsZero M) :
+    SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := R) M := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients.{u + 1, u, u + 1} R
+  let := SheafOfModules.monoidalCategory.{u, u + 1, u + 1} R
+  let := SheafOfModules.tensorPreadditive R
+  apply (exactFunctor _ _).prop_of_iso (SheafOfModules.siteSheafTensorRightIso R M).symm
+  have hz : IsZero (MonoidalCategory.tensorRight M) := by
+    rw [Functor.isZero_iff]
+    intro N
+    exact (MonoidalCategory.tensorLeft N).map_isZero hM
+  exact ⟨⟨fun _ _ _ ↦ (MonoidalCategory.tensorRight M).preservesLimitsOfShape_of_isZero hz _⟩,
+    ⟨fun _ _ _ ↦ (MonoidalCategory.tensorRight M).preservesColimitsOfShape_of_isZero hz _⟩⟩
+private theorem pbcFlat_single_kflat (T : Scheme.{u})
+    {R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (M : pbcModules T R)
+    (hM : SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := R) M) :
+    CochainComplex.IsKFlatIndependentCoefficients (J := ProEt.topology T) (R := R)
+      ((CochainComplex.singleFunctor _ 0).obj M) := by
+  classical
+  apply SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
+    R ((CochainComplex.singleFunctor _ 0).obj M) 0
+  intro i
+  by_cases hi : i = 0
+  · subst i
+    simpa only [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      HomologicalComplex.single_obj_X_self] using hM
+  · exact pbcFlat_zero T _ (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi)
+private theorem pbcFlat_scalar_single (T : Scheme.{u})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (M : pbcModules T R)
+    (hM : SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := R) M)
+    (i : ℤ) (hi : i < 0) :
+    IsZero ((DerivedCategory.homologyFunctor _ i).obj
+      ((pbcDerivedExtend φ).obj ((DerivedCategory.singleFunctor _ 0).obj M))) := by
+  let P := (CochainComplex.singleFunctor _ 0).obj M
+  have hk := pbcFlat_single_kflat T M hM
+  have : IsIso ((pbcExtensionCounit φ).app ((HomotopyCategory.quotient _ _).obj P)) :=
+    pbcExtensionCounit_isIso φ P hk
+  let e₁ := (pbcDerivedExtend φ).mapIso ((DerivedCategory.singleFunctorIsoCompQ _ 0).app M)
+  let e₂ := asIso ((pbcExtensionCounit φ).app ((HomotopyCategory.quotient _ _).obj P))
+  let e₃ := DerivedCategory.Q.mapIso
+    ((HomologicalComplex.singleMapHomologicalComplex (pbcExtend φ) (.up ℤ) 0).app M)
+  let e := e₁ ≪≫ e₂ ≪≫ e₃
+  have hz := DerivedCategory.isZero_of_isGE
+    (DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj
+      ((pbcExtend φ).obj M))) 0 i hi
+  exact hz.of_iso ((DerivedCategory.homologyFunctor _ i).mapIso e)
+
 /-- Flatness of cohomology on every supplied system of common local models of the
 canonical reduction tower. The bounds, stratification, covering sieves and all their
 models are supplied together, exactly as in the uniform-constructibility definition.
@@ -111,6 +183,60 @@ def PbcSuppliedModelCohomologyFlat (K : PbcCompletedDerived T d) : Prop :=
 
 variable (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+
+/-- Under the equivalent conditions, the canonical cohomology reduction map is an
+isomorphism and the reduced cohomology is flat over its own quotient coefficient sheaf.
+Source: blueprint integral truncations, hypothesis paragraph
+(blueprint: lem-weil-pbc-adic-tor-flat-cohomology).
+Proof: steps 3 and 4 of this node's proof. Resolve the quotient sheaf by multiplication
+by the uniformizer power. The cohomology long exact sequence identifies the cokernel
+with reduced cohomology because flatness kills the next cohomology's power-torsion.
+The first arrow sends a cocycle z to z tensor 1, so it is precisely the adjunct of the
+derived tensor unit used in pbcCohomologyScalarExtension. Its scalar-extension source
+is the ordinary tensor. Balancing shows scalar extension preserves flatness; transfer
+this flatness across the canonical isomorphism. -/
+theorem pbc_adic_flat_cohomology_reduction
+    [IsNoetherian T] (_hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n)
+    (_hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
+    (K : PbcBoundedConstructibleComplete T (pbcPadicCoefficientDatum l E))
+    (_hflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology T)
+      (R := pbcAdicCompletion T (pbcPadicCoefficientDatum l E))
+      ((DerivedCategory.homologyFunctor _ q).obj K.obj)) :
+    ∀ (n : ℕ) (q : ℤ),
+      IsIso (pbcCohomologyScalarExtension T
+        (pbcAdicProjection T (pbcPadicCoefficientDatum l E) n) K.obj q) ∧
+      SheafOfModules.IsFlatOnSite (J := ProEt.topology T)
+        (R := (pbcAdicRings T (pbcPadicCoefficientDatum l E)).obj (op n))
+        ((DerivedCategory.homologyFunctor _ q).obj
+          ((pbcCompletedReduction T (pbcPadicCoefficientDatum l E) n).obj K.obj)) := by
+  intro n q
+  let d := pbcPadicCoefficientDatum l E
+  let B := pbcAdicCompletion T d
+  let S := (pbcAdicRings T d).obj (op n)
+  let φ := pbcAdicProjection T d n
+  let c := pbcCohomologyScalarExtension T φ K.obj q
+  obtain ⟨f, hf, hseq⟩ := pbc_adic_reduction_cohomology_sequence T l E n
+  obtain ⟨δ, hδ, hs⟩ := hseq K.obj q
+  let H := (DerivedCategory.homologyFunctor _ (q + 1)).obj K.obj
+  have : Mono f := hf
+  have : PreservesFiniteLimits
+      (SheafOfModules.siteSheafTensorRight (J := ProEt.topology T) (A := B) H) :=
+    (_hflat (q + 1)).1
+  have : Mono ((SheafOfModules.siteSheafTensorRight
+      (J := ProEt.topology T) (A := B) H).map f) := inferInstance
+  have hc : IsIso ((pbcRestrict φ).map c) :=
+    hs.isIso_f_iff.mpr (isZero_kernel_of_mono _)
+  have : IsIso ((SheafOfModules.toSheaf ((adicLisseForget T).obj B)).map
+      ((pbcRestrict φ).map c)) := inferInstance
+  have hc' : IsIso c := by
+    have : IsIso ((SheafOfModules.toSheaf ((adicLisseForget T).obj S)).map c) :=
+      inferInstanceAs (IsIso ((SheafOfModules.toSheaf ((adicLisseForget T).obj B)).map
+        ((pbcRestrict φ).map c)))
+    exact isIso_of_reflects_iso c (SheafOfModules.toSheaf ((adicLisseForget T).obj S))
+  refine ⟨hc', ?_⟩
+  have hflatS := pbcFlat_of_iso T (asIso c) (pbcExtend_flat T φ
+    ((DerivedCategory.homologyFunctor _ q).obj K.obj) (_hflat q))
+  exact hflatS
 
 /-- All-cutoff higher Tor, ambient flat cohomology and flat cohomology of every supplied
 common local model are equivalent. Source: blueprint integral truncations, hypothesis
@@ -157,33 +283,15 @@ theorem pbc_adic_tor_flat_cohomology
         (R := pbcAdicCompletion T (pbcPadicCoefficientDatum l E))
         ((DerivedCategory.homologyFunctor _ q).obj K.obj)) ↔
       PbcSuppliedModelCohomologyFlat T (pbcPadicCoefficientDatum l E) K.obj) := by
-  sorry
-
-/-- Under the equivalent conditions, the canonical cohomology reduction map is an
-isomorphism and the reduced cohomology is flat over its own quotient coefficient sheaf.
-Source: blueprint integral truncations, hypothesis paragraph
-(blueprint: lem-weil-pbc-adic-tor-flat-cohomology).
-Proof: steps 3 and 4 of this node's proof. Resolve the quotient sheaf by multiplication
-by the uniformizer power. The cohomology long exact sequence identifies the cokernel
-with reduced cohomology because flatness kills the next cohomology's power-torsion.
-The first arrow sends a cocycle z to z tensor 1, so it is precisely the adjunct of the
-derived tensor unit used in pbcCohomologyScalarExtension. Its scalar-extension source
-is the ordinary tensor. Balancing shows scalar extension preserves flatness; transfer
-this flatness across the canonical isomorphism. -/
-theorem pbc_adic_flat_cohomology_reduction
-    [IsNoetherian T] (_hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n)
-    (_hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
-    (K : PbcBoundedConstructibleComplete T (pbcPadicCoefficientDatum l E))
-    (_hflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology T)
-      (R := pbcAdicCompletion T (pbcPadicCoefficientDatum l E))
-      ((DerivedCategory.homologyFunctor _ q).obj K.obj)) :
-    ∀ (n : ℕ) (q : ℤ),
-      IsIso (pbcCohomologyScalarExtension T
-        (pbcAdicProjection T (pbcPadicCoefficientDatum l E) n) K.obj q) ∧
-      SheafOfModules.IsFlatOnSite (J := ProEt.topology T)
-        (R := (pbcAdicRings T (pbcPadicCoefficientDatum l E)).obj (op n))
-        ((DerivedCategory.homologyFunctor _ q).obj
-          ((pbcCompletedReduction T (pbcPadicCoefficientDatum l E) n).obj K.obj)) := by
-  sorry
+  constructor
+  · constructor
+    · exact pbc_adic_tor_implies_flat_cohomology T _hdim l E _hl K
+    · intro hflat m n q _hq p hp
+      have hred := pbc_adic_flat_cohomology_reduction T l E _hdim _hl K hflat
+        (n + 1) q
+      exact pbcFlat_scalar_single T
+        (pbcAdicQuotient T (pbcPadicCoefficientDatum l E) (n + 1) n (Nat.le_succ n))
+        _ hred.2 (-(p : ℤ)) (by omega)
+  · exact pbc_adic_flat_iff_supplied_model_flat T _hdim l E _hl K
 
 end AlgebraicGeometry.Scheme
