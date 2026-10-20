@@ -18740,3 +18740,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:34 L: returned deliver/NA/lem-weil-pbc-residue-perfect-finite-quotient-models (reviewer RETURN: L: independent stage-2 immutable head 2dd095d4d936: H4: rebased re-delivery (Lean byte-identical to the PASSed 5464e50d))
 - 17:39 L: merged deliver/ND/lem-trf-derived-evaluation-pseudocoherent (stage 2; reviewer PASS; parallel immutable checks)
 - 17:46 L: merged deliver/NC/lem-coef-rational-bidual-triangle-compatibility (stage 2; reviewer PASS; parallel immutable checks)
+- 17:47 L: returned deliver/B9/Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants (reviewer RETURN: (the landing tools, head e349e7f57) the delivery did not land: (d) Sheaf.AlgebraicGeometry.BaseFieldCohomologicalDimensi)
