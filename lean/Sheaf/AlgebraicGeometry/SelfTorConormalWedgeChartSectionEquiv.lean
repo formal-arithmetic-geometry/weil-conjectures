@@ -3,13 +3,25 @@ public import WeilConjectures.AlgebraicGeometry.SelfTorAffineSection
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.AffineConormalSections
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit
 import WeilConjectures.AlgebraicGeometry.SelfTorConormalExteriorSectionModel
 @[expose] public section
 set_option autoImplicit false
 universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorSheafPresheaf_eq_upstream {X : Scheme.{u}} (M : X.Modules) (n : ℕ) :
+    Scheme.Modules.exteriorSheafPresheaf M n =
+      _root_.PresheafOfModules.exteriorPower (R := X.presheaf) M.val n := by
+  unfold Scheme.Modules.exteriorSheafPresheaf PresheafOfModules.exteriorPower
+  congr 1
+  funext U V f
+  apply ((Classical.choose_spec
+    (Scheme.Modules.exteriorSheafRestriction_existsUnique M n f)).2 _ ?_).symm
+  exact PresheafOfModules.exteriorPower_map_ιMulti M.val n f
+
 /-- The affine section calculation underlying the conormal wedge chart.
 Source: Stacks Project, Tags 01R3 (conormal), 01I6 (exterior powers and
 affine pullback), and 0096 (canonical pullback unit).
@@ -61,7 +73,13 @@ theorem exists_selfTor_conormal_wedge_chart_section_equiv
   let e₁ : (⋀[Z.presheaf.obj (op V.1)]^n (N.val.obj (op V.1))) ≃ₗ[
       Z.presheaf.obj (op V.1)] (Scheme.Modules.exteriorSheaf N n).val.obj (op V.1) :=
     LinearEquiv.ofBijective η.hom
-    (Scheme.Modules.exteriorSheaf_affine_unit_bijective N n V)
+      (by
+        change Function.Bijective
+          (((PresheafOfModules.sheafificationAdjunction.{u}
+            (𝟙 Z.ringCatSheaf.obj)).unit.app
+              (Scheme.Modules.exteriorSheafPresheaf N n)).app (op V.1))
+        rw [exteriorSheafPresheaf_eq_upstream]
+        exact Scheme.Modules.exteriorSheaf_affine_unit_bijective N n V)
   obtain ⟨e₂, h₂⟩ := exists_selfTor_conormal_exterior_section_model i n U
   refine ⟨e₁.symm.trans e₂, ?_⟩
   intro b

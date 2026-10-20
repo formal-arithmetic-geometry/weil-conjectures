@@ -25,10 +25,11 @@
    "elementary": false
   },
   {
-   "text": "The canonical exterior sheafification unit is bijective on W and D(f), since both are affine and M is quasi-coherent. For a section on D(f), lift across this unit and use localization surjectivity to obtain an extending power multiple on W. Naturality of the unit identifies its restriction with the desired power multiple. For a section on W whose restriction vanishes, lift across the unit on W, use injectivity of the unit on D(f), and apply the localization zero criterion to obtain a killing power. Linearity of the unit transports that equation back to the exterior sheaf.",
+   "text": "Identify exteriorSheafPresheaf with PresheafOfModules.exteriorPower: the object modules coincide and exteriorSheafRestriction_existsUnique identifies their restriction maps, using the upstream pure-wedge formula. Transport the upstream affine-unit bijectivity theorem through this equality. The canonical exterior sheafification unit is bijective on W and D(f), since both are affine and M is quasi-coherent. For a section on D(f), lift across this unit and use localization surjectivity to obtain an extending power multiple on W. Naturality of the unit identifies its restriction with the desired power multiple. For a section on W whose restriction vanishes, lift across the unit on W, use injectivity of the unit on D(f), and apply the localization zero criterion to obtain a killing power. Linearity of the unit transports that equation back to the exterior sheaf.",
    "uses": [
     "new-q1-exterior-sheaf-affine-unit-bijective",
-    "new-v2-generic-exterior-power-localization"
+    "new-v2-generic-exterior-power-localization",
+    "def-sc-sheaf-exterior-power"
    ],
    "elementary": true
   },
@@ -48,11 +49,11 @@
   "pqf-lem-qcoh-principal-open-criterion"
  ],
  "proof_origin": {
-  "by": "worker",
-  "agent": "V2",
-  "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/01I6",
-  "place": "Lemma 26.7.2(2), via the principal-open localization criterion and the existing exterior sheafification-unit theorem."
+  "by": "agent",
+  "group": "E7",
+  "date": "2026-10-20",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafAffineUnit.lean",
+  "place": "Retirement adaptation: canonical exterior-presheaf equality and upstream affine-unit theorem; the remaining existing proof is preserved."
  },
  "mathlib_searches": [
   {
@@ -151,13 +152,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "C-863a2",
+  "group": "E7",
   "result": "pass",
-  "landing": "20261014T013049-L-3419307",
+  "landing": "20261020T151216-L-2647231",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf twin ExteriorSheafAffineUnit vs upstream WeilConjectures twin (node lean.statement verbatim upstream, existing:true); both adapted consumers + next-level importers compiled; axioms clean"
  }
 }

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit
 import WeilConjectures.LinearAlgebra.GenericExteriorPowerLocalization
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
@@ -22,6 +22,17 @@ set_option autoImplicit false
 universe u
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorSheafPresheaf_eq_upstream {X : Scheme.{u}} (M : X.Modules) (n : ℕ) :
+    Scheme.Modules.exteriorSheafPresheaf M n =
+      _root_.PresheafOfModules.exteriorPower (R := X.presheaf) M.val n := by
+  unfold Scheme.Modules.exteriorSheafPresheaf PresheafOfModules.exteriorPower
+  congr 1
+  funext U V f
+  apply ((Classical.choose_spec
+    (Scheme.Modules.exteriorSheafRestriction_existsUnique M n f)).2 _ ?_).symm
+  exact PresheafOfModules.exteriorPower_map_ιMulti M.val n f
 
 /-- Exterior powers of a quasi-coherent module on an affine scheme are quasi-coherent.
 
@@ -42,6 +53,13 @@ the localization theorem also includes degree zero and the zero ring.
 theorem isQuasicoherent_exteriorSheaf_of_isAffine {X : Scheme.{u}} [IsAffine X]
     (M : X.Modules) [M.IsQuasicoherent] (n : ℕ) :
     (exteriorSheaf M n).IsQuasicoherent := open CategoryTheory Opposite in by
+  have hunit (V : X.affineOpens) :
+      Function.Bijective
+        (((PresheafOfModules.sheafificationAdjunction.{u}
+          (CategoryTheory.CategoryStruct.id X.ringCatSheaf.obj)).unit.app
+          (exteriorSheafPresheaf M n)).app (op V.1)) := by
+    rw [exteriorSheafPresheaf_eq_upstream]
+    exact exteriorSheaf_affine_unit_bijective M n V
   let E := exteriorSheaf M n
   let P := exteriorSheafPresheaf M n
   let η := ((PresheafOfModules.sheafificationAdjunction.{u}
@@ -69,8 +87,7 @@ theorem isQuasicoherent_exteriorSheaf_of_isAffine {X : Scheme.{u}} [IsAffine X]
       (exteriorSheafRestriction_existsUnique M n (homOfLE (X.basicOpen_le f)).op)).1 a
   apply isQuasicoherent_of_forall_isAffineOpen E
   · intro W hW f s
-    obtain ⟨s', hs'⟩ := (exteriorSheaf_affine_unit_bijective M n
-      ⟨X.basicOpen f, hW.basicOpen f⟩).2 s
+    obtain ⟨s', hs'⟩ := (hunit ⟨X.basicOpen f, hW.basicOpen f⟩).2 s
     let : Module Γ(X, W) (P.obj (op (X.basicOpen f))) :=
       Module.compHom _ (algebraMap Γ(X, W) Γ(X, X.basicOpen f))
     have := hloc W hW f
@@ -87,13 +104,12 @@ theorem isQuasicoherent_exteriorSheaf_of_isAffine {X : Scheme.{u}} [IsAffine X]
       ((X.presheaf.map (homOfLE (X.basicOpen_le f)).op (f ^ k)) • s') = _
     rw [map_pow, (η.app (op (X.basicOpen f))).hom.map_smul, hs']
   · intro W hW f t ht
-    obtain ⟨t', ht'⟩ := (exteriorSheaf_affine_unit_bijective M n ⟨W, hW⟩).2 t
+    obtain ⟨t', ht'⟩ := (hunit ⟨W, hW⟩).2 t
     let : Module Γ(X, W) (P.obj (op (X.basicOpen f))) :=
       Module.compHom _ (algebraMap Γ(X, W) Γ(X, X.basicOpen f))
     have := hloc W hW f
     have hz : (P.map (homOfLE (X.basicOpen_le f)).op).hom t' = 0 := by
-      apply (exteriorSheaf_affine_unit_bijective M n
-        ⟨X.basicOpen f, hW.basicOpen f⟩).1
+      apply (hunit ⟨X.basicOpen f, hW.basicOpen f⟩).1
       rw [map_zero]
       erw [PresheafOfModules.naturality_apply η
         (homOfLE (X.basicOpen_le f)).op t']

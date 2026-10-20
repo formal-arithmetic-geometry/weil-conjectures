@@ -22,7 +22,7 @@
    "elementary": false
   },
   {
-   "text": "Apply exteriorPower.isLocalizedModule_of_wedge to this module localization. The defining pure-wedge equation of exteriorSheafRestriction_existsUnique supplies its map-compatibility hypothesis. Thus all principal restrictions of exteriorSheafPresheaf M n are localizations.",
+   "text": "Apply exteriorPower.isLocalizedModule_of_wedge to this module localization. PresheafOfModules.exteriorPower_map_ιMulti supplies the pure-wedge map-compatibility hypothesis. Thus all principal restrictions of the canonical exterior presheaf are localizations. The old exteriorSheafPresheaf is equal to this presheaf: its objects are definitionally equal, and its restrictions agree by exteriorSheafRestriction_existsUnique. The consumers prove this equality privately before transporting the upstream unit theorem.",
    "uses": [
     "new-v2-exterior-power-localization",
     "def-sc-sheaf-exterior-power"
@@ -45,10 +45,11 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "V2",
-  "date": "2026-10-14",
-  "document": "Stacks Project, Tags 01I8, 01IA, 01HV and 009Q; existing affine localizing presheaf theorem",
-  "place": "Realize the principal-open localization argument by the general affine-localizing sheafification theorem, with the algebraic exterior-localization step isolated."
+  "group": "E7",
+  "date": "2026-10-20",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafAffineUnit.lean",
+  "place": "exteriorSheaf_affine_unit_bijective",
+  "note": "Retirement of the duplicate Sheaf module. The upstream proof preserves the principal-localization route, and each consumer transports it through the proved equality of exterior presheaves."
  },
  "mathlib_searches": [
   {
@@ -124,14 +125,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafAffineUnit.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafAffineUnit.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_affine_unit_bijective",
-  "statement": "theorem exteriorSheaf_affine_unit_bijective {X : Scheme.{u}} (M : X.Modules)\n    [M.IsQuasicoherent] (n : ℕ) (U : X.affineOpens) :\n    Function.Bijective\n      (((PresheafOfModules.sheafificationAdjunction.{u} (𝟙 X.ringCatSheaf.obj)).unit.app\n        (exteriorSheafPresheaf M n)).app (op U.1))",
+  "statement": "theorem exteriorSheaf_affine_unit_bijective {X : Scheme.{u}} (M : X.Modules)\n    [M.IsQuasicoherent] (n : ℕ) (U : X.affineOpens) :\n    Function.Bijective\n      (((PresheafOfModules.sheafificationAdjunction.{u} (𝟙 X.ringCatSheaf.obj)).unit.app\n        (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).app (op U.1))",
   "branch": "sheaf-dag",
-  "by": "Q1",
-  "date": "2026-10-14"
+  "by": "E7",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf copy in favor of its upstream twin. The two consumers prove equality of the old and upstream exterior presheaves by uniqueness on pure wedges, so their existing statements are preserved."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -144,14 +146,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "C-863a2",
+  "group": "E7",
   "result": "pass",
-  "landing": "20261014T010856-L-3168988",
+  "landing": "20261020T151216-L-2647231",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf twin ExteriorSheafAffineUnit vs upstream WeilConjectures twin (node lean.statement verbatim upstream, existing:true); both adapted consumers + next-level importers compiled; axioms clean"
  },
  "lean_audit": {
   "master": {
