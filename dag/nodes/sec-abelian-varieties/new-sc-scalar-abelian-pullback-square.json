@@ -108,14 +108,15 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ScalarAbelianPullbackSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/ScalarAbelianPullbackSquare.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ScalarAbelianPullbackSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ScalarAbelianPullbackSquare.lean",
   "declaration": "AlgebraicGeometry.Scheme.scalar_abelian_pullback_square",
   "statement": "theorem scalar_abelian_pullback_square (k : Type u) [Field k]\n    {X Y : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))\n    (g : Y ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (h : a ≫ f = g) :\n    ∃ c : scalarInverseImage (k := k) a ⋙ scalarAbelianForget k Y ≅\n        scalarAbelianForget k X ⋙ scalarAbelianInverseImage a,\n      ((scalarAbelianUnitClass k Y).comp\n        (Abelian.Ext.mk₀ ((scalarAbelianForget k Y).map (scalarInverseUnitIso a).inv))\n        rfl).comp\n          (Abelian.Ext.mk₀ (c.hom.app (𝟙_ (KSheaf X k)))) rfl =\n        (Abelian.Ext.mk₀ (scalarAbelianIntegerIso a).hom).comp\n          ((scalarAbelianUnitClass k X).mapExactFunctor (scalarAbelianInverseImage a))\n          rfl ∧\n      (scalarAbelianForget k Y).map\n          (scalarPullbackCoefficient f g a h (SheafOfModules.unit X.ringCatSheaf) ≫\n            scalarHom g (tensorPullbackObjUnitToUnit a)) =\n        c.hom.app (scalarSheaf f (SheafOfModules.unit X.ringCatSheaf)) ≫\n          scalarAbelianStructureCoefficient a",
   "branch": "sheaf-dag",
   "by": "X3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "Retired the Sheaf copy in favor of its official WeilConjectures twin (human instruction, 2026-10-20); statement and declaration name agree."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -128,14 +129,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-29b3c",
-  "group": "S4",
+  "reviewer": "C-91aed",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T130752-L-3986965",
+  "landing": "20261020T164229-L-3891259",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three DAG nodes; existing signatures unchanged, all delivered modules and the sole direct importer compile, and axiom checks match the documented remaining obligation."
+  "note": "independent cc review: Withdrawn Sheaf copy vs WeilConjectures twin (identical declarations and proofs, only header/local-instance name differ); both node lean pointers vs twin signatures and the C-15179 instructions; no importers of the Sheaf module; empty file compiles; twin axioms clean"
  },
  "lean_audit": {
   "master": {
