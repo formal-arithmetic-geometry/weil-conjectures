@@ -19140,3 +19140,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:27 L: returned deliver/A3/Sheaf.AlgebraicGeometry.NoetherianGlobalConstructibility (reviewer RETURN: (reviewer C-98ce9, head 98ce9c17e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.No)
 - 23:30 L: returned deliver/C1/Sheaf.CategoryTheory.FilteredCohomologyImage (reviewer RETURN: (the landing tools, head e17a2ae81) the delivery did not land: (d) user Sheaf.CategoryTheory.CartanEilenbergComparisonIn)
 - 23:30 L: returned deliver/F5/Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget (reviewer RETURN: (the landing tools, head c8fdbc60b) the delivery did not land: lean/Sheaf/AlgebraicGeometry/ProjectiveLineConstructible.)
+- 23:30 L: returned deliver/Z6/Sheaf.CategoryTheory.RingedSiteDualityMaps (reviewer RETURN: (the landing tools, head 793a42702) the delivery did not land: (d) user Sheaf.Algebra.Homology.RingedSliceEvaluationMode)
