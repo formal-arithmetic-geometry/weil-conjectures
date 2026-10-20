@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-normalized-local-module-pullback",
+ "kind": "statement",
+ "title": "Chosen local module isomorphisms transport uniquely with adjunction-unit normalization",
+ "statement": "Let $C,D$ be small sites with finite limits [def-weil-pbc-sites-and-cohomology], topologies $J,K$, and a continuous finite-limit-preserving functor $F:C\\to D$. Let $R,S$ be ring sheaves, $\\rho:R\\to F_*S$, and use the existing module inverse-image adjunction [def-weil-sheaf-of-modules-category]. Let $A,G$ be $R$-module sheaves, $B,P$ be $S$-module sheaves, $c:F^*A\\simeq B$, $b:P\\simeq F^*G$, $V\\in C$, and $e:G|_V\\simeq A|_V$ on the localized site [def-pur-localized-ringed-site]. There is a unique isomorphism $d:P|_{F(V)}\\simeq B|_{F(V)}$ such that for every $W\\to V$ and $x\\in G(W)$, $d(b^{-1}(\\eta_G(x)))=\\operatorname{adj}(c)(e(x))$ on $F(W)\\to F(V)$, where $\\eta$ is the specified module pullback unit. No condition of commutativity, finiteness, or constant coefficients is needed for the ring sheaves.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, and Tag 093R; the finite-limit-preserving site-functor specialization, with normalized module mate"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Let F_V be Over.post F at V and restrict rho componentwise to define its scalar map. Continuity follows from covering preservation and flatness, since F_V preserves finite limits. Product preservation identifies F followed by Over.star(F V) with Over.star V followed by F_V. The product comparison and naturality of rho give an isomorphism between the two module direct-image composites.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, and Tag 093R; the finite-limit-preserving site-functor specialization, with normalized module mate"
+   }
+  },
+  {
+   "text": "Compose the inverse-image adjunction with restriction/right-extension adjunctions, transport its right adjoint through this direct-image isomorphism, and cancel the restriction adjunction on the source. This gives a bijection Hom((F*G)|F(V),Q) = Hom(G|V,(F_V)*Q), natural in Q. Expand the units and counit: at W the resulting map sends x to z(eta_G(x)); the product-comparison projection equations and naturality cancel the auxiliary product restriction. Keep this hom equivalence irreducible and use its sectionwise computation and naturality lemmas as the proof API, preventing repeated expansion of the composed adjunctions.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, and Tag 093R; the finite-limit-preserving site-functor specialization, with normalized module mate"
+   }
+  },
+  {
+   "text": "Under this bijection let z correspond to e followed by the image of c|F(V). Precomposition by z is bijective on Hom into every Q, because both hom equivalences and precomposition by e and c are bijective. The coyoneda criterion makes z an isomorphism. Conjugate by b|F(V) to get d. The computed unit formula gives normalization, and injectivity of the hom equivalence gives uniqueness. The normalized equation is named NormalizedLocalModuleTrivialization and reused verbatim by the scheme-site specialization, preventing repeated scalar-restriction expansion.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, and Tag 093R; the finite-limit-preserving site-functor specialization, with normalized module mate"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, and Tag 093R; the finite-limit-preserving site-functor specialization, with normalized module mate; explicit Mathlib adjunction and limit proof by M5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of modules commutes with restriction to slice sites",
+   "results": "{\"t\": \"2026-10-19T08:04:19Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of sheaves of modules commutes with restriction to slice sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"ModuleCat.Tilde.res_apply\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"SheafOfModules.over\"], \"digest\": \"5cb1b40861edf6ae\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not state this result with these hypotheses and conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"over\"",
+   "results": "{\"t\": \"2026-10-19T08:04:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"over\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.over\", \"SheafOfModules.overFunctor\", \"SheafOfModules.overMap\", \"SheafOfModules.overPullback\", \"SheafOfModules.instIsLeftAdjointOverOverRingCatOverMapOfHasPullbacks\", \"SheafOfModules.overMapPushforwardAdj\", \"SheafOfModules.Hom.over\", \"SheafOfModules.pushforwardOver\"], \"digest\": \"9ec1dcc1da78037c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: restriction and its right adjoint exist, but not the normalized localized inverse-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*overFunctor|overFunctor.*pullback|IsFiniteTypeLocallyConstant|stratification",
+   "results": "{\"t\": \"2026-10-19T08:04:18Z\", \"tool\": \"grep\", \"query\": \"pullback.*overFunctor|overFunctor.*pullback|IsFiniteTypeLocallyConstant|stratification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match in Mathlib; library searches found Stratification.inter and Stratification.pullback, used in the geometric proof, and the CommRingCat localization theorem, whose comparison requires transport to underlying RingCat sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback",
+  "date": "2026-10-19",
+  "group": "M5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Finite-reductions common-strata argument, Step 6: Chosen local module isomorphisms transport uniquely with adjunction-unit normalization",
+   "via": [
+    "lem-sfb-adic-finite-stratification-pullback",
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedLocalModulePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedLocalModulePullback.lean",
+  "declaration": "SheafOfModules.normalized_local_module_pullback",
+  "statement": "theorem normalized_local_module_pullback\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    [HasFiniteLimits C] [HasFiniteLimits D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (F : C ⥤ D) [F.IsContinuous J K] [PreservesFiniteLimits F]\n    {R : Sheaf J RingCat.{u}} {S : Sheaf K RingCat.{u}}\n    (rho : R ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj S)\n    (A G : SheafOfModules.{u} R) (B P : SheafOfModules.{u} S)\n    (c : (pullback rho).obj A ≅ B) (b : P ≅ (pullback rho).obj G)\n    (V : C) (e : G.over V ≅ A.over V) :\n    NormalizedLocalModuleTrivialization J K F rho A G B P c.hom b V e",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a4c5c",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261020T131144-L-1250594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a4c5c",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261020T131144-L-1250594",
+  "kind": "interface",
+  "note": "independent cc review: 4 delivered modules (compiled clean, axioms standard, no sorry) and importer AdicConstructibleFiniteReductions (compiles) matched with node lem-sfb-adic-finite-stratification-pullback, 3 new nodes and change record adic-stratification-normalization-predicate (abbrev→def topology, compatibility predicate defeq to old ∃! equation)"
+ }
+}

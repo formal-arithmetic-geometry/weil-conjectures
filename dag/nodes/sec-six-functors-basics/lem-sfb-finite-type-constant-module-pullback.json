@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-finite-type-constant-module-pullback",
+ "kind": "statement",
+ "title": "Constant-preserving module pullback preserves finite type local constancy",
+ "statement": "Let $C,D$ be small sites with finite limits [def-weil-pbc-sites-and-cohomology], topologies $J,K$, and $F:C\\to D$ continuous, finite-limit-preserving and covering-preserving. Let $R$ be any commutative ring, $\\rho:\\underline R_C\\to F_*\\underline R_D$ a ring-sheaf map, and suppose for every $R$-module $M$ an isomorphism $c_M:F^*\\underline M_C\\simeq\\underline M_D$ is given, using the genuine constant module sheafification [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]. If $G$ is locally constant of finite type [def-weil-pbc-finite-type-locally-constant-module-sheaf] and $b:P\\simeq F^*G$, then $P$ is locally constant of finite type, with the same finitely generated module models.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093R, lemma-pullback-locally-constant, fixed-ring module case"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-finite-type-locally-constant-module-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Choose a trivializing covering sieve of the terminal object of C. Its functor-pushforward covers F(terminal C). Pull it back along the unique arrow from any target object U, since F preserves the terminal object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R, lemma-pullback-locally-constant, fixed-ring module case"
+   }
+  },
+  {
+   "text": "Membership in this sieve gives a factorization through F(W) for a source cover member W. Its given trivialization has a finite R-module model M. Apply normalized local transport with c_M and b to get the same model on F(W), then restrict along the factorization using overFunctorMap. The module M and its finite generating property do not change.",
+   "uses": [
+    "lem-sfb-normalized-local-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R, lemma-pullback-locally-constant, fixed-ring module case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normalized-local-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093R, lemma-pullback-locally-constant, fixed-ring module case; explicit Mathlib adjunction and limit proof by M5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback preserves locally constant sheaves of finitely generated modules over a constant ring",
+   "results": "{\"t\": \"2026-10-19T08:04:19Z\", \"tool\": \"leansearch\", \"query\": \"Pullback preserves locally constant sheaves of finitely generated modules over a constant ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocallyConstant.comapₗ\", \"SheafOfModules.pullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\"], \"digest\": \"262a90b40aeaa9b6\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not state this result with these hypotheses and conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"over\"",
+   "results": "{\"t\": \"2026-10-19T08:04:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"over\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.over\", \"SheafOfModules.overFunctor\", \"SheafOfModules.overMap\", \"SheafOfModules.overPullback\", \"SheafOfModules.instIsLeftAdjointOverOverRingCatOverMapOfHasPullbacks\", \"SheafOfModules.overMapPushforwardAdj\", \"SheafOfModules.Hom.over\", \"SheafOfModules.pushforwardOver\"], \"digest\": \"9ec1dcc1da78037c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: restriction and its right adjoint exist, but not the normalized localized inverse-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*overFunctor|overFunctor.*pullback|IsFiniteTypeLocallyConstant|stratification",
+   "results": "{\"t\": \"2026-10-19T08:04:18Z\", \"tool\": \"grep\", \"query\": \"pullback.*overFunctor|overFunctor.*pullback|IsFiniteTypeLocallyConstant|stratification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match in Mathlib; library searches found Stratification.inter and Stratification.pullback, used in the geometric proof, and the CommRingCat localization theorem, whose comparison requires transport to underlying RingCat sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback",
+  "date": "2026-10-19",
+  "group": "M5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Finite-reductions common-strata argument, Step 6: Constant-preserving module pullback preserves finite type local constancy",
+   "via": [
+    "lem-sfb-adic-finite-stratification-pullback",
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeConstantModulePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeConstantModulePullback.lean",
+  "declaration": "SheafOfModules.finite_type_constant_module_pullback",
+  "statement": "theorem finite_type_constant_module_pullback\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    [HasFiniteLimits C] [HasFiniteLimits D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (F : C ⥤ D) [F.IsContinuous J K] [PreservesFiniteLimits F]\n    (hF : CoverPreserving J K F) (R : Type u) [CommRing R]\n    (rho : (constantSheaf J RingCat.{u}).obj (RingCat.of R) ⟶\n      (F.sheafPushforwardContinuous RingCat.{u} J K).obj\n        ((constantSheaf K RingCat.{u}).obj (RingCat.of R)))\n    (c : ∀ M : ModuleCat.{u} R,\n      (pullback rho).obj ((strictPerfectConstantSheaf J R).obj M) ≅\n        (strictPerfectConstantSheaf K R).obj M)\n    (G : SheafOfModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of R)))\n    (P : SheafOfModules.{u} ((constantSheaf K RingCat.{u}).obj (RingCat.of R)))\n    (b : P ≅ (pullback rho).obj G) (hG : IsFiniteTypeLocallyConstant J R G) :\n    IsFiniteTypeLocallyConstant K R P",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a4c5c",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261020T131144-L-1250594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a4c5c",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261020T131144-L-1250594",
+  "kind": "interface",
+  "note": "independent cc review: 4 delivered modules (compiled clean, axioms standard, no sorry) and importer AdicConstructibleFiniteReductions (compiles) matched with node lem-sfb-adic-finite-stratification-pullback, 3 new nodes and change record adic-stratification-normalization-predicate (abbrev→def topology, compatibility predicate defeq to old ∃! equation)"
+ }
+}

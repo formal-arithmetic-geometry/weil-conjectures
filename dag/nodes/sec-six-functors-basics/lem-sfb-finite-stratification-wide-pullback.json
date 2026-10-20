@@ -1,0 +1,152 @@
+{
+ "id": "lem-sfb-finite-stratification-wide-pullback",
+ "kind": "statement",
+ "title": "Finite constructible stratifications have a limiting common fibre-product refinement",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $r\\in\\mathbb N$, $U,O_0,\\ldots,O_{r-1}$ open subschemes of $X$ with $U\\subseteq O_j$, and $S_j$ finite stratifications [def-constructible-stratification] of $O_j$ whose locally closed strata are constructible [def-weil-constructible-subset]. There is a finite constructible stratification $T$ of $U$, and for every stratum $T_k$ a choice of one stratum $S_{j,a(k,j)}$ of each $S_j$, and a limiting fibre-product cone [def-pc-fibre-product] over the maps $U\\to X$ and $S_{j,a(k,j)}\\to O_j\\to X$, whose vertex is $T_k$ and whose projection to $U$ is its immersion. If $r\\ne0$, every retained vertex is nonempty. If $r=0$, retain the single identity stratum, even when $U$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Finite-reductions Step 6, common strata; Stacks Tags 054I, 02V0, 005H"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Induct on r, starting with the identity one-stratum partition of U. At the successor step restrict the new partition to U by Stratification.pullback and intersect it with the previous partition using Stratification.inter. These existing constructions retain the actual pullback schemes and their immersion maps, not only their point sets.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "lemma-constructible-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054I; finite-reductions Step 6, iterated pullback refinement"
+   }
+  },
+  {
+   "text": "Prove the limiting-cone assertion at the same time. Build the old cone from every test cone by omitting the new factor, lift to its vertex by the induction hypothesis, lift the new-factor map to the restricted stratum, and take their pullback lift. Projection equations follow from pullback.lift_fst and pullback.lift_snd. Uniqueness follows from pullback.hom_ext; the immersions to U are monomorphisms. For r=0 use the projection to U as the unique lift.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Fibre-product universal property, finite iteration in common-strata argument Step 6"
+   }
+  },
+  {
+   "text": "When r is nonzero restrict the finite index set to vertices with a point, and enumerate this subtype by Fin n. A point of U is still covered because any stratum containing it has a point. Pairwise disjointness, constructibility and the same limiting cones restrict to this subtype. For r=0 retain the original identity stratum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Finite-reductions Step 6, common strata; Stacks Tags 054I, 02V0, 005H"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-constructible-pullback-stratification",
+  "lemma-constructible-common-refinement",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Finite-reductions Step 6, common strata; Stacks Tags 054I, 02V0, 005H; explicit Mathlib adjunction and limit proof by M5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Common refinement of finite constructible scheme stratifications by fiber products with all projections",
+   "results": "{\"t\": \"2026-10-19T08:04:18Z\", \"tool\": \"leansearch\", \"query\": \"Common refinement of finite constructible scheme stratifications by fiber products with all projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.instHasFiniteLimitsScheme\"], \"digest\": \"4123aedaf87a1923\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not state this result with these hypotheses and conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally closed stratifications of a scheme have a common refinement from fibre products",
+   "results": "{\"t\": \"2026-10-19T00:32:49Z\", \"tool\": \"leanfinder\", \"query\": \"Finite locally closed stratifications of a scheme have a common refinement from fibre products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.LocallyDirected.directed\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.\\ud835\\udcb0D\\u2080\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.\\ud835\\udcb0D\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected_f\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.\\ud835\\udcb0S\"], \"digest\": \"118c4b1adcdfaa5d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: candidate scheme-cover refinements do not state a common finite constructible stratification with limiting fibre-product cones"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*overFunctor|overFunctor.*pullback|IsFiniteTypeLocallyConstant|stratification",
+   "results": "{\"t\": \"2026-10-19T08:04:18Z\", \"tool\": \"grep\", \"query\": \"pullback.*overFunctor|overFunctor.*pullback|IsFiniteTypeLocallyConstant|stratification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match in Mathlib; library searches found Stratification.inter and Stratification.pullback, used in the geometric proof, and the CommRingCat localization theorem, whose comparison requires transport to underlying RingCat sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback",
+  "date": "2026-10-19",
+  "group": "M5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Finite-reductions common-strata argument, Step 6: Finite constructible stratifications have a limiting common fibre-product refinement",
+   "via": [
+    "lem-sfb-adic-finite-stratification-pullback",
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteStratificationWidePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteStratificationWidePullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_stratification_wide_pullback",
+  "statement": "theorem finite_stratification_wide_pullback {X : Scheme.{u}} (r : ℕ) (U : X.Opens)\n    (O : Fin r → X.Opens) (S : ∀ j, LocallyClosedStratification (O j).toScheme)\n    (hU : ∀ j, U ≤ O j) :\n    ∃ (T : LocallyClosedStratification U.toScheme)\n      (a : Fin T.n → ∀ j, Fin (S j).n)\n      (c : ∀ k, WidePullbackCone (stratificationWideArrows U O S (a k)))\n      (hp : ∀ k, (c k).pt = T.domain k),\n      (∀ k, eqToHom (hp k).symm ≫ (c k).π none = T.immersion k) ∧\n      (∀ k, Nonempty (IsLimit (c k))) ∧\n      (r ≠ 0 → ∀ k, Nonempty (T.domain k)) ∧\n      (r = 0 → T.n = 1 ∧ ∀ k, IsIso (T.immersion k))",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finite_stratification_wide_pullback",
+   "AlgebraicGeometry.Scheme.stratificationWideFactors",
+   "AlgebraicGeometry.Scheme.stratificationWideArrows"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a4c5c",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261020T131144-L-1250594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a4c5c",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261020T131144-L-1250594",
+  "kind": "interface",
+  "note": "independent cc review: 4 delivered modules (compiled clean, axioms standard, no sorry) and importer AdicConstructibleFiniteReductions (compiles) matched with node lem-sfb-adic-finite-stratification-pullback, 3 new nodes and change record adic-stratification-normalization-predicate (abbrev→def topology, compatibility predicate defeq to old ∃! equation)"
+ }
+}

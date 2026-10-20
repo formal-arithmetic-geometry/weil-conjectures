@@ -12,7 +12,11 @@ public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+import Mathlib.Algebra.Category.Ring.Colimits
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Sheaf.AlgebraicGeometry.FiniteStratificationWidePullback
+import Sheaf.AlgebraicGeometry.FiniteTypeConstantModulePullback
+public import Sheaf.AlgebraicGeometry.NormalizedLocalModulePullback
 
 /-!
 # Common finite stratifications and pullback of chosen module trivializations
@@ -29,6 +33,9 @@ it retains every original site object. Coefficients are arbitrary commutative ri
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option linter.style.setOption false
+-- The adjunction and dependent scalar-restriction comparisons need this elaboration budget.
+set_option maxHeartbeats 100000
 
 universe u v
 
@@ -83,7 +90,7 @@ abbrev adicStratificationModel (pro : Bool) (X : Scheme.{u}) :=
 
 /-- Transported topology, Stacks size convention and Tag 093R.
 (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
-abbrev adicStratificationModelTopology (pro : Bool) (X : Scheme.{u}) :=
+def adicStratificationModelTopology (pro : Bool) (X : Scheme.{u}) :=
   (AsSmall.down : adicStratificationModel pro X ⥤ adicStratificationSite pro X).inducedTopology
     (adicStratificationTopology pro X)
 
@@ -105,6 +112,12 @@ instance adicStratificationModelUpContinuous (pro : Bool) (X : Scheme.{u}) :
         (C := adicStratificationSite pro X)).inverse.inducedTopology
           (adicStratificationTopology pro X)))
 
+private instance adicModelDownContinuous (pro : Bool) (X : Scheme.{u}) :
+    (AsSmall.down : adicStratificationModel pro X ⥤ adicStratificationSite pro X).IsContinuous
+      (adicStratificationModelTopology pro X) (adicStratificationTopology pro X) := by
+  unfold adicStratificationModelTopology
+  infer_instance
+
 /-- Continuity on the small model, Stacks 093R and the size convention.
 (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
 instance adicStratificationModelBaseChangeContinuous (pro : Bool) {X Y : Scheme.{u}}
@@ -116,6 +129,50 @@ instance adicStratificationModelBaseChangeContinuous (pro : Bool) {X Y : Scheme.
   Functor.isContinuous_comp AsSmall.down (adicStratificationBaseChange pro f ⋙ AsSmall.up)
     (adicStratificationModelTopology pro Y) (adicStratificationTopology pro Y)
     (adicStratificationModelTopology pro X)
+
+/-- Ring sheafification on the transported small site, using the usual concrete
+sheafification construction. Naming the instance prevents repeated search through
+scheme-site constructions. Source: Stacks 00ZG.
+(blueprint: lem-sfb-adic-finite-stratification-pullback). -/
+instance adicStratificationModelRingSheafify (pro : Bool) (X : Scheme.{u}) :
+    HasWeakSheafify (adicStratificationModelTopology pro X) RingCat.{u + 1} :=
+  (fun {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C) ↦
+    (inferInstance : HasWeakSheafify J RingCat.{u + 1}))
+      (adicStratificationModelTopology pro X)
+
+/-- Additive sheafification on the small model, specialized from the generic construction.
+Source: Stacks 00ZG (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
+instance adicStratificationModelAddSheafify (pro : Bool) (X : Scheme.{u}) :
+    HasWeakSheafify (adicStratificationModelTopology pro X) AddCommGrpCat.{u + 1} :=
+  (fun {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C) ↦
+    (inferInstance : HasWeakSheafify J AddCommGrpCat.{u + 1}))
+      (adicStratificationModelTopology pro X)
+
+/-- Local bijections characterize additive sheafification on the small model.
+Source: Stacks 00ZG (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
+instance adicStratificationModelAddWEquals (pro : Bool) (X : Scheme.{u}) :
+    (adicStratificationModelTopology pro X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+  (fun {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C) ↦
+    (inferInstance : J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}))
+      (adicStratificationModelTopology pro X)
+
+/-- Ring-valued left Kan extensions exist on the small models.
+Source: Stacks 03D2 (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
+instance adicStratificationModelRingLeftKan (pro : Bool) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ∀ P : (adicStratificationModel pro Y)ᵒᵖ ⥤ RingCat.{u + 1},
+      (adicStratificationModelBaseChange pro f).op.HasLeftKanExtension P := by
+  intro P
+  have h : ∀ W : (adicStratificationModel pro X)ᵒᵖ,
+      HasColimit (CostructuredArrow.proj (adicStratificationModelBaseChange pro f).op W ⋙ P) := by
+    intro W
+    have : HasColimits RingCat.{u + 1} := RingCat.Colimits.hasColimits_ringCat
+    have : HasColimitsOfShape
+        (CostructuredArrow (adicStratificationModelBaseChange pro f).op W)
+          RingCat.{u + 1} := HasColimitsOfSize.has_colimits_of_shape _
+    exact HasColimitsOfShape.has_colimit _
+  exact Functor.instHasLeftKanExtension _ _
+
+attribute [local irreducible] adicStratificationModelTopology
 
 /-- Constant-ring module sheaves on the chosen site, Stacks 093R.
 (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
@@ -138,6 +195,14 @@ def adicStratificationRho (pro : Bool) (R : Type (u + 1)) [CommRing R]
     _ _).symm (Functor.whiskerLeft (adicStratificationModelBaseChange pro f).op
       (toSheafify (adicStratificationModelTopology pro X)
         ((Functor.const (adicStratificationModel pro X)ᵒᵖ).obj (RingCat.of R))))
+
+/-- The existing module direct image has a left adjoint. Specializing the generic
+small-site proof avoids repeating its Kan-extension and sheafification instance search.
+Source: Stacks 03D2 (blueprint: lem-sfb-adic-finite-stratification-pullback). -/
+instance adicStratificationModulePushforwardRightAdjoint
+    (pro : Bool) (R : Type (u + 1)) [CommRing R] {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (SheafOfModules.pushforward.{u + 1} (adicStratificationRho pro R f)).IsRightAdjoint :=
+  by infer_instance
 
 /-- Canonical module pullback along rho, Stacks 03D2 and 093R.
 This is the existing sheafified module Kan extension, not an arbitrary functor.
@@ -180,6 +245,8 @@ private theorem adicStratificationRho_constants
           ((Functor.const (adicStratificationModel pro X)ᵒᵖ).obj (RingCat.of R))))
   change toSheafify _ _ ≫ (adicStratificationRho pro R f).hom = _ at h
   exact congrArg (fun k ↦ k.app W) h
+
+attribute [local irreducible] adicStratificationRho
 
 /-- The specified ring comparison is invertible, Stacks 0H7J and proof Step 5.
 (blueprint: lem-sfb-adic-finite-stratification-pullback).
@@ -322,25 +389,27 @@ theorem adicStratificationConstantMap_existsUnique
         exact PresheafOfModules.naturality_apply η (b.op.map a) m }
   let aj := PresheafOfModules.sheafificationAdjunction.{u + 1, u + 1, u + 1, u + 1} α
   let af := SheafOfModules.pullbackPushforwardAdjunction (adicStratificationRho pro R f)
-  let c := (af.homEquiv _ _).symm ((aj.homEquiv _ _).symm h)
-  have hc : aj.homEquiv _ _ (af.homEquiv _ _ c) = h := by
+  let c := (af.homEquiv ((SheafOfModules.strictPerfectConstantSheaf J R).obj M) G).symm
+    ((aj.homEquiv ((SheafOfModules.strictPerfectConstantPresheaf R).obj M) H).symm h)
+  have hc : aj.homEquiv ((SheafOfModules.strictPerfectConstantPresheaf R).obj M) H
+      (af.homEquiv ((SheafOfModules.strictPerfectConstantSheaf J R).obj M) G c) = h := by
     simp only [c, Equiv.apply_symm_apply]
   have happ (d : (adicStratificationPullback pro R f).obj
       ((SheafOfModules.strictPerfectConstantSheaf J R).obj M) ⟶ G)
       (W : (adicStratificationModel pro Y)ᵒᵖ) (m : M) :
-      (aj.homEquiv _ _ (af.homEquiv _ _ d)).app W m =
-        (af.homEquiv _ _ d).val.app W (adicStratificationConstantSection pro R Y M W m) := by
+      (aj.homEquiv ((SheafOfModules.strictPerfectConstantPresheaf R).obj M) H
+        (af.homEquiv ((SheafOfModules.strictPerfectConstantSheaf J R).obj M) G d)).app W m =
+        (af.homEquiv ((SheafOfModules.strictPerfectConstantSheaf J R).obj M) G d).val.app W
+          (adicStratificationConstantSection pro R Y M W m) := by
     rfl
   refine ⟨c, ?_, ?_⟩
   · intro W m
     have hx := congrArg (fun k ↦ k.app W m) hc
     rw [happ] at hx
     exact hx
-  · intro c' hc'
-    apply (af.homEquiv _ _).injective
-    apply (aj.homEquiv _ _).injective
-    change aj.homEquiv _ _ (af.homEquiv _ _ c') =
-      aj.homEquiv _ _ (af.homEquiv _ _ c)
+  · intro c' hc' 
+    apply (af.homEquiv ((SheafOfModules.strictPerfectConstantSheaf J R).obj M) G).injective
+    apply (aj.homEquiv ((SheafOfModules.strictPerfectConstantPresheaf R).obj M) H).injective
     trans h
     · ext W m
       rw [happ]
@@ -353,7 +422,6 @@ def adicStratificationConstantMap (pro : Bool) (R : Type (u + 1)) [CommRing R]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : ModuleCat.{u + 1} R) :=
   Classical.choose (adicStratificationConstantMap_existsUnique pro R f M).exists
 
-set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation at a terminal object classifies maps from constant module presheaves.
 The inverse restricts a linear map along the unique arrows to that terminal object. -/
 private def adicStratificationConstantHomEquiv {C : Type v} [SmallCategory C]
@@ -494,7 +562,6 @@ abbrev adicStratificationPushforward (pro : Bool) (R : Type (u + 1)) [CommRing R
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   SheafOfModules.pushforward.{u + 1} (adicStratificationRho pro R f)
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The uniquely specified sectionwise direct-image composition, Stacks 093R, proof Step 7.
 (blueprint: lem-sfb-adic-finite-stratification-pullback).
 Proof: pullback pasting identifies the two evaluation objects. Restrict sections along
@@ -586,7 +653,6 @@ def adicStratificationPullbackComp (pro : Bool) (R : Type (u + 1)) [CommRing R]
       (SheafOfModules.pullbackPushforwardAdjunction (adicStratificationRho pro R f)))).symm
         (adicStratificationPushforwardComp pro R f g).symm).symm
 
-set_option backward.isDefEq.respectTransparency false in
 /-- Constant sections commute with the specified inverse-image composition,
 Stacks 0H7J and 093R, proof Step 7.
 (blueprint: lem-sfb-adic-finite-stratification-pullback).
@@ -692,18 +758,14 @@ def AdicStratificationTrivializationCompatibility
     (V : adicStratificationModel pro S) (M : ModuleCat.{u + 1} R)
     (e : G.over V ≅ ((SheafOfModules.strictPerfectConstantSheaf
       (adicStratificationModelTopology pro S) R).obj M).over V) : Prop :=
-  ∃! d : P.over ((adicStratificationModelBaseChange pro h).obj V) ≅
-      ((SheafOfModules.strictPerfectConstantSheaf
-        (adicStratificationModelTopology pro T) R).obj M).over
-          ((adicStratificationModelBaseChange pro h).obj V),
-    ∀ (W : Over V) (x : G.val.obj (op W.left)),
-      (d.hom.val.app (op ((Over.post (adicStratificationModelBaseChange pro h)).obj W)))
-        ((b.inv.val.app (op ((adicStratificationModelBaseChange pro h).obj W.left)))
-          ((((SheafOfModules.pullbackPushforwardAdjunction
-            (adicStratificationRho pro R h)).unit.app G).val.app (op W.left)) x)) =
-        (((SheafOfModules.pullbackPushforwardAdjunction (adicStratificationRho pro R h)).homEquiv
-          _ _ (adicStratificationConstantMap pro R h M)).val.app (op W.left))
-            ((e.hom.val.app (op W)) x)
+  SheafOfModules.NormalizedLocalModuleTrivialization
+    (adicStratificationModelTopology pro S) (adicStratificationModelTopology pro T)
+    (adicStratificationModelBaseChange pro h) (adicStratificationRho pro R h)
+    ((SheafOfModules.strictPerfectConstantSheaf
+      (adicStratificationModelTopology pro S) R).obj M) G
+    ((SheafOfModules.strictPerfectConstantSheaf
+      (adicStratificationModelTopology pro T) R).obj M) P
+    (adicStratificationConstantMap pro R h M) b V e
 
 /-- The hypotheses of the common-strata lemma, bundled without choosing any new sheaves.
 Every cover member has its given constructible locally closed scheme stratification.
@@ -823,6 +885,36 @@ structure CommonRefinement (p : ∀ j : Fin r, D.coverIndex j) where
 
 end AdicStratificationInput
 
+
+private instance adicModelHasFiniteLimits (pro : Bool) (X : Scheme.{u}) :
+    HasFiniteLimits (adicStratificationModel pro X) := by
+  have : HasFiniteLimits (adicStratificationSite pro X) := by
+    cases pro
+    · exact inferInstanceAs (HasFiniteLimits X.Etale)
+    · exact inferInstanceAs (HasFiniteLimits X.ProEt)
+  infer_instance
+
+private instance adicModelBaseChangePreservesFiniteLimits (pro : Bool)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    PreservesFiniteLimits (adicStratificationModelBaseChange pro f) := by
+  have : PreservesFiniteLimits (adicStratificationBaseChange pro f) := by
+    cases pro
+    · exact inferInstanceAs
+        (PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ f))
+    · exact proEtaleBaseChange_preservesFiniteLimits f
+  have : PreservesFiniteLimits
+      (AsSmall.down : adicStratificationModel pro Y ⥤ adicStratificationSite pro Y) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (AsSmall.equiv (C := adicStratificationSite pro Y)).inverse)
+  have : PreservesFiniteLimits
+      (AsSmall.up : adicStratificationSite pro X ⥤ adicStratificationModel pro X) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (AsSmall.equiv (C := adicStratificationSite pro X)).functor)
+  exact inferInstanceAs (PreservesFiniteLimits
+    (AsSmall.down ⋙ adicStratificationBaseChange pro f ⋙ AsSmall.up))
+
+set_option maxHeartbeats 100000 in
+-- The dependent refinement checks the scalar restrictions on all its projection maps.
 /-- Finite families have common finite constructible stratifications on exactly the
 intersection cover, with actual finite fibre products and canonical transport of every
 chosen local trivialization over an arbitrary coefficient ring, on either site.
@@ -864,6 +956,58 @@ theorem adic_finite_stratification_pullback
     (D : AdicStratificationInput.{u, v} pro R X r) :
     (⨆ p : (∀ j : Fin r, D.coverIndex j), D.commonOpen p) = ⊤ ∧
       ∀ p : (∀ j : Fin r, D.coverIndex j), Nonempty (D.CommonRefinement p) := by
-  sorry
+  classical
+  constructor
+  · apply top_unique
+    intro x hx
+    have h (j : Fin r) : ∃ a, x ∈ D.opens j a := by
+      apply TopologicalSpace.Opens.mem_iSup.mp
+      rw [D.covers j]
+      trivial
+    choose a ha using h
+    apply TopologicalSpace.Opens.mem_iSup.mpr
+    refine ⟨a, ?_⟩
+    change x ∈ ((⨅ j, D.opens j (a j) : X.Opens) : Set X)
+    rw [TopologicalSpace.Opens.coe_iInf]
+    exact Set.mem_iInter.mpr ha
+  · intro p
+    obtain ⟨T, a, c, hp, hto, hl, hn, he⟩ := finite_stratification_wide_pullback r
+      (D.commonOpen p) (fun j ↦ D.opens j (p j)) (fun j ↦ D.strata j (p j))
+        (fun j ↦ iInf_le (fun j ↦ D.opens j (p j)) j)
+    let h (k : Fin T.n) (j : Fin r) :
+        T.domain k ⟶ (D.strata j (p j)).domain (a k j) :=
+      eqToHom (hp k).symm ≫ (c k).π (some j)
+    have hw (k : Fin T.n) (j : Fin r) :
+        h k j ≫ ((D.strata j (p j)).immersion (a k j) ≫ (D.opens j (p j)).ι) =
+          T.immersion k ≫ (D.commonOpen p).ι := by
+      dsimp only [h]
+      erw [Category.assoc, (c k).condition (some j), ← (c k).condition none,
+        ← Category.assoc, hto]
+      rfl
+    let b (k : Fin T.n) (j : Fin r) := adicStratificationProjectionComparison pro R
+      (h k j) ((D.strata j (p j)).immersion (a k j) ≫ (D.opens j (p j)).ι)
+      (T.immersion k ≫ (D.commonOpen p).ι) (hw k j) (D.sheaf j)
+    let cm {Y Z : Scheme.{u}} (f : Y ⟶ Z) (M : ModuleCat.{u + 1} R) :=
+      @asIso _ _ _ _ (adicStratificationConstantMap pro R f M)
+        (adicStratificationConstantMap_isIso pro R f M)
+    refine ⟨{ strata := T, factor := a, cone := c, point := hp, toOpen := hto
+              isLimit := fun k ↦ (hl k).some
+              nonempty := hn, emptyFamily := he, projection := h
+              projection_eq := fun _ _ ↦ rfl, projection_comp := hw
+              locallyConstant := ?_, coverings := ?_, trivializations := ?_ }⟩
+    · intro k j
+      exact SheafOfModules.finite_type_constant_module_pullback
+        (adicStratificationModelTopology pro _) (adicStratificationModelTopology pro _)
+        (adicStratificationModelBaseChange pro (h k j))
+        (CoverPreserving.of_isContinuous _ _ _) R (adicStratificationRho pro R (h k j))
+        (cm (h k j)) _ _ (b k j) (D.locallyConstant j (p j) (a k j))
+    · intro k j W S hS
+      exact (CoverPreserving.of_isContinuous (adicStratificationModelBaseChange pro (h k j))
+        _ _).cover_preserve hS
+    · intro k j V M _ e
+      exact SheafOfModules.normalized_local_module_pullback
+        (adicStratificationModelTopology pro _) (adicStratificationModelTopology pro _)
+        (adicStratificationModelBaseChange pro (h k j)) (adicStratificationRho pro R (h k j))
+        _ _ _ _ (cm (h k j) M) (b k j) V e
 
 end AlgebraicGeometry.Scheme
