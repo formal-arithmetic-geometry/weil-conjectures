@@ -17701,3 +17701,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:43 L: returned deliver/R7/Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal (reviewer RETURN: (reviewer C-b4b8e, head b4b8e778f) 2 (signature/interface of existing declarations changed, importer broken): lean/Sheaf)
 - 03:05 L: returned deliver/E5/Sheaf.SecSmoothPurity.DirectImageScalarExchange (reviewer RETURN: (reviewer C-eca8c, head eca8c041a) B (point 2, interface change breaks an importer): lean/Sheaf/SecSmoothPurity/Constant)
 - 03:05 L: returned deliver/T1/Sheaf.Paper.InvertibleTensorScalarExtension (reviewer RETURN: (reviewer C-49c1d, head 49c1d2feb) 6/C1: dag/nodes/sec-smooth-purity/lem-sp-invertible-tensor-scalar-extension.json — th)
+- 03:07 L: returned deliver/NL/lem-pur-system-level-projection-formula-coherence (reviewer RETURN: L: independent stage-2 immutable head ec9ccd68059b: Statement clauses, edge cases, universes, helpers and docstrings che)
