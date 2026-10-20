@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Put V_i equal to the complement of the union of all components other than X_i. The components form a finite set because components is an equivalence from Fin n. The V_i are open, and Mathlib closure_sUnion_irreducibleComponents_sdiff_singleton gives closure(V_i) = X_i, hence V_i is contained in X_i and nonempty. The generic-point open-set criterion then gives eta_i in V_i. Distinct V_i are disjoint because V_i avoids X_j for j different from i. This uses the component cover and maximality via the cited Mathlib closure theorem [lem-sc-irreducible-components-cover, def-weil-irreducible-components, def-sc-generic-point].",
+   "text": "For each component define openAwayFromOtherComponents to be the complement of the finite union of the other components. A generic point cannot lie in a different component: closure of its singleton would put its whole component in that other maximal irreducible subset, forcing equality. The components cover X, so any point in this open belongs only to its designated component, and distinct such opens are disjoint [lem-sc-irreducible-components-cover, def-weil-irreducible-components, def-sc-generic-point].",
    "uses": [
     "lem-sc-irreducible-components-cover",
     "def-weil-irreducible-components",
@@ -63,7 +63,7 @@
    }
   },
   {
-   "text": "Injectivity, following the third equality of Stacks 01RV. The dense-open diagram is filtered in the restriction direction, so every element of its ring colimit is represented by a section [def-sc-rational-functions]. For representatives s on U and t on T with equal generic germs, the stalk equality criterion [def-weil-pbc-module-stalk] supplies neighborhoods W_i of eta_i contained in both U and T on which their restrictions agree. The union D of these neighborhoods is dense by step 2. Sheaf locality [def-pc-scheme] gives equality of the two restrictions on D, and the colimit relation gives equality of the represented rational functions. Disjointness of the W_i is unnecessary for this step.",
+   "text": "For injectivity it suffices to show the kernel is zero. Represent a rational function by a section f on a dense open U [def-sc-rational-functions]. If every generic germ vanishes, germ_eq [def-weil-pbc-module-stalk] gives a neighborhood W_i of each generic point, contained in U, on which f vanishes. Their union is dense by step 2. Sheaf locality [def-pc-scheme] makes f zero on this union; colimit.w_apply identifies its rational-function class with zero.",
    "uses": [
     "def-weil-pbc-module-stalk",
     "def-pc-scheme",
@@ -89,7 +89,7 @@
    }
   },
   {
-   "text": "Integral case, following the final sentence of Stacks 01RV. If X is integral [def-pc-integral-scheme], it is irreducible and its irreducible components form the singleton {X} [def-weil-irreducible-components]. Thus Fin n is nonempty and subsingleton, so n = 1, and each component is X. Evaluation of the product at any index is a ring equivalence, compatible with the germ equivalence of steps 3-5. The field clause of [lem-sc-integral-function-field-affine-fraction] is available directly as Mathlib AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents: reducedness and closure {eta_i} in irreducibleComponents X imply that its stalk is a field. Transport this property through the evaluation equivalence to the rational-function ring. The affine-fraction construction and the choice of an affine open need not be repeated here.",
+   "text": "If X is integral [def-pc-integral-scheme], irreducibility makes every maximal irreducible component the whole space [def-weil-irreducible-components]. The indexing Fin n is nonempty and subsingleton, so n = 1. Uniqueness of generic points identifies every eta_i with genericPoint X. Mathlib instFieldCarrierFunctionField gives the field property of this stalk, the field clause of [lem-sc-integral-function-field-affine-fraction]. Evaluation at the unique index is a ring equivalence; compose it with the germ equivalence and transport IsField to rationalFunctionRing [def-pc-scheme].",
    "uses": [
     "def-pc-integral-scheme",
     "def-weil-irreducible-components",
@@ -116,7 +116,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), implemented elementwise via Mathlib filtered-colimit representatives, germ_eq, and sheaf unique gluing/locality; the field clause uses AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents (Properties.lean), which implements the affine-local 00EU argument. Topology Lemma 004W supplies the component cover through Mathlib closure_sUnion_irreducibleComponents_sdiff_singleton."
+  "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), implemented by the upstream exists_ringEquiv_rationalFunctionRing_pi_stalk: finite component complements; dense-open germ cocone; injectivity by vanishing germs, sheaf locality and colimit.w_apply; surjectivity by gluing on disjoint opens; integral field clause by Mathlib Scheme.functionField. E9 retires the duplicate Sheaf theorem and redirects this attachment without changing the mathematical statement."
  },
  "mathlib_searches": [
   {
@@ -177,14 +177,15 @@
  },
  "reviewed": "2026-10-10 L: 6 steps along 01RV checked (opens V_i = X minus the other components; a dense open contains every generic point; the germ map well defined on the colimit; injective by locality on a disjoint cover; surjective by gluing; integral case via the affine-fraction leaf, the 00EU step). New Mathlib leaf lem-sc-irreducible-components-cover (004W (3),(4): Irreducible.lean 128/148/158, verified). The reduced clause of 01RV is not part of the item. LeanSearch down.",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.RationalFunctionsGenericStalks",
-  "declaration": "AlgebraicGeometry.Scheme.rationalFunctions_generic_stalks",
-  "file": "lean/Sheaf/AlgebraicGeometry/RationalFunctionsGenericStalks.lean",
-  "statement": "theorem rationalFunctions_generic_stalks (X : Scheme.{u}) (n : ℕ) (components : Fin n ≃ {Z : Set X // Z ∈ irreducibleComponents X}) (η : Fin n → X) (hη : ∀ i : Fin n, IsGenericPoint (η i) (components i).val) : ∃ hDense : ∀ (U : DenseOpens X) (i : Fin n), η i ∈ U.val, ∃ e : (X.rationalFunctionRing : Type u) ≃+* ((i : Fin n) → X.presheaf.stalk (η i)), (∀ (U : DenseOpens X) (f : Γ(X, U.val)) (i : Fin n), e ((colimit.ι (denseOpenSections X) (op U)) f) i = X.presheaf.germ U.val (η i) (hDense U i) f) ∧ (IsIntegral X → n = 1 ∧ (∀ i : Fin n, (components i).val = Set.univ) ∧ IsField (X.rationalFunctionRing : Type u) ∧ ∀ i : Fin n, IsField (X.presheaf.stalk (η i)) ∧ ∃ ei : (X.rationalFunctionRing : Type u) ≃+* X.presheaf.stalk (η i), ∀ r : X.rationalFunctionRing, ei r = e r i)",
+  "module": "WeilConjectures.AlgebraicGeometry.RationalFunctionsGenericStalks",
+  "declaration": "AlgebraicGeometry.Scheme.exists_ringEquiv_rationalFunctionRing_pi_stalk",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RationalFunctionsGenericStalks.lean",
+  "statement": "theorem exists_ringEquiv_rationalFunctionRing_pi_stalk (X : Scheme.{u}) (n : ℕ) (components : Fin n ≃ {Z : Set X // Z ∈ irreducibleComponents X}) (η : Fin n → X) (hη : ∀ i : Fin n, IsGenericPoint (η i) (components i).val) : ∃ hDense : ∀ (U : DenseOpens X) (i : Fin n), η i ∈ U.val, ∃ e : (X.rationalFunctionRing : Type u) ≃+* ((i : Fin n) → X.presheaf.stalk (η i)), (∀ (U : DenseOpens X) (f : Γ(X, U.val)) (i : Fin n), e ((colimit.ι (denseOpenSections X) (op U)) f) i = X.presheaf.germ U.val (η i) (hDense U i) f) ∧ (IsIntegral X → n = 1 ∧ (∀ i : Fin n, (components i).val = Set.univ) ∧ IsField (X.rationalFunctionRing : Type u) ∧ ∀ i : Fin n, IsField (X.presheaf.stalk (η i)) ∧ ∃ ei : (X.rationalFunctionRing : Type u) ≃+* X.presheaf.stalk (η i), ∀ r : X.rationalFunctionRing, ei r = e r i)",
   "branch": "sheaf-dag",
-  "by": "M1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "E9",
+  "date": "2026-10-20",
+  "existing": true,
+  "note": "Retired the Sheaf duplicate under the human-approved twin retirement. The upstream theorem has exactly the same universe-polymorphic statement, including the dense-open germ equation and integral clauses. A compiler check applies it directly to the former signature; both proofs use only propext, Classical.choice and Quot.sound. No mathematical statement or dependency is removed."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -195,13 +196,13 @@
   "note": "X:Scheme.{u}; n+Fin n equiv irreducibleComponents; eta IsGenericPoint; dense opens contain eta (conclusion); e: rationalFunctionRing ≃+* Pi stalks with germ values on colimit.ι classes; IsIntegral (AlgebraicGeometry.IsIntegral by #check) -> n=1, X_1=univ, IsField R(X) and stalk, ei compatible; old rationalFunctions verified Scheme.{0} so rule (B) module justified"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
+  "reviewer": "C-3efbb",
+  "group": "E9",
   "result": "pass",
-  "landing": "20261018T062747-L-648371",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T151217-L-2647418",
+  "kind": "interface",
+  "note": "independent cc review: old Sheaf rationalFunctions_generic_stalks signature vs upstream WeilConjectures exists_ringEquiv_rationalFunctionRing_pi_stalk (byte-identical, scratch application compiles; axioms clean); node lean record vs upstream source; 0 importers"
  }
 }
