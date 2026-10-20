@@ -97,14 +97,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFlatEtale",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationFlatEtale.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFlatEtale",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StalkNormalizationFlatEtale.lean",
   "declaration": "AlgebraicGeometry.Scheme.finiteEtale_stalk_normalization_etale_of_flat",
-  "statement": "theorem finiteEtale_stalk_normalization_etale_of_flat {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens) (hηU : genericPoint S ∈ U)\n    (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth\n      (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    IsFinite n → ∀ V : (pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n      (pullback.fst c a)).Opens, Flat (V.ι ≫ n) → Etale (V.ι ≫ n)",
+  "statement": "theorem finiteEtale_stalk_normalization_etale_of_flat {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens)\n    (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth\n      (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    IsFinite n → ∀ V : (pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n      (pullback.fst c a)).Opens, Flat (V.ι ≫ n) → Etale (V.ι ≫ n)",
   "branch": "sheaf-dag",
-  "by": "R3",
-  "date": "2026-10-13"
+  "by": "G5",
+  "date": "2026-10-21",
+  "note": "Retire the unused Sheaf duplicate in favour of the proved upstream theorem. The upstream signature omits only hS (normality of base stalks) and hηU (generic point in U), which the flat-source proof never uses. A compiled scratch theorem applies the upstream result to the old full signature. The mathematical node statement, its proof dependencies and its parent references stay unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -117,14 +118,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q4",
+  "reviewer": "C-28a76",
+  "group": "G5",
   "result": "pass",
-  "landing": "20261013T034209-L-3767562",
+  "landing": "20261020T211720-L-3492138",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf copy + node lean record vs upstream WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFlatEtale (signature byte-identical; old full signature proved by direct application, axioms clean); no importers of the Sheaf module"
  },
  "lean_audit": {
   "master": {
