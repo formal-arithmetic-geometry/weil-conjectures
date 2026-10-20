@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import all WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation
+import WeilConjectures.AlgebraicGeometry.StalkInternalHomFinitePresentation
 
 /-!
 # A map of stalks of coherent modules comes from a map on a neighbourhood

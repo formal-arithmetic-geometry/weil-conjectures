@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkHomotopySpread
-import Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation
+import WeilConjectures.AlgebraicGeometry.StalkInternalHomFinitePresentation
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Spreading two inverse homotopies

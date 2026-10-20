@@ -5,9 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationLocalDescent
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Gluing torsion-controlled triples -/
 

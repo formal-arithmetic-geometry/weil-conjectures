@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective

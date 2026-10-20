@@ -108,13 +108,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMorphism",
-  "file": "lean/Sheaf/Algebra/Homology/ModuleExtensionByZeroStalkMorphism.lean",
+  "module": "WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkMorphism",
+  "file": "lean/WeilConjectures/Algebra/Homology/ModuleExtensionByZeroStalkMorphism.lean",
   "declaration": "AlgebraicGeometry.exists_moduleExtensionByZero_stalk_morphism",
   "statement": "theorem exists_moduleExtensionByZero_stalk_morphism (X : RingedSpace.{u}) :\n    (∀ (W : Opens X) (x : X) (hx : x ∈ W),\n      ∃ e : (W.sheafOfModulesEquivOver (moduleRings X)).functor ⋙\n          RingedSpace.moduleStalkFunctor (X.restrict (Opens.isOpenEmbedding W)) ⟨x, hx⟩ ⋙\n          ModuleCat.restrictScalars\n            (X.toPresheafedSpace.restrictStalkIso (Opens.isOpenEmbedding W) ⟨x, hx⟩).inv.hom ⟶\n        (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙\n          PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)) ⋙\n          RingedSpace.moduleStalkFunctor X x,\n        ∀ (G : SheafOfModules.{u} ((moduleRings X).over W)) (V : Opens W)\n          (hV : (⟨x, hx⟩ : W) ∈ V)\n          (s : ((W.sheafOfModulesEquivOver (moduleRings X)).functor.obj G).val.obj (op V)),\n          (e.app G) (TopCat.Presheaf.germ (C := Ab.{u})\n              (X := (X.restrict (Opens.isOpenEmbedding W)).carrier)\n              ((W.sheafOfModulesEquivOver (moduleRings X)).functor.obj G).val.presheaf\n              V ⟨x, hx⟩ hV s) =\n            TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier)\n              ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙\n                PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj\n                  G).val.presheaf\n              ((Opens.isOpenEmbedding W).isOpenMap.functor.obj V) x ⟨⟨x, hx⟩, hV, rfl⟩\n              (((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app\n                G).val.app\n                (op (Over.mk (homOfLE (Set.image_subset_iff.2 (fun y _ => y.2))))) s))",
   "branch": "sheaf-dag",
   "by": "J3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMorphism retired; now WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkMorphism."
  },
  "reviewed": {
   "date": "2026-10-12",

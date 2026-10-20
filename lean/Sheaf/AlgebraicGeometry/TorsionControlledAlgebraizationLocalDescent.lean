@@ -7,7 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.TorsionControlledLocalCocycle
 import Sheaf.AlgebraicGeometry.TorsionControlledDescendedSourceComparisons
-import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.Topology.GlueSheavesOfModules
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Algebraic descent with local formal comparisons
 

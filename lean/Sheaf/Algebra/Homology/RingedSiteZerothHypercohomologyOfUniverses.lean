@@ -5,7 +5,7 @@ Authors: SHEAF maintenance NZ
 -/
 module
 
-public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
+public import WeilConjectures.Algebra.Homology.RingedSiteZerothHypercohomology
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 
 /-!

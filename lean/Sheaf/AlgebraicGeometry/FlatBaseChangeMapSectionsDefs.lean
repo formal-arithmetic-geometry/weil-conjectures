@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
+public import WeilConjectures.AlgebraicGeometry.FlatModulePullbackExact
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Mathlib.AlgebraicGeometry.Pullbacks

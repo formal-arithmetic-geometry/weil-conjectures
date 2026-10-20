@@ -9,7 +9,7 @@ public import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
 public import Sheaf.Paper.StrictPerfectCoefficientPackage
 public import Sheaf.CategoryTheory.KInjectiveTotalDerived
 public import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.SplitPerfectTensorKInjective

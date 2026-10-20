@@ -6,7 +6,7 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure

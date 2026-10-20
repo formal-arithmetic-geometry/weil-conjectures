@@ -17,7 +17,7 @@ import WeilConjectures.Topology.ConstantIntegerOpenExtensionComparison
 import WeilConjectures.Topology.IrreducibleOpenComplementDimension
 import WeilConjectures.Topology.AbelianOpenExtensionByZeroStalks
 import Sheaf.Topology.NoetherianOpenClosedCohomologySequence
-import Sheaf.Topology.IrreducibleNoetherianConstantAcyclic
+import WeilConjectures.Topology.IrreducibleNoetherianConstantAcyclic
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 
 /-! # Integer extension-by-zero generators in the dimension induction

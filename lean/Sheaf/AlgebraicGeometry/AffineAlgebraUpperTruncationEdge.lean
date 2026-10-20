@@ -6,7 +6,7 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.CategoryTheory.LeftExactUpperTruncationComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 

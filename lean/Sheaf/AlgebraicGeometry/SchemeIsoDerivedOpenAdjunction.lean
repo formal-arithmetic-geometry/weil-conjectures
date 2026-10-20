@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedRestrictionSquare
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective

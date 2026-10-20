@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
 

@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
+public import WeilConjectures.Algebra.Homology.RingedSiteZerothHypercohomology
 import Sheaf.Algebra.Homology.HomComplexHypercohomology
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 

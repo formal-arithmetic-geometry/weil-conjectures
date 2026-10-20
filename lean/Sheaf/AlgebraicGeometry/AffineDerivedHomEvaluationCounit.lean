@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 import Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint
 import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 import Sheaf.AlgebraicGeometry.DerivedInternalHomUnitIso

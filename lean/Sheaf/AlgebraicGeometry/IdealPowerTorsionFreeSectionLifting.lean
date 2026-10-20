@@ -10,9 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection
 import Sheaf.AlgebraicGeometry.IdealPowerTorsionFreeSectionRestriction
-import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.Topology.GlueSheavesOfModules
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Lifting a section into an ideal-power-torsion-free module
 
