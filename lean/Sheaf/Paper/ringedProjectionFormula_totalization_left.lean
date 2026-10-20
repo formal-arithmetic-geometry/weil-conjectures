@@ -8,7 +8,7 @@ module
 
 public import Sheaf.Paper.ProjectionFormulaArrows
 import Sheaf.Paper.StrictPerfectCoefficientPackage
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullback

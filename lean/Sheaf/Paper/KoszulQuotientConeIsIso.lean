@@ -9,7 +9,7 @@ public import Sheaf.Paper.IntrinsicKoszulCompletion
 public import Sheaf.Paper.CompletionMap
 import Sheaf.RingTheory.NoetherianKoszulAugmentationProZero
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

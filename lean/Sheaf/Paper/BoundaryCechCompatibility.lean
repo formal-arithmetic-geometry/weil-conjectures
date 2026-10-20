@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.Paper.BoundaryCechInjectiveMiddle

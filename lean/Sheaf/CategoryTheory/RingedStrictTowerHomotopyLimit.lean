@@ -23,7 +23,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 
 /-!

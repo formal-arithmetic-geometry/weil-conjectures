@@ -5,7 +5,7 @@ Authors: SHEAF group R2
 -/
 module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
 import Sheaf.AlgebraicGeometry.AffineAlgebraTensorPullbackExact

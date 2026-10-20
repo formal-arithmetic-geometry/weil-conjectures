@@ -6,7 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.DirectSum.Basic
 import Sheaf.AlgebraicGeometry.DerivedGlobalSectionsPreservesCoproducts

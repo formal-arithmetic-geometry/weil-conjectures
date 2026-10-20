@@ -12,12 +12,13 @@ public import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import WeilConjectures.LinearAlgebra.GenericExteriorPowerLocalization
 import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.CoherentFiniteType
 import Sheaf.RingTheory.FiniteProjectiveOfStandardCover
 import WeilConjectures.LinearAlgebra.ExteriorTopDirectSum
 import Mathlib.RingTheory.Localization.BaseChange
 import WeilConjectures.RingTheory.CoverModuleExact
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Determinants of exact sequences of finite projective modules

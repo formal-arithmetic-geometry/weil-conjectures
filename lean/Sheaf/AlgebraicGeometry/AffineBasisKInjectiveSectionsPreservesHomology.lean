@@ -5,7 +5,7 @@ Authors: SHEAF group G2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 

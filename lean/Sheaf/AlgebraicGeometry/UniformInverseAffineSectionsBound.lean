@@ -6,7 +6,7 @@ Authors: SHEAF group R3
 module
 
 public import Sheaf.Topology.OpenModuleCohomology
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated

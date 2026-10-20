@@ -16,7 +16,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalCompatibleCover
-import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.Topology.GlueSheavesOfModules
+import Sheaf.Paper.DerivedHomMayerVietoris
 /-! # Alignment of local Koszul identifications
 
 Source: Stacks Project, Tag 0BQY, comparison of regular generators. -/

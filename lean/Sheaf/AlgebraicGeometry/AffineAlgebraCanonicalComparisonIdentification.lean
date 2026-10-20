@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility
 

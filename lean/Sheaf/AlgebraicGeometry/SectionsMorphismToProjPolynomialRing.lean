@@ -9,10 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.ProjPolynomialTwistChart
 public import Sheaf.Paper.NonvanishingSectionTrivializes
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.Topology.GlueSheavesOfModules
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Morphism to polynomial Proj from generating sections
 

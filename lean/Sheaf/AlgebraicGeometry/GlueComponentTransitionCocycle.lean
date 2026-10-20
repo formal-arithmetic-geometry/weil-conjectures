@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
-import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.Topology.GlueSheavesOfModules
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Čech transition functions glue local trivial line bundles

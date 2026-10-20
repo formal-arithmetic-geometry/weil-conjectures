@@ -5,7 +5,7 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute
