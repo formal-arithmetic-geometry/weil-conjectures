@@ -116,13 +116,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OverlapPairRefinementPersistence",
-  "file": "lean/Sheaf/AlgebraicGeometry/OverlapPairRefinementPersistence.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OverlapPairRefinementPersistence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OverlapPairRefinementPersistence.lean",
   "declaration": "AlgebraicGeometry.overlap_pair_map_refinement_persistence",
   "statement": "theorem overlap_pair_map_refinement_persistence\n    {X Y Y' Z : Scheme.{u}} (U : X.OpenCover.{u})\n    (q : Y ⟶ X) (q' : Y' ⟶ X) (r : Y' ⟶ Y) (hr : r ≫ q = q')\n    (p : Z ⟶ Y) (p' : Z ⟶ Y') (t : Z ⟶ X)\n    (h : p ≫ q = t) (h' : p' ≫ q' = t) (hp : p' ≫ r = p)\n    (N : (a : U.I₀) → (U.X a).Modules) (M : Z.Modules)\n    (e : ∀ a, (Scheme.Modules.pullback (U.pullbackHom t a)).obj (N a) ≅\n      (Scheme.Modules.pullback ((U.pullback₁ t).f a)).obj M)\n    (a b : U.I₀) :\n    let V := U.pullback₁ q\n    let A := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q d)).obj (N d)\n    let W := V.pullback₁ p\n    let D := (modulesPseudofunctor.toDescentData W.f).obj M\n    let ε := overlapIteratedComparison U q p t h N M e\n    (∃ φ : (Scheme.Modules.pullback (pullback.fst (V.f a) (V.f b))).obj (A a) ⟶\n        (Scheme.Modules.pullback (pullback.snd (V.f a) (V.f b))).obj (A b),\n      overlapPairSquare V A p D ε a b φ) →\n    let V' := U.pullback₁ q'\n    let A' := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q' d)).obj (N d)\n    let W' := V'.pullback₁ p'\n    let D' := (modulesPseudofunctor.toDescentData W'.f).obj M\n    let ε' := overlapIteratedComparison U q' p' t h' N M e\n    ∃ φ' : (Scheme.Modules.pullback (pullback.fst (V'.f a) (V'.f b))).obj (A' a) ⟶\n        (Scheme.Modules.pullback (pullback.snd (V'.f a) (V'.f b))).obj (A' b),\n      overlapPairSquare V' A' p' D' ε' a b φ'",
   "branch": "sheaf-dag",
   "by": "S2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (H3): retired Sheaf twin Sheaf.AlgebraicGeometry.OverlapPairRefinementPersistence; points at its adopted upstream twin. The public persistence theorem has the recorded statement unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -135,14 +136,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "C-b1b3d",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T181123-L-2607513",
+  "landing": "20261020T162307-L-3587565",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf module (empty Withdrawn stub) and repointed node lem-pc-fp-overlap-pair-refinement-persistence vs live upstream WeilConjectures.AlgebraicGeometry.OverlapPairRefinementPersistence (statement verbatim, sorry-free, standard axioms), retire-items.tsv line 292, zero importers"
  },
  "lean_audit": {
   "master": {
