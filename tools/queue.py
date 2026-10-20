@@ -195,9 +195,11 @@ def main() -> int:
     # rework (the human, 2026-10-20): the quarantined modules first; whatever depends on one is not an item meanwhile
     import rework
     rw_rows = rework.load()
-    rw_open, blocked_n, blocked_m, rw_clusters = [], set(), set(), []
+    rw_open, blocked_n, blocked_m, rw_clusters, rt_prio = [], set(), set(), [], {}
     if rw_rows:
-        rw_clusters = rework.clusters(rw_rows)   # the human, 2026-10-20: one item per cluster (its root), bottom-up
+        # the coordinator, 2026-10-20: retire items whose copy collides in a root's environment come first; those roots wait
+        rt_prio, rw_held = rework.priority_retire(rw_rows)
+        rw_clusters = rework.clusters(rw_rows, rw_held)   # the human, 2026-10-20: one item per cluster (its root), bottom-up
         # a new root not compiled yet waits for `tools/rework.py autorestore` (it may come back by itself)
         rw_clusters = [c for c in rw_clusters if (rw_rows[c["item"]].get("cause") or "").startswith("error:")]
         rw_open = [c["item"] for c in rw_clusters]
@@ -240,12 +242,14 @@ def main() -> int:
         p = rework.ROOT / (rw_rows[m].get("quarantine") or rework.qpath(m))
         try: return li.sorry_count(p.read_text(errors="ignore"))
         except OSError: return ""
-    rows = [(c["item"], 3, "-", sum(qsorry(m) or 0 for m in c["members"]), "rework", f"cluster {len(c['members'])}")
-            for c in rw_clusters]
+    rows = [(m, 3, "-", "", "retire-first", f"unblocks {n} rework roots")
+            for m, n in sorted(rt_prio.items(), key=lambda x: (-x[1], x[0]))]
+    rows += [(c["item"], 3, "-", sum(qsorry(m) or 0 for m in c["members"]), "rework", f"cluster {len(c['members'])}")
+             for c in rw_clusters]
     # retire items (the human, 2026-10-20; coord/retire-items.tsv): after the rework items, before every other queue
     rt_rows = rework.retire_rows()                       # open ones: every `after` copy gone
     rt_all = rework.retire_rows(open_only=False)
-    rt_items = [m for m in sorted(rt_rows) if m not in blocked_m and m not in rw_rows]
+    rt_items = [m for m in sorted(rt_rows) if m not in blocked_m and m not in rw_rows and m not in rt_prio]
     rt_items.sort(key=lambda m: (int(rt_rows[m]["depth"]) if rt_rows[m]["depth"].isdigit() else 99, m))
     rows += [(m, 3, rt_rows[m]["depth"] or "-", "", "retire", f"consumers {len(rt_rows[m]['consumers'])}") for m in rt_items]
     items3 = [x for x in items3 if x[2] not in rt_all]   # a copy being retired is no proof item

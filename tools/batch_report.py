@@ -116,7 +116,7 @@ rework_open = []   # 2026-10-20 (the human): rework items (tools/rework.py) are 
 for r in rows(LIVE / "coord/queue.tsv"):
     if r[1] == "3" and len(r) > 4 and r[4] == "rework":
         rework_open.append(r[0]); continue
-    if r[1] == "3" and len(r) > 4 and r[4] == "retire":   # coord/retire-items.tsv: no batch's proof work
+    if r[1] == "3" and len(r) > 4 and r[4] in ("retire", "retire-first"):   # coord/retire-items.tsv: no batch's proof work
         retire_open.append(r[0]); continue
     if r[1] == "3":
         try: n = int(r[3])

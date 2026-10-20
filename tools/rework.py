@@ -146,7 +146,7 @@ def open_items(rows=None, imports=None) -> list[str]:
     return sorted(out, key=lambda m: (-waiting(m), m))
 
 
-def clusters(rows=None) -> list[dict]:
+def clusters(rows=None, held: set | None = None) -> list[dict]:
     """The rework items as CLUSTERS (the human, 2026-10-20): a root is a quarantined module whose fix has not landed and
     that imports no other open rework module; its cluster is the root and every open rework module that imports it
     (transitively, through rework modules: a library module importing a quarantined one is quarantined itself).
@@ -190,6 +190,10 @@ def clusters(rows=None) -> list[dict]:
     for rs in groups.values():
         rs = sorted(rs)
         mem = set().union(*(member_of[r] for r in rs))
+        free = [r for r in rs if r not in (held or set())]
+        if held is not None and not free:
+            continue          # every root waits for a priority retire item
+        rs = free + [r for r in rs if r not in free]
         out.append({"item": rs[0], "roots": rs, "members": rs + sorted(mem - set(rs))})
     return sorted(out, key=lambda c: (-len(c["members"]), c["item"]))
 
@@ -222,6 +226,42 @@ def retire_rows(open_only: bool = True) -> dict[str, dict]:
         out[copy] = {"module": copy, "twin": r[3], "class": r[4], "depth": r[5], "after": after,
                      "consumers": [x for x in r[7].split() if x and x != "-"], "nodes": r[8], "api": r[9]}
     return out
+
+
+COLLISION = re.compile(r"import (\S+) failed, environment already contains .*? from (\S+?)(?:\s|\||$)")
+
+
+def collision_copies(cause: str) -> set[str]:
+    """the Sheaf copies named in a twin-collision error (`import X failed, environment already contains ... from Y`)"""
+    out = set()
+    for a, b in COLLISION.findall(cause or ""):
+        out |= {x.rstrip("|,.") for x in (a, b) if x.startswith("Sheaf.")}
+    return out
+
+
+def priority_retire(rows=None) -> tuple[dict[str, int], set[str]]:
+    """The coordinator, 2026-10-20: a retire item whose copy appears in the cause of a rework root ranks ahead of every
+    rework cluster, by the number of roots it unblocks; those roots are held until the copy is gone (then autorestore
+    compiles them again). Returns ({copy: roots unblocked}, held roots)."""
+    rows = load() if rows is None else rows
+    live = {m for m in rows if not landed(m)}
+    rimp = {m: i & live for m, i in rework_imports({m: rows[m] for m in live}).items()}
+    retire = retire_rows(open_only=False)
+    score, held = collections.Counter(), set()
+    for m in live:
+        if rimp.get(m, set()) - {m}:
+            continue
+        cps = {c for c in collision_copies(rows[m].get("cause", "")) if c in retire}
+        if cps:
+            held.add(m)
+            for c in cps:
+                score[c] += 1
+    return dict(score), held
+
+
+def stale_cause(m: str, rows: dict) -> bool:
+    """the cause names a module (a collision partner) that is no longer in lean/: compile the module again"""
+    return any(not (ROOT / opath(x)).is_file() for x in collision_copies(rows[m].get("cause", "")))
 
 
 def blocked(g=None, imports=None, rows=None) -> tuple[set[str], set[str], dict[str, str]]:
@@ -451,8 +491,9 @@ def autorestore(workers: int = 4, limit: int = 60, recheck: bool = False) -> int
         return hashlib.sha1(p.read_bytes()).hexdigest() if p.is_file() else None
     claimed = lambda m: (ROOT / "coord" / "claims" / (m + ".lock")).is_file()   # noqa: E731
     cand = sorted(m for m in live if not (rimp.get(m, set()) - {m}) and not claimed(m)
-                  and tried.get(m) != blob(m) and (not (rows[m].get("cause") or "").startswith("error:")
-                                                   or (recheck and "no message located" in rows[m].get("cause", ""))))[:limit]
+                  and ((tried.get(m) != blob(m) and (not (rows[m].get("cause") or "").startswith("error:")
+                                                   or (recheck and "no message located" in rows[m].get("cause", ""))))
+                       or stale_cause(m, rows)))[:limit]
     if not cand:
         return 0
     box = li.LEAN / ".sandbox" / "rework"

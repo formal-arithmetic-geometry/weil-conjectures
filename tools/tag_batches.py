@@ -75,6 +75,8 @@ rows = []; allrows = []
 for l in (R / "coord/queue.tsv").read_text().splitlines():
     r = l.split("\t")
     if l.startswith("#") or len(r) < 2: continue
+    if len(r) > 4 and r[4] == "retire-first":   # unblocks rework roots (twin collisions): the dispatcher's first lane
+        rows.append(f"{r[0]}\tretire-first"); allrows.append(f"{r[0]}\tretire-first"); continue
     if len(r) > 4 and r[4] == "retire":   # coord/rework-retire.tsv: the dispatcher's second lane
         rows.append(f"{r[0]}\tretire"); allrows.append(f"{r[0]}\tretire"); continue
     if len(r) > 4 and r[4] == "rework":   # the human, 2026-10-20: quarantined by the upstream sync; the dispatcher's first lane
