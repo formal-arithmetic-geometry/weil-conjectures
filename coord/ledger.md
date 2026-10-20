@@ -17929,3 +17929,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:20 L: returned deliver/S8/Sheaf.Paper.FiniteReductionReconstructionCompleted (reviewer RETURN: (the landing tools, head 7440fff75) the delivery did not land: lean/Sheaf/Paper/FiniteReductionReconstructionCompleted.l)
 - 12:20 L: returned deliver/S8/Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtension (reviewer RETURN: (the landing tools, head 61ff16d22) the delivery did not land: lean/Sheaf/SecSmoothPurity/ProperFiniteCoefficientExtensi)
 - 12:21 L: returned deliver/T1/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (the landing tools, head 33c239a1e) the delivery did not land: lean/Sheaf/Paper/CompletedOperationTowerSubstitution.lean)
+- 12:21 L: returned deliver/Z6/Sheaf.Paper.WContractibleConstantReductionsML (reviewer RETURN: (reviewer C-662c4, head 662c40be5) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.WContractibleC)
