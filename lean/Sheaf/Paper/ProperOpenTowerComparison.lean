@@ -148,48 +148,100 @@ def properOpenScalarOrigin (I : Ideal A) [∀ n : ℕ, Finite (A ⧸ I ^ (n + 1)
     origin := w.2.1
     iso := w.2.2 }
 
-/-- The unique canonical restriction isomorphism and its open adjunct, with the finite
-evaluation normalization. The equation with the open unit is the typed form of
-`λ G_i Γ = 1` under `G_i J_i ≅ 1`. The equality with `gamma` identifies actual natural
-transformations before evaluation, including noncartesian squares.
+/-- The explicit restriction map, its cartesian normalization, and its open adjunct
+normalization. This bundles the three structural comparison identities used by the
+proper/open tower theorem.
+Source: Stacks Tags 0F7B, 0F7F and 07A7; strict-tower mate calculus
+(blueprint: lem-sp-proper-open-comparison-normalization).
+-/
+theorem properOpenComparisonNormalization [IsNoetherianRing A]
+    {U V W Z : Scheme.{u}} [IsNoetherian U] [IsNoetherian V]
+    [IsNoetherian W] [IsNoetherian Z]
+    (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+    [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i) :
+    IsIso (properOpenRestrictionMap A k r p i h) ∧
+      (∀ hp : IsPullback k r p i,
+        properOpenRestrictionMap A k r p i h =
+          properOpenCartesianRestrictionMap A k r p i h) ∧
+      (∀ (lam : (J A k ⋙ R A p) ⋙ G A i ≅ R A r),
+          lam.hom = properOpenRestrictionMap A k r p i h →
+          properOpenOpenAdjunct A k r p i lam = gamma A k r p i h) := by
+  sorry
 
-Source: Stacks 0F7B and 0F7F with 0941; the strict-tower enhancement and its open
-normalization are agent assertions, as explicitly recorded in the DAG source
+/-- The normalization and finite-origin identities for an explicit restriction isomorphism.
+Source: Stacks Tags 0F7B, 0F7F and 0941; strict-tower normalization in the blueprint
 (blueprint: lem-sp-proper-open-tower-comparison).
+The open adjunction transpose is calculated before evaluation, and the finite comparison
+is then transported through the canonical source and target evaluation isomorphisms. -/
+private theorem properOpenNormalization [IsNoetherianRing A]
+    (I : Ideal A) [∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))]
+    {U V W Z : Scheme.{u}} [IsNoetherian U] [IsNoetherian V]
+    [IsNoetherian W] [IsNoetherian Z]
+    (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+    [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i)
+    (lam : (J A k ⋙ R A p) ⋙ G A i ≅ R A r)
+    (hlam : lam.hom = properOpenRestrictionMap A k r p i h) :
+    properOpenOpenAdjunct A k r p i lam = gamma A k r p i h ∧
+      (∀ M : Derived A U,
+        (jAdj A i).unit.app ((R A r).obj M) ≫
+            (G A i).map ((properOpenOpenAdjunct A k r p i lam).app M) ≫
+            lam.hom.app M =
+          𝟙 ((R A r).obj M))  := by
+  constructor
+  · exact (properOpenComparisonNormalization A k r p i h).2.2 lam hlam
+  · intro M
+    have ht := (((jAdj A i).whiskerRight (Derived A U)).homEquiv
+      (R A r) (J A k ⋙ R A p)).apply_symm_apply lam.inv
+    have htM := congr_app ht M
+    simp only [Adjunction.homEquiv_unit, NatTrans.comp_app,
+      Adjunction.whiskerRight_unit_app_app, Functor.whiskeringRight_obj_map,
+      Functor.whiskerRight_app] at htM
+    simpa only [properOpenOpenAdjunct, Category.assoc] using
+      (congrArg (fun f ↦ f ≫ lam.hom.app M) htM).trans (lam.inv_hom_id_app M)
 
-Proof, following the five DAG steps:
-1. Use the published strict constant-coefficient operations with B=A and n indexing
-   positive level n+1. Weakly-etale localization and localizedModuleExactIndependent
-   identify moduleJ with the prescribed sheafified extension presheaf: maps to the
-   open are unique when they exist, so its direct sum is the stated module or zero.
-   This preserves the open units and gives the same exact tower and derived adjunctions.
-   Noetherian schemes make the open immersions quasi-compact. The strict-tower calculus
-   supplies the clopen lift s into V times_Z W, with b s=k and q s=r.
-2. Split every test object over the clopen image of s and its complement. Sheaf gluing
-   identifies modules, transitions and differentials with pairs. Both J_s and s_* are
-   F mapped to (F,0); openToR is identity on the first factor and zero on the other.
-   Thus it is invertible and the direct-image unit is the clopen projection pi.
-   The unit-normalized open compositor gives properOpenRestrictedExtension.
-3. On the ringed diagram site choose a K-injective resolution. Restriction G_b
-   preserves K-injectives because it is right adjoint to exact J_b. Localization of
-   the ringed-site morphism identifies both restricted direct images with q_*G_b
-   of that same resolution, by identity on sections. This is precisely exchange.
-   Compose with step 2 and the normalized direct-image compositor to obtain the
-   displayed properOpenRestrictionMap, an isomorphism. For a cartesian square the
-   clopen lift is an isomorphism and this is the square mate followed by the open unit.
-4. Compute the open transpose of the existing proper mate gamma. The square-mate
-   unit equation cancels the p adjunction unit; the restriction of beta is the open
-   identity. Naturality moves the r counit past the restriction comparison. What
-   remains is R_q J_s epsilon_r composed with R_q pi_s G_q R_r and eta_q R_r.
-   Since pi_s=eta_s under J_s=R_s, the composite-unit formula and the r triangle
-   identity make this the identity of R_r. The open Hom bijection therefore identifies
-   gamma with properOpenOpenAdjunct, as transformations on derived strict towers.
-5. Apply gamma_isIso and gamma_evaluation to the specified quotient origins, using
-   finiteGamma from properOpenInterchangeCoherence and the canonical finiteSource
-   and finiteTarget comparisons. Each origin has its own lower bound; the strict
-   transitions belong to N and no transitions between etale origins are required.
-   Substitute step 4 before evaluating; no faithfulness of evaluation is invoked.
-   Uniqueness of lambda follows because its hom is the specified restriction map. -/
+
+attribute [local irreducible] G R J adj jAdj properOpenOpenAdjunct finiteSource finiteTarget HD
+
+/-- Finite-origin normalization of the open adjunct, after the strict comparison.
+Source: Stacks Tags 0F7B and 0941 and the finite evaluation clause of the blueprint
+(blueprint: lem-sp-proper-open-tower-comparison).
+The finite source and target mates transport the normalized finite proper/open comparison
+at each level; independent origins are used level by level. -/
+private theorem properOpenFiniteNormalization [IsNoetherianRing A]
+    (I : Ideal A) [∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))]
+    {U V W Z : Scheme.{u}} [IsNoetherian U] [IsNoetherian V]
+    [IsNoetherian W] [IsNoetherian Z]
+    (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+    [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i)
+    (lam : (J A k ⋙ R A p) ⋙ G A i ≅ R A r)
+    (hlam : lam.hom = properOpenRestrictionMap A k r p i h) :
+    ∀ (N : Derived A U) (w : ∀ n : ℕ, properOpenQuotientOrigin A I U N n),
+      IsIso ((properOpenOpenAdjunct A k r p i lam).app N) ∧
+      ∀ n : ℕ,
+        (finiteSource A r i N n
+          (properOpenScalarOrigin A I U N n (w n))).hom ≫
+            (ev A Z n).map ((properOpenOpenAdjunct A k r p i lam).app N) =
+          (HD A Z (properOpenScalarOrigin A I U N n (w n)).Λ
+              (properOpenScalarOrigin A I U N n (w n)).φ).map
+            ((finiteGamma (properOpenScalarOrigin A I U N n (w n)).Λ
+              k r p i h).hom.app
+              (properOpenScalarOrigin A I U N n (w n)).origin.L) ≫
+            (finiteTarget A k p N n
+              (properOpenScalarOrigin A I U N n (w n))).hom  := by
+  have heq := (properOpenNormalization A I k r p i h lam hlam).1
+  intro N w
+  constructor
+  · rw [heq]
+    exact gamma_isIso A k r p i h N
+      (fun n ↦ ⟨properOpenScalarOrigin A I U N n (w n)⟩)
+  · intro n
+    have hh := gamma_evaluation A k r p i h N n
+      (properOpenScalarOrigin A I U N n (w n))
+    simpa only [heq] using hh
+
 theorem properOpenTowerComparison [IsNoetherianRing A]
     (I : Ideal A) [∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))]
     {U V W Z : Scheme.{u}} [IsNoetherian U] [IsNoetherian V]
@@ -214,7 +266,28 @@ theorem properOpenTowerComparison [IsNoetherianRing A]
                 (properOpenScalarOrigin A I U N n (w n)).φ).map
                 ((finiteGamma (properOpenScalarOrigin A I U N n (w n)).Λ k r p i h).hom.app
                   (properOpenScalarOrigin A I U N n (w n)).origin.L) ≫
-              (finiteTarget A k p N n (properOpenScalarOrigin A I U N n (w n))).hom := by
-  sorry
+              (finiteTarget A k p N n (properOpenScalarOrigin A I U N n (w n))).hom  := by
+  have hcore := properOpenComparisonNormalization A k r p i h
+  let : IsIso (properOpenRestrictionMap A k r p i h) := hcore.1
+  let lam : (J A k ⋙ R A p) ⋙ G A i ≅ R A r :=
+    asIso (properOpenRestrictionMap A k r p i h)
+  have hlam : lam.hom = properOpenRestrictionMap A k r p i h := by
+    rfl
+  have hnorm := properOpenNormalization A I k r p i h lam hlam
+  have hcart (hp : IsPullback k r p i) :
+      lam.hom = properOpenCartesianRestrictionMap A k r p i h := by
+    rw [hlam]
+    exact hcore.2.1 hp
+  have hfin := properOpenFiniteNormalization A I k r p i h lam hlam
+  refine ⟨lam, ?_, ?_⟩
+  · refine ⟨hlam, ?_, hnorm.1, hnorm.2, ?_⟩
+    · intro hp
+      exact hcart hp
+    · intro N w
+      exact hfin N w
+  · intro lam' h'
+    apply Iso.ext
+    exact h'.1.trans hlam.symm
+
 
 end AlgebraicGeometry.ProEtale.StrictTower
