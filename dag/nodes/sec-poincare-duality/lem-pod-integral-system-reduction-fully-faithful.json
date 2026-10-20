@@ -1,0 +1,113 @@
+{
+ "id": "lem-pod-integral-system-reduction-fully-faithful",
+ "kind": "statement",
+ "title": "Coherent reduction is fully faithful on the full category of derived-complete bounded constructible integral coefficient objects",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell. On every scheme X where ell is invertible in every residue field, coherent reduction is fully faithful on the full category of derived-complete bounded constructible integral coefficient objects. The reduction is the specified reduction of the coefficient calculus restricted along the full inclusion, not a diagram of separate derived reductions.",
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099N(2),(5); 0941 in sites-cohomology.tex; Bhatt--Scholze Lemma 3.5.7; extracted from lem-pod-integral-pullback-composition steps 1--3."
+ },
+ "proof": [
+  {
+   "text": "Invertibility of ell in every residue field implies it is a unit in global sections, by the local-ring residue criterion and the germ criterion for units. Transport a constructible object through purCoefficientModel. Its predicate-transport theorem identifies its derived completeness in the normalized reconstruction presentation. purNormalizedReconstruction makes the reduction adjunction unit invertible there, and naturality transports this to the original object. Restrict the adjunction to the full constructible subcategory: the inverse on Hom sends f to the adjoint of f followed by the inverse unit. The triangle identities and unit naturality prove the two inverse equations.",
+   "uses": [
+    "def-pur-completed-coefficient-presentation-transport",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-pur-normalized-reconstruction-adjunction-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-normalized-reconstruction-adjunction-calculus"
+ ],
+ "proof_origin": "A7: proved from the existing normalized reconstruction and coefficient-presentation transport declarations, with explicit global-unit and adjunction calculations.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived complete reduction inverse limit fully faithful",
+   "results": "Generic full-faithfulness and reflective adjunction lemmas; no completed-coefficient application.",
+   "date": "2026-10-19",
+   "verdict": "Use the existing specialized calculus, not a duplicate derived category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "results": "Adjunction.fullyFaithfulLOfIsIsoUnit, Functor.fullyFaithfulCancelRight.",
+   "date": "2026-10-19",
+   "verdict": "Generic tools do not identify the Roos unit/projections."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientSequenceDerived|fullyFaithful|integralPullbackComposition in lean/Sheaf, lean/WeilConjectures and Mathlib/CategoryTheory",
+   "results": "Existing coefficient evaluation calculus supplies the reduction/limit adjunction. FiniteSystemPullbackCoherence supplies finite system associativity.",
+   "date": "2026-10-19",
+   "verdict": "Use those declarations; no existing normalized bridge located."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPullbackComposition",
+  "date": "2026-10-19",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-integral-pullback-composition",
+   "place": "Proof steps 1--3: coherent reduction, its full faithfulness, and the projection-normalized system pullback comparison.",
+   "via": [
+    "lem-pod-integral-pullback-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSystemReductionFullyFaithful",
+  "file": "lean/Sheaf/Paper/IntegralSystemReductionFullyFaithful.lean",
+  "declaration": "WeilConjectures.integralSystemReduction_fullyFaithful",
+  "declarations": [
+   "WeilConjectures.integralSystemRings",
+   "WeilConjectures.integralSystemTransition",
+   "WeilConjectures.integralSystemRings_finite",
+   "WeilConjectures.integralSystemReduction",
+   "WeilConjectures.integralSystemReductionEvaluation",
+   "WeilConjectures.integralSystemReduction_fullyFaithful"
+  ],
+  "statement": "theorem integralSystemReduction_fullyFaithful (X : Scheme.{u})\n    [∀ x : X, Invertible (l : X.residueField x)] :\n    (integralSystemReduction l E X).Full ∧ (integralSystemReduction l E X).Faithful",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261020T051013-L-1525395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261020T051013-L-1525395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

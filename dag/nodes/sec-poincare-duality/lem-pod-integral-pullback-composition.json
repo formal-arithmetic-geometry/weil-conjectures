@@ -28,110 +28,23 @@
  ],
  "proof": [
   {
-   "text": "Work on fixed small pro-etale skeletons with the derived reduction/total-limit adjunction $\\mathcal R_T\\dashv\\mathcal L_T$ of [lem-coef-derived-system-evaluation-calculus], with unit $\\eta$ and counit $\\epsilon$. Let $U_f$ be exact levelwise finite inverse image, supplied by [prop-weil-pbc-proetale-constant-exact, lem-coef-semilinear-derived-sections]. For one flat-term K-flat representative $P\\to K$, its reductions $P_n$ are K-flat with flat terms by [lem-pur-kflat-change-of-rings]. The successive scalar-extension comparison of [lem-sfb-successive-derived-quotient-normalization] identifies $P_m\\otimes^L_{(A_{E,m})_T}(A_{E,n})_T$ with $P_n$, with coherent quotient transitions. Pullback preserves these identifications by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied over $A_{E,m}$ to $P_m$ and the quotient $A_{E,n}$. Thus $\\mathcal R_TK$, $U_f\\mathcal R_TK$, and their iterated finite pullbacks are normalized systems.",
+   "text": "Lift the finite-system composition through fully faithful coherent reduction using fullyFaithfulCancelRight. Its defining equation follows by cancellation. Evaluate this equation and paste the three beta evaluation squares with naturality of evaluation and finite composition; cancellation of the invertible reduction comparison proves the prescribed finite reduction equation. Apply the fixed-lift associativity theorem to the same defining equation.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-coef-semilinear-derived-sections",
-    "lem-pur-kflat-change-of-rings",
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7E, lemma-pullback-K-flat, and 07A4, lemma-pullback-tensor-product; successive coefficient quotients use the cited normalization node."
-   }
-  },
-  {
-   "text": "Write $F_f=Lf^*$ for the actual integral functor of [def-pur-integral-derived-operations]. Its formula on $P$ is the product-cone realization of the restricted strict tower $f^*P_\\bullet$. Countable products of completed-coefficient sheaves are exact by [lem-weil-proetale-countable-products-exact]. Hence [lem-weil-strict-roos-comparison] identifies this cone naturally with $\\mathcal L_XU_f\\mathcal R_YK$, commuting with all tower projections. The representative comparisons and functorial descent in [lem-pur-integral-operations-well-defined] make this a natural identification of the actual functor $F_f$ with $\\mathcal L_XU_f\\mathcal R_Y$. We use this identification below, including its defining projections. No completed coefficient sheaf is identified with a discrete constant integral sheaf.",
-   "uses": [
-    "def-pur-integral-derived-operations",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison",
-    "lem-pur-integral-operations-well-defined"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; the precise natural and projection-normalized comparison is the statement of lem-weil-strict-roos-comparison."
-   }
-  },
-  {
-   "text": "For each \\(f:X\\to Y\\), use the counit at \\(N=U_f\\mathcal R_YK\\) to define the natural derived-system map \\(\\beta_{f,K}:\\mathcal R_XF_fK\\to U_f\\mathcal R_YK\\). Its evaluation at \\(n\\) is the scalar-extension adjoint of the actual total-limit projection by [lem-coef-derived-system-evaluation-calculus]. Since \\(N\\) is normalized, [lem-coef-normalized-dvr-effectivity] makes every evaluation invertible; the evaluation criterion in [lem-coef-derived-system-evaluation-calculus] therefore makes \\(\\beta_{f,K}\\) an isomorphism of derived systems. These are precisely the canonical reduction maps \\(\\rho_{f,K,n}\\): both are the adjoints of the projections in the defining integral operation, whose canonical reductions are specified by [lem-pur-integral-operations-preserve-constructible]. The same preservation theorem puts \\(F_kK,F_{kh}K,F_hF_kK\\), and all the third-morphism values below, in the required full constructible subcategories. The adjunction triangle identity gives \\(\\mathcal L_X(\\epsilon_N)\\eta_{\\mathcal L_XN}=1\\). As \\(\\epsilon_N\\) is invertible, \\(\\eta_{\\mathcal L_XN}\\) is its inverse after applying \\(\\mathcal L_X\\). Thus the unit is invertible on every integral pullback value appearing here. On such objects \\(A,B\\), adjunction gives \\(\\operatorname{Hom}(\\mathcal R A,\\mathcal R B)\\cong\\operatorname{Hom}(A,\\mathcal L\\mathcal R B)\\cong\\operatorname{Hom}(A,B)\\); the last map composes with \\(\\eta_B^{-1}\\). This proves the full faithfulness needed below from the cited adjunction and counit identities.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-pur-integral-operations-preserve-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 3.5.5 and Lemma 3.5.7(1)-(5), with the regular principal ideal (uniformizer); the adjunction identities give the displayed Hom calculation"
-   }
-  },
-  {
-   "text": "Apply [lem-pod-finite-system-pullback-coherence] to the ring sequence $(A_{E,n})_n$. It supplies the natural system isomorphism $a_{h,k}:U_{kh}\\xrightarrow{\\sim}U_hU_k$, with evaluation the finite comparison of [lem-weil-pbc-proetale-derived-pullback-composition]. Write also $a_{h,k}$ for its component at $\\mathcal R_VK$. Put $B_{h,k}(K)=U_h(\\beta_{k,K})\\circ\\beta_{h,F_kK}$, an isomorphism from $\\mathcal R_ZF_hF_kK$ to $U_hU_k\\mathcal R_VK$, and set $\\delta_{h,k}(K)=B_{h,k}(K)^{-1}a_{h,k}\\beta_{kh,K}$. Define\n$$c^{\\mathcal O_E}_{h,k}(K)=\\eta_{F_hF_kK}^{-1}\\mathcal L_Z(\\delta_{h,k}(K))\\eta_{F_{kh}K}.$$\nFull faithfulness from Step 3 identifies its reduction system with $\\delta_{h,k}(K)$. All three factors are invertible and natural in $K$. Total limit is a functor by [lem-weil-pbc-ringed-strict-tower-homotopy-limit], so this is a natural isomorphism of the actual integral pullbacks. The unit and adjunction used here are those of [lem-coef-derived-system-evaluation-calculus].",
-   "uses": [
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "lem-pod-integral-pullback-system-comparison",
     "lem-pod-finite-system-pullback-coherence",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-coef-derived-system-evaluation-calculus"
+    "lem-pod-integral-system-pullback-lift-associativity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D (lemma-derived-pullback-composition), with total-limit functoriality Tag 0941 (lemma-derived-limit-is-ok)"
-   }
-  },
-  {
-   "text": "By the definition of \\(\\delta_{h,k}\\) in Step 4, \\(B_{h,k}(K)\\mathcal R_Z(c^{\\mathcal O_E}_{h,k}(K))=a_{h,k}\\beta_{kh,K}\\) as an equality of derived-system maps. Evaluate this equality at any \\(n\\geq1\\). The evaluation of \\(\\beta_{kh,K}\\) is \\(\\rho_{kh,K,n}\\), and the evaluation of \\(B_{h,k}(K)\\) is \\(L(h_n)^*(\\rho_{k,K,n})\\circ\\rho_{h,F_kK,n}\\) by Step 3 and [lem-coef-derived-system-evaluation-calculus]. The evaluation of \\(a_{h,k}\\) is exactly the canonical finite comparison of [lem-weil-pbc-proetale-derived-pullback-composition]. This is the stated reduction formula, with the canonical reduction identifications of [lem-pur-integral-operations-preserve-constructible]. This calculation uses every positive uniformizer exponent, with no unramifiedness assumption or change to an ell-power subsequence.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-pur-integral-operations-preserve-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 3.5.7: counit evaluations; Stacks Tag 0D6D fixes the finite comparison"
-   }
-  },
-  {
-   "text": "For $j:Y\\to Z$ put $S=\\mathcal R_VK$ and\n$$B=U_jU_h(\\beta_{k,K})\\circ U_j(\\beta_{h,F_kK})\\circ\\beta_{j,F_hF_kK}.$$\nThis identifies $\\mathcal R_YF_jF_hF_kK$ with $U_jU_hU_kS$. Denote the integral composites in the statement by $C_L,C_R$; composition is read right to left. Apply $\\mathcal R_Y$ and use the equation of Step 5. Naturality of $\\beta_j$ gives\n$$B\\mathcal R_Y(C_L)=U_j(a_{h,k}(S))\\,a_{j,kh}(S)\\,\\beta_{khj,K}.$$\nFor the other composite, substitution gives\n$$B\\mathcal R_Y(C_R)=U_jU_h(\\beta_{k,K})\\,a_{j,h}(\\mathcal R_WF_kK)\\,\\beta_{hj,F_kK}\\,\\mathcal R_Y(c_{hj,k}).$$\nThe naturality square of $a_{j,h}$ at $\\beta_{k,K}$ is\n$$U_jU_h(\\beta_{k,K})\\,a_{j,h}(\\mathcal R_WF_kK)=a_{j,h}(U_kS)\\,U_{hj}(\\beta_{k,K}).$$\nSubstitute it and apply Step 5 for $(hj,k)$ to obtain\n$$B\\mathcal R_Y(C_R)=a_{j,h}(U_kS)\\,a_{hj,k}(S)\\,\\beta_{khj,K}.$$\nThe two right sides agree as derived-system maps by the associativity equation of [lem-pod-finite-system-pullback-coherence]. Cancel $B$ and use the full faithfulness from Step 3, deduced from [lem-coef-derived-system-evaluation-calculus], to obtain $C_L=C_R$. The equality is lifted from a coherent system equation, never from equality of independent finite reductions.",
-   "uses": [
-    "lem-pod-finite-system-pullback-coherence",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition, for finite comparison; whole-system associativity is now cited as lem-pod-finite-system-pullback-coherence. The remaining computation uses naturality and the equation of Step 5."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-derived-system-evaluation-calculus",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-coef-semilinear-derived-sections",
-  "lem-pur-kflat-change-of-rings",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-pur-integral-derived-operations",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "lem-pur-integral-operations-well-defined",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-pod-integral-pullback-system-comparison",
   "lem-pod-finite-system-pullback-coherence",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-pod-integral-system-pullback-lift-associativity"
  ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Existing route retained: normalized finite reduction systems, natural Roos realization, effectivity and the reduction/limit adjunction, explicit integral lift and reduction equation, and associativity by naturality. The strict Roos comparison and successive quotient normalization are reused as existing statements. The finite whole-system coherence is extracted into a new statement-only node. Stacks 099N(5), 0D6D, 0941 and Bhatt-Scholze 3.5.7 provide the source context; the assembled argument is by the agent."
- },
+ "proof_origin": "A7: full-faithful lift, evaluated reduction diagram algebra, and fixed-lift associativity proved in Lean. The single-morphism projection-normalized system comparison remains a separate sourced obligation.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -341,5 +254,15 @@
   "by": "Q143",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261020T051013-L-1525395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
