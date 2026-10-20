@@ -2,7 +2,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SelfTorAffineSection
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafQuasicoherent
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafQuasicoherent
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
 import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
@@ -12,6 +12,23 @@ set_option autoImplicit false
 universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorSheafPresheaf_eq_upstream {X : Scheme.{u}} (M : X.Modules) (n : ℕ) :
+    Scheme.Modules.exteriorSheafPresheaf M n =
+      _root_.PresheafOfModules.exteriorPower (R := X.presheaf) M.val n := by
+  unfold Scheme.Modules.exteriorSheafPresheaf PresheafOfModules.exteriorPower
+  congr 1
+  funext U V f
+  apply ((Classical.choose_spec
+    (Scheme.Modules.exteriorSheafRestriction_existsUnique M n f)).2 _ ?_).symm
+  exact PresheafOfModules.exteriorPower_map_ιMulti M.val n f
+
+private theorem exteriorSheaf_eq_upstream {X : Scheme.{u}} (M : X.Modules) (n : ℕ) :
+    Scheme.Modules.exteriorSheaf M n = Scheme.Modules.exteriorPower M n := by
+  unfold Scheme.Modules.exteriorSheaf Scheme.Modules.exteriorPower
+    Scheme.Modules.sheafificationObj
+  rw [exteriorSheafPresheaf_eq_upstream]
 
 private theorem affine_iso_from_sections {X : Scheme.{u}} [IsAffine X]
     (P Q : X.Modules) [P.IsQuasicoherent] [Q.IsQuasicoherent]
@@ -174,7 +191,9 @@ theorem exists_selfTor_conormal_wedge_chart_from_sections
   obtain ⟨r⟩ := Scheme.Modules.exteriorSheaf_restrict_iso N n V.1
   have : (E.restrict V.1.ι).IsQuasicoherent :=
     (SheafOfModules.isQuasicoherent V.1.toScheme.ringCatSheaf).prop_of_iso r.symm
-      (Scheme.Modules.isQuasicoherent_exteriorSheaf_of_isAffine (N.restrict V.1.ι) n)
+      (by
+        rw [exteriorSheaf_eq_upstream]
+        exact Scheme.Modules.isQuasicoherent_exteriorSheaf_of_isAffine (N.restrict V.1.ι) n)
   have : ((T.obj M).restrict V.1.ι).IsQuasicoherent :=
     affine_model_chart_quasicoherent i U M
   exact affine_over_iso_from_sections E (T.obj M) V e

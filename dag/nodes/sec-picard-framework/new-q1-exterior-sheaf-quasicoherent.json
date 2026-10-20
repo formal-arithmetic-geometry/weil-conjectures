@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "For every affine open W and f in Gamma(X,W), the restriction map of M to D(f) is a localization. Apply exteriorPower.isLocalizedModule_of_pure_wedge to its exterior restriction, with the coefficient-ring localization supplied by affinity. The required pure-wedge formula is exactly the defining property of exteriorSheafRestriction.",
+   "text": "For every affine open W and f in Gamma(X,W), the restriction map of M to D(f) is a localization. Apply exteriorPower.isLocalizedModule_of_pure_wedge to the restriction of PresheafOfModules.exteriorPower, with the coefficient-ring localization supplied by affinity. Its required pure-wedge formula is PresheafOfModules.exteriorPower_map_ιMulti.",
    "uses": [
     "lem-weil-pbc-affine-module-basic-open-localization",
     "new-v2-generic-exterior-power-localization",
@@ -25,7 +25,7 @@
    "elementary": false
   },
   {
-   "text": "Identify exteriorSheafPresheaf with PresheafOfModules.exteriorPower: the object modules coincide and exteriorSheafRestriction_existsUnique identifies their restriction maps, using the upstream pure-wedge formula. Transport the upstream affine-unit bijectivity theorem through this equality. The canonical exterior sheafification unit is bijective on W and D(f), since both are affine and M is quasi-coherent. For a section on D(f), lift across this unit and use localization surjectivity to obtain an extending power multiple on W. Naturality of the unit identifies its restriction with the desired power multiple. For a section on W whose restriction vanishes, lift across the unit on W, use injectivity of the unit on D(f), and apply the localization zero criterion to obtain a killing power. Linearity of the unit transports that equation back to the exterior sheaf.",
+   "text": "The canonical exterior sheafification unit is bijective on W and D(f), since both are affine and M is quasi-coherent, by the upstream exteriorSheaf_affine_unit_bijective theorem. For a section on D(f), lift across this unit and use localization surjectivity to obtain an extending power multiple on W. Naturality of the unit identifies its restriction with the desired power multiple. For a section on W whose restriction vanishes, lift across the unit on W, use injectivity of the unit on D(f), and apply the localization zero criterion to obtain a killing power. Linearity of the unit transports that equation back to the exterior sheaf.",
    "uses": [
     "new-q1-exterior-sheaf-affine-unit-bijective",
     "new-v2-generic-exterior-power-localization",
@@ -50,10 +50,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "E7",
+  "group": "K4",
   "date": "2026-10-20",
-  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafAffineUnit.lean",
-  "place": "Retirement adaptation: canonical exterior-presheaf equality and upstream affine-unit theorem; the remaining existing proof is preserved."
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafQuasicoherent.lean",
+  "place": "Retirement: existing upstream localization and affine-unit proof. The consumer transports this result through proved equality of the two exterior presheaves and their sheafifications."
  },
  "mathlib_searches": [
   {
@@ -132,14 +132,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafQuasicoherent",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafQuasicoherent.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafQuasicoherent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafQuasicoherent.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_exteriorSheaf_of_isAffine",
-  "statement": "theorem isQuasicoherent_exteriorSheaf_of_isAffine {X : Scheme.{u}} [IsAffine X]\n    (M : X.Modules) [M.IsQuasicoherent] (n : ℕ) :\n    (exteriorSheaf M n).IsQuasicoherent",
+  "statement": "theorem isQuasicoherent_exteriorSheaf_of_isAffine {X : Scheme.{u}} [IsAffine X]\n    (M : X.Modules) [M.IsQuasicoherent] (n : ℕ) :\n    (exteriorPower M n).IsQuasicoherent",
   "branch": "sheaf-dag",
-  "by": "Q1",
-  "date": "2026-10-14"
+  "by": "K4",
+  "date": "2026-10-20",
+  "note": "Retired the duplicate Sheaf module. The sole direct consumer proves equality of exteriorSheafPresheaf and the canonical PresheafOfModules.exteriorPower, then equality after sheafification, to preserve its existing public signature while applying the upstream theorem."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -154,11 +155,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-863a2",
-  "group": "E7",
+  "reviewer": "C-a806b",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261020T151216-L-2647231",
+  "landing": "20261020T162313-L-3588413",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf twin ExteriorSheafAffineUnit vs upstream WeilConjectures twin (node lean.statement verbatim upstream, existing:true); both adapted consumers + next-level importers compiled; axioms clean"
+  "note": "independent cc review: Withdrawn Sheaf copy vs upstream twin WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafQuasicoherent (node lean.statement verbatim upstream, existing:true); the one consumer (unclaimed), adapted only where forced (original fails: unknown constant at 177:7), compiles, as does its importer SelfTorConormalWedgeChart; axioms clean"
  }
 }
