@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-public import Sheaf.CategoryTheory.ExactCouple
+public import WeilConjectures.CategoryTheory.ExactCoupleExtension
 
 /-!
 # Exchange on truncation exact couples
