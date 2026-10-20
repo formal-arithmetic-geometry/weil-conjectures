@@ -1,6 +1,6 @@
 # Work queue
 
-228 items; claim with `tools/claim.py next <group> [--stage N]`.
+229 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (28 clusters, 1646 modules)
 
@@ -14,8 +14,11 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.AdicSuppliedModelFlatCriterion` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.Paper.AdicTorFlatCriterion` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.CategoryTheory.CoefficientFiniteLocalSystemsPullback` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
 | `Sheaf.AlgebraicGeometry.ResidueHomologyRankOneCoefficient` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence` | 1 |  | error: Sheaf/AlgebraicGeometry/PerfectOverlapStageEquivalence.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment alre |
+| `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
+| `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
 | `Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedPullbackTensorQCoh.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment already c |
 | `Sheaf.AlgebraicGeometry.PerfectUniversalLowestZeroModel` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
@@ -30,11 +33,8 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence` | 1 |  | error: Sheaf/CategoryTheory/FilteredHomotopySpectralSequence.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alre |
 | `Sheaf.AlgebraicGeometry.FlatTelescopePullbackSumColimit` | 1 |  | error: Sheaf/AlgebraicGeometry/FlatTelescopePullbackSumColimit.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment alr |
-| `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
-| `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors faile |
 | `Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore` | 1 |  | error: Sheaf/AlgebraicGeometry/SmoothProperTensorPerfectCaseCore.lean:1:0: error: import WeilConjectures.AlgebraicGeometry.DerivedPullback failed, environment a |
-| `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
 | `Sheaf.Paper.ReconstructionUniformTower` | 1 |  | error: Sheaf/Paper/ReconstructionUniformTower.lean:82:14: error(lean.unknownIdentifier): Unknown identifier `LocallyClosedStratification` | | Note: It is not po |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 27, stage 3 25 items.
@@ -47,7 +47,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 302 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (131)
+## Stage 3: modules to prove (132)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -182,6 +182,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.CompletedTensorShiftRight` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormulaBoundedBelow` | - | 1 | proof | 16 |
 | `Sheaf.AlgebraicGeometry.GeometricPointDerivedConstants` | - | 1 | proof | 17 |
+| `Sheaf.CategoryTheory.RingedSiteCechRefinementSquare` | - | 2 | proof | 17 |
 | `Sheaf.Algebra.Homology.FilteredPageLocalization` | - | 1 | proof | 20 |
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 
