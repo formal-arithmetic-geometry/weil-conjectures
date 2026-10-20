@@ -20,96 +20,51 @@
  ],
  "proof": [
   {
-   "text": "For every scheme morphism $u$, [prop-weil-pbc-inverse-image-modules-exact] gives the underived module adjunction $u^*=u^{-1}\\dashv u_*$, with $u^{-1}$ additive and exact; on derived categories $u^*$ is applied termwise, since an exact functor preserves quasi-isomorphisms. Derived adjunction $s^*\\dashv Rs_*$: let $C$ be a complex on $X$ and $H\\in D(S_{\\mathrm{et}},A)$, and choose a K-injective resolution $H\\to I$ [prop-weil-pbc-kinjective-resolutions-exist]. Since $s^{-1}$ is an exact left adjoint of $s_*$, the termwise complex $s_*I$ is K-injective [lem-weil-pbc-right-adjoint-preserves-kinjective], and $Rs_*H=Q(s_*I)$ because a K-injective complex computes the total right derived functor of $Q\\circ s_*$ [lem-weil-pbc-kinjective-total-derived]. Hence $\\operatorname{Hom}_{D(S)}(s^*C,H)=\\operatorname{Hom}_{K(S)}(s^{-1}C,I)\\cong\\operatorname{Hom}_{K(X)}(C,s_*I)=\\operatorname{Hom}_{D(X)}(C,Rs_*H)$, the outer equalities by [lem-weil-pbc-kinjective-hom-derived] and the middle bijection on homotopy classes $f\\mapsto s_*(f)\\circ\\eta_C$, with inverse $g\\mapsto\\varepsilon_I\\circ s^{-1}(g)$, by [lem-weil-pbc-termwise-adjunction-homotopy](b). Each identification is natural in $C\\in K(X)$, and both outer functors invert quasi-isomorphisms in $C$, so the bijection is natural in $C\\in D(X_{\\mathrm{et}},A)$; it is natural in $H$ by functoriality of K-injective resolutions. This is the canonical adjunction $s^*\\dashv Rs_*$; its counit $\\varepsilon^*_{s,H}$ is represented by the termwise counit $s^{-1}s_*I\\to I$. Open factor: [lem-weil-pbc-extension-by-zero-adjunction] gives $j_!\\dashv j^{-1}=j^*$ on module sheaves, $j_!$ is exact by [lem-weil-pbc-extension-by-zero-exact] and $j^{-1}$ is exact by [prop-weil-pbc-inverse-image-modules-exact], so both act termwise on derived categories. For $N\\in D(X_{\\mathrm{et}},A)$ with K-injective resolution $N\\to I$, the complex $j^{-1}I$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective] applied to the exact left adjoint $j_!$, and represents $j^*N$ since $j^{-1}$ preserves quasi-isomorphisms. The same three identifications [lem-weil-pbc-kinjective-hom-derived], [lem-weil-pbc-termwise-adjunction-homotopy](b) give $\\operatorname{Hom}_{D(X)}(j_!P',N)\\cong\\operatorname{Hom}_{D(U)}(P',j^*N)$ naturally, the derived pair $j_!\\dashv j^*$. Closed factor: $i_*\\dashv Ri^!$ by [lem-exc-closed-ambient]. Composing the derived open and closed adjunctions gives $Rs_!=j_!i_*\\dashv Ri^!j^*=Rs^!$, with counit $\\varepsilon^!_{s,M}$ the composite of the two counits.",
+   "text": "Reuse the canonical derived adjunction derivedUpperStarLowerStarAdjunction for L(s^*) left adjoint to R(s_*), and the existing derivedOpenImmersionLowerShriekUpperStarAdjunction for exact open extension by zero. Compose the latter with the closed-ambient adjunction of lem-exc-closed-ambient to obtain the specified immersionLowerUpperShriekAdjunction, with exactly its given counit. These upstream derived interfaces already implement the exact inverse-image and extension-by-zero adjunctions; no new K-injective reconstruction is necessary in this module.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived",
-    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-exc-closed-ambient",
     "lem-weil-pbc-extension-by-zero-adjunction",
     "lem-weil-pbc-extension-by-zero-exact",
-    "lem-exc-closed-ambient"
+    "prop-weil-pbc-inverse-image-modules-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), adjunction of derived inverse and direct image on unbounded derived categories, written out through K-injective resolutions; Tag 08FJ (lemma-adjoint-lower-shriek-restrict) for the open factor; composition of adjunctions"
-   }
+   "elementary": false
   },
   {
-   "text": "For every C, the closed symmetric-monoidal statement lem-sf-ringed-derived-closed-symmetric-monoidal gives a natural tensor-Hom bijection from maps C\\to\\mathscr H_X(Rs_!P,M) to maps C\\otimes_A^LRs_!P\\to M, with evaluation as its counit. The projection isomorphism lem-sf-etale-generic-immersion-projection rewrites the latter as maps Rs_!(s^*C\\otimes_A^LP)\\to M. The adjunction Rs_!\\dashv Rs^! from step 1 rewrites these as maps s^*C\\otimes_A^LP\\to Rs^!M, and the same closed tensor-Hom bijection on S rewrites them as maps s^*C\\to H=\\mathscr H_S(P,Rs^!M). Thus the resulting bijection from Hom_X(C,\\mathscr H_X(Rs_!P,M)) to Hom_S(s^*C,H) is natural in C.",
+   "text": "Use the existing closed derived internal Hom derivedHom and its parametrized adjunction derivedTensorHomAdjunction₂. Transport this adjunction along the canonical derivedTensorSymmetry to right-ordered tensor, so that its inverse Hom equivalence sends f to (f tensor identity), signed symmetry, then the original counit; naturality of symmetry proves this formula. This is precisely immersionHomEvaluation. The source derived tensor/internal-Hom interfaces already provide this structure, so the separate general ringed-site existence theorem is not needed.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-sf-etale-generic-immersion-projection",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-exc-closed-ambient"
+    "def-kun-derived-tensor",
+    "def-pur-derived-internal-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), tensor-Hom transposition combined with the immersion projection formula"
-   }
+   "elementary": false
   },
   {
-   "text": "The derived inverse-image/direct-image adjunction s^*\\dashv Rs_* from step 1 identifies maps s^*C\\to H with maps C\\to Rs_*H. Composing this bijection with the natural bijection of step 2 gives, for every C, a bijection Hom_X(C,\\mathscr H_X(Rs_!P,M))\\cong Hom_X(C,Rs_*H), natural in C. Yoneda therefore defines a unique morphism \\theta_{s,P,M}:\\mathscr H_X(Rs_!P,M)\\to Rs_*H whose postcomposition sends each map from C to the corresponding map under this bijection; since every component is bijective, \\theta is an isomorphism. This defines \\theta directly from the adjunction chain and does not invoke the unspecified isomorphism of lem-weil-stratum-ambient-hom.",
+   "text": "The isomorphism and two-variable naturality clauses of immersionProjectionFormula assemble into an isomorphism of left-adjoint bifunctors, from (P,C) mapped to C tensor Rs_! P to (P,C) mapped to Rs_!(s^* C tensor P). Compose the right-ordered tensor-Hom parametrized adjunction on S with s^* left adjoint to Rs_* and Rs_! left adjoint to Rs^!. Compare it with the right-ordered tensor-Hom adjunction on X precomposed in the parameter by Rs_!. ParametrizedAdjunction.conjugateIso, followed by objectwise uncurrying, gives the required natural isomorphism theta. The uncurrying naturality equation uses only functoriality of Rs_*.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-sf-etale-generic-immersion-projection",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-exc-closed-ambient",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived",
-    "prop-weil-pbc-kinjective-resolutions-exist"
+    "lem-sf-etale-generic-immersion-projection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), Yoneda construction from the tensor-adjunction chain"
-   }
+   "elementary": false
   },
   {
-   "text": "Let u:C\\to Rs_*H and let \\widetilde u:s^*C\\to H be its adjoint under s^*\\dashv Rs_*. Tracing the inverse of the Yoneda bijection in step 3, and using the evaluation-counit clause of lem-sf-ringed-derived-closed-symmetric-monoidal, says that the tensor transpose of \\theta_{s,P,M}^{-1}\\circ u is exactly the composite $$C\\otimes_A^LRs_!P\\xrightarrow{\\pi_s}Rs_!(s^*C\\otimes_A^LP)\\xrightarrow{Rs_!(\\widetilde u\\otimes1)}Rs_!(H\\otimes_A^LP)\\xrightarrow{Rs_!\\mathrm{ev}}Rs_!Rs^!M\\xrightarrow{\\varepsilon^!_{s,M}}M.$$ Every arrow is the corresponding map in the adjunction chain, so its naturality in C, P and M follows from naturality of the closed tensor-Hom bijections, the projection isomorphism, the two adjunctions, evaluation, and the counit; no boundedness or constructibility hypothesis is introduced.",
-   "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-sf-etale-generic-immersion-projection",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-exc-closed-ambient",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived",
-    "prop-weil-pbc-kinjective-resolutions-exist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
-    "place": "Mate calculation and final Yoneda sentence, with evaluation normalization"
-   }
+   "text": "Apply the elementary conjugate-equivalence counit identity to the projection transformation. Expanding the inverse Hom equivalence of the composed adjunction gives the inverse of s^* left adjoint to Rs_*, then the right-ordered tensor-Hom inverse on S, then the inverse of Rs_! left adjoint to Rs^!. The symmetry calculation of step 2 identifies both tensor-Hom inverses with tensoring the input map by the identity followed by immersionHomEvaluation. Functoriality distributes Rs_! over that composite, producing exactly projection, Rs_! of the adjoint map tensor identity, Rs_! evaluation, and the specified exceptional counit, as claimed. No boundedness or constructibility is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-pur-derived-internal-hom",
   "lem-exc-closed-ambient",
   "lem-sf-etale-generic-immersion-projection",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-weil-pbc-kinjective-resolutions-exist"
+  "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08J9; tensor-Hom transposition of the closed/open immersion adjunctions, using the existing ambient Hom and immersion projection nodes"
+  "by": "worker",
+  "group": "C1",
+  "date": "2026-10-20",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.proof.md",
+  "place": "The displayed Hom-adjunction chain and final evaluation/counit sentence, implemented by the existing canonical derived adjunctions and parametrized conjugate isomorphism."
  },
  "mathlib_searches": [
   {
@@ -224,7 +179,7 @@
    "AlgebraicGeometry.Etale.immersionInternalHomIso"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleGenericStratumMate.lean",
-  "statement": "theorem immersionInternalHomIso (A : Type (u + 1)) [CommRing A] [Finite A] {S U X : Scheme.{u}} (i : S ⟶ U) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] : ∃ θ : (immersionLowerShriek A i j).op.prod (𝟭 (DerivedCategoryModule A X)) ⋙ Functor.uncurry.obj (derivedHom (ModuleCat.{u + 1} A) X) ≅ (𝟭 (DerivedCategoryModule A S)ᵒᵖ).prod (immersionUpperShriek A i j) ⋙ Functor.uncurry.obj (derivedHom (ModuleCat.{u + 1} A) S) ⋙ R((i ≫ j)_*[ModuleCat.{u + 1} A]), ∀ (P : DerivedCategoryModule A S) (M C : DerivedCategoryModule A X) (f : C ⟶ (R((i ≫ j)_*[ModuleCat.{u + 1} A])).obj (((derivedHom (ModuleCat.{u + 1} A) S).obj (op P)).obj ((immersionUpperShriek A i j).obj M))), derivedTensorHom (ModuleCat.{u + 1} A) (f ≫ θ.inv.app (op P, M)) (𝟙 ((immersionLowerShriek A i j).obj P)) ≫ immersionHomEvaluation A X ((immersionLowerShriek A i j).obj P) M = immersionProjectionMap A i j C P ≫ (immersionLowerShriek A i j).map (derivedTensorHom (ModuleCat.{u + 1} A) (((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) (i ≫ j)).homEquiv C (((derivedHom (ModuleCat.{u + 1} A) S).obj (op P)).obj ((immersionUpperShriek A i j).obj M))).symm f) (𝟙 P)) ≫ (immersionLowerShriek A i j).map (immersionHomEvaluation A S P ((immersionUpperShriek A i j).obj M)) ≫ (immersionLowerUpperShriekAdjunction A i j).counit.app M",
+  "statement": "theorem immersionInternalHomIso (A : Type (u + 1)) [CommRing A] [Finite A] {S U X : Scheme.{u}} (i : S ⟶ U) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] : ∃ θ : (immersionLowerShriek A i j).op.prod (𝟭 (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))) ⋙ Functor.uncurry.obj (derivedHom (ModuleCat.{u + 1} A) X) ≅ (𝟭 (DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)))ᵒᵖ).prod (immersionUpperShriek A i j) ⋙ Functor.uncurry.obj (derivedHom (ModuleCat.{u + 1} A) S) ⋙ R((i ≫ j)_*[ModuleCat.{u + 1} A]), ∀ (P : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))) (M C : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (f : C ⟶ (R((i ≫ j)_*[ModuleCat.{u + 1} A])).obj (((derivedHom (ModuleCat.{u + 1} A) S).obj (op P)).obj ((immersionUpperShriek A i j).obj M))), derivedTensorHom (ModuleCat.{u + 1} A) (f ≫ θ.inv.app (op P, M)) (𝟙 ((immersionLowerShriek A i j).obj P)) ≫ immersionHomEvaluation A X ((immersionLowerShriek A i j).obj P) M = immersionProjectionMap A i j C P ≫ (immersionLowerShriek A i j).map (derivedTensorHom (ModuleCat.{u + 1} A) (((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) (i ≫ j)).homEquiv C (((derivedHom (ModuleCat.{u + 1} A) S).obj (op P)).obj ((immersionUpperShriek A i j).obj M))).symm f) (𝟙 P)) ≫ (immersionLowerShriek A i j).map (immersionHomEvaluation A S P ((immersionUpperShriek A i j).obj M)) ≫ (immersionLowerUpperShriekAdjunction A i j).counit.app M",
   "branch": "newtargets-dag",
   "by": "Q106",
   "date": "2026-10-17",
@@ -237,5 +192,15 @@
   "group": "Q106",
   "result": "pass",
   "note": "Read node, all 9 stmt deps, Stacks 08J9/07A6/08FJ, the delivered EtaleGenericStratumMate.lean and the exact declarations it uses (immersionLowerShriek, immersionProjectionMap, derivedHom/derivedTensorHomAdjunction, derivedTensorSymmetry, derivedUpperStarLowerStarAdjunction, closed-ambient IsLeftAdjoint). The statement matches clause by clause: A finite CommRing in Type (u+1), closed-then-open factorization, Rs^! = D(j^*) then rightAdjoint R(i_*), counit of Adjunction.comp, natural iso of functors D(S)^op x D(X) -> D(X), and the tensor-adjoint formula with all arrows correctly oriented; the property determines theta uniquely. Helpers are real, not hollow; the internal Hom is upstream derivedHom, as in landed EtaleTwistedBidualTransport, with no duplicate. Edge cases (id, purely open/closed, S empty, A=0, unbounded) are covered; no extra assumptions or unbound universes; docstrings and proof plan present; sorry only; no pro-etale. lean.statement is verbatim. nt_compile --json clean (6.0 s, 4.8 s, rc 0). Cosmetic: the report's 'preflight recorded below' sentence has nothing after it."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-38021",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261020T131128-L-1244431",
+  "kind": "interface",
+  "note": "independent cc review: delivered EtaleGenericStratumMate (proof of immersionInternalHomIso, DerivedCategoryModule abbrev expanded in 3 signatures) vs live module, node lem-sf-etale-generic-stratum-mate and change record; item and both direct importers (EvaluationCoherence, ExchangeAlgClosed) compiled clean; axioms only sorryAx via existing immersionProjectionFormula"
  }
 }
