@@ -91,6 +91,19 @@
    }
   },
   {
+   "text": "For the additional normalized constant-ring module interface singleBetaInv, use the fixed-scalar realization C with coefficient map the identity. Its scalar map is an isomorphism: after precomposing with the locally bijective constant unit it is the locally bijective finite scalar map. Thus C is an equivalence. Its sectionwise direct-image comparison, followed by uniqueness of left adjoints, identifies module pullback and open extension with the ordinary fixed-scalar operations. The weakly-etale base-change isomorphism for the two open immersions, conjugated under the two composite adjunctions, therefore places g^{-1}j_!M in the essential image of jprime_!. The ordinary open unit is invertible by the localization adjoint triple; transport along C makes both module open units invertible. Fully faithfulness of jprime_! now makes its counit invertible at g^{-1}j_!M. Expanding the original, unchanged singleBetaInvApp by the adjunction counit formula expresses it as jprime_! applied to the pulled-back open unit and moduleSquareG inverse, followed by this counit. Each factor is invertible, so every component of this particular comparison is invertible. This argument needs only the essential-image consequence of the transported comparison, and does not choose a replacement comparison.",
+   "uses": [
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-weil-pbc-coefficient-site-weakly-etale-base-change",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE, extension by zero on the localized site; constant-scalar coordinate transport and the fully faithful adjunction criterion."
+   }
+  },
+  {
    "text": "For a cochain complex $K$, take in degree $n$ the sheaf isomorphism $\\beta_{K^n}$ constructed in step 6. Naturality with respect to $d^n:K^n\\to K^{n+1}$ says\n$$L_2(d^n)\\circ\\beta_{K^n}=\\beta_{K^{n+1}}\\circ L_1(d^n).$$\nConsequently these components form a chain map $L_1K\\to L_2K$. Naturality of $\\gamma$ gives $L_1(d^n)\\circ\\gamma_{K^n}=\\gamma_{K^{n+1}}\\circ L_2(d^n)$, so its components form the reverse chain map. The two composites in degree $n$ are $\\gamma_{K^n}\\circ\\beta_{K^n}=\\mathrm{id}_{L_1K^n}$ and $\\beta_{K^n}\\circ\\gamma_{K^n}=\\mathrm{id}_{L_2K^n}$. Naturality for a map of complexes holds in each degree by step 6. This proves the asserted natural isomorphism on complexes, without any boundedness or constructibility assumption.",
    "uses": [],
    "elementary": true,
@@ -126,12 +139,16 @@
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "prop-weil-pbc-proetale-constant-exact",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-weil-pbc-localization-universal-property",
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-weil-pbc-coefficient-site-weakly-etale-base-change",
+  "def-weil-pbc-proetale-modules"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero-base-change.proof.md",
-  "place": "Both paragraphs: the same right-adjoint comparison route, with explicit constant-ring typing, localized-site comparison, conjugate unit equation, chain-map verification and unbounded derived descent. Stacks inputs are cited in each step."
+  "place": "Both paragraphs: the same right-adjoint comparison route, with explicit constant-ring typing, localized-site comparison, conjugate unit equation, chain-map verification and unbounded derived descent. Stacks inputs are cited in each step.",
+  "note": " P5 adds the constant-ring module coordinate refinement implemented in FiniteOpenBaseChangeNormalized: ordinary open base change establishes the essential image, and the open-adjunction counit formula proves invertibility of the unchanged specified transpose."
  },
  "mathlib_searches": [
   {
@@ -336,5 +353,15 @@
   "group": "Q07",
   "result": "fix",
   "note": "Statement correct clause by clause: Λ finite comm ring (u+1 ModuleCat convention, no case lost), OpenImmersionSquare with arbitrary g, K in D+(U_et) Plus, LHS g^*(c_j)≫e^proet≫j'_!(ρ_h) and RHS ρ_g≫N(e^et)≫c_j' in the right order and orientation. ρ = comparisonUpperStarCompUpperStarIso, rfl-checked equal to the inverse of the recorded supportSiteComparisonCoefficientPullbackIso. c_j is the degreewise openImmersionLowerShriekComparisonUpperStarIso; e^et is the recorded extensionZeroBaseChangeDerivedPlusIso. §1(B) module for lem-cbc-proetale-extension-zero-base-change justified: singleBeta lives on strict-tower Modules, and upstream derivedOpenImmersionLowerShriekBaseChangeIso and the OpenCover helpers fail to import (UpperLowerStar.Iso clash, compile-verified); the delivered map is the same canonical conjugate of ProEtale.baseChangeMap. Fixes: F1 removed sorry'd fixSiteOpenComparison_unit_normalization (verbatim copy of landed openComparison_unit_normalization, now cited in the docstring); F2 removed sorry'd fixSiteIsPullback, inlined IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd; F3 dependency iso rewritten in term mode via conjugateIsoEquiv.symm(asIso baseChangeMap), same data and signature; F4 record override adds declarations and note; docstring proof steps follow the node's six steps. Delivered and fixed modules both compile cleanly with nt_compile; only sorry is the item theorem's proof. Edge cases g=id, empty U, K=0, Λ=0 covered."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261020T122120-L-479272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

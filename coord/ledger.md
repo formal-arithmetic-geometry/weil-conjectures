@@ -17945,3 +17945,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:21 L: merged deliver/N2/Sheaf.RingTheory.QuasiRegularNoetherianLocal (stage 3; reviewer PASS; first push; landing 20261020T122115-L-477883 (proof); batch 20261020T122102; modules 1; new nodes 0)
 - 12:21 L: merged deliver/P2/Sheaf.SixFunctors.SmoothDualityBaseChangeCompat (stage 3; reviewer PASS; first push; landing 20261020T122116-L-478185 (interface); batch 20261020T122102; modules 3; new nodes 2)
 - 12:21 L: merged deliver/P3/Sheaf.Paper.RefinementExchangeCoherence (stage 3; reviewer PASS; first push; landing 20261020T122118-L-478631 (proof); batch 20261020T122102; modules 1; new nodes 0)
+- 12:21 L: merged deliver/P5/Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized (stage 3; reviewer PASS; first push; landing 20261020T122120-L-479272 (interface); batch 20261020T122102; modules 1; new nodes 0; change records: coord/changes/P5-finite-open-base-change-proof-scope.md)
