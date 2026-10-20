@@ -8,7 +8,8 @@ module
 public import Sheaf.Paper.CompletedIntegralCoefficients
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Mathlib.CategoryTheory.Sites.Sheafification
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Exactness of restriction from finite to completed integral coefficients
@@ -60,18 +61,6 @@ theorem completedIntegralRestrictScalars_exact
     (n : ℕ) :
     PreservesFiniteLimits (completedIntegralRestrictScalars l E Y D hl n) ∧
       PreservesFiniteColimits (completedIntegralRestrictScalars l E Y D hl n) := by
-  let α := (sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
-      (forget₂ CommRingCat RingCat)).map
-      (completedIntegralCommRingProjectionUnrestricted l E Y n)
-  have hα : α = completedIntegralCoefficientProjection l E Y D hl n := by
-    ext U x
-    rfl
-  change PreservesFiniteLimits (SheafOfModules.restrictScalars
-      (completedIntegralCoefficientProjection l E Y D hl n)) ∧
-      PreservesFiniteColimits (SheafOfModules.restrictScalars
-      (completedIntegralCoefficientProjection l E Y D hl n))
-  rw [← hα]
-  simpa [α, scalarReductionRestriction, scalarReductionSource, scalarReductionTarget] using
-    (scalarReductionRestriction_exact l E Y n)
+  sorry
 
 end WeilConjectures

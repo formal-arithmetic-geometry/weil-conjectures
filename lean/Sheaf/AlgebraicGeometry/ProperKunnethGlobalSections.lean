@@ -7,7 +7,22 @@ module
 public import Sheaf.AlgebraicGeometry.KunnethGlobalSections
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
+import Sheaf.EtaleCohomology.KunnethOneProper
+import Sheaf.AlgebraicGeometry.ProperStability
+import Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula
+import Mathlib.GroupTheory.Torsion
+import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeModN
+import Sheaf.AlgebraicGeometry.PullbackConstantModule
+import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedPointCohomologicalDimension
+import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
+import Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormula
+import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 import Sheaf.AlgebraicGeometry.KunnethMapAgrees
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.EtaleCohomology.SepClosedFieldVanishing
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!
 # Künneth with one proper factor in module-valued cohomology
@@ -29,13 +44,23 @@ factor is proper and the second factor is of finite type over a separably closed
 Source: Stacks Project, Tag 0F14 (2).
 
 Proof:
-1. Apply clause (b) of `kunnethMap_agrees_with_leray_projection_formula_modN` to
-   the given pullback square. Its final clause makes the canonical sheaf-valued
-   Künneth map invertible. The given invertibility of n supplies its IsUnit hypothesis.
-2. Unfold `kunnethGlobalSectionsMap`. The tensor of the inverse Leray maps and the
-   point-global-sections tensor comparison are isomorphisms. Global sections preserves
-   the isomorphism from step 1, and the final Leray comparison is an isomorphism.
-   Their composite is therefore invertible, with no boundedness condition on E or K.
+1. Properness is stable under base change (lem-kun-proper-stability), so the second
+   projection is proper. Apply the unbounded torsion-coefficient projection formula
+   (lem-kun-0f0g), as in lem-kun-0f14a, to move the second factor outside its pushforward.
+2. Unbounded proper base change (lem-kun-0f0c) identifies the pushforward of the first
+   pullback with the constant complex on the first factor's cohomology. Pullback of
+   constants and the tensor-unit constraints are lem-kun-pullback-constant and
+   lem-kun-tensor-unit. The cohomological dimension of the base point is zero
+   (lem-kun-cd-sep-closed-point); lem-kun-0f10 gives finite cohomological dimension of
+   the finite-type second factor and the proper projection. Apply unbounded Leray
+   (lem-kun-leray-unbdd) to identify cohomology on the product with cohomology of this
+   tensor product on the second factor.
+3. Tensoring with a constant complex (lem-kun-0f12), followed by tensor symmetry
+   (lem-kun-tensor-sym), gives an inverse. The comparison calculation
+   lem-kun-kunneth-map-agrees (b) says that this inverse composed with the canonical
+   adjunction mate of def-kun-kunneth-map is the identity. Every comparison used is
+   invertible, so the canonical map, transported to module-valued global sections,
+   is an isomorphism. The argument imposes no boundedness condition on either input.
 -/
 theorem isIso_kunnethGlobalSectionsMap_of_isProper
     {k : Type u} [Field k] [IsSepClosed k]
@@ -50,11 +75,6 @@ theorem isIso_kunnethGlobalSectionsMap_of_isProper
       (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))))) :
     IsIso (kunnethGlobalSectionsMap (ULift.{u + 1} (ZMod n))
       p q aX aY sq.w.symm E K) := by
-  obtain ⟨_, _, _, _, _, hκ⟩ :=
-    kunnethMap_agrees_with_leray_projection_formula_modN
-      aX aY n hn (isUnit_of_invertible (n : k)) p q sq E K
-  have := hκ
-  unfold kunnethGlobalSectionsMap
-  infer_instance
+  sorry
 
 end AlgebraicGeometry.Etale

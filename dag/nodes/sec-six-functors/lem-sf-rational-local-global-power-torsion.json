@@ -1,191 +1,164 @@
 {
- "id": "lem-sf-rational-local-global-power-torsion",
- "kind": "statement",
- "title": "Finite-cover scalar localization gives uniform power torsion",
- "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and a scheme $X$ on which $\\ell$ is invertible. Let $\\widehat{\\mathcal O}_{E,X}$ be the completed coefficient sheaf on the small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-completed-integral-coefficients, def-weil-pbc-proetale-site] and let $C\\in D(X_{\\mathrm{proet}},\\mathcal O_E)$ be any object of the derived category of sheaves of $\\widehat{\\mathcal O}_{E,X}$-modules. Let $\\{U_j\\to X\\}_{j=1}^t$ be a finite covering in $X_{\\mathrm{proet}}$, and for each $j$ let $C|_{U_j}$ be the termwise restriction of $C$ to the slice $X_{\\mathrm{proet}}/U_j$ [def-pur-localized-ringed-site], an object of the derived category $D_j$ of sheaves of $\\widehat{\\mathcal O}_{E,X}|_{U_j}$-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]; $D_j$ is $\\mathcal O_E$-linear. Suppose that for every $j$ the image of $C|_{U_j}$ in the scalar localization $D_j[1/\\varpi_E]$ [def-weil-linear-scalar-localization] is a zero object, equivalently that $\\varpi_E^{N_j}\\operatorname{id}_{C|_{U_j}}=0$ in $D_j$ for some $N_j\\in\\mathbf Z_{\\geq0}$. Then there exists $N\\in\\mathbf Z_{\\geq0}$ such that $\\varpi_E^N\\mathcal H^d(C)=0$, as a sheaf of $\\widehat{\\mathcal O}_{E,X}$-modules, for every $d\\in\\mathbf Z$. The case $t=0$ is permitted when the empty family covers $X$.",
- "source": {
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
-  "place": "Proof: 'Choose locally a bounded complex'; local-to-global detection of that comparison at the raw scalar-localized coefficient stage. Extracted from the explicit rational supplement, former step 9, finite-cover uniform-power argument."
- },
- "stmt_deps": [
-  "def-weil-completed-integral-coefficients",
-  "def-weil-pbc-proetale-site",
-  "def-pur-localized-ringed-site",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category",
-  "def-weil-linear-scalar-localization"
- ],
- "proof": [
-  {
-   "text": "Unfold the tensor-Hom scalar localization. The identity of a zero object is zero, so 1 tensor id of each restricted object vanishes. IsLocalizedModule.eq_zero_iff for the localization tensor product supplies a power of the uniformizer annihilating its identity. Choose these exponents a_j and set M = Finset.univ.sup a; this is zero when the indexing type is empty.",
-   "uses": [
+  "id": "lem-sf-rational-local-global-power-torsion",
+  "kind": "statement",
+  "title": "Finite-cover scalar localization gives uniform power torsion",
+  "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and a scheme $X$ on which $\\ell$ is invertible. Let $\\widehat{\\mathcal O}_{E,X}$ be the completed coefficient sheaf on the small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-completed-integral-coefficients, def-weil-pbc-proetale-site] and let $C\\in D(X_{\\mathrm{proet}},\\mathcal O_E)$ be any object of the derived category of sheaves of $\\widehat{\\mathcal O}_{E,X}$-modules. Let $\\{U_j\\to X\\}_{j=1}^t$ be a finite covering in $X_{\\mathrm{proet}}$, and for each $j$ let $C|_{U_j}$ be the termwise restriction of $C$ to the slice $X_{\\mathrm{proet}}/U_j$ [def-pur-localized-ringed-site], an object of the derived category $D_j$ of sheaves of $\\widehat{\\mathcal O}_{E,X}|_{U_j}$-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]; $D_j$ is $\\mathcal O_E$-linear. Suppose that for every $j$ the image of $C|_{U_j}$ in the scalar localization $D_j[1/\\varpi_E]$ [def-weil-linear-scalar-localization] is a zero object, equivalently that $\\varpi_E^{N_j}\\operatorname{id}_{C|_{U_j}}=0$ in $D_j$ for some $N_j\\in\\mathbf Z_{\\geq0}$. Then there exists $N\\in\\mathbf Z_{\\geq0}$ such that $\\varpi_E^N\\mathcal H^d(C)=0$, as a sheaf of $\\widehat{\\mathcal O}_{E,X}$-modules, for every $d\\in\\mathbf Z$. The case $t=0$ is permitted when the empty family covers $X$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+    "place": "Proof: 'Choose locally a bounded complex'; local-to-global detection of that comparison at the raw scalar-localized coefficient stage. Extracted from the explicit rational supplement, former step 9, finite-cover uniform-power argument."
+  },
+  "stmt_deps": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-pbc-proetale-site",
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
     "def-weil-linear-scalar-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "Mathlib/RingTheory/Localization/BaseChange.lean",
-    "place": "tensorProduct_isLocalizedModule, together with IsLocalizedModule.eq_zero_iff and the definition of ScalarLocalization.localization."
-   }
+  ],
+  "proof": [
+    {
+      "text": "For each member of the finite covering, choose an exponent $N_j$ supplied by the hypothesis. If $t>0$, let $N=\\max_{1\\le j\\le t}N_j$; if $t=0$, put $N=0$. For every $j$ we have $N\\ge N_j$, and the $\\mathcal O_E$-linear composition and scalar action in $D_j$ give $\\varpi_E^N\\operatorname{id}_{C|_{U_j}}=\\varpi_E^{N-N_j}(\\varpi_E^{N_j}\\operatorname{id}_{C|_{U_j}})=0$.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+        "place": "Local comparison motivating the ancestor prop-sf-dualizable-hom; elementary finite-maximum argument supplied by the agent (no such proof step is present in this blueprint section)."
+      }
+    },
+    {
+      "text": "Restriction of sheaves of modules to a localized site is exact, so it preserves kernels, images and cokernels. Applying this to the cohomology formula gives a natural identification $\\mathcal H^d(C|_{U_j})\\cong(\\mathcal H^d(C))|_{U_j}$. On complexes, the map induced by scalar multiplication on the quotient $\\ker d^d/\\operatorname{im}d^{d-1}$ is scalar multiplication by the same scalar. This identity persists on derived morphisms, since cohomology factors through quasi-isomorphism localization. Applying cohomology to Step 1 therefore gives $\\varpi_E^N\\operatorname{id}_{\\mathcal H^d(C|_{U_j})}=0$. Exact restriction also preserves the image of scalar multiplication; consequently the image sheaf $(\\varpi_E^N\\mathcal H^d(C))|_{U_j}$ is zero for every $d$ and $j$.",
+      "uses": [
+        "lem-pur-site-restriction-module-adjunction-exact",
+        "lem-sf-derived-homology-long-exact",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Section 03DH (section-localize), Definition 04IX (definition-localize-ringed-site); derived.tex Section 05RR, Lemma 05RT (lemma-acyclic) and Definition 05RU (definition-unbounded-derived-category); scalar compatibility follows directly from the cohomology quotient formula."
+      }
+    },
+    {
+      "text": "Fix $d$ and set $H=\\operatorname{im}(\\varpi_E^N\\operatorname{id}_{\\mathcal H^d(C)})$, the image in the abelian category of module sheaves. Step 2 says $H|_{U_j}=0$. Apply the cited cover-local criterion to the underlying abelian sheaf of $H$ and the morphism $0\\to H$. Its covering hypothesis holds: for any object $V\\to X$, the pullback family $V\\times_X U_j\\to V$ is a covering, and every domain admits a map to $U_j$. Thus the sieve of arrows to $V$ whose domains map to some $U_j$ contains this covering family and is covering. The restrictions of $0\\to H$ are isomorphisms, so the criterion gives an isomorphism of underlying abelian sheaves globally. Hence $H$ is the zero module sheaf, which says $\\varpi_E^N\\mathcal H^d(C)=0$. The argument holds for every $d$ with the same $N$. If $t=0$, pullback stability gives the empty covering on every $V$, the same criterion applies, and $N=0$ works.",
+      "uses": [
+        "lem-sfb-sheaf-cover-local-isomorphism"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Tag 04TQ, lemma-glue-maps, sites.tex lines 5638-5703 (glue the local inverses); the category-valued criterion is Mathlib/CategoryTheory/Sites/LocalProperties.lean:35-64, with CoversTop/Basic.lean:41-54."
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-sheaf-cover-local-isomorphism"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+    "place": "Explicit local-to-global supplement to the ancestor prop-sf-dualizable-hom. The blueprint section states the comparison but contains no finite-cover uniform-power proof; the argument uses exact slice restriction, the cohomology quotient formula, and Stacks Tag 04TQ to glue local inverses."
   },
-  {
-   "text": "From the recorded coefficient DVR theorem extract its local-ring instance, DVR instance, unit criterion and the generator equation for the chosen uniformizer p. The integer ell is nonzero and has absolute value less than one, so it is not a unit. Mathlib DVR factorization therefore gives ell = v*p^e with v a unit and e>0. For each j, a_j <= M <= e*M; multiplying the local zero equation proves ell^M times the local identity is zero. Replace the natural-number cast action by repeated addition. This avoids requiring compatibility between the independent Linear instances and the restriction functors.",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Mathlib/RingTheory/DiscreteValuationRing/Basic.lean",
-    "place": "irreducible_iff_uniformizer and eq_unit_mul_pow_irreducible; the chosen generator and unit criterion are from Padic.extension_integers_dvr. Positivity follows from Padic.norm_p_lt_one and spectralNorm_extends."
-   }
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "If a derived-complete integral cone becomes zero after scalar localization on a finite cover, one power of the uniformizer annihilates every cohomology sheaf globally",
+      "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A finite cover on which a complex vanishes after inverting a central scalar gives a uniform scalar power annihilating its cohomology sheaves",
+      "results": "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CochainComplex.isKInjective_of_injective; CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt; CochainComplex.cm5b.instIsStrictlyGEI; CochainComplex.isKInjective_of_injective_aux; CochainComplex.IsKInjective; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished",
+      "results": "CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it"
+    },
+    {
+      "tool": "grep",
+      "query": "annihilat|uniform.*power|scalar.*localiz",
+      "results": "none",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it",
+      "directory": "Mathlib/CategoryTheory/Sites"
+    },
+    {
+      "tool": "leansearch",
+      "query": "If a derived-complete integral cone becomes zero after scalar localization on a finite cover, one power of the uniformizer annihilates every cohomology sheaf globally",
+      "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; ModuleCat.Tilde.smul_stalk_no_nonzero_divisor; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; ideal_eq_bot_of_localization; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; PowerSeries.IsWeierstrassDivisorAt.mod_zero",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "prop-sf-dualizable-hom",
+    "date": "2026-10-17",
+    "group": "Q94"
   },
-  {
-   "text": "Derived homology is additive: its composite with the additive localization Qh is isomorphic to additive homotopy-category homology, and Localization.functor_additive_iff descends additivity. Slice restriction is exact by ringedOverFunctor_exactGeneral. Use the proved library isomorphism mapDerivedCategoryHomologyFunctorIso to identify restricted global homology with homology of the restricted object. Additivity sends the ell^M identity equation to homology, and conjugation by this isomorphism yields zero for restriction of ell^M times every global homology identity.",
-   "uses": [
-    "def-weil-pbc-ringed-derived-restriction",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
-    "place": "Functor.mapDerivedCategoryHomologyFunctorIso; exactness is ringedOverFunctor_exactGeneral, and additivity descends using Localization.functor_additive_iff and homologyFunctorFactorsh."
-   }
+  "chapter": "sec-six-functors",
+  "unit": "sk-prop-sf-dualizable-biduality",
+  "blueprint": {
+    "from": {
+      "node": "prop-sf-dualizable-hom",
+      "place": "Proof: 'Choose locally a bounded complex'; local-to-global detection of that comparison at the raw scalar-localized coefficient stage. Extracted from the explicit rational supplement, former step 9, finite-cover uniform-power argument.",
+      "via": []
+    },
+    "same_as": [],
+    "is": null
   },
-  {
-   "text": "Forget module actions faithfully. A sheaf map whose restrictions to all slices of the covering are zero is zero: on an object V apply sheaf separatedness to CoversTop.cover V; each covering arrow domain admits a map g to some U_j, and the component at Over.mk g of the local zero equation is the needed component zero. Naturality completes separatedness. This proves ell^M times every global homology identity is zero, including for an empty covering.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "Mathlib/CategoryTheory/Sites/Sheaf.lean",
-    "place": "Presheaf.IsSheaf.hom_ext, using GrothendieckTopology.CoversTop.cover and SheafOfModules.toSheaf faithfulness."
-   }
+  "lean_audit": {
+    "master": {
+      "state": "none"
+    },
+    "slopmaster2": {
+      "state": "none"
+    }
   },
-  {
-   "text": "Apply homology additivity globally to obtain H^d(ell^M id_C)=0. Compose with the image under homology of (v inverse)^M id_C. Functoriality, bilinearity of composition and ell=v*p^e simplify this to H^d(p^(e*M) id_C)=0. The common exponent e*M is independent of d; when the cover is empty M=0. No linearity of homology or of restriction for the supplied coefficient actions is assumed.",
-   "uses": [],
-   "elementary": true
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "lem-sf-rational-local-global-power-torsion",
+    "worker": "stage1",
+    "summary": "Kept the imported statement and all hypotheses unchanged. The proof takes the maximum of the finitely many local uniformizer exponents (with N=0 for the empty cover), uses exact restriction to identify restricted cohomology sheaves and cohomology functoriality to obtain local annihilation, then applies the existing cover-local isomorphism criterion to the zero-to-sheaf map. No new nodes were needed.",
+    "blueprint": "Realizes the ancestor prop-sf-dualizable-hom proof paragraph 'The finite-cover localization lemma gives N>=0 with varpi_E^N H^d(C)=0 for every d' (the finite-cover uniform-power argument in the rational supplement)."
+  },
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-Codex-N4-553a14f08",
+    "group": "N4",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-553a14f08 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and unit/chapter route. Clarified scalar compatibility, the image sheaf and CoversTop application; corrected proof attribution. Statement unchanged. Corrected whole DAG JSON and concrete source, edge-case, dependency and target-category checks are recorded in fixes/ and review.md. No new nodes or accepted tool_uses.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.Paper.SfRationalLocalGlobalPowerTorsion",
+    "declaration": "WeilConjectures.sfRationalLocalGlobalPowerTorsion",
+    "file": "lean/Sheaf/Paper/SfRationalLocalGlobalPowerTorsion.lean",
+    "statement": "theorem sfRationalLocalGlobalPowerTorsion (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t}) (_hl : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (C : DerivedCategory (integralTowerModules l E X)) (n : ℕ) (U : Fin n → AlgebraicGeometry.Scheme.ProEt X) (hU : (AlgebraicGeometry.Scheme.ProEt.topology X).CoversTop U) [Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E X))] [∀ j : Fin n, Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (SheafOfModules.{max u (t + 1)} ((completedIntegralCoefficientSheafUnrestricted l E X).over (U j))))] (hzero : ∀ j : Fin n, IsZero ((ScalarLocalization.localization (Padic.coefficientExtensionIntegers l E) (DerivedCategory (SheafOfModules.{max u (t + 1)} ((completedIntegralCoefficientSheafUnrestricted l E X).over (U j)))) (Padic.coefficientExtensionUniformizer l E)).obj ((SheafOfModules.overFunctor.{max u (t + 1)} (completedIntegralCoefficientSheafUnrestricted l E X) (U j)).mapDerivedCategory.obj C))) : ∃ N : ℕ, ∀ d : ℤ, (DerivedCategory.homologyFunctor (integralTowerModules l E X) d).map ((Padic.coefficientExtensionUniformizer l E) ^ N • 𝟙 C) = 0",
+    "branch": "newtargets-dag",
+    "by": "Q151",
+    "date": "2026-10-18",
+    "existing": false,
+    "note": "Independent-universe statement and invertibility hypothesis as required by the node; local slice localization is expressed by overFunctor.mapDerivedCategory and scalar localization by CategoryTheory.ScalarLocalization."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-ad2bf2dfd",
+    "group": "Q151",
+    "result": "pass",
+    "note": "Re-delivery of the already landed Q30 statement (reviewer-FIXed on 2026-10-17): the Lean differs only by one docstring provenance line, and the node record only in the lean field's by/date/note/fixed_by (statement unchanged, verbatim equal to the file). Every clause re-checked against the node: Fact l.Prime, finite E/Q_l, _hl ℓ invertible on every stalk, C in DerivedCategory(integralTowerModules) = SheafOfModules.{max u (t+1)} over the completed limit sheaf on Scheme.ProEt, a Fin n CoversTop cover (n=0 allowed), restriction by overFunctor.mapDerivedCategory, IsZero in ScalarLocalization at ϖ (⇔ ∃N ϖ^N•𝟙=0), conclusion ∃N ∀d:ℤ homologyFunctor.map(ϖ^N•𝟙C)=0. The Linear instance arguments do not change the meaning (ℓ = unit·ϖ^e, so both sides are equivalent to ℓ-power statements). Universes t and u independent; no hollow definitions; only the theorem is sorry; source/blueprint docstrings present; Mathlib ProEt site; dependency declarations match their nodes; no duplicate. nt_compile --json of the snapshot text: rc=0, 4.2 s, no errors or warnings. Minor, non-blocking: the provenance docstring line and the shorter lean note."
   }
- ],
- "proof_deps": [
-  "def-weil-linear-scalar-localization",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
-  "def-weil-pbc-ringed-derived-restriction",
-  "def-weil-abstract-derived-category"
- ],
- "proof_origin": {
-  "by": "worker C7",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
-  "place": "Finite-cover scalar-localization supplement, implemented using the tensor localization criterion, DVR conversion to natural-number scalars, exact-restriction homology comparison, and sheaf separatedness. Source details are given in the individual steps. The unit route and statement are unchanged."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "If a derived-complete integral cone becomes zero after scalar localization on a finite cover, one power of the uniformizer annihilates every cohomology sheaf globally",
-   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A finite cover on which a complex vanishes after inverting a central scalar gives a uniform scalar power annihilating its cohomology sheaves",
-   "results": "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CochainComplex.isKInjective_of_injective; CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt; CochainComplex.cm5b.instIsStrictlyGEI; CochainComplex.isKInjective_of_injective_aux; CochainComplex.IsKInjective; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished",
-   "results": "CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it"
-  },
-  {
-   "tool": "grep",
-   "query": "annihilat|uniform.*power|scalar.*localiz",
-   "results": "none",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it",
-   "directory": "Mathlib/CategoryTheory/Sites"
-  },
-  {
-   "tool": "leansearch",
-   "query": "If a derived-complete integral cone becomes zero after scalar localization on a finite cover, one power of the uniformizer annihilates every cohomology sheaf globally",
-   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; ModuleCat.Tilde.smul_stalk_no_nonzero_divisor; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; ideal_eq_bot_of_localization; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; PowerSeries.IsWeierstrassDivisorAt.mod_zero",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state the completed/rational sheaf-coefficient assertion or a one-line specialization of it"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "prop-sf-dualizable-hom",
-  "date": "2026-10-17",
-  "group": "Q94"
- },
- "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-dualizable-biduality",
- "blueprint": {
-  "from": {
-   "node": "prop-sf-dualizable-hom",
-   "place": "Proof: 'Choose locally a bounded complex'; local-to-global detection of that comparison at the raw scalar-localized coefficient stage. Extracted from the explicit rational supplement, former step 9, finite-cover uniform-power argument.",
-   "via": []
-  },
-  "same_as": [],
-  "is": null
- },
- "lean_audit": {
-  "master": {
-   "state": "none"
-  },
-  "slopmaster2": {
-   "state": "none"
-  }
- },
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-sf-rational-local-global-power-torsion",
-  "worker": "stage1",
-  "summary": "Kept the imported statement and all hypotheses unchanged. The proof takes the maximum of the finitely many local uniformizer exponents (with N=0 for the empty cover), uses exact restriction to identify restricted cohomology sheaves and cohomology functoriality to obtain local annihilation, then applies the existing cover-local isomorphism criterion to the zero-to-sheaf map. No new nodes were needed.",
-  "blueprint": "Realizes the ancestor prop-sf-dualizable-hom proof paragraph 'The finite-cover localization lemma gives N>=0 with varpi_E^N H^d(C)=0 for every d' (the finite-cover uniform-power argument in the rational supplement)."
- },
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-Codex-N4-553a14f08",
-  "group": "N4",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-553a14f08 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and unit/chapter route. Clarified scalar compatibility, the image sheaf and CoversTop application; corrected proof attribution. Statement unchanged. Corrected whole DAG JSON and concrete source, edge-case, dependency and target-category checks are recorded in fixes/ and review.md. No new nodes or accepted tool_uses.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.Paper.SfRationalLocalGlobalPowerTorsion",
-  "declaration": "WeilConjectures.sfRationalLocalGlobalPowerTorsion",
-  "file": "lean/Sheaf/Paper/SfRationalLocalGlobalPowerTorsion.lean",
-  "statement": "theorem sfRationalLocalGlobalPowerTorsion (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t}) (_hl : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (C : DerivedCategory (integralTowerModules l E X)) (n : ℕ) (U : Fin n → AlgebraicGeometry.Scheme.ProEt X) (hU : (AlgebraicGeometry.Scheme.ProEt.topology X).CoversTop U) [Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E X))] [∀ j : Fin n, Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (SheafOfModules.{max u (t + 1)} ((completedIntegralCoefficientSheafUnrestricted l E X).over (U j))))] (hzero : ∀ j : Fin n, IsZero ((ScalarLocalization.localization (Padic.coefficientExtensionIntegers l E) (DerivedCategory (SheafOfModules.{max u (t + 1)} ((completedIntegralCoefficientSheafUnrestricted l E X).over (U j)))) (Padic.coefficientExtensionUniformizer l E)).obj ((SheafOfModules.overFunctor.{max u (t + 1)} (completedIntegralCoefficientSheafUnrestricted l E X) (U j)).mapDerivedCategory.obj C))) : ∃ N : ℕ, ∀ d : ℤ, (DerivedCategory.homologyFunctor (integralTowerModules l E X) d).map ((Padic.coefficientExtensionUniformizer l E) ^ N • 𝟙 C) = 0",
-  "branch": "newtargets-dag",
-  "by": "Q151",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "Independent-universe statement and invertibility hypothesis as required by the node; local slice localization is expressed by overFunctor.mapDerivedCategory and scalar localization by CategoryTheory.ScalarLocalization."
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-ad2bf2dfd",
-  "group": "Q151",
-  "result": "pass",
-  "note": "Re-delivery of the already landed Q30 statement (reviewer-FIXed on 2026-10-17): the Lean differs only by one docstring provenance line, and the node record only in the lean field's by/date/note/fixed_by (statement unchanged, verbatim equal to the file). Every clause re-checked against the node: Fact l.Prime, finite E/Q_l, _hl ℓ invertible on every stalk, C in DerivedCategory(integralTowerModules) = SheafOfModules.{max u (t+1)} over the completed limit sheaf on Scheme.ProEt, a Fin n CoversTop cover (n=0 allowed), restriction by overFunctor.mapDerivedCategory, IsZero in ScalarLocalization at ϖ (⇔ ∃N ϖ^N•𝟙=0), conclusion ∃N ∀d:ℤ homologyFunctor.map(ϖ^N•𝟙C)=0. The Linear instance arguments do not change the meaning (ℓ = unit·ϖ^e, so both sides are equivalent to ℓ-power statements). Universes t and u independent; no hollow definitions; only the theorem is sorry; source/blueprint docstrings present; Mathlib ProEt site; dependency declarations match their nodes; no duplicate. nt_compile --json of the snapshot text: rc=0, 4.2 s, no errors or warnings. Minor, non-blocking: the provenance docstring line and the shorter lean note."
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C7",
-  "result": "pass",
-  "landing": "20261019T231058-L-546040",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

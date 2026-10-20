@@ -1,247 +1,290 @@
 {
- "id": "lem-sp-ringed-site-tor-flat-model",
- "kind": "statement",
- "title": "Finite Tor intervals and bounded flat models on a ringed site",
- "statement": "Let $\\mathcal C$ be a site small in the chosen universe [def-weil-size-convention], and let $R$ be a sheaf of commutative rings on $\\mathcal C$. Use the abelian category of sheaves of $R$-modules [def-weil-sheaf-of-modules-category], its unbounded derived category $D(R)$ [def-weil-abstract-derived-category], cohomology sheaves [def-weil-derived-cohomology-sheaves], and derived tensor computed by K-flat resolutions [lem-weil-pbc-site-derived-tensor-descent]. Let $K\\in D(R)$ and $a\\leq b$ be integers. The following conditions are equivalent:\n\n(1) For every sheaf $M$ of $R$-modules placed in degree zero, $H^i(K\\otimes_R^{\\mathbf L}M)=0$ whenever $i\\notin[a,b]$.\n\n(2) There is a cochain complex $P$ of $R$-module sheaves [def-pc-cochain-complex-modules], with every $P^i$ flat (tensoring with it is exact [def-pc-flat-sheaf-modules]), $P^i=0$ for $i\\notin[a,b]$, and an isomorphism $K\\simeq P$ in $D(R)$.\n\nNo constructibility hypothesis, existence of enough points, or constant-coefficient assumption is imposed.",
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08G1, label lemma-tor-amplitude, equivalence (1)-(2), lines 12432-12481"
- },
- "stmt_deps": [
-  "def-weil-size-convention",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-cohomology-sheaves",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-pc-cochain-complex-modules",
-  "def-pc-flat-sheaf-modules",
-  "def-wf-tensor-product"
- ],
- "proof": [
-  {
-   "text": "Install the existing sheafified symmetric monoidal structure, tensorPreadditive, the proved small internal-Hom closed structure exposed by nonempty_monoidalClosed_independentCoefficients, the canonical functorial flat resolution, and isGrothendieckAbelianOfUniverses. Transport exactness along siteSheafTensorRightIso and symmetry to identify IsFlatOnSite with categorical ObjectProperty.flat. No site universes are identified.",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": false
+  "id": "lem-sp-ringed-site-tor-flat-model",
+  "kind": "statement",
+  "title": "Finite Tor intervals and bounded flat models on a ringed site",
+  "statement": "Let $\\mathcal C$ be a site small in the chosen universe [def-weil-size-convention], and let $R$ be a sheaf of commutative rings on $\\mathcal C$. Use the abelian category of sheaves of $R$-modules [def-weil-sheaf-of-modules-category], its unbounded derived category $D(R)$ [def-weil-abstract-derived-category], cohomology sheaves [def-weil-derived-cohomology-sheaves], and derived tensor computed by K-flat resolutions [lem-weil-pbc-site-derived-tensor-descent]. Let $K\\in D(R)$ and $a\\leq b$ be integers. The following conditions are equivalent:\n\n(1) For every sheaf $M$ of $R$-modules placed in degree zero, $H^i(K\\otimes_R^{\\mathbf L}M)=0$ whenever $i\\notin[a,b]$.\n\n(2) There is a cochain complex $P$ of $R$-module sheaves [def-pc-cochain-complex-modules], with every $P^i$ flat (tensoring with it is exact [def-pc-flat-sheaf-modules]), $P^i=0$ for $i\\notin[a,b]$, and an isomorphism $K\\simeq P$ in $D(R)$.\n\nNo constructibility hypothesis, existence of enough points, or constant-coefficient assumption is imposed.",
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G1, label lemma-tor-amplitude, equivalence (1)-(2), lines 12432-12481"
   },
-  {
-   "text": "For a degree-zero test sheaf M, choose a cochain representative L of K and apply the proved generic CochainComplex.exists_quasiIso_flat_kFlat to obtain P -> L. Its categorical K-flatness implies the live acyclic-tensor predicate: tensor the quasi-isomorphism 0 -> Z for any acyclic Z, and use that tensor preserves zero objects. Apply wfSiteDerivedTensor_first from def-wf-tensor-product to P and M[0]. Compose with the generic QObjTensorQObjIsoOfKFlatLeft, the localization of P -> L, and singleFunctorIsoCompQ. This gives an isomorphism from wfSiteDerivedTensor(K,M[0]) to the generic derived monoidal tensor K tensor M[0]. Transport homology vanishing along it and use isGE_iff/isLE_iff to identify the stated condition with categorical torAmplitudeIn.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "def-wf-tensor-product",
-    "lem-sc-source-tor-amplitude-flat-model",
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the already proved generic DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat. Its reverse implication uses bounded flat K-flatness; its forward implication tests against the unit, takes a same-upper-bound flat resolution, proves the lower opcycles flat by the Tor criterion, and forms the good lower truncation. Thus the original flat-resolution and truncation argument is retained inside this generic tool. Convert its categorical flatness termwise to IsFlatOnSite, convert IsStrictlyGE/LE to zero terms outside the interval, and reverse the representing isomorphism. These conversions work in both directions, including the zero ring, empty site, and a=b.",
-   "uses": [
-    "lem-sc-source-tor-amplitude-flat-model",
+  "stmt_deps": [
+    "def-weil-size-convention",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-cohomology-sheaves",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-cochain-complex-modules",
     "def-pc-flat-sheaf-modules",
+    "def-wf-tensor-product"
+  ],
+  "proof": [
+    {
+      "text": "We first make the single-variable tensor computation explicit. Let $T$ be a K-flat complex with flat terms and let $M$ be a module sheaf. Choose a flat-term K-flat resolution $c:C\\to M[0]$ by [lem-pc-kflat-resolution]. The cone of $c$ is acyclic by [lem-pur-quasi-iso-cone-acyclic]. By [lem-pc-tensor-mapping-cone-iso] the cone of $T\\otimes c$ is $\\operatorname{Tot}(T\\otimes\\operatorname{Cone}(c))$, which is acyclic by [def-pc-kflat-complex]; the symmetry from [lem-pc-sheaf-modules-tensor-closed] exchanges the factors in that definition (on complexes it has sign $(-1)^{pq}$). Thus $T\\otimes c$ is a quasi-isomorphism by the same cone criterion. The two-K-flat computation in [lem-weil-pbc-site-derived-tensor-descent] now gives\n$$Q_RT\\otimes_R^{\\mathbf L}M\\simeq Q_R\\operatorname{Tot}(T\\otimes_R M[0]).$$\nThis is the direct cone criterion applied to the chosen resolution, not an assumption that $M[0]$ is K-flat.",
+      "uses": [
+        "lem-pc-kflat-resolution",
+        "lem-pur-quasi-iso-cone-acyclic",
+        "lem-pc-tensor-mapping-cone-iso",
+        "def-pc-kflat-complex",
+        "lem-pc-sheaf-modules-tensor-closed",
+        "lem-weil-pbc-site-derived-tensor-descent"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 06YP (lemma-K-flat-quasi-isomorphism) and 06YU (definition-derived-tor); the cone argument in the proof of 06YP"
+      }
+    },
+    {
+      "text": "Assume (2). The displayed $P$ is bounded above and termwise flat, so [lem-pc-bounded-above-flat-kflat-site] makes it K-flat. Apply step 1 with $T=P$. In degree $i$ the tensor with $M[0]$ has just the term $P^i\\otimes_R M$, by [def-pc-tensor-complex-sheaves], and is zero outside $[a,b]$. Its cohomology is therefore zero outside that interval. The isomorphism $K\\simeq Q_RP$ and functoriality of derived tensor give (1).",
+      "uses": [
+        "lem-pc-bounded-above-flat-kflat-site",
+        "def-pc-tensor-complex-sheaves"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08G1 (lemma-tor-amplitude), proof of (2) implies (1); Tag 06YQ (lemma-bounded-flat-K-flat)"
+      }
+    },
+    {
+      "text": "Assume (1) and test it on $M=R$. The ordinary tensor unit is $R$, by [lem-pc-sheaf-modules-tensor-closed], so it is flat: tensoring with it is the identity exact functor [def-pc-flat-sheaf-modules]. For a flat-term K-flat representative $T$ of $K$, provided by [lem-pc-kflat-resolution], step 1 and the termwise unit isomorphisms identify $K\\otimes_R^{\\mathbf L}R$ with $K$. Hence $H^i(K)=0$ outside $[a,b]$. By the representative characterization in [def-sbc-standard-tstructure-derived-category], choose a complex $L$ representing $K$ with $L^i=0$ for $i>b$. This uses only the upper bound on cohomology; it makes no assertion that the terms of $L$ are flat.",
+      "uses": [
+        "lem-pc-sheaf-modules-tensor-closed",
+        "def-pc-flat-sheaf-modules",
+        "lem-pc-kflat-resolution",
+        "def-sbc-standard-tstructure-derived-category"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08G1, proof of (1) implies (2), first paragraph; preceding observation testing on the ring sheaf"
+      }
+    },
+    {
+      "text": "Apply [lem-pc-kflat-bounded-flat-replacement] to the complex $L$ of step 3 with the integer $N=b$. Obtain a quasi-isomorphism $F\\to L$ with every $F^i$ flat and $F^i=0$ for $i>b$. Thus $Q_RF\\simeq K$, since the derived category inverts quasi-isomorphisms [def-weil-abstract-derived-category]. The bound is exactly $b$, not merely some larger integer. This replaces the finite sequence of upper flat-kernel truncations in the source proof by the already available bound-preserving flat replacement.",
+      "uses": [
+        "lem-pc-kflat-bounded-flat-replacement",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08G1, first paragraph of the reverse implication, using Section 06YL (section-flat); bounded-above replacement preserves the prescribed upper bound"
+      }
+    },
+    {
+      "text": "The bounded-above flat complex $F$ is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Step 1 therefore identifies $H^{a-1}(F\\otimes_R M[0])$ with $H^{a-1}(K\\otimes_R^{\\mathbf L}M)$ for every module sheaf $M$. This vanishes by (1), because $a-1<a$. Symmetry of the sheaf tensor [lem-pc-sheaf-modules-tensor-closed] interchanges $F\\otimes M[0]$ and $M[0]\\otimes F$; the degree-zero factor contributes no sign. All the hypotheses of [lem-weil-pbc-site-flat-opcycles-tor-criterion] hold with $P=F$ and $n=a$. It follows that the cokernel sheaf\n$$B=\\operatorname{Coker}(d_F^{a-1}:F^{a-1}\\to F^a)$$\nis flat. In particular, it is exactness after tensoring with every module sheaf, not flatness of the cohomology sheaves of $K$, that supplies the bottom flat term.",
+      "uses": [
+        "lem-pc-bounded-above-flat-kflat-site",
+        "lem-pc-sheaf-modules-tensor-closed",
+        "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 08G0 (lemma-last-one-flat) and 08G1 (lemma-tor-amplitude), final paragraph"
+      }
+    },
+    {
+      "text": "Define $P$ explicitly by $P^i=0$ for $i<a$, $P^a=B$, and $P^i=F^i$ for $i>a$. The differential out of $B$ is induced by $d_F^a$, which kills $\\operatorname{im}d_F^{a-1}$ because $d_F^ad_F^{a-1}=0$; subsequent differentials are those of $F$. This is a complex by [def-pc-cochain-complex-modules]. The quotient in degree $a$ and the identity in higher degrees define a chain map $q:F\\to P$. Using the cohomology quotient formula in [def-weil-abstract-derived-category], in degree $a$ its induced map is\n$$\\ker d_F^a/\\operatorname{im}d_F^{a-1}\\xrightarrow{\\sim}\\ker(B\\to F^{a+1}).$$\nIn degree $a+1$, the images of $B\\to F^{a+1}$ and $F^a\\to F^{a+1}$ coincide since $F^a\\to B$ is epimorphic; thus cohomology is unchanged there, and it is unchanged in every higher degree. Below $a$ both cohomologies vanish, for $F$ by step 3 and for $P$ by its zero terms. Hence $q$ is a quasi-isomorphism and $Q_RP\\simeq Q_RF\\simeq K$. The bottom term is flat by step 5, higher terms are flat by step 4, and zero terms are flat since tensoring with zero is the zero exact functor [def-pc-flat-sheaf-modules]. Finally $a\\leq b$ and $F^i=0$ for $i>b$ imply $P^i=0$ outside $[a,b]$. This is (2).",
+      "uses": [
+        "def-pc-cochain-complex-modules",
+        "def-weil-abstract-derived-category",
+        "def-pc-flat-sheaf-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08G1 (lemma-tor-amplitude), final paragraph: the good lower truncation and its definitions"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-pc-kflat-complex",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-flat-sheaf-modules",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-flat-opcycles-tor-criterion",
     "def-pc-cochain-complex-modules"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex",
-  "def-wf-tensor-product",
-  "lem-sc-source-tor-amplitude-flat-model",
-  "def-sbc-standard-tstructure-derived-category",
-  "def-weil-abstract-derived-category",
-  "def-pc-cochain-complex-modules"
- ],
- "proof_origin": {
-  "by": "agent",
-  "group": "M5",
-  "date": "2026-10-19",
-  "document": "literature/stacks-project/sites-cohomology.tex; lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
-  "place": "Tag 08G1 (1)-(2), realized by the proved generic bounded flat model theorem and the live wfSiteDerivedTensor_first comparison."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "torAmplitude|tor_amplitude|flatModel|flat_model",
-   "results": "0 hits; successful service response",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G1 (lemma-tor-amplitude), with Tag 08G0 (lemma-last-one-flat); bound-preserving flat replacement supplies the upper truncation part directly"
   },
-  {
-   "tool": "leansearch",
-   "query": "Finite Tor dimension of a complex of sheaves on a ringed site is equivalent to a bounded flat resolution",
-   "results": "Module.Flat.tfae_equational_criterion; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; Module.Flat.iff_flat_tensorProduct; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "torAmplitude|tor_amplitude|flatModel|flat_model",
+      "results": "0 hits; successful service response",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Finite Tor dimension of a complex of sheaves on a ringed site is equivalent to a bounded flat resolution",
+      "results": "Module.Flat.tfae_equational_criterion; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; Module.Flat.iff_flat_tensorProduct; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"torAmplitude\"",
+      "results": "0 hits; successful service response",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "On any ringed site a complex of finite Tor amplitude in an interval is represented by a bounded complex of flat module sheaves supported in that interval",
+      "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.TStructure.t; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
+    },
+    {
+      "tool": "grep",
+      "query": "exists_iso_Q_obj_of_isGE_of_isLE|tfae_equational_criterion",
+      "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/RingTheory/Flat/EquationalCriterion.lean; Mathlib/RingTheory/Flat/EquationalCriterion.lean; Mathlib/RingTheory/Flat/EquationalCriterion.lean",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A derived sheaf module has Tor amplitude between two integers if and only if it has a flat resolution zero outside those degrees",
+      "results": "DerivedCategory.isLE_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.isGE_iff; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isZero_of_isLE",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
+    },
+    {
+      "tool": "grep",
+      "query": "exists_iso_Q_obj_of_isGE_of_isLE|torAmplitude|flat_opcycles|flat_model",
+      "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; successful response",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded cohomological representatives have no flatness assertion; ordinary-module flatness and Grothendieck-category results do not supply the stated ringed-site finite-Tor equivalence"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"torAmplitude\"",
+      "results": "0 hits; successful response",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded cohomological representatives have no flatness assertion; ordinary-module flatness and Grothendieck-category results do not supply the stated ringed-site finite-Tor equivalence"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Finite Tor amplitude for a complex of sheaves on an arbitrary ringed site is equivalent to a flat complex supported in the same interval",
+      "results": "DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.IsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; successful response",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded cohomological representatives have no flatness assertion; ordinary-module flatness and Grothendieck-category results do not supply the stated ringed-site finite-Tor equivalence"
+    },
+    {
+      "tool": "leansearch",
+      "query": "A complex of sheaves with finite Tor dimension admits a bounded flat representative",
+      "results": "Module.Flat.rTensor_shortComplex_exact; Module.Flat.tfae_equational_criterion; Module.Flat.lTensor_shortComplex_exact; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; Module.Flat.of_projective; Module.Flat.iff_rTensor_exact; Module.Flat.iff_lTensor_exact'; Module.Flat.iff_rTensor_preserves_shortComplex_exact; successful response",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded cohomological representatives have no flatness assertion; ordinary-module flatness and Grothendieck-category results do not supply the stated ringed-site finite-Tor equivalence"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A bounded Tor interval admits a bounded resolution by flat sheaves with flat lowest cokernel",
+      "results": "CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; LightCondensed.instIsGrothendieckAbelianLightCondMod; DerivedCategory.exists_iso_Q_obj_of_isLE; CategoryTheory.HasInjectiveDimensionLE; DerivedCategory.IsGE; CategoryTheory.isZero_Tor'_succ_of_projective; successful response",
+      "date": "2026-10-17",
+      "verdict": "no match: bounded cohomological representatives have no flatness assertion; ordinary-module flatness and Grothendieck-category results do not supply the stated ringed-site finite-Tor equivalence"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-sp-tower-compact-support-projection-formula",
+    "date": "2026-10-17",
+    "group": "Q142"
   },
-  {
-   "tool": "loogle",
-   "query": "\"torAmplitude\"",
-   "results": "0 hits; successful service response",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sp-integral-adjunction",
+  "blueprint": {
+    "from": {
+      "node": "det-sp-integral-direct-image-tower",
+      "place": "proof, paragraph (3): tower projection formula applied to the reductions; supplies bounded flat models for the finite-Tor inputs, needed for the D+ tensor domain before evaluating the tower maps",
+      "via": [
+        "lem-sp-tower-compact-support-projection-formula"
+      ]
+    },
+    "same_as": [],
+    "is": null
   },
-  {
-   "tool": "leanfinder",
-   "query": "On any ringed site a complex of finite Tor amplitude in an interval is represented by a bounded complex of flat module sheaves supported in that interval",
-   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.TStructure.t; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "lem-sp-ringed-site-tor-flat-model",
+    "worker": "stage1",
+    "summary": "Proved both directions of the ringed-site finite-Tor/bounded-flat-model equivalence using existing bound-preserving flat replacement, K-flat tensor descent and the site flat-opcycles criterion. Wrote the single-variable tensor comparison via cones and the lower truncation cohomology computation explicitly. No statement changes, new nodes or Mathlib leaves.",
+    "blueprint": "det-sp-integral-direct-image-tower, proof paragraph (3): finite-Tor models for the finite-level tower projection formula; the present six steps establish the generic bounded-flat-model input without changing the integral-adjunction route.",
+    "tool_uses": [
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "Generic small-ringed-site flat-term K-flat resolution existence used in steps 1 and 3; the integral-adjunction unit supplies no resolution theorem."
+      },
+      {
+        "node": "lem-pc-sheaf-modules-tensor-closed",
+        "why": "Generic sheaf tensor symmetry and unit in steps 1, 3 and 5; these identify the same coefficient-module tensor, not a change of proof route."
+      },
+      {
+        "node": "lem-weil-pbc-site-derived-tensor-descent",
+        "why": "Generic K-flat computation of the ambient ringed-site derived tensor in step 1, retaining the arbitrary sheaf of coefficient rings."
+      },
+      {
+        "node": "lem-pc-bounded-above-flat-kflat-site",
+        "why": "Generic bounded-above flat K-flatness in steps 2 and 5, needed on an arbitrary small ringed site."
+      },
+      {
+        "node": "lem-pc-kflat-bounded-flat-replacement",
+        "why": "Generic upper-bound-preserving flat replacement in step 4; no node of this adjunction unit provides it."
+      },
+      {
+        "node": "lem-weil-pbc-site-flat-opcycles-tor-criterion",
+        "why": "Generic site flat-cokernel criterion in step 5; the adjunction unit supplies no such homological algebra theorem."
+      }
+    ]
   },
-  {
-   "tool": "grep",
-   "query": "exists_iso_Q_obj_of_isGE_of_isLE|tfae_equational_criterion",
-   "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/RingTheory/Flat/EquationalCriterion.lean; Mathlib/RingTheory/Flat/EquationalCriterion.lean; Mathlib/RingTheory/Flat/EquationalCriterion.lean",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A derived sheaf module has Tor amplitude between two integers if and only if it has a flat resolution zero outside those degrees",
-   "results": "DerivedCategory.isLE_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.isGE_iff; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isZero_of_isLE",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded derived representatives have no flatness clause; module flatness criteria do not assert finite-Tor flat replacement for sheaves"
-  },
-  {
-   "tool": "grep",
-   "query": "exists_iso_Q_obj_of_isGE_of_isLE|torAmplitude|flat_opcycles|flat_model",
-   "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; successful response",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded cohomological representatives have no flatness assertion; ordinary-module flatness and Grothendieck-category results do not supply the stated ringed-site finite-Tor equivalence"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"torAmplitude\"",
-   "results": "0 hits; successful response",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded cohomological representatives have no flatness assertion; ordinary-module flatness and Grothendieck-category results do not supply the stated ringed-site finite-Tor equivalence"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Finite Tor amplitude for a complex of sheaves on an arbitrary ringed site is equivalent to a flat complex supported in the same interval",
-   "results": "DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.IsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; successful response",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded cohomological representatives have no flatness assertion; ordinary-module flatness and Grothendieck-category results do not supply the stated ringed-site finite-Tor equivalence"
-  },
-  {
-   "tool": "leansearch",
-   "query": "A complex of sheaves with finite Tor dimension admits a bounded flat representative",
-   "results": "Module.Flat.rTensor_shortComplex_exact; Module.Flat.tfae_equational_criterion; Module.Flat.lTensor_shortComplex_exact; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; Module.Flat.of_projective; Module.Flat.iff_rTensor_exact; Module.Flat.iff_lTensor_exact'; Module.Flat.iff_rTensor_preserves_shortComplex_exact; successful response",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded cohomological representatives have no flatness assertion; ordinary-module flatness and Grothendieck-category results do not supply the stated ringed-site finite-Tor equivalence"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A bounded Tor interval admits a bounded resolution by flat sheaves with flat lowest cokernel",
-   "results": "CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; LightCondensed.instIsGrothendieckAbelianLightCondMod; DerivedCategory.exists_iso_Q_obj_of_isLE; CategoryTheory.HasInjectiveDimensionLE; DerivedCategory.IsGE; CategoryTheory.isZero_Tor'_succ_of_projective; successful response",
-   "date": "2026-10-17",
-   "verdict": "no match: bounded cohomological representatives have no flatness assertion; ordinary-module flatness and Grothendieck-category results do not supply the stated ringed-site finite-Tor equivalence"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "lem-sp-tower-compact-support-projection-formula",
-  "date": "2026-10-17",
-  "group": "Q142"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sp-integral-adjunction",
- "blueprint": {
-  "from": {
-   "node": "det-sp-integral-direct-image-tower",
-   "place": "proof, paragraph (3): tower projection formula applied to the reductions; supplies bounded flat models for the finite-Tor inputs, needed for the D+ tensor domain before evaluating the tower maps",
-   "via": [
-    "lem-sp-tower-compact-support-projection-formula"
-   ]
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-sp-ringed-site-tor-flat-model",
-  "worker": "stage1",
-  "summary": "Proved both directions of the ringed-site finite-Tor/bounded-flat-model equivalence using existing bound-preserving flat replacement, K-flat tensor descent and the site flat-opcycles criterion. Wrote the single-variable tensor comparison via cones and the lower truncation cohomology computation explicitly. No statement changes, new nodes or Mathlib leaves.",
-  "blueprint": "det-sp-integral-direct-image-tower, proof paragraph (3): finite-Tor models for the finite-level tower projection formula; the present six steps establish the generic bounded-flat-model input without changing the integral-adjunction route.",
   "tool_uses": [
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic small-ringed-site flat-term K-flat resolution existence used in steps 1 and 3; the integral-adjunction unit supplies no resolution theorem."
-   },
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "Generic sheaf tensor symmetry and unit in steps 1, 3 and 5; these identify the same coefficient-module tensor, not a change of proof route."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Generic K-flat computation of the ambient ringed-site derived tensor in step 1, retaining the arbitrary sheaf of coefficient rings."
-   },
-   {
-    "node": "lem-pc-bounded-above-flat-kflat-site",
-    "why": "Generic bounded-above flat K-flatness in steps 2 and 5, needed on an arbitrary small ringed site."
-   },
-   {
-    "node": "lem-pc-kflat-bounded-flat-replacement",
-    "why": "Generic upper-bound-preserving flat replacement in step 4; no node of this adjunction unit provides it."
-   },
-   {
-    "node": "lem-weil-pbc-site-flat-opcycles-tor-criterion",
-    "why": "Generic site flat-cokernel criterion in step 5; the adjunction unit supplies no such homological algebra theorem."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-pc-sheaf-modules-tensor-closed"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-Q86-158314cb6",
-  "group": "Q86",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-158314cb6 (reviewer sub-agent of L); spot-checked: I read all of the item and its six steps against Stacks sites-cohomology.tex 08G1 (lemma-tor-amplitude, lines 12432-12481) and 08G0 (lemma-last-one-flat), and checked the step tags 06YP, 06YQ, 06YU and 06YL against tags/tags. The statement matches the source hypothesis by hypothesis: arbitrary sheaf of commutative rings, unbounded D(R), every module sheaf as test object, a<=b; nothing is weakened. I read the statements of all 14 proof_deps and 7 stmt_deps. Step 1: the cone criterion (05RT node, an iff), the tensor-cone iso with T as the left factor, and K-flatness after the signed symmetry swap show that T⊗c is a quasi-isomorphism; the descent iso then gives QT⊗^L M ≅ Q Tot(T⊗M[0]). Step 2: P is K-flat by 06YQ and Tot(P⊗M[0])^i = P^i⊗M. Step 3: testing on M=R gives H^i(K)=0 outside [a,b]; the representative with L^i=0 for i>b comes from the statement of def-sbc-standard-tstructure-derived-category itself, not a proof. Step 4: lem-pc-kflat-bounded-flat-replacement with N=b keeps the bound exactly. Step 5: every hypothesis of lem-weil-pbc-site-flat-opcycles-tor-criterion holds (small site, flat terms, exactness in degree a-1 for every N, no sign from the degree-zero factor), so Coker d^{a-1} is flat. Step 6: the good truncation's cohomology was checked in degrees a, a+1 and below a. Edge cases: a=b, K=0, R=0 or an empty site, a one-point site (agrees with 0654), and Z/2[0] over Z. Grep found no duplicate: the existing nodes are the ring-only 0654 version, the étale class version, the locally perfect version and comparison statements. No cycle: the dependency closure of 205 nodes does not contain the item. The blueprint_update of def-weil-abstract-derived-category does not change what is used. The six tool_uses are accepted; their units are already in the route of sk-prop-sp-integral-adjunction. No SGA is cited. No new nodes and no fixes."
- },
- "lean": {
-  "module": "Sheaf.Algebra.Homology.RingedSiteTorFlatModel",
-  "declaration": "SheafOfModules.torAmplitude_iff_exists_bounded_flat_model",
-  "file": "lean/Sheaf/Algebra/Homology/RingedSiteTorFlatModel.lean",
-  "statement": "theorem torAmplitude_iff_exists_bounded_flat_model {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max u v}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}] (R : Sheaf J CommRingCat.{max u v}) [HasDerivedCategory.{w} (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))] (K : DerivedCategory (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))) (a b : ℤ) (_hab : a ≤ b) : (∀ (M : SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj ((wfSiteDerivedTensor J R).obj (K, (DerivedCategory.singleFunctor _ 0).obj M)))) ↔ ∃ P : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ, (∀ i : ℤ, IsFlatOnSite (C := C) (J := J) (R := R) (P.X i)) ∧ (∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i)) ∧ Nonempty (K ≅ DerivedCategory.Q.obj P)",
-  "branch": "newtargets-dag",
-  "by": "Q03",
-  "date": "2026-10-17",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-2401d239f",
-  "group": "Q03",
-  "result": "pass",
-  "note": "Statement, dependencies, source proof, universes, edge cases, docstrings, report sections, and compiler evidence checked; delivery is correct."
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M5",
-  "result": "pass",
-  "landing": "20261019T231238-L-565380",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+    "lem-pc-kflat-resolution",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+  ],
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-Q86-158314cb6",
+    "group": "Q86",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-158314cb6 (reviewer sub-agent of L); spot-checked: I read all of the item and its six steps against Stacks sites-cohomology.tex 08G1 (lemma-tor-amplitude, lines 12432-12481) and 08G0 (lemma-last-one-flat), and checked the step tags 06YP, 06YQ, 06YU and 06YL against tags/tags. The statement matches the source hypothesis by hypothesis: arbitrary sheaf of commutative rings, unbounded D(R), every module sheaf as test object, a<=b; nothing is weakened. I read the statements of all 14 proof_deps and 7 stmt_deps. Step 1: the cone criterion (05RT node, an iff), the tensor-cone iso with T as the left factor, and K-flatness after the signed symmetry swap show that T⊗c is a quasi-isomorphism; the descent iso then gives QT⊗^L M ≅ Q Tot(T⊗M[0]). Step 2: P is K-flat by 06YQ and Tot(P⊗M[0])^i = P^i⊗M. Step 3: testing on M=R gives H^i(K)=0 outside [a,b]; the representative with L^i=0 for i>b comes from the statement of def-sbc-standard-tstructure-derived-category itself, not a proof. Step 4: lem-pc-kflat-bounded-flat-replacement with N=b keeps the bound exactly. Step 5: every hypothesis of lem-weil-pbc-site-flat-opcycles-tor-criterion holds (small site, flat terms, exactness in degree a-1 for every N, no sign from the degree-zero factor), so Coker d^{a-1} is flat. Step 6: the good truncation's cohomology was checked in degrees a, a+1 and below a. Edge cases: a=b, K=0, R=0 or an empty site, a one-point site (agrees with 0654), and Z/2[0] over Z. Grep found no duplicate: the existing nodes are the ring-only 0654 version, the étale class version, the locally perfect version and comparison statements. No cycle: the dependency closure of 205 nodes does not contain the item. The blueprint_update of def-weil-abstract-derived-category does not change what is used. The six tool_uses are accepted; their units are already in the route of sk-prop-sp-integral-adjunction. No SGA is cited. No new nodes and no fixes."
+  },
+  "lean": {
+    "module": "Sheaf.Algebra.Homology.RingedSiteTorFlatModel",
+    "declaration": "SheafOfModules.torAmplitude_iff_exists_bounded_flat_model",
+    "file": "lean/Sheaf/Algebra/Homology/RingedSiteTorFlatModel.lean",
+    "statement": "theorem torAmplitude_iff_exists_bounded_flat_model {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max u v}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}] (R : Sheaf J CommRingCat.{max u v}) [HasDerivedCategory.{w} (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))] (K : DerivedCategory (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))) (a b : ℤ) (_hab : a ≤ b) : (∀ (M : SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj ((wfSiteDerivedTensor J R).obj (K, (DerivedCategory.singleFunctor _ 0).obj M)))) ↔ ∃ P : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ, (∀ i : ℤ, IsFlatOnSite (C := C) (J := J) (R := R) (P.X i)) ∧ (∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i)) ∧ Nonempty (K ≅ DerivedCategory.Q.obj P)",
+    "branch": "newtargets-dag",
+    "by": "Q03",
+    "date": "2026-10-17",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-2401d239f",
+    "group": "Q03",
+    "result": "pass",
+    "note": "Statement, dependencies, source proof, universes, edge cases, docstrings, report sections, and compiler evidence checked; delivery is correct."
+  }
 }

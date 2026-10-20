@@ -9,7 +9,14 @@ public import Sheaf.Paper.IntegralConstructibleTriangulated
 public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 import Sheaf.Paper.FiniteCtfTriangulated
 import Mathlib.CategoryTheory.Triangulated.Subcategory
-
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedTensor
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SfIntegralConstructibleTriangulated
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Integral constructible complexes with uniformly finite Tor amplitude
@@ -25,8 +32,7 @@ set_option autoImplicit false
 
 universe d u
 
-open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
-open scoped ZeroObject
+open CategoryTheory AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
 
@@ -44,27 +50,6 @@ noncomputable def integralCtfProperty
     fun K ↦ ∃ a b : ℤ, a ≤ b ∧ ∀ n : ℕ,
       HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E (n + 1))
         ((integralDerivedReduction l E Y D hl n).obj K) a b
-
-private theorem integralCtf_amplitude_iso
-    (Y : AlgebraicGeometry.Scheme.{u}) (A : Type u) [CommRing A]
-    {K L : proEtaleDerivedCategory Y A} (e : K ≅ L) {a b : ℤ}
-    (h : HasProEtaleTorAmplitude Y A K a b) : HasProEtaleTorAmplitude Y A L a b := by
-  refine ⟨h.1, ?_⟩
-  intro N P hN f hf hP M i hi
-  obtain ⟨q⟩ := hN
-  exact h.2 N P ⟨q ≪≫ e.symm⟩ f hf hP M i hi
-
-private theorem integralCtf_amplitude_mono
-    (Y : AlgebraicGeometry.Scheme.{u}) (A : Type u) [CommRing A]
-    {K : proEtaleDerivedCategory Y A} {a b c e : ℤ}
-    (h : HasProEtaleTorAmplitude Y A K a b) (hc : c ≤ a) (he : b ≤ e) :
-    HasProEtaleTorAmplitude Y A K c e := by
-  refine ⟨hc.trans (h.1.trans he), ?_⟩
-  intro N P hN f hf hP M i hi
-  apply h.2 N P hN f hf hP M i
-  rcases hi with hi | hi
-  · exact Or.inl (hi.trans_le hc)
-  · exact Or.inr (he.trans_lt hi)
 
 /-- The integral finite-Tor property is isomorphism invariant and cuts out a full
 triangulated subcategory: zero belongs, every integer shift preserves it in both
@@ -131,74 +116,8 @@ theorem integral_ctf_isTriangulated
     @ObjectProperty.IsTriangulated.{u + 2, u + 2}
       (completedIntegralDerivedCategory l E Y D hl)
       inferInstance inferInstance inferInstance inferInstance
-      (fun (_n : ℤ) ↦ inferInstance) inferInstance
+      (fun (n : ℤ) ↦ inferInstance) inferInstance
       (integralCtfProperty D l hl E Y) := by
-  let C := completedIntegralDerivedCategory l E Y D hl
-  let P := boundedConstructibleDerivedCompleteIntegral D l hl E Y
-  let Q : ObjectProperty C := fun K ↦ ∃ a b : ℤ, a ≤ b ∧ ∀ n : ℕ,
-    HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E (n + 1))
-      ((integralDerivedReduction l E Y D hl n).obj K) a b
-  obtain ⟨hPi, hPt⟩ := boundedConstructibleDerivedCompleteIntegral_isTriangulated D l hl E Y
-  have : P.IsClosedUnderIsomorphisms := hPi
-  have : P.IsTriangulated := hPt
-  have : Q.IsClosedUnderIsomorphisms := ⟨by
-    intro K L e hK
-    obtain ⟨a, b, hab, hK⟩ := hK
-    exact ⟨a, b, hab, fun n ↦ integralCtf_amplitude_iso Y _
-      ((integralDerivedReduction l E Y D hl n).mapIso e) (hK n)⟩⟩
-  have : Q.ContainsZero := by
-    refine ⟨0, isZero_zero _, 0, 0, le_rfl, fun n ↦ ?_⟩
-    let A := Padic.coefficientExtensionRing l E (n + 1)
-    let F := integralDerivedReduction l E Y D hl n
-    obtain ⟨c, hF⟩ := integralDerivedReduction_exact l E Y D hl n
-    let : F.CommShift ℤ := c
-    have : F.IsTriangulated := hF
-    obtain ⟨hSi, hSt, hshift, _⟩ := finite_ctf_isTriangulated l E (n + 1) (by omega) Y
-    let S := intrinsicFiniteTorsionConstructible l E (n + 1) (by omega) Y ⊓
-      fun K ↦ HasFiniteProEtaleTorAmplitude Y A K
-    have : S.IsClosedUnderIsomorphisms := hSi
-    have : S.IsTriangulated := hSt
-    obtain ⟨a, b, hzero⟩ := (S.prop_zero).2
-    -- Shift the zero object to place any test degree below the translated lower bound.
-    -- Its tensor cohomology therefore vanishes in every degree, uniformly at all levels.
-    have hz : HasProEtaleTorAmplitude Y A (0 : proEtaleDerivedCategory Y A) 0 0 := by
-      refine ⟨le_rfl, ?_⟩
-      intro N R hN f hf hR M i _hi
-      let m := a - i - 1
-      have hm := hshift 0 a b m hzero
-      have hs := (shiftFunctor (proEtaleDerivedCategory Y A) m).map_isZero (isZero_zero _)
-      have hm' := integralCtf_amplitude_iso Y A hs.isoZero hm
-      exact hm'.2 N R hN f hf hR M i (Or.inl (by dsimp [m]; omega))
-    exact integralCtf_amplitude_iso Y A (F.map_isZero (isZero_zero _)).isoZero.symm hz
-  have : Q.IsStableUnderShift ℤ := by
-    constructor
-    intro m
-    constructor
-    intro K hK
-    obtain ⟨a, b, hab, hK⟩ := hK
-    refine ⟨a - m, b - m, sub_le_sub_right hab m, fun n ↦ ?_⟩
-    let F := integralDerivedReduction l E Y D hl n
-    obtain ⟨c, hF⟩ := integralDerivedReduction_exact l E Y D hl n
-    let : F.CommShift ℤ := c
-    have : F.IsTriangulated := hF
-    exact integralCtf_amplitude_iso Y _ ((F.commShiftIso m).app K).symm
-      ((finite_ctf_isTriangulated l E (n + 1) (by omega) Y).2.2.1 _ a b m (hK n))
-  have : Q.IsTriangulatedClosed₂ := ObjectProperty.IsTriangulatedClosed₂.mk' (by
-    intro T hT h₁ h₃
-    obtain ⟨a, b, hab, h₁⟩ := h₁
-    obtain ⟨c, e, hce, h₃⟩ := h₃
-    refine ⟨min a c, max b e, (min_le_left _ _).trans (hab.trans (le_max_left _ _)),
-      fun n ↦ ?_⟩
-    let F := integralDerivedReduction l E Y D hl n
-    obtain ⟨cs, hF⟩ := integralDerivedReduction_exact l E Y D hl n
-    let : F.CommShift ℤ := cs
-    have : F.IsTriangulated := hF
-    exact (finite_ctf_isTriangulated l E (n + 1) (by omega) Y).2.2.2
-      (F.mapTriangle.obj T) _ _ (F.map_distinguished T hT)
-      (integralCtf_amplitude_mono Y _ (h₁ n) (min_le_left _ _) (le_max_left _ _))
-      (integralCtf_amplitude_mono Y _ (h₃ n) (min_le_right _ _) (le_max_right _ _)))
-  have : Q.IsTriangulated := {}
-  exact ⟨inferInstanceAs (P ⊓ Q).IsClosedUnderIsomorphisms,
-    inferInstanceAs (P ⊓ Q).IsTriangulated⟩
+  sorry
 
 end WeilConjectures

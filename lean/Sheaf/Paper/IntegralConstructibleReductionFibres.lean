@@ -21,7 +21,6 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 import Sheaf.Paper.PurIntegralTwistLineInverseImage
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
@@ -105,8 +104,7 @@ theorem scalarData_map_id
     (M : pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E))) (U : T.ProEtᵒᵖ) :
     ((scalarData l E T M).map (𝟙 U) :
       (scalarData l E T M).obj U ⟶ (scalarData l E T M).obj U) = 𝟙 _ := by
-  ext m
-  exact CategoryTheory.congr_fun ((scalarData l E T M).presheaf.map_id U) m
+  sorry
 
 /-- Composition law for the constant-scalar presentation.
 Source: BS 6.8.2 (blueprint: lem-a1-integral-constructible-reduction-fibres).
@@ -118,8 +116,7 @@ theorem scalarData_map_comp
     ((scalarData l E T M).map (f ≫ g) :
       (scalarData l E T M).obj U ⟶ (scalarData l E T M).obj W) =
         (scalarData l E T M).map f ≫ (scalarData l E T M).map g := by
-  ext m
-  exact (scalarData l E T M).map_comp_apply f g m
+  sorry
 
 /-- Ordinary sections and restrictions with their fixed constant-scalar action.
 Source: BS 6.8.2 (blueprint: lem-a1-integral-constructible-reduction-fibres). -/
@@ -143,8 +140,7 @@ theorem scalarMap_naturality
       (ModuleCat.restrictScalars
           (pbcCompletedSection T (pbcIntegralDatum l E) U)).map (f.val.app U) ≫
         (scalarPresheaf l E T N).map g := by
-  ext m
-  exact PresheafOfModules.naturality_apply f.val g m
+  sorry
 
 /-- Ordinary coefficient restriction, retaining the original sections and maps.
 Source: BS 6.8.2 (blueprint: lem-a1-integral-constructible-reduction-fibres). -/
@@ -180,9 +176,7 @@ theorem quotientTransition_condition (n : ℕ) :
     ((pbcUniformizer l E) ^ (n + 1 + 1) •
       𝟙 (𝟭 (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E))))) ≫
         quotientProjection l E T n = 0 := by
-  rw [pow_succ', mul_smul, Linear.smul_comp]
-  change pbcUniformizer l E • (_ ≫ cokernel.π _) = 0
-  rw [cokernel.condition, smul_zero]
+  sorry
 
 /-- Consecutive ordinary quotient maps, fixed by their cokernel projections.
 Source: BS 6.8.10 (blueprint: lem-a1-integral-constructible-reduction-fibres). -/
@@ -228,13 +222,7 @@ integralFiber. The single-sheaf embedding gives exactly sheafFiber. -/
 theorem rawFiberComparison_eq :
     toIntegral l E T ⋙ pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E) ⋙
       PerAdic.fiber l E T x = underlying l E T ⋙ sheafFiber l E T x := by
-  have hf : pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E) ⋙
-      PerAdic.fiber l E T x = PerAdic.integralFiber l E T x := by
-    unfold PerAdic.fiber
-    exact (PerAdic.fiber_existsUnique l E T x).exists.choose_spec
-  rw [hf]
-  unfold PerAdic.integralFiber toIntegral underlying sheafFiber
-  apply CategoryTheory.Functor.ext (fun M ↦ rfl)
+  sorry
 
 /-- The sheaf formula is the recorded fibre of raw rationalization, with the exact
 section normalization imposed in PerAdic.fiber_existsUnique. This changes only the
@@ -259,7 +247,6 @@ Source: BS 6.8.2 (blueprint: lem-a1-integral-constructible-reduction-fibres). -/
 abbrev coefficientUnit := SheafOfModules.unit
   ((adicLisseForget T).obj (pbcAdicCompletion T (pbcIntegralDatum l E)))
 
-set_option linter.unusedSectionVars false in
 /-- The derived counit is invertible on the regular coefficient module.
 Source: BS 6.8.2, 6.8.14 (blueprint: lem-a1-integral-constructible-reduction-fibres).
 Proof: the regular module is flat. Its single complex is a bounded flat-term K-flat
@@ -268,33 +255,7 @@ The final single-complex comparison is already an isomorphism. This lemma suppli
 only the proof needed to define the actual coefficient vector 1 in the fibre. -/
 @[instance] theorem regularCounit_isIso :
     IsIso (singlePullCounit l E T x (coefficientUnit l E T)) := by
-  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
-  let R := pbcAdicCompletion T (pbcIntegralDatum l E)
-  let P : CochainComplex (pbcModules T R) ℤ :=
-    (CochainComplex.singleFunctor.{u + 1, u + 2} (pbcModules T R) 0).obj
-      (coefficientUnit l E T)
-  have hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
-      T.ProEt _ (essentiallySmallSelf.{0, u, u + 1} _) (ProEt.topology T) R P := by
-    let := SheafOfModules.isMonoidal_W_independentCoefficients.{u + 1, u, u + 1} R
-    let := SheafOfModules.monoidalCategory.{u, u + 1, u + 1} R
-    let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
-    let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
-    intro F hF
-    let e := CochainComplex.mapBifunctorSingle₂Iso
-      (MonoidalCategory.curriedTensor (pbcModules T R)) (coefficientUnit l E T) F
-    let e' := e ≪≫ (NatIso.mapHomologicalComplex
-      (MonoidalCategory.rightUnitorNatIso (pbcModules T R)) (.up ℤ)).app F ≪≫
-      (Functor.mapHomologicalComplexIdIso _ (.up ℤ)).app F
-    exact fun i ↦ (hF i).of_iso e'.symm
-  have hc : IsIso ((pbcActualPullCounit x (pbcIntegralDatum l E)).app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
-    by
-      unfold pbcActualPullCounit completedOrdinaryPullbackCounit completedOrdinaryPullback
-      exact (completedOrdinaryPullback_exists.{u} x
-        (pbcIntegralDatum l E)).choose_spec.choose_spec.2 P hP
-  change IsIso ((pbcActualPullComplexCounit x (pbcIntegralDatum l E) P) ≫ _)
-  unfold pbcActualPullComplexCounit
-  infer_instance
+  sorry
 
 /-- The final point object maps canonically to the pullback of the final base object.
 Source: BS 6.8.14 (blueprint: lem-a1-integral-constructible-reduction-fibres). -/

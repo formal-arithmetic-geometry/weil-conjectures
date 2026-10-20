@@ -1,508 +1,488 @@
 {
- "id": "lem-coef-tower-coaugmentation",
- "kind": "statement",
- "proof": [
-  {
-   "text": "Set $\\mathcal A_s=\\operatorname{Mod}(R_s)$ and $M_K=\\mathcal T_a^cK$. The strict-tower functor gives $\\operatorname{ev}_nM_K=\\operatorname{Res}_nF_nK_n$ naturally, with exactly the quotient-induced compact-support transitions, including every composite transition. By the integral compact-support definition, interpreted on this specified strict tower, $N_K=Ra_!K=R\\lim M_K$. Here we use the total-limit functor, not an arbitrary choice of a triangulated Roos cone. Thus its projections are the actual compact-support projections $N_K\\to\\operatorname{Res}_nF_nK_n$. The same definition of the transitions applies on morphisms because $\\mathcal T_a^c$ is a functor.",
-   "uses": [
-    "lem-weil-compact-support-reduction-tower-functor",
+  "id": "lem-coef-tower-coaugmentation",
+  "kind": "statement",
+  "proof": [
+    {
+      "text": "Set $\\mathcal A_s=\\operatorname{Mod}(R_s)$ and $M_K=\\mathcal T_a^cK$. The strict-tower functor gives $\\operatorname{ev}_nM_K=\\operatorname{Res}_nF_nK_n$ naturally, with exactly the quotient-induced compact-support transitions, including every composite transition. By the integral compact-support definition, interpreted on this specified strict tower, $N_K=Ra_!K=R\\lim M_K$. Here we use the total-limit functor, not an arbitrary choice of a triangulated Roos cone. Thus its projections are the actual compact-support projections $N_K\\to\\operatorname{Res}_nF_nK_n$. The same definition of the transitions applies on morphisms because $\\mathcal T_a^c$ is a functor.",
+      "uses": [
+        "lem-weil-compact-support-reduction-tower-functor",
+        "def-weil-integral-rational-qbar-compact-support",
+        "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+        "place": "Proof paragraph 2, compact-support reduction preceding the third displayed mapping-complex comparison."
+      }
+    },
+    {
+      "text": "Let $F:\\mathcal A_s\\to\\operatorname{Mod}(R)$ be $\\Gamma(s,-)$ followed by restriction along $R\\to\\Gamma(s,R_s)$. Point sections are exact since $k$ is algebraically closed; restriction changes only the scalar action, so preserves kernels and cokernels. Hence $F$ and its levelwise tower functor are exact. The exact-functor factorization identifies their derived functors with termwise application. In particular the separately derived tower sections in the statement give $B_K=F_D^{\\operatorname{Tow}}M_K$, and $\\operatorname{ev}_nB_K=C_n$ with the same transitions. No inverse limit is taken by these tower sections.",
+      "uses": [
+        "lem-weil-point-proetale-sections-exact",
+        "lem-weil-tower-category-levelwise-abelian",
+        "lem-weil-pbc-exact-functor-derived-factorization",
+        "def-pc-sheaf-restrict-scalars"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0940, section-derived-limits, tower site; exact point sections and exact derived factorization from the cited nodes."
+      }
+    },
+    {
+      "text": "Countable products in $\\mathcal A_s$ are sectionwise and exact by the pro-etale product theorem. In $\\operatorname{Mod}(R)$ they are exact too: the kernel of a product map is the product of its kernels, and a family in the product of targets of surjections has a preimage by choosing one preimage in each coordinate. The canonical product comparison for $F$ is the identity $F(\\prod_iL_i)=\\prod_iF(L_i)$ on sections at $s$, with the restricted $R$-actions. The exact-product-functor strict-limit comparison therefore applies and gives the natural isomorphism\n$$\\lambda_K:C=F_DN_K=F_D R\\lim M_K\\xrightarrow{\\sim}R\\lim F_D^{\\operatorname{Tow}}M_K=R\\lim B_K.$$\nIts stated projection equation says $\\pi_n\\lambda_K=F_D(N_K\\to\\operatorname{Res}_nF_nK_n)$. Thus it identifies the specified projections, not merely the two limit objects.",
+      "uses": [
+        "lem-weil-proetale-countable-products-exact",
+        "lem-cbc-exact-product-functor-strict-limit"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 0940 and 0941, section-derived-limits and lemma-derived-limit-is-ok; normalized strict-limit comparison as in the cited existing refinement."
+      }
+    },
+    {
+      "text": "On $R$-modules, let $\\Delta$ be the constant tower functor and $L$ ordinary inverse limit. The correspondence $h:V\\to LT\\mapsto(\\pi_nh)_n$ identifies module maps into the limit with tower maps $\\Delta V\\to T$; its inverse sends a compatible family to its map into the limit. These are inverse and natural by their coordinate formulas, so $\\Delta\\dashv L$. Moreover $\\Delta$ is additive and exact because tower exactness is levelwise. Its left derived functor is therefore the same termwise constant functor. The total right derived functor of $L$ exists on every tower by the total-limit theorem. Applying the general derived-adjoint theorem gives\n$$\\Delta:D(R)\\ \\dashv\\ R\\lim:D(\\operatorname{Tow}(\\operatorname{Mod}(R))).$$",
+      "uses": [
+        "lem-weil-tower-category-levelwise-abelian",
+        "lem-weil-pbc-exact-functor-derived-factorization",
+        "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+        "lem-pc-derived-adjoint-functors"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 09T5, lemma-derived-adjoint-functors; tower projection of sites-cohomology.tex Tag 0940."
+      }
+    },
+    {
+      "text": "Write $\\epsilon_B:\\Delta R\\lim B\\to B$ for this derived adjunction's counit. Its normalization can be read on a K-injective tower representative $I$ of $B$: $R\\lim B$ is $\\lim I$, and the counit is the chain map $\\Delta\\lim I\\to I$ with components $\\pi_n$. Indeed the fraction formula for the canonical derived adjunction, taking the identity resolution of the exact left functor and the K-injective resolution for the right functor, sends $1_{\\lim I}$ to the ordinary counit with precisely these components. Consequently $\\operatorname{ev}_n\\epsilon_B$ is the actual total-limit projection, after the resolution identifications. Define\n$$\\eta_K=\\epsilon_{B_K}\\circ\\Delta(\\lambda_K):\\Delta C\\to B_K.$$\nBy Step 3 its $n$th evaluation is exactly the compact-support projection $C\\to C_n$.",
+      "uses": [
+        "lem-pc-pre-derived-adjoint-functors-general",
+        "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, fraction characterization; sites-cohomology.tex Tag 0941, K-injective tower model."
+      }
+    },
+    {
+      "text": "For $f:K\\to K'$ let $b=B(f)$ and $c=C(f)$. Naturality of the comparison in Step 3 gives $(R\\lim b)\\lambda_K=\\lambda_{K'}c$. Naturality of the derived counit gives $b\\epsilon_{B_K}=\\epsilon_{B_{K'}}\\Delta(R\\lim b)$. Substitution yields\n$$b\\eta_K=\\epsilon_{B_{K'}}\\Delta(R\\lim b)\\Delta\\lambda_K=\\epsilon_{B_{K'}}\\Delta\\lambda_{K'}\\Delta c=\\eta_{K'}\\Delta c.$$\nThis equality is in the derived tower category itself. It does not infer equality of tower morphisms from equality of their evaluations.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+        "place": "Proof paragraph 2, sentence after the displayed calculation asserting that the specified natural maps are identified; elementary counit-naturality calculation."
+      }
+    },
+    {
+      "text": "Apply integral compact-support reduction to $a:X\\to s$ and $K$. The base field, $\\ell\\ne p$, separated finite-type morphism, dimension bound $d\\ge0$, and common Tor interval $[a_0,b_0]$ are exactly its hypotheses. It gives $N_K\\in D^b_c(s,R)$ and the canonical coherent isomorphism $r_n:N_K\\otimes^L_{R_s}(A_n)_s\\xrightarrow{\\sim}F_nK_n$. Apply point-sections derived reduction to this $N_K$. Composing gives a natural isomorphism\n$$\\alpha_n:C\\otimes_R^LA_n\\xrightarrow{\\sim}\\Gamma(s,N_K\\otimes^L_{R_s}(A_n)_s)\\xrightarrow{\\Gamma(s,r_n)}C_n.$$\nThe first arrow concerns modules over the completed sheaf on $s$, with scalar restriction to $R$; it is not an identification with the discrete constant integral sheaf.",
+      "uses": [
+        "lem-coef-integral-compact-support",
+        "lem-pod-point-sections-derived-reduction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+        "place": "Proof paragraph 2, third displayed comparison: integral compact-support reduction and point sections."
+      }
+    },
+    {
+      "text": "We specify the unit compatibility of the point-sections comparison rather than assuming it from naturality. Put $t=\\varpi^n$ and $A=A_n$. The coefficient DVR is a PID, hence Noetherian since each ideal has one generator. The finite-free resolution $[R\\xrightarrow{t}R]\\to A$ and the completed-constant reduction theorem identify $[R_s\\xrightarrow{t}R_s]$, augmented by the actual coefficient projection, with $(A_n)_s[0]$. Thus $0\\to R_s\\xrightarrow{t}R_s\\to(A_n)_s\\to0$ is exact. Apply the resolution-independence comparison for exact sections with $\\mathcal O=R_s$, $\\mathcal O'=(A_n)_s$ and final object $s$. Its hypotheses are this sequence and exact point sections. On a flat-term K-flat sheaf representative $P$ of $N_K$, it specifies the comparison as $\\theta_Pc_{\\Gamma P}$, where $c$ is the universal ordinary derived-tensor counit and $\\theta_P:\\Gamma P/t\\Gamma P\\to\\Gamma(P/tP)$ sends a quotient of a section to its quotient section. These are the normalized quotient maps underlying the point-sections isomorphism in Step 7.",
+      "uses": [
+        "lem-weil-l-adic-extension-integers-dvr",
+        "lem-weil-pbc-standard-quotients-perfect",
+        "lem-weil-pbc-completed-constant-sheaf-reduction",
+        "lem-pod-derived-reduction-sheaf-resolution-independence",
+        "lem-pc-kflat-resolution",
+        "lem-weil-point-proetale-sections-exact"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tags 093M and 093J, completion and constant-sheaf reduction; sites-cohomology.tex Tag 06YS, K-flat models; explicit normalization of the existing point-sections comparison."
+      }
+    },
+    {
+      "text": "Choose a flat-term K-flat ordinary-module resolution $q:Q\\to\\Gamma P$ on the one-object trivial site. The counit's naturality gives $c_{\\Gamma P}L(q)=\\bar q\\,c_Q$, where $\\bar q:Q/tQ\\to\\Gamma P/t\\Gamma P$ is induced by $q$ and $c_Q$ is the K-flat identification. Thus the comparison in Step 8, on the representative $Q/tQ$, is\n$$\\bar x\\longmapsto\\text{the image of }q(x)\\text{ in }\\Gamma(P/tP).$$\nBy the normalized scalar adjunction (on the trivial site for modules and on $s_{\\mathrm{proet}}$ for sheaves), its adjunct is the class of $Q\\to\\Gamma(P/tP)$, $x\\mapsto q(x)\\bmod t$. This is the composite of $q$ with sections of the reduction unit $P\\to P/tP$. All comparisons are therefore normalized with the same unit $x\\mapsto x\\otimes1$; no K-flatness of $\\Gamma P$ is needed.",
+      "uses": [
+        "lem-pc-kflat-resolution",
+        "lem-pc-mixed-tensor-pointwise-left-derived",
+        "lem-pod-derived-reduction-sheaf-resolution-independence",
+        "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 06YS and 07A6, K-flat models and scalar adjunction; ordinary derived-tensor counit naturality as in the cited existing comparison."
+      }
+    },
+    {
+      "text": "Finally compose that point-sections comparison with $\\Gamma(s,r_n)$ from Step 7. Its scalar-extension adjunct is sections of the reduction unit followed by $r_n$, by Step 9. Since $r_n$ is the canonical compact-support coefficient comparison, this composite is the actual compact-support projection $C\\to C_n$. That is exactly $\\operatorname{ev}_n\\eta_K$ by Steps 3 and 5. The scalar adjunction bijection therefore identifies $\\alpha_n$ with the adjunct of $\\operatorname{ev}_n\\eta_K$, proving the last clause, including its specified map.",
+      "uses": [
+        "lem-coef-integral-compact-support",
+        "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+        "place": "Proof paragraph 2, third displayed comparison; identification of its specified canonical scalar adjunct."
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-pc-sheaf-restrict-scalars",
     "def-weil-integral-rational-qbar-compact-support",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2, compact-support reduction preceding the third displayed mapping-complex comparison."
-   }
-  },
-  {
-   "text": "Let $F:\\mathcal A_s\\to\\operatorname{Mod}(R)$ be $\\Gamma(s,-)$ followed by restriction along $R\\to\\Gamma(s,R_s)$. Point sections are exact since $k$ is algebraically closed; restriction changes only the scalar action, so preserves kernels and cokernels. Hence $F$ and its levelwise tower functor are exact. The exact-functor factorization identifies their derived functors with termwise application. In particular the separately derived tower sections in the statement give $B_K=F_D^{\\operatorname{Tow}}M_K$, and $\\operatorname{ev}_nB_K=C_n$ with the same transitions. No inverse limit is taken by these tower sections.",
-   "uses": [
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940, section-derived-limits, tower site; exact point sections and exact derived factorization from the cited nodes."
-   }
-  },
-  {
-   "text": "Countable products in $\\mathcal A_s$ are sectionwise and exact by the pro-etale product theorem. In $\\operatorname{Mod}(R)$ they are exact too: the kernel of a product map is the product of its kernels, and a family in the product of targets of surjections has a preimage by choosing one preimage in each coordinate. The canonical product comparison for $F$ is the identity $F(\\prod_iL_i)=\\prod_iF(L_i)$ on sections at $s$, with the restricted $R$-actions. The exact-product-functor strict-limit comparison therefore applies and gives the natural isomorphism\n$$\\lambda_K:C=F_DN_K=F_D R\\lim M_K\\xrightarrow{\\sim}R\\lim F_D^{\\operatorname{Tow}}M_K=R\\lim B_K.$$\nIts stated projection equation says $\\pi_n\\lambda_K=F_D(N_K\\to\\operatorname{Res}_nF_nK_n)$. Thus it identifies the specified projections, not merely the two limit objects.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-cbc-exact-product-functor-strict-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0940 and 0941, section-derived-limits and lemma-derived-limit-is-ok; normalized strict-limit comparison as in the cited existing refinement."
-   }
-  },
-  {
-   "text": "On $R$-modules, let $\\Delta$ be the constant tower functor and $L$ ordinary inverse limit. The correspondence $h:V\\to LT\\mapsto(\\pi_nh)_n$ identifies module maps into the limit with tower maps $\\Delta V\\to T$; its inverse sends a compatible family to its map into the limit. These are inverse and natural by their coordinate formulas, so $\\Delta\\dashv L$. Moreover $\\Delta$ is additive and exact because tower exactness is levelwise. Its left derived functor is therefore the same termwise constant functor. The total right derived functor of $L$ exists on every tower by the total-limit theorem. Applying the general derived-adjoint theorem gives\n$$\\Delta:D(R)\\ \\dashv\\ R\\lim:D(\\operatorname{Tow}(\\operatorname{Mod}(R))).$$",
-   "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-pc-derived-adjoint-functors"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5, lemma-derived-adjoint-functors; tower projection of sites-cohomology.tex Tag 0940."
-   }
-  },
-  {
-   "text": "Write $\\epsilon_B:\\Delta R\\lim B\\to B$ for this derived adjunction's counit. Its normalization can be read on a K-injective tower representative $I$ of $B$: $R\\lim B$ is $\\lim I$, and the counit is the chain map $\\Delta\\lim I\\to I$ with components $\\pi_n$. Indeed the fraction formula for the canonical derived adjunction, taking the identity resolution of the exact left functor and the K-injective resolution for the right functor, sends $1_{\\lim I}$ to the ordinary counit with precisely these components. Consequently $\\operatorname{ev}_n\\epsilon_B$ is the actual total-limit projection, after the resolution identifications. Define\n$$\\eta_K=\\epsilon_{B_K}\\circ\\Delta(\\lambda_K):\\Delta C\\to B_K.$$\nBy Step 3 its $n$th evaluation is exactly the compact-support projection $C\\to C_n$.",
-   "uses": [
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, fraction characterization; sites-cohomology.tex Tag 0941, K-injective tower model."
-   }
-  },
-  {
-   "text": "For $f:K\\to K'$ let $b=B(f)$ and $c=C(f)$. Naturality of the comparison in Step 3 gives $(R\\lim b)\\lambda_K=\\lambda_{K'}c$. Naturality of the derived counit gives $b\\epsilon_{B_K}=\\epsilon_{B_{K'}}\\Delta(R\\lim b)$. Substitution yields\n$$b\\eta_K=\\epsilon_{B_{K'}}\\Delta(R\\lim b)\\Delta\\lambda_K=\\epsilon_{B_{K'}}\\Delta\\lambda_{K'}\\Delta c=\\eta_{K'}\\Delta c.$$\nThis equality is in the derived tower category itself. It does not infer equality of tower morphisms from equality of their evaluations.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2, sentence after the displayed calculation asserting that the specified natural maps are identified; elementary counit-naturality calculation."
-   }
-  },
-  {
-   "text": "Apply integral compact-support reduction to $a:X\\to s$ and $K$. The base field, $\\ell\\ne p$, separated finite-type morphism, dimension bound $d\\ge0$, and common Tor interval $[a_0,b_0]$ are exactly its hypotheses. It gives $N_K\\in D^b_c(s,R)$ and the canonical coherent isomorphism $r_n:N_K\\otimes^L_{R_s}(A_n)_s\\xrightarrow{\\sim}F_nK_n$. Apply point-sections derived reduction to this $N_K$. Composing gives a natural isomorphism\n$$\\alpha_n:C\\otimes_R^LA_n\\xrightarrow{\\sim}\\Gamma(s,N_K\\otimes^L_{R_s}(A_n)_s)\\xrightarrow{\\Gamma(s,r_n)}C_n.$$\nThe first arrow concerns modules over the completed sheaf on $s$, with scalar restriction to $R$; it is not an identification with the discrete constant integral sheaf.",
-   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit",
     "lem-coef-integral-compact-support",
-    "lem-pod-point-sections-derived-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2, third displayed comparison: integral compact-support reduction and point sections."
-   }
-  },
-  {
-   "text": "We specify the unit compatibility of the point-sections comparison rather than assuming it from naturality. Put $t=\\varpi^n$ and $A=A_n$. The coefficient DVR is a PID, hence Noetherian since each ideal has one generator. The finite-free resolution $[R\\xrightarrow{t}R]\\to A$ and the completed-constant reduction theorem identify $[R_s\\xrightarrow{t}R_s]$, augmented by the actual coefficient projection, with $(A_n)_s[0]$. Thus $0\\to R_s\\xrightarrow{t}R_s\\to(A_n)_s\\to0$ is exact. Apply the resolution-independence comparison for exact sections with $\\mathcal O=R_s$, $\\mathcal O'=(A_n)_s$ and final object $s$. Its hypotheses are this sequence and exact point sections. On a flat-term K-flat sheaf representative $P$ of $N_K$, it specifies the comparison as $\\theta_Pc_{\\Gamma P}$, where $c$ is the universal ordinary derived-tensor counit and $\\theta_P:\\Gamma P/t\\Gamma P\\to\\Gamma(P/tP)$ sends a quotient of a section to its quotient section. These are the normalized quotient maps underlying the point-sections isomorphism in Step 7.",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-standard-quotients-perfect",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-pod-derived-reduction-sheaf-resolution-independence",
-    "lem-pc-kflat-resolution",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 093M and 093J, completion and constant-sheaf reduction; sites-cohomology.tex Tag 06YS, K-flat models; explicit normalization of the existing point-sections comparison."
-   }
-  },
-  {
-   "text": "Choose a flat-term K-flat ordinary-module resolution $q:Q\\to\\Gamma P$ on the one-object trivial site. The counit's naturality gives $c_{\\Gamma P}L(q)=\\bar q\\,c_Q$, where $\\bar q:Q/tQ\\to\\Gamma P/t\\Gamma P$ is induced by $q$ and $c_Q$ is the K-flat identification. Thus the comparison in Step 8, on the representative $Q/tQ$, is\n$$\\bar x\\longmapsto\\text{the image of }q(x)\\text{ in }\\Gamma(P/tP).$$\nBy the normalized scalar adjunction (on the trivial site for modules and on $s_{\\mathrm{proet}}$ for sheaves), its adjunct is the class of $Q\\to\\Gamma(P/tP)$, $x\\mapsto q(x)\\bmod t$. This is the composite of $q$ with sections of the reduction unit $P\\to P/tP$. All comparisons are therefore normalized with the same unit $x\\mapsto x\\otimes1$; no K-flatness of $\\Gamma P$ is needed.",
-   "uses": [
+    "lem-pc-derived-adjoint-functors",
     "lem-pc-kflat-resolution",
     "lem-pc-mixed-tensor-pointwise-left-derived",
+    "lem-pc-pre-derived-adjoint-functors-general",
     "lem-pod-derived-reduction-sheaf-resolution-independence",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS and 07A6, K-flat models and scalar adjunction; ordinary derived-tensor counit naturality as in the cited existing comparison."
-   }
-  },
-  {
-   "text": "Finally compose that point-sections comparison with $\\Gamma(s,r_n)$ from Step 7. Its scalar-extension adjunct is sections of the reduction unit followed by $r_n$, by Step 9. Since $r_n$ is the canonical compact-support coefficient comparison, this composite is the actual compact-support projection $C\\to C_n$. That is exactly $\\operatorname{ev}_n\\eta_K$ by Steps 3 and 5. The scalar adjunction bijection therefore identifies $\\alpha_n$ with the adjunct of $\\operatorname{ev}_n\\eta_K$, proving the last clause, including its specified map.",
-   "uses": [
-    "lem-coef-integral-compact-support",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2, third displayed comparison; identification of its specified canonical scalar adjunct."
-   }
-  }
- ],
- "proof_deps": [
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-coef-integral-compact-support",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pc-kflat-resolution",
-  "lem-pc-mixed-tensor-pointwise-left-derived",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pod-derived-reduction-sheaf-resolution-independence",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-tower-category-levelwise-abelian"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-  "place": "Proof paragraph 2, compact-support reduction and the third displayed comparison; expanded using Stacks Tags 0940, 0941, 09T5 and 0FND and the existing normalized strict-limit comparison."
- },
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "prop-coef-integral-dualizing",
-  "date": "2026-10-17",
-  "group": "Q91"
- },
- "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general",
- "title": "Compact-support tower coaugmentation",
- "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $a:X\\to s=\\operatorname{Spec}k$ be separated and of finite type [def-weil-scheme-morphism-properties]. Use ordinary module sheaves on the small pro-etale sites, with completed coefficient sheaf $R_W=\\lim_n(A_n)_W$ for $W=X,s$ [def-weil-completed-integral-coefficients]. Write $F_n=Ra_{!,n}$ for compact support using one fixed compactification $a=pj$ [def-weil-integral-rational-qbar-compact-support], $G_n=Ra_n^!$ for the finite constructible comparison-class exceptional functor [def-weil-exceptional-inverse-image], and $\\omega_n=G_n(A_n)_s$. Let $K\\in D^b_c(X,R)$ [def-weil-derived-complete-integral-detailed], let $K_n=K\\otimes^L_{R_X}(A_n)_X$ [def-weil-integral-derived-reduction], and suppose its reductions have Tor amplitude in one finite interval $[a_0,b_0]$ [def-weil-finite-tor-amplitude]. Put $C_n=\\Gamma(s,F_nK_n)$ and $C=\\Gamma(s,Ra_!K)$, with coefficient-point sections [def-weil-finite-coefficient-point]. Suppose $\\dim X\\le d$ for an integer $d\\ge0$ [def-kun-topological-krull-dimension]. Let $\\mathcal T_a^cK$ be the specified strict compact-support reduction tower [lem-weil-compact-support-reduction-tower-functor] and put $B_K=R\\Gamma^{\\operatorname{Tow}}(s,\\mathcal T_a^cK)$, with scalars restricted to $R$. Use total derived inverse limits and derived tower categories as in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. There is a natural isomorphism $C\\cong R\\lim B_K$ compatible with all finite projections, and the derived constant/limit counit gives a natural morphism\n$$\\eta_K:\\operatorname{const}C\\longrightarrow B_K$$\nin $D(\\operatorname{Tow}(\\operatorname{Mod}(R)))$. Under $\\operatorname{ev}_nB_K\\cong C_n$, its evaluation is the actual compact-support projection $C\\to C_n$. The scalar-extension adjunct of this evaluation is the canonical isomorphism $C\\otimes_R^LA_n\\xrightarrow{\\sim}C_n$ of [lem-pod-point-sections-derived-reduction] and [lem-coef-integral-compact-support].",
- "stmt_deps": [
-  "def-weil-finite-field-fiber",
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-completed-integral-coefficients",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-exceptional-inverse-image",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-integral-derived-reduction",
-  "def-weil-finite-tor-amplitude",
-  "def-weil-finite-coefficient-point",
-  "def-kun-topological-krull-dimension",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-coef-integral-compact-support"
- ],
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-  "place": "Proof paragraph 2, third displayed line: canonical projections from integral compact support to the finite compact-support tower (first part of old step 11).",
-  "note": "Agent-written extraction of the existing item proof; the blueprint supplies the route, and the retained argument is recorded in the delivery report."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "inverse limit tower constant coaugmentation compatible quotient maps",
-   "results": "InverseSystem.invLimEquiv_apply_coe; InverseSystem.invLimEquiv; InverseSystem.invLimEquiv_symm_apply_coe; InverseSystem.globalEquiv_naturality; LightProfinite.proj_comp_transitionMap; InverseSystem.globalEquiv_compatibility; LightProfinite.proj_comp_transitionMapLE; LightProfinite.proj_comp_transitionMap'",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits.constLimAdj",
-   "results": "CategoryTheory.Limits.constLimAdj; CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "constLimAdj|limit.*cone|compatible Mathlib/CategoryTheory/Limits",
-   "results": "none",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "natural coaugmentation from inverse limit object to a tower",
-   "results": "InverseSystem.isNatEquiv_piEquivLim; InverseSystem.invLimEquiv_symm_apply_coe; ModuleCat.directLimitCocone; InverseSystem.invLimEquiv_apply_coe; InverseSystem.piEquivLim; CategoryTheory.Limits.limitCompCoyonedaIsoCone; InverseSystem.invLimEquiv; CochainComplex.truncateAugment_inv_f",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "inverse limit tower constant coaugmentation compatible quotient maps",
-   "results": "LightProfinite.proj_comp_transitionMap; LightProfinite.proj_comp_transitionMap'; LightProfinite.lightToProfinite_map_proj_eq; LightProfinite.proj_comp_transitionMapLE; LightProfinite.proj_comp_transitionMapLE'; InverseSystem.globalEquiv_compatibility; InverseSystem.pEquivOnLim; InverseSystem.invLimEquiv_apply_coe",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits.constLimAdj",
-   "results": "CategoryTheory.Limits.constLimAdj; CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "constLimAdj|limit.*cone|compatible Mathlib/CategoryTheory/Limits",
-   "results": "none",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "natural coaugmentation from inverse limit object to a tower",
-   "results": "InverseSystem.isNatEquiv_piEquivLim; InverseSystem.invLimEquiv_symm_apply_coe; ModuleCat.directLimitCocone; InverseSystem.invLimEquiv_apply_coe; InverseSystem.piEquivLim; CategoryTheory.Limits.limitCompCoyonedaIsoCone; InverseSystem.invLimEquiv; CochainComplex.truncateAugment_inv_f",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "constLimAdj|limit.*cone|compatible CategoryTheory/Limits",
-   "results": "Mathlib/CategoryTheory/Limits/FullSubcategory.lean; Mathlib/CategoryTheory/Limits/FullSubcategory.lean; Mathlib/CategoryTheory/Limits/FullSubcategory.lean; Mathlib/CategoryTheory/Limits/FullSubcategory.lean; Mathlib/CategoryTheory/Limits/FullSubcategory.lean; Mathlib/CategoryTheory/Limits/Lattice.lean; Mathlib/CategoryTheory/Limits/Lattice.lean; Mathlib/CategoryTheory/Limits/Lattice.lean; 25 source hits; these concern general category or homological constructions, not the stated finite-coefficient compact-support tower comparison.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "natural coaugmentation from inverse limit compact support tower to finite levels",
-   "results": "{\"t\": \"2026-10-17T14:54:29Z\", \"tool\": \"leanfinder\", \"query\": \"natural coaugmentation from inverse limit compact support tower to finite levels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.spanCone\", \"Condensed.profiniteSolidCounit\", \"LightProfinite.transitionMap\", \"LightProfinite.transitionMapLE\", \"Profinite.indexCone\", \"Profinite.NobelingProof.spanFunctor\", \"CompHausLike.LocallyConstant.counitAppApp\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\"], \"digest\": \"446cb317d215f5c8\"}",
-   "date": "2026-10-17",
-   "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits.limitCone, const, inverse limit",
-   "results": "{\"t\": \"2026-10-17T14:54:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.limitCone, const, inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits.limitCone'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "invalid query: unknown identifier; retried with CategoryTheory.Limits.constLimAdj"
-  },
-  {
-   "tool": "grep",
-   "query": "Rlim|invLim|constLimAdj|limit.*counit",
-   "results": "{\"t\": \"2026-10-17T14:54:29Z\", \"tool\": \"grep\", \"query\": \"Rlim|invLim|constLimAdj|limit.*counit\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\"], \"digest\": \"2101f61f4c981dfa\"}",
-   "date": "2026-10-17",
-   "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only",
-   "sub": "CategoryTheory/Limits"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits.constLimAdj",
-   "results": "{\"t\": \"2026-10-17T14:57:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.constLimAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.constLimAdj\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app\"], \"digest\": \"bcbc630362d829df\"}",
-   "date": "2026-10-17",
-   "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only"
-  },
-  {
-   "tool": "leansearch",
-   "query": "derived inverse limit of compactly supported cohomology coefficient reductions natural limit projections",
-   "results": "{\"t\": \"2026-10-17T14:57:49Z\", \"tool\": \"leansearch\", \"query\": \"derived inverse limit of compactly supported cohomology coefficient reductions natural limit projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π\", \"CategoryTheory.Limits.limit.isoLimitCone_inv_π\", \"CategoryTheory.Limits.colimitHomIsoLimitYoneda'_inv_comp_π\", \"CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app\", \"InverseSystem.invLimEquiv_apply_coe\", \"CategoryTheory.Limits.limit.conePointUniqueUpToIso_inv_comp\", \"CategoryTheory.Limits.Pi.isoLimit_inv_π\", \"InverseSystem.invLimEquiv\"], \"digest\": \"18f9a4464ccfca88\"}",
-   "date": "2026-10-17",
-   "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "total right derived inverse limit right adjoint to exact constant diagram functor",
-   "results": "{\"t\": \"2026-10-17T14:57:52Z\", \"tool\": \"leanfinder\", \"query\": \"total right derived inverse limit right adjoint to exact constant diagram functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit'\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit\"], \"digest\": \"603869d0c91143c1\"}",
-   "date": "2026-10-17",
-   "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only"
-  },
-  {
-   "tool": "grep",
-   "query": "derived.*[Ll]imit|[Ll]imit.*derived|constLimAdj",
-   "results": "{\"t\": \"2026-10-17T14:57:52Z\", \"tool\": \"grep\", \"query\": \"derived.*[Ll]imit|[Ll]imit.*derived|constLimAdj\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\"], \"digest\": \"355c8c279d1f3950\"}",
-   "date": "2026-10-17",
-   "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only",
-   "sub": "CategoryTheory"
-  }
- ],
- "blueprint": {
-  "from": {
-   "node": "prop-coef-integral-dualizing",
-   "place": "Proof paragraph 2, third displayed line: canonical projections from integral compact support to the finite compact-support tower (first part of old step 11).",
-   "via": []
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-coef-tower-coaugmentation",
-  "worker": "stage1",
-  "summary": "Expanded the canonical compact-support tower coaugmentation into ten steps, using existing strict-tower, exact point-sections, normalized limit-comparison, and derived-adjunction nodes; verified naturality as a tower identity and identified the scalar-extension adjunct on normalized K-flat quotient models. Statement unchanged; no new nodes.",
-  "blueprint": "prop-coef-integral-dualizing proof paragraph 2, compact-support reduction before and within the third displayed mapping-complex comparison, and the final identification of the specified natural maps.",
-  "tool_uses": [
-   {
-    "node": "def-pc-sheaf-restrict-scalars",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "def-weil-integral-rational-qbar-compact-support",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-cbc-exact-product-functor-strict-limit",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pc-derived-adjoint-functors",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pc-mixed-tensor-pointwise-left-derived",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pc-pre-derived-adjoint-functors-general",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pod-derived-reduction-sheaf-resolution-independence",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pod-point-sections-derived-reduction",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-weil-compact-support-reduction-tower-functor",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-derived-factorization",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-weil-pbc-standard-quotients-perfect",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-weil-tower-category-levelwise-abelian",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   }
-  ]
- },
- "tool_uses": [
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pc-kflat-resolution",
-  "lem-pc-mixed-tensor-pointwise-left-derived",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pod-derived-reduction-sheaf-resolution-independence",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-tower-category-levelwise-abelian"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-Codex-Q78-08c8831b7",
-  "group": "Q78",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-08c8831b7 (reviewer sub-agent of L); spot-checked: Reviewed item, route, report, all cited node statements and sources, hypotheses, coefficient category, canonical base-change maps, edge cases, searches, and all ten proof steps. No new nodes or repairs are needed; review.md records the checks."
- },
- "lean": {
-  "module": "Sheaf.Paper.CoefTowerCoaugmentation",
-  "declaration": "WeilConjectures.CoefTower.compactSupport_tower_coaugmentation",
-  "file": "lean/Sheaf/Paper/CoefTowerCoaugmentation.lean",
-  "statement": "theorem compactSupport_tower_coaugmentation (_hl : l ≠ D.p) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a₀ b₀ : ℤ) (_hab : a₀ ≤ b₀) (_htransition : ∀ (m n : ℕ) (h : n ≤ m) (K : DerivedCategory (scalarReductionSource l E X)), (pbcTowerTransition (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) m n h).app (T.obj K) ≫ (e n).hom.app K = (e m).hom.app K ≫ compactSupportRestrictedTransition l E c m n h K) : ∃ lambda : (inputs l E (X := X) a₀ b₀).ι ⋙ integralSections D l E T ≅ (inputs l E (X := X) a₀ b₀).ι ⋙ sectionsTower D l E T ⋙ totalLimit (coefficient l E), (∀ (K : (inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), lambda.hom.app K ≫ (projection (coefficient l E) n).app ((sectionsTower D l E T).obj K.obj) ≫ (finiteEvaluation D l E c T e n).hom.app K.obj = (compactSupportProjection D l E c T e n).app K.obj) ∧ (∀ (K : (inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), (evaluate (coefficient l E) n).map ((coaugmentation D l E T a₀ b₀ lambda).app K) ≫ (finiteEvaluation D l E c T e n).hom.app K.obj = (constantEvaluation (coefficient l E) n).hom.app ((integralSections D l E T).obj K.obj) ≫ (compactSupportProjection D l E c T e n).app K.obj) ∧ ∀ (K : (inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), IsIso (reductionComparison D l E c T e n K.obj)",
-  "branch": "newtargets-dag",
-  "by": "Q66",
-  "date": "2026-10-17",
-  "existing": false,
-  "declarations": [
-   "WeilConjectures.CoefTower.moduleTowersDerived",
-   "WeilConjectures.CoefTower.moduleTowersKInjectives",
-   "WeilConjectures.CoefTower.moduleLimitAdditive",
-   "WeilConjectures.CoefTower.constant",
-   "WeilConjectures.CoefTower.totalLimit",
-   "WeilConjectures.CoefTower.adjunction",
-   "WeilConjectures.CoefTower.evaluate",
-   "WeilConjectures.CoefTower.projection",
-   "WeilConjectures.CoefTower.coefficient",
-   "WeilConjectures.CoefTower.towerSections",
-   "WeilConjectures.CoefTower.towerSectionsLimits",
-   "WeilConjectures.CoefTower.towerSectionsColimits",
-   "WeilConjectures.CoefTower.derivedTowerSections",
-   "WeilConjectures.CoefTower.sectionsEvaluation",
-   "WeilConjectures.CoefTower.finiteSectionsRestriction_existsUnique",
-   "WeilConjectures.CoefTower.finiteSectionsRestriction",
-   "WeilConjectures.CoefTower.quotientExtensionAdditive",
-   "WeilConjectures.CoefTower.derivedFiniteSectionsRestriction",
-   "WeilConjectures.CoefTower.tensorSingleIso",
-   "WeilConjectures.CoefTower.tensorCounit",
-   "WeilConjectures.CoefTower.reductionAdjunction_existsUnique",
-   "WeilConjectures.CoefTower.reductionAdjunction",
-   "WeilConjectures.CoefTower.constantEvaluation",
-   "WeilConjectures.CoefTower.counit_projection",
-   "WeilConjectures.CoefTower.inputs",
-   "WeilConjectures.CoefTower.strictIntegralCompactSupport",
-   "WeilConjectures.CoefTower.integralSections",
-   "WeilConjectures.CoefTower.sectionsTower",
-   "WeilConjectures.CoefTower.finiteSections",
-   "WeilConjectures.CoefTower.finiteEvaluation",
-   "WeilConjectures.CoefTower.compactSupportProjection",
-   "WeilConjectures.CoefTower.reductionComparison",
-   "WeilConjectures.CoefTower.coaugmentation",
-   "WeilConjectures.CoefTower.compactSupport_tower_coaugmentation"
-  ]
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-1301a4d43",
-  "group": "Q66",
-  "result": "pass",
-  "note": "Reviewed packet, node, dependencies, source, Lean module, docstrings, edge cases, report sections, and exact declarations. scompile.py passed sandbox and library compiles with server confirmation (exit 0, no warnings); no fixes required."
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R3",
-  "result": "pass",
-  "landing": "20261019T231320-L-573320",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.CoefTower.compactSupport_tower_coaugmentation",
-   "WeilConjectures.CoefTower.counit_projection",
-   "WeilConjectures.CoefTower.finiteSectionsRestriction_existsUnique",
-   "WeilConjectures.CoefTower.moduleTowersKInjectives",
-   "WeilConjectures.CoefTower.reductionAdjunction_existsUnique"
+    "lem-pod-point-sections-derived-reduction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-tower-category-levelwise-abelian"
   ],
-  "sorry_after": [
-   "WeilConjectures.CoefTower.compactSupport_tower_coaugmentation"
-  ]
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+    "place": "Proof paragraph 2, compact-support reduction and the third displayed comparison; expanded using Stacks Tags 0940, 0941, 09T5 and 0FND and the existing normalized strict-limit comparison."
+  },
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "prop-coef-integral-dualizing",
+    "date": "2026-10-17",
+    "group": "Q91"
+  },
+  "chapter": "sec-six-functors",
+  "unit": "sk-prop-sf-biduality-general",
+  "title": "Compact-support tower coaugmentation",
+  "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $a:X\\to s=\\operatorname{Spec}k$ be separated and of finite type [def-weil-scheme-morphism-properties]. Use ordinary module sheaves on the small pro-etale sites, with completed coefficient sheaf $R_W=\\lim_n(A_n)_W$ for $W=X,s$ [def-weil-completed-integral-coefficients]. Write $F_n=Ra_{!,n}$ for compact support using one fixed compactification $a=pj$ [def-weil-integral-rational-qbar-compact-support], $G_n=Ra_n^!$ for the finite constructible comparison-class exceptional functor [def-weil-exceptional-inverse-image], and $\\omega_n=G_n(A_n)_s$. Let $K\\in D^b_c(X,R)$ [def-weil-derived-complete-integral-detailed], let $K_n=K\\otimes^L_{R_X}(A_n)_X$ [def-weil-integral-derived-reduction], and suppose its reductions have Tor amplitude in one finite interval $[a_0,b_0]$ [def-weil-finite-tor-amplitude]. Put $C_n=\\Gamma(s,F_nK_n)$ and $C=\\Gamma(s,Ra_!K)$, with coefficient-point sections [def-weil-finite-coefficient-point]. Suppose $\\dim X\\le d$ for an integer $d\\ge0$ [def-kun-topological-krull-dimension]. Let $\\mathcal T_a^cK$ be the specified strict compact-support reduction tower [lem-weil-compact-support-reduction-tower-functor] and put $B_K=R\\Gamma^{\\operatorname{Tow}}(s,\\mathcal T_a^cK)$, with scalars restricted to $R$. Use total derived inverse limits and derived tower categories as in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. There is a natural isomorphism $C\\cong R\\lim B_K$ compatible with all finite projections, and the derived constant/limit counit gives a natural morphism\n$$\\eta_K:\\operatorname{const}C\\longrightarrow B_K$$\nin $D(\\operatorname{Tow}(\\operatorname{Mod}(R)))$. Under $\\operatorname{ev}_nB_K\\cong C_n$, its evaluation is the actual compact-support projection $C\\to C_n$. The scalar-extension adjunct of this evaluation is the canonical isomorphism $C\\otimes_R^LA_n\\xrightarrow{\\sim}C_n$ of [lem-pod-point-sections-derived-reduction] and [lem-coef-integral-compact-support].",
+  "stmt_deps": [
+    "def-weil-finite-field-fiber",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-completed-integral-coefficients",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-exceptional-inverse-image",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-integral-derived-reduction",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-finite-coefficient-point",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-pod-point-sections-derived-reduction",
+    "lem-coef-integral-compact-support"
+  ],
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+    "place": "Proof paragraph 2, third displayed line: canonical projections from integral compact support to the finite compact-support tower (first part of old step 11).",
+    "note": "Agent-written extraction of the existing item proof; the blueprint supplies the route, and the retained argument is recorded in the delivery report."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "inverse limit tower constant coaugmentation compatible quotient maps",
+      "results": "InverseSystem.invLimEquiv_apply_coe; InverseSystem.invLimEquiv; InverseSystem.invLimEquiv_symm_apply_coe; InverseSystem.globalEquiv_naturality; LightProfinite.proj_comp_transitionMap; InverseSystem.globalEquiv_compatibility; LightProfinite.proj_comp_transitionMapLE; LightProfinite.proj_comp_transitionMap'",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Limits.constLimAdj",
+      "results": "CategoryTheory.Limits.constLimAdj; CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "constLimAdj|limit.*cone|compatible Mathlib/CategoryTheory/Limits",
+      "results": "none",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "natural coaugmentation from inverse limit object to a tower",
+      "results": "InverseSystem.isNatEquiv_piEquivLim; InverseSystem.invLimEquiv_symm_apply_coe; ModuleCat.directLimitCocone; InverseSystem.invLimEquiv_apply_coe; InverseSystem.piEquivLim; CategoryTheory.Limits.limitCompCoyonedaIsoCone; InverseSystem.invLimEquiv; CochainComplex.truncateAugment_inv_f",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "inverse limit tower constant coaugmentation compatible quotient maps",
+      "results": "LightProfinite.proj_comp_transitionMap; LightProfinite.proj_comp_transitionMap'; LightProfinite.lightToProfinite_map_proj_eq; LightProfinite.proj_comp_transitionMapLE; LightProfinite.proj_comp_transitionMapLE'; InverseSystem.globalEquiv_compatibility; InverseSystem.pEquivOnLim; InverseSystem.invLimEquiv_apply_coe",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Limits.constLimAdj",
+      "results": "CategoryTheory.Limits.constLimAdj; CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "constLimAdj|limit.*cone|compatible Mathlib/CategoryTheory/Limits",
+      "results": "none",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "natural coaugmentation from inverse limit object to a tower",
+      "results": "InverseSystem.isNatEquiv_piEquivLim; InverseSystem.invLimEquiv_symm_apply_coe; ModuleCat.directLimitCocone; InverseSystem.invLimEquiv_apply_coe; InverseSystem.piEquivLim; CategoryTheory.Limits.limitCompCoyonedaIsoCone; InverseSystem.invLimEquiv; CochainComplex.truncateAugment_inv_f",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "constLimAdj|limit.*cone|compatible CategoryTheory/Limits",
+      "results": "Mathlib/CategoryTheory/Limits/FullSubcategory.lean; Mathlib/CategoryTheory/Limits/FullSubcategory.lean; Mathlib/CategoryTheory/Limits/FullSubcategory.lean; Mathlib/CategoryTheory/Limits/FullSubcategory.lean; Mathlib/CategoryTheory/Limits/FullSubcategory.lean; Mathlib/CategoryTheory/Limits/Lattice.lean; Mathlib/CategoryTheory/Limits/Lattice.lean; Mathlib/CategoryTheory/Limits/Lattice.lean; 25 source hits; these concern general category or homological constructions, not the stated finite-coefficient compact-support tower comparison.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "natural coaugmentation from inverse limit compact support tower to finite levels",
+      "results": "{\"t\": \"2026-10-17T14:54:29Z\", \"tool\": \"leanfinder\", \"query\": \"natural coaugmentation from inverse limit compact support tower to finite levels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.spanCone\", \"Condensed.profiniteSolidCounit\", \"LightProfinite.transitionMap\", \"LightProfinite.transitionMapLE\", \"Profinite.indexCone\", \"Profinite.NobelingProof.spanFunctor\", \"CompHausLike.LocallyConstant.counitAppApp\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\"], \"digest\": \"446cb317d215f5c8\"}",
+      "date": "2026-10-17",
+      "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Limits.limitCone, const, inverse limit",
+      "results": "{\"t\": \"2026-10-17T14:54:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.limitCone, const, inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits.limitCone'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "invalid query: unknown identifier; retried with CategoryTheory.Limits.constLimAdj"
+    },
+    {
+      "tool": "grep",
+      "query": "Rlim|invLim|constLimAdj|limit.*counit",
+      "results": "{\"t\": \"2026-10-17T14:54:29Z\", \"tool\": \"grep\", \"query\": \"Rlim|invLim|constLimAdj|limit.*counit\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\"], \"digest\": \"2101f61f4c981dfa\"}",
+      "date": "2026-10-17",
+      "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only",
+      "sub": "CategoryTheory/Limits"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Limits.constLimAdj",
+      "results": "{\"t\": \"2026-10-17T14:57:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.constLimAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.constLimAdj\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app\"], \"digest\": \"bcbc630362d829df\"}",
+      "date": "2026-10-17",
+      "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only"
+    },
+    {
+      "tool": "leansearch",
+      "query": "derived inverse limit of compactly supported cohomology coefficient reductions natural limit projections",
+      "results": "{\"t\": \"2026-10-17T14:57:49Z\", \"tool\": \"leansearch\", \"query\": \"derived inverse limit of compactly supported cohomology coefficient reductions natural limit projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π\", \"CategoryTheory.Limits.limit.isoLimitCone_inv_π\", \"CategoryTheory.Limits.colimitHomIsoLimitYoneda'_inv_comp_π\", \"CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app\", \"InverseSystem.invLimEquiv_apply_coe\", \"CategoryTheory.Limits.limit.conePointUniqueUpToIso_inv_comp\", \"CategoryTheory.Limits.Pi.isoLimit_inv_π\", \"InverseSystem.invLimEquiv\"], \"digest\": \"18f9a4464ccfca88\"}",
+      "date": "2026-10-17",
+      "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "total right derived inverse limit right adjoint to exact constant diagram functor",
+      "results": "{\"t\": \"2026-10-17T14:57:52Z\", \"tool\": \"leanfinder\", \"query\": \"total right derived inverse limit right adjoint to exact constant diagram functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit'\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit\"], \"digest\": \"603869d0c91143c1\"}",
+      "date": "2026-10-17",
+      "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only"
+    },
+    {
+      "tool": "grep",
+      "query": "derived.*[Ll]imit|[Ll]imit.*derived|constLimAdj",
+      "results": "{\"t\": \"2026-10-17T14:57:52Z\", \"tool\": \"grep\", \"query\": \"derived.*[Ll]imit|[Ll]imit.*derived|constLimAdj\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\"], \"digest\": \"355c8c279d1f3950\"}",
+      "date": "2026-10-17",
+      "verdict": "no match for the whole compact-support derived-tower statement; ordinary limit or general derived-functor infrastructure only",
+      "sub": "CategoryTheory"
+    }
+  ],
+  "blueprint": {
+    "from": {
+      "node": "prop-coef-integral-dualizing",
+      "place": "Proof paragraph 2, third displayed line: canonical projections from integral compact support to the finite compact-support tower (first part of old step 11).",
+      "via": []
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "lem-coef-tower-coaugmentation",
+    "worker": "stage1",
+    "summary": "Expanded the canonical compact-support tower coaugmentation into ten steps, using existing strict-tower, exact point-sections, normalized limit-comparison, and derived-adjunction nodes; verified naturality as a tower identity and identified the scalar-extension adjunct on normalized K-flat quotient models. Statement unchanged; no new nodes.",
+    "blueprint": "prop-coef-integral-dualizing proof paragraph 2, compact-support reduction before and within the third displayed mapping-complex comparison, and the final identification of the specified natural maps.",
+    "tool_uses": [
+      {
+        "node": "def-pc-sheaf-restrict-scalars",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "def-weil-integral-rational-qbar-compact-support",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-cbc-exact-product-functor-strict-limit",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-pc-derived-adjoint-functors",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-pc-mixed-tensor-pointwise-left-derived",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-pc-pre-derived-adjoint-functors-general",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-pod-derived-reduction-sheaf-resolution-independence",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-pod-point-sections-derived-reduction",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-weil-compact-support-reduction-tower-functor",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-weil-l-adic-extension-integers-dvr",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-weil-pbc-exact-functor-derived-factorization",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-weil-pbc-standard-quotients-perfect",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-weil-point-proetale-sections-exact",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-weil-proetale-countable-products-exact",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      },
+      {
+        "node": "lem-weil-tower-category-levelwise-abelian",
+        "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+      }
+    ]
+  },
+  "tool_uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-pc-derived-adjoint-functors",
+    "lem-pc-kflat-resolution",
+    "lem-pc-mixed-tensor-pointwise-left-derived",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-pod-derived-reduction-sheaf-resolution-independence",
+    "lem-pod-point-sections-derived-reduction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-tower-category-levelwise-abelian"
+  ],
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-Codex-Q78-08c8831b7",
+    "group": "Q78",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-08c8831b7 (reviewer sub-agent of L); spot-checked: Reviewed item, route, report, all cited node statements and sources, hypotheses, coefficient category, canonical base-change maps, edge cases, searches, and all ten proof steps. No new nodes or repairs are needed; review.md records the checks."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.CoefTowerCoaugmentation",
+    "declaration": "WeilConjectures.CoefTower.compactSupport_tower_coaugmentation",
+    "file": "lean/Sheaf/Paper/CoefTowerCoaugmentation.lean",
+    "statement": "theorem compactSupport_tower_coaugmentation (_hl : l ≠ D.p) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a₀ b₀ : ℤ) (_hab : a₀ ≤ b₀) (_htransition : ∀ (m n : ℕ) (h : n ≤ m) (K : DerivedCategory (scalarReductionSource l E X)), (pbcTowerTransition (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) m n h).app (T.obj K) ≫ (e n).hom.app K = (e m).hom.app K ≫ compactSupportRestrictedTransition l E c m n h K) : ∃ lambda : (inputs l E (X := X) a₀ b₀).ι ⋙ integralSections D l E T ≅ (inputs l E (X := X) a₀ b₀).ι ⋙ sectionsTower D l E T ⋙ totalLimit (coefficient l E), (∀ (K : (inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), lambda.hom.app K ≫ (projection (coefficient l E) n).app ((sectionsTower D l E T).obj K.obj) ≫ (finiteEvaluation D l E c T e n).hom.app K.obj = (compactSupportProjection D l E c T e n).app K.obj) ∧ (∀ (K : (inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), (evaluate (coefficient l E) n).map ((coaugmentation D l E T a₀ b₀ lambda).app K) ≫ (finiteEvaluation D l E c T e n).hom.app K.obj = (constantEvaluation (coefficient l E) n).hom.app ((integralSections D l E T).obj K.obj) ≫ (compactSupportProjection D l E c T e n).app K.obj) ∧ ∀ (K : (inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), IsIso (reductionComparison D l E c T e n K.obj)",
+    "branch": "newtargets-dag",
+    "by": "Q66",
+    "date": "2026-10-17",
+    "existing": false,
+    "declarations": [
+      "WeilConjectures.CoefTower.moduleTowersDerived",
+      "WeilConjectures.CoefTower.moduleTowersKInjectives",
+      "WeilConjectures.CoefTower.moduleLimitAdditive",
+      "WeilConjectures.CoefTower.constant",
+      "WeilConjectures.CoefTower.totalLimit",
+      "WeilConjectures.CoefTower.adjunction",
+      "WeilConjectures.CoefTower.evaluate",
+      "WeilConjectures.CoefTower.projection",
+      "WeilConjectures.CoefTower.coefficient",
+      "WeilConjectures.CoefTower.towerSections",
+      "WeilConjectures.CoefTower.towerSectionsLimits",
+      "WeilConjectures.CoefTower.towerSectionsColimits",
+      "WeilConjectures.CoefTower.derivedTowerSections",
+      "WeilConjectures.CoefTower.sectionsEvaluation",
+      "WeilConjectures.CoefTower.finiteSectionsRestriction_existsUnique",
+      "WeilConjectures.CoefTower.finiteSectionsRestriction",
+      "WeilConjectures.CoefTower.quotientExtensionAdditive",
+      "WeilConjectures.CoefTower.derivedFiniteSectionsRestriction",
+      "WeilConjectures.CoefTower.tensorSingleIso",
+      "WeilConjectures.CoefTower.tensorCounit",
+      "WeilConjectures.CoefTower.reductionAdjunction_existsUnique",
+      "WeilConjectures.CoefTower.reductionAdjunction",
+      "WeilConjectures.CoefTower.constantEvaluation",
+      "WeilConjectures.CoefTower.counit_projection",
+      "WeilConjectures.CoefTower.inputs",
+      "WeilConjectures.CoefTower.strictIntegralCompactSupport",
+      "WeilConjectures.CoefTower.integralSections",
+      "WeilConjectures.CoefTower.sectionsTower",
+      "WeilConjectures.CoefTower.finiteSections",
+      "WeilConjectures.CoefTower.finiteEvaluation",
+      "WeilConjectures.CoefTower.compactSupportProjection",
+      "WeilConjectures.CoefTower.reductionComparison",
+      "WeilConjectures.CoefTower.coaugmentation",
+      "WeilConjectures.CoefTower.compactSupport_tower_coaugmentation"
+    ]
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-1301a4d43",
+    "group": "Q66",
+    "result": "pass",
+    "note": "Reviewed packet, node, dependencies, source, Lean module, docstrings, edge cases, report sections, and exact declarations. scompile.py passed sandbox and library compiles with server confirmation (exit 0, no warnings); no fixes required."
+  }
 }

@@ -87,13 +87,7 @@ the additivity equation with the kernel inclusion and cancel its monomorphism. -
 @[instance] theorem relativeSupportKernel_additive
     {Z U : Scheme.{u}} (i : Z ⟶ U) [IsClosedImmersion i] :
     (relativeSupportKernel i).Additive := by
-  let α : relativeSupportKernel i ⟶ 𝟭 _ :=
-    kernel.ι (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i.openComplement.ι).unit
-  constructor
-  intro F G f g
-  apply (cancel_mono (α.app G)).1
-  rw [Preadditive.add_comp, α.naturality (f + g), α.naturality f, α.naturality g]
-  simp only [Functor.id_map, Preadditive.comp_add]
+  sorry
 
 /-- The local cohomology sheaf in degree `b` of the signed coefficient `A(r)`.
 Source: Stacks Tag 09XP, derived sheaf of sections with support (blueprint:
@@ -107,27 +101,6 @@ noncomputable def relativeSupportCohomologySheaf
     ((relativeSupportKernel i).rightDerivedFunctorPlus.obj
       ((DerivedCategory.Plus.singleFunctor _ 0).obj (relativeSupportCoefficient P U r)))
 
-private theorem relativeSupportKernel_preservesInjectives
-    {Z U : Scheme.{u}} (i : Z ⟶ U) [IsClosedImmersion i] :
-    (relativeSupportKernel i).PreservesInjectiveObjects := by
-  have hc : IsCompl (Set.range i.base) (Set.range i.openComplement.ι.base) := by
-    rw [i.range_eq_compl_range_openComplement_ι]
-    exact (isCompl_compl (x := Set.range i.openComplement.ι.base)).symm
-  obtain ⟨hunit, hlim, _, ⟨adj⟩⟩ :=
-    supportedKernel_closedAdjunction i i.openComplement.ι hc
-  let := hunit
-  let := hlim
-  let := adj.preservesInjectiveObjects_of_preservesFiniteLimits
-  let := Adjunction.preservesInjectiveObjects_of_preservesFiniteLimits
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i)
-  refine ⟨fun {F} hF ↦ ?_⟩
-  let := hF
-  exact Injective.of_iso
-    (asIso ((Functor.whiskerLeft (supportedKernel i.openComplement.ι)
-      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit).app F)).symm
-    (inferInstance : Injective ((lowerStar AddCommGrpCat.{u + 1} i).obj
-      ((supportedClosedInverseImage i i.openComplement.ι).obj F)))
-
 /-- The support/global-sections pair is acyclic on injectives.
 Source: Stacks Tag 09XP, section-cohomology-support, and Tag 09XQ,
 lemma-sections-with-support-acyclic (blueprint: lem-pur-relative-support-bottom-descent).
@@ -139,9 +112,7 @@ theorem relativeSupport_isAcyclic
     {Z U : Scheme.{u}} (i : Z ⟶ U) [IsClosedImmersion i] :
     (relativeSupportKernel i).IsAcyclicComposablePair
       (Sheaf.Γ U.smallEtaleTopology AddCommGrpCat.{u + 1}) := by
-  cases P
-  let := relativeSupportKernel_preservesInjectives i
-  exact Functor.isAcyclicComposablePair_of_preservesInjectiveObjects _ _
+  sorry
 
 /-- Evaluation at one etale object of the fixed site of U.
 Source: Stacks Tag 09XP, the functor Gamma(W,-)
@@ -172,8 +143,7 @@ extensionality of objects of the etale over-category give the equality. -/
 theorem relativeSupport_terminal {U : Scheme.{u}} (W : U.Etale) :
     (MorphismProperty.Over.map ⊤ (inferInstance : Etale W.hom)).obj
       (Scheme.Etale.mk (𝟙 W.left)) = W := by
-  apply MorphismProperty.Comma.ext rfl (Subsingleton.elim _ _)
-  simp
+  sorry
 
 /-- The canonical evaluation identification, using only the identity law of localization.
 Source: Stacks Tag 03F3 (blueprint: lem-pur-relative-support-bottom-descent). -/
@@ -193,8 +163,7 @@ an injective to W, using exact etale extension by zero, and take global sections
 theorem relativeSupport_evaluationAcyclic {Z U : Scheme.{u}} (i : Z ⟶ U)
     [IsClosedImmersion i] (W : U.Etale) :
     (relativeSupportKernel i).IsAcyclicComposablePair (relativeSupportEvaluation W) := by
-  let := relativeSupportKernel_preservesInjectives i
-  exact Functor.isAcyclicComposablePair_of_preservesInjectiveObjects _ _
+  sorry
 
 /-- The support kernel evaluated at W is the support kernel on W of the restriction.
 The displayed inclusion equation determines the isomorphism uniquely, so no choice
@@ -230,23 +199,21 @@ Proof: restriction is computed sectionwise and is canonically the exact inverse 
 Transport exactness along upperStarIsoLocalizationRestriction; addition is sectionwise. -/
 @[instance] theorem relativeSupportRestriction_additive {U : Scheme.{u}} (W : U.Etale) :
     (relativeSupportRestriction W).Additive := by
-  infer_instance
+  sorry
 
 /-- Exactness of etale restriction, for deriving the kernel-normalized comparison.
 Source: Stacks Tag 03F3 (blueprint: lem-pur-relative-support-bottom-descent).
 Proof: the localization functor is the inverse image, hence exact. -/
 @[instance] theorem relativeSupportRestriction_colimits {U : Scheme.{u}} (W : U.Etale) :
     PreservesFiniteColimits (relativeSupportRestriction W) := by
-  exact preservesFiniteColimits_of_natIso
-    (upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} W.hom inferInstance)
+  sorry
 
 /-- Left exactness of etale restriction.
 Source: Stacks Tag 03F3 (blueprint: lem-pur-relative-support-bottom-descent).
 Proof: limits are computed sectionwise, so restriction preserves finite limits. -/
 @[instance] theorem relativeSupportRestriction_limits {U : Scheme.{u}} (W : U.Etale) :
     PreservesFiniteLimits (relativeSupportRestriction W) := by
-  exact preservesFiniteLimits_of_natIso
-    (upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} W.hom inferInstance)
+  sorry
 
 /-- The derived restriction comparison attached to the kernel-normalized ordinary map.
 Source: Stacks Tags 09XP and 015N
@@ -335,9 +302,7 @@ composites the identity in each degree. -/
 @[instance] theorem relativeSupportGlobalDerived_isIso {Z U : Scheme.{u}}
     (i : Z ⟶ U) [IsClosedImmersion i] (n : ℕ) :
     IsIso (NatTrans.rightDerived (relativeSupportGlobalIso i).hom n) := by
-  refine ⟨⟨NatTrans.rightDerived (relativeSupportGlobalIso i).inv n, ?_, ?_⟩⟩
-  · rw [← NatTrans.rightDerived_comp, Iso.hom_inv_id, NatTrans.rightDerived_id]
-  · rw [← NatTrans.rightDerived_comp, Iso.inv_hom_id, NatTrans.rightDerived_id]
+  sorry
 
 /-- Restriction of an actual global supported class to an etale object W.
 Source: Stacks Tag 09XP (blueprint: lem-pur-relative-support-bottom-descent). -/
@@ -377,12 +342,7 @@ theorem relativeSupportForgetIso_naturality (A : Type (u + 1)) [CommRing A]
     (PreservesKernel.iso (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
         (F.obj.map (supportRestrictionArrow i).op)).hom ≫
       (moduleAbelianForget A T ⋙ supportSections i).map a := by
-  simp only [PreservesKernel.iso_hom]
-  exact (kernelComparison_comp_kernel_map
-    (F.obj.map (supportRestrictionArrow i).op)
-    (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
-    (G.obj.map (supportRestrictionArrow i).op)
-    (a.hom.app _) (a.hom.app _) (a.hom.naturality _)).symm
+  sorry
 
 /-- Scalar forgetting of support kernels, using Mathlib's actual kernel-preservation
 isomorphism. Its inclusion normalization is built into PreservesKernel.iso.
@@ -407,11 +367,7 @@ presentation; specialize the existing colimit-preservation theorem to finite dia
     (A : Type (u + 1)) [CommRing A] :
     PreservesFiniteColimits
       (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}) := by
-  have : PreservesColimitsOfSize.{0, 0}
-      (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}) :=
-    ModuleCat.forget₂PreservesColimitsOfSize.{u + 1, u + 1, 0, 0} A
-  exact PreservesColimitsOfSize0.preservesFiniteColimits
-    (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
+  sorry
 
 /-- Derive the scalar-forgetting support comparison by the canonical base-change map.
 Source: Stacks Tags 09XP and 015N

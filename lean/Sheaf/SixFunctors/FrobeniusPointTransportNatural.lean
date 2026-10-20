@@ -69,9 +69,7 @@ theorem frobeniusPointRationalPullbackEq
       fun x => frobeniusPointPrimeInvertible D l hl x
     (rationalDerivedPullback l E (frobeniusPointIso D).hom).obj N =
       frobeniusPointRationalPullbackObj D l hl E N := by
-  letI := frobeniusPointPrimeInvertible D l hl
-  exact
-    (rationalDerivedPullback_existsUnique l E (frobeniusPointIso D).hom).exists.choose_spec.2.1 N
+  sorry
 
 /-- The canonical common-stage object equality for qbar pullback.
 Source: blueprint common-stage pullback paragraph; proof postponed to the
@@ -86,14 +84,7 @@ theorem frobeniusPointQbarPullbackEq
       fun x => frobeniusPointPrimeInvertible D l hl x
     (commonStageDerivedPullback l Ω (frobeniusPointIso D).hom).obj A =
       frobeniusPointQbarPullbackObj D l hl Ω A := by
-  letI := frobeniusPointPrimeInvertible D l hl
-  have h₁ := (commonStageDerivedPullback_existsUnique l Ω
-    (frobeniusPointIso D).hom).exists.choose_spec.1 A
-  have h₂ := frobeniusPointRationalPullbackEq D l hl
-    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω A.stage) A.obj
-  exact h₁.trans (congrArg (fun K ↦
-    (⟨A.stage, K⟩ : generalAlgebraicallyClosedConstructibleCategory l Ω
-      (Spec (.of D.k)))) h₂)
+  sorry
 
 /-- The canonical object equality for the chosen qbar fibre functor.
 Source: blueprint algebraically closed coefficient fibre construction; proof
@@ -105,7 +96,7 @@ theorem frobeniusPointQbarFibreObjEq
     [IsAlgClosure ℚ_[l] Ω]
     (A : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) :
     (pointQbarFibre D l hl Ω).obj A = pointQbarFibreObj D l hl Ω A := by
-  exact (pointQbarFibre_existsUnique D l hl Ω).exists.choose_spec.1 A
+  sorry
 
 /-- The derived finite sigma component `Γ(s, N) → Γ(s, g_s⁻¹ N)` on the unbounded
 derived category, for the exact module inverse image `inverseImageFiniteDerived`

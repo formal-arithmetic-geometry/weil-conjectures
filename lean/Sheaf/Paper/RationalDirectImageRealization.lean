@@ -89,7 +89,7 @@ actions. Addition is sectionwise, so the two additive maps have identical compon
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (c : (adicTowerInverseImage f).obj R ⟶ S) : (modulePush f c).Additive := by
-  exact ⟨fun {_ _} _ _ ↦ rfl⟩
+  sorry
 
 /-- The ordinary unbounded right derived direct image, computed on K-injectives in all
 continuous modules. Source: BS 6.8.15

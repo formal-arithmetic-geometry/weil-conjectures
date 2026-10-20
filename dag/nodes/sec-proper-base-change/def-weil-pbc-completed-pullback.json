@@ -1,211 +1,190 @@
 {
- "id": "def-weil-pbc-completed-pullback",
- "blueprint": {
-  "is": "def-weil-pbc-completed-pullback",
-  "from": null,
-  "same_as": []
- },
- "kind": "definition",
- "title": "Completed pullback",
- "statement": "Let $g:T'\\to T$ be a morphism of schemes, with its morphism of small pro-etale topoi and inverse image $g^{-1}$ [def-weil-proetale-inverse-image]. Use the Noetherian adic datum $A,I,P_n=A/I^n$, completed coefficient sheaves $A_W=\\varprojlim_n(P_n)_W$, and strict tower categories $\\operatorname{Tow}_A(W)$, for $W=T,T'$, of [def-weil-pbc-adic-coefficient-datum]. Define the coefficient structure map\n$$c_g:g^{-1}A_T\\longrightarrow A_{T'}$$\nby its components $g^{-1}A_T\\to g^{-1}(P_n)_T\\to(P_n)_{T'}$; they are compatible with quotient maps and hence give a map into the inverse limit. Module pullback along $c_g$ is $g^*M=g^{-1}M\\otimes_{g^{-1}A_T}A_{T'}$. At finite level write $g_n^*$ for the module inverse image over the constant sheaves $(P_n)_T,(P_n)_{T'}$ [def-weil-pbc-proetale-operations]. The map $c_g$ is a structure map, without an assumption that it is an isomorphism.\n\nOn complexes of strict towers, apply module pullback levelwise. Define its total left derived functor\n$$Lg^*_{\\operatorname{Tow}}:D(\\operatorname{Tow}_A(T))\\longrightarrow D(\\operatorname{Tow}_A(T'))$$\nusing the objectwise K-flat resolving class of [lem-weil-pbc-diagram-kflat-replacements], with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, and the resolving-class construction of [lem-pur-left-derived-from-kflat-class]. Thus a strict replacement $P_\\bullet\\to M_\\bullet$ from that class gives the representative $g^*P_\\bullet$; the transition maps are the images under $g^*$ of the transition maps of $P_\\bullet$.\n\nFor the reduction tower $K_\\bullet$ of [def-weil-pbc-adic-coefficient-datum], its $n$-th evaluation is canonically $Lg_n^*K_n$, regarded as an $A_{T'}$-complex by restriction along $A_{T'}\\to(P_n)_{T'}$ [def-pc-sheaf-restrict-scalars]. The coefficient comparison used here is the flat constant-to-completed comparison and its finite reductions in [lem-weil-pbc-constant-completion-equivalence]; finite constant-coefficient pullback is exact [prop-weil-pbc-proetale-constant-exact].\n\nFor $K\\in D(T_{\\mathrm{proet}},A)$ derived $I$-complete in the sense of [def-weil-pbc-intrinsic-completion], define\n$$Lg^*_{\\mathrm{comp}}K=\\operatorname{Rlim}\\bigl(Lg^*_{\\operatorname{Tow}}K_\\bullet\\bigr)\\quad\\text{in }D(T'_{\\mathrm{proet}},A),$$\nwhere $\\operatorname{Rlim}$ is [def-weil-pbc-derived-inverse-limit]. Ordinary $Lg^*K$ is computed by the same K-flat class with the one-object indexing category. Write $\\Delta$ for the constant strict tower functor. The quotient maps give a strict morphism $\\Delta QK\\to(QK\\otimes_{A_T}(P_n)_T)_n$, where $QK$ is the K-flat representative with flat terms. Applying $Lg^*_{\\operatorname{Tow}}$ gives a morphism $\\Delta Lg^*K\\to Lg^*_{\\operatorname{Tow}}K_\\bullet$, since the constant tower on $QK$ is already in the resolving class. Use the functor $\\operatorname{Rlim}$ of [prop-weil-pbc-rlim-functoriality]. The canonical map from a complex $C$ to $\\operatorname{Rlim}\\Delta C$ is obtained by taking a tower K-injective resolution $\\Delta C\\to I_\\bullet$ and factoring its compatible component maps $C\\to I_n$ through $\\varprojlim I_n$. Compose this map for $C=Lg^*K$ with $\\operatorname{Rlim}$ of the strict-tower morphism just constructed. This defines the comparison $Lg^*K\\to Lg^*_{\\mathrm{comp}}K$ without selecting a cone map from unrelated morphisms in a triangulated category. Its component maps are the images of the finite quotient maps.\n\nUnder restriction to constant coefficients and the equivalences of [lem-weil-pbc-constant-completion-equivalence], this is the completed pullback $Lg^*_{\\mathrm{comp}}$ of Stacks Tag 099N (proetale-lemma-pushforward-Noetherian-case), clauses (2) and (5): ordinary pullback followed by derived completion, equivalently $R\\lim_n Lg^*(K\\otimes^L_{A_T}(P_n)_T)$. Here [lem-weil-pbc-constant-completion-equivalence] identifies intrinsic Koszul completeness with the local Stacks condition, and its natural finite-reduction isomorphisms identify the pulled-back tower with the finite-reduction tower of constant-coefficient pullback, including transition maps. The same lemma identifies derived limits and completion units under restriction of scalars. Thus the displayed derived limit is ordinary pullback followed by derived completion, and the comparison just constructed is its completion unit. This comparison is on derived-complete categories under the coefficient equivalences, with the ambient categories of constant and completed coefficient modules distinguished.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-completed-pullback.md",
-  "place": "node def-weil-pbc-completed-pullback, order 1261",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099N"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099L"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-proetale-inverse-image",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-diagram-kflat-replacements",
-  "lem-pur-left-derived-from-kflat-class",
-  "def-pc-sheaf-restrict-scalars",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "prop-weil-pbc-proetale-constant-exact",
-  "def-weil-pbc-intrinsic-completion",
-  "prop-weil-pbc-rlim-functoriality",
-  "def-weil-pbc-derived-inverse-limit"
- ],
- "proof": [
-  {
-   "text": "For the strict completed-coefficient interface in Sheaf.Paper.CompletedPullback, exactness of towerModulePull follows from exactness of the ringed module inverse image and the pointwise finite-limit and finite-colimit preservation instances for whiskering right. Construct each finite-preservation structure from the instances for every finite shape. All completed pullback definitions are retained.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-profinite-coefficient-inverse-image"
-   ],
-   "elementary": true
+  "id": "def-weil-pbc-completed-pullback",
+  "blueprint": {
+    "is": "def-weil-pbc-completed-pullback",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "For each generating list and each representative, use the unit-compatible Koszul-to-quotient isomorphism. The intrinsic unit is invertible if and only if its composite with that isomorphism is invertible, namely the canonical quotient unit. This proves the forward implication uniformly. For the converse choose a finite generating family using ideal finite generation and choose the canonical localization representative of K. Apply the reverse invertibility implication to that family and representative. This proves towerComplete_iff_intrinsic without changing either completeness definition.",
-   "uses": [
-    "lem-weil-pbc-completed-koszul-quotient-comparison",
+  "kind": "definition",
+  "title": "Completed pullback",
+  "statement": "Let $g:T'\\to T$ be a morphism of schemes, with its morphism of small pro-etale topoi and inverse image $g^{-1}$ [def-weil-proetale-inverse-image]. Use the Noetherian adic datum $A,I,P_n=A/I^n$, completed coefficient sheaves $A_W=\\varprojlim_n(P_n)_W$, and strict tower categories $\\operatorname{Tow}_A(W)$, for $W=T,T'$, of [def-weil-pbc-adic-coefficient-datum]. Define the coefficient structure map\n$$c_g:g^{-1}A_T\\longrightarrow A_{T'}$$\nby its components $g^{-1}A_T\\to g^{-1}(P_n)_T\\to(P_n)_{T'}$; they are compatible with quotient maps and hence give a map into the inverse limit. Module pullback along $c_g$ is $g^*M=g^{-1}M\\otimes_{g^{-1}A_T}A_{T'}$. At finite level write $g_n^*$ for the module inverse image over the constant sheaves $(P_n)_T,(P_n)_{T'}$ [def-weil-pbc-proetale-operations]. The map $c_g$ is a structure map, without an assumption that it is an isomorphism.\n\nOn complexes of strict towers, apply module pullback levelwise. Define its total left derived functor\n$$Lg^*_{\\operatorname{Tow}}:D(\\operatorname{Tow}_A(T))\\longrightarrow D(\\operatorname{Tow}_A(T'))$$\nusing the objectwise K-flat resolving class of [lem-weil-pbc-diagram-kflat-replacements], with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, and the resolving-class construction of [lem-pur-left-derived-from-kflat-class]. Thus a strict replacement $P_\\bullet\\to M_\\bullet$ from that class gives the representative $g^*P_\\bullet$; the transition maps are the images under $g^*$ of the transition maps of $P_\\bullet$.\n\nFor the reduction tower $K_\\bullet$ of [def-weil-pbc-adic-coefficient-datum], its $n$-th evaluation is canonically $Lg_n^*K_n$, regarded as an $A_{T'}$-complex by restriction along $A_{T'}\\to(P_n)_{T'}$ [def-pc-sheaf-restrict-scalars]. The coefficient comparison used here is the flat constant-to-completed comparison and its finite reductions in [lem-weil-pbc-constant-completion-equivalence]; finite constant-coefficient pullback is exact [prop-weil-pbc-proetale-constant-exact].\n\nFor $K\\in D(T_{\\mathrm{proet}},A)$ derived $I$-complete in the sense of [def-weil-pbc-intrinsic-completion], define\n$$Lg^*_{\\mathrm{comp}}K=\\operatorname{Rlim}\\bigl(Lg^*_{\\operatorname{Tow}}K_\\bullet\\bigr)\\quad\\text{in }D(T'_{\\mathrm{proet}},A),$$\nwhere $\\operatorname{Rlim}$ is [def-weil-pbc-derived-inverse-limit]. Ordinary $Lg^*K$ is computed by the same K-flat class with the one-object indexing category. Write $\\Delta$ for the constant strict tower functor. The quotient maps give a strict morphism $\\Delta QK\\to(QK\\otimes_{A_T}(P_n)_T)_n$, where $QK$ is the K-flat representative with flat terms. Applying $Lg^*_{\\operatorname{Tow}}$ gives a morphism $\\Delta Lg^*K\\to Lg^*_{\\operatorname{Tow}}K_\\bullet$, since the constant tower on $QK$ is already in the resolving class. Use the functor $\\operatorname{Rlim}$ of [prop-weil-pbc-rlim-functoriality]. The canonical map from a complex $C$ to $\\operatorname{Rlim}\\Delta C$ is obtained by taking a tower K-injective resolution $\\Delta C\\to I_\\bullet$ and factoring its compatible component maps $C\\to I_n$ through $\\varprojlim I_n$. Compose this map for $C=Lg^*K$ with $\\operatorname{Rlim}$ of the strict-tower morphism just constructed. This defines the comparison $Lg^*K\\to Lg^*_{\\mathrm{comp}}K$ without selecting a cone map from unrelated morphisms in a triangulated category. Its component maps are the images of the finite quotient maps.\n\nUnder restriction to constant coefficients and the equivalences of [lem-weil-pbc-constant-completion-equivalence], this is the completed pullback $Lg^*_{\\mathrm{comp}}$ of Stacks Tag 099N (proetale-lemma-pushforward-Noetherian-case), clauses (2) and (5): ordinary pullback followed by derived completion, equivalently $R\\lim_n Lg^*(K\\otimes^L_{A_T}(P_n)_T)$. Here [lem-weil-pbc-constant-completion-equivalence] identifies intrinsic Koszul completeness with the local Stacks condition, and its natural finite-reduction isomorphisms identify the pulled-back tower with the finite-reduction tower of constant-coefficient pullback, including transition maps. The same lemma identifies derived limits and completion units under restriction of scalars. Thus the displayed derived limit is ordinary pullback followed by derived completion, and the comparison just constructed is its completion unit. This comparison is on derived-complete categories under the coefficient equivalences, with the ambient categories of constant and completed coefficient modules distinguished.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-completed-pullback.md",
+    "place": "node def-weil-pbc-completed-pullback, order 1261",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099N"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099L"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-pur-left-derived-from-kflat-class",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact",
     "def-weil-pbc-intrinsic-completion",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": true
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-completed-koszul-quotient-comparison",
-  "def-weil-pbc-intrinsic-completion",
-  "def-weil-pbc-adic-coefficient-datum"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
-  "place": "H6: supplementary proof route of CompletedPullback exactness and completeness equivalence; definition and Qbar declaration attachment unchanged"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Derived completed inverse image of sheaves of modules computed by inverse limit of pullbacks modulo powers of an ideal",
-   "results": "localCohomology, localCohomology.diagram, AdicCompletion, AdicCompletion.module, Hausdorffification, AdicCompletion.of, localCohomology.ofDiagram, Hausdorffification.of",
-   "date": "2026-10-14",
-   "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.leftDerived",
-   "results": "CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.leftDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.instIsIsoAppFromLeftDerivedZero, CategoryTheory.NatTrans.leftDerived",
-   "date": "2026-10-14",
-   "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Completed derived pullback on a ringed site",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "completedPullback|completed.pullback|derivedCompletion",
-   "results": "No hits.",
-   "date": "2026-10-14",
-   "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The left adjoint pullback on derived adically complete sheaves is the derived limit of finite torsion inverse images",
-   "results": "SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
-   "date": "2026-10-14",
-   "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
-  },
-  {
-   "tool": "grep",
-   "query": "totalLeftDerived|HasLeftDerivedFunctor",
-   "results": "Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form"
- ],
- "blueprint_kind": "definition",
- "blueprint_order": 1261,
- "blueprint_uses": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-complete-coefficient-datum",
-  "def-weil-pbc-derived-inverse-limit",
-  "def-weil-pbc-proetale-operations"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-complete-coefficient-datum",
-  "def-weil-pbc-derived-inverse-limit",
-  "def-weil-pbc-proetale-operations"
- ],
- "blueprint_sketch": [
-  {
-   "statement": "For $g:Y'\\to Y$ define\n\n$$\nLg^*_{\\mathrm{comp}}K:=\nR\\varprojlim_n\\bigl(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n\\bigr).\n$$\n\nThe comparison from ordinary pullback is the completion map of $Lg^*K$.",
-   "proof": "",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "def-weil-pbc-completed-pullback",
-  "worker": "stage1",
-  "summary": "Split this definition into its explicit ringed coefficient map, strict-diagram derived pullback construction, finite-level interpretation, and derived limit. Added two general statement-only bridge lemmas for diagram K-flat replacements and constant-to-completed coefficients; reused the existing resolving-class theorem and finite-level exactness. Removed the unused duplicate complete-coefficient datum dependency and named intrinsic completeness explicitly. No proof steps are added to a definition. Repair: the Rlim comparison is constructed by the existing functoriality theorem from a constant-tower morphism, and the final Stacks identification explicitly tracks natural finite pullback, transition maps, coefficient equivalence, and completion units.",
-  "blueprint": "Realizes the blueprint basic formula and Detailed form: first functor display via strict diagram replacements, evaluation sentence via finite coefficient comparison, completed-pullback display via derived inverse limit, and the final Stacks comparison via restriction to constant coefficients. The repaired comparison clause realizes the compatible-map-to-Rlim construction and the coefficient-equivalence transport of the completion unit.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "NT-Codex-ND-d3b86cacd",
-  "group": "ND",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-d3b86cacd (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited DAG statements, unit/chapter route, Stacks Tags 099L/099N/093M/099I/0A0E/077J/06YS/0G7E/06YY/08TC, and archived master target declarations. Added fixes for the missing prop-weil-pbc-proetale-constant-ring-map dependency and missing created/lean_audit metadata on both new nodes. Review: review.md.; 3 file(s) fixed by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-4de831828",
-  "group": "Q99",
-  "result": "fix",
-  "note": "Lean and mathematics correct. Every hypothesis is matched and none is stronger: PerAdic.Base gives separated finite type over k with no nonemptiness; l is invertible on the schemes only; d : ℕ with SmoothOfRelativeDimension. Conjunct 1 is t-exactness, conjunct 2 is the natural iso with the correct -i+d sign, conjunct 3 is the support-dimension inequality with ⊥ for -∞. The statement field is verbatim. The item node changes only in lean plus the landed stmt_dep lem-per-adic-heart-pullback-fibres; the two dependency nodes change only in lean, with notes. The §1(B) modules are correct and canonical: strictly full integral image classes with a unique t-structure, and the unique descended family with stage functors pbcDescentPullback and β fixed by PbcPullbackBetaSpec. They generalize PerAdic.commonT/commonPull without IsUnit (l:k) (observation only). Edge cases checked: empty schemes, char l, d=0, K=0, f not surjective, non-closed support, negative i, independent universes u and w. nt_compile of all 3 files: exit 0, no errors or warnings. Fault: delivery-errors A11, the Second reading by Q99 was the worker's self-check; fixed by fixes/lem-per-smooth-pullback-support-dimension.report.md (full report, that section replaced by an independent reading)."
- },
- "lean": {
-  "module": "Sheaf.Paper.PbcQbarCompletedPullback",
-  "declaration": "AlgebraicGeometry.Scheme.pbcQbarCompletedPull",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.pbcQbarIntegralPull_mem",
-   "AlgebraicGeometry.Scheme.pbcQbarPullFamily_existsUnique",
-   "AlgebraicGeometry.Scheme.pbcQbarPullFamily",
-   "AlgebraicGeometry.Scheme.pbcQbarCompletedPull"
+    "prop-weil-pbc-rlim-functoriality",
+    "def-weil-pbc-derived-inverse-limit"
   ],
-  "file": "lean/Sheaf/Paper/PbcQbarCompletedPullback.lean",
-  "statement": "def pbcQbarCompletedPull : pbcQbarCategory l Ω Y ⥤ pbcQbarCategory l Ω X",
-  "branch": "newtargets-dag",
-  "by": "Q99",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "The recorded strict-tower completed pullback and its unit-compatible comparison are retained by public import. That interface is integral and ambient, not a functor on pbcQbarCategory. The PerAdic.commonPull specialization additionally requires invertibility in the base field, which excludes the empty-scheme case in characteristic l. This module restricts the same actual completed pullback to the integral constructible objects, uses the recorded rationalization and normalized scalar beta comparisons, and descends the uniquely specified family to the actual Qbar pair category under the original scheme-level coefficient hypotheses."
- },
- "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "For $g:T'\\to T$, levelwise inverse image on strict tower complexes has a\ntotal left derived functor\n\n$$\n Lg^*_{\\operatorname{Tow}}:\n D(\\operatorname{Tow}_{A}(T))\n \\longrightarrow D(\\operatorname{Tow}_{A}(T')).\n$$\n\nIts $n$-th evaluation on the reduction tower $K_\\bullet$ of\n[def-weil-pbc-adic-coefficient-datum] is $Lg_n^*K_n$. For a derived complete\n$K$, define\n\n$$\n Lg^*_{\\mathrm{comp}}K\n   =\\Rlim\\bigl(Lg^*_{\\operatorname{Tow}}K_\\bullet\\bigr)\n   =R\\varprojlim_n\\bigl(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n\\bigr)\n \\quad\\text{in }D(T'_{\\Proet},A).\n$$\n\nThe comparison from ordinary pullback is the completion map of $Lg^*K$.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H6",
-  "result": "pass",
-  "landing": "20261019T231214-L-560879",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Derived completed inverse image of sheaves of modules computed by inverse limit of pullbacks modulo powers of an ideal",
+      "results": "localCohomology, localCohomology.diagram, AdicCompletion, AdicCompletion.module, Hausdorffification, AdicCompletion.of, localCohomology.ofDiagram, Hausdorffification.of",
+      "date": "2026-10-14",
+      "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.leftDerived",
+      "results": "CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.leftDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.instIsIsoAppFromLeftDerivedZero, CategoryTheory.NatTrans.leftDerived",
+      "date": "2026-10-14",
+      "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Completed derived pullback on a ringed site",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "completedPullback|completed.pullback|derivedCompletion",
+      "results": "No hits.",
+      "date": "2026-10-14",
+      "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The left adjoint pullback on derived adically complete sheaves is the derived limit of finite torsion inverse images",
+      "results": "SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+      "date": "2026-10-14",
+      "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
+    },
+    {
+      "tool": "grep",
+      "query": "totalLeftDerived|HasLeftDerivedFunctor",
+      "results": "Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+      "date": "2026-10-14",
+      "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1261,
+  "blueprint_uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-complete-coefficient-datum",
+    "def-weil-pbc-derived-inverse-limit",
+    "def-weil-pbc-proetale-operations"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-complete-coefficient-datum",
+    "def-weil-pbc-derived-inverse-limit",
+    "def-weil-pbc-proetale-operations"
+  ],
+  "blueprint_sketch": [
+    {
+      "statement": "For $g:Y'\\to Y$ define\n\n$$\nLg^*_{\\mathrm{comp}}K:=\nR\\varprojlim_n\\bigl(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n\\bigr).\n$$\n\nThe comparison from ordinary pullback is the completion map of $Lg^*K$.",
+      "proof": "",
+      "cites": []
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "def-weil-pbc-completed-pullback",
+    "worker": "stage1",
+    "summary": "Split this definition into its explicit ringed coefficient map, strict-diagram derived pullback construction, finite-level interpretation, and derived limit. Added two general statement-only bridge lemmas for diagram K-flat replacements and constant-to-completed coefficients; reused the existing resolving-class theorem and finite-level exactness. Removed the unused duplicate complete-coefficient datum dependency and named intrinsic completeness explicitly. No proof steps are added to a definition. Repair: the Rlim comparison is constructed by the existing functoriality theorem from a constant-tower morphism, and the final Stacks identification explicitly tracks natural finite pullback, transition maps, coefficient equivalence, and completion units.",
+    "blueprint": "Realizes the blueprint basic formula and Detailed form: first functor display via strict diagram replacements, evaluation sentence via finite coefficient comparison, completed-pullback display via derived inverse limit, and the final Stacks comparison via restriction to constant coefficients. The repaired comparison clause realizes the compatible-map-to-Rlim construction and the coefficient-equivalence transport of the completion unit.",
+    "tool_uses": []
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "NT-Codex-ND-d3b86cacd",
+    "group": "ND",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-d3b86cacd (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited DAG statements, unit/chapter route, Stacks Tags 099L/099N/093M/099I/0A0E/077J/06YS/0G7E/06YY/08TC, and archived master target declarations. Added fixes for the missing prop-weil-pbc-proetale-constant-ring-map dependency and missing created/lean_audit metadata on both new nodes. Review: review.md.; 3 file(s) fixed by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-4de831828",
+    "group": "Q99",
+    "result": "fix",
+    "note": "Lean and mathematics correct. Every hypothesis is matched and none is stronger: PerAdic.Base gives separated finite type over k with no nonemptiness; l is invertible on the schemes only; d : ℕ with SmoothOfRelativeDimension. Conjunct 1 is t-exactness, conjunct 2 is the natural iso with the correct -i+d sign, conjunct 3 is the support-dimension inequality with ⊥ for -∞. The statement field is verbatim. The item node changes only in lean plus the landed stmt_dep lem-per-adic-heart-pullback-fibres; the two dependency nodes change only in lean, with notes. The §1(B) modules are correct and canonical: strictly full integral image classes with a unique t-structure, and the unique descended family with stage functors pbcDescentPullback and β fixed by PbcPullbackBetaSpec. They generalize PerAdic.commonT/commonPull without IsUnit (l:k) (observation only). Edge cases checked: empty schemes, char l, d=0, K=0, f not surjective, non-closed support, negative i, independent universes u and w. nt_compile of all 3 files: exit 0, no errors or warnings. Fault: delivery-errors A11, the Second reading by Q99 was the worker's self-check; fixed by fixes/lem-per-smooth-pullback-support-dimension.report.md (full report, that section replaced by an independent reading)."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.PbcQbarCompletedPullback",
+    "declaration": "AlgebraicGeometry.Scheme.pbcQbarCompletedPull",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.pbcQbarIntegralPull_mem",
+      "AlgebraicGeometry.Scheme.pbcQbarPullFamily_existsUnique",
+      "AlgebraicGeometry.Scheme.pbcQbarPullFamily",
+      "AlgebraicGeometry.Scheme.pbcQbarCompletedPull"
+    ],
+    "file": "lean/Sheaf/Paper/PbcQbarCompletedPullback.lean",
+    "statement": "def pbcQbarCompletedPull : pbcQbarCategory l Ω Y ⥤ pbcQbarCategory l Ω X",
+    "branch": "newtargets-dag",
+    "by": "Q99",
+    "date": "2026-10-17",
+    "existing": false,
+    "note": "The recorded strict-tower completed pullback and its unit-compatible comparison are retained by public import. That interface is integral and ambient, not a functor on pbcQbarCategory. The PerAdic.commonPull specialization additionally requires invertibility in the base field, which excludes the empty-scheme case in characteristic l. This module restricts the same actual completed pullback to the integral constructible objects, uses the recorded rationalization and normalized scalar beta comparisons, and descends the uniquely specified family to the actual Qbar pair category under the original scheme-level coefficient hypotheses."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "For $g:T'\\to T$, levelwise inverse image on strict tower complexes has a\ntotal left derived functor\n\n$$\n Lg^*_{\\operatorname{Tow}}:\n D(\\operatorname{Tow}_{A}(T))\n \\longrightarrow D(\\operatorname{Tow}_{A}(T')).\n$$\n\nIts $n$-th evaluation on the reduction tower $K_\\bullet$ of\n[def-weil-pbc-adic-coefficient-datum] is $Lg_n^*K_n$. For a derived complete\n$K$, define\n\n$$\n Lg^*_{\\mathrm{comp}}K\n   =\\Rlim\\bigl(Lg^*_{\\operatorname{Tow}}K_\\bullet\\bigr)\n   =R\\varprojlim_n\\bigl(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n\\bigr)\n \\quad\\text{in }D(T'_{\\Proet},A).\n$$\n\nThe comparison from ordinary pullback is the completion map of $Lg^*K$.",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-19",
+    "by": "L",
+    "reviewer": "AUTO",
+    "group": "P7",
+    "result": "pass",
+    "landing": "20261019T005359-L-2761511",
+    "kind": "proof",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+    "sorry_before": [
+      "AlgebraicGeometry.Scheme.pbcQbarIntegralPull_mem",
+      "AlgebraicGeometry.Scheme.pbcQbarPullFamily_existsUnique"
+    ],
+    "sorry_after": [
+      "AlgebraicGeometry.Scheme.pbcQbarIntegralPull_mem"
+    ]
+  }
 }

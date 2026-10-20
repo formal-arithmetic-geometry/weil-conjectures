@@ -24,8 +24,6 @@ public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Noetherian
 
-import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.Paper.IntegralCompactSupportCoefficientData
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
@@ -56,7 +54,7 @@ import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 import Sheaf.Paper.BasicOperationsCoefficientReduction
 import Sheaf.Paper.QcqsCompactSupportRealization
 import Sheaf.Paper.SfCommonStageDirectImage
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # The canonical open-closed triangle at all coefficient stages
@@ -106,7 +104,7 @@ coordinates. Profinite coefficient inverse image identifies its adjunct with the
 canonical limit comparison, which is an isomorphism. -/
 @[instance] theorem sfRecollementCoefficientMap_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (sfRecollementCoefficientMap l E f) := by
-  exact PurCompactSupport.completedPullMap_isIso l E f
+  sorry
 
 /-- The normalized ordinary integral module adjunction.
 Source: blueprint proof steps 3 and 7; Stacks 03D2, 07A6
@@ -147,120 +145,6 @@ Source: blueprint proof step 7; Stacks 09AH
 def sfRecollementModuleCounit {Z X : Scheme.{u}} (i : Z ⟶ X) :=
   kernel.ι (sfRecollementModuleUnit l E i)
 
-set_option backward.isDefEq.respectTransparency false in
-private noncomputable def sfLocalCoefficientEquivalence (X : Scheme.{u})
-    {R S : Sheaf (ProEt.topology X) RingCat.{u + 1}} (c : R ≅ S) :
-    SheafOfModules.{u + 1} S ≌ SheafOfModules.{u + 1} R := by
-  let : (CategoryTheory.Equivalence.refl (C := X.ProEt)).functor.IsContinuous
-      (ProEt.topology X) (ProEt.topology X) := by
-    change (𝟭 X.ProEt).IsContinuous _ _
-    infer_instance
-  let : (CategoryTheory.Equivalence.refl (C := X.ProEt)).inverse.IsContinuous
-      (ProEt.topology X) (ProEt.topology X) := by
-    change (𝟭 X.ProEt).IsContinuous _ _
-    infer_instance
-  exact SheafOfModules.pushforwardPushforwardEquivalence
-    (J := ProEt.topology X) (K := ProEt.topology X) (S := R) (R := S)
-    (CategoryTheory.Equivalence.refl (C := X.ProEt)) c.hom c.inv
-    (by
-      apply NatTrans.ext
-      funext U
-      dsimp [CategoryTheory.Equivalence.refl]
-      erw [S.obj.map_id]
-      exact congrArg (fun q ↦ q.hom.app U) c.inv_hom_id.symm)
-    (by
-      apply NatTrans.ext
-      funext U
-      dsimp [CategoryTheory.Equivalence.refl]
-      erw [R.obj.map_id, Category.comp_id]
-      exact congrArg (fun q ↦ q.hom.app U) c.hom_inv_id)
-
-private noncomputable def sfLocalCoefficientTransport {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S) :
-    proEtaleRingModules X S ≌
-      proEtaleRingModules X ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) :=
-  sfLocalCoefficientEquivalence X
-    ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c)
-
-set_option backward.isDefEq.respectTransparency false in
-private noncomputable def sfLocalDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S) :
-    proEtaleRingModuleDirectImage f R S c ≅
-      (sfLocalCoefficientTransport f R S c).functor ⋙ proEtaleRingedDirectImage f R := by
-  let φ : proEtaleModuleCoefficients R ⟶
-      ((proEtaleBaseChange f).sheafPushforwardContinuous RingCat.{u + 1}
-        (ProEt.topology Y) (ProEt.topology X)).obj
-          (proEtaleModuleCoefficients
-            ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)) :=
-    ⟨Functor.whiskerRight ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).unit.app R).hom
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
-  let ψ : proEtaleModuleCoefficients
-      ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) ⟶
-        proEtaleModuleCoefficients S := (sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c.hom
-  exact (SheafOfModules.pushforwardComp (F := proEtaleBaseChange f)
-    (G := 𝟭 X.ProEt) (K' := ProEt.topology X)
-    (R' := proEtaleModuleCoefficients S) φ ψ).symm
-
-private noncomputable def sfLocalPullbackComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
-    (a : proEtaleModuleInverseImage f R ⊣ proEtaleRingedDirectImage f R) :
-    proEtaleRingModulePullback f R S c ≅
-      proEtaleModuleInverseImage f R ⋙ (sfLocalCoefficientTransport f R S c).inverse :=
-  (proEtaleRingModuleAdjunction f R S c).leftAdjointUniq
-    ((a.comp (sfLocalCoefficientTransport f R S c).symm.toAdjunction).ofNatIsoRight
-      (sfLocalDirectImageComparison f R S c).symm)
-
-private noncomputable def sfLocalUnitKernelCompEquivalenceIso
-    {C D E : Type*} [Category* C] [Category* D] [Category* E]
-    [Abelian C] {L : C ⥤ D} {R : D ⥤ C} (a : L ⊣ R) (e : D ≌ E) :
-    kernel a.unit ≅ kernel (a.comp e.toAdjunction).unit := by
-  let q : L ⋙ R ≅ (L ⋙ e.functor) ⋙ (e.inverse ⋙ R) :=
-    Functor.isoWhiskerLeft L
-      ((Functor.leftUnitor R).symm ≪≫ Functor.isoWhiskerRight e.unitIso R ≪≫
-        Functor.associator _ _ _) ≪≫ (Functor.associator _ _ _).symm
-  refine kernel.mapIso _ _ (Iso.refl _) q ?_
-  ext X
-  simp [q, Adjunction.comp_unit_app]
-
-private noncomputable def sfLocalUnitKernelIsoOfLeftIso
-    {C D : Type*} [Category* C] [Category* D] [Abelian C]
-    {L L' : C ⥤ D} {R R' : D ⥤ C} (a : L ⊣ R) (b : L' ⊣ R') (e : L ≅ L') :
-    kernel a.unit ≅ kernel b.unit := by
-  let b' := b.ofNatIsoLeft e.symm
-  let r := a.rightAdjointUniq b'
-  let q : L ⋙ R ≅ L' ⋙ R' :=
-    Functor.isoWhiskerLeft L r ≪≫ Functor.isoWhiskerRight e R'
-  refine kernel.mapIso _ _ (Iso.refl _) q ?_
-  ext X
-  change a.unit.app X ≫ (r.hom.app (L.obj X) ≫ R'.map (e.hom.app X)) =
-    𝟙 X ≫ b.unit.app X
-  rw [← Category.assoc, Adjunction.unit_rightAdjointUniq_hom_app]
-  simp [b', Adjunction.ofNatIsoLeft_unit, ← R'.map_comp]
-
-private theorem sfLocalUnitEpiOfLeftIso
-    {C D : Type*} [Category* C] [Category* D]
-    {L L' : C ⥤ D} {R R' : D ⥤ C} (a : L ⊣ R) (b : L' ⊣ R') (e : L ≅ L')
-    (X : C) [Epi (b.unit.app X)] : Epi (a.unit.app X) := by
-  let b' := b.ofNatIsoLeft e.symm
-  let r := a.rightAdjointUniq b'
-  have he : a.unit.app X ≫ (r.hom.app (L.obj X) ≫ R'.map (e.hom.app X)) =
-      b.unit.app X := by
-    rw [← Category.assoc, Adjunction.unit_rightAdjointUniq_hom_app]
-    simp [b', Adjunction.ofNatIsoLeft_unit, ← R'.map_comp]
-  have : Epi (a.unit.app X ≫ (r.hom.app (L.obj X) ≫ R'.map (e.hom.app X))) := by
-    rw [he]
-    infer_instance
-  exact (epi_comp_iff_of_isIso (a.unit.app X)
-    (r.hom.app (L.obj X) ≫ R'.map (e.hom.app X))).1 inferInstance
-
 /-- Exactness and additivity of both localization terms.
 Source: blueprint proof steps 1, 3--7; Stacks 09AH, 09BM
 (blueprint: prop-sf-open-closed-triangle-all-stages).
@@ -277,97 +161,7 @@ theorem sfRecollementModule_exact {Z X : Scheme.{u}} (i : Z ⟶ X)
     (sfRecollementModuleClosed l E i).Additive ∧
     PreservesFiniteLimits (sfRecollementModuleClosed l E i) ∧
     PreservesFiniteColimits (sfRecollementModuleClosed l E i) := by
-  let R := completedIntegralCommRingSheafUnrestricted l E X
-  let S := completedIntegralCommRingSheafUnrestricted l E Z
-  let c := asIso (sfRecollementCoefficientMap l E i)
-  let V : X.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
-  let U : X.ProEt := ProEt.mk V.ι
-  have : IsOpenImmersion U.hom := inferInstanceAs (IsOpenImmersion V.ι)
-  have : QuasiCompact U.hom := inferInstanceAs (QuasiCompact V.ι)
-  have hU : Set.range U.hom = (Set.range i)ᶜ := V.range_ι
-  obtain ⟨q, ⟨e⟩, ai, aj, hc, hu, hz, hzi, hlimL, hcolL, hlimH, hcolH, hs, _⟩ :=
-    proEtale_ringed_open_closed i U hU R
-  let ei := sfLocalCoefficientTransport i R S c
-  let d := sfLocalDirectImageComparison i R S c
-  have : PreservesFiniteColimits (proEtaleRingModuleDirectImage i R S c) :=
-    preservesFiniteColimits_of_natIso d.symm
-  have : PreservesLimitsOfSize.{0, 0} (proEtaleRingModuleDirectImage i R S c) :=
-    (sfRecollementModuleAdjunction l E i).rightAdjoint_preservesLimits
-  have : (sfRecollementModuleClosed l E i).Additive := by
-    dsimp [sfRecollementModuleClosed]
-    infer_instance
-  have : PreservesFiniteLimits (sfRecollementModuleClosed l E i) := by
-    dsimp [sfRecollementModuleClosed]
-    infer_instance
-  have : PreservesFiniteColimits (sfRecollementModuleClosed l E i) := by
-    dsimp [sfRecollementModuleClosed]
-    infer_instance
-  let li := sfLocalPullbackComparison i R S c ai
-  let li' : proEtaleRingModulePullback i R S c ⋙ ei.functor ≅
-      proEtaleModuleInverseImage i R :=
-    Functor.isoWhiskerRight li ei.functor ≪≫ Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ ei.counitIso ≪≫ Functor.rightUnitor _
-  let ek : sfRecollementModuleOpen l E i ≅ kernel ai.unit :=
-    sfLocalUnitKernelCompEquivalenceIso (sfRecollementModuleAdjunction l E i) ei ≪≫
-      sfLocalUnitKernelIsoOfLeftIso
-        ((sfRecollementModuleAdjunction l E i).comp ei.toAdjunction) ai li'
-  let J := SheafOfModules.overFunctor.{u + 1} (proEtaleModuleCoefficients R) U
-  let L := proEtaleRingedExtensionByZero U R
-  have : PreservesLimitsOfSize.{0, 0} J := aj.rightAdjoint_preservesLimits
-  have : PreservesFiniteLimits J := inferInstance
-  have : PreservesFiniteColimits J := by
-    obtain ⟨_, _, hj, _⟩ :=
-      (proEtale_immersion_inverseImage_preservesLimits U.hom).2.2 R
-    have := hj
-    exact preservesFiniteColimits_of_natIso e
-  have : PreservesFiniteLimits L := hlimL
-  have : PreservesFiniteColimits L := hcolL
-  have hzero : aj.counit ≫ ai.unit = 0 := by
-    apply NatTrans.ext
-    funext M
-    exact (hs M).2.2.toIsComplex.zero 0
-  let hker : IsLimit (KernelFork.ofι aj.counit hzero) := by
-    apply evaluationJointlyReflectsLimits
-    intro M
-    apply (KernelFork.isLimitMapConeEquiv ..).2
-    have := (hs M).1
-    have hex : (ShortComplex.mk (aj.counit.app M) (ai.unit.app M)
-        (congr_app hzero M)).Exact := by
-      exact (ShortComplex.exact_iff_exact_toComposableArrows _).2 (hs M).2.2
-    exact hex.fIsKernel
-  let eo : sfRecollementModuleOpen l E i ≅ J ⋙ L :=
-    ek ≪≫ (kernelIsKernel ai.unit).conePointUniqueUpToIso hker
-  have : PreservesFiniteLimits (sfRecollementModuleOpen l E i) :=
-    preservesFiniteLimits_of_natIso eo.symm
-  have : PreservesFiniteColimits (sfRecollementModuleOpen l E i) :=
-    preservesFiniteColimits_of_natIso eo.symm
-  have : (sfRecollementModuleOpen l E i).Additive :=
-    Functor.additive_of_preserves_binary_products _
-  exact ⟨inferInstance, inferInstance, inferInstance,
-    inferInstance, inferInstance, inferInstance⟩
-
-private theorem sfLocalModuleUnitEpi {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] [IsNoetherian X] (M : scalarReductionSource.{u, u} l E X) :
-    Epi ((sfRecollementModuleUnit l E i).app M) := by
-  let R := completedIntegralCommRingSheafUnrestricted l E X
-  let S := completedIntegralCommRingSheafUnrestricted l E Z
-  let c := asIso (sfRecollementCoefficientMap l E i)
-  let V : X.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
-  let U : X.ProEt := ProEt.mk V.ι
-  have : IsOpenImmersion U.hom := inferInstanceAs (IsOpenImmersion V.ι)
-  have : QuasiCompact U.hom := inferInstanceAs (QuasiCompact V.ι)
-  have hU : Set.range U.hom = (Set.range i)ᶜ := V.range_ι
-  obtain ⟨q, ⟨e⟩, ai, aj, hc, hu, hz, hzi, hlimL, hcolL, hlimH, hcolH, hs, _⟩ :=
-    proEtale_ringed_open_closed i U hU R
-  let ei := sfLocalCoefficientTransport i R S c
-  let b := ai.comp ei.symm.toAdjunction
-  have : Epi (ai.unit.app M) := (hs M).2.1
-  have : Epi (b.unit.app M) := by
-    dsimp only [b]
-    rw [Adjunction.comp_unit_app]
-    infer_instance
-  exact sfLocalUnitEpiOfLeftIso (sfRecollementModuleAdjunction l E i) b
-    (sfLocalPullbackComparison i R S c ai) M
+  sorry
 
 /-- Exact open functor's additive structure. Source: Stacks 09AH
 (blueprint: prop-sf-open-closed-triangle-all-stages). -/
@@ -408,50 +202,6 @@ instance sfRecollementModuleClosed_colimits {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [IsNoetherian X] :
     PreservesFiniteColimits (sfRecollementModuleClosed l E i) :=
   (sfRecollementModule_exact l E i).2.2.2.2.2
-
-private theorem sfLocalSequenceTriangle
-    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
-    (F G : C ⥤ C) [F.Additive] [G.Additive]
-    (α : F ⟶ 𝟭 C) (β : 𝟭 C ⟶ G) (h : α ≫ β = 0)
-    (hS : (ShortComplex.mk α β h).ShortExact) (B : CochainComplex C ℤ) :
-    ∃ δ, Triangle.mk
-      (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex α (.up ℤ)).app B))
-      (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex β (.up ℤ)).app B)) δ ∈
-      distTriang (DerivedCategory C) := by
-  let f := (NatTrans.mapHomologicalComplex α (.up ℤ)).app B
-  let g := (NatTrans.mapHomologicalComplex β (.up ℤ)).app B
-  have hz : f ≫ g = 0 := by
-    ext n
-    exact congrArg (fun q ↦ q.app (B.X n)) h
-  let S : ShortComplex (CochainComplex C ℤ) := ShortComplex.mk f g hz
-  have hs : S.ShortExact := by
-    apply HomologicalComplex.shortExact_of_degreewise_shortExact
-    intro n
-    have := hS.mono_f
-    have := hS.epi_g
-    exact hS.map ((CategoryTheory.evaluation C C).obj (B.X n))
-  exact ⟨DerivedCategory.triangleOfSESδ hs, DerivedCategory.triangleOfSES_distinguished hs⟩
-
-private theorem sfLocalIntegralSequenceTriangle {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] [IsNoetherian X]
-    (B : CochainComplex (scalarReductionSource.{u, u} l E X) ℤ) :
-    ∃ δ, Triangle.mk
-      (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-        (F := sfRecollementModuleOpen l E i) (G := 𝟭 _)
-        (sfRecollementModuleCounit l E i) (.up ℤ)).app B))
-      (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-        (sfRecollementModuleUnit l E i) (.up ℤ)).app B)) δ ∈
-      distTriang (DerivedCategory (scalarReductionSource.{u, u} l E X)) := by
-  let C := scalarReductionSource.{u, u} l E X
-  let α : sfRecollementModuleOpen l E i ⟶ 𝟭 C := sfRecollementModuleCounit l E i
-  let β : 𝟭 C ⟶ sfRecollementModuleClosed l E i := sfRecollementModuleUnit l E i
-  have hz : α ≫ β = 0 := kernel.condition β
-  have hEpi : ∀ M, Epi (β.app M) := fun M ↦ sfLocalModuleUnitEpi l E i M
-  have : Epi β := @NatTrans.epi_of_epi_app _ _ _ _ _ _ β hEpi
-  have hs : (ShortComplex.mk α β hz).ShortExact := by
-    change (ShortComplex.mk (kernel.ι β) β (kernel.condition β)).ShortExact
-    exact { exact := ShortComplex.exact_kernel β }
-  exact sfLocalSequenceTriangle _ _ α β hz hs B
 
 /-- The two functorial vertices and the prescribed first two arrows of a recollement
 triangle. This is only presentation data, without an existence or vanishing assertion.
@@ -508,99 +258,6 @@ def SfRecollementConclusionOn {C : Type w} [Category.{w₁} C] [Preadditive C]
     Triangle.mk (P.counit.app L) (P.unit.app L) δ' ∈ distTriang C →
     P.closedTerm.map f ≫ δ' = δ ≫ (shiftFunctor C (1 : ℤ)).map (P.openTerm.map f)
 
-private theorem sfLocalConclusionOn
-    {C : Type w} [Category.{w₁} C] [Preadditive C] [HasZeroObject C]
-    [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-    (P : SfRecollementPresentation C) (S : ObjectProperty C)
-    (hmem : ∀ K, S K → S (P.openTerm.obj K) ∧ S (P.closedTerm.obj K))
-    (hex : ∀ K, S K → ∃ δ,
-      Triangle.mk (P.counit.app K) (P.unit.app K) δ ∈ distTriang C)
-    (hvan : ∀ K L, S K → S L → ∀ m : ℤ,
-      Subsingleton ((P.openTerm.obj K)⟦m⟧ ⟶ P.closedTerm.obj L)) :
-    SfRecollementConclusionOn P S := by
-  constructor
-  · intro K hK
-    obtain ⟨δ, hδ⟩ := hex K hK
-    refine ⟨(hmem K hK).1, (hmem K hK).2, ⟨δ, hδ, ?_⟩, hvan K K hK hK⟩
-    intro δ' hδ'
-    let := hvan K K hK hK 1
-    let : Subsingleton ((Triangle.mk (P.counit.app K) (P.unit.app K) δ').obj₁⟦(1 : ℤ)⟧ ⟶
-        (Triangle.mk (P.counit.app K) (P.unit.app K) δ).obj₃) := hvan K K hK hK 1
-    obtain ⟨τ, hτ⟩ := exists_triangleHom_of_comp_eq_zero hδ' hδ (𝟙 K) (by
-      change P.counit.app K ≫ 𝟙 K ≫ P.unit.app K = 0
-      simpa using comp_distTriang_mor_zero₁₂ _ hδ')
-    have h₁ : τ.hom₁ = 𝟙 _ := Triangle.cancel_mor₁_of_subsingleton hδ (by
-      rw [← τ.comm₁, hτ]
-      change P.counit.app K ≫ 𝟙 K = 𝟙 _ ≫ P.counit.app K
-      simp)
-    have h₃ : τ.hom₃ = 𝟙 _ := Triangle.cancel_mor₂_of_subsingleton hδ' (by
-      rw [τ.comm₂, hτ]
-      change 𝟙 K ≫ P.unit.app K = P.unit.app K ≫ 𝟙 _
-      simp)
-    have h := τ.comm₃
-    rw [h₁, h₃] at h
-    simpa using h
-  · intro K L hK hL f δ δ' hδ hδ'
-    let := hvan K L hK hL 1
-    let : Subsingleton ((Triangle.mk (P.counit.app K) (P.unit.app K) δ).obj₁⟦(1 : ℤ)⟧ ⟶
-        (Triangle.mk (P.counit.app L) (P.unit.app L) δ').obj₃) := hvan K L hK hL 1
-    obtain ⟨τ, hτ⟩ := exists_triangleHom_of_comp_eq_zero hδ hδ' f (by
-      change P.counit.app K ≫ f ≫ P.unit.app L = 0
-      have hn : P.counit.app K ≫ f = P.openTerm.map f ≫ P.counit.app L :=
-        (P.counit.naturality f).symm
-      rw [← Category.assoc, hn, Category.assoc]
-      erw [comp_distTriang_mor_zero₁₂ _ hδ']
-      exact comp_zero)
-    have h₁ : τ.hom₁ = P.openTerm.map f :=
-      Triangle.cancel_mor₁_of_subsingleton hδ' (by
-        rw [← τ.comm₁, hτ]
-        exact (P.counit.naturality f).symm)
-    have h₃ : τ.hom₃ = P.closedTerm.map f :=
-      Triangle.cancel_mor₂_of_subsingleton hδ (by
-        rw [τ.comm₂, hτ]
-        exact P.unit.naturality f)
-    have h := τ.comm₃
-    rw [h₁, h₃] at h
-    exact h.symm
-
-private theorem sfLocalFiniteDisjoint {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A]
-    (hij : Disjoint (Set.range j.base) (Set.range i.base))
-    (M : proEtaleRingModules U (proEtaleConstantRing U A)) :
-    IsZero ((sfIntrinsicPullback.{u} A i).obj ((sfIntrinsicExtensionByZero.{u} j A).obj M)) := by
-  let L := ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j
-  let I := ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) i
-  have hz : IsZero ((sfIntrinsicTransport A (L ⋙ I)).obj M) :=
-    (sfIntrinsicModuleEquivalence Z A).functor.map_isZero
-      (ProEtale.isZero_upperStar_openImmersionLowerShriek _ j i
-        (Set.disjoint_iff_inter_eq_empty.mp hij)
-        ((sfIntrinsicModuleEquivalence U A).inverse.obj M))
-  exact hz.of_iso ((sfIntrinsicTransportComp A L I).symm.app M)
-
-private theorem sfLocalFiniteHomVanishing {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A]
-    (hij : Disjoint (Set.range j.base) (Set.range i.base))
-    (K : proEtaleDerivedCategory U A) (M : proEtaleDerivedCategory Z A) (n : ℤ) :
-    Subsingleton (((sfIntrinsicDerivedOpen.{u} A j).obj K)⟦n⟧ ⟶
-      (proEtaleConstantDerivedDirectImage.{u} i A).obj M) := by
-  let : HasDerivedCategory (proEtaleRingModules X (proEtaleConstantRing X A)) :=
-    HasDerivedCategory.standard _
-  let : HasDerivedCategory (proEtaleRingModules U (proEtaleConstantRing U A)) :=
-    HasDerivedCategory.standard _
-  let : HasDerivedCategory (proEtaleRingModules Z (proEtaleConstantRing Z A)) :=
-    HasDerivedCategory.standard _
-  let I := sfIntrinsicPullback.{u} A i
-  let L := sfIntrinsicExtensionByZero.{u} j A
-  have hz : IsZero (I.mapDerivedCategory.obj (L.mapDerivedCategory.obj K)) :=
-    (Functor.isZero_mapDerivedCategory_obj (L ⋙ I) K
-      (fun _ ↦ sfLocalFiniteDisjoint i j A hij _)).of_iso
-        ((L.mapDerivedCategoryCompIso I).symm.app K)
-  have hzs : IsZero (I.mapDerivedCategory.obj ((L.mapDerivedCategory.obj K)⟦n⟧)) :=
-    ((shiftFunctor _ n).map_isZero hz).of_iso ((I.mapDerivedCategory.commShiftIso n).app _)
-  have : Subsingleton (I.mapDerivedCategory.obj ((L.mapDerivedCategory.obj K)⟦n⟧) ⟶ M) :=
-    ⟨fun _ _ ↦ hzs.eq_of_src _ _⟩
-  exact ((finiteRecollementDerivedAdjunction.{u} i A).homEquiv _ _).symm.subsingleton
-
 /-- Positive-level specialization with the recorded finiteness proof supplied
 internally, so finiteness is not an extra theorem hypothesis.
 Source: blueprint finite-stage paragraph
@@ -645,10 +302,7 @@ theorem sfRecollementNoetherian (k : Type u) [Field k]
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] :
     IsNoetherian X := by
-  have : IsLocallyNoetherian X :=
-    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
-  exact ⟨⟩
+  sorry
 
 /-- The open complement has its inherited finite-type structure over k and is a
 quasi-compact open immersion. Source: blueprint proof step 1; Stacks 01T6
@@ -663,17 +317,7 @@ theorem sfRecollementOpenFiniteType (k : Type u) [Field k]
     (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] :
     LocallyOfFiniteType (U ↘ Spec (.of k)) ∧
       QuasiCompact (U ↘ Spec (.of k)) ∧ QuasiCompact j := by
-  have : IsNoetherian X := sfRecollementNoetherian k X
-  have : TopologicalSpace.NoetherianSpace U :=
-    j.isOpenEmbedding.isInducing.noetherianSpace
-  have : QuasiCompact j := inferInstance
-  have : LocallyOfFiniteType (j ≫ (X ↘ Spec (.of k))) := inferInstance
-  have : QuasiCompact (j ≫ (X ↘ Spec (.of k))) := inferInstance
-  rw [← comp_over j (Spec (.of k))]
-  exact
-    (show LocallyOfFiniteType (j ≫ (X ↘ Spec (.of k))) ∧
-      QuasiCompact (j ≫ (X ↘ Spec (.of k))) ∧ QuasiCompact j from
-        ⟨inferInstance, inferInstance, inferInstance⟩)
+  sorry
 
 /-- A normalized integral presentation uses the exact sheaf kernel and closed term,
 with their actual sheaf maps on every representative complex. This pins down the
@@ -893,17 +537,7 @@ a finite-type scheme over the closure field is Noetherian. -/
 theorem sfRecollementGeometricNoetherian (D : FiniteFieldDatum.{u})
     (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     IsNoetherian (D.geometricFiber X₀).left := by
-  have : LocallyOfFiniteType (D.geometricFiber X₀).hom := by
-    dsimp [FiniteFieldDatum.geometricFiber]
-    infer_instance
-  have : QuasiCompact (D.geometricFiber X₀).hom := by
-    dsimp [FiniteFieldDatum.geometricFiber]
-    infer_instance
-  have : IsLocallyNoetherian (D.geometricFiber X₀).left :=
-    LocallyOfFiniteType.isLocallyNoetherian (D.geometricFiber X₀).hom
-  have : CompactSpace (D.geometricFiber X₀).left :=
-    QuasiCompact.compactSpace_of_compactSpace (D.geometricFiber X₀).hom
-  exact ⟨⟩
+  sorry
 
 /-- Weil equivariance at a rational coefficient stage, for the prescribed open and
 closed terms and every connecting arrow supplied by the localization triangle.

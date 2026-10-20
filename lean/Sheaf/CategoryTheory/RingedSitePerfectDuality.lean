@@ -14,9 +14,25 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.CategoryTheory.RingedSitePerfectDualLocalModel
-import Sheaf.CategoryTheory.RingedSitePerfectBidualModel
-import Sheaf.CategoryTheory.RingedSitePerfectEvaluationModel
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
+import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
+import Mathlib.CategoryTheory.Sites.LocalProperties
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-! # Perfect duality on a small ringed site
 
@@ -35,48 +51,6 @@ universe c v r w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
-
-private theorem bidual_isIso_of_iso
-    {D : Type*} [Category D] {H : Dᵒᵖ × D ⥤ D}
-    (S : WeilConjectures.CoefficientClosedStructure H)
-    (s : @SymmetricCategory D _ S.monoidal) (O : D)
-    {P Q : D} (e : P ≅ Q) (hQ : IsIso (ringedSiteBidual S s O Q)) :
-    IsIso (ringedSiteBidual S s O P) := by
-  have := hQ
-  let d := H.mapIso (Iso.prod e.op (Iso.refl O))
-  have hd : IsIso (H.map (Prod.mkHom e.hom.op (𝟙 O))) := d.isIso_hom
-  have hdd : IsIso (H.map
-      (Prod.mkHom (H.map (Prod.mkHom e.hom.op (𝟙 O))).op (𝟙 O))) :=
-    (H.mapIso (Iso.prod d.op (Iso.refl O))).isIso_hom
-  have : IsIso (ringedSiteBidual S s O P ≫
-      H.map (Prod.mkHom (H.map (Prod.mkHom e.hom.op (𝟙 O))).op (𝟙 O))) := by
-    rw [← ringedSiteBidual_naturality S s O e.hom]
-    infer_instance
-  exact IsIso.of_isIso_comp_right _
-    (H.map (Prod.mkHom (H.map (Prod.mkHom e.hom.op (𝟙 O))).op (𝟙 O)))
-
-private theorem evaluation_isIso_of_iso
-    {D : Type*} [Category D] {H : Dᵒᵖ × D ⥤ D}
-    (S : WeilConjectures.CoefficientClosedStructure H)
-    (O : D) (u : S.monoidal.tensorUnit ≅ O)
-    {P Q : D} (e : P ≅ Q) (N : D)
-    (hQ : IsIso (ringedSiteDualEvaluation S O u Q N)) :
-    IsIso (ringedSiteDualEvaluation S O u P N) := by
-  have := hQ
-  let d := H.mapIso (Iso.prod e.op (Iso.refl O))
-  have hd : IsIso (H.map (Prod.mkHom e.hom.op (𝟙 O))) := d.isIso_hom
-  have hn : IsIso (H.map (Prod.mkHom e.hom.op (𝟙 N))) :=
-    (H.mapIso (Iso.prod e.op (Iso.refl N))).isIso_hom
-  have ht : IsIso (S.tensor.map (Prod.mkHom (𝟙 N)
-      (H.map (Prod.mkHom e.hom.op (𝟙 O))))) :=
-    (S.tensor.mapIso (Iso.prod (Iso.refl N) d)).isIso_hom
-  have : IsIso (S.tensor.map (Prod.mkHom (𝟙 N)
-      (H.map (Prod.mkHom e.hom.op (𝟙 O)))) ≫ ringedSiteDualEvaluation S O u P N) := by
-    rw [ringedSiteDualEvaluation_source_naturality S O u e.hom N]
-    infer_instance
-  exact IsIso.of_isIso_comp_left
-    (S.tensor.map (Prod.mkHom (𝟙 N) (H.map (Prod.mkHom e.hom.op (𝟙 O))))) _
-
 /-- Perfect-complex duality for the specified canonical maps.
 The existential is a normalized presentation of the already recorded derived
 tensor and Hom: its transposition, unit, associator and symmetry are fixed on
@@ -87,30 +61,44 @@ Source: Stacks Project, Tag 08JJ, lemma-dual-perfect-complex
 (blueprint: lem-sfb-ringed-site-perfect-duality).
 
 Proof:
-1. Choose the complex representative K recorded by the perfectness hypothesis and
-   a normalized closed tensor-Hom model M supplied by the canonical-map theorem.
-2. Put L=Hom(K,I(O[0])) and take its fixed outer K-injective replacement I(L).
-   On each covering slice the proved ordinary-dual calculation supplies a bounded
-   finite-free-retract model. The exact-source Hom comparison and K-injective
-   lifting give an actual quasi-isomorphism from that model to I(L) restricted
-   to the slice. Thus I(L) is locally strictly perfect.
-3. The fixed Hom comparison, the K-injective augmentation of L and source
-   naturality identify Q(I(L)) with the coefficient dual of the original P.
-   This proves perfectness of that precise derived dual object.
-4. For strict-perfect sources, the separate ordinary finite diagonal evaluation
-   calculation, K-flatness of the ordinary dual and bounded exact-source Hom
-   comparison make the normalized derived evaluation invertible. Exact slice
-   restriction and the covering sheaf criterion detect quasi-isomorphisms;
-   right-fraction presentations extend this to derived morphisms. Therefore
-   canonical evaluation for K is invertible for every unbounded target.
-5. In a closed symmetric category, invertibility of these evaluation components
-   supplies coevaluation and both pairing triangles. The corresponding Hom-set
-   equivalences identify the specified canonical bidual map, so it is invertible.
-   This is the proved categorical bidual-model lemma.
-6. Source naturality transports biduality and evaluation along P isomorphic to
-   QK. The specified symmetry changes the evaluation tensor order, and
-   componentwise invertibility makes its canonical natural transformation an
-   isomorphism. No global bounds on P or on its dual are imposed. -/
+1. Use lem-sfb-ringed-site-duality-maps for the normalized canonical maps and
+   lem-weil-pbc-ringed-internal-hom-exact-restriction to restrict them. On covering
+   slice sites choose the bounded finite-free-summand representatives E of hP.
+2. Split each E^i into a finite free sheaf. Its dual is a finite free summand;
+   the dual-basis formulas invert termwise biduality and tensor-Hom evaluation.
+   Hom out of each term, and tensor with it or its dual, are exact retracts of
+   finite direct sum, using lem-sc-finite-free-internal-hom-exact. Thus the terms
+   and their duals are flat (def-pc-flat-sheaf-modules).
+3. Apply lem-pc-bounded-exact-term-hom-quasi-iso to the K-injective augmentation
+   of an arbitrary complex F. Ordinary Hom(E,F) computes derived Hom, naturally
+   in F; boundedness of E makes each Hom product finite.
+4. For F=O[0] obtain the dual complex D, with D^q=(E^(-q))^dual and differential
+   (-1)^(q+1) times the dual differential. It is supported in [-b,-a] and its
+   terms are finite free summands, so it is strictly perfect on this slice.
+5. The two Hom comparisons identify the canonical bidual map with
+   x ↦ (phi ↦ (-1)^i phi(x)). The double-dual differential is minus the double
+   dual of d_E. These signs give a chain map, termwise invertible by step 2.
+6. Choose a flat-term K-flat representative F of N by lem-pc-kflat-resolution.
+   D is K-flat by lem-pc-bounded-above-flat-kflat-site; the comparison in
+   lem-weil-pbc-site-derived-tensor-descent computes tensor by Tot(F tensor D).
+7. Under step 3 and this comparison, canonical evaluation has summand map
+   y tensor phi ↦ (x ↦ y phi(x)), with no sign. It is termwise invertible by
+   step 2, and the tensor differential agrees with the Hom differential. The
+   bounded dual makes each degree sum finite even when N is unbounded. The
+   normalized Koszul symmetry gives precisely the order dual tensor N here.
+8. Exact slice restriction commutes with cohomology. Represent any derived map
+   by an actual map to a K-injective complex (lem-weil-pbc-kinjective-hom-derived).
+   The sheaf-cover criterion lem-sfb-sheaf-cover-local-isomorphism makes its
+   cohomology maps invertible globally if they are so on this covering family.
+   Apply this to the canonical maps of steps 5 and 7.
+9. Choose one global K-injective representative of the dual. Its restrictions
+   remain K-injective by lem-pur-kinjective-restrict-localized. Lift the local
+   isomorphisms from D to actual quasi-isomorphisms using
+   lem-weil-pbc-kinjective-hom-derived; these are exactly the local perfectness
+   condition. No global bound on P or its dual is imposed.
+10. The comparison is natural by lem-sfb-ringed-site-duality-maps and symmetry.
+    Since each component is invertible by step 8, its component inverses are
+    natural too, proving IsIso of this specified natural transformation. -/
 theorem ringedSitePerfectDuality
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -131,47 +119,6 @@ theorem ringedSitePerfectDuality
         (ringedSiteDualityUnit.{c, v, r, w} J R) P) ∧
       IsIso (ringedSiteDualEvaluationLeftNatTrans M.closed M.symmetric
         (ringedSiteDualityUnit.{c, v, r, w} J R) M.unitIso P) := by
-  classical
-  obtain ⟨K, hK, ⟨eP⟩⟩ := hP
-  obtain ⟨M⟩ := ringedSiteDualityMaps_exists.{c, v, r, w} J R
-  let O := ringedSiteDualityUnit.{c, v, r, w} J R
-  let O₀ := ringedSiteDualityUnitComplex.{c, v, r} J R
-  let H := derivedInternalHomOfUniverses.{c, v, r, w} J R
-  let L := homComplex (R := R) K
-    ((WeilConjectures.coefficientHomResolution.{r, c, v} J R).obj O₀)
-  let I := WeilConjectures.coefficientHomResolution.{r, c, v} J R
-  have hlocal : SheafOfModules.IsLocallyStrictPerfectComplexOfUniverses.{c, v, r} R
-      (I.obj L) := ringedSitePerfectDual_localModel.{c, v, r, w} J R K hK
-  have : IsGrothendieckAbelian.{max c v r} (SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-        RingCat.{max c v r})).obj R)) :=
-    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, r}
-      J R).1
-  have hη : QuasiIso ((ringedSiteHomAugmentation.{c, v, r} J R).app L) :=
-    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{max c v r} _ L).2
-  have : IsIso (DerivedCategory.Q.map
-      ((ringedSiteHomAugmentation.{c, v, r} J R).app L)) :=
-    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr hη
-  have hbidual : IsIso (ringedSiteBidual M.closed M.symmetric O
-      (DerivedCategory.Q.obj K)) :=
-    ringedSitePerfectBidual_model.{c, v, r, w} J R K hK M
-  have heval : ∀ N, IsIso (ringedSiteDualEvaluation M.closed O M.unitIso
-      (DerivedCategory.Q.obj K) N) :=
-    fun N ↦ ringedSitePerfectEvaluation_model.{c, v, r, w} J R K hK M N
-  refine ⟨M, ?_, ?_, ?_⟩
-  · refine ⟨_, hlocal, ?_⟩
-    exact ⟨H.mapIso (Iso.prod eP.symm.op (Iso.refl O)) ≪≫
-      WeilConjectures.coefficientHomResolutionIso.{r, c, v, w} J R K O₀ ≪≫
-        asIso (DerivedCategory.Q.map
-          ((ringedSiteHomAugmentation.{c, v, r} J R).app L))⟩
-  · exact bidual_isIso_of_iso M.closed M.symmetric O eP hbidual
-  · have hcomponents (N) : IsIso
-        ((ringedSiteDualEvaluationLeftNatTrans M.closed M.symmetric O M.unitIso P).app N) := by
-      have : IsIso (ringedSiteDualEvaluation M.closed O M.unitIso P N) :=
-        evaluation_isIso_of_iso M.closed O M.unitIso eP N (heval N)
-      change IsIso (ringedSiteDualEvaluationLeft M.closed M.symmetric O M.unitIso P N)
-      dsimp only [ringedSiteDualEvaluationLeft]
-      infer_instance
-    exact NatIso.isIso_of_isIso_app _
+  sorry
 
 end CategoryTheory

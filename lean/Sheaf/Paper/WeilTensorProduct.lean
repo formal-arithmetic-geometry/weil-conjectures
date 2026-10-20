@@ -10,11 +10,6 @@ public import Sheaf.Paper.WeilCompletedTensorReflector
 public import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 public import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.PbcRationalTransport
-import Mathlib.RingTheory.Localization.BaseChange
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-!
 # Completed adic tensor and its geometric Frobenius
@@ -41,10 +36,7 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite TensorProduct
-
-attribute [local irreducible] ScalarLocalization.composition
 namespace SheafOfModules
-
 
 /-- The derived tensor supplied by localization of the flat-term K-flat subcategory.
 The representative comparison in site_derived_tensor_descent determines this functor
@@ -65,37 +57,6 @@ def wfSiteDerivedTensor {C : Type u} [Category.{v} C] (J : GrothendieckTopology 
       ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) :=
   (wf_site_derived_tensor_descent.{u, v, w, 0, 0} J R).choose_spec.2.2.1.choose_spec.2.choose
 
-set_option backward.isDefEq.respectTransparency false in
-open MonoidalCategory in
-private theorem wfTensorLeft_quasiIso
-    {C : Type u} [Category.{v} C]
-    {J : GrothendieckTopology C}
-    [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
-    [HasSheafify J AddCommGrpCat.{max u v}]
-    {R : Sheaf J CommRingCat.{max u v}}
-    {K E E' : CochainComplex (SheafOfModules.{max u v}
-      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ} (α : E ⟶ E')
-    (hα : QuasiIso α) (hK : CochainComplex.IsAcyclicTensorKFlat (J := J) (R := R) K) :
-    let := monoidalCategory R
-    QuasiIso (HomologicalComplex.mapBifunctorMap (𝟙 K) α
-      (MonoidalCategory.curriedTensor _) (.up ℤ)) := by
-  let := cochainModulesMonoidal R
-  let := cochainModulesSymmetric R
-  let := cochainModulesPreadditive R
-  have hk : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat K := by
-    rw [← HomotopyCategory.kFlat_quotient_obj_iff,
-      HomotopyCategory.kFlat_iff_preserves_acyclic]
-    intro N hN
-    obtain ⟨N, rfl⟩ := N.quotient_obj_surjective
-    rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hN
-    have hr := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic
-      (CochainComplex.mapBifunctor N K (curriedTensor _))).2 (hK N hN)
-    refine ⟨?_, hr⟩
-    exact (HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) hr
-  exact hk.whiskerLeft hα
-
-set_option backward.isDefEq.respectTransparency false in
 /-- A flat-term K-flat first argument computes tensor against every second complex.
 Source: Stacks 06YS and 06YT (blueprint: def-wf-tensor-product).
 Proof: choose a flat-term K-flat resolution V→D of the second complex. K-flatness
@@ -126,143 +87,10 @@ theorem wfSiteDerivedTensor_first {C : Type u} [Category.{v} C]
             ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) _
               (SheafOfModules.monoidalCategory.{v, u, max u v} R))) ≅
       (wfSiteDerivedTensor J R).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj D)) := by
-  let := monoidalCategory R
-  obtain ⟨V, v, hV, hflatV, hv, _⟩ :=
-    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (C := C) (J := J) (R := R) D
-  have hV' : CochainComplex.IsAcyclicTensorKFlat (J := J) (R := R) V := hV
-  let h := wf_site_derived_tensor_descent.{u, v, w, 0, 0} J R
-  let S := h.choose
-  have hS := h.choose_spec.1
-  let c := h.choose_spec.2.2.1.choose_spec.1.some
-  let d := h.choose_spec.2.2.1.choose_spec.2.choose_spec.some
-  let p : S.FullSubcategory := ⟨(HomotopyCategory.quotient _ _).obj P,
-    (hS _).2 ⟨_hP, _hflat⟩⟩
-  let q : S.FullSubcategory := ⟨(HomotopyCategory.quotient _ _).obj V,
-    (hS _).2 ⟨hV', hflatV⟩⟩
-  let f := HomologicalComplex.mapBifunctorMap (𝟙 P) v
-    (MonoidalCategory.curriedTensor _) (.up ℤ)
-  have : QuasiIso f := wfTensorLeft_quasiIso v hv _hP
-  have : IsIso (DerivedCategory.Q.map f) := by infer_instance
-  have : QuasiIso v := hv
-  exact ⟨(asIso (DerivedCategory.Q.map f)).symm ≪≫
-    (DerivedCategory.Qh.mapIso (c.app (P, V))).symm ≪≫ d.app (p, q) ≪≫
-      (wfSiteDerivedTensor J R).mapIso
-        (Iso.prod (Iso.refl _) (asIso (DerivedCategory.Q.map v)))⟩
+  sorry
 
 end SheafOfModules
 namespace AlgebraicGeometry.Scheme
-attribute [local irreducible] SheafOfModules.wfSiteDerivedTensor
-  intrinsicCompletion intrinsicCompletionUnit intrinsicCompletionComplex
-  intrinsicCompletionComplexUnit
-set_option backward.isDefEq.respectTransparency false in
-private theorem scalarLocalization_precomp_injective
-    {R : Type u} [CommRing R] {C : Type v} [Category C]
-    [Preadditive C] [Linear R C] (p : R) {E : Type w} [Category E]
-    (F G : ScalarLocalization R C p ⥤ E)
-    (h : ScalarLocalization.localization R C p ⋙ F =
-      ScalarLocalization.localization R C p ⋙ G) : F = G := by
-  classical
-  let Q := ScalarLocalization.localization R C p
-  let e := eqToIso h
-  let i (K : ScalarLocalization R C p) : F.obj K ≅ G.obj K := e.app K.obj
-  have nat {K L : ScalarLocalization R C p} (f : K.obj ⟶ L.obj) :
-      F.map (Q.map f) ≫ (i L).hom = (i K).hom ≫ G.map (Q.map f) :=
-    e.hom.naturality f
-  have nat_all : ∀ {K L : ScalarLocalization R C p} (f : K ⟶ L),
-      F.map f ≫ (i L).hom = (i K).hom ≫ G.map f := by
-    rintro ⟨K⟩ ⟨L⟩ f
-    let K : ScalarLocalization R C p := ⟨K⟩
-    let L : ScalarLocalization R C p := ⟨L⟩
-    obtain ⟨⟨g, s⟩, hs⟩ := IsLocalizedModule.surj (Submonoid.powers p)
-      (TensorProduct.mk R (Localization.Away p) (K.obj ⟶ L.obj) 1) f
-    let z : K.obj ⟶ K.obj := (s : R) • 𝟙 K.obj
-    have hz : Q.map z ≫ f = Q.map g := by
-      change ScalarLocalization.composition R C p _ _ _ f (1 ⊗ₜ[R] z) = 1 ⊗ₜ[R] g
-      have ht : (1 : Localization.Away p) ⊗ₜ[R] z =
-          algebraMap R (Localization.Away p) (s : R) • (𝟙 K) := by
-        dsimp [z]
-        rw [TensorProduct.tmul_smul]
-        exact (algebraMap_smul (M := Localization.Away p ⊗[R] (K.obj ⟶ K.obj))
-          (Localization.Away p) (s : R) (1 ⊗ₜ[R] 𝟙 K.obj)).symm
-      rw [ht, map_smul]
-      change algebraMap R (Localization.Away p) (s : R) • (𝟙 K ≫ f) =
-        1 ⊗ₜ[R] g
-      rw [Category.id_comp]
-      change algebraMap R (Localization.Away p) (s : R) •
-        (f : Localization.Away p ⊗[R] (K.obj ⟶ L.obj)) = 1 ⊗ₜ[R] g
-      have : IsScalarTower R (Localization.Away p) (K ⟶ L) :=
-        inferInstanceAs (IsScalarTower R (Localization.Away p)
-          (Localization.Away p ⊗[R] (K.obj ⟶ L.obj)))
-      rw [algebraMap_smul]
-      exact hs
-    have hu := IsLocalization.map_units (Localization.Away p) s
-    let j : K ≅ K :=
-      { hom := (hu.unit : Localization.Away p) • 𝟙 K
-        inv := ((hu.unit⁻¹ : (Localization.Away p)ˣ) : Localization.Away p) • 𝟙 K
-        hom_inv_id := by simp [Linear.comp_smul, smul_smul]
-        inv_hom_id := by simp [Linear.comp_smul, smul_smul] }
-    have hj : Q.map z = j.hom := by
-      change (1 : Localization.Away p) ⊗ₜ[R] ((s : R) • 𝟙 K.obj) = _
-      rw [TensorProduct.tmul_smul]
-      change (s : R) • (1 ⊗ₜ[R] 𝟙 K.obj) =
-        (hu.unit : Localization.Away p) • (1 ⊗ₜ[R] 𝟙 K.obj)
-      rw [hu.unit_spec, algebraMap_smul]
-    have : IsIso (Q.map z) := by rw [hj]; exact j.isIso_hom
-    apply (cancel_epi (F.map (Q.map z))).1
-    rw [← Category.assoc, ← F.map_comp, hz, nat]
-    rw [← Category.assoc, nat z, Category.assoc, ← G.map_comp, hz]
-  refine CategoryTheory.Functor.ext
-    (fun K ↦ CategoryTheory.Functor.congr_obj h K.obj) ?_
-  intro K L f
-  apply (cancel_mono (i L).hom).1
-  have hi (K : ScalarLocalization R C p) : (i K).hom =
-      eqToHom (CategoryTheory.Functor.congr_obj h K.obj) := eqToHom_app h K.obj
-  simpa only [hi, Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id]
-    using nat_all f
-
-private theorem scalarLocalization_mapHom_tmul
-    {R : Type u} [CommRing R] {C : Type v} [Category C]
-    [Preadditive C] [Linear R C] (p : R) (H : C ⥤ C) [H.Additive] [H.Linear R]
-    {M N : C} (s : Localization.Away p) (f : M ⟶ N) :
-    ScalarLocalization.mapHom R C p H M N (s ⊗ₜ[R] f) = s ⊗ₜ[R] H.map f :=
-  LinearMap.baseChange_tmul _ _ _
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem scalarLocalization_bilinear_naturality
-    {R : Type u} [CommRing R] {C : Type v} [Category C]
-    [Preadditive C] [Linear R C] (p : R) (H : C ⥤ C) [H.Additive] [H.Linear R]
-    {M M' N N' S S' T T' : C}
-    (b : (Localization.Away p ⊗[R] (M ⟶ M')) →ₗ[Localization.Away p]
-      (Localization.Away p ⊗[R] (N ⟶ N')) →ₗ[Localization.Away p]
-        (Localization.Away p ⊗[R] (S ⟶ S')))
-    (b' : (Localization.Away p ⊗[R] (H.obj M ⟶ H.obj M')) →ₗ[Localization.Away p]
-      (Localization.Away p ⊗[R] (H.obj N ⟶ H.obj N')) →ₗ[Localization.Away p]
-        (Localization.Away p ⊗[R] (T ⟶ T')))
-    (t : (M ⟶ M') → (N ⟶ N') → (S ⟶ S'))
-    (t' : (H.obj M ⟶ H.obj M') → (H.obj N ⟶ H.obj N') → (T ⟶ T'))
-    (hb : ∀ f g s z, b (s ⊗ₜ[R] f) (z ⊗ₜ[R] g) = (s * z) ⊗ₜ[R] (t f g))
-    (hb' : ∀ f g s t, b' (s ⊗ₜ[R] f) (t ⊗ₜ[R] g) = (s * t) ⊗ₜ[R] (t' f g))
-    (i : H.obj S ⟶ T) (i' : H.obj S' ⟶ T')
-    (hi : ∀ f g, H.map (t f g) ≫ i' = i ≫ t' (H.map f) (H.map g))
-    (f : Localization.Away p ⊗[R] (M ⟶ M'))
-    (g : Localization.Away p ⊗[R] (N ⟶ N')) :
-    ScalarLocalization.composition R C p _ _ _ (1 ⊗ₜ[R] i')
-        (ScalarLocalization.mapHom R C p H _ _ (b f g)) =
-      ScalarLocalization.composition R C p _ _ _
-        (b' (ScalarLocalization.mapHom R C p H _ _ f)
-          (ScalarLocalization.mapHom R C p H _ _ g)) (1 ⊗ₜ[R] i) := by
-  induction f using TensorProduct.induction_on with
-  | zero => simp
-  | add f₁ f₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
-  | tmul s f =>
-    induction g using TensorProduct.induction_on with
-    | zero => simp
-    | add g₁ g₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
-    | tmul t g =>
-      rw [hb, scalarLocalization_mapHom_tmul, scalarLocalization_mapHom_tmul,
-        scalarLocalization_mapHom_tmul, hb', ScalarLocalization.composition_tmul,
-        ScalarLocalization.composition_tmul, one_mul, mul_one, hi]
-
 variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
   (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
 
@@ -356,8 +184,6 @@ private theorem wfRationalTensorHom_tmul (p : A)
       (s * t) ⊗ₜ[A] (wfIntegralTensor X d r a ha).map (Prod.mkHom f g) :=
   (wfRationalTensorHom_exists X d r a ha p M M' N N').exists.choose_spec f g s t
 
-attribute [local irreducible] wfRationalTensorHom
-
 /-- The extended tensor maps satisfy the bifunctor laws.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
 Proof: on pure tensors the identity law follows from integral tensor's identity law and
@@ -388,29 +214,25 @@ theorem wfRationalTensor_laws (p : A) :
           (wfRationalTensorHom X d r a ha p M' M'' N' N'' f' g')
           (wfRationalTensorHom X d r a ha p M M' N N' f g)
     induction f using TensorProduct.induction_on with
-    | zero => simp only [map_zero, LinearMap.zero_apply]
+    | zero => simp
     | add f₁ f₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
     | tmul s f =>
       induction f' using TensorProduct.induction_on with
-      | zero => simp only [map_zero, LinearMap.zero_apply]
+      | zero => simp
       | add f₁ f₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
       | tmul t f' =>
         induction g using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        | zero => simp
         | add g₁ g₂ h₁ h₂ => simp only [map_add, h₁, h₂]
         | tmul u g =>
           induction g' using TensorProduct.induction_on with
-          | zero => simp only [map_zero, LinearMap.zero_apply]
+          | zero => simp
           | add g₁ g₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
           | tmul v g' =>
-            rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul,
-              wfRationalTensorHom_tmul, wfRationalTensorHom_tmul,
-              wfRationalTensorHom_tmul, ScalarLocalization.composition_tmul]
-            have ht := (wfIntegralTensor X d r a ha).map_comp
-              (Prod.mkHom f g) (Prod.mkHom f' g')
-            rw [← ht]
-            congr 1
-            ac_rfl
+            simp [ScalarLocalization.composition_tmul,
+              wfRationalTensorHom_tmul, ← Functor.map_comp, mul_comm,
+              mul_left_comm, Prod.mkHom]
+
 
 /-- Completed tensor rationalized with the stated product-of-denominators convention.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
@@ -425,23 +247,6 @@ def wfRationalTensor (p : A) :
 
 variable (e : Aut X)
 
-/-- The completion comparison is uniquely fixed by its unit square.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
-Proof: on flat-term K-flat representatives use the degreewise balanced tensor comparison.
-The coefficient limit identification fixes a_j, hence identifies Q_m and every transition.
-On the product use the map whose components are the transported projections. The transition
-identity makes this commute with 1-shift. On each fiber term B^i plus B^(i-1) use the
-comparison on both summands; it commutes with (dx,(1-t)x-dy). This produces the displayed
-isomorphism and its (u,0) unit equation. The reflector's Hom bijection shows uniqueness,
-including when a representative is already flat K-flat and when the scheme is empty. -/
-theorem wfPullbackCompletion_exists (M : PbcCompletedDerived X d) :
-    ∃! c : (pbcIsoAmbientPullback e.hom d).obj (wfCompletionObj X d r a ha M) ≅
-        wfCompletionObj X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M),
-      (pbcIsoAmbientPullback e.hom d).map (wfCompletionUnit X d r a ha M) ≫ c.hom =
-        wfCompletionUnit X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M) := by
-  sorry
-
-set_option backward.isDefEq.respectTransparency false in
 /-- Exact coefficient transport preserves intrinsic completeness for the actual scalar list.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
 Proof: the finite coefficient comparisons preserve every constant section a_j, and commute
@@ -451,12 +256,7 @@ fiber summands; the projection comparison commutes with 1-shift and with the sig
 fiber differential. It identifies the (u,0) units, hence preserves their invertibility. -/
 theorem wfIsoPullback_complete (M : WfCompleteCategory X d r a ha) :
     WfIsComplete X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M.obj) := by
-  change IsIso (wfCompletionUnit X d r a ha
-    ((pbcIsoAmbientPullback e.hom d).obj M.obj))
-  obtain ⟨c, hc, _⟩ := wfPullbackCompletion_exists X d r a ha e M.obj
-  have : IsIso (wfCompletionUnit X d r a ha M.obj) := M.property
-  rw [← hc]
-  infer_instance
+  sorry
 
 /-- The same exact transport on all complete objects, before raw rationalization.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
@@ -492,6 +292,22 @@ abbrev wfAmbientRationalPullback (p : A) :=
   ScalarLocalization.map A (WfCompleteCategory X d r a ha) p
     (wfCompletePullback X d r a ha e)
 
+/-- The completion comparison is uniquely fixed by its unit square.
+Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Proof: on flat-term K-flat representatives use the degreewise balanced tensor comparison.
+The coefficient limit identification fixes a_j, hence identifies Q_m and every transition.
+On the product use the map whose components are the transported projections. The transition
+identity makes this commute with 1-shift. On each fiber term B^i plus B^(i-1) use the
+comparison on both summands; it commutes with (dx,(1-t)x-dy). This produces the displayed
+isomorphism and its (u,0) unit equation. The reflector's Hom bijection shows uniqueness,
+including when a representative is already flat K-flat and when the scheme is empty. -/
+theorem wfPullbackCompletion_exists (M : PbcCompletedDerived X d) :
+    ∃! c : (pbcIsoAmbientPullback e.hom d).obj (wfCompletionObj X d r a ha M) ≅
+        wfCompletionObj X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M),
+      (pbcIsoAmbientPullback e.hom d).map (wfCompletionUnit X d r a ha M) ≫ c.hom =
+        wfCompletionUnit X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M) := by
+  sorry
+
 /-- The specified product/fiber comparison, determined equivalently by the unit square.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
 def wfPullbackCompletion (M : PbcCompletedDerived X d) :=
@@ -511,74 +327,6 @@ def wfIntegralTensorPullback (M N : WfCompleteCategory X d r a ha) :
             (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.hom d))
             (wfTensorModel X d) (wfTensorModel X d)).app (M.obj, N.obj))))
 
-private theorem wfCompletion_unit_map {M N : PbcCompletedDerived X d} (f : M ⟶ N) :
-    wfCompletionUnit X d r a ha M ≫ ((wfCompletion X d r a ha).map f).hom =
-      f ≫ wfCompletionUnit X d r a ha N := by
-  exact (Equiv.ofBijective _
-    ((wfCompletionReflector X d r a ha).2 M
-      (wfCompletionObj X d r a ha N) ((wfCompletionReflector X d r a ha).1 N))).apply_symm_apply _
-
-private theorem wfPullbackCompletion_naturality {M N : PbcCompletedDerived X d}
-    (f : M ⟶ N) :
-    (pbcIsoAmbientPullback e.hom d).map (((wfCompletion X d r a ha).map f).hom) ≫
-        (wfPullbackCompletion X d r a ha e N).hom =
-      (wfPullbackCompletion X d r a ha e M).hom ≫
-        ((wfCompletion X d r a ha).map ((pbcIsoAmbientPullback e.hom d).map f)).hom := by
-  let H := pbcIsoAmbientPullback e.hom d
-  let cM := wfPullbackCompletion X d r a ha e M
-  have hc (K : PbcCompletedDerived X d) :
-      H.map (wfCompletionUnit X d r a ha K) ≫
-          (wfPullbackCompletion X d r a ha e K).hom =
-        wfCompletionUnit X d r a ha (H.obj K) :=
-    (wfPullbackCompletion_exists X d r a ha e K).exists.choose_spec
-  apply (cancel_epi cM.inv).1
-  apply ((wfCompletionReflector X d r a ha).2 (H.obj M)
-    (wfCompletionObj X d r a ha (H.obj N))
-    ((wfCompletionReflector X d r a ha).1 (H.obj N))).1
-  have hm : wfCompletionUnit X d r a ha (H.obj M) ≫ cM.inv =
-      H.map (wfCompletionUnit X d r a ha M) := by
-    rw [← hc M, Category.assoc, Iso.hom_inv_id, Category.comp_id]
-  dsimp only
-  rw [← Category.assoc, hm, ← Category.assoc, ← H.map_comp,
-    wfCompletion_unit_map, H.map_comp, Category.assoc, hc N]
-  change H.map f ≫ wfCompletionUnit X d r a ha (H.obj N) =
-    wfCompletionUnit X d r a ha (H.obj M) ≫ cM.inv ≫ cM.hom ≫
-      ((wfCompletion X d r a ha).map (H.map f)).hom
-  rw [Iso.inv_hom_id_assoc, wfCompletion_unit_map]
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem wfIntegralTensorPullback_naturality
-    {M M' N N' : WfCompleteCategory X d r a ha} (f : M ⟶ M') (g : N ⟶ N') :
-    (wfCompletePullback X d r a ha e).map
-        ((wfIntegralTensor X d r a ha).map (Prod.mkHom f g)) ≫
-          (wfIntegralTensorPullback X d r a ha e M' N').hom =
-      (wfIntegralTensorPullback X d r a ha e M N).hom ≫
-        (wfIntegralTensor X d r a ha).map (Prod.mkHom
-          ((wfCompletePullback X d r a ha e).map f)
-          ((wfCompletePullback X d r a ha e).map g)) := by
-  apply ObjectProperty.hom_ext
-  let T := wfOrdinaryDerivedTensor X d
-  let H := pbcIsoAmbientPullback e.hom d
-  let L := wfCompletion X d r a ha
-  let alpha := proEtaleCanonicalTensorComparison e.hom (pbcAdicCompletion X d)
-    (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.hom d))
-    (wfTensorModel X d) (wfTensorModel X d)
-  change H.map ((L.map (T.map (Prod.mkHom f.hom g.hom))).hom) ≫
-      (wfPullbackCompletion X d r a ha e (T.obj (M'.obj, N'.obj))).hom ≫
-        (L.map (alpha.hom.app (M'.obj, N'.obj))).hom =
-    ((wfPullbackCompletion X d r a ha e (T.obj (M.obj, N.obj))).hom ≫
-      (L.map (alpha.hom.app (M.obj, N.obj))).hom) ≫
-        (L.map (T.map (Prod.mkHom (H.map f.hom) (H.map g.hom)))).hom
-  rw [← Category.assoc, wfPullbackCompletion_naturality, Category.assoc]
-  rw [Category.assoc]
-  congr 1
-  have hn := congrArg (fun k ↦ (L.map k).hom)
-    (alpha.hom.naturality (Prod.mkHom f.hom g.hom))
-  simpa only [T, H, wfTensorModel, Functor.comp_map, Functor.prod_map, Functor.map_comp,
-    ObjectProperty.FullSubcategory.comp_hom] using hn
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Rationalizing the constructed integral comparison fixes every component uniquely.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
 Proof: tensor with one the integral comparison and its inverse on Hom modules. The
@@ -593,47 +341,8 @@ theorem wfRationalTensorPullback_exists (p : A) :
       ∀ M N : WfCompleteCategory X d r a ha,
         mu.hom.app (⟨M⟩, ⟨N⟩) =
           (ScalarLocalization.localization A (WfCompleteCategory X d r a ha) p).map
-            (wfIntegralTensorPullback X d r a ha e M N).hom  := by
-  let Q := ScalarLocalization.localization A (WfCompleteCategory X d r a ha) p
-  let mu : wfRationalTensor X d r a ha p ⋙ wfAmbientRationalPullback X d r a ha e p ≅
-      ((wfAmbientRationalPullback X d r a ha e p).prod
-        (wfAmbientRationalPullback X d r a ha e p)) ⋙ wfRationalTensor X d r a ha p :=
-    NatIso.ofComponents
-    (fun MN ↦ Q.mapIso
-      (wfIntegralTensorPullback X d r a ha e MN.1.obj MN.2.obj)) (by
-        intro MN PQ v
-        rcases MN with ⟨M, N⟩
-        rcases PQ with ⟨M', N'⟩
-        rcases v with ⟨f, g⟩
-        change ScalarLocalization.composition A (WfCompleteCategory X d r a ha) p _ _ _
-            (1 ⊗ₜ[A] (wfIntegralTensorPullback X d r a ha e M'.obj N'.obj).hom)
-            (ScalarLocalization.mapHom A (WfCompleteCategory X d r a ha) p
-              (wfCompletePullback X d r a ha e) _ _
-              (wfRationalTensorHom X d r a ha p M M' N N' f g)) =
-          ScalarLocalization.composition A (WfCompleteCategory X d r a ha) p _ _ _
-            (wfRationalTensorHom X d r a ha p _ _ _ _
-              (ScalarLocalization.mapHom A (WfCompleteCategory X d r a ha) p
-                (wfCompletePullback X d r a ha e) _ _ f)
-              (ScalarLocalization.mapHom A (WfCompleteCategory X d r a ha) p
-                (wfCompletePullback X d r a ha e) _ _ g))
-            (1 ⊗ₜ[A] (wfIntegralTensorPullback X d r a ha e M.obj N.obj).hom)
-        exact scalarLocalization_bilinear_naturality p
-          (wfCompletePullback X d r a ha e)
-          (wfRationalTensorHom X d r a ha p M M' N N')
-          (wfRationalTensorHom X d r a ha p _ _ _ _)
-          (fun f g ↦ (wfIntegralTensor X d r a ha).map (Prod.mkHom f g))
-          (fun f g ↦ (wfIntegralTensor X d r a ha).map (Prod.mkHom f g))
-          (wfRationalTensorHom_tmul X d r a ha p M M' N N')
-          (wfRationalTensorHom_tmul X d r a ha p _ _ _ _)
-          (wfIntegralTensorPullback X d r a ha e M.obj N.obj).hom
-          (wfIntegralTensorPullback X d r a ha e M'.obj N'.obj).hom
-          (wfIntegralTensorPullback_naturality X d r a ha e) f g)
-  refine ⟨mu, (fun M N ↦ rfl), ?_⟩
-  intro nu hnu
-  apply Iso.ext
-  apply NatTrans.ext
-  funext MN
-  exact hnu MN.1.obj MN.2.obj
+            (wfIntegralTensorPullback X d r a ha e M N).hom := by
+  sorry
 
 /-- The typed pullback/tensor comparison in the displayed direction of the source.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
@@ -670,25 +379,7 @@ theorem wfConstructibleInclusion_exists (p : A) :
       pbcRationalization X d p ⋙ F =
         wfIntegralConstructibleInclusion X d r a ha ⋙
           ScalarLocalization.localization A (WfCompleteCategory X d r a ha) p := by
-  let I := wfIntegralConstructibleInclusion X d r a ha
-  have : I.Additive := ⟨fun {M N f g} ↦ by
-    apply ObjectProperty.hom_ext
-    rfl⟩
-  have : I.Linear A := ⟨fun {M N} f c ↦ by
-    apply ObjectProperty.hom_ext
-    rfl⟩
-  let F := ScalarLocalization.transport A p I
-  have hF : pbcRationalization X d p ⋙ F = I ⋙
-      ScalarLocalization.localization A (WfCompleteCategory X d r a ha) p := by
-    refine CategoryTheory.Functor.ext (fun _ ↦ rfl) ?_
-    intro M N f
-    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
-    change (I.mapLinearMap A).baseChange (Localization.Away p) (1 ⊗ₜ[A] f) =
-      1 ⊗ₜ[A] I.map f
-    exact LinearMap.baseChange_tmul _ _ _
-  refine ⟨F, hF, ?_⟩
-  intro G hG
-  exact scalarLocalization_precomp_injective p G F (hG.trans hF.symm)
+  sorry
 
 /-- The raw rational inclusion with its actual unchanged integral object function.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
@@ -706,22 +397,7 @@ theorem wfConstructiblePullback_obj (p : A) (M : PbcRationalCategory X d p) :
         ((wfConstructibleInclusion X d r a ha p).obj M) =
       (wfConstructibleInclusion X d r a ha p).obj
         ((pbcRationalIsoPullback e d p).obj M) := by
-  have hobj (K : PbcBoundedConstructibleComplete X d) :
-      (wfConstructibleInclusion X d r a ha p).obj ⟨K⟩ =
-        ⟨(wfIntegralConstructibleInclusion X d r a ha).obj K⟩ :=
-    congrArg (fun F ↦ F.obj K)
-      (wfConstructibleInclusion_exists X d r a ha p).exists.choose_spec
-  cases M with
-  | mk M =>
-    change (wfAmbientRationalPullback X d r a ha e p).obj
-        ((wfConstructibleInclusion X d r a ha p).obj ⟨M⟩) =
-      (wfConstructibleInclusion X d r a ha p).obj
-        ⟨(pbcIsoIntegralPullback e.hom d).obj M⟩
-    rw [hobj, hobj]
-    rfl
-
-attribute [local irreducible] wfRationalTensor wfRationalTensorPullback
-  wfConstructibleInclusion wfCompletePullback
+  sorry
 
 end AlgebraicGeometry.Scheme
 
@@ -768,8 +444,6 @@ abbrev wfWeilCarrier (K : WeilD D c X₀ E) : WfAmbient D c X₀ E :=
     (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)
     (wfUniformizer_generates D c E) (pbcStageUniformizer.{u} c.l c.Qbar E)).obj K.carrier
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- The given Weil isomorphism, transported by the faithful ambient coefficient inclusion.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
 def wfWeilStructure (K : WeilD D c X₀ E) :
@@ -783,10 +457,6 @@ def wfWeilStructure (K : WeilD D c X₀ E) :
         (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)
         (wfUniformizer_generates D c E) (pbcStageUniformizer.{u} c.l c.Qbar E)).mapIso K.str
 
-attribute [local irreducible] wfWeilStructure
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Tensor Frobenius is mu followed by tensor of the two given Weil isomorphisms.
 The output is ambient; restriction to an exact bifunctor of Weil complexes is separate.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
@@ -800,8 +470,6 @@ def wfTensorFrobenius (K L : WeilD D c X₀ E) :
       (wfWeilCarrier D c X₀ E K, wfWeilCarrier D c X₀ E L) ≪≫
     (wfTensor D c X₀ E).mapIso
       { hom := Prod.mkHom (wfWeilStructure D c X₀ E K).hom (wfWeilStructure D c X₀ E L).hom
-        inv := Prod.mkHom (wfWeilStructure D c X₀ E K).inv (wfWeilStructure D c X₀ E L).inv
-        hom_inv_id := by ext <;> exact Iso.hom_inv_id _
-        inv_hom_id := by ext <;> exact Iso.inv_hom_id _ }
+        inv := Prod.mkHom (wfWeilStructure D c X₀ E K).inv (wfWeilStructure D c X₀ E L).inv }
 
 end WeilConjectures

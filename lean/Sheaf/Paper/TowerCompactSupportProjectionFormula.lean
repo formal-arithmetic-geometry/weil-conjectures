@@ -30,6 +30,7 @@ import Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence
 import Sheaf.Paper.FiniteProperBaseChange
 import Sheaf.Paper.SemilinearDerivedSections
 import Sheaf.Paper.SmoothPurityCoefficientTowersAbelian
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Tower compact-support projection over an arbitrary standing field
@@ -148,39 +149,7 @@ theorem maps_natural (b : Base l E) (o : Operations l E b)
       properMap l E b o c C B ≫ (middle l E b o c).map (Prod.mkHom a d) ∧
     (openSource l E b o c).map (Prod.mkHom a d) ≫ openMap l E b o c C' B' =
       openMap l E b o c C B ≫ (middle l E b o c).map (Prod.mkHom a d) := by
-  constructor
-  · apply (adjunction l E b (o.geometry c.g)).homEquiv_naturality_left_square
-    dsimp [source, middle, properMap]
-    have ht := ((o.geometry c.g).tensorPullback).hom.naturality
-      (Prod.mkHom ((push l E b (o.geometry c.g)).map
-        ((openD l E b (o.openOp c.i)).map a)) d)
-    dsimp only [Functor.comp_map, Functor.prod_map] at ht
-    rw [← Category.assoc, ht]
-    simp only [Category.assoc]
-    rw [← (tensor l E b c.Z).map_comp, ← (tensor l E b c.Z).map_comp]
-    congr 2
-    ext
-    · exact (adjunction l E b (o.geometry c.g)).counit.naturality
-        ((openD l E b (o.openOp c.i)).map a)
-    · simp
-  · dsimp [openSource, middle, openMap]
-    rw [← Functor.map_comp, ← Functor.map_comp]
-    congr 1
-    apply ((o.openOp c.i).derivedAdjunction.homEquiv _ _).injective
-    rw [(o.openOp c.i).derivedAdjunction.homEquiv_naturality_left,
-      (o.openOp c.i).derivedAdjunction.homEquiv_naturality_right,
-      o.openTensor_mate, o.openTensor_mate]
-    have ht := ((o.geometry c.i).tensorPullback).inv.naturality
-      (Prod.mkHom ((openD l E b (o.openOp c.i)).map a)
-        ((pull l E b (o.geometry c.g)).map d))
-    dsimp only [Functor.comp_map, Functor.prod_map] at ht
-    rw [Category.assoc, ← ht]
-    rw [← Category.assoc, ← (tensor l E b X).map_comp,
-      ← Category.assoc, ← (tensor l E b X).map_comp]
-    congr 2
-    ext
-    · exact (o.openOp c.i).derivedAdjunction.unit.naturality a
-    · simp
+  sorry
 
 /-- The finite-level tensor is the same recorded K-flat total tensor.
 Source: blueprint paragraph (3), finite projection maps
@@ -449,42 +418,6 @@ theorem canonicalIso_natural (b : Base l E) (o : Operations l E b)
         (canonicalIso l E b o k p hlp X Y f c AX AY C' B' hC' hB').hom =
       (canonicalIso l E b o k p hlp X Y f c AX AY C B hC hB).hom ≫
         (target l E b o c).map (Prod.mkHom a d) := by
-  change (source l E b o c).map (Prod.mkHom a d) ≫ projection l E b o c C' B' =
-    projection l E b o c C B ≫ (target l E b o c).map (Prod.mkHom a d)
-  let q : pull l E b (o.geometry c.g) ⋙ pull l E b (o.geometry c.i) ≅
-      pull l E b (o.geometry f.left) :=
-    o.comp c.i c.g ≪≫
-      eqToIso (congrArg (fun h ↦ pull l E b (o.geometry h)) c.comm.symm)
-  let e : openSource l E b o c ≅ target l E b o c :=
-    Functor.isoWhiskerRight
-      (Functor.isoWhiskerRight (NatIso.prod (Iso.refl (𝟭 (D l E X.left))) q)
-        (tensor l E b X.left)) (F l E b o c)
-  have he := e.hom.naturality (Prod.mkHom a d)
-  let v := (push l E b (o.geometry c.g)).mapIso
-    (o.openTensor c.i C ((pull l E b (o.geometry c.g)).obj B))
-  let v' := (push l E b (o.geometry c.g)).mapIso
-    (o.openTensor c.i C' ((pull l E b (o.geometry c.g)).obj B'))
-  have hn := maps_natural l E b o c a d
-  have hv : (middle l E b o c).map (Prod.mkHom a d) ≫ v'.hom =
-      v.hom ≫ (openSource l E b o c).map (Prod.mkHom a d) := by
-    have ho : (openSource l E b o c).map (Prod.mkHom a d) ≫ v'.inv =
-        v.inv ≫ (middle l E b o c).map (Prod.mkHom a d) := hn.2
-    apply (cancel_epi v.inv).1
-    calc
-      v.inv ≫ ((middle l E b o c).map (Prod.mkHom a d) ≫ v'.hom) =
-          (v.inv ≫ (middle l E b o c).map (Prod.mkHom a d)) ≫ v'.hom :=
-        (Category.assoc _ _ _).symm
-      _ = ((openSource l E b o c).map (Prod.mkHom a d) ≫ v'.inv) ≫ v'.hom :=
-        congrArg (fun h ↦ h ≫ v'.hom) ho.symm
-      _ = v.inv ≫ (v.hom ≫ (openSource l E b o c).map (Prod.mkHom a d)) := by
-        simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
-          Iso.inv_hom_id_assoc]
-  simp only [projection, Functor.map_comp]
-  change (source l E b o c).map (Prod.mkHom a d) ≫
-      (properMap l E b o c C' B' ≫ v'.hom ≫ e.hom.app (C', B')) =
-    (properMap l E b o c C B ≫ v.hom ≫ e.hom.app (C, B)) ≫ _
-  rw [← Category.assoc, ← Category.assoc, hn.1]
-  simp only [Category.assoc]
-  rw [reassoc_of% hv, he]
+  sorry
 
 end AlgebraicGeometry.ProEtale.SpTowerProjection

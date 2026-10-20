@@ -32,51 +32,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Endofunctor AlgebraicGe
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-private theorem map_heq {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
-    {K L K' L' : C} (hK : K = K') (hL : L = L')
-    {a : K ⟶ L} {b : K' ⟶ L'} (h : HEq a b) : HEq (F.map a) (F.map b) := by
-  cases hK
-  cases hL
-  cases h
-  rfl
-
-private def localizedIso {R : Type*} [CommRing R] (p : R)
-    {C D : Type*} [Category C] [Category D]
-    [Preadditive C] [Preadditive D] [Linear R C] [Linear R D]
-    (F G : C ⥤ D)
-    (F' G' : ScalarLocalization R C p ⥤ ScalarLocalization R D p)
-    [F'.Additive] [G'.Additive]
-    (hF : ∀ K, F'.obj K = ⟨F.obj K.obj⟩)
-    (hG : ∀ K, G'.obj K = ⟨G.obj K.obj⟩)
-    (hFm : ∀ (K L : C) (a : K ⟶ L) (c : Localization.Away p),
-      HEq (F'.map (c ⊗ₜ[R] a : ScalarLocalization.mk K ⟶ ScalarLocalization.mk L))
-        (c ⊗ₜ[R] F.map a))
-    (hGm : ∀ (K L : C) (a : K ⟶ L) (c : Localization.Away p),
-      HEq (G'.map (c ⊗ₜ[R] a : ScalarLocalization.mk K ⟶ ScalarLocalization.mk L))
-        (c ⊗ₜ[R] G.map a)) (e : F ≅ G) : F' ≅ G' :=
-  NatIso.ofComponents (fun K ↦ eqToIso (hF K) ≪≫
-    (ScalarLocalization.localization R D p).mapIso (e.app K.obj) ≪≫
-      (eqToIso (hG K)).symm) (by
-    intro K L a
-    induction a using TensorProduct.induction_on with
-    | zero => simp
-    | tmul c a =>
-      rw [(conj_eqToHom_iff_heq _ _ (hF K) (hF L)).2 (hFm K.obj L.obj a c),
-        (conj_eqToHom_iff_heq _ _ (hG K) (hG L)).2 (hGm K.obj L.obj a c)]
-      simp only [Iso.trans_hom, eqToIso.hom, Iso.symm_hom, eqToIso.inv,
-        Category.assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
-      rw [cancel_epi]
-      simp only [← Category.assoc, cancel_mono]
-      change ScalarLocalization.composition R D p _ _ _ (1 ⊗ₜ[R] e.hom.app L.obj)
-          (c ⊗ₜ[R] F.map a) =
-        ScalarLocalization.composition R D p _ _ _ (c ⊗ₜ[R] G.map a)
-          (1 ⊗ₜ[R] e.hom.app K.obj)
-      simp only [ScalarLocalization.composition_tmul, one_mul, mul_one, e.hom.naturality]
-    | add a b ha hb =>
-      change F'.map (a + b) ≫ _ = _ ≫ G'.map (a + b)
-      rw [F'.map_add, G'.map_add, Preadditive.add_comp, Preadditive.comp_add]
-      exact congrArg₂ (· + ·) ha hb)
-
 section PullbackShift
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -196,39 +151,7 @@ theorem fieldRationalPullComp_existsUnique {X Y Z : Scheme.{u}}
         HEq (c.hom.app ((sfRationalConstructibleLocalization l E Z).obj K))
           ((sfRationalConstructibleLocalization l E X).map
             (((integralPullbackComposition l E).choose f g).hom.app K)) := by
-  let F := constructibleIntegralPullback l E (f ≫ g)
-  let G := constructibleIntegralPullback l E g ⋙ constructibleIntegralPullback l E f
-  let F' := rationalDerivedPullback l E (f ≫ g)
-  let G' := rationalDerivedPullback l E g ⋙ rationalDerivedPullback l E f
-  have hf := (rationalDerivedPullback_existsUnique l E f).exists.choose_spec
-  have hg := (rationalDerivedPullback_existsUnique l E g).exists.choose_spec
-  have hfg := (rationalDerivedPullback_existsUnique l E (f ≫ g)).exists.choose_spec
-  let : F'.Additive := hfg.1
-  let : (rationalDerivedPullback l E f).Additive := hf.1
-  let : (rationalDerivedPullback l E g).Additive := hg.1
-  have hG (K : sfRationalConstructibleCategory l E Z) : G'.obj K = ⟨G.obj K.obj⟩ :=
-    (congrArg (rationalDerivedPullback l E f).obj (hg.2.1 K)).trans (hf.2.1 _)
-  have hGm (K L : sfIntegralConstructibleCategory l E Z) (a : K ⟶ L)
-      (c : Localization.Away (Padic.coefficientExtensionUniformizer l E)) :
-      HEq (G'.map (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] a))
-        (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] G.map a) := by
-    exact (map_heq (rationalDerivedPullback l E f) (hg.2.1 ⟨K⟩) (hg.2.1 ⟨L⟩)
-      (hg.2.2 K L a c)).trans (hf.2.2 _ _ _ c)
-  let e := localizedIso (Padic.coefficientExtensionUniformizer l E)
-    F G F' G' hfg.2.1 hG hfg.2.2 hGm ((integralPullbackComposition l E).choose f g)
-  have he (K : sfIntegralConstructibleCategory l E Z) :
-      HEq (e.hom.app ((sfRationalConstructibleLocalization l E Z).obj K))
-        ((sfRationalConstructibleLocalization l E X).map
-          (((integralPullbackComposition l E).choose f g).hom.app K)) := by
-    apply (conj_eqToHom_iff_heq _ _ (hfg.2.1 ⟨K⟩) (hG ⟨K⟩)).1
-    rfl
-  refine ⟨e, he, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  apply NatTrans.ext
-  funext K
-  exact eq_of_heq ((he' K.obj).trans (he K.obj).symm)
-
+  sorry
 
 /-- The fixed rational pullback composition. Source: Stacks 099N(5)
 (blueprint: def-zl-field-weil-shriek-shift-data). -/

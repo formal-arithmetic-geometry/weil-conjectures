@@ -15,8 +15,23 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 public import Mathlib.AlgebraicGeometry.Cover.Open
 
-import Sheaf.Paper.ResidueClopenPreparation
-import Sheaf.Paper.CompleteConstantResidueFreeModel
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.Paper.ConstantModuleSectionProperties
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
+import Sheaf.AlgebraicGeometry.WeaklyEtaleStability
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.EtaleComparison
+import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
+import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
+import Sheaf.Paper.CompleteResidueCohomologyBounds
+import Sheaf.Paper.DerivedNakayamaFirstReduction
+import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 
 /-!
 # Projective models from lisse residue cohomology
@@ -137,18 +152,7 @@ theorem residue_lisse_projective_models
             ι ≫ ρ = 𝟙 _) ∧
           Nonempty
             ((integralDerivedPullback l E (U i).ι).obj K ≅
-              DerivedCategory.Q.obj P)  := by
-  obtain ⟨n, U, hcover, hdisjoint, hpieces⟩ :=
-    residue_clopen_preparation l E S hS hweak K hcomplete hresidue hlisse hTor
-  refine ⟨n, U, hcover, hdisjoint, ?_⟩
-  intro i
-  obtain ⟨haffine, hcontractible, hcomplete', hTor', hfree⟩ := hpieces i
-  obtain ⟨P, a, b, hab, hge, hle, hterms, hiso⟩ :=
-    complete_constant_residue_free_model l E (U i).toScheme haffine hcontractible
-      ((integralDerivedPullback l E (U i).ι).obj K) hcomplete' hTor' hfree
-  refine ⟨P, a, b, hab, hge, hle, ?_, hiso⟩
-  intro r
-  obtain ⟨N, ⟨e⟩⟩ := hterms r
-  exact ⟨N, e.hom, e.inv, e.hom_inv_id⟩
+              DerivedCategory.Q.obj P) := by
+  sorry
 
 end WeilConjectures

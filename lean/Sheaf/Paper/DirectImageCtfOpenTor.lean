@@ -24,14 +24,38 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Over
-import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
-import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
-import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
-import WeilConjectures.SixFunctors.Etale.Derived.Hom
-import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
+import Sheaf.AlgebraicGeometry.EtaleLfpAndFiniteType
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
-import Sheaf.CategoryTheory.RightDerivedFunctorUpperBound
+import WeilConjectures.CategoryTheory.TruncationHypercohomology
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.Paper.PbcActualScalarPullback
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap
+import Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormula
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import Sheaf.AlgebraicGeometry.GeometricStalkCohomology
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.ComparisonTorInterval
+
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! # Scalar projection formula and Tor bound for an open immersion
 
@@ -50,104 +74,6 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
-
-/-- The constant-complex projection mate is invertible by generation from A[0].
-The two functors preserve coproducts; the unit case and shift compatibility are the
-source-library projection unit and shift theorems. -/
-private theorem scalarProjection_of_finite_cd
-    (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}}
-    (j : U ⟶ X) [QuasiCompact j] [QuasiSeparated j]
-    (hcd : HasFiniteCohomologicalDimensionMorphism A j)
-    (K : DerivedCategoryModule A U) (M : ModuleCat.{u + 1} A) :
-    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) j).app K).app
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj
-        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M))) := by
-  let C := (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).mapDerivedCategory
-  let π : (-⊗ᴸ-(X)[ModuleCat.{u + 1} A]).obj
-      (((lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor).obj K) ⟶
-      (((upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor) ⋙
-        (-⊗ᴸ-(U)[ModuleCat.{u + 1} A]).obj K) ⋙
-          (lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor :=
-    (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) j).app K
-  let τ := Functor.whiskerLeft C π
-  have (I : Type (u + 1)) := preservesCoproducts_rightDerivedLowerStar A j hcd I
-  have (I : Type (u + 1)) : PreservesColimitsOfShape (Discrete I)
-      (upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor :=
-    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).leftAdjoint_preservesColimits
-      |>.preservesColimitsOfShape
-  have (I : Type (u + 1)) (Y : Scheme.{u}) (L : DerivedCategoryModule A Y) :
-      PreservesColimitsOfShape (Discrete I) ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} A]).obj L) :=
-    (derivedTensorHomAdjunction (ModuleCat.{u + 1} A) L).leftAdjoint_preservesColimits
-      |>.preservesColimitsOfShape
-  have hτ : IsIso τ := by
-    apply _root_.DerivedCategory.isIso_of_isIso_app_singleFunctor_obj_self τ
-    have hunit := isIso_rightDerivedLowerStarProjectionMap_app_app_tensorUnit
-      (ModuleCat.{u + 1} A) j K
-    change IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) j).app K).app
-      (C.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of A A))))
-    apply (NatTrans.isIso_app_iff_of_iso
-      ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) j).app K) _).2 hunit
-    exact (Functor.mapDerivedCategorySingleFunctor _ 0).app _ ≪≫
-      (_root_.DerivedCategory.singleFunctor _ 0).mapIso
-        (Functor.Monoidal.εIso
-          (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))).symm ≪≫
-      _root_.DerivedCategory.singleFunctorObjUnitIso _
-  have := (NatTrans.isIso_iff_isIso_app τ).1 hτ
-    ((_root_.DerivedCategory.singleFunctor _ 0).obj M)
-  exact (NatTrans.isIso_app_iff_of_iso
-    ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) j).app K)
-    ((Functor.mapDerivedCategorySingleFunctor _ 0).app M)).1 this
-
-/-- Extract the numerical cd bound and transport it through exact faithful forgetting
-of module coefficients. The comparison uses acyclicity, not preservation of injectives. -/
-private theorem moduleDirectImage_bound_of_torsion_cd
-    (A : Type (u + 1)) [CommRing A] [Finite A] {U X : Scheme.{u}}
-    (j : U ⟶ X) [QuasiCompact j] [QuasiSeparated j] (d : ℕ)
-    (hd : j.torsionEtaleCohomologicalDimension ≤ (d : ℕ∞)) :
-    ∀ (S : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℕ), d < q →
-      IsZero (((lowerStar (ModuleCat.{u + 1} A) j).rightDerived q).obj S) := by
-  classical
-  let B : Set ℕ∞ := {c | ∃ n : ℕ, c = (n : ℕ∞) ∧
-    ∀ (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}), F.IsTorsion →
-      ∀ q : ℤ, (n : ℤ) < q →
-        IsZero ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj
-          ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} j).obj
-            ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F)))}
-  have hd' : sInf B ≤ (d : ℕ∞) := hd
-  have hB : B.Nonempty := by
-    by_contra hn
-    have he : B = ∅ := Set.not_nonempty_iff_eq_empty.mp hn
-    rw [he, sInf_empty] at hd'
-    exact (not_le_of_gt (ENat.natCast_lt_top d)) hd'
-  obtain ⟨n, hn, hvan⟩ := csInf_mem hB
-  have hnd : n ≤ d := by
-    exact_mod_cast (hn ▸ hd')
-  intro S q hq
-  let F := lowerStar (ModuleCat.{u + 1} A) j
-  let V := moduleAbelianForget A X
-  let W := moduleAbelianForget A U
-  have ht : (W.obj S).IsTorsion :=
-    Sheaf.IsTorsion.of_forall_isAddTorsion fun T ↦
-      IsAddTorsion.module_of_finite A (S.obj.obj T)
-  have hz := hvan (W.obj S) ht q (by omega)
-  let e : V.obj ((F.rightDerived q).obj S) ≅
-      (_root_.DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
-        ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} j).obj
-          ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj (W.obj S))) :=
-    (V.mapIso ((F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).app S)).symm ≪≫
-      (V.mapDerivedCategoryPlusHomologyFunctorIso q).app
-        (F.rightDerivedFunctorPlus.obj
-          ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj S)) ≪≫
-      (_root_.DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).mapIso
-        ((moduleAbelianDerivedLowerStarIso A j).app
-          ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj S)) ≪≫
-      (_root_.DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).mapIso
-        ((lowerStar AddCommGrpCat.{u + 1} j).rightDerivedFunctorPlus.mapIso
-          ((W.mapDerivedCategoryPlusSingleFunctor 0).app S))
-  have hzero : IsZero (V.obj ((F.rightDerived q).obj S)) := hz.of_iso e
-  exact (IsZero.iff_id_eq_zero _).2 (V.map_injective (by
-    rw [V.map_id, V.map_zero]
-    exact hzero.eq_of_src _ _))
 
 /-- Scalar projection and the all-module-sheaf Tor bound for an open immersion.
 Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-sf-direct-image-ctf,
@@ -348,43 +274,6 @@ theorem sf_directImage_ctf_open_tor
       (((ProEtale.lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor.obj
         ((AlgebraicGeometry.ProEtale.comparisonUpperStar
           (ModuleCat.{u + 1} A) U).mapDerivedCategory.obj K))) := by
-  have : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian aU
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
-  have : CompactSpace U := (quasiCompact_iff_compactSpace aU).mp inferInstance
-  have : QuasiCompact j := inferInstance
-  have : QuasiSeparated j := inferInstance
-  let F := lowerStar (ModuleCat.{u + 1} A) j
-  have hvan := moduleDirectImage_bound_of_torsion_cd A j d _hd
-  have hAt : IsAddTorsion A := by
-    obtain ⟨n, hn⟩ := hA
-    exact fun x ↦ isOfFinAddOrder_iff_nsmul_eq_zero.mpr
-      ⟨l ^ n, pow_pos (Fact.out : l.Prime).pos n, hn x⟩
-  have hcd := hasFiniteCohomologicalDimensionMorphism_of_isSepClosed_of_locallyOfFiniteType
-    A hAt aU aX j _hj
-  have hproj := scalarProjection_of_finite_cd A j hcd K
-  have hKt := Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mp _hK
-  have hKge : K.IsGE a :=
-    (_root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hKt).1
-  have hQt : Etale.DerivedCategory.torAmplitudeIn
-      (ModuleCat.{u + 1} A) X a (b + d) (F.rightDerivedFunctor.obj K) := by
-    rw [Etale.DerivedCategory.torAmplitudeIn_iff_tensorSingleConcentratedIn]
-    let κ := ModuleCat.of A (A ⧸ Ring.jacobson A)
-    have := hproj κ
-    apply tensorSingleConcentratedIn_rightDerivedLowerStar_of_isIso
-      (ModuleCat.{u + 1} A) j K κ
-    let L := ((derivedTensor (ModuleCat.{u + 1} A) U).obj K).obj
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj
-        ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)).obj κ))
-    have hLge : L.IsGE a := (_root_.DerivedCategory.isGE_iff L a).2
-      (fun q hq ↦ _hK _ q (Or.inl hq))
-    have hLle : L.IsLE b := (_root_.DerivedCategory.isLE_iff L b).2
-      (fun q hq ↦ _hK _ q (Or.inr hq))
-    exact ⟨F.isGE_rightDerivedFunctor_obj L a,
-      F.isLE_rightDerivedFunctor_obj_of_dimension d hvan L b hLle⟩
-  let e := ProEtale.rightDerivedLowerStarMapDerivedCategoryObjIso
-    (ModuleCat.{u + 1} A) j K ⟨a, hKge⟩
-  have hp := ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory A hQt
-  exact ⟨hproj, Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mpr hQt, ⟨e⟩,
-    (_root_.DerivedCategory.torAmplitudeIn _ a (b + d)).prop_of_iso e.symm hp⟩
+  sorry
 
 end AlgebraicGeometry.Etale

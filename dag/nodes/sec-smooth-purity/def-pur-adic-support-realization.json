@@ -1,192 +1,146 @@
 {
- "id": "def-pur-adic-support-realization",
- "kind": "definition",
- "title": "ExceptionalFiniteSupportRealization",
- "status": "split",
- "statement": "For a compactification and the actual strict etale compact-support construction [def-weil-exceptional-inverse-image], define the fixed-coefficient realization of its open extension by the full Hom-transpose equation relative to the inverse comparison [def-pur-adic-etale-realization]. Derive this exact comparison with its square on every cochain representative. Compose it with the universal-unit-normalized proper direct-image comparison to obtain the compact-support comparison at that same compactification. Its right-adjoint comparison is uniquely specified by the Hom-transpose equation for every pair of objects and every compact-support morphism.",
- "stmt_deps": [
-  "def-pur-adic-etale-realization",
-  "def-weil-exceptional-inverse-image"
- ],
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
-  "place": "node thm-pur-adic-reconstruction, order 2023"
- },
- "proof": [
-  {
-   "text": "For two adjunctions and a square, expand both Hom transposes using their units. Naturality of the right square and its mate unit equation give the full Hom-transpose equation for every arrow. Apply this to the inverse mate of integralExceptionalEtaleInverse. Both realization functors are equivalences, so the existing inverse-mate invertibility theorem supplies the open-extension isomorphism. If another isomorphism satisfies the equation, evaluate at the identity of each left-adjoint image and use injectivity of the target Hom equivalence to identify the inverse components.",
-   "uses": [
+  "id": "def-pur-adic-support-realization",
+  "kind": "definition",
+  "title": "ExceptionalFiniteSupportRealization",
+  "status": "split",
+  "statement": "For a compactification and the actual strict etale compact-support construction [def-weil-exceptional-inverse-image], define the fixed-coefficient realization of its open extension by the full Hom-transpose equation relative to the inverse comparison [def-pur-adic-etale-realization]. Derive this exact comparison with its square on every cochain representative. Compose it with the universal-unit-normalized proper direct-image comparison to obtain the compact-support comparison at that same compactification. Its right-adjoint comparison is uniquely specified by the Hom-transpose equation for every pair of objects and every compact-support morphism.",
+  "stmt_deps": [
     "def-pur-adic-etale-realization",
-    "lem-pur-etale-coefficient-system-adjoint",
-    "lem-stage3-inverse-mate-equivalences"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply NatIso.mapHomologicalComplex to the ordinary open comparison. Form two comparison isomorphisms from Q followed by the two derived composites to the same functor on complexes: one uses the source realization factorization followed by the ordinary open-extension factorization, and the other uses levelOpenFactors, the target realization factorization, and the complex comparison. The composite of the latter with the inverse of the former descends uniquely through Q, because precomposition with a localization is fully faithful (Localization.fullyFaithfulWhiskeringLeft). Its normalization square is the equality (b followed by a inverse) followed by a equals b. For uniqueness, cancel the invertible normalization factors at each Q(J), then use Localization.natTrans_ext.",
-   "uses": [
-    "def-pur-adic-etale-realization",
-    "lem-pur-etale-coefficient-system-adjoint"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Keep the compact-support comparison as its existing composite of the exact open comparison and the normalized proper comparison. Apply the existing forward-mate invertibility theorem to its inverse, the generic finite exceptional adjunction, and the fixed compact-support adjunction; the derived realizations are equivalences. The mate unit equation and naturality give exactly IsIntegralExceptionalEtaleRightAdjoint. For uniqueness, evaluate that Hom-transpose equation on each counit of the generic adjunction. Its transpose is the identity by the triangle identity, so the right-comparison components agree.",
-   "uses": [
-    "def-pur-adic-etale-realization",
-    "lem-pur-etale-coefficient-system-adjoint",
-    "lem-weil-mate-iso-along-equivalences"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-pur-adic-etale-realization",
-  "lem-pur-etale-coefficient-system-adjoint",
-  "lem-stage3-inverse-mate-equivalences",
-  "lem-weil-mate-iso-along-equivalences"
- ],
- "proof_origin": {
-  "by": "agent D6",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
-  "place": "The three existing declaration docstring proofs, implemented using the library mate-invertibility lemmas and Mathlib localization full faithfulness. No change to the purity-transport unit route."
- },
- "mathlib_match": null,
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "canonical finite reduction of integral smooth purity via coefficient systems, root-normalized Tate twist and exceptional adjunction realization",
-   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmooth.out\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"StandardEtalePresentation\"]}",
-   "date": "2026-10-18",
-   "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
-  },
-  {
-   "tool": "loogle",
-   "query": "Functor.mapDerivedCategoryCompIso, DerivedCategory.QObjTensorSingleFunctorObjIso, Adjunction.homEquiv",
-   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.mapDerivedCategoryCompIso'\", \"top\": []}",
-   "date": "2026-10-18",
-   "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
-  },
-  {
-   "tool": "grep",
-   "query": "adicPurity|integralExceptional|smoothPurityMap|QObjTensorSingleFunctorObjIso",
-   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
-   "date": "2026-10-18",
-   "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Canonical realization of coefficient systems and Tate twists under exact derived equivalences, compatible with exceptional inverse image adjunction and scalar reduction",
-   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"CochainComplex.HomComplex.Cochain.rightShiftAddEquiv\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"DerivedCategory.instCommShiftCochainComplexIntQ\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"KaehlerDifferential.cotangentComplexBaseChange.congr_simp\", \"Rep.coindResAdjunction\"]}",
-   "date": "2026-10-18",
-   "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
-  },
-  {
-   "tool": "grep",
-   "query": "integralExceptional|exceptional.*System|System.*exceptional",
-   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
-   "date": "2026-10-18",
-   "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.homEquiv",
-   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app\"]}",
-   "date": "2026-10-18",
-   "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "canonical comparison of an integral exceptional inverse limit of strict coefficient systems with the constructible exceptional right adjoint",
-   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidification\", \"Condensed.profiniteSolid\", \"InverseSystem.pEquivOnLim\", \"Condensed.profiniteSolidCounit\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"localCohomology.isoOfFinal\", \"LightCondensed.isoLocallyConstantOfIsColimit_inv\"]}",
-   "date": "2026-10-18",
-   "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Uniqueness of derived inverse image by localization and right adjoints by Hom transpose, comparison of strict-system integral exceptional inverse limit with constructible exceptional functor",
-   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived_ext\", \"CategoryTheory.Functor.rightDerivedUnique\", \"CategoryTheory.Functor.leftDerivedUnique\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_of_inverts\", \"CategoryTheory.Functor.isRightDerivedFunctor_of_inverts\", \"CategoryTheory.Functor.rightDerivedNatIso_inv\", \"CategoryTheory.Adjunction.isLocalization'\"]}",
-   "date": "2026-10-18",
-   "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
-  },
-  {
-   "tool": "grep",
-   "query": "rg adicPurity|integralExceptional in WeilConjectures, lean/Sheaf, dag/nodes; blueprint_refs.py search exceptional realization",
-   "results": "No matching project declarations or blueprint nodes. Existing generic site, tensor, localization and adjunction APIs are reused.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  }
- ],
- "created": {
-  "by": "worker",
-  "item": "thm-pur-adic-reconstruction",
-  "date": "2026-10-18",
-  "group": "N0"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-pur-adic-reconstruction",
-   "place": "Canonical source and target identifications in the finite reduction equation; five-step reconstruction proof.",
-   "via": []
-  },
-  "same_as": []
- },
- "lean_audit": {
-  "master": {
-   "state": "none"
-  },
-  "slopmaster2": {
-   "state": "none"
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport",
- "lean": {
-  "module": "Sheaf.Paper.ExceptionalFiniteSupportRealization",
-  "declaration": "WeilConjectures.integralExceptionalEtaleSupportComparison",
-  "declarations": [
-   "WeilConjectures.integralExceptionalEtaleOpen_existsUnique",
-   "WeilConjectures.integralExceptionalEtaleOpen",
-   "WeilConjectures.IsIntegralExceptionalEtaleDerivedOpen",
-   "WeilConjectures.integralExceptionalEtaleDerivedOpen_existsUnique",
-   "WeilConjectures.integralExceptionalEtaleDerivedOpen",
-   "WeilConjectures.integralExceptionalEtaleSupportComparison",
-   "WeilConjectures.IsIntegralExceptionalEtaleRightAdjoint",
-   "WeilConjectures.integralExceptionalEtaleRightAdjoint_existsUnique",
-   "WeilConjectures.integralExceptionalEtaleRightAdjoint"
+    "def-weil-exceptional-inverse-image"
   ],
-  "file": "lean/Sheaf/Paper/ExceptionalFiniteSupportRealization.lean",
-  "statement": "def integralExceptionalEtaleSupportComparison (n : ℕ) : S.levelFunctor n ⋙ (integralExceptionalEtaleRealization l E Y n).mapDerivedCategory ≅ (integralExceptionalEtaleRealization l E X n).mapDerivedCategory ⋙ Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) c",
-  "branch": "newtargets-dag",
-  "by": "N0",
-  "date": "2026-10-18",
-  "existing": false
- },
- "reviewed": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-1d92b1302",
-  "group": "N0",
-  "result": "fix",
-  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-1d92b1302",
-  "group": "N0",
-  "result": "fix",
-  "note": "Re-delivery of PASSed 76c20af30ac6 (landing return was a load timeout in base WeilSiteDerivedTensorDescent). All 13 owned modules byte-identical to 76c; item node adds only a correct lean.note (upstream exists_iso_realization_twistShiftPullbackLevel is only the reconstruction step); new-node edits trim implementation wording and add the real def-weil-exceptional-inverse-image citation; declaration lists match modules and statements are verbatim; dependency copies equal live. Statement substance unchanged from the clause-by-clause PASS (actual U, V, smoothPurityMap at K_n, IsIso, ctf endpoints, reduction equation for every n+1, coherent lift G; edge cases covered). New content: a §1(B) edit of Q118's live DerivedPullbackTensorHom (2 transparency options, 16 @[no_expose], not 9 as reported, including the operation functors). It does not address the landing failure and is ineffective: back to back, live 39.6/42.1 s vs delivered 36.6/41.9 s. The live module already has a published build and about 40 live files use the hidden names; 2 sampled importers compile clean. FIX: fixes/DerivedPullbackTensorHom.lean = live text. nt_compile --json: all 13 owned modules clean against live (5-26 s). Notes: if the dep node carries a group note, use --revert-nodes (the node is not in the snapshot); NW's re-binding of def-weil-finite-tor-amplitude left Sheaf.Paper.FiniteTorAmplitude, whose finiteTorConstructibleIntegral this item and at least 10 live modules use, with no owning node; land at lower load."
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D6",
-  "result": "pass",
-  "landing": "20261019T231110-L-548018",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
+    "place": "node thm-pur-adic-reconstruction, order 2023"
+  },
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_match": null,
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "canonical finite reduction of integral smooth purity via coefficient systems, root-normalized Tate twist and exceptional adjunction realization",
+      "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmooth.out\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"StandardEtalePresentation\"]}",
+      "date": "2026-10-18",
+      "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
+    },
+    {
+      "tool": "loogle",
+      "query": "Functor.mapDerivedCategoryCompIso, DerivedCategory.QObjTensorSingleFunctorObjIso, Adjunction.homEquiv",
+      "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.mapDerivedCategoryCompIso'\", \"top\": []}",
+      "date": "2026-10-18",
+      "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
+    },
+    {
+      "tool": "grep",
+      "query": "adicPurity|integralExceptional|smoothPurityMap|QObjTensorSingleFunctorObjIso",
+      "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+      "date": "2026-10-18",
+      "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Canonical realization of coefficient systems and Tate twists under exact derived equivalences, compatible with exceptional inverse image adjunction and scalar reduction",
+      "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"CochainComplex.HomComplex.Cochain.rightShiftAddEquiv\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"DerivedCategory.instCommShiftCochainComplexIntQ\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"KaehlerDifferential.cotangentComplexBaseChange.congr_simp\", \"Rep.coindResAdjunction\"]}",
+      "date": "2026-10-18",
+      "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
+    },
+    {
+      "tool": "grep",
+      "query": "integralExceptional|exceptional.*System|System.*exceptional",
+      "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+      "date": "2026-10-18",
+      "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.homEquiv",
+      "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app\"]}",
+      "date": "2026-10-18",
+      "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "canonical comparison of an integral exceptional inverse limit of strict coefficient systems with the constructible exceptional right adjoint",
+      "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidification\", \"Condensed.profiniteSolid\", \"InverseSystem.pEquivOnLim\", \"Condensed.profiniteSolidCounit\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"localCohomology.isoOfFinal\", \"LightCondensed.isoLocallyConstantOfIsColimit_inv\"]}",
+      "date": "2026-10-18",
+      "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Uniqueness of derived inverse image by localization and right adjoints by Hom transpose, comparison of strict-system integral exceptional inverse limit with constructible exceptional functor",
+      "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived_ext\", \"CategoryTheory.Functor.rightDerivedUnique\", \"CategoryTheory.Functor.leftDerivedUnique\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_of_inverts\", \"CategoryTheory.Functor.isRightDerivedFunctor_of_inverts\", \"CategoryTheory.Functor.rightDerivedNatIso_inv\", \"CategoryTheory.Adjunction.isLocalization'\"]}",
+      "date": "2026-10-18",
+      "verdict": "No exact normalized comparison; reuse the underlying Mathlib constructions."
+    },
+    {
+      "tool": "grep",
+      "query": "rg adicPurity|integralExceptional in WeilConjectures, lean/Sheaf, dag/nodes; blueprint_refs.py search exceptional realization",
+      "results": "No matching project declarations or blueprint nodes. Existing generic site, tensor, localization and adjunction APIs are reused.",
+      "date": "2026-10-18",
+      "verdict": "no match"
+    }
+  ],
+  "created": {
+    "by": "worker",
+    "item": "thm-pur-adic-reconstruction",
+    "date": "2026-10-18",
+    "group": "N0"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-pur-adic-reconstruction",
+      "place": "Canonical source and target identifications in the finite reduction equation; five-step reconstruction proof.",
+      "via": []
+    },
+    "same_as": []
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none"
+    },
+    "slopmaster2": {
+      "state": "none"
+    }
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-thm-purity-transport",
+  "lean": {
+    "module": "Sheaf.Paper.ExceptionalFiniteSupportRealization",
+    "declaration": "WeilConjectures.integralExceptionalEtaleSupportComparison",
+    "declarations": [
+      "WeilConjectures.integralExceptionalEtaleOpen_existsUnique",
+      "WeilConjectures.integralExceptionalEtaleOpen",
+      "WeilConjectures.IsIntegralExceptionalEtaleDerivedOpen",
+      "WeilConjectures.integralExceptionalEtaleDerivedOpen_existsUnique",
+      "WeilConjectures.integralExceptionalEtaleDerivedOpen",
+      "WeilConjectures.integralExceptionalEtaleSupportComparison",
+      "WeilConjectures.IsIntegralExceptionalEtaleRightAdjoint",
+      "WeilConjectures.integralExceptionalEtaleRightAdjoint_existsUnique",
+      "WeilConjectures.integralExceptionalEtaleRightAdjoint"
+    ],
+    "file": "lean/Sheaf/Paper/ExceptionalFiniteSupportRealization.lean",
+    "statement": "def integralExceptionalEtaleSupportComparison (n : ℕ) : S.levelFunctor n ⋙ (integralExceptionalEtaleRealization l E Y n).mapDerivedCategory ≅ (integralExceptionalEtaleRealization l E X n).mapDerivedCategory ⋙ Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) c",
+    "branch": "newtargets-dag",
+    "by": "N0",
+    "date": "2026-10-18",
+    "existing": false
+  },
+  "reviewed": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-1d92b1302",
+    "group": "N0",
+    "result": "fix",
+    "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-1d92b1302",
+    "group": "N0",
+    "result": "fix",
+    "note": "Re-delivery of PASSed 76c20af30ac6 (landing return was a load timeout in base WeilSiteDerivedTensorDescent). All 13 owned modules byte-identical to 76c; item node adds only a correct lean.note (upstream exists_iso_realization_twistShiftPullbackLevel is only the reconstruction step); new-node edits trim implementation wording and add the real def-weil-exceptional-inverse-image citation; declaration lists match modules and statements are verbatim; dependency copies equal live. Statement substance unchanged from the clause-by-clause PASS (actual U, V, smoothPurityMap at K_n, IsIso, ctf endpoints, reduction equation for every n+1, coherent lift G; edge cases covered). New content: a §1(B) edit of Q118's live DerivedPullbackTensorHom (2 transparency options, 16 @[no_expose], not 9 as reported, including the operation functors). It does not address the landing failure and is ineffective: back to back, live 39.6/42.1 s vs delivered 36.6/41.9 s. The live module already has a published build and about 40 live files use the hidden names; 2 sampled importers compile clean. FIX: fixes/DerivedPullbackTensorHom.lean = live text. nt_compile --json: all 13 owned modules clean against live (5-26 s). Notes: if the dep node carries a group note, use --revert-nodes (the node is not in the snapshot); NW's re-binding of def-weil-finite-tor-amplitude left Sheaf.Paper.FiniteTorAmplitude, whose finiteTorConstructibleIntegral this item and at least 10 live modules use, with no owning node; land at lower load."
+  }
 }

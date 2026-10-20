@@ -1,7 +1,5 @@
 module
 
-public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerScalar
-
 public import Sheaf.Paper.WitnessCompatibility
 public import Sheaf.Paper.NormalizedEtaleOriginWitnesses
 public import Sheaf.Paper.EtaleDerivedScalarTensor
@@ -114,8 +112,11 @@ noncomputable def coefficientUnitDerived {A B : Type (u + 1)} [CommRing A] [Comm
     supportedConstantDerived (A := A) i ⟶
       (Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ).obj
         (supportedConstantDerived (A := B) i) :=
-  exactDerivedScalarUnitMap (Sheaf.restrictScalars Z.smallEtaleTopology φ)
-    (coefficientUnitModule φ i)
+  (DerivedCategory.singleFunctor
+    (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).map
+      (coefficientUnitModule φ i) ≫
+    ((Sheaf.restrictScalars Z.smallEtaleTopology φ).mapDerivedCategorySingleFunctor 0).inv.app
+      (supportedConstantModule (A := B) i)
 
 /-- The specified comparison is the adjunct of the actual direct-image coefficient unit.
 Source: sk-lem-geo-cartier.proof.md, paragraph 4; Stacks 07A6.

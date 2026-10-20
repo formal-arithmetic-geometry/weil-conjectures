@@ -13,8 +13,19 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+import Sheaf.AlgebraicGeometry.EtaleComparison
+import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Mathlib.AlgebraicGeometry.AffineScheme
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Isomorphisms descend along étale surjections
@@ -33,21 +44,6 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
-
-open CategoryTheory.Limits in
-private theorem fixedPullback_reflectsIsomorphisms (A : Type u) [CommRing A]
-    {U X : Scheme.{u}} (f : U ⟶ X) [Surjective f] [Etale f] :
-    (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f).ReflectsIsomorphisms := by
-  let C := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
-  constructor
-  intro M N φ hφ
-  apply ProEtale.isIso_of_isIso_localizationRestriction C φ (fun _ : PUnit.{1} ↦ f)
-  · apply etalePrecoverage_le_proetalePrecoverage
-    apply (ofArrows_mem_precoverage_iff _).mpr
-    exact ⟨fun x ↦ ⟨PUnit.unit, f.surjective x⟩, fun _ ↦ inferInstance⟩
-  · intro _
-    exact (NatIso.isIso_map_iff
-      (ProEtale.upperStarIsoLocalizationRestriction C f inferInstance) φ).mp hφ
 
 /-- Pullback along a surjective étale morphism of separated finite-type k-schemes
 reflects isomorphisms between bounded constructible complexes at the fixed finite
@@ -101,32 +97,6 @@ theorem isIso_of_surjective_etale_pullback (P : PurityFiniteSetting.{u})
       (Padic.finite_coefficientExtensionRing P.coefficients.l P.extension
         P.level P.level_pos) U.left X.left f.left).map φ.hom)) :
     IsIso φ := by
-  let A := P.Ring
-  let : Finite A := Padic.finite_coefficientExtensionRing P.coefficients.l P.extension
-    P.level P.level_pos
-  let F := sfIntrinsicPullback A f.left
-  have : (ProEtale.upperStar
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f.left).ReflectsIsomorphisms :=
-    fixedPullback_reflectsIsomorphisms A f.left
-  have : F.ReflectsIsomorphisms :=
-    inferInstanceAs (((sfIntrinsicModuleEquivalence X.left A).inverse ⋙
-      ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f.left) ⋙
-        (sfIntrinsicModuleEquivalence U.left A).functor).ReflectsIsomorphisms
-  have hFφ : IsIso (F.mapDerivedCategory.map φ.hom) := hφ
-  have hφambient : IsIso φ.hom := by
-    rw [DerivedCategory.isIso_iff]
-    intro n
-    have hcohcomp : IsIso ((DerivedCategory.homologyFunctor _ n ⋙ F).map φ.hom) :=
-      (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso n) φ.hom).mpr
-        (by change IsIso ((DerivedCategory.homologyFunctor _ n).map
-              (F.mapDerivedCategory.map φ.hom)); infer_instance)
-    have hcoh : IsIso (F.map ((DerivedCategory.homologyFunctor _ n).map φ.hom)) := hcohcomp
-    exact @isIso_of_reflects_iso _ _ _ _ _ _
-      ((DerivedCategory.homologyFunctor _ n).map φ.hom) F hcoh inferInstance
-  have : IsIso ((intrinsicFiniteTorsionConstructible P.coefficients.l P.extension
-      P.level P.level_pos X.left).ι.map φ) := hφambient
-  exact isIso_of_reflects_iso φ
-    (intrinsicFiniteTorsionConstructible P.coefficients.l P.extension
-      P.level P.level_pos X.left).ι
+  sorry
 
 end WeilConjectures

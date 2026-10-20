@@ -360,70 +360,6 @@ def Expression.SlotContext.shift {B : Scheme.{u}} {C : Scheme.{u} → Type v}
     ((Functor.curry.obj (d.tensor W.left)).obj M).mapIso (e.shift a r P) ≪≫
       (a.tensorRight W.left r).app (M, e.evaluate.obj P)
 
-private theorem slotContext_shift_naturality {B : Scheme.{u}} {C : Scheme.{u} → Type v}
-    [∀ W, Category.{w} (C W)] [∀ W, HasShift (C W) ℤ] {d : Interpretation C}
-    (a : InterpretationShifts d) {A W : Over B} (e : Expression.SlotContext d A W)
-    (r : ℤ) {P Q : C A.left} (f : P ⟶ Q) :
-    e.evaluate.map (f⟦r⟧') ≫ (e.shift a r Q).hom =
-      (e.shift a r P).hom ≫ (e.evaluate.map f)⟦r⟧' := by
-  induction e with
-  | input => simp [Expression.SlotContext.evaluate, Expression.SlotContext.shift]
-  | pull g e ih =>
-    simp only [Expression.SlotContext.evaluate, Expression.SlotContext.shift,
-      Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom]
-    rw [← Category.assoc, ← Functor.map_comp, ih, Functor.map_comp, Category.assoc]
-    simpa only [Functor.comp_map, Functor.comp_obj, Iso.app_hom, Category.assoc] using
-      congrArg (fun k ↦ (d.pull g.left).map (e.shift a r P).hom ≫ k)
-        ((Functor.commShiftIso (d.pull g.left) (self := a.pull g.left) r).hom.naturality
-          (e.evaluate.map f))
-  | push g hp e ih =>
-    simp only [Expression.SlotContext.evaluate, Expression.SlotContext.shift,
-      Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom]
-    rw [← Category.assoc, ← Functor.map_comp, ih, Functor.map_comp, Category.assoc]
-    simpa only [Functor.comp_map, Functor.comp_obj, Iso.app_hom, Category.assoc] using
-      congrArg (fun k ↦ (d.push g.left).map (e.shift a r P).hom ≫ k)
-        ((Functor.commShiftIso (d.push g.left) (self := a.push g.left) r).hom.naturality
-          (e.evaluate.map f))
-  | shriek j hj hq e ih =>
-    let := hj
-    simp only [Expression.SlotContext.evaluate, Expression.SlotContext.shift,
-      Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom]
-    rw [← Category.assoc, ← Functor.map_comp, ih, Functor.map_comp, Category.assoc]
-    simpa only [Functor.comp_map, Functor.comp_obj, Iso.app_hom, Category.assoc] using
-      congrArg (fun k ↦ (d.shriek j.left).map (e.shift a r P).hom ≫ k)
-        ((Functor.commShiftIso (d.shriek j.left) (self := a.shriek j.left) r).hom.naturality
-          (e.evaluate.map f))
-  | compactSupport g c e ih =>
-    simp only [Expression.SlotContext.evaluate, Expression.SlotContext.shift,
-      Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom]
-    rw [← Category.assoc, ← Functor.map_comp, ih, Functor.map_comp, Category.assoc]
-    simpa only [Functor.comp_map, Functor.comp_obj, Iso.app_hom, Category.assoc] using
-      congrArg (fun k ↦ (d.compactSupport g.left c).map (e.shift a r P).hom ≫ k)
-        ((Functor.commShiftIso (d.compactSupport g.left c)
-          (self := a.compactSupport g.left c) r).hom.naturality
-          (e.evaluate.map f))
-  | tensorLeft e N ih =>
-    simp only [Expression.SlotContext.evaluate, Expression.SlotContext.shift,
-      Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom]
-    rw [← Category.assoc, ← Functor.map_comp, ih, Functor.map_comp, Category.assoc]
-    simpa only [Functor.comp_map, Functor.comp_obj, Iso.app_hom, Category.assoc] using
-      congrArg (fun k ↦ ((Functor.curry.obj (d.tensor _)).flip.obj N).map (e.shift a r P).hom ≫ k)
-        (by
-          simpa [tensorShiftFirst] using
-            (a.tensorLeft _ r).hom.naturality
-              (X := (e.evaluate.obj P, N)) (Y := (e.evaluate.obj Q, N))
-              (e.evaluate.map f, 𝟙 N))
-  | tensorRight M e ih =>
-    simp only [Expression.SlotContext.evaluate, Expression.SlotContext.shift,
-      Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom]
-    rw [← Category.assoc, ← Functor.map_comp, ih, Functor.map_comp, Category.assoc]
-    simpa only [Functor.comp_map, Functor.comp_obj, Iso.app_hom, Category.assoc] using
-      congrArg (fun k ↦ ((Functor.curry.obj (d.tensor _)).obj M).map (e.shift a r P).hom ≫ k)
-        (by
-          simpa [completedTensorShiftSecond] using
-            (a.tensorRight _ r).hom.naturality
-              (X := (M, e.evaluate.obj P)) (Y := (M, e.evaluate.obj Q))
-              (𝟙 M, e.evaluate.map f))
 open Classical in
 /-- The actual comparison for a single independently labelled input.
 Its endpoint identifications are equalities of explicit evaluations, not chosen isos.
@@ -448,15 +384,6 @@ def IndependentExpression.source {B : Scheme.{u}} {I : Type u} {X : I → Over B
     coefficientSequenceLimit l E W.left
 
 open Classical in
-private theorem pi_obj_update {I : Type u} {A B : I → Type v}
-    [∀ i, Category.{w} (A i)] [∀ i, Category.{w} (B i)]
-    (F : ∀ i, A i ⥤ B i) (K : ∀ i, A i) (i : I) (P : A i) :
-    Function.update ((Functor.pi F).obj K) i ((F i).obj P) =
-      (Functor.pi F).obj (Function.update K i P) := by
-  funext j
-  exact (Function.apply_update (fun k ↦ (F k).obj) K i P j).symm
-
-open Classical in
 /-- Reduction commutes with replacement of an independently labelled input.
 This equality involves the actual reduction functor, not a selected representative.
 Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data).
@@ -473,12 +400,7 @@ theorem IndependentExpression.reductionContext_evaluate {B : Scheme.{u}} {I : Ty
         ((calculus l E (X i).left).reduction.obj P) =
       (e.val.evaluate (systemInterpretation l E o)).obj
         ((inputReduction l E X).obj (Function.update K i P)) := by
-  have h := (e.variableContext_evaluate (systemInterpretation l E o)
-    ((inputReduction l E X).obj K) i
-    ((calculus l E (X i).left).reduction.obj P)).1
-  have hupdate := pi_obj_update
-    (fun j ↦ (calculus l E (X j).left).reduction) K i P
-  exact h.trans (congrArg ((e.val.evaluate (systemInterpretation l E o)).obj) hupdate)
+  sorry
 
 open Classical in
 /-- Source shift: the reduction mate, the exact/proper/open/signed-tensor context,

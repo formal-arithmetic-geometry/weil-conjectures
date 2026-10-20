@@ -24,7 +24,6 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 import Sheaf.Paper.IntegralUniformCoefficient
-import Sheaf.Paper.IntegralReductionTowerUnrestricted
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Sheaf.Paper.IntegralOperationsWellDefined
 import Sheaf.Paper.SfImmersionCompletedPullbackComparison
@@ -36,11 +35,6 @@ import Sheaf.Paper.RingedDerivedSliceLocalization
 import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Paper.KoszulReconstruction
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.CategoryTheory.Adjunction.Additive
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Coseparator
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Mathlib.Topology.Algebra.Valued.LocallyCompact
 import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 
@@ -78,34 +72,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-private def ordinaryRestrictionPushforwardIso
-    {C D : Type*} [Category C] [Category D]
-    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
-    {F : C ⥤ D} [F.IsContinuous J K]
-    {T S : Sheaf J RingCat.{u + 1}} {R R' : Sheaf K RingCat.{u + 1}}
-    (α : T ⟶ S) (β : R ⟶ R')
-    (φ : T ⟶ (F.sheafPushforwardContinuous RingCat J K).obj R)
-    (ψ : S ⟶ (F.sheafPushforwardContinuous RingCat J K).obj R')
-    (h : φ ≫ (F.sheafPushforwardContinuous RingCat J K).map β = α ≫ ψ) :
-    SheafOfModules.pushforward.{u + 1} ψ ⋙ SheafOfModules.restrictScalars α ≅
-      SheafOfModules.restrictScalars β ⋙ SheafOfModules.pushforward.{u + 1} φ := by
-  refine NatIso.ofComponents (fun M ↦
-    (SheafOfModules.fullyFaithfulForget _).preimageIso
-      (PresheafOfModules.isoMk (fun U ↦ ?_) ?_)) ?_
-  · exact ((ModuleCat.restrictScalarsComp
-        (α.hom.app U).hom (ψ.hom.app U).hom).app (M.val.obj (F.op.obj U))).symm ≪≫
-      (ModuleCat.restrictScalarsCongr
-        (congrArg (fun k ↦ (k.hom.app U).hom) h.symm)).app _ ≪≫
-      (ModuleCat.restrictScalarsComp
-        (φ.hom.app U).hom (β.hom.app (F.op.obj U)).hom).app _
-  · intro U V i
-    ext x
-    rfl
-  · intro M N a
-    apply SheafOfModules.hom_ext
-    ext U x
-    rfl
-
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -118,45 +84,6 @@ def ordinaryIntegralFiniteDirectRingMap (n : ℕ) :
   (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
     (coefficientProEtaleDirectRingMap.{u, u} f
       (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))
-
-private theorem ordinaryConstantUnit
-    (A : CommRingCat.{u + 1}) (U : Y.ProEtᵒᵖ) :
-    (toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app U ≫
-      (coefficientProEtaleDirectRingMap.{u, u} f A).hom.app U =
-    (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).app
-      ((proEtaleBaseChange f).op.obj U) := by
-  have h := (sheafificationAdjunction (ProEt.topology Y)
-      CommRingCat.{u + 1}).homEquiv ((Functor.const Y.ProEtᵒᵖ).obj A)
-        (((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{u + 1}
-          (ProEt.topology Y) (ProEt.topology X)).obj
-            ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj A))
-      |>.apply_symm_apply (Functor.whiskerLeft (proEtaleBaseChange f).op
-        (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)))
-  exact congrArg (fun α ↦ α.app U) h
-
-private theorem ordinaryConstantMap_naturality
-    {A B : CommRingCat.{u + 1}} (a : A ⟶ B) :
-    (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map a ≫
-      coefficientProEtaleDirectRingMap.{u, u} f B =
-    coefficientProEtaleDirectRingMap.{u, u} f A ≫
-      ((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{u + 1}
-        (ProEt.topology Y) (ProEt.topology X)).map
-          ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map a) := by
-  apply (sheafificationAdjunction (ProEt.topology Y)
-      CommRingCat.{u + 1}).homEquiv ((Functor.const Y.ProEtᵒᵖ).obj A)
-        (((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{u + 1}
-          (ProEt.topology Y) (ProEt.topology X)).obj
-            ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj B)) |>.injective
-  apply NatTrans.ext
-  funext U
-  change _ ≫ (_ ≫ _) = _ ≫ (_ ≫ _)
-  have hY := congrArg (fun α ↦ α.app U)
-    (toSheafify_naturality (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).map a))
-  change a ≫ _ = _ ≫ _ at hY
-  erw [← Category.assoc, ← hY, Category.assoc, ordinaryConstantUnit,
-    ← Category.assoc, ordinaryConstantUnit]
-  exact congrArg (fun α ↦ α.app ((proEtaleBaseChange f).op.obj U))
-    (toSheafify_naturality (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map a))
 
 /-- The adjoint completed ring map is uniquely determined by all its quotient projections.
 Its inverse-image adjoint is exactly c_f of the statement.
@@ -173,29 +100,7 @@ theorem ordinaryIntegralDirectRingMap_existsUnique :
           (limit.π (integralCoefficientSheafSystem l E X) (op n)) =
         limit.π (integralCoefficientSheafSystem l E Y) (op n) ≫
           ordinaryIntegralFiniteDirectRingMap l E f n := by
-  let D := proEtaleSheafDirectImage f RingCat.{u + 1}
-  let : D.IsRightAdjoint := (proEtaleSheafAdjunction f RingCat.{u + 1}).isRightAdjoint
-  let a : integralCoefficientSheafSystem l E Y ⟶ integralCoefficientSheafSystem l E X ⋙ D :=
-    NatTrans.ofOpSequence (ordinaryIntegralFiniteDirectRingMap l E f) (fun n ↦ by
-      simp only [integralCoefficientSheafSystem, Functor.comp_map,
-        Functor.ofOpSequence_map_homOfLE_succ]
-      change integralCoefficientSheafTransition l E Y n ≫
-          ordinaryIntegralFiniteDirectRingMap l E f n =
-        ordinaryIntegralFiniteDirectRingMap l E f (n + 1) ≫
-          D.map (integralCoefficientSheafTransition l E X n)
-      exact (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).congr_map
-        (ordinaryConstantMap_naturality f
-          (CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1)).ulift)))
-  let c : Cone (integralCoefficientSheafSystem l E X ⋙ D) :=
-    ⟨_, (limit.cone (integralCoefficientSheafSystem l E Y)).π ≫ a⟩
-  let h := isLimitOfPreserves D (limit.isLimit (integralCoefficientSheafSystem l E X))
-  refine ⟨h.lift c, ?_, ?_⟩
-  · intro n
-    exact h.fac c (op n)
-  · intro b hb
-    apply h.hom_ext
-    intro n
-    simpa using (hb n.unop).trans (h.fac c n).symm
+  sorry
 
 /-- The canonical completed coefficient map, in its direct-image adjoint form.
 Source: Bhatt--Scholze, Lemma 6.5.9
@@ -217,28 +122,7 @@ adjunction back. Its right adjoint is the specified sectionwise module pushforwa
 The left adjoint is B_X tensor over f-inverse B_Y with f-inverse of the module. -/
 @[instance] theorem ordinaryIntegralModulePush_isRightAdjoint :
     (ordinaryIntegralModulePush l E f).IsRightAdjoint := by
-  have : IsGrothendieckAbelian.{u + 1} (integralTowerModules l E X) :=
-    SheafOfModules.isGrothendieckAbelianOfUniverses.{u + 1, u, u + 1, 0} _ _
-  have : PreservesLimitsOfSize.{u + 1, u + 1} (ordinaryIntegralModulePush l E f) := by
-    constructor
-    intro J _
-    have : Small.{u + 1} J := inferInstance
-    constructor
-    intro K
-    constructor
-    intro c hc
-    refine ⟨?_⟩
-    apply isLimitOfReflects (SheafOfModules.forget _)
-    apply PresheafOfModules.evaluationJointlyReflectsLimits
-    intro U
-    change IsLimit ((ModuleCat.restrictScalars
-      ((ordinaryIntegralDirectRingMap l E f).hom.app U).hom).mapCone
-        ((SheafOfModules.evaluation _ ((proEtaleBaseChange f).op.obj U)).mapCone c))
-    have : PreservesLimit K
-        (SheafOfModules.evaluation _ ((proEtaleBaseChange f).op.obj U)) := inferInstance
-    exact isLimitOfPreserves _ (isLimitOfPreserves _ hc)
-  exact isRightAdjoint_of_preservesLimits_of_isCoseparating
-    (isCoseparator_coseparator (integralTowerModules l E X)) _
+  sorry
 
 /-- Ordinary ringed module pullback, fixed by its sheafified Kan-extension adjunction.
 Source: Stacks 03D2 (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
@@ -268,14 +152,7 @@ Proof: sectionwise pushforward is additive. Its adjunction makes its left adjoin
 additive by the preadditive adjunction criterion. -/
 @[instance] theorem ordinaryIntegralModulePull_additive :
     (ordinaryIntegralModulePull l E f).Additive := by
-  have : (ordinaryIntegralModulePush l E f).Additive := by
-    constructor
-    intro M N a b
-    apply SheafOfModules.hom_ext
-    apply PresheafOfModules.hom_ext
-    intro U
-    rfl
-  exact (ordinaryIntegralModuleAdjunction l E f).left_adjoint_additive
+  sorry
 
 /-- The canonical total left derived functor exists on the unbounded category.
 Source: Stacks 06YY (blueprint: lem-tw-ordinary-completed-integral-pullback).
@@ -332,170 +209,6 @@ theorem ordinaryIntegralPullComplexCounit_isIso
     IsIso (ordinaryIntegralPullComplexCounit l E f P.obj) := by
   sorry
 
-
-private def ordinaryFinitePush (n : ℕ) :=
-  coefficientProEtaleModuleDirectImage.{u, u} f
-    (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))
-
-private def ordinaryFiniteAdjunction (n : ℕ) :
-    integralOperationsLevelPullback l E f n ⊣ ordinaryFinitePush l E f n :=
-  coefficientProEtaleModuleAdjunction.{u, u} f
-    (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))
-
-private def ordinaryReductionPushIso (n : ℕ) :
-    ordinaryFinitePush l E f n ⋙ scalarReductionRestriction l E Y n ≅
-      scalarReductionRestriction l E X n ⋙ ordinaryIntegralModulePush l E f := by
-  let πY := (sheafCompose (ProEt.topology Y)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-      (completedIntegralCommRingProjectionUnrestricted l E Y n)
-  let πX := (sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-      (completedIntegralCommRingProjectionUnrestricted l E X n)
-  have h : ordinaryIntegralDirectRingMap l E f ≫
-      (proEtaleSheafDirectImage f RingCat.{u + 1}).map πX =
-    πY ≫ ordinaryIntegralFiniteDirectRingMap l E f n :=
-    (ordinaryIntegralDirectRingMap_existsUnique l E f).exists.choose_spec n
-  exact ordinaryRestrictionPushforwardIso πY πX
-    (ordinaryIntegralDirectRingMap l E f) (ordinaryIntegralFiniteDirectRingMap l E f n) h
-
-private def ordinaryReductionAdjunction (W : Scheme.{u}) (n : ℕ) :
-    unrestrictedIntegralReductionFunctor l E W n ⊣ scalarReductionRestriction l E W n :=
-  (scalarReductionExtension_adjunction l E W n).choose
-
-private theorem ordinaryReductionUnit_apply (W : Scheme.{u}) (n : ℕ)
-    (M : integralTowerModules l E W) (U : W.ProEtᵒᵖ) (x : M.val.obj U) :
-    ((ordinaryReductionAdjunction l E W n).unit.app M).val.app U x =
-      unrestrictedIntegralTensorSection l E W n M U 1 x := by
-  exact (scalarReductionExtension_adjunction l E W n).choose_spec M U x
-
-private abbrev ordinaryFiniteAugmentationTarget (n : ℕ) :=
-  unrestrictedIntegralReductionFunctor l E Y n ⋙ integralOperationsLevelPullback l E f n ⋙
-    scalarReductionRestriction l E X n
-
-private def ordinaryFiniteAugmentationAdjunct (n : ℕ) :
-    𝟭 (integralTowerModules l E Y) ⟶
-      ordinaryFiniteAugmentationTarget l E f n ⋙ ordinaryIntegralModulePush l E f :=
-  (ordinaryReductionAdjunction l E Y n).unit ≫
-    Functor.whiskerLeft (unrestrictedIntegralReductionFunctor l E Y n)
-      (Functor.whiskerRight (ordinaryFiniteAdjunction l E f n).unit
-        (scalarReductionRestriction l E Y n)) ≫
-    Functor.whiskerLeft (unrestrictedIntegralReductionFunctor l E Y n ⋙
-      integralOperationsLevelPullback l E f n) (ordinaryReductionPushIso l E f n).hom
-
-private def ordinaryFiniteAugmentation (n : ℕ) :
-    ordinaryIntegralModulePull l E f ⟶ ordinaryFiniteAugmentationTarget l E f n where
-  app M := ((ordinaryIntegralModuleAdjunction l E f).homEquiv M _).symm
-    ((ordinaryFiniteAugmentationAdjunct l E f n).app M)
-  naturality {M N} a := by
-    apply ((ordinaryIntegralModuleAdjunction l E f).homEquiv M _).injective
-    rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
-    simp only [Equiv.apply_symm_apply]
-    exact (ordinaryFiniteAugmentationAdjunct l E f n).naturality a
-
-private theorem ordinaryFiniteAugmentation_apply (n : ℕ)
-    (M : integralTowerModules l E Y) (V : Y.ProEt) (x : M.val.obj (op V)) :
-    ((ordinaryFiniteAugmentation l E f n).app M).val.app
-        (op ((proEtaleBaseChange f).obj V))
-        (((ordinaryIntegralModuleAdjunction l E f).unit.app M).val.app (op V) x) =
-      integralOperationsPullbackGenerator l E f n
-        ((unrestrictedIntegralReductionFunctor l E Y n).obj M) V
-          (unrestrictedIntegralTensorSection l E Y n M (op V) 1 x) := by
-  have h := ((ordinaryIntegralModuleAdjunction l E f).homEquiv M _).apply_symm_apply
-    ((ordinaryFiniteAugmentationAdjunct l E f n).app M)
-  rw [Adjunction.homEquiv_unit] at h
-  have h' := congrArg (fun k ↦ k.val.app (op V) x) h
-  change ((ordinaryFiniteAugmentation l E f n).app M).val.app
-      (op ((proEtaleBaseChange f).obj V))
-      (((ordinaryIntegralModuleAdjunction l E f).unit.app M).val.app (op V) x) =
-    integralOperationsPullbackGenerator l E f n
-      ((unrestrictedIntegralReductionFunctor l E Y n).obj M) V
-        (((ordinaryReductionAdjunction l E Y n).unit.app M).val.app (op V) x) at h'
-  rw [ordinaryReductionUnit_apply] at h'
-  exact h'
-
-private theorem ordinaryPullbackHom_ext
-    {M : integralTowerModules l E Y} {N : integralTowerModules l E X}
-    (a b : (ordinaryIntegralModulePull l E f).obj M ⟶ N)
-    (h : ∀ (V : Y.ProEt) (x : M.val.obj (op V)),
-      (a.val.app (op ((proEtaleBaseChange f).obj V)))
-        (((ordinaryIntegralModuleAdjunction l E f).unit.app M).val.app (op V) x) =
-      (b.val.app (op ((proEtaleBaseChange f).obj V)))
-        (((ordinaryIntegralModuleAdjunction l E f).unit.app M).val.app (op V) x)) :
-    a = b := by
-  apply ((ordinaryIntegralModuleAdjunction l E f).homEquiv M N).injective
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro V
-  ext x
-  exact h V.unop x
-
-private instance ordinaryFiniteAugmentationTarget_additive (n : ℕ) :
-    (ordinaryFiniteAugmentationTarget l E f n).Additive := by
-  have := unrestrictedIntegralReductionFunctor_additive.{u, u} l E Y n
-  have := integralOperationsLevelPullback_additive.{u, u} l E f n
-  dsimp only [ordinaryFiniteAugmentationTarget, scalarReductionRestriction]
-  infer_instance
-
-private def ordinaryFiniteAugmentationComplex (n : ℕ) :
-    ordinaryIntegralPullComplex l E f ⟶ integralOperationsPullbackLevel l E f n := by
-  letI := ordinaryFiniteAugmentationTarget_additive l E f n
-  exact NatTrans.mapHomologicalComplex (ordinaryFiniteAugmentation l E f n) (.up ℤ)
-
-private theorem ordinaryFiniteAugmentationComplex_apply (n : ℕ)
-    (P : CochainComplex (integralTowerModules l E Y) ℤ)
-    (i : ℤ) (V : Y.ProEt) (x : (P.X i).val.obj (op V)) :
-    (((ordinaryFiniteAugmentationComplex l E f n).app P).f i).val.app
-        (op ((proEtaleBaseChange f).obj V))
-        (((ordinaryIntegralModuleAdjunction l E f).unit.app (P.X i)).val.app (op V) x) =
-      integralOperationsPullbackGenerator l E f n
-        (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i) V
-          (unrestrictedIntegralTensorSection l E Y n (P.X i) (op V) 1 x) := by
-  exact ordinaryFiniteAugmentation_apply l E f n (P.X i) V x
-
-private theorem ordinaryFiniteAugmentationComplex_transition (n : ℕ) :
-    ordinaryFiniteAugmentationComplex l E f (n + 1) ≫
-        integralOperationsPullbackTransition l E f n =
-      ordinaryFiniteAugmentationComplex l E f n := by
-  apply NatTrans.ext
-  funext P
-  apply HomologicalComplex.Hom.ext
-  funext i
-  apply ordinaryPullbackHom_ext l E f
-  intro V x
-  change (((integralOperationsPullbackTransition l E f n).app P).f i).val.app
-      (op ((proEtaleBaseChange f).obj V))
-      ((((ordinaryFiniteAugmentationComplex l E f (n + 1)).app P).f i).val.app
-        (op ((proEtaleBaseChange f).obj V))
-          (((ordinaryIntegralModuleAdjunction l E f).unit.app (P.X i)).val.app (op V) x)) = _
-  rw [ordinaryFiniteAugmentationComplex_apply]
-  rw [show integralOperationsPullbackTransition l E f n =
-    (integralOperationsPullbackTransition_existsUnique l E f n).exists.choose from rfl]
-  rw [(integralOperationsPullbackTransition_existsUnique l E f n).exists.choose_spec]
-  rw [show unrestrictedIntegralTransition l E Y n =
-    (unrestrictedIntegralTransition_existsUnique l E Y n).exists.choose from rfl]
-  rw [(unrestrictedIntegralTransition_existsUnique l E Y n).exists.choose_spec]
-  simp only [map_one]
-  exact (ordinaryFiniteAugmentationComplex_apply l E f n P i V x).symm
-
-private def ordinaryQuotientAugmentation :
-    ordinaryIntegralPullComplex l E f ⋙
-        (Functor.const ℕᵒᵖ : CochainComplex (integralTowerModules l E X) ℤ ⥤ _) ⟶
-      integralOperationsPullbackTowerFunctor l E f where
-  app P := NatTrans.ofOpSequence
-    (fun n ↦ (ordinaryFiniteAugmentationComplex l E f n).app P) (fun n ↦ by
-      simp only [Functor.comp_obj, Functor.const_obj_map,
-        integralOperationsPullbackTowerFunctor, Functor.flip_obj_map,
-        Functor.ofOpSequence_map_homOfLE_succ]
-      change (ordinaryFiniteAugmentationComplex l E f n).app P =
-        (ordinaryFiniteAugmentationComplex l E f (n + 1)).app P ≫
-          (integralOperationsPullbackTransition l E f n).app P
-      exact (congrArg (fun a ↦ a.app P)
-        (ordinaryFiniteAugmentationComplex_transition l E f n)).symm)
-  naturality {P Q} a := by
-    apply NatTrans.ext
-    funext n
-    exact (ordinaryFiniteAugmentationComplex l E f n.unop).naturality a
-
 /-- The quotient maps, as one natural map of strict towers, are uniquely fixed on generators.
 The formula is 1 tensor q ↦ 1 tensor (q tensor 1); completed linearity gives
 b tensor q ↦ 1 tensor (q tensor pi_n(b)) on every inverse-image generator.
@@ -518,20 +231,7 @@ theorem ordinaryIntegralQuotientAugmentation_existsUnique :
         integralOperationsPullbackGenerator l E f n
           (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i) V
           (unrestrictedIntegralTensorSection l E Y n (P.X i) (op V) 1 x) := by
-  refine ⟨ordinaryQuotientAugmentation l E f, ?_, ?_⟩
-  · intro P n i V x
-    exact ordinaryFiniteAugmentationComplex_apply l E f n P i V x
-  · intro a ha
-    apply NatTrans.ext
-    funext P
-    apply NatTrans.ext
-    funext n
-    apply HomologicalComplex.Hom.ext
-    funext i
-    apply ordinaryPullbackHom_ext l E f
-    intro V x
-    exact (ha P n.unop i V x).trans
-      (ordinaryFiniteAugmentationComplex_apply l E f n.unop P i V x).symm
+  sorry
 
 /-- The actual quotient augmentation, with all quotient transitions retained.
 Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 08TC
@@ -546,21 +246,6 @@ def ordinaryIntegralProductAugmentation
     (ordinaryIntegralPullComplex l E f).obj P ⟶
       ∏ᶜ (fun n : ℕ ↦ ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n)) :=
   Pi.lift (fun n ↦ ((ordinaryIntegralQuotientAugmentation l E f).app P).app (op n))
-
-private theorem ordinaryCone_killed
-    {A : Type*} [Category A] [Preadditive A]
-    (C : ℕᵒᵖ ⥤ A) [HasProduct (fun n : ℕ ↦ C.obj (op n))]
-    {B : A} (a : (Functor.const ℕᵒᵖ).obj B ⟶ C) :
-    Pi.lift (fun n : ℕ ↦ a.app (op n)) ≫
-      towerTransitionEndomorphism (K := fun n : ℕ ↦ C.obj (op n))
-        (fun n ↦ C.map (homOfLE (Nat.le_succ n)).op) = 0 := by
-  apply Pi.hom_ext
-  intro n
-  have hn := a.naturality (homOfLE (Nat.le_succ n)).op
-  simpa only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
-    Preadditive.sub_comp, Category.assoc, Category.comp_id, Category.id_comp,
-    Pi.lift_π, Pi.lift_π_assoc, zero_comp, Functor.const_obj_map] using
-    sub_eq_zero.mpr (by simpa using hn)
 
 /-- The strict quotient augmentation is killed by 1-s, with zero second cone cochain.
 Source: Stacks 08TC (blueprint: lem-tw-ordinary-completed-integral-pullback).
@@ -580,14 +265,7 @@ theorem ordinaryIntegralCompletionChain_condition
               ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n))
             (integralOperationsTowerStep
               ((integralOperationsPullbackTowerFunctor l E f).obj P))) = 0 := by
-  have h : ordinaryIntegralProductAugmentation l E f P ≫
-      towerTransitionEndomorphism
-        (K := fun n : ℕ ↦ ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n))
-        (integralOperationsTowerStep ((integralOperationsPullbackTowerFunctor l E f).obj P)) =
-      0 := by
-    exact ordinaryCone_killed _ ((ordinaryIntegralQuotientAugmentation l E f).app P)
-  rw [h]
-  simp
+  sorry
 
 /-- The prescribed chain map into Cone(1-s)[-1]: quotient maps and zero, respectively.
 Source: Stacks 08TC (blueprint: lem-tw-ordinary-completed-integral-pullback). -/

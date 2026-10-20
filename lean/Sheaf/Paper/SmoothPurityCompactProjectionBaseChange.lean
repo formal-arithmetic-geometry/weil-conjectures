@@ -1,330 +1,329 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group F8
+Authors: SHEAF group Q110
 -/
 module
 
-public import Sheaf.Paper.SmoothPurityCompactProjectionData
-import Sheaf.Paper.SmoothPurityCompactProjectionFinitePresentation
-import Sheaf.Paper.SmoothPurityCompactProjectionTowerPresentation
-import Sheaf.Paper.SmoothPurityCompactProjectionTensorSquare
-import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
+public import Sheaf.Paper.FiniteFieldFiber
+public import Sheaf.Paper.SmoothPurityCoefficientTowersAbelian
+public import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+public import Sheaf.SixFunctors.OpenTensorNormalization
+public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.Paper.ProjectionMateExact
+import Sheaf.CategoryTheory.DiagramSiteRealization
 
-/-! # Compact-support projection and arbitrary base change
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Mathlib.CategoryTheory.Sites.Limits
+/-!
+# Compact-support projection and arbitrary base change
 
-Source: blueprint main-20261015, proof (2) of `det-sp-purity-bc-factors`;
+Source: blueprint main-20261015, `det-sp-purity-bc-factors`, proof (2);
 Stacks 0E48 and 0GL1 (blueprint: lem-sp-compact-projection-base-change).
+The presentations retain the sectionwise direct images, exact inverse images,
+K-flat tensor comparisons and adjunction mates. Both ordinary coefficients and
+varying coefficient systems use ordinary unbounded derived categories.
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
+
 universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 open AlgebraicGeometry.Scheme.ProjectionRestriction
 open SheafOfModules.OpenTensorNormalization
 open scoped CategoryTheory.Functor
+
 namespace AlgebraicGeometry.ProEtale.CompactProjectionBaseChange
 
--- The uncurried form of the mate calculation, following the private calculation in
--- RingedExchangeTensorCoherence; it applies to the original independent universes.
-set_option backward.isDefEq.respectTransparency false in
-private theorem tensor_mate_coherence
-    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-    {F : A ⥤ B} {R : B ⥤ A} {G : A ⥤ C} {H : B ⥤ D} {K : C ⥤ D} {S : D ⥤ C}
-    (adj : F ⊣ R) (adj' : K ⊣ S)
-    (T : A × A ⥤ A) (U : B × B ⥤ B) (V : C × C ⥤ C) (W : D × D ⥤ D)
-    (tF : T ⋙ F ⟶ (F.prod F) ⋙ U) (tG : T ⋙ G ⟶ (G.prod G) ⋙ V)
-    (tH : U ⋙ H ⟶ (H.prod H) ⋙ W) (tK : V ⋙ K ⟶ (K.prod K) ⋙ W)
-    (theta : G ⋙ K ≅ F ⋙ H)
-    (hc : ∀ P Q : A,
-      theta.hom.app (T.obj (P, Q)) ≫ H.map (tF.app (P, Q)) ≫
-        tH.app (F.obj P, F.obj Q) =
-      K.map (tG.app (P, Q)) ≫ tK.app (G.obj P, G.obj Q) ≫
-        W.map (CategoryTheory.Prod.mkHom (theta.hom.app P) (theta.hom.app Q)))
-    (E : B) (Q : A) :
-    G.map (adj.homEquiv _ _ (tF.app (R.obj E, Q) ≫
-        U.map (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q))))) ≫
-      (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans.app
-        (U.obj (E, F.obj Q)) ≫
-      S.map (tH.app (E, F.obj Q) ≫
-        W.map (CategoryTheory.Prod.mkHom (𝟙 (H.obj E)) (theta.inv.app Q))) =
-    tG.app (R.obj E, Q) ≫
-      V.map (CategoryTheory.Prod.mkHom
-        ((mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans.app E)
-        (𝟙 (G.obj Q))) ≫
-      adj'.homEquiv _ _ (tK.app (S.obj (H.obj E), G.obj Q) ≫
-        W.map (CategoryTheory.Prod.mkHom (adj'.counit.app (H.obj E))
-          (𝟙 (K.obj (G.obj Q))))) := by
-  let ex := (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans
-  let pi := adj.homEquiv _ _ (tF.app (R.obj E, Q) ≫
-    U.map (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q))))
-  have hex (Z : B) : K.map (ex.app Z) ≫ adj'.counit.app (H.obj Z) =
-      theta.hom.app (R.obj Z) ≫ H.map (adj.counit.app Z) :=
-    mateEquiv_counit adj adj' (TwoSquare.mk G F K H theta.hom) Z
-  dsimp only [Functor.id_obj, Functor.comp_obj]
-  apply (adj'.homEquiv _ _).symm.injective
-  change (adj'.homEquiv _ _).symm (G.map pi ≫ ex.app _ ≫ S.map _) = _
-  rw [adj'.homEquiv_naturality_left_symm,
-    adj'.homEquiv_naturality_right_symm]
-  rw [adj'.homEquiv_counit, hex]
-  simp only [Adjunction.homEquiv_naturality_left_symm, Equiv.symm_apply_apply]
-  have hn := theta.hom.naturality pi
-  dsimp at hn
-  dsimp only [Functor.id_obj] at *
-  simp only [← Category.assoc]
-  rw [hn]
-  have hpi : F.map pi ≫ adj.counit.app (U.obj (E, F.obj Q)) =
-      tF.app (R.obj E, Q) ≫
-        U.map (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q))) := by
-    exact (adj.homEquiv _ _).symm_apply_apply _
-  simp only [Category.assoc]
-  rw [← H.map_comp_assoc, hpi, H.map_comp, Category.assoc]
-  have htH := tH.naturality
-    (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q)))
-  have htK := tK.naturality
-    (CategoryTheory.Prod.mkHom (ex.app E) (𝟙 (G.obj Q)))
-  dsimp at htH htK
-  rw [reassoc_of% htH, reassoc_of% htK]
-  rw [reassoc_of% (hc (R.obj E) Q)]
-  simp only [← W.map_comp]
-  congr 2
-  congr 1
-  ext
-  · simpa using (hex E).symm
-  · simp
+/-- Ring coefficients on the ordinary or vertical site, with their structural maps.
+These data are pinned to the constant finite ring or the recorded quotient-ring system
+in the final statement. Source: blueprint proof (2); Stacks 0E48
+(blueprint: lem-sp-compact-projection-base-change). -/
+structure Coefficients (m : Mode) where
+  ring : ∀ T : Scheme.{u}, Sheaf (topology m T) CommRingCat.{u + 1}
+  map : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), ring Y ⟶
+    ((baseChange m f).sheafPushforwardContinuous CommRingCat.{u + 1}
+      (topology m Y) (topology m X)).obj (ring X)
 
+/-- The coefficient map after forgetting only commutativity.
+Source: Stacks 03D7 (blueprint: lem-sp-compact-projection-base-change). -/
+def Coefficients.moduleMap {m : Mode} (c : Coefficients.{u} m)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (sheafCompose (topology m Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (c.ring Y) ⟶
+      ((baseChange m f).sheafPushforwardContinuous RingCat.{u + 1}
+        (topology m Y) (topology m X)).obj
+          ((sheafCompose (topology m X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+            (c.ring X)) :=
+  ⟨Functor.whiskerRight (c.map f).hom (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
 
-private def properProjection {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
-    {B Y : Scheme.{u}} (p : B ⟶ Y) (M : Der (c.ring B)) (K : Der (c.ring Y)) :=
-  (o.operation p).derivedAdjunction.homEquiv _ _
-    ((o.tensorComparison p).comparison.hom.app ((o.operation p).right.obj M, K) ≫
-      (o.tensor B).functor.map
-        (CategoryTheory.Prod.mkHom ((o.operation p).derivedAdjunction.counit.app M)
-          (𝟙 ((o.operation p).left.obj K))))
+/-- The canonical iterated fibre-product comparison on the site.
+Its factors are the existing pullback-composition comparisons and the square equation.
+Source: Stacks 09A5, 0E48 (blueprint: lem-sp-compact-projection-base-change). -/
+def siteSquare (m : Mode) {X' X Y' Y : Scheme.{u}}
+    {a : X' ⟶ X} {b : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (s : CommSq a b f g) : baseChange m g ⋙ baseChange m b ≅
+      baseChange m f ⋙ baseChange m a := by
+  let e : proEtaleBaseChange g ⋙ proEtaleBaseChange b ≅
+      proEtaleBaseChange f ⋙ proEtaleBaseChange a :=
+    (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) b g).symm ≪≫
+      eqToIso (congrArg (fun h => proEtaleBaseChange h) s.w.symm) ≪≫
+        MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) a f
+  cases m with
+  | ordinary => exact e
+  | systems => exact NatIso.prod (Iso.refl (𝟭 ℕ)) e
 
-private def properExchange {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
-    {B' B Y' Y : Scheme.{u}} {b : B' ⟶ B} {p' : B' ⟶ Y'} {p : B ⟶ Y}
-    {v : Y' ⟶ Y} (s : CommSq b p' p v) :=
-  (mateEquiv (o.operation p).derivedAdjunction (o.operation p').derivedAdjunction
-    (TwoSquare.mk _ _ _ _ (o.square s).hom)).natTrans
+/-- Exact open extension as the left adjoint to the actual module inverse image.
+The adjunction determines it up to its unique compatible isomorphism. This is
+termwise extension by zero, including the vertical site of varying ring systems.
+Source: Stacks 03DI, 0F6Z (blueprint: lem-sp-compact-projection-base-change). -/
+structure OpenModel {m : Mode} {c : Coefficients.{u} m}
+    {U T : Scheme.{u}} (j : U ⟶ T)
+    (o : Operation (baseChange m j) (c.ring T) (c.ring U)) where
+  functor : Mod (c.ring U) ⥤ Mod (c.ring T)
+  adjunction : functor ⊣ o.pullback
+  [additive : functor.Additive]
+  [limits : PreservesFiniteLimits functor]
+  [colimits : PreservesFiniteColimits functor]
+  unit : ∀ M, IsIso (adjunction.unit.app M)
 
-private theorem proper_compatibility {m : Mode} {c : Coefficients.{u} m}
-    (o : Presentation c) {B' B Y' Y : Scheme.{u}}
-    {b : B' ⟶ B} {p' : B' ⟶ Y'} {p : B ⟶ Y} {v : Y' ⟶ Y}
-    (s : CommSq b p' p v) (M : Der (c.ring B)) (K : Der (c.ring Y)) :
-    (o.operation v).left.map (properProjection o p M K) ≫
-        (properExchange o s).app
-          ((o.tensor B).functor.obj (M, (o.operation p).left.obj K)) ≫
-        (o.operation p').right.map
-          ((o.tensorComparison b).comparison.hom.app (M, (o.operation p).left.obj K) ≫
-            (o.tensor B').functor.map
-              (CategoryTheory.Prod.mkHom (𝟙 ((o.operation b).left.obj M))
-                ((o.square s).inv.app K))) =
-      (o.tensorComparison v).comparison.hom.app ((o.operation p).right.obj M, K) ≫
-        (o.tensor Y').functor.map (CategoryTheory.Prod.mkHom
-          ((properExchange o s).app M) (𝟙 ((o.operation v).left.obj K))) ≫
-        properProjection o p' ((o.operation b).left.obj M) ((o.operation v).left.obj K) := by
-  exact tensor_mate_coherence (o.operation p).derivedAdjunction
-    (o.operation p').derivedAdjunction
-    (o.tensor Y).functor (o.tensor B).functor (o.tensor Y').functor (o.tensor B').functor
-    (o.tensorComparison p).comparison.hom (o.tensorComparison v).comparison.hom
-    (o.tensorComparison b).comparison.hom (o.tensorComparison p').comparison.hom
-    (o.square s) (o.tensor_square s) M K
+attribute [instance] OpenModel.additive OpenModel.limits OpenModel.colimits
 
-private theorem properProjection_naturality {m : Mode} {c : Coefficients.{u} m}
-    (o : Presentation c) {B Y : Scheme.{u}} (p : B ⟶ Y)
-    {M N : Der (c.ring B)} {K L : Der (c.ring Y)} (r : M ⟶ N) (z : K ⟶ L) :
-    (o.tensor Y).functor.map (CategoryTheory.Prod.mkHom ((o.operation p).right.map r) z) ≫
-        properProjection o p N L =
-      properProjection o p M K ≫ (o.operation p).right.map
-        ((o.tensor B).functor.map
-          (CategoryTheory.Prod.mkHom r ((o.operation p).left.map z))) := by
-  let t := (o.operation p).derivedAdjunction.rightAdjointProjectionMap
-    (o.curriedTensorComparison p).hom
-  have H := (Functor.uncurry.map t).naturality (CategoryTheory.Prod.mkHom r z)
-  simpa [t, Adjunction.rightAdjointProjectionMap_app_app, properProjection,
-    Presentation.curriedTensorComparison, curryPostIso, curryPreIso,
-    ← Functor.map_comp, prod_comp, Category.id_comp, Category.comp_id] using H
+/-- Canonical operations on the fixed ringed sites. The ordinary direct image is
+literal sectionwise direct image with the specified coefficient map. Inverse image
+is its module left adjoint, and its exact localization and K-injective right derived
+functor are the existing constructions `Operation.left` and `Operation.right`.
+Tensor comparisons retain their pure-section and K-flat total-complex normalizations.
+The right squares are fixed on every section by the actual fibre-product comparison;
+no derived exchange/projection coherence is assumed here.
+Source: Stacks 03D7, 07A4, 07A5, 0E48, 0GL1
+(blueprint: lem-sp-compact-projection-base-change). -/
+structure Presentation {m : Mode} (c : Coefficients.{u} m) where
+  operation : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
+    Operation (baseChange m f) (c.ring Y) (c.ring X)
+  coefficient : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
+    (operation f).coefficient = c.moduleMap f
+  tensor : ∀ T : Scheme.{u}, TensorModel (c.ring T)
+  ordinaryTensor : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
+    Operation.OrdinaryTensor (operation f)
+  tensorComparison : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
+    TensorComparison (operation f).pullback (operation f).leftModel
+      (tensor Y) (tensor X) (ordinaryTensor f).iso
+  openModel : ∀ {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j],
+    OpenModel j (operation j)
+  rightSquare : ∀ {X' X Y' Y : Scheme.{u}}
+    {a : X' ⟶ X} {b : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (_s : CommSq a b f g),
+    (operation b).pushforward ⋙ (operation g).pushforward ≅
+      (operation a).pushforward ⋙ (operation f).pushforward
+  rightSections : ∀ {X' X Y' Y : Scheme.{u}}
+    {a : X' ⟶ X} {b : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (s : CommSq a b f g) (M : Mod (c.ring X')) (W : (Site m Y)ᵒᵖ),
+    HEq (fun x => ((rightSquare s).hom.app M).val.app W x)
+      (fun x => M.val.map ((siteSquare m s).inv.app W.unop).op x)
 
-private theorem projection_factorization {m : Mode} {c : Coefficients.{u} m}
-    (o : Presentation c) (h : OpenComparisons o) {X B Y : Scheme.{u}}
-    (j : X ⟶ B) [IsOpenImmersion j] (p : B ⟶ Y)
-    (M : Der (c.ring X)) (K : Der (c.ring Y)) :
-    o.projection h j p M K = properProjection o p ((o.shriek j).obj M) K ≫
-      (o.operation p).right.map ((o.gammaIso h j).hom.app (M, (o.operation p).left.obj K)) := by
-  simp [Presentation.projection,
-    CategoryTheory.SuppliedExchangeProjection.compactificationProjectionFromData,
-    Adjunction.rightAdjointProjectionMap_app_app, Presentation.openProjectionIso,
-    Presentation.curriedTensorComparison, curryPostIso, curryPreIso, properProjection]
+/-- The ordinary inverse-image square is the conjugate of the sectionwise direct-image
+square. Source: Stacks 04J0, 0E48 (blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.ordinarySquare {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    {X' X Y' Y : Scheme.{u}} {a : X' ⟶ X} {b : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (s : CommSq a b f g) :
+    (o.operation g).pullback ⋙ (o.operation b).pullback ≅
+      (o.operation f).pullback ⋙ (o.operation a).pullback :=
+  (conjugateIsoEquiv ((o.operation f).moduleAdjunction.comp (o.operation a).moduleAdjunction)
+    ((o.operation g).moduleAdjunction.comp (o.operation b).moduleAdjunction)).symm
+      (o.rightSquare s).symm
 
-private theorem exchange_factorization {m : Mode} {c : Coefficients.{u} m}
-    (o : Presentation c) (h : OpenComparisons o) {X' X B' B Y' Y : Scheme.{u}}
+/-- Exact termwise localization of that very ordinary square.
+Source: Stacks 0735, 0E48 (blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.square {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    {X' X Y' Y : Scheme.{u}} {a : X' ⟶ X} {b : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (s : CommSq a b f g) :
+    (o.operation g).left ⋙ (o.operation b).left ≅
+      (o.operation f).left ⋙ (o.operation a).left :=
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (o.ordinarySquare s) ≪≫
+      Functor.mapDerivedCategoryCompIso _ _
+
+/-- The actual termwise open extension on unbounded complexes.
+Source: Stacks 015F, 03DI (blueprint: lem-sp-compact-projection-base-change). -/
+abbrev Presentation.shriek {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] :=
+  (o.openModel j).functor.mapDerivedCategory
+
+/-- Localization of the ordinary open adjunction, retaining its unit normalization.
+Source: Stacks 015F (blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.openAdjunction {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] :
+    o.shriek j ⊣ (o.operation j).left :=
+  exactDerivedAdjunction (o.openModel j).adjunction
+
+/-- Identity-component comparison between postcomposition and currying.
+Source: Mathlib currying conventions (blueprint: lem-sp-compact-projection-base-change). -/
+def curryPostIso {C D B H : Type v} [Category.{w} C] [Category.{w} D]
+    [Category.{w} B] [Category.{w} H] (T : C × D ⥤ B) (F : B ⥤ H) :
+    (Functor.postcompose₂.obj F).obj (Functor.curry.obj T) ≅
+      Functor.curry.obj (T ⋙ F) :=
+  NatIso.ofComponents (fun _ => NatIso.ofComponents (fun _ => Iso.refl _))
+
+/-- Identity-component comparison between precomposition and currying.
+Source: Mathlib currying conventions (blueprint: lem-sp-compact-projection-base-change). -/
+def curryPreIso {C D B H Z : Type v} [Category.{w} C] [Category.{w} D]
+    [Category.{w} B] [Category.{w} H] [Category.{w} Z]
+    (F : C ⥤ B) (G : D ⥤ H) (T : B × H ⥤ Z) :
+    Functor.curry.obj ((F.prod G) ⋙ T) ≅
+      (((Functor.whiskeringLeft₂ Z).obj F).obj G).obj (Functor.curry.obj T) :=
+  NatIso.ofComponents (fun _ => NatIso.ofComponents (fun _ => Iso.refl _))
+
+/-- The normalized tensor comparison in the curried interface of the dependency.
+Source: Stacks 07A4 (blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.curriedTensorComparison {m : Mode} {c : Coefficients.{u} m}
+    (o : Presentation c) {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  curryPostIso (o.tensor Y).functor (o.operation f).left ≪≫
+    Functor.curry.mapIso (o.tensorComparison f).comparison ≪≫
+      curryPreIso (o.operation f).left (o.operation f).left (o.tensor X).functor
+
+/-- Natural inverse open tensor comparison, constructed by the existing projection-map
+adjunction interface. Source: Stacks 0GL1, 0E8I
+(blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.gammaInvNat {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] :=
+  (o.openAdjunction j).projectionMap (o.operation j).left
+    (Functor.curry.obj (o.tensor U).functor) (Functor.curry.obj (o.tensor T).functor)
+    (o.curriedTensorComparison j).inv
+
+/-- Component of the canonical inverse open tensor comparison.
+Source: Stacks 0GL1, 0E8I (blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.gammaInv {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]
+    (M : Der (c.ring U)) (N : Der (c.ring T)) :=
+  ((o.gammaInvNat j).app M).app N
+
+/-- The natural inverse open base-change map is the mate of the canonical square.
+Source: Stacks 03S6 (blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.betaInvNat {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    {X' X B' B : Scheme.{u}} {a : X' ⟶ X} {j' : X' ⟶ B'} {j : X ⟶ B} {h : B' ⟶ B}
+    [IsOpenImmersion j] [IsOpenImmersion j'] (s : IsPullback a j' j h) :=
+  ((mateEquiv (o.openAdjunction j) (o.openAdjunction j')).symm
+    (TwoSquare.mk _ _ _ _ (o.square s.toCommSq).inv)).natTrans
+
+/-- Component of the canonical inverse open base-change comparison.
+Source: Stacks 03S6 (blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.betaInv {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    {X' X B' B : Scheme.{u}} {a : X' ⟶ X} {j' : X' ⟶ B'} {j : X ⟶ B} {h : B' ⟶ B}
+    [IsOpenImmersion j] [IsOpenImmersion j'] (s : IsPullback a j' j h)
+    (M : Der (c.ring X)) :=
+  (o.betaInvNat s).app M
+
+/-- Only open comparison invertibility is recorded here, not the compact-support
+projection formula or proper exchange invertibility. These are the open-normalization
+conclusions, equally for strict varying coefficient systems.
+Source: Stacks 03S6, 0GL1 (blueprint: lem-sp-compact-projection-base-change). -/
+structure OpenComparisons {m : Mode} {c : Coefficients.{u} m} (o : Presentation c) : Prop where
+  gamma : ∀ {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]
+    (M : Der (c.ring U)) (N : Der (c.ring T)), IsIso (o.gammaInv j M N)
+  beta : ∀ {X' X B' B : Scheme.{u}} {a : X' ⟶ X} {j' : X' ⟶ B'}
+    {j : X ⟶ B} {h : B' ⟶ B} [IsOpenImmersion j] [IsOpenImmersion j']
+    (s : IsPullback a j' j h) (M : Der (c.ring X)), IsIso (o.betaInv s M)
+
+/-- The canonical open tensor isomorphism with both variables retained.
+Source: Stacks 0GL1 (blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.gammaIso {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    (h : OpenComparisons o) {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] :
+    (o.shriek j).prod (𝟭 _) ⋙ (o.tensor T).functor ≅
+      (𝟭 _).prod (o.operation j).left ⋙ (o.tensor U).functor ⋙ o.shriek j := by
+  let t := Functor.uncurry.map (o.gammaInvNat j)
+  letI : ∀ Z, IsIso (t.app Z) := fun Z => h.gamma j Z.1 Z.2
+  letI : IsIso t := NatIso.isIso_of_isIso_app t
+  refine ?_ ≪≫ (asIso t).symm ≪≫ ?_
+  · exact NatIso.ofComponents (fun _ => Iso.refl _)
+  · exact NatIso.ofComponents (fun _ => Iso.refl _) (by
+      intro Z W f
+      dsimp
+      simp only [Category.comp_id, Category.id_comp, ← Functor.map_comp, prod_comp])
+
+/-- The canonical natural open base-change isomorphism.
+Source: Stacks 03S6 (blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.betaIso {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    (h : OpenComparisons o) {X' X B' B : Scheme.{u}}
     {a : X' ⟶ X} {j' : X' ⟶ B'} {j : X ⟶ B} {b : B' ⟶ B}
-    {p' : B' ⟶ Y'} {p : B ⟶ Y} {v : Y' ⟶ Y}
-    [IsOpenImmersion j] [IsOpenImmersion j']
-    (so : IsPullback a j' j b) (sp : CommSq b p' p v) (M : Der (c.ring X)) :
-    o.exchange h so sp M = (properExchange o sp).app ((o.shriek j).obj M) ≫
-      (o.operation p').right.map ((o.betaIso h so).hom.app M) := by
-  simp [Presentation.exchange, properExchange,
-    CategoryTheory.SuppliedExchangeProjection.compactificationExchangeFromData]
+    [IsOpenImmersion j] [IsOpenImmersion j'] (s : IsPullback a j' j b) :
+    o.shriek j ⋙ (o.operation b).left ≅ (o.operation a).left ⋙ o.shriek j' := by
+  letI : ∀ M, IsIso ((o.betaInvNat s).app M) := h.beta s
+  letI : IsIso (o.betaInvNat s) := NatIso.isIso_of_isIso_app _
+  exact (asIso (o.betaInvNat s)).symm
 
-private theorem inverse_square {C : Type v} [Category.{w} C]
-    {A B C' D : C} (p : A ⟶ B) (c : B ⟶ C') (b : A ⟶ D) (q : D ⟶ C')
-    [IsIso p] [IsIso c] [IsIso q] (h : p ≫ c = b ≫ q) :
-    inv c ≫ inv p ≫ b = inv q := by
-  apply (cancel_mono q).1
-  calc
-    (inv c ≫ inv p ≫ b) ≫ q = inv c ≫ inv p ≫ (b ≫ q) := by simp
-    _ = inv c ≫ inv p ≫ (p ≫ c) := by rw [h]
-    _ = inv q ≫ q := by simp
-
-section OpenCompatibility
-variable {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
-  (h : OpenComparisons o) {X' X B' B : Scheme.{u}}
-  {a : X' ⟶ X} {j' : X' ⟶ B'} {j : X ⟶ B} {b : B' ⟶ B}
-  [IsOpenImmersion j] [IsOpenImmersion j'] (so : IsPullback a j' j b)
-
-omit [IsOpenImmersion j] [IsOpenImmersion j'] in
-private theorem inverse_tensor_square (M N : Der (c.ring B)) :
-    (o.operation a).left.map ((o.tensorComparison j).comparison.inv.app (M, N)) ≫
-        (o.square so.toCommSq).inv.app ((o.tensor B).functor.obj (M, N)) ≫
-        (o.operation j').left.map ((o.tensorComparison b).comparison.hom.app (M, N)) =
-      (o.tensorComparison a).comparison.hom.app
-          ((o.operation j).left.obj M, (o.operation j).left.obj N) ≫
-        (o.tensor X').functor.map (CategoryTheory.Prod.mkHom
-          ((o.square so.toCommSq).inv.app M) ((o.square so.toCommSq).inv.app N)) ≫
-        (o.tensorComparison j').comparison.inv.app
-          ((o.operation b).left.obj M, (o.operation b).left.obj N) := by
-  apply (cancel_epi ((o.square so.toCommSq).hom.app
-    ((o.tensor B).functor.obj (M, N)) ≫
-    (o.operation a).left.map ((o.tensorComparison j).comparison.hom.app (M, N)))).1
-  simp only [Category.assoc]
-  rw [reassoc_of% (o.tensor_square so.toCommSq M N)]
-  simp only [← Functor.map_comp_assoc, prod_comp, Iso.hom_inv_id_app]
-  simp
-
-private theorem open_inverse_compatibility (M : Der (c.ring X))
-    (N : Der (c.ring B)) :
-    o.betaInv so ((o.tensor X).functor.obj (M, (o.operation j).left.obj N)) ≫
-        (o.operation b).left.map (o.gammaInv j M N) ≫
-        (o.tensorComparison b).comparison.hom.app ((o.shriek j).obj M, N) =
-      (o.shriek j').map ((o.tensorComparison a).comparison.hom.app
-        (M, (o.operation j).left.obj N)) ≫
-        (o.shriek j').map ((o.tensor X').functor.map (CategoryTheory.Prod.mkHom
-          (𝟙 ((o.operation a).left.obj M)) ((o.square so.toCommSq).inv.app N))) ≫
-        o.gammaInv j' ((o.operation a).left.obj M) ((o.operation b).left.obj N) ≫
-        (o.tensor B').functor.map (CategoryTheory.Prod.mkHom (o.betaInv so M)
-          (𝟙 ((o.operation b).left.obj N))) := by
-  have H := Adjunction.projectionMap_mate (o.openAdjunction j) (o.openAdjunction j')
-    (o.operation j).left (o.operation j').left
-    (o.curriedTensorComparison j).inv (o.curriedTensorComparison j').inv
-    (o.curriedTensorComparison a).hom (o.curriedTensorComparison b).hom
-    (o.square so.toCommSq).inv (o.square so.toCommSq).inv (o.betaInvNat so)
-    (fun Z ↦ (unit_mateEquiv_symm (o.openAdjunction j) (o.openAdjunction j')
-      (TwoSquare.mk _ _ _ _ (o.square so.toCommSq).inv) Z).symm)
+/-- Restrict the open tensor comparison to the proper pullback input, in precisely
+that dependency's supplied-domain interface. Source: Stacks 0GL1
+(blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.openProjectionIso {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    (h : OpenComparisons o) {X B Y : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j]
+    (p : B ⟶ Y) :
+    (((Functor.whiskeringLeft₂ (Der (c.ring B))).obj (o.shriek j)).obj
+      (o.operation p).left).obj (Functor.curry.obj (o.tensor B).functor) ≅
+    (Functor.postcompose₂.obj (o.shriek j)).obj
+      ((((Functor.whiskeringLeft₂ (Der (c.ring X))).obj (𝟭 _)).obj
+        ((o.operation p).left ⋙ (o.operation j).left)).obj
+          (Functor.curry.obj (o.tensor X).functor)) :=
+  NatIso.ofComponents
+    (fun M => NatIso.ofComponents
+      (fun K => (o.gammaIso h j).app (M, (o.operation p).left.obj K))
+      (by
+        intro K L z
+        simpa using (o.gammaIso h j).hom.naturality
+          (CategoryTheory.Prod.mkHom (𝟙 M) ((o.operation p).left.map z))))
     (by
-      intro Z W
-      simpa [Presentation.curriedTensorComparison, curryPostIso, curryPreIso,
-        ← Functor.map_comp_assoc, prod_comp, Category.id_comp, Category.comp_id,
-        Category.assoc] using inverse_tensor_square o so Z W)
-    M N
-  simpa [Presentation.curriedTensorComparison, curryPostIso, curryPreIso,
-    Presentation.gammaInv, Presentation.gammaInvNat, Presentation.betaInv,
-    ← Functor.map_comp, prod_comp] using H
+      intro M N r
+      ext K
+      simpa using (o.gammaIso h j).hom.naturality
+        (CategoryTheory.Prod.mkHom r (𝟙 ((o.operation p).left.obj K))))
 
-private theorem gammaIso_inv {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]
-    (M : Der (c.ring U)) (N : Der (c.ring T)) :
-    (o.gammaIso h j).inv.app (M, N) = o.gammaInv j M N := by
-  simp [Presentation.gammaIso, Presentation.gammaInv]
-
-private theorem open_compatibility (M : Der (c.ring X)) (N : Der (c.ring B)) :
-    (o.operation b).left.map ((o.gammaIso h j).hom.app (M, N)) ≫
-        (o.betaIso h so).hom.app
-          ((o.tensor X).functor.obj (M, (o.operation j).left.obj N)) ≫
-        (o.shriek j').map
-          ((o.tensorComparison a).comparison.hom.app (M, (o.operation j).left.obj N) ≫
-            (o.tensor X').functor.map (CategoryTheory.Prod.mkHom
-              (𝟙 ((o.operation a).left.obj M)) ((o.square so.toCommSq).inv.app N))) =
-      (o.tensorComparison b).comparison.hom.app ((o.shriek j).obj M, N) ≫
-        (o.tensor B').functor.map (CategoryTheory.Prod.mkHom ((o.betaIso h so).hom.app M)
-          (𝟙 ((o.operation b).left.obj N))) ≫
-        (o.gammaIso h j').hom.app ((o.operation a).left.obj M, (o.operation b).left.obj N) := by
-  have hg := gammaIso_inv o h j M N
-  have hg' := gammaIso_inv o h j' ((o.operation a).left.obj M)
-    ((o.operation b).left.obj N)
-  have H := open_inverse_compatibility o so M N
-  change (o.betaIso h so).inv.app _ ≫ (o.operation b).left.map (o.gammaInv j M N) ≫ _ =
-    _ ≫ _ ≫ o.gammaInv j' _ _ ≫ (o.tensor B').functor.map
-      (CategoryTheory.Prod.mkHom ((o.betaIso h so).inv.app M) (𝟙 _)) at H
-  simp only [← hg, ← hg'] at H
-  change (o.betaIso h so).inv.app
-      ((o.tensor X).functor.obj (M, (o.operation j).left.obj N)) ≫
-      (o.operation b).left.map ((o.gammaIso h j).inv.app (M, N)) ≫
-      (o.tensorComparison b).comparison.hom.app ((o.shriek j).obj M, N) = _ at H
-  apply (cancel_epi ((o.betaIso h so).inv.app
-    ((o.tensor X).functor.obj (M, (o.operation j).left.obj N)) ≫
-    (o.operation b).left.map ((o.gammaIso h j).inv.app (M, N)))).1
-  simp only [Category.assoc]
-  conv_rhs => rw [reassoc_of% H]
-  dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.id_obj] at H ⊢
-  simp only [Functor.map_comp]
-  rw [← (o.tensor B').functor.map_comp_assoc]
-  simp only [prod_comp, Iso.inv_hom_id_app, Category.id_comp]
-  have hid : CategoryTheory.Prod.mkHom
-      (𝟙 (((o.operation a).left ⋙ o.shriek j').obj M))
-      (𝟙 ((o.operation b).left.obj N)) =
-      𝟙 ((((o.operation a).left ⋙ o.shriek j').obj M,
-        (o.operation b).left.obj N)) := rfl
-  rw [hid]
-  erw [(o.tensor B').functor.map_id]
-  rw [Category.id_comp]
-  erw [← (o.operation b).left.map_comp_assoc, Iso.inv_hom_id_app,
-    (o.operation b).left.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
-    Iso.inv_hom_id_app]
-  erw [Category.comp_id]
-
-
-end OpenCompatibility
-
-section FormalConsequences
-variable {m : Mode} {c : Coefficients.{u} m} (o : Presentation c) (h : OpenComparisons o)
-  {X B Y : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] (p : B ⟶ Y)
-
-private theorem projection_naturality
-    {M N : Der (c.ring X)} {K L : Der (c.ring Y)} (r : M ⟶ N) (z : K ⟶ L) :
-    (o.tensor Y).functor.map
-        (CategoryTheory.Prod.mkHom (((o.shriek j) ⋙ (o.operation p).right).map r) z) ≫
-      o.projection h j p N L =
-    o.projection h j p M K ≫ ((o.shriek j) ⋙ (o.operation p).right).map
-      ((o.tensor X).functor.map (CategoryTheory.Prod.mkHom r
-        ((o.operation j).left.map ((o.operation p).left.map z)))) := by
-  let t := CategoryTheory.SuppliedExchangeProjection.compactificationProjectionFromData
+/-- The proper counit-defined projection, followed by open tensor comparison.
+The pullback in the target is literally `j^* p^*`, implementing the stipulated
+composition identification with `f^*`. Source: blueprint proof (2); Stacks 0GL1, 0E48
+(blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.projection {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    (h : OpenComparisons o) {X B Y : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j]
+    (p : B ⟶ Y) (M : Der (c.ring X)) (K : Der (c.ring Y)) :
+    (o.tensor Y).functor.obj (((o.shriek j) ⋙ (o.operation p).right).obj M, K) ⟶
+      ((o.shriek j) ⋙ (o.operation p).right).obj
+        ((o.tensor X).functor.obj (M, (o.operation j).left.obj ((o.operation p).left.obj K))) :=
+  ((CategoryTheory.SuppliedExchangeProjection.compactificationProjectionFromData
     (o.shriek j) ((o.operation p).left ⋙ (o.operation j).left)
     (o.operation p).left (o.operation p).right (o.operation p).derivedAdjunction
     (Functor.curry.obj (o.tensor X).functor) (Functor.curry.obj (o.tensor B).functor)
     (Functor.curry.obj (o.tensor Y).functor)
-    (o.curriedTensorComparison p) (o.openProjectionIso h j p)
-  have H := (Functor.uncurry.map t).naturality (CategoryTheory.Prod.mkHom r z)
-  change
-    ((o.tensor Y).functor.map (CategoryTheory.Prod.mkHom
-        (((o.shriek j) ⋙ (o.operation p).right).map r) (𝟙 K)) ≫
-      (o.tensor Y).functor.map (CategoryTheory.Prod.mkHom (𝟙 _) z)) ≫
-        o.projection h j p N L =
-      o.projection h j p M K ≫
-        (((o.shriek j) ⋙ (o.operation p).right).map
-          ((o.tensor X).functor.map (CategoryTheory.Prod.mkHom r (𝟙 _))) ≫
-        ((o.shriek j) ⋙ (o.operation p).right).map
-          ((o.tensor X).functor.map (CategoryTheory.Prod.mkHom (𝟙 _)
-            ((o.operation j).left.map ((o.operation p).left.map z))))) at H
-  simpa only [← Functor.map_comp, prod_comp, Category.id_comp, Category.comp_id] using H
+    (o.curriedTensorComparison p) (o.openProjectionIso h j p)).app M).app K
 
-end FormalConsequences
+/-- Proper exchange followed by the canonical open comparison. Both factors are
+actual mates of the specified squares. Source: blueprint proof (2); Stacks 0E48, 03S6
+(blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.exchange {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
+    (h : OpenComparisons o) {X' X B' B Y' Y : Scheme.{u}}
+    {a : X' ⟶ X} {j' : X' ⟶ B'} {j : X ⟶ B} {b : B' ⟶ B}
+    {p' : B' ⟶ Y'} {p : B ⟶ Y} {v : Y' ⟶ Y}
+    [IsOpenImmersion j] [IsOpenImmersion j']
+    (so : IsPullback a j' j b) (sp : CommSq b p' p v) (M : Der (c.ring X)) :
+    (o.operation v).left.obj (((o.shriek j) ⋙ (o.operation p).right).obj M) ⟶
+      ((o.shriek j') ⋙ (o.operation p').right).obj ((o.operation a).left.obj M) :=
+  (CategoryTheory.SuppliedExchangeProjection.compactificationExchangeFromData
+    (o.shriek j) (o.shriek j')
+    (o.operation p).left (o.operation p).right (o.operation p).derivedAdjunction
+    (o.operation p').left (o.operation p').right (o.operation p').derivedAdjunction
+    (o.operation v).left (o.operation a).left (o.operation b).left
+    (o.square sp) (o.betaIso h so)).app M
 
-section DiagramConsequences
+section Diagram
 variable {m : Mode} {c : Coefficients.{u} m} (o : Presentation c) (h : OpenComparisons o)
   {X' X B' B Y' Y : Scheme.{u}}
   {a : X' ⟶ X} {j' : X' ⟶ B'} {j : X ⟶ B} {b : B' ⟶ B}
@@ -332,158 +331,146 @@ variable {m : Mode} {c : Coefficients.{u} m} (o : Presentation c) (h : OpenCompa
   [IsOpenImmersion j] [IsOpenImmersion j']
   (so : IsPullback a j' j b) (sp : CommSq b p' p v)
 
-private theorem diagramAssertion_of_forward
-    (hf : ∀ (M : Der (c.ring X)) (K : Der (c.ring Y)),
-      o.pulledProjection h (j := j) (p := p) (v := v) M K ≫ o.tensorTargetExchange h so sp M K =
-        o.tensorExchange h so sp M K ≫
-          o.projection h j' p' ((o.operation a).left.obj M) ((o.operation v).left.obj K)) :
-    DiagramAssertion o h so sp := by
-  refine ⟨hf, ?_, ?_⟩
-  · intro M N K L r z
-    rw [hf, hf]
-    let ex := CategoryTheory.SuppliedExchangeProjection.compactificationExchangeFromData
-      (o.shriek j) (o.shriek j')
-      (o.operation p).left (o.operation p).right (o.operation p).derivedAdjunction
-      (o.operation p').left (o.operation p').right (o.operation p').derivedAdjunction
-      (o.operation v).left (o.operation a).left (o.operation b).left
-      (o.square sp) (o.betaIso h so)
-    have hex := ex.naturality r
-    change (o.operation v).left.map (((o.shriek j) ⋙ (o.operation p).right).map r) ≫
-        o.exchange h so sp N = o.exchange h so sp M ≫
-          ((o.shriek j') ⋙ (o.operation p').right).map ((o.operation a).left.map r) at hex
-    have ht : (o.tensor Y').functor.map
+/-- Target identification: inverse-image tensor comparison, followed by the open
+and proper pullback squares. Source: blueprint proof (2); Stacks 0E48
+(blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.targetIso (M : Der (c.ring X)) (K : Der (c.ring Y)) :
+    (o.operation a).left.obj
+        ((o.tensor X).functor.obj (M, (o.operation j).left.obj ((o.operation p).left.obj K))) ≅
+      (o.tensor X').functor.obj ((o.operation a).left.obj M,
+        (o.operation j').left.obj ((o.operation p').left.obj ((o.operation v).left.obj K))) :=
+  (o.tensorComparison a).comparison.app (M, (o.operation j).left.obj
+      ((o.operation p).left.obj K)) ≪≫
+    (o.tensor X').functor.mapIso (Iso.prod (Iso.refl _)
+      ((o.square so.toCommSq).symm.app ((o.operation p).left.obj K) ≪≫
+        (o.operation j').left.mapIso ((o.square sp).symm.app K)))
+
+/-- The source tensor identification followed by pulled-back compact projection.
+Source: blueprint proof (2); Stacks 0E48
+(blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.pulledProjection (M : Der (c.ring X)) (K : Der (c.ring Y)) :
+    (o.tensor Y').functor.obj
+        ((o.operation v).left.obj (((o.shriek j) ⋙ (o.operation p).right).obj M),
+          (o.operation v).left.obj K) ⟶
+      (o.operation v).left.obj (((o.shriek j) ⋙ (o.operation p).right).obj
+        ((o.tensor X).functor.obj (M, (o.operation j).left.obj ((o.operation p).left.obj K)))) :=
+  (o.tensorComparison v).comparison.inv.app
+      (((o.shriek j) ⋙ (o.operation p).right).obj M, K) ≫
+    (o.operation v).left.map (o.projection h j p M K)
+
+/-- Exchange at the tensor input, followed by the specified target identification.
+Source: blueprint proof (2); Stacks 0E48
+(blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.tensorTargetExchange (M : Der (c.ring X)) (K : Der (c.ring Y)) :
+    (o.operation v).left.obj (((o.shriek j) ⋙ (o.operation p).right).obj
+        ((o.tensor X).functor.obj (M, (o.operation j).left.obj ((o.operation p).left.obj K)))) ⟶
+      ((o.shriek j') ⋙ (o.operation p').right).obj
+        ((o.tensor X').functor.obj ((o.operation a).left.obj M,
+          (o.operation j').left.obj ((o.operation p').left.obj ((o.operation v).left.obj K)))) :=
+  o.exchange h so sp
+      ((o.tensor X).functor.obj (M, (o.operation j).left.obj ((o.operation p).left.obj K))) ≫
+    ((o.shriek j') ⋙ (o.operation p').right).map (o.targetIso so sp M K).hom
+
+/-- Exchange tensored with the identity of the pulled-back coefficient.
+Source: blueprint proof (2); Stacks 0E48
+(blueprint: lem-sp-compact-projection-base-change). -/
+def Presentation.tensorExchange (M : Der (c.ring X)) (K : Der (c.ring Y)) :=
+  (o.tensor Y').functor.map
+    (CategoryTheory.Prod.mkHom (o.exchange h so sp M) (𝟙 ((o.operation v).left.obj K)))
+
+/-- Forward projection/base-change compatibility, its simultaneous naturality, and
+its inverse form under exactly the four isomorphism assumptions in the node.
+The latter includes the two source/target identifications explicitly.
+Source: blueprint proof (2); Stacks 0E48, 0GL1
+(blueprint: lem-sp-compact-projection-base-change). -/
+def DiagramAssertion : Prop :=
+  (∀ (M : Der (c.ring X)) (K : Der (c.ring Y)),
+    o.pulledProjection h (v := v) M K ≫ o.tensorTargetExchange h so sp M K =
+      o.tensorExchange h so sp M K ≫
+        o.projection h j' p' ((o.operation a).left.obj M) ((o.operation v).left.obj K)) ∧
+  (∀ (M N : Der (c.ring X)) (K L : Der (c.ring Y)) (r : M ⟶ N) (z : K ⟶ L),
+    (o.tensor Y').functor.map
         (CategoryTheory.Prod.mkHom
           ((o.operation v).left.map (((o.shriek j) ⋙ (o.operation p).right).map r))
-          ((o.operation v).left.map z)) ≫ o.tensorExchange h so sp N L =
-        o.tensorExchange h so sp M K ≫ (o.tensor Y').functor.map
-          (CategoryTheory.Prod.mkHom
-            (((o.shriek j') ⋙ (o.operation p').right).map ((o.operation a).left.map r))
-            ((o.operation v).left.map z)) := by
-      dsimp only [Presentation.tensorExchange]
-      rw [← Functor.map_comp, ← Functor.map_comp]
-      congr 1
-      ext
-      · exact hex
-      · simp
-    rw [← Category.assoc, ht, Category.assoc,
-      projection_naturality o h j' p' ((o.operation a).left.map r)
-        ((o.operation v).left.map z)]
-    simp only [Category.assoc]
-  · intro M K _ _ _ _
-    let : IsIso (o.pulledProjection h (j := j) (p := p) (v := v) M K) := by
-      dsimp only [Presentation.pulledProjection]
-      infer_instance
-    let : IsIso (o.tensorTargetExchange h so sp M K) := by
-      dsimp only [Presentation.tensorTargetExchange]
-      infer_instance
-    have hi := inverse_square (o.pulledProjection h (j := j) (p := p) (v := v) M K)
-      (o.tensorTargetExchange h so sp M K) (o.tensorExchange h so sp M K)
-      (o.projection h j' p' ((o.operation a).left.obj M) ((o.operation v).left.obj K))
-      (hf M K)
-    simpa [Presentation.pulledProjection, Presentation.tensorTargetExchange,
-      IsIso.inv_comp, ← Functor.map_inv, Category.assoc] using hi
+          ((o.operation v).left.map z)) ≫
+      (o.pulledProjection h (v := v) N L ≫ o.tensorTargetExchange h so sp N L) =
+    (o.pulledProjection h (v := v) M K ≫ o.tensorTargetExchange h so sp M K) ≫
+      ((o.shriek j') ⋙ (o.operation p').right).map
+        ((o.tensor X').functor.map
+          (CategoryTheory.Prod.mkHom ((o.operation a).left.map r)
+            ((o.operation j').left.map
+              ((o.operation p').left.map ((o.operation v).left.map z)))))) ∧
+  ∀ (M : Der (c.ring X)) (K : Der (c.ring Y))
+    [IsIso (o.exchange h so sp M)]
+    [IsIso (o.exchange h so sp
+      ((o.tensor X).functor.obj (M, (o.operation j).left.obj ((o.operation p).left.obj K))))]
+    [IsIso (o.projection h j p M K)]
+    [IsIso (o.projection h j' p' ((o.operation a).left.obj M) ((o.operation v).left.obj K))],
+    ((o.shriek j') ⋙ (o.operation p').right).map (o.targetIso so sp M K).inv ≫
+      inv (o.exchange h so sp
+        ((o.tensor X).functor.obj (M, (o.operation j).left.obj ((o.operation p).left.obj K)))) ≫
+      (o.operation v).left.map (inv (o.projection h j p M K)) ≫
+      (o.tensorComparison v).comparison.hom.app
+        (((o.shriek j) ⋙ (o.operation p).right).obj M, K) ≫
+      o.tensorExchange h so sp M K =
+    inv (o.projection h j' p' ((o.operation a).left.obj M) ((o.operation v).left.obj K))
 
-end DiagramConsequences
+end Diagram
 
-private theorem open_target_compatibility {m : Mode} {c : Coefficients.{u} m}
-    (o : Presentation c) (h : OpenComparisons o) {X' X B' B Y' Y : Scheme.{u}}
-    {a : X' ⟶ X} {j' : X' ⟶ B'} {j : X ⟶ B} {b : B' ⟶ B}
-    {p' : B' ⟶ Y'} {p : B ⟶ Y} {v : Y' ⟶ Y}
-    [IsOpenImmersion j] [IsOpenImmersion j']
-    (so : IsPullback a j' j b) (sp : CommSq b p' p v)
-    (M : Der (c.ring X)) (K : Der (c.ring Y)) :
-    (o.operation b).left.map
-          ((o.gammaIso h j).hom.app (M, (o.operation p).left.obj K)) ≫
-        (o.betaIso h so).hom.app
-          ((o.tensor X).functor.obj (M, (o.operation j).left.obj ((o.operation p).left.obj K))) ≫
-        (o.shriek j').map (o.targetIso so sp M K).hom =
-      ((o.tensorComparison b).comparison.hom.app ((o.shriek j).obj M,
-          (o.operation p).left.obj K) ≫
-        (o.tensor B').functor.map (CategoryTheory.Prod.mkHom
-          (𝟙 ((o.operation b).left.obj ((o.shriek j).obj M))) ((o.square sp).inv.app K))) ≫
-        (o.tensor B').functor.map (CategoryTheory.Prod.mkHom
-          ((o.betaIso h so).hom.app M) (𝟙 _)) ≫
-        (o.gammaIso h j').hom.app
-          ((o.operation a).left.obj M, (o.operation p').left.obj ((o.operation v).left.obj K)) := by
-  have ho := open_compatibility o h so M ((o.operation p).left.obj K)
-  have hn := (o.gammaIso h j').hom.naturality
-    (CategoryTheory.Prod.mkHom (𝟙 ((o.operation a).left.obj M)) ((o.square sp).inv.app K))
-  dsimp only [Functor.comp_map, Functor.prod_map, Functor.id_map] at hn
-  rw [(o.shriek j').map_id] at hn
-  dsimp only [Presentation.targetIso, Iso.trans_hom, Iso.app_hom, Iso.symm_hom,
-    Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom]
-  change _ ≫ _ ≫ (o.shriek j').map
-    ((o.tensorComparison a).comparison.hom.app (M, (o.operation j).left.obj
-        ((o.operation p).left.obj K)) ≫
-      (o.tensor X').functor.map (CategoryTheory.Prod.mkHom (𝟙 _)
-        ((o.square so.toCommSq).inv.app ((o.operation p).left.obj K) ≫
-          (o.operation j').left.map ((o.square sp).inv.app K)))) = _
-  have hsplit : (o.tensor X').functor.map (CategoryTheory.Prod.mkHom
-      (𝟙 ((o.operation a).left.obj M))
-      ((o.square so.toCommSq).inv.app ((o.operation p).left.obj K) ≫
-        (o.operation j').left.map ((o.square sp).inv.app K))) =
-      (o.tensor X').functor.map (CategoryTheory.Prod.mkHom (𝟙 _)
-        ((o.square so.toCommSq).inv.app ((o.operation p).left.obj K))) ≫
-      (o.tensor X').functor.map (CategoryTheory.Prod.mkHom (𝟙 _)
-        ((o.operation j').left.map ((o.square sp).inv.app K))) := by
-    rw [← Functor.map_comp]
-    congr 1
-  rw [hsplit]
-  simp only [Functor.map_comp, Category.assoc] at ho ⊢
-  rw [reassoc_of% ho]
-  dsimp only [Functor.comp_obj] at hn ⊢
-  rw [← Category.assoc, ← hn]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, prod_comp,
-    Category.id_comp, Category.comp_id]
+/-- The constant-ring family and its constant-section structure maps.
+Source: Stacks 0H7J (blueprint: lem-sp-compact-projection-base-change). -/
+def finiteCoefficients (A : Type (u + 1)) [CommRing A] : Coefficients.{u} .ordinary where
+  ring T := (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).obj (CommRingCat.of A)
+  map f := proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (CommRingCat.of A)
 
-private theorem forward_compatibility {m : Mode} {c : Coefficients.{u} m}
-    (o : Presentation c) (h : OpenComparisons o) {X' X B' B Y' Y : Scheme.{u}}
-    {a : X' ⟶ X} {j' : X' ⟶ B'} {j : X ⟶ B} {b : B' ⟶ B}
-    {p' : B' ⟶ Y'} {p : B ⟶ Y} {v : Y' ⟶ Y}
-    [IsOpenImmersion j] [IsOpenImmersion j']
-    (so : IsPullback a j' j b) (sp : CommSq b p' p v)
-    (M : Der (c.ring X)) (K : Der (c.ring Y)) :
-    o.pulledProjection h (j := j) (p := p) (v := v) M K ≫
-        o.tensorTargetExchange h so sp M K =
-      o.tensorExchange h so sp M K ≫
-        o.projection h j' p' ((o.operation a).left.obj M) ((o.operation v).left.obj K) := by
-  apply (cancel_epi ((o.tensorComparison v).comparison.hom.app
-    (((o.shriek j) ⋙ (o.operation p).right).obj M, K))).1
-  simp only [Presentation.pulledProjection, Category.assoc, Iso.hom_inv_id_app_assoc]
-  rw [projection_factorization]
-  simp only [Functor.map_comp, Category.assoc, Presentation.tensorTargetExchange,
-    exchange_factorization]
-  have hn := (properExchange o sp).naturality
-    ((o.gammaIso h j).hom.app (M, (o.operation p).left.obj K))
-  dsimp only [Functor.comp_map] at hn
-  dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.id_obj] at hn
-  rw [reassoc_of% hn]
-  dsimp only [CategoryTheory.Functor.comp_map]
-  rw [← (o.operation p').right.map_comp_assoc,
-    ← (o.operation p').right.map_comp]
-  simp only [Category.assoc]
-  rw [open_target_compatibility o h so sp M K]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← (o.operation p').right.map_comp_assoc,
-    reassoc_of% (proper_compatibility o sp ((o.shriek j).obj M) K)]
-  have hp :
-      (o.tensor Y').functor.map (CategoryTheory.Prod.mkHom
-        ((o.operation p').right.map ((o.betaIso h so).hom.app M)) (𝟙 _)) ≫
-        properProjection o p' ((o.shriek j').obj ((o.operation a).left.obj M))
-          ((o.operation v).left.obj K) =
-      properProjection o p' ((o.operation b).left.obj ((o.shriek j).obj M))
-          ((o.operation v).left.obj K) ≫
-        (o.operation p').right.map ((o.tensor B').functor.map
-          (CategoryTheory.Prod.mkHom ((o.betaIso h so).hom.app M) (𝟙 _))) := by
-    have hn := properProjection_naturality o p'
-      ((o.betaIso h so).hom.app M) (𝟙 ((o.operation v).left.obj K))
-    rw [(o.operation p').left.map_id] at hn
-    exact hn
-  dsimp only [Functor.comp_obj] at hp ⊢
-  rw [← reassoc_of% hp]
-  rw [projection_factorization]
-  simp only [Presentation.tensorExchange, exchange_factorization,
-    ← (o.tensor Y').functor.map_comp_assoc, prod_comp, Category.comp_id]
+/-- The ring system is exactly the recorded ell-power system. Its structural map
+is fixed on every section at every level by the constant-section direct-image map.
+The normalized equivalence retains entire module presheaves and linear morphisms,
+so it retains all semilinear transitions, including nonflat coefficient reductions.
+Source: blueprint coefficient-tower definition and proof (2); Stacks 00Z4
+(blueprint: lem-sp-compact-projection-base-change). -/
+def TowerCoefficients (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (c : Coefficients.{u} .systems) : Prop :=
+  (∀ T : Scheme.{u},
+    ((sheafCompose (topology .systems T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      (c.ring T)).obj = spCoefficientPresheaf l E T) ∧
+  (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (W : Y.ProEtᵒᵖ),
+    HEq (((c.map f).hom.app (op (n, W.unop))).hom)
+      (((proEtaleConstantDirectImageMap f CommRingCat.{u + 1}
+        (CommRingCat.of (ULift.{u + 1}
+          (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))))).hom.app W).hom)) ∧
+  ∀ T : Scheme.{u}, ∃ e : spCoefficientTowers l E T ≌ Mod (c.ring T),
+    e.functor.Additive ∧
+      (∀ M : spCoefficientTowers l E T, HEq (e.functor.obj M).val M.obj) ∧
+      (∀ (M N : spCoefficientTowers l E T) (r : M ⟶ N), HEq (e.functor.map r).val r.hom)
+
+/-- The prescribed field-base geometry, the chosen compactification, and arbitrary
+base change. The open and proper squares name their universal properties, permitting
+any chosen realization of the fibre products; neither arrow on the horizontal base
+is required to be flat, smooth or proper.
+Source: blueprint proof (2) (blueprint: lem-sp-compact-projection-base-change). -/
+def GeometricAssertion (D : WeilConjectures.FiniteFieldDatum.{u})
+    {m : Mode} {c : Coefficients.{u} m} (o : Presentation c) (h : OpenComparisons o) : Prop :=
+  ∀ (X Y Y' : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))]
+    [Y.Over (Spec (CommRingCat.of D.k))] [Y'.Over (Spec (CommRingCat.of D.k))]
+    [IsSeparated (X ↘ Spec (CommRingCat.of D.k))]
+    [IsSeparated (Y ↘ Spec (CommRingCat.of D.k))]
+    [IsSeparated (Y' ↘ Spec (CommRingCat.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))]
+    [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of D.k))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))]
+    [QuasiCompact (Y' ↘ Spec (CommRingCat.of D.k))]
+    (f : X ⟶ Y) (v : Y' ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))]
+    [v.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f] (q : Compactification f)
+    (X' B' : Scheme.{u}) (a : X' ⟶ X) (f' : X' ⟶ Y')
+    (b : B' ⟶ q.Z) (p' : B' ⟶ Y') (j' : X' ⟶ B') [IsOpenImmersion j']
+    (_sx : IsPullback a f' f v) (sb : IsPullback b p' q.g v)
+    (sj : IsPullback a j' q.i b) (_hf' : j' ≫ p' = f'),
+    DiagramAssertion o h sj sb.toCommSq
 
 /-- Compact-support projection commutes with arbitrary base change, both for a finite
 ell-primary commutative ring and for the ordinary varying-coefficient tower category.
@@ -528,16 +515,6 @@ theorem compact_projection_base_change (D : WeilConjectures.FiniteFieldDatum.{u}
         ∃ o : Presentation c, Nonempty (OpenComparisons o)) ∧
       ∀ (c : Coefficients.{u} .systems), TowerCoefficients l E c →
         ∀ (o : Presentation c) (h : OpenComparisons o), GeometricAssertion D o h) := by
-  have hg {m : Mode} {c : Coefficients.{u} m} (o : Presentation c)
-      (h : OpenComparisons o) : GeometricAssertion D o h := by
-    intro X Y Y' _ _ _ _ _ _ _ _ _ _ _ _ f v _ _ _ _ _ q X' B' a f' b p' j' _
-      sx sb sj hf'
-    exact diagramAssertion_of_forward o h sj sb.toCommSq
-      (forward_compatibility o h sj sb.toCommSq)
-  constructor
-  · intro A _ _ ha
-    exact ⟨finite_presentation_exists A, fun o h ↦ hg o h⟩
-  · intro E _ _ _
-    exact ⟨tower_presentation_exists l E, fun c hc o h ↦ hg o h⟩
+  sorry
 
 end AlgebraicGeometry.ProEtale.CompactProjectionBaseChange

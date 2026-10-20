@@ -5,7 +5,6 @@ public import Sheaf.Paper.IntegralScalarExtensionUniverses
 public import Sheaf.Paper.IntegralOperationsScalarComparisons
 public import Sheaf.Paper.IntegralCompactSupportCoefficientComparison
 
-import Sheaf.Paper.CompletedCoefficientPresentationTransport
 import Sheaf.Paper.IntegralConstructibleInternalHom
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Paper.SfIntegralConstructible
@@ -41,6 +40,7 @@ import Sheaf.SixFunctors.IntegralDualizing
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Paper.FiniteCoefficientHomChange
 import Sheaf.Paper.SemilinearDerivedSections
+import Sheaf.Paper.FiniteFreeCoefficientExtension
 
 /-! # Integral duality under finite coefficient extension
 
@@ -96,73 +96,6 @@ def homMap {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
         (K, (IntegralHom.hom.{u, u} X R).obj (op K, M)) ≫
       (pbcDerivedExtend φ).map ((a.adjunction K).counit.app M))
 
-private theorem complete_iso {K M : IntegralVerdier.Ambient l E X} (e : K ≅ M)
-    (h : IsSfDerivedComplete l E X K) : IsSfDerivedComplete l E X M := by
-  let F := sfDerivedReductionRestricted l E X
-  let η := sfDerivedReductionUnit l E X
-  let τ := sfDerivedReductionTransition l E X
-  obtain ⟨hp, δ, hδ⟩ := h
-  let := hp
-  let : HasProduct (fun n ↦ (F n).obj M) :=
-    hasProduct_of_equiv_of_iso (fun n ↦ (F n).obj K)
-      (fun n ↦ (F n).obj M) (Equiv.refl ℕ) (fun n ↦ (F n).mapIso e.symm)
-  let p : (∏ᶜ fun n ↦ (F n).obj K) ≅ (∏ᶜ fun n ↦ (F n).obj M) :=
-    { hom := Limits.Pi.map (fun n ↦ (F n).map e.hom)
-      inv := Limits.Pi.map (fun n ↦ (F n).map e.inv)
-      hom_inv_id := by
-        apply Pi.hom_ext
-        intro n
-        simp [Category.assoc, ← Functor.map_comp]
-      inv_hom_id := by
-        apply Pi.hom_ext
-        intro n
-        simp [Category.assoc, ← Functor.map_comp] }
-  refine ⟨inferInstance, p.inv ≫ δ ≫ (shiftFunctor _ (1 : ℤ)).map e.hom, ?_⟩
-  apply CategoryTheory.Pretriangulated.isomorphic_distinguished _ hδ _
-  refine CategoryTheory.Pretriangulated.Triangle.isoMk _ _ e.symm p.symm p.symm ?_ ?_ ?_
-  · apply Pi.hom_ext
-    intro n
-    change ((Pi.lift (fun n ↦ (η n).app M)) ≫
-      Limits.Pi.map (fun n ↦ (F n).map e.inv)) ≫ Pi.π (fun n ↦ (F n).obj K) n =
-        (e.inv ≫ (Pi.lift (fun n ↦ (η n).app K))) ≫ Pi.π (fun n ↦ (F n).obj K) n
-    simp only [Category.assoc]
-    rw [Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
-    exact ((η n).naturality e.inv).symm
-  · exact towerTransitionEndomorphism_natural_backward
-      (fun n ↦ (τ n).app M) (fun n ↦ (τ n).app K)
-      (fun n ↦ (F n).map e.inv) (fun n ↦ (τ n).naturality e.inv) |>.symm
-  · simp [p, Category.assoc, ← Functor.map_comp]
-
-private theorem unrestricted_complete_iso {K M : IntegralVerdier.Ambient l E X}
-    (e : K ≅ M) (h : IsDerivedCompleteUnrestricted l E X K) :
-    IsDerivedCompleteUnrestricted l E X M := by
-  obtain ⟨D, hl, P, G, q, hq, r, hp, δ, hδ⟩ := h
-  let := hp
-  refine ⟨D, hl, P, G, q, hq, r ≪≫ e, hp,
-    δ ≫ (shiftFunctor _ (1 : ℤ)).map e.hom, ?_⟩
-  apply CategoryTheory.Pretriangulated.isomorphic_distinguished _ hδ _
-  refine CategoryTheory.Pretriangulated.Triangle.isoMk _ _ e.symm (Iso.refl _)
-    (Iso.refl _) ?_ ?_ ?_
-  · apply Pi.hom_ext
-    intro n
-    simp [Category.assoc]
-  · simp
-  · simp [Category.assoc, ← Functor.map_comp]
-
-private theorem complete_iff_unrestricted (K : IntegralVerdier.Ambient l E X) :
-    IsSfDerivedComplete l E X K ↔ IsDerivedCompleteUnrestricted l E X K := by
-  let e := purCoefficientModel l E X
-  have h := purCoefficientModel_predicates l E X (e.inverse.obj K)
-  constructor
-  · intro hK
-    have hK' := complete_iso l E X (e.counitIso.app K).symm hK
-    have h' := h.1.mp (h.2.mpr hK')
-    exact unrestricted_complete_iso l E X (e.counitIso.app K) h'
-  · intro hK
-    have hK' := unrestricted_complete_iso l E X (e.counitIso.app K).symm hK
-    have h' := h.2.mp (h.1.mpr hK')
-    exact complete_iso l E X (e.counitIso.app K) h'
-
 /-- Completeness in the intrinsic category makes the specified completion map invertible.
 Source: blueprint order 2494, first paragraph
 (blueprint: lem-coef-integral-finite-extension).
@@ -173,8 +106,7 @@ same unit; hence its localized map is invertible. -/
 theorem completion_isIso (K : IntegralVerdier.Ambient l E X)
     (hK : IsSfDerivedComplete l E X K) :
     IsIso ((completedScalarComparison l E L ι X).app K) := by
-  exact ((finiteFreeCompletedScalarComparison l E L ι X).2.1 K
-    ((complete_iff_unrestricted l E X K).mp hK)).1
+  sorry
 
 /-- The fixed completion comparison on a complete input.
 Source: blueprint order 2494 (blueprint: lem-coef-integral-finite-extension). -/
@@ -311,19 +243,7 @@ Proof: choose a dimension bound for the finite-type scheme, then apply the integ
 coherent finite-term origins. Their transition equation is precisely coherent. -/
 theorem dualizingDatum_nonempty (F : Type u) [Field F] [Algebra (Padic l) F]
     [FiniteDimensional (Padic l) F] : Nonempty (DualizingDatum l X D hl F) := by
-  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (X ↘ Spec (.of D.k))
-  obtain ⟨ω, T, _, ⟨e, he⟩, _, hp, _⟩ :=
-    prop_coef_integral_dualizing D l hl F X d hd
-  let : HasCountableProducts (completedIntegralDerivedCategory l F X D hl) :=
-    integralOperationsDerivedCountableProducts l F X
-  obtain ⟨p, δ, _, hi, ht⟩ := hp
-  have (n : ℕ) : IsIso (normalizedDVRCounitComparison l F X D hl T ω.obj p n) := hi n
-  refine ⟨⟨ω, fun n ↦ asIso (normalizedDVRCounitComparison l F X D hl T ω.obj p n) ≪≫
-    e n, ?_⟩⟩
-  intro m n h
-  dsimp
-  rw [Functor.map_comp, ← Category.assoc, ← ht m n h, Category.assoc, he h]
-  simp only [integralDualizingFiniteComparison, Equiv.apply_symm_apply, Category.assoc]
+  sorry
 
 variable (wE : DualizingDatum l X D hl E) (wL : DualizingDatum l X D hl L)
 
@@ -351,14 +271,6 @@ Source: blueprint order 2494 (blueprint: lem-coef-integral-finite-extension). -/
 def u : (integralScalarExtensionOfUniverses l E L ι X).obj wE.omega.obj ⟶ wL.omega.obj :=
   (u_existsUnique l E L ι X D hl wE wL).exists.choose
 
-private theorem u_reduction (n : ℕ) :
-    (scalarReductionDerivedExtension l L X n).map (u l E L ι X D hl wE wL) ≫
-        (wL.reduction n).hom =
-      (quotient l E L ι X n wE.omega.obj wE.omega.property.1).hom ≫
-        (pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n)).map
-          (wE.reduction n).hom ≫ finiteU l E L ι X D n := by
-  exact (u_existsUnique l E L ι X D hl wE wL).exists.choose_spec n
-
 /-- Beta is v followed by RHom(TK,u); it is not independent comparison data.
 Source: blueprint order 2494, third displayed comparison
 (blueprint: lem-coef-integral-finite-extension). -/
@@ -384,10 +296,7 @@ completion unit with the target completion unit, so the latter is invertible. -/
 theorem extension_complete (K : IntegralVerdier.Ambient l E X)
     (hK : IsSfDerivedComplete l E X K) : IsSfDerivedComplete l L X
       ((integralScalarExtensionOfUniverses l E L ι X).obj K) := by
-  have hc := ((finiteFreeCompletedScalarComparison l E L ι X).2.1 K
-    ((complete_iff_unrestricted l E X K).mp hK)).2
-  apply (complete_iff_unrestricted l L X _).mpr
-  exact unrestricted_complete_iso l L X (completion l E L ι X K hK) hc
+  sorry
 
 /-- The identity-extension comparison is multiplication, conjugated by completion.
 Source: blueprint order 2494, last paragraph

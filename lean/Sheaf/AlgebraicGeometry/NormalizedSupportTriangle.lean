@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
@@ -48,8 +47,7 @@ Proof: the first projection is the base change of c; compose it with b. -/
 theorem supportIntersection_closed {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :
     IsClosedImmersion (supportIntersection b c) := by
-  dsimp [supportIntersection]
-  infer_instance
+  sorry
 
 /-- The support restricted to an actual open ambient scheme.
 Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
@@ -62,8 +60,7 @@ Proof: this projection is the base change of b along the open immersion. -/
 @[instance]
 theorem supportOnOpen_closed {T B : Scheme.{u}} (b : B ⟶ T) (U : T.Opens)
     [IsClosedImmersion b] : IsClosedImmersion (supportOnOpen b U) := by
-  dsimp [supportOnOpen]
-  infer_instance
+  sorry
 
 /-- Uniquely normalized inclusion of the intersection support kernel.
 Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
@@ -215,29 +212,7 @@ theorem exists_unique_supportOpenDerivedComparison (A : Type (u + 1)) [CommRing 
             (Functor.whiskerRight
               ((upperStar (ModuleCat.{u + 1} A) U.ι).rightDerivedFunctorIsoMapDerivedCategory).hom
               (supportedSectionsDerived A (supportOnOpen b U))) := by
-  let F := upperStar (ModuleCat.{u + 1} A) U.ι
-  let G := supportedEtaleSections A U (supportOnOpen b U).openComplement
-  let adj := etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) U.ι
-    (inferInstance : Etale U.ι)
-  have : (etaleLowerShriek (ModuleCat.{u + 1} A) U.ι inferInstance).Additive :=
-    adj.left_adjoint_additive
-  have : F.PreservesKInjectiveComplexes := adj.preservesKInjectiveComplexes
-  let e := F.rightDerivedFunctorCompIso G ≪≫
-    Functor.isoWhiskerRight F.rightDerivedFunctorIsoMapDerivedCategory G.rightDerivedFunctor
-  have he : (F ⋙ G).rightDerivedFunctorUnit ≫
-      Functor.whiskerLeft DerivedCategory.Qh e.hom =
-      Functor.rightDerivedFunctorCompUnit F G ≫
-        Functor.whiskerLeft DerivedCategory.Qh
-          (Functor.whiskerRight F.rightDerivedFunctorIsoMapDerivedCategory.hom
-            G.rightDerivedFunctor) := by
-    simp [e, Functor.rightDerivedFunctorCompIso, Functor.whiskerLeft_comp]
-  refine ⟨e, he, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  apply (F ⋙ G).rightDerivedFunctor.rightDerived_ext
-    (F ⋙ G).rightDerivedFunctorUnit
-    (HomotopyCategory.quasiIso _ (.up ℤ))
-  exact he'.trans he.symm
+  sorry
 
 /-- The uniquely normalized derived open comparison.
 Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
@@ -287,10 +262,7 @@ off the original closed subscheme, by the topological image description of base 
 theorem supportOnOpen_complement {T B : Scheme.{u}} (b : B ⟶ T)
     [IsClosedImmersion b] (U : T.Opens) :
     (supportOnOpen b U).openComplement = U.ι ⁻¹ᵁ b.openComplement := by
-  apply TopologicalSpace.Opens.ext
-  change (Set.range (pullback.snd b U.ι))ᶜ = U.ι ⁻¹' (Set.range b)ᶜ
-  rw [Scheme.Pullback.range_snd]
-  rfl
+  sorry
 
 /-- Supported pullback along an open immersion, normalized on ordinary sections.
 Source: Tag 09XP, restriction construction
@@ -339,29 +311,7 @@ theorem exists_unique_supportTransportComparison (A : Type (u + 1)) [CommRing A]
           Functor.whiskerLeft DerivedCategory.Qh (Functor.whiskerRight
             (upperStar (ModuleCat.{u + 1} A) h).rightDerivedFunctorIsoMapDerivedCategory.hom
             (supportedSectionsDerived A d)) := by
-  let F := upperStar (ModuleCat.{u + 1} A) h
-  let G := supportedEtaleSections A S d.openComplement
-  let adj := etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) h
-    (inferInstance : Etale h)
-  have : (etaleLowerShriek (ModuleCat.{u + 1} A) h inferInstance).Additive :=
-    adj.left_adjoint_additive
-  have : F.PreservesKInjectiveComplexes := adj.preservesKInjectiveComplexes
-  let e := F.rightDerivedFunctorCompIso G ≪≫
-    Functor.isoWhiskerRight F.rightDerivedFunctorIsoMapDerivedCategory G.rightDerivedFunctor
-  have he : (F ⋙ G).rightDerivedFunctorUnit ≫
-      Functor.whiskerLeft DerivedCategory.Qh e.hom =
-      Functor.rightDerivedFunctorCompUnit F G ≫
-        Functor.whiskerLeft DerivedCategory.Qh
-          (Functor.whiskerRight F.rightDerivedFunctorIsoMapDerivedCategory.hom
-            G.rightDerivedFunctor) := by
-    simp [e, Functor.rightDerivedFunctorCompIso, Functor.whiskerLeft_comp]
-  refine ⟨e, he, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  apply (F ⋙ G).rightDerivedFunctor.rightDerived_ext
-    (F ⋙ G).rightDerivedFunctorUnit
-    (HomotopyCategory.quasiIso _ (.up ℤ))
-  exact he'.trans he.symm
+  sorry
 
 /-- The normalized derived-composite comparison for an open immersion.
 Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/

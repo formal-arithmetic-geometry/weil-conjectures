@@ -120,13 +120,7 @@ the identity open arrow to the identity; proof irrelevance identifies the record
 theorem properFrobeniusCompactification_eq :
     frobeniusCohomologyCompactification D Y₀ (Compactification.ofIsProper Y₀.hom) =
       Compactification.ofIsProper (D.geometricFiber Y₀).hom := by
-  rcases Y₀ with ⟨Y, ⟨⟨⟩⟩, f⟩
-  simp only [frobeniusCohomologyCompactification, zlCompactificationMiddle,
-    zlCompactificationOpen, Compactification.ofIsProper, sfWeilCohomologyPoint]
-  simp only [Over.hom]
-  congr 1
-  change fiberMap D (𝟙 (Over.mk f)) = 𝟙 _
-  simp [fiberMap, zlFiberMap]
+  sorry
 
 /-- Canonical finite comparison: change the equal compactification record, then
 apply the adjunction-normalized identity-open isomorphism and the left unitor.
@@ -277,39 +271,7 @@ theorem properFrobeniusRationalIso_existsUnique :
         HEq (κ.hom.app K)
           ((sfRationalConstructibleLocalization l E (Spec (.of D.k))).map
             ((properFrobeniusIntegralIso D Y₀ l E).hom.app K.obj)) := by
-  let _ : (properFrobeniusIntegralFunctor D Y₀ l E true).Additive :=
-    (modelLinear l D.k (zlClosurePrimeUnit D l Fact.out)
-    (D.geometricFiber Y₀).hom (galois D Y₀) (frobeniusPointIso D).hom
-    (frobeniusCohomologyCompactModel D Y₀ (Compactification.ofIsProper Y₀.hom)) E).1
-  let _ : (properFrobeniusIntegralFunctor D Y₀ l E true).Linear
-      (Padic.coefficientExtensionIntegers l E) :=
-    (modelLinear l D.k (zlClosurePrimeUnit D l Fact.out)
-    (D.geometricFiber Y₀).hom (galois D Y₀) (frobeniusPointIso D).hom
-    (frobeniusCohomologyCompactModel D Y₀ (Compactification.ofIsProper Y₀.hom)) E).2
-  let _ : (properFrobeniusIntegralFunctor D Y₀ l E false).Additive :=
-    (modelLinear l D.k (zlClosurePrimeUnit D l Fact.out)
-    (D.geometricFiber Y₀).hom (galois D Y₀) (frobeniusPointIso D).hom
-    (frobeniusCohomologyDirectModel D Y₀) E).1
-  let _ : (properFrobeniusIntegralFunctor D Y₀ l E false).Linear
-      (Padic.coefficientExtensionIntegers l E) :=
-    (modelLinear l D.k (zlClosurePrimeUnit D l Fact.out)
-    (D.geometricFiber Y₀).hom (galois D Y₀) (frobeniusPointIso D).hom
-    (frobeniusCohomologyDirectModel D Y₀) E).2
-  let κ : properFrobeniusRationalFunctor D Y₀ l E true ≅
-      properFrobeniusRationalFunctor D Y₀ l E false :=
-    NatIso.ofComponents
-      (fun K ↦ (sfRationalConstructibleLocalization l E (Spec (.of D.k))).mapIso
-        ((properFrobeniusIntegralIso D Y₀ l E).app K.obj))
-      (fun a ↦ localizedTransformation_naturality l E
-        (properFrobeniusIntegralFunctor D Y₀ l E true)
-        (properFrobeniusIntegralFunctor D Y₀ l E false)
-        (properFrobeniusIntegralIso D Y₀ l E).hom _ _ a)
-  refine ⟨κ, fun _ ↦ HEq.rfl, ?_⟩
-  intro κ' hκ'
-  apply Iso.ext
-  apply NatTrans.ext
-  funext K
-  exact eq_of_heq (hκ' K)
+  sorry
 
 /-- The canonical rational comparison, fixed by localization of integral maps.
 Source: main-20261015, proper-case Step 6

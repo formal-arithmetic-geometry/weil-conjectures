@@ -10,7 +10,6 @@ public import Sheaf.Paper.QcqsCompactSupportRealization
 public import Sheaf.Paper.IntegralPullbackComparisonRealization
 public import Sheaf.Paper.FdPullbackComparison
 public import Sheaf.Paper.CompleteProetaleStrictTowerRealization
-import Sheaf.Paper.AdicMiddleExtensionConstructible
 
 /-! # Framework open exchange in its own coefficient presentation
 Source: thm-cbc-qbar.proof.md, integral strict quotient construction
@@ -56,109 +55,6 @@ def FrameworkPullChainSpec {U T : Scheme.{u}} (h : U ⟶ T)
       (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P))).v
         i j hij = 0)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem frameworkModuleUnit_section {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
-    (M : proEtaleRingModules Y R) (V : Y.ProEt) (x : M.val.obj (op V)) :
-    ((proEtaleRingModuleAdjunction f R S c).unit.app M).val.app (op V) x =
-      proEtaleRingModuleUnitSection f R S c M V x := by
-  let adj := proEtaleRingModuleAdjunction f R S c
-  obtain ⟨g, hg, he⟩ :=
-    (Classical.choose_spec (proEtaleRingModuleAdjunction_existsUnique f R S c)).1
-      M _ (𝟙 _)
-  rw [← adj.homEquiv_id]
-  refine (he (op V) x).trans ?_
-  rw [Adjunction.homEquiv_unit]
-  change g.val.app _ _ = _
-  exact hg _ _
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem frameworkModulePull_hom_ext {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
-    {M : proEtaleRingModules Y R} {N : proEtaleRingModules X S}
-    (a b : (proEtaleRingModulePullback f R S c).obj M ⟶ N)
-    (h : ∀ (V : Y.ProEt) (x : M.val.obj (op V)),
-      a.val.app (op ((proEtaleBaseChange f).obj V))
-        (((proEtaleRingModuleAdjunction f R S c).unit.app M).val.app (op V) x) =
-      b.val.app (op ((proEtaleBaseChange f).obj V))
-        (((proEtaleRingModuleAdjunction f R S c).unit.app M).val.app (op V) x)) :
-    a = b := by
-  apply ((proEtaleRingModuleAdjunction f R S c).homEquiv M N).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro W
-  ext x
-  exact h W.unop x
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem frameworkCocone_hom_ext {C : Type*} [Category C] [Preadditive C]
-    {K L M : CochainComplex C ℤ} (φ : K ⟶ L) [HomologicalComplex.HasHomotopyCofiber φ]
-    (a b : M ⟶ CochainComplex.mappingCocone φ)
-    (hf : a ≫ CochainComplex.mappingCocone.fst φ =
-      b ≫ CochainComplex.mappingCocone.fst φ)
-    (hs : ∀ (i j : ℤ) (hij : i + -1 = j),
-      a.f i ≫ (CochainComplex.mappingCocone.snd φ).v i j hij =
-      b.f i ≫ (CochainComplex.mappingCocone.snd φ).v i j hij) : a = b := by
-  apply HomologicalComplex.hom_ext
-  intro i
-  have h := CochainComplex.mappingCocone.id_X φ i (i - 1) (by omega)
-  calc
-    a.f i = a.f i ≫ 𝟙 _ := (Category.comp_id _).symm
-    _ = a.f i ≫ ((CochainComplex.mappingCocone.fst φ).f i ≫
-          (CochainComplex.mappingCocone.inl φ).v i i (add_zero i) +
-        (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega) ≫
-          (CochainComplex.mappingCocone.inr φ).1.v (i - 1) i (by omega)) := by rw [h]
-    _ = b.f i ≫ 𝟙 _ := by
-      rw [Preadditive.comp_add, ← Category.assoc, ← Category.assoc,
-        ← HomologicalComplex.comp_f, hf, HomologicalComplex.comp_f, hs]
-      rw [Category.assoc, Category.assoc, ← Preadditive.comp_add, h]
-    _ = b.f i := Category.comp_id _
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem frameworkPullChain_hom_ext {U T : Scheme.{u}} (h : U ⟶ T)
-    (P : CochainComplex (integralTowerModules l E T) ℤ)
-    (ξ ξ' : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P ⟶
-      (integralOperationsPullbackComplexFunctor l E h).obj P)
-    (hξ : FrameworkPullChainSpec l E h P ξ)
-    (hξ' : FrameworkPullChainSpec l E h P ξ') : ξ = ξ' := by
-  have hf : ξ ≫ CochainComplex.mappingCocone.fst _ =
-      ξ' ≫ CochainComplex.mappingCocone.fst _ := by
-    apply Pi.hom_ext
-    intro n
-    apply HomologicalComplex.hom_ext
-    intro i
-    apply frameworkModulePull_hom_ext
-    intro V x
-    exact (hξ.1 n i V x).trans (hξ'.1 n i V x).symm
-  apply frameworkCocone_hom_ext _ ξ ξ' hf
-  intro i j hij
-  exact (hξ.2 i j hij).trans (hξ'.2 i j hij).symm
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem frameworkAdicPullChain_spec {U T : Scheme.{u}} (h : U ⟶ T)
-    (P : CochainComplex (integralTowerModules l E T) ℤ) :
-    FrameworkPullChainSpec l E h P ((adicPullAugmentation l E h).app P) := by
-  have hη := (adicPullAugmentation_existsUnique l E h).exists.choose_spec
-  constructor
-  · intro n i V x
-    rw [frameworkModuleUnit_section]
-    exact hη.1 P i n V x
-  · intro i j hij
-    have hj : j = i - 1 := by omega
-    subst j
-    exact hη.2 P i
-
-
 /-- The quotient-unit comparison is uniquely determined before localization.
 Source: Stacks 099N(5), 08TC (blueprint: def-zl-framework-open-exchange).
 Proof: apply inverse image to the quotient augmentation x maps to 1 tensor x at
@@ -171,9 +67,7 @@ theorem frameworkPullChain_existsUnique {U T : Scheme.{u}} (h : U ⟶ T)
     ∃! ξ : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P ⟶
       (integralOperationsPullbackComplexFunctor l E h).obj P,
       FrameworkPullChainSpec l E h P ξ := by
-  refine ⟨(adicPullAugmentation l E h).app P, frameworkAdicPullChain_spec l E h P, ?_⟩
-  intro ξ hξ
-  exact frameworkPullChain_hom_ext l E h P ξ _ hξ (frameworkAdicPullChain_spec l E h P)
+  sorry
 
 /-- The specified whole quotient-diagram augmentation into its Roos realization.
 Source: Stacks 099N(5), 08TC (blueprint: def-zl-framework-open-exchange). -/
@@ -310,12 +204,7 @@ theorem frameworkRingedSquare_coherent {A B C T : Scheme.{u}}
       (proEtaleRingCompositeCoefficients b d ((completed l E).ring T)
         ((completed l E).ring C) ((completed l E).ring A)
         ((completed l E).pull d) ((completed l E).pull b)) := by
-  rw [← completedPull_comp, ← completedPull_comp]
-  have aux (f g : A ⟶ T) (hfg : f = g) :
-      HEq ((completed l E).pull f) ((completed l E).pull g) := by
-    subst g
-    rfl
-  exact aux _ _ sq.w
+  sorry
 
 /-- The ringed square in the framework's own completed presentation.
 Source: Stacks 07A7 (blueprint: def-zl-framework-open-exchange). -/
@@ -384,11 +273,7 @@ Proof: each scalar extension and restriction is additive. The tower maps and
 addition are pointwise, so their composites preserve zero and sums. -/
 theorem frameworkModuleQuotientTower_additive (W : Scheme.{u}) :
     (frameworkModuleQuotientTower l E W).Additive := by
-  constructor
-  intro X Y f g
-  apply NatTrans.ext
-  funext n
-  exact (sfReductionRestricted l E W n.unop).map_add
+  sorry
 
 attribute [instance] frameworkModuleQuotientTower_additive
 

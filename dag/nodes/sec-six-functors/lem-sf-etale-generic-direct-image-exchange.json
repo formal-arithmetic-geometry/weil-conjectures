@@ -1,343 +1,336 @@
 {
- "id": "lem-sf-etale-generic-direct-image-exchange",
- "kind": "statement",
- "title": "Generic direct-image exchange over an arbitrary algebraically closed base",
- "statement": "Let $F$ be an algebraically closed field, $N\\geq1$ an integer invertible in $F$, and $A$ a finite commutative ring with $NA=0$. Let $B$ be a smooth integral finite-type $F$-scheme of dimension one [def-sbc-smooth-morphisms, def-pc-integral-scheme, def-weil-finite-type-morphism, def-kun-topological-krull-dimension]. Let $Q=F(B)$ be the fraction field of the coordinate ring of a nonempty affine open of $B$, let $L/Q$ be an algebraically closed algebraic field extension, and for any $B$-scheme $W$ put $W_L=W\\times_B\\operatorname{Spec}L$ and $g_W:W_L\\to W$ [def-pc-base-change]. If $h:T\\to Y$ is a quasi-compact quasi-separated morphism of finite-type $B$-schemes and $E\\in D^+(T_{\\mathrm{et}},A)$, then the canonical unbounded adjunction-mate exchange [def-kun-unbounded-exchange]\n$$\\operatorname{Ex}_{h,E}:g_Y^*Rh_*E\\longrightarrow Rh_{L,*}g_T^*E$$\nis an isomorphism. Here quasi-compact and quasi-separated mean that inverse images of affine opens are quasi-compact and the diagonal is quasi-compact [def-weil-finite-type-morphism, def-weil-quasi-separated-morphism]; $h_L:T_L\\to Y_L$ is the base change of $h$. The canonical exchange agrees with the composite of the exchanges for the ordinary generic projection $\\operatorname{Spec}Q\\to B$ and the field extension $\\operatorname{Spec}L\\to\\operatorname{Spec}Q$, under the canonical composite-functor identifications [def-weil-pbc-derived-exchange]. Use ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of sheaves of modules over the constant ring sheaf $A_T$ on small etale sites [def-weil-pbc-derived-categories]. Scheme inverse images on these categories are exact constant-coefficient inverse images [prop-weil-pbc-inverse-image-modules-exact].",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0F09 (lemma-smooth-base-change-general) and 0F1C (lemma-base-change-field-extension); agent geometric-generic specialization and constant-module transport."
- },
- "stmt_deps": [
-  "def-weil-pbc-derived-categories",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "def-sbc-smooth-morphisms",
-  "def-pc-integral-scheme",
-  "def-weil-finite-type-morphism",
-  "def-kun-topological-krull-dimension",
-  "def-pc-base-change",
-  "def-weil-quasi-separated-morphism",
-  "def-weil-pbc-derived-exchange",
-  "def-kun-unbounded-exchange"
- ],
- "proof": [
-  {
-   "text": "Let $\\eta$ be the generic point of $B$. By [lem-sc-integral-function-field-affine-fraction], the germ map from the chosen nonempty affine open identifies its fraction field $Q$ with $\\mathcal O_{B,\\eta}$, compatibly with the maps to $B$. Apply [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods] at $\\eta$. Its set $I$ of affine open neighbourhoods $U_i$ is nonempty and directed under reverse inclusion, its transitions are affine, and $\\operatorname{Spec}Q=\\varprojlim_i U_i$ over $B$. Thus this is the ordinary generic projection specified in the statement; choosing another affine open yields the same local-ring map.",
-   "uses": [
-    "lem-sc-integral-function-field-affine-fraction",
-    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
-   ],
-   "elementary": false,
-   "source": {
+  "id": "lem-sf-etale-generic-direct-image-exchange",
+  "kind": "statement",
+  "title": "Generic direct-image exchange over an arbitrary algebraically closed base",
+  "statement": "Let $F$ be an algebraically closed field, $N\\geq1$ an integer invertible in $F$, and $A$ a finite commutative ring with $NA=0$. Let $B$ be a smooth integral finite-type $F$-scheme of dimension one [def-sbc-smooth-morphisms, def-pc-integral-scheme, def-weil-finite-type-morphism, def-kun-topological-krull-dimension]. Let $Q=F(B)$ be the fraction field of the coordinate ring of a nonempty affine open of $B$, let $L/Q$ be an algebraically closed algebraic field extension, and for any $B$-scheme $W$ put $W_L=W\\times_B\\operatorname{Spec}L$ and $g_W:W_L\\to W$ [def-pc-base-change]. If $h:T\\to Y$ is a quasi-compact quasi-separated morphism of finite-type $B$-schemes and $E\\in D^+(T_{\\mathrm{et}},A)$, then the canonical unbounded adjunction-mate exchange [def-kun-unbounded-exchange]\n$$\\operatorname{Ex}_{h,E}:g_Y^*Rh_*E\\longrightarrow Rh_{L,*}g_T^*E$$\nis an isomorphism. Here quasi-compact and quasi-separated mean that inverse images of affine opens are quasi-compact and the diagonal is quasi-compact [def-weil-finite-type-morphism, def-weil-quasi-separated-morphism]; $h_L:T_L\\to Y_L$ is the base change of $h$. The canonical exchange agrees with the composite of the exchanges for the ordinary generic projection $\\operatorname{Spec}Q\\to B$ and the field extension $\\operatorname{Spec}L\\to\\operatorname{Spec}Q$, under the canonical composite-functor identifications [def-weil-pbc-derived-exchange]. Use ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of sheaves of modules over the constant ring sheaf $A_T$ on small etale sites [def-weil-pbc-derived-categories]. Scheme inverse images on these categories are exact constant-coefficient inverse images [prop-weil-pbc-inverse-image-modules-exact].",
+  "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0F09, lemma-smooth-base-change-general: choice of limiting base; geometry from Tags 01RV and 0GWT"
-   }
+    "place": "Tags 0F09 (lemma-smooth-base-change-general) and 0F1C (lemma-base-change-field-extension); agent geometric-generic specialization and constant-module transport."
   },
-  {
-   "text": "The field $F$ is Noetherian (its ideals are $0$ and $F$), so $B$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Each $U_i$ is affine, hence qcqs by [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods](2). Therefore $U_i\\to B$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1). It is smooth by [lem-pc-open-immersion-smooth-composition] applied to $U_i\\hookrightarrow B$ and $1_B$; the identity is smooth directly from finite presentation of an identity and its unique lift across a thickening. Put $Y_i=Y\\times_B U_i$ and $Y_Q=Y\\times_B\\operatorname{Spec}Q$. Base change preserves smoothness by [lem-pc-proper-base-change](2), and qcqs by [lem-weil-pbc-qcqs-morphism-permanence](3). Lift the affine-neighbourhood diagram and its specified limit cone to the over category of $B$. The pullback functor along $Y\\to B$ is a right adjoint, so it preserves this limit. The forgetful functor from the over category of $Y$ preserves connected limits. Finally transport across pullback symmetry to obtain exactly the cone on $Y_Q$. Transitions are base changes of maps between affine schemes, hence affine. This is the elementary categorical proof using Mathlib Over.isLimitLiftCone, Over.pullback.IsRightAdjoint, and Over.preservesLimitsOfShape_forget_of_isConnected.",
-   "uses": [
+  "stmt_deps": [
+    "def-weil-pbc-derived-categories",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-sbc-smooth-morphisms",
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism",
+    "def-kun-topological-krull-dimension",
+    "def-pc-base-change",
+    "def-weil-quasi-separated-morphism",
+    "def-weil-pbc-derived-exchange",
+    "def-kun-unbounded-exchange"
+  ],
+  "proof": [
+    {
+      "text": "Let $\\eta$ be the generic point of $B$. By [lem-sc-integral-function-field-affine-fraction], the germ map from the chosen nonempty affine open identifies its fraction field $Q$ with $\\mathcal O_{B,\\eta}$, compatibly with the maps to $B$. Apply [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods] at $\\eta$. Its set $I$ of affine open neighbourhoods $U_i$ is nonempty and directed under reverse inclusion, its transitions are affine, and $\\operatorname{Spec}Q=\\varprojlim_i U_i$ over $B$. Thus this is the ordinary generic projection specified in the statement; choosing another affine open yields the same local-ring map.",
+      "uses": [
+        "lem-sc-integral-function-field-affine-fraction",
+        "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tags 0F09, lemma-smooth-base-change-general: choice of limiting base; geometry from Tags 01RV and 0GWT"
+      }
+    },
+    {
+      "text": "The field $F$ is Noetherian (its ideals are $0$ and $F$), so $B$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Each $U_i$ is affine, hence qcqs by [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods](2). Therefore $U_i\\to B$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1). It is smooth by [lem-pc-open-immersion-smooth-composition] applied to $U_i\\hookrightarrow B$ and $1_B$; the identity is smooth directly from finite presentation of an identity and its unique lift across a thickening. Put $Y_i=Y\\times_B U_i$ and $Y_Q=Y\\times_B\\operatorname{Spec}Q$. Base change preserves smoothness by [lem-pc-proper-base-change](2), and qcqs by [lem-weil-pbc-qcqs-morphism-permanence](3). Apply [lem-weil-pbc-limit-fibre-products] to the constant systems $Y$, $B$ and the system $U_i$: the $Y_i$ have affine transitions and limit $Y_Q$, with their specified projections to $Y$. All its constant-system transitions are identities, hence affine.",
+      "uses": [
+        "lem-weil-pbc-finite-type-over-noetherian",
+        "lem-weil-pbc-locally-noetherian-quasi-separated",
+        "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+        "lem-weil-pbc-qcqs-morphism-permanence",
+        "lem-pc-open-immersion-smooth-composition",
+        "lem-pc-proper-base-change",
+        "lem-weil-pbc-limit-fibre-products"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F09, lemma-smooth-base-change-general: smooth qcqs stages and affine transitions; geometry Tags 01T6, 01OY, 01VC, 01VA, 01V7 and 01YW"
+      }
+    },
+    {
+      "text": "Write $U_WE$ for the underlying abelian derived object. The exact coefficient-forgetting functor, its commutation with cohomology, and its conservativity are supplied by [lem-kun-unbounded-abelian-exchange-comparison]. Since $NA=0$, every stalk of every cohomology sheaf of $U_TE$ is killed by $N$. Moreover $N$ is a unit on $B$, on $Y$, and on every base change: its inverse is the image of $N^{-1}\\in F$. The object $U_TE$ is bounded below. Apply [lem-kun-0f09] with base $S=Y$, morphism $f=h$, stages $S_i=Y_i$, and limit $S'=Y_Q$. Step 2 verifies all stage hypotheses, and $h$ is qcqs by assumption. It gives that the canonical abelian bounded-below exchange to $Q$ is an isomorphism. By [lem-kun-unbounded-exchange-agrees], the canonical unbounded abelian exchange is the same map through the canonical bounded-below inclusions and direct-image comparisons. Finally [lem-kun-unbounded-abelian-exchange-comparison] identifies the forgotten module exchange with this abelian exchange through its two endpoint isomorphisms. Conservativity therefore proves that the canonical module exchange $g_{Y,Q}^*Rh_*E\\to Rh_{Q,*}g_{T,Q}^*E$ is an isomorphism.",
+      "uses": [
+        "lem-kun-unbounded-abelian-exchange-comparison",
+        "lem-kun-0f09",
+        "lem-kun-unbounded-exchange-agrees"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F09, lemma-smooth-base-change-general; coefficient forgetting and bounded-below/unbounded comparison as in the cited nodes"
+      }
+    },
+    {
+      "text": "By [lem-weil-pbc-qcqs-morphism-permanence](3), $h_Q:T_Q\\to Y_Q$ is qcqs. Set $E_Q=g_{T,Q}^*E$. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact](3) keeps it bounded below, and $N$ still annihilates its cohomology. Forget coefficients as in step 3. Apply [lem-kun-0f1c-exchange] to $h_Q$, the field extension $L/Q$, and the underlying abelian object of $E_Q$. Its torsion hypothesis holds since $N$ is a unit in $Q$; this lemma allows arbitrary extensions, so no separability of $L/Q$ is imposed. It asserts that the canonical bounded-below abelian exchange is an isomorphism. Use [lem-kun-unbounded-exchange-agrees] and then the endpoint-isomorphism identity and conservativity in [lem-kun-unbounded-abelian-exchange-comparison], exactly as in step 3. The result is invertibility of the specified unbounded module exchange for $h_Q$ and $L/Q$. This square has the chosen corners $(Y_Q)_L=Y_Q\\times_{\\operatorname{Spec}Q}\\operatorname{Spec}L$, $(T_Q)_L$. Let $\\square_2=(h_Q,h_L,k,k_1)$, with $k=1_Y\\times_B(\\operatorname{Spec}L\\to\\operatorname{Spec}Q):Y_L\\to Y_Q$ and $k_1$ likewise; by [def-pc-base-change] and [lem-weil-pbc-cartesian-square-pasting] it is cartesian, and the unique $Y_Q$- and $L$-morphisms $\\varphi_Y:Y_L\\to(Y_Q)_L$, $\\varphi_T:T_L\\to(T_Q)_L$ are isomorphisms with $(h_Q)_L\\varphi_T=\\varphi_Yh_L$. So $\\square_2$ is the square $\\square_\\varphi=((h_Q)_L,h_L,\\varphi_Y,\\varphi_T)$ pasted onto the 0F1C square $(h_Q,(h_Q)_L,r_{Y_Q},r_{T_Q})$, as $r_{Y_Q}\\varphi_Y=k$ and $r_{T_Q}\\varphi_T=k_1$. Inverse images along the isomorphisms $\\varphi$ are equivalences, with quasi-inverses the inverse images along $\\varphi^{-1}$, by the composition and identity isomorphisms of [lem-weil-pbc-inverse-image-composition] (2), (3), applied termwise. Hence $\\operatorname{Ex}_{\\square_\\varphi}$ is invertible by [lem-weil-mate-iso-along-equivalences], and [lem-fin-module-exchange-composite-base-change] shows that $\\operatorname{Ex}_{\\square_2}$ is invertible.",
+      "uses": [
+        "lem-weil-pbc-qcqs-morphism-permanence",
+        "prop-weil-pbc-inverse-image-modules-exact",
+        "lem-kun-0f1c-exchange",
+        "lem-kun-unbounded-exchange-agrees",
+        "lem-kun-unbounded-abelian-exchange-comparison",
+        "def-pc-base-change",
+        "lem-weil-pbc-cartesian-square-pasting",
+        "lem-weil-pbc-inverse-image-composition",
+        "lem-weil-mate-iso-along-equivalences",
+        "lem-fin-module-exchange-composite-base-change"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F1C, lemma-base-change-field-extension, including its purely inseparable reduction"
+      }
+    },
+    {
+      "text": "Paste the cartesian square $\\square_1$ for $Y_Q\\to Y$ (step 3) and the square $\\square_2$ for $k:Y_L\\to Y_Q$ (step 4). Since $g_{Y,Q}\\circ k=g_Y$ and $g_{T,Q}\\circ k_1=g_T$ by [def-pc-base-change], the outer rectangle is literally the square $(h,h_L,g_Y,g_T)$ of the statement; only the commutativity enters the exchange through $\\theta_\\square$. By [lem-fin-module-exchange-composite-base-change], the canonical exchange for this rectangle is, under the specified inverse-image composition isomorphisms, the pullback by $k$ of the exchange in step 3 followed by the exchange for $\\square_2$ in step 4. Both factors are isomorphisms: any functor preserves an inverse, and a composite of invertible arrows is invertible. Hence $\\operatorname{Ex}_{h,E}$ is an isomorphism. The same pasting identity proves the final compatibility clause, for these canonical mates and not merely for some isomorphism of their endpoints.",
+      "uses": [
+        "lem-fin-module-exchange-composite-base-change",
+        "def-pc-base-change"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tags 0F09 and 0F1C, successive base changes; module mate-pasting identity in the cited node"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
     "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-pc-open-immersion-smooth-composition",
-    "lem-pc-proper-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F09, lemma-smooth-base-change-general: smooth qcqs stages and affine transitions; geometry Tags 01T6, 01OY, 01VC, 01VA, 01V7 and 01YW"
-   }
-  },
-  {
-   "text": "Write $U_WE$ for the underlying abelian derived object. The exact coefficient-forgetting functor, its commutation with cohomology, and its conservativity are supplied by [lem-kun-unbounded-abelian-exchange-comparison]. Since $NA=0$, every stalk of every cohomology sheaf of $U_TE$ is killed by $N$. Moreover $N$ is a unit on $B$, on $Y$, and on every base change: its inverse is the image of $N^{-1}\\in F$. The object $U_TE$ is bounded below. Apply [lem-kun-0f09] with base $S=Y$, morphism $f=h$, stages $S_i=Y_i$, and limit $S'=Y_Q$. Step 2 verifies all stage hypotheses, and $h$ is qcqs by assumption. It gives that the canonical abelian bounded-below exchange to $Q$ is an isomorphism. By [lem-kun-unbounded-exchange-agrees], the canonical unbounded abelian exchange is the same map through the canonical bounded-below inclusions and direct-image comparisons. Finally [lem-kun-unbounded-abelian-exchange-comparison] identifies the forgotten module exchange with this abelian exchange through its two endpoint isomorphisms. Conservativity therefore proves that the canonical module exchange $g_{Y,Q}^*Rh_*E\\to Rh_{Q,*}g_{T,Q}^*E$ is an isomorphism.",
-   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-limit-fibre-products",
     "lem-kun-unbounded-abelian-exchange-comparison",
     "lem-kun-0f09",
-    "lem-kun-unbounded-exchange-agrees"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F09, lemma-smooth-base-change-general; coefficient forgetting and bounded-below/unbounded comparison as in the cited nodes"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-qcqs-morphism-permanence](3), $h_Q:T_Q\\to Y_Q$ is qcqs. Set $E_Q=g_{T,Q}^*E$. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact](3) keeps it bounded below, and $N$ still annihilates its cohomology. Forget coefficients as in step 3. Apply [lem-kun-0f1c-exchange] to $h_Q$, the field extension $L/Q$, and the underlying abelian object of $E_Q$. Its torsion hypothesis holds since $N$ is a unit in $Q$; this lemma allows arbitrary extensions, so no separability of $L/Q$ is imposed. It asserts that the canonical bounded-below abelian exchange is an isomorphism. Use [lem-kun-unbounded-exchange-agrees] and then the endpoint-isomorphism identity and conservativity in [lem-kun-unbounded-abelian-exchange-comparison], exactly as in step 3. The result is invertibility of the specified unbounded module exchange for $h_Q$ and $L/Q$. This square has the chosen corners $(Y_Q)_L=Y_Q\\times_{\\operatorname{Spec}Q}\\operatorname{Spec}L$, $(T_Q)_L$. Let $\\square_2=(h_Q,h_L,k,k_1)$, with $k=1_Y\\times_B(\\operatorname{Spec}L\\to\\operatorname{Spec}Q):Y_L\\to Y_Q$ and $k_1$ likewise; by [def-pc-base-change] and [lem-weil-pbc-cartesian-square-pasting] it is cartesian, and the unique $Y_Q$- and $L$-morphisms $\\varphi_Y:Y_L\\to(Y_Q)_L$, $\\varphi_T:T_L\\to(T_Q)_L$ are isomorphisms with $(h_Q)_L\\varphi_T=\\varphi_Yh_L$. So $\\square_2$ is the square $\\square_\\varphi=((h_Q)_L,h_L,\\varphi_Y,\\varphi_T)$ pasted onto the 0F1C square $(h_Q,(h_Q)_L,r_{Y_Q},r_{T_Q})$, as $r_{Y_Q}\\varphi_Y=k$ and $r_{T_Q}\\varphi_T=k_1$. Inverse images along the isomorphisms $\\varphi$ are equivalences, with quasi-inverses the inverse images along $\\varphi^{-1}$, by the composition and identity isomorphisms of [lem-weil-pbc-inverse-image-composition] (2), (3), applied termwise. Hence $\\operatorname{Ex}_{\\square_\\varphi}$ is invertible by [lem-weil-mate-iso-along-equivalences], and [lem-fin-module-exchange-composite-base-change] shows that $\\operatorname{Ex}_{\\square_2}$ is invertible.",
-   "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-kun-unbounded-exchange-agrees",
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-kun-0f1c-exchange",
-    "lem-kun-unbounded-exchange-agrees",
-    "lem-kun-unbounded-abelian-exchange-comparison",
     "def-pc-base-change",
     "lem-weil-pbc-cartesian-square-pasting",
     "lem-weil-pbc-inverse-image-composition",
     "lem-weil-mate-iso-along-equivalences",
     "lem-fin-module-exchange-composite-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1C, lemma-base-change-field-extension, including its purely inseparable reduction"
-   }
-  },
-  {
-   "text": "Paste the cartesian square $\\square_1$ for $Y_Q\\to Y$ (step 3) and the square $\\square_2$ for $k:Y_L\\to Y_Q$ (step 4). Since $g_{Y,Q}\\circ k=g_Y$ and $g_{T,Q}\\circ k_1=g_T$ by [def-pc-base-change], the outer rectangle is literally the square $(h,h_L,g_Y,g_T)$ of the statement; only the commutativity enters the exchange through $\\theta_\\square$. By [lem-fin-module-exchange-composite-base-change], the canonical exchange for this rectangle is, under the specified inverse-image composition isomorphisms, the pullback by $k$ of the exchange in step 3 followed by the exchange for $\\square_2$ in step 4. Both factors are isomorphisms: any functor preserves an inverse, and a composite of invertible arrows is invertible. Hence $\\operatorname{Ex}_{h,E}$ is an isomorphism. The same pasting identity proves the final compatibility clause, for these canonical mates and not merely for some isomorphism of their endpoints.",
-   "uses": [
-    "lem-fin-module-exchange-composite-base-change",
-    "def-pc-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0F09 and 0F1C, successive base changes; module mate-pasting identity in the cited node"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-sc-integral-function-field-affine-fraction",
-  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-pc-open-immersion-smooth-composition",
-  "lem-pc-proper-base-change",
-  "lem-kun-unbounded-abelian-exchange-comparison",
-  "lem-kun-0f09",
-  "lem-kun-unbounded-exchange-agrees",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-kun-0f1c-exchange",
-  "def-pc-base-change",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-mate-iso-along-equivalences",
-  "lem-fin-module-exchange-composite-base-change"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0F09 and 0F1C; five-step module exchange argument, with Mathlib over-category limit preservation replacing the fibre-product limit theorem; C4, 2026-10-19."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "geometric generic fibre direct image exchange for finite type schemes over an arbitrary field and algebraically closed extension",
-   "results": "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.isField_of_universallyClosed; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField; AlgebraicGeometry.instIsAffineFiberOfIsAffineHom; AlgebraicGeometry.Flat.generalizingMap; AlgebraicGeometry.IsFinite.finite_preimage_singleton; AlgebraicGeometry.Scheme.Hom.fiber",
-   "date": "2026-10-17",
-   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"baseChange\"",
-   "results": "Lean.RecordedDeps.baseChangeLogPos; Submodule.baseChange; LinearMap.baseChange; LinearEquiv.baseChange; LinearMap.baseChange_id; Submodule.baseChange_bot; Submodule.baseChange_top; Submodule.tmul_mem_baseChange_of_mem",
-   "date": "2026-10-17",
-   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-  },
-  {
-   "tool": "grep",
-   "query": "(internalHom|baseChange|projectionFormula|exceptional)",
-   "results": "Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean; Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean; Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean; Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean",
-   "date": "2026-10-17",
-   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-  },
-  {
-   "tool": "grep",
-   "query": "(geometricGeneric|generic.*baseChange|baseChange.*generic)",
-   "results": "No hits",
-   "date": "2026-10-17",
-   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Geometric generic base change for bounded below torsion etale module direct images over an arbitrary algebraically closed field",
-   "results": "Algebra.Etale.baseChange; IsBaseChange.directSumPow; IsBaseChange.finrank_eq; Algebra.Extension.baseChange; KaehlerDifferential.tensorKaehlerEquivBase; Submodule.baseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; RingHom.Etale.isStableUnderBaseChange",
-   "date": "2026-10-17",
-   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Canonical derived direct image base change for localization to a function field followed by arbitrary algebraic field extension with constant torsion coefficients",
-   "results": "Algebra.IsAlgebraic.isBaseChange_of_isFractionRing; AlgebraicGeometry.Scheme.PartialMap.fromFunctionField; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap; AlgebraicGeometry.Scheme.RationalMap.ofFunctionField; AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict; WeierstrassCurve.Affine.Point.baseChange",
-   "date": "2026-10-17",
-   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-  },
-  {
-   "tool": "grep",
-   "query": "(geometricGeneric|generic.*baseChange|baseChange.*generic)",
-   "results": "{\"t\": \"2026-10-17T15:08:07Z\", \"tool\": \"grep\", \"query\": \"(geometricGeneric|generic.*baseChange|baseChange.*generic)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern algebraic morphisms or scalar extension, not the derived etale geometric-generic exchange"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Bounded below torsion etale derived direct image commutes with passage to a function field and an algebraic field extension",
-   "results": "{\"t\": \"2026-10-17T15:08:07Z\", \"tool\": \"leansearch\", \"query\": \"Bounded below torsion etale derived direct image commutes with passage to a function field and an algebraic field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"Algebra.Etale.comp\", \"Algebra.IsEtaleAt.comp\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.formallyEtale\", \"RingHom.Etale.isStableUnderBaseChange\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\"], \"digest\": \"4f071a667cf64a5a\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern algebraic morphisms or scalar extension, not the derived etale geometric-generic exchange"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"baseChange\"",
-   "results": "{\"t\": \"2026-10-17T15:08:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.RecordedDeps.baseChangeLogPos\", \"Submodule.baseChange\", \"LinearMap.baseChange\", \"LinearEquiv.baseChange\", \"LinearMap.baseChange_id\", \"Submodule.baseChange_bot\", \"Submodule.baseChange_top\", \"Submodule.tmul_mem_baseChange_of_mem\"], \"digest\": \"8cfaf78eabb883b6\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern algebraic morphisms or scalar extension, not the derived etale geometric-generic exchange"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Canonical derived etale direct image commutes with pullback to the geometric generic fibre with finite constant ring coefficients",
-   "results": "{\"t\": \"2026-10-17T15:08:10Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical derived etale direct image commutes with pullback to the geometric generic fibre with finite constant ring coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.HasMap.map\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.IsEtaleAt.comp\"], \"digest\": \"eb5e3e657a9ca35c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern algebraic morphisms or scalar extension, not the derived etale geometric-generic exchange"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Smooth base change for a limit of principal open subschemes and arbitrary extension of fields",
-   "results": "{\"t\": \"2026-10-17T15:08:11Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth base change for a limit of principal open subschemes and arbitrary extension of fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.Smooth.baseChange\", \"RingHom.IsStandardOpenImmersion.isStableUnderBaseChange\"], \"digest\": \"03ce5c99c0a8920a\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern algebraic morphisms or scalar extension, not the derived etale geometric-generic exchange"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "lem-sf-etale-generic-exchange-algclosed",
-  "date": "2026-10-17",
-  "group": "Q57"
- },
- "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general",
- "blueprint": {
-  "from": {
-   "node": "thm-weil-etale-geometric-biduality",
-   "place": "Proof paragraph 4, \"The induction hypothesis over ... together with [lem-weil-geometric-generic-duality]\"; direct-image comparison underlying generic restriction",
-   "via": [
-    "lem-sf-etale-generic-exchange-algclosed"
-   ]
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-sf-etale-generic-direct-image-exchange",
-  "worker": "stage1",
-  "summary": "Five steps identify the generic projection as a smooth qcqs limit, apply the existing canonical abelian exchanges for that limit and for arbitrary field extension, transport each to ordinary unbounded constant-module categories and paste the canonical mates. Statement unchanged; no new nodes. All coefficient, boundedness, qcqs and inseparability hypotheses checked. Maintainer reader (Q144 S1): added the unbounded-exchange definition citation and the explicit identification of the 0F1C square's chosen corners with the statement's W x_B Spec L in steps 4-5.",
-  "blueprint": "Realizes the generic-restriction input in thm-weil-etale-geometric-biduality proof paragraph 4 through lem-sf-etale-generic-exchange-algclosed; the direct-image clause of lem-weil-geometric-generic-exchange, with the general 0F09/0F1C tools and arbitrary algebraically closed base.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-integral-function-field-affine-fraction",
-    "why": "Identifies the chosen fraction field with the generic stalk; this unit has no local-ring/function-field identification."
-   },
-   {
-    "node": "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
-    "why": "Supplies the directed affine-neighbourhood limit and affine transitions, a generic geometric tool for the required generic restriction."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Supplies Noetherianity of the finite-type base over a field."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Supplies quasi-separatedness even when the base curve is nonseparated."
-   },
-   {
-    "node": "lem-weil-pbc-qcqs-morphism-permanence",
-    "why": "Supplies qcqs for affine neighbourhood maps and preserves qcqs under the two base changes."
-   },
-   {
-    "node": "lem-pc-open-immersion-smooth-composition",
-    "why": "Supplies smoothness of affine open stages; generic morphism property tool."
-   },
-   {
-    "node": "lem-pc-proper-base-change",
-    "why": "Only clause (2), stability of smoothness under base change, is used; no properness is asserted."
-   },
-   {
-    "node": "lem-weil-pbc-limit-fibre-products",
-    "why": "Supplies the relative limit after base change from B to Y; generic geometric limit tool."
-   },
-   {
-    "node": "lem-kun-unbounded-abelian-exchange-comparison",
-    "why": "Identifies the actual module exchange with abelian exchange and reflects isomorphisms; no coefficient-category identification is assumed."
-   },
-   {
-    "node": "lem-kun-0f09",
-    "why": "General smooth-limit base change implements the generic restriction required in the unit, without replacing that step."
-   },
-   {
-    "node": "lem-kun-unbounded-exchange-agrees",
-    "why": "Identifies the bounded-below and unbounded canonical abelian exchange maps."
-   },
-   {
-    "node": "lem-kun-0f1c-exchange",
-    "why": "General canonical field-extension base change includes inseparability; used as a base-change tool for the required geometric generic restriction."
-   },
-   {
-    "node": "lem-fin-module-exchange-composite-base-change",
-    "why": "Supplies the canonical constant-module exchange pasting identity."
-   },
-   {
-    "node": "lem-weil-pbc-inverse-image-composition",
-    "why": "Supplies the composition and identity isomorphisms making inverse image along a scheme isomorphism an equivalence, needed to identify the chosen 0F1C corners with W x_B Spec L; no node of this unit gives it."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sc-integral-function-field-affine-fraction",
-  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-pc-open-immersion-smooth-composition",
-  "lem-pc-proper-base-change",
-  "lem-kun-unbounded-abelian-exchange-comparison",
-  "lem-kun-0f09",
-  "lem-kun-unbounded-exchange-agrees",
-  "lem-kun-0f1c-exchange",
-  "lem-fin-module-exchange-composite-base-change",
-  "lem-weil-pbc-inverse-image-composition"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-Q144-448c3a071",
-  "group": "Q144",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-448c3a071 (reviewer sub-agent of L); spot-checked: I read the whole item, all five steps and every cited statement, plus Stacks 0F09 (etale-cohomology.tex l.17975) and 0F1C (l.18032) and the current blueprint proof of lem-weil-geometric-generic-exchange (separable limit plus inseparable step; 0F1C uses this same argument internally). The mathematics is correct. The statement is a true composite of 0F09 at the generic point and 0F1C for L/Q. I tested it with N=1, E=0, T empty, h an identity or open immersion, the nonseparated doubled-origin curve, and inseparable L/Q. All hypotheses are met: B is Noetherian and quasi-separated; the U_i->B are smooth and qcqs, and so are their base changes Y_i; limit-fibre-products gives Y_Q as the limit with affine transitions; N^{-1} lies in Gamma(Y,O_Y) and N is a unit in Q; inverse image is exact, so E_Q stays in D^+. Invertibility passes from the abelian maps to the module maps through t∘U(Ex)=Ex∘s and conservativity, without identifying coefficient categories. There is no cycle and no duplicate (lem-weil-geometric-generic-exchange, lem-sc-*-direct-image-exchange and lem-kun-0f1c are weaker or different). No new nodes. Two repairs, in fixes/.../lem-sf-etale-generic-direct-image-exchange.json. (1) B3: the item's exchange is the unbounded module mate, but only def-weil-pbc-derived-exchange was cited; I added [def-kun-unbounded-exchange] to the statement and stmt_deps (citation only). (2) E5: 0F1C is stated for the corners (Y_Q)x_Q L and (T_Q)_L, which differ from the statement's chosen Y x_B L and T_L; step 5 had identified the squares without argument. Step 4 now defines the square for k:Y_L->Y_Q, cartesian by pasting, and shows its exchange is invertible: the square along the corner isomorphisms has invertible exchange by lem-weil-mate-iso-along-equivalences and lem-weil-pbc-inverse-image-composition (2),(3), then lem-fin-module-exchange-composite-base-change applies. Step 5 now pastes literally to the statement's square. proof_deps recomputed. I accept all 13 declared tool uses and added one, lem-weil-pbc-inverse-image-composition.; 1 file(s) fixed by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-c488bd938",
-  "group": "Q53",
-  "result": "pass",
-  "note": "Checked all hypotheses, both canonical exchange clauses, dependency interfaces, sources, universes, edge cases, docstrings, and verbatim statement record. scompile.py reproduced a clean compile. Branch head unchanged."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange",
-  "declaration": "AlgebraicGeometry.Etale.genericDirectImageExchange",
-  "declarations": [
-   "AlgebraicGeometry.Etale.genericDirectImageFirstSquare",
-   "AlgebraicGeometry.Etale.genericDirectImageSecondSquare",
-   "AlgebraicGeometry.Etale.genericDirectImageExchangeConclusion",
-   "AlgebraicGeometry.Etale.genericDirectImageExchange"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean",
-  "statement": "theorem genericDirectImageExchange (F : Type u) [Field F] [IsAlgClosed F] (N : ℕ) (hN : 1 ≤ N) (hNF : IsUnit (N : F)) (A : Type (u + 1)) [CommRing A] [Finite A] (hNA : ∀ a : A, N • a = 0) (B : Scheme.{u}) [B.Over (Spec (.of F))] [Smooth (B ↘ Spec (.of F))] [IsIntegral B] [LocallyOfFiniteType (B ↘ Spec (.of F))] [QuasiCompact (B ↘ Spec (.of F))] (hBdim : topologicalKrullDim B = 1) (U : B.Opens) (hU : IsAffineOpen U) [Nonempty U] (Q : Type u) [Field Q] [Algebra (B.presheaf.obj (op U)) Q] [IsFractionRing (B.presheaf.obj (op U)) Q] (L : Type u) [Field L] [Algebra Q L] [IsAlgClosed L] [Algebra.IsAlgebraic Q L] (T Y : Over B) [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (h : T ⟶ Y) [QuasiCompact h.left] [QuasiSeparated h.left] (E : _root_.DerivedCategory.Plus (Sheaf T.left.smallEtaleTopology (ModuleCat.{u + 1} A))) : genericDirectImageExchangeConclusion A h (Spec.map (CommRingCat.ofHom (algebraMap (B.presheaf.obj (op U)) Q)) ≫ hU.fromSpec) (Spec.map (CommRingCat.ofHom (algebraMap Q L))) E.obj",
-  "branch": "newtargets-dag",
-  "by": "Q53",
-  "date": "2026-10-17",
-  "existing": false
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
-  "result": "pass",
-  "landing": "20261019T231048-L-544541",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0F09 and 0F1C specialized to the ordinary generic projection and then L/Q; canonical coefficient transport and mate pasting"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "geometric generic fibre direct image exchange for finite type schemes over an arbitrary field and algebraically closed extension",
+      "results": "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.isField_of_universallyClosed; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField; AlgebraicGeometry.instIsAffineFiberOfIsAffineHom; AlgebraicGeometry.Flat.generalizingMap; AlgebraicGeometry.IsFinite.finite_preimage_singleton; AlgebraicGeometry.Scheme.Hom.fiber",
+      "date": "2026-10-17",
+      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"baseChange\"",
+      "results": "Lean.RecordedDeps.baseChangeLogPos; Submodule.baseChange; LinearMap.baseChange; LinearEquiv.baseChange; LinearMap.baseChange_id; Submodule.baseChange_bot; Submodule.baseChange_top; Submodule.tmul_mem_baseChange_of_mem",
+      "date": "2026-10-17",
+      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+    },
+    {
+      "tool": "grep",
+      "query": "(internalHom|baseChange|projectionFormula|exceptional)",
+      "results": "Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean; Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean; Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean; Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean",
+      "date": "2026-10-17",
+      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+    },
+    {
+      "tool": "grep",
+      "query": "(geometricGeneric|generic.*baseChange|baseChange.*generic)",
+      "results": "No hits",
+      "date": "2026-10-17",
+      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Geometric generic base change for bounded below torsion etale module direct images over an arbitrary algebraically closed field",
+      "results": "Algebra.Etale.baseChange; IsBaseChange.directSumPow; IsBaseChange.finrank_eq; Algebra.Extension.baseChange; KaehlerDifferential.tensorKaehlerEquivBase; Submodule.baseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; RingHom.Etale.isStableUnderBaseChange",
+      "date": "2026-10-17",
+      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Canonical derived direct image base change for localization to a function field followed by arbitrary algebraic field extension with constant torsion coefficients",
+      "results": "Algebra.IsAlgebraic.isBaseChange_of_isFractionRing; AlgebraicGeometry.Scheme.PartialMap.fromFunctionField; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap; AlgebraicGeometry.Scheme.RationalMap.ofFunctionField; AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict; WeierstrassCurve.Affine.Point.baseChange",
+      "date": "2026-10-17",
+      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+    },
+    {
+      "tool": "grep",
+      "query": "(geometricGeneric|generic.*baseChange|baseChange.*generic)",
+      "results": "{\"t\": \"2026-10-17T15:08:07Z\", \"tool\": \"grep\", \"query\": \"(geometricGeneric|generic.*baseChange|baseChange.*generic)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: hits concern algebraic morphisms or scalar extension, not the derived etale geometric-generic exchange"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Bounded below torsion etale derived direct image commutes with passage to a function field and an algebraic field extension",
+      "results": "{\"t\": \"2026-10-17T15:08:07Z\", \"tool\": \"leansearch\", \"query\": \"Bounded below torsion etale derived direct image commutes with passage to a function field and an algebraic field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"Algebra.Etale.comp\", \"Algebra.IsEtaleAt.comp\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.formallyEtale\", \"RingHom.Etale.isStableUnderBaseChange\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\"], \"digest\": \"4f071a667cf64a5a\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: hits concern algebraic morphisms or scalar extension, not the derived etale geometric-generic exchange"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"baseChange\"",
+      "results": "{\"t\": \"2026-10-17T15:08:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.RecordedDeps.baseChangeLogPos\", \"Submodule.baseChange\", \"LinearMap.baseChange\", \"LinearEquiv.baseChange\", \"LinearMap.baseChange_id\", \"Submodule.baseChange_bot\", \"Submodule.baseChange_top\", \"Submodule.tmul_mem_baseChange_of_mem\"], \"digest\": \"8cfaf78eabb883b6\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: hits concern algebraic morphisms or scalar extension, not the derived etale geometric-generic exchange"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Canonical derived etale direct image commutes with pullback to the geometric generic fibre with finite constant ring coefficients",
+      "results": "{\"t\": \"2026-10-17T15:08:10Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical derived etale direct image commutes with pullback to the geometric generic fibre with finite constant ring coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.HasMap.map\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.IsEtaleAt.comp\"], \"digest\": \"eb5e3e657a9ca35c\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: hits concern algebraic morphisms or scalar extension, not the derived etale geometric-generic exchange"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Smooth base change for a limit of principal open subschemes and arbitrary extension of fields",
+      "results": "{\"t\": \"2026-10-17T15:08:11Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth base change for a limit of principal open subschemes and arbitrary extension of fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.Smooth.baseChange\", \"RingHom.IsStandardOpenImmersion.isStableUnderBaseChange\"], \"digest\": \"03ce5c99c0a8920a\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: hits concern algebraic morphisms or scalar extension, not the derived etale geometric-generic exchange"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-sf-etale-generic-exchange-algclosed",
+    "date": "2026-10-17",
+    "group": "Q57"
+  },
+  "chapter": "sec-six-functors",
+  "unit": "sk-prop-sf-biduality-general",
+  "blueprint": {
+    "from": {
+      "node": "thm-weil-etale-geometric-biduality",
+      "place": "Proof paragraph 4, \"The induction hypothesis over ... together with [lem-weil-geometric-generic-duality]\"; direct-image comparison underlying generic restriction",
+      "via": [
+        "lem-sf-etale-generic-exchange-algclosed"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "lem-sf-etale-generic-direct-image-exchange",
+    "worker": "stage1",
+    "summary": "Five steps identify the generic projection as a smooth qcqs limit, apply the existing canonical abelian exchanges for that limit and for arbitrary field extension, transport each to ordinary unbounded constant-module categories and paste the canonical mates. Statement unchanged; no new nodes. All coefficient, boundedness, qcqs and inseparability hypotheses checked. Maintainer reader (Q144 S1): added the unbounded-exchange definition citation and the explicit identification of the 0F1C square's chosen corners with the statement's W x_B Spec L in steps 4-5.",
+    "blueprint": "Realizes the generic-restriction input in thm-weil-etale-geometric-biduality proof paragraph 4 through lem-sf-etale-generic-exchange-algclosed; the direct-image clause of lem-weil-geometric-generic-exchange, with the general 0F09/0F1C tools and arbitrary algebraically closed base.",
+    "tool_uses": [
+      {
+        "node": "lem-sc-integral-function-field-affine-fraction",
+        "why": "Identifies the chosen fraction field with the generic stalk; this unit has no local-ring/function-field identification."
+      },
+      {
+        "node": "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+        "why": "Supplies the directed affine-neighbourhood limit and affine transitions, a generic geometric tool for the required generic restriction."
+      },
+      {
+        "node": "lem-weil-pbc-finite-type-over-noetherian",
+        "why": "Supplies Noetherianity of the finite-type base over a field."
+      },
+      {
+        "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+        "why": "Supplies quasi-separatedness even when the base curve is nonseparated."
+      },
+      {
+        "node": "lem-weil-pbc-qcqs-morphism-permanence",
+        "why": "Supplies qcqs for affine neighbourhood maps and preserves qcqs under the two base changes."
+      },
+      {
+        "node": "lem-pc-open-immersion-smooth-composition",
+        "why": "Supplies smoothness of affine open stages; generic morphism property tool."
+      },
+      {
+        "node": "lem-pc-proper-base-change",
+        "why": "Only clause (2), stability of smoothness under base change, is used; no properness is asserted."
+      },
+      {
+        "node": "lem-weil-pbc-limit-fibre-products",
+        "why": "Supplies the relative limit after base change from B to Y; generic geometric limit tool."
+      },
+      {
+        "node": "lem-kun-unbounded-abelian-exchange-comparison",
+        "why": "Identifies the actual module exchange with abelian exchange and reflects isomorphisms; no coefficient-category identification is assumed."
+      },
+      {
+        "node": "lem-kun-0f09",
+        "why": "General smooth-limit base change implements the generic restriction required in the unit, without replacing that step."
+      },
+      {
+        "node": "lem-kun-unbounded-exchange-agrees",
+        "why": "Identifies the bounded-below and unbounded canonical abelian exchange maps."
+      },
+      {
+        "node": "lem-kun-0f1c-exchange",
+        "why": "General canonical field-extension base change includes inseparability; used as a base-change tool for the required geometric generic restriction."
+      },
+      {
+        "node": "lem-fin-module-exchange-composite-base-change",
+        "why": "Supplies the canonical constant-module exchange pasting identity."
+      },
+      {
+        "node": "lem-weil-pbc-inverse-image-composition",
+        "why": "Supplies the composition and identity isomorphisms making inverse image along a scheme isomorphism an equivalence, needed to identify the chosen 0F1C corners with W x_B Spec L; no node of this unit gives it."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-limit-fibre-products",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-kun-0f09",
+    "lem-kun-unbounded-exchange-agrees",
+    "lem-kun-0f1c-exchange",
+    "lem-fin-module-exchange-composite-base-change",
+    "lem-weil-pbc-inverse-image-composition"
+  ],
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-Q144-448c3a071",
+    "group": "Q144",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-448c3a071 (reviewer sub-agent of L); spot-checked: I read the whole item, all five steps and every cited statement, plus Stacks 0F09 (etale-cohomology.tex l.17975) and 0F1C (l.18032) and the current blueprint proof of lem-weil-geometric-generic-exchange (separable limit plus inseparable step; 0F1C uses this same argument internally). The mathematics is correct. The statement is a true composite of 0F09 at the generic point and 0F1C for L/Q. I tested it with N=1, E=0, T empty, h an identity or open immersion, the nonseparated doubled-origin curve, and inseparable L/Q. All hypotheses are met: B is Noetherian and quasi-separated; the U_i->B are smooth and qcqs, and so are their base changes Y_i; limit-fibre-products gives Y_Q as the limit with affine transitions; N^{-1} lies in Gamma(Y,O_Y) and N is a unit in Q; inverse image is exact, so E_Q stays in D^+. Invertibility passes from the abelian maps to the module maps through t∘U(Ex)=Ex∘s and conservativity, without identifying coefficient categories. There is no cycle and no duplicate (lem-weil-geometric-generic-exchange, lem-sc-*-direct-image-exchange and lem-kun-0f1c are weaker or different). No new nodes. Two repairs, in fixes/.../lem-sf-etale-generic-direct-image-exchange.json. (1) B3: the item's exchange is the unbounded module mate, but only def-weil-pbc-derived-exchange was cited; I added [def-kun-unbounded-exchange] to the statement and stmt_deps (citation only). (2) E5: 0F1C is stated for the corners (Y_Q)x_Q L and (T_Q)_L, which differ from the statement's chosen Y x_B L and T_L; step 5 had identified the squares without argument. Step 4 now defines the square for k:Y_L->Y_Q, cartesian by pasting, and shows its exchange is invertible: the square along the corner isomorphisms has invertible exchange by lem-weil-mate-iso-along-equivalences and lem-weil-pbc-inverse-image-composition (2),(3), then lem-fin-module-exchange-composite-base-change applies. Step 5 now pastes literally to the statement's square. proof_deps recomputed. I accept all 13 declared tool uses and added one, lem-weil-pbc-inverse-image-composition.; 1 file(s) fixed by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-c488bd938",
+    "group": "Q53",
+    "result": "pass",
+    "note": "Checked all hypotheses, both canonical exchange clauses, dependency interfaces, sources, universes, edge cases, docstrings, and verbatim statement record. scompile.py reproduced a clean compile. Branch head unchanged."
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange",
+    "declaration": "AlgebraicGeometry.Etale.genericDirectImageExchange",
+    "declarations": [
+      "AlgebraicGeometry.Etale.genericDirectImageFirstSquare",
+      "AlgebraicGeometry.Etale.genericDirectImageSecondSquare",
+      "AlgebraicGeometry.Etale.genericDirectImageExchangeConclusion",
+      "AlgebraicGeometry.Etale.genericDirectImageExchange"
+    ],
+    "file": "lean/Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean",
+    "statement": "theorem genericDirectImageExchange (F : Type u) [Field F] [IsAlgClosed F] (N : ℕ) (hN : 1 ≤ N) (hNF : IsUnit (N : F)) (A : Type (u + 1)) [CommRing A] [Finite A] (hNA : ∀ a : A, N • a = 0) (B : Scheme.{u}) [B.Over (Spec (.of F))] [Smooth (B ↘ Spec (.of F))] [IsIntegral B] [LocallyOfFiniteType (B ↘ Spec (.of F))] [QuasiCompact (B ↘ Spec (.of F))] (hBdim : topologicalKrullDim B = 1) (U : B.Opens) (hU : IsAffineOpen U) [Nonempty U] (Q : Type u) [Field Q] [Algebra (B.presheaf.obj (op U)) Q] [IsFractionRing (B.presheaf.obj (op U)) Q] (L : Type u) [Field L] [Algebra Q L] [IsAlgClosed L] [Algebra.IsAlgebraic Q L] (T Y : Over B) [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (h : T ⟶ Y) [QuasiCompact h.left] [QuasiSeparated h.left] (E : _root_.DerivedCategory.Plus (Sheaf T.left.smallEtaleTopology (ModuleCat.{u + 1} A))) : genericDirectImageExchangeConclusion A h (Spec.map (CommRingCat.ofHom (algebraMap (B.presheaf.obj (op U)) Q)) ≫ hU.fromSpec) (Spec.map (CommRingCat.ofHom (algebraMap Q L))) E.obj",
+    "branch": "newtargets-dag",
+    "by": "Q53",
+    "date": "2026-10-17",
+    "existing": false
+  }
 }

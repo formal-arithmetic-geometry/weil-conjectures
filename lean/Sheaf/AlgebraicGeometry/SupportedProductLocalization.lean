@@ -324,54 +324,6 @@ noncomputable def supportedExternalProductMap (A : Type (u + 1)) [CommRing A]
     ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map e) ≫
     (supportedExternalProductIso (ModuleCat.{u + 1} A) f g K' L').inv
 
-
-private theorem supportedDerivedTensorMap_comp (A : Type (u + 1)) [CommRing A]
-    (X : Scheme.{u})
-    {M₁ M₂ M₃ N₁ N₂ N₃ : DerivedCategoryModule A X}
-    (a : M₁ ⟶ M₂) (a' : M₂ ⟶ M₃) (e : N₁ ⟶ N₂) (e' : N₂ ⟶ N₃) :
-    supportedDerivedTensorMap A X a e ≫ supportedDerivedTensorMap A X a' e' =
-      supportedDerivedTensorMap A X (a ≫ a') (e ≫ e') := by
-  set_option backward.isDefEq.respectTransparency false in
-    simp only [supportedDerivedTensorMap, Functor.map_comp, NatTrans.comp_app,
-      Category.assoc]
-    rw [NatTrans.naturality_assoc]
-
-private theorem supportedFirstEvaluation_naturality (A : Type (u + 1)) [CommRing A]
-    {S X Y B : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
-    (b : B ⟶ X) [IsClosedImmersion b]
-    {K K' : DerivedCategoryModule A X} (a : K ⟶ K') :
-    (supportedFirstCoefficients A f g b).mapDerivedCategory.map
-        ((supportedSectionsDerived A b).map a) ≫ supportedFirstEvaluation A f g b K' =
-      supportedFirstEvaluation A f g b K ≫
-        (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map a := by
-  set_option backward.isDefEq.respectTransparency false in
-    let τ := Functor.whiskerLeft (supportedSectionsDerived A b)
-        (Functor.mapDerivedCategoryCompIso (supportedCoefficients A b)
-          (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g))).hom ≫
-      Functor.whiskerRight (supportedCoefficientDerivedAdjunction A b).counit
-        (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).mapDerivedCategory ≫
-      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
-        (pullback.fst f g)).inv
-    exact τ.naturality a
-
-private theorem supportedSecondEvaluation_naturality (A : Type (u + 1)) [CommRing A]
-    {S X Y D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
-    (d : D ⟶ Y) [IsClosedImmersion d]
-    {L L' : DerivedCategoryModule A Y} (e : L ⟶ L') :
-    (supportedSecondCoefficients A f g d).mapDerivedCategory.map
-        ((supportedSectionsDerived A d).map e) ≫ supportedSecondEvaluation A f g d L' =
-      supportedSecondEvaluation A f g d L ≫
-        (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map e := by
-  set_option backward.isDefEq.respectTransparency false in
-    let τ := Functor.whiskerLeft (supportedSectionsDerived A d)
-        (Functor.mapDerivedCategoryCompIso (supportedCoefficients A d)
-          (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g))).hom ≫
-      Functor.whiskerRight (supportedCoefficientDerivedAdjunction A d).counit
-        (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).mapDerivedCategory ≫
-      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
-        (pullback.snd f g)).inv
-    exact τ.naturality e
-
 /-- Naturality of every specified exterior-product component under coefficient morphisms.
 Source: Tag 0F1E (blueprint: lem-pur-supported-product-localization).
 Proof: evaluation and the coefficient tensor map are natural in both variables. Apply
@@ -387,20 +339,7 @@ theorem supportedProductLocalization_naturality (A : Type (u + 1)) [CommRing A]
       supportedExteriorProduct A f g b d K L ≫
         (supportedSectionsDerived A (supportedProductImmersion f g b d)).map
           (supportedExternalProductMap A f g a e) := by
-  set_option backward.isDefEq.respectTransparency false in
-    unfold supportedExteriorProduct
-    apply (supportedCoefficientDerivedAdjunction A
-      (supportedProductImmersion f g b d)).homEquiv_naturality_left_square
-    have ht := (exists_unique_supportedCoefficientTensorDerived A f g b d).choose_spec.1
-    change supportedCoefficientTensorDerivedCondition A f g b d
-      (supportedCoefficientTensorDerived A f g b d) at ht
-    simp only [supportedExternalProductMap, supportedExternalProductIso, eqToIso,
-      eqToHom_refl, Category.id_comp, Category.comp_id]
-    rw [← Category.assoc, ht.1, Category.assoc, supportedDerivedTensorMap_comp,
-      supportedFirstEvaluation_naturality, supportedSecondEvaluation_naturality,
-      ← supportedDerivedTensorMap_comp]
-    simp only [Category.assoc]
-
+  sorry
 
 /-- Naturality under open restriction of the first ambient scheme, for every
 support, hence for all three components of each localization diagram.

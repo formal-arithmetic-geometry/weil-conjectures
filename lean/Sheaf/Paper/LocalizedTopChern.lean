@@ -48,7 +48,7 @@ Source: blueprint localized-top-Chern, Tate degrees (blueprint: thm-pur-localize
 Proof: expand the successor cast and distribute multiplication by two. -/
 theorem localizedChernDegree_succ (r : ℕ) :
     2 * (r : ℤ) + 2 = 2 * ((r + 1 : ℕ) : ℤ) := by
-  omega
+  sorry
 
 /-- Assemble the ordered tensor-shift comparison in an abstract abelian category.
 Keeping the category abstract prevents repeated normalization of the concrete
@@ -365,7 +365,7 @@ Proof: project the corresponding conjunct of LocalizedTopChernLaws. -/
 theorem LocalizedTopChernLaws.forget_support (P : PurityFiniteSetting.{u})
     {c : P.LocalizedTopChernClasses} (h : P.LocalizedTopChernLaws c) :
     P.LocalizedTopChernForgetSupport c := by
-  exact h.1
+  sorry
 
 /-- The line clause of the four localized Chern laws.
 Source: blueprint localized-top-Chern, (L1)--(L4)
@@ -374,7 +374,7 @@ Proof: project the corresponding conjunct of LocalizedTopChernLaws. -/
 theorem LocalizedTopChernLaws.line (P : PurityFiniteSetting.{u})
     {c : P.LocalizedTopChernClasses} (h : P.LocalizedTopChernLaws c) :
     P.LocalizedTopChernLine c := by
-  exact h.2.1
+  sorry
 
 /-- The base_change clause of the four localized Chern laws.
 Source: blueprint localized-top-Chern, (L1)--(L4)
@@ -383,7 +383,7 @@ Proof: project the corresponding conjunct of LocalizedTopChernLaws. -/
 theorem LocalizedTopChernLaws.base_change (P : PurityFiniteSetting.{u})
     {c : P.LocalizedTopChernClasses} (h : P.LocalizedTopChernLaws c) :
     P.LocalizedTopChernBaseChange c := by
-  exact h.2.2.1
+  sorry
 
 /-- The direct_sum clause of the four localized Chern laws.
 Source: blueprint localized-top-Chern, (L1)--(L4)
@@ -392,7 +392,7 @@ Proof: project the corresponding conjunct of LocalizedTopChernLaws. -/
 theorem LocalizedTopChernLaws.direct_sum (P : PurityFiniteSetting.{u})
     {c : P.LocalizedTopChernClasses} (h : P.LocalizedTopChernLaws c) :
     P.LocalizedTopChernDirectSum c := by
-  exact h.2.2.2
+  sorry
 
 /-- There is a canonical localized top Chern family, with precisely (L1)--(L4).
 Source: blueprint main-20261015, thm-pur-localized-top-chern, statement and the

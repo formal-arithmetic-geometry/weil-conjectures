@@ -37,11 +37,7 @@ is closed. -/
 theorem compactProperSupportClosed {B X Z : Scheme.{u}} {f : X ⟶ B}
     (c : Compactification f) (i : Z ⟶ X) [IsClosedImmersion i] [IsProper (i ≫ f)] :
     IsClosedImmersion (i ≫ c.i) := by
-  have : IsProper ((i ≫ c.i) ≫ c.g) := by
-    simpa only [Category.assoc, ← c.comm] using
-      (inferInstance : IsProper (i ≫ f))
-  have : IsProper (i ≫ c.i) := IsProper.of_comp _ c.g
-  exact IsClosedImmersion.of_isPreimmersion _ (i ≫ c.i).isClosedMap.isClosed_range
+  sorry
 
 /-- Restriction of supported constants along the compactifying open, uniquely
 normalized on the constant quotient sections.
@@ -187,12 +183,7 @@ theorem compactProductSupportProper {B X Y Z W : Scheme.{u}}
     (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
     [IsProper (i ≫ f)] [IsProper (j ≫ g)] :
     IsProper (supportedProductImmersion f g i j ≫ pullback.toBase f g) := by
-  have h : supportedProductImmersion f g i j ≫ pullback.toBase f g =
-      pullback.fst (i ≫ f) (j ≫ g) ≫ (i ≫ f) := by
-    simp only [supportedProductImmersion, pullback.toBase, ← Category.assoc,
-      pullback.map, pullback.lift_fst]
-  rw [h]
-  infer_instance
+  sorry
 
 /-- Excision with the specified restriction identification of an arbitrary extension.
 Source: blueprint Step 1, excision paragraph

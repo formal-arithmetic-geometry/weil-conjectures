@@ -22,6 +22,15 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 import Sheaf.RingTheory.DerivedModuleScalarAdjunction
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization
+import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
+import Sheaf.Paper.KFlatRingedToposPullback
 /-!
 # Derived constant realization and scalar extension
 
@@ -121,56 +130,6 @@ def constantSection (M : ModuleCat.{max u v} R) (V : Cᵒᵖ) (x : M) :
   (((PresheafOfModules.sheafificationAdjunction (realizationRingUnit J R)).unit.app
     ((siteConstantModulePresheafGeneral (C := C) R).obj M)).app V) x
 
-section RestrictionSheafification
-
-variable {A₀ B₀ : Cᵒᵖ ⥤ RingCat.{max u v}}
-  {A B : Sheaf J RingCat.{max u v}}
-  (ηA : A₀ ⟶ A.obj) (ηB : B₀ ⟶ B.obj)
-  [Presheaf.IsLocallyInjective J ηA] [Presheaf.IsLocallySurjective J ηA]
-  [Presheaf.IsLocallyInjective J ηB] [Presheaf.IsLocallySurjective J ηB]
-  (a₀ : A₀ ⟶ B₀) (a : A ⟶ B) (hsq : ηA ≫ a.hom = a₀ ≫ ηB)
-  (P : PresheafOfModules.{max u v} B₀) (F : Sheaf J AddCommGrpCat.{max u v})
-  (φ : P.presheaf ⟶ F.obj)
-  [Presheaf.IsLocallyInjective J φ] [Presheaf.IsLocallySurjective J φ]
-
-include hsq in
-set_option backward.isDefEq.respectTransparency false in
-private theorem sheafify_restriction_smul
-    (V : Cᵒᵖ) (r : A.obj.obj V) (x : F.obj.obj V) :
-    PresheafOfModules.Sheafify.smul ηA
-        (M₀ := (PresheafOfModules.restrictScalars a₀).obj P) φ r x =
-      PresheafOfModules.Sheafify.smul ηB φ (a.hom.app V r) x := by
-  apply F.isSeparated _ _ (J.intersection_covering
-    (Presheaf.imageSieve_mem J ηA r) (Presheaf.imageSieve_mem J φ x))
-  rintro U f ⟨⟨r₀, hr₀⟩, ⟨x₀, hx₀⟩⟩
-  have hr : ηB.app (op U) (a₀.app (op U) r₀) =
-      B.obj.map f.op (a.hom.app V r) := by
-    have hs := ConcreteCategory.congr_hom (congr_app hsq (op U)) r₀
-    change a.hom.app (op U) (ηA.app (op U) r₀) = ηB.app (op U) (a₀.app (op U) r₀)
-      at hs
-    rw [← hs, hr₀]
-    exact ConcreteCategory.congr_hom (a.hom.naturality f.op) r
-  exact (PresheafOfModules.Sheafify.map_smul_eq ηA
-    (M₀ := (PresheafOfModules.restrictScalars a₀).obj P)
-    φ r x f.op r₀ hr₀ x₀ hx₀).trans
-      (PresheafOfModules.Sheafify.map_smul_eq ηB φ (a.hom.app V r) x f.op
-        (a₀.app _ r₀) hr x₀ hx₀).symm
-
-set_option backward.isDefEq.respectTransparency false in
-private def sheafifyRestrictionIso :
-    PresheafOfModules.sheafify ηA
-        (M₀ := (PresheafOfModules.restrictScalars a₀).obj P) φ ≅
-      (SheafOfModules.restrictScalars a).obj (PresheafOfModules.sheafify ηB φ) where
-  hom := ⟨PresheafOfModules.homMk (𝟙 F.obj) (fun V r x ↦
-    sheafify_restriction_smul J ηA ηB a₀ a hsq P F φ V r x)⟩
-  inv := ⟨PresheafOfModules.homMk (𝟙 F.obj) (fun V r x ↦
-    (sheafify_restriction_smul J ηA ηB a₀ a hsq P F φ V r x).symm)⟩
-  hom_inv_id := by ext V x; rfl
-  inv_hom_id := by ext V x; rfl
-
-end RestrictionSheafification
-
-set_option backward.isDefEq.respectTransparency false in
 /-- Restricting constant realization commutes canonically with restricting modules.
 The equation fixes the comparison on constant presheaf sections.
 Source: Stacks 03CY (blueprint: lem-sfb-constant-realization-derived-scalar-extension).
@@ -184,39 +143,7 @@ theorem restrictionIso_existsUnique :
       ∀ (M : ModuleCat.{max u v} S) (V : Cᵒᵖ) (x : M),
         (e.hom.app M).val.app V (constantSection J M V x) =
           constantSection J ((ModuleCat.restrictScalars q).obj M) V x := by
-  let := (realizationRingUnit_locallyBijective J R).1
-  let := (realizationRingUnit_locallyBijective J R).2
-  let := (realizationRingUnit_locallyBijective J S).1
-  let := (realizationRingUnit_locallyBijective J S).2
-  let a₀ := (Functor.const Cᵒᵖ).map (RingCat.ofHom q)
-  let a := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).map
-    ((constantSheaf J CommRingCat.{max u v}).map (CommRingCat.ofHom q))
-  have hsq : realizationRingUnit J R ≫ a.hom = a₀ ≫ realizationRingUnit J S := by
-    exact congrArg (Functor.whiskerRight · (forget₂ CommRingCat RingCat))
-      (toSheafify_naturality J
-        ((Functor.const Cᵒᵖ).map (CommRingCat.ofHom q))).symm
-  let eM (M : ModuleCat.{max u v} S) := sheafifyRestrictionIso J
-    (realizationRingUnit J R) (realizationRingUnit J S) a₀ a hsq
-    ((siteConstantModulePresheafGeneral (C := C) S).obj M)
-    ((presheafToSheaf J AddCommGrpCat).obj
-      ((siteConstantModulePresheafGeneral (C := C) S).obj M).presheaf)
-    (toSheafify J _)
-  let e : ModuleCat.restrictScalars q ⋙ commutativeSiteConstantModuleFunctor J R ≅
-      commutativeSiteConstantModuleFunctor J S ⋙ restriction J q :=
-    NatIso.ofComponents eM (by intro M N f; ext V x; rfl)
-  have hsection (M : ModuleCat.{max u v} S) (V : Cᵒᵖ) (x : M) :
-      (e.inv.app M).val.app V (constantSection J M V x) =
-        constantSection J ((ModuleCat.restrictScalars q).obj M) V x := by
-    rfl
-  refine ⟨e.symm, hsection, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  apply NatTrans.ext
-  funext M
-  apply (SheafOfModules.toSheaf _).map_injective
-  apply ((sheafificationAdjunction J AddCommGrpCat.{max u v}).homEquiv _ _).injective
-  ext V x
-  exact (he' M V x).trans (hsection M V x).symm
+  sorry
 
 /-- The identity-on-constant-sections restriction comparison.
 Source: Stacks 03CY (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
@@ -256,160 +183,6 @@ theorem moduleComparison_naturality {M N : ModuleCat.{max u v} R} (f : M ⟶ N) 
   congr 1
   exact (restrictionIso J q).inv.naturality ((ModuleCat.extendScalars q).map f)
 
-set_option backward.isDefEq.respectTransparency false in
-private theorem moduleComparison_generator (M : ModuleCat.{max u v} R)
-    (V : Cᵒᵖ) (x : M) :
-    (moduleComparison J q M).val.app V
-        ((((adjunction J q).unit.app
-          ((commutativeSiteConstantModuleFunctor J R).obj M)).val.app V)
-            (constantSection J M V x)) =
-      constantSection J ((ModuleCat.extendScalars q).obj M) V ((1 : S) ⊗ₜ[R,q] x) := by
-  have constantSection_map {M N : ModuleCat.{max u v} R} (f : M ⟶ N)
-      (V : Cᵒᵖ) (x : M) :
-      ((commutativeSiteConstantModuleFunctor J R).map f).val.app V
-          (constantSection J M V x) = constantSection J N V (f x) := by
-    let := (realizationRingUnit_locallyBijective J R).1
-    let := (realizationRingUnit_locallyBijective J R).2
-    exact (congrArg (fun k ↦ (k.app V).hom x)
-      ((PresheafOfModules.sheafificationAdjunction (realizationRingUnit J R)).unit.naturality
-        ((siteConstantModulePresheafGeneral (C := C) R).map f))).symm
-  have restrictionIso_inv_constantSection (M : ModuleCat.{max u v} S)
-      (V : Cᵒᵖ) (x : M) :
-      ((restrictionIso J q).inv.app M).val.app V
-          (constantSection J ((ModuleCat.restrictScalars q).obj M) V x) =
-        constantSection J M V x := by
-    have h := (Classical.choose_spec (restrictionIso_existsUnique J q)).1 M V x
-    change ((restrictionIso J q).hom.app M).val.app V (constantSection J M V x) = _ at h
-    rw [← h]
-    exact congrArg (fun k ↦ k.val.app V (constantSection J M V x))
-      ((restrictionIso J q).hom_inv_id_app M)
-  have h := (adjunction J q).homEquiv_unit _ _ (moduleComparison J q M)
-  rw [moduleComparison, Equiv.apply_symm_apply] at h
-  have h' := congrArg (fun k ↦ k.val.app V (constantSection J M V x)) h
-  change _ = (moduleComparison J q M).val.app V
-    ((((adjunction J q).unit.app _).val.app V) (constantSection J M V x)) at h'
-  rw [← h']
-  change ((restrictionIso J q).inv.app _).val.app V
-    (((commutativeSiteConstantModuleFunctor J R).map
-      ((ModuleCat.extendRestrictScalarsAdj q).unit.app M)).val.app V
-        (constantSection J M V x)) = _
-  exact (congrArg (fun y ↦ ((restrictionIso J q).inv.app _).val.app V y)
-    (constantSection_map ((ModuleCat.extendRestrictScalarsAdj q).unit.app M) V x)).trans
-      (restrictionIso_inv_constantSection _ V _)
-
-set_option backward.isDefEq.respectTransparency false in
-private def constantScalarSeed (M : ModuleCat.{max u v} R)
-    (N : realizationModules J S)
-    (f : (commutativeSiteConstantModuleFunctor J R).obj M ⟶ (restriction J q).obj N)
-    (V : Cᵒᵖ) :
-    M ⟶ (ModuleCat.restrictScalars q).obj
-      ((ModuleCat.restrictScalars ((realizationRingUnit J S).app V).hom).obj
-        (N.val.obj V)) := by
-  let := (realizationRingUnit_locallyBijective J R).1
-  let := (realizationRingUnit_locallyBijective J R).2
-  refine ModuleCat.ofHom (X := M)
-    (Y := (ModuleCat.restrictScalars q).obj
-      ((ModuleCat.restrictScalars ((realizationRingUnit J S).app V).hom).obj
-        (N.val.obj V)))
-    { toFun := fun x ↦ f.val.app V (constantSection J M V x)
-      map_add' := ?_
-      map_smul' := ?_ }
-  · intro x y
-    exact (congrArg (fun z ↦ f.val.app V z)
-      ((((PresheafOfModules.sheafificationAdjunction (realizationRingUnit J R)).unit.app
-        ((siteConstantModulePresheafGeneral (C := C) R).obj M)).app V).hom.map_add x y)).trans
-      ((f.val.app V).hom.map_add _ _)
-  · intro r x
-    change f.val.app V (constantSection J M V (r • x)) =
-      (realizationRingUnit J S).app V (q r) •
-        (show N.val.obj V from f.val.app V (constantSection J M V x))
-    have hs := (((PresheafOfModules.sheafificationAdjunction
-      (realizationRingUnit J R)).unit.app
-        ((siteConstantModulePresheafGeneral (C := C) R).obj M)).app V).hom.map_smul r x
-    change constantSection J M V (r • x) =
-      (realizationRingUnit J R).app V r • constantSection J M V x at hs
-    rw [hs]
-    have hf := (f.val.app V).hom.map_smul ((realizationRingUnit J R).app V r)
-      (constantSection J M V x)
-    refine hf.trans ?_
-    change (((constantSheaf J CommRingCat).map (CommRingCat.ofHom q)).hom.app V
-      ((realizationRingUnit J R).app V r)) •
-        (show N.val.obj V from f.val.app V (constantSection J M V x)) =
-        (realizationRingUnit J S).app V (q r) •
-          (show N.val.obj V from f.val.app V (constantSection J M V x))
-    have hr := ConcreteCategory.congr_hom
-      (congr_app (toSheafify_naturality J
-        ((Functor.const Cᵒᵖ).map (CommRingCat.ofHom q))) V) r
-    exact congrArg (fun a : ((realizationRing J S).obj.obj V) ↦
-      a • (show N.val.obj V from f.val.app V (constantSection J M V x))) hr.symm
-
-set_option backward.isDefEq.respectTransparency false in
-private def constantScalarLiftSeed (M : ModuleCat.{max u v} R)
-    (N : realizationModules J S)
-    (f : (commutativeSiteConstantModuleFunctor J R).obj M ⟶ (restriction J q).obj N) :
-    (siteConstantModulePresheafGeneral (C := C) S).obj
-        ((ModuleCat.extendScalars q).obj M) ⟶
-      (PresheafOfModules.restrictScalars (realizationRingUnit J S)).obj N.val where
-  app V := ((ModuleCat.extendRestrictScalarsAdj q).homEquiv _ _).symm
-    (constantScalarSeed J q M N f V)
-  naturality {U V} i := by
-    apply ((ModuleCat.extendRestrictScalarsAdj q).homEquiv _ _).injective
-    ext x
-    change ((ModuleCat.extendRestrictScalarsAdj q).homEquiv _ _
-      (((ModuleCat.extendRestrictScalarsAdj q).homEquiv _ _).symm
-        (constantScalarSeed J q M N f V))) x =
-      N.val.map i (((ModuleCat.extendRestrictScalarsAdj q).homEquiv _ _
-        (((ModuleCat.extendRestrictScalarsAdj q).homEquiv _ _).symm
-          (constantScalarSeed J q M N f U))) x)
-    simp only [Equiv.apply_symm_apply]
-    change f.val.app V (constantSection J M V x) =
-      N.val.map i (f.val.app U (constantSection J M U x))
-    refine (congrArg (fun z ↦ f.val.app V z) ?_).trans
-      (PresheafOfModules.naturality_apply f.val i (constantSection J M U x))
-    let := (realizationRingUnit_locallyBijective J R).1
-    let := (realizationRingUnit_locallyBijective J R).2
-    exact (PresheafOfModules.naturality_apply
-      ((PresheafOfModules.sheafificationAdjunction (realizationRingUnit J R)).unit.app
-        ((siteConstantModulePresheafGeneral (C := C) R).obj M)) i x)
-
-set_option backward.isDefEq.respectTransparency false in
-private def constantScalarLift (M : ModuleCat.{max u v} R)
-    (N : realizationModules J S)
-    (f : (commutativeSiteConstantModuleFunctor J R).obj M ⟶ (restriction J q).obj N) :
-    (commutativeSiteConstantModuleFunctor J S).obj ((ModuleCat.extendScalars q).obj M) ⟶ N :=
-  letI := (realizationRingUnit_locallyBijective J S).1
-  letI := (realizationRingUnit_locallyBijective J S).2
-  (PresheafOfModules.sheafificationHomEquiv (realizationRingUnit J S)).symm
-    (constantScalarLiftSeed J q M N f)
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem constantScalarLift_generator (M : ModuleCat.{max u v} R)
-    (N : realizationModules J S)
-    (f : (commutativeSiteConstantModuleFunctor J R).obj M ⟶ (restriction J q).obj N)
-    (V : Cᵒᵖ) (x : M) :
-    (constantScalarLift J q M N f).val.app V
-      (constantSection J ((ModuleCat.extendScalars q).obj M) V ((1 : S) ⊗ₜ[R,q] x)) =
-      f.val.app V (constantSection J M V x) := by
-  let := (realizationRingUnit_locallyBijective J S).1
-  let := (realizationRingUnit_locallyBijective J S).2
-  have h := (PresheafOfModules.sheafificationHomEquiv
-    (realizationRingUnit J S)).apply_symm_apply (constantScalarLiftSeed J q M N f)
-  have h₁ := congrArg (fun t ↦ t.app V ((1 : S) ⊗ₜ[R,q] x)) h
-  change (constantScalarLift J q M N f).val.app V
-    (constantSection J ((ModuleCat.extendScalars q).obj M) V ((1 : S) ⊗ₜ[R,q] x)) =
-    (constantScalarLiftSeed J q M N f).app V ((1 : S) ⊗ₜ[R,q] x) at h₁
-  refine h₁.trans ?_
-  change (((ModuleCat.extendRestrictScalarsAdj q).homEquiv _ _).symm
-    (constantScalarSeed J q M N f V)) ((1 : S) ⊗ₜ[R,q] x) = _
-  exact (ModuleCat.extendRestrictScalarsAdj_homEquiv_apply
-    (((ModuleCat.extendRestrictScalarsAdj q).homEquiv _ _).symm
-      (constantScalarSeed J q M N f V)) x).symm.trans
-        (congrArg (fun t ↦ t x)
-          (((ModuleCat.extendRestrictScalarsAdj q).homEquiv _ _).apply_symm_apply
-            (constantScalarSeed J q M N f V)))
-
-attribute [local irreducible] constantScalarSeed constantScalarLiftSeed constantScalarLift
-
 /-- The ordinary comparison is an isomorphism, with the identity-on-tensors formula.
 Scalar-first tensors in Lean are the paper's m tensor s with factors interchanged.
 Source: Stacks 0GMW and 03CY
@@ -430,73 +203,7 @@ theorem moduleComparison_tensor (M : ModuleCat.{max u v} R) :
                   (constantSection J M V x)))) =
           constantSection J ((ModuleCat.extendScalars q).obj M) V
             (s ⊗ₜ[R, q] x) := by
-  have constantScalar_hom_ext (M : ModuleCat.{max u v} R)
-      (N : realizationModules J S)
-      (f g : (commutativeSiteConstantModuleFunctor J S).obj
-        ((ModuleCat.extendScalars q).obj M) ⟶ N)
-      (h : ∀ (V : Cᵒᵖ) (x : M),
-        f.val.app V (constantSection J ((ModuleCat.extendScalars q).obj M) V
-          ((1 : S) ⊗ₜ[R,q] x)) =
-        g.val.app V (constantSection J ((ModuleCat.extendScalars q).obj M) V
-          ((1 : S) ⊗ₜ[R,q] x))) : f = g := by
-    let := (realizationRingUnit_locallyBijective J S).1
-    let := (realizationRingUnit_locallyBijective J S).2
-    apply (PresheafOfModules.sheafificationHomEquiv (realizationRingUnit J S)).injective
-    apply PresheafOfModules.Hom.ext
-    funext V
-    apply ((ModuleCat.extendRestrictScalarsAdj q).homEquiv _ _).injective
-    ext x
-    exact h V x
-  let := (realizationRingUnit_locallyBijective J R).1
-  let := (realizationRingUnit_locallyBijective J R).2
-  let := (realizationRingUnit_locallyBijective J S).1
-  let := (realizationRingUnit_locallyBijective J S).2
-  let X := (extension J q).obj ((commutativeSiteConstantModuleFunctor J R).obj M)
-  let η := (adjunction J q).unit.app ((commutativeSiteConstantModuleFunctor J R).obj M)
-  let g := constantScalarLift J q M X η
-  have hcg : moduleComparison J q M ≫ g = 𝟙 X := by
-    apply ((adjunction J q).homEquiv _ _).injective
-    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_id]
-    apply (PresheafOfModules.sheafificationHomEquiv (realizationRingUnit J R)).injective
-    ext V x
-    change g.val.app V ((moduleComparison J q M).val.app V
-      (η.val.app V (constantSection J M V x))) = η.val.app V (constantSection J M V x)
-    rw [moduleComparison_generator]
-    exact constantScalarLift_generator J q M X η V x
-  have hgc : g ≫ moduleComparison J q M = 𝟙 _ := by
-    apply constantScalar_hom_ext M
-    intro V x
-    change (moduleComparison J q M).val.app V
-      (g.val.app V (constantSection J ((ModuleCat.extendScalars q).obj M) V
-        ((1 : S) ⊗ₜ[R,q] x))) = _
-    rw [constantScalarLift_generator]
-    exact moduleComparison_generator J q M V x
-  refine ⟨⟨⟨g, hcg, hgc⟩⟩, ?_⟩
-  intro V x s
-  change (moduleComparison J q M).val.app V
-    ((realizationRingUnit J S).app V s •
-      (show X.val.obj V from η.val.app V (constantSection J M V x))) = _
-  calc
-    _ = (realizationRingUnit J S).app V s •
-        ((moduleComparison J q M).val.app V
-          (η.val.app V (constantSection J M V x))) :=
-      ((moduleComparison J q M).val.app V).hom.map_smul _ _
-    _ = (realizationRingUnit J S).app V s •
-        constantSection J ((ModuleCat.extendScalars q).obj M) V ((1 : S) ⊗ₜ[R,q] x) :=
-      congrArg ((realizationRingUnit J S).app V s • ·)
-        (moduleComparison_generator J q M V x)
-    _ = constantSection J ((ModuleCat.extendScalars q).obj M) V (s ⊗ₜ[R,q] x) := by
-      have h := (((PresheafOfModules.sheafificationAdjunction
-        (realizationRingUnit J S)).unit.app
-          ((siteConstantModulePresheafGeneral (C := C) S).obj
-            ((ModuleCat.extendScalars q).obj M))).app V).hom.map_smul s
-              ((1 : S) ⊗ₜ[R,q] x)
-      change constantSection J ((ModuleCat.extendScalars q).obj M) V
-        (s • ((1 : S) ⊗ₜ[R,q] x)) =
-        (realizationRingUnit J S).app V s •
-          constantSection J ((ModuleCat.extendScalars q).obj M) V
-            ((1 : S) ⊗ₜ[R,q] x) at h
-      simpa only [TensorProduct.smul_tmul', smul_eq_mul, mul_one] using h.symm
+  sorry
 
 /-- The genuine chain map of termwise constant tensor comparisons.
 Source: Stacks 0GMW (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/

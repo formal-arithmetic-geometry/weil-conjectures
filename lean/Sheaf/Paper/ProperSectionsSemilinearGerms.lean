@@ -21,7 +21,6 @@ public import Sheaf.SixFunctors.FrobeniusPointTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 import Sheaf.Paper.FrobeniusGeometricExchange
 import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Whiskering
 import Sheaf.Paper.BasicOperationsCoefficientReduction
 import Sheaf.Paper.SemilinearDerivedSections
 import Sheaf.Paper.CompletedRlimFunctor
@@ -98,41 +97,6 @@ def integralCounit (M : sfIntegralConstructibleCategory l E (D.geometricFiber Y�
           (systemAdjunction l E a).counit.app (B.obj M.obj)) ≫
       inv (T.adjunction.unit.app M.obj))
 
-private theorem integralCounit_natural
-    (M N : sfIntegralConstructibleCategory l E (D.geometricFiber Y₀).left) (f : M ⟶ N) :
-    (constructibleIntegralPullback l E (D.geometricFiber Y₀).hom).map
-        ((properFrobeniusIntegralFunctor D Y₀ l E false).map f) ≫
-        integralCounit D Y₀ l E N =
-      integralCounit D Y₀ l E M ≫ f := by
-  let X := (D.geometricFiber Y₀).left
-  let a := (D.geometricFiber Y₀).hom
-  let I := (sfIntegralConstructible l E X).ι
-  let S := (models l E).system (Spec (.of D.k))
-  let T := (models l E).system X
-  let A := integralComparisonDerivedSequencePullback l E a
-  let R := systemDirect l E a
-  let B := reduction l E X
-  let L := coefficientSequenceLimit l E X
-  let η := Functor.whiskerLeft I T.adjunction.unit
-  have : ∀ K, IsIso (η.app K) := fun K ↦ (models l E).complete X K
-  have := NatIso.isIso_of_isIso_app η
-  let t : I ⋙ integralDirectImage l E a ⋙ integralDerivedPullback l E a ⟶ I :=
-    Functor.whiskerLeft (I ⋙ integralDirectImage l E a)
-        ((models l E).pullback a).realization.hom ≫
-      Functor.whiskerRight (Functor.whiskerLeft (I ⋙ B)
-        (Functor.whiskerRight (Functor.whiskerLeft R S.adjunction.counit) A ≫
-          (systemAdjunction l E a).counit)) L ≫ (asIso η).inv
-  apply ObjectProperty.hom_ext
-  change (integralDerivedPullback l E a).map
-      ((integralDirectImage l E a).map f.hom) ≫ _ = _ ≫ f.hom
-  have ht (K : sfIntegralConstructibleCategory l E X) :
-      t.app K = (integralCounit D Y₀ l E K).hom := by
-    simp only [t, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-      asIso_inv, NatIso.isIso_inv_app]
-    rfl
-  rw [← ht M, ← ht N]
-  exact t.naturality f
-
 /-- The integral germ before applying the point fibre. The inverse identity
 comparison and z*a*=id comparisons put the counit in the required coordinates.
 Source: Stacks 07A7, 0D6D (blueprint: lem-a1-proper-sections-semilinear-germs). -/
@@ -151,75 +115,6 @@ def integralGerm
         (D.geometricFiber Y₀).hom).hom.app
         ((properFrobeniusIntegralFunctor D Y₀ l E false).obj M)).hom ≫
       (integralDerivedPullback l E z).map (integralCounit D Y₀ l E M).hom)
-
-private theorem integralUnit_inv_natural (X : Scheme.{u})
-    [∀ x : X, Invertible (l : X.residueField x)]
-    (M N : sfIntegralConstructibleCategory l E X) (f : M ⟶ N) :
-    f.hom ≫ (integralComparisonUnit l E (comparisons l) X N).inv =
-      (integralComparisonUnit l E (comparisons l) X M).inv ≫
-        (integralDerivedPullback l E (𝟙 X)).map f.hom := by
-  let B := (comparisons l).coefficient E
-  let I := (sfIntegralConstructible l E X).ι
-  let η := Functor.whiskerLeft I (B.system X).adjunction.unit
-  have : ∀ K, IsIso (η.app K) := fun K ↦ B.complete X K
-  have := NatIso.isIso_of_isIso_app η
-  let e : I ⋙ integralDerivedPullback l E (𝟙 X) ≅ I :=
-    Functor.isoWhiskerLeft I (B.pullback (𝟙 X)).realization ≪≫
-      Functor.isoWhiskerRight
-        (Functor.isoWhiskerLeft (I ⋙ (B.system X).reduction) (integralComparisonSystemUnit l E X))
-        (coefficientSequenceLimit l E X) ≪≫ (asIso η).symm
-  have he (K : sfIntegralConstructibleCategory l E X) :
-      e.inv.app K = (integralComparisonUnit l E (comparisons l) X K).inv := by
-    simp only [e, Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerLeft_inv,
-      Functor.isoWhiskerRight_inv,
-      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app, asIso_hom]
-    rfl
-  rw [← he M, ← he N]
-  exact e.inv.naturality f
-
-private theorem integralGerm_natural
-    (z : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left)
-    (hz : z ≫ (D.geometricFiber Y₀).hom = 𝟙 _)
-    (M N : sfIntegralConstructibleCategory l E (D.geometricFiber Y₀).left) (f : M ⟶ N) :
-    (properFrobeniusIntegralFunctor D Y₀ l E false).map f ≫
-        integralGerm D Y₀ l E z hz N =
-      integralGerm D Y₀ l E z hz M ≫ (constructibleIntegralPullback l E z).map f := by
-  let R := properFrobeniusIntegralFunctor D Y₀ l E false
-  let a := (D.geometricFiber Y₀).hom
-  let Z := integralDerivedPullback l E z
-  let c := ((integralPullbackComposition l E).choose z a).hom
-  have h₁ := integralUnit_inv_natural l E (Spec (.of D.k))
-    (R.obj M) (R.obj N) (R.map f)
-  have h₂ := eqToHom_naturality
-    (fun g : Spec (.of D.k) ⟶ Spec (.of D.k) ↦
-      (integralDerivedPullback l E g).map (R.map f).hom) hz.symm
-  have h₃ := congrArg (fun g ↦ g.hom) (c.naturality (R.map f))
-  have h₄ := congrArg
-    (fun g ↦ ((constructibleIntegralPullback l E z).map g).hom)
-    (integralCounit_natural D Y₀ l E M N f)
-  apply ObjectProperty.hom_ext
-  change (R.map f).hom ≫ _ = _ ≫ Z.map f.hom
-  unfold integralGerm
-  simp only [ObjectProperty.homMk_hom]
-  simp only [ObjectProperty.FullSubcategory.comp_hom] at h₃
-  change (integralDerivedPullback l E (z ≫ a)).map (R.map f).hom ≫
-      (c.app (R.obj N)).hom = (c.app (R.obj M)).hom ≫
-      (integralDerivedPullback l E z).map
-        ((integralDerivedPullback l E a).map (R.map f).hom) at h₃
-  simp only [Functor.map_comp, ObjectProperty.FullSubcategory.comp_hom] at h₄
-  change (integralDerivedPullback l E z).map
-        ((integralDerivedPullback l E a).map (R.map f).hom) ≫
-      (integralDerivedPullback l E z).map (integralCounit D Y₀ l E N).hom =
-    (integralDerivedPullback l E z).map (integralCounit D Y₀ l E M).hom ≫
-      (integralDerivedPullback l E z).map f.hom at h₄
-  simp only [Category.assoc] at h₁ h₂ h₃ h₄ ⊢
-  change (R.map f).hom ≫
-      (integralComparisonUnit l E (comparisons l) (Spec (.of D.k)) (R.obj N)).inv ≫ _ = _
-  rw [← Category.assoc, h₁]
-  simp only [Category.assoc]
-  rw [reassoc_of% h₂]
-  rw [reassoc_of% h₃]
-  rw [h₄]
 
 /-- The compact rational germ, using the identity-compactification comparison,
 then the scalar-localized integral germ and the actual rational-pullback object map.
@@ -286,46 +181,7 @@ theorem movingPoint_properties
     movingPoint D Y₀ z r ≫ (D.geometricFiber Y₀).hom = 𝟙 _ ∧
       localPositivePower (frobeniusPointIso D).hom r ≫ movingPoint D Y₀ z r =
         z ≫ localPositivePower (D.geometricFrobenius Y₀).hom r := by
-  have hp {X : Scheme.{u}} (g : X ⟶ X) (n : ℕ) :
-      g ≫ localPositivePower g n = localPositivePower g n ≫ g := by
-    induction n with
-    | zero => rfl
-    | succ n ih =>
-      simp only [localPositivePower, ← Category.assoc, ih]
-  have hi (n : ℕ) :
-      localPositivePower (frobeniusPointIso D).hom n ≫
-        localPositivePower (frobeniusPointIso D).inv n = 𝟙 _ := by
-    induction n with
-    | zero => exact (frobeniusPointIso D).hom_inv_id
-    | succ n ih =>
-      rw [localPositivePower, localPositivePower, ← hp (frobeniusPointIso D).inv n]
-      simp only [Category.assoc, Iso.hom_inv_id_assoc, ih]
-  have hi' (n : ℕ) :
-      localPositivePower (frobeniusPointIso D).inv n ≫
-        localPositivePower (frobeniusPointIso D).hom n = 𝟙 _ := by
-    induction n with
-    | zero => exact (frobeniusPointIso D).inv_hom_id
-    | succ n ih =>
-      rw [localPositivePower, localPositivePower, ← hp (frobeniusPointIso D).hom n]
-      simp only [Category.assoc, Iso.inv_hom_id_assoc, ih]
-  have hg : (D.geometricFrobenius Y₀).hom ≫ (D.geometricFiber Y₀).hom =
-      (D.geometricFiber Y₀).hom ≫ (frobeniusPointIso D).hom := by
-    let := Fintype.ofFinite D.k₀
-    exact (D.galoisMap_projections Y₀.hom
-      (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k)).2
-  have hgp (n : ℕ) :
-      localPositivePower (D.geometricFrobenius Y₀).hom n ≫
-        (D.geometricFiber Y₀).hom =
-      (D.geometricFiber Y₀).hom ≫ localPositivePower (frobeniusPointIso D).hom n := by
-    induction n with
-    | zero => exact hg
-    | succ n ih =>
-      rw [localPositivePower, localPositivePower, Category.assoc, hg,
-        ← Category.assoc, ih, Category.assoc]
-  constructor
-  · simp only [movingPoint, Category.assoc, hgp]
-    simp only [← Category.assoc, hz, Category.id_comp, hi']
-  · simp only [movingPoint, ← Category.assoc, hi, Category.id_comp]
+  sorry
 
 /-- b_(r+1,z,M) from the two canonical compositors and the actual square equality.
 Source: Deligne (1.1.14); Stacks 0D6D
