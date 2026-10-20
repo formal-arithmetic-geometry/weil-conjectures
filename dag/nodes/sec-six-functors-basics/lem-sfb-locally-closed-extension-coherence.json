@@ -34,176 +34,56 @@
  ],
  "proof": [
   {
-   "text": "Fix $a=vc$ with $c:S\\hookrightarrow V$ closed and $v:V\\hookrightarrow X$ open. The Noetherian-scheme topology theorem gives the minimal condition on closed subsets; the compact-subsets lemma then makes every subset of $|X|$ quasi-compact. The spaces of all open and closed subschemes below are subspaces of $|X|$, so every open in each is quasi-compact. In particular its intersection with every affine open is quasi-compact: every open immersion used below is quasi-compact, as required by the ringed open--closed theorem. The closed-subset realization lemma supplies closed subschemes on the closed complements of the opens. The ringed open--closed theorem therefore supplies exact $v_!,c_*$, $v_!\\dashv v^{-1}$, and the invertible open unit; immersion inverse image is exact by the limit-preservation theorem. Apply the ringed-topos module-adjunction theorem to $c$ and the identity coefficient map on $c^{-1}R_V$, transporting along $c^{-1}v^{-1}R\\cong a^{-1}R$; $R_S\\otimes_{R_S}M\\cong M$ gives $c^{-1}\\dashv c_*$. Its specified counit is invertible by the closed-counit theorem. Thus $a_!=v_!c_*$ is exact. Inverse-image composition identifies $a^*$ with $c^{-1}v^{-1}$, compatibly with the coefficient actions. The inverse open unit followed by the closed counit gives $r_a:a^*a_!\\xrightarrow{\\sim}1$. This is a restriction comparison; no composite adjunction is asserted.",
+   "text": "Apply the normalized module-sheaf extension-system theorem to obtain exact functors, restriction comparisons, and normalized module composition satisfying the two unit laws and associativity. This result assumes neither full faithfulness nor a Hom bijection, on either module sheaves or derived categories.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-site-morphism-composition",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-proetale-ringed-closed-counit",
-    "lem-weil-pbc-closed-subset-closed-subscheme",
-    "lem-sfb-noetherian-space-compact-subsets"
+    "lem-sfb-locally-closed-module-extension-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "proof (2), exact locally closed extension and its restriction; Stacks Tags 09AA, 09BM, 09BN, 09AH and 03DI--03DJ"
-   }
+   "elementary": false
   },
   {
-   "text": "For an open $j$ and closed complement $i$, the localization sequence gives two useful characterizations on module sheaves: if $i^{-1}F=0$, its counit $j_!j^{-1}F\\to F$ is an isomorphism; if $j^{-1}F=0$, its unit $F\\to i_*i^{-1}F$ is an isomorphism. It also detects zero objects, and detects isomorphisms by applying the two exact restrictions to the kernel and cokernel. Separately, the two adjunctions of Step 1 give\n$$\\operatorname{Hom}(v_!c_*M,v_!c_*N)\\cong\\operatorname{Hom}(c_*M,c_*N)\\cong\\operatorname{Hom}(M,N).$$\nThe first bijection uses $v_!\\dashv v^{-1}$ and $v^{-1}v_!\\cong1$; the second uses $c^{-1}\\dashv c_*$ and $c^{-1}c_*\\cong1$. By the displayed adjunction formulas and their triangle identities, their composite is exactly $f\\mapsto r_{a,N}\\,a^*(f)\\,r_{a,M}^{-1}$, and its inverse is $a_!$ on morphisms. Consequently $a_!$ is fully faithful on module sheaves. Whenever two functors in this proof are already isomorphic to the same $a_!$, there is at most one morphism between any two of their values with a specified restriction to $S$: conjugate by those isomorphisms and use this Hom bijection.",
+   "text": "Factor each coefficient immersion as a closed immersion followed by an open immersion. Mathlib IsImmersion.isImmersion_iff_exists supplies the factorization; the Noetherian-space subspace instance makes the intermediate scheme quasi-compact, and the inverse-image composition isomorphism specifies its coefficient identification. The coefficient equation is the isomorphism cancellation equation. Already on module sheaves, the separate open and closed adjunctions and restriction isomorphisms give full faithfulness of open extension and closed direct image. Transport along the closed comparison and gamma to deduce module full faithfulness for every locally closed immersion. Naturality gives that restriction conjugation followed by the extension map is the identity; full faithfulness gives the module Hom bijection. Descend each separate open or closed exact adjunction using the termwise complex adjunction and localization. The descended restriction isomorphism and adjunction show that open extension is fully faithful as a left adjoint and closed extension as a right adjoint. Transport closed full faithfulness along its specified comparison with actual direct image, and then use gamma for the closed/open factorization. Conjugating restriction by its natural isomorphism is bijective on Hom sets: its composite with the extension map is the identity by naturality, while full faithfulness makes extension a bijection.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "proof (2), essential images, zero detection and full faithfulness"
-   }
-  },
-  {
-   "text": "The open-restriction-counit lemma gives $h^{-1}c_*\\cong c_{W,*}h_S^{-1}$ for a closed $c:S\\hookrightarrow V$ and an open $h:W\\hookrightarrow V$, with $S_W=S\\times_VW$, and gives compatibility with the actual closed counit. For opens $j:U\\hookrightarrow X$, $q:W\\hookrightarrow X$, the extension presheaf restricted to $W$ is the extension presheaf for $U\\times_XW\\hookrightarrow W$: a test object over $W$ factors through $U$ precisely when it factors through the intersection. The unique summand and its sections agree, and otherwise both values are zero. Slice sheafification commutes with restriction; the module actions agree by the unique extension property of module sheafification. Hence $q^{-1}j_!\\cong(U\\times_XW\\hookrightarrow W)_!(U\\times_XW\\to U)^{-1}$. This proves only open restriction calculations, not arbitrary closed base change.",
-   "uses": [
-    "lem-sfb-proetale-open-restriction-counit",
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-cbc-sieve-slice-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "proof (2), open-slice calculations for mixed compositions; Stacks sites-modules.tex Tag 03DI and slice sheafification compatibility"
-   }
-  },
-  {
-   "text": "Pure open extensions compose canonically: for opens $h:W\\hookrightarrow V$ and $v:V\\hookrightarrow X$, $v_!h_!$ and $(vh)_!$ are both left adjoint to $h^{-1}v^{-1}\\cong(vh)^{-1}$. Apply the unit-compatible-left-adjoint comparison to obtain $v_!h_!\\cong(vh)_!$. All adjunctions here are open adjunctions; the comparison restricts to the identity on $W$, since its defining unit equation becomes the two open restriction identifications. Pure closed direct images compose by the evaluation formula $M(S\\times_V(V\\times_XE))\\cong M(S\\times_XE)$; the fibre-product associativity map is the identity after the canonical restriction identifications on $S$. Composition of open immersions is open from the definition, and composition of closed immersions is closed: on affine opens the two surjective ring maps compose to a surjection. These are the elementary geometric cases of Stacks Tag 02V0.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-site-morphism-composition",
-    "def-weil-open-immersion",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "proof (2), pure open and pure closed composition; schemes.tex Tag 02V0 and proetale.tex Tags 09AA, 09BN"
-   }
-  },
-  {
-   "text": "Here is the shrinking argument for a closed factor. Let $c:S\\hookrightarrow V$ be closed and $h:W\\hookrightarrow V$ open containing the image of $S$; write $d:S\\hookrightarrow W$ for its restriction. Apply the closed-subset realization theorem to $V\\setminus W$, obtaining a closed immersion $e:D\\hookrightarrow V$ with that image. Since $D$ is disjoint from $S$, its map to $V$ factors through the open $V\\setminus S$. The cross-vanishing $(V\\setminus S)^{-1}c_*=0$, followed by inverse-image composition, gives $e^{-1}c_*M=0$. The localization sequence for $h,e$ therefore identifies $h_!h^{-1}c_*M\\xrightarrow{\\sim}c_*M$. Step 3 identifies $h^{-1}c_*M=d_*M$. We have obtained a natural isomorphism $h_!d_*\\cong c_*$ restricting to the identity on $S$: the open counit restricts to the inverse open unit by its triangle identity, and the closed restriction comparison is the counit of Step 1.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-site-morphism-composition",
-    "lem-weil-pbc-proetale-ringed-open-comparison",
-    "lem-weil-pbc-closed-subset-closed-subscheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "proof (2), factorization comparison by shrinking an ambient open"
-   }
-  },
-  {
-   "text": "For two factorizations $a=v c=v'c'$, use the open subscheme $W=V\\times_XV'$ of $X$. Both maps from $S$ to $V,V'$ factor through $W$, and $d:S\\hookrightarrow W$ is closed, being the restriction of $c$ (equivalently $c'$) to this open. Step 5 identifies $c_*\\cong(W\\hookrightarrow V)_!d_*$ and $c'_*\\cong(W\\hookrightarrow V')_!d_*$. Step 4 therefore identifies both extension functors with $(W\\hookrightarrow X)_!d_*$. These are normalized isomorphisms: their restrictions to $S$, using $r_a$, are the identity. This proves factorization independence without a composite adjunction. Step 2 shows that the normalized comparison is unique, so comparisons via a further intersection agree and satisfy the cocycle law. The topology and scheme structure used here are literal open restrictions of the given closed immersions, not an inference that an arbitrary morphism factors through a closed subscheme merely from its image.",
-   "uses": [
-    "def-weil-open-immersion",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "proof (2), independence of the closed-then-open factorization"
-   }
-  },
-  {
-   "text": "Suppose $a=iu$ with $i:Z\\hookrightarrow X$ closed and $u:S\\hookrightarrow Z$ open. The subspace topology gives an open $j:V\\hookrightarrow X$ with $S=Z\\times_XV$; write $d:S\\hookrightarrow V$ and $A=j_!d_*M$. Inverse-image composition, the open unit and the closed counit give $\\sigma:u^{-1}i^{-1}A\\xrightarrow{\\sim}M$. Realize $X\\setminus V$ as a closed subscheme $e:D\\hookrightarrow X$. Its pullback $f:B=Z\\times_XD\\hookrightarrow Z$ complements $u$, and $f^{-1}i^{-1}A=t^{-1}e^{-1}j_!d_*M=0$ for $t:B\\to D$. For $k:X\\setminus Z\\hookrightarrow X$, Step 3 gives $k^{-1}A=j'_!k'^{-1}d_*M=0$, where $k':V\\setminus S\\hookrightarrow V$ and $j':V\\setminus S\\hookrightarrow X\\setminus Z$; the last equality is closed cross-vanishing. Step 1 checks that $k,u$ are quasi-compact. The supported-reconstruction lemma applies to these two vanishing restrictions and $\\sigma$, giving a natural isomorphism $\\theta:A\\xrightarrow{\\sim}i_*u_!M$ with its explicit restriction equation. The open-restriction-counit lemma identifies the closed counit in $\\sigma$ with the restriction of the counit for $i$. Thus that equation says precisely that $\\theta$ restricts to the identity on $S$ under $r_a$. Step 6 identifies this normalized comparison with the chosen $a_!$.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-site-morphism-composition",
     "def-weil-open-immersion",
     "def-weil-closed-immersion",
-    "lem-weil-pbc-closed-subset-closed-subscheme",
-    "lem-sfb-proetale-open-restriction-counit",
-    "lem-sfb-proetale-supported-reconstruction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "proof (2), mixed open/closed factorization; localization sequence of Stacks Tag 09AH"
-   }
-  },
-  {
-   "text": "Let $a=v c:S\\hookrightarrow X$ and $b=w d:T\\hookrightarrow S$, with $v,w$ open and $c,d$ closed. Lift the open $W\\subset S$ defining $w$ to an open $V'\\subset V$ by the subspace topology for the closed immersion $c$. This gives a cartesian square $c w=h e$, with $h:V'\\hookrightarrow V$ open and $e:W=S\\times_VV'\\hookrightarrow V'$ closed. Step 7 supplies $c_*w_!\\cong h_!e_*$. Hence\n$$a_!b_!=v_!c_*w_!d_*\\cong v_!h_!e_*d_*\\cong(vh)_!(ed)_*.$$\nHere $vh$ is open and $ed$ is closed by Step 4, so the last functor is extension by zero for the exhibited factorization of $ab$. Compare it to the chosen $(ab)_!$ using Step 6; the result is $\\gamma_{a,b}$. Every map in the construction restricts to the identity on $T$, proving its normalization. In particular $a_!b_!$ lies in the same essential image as $(ab)_!$.",
-   "uses": [
-    "def-weil-open-immersion",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "proof (2), compatibility with arbitrary mixed compositions; schemes.tex Tag 02V0 open-lifting argument"
-   }
-  },
-  {
-   "text": "The comparisons are independent of every choice and satisfy the claimed laws by the Hom uniqueness in Step 2, rather than uniqueness of nonexistent composite adjoints. Indeed, after the isomorphisms of Steps 6 and 8, the source and target of two candidate comparisons both lie in the essential image of the same locally closed extension functor. Their restrictions agree (they are the identity), so the comparisons agree. For an identity immersion the identity comparison has that normalization; this proves both unit laws. For three composable immersions $a,b,d$, both maps from $a_!b_!d_!M$ to $(abd)_!M$ lie between objects in the essential image of $(abd)_!$: apply Step 8 twice, in either order. After restriction to the final source they are both the identity, by the normalized restriction comparisons and inverse-image associativity. Step 2 makes them equal. The inverse-image associativity here is the canonical site-composition associativity: the two fibre-product comparisons agree by the universal property, and their adjoint inverse-image comparisons agree by the unit normalization. This proves associativity, including mixed cases, on module sheaves.",
-   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
     "lem-weil-pbc-site-morphism-composition",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "proof (2), unit and associativity laws for normalized composition"
-   }
-  },
-  {
-   "text": "Finally pass all these constructions to the ordinary unbounded derived categories. The exact-functor derived-factorization theorem applies to each open extension, closed direct image and immersion inverse image, so their induced functors are represented termwise with no boundedness or resolution assumption. The termwise-adjunction theorem supplies the open and closed units, counits and triangle identities on complexes separately. Apply the localization universal property to those natural transformations: it descends units and counits to the derived functors, and its equality-detection clause descends both triangle identities. We therefore have $D(v_!)\\dashv D(v^{-1})$ and $D(c^{-1})\\dashv D(c_*)$, still with invertible open unit and closed counit. The two successive Hom transpositions of Step 2 now give\n$$\\operatorname{Hom}_{D(X,R)}(a_!M,a_!N)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(S,R_S)}(M,N),\\qquad f\\longmapsto r_{a,N}\\,a^*(f)\\,r_{a,M}^{-1}.$$\nThus the termwise locally closed extension is fully faithful and restriction gives exactly the stated Hom bijection. The same localization statement descends $r_a$, the factorization and mixed comparisons, and $\\gamma$. Their normalization, unit and associativity identities already hold as natural transformations of complexes (degreewise the module identities above), so equality detection proves them on the entire unbounded derived categories. No assertion that $a_!\\dashv a^*$ is used.",
-   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations",
     "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-termwise-adjunction-homotopy",
     "lem-weil-pbc-localization-universal-property"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "proof (2), passage to ordinary unbounded derived categories; exact-functor factorization and localization"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Define derived restriction as the derived composite comparison followed by the derived identity comparison; define derived gamma by mapDerivedCategoryCompNatIso and derived identity by mapDerivedCategoryNatIso followed by the identity comparison. Their factorization formulas on Q of every complex are the exact-functor localization formulas. Derive the identity factorization formula from its homotopy-category factorization. For each unit law, derived natural-isomorphism transport respects postcomposition and eqToIso, and its whiskering and identity comparison equations convert the corresponding module unit law into the required derived law. For associativity apply the source library mapDerivedCategoryCompNatIso_cocycle to the module associativity equation, absorbing the final eqToIso into the last comparison, and use compatibility with postcomposition and equality transport to recover the required final eqToIso. These are complete Lean proofs of all fields of DerivedCoherence; there is no extra existence or boundedness assumption. Combine that constructed structure with the module-sheaf witness.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-site-morphism-composition",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-proetale-ringed-closed-counit",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
-  "lem-sfb-noetherian-space-compact-subsets",
-  "lem-sfb-proetale-open-restriction-counit",
-  "def-weil-extension-by-zero-presheaf",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-cbc-sieve-slice-sheafification",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sfb-locally-closed-module-extension-coherence",
   "def-weil-open-immersion",
   "def-weil-closed-immersion",
-  "lem-weil-pbc-proetale-ringed-open-comparison",
-  "lem-sfb-proetale-supported-reconstruction",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-site-morphism-composition",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "P1",
+  "date": "2026-10-21",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-  "place": "Proof (2), compatibility with composition of immersions. Expanded using Stacks proetale.tex Tags 09AA, 09BM, 09BN, 09AH; sites-modules.tex Tags 03DI, 03DJ; schemes.tex Tag 02V0. The mixed comparison is proved through localization and the closed inverse-image/direct-image adjunction, not a composite shriek/restriction adjunction."
+  "place": "Proof (2): the geometric module-sheaf assertion is extracted as a genuine smaller theorem; Step 10 is implemented completely using Mathlib localization of adjunctions and the adopted source library derived-comparison APIs."
  },
  "mathlib_searches": [
   {
@@ -460,19 +340,6 @@
   "module": "Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence",
   "declaration": "AlgebraicGeometry.Scheme.locallyClosedExtensionCoherence",
   "declarations": [
-   "AlgebraicGeometry.Scheme.LocallyClosedCoefficients",
-   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion",
-   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.identity",
-   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.comp",
-   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.pull",
-   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.push",
-   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.pullComp",
-   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData",
-   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.derived",
-   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.closedOpenFactorization",
-   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.openClosedFactorization",
-   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.factorizationComparison",
-   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.Coherent",
    "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.DerivedCoherence",
    "AlgebraicGeometry.Scheme.locallyClosedExtensionCoherence"
   ],
@@ -482,6 +349,16 @@
   "by": "Q88",
   "date": "2026-10-16",
   "existing": false,
-  "note": "The helper structures package this node’s simultaneous witnesses and equations, with actual published module inverse/direct images and exact termwise derived functors. Pure open extension is specified by its adjunction (the equivalent characterization in the statement); pure closed extension uses the normalized actual counit. No arbitrary functor or conclusion is assumed. The added landed statement dependencies supply canonical coefficient identifications and the section-normalized ordinary inverse-image composition."
+  "note": "DerivedCoherence and the original theorem retain their names and types. The other existing definitions are unchanged in LocallyClosedModuleExtensionCoherence, publicly reexported by this module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e426d",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261020T221304-L-4169280",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs live LocallyClosedExtensionCoherence (moved block byte-identical, DerivedCoherence and item statement unchanged); new sorry ∃E, NormalizedComposition vs item (strictly smaller: module full faithfulness, Hom bijection and all DerivedCoherence proved); 5/6 importers compile against delivered .lbuild, FlatModelGeneration fails identically on published baseline"
  }
 }

@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-proetale-identified-open-closed",
+ "kind": "statement",
+ "title": "Exact open and closed extensions with identified inverse-image coefficients",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion] and $j:U\\hookrightarrow X$ its complementary quasi-compact open immersion [def-weil-open-immersion, def-weil-finite-type-morphism], regarded as an object of the small pro-etale site [def-weil-pbc-proetale-site]. Let $R,R_Z,R_U$ be arbitrary sheaves of commutative rings on the respective pro-etale sites, with specified isomorphisms $i^{-1}R\\cong R_Z$ and $j^{-1}R\\cong R_U$ [def-weil-proetale-inverse-image]. Use actual tensor pullback, direct image and the specified canonical module adjunction [def-weil-pbc-proetale-operations] on module sheaves [def-weil-sheaf-of-modules-category]. Then $i_*$ preserves finite limits and finite colimits, and the counit of the specified adjunction $i^*\\dashv i_*$ is invertible. There exists an additive functor $F:\\operatorname{Mod}(U,R_U)\\to\\operatorname{Mod}(X,R)$ preserving finite limits and finite colimits and an adjunction $F\\dashv j^*$ whose unit is invertible. For every $N$, $i^*F(N)$ is zero. For every $M$ with $i^*M$ zero, the counit $Fj^*M\\to M$ of this same adjunction is invertible. No finiteness assumption is imposed on the coefficient rings.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open; Tags 09AA, 09BM and 09BN. Coefficient and adjunction transport use sites-modules.tex Tags 03DI and 03DJ and categories.tex Tag 0037. This is a composite consequence in the specified sheaf-of-modules presentation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Scalar restriction along each coefficient isomorphism is an equivalence. Uniqueness of left adjoints identifies its inverse with the actual sheafified tensor extension. Compose with ordinary module inverse image to identify actual tensor pullback.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-exc-proetale-closed-essential-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the ringed open/closed localization theorem. Compose scalar equivalence, open-slice equivalence and ringed extension by zero. Transport the right adjoint along the inverse-image/slice comparison. Exactness is preserved by equivalences; finite biproduct preservation gives additivity. The ringed extension is fully faithful by its invertible unit, hence so is the composite, making its unit invertible.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the sectionwise identified-coefficient direct-image isomorphism: scalar transport followed by ringed direct image agrees with actual direct image. Thus actual direct image is exact. Its full faithfulness follows from the ringed counit and scalar equivalence. Full faithfulness makes the counit of the specified actual adjunction invertible.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-exc-proetale-closed-essential-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar transport carries ringed closed cross-vanishing to i^*F=0. If i^*M=0, the third object of the ringed localization sequence is zero. Exactness and the monic open counit make that counit epic and hence invertible. Scalar and slice equivalences exhibit M in the actual extension essential image. Its fully faithful left adjoint then has invertible counit at M.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-exc-proetale-closed-essential-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-exc-proetale-closed-essential-image",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Open/closed factors and supported reconstruction in Steps 1, 5 and 7 of lem-sfb-locally-closed-module-extension-coherence. The Lean proof is complete; no new sorry."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "Proof (2), open/closed construction and supported mixed-factor comparison.",
+   "via": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-sfb-locally-closed-module-extension-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Aa]djunction|[Aa]djunction.*extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact pro-etale identified-coefficient statement. Use the published categorical and ringed-site results in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\", \"Adjunction\"",
+   "results": "5 hits: PresheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-21",
+   "verdict": "No exact pro-etale identified-coefficient statement. Use the published categorical and ringed-site results in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for module sheaves along an open immersion with an isomorphism of inverse image coefficient rings is an exact fully faithful left adjoint",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; PresheafOfModules.sheafificationAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "date": "2026-10-21",
+   "verdict": "No exact pro-etale identified-coefficient statement. Use the published categorical and ringed-site results in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for module sheaves along an open immersion with an isomorphism of inverse image coefficient rings is an exact fully faithful left adjoint",
+   "date": "2026-10-21",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; PresheafOfModules.sheafificationAdjunction",
+   "verdict": "No exact arbitrary-coefficient pro-etale extension or reconstruction theorem. The generic module adjunction and geometric factorization APIs are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence",
+  "date": "2026-10-21",
+  "group": "P1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIdentifiedOpenClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIdentifiedOpenClosed.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleIdentifiedOpenClosed",
+  "statement": "theorem proEtaleIdentifiedOpenClosed\n    {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]\n    (hU : Set.range U.hom = (Set.range i)ᶜ)\n    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (Si : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})\n    (Su : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})\n    (ci : (proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R ≅ Si)\n    (cu : (proEtaleSheafInverseImage U.hom CommRingCat.{u + 1}).obj R ≅ Su) :\n    PreservesFiniteLimits (proEtaleRingModuleDirectImage i R Si ci) ∧\n      PreservesFiniteColimits (proEtaleRingModuleDirectImage i R Si ci) ∧\n        IsIso (proEtaleRingModuleAdjunction i R Si ci).counit ∧\n          ∃ F : proEtaleRingModules U.left Su ⥤ proEtaleRingModules X R,\n            F.Additive ∧ PreservesFiniteLimits F ∧ PreservesFiniteColimits F ∧\n              ∃ adj : F ⊣ proEtaleRingModulePullback U.hom R Su cu, IsIso adj.unit ∧\n                (∀ N, IsZero ((proEtaleRingModulePullback i R Si ci).obj (F.obj N))) ∧\n                ∀ M, IsZero ((proEtaleRingModulePullback i R Si ci).obj M) →\n                  IsIso (adj.counit.app M)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-21",
+  "note": "Fully proved interface transport; no sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e426d",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261020T221304-L-4169280",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e426d",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261020T221304-L-4169280",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs live LocallyClosedExtensionCoherence (moved block byte-identical, DerivedCoherence and item statement unchanged); new sorry ∃E, NormalizedComposition vs item (strictly smaller: module full faithfulness, Hom bijection and all DerivedCoherence proved); 5/6 importers compile against delivered .lbuild, FlatModelGeneration fails identically on published baseline"
+ }
+}

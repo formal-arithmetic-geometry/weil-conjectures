@@ -13,20 +13,13 @@ public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.AlgebraicGeometry.ProEtaleRingedClosedCounit
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison
-import Sheaf.Paper.PbcCompletedPullbackActual
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
+public import Sheaf.AlgebraicGeometry.LocallyClosedModuleExtensionCoherence
+
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Mathlib.CategoryTheory.Sites.CoverLifting
-import Mathlib.CategoryTheory.Localization.Predicate
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleOpenRestrictionCounit
-import Sheaf.AlgebraicGeometry.ProEtaleSupportedReconstruction
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
+import Mathlib.CategoryTheory.Localization.Adjunction
+import Mathlib.CategoryTheory.Monad.Adjunction
 
 /-!
 # Normalized locally closed extensions with arbitrary pro-etale coefficients
@@ -46,206 +39,17 @@ All derived functors are the exact termwise localizations of these same functors
 
 @[expose] public noncomputable section
 
+
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A Noetherian scheme with an arbitrary commutative coefficient sheaf; a bundle of
-parameters for the coherence assertion, not an additional hypothesis on coefficients.
-Source: Stacks, Tags 01OV and 09A5
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-structure LocallyClosedCoefficients where
-  scheme : Scheme.{u}
-  locallyNoetherian : IsLocallyNoetherian scheme
-  compact : CompactSpace scheme
-  ring : Sheaf (ProEt.topology scheme) CommRingCat.{u + 1}
-
-attribute [instance] LocallyClosedCoefficients.locallyNoetherian
-  LocallyClosedCoefficients.compact
-
-/-- A locally closed immersion with its inverse-image coefficient identification.
-Taking the source ring literally to be inverse image is the special case `Iso.refl`;
-allowing its identified presentation permits composition without silently equating rings.
-Source: Stacks, Tags 01IO and 03D2
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-structure LocallyClosedCoefficientImmersion (S X : LocallyClosedCoefficients.{u}) where
-  hom : S.scheme ⟶ X.scheme
-  immersion : IsImmersion hom
-  coefficient : (proEtaleSheafInverseImage hom CommRingCat.{u + 1}).obj X.ring ≅ S.ring
-
-attribute [instance] LocallyClosedCoefficientImmersion.immersion
-
-namespace LocallyClosedCoefficientImmersion
-
-/-- Identity with the actual identity inverse-image comparison.
-Source: Stacks, Tag 09A5 (blueprint: lem-sfb-locally-closed-extension-coherence). -/
-def identity (X : LocallyClosedCoefficients.{u}) : LocallyClosedCoefficientImmersion X X where
-  hom := 𝟙 X.scheme
-  immersion := inferInstance
-  coefficient := (proEtaleRingInverseImageId X.scheme).app X.ring
-
-/-- Composition with the actual composition of inverse-image coefficient identifications.
-Source: Stacks, Tags 02V0 and 03D8
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-def comp {S X T : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S) :
-    LocallyClosedCoefficientImmersion T X where
-  hom := b.hom ≫ a.hom
-  immersion := inferInstance
-  coefficient := proEtaleRingCompositeCoefficients b.hom a.hom X.ring S.ring T.ring
-    a.coefficient b.coefficient
-
-/-- Exact inverse image with the specified inverse-image coefficients.
-Source: Stacks, Tag 03D2 (blueprint: lem-sfb-locally-closed-extension-coherence). -/
-abbrev pull {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :=
-  proEtaleRingModulePullback a.hom X.ring S.ring a.coefficient
-
-/-- Actual direct image with action through the coefficient adjunction unit.
-Source: Stacks, Tag 03D3 (blueprint: lem-sfb-locally-closed-extension-coherence). -/
-abbrev push {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :=
-  proEtaleRingModuleDirectImage a.hom X.ring S.ring a.coefficient
-
-/-- The canonical inverse-image composition, fixed by the sectionwise fibre-product map.
-Source: Stacks, Tag 03D8 (blueprint: lem-sfb-locally-closed-extension-coherence). -/
-def pullComp {S X T : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S) :
-    (a.comp b).pull ≅ a.pull ⋙ b.pull :=
-  exchangeModuleComposition b.hom a.hom X.ring S.ring T.ring a.coefficient b.coefficient
-
-end LocallyClosedCoefficientImmersion
-
-/-- Witnesses for the exact module extensions in the assertion. The open adjunction and
-closed counit normalize restriction. The coefficients of every arrow are inverse images.
-Source: Stacks, Tags 09AA, 09BM, 09BN, 03DI and 03DJ
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-structure LocallyClosedExtensionData where
-  extension : ∀ {S X : LocallyClosedCoefficients.{u}}, LocallyClosedCoefficientImmersion S X →
-    proEtaleRingModules S.scheme S.ring ⥤ proEtaleRingModules X.scheme X.ring
-  additive : ∀ {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X),
-    (extension a).Additive
-  finiteLimits : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X), PreservesFiniteLimits (extension a)
-  finiteColimits : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X), PreservesFiniteColimits (extension a)
-  restriction : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X), extension a ⋙ a.pull ≅ 𝟭 _
-  openAdjunction : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (_ : IsOpenImmersion a.hom),
-    extension a ⊣ a.pull
-  openNormalization : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (ha : IsOpenImmersion a.hom)
-    (M : proEtaleRingModules S.scheme S.ring),
-    (openAdjunction a ha).unit.app M ≫ (restriction a).hom.app M = 𝟙 M
-  closedComparison : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (_ : IsClosedImmersion a.hom),
-    extension a ≅ a.push
-  closedNormalization : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (ha : IsClosedImmersion a.hom)
-    (M : proEtaleRingModules S.scheme S.ring),
-    (restriction a).hom.app M = a.pull.map ((closedComparison a ha).hom.app M) ≫
-      (proEtaleRingModuleAdjunction a.hom X.ring S.ring a.coefficient).counit.app M
-  gamma : ∀ {S X T : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S),
-    extension b ⋙ extension a ≅ extension (a.comp b)
-  identity : ∀ X : LocallyClosedCoefficients.{u},
-    extension (.identity X) ≅ 𝟭 (proEtaleRingModules X.scheme X.ring)
-
-attribute [instance] LocallyClosedExtensionData.additive LocallyClosedExtensionData.finiteLimits
-  LocallyClosedExtensionData.finiteColimits
-
 namespace LocallyClosedExtensionData
-
-/-- The actual termwise extension on the ordinary unbounded derived categories.
-Source: Stacks, Tags 015F and 05RU
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-abbrev derived (E : LocallyClosedExtensionData.{u}) {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) := (E.extension a).mapDerivedCategory
-
-/-- The specified closed-then-open factorization of extension. Its open factor is the
-left adjoint to actual inverse image from `openAdjunction`, hence the sheafified
-extension-by-zero presheaf; its closed factor is actual direct image.
-Source: Stacks, Tags 03DI, 09AA and 09BN
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-def closedOpenFactorization (E : LocallyClosedExtensionData.{u})
-    {S V X : LocallyClosedCoefficients.{u}} (v : LocallyClosedCoefficientImmersion V X)
-    (c : LocallyClosedCoefficientImmersion S V) (hc : IsClosedImmersion c.hom)
-    (_hv : IsOpenImmersion v.hom) :
-    E.extension (v.comp c) ≅ c.push ⋙ E.extension v :=
-  (E.gamma v c).symm ≪≫ Functor.isoWhiskerRight (E.closedComparison c hc) (E.extension v)
-
-/-- The specified opposite factorization, with open followed by closed. This uses
-exactly the same normalized composition comparison, including the mixed case.
-Source: Stacks, Tags 02V0 and 09AH
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-def openClosedFactorization (E : LocallyClosedExtensionData.{u})
-    {S Z X : LocallyClosedCoefficients.{u}} (i : LocallyClosedCoefficientImmersion Z X)
-    (j : LocallyClosedCoefficientImmersion S Z) (hi : IsClosedImmersion i.hom)
-    (_hj : IsOpenImmersion j.hom) :
-    E.extension (i.comp j) ≅ E.extension j ⋙ i.push :=
-  (E.gamma i j).symm ≪≫ Functor.isoWhiskerLeft (E.extension j) (E.closedComparison i hi)
-
-/-- Comparison of any two closed-then-open factorizations with the same composite
-coefficient identification. In a coherent system its restriction is the identity,
-and it is the unique isomorphism with that normalization by `Coherent.homBijection`.
-Source: Stacks, Tags 02V0 and 09AH, the intersection-and-shrinking argument
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-def factorizationComparison (E : LocallyClosedExtensionData.{u})
-    {S V V' X : LocallyClosedCoefficients.{u}} (v : LocallyClosedCoefficientImmersion V X)
-    (c : LocallyClosedCoefficientImmersion S V) (v' : LocallyClosedCoefficientImmersion V' X)
-    (c' : LocallyClosedCoefficientImmersion S V')
-    (hc : IsClosedImmersion c.hom) (hv : IsOpenImmersion v.hom)
-    (hc' : IsClosedImmersion c'.hom) (hv' : IsOpenImmersion v'.hom)
-    (h : v.comp c = v'.comp c') :
-    c.push ⋙ E.extension v ≅ c'.push ⋙ E.extension v' :=
-  (E.closedOpenFactorization v c hc hv).symm ≪≫ eqToIso (congrArg E.extension h) ≪≫
-    E.closedOpenFactorization v' c' hc' hv'
-
-/-- Normalized comparison laws on module sheaves. The two factorization orders follow
-by composing `gamma` with `closedComparison` and the open adjunction; normalization
-and the Hom bijection make the comparison between any two factorizations unique.
-Source: Stacks, Tags 02V0 and 09AH, composite consequence described in the node proof
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-structure Coherent (E : LocallyClosedExtensionData.{u}) : Prop where
-  full : ∀ {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X),
-    (E.extension a).Full
-  faithful : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X), (E.extension a).Faithful
-  homBijection : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (M N : proEtaleRingModules S.scheme S.ring),
-    Function.Bijective (fun f : (E.extension a).obj M ⟶ (E.extension a).obj N ↦
-      (E.restriction a).inv.app M ≫ a.pull.map f ≫ (E.restriction a).hom.app N)
-  normalized : ∀ {S X T : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S)
-    (M : proEtaleRingModules T.scheme T.ring),
-    (a.comp b).pull.map ((E.gamma a b).hom.app M) ≫ (E.restriction (a.comp b)).hom.app M =
-      (a.pullComp b).hom.app ((E.extension a).obj ((E.extension b).obj M)) ≫
-        b.pull.map ((E.restriction a).hom.app ((E.extension b).obj M)) ≫
-          (E.restriction b).hom.app M
-  innerUnit : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X),
-    ∃ h : a.comp (.identity S) = a,
-      E.gamma a (.identity S) ≪≫ eqToIso (congrArg E.extension h) =
-        Functor.isoWhiskerRight (E.identity S) (E.extension a) ≪≫
-          Functor.leftUnitor (E.extension a)
-  outerUnit : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X),
-    ∃ h : (LocallyClosedCoefficientImmersion.identity X).comp a = a,
-      E.gamma (.identity X) a ≪≫ eqToIso (congrArg E.extension h) =
-        Functor.isoWhiskerLeft (E.extension a) (E.identity X) ≪≫
-          Functor.rightUnitor (E.extension a)
-  associative : ∀ {S X T W : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S)
-    (d : LocallyClosedCoefficientImmersion W T),
-    ∃ h : (a.comp b).comp d = a.comp (b.comp d),
-      Functor.isoWhiskerRight (E.gamma b d) (E.extension a) ≪≫ E.gamma a (b.comp d) =
-        Functor.associator (E.extension d) (E.extension b) (E.extension a) ≪≫
-          Functor.isoWhiskerLeft (E.extension d) (E.gamma a b) ≪≫ E.gamma (a.comp b) d ≪≫
-            eqToIso (congrArg E.extension h)
 
 /-- The same comparisons on unbounded derived categories, required to be the
 localizations of the module comparisons on every cochain complex, not arbitrary isos.
@@ -309,57 +113,503 @@ structure DerivedCoherence (E : LocallyClosedExtensionData.{u}) where
           Functor.isoWhiskerLeft (E.derived d) (gamma a b) ≪≫ gamma (a.comp b) d ≪≫
             eqToIso (congrArg E.derived h)
 
+
 end LocallyClosedExtensionData
 
-/-- Exact locally closed extension, normalized factorization independence, and coherent
-composition, simultaneously on modules and their ordinary unbounded derived categories.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem restriction_hom_bijective
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (G : D ⥤ C)
+    [F.Full] [F.Faithful] (r : F ⋙ G ≅ 𝟭 C) (M N : C) :
+    Function.Bijective (fun f : F.obj M ⟶ F.obj N ↦
+      r.inv.app M ≫ G.map f ≫ r.hom.app N) := by
+  have hr (f : M ⟶ N) :
+      r.inv.app M ≫ G.map (F.map f) ≫ r.hom.app N = f := by
+    simpa using congrArg (fun g ↦ r.inv.app M ≫ g) (r.hom.naturality f)
+  constructor
+  · intro f g h
+    obtain ⟨f, rfl⟩ := F.map_surjective f
+    obtain ⟨g, rfl⟩ := F.map_surjective g
+    change r.inv.app M ≫ G.map (F.map f) ≫ r.hom.app N =
+      r.inv.app M ≫ G.map (F.map g) ≫ r.hom.app N at h
+    rw [hr, hr] at h
+    exact congrArg F.map h
+  · intro f
+    exact ⟨F.map f, hr f⟩
+
+private noncomputable def exactAdjunction
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (adj : F ⊣ G) :
+    F.mapDerivedCategory ⊣ G.mapDerivedCategory := by
+  let : CatCommSq (F.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q
+      DerivedCategory.Q F.mapDerivedCategory := ⟨F.mapDerivedCategoryFactors.symm⟩
+  let : CatCommSq (G.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q
+      DerivedCategory.Q G.mapDerivedCategory := ⟨G.mapDerivedCategoryFactors.symm⟩
+  exact (adj.mapHomologicalComplex (.up ℤ)).localization DerivedCategory.Q
+    (HomologicalComplex.quasiIso C (.up ℤ)) DerivedCategory.Q
+    (HomologicalComplex.quasiIso D (.up ℤ)) F.mapDerivedCategory G.mapDerivedCategory
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_full_faithful_left
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (adj : F ⊣ G) (r : F ⋙ G ≅ 𝟭 C) :
+    F.mapDerivedCategory.Full ∧ F.mapDerivedCategory.Faithful := by
+  let e := Functor.mapDerivedCategoryCompNatIso r ≪≫ Functor.mapDerivedCategoryIdIso C
+  let h := (exactAdjunction adj).fullyFaithfulLOfCompIsoId e
+  exact ⟨h.full, h.faithful⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_full_faithful_right
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (adj : F ⊣ G) (r : G ⋙ F ≅ 𝟭 D) :
+    G.mapDerivedCategory.Full ∧ G.mapDerivedCategory.Faithful := by
+  let e := Functor.mapDerivedCategoryCompNatIso r ≪≫ Functor.mapDerivedCategoryIdIso D
+  let h := (exactAdjunction adj).fullyFaithfulROfCompIsoId e
+  exact ⟨h.full, h.faithful⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_postcompose
+    {C D B : Type*} [Category C] [Category D] [Category B]
+    [Abelian C] [Abelian D] [Abelian B]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory B]
+    {F : C ⥤ D} {G : D ⥤ B} {H H' : C ⥤ B}
+    [F.Additive] [G.Additive] [H.Additive] [H'.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits H'] [PreservesFiniteColimits H']
+    (γ : F ⋙ G ≅ H) (e : H ≅ H') :
+    Functor.mapDerivedCategoryCompNatIso (γ ≪≫ e) =
+      Functor.mapDerivedCategoryCompNatIso γ ≪≫ Functor.mapDerivedCategoryNatIso e := by
+  apply Iso.ext
+  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom,
+    Functor.mapDerivedCategoryNatIso_trans, Category.assoc]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_eqToIso
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {A : Type*} (F : A → C ⥤ D) [∀ a, (F a).Additive]
+    [∀ a, PreservesFiniteLimits (F a)] [∀ a, PreservesFiniteColimits (F a)]
+    {a b : A} (h : a = b) :
+    Functor.mapDerivedCategoryNatIso (eqToIso (congrArg F h)) =
+      eqToIso (congrArg (fun x ↦ (F x).mapDerivedCategory) h) := by
+  subst b
+  apply Iso.ext
+  exact Functor.mapDerivedCategoryNatIso_refl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_left_unit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (I : C ⥤ C) (F : C ⥤ D) [I.Additive] [F.Additive]
+    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (e : I ≅ 𝟭 C) :
+    Functor.mapDerivedCategoryCompNatIso
+        (Functor.isoWhiskerRight e F ≪≫ Functor.leftUnitor F) =
+      Functor.isoWhiskerRight
+        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C)
+        F.mapDerivedCategory ≪≫ Functor.leftUnitor F.mapDerivedCategory := by
+  apply Iso.ext
+  rw [derived_postcompose]
+  have hL : (Functor.mapDerivedCategoryNatIso (Functor.leftUnitor F)).hom = 𝟙 _ :=
+    Functor.mapDerivedCategoryNatIso_refl
+  ext K
+  simp only [Iso.trans_hom, NatTrans.comp_app, hL, Functor.comp_obj,
+    Functor.id_obj, Category.comp_id,
+    Functor.mapDerivedCategoryCompNatIso, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    Functor.leftUnitor_hom_app, Functor.whiskerRight_app, CategoryTheory.Functor.map_comp]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso I F).hom.app K),
+    Iso.hom_inv_id_app_assoc]
+  have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight e F) K
+  have hu := congr_app (Functor.mapDerivedCategoryCompIso_id_comp F) K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app] at hn hu
+  simp only [Functor.comp_obj, Functor.id_obj] at hn hu ⊢
+  rw [← Category.assoc, ← hn, Category.assoc, hu]
+  exact (Category.comp_id _).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_right_unit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (I : D ⥤ D) (F : C ⥤ D) [I.Additive] [F.Additive]
+    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (e : I ≅ 𝟭 D) :
+    Functor.mapDerivedCategoryCompNatIso
+        (Functor.isoWhiskerLeft F e ≪≫ Functor.rightUnitor F) =
+      Functor.isoWhiskerLeft F.mapDerivedCategory
+        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso D) ≪≫
+          Functor.rightUnitor F.mapDerivedCategory := by
+  apply Iso.ext
+  rw [derived_postcompose]
+  have hL : (Functor.mapDerivedCategoryNatIso (Functor.rightUnitor F)).hom = 𝟙 _ :=
+    Functor.mapDerivedCategoryNatIso_refl
+  ext K
+  simp only [Iso.trans_hom, NatTrans.comp_app, hL, Functor.comp_obj,
+    Functor.id_obj, Category.comp_id,
+    Functor.mapDerivedCategoryCompNatIso, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+    Functor.rightUnitor_hom_app, Functor.whiskerLeft_app]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F I).hom.app K),
+    Iso.hom_inv_id_app_assoc]
+  have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e) K
+  have hu := congr_app (Functor.mapDerivedCategoryCompIso_comp_id F) K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app] at hn hu
+  simp only [Functor.comp_obj, Functor.id_obj] at hn hu ⊢
+  rw [← Category.assoc, ← hn, Category.assoc, hu]
+  exact (Category.comp_id _).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_cocycle
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {F : A ⥤ B} {G : B ⥤ C} {H : C ⥤ D}
+    {FG : A ⥤ C} {GH : B ⥤ D} {FGH : A ⥤ D}
+    [F.Additive] [G.Additive] [H.Additive] [FG.Additive] [GH.Additive] [FGH.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
+    [PreservesFiniteLimits GH] [PreservesFiniteColimits GH]
+    [PreservesFiniteLimits FGH] [PreservesFiniteColimits FGH]
+    (eFG : F ⋙ G ≅ FG) (eFGH : FG ⋙ H ≅ FGH)
+    (eGH : G ⋙ H ≅ GH) (eFGH' : F ⋙ GH ≅ FGH)
+    (h : Functor.isoWhiskerRight eFG H ≪≫ eFGH =
+      Functor.associator F G H ≪≫ Functor.isoWhiskerLeft F eGH ≪≫ eFGH') :
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompNatIso eFG)
+        H.mapDerivedCategory ≪≫ Functor.mapDerivedCategoryCompNatIso eFGH =
+      Functor.associator F.mapDerivedCategory G.mapDerivedCategory H.mapDerivedCategory ≪≫
+        Functor.isoWhiskerLeft F.mapDerivedCategory
+          (Functor.mapDerivedCategoryCompNatIso eGH) ≪≫
+            Functor.mapDerivedCategoryCompNatIso eFGH' := by
+  have hm (M : A) := congr_app (congrArg Iso.hom h) M
+  simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.id_comp] at hm
+  apply Iso.ext
+  ext K
+  simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.id_comp] using
+      Functor.mapDerivedCategoryCompNatIso_cocycle eFG eFGH eGH eFGH' hm K
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem identity_factors {C : Type*} [Category C] [Abelian C]
+    [HasDerivedCategory C] (K : CochainComplex C ℤ) :
+    (Functor.mapDerivedCategoryIdIso C).hom.app (DerivedCategory.Q.obj K) =
+      (𝟭 C).mapDerivedCategoryFactors.hom.app K := by
+  have hf := congr_app (congrArg Iso.hom (Functor.mapDerivedCategoryIdIso_factorsh C))
+    ((HomotopyCategory.quotient C (.up ℤ)).obj K)
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
+    Functor.mapDerivedCategoryFactorsh_hom_app,
+    Functor.mapHomotopyCategoryIdIso_hom_app] at hf
+  have h₁ : ((𝟭 C).mapHomotopyCategoryFactors (.up ℤ)).inv.app K = 𝟙 _ := rfl
+  have h₂ : (Functor.mapHomologicalComplexIdIso C (.up ℤ)).hom.app K = 𝟙 _ := rfl
+  rw [h₁, h₂] at hf
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+    Category.comp_id, Category.comp_id] at hf
+  have he : (DerivedCategory.quotientCompQhIso C).inv.app
+      (((𝟭 C).mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := rfl
+  rw [he] at hf
+  erw [Category.id_comp, Category.comp_id, Category.comp_id] at hf
+  exact hf
+
+namespace LocallyClosedExtensionData
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem coefficient_factorization
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
+    ∃ (V : LocallyClosedCoefficients.{u}) (v : LocallyClosedCoefficientImmersion V X)
+      (c : LocallyClosedCoefficientImmersion S V),
+      IsClosedImmersion c.hom ∧ IsOpenImmersion v.hom ∧ v.comp c = a := by
+  rcases a with ⟨f, hf, cf⟩
+  obtain ⟨V, c, v, hc, hv, h⟩ := IsImmersion.isImmersion_iff_exists.mp hf
+  subst f
+  let := hc
+  let := hv
+  let : IsNoetherian X.scheme := ⟨⟩
+  let : IsLocallyNoetherian V := isLocallyNoetherian_of_isOpenImmersion v
+  let : NoetherianSpace V :=
+    v.isOpenEmbedding.isInducing.noetherianSpace
+  let B : LocallyClosedCoefficients.{u} :=
+    { scheme := V
+      locallyNoetherian := inferInstance
+      compact := inferInstance
+      ring := (proEtaleSheafInverseImage v CommRingCat.{u + 1}).obj X.ring }
+  let vv : LocallyClosedCoefficientImmersion B X :=
+    { hom := v
+      immersion := inferInstance
+      coefficient := Iso.refl _ }
+  let cc : LocallyClosedCoefficientImmersion S B :=
+    { hom := c
+      immersion := inferInstance
+      coefficient := ((proEtaleRingInverseImageComp c v).app X.ring).symm ≪≫ cf }
+  refine ⟨B, vv, cc, hc, hv, ?_⟩
+  dsimp [LocallyClosedCoefficientImmersion.comp, vv, cc,
+    proEtaleRingCompositeCoefficients]
+  congr 1
+  simp
+
+private theorem module_full_faithful_open (E : LocallyClosedExtensionData.{u})
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X)
+    (ha : IsOpenImmersion a.hom) :
+    (E.extension a).Full ∧ (E.extension a).Faithful := by
+  let h := (E.openAdjunction a ha).fullyFaithfulLOfCompIsoId (E.restriction a)
+  exact ⟨h.full, h.faithful⟩
+
+private theorem module_full_faithful_closed (E : LocallyClosedExtensionData.{u})
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X)
+    (ha : IsClosedImmersion a.hom) :
+    (E.extension a).Full ∧ (E.extension a).Faithful := by
+  let adj : a.pull ⊣ E.extension a :=
+    (proEtaleRingModuleAdjunction a.hom X.ring S.ring a.coefficient).ofNatIsoRight
+      (E.closedComparison a ha).symm
+  let h := adj.fullyFaithfulROfCompIsoId (E.restriction a)
+  exact ⟨h.full, h.faithful⟩
+
+private theorem module_full_faithful (E : LocallyClosedExtensionData.{u})
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
+    (E.extension a).Full ∧ (E.extension a).Faithful := by
+  obtain ⟨V, v, c, hc, hv, h⟩ := coefficient_factorization a
+  obtain ⟨hvc, hvc'⟩ := module_full_faithful_open E v hv
+  obtain ⟨hcc, hcc'⟩ := module_full_faithful_closed E c hc
+  let := hvc
+  let := hvc'
+  let := hcc
+  let := hcc'
+  subst a
+  exact ⟨Functor.Full.of_iso (E.gamma v c), Functor.Faithful.of_iso (E.gamma v c)⟩
+
+private theorem coherent_of_normalized (E : LocallyClosedExtensionData.{u})
+    (h : E.NormalizedComposition) : E.Coherent where
+  full a := (module_full_faithful E a).1
+  faithful a := (module_full_faithful E a).2
+  homBijection a M N := by
+    have := (module_full_faithful E a).1
+    have := (module_full_faithful E a).2
+    exact restriction_hom_bijective (E.extension a) a.pull (E.restriction a) M N
+  normalized := h.normalized
+  innerUnit := h.innerUnit
+  outerUnit := h.outerUnit
+  associative := h.associative
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_full_faithful_open (E : LocallyClosedExtensionData.{u})
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X)
+    (ha : IsOpenImmersion a.hom) : (E.derived a).Full ∧ (E.derived a).Faithful := by
+  exact derived_full_faithful_left (E.openAdjunction a ha) (E.restriction a)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_full_faithful_closed (E : LocallyClosedExtensionData.{u})
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X)
+    (ha : IsClosedImmersion a.hom) : (E.derived a).Full ∧ (E.derived a).Faithful := by
+  exact derived_full_faithful_right
+    ((proEtaleRingModuleAdjunction a.hom X.ring S.ring a.coefficient).ofNatIsoRight
+      (E.closedComparison a ha).symm) (E.restriction a)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_full_faithful (E : LocallyClosedExtensionData.{u})
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
+    (E.derived a).Full ∧ (E.derived a).Faithful := by
+  obtain ⟨V, v, c, hc, hv, h⟩ := coefficient_factorization a
+  obtain ⟨hvc, hvc'⟩ := derived_full_faithful_open E v hv
+  obtain ⟨hcc, hcc'⟩ := derived_full_faithful_closed E c hc
+  let := hvc
+  let := hvc'
+  let := hcc
+  let := hcc'
+  let e := Functor.mapDerivedCategoryCompNatIso (E.gamma v c)
+  subst a
+  exact ⟨Functor.Full.of_iso e, Functor.Faithful.of_iso e⟩
+
+private noncomputable def derivedRestriction (E : LocallyClosedExtensionData.{u})
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
+    E.derived a ⋙ a.pull.mapDerivedCategory ≅ 𝟭 _ :=
+  (Functor.mapDerivedCategoryCompNatIso (E.restriction a)) ≪≫
+    Functor.mapDerivedCategoryIdIso _
+
+private noncomputable def derivedGamma (E : LocallyClosedExtensionData.{u})
+    {S X T : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X)
+    (b : LocallyClosedCoefficientImmersion T S) :
+    E.derived b ⋙ E.derived a ≅ E.derived (a.comp b) :=
+  Functor.mapDerivedCategoryCompNatIso (E.gamma a b)
+
+private noncomputable def derivedIdentity (E : LocallyClosedExtensionData.{u})
+    (X : LocallyClosedCoefficients.{u}) : E.derived (.identity X) ≅ 𝟭 _ :=
+  Functor.mapDerivedCategoryNatIso (E.identity X) ≪≫ Functor.mapDerivedCategoryIdIso _
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem identityTermwise (E : LocallyClosedExtensionData.{u})
+    (X : LocallyClosedCoefficients.{u})
+    (K : CochainComplex (proEtaleRingModules X.scheme X.ring) ℤ) :
+    (E.derivedIdentity X).hom.app (DerivedCategory.Q.obj K) =
+      (E.extension (.identity X)).mapDerivedCategoryFactors.hom.app K ≫
+        DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex (E.identity X) (.up ℤ)).hom.app K) := by
+  have h := Functor.mapDerivedCategoryNatIso_fac (E.identity X) K
+  change (Functor.mapDerivedCategoryNatIso (E.identity X)).hom.app _ ≫ _ = _ at h
+  dsimp only [derivedIdentity, Iso.trans_hom, NatTrans.comp_app]
+  rw [identity_factors]
+  exact h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem restrictionTermwise (E : LocallyClosedExtensionData.{u})
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X)
+    (K : CochainComplex (proEtaleRingModules S.scheme S.ring) ℤ) :
+    (E.derivedRestriction a).hom.app (DerivedCategory.Q.obj K) =
+      a.pull.mapDerivedCategory.map ((E.extension a).mapDerivedCategoryFactors.hom.app K) ≫
+        a.pull.mapDerivedCategoryFactors.hom.app
+          (((E.extension a).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex (E.restriction a) (.up ℤ)).hom.app K) := by
+  have h := Functor.mapDerivedCategoryCompNatIso_hom_app_Q (E.restriction a) K
+  dsimp only [Functor.mapHomologicalComplexCompIsoHomOfIso] at h
+  rw [Functor.mapHomologicalComplexCompIso_refl_hom_app] at h
+  erw [Category.id_comp] at h
+  dsimp only [derivedRestriction, Iso.trans_hom, NatTrans.comp_app]
+  rw [identity_factors]
+  exact h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem gammaTermwise (E : LocallyClosedExtensionData.{u})
+    {S X T : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X)
+    (b : LocallyClosedCoefficientImmersion T S)
+    (K : CochainComplex (proEtaleRingModules T.scheme T.ring) ℤ) :
+    (E.derivedGamma a b).hom.app (DerivedCategory.Q.obj K) ≫
+        (E.extension (a.comp b)).mapDerivedCategoryFactors.hom.app K =
+      (E.derived a).map ((E.extension b).mapDerivedCategoryFactors.hom.app K) ≫
+        (E.extension a).mapDerivedCategoryFactors.hom.app
+          (((E.extension b).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (E.gamma a b) (.up ℤ)).hom.app K) := by
+  have h := Functor.mapDerivedCategoryCompNatIso_hom_app_Q (E.gamma a b) K
+  dsimp only [Functor.mapHomologicalComplexCompIsoHomOfIso] at h
+  rw [Functor.mapHomologicalComplexCompIso_refl_hom_app] at h
+  erw [Category.id_comp] at h
+  exact h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_inner_unit (E : LocallyClosedExtensionData.{u}) (hE : E.Coherent)
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
+    ∃ h : a.comp (.identity S) = a,
+      E.derivedGamma a (.identity S) ≪≫ eqToIso (congrArg E.derived h) =
+        Functor.isoWhiskerRight (E.derivedIdentity S) (E.derived a) ≪≫
+          Functor.leftUnitor (E.derived a) := by
+  obtain ⟨h, hh⟩ := hE.innerUnit a
+  refine ⟨h, ?_⟩
+  change Functor.mapDerivedCategoryCompNatIso (E.gamma a (.identity S)) ≪≫ _ = _
+  rw [← derived_eqToIso E.extension h, ← derived_postcompose, hh]
+  exact derived_left_unit _ _ (E.identity S)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_outer_unit (E : LocallyClosedExtensionData.{u}) (hE : E.Coherent)
+    {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
+    ∃ h : (LocallyClosedCoefficientImmersion.identity X).comp a = a,
+      E.derivedGamma (.identity X) a ≪≫ eqToIso (congrArg E.derived h) =
+        Functor.isoWhiskerLeft (E.derived a) (E.derivedIdentity X) ≪≫
+          Functor.rightUnitor (E.derived a) := by
+  obtain ⟨h, hh⟩ := hE.outerUnit a
+  refine ⟨h, ?_⟩
+  change Functor.mapDerivedCategoryCompNatIso (E.gamma (.identity X) a) ≪≫ _ = _
+  rw [← derived_eqToIso E.extension h, ← derived_postcompose, hh]
+  exact derived_right_unit _ _ (E.identity X)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_associative (E : LocallyClosedExtensionData.{u}) (hE : E.Coherent)
+    {S X T W : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X)
+    (b : LocallyClosedCoefficientImmersion T S) (d : LocallyClosedCoefficientImmersion W T) :
+    ∃ h : (a.comp b).comp d = a.comp (b.comp d),
+      Functor.isoWhiskerRight (E.derivedGamma b d) (E.derived a) ≪≫
+          E.derivedGamma a (b.comp d) =
+        Functor.associator (E.derived d) (E.derived b) (E.derived a) ≪≫
+          Functor.isoWhiskerLeft (E.derived d) (E.derivedGamma a b) ≪≫
+            E.derivedGamma (a.comp b) d ≪≫ eqToIso (congrArg E.derived h) := by
+  obtain ⟨h, hh⟩ := hE.associative a b d
+  refine ⟨h, ?_⟩
+  have hc := derived_cocycle (E.gamma b d) (E.gamma a (b.comp d))
+    (E.gamma a b) (E.gamma (a.comp b) d ≪≫ eqToIso (congrArg E.extension h)) hh
+  rw [derived_postcompose, derived_eqToIso E.extension h] at hc
+  exact hc
+
+private noncomputable def derivedCoherence (E : LocallyClosedExtensionData.{u})
+    (hE : E.Coherent) : E.DerivedCoherence where
+  restriction := E.derivedRestriction
+  gamma := E.derivedGamma
+  identity := E.derivedIdentity
+  restrictionTermwise := E.restrictionTermwise
+  gammaTermwise := E.gammaTermwise
+  identityTermwise := E.identityTermwise
+  full a := (derived_full_faithful E a).1
+  faithful a := (derived_full_faithful E a).2
+  homBijection a M N := by
+    have := (derived_full_faithful E a).1
+    have := (derived_full_faithful E a).2
+    exact restriction_hom_bijective (E.derived a) a.pull.mapDerivedCategory
+      (E.derivedRestriction a) M N
+  innerUnit := E.derived_inner_unit hE
+  outerUnit := E.derived_outer_unit hE
+  associative := E.derived_associative hE
+
+end LocallyClosedExtensionData
+
+/-- Exact locally closed extensions, their restriction Hom bijection, and normalized
+composition on modules and ordinary unbounded derived categories.
 
 Source: Stacks, proetale.tex Tags 09AA, 09BM, 09BN and 09AH; sites-modules.tex
 Tags 03DI and 03DJ; schemes.tex Tag 02V0; blueprint main-20261015,
 det-prop-scalar-six-pullback proof (2)
 (blueprint: lem-sfb-locally-closed-extension-coherence).
 
-Proof, following the ten steps of the DAG node:
-1. Noetherian spaces and all their subspaces have quasi-compact opens. Closed complements
-   are realized by their vanishing ideal subschemes. Apply
-   lem-weil-pbc-proetale-ringed-open-closed and
-   lem-weil-pbc-proetale-immersion-limit-preservation to the two factors. The open unit
-   and the actual closed counit (lem-weil-pbc-proetale-ringed-closed-counit) give restriction.
-   The valid closed adjunction is inverse image left adjoint to direct image, by
-   lem-weil-pbc-ringed-topoi-module-adjunction; no composite shriek adjunction is asserted.
-2. The localization sequence detects zeros and isomorphisms. Two successive Hom
-   transpositions, separately for the open and closed adjunctions, prove full faithfulness
-   and identify the Hom map with restriction conjugated by its comparison.
-3. On open slices closed direct image is evaluation on the same fibre product. Open
-   extension restricts to extension on the intersection. The extension-presheaf formula,
-   module sheafification and lem-cbc-sieve-slice-sheafification prove these statements,
-   compatibly with the closed counit and scalar action.
-4. Pure open composition uses unit-normalized uniqueness of left adjoints
-   (lem-weil-pbc-conjugate-iso-unit-equation); pure closed composition uses fibre-product
-   pasting (lem-weil-pbc-site-morphism-composition).
-5. Shrinking an ambient open containing the closed support does not change extension:
-   its restriction to the complementary closed subscheme vanishes, so localization
-   identifies the open-extension counit with an isomorphism.
-6. Intersect two ambient opens. Apply shrinking to identify both factorizations with
-   the one on the intersection. The Hom bijection proves uniqueness and the cocycle law.
-7. For the opposite factorization i u, lift the open in the closed subscheme to an ambient
-   open. The localization sequence on the closed subscheme identifies the restriction
-   of the closed-then-open extension with u_!. Transpose under i inverse image adjoint
-   to i_*; closed and complementary open restrictions detect that this is an isomorphism.
-   The two triangle identities give normalization on the source.
-8. Lift the intermediate open in a composition of two factorizations as in Tag 02V0.
-   Interchange the middle closed/open factors by step 7, compose pure factors by step 4,
-   and compare with the chosen factorization by step 6. This constructs gamma.
-9. After restriction both candidates for any unit or associativity diagram are identities.
-   They lie in the same extension image; step 2 makes them equal.
-10. Descend every exact functor termwise by
-    lem-weil-pbc-exact-functor-derived-factorization. Descend the two separate factor
-    adjunctions using lem-weil-pbc-termwise-adjunction-homotopy and
-    lem-weil-pbc-localization-universal-property. Their invertible units/counits give the
-    derived Hom bijection. Localization descends all comparisons and detects the same
-    normalization, identity and associativity equations on every unbounded complex. -/
+Proof: obtain the normalized module extension system from
+`locallyClosedModuleExtensionCoherence`. Factor each coefficient immersion as closed then
+open. The separate module adjunctions and their invertible restriction comparisons make
+the two factor extensions fully faithful; the composition comparison gives this for every
+immersion. Naturality identifies restriction conjugated by its comparison with the
+inverse of extension on Hom sets, giving `Coherent`.
+
+Descend the exact open and closed adjunctions termwise through homotopy and localization.
+Their invertible restriction comparisons give derived full faithfulness for each factor;
+factorization gives it for all immersions. Construct the derived restriction, identity and
+composition comparisons with the published exact-functor descent APIs. Their termwise
+formulas follow from the factorization isomorphisms. The generic left-unit, right-unit and
+cocycle identities for descent transport the module laws, including the equalities of
+composite coefficient immersions. These constructions give every `DerivedCoherence`
+field, so the chosen module system is the required witness. -/
 theorem locallyClosedExtensionCoherence :
     ∃ E : LocallyClosedExtensionData.{u}, E.Coherent ∧ Nonempty E.DerivedCoherence := by
-  sorry
+  obtain ⟨E, hE⟩ := locallyClosedModuleExtensionCoherence.{u}
+  have hC := E.coherent_of_normalized hE
+  exact ⟨E, hC, ⟨E.derivedCoherence hC⟩⟩
 
 end AlgebraicGeometry.Scheme

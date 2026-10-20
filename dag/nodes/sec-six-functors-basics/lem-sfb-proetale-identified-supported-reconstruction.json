@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-proetale-identified-supported-reconstruction",
+ "kind": "statement",
+ "title": "Normalized supported reconstruction for actual tensor pullbacks",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion] and $k:K\\hookrightarrow X$ its complementary quasi-compact open immersion [def-weil-open-immersion, def-weil-finite-type-morphism]. Let $u:S\\to Z$ and $e:B\\to Z$ be morphisms. Choose arbitrary commutative coefficient sheaves on $X,Z,S,K,B$ [def-weil-pbc-proetale-site] and specified coefficient isomorphisms for $i,u,k,e$ [def-weil-proetale-inverse-image]. Use actual tensor pullback and direct image with their specified adjunction $i^*\\dashv i_*$ [def-weil-pbc-proetale-operations], on module sheaves [def-weil-sheaf-of-modules-category]. Suppose $F:\\operatorname{Mod}(S)\\to\\operatorname{Mod}(Z)$ has an adjunction $F\\dashv u^*$ such that its counit at $N$ is invertible whenever $e^*N=0$. In the geometric application, $u$ is the complementary open of closed $e$, and lem-sfb-proetale-identified-open-closed supplies this condition. For module sheaves $A$ on $X$, $M$ on $S$, an isomorphism $\\sigma:u^*i^*A\\cong M$, and support conditions $k^*A=0$ and $e^*i^*A=0$, there exists an isomorphism $\\theta:A\\to i_*F(M)$. It satisfies $u^*(\\varepsilon_{i,F(M)}\\circ i^*\\theta)=\\eta_{u,M}\\circ\\sigma$. Among all morphisms $A\\to i_*F(M)$ it is the unique morphism satisfying this equation. It is natural in pairs of morphisms $a:A\\to A'$ and $b:M\\to M'$ commuting with the restriction isomorphisms: if $e^*i^*A'=0$ and $q':A'\\to i_*F(M')$ has the analogous normalization, then $q'\\circ a=i_*F(b)\\circ\\theta$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open; Tags 09AA, 09BM and 09BN. Coefficient and adjunction transport use sites-modules.tex Tags 03DI and 03DJ and categories.tex Tag 0037. This is a composite consequence in the specified sheaf-of-modules presentation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply the actual identified-coefficient closed-essential-image theorem to the first support condition; the specified closed adjunction unit at A is invertible.",
+   "uses": [
+    "lem-exc-proetale-closed-essential-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The second support condition and the open-counit hypothesis make lambda=F(sigma inverse) followed by the open counit invertible. Its closed adjoint transpose inverse, theta=closed unit followed by i_*(lambda inverse), is invertible. The closed Hom equivalence computes its transpose as lambda inverse.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the generic normalized-restriction and normalized-uniqueness adjunction algebra from supported reconstruction. The open triangle identity gives the restriction equation for lambda inverse. Any other morphism with that equation has transpose lambda inverse by cancellation; injectivity of the closed Hom equivalence proves uniqueness. For naturality, the compatibility equation and naturality of the open counit give F(b) followed by lambda prime equal to lambda followed by i^*(a). Cancel the two invertible lambdas and transpose this equality through the closed adjunction. Any normalized q prime has inverse lambda prime as its transpose by the same uniqueness argument.",
+   "uses": [
+    "lem-sfb-proetale-supported-reconstruction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-proetale-closed-essential-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-sfb-proetale-supported-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Open/closed factors and supported reconstruction in Steps 1, 5 and 7 of lem-sfb-locally-closed-module-extension-coherence. The Lean proof is complete; no new sorry."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "Proof (2), open/closed construction and supported mixed-factor comparison.",
+   "via": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-sfb-locally-closed-module-extension-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reconstruct a module sheaf supported on a closed subscheme and then an open stratum using adjunction unit and inverse open counit",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.toOpen_toSpecΓ_app_assoc; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.ofRestrict_app",
+   "date": "2026-10-21",
+   "verdict": "No exact pro-etale identified-coefficient statement. Use the published categorical and ringed-site results in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"counit\", \"IsIso\"",
+   "results": "12 hits: CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit; CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence; CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1; CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful; CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit; CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit; CategoryTheory.Adjunction.mem_essImage_of_counit_isIso; CategoryTheory.Adjunction.instIsIsoAppCounitOfFullOfFaithful",
+   "date": "2026-10-21",
+   "verdict": "No exact pro-etale identified-coefficient statement. Use the published categorical and ringed-site results in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*reconstruction|reconstruction.*support",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact pro-etale identified-coefficient statement. Use the published categorical and ringed-site results in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct a module sheaf supported on a closed subscheme and then an open stratum using adjunction unit and inverse open counit",
+   "date": "2026-10-21",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; stalkSkyscraperSheafAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.toOpen_toSpecΓ_app_assoc; CategoryTheory.sheafificationAdjunction_unit_app",
+   "verdict": "No exact arbitrary-coefficient pro-etale extension or reconstruction theorem. The generic module adjunction and geometric factorization APIs are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence",
+  "date": "2026-10-21",
+  "group": "P1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIdentifiedSupportedReconstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIdentifiedSupportedReconstruction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleIdentifiedSupportedReconstruction",
+  "statement": "theorem proEtaleIdentifiedSupportedReconstruction\n    {X Z S K B : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (k : K ⟶ X) [IsOpenImmersion k] [QuasiCompact k]\n    (u : S ⟶ Z) (e : B ⟶ Z)\n    (hk : Set.range k = (Set.range i)ᶜ)\n    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (Ri : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})\n    (Rs : Sheaf (ProEt.topology S) CommRingCat.{u + 1})\n    (Rk : Sheaf (ProEt.topology K) CommRingCat.{u + 1})\n    (Re : Sheaf (ProEt.topology B) CommRingCat.{u + 1})\n    (ci : (proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R ≅ Ri)\n    (cu : (proEtaleSheafInverseImage u CommRingCat.{u + 1}).obj Ri ≅ Rs)\n    (ck : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj R ≅ Rk)\n    (ce : (proEtaleSheafInverseImage e CommRingCat.{u + 1}).obj Ri ≅ Re)\n    (F : proEtaleRingModules S Rs ⥤ proEtaleRingModules Z Ri)\n    (ao : F ⊣ proEtaleRingModulePullback u Ri Rs cu)\n    (hopen : ∀ N, IsZero ((proEtaleRingModulePullback e Ri Re ce).obj N) →\n      IsIso (ao.counit.app N))\n    (A : proEtaleRingModules X R) (M : proEtaleRingModules S Rs)\n    (σ : (proEtaleRingModulePullback u Ri Rs cu).obj\n      ((proEtaleRingModulePullback i R Ri ci).obj A) ≅ M)\n    (hK : IsZero ((proEtaleRingModulePullback k R Rk ck).obj A))\n    (hB : IsZero ((proEtaleRingModulePullback e Ri Re ce).obj\n      ((proEtaleRingModulePullback i R Ri ci).obj A))) :\n    ∃ θ : A ⟶ (proEtaleRingModuleDirectImage i R Ri ci).obj (F.obj M),\n      IsIso θ ∧\n        (proEtaleRingModulePullback u Ri Rs cu).map\n          ((proEtaleRingModulePullback i R Ri ci).map θ ≫\n            (proEtaleRingModuleAdjunction i R Ri ci).counit.app (F.obj M)) =\n          σ.hom ≫ ao.unit.app M ∧\n        (∀ q : A ⟶ (proEtaleRingModuleDirectImage i R Ri ci).obj (F.obj M),\n          (proEtaleRingModulePullback u Ri Rs cu).map\n            ((proEtaleRingModulePullback i R Ri ci).map q ≫\n              (proEtaleRingModuleAdjunction i R Ri ci).counit.app (F.obj M)) =\n            σ.hom ≫ ao.unit.app M → q = θ) ∧\n        ∀ (A' : proEtaleRingModules X R) (M' : proEtaleRingModules S Rs)\n          (σ' : (proEtaleRingModulePullback u Ri Rs cu).obj\n            ((proEtaleRingModulePullback i R Ri ci).obj A') ≅ M')\n          (_hB' : IsZero ((proEtaleRingModulePullback e Ri Re ce).obj\n            ((proEtaleRingModulePullback i R Ri ci).obj A')))\n          (q' : A' ⟶ (proEtaleRingModuleDirectImage i R Ri ci).obj (F.obj M')),\n          (proEtaleRingModulePullback u Ri Rs cu).map\n            ((proEtaleRingModulePullback i R Ri ci).map q' ≫\n              (proEtaleRingModuleAdjunction i R Ri ci).counit.app (F.obj M')) =\n            σ'.hom ≫ ao.unit.app M' →\n          ∀ (a : A ⟶ A') (b : M ⟶ M'),\n            (proEtaleRingModulePullback u Ri Rs cu).map\n              ((proEtaleRingModulePullback i R Ri ci).map a) ≫ σ'.hom = σ.hom ≫ b →\n            a ≫ q' = θ ≫ (proEtaleRingModuleDirectImage i R Ri ci).map (F.map b)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-21",
+  "note": "Fully proved interface transport; no sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e426d",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261020T221304-L-4169280",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e426d",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261020T221304-L-4169280",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs live LocallyClosedExtensionCoherence (moved block byte-identical, DerivedCoherence and item statement unchanged); new sorry ∃E, NormalizedComposition vs item (strictly smaller: module full faithfulness, Hom bijection and all DerivedCoherence proved); 5/6 importers compile against delivered .lbuild, FlatModelGeneration fails identically on published baseline"
+ }
+}

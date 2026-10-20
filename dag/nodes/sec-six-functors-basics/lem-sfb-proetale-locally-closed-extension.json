@@ -1,0 +1,153 @@
+{
+ "id": "lem-sfb-proetale-locally-closed-extension",
+ "kind": "statement",
+ "title": "Pointwise exact locally closed extension",
+ "statement": "Let $X$ be a Noetherian scheme (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]), and $f:S\\hookrightarrow X$ a locally closed immersion [def-weil-closed-immersion]. Choose arbitrary commutative coefficient sheaves $R,R_S$ on the respective small pro-etale sites [def-weil-pbc-proetale-site], with a specified inverse-image identification $f^{-1}R\\cong R_S$ [def-weil-proetale-inverse-image]. Use actual tensor pullback $f^*$ [def-weil-pbc-proetale-operations]. There is an additive functor $F:\\operatorname{Mod}(S,R_S)\\to\\operatorname{Mod}(X,R)$ [def-weil-sheaf-of-modules-category] preserving finite limits and finite colimits, and an isomorphism $f^*F\\cong1$. The construction is closed direct image followed by open extension by zero, with the composite coefficient identification [def-weil-pbc-strict-tower-operations] transported to the prescribed one. No adjunction for this composite extension is asserted. This extension is fully faithful on module sheaves.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open; Tags 09AA, 09BM and 09BN. Coefficient and adjunction transport use sites-modules.tex Tags 03DI and 03DJ and categories.tex Tag 0037. This is a composite consequence in the specified sheaf-of-modules presentation."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-strict-tower-operations"
+ ],
+ "proof": [
+  {
+   "text": "Factor the locally closed immersion as closed c followed by open v. Give V the inverse-image coefficient ring and c the inverse composite comparison followed by the prescribed coefficient identification. The composite coefficient identification is the prescribed one by isomorphism cancellation.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-strict-tower-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The source V of v is a subspace of the Noetherian space X. Its opens are Noetherian and therefore quasi-compact, so v and the complement of c are quasi-compact morphisms. The complement of v is realized by the subscheme of its vanishing ideal.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-closed-subset-closed-subscheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply identified-coefficient open/closed extension to v and its closed complement, obtaining exact additive open extension O and an adjunction O to v^* with invertible unit. Apply the same theorem to c and its open complement to obtain exact direct image c_* with invertible specified counit.",
+   "uses": [
+    "lem-sfb-proetale-identified-open-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take F=c_* followed by O. Finite limit and colimit preservation compose; finite biproduct preservation gives additivity of c_*. Whisker the specified composition comparison (vc)^* to c^*v^* by F, reassociate, then apply the inverse open unit and closed counit. This gives (vc)^*F isomorphic to the identity. The open unit and closed counit make their respective extension factors fully faithful. Their composite is therefore fully faithful on module sheaves.",
+   "uses": [
+    "def-weil-pbc-strict-tower-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-strict-tower-operations",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-sfb-proetale-identified-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Open/closed factors and supported reconstruction in Steps 1, 5 and 7 of lem-sfb-locally-closed-module-extension-coherence. The Lean proof is complete; no new sorry."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "Proof (2), open/closed construction and supported mixed-factor comparison.",
+   "via": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-sfb-locally-closed-module-extension-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion followed by an open immersion into a Noetherian scheme exact extension of module sheaves has an invertible restriction comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+   "date": "2026-10-21",
+   "verdict": "No exact pro-etale identified-coefficient statement. Use the published categorical and ringed-site results in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherian\", \"IsImmersion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact pro-etale identified-coefficient statement. Use the published categorical and ringed-site results in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyClosed.*(extension|Extension)|[Ee]xtension.*[Cc]losed",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/Tactic/NormNum/IsSquare.lean; Mathlib/Analysis/Normed/Field/WithAbs.lean; Mathlib/Analysis/Complex/Tietze.lean; Mathlib/Analysis/Complex/Tietze.lean; Mathlib/Analysis/Complex/Tietze.lean",
+   "date": "2026-10-21",
+   "verdict": "No exact pro-etale identified-coefficient statement. Use the published categorical and ringed-site results in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion followed by an open immersion into a Noetherian scheme exact extension of module sheaves has an invertible restriction comparison",
+   "date": "2026-10-21",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.restrict_obj; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrict_map; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc",
+   "verdict": "No exact arbitrary-coefficient pro-etale extension or reconstruction theorem. The generic module adjunction and geometric factorization APIs are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence",
+  "date": "2026-10-21",
+  "group": "P1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocallyClosedExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocallyClosedExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleLocallyClosedExtension",
+  "statement": "theorem proEtaleLocallyClosedExtension\n    {X S : Scheme.{u}} [IsNoetherian X] (f : S ⟶ X) [IsImmersion f]\n    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (Rs : Sheaf (ProEt.topology S) CommRingCat.{u + 1})\n    (cf : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ Rs) :\n    ∃ F : proEtaleRingModules S Rs ⥤ proEtaleRingModules X R,\n      F.Additive ∧ PreservesFiniteLimits F ∧ PreservesFiniteColimits F ∧\n        F.Full ∧ F.Faithful ∧\n        Nonempty (F ⋙ proEtaleRingModulePullback f R Rs cf ≅ 𝟭 _)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-21",
+  "note": "Fully proved interface transport; no sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e426d",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261020T221304-L-4169280",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e426d",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261020T221304-L-4169280",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs live LocallyClosedExtensionCoherence (moved block byte-identical, DerivedCoherence and item statement unchanged); new sorry ∃E, NormalizedComposition vs item (strictly smaller: module full faithfulness, Hom bijection and all DerivedCoherence proved); 5/6 importers compile against delivered .lbuild, FlatModelGeneration fails identically on published baseline"
+ }
+}
