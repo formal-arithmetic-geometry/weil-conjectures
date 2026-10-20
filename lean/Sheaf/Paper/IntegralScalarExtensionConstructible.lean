@@ -20,7 +20,7 @@ import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
 import Sheaf.Paper.IntegralScalarExtensionWellDefined
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.HomologicalComplexLimits

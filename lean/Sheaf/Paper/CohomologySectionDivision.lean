@@ -5,11 +5,11 @@ Authors: SHEAF group B2
 -/
 module
 
-public import WeilConjectures.Topology.OpenModuleCohomology
+public import Sheaf.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.Paper.NonvanishingSectionTrivializes
-import WeilConjectures.Topology.OpenModuleCohomologyLocalIso
+import Sheaf.Topology.OpenModuleCohomologyLocalIso
 
 /-! # Dividing restricted twisted cohomology by a nonvanishing section
 

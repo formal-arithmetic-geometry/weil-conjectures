@@ -5,12 +5,12 @@ Authors: SHEAF group V1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.DirectSum.Basic
 import Sheaf.AlgebraicGeometry.DerivedGlobalSectionsPreservesCoproducts
-import WeilConjectures.CategoryTheory.DerivedModuleHomologyCoproduct
+import Sheaf.CategoryTheory.DerivedModuleHomologyCoproduct
 import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Zeroth derived global sections of a coproduct

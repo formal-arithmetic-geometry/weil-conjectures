@@ -5,11 +5,11 @@ Authors: SHEAF group P3
 -/
 module
 
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Topology.Sheaves.Flasque
 public import Mathlib.AlgebraicGeometry.Scheme
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianZariskiCohomology
-import WeilConjectures.Topology.FlasqueZariskiAcyclic
+import Sheaf.Topology.FlasqueZariskiAcyclic
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 
 /-! # Flasque module sheaves are acyclic for module global sections

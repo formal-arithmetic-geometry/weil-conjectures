@@ -19,13 +19,13 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
+import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
@@ -33,6 +33,7 @@ import Sheaf.Paper.LocalHomTowerCriterion
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-! # Completeness of limits of power-torsion pro-etale sheaves
 

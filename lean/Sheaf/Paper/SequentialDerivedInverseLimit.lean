@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.AdicCoefficientDatum
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
