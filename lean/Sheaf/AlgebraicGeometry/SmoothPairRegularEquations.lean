@@ -12,23 +12,7 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Smooth.Flat
-import Mathlib.RingTheory.FinitePresentation
-import WeilConjectures.RingTheory.SmoothFibreRegularLocal
-import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
-import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Mathlib.RingTheory.Flat.Equalizer
-import Mathlib.Algebra.Module.LocalizedModule.Exact
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.FiniteType
-import Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood
-import WeilConjectures.AlgebraicGeometry.FibreCartierLocal
-import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
+import Sheaf.RingTheory.SmoothQuotientRegularSequence
 
 /-!
 # Local regular equations for a closed immersion of smooth schemes
@@ -47,6 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A closed immersion between schemes smooth over the same arbitrary base has affine-local
 regular equations at each point of its source. The quotient-spectrum isomorphism commutes
 with the maps to the ambient affine neighbourhood, so it identifies closed subschemes.
@@ -83,19 +68,15 @@ sequence from its local ring to a principal neighbourhood using
 lem-exc-regular-sequence-principal-neighbourhood. A fibre element is a fraction `a/r`,
 with `r` from the base outside its prime, so this shrink lifts to the ambient principal
 open defined by `a`. Equality of ideals persists.
-6. Lift regularity from the fibre inductively on the prefix length. The zero-prefix
-quotient is flat and locally finitely presented over the chosen base affine. If the
-prefix quotient has these properties, its next principal equation cuts out a Cartier
-divisor on the fibre near `y`. Apply lem-pc-recd-fibre-cartier-local. Shrink the ambient
-affine so its intersection with the prefix quotient lies in the resulting open. By
-def-pc-relative-effective-cartier and def-nagata-effective-cartier-ideal the next quotient
-is flat, and its ideal has local nonzerodivisor generators. The prescribed equation itself
-is a nonzerodivisor: if `(f) = (v)` and `v` is a nonzerodivisor, write `f = uv`, `v = wf`;
-cancelling `v` gives `wu = 1`. Stalkwise injectivity implies injectivity on sections.
-Previous injections survive localization (lem-weil-pbc-localization-module-exact).
-Finite presentation persists by adjoining the finitely many prefix equations and the
-localization relation (def-sbc-locally-finite-presentation); flatness is interpreted
-stalkwise by def-weil-flat-morphism. This completes the induction.
+6. Lift regularity from the fibre inductively on the list length, using the algebraic
+criterion lem-pc-algebra-fibre-cartier-local. Its scalar annihilator criterion, applied
+with second scalar 1, gives a principal neighbourhood on which the next specified equation
+is a nonzerodivisor and its quotient is flat. Apply induction to the tail in that quotient.
+Quotient localization and tensor-quotient comparison identify the tail fibre and its
+localization; flat localization preserves the head injection. Lift each denominator from
+the quotient and clear its ambient denominator. All shrinks retain the prime through y.
+The detailed algebra is proved in lem-pur-fiber-regular-sequence-neighbourhood, and generation
+is combined with regularity in lem-pur-flat-quotient-fiber-regular-sequence.
 7. The ideal equality identifies the base change (def-pc-base-change) with the quotient
 spectrum over the affine neighbourhood. Every successive multiplication is injective.
 The final quotient is nonzero since it has the retained point `y`, giving
@@ -110,6 +91,79 @@ theorem exists_regular_equations_of_smooth_closedImmersion {S X Y : Scheme.{u}}
         ∃ e : pullback i U.ι ≅ Spec (CommRingCat.of (A ⧸ Ideal.ofList f)),
           e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.ofList f))) =
             pullback.snd i U.ι ≫ a.hom := by
-  sorry
+  classical
+  subst q
+  obtain ⟨W, hW, hsW, -⟩ :=
+    exists_isAffineOpen_mem_and_subset (x := p (i y)) (U := ⊤) trivial
+  obtain ⟨U, hU, hxU, hUW⟩ :=
+    exists_isAffineOpen_mem_and_subset (x := i y) (U := p ⁻¹ᵁ W) hsW
+  let V := i ⁻¹ᵁ U
+  have hV : IsAffineOpen V := hU.preimage i
+  let R := Γ(S, W)
+  let A := Γ(X, U)
+  let C := Γ(Y, V)
+  let := (p.appLE W U hUW).hom.toAlgebra
+  let hVW : V ≤ (i ≫ p) ⁻¹ᵁ W := by
+    intro z hz
+    exact hUW hz
+  let := ((i ≫ p).appLE W V hVW).hom.toAlgebra
+  let φ : A →ₐ[R] C :=
+    { (i.app U).hom with
+      commutes' := fun r ↦ by
+        change ((p.appLE W U hUW) ≫ i.app U) r = ((i ≫ p).appLE W V hVW) r
+        rw [Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_comp_appLE] }
+  have : Algebra.Smooth R A :=
+    HasRingHomProperty.appLE (P := @Smooth) p inferInstance ⟨W, hW⟩ ⟨U, hU⟩ hUW
+  have : Algebra.Smooth R C :=
+    HasRingHomProperty.appLE (P := @Smooth) (i ≫ p) inferInstance ⟨W, hW⟩ ⟨V, hV⟩ hVW
+  let Q := hU.primeIdealOf ⟨i y, hxU⟩
+  have hker : RingHom.ker φ.toRingHom ≤ Q.asIdeal := by
+    have hQ := IsAffineOpen.comap_primeIdealOf_appLE U hU V hV le_rfl hxU
+    change _ ≤ (hU.primeIdealOf ⟨i y, hxU⟩).asIdeal
+    rw [← hQ]
+    change RingHom.ker (i.app U).hom ≤ _
+    rw [Scheme.Hom.app_eq_appLE]
+    exact Ideal.ker_le_comap _
+  obtain ⟨g, hg, hseq⟩ := Algebra.exists_regularSequence_smooth_surjection
+    R A C φ (i.app_surjective U hU) Q hker
+  let D := X.affineBasicOpen (U := ⟨U, hU⟩) g
+  have hDU : D.1 ≤ U := X.basicOpen_le g
+  let := (X.presheaf.map (homOfLE hDU).op).hom.toAlgebra
+  have : IsLocalization.Away g Γ(X, D) :=
+    hU.isLocalization_of_eq_basicOpen g (homOfLE hDU) rfl
+  obtain ⟨f, hf, hgen⟩ := hseq Γ(X, D)
+  have hxD : i y ∈ D.1 := by
+    have hm : Q ∈ hU.fromSpec ⁻¹ᵁ X.basicOpen g := by
+      rw [hU.fromSpec_preimage_basicOpen]
+      exact hg
+    change hU.fromSpec (hU.primeIdealOf ⟨i y, hxU⟩) ∈ X.basicOpen g at hm
+    rwa [hU.fromSpec_primeIdealOf ⟨i y, hxU⟩] at hm
+  have hgen' : RingHom.ker (i.app D.1).hom = Ideal.ofList f := by
+    rw [← Scheme.Hom.ker_apply i D, ← i.ker.map_ideal (show D ≤ ⟨U, hU⟩ from hDU),
+      Scheme.Hom.ker_apply]
+    exact hgen
+  refine ⟨D.1, hxD, Γ(X, D), D.2.isoSpec, f, hf, ?_⟩
+  let B := i ⁻¹ᵁ D.1
+  have hB : IsAffineOpen B := D.2.preimage i
+  let ψ := (i.app D.1).hom
+  let t := ψ.quotientKerEquivOfSurjective (i.app_surjective D.1 D.2)
+  let t' : CommRingCat.of (Γ(X, D) ⧸ Ideal.ofList f) ≅ Γ(Y, B) :=
+    (Ideal.quotEquivOfEq hgen'.symm).toCommRingCatIso ≪≫ t.toCommRingCatIso
+  have ht : CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.ofList f)) ≫
+      t'.hom = i.app D.1 := by
+    ext x
+    change t ((Ideal.quotEquivOfEq hgen'.symm) (Ideal.Quotient.mk _ x)) = ψ x
+    rw [Ideal.quotEquivOfEq_mk]
+    exact RingHom.quotientKerEquivOfSurjective_apply_mk _ x
+  let e := pullbackRestrictIsoRestrict i D.1 ≪≫ hB.isoSpec ≪≫
+    Scheme.Spec.mapIso t'.op
+  refine ⟨e, ?_⟩
+  change (pullbackRestrictIsoRestrict i D.1).hom ≫
+    hB.isoSpec.hom ≫ Spec.map t'.hom ≫
+      Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.ofList f))) = _
+  rw [← Spec.map_comp, ht, IsAffineOpen.isoSpec_hom,
+    Scheme.Opens.toSpecΓ_naturality]
+  rw [pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc]
+  rfl
 
 end AlgebraicGeometry

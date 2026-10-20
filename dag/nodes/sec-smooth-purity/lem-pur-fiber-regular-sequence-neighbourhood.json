@@ -1,0 +1,174 @@
+{
+ "id": "lem-pur-fiber-regular-sequence-neighbourhood",
+ "kind": "statement",
+ "title": "A specified regular fibre sequence lifts on a principal neighbourhood",
+ "statement": "Let $R\\to A$ be flat [def-weil-pbc-flat-ring-map] and finitely presented [def-weil-pbc-finitely-presented-algebra]. Let $p\\in\\operatorname{Spec}R$, $Q\\in\\operatorname{Spec}A$, and $P\\in\\operatorname{Spec}(\\kappa(p)\\otimes_R A)$ contract to $Q$ [def-weil-pbc-localization-at-prime]. If the image of a specified finite list $f$ of elements of $A$ is regular [def-weil-pbc-regular-sequence] in $(\\kappa(p)\\otimes_R A)_P$, there exists $g\\notin Q$ such that its image is regular in $A[1/g]$ [def-weil-ring-localization-away].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 063W, lemma-fibre-quasi-regular, proof of assertion (1): successive application of Tag 062Y(3) to a specified fibre regular sequence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "The fibre algebra is finite type over the field $\\kappa(\\mathfrak p)$, hence Noetherian by [lem-wf-affine-noetherian-components]. Apply [lem-exc-regular-sequence-principal-neighbourhood] to the images of the chosen $f_j$ at $P$. Write its shrinking element as $a/r$ with $a\\in A$ and $r\\notin\\mathfrak p$, and invert $a$. Since the shrinking element is outside $P$, $a$ is outside $Q$. The chosen equations are now a regular sequence on the whole fibre.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-exc-regular-sequence-principal-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, proof of (1), via Tag 062Y(3)"
+   }
+  },
+  {
+   "text": "Induct on $e$, the number of equations lifted. Retain a principal neighbourhood of $Q$ on which every prefix quotient through $e$ is flat and finitely presented over $R$, the first $e$ successive multiplications are injective, and all successive fibre multiplications remain injective. At $e=0$ flatness and finite presentation are the assumptions and principal localization preserves them. Under further localization [lem-weil-pbc-localization-quotient-commute], [lem-weil-pbc-localization-tensor-over-base] and [lem-weil-pbc-localization-module-exact] identify all prefix quotients and fibres and preserve the injections.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, proof of (1), via Tag 062Y(3)"
+   }
+  },
+  {
+   "text": "For the induction step, let f be the head of the list. Its multiplication on the whole fibre is injective. Apply the scalar criterion exists_notMem_forall_mul_mem_map, proved in the module of [lem-pc-algebra-fibre-cartier-local], with the second scalar equal to 1. It gives g outside the retained prime and uniform annihilator bounds modulo every base ideal. The same module's isRegularPrincipal_and_flat_of_forall_mul_mem_map makes f a nonzerodivisor on B=A[1/g] and makes C=B/(f) flat over R. By [lem-weil-pbc-tensor-quotient-base-change], the fibre of C is the quotient of the fibre of B by f, so the tail is weakly regular. Apply induction in C. Lift its new denominator through B onto C, and clear the denominator from A to B. The iterated localization is a principal localization of A. Quotient localization [lem-weil-pbc-localization-quotient-commute] identifies its tail quotient with the inductively chosen localization of C. Flat localization preserves the head injection [lem-weil-pbc-localization-module-exact] and base flatness (Mathlib flat localization and transitivity). Combine head and tail using the regular-sequence cons criterion.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-pc-algebra-fibre-cartier-local",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, proof of (1), via Tag 062Y(3)"
+   }
+  },
+  {
+   "text": "The image of the specified list in the fibre-local ring has proper ideal. Thus every equation lies in Q, and Q survives all shrinking elements. The final quotient is nonzero; the successive injections obtained by induction give regularity [def-weil-pbc-regular-sequence]. The empty list is regular since the prime survives. This proves the assertion on the canonical principal localization [def-weil-ring-localization-away].",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, proof of (1), via Tag 062Y(3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-regular-sequence",
+  "def-weil-ring-localization-away",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-pc-algebra-fibre-cartier-local",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-wf-affine-noetherian-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 063W(1), specified-list induction, implemented using the scalar annihilator criterion and principal-quotient flatness API underlying Tag 062Y(3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth quotient of a smooth algebra is locally defined by a regular sequence",
+   "results": "{\"t\": \"2026-10-19T19:48:47Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth quotient of a smooth algebra is locally defined by a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Smooth.locally_isStandardSmooth\", \"Algebra.IsStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt\", \"RingHom.smooth_iff_locally_isStandardSmooth\", \"Algebra.smoothLocus\"], \"digest\": \"4fb5178b96a1bf1a\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Smooth charts and preservation under flat base change do not lift a fibre regular sequence to the ambient algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*quotient.*[Ff]ib|[Ff]ib.*[Rr]egular[Ss]equence|regularSequence.*[Ff]ib",
+   "results": "{\"t\": \"2026-10-19T21:46:39Z\", \"tool\": \"grep\", \"query\": \"flat.*quotient.*[Ff]ib|[Ff]ib.*[Rr]egular[Ss]equence|regularSequence.*[Ff]ib\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Smooth charts and preservation under flat base change do not lift a fibre regular sequence to the ambient algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, Algebra.Smooth",
+   "results": "{\"t\": \"2026-10-19T21:46:39Z\", \"tool\": \"loogle\", \"query\": \"RingTheory.Sequence.IsRegular, Algebra.Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Smooth charts and preservation under flat base change do not lift a fibre regular sequence to the ambient algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a flat finitely presented algebra with flat quotient, regular generators of the ideal in a fibre local ring lift to regular generators on a principal neighbourhood",
+   "results": "{\"t\": \"2026-10-19T21:46:40Z\", \"tool\": \"leanfinder\", \"query\": \"In a flat finitely presented algebra with flat quotient, regular generators of the ideal in a fibre local ring lift to regular generators on a principal neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsStandardSmooth\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"Algebra.IsSmoothAt\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\"], \"digest\": \"23e80db1e3c3d1f7\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match. Smooth charts and preservation under flat base change do not lift a fibre regular sequence to the ambient algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a flat finitely presented algebra over an arbitrary ring, a specified sequence regular on a fibre local ring is regular on a principal neighbourhood",
+   "results": "{\"t\": \"2026-10-20T04:46:11Z\", \"tool\": \"leansearch\", \"query\": \"In a flat finitely presented algebra over an arbitrary ring, a specified sequence regular on a fibre local ring is regular on a principal neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"RingTheory.Sequence.IsRegular\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingHom.smooth_def\"], \"digest\": \"310a5d4e5ee86609\"}",
+   "date": "2026-10-20",
+   "verdict": "No exact match: Mathlib regular-sequence flat base change preserves regularity already on the ambient algebra; it does not lift it from a fibre."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothPairRegularEquations",
+  "date": "2026-10-19",
+  "group": "Q7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-divisor-class",
+   "place": "The local one-function frame for a smooth closed divisor, via lem-pur-smooth-pair-local-coordinates step 1 and the regular-equation input lem-pur-smooth-pair-regular-immersion.",
+   "via": [
+    "lem-pur-smooth-pair-local-coordinates",
+    "lem-pur-smooth-pair-regular-immersion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiberRegularSequenceNeighbourhood",
+  "declaration": "Algebra.exists_isRegular_of_fiber_local",
+  "file": "lean/Sheaf/RingTheory/FiberRegularSequenceNeighbourhood.lean",
+  "statement": "theorem exists_isRegular_of_fiber_local (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] [Module.Flat R A] [FinitePresentation R A] (p : PrimeSpectrum R) (Q : PrimeSpectrum A) (P : PrimeSpectrum (p.asIdeal.Fiber A)) (hP : P.comap TensorProduct.includeRight.toRingHom = Q) (fs : List A) (hreg : RingTheory.Sequence.IsRegular (Localization.AtPrime P.asIdeal) (fs.map fun a ↦ algebraMap (p.asIdeal.Fiber A) (Localization.AtPrime P.asIdeal) (TensorProduct.includeRight a))) : ∃ g : A, g ∉ Q.asIdeal ∧ RingTheory.Sequence.IsRegular (Localization.Away g) (fs.map (algebraMap A (Localization.Away g)))",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T122124-L-481295",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T122124-L-481295",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

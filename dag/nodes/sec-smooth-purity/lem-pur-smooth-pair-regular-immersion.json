@@ -18,161 +18,56 @@
  ],
  "proof": [
   {
-   "text": "Fix $y\\in Y$ and put $x=i(y)$, $s$ its image in $S$. Choose an affine neighbourhood $W=\\operatorname{Spec}R$ of $s$ and an affine open $X_0=\\operatorname{Spec}A$ of $x$ in the inverse image of $W$. By the affine clause of [def-weil-closed-immersion], $Y_0=Y\\times_XX_0=\\operatorname{Spec}C$, with $C=A/I$ for an ideal $I\\subset A$. Let $\\mathfrak q\\supset I$ correspond to $x$ and $\\mathfrak p=\\mathfrak q\\cap R$. Both restricted structure morphisms are smooth: a lift against a first-order thickening given by [def-sbc-smooth-morphisms] lands in the chosen open because the thickening has the same underlying space; local finite presentation also restricts to opens. Apply [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] to get smooth ring maps $R\\to A$ and $R\\to C$. In particular $A$ and $C$ are finitely presented over $R$ by [def-weil-pbc-smooth-ring-map], and both are $R$-flat by [lem-weil-pbc-smooth-ring-map-flat].",
+   "text": "Choose an affine neighbourhood $W=\\operatorname{Spec}R$ of the base image of $y$, then an affine neighbourhood $U=\\operatorname{Spec}A$ of $i(y)$ contained in its inverse image. A closed immersion has affine inverse image $V=i^{-1}U=\\operatorname{Spec}C$, and its section map $\\varphi:A\\to C$ is surjective [def-weil-closed-immersion]. The two structure maps on sections are compatible with $\\varphi$ and smooth by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. Let $Q$ be the prime corresponding to $i(y)$; naturality of the affine prime correspondence gives $\\ker\\varphi\\subseteq Q$.",
    "uses": [
     "def-weil-closed-immersion",
-    "def-sbc-smooth-morphisms",
-    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-    "def-weil-pbc-smooth-ring-map",
-    "lem-weil-pbc-smooth-ring-map-flat"
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 067U, lemma-immersion-smooth-into-smooth-regular-immersion, expanded through Tag 067T, lemma-immersion-lci-into-smooth-regular-immersion, first paragraph; affine reduction in Tag 063W, lemma-fibre-quasi-regular"
+    "place": "Tag 063W, lemma-fibre-quasi-regular, proof of (2)"
    }
   },
   {
-   "text": "The $R$-algebra $A$ is of finite type, so [lem-weil-pbc-finite-presentation-over-finite-type-algebra], applied to $R\\to A\\to C$, makes $C$ finitely presented over $A$. Apply [lem-weil-pbc-finite-presentation-surjection-kernel-fg] over $A$ with zero polynomial variables and the quotient surjection $A\\to C$. Thus $I=(a_1,\\ldots,a_N)$ is finitely generated. This uses no Noetherian hypothesis on $R$ or $A$.",
+   "text": "Apply [lem-pur-smooth-quotient-regular-sequence] to these smooth $R$-algebras and $\\varphi$. It supplies $g\\notin Q$. Replace $U$ by its affine basic open $D(g)$. Sections on that open form a model of $A[1/g]$, so the theorem gives a regular list $f$ generating the extended kernel. Restriction of the quasi-coherent kernel ideal equals the kernel of the new section map. Therefore this new kernel is exactly $(f)$.",
    "uses": [
-    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
-    "lem-weil-pbc-finite-presentation-surjection-kernel-fg"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00F4, lemma-compose-finite-type, part (4); Tag 00R2, lemma-finite-presentation-independent, n=0; finiteness input to divisors.tex Tag 063W(2)"
-   }
-  },
-  {
-   "text": "Set $k=\\kappa(\\mathfrak p)$, $\\bar A=A\\otimes_Rk$, $\\bar C=C\\otimes_Rk=\\bar A/I\\bar A$, and let $\\bar{\\mathfrak q}$ be the point of $\\operatorname{Spec}\\bar A$ corresponding to $y$ on the fibre. The two local rings $L=\\bar A_{\\bar{\\mathfrak q}}$ and $L/J=(\\bar C)_{\\bar{\\mathfrak q}/I\\bar A}$, where $J=I\\bar A_{\\bar{\\mathfrak q}}$, are regular local by [lem-weil-pbc-smooth-fibre-regular-local], applied separately to $R\\to A$ and $R\\to C$. In particular $J$ is proper. By [lem-weil-pbc-regular-local-quotient-kernel-parameters], choose a minimal generating tuple $z_1,\\ldots,z_d$ of the maximal ideal of $L$ such that $J=(z_1,\\ldots,z_b)$ for $0\\le b\\le d$. By [lem-weil-pbc-regular-local-generators-regular-sequence] this full tuple is regular, hence its first $b$ elements are regular: each multiplication is one of the original injections and every prefix quotient surjects onto the nonzero final quotient.",
-   "uses": [
-    "lem-weil-pbc-smooth-fibre-regular-local",
-    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
-    "lem-weil-pbc-regular-local-generators-regular-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00TT, lemma-characterize-smooth-over-field; Tag 00NR, lemma-regular-quotient-regular; Tag 00NQ, lemma-regular-ring-CM; smooth-fibre specialization of the local argument in divisors.tex Tag 067T"
-   }
-  },
-  {
-   "text": "Choose $f_j\\in I$ whose image in $L$ is a unit multiple of $z_j$. Indeed $L=A_{\\mathfrak q}/\\mathfrak pA_{\\mathfrak q}$, and $J$ is the image of $I_{\\mathfrak q}$, so lift $z_j$ to a fraction $f_j/t_j\\in I_{\\mathfrak q}$ with $t_j\\notin\\mathfrak q$. Multiplying each successive generator by the unit $t_j$ preserves its regularity and all prefix ideals. Apply [lem-weil-pbc-flat-quotient-tensor-injective] to $0\\to I\\to A\\to C\\to0$ over $R$, with $N=k$ and flat quotient $C$. It identifies $I\\otimes_Rk$ with the fibre ideal $I\\bar A$. Localizing this exact sequence using [lem-weil-pbc-localization-module-exact] identifies $(I\\otimes_Rk)_{\\bar{\\mathfrak q}}$ with $I_{\\mathfrak q}/\\mathfrak p I_{\\mathfrak q}$. The images of the $f_j$ generate this module. Therefore for the finite $A_{\\mathfrak q}$-module $M=I_{\\mathfrak q}/(f_1,\\ldots,f_b)A_{\\mathfrak q}$ one has $M=\\mathfrak pM$, hence $M=\\mathfrak qA_{\\mathfrak q}M$. Apply [lem-weil-pbc-nakayama-local-generators] with the empty generating family to obtain $M=0$. The finite module $I/(f_1,\\ldots,f_b)$ consequently vanishes after localizing at $\\mathfrak q$. For each generator $a_l$ choose $h_l\\notin\\mathfrak q$ killing its class in that quotient, and invert $h=\\prod_lh_l$. Thus after replacing $A$ by $A_h$ one has $I=(f_1,\\ldots,f_b)$ on the entire affine open. The new $A$ remains flat and finitely presented over $R$: localization is exact by the cited lemma, and a presentation for $A_h$ is obtained from one for $A$ by adjoining a variable $u$ and the relation $hu-1$.",
-   "uses": [
-    "lem-weil-pbc-flat-quotient-tensor-injective",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-nakayama-local-generators"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HL, lemma-flat-tor-zero; Tag 00CS, proposition-localization-exact; Tag 00DV, lemma-NAK; supplies the equality-of-ideals step of divisors.tex Tag 063W(2) without its D/Z notation slip"
-   }
-  },
-  {
-   "text": "The fibre algebra $\\bar A$ is a finitely generated $k$-algebra: tensor a finite polynomial presentation of $A$ with $k$ and reduce its coefficients. It is therefore Noetherian by [lem-wf-affine-noetherian-components]. The images of $f_1,\\ldots,f_b$ form a regular sequence in $L$. Apply [lem-exc-regular-sequence-principal-neighbourhood] to the ring $\\bar A$, the prime $\\bar{\\mathfrak q}$ and these elements. It gives $\\gamma\\in\\bar A\\setminus\\bar{\\mathfrak q}$ on whose principal open the whole tuple is regular. Write $\\gamma=a/r$ with $a\\in A$ and $r\\in R\\setminus\\mathfrak p$: this is possible since $\\bar A=(R\\setminus\\mathfrak p)^{-1}(A/\\mathfrak pA)$. Then $a\\notin\\mathfrak q$, and replacing $A$ by $A_a$ has precisely the same effect on the fibre. The ideal equality from step 4 persists. Thus the fibre tuple is regular on the whole new fibre, and all $f_j$ vanish at the retained point $y$.",
-   "uses": [
-    "lem-wf-affine-noetherian-components",
-    "lem-exc-regular-sequence-principal-neighbourhood"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061L, lemma-regular-sequence-in-neighbourhood; Noetherianity of finite-type field algebras; spreading step in divisors.tex Tag 063W, lemma-fibre-quasi-regular, first proof paragraph"
-   }
-  },
-  {
-   "text": "Induct on $e=0,\\ldots,b$, retaining a principal neighbourhood of $\\mathfrak q$. For the current localized algebra write $B_j=A/(f_1,\\ldots,f_j)$. Require the first $e$ successive multiplications to be injective, every $B_j$ for $0\\le j\\le e$ to be flat and finitely presented over $R$, and all successive fibre multiplications to be injective. The case $e=0$ follows from steps 1--5. Under any further ambient principal localization, [lem-weil-pbc-localization-quotient-commute] identifies every prefix quotient with its localization; [lem-weil-pbc-localization-tensor-over-base], with $M=B_j$ and $N=k$, identifies its new fibre with its localized old fibre. Thus [lem-weil-pbc-localization-module-exact] preserves both the earlier and the fibre multiplication injections. Every $f_j$ belongs to the retained prime, so the prime $\\mathfrak q_e$ of $B_e$ exists and contracts to $\\mathfrak p$.",
-   "uses": [
-    "lem-weil-pbc-localization-quotient-commute",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-localization-module-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 063W, lemma-fibre-quasi-regular, first proof paragraph: successive application of Tag 062Y, lemma-fibre-Cartier, part (3), using its algebraic criterion."
-   }
-  },
-  {
-   "text": "Suppose $e<b$. The quotient base-change isomorphism [lem-weil-pbc-tensor-quotient-base-change], applied to $A\\to A\\otimes_R k$ and $(f_1,\\ldots,f_e)$, identifies the fibre of $B_e$ with $(A\\otimes_R k)/(\\bar f_1,\\ldots,\\bar f_e)$, using the balancing identification $(A\\otimes_R k)\\otimes_A B_e\\cong B_e\\otimes_R k$. Its maps send $[(a\\bmod(f_1,\\ldots,f_e))\\otimes t]$ to $[a\\otimes t]$ and back. The next fibre element is a nonzerodivisor on this entire ring by induction. Apply [lem-pc-algebra-fibre-cartier-local] with base $R$, algebra $B_e$, field $k=\\kappa(\\mathfrak p)$, principal ideal $(f_{e+1})$ and prime $\\mathfrak q_e$. Flatness and finite presentation hold by induction, the contraction is $\\ker(R\\to k)=\\mathfrak p$, and at every fibre prime the criterion holds with $g_P=1$. It gives $g\\in B_e\\setminus\\mathfrak q_e$ such that $(f_{e+1})(B_e)_g=(v)$ for a nonzerodivisor $v$, and $(B_e)_g/(f_{e+1})$ is $R$-flat.",
-   "uses": [
-    "lem-weil-pbc-tensor-quotient-base-change",
-    "lem-pc-algebra-fibre-cartier-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 063W, lemma-fibre-quasi-regular, first proof paragraph: successive application of Tag 062Y, lemma-fibre-Cartier, part (3), using its algebraic criterion."
-   }
-  },
-  {
-   "text": "The specified $f_{e+1}$ is itself a nonzerodivisor in $(B_e)_g$: write $v=t f_{e+1}$, so $f_{e+1}z=0$ implies $vz=0$ and $z=0$. Lift $g$ to $\\tilde g\\in A\\setminus\\mathfrak q$ and replace $A$ by $A_{\\tilde g}$. By [lem-weil-pbc-localization-quotient-commute] its $e$-th prefix quotient is $(B_e)_g$, and its next prefix quotient is $(B_e)_g/(f_{e+1})$. The latter is flat by step 7. For each earlier prefix, apply [lem-pc-affine-flat-module-localization-preserves-flatness] with the algebra $R\\to B_j$, the module $M=B_j$, and the powers of the image of $\\tilde g$: the localized prefix remains flat over $R$. Step 6 already gives preservation of all earlier multiplication injections and all fibre injections. Thus the injectivity and flatness parts of the inductive claim hold at $e+1$.",
-   "uses": [
-    "lem-weil-pbc-localization-quotient-commute",
-    "lem-pc-affine-flat-module-localization-preserves-flatness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 063W, lemma-fibre-quasi-regular, first proof paragraph: successive application of Tag 062Y, lemma-fibre-Cartier, part (3), using its algebraic criterion."
-   }
-  },
-  {
-   "text": "Finite presentation also persists. By [lem-weil-pbc-localization-away-polynomial-quotient], a principal localization of a ring $D$ is $D[u]/(\\tilde g u-1)$. Starting with a finite polynomial presentation of the current $A$, add the finitely many relations $f_1,\\ldots,f_j$ and then the single variable $u$ and relation $\\tilde g u-1$. This is a finite presentation over $R$ of every new prefix, by [def-weil-pbc-finitely-presented-algebra]. Finally, if the current ambient open is $A_0[1/h]$, write $\\tilde g=c/h^n$; the new open is $A_0[1/(hc)]$. Since $h$ and $\\tilde g$ avoid the retained prime, $hc\\notin\\mathfrak q_0$. All restrictions therefore retain the chosen point in an ambient affine open. This completes the induction.",
-   "uses": [
-    "lem-weil-pbc-localization-away-polynomial-quotient",
-    "def-weil-pbc-finitely-presented-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 063W, lemma-fibre-quasi-regular, first proof paragraph: successive application of Tag 062Y, lemma-fibre-Cartier, part (3), using its algebraic criterion."
-   }
-  },
-  {
-   "text": "At $e=b$ let the resulting affine open be $U=\\operatorname{Spec}A'$. The ideal identity $I A'=(f_1,\\ldots,f_b)$ still holds, so the affine closed-immersion description [def-weil-closed-immersion] identifies $Y\\times_XU$ with $\\operatorname{Spec}(A'/(f_1,\\ldots,f_b))$ as a closed subscheme of $U$. The induction gives every successive multiplication injection. Its final quotient has the point $y$ and therefore is nonzero, giving precisely the regular-sequence condition of [def-weil-pbc-regular-sequence]. For $b=0$ step 4 already says that the ideal vanishes on a neighbourhood of $x$; the induction has no steps, and the empty sequence is regular because this neighbourhood contains $y$. Renaming $A'$ as $A$ proves every assertion.",
-   "uses": [
-    "def-weil-closed-immersion",
+    "lem-pur-smooth-quotient-regular-sequence",
+    "def-weil-open-immersion",
     "def-weil-pbc-regular-sequence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0FUE, lemma-etale-local-structure, first proof paragraph; divisors.tex Tag 063J, definition-regular-immersion, affine regular-equation interpretation"
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, proof of (2)"
+   }
+  },
+  {
+   "text": "The new open contains $i(y)$ because $g\\notin Q$. Its inverse image under $i$ is affine, and its section map is surjective. The first isomorphism theorem identifies its section ring with $A/(f)$. Combine the affine spectrum isomorphism of the inverse image with this quotient isomorphism and the canonical pullback-restriction isomorphism. Naturality of the spectrum map gives the required equality with the pullback projection. These are exactly the isomorphism and commutative equation in the statement, with the regular list obtained in the preceding step.",
+   "uses": [
+    "def-pc-base-change",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, proof of (2)"
    }
   }
  ],
  "proof_deps": [
-  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-weil-affine-spectrum",
   "def-weil-closed-immersion",
-  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-open-immersion",
   "def-weil-pbc-regular-sequence",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-exc-regular-sequence-principal-neighbourhood",
-  "lem-pc-affine-flat-module-localization-preserves-flatness",
-  "lem-pc-algebra-fibre-cartier-local",
-  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
-  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
-  "lem-weil-pbc-flat-quotient-tensor-injective",
-  "lem-weil-pbc-localization-away-polynomial-quotient",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-localization-quotient-commute",
-  "lem-weil-pbc-localization-tensor-over-base",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
-  "lem-weil-pbc-smooth-fibre-regular-local",
-  "lem-weil-pbc-smooth-ring-map-flat",
-  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-  "lem-weil-pbc-tensor-quotient-base-change",
-  "lem-wf-affine-noetherian-components"
+  "lem-pur-smooth-quotient-regular-sequence",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 067U through Tag 067T; the smooth-fibre case of Tag 063W, lemma-fibre-quasi-regular, proved by Tag 062Y(3). The flat-quotient/Nakayama argument spells out equality of ideals."
+  "place": "Tag 067U, lemma-immersion-smooth-into-smooth-regular-immersion, affine reduction to Tag 067T and the separately stated flat-family criterion Tag 063W(2). Fibre regularity and the regular-local parameter argument are proved in the smooth-algebra corollary."
  },
  "mathlib_searches": [
   {
@@ -347,9 +242,7 @@
   "lem-weil-pbc-smooth-fibre-regular-local",
   "lem-weil-pbc-regular-local-quotient-kernel-parameters",
   "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "lem-pc-recd-fibre-cartier-local",
-  "lem-pc-algebra-fibre-cartier-local",
-  "lem-pc-affine-flat-module-localization-preserves-flatness"
+  "lem-pc-algebra-fibre-cartier-local"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -376,5 +269,15 @@
   "by": "NL",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T122124-L-481295",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
