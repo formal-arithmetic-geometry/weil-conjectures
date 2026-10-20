@@ -28,133 +28,36 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-localize-ringed-site-morphism] to the base-change functor $u_f$ of [def-weil-proetale-inverse-image]. Its object $u_f(V)$ is exactly $U=X\\times_YV$, an object of $X_{\\mathrm{proet}}$, not an assumed open subscheme. We obtain the ringed localization square, the ordinary pullback comparison $f_V^*j_V^*\\cong j_U^*f^*$, and the ordinary direct-image comparison $\\beta^0:j_V^*f_*\\cong(f_V)_*j_U^*$. For $W\\to V$ the latter identifies both module sections with $G(X\\times_YW)$; the $R_Y(W)$-actions agree because the localized ring map is the restriction of the specified map $f^{-1}R_Y\\cong R_X$. That same pullback square restricts this ring isomorphism to $(f_V)^{-1}(R_Y|_V)\\cong R_X|_U$.",
+   "text": "Construct the normalized global operation, derived adjunction, and signed tensor models.",
    "uses": [
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "def-weil-proetale-inverse-image"
+    "lem-weil-pbc-ringed-projection-restriction-global"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CF and 04J0, localization of the site morphism"
-   }
+   "elementary": false
   },
   {
-   "text": "Restriction on module sheaves is exact by [lem-pur-site-restriction-module-adjunction-exact]. Thus $H^q(j_T^*A)=j_T^*H^q(A)$, directly by its preservation of kernels and cokernels, and termwise restriction induces the derived restriction functors. The pullbacks $f^*$ and $f_V^*$ are also exact: their coefficient maps are isomorphisms (Step 1), so their underlying abelian functors are inverse image, exact by [lem-weil-pbc-site-pullback-abelian-exact]; kernels and cokernels of module sheaves are computed on underlying abelian sheaves [def-weil-sheaf-of-modules-category]. Consequently the ordinary square of Step 1, applied termwise to any representative of $P$, induces $j_U^*Lf^*P\\cong Lf_V^*j_V^*P$. Here $Lf^*$ is exactly the termwise exact functor specified in [def-weil-pbc-proetale-operations]; the same construction applies on the localized sites. Naturality for derived morphisms follows by inversion of quasi-isomorphisms from naturality of the ordinary square.",
+   "text": "For every pro-etale slice, construct the normalized local comparisons and projection mate equation.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-weil-pbc-ringed-projection-restriction-local"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Restriction discussion immediately before 08FI; 04J0 with isomorphic coefficient maps"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose a K-injective resolution $E\\to I$ in module sheaves using [prop-pur-kinjective-resolutions-exist]. Exact restriction sends it to a quasi-isomorphism $j_U^*E\\to j_U^*I$, and [lem-pur-kinjective-restrict-localized] makes $j_U^*I$ K-injective. The definition [def-weil-pbc-proetale-operations] represents $Rf_*E$ by $f_*I$, and [lem-weil-pbc-kinjective-total-derived] represents $R(f_V)_*j_U^*E$ by $(f_V)_*j_U^*I$. Restricting the former complex gives exactly the latter by $\\beta^0$ of Step 1 in every degree. This is the desired $\\beta:j_V^*Rf_*E\\cong R(f_V)_*j_U^*E$. Maps between K-injective representatives give the same comparison: [lem-weil-pbc-kinjective-hom-derived] represents all derived morphisms into them by homotopy classes, and additive restriction and pushforward preserve these homotopies. Thus the comparison is natural and independent of the resolution.",
+   "text": "Glue the local inverses degreewise and pass through the derived localization to detect isomorphisms.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-kinjective-restrict-localized",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-weil-pbc-ringed-projection-restriction-detection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "08FI, lemma-restrict-K-injective-to-open; proof method of 0FN5, lemma-localize-cartesian-square-modules (the site morphism is the one from Step 1)"
-   }
-  },
-  {
-   "text": "The restriction morphism of ringed topoi has module pullback $j_V^*$, since its ring map identifies the restricted ring with $R_Y|_V$. It is exact by Step 2, so $Lj_V^*=j_V^*$. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this morphism to obtain the canonical natural comparison $j_V^*(M\\otimes^LN)\\cong j_V^*M\\otimes^Lj_V^*N$. More explicitly, choose flat K-flat representatives of $M,N$; the cited theorem preserves their K-flatness under pullback and its tensor comparison is induced on their direct-sum total tensor complexes. Restriction preserves the bidegrees and the tensor differential $d_M\\otimes1+(-1)^a1\\otimes d_N$. The same construction applies to $j_U^*$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "07A4, lemma-pullback-tensor-product"
-   }
-  },
-  {
-   "text": "The comparison $\\beta$ from Step 3 is the exchange mate of the pullback square from Step 2. Verify its counit equation first on an ordinary module $G$. In the local inverse-image presheaf, a generator at $W\\to U$ is represented by $T\\to V$, an arrow $W\\to u_f(T)$ over $U$, and a section $m\\in G(u_f(T))$. Via the canonical pullback square [lem-weil-pbc-localize-ringed-site-morphism], it is the same generator in the global inverse image with the map to $V$ forgotten. The local counit and the restriction of the global counit both send it to the restriction of $m$ along $W\\to u_f(T)$. Hence their maps agree after sheafification; the coefficient actions agree by Step 1. The presheaf formula is [def-weil-pbc-sites-and-cohomology], and the linear adjuncts are [lem-weil-pbc-ringed-topoi-module-adjunction]. Apply this equality degreewise to the K-injective $I$ of Step 3. The termwise adjunction and its counit descend to homotopy classes by [lem-weil-pbc-termwise-adjunction-homotopy]. Since exact pullback preserves quasi-isomorphisms and $I,j_U^*I$ are K-injective, the Hom bijections of [lem-weil-pbc-kinjective-hom-derived] identify these with the canonical derived adjunctions. Writing $\\theta:Lf_V^*j_V^*\\cong j_U^*Lf^*$ and $\\varepsilon,\\varepsilon_V$ for the derived counits, we therefore have\n$$\\varepsilon_{V,j_U^*E}\\,Lf_V^*(\\beta_E)=j_U^*(\\varepsilon_E)\\,\\theta_{Rf_*E}.$$\nBy the bijection defining the mate [def-weil-pbc-adjunction-mate], this identifies $\\beta$ with that mate, rather than just some isomorphism between its source and target.",
-   "uses": [
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "04J0 and 03CF with the counit evaluation; 07A6, lemma-adjoint, computed on K-injective representatives"
-   }
-  },
-  {
-   "text": "Use [lem-weil-pbc-ringed-exchange-tensor-coherence] for the ringed square of Step 1, with $g=j_V$, $g'=j_U$, $f'=f_V$ and $Q=P$. Steps 2 and 4 supply its canonical derived pullback and tensor comparisons, and Step 5 identifies its exchange with $\\beta$. Its equality of the two composites says precisely that the restriction of $\\pi_{f,E,P}$, under the comparisons of Steps 2--4, is $\\pi_{f_V,j_U^*E,j_V^*P}$. No projection-formula isomorphism is assumed. All comparisons commute with integer shifts: the exact restriction and pullback squares are termwise and send the shifted differential $-d$ to $-j^*d$; the pushforward square on $I[n]$ is the same degreewise identity; and the tensor comparison preserves the bidegrees, hence the usual shift sign $(-1)^{na}$ on the second tensor variable. [lem-weil-pbc-ringed-projection-mate-exact] gives the canonical tensor and projection-mate shift structures for $f$ and $f_V$. The preceding termwise checks identify these structures with their restricted ones, so the equality includes the shift comparisons.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "0B56, equation-projection-formula-map; 0E48, remark-compatible-with-diagram; canonical shifts"
-   }
-  },
-  {
-   "text": "Finally let $a:A\\to B$ satisfy the stated local isomorphism condition. Represent it as $Q(h)Q(s)^{-1}$ with $s:C\\to A$ a quasi-isomorphism and $h:C\\to B$ a cochain map, using the right calculus of fractions [lem-pc-quasi-isomorphisms-multiplicative-system, lem-pc-right-fraction-representation]. By exactness of restriction from Step 2, for each $q$ the map $H^q(a)$ restricts to an isomorphism on every member of the specified covering of every $V$. Its inverse section maps are natural on the slices, hence agree after further restriction to $V_i\\times_VV_j$ (both are inverses to the same map). The sheaf equalizer condition [def-weil-pbc-sites-and-cohomology] glues these inverses, giving an inverse to $H^q(a)$ on $V$. Thus $H^q(a)$ is an isomorphism of module sheaves for all $q$. Since $H^q(s)$ is already invertible, $H^q(h)$ is invertible; $h$ is a quasi-isomorphism by [def-weil-abstract-derived-category]. Both $Q(h)$ and $Q(s)$ are invertible, so $a$ is invertible. This checks every degree separately; no uniform bound, quasi-compactness, or enough-points assumption has been used.",
-   "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-right-fraction-representation",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "0944, lemma-projection-formula, first locality sentence; derived.tex 05RT and 05RU for the fraction argument"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-localize-ringed-site-morphism",
-  "def-weil-proetale-inverse-image",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-localization-universal-property",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "def-weil-pbc-adjunction-mate",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "def-weil-abstract-derived-category",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-right-fraction-representation"
+  "lem-weil-pbc-ringed-projection-restriction-global",
+  "lem-weil-pbc-ringed-projection-restriction-local",
+  "lem-weil-pbc-ringed-projection-restriction-detection"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "08FI and 07A4, with 04J0/03CF for the ordinary localization square; explicit counit and shift checks supply the locality used by 0944"
+  "place": "The seven-step proof is split into global construction, local slice compatibility, and local detection; the main theorem combines these three results."
  },
  "mathlib_searches": [
   {
@@ -357,5 +260,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "H3/H5 repair of returned head 40e52a6f4e32: restriction is overFunctor.mapDerivedCategory; pullback and K-injective direct image are constructed module operations for the fixed coefficient adjunct and its sectionwise localization. Tensor functors and comparisons are normalized naturally on all flat K-flat signed total complexes, with descent uniqueness. Projection maps are the actual derived adjoint-of-counit mates; source/target identifications are explicit composites. Canonical shift equations retained. Original node statement unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261020T211834-L-3509315",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
