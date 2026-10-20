@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "Compare the explicit least length of a bounded projective resolution with Mathlib CategoryTheory.projectiveDimension: HasProjectiveResolutionLE is equivalent to HasProjectiveDimensionLE, and Nat.find gives the least bound. Nontriviality excludes projective dimension bottom. The module carrier is in Type (max u v), so the module universe contains the ring and this comparison applies.",
+   "text": "Let e be the least natural Ext projective-dimension bound supplied by finite projective dimension. Mathlib projectiveDimension_le_iff and projectiveDimension_ge_iff identify projectiveDimension M with e; nontriviality excludes bottom when e=0. The bounded-resolution comparison turns the minimum Ext bound into a resolution of length e. The module universe contains the ring universe.",
    "uses": [
     "def-weil-pbc-finite-global-dimension",
     "lem-weil-pbc-projective-resolution-ext-degree"
@@ -34,7 +34,7 @@
    "elementary": false
   },
   {
-   "text": "Reuse IsLocalRing.depth_equiv_local, depth_subsingleton and depth_free_ge from Sheaf.RingTheory.CohenMacaulayDepthFirstTerm, where these proved helpers are now public. These give depth invariance under linear equivalence, infinite depth of the zero module, and depth(F)>=depth(R) for a finite free module F. Their original proofs transport regular sequences, use a finite basis and flat base change, and apply Nakayama; no duplicate proof is introduced.",
+   "text": "Prove three private depth helpers in the restored Sheaf module: linear equivalences preserve depth by transporting regular sequences and the maximal-ideal quotient; a subsingleton module has infinite depth by definition; a finite free module has depth at least depth R by a finite basis, flat transport of regularity and Nakayama. The previously public Sheaf helpers were retired in favor of an upstream module whose helpers are private; no upstream visibility is changed.",
    "uses": [
     "def-weil-pbc-depth",
     "def-weil-pbc-regular-sequence",
@@ -55,7 +55,7 @@
    "elementary": false
   },
   {
-   "text": "For an arbitrary finite module L with finite projective dimension q, use its minimum-length bound and the minimal finite free resolution theorem. For q=0, q<=depth R is immediate. For q>0 a zero top term would give a shorter bound, so its rank is positive. Choose finite bases, transport the differential exactness and top injectivity to matrices. Minimality puts every coefficient in the maximal ideal; applying the residue quotient to each nonempty determinant shows its ideal is contained in the maximal ideal and is proper. The exact-free-complex last-minors lemma then gives a regular sequence of length q in that ideal, hence q<=depth R by the supremum definition.",
+   "text": "For an arbitrary finite module L with finite projective dimension q, use its minimum Ext bound and the bounded-resolution comparison and the minimal finite free resolution theorem. For q=0, q<=depth R is immediate. For q>0 a zero top term would give a shorter resolution and, by the comparison, a smaller Ext bound, so its rank is positive. Choose finite bases, transport the differential exactness and top injectivity to matrices. Minimality puts every coefficient in the maximal ideal; applying the residue quotient to each nonempty determinant shows its ideal is contained in the maximal ideal and is proper. The exact-free-complex last-minors lemma then gives a regular sequence of length q in that ideal, hence q<=depth R by the supremum definition.",
    "uses": [
     "lem-weil-pbc-minimal-finite-free-resolution-local",
     "lem-weil-pbc-exact-free-complex-last-minors-regular-sequence",
@@ -95,10 +95,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q2",
-  "date": "2026-10-18",
+  "group": "G2",
+  "date": "2026-10-20",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 090V: the resolution/minors inequalities, combined with Mathlib.RingTheory.Regular.ProjectiveDimension projectiveDimension_quotient_eq_add_length_of_isWeaklyRegular to avoid change of rings; repair reuses the existing depth helpers in CohenMacaulayDepthFirstTerm instead of duplicating them"
+  "place": "Tag 090V: retain the last-minors and resolution-depth inequalities and Mathlib regular-quotient dimension formula. Restore after upstream API synchronization: use the minimum Ext bound through the bounded-resolution bridge, Mathlib projective dimension in WithBot ℕ∞, and proved private depth helpers because the upstream helpers are private."
  },
  "mathlib_searches": [
   {
@@ -234,21 +234,21 @@
   "module": "Sheaf.RingTheory.AuslanderBuchsbaum",
   "declaration": "IsLocalRing.depth_eq_projectiveDimension_add_depth",
   "file": "lean/Sheaf/RingTheory/AuslanderBuchsbaum.lean",
-  "statement": "theorem depth_eq_projectiveDimension_add_depth\n    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    (M : Type (max u v)) [AddCommGroup M] [Module R M] [Nontrivial M] [Module.Finite R M]\n    (h : ModuleCat.HasFiniteProjectiveDimension (ModuleCat.of R M)) :\n    depth (R := R) R =\n      (ModuleCat.projectiveDimension (ModuleCat.of R M) h : ℕ∞) + depth (R := R) M",
-  "branch": "newtargets-dag",
-  "by": "Q2",
-  "date": "2026-10-18",
+  "statement": "theorem depth_eq_projectiveDimension_add_depth\n    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    (M : Type (max u v)) [AddCommGroup M] [Module R M] [Nontrivial M] [Module.Finite R M]\n    (h : ModuleCat.HasFiniteProjectiveDimension (ModuleCat.of R M)) :\n    (depth (R := R) R : WithBot ℕ∞) =\n      CategoryTheory.projectiveDimension (ModuleCat.of R M) +\n        (depth (R := R) M : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-20",
   "existing": false,
-  "note": "Universe interface repair: M is in Type (max u v), as required by ordinary projectivity and bounded resolutions; mathematical hypotheses and conclusion are unchanged."
+  "note": "Restore the quarantined proof against the canonical upstream finite-projective-dimension API. The equality is now in WithBot ℕ∞ and uses CategoryTheory.projectiveDimension. For the nonzero finite-dimensional module this equals the least natural Ext bound, which by the bounded-resolution bridge is the old least resolution length. No mathematical hypothesis or conclusion changes."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-b946e",
-  "group": "Q2",
+  "reviewer": "C-fa7b0",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261018T091410-L-3257941",
+  "landing": "20261020T163314-L-3728444",
   "kind": "interface",
-  "note": "independent cc review: delivered AuslanderBuchsbaum proof and the CohenMacaulayDepthFirstTerm visibility change against the node lem-weil-pbc-auslander-buchsbaum, both change records, the clone sources and compiles of the direct importers (CohenMacaulayFreeResolutionMCM, UniformPerfectQuotientBound)"
+  "note": "independent cc review: delivered AuslanderBuchsbaum/UniformPerfectQuotientBound vs quarantine archives and live clone; new WithBot pd statement vs node lean.statement and change record; private helpers vs WeilConjectures CohenMacaulayDepthFirstTerm; compile --all clean, axioms clean"
  }
 }

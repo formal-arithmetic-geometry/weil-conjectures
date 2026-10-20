@@ -43,14 +43,13 @@
    "elementary": false
   },
   {
-   "text": "Localize P_n=A/I^n at a maximal ideal m. Mathlib localizedModule_hasProjectiveDimensionLE preserves the finite bound from the first step. If the localization is nonzero, the support-annihilator criterion gives I^n≤m. Primality implies I≤m, so m∈T. Finite generation survives localization. Auslander–Buchsbaum gives pd((P_n)_m)+depth((P_n)_m)=depth(A_m)≤r, hence pd((P_n)_m)≤r. If it is zero, it has projective dimension at most r without further assumptions.",
+   "text": "Localize P_n=A/I^n at a maximal ideal m. Mathlib localizedModule_hasProjectiveDimensionLE preserves the finite bound from the first step. If the localization is nonzero, the support-annihilator criterion gives I^n≤m. Primality implies I≤m, so m∈T. Finite generation survives localization. Auslander–Buchsbaum gives pd((P_n)_m)+depth((P_n)_m)=depth(A_m)≤r, hence pd((P_n)_m)≤r. If it is zero, it has projective dimension at most r without further assumptions. Use the categorical Auslander–Buchsbaum equality directly in WithBot ℕ∞; nonnegativity of module depth and projectiveDimension_le_iff give the desired Ext bound without a natural-number projective-dimension wrapper or bounded-resolution comparison.",
    "uses": [
     "def-weil-pbc-module-localization",
     "lem-weil-pbc-localization-module-exact",
     "lem-weil-pbc-localization-projective",
     "lem-weil-pbc-finite-module-support-annihilator",
-    "lem-weil-pbc-auslander-buchsbaum",
-    "lem-weil-pbc-projective-resolution-ext-degree"
+    "lem-weil-pbc-auslander-buchsbaum"
    ],
    "elementary": false
   },
@@ -90,7 +89,6 @@
   "lem-weil-pbc-localization-projective",
   "lem-weil-pbc-finite-module-support-annihilator",
   "lem-weil-pbc-auslander-buchsbaum",
-  "lem-weil-pbc-projective-resolution-ext-degree",
   "lem-weil-pbc-finite-module-pd-local-global",
   "def-weil-finitely-generated-module",
   "lem-weil-pbc-bounded-finite-projective-resolution",
@@ -100,7 +98,9 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 090V, 065R and 0CXE; shorter finite-support assembly: finitely many maximal ideals over the finite ring A/I, finite local ring depths, and Auslander–Buchsbaum. The two bridge lemmas are proved in this delivery."
+  "place": "Tags 090V, 065R and 0CXE; preserve the finite-support assembly. Adapt only the Auslander–Buchsbaum application to canonical categorical projective dimension; remove the now-unused direct bounded-resolution bridge import.",
+  "group": "G2",
+  "date": "2026-10-20"
  },
  "mathlib_searches": [
   {
@@ -249,13 +249,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G4",
+  "reviewer": "C-fa7b0",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261018T062759-L-651895",
+  "landing": "20261020T163314-L-3728444",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered AuslanderBuchsbaum/UniformPerfectQuotientBound vs quarantine archives and live clone; new WithBot pd statement vs node lean.statement and change record; private helpers vs WeilConjectures CohenMacaulayDepthFirstTerm; compile --all clean, axioms clean"
  }
 }
