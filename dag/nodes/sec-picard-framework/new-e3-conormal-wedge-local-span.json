@@ -115,14 +115,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ConormalWedgeLocalSpan",
-  "file": "lean/Sheaf/AlgebraicGeometry/ConormalWedgeLocalSpan.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ConormalWedgeLocalSpan",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ConormalWedgeLocalSpan.lean",
   "declaration": "AlgebraicGeometry.conormal_wedge_mem_span_locally",
-  "statement": "theorem conormal_wedge_mem_span_locally\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ)\n    (V : Y.affineOpens) (W : Z.Opens) (hW : W ≤ i ⁻¹ᵁ V.1)\n    (a : Fin n → ((Scheme.Modules.tensorPullback i).obj i.ker.toModules).val.obj (op W))\n    (x : Z) (hx : x ∈ W) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let E := Scheme.Modules.exteriorSheaf N n\n    let η := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app\n      i.ker.toModules\n    ∃ (W' : Z.Opens) (hW' : W' ≤ W), x ∈ W' ∧\n      E.val.map (homOfLE hW').op (Scheme.Modules.exteriorSheafSection N n W a) ∈\n        Submodule.span (Z.presheaf.obj (op W'))\n          (Set.range (fun b : Fin n → i.ker.toModules.val.obj (op V.1) ↦\n            Scheme.Modules.exteriorSheafSection N n W'\n              (fun j ↦ N.val.map (homOfLE (hW'.trans hW)).op\n                (η.val.app (op V.1) (b j)))))",
+  "statement": "theorem conormal_wedge_mem_span_locally\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ)\n    (V : Y.affineOpens) (W : Z.Opens) (hW : W ≤ i ⁻¹ᵁ V.1)\n    (a : Fin n → ((Scheme.Modules.tensorPullback i).obj i.ker.toModules).val.obj (op W))\n    (x : Z) (hx : x ∈ W) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let E := Scheme.Modules.exteriorPower N n\n    let η := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app\n      i.ker.toModules\n    ∃ (W' : Z.Opens) (hW' : W' ≤ W), x ∈ W' ∧\n      E.val.map (homOfLE hW').op (wedge (M := N) (r := n) (U := W) a) ∈\n        Submodule.span (Z.presheaf.obj (op W'))\n          (Set.range (fun b : Fin n → i.ker.toModules.val.obj (op V.1) ↦\n            wedge (M := N) (r := n) (U := W')\n              (fun j ↦ N.val.map (homOfLE (hW'.trans hW)).op\n                (η.val.app (op V.1) (b j)))))",
   "branch": "sheaf-dag",
-  "by": "E3",
-  "date": "2026-10-14"
+  "by": "Q7",
+  "date": "2026-10-21",
+  "note": "Retired the local duplicate in favour of the upstream theorem. The exterior presheaves agree by exteriorSheafPresheaf_eq_exteriorPower. Pairing each presheaf with its pure-wedge maps identifies the whole sheafified span predicate, so the sole direct consumer preserves its original exteriorSheaf statement."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -135,14 +136,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E3",
+  "reviewer": "C-de7ab",
+  "group": "Q7",
   "result": "pass",
-  "landing": "20261013T222403-L-1222902",
+  "landing": "20261020T221314-L-4171097",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf ConormalWedgeLocalSpan vs upstream WeilConjectures.AlgebraicGeometry.ConormalWedgeLocalSpan (statement verbatim with e3 node lean record); adapted SelfTorLocalWedgeCoordinates vs clone (only import swap, scoped private helpers, one call site; public signature unchanged)"
  },
  "lean_audit": {
   "master": {

@@ -26,9 +26,10 @@
    "elementary": false
   },
   {
-   "text": "For the given W, tuple a and point x, conormal_wedge_mem_span_locally gives W′⊆W containing x and expresses the restricted exterior section in the span of restrictions of the ideal-unit wedges from V.",
+   "text": "For the given W, tuple a and point x, the upstream conormal_wedge_mem_span_locally gives W′⊆W containing x and the span conclusion for the official exteriorPower/wedge construction. The exterior presheaves are equal by exteriorSheafPresheaf_eq_exteriorPower; their pure-wedge maps agree definitionally. Pair each presheaf with its pure-wedge maps in a dependent pair, and transport the entire restriction-and-span predicate along equality of these pairs. The private exterior_span_transport helper thereby gives exactly the original exteriorSheafSection conclusion, with the generator type supplied explicitly. No hypotheses change.",
    "uses": [
-    "new-e3-conormal-wedge-local-span"
+    "new-e3-conormal-wedge-local-span",
+    "lem-sc-exterior-sheaf-presheaf-upstream-comparison"
    ],
    "elementary": false
   },
@@ -39,15 +40,16 @@
   }
  ],
  "proof_deps": [
+  "lem-sc-exterior-sheaf-presheaf-upstream-comparison",
   "new-e3-conormal-wedge-local-span",
   "new-e3-self-tor-ideal-wedge-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "E3",
-  "date": "2026-10-14",
+  "agent": "Q7",
+  "date": "2026-10-21",
   "document": "https://stacks.math.columbia.edu/tag/09PQ",
-  "place": "Original local wedge route split at agreement on ideal tuples; local generation, denominator inversion, exterior multilinearity and span induction are proved in Lean."
+  "place": "Retain the ideal-generator and local-span route. Transport the upstream local-span theorem using equality of the exterior presheaves paired with their pure-wedge maps; all other steps are unchanged from the E3 proof."
  },
  "mathlib_searches": [
   {
@@ -132,14 +134,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E3",
+  "reviewer": "C-de7ab",
+  "group": "Q7",
   "result": "pass",
-  "landing": "20261013T222403-L-1222902",
+  "landing": "20261020T221314-L-4171097",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf ConormalWedgeLocalSpan vs upstream WeilConjectures.AlgebraicGeometry.ConormalWedgeLocalSpan (statement verbatim with e3 node lean record); adapted SelfTorLocalWedgeCoordinates vs clone (only import swap, scoped private helpers, one call site; public signature unchanged)"
  },
  "lean_audit": {
   "master": {

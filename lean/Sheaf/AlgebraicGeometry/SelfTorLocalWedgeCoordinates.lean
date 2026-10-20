@@ -13,7 +13,8 @@ public import WeilConjectures.RingTheory.SelfTorConormalComparison
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 import Sheaf.AlgebraicGeometry.SelfTorIdealWedgeCoordinates
-import Sheaf.AlgebraicGeometry.ConormalWedgeLocalSpan
+import WeilConjectures.AlgebraicGeometry.ConormalWedgeLocalSpan
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPresheafComparison
 
 /-! # Local Koszul agreement on wedges in affine self-Tor coordinates
 
@@ -25,6 +26,73 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
+
+section
+
+-- Keep the concrete pullback and sheafification constructions behind their APIs.
+attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
+  PresheafOfModules.sheafification Scheme.Modules.exteriorSheafRestriction
+
+-- Keep the sheaf argument abstract while transporting the entire span predicate.
+set_option backward.isDefEq.respectTransparency false in
+private theorem exterior_span_transport {X : Scheme.{u}} (M : X.Modules) (n : ℕ)
+    {U V : X.Opens} (f : V ⟶ U) (a : Fin n → M.val.obj (op U))
+    {G : Type u} (b : G → Fin n → M.val.obj (op V))
+    (h : (Scheme.Modules.exteriorPower M n).val.map f.op
+        (Scheme.Modules.wedge (M := M) (r := n) (U := U) a) ∈
+      Submodule.span (X.presheaf.obj (op V))
+        (Set.range (fun g ↦ Scheme.Modules.wedge (M := M) (r := n) (U := V) (b g)))) :
+    (Scheme.Modules.exteriorSheaf M n).val.map f.op
+        (Scheme.Modules.exteriorSheafSection M n U a) ∈
+      Submodule.span (X.presheaf.obj (op V))
+        (Set.range (fun g ↦ Scheme.Modules.exteriorSheafSection M n V (b g))) := by
+  -- Pair the presheaf with its wedge maps to transport their dependent types together.
+  let T := Σ P : PresheafOfModules.{u} X.ringCatSheaf.obj,
+    ∀ W : X.Opens, (Fin n → M.val.obj (op W)) → P.obj (op W)
+  let p : T := ⟨Scheme.Modules.exteriorSheafPresheaf M n,
+    fun W ↦ exteriorPower.ιMulti (X.presheaf.obj (op W)) n⟩
+  let q : T := ⟨PresheafOfModules.exteriorPower (R := X.presheaf) M.val n,
+    fun W ↦ exteriorPower.ιMulti (X.presheaf.obj (op W)) n⟩
+  have hpq : p = q := Sigma.ext
+    (Scheme.Modules.exteriorSheafPresheaf_eq_exteriorPower M n) HEq.rfl
+  let F : T → Prop := fun t ↦
+    let E := (PresheafOfModules.sheafification.{u} (𝟙 X.ringCatSheaf.obj)).obj t.1
+    let s := fun W a ↦ ((PresheafOfModules.sheafificationAdjunction.{u}
+      (𝟙 X.ringCatSheaf.obj)).unit.app t.1).app (op W) (t.2 W a)
+    E.val.map f.op (s U a) ∈ Submodule.span (X.presheaf.obj (op V))
+      (Set.range (fun g ↦ s V (b g)))
+  change F p
+  rw [hpq]
+  exact h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem conormal_wedge_mem_span_locally_compat
+    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ)
+    (V : Y.affineOpens) (W : Z.Opens) (hW : W ≤ i ⁻¹ᵁ V.1)
+    (a : Fin n → ((Scheme.Modules.tensorPullback i).obj i.ker.toModules).val.obj (op W))
+    (x : Z) (hx : x ∈ W) :
+    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
+    let E := Scheme.Modules.exteriorSheaf N n
+    let η := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
+      i.ker.toModules
+    ∃ (W' : Z.Opens) (hW' : W' ≤ W), x ∈ W' ∧
+      E.val.map (homOfLE hW').op (Scheme.Modules.exteriorSheafSection N n W a) ∈
+        Submodule.span (Z.presheaf.obj (op W'))
+          (Set.range (fun b : Fin n → i.ker.toModules.val.obj (op V.1) ↦
+            Scheme.Modules.exteriorSheafSection N n W'
+              (fun j ↦ N.val.map (homOfLE (hW'.trans hW)).op
+                (η.val.app (op V.1) (b j))))) := by
+  let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
+  let η := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
+    i.ker.toModules
+  obtain ⟨W', hW', hx', hspan⟩ := conormal_wedge_mem_span_locally i n V W hW a x hx
+  refine ⟨W', hW', hx', ?_⟩
+  exact exterior_span_transport N n (homOfLE hW') a
+    (G := Fin n → i.ker.toModules.val.obj (op V.1))
+    (fun b j ↦ N.val.map (homOfLE (hW'.trans hW)).op (η.val.app (op V.1) (b j))) hspan
+
+end
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem exterior_section_map {X : Scheme.{u}} (M : X.Modules) (n : ℕ)
@@ -147,7 +215,7 @@ private theorem local_wedge_agreement_of_ideal_generators
   let η := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
     i.ker.toModules
   intro V U h W hW a x hx
-  obtain ⟨W', hW', hx', hspan⟩ := conormal_wedge_mem_span_locally i n V W hW a x hx
+  obtain ⟨W', hW', hx', hspan⟩ := conormal_wedge_mem_span_locally_compat i n V W hW a x hx
   refine ⟨W', hW', hx', ?_⟩
   have heq := exterior_over_restrict_eq_on_span N Q n
     (G := Fin n → i.ker.toModules.val.obj (op V.1))
