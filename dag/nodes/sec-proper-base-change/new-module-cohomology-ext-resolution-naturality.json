@@ -1,167 +1,169 @@
 {
- "id": "new-module-cohomology-ext-resolution-naturality",
- "kind": "statement",
- "title": "Coefficient naturality of the concrete module/Ext resolution equivalence",
- "statement": "For any scheme X, nonnegative degree q, modules F and G and coefficient morphism phi:F -> G, the explicitly constructed moduleCohomologyExtResolutionEquiv from module-derived sections [def-sc-ringed-space-module-cohomology] to H [pqf-def-cohomology] commutes with their maps on phi. The equivalence is the composite of the standard module injective-resolution comparison, exact forgetting of homology, the inverse acyclic-resolution comparison on the forgotten resolution, the inverse concrete Ext/derived-sections comparison obtained from Hom complexes and the section adjunction, and Ext precomposition by the inverse free-abelian-terminal/constant-integers source isomorphism. All these maps are constructed; no arbitrary natural equivalence is chosen.",
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/03FD",
-  "place": "Tag 03FD, Lemma 21.12.4; Tag 01FT (derived sections); Tag 06XR (Ext by injective resolutions)"
- },
- "stmt_deps": [
-  "def-sc-ringed-space-module-cohomology",
-  "pqf-def-cohomology"
- ],
- "proof": [
-  {
-   "text": "Construct the explicit Ext/derived-sections natural isomorphism from Hom complexes and the section adjunction. Its domain is the fixed free-sheaf Ext functor, definitionally the evaluated cohomology functor. Cache the existing sheafification and Ext-size proofs for the scheme site. The constant-source Ext functor is definitionally Mathlib Sheaf.functorH; no new comparison map is chosen.",
-   "uses": [],
-   "elementary": true
+  "id": "new-module-cohomology-ext-resolution-naturality",
+  "kind": "statement",
+  "title": "Coefficient naturality of the concrete module/Ext resolution equivalence",
+  "statement": "For any scheme X, nonnegative degree q, modules F and G and coefficient morphism phi:F -> G, the explicitly constructed moduleCohomologyExtResolutionEquiv from module-derived sections [def-sc-ringed-space-module-cohomology] to H [pqf-def-cohomology] commutes with their maps on phi. The equivalence is the composite of the standard module injective-resolution comparison, exact forgetting of homology, the inverse acyclic-resolution comparison on the forgotten resolution, the inverse concrete Ext/derived-sections comparison obtained from Hom complexes and the section adjunction, and Ext precomposition by the inverse free-abelian-terminal/constant-integers source isomorphism. All these maps are constructed; no arbitrary natural equivalence is chosen.",
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/03FD",
+    "place": "Tag 03FD, Lemma 21.12.4; Tag 01FT (derived sections); Tag 06XR (Ext by injective resolutions)"
   },
-  {
-   "text": "Forgotten injective modules are acyclic for abelian sections. The explicit Ext/section comparison transports this vanishing to rightAcyclic, so the forgotten module resolution computes derived abelian sections. Compose its acyclic-resolution comparison with exact forgetting of the module section homology and the terminal Ext-source isomorphism to construct E.",
-   "uses": [
-    "lem-sc-injective-module-abelian-acyclic-zariski"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Package the common-resolution coefficient square as resolutionSectionsNatIso: lift coefficient maps between standard resolutions, apply injective-resolution naturality and exact-forgetting homology naturality, then acyclicComparison_naturality. Compose three abstract natural isomorphisms with sectionsComparisonNatIso before scheme specialization: the common-resolution section map, inverse Ext/section map, and original precompAddEquiv.symm of the terminal-source isomorphism. The latter is extSourceNatIso, natural by Mathlib Ext associativity. Identity factors for the definitionally equal cohomology functors are omitted. Convert the resulting component to an additive equivalence and evaluate its natural square. All component functions and inverses remain the original resolution-normalized maps.",
-   "uses": [
-    "lem-weil-pbc-derived-functor-map-via-lift",
-    "lem-sc-acyclic-comparison-natural"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-sc-acyclic-comparison-natural",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
-  "lem-weil-pbc-derived-functor-map-via-lift"
- ],
- "proof_origin": {
-  "by": "N1 worker, reusing the complete Q4 proof",
-  "document": "https://stacks.math.columbia.edu/tag/03FD",
-  "place": "Same common-resolution natural isomorphism. Cached existing site-instance proofs and generic three-isomorphism composition avoid expensive scheme-specialized conversions; identity factors are omitted. No new holes or mathematical assumptions."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Natural comparison of derived module global sections with abelian sheaf Ext cohomology compatible with direct image",
-   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk",
-   "date": "2026-10-14",
-   "verdict": "No exact normalized edge comparison; existing resolution and cohomology primitives used."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"rightDerived\", \"iso\"",
-   "results": "12 hits: CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc, CategoryTheory.Functor.rightDerivedNatIso, CategoryTheory.Functor.rightDerivedNatIso_hom, CategoryTheory.Functor.rightDerivedNatIso_inv, CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
-   "date": "2026-10-14",
-   "verdict": "No exact normalized edge comparison; existing resolution and cohomology primitives used."
-  },
-  {
-   "tool": "grep",
-   "query": "moduleCohomology.*[Ee]dge|[Ee]dge.*[Ee]xt",
-   "results": "25 hits: Mathlib/CategoryTheory/Limits/Chosen/End.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Join/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean",
-   "date": "2026-10-14",
-   "verdict": "No exact normalized edge comparison; existing resolution and cohomology primitives used."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Cohomology comparison for modules and underlying abelian sheaves using common acyclic resolutions commutes with inverse image and the direct image edge map",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "service unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtEdgeComparison",
-  "date": "2026-10-14",
-  "group": "S2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-henselian-idempotent-lifting",
-   "place": "Common-complex normalization and coefficient naturality",
-   "via": [
-    "new-module-cohomology-ext-edge-comparison",
-    "new-module-cohomology-ext-pullback-comparison",
-    "new-flat-base-change-target-leray-comparison",
-    "new-flat-base-change-affine-canonical-comparisons",
-    "new-flat-base-change-affine-target",
-    "lem-weil-pbc-flat-base-change-affine-dictionary",
-    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
-    "lem-weil-pbc-flat-base-change-resolution-iso",
-    "lem-weil-pbc-formal-functions-local-stalk-comparison",
-    "lem-weil-pbc-formal-functions-local-dictionary",
-    "lem-weil-pbc-formal-functions-stalk",
-    "lem-weil-pbc-stein-fibre-idempotent-image",
-    "lem-weil-pbc-stein-normalized-fibre-idempotent",
-    "lem-weil-pbc-stein-factorization-affine",
-    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "existing": true,
-  "module": "WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/ModuleCohomologyExtResolutionNaturality.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv_naturality",
-  "statement": "theorem moduleCohomologyExtResolutionEquiv_naturality (X : Scheme.{u}) (q : ℕ) (F G : X.Modules) (φ : F ⟶ G) (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) : moduleCohomologyExtResolutionEquiv X G q (((RingedSpace.moduleCohomology X.toRingedSpace q).map φ).hom x) = H.map φ q (moduleCohomologyExtResolutionEquiv X F q x)",
-  "branch": "sheaf-dag",
-  "by": "S2",
-  "date": "2026-10-14",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv",
-   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv_naturality",
-   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionNatIso",
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.siteExtNatIso",
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.siteHNatIso",
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.resolutionForgetObjIso",
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.sectionHomologyIso",
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.resolutionSectionsObjIso",
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.resolutionSectionsNatIso",
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.moduleComparisonEquiv",
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.extSourceNatIso"
+  "stmt_deps": [
+    "def-sc-ringed-space-module-cohomology",
+    "pqf-def-cohomology"
   ],
-  "note": "The comparison and its naturality are supplied by the adopted source module. The additional cached comparisonHasSheafify/comparisonHasExt instances and sectionsComparisonNatIso are supplied by its ModuleCohomologyExtResolutionNaturalityExtension module; consumers needing those helpers import that extension. No mathematical statement or proof dependency changes."
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
-  "result": "pass",
-  "landing": "20261013T190152-L-3220210",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
-  "result": "pass",
-  "landing": "20261020T154037-L-3031943",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "proof": [
+    {
+      "text": "Construct the explicit Ext/derived-sections natural isomorphism from Hom complexes and the section adjunction. Its domain is the fixed free-sheaf Ext functor, definitionally the evaluated cohomology functor. Cache the existing sheafification and Ext-size proofs for the scheme site. The constant-source Ext functor is definitionally Mathlib Sheaf.functorH; no new comparison map is chosen.",
+      "uses": [],
+      "elementary": true
+    },
+    {
+      "text": "Forgotten injective modules are acyclic for abelian sections. The explicit Ext/section comparison transports this vanishing to rightAcyclic, so the forgotten module resolution computes derived abelian sections. Compose its acyclic-resolution comparison with exact forgetting of the module section homology and the terminal Ext-source isomorphism to construct E.",
+      "uses": [
+        "lem-sc-injective-module-abelian-acyclic-zariski"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Package the common-resolution coefficient square as resolutionSectionsNatIso: lift coefficient maps between standard resolutions, apply injective-resolution naturality and exact-forgetting homology naturality, then acyclicComparison_naturality. Compose three abstract natural isomorphisms with sectionsComparisonNatIso before scheme specialization: the common-resolution section map, inverse Ext/section map, and original precompAddEquiv.symm of the terminal-source isomorphism. The latter is extSourceNatIso, natural by Mathlib Ext associativity. Identity factors for the definitionally equal cohomology functors are omitted. Convert the resulting component to an additive equivalence and evaluate its natural square. All component functions and inverses remain the original resolution-normalized maps.",
+      "uses": [
+        "lem-weil-pbc-derived-functor-map-via-lift",
+        "lem-sc-acyclic-comparison-natural"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-acyclic-comparison-natural",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+  ],
+  "proof_origin": {
+    "by": "N1 worker, reusing the complete Q4 proof",
+    "document": "https://stacks.math.columbia.edu/tag/03FD",
+    "place": "Same common-resolution natural isomorphism. Cached existing site-instance proofs and generic three-isomorphism composition avoid expensive scheme-specialized conversions; identity factors are omitted. No new holes or mathematical assumptions."
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Natural comparison of derived module global sections with abelian sheaf Ext cohomology compatible with direct image",
+      "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk",
+      "date": "2026-10-14",
+      "verdict": "No exact normalized edge comparison; existing resolution and cohomology primitives used."
+    },
+    {
+      "tool": "loogle",
+      "query": "\"rightDerived\", \"iso\"",
+      "results": "12 hits: CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc, CategoryTheory.Functor.rightDerivedNatIso, CategoryTheory.Functor.rightDerivedNatIso_hom, CategoryTheory.Functor.rightDerivedNatIso_inv, CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+      "date": "2026-10-14",
+      "verdict": "No exact normalized edge comparison; existing resolution and cohomology primitives used."
+    },
+    {
+      "tool": "grep",
+      "query": "moduleCohomology.*[Ee]dge|[Ee]dge.*[Ee]xt",
+      "results": "25 hits: Mathlib/CategoryTheory/Limits/Chosen/End.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Join/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean",
+      "date": "2026-10-14",
+      "verdict": "No exact normalized edge comparison; existing resolution and cohomology primitives used."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Cohomology comparison for modules and underlying abelian sheaves using common acyclic resolutions commutes with inverse image and the direct image edge map",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "service unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtEdgeComparison",
+    "date": "2026-10-14",
+    "group": "S2"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-henselian-idempotent-lifting",
+      "place": "Common-complex normalization and coefficient naturality",
+      "via": [
+        "new-module-cohomology-ext-edge-comparison",
+        "new-module-cohomology-ext-pullback-comparison",
+        "new-flat-base-change-target-leray-comparison",
+        "new-flat-base-change-affine-canonical-comparisons",
+        "new-flat-base-change-affine-target",
+        "lem-weil-pbc-flat-base-change-affine-dictionary",
+        "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+        "lem-weil-pbc-flat-base-change-resolution-iso",
+        "lem-weil-pbc-formal-functions-local-stalk-comparison",
+        "lem-weil-pbc-formal-functions-local-dictionary",
+        "lem-weil-pbc-formal-functions-stalk",
+        "lem-weil-pbc-stein-fibre-idempotent-image",
+        "lem-weil-pbc-stein-normalized-fibre-idempotent",
+        "lem-weil-pbc-stein-factorization-affine",
+        "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality",
+    "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyExtResolutionNaturality.lean",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv_naturality",
+    "statement": "theorem moduleCohomologyExtResolutionEquiv_naturality (X : Scheme.{u}) (q : ℕ) (F G : X.Modules) (φ : F ⟶ G) (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) : moduleCohomologyExtResolutionEquiv X G q (((RingedSpace.moduleCohomology X.toRingedSpace q).map φ).hom x) = H.map φ q (moduleCohomologyExtResolutionEquiv X F q x)",
+    "branch": "sheaf-dag",
+    "by": "S2",
+    "date": "2026-10-14",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv",
+      "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv_naturality",
+      "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionNatIso",
+      "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.siteExtNatIso",
+      "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.siteHNatIso",
+      "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.resolutionForgetObjIso",
+      "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.sectionHomologyIso",
+      "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.resolutionSectionsObjIso",
+      "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.resolutionSectionsNatIso",
+      "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.moduleComparisonEquiv",
+      "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.extSourceNatIso",
+      "AlgebraicGeometry.Scheme.Modules.comparisonHasSheafify",
+      "AlgebraicGeometry.Scheme.Modules.comparisonHasExt",
+      "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.sectionsComparisonNatIso"
+    ]
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "S2",
+    "result": "pass",
+    "landing": "20261013T190152-L-3220210",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "N1",
+    "result": "pass",
+    "landing": "20261014T201710-L-2040671",
+    "kind": "proof",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   }
- }
 }

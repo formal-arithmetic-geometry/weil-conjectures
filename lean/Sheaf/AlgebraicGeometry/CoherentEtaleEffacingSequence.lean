@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
 import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsRightExact
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.EtaleQcoherentULiftCohomologyNatural
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturalityExtension
+import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
 
 /-! # Simultaneous effacement for the coherent comparison
 
