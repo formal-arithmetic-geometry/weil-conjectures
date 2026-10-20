@@ -1,0 +1,156 @@
+{
+ "id": "lem-sfb-finite-reduction-pullback",
+ "kind": "statement",
+ "title": "Base change of a single normalized finite reduction",
+ "statement": "Fix a prime l, a finite-dimensional extension E of Q_l, a morphism f : X → Y, and a positive quotient level n+1. Let aX and aY be natural identifications of finite constant set sheaves with the relative finite-label representables from [det-prop-sfb-qlbar-colimit-x-integral-limit]. Let q : O_E → O_E/(pi_E^(n+1)) be any continuous map of the corresponding profinite sets. Let rZ : pZ^* O_E → (O_E/(pi_E^(n+1)))_Z be maps of abelian sheaves, for Z=X,Y. Suppose that, for every profinite S and continuous g : S → O_E, the adjunction mate of rZ sends g, under aZ and the canonical constant/forgetful identification, to the relative scheme map Z[g followed by q]. Then f^*(rY), followed by the canonical finite constant-sheaf pullback identification, equals alpha_f followed by rX. Here pZ and alpha_f are [sk-def-sfb-pullback-from-point] and [sk-def-sfb-pullback-from-point-comp]. This statement concerns one finite quotient and arbitrary maps rZ; it asserts no integral isomorphism, ring compatibility or preservation of an infinite limit.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+  "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)"
+ },
+ "stmt_deps": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pullback-from-point-comp"
+ ],
+ "proof": [
+  {
+   "text": "For a pro-etale object V over Y and a set sheaf G over X, adjunction and Yoneda identify Hom(f^*hV,G) with G(V times_Y X). These identifications are natural in both V and G, so representable maps pull back to their base changes.",
+   "uses": [
+    "det-pe-topos-functoriality-site",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+    "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)"
+   }
+  },
+  {
+   "text": "Associativity of fibre products identifies the base change of Y[S] with X[S], naturally in the profinite set S. For finite labels the representable identification agrees with the canonical constant-sheaf identification. Both agree on constant labels: naturality in a singleton-to-label map sends a label to its summand inclusion, and the singleton test object is terminal. Sheafification extends equality on these constants. Forgetting the additive structure uses the canonical constant/forgetful comparison, which preserves the sheafification unit.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+    "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)"
+   }
+  },
+  {
+   "text": "The inverse-image compositor is the adjunction mate of the direct-image compositor. The latter is restriction along fibre-product associativity. Hence alpha_f carries the unit section indexed by g on Y[S] to that indexed by g on X[S]. Applying the two assumed mate identities makes the finite represented values equal to X[g followed by q]. Cancel the finite representation. Extensionality on every profinite S and every continuous g proves equality of mates; injectivity of the point adjunction proves the required equality of sheaf maps. Empty test objects and an empty base cause no exception.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point-comp",
+    "def-sfb-finite-upper-star-comp",
+    "def-sfb-finite-lower-star-comp",
+    "sk-def-sfb-pullback-from-point",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+    "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+  "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)",
+  "note": "E6: isolate the genuinely finite-level mate calculation from the integral-limit conjugation and cone transport. No choice of integral comparison or limiting cone occurs in this statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a finite constant sheaf along a morphism of schemes preserves the normalized finite labels in an adjunction mate",
+   "results": "Eight hits, including Mathlib.CategoryTheory.Sites.Pullback sheafPullbackConstruction.preservesFiniteLimits and Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous PullbackConstruction.adjunction; none identifies the normalized finite-label mate.",
+   "date": "2026-10-19",
+   "verdict": "no direct match; generic adjunction APIs only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a condensed abelian sheaf pulled back to a scheme into a finite constant sheaf is compatible with base change if its adjunction mate is the same finite labeling on every profinite test object",
+   "results": "Eight hits concern module pullback adjunctions and light condensed internal Hom; none states the finite-label mate compatibility.",
+   "date": "2026-10-19",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "constantSheafCompUpperStarIso",
+   "results": "Unknown identifier in the remote Mathlib search. Read the project declaration in GaloisEvaluation and Mathlib Adjunction.Unique directly; the unit identities are useful but do not state this result.",
+   "date": "2026-10-19",
+   "verdict": "project-specific declaration; no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheafCompUpperStarIso|unit_conjugateEquiv|uliftYoneda",
+   "results": "25 hits include Mathlib CategoryTheory Yoneda and Adjunction.Mates; these supply the Yoneda bijection and unit_conjugateEquiv_symm but not the scheme finite-constant identification. Local searches read FiniteDiscreteCoefficientTerminal and Sections, which concern a different constant coefficient comparison and do not give this normalized finite-reduction assertion.",
+   "date": "2026-10-19",
+   "verdict": "generic APIs only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback",
+  "date": "2026-10-19",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-qlbar-colimit-x-pullback",
+   "place": "proof, second paragraph: finite coproduct representables and identification of their base-change maps with alpha_f"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-qlbar-colimit-x",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteReductionPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteReductionPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sfb_finite_reduction_pullback",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfbConstantRingAbIso",
+   "AlgebraicGeometry.ProEtale.sfbFiniteCoefficientPullbackIso",
+   "AlgebraicGeometry.ProEtale.sfb_finite_reduction_pullback"
+  ],
+  "statement": "theorem sfb_finite_reduction_pullback (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (aX : sfbFiniteConstantSets X ≅ sfbFiniteRepresentables X)\n    (aY : sfbFiniteConstantSets Y ≅ sfbFiniteRepresentables Y)\n    (q : sfbIntegralProfinite l E ⟶\n      FintypeCat.toProfinite.obj (sfbIntegralFiniteLevel l E n))\n    (rX : (coefficientRing X (sfbCondensedIntegers l E)).X ⟶\n      (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj\n        (integralCoefficientSheaf l E X n))\n    (rY : (coefficientRing Y (sfbCondensedIntegers l E)).X ⟶\n      (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj\n        (integralCoefficientSheaf l E Y n))\n    (hX : ∀ (S : Profinite.{u}) (g : S ⟶ sfbIntegralProfinite l E),\n      (sfbIntegralFiniteRepresentation l E X aX n).hom.app\n          (op ((profiniteToProEtOf X).obj S))\n        (rX.hom.app (op ((profiniteToProEtOf X).obj S))\n          (((sfbIntegralPointAdjunction X).unit.app (sfbCondensedIntegers l E).X).hom.app\n            (op S) (ULift.up g.hom.hom))) =\n        ULift.up ((profiniteToProEtOf X).map (g ≫ q)))\n    (hY : ∀ (S : Profinite.{u}) (g : S ⟶ sfbIntegralProfinite l E),\n      (sfbIntegralFiniteRepresentation l E Y aY n).hom.app\n          (op ((profiniteToProEtOf Y).obj S))\n        (rY.hom.app (op ((profiniteToProEtOf Y).obj S))\n          (((sfbIntegralPointAdjunction Y).unit.app (sfbCondensedIntegers l E).X).hom.app\n            (op S) (ULift.up g.hom.hom))) =\n        ULift.up ((profiniteToProEtOf Y).map (g ≫ q))) :\n    (f)^*[Ab.{u + 1}].map rY ≫ (sfbFiniteCoefficientPullbackIso l E f n).hom =\n      ((upperStarFromPointComp f).app (sfbCondensedIntegers l E).X).hom ≫ rX",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-19"
+ },
+ "proof_deps": [
+  "det-pe-topos-functoriality-site",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-galois-yoneda-hom-bijection",
+  "sk-def-sfb-pullback-from-point",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-def-sfb-pullback-from-point-comp",
+  "def-sfb-finite-upper-star-comp",
+  "def-sfb-finite-lower-star-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-90615",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261020T051219-L-1596947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-90615",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261020T051219-L-1596947",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + new finite-level sorry lemma vs node det-prop-sfb-qlbar-colimit-x-pullback / new node lem-sfb-finite-reduction-pullback, verbatim relocation vs change record, 3 direct importers compiled"
+ }
+}

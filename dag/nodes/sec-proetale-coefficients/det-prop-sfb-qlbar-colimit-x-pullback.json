@@ -25,45 +25,39 @@
  ],
  "proof": [
   {
-   "text": "Representable inverse images, including their maps. Write $h_V$ for the sheaf represented by $V\\in Y_{\\mathrm{proét}}$. It is a sheaf by [det-pe-topos-functoriality-site](2). For every sheaf of sets $G$ on $X$, adjunction and the formula for $f_*$ in [det-pe-topos-functoriality-inverse-image](2), followed by Yoneda [lem-galois-yoneda-hom-bijection], give\n$$\\operatorname{Hom}(f^{-1}h_V,G)=\\operatorname{Hom}(h_V,f_*G)=(f_*G)(V)=G(V\\times_YX)=\\operatorname{Hom}(h_{V\\times_YX},G).$$\nThe bijections are natural in $V$ and $G$, so $f^{-1}h_V\\cong h_{V\\times_YX}$, and a map $V\\to W$ pulls back to its base change. This last assertion follows directly by precomposing the displayed bijections with $h_V\\to h_W$ and using the naturality formula in the cited Yoneda statement.",
+   "text": "Obtain the normalized integral comparison isomorphisms eX and eY and the finite profinite cones from sfb_integral_coefficient_limit. Package its normalization data as SfbIntegralComparison. The supplied pointwise quotient formulas show that jX followed by the nth profinite cone leg equals jY followed by its nth leg, by extensionality of continuous maps.",
    "uses": [
-    "det-pe-topos-functoriality-site",
-    "det-pe-topos-functoriality-inverse-image",
-    "lem-galois-yoneda-hom-bijection"
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
-    "place": "second paragraph: inverse image of a representable; naturality made explicit"
+    "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)"
    }
   },
   {
-   "text": "Identify the integral cone and its coefficient isomorphism. For a profinite set $S$, [sk-def-sfb-pullback-from-point](2) writes $Z[S]=B(S)\\times_{\\operatorname{Spec}\\mathbf Z}Z$, where $B(S)=\\operatorname{Spec}LC(S,\\mathbf Z)$. Thus $Y[S]\\times_YX\\cong X[S]$, naturally in $S$, by associating these fibre products. By Step 1 and [det-prop-sfb-qlbar-colimit-x-integral-limit](1),(2), the inverse images of the representing sheaves for $Y[\\cO_E]$ and $Y[\\cO_E/\\pi_E^n]$ are those for $X[\\cO_E]$ and $X[\\cO_E/\\pi_E^n]$.\n\nHere is the check of the chosen identifications and their maps on abelian sheaves. For any of the profinite rings $S=\\cO_E$ or $\\cO_E/\\pi_E^n$, the condensed set underlying $\\underline S$ is $h_S$. By the adjunction in [sk-def-sfb-pullback-from-point](4) and [lem-galois-yoneda-hom-bijection], maps $p_Z^*\\underline S\\to G$ of abelian sheaves correspond to elements $\\xi\\in G(Z[S])$ satisfying\n$$G(Z[+])(\\xi)=G(Z[\\mathrm{pr}_1])(\\xi)+G(Z[\\mathrm{pr}_2])(\\xi),\\qquad G(Z[0])(\\xi)=0.$$\nThese are exactly the conditions that the transformation represented by $\\xi$ be additive. Since $u_Z$ preserves finite products, Yoneda gives the same description for maps from $h_{Z[S]}$, endowed with the group operations induced by $S$, to $G$. This constructs the canonical representing identification in the integral-limit statement. Precomposing with a continuous ring map $S\\to T$ replaces $\\xi\\in G(Z[T])$ by its restriction along $Z[S]\\to Z[T]$. In particular the reduction and transition maps are the maps of these representing schemes, and the finite-level identifications are the canonical constant-sheaf identifications.\n\nFinally [def-sfb-finite-upper-star-comp] defines the composition isomorphism by taking the mate of the right-adjoint composition map; [def-sfb-finite-lower-star-comp] gives that map as restriction along the associativity isomorphism of fibre products. After the restriction to the point in [sk-def-sfb-pullback-from-point](4), its value is exactly $G(Y[S]\\times_YX)=G(X[S])$. Under the preceding Yoneda descriptions this sends each universal element to the same universal element on the associated fibre product. Therefore the representing-sheaf base-change identification is the component $\\alpha_f$ defined in [sk-def-sfb-pullback-from-point-comp], with the same equality for every reduction map.",
+   "text": "For each n, apply [lem-sfb-finite-reduction-pullback] to rZ = eZ followed by the nth completed-coefficient projection, using the common profinite quotient map. The mate hypotheses are exactly the normalization equations supplied by sfb_integral_coefficient_limit. This proves compatibility of every finite reduction with alpha_f.",
    "uses": [
-    "sk-def-sfb-pullback-from-point",
+    "lem-sfb-finite-reduction-pullback",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+    "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)"
+   }
+  },
+  {
+   "text": "Construct the ring-compatible isomorphism c by conjugating alpha_f with eY and eX inside the category of monoid objects, then forget to abelian sheaves. Functoriality and inverse cancellation give the comparison square, and the monoid-object morphisms give IsMonHom for both directions. Cancel f^*eY in the preceding finite-reduction equation to obtain every projection equation for c. The canonical finite pullback comparisons form a natural isomorphism of towers: their successor naturality is naturality of the constant/forgetful and constant-pullback natural isomorphisms. Build the tower transformation with NatTrans.ofOpSequence. Forgetting rings to abelian sheaves preserves this limit, as checked after the limit-reflecting sheaf inclusion by pointwise limit preservation. Transport that limiting cone along the diagram isomorphism and c, using the proved projection equations. This proves the asserted preservation of this particular integral limit.",
+   "uses": [
     "det-prop-sfb-qlbar-colimit-x-integral-limit",
     "sk-def-sfb-pullback-from-point-comp",
-    "lem-galois-yoneda-hom-bijection",
-    "def-sfb-finite-upper-star-comp",
-    "def-sfb-finite-lower-star-comp",
-    "sk-def-sfb-condensed-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
-    "place": "second paragraph: representing schemes and identification with the component of alpha"
-   }
-  },
-  {
-   "text": "Conclude (1) by the limit universal property. Put $A_{n,Z}=(\\cO_E/\\pi_E^n)_Z$, and let $\\beta_Z:\\cO_{E,Z}\\xrightarrow{\\sim}\\lim_n A_{n,Z}$ be [det-prop-sfb-qlbar-colimit-x-integral-limit](3). Let $c:f^{-1}(\\lim_n A_{n,Y})\\to\\lim_n A_{n,X}$ be the canonical comparison whose $n$-th projection is $f^{-1}$ of the $n$-th projection, followed by the finite-level identification of Step 2. That step gives, for each $n$, equality of the projections of $c\\circ f^{-1}\\beta_Y$ and $\\beta_X\\circ\\alpha_f$. Hence $c\\circ f^{-1}\\beta_Y=\\beta_X\\circ\\alpha_f$. All three other arrows are isomorphisms, so $c$ is an isomorphism. This proves preservation of this particular inverse limit. The reductions preserve $0,1,+,\\cdot$, so their componentwise equalities prove the equality as ring maps as well.",
-   "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "sk-def-sfb-pullback-from-point-comp"
+    "det-pe-topos-functoriality-site"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
-    "place": "second paragraph: compatibility of the limit comparisons and their ring structures"
+    "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)"
    }
   },
   {
@@ -95,15 +89,10 @@
   }
  ],
  "proof_deps": [
-  "det-pe-topos-functoriality-site",
-  "det-pe-topos-functoriality-inverse-image",
-  "lem-galois-yoneda-hom-bijection",
-  "sk-def-sfb-pullback-from-point",
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sfb-finite-reduction-pullback",
   "sk-def-sfb-pullback-from-point-comp",
-  "def-sfb-finite-upper-star-comp",
-  "def-sfb-finite-lower-star-comp",
-  "sk-def-sfb-condensed-ring",
+  "det-pe-topos-functoriality-site",
   "def-sfb-integers-to-subfield",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "def-sfb-qlbar-x-cocone",
@@ -113,8 +102,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
-  "place": "both proof paragraphs: localization by scalar recurrence; algebraic-closure colimit by published preservation and naturality; integral plan retained",
-  "note": "E6: localization and algebraic-closure clauses proved. The original integral comparison hole and its planned route remain. No new holes, statements, definitions or nodes."
+  "place": "integral paragraph: single finite-reduction mate calculation separated; ring conjugation, all projection equations, and limiting-cone transport proved in Lean; localization and algebraic-closure proofs retained",
+  "note": "E6: the original integral hole is reduced to one strictly finite-level theorem, lem-sfb-finite-reduction-pullback. It has arbitrary reduction maps and one quotient; it contains neither an integral comparison isomorphism nor a limit-preservation assertion. The resulting delivery is a decomposition (one hole removed, one added), not net hole closure."
  },
  "mathlib_searches": [
   {
@@ -235,8 +224,7 @@
   ]
  },
  "tool_uses": [
-  "det-pe-topos-functoriality-site",
-  "det-pe-topos-functoriality-inverse-image"
+  "det-pe-topos-functoriality-site"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -264,8 +252,6 @@
   "module": "Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback",
   "declaration": "AlgebraicGeometry.ProEtale.sfb_integral_comparison_pullback",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.sfbConstantRingAbIso",
-   "AlgebraicGeometry.ProEtale.sfbFiniteCoefficientPullbackIso",
    "AlgebraicGeometry.ProEtale.SfbIntegralComparison",
    "AlgebraicGeometry.ProEtale.sfb_integral_comparison_pullback",
    "AlgebraicGeometry.ProEtale.sfb_localization_comparison_pullback",
@@ -277,7 +263,7 @@
   "by": "Q60",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Clauses 1, 2 and 3 are the three listed comparison theorems. The integral clause uses the canonical universe lift of the fixed finite subextension and the dependency’s adjunction-mate normalization; it identifies the comparison by every finite projection and states preservation of that particular limit. The localization clause is independent of the choice of module-colimit representatives, uses ring isomorphisms normalized at the integral inclusion, and checks every fraction leg. The algebraic-closure clause uses the recorded cocone, states its inverse image is colimiting, and identifies its canonical ring comparison by all inclusion legs. The three definition helpers only express the canonical constant-sheaf transport and the integral dependency’s normalization."
+  "note": "Clauses 1, 2 and 3 are the three listed comparison theorems. The integral clause uses the canonical universe lift of the fixed finite subextension and the dependency’s adjunction-mate normalization; it identifies the comparison by every finite projection and states preservation of that particular limit. The localization clause is independent of the choice of module-colimit representatives, uses ring isomorphisms normalized at the integral inclusion, and checks every fraction leg. The algebraic-closure clause uses the recorded cocone, states its inverse image is colimiting, and identifies its canonical ring comparison by all inclusion legs. The three definition helpers only express the canonical constant-sheaf transport and the integral dependency’s normalization. E6: the two canonical finite constant-sheaf isomorphisms are now defined verbatim in ProEtaleFiniteReductionPullback and publicly re-exported here; the normalization predicate remains here."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -288,13 +274,13 @@
   "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "C-90615",
   "group": "E6",
   "result": "pass",
-  "landing": "20261019T002535-L-2150105",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T051219-L-1596947",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + new finite-level sorry lemma vs node det-prop-sfb-qlbar-colimit-x-pullback / new node lem-sfb-finite-reduction-pullback, verbatim relocation vs change record, 3 direct importers compiled"
  }
 }

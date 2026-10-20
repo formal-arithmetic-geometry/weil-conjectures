@@ -1,83 +1,111 @@
 ## What changed
 
-Proved two declarations in
-Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback:
-AlgebraicGeometry.ProEtale.sfb_localization_comparison_pullback and
-AlgebraicGeometry.ProEtale.sfb_qlbar_comparison_pullback.
-Every existing signature, definition and docstring is unchanged.
+The integral clause `AlgebraicGeometry.ProEtale.sfb_integral_comparison_pullback`
+now has a complete Lean proof from one separate finite-reduction mate lemma.
+The proof obtains the normalized comparisons from `sfb_integral_coefficient_limit`,
+constructs the ring-compatible pullback isomorphism inside `Mon`, proves every
+projection equation by cancelling the pulled-back comparison, and transports the
+limiting cone along a natural isomorphism of finite coefficient towers. Successor
+naturality of that tower is proved from naturality of constant-sheaf comparisons;
+`NatTrans.ofOpSequence` supplies naturality for every tower arrow. Forgetting ring
+sheaves preserves the limit, checked after the limit-reflecting sheaf inclusion.
 
-For localization, padicIntegers_invertEll supplies the normalized ring isomorphisms
-for the two given colimit representatives. Conjugating coefficientPullbackIso gives
-the comparison. Naturality proves the zeroth-leg equation; the scalar recurrence of
-any sequential cocone and the supplied inverse of multiplication by ell prove every
-other leg by induction. Three proved private scalar helpers and a proved generic
-ring-isomorphism cancellation helper perform this argument.
+The finite mate calculation is stated in
+`Sheaf.AlgebraicGeometry.ProEtaleFiniteReductionPullback`, for one finite quotient,
+arbitrary abelian sheaf maps, and a common continuous quotient map. It has neither
+an integral comparison isomorphism nor a limit-preservation conclusion. Its source
+is the finite-label and adjunction-mate calculation in Steps 1--2 of the parent
+node and the second paragraph of the blueprint proof. The new statement was checked
+on an identity base change, the empty base, the empty test object, a constant
+quotient map, and the ordinary nonconstant reduction map. The universal natural
+finite-label identifications exclude arbitrary permutations of the finite labels.
 
-For algebraic-closure coefficients, the published
-isColimitPadicAlgClRingObjCocone and left-adjoint colimit preservation give the mapped
-colimit. A proved private monoidal naturality helper computes the underlying ring
-comparison before specializing to sheaves and proves all inclusion-leg equations.
-The node's proof and dependency list now record these actual arguments.
+The two definitions `sfbConstantRingAbIso` and `sfbFiniteCoefficientPullbackIso`
+are moved verbatim into that lower module and publicly re-exported by the item.
+This prevents a circular import. Names, signatures, universes, visibility, and
+bodies are unchanged. The change record is
+`coord/changes/E6-finite-reduction-identifications-relocation.md`.
+No consumer source is adapted. The existing localization and algebraic-closure
+proofs are retained.
 
-Validation: the retained combined module was checked against the current source and
-compiled through lcompile.py in 14.4 seconds on 2026-10-19. All ten unused proof-only
-imports remain removed. The final dry run and delivery run repeat compilation, axiom
-probing and preflight on the delivered content.
+Further proof work establishes the constant-sheaf unit, finite-scalar transport, and
+finite-representation base-change identities in a compiling scratch probe
+(`scratchpad/FiniteTransportProbe.lean`, `oct20-finite-transport20.log`). The remaining
+glue is the point-adjunction base-change unit and the final equality of mates. A
+point-unit proof elaborates but encounters kernel reduction cost when its composite
+functors are identified. These scratch probes are not part of the delivery and are
+not counted as closed holes.
+
+Verification: both sandbox modules compile through `lcompile.py --all`; the parent
+proof has no `sorry`. Compiler-guided checks include the full projection and
+limit-cone conclusions. A profiling check showed that retaining the small-site
+properties import is needed for the sheafification instance search; it is retained.
 
 ## Proved and sorry left
 
-Closed two of the three original holes:
-- AlgebraicGeometry.ProEtale.sfb_localization_comparison_pullback.
-- AlgebraicGeometry.ProEtale.sfb_qlbar_comparison_pullback.
+One original hole is closed in the item:
+`AlgebraicGeometry.ProEtale.sfb_integral_comparison_pullback`
+(node `det-prop-sfb-qlbar-colimit-x-pullback`). The item has zero remaining holes.
 
-One unchanged hole remains:
-AlgebraicGeometry.ProEtale.sfb_integral_comparison_pullback
-(blueprint: det-prop-sfb-qlbar-colimit-x-pullback).
-No holes were added or split off. This is two proofs from existing declarations,
-not a decomposition. The integral hole still needs the base-change compatibility
-of the adjunction-normalized reductions with sfbFiniteCoefficientPullbackIso,
-followed by transport of the corresponding limit cone.
+One hole is added in a separate finite-level result:
+`AlgebraicGeometry.ProEtale.sfb_finite_reduction_pullback`
+(node `lem-sfb-finite-reduction-pullback`). Its proof is exactly `by sorry`, with the
+source and complete proof in words in its docstring and node. No private helper
+or definition contains a hole. This is a decomposition, one hole closed and one
+added, with net hole closure zero; it is not claimed as a proof of the finite mate
+calculation. Ring conjugation, diagram naturality, cancellation and limit-cone
+transport are proved in Lean.
+
+The localization and algebraic-closure clauses were already proved in the shared
+baseline and are not counted as new closures in this delivery.
 
 ## No longer needed
 
-Removed these ten unused proof-only imports from the current source:
-- Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties.
-- Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage.
-- WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs.
-- Sheaf.CategoryTheory.SheafTensor.
-- Sheaf.AlgebraicGeometry.ProEtalePointPullback.
-- Sheaf.Topology.ProfiniteCondensedRing.
-- WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization.
-- WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic.
-- WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic.
-- WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs.
+The item no longer directly imports:
 
-Removed the following proof dependencies from this node:
-- def-sfb-module-upper-star and def-sfb-module-upper-lower-adjunction:
-  the localization theorem already supplies the ring comparisons, and the recurrence
-  argument checks every leg without constructing module inverse image.
-- sk-def-sfb-qlbar-condensed and def-sfb-qlbar-subextension-map:
-  the published algebraic-closure colimit makes reconstruction of the point colimit
-  unnecessary here.
-- sk-def-sfb-sheaf-tensor: monoidal naturality computes the specified ring comparison;
-  no new tensor-colimit ring construction is needed.
+- `Sheaf.AlgebraicGeometry.ProEtalePointPullback` (already available through the
+  integral-limit statement dependency).
+- `Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage` (its role is in
+  the new finite-level mate lemma, not the parent cone argument).
+- `Sheaf.Topology.ProfiniteCondensedRing` (already in the public coefficient API).
+- `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization` (already
+  publicly imported by `PadicIntegersInvertEll`).
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic` (already in the public
+  coefficient API).
+- `WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs` (already in the public
+  constant-pullback API).
 
-The integral proof plan remains in the node for its unchanged hole. Its planned
-site and representability dependencies remain recorded; their direct proof imports
-are unused by the two proofs delivered here. No module is withdrawn and no unit
-statement or proof step is bypassed.
+The generic representable inverse-image/Yoneda and finite-compositor calculation
+of the old parent Steps 1--2 is confined to the new finite-level node. Those nodes
+remain dependencies through that lemma; they are not claimed as globally pruned.
+The parent directly retains the small-site properties import for instance search.
+No blueprint unit statement or proof step is bypassed. No whole module is withdrawn.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The earlier retained report described an inclusion-leg hole that is now fully proved.
-The source library already proves the finite-subextension colimit. Direct concrete
-naturality calculations had incurred expensive kernel conversion; proving the generic
-monoidal calculation before specialization avoids that conversion.
+The integral-limit declaration supplies normalized comparisons and representability,
+but not the compatibility of their finite projections under a change of base. The
+remaining mate calculation therefore is a separate result, not an immediate
+application of the integral-limit theorem or of preservation of colimits. Its
+statement does not assume the integral comparison square or the desired preservation
+of the infinite limit.
 
-The localization plan constructed module inverse image and its colimit preservation
-again, although the stated localization theorem already supplies exactly the two
-ring comparisons needed. Scalar recurrence and invertibility of ell give all their
-leg compatibilities directly. No statement correction or definition repair is needed.
+Earlier interrupted attempts and compile-service transport failures are recorded in
+`scratchpad/findings.md`; none was treated as a delivered proof. The present service
+has compiled the reduction. The resumed launcher reference clock is
+2026-10-19 18:22:31 UTC (`.budget.start` 1792434151.215593); previous provider-interrupted
+turns had already done proof and search work. No clock metadata was edited.
+
+## New nodes
+
+`lem-sfb-finite-reduction-pullback` is the single finite-level mate lemma in
+`Sheaf.AlgebraicGeometry.ProEtaleFiniteReductionPullback`. It isolates the finite
+constant identification and the point-adjunction compositor check of the parent
+proof, independently of the completed integral limit. Its natural-language proof
+uses the same representing-scheme route as the blueprint. The two unchanged
+constant-sheaf definition helpers are attached to this new module in its Lean record.
+The parent node now records the actual ring conjugation, finite-projection and
+limit-cone proof. See the relocation change record named above.
 
 ## Second reading by E6
 
