@@ -1,0 +1,91 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-prop-weil-pbc-ringed-internal-hom-exact-restriction",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfHomTriangulated",
+  "date": "2026-10-21",
+  "group": "A4"
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "proof": [
+  {
+   "text": "Use the normalized independent-universe Hom construction and the covariant exactness and signed shift declarations in lem-weil-pbc-ringed-internal-hom-exact-restriction. The cone proof in the two variables is the same finite biproduct argument, with the first variable read in the opposite triangulated category and the second variable covariantly.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": "Stacks Project, Tag 08JC; split from the independent-universe specialization required by lem-sf-hom-triangulated.",
+ "id": "lem-weil-pbc-ringed-internal-hom-exact-universes",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ },
+ "kind": "lemma",
+ "title": "Independent-universe exactness of ringed internal Hom",
+ "statement": "For a site with independent object and morphism universes, a sheaf of commutative rings and its module derived category, derivedInternalHomOfUniverses is triangulated covariantly in the second variable and contravariantly in the first variable, with the corresponding normalized shifts.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 08JC"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom is triangulated in both variables with independent universes",
+   "results": "No matching theorem; the project-specific derivedInternalHomOfUniverses construction is not in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsTriangulated CommShift",
+   "results": "Only generic structure APIs; no independent-universe internal-Hom exactness result."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedInternalHom_exact hom_isTriangulated derivedInternalHomOfUniverses",
+   "results": "The existing Sheaf shift and restriction interfaces are the only matches; they supply the recorded cone and shift ingredients."
+  }
+ ],
+ "split_report": "The target needs the independent-universe two-clause interface; the existing equal-universe theorem cannot state it. This is a strict generic strengthening of the target specialization.",
+ "tool_uses": [],
+ "lean_audit": {},
+ "reviewed_lean": null,
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedInternalHomExactUniverses",
+  "declaration": "CategoryTheory.RingedHomUniverses.ringedInternalHom_exact",
+  "file": "lean/Sheaf/Algebra/Homology/RingedInternalHomExactUniverses.lean",
+  "statement": "theorem ringedInternalHom_exact (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max c v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (R : Sheaf J CommRingCat.{max c v r}) [HasDerivedCategory.{w} (Modules.{c, v, r} J R)] : (∀ M : D.{c, v, r, w} J R, ∃ _ : ((Functor.curry.obj (derivedInternalHomOfUniverses.{c, v, r, w} J R)).flip.obj M).CommShift ℤ, ((Functor.curry.obj (derivedInternalHomOfUniverses.{c, v, r, w} J R)).flip.obj M).IsTriangulated) ∧ (∀ K : D.{c, v, r, w} J R, ∃ _ : ((Functor.curry.obj (derivedInternalHomOfUniverses.{c, v, r, w} J R)).obj (op K)).CommShift ℤ, ((Functor.curry.obj (derivedInternalHomOfUniverses.{c, v, r, w} J R)).obj (op K)).IsTriangulated)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261020T230706-L-601064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261020T230706-L-601064",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -164,10 +164,11 @@
    "CategoryTheory.localCoefficientTelescopeMap",
    "CategoryTheory.localCoefficientTelescope_rhom_product"
   ],
-  "statement": "theorem localCoefficientTelescope_rhom_product\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u}) (U : C) (f : R.obj.obj (op U))\n    [HasDerivedCategory.{w} (ringedSiteModules.{u} (localCoefficientRings R))]\n    [HasDerivedCategory.{wSlice} (ringedSiteModules.{u} ((localCoefficientRings R).over U))]\n    (K : DerivedCategory (ringedSiteModules.{u} (localCoefficientRings R)))\n    [HasProduct (fun _ : ℕ ↦ (localCoefficientDerivedRestriction R U).obj K)] :\n    let L := (localCoefficientDerivedRestriction R U).obj K\n    let S := DerivedCategory.singleFunctor\n      (ringedSiteModules.{u} ((localCoefficientRings R).over U)) 0\n    let H := (Functor.curry.obj (derivedInternalHom (J.over U) (R.over U))).flip.obj L\n    ∃ e : H.obj (op (S.obj (localCoefficientFree R U))) ≅ ∏ᶜ (fun _ : ℕ ↦ L),\n      H.map (S.map (localCoefficientTelescopeMap R U f)).op ≫ e.hom =\n        e.hom ≫ towerTransitionEndomorphism\n          (K := fun _ : ℕ ↦ L) (fun _ ↦ (localSectionDerivedMultiplication R U f).app K)",
+  "statement": "theorem localCoefficientTelescope_rhom_product\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u}) (U : C) (f : R.obj.obj (op U))\n    [HasDerivedCategory.{w} (ringedSiteModules.{u} (localCoefficientRings R))]\n    [HasDerivedCategory.{wSlice} (ringedSiteModules.{u} ((localCoefficientRings R).over U))]\n    (K : DerivedCategory (ringedSiteModules.{u} (localCoefficientRings R)))\n    [HasProduct (fun _ : ℕ ↦ (localCoefficientDerivedRestriction R U).obj K)] :\n    let L := (localCoefficientDerivedRestriction R U).obj K\n    let S := DerivedCategory.singleFunctor\n      (ringedSiteModules.{u} ((localCoefficientRings R).over U)) 0\n    let H : (DerivedCategory\n        (ringedSiteModules.{u} ((localCoefficientRings R).over U)))ᵒᵖ ⥤\n        DerivedCategory (ringedSiteModules.{u} ((localCoefficientRings R).over U)) :=\n      (Functor.curry.obj (derivedInternalHom (J.over U) (R.over U))).flip.obj L\n    ∃ e : H.obj (op (S.obj (localCoefficientFree R U))) ≅ ∏ᶜ (fun _ : ℕ ↦ L),\n      H.map (S.map (localCoefficientTelescopeMap R U f)).op ≫ e.hom =\n        e.hom ≫ towerTransitionEndomorphism\n          (K := fun _ : ℕ ↦ L) (fun _ ↦ (localSectionDerivedMultiplication R U f).app K)",
   "branch": "sheaf-dag",
   "by": "C1",
-  "date": "2026-10-18"
+  "date": "2026-10-18",
+  "note": " A4: the local Hom functor has its original derived-category type explicitly annotated. The public statement is definitionally unchanged. Private projection/evaluation APIs and strict type comparison keep large constructions folded. The existing generic calculus now provides the proved ringedInternalHom_exact_small compatibility specialization used by this proof."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -180,12 +181,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261018T103142-L-4174555",
+  "landing": "20261020T230706-L-601064",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

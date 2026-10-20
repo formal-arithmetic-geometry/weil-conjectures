@@ -12,9 +12,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.Algebra.Homology.RingedInternalHomExactUniverses
 
 /-! # Exactness of internal Hom on the small etale site
 
@@ -86,6 +84,9 @@ theorem sf_internalHom_triangulated (A : Type (u + 1)) [CommRing A] (X : Scheme.
         (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology
           ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj
             (CommRingCat.of A)))).obj (op K)).IsTriangulated) := by
-  sorry
+  let R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj
+    (CommRingCat.of A)
+  exact CategoryTheory.RingedHomUniverses.ringedInternalHom_exact.{u + 1, u, u + 1, w}
+    X.smallEtaleTopology R
 
 end AlgebraicGeometry.Etale
