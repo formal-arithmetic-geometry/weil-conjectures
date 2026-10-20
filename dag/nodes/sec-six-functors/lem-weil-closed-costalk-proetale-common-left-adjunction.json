@@ -1,0 +1,102 @@
+{
+ "id": "lem-weil-closed-costalk-proetale-common-left-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-closed-costalk-duality",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pro-etale common-left-adjunction decomposition",
+ "statement": "For the small etale data of [lem-weil-closed-costalk-duality], the two displayed derived internal-Hom functors admit a common left adjoint.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
+  "place": "Lean decomposition of pro-etale proof"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "This is the common-left-adjunction stage of the blueprint Hom calculation. Expand the closed-support projection identity, tensor-Hom currying, and the assumed exceptional adjunction; package the resulting natural Hom equivalences as adjunctions. The detailed construction is the only deferred part of this delivery.",
+   "uses": [
+    "lem-weil-closed-costalk-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
+    "place": "Proof, steps 1–5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-closed-costalk-duality"
+ ],
+ "proof_origin": {
+  "by": "G3",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
+  "place": "Lean decomposition of pro-etale proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "common left adjunctions right adjoint uniqueness",
+   "results": "Generic adjunction uniqueness declarations found; no closed-costalk theorem.",
+   "verdict": "no exact domain-specific match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.rightAdjointUniq",
+   "results": "Mathlib declaration `CategoryTheory.Adjunction.rightAdjointUniq` matches the categorical bridge.",
+   "verdict": "generic match used only for the separate proved bridge"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean contains the uniqueness theorem.",
+   "verdict": "generic match; no domain-specific result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ClosedCostalkDuality",
+  "date": "2026-10-21",
+  "group": "G3"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ClosedCostalkDuality",
+  "declaration": "AlgebraicGeometry.Scheme.exceptionalRestrictionVerdierDuality_proetale_common_left_adjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exceptionalRestrictionVerdierDuality_proetale_common_left_adjunction"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ClosedCostalkDuality.lean",
+  "statement": "theorem exceptionalRestrictionVerdierDuality_proetale_common_left_adjunction {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j] (_hij : Set.range j.base = (Set.range i.base)ᶜ) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (riExcl : DerivedCategory (proEtaleRingModules T R) ⥤ DerivedCategory (proEtaleRingModules Z ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R))) (_adj : proEtaleRingDerivedDirectImage i R ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R) (Iso.refl _) ⊣ riExcl) (ωT : DerivedCategory (proEtaleRingModules T R)) : let Ht := derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} (ProEt.topology T) R let Hz := derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} (ProEt.topology Z) ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R) ∃ F : DerivedCategory (proEtaleRingModules Z ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R)) ⥤ (DerivedCategory (proEtaleRingModules T R))ᵒᵖ, Nonempty (Adjunction F (((𝟭 (DerivedCategory (proEtaleRingModules T R))ᵒᵖ).prod' ((Functor.const _).obj ωT)) ⋙ Ht ⋙ riExcl) × Adjunction F ((proEtaleRingDerivedPullback i R ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R) (Iso.refl _)).op ⋙ ((𝟭 _).prod' ((Functor.const _).obj (riExcl.obj ωT))) ⋙ Hz))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261020T230740-L-608051",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261020T230740-L-608051",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

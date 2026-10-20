@@ -32,6 +32,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.SixFunctors.CommonLeftAdjunctionIso
 
 /-!
 # Exceptional restriction of a Verdier dual
@@ -115,6 +116,49 @@ noncomputable instance closedCostalkEtaleModulePush_additive {X Y : Scheme.{u}}
     (closedCostalkEtaleModulePush f R).Additive where
   map_add := by intros; rfl
 
+/- The tensor-Hom and exceptional-adjunction calculation used below has a
+   categorical core: both displayed functors are right adjoints of one common
+   left adjoint.  We record that core separately so the final comparison is a
+   direct application of uniqueness of right adjoints. -/
+/-- The six-step etale Hom calculation packages as two adjunctions with one
+common left adjoint. The construction uses the closed-support projection,
+tensor-Hom currying, and the supplied exceptional adjunction.
+(blueprint: lem-weil-closed-costalk-etale-common-left-adjunction). -/
+theorem exceptionalRestrictionVerdierDuality_etale_common_left_adjunction
+    {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
+    (j : U ⟶ T) [IsOpenImmersion j]
+    (_hij : Set.range j.base = (Set.range i.base)ᶜ)
+    (R : Sheaf T.smallEtaleTopology CommRingCat.{u + 1})
+    (iStar : closedCostalkEtaleModules T R ⥤
+      closedCostalkEtaleModules Z ((closedCostalkEtaleRingPullback i).obj R))
+    [iStar.Additive] (_ai : iStar ⊣ closedCostalkEtaleModulePush i R)
+    (iPull : DerivedCategory (closedCostalkEtaleModules T R) ⥤
+      DerivedCategory (closedCostalkEtaleModules Z ((closedCostalkEtaleRingPullback i).obj R)))
+    (_pullFactors : DerivedCategory.Q ⋙ iPull ≅
+      iStar.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)
+    (iPush : DerivedCategory
+        (closedCostalkEtaleModules Z ((closedCostalkEtaleRingPullback i).obj R)) ⥤
+      DerivedCategory (closedCostalkEtaleModules T R))
+    (_pushFactors : DerivedCategory.Q ⋙ iPush ≅
+      (closedCostalkEtaleModulePush i R).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
+        DerivedCategory.Q)
+    (riExcl : DerivedCategory (closedCostalkEtaleModules T R) ⥤ DerivedCategory
+      (closedCostalkEtaleModules Z ((closedCostalkEtaleRingPullback i).obj R)))
+    (_adj : iPush ⊣ riExcl) (ωT : DerivedCategory (closedCostalkEtaleModules T R)) :
+    let Ht := derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2}
+      T.smallEtaleTopology R
+    let Hz := derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2}
+      Z.smallEtaleTopology ((closedCostalkEtaleRingPullback i).obj R)
+    ∃ F : DerivedCategory (closedCostalkEtaleModules Z
+        ((closedCostalkEtaleRingPullback i).obj R)) ⥤
+        (DerivedCategory (closedCostalkEtaleModules T R))ᵒᵖ,
+      Nonempty (Adjunction F (((𝟭 (DerivedCategory (closedCostalkEtaleModules T R))ᵒᵖ).prod'
+          ((Functor.const _).obj ωT)) ⋙ Ht ⋙ riExcl) ×
+        Adjunction F (iPull.op ⋙ ((𝟭 _).prod'
+          ((Functor.const _).obj (riExcl.obj ωT))) ⋙ Hz)) := by
+  sorry
+
+set_option linter.unusedVariables false in
 /-- Exceptional restriction of derived internal Hom, on the small etale site.
 The underived inverse image is specified by its adjunction to the actual module
 pushforward; the two factorization isomorphisms specify termwise descent through Q.
@@ -171,8 +215,40 @@ theorem exceptionalRestrictionVerdierDuality_etale
       iPull.op ⋙ ((𝟭 _).prod' ((Functor.const _).obj (riExcl.obj ωT))) ⋙
         derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} Z.smallEtaleTopology
           ((closedCostalkEtaleRingPullback i).obj R)) := by
+  dsimp
+  obtain ⟨F, ⟨a, b⟩⟩ := exceptionalRestrictionVerdierDuality_etale_common_left_adjunction
+    i j _hij R iStar _ai iPull _pullFactors iPush _pushFactors riExcl _adj ωT
+  exact nonempty_iso_of_common_left_adjunctions F a b
+
+/-- The pro-etale version of the common-left-adjunction calculation. The
+quasi-compact complement supplies the open-closed detection used in the
+projection step.
+(blueprint: lem-weil-closed-costalk-proetale-common-left-adjunction). -/
+theorem exceptionalRestrictionVerdierDuality_proetale_common_left_adjunction
+    {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
+    (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j]
+    (_hij : Set.range j.base = (Set.range i.base)ᶜ)
+    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
+    (riExcl : DerivedCategory (proEtaleRingModules T R) ⥤ DerivedCategory
+      (proEtaleRingModules Z ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R)))
+    (_adj : proEtaleRingDerivedDirectImage i R
+      ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R) (Iso.refl _) ⊣ riExcl)
+    (ωT : DerivedCategory (proEtaleRingModules T R)) :
+    let Ht := derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2}
+      (ProEt.topology T) R
+    let Hz := derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2}
+      (ProEt.topology Z) ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R)
+    ∃ F : DerivedCategory (proEtaleRingModules Z
+        ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R)) ⥤
+        (DerivedCategory (proEtaleRingModules T R))ᵒᵖ,
+      Nonempty (Adjunction F (((𝟭 (DerivedCategory (proEtaleRingModules T R))ᵒᵖ).prod'
+          ((Functor.const _).obj ωT)) ⋙ Ht ⋙ riExcl) ×
+        Adjunction F ((proEtaleRingDerivedPullback i R
+          ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R) (Iso.refl _)).op ⋙
+          ((𝟭 _).prod' ((Functor.const _).obj (riExcl.obj ωT))) ⋙ Hz)) := by
   sorry
 
+set_option linter.unusedVariables false in
 /-- Exceptional restriction of a Verdier dual, on the small pro-etale site.
 Here the open complement is quasi-compact, as required for the ringed recollement.
 The coefficient ring on Z is exactly the actual inverse image of R; its identification
@@ -210,6 +286,10 @@ theorem exceptionalRestrictionVerdierDuality
       ((𝟭 _).prod' ((Functor.const _).obj (riExcl.obj ωT))) ⋙
         derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} (ProEt.topology Z)
           ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R)) := by
-  sorry
+  dsimp
+  obtain ⟨F, ⟨a, b⟩⟩ := exceptionalRestrictionVerdierDuality_proetale_common_left_adjunction
+    i j _hij R riExcl _adj ωT
+  exact nonempty_iso_of_common_left_adjunctions F a b
 
 end AlgebraicGeometry.Scheme
+
