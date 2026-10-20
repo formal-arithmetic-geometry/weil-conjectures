@@ -1,0 +1,122 @@
+{
+ "id": "lem-finite-compact-support-fixed-scalar-finiteness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Existing fixed-scalar pro-etale compact-support finiteness and amplitude",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existing fixed-scalar pro-etale compact-support finiteness and amplitude",
+ "statement": "Let k be any field, Lambda a finite commutative ring with invertible exponent over k, and f:X->Y a morphism between finite-type k-schemes with a compactification and compatible structure maps. The fixed-scalar pro-etale Rf_! preserves bounded constructibility of etale origin. If every geometric fibre of f has dimension at most e, it sends constructibleIn [a,b] into constructibleIn [a,b+2e], for all integers a,b, including empty intervals.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/Finiteness.lean",
+  "place": "boundedConstructible_rightDerivedLowerShriek and constructibleIn_rightDerivedLowerShriek; Stacks 0GL0 and 095U"
+ },
+ "stmt_deps": [
+  "def-weil-compact-support-candidate",
+  "def-weil-constructible-intervals"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded constructible etale origin. The compact-support site comparison transports etale bounded constructibility; the exact comparison pullback preserves cohomology. For the upper bound, reflect the input interval to its etale origin and apply finite-type sheaf compact-support vanishing and finite truncation induction. Exact open extension and left t-exact right derived direct image give the lower bound. Transport the resulting interval back by the normalized comparison. These are the already written proofs in the source Finiteness module.",
+   "uses": [
+    "sbc-thm-finiteness-finite-type",
+    "lem-fin-proper-bounded-constructible",
+    "lem-fin-extension-by-zero",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-thm-finiteness-finite-type",
+  "lem-fin-proper-bounded-constructible",
+  "lem-fin-extension-by-zero",
+  "lem-sf-class-compact-support-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent G9",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Existing fixed-scalar pro-etale compact-support finiteness and amplitude"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived change of coefficients commutes with proper compact support finite torsion bounded constructible complexes",
+   "results": "Eight generic derived/condensed results; no compact-support scalar comparison.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "The adjunction equivalence and unit/counit formulas are available; none asserts invertibility of this coefficient mate.",
+   "date": "2026-10-19",
+   "verdict": "generic assembly only"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarMate|sfCompactSupportRestriction",
+   "results": "No Mathlib match. Project searches found PurEtaleScalarMateProjection, ProperFiniteCoefficientExtension and SfCompactSupportRestrictionOfScalars. Direct-image finite-Tor hypotheses do not match the bounded-domain statement.",
+   "date": "2026-10-19",
+   "verdict": "reuse project interfaces; normalization glue remains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalences of derived categories preserve bounded constructibility and transport compactly supported direct image and cohomological amplitude bounds",
+   "results": "HasDerivedCategory.standard; CategoryTheory.Equivalence.IsTriangulated.symm; CategoryTheory.Equivalence.IsTriangulated; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctor; CategoryTheory.Functor.mapDerivedCategory; DerivedCategory.TStructure.t; CategoryTheory.exactFunctor; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctorSymmOfInverse",
+   "date": "2026-10-19",
+   "verdict": "Generic derived, adjunction or natural-isomorphism interfaces only; no compact-support normalization theorem. The assembly uses the existing project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCompactSupportConstructibility",
+  "date": "2026-10-19",
+  "group": "G9"
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Finiteness",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleIn_rightDerivedLowerShriek",
+  "statement": "theorem constructibleIn_rightDerivedLowerShriek [HasInvertibleExponent Λ (Spec (.of k))]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (aX : X ⟶ Spec (.of k))\n    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]\n    [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX) (e : ℕ)\n    (he : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),\n      topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤ (e : WithBot ℕ∞)) (a b : ℤ)\n    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))\n    (hK : DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) X a b K) :\n    DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * e)\n      ((ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj K)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerShriek",
+   "AlgebraicGeometry.ProEtale.constructibleIn_rightDerivedLowerShriek"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261020T051343-L-1649440",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261020T051343-L-1649440",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

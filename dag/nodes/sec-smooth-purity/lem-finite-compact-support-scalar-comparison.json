@@ -1,0 +1,132 @@
+{
+ "id": "lem-finite-compact-support-scalar-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Canonical coefficient comparison, Steps 7--10",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical coefficient comparison, Steps 7--10",
+ "statement": "For l prime, E a finite extension of Q_l, K0 any field in which l is invertible, positive levels m <= n, and f a separated finite-type map between finite-type K0-schemes, every compactification c and intrinsically bounded constructible K whose actual ordinary derived m-reduction is bounded constructible have invertible canonical B-linear compact-support coefficient map. The map is the scalar-adjunction transpose of compact support of the scalar unit followed by sfCompactSupportRestriction. No Tor amplitude or separate constructibility/interval conclusion is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Canonical coefficient comparison, Steps 7--10"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-torsion-constructibility",
+  "def-compact-support-direct-image-detailed",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Use arbitrary finite-ring constructible derived origin to realize K as comparison pullback of a bounded constructible etale complex G. Convert its finite cohomological support to an explicit interval and hence to a bounded-below object.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized scalar/site isomorphism identifies comparison pullback of the actual etale reduction L_B G with the actual reduction of K. Reflect its cohomological interval through the exact faithful comparison. This supplies a bounded-below object GB equal to L_B G; no finite Tor hypothesis or choice of a new reduction is made.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-finite-compact-support-scalar-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar-transport theorem identifies the specified compact-support scalar transpose at the origin with the explicit isomorphism built from the proper finite-coefficient scalar mate and the open left-adjoint uniqueness comparison. Thus it is invertible at the origin. Adjunction naturality makes the scalar transpose a natural transformation, and conjugation by the input isomorphism gives invertibility at K.",
+   "uses": [
+    "lem-finite-compact-support-scalar-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-finite-compact-support-scalar-transport"
+ ],
+ "proof_origin": {
+  "by": "agent G9",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Etale origin, interval reflection for the actual reduction, normalized scalar transport, and naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived change of coefficients commutes with proper compact support finite torsion bounded constructible complexes",
+   "results": "Eight generic derived/condensed results; no compact-support scalar comparison.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "The adjunction equivalence and unit/counit formulas are available; none asserts invertibility of this coefficient mate.",
+   "date": "2026-10-19",
+   "verdict": "generic assembly only"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarMate|sfCompactSupportRestriction",
+   "results": "No Mathlib match. Project searches found PurEtaleScalarMateProjection, ProperFiniteCoefficientExtension and SfCompactSupportRestrictionOfScalars. Direct-image finite-Tor hypotheses do not match the bounded-domain statement.",
+   "date": "2026-10-19",
+   "verdict": "reuse project interfaces; normalization glue remains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation which is an isomorphism at every object in the essential image of a fully faithful comparison is an isomorphism at all isomorphic objects",
+   "results": "CategoryTheory.NatTrans.isIso_iff_isIso_app; CategoryTheory.Functor.FullyFaithful.preimageIso; CategoryTheory.NatIso.hom_app_isIso; CategoryTheory.NatIso.isIso_app_of_isIso; CategoryTheory.Functor.preimageIso; CategoryTheory.reflectsIsomorphisms_of_full_and_faithful; CategoryTheory.Functor.FullyFaithful.ofIso; CategoryTheory.MorphismProperty.functorCategory_isomorphisms",
+   "date": "2026-10-19",
+   "verdict": "Generic derived, adjunction or natural-isomorphism interfaces only; no compact-support normalization theorem. The assembly uses the existing project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCompactSupportConstructibility",
+  "date": "2026-10-19",
+  "group": "G9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCompactSupportScalarComparison",
+  "file": "lean/Sheaf/Paper/FiniteCompactSupportScalarComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCompactSupportScalarComparison",
+  "statement": "theorem finiteCompactSupportScalarComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E]\n    (K₀ : Type u) [Field K₀] (_hl : IsUnit (l : K₀))\n    (n : ℕ) (hn : 1 ≤ n) (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n)\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]\n    [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n))\n    (hK : intrinsicFiniteTorsionConstructible l E n hn X K) :\n    let := Padic.finite_coefficientExtensionRing l E n hn\n    let := Padic.finite_coefficientExtensionRing l E m hm\n    let φ := Ideal.Quotient.factor\n      (S := Padic.coefficientExtensionIdeal l E n)\n      (T := Padic.coefficientExtensionIdeal l E m) (Ideal.pow_le_pow_right hmn)\n    let ρ := fun T : Scheme.{u} ↦\n      (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map\n        (CommRingCat.ofHom (RingHom.ulift.{u + 1, u + 1} φ))\n    intrinsicFiniteTorsionConstructible l E m hm X ((pbcDerivedExtend (ρ X)).obj K) →\n    IsIso (((pbcDerivedScalarAdjunction (ρ Y)).homEquiv _ _).symm\n      ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E n)).map\n          ((pbcDerivedScalarAdjunction (ρ X)).unit.app K) ≫\n        (sfCompactSupportRestriction c φ).hom.app ((pbcDerivedExtend (ρ X)).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261020T051343-L-1649440",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261020T051343-L-1649440",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

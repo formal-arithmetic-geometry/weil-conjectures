@@ -1,0 +1,143 @@
+{
+ "id": "lem-finite-compact-support-scalar-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Steps 7--10: canonical site and realization normalization",
+   "via": [
+    "lem-sfb-etale-proetale-scalar-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical intrinsic realization of the compact-support scalar mate",
+ "statement": "For finite commutative rings A and B, a ring homomorphism phi:A -> B, a compactification c with noetherian proper source and target, a bounded-below etale A-complex G and a bounded-below etale B-complex GB identified with its actual derived scalar extension, the specified intrinsic compact-support scalar-adjunction transpose on the comparison pullback of G equals the explicitly constructed intrinsicCompactScalarIsoOfOrigin. The latter is the etale proper scalar mate composed with the open scalar isomorphism, transported through the canonical site and intrinsic realization comparisons. This records equality of the specific maps, not merely equality of their endpoints. The auxiliary definitions construct every comparison explicitly from recorded adjunctions and normalized comparisons.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Steps 7--10: scalar-mate transport through comparison inverse image and intrinsic realization; Stacks 0GL6, 09AL and 0D6J"
+ },
+ "stmt_deps": [
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sf-class-compact-support-comparison",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-asd-proper-finite-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Construct openScalarIso by uniqueness of the left adjoints of the coefficient/open restriction square. Compose it with the proper finite-coefficient scalar mate, which is invertible on noetherian schemes, to construct compactScalarIso. Construct realizationScalarIso by adjoint uniqueness from the sectionwise normalized inverse realization/restriction square, and compose it with the canonical site/scalar comparison.",
+   "uses": [
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-pur-etale-scalar-mate-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct compactRealizationIso by the realization equivalence unit and the normalized derived direct-image comparison. Compose it with the canonical compact-support site comparison and the scalar comparison to obtain intrinsicCompactScalarIsoOfOrigin; the intermediate GB is used with its actual identification, and its arbitrary isomorphism cancels by naturality.",
+   "uses": [
+    "lem-sf-class-compact-support-comparison",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For equality of maps, first factor the scalar-adjunction transpose for the compactification composite into the proper scalar transpose and proper image of the open scalar transpose, using adjunction naturality. The open unit-preserving uniqueness comparison identifies the latter with openScalarIso. On the proper factor, compute the realization/restriction squares on a K-injective B-complex and a K-injective resolution of its restriction: both defining equations give direct image of the same resolution arrow. Cancel that quasi-isomorphism. The fixed-scalar site equality is etaleProEtale_scalar_mate, applied to the bounded-below open extensions of G and GB. K-flat pure-tensor normalization identifies its etale pullback comparison with scalarPullbackIso. Whisker and cancel the site and realization units and counits to obtain exactly the asserted equality.",
+   "uses": [
+    "lem-sfb-etale-proetale-scalar-mate",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-sf-class-compact-support-comparison",
+    "lem-pur-etale-scalar-mate-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent G9",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Steps 7--10: scalar-mate transport through comparison inverse image and intrinsic realization; Stacks 0GL6, 09AL and 0D6J"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived change of coefficients commutes with proper compact support finite torsion bounded constructible complexes",
+   "results": "Eight generic derived/condensed results; no compact-support scalar comparison.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "The adjunction equivalence and unit/counit formulas are available; none asserts invertibility of this coefficient mate.",
+   "date": "2026-10-19",
+   "verdict": "generic assembly only"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarMate|sfCompactSupportRestriction",
+   "results": "No Mathlib match. Project searches found PurEtaleScalarMateProjection, ProperFiniteCoefficientExtension and SfCompactSupportRestrictionOfScalars. Direct-image finite-Tor hypotheses do not match the bounded-domain statement.",
+   "date": "2026-10-19",
+   "verdict": "reuse project interfaces; normalization glue remains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical scalar extension adjunction transpose commutes with a composite of open extension by zero and proper derived direct image under an exact equivalence of module categories",
+   "results": "ModuleCat.restrictCoextendScalarsAdj; ModuleCat.ExtendScalars.map'_comp; ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars; ModuleCat.ExtendRestrictScalarsAdj.homEquiv; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-19",
+   "verdict": "Generic derived, adjunction or natural-isomorphism interfaces only; no compact-support normalization theorem. The assembly uses the existing project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCompactSupportConstructibility",
+  "date": "2026-10-19",
+  "group": "G9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCompactSupportScalarTransport",
+  "file": "lean/Sheaf/Paper/FiniteCompactSupportScalarTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteCompactScalar.intrinsicCompactScalarIsoOfOrigin_hom",
+  "statement": "theorem intrinsicCompactScalarIsoOfOrigin_hom\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    [IsNoetherian c.Z] [IsNoetherian Y]\n    (G : DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))))\n    (GB : DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B))))\n    (eGB : (Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) X).obj G.obj ≅\n      GB.obj) :\n    ((pbcDerivedScalarAdjunction (scalarRingMap φ Y)).homEquiv _ _).symm\n      ((sfIntrinsicCompactSupport c A).map\n          ((pbcDerivedScalarAdjunction (scalarRingMap φ X)).unit.app\n            ((ProEtale.finiteCoefficientIntrinsicDerivedComparison X A).obj G.obj)) ≫\n        (sfCompactSupportRestriction c φ).hom.app\n          ((pbcDerivedExtend (scalarRingMap φ X)).obj\n            ((ProEtale.finiteCoefficientIntrinsicDerivedComparison X A).obj G.obj))) =\n      (intrinsicCompactScalarIsoOfOrigin φ c G GB eGB).hom",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261020T051343-L-1649440",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261020T051343-L-1649440",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
