@@ -1,109 +1,17 @@
 {
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "created": {
-    "item": "lem-weil-pbc-extended-cech-completion-model",
-    "by": "worker",
-    "date": "2026-10-13"
-  },
-  "status": "split",
-  "mathlib_match": null,
-  "proof": [
-    {
-      "text": "Choose K-flat representatives $A,B$ of $K,L$ [lem-pc-kflat-resolution] and a K-injective representative $I$ of $M$ [prop-pur-kinjective-resolutions-exist]. Write $\\mathscr H$ for the ordinary sheaf Hom complex. The existing chain-level currying isomorphism [lem-sc-derived-hom-tensor-total] is $\\mathscr H(A,\\mathscr H(B,I))\\cong\\mathscr H(\\operatorname{Tot}(A\\otimes B),I)$, natural in all three complex maps. Its left inner Hom is K-injective by [lem-pur-hom-kflat-into-kinjective]. Thus the left side computes $H(K,H(L,M))$ and the right side computes $H(K\\otimes^{\\mathbf L}L,M)$: both tensor factors were chosen K-flat, exactly as in the statement's definition of derived tensor [def-pc-tensor-complex-sheaves, def-pc-kflat-complex, def-pur-derived-internal-hom]. The representative comparisons and invariance under quasi-isomorphisms [lem-pur-rhom-well-defined] descend this natural chain isomorphism to the required natural isomorphism in $D(\\mathcal O)$. In Lean, use the existing concrete functorial flat resolution to show that the inclusion of the specified K-flat full subcategory followed by Q is a localization. Replace the third variable functorially by K-injectives. The existing representative comparison computes the inner Hom; quasi-isomorphism invariance computes the outer Hom because the inner Hom is K-injective. Assemble the chain currying comparison and the given tensor comparison on the product of two K-flat subcategories and all complexes. The tensor bifunctor applies its two maps successively; the total-complex map composition lemma identifies this with the simultaneous tensor map in the currying naturality equation. Fully faithful precomposition with the product localization then descends the natural isomorphism in all three variables at once.",
-      "uses": [
-        "lem-pc-kflat-resolution",
-        "prop-pur-kinjective-resolutions-exist",
-        "lem-sc-derived-hom-tensor-total",
-        "lem-pur-hom-kflat-into-kinjective",
-        "def-pc-tensor-complex-sheaves",
-        "def-pc-kflat-complex",
-        "def-pur-derived-internal-hom",
-        "lem-pur-rhom-well-defined"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08J9 (lemma-internal-hom)"
-      }
-    },
-    {
-      "text": "Let $A$ represent $L$ and let $I$ be K-injective representing $M$. The six restriction instances proved in this module show directly that slice restriction is additive and preserves finite limits and finite colimits, so it preserves these representatives and their quasi-isomorphisms. For limits, forget to presheaves of abelian groups, where restriction is precomposition, and reflect limits back. For colimits, the slice functors are both continuous and cocontinuous; their pushforward on abelian sheaves is therefore also a left adjoint. The exact conservative forgetful functor from module sheaves to abelian sheaves reflects the finite colimits. Over $V\\to U$, sections of $\\mathscr H(A,I)|_U$ and of $\\mathscr H(A|_U,I|_U)$ are the same families $A^p|_V\\to I^{p+n}|_V$, with the same differential $d_I f-(-1)^n f d_A$ [def-pur-hom-complex, def-pur-sheaf-hom]. This gives a chain isomorphism, and $I|_U$ is K-injective [lem-pur-kinjective-restrict-localized]. Therefore the two sides compute the two derived Homs in the statement [def-pur-derived-internal-hom]. For $W\\to U$, the composite comparison and the direct comparison agree on every such family over each $V\\to W$; this proves compatibility with successive slice restrictions. Componentwise pre- and postcomposition commute with these identity maps, proving naturality.",
-      "uses": [
-        "def-pur-hom-complex",
-        "def-pur-sheaf-hom",
-        "lem-pur-kinjective-restrict-localized",
-        "def-pur-derived-internal-hom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08JB (lemma-restriction-RHom-to-U)"
-      }
-    },
-    {
-      "text": "We will use cones of K-injective representatives. If $g:J\\to I$ is a chain map with $J,I$ K-injective, then in the homotopy-category cone triangle $J\\to I\\to C(g)\\to J[1]$ [lem-pur-homotopy-category-triangulated], apply [lem-weil-pbc-hom-into-triangle-exact] to the rotated triangle and an acyclic complex $E$. The map $E\\to J[1]$ obtained from any $E\\to C(g)$ is zero, since $J[1]$ is K-injective [lem-weil-pbc-kinjective-shift, def-pur-kinjective-complex]. Exactness factors $E\\to C(g)$ through $I$, and that factor is zero for the same reason. Hence $\\operatorname{Hom}_{K(\\mathcal O)}(E,C(g))=0$, which is exactly K-injectivity of $C(g)$. This is the two-line representable-exactness argument of Stacks Tag 090X (lemma-triangle-K-injective), with all of its inputs already cited.",
-      "uses": [
-        "lem-pur-homotopy-category-triangulated",
-        "lem-weil-pbc-hom-into-triangle-exact",
-        "lem-weil-pbc-kinjective-shift",
-        "def-pur-kinjective-complex"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 090X (lemma-triangle-K-injective)"
-      }
-    },
-    {
-      "text": "For the first variable fix a K-injective $I$ representing $M$ [prop-pur-kinjective-resolutions-exist]. By the cone description of distinguished triangles [def-weil-abstract-derived-category], it suffices to start with $A\\xrightarrow{f}B\\to C(f)\\to A[1]$. Put $X=\\mathscr H(B,I)$, $Y=\\mathscr H(A,I)$, and $h=f^*:X\\to Y$. The graded splitting $C(f)=B\\oplus A[1]$ writes a degree-$n$ element of $\\mathscr H(C(f),I)$ as $(x,y)$ with $x\\in X^n$, $y\\in Y^{n-1}$. Substitution into the Hom differential [def-pur-hom-complex] gives $d(x,y)=(d_Xx,d_Yy+(-1)^{n+1}h(x))$. The invertible degreewise map $(x,y)\\mapsto((-1)^{n-1}y,x)$ identifies this with $C(h)[-1]$, whose differential is $(u,x)\\mapsto(-d_Yu-h(x),d_Xx)$. Its projection to $X$ is $x$, and the following map $X\\to Y$ is $h$, so the resulting triangle is the inverse rotation of the cone triangle of $h$. Its degree-$n$ boundary $Y\\to\\mathscr H(C(f),I)[1]$ is $y\\mapsto(0,(-1)^n y)$: precomposition with the original boundary $-p:C(f)\\to A[1]$ gives exactly this map after the source-shift comparison, whose degree-$r$ component is multiplication by $(-1)^r$ on $Y^{r-1}$. Cone triangles, their rotations and their localized images are distinguished [lem-pur-homotopy-category-triangulated, def-weil-triangulated-category]. Each Hom into $I$ computes derived Hom [def-pur-derived-internal-hom]; hence this is the required reversed triangle. This calculation uses a finite biproduct, with no exactness assumption on infinite products.",
-      "uses": [
-        "prop-pur-kinjective-resolutions-exist",
-        "def-weil-abstract-derived-category",
-        "def-pur-hom-complex",
-        "lem-pur-homotopy-category-triangulated",
-        "def-weil-triangulated-category",
-        "def-pur-derived-internal-hom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08JC (lemma-RHom-triangulated), first-variable termwise split cone calculation"
-      }
-    },
-    {
-      "text": "For a distinguished triangle in the second variable, choose K-injective representatives $J,I$ of its first two vertices [prop-pur-kinjective-resolutions-exist]. Its first morphism lifts to a chain map $g:J\\to I$ by [lem-weil-pbc-kinjective-hom-derived]. The localized cone triangle of $g$ and the given triangle complete the same first arrow; TR3 [def-weil-triangulated-category] gives a triangle morphism with identity first two components, and [lem-sf-triangle-morphism-iso] makes the third an isomorphism. The preceding step about K-injective cones shows that $C(g)$ is K-injective. For any complex $A$ representing the fixed first variable, [lem-sc-hom-complex-mapping-cone] gives $\\mathscr H(A,C(g))\\cong C(\\mathscr H(A,g))$. Under the standard finite-biproduct splitting the differential is $(x,y)\\mapsto(d x+\\mathscr H(A,g)y,-d y)$ [def-pur-hom-complex], so the inclusion, projection and signed target-shift boundary give the ordinary cone triangle. After localization it is distinguished [lem-pur-homotopy-category-triangulated]. All three targets are K-injective, so these Homs compute the derived Homs and their arrows [def-pur-derived-internal-hom]. This proves the covariant triangle assertion, and the triangle isomorphism just constructed transfers it to the given triangle.",
-      "uses": [
-        "prop-pur-kinjective-resolutions-exist",
-        "lem-weil-pbc-kinjective-hom-derived",
-        "def-weil-triangulated-category",
-        "lem-sf-triangle-morphism-iso",
-        "lem-sc-hom-complex-mapping-cone",
-        "def-pur-hom-complex",
-        "lem-pur-homotopy-category-triangulated",
-        "def-pur-derived-internal-hom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08JC (lemma-RHom-triangulated), second-variable termwise split cone calculation"
-      }
-    },
-    {
-      "text": "The natural shift comparisons [lem-pur-derived-internal-hom-shift-left, lem-pur-derived-internal-hom-shift-right] are $H(P[m],Q)\\cong H(P,Q)[-m]$ and $H(P,Q[n])\\cong H(P,Q)[n]$. They supply the source and target shift identifications used in the two cone triangles above. Their differentials are the signed differentials of [def-pur-hom-complex]. Neither comparison requires boundedness, flatness or finite generation; neither did any of the preceding arguments.",
-      "uses": [
-        "lem-pur-derived-internal-hom-shift-left",
-        "lem-pur-derived-internal-hom-shift-right",
-        "def-pur-hom-complex"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08JC (lemma-RHom-triangulated), shift compatibility"
-      }
-    }
-  ],
-  "proof_deps": [
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "item": "lem-weil-pbc-extended-cech-completion-model",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "proof": [
+  {
+   "text": "Choose K-flat representatives $A,B$ of $K,L$ [lem-pc-kflat-resolution] and a K-injective representative $I$ of $M$ [prop-pur-kinjective-resolutions-exist]. Write $\\mathscr H$ for the ordinary sheaf Hom complex. The existing chain-level currying isomorphism [lem-sc-derived-hom-tensor-total] is $\\mathscr H(A,\\mathscr H(B,I))\\cong\\mathscr H(\\operatorname{Tot}(A\\otimes B),I)$, natural in all three complex maps. Its left inner Hom is K-injective by [lem-pur-hom-kflat-into-kinjective]. Thus the left side computes $H(K,H(L,M))$ and the right side computes $H(K\\otimes^{\\mathbf L}L,M)$: both tensor factors were chosen K-flat, exactly as in the statement's definition of derived tensor [def-pc-tensor-complex-sheaves, def-pc-kflat-complex, def-pur-derived-internal-hom]. The representative comparisons and invariance under quasi-isomorphisms [lem-pur-rhom-well-defined] descend this natural chain isomorphism to the required natural isomorphism in $D(\\mathcal O)$. In Lean, use the existing concrete functorial flat resolution to show that the inclusion of the specified K-flat full subcategory followed by Q is a localization. Replace the third variable functorially by K-injectives. The existing representative comparison computes the inner Hom; quasi-isomorphism invariance computes the outer Hom because the inner Hom is K-injective. Assemble the chain currying comparison and the given tensor comparison on the product of two K-flat subcategories and all complexes. The tensor bifunctor applies its two maps successively; the total-complex map composition lemma identifies this with the simultaneous tensor map in the currying naturality equation. Fully faithful precomposition with the product localization then descends the natural isomorphism in all three variables at once.",
+   "uses": [
     "lem-pc-kflat-resolution",
     "prop-pur-kinjective-resolutions-exist",
     "lem-sc-derived-hom-tensor-total",
@@ -111,282 +19,392 @@
     "def-pc-tensor-complex-sheaves",
     "def-pc-kflat-complex",
     "def-pur-derived-internal-hom",
-    "lem-pur-rhom-well-defined",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom)"
+   }
+  },
+  {
+   "text": "Let $A$ represent $L$ and let $I$ be K-injective representing $M$. The six restriction instances proved in this module show directly that slice restriction is additive and preserves finite limits and finite colimits, so it preserves these representatives and their quasi-isomorphisms. For limits, forget to presheaves of abelian groups, where restriction is precomposition, and reflect limits back. For colimits, the slice functors are both continuous and cocontinuous; their pushforward on abelian sheaves is therefore also a left adjoint. The exact conservative forgetful functor from module sheaves to abelian sheaves reflects the finite colimits. Over $V\\to U$, sections of $\\mathscr H(A,I)|_U$ and of $\\mathscr H(A|_U,I|_U)$ are the same families $A^p|_V\\to I^{p+n}|_V$, with the same differential $d_I f-(-1)^n f d_A$ [def-pur-hom-complex, def-pur-sheaf-hom]. This gives a chain isomorphism, and $I|_U$ is K-injective [lem-pur-kinjective-restrict-localized]. Therefore the two sides compute the two derived Homs in the statement [def-pur-derived-internal-hom]. For $W\\to U$, the composite comparison and the direct comparison agree on every such family over each $V\\to W$; this proves compatibility with successive slice restrictions. Componentwise pre- and postcomposition commute with these identity maps, proving naturality.",
+   "uses": [
     "def-pur-hom-complex",
     "def-pur-sheaf-hom",
     "lem-pur-kinjective-restrict-localized",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB (lemma-restriction-RHom-to-U)"
+   }
+  },
+  {
+   "text": "We will use cones of K-injective representatives. If $g:J\\to I$ is a chain map with $J,I$ K-injective, then in the homotopy-category cone triangle $J\\to I\\to C(g)\\to J[1]$ [lem-pur-homotopy-category-triangulated], apply [lem-weil-pbc-hom-into-triangle-exact] to the rotated triangle and an acyclic complex $E$. The map $E\\to J[1]$ obtained from any $E\\to C(g)$ is zero, since $J[1]$ is K-injective [lem-weil-pbc-kinjective-shift, def-pur-kinjective-complex]. Exactness factors $E\\to C(g)$ through $I$, and that factor is zero for the same reason. Hence $\\operatorname{Hom}_{K(\\mathcal O)}(E,C(g))=0$, which is exactly K-injectivity of $C(g)$. This is the two-line representable-exactness argument of Stacks Tag 090X (lemma-triangle-K-injective), with all of its inputs already cited.",
+   "uses": [
     "lem-pur-homotopy-category-triangulated",
     "lem-weil-pbc-hom-into-triangle-exact",
     "lem-weil-pbc-kinjective-shift",
-    "def-pur-kinjective-complex",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090X (lemma-triangle-K-injective)"
+   }
+  },
+  {
+   "text": "For the first variable fix a K-injective $I$ representing $M$ [prop-pur-kinjective-resolutions-exist]. By the cone description of distinguished triangles [def-weil-abstract-derived-category], it suffices to start with $A\\xrightarrow{f}B\\to C(f)\\to A[1]$. Put $X=\\mathscr H(B,I)$, $Y=\\mathscr H(A,I)$, and $h=f^*:X\\to Y$. The graded splitting $C(f)=B\\oplus A[1]$ writes a degree-$n$ element of $\\mathscr H(C(f),I)$ as $(x,y)$ with $x\\in X^n$, $y\\in Y^{n-1}$. Substitution into the Hom differential [def-pur-hom-complex] gives $d(x,y)=(d_Xx,d_Yy+(-1)^{n+1}h(x))$. The invertible degreewise map $(x,y)\\mapsto((-1)^{n-1}y,x)$ identifies this with $C(h)[-1]$, whose differential is $(u,x)\\mapsto(-d_Yu-h(x),d_Xx)$. Its projection to $X$ is $x$, and the following map $X\\to Y$ is $h$, so the resulting triangle is the inverse rotation of the cone triangle of $h$. Its degree-$n$ boundary $Y\\to\\mathscr H(C(f),I)[1]$ is $y\\mapsto(0,(-1)^n y)$: precomposition with the original boundary $-p:C(f)\\to A[1]$ gives exactly this map after the source-shift comparison, whose degree-$r$ component is multiplication by $(-1)^r$ on $Y^{r-1}$. Cone triangles, their rotations and their localized images are distinguished [lem-pur-homotopy-category-triangulated, def-weil-triangulated-category]. Each Hom into $I$ computes derived Hom [def-pur-derived-internal-hom]; hence this is the required reversed triangle. This calculation uses a finite biproduct, with no exactness assumption on infinite products.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
     "def-weil-abstract-derived-category",
+    "def-pur-hom-complex",
+    "lem-pur-homotopy-category-triangulated",
     "def-weil-triangulated-category",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), first-variable termwise split cone calculation"
+   }
+  },
+  {
+   "text": "For a distinguished triangle in the second variable, choose K-injective representatives $J,I$ of its first two vertices [prop-pur-kinjective-resolutions-exist]. Its first morphism lifts to a chain map $g:J\\to I$ by [lem-weil-pbc-kinjective-hom-derived]. The localized cone triangle of $g$ and the given triangle complete the same first arrow; TR3 [def-weil-triangulated-category] gives a triangle morphism with identity first two components, and [lem-sf-triangle-morphism-iso] makes the third an isomorphism. The preceding step about K-injective cones shows that $C(g)$ is K-injective. For any complex $A$ representing the fixed first variable, [lem-sc-hom-complex-mapping-cone] gives $\\mathscr H(A,C(g))\\cong C(\\mathscr H(A,g))$. Under the standard finite-biproduct splitting the differential is $(x,y)\\mapsto(d x+\\mathscr H(A,g)y,-d y)$ [def-pur-hom-complex], so the inclusion, projection and signed target-shift boundary give the ordinary cone triangle. After localization it is distinguished [lem-pur-homotopy-category-triangulated]. All three targets are K-injective, so these Homs compute the derived Homs and their arrows [def-pur-derived-internal-hom]. This proves the covariant triangle assertion, and the triangle isomorphism just constructed transfers it to the given triangle.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
     "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-triangulated-category",
     "lem-sf-triangle-morphism-iso",
     "lem-sc-hom-complex-mapping-cone",
+    "def-pur-hom-complex",
+    "lem-pur-homotopy-category-triangulated",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), second-variable termwise split cone calculation"
+   }
+  },
+  {
+   "text": "The natural shift comparisons [lem-pur-derived-internal-hom-shift-left, lem-pur-derived-internal-hom-shift-right] are $H(P[m],Q)\\cong H(P,Q)[-m]$ and $H(P,Q[n])\\cong H(P,Q)[n]$. They supply the source and target shift identifications used in the two cone triangles above. Their differentials are the signed differentials of [def-pur-hom-complex]. Neither comparison requires boundedness, flatness or finite generation; neither did any of the preceding arguments.",
+   "uses": [
     "lem-pur-derived-internal-hom-shift-left",
-    "lem-pur-derived-internal-hom-shift-right"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "lem-pur-derived-internal-hom-shift-right",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U), 08JC (lemma-RHom-triangulated); cone closure: derived.tex Tag 090X (lemma-triangle-K-injective). The seven completed clauses use the existing chain currying theorem, concrete functorial flat and K-injective resolutions, product localization, and continuous/cocontinuous slice restriction."
+    "place": "Tag 08JC (lemma-RHom-triangulated), shift compatibility"
+   }
   },
-  "id": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-weil-pbc-completed-pullback",
-      "place": "Detailed form, final Stacks comparison: the 099F completion unit, using internal-Hom restriction, tensor adjunction and exactness to prove its local completeness and global mapping property.",
-      "via": [
-        "lem-weil-pbc-extended-cech-completion-model"
-      ]
-    },
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Derived internal Hom calculus on small ringed sites",
-  "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] with a sheaf of commutative rings $\\mathcal O$. Use $D(\\mathcal O)$ for the unbounded derived category of module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category] and $H(L,M)=R\\mathcal Hom_{\\mathcal O}(L,M)$ [def-pur-derived-internal-hom]. Derived tensor is total tensor [def-pc-tensor-complex-sheaves] after K-flat replacement [def-pc-kflat-complex]. For all $K,L,M\\in D(\\mathcal O)$ there is a natural isomorphism $H(K,H(L,M))\\cong H(K\\otimes_{\\mathcal O}^{\\mathbf L}L,M)$. For every object $U$, write $\\mathcal O_U$ for restriction to the slice site $\\mathcal C/U$. There is a natural isomorphism $H(L,M)|_U\\cong R\\mathcal Hom_{\\mathcal O_U}(L|_U,M|_U)$, compatible with successive slice restrictions. The functor $H$ sends distinguished triangles in either variable to distinguished triangles (contravariantly in the first variable), and commutes with shifts with the corresponding sign of the shift. No boundedness or finite-generation condition is imposed on the three objects.",
-  "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U), 08JC (lemma-RHom-triangulated)."
-  },
-  "stmt_deps": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-abstract-derived-category",
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-derived-internal-hom",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex"
-  ],
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Cohomology derived sheaf Hom tensor adjunction restriction to over site",
-      "results": "CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.H; CategoryTheory.sheafHom'; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.unitHomEquiv_comp_apply; CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply; PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
-      "date": "2026-10-14",
-      "verdict": "no match: returned signatures concern underived sheaves or generic derived localization, not this sheaf internal-Hom calculus."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"derived\", \"Hom\"",
-      "results": "DerivedCategory.instEssSurjHomotopyCategoryIntUpQh; DerivedCategory.instCommShiftHomotopyCategoryIntUpQh; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso; DerivedCategory.instAdditiveHomotopyCategoryIntUpQh; DerivedCategory.singleFunctorIsoCompQ_hom_app; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; DerivedCategory.singleFunctorsPostcompQIso_hom_hom; DerivedCategory.singleFunctorsPostcompQIso_inv_hom",
-      "date": "2026-10-14",
-      "verdict": "no match: returned signatures concern underived sheaves or generic derived localization, not this sheaf internal-Hom calculus."
-    },
-    {
-      "tool": "grep",
-      "query": "\\bRHom\\b|derivedInternalHom",
-      "results": "0 hits",
-      "date": "2026-10-14",
-      "verdict": "no match: returned signatures concern underived sheaves or generic derived localization, not this sheaf internal-Hom calculus."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived sheaf internal Hom commutes with slice restriction and is exact and tensor adjoint",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived tensor internal Hom adjunction and exactness of derived sheaf Hom on a ringed site",
-      "results": "instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite (Mathlib/CategoryTheory/Sites/CartesianClosed); LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod (Mathlib/Condensed/Light/Monoidal); instMonoidalClosedLightCondSet (Mathlib/Condensed/Light/CartesianClosed); SheafOfModules.instAbelian (Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian); LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition (Mathlib/Condensed/Light/InternallyProjective)",
-      "date": "2026-10-14",
-      "verdict": "no match: underived closed structures, abelian structure and internally projective objects; none states unbounded derived internal Hom, its slice restriction or triangle exactness."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Closed monoidal structure on the unbounded derived category of sheaves of modules, restriction and exact internal hom",
-      "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; instMonoidalClosedLightCondSet; instMonoidalClosedCondensedSet; LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
-      "date": "2026-10-14",
-      "verdict": "no match: Light/Monoidal.lean lines 43-65 gives underived condensed module structures; the other returned closed structures are also underived and give no slice or derived triangle statement."
-    },
-    {
-      "tool": "grep",
-      "query": "derivedInternalHom|ringedInternalHom|RHom",
-      "results": "Mathlib/Algebra/Star/StarRingHom.lean; Mathlib/Algebra/Star/StarRingHom.lean; Mathlib/Algebra/Group/End.lean; Mathlib/Algebra/Group/End.lean; Mathlib/Algebra/Group/End.lean; Mathlib/Algebra/Group/End.lean; Mathlib/Algebra/Group/End.lean; Mathlib/Algebra/Star/SelfAdjoint.lean",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived internal Hom of sheaves of modules commutes with slice restrictions and sends triangles to triangles",
-      "results": "CategoryTheory.sheafHom; CategoryTheory.sheafHom'; AlgebraicGeometry.Scheme.Modules.Hom; CategoryTheory.Pseudofunctor.sheafHom; SheafOfModules.over; SheafOfModules.Hom; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Sheaf.Hom",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"internalHom\", \"DerivedCategory\"",
-      "results": "0 hits",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Unbounded derived internal Hom of sheaves of modules tensor Hom currying slice restriction distinguished triangles",
-      "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.ihomPoints; SheafOfModules.PullbackConstruction.adjunction; LightCondensed.ihomPoints_apply; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; CategoryTheory.Sheaf.H; LightCondensed.ihomPoints_symm_apply; LightCondensed.ihomPoints_symm_comp",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
-    },
-    {
-      "tool": "grep",
-      "query": "KInjective|kInjective",
-      "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"IsKInjective\"",
-      "results": "CochainComplex.IsKInjective; CochainComplex.isKInjective_of_injective; HomotopyEquiv.isKInjective; CochainComplex.isKInjective_of_iso; CochainComplex.isKInjective_iff_of_iso; CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX; CochainComplex.instIsKInjectiveObjIntShiftFunctor; CochainComplex.isKInjective_shift_iff",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The mapping cone of a chain map between K-injective cochain complexes in an abelian category is K-injective",
-      "results": "CochainComplex.cm5b.instInjectiveXIntMappingConeIdI; CochainComplex.cm5b.i; CochainComplex.isKInjective_of_injective_aux; CochainComplex.cm5b.i_f_comp; CochainComplex.cm5b.I; CochainComplex.cm5b.p; CochainComplex.isKInjective_of_injective; CochainComplex.cm5b.i_f_comp_assoc",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
-    },
-    {
-      "tool": "grep",
-      "query": "\\bRHom\\b|derivedInternalHom|ringedInternalHom",
-      "results": "0 hits",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Closed monoidal unbounded derived category of modules on a ringed site internal hom exactness restriction to slice site",
-      "results": "LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; Condensed.instAB4CondensedMod; Condensed.instAB4StarCondensedMod; LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
-    }
-  ],
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "worker": "stage1",
-    "summary": "Rechecked the inherited proof against Stacks 08J9, 08JB, 08JC and 090X. Reused the existing ordinary tensor-Hom and covariant Hom-cone nodes instead of proving their non-elementary comparisons inline. Chose both tensor representatives K-flat, cited exact slice restriction, and replaced the long compound triangle step by explicit representable-exactness cone closure, signed contravariant cone calculation, covariant triangle transport, and shift steps. The cone-closure deduction is elementary from existing exactness and shift lemmas. No statement change and no new nodes.",
-    "blueprint": [
-      "def-weil-pbc-completed-pullback: final Stacks comparison used by the completion unit in lem-weil-pbc-extended-cech-completion-model; derived tensor-Hom currying, coherent slice restriction, exactness and signed shifts."
-    ],
-    "tool_uses": [
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "K-flat representatives of the two input complexes; the proper-base-change unit supplies no such resolution theorem."
-      },
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "K-injective representatives for the Stacks ringed-site Hom model, independent of scheme geometry."
-      },
-      {
-        "node": "lem-sc-derived-hom-tensor-total",
-        "why": "The ordinary chain-level tensor-Hom currying isomorphism; the derived statement is proved here using K-flat and K-injective representatives."
-      },
-      {
-        "node": "lem-pur-hom-kflat-into-kinjective",
-        "why": "K-injectivity of the inner Hom in the tensor-Hom comparison."
-      },
-      {
-        "node": "lem-pur-rhom-well-defined",
-        "why": "Quasi-isomorphism invariance of the representative Hom complexes."
-      },
-      {
-        "node": "lem-pur-kinjective-restrict-localized",
-        "why": "K-injectivity after slice restriction, needed in the restriction comparison."
-      },
-      {
-        "node": "lem-sc-hom-complex-mapping-cone",
-        "why": "The ordinary covariant Hom-cone isomorphism used on K-injective target cones."
-      },
-      {
-        "node": "lem-pur-derived-internal-hom-shift-left",
-        "why": "Natural negative source-shift comparison, general ringed-site infrastructure."
-      },
-      {
-        "node": "lem-pur-derived-internal-hom-shift-right",
-        "why": "Natural positive target-shift comparison, general ringed-site infrastructure."
-      }
-    ]
-  },
-  "tool_uses": [
+  {
+   "text": "For the independent-universe normalized shifts, construct both chain reindexings directly from the fixed Hom product projections [lem-sc-hom-complex-projections, def-coef-hom-representative-evaluation]. The target reindexing is unsigned; the source reindexing multiplies degree k by (-1)^(s*k). Projection extensionality proves their chain identities, naturality, inverse identities, and the target shift zero/addition coherence. The ordinary-to-derived comparison is the fixed augmentation followed by the inverse localization factorization. Hom into K-injective complexes preserves quasi-isomorphisms [lem-pur-rhom-well-defined-universes], so that comparison is invertible on the K-injective subcategory. The inclusion of this subcategory followed by Q is a localization and an equivalence, by the existing Mathlib K-injective derivability structure. Descend target shift isomorphisms and their coherence through these localizations and then in the source variable. Descend the signed source shift in both variables through product localization. Naturality of the augmentation gives the exact normalization equations. Projection extensionality and essential surjectivity give uniqueness. For covariant exactness, construct Hom(L, cone(f)) as the cone of Hom(L,f) by the two finite-biproduct projections, verifying the differential and all three triangle arrows, including the target-shift boundary. Mathlib right-orthogonal closure shows the cone of a map between K-injectives is K-injective. Lift the first arrow of a distinguished triangle to that full subcategory; TR3 and the two-out-of-three isomorphism theorem identify its cone triangle with the given triangle. Transfer the ordinary cone comparison through the normalized augmentation, giving triangulatedness for the unique normalized target shift. These arguments allow separate object and morphism universes and use neither boundedness nor K-flatness. The local normalization predicates name homComplexπ directly, the same fixed projection as the coefficient projection from homComplex_exists. Specialize the abstract arguments directly to the native Hom functor, projections, and their law lemmas; no concrete proof-bearing data wrapper is unfolded.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-coef-hom-representative-evaluation",
+    "lem-pur-rhom-well-defined-universes",
     "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-pur-rhom-well-defined",
-    "lem-pur-kinjective-restrict-localized",
-    "lem-pc-kflat-resolution",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-sc-hom-complex-mapping-cone",
-    "lem-pur-derived-internal-hom-shift-left",
-    "lem-pur-derived-internal-hom-shift-right"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q09-6b85405e2",
-    "group": "Q09",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-6b85405e2 (reviewer sub-agent of L); spot-checked: I read the full item, all six stmt_deps and 23 proof_deps statements, and Stacks sites-cohomology.tex 08J9 (l.8896-8931), 08JB (l.8934-8945), 08JC (l.8947-8962) and derived.tex 090X (l.9674-9685). The statement is unchanged and matches the sources: arbitrary small ringed site, commutative O, unbounded. This is not a target node, so the base-change and coefficient comparison does not apply. Step 1 follows the 08J9 proof: Hom(B,I) is K-injective (lem-pur-hom-kflat-into-kinjective), the chain-level currying is lem-sc-derived-hom-tensor-total, and naturality descends via K-flat representatives and lem-pur-rhom-well-defined; this is terse but at the source's level. Step 2: on each V->U both restricted Hom complexes have the same sections and differential, using exact restriction and lem-pur-kinjective-restrict-localized; successive restriction and naturality hold because the comparison is the identity. Step 3 is the 090X argument via hom-into-triangle-exact(ii) and kinjective-shift; correctly marked elementary. Step 4: I checked by hand the differential (d_X x, d_Y y+(-1)^{n+1}hx), that psi(x,y)=((-1)^{n-1}y,x) is a chain isomorphism onto C(h)[-1], and the boundary (0,(-1)^n y) with the source-shift sign (-1)^r. Step 5: I checked that Hom^n(A,C(g)) = Hom^n(A,I)+Hom^{n+1}(A,J) has differential (dx+g_*y,-dy), and that Hom(A,J[1]) = Hom(A,J)[1] with no sign; TR3, triangle-morphism-iso and the K-injective cone are used correctly. Step 6 cites the existing shift nodes with the right signs. Edge cases (one-point site with Z, f=0, f=id, negative n, zero complexes) hold. No new nodes, no cycle (DFS), and no duplicate: only the scheme-level specializations lem-sc-derived-internal-hom-adjunction and lem-sc-derived-internal-hom-restrict-open exist. Off-route statements are either declared, Lean-closed or Mathlib leaves. I accept the nine declared tool_uses: lem-pc-kflat-resolution, prop-pur-kinjective-resolutions-exist, lem-sc-derived-hom-tensor-total, lem-pur-hom-kflat-into-kinjective, lem-pur-rhom-well-defined, lem-pur-kinjective-restrict-localized, lem-sc-hom-complex-mapping-cone, lem-pur-derived-internal-hom-shift-left, lem-pur-derived-internal-hom-shift-right. No SGA source is cited. No fixes."
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-390c6f152",
-    "group": "Q13",
-    "result": "fix",
-    "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
-  },
-  "lean": {
-    "module": "Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses",
-    "declaration": "CategoryTheory.RingedHomUniverses.rightShift_existsUnique",
-    "declarations": [
-      "CategoryTheory.RingedHomUniverses.Modules",
-      "CategoryTheory.RingedHomUniverses.Complex",
-      "CategoryTheory.RingedHomUniverses.complexHom",
-      "CategoryTheory.RingedHomUniverses.RightFormula",
-      "CategoryTheory.RingedHomUniverses.LeftFormula",
-      "CategoryTheory.RingedHomUniverses.D",
-      "CategoryTheory.RingedHomUniverses.hom",
-      "CategoryTheory.RingedHomUniverses.RightNormalization",
-      "CategoryTheory.RingedHomUniverses.rightShift_existsUnique",
-      "CategoryTheory.RingedHomUniverses.homCommShift",
-      "CategoryTheory.RingedHomUniverses.LeftNormalization",
-      "CategoryTheory.RingedHomUniverses.leftShift_existsUnique",
-      "CategoryTheory.RingedHomUniverses.sourceShift",
-      "CategoryTheory.RingedHomUniverses.hom_isTriangulated"
-    ],
-    "file": "lean/Sheaf/Algebra/Homology/RingedInternalHomShiftOfUniverses.lean",
-    "statement": "theorem rightShift_existsUnique : ∃! S : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ, RightNormalization.{c, v, r, w} J R S",
-    "branch": "newtargets-dag",
-    "by": "Q13",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "§1(B): the recorded signed calculus requires a SmallCategory with equal object and morphism universes. The small pro-etale site has object universe u+1 and morphism universe u. This module publicly reexports that entire interface and supplies the same Hom-complex shifts at independent object, morphism, coefficient and derived universes. Both shifts are uniquely specified through fixed Hom-product projections and the actual ordinary-to-derived augmentation, including arbitrary representative isomorphisms; the target shift has its exact triangle structure. No alternative Hom, arbitrary isomorphism or extra universe equality is used."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "U4",
-    "result": "pass",
-    "landing": "20261018T062926-L-684370",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X, 08JA and 08JC; derived.tex Tag 090X. Independent-universe normalized shifts and covariant exactness."
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-pur-hom-kflat-into-kinjective",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-kinjective-shift",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sc-hom-complex-mapping-cone",
+  "lem-pur-derived-internal-hom-shift-left",
+  "lem-pur-derived-internal-hom-shift-right",
+  "lem-sc-hom-complex-projections",
+  "def-coef-hom-representative-evaluation",
+  "lem-pur-rhom-well-defined-universes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U), 08JC (lemma-RHom-triangulated); cone closure: derived.tex Tag 090X (lemma-triangle-K-injective). The seven completed clauses use the existing chain currying theorem, concrete functorial flat and K-injective resolutions, product localization, and continuous/cocontinuous slice restriction. Independent-universe normalized shift clauses additionally use the fixed Hom projection API, localization of K-injectives, and the explicit cone-triangle comparison (S6). Existing clauses and their dependencies are retained."
+ },
+ "id": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, final Stacks comparison: the 099F completion unit, using internal-Hom restriction, tensor adjunction and exactness to prove its local completeness and global mapping property.",
+   "via": [
+    "lem-weil-pbc-extended-cech-completion-model"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived internal Hom calculus on small ringed sites",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] with a sheaf of commutative rings $\\mathcal O$. Use $D(\\mathcal O)$ for the unbounded derived category of module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category] and $H(L,M)=R\\mathcal Hom_{\\mathcal O}(L,M)$ [def-pur-derived-internal-hom]. Derived tensor is total tensor [def-pc-tensor-complex-sheaves] after K-flat replacement [def-pc-kflat-complex]. For all $K,L,M\\in D(\\mathcal O)$ there is a natural isomorphism $H(K,H(L,M))\\cong H(K\\otimes_{\\mathcal O}^{\\mathbf L}L,M)$. For every object $U$, write $\\mathcal O_U$ for restriction to the slice site $\\mathcal C/U$. There is a natural isomorphism $H(L,M)|_U\\cong R\\mathcal Hom_{\\mathcal O_U}(L|_U,M|_U)$, compatible with successive slice restrictions. The functor $H$ sends distinguished triangles in either variable to distinguished triangles (contravariantly in the first variable), and commutes with shifts with the corresponding sign of the shift. No boundedness or finite-generation condition is imposed on the three objects.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U), 08JC (lemma-RHom-triangulated)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology derived sheaf Hom tensor adjunction restriction to over site",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.H; CategoryTheory.sheafHom'; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.unitHomEquiv_comp_apply; CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply; PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures concern underived sheaves or generic derived localization, not this sheaf internal-Hom calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"Hom\"",
+   "results": "DerivedCategory.instEssSurjHomotopyCategoryIntUpQh; DerivedCategory.instCommShiftHomotopyCategoryIntUpQh; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso; DerivedCategory.instAdditiveHomotopyCategoryIntUpQh; DerivedCategory.singleFunctorIsoCompQ_hom_app; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; DerivedCategory.singleFunctorsPostcompQIso_hom_hom; DerivedCategory.singleFunctorsPostcompQIso_inv_hom",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures concern underived sheaves or generic derived localization, not this sheaf internal-Hom calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bRHom\\b|derivedInternalHom",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures concern underived sheaves or generic derived localization, not this sheaf internal-Hom calculus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sheaf internal Hom commutes with slice restriction and is exact and tensor adjoint",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor internal Hom adjunction and exactness of derived sheaf Hom on a ringed site",
+   "results": "instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite (Mathlib/CategoryTheory/Sites/CartesianClosed); LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod (Mathlib/Condensed/Light/Monoidal); instMonoidalClosedLightCondSet (Mathlib/Condensed/Light/CartesianClosed); SheafOfModules.instAbelian (Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian); LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition (Mathlib/Condensed/Light/InternallyProjective)",
+   "date": "2026-10-14",
+   "verdict": "no match: underived closed structures, abelian structure and internally projective objects; none states unbounded derived internal Hom, its slice restriction or triangle exactness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed monoidal structure on the unbounded derived category of sheaves of modules, restriction and exact internal hom",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; instMonoidalClosedLightCondSet; instMonoidalClosedCondensedSet; LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-14",
+   "verdict": "no match: Light/Monoidal.lean lines 43-65 gives underived condensed module structures; the other returned closed structures are also underived and give no slice or derived triangle statement."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|ringedInternalHom|RHom",
+   "results": "Mathlib/Algebra/Star/StarRingHom.lean; Mathlib/Algebra/Star/StarRingHom.lean; Mathlib/Algebra/Group/End.lean; Mathlib/Algebra/Group/End.lean; Mathlib/Algebra/Group/End.lean; Mathlib/Algebra/Group/End.lean; Mathlib/Algebra/Group/End.lean; Mathlib/Algebra/Star/SelfAdjoint.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of sheaves of modules commutes with slice restrictions and sends triangles to triangles",
+   "results": "CategoryTheory.sheafHom; CategoryTheory.sheafHom'; AlgebraicGeometry.Scheme.Modules.Hom; CategoryTheory.Pseudofunctor.sheafHom; SheafOfModules.over; SheafOfModules.Hom; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Sheaf.Hom",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHom\", \"DerivedCategory\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived internal Hom of sheaves of modules tensor Hom currying slice restriction distinguished triangles",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.ihomPoints; SheafOfModules.PullbackConstruction.adjunction; LightCondensed.ihomPoints_apply; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; CategoryTheory.Sheaf.H; LightCondensed.ihomPoints_symm_apply; LightCondensed.ihomPoints_symm_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|kInjective",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\"",
+   "results": "CochainComplex.IsKInjective; CochainComplex.isKInjective_of_injective; HomotopyEquiv.isKInjective; CochainComplex.isKInjective_of_iso; CochainComplex.isKInjective_iff_of_iso; CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX; CochainComplex.instIsKInjectiveObjIntShiftFunctor; CochainComplex.isKInjective_shift_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mapping cone of a chain map between K-injective cochain complexes in an abelian category is K-injective",
+   "results": "CochainComplex.cm5b.instInjectiveXIntMappingConeIdI; CochainComplex.cm5b.i; CochainComplex.isKInjective_of_injective_aux; CochainComplex.cm5b.i_f_comp; CochainComplex.cm5b.I; CochainComplex.cm5b.p; CochainComplex.isKInjective_of_injective; CochainComplex.cm5b.i_f_comp_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bRHom\\b|derivedInternalHom|ringedInternalHom",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed monoidal unbounded derived category of modules on a ringed site internal hom exactness restriction to slice site",
+   "results": "LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; Condensed.instAB4CondensedMod; Condensed.instAB4StarCondensedMod; LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern underived sheaf Hom, underived condensed closed structures, K-injective infrastructure or unrelated name substrings; none states the item on unbounded ringed-site derived categories."
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "worker": "stage1",
+  "summary": "Rechecked the inherited proof against Stacks 08J9, 08JB, 08JC and 090X. Reused the existing ordinary tensor-Hom and covariant Hom-cone nodes instead of proving their non-elementary comparisons inline. Chose both tensor representatives K-flat, cited exact slice restriction, and replaced the long compound triangle step by explicit representable-exactness cone closure, signed contravariant cone calculation, covariant triangle transport, and shift steps. The cone-closure deduction is elementary from existing exactness and shift lemmas. No statement change and no new nodes.",
+  "blueprint": [
+   "def-weil-pbc-completed-pullback: final Stacks comparison used by the completion unit in lem-weil-pbc-extended-cech-completion-model; derived tensor-Hom currying, coherent slice restriction, exactness and signed shifts."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat representatives of the two input complexes; the proper-base-change unit supplies no such resolution theorem."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "K-injective representatives for the Stacks ringed-site Hom model, independent of scheme geometry."
+   },
+   {
+    "node": "lem-sc-derived-hom-tensor-total",
+    "why": "The ordinary chain-level tensor-Hom currying isomorphism; the derived statement is proved here using K-flat and K-injective representatives."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "K-injectivity of the inner Hom in the tensor-Hom comparison."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Quasi-isomorphism invariance of the representative Hom complexes."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "K-injectivity after slice restriction, needed in the restriction comparison."
+   },
+   {
+    "node": "lem-sc-hom-complex-mapping-cone",
+    "why": "The ordinary covariant Hom-cone isomorphism used on K-injective target cones."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-left",
+    "why": "Natural negative source-shift comparison, general ringed-site infrastructure."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-right",
+    "why": "Natural positive target-shift comparison, general ringed-site infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pc-kflat-resolution",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-sc-hom-complex-mapping-cone",
+  "lem-pur-derived-internal-hom-shift-left",
+  "lem-pur-derived-internal-hom-shift-right"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-6b85405e2",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-6b85405e2 (reviewer sub-agent of L); spot-checked: I read the full item, all six stmt_deps and 23 proof_deps statements, and Stacks sites-cohomology.tex 08J9 (l.8896-8931), 08JB (l.8934-8945), 08JC (l.8947-8962) and derived.tex 090X (l.9674-9685). The statement is unchanged and matches the sources: arbitrary small ringed site, commutative O, unbounded. This is not a target node, so the base-change and coefficient comparison does not apply. Step 1 follows the 08J9 proof: Hom(B,I) is K-injective (lem-pur-hom-kflat-into-kinjective), the chain-level currying is lem-sc-derived-hom-tensor-total, and naturality descends via K-flat representatives and lem-pur-rhom-well-defined; this is terse but at the source's level. Step 2: on each V->U both restricted Hom complexes have the same sections and differential, using exact restriction and lem-pur-kinjective-restrict-localized; successive restriction and naturality hold because the comparison is the identity. Step 3 is the 090X argument via hom-into-triangle-exact(ii) and kinjective-shift; correctly marked elementary. Step 4: I checked by hand the differential (d_X x, d_Y y+(-1)^{n+1}hx), that psi(x,y)=((-1)^{n-1}y,x) is a chain isomorphism onto C(h)[-1], and the boundary (0,(-1)^n y) with the source-shift sign (-1)^r. Step 5: I checked that Hom^n(A,C(g)) = Hom^n(A,I)+Hom^{n+1}(A,J) has differential (dx+g_*y,-dy), and that Hom(A,J[1]) = Hom(A,J)[1] with no sign; TR3, triangle-morphism-iso and the K-injective cone are used correctly. Step 6 cites the existing shift nodes with the right signs. Edge cases (one-point site with Z, f=0, f=id, negative n, zero complexes) hold. No new nodes, no cycle (DFS), and no duplicate: only the scheme-level specializations lem-sc-derived-internal-hom-adjunction and lem-sc-derived-internal-hom-restrict-open exist. Off-route statements are either declared, Lean-closed or Mathlib leaves. I accept the nine declared tool_uses: lem-pc-kflat-resolution, prop-pur-kinjective-resolutions-exist, lem-sc-derived-hom-tensor-total, lem-pur-hom-kflat-into-kinjective, lem-pur-rhom-well-defined, lem-pur-kinjective-restrict-localized, lem-sc-hom-complex-mapping-cone, lem-pur-derived-internal-hom-shift-left, lem-pur-derived-internal-hom-shift-right. No SGA source is cited. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-390c6f152",
+  "group": "Q13",
+  "result": "fix",
+  "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses",
+  "declaration": "CategoryTheory.RingedHomUniverses.rightShift_existsUnique",
+  "declarations": [
+   "CategoryTheory.RingedHomUniverses.Modules",
+   "CategoryTheory.RingedHomUniverses.Complex",
+   "CategoryTheory.RingedHomUniverses.complexHom",
+   "CategoryTheory.RingedHomUniverses.RightFormula",
+   "CategoryTheory.RingedHomUniverses.LeftFormula",
+   "CategoryTheory.RingedHomUniverses.D",
+   "CategoryTheory.RingedHomUniverses.hom",
+   "CategoryTheory.RingedHomUniverses.RightNormalization",
+   "CategoryTheory.RingedHomUniverses.rightShift_existsUnique",
+   "CategoryTheory.RingedHomUniverses.homCommShift",
+   "CategoryTheory.RingedHomUniverses.LeftNormalization",
+   "CategoryTheory.RingedHomUniverses.leftShift_existsUnique",
+   "CategoryTheory.RingedHomUniverses.sourceShift",
+   "CategoryTheory.RingedHomUniverses.hom_isTriangulated"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedInternalHomShiftOfUniverses.lean",
+  "statement": "theorem rightShift_existsUnique : ∃! S : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ, RightNormalization.{c, v, r, w} J R S",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "§1(B): the recorded signed calculus requires a SmallCategory with equal object and morphism universes. The small pro-etale site has object universe u+1 and morphism universe u. This module publicly reexports that entire interface and supplies the same Hom-complex shifts at independent object, morphism, coefficient and derived universes. Both shifts are uniquely specified through fixed Hom-product projections and the actual ordinary-to-derived augmentation, including arbitrary representative isomorphisms; the target shift has its exact triangle structure. No alternative Hom, arbitrary isomorphism or extra universe equality is used."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261020T221346-L-4177964",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
