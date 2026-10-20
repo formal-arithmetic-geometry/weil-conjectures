@@ -2,13 +2,13 @@
 
 223 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (70 clusters, 2466 modules)
+## Rework: quarantined by the upstream sync (70 clusters, 2492 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
-| `Sheaf.Algebra.Homology.FilteredTensorGradedComparison` | 2182 | Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy, Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses, Sheaf.Algebra | error: Sheaf/Algebra/Homology/FilteredTensorGradedComparison.lean:6:0: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'CategoryTheo |
+| `Sheaf.Algebra.Homology.FilteredTensorGradedComparison` | 2208 | Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy, Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses, Sheaf.Algebra | error: Sheaf/Algebra/Homology/FilteredTensorGradedComparison.lean:6:0: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'CategoryTheo |
 | `Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComparison` | 69 | Sheaf.AlgebraicGeometry.ScalarCohomologyPullbackComposition, Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibili | error: Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAffineCechComparison.lean:6:0: import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOper |
 | `Sheaf.Algebra.Homology.FilteredHomComplexInvariance` | 20 | Sheaf.Algebra.Homology.FiniteFilteredLocalization, Sheaf.CategoryTheory.FiniteFilteredDerivedPresentation | error: Sheaf/Algebra/Homology/FilteredHomComplexInvariance.lean:6:0: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment already conta |
 | `Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso` | 20 | Sheaf.AlgebraicGeometry.QCohTensorResolutionChartTensorComponents, Sheaf.AlgebraicGeometry.QCohTensorResolutionCompariso | error: Sheaf/AlgebraicGeometry/QCohTensorResolutionChartComparisonIso.lean:1:0: import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde failed, environment already  |
@@ -129,7 +129,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.RingTheory.ColimOfLocalizations` | - | 1 | proof | 13 |
 | `Sheaf.Algebra.Homology.IntegerFlatRepresentative` | - | 1 | proof | 17 |
 
-## Stage 3: held for an open upstream PR (19)
+## Stage 3: held for an open upstream PR (20)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
@@ -149,6 +149,7 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs` | bundle/sec-smooth-purity-d3 |
+| `WeilConjectures.WeilSheaf.Finiteness` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
 | `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekOperations` | bundle/sec-poincare-duality-c1 |
