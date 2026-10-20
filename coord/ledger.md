@@ -18171,3 +18171,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:44 L: returned deliver/N5/lem-sf-open-external-tensor-normalization (reviewer RETURN: L: independent stage-2 immutable head 30476100b6dd: H3/H5: ComparisonFamily is hollow. e is an arbitrary, non-natural is)
 
 - 21:50 L: batch 20261020T131932 dependency take-out
+- 13:53 L: returned deliver/A7/Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComparison (reviewer RETURN: (the landing tools, head 68760ef87) the delivery did not land: lean/Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAf)
