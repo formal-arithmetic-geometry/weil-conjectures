@@ -15,9 +15,62 @@
   "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Reindexing is continuous by isContinuous_overMap, hence preserves the module-valued sheaf condition. Identify its sheaf pullback with ordinary etale upperStar through upperStarIsoLocalizationRestriction. Apply preservation of finite local constancy and transport that property through the resulting isomorphism.",
+   "uses": [
+    "prop-constructible-pullback",
+    "lemma-constructible-iso-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The functor on pointed neighbourhoods sends (U,z) to (U with structure map followed by h,z). Its inverse reindexes with h inverse. Full faithfulness follows by cancelling h on structure maps; the counit with identity underlying scheme map proves essential surjectivity. The final-functor colimit isomorphism has the prescribed germ formula, and colimit extensionality proves uniqueness and naturality.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport local constancy levelwise. Sectionwise annihilation is unchanged. On stalk transitions the natural fibre isomorphism gives a conjugate linear map; transport surjectivity through the two linear equivalences and compute its kernel by comapping the old ideal multiple of the full module. Whisker the natural fibre isomorphism with the inverse system and apply the limit isomorphism of naturally isomorphic diagrams; projection extensionality proves its unique characterization.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The rational pullback construction remains to be proved: extend integral pullback to balanced tensors and check identity and composition on pure tensors. Its object-identification theorem follows by selecting the object clause of its existing existence specification.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The integral scalar comparison, its rationalization, and the strong coefficient transformation remain to be proved by their existing identity-on-tensor generator and coherence specifications. This delivery leaves those original three existence theorems unchanged.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A cocartesian coefficient arrow is sent by the Grothendieck functor to the composite of an invertible strong naturality constraint with the image of an invertible fibre map; localization therefore inverts it. The chosen coefficient transformation specifies its stage functors. Evaluate this equality on a fibre object to obtain the algebraic pullback object formula, then cancel the inverse category-value transports to obtain the stated algebraic fibre formula.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "prop-constructible-pullback",
+  "lemma-constructible-iso-invariance",
+  "def-weil-pbc-geometric-stalks",
+  "def-pod-lisse-l-adic-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), Stacks 03Q1 and 095A; C9 Lean proof of nine well-definedness clauses, with the original four remaining existence proofs recorded explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -187,5 +240,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Automorphism pullback at finite, integral, rational and algebraic coefficients, with the reindexing inverse, identity-on-tensors scalar comparisons and pointed-neighbourhood/inverse-limit/tensor fibre identifications. Helper well-definedness statements are the clauses of this definition, all recorded in declarations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261020T174729-L-786266",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

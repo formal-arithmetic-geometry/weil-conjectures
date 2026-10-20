@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.LisseIntegralSmallCoefficients
 public import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Automorphism pullback of lisse adic sheaves
 
@@ -55,7 +56,10 @@ Apply the sheaf condition of F and transport the unique amalgamation back. -/
 theorem automorphismEtaleReindex_isSheaf (R : Type (u + 1)) [Ring R]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :
     Presheaf.IsSheaf Y.smallEtaleTopology ((automorphismEtaleReindex h).op ⋙ F.obj) := by
-  sorry
+  let : (automorphismEtaleReindex h).IsContinuous
+      Y.smallEtaleTopology Y.smallEtaleTopology :=
+    isContinuous_overMap (inferInstance : Etale h.hom) le_rfl
+  exact (automorphismEtaleReindex h).op_comp_isSheaf _ _ F
 
 /-- Pullback at unchanged module coefficients: restrictions and morphisms are whiskered
 by the same site reindexing. Source: Stacks 03Q1
@@ -68,6 +72,7 @@ def automorphismModuleSheafPullback (R : Type (u + 1)) [Ring R] :
       (Functor.whiskeringLeft _ _ _).obj (automorphismEtaleReindex h).op)
     (automorphismEtaleReindex_isSheaf h R)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The transported local trivializations have the same finite modules.
 Source: Stacks 095A (blueprint: def-wf-lisse-adic-automorphism-pullback).
 Proof: replace each trivializing (U,u) by (U,u ≫ h.inv). The reindexed sheaf there is
@@ -78,7 +83,19 @@ theorem automorphismModuleSheafPullback_isFiniteLocallyConstant
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
     (hF : IsFiniteLocallyConstantSheaf F) :
     IsFiniteLocallyConstantSheaf ((automorphismModuleSheafPullback h R).obj F) := by
-  sorry
+  have : IsFiniteLocallyConstantSheaf F := hF
+  let A := ModuleCat.{u + 1} R
+  let G := (automorphismModuleSheafPullback h R).obj F
+  let e : (Etale.upperStar A h.hom).obj F ≅ G :=
+    ((GrothendieckTopology.upperStarIsoLocalizationRestriction A @Etale @Etale
+      le_rfl h.hom (inferInstance : Etale h.hom)).app F) ≪≫
+      (ObjectProperty.isoMk (fun P ↦ Presheaf.IsSheaf Y.smallEtaleTopology P)
+        (Iso.refl ((automorphismEtaleReindex h).op ⋙ F.obj)) :
+        (GrothendieckTopology.localizationRestriction A @Etale @Etale le_rfl h.hom
+          (inferInstance : Etale h.hom)).obj F ≅ G)
+  have : IsFiniteLocallyConstantSheaf ((Etale.upperStar A h.hom).obj F) :=
+    IsFiniteLocallyConstantSheaf.upperStar h.hom F
+  exact IsFiniteLocallyConstantSheaf.of_iso e
 
 /-- Pullback of finite-coefficient lisse sheaves, with the coefficient ring unchanged.
 Source: Weil II (1.1.1), Stacks 095A
@@ -99,6 +116,54 @@ def automorphismPointedEtaleLift {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     exact (Category.assoc z.left U.hom h.hom).symm.trans
       (congrArg (fun f => f ≫ h.hom) (Over.w z)))
 
+private def automorphismPointedEtaleFunctor {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (y : Spec (.of Ω) ⟶ Y) :
+    (pointSmallEtale y).fiber.Elements ⥤ (pointSmallEtale (y ≫ h.hom)).fiber.Elements where
+  obj W := ⟨(automorphismEtaleReindex h).obj W.1,
+    automorphismPointedEtaleLift h y W.1 W.2⟩
+  map {W V} f := ⟨(automorphismEtaleReindex h).map f.val, by
+    apply Over.OverMorphism.ext
+    have hf := congrArg (fun g : Over.mk y ⟶ (Etale.forget Y).obj V.fst ↦ g.left)
+      f.property
+    exact hf⟩
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem automorphismPointedEtaleFunctor_isEquivalence
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) :
+    (automorphismPointedEtaleFunctor h y).IsEquivalence := by
+  let e := automorphismEtaleReindexEquivalence h
+  let ef := e.fullyFaithfulFunctor
+  let ff : (automorphismPointedEtaleFunctor h y).FullyFaithful :=
+    { preimage := fun {W V} f ↦ ⟨ef.preimage f.val, by
+        apply Over.OverMorphism.ext
+        have hv := congrArg (fun g ↦ g.left) (ef.map_preimage f.val)
+        change (ef.preimage f.val).left = f.val.left at hv
+        change W.snd.left ≫ (ef.preimage f.val).left = V.snd.left
+        rw [hv]
+        exact congrArg Over.Hom.left f.property⟩
+      map_preimage := by
+        intro W V f
+        apply Subtype.ext
+        exact ef.map_preimage f.val
+      preimage_map := by
+        intro W V f
+        apply Subtype.ext
+        exact ef.preimage_map f.val }
+  let es : (automorphismPointedEtaleFunctor h y).EssSurj :=
+    { mem_essImage W := by
+        let U := (automorphismEtaleReindex h.symm).obj W.fst
+        let z : (pointSmallEtale y).fiber.obj U := Over.homMk W.snd.left (by
+          change W.snd.left ≫ (W.fst.hom ≫ h.inv) = y
+          have hw : W.snd.left ≫ W.fst.hom = y ≫ h.hom := Over.w W.snd
+          exact (Category.assoc _ _ _).symm.trans
+            ((congrArg (fun g ↦ g ≫ h.inv) hw).trans (by
+              simp only [Category.assoc, h.hom_inv_id, Category.comp_id])))
+        refine ⟨⟨U, z⟩, ⟨CategoryOfElements.isoMk _ _ (e.counitIso.app W.fst) ?_⟩⟩
+        apply Over.OverMorphism.ext
+        change W.snd.left ≫ 𝟙 W.fst.left = W.snd.left
+        exact Category.comp_id _ }
+  exact { faithful := ff.faithful, full := ff.full, essSurj := es }
+
 /-- The finite-level fibre iso is fixed by its action on every pointed-neighbourhood
 colimit injection. Source: Stacks 03Q1(3)
 (blueprint: def-wf-lisse-adic-automorphism-pullback).
@@ -115,7 +180,23 @@ theorem automorphismModuleStalkIso_exists (R : Type (u + 1)) [Ring R]
         pointedEtaleGerm ((automorphismModuleSheafPullback h R).obj F) y U z ≫ φ.hom =
           pointedEtaleGerm F (y ≫ h.hom) ((automorphismEtaleReindex h).obj U)
             (automorphismPointedEtaleLift h y U z) := by
-  sorry
+  let P := automorphismPointedEtaleFunctor h y
+  have : P.IsEquivalence := automorphismPointedEtaleFunctor_isEquivalence h y
+  let D := pointedEtaleStalkDiagram F (y ≫ h.hom)
+  let φ : pointedEtaleStalk ((automorphismModuleSheafPullback h R).obj F) y ≅
+      pointedEtaleStalk F (y ≫ h.hom) := Functor.Final.colimitIso P.op D
+  have hφ : ∀ (U : Y.Etale) (z : (pointSmallEtale y).fiber.obj U),
+      pointedEtaleGerm ((automorphismModuleSheafPullback h R).obj F) y U z ≫ φ.hom =
+        pointedEtaleGerm F (y ≫ h.hom) ((automorphismEtaleReindex h).obj U)
+          (automorphismPointedEtaleLift h y U z) := by
+    intro U z
+    exact Functor.Final.ι_colimitIso_hom P.op D (op ⟨U, z⟩)
+  refine ⟨φ, hφ, ?_⟩
+  intro ψ hψ
+  apply Iso.ext
+  apply colimit.hom_ext
+  intro j
+  exact (hψ j.unop.fst j.unop.snd).trans (hφ j.unop.fst j.unop.snd).symm
 
 /-- The uniquely specified fibre identification, using the recorded geometric stalk.
 Source: Stacks 03Q1(3) (blueprint: def-wf-lisse-adic-automorphism-pullback). -/
@@ -140,6 +221,82 @@ def automorphismModuleLiftedStalkIso (R : Type (u + 1)) [Ring R]
       (((pointSmallEtale (y ≫ h.hom)).uliftSheafFiberIso.{u + 1}
         (ModuleCat.{u + 1} R)).app F).symm
 
+private def automorphismModuleStalkNatIso (R : Type (u + 1)) [Ring R]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) :
+    automorphismModuleSheafPullback h R ⋙ (pointSmallEtale y).sheafFiber ≅
+      (pointSmallEtale (y ≫ h.hom)).sheafFiber :=
+  NatIso.ofComponents (fun F ↦ automorphismModuleStalkIso h R F y) (by
+    intro F G f
+    apply colimit.hom_ext
+    rintro ⟨⟨U, z⟩⟩
+    let P := automorphismModuleSheafPullback h R
+    let V := (automorphismEtaleReindex h).obj U
+    let w := automorphismPointedEtaleLift h y U z
+    have hF := (automorphismModuleStalkIso_exists h R F y).exists.choose_spec U z
+    have hG := (automorphismModuleStalkIso_exists h R G y).exists.choose_spec U z
+    change pointedEtaleGerm (P.obj F) y U z ≫
+      ((pointSmallEtale y).sheafFiber.map (P.map f) ≫
+        (automorphismModuleStalkIso h R G y).hom) =
+      pointedEtaleGerm (P.obj F) y U z ≫
+        ((automorphismModuleStalkIso h R F y).hom ≫
+          (pointSmallEtale (y ≫ h.hom)).sheafFiber.map f)
+    calc
+      _ = ((P.map f).hom.app (op U) ≫ pointedEtaleGerm (P.obj G) y U z) ≫
+          (automorphismModuleStalkIso h R G y).hom := by
+        rw [← Category.assoc]
+        exact congrArg (fun a ↦ a ≫ (automorphismModuleStalkIso h R G y).hom)
+          ((pointSmallEtale y).toPresheafFiber_naturality (P.map f).hom U z)
+      _ = f.hom.app (op V) ≫ pointedEtaleGerm G (y ≫ h.hom) V w :=
+        (Category.assoc _ _ _).trans
+          (congrArg (fun a ↦ f.hom.app (op V) ≫ a) hG)
+      _ = pointedEtaleGerm F (y ≫ h.hom) V w ≫
+          (pointSmallEtale (y ≫ h.hom)).sheafFiber.map f :=
+        ((pointSmallEtale (y ≫ h.hom)).toPresheafFiber_naturality f.hom V w).symm
+      _ = _ :=
+        (congrArg (fun a ↦ a ≫ (pointSmallEtale (y ≫ h.hom)).sheafFiber.map f)
+          hF.symm).trans (Category.assoc _ _ _))
+
+private def automorphismModuleLiftedStalkNatIso (R : Type (u + 1)) [Ring R]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) :
+    automorphismModuleSheafPullback h R ⋙ (pointSmallEtale y).ulift.{u + 1}.sheafFiber ≅
+      (pointSmallEtale (y ≫ h.hom)).ulift.{u + 1}.sheafFiber :=
+  Functor.isoWhiskerLeft (automorphismModuleSheafPullback h R)
+      ((pointSmallEtale y).uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} R)) ≪≫
+    automorphismModuleStalkNatIso h R y ≪≫
+      ((pointSmallEtale (y ≫ h.hom)).uliftSheafFiberIso.{u + 1}
+        (ModuleCat.{u + 1} R)).symm
+
+private theorem automorphism_transition_conjugate {R : Type (u + 1)} [CommRing R]
+    {A B C D : ModuleCat.{u + 1} R} (I : Ideal R) (f : A ⟶ B) (g : C ⟶ D)
+    (e : A ≅ C) (d : B ≅ D) (w : f ≫ d.hom = e.hom ≫ g)
+    (hg : Function.Surjective g.hom) (hkg : LinearMap.ker g.hom = I • ⊤) :
+    Function.Surjective f.hom ∧ LinearMap.ker f.hom = I • ⊤ := by
+  have hw (x : A) : d.hom (f x) = g (e.hom x) :=
+    congrArg (fun k : A ⟶ D ↦ k x) w
+  constructor
+  · intro b
+    obtain ⟨c, hc⟩ := hg (d.hom b)
+    refine ⟨e.inv c, d.toLinearEquiv.injective ?_⟩
+    change d.hom (f (e.inv c)) = d.hom b
+    rw [hw]
+    exact (congrArg g (e.toLinearEquiv.apply_symm_apply c)).trans hc
+  · have hk : LinearMap.ker f.hom = (LinearMap.ker g.hom).comap e.hom.hom := by
+      ext x
+      change f x = 0 ↔ g (e.hom x) = 0
+      rw [← hw]
+      constructor
+      · intro hx
+        rw [hx, map_zero]
+      · intro hx
+        apply d.toLinearEquiv.injective
+        exact hx.trans (map_zero d.hom.hom).symm
+    have he : LinearMap.ker e.hom.hom = ⊥ :=
+      LinearMap.ker_eq_bot.mpr (show Function.Injective e.hom.hom from
+        e.toLinearEquiv.injective)
+    rw [hk, hkg,
+      Submodule.comap_smul_top_of_surjective I e.hom.hom e.toLinearEquiv.surjective,
+      he, sup_bot_eq]
+
 variable (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)]
@@ -160,7 +317,20 @@ Thus each stalk transition is conjugate to the old transition. Surjectivity and 
 specified uniformizer-power kernel are unchanged. -/
 theorem adicIntegralAutomorphismPullback_isLisse (F : LisseIntegralSheaf l E Y) :
     IsLisseIntegralDiagram l E Y ((adicIntegralAutomorphismPullback h l E).obj F.obj) := by
-  sorry
+  rcases F.property with ⟨hfinite, hann, htrans⟩
+  refine ⟨fun n ↦ automorphismModuleSheafPullback_isFiniteLocallyConstant h _ _
+    (hfinite n), ?_, ?_⟩
+  · intro n U
+    exact hann n ((automorphismEtaleReindex h).obj U)
+  · intro Ω _ _ y n
+    let t := F.obj.map (homOfLE (Nat.le_succ n)).op
+    let N := automorphismModuleLiftedStalkNatIso h
+      (Padic.coefficientExtensionIntegers l E) y
+    exact automorphism_transition_conjugate
+      ((Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+        Set (Padic.coefficientExtensionIntegers l E))) ^ (n + 1))
+      _ _ (N.app (F.obj.obj (op (n + 1)))) (N.app (F.obj.obj (op n)))
+      (N.hom.naturality t) (htrans Ω (y ≫ h.hom) n).1 (htrans Ω (y ≫ h.hom) n).2
 
 /-- Pullback of integral lisse systems and compatible families of their morphisms.
 Source: Weil II (1.1.1) b) (blueprint: def-wf-lisse-adic-automorphism-pullback). -/
@@ -207,7 +377,8 @@ Proof: take the object clause of the existence theorem specifying this functor. 
 theorem lisseRationalAutomorphismPullbackObjEq (F : LisseRationalSheaf l E Y) :
     (lisseRationalAutomorphismPullback h l E).obj F =
       lisseRationalAutomorphismPullbackObj h l E F :=
-  by sorry
+  by
+    exact (lisseRationalAutomorphismPullback_exists h l E).choose_spec.choose F
 
 section Fibres
 variable {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
@@ -231,7 +402,25 @@ theorem lisseIntegralAutomorphismFiberIso_exists (F : LisseIntegralSheaf l E Y) 
           (pointSmallEtale y).ulift.{u + 1}.sheafFiber) (op n) ≫
         (automorphismModuleLiftedStalkIso h (Padic.coefficientExtensionIntegers l E)
           (F.obj.obj (op n)) y).hom := by
-  sorry
+  let e := Functor.isoWhiskerLeft F.obj
+    (automorphismModuleLiftedStalkNatIso h (Padic.coefficientExtensionIntegers l E) y)
+  let φ : lisseIntegralFiber l E Y y
+      ((lisseIntegralAutomorphismPullback h l E).obj F) ≅
+      lisseIntegralFiber l E Y (y ≫ h.hom) F := HasLimit.isoOfNatIso e
+  have hφ : ∀ n : ℕ, φ.hom ≫
+      limit.π (F.obj ⋙ (pointSmallEtale (y ≫ h.hom)).ulift.{u + 1}.sheafFiber) (op n) =
+      limit.π (((lisseIntegralAutomorphismPullback h l E).obj F).obj ⋙
+        (pointSmallEtale y).ulift.{u + 1}.sheafFiber) (op n) ≫
+      (automorphismModuleLiftedStalkIso h (Padic.coefficientExtensionIntegers l E)
+        (F.obj.obj (op n)) y).hom := by
+    intro n
+    exact HasLimit.isoOfNatIso_hom_π e (op n)
+  refine ⟨φ, hφ, ?_⟩
+  intro ψ hψ
+  apply Iso.ext
+  apply limit.hom_ext
+  intro n
+  exact (hψ n.unop).trans (hφ n.unop).symm
 
 /-- The unique inverse-limit fibre identification.
 Source: Weil II (1.1.1) b) (blueprint: def-wf-lisse-adic-automorphism-pullback). -/
@@ -401,7 +590,13 @@ theorem lisseCoefficientPairAutomorphismPullback_inverts :
     (lisseCoefficientCocartesian l Y K).IsInvertedBy
       (lisseCoefficientPairAutomorphismPullback h l K ⋙
         (lisseCoefficientCocartesian l Y K).Q) := by
-  sorry
+  intro F G f hf
+  have : IsIso f.fiber := hf
+  apply (lisseCoefficientCocartesian l Y K).Q_inverts
+  change IsIso (((automorphismLisseCoefficientTransformation h l K).naturality
+    f.base.toLoc).inv.toNatTrans.app F.fiber ≫
+    ((automorphismLisseCoefficientTransformation h l K).app ⟨G.base⟩).toFunctor.map f.fiber)
+  infer_instance
 
 /-- Algebraic-coefficient pullback, constructed by the localization universal property.
 On a common finite extension its morphisms are exactly the finite-stage pullback, with
@@ -430,7 +625,11 @@ cancel, leaving precisely the displayed pair. -/
 theorem lisseAlgebraicAutomorphismPullback_obj (F : LisseAlgebraicSheaf l Y K) :
     (lisseAlgebraicAutomorphismPullback h l K).obj F =
       lisseAlgebraicAutomorphismPullbackObj h l K F := by
-  sorry
+  let P := lisseAlgebraicPair l Y K F
+  have he := (automorphismLisseCoefficientTransformation_exists h l K).choose_spec.1 P.base
+  have ho := congrArg (fun T ↦ T.obj P.fiber) he
+  exact congrArg (fun x ↦ (lisseCoefficientCocartesian l Y K).Q.obj
+    { base := P.base, fiber := x }) ho
 
 variable {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
 
@@ -452,7 +651,20 @@ transports cancel, so the fibre definition is the displayed tensor at that stage
 theorem lisseAlgebraicAutomorphismFiberAtStage_eq (F : LisseAlgebraicSheaf l Y K) :
     lisseAlgebraicFiber l Y K y ((lisseAlgebraicAutomorphismPullback h l K).obj F) =
       lisseAlgebraicAutomorphismFiberAtStage h l K y F := by
-  sorry
+  rw [lisseAlgebraicAutomorphismPullback_obj]
+  let P := lisseAlgebraicPair l Y K F
+  let e := (lisseCoefficientDiagramData l Y K).obj_eq P.base
+  have he : ∀ x : LisseRationalSheaf l P.base.val Y,
+      (eqToHom e).toFunctor.obj ((eqToHom e.symm).toFunctor.obj x) = x := by
+    intro x
+    exact congrArg (fun T ↦ T.toFunctor.obj x) (eqToHom_trans e.symm e)
+  change ModuleCat.of K (TensorProduct P.base.val K
+    (lisseRationalFiber l P.base.val Y y
+      ((eqToHom e).toFunctor.obj ((eqToHom e.symm).toFunctor.obj
+        ((lisseRationalAutomorphismPullback h l P.base.val).obj
+          (lisseCoefficientPairModel l Y K P)))))) = _
+  rw [he]
+  rfl
 
 /-- Algebraic fibre transport is the identity on K tensored with the rational fibre
 transport, at the unchanged finite coefficient stage.

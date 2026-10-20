@@ -18748,3 +18748,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:47 L: merged deliver/B5/Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricPullback (stage 3; reviewer PASS; first push; landing 20261020T174723-L-784854 (proof); batch 20261020T174710; modules 1; new nodes 0; change records: coord/changes/rectangle-ordinary-geometric-pullback.md)
 - 17:47 L: merged deliver/C2/Sheaf.AlgebraicGeometry.AmplePositiveTensorPower (stage 3; reviewer PASS; first push; landing 20261020T174725-L-785191 (proof); batch 20261020T174710; modules 1; new nodes 0)
 - 17:47 L: merged deliver/C6/Sheaf.AlgebraicGeometry.CohomologyFiniteExtension (stage 3; reviewer PASS; first push; landing 20261020T174727-L-785661 (proof); batch 20261020T174710; modules 1; new nodes 0)
+- 17:47 L: merged deliver/C9/Sheaf.Paper.LisseAdicAutomorphismPullback (stage 3; reviewer PASS; first push; landing 20261020T174729-L-786266 (proof); batch 20261020T174710; modules 1; new nodes 0)
