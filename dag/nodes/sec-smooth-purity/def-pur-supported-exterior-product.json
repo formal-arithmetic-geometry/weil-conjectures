@@ -47,9 +47,61 @@
   "def-kun-kunneth-map",
   "lem-weil-pbc-geometric-point-pullback-stalk"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Prove supported-coefficient exactness using the exact constant-sheaf and closed-direct-image APIs. The unit for a closed immersion is epic: its cokernel restricts to zero on both the closed and open parts, hence vanishes. Therefore the coefficient quotient is epic.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md",
+    "place": "Supported section pairing, signed totalization, and K-flat derivation; implemented using existing Mathlib and adopted source-library APIs."
+   }
+  },
+  {
+   "text": "Identify global sections of the sheaf of supported sections with the kernel of restriction. Compose the constant-sheaf/global-sections adjunction on the closed scheme with the closed-direct-image/exceptional-inverse-image adjunction and transport through this kernel isomorphism. The terminal-object global-sections comparison gives the required quotient normalization; epimorphic quotients determine the counit and hence the adjunction uniquely.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md",
+    "place": "Supported section pairing, signed totalization, and K-flat derivation; implemented using existing Mathlib and adopted source-library APIs."
+   }
+  },
+  {
+   "text": "The fibre-product map of the two closed immersions is closed. The ordinary tensor target vanishes off the product support by the open-closed detection theorem and geometric-point factorization. Factor the constant tensor map uniquely through the closed quotient. Epimorphic quotient cancellation proves naturality in both module variables.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md",
+    "place": "Supported section pairing, signed totalization, and K-flat derivation; implemented using existing Mathlib and adopted source-library APIs."
+   }
+  },
+  {
+   "text": "Package the ordinary pairing as a bifunctor natural transformation. Apply HomologicalComplex.mapBifunctorComparison to construct its signed total-complex map. The map on each summand is the ordinary pairing followed by the target summand inclusion; preservation of coproducts and summand extensionality give uniqueness.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md",
+    "place": "Supported section pairing, signed totalization, and K-flat derivation; implemented using existing Mathlib and adopted source-library APIs."
+   }
+  },
+  {
+   "text": "Closed direct image preserves flatness by the open-closed partition of geometric points, the inverse-image/point comparison, and conservativity. Thus the second projected coefficient functor preserves flat objects. Functorial flat resolutions produce a left derivability structure for complexes whose second image is K-flat. The tensor localization counit is invertible on these models, so the existing two-variable localization universal property gives the unique natural derived comparison with its equation on every complex model. Retain the signed-total eqToHom localization factor explicitly and form the original adjoint exterior product from the two evaluation counits.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md",
+    "place": "Supported section pairing, signed totalization, and K-flat derivation; implemented using existing Mathlib and adopted source-library APIs."
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "group": "X3",
+  "date": "2026-10-21",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md",
+  "place": "All seven existing holes are proved with Mathlib and adopted source APIs; no new holed dependency. The source diagram and unit route are preserved."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -197,7 +249,26 @@
    "AlgebraicGeometry.Etale.supportedCoefficientTensorDerived",
    "AlgebraicGeometry.Etale.supportedFirstEvaluation",
    "AlgebraicGeometry.Etale.supportedSecondEvaluation",
-   "AlgebraicGeometry.Etale.supportedExteriorProduct"
+   "AlgebraicGeometry.Etale.supportedExteriorProduct",
+   "AlgebraicGeometry.Etale.search",
+   "AlgebraicGeometry.Etale.supportedComplexTensor_eq",
+   "AlgebraicGeometry.Etale.supportedCoefficients_isLeftAdjoint",
+   "AlgebraicGeometry.Etale.supportedCoefficientTensorNatTrans",
+   "AlgebraicGeometry.Etale.supportedComplexComparisonHom",
+   "AlgebraicGeometry.Etale.supportedComplexComparisonCondition",
+   "AlgebraicGeometry.Etale.supportedComplexComparisonNatTrans",
+   "AlgebraicGeometry.Etale.supportedComplexComparison",
+   "AlgebraicGeometry.Etale.supportedDerivedComparisonHom",
+   "AlgebraicGeometry.Etale.supportedDerivedComparisonCondition",
+   "AlgebraicGeometry.Etale.supportedDerivedComparisonApply",
+   "AlgebraicGeometry.Etale.supportedSchemeComplexHom",
+   "AlgebraicGeometry.Etale.supportedSchemeComplexComparison",
+   "AlgebraicGeometry.Etale.supportedSchemeComplexComparison_spec",
+   "AlgebraicGeometry.Etale.supportedSchemeDerivedHom",
+   "AlgebraicGeometry.Etale.supportedSchemeDerivedCondition",
+   "AlgebraicGeometry.Etale.supportedSchemeDerivedApply",
+   "AlgebraicGeometry.Etale.supportedHasSheafify",
+   "AlgebraicGeometry.Etale.supportedHasWeakSheafify"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/SupportedExteriorProduct.lean",
   "statement": "def supportedExteriorProduct (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) : (supportedSectionsDerived A i).obj K ⊗ (supportedSectionsDerived A j).obj L ⟶ (supportedSectionsDerived A (supportedProductImmersion f g i j)).obj (externalProduct (ModuleCat.{u + 1} A) f g K L)",
@@ -205,7 +276,7 @@
   "by": "N4",
   "date": "2026-10-16",
   "existing": false,
-  "note": "The dependency has no recorded Lean declaration. This module constructs the canonical supported product as the adjoint of the coefficient tensor comparison followed by pulled-back support evaluation counits. All choices are uniquely normalized on ordinary quotient sections and signed total-complex representatives. The unbounded construction restricts to the source bounded-below case."
+  "note": "The supported product is the adjoint of the uniquely normalized coefficient tensor comparison and the pulled-back evaluation counits. X3 proved all seven original construction obligations with no new holes; generic and variable-scheme interfaces share the existing signed tensors before specialization, retaining both the summand and complex-localization normalizations."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
@@ -235,5 +306,15 @@
   "group": "Q62",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-856b3850f (reviewer sub-agent of L); spot-checked: I read the whole delivery against the current blueprint main-20261015 sk-prop-an/def-pur-supported-exterior-product.md (order 2282), the older master version (order 1938) and the statements of all 32 cited nodes. The hypotheses match the source one for one: algebraically closed k, separated finite-type X and Y, closed Z and W, any finite commutative A, K and L bounded below with K⊠L bounded below, and the tensor source in unbounded D(A). Nothing is weakened. Construction checks: (1) the product immersion has kernel I⊗C+B⊗J, and its complement is the union of the two pulled-back opens. (2) C_a=a_*M_D with e_a the cokernel map from lem-weil-pbc-open-closed-short-exact (module clause), and Hom(C_aM,G)=Hom_A(M,Γ_D G) via lem-weil-pbc-extension-by-zero-adjunction, with a normalization that fixes the bijection. (3) A closed immersion has geometric fibres that are one point or empty, so C_a has stalks M or 0 and is exact. The derived adjunction comes from lem-pc-derived-adjoint-functors, with K-injective resolutions for RΓ_D, and on D+ this agrees with Stacks 09XP (etale-cohomology.tex section-cohomology-support). (4) θ factors uniquely because its target vanishes on (X∖Z)×Y and on X×(Y∖W). The naturality identities and the sign (−1)^r are correct. (5) Stalks show the coefficient complexes and their inverse images are K-flat with flat terms, so lem-weil-pbc-site-derived-tensor-descent applies. (6) The transpose has the correct target, and on sections it sends a⊗b to p*a⊗q*b. Forgetting support works by the mate of e_a. Edge cases tested: empty support, full support (gives the ordinary product, as used by lem-pur-kunneth-supported), Spec k, the zero ring, Z/2 over Z/4, nonreduced Z. There are no new nodes. The rg duplicate search found only the ordinary exterior tensors pur7710-*, which are not this map, and def-pur-proetale-supported-exterior-product, the pro-étale analogue, which cites this item. No SGA source is used, there is no cycle, and no tool_uses are needed. FIX: the forgetting-support clause compared with def-kun-kunneth-map in D((Spec k)_et,A) without citing its identification with D(A). I added lem-weil-pbc-geometric-point-pullback-stalk (1), the global-sections equivalence, with the identifications Rf_*K↔RΓ(X,K) and constant sheaf↔f⁻¹, and added it to stmt_deps; only the statement and stmt_deps change. Maintenance note: the maintainer-owned source field still names master order 1938 (current is main-20261015 order 2282), so the report's claim that it was updated is wrong. The unit binding sk-prop-a1-kummer vs sk-prop-an was reported by the worker.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261020T211856-L-3513030",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
