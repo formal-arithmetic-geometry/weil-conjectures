@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-public import Mathlib.Algebra.Homology.QuasiIso
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentationPositive
 import Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentationZero

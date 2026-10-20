@@ -5,11 +5,7 @@ Authors: SHEAF group NI
 -/
 module
 
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.Algebra.Category.ModuleCat.Abelian
-public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Flat.Basic
-public import Mathlib.RingTheory.Noetherian.Basic
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
 

@@ -8,7 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
 public import Sheaf.Paper.CechCupProductCore
 public import Sheaf.Paper.ModuleCupResolutionData
-public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 import Sheaf.AlgebraicGeometry.PicardModuleCechExternalPairing

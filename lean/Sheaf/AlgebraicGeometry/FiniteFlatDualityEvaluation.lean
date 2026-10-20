@@ -6,7 +6,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -15,7 +14,6 @@ import Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom
 import Sheaf.AlgebraicGeometry.FiniteRestrictionDerivedRightAdjoint
 import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
 import Sheaf.AlgebraicGeometry.FiniteDualityDegreeZeroCounitAction
-import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDerivedHom
 import Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree
 

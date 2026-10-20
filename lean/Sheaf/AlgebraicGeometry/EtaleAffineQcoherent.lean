@@ -5,8 +5,6 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift

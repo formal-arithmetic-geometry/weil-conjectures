@@ -7,9 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
-public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 import Sheaf.Algebra.Homology.KFlatResolution
-import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 
 /-! # K-flat cone representatives of localized homotopy triangles
 

@@ -6,7 +6,6 @@ Authors: SHEAF group E2
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 

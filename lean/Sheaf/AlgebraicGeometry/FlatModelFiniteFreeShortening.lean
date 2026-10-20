@@ -6,7 +6,6 @@ Authors: SHEAF group F2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import Mathlib.AlgebraicGeometry.Restrict
 import WeilConjectures.AlgebraicGeometry.FlatModelFiniteFreeConstruction
 import Sheaf.AlgebraicGeometry.FlatModelFiniteFreeComparison
 

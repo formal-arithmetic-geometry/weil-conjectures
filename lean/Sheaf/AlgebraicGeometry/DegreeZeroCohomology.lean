@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # Cohomology of a sheaf placed in one degree
