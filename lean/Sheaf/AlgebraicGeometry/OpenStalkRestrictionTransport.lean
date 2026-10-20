@@ -6,7 +6,7 @@ Authors: SHEAF group T3
 module
 
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Transport of open-site stalk comparisons through further restriction
@@ -142,7 +142,7 @@ theorem exists_openStalk_restriction_transport
   -- Any family of comparisons works: descend its composite with a.inv along restriction.
   -- This avoids a separate coherence theorem for canonical germ comparisons.
   let e := fun (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U) ↦
-    (nonempty_openModuleStalkRestrictionComparison X U W hWU x hxU hxW).some
+    openModuleStalkRestrictionComparison X U W hWU x hxU hxW
   refine ⟨e, ?_⟩
   intro V hxV hVU a W hxW hWV hWU
   dsimp only

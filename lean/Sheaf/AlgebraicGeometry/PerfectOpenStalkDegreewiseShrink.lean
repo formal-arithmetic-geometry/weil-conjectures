@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkRetractHomEquality
-import Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 import Mathlib.Data.Int.Interval
 import Mathlib.AlgebraicGeometry.AffineScheme
 public import Sheaf.Paper.DerivedHomMayerVietoris
@@ -165,7 +165,7 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
     (restriction_comp_iso X U W V hWU hVW) (.up ℤ)
   let C := D.symm
   let k := fun n : ℤ ↦ (C.app P).hom.f n ≫ B.map (g n) ≫ (C.app Q).inv.f n
-  obtain ⟨c⟩ := nonempty_openModuleStalkRestrictionComparison X W V hVW x hxW hxV
+  let c := openModuleStalkRestrictionComparison X W V hVW x hxW hxV
   let c' := NatIso.mapHomologicalComplex c (.up ℤ)
   let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)
   let eV := Functor.isoWhiskerRight C S ≪≫
