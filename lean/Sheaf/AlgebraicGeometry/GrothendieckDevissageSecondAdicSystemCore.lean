@@ -1,6 +1,8 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.CategoryTheory.Functor.Currying
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLift
 import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTorsion
 

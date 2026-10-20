@@ -5,6 +5,8 @@ Authors: SHEAF contributors
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 import all Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 

@@ -5,8 +5,10 @@ Authors: SHEAF group B2
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import Sheaf.Paper.IntegralConstructibleSerre
 public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineTraceConstruction
 import Sheaf.AlgebraicGeometry.AffineTraceLineLocalization
+import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-!
 # AffineTraceLinePurity

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.StandingExceptionalComposition
 public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
+import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-!
 # Finite-coefficient exceptional composition

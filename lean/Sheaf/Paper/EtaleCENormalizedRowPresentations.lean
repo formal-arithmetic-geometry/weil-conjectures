@@ -15,6 +15,7 @@ import all WeilConjectures.CategoryTheory.SecondFiltrationRowCohomology
 import all WeilConjectures.CategoryTheory.SecondFiltrationSignedFirstPage
 import all WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.Algebra.Homology.KInjectiveResolution
+import Mathlib.CategoryTheory.CommSq
 
 /-! # Prescribed normalized CE presentations
 

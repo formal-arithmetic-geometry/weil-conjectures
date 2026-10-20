@@ -6,6 +6,7 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 
 /-! # Counit-normalized affine derived tensor source

@@ -6,9 +6,16 @@ Authors: SHEAF group Q22
 module
 
 public import Sheaf.Paper.DualityPairing
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import Sheaf.Paper.FiniteFieldFiber
+public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.SixFunctors.EtaleHomThickLocus
+import Mathlib.Algebra.CharP.CharAndCard
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison

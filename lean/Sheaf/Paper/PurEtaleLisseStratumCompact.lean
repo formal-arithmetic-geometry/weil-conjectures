@@ -5,14 +5,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.CategoryTheory.CompactObject
+public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.OpenImmersion
 
 import Sheaf.Paper.PurEtaleClosedRightAdjointCoproducts
 import Sheaf.Paper.PurEtaleLisseDualizable
 import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+import WeilConjectures.SixFunctors.Finite.Exact
 import Sheaf.CategoryTheory.DerivedModuleRankOneCompact
+import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 

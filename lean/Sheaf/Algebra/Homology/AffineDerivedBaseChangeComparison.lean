@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
 import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 import Sheaf.Algebra.Homology.AffineTensorCohomologyLifts

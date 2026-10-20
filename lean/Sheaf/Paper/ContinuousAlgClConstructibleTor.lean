@@ -7,7 +7,9 @@ module
 
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import Mathlib.NumberTheory.Padics.Complex
+public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.Paper.ContinuousAlgClLocalFree
+import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import all Sheaf.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import all Sheaf.Paper.CondensedFiniteFreeTensorExact
 import all Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport

@@ -7,11 +7,22 @@ module
 
 public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
 public import Sheaf.AlgebraicGeometry.SfFiniteOpenExtensionBaseChange
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.Refinement
+public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 import Sheaf.AlgebraicGeometry.CompactSupportProperFactor
 import Sheaf.AlgebraicGeometry.CompactSupportOpenFactor
 import Sheaf.AlgebraicGeometry.OpenSiteEvaluationCounit
+import Sheaf.Paper.ComparisonPullbackExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.Compactification.RefinementCategory
 
 /-! # Compactified site comparison and open restriction
 

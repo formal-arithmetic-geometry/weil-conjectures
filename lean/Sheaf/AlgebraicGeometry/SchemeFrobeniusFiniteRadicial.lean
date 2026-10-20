@@ -6,6 +6,8 @@ Authors: SHEAF group NH
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeFrobeniusGeometricFiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 
 /-!

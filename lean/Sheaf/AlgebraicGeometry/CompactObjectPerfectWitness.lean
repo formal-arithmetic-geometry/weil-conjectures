@@ -1,5 +1,7 @@
 module
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
 public import WeilConjectures.CategoryTheory.CompactObject
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactRepresentatives

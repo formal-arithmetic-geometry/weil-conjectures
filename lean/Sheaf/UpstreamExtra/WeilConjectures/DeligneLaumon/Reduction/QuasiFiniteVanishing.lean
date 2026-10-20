@@ -1,7 +1,13 @@
 module
 
+public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.WeilSheaf.FiniteLowerStar
+public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.LowerShriek
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 public import Sheaf.RingTheory.FiniteWContractible
 
 /-! Declarations of ours that lived in the upstream file

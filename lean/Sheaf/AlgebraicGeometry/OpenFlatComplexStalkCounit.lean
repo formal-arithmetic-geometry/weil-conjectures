@@ -10,6 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkConditi
 import all Sheaf.Algebra.Homology.StalkKFlatTensorHomology
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 
 /-! # Local comparison factors
 

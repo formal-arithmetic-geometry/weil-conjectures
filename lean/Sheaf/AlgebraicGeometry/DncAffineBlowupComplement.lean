@@ -5,7 +5,10 @@ Authors: SHEAF group N9
 -/
 module
 
+public import WeilConjectures.Blowup.Affine.ChartAlgebra
+public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.StrictTransformChartModel
+import WeilConjectures.Blowup.FiniteDegree.Algebra
 
 /-!
 # The affine deformation chart as a strict-transform complement

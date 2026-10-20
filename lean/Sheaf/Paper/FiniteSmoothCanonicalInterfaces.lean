@@ -5,6 +5,9 @@ Authors: SHEAF group Q07
 -/
 module
 
+public import Sheaf.Paper.PurityNormalCone
+public import Sheaf.AlgebraicGeometry.VectorBundleZeroSection
+public import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 public import Sheaf.AlgebraicGeometry.ReesConeNormalization
 import Sheaf.AlgebraicGeometry.ReesConeNormalizedExistence
 import Sheaf.AlgebraicGeometry.ConormalConeHomExt

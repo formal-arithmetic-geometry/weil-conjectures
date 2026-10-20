@@ -1,6 +1,8 @@
 module
 
 public import WeilConjectures.RingTheory.GlobalDimension
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Mathlib.CategoryTheory.Abelian.Projective.Dimension
 import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
 
 @[expose] public section

@@ -6,11 +6,15 @@ Authors: SHEAF group U4
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.KFlatPullback
 import Sheaf.AlgebraicGeometry.KFlatStalkResidueCohomology
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 import Mathlib.Algebra.Category.ModuleCat.Descent
+import Mathlib.CategoryTheory.Adjunction.Additive
+import WeilConjectures.AlgebraicGeometry.DerivedPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Scalar extension of derived fibre cohomology
 

@@ -6,11 +6,16 @@ Authors: SHEAF group Q109
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
+public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.Algebra.Homology.BifunctorFlip
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+import Mathlib.CategoryTheory.EqToHom
 import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients

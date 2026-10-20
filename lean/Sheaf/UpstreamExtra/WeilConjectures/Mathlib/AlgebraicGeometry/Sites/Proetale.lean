@@ -1,6 +1,13 @@
 module
 
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 
 /-! Declarations of ours that lived in the upstream file
 `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale` (moved out by the scheduled sync,

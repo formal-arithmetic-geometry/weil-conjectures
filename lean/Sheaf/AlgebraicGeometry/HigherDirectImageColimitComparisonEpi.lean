@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawAffineImageRep
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Local surjectivity of the higher-image colimit comparison
 

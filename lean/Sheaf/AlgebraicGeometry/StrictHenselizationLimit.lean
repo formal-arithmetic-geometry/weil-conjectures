@@ -6,10 +6,21 @@ Authors: SHEAF group N7
 module
 
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+public import Mathlib.AlgebraicGeometry.Over
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.ZetaSeries
 import Sheaf.AlgebraicGeometry.StrictLocalAlgebraicResidueModels
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
+import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
+import Mathlib.AlgebraicGeometry.Properties
+import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 import WeilConjectures.PointCount
 
 /-! # Strict henselization as a limit of smaller-dimensional models

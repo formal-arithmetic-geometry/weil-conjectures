@@ -1,5 +1,8 @@
 module
 
+public import WeilConjectures.AlgebraicGeometry.HypercoverCohomology
+public import WeilConjectures.AlgebraicGeometry.HypercoverCohomologyColimit
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.AlgebraicTopology.SimplicialObject.ChainHomotopy
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import Sheaf.Paper.HypercoverCohomologyModule

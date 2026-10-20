@@ -5,6 +5,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Homology.KFlatClosure
 import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.CategoryTheory.AdditiveAdjunctionConeSquare

@@ -6,6 +6,9 @@ Authors: SHEAF group Q31
 module
 
 public import Sheaf.Paper.PurityDncComparisons
+public import Sheaf.Paper.PurityDncFamily
+public import Sheaf.Paper.PurityNormalCone
+import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 import WeilConjectures.EtaleCohomology.TateTwist.Normalized
 
 /-! # Deformation invariance of the section dualizing object

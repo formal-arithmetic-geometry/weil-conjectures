@@ -9,11 +9,17 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ope
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+public import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+public import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
+public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.Paper.ComparisonPullbackExact
+public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 
 /-!
 # Comparison preserves the canonical open tensor map

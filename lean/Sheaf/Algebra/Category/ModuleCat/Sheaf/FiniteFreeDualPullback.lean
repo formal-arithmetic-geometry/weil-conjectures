@@ -6,8 +6,11 @@ Authors: SHEAF group Q11
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
+public import Sheaf.CategoryTheory.SiteCoveringAxioms
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+public import Mathlib.CategoryTheory.Sites.CoverPreserving
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackExistsOfUniverses
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackPairingTransfer
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackDualFreeChart

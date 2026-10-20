@@ -5,8 +5,14 @@ Authors: SHEAF group NH
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+public import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
 import Sheaf.AlgebraicGeometry.EtaleSetDegreeZeroFlatBaseChange
 

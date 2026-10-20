@@ -6,6 +6,7 @@ Authors: SHEAF group D4
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.CategoryTheory.CoefficientPushCopowerCriterion
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis

@@ -1,6 +1,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import Mathlib.AlgebraicGeometry.Restrict
 import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.Algebra.Homology.KFlatPullback

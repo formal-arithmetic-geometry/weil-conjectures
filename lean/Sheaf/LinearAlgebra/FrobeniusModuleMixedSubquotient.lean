@@ -5,6 +5,7 @@ Authors: SHEAF
 -/
 module
 
+public import Mathlib.Algebra.Module.Submodule.Equiv
 public import Sheaf.LinearAlgebra.FrobeniusModuleWeights
 import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 import Sheaf.LinearAlgebra.FrobeniusPunctualBoundMixed

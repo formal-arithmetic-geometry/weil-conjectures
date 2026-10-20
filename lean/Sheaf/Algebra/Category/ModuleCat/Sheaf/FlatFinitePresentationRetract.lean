@@ -8,7 +8,9 @@ module
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # Finite relations in a flat module sheaf

@@ -6,12 +6,15 @@ Authors: SHEAF group K2
 module
 
 public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineLocalCohomology
 import WeilConjectures.AlgebraicGeometry.PicardExternalCoefficientsPushforwardCoproduct
 import Sheaf.Paper.HigherDirectImagePresheaf
+import Mathlib.Algebra.Category.Grp.Zero
+import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Direct images of an external tensor product with an acyclic first factor
 

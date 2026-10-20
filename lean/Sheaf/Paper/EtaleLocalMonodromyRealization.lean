@@ -6,6 +6,8 @@ Authors: SHEAF group Q20
 module
 
 public import Sheaf.Paper.EtaleMonodromyRealizationData
+public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.Paper.EtaleLocalMonodromyRealizationBase
 import Sheaf.Paper.EtaleLocalMonodromyRealizationLocal
 

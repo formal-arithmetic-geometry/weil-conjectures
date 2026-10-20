@@ -7,8 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Group.Affine
 public import Mathlib.RingTheory.HopfAlgebra.MonoidAlgebra
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 
+import Mathlib.Algebra.CharP.Lemmas
 
 /-!
 # Multiplicative, additive, roots-of-unity and Frobenius-kernel group schemes

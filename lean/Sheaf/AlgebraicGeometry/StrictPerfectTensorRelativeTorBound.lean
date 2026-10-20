@@ -8,10 +8,16 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.KFlat
+public import Mathlib.Algebra.Homology.Single
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorModel
 import Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison
+import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import WeilConjectures.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 
 /-! # The relative Tor bound on a strictly perfect chart
 

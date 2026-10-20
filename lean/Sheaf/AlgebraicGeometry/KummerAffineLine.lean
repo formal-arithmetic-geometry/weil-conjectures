@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.KummerLineGeometry
 import Sheaf.AlgebraicGeometry.KummerFiniteFreeComparison
 import Sheaf.AlgebraicGeometry.KummerRootLineComputation
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 
 /-!
 # Kummer computations on the affine and punctured lines

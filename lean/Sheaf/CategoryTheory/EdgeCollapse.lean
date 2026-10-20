@@ -6,6 +6,8 @@ module
 
 public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
+import WeilConjectures.CategoryTheory.Abelian.Filtration
+import WeilConjectures.CategoryTheory.ExactCouple
 
 /-!
 # Edge collapse and edge maps
