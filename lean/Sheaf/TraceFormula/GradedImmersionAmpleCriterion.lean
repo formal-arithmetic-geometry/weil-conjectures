@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 public import Sheaf.TraceFormula.SpaceLineModuleProjMap
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.AmplePositiveTensorPower
+import WeilConjectures.AlgebraicGeometry.AmplePositiveTensorPower
 import Sheaf.AlgebraicGeometry.ProjCanonicalMapTwistComparison
 import Sheaf.TraceFormula.ProjQcOpenTwistAmple
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
@@ -31,7 +31,6 @@ Constructions, Tag 01O9 (blueprint: lem-trf-graded-immersion-ample-criterion).
 @[expose] public section
 
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u
 

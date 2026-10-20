@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Unpack IsAmple, retain compactness, and at a point choose n > 0, a global section s of M.tensorPow n and its affine nonvanishing open U. Form a = tensorPowSection (homOfGlobalSection (M.tensorPow n) s) k. The existing tensorPowMulIso, its inverse, and Nat.mul_comm give e : (M.tensorPow n).tensorPow k ≅ (M.tensorPow k).tensorPow n. Evaluate a followed by e.hom at one to obtain t.",
+   "text": "Retain compactness and choose n > 0, a section s of M.tensorPow n, and its affine nonvanishing open U at the point. Form f = homOfGlobalSection s and t = tensorPowSectionOne f k. The tensorPowMulIso isomorphisms and Nat.mul_comm identify (M.tensorPow n).tensorPow k with (M.tensorPow k).tensorPow n.",
    "uses": [
     "def-sc-invertible-module",
     "def-weil-pbc-ample-invertible-module"
@@ -22,28 +22,31 @@
    "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-section-nonvanishing-zero-locus] to identify both nonvanishing loci with complements of zero-locus supports. The proved private helper nonvanishingLocus_app_one identifies homOfGlobalSection of evaluation at one with the original morphism, using unitHomEquiv injectivity and naturality. Apply the existing proved source theorem Hom.zeroLocus_eq_of_arrowIso to remove e, then compl_support_zeroLocus_tensorPowSection (WeilConjectures.AlgebraicGeometry.Modules.AffineComplement) with hk to identify the two supports. Thus nonvanishingLocus t = nonvanishingLocus s.",
+   "text": "Use the upstream private nonvanishing_of_frame helper: the stalk of a local free generator freely generates, by bijective_smul_germ from [lem-weil-pbc-section-nonvanishing-zero-locus], so a section with coefficient a is nonvanishing precisely when the germ of a is a unit. The proved exists_tensorPowSectionOne_eq_pow_smul gives coefficient a^k for t. Restriction compatibility, map_pow and isUnit_pow_iff hk.ne' show nonvanishingLocus t = nonvanishingLocus s.",
    "uses": [
     "lem-weil-pbc-section-nonvanishing-zero-locus"
    ],
    "elementary": false
   },
   {
-   "text": "Keep the original n, its positivity, and the affine open U. Transport each pointwise equality of membership through the equality of nonvanishing loci just proved. These witnesses and the original compactness prove IsAmple X (M.tensorPow k), including when X is empty.",
-   "uses": [],
-   "elementary": true
+   "text": "Transport t through the tensor-power isomorphism e. The upstream private nonvanishingLocus_iso from [lem-sc-ample-iso] preserves its locus. The original n, U and the transported section therefore witness ampleness at the point, retaining compactness. This is the existing complete upstream proof; the Sheaf copy is retired.",
+   "uses": [
+    "lem-sc-ample-iso"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module",
-  "lem-weil-pbc-section-nonvanishing-zero-locus"
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
+  "lem-sc-ample-iso"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/properties.tex",
   "place": "Lemma 01PT (lemma-ample-power-ample), forward implication; Definition 01PS",
-  "note": "S6: complete Lean proof using the existing proved positive-power zero-locus theorem and nonvanishing/zero-locus comparison; no new sorry."
+  "note": "S4 retirement: attach the existing complete upstream proof, using a local frame, unit detection of nonvanishing, positive powers, and isomorphism invariance; no new theorem or sorry."
  },
  "mathlib_searches": [
   {
@@ -93,13 +96,14 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AmplePositiveTensorPower",
-  "file": "lean/Sheaf/AlgebraicGeometry/AmplePositiveTensorPower.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AmplePositiveTensorPower",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AmplePositiveTensorPower.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_positive_tensorPow",
   "statement": "theorem isAmple_positive_tensorPow {X : Scheme.{u}} (M : X.Modules) [M.IsInvertible]\n    (hM : IsAmple X M) (k : ℕ) (hk : 0 < k) : IsAmple X (M.tensorPow k)",
   "branch": "sheaf-dag",
   "by": "H2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "S4, 2026-10-20: retire the duplicate Sheaf module in favour of the proved upstream twin; the public theorem has exactly the same signature. Its private nonvanishingLocus_app_one helper has no users outside the retired file."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -112,14 +116,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S6",
+  "reviewer": "C-08294",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261018T062912-L-676573",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T153021-L-2864227",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf copy vs upstream twin WeilConjectures.AlgebraicGeometry.AmplePositiveTensorPower (identical signature); delta vs passed head af33c0a1a = removal of set_option warn.sorry false only; 4 modules compile"
  },
  "lean_audit": {
   "master": {
