@@ -2,7 +2,7 @@
 
 92 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (32 clusters, 2266 modules)
+## Rework: quarantined by the upstream sync (33 clusters, 2266 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -13,6 +13,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
 | `Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalLocalizedHomGerm.lean:57:6: error: Application type mismatch: The argument | ((Scheme.strictHenselizationStructuralMap |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
+| `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
 | `Sheaf.Paper.GlobalTensorPullbackUnderivedData` | 1 |  | error: Sheaf/Paper/GlobalTensorPullbackUnderivedData.lean:6:0: error: import WeilConjectures.Algebra.Homology.KFlatPullback failed, environment already contains |
 | `Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport` | 1 |  | error: Sheaf/AlgebraicGeometry/EulerCharZeroDimSupport.lean:55:10: error(lean.unknownIdentifier): Unknown constant `AlgebraicGeometry.RingedSpace.IsCoherent` |  |
 | `Sheaf.AlgebraicGeometry.DerivedFiberCohomologyBaseChange` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedFiberCohomologyBaseChange.lean:6:0: error: object file '/home/ubuntu/weil-conjectures-sheaf/local/build/RW/Sheaf/Algebraic |
@@ -41,7 +42,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition` | 1 |  | error: Sheaf/AlgebraicGeometry/ProperDerivedDirectImageComposition.lean:6:0: error: object file '/home/ubuntu/weil-conjectures-sheaf/local/build/RW/Sheaf/Algebr |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/BaseChange/SmoothBaseChange.lean:1:0: error: import Sheaf.SixFunctors.ProEtale.BaseChange.Smooth |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 145 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 142 items.
 
 ## Stage 1: nodes to split (1)
 
