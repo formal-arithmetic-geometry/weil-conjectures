@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-ringed-refinement-formal-laws",
+ "kind": "statement",
+ "title": "Formal laws from the clopen compatibility calculation",
+ "statement": "theorem laws_of_clopen {m : Mode} {T : Scheme.{u}} {c : Coefficients m T}\n    {o : Calculus c} (sc : ScalarComparisons o) (ac : ScalarComposition o)\n    {p : Spatial o} {e : OpenComparisons p} (r : Refinements e)\n    (hc : HCompatible sc e) (hr : ResidualLaws sc ac r) : Laws sc ac r",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.7.6–6.7.7, compactification independence; agent ordinary-derived ring-sheaf coefficient supplement to the clopen-section refinement construction, not a theorem literally asserted in the paper."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-refinement-data",
+  "def-pur-ringed-refinement-construction"
+ ],
+ "proof": [
+  {
+   "text": "transpose h compatibility to obtain the square; naturality is naturality\nof the displayed left transformation. For a commuting coefficient square, express\neach successive mate as the direct mate using the coefficient cocycle, then use\ntransport along the equality of coefficient maps. The remaining equations are given.",
+   "uses": [
+    "lem-pur-refinement-coefficient-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7, compactification independence; agent ordinary-derived ring-sheaf coefficient supplement to the clopen-section refinement construction, not a theorem literally asserted in the paper."
+   }
+  },
+  {
+   "text": "The shifts of the two square composites follow from the generator shifts by whiskering and vertical composition. Insert the canonical functor associators to retain the specified composite shift structures, then simplify their components to identity maps.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-refinement-coefficient-mate"
+ ],
+ "proof_origin": {
+  "by": "B6 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Coefficient supplement: Formal laws from the clopen compatibility calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of sheaves commutes with the clopen section normalized proper open refinement mate on ordinary derived diagram categories",
+   "results": "8 hits: CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; CategoryTheory.sheafComposeNatTrans_fac; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; CategoryTheory.sheafComposeIso_hom_fac; CategoryTheory.RanIsSheafOfIsCocontinuous.fac'; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'",
+   "date": "2026-10-18",
+   "digest": "f31eefa7a6c65e02",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Adjunction",
+   "results": "8 hits: PresheafOfModules.sheafificationAdjunction; SheafOfModules.overMapPushforwardAdj; SheafOfModules.overPushforwardOverAdj; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-18",
+   "digest": "2d777c4a7cb6ca75",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*(scalar|Scalar|refinement)|refinement.*[Cc]oefficient",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On derived categories of sheaves of modules, coefficient extension preserves clopen refinement transposes, with naturality, composition, shifts and strict diagram realization",
+   "results": "DerivedCategory.instLinearShiftFunctorInt; DerivedCategory.instAdditiveShiftFunctorInt; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; SheafOfModules.pushforwardNatTrans; SheafOfModules.pushforwardComp; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "date": "2026-10-19",
+   "digest": "ba661c44181c110a",
+   "verdict": "No match for the normalized refinement statement. The hits supply standard shifts, ordinary module adjunctions and direct-image composition; these constituent APIs are used by the constructed formal glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedRefinementCoefficientSquare",
+  "date": "2026-10-20",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ringed-refinement-coefficient-square",
+   "place": "Formal laws from the clopen compatibility calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalRingedRefinementSquare",
+  "file": "lean/Sheaf/Paper/CanonicalRingedRefinementSquare.lean",
+  "declaration": "SheafOfModules.RingedRefinement.laws_of_clopen",
+  "statement": "theorem laws_of_clopen {m : Mode} {T : Scheme.{u}} {c : Coefficients m T}\n    {o : Calculus c} (sc : ScalarComparisons o) (ac : ScalarComposition o)\n    {p : Spatial o} {e : OpenComparisons p} (r : Refinements e)\n    (hc : HCompatible sc e) (hr : ResidualLaws sc ac r) : Laws sc ac r",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-20",
+  "declarations": [
+   "SheafOfModules.RingedRefinement.ResidualLaws",
+   "SheafOfModules.RingedRefinement.HCompatible",
+   "SheafOfModules.RingedRefinement.laws_of_clopen",
+   "SheafOfModules.RingedRefinement.BasicShifts",
+   "SheafOfModules.RingedRefinement.shifts_of_generators"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7646e",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051031-L-1537613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7646e",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051031-L-1537613",
+  "kind": "interface",
+  "note": "independent cc review: RingedRefinementData vs base item module (verbatim move, statement byte-identical); 3 sorry statements (core/clopen/finite) vs base Package/Laws/Shifts fields and node Steps 1-10; HCompatible vs Step 5 (*); axioms via scratch #print axioms; --all compile of 9 modules clean; no importers of the item in the clone"
+ }
+}

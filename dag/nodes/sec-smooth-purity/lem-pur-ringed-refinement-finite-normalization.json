@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-ringed-refinement-finite-normalization",
+ "kind": "statement",
+ "title": "Constant finite coefficients recover the strict tower refinement",
+ "statement": "theorem ringedRefinementFinite {T : Scheme.{u}} (P : Package .systems T)\n    (B : Type (u + 1)) [CommRing B] [Finite B] :\n    ∃ (e : ∀ W : Over T, FiniteRealization P B W) (k : FiniteComparison P B e),\n      FiniteNormalization P B e k",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.7.6–6.7.7, compactification independence; agent ordinary-derived ring-sheaf coefficient supplement to the clopen-section refinement construction, not a theorem literally asserted in the paper."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-refinement-data",
+  "def-pur-ringed-refinement-construction"
+ ],
+ "proof": [
+  {
+   "text": "the section-preserving diagram-site equivalence identifies strict constant\ncoefficient towers with module sheaves over the vertical constant ring. Inverse\nimage preserves that ring and its constant sections, so transport along the canonical\nconstant-ring isomorphism gives each FiniteRealization, with the stated scalar action.\nDirect image is precomposition on sections, giving ordinaryPush. Conjugating this\ncomparison by the fixed ordinary adjunctions gives ordinaryPull and its unit formula.\nLocalizing fixes pull and its cochain equation. The derived adjunction comparison\nthen fixes push and its unit/counit equations. The open unit fixes shriekIso. The three\nnormalized h factors become the strict-tower alpha: both are the open-unit base change,\nthe clopen projection, and open composition. Apply the proper-adjunction Hom bijection\nto identify their refinement mates, inserting the identity proper comparison. This is\nexactly FiniteNormalization and uses no detection of derived morphisms by evaluation.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7, compactification independence; agent ordinary-derived ring-sheaf coefficient supplement to the clopen-section refinement construction, not a theorem literally asserted in the paper."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "B6 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Coefficient supplement: Constant finite coefficients recover the strict tower refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized geometric scalar extension calculus exact inverse image open extension pro etale ring sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage; AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; StandardEtalePair.homEquiv_symm_apply; AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; Algebra.isOpen_etaleLocus; AlgebraicGeometry.Scheme.Hom.normalizationDesc; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul",
+   "date": "2026-10-19",
+   "digest": "349dd2866ae560e8",
+   "verdict": "No direct match; listed declarations do not construct this normalized geometric package."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-19",
+   "digest": "ef3654c89ecf172c",
+   "verdict": "No direct match; listed declarations do not construct this normalized geometric package."
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*[Cc]oefficient|[Cc]oefficient.*refinement",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No direct match; listed declarations do not construct this normalized geometric package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On derived categories of sheaves of modules, coefficient extension preserves clopen refinement transposes, with naturality, composition, shifts and strict diagram realization",
+   "results": "DerivedCategory.instLinearShiftFunctorInt; DerivedCategory.instAdditiveShiftFunctorInt; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; SheafOfModules.pushforwardNatTrans; SheafOfModules.pushforwardComp; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "date": "2026-10-19",
+   "digest": "ba661c44181c110a",
+   "verdict": "No match for the normalized refinement statement. The hits supply standard shifts, ordinary module adjunctions and direct-image composition; these constituent APIs are used by the constructed formal glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedRefinementCoefficientSquare",
+  "date": "2026-10-20",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ringed-refinement-coefficient-square",
+   "place": "Constant finite coefficients recover the strict tower refinement",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedRefinementFinite",
+  "file": "lean/Sheaf/Paper/RingedRefinementFinite.lean",
+  "declaration": "SheafOfModules.RingedRefinement.ringedRefinementFinite",
+  "statement": "theorem ringedRefinementFinite {T : Scheme.{u}} (P : Package .systems T)\n    (B : Type (u + 1)) [CommRing B] [Finite B] :\n    ∃ (e : ∀ W : Over T, FiniteRealization P B W) (k : FiniteComparison P B e),\n      FiniteNormalization P B e k",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7646e",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051031-L-1537613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7646e",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051031-L-1537613",
+  "kind": "interface",
+  "note": "independent cc review: RingedRefinementData vs base item module (verbatim move, statement byte-identical); 3 sorry statements (core/clopen/finite) vs base Package/Laws/Shifts fields and node Steps 1-10; HCompatible vs Step 5 (*); axioms via scratch #print axioms; --all compile of 9 modules clean; no importers of the item in the clone"
+ }
+}

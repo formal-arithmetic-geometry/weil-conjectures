@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-refinement-coefficient-mate",
+ "kind": "statement",
+ "title": "Counit transpose of a compatible coefficient refinement map",
+ "statement": "For adjunctions L₁ ⊣ R₁ and L₂ ⊣ R₂, functors S and T, and a natural transformation c : S ⋙ L₂ ⟶ L₁ ⋙ T, a commuting square c.app M ≫ T.map h₁ ≫ δ₁ = L₂.map δ₂ ≫ h₂ implies the corresponding square after transposing h₁ and h₂, with the mate of c and R₂.map δ₁.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.7.6–6.7.7, coefficient supplement, counit calculation used in the final refinement square"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the inverse Hom bijection for the second adjunction. Use right and left naturality of the two Hom equivalences to move δ₁ and δ₂ outside the transposes. The mate counit formula rewrites the middle term as L₂.map (S.map (adj₁.homEquiv h₁)) followed by c and the first counit. Naturality of c and functoriality of T combine the first counit with h₁, and the assumed commuting square gives the result.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7, explicit counit-transpose calculation"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "B6 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.7.6–6.7.7, explicit counit-transpose calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adjunction mate counit naturality compatible square",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates declarations used directly; no single theorem with the required four-arrow compatibility statement",
+   "date": "2026-10-20",
+   "verdict": "proved from Mathlib mate lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit Adjunction.homEquiv_naturality",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates and Adjunction.Basic",
+   "date": "2026-10-20",
+   "verdict": "used"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|homEquiv_naturality_left_symm",
+   "results": "matched Mathlib declarations; no duplicate project lemma",
+   "date": "2026-10-20",
+   "verdict": "used Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On derived categories of sheaves of modules, coefficient extension preserves clopen refinement transposes, with naturality, composition, shifts and strict diagram realization",
+   "results": "DerivedCategory.instLinearShiftFunctorInt; DerivedCategory.instAdditiveShiftFunctorInt; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; SheafOfModules.pushforwardNatTrans; SheafOfModules.pushforwardComp; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "date": "2026-10-19",
+   "digest": "ba661c44181c110a",
+   "verdict": "No match for the normalized refinement statement. The hits supply standard shifts, ordinary module adjunctions and direct-image composition; these constituent APIs are used by the constructed formal glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedRefinementCoefficientSquare",
+  "date": "2026-10-20",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ringed-refinement-coefficient-square",
+   "place": "proof step 6, counit transpose",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedRefinementMate",
+  "file": "lean/Sheaf/Paper/RingedRefinementMate.lean",
+  "declaration": "CategoryTheory.refinement_coefficient_mate",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-20",
+  "statement": "theorem refinement_coefficient_mate\n    {C₁ : Type u₁} {D₁ : Type u₂} {C₂ : Type u₃} {D₂ : Type u₄}\n    [Category.{v₁} C₁] [Category.{v₂} D₁]\n    [Category.{v₃} C₂] [Category.{v₄} D₂]\n    {L₁ : C₁ ⥤ D₁} {R₁ : D₁ ⥤ C₁} {L₂ : C₂ ⥤ D₂} {R₂ : D₂ ⥤ C₂}\n    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\n    {S : C₁ ⥤ C₂} {T : D₁ ⥤ D₂} (c : S ⋙ L₂ ⟶ L₁ ⋙ T)\n    {M : C₁} {N : D₁} {M' : C₂} {N' : D₂}\n    (h₁ : L₁.obj M ⟶ N) (h₂ : L₂.obj M' ⟶ N')\n    (δ₁ : T.obj N ⟶ N') (δ₂ : S.obj M ⟶ M')\n    (h : c.app M ≫ T.map h₁ ≫ δ₁ = L₂.map δ₂ ≫ h₂) :\n    S.map (adj₁.homEquiv _ _ h₁) ≫\n        (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ c)).natTrans.app N ≫ R₂.map δ₁ =\n      δ₂ ≫ adj₂.homEquiv _ _ h₂"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7646e",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051031-L-1537613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7646e",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051031-L-1537613",
+  "kind": "interface",
+  "note": "independent cc review: RingedRefinementData vs base item module (verbatim move, statement byte-identical); 3 sorry statements (core/clopen/finite) vs base Package/Laws/Shifts fields and node Steps 1-10; HCompatible vs Step 5 (*); axioms via scratch #print axioms; --all compile of 9 modules clean; no importers of the item in the clone"
+ }
+}

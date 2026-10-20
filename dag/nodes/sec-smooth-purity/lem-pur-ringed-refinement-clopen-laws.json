@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-ringed-refinement-clopen-laws",
+ "kind": "statement",
+ "title": "Clopen comparisons, component compatibility and coherence",
+ "statement": "theorem ringedRefinementClopen {m : Mode} {T : Scheme.{u}} {c : Coefficients m T}\n    (o : Calculus c) (p : Spatial o) (sc : ScalarComparisons o)\n    (ac : ScalarComposition o) :\n    ∃ e : OpenComparisons p, HCompatible sc e ∧\n      ResidualLaws sc ac (canonicalRefinements e) ∧\n      Nonempty (BasicShifts sc (canonicalRefinements e))",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.7.6–6.7.7, compactification independence; agent ordinary-derived ring-sheaf coefficient supplement to the clopen-section refinement construction, not a theorem literally asserted in the paper."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-refinement-data",
+  "def-pur-ringed-refinement-construction",
+  "lem-pur-ringed-refinement-formal-laws"
+ ],
+ "proof": [
+  {
+   "text": "use normalized open base change for beta. Split the ringed module category\nalong the clopen section and its complementary open. Projection onto the section\nis the row (identity, zero). Exact localization retains this product decomposition,\nso scalar extension preserves the projection by additivity. The open comparisons\nare fixed by their inverse transpose equations; restricting to the open proves their\ncompatibility with scalar comparison and composition. Paste these compatibilities\nfor the three factors of h to obtain HCompatible. Successive coefficient changes\nuse the balanced associator, and successive refinements select nested components;\nthe same rows (identity, zero, zero) give refinement composition. Mate pasting gives\nspatial coefficient composition. Exact open maps act termwise on complexes; scalar\ncounits and geometric adjunctions have their canonical cochain shifts, proving all\nshift fields. These calculations take place on the whole ringed derived category,\nalso on the vertical site, before evaluation or any total limit.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7, compactification independence; agent ordinary-derived ring-sheaf coefficient supplement to the clopen-section refinement construction, not a theorem literally asserted in the paper."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "B6 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Coefficient supplement: Clopen comparisons, component compatibility and coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "clopen component projection commutes with derived change of coefficients and refinements",
+   "results": "8 hits: Profinite.NobelingProof.coe_πs'; Profinite.NobelingProof.πs'_apply_apply; Profinite.NobelingProof.proj_eq_of_subset; Profinite.NobelingProof.projRestricts_eq_comp; Profinite.NobelingProof.GoodProducts.smaller_factorization; Profinite.NobelingProof.Products.evalFacProps; Profinite.IndexFunctor.map_comp_π_app; Profinite.NobelingProof.coe_πs",
+   "date": "2026-10-19",
+   "digest": "71f97e7debddcfa0",
+   "verdict": "No direct match; listed declarations do not construct this normalized geometric package."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-19",
+   "digest": "502adec603a5acaf",
+   "verdict": "No direct match; listed declarations do not construct this normalized geometric package."
+  },
+  {
+   "tool": "grep",
+   "query": "diagramSiteRealization|strictTower.*finite",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No direct match; listed declarations do not construct this normalized geometric package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On derived categories of sheaves of modules, coefficient extension preserves clopen refinement transposes, with naturality, composition, shifts and strict diagram realization",
+   "results": "DerivedCategory.instLinearShiftFunctorInt; DerivedCategory.instAdditiveShiftFunctorInt; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; SheafOfModules.pushforwardNatTrans; SheafOfModules.pushforwardComp; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "date": "2026-10-19",
+   "digest": "ba661c44181c110a",
+   "verdict": "No match for the normalized refinement statement. The hits supply standard shifts, ordinary module adjunctions and direct-image composition; these constituent APIs are used by the constructed formal glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedRefinementCoefficientSquare",
+  "date": "2026-10-20",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ringed-refinement-coefficient-square",
+   "place": "Clopen comparisons, component compatibility and coherence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedRefinementClopen",
+  "file": "lean/Sheaf/Paper/RingedRefinementClopen.lean",
+  "declaration": "SheafOfModules.RingedRefinement.ringedRefinementClopen",
+  "statement": "theorem ringedRefinementClopen {m : Mode} {T : Scheme.{u}} {c : Coefficients m T}\n    (o : Calculus c) (p : Spatial o) (sc : ScalarComparisons o)\n    (ac : ScalarComposition o) :\n    ∃ e : OpenComparisons p, HCompatible sc e ∧\n      ResidualLaws sc ac (canonicalRefinements e) ∧\n      Nonempty (BasicShifts sc (canonicalRefinements e))",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7646e",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051031-L-1537613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7646e",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051031-L-1537613",
+  "kind": "interface",
+  "note": "independent cc review: RingedRefinementData vs base item module (verbatim move, statement byte-identical); 3 sorry statements (core/clopen/finite) vs base Package/Laws/Shifts fields and node Steps 1-10; HCompatible vs Step 5 (*); axioms via scratch #print axioms; --all compile of 9 modules clean; no importers of the item in the clone"
+ }
+}

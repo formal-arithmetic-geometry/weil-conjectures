@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-ringed-refinement-core",
+ "kind": "statement",
+ "title": "Normalized ringed coefficient and geometric calculus",
+ "statement": "theorem ringedRefinementCore (m : Mode) (T : Scheme.{u}) :\n    ∃ (o : Calculus (canonicalCoefficients m T)) (p : Spatial o)\n      (sc : ScalarComparisons o), Nonempty (ScalarComposition o)",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.7.6–6.7.7, compactification independence; agent ordinary-derived ring-sheaf coefficient supplement to the clopen-section refinement construction, not a theorem literally asserted in the paper."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-refinement-data",
+  "def-pur-ringed-refinement-construction"
+ ],
+ "proof": [
+  {
+   "text": "construct module inverse image as the left adjoint of sectionwise direct\nimage with the structural map obtained from the ring inverse-image compositor.\nThe coefficient identification after inverse image is an isomorphism, so inverse image is exact. Module\nsheaf categories are Grothendieck and have K-injective resolutions. For an open,\ntransport the direct-sum extension and sheafification adjunction from the localized\nsite; its unit is an isomorphism and extension is exact. Take each scalar universal\npair from derived change of rings. Direct-image compositors are induced on every\nsection by fibre-product associativity; their conjugates fix inverse-image ones.\nRestriction of scalars commutes with direct image by the identity on underlying\nsections; taking left mates fixes the ordinary scalar comparison. Its K-flat\nlocalization gives the pull comparison. The open-unit transpose gives delta,\ninvertible by the normalized open tensor comparison. Balanced tensor associativity\nand the unit are localized on K-flat representatives to give ScalarComposition.\nAll constructions apply on the vertical sites with unchanged coefficient index.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-restriction",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-open-tensor-normalization",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7, compactification independence; agent ordinary-derived ring-sheaf coefficient supplement to the clopen-section refinement construction, not a theorem literally asserted in the paper."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-restriction",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof_origin": {
+  "by": "B6 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Coefficient supplement: Normalized ringed coefficient and geometric calculus"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constant ring diagram site module sheaves equivalence strict inverse towers preserving sections",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_symm_comp; SheafOfModules.ιFree_mapFree_inv; LightCondMod.LocallyConstant.functorIsoDiscrete; SheafOfModules.unitHomEquiv; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.unitHomEquiv_comp_apply; SheafOfModules.toSheafCompSheafToPresheafIso; CategoryTheory.evalEquiv_symm_apply",
+   "date": "2026-10-19",
+   "digest": "f6405e852c6a3351",
+   "verdict": "No direct match; listed declarations do not construct this normalized geometric package."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-19",
+   "digest": "8e33c4df1a4bdb3e",
+   "verdict": "No direct match; listed declarations do not construct this normalized geometric package."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*scalar|scalar.*clopen",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No direct match; listed declarations do not construct this normalized geometric package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On derived categories of sheaves of modules, coefficient extension preserves clopen refinement transposes, with naturality, composition, shifts and strict diagram realization",
+   "results": "DerivedCategory.instLinearShiftFunctorInt; DerivedCategory.instAdditiveShiftFunctorInt; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; SheafOfModules.pushforwardNatTrans; SheafOfModules.pushforwardComp; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "date": "2026-10-19",
+   "digest": "ba661c44181c110a",
+   "verdict": "No match for the normalized refinement statement. The hits supply standard shifts, ordinary module adjunctions and direct-image composition; these constituent APIs are used by the constructed formal glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedRefinementCoefficientSquare",
+  "date": "2026-10-20",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ringed-refinement-coefficient-square",
+   "place": "Normalized ringed coefficient and geometric calculus",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedRefinementCore",
+  "file": "lean/Sheaf/Paper/RingedRefinementCore.lean",
+  "declaration": "SheafOfModules.RingedRefinement.ringedRefinementCore",
+  "statement": "theorem ringedRefinementCore (m : Mode) (T : Scheme.{u}) :\n    ∃ (o : Calculus (canonicalCoefficients m T)) (p : Spatial o)\n      (sc : ScalarComparisons o), Nonempty (ScalarComposition o)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7646e",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051031-L-1537613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-7646e",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051031-L-1537613",
+  "kind": "interface",
+  "note": "independent cc review: RingedRefinementData vs base item module (verbatim move, statement byte-identical); 3 sorry statements (core/clopen/finite) vs base Package/Laws/Shifts fields and node Steps 1-10; HCompatible vs Step 5 (*); axioms via scratch #print axioms; --all compile of 9 modules clean; no importers of the item in the clone"
+ }
+}
