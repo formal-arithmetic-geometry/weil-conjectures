@@ -23,87 +23,68 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-weil-proetale-weakly-etale-localization] (1) to replace $X_{\\mathrm{proet}}$ by $\\mathcal C/X$; only the equivalence of underlying sites is used, not its constant-coefficient clause. On this localization [lem-pur-site-restriction-module-adjunction-exact] gives exact $j_!\\dashv j^*$. By [lem-sf-exact-functor-derived-triangulated] these functors are computed termwise in the unbounded derived categories. Thus any complex $I$ representing $E$ can be used, $j_!I$ represents $j_!E$, and $j^*F$ represents $Lj^*F$. There is no boundedness condition on $I$.",
+   "text": "An open immersion is a monomorphism, so U = ProEt.mk c.i is subterminal in the pro-etale site. For a module on the slice, the direct sum indexed by arrows V to U has a single summand whenever V is over U. Its summand inclusion is bijective. Composing with the sheafification unit gives the ordinary localized adjunction unit; the sheafification unit is locally bijective and stays so upon restriction to the slice. Thus the ordinary adjunction unit is invertible. The localization formula for the derived adjunction unit and exact termwise extension/restriction show that its derived unit is invertible too.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-exact-functor-derived-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AE, definition-extension-zero; sites-modules.tex Tags 03DI/03DJ; derived.tex Tag 015F"
-   }
-  },
-  {
-   "text": "For an $R_X$-module $M$ and an $R$-module $P$, define $\\alpha_{M,P}:j_!(M\\otimes j^*P)\\to j_!M\\otimes P$ by adjunction from $\\eta_M\\otimes1:M\\otimes j^*P\\to j^*j_!M\\otimes j^*P=j^*(j_!M\\otimes P)$. The adjunction is [lem-pur-site-restriction-module-adjunction-exact], and the natural restriction-tensor identification is [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. Hence $\\alpha$ is natural in both variables. For $P=R^{\\oplus N}$ it is the finite-sum identification $j_!(M^{\\oplus N})\\to(j_!M)^{\\oplus N}$: on each inclusion the adjunct is the corresponding inclusion composed with $\\eta_M$. This map is invertible: maps from $j_!(M^{\\oplus N})$ to any $H$ correspond by adjunction to $N$ maps $M\\to j^*H$, then to $N$ maps $j_!M\\to H$; these are precisely the maps from $(j_!M)^{\\oplus N}$. This verifies the coproduct universal property and identifies the comparison, including $N=0$.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI (lemma-extension-by-zero), 03EL (lemma-tensor-product-pullback); finite sums by the displayed adjunction"
+    "place": "Mathlib locally bijective sheafification and localization of adjunctions; direct-sum unit normalization in LocalizedModuleExactIndependent"
    }
   },
   {
-   "text": "Write $A(P)=j_!(M\\otimes j^*P)$ and $B(P)=j_!M\\otimes P$. For a package splitting $P\\xrightarrow{i}R^{\\oplus N}\\xrightarrow{p}P$, $pi=1$, supplied by [def-weil-pbc-strict-perfect-coefficient-package], put $\\beta_P=A(p)\\alpha_{M,R^{\\oplus N}}^{-1}B(i):B(P)\\to A(P)$. Naturality of $\\alpha$ gives $\\beta_P\\alpha_{M,P}=A(p)A(i)=1$ and $\\alpha_{M,P}\\beta_P=B(p)B(i)=1$. Consequently $\\beta$ is independent of the splitting. For maps $u:M\\to M'$ and $v:P\\to P'$, invert the naturality equation for $\\alpha$ to obtain $A(u,v)\\beta_{M,P}=\\beta_{M',P'}B(u,v)$. This gives naturality for arbitrary maps of finite-projective terms, even when the chosen splittings are not chain maps.",
+   "text": "Use the ordinary slice extension-tensor isomorphism. Construct the natural presentation of the module tensor from the inverse sheafification counit and the strong monoidal tensorator. Compose this presentation on both sides of the ordinary slice formula, using a general categorical comparison lemma. Naturality follows from the lax monoidal sheafification comparison and the sheafification counit. Extension by zero preserves all direct sums because it is a left adjoint. Apply the comparison in every bidegree and mapTotalIso to obtain an isomorphism between extension of the slice total tensor and the total tensor of the extension. Bicomplex naturality proves compatibility with both differentials, and totalization supplies their signs.",
    "uses": [
-    "def-weil-pbc-strict-perfect-coefficient-package"
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-open-piece.md",
-    "place": "Proof, finite-projective term argument, expanded by finite-free retractions"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Stacks sites-modules.tex, Tag 0E8I; Mathlib total complexes and TotalComplexMap"
    }
   },
   {
-   "text": "Each $F^r$ and $j^*F^r$ is flat: tensor with it is a retract of the exact functor $M\\mapsto M^{\\oplus N_r}$, using the package splitting; the splitting restricts to the localized site. Thus [lem-pc-bounded-above-flat-kflat-site] makes $F$ and $j^*F$ K-flat. The derived tensor computation in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and [lem-weil-pbc-site-derived-tensor-descent] then identifies $j_!E\\otimes_R^{\\mathbf L}F$ with $\\operatorname{Tot}(j_!I\\otimes_R F)$ and $E\\otimes_{R_X}^{\\mathbf L}Lj^*F$ with $\\operatorname{Tot}(I\\otimes_{R_X}j^*F)$. Explicitly, to justify using the arbitrary representative $I$, choose K-flat resolutions of $I$ and $j_!I$ by [lem-pc-kflat-resolution]. Tensoring either quasi-isomorphism with the indicated K-flat second factor remains a quasi-isomorphism: its cone is the tensor of the acyclic original cone, with the same cone signs, and is acyclic by [def-pc-kflat-complex]. Apply the canonical two-K-flat-factor identifications of the cited descent node. Exactness of $j_!$ preserves the resulting quasi-isomorphism on the source.",
+   "text": "Choose any complex P representing E and a K-flat resolution K of a representative of F. To compute an arbitrary TensorModel a on a pair with K-flat second factor, resolve both factors by flat-term K-flat complexes. The representative comparison of a applies to this resolving pair. Tensoring the first resolution map with the original K-flat second factor is a quasi-isomorphism: its cone is a tensor of an acyclic cone. Tensoring the second resolution map with the resolved first factor is a quasi-isomorphism by the braiding, signed flip, and the same cone argument. The site-tensor/monoidal-tensor natural isomorphism transfers the resolutions' termwise exact tensor functors to IsFlatOnSite. Thus a(j_!E,F) is represented by Tot(j_!P tensor K). The preceding ordinary total comparison identifies this with j_! Q(Tot(P tensor j^*K)), proving that it lies in the essential image of derived extension.",
    "uses": [
-    "def-weil-pbc-strict-perfect-coefficient-package",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
     "lem-pc-kflat-resolution",
     "def-pc-kflat-complex",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-quasi-iso-cone-acyclic",
     "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 06YN, 06YS, 06YT/06YU, 0G7E, 07A4"
+    "place": "Tags 06YN, 06YS and 06YT/06YU; Mathlib tensor mapping-cone comparisons, signed bifunctor flip, and the recorded TensorModel representative comparison"
    }
   },
   {
-   "text": "Apply the inverses $\\beta_{I^a,F^r}$ of step 3 at each bidegree $(a,r)$. Under the total-complex definition [def-pc-tensor-complex-sheaves], degree $n$ is the finite sum over $a+r=n$, since $F$ is bounded. The finite-sum identification of step 2 commutes $j_!$ with these sums. Naturality from step 3 gives $\\beta_{I^{a+1},F^r}(j_!d_I\\otimes1)=j_!(d_I\\otimes1)\\beta_{I^a,F^r}$ and $\\beta_{I^a,F^{r+1}}(1\\otimes d_F)=j_!(1\\otimes j^*d_F)\\beta_{I^a,F^r}$. Multiplying the second equality by $(-1)^a$ proves compatibility with $d_I\\otimes1+(-1)^a1\\otimes d_F$. Thus the finite sums of $\\beta$ and $\\alpha$ are inverse chain maps. Their image under localization is the displayed canonical map, because $\\alpha$ was defined using precisely the unit and restriction-tensor comparison. For maps of representatives both variables' naturality equations hold termwise. These maps also descend to homotopy categories: a homotopy $h:I^a\\to I'^{a-1}$ induces $j_!h\\otimes1$ on the left total complex and $j_!(h\\otimes1)$ on the right; a homotopy $k:F^r\\to F'^{r-1}$ induces $(-1)^a1\\otimes k$ in bidegree $(a,r)$ on either side, with restriction and $j_!$ where appropriate. In each case $dH+Hd$ is the difference of the induced chain maps, and naturality of $\\beta$ with respect to $h$ or $k$ makes these homotopies commute with $\\beta$. For quasi-isomorphisms the naturality equations remain true after inverting those maps, by step 4. This proves naturality in the derived object $E$ and in $F$, as well as the asserted isomorphism.",
+   "text": "Curry the given normalized restriction-tensor comparison and form the adjunction projection map. Its unit and restriction comparison are invertible, and its target lies in the essential image of extension by the preceding step. Apply the already proved Adjunction.isIso_projectionMap_app_app_of_iso. Uncurry its inverse to obtain a natural isomorphism, then restrict the coefficient variable to openTensorCoefficients. The component projection-map formula gives precisely the required homEquiv equation. Injectivity of that equivalence gives uniqueness of the inverse, hence of the natural isomorphism. This argument works for arbitrary coefficients, so in particular for the unchanged strict-perfect subcategory.",
    "uses": [
-    "def-pc-tensor-complex-sheaves"
+    "lem-weil-pbc-ringed-projection-restriction"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-open-piece.md",
-    "place": "Proof, final two sentences: differentials and signed totalization, with naturality expanded"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "WeilConjectures/CategoryTheory/Adjunction/ProjectionMap.lean, isIso_projectionMap_app_app_of_iso and projectionMap_app_app"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "def-weil-pbc-strict-perfect-coefficient-package",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
   "lem-pc-kflat-resolution",
   "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves"
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-ringed-projection-restriction"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-open-piece.md",
-  "place": "Proof, expanded using Stacks 03DI/03DJ, 03EL, 06YQ and K-flat descent; geometric-point shortcut replaced"
+  "by": "G1",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lifted using flat K-flat resolutions, tensor mapping cones, and the fully faithful open-extension adjunction; actual Lean proof in Sheaf.Paper.OpenImmersionTensorPiece"
  },
  "mathlib_searches": [
   {
@@ -220,10 +201,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-pc-bounded-above-flat-kflat-site",
   "lem-pc-kflat-resolution"
  ],
  "reviewed": {
@@ -260,5 +238,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "The shared record was unstated. Reuse the already delivered and independently reviewed NG module verbatim, with its canonical localized unit transpose and two-variable natural isomorphism. Original-site transport definitions are helpers of the consumer, not a second open-piece statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T211714-L-3490672",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
