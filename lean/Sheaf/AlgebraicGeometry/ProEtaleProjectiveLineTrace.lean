@@ -161,50 +161,40 @@ def SpP1TraceStatement (A : Type (u + 1)) [CommRing A] [Finite A]
     SpP1BaseTraceConditions A N hN hA c b d ∧
     SpP1DiagonalIntegrals A N hN hA b
 
-/-- The projective-line decomposition, its normalized trace, arbitrary base change,
-geometric-fibre normalization, and both diagonal integrals, for Z/ell^n coefficients.
-The harmless ULift puts that finite discrete ring in the existing module universe.
+/-- The projective-line component construction, separated from the diagonal clause.
+Source: det-sp-p1-trace, clauses 1--2 (blueprint: lem-sp-p1-base-trace-families). -/
+theorem exists_spP1BaseTraceConditions (ℓ : ℕ) (hℓ : ℓ.Prime) (n : ℕ) (hn : 0 < n)
+    [Finite (ULift.{u + 1} (ZMod (ℓ ^ n)))] :
+    ∃ c : SpP1ChernFamily (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)
+      (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)),
+      ∃ b : SpP1TwistedFamily (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)
+        (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)),
+      ∃ d : SpP1DecompositionFamily (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)
+          (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)),
+          SpP1BaseTraceConditions (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)
+            (pow_pos hℓ.pos n)
+            (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)) c b d := by
+  sorry
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-geo-p1-adjunction,
-det-sp-p1-trace.md, clauses 1--3 and final paragraph
-(blueprint: det-sp-p1-trace).
+/-- The diagonal integral clause for normalized projective-line families.
+Source: det-sp-p1-trace, clause 3 (blueprint: lem-sp-p1-diagonal-integrals-family). -/
+theorem spP1DiagonalIntegrals_of_twisted (ℓ : ℕ) (hℓ : ℓ.Prime) (n : ℕ) (hn : 0 < n)
+    [Finite (ULift.{u + 1} (ZMod (ℓ ^ n)))]
+    (c : SpP1ChernFamily (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)
+      (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)))
+    (b : SpP1TwistedFamily (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)
+      (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)))
+    (d : SpP1DecompositionFamily (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)
+      (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)))
+    (_hbase : SpP1BaseTraceConditions (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)
+      (pow_pos hℓ.pos n)
+      (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)) c b d) :
+    SpP1DiagonalIntegrals (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)
+      (pow_pos hℓ.pos n)
+      (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)) b := by
+  sorry
 
-Proof plan, following the node:
-1. Projective-space base change identifies q and both p_a with projective-line
-projections. Properness gives qcqs; finite type over the Noetherian base makes P
-and W Noetherian. On the four standard product charts the diagonal has regular
-equations x-y or xy-1; coefficient comparison proves regularity over every ring.
-Its complementary open is quasi-compact. Thus closed direct image is exact by
-lem-weil-pbc-proetale-ringed-open-closed.
-2. The ordinary etale decomposition thm-amb-p1-decomposition has exactly the unit
-and Kummer components. The normalized twisted decomposition of
-lem-asd-ordinary-finite-p1-adjunction has the same Chern class as second component.
-The projection formula identifies it with twisting the untwisted decomposition.
-3. Proper torsion base change applies to arbitrary S' (lem-kun-proper-base-change-
-torsion-ring). The infinity divisor remains Cartier after arbitrary base change.
-Supported Kummer naturality and roots-normalized twist pullback preserve its Chern
-class, while adjunction mates preserve the unit. Hence both decompositions commute
-with every exchange, without a Noetherian assumption on S'.
-4. Apply exact comparison. All inputs are sheaves, shifts, or the exact closed
-image of a sheaf, hence bounded below. The qcqs comparison theorem
-sk-thm-pe-direct-image-comparison makes the actual mate invertible. Mate pasting
-identifies the transported exchange with geoP1Exchange, yielding the first equation.
-5. Define trace as inverse twisted decomposition followed by the second projection.
-Invert its exchange square to get trace compatibility. Its Chern adjunct is the
-second inclusion followed by that decomposition, so its trace is identity.
-6. A rational point [a:b] over an algebraically closed field is cut out by the
-linear form bX0-aX1. Its Cartier ideal dual has the O(1) transition, including both
-coordinate points. Its Kummer boundary therefore equals the same hyperplane class.
-7. Spec Z[1/ell] is Noetherian and every scheme on which ell is invertible maps
-to it. Pulling back its decomposition gives the asserted families on all schemes.
-The components remain their intrinsic unit and Kummer class, by step 3.
-8. Apply lem-amb-p1-diagonal-integrals over S. Its supported etale class is fixed
-by SupportedKummerBoundary. The comparison equation of sk-lem-geo-cartier identifies
-it with c_Delta, and exact closed image identifies its derived realization.
-Direct-image composition and its identity comparison identify its source with
-the characterized α maps. Transport the two etale identities through exact
-comparison; the chart transport identifies their traces with the characterized τ maps.
-This proves the two displayed integral equations for the precise Cartier class. -/
+set_option linter.style.haveILetI false in
 theorem proEtale_projectiveLine_trace (ℓ : ℕ) (hℓ : ℓ.Prime) (n : ℕ) (_hn : 0 < n) :
     @SpP1TraceStatement (ULift.{u + 1} (ZMod (ℓ ^ n))) inferInstance
       (Finite.of_equiv (ZMod (ℓ ^ n))
@@ -212,6 +202,12 @@ theorem proEtale_projectiveLine_trace (ℓ : ℕ) (hℓ : ℓ.Prime) (n : ℕ) (
           ⟨ne_of_gt (pow_pos hℓ.pos n)⟩)) Equiv.ulift.symm)
       (ℓ ^ n) (pow_pos hℓ.pos n)
       (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n)) := by
-  sorry
+  letI : Finite (ULift.{u + 1} (ZMod (ℓ ^ n))) :=
+    Finite.of_equiv (ZMod (ℓ ^ n))
+      (h := @Finite.of_fintype _ (@ZMod.fintype (ℓ ^ n)
+        ⟨ne_of_gt (pow_pos hℓ.pos n)⟩)) Equiv.ulift.symm
+  obtain ⟨c, b, d, hbase⟩ := exists_spP1BaseTraceConditions ℓ hℓ n _hn
+  exact ⟨c, b, d, hbase,
+    spP1DiagonalIntegrals_of_twisted ℓ hℓ n _hn c b d hbase⟩
 
 end AlgebraicGeometry.ProEtale

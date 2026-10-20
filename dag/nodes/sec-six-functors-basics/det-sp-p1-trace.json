@@ -40,195 +40,28 @@
  ],
  "proof": [
   {
-   "text": "The projective-space pullback formula identifies each $p_a$ with a projective line over $P$, and identifies the projective line after any $g:S'\\to S$. The projective-space properness theorem makes $q,q'$ and $p_a$ proper. A proper morphism is separated and of finite type; finite type includes quasi-compactness, and a separated morphism is quasi-separated. Thus all these morphisms are qcqs, without a Noetherian condition on $S'$. These facts give the projective-line identifications and proper qcqs hypotheses used below.",
+   "text": "Obtain the normalized base and trace families from the separated clauses (1)--(2) theorem `exists_spP1BaseTraceConditions`.",
    "uses": [
-    "lemma-nagata-projective-space-base-change-pullback",
-    "lemma-nagata-projective-space-base-change-proper",
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "lem-pc-separated-quasi-separated",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-closed-immersion-proper"
+    "lem-sp-p1-base-trace-families"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (1) and (3): projective-space identifications, properness and qcqs hypotheses"
-   }
+   "elementary": false
   },
   {
-   "text": "Since $S$ is Noetherian and $q$ is of finite type, $P$ is Noetherian as well. Each $p_a:W\\to P$ is of finite type with Noetherian target $P$, so the same finite-type theorem also makes $W$ Noetherian, as required for the projection formula applied to $p_a$. Finally $\\Delta$ is a closed immersion by separatedness of $q$, hence proper and qcqs too. These are precisely the hypotheses needed below for the ordinary decomposition over $S$ and $P$ and for bounded-below direct-image comparison for $q,q',p_a,\\Delta$. To verify the Cartier hypothesis rather than assume it, work over an affine base $\\operatorname{Spec}R\\subset S$ and the four products of standard charts. On equal-index charts the diagonal has equation $x-y$ in $R[x,y]$; on mixed charts it has equation $xy-1$. The first is monic in $x$, so multiplication is injective. For the second, if $(xy-1)\\sum_{k=0}^m a_k(y)x^k=0$, its constant coefficient gives $a_0=0$ and the coefficient of $x^k$ gives $a_k=ya_{k-1}$, whence all $a_k=0$. Thus these equations are non-zero-divisors over every ring and remain so after arbitrary base change. This proves that $\\Delta$ is effective Cartier. Its complement is quasi-compact: use a finite affine cover of the Noetherian $S$ and these four charts; in each chart the complement is the principal affine open defined by the corresponding equation. The pro-etale ringed open/closed theorem therefore applies to the constant coefficient sheaf $A_W$ and says $\\Delta_*$ on modules is exact. Applying it to an injective resolution gives the canonical identification $R\\Delta_*A_P=\\Delta_*A_P$, including their restriction units.",
+   "text": "Apply the separated diagonal-integral theorem to the selected twisted family and package its result with the base conditions.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-weil-pbc-projective-space-standard-charts",
-    "def-pc-divisor-line-bundle",
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "lem-sp-p1-diagonal-integrals-family"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (1) and (3): Noetherian targets and regular equations for the diagonal"
-   }
-  },
-  {
-   "text": "Work first on the ordinary small etale sites, with $A=\\mathbf Z/\\ell^n$ and $N=\\ell^n$. All coefficient hypotheses hold: $N\\geq1$, $A$ is finite, $NA=0$, and $N$ is invertible on every scheme over $S$. The current statement of [thm-amb-p1-decomposition] applies to these data in the ordinary etale constant-$A$ module categories. Since $A=\\mathbf Z/N$, its scalar extension of the Kummer class is the identity scalar extension, and its twist $\\mu_N\\otimes_{\\mathbf Z/N}A$ is canonically $\\mu_N$, exactly our etale twist. Its convention $e_0=t^{-1}e_1$ for $t=x_1/x_0$ agrees with our $\\mathcal O(1)$. Its second component $h_{\\mathrm{et}}:A_S(-1)[-2]\\to Rq_{\\mathrm{et},*}A_P$ is defined by the adjoint of $1\\otimes c_1(\\mathcal O(1))$ followed by evaluation, so it is precisely the unit-and-Chern-class map $d_q^{\\mathrm{et}}=(1,h_{\\mathrm{et}})$, and the theorem says that this map is an isomorphism. The locally free rank-one twists and their pullback/evaluation identifications are those of [lem-asd-etale-finite-twist-pullback]. Its twisted version is the explicitly normalized decomposition $b_q^{\\mathrm{et}}:A_S(1)[2]\\oplus A_S\\xrightarrow{\\sim}Rq_{\\mathrm{et},*}(A_P(1)[2])$ in the ordinary finite projective-line interface. Its second component is exactly the Kummer class, not an unspecified generator. The definition of the ordinary trace is $t_q^{\\mathrm{et}}=\\operatorname{pr}_2(b_q^{\\mathrm{et}})^{-1}$. The same facts apply over the Noetherian base $P$ to either $p_a$. The proper projection formula with the invertible finite twist identifies this $b_q^{\\mathrm{et}}$ with $d_q^{\\mathrm{et}}$ twisted by $(1)[2]$: the hyperplane summand becomes $A_S$, and the unit summand becomes $A_S(1)[2]$. Its Noetherian hypotheses hold for $q$ and $p_a$ by steps 1--2.",
-   "uses": [
-    "thm-amb-p1-decomposition",
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "def-amb-p1-trace",
-    "lem-amb-proper-coproducts-projection",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (1), projective-line decomposition; Proof (2), definition of the trace"
-   }
-  },
-  {
-   "text": "Here is also the ordinary-etale compatibility for an arbitrary $g:S'\\to S$. Proper base change for the torsion ring $A$ gives isomorphisms $g^{-1}Rq_{\\mathrm{et},*}E\\xrightarrow{\\beta_g^{\\mathrm{et}}}Rq'_{\\mathrm{et},*}g_P^{-1}E$ for both $E=A_P$ and $E=A_P(1)[2]$, with no Noetherian condition on $S'$. The twist pullback theorem identifies all their twists. The pullback of the unit is the unit by the identity/pasting rules for adjunction mates. For the second component, the infinity divisor on the projective line has local equation $t=0$ on the chart at infinity and is empty on the complementary chart. Its ideal is invertible, and dualizing its transition function gives $\\mathcal O(1)$. It remains Cartier after any base change since multiplication by the indeterminate $t$ is injective on $R[t]$ for every ring $R$. The supported Kummer morphism, and its composite with the divisor unit, therefore pull back to those of infinity on $P'$. Its composite is $c_1(\\mathcal O(1))$. Consequently $\\beta_g^{\\mathrm{et}}g^{-1}d_q^{\\mathrm{et}}=d_{q'}^{\\mathrm{et}}$ and $\\beta_g^{\\mathrm{et}}g^{-1}b_q^{\\mathrm{et}}=b_{q'}^{\\mathrm{et}}$, with the evident pullback identifications on their sources. This proves that the two maps on $S'$ are isomorphisms too; no decomposition theorem over a non-Noetherian base was invoked.",
-   "uses": [
-    "lem-kun-proper-base-change-torsion-ring",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-projective-space-standard-charts",
-    "def-pc-divisor-line-bundle",
-    "lem-asd-ordinary-supported-kummer"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (1), last two sentences: base change of the unit and the Kummer class; Stacks Tag 0F0C (lemma-proper-base-change-mod-n)"
-   }
-  },
-  {
-   "text": "For every scheme morphism $r:V\\to T$ appearing here, $Rr_*$ means the total right derived ordinary direct image of constant-$A$ module sheaves, computed on K-injective resolutions as defined in [sk-def-sfb-finite-derived-functors], with coefficient category $\\mathcal A=\\operatorname{Mod}_A$. We use that node here for this definition of $Rr_*$ and its bounded-below version. The comparison pullback is the termwise exact functor of [def-sf-comparison-derived-pullback]; its exactness and preservation of the bounded-below range are supplied by [lem-sf-comparison-pullback-exact]. Apply the exact derived comparison pullback $\\nu_T^*$ to these maps. It preserves their direct sums and shifts; its tensor comparison identifies the pulled-back finite twists with the twists in the statement. For any of $r=q,q',p_a,\\Delta$, write $C_r:\\nu_T^*Rr_{\\mathrm{et},*}E\\xrightarrow{\\sim}Rr_{\\mathrm{proet},*}\\nu_V^*E$ for direct-image comparison. Its hypotheses hold by steps 1--2, and the inputs are sheaves, their shifts, or $R\\Delta_*A_P$ on the etale site; the last is canonically a sheaf by the closed-immersion exactness stated in [lem-amb-p1-diagonal-integrals], so all inputs are bounded below; an unbounded comparison theorem is unnecessary. Thus $d_q=C_q\\nu_S^*d_q^{\\mathrm{et}}$ and $b_q=C_q\\nu_S^*b_q^{\\mathrm{et}}$ are isomorphisms with the required unit and Chern components.",
-   "uses": [
-    "sk-def-sfb-finite-derived-functors",
-    "lem-sf-comparison-pullback-exact",
-    "def-sf-comparison-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "sk-thm-pe-direct-image-comparison",
-    "lem-amb-p1-diagonal-integrals"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (1), transport to the pro-etale site: exact comparison and bounded-below direct-image comparison"
-   }
-  },
-  {
-   "text": "More explicitly, comparison commutes with pullback, and the mate-pasting rule gives, after those pullback identifications,\n$$\\beta_g^{\\mathrm{proet}}\\,g^*C_q=C_{q'}\\,\\nu_{S'}^*(\\beta_g^{\\mathrm{et}}).$$\nIndeed each exchange is the mate of the pullback commutation square; pasting that square with the two comparison squares in either order gives the same square. Applying this equality to the two component equations of step 4 proves the claimed compatibility for every $g$ on the pro-etale sites. In particular it proves (1), including arbitrary base change, and identifies the pro-etale twisted decomposition with the one obtained from the etale normalization.",
-   "uses": [
-    "def-sf-comparison-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "sk-thm-pe-direct-image-comparison",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (1), transport to the pro-etale site: mate-pasting and base-change compatibility"
-   }
-  },
-  {
-   "text": "Let $\\iota_2:A_S\\to A_S(1)[2]\\oplus A_S$. Since $h=b_q\\iota_2$ in adjoint form, $\\operatorname{Tr}_qh=\\operatorname{pr}_2b_q^{-1}b_q\\iota_2=\\operatorname{id}_{A_S}$. If $\\beta$ denotes the twisted exchange from step 6, its equation $b_{q'}=\\beta g^*b_q$ gives\n$$\\operatorname{Tr}_{q'}\\beta=\\operatorname{pr}_2 b_{q'}^{-1}\\beta=\\operatorname{pr}_2g^*(b_q^{-1})=g^*\\operatorname{Tr}_q.$$\nThis is trace compatibility, including pullback to any geometric point, and proves that the trace of the geometric-fibre hyperplane class is $1$. It also shows that $\\operatorname{Tr}_q=C_q^{-1}$ followed by $\\nu_S^*t_q^{\\mathrm{et}}$, a description used in the final step. For the non-Noetherian bases needed by the tower-class citer, $S_0=\\operatorname{Spec}\\mathbf Z[1/\\ell]$ is Noetherian: localization preserves the ascending-chain condition on ideals (each ideal is the extension of its contraction, so an ascending chain contracts to an ascending chain in $\\mathbf Z$). Every scheme $T$ on which $\\ell$ is invertible has its structure map $T\\to S_0$, obtained on affine opens by the unique ring homomorphism $\\mathbf Z[1/\\ell]\\to\\Gamma(U,\\mathcal O_T)$. Steps 4--6 and the displayed trace equation applied to this map give (1)--(2) over $T$ with exactly their intrinsic unit and Kummer components. No Noetherian assumption on $T$ is made.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (2): projection onto the second summand and its compatibility; algebraic consequences of steps 2--4"
-   }
-  },
-  {
-   "text": "On $\\mathbf P^1_\\Omega$ for a geometric residue field $\\Omega$, a rational point $x=[a:b]$ is the zero divisor of the nonzero linear form $bX_0-aX_1$. On $U_0=D_+(X_0)$ with $t=X_1/X_0$ and $U_1=D_+(X_1)$ with $u=X_0/X_1$, its ideal has generators $f_0=b-at$ and $f_1=bu-a$. These are non-zero-divisors: each is either a nonzero constant or a nonzero linear polynomial over the field $\\Omega$. On the overlap $f_0=t f_1$, so the dual ideal has bases $e_0=t^{-1}e_1$, exactly the transition of $\\mathcal O(1)$. Thus $\\mathcal O(x)\\cong\\mathcal O(1)$. For $a=0$ the two equations are $b$ and $bu$; for $b=0$ they are $-at$ and $-a$, so this calculation includes both coordinate points. By the definition of the Kummer Chern class, equal line-bundle classes have equal boundaries. Hence the rational-point class is $h$, proving the remaining assertion of (2) by step 7.",
-   "uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
-    "def-pc-divisor-line-bundle",
-    "lem-amb-kummer-any-base"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (2), last sentence: the class of every rational point is the hyperplane class"
-   }
-  },
-  {
-   "text": "First keep the ordinary-etale supported Kummer class as an auxiliary map, denoted $\\delta_{\\mathrm{et}}$, and put $\\widetilde\\delta=\\nu_W^*(\\delta_{\\mathrm{et}})C_\\Delta^{-1}$. This notation does not identify it with $c_\\Delta$. The ordinary-etale diagonal-integrals lemma, at $N=\\ell^n$ and $A=\\Lambda_n$, states\n$$t_{p_a}^{\\mathrm{et}}R(p_a)_{\\mathrm{et},*}(\\delta_{\\mathrm{et}})\\alpha_a^{\\mathrm{et}}=\\operatorname{id}_{A_P}\\quad(a=1,2).$$\nAll its hypotheses hold by steps 1--2. Apply $\\nu_P^*$. Naturality of direct-image comparison gives\n$$R(p_a)_{\\mathrm{proet},*}(\\widetilde\\delta)R(p_a)_{\\mathrm{proet},*}(C_\\Delta)C_{p_a,R\\Delta_*A}=C_{p_a,A_W(1)[2]}\\nu_P^*\\bigl(R(p_a)_{\\mathrm{et},*}\\delta_{\\mathrm{et}}\\bigr).$$\nIts composition compatibility and the identity comparison for $p_a\\Delta=\\operatorname{id}$ identify\n$$\\alpha_a=R(p_a)_*(C_\\Delta)C_{p_a,R\\Delta_*A}\\nu_P^*\\alpha_a^{\\mathrm{et}}.$$\nBy step 7, $\\operatorname{Tr}_{p_a}=\\nu_P^*t_{p_a}^{\\mathrm{et}}C_{p_a,A_W(1)[2]}^{-1}$. Substitution cancels the comparison maps and yields\n$$\\operatorname{Tr}_{p_a}R(p_a)_*(\\widetilde\\delta)\\alpha_a=\\operatorname{id}_{A_P}.$$",
-   "uses": [
-    "lem-amb-p1-diagonal-integrals",
-    "lem-asd-ordinary-supported-kummer",
-    "sk-thm-pe-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (3): transport the auxiliary ordinary-etale diagonal integral through comparison"
-   }
-  },
-  {
-   "text": "We now pass to the class actually fixed by the unit, using only an equality of integrals. Let $u_\\Delta:A_W\\to R\\Delta_*A_P$ be restriction (the derived adjunction unit), and $\\eta_{p_a}:A_P\\to R(p_a)_*A_W$ the usual inverse-image/direct-image unit. The composite-adjunction formula is\n$$\\alpha_a=R(p_a)_*(u_\\Delta)\\eta_{p_a}.$$\nHere the formula uses the canonical $\\kappa_{p_a,\\Delta}$ of the derived-composition node, not an arbitrary isomorphism. To verify its normalization, choose a K-injective resolution $A_P\\to I$ and a K-injective resolution $j:\\Delta_*I\\to J$. The unit for the composite adjunction is $R(p_a)_*(\\eta_\\Delta)\\eta_{p_a}$ by [def-weil-pbc-composite-adjunction]. Under the resolution models its value on the constant sheaf is represented by the restriction maps\n$$A_P\\longrightarrow(p_a)_*\\Delta_*I\\xrightarrow{(p_a)_*j}(p_a)_*J.$$\nThe first arrow is exactly $A_P\\to I$, since $p_a\\Delta=\\operatorname{id}$ and the two underived restrictions compose to identity restriction. The second arrow represents $\\kappa_{p_a,\\Delta}$ by the explicit normalization in [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Thus this is the canonical $\\alpha_a$, proving the displayed formula; equivalently it is unit compatibility under the composite-adjunction mate-pasting rule.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (3), unit normalization: canonical composite-adjunction unit and pushforward-composition normalization"
-   }
-  },
-  {
-   "text": "By [sk-lem-geo-cartier], with $r=n$, $\\Lambda=A$ and the Cartier divisor verified in step 2, our $\\delta$ satisfies $\\delta u_\\Delta=c_1(\\mathcal O_W(\\Delta))$. The supported-Kummer statement gives $\\delta_{\\mathrm{et}}u_\\Delta^{\\mathrm{et}}=c_1^{\\mathrm{et}}(\\mathcal O_W(\\Delta))$. Comparison preserves the unit, so $C_\\Delta\\nu_W^*u_\\Delta^{\\mathrm{et}}=u_\\Delta$; hence $\\widetilde\\delta u_\\Delta=\\nu_W^*c_1^{\\mathrm{et}}(\\mathcal O_W(\\Delta))=c_1(\\mathcal O_W(\\Delta))$. These are the same Chern class with the positive sign specified in the two cited statements. Consequently, for each projection,\n$$\\begin{aligned}\nR(p_a)_*(\\delta)\\alpha_a\n&=R(p_a)_*(\\delta u_\\Delta)\\eta_{p_a}\\\\\n&=R(p_a)_*(\\widetilde\\delta u_\\Delta)\\eta_{p_a}\n=R(p_a)_*(\\widetilde\\delta)\\alpha_a.\n\\end{aligned}$$\nCompose with $\\operatorname{Tr}_{p_a}$ and use the auxiliary integral already proved to obtain (3) for precisely $c_\\Delta$. The argument does not infer equality of the two supported morphisms from equality of their composites with the unit, and uses no conservativity assertion for arbitrary pro-etale sheaves.",
-   "uses": [
-    "sk-lem-geo-cartier",
-    "lem-asd-ordinary-supported-kummer",
-    "sk-thm-pe-direct-image-comparison",
-    "lem-amb-p1-diagonal-integrals"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-    "place": "Proof (3): compare the two Chern-class composites and conclude the integral for c_Delta"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-amb-p1-trace",
-  "def-pc-divisor-line-bundle",
-  "def-sf-comparison-derived-pullback",
-  "def-weil-finite-type-morphism",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-proper-morphism",
-  "lem-amb-kummer-any-base",
-  "lem-amb-p1-diagonal-integrals",
-  "lem-amb-proper-coproducts-projection",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-asd-ordinary-supported-kummer",
-  "lem-kun-proper-base-change-torsion-ring",
-  "lem-pc-separated-quasi-separated",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-projective-space-standard-charts",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lemma-nagata-projective-space-base-change-proper",
-  "lemma-nagata-projective-space-base-change-pullback",
-  "sk-def-sfb-finite-derived-functors",
-  "sk-lem-geo-cartier",
-  "sk-thm-pe-direct-image-comparison",
-  "thm-amb-p1-decomposition"
+  "lem-sp-p1-base-trace-families",
+  "lem-sp-p1-diagonal-integrals-family"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
-  "place": "Proof (1)--(3) and unit (G5)--(G6), including the composite-adjunction argument comparing integrals of the two constructions and universal-base extension of (1)--(2)"
+  "by": "worker",
+  "document": "det-sp-p1-trace.proof.md",
+  "place": "Separated clauses 1--2 and clause 3 components, combined by the constructor proof in Lean"
  },
  "mathlib_searches": [
   {
@@ -447,5 +280,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Re-delivery after c93f H2 RETURN. Theorem stmt_deps sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition/lem-amb-p1-diagonal-integrals replaced in item and def-sp-p1-proetale-trace-system by existing:true def nodes def-sp-p1-comparison-arrows (15 plain GeoP1Cohomology defs), def-sp-p1-decomposition-arrows, def-sp-p1-diagonal-charts; ownership scan: every geoP1*/p1Decomposition*/projectiveLineDiagonal* identifier now resolves to a cited def node; statements verbatim, no rival owners, DAG acyclic; item statement/proof/proof_deps byte-identical to live. Advisory resolved: new def-sp-cartier-derived-realization pins delta = R(Delta_*)(s) ; exact single comparison ; cDelta ; t^-1 (exactness witness is a conjunct); free deltaType HEq verified sound: scratch rfl proves the Hom types equal (finiteEtaleTateSheaf 1 reduces to finiteEtaleTateLine), 11.3 s clean. Clauses 1-2, edge cases, docstrings, single sorry unchanged/OK; trace-system module byte-identical to c93f. Advisory: GeoCartierClass helpers owned only by base stmt_dep sk-lem-geo-cartier; finiteEtaleTateLine/ProjectiveLine/derivedUpperStarLowerStarAdjunction owners outside stmt_deps. Compile at load 133-172: CartierDerivedRealization 23.9-59.9 s clean, TraceSystem 31-58 s clean, item module timeout 60 s x3; item prefix through SpP1DiagonalIntegrals clean 49.2 s (kernel 40.5 s), delivery recorded 29.5/27.8/47.1 s. Maintainer: land item at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261020T230718-L-604300",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
