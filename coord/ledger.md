@@ -17843,3 +17843,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:19 L: returned deliver/K2/Sheaf.Paper.BasicOperationsCoefficientReduction (reviewer RETURN: (reviewer C-1c5dd, head 1c5dd1082) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.BasicOperation)
 - 12:19 L: returned deliver/T4/Sheaf.Paper.CompletedProjectionCoherence (reviewer RETURN: (reviewer C-1decb, head 1decb235e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedProje)
 - 12:19 L: returned deliver/V5/Sheaf.SixFunctors.CompositionProjectionMate (reviewer RETURN: (reviewer C-27d38, head 27d3891c1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.SixFunctors.Composit)
+- 12:19 L: merged deliver/NJ/lem-trf-derived-evaluation-canonical-map (stage 2; reviewer PASS; parallel immutable checks)

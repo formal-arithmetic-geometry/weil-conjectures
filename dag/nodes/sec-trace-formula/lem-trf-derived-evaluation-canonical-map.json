@@ -295,5 +295,30 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-217194271 (reviewer sub-agent of L); spot-checked: I read the whole item, all 14 cited statements, and Stacks 0A67, 0A60 with remark-sign-explanation (more-algebra.tex:18294), 08JC (sites-cohomology.tex:8948) and 064J. The statement is unchanged from Q82's unsplit node and there are no new nodes. Step 1: the closed-monoidal node supplies the small site, the one-K-flat-factor tensor, the Koszul symmetry, the adjunction and the evaluation counit, and the transpose is a specific map. Step 2: naturality of the counit gives the K, M and L squares. Step 3: I checked by hand that E(h⊗x)(f)=(-1)^{bc}h(f(x)) commutes with the differentials. Its sign matches Stacks' (-1)^{r(q+r)} and the parent pseudocoherent step 6's (-1)^{ks}. Step 4: I checked that the tensor-cone isomorphism h⊗(y,x)↦(h⊗y,(-1)^a h⊗x) is a chain isomorphism and takes the projection to the tensor shift. It only uses the stated inclusion compatibility of lem-pc-tensor-mapping-cone-iso. Step 5: s_{P,m} with (-1)^{mq} is a chain map, χ carries (-1)^{m(n+c)}, and (b−m)(c+m)+m(n+c)≡bc+ma (mod 2) holds for every integer m. Step 6: naturality applied to w and the m=1 shift square give the TR3 connecting square. Edge cases hold: R=0; degree 0; b=c=1; a=b=c=0 with m=1 (the extra reversal sign is needed); no invertibility claimed. Grepping for 0A67/0A60 finds only different maps: lem-sfb-ringed-site-duality-maps, lem-pc-perfect-rhom-tensor-comparison and the bidual nodes. No blueprint duplicate. I accept all 8 declared tool_uses as generic algebra. Advisory: step 4 names the composite shift comparison for G only briefly, but step 5 makes it explicit. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedEvaluationCanonicalMap",
+  "declaration": "DerivedCategory.derived_evaluation_canonical_map",
+  "declarations": [
+   "DerivedCategory.evaluationDerivedCategory",
+   "DerivedCategory.evaluationTensorFunctor",
+   "DerivedCategory.evaluationDoubleHomFunctor",
+   "DerivedCategory.evaluationDoubleHomShift",
+   "DerivedCategory.derived_evaluation_canonical_map"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DerivedEvaluationCanonicalMap.lean",
+  "statement": "theorem derived_evaluation_canonical_map : ∃ e : ∀ K L M : evaluationDerivedCategory R, (evaluationTensorFunctor R L M).obj K ⟶ (evaluationDoubleHomFunctor R L M).obj K, (∀ K L M : evaluationDerivedCategory R, e K L M = (SignedRingedHom.adjunction ⊥ (CochainComplex.onePointRingSheaf R) ((SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) K).obj L)).homEquiv _ M ((α_ _ _ _).hom ≫ _ ◁ ((β_ K _).hom ≫ (SignedRingedHom.adjunction ⊥ (CochainComplex.onePointRingSheaf R) K).counit.app L) ≫ (SignedRingedHom.adjunction ⊥ (CochainComplex.onePointRingSheaf R) L).counit.app M)) ∧ (∀ (K K' L L' M M' : evaluationDerivedCategory R) (f : K ⟶ K') (l : L' ⟶ L) (m : M ⟶ M'), ((SignedRingedHom.homFunctor ⊥ (CochainComplex.onePointRingSheaf R)).map (l.op, m) ⊗ₘ f) ≫ e K' L' M' = e K L M ≫ (SignedRingedHom.homFunctor ⊥ (CochainComplex.onePointRingSheaf R)).map (X := (op ((SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) K).obj L), M)) (Y := (op ((SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) K').obj L'), M')) (((SignedRingedHom.homFunctor ⊥ (CochainComplex.onePointRingSheaf R)).map (f.op, l)).op, m)) ∧ ∀ L M : evaluationDerivedCategory R, (evaluationTensorFunctor R L M).IsTriangulated ∧ ∃ _ : (evaluationDoubleHomFunctor R L M).CommShift ℤ, (∀ (K : evaluationDerivedCategory R) (m : ℤ), ((evaluationDoubleHomFunctor R L M).commShiftIso m).app K = evaluationDoubleHomShift R L M K m) ∧ (evaluationDoubleHomFunctor R L M).IsTriangulated ∧ (∀ (K : evaluationDerivedCategory R) (m : ℤ), e (K⟦m⟧) L M ≫ ((evaluationDoubleHomFunctor R L M).commShiftIso m).hom.app K = ((evaluationTensorFunctor R L M).commShiftIso m).hom.app K ≫ (e K L M)⟦m⟧') ∧ ∀ (T : Pretriangulated.Triangle (evaluationDerivedCategory R)) (_hT : T ∈ Pretriangulated.distinguishedTriangles), ∃ t : (evaluationTensorFunctor R L M).mapTriangle.obj T ⟶ (evaluationDoubleHomFunctor R L M).mapTriangle.obj T, t.hom₁ = e T.obj₁ L M ∧ t.hom₂ = e T.obj₂ L M ∧ t.hom₃ = e T.obj₃ L M",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1df3eea78",
+  "group": "NJ",
+  "result": "pass",
+  "note": "nt_compile clean 27.4 s/60 s. All clauses match the node: e is fixed by its transpose equation (same term as landed finiteInjectiveEvaluation); one combined naturality square (K,M covariant, L contravariant); F = tensorLeft H(L,M) triangulated with the native signed commShiftTensorLeft; G's CommShift pinned for every K and m to (-1)^m * two sourceShifts, and the elaboration probe shows G's commShiftIso, mapTriangle and IsTriangulated all use that pinned instance; shift square for all m : Z; morphism of triangles with components e, including the connecting square; no IsIso and no extra hypotheses. Independent chain-level check: sourceShift = (-1)^{qm}, the double-Hom comparison = (-1)^{m(n+c)} and is additive in m; the shift square holds only with the (-1)^m factor; perfect-complex biduality agrees. lean.statement verbatim; docstrings carry source, blueprint and all 6 steps; only the item lean record changed. Advisories: SignedRingedHom.* comes from the module of theorem node lem-weil-pbc-ringed-internal-hom-exact-restriction, which is not in stmt_deps (same as the landed sibling; S2 cannot change stmt_deps); two proof-dep modules imported only transitively; the second reading was by the author."
  }
 }
