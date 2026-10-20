@@ -1,9 +1,55 @@
 {
  "kind": "definition",
  "status": "split",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the section-ring equality, apply sheaf and functor extensionality. At each object, additive structures coincide definitionally. Equality of products follows by evaluating the tensor compatibility of sheafToPresheaf with continuous pushforward on a pure tensor, then applying the coefficient multiplication. Ring extensionality supplies the bundled ring equality; naturality is the equality-transport equation for the same restriction maps. This is sectionRing_over_eq and its slice specialization in Lean.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The transported section equivalence is additive because every equivalence between these preadditive categories preserves binary products and zero morphisms. Apply Mathlib Functor.additive_of_preserves_binary_products directly; no elimination of the concrete section-ring equality is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Project lem-pe-internal-section-tensor-comparison to the existential ordinary comparison together with its pure-tensor formula and its sum-total summand formula. This is sectionTensorWitness. The pure-tensor formula determines the ordinary maps by the relative tensor universal property, so sectionOrdinaryTensorIso is a choice of the canonical normalized data, not an arbitrary isomorphism. Specialize the retained sum-total formula to the slice ring and unfold only the ordinary-comparison alias to prove sliceRawComplexTensorComparison. Keeping the unused coherence, acyclicity and flatness clauses out of this choice predicate avoids repeated kernel comparison of their large dependent endpoint types.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let the section-ring presentation vary over S with an equality from the reconstructed ring to S. Transport the section equivalence along that equality and form the type of isomorphisms between its image of the native cochain total and the coefficient total of its images. At reflexivity the fixed raw comparison inhabits this type, since both totals are their explicit sum totals. Equality elimination identifies every fiber with this reflexive fiber. The private complexAt_eq and totalTypeAt_eq rewrite its specialization to the existing sliceComplexForward endpoints without unfolding the tensors. Transport the raw isomorphism along the resulting type equality. HEq with that fixed isomorphism determines it uniquely by eq_of_heq, proving sliceTotalComparison_existsUnique.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Over an abstract closed braided Grothendieck abelian category, the framework native derived monoidal constructor is definitionally DerivedMonoidal.instMonoidalCategory for its K-flat localization. Prove this equality by reflexivity before specializing to the slice module category. The native tensor, internal Hom, braiding and evaluation remain the framework constructions, independently of any ringed-site closed structure. The same abstract argument is repeated privately for the existing global monoidal equality of the sole consumer, avoiding the same concrete unfolding there. Local named proofs of graded tensor coproduct existence and its associativity compatibility keep the native slice tensor proof arguments shared; their mathematical structures are unchanged.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DH, 03EK, 06YL and 08J9; formal specialization of the native tensor and section-action comparisons, R2 stage-3 proof."
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -221,7 +267,13 @@
    "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sliceRestrictionSectionIso",
    "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sliceHomEvaluationNormalized",
    "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sliceHomRestrictionCompatible",
-   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.SliceHomComparison"
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.SliceHomComparison",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sectionTensorWitness",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sectionOrdinaryTensorIso",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sliceGradedTensor",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sliceGradedTensorFour",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sliceGradedTensorLeft",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sliceGradedTensorRight"
   ],
   "file": "lean/Sheaf/Paper/InternalSliceDerivedHomComparison.lean",
   "statement": "structure SliceHomComparison (S : CoefficientClosedStructure (hom Λ X)) (SU : CoefficientClosedStructure (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1} ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U))) (TU : CoefficientTensorModels.{u, u + 1, u, u + 1} ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) SU) (tU : SliceTensorComparison Λ X U SU TU) (d : RingedSliceEvaluationComparisons (hom Λ X) (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1} ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U)) (ringedSliceDerivedRestriction.{u + 1, u, u, u + 1, u + 1} (Scheme.ProEt.topology X) (ring Λ X) U) S SU (RingedSliceFlatRestriction.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X) U)) (θ : Functor.uncurry.obj (CondensedRing.derivedHom Λ X) ⋙ forward Λ X ≅ ((forward Λ X).op.prod (forward Λ X)) ⋙ hom Λ X)",
@@ -246,5 +298,15 @@
   "group": "Q30",
   "result": "pass",
   "note": "Third delivery; fixes F1-F3 of the f471 RETURN. F1: the slice clause now uses the framework's native local derived tensor (Mod.derivedMonoidalCategory), MonoidalClosed.internalHom (DerivedCategory.monoidalClosed, same construction as the global CondensedRing.derivedHom) and the native counit, none of them transported from S_U. SliceTensorComparison is pinned on K-flat representatives by the unique summand/pure-tensor total comparison (exists-unique with HEq). SliceHomComparison gives theta^U on all local objects with the native evaluation equation and the Step-5 restriction square (variances checked: (c K).inv.op contravariant, (c N).hom covariant); r_U is its unique lift. Global theta/evaluation clause unchanged and correct. No extra hypotheses or universe restrictions; edge cases (empty scheme, zero ring, U=X, unbounded complexes) admitted. lean.statement verbatim for the item and the 3 owned def nodes; all declarations exist; item stmt_deps only gain def nodes used in the Lean. F2: the second reading is substantive. F3: nt_compile --json clean, no errors or warnings: 31.3/3.8/47.4/16.4 s (limit 60 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-bf1df",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261020T221320-L-4173249",
+  "kind": "interface",
+  "note": "independent cc review: delivered item and consumer vs live clone and the packet diffs; node def-sfb-internal-slice-derived-hom-comparison proof fields vs the Lean proofs; new sliceOrdinaryTensorIso/sliceRawComplexTensorIso types (#check) vs the old signatures; importers ConstructibleInternalHomContinuity and InternalHomDualTorAmplitude compiled against the delivered modules"
  }
 }

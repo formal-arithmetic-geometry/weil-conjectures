@@ -54,6 +54,20 @@ namespace AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
 
+universe u₀ v₀
+
+private theorem globalNativeMonoidal_eq_localization
+    (C : Type u₀) [Category.{v₀} C] [Abelian C] [IsGrothendieckAbelian.{v₀} C]
+    [HasDerivedCategory.{v₀} C] [MonoidalCategory C] [MonoidalClosed C]
+    [MonoidalPreadditive C] [BraidedCategory C]
+    [(DerivedCategory.Qh (C := C)).HasDerivedMonoidalCategory
+      (HomotopyCategory.quasiIso C (.up ℤ))] :
+    DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory C =
+      DerivedMonoidal.instMonoidalCategory DerivedCategory.Qh
+        (HomotopyCategory.quasiIso C (.up ℤ)) := by
+  rfl
+
+
 /-- The native derived tensor uses the K-flat localization monoidal structure.
 Source: blueprint derived tensor--Hom, Stacks 06YS
 (blueprint: lem-sfb-module-object-ringed-site-derived-comparison).
@@ -64,7 +78,7 @@ theorem internalMonoidal_eq_localization :
     (inferInstance : MonoidalCategory (DerivedCategory (Internal Λ X))) =
       DerivedMonoidal.instMonoidalCategory DerivedCategory.Qh
         (HomotopyCategory.quasiIso (Internal Λ X) (.up ℤ)) := by
-  rfl
+  exact globalNativeMonoidal_eq_localization (Internal Λ X)
 
 /-- The actual derived Koszul braiding, transported along the preceding equality.
 Source: Stacks 06YL (blueprint: lem-sfb-module-object-ringed-site-derived-comparison). -/
