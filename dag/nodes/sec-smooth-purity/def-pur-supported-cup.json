@@ -38,9 +38,70 @@
   "lem-weil-derived-tensor-functorial",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the specified constant restriction with the lax monoidal unit of the fixed-scalar lowerStar, conjugated by cupConstantIso. The unit laws give compatibility with composition and coefficient multiplication.",
+   "uses": [
+    "def-weil-proetale-module-direct-image",
+    "def-sfb-finite-upper-star-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the supported-constant cokernel presentation through sfIntrinsicModuleEquivalence. Its quotient restriction is epic, so each cupCoefficientRestriction is epic. Tensor preserves these epimorphisms. Restrict both supports to their intersection, multiply there via the lax comparison, verify the normalization, and cancel the epic tensor of restriction maps for uniqueness.",
+   "uses": [
+    "lem-pur-proetale-supported-constant-presentation",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For cupCoefficientMap_isIso, use the existing etale closedConstantTensor theorem. Its specified tensor arrow is normalized by the lax direct-image units, using the proved constant-module transition and lowerStar composition laws. The comparison functor is strong monoidal, and its base-change mate is monoidal. At the tensor unit cupConstantIso is its oplax unit, by uniqueness of left adjoints. Hence the three base-change isomorphisms transport the etale tensor isomorphism to an arrow with exactly the defining restriction/multiplication normalization of cupCoefficientMap. The already proved uniqueness identifies these arrows. This replaces the separate balanced quotient/ideal-sum calculation.",
+   "uses": [
+    "lem-pur-etale-closed-constant-tensor",
+    "def-weil-proetale-module-direct-image",
+    "def-sfb-finite-upper-star-monoidal",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For cupCoefficient_flat use openClosedFlatness_etale on the tensor unit and the actual open complement. Apply flat_comparisonUpperStar_obj and transport along the proved underived isIso_lowerStarComparisonUpperStarBaseChange, valid for closed immersions because they are quasi-compact and quasi-separated. No quasi-compactness of the open complement is needed.",
+   "uses": [
+    "lem-sfb-open-closed-flatness",
+    "lem-exc-constant-inverse-image-flat",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-proetale-module-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the derived theorem, a flat sheaf in degree zero is K-flat. Apply the source-library isIso_mu_Qh_of_kFlat to that complex and the other degree-zero complex, transport through the homotopy quotient comparison, and compose with the single-complex tensor isomorphism and the ordinary coefficient isomorphism just proved. Package the derived monoidal structure together with the localization lax structure, and transport from the canonical pair by equality, avoiding expansion of their data.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-kflat-complex",
+    "lem-weil-derived-tensor-resolution-independent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-module-direct-image",
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-pur-proetale-supported-constant-presentation",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-etale-closed-constant-tensor",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-open-closed-flatness",
+  "lem-exc-constant-inverse-image-flat",
+  "def-pc-kflat-complex",
+  "lem-weil-derived-tensor-resolution-independent"
+ ],
+ "proof_origin": {
+  "by": "E7",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-pur-supported-cup.proof.md",
+  "place": "All four coefficient obligations: normalized restriction and supported-constant presentation; etale tensor isomorphism transported through strong monoidal comparison and its base-change mate; etale open-closed flatness; degree-zero K-flat localization tensor comparison. All four Lean proofs are complete from the stated declarations."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -402,5 +463,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Import-only dependency repair: the finite-coefficient TensorResolution import declares the same ProEtale tensor names as the legacy TensorResolution imported by the recorded supported-exterior/site-comparison interface. Use the upstream legacy tensor owner consistently; all supported-cup definitions, normalization, shifts and theorem statements are unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261020T211701-L-3488314",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
