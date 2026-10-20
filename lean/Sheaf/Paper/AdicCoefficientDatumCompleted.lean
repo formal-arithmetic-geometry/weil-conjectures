@@ -1,0 +1,644 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Q22
+-/
+module
+
+public import Sheaf.Paper.CompletedConstantFiniteComplexRealization
+public import Sheaf.Paper.CompleteCoefficientDatum
+public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
+public import Mathlib.Algebra.Homology.Functor
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+
+/-!
+# Completed adic coefficient datum and its strict reduction tower
+
+Source: blueprint, proper base change, order 1239; Stacks Tags 099L and 099M
+(blueprint: def-weil-pbc-adic-coefficient-datum).
+
+The site has object universe t+1 and morphism universe t. Coefficients and modules
+are in t+1. The ambient ring is the actual inverse limit of the finite constant
+quotient sheaves, not the constant sheaf associated to the original ring.
+
+## Main definitions
+
+* `ProEtaleAdicCoefficientDatum`: coefficient hypotheses.
+* `adicDatumRing`: the actual completed coefficient sheaf.
+* `adicDatumAdjunction`: normalized derived scalar adjunction.
+* `adicDatumDerivedTower`: universal strict quotient tower.
+* `adicDatumModelTower`: its explicit K-flat computation.
+-/
+
+@[expose] public noncomputable section
+
+set_option autoImplicit false
+set_option synthInstance.maxSize 2048
+
+universe t
+
+open CategoryTheory CategoryTheory.Limits Opposite
+
+namespace AlgebraicGeometry.Scheme
+
+/-- The Noetherian, finitely generated, torsion, perfect and finite quotient hypotheses.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+structure ProEtaleAdicCoefficientDatum (A : Type (t + 1)) [CommRing A]
+    extends CompleteCoefficientDatum A where
+  quotientFinite : ∀ n : ℕ, Finite (A ⧸ ideal ^ (n + 1))
+
+variable (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
+variable (d : ProEtaleAdicCoefficientDatum A)
+
+section FiniteCoefficientComparison
+variable (P : Type (t + 1)) [CommRing P] [Finite P]
+variable [TopologicalSpace P] [DiscreteTopology P]
+
+/-- Canonical identification of the constant finite ring sheaf with the recorded
+continuous-functions coefficient sheaf. The normalization fixes the constants map.
+Source: order 1239; def-weil-pbc-proetale-modules
+(blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: finiteCoefficientScalarMap_locallyBijective says constant scalars and continuous
+functions on connected components have the same associated sheaf. The sheafification
+universal property extends the constants map uniquely. Local bijectivity makes that
+extension invertible, and the normalization uniquely determines the isomorphism. -/
+theorem adicDatumFiniteCoefficientIso_exists :
+    ∃! e : adicLisseRing T P ≅ AlgebraicGeometry.ProEtale.finiteCoefficientRingSheaf T P,
+      adicLisseConstantUnit T P ≫ e.hom.hom =
+        AlgebraicGeometry.ProEtale.finiteCoefficientScalarMap T P := by
+  sorry
+
+/-- The normalized finite coefficient isomorphism; its quotient specializations
+identify the inverse-limit ring used here with the node's completed coefficient sheaf.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumFiniteCoefficientIso :
+    adicLisseRing T P ≅ AlgebraicGeometry.ProEtale.finiteCoefficientRingSheaf T P :=
+  (adicDatumFiniteCoefficientIso_exists T P).exists.choose
+
+/-- Transport of a finite coefficient homomorphism along the normalized isomorphisms
+is exactly postcomposition on continuous functions, characterized before sheafification.
+This supplies naturality for every quotient transition, hence for the limit projections.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: both routes send a constant p to the constant φ(p). The sheafification
+universal property identifies them. For any continuous section, its open level-set
+cover makes it locally constant; this extends the equality to every section. -/
+theorem adicDatumFiniteCoefficientIso_natural
+    (B : Type (t + 1)) [CommRing B] [Finite B]
+    [TopologicalSpace B] [DiscreteTopology B] (φ : P →+* B)
+    (q : AlgebraicGeometry.ProEtale.finiteCoefficientPresheaf T P ⟶
+      AlgebraicGeometry.ProEtale.finiteCoefficientPresheaf T B)
+    (hq : ∀ (U : T.ProEtᵒᵖ)
+      (s : C(ConnectedComponents U.unop.left, P))
+      (c : ConnectedComponents U.unop.left),
+      ContinuousMap.toFun (q.app U s) c = φ (s c)) :
+    (adicDatumFiniteCoefficientIso T P).hom ≫
+        (presheafToSheaf (ProEt.topology T) RingCat.{t + 1}).map q =
+      (adicLisseForget T).map
+        ((constantSheaf (ProEt.topology T) CommRingCat.{t + 1}).map
+          (CommRingCat.ofHom φ)) ≫ (adicDatumFiniteCoefficientIso T B).hom := by
+  sorry
+end FiniteCoefficientComparison
+
+/-- The completed coefficient sheaf, with its genuine compatible-family sections.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+abbrev adicDatumRing := adicLisseCompletedRing T d.ideal
+
+/-- Module sheaves over the completed coefficient sheaf.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+abbrev adicDatumModules := completedConstantModules T (adicDatumRing T d)
+
+/-- The ambient unbounded derived category, with the standard localization.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+abbrev adicDatumDerived := completedConstantDerived (adicDatumModules T d)
+
+/-- Finite biproducts are the usual products in the abelian module category.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+instance adicDatumFiniteBiproducts : HasFiniteBiproducts (adicDatumModules T d) :=
+  HasFiniteBiproducts.of_hasFiniteProducts
+
+/-- Strict inverse sequences of completed-coefficient module sheaves; index n is n+1.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+abbrev adicDatumTowers := ℕᵒᵖ ⥤ adicDatumModules T d
+
+/-- The original ring acts by its compatible residues in every finite quotient.
+The projection equations determine this map uniquely.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: the constant quotient maps form a cone, since the quotient maps compose.
+Use the limit lift; its projection identities prove existence and uniqueness. -/
+theorem adicDatumScalar_exists :
+    ∃! φ : adicLisseConstantRing T A ⟶ adicDatumRing T d,
+      ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem T d.ideal) (op n) =
+        (constantSheaf (ProEt.topology T) CommRingCat.{t + 1}).map
+          (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) := by
+  sorry
+
+/-- The unique compatible-residue coefficient map.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumScalar := (adicDatumScalar_exists T d).exists.choose
+
+/-- The strict quotient tower as modules over the completed ring is uniquely specified
+by its objects and the quotient formula on sections, as in CompletedConstantQuotientTower.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: restrict the regular module at each quotient along its limit projection.
+The quotient sheaf map is linear because the limit projections commute with transitions.
+Its underlying section map is the specified quotient. Identities and composition follow
+from those of the ring diagram. The fields of the indicated structure fix all data. -/
+theorem adicDatumQuotients_exists :
+    Nonempty (CompletedConstantQuotientTower T d.ideal (adicDatumRing T d) (𝟙 _)) := by
+  sorry
+
+/-- The canonical quotient module tower, including its prescribed quotient transitions.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumQuotients : adicDatumTowers T d :=
+  (Classical.choice (adicDatumQuotients_exists T d)).diagram
+
+/-- One K-flat representative, without restricting the derived object.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+structure AdicDatumModel (K : adicDatumDerived T d) where
+  complex : CochainComplex (adicDatumModules T d) ℤ
+  isKFlat : CochainComplex.IsAcyclicTensorKFlat (R := adicDatumRing T d) complex
+  realization : (completedConstantQ _).obj complex ≅ K
+
+/-- The choice of model exists for every unbounded derived object.
+Source: order 1239; Tag 06YS (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: choose a representative by essential surjectivity of localization, resolve it
+by exists_isKFlatResolutionIndependentCoefficients and compose the localization of
+that quasi-isomorphism with the representative isomorphism. -/
+theorem adicDatumModel_exists (K : adicDatumDerived T d) :
+    Nonempty (AdicDatumModel T d K) := by
+  sorry
+
+section ScalarChange
+
+variable {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+
+/-- The homotopy localization with the same standard derived-category instance.
+Source: Tag 05RU (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+abbrev adicDatumQh (B : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
+  @DerivedCategory.Qh (completedConstantModules T B) _ _ (HasDerivedCategory.standard _)
+
+/-- Derived extension from the existing universal K-flat derived pair.
+Its comparison counit is retained below, so no unrelated functor is chosen.
+Source: order 1239; Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumExtension :
+    completedConstantDerived (completedConstantModules T R) ⥤
+      completedConstantDerived (completedConstantModules T S) :=
+  letI := HasDerivedCategory.standard (completedConstantModules T R)
+  letI := HasDerivedCategory.standard (completedConstantModules T S)
+  ((SheafOfModules.derivedChangeOfRingsIndependentCoefficients φ).choose_spec.choose_spec
+    |>.choose_spec.choose_spec.2.2).choose
+
+/-- The universal derived counit on homotopy complexes.
+Source: order 1239; Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumExtensionCounit :
+    adicDatumQh T R ⋙ adicDatumExtension T φ ⟶
+      (completedConstantExtension T φ).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+        adicDatumQh T S :=
+  letI := HasDerivedCategory.standard (completedConstantModules T R)
+  letI := HasDerivedCategory.standard (completedConstantModules T S)
+  ((SheafOfModules.derivedChangeOfRingsIndependentCoefficients φ).choose_spec.choose_spec
+    |>.choose_spec.choose_spec.2.2).choose_spec.choose
+
+/-- Restriction changes only the scalar action and is exact.
+Source: order 1239; Tag 03D3 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: the underlying abelian sheaves, kernels and sheafified cokernels are unchanged
+by restriction. Their universal maps remain linear for the restricted action. -/
+theorem adicDatumRestriction_exact :
+    PreservesFiniteLimits (SheafOfModules.restrictScalars.{t + 1}
+      ((adicLisseForget T).map φ)) ∧
+    PreservesFiniteColimits (SheafOfModules.restrictScalars.{t + 1}
+      ((adicLisseForget T).map φ)) := by
+  sorry
+
+/-- Exact derived restriction of scalars.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumRestriction :
+    completedConstantDerived (completedConstantModules T S) ⥤
+      completedConstantDerived (completedConstantModules T R) :=
+  letI := HasDerivedCategory.standard (completedConstantModules T R)
+  letI := HasDerivedCategory.standard (completedConstantModules T S)
+  letI := (adicDatumRestriction_exact T φ).1
+  letI := (adicDatumRestriction_exact T φ).2
+  (SheafOfModules.restrictScalars.{t + 1} ((adicLisseForget T).map φ)).mapDerivedCategory
+
+/-- Local pure tensors in the actual sheafified extension, transported by the
+specified object identification of the additive scalar-extension witness.
+Source: order 1239; Tag 03EK (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumTensorSection (M : completedConstantModules T R) (U : T.ProEtᵒᵖ)
+    (s : S.obj.obj U) (m : M.val.obj U) :
+    ((completedConstantExtension T φ).obj M).val.obj U :=
+  letI := HasDerivedCategory.standard (completedConstantModules T R)
+  letI := HasDerivedCategory.standard (completedConstantModules T S)
+  letI : Module (R.obj.obj U) (S.obj.obj U) :=
+    Module.compHom (S.obj.obj U) (φ.hom.app U).hom
+  (eqToHom
+    ((SheafOfModules.derivedChangeOfRingsIndependentCoefficients φ).choose_spec.choose M).symm)
+      |>.val.app U
+    (((PresheafOfModules.sheafificationAdjunction
+      (𝟙 ((adicLisseForget T).obj S).obj)).unit.app
+        (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} φ M)).app U
+          (s ⊗ₜ[R.obj.obj U] m))
+
+/-- The ordinary tensor/restriction unit, fixed by its local pure-tensor formula.
+Source: order 1239; Tag 03EK (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: the presheaf tensor unit m maps to 1 tensor m and then sheafifies.
+Naturality on restrictions gives a sheaf map; tensor generation gives uniqueness. -/
+theorem adicDatumOrdinaryUnit_exists (M : completedConstantModules T R) :
+    ∃! u : M ⟶ (SheafOfModules.restrictScalars.{t + 1}
+      ((adicLisseForget T).map φ)).obj ((completedConstantExtension T φ).obj M),
+      ∀ (U : T.ProEtᵒᵖ) (m : M.val.obj U),
+        u.val.app U m = adicDatumTensorSection T φ M U 1 m := by
+  sorry
+
+/-- The ordinary unit, selected by the unique section formula.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumOrdinaryUnit (M : completedConstantModules T R) :
+    M ⟶ (SheafOfModules.restrictScalars.{t + 1}
+      ((adicLisseForget T).map φ)).obj ((completedConstantExtension T φ).obj M) :=
+  (adicDatumOrdinaryUnit_exists T φ M).exists.choose
+
+/-- Tensor/restriction adjunction normalized by the ordinary unit on every module.
+Source: order 1239; Tag 03EK (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: the balanced map sends s tensor m to s times the proposed restricted map(m).
+Sheafification extends it uniquely. Evaluation at 1 tensor m is its inverse;
+the formulas commute with precomposition and postcomposition. -/
+theorem adicDatumOrdinaryAdjunction_exists :
+    ∃ adj : completedConstantExtension T φ ⊣
+        SheafOfModules.restrictScalars.{t + 1} ((adicLisseForget T).map φ),
+      ∀ M : completedConstantModules T R, adj.unit.app M = adicDatumOrdinaryUnit T φ M := by
+  sorry
+
+/-- The canonical ordinary scalar adjunction.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumOrdinaryAdjunction : completedConstantExtension T φ ⊣
+    SheafOfModules.restrictScalars.{t + 1} ((adicLisseForget T).map φ) :=
+  (adicDatumOrdinaryAdjunction_exists T φ).choose
+
+/-- The exact restriction comparison, retaining its specified localization maps.
+Source: Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumRestrictionComparison :
+    adicDatumQh T S ⋙ adicDatumRestriction T φ ≅
+      (SheafOfModules.restrictScalars.{t + 1}
+        ((adicLisseForget T).map φ)).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ adicDatumQh T R :=
+  letI := HasDerivedCategory.standard (completedConstantModules T R)
+  letI := HasDerivedCategory.standard (completedConstantModules T S)
+  letI := (adicDatumRestriction_exact T φ).1
+  letI := (adicDatumRestriction_exact T φ).2
+  (SheafOfModules.restrictScalars.{t + 1} ((adicLisseForget T).map φ)).mapDerivedCategoryFactorsh
+
+/-- The derived adjunction is fixed by compatibility with the ordinary normalized
+adjunction and the universal derived counit, rather than by bare existence.
+Source: order 1239; Tags 06YY and 09T5 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: derive the ordinary tensor/restriction adjunction, whose unit is 1 tensor m.
+Restriction is exact. Identify its derived functor with exact restriction using its
+localization comparison, and identify its left adjoint with the universal left-derived
+pair already chosen above. The universal property fixes the displayed hom-equivalence
+formula on homotopy representatives, which determines the adjunction after localization. -/
+theorem adicDatumAdjunction_exists :
+    ∃ adj : adicDatumExtension T φ ⊣ adicDatumRestriction T φ,
+      ∀ (C : HomotopyCategory (completedConstantModules T R) (ComplexShape.up ℤ))
+        (D : HomotopyCategory (completedConstantModules T S) (ComplexShape.up ℤ))
+        (f : ((completedConstantExtension T φ).mapHomotopyCategory
+          (ComplexShape.up ℤ)).obj C ⟶ D),
+        adj.homEquiv ((adicDatumQh T R).obj C) ((adicDatumQh T S).obj D)
+          ((adicDatumExtensionCounit T φ).app C ≫ (adicDatumQh T S).map f) =
+        (adicDatumQh T R).map
+          ((adicDatumOrdinaryAdjunction T φ).mapHomotopyCategory (ComplexShape.up ℤ)
+            |>.homEquiv C D f) ≫ (adicDatumRestrictionComparison T φ).inv.app D := by
+  sorry
+
+/-- The normalized derived scalar adjunction.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumAdjunction : adicDatumExtension T φ ⊣ adicDatumRestriction T φ :=
+  (adicDatumAdjunction_exists T φ).choose
+
+/-- The universal scalar-extension comparison, now on complexes rather than homotopy
+classes, using precisely the two localization comparison isomorphisms.
+Source: order 1239; Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumComplexCounit (C : CochainComplex (completedConstantModules T R) ℤ) :
+    (adicDatumExtension T φ).obj ((completedConstantQ _).obj C) ⟶
+      (completedConstantQ _).obj
+        (((completedConstantExtension T φ).mapHomologicalComplex (ComplexShape.up ℤ)).obj C) :=
+  letI := HasDerivedCategory.standard (completedConstantModules T R)
+  letI := HasDerivedCategory.standard (completedConstantModules T S)
+  (adicDatumExtension T φ).map ((DerivedCategory.quotientCompQhIso _).inv.app C) ≫
+    (adicDatumExtensionCounit T φ).app
+      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj C) ≫
+    (adicDatumQh T S).map
+      (((completedConstantExtension T φ).mapHomotopyCategoryFactors
+        (ComplexShape.up ℤ)).hom.app C) ≫
+    (DerivedCategory.quotientCompQhIso _).hom.app
+      (((completedConstantExtension T φ).mapHomologicalComplex (ComplexShape.up ℤ)).obj C)
+
+/-- The specified comparison is invertible on every K-flat complex.
+Source: order 1239; Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: the universal derived counit is invertible on K-flat homotopy representatives
+by derivedChangeOfRingsIndependentCoefficients. The two changes between homotopy
+and complex localization above are isomorphisms, as is their image under a functor. -/
+theorem adicDatumComplexCounit_isIso
+    (C : CochainComplex (completedConstantModules T R) ℤ)
+    (hC : CochainComplex.IsAcyclicTensorKFlat (R := R) C) :
+    IsIso (adicDatumComplexCounit T φ C) := by
+  sorry
+
+end ScalarChange
+
+/-- The actual limit projection to the positive quotient level n+1.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumProjection (n : ℕ) :
+    adicDatumRing T d ⟶ (adicLisseRingSystem T d.ideal).obj (op n) :=
+  limit.π (adicLisseRingSystem T d.ideal) (op n)
+
+/-- Finite reduction as a functor to the quotient-coefficient derived category.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumReduction (n : ℕ) := adicDatumExtension T (adicDatumProjection T d n)
+
+/-- Derived tensor with the quotient, retaining the completed-ring action.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumReductionUnderlying (n : ℕ) :=
+  adicDatumReduction T d n ⋙ adicDatumRestriction T (adicDatumProjection T d n)
+
+
+/-- Ordinary reduction, retaining the A_T action.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumOrdinaryReduction (n : ℕ) : adicDatumModules T d ⥤ adicDatumModules T d :=
+  completedConstantExtension T (adicDatumProjection T d n) ⋙
+    SheafOfModules.restrictScalars.{t + 1}
+      ((adicLisseForget T).map (adicDatumProjection T d n))
+
+/-- Quotient transition on actual tensor sections, natural in the module.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: the quotient map on the scalar factor respects the balancing relation because
+its composite with the completion projection is the earlier projection. It respects
+restrictions, addition and scalar action. Sheafification gives the map. Tensor
+sections locally generate, proving uniqueness and naturality in the module. -/
+theorem adicDatumOrdinaryTransition_exists (m n : ℕᵒᵖ) (g : m ⟶ n) :
+    ∃! τ : adicDatumOrdinaryReduction T d m.unop ⟶ adicDatumOrdinaryReduction T d n.unop,
+      ∀ (M : adicDatumModules T d) (U : T.ProEtᵒᵖ)
+        (s : ((adicLisseRingSystem T d.ideal).obj m).obj.obj U) (x : M.val.obj U),
+        (τ.app M).val.app U (adicDatumTensorSection T
+          (adicDatumProjection T d m.unop) M U s x) =
+        adicDatumTensorSection T (adicDatumProjection T d n.unop) M U
+          (((adicLisseRingSystem T d.ideal).map g).hom.app U s) x := by
+  sorry
+
+/-- The specified quotient map on the scalar factor.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumOrdinaryTransition (m n : ℕᵒᵖ) (g : m ⟶ n) :
+    adicDatumOrdinaryReduction T d m.unop ⟶ adicDatumOrdinaryReduction T d n.unop :=
+  (adicDatumOrdinaryTransition_exists T d m n g).exists.choose
+
+/-- Identity law for the quotient transitions.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: the identity quotient fixes every scalar, hence every pure tensor. The unique
+section formula identifies the sheaf map with the identity, naturally in M. -/
+theorem adicDatumOrdinaryTransition_id (n : ℕᵒᵖ) :
+    adicDatumOrdinaryTransition T d n n (𝟙 n) = 𝟙 _ := by
+  sorry
+
+/-- Composition law for the quotient transitions.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: either composite sends s tensor x to q(s) tensor x. Composition of the ring
+quotient diagram gives the same q, and uniqueness identifies the transformations. -/
+theorem adicDatumOrdinaryTransition_comp (l m n : ℕᵒᵖ) (g : l ⟶ m) (h : m ⟶ n) :
+    adicDatumOrdinaryTransition T d l n (g ≫ h) =
+      adicDatumOrdinaryTransition T d l m g ≫ adicDatumOrdinaryTransition T d m n h := by
+  sorry
+
+/-- The strict diagram of ordinary reduction endofunctors, with genuine quotient maps.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumOrdinaryTower : ℕᵒᵖ ⥤ (adicDatumModules T d ⥤ adicDatumModules T d) where
+  obj n := adicDatumOrdinaryReduction T d n.unop
+  map {m n} g := adicDatumOrdinaryTransition T d m n g
+  map_id n := adicDatumOrdinaryTransition_id T d n
+  map_comp {l m n} g h := adicDatumOrdinaryTransition_comp T d l m n g h
+
+/-- The module-to-tower construction is additive.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: extension and restriction of scalars are additive. Addition of tower maps is
+levelwise, so equality at every evaluation proves additivity of the whole functor. -/
+theorem adicDatumOrdinaryTower_additive : (adicDatumOrdinaryTower T d).flip.Additive := by
+  sorry
+attribute [instance] adicDatumOrdinaryTower_additive
+
+/-- Actual strict tensor tower as a complex in Tow(Mod(A_T)).
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumTowerFunctor : CochainComplex (adicDatumModules T d) ℤ ⥤
+    CochainComplex (adicDatumTowers T d) ℤ :=
+  (adicDatumOrdinaryTower T d).flip.mapHomologicalComplex (ComplexShape.up ℤ)
+
+/-- The ambient derived tower category uses the standard localization.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+abbrev adicDatumTowerDerived := completedConstantDerived (adicDatumTowers T d)
+
+/-- Universal derived strict tensor tower, computed on every K-flat representative.
+Source: order 1239; Tag 06XN (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: the strict construction commutes with shifts and the two finite summands of
+cones. At every level, quasi-isomorphisms between K-flat complexes remain such after
+extension, then restriction. Tower cohomology is levelwise, so it preserves these
+quasi-isomorphisms in Tow. K-flat resolutions and the resolving-class theorem give
+the universal left-derived pair, with invertible comparison on that class. -/
+theorem adicDatumTowerDerived_exists :
+    ∃ (F : adicDatumDerived T d ⥤ adicDatumTowerDerived T d)
+      (ε : completedConstantQ _ ⋙ F ⟶
+        adicDatumTowerFunctor T d ⋙ completedConstantQ _),
+      F.IsLeftDerivedFunctor ε
+        (HomologicalComplex.quasiIso (adicDatumModules T d) (ComplexShape.up ℤ)) ∧
+      ∀ C : CochainComplex (adicDatumModules T d) ℤ,
+        CochainComplex.IsAcyclicTensorKFlat (R := adicDatumRing T d) C → IsIso (ε.app C) := by
+  sorry
+
+/-- Strict quotient tower in the derived category of towers; its universal counit
+specifies the comparison between all K-flat computations.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumDerivedTower : adicDatumDerived T d ⥤ adicDatumTowerDerived T d :=
+  (adicDatumTowerDerived_exists T d).choose
+
+/-- Derived finite reduction at a model, with its quotient-coefficient action retained.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumModelReduction {K : adicDatumDerived T d} (M : AdicDatumModel T d K) (n : ℕ) :=
+  (completedConstantQ _).obj
+    (((completedConstantExtension T (adicDatumProjection T d n)).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj M.complex)
+
+/-- The same strict model, with all transitions, in the one ambient derived category.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumModelTower {K : adicDatumDerived T d} (M : AdicDatumModel T d K) :
+    ℕᵒᵖ ⥤ adicDatumDerived T d :=
+  (HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj
+    ((adicDatumTowerFunctor T d).obj M.complex)) ⋙ completedConstantQ _
+
+/-- Identity on every degree identifies evaluation of the strict tower complex
+with successive termwise extension and restriction.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: both terms in every degree are the same restricted tensor module and both
+differentials are obtained by applying extension then restriction to the original
+differential. Identity components commute with these differentials and form the
+required isomorphism; the component equation determines its hom, hence its inverse. -/
+theorem adicDatumModelComplexRestrictionIso_exists {K : adicDatumDerived T d}
+    (M : AdicDatumModel T d K) (n : ℕ) :
+    ∃! e : (HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj
+        ((adicDatumTowerFunctor T d).obj M.complex)).obj (op n) ≅
+      ((SheafOfModules.restrictScalars.{t + 1}
+        ((adicLisseForget T).map (adicDatumProjection T d n))).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj
+        (((completedConstantExtension T (adicDatumProjection T d n)).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj M.complex),
+      ∀ i : ℤ, e.hom.f i = 𝟙 _ := by
+  sorry
+
+/-- The degreewise identity comparison, fixed by its component equations.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumModelComplexRestrictionIso {K : adicDatumDerived T d}
+    (M : AdicDatumModel T d K) (n : ℕ) :=
+  (adicDatumModelComplexRestrictionIso_exists T d M n).exists.choose
+
+/-- Canonical exact scalar-restriction comparison for a finite quotient complex.
+Source: order 1239; Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumModelRestriction {K : adicDatumDerived T d}
+    (M : AdicDatumModel T d K) (n : ℕ) :
+    (adicDatumModelTower T d M).obj (op n) ≅
+      (adicDatumRestriction T (adicDatumProjection T d n)).obj
+        (adicDatumModelReduction T d M n) :=
+  letI := HasDerivedCategory.standard (adicDatumModules T d)
+  letI := HasDerivedCategory.standard
+    (completedConstantModules T ((adicLisseRingSystem T d.ideal).obj (op n)))
+  letI := (adicDatumRestriction_exact T (adicDatumProjection T d n)).1
+  letI := (adicDatumRestriction_exact T (adicDatumProjection T d n)).2
+  (completedConstantQ _).mapIso (adicDatumModelComplexRestrictionIso T d M n) ≪≫
+    ((SheafOfModules.restrictScalars.{t + 1}
+    ((adicLisseForget T).map (adicDatumProjection T d n))).mapDerivedCategoryFactors.app
+      (((completedConstantExtension T (adicDatumProjection T d n)).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj M.complex)).symm
+
+/-- Comparison from derived scalar extension of K to its specified K-flat computation.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumModelReductionComparison {K : adicDatumDerived T d}
+    (M : AdicDatumModel T d K) (n : ℕ) :
+    (adicDatumReduction T d n).obj K ⟶ adicDatumModelReduction T d M n :=
+  (adicDatumReduction T d n).map M.realization.inv ≫
+    adicDatumComplexCounit T (adicDatumProjection T d n) M.complex
+
+/-- The canonical comparison with a K-flat computation is invertible.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: the model realization is an isomorphism and its functor image is invertible.
+The remaining factor is the universal K-flat comparison just described. -/
+theorem adicDatumModelReductionComparison_isIso {K : adicDatumDerived T d}
+    (M : AdicDatumModel T d K) (n : ℕ) :
+    IsIso (adicDatumModelReductionComparison T d M n) := by
+  sorry
+
+/-- The canonical K-flat comparison as an isomorphism.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumModelReductionIso {K : adicDatumDerived T d}
+    (M : AdicDatumModel T d K) (n : ℕ) :
+    (adicDatumReduction T d n).obj K ≅ adicDatumModelReduction T d M n :=
+  letI := adicDatumModelReductionComparison_isIso T d M n
+  asIso (adicDatumModelReductionComparison T d M n)
+
+section Balancing
+variable {R S B : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+variable (φ : R ⟶ S) (ψ : S ⟶ B)
+
+/-- Ordinary scalar-extension associativity, with its balanced section formula.
+This specifies the natural isomorphism uniquely, including all complex differentials.
+Source: order 1239; Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: send s tensor (r tensor x) to (s times ψ(r)) tensor x; the inverse sends
+s tensor x to s tensor (1 tensor x). The balancing relations prove both maps are
+well defined and inverse. They commute with restrictions and differentials. A chain
+map changes x only, giving naturality. Tensor sections locally generate, giving
+uniqueness. For three scalar changes both composites multiply the same three scalars,
+which proves the quotient cocycle, including identity quotient maps. -/
+theorem adicDatumBalance_exists :
+    ∃! e : (completedConstantExtension T φ).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
+        (completedConstantExtension T ψ).mapHomologicalComplex (ComplexShape.up ℤ) ≅
+      (completedConstantExtension T (φ ≫ ψ)).mapHomologicalComplex (ComplexShape.up ℤ),
+      ∀ (C : CochainComplex (completedConstantModules T R) ℤ) (p : ℤ) (U : T.ProEtᵒᵖ)
+        (s : B.obj.obj U) (r : S.obj.obj U) (x : (C.X p).val.obj U),
+        ((e.hom.app C).f p).val.app U
+          (adicDatumTensorSection T ψ ((completedConstantExtension T φ).obj (C.X p)) U s
+            (adicDatumTensorSection T φ (C.X p) U r x)) =
+        adicDatumTensorSection T (φ ≫ ψ) (C.X p) U
+          (s * ψ.hom.app U r) x := by
+  sorry
+
+/-- The canonical balancing isomorphism of scalar-extension complexes.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumBalance :
+    (completedConstantExtension T φ).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
+        (completedConstantExtension T ψ).mapHomologicalComplex (ComplexShape.up ℤ) ≅
+      (completedConstantExtension T (φ ≫ ψ)).mapHomologicalComplex (ComplexShape.up ℤ) :=
+  (adicDatumBalance_exists T φ ψ).exists.choose
+
+/-- K-flatness survives ordinary extension, with no flatness hypothesis on the ring map.
+Source: order 1239; Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: tensor an acyclic S-complex N with the extended R-complex. Balancing identifies
+it with the tensor of the original K-flat complex and the restricted N. Restriction
+is exact, so the latter is acyclic. This is exactly the K-flatness criterion over S. -/
+theorem adicDatumExtension_kflat (C : CochainComplex (completedConstantModules T R) ℤ)
+    (hC : CochainComplex.IsAcyclicTensorKFlat (R := R) C) :
+    CochainComplex.IsAcyclicTensorKFlat (R := S)
+      (((completedConstantExtension T φ).mapHomologicalComplex (ComplexShape.up ℤ)).obj C) := by
+  sorry
+/-- The actual balancing normalizations satisfy the cocycle, including all quotients.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: on a triple tensor s tensor (r tensor (q tensor x)), both routes give
+s times χ(r) times χ(ψ(q)) tensor x. Associativity and preservation of multiplication
+identify these coefficients. These sections locally generate, so the chain maps agree.
+The final equality transport only reassociates composition of the same ring maps. -/
+theorem adicDatumBalance_cocycle
+    {V : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (χ : B ⟶ V)
+    (C : CochainComplex (completedConstantModules T R) ℤ) :
+    ((completedConstantExtension T χ).mapHomologicalComplex (ComplexShape.up ℤ)).map
+        ((adicDatumBalance T φ ψ).hom.app C) ≫
+      (adicDatumBalance T (φ ≫ ψ) χ).hom.app C =
+    (adicDatumBalance T ψ χ).hom.app
+        (((completedConstantExtension T φ).mapHomologicalComplex (ComplexShape.up ℤ)).obj C) ≫
+      (adicDatumBalance T φ (ψ ≫ χ)).hom.app C ≫
+      eqToHom (congrArg (fun ξ ↦
+        ((completedConstantExtension T ξ).mapHomologicalComplex (ComplexShape.up ℤ)).obj C)
+          (Category.assoc φ ψ χ).symm) := by
+  sorry
+end Balancing
+
+/-- Finite-level normalization on the K-flat computation, with its quotient action.
+The limit projection equation identifies the composite scalar map with π_a.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumModelNormalization {K : adicDatumDerived T d}
+    (M : AdicDatumModel T d K) (a b : ℕ) (h : a ≤ b) :
+    (completedConstantQ _).obj
+      (((completedConstantExtension T
+        ((adicLisseRingSystem T d.ideal).map (homOfLE h).op)).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj
+        (((completedConstantExtension T (adicDatumProjection T d b)).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj M.complex)) ≅ adicDatumModelReduction T d M a :=
+  (completedConstantQ _).mapIso
+    ((adicDatumBalance T (adicDatumProjection T d b)
+      ((adicLisseRingSystem T d.ideal).map (homOfLE h).op)).app M.complex ≪≫
+        eqToIso (congrArg (fun ξ ↦
+          ((completedConstantExtension T ξ).mapHomologicalComplex (ComplexShape.up ℤ)).obj
+            M.complex) (limit.w (adicLisseRingSystem T d.ideal) (homOfLE h).op)))
+
+
+/-- The quotient normalization in the actual derived quotient-coefficient categories.
+It is the K-flat scalar-extension comparison followed by the specified balancing map.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def adicDatumModelDerivedNormalization {K : adicDatumDerived T d}
+    (M : AdicDatumModel T d K) (a b : ℕ) (h : a ≤ b) :
+    (adicDatumExtension T
+      ((adicLisseRingSystem T d.ideal).map (homOfLE h).op)).obj
+        (adicDatumModelReduction T d M b) ≅ adicDatumModelReduction T d M a :=
+  letI := adicDatumComplexCounit_isIso T
+    ((adicLisseRingSystem T d.ideal).map (homOfLE h).op)
+    (((completedConstantExtension T (adicDatumProjection T d b)).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj M.complex)
+    (adicDatumExtension_kflat T (adicDatumProjection T d b) M.complex M.isKFlat)
+  asIso (adicDatumComplexCounit T
+    ((adicLisseRingSystem T d.ideal).map (homOfLE h).op)
+    (((completedConstantExtension T (adicDatumProjection T d b)).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj M.complex)) ≪≫ adicDatumModelNormalization T d M a b h
+
+end AlgebraicGeometry.Scheme
