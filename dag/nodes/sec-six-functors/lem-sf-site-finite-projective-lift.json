@@ -1,0 +1,107 @@
+{
+ "id": "lem-sf-site-finite-projective-lift",
+ "kind": "statement",
+ "title": "exists local lift overMap from finiteFree",
+ "statement": "Let p:M→N be an epimorphism of module sheaves on the slice C/U of a ringed site, and let g be a map from a finite biproduct of rank-one free modules into N. After a covering sieve of U, the restriction of g lifts across the restriction of p. Assume abelian sheafification and local-bijectivity comparisons on every slice.\n\nPrecise quantified statement:\ntheorem exists_local_lift_overMap_from_finiteFree\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max u v}]\n    [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    (R : Sheaf J RingCat.{max u v}) (U : C)\n    (M N : SheafOfModules.{max u v} (R.over U))\n    (p : M ⟶ N) [Epi p] (n : ℕ)\n    (g : (⨁ fun _ : Fin n ↦ unit (R.over U)) ⟶ N) :\n    ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f →\n      ∃ h : (overMap.{max u v} R f).obj\n          (⨁ fun _ : Fin n ↦ unit (R.over U)) ⟶ (overMap R f).obj M,\n        h ≫ (overMap R f).map p = (overMap R f).map g\n\nNotions used: [def-weil-sheaf-of-modules-category], [def-pur-localized-ringed-site].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G7, 08FX, 08FN, 08G0; Modules on Sites Tags 03DJ, 04IX and 08FD."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Forget the epimorphism to abelian sheaves and use local surjectivity at the terminal object of the slice for each finite generator. Intersect their covering image sieves. Extend the lifted sections naturally over each new slice, assemble them using the preserved biproduct colimit, and verify the required equation on all coprojections.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sf-site-perfect-overmap-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sf-site-perfect-overmap-exact"
+ ],
+ "proof_origin": {
+  "by": "J9 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G7, 08FX, 08FN, 08G0; Modules on Sites Tags 03DJ, 04IX and 08FD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An epimorphism of sheaves of modules locally lifts maps from a finite free module and locally splits over a finite projective retract",
+   "results": "{\"t\": \"2026-10-20T01:57:15Z\", \"tool\": \"leansearch\", \"query\": \"An epimorphism of sheaves of modules locally lifts maps from a finite free module and locally splits over a finite projective retract\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective\", \"SheafOfModules.GeneratingSections.epi\", \"LinearMap.splittingOfFinsuppSurjective\", \"PresheafOfModules.epi_iff_surjective\", \"PresheafOfModules.surjective_of_epi\"], \"digest\": \"8a0eea4324a3bc93\"}",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-19T04:18:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallySurjective|epi_iff|Retract",
+   "results": "{\"t\": \"2026-10-20T01:57:14Z\", \"tool\": \"grep\", \"query\": \"locallySurjective|epi_iff|Retract\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"58660e06d84dfe2e\"}",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SitePerfectTorWindow",
+  "date": "2026-10-20",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-hom-ctf",
+   "place": "Proof, sharper assertion: choose a finite projective model in [a,b]; Proof of the local finite-projective Tor window: exists_local_lift_overMap_from_finiteFree",
+   "via": [
+    "lem-sf-site-perfect-tor-window"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-hom-ctf",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteFiniteProjectiveLift",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SiteFiniteProjectiveLift.lean",
+  "declaration": "SheafOfModules.exists_local_lift_overMap_from_finiteFree",
+  "statement": "theorem exists_local_lift_overMap_from_finiteFree\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max u v}]\n    [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    (R : Sheaf J RingCat.{max u v}) (U : C)\n    (M N : SheafOfModules.{max u v} (R.over U))\n    (p : M ⟶ N) [Epi p] (n : ℕ)\n    (g : (⨁ fun _ : Fin n ↦ unit (R.over U)) ⟶ N) :\n    ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f →\n      ∃ h : (overMap.{max u v} R f).obj\n          (⨁ fun _ : Fin n ↦ unit (R.over U)) ⟶ (overMap R f).obj M,\n        h ≫ (overMap R f).map p = (overMap R f).map g",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051428-L-1678201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051428-L-1678201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

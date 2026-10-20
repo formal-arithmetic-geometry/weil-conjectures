@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-site-perfect-lower-model",
+ "kind": "statement",
+ "title": "exists strictPerfect lower model",
+ "statement": "Let E have universal Tor amplitude in [a,b], a≤b, and let P represent E on U by a bounded strict-perfect complex with terms above b zero. There is a covering sieve of U on each arrow V→U of which E has a bounded strict-perfect representative whose terms outside [a,b] vanish. Sheafification, derived-category and universe assumptions are precisely those displayed below.\n\nPrecise quantified statement:\ntheorem exists_strictPerfect_lower_model\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max u v}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max u v}]\n    [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    (R : Sheaf J CommRingCat.{max u v})\n    [HasDerivedCategory.{w} (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))]\n    [hDU : ∀ U : C, HasDerivedCategory.{w'} (SheafOfModules.{max u v}\n      (((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U))]\n    (E : DerivedCategory (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)))\n    (U : C)\n    (P : StrictPerfectCoefficientRepresentationOfUniverses.{u, v, 0} R U\n      (ringedSiteDerivedRestrictionOfUniverses\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U E))\n    (a b : ℤ) (hab : a ≤ b)\n    (hupper : ∀ r : ℤ, b < r → IsZero (P.F.X r))\n    (hTor : ∀ (G : SheafOfModules.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))\n        (r : ℤ), r < a ∨ b < r →\n      IsZero ((DerivedCategory.homologyFunctor _ r).obj\n        ((wfSiteDerivedTensor J R).obj\n          (E, (DerivedCategory.singleFunctor _ 0).obj G)))) :\n    ∃ S : Sieve U, S ∈ J U ∧\n      ∀ (V : C) (f : V ⟶ U), S f →\n        ∃ P : StrictPerfectCoefficientRepresentationOfUniverses.{u, v, 0} R V\n          (ringedSiteDerivedRestrictionOfUniverses\n            ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) V E),\n          ∀ r : ℤ, r < a ∨ b < r → IsZero (P.F.X r)\n\nNotions used: [def-weil-pbc-strict-perfect-coefficient-package], [def-weil-sheaf-of-modules-category], [def-pur-localized-ringed-site], [def-weil-abstract-derived-category], [def-weil-derived-cohomology-sheaves], [def-wf-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G7, 08FX, 08FN, 08G0; Modules on Sites Tags 03DJ, 04IX and 08FD."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-wf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Restrict a bounded flat model of E exactly to show that the chart has no cohomology below a. Locally the opcycles in degree a are a finite free retract by the boundary lemma. Apply the good lower truncation after restriction. Its degree-a term is the opcycle, higher terms retain the finite-free splittings and lower terms vanish. The canonical map is a quasi-isomorphism by the cohomology bound. The inequality a<=b retains the upper term bound. Derived restriction and composition comparisons identify the resulting representative with E on the new slice.",
+   "uses": [
+    "lem-sp-ringed-site-tor-flat-model",
+    "lem-sf-site-perfect-opcycles-retract",
+    "lem-sf-site-perfect-overmap-exact",
+    "lem-sf-site-perfect-package-map",
+    "lem-sf-site-perfect-derived-restriction-iso",
+    "lem-sf-site-perfect-overmap-additive",
+    "lem-sf-site-perfect-restriction-additive"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-sf-site-perfect-opcycles-retract",
+  "lem-sf-site-perfect-overmap-exact",
+  "lem-sf-site-perfect-package-map",
+  "lem-sf-site-perfect-derived-restriction-iso",
+  "lem-sf-site-perfect-overmap-additive",
+  "lem-sf-site-perfect-restriction-additive"
+ ],
+ "proof_origin": {
+  "by": "J9 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G7, 08FX, 08FN, 08G0; Modules on Sites Tags 03DJ, 04IX and 08FD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite projective module sheaves with Tor amplitude a b has locally finite projective opcycles at a and admits a truncation in that interval",
+   "results": "{\"t\": \"2026-10-20T01:57:15Z\", \"tool\": \"leansearch\", \"query\": \"A bounded complex of finite projective module sheaves with Tor amplitude a b has locally finite projective opcycles at a and admits a truncation in that interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.Embedding.truncGE'Functor\", \"HomologicalComplex.stupidTrunc\", \"ComplexShape.Embedding.truncLEFunctor\", \"HomologicalComplex.truncLE'\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"HomologicalComplex.truncGE'\", \"HomologicalComplex.ιTruncLE\", \"HomologicalComplex.truncGE'XIsoOpcycles.congr_simp\"], \"digest\": \"ff8545d63906c5c4\"}",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-19T04:18:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE|truncGE|opcycles",
+   "results": "{\"t\": \"2026-10-20T01:57:14Z\", \"tool\": \"grep\", \"query\": \"truncLE|truncGE|opcycles\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/Opposite.lean\", \"Mathlib/Algebra/Homology/Opposite.lean\", \"Mathlib/Algebra/Homology/Opposite.lean\"], \"digest\": \"ca208ec698f07ccd\"}",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SitePerfectTorWindow",
+  "date": "2026-10-20",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-hom-ctf",
+   "place": "Proof, sharper assertion: choose a finite projective model in [a,b]; Proof of the local finite-projective Tor window: exists_strictPerfect_lower_model",
+   "via": [
+    "lem-sf-site-perfect-tor-window"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-hom-ctf",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SitePerfectLowerModel",
+  "file": "lean/Sheaf/Algebra/Homology/SitePerfectLowerModel.lean",
+  "declaration": "SheafOfModules.exists_strictPerfect_lower_model",
+  "statement": "theorem exists_strictPerfect_lower_model\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max u v}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max u v}]\n    [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    (R : Sheaf J CommRingCat.{max u v})\n    [HasDerivedCategory.{w} (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))]\n    [hDU : ∀ U : C, HasDerivedCategory.{w'} (SheafOfModules.{max u v}\n      (((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U))]\n    (E : DerivedCategory (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)))\n    (U : C)\n    (P : StrictPerfectCoefficientRepresentationOfUniverses.{u, v, 0} R U\n      (ringedSiteDerivedRestrictionOfUniverses\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U E))\n    (a b : ℤ) (hab : a ≤ b)\n    (hupper : ∀ r : ℤ, b < r → IsZero (P.F.X r))\n    (hTor : ∀ (G : SheafOfModules.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))\n        (r : ℤ), r < a ∨ b < r →\n      IsZero ((DerivedCategory.homologyFunctor _ r).obj\n        ((wfSiteDerivedTensor J R).obj\n          (E, (DerivedCategory.singleFunctor _ 0).obj G)))) :\n    ∃ S : Sieve U, S ∈ J U ∧\n      ∀ (V : C) (f : V ⟶ U), S f →\n        ∃ P : StrictPerfectCoefficientRepresentationOfUniverses.{u, v, 0} R V\n          (ringedSiteDerivedRestrictionOfUniverses\n            ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) V E),\n          ∀ r : ℤ, r < a ∨ b < r → IsZero (P.F.X r)",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051428-L-1678201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051428-L-1678201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

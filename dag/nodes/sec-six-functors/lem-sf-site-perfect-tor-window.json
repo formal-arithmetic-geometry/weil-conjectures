@@ -32,125 +32,31 @@
  ],
  "proof": [
   {
-   "text": "Fix $U\\in\\mathcal C$. Choose a covering and bounded finite-projective models $P$ of $E$ there, with explicit degreewise splittings as retracts of finite free sheaves as in [def-weil-pbc-strict-perfect-coefficient-package]. Work on each of these slice sites. By [lem-sf-site-tor-interval-restriction], the restriction of $E$ has the same Tor interval $[a,b]$, testing against every module sheaf on this slice, not just restrictions of global test sheaves. Thus $H^r(P\\otimes^{\\mathbf L}F)=0$ outside $[a,b]$ on this slice.",
+   "text": "Use the bounded flat representative supplied by the Tor interval to deduce vanishing of cohomology above b. Apply the local strict-perfect upper-model theorem to get charts with terms zero above b.",
    "uses": [
-    "lem-sf-site-tor-interval-restriction",
-    "def-weil-pbc-strict-perfect-coefficient-package"
+    "lem-sp-ringed-site-tor-flat-model",
+    "lem-sf-site-perfect-upper-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G7 (lemma-perfect-precise), first local replacement, and Tag 08H5 (lemma-tor-amplitude-pullback)."
-   }
+   "elementary": false
   },
   {
-   "text": "Every term of $P$ is flat in the sense of [def-pc-flat-sheaf-modules]: by the additive tensor structure and its unit in [lem-pc-sheaf-modules-tensor-closed], tensoring with a retract of $\\mathcal O^{\\oplus s}$ is a retract of the exact functor $F\\mapsto F^{\\oplus s}$, so preserves exact sequences. Hence [lem-pc-bounded-above-flat-kflat-site] makes $P$ K-flat. For any degree-zero module $F$, the ordinary complex $P\\otimes F$ computes $P\\otimes^{\\mathbf L}F$: take a K-flat flat-term resolution $T\\to F[0]$ supplied by [lem-pc-kflat-resolution]; its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic]. The natural complex isomorphism of [lem-pc-tensor-mapping-cone-iso], applied with $\\mathcal A^\\bullet=P$ and $K_1\\to K_2$ equal to $T\\to F[0]$, identifies the cone of $P\\otimes T\\to P\\otimes F[0]$ with $P\\otimes\\operatorname{Cone}(T\\to F[0])$. Thus K-flatness [def-pc-kflat-complex] makes $P\\otimes T\\to P\\otimes F[0]$ a quasi-isomorphism, again by [lem-pur-quasi-iso-cone-acyclic]. Since both $P$ and $T$ are K-flat with flat terms, [lem-weil-pbc-site-derived-tensor-descent] identifies $P\\otimes T$ with the derived tensor of their represented objects. Termwise tensor symmetry identifies $F\\otimes P$ with $P\\otimes F[0]$. Taking $F=\\mathcal O$ gives $H^r(P)=0$ outside $[a,b]$. This computation applies to every bounded finite-projective model constructed below.",
+   "text": "On each chart apply the lower-model theorem with a<=b and the original universal Tor interval. Its good lower truncation gives finite-free retract terms in [a,b]. Bind the covering sieves and apply transitivity to obtain the covering over the originally requested object.",
    "uses": [
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-kflat-resolution",
-    "lem-pur-quasi-iso-cone-acyclic",
-    "def-pc-kflat-complex",
-    "lem-pc-tensor-mapping-cone-iso"
+    "lem-sf-site-perfect-lower-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ (lemma-bounded-flat-K-flat) and Tag 08G7 (lemma-perfect-precise), tensor computation."
-   }
-  },
-  {
-   "text": "Let $n>b$ be a degree above which the current model is zero. Then $H^n(P)=0$ makes $d:P^{n-1}\\to P^n$ an epimorphism. Choose a retraction $P^n\\xrightarrow{i}\\mathcal O^{\\oplus s}\\xrightarrow{p}P^n$. Forgetting modules preserves epimorphisms by [lem-weil-pbc-module-sheaves-colimits-forgetful]. By [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective], each of the finitely many sections $p(e_j)$ lifts along $d$ after a cover; successively refine to lift them all on one cover. These lifts give $h:\\mathcal O^{\\oplus s}\\to P^{n-1}$ with $dh=p$, hence $s_0=hi:P^n\\to P^{n-1}$ satisfies $ds_0=\\operatorname{id}$. This argument uses only local section lifts, not surjectivity on sections over the original object.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FN (lemma-local-lift-map), written out; Tag 08FX (lemma-finite-cohomology), upper shortening in the proof of (1)."
-   }
-  },
-  {
-   "text": "On each member of this cover put $K=\\ker d$. The maps $x\\mapsto(x-s_0d(x),d(x))$ and $(k,y)\\mapsto k+s_0(y)$ identify $P^{n-1}$ with $K\\oplus P^n$. Consequently $K$ is a retract of $P^{n-1}$ and hence of a finite free sheaf. Since $dd^{n-2}=0$, the incoming differential lands in $K$. The complex is therefore the direct sum of the shortened complex (replace $P^{n-1}$ by $K$ and $P^n$ by zero) and the two-term identity complex $P^n\\xrightarrow{1}P^n$ in degrees $n-1,n$. The latter has contracting homotopy the identity backwards, so removing it gives a quasi-isomorphism and preserves the represented derived object.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FX (lemma-finite-cohomology), proof of (1), explicit splitting and induction step."
-   }
-  },
-  {
-   "text": "Choose an initial integer upper bound $t\\ge b$ for $P$. Descending induction from $n=t$ through $n=b+1$ using Steps 3 and 4 produces, after a finite succession of covers on this original perfect chart, a bounded finite-projective complex $Q$ zero in degrees $>b$. The base case $t=b$ needs no change; if a top term is zero the splitting is the zero map. Restriction is exact by [lem-pur-site-restriction-module-adjunction-exact], hence preserves quasi-isomorphisms, and restricts the displayed retractions sectionwise. At every refinement [lem-sf-site-tor-interval-restriction] preserves the Tor interval of the represented object. Iterated slices are slices of the original site by [def-pur-localized-ringed-site]; transitivity of covers composes these finite refinements. Thus $Q$ still represents the appropriate restriction of $E$ and has Tor interval $[a,b]$.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-site-tor-interval-restriction",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FX (lemma-finite-cohomology), upper shortening; Tag 08G7 (lemma-perfect-precise), the upper bound implicit in its final displayed complex."
-   }
-  },
-  {
-   "text": "Set $N=\\operatorname{coker}(d_Q^{a-1}:Q^{a-1}\\to Q^a)$. By Step 2 applied to $Q$, for every module sheaf $F$ the ordinary complex $F\\otimes Q$ has zero cohomology in degree $a-1$. The terms of $Q$ are flat. Therefore [lem-weil-pbc-site-flat-opcycles-tor-criterion], applied on the current small slice site with $n=a$, proves that $N$ is flat. This uses the site's general opcycle criterion; no assumption of enough points or of constant coefficients is made.",
-   "uses": [
-    "lem-weil-pbc-site-flat-opcycles-tor-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G0 (lemma-last-one-flat) and Tag 08G7 (lemma-perfect-precise), flatness of the lower-end cokernel."
-   }
-  },
-  {
-   "text": "The sheaf $N$ has a finite presentation. To see it directly, write retractions $Q^a\\xrightarrow{i}\\mathcal O^{\\oplus s}\\xrightarrow{p}Q^a$ and $Q^{a-1}\\xrightarrow{j}\\mathcal O^{\\oplus r}\\xrightarrow{q}Q^{a-1}$ with $pi=1$ and $qj=1$, and put $e=ip$. Then\n$$\\mathcal O^{\\oplus s}\\oplus\\mathcal O^{\\oplus r}\\xrightarrow{(1-e,\\ i d_Q^{a-1}q)}\\mathcal O^{\\oplus s}\\xrightarrow{\\overline p}N\\to0$$\nis exact: $\\ker p=\\operatorname{im}(1-e)$ and the image of $id_Q^{a-1}q$ is $i(\\operatorname{im}d_Q^{a-1})$, so the cokernel is precisely $Q^a/\\operatorname{im}d_Q^{a-1}$. These identities hold as sheaf images and cokernels, with no exactness of global sections asserted. Thus $N$ satisfies the explicit finite-presentation hypothesis of Step 8.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G7 (lemma-perfect-precise), finite presentation before the invocation of Modules on Sites Tag 08FD; explicit presentation from the degreewise retractions."
-   }
-  },
-  {
-   "text": "Apply [lem-sf-site-flat-fp-finite-retract] to $N$ on this slice, using Steps 6 and 7. On its resulting cover form $R$ with $R^a=N$, $R^r=Q^r$ for $a<r\\le b$, and zero terms otherwise; its first differential is induced by $d_Q^a$, which annihilates $\\operatorname{im}d_Q^{a-1}$. Restrict this construction to each covering member. Exact restriction [lem-pur-site-restriction-module-adjunction-exact] preserves its quotient and cohomology. The quotient chain map $Q\\to R$ induces an isomorphism on cohomology: in degree $a$ its kernel calculation is $\\ker(d_Q^a)/\\operatorname{im}(d_Q^{a-1})$, in degree $a+1$ the incoming image is unchanged because $Q^a\\to N$ is an epimorphism and $d_Q^a$ factors through it, in degrees $>a+1$ the adjacent terms and differentials are identical, and below $a$ both cohomologies vanish by the given Tor interval and Step 2. Hence $R$ represents the restriction of $E$. Its degree $a$ term is a finite free retract by the new tool and its other terms retain their retractions. It is zero outside $[a,b]$. Finally compose all covers with the original perfect cover using [def-pur-localized-ringed-site] and the covering transitivity axiom to get the asserted $\\{V_j\\to U\\}$.",
-   "uses": [
-    "lem-sf-site-flat-fp-finite-retract",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G7 (lemma-perfect-precise), final displayed complex, with Tag 08FD (sites-modules-lemma-flat-locally-finite-presentation)."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-site-tor-interval-restriction",
-  "def-weil-pbc-strict-perfect-coefficient-package",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pc-kflat-resolution",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "def-pc-kflat-complex",
-  "lem-pc-tensor-mapping-cone-iso",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "def-pur-localized-ringed-site",
-  "lem-weil-pbc-site-flat-opcycles-tor-criterion",
-  "lem-sf-site-flat-fp-finite-retract"
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-sf-site-perfect-upper-model",
+  "lem-sf-site-perfect-lower-model"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "J9 stage 3",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08G7 (lemma-perfect-precise), 08G0 (lemma-last-one-flat), 08FX (lemma-finite-cohomology), and 08FN (lemma-local-lift-map); the local perfect model supplies the pseudo-coherent approximation directly. Restriction uses Tag 08H5 and the lower-end retraction uses Modules on Sites Tag 08FD."
+  "place": "Tags 08G7, 08FX, 08FN, 08G0; Modules on Sites Tags 03DJ, 04IX and 08FD.",
+  "note": "The entire local splitting, truncation, boundary flatness and presentation argument is proved in the new support modules. No new sorry remains."
  },
  "mathlib_searches": [
   {
@@ -289,18 +195,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pc-kflat-resolution",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-site-flat-opcycles-tor-criterion",
-  "lem-pc-tensor-mapping-cone-iso"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -339,5 +234,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051428-L-1678201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

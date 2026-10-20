@@ -1,0 +1,103 @@
+{
+ "id": "lem-sf-site-perfect-opcycles-retract-transport",
+ "kind": "statement",
+ "title": "transport slice retract",
+ "statement": "For a ring sheaf O, an arrow f:V→U, a module sheaf M on C/U and n in N, a retraction of the restriction of M to (C/U)/(V→U) from the rank-n free module transports to a retraction of the further restriction of M on C/V from the rank-n free module.\n\nPrecise quantified statement:\ntheorem transport_slice_retract\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (O : Sheaf J RingCat.{max u v}) (U V : C) (f : V ⟶ U)\n    (M : SheafOfModules.{max u v} (O.over U)) (n : ℕ)\n    (h : Nonempty (Retract (M.over (Over.mk f))\n      (∏ᶜ fun _ : Fin n ↦ unit ((O.over U).over (Over.mk f))))) :\n    Nonempty (Retract ((overMap O f).obj M)\n      (∏ᶜ fun _ : Fin n ↦ unit (O.over V)))\n\nNotions used: [def-weil-sheaf-of-modules-category], [def-pur-localized-ringed-site], [def-weil-abstract-derived-category], [def-weil-derived-cohomology-sheaves].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G7, 08FX, 08FN, 08G0; Modules on Sites Tags 03DJ, 04IX and 08FD."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Push the retraction along the inverse of the iterated-slice equivalence. This functor preserves finite limits through the presheaf forgetful comparison and sends the unit to the unit. Conjugate the mapped retraction by the finite-product comparison and the definitional comparison with overMap. The splitting equation follows by functoriality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "J9 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G7, 08FX, 08FN, 08G0; Modules on Sites Tags 03DJ, 04IX and 08FD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite projective module sheaves with Tor amplitude a b has locally finite projective opcycles at a and admits a truncation in that interval",
+   "results": "{\"t\": \"2026-10-20T01:57:15Z\", \"tool\": \"leansearch\", \"query\": \"A bounded complex of finite projective module sheaves with Tor amplitude a b has locally finite projective opcycles at a and admits a truncation in that interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.Embedding.truncGE'Functor\", \"HomologicalComplex.stupidTrunc\", \"ComplexShape.Embedding.truncLEFunctor\", \"HomologicalComplex.truncLE'\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"HomologicalComplex.truncGE'\", \"HomologicalComplex.ιTruncLE\", \"HomologicalComplex.truncGE'XIsoOpcycles.congr_simp\"], \"digest\": \"ff8545d63906c5c4\"}",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-19T04:18:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE|truncGE|opcycles",
+   "results": "{\"t\": \"2026-10-20T01:57:14Z\", \"tool\": \"grep\", \"query\": \"truncLE|truncGE|opcycles\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/Opposite.lean\", \"Mathlib/Algebra/Homology/Opposite.lean\", \"Mathlib/Algebra/Homology/Opposite.lean\"], \"digest\": \"ca208ec698f07ccd\"}",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SitePerfectTorWindow",
+  "date": "2026-10-20",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-hom-ctf",
+   "place": "Proof, sharper assertion: choose a finite projective model in [a,b]; Proof of the local finite-projective Tor window: transport_slice_retract",
+   "via": [
+    "lem-sf-site-perfect-tor-window"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-hom-ctf",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SitePerfectOpcyclesRetract",
+  "file": "lean/Sheaf/Algebra/Homology/SitePerfectOpcyclesRetract.lean",
+  "declaration": "SheafOfModules.transport_slice_retract",
+  "statement": "theorem transport_slice_retract\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (O : Sheaf J RingCat.{max u v}) (U V : C) (f : V ⟶ U)\n    (M : SheafOfModules.{max u v} (O.over U)) (n : ℕ)\n    (h : Nonempty (Retract (M.over (Over.mk f))\n      (∏ᶜ fun _ : Fin n ↦ unit ((O.over U).over (Over.mk f))))) :\n    Nonempty (Retract ((overMap O f).obj M)\n      (∏ᶜ fun _ : Fin n ↦ unit (O.over V)))",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051428-L-1678201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051428-L-1678201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

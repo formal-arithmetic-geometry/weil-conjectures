@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-site-perfect-opcycles-retract",
+ "kind": "statement",
+ "title": "exists local retract opcycles of perfect tor",
+ "statement": "Let E be a derived module-sheaf object over a commutative ring sheaf R with universal Tor amplitude in [a,b], a≤b. Let P be a bounded strict-perfect representative of its restriction to U. There is a covering sieve of U on each arrow V→U of which the further restriction of opcycles(P,a) is a retract of a finite power of the rank-one free module. Sheafification, derived-category and universe assumptions are precisely those displayed below.\n\nPrecise quantified statement:\ntheorem exists_local_retract_opcycles_of_perfect_tor\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max u v}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max u v}]\n    [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    (R : Sheaf J CommRingCat.{max u v})\n    [HasDerivedCategory.{w} (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))]\n    [hDU : ∀ U : C, HasDerivedCategory.{w'} (SheafOfModules.{max u v}\n      (((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U))]\n    (E : DerivedCategory (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)))\n    (U : C)\n    (P : StrictPerfectCoefficientRepresentationOfUniverses.{u, v, 0} R U\n      (ringedSiteDerivedRestrictionOfUniverses\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U E))\n    (a b : ℤ) (hab : a ≤ b)\n    (hTor : ∀ (G : SheafOfModules.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))\n        (r : ℤ), r < a ∨ b < r →\n      IsZero ((DerivedCategory.homologyFunctor _ r).obj\n        ((wfSiteDerivedTensor J R).obj\n          (E, (DerivedCategory.singleFunctor _ 0).obj G)))) :\n    ∃ S : Sieve U, S ∈ J U ∧\n      ∀ (V : C) (f : V ⟶ U), S f →\n        ∃ n : ℕ, Nonempty (Retract\n          ((overMap.{max u v}\n            ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)\n            f).obj (P.F.opcycles a))\n          (∏ᶜ fun _ : Fin n ↦ unit\n            (((sheafCompose J\n              (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over V)))\n\nNotions used: [def-weil-sheaf-of-modules-category], [def-weil-pbc-strict-perfect-coefficient-package], [def-pur-localized-ringed-site], [def-weil-abstract-derived-category], [def-weil-derived-cohomology-sheaves], [def-wf-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G7, 08FX, 08FN, 08G0; Modules on Sites Tags 03DJ, 04IX and 08FD."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-wf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the bounded flat model to restrict the Tor interval; the local equational criterion proves that flatness restricts at independent universes. Finite-free retract terms are dualizable and flat, so the bounded complex is K-flat. The first-variable tensor comparison and the degree-zero tensor isomorphism prove universal exactness in degree a-1. The categorical Tor diagram chase proves the opcycles flat. Construct a finite global presentation explicitly with matrix (1-ip, i d q), checking its cokernel universal property. Restriction preserves colimits, hence this gives local finite presentations without binary products on the site. Apply the declared flat finitely presented local-retract theorem on the slice and transport its retract along the iterated-slice equivalence. The terminal-slice covering is a covering of U.",
+   "uses": [
+    "lem-sp-ringed-site-tor-flat-model",
+    "lem-weil-pbc-site-flat-equational-criterion-universes",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-wf-tensor-product",
+    "lem-sf-site-flat-fp-finite-retract",
+    "lem-sf-site-perfect-derived-restriction-iso",
+    "lem-sf-site-perfect-opcycles-retract-transport",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-weil-pbc-site-flat-equational-criterion-universes",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-wf-tensor-product",
+  "lem-sf-site-flat-fp-finite-retract",
+  "lem-sf-site-perfect-derived-restriction-iso",
+  "lem-sf-site-perfect-opcycles-retract-transport",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "J9 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G7, 08FX, 08FN, 08G0; Modules on Sites Tags 03DJ, 04IX and 08FD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite projective module sheaves with Tor amplitude a b has locally finite projective opcycles at a and admits a truncation in that interval",
+   "results": "{\"t\": \"2026-10-20T01:57:15Z\", \"tool\": \"leansearch\", \"query\": \"A bounded complex of finite projective module sheaves with Tor amplitude a b has locally finite projective opcycles at a and admits a truncation in that interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.Embedding.truncGE'Functor\", \"HomologicalComplex.stupidTrunc\", \"ComplexShape.Embedding.truncLEFunctor\", \"HomologicalComplex.truncLE'\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"HomologicalComplex.truncGE'\", \"HomologicalComplex.ιTruncLE\", \"HomologicalComplex.truncGE'XIsoOpcycles.congr_simp\"], \"digest\": \"ff8545d63906c5c4\"}",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-19T04:18:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE|truncGE|opcycles",
+   "results": "{\"t\": \"2026-10-20T01:57:14Z\", \"tool\": \"grep\", \"query\": \"truncLE|truncGE|opcycles\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/Opposite.lean\", \"Mathlib/Algebra/Homology/Opposite.lean\", \"Mathlib/Algebra/Homology/Opposite.lean\"], \"digest\": \"ca208ec698f07ccd\"}",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SitePerfectTorWindow",
+  "date": "2026-10-20",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-hom-ctf",
+   "place": "Proof, sharper assertion: choose a finite projective model in [a,b]; Proof of the local finite-projective Tor window: exists_local_retract_opcycles_of_perfect_tor",
+   "via": [
+    "lem-sf-site-perfect-tor-window"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-hom-ctf",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SitePerfectOpcyclesRetract",
+  "file": "lean/Sheaf/Algebra/Homology/SitePerfectOpcyclesRetract.lean",
+  "declaration": "SheafOfModules.exists_local_retract_opcycles_of_perfect_tor",
+  "statement": "theorem exists_local_retract_opcycles_of_perfect_tor\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max u v}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max u v}]\n    [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}]\n    (R : Sheaf J CommRingCat.{max u v})\n    [HasDerivedCategory.{w} (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))]\n    [hDU : ∀ U : C, HasDerivedCategory.{w'} (SheafOfModules.{max u v}\n      (((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U))]\n    (E : DerivedCategory (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)))\n    (U : C)\n    (P : StrictPerfectCoefficientRepresentationOfUniverses.{u, v, 0} R U\n      (ringedSiteDerivedRestrictionOfUniverses\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U E))\n    (a b : ℤ) (hab : a ≤ b)\n    (hTor : ∀ (G : SheafOfModules.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))\n        (r : ℤ), r < a ∨ b < r →\n      IsZero ((DerivedCategory.homologyFunctor _ r).obj\n        ((wfSiteDerivedTensor J R).obj\n          (E, (DerivedCategory.singleFunctor _ 0).obj G)))) :\n    ∃ S : Sieve U, S ∈ J U ∧\n      ∀ (V : C) (f : V ⟶ U), S f →\n        ∃ n : ℕ, Nonempty (Retract\n          ((overMap.{max u v}\n            ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)\n            f).obj (P.F.opcycles a))\n          (∏ᶜ fun _ : Fin n ↦ unit\n            (((sheafCompose J\n              (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over V)))",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051428-L-1678201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051428-L-1678201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
