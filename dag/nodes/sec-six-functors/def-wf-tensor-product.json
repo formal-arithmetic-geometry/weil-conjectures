@@ -1,408 +1,418 @@
 {
-  "id": "def-wf-tensor-product",
-  "blueprint": {
-    "is": "def-wf-tensor-product",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "definition",
-  "title": "Derived tensor product",
-  "statement": "Fix primes $p\\ne\\ell$, an integer $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, a chosen algebraic closure $\\overline{\\mathbf Q}_\\ell$ and a finite intermediate extension $\\mathbf Q_\\ell\\subseteq E\\subseteq\\overline{\\mathbf Q}_\\ell$, and a separated finite-type $k_0$-scheme $X_0$. Put $X=X_0\\times_{k_0}k$. Use the Weil complexes of [def-wf-weil-category] and its coefficient category $D^b_c(X,E)$, namely the rationalization [def-weil-pbc-rational-category] of the integral category specified there. Write $\\Phi_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$, where $\\gamma:z\\mapsto z^{1/q}$ is the geometric Frobenius automorphism of $k$ [def-weil-frobenius-detailed]. The notation $\\Phi_X^*$ means the completed pullback followed by rationalization specified in [def-wf-weil-category]. In this scheme-automorphism case that node identifies completed pullback with coefficient transport, so the explicit inverse-image comparison below uses this same functor.\n\nHere is the derived tensor convention, including the coefficient model implicit in $D(X,E)$. On a small ringed site $(\\mathcal C,R)$, choose complexes $C,D$ representing $M,N\\in D(R)$, and a quasi-isomorphism $P\\to C$ with $P$ K-flat and with flat terms [def-pc-kflat-complex, lem-pc-kflat-resolution]. Define\n$$\n M\\otimes_R^L N=Q_R\\operatorname{Tot}(P\\otimes_R D),\n$$\nwhere total tensor is [def-pc-tensor-complex-sheaves] and $Q_R$ is localization at quasi-isomorphisms. Use the derived bifunctor obtained by localization [lem-weil-pbc-site-derived-tensor-descent]; thus this is computation by a K-flat replacement of the first argument, not a requirement of a functorial choice of complex representatives.\n\nFor the adic coefficient category above put $A=\\mathcal O_E$, choose a uniformizer $\\varpi$, and let $A_X=\\varprojlim_n(A/\\varpi^n)_X$ be the completed sheaf on the small pro-etale site [def-weil-pbc-adic-coefficient-datum]. Write $D_{\\mathrm{comp}}(A_X)$ for the full subcategory of $D(A_X)$ of objects whose completion map in [def-weil-pbc-intrinsic-completion] is an isomorphism. The ambient notation $D(X,E)$ here means $D_{\\mathrm{comp}}(A_X)[1/\\varpi]$, using raw scalar localization [def-weil-linear-scalar-localization]. Its bounded constructible objects are the objects selected by [def-wf-weil-category], with its given proper-base-change integral definition. For integral representatives $M,N$ of arbitrary objects in this ambient rational category define the tensor construction by\n$$\n M\\mathbin{\\widehat\\otimes}_A^L N\n   :=(M\\otimes_{A_X}^L N)^{\\wedge}_{\\mathrm{Kos}},\n$$\nusing the completion functor $D(A_X)\\to D_{\\mathrm{comp}}(A_X)$ of [lem-weil-pbc-ringed-koszul-completion-reflector], represented by the explicit Koszul mapping-fiber model of [def-weil-pbc-intrinsic-completion]. Its rationalization is denoted $K\\otimes_E^L L$. On localized morphisms the convention is\n$$\n (u/\\varpi^r)\\otimes(v/\\varpi^s)\n   =(u\\mathbin{\\widehat\\otimes}v)/\\varpi^{r+s}.\n$$\nIn particular the coefficient category here is the adic rationalization, with tensor computed by K-flat tensor followed by completion on integral representatives. The restriction of this construction to an exact bifunctor of Weil complexes is a separate property, not an axiom in this definition.\n\nFor Weil complexes $(K,\\varphi_K)$ and $(L,\\varphi_L)$, define their tensor Frobenius by the typed composite\n$$\n \\varphi_{K\\otimes L}:\n \\Phi_X^*(K\\otimes_E^L L)\n \\xrightarrow{\\mu_{\\Phi_X;K,L}}\n \\Phi_X^*K\\otimes_E^L\\Phi_X^*L\n \\xrightarrow{\\varphi_K\\otimes_E^L\\varphi_L}\n K\\otimes_E^L L.\n$$\nHere are the coefficient identifications and the comparison $\\mu$. For $P_n=A/\\varpi^n$, let $c_n:\\Phi_X^{-1}(P_n)_X\\xrightarrow{\\sim}(P_n)_X$ be the constant-coefficient isomorphisms of [lem-weil-proetale-isomorphism-inverse-image]. They are adjoint to the maps sending each constant section to itself [def-weil-proetale-inverse-image]. Hence they preserve the residues of $\\varpi$ and multiplication by those residues; their naturality for ring homomorphisms makes them commute with the quotient maps. The coefficient-ring isomorphism used for module pullback is\n$$\n c:\\Phi_X^{-1}A_X\n \\xrightarrow{\\sim}\\varprojlim_n\\Phi_X^{-1}(P_n)_X\n \\xrightarrow{\\varprojlim_n c_n}\\varprojlim_n(P_n)_X=A_X.\n$$\nThe first arrow uses preservation of limits by the inverse-image equivalence in that node. This $c$ preserves the scalar $\\varpi$, as is checked after every projection to $(P_n)_X$.\n\nWith this ring map use the canonical comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] on integral representatives. More explicitly, write $H$ for the exact module transport induced by $\\Phi_X^{-1}$ and $c$, before completion and rationalization. Choose flat-term K-flat representatives $U,V$ for $M,N$. Since the inverse-image equivalence preserves colimits and finite products, it preserves the balanced generators and relations defining sheaf tensor. Thus the canonical balanced map $HU^i\\otimes_{A_X}HV^j\\to H(U^i\\otimes_{A_X}V^j)$ is an isomorphism; on local pure tensors it sends $u\\otimes v$ to $u\\otimes v$ after the coefficient identification $c$. Its inverse commutes with the two differentials and with direct-sum inclusions, so totalization gives inverse chain maps with the differential $d_U\\otimes1+(-1)^i1\\otimes d_V$. These represent the cited derived tensor comparison. The cited pullback statement ensures that $HU,HV$ are again flat-term K-flat representatives.\n\nTo complete this chain map, write $Q_m=[A_X\\xrightarrow{\\varpi^m}A_X]$ in degrees $[-1,0]$ as in [def-weil-pbc-intrinsic-completion]. Applying $c$ in both degrees gives $HQ_m\\cong Q_m$; it respects the transition maps since those are $\\varpi$ in degree $-1$ and identity in degree $0$. Tensor the preceding degreewise maps with this identification to obtain isomorphisms of actual complexes\n$$\n H(\\operatorname{Tot}(U\\otimes_{A_X}V)\\otimes_{A_X}Q_m)\n \\xrightarrow{\\sim}\n \\operatorname{Tot}(HU\\otimes_{A_X}HV)\\otimes_{A_X}Q_m.\n$$\nThey commute with each strict tower transition because $c(\\varpi)=\\varpi$; no lifting of an arbitrary derived-category map to strict towers is being assumed. Apply the inverse-image equivalence to the product $B$ and the mapping-fiber complex $F$ in the completion definition: the product comparison is the map whose $m$-th component is the $m$-th inverse-image projection, and it commutes with $1-t$ by the transition identity just checked. On $F^i=B^i\\oplus B^{i-1}$ use that comparison on both summands. It commutes with the differential $(x,y)\\mapsto(d_Bx,(1-t)x-d_By)$, giving the comparison with completion. Rationalize this composite to obtain $\\mu_{\\Phi_X;K,L}$ in the displayed direction. The source's shorthand $\\varphi_K\\otimes\\varphi_L$ denotes this composite.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
-    "place": "node def-wf-tensor-product, order 2107",
-    "note": [
-      "*Recorded in advance* from chapter *Weight foundations and monodromy groups* of the source."
-    ]
-  },
-  "stmt_deps": [
-    "def-wf-weil-category",
-    "def-weil-pbc-rational-category",
-    "def-weil-frobenius-detailed",
-    "def-pc-kflat-complex",
-    "lem-pc-kflat-resolution",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-intrinsic-completion",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-linear-scalar-localization",
+ "id": "def-wf-tensor-product",
+ "blueprint": {
+  "is": "def-wf-tensor-product",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Derived tensor product",
+ "statement": "Fix primes $p\\ne\\ell$, an integer $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, a chosen algebraic closure $\\overline{\\mathbf Q}_\\ell$ and a finite intermediate extension $\\mathbf Q_\\ell\\subseteq E\\subseteq\\overline{\\mathbf Q}_\\ell$, and a separated finite-type $k_0$-scheme $X_0$. Put $X=X_0\\times_{k_0}k$. Use the Weil complexes of [def-wf-weil-category] and its coefficient category $D^b_c(X,E)$, namely the rationalization [def-weil-pbc-rational-category] of the integral category specified there. Write $\\Phi_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$, where $\\gamma:z\\mapsto z^{1/q}$ is the geometric Frobenius automorphism of $k$ [def-weil-frobenius-detailed]. The notation $\\Phi_X^*$ means the completed pullback followed by rationalization specified in [def-wf-weil-category]. In this scheme-automorphism case that node identifies completed pullback with coefficient transport, so the explicit inverse-image comparison below uses this same functor.\n\nHere is the derived tensor convention, including the coefficient model implicit in $D(X,E)$. On a small ringed site $(\\mathcal C,R)$, choose complexes $C,D$ representing $M,N\\in D(R)$, and a quasi-isomorphism $P\\to C$ with $P$ K-flat and with flat terms [def-pc-kflat-complex, lem-pc-kflat-resolution]. Define\n$$\n M\\otimes_R^L N=Q_R\\operatorname{Tot}(P\\otimes_R D),\n$$\nwhere total tensor is [def-pc-tensor-complex-sheaves] and $Q_R$ is localization at quasi-isomorphisms. Use the derived bifunctor obtained by localization [lem-weil-pbc-site-derived-tensor-descent]; thus this is computation by a K-flat replacement of the first argument, not a requirement of a functorial choice of complex representatives.\n\nFor the adic coefficient category above put $A=\\mathcal O_E$, choose a uniformizer $\\varpi$, and let $A_X=\\varprojlim_n(A/\\varpi^n)_X$ be the completed sheaf on the small pro-etale site [def-weil-pbc-adic-coefficient-datum]. Write $D_{\\mathrm{comp}}(A_X)$ for the full subcategory of $D(A_X)$ of objects whose completion map in [def-weil-pbc-intrinsic-completion] is an isomorphism. The ambient notation $D(X,E)$ here means $D_{\\mathrm{comp}}(A_X)[1/\\varpi]$, using raw scalar localization [def-weil-linear-scalar-localization]. Its bounded constructible objects are the objects selected by [def-wf-weil-category], with its given proper-base-change integral definition. For integral representatives $M,N$ of arbitrary objects in this ambient rational category define the tensor construction by\n$$\n M\\mathbin{\\widehat\\otimes}_A^L N\n   :=(M\\otimes_{A_X}^L N)^{\\wedge}_{\\mathrm{Kos}},\n$$\nusing the completion functor $D(A_X)\\to D_{\\mathrm{comp}}(A_X)$ of [lem-weil-pbc-ringed-koszul-completion-reflector], represented by the explicit Koszul mapping-fiber model of [def-weil-pbc-intrinsic-completion]. Its rationalization is denoted $K\\otimes_E^L L$. On localized morphisms the convention is\n$$\n (u/\\varpi^r)\\otimes(v/\\varpi^s)\n   =(u\\mathbin{\\widehat\\otimes}v)/\\varpi^{r+s}.\n$$\nIn particular the coefficient category here is the adic rationalization, with tensor computed by K-flat tensor followed by completion on integral representatives. The restriction of this construction to an exact bifunctor of Weil complexes is a separate property, not an axiom in this definition.\n\nFor Weil complexes $(K,\\varphi_K)$ and $(L,\\varphi_L)$, define their tensor Frobenius by the typed composite\n$$\n \\varphi_{K\\otimes L}:\n \\Phi_X^*(K\\otimes_E^L L)\n \\xrightarrow{\\mu_{\\Phi_X;K,L}}\n \\Phi_X^*K\\otimes_E^L\\Phi_X^*L\n \\xrightarrow{\\varphi_K\\otimes_E^L\\varphi_L}\n K\\otimes_E^L L.\n$$\nHere are the coefficient identifications and the comparison $\\mu$. For $P_n=A/\\varpi^n$, let $c_n:\\Phi_X^{-1}(P_n)_X\\xrightarrow{\\sim}(P_n)_X$ be the constant-coefficient isomorphisms of [lem-weil-proetale-isomorphism-inverse-image]. They are adjoint to the maps sending each constant section to itself [def-weil-proetale-inverse-image]. Hence they preserve the residues of $\\varpi$ and multiplication by those residues; their naturality for ring homomorphisms makes them commute with the quotient maps. The coefficient-ring isomorphism used for module pullback is\n$$\n c:\\Phi_X^{-1}A_X\n \\xrightarrow{\\sim}\\varprojlim_n\\Phi_X^{-1}(P_n)_X\n \\xrightarrow{\\varprojlim_n c_n}\\varprojlim_n(P_n)_X=A_X.\n$$\nThe first arrow uses preservation of limits by the inverse-image equivalence in that node. This $c$ preserves the scalar $\\varpi$, as is checked after every projection to $(P_n)_X$.\n\nWith this ring map use the canonical comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] on integral representatives. More explicitly, write $H$ for the exact module transport induced by $\\Phi_X^{-1}$ and $c$, before completion and rationalization. Choose flat-term K-flat representatives $U,V$ for $M,N$. Since the inverse-image equivalence preserves colimits and finite products, it preserves the balanced generators and relations defining sheaf tensor. Thus the canonical balanced map $HU^i\\otimes_{A_X}HV^j\\to H(U^i\\otimes_{A_X}V^j)$ is an isomorphism; on local pure tensors it sends $u\\otimes v$ to $u\\otimes v$ after the coefficient identification $c$. Its inverse commutes with the two differentials and with direct-sum inclusions, so totalization gives inverse chain maps with the differential $d_U\\otimes1+(-1)^i1\\otimes d_V$. These represent the cited derived tensor comparison. The cited pullback statement ensures that $HU,HV$ are again flat-term K-flat representatives.\n\nTo complete this chain map, write $Q_m=[A_X\\xrightarrow{\\varpi^m}A_X]$ in degrees $[-1,0]$ as in [def-weil-pbc-intrinsic-completion]. Applying $c$ in both degrees gives $HQ_m\\cong Q_m$; it respects the transition maps since those are $\\varpi$ in degree $-1$ and identity in degree $0$. Tensor the preceding degreewise maps with this identification to obtain isomorphisms of actual complexes\n$$\n H(\\operatorname{Tot}(U\\otimes_{A_X}V)\\otimes_{A_X}Q_m)\n \\xrightarrow{\\sim}\n \\operatorname{Tot}(HU\\otimes_{A_X}HV)\\otimes_{A_X}Q_m.\n$$\nThey commute with each strict tower transition because $c(\\varpi)=\\varpi$; no lifting of an arbitrary derived-category map to strict towers is being assumed. Apply the inverse-image equivalence to the product $B$ and the mapping-fiber complex $F$ in the completion definition: the product comparison is the map whose $m$-th component is the $m$-th inverse-image projection, and it commutes with $1-t$ by the transition identity just checked. On $F^i=B^i\\oplus B^{i-1}$ use that comparison on both summands. It commutes with the differential $(x,y)\\mapsto(d_Bx,(1-t)x-d_By)$, giving the comparison with completion. Rationalize this composite to obtain $\\mu_{\\Phi_X;K,L}$ in the displayed direction. The source's shorthand $\\varphi_K\\otimes\\varphi_L$ denotes this composite.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+  "place": "node def-wf-tensor-product, order 2107",
+  "note": [
+   "*Recorded in advance* from chapter *Weight foundations and monodromy groups* of the source."
+  ]
+ },
+ "stmt_deps": [
+  "def-wf-weil-category",
+  "def-weil-pbc-rational-category",
+  "def-weil-frobenius-detailed",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "For wfRationalTensorPullback_exists, first derive naturality of completion from the reflector Hom bijection and the completion comparison unit square. Combine it with the naturality of proEtaleCanonicalTensorComparison to obtain naturality of the integral tensor comparison. Localize its component isomorphisms with scalar-localization.mapIso. Tensor induction in the two Hom variables reduces naturality to the integral equation, using the pure-tensor formulas for the tensor Hom map, pullback Hom map and composition. Every rational object retains an integral object, so component normalization proves uniqueness by isomorphism and natural-transformation extensionality.",
+   "uses": [
     "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "def-weil-proetale-inverse-image"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "KFlat|K.flat|derivedTensor|tensorWeilDatum",
-      "results": "3 hits; top results: Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf/module tensor or degreewise Tor does not define the adic derived tensor and Weil Frobenius datum"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The derived tensor product of sheaf complexes is computed using a K-flat replacement",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.DerivedCategory, MonoidalCategory",
-      "results": "loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
-      "date": "2026-10-16",
-      "verdict": "no usable result: query identifier not indexed"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived tensor product of sheaf complexes computed by a K-flat resolution with tensor Frobenius on Weil complexes",
-      "results": "8 hits; top results: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map, LightCondensed.instMonoidalLightCondSetLightCondModFree",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf/module tensor or degreewise Tor does not define the adic derived tensor and Weil Frobenius datum"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A monoidal structure on the unbounded derived category of sheaves and tensor product of Frobenius equivariant objects",
-      "results": "8 hits; top results: CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, CategoryTheory.Tor'_obj_obj",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf/module tensor or degreewise Tor does not define the adic derived tensor and Weil Frobenius datum"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"tensorObj\"",
-      "results": "12 hits; top results: CategoryTheory.MonoidalCategoryStruct.tensorObj, CategoryTheory.MonoidalCategory.prodMonoidal_tensorObj, CategoryTheory.Monoidal.transportStruct_tensorObj, SemimoduleCat.MonoidalCategory.tensorObj, SemimoduleCat.MonoidalCategory.tensorObj_def, ModuleCat.MonoidalCategory.tensorObj_carrier, AlgCat.instMonoidalCategory.tensorObj, AlgCat.instMonoidalCategory.tensorObj_carrier",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf/module tensor or degreewise Tor does not define the adic derived tensor and Weil Frobenius datum"
-    },
-    {
-      "tool": "grep",
-      "query": "derived.*tensor|tensor.*derived|K-flat",
-      "results": "5 hits; top results: Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean (subdirectory CategoryTheory)",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf/module tensor or degreewise Tor does not define the adic derived tensor and Weil Frobenius datum"
-    },
-    {
-      "tool": "grep",
-      "query": "KFlat|IsKFlat|tensorBifunctor|DerivedCategory.*[Mm]onoidal",
-      "results": "0 hits; top results: ",
-      "date": "2026-10-16",
-      "verdict": "no match in Mathlib/Algebra/Homology"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Localization of the category of cochain complexes at quasi-isomorphisms inherits tensor from K-flat resolutions and equivariant automorphisms",
-      "results": "8 hits; top results: CategoryTheory.Tor', CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, DerivedCategory.instLinearHomotopyCategoryIntUpQh",
-      "date": "2026-10-16",
-      "verdict": "no match: degreewise Tor and linearity of derived localization do not define the completed adic tensor and its Weil Frobenius"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Localization\", \"tensorBifunctor\"",
-      "results": "6 hits; top results: CategoryTheory.Localization.Monoidal.tensorBifunctor, CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorLeftObjFunctorTensorBifunctor, CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorRightObjFunctorFlipTensorBifunctor, CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorCurriedTensorObjWhiskeringRightTensorBifunctor, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorFlipCurriedTensorObjWhiskeringRightTensorBifunctor",
-      "date": "2026-10-16",
-      "verdict": "ingredient only: generic monoidal localization needs an already monoidal resolving category; it does not construct the completed adic tensor or its Weil Frobenius datum"
-    },
-    {
-      "tool": "grep",
-      "query": "derivedComplete|DerivedCompletion|WeilDatum",
-      "results": "0 hits; top results: ",
-      "date": "2026-10-16",
-      "verdict": "no match: no derived-completion or Weil-datum declaration in the pinned Mathlib source"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Completion of derived tensor product for adic sheaves with a Frobenius equivariant structure",
-      "results": "8 hits; top results: AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype",
-      "date": "2026-10-16",
-      "verdict": "no match: AdicCompletion.ofTensorProduct and its finite-module equivalences concern ordinary modules and classical completion, not derived sheaf complexes or Weil data"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Sheaf\", \"tensor\"",
-      "results": "12 hits; top results: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
-      "date": "2026-10-16",
-      "verdict": "no match: tensorObj and tensorHom here concern presheaves of modules; cartesian sheaf tensors do not construct completed adic derived tensor or Frobenius data"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived complete category monoidal product defined by completing the tensor product of complexes",
-      "results": "8 hits; top results: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor', HomologicalComplex.monoidalCategory, HomologicalComplex.monoidalCategoryStruct, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map",
-      "date": "2026-10-16",
-      "verdict": "ingredient only: Tor is degreewise in an abelian category and HomologicalComplex.monoidalCategory is before localization; neither constructs completed adic derived tensor or Weil data"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Localization\", \"tensor\"",
-      "results": "12 hits; top results: IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.Away.tensorRight, IsLocalization.Away.tensor, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.algebraTensorEquiv, IsLocalization.tensorProduct_compatibleSMul, IsLocalization.Away.tensorRightEquiv",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned IsLocalization and tensor equivalences concern ordinary algebraic modules and algebras, not derived sheaf complexes or completed Weil data"
-    },
-    {
-      "tool": "grep",
-      "query": "KFlat|derivedTensor|derivedCompletion|tensorWeilDatum",
-      "results": "0 hits; top results: ",
-      "date": "2026-10-16",
-      "verdict": "no match in the pinned Mathlib source"
-    },
-    {
-      "tool": "grep",
-      "query": "adic.*tensor|tensor.*adic|complete.*tensor|tensor.*complete",
-      "results": "0 hits; top results: ",
-      "date": "2026-10-16",
-      "verdict": "no hits in Mathlib/Algebra/Homology for adic or complete tensor vocabulary"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"monoidalCategory\", \"DerivedCategory\"",
-      "results": "0 hits; top results: ",
-      "date": "2026-10-16",
-      "verdict": "no hits for the queried derived-category monoidal structure"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Tensor product on the category of derived complete module sheaves compatible with pullback by a scheme automorphism",
-      "results": "8 hits; top results: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedLightCondMod, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.monoidalCategory, PresheafOfModules.monoidalCategoryStruct",
-      "date": "2026-10-16",
-      "verdict": "no full match: light condensed modules and presheaves of modules have ordinary tensor structures, without derived completion, adic rationalization, or Weil Frobenius data"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived tensor bifunctor on sheaves of modules followed by ideal-adic completion, with equivariant structure under an exact equivalence",
-      "results": "8 hits; top results: AdicCompletion.ofTensorProduct, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.tensor_map_id_left_eq_map, LightCondensed.instMonoidalClosedLightCondMod, AdicCompletion.ofTensorProduct_naturality",
-      "date": "2026-10-16",
-      "verdict": "no full match: classical module adic completion and ordinary light condensed sheaf tensor do not construct completed derived sheaf tensor with Weil data"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"DerivedCategory\", \"tensor\"",
-      "results": "0 hits; top results: ",
-      "date": "2026-10-16",
-      "verdict": "no hits for the queried derived-category tensor vocabulary"
-    },
-    {
-      "tool": "grep",
-      "query": "K.?flat|derived.{0,30}completion|completion.{0,30}derived",
-      "results": "0 hits; top results:  (subdirectory Algebra/Homology)",
-      "date": "2026-10-16",
-      "verdict": "no hits in Mathlib/Algebra/Homology for K-flat or derived-completion vocabulary"
-    },
-    {
-      "tool": "grep",
-      "query": "KFlat|derivedTensor|derivedCompletion|tensorWeilDatum",
-      "results": "0 hits; top results: ",
-      "date": "2026-10-16",
-      "verdict": "no match: zero hits in pinned Mathlib"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"DerivedCategory\", \"tensor\"",
-      "results": "0 hits; top results: ",
-      "date": "2026-10-16",
-      "verdict": "no match: zero hits"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The tensor product of derived complete sheaf complexes with Weil Frobenius is computed by completing a K-flat tensor product",
-      "results": "8 hits; top results: HomologicalComplex.tensorObj, Module.Flat.rTensor_shortComplex_exact, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, CategoryTheory.Sheaf.tensorProd_isSheaf, Module.Flat.lTensor_shortComplex_exact",
-      "date": "2026-10-16",
-      "verdict": "ingredients only: tensor of complexes, flat modules, classical finite-module adic completion and cartesian sheaf tensor omit the completed derived Weil construction"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Completed derived tensor product of adic sheaves with Frobenius equivariant structure",
-      "results": "8 hits; top results: BDeRhamPlus, BDeRham, AdicCompletion.ofTensorProduct, instCommRingBDeRhamPlus, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProduct_naturality",
-      "date": "2026-10-16",
-      "verdict": "no match: BDeRham rings and classical module adic completion do not define completed derived tensor of sheaves or Weil Frobenius"
-    },
-    {
-      "tool": "grep",
-      "query": "def ofTensorProduct|def tensorObj|def tensorBifunctor",
-      "results": "18 hits; top results: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean",
-      "date": "2026-10-16",
-      "verdict": "ingredients only: read AsTensorProduct.lean:57, Homology/Monoidal.lean:50 and Localization/Monoidal/Basic.lean:124; these are classical module completion, tensor of complexes and generic localization, not this definition"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Localization\", \"tensorBifunctor\"",
-      "results": "6 hits; top results: CategoryTheory.Localization.Monoidal.tensorBifunctor, CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorLeftObjFunctorTensorBifunctor, CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorRightObjFunctorFlipTensorBifunctor, CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorCurriedTensorObjWhiskeringRightTensorBifunctor, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorFlipCurriedTensorObjWhiskeringRightTensorBifunctor",
-      "date": "2026-10-16",
-      "verdict": "ingredient only: generic monoidal localization assumes a monoidal source and does not construct the adic completion or Weil comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A tensor bifunctor on derived complete complexes of sheaves of modules is obtained by completing K-flat tensor, compatible with an automorphism",
-      "results": "8 hits; top results: HomologicalComplex.HasTensor, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, HomologicalComplex.ιTensorObj, HomologicalComplex.tensorObj, LightCondensed.instMonoidalLightCondSetLightCondModFree, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
-      "date": "2026-10-16",
-      "verdict": "ingredients only: HomologicalComplex tensor precedes derived localization; light condensed sheaf tensor does not supply completed adic derived tensor or Frobenius"
-    },
-    {
-      "tool": "grep",
-      "query": "KFlat|kFlat|DerivedCategory.*monoidal|derivedComplete",
-      "results": "0 hits; top results: ",
-      "date": "2026-10-16",
-      "verdict": "no hits in the pinned Mathlib source"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"DerivedCategory\", \"MonoidalCategory\"",
-      "results": "0 hits; top results: ",
-      "date": "2026-10-16",
-      "verdict": "no hits for the queried derived-category monoidal structure"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Monoidal structure on localization of complexes of sheaves at quasi isomorphisms followed by derived adic completion",
-      "results": "8 hits; top results: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.Q, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
-      "date": "2026-10-16",
-      "verdict": "ingredient only: LightCondensed tensor is on ordinary sheaves; derived-category exact-functor lifting and linearity do not define completed tensor or tensor Weil data"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2107,
-  "blueprint_uses": [
-    "def-wf-weil-category"
-  ],
-  "uses_not_cited": [
-    "def-wf-weil-category"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "recorded_in_advance",
-      "text": "*Recorded in advance* from chapter *Weight foundations and monodromy groups* of the source.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-rem-sf-pf-done",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "def-wf-tensor-product",
-    "worker": "stage1",
-    "summary": "Repaired the released literature-review B3 finding: removed def-weil-pbc-finite-completed-coefficient-map and def-wf-automorphism-completed-transport from stmt_deps because the fixed-E tensor definition uses neither construction. The fourteen remaining dependencies are exactly the nodes cited in the unchanged statement. Reread their statements, the current main-20261015 blueprint, and the ringed-site K-flat, tensor-pullback and Koszul-completion sources. Rechecked coefficient conventions, strict-tower comparison and small cases; searched project Lean and Mathlib afresh. No new nodes, no Mathlib leaves, no statement or proof changes. Repair continuation verified the retained two-edge deletion against the current shared baseline and released repair note; no additional mathematical change was needed. Current repair continuation independently confirms the retained deletion is the entire assigned B3 correction: the fourteen direct dependencies equal the inline node references; the mathematical statement and proof fields remain identical to current shared main.",
-    "blueprint": "Current main-20261015 def-wf-tensor-product, order 2451: its first sentence is the first-variable K-flat tensor computation with the coefficient convention of adjacent def-wf-weil-category, order 2450; its second sentence is the displayed typed tensor Frobenius composite. This is a recorded-in-advance definition in sk-rem-sf-pf-done, not its key statement. The unit has no proof steps to replace."
+  {
+   "text": "For wfSiteDerivedTensor_first, choose a flat-term K-flat resolution V to D. The existing cochain tensor structures and the homotopy-category acyclicity characterization turn acyclic-tensor K-flatness of P into categorical K-flatness. It follows that tensor by P sends V to D to a quasi-isomorphism. The site-derived-tensor descent comparison computes tensor on P,V; localize the tensor quasi-isomorphism and V to D and compose the resulting isomorphisms.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
   },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-NI-be400a40e",
-    "group": "NI",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-be400a40e (reviewer sub-agent of L); spot-checked: Read the full item, report, current and master blueprint sources, unit/chapter route, all fourteen retained dependency statements, both removed dependency statements, and cited Stacks passages. Verified hypotheses, coefficient category, geometric Frobenius, K-flat tensor, completion tower and mapping-fiber comparison, base-change morphism direction, edge cases, duplicate searches, Mathlib searches, and route lock. The only change is the correct B3 removal of two unused fixed-E scalar-extension dependencies; no new nodes or proof steps exist. Review written to review.md."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.WeilTensorProduct",
-    "declaration": "WeilConjectures.wfTensorFrobenius",
-    "file": "lean/Sheaf/Paper/WeilTensorProduct.lean",
-    "statement": "def wfTensorFrobenius (K L : WeilD D c X₀ E) : (wfAmbientFrobenius D c X₀ E).obj ((wfTensor D c X₀ E).obj (wfWeilCarrier D c X₀ E K, wfWeilCarrier D c X₀ E L)) ≅ (wfTensor D c X₀ E).obj (wfWeilCarrier D c X₀ E K, wfWeilCarrier D c X₀ E L)",
-    "branch": "newtargets-dag",
-    "by": "NJ",
-    "date": "2026-10-16",
-    "existing": false,
-    "declarations": [
-      "SheafOfModules.wfSiteDerivedTensor",
-      "SheafOfModules.wfSiteDerivedTensor_first",
-      "AlgebraicGeometry.Scheme.wfOrdinaryDerivedTensor",
-      "AlgebraicGeometry.Scheme.wfTensorRepresentative_exists",
-      "AlgebraicGeometry.Scheme.wfTensorModel",
-      "AlgebraicGeometry.Scheme.wfIntegralTensor",
-      "AlgebraicGeometry.Scheme.WfAmbientRationalCategory",
-      "AlgebraicGeometry.Scheme.wfRationalTensorObj",
-      "AlgebraicGeometry.Scheme.wfRationalTensorHom_exists",
-      "AlgebraicGeometry.Scheme.wfRationalTensorHom",
-      "AlgebraicGeometry.Scheme.wfRationalTensor_laws",
-      "AlgebraicGeometry.Scheme.wfRationalTensor",
-      "AlgebraicGeometry.Scheme.wfIsoPullback_complete",
-      "AlgebraicGeometry.Scheme.wfCompletePullback",
-      "AlgebraicGeometry.Scheme.wfCompletePullback_linear",
-      "AlgebraicGeometry.Scheme.wfCompletePullback_additive",
-      "AlgebraicGeometry.Scheme.wfCompletePullback_isLinear",
-      "AlgebraicGeometry.Scheme.wfAmbientRationalPullback",
-      "AlgebraicGeometry.Scheme.wfPullbackCompletion_exists",
-      "AlgebraicGeometry.Scheme.wfPullbackCompletion",
-      "AlgebraicGeometry.Scheme.wfIntegralTensorPullback",
-      "AlgebraicGeometry.Scheme.wfRationalTensorPullback_exists",
-      "AlgebraicGeometry.Scheme.wfRationalTensorPullback",
-      "AlgebraicGeometry.Scheme.wfConstructible_complete",
-      "AlgebraicGeometry.Scheme.wfIntegralConstructibleInclusion",
-      "AlgebraicGeometry.Scheme.wfConstructibleInclusion_exists",
-      "AlgebraicGeometry.Scheme.wfConstructibleInclusion",
-      "AlgebraicGeometry.Scheme.wfConstructiblePullback_obj",
-      "WeilConjectures.wfUniformizer_generates",
-      "WeilConjectures.WfAmbient",
-      "WeilConjectures.wfTensor",
-      "WeilConjectures.wfAmbientFrobenius",
-      "WeilConjectures.wfWeilCarrier",
-      "WeilConjectures.wfWeilStructure",
-      "WeilConjectures.wfTensorFrobenius"
-    ]
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-884995e9b",
-    "group": "NJ",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable statements, all dependencies, sources, canonical constructions, universes, edge cases, and report gates. All five modules reproduced cleanly through scompile.py. No fixes needed; branch head unchanged."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "On $D(X,E)$ the derived tensor product $-\\otimes^L_E-$ is computed\nfrom a $K$-flat replacement of its first argument. For Weil complexes\n$(K,\\varphi_K)$, $(L,\\varphi_L)$ the tensor Frobenius is\n$\\varphi_K\\otimes\\varphi_L$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "AUTO",
-    "group": "F2",
-    "result": "pass",
-    "landing": "20261019T002541-L-2151918",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-    "sorry_before": [
-      "AlgebraicGeometry.Scheme.wfCompletePullback_linear",
-      "AlgebraicGeometry.Scheme.wfConstructibleInclusion_exists",
-      "AlgebraicGeometry.Scheme.wfConstructiblePullback_obj",
-      "AlgebraicGeometry.Scheme.wfConstructible_complete",
-      "AlgebraicGeometry.Scheme.wfIsoPullback_complete",
-      "AlgebraicGeometry.Scheme.wfPullbackCompletion_exists",
-      "AlgebraicGeometry.Scheme.wfRationalTensorHom_exists",
-      "AlgebraicGeometry.Scheme.wfRationalTensorPullback_exists",
-      "AlgebraicGeometry.Scheme.wfRationalTensor_laws",
-      "AlgebraicGeometry.Scheme.wfTensorRepresentative_exists",
-      "SheafOfModules.wfSiteDerivedTensor_first",
-      "WeilConjectures.wfUniformizer_generates"
-    ],
-    "sorry_after": [
-      "AlgebraicGeometry.Scheme.wfCompletePullback_linear",
-      "AlgebraicGeometry.Scheme.wfConstructibleInclusion_exists",
-      "AlgebraicGeometry.Scheme.wfConstructiblePullback_obj",
-      "AlgebraicGeometry.Scheme.wfConstructible_complete",
-      "AlgebraicGeometry.Scheme.wfIsoPullback_complete",
-      "AlgebraicGeometry.Scheme.wfPullbackCompletion_exists",
-      "AlgebraicGeometry.Scheme.wfRationalTensorHom_exists",
-      "AlgebraicGeometry.Scheme.wfRationalTensorPullback_exists",
-      "AlgebraicGeometry.Scheme.wfTensorRepresentative_exists",
-      "SheafOfModules.wfSiteDerivedTensor_first"
-    ]
+  {
+   "text": "For wfIsoPullback_complete, apply wfPullbackCompletion_exists to the underlying complete object. Its unit square writes the pulled-back completion unit as the composite of the pullback of the old unit with an isomorphism. The old unit is invertible by completeness, so its functorial image and the composite are invertible.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-linear-scalar-localization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "J2",
+  "date": "2026-10-21",
+  "note": "Three existing holes closed with no new holes: first-variable tensor computation, preservation of completeness, and rational tensor pullback. Four remaining original holes plus the two constructible inclusion holes are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|derivedTensor|tensorWeilDatum",
+   "results": "3 hits; top results: Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module tensor or degreewise Tor does not define the adic derived tensor and Weil Frobenius datum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor product of sheaf complexes is computed using a K-flat replacement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, MonoidalCategory",
+   "results": "loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+   "date": "2026-10-16",
+   "verdict": "no usable result: query identifier not indexed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product of sheaf complexes computed by a K-flat resolution with tensor Frobenius on Weil complexes",
+   "results": "8 hits; top results: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map, LightCondensed.instMonoidalLightCondSetLightCondModFree",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module tensor or degreewise Tor does not define the adic derived tensor and Weil Frobenius datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal structure on the unbounded derived category of sheaves and tensor product of Frobenius equivariant objects",
+   "results": "8 hits; top results: CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module tensor or degreewise Tor does not define the adic derived tensor and Weil Frobenius datum"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorObj\"",
+   "results": "12 hits; top results: CategoryTheory.MonoidalCategoryStruct.tensorObj, CategoryTheory.MonoidalCategory.prodMonoidal_tensorObj, CategoryTheory.Monoidal.transportStruct_tensorObj, SemimoduleCat.MonoidalCategory.tensorObj, SemimoduleCat.MonoidalCategory.tensorObj_def, ModuleCat.MonoidalCategory.tensorObj_carrier, AlgCat.instMonoidalCategory.tensorObj, AlgCat.instMonoidalCategory.tensorObj_carrier",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module tensor or degreewise Tor does not define the adic derived tensor and Weil Frobenius datum"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*tensor|tensor.*derived|K-flat",
+   "results": "5 hits; top results: Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean (subdirectory CategoryTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module tensor or degreewise Tor does not define the adic derived tensor and Weil Frobenius datum"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|IsKFlat|tensorBifunctor|DerivedCategory.*[Mm]onoidal",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no match in Mathlib/Algebra/Homology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of the category of cochain complexes at quasi-isomorphisms inherits tensor from K-flat resolutions and equivariant automorphisms",
+   "results": "8 hits; top results: CategoryTheory.Tor', CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, DerivedCategory.instLinearHomotopyCategoryIntUpQh",
+   "date": "2026-10-16",
+   "verdict": "no match: degreewise Tor and linearity of derived localization do not define the completed adic tensor and its Weil Frobenius"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"tensorBifunctor\"",
+   "results": "6 hits; top results: CategoryTheory.Localization.Monoidal.tensorBifunctor, CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorLeftObjFunctorTensorBifunctor, CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorRightObjFunctorFlipTensorBifunctor, CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorCurriedTensorObjWhiskeringRightTensorBifunctor, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorFlipCurriedTensorObjWhiskeringRightTensorBifunctor",
+   "date": "2026-10-16",
+   "verdict": "ingredient only: generic monoidal localization needs an already monoidal resolving category; it does not construct the completed adic tensor or its Weil Frobenius datum"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedCompletion|WeilDatum",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no match: no derived-completion or Weil-datum declaration in the pinned Mathlib source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of derived tensor product for adic sheaves with a Frobenius equivariant structure",
+   "results": "8 hits; top results: AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype",
+   "date": "2026-10-16",
+   "verdict": "no match: AdicCompletion.ofTensorProduct and its finite-module equivalences concern ordinary modules and classical completion, not derived sheaf complexes or Weil data"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "12 hits; top results: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-16",
+   "verdict": "no match: tensorObj and tensorHom here concern presheaves of modules; cartesian sheaf tensors do not construct completed adic derived tensor or Frobenius data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete category monoidal product defined by completing the tensor product of complexes",
+   "results": "8 hits; top results: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor', HomologicalComplex.monoidalCategory, HomologicalComplex.monoidalCategoryStruct, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-16",
+   "verdict": "ingredient only: Tor is degreewise in an abelian category and HomologicalComplex.monoidalCategory is before localization; neither constructs completed adic derived tensor or Weil data"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"tensor\"",
+   "results": "12 hits; top results: IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.Away.tensorRight, IsLocalization.Away.tensor, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.algebraTensorEquiv, IsLocalization.tensorProduct_compatibleSMul, IsLocalization.Away.tensorRightEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned IsLocalization and tensor equivalences concern ordinary algebraic modules and algebras, not derived sheaf complexes or completed Weil data"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|derivedTensor|derivedCompletion|tensorWeilDatum",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no match in the pinned Mathlib source"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*tensor|tensor.*adic|complete.*tensor|tensor.*complete",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no hits in Mathlib/Algebra/Homology for adic or complete tensor vocabulary"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"monoidalCategory\", \"DerivedCategory\"",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no hits for the queried derived-category monoidal structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product on the category of derived complete module sheaves compatible with pullback by a scheme automorphism",
+   "results": "8 hits; top results: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedLightCondMod, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.monoidalCategory, PresheafOfModules.monoidalCategoryStruct",
+   "date": "2026-10-16",
+   "verdict": "no full match: light condensed modules and presheaves of modules have ordinary tensor structures, without derived completion, adic rationalization, or Weil Frobenius data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor bifunctor on sheaves of modules followed by ideal-adic completion, with equivariant structure under an exact equivalence",
+   "results": "8 hits; top results: AdicCompletion.ofTensorProduct, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.tensor_map_id_left_eq_map, LightCondensed.instMonoidalClosedLightCondMod, AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-16",
+   "verdict": "no full match: classical module adic completion and ordinary light condensed sheaf tensor do not construct completed derived sheaf tensor with Weil data"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no hits for the queried derived-category tensor vocabulary"
+  },
+  {
+   "tool": "grep",
+   "query": "K.?flat|derived.{0,30}completion|completion.{0,30}derived",
+   "results": "0 hits; top results:  (subdirectory Algebra/Homology)",
+   "date": "2026-10-16",
+   "verdict": "no hits in Mathlib/Algebra/Homology for K-flat or derived-completion vocabulary"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|derivedTensor|derivedCompletion|tensorWeilDatum",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits in pinned Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor product of derived complete sheaf complexes with Weil Frobenius is computed by completing a K-flat tensor product",
+   "results": "8 hits; top results: HomologicalComplex.tensorObj, Module.Flat.rTensor_shortComplex_exact, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, CategoryTheory.Sheaf.tensorProd_isSheaf, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-16",
+   "verdict": "ingredients only: tensor of complexes, flat modules, classical finite-module adic completion and cartesian sheaf tensor omit the completed derived Weil construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived tensor product of adic sheaves with Frobenius equivariant structure",
+   "results": "8 hits; top results: BDeRhamPlus, BDeRham, AdicCompletion.ofTensorProduct, instCommRingBDeRhamPlus, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-16",
+   "verdict": "no match: BDeRham rings and classical module adic completion do not define completed derived tensor of sheaves or Weil Frobenius"
+  },
+  {
+   "tool": "grep",
+   "query": "def ofTensorProduct|def tensorObj|def tensorBifunctor",
+   "results": "18 hits; top results: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "ingredients only: read AsTensorProduct.lean:57, Homology/Monoidal.lean:50 and Localization/Monoidal/Basic.lean:124; these are classical module completion, tensor of complexes and generic localization, not this definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"tensorBifunctor\"",
+   "results": "6 hits; top results: CategoryTheory.Localization.Monoidal.tensorBifunctor, CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorLeftObjFunctorTensorBifunctor, CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorRightObjFunctorFlipTensorBifunctor, CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorCurriedTensorObjWhiskeringRightTensorBifunctor, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorFlipCurriedTensorObjWhiskeringRightTensorBifunctor",
+   "date": "2026-10-16",
+   "verdict": "ingredient only: generic monoidal localization assumes a monoidal source and does not construct the adic completion or Weil comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor bifunctor on derived complete complexes of sheaves of modules is obtained by completing K-flat tensor, compatible with an automorphism",
+   "results": "8 hits; top results: HomologicalComplex.HasTensor, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, HomologicalComplex.ιTensorObj, HomologicalComplex.tensorObj, LightCondensed.instMonoidalLightCondSetLightCondModFree, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+   "date": "2026-10-16",
+   "verdict": "ingredients only: HomologicalComplex tensor precedes derived localization; light condensed sheaf tensor does not supply completed adic derived tensor or Frobenius"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|DerivedCategory.*monoidal|derivedComplete",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no hits in the pinned Mathlib source"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"MonoidalCategory\"",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no hits for the queried derived-category monoidal structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal structure on localization of complexes of sheaves at quasi isomorphisms followed by derived adic completion",
+   "results": "8 hits; top results: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.Q, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "ingredient only: LightCondensed tensor is on ordinary sheaves; derived-category exact-functor lifting and linearity do not define completed tensor or tensor Weil data"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2107,
+ "blueprint_uses": [
+  "def-wf-weil-category"
+ ],
+ "uses_not_cited": [
+  "def-wf-weil-category"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "recorded_in_advance",
+   "text": "*Recorded in advance* from chapter *Weight foundations and monodromy groups* of the source.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-wf-tensor-product",
+  "worker": "stage1",
+  "summary": "Repaired the released literature-review B3 finding: removed def-weil-pbc-finite-completed-coefficient-map and def-wf-automorphism-completed-transport from stmt_deps because the fixed-E tensor definition uses neither construction. The fourteen remaining dependencies are exactly the nodes cited in the unchanged statement. Reread their statements, the current main-20261015 blueprint, and the ringed-site K-flat, tensor-pullback and Koszul-completion sources. Rechecked coefficient conventions, strict-tower comparison and small cases; searched project Lean and Mathlib afresh. No new nodes, no Mathlib leaves, no statement or proof changes. Repair continuation verified the retained two-edge deletion against the current shared baseline and released repair note; no additional mathematical change was needed. Current repair continuation independently confirms the retained deletion is the entire assigned B3 correction: the fourteen direct dependencies equal the inline node references; the mathematical statement and proof fields remain identical to current shared main.",
+  "blueprint": "Current main-20261015 def-wf-tensor-product, order 2451: its first sentence is the first-variable K-flat tensor computation with the coefficient convention of adjacent def-wf-weil-category, order 2450; its second sentence is the displayed typed tensor Frobenius composite. This is a recorded-in-advance definition in sk-rem-sf-pf-done, not its key statement. The unit has no proof steps to replace."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-be400a40e",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-be400a40e (reviewer sub-agent of L); spot-checked: Read the full item, report, current and master blueprint sources, unit/chapter route, all fourteen retained dependency statements, both removed dependency statements, and cited Stacks passages. Verified hypotheses, coefficient category, geometric Frobenius, K-flat tensor, completion tower and mapping-fiber comparison, base-change morphism direction, edge cases, duplicate searches, Mathlib searches, and route lock. The only change is the correct B3 removal of two unused fixed-E scalar-extension dependencies; no new nodes or proof steps exist. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilTensorProduct",
+  "declaration": "WeilConjectures.wfTensorFrobenius",
+  "file": "lean/Sheaf/Paper/WeilTensorProduct.lean",
+  "statement": "def wfTensorFrobenius (K L : WeilD D c X₀ E) : (wfAmbientFrobenius D c X₀ E).obj ((wfTensor D c X₀ E).obj (wfWeilCarrier D c X₀ E K, wfWeilCarrier D c X₀ E L)) ≅ (wfTensor D c X₀ E).obj (wfWeilCarrier D c X₀ E K, wfWeilCarrier D c X₀ E L)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "SheafOfModules.wfSiteDerivedTensor",
+   "SheafOfModules.wfSiteDerivedTensor_first",
+   "AlgebraicGeometry.Scheme.wfOrdinaryDerivedTensor",
+   "AlgebraicGeometry.Scheme.wfTensorRepresentative_exists",
+   "AlgebraicGeometry.Scheme.wfTensorModel",
+   "AlgebraicGeometry.Scheme.wfIntegralTensor",
+   "AlgebraicGeometry.Scheme.WfAmbientRationalCategory",
+   "AlgebraicGeometry.Scheme.wfRationalTensorObj",
+   "AlgebraicGeometry.Scheme.wfRationalTensorHom_exists",
+   "AlgebraicGeometry.Scheme.wfRationalTensorHom",
+   "AlgebraicGeometry.Scheme.wfRationalTensor_laws",
+   "AlgebraicGeometry.Scheme.wfRationalTensor",
+   "AlgebraicGeometry.Scheme.wfIsoPullback_complete",
+   "AlgebraicGeometry.Scheme.wfCompletePullback",
+   "AlgebraicGeometry.Scheme.wfCompletePullback_linear",
+   "AlgebraicGeometry.Scheme.wfCompletePullback_additive",
+   "AlgebraicGeometry.Scheme.wfCompletePullback_isLinear",
+   "AlgebraicGeometry.Scheme.wfAmbientRationalPullback",
+   "AlgebraicGeometry.Scheme.wfPullbackCompletion_exists",
+   "AlgebraicGeometry.Scheme.wfPullbackCompletion",
+   "AlgebraicGeometry.Scheme.wfIntegralTensorPullback",
+   "AlgebraicGeometry.Scheme.wfRationalTensorPullback_exists",
+   "AlgebraicGeometry.Scheme.wfRationalTensorPullback",
+   "AlgebraicGeometry.Scheme.wfConstructible_complete",
+   "AlgebraicGeometry.Scheme.wfIntegralConstructibleInclusion",
+   "AlgebraicGeometry.Scheme.wfConstructibleInclusion_exists",
+   "AlgebraicGeometry.Scheme.wfConstructibleInclusion",
+   "AlgebraicGeometry.Scheme.wfConstructiblePullback_obj",
+   "WeilConjectures.wfUniformizer_generates",
+   "WeilConjectures.WfAmbient",
+   "WeilConjectures.wfTensor",
+   "WeilConjectures.wfAmbientFrobenius",
+   "WeilConjectures.wfWeilCarrier",
+   "WeilConjectures.wfWeilStructure",
+   "WeilConjectures.wfTensorFrobenius"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-884995e9b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all dependencies, sources, canonical constructions, universes, edge cases, and report gates. All five modules reproduced cleanly through scompile.py. No fixes needed; branch head unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "On $D(X,E)$ the derived tensor product $-\\otimes^L_E-$ is computed\nfrom a $K$-flat replacement of its first argument. For Weil complexes\n$(K,\\varphi_K)$, $(L,\\varphi_L)$ the tensor Frobenius is\n$\\varphi_K\\otimes\\varphi_L$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T235603-L-1193266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
