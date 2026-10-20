@@ -38,7 +38,16 @@ Usage:
 """
 from __future__ import annotations
 import collections, datetime, pathlib, re, subprocess, sys, time
-import concurrent.futures  # noqa: F401  (before tools/ is on sys.path: tools/queue.py shadows the stdlib `queue`)
+import os as _os, sys as _sys
+# 2026-10-20: tools/queue.py shadows the stdlib `queue` (the script's directory is sys.path[0]); concurrent.futures
+# needs the stdlib one (ThreadPoolExecutor: "module 'queue' has no attribute 'SimpleQueue'"). Import both without
+# tools/ on the path; this process never imports tools/queue.py as a module.
+_saved = list(_sys.path)
+_here = _os.path.dirname(_os.path.abspath(__file__))
+_sys.path[:] = [p for p in _sys.path if _os.path.abspath(p or ".") != _here]
+_sys.modules.pop("queue", None)
+import queue as _queue, concurrent.futures  # noqa: E402,F401
+_sys.path[:] = _saved
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import leanindex as li  # noqa: E402
