@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Use Mathlib Functor.mapBifunctorHomologicalComplex with curriedTensor for the unsigned bicomplex, and the map of Functor.uncurry.obj of that bifunctor for its maps. Keep tensorBicomplex and tensorBicomplexMap as transparent compatibility abbreviations of those exact expressions, as requested by the landing-failure return. Their terms, differentials and morphism components are inherited definitionally from Mathlib. Existing callers retain their original signatures, syntax and proofs. Construct chainTensorMap by mapHomologicalComplex followed by NatTrans.mapHomologicalComplex as before.",
+   "text": "Reuse the retained upstream HomologicalComplex₂.tensorBicomplex and tensorBicomplexMap from WeilConjectures.Algebra.Homology.TensorBicomplexExtension. They are the same transparent abbreviations of Mathlib Functor.mapBifunctorHomologicalComplex and its uncurried map. For tensoring a chain map with a module map, use ChainComplex.tensorMap from the extension's publicly imported WeilConjectures.Algebra.Homology.TensorBicomplex. Its mapHomologicalComplex/NatTrans.mapHomologicalComplex composite is exactly the former chainTensorMap construction. The current library has no import of Sheaf.Algebra.Homology.TensorBicomplex, so withdraw this duplicate without changing upstream declarations or consumers.",
    "uses": [
     "def-weil-pbc-chain-complex-tensor-module",
     "def-weil-pbc-module-tensor-product"
@@ -28,7 +28,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00M3, proof and functoriality paragraph; canonical implementation via Mathlib.Algebra.Homology.Bifunctor and Mathlib.CategoryTheory.Functor.Currying"
+  "place": "Tag 00M3 (lemma-tor-left-right), tensor double complex and functoriality paragraphs; reuse the existing upstream Mathlib aliases and ChainComplex.tensorMap."
  },
  "mathlib_searches": [
   {
@@ -83,19 +83,20 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.TensorBicomplex",
-  "file": "lean/Sheaf/Algebra/Homology/TensorBicomplex.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.TensorBicomplexExtension",
+  "file": "lean/WeilConjectures/Algebra/Homology/TensorBicomplexExtension.lean",
   "declaration": "HomologicalComplex₂.tensorBicomplex",
-  "statement": "abbrev tensorBicomplex (P Q : ChainComplex (ModuleCat.{u} R) ℕ) : HomologicalComplex₂ (ModuleCat.{u} R) (.down ℕ) (.down ℕ)",
-  "branch": "sheaf-dag",
-  "by": "D2",
-  "date": "2026-10-14",
   "declarations": [
    "HomologicalComplex₂.tensorBicomplex",
    "HomologicalComplex₂.tensorBicomplexMap",
-   "HomologicalComplex₂.chainTensorMap"
-  ]
+   "ChainComplex.tensorMap"
+  ],
+  "statement": "abbrev tensorBicomplex (P Q : ChainComplex (ModuleCat.{u} R) ℕ) : HomologicalComplex₂ (ModuleCat.{u} R) (.down ℕ) (.down ℕ)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-20",
+  "note": "The unsigned tensor bicomplex and its map are defined in this upstream extension. Its public import WeilConjectures.Algebra.Homology.TensorBicomplex provides ChainComplex.tensorMap, with exactly the former chainTensorMap signature and composite body. The unused Sheaf duplicate is withdrawn; all three upstream constructions have only the permitted axioms."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -108,16 +109,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-68348",
-  "group": "F2",
+  "reviewer": "C-8742f",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261014T084700-L-88935",
+  "landing": "20261020T132019-L-1402004",
   "kind": "interface",
-  "note": "independent Codex review: Matched all three constructions with the node and Mathlib; signatures unchanged, canonical-map equality and component checks pass, axioms permitted, delivery and all three direct importers plus TorSymmetry compile.",
-  "sorry_before": [],
-  "sorry_after": []
+  "note": "independent cc review: withdrawn Sheaf TensorBicomplex (0 importers, no chainTensorMap users) against upstream TensorBicomplexExtension abbrevs (byte-identical) and ChainComplex.tensorMap (same signature and body); node changes limited to lean/proof/proof_origin; delivery and axiom probe compile"
  },
  "lean_audit": {
   "master": {
