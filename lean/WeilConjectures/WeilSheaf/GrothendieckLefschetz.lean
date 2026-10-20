@@ -7,10 +7,6 @@ module
 
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Stalk
-import WeilConjectures.PointCount
-import WeilConjectures.WeilSheaf.LowerShriekOperations
-import WeilConjectures.WeilSheaf.StalkCharpoly
-import WeilConjectures.WeilSheaf.TraceFunctionCongr
 
 /-!
 # The Grothendieck–Lefschetz trace formula for Weil sheaves

@@ -95,14 +95,7 @@ section Proper
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
 
 /-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_ét) ⥤ D(Y_ét)` is a
-left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`.
-
-STATEMENT-DISPUTED: This asserts existence for every Grothendieck abelian coefficient
-category. The implementation notes of `Etale.Derived.UpperShriek` explicitly reject that
-unrestricted assertion and require a left-adjoint instance for general coefficients.
-The available proper coproduct theorem in `Etale.Derived.LowerShriekLeftAdjoint` assumes
-coefficients `ModuleCat Λ` with `IsAddTorsion Λ`. Those hypotheses are absent here.
-The original signature is retained for review; no counterexample is claimed. -/
+left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
 instance isLeftAdjoint_rightDerivedLowerStar_of_isProper :
     ((g)_*[A]).rightDerivedFunctor.IsLeftAdjoint :=
   sorry

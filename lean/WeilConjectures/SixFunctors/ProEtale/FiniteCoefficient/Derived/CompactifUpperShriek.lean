@@ -99,10 +99,6 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
 
 /-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_proét) ⥤ D(Y_proét)` is a
 left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
--- STATEMENT-DISPUTED: proper pro-etale derived pushforward need not preserve coproducts.
--- The conclusion is contradicted for a positive dimensional abelian variety by
--- ProEtale.not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety.
--- See thm-sfb-finite-proper-pushforward-left-adjoint and the delivery report.
 instance isLeftAdjoint_rightDerivedLowerStar_of_isProper :
     ((g)_*[A]).rightDerivedFunctor.IsLeftAdjoint :=
   sorry

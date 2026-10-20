@@ -6,12 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
-import Sheaf.Paper.TruncatedEtaleMatchingData
-import Sheaf.Paper.TruncatedFiniteSplitEtaleDiagram
-import WeilConjectures.AlgebraicGeometry.DescendSurjective
-import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
-import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Blueprint statements
