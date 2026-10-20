@@ -12,11 +12,12 @@
  ],
  "proof": [
   {
-   "text": "The weak Serre property of constructible integral modules makes bounded constructible integral complexes a triangulated isomorphism-invariant property. Apply the mapping-cone reduction theorem with the supplied actual tensor description.",
+   "text": "Install the kernel, cokernel and extension closure proofs of integral constructible modules as explicitly typed local instances. Use the proved weak Serre triangulated-closure instance, explicitly, rather than the upstream noetherian-only instance. Apply the mapping-cone reduction theorem with the supplied actual tensor description.",
    "uses": [
     "lem-weil-pbc-integral-reduction-triangulated-property",
     "lem-weil-pbc-integral-constructible-serre",
-    "lem-weil-pbc-integral-reduction-tensor"
+    "lem-weil-pbc-integral-reduction-tensor",
+    "prop-weil-pbc-module-bounded-constructible-triangulated"
    ],
    "elementary": false
   },
@@ -34,13 +35,14 @@
  "proof_deps": [
   "lem-weil-pbc-integral-reduction-triangulated-property",
   "lem-weil-pbc-integral-constructible-serre",
-  "lem-weil-pbc-integral-reduction-tensor"
+  "lem-weil-pbc-integral-reduction-tensor",
+  "prop-weil-pbc-module-bounded-constructible-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "C2 stage-3 reduction. Numbered steps are implemented in the attached Lean declaration, except the explicitly reported remaining coefficient-comparison theorem."
+  "note": "H2 restores the quarantined complete proof after upstream synchronization. Explicit closure instances and a proof-only import of the relocated weak Serre theorem repair elaboration and keep triangulated closure on the integral Serre route. No holes are added; all existing theorem signatures and constructions are preserved."
  },
  "mathlib_searches": [
   {
@@ -109,14 +111,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-eeaf7",
-  "group": "C2",
+  "reviewer": "COMPILER",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261016T050636-L-3699071",
-  "kind": "interface",
-  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched against DAG statements and dependencies; all eight modules, the sole direct importer, and 22 axiom probes compile cleanly."
+  "landing": "20261020T154617-L-3136528",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
