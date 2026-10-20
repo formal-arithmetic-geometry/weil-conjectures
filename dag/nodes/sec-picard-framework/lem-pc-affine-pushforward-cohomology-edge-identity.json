@@ -45,11 +45,11 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "G4",
+  "group": "P1",
   "date": "2026-10-20",
   "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
   "place": "perfect.tex, affine morphism equivalence proof, identity representative calculation.",
-  "note": "Use the complete adopted upstream proof as this node's realization. Its construction, adjunction-cancellation and factorization steps agree with the archived proof, with explicit SheafOfModules.{u} universes and a direct import of the canonical upstream factorization. This records the actual replacement parent argument when withdrawing the unused Sheaf factorization wrapper. All mathematical dependency edges are retained. The separately claimed Sheaf identity module and its quarantine archive are not edited."
+  "note": "Reuse the proved adopted upstream theorem, whose construction, adjunction cancellation, and comparison factorization are the three steps recorded here. Restore the old Sheaf module path as a public re-export instead of redeclaring the same theorem or importing the incompatible pre-sync coordinate declarations. All proof dependencies are retained."
  },
  "mathlib_searches": [
   {
@@ -99,9 +99,10 @@
   "file": "lean/WeilConjectures/Algebra/Homology/AffinePushforwardCohomologyEdgeIdentity.lean",
   "declaration": "AlgebraicGeometry.exists_affinePushforwardCohomologyEdge_identity",
   "branch": "sheaf-dag",
-  "by": "G4",
+  "by": "P1",
   "date": "2026-10-20",
-  "statement": "theorem exists_affinePushforwardCohomologyEdge_identity\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)\n    (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅\n      affinePushforwardTilde A ⋙\n        Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))) :\n  ∃ α : affineDerivedCohomologyModules A i ⋙\n      (ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B) ⟶\n    (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n      schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙\n      DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i,\n    ∀ (C : CochainComplex (ModuleCat A) ℤ)\n      (hK : schemeDerivedQCohProperty (Spec (.of A))\n        (DerivedCategory.Q.obj (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))),\n      affinePushforwardCohomologyMapOfComparison A B φ σ C i ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map\n          ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).map\n            (𝟙 _)) =\n        (affinePushforwardTilde B).map ((ModuleCat.restrictScalars φ).map\n          (affinePushforwardRepresentativeCohomologyIso A C _ (Iso.refl _) i).hom) ≫\n          α.app ⟨_, hK⟩"
+  "statement": "theorem exists_affinePushforwardCohomologyEdge_identity\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)\n    (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅\n      affinePushforwardTilde A ⋙\n        Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))) :\n  ∃ α : affineDerivedCohomologyModules A i ⋙\n      (ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B) ⟶\n    (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n      schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙\n      DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i,\n    ∀ (C : CochainComplex (ModuleCat A) ℤ)\n      (hK : schemeDerivedQCohProperty (Spec (.of A))\n        (DerivedCategory.Q.obj (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))),\n      affinePushforwardCohomologyMapOfComparison A B φ σ C i ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map\n          ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).map\n            (𝟙 _)) =\n        (affinePushforwardTilde B).map ((ModuleCat.restrictScalars φ).map\n          (affinePushforwardRepresentativeCohomologyIso A C _ (Iso.refl _) i).hom) ≫\n          α.app ⟨_, hK⟩",
+  "note": "The restored Sheaf module publicly re-exports this existing upstream declaration. It has the archived proof and statement with explicit SheafOfModules.{u} universes; the mathematical statement and proof dependencies are unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -116,12 +117,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G4",
+  "reviewer": "C-31185",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261020T160107-L-3325645",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T160759-L-3407880",
+  "kind": "proof",
+  "note": "independent cc review: delivered re-export module + node lean record (existing:true, statement verbatim in WeilConjectures/Algebra/Homology/AffinePushforwardCohomologyEdgeIdentity.lean) against the quarantined Sheaf copy (only .{u} annotations differ) and the live node (only proof_origin/lean changed); compile ok, axioms clean, no importers"
  },
  "lean_audit": {
   "master": {
