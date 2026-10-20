@@ -14,101 +14,72 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal C=X_{\\mathrm{aff,proet}}$, $\\mathcal D=X_{\\mathrm{proet}}$, and let $u$ be the full inclusion. An open immersion is étale and hence weakly étale by the two cited comparison statements. Composition stability therefore makes every affine open $A\\subset U$ of a weakly étale $U\\to X$ an object of $\\mathcal C$. Affine opens cover $U$ by the affine-basis lemma. The family of all affine opens $A\\to U$ is a pro-etale covering directly by the covering definition: for any affine open $W\\subset U$, the member $A=W$ alone has image $W$. Thus every object of $\\mathcal D$ has a covering by image objects. This works for arbitrary $U$ and $X$, with no quasi-compactness or separatedness assumption.",
+   "text": "Pullbacks of affine objects remain affine: map the limiting cone through ProEt.forget and Over.forget and apply Mathlib Scheme.isAffine_of_isLimit to the walking-cospan diagram. The full-subcategory inclusion therefore preserves pullbacks. The weakly etale base-change and composition instances are the Mathlib implementations recorded by the cited leaf.",
    "uses": [
-    "lem-weil-pbc-open-immersion-etale",
-    "det-pe-morphisms-etale-comparison",
-    "sk-lem-pe-weakly-etale-stability",
-    "lem-weil-pbc-affine-opens-basis",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098W (lemma-alternative), image-object covering condition of Tag 03A0; affine opens: 01IT; open immersions: 02GP and 094X; composition: 094T"
-   }
-  },
-  {
-   "text": "For a finite family $\\{A_j\\to U\\}$ of weakly étale maps with all $A_j$ and $U$ affine, the pro-etale covering condition is equivalent to $\\bigcup_j\\operatorname{im}(A_j\\to U)=U$. Necessity follows by taking the affine open $U$ itself in the definition. For sufficiency, fix any affine open $W\\subset U$. Each inverse image $A_j\\times_U W$ is an affine open of $A_j$ by the cited affine-morphism theorem; these finitely many opens have images with union $W$. This is exactly the finite-affine-refinement condition in the definition. In particular the standard coverings used here agree with Tag 098E, not with an ind-etale presentation condition.",
-   "uses": [
-    "lem-weil-pbc-morphism-affine-schemes-affine",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098E (definition-standard-proetale); affine-morphism input: Tag 01SH (morphisms/lemma-morphism-affines-affine)"
-   }
-  },
-  {
-   "text": "The declared standard coverings make $\\mathcal C$ a site and $u$ continuous. Indeed, a pullback $A\\times_U B$ needed for a covering in $\\mathcal C$ is affine by the affine-spectra fibre-product theorem. Its map to $B$ is weakly étale by base-change stability, and its composite to $X$ is weakly étale by composition stability. Thus this is also the pullback in the full subcategory. Pro-etale coverings are precisely fpqc families of weakly étale arrows by the site definition. The three fpqc covering axioms, together with weakly étale base-change and composition stability, show that singleton isomorphisms, finite composites of standard coverings, and their pullbacks are standard coverings again: the index sets remain finite, and all their domains remain affine. The inclusion preserves these covering families and their pullbacks, which is exactly continuity in the cited site definition.",
-   "uses": [
+    "def-weil-pbc-proetale-site",
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "sk-lem-pe-weakly-etale-stability",
-    "lem-weil-pbc-fpqc-covering-axioms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-weakly-etale-composition-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098W (lemma-alternative), continuity verification; Tags 098C (lemma-proetale), 01I4/01JQ (affine fibre products), 022D (fpqc covering axioms)"
-   }
+   "elementary": false
   },
   {
-   "text": "To check cocontinuity, let $U$ be an object of $\\mathcal C$ and $\\{V_i\\to U\\}$ any covering of $\\mathcal D$. Apply the defining covering condition to the affine open $U\\subset U$: it gives finitely many affine opens $A_j\\subset V_{i(j)}$ whose composite images cover $U$. Step 1 makes the open inclusions weakly étale, and composition stability makes $A_j\\to U$ and $A_j\\to X$ weakly étale. By step 2 the finite family $\\{A_j\\to U\\}$ is a standard covering in $\\mathcal C$. Each arrow factors through the chosen $V_{i(j)}$, so its image family refines the original covering. This is precisely the cocontinuity condition, with the required factors explicitly given by $A_j\\hookrightarrow V_{i(j)}$.",
+   "text": "For U in X.ProEt, use U.left.affineCover. Its charts are affine and their open-immersion maps, followed by U.hom, are weakly etale, using the direct Mathlib etale-to-weakly-etale and composition instances. Zariski covers are quasi-compact weakly-etale covers (zariskiPrecoverage_le_propQCPrecoverage), so this family generates a covering sieve contained in coverByImage of the affine inclusion. This proves IsCoverDense without any condition on X.",
    "uses": [
     "def-weil-pbc-proetale-site",
-    "sk-lem-pe-weakly-etale-stability",
-    "def-weil-pbc-special-cocontinuous-functor"
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 098D (lemma-proetale-affine), 098W (lemma-alternative), and 00XJ/03A0 (cocontinuity)"
-   }
+   "elementary": false
   },
   {
-   "text": "Because $\\mathcal C$ is a full subcategory, $u(a)=u(b)$ for parallel arrows implies $a=b$; the singleton identity covering witnesses local faithfulness. Every arrow $c:u(U^{\\prime})\\to u(U)$ is already the image of a unique arrow $U^{\\prime}\\to U$; again the singleton identity covering witnesses local fullness. Together with continuity in step 3, cocontinuity in step 4 and the image-object coverings in step 1, these verify all five conditions in the cited definition of a special cocontinuous functor.",
-   "uses": [
-    "def-weil-pbc-special-cocontinuous-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098W (lemma-alternative); Tag 03A0 (lemma-equivalence), conditions (3)-(5)"
-   }
-  },
-  {
-   "text": "Use the compatible universes and small skeletons of the stated pro-etale site convention, and apply the special-cocontinuous sheaf-equivalence theorem to $u:\\mathcal C\\to\\mathcal D$. Its hypotheses have all been verified in steps 1–5. Its inverse-image functor is precomposition with $u$, hence on objects it sends $F$ to $F|_{\\mathcal C}$ and on morphisms it restricts each component to affine objects. Therefore restriction is the asserted equivalence $\\operatorname{Sh}(X_{\\mathrm{proet}})\\simeq\\operatorname{Sh}(X_{\\mathrm{aff,proet}})$, and the cited theorem identifies it with an equivalence of topoi.",
+   "text": "A covering sieve S on an affine object U contains a covering presieve R, by Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition for the pro-etale precoverage. Package the underlying scheme family as a quasi-compact weakly-etale cover E. QuasiCompactCover.exists_hom applied to E.forgetQc gives a finite affine refinement A and a morphism a of covers. Each A.f j followed by U.hom defines an affine weakly-etale object. Finiteness and affineness make A.cover quasi-compact (QuasiCompactCover.of_finite), so its presieve belongs to affineWeaklyEtalePrecoverage. The arrow a.h₀ j, with the equation a.w₀ j, defines the map of pro-etale objects through the chosen member of R. Sieve downward closure puts each refined arrow in S. Thus every covering sieve on an affine object has a finite standard affine refinement. This is the finite-affine-refinement condition of the pro-etale covering definition.",
    "uses": [
     "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-special-cocontinuous-sheaf-equivalence"
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098W (lemma-alternative), application of Sites Tag 03A0 (lemma-equivalence)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Construct the pretopology J as the infimum of Pretopology.finite and the pretopology of the comapped pro-etale precoverage. Its underlying precoverage is definitionally affineWeaklyEtalePrecoverage. Coverage.toGrothendieck_toPrecoverage and Pretopology.toGrothendieck_toCoverage identify its Grothendieck topology with affineWeaklyEtaleTopology. The preserved pullbacks of step 1 identify the matching-family condition for a J-cover with the condition for its image cover. The latter holds for any sheaf on X.ProEt, because the image cover belongs to the pro-etale precoverage. Presieve.isSheaf_pretopology gives continuity. This uses bind composition for finite presieves, rather than the stronger arbitrary-indexed-composition class.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By continuity, affineWeaklyEtaleTopology is bounded above by the topology induced by the inclusion. Conversely, cover-density from step 2 identifies induced covering sieves with sieves whose pushforward covers. Refine that pushforward by step 3. Fullness and faithfulness lift each factorization back to the affine subcategory, so the original sieve contains a standard finite covering and is covering. This proves equality of the two topologies. The full faithful cover-dense inclusion is consequently an IsDenseSubsite.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing Mathlib dense-subsite sheaf-equivalence leaf to the inclusion, with value category Type (max (u+1) v). It has all the required comma-shaped limits since both site object types have universe u+1 and hom types have universe u. The equivalence is the asEquivalence of sheafPushforwardContinuous. Its sheafPushforwardContinuousCompSheafToPresheafIso is exactly the displayed natural isomorphism with restriction. This is the dense-subsite form of Stacks 03A0/098W and uses no enlargement identifying the object and hom universes.",
+   "uses": [
+    "lem-cbc-local-dense-ordinary-sheaves"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-special-cocontinuous-functor",
-  "det-pe-morphisms-etale-comparison",
+  "lem-cbc-local-dense-ordinary-sheaves",
   "lem-weil-pbc-affine-opens-basis",
   "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-fpqc-covering-axioms",
   "lem-weil-pbc-morphism-affine-schemes-affine",
   "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
-  "sk-lem-pe-weakly-etale-stability"
+  "lem-weil-pbc-weakly-etale-composition-base-change"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "H2",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 098W (lemma-alternative): expanded verification of the five hypotheses of Sites Tag 03A0, with finite affine refinement from 098D and standard coverings from 098E."
+  "place": "Tags 098E and 098W (definition-standard-proetale and lemma-alternative), implemented via the Mathlib dense-subsite comparison. Finite refinement uses Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, QuasiCompactCover.exists_hom and of_finite; comparison uses the existing leaf lem-cbc-local-dense-ordinary-sheaves. All proof terms are closed; no new theorem obligations."
  },
  "mathlib_searches": [
   {
@@ -246,13 +217,10 @@
  },
  "tool_uses": [
   "lem-weil-pbc-open-immersion-etale",
-  "det-pe-morphisms-etale-comparison",
-  "sk-lem-pe-weakly-etale-stability",
   "lem-weil-pbc-affine-opens-basis",
   "lem-weil-pbc-morphism-affine-schemes-affine",
   "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-fpqc-covering-axioms",
-  "lem-weil-pbc-special-cocontinuous-sheaf-equivalence"
+  "lem-weil-pbc-fpqc-covering-axioms"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -288,5 +256,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Re-delivery of an already-landed module; it only adds the module-docstring declaration index, reformats lean.statement and appends a report paragraph. Checked in full against Stacks 098W/098E: X:Scheme.{u} with no extra hypotheses; Mathlib ProEt/topology (fpqc weakly etale covers, u+1/u universes kept); full subcategory of affine sources; coverings Precoverage.finite ⊓ comap ι (Iff.rfl checked), which is 098E on affine targets; conclusion is an equivalence with functor ≅ restriction along ι.op; coefficients Type (max (u+1) v), with no universe restriction. Statement is true (dense subsite). Edge cases empty X, empty cover and non-qc/qs base are covered. Helpers have real data; only the theorem is sorry, with the six-step docstring; source/blueprint docstrings present; record complete and verbatim; Worker report and Second reading present; no long lines. nt_compile --json: clean in 8.2 s; with #check/#print axioms (sorryAx only) clean in 7.3 s. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-da1fb",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261020T221211-L-4156571",
+  "kind": "interface",
+  "note": "independent cc review: delivered ProEtaleAffineSubsiteEquivalence.lean vs live clone (only imports, private helpers, sorry body changed); node vs live (proof/proof_deps/proof_origin/tool_uses only); WeaklyEtaleStability and item unit realized lists (empty); importer ProEtaleEnoughPoints compiled against delivered module"
  }
 }

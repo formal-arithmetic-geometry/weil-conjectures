@@ -9,17 +9,10 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Sites.Finite
 public import Mathlib.CategoryTheory.Sites.Sheaf
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
 
+import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
+import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
-import Sheaf.CategoryTheory.SpecialCocontinuousSheafEquivalence
-import Sheaf.AlgebraicGeometry.EtaleComparison
-import Sheaf.AlgebraicGeometry.WeaklyEtaleStability
 
 /-!
 # The full affine weakly étale subsite
@@ -86,6 +79,141 @@ def affineWeaklyEtaleTopology (X : Scheme.{u}) :
     GrothendieckTopology (AffineWeaklyEtale X) :=
   (affineWeaklyEtalePrecoverage X).toGrothendieck
 
+-- Affine pullbacks are computed in schemes, even when the base X is not affine.
+private theorem affineSource_closedUnderPullbacks (X : Scheme.{u}) :
+    (affineSource X).IsClosedUnderLimitsOfShape Limits.WalkingCospan := by
+  refine ⟨?_⟩
+  rintro D ⟨h⟩
+  let F := ProEt.forget X ⋙ Over.forget X
+  have (j : Limits.WalkingCospan) : IsAffine ((h.diag ⋙ F).obj j) := h.prop_diag_obj j
+  exact Scheme.isAffine_of_isLimit (F.mapCone h.toLimitPresentation.cone)
+    (Limits.isLimitOfPreserves F h.isLimit)
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem affineWeaklyEtale_coverDense (X : Scheme.{u}) :
+    (affineWeaklyEtaleInclusion X).IsCoverDense (topology X) := by
+  constructor
+  intro U
+  let V (i : U.left.affineCover.I₀) : AffineWeaklyEtale X :=
+    ⟨ProEt.mk (U.left.affineCover.f i ≫ U.hom), by
+      change IsAffine (Spec _)
+      infer_instance⟩
+  let f (i : U.left.affineCover.I₀) :
+      (affineWeaklyEtaleInclusion X).obj (V i) ⟶ U :=
+    MorphismProperty.Over.homMk (U.left.affineCover.f i)
+  apply (topology X).superset_covering (S := Sieve.ofArrows _ f)
+  · rw [Sieve.ofArrows, Sieve.generate_le_iff, Presieve.ofArrows_le_iff]
+    exact fun i ↦ Presieve.in_coverByImage _ (f i)
+  · apply Precoverage.generate_mem_toGrothendieck
+    change (Presieve.ofArrows _ f).map (ProEt.forget X ⋙ Over.forget X) ∈
+      proetalePrecoverage U.left
+    rw [Presieve.map_ofArrows]
+    exact Scheme.zariskiPrecoverage_le_propQCPrecoverage _ U.left.affineCover.mem₀
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem affineWeaklyEtale_cover_refinement (X : Scheme.{u})
+    (U : AffineWeaklyEtale X) (S : Sieve U.obj) (hS : S ∈ topology X U.obj) :
+    ∃ R ∈ affineWeaklyEtalePrecoverage X U,
+      R.map (affineWeaklyEtaleInclusion X) ≤ S.arrows := by
+  classical
+  have : IsAffine U.obj.left := U.property
+  let : (precoverage X).HasIsos := by dsimp [precoverage]; infer_instance
+  let : (precoverage X).IsStableUnderBaseChange := by dsimp [precoverage]; infer_instance
+  let : (precoverage X).IsStableUnderComposition := by dsimp [precoverage]; infer_instance
+  obtain ⟨R, hR, hle⟩ :=
+    Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition.mp hS
+  obtain ⟨I, V, f, rfl⟩ := R.exists_eq_ofArrows
+  have hR : Presieve.ofArrows (fun i ↦ (V i).left) (fun i ↦ (f i).left) ∈
+      proetalePrecoverage U.obj.left := by
+    change (Presieve.ofArrows V f).map (ProEt.forget X ⋙ Over.forget X) ∈
+      proetalePrecoverage U.obj.left at hR
+    rw [Presieve.map_ofArrows] at hR
+    exact hR
+  let E : U.obj.left.Cover (propQCPrecoverage @WeaklyEtale) :=
+    { I₀ := I, X := fun i ↦ (V i).left, f := fun i ↦ (f i).left, mem₀ := hR }
+  let : QuasiCompactCover E.forgetQc.toPreZeroHypercover :=
+    Scheme.presieve₀_mem_qcPrecoverage_iff.mp hR.1
+  obtain ⟨A, a, hfin, _⟩ := QuasiCompactCover.exists_hom E.forgetQc
+  let := hfin
+  have (j : A.I₀) : WeaklyEtale (A.f j) := A.cover.map_prop j
+  let W : A.I₀ → AffineWeaklyEtale X := fun j ↦
+    ⟨ProEt.mk (A.f j ≫ U.obj.hom), by change IsAffine (Spec _); infer_instance⟩
+  let g : ∀ j, W j ⟶ U := fun j ↦
+    ObjectProperty.homMk (MorphismProperty.Over.homMk (A.f j))
+  refine ⟨Presieve.ofArrows W g, ⟨Precoverage.ofArrows_mem_finite _ _, ?_⟩, ?_⟩
+  · change ((Presieve.ofArrows W g).map (affineWeaklyEtaleInclusion X)).map
+      (ProEt.forget X ⋙ Over.forget X) ∈ proetalePrecoverage U.obj.left
+    rw [Presieve.map_ofArrows, Presieve.map_ofArrows]
+    exact ⟨(Scheme.presieve₀_mem_qcPrecoverage_iff
+      (E := A.cover.toPreZeroHypercover)).mpr inferInstance, A.cover.mem₀⟩
+  · rw [Presieve.map_ofArrows]
+    rintro Y q ⟨j⟩
+    let b : (affineWeaklyEtaleInclusion X).obj (W j) ⟶ V (a.s₀ j) :=
+      MorphismProperty.Over.homMk (a.h₀ j) (by
+        change a.h₀ j ≫ (V (a.s₀ j)).hom = A.f j ≫ U.obj.hom
+        rw [← MorphismProperty.Over.w (f (a.s₀ j)), ← Category.assoc]
+        exact congrArg (· ≫ U.obj.hom) (a.w₀ j))
+    have hb : b ≫ f (a.s₀ j) = (affineWeaklyEtaleInclusion X).map (g j) := by
+      apply MorphismProperty.Over.Hom.ext
+      exact a.w₀ j
+    rw [← hb]
+    exact S.downward_closed (hle _ _ ⟨a.s₀ j⟩) b
+
+private theorem affineWeaklyEtale_isContinuous (X : Scheme.{u}) :
+    (affineWeaklyEtaleInclusion X).IsContinuous (affineWeaklyEtaleTopology X) (topology X) := by
+  let : (affineSource X).IsClosedUnderLimitsOfShape Limits.WalkingCospan :=
+    affineSource_closedUnderPullbacks X
+  let : Limits.HasPullbacks (AffineWeaklyEtale X) := inferInstance
+  let : Limits.PreservesLimitsOfShape Limits.WalkingCospan (affineWeaklyEtaleInclusion X) :=
+    inferInstanceAs (Limits.PreservesLimitsOfShape Limits.WalkingCospan (affineSource X).ι)
+  let : (precoverage X).HasIsos := by dsimp [precoverage]; infer_instance
+  let : (precoverage X).IsStableUnderBaseChange := by dsimp [precoverage]; infer_instance
+  let : (precoverage X).IsStableUnderComposition := by dsimp [precoverage]; infer_instance
+  -- Use bind composition for finite presieves. Arbitrarily repeated indexed
+  -- presentations need not have finite sets of composite arrows.
+  let K := ((precoverage X).comap (affineWeaklyEtaleInclusion X)).toPretopology
+  let J := Pretopology.finite (AffineWeaklyEtale X) ⊓ K
+  have htop : J.toGrothendieck = affineWeaklyEtaleTopology X := by
+    change J.toGrothendieck = J.toCoverage.toPrecoverage.toGrothendieck
+    rw [Coverage.toGrothendieck_toPrecoverage, Pretopology.toGrothendieck_toCoverage]
+  constructor
+  intro G
+  rw [← htop, Presieve.isSheaf_pretopology]
+  intro U R hR
+  rw [Presieve.IsSheafFor.comp_iff_of_preservesPairwisePullbacks]
+  exact ((isSheaf_iff_isSheaf_of_type _ _).mp G.property).isSheafFor_of_mem_precoverage hR.2
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem affineWeaklyEtale_topology_eq_induced (X : Scheme.{u}) :
+    affineWeaklyEtaleTopology X =
+      (affineWeaklyEtaleInclusion X).inducedTopology (topology X) := by
+  let : (affineWeaklyEtaleInclusion X).IsCoverDense (topology X) :=
+    affineWeaklyEtale_coverDense X
+  let : (affineWeaklyEtaleInclusion X).Full :=
+    inferInstanceAs (ObjectProperty.ι _).Full
+  let : (affineWeaklyEtaleInclusion X).Faithful :=
+    inferInstanceAs (ObjectProperty.ι _).Faithful
+  let : (affineWeaklyEtaleInclusion X).IsContinuous (affineWeaklyEtaleTopology X)
+      (topology X) := affineWeaklyEtale_isContinuous X
+  apply le_antisymm
+  · rw [Functor.le_inducedTopology_iff]
+    infer_instance
+  · intro U R hR
+    rw [Functor.mem_inducedTopology_iff_of_isCoverDense] at hR
+    obtain ⟨T, hT, hle⟩ := affineWeaklyEtale_cover_refinement X U _ hR
+    have hTR : T ≤ R.arrows := by
+      intro V f hf
+      have h := hle _ _ (Presieve.map.of hf)
+      obtain ⟨W, g, i, hg, hi⟩ := h
+      have hfac : (affineWeaklyEtaleInclusion X).preimage i ≫ g = f := by
+        apply (affineWeaklyEtaleInclusion X).map_injective
+        simpa using hi.symm
+      rw [← hfac]
+      exact R.downward_closed hg _
+    exact (affineWeaklyEtaleTopology X).superset_covering
+      ((Sieve.generate_le_iff _ _).mpr hTR) (Precoverage.generate_mem_toGrothendieck hT)
+
 /-- Restriction to all affine weakly étale objects is an equivalence of sheaf topoi.
 Source: Stacks Project, Tag 098W (blueprint: lem-sfb-proetale-affine-subsite-equivalence).
 The natural isomorphism identifies the forward functor with precomposition by the full
@@ -136,6 +264,15 @@ theorem affineWeaklyEtale_sheafEquivalence (X : Scheme.{u}) :
           sheafToPresheaf (topology X) (Type (max (u + 1) v)) ⋙
             (Functor.whiskeringLeft _ _ (Type (max (u + 1) v))).obj
               (affineWeaklyEtaleInclusion X).op) := by
-  sorry
+  let F := affineWeaklyEtaleInclusion X
+  let : F.Full := inferInstanceAs (ObjectProperty.ι _).Full
+  let : F.Faithful := inferInstanceAs (ObjectProperty.ι _).Faithful
+  let : F.IsCoverDense (topology X) := affineWeaklyEtale_coverDense X
+  let : F.IsDenseSubsite (affineWeaklyEtaleTopology X) (topology X) := by
+    rw [affineWeaklyEtale_topology_eq_induced X]
+    infer_instance
+  refine ⟨(F.sheafPushforwardContinuous (Type (max (u + 1) v))
+    (affineWeaklyEtaleTopology X) (topology X)).asEquivalence, ?_⟩
+  exact ⟨F.sheafPushforwardContinuousCompSheafToPresheafIso _ _ _⟩
 
 end AlgebraicGeometry.Scheme.ProEt
