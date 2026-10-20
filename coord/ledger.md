@@ -18813,3 +18813,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:11 L: returned deliver/W6/Sheaf.Paper.KoszulReconstruction (reviewer RETURN: (reviewer C-373e2, head 373e2cba8) D1/D2 (brief point 4): koszulReconstructionComparison restates the item; the worker m)
 - 20:11 L: returned deliver/NA/lem-weil-pbc-residue-perfect-finite-quotient-models (reviewer RETURN: L: independent stage-2 immutable head 1edabf9b815b: H3 R1: the predicate ResidueFiniteQuotientModel asks for a single co)
 - 20:21 L: returned deliver/W4/Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons (reviewer RETURN: (reviewer C-b6d4b, head b6d4b6a62) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Af)
+- 20:29 L: returned deliver/NA/lem-weil-pbc-residue-perfect-finite-quotient-models (reviewer RETURN: L: independent stage-2 immutable head 04e5e132c093: incremental DAG validation: blueprint: lem-weil-pbc-residue-perfect-)
