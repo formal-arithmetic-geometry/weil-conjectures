@@ -98,14 +98,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-normal-form",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CommonFieldFibreComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/CommonFieldFibreComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.CommonFieldFibreComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CommonFieldFibreComparison.lean",
   "declaration": "AlgebraicGeometry.exists_common_field_fibre_comparison",
-  "statement": "theorem exists_common_field_fibre_comparison {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) (t : T) (s : S) (ht : g t = s) (K : Type u) [Field K] (y : Spec (CommRingCat.of K) ⟶ Spec (CommRingCat.of (S.residueField s))) : ∃ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of (T.residueField t))) (p : pullback ((pullback.snd f g).fiberToSpecResidueField t) z ⟶ pullback (f.fiberToSpecResidueField s) y), Surjective p",
+  "statement": "theorem exists_common_field_fibre_comparison {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) (t : T) (s : S) (ht : g t = s) (K : Type u) [Field K] (y : Spec (CommRingCat.of K) ⟶ Spec (CommRingCat.of (S.residueField s))) : ∃ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of (T.residueField t))) (k : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of K)) (heq : (z ≫ T.fromSpecResidueField t) ≫ g = (k ≫ y) ≫ S.fromSpecResidueField s), Surjective k ∧ Surjective ((commonFieldFibreIso f g t s z k y heq).hom ≫ pullback.fst (pullback.snd (f.fiberToSpecResidueField s) y) k)",
   "branch": "sheaf-dag",
-  "by": "P4",
-  "date": "2026-10-13"
+  "by": "W2",
+  "date": "2026-10-20",
+  "note": "Retired the unused Sheaf twin in favour of the proved upstream theorem. Its stronger conclusion additionally supplies k, the compatibility equation heq, and Surjective k. The original existential statement follows by taking p to be (commonFieldFibreIso f g t s z k y heq).hom followed by the base-change first projection. This implication and the upstream declarations were compiled and checked with #print axioms: only propext, Classical.choice, Quot.sound."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -118,13 +119,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P4",
+  "reviewer": "C-ae8c5",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T003200-L-2429639",
+  "landing": "20261020T135435-L-1823728",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Retired Sheaf copy of exists_common_field_fibre_comparison vs upstream WeilConjectures twin (same binders, stronger conclusion; old signature derived in scratch, standard axioms); node lean block vs upstream signature; zero importers in live clone"
  }
 }
