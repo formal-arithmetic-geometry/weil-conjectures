@@ -1,3 +1,3 @@
 module
 
-/-! Withdrawn duplicate: use the proved WeilConjectures twin. -/
+/-! Withdrawn: no declarations remain. -/
