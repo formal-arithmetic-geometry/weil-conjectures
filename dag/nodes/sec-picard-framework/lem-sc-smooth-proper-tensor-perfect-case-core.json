@@ -86,14 +86,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore",
+  "module": "WeilConjectures.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore",
   "declaration": "AlgebraicGeometry.smoothProper_tensor_perfect_case_core",
-  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProperTensorPerfectCaseCore.lean",
-  "statement": "theorem smoothProper_tensor_perfect_case_core {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (hRf : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj)) (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y))) (hTensor : ∀ (K : schemeDerivedQCohCategory Y) (E : schemeDerivedQCohCategory X), schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj)) (hm : Functor.Monoidal (derivedPullback f)) (ha : derivedPullback f ⊣ schemeDerivedDirectImage f): ∀ (_ : Functor.Monoidal (derivedPullback f)) (a : derivedPullback f ⊣ schemeDerivedDirectImage f) (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hRf ⊣ c) (K : schemeDerivedQCohCategory Y), Scheme.IsPerfect Y K.obj → ∃ pf : (schemeDerivedDirectImage f).obj (((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅ K.obj ⊗ (schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj, pf.inv = (a.homEquiv _ _) ((Functor.Monoidal.μIso (derivedPullback f) K.obj ((schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫ (derivedPullback f).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj) ∧ IsIso ((adj.homEquiv ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj, hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K) (ObjectProperty.homMk (pf.hom ≫ K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)))",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SmoothProperTensorPerfectCaseCore.lean",
+  "statement": "theorem smoothProper_tensor_perfect_case_core\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u}\n        ((moduleRings Y.toRingedSpace).over U))]\n    (hRf : ∀ E : schemeDerivedQCohCategory X,\n      schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj))\n    (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y)))\n    (hTensor : ∀ (K : schemeDerivedQCohCategory Y)\n      (E : schemeDerivedQCohCategory X),\n      schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj)) :\n        ∀ (_ : Functor.Monoidal (derivedPullback f))\n        (a : derivedPullback f ⊣ schemeDerivedDirectImage f)\n        (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n        (adj : (schemeDerivedQCohProperty Y).lift\n          ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hRf ⊣ c)\n        (K : schemeDerivedQCohCategory Y), Scheme.IsPerfect Y K.obj →\n        ∃ pf : (schemeDerivedDirectImage f).obj\n            (((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅\n          K.obj ⊗ (schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj,\n          pf.inv = (a.homEquiv _ _)\n            ((Functor.Monoidal.μIso (derivedPullback f) K.obj\n              ((schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫\n              (derivedPullback f).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj) ∧\n          IsIso ((adj.homEquiv\n            ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj,\n              hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)\n            (ObjectProperty.homMk (pf.hom ≫\n              K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)))",
   "branch": "sheaf-dag",
-  "by": "T1",
-  "date": "2026-10-13",
-  "existing": false
+  "by": "B6",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Reconciled quarantine with the adopted source proof. The source omits only the redundant hm and ha binders, retains the quantified monoidal structure and adjunction and every conclusion, and implies the full archived signature. The Sheaf path publicly re-exports this declaration. All proof dependencies are preserved."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -106,14 +107,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y2",
+  "reviewer": "C-9d234",
+  "group": "B6",
   "result": "pass",
-  "landing": "20261012T210409-L-969754",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221048-L-4139503",
+  "kind": "proof",
+  "note": "independent cc review: the Sheaf compatibility module re-exporting WeilConjectures.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore and the node's existing:true lean record, matched with the source theorem (verbatim signature, axioms propext/choice/Quot.sound) and the quarantined original (same conclusion, unused hm/ha dropped)"
  },
  "lean_audit": {
   "master": {
