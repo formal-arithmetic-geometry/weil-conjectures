@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-canonical-reduction-constructibility-criterion",
+ "kind": "statement",
+ "title": "Canonical-reduction criterion for constructible completeness",
+ "statement": "Let l be prime, E a finite extension of Q_l, d its integral datum, and T a Noetherian scheme. For K in the completed coefficient derived category [def-weil-pbc-bounded-constructible-complete], assume every canonical reduction has cohomology supported in [a,b], allowing a>b. Then K is bounded constructible complete if and only if it is intrinsically complete and, at every positive quotient level, the homologyProperty clause of [def-weil-pbc-uniform-reduction-profile] holds for its constant reduction. This criterion is only asserted for the integral datum.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "Proof, canonical-reduction refinement, steps 1--6 of the reviewed preservation node"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-uniform-reduction-profile"
+ ],
+ "proof": [
+  {
+   "text": "Apply the forward uniform criterion to the local-model and compatible-origin clauses of membership. Retain completeness and the cohomology clause of its uniform profile.",
+   "uses": [
+    "lem-weil-pbc-uniform-reduction-criterion",
+    "def-weil-pbc-uniform-reduction-profile"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact restriction along pbcLevelConstantComparison transports the given cohomology bounds to constant reductions. On [min a b,b] these bounds and the given homologyProperty are PbcUniformReductionProfile. Apply pbcUniformReductionCriterion_backward and pair the two witness clauses with completeness.",
+   "uses": [
+    "lem-weil-pbc-uniform-reduction-criterion",
+    "def-weil-pbc-uniform-reduction-profile",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-uniform-reduction-criterion",
+  "def-weil-pbc-uniform-reduction-profile",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "B5 complete Lean proof, repaired to reuse the landed uniform profile and coefficient Serre encoding"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete adic complex constructible if all finite reductions are constructible in a common cohomological interval",
+   "results": "8 hits: IsAdicComplete, AdicCompletion and their algebraic completion instances; none supplies the sheaf-derived criterion or operation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "No matching theorem returned.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PbcIsBoundedConstructibleComplete",
+   "results": "0 hits from msearch grep. Local rg finds the membership definition and distinct coefficient or rationalization interfaces, without the canonical-reduction statement.",
+   "date": "2026-10-18",
+   "verdict": "no matching existing statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical reductions in a common cohomological interval characterize bounded constructible derived complete objects",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE.",
+   "date": "2026-10-18",
+   "verdict": "no match for the canonical-reduction sheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PreservationConstructible",
+  "date": "2026-10-19",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-preservation-constructible",
+   "place": "Canonical-reduction refinement of preservation: Canonical-reduction criterion for constructible completeness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcConstructibleReductionCriterion",
+  "file": "lean/Sheaf/Paper/PbcConstructibleReductionCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_constructible_reduction_criterion",
+  "statement": "theorem pbc_constructible_reduction_criterion\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E]\n    (T : Scheme.{u}) [IsNoetherian T] (a b : ℤ)\n    (K : PbcCompletedDerived T (pbcIntegralDatum l E))\n    (hbounded : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj\n        ((pbcCompletedReduction T (pbcIntegralDatum l E) n).obj K))) :\n    PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E) K ↔\n      PbcIsIntrinsicallyComplete T (pbcIntegralDatum l E) K ∧\n        ∀ n : ℕ, DerivedCategory.homologyProperty\n          (@IsConstructibleProEtaleCoefficientModuleSheaf T\n            (PbcQuotient (pbcIntegralDatum l E) n) _\n            ((pbcIntegralDatum l E).quotientFinite n))\n          ((pbcConstantReduction T (pbcIntegralDatum l E) n).obj K)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbc_constructible_reduction_criterion"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules (lcompile --all exit 0, no sorry) and 4 importers compiled against the delivery; pbc_preservation_constructible signature unchanged vs live; node proof/proof_deps vs Lean; C-acb12 points 1-3 vs repaired criterion/operation lemmas; ProEtaleSiteComparisonFiniteLevel still in transitive closure and not in unit sk-thm-properbasechange realized"
+ }
+}

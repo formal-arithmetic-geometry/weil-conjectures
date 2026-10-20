@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "Blueprint preservation step 5; Stacks Tags 09AI and 09AL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete adic complex constructible if all finite reductions are constructible in a common cohomological interval",
+   "results": "8 hits: IsAdicComplete, AdicCompletion and their algebraic completion instances; none supplies the sheaf-derived criterion or operation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "No matching theorem returned.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PbcIsBoundedConstructibleComplete",
+   "results": "0 hits from msearch grep. Local rg finds the membership definition and distinct coefficient or rationalization interfaces, without the canonical-reduction statement.",
+   "date": "2026-10-18",
+   "verdict": "no matching existing statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite reductions of proper derived direct image are constructible with upper bound twice fibre dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, chevalley_mvPolynomial_mvPolynomial, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, ChevalleyThm.chevalley_polynomialC, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, ChevalleyThm.chevalley_mvPolynomialC, PrimeSpectrum.isConstructible_comap_image.",
+   "date": "2026-10-18",
+   "verdict": "no match for the canonical-reduction sheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PreservationConstructible",
+  "date": "2026-10-19",
+  "group": "B5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-pullback-constructibility",
+ "title": "Intrinsic finite-quotient module constructibility under inverse image",
+ "statement": "Let g:S -> T be a morphism of Noetherian schemes, d an adic coefficient datum and n a nonnegative index for the positive quotient A/I^(n+1). If a module over the actual finite function coefficient ring on T becomes intrinsically constructible [def-weil-proetale-constructible-sheaf] after restriction along pbcLevelConstantComparison, then its exact quotient module inverse image under g has the same property on S. No derived object, support interval, completeness or direct image occurs.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Pull the finite constructible locally closed partition back along g, using fibre products of its immersions. Base change of the trivializing pro-etale covering sieve is covering. The inverse-image composition isomorphism identifies restrictions to the new strata with successive inverse images of the old restrictions. Inverse image of each constant module is the constant module with the same finite value. The constant-section normalized coefficient square, obtained by cancellation in completedFiniteCoefficientMap, identifies quotient-linear pullback followed by restriction with constant-ring pullback. Transport the finite local trivializations through these isomorphisms. The partition retains its positive number of strata, including empty strata and the empty scheme.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-proetale-constructible-sheaf",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lemma-constructible-pullback-stratification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lemma-constructible-pullback-stratification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "Blueprint preservation step 5; Stacks Tags 09AI and 09AL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-preservation-constructible",
+   "place": "Exact finite inverse image portion of preservation step 5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcFinitePullbackConstructibility",
+  "file": "lean/Sheaf/Paper/PbcFinitePullbackConstructibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_finite_pullback_constructibility",
+  "statement": "theorem pbc_finite_pullback_constructibility\n    {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T] (g : S ⟶ T)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)\n    (F : pbcModules T ((pbcAdicRings T d).obj (op n)))\n    (h : @IsConstructibleProEtaleCoefficientModuleSheaf T (A ⧸ d.ideal ^ (n + 1)) _\n      (d.quotientFinite n) ((pbcRestrict (pbcLevelConstantComparison T d n).hom).obj F)) :\n    @IsConstructibleProEtaleCoefficientModuleSheaf S (A ⧸ d.ideal ^ (n + 1)) _\n      (d.quotientFinite n) ((pbcRestrict (pbcLevelConstantComparison S d n).hom).obj\n        ((proEtaleRingModulePullback g ((pbcAdicRings T d).obj (op n))\n          ((pbcAdicRings S d).obj (op n)) (asIso (completedFiniteCoefficientMap g d n))).obj\n            F))",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules (lcompile --all exit 0, no sorry) and 4 importers compiled against the delivery; pbc_preservation_constructible signature unchanged vs live; node proof/proof_deps vs Lean; C-acb12 points 1-3 vs repaired criterion/operation lemmas; ProEtaleSiteComparisonFiniteLevel still in transitive closure and not in unit sk-thm-properbasechange realized"
+ }
+}

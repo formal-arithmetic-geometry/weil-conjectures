@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-constructible-reduction-pullback",
+ "kind": "statement",
+ "title": "Constructible canonical reduction cohomology under completed pullback",
+ "statement": "Let ell be prime and E a finite extension of Q_ell, with integral datum d of [def-weil-pbc-bounded-constructible-complete]. For a map g:S -> T between Noetherian schemes and a completed object K, assume intrinsic completeness, constructible canonical reduction cohomology [def-weil-pbc-uniform-reduction-profile], and support in [a,b]. The actual completed pullback is intrinsically complete and has constructible canonical reduction cohomology with the same support bound, including a>b. No uniform models or compatible origins of the output are asserted. The constructibility input and output are exactly the homologyProperty clause of [def-weil-pbc-uniform-reduction-profile] for every constant reduction; no duplicate constructibility predicate is defined.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "Proof, canonical-reduction refinement, steps 1--6 of the reviewed preservation node"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-uniform-reduction-profile"
+ ],
+ "proof": [
+  {
+   "text": "Use the homologyProperty clause of the uniform reduction profile. The canonical homology isomorphism for exact coefficient restriction identifies it with the intrinsic cohomology of each actual quotient module. Transport the input and output constructibility assertions through this isomorphism.",
+   "uses": [
+    "def-weil-pbc-uniform-reduction-profile",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use sbcOperations_preserveComplete on the actual intrinsic-complete input, and the invertible sbcPullReduction comparison on each canonical quotient. Exact quotient pullback commutes with homology and preserves zero. Apply pbc_finite_pullback_constructibility to input homology, then transport constructibility through its homology comparison and the output reduction isomorphism. The private lisse_iso and constructible_iso helpers transport the same covers and strata.",
+   "uses": [
+    "lem-sbc-completed-operations-linear-natural-exchange",
+    "lem-weil-pbc-finite-pullback-constructibility",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-uniform-reduction-profile",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-weil-pbc-finite-pullback-constructibility",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "B5 complete Lean proof, repaired to reuse the landed uniform profile and coefficient Serre encoding"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete adic complex constructible if all finite reductions are constructible in a common cohomological interval",
+   "results": "8 hits: IsAdicComplete, AdicCompletion and their algebraic completion instances; none supplies the sheaf-derived criterion or operation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "No matching theorem returned.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PbcIsBoundedConstructibleComplete",
+   "results": "0 hits from msearch grep. Local rg finds the membership definition and distinct coefficient or rationalization interfaces, without the canonical-reduction statement.",
+   "date": "2026-10-18",
+   "verdict": "no matching existing statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed pullback preserves constructible canonical finite reductions and cohomological support",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.openCoverOfBase'_f, AlgebraicGeometry.IsFinite.instFstScheme, SSet.finite_of_isPullback, AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme, AlgebraicGeometry.QuasiCompactCover.instPullback₂Scheme, AlgebraicGeometry.instLocallyQuasiFiniteFstScheme, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme.",
+   "date": "2026-10-18",
+   "verdict": "no match for the canonical-reduction sheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PreservationConstructible",
+  "date": "2026-10-19",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-preservation-constructible",
+   "place": "Canonical-reduction refinement of preservation: Constructible canonical reduction cohomology under completed pullback",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcConstructibleReductionPullback",
+  "file": "lean/Sheaf/Paper/PbcConstructibleReductionPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_constructible_reduction_pullback",
+  "statement": "theorem pbc_constructible_reduction_pullback\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E]\n    {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T] (g : S ⟶ T)\n    (a b : ℤ) (K : PbcCompletedDerived T (pbcIntegralDatum l E))\n    (_hcomplete : PbcIsIntrinsicallyComplete T (pbcIntegralDatum l E) K)\n    (_hconstructible : (fun K ↦ ∀ n : ℕ, DerivedCategory.homologyProperty\n        (@IsConstructibleProEtaleCoefficientModuleSheaf T\n          (PbcQuotient (pbcIntegralDatum l E) n) _\n          ((pbcIntegralDatum l E).quotientFinite n))\n        ((pbcConstantReduction T (pbcIntegralDatum l E) n).obj K)) K)\n    (_hbounded : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj\n        ((pbcCompletedReduction T (pbcIntegralDatum l E) n).obj K))) :\n    PbcIsIntrinsicallyComplete S (pbcIntegralDatum l E)\n        (completedPullbackObject g (pbcIntegralDatum l E) K) ∧\n      (fun K ↦ ∀ n : ℕ, DerivedCategory.homologyProperty\n        (@IsConstructibleProEtaleCoefficientModuleSheaf S\n          (PbcQuotient (pbcIntegralDatum l E) n) _\n          ((pbcIntegralDatum l E).quotientFinite n))\n        ((pbcConstantReduction S (pbcIntegralDatum l E) n).obj K))\n        (completedPullbackObject g (pbcIntegralDatum l E) K) ∧\n      ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →\n        IsZero ((DerivedCategory.homologyFunctor _ q).obj\n          ((pbcCompletedReduction S (pbcIntegralDatum l E) n).obj\n            (completedPullbackObject g (pbcIntegralDatum l E) K)))",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules (lcompile --all exit 0, no sorry) and 4 importers compiled against the delivery; pbc_preservation_constructible signature unchanged vs live; node proof/proof_deps vs Lean; C-acb12 points 1-3 vs repaired criterion/operation lemmas; ProEtaleSiteComparisonFiniteLevel still in transitive closure and not in unit sk-thm-properbasechange realized"
+ }
+}

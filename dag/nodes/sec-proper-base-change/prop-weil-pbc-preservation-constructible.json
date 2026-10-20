@@ -50,110 +50,49 @@
  ],
  "proof": [
   {
-   "text": "The residue field $A/I$ has characteristic $\\ell$, so $\\ell\\mid N$. Write $N=\\ell d$; the element $dN^{-1}$ is an inverse of $\\ell$ on all four schemes. Thus the scheme hypotheses in [def-weil-pbc-bounded-constructible-complete] hold. The given properness, noetherianity, finite dimension and geometric fibre bound meet every hypothesis of [thm-weil-pbc-amplification-proper], giving $\\mathrm{AMP}(\\square;2e)$. In [def-weil-pbc-finite-level-amplification] this supplies FIN for both proper maps at every level and interval-preserving finite pullbacks. The input $K$ is complete and its canonical reduction tower has the local models of [def-weil-pbc-bounded-constructible-tower]. On those strata and covers, its reduction cohomology is finite lisse by the displayed local reduction isomorphisms in that definition, hence intrinsically constructible. By [lem-weil-pbc-finite-ring-constructible-derived-origin], each $K_n$ is in the finite-coefficient bounded constructible category, in the assumed interval $[a,b]$. Throughout, this equivalence uses the global finite-stratification constructibility convention stated in that node; the schemes are Noetherian.",
+   "text": "Field extension preserves the dimension of the finite-type scheme-theoretic fibre. Factor each field-valued point through its residue field. The chosen algebraic-closure bound therefore bounds every field-valued fibre. Pasting the chosen Cartesian square with the fibre square gives the same bound for f-prime. This is the fully proved Lean argument pbc_fieldPoint_dimension and pbc_all_fieldPoint_bounds.",
    "uses": [
-    "def-weil-pbc-bounded-constructible-complete",
-    "thm-weil-pbc-amplification-proper",
-    "def-weil-pbc-finite-level-amplification",
-    "def-weil-pbc-bounded-constructible-tower",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+    "lem-pc-dim-base-change",
+    "def-weil-pbc-cartesian-square"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
-    "place": "Proof, canonical-reduction refinement of the four-output argument"
-   }
+   "elementary": true
   },
   {
-   "text": "For each output it suffices to check completeness and intrinsically constructible canonical reductions in one common interval. Indeed, for a complete $J$ with such reductions $J_n$ on one of the four schemes $T$, [def-weil-pbc-adic-coefficient-datum] supplies the canonical strict tower and its normalization isomorphisms, inducing its transitions and satisfying the quotient cocycle. Apply [lem-weil-pbc-normalized-constructible-local-effectivity]: its Noetherian and uniform-interval hypotheses hold, so this very tower admits the common local models and normalization-compatible isomorphisms required by [def-weil-pbc-bounded-constructible-tower]. Choose bounded constructible origins at every level by [lem-weil-pbc-finite-ring-constructible-derived-origin]. Apply [lem-weil-pbc-normalized-etale-origin-witnesses] to these origins and the canonical normalizations to obtain compatible witnesses. These data and the assumed completeness are precisely membership in [def-weil-pbc-bounded-constructible-complete]. This is an assembly of the cited statements on the canonical tower; it does not identify any independently supplied TOW quotient structures.",
+   "text": "Apply the integral canonical-reduction criterion to K with l and E and its given support interval. Retain intrinsic completeness and the constant-reduction homologyProperty clause of the existing uniform reduction profile.",
    "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-normalized-constructible-local-effectivity",
-    "def-weil-pbc-bounded-constructible-tower",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-weil-pbc-normalized-etale-origin-witnesses",
-    "def-weil-pbc-bounded-constructible-complete"
+    "lem-weil-pbc-canonical-reduction-constructibility-criterion",
+    "def-weil-pbc-uniform-reduction-profile"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
-    "place": "Proof, canonical-reduction refinement of the four-output argument"
-   }
+   "elementary": true
   },
   {
-   "text": "We will transfer finite constructibility using cohomology only. By [lem-weil-pbc-completed-constant-sheaf-reduction], the constant sheaves $\\underline{P_n}$ are the coefficient sheaves $(P_n)_T$ of the adic datum and $\\varprojlim_n\\underline{P_n}=A_T$; hence [lem-weil-pbc-constant-completion-equivalence] gives $A_T/I^nA_T\\cong(P_n)_T$, i.e. $\\pi_n:A_T\\to(P_n)_T$ is a surjection of sheaves with kernel $I^nA_T$. An $A_T$-linear map $\\phi$ between $(P_n)_T$-modules, regarded as $A_T$-modules by restriction along $\\pi_n$, is therefore $(P_n)_T$-linear: locally lift a section $r$ of the quotient to $\\widetilde r$ of $A_T$ and compute $\\phi(rx)=\\phi(\\widetilde r x)=\\widetilde r\\phi(x)=r\\phi(x)$. A different lift changes both expressions by zero; the equalities glue. Thus an isomorphism of underlying completed-coefficient complexes gives quotient-linear isomorphisms of their genuine quotient-module cohomology sheaves. This argument asserts no lifting of the isomorphism to a quotient-coefficient derived category.",
+   "text": "Apply the direct-image reduction lemma to f and K, giving completeness and constructible reductions of H=Rf_*K in [a,b+2e]. Apply the pullback reduction lemma to g-prime and K, giving the same properties for B in [a,b]. Apply it to g and H, retaining [a,b+2e]. Apply the direct-image lemma to f-prime and B, giving [a,b+2e]. These are separate applications with the correct input intervals, not a bound on B inferred from H.",
    "uses": [
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-weil-pbc-constructible-reduction-direct-image",
+    "lem-weil-pbc-constructible-reduction-pullback"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
-    "place": "Proof, canonical-reduction refinement of the four-output argument"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $H=Rf_*K$. Its completeness follows from [prop-weil-pbc-direct-image-limits]. The projection formula [lemma-weil-pbc-perfect-projection-formula], applied with the perfect finite quotient $P_n$, identifies the underlying completed-coefficient complexes of the actual $H_n$ and the finite direct image $Rf_*K_n$. By step 3 their cohomology isomorphisms are quotient-linear. FIN for $f$ from step 1 and [prop-weil-pbc-restriction-direct-image] put the finite direct images in the bounded constructible category in $[a,b+2e]$. By [lem-weil-pbc-finite-ring-constructible-derived-origin], this gives intrinsically constructible cohomology and the same bound on the actual $H_n$. Step 2, on their canonical normalization maps, gives $H\\in\\Dbc(Y_{\\Proet},A)$ and the stated interval. No comparison of supplied quotient normalizations is needed.",
+   "text": "Apply the reverse implication of the canonical-reduction criterion to all four outputs. Combine these four memberships with the four reduction bounds. The Lean conjunction proof is complete.",
    "uses": [
-    "prop-weil-pbc-direct-image-limits",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "prop-weil-pbc-restriction-direct-image",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+    "lem-weil-pbc-canonical-reduction-constructibility-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
-    "place": "Proof, canonical-reduction refinement of the four-output argument"
-   }
-  },
-  {
-   "text": "Apply [lemma-weil-pbc-completed-pullback-reduction] to $(g',K)$ and $(g,H)$, both with complete input. It gives complete outputs $B=Lg'^*_{\\mathrm{comp}}K$ and $C=Lg^*_{\\mathrm{comp}}H$, with isomorphisms $B_n\\cong Lg_n'^*K_n$ and $C_n\\cong Lg_n^*H_n$ in the actual quotient-coefficient derived categories. Step 4 gave the intrinsic constructibility and interval of $H_n$; [lem-weil-pbc-finite-ring-constructible-derived-origin] makes these finite bounded constructible inputs, as already known for $K_n$. Apply the interval-preserving pullback clauses of [def-weil-pbc-finite-level-amplification], supplied by step 1. The intervals are $[a,b]$ for $B_n$ and $[a,b+2e]$ for $C_n$. The derived-origin equivalence gives intrinsic constructibility of their cohomology. Step 2 on each canonical tower proves $B\\in\\Dbc(X'_{\\Proet},A)$ and $C\\in\\Dbc(Y'_{\\Proet},A)$, with these intervals.",
-   "uses": [
-    "lemma-weil-pbc-completed-pullback-reduction",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "def-weil-pbc-finite-level-amplification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
-    "place": "Proof, canonical-reduction refinement of the four-output argument"
-   }
-  },
-  {
-   "text": "Finally put $D=Rf'_*B$. By [prop-weil-pbc-direct-image-limits] it is complete. The projection formula [lemma-weil-pbc-perfect-projection-formula] compares the underlying completed-coefficient complexes of $D_n$ and the finite direct image $Rf'_*B_n$; step 3 makes their cohomology isomorphisms quotient-linear. Step 5 gives finite bounded constructible $B_n$ in $[a,b]$. FIN for $f'$ with the same $c=2e$ from step 1 and [prop-weil-pbc-restriction-direct-image] give $Rf'_*B_n$ finite bounded constructible in $[a,b+2e]$. By [lem-weil-pbc-finite-ring-constructible-derived-origin] and the cohomology isomorphisms, the actual $D_n$ are intrinsically constructible with this bound. Step 2 yields $D\\in\\Dbc(Y'_{\\Proet},A)$. The four outputs and their four bounds are those asserted, with the pullback of $H$ retaining $H$'s interval $[a,b+2e]$.",
-   "uses": [
-    "prop-weil-pbc-direct-image-limits",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "prop-weil-pbc-restriction-direct-image",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
-    "place": "Proof, canonical-reduction refinement of the four-output argument"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-bounded-constructible-complete",
-  "thm-weil-pbc-amplification-proper",
-  "def-weil-pbc-finite-level-amplification",
-  "def-weil-pbc-bounded-constructible-tower",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-weil-pbc-normalized-constructible-local-effectivity",
-  "lem-weil-pbc-normalized-etale-origin-witnesses",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "prop-weil-pbc-direct-image-limits",
-  "lemma-weil-pbc-perfect-projection-formula",
-  "prop-weil-pbc-restriction-direct-image",
-  "lemma-weil-pbc-completed-pullback-reduction"
+  "lem-pc-dim-base-change",
+  "def-weil-pbc-cartesian-square",
+  "lem-weil-pbc-canonical-reduction-constructibility-criterion",
+  "def-weil-pbc-uniform-reduction-profile",
+  "lem-weil-pbc-constructible-reduction-direct-image",
+  "lem-weil-pbc-constructible-reduction-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
-  "place": "Proof, canonical-reduction refinement; corrected bound for completed pullback of the direct image"
+  "place": "B5 complete preservation proof with integral uniform-profile criterion and proved finite-level operation lemmas; C-acb12 repair"
  },
  "mathlib_searches": [
   {
@@ -354,5 +293,15 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules (lcompile --all exit 0, no sorry) and 4 importers compiled against the delivery; pbc_preservation_constructible signature unchanged vs live; node proof/proof_deps vs Lean; C-acb12 points 1-3 vs repaired criterion/operation lemmas; ProEtaleSiteComparisonFiniteLevel still in transitive closure and not in unit sk-thm-properbasechange realized"
  }
 }

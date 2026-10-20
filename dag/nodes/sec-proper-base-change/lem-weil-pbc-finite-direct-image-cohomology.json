@@ -1,0 +1,137 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "Proof, canonical-reduction refinement, steps 1--6 of the reviewed preservation node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete adic complex constructible if all finite reductions are constructible in a common cohomological interval",
+   "results": "8 hits: IsAdicComplete, AdicCompletion and their algebraic completion instances; none supplies the sheaf-derived criterion or operation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "No matching theorem returned.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PbcIsBoundedConstructibleComplete",
+   "results": "0 hits from msearch grep. Local rg finds the membership definition and distinct coefficient or rationalization interfaces, without the canonical-reduction statement.",
+   "date": "2026-10-18",
+   "verdict": "no matching existing statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite reductions of proper derived direct image are constructible with upper bound twice fibre dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, chevalley_mvPolynomial_mvPolynomial, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, ChevalleyThm.chevalley_polynomialC, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, ChevalleyThm.chevalley_mvPolynomialC, PrimeSpectrum.isConstructible_comap_image.",
+   "date": "2026-10-18",
+   "verdict": "no match for the canonical-reduction sheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PreservationConstructible",
+  "date": "2026-10-19",
+  "group": "B5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-direct-image-cohomology",
+ "title": "Intrinsic cohomological finiteness at one positive coefficient level",
+ "statement": "Let f:S -> T be a proper morphism of finite-dimensional Noetherian schemes, d an adic coefficient datum on A, and n a fixed positive quotient index. Suppose every additive order in A/I^(n+1) is invertible in every stalk of S and T, and every field-valued fibre of f has dimension at most e. For any quotient-coefficient derived object L with intrinsically constructible cohomology supported in [a,b], its ordinary finite derived direct image has intrinsically constructible cohomology supported in [a,b+2e]. Coefficients are the actual function sheaves and restriction along pbcLevelConstantComparison as in [def-weil-pbc-bounded-constructible-tower]. There is no completed object, no completeness hypothesis, no canonical-reduction tower, and no coefficient-annihilator input.",
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-proetale-constructible-sheaf",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof": [
+  {
+   "text": "Use restriction along pbcLevelConstantComparison and the constant-section encoding equivalence of ConstructibleCoefficientSerre. Its coefficient_constructible_iff identifies intrinsic constructibility with fixed-module constructibility. The canonical coefficient square gives the sectionwise direct-image comparison; derive it by the right-derived composition isomorphisms. These are the proved private reductionEncoding and reductionDerivedDirectImageEncoding helpers.",
+   "uses": [
+    "lem-weil-constructible-coefficient-serre",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fixed-module constructible sheaf choose its constructible etale origin and apply proper_directImage_finiteness with the given geometric fibre bound. The fixedHigherDirectImageIso identifies its higher direct images with comparison images of the etale higher direct images. Right derivation is nonnegative, so the sheaf image has constructible homology and support [0,2e].",
+   "uses": [
+    "lem-weil-constructible-coefficient-serre",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness",
+    "thm-weil-pbc-direct-image-finiteness-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use prop_of_bounded to extend constructibility from the sheaves to every bounded input complex. Use the proved constructibleAmplitude truncation induction to extend the bound from [0,2e] to [a,b+2e]. For a>b the input and its additive derived direct image are zero. Commute the coefficient encoding with homology and reflect zero by its faithful equivalence. These steps are the private fixedDirectImage proof and the final transport in the public theorem.",
+   "uses": [
+    "prop-weil-pbc-restriction-direct-image",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-constructible-coefficient-serre"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-constructible-coefficient-serre",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-etale-proper-direct-image-finiteness",
+  "thm-weil-pbc-direct-image-finiteness-proper",
+  "prop-weil-pbc-restriction-direct-image",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "B5 complete Lean proof, repaired to reuse the landed uniform profile and coefficient Serre encoding"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-preservation-constructible",
+   "place": "The finite-level finiteness argument, with completed projection-formula transport performed in the parent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcFiniteDirectImageCohomology",
+  "file": "lean/Sheaf/Paper/PbcFiniteDirectImageCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_finite_directImage_cohomology",
+  "statement": "theorem pbc_finite_directImage_cohomology\n    {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T]\n    (hDimS : ∃ k : ℕ, topologicalKrullDim S ≤ (k : WithBot ℕ∞))\n    (hDimT : ∃ k : ℕ, topologicalKrullDim T ≤ (k : WithBot ℕ∞))\n    (f : S ⟶ T) [IsProper f] {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) (n : ℕ)\n    (_horderS : ∀ (x : A ⧸ d.ideal ^ (n + 1)) (s : S),\n      IsUnit (addOrderOf x : S.presheaf.stalk s))\n    (horderT : ∀ (x : A ⧸ d.ideal ^ (n + 1)) (t : T),\n      IsUnit (addOrderOf x : T.presheaf.stalk t))\n    (e : ℕ)\n    (hFib : ∀ (Ω : Type u) [Field Ω] (y : Spec (.of Ω) ⟶ T),\n      topologicalKrullDim (pullback f y : Scheme.{u}) ≤ (e : WithBot ℕ∞))\n    (a b : ℤ) (L : DerivedCategory (pbcModules S ((pbcAdicRings S d).obj (op n))))\n    (hconstructible : ∀ q : ℤ,\n      @IsConstructibleProEtaleCoefficientModuleSheaf S (A ⧸ d.ideal ^ (n + 1)) _\n        (d.quotientFinite n) ((pbcRestrict (pbcLevelConstantComparison S d n).hom).obj\n          ((DerivedCategory.homologyFunctor _ q).obj L)))\n    (hbounded : ∀ q : ℤ, (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj L)) :\n    (∀ q : ℤ,\n      @IsConstructibleProEtaleCoefficientModuleSheaf T (A ⧸ d.ideal ^ (n + 1)) _\n        (d.quotientFinite n) ((pbcRestrict (pbcLevelConstantComparison T d n).hom).obj\n          ((DerivedCategory.homologyFunctor _ q).obj\n            ((completedFiniteDerivedDirectImage f d n).obj L)))) ∧\n      ∀ q : ℤ, (q < a ∨ b + 2 * (e : ℤ) < q) →\n        IsZero ((DerivedCategory.homologyFunctor _ q).obj\n          ((completedFiniteDerivedDirectImage f d n).obj L))",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules (lcompile --all exit 0, no sorry) and 4 importers compiled against the delivery; pbc_preservation_constructible signature unchanged vs live; node proof/proof_deps vs Lean; C-acb12 points 1-3 vs repaired criterion/operation lemmas; ProEtaleSiteComparisonFiniteLevel still in transitive closure and not in unit sk-thm-properbasechange realized"
+ }
+}

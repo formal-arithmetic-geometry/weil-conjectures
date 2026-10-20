@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-constructible-reduction-direct-image",
+ "kind": "statement",
+ "title": "Constructible canonical reduction cohomology under proper direct image",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite extension, and $(A,I)$ its lifted valuation-ring datum as in [def-weil-pbc-bounded-constructible-complete]. Let $f:S\\to T$ be proper between Noetherian finite-dimensional schemes. Let $N>0$ vanish in $\\mathcal O_E/(\\varpi)$ and be invertible in the global section rings of both schemes. Suppose every fibre over a field-valued point of $T$ has dimension at most $e$. If $K\\in D(\\operatorname{Mod}(A_S))$ is intrinsically complete [def-weil-pbc-intrinsic-completion], and its canonical positive reductions have intrinsically constructible cohomology [def-weil-proetale-constructible-sheaf] supported in $[a,b]$, then $Rf_*K$ is intrinsically complete and its canonical reductions have intrinsically constructible cohomology supported in $[a,b+2e]$. No common local models or compatible etale origins of the output are asserted. The constructibility input and output are exactly the homologyProperty clause of [def-weil-pbc-uniform-reduction-profile] for every constant reduction; no duplicate constructibility predicate is defined.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "Proof, canonical-reduction refinement, steps 1--6 of the reviewed preservation node"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-proetale-constructible-sheaf",
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-pbc-uniform-reduction-profile"
+ ],
+ "proof": [
+  {
+   "text": "Use the homologyProperty clause of the uniform reduction profile. The canonical homology isomorphism for exact coefficient restriction identifies it with the intrinsic cohomology of each actual quotient module. Transport the input and output constructibility assertions through this isomorphism.",
+   "uses": [
+    "def-weil-pbc-uniform-reduction-profile",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "N lies in the first uniformizer ideal by the given quotient equality. Lift this membership through ULift using the principal-ideal divisibility criterion. Its (n+1)st power lies in the (n+1)st ideal power, so it annihilates every element of that quotient. The additive order divides this power. The global unit N maps to a unit in each stalk, so each such additive order maps to a unit. These are the proved private helpers annihilator_mem and quotient_orders.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the one-level finite direct-image cohomology theorem separately to every canonical input reduction. It supplies intrinsically constructible cohomology and the bound [a,b+2e] for the finite direct image. This statement involves neither a completed object nor completeness.",
+   "uses": [
+    "lem-weil-pbc-finite-direct-image-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The actual quotient-linear completedDirectImageProjectionFormula is invertible by its published properties. Apply homology and restrict the coefficient action to transport both constructibility and vanishing back to the canonical output reductions. The private lisse_iso and constructible_iso helpers retain the same stratification and covers. The completed operations theorem supplies intrinsic completeness of the actual uncompleted direct image.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-uniform-reduction-profile",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-weil-pbc-finite-direct-image-cohomology",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-sbc-completed-operations-linear-natural-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-preservation-constructible.proof.md",
+  "place": "B5 complete Lean proof, repaired to reuse the landed uniform profile and coefficient Serre encoding"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete adic complex constructible if all finite reductions are constructible in a common cohomological interval",
+   "results": "8 hits: IsAdicComplete, AdicCompletion and their algebraic completion instances; none supplies the sheaf-derived criterion or operation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "No matching theorem returned.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PbcIsBoundedConstructibleComplete",
+   "results": "0 hits from msearch grep. Local rg finds the membership definition and distinct coefficient or rationalization interfaces, without the canonical-reduction statement.",
+   "date": "2026-10-18",
+   "verdict": "no matching existing statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite reductions of proper derived direct image are constructible with upper bound twice fibre dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, chevalley_mvPolynomial_mvPolynomial, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, ChevalleyThm.chevalley_polynomialC, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, ChevalleyThm.chevalley_mvPolynomialC, PrimeSpectrum.isConstructible_comap_image.",
+   "date": "2026-10-18",
+   "verdict": "no match for the canonical-reduction sheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PreservationConstructible",
+  "date": "2026-10-19",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-preservation-constructible",
+   "place": "Canonical-reduction refinement of preservation: Constructible canonical reduction cohomology under proper direct image",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcConstructibleReductionDirectImage",
+  "file": "lean/Sheaf/Paper/PbcConstructibleReductionDirectImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_constructible_reduction_directImage",
+  "statement": "theorem pbc_constructible_reduction_directImage\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E]\n    {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T]\n    (_hDimS : ∃ k : ℕ, topologicalKrullDim S ≤ (k : WithBot ℕ∞))\n    (_hDimT : ∃ k : ℕ, topologicalKrullDim T ≤ (k : WithBot ℕ∞))\n    (f : S ⟶ T) [IsProper f] (N : ℕ) (_hN : 0 < N)\n    (_hAnn : (N : Padic.coefficientExtensionRing l E 1) = 0)\n    (_hInvertS : IsUnit (N : Γ(S, ⊤))) (_hInvertT : IsUnit (N : Γ(T, ⊤)))\n    (e : ℕ)\n    (_hFib : ∀ (Ω : Type u) [Field Ω] (y : Spec (.of Ω) ⟶ T),\n      topologicalKrullDim (pullback f y : Scheme.{u}) ≤ (e : WithBot ℕ∞))\n    (a b : ℤ) (K : PbcCompletedDerived S (pbcIntegralDatum l E))\n    (_hcomplete : PbcIsIntrinsicallyComplete S (pbcIntegralDatum l E) K)\n    (_hconstructible : (fun K ↦ ∀ n : ℕ, DerivedCategory.homologyProperty\n        (@IsConstructibleProEtaleCoefficientModuleSheaf S\n          (PbcQuotient (pbcIntegralDatum l E) n) _\n          ((pbcIntegralDatum l E).quotientFinite n))\n        ((pbcConstantReduction S (pbcIntegralDatum l E) n).obj K)) K)\n    (_hbounded : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj\n        ((pbcCompletedReduction S (pbcIntegralDatum l E) n).obj K))) :\n    PbcIsIntrinsicallyComplete T (pbcIntegralDatum l E)\n        ((completedDerivedDirectImage f (pbcIntegralDatum l E)).obj K) ∧\n      (fun K ↦ ∀ n : ℕ, DerivedCategory.homologyProperty\n        (@IsConstructibleProEtaleCoefficientModuleSheaf T\n          (PbcQuotient (pbcIntegralDatum l E) n) _\n          ((pbcIntegralDatum l E).quotientFinite n))\n        ((pbcConstantReduction T (pbcIntegralDatum l E) n).obj K))\n        ((completedDerivedDirectImage f (pbcIntegralDatum l E)).obj K) ∧\n      ∀ (n : ℕ) (q : ℤ), (q < a ∨ b + 2 * (e : ℤ) < q) →\n        IsZero ((DerivedCategory.homologyFunctor _ q).obj\n          ((pbcCompletedReduction T (pbcIntegralDatum l E) n).obj\n            ((completedDerivedDirectImage f (pbcIntegralDatum l E)).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b7df1",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051020-L-1529792",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules (lcompile --all exit 0, no sorry) and 4 importers compiled against the delivery; pbc_preservation_constructible signature unchanged vs live; node proof/proof_deps vs Lean; C-acb12 points 1-3 vs repaired criterion/operation lemmas; ProEtaleSiteComparisonFiniteLevel still in transitive closure and not in unit sk-thm-properbasechange realized"
+ }
+}
