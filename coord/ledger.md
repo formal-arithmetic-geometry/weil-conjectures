@@ -17821,3 +17821,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:14 L: merged deliver/J9/Sheaf.FieldTheory.CanonicalTraitTameCharacter (stage 3; reviewer PASS; first push; landing 20261020T051431-L-1679928 (interface); batch 20261020T050952; modules 6; new nodes 6)
 - 05:14 L: merged deliver/K1/Sheaf.Paper.ConstructibleCompleteBaseChange (stage 3; reviewer PASS; first push; landing 20261020T051434-L-1681519 (interface); batch 20261020T050952; modules 3; new nodes 2; change records: coord/changes/K1-original-datum-constructible-preservation.md)
 - 05:14 L: merged deliver/K1/Sheaf.RingTheory.QuasiRegularFlatQuotientBaseChange (stage 3; reviewer PASS; first push; landing 20261020T051436-L-1682894 (proof); batch 20261020T050952; modules 1; new nodes 0)
+- 05:14 L: merged deliver/K2/Sheaf.RingTheory.QuasiRegularPrefixQuotient (stage 3; reviewer PASS; first push; landing 20261020T051439-L-1684122 (proof); batch 20261020T050952; modules 1; new nodes 0)

@@ -14,99 +14,53 @@
  ],
  "proof": [
   {
-   "text": "We first prove the one-generator quotient assertion for every commutative ring and every sequence of positive length $b$ satisfying the hypothesis. Put $t=f_1$, $B=A/(t)$, and let $q:A\\to B$ be the quotient map. Put $K=(q(f_2),\\ldots,q(f_b))$. Since $q(t)=0$, expanding products of generators gives $q(J^n)=K^n$ for all $n\\geq0$, with $q(J^0)=B$. Also $B/K=C$: the map $a\\bmod(t)\\mapsto a\\bmod J$ is surjective, and its kernel is $K$, because $J=(t,f_2,\\ldots,f_b)$. These are statements about representatives and the quotient kernel in [def-weil-pbc-algebra-hom-quotient].",
+   "text": "Write Phi_f for the canonical evaluation map. By induction on monomials, the product and scalar formulas for associated graded classes identify Phi_f(map(A -> A/J)(P)) with the degree-n class of P(f), for a homogeneous degree-n polynomial P over A. Lifting coefficients and taking homogeneous components then shows that injectivity of Phi_f implies: P(f) in J^(n+1) forces every coefficient of P into J. Conversely this coefficient criterion proves injectivity by homogeneous components, and expanding ideal powers by homogeneous polynomials proves surjectivity. A zero-relation version of the criterion suffices: expand an element of J^(n+1) in degree n with coefficients in J, subtract that expansion, and apply the zero-relation criterion.",
    "uses": [
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061R, lemma-truncate-quasi-regular, opening reduction and definition of the quotient ideal."
-   }
-  },
-  {
-   "text": "Write $G_n=J^n/J^{n+1}$ and $\\Phi:C[T_1,\\ldots,T_b]\\xrightarrow{\\sim}\\bigoplus_nG_n$ for the assumed graded isomorphism. Multiplication by $T_1$ is injective: in the coefficient description of [def-weil-pbc-mv-polynomial-ring] it shifts an exponent $\\alpha$ to $\\alpha+e_1$, and these shifted exponents are distinct. Thus for any $y\\in J^r\\setminus J^{r+1}$, the polynomial $\\Phi^{-1}([y]_r)$ is nonzero and so is $T_1\\Phi^{-1}([y]_r)$. By the homogeneous multiplication formula (2) of [lem-weil-pbc-associated-graded-ring-structure], its image is $[t]_1[y]_r=[ty]_{r+1}$. In particular $ty\\notin J^{r+2}$. This uses no cancellation by $t$ in $A$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
     "def-weil-pbc-associated-graded-ring",
+    "def-weil-pbc-mv-polynomial-ring",
     "lem-weil-pbc-associated-graded-ring-structure"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 061R, lemma-truncate-quasi-regular, last sentence, and 061N, equation-quasi-regular, multiplication by the first variable."
+    "place": "Tag 061R, lemma-truncate-quasi-regular, specialized to M=A; Tag 061P, definition-quasi-regular-sequence, and Tag 061N, equation-quasi-regular, expand the quasi-regular hypothesis and conclusion."
    }
   },
   {
-   "text": "For $n\\geq1$ we claim $J^n\\cap tA=tJ^{n-1}$. The right-hand side lies in the left-hand side since $t\\in J$. Conversely write an element of the left-hand side as $ty$. For $n=1$, $y\\in A=J^0$ already. For $n\\geq2$, if $y\\notin J^{n-1}$ choose the least $m\\in\\{1,\\ldots,n-1\\}$ with $y\\notin J^m$. Then $y\\in J^{m-1}\\setminus J^m$, so Step 2 gives $ty\\notin J^{m+1}$. But $n\\geq m+1$ and $ty\\in J^n\\subseteq J^{m+1}$, a contradiction. Hence $y\\in J^{n-1}$. The descending inclusions of powers follow from the ideal-product definition: a product of $s+1$ elements of $J$ lies in the ideal $J^s$. Only a finite set of filtration levels was used; there is no separatedness or Noetherian assumption.",
-   "uses": [
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061R, lemma-truncate-quasi-regular, assertion $J^nM\\cap f_1M=f_1J^{n-1}M$ and its initial-form argument, with $M=A$ and $n\\geq1$."
-   }
-  },
-  {
-   "text": "The maps $\\rho_n:G_n\\to K^n/K^{n+1}$ given by $[x]_n\\mapsto[q(x)]_n$ are well defined and surjective by Step 1. They assemble to a graded $C$-algebra map $\\rho:\\operatorname{gr}_J(A)\\to\\operatorname{gr}_K(B)$: additivity, multiplication and scalar compatibility follow on representatives from $q(x+y)=q(x)+q(y)$, $q(xy)=q(x)q(y)$ and the formulas in [lem-weil-pbc-associated-graded-ring-structure](1)-(3). In degree zero $\\rho_0$ is the identity of $C$ under $B/K=C$. For $n\\geq1$, a class $[x]_n$ lies in $\\ker\\rho_n$ precisely when $q(x)\\in K^{n+1}=q(J^{n+1})$. Choosing $z\\in J^{n+1}$ with $q(z)=q(x)$ gives $x-z\\in tA\\cap J^n$, and conversely any such difference gives a kernel class. Thus the kernel consists exactly of the classes in $G_n$ represented by $J^{n+1}+(tA\\cap J^n)$.",
+   "text": "For a chosen generator t=f_j, prove t*y in J^(n+1) implies y in J^n by induction on n. At n=0 the assertion is automatic. In the induction step the preceding assertion puts y in J^(n-1); expand y=P(f) homogeneously in degree n-1. Apply the coefficient criterion to X_j*P, whose evaluation lies in J^(n+1), to put every coefficient of P in J (compare coefficients at e_j+d). Expand those coefficients in the generators of J to raise P to degree n with the same evaluation. This is the finite filtration argument of Stacks 061R and requires no separatedness.",
    "uses": [
     "def-weil-pbc-algebra-hom-quotient",
-    "def-weil-pbc-associated-graded-ring",
-    "lem-weil-pbc-associated-graded-ring-structure"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061R, lemma-truncate-quasi-regular, the displayed computation of the graded pieces of the quotient; representative calculation in place of an uncited quotient-isomorphism theorem."
-   }
-  },
-  {
-   "text": "By Step 3, for $n\\geq1$ the kernel classes in Step 4 are exactly $[ty]_n$ with $y\\in J^{n-1}$. By [lem-weil-pbc-associated-graded-ring-structure](2), these are $[t]_1[y]_{n-1}$. Hence $\\ker\\rho_n=[t]_1G_{n-1}$ for $n\\geq1$, while $\\ker\\rho_0=0$. Under $\\Phi$ this means: a homogeneous polynomial $H$ of degree $n\\geq1$ maps to zero under $\\rho\\Phi$ if and only if $H=T_1Q$ for a homogeneous polynomial $Q$ of degree $n-1$. Indeed choose $[y]_{n-1}$ in the preceding description and take $Q=\\Phi^{-1}([y]_{n-1})$; injectivity of $\\Phi$ gives the equality. The reverse implication holds because $\\rho([t]_1)=0$.",
-   "uses": [
-    "lem-weil-pbc-associated-graded-ring-structure",
     "def-weil-pbc-mv-polynomial-ring"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061R, lemma-truncate-quasi-regular, identification of the associated graded quotient with the polynomial module modulo $X_1$."
+    "place": "Tag 061R, lemma-truncate-quasi-regular, specialized to M=A; Tag 061P, definition-quasi-regular-sequence, and Tag 061N, equation-quasi-regular, expand the quasi-regular hypothesis and conclusion."
    }
   },
   {
-   "text": "Restrict $\\rho\\Phi$ to polynomials in $T_2,\\ldots,T_b$. In degree zero it is the identity on $C$. In degree $n\\geq1$ it is surjective: lift a target class through $\\rho_n$, then through the degree-$n$ part of $\\Phi$, to a homogeneous polynomial $H$. Separate its finite monomial sum as $H=P+T_1Q$, where $P$ contains exactly the monomials with first exponent zero and $Q$ is obtained from the remaining monomials by lowering that exponent by one. Then $\\rho\\Phi(H)=\\rho\\Phi(P)$. It is injective: if $P$ in the remaining variables maps to zero, Step 5 gives $P=T_1Q$; the left side has first exponent zero on every monomial, while the right side has positive first exponent, so comparison of coefficients forces $P=0$. This argument works over any $C$, including the zero ring, by [def-weil-pbc-mv-polynomial-ring].",
+   "text": "Let q:A -> B be surjective with kernel (f_j), and let g be the images of the other generators, indexed injectively by variables different from j, generating q(J). For a homogeneous zero relation p(g)=0, lift its coefficients to A and take the same homogeneous component, obtaining P; rename its variables to obtain H. Then H(f)=t*y. In degree n>=1, the preceding filtration assertion gives y in J^(n-1), so choose a homogeneous Q of degree n-1 evaluating to y. The homogeneous zero relation H-X_j*Q has all coefficients in J by Step 1. At a monomial supported on the remaining variables, the X_j*Q coefficient is zero, so the original coefficients of P lie in J; their images are in q(J). At degree zero H(f) lies in (t) subset J directly. Step 1 now proves bijectivity of Phi_g. The same coefficient-lifting argument, without subtracting X_j*Q, transports the criterion across a bijective ring map.",
    "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
     "def-weil-pbc-mv-polynomial-ring"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061R, lemma-truncate-quasi-regular, conclusion after quotienting by $X_1$; coefficientwise surjectivity and injectivity written out."
+    "place": "Tag 061R, lemma-truncate-quasi-regular, specialized to M=A; Tag 061P, definition-quasi-regular-sequence, and Tag 061N, equation-quasi-regular, expand the quasi-regular hypothesis and conclusion."
    }
   },
   {
-   "text": "The inclusion $C[T_2,\\ldots,T_b]\\to C[T_1,\\ldots,T_b]$ sends each remaining variable to the variable with the same name; it exists by the polynomial universal property and is the monomial inclusion of Step 6. Its composite with $\\rho\\Phi$ sends $T_j$ to $[q(f_j)]_1$ and fixes $C$, so it is precisely the canonical map in the desired one-generator conclusion, by that universal property's uniqueness. It preserves degrees. Every polynomial and every element of an associated graded ring has finitely many homogeneous components; the degreewise bijections of Step 6 therefore give bijectivity of the whole map (lift or compare each of those finitely many components). A bijective algebra homomorphism has an algebra-homomorphic inverse: for $u=F(x)$ and $v=F(y)$ its inverse sends $u+v$, $uv$ and a scalar respectively to $x+y$, $xy$ and that scalar. This proves the one-generator graded algebra isomorphism.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-associated-graded-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 061R, lemma-truncate-quasi-regular, quotient by the first variable, and 061N, equation-quasi-regular, the canonical map; finite-degree assembly made explicit."
-   }
-  },
-  {
-   "text": "Now induct on $i$ from $0$ to $b$. At $i=0$, $B_0=A$ and the assertion is the given isomorphism. Suppose it holds at $i<b$. Apply the one-generator assertion just proved, over $B_i$, to the sequence $\\overline f_{i+1},\\ldots,\\overline f_b$ and its canonical isomorphism supplied by the induction hypothesis. Its next quotient is $B_i/(\\overline f_{i+1})\\cong B_{i+1}$: the map sending the iterated class of $a$ to $a\\bmod I_{i+1}$ is well defined and surjective, and its kernel before the second quotient is exactly the principal ideal $(\\overline f_{i+1})$, since $I_{i+1}=I_i+(f_{i+1})$. It identifies each remaining generator with the image of $f_j$ in $B_{i+1}$, and both coefficient maps send $a$ to $a\\bmod J$ in $C$. Write $u$ for this quotient-ring isomorphism. It maps the remaining ideal onto $\\overline J_{i+1}$, hence maps each power onto the corresponding power, by expanding products. Thus $[x]_n\\mapsto[u(x)]_n$ is a bijection of the successive-power quotients, with inverse induced by $u^{-1}$; the representative formulas for addition, multiplication and scalars show that their direct sum is a graded $C$-algebra isomorphism. On each remaining variable the composite sends $T_j$ to $[\\overline f_j]_1$, so polynomial uniqueness identifies it with the canonical map for $i+1$. This completes the induction, including $i=b$: then the remaining ideal is zero, its positive powers and positive graded pieces vanish, and its degree-zero ring is $B_b=C$. If $b=0$ the base case alone gives the result. Polynomial rings on no variables are $C$ by their monomial description.",
+   "text": "For I_i=span(f_j : j<i), prove I_i<=J and map(A -> A/I_i)(J)=span(g_i). Also I_(i+1)=I_i+(f_i). Therefore the surjective factor A/I_i -> A/I_(i+1) has kernel generated by the image of f_i and carries the remaining ideal to the next remaining ideal. The inclusion of the next tail index into the present tail is injective and omits i. Apply Step 3. The initial case i=0 follows by transporting across A -> A/0. Induction proves bijectivity for every i<=b, including b=0 and the empty tail at i=b. Finally the third isomorphism theorem, using I_i<=J and the image-ideal identity, gives (A/I_i)/span(g_i) equiv A/J. Its representative formula sends the double class of a to the class of a.",
    "uses": [
     "def-weil-pbc-algebra-hom-quotient",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-associated-graded-ring"
+    "def-weil-pbc-mv-polynomial-ring"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 061R, lemma-truncate-quasi-regular, opening sentence reducing general $i$ to $i=1$; quotient representatives and both empty cases made explicit."
+    "place": "Tag 061R, lemma-truncate-quasi-regular, specialized to M=A; Tag 061P, definition-quasi-regular-sequence, and Tag 061N, equation-quasi-regular, expand the quasi-regular hypothesis and conclusion."
    }
   }
  ],
@@ -119,7 +73,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 061R, lemma-truncate-quasi-regular, specialized to M=A; finite initial-form argument, graded kernel computation, coefficientwise quotient, and prefix induction written out. Canonical maps as in Tag 061N."
+  "place": "Tag 061R, lemma-truncate-quasi-regular, with the finite filtration argument implemented by homogeneous coefficient relations; the canonical evaluation formulas use Tags 061N and 061P. Prefix induction and quotient identification follow the source route."
  },
  "mathlib_searches": [
   {
@@ -281,5 +235,15 @@
   "group": "Q67",
   "result": "pass",
   "note": "Read node, 8-step proof, Stacks 061R/061N/061P, live AssociatedGradedRing declarations and delivered module. All clauses match: J=span(range f), C=A/J; hypothesis = bijective MvPolynomial.aeval with variables to degree-1 classes, using associatedGradedAlgebra (rfl-checked); quasiRegularPrefixIdeal = span f''{j<i} (compiled: =⊥ at i=0, =J at i=b); tail indexed by {j // i<=j} = paper i+1..b; e: B_i/Jbar_i ≃+* C with e(mk mk a)=mk a is the unique canonical identification, so aeval over B_i/Jbar_i is equivalent to the node's map over C; graded iso = bijective since degrees are forced. Edge cases b=0, i=0, i=b, J=A, zero ring covered; no extra assumptions or universe restriction. Helpers have real data and docstrings; one sorry; lean.statement verbatim; report sections present; no duplicate found. nt_compile clean (1.9-4.3 s) plus a separate compiled check file. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261020T051439-L-1684122",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
