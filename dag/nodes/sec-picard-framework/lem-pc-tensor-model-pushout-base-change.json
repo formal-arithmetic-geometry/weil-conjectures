@@ -95,14 +95,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.TensorModelPushoutBaseChange",
-  "file": "lean/Sheaf/RingTheory/TensorModelPushoutBaseChange.lean",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.TensorModelPushoutBaseChange",
+  "file": "lean/WeilConjectures/RingTheory/TensorModelPushoutBaseChange.lean",
   "declaration": "AlgebraicGeometry.tensor_model_pushout_base_change",
-  "statement": "theorem tensor_model_pushout_base_change\n    (R : Type u) (S : Type v) (T : Type w) (A : Type x) (B : Type y)\n    (P Q : Type z)\n    [CommRing R] [CommRing S] [CommRing T] [CommRing A] [CommRing B]\n    [CommRing P] [CommRing Q] [Algebra R S] [Algebra R T]\n    [Algebra R A] [Algebra R B] [Algebra P Q]\n    (t : S →ₐ[R] T) (f : A →ₐ[R] B) (q : Q →+* S ⊗[R] B)\n    (h : let D := S ⊗[R] A\n      let E := S ⊗[R] B\n      let d : D →+* E :=\n        (Algebra.TensorProduct.map (AlgHom.id S S) f).toRingHom\n      letI : Algebra D E := d.toAlgebra\n      letI : Algebra Q E := q.toAlgebra\n      ∃ aP : Algebra P D,\n        letI := aP\n        letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra\n        letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl\n        ∃ hPQ : IsScalarTower P Q E,\n          letI := hPQ\n          Algebra.IsPushout P D Q E) :\n    let D := T ⊗[R] A\n    let E := T ⊗[R] B\n    let d : D →+* E := (Algebra.TensorProduct.map (AlgHom.id T T) f).toRingHom\n    letI : Algebra D E := d.toAlgebra\n    letI : Algebra Q E :=\n      ((Algebra.TensorProduct.map t (AlgHom.id R B)).toRingHom.comp q).toAlgebra\n    ∃ aP : Algebra P D,\n      letI := aP\n      letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra\n      letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl\n      ∃ hPQ : IsScalarTower P Q E,\n        letI := hPQ\n        Algebra.IsPushout P D Q E",
+  "statement": "theorem tensor_model_pushout_base_change\n    (R : Type u) (S : Type v) (T : Type w) (A : Type x) (B : Type y)\n    (P Q : Type z)\n    [CommRing R] [CommRing S] [CommRing T] [CommRing A] [CommRing B]\n    [CommRing P] [CommRing Q] [Algebra R S] [Algebra R T]\n    [Algebra R A] [Algebra R B] [Algebra P Q]\n    (t : S →ₐ[R] T) (f : A →ₐ[R] B) (q : Q →+* S ⊗[R] B) (aP : Algebra P (S ⊗[R] A))\n    (h : let D := S ⊗[R] A\n      let E := S ⊗[R] B\n      let d : D →+* E :=\n        (Algebra.TensorProduct.map (AlgHom.id S S) f).toRingHom\n      letI : Algebra D E := d.toAlgebra\n      letI : Algebra Q E := q.toAlgebra\n      letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra\n      letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl\n      ∃ hPQ : IsScalarTower P Q E,\n        letI := hPQ\n        Algebra.IsPushout P D Q E) :\n    let D := T ⊗[R] A\n    let E := T ⊗[R] B\n    let d : D →+* E := (Algebra.TensorProduct.map (AlgHom.id T T) f).toRingHom\n    letI : Algebra D E := d.toAlgebra\n    letI : Algebra Q E :=\n      ((Algebra.TensorProduct.map t (AlgHom.id R B)).toRingHom.comp q).toAlgebra\n    letI : Algebra P D :=\n      ((Algebra.TensorProduct.map t (AlgHom.id R A)).toRingHom.comp\n        (algebraMap P (S ⊗[R] A))).toAlgebra\n    letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra\n    letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl\n    ∃ hPQ : IsScalarTower P Q E,\n      letI := hPQ\n      Algebra.IsPushout P D Q E",
   "branch": "sheaf-dag",
-  "by": "S2",
-  "date": "2026-10-13"
+  "by": "T4",
+  "date": "2026-10-20",
+  "note": "Retired the unused Sheaf twin in favor of the upstream theorem. The upstream statement takes the original P-algebra structure explicitly and retains its induced structure after base change; existentially forgetting this extra information recovers the node statement. No Lean consumer imports the retired copy."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -115,13 +116,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "C-09746",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T113354-L-3187744",
+  "landing": "20261020T132044-L-1407412",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Withdrawn Sheaf copy (0 importers, retire-items.tsv item 143) vs upstream WeilConjectures.RingTheory.TensorModelPushoutBaseChange; node lean.statement verbatim in upstream; old Sheaf signature proved from upstream in scratch (axioms propext/choice/Quot.sound); stub compiles"
  }
 }
