@@ -1,0 +1,150 @@
+{
+ "id": "lem-pur-system-tensor-reduction-formula",
+ "kind": "statement",
+ "title": "Tensor formula for actual semilinear reduction adjoints",
+ "statement": "Let J be a site and B a strict inverse sequence of sheaves of commutative rings. Use the actual system category, its derived evaluation functors e_n, reduction adjoints alpha_h, and simultaneous section-normalized tensor comparisons of [def-coef-semilinear-system-models, def-coef-semilinear-derived-calculus]. For every two objects P,Q of the unbounded derived system category, and every n ≤ m with h : n ≤ m, alpha_h(P tensor^L Q) followed by tensorEvaluation_n equals scalar_h(tensorEvaluation_m) followed by scalarTensor_h and then tensor(alpha_h(P), alpha_h(Q)). This equality concerns the adjoints of the actual horizontal transitions. Neither P nor Q is assumed normalized. No boundedness or flatness of the coefficient homomorphisms is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YS, applied to the actual horizontal system restrictions of Zheng Construction 4.1; the tensor-adjoint formula is the strict-system calculation in Step 1 of lem-pur-system-normalized-tensor-closure."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Choose K-flat resolutions with flat terms of the two system objects. Evaluation preserves K-flatness by its model field and flat terms by the vertical finite-relation argument. The total tensor is K-flat with flat terms by the existing total-tensor model theorem.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-system-evaluation-flat",
+    "lem-pur-kflat-total-tensor-model",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 06YS, applied to the actual horizontal system restrictions of Zheng Construction 4.1; the tensor-adjoint formula is the strict-system calculation in Step 1 of lem-pur-system-normalized-tensor-closure."
+   }
+  },
+  {
+   "text": "Use the cochain tensor-reduction identity. Localize it, and identify the localized degreewise adjoints with the actual derived reductions by ScalarData.transpose_model and the exact evaluation localization comparisons.",
+   "uses": [
+    "lem-pur-system-cochain-tensor-reduction",
+    "def-coef-semilinear-system-models",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 06YS, applied to the actual horizontal system restrictions of Zheng Construction 4.1; the tensor-adjoint formula is the strict-system calculation in Step 1 of lem-pur-system-normalized-tensor-closure."
+   }
+  },
+  {
+   "text": "The evaluation and scalar tensor model derived squares identify the remaining maps. Naturality of the tensor model and scalar counit completes a diagram of nine commuting squares. Cancel its invertible comparisons to obtain the formula on K-flat representatives. Both sides are components of natural transformations of the pair of derived system objects; transport their equality along the representative isomorphisms.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 06YS, applied to the actual horizontal system restrictions of Zheng Construction 4.1; the tensor-adjoint formula is the strict-system calculation in Step 1 of lem-pur-system-normalized-tensor-closure."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-system-evaluation-flat",
+  "lem-pur-kflat-total-tensor-model",
+  "def-coef-semilinear-system-models",
+  "lem-pur-system-cochain-tensor-reduction",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YS, applied to the actual horizontal system restrictions of Zheng Construction 4.1; the tensor-adjoint formula is the strict-system calculation in Step 1 of lem-pur-system-normalized-tensor-closure."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemNormalizedTensorClosure",
+  "date": "2026-10-21",
+  "group": "H3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Normalized coefficient-system operations in the tensor formula: the actual reduction of the tensor is the tensor of the two reduction adjoints after canonical scalar reassociation. This is the identification before isomorphism cancellation in Step 1 of lem-pur-system-normalized-tensor-closure.",
+   "via": [
+    "lem-pur-system-level-projection-formula-coherence",
+    "lem-pur-system-normalized-tensor-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars tensor comparison compatible with adjunction transpose",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-21",
+   "verdict": "The isomorphism cancellation lemma proves the closure step; no result identifies the actual semilinear tensor reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso.of_isIso_fac_right",
+   "results": "1 hits: CategoryTheory.IsIso.of_isIso_fac_right",
+   "date": "2026-10-21",
+   "verdict": "The isomorphism cancellation lemma proves the closure step; no result identifies the actual semilinear tensor reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*transition|transition.*tensor",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "The isomorphism cancellation lemma proves the closure step; no result identifies the actual semilinear tensor reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension of scalars tensor comparison compatible with adjunction transpose",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.monoidalClosedHomEquiv",
+   "date": "2026-10-21",
+   "verdict": "General module scalar-extension, restriction or total-complex tools only; no theorem gives the actual coefficient-sequence-site compatibility. The proof uses the existing library APIs."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemTensorReductionFormula",
+  "file": "lean/Sheaf/Paper/SystemTensorReductionFormula.lean",
+  "declaration": "WeilConjectures.SemilinearSections.tensor_reduction_formula",
+  "statement": "theorem tensor_reduction_formula (A : Data.{c, v, r} J B τ)\n    (P Q : DS.{c, v, max c v r} J B τ) :\n    ∀ {m n : ℕ} (h : n ≤ m),\n      reduction.{c, v, max c v r} J B τ h (A.scalar h) (A.closed.tensor.obj (P, Q)) ≫\n          (A.tensorEvaluation n).hom.app (P, Q) =\n        (A.scalar h).T.map ((A.tensorEvaluation m).hom.app (P, Q)) ≫\n          (A.scalarTensor h).hom.app\n            ((e.{c, v, max c v r} J B τ m).obj P, (e.{c, v, max c v r} J B τ m).obj Q) ≫\n          (A.levelClosed n).tensor.map\n            (Prod.mkHom (reduction.{c, v, max c v r} J B τ h (A.scalar h) P)\n              (reduction.{c, v, max c v r} J B τ h (A.scalar h) Q))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T221213-L-4156862",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T221213-L-4156862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

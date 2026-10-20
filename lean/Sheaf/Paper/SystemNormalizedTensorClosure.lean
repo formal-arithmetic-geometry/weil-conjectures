@@ -6,8 +6,7 @@ Authors: SHEAF group Q55
 module
 
 public import Sheaf.Paper.SemilinearDerivedSections
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Paper.SystemTensorReductionFormula
 
 /-!
 # Tensor and inverse image preserve normalized semilinear systems
@@ -41,20 +40,15 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
 Source: Stacks 07A4 and 06YS; strict-system consequence in the normalized-system operations
 of `prop-pur-adic-reconstruction-trace-coherence`
 (blueprint: lem-pur-system-normalized-tensor-closure).
-Proof: use the simultaneous K-flat total tensor model of
-lem-coef-semilinear-derived-sections. On these representatives, transpose the actual
-horizontal tensor transition by the scalar-extension/restriction adjunction. The
-canonical scalar-tensor comparison, given by lem-weil-pbc-ringed-topoi-derived-tensor-pullback
-for the identity topos and the coefficient map, identifies this transpose with the tensor
-of the two original reductions. The representative normalizations fix this equality
-before localization; joint conservativity is not used to infer equality of morphisms.
-Both original reductions are invertible, so the displayed composite is invertible.
-The tensor evaluation comparisons are isomorphisms, hence every actual tensor reduction
-is invertible. For a triple of indices, naturality and scalar reassociation identify
-both iterated composites with the composite reduction. This is exactly the quotient
-cocycle supplied by the section model. Finally lem-pur-derived-change-of-rings uses
-K-flat resolutions for arbitrary ring maps, so the argument applies to unbounded
-complexes and does not require flat coefficient transitions. -/
+Proof: apply the actual tensor-reduction identity `tensor_reduction_formula`, proved
+by the ordinary pure-section adjunction calculation, the total cochain tensor
+summands, and the representative-normalized derived comparison squares. The two
+original reductions are invertible by normalization. The scalar tensor and evaluation
+comparisons are isomorphisms, so cancellation proves that the tensor reduction is
+invertible. Retain the actual tensor-reduction identity as the second conjunct.
+The quotient cocycle is the simultaneous calculus's reduction_cocycle field applied
+to the tensor system. K-flat resolutions with flat terms and the total tensor model
+apply to unbounded complexes without flat coefficient transitions. -/
 theorem normalized_tensor_closure (A : Data.{c, v, r} J B τ)
     (P Q : DS.{c, v, max c v r} J B τ)
     (hP : Normalized.{c, v, max c v r} J B τ A.scalar P)
@@ -78,7 +72,16 @@ theorem normalized_tensor_closure (A : Data.{c, v, r} J B τ)
             ((e.{c, v, max c v r} J B τ l).obj (A.closed.tensor.obj (P, Q))) ≫
           reduction.{c, v, max c v r} J B τ (h.trans k) (A.scalar (h.trans k))
             (A.closed.tensor.obj (P, Q))) := by
-  sorry
+  refine ⟨?_, (fun h ↦ tensor_reduction_formula J B τ A P Q h), ?_⟩
+  · intro m n h
+    have := hP h
+    have := hQ h
+    have : IsIso (Prod.mkHom
+        (reduction J B τ h (A.scalar h) P) (reduction J B τ h (A.scalar h) Q)) :=
+      (isIso_prod_iff _ _).mpr ⟨hP h, hQ h⟩
+    exact IsIso.of_isIso_fac_right (tensor_reduction_formula J B τ A P Q h)
+  · intro l m n h k
+    exact A.reduction_cocycle h k (A.closed.tensor.obj (P, Q))
 
 section InverseImage
 

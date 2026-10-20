@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-system-cochain-tensor-reduction",
+ "kind": "statement",
+ "title": "Cochain scalar-adjoint tensor formula for strict systems",
+ "statement": "Use the ordinary systems and section-normalized comparisons of [def-coef-semilinear-system-models, def-coef-semilinear-derived-calculus]. The degreewise ordinary horizontal adjoints define a cochain reduction. On the total tensor of two system complexes, scalar tensor chain comparison followed by evaluation chain comparison and this cochain reduction equals the total tensor of the two cochain reductions followed by evaluation chain comparison. No flatness or boundedness is needed for this chain identity.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Zheng Construction 4.1 horizontal system restrictions, with Stacks Tags 03EK, 03CZ and 06YY for module tensors and scalar adjunctions."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of the ordinary adjunction transpose makes the degreewise horizontal adjoints commute with all differentials. Their resulting cochain map is the transpose through the induced adjunction on complexes of the actual cochain transition.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-coef-semilinear-derived-calculus",
+    "lem-pur-system-ordinary-tensor-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Zheng Construction 4.1 horizontal system restrictions, with Stacks Tags 03EK, 03CZ and 06YY for module tensors and scalar adjunctions."
+   }
+  },
+  {
+   "text": "Precompose the claimed chain equality with every (p,q) tensor summand in degree p+q. The model summand equations, naturality of the reduction, and the ordinary tensor-reduction formula identify the composites. The inclusions into the total direct sums jointly detect equality, so the cochain maps agree.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-coef-semilinear-derived-calculus",
+    "lem-pur-system-ordinary-tensor-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Zheng Construction 4.1 horizontal system restrictions, with Stacks Tags 03EK, 03CZ and 06YY for module tensors and scalar adjunctions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus",
+  "lem-pur-system-ordinary-tensor-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Zheng Construction 4.1 horizontal system restrictions, with Stacks Tags 03EK, 03CZ and 06YY for module tensors and scalar adjunctions."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemNormalizedTensorClosure",
+  "date": "2026-10-21",
+  "group": "H3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Cochain scalar-adjoint tensor formula for strict systems; part of the actual tensor transition calculation.",
+   "via": [
+    "lem-pur-system-level-projection-formula-coherence",
+    "lem-pur-system-normalized-tensor-closure",
+    "lem-pur-system-tensor-reduction-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "total tensor complex map determined by inclusions of degree summands",
+   "results": "8 hits: HomologicalComplex₂.total.hom_ext, HomologicalComplex₂.total.hom_ext_iff, HomologicalComplex₂.ι_totalDesc, HomologicalComplex₂.ιTotalOrZero_map, HomologicalComplex.ιTensorObj, HomologicalComplex₂.ιTotal, HomologicalComplex.tensorHom, HomologicalComplex₂.ιTotalOrZero; ",
+   "date": "2026-10-21",
+   "verdict": "General algebra or total-complex tools only. The actual sequence-site identity is proved here using the existing library APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.total.hom_ext",
+   "results": "1 hits: HomologicalComplex₂.total.hom_ext; ",
+   "date": "2026-10-21",
+   "verdict": "General algebra or total-complex tools only. The actual sequence-site identity is proved here using the existing library APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "cochain.*reduction|reduction.*cochain",
+   "results": "0 hits: ; ",
+   "date": "2026-10-21",
+   "verdict": "General algebra or total-complex tools only. The actual sequence-site identity is proved here using the existing library APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "total tensor complex map determined by inclusions of degree summands",
+   "results": "8 hits: HomologicalComplex.ιTensorObj, HomologicalComplex.ιTensorObj.congr_simp, CochainComplex.ιMapBifunctor, PiTensorProduct.mapIncl, HomologicalComplex₂.ιTotal, HomologicalComplex₂.totalFunctor, HomologicalComplex.ιMapBifunctorOrZero, TensorAlgebra.GradedAlgebra.ι",
+   "date": "2026-10-21",
+   "verdict": "General module scalar-extension, restriction or total-complex tools only; no theorem gives the actual coefficient-sequence-site compatibility. The proof uses the existing library APIs."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemCochainTensorReduction",
+  "file": "lean/Sheaf/Paper/SystemCochainTensorReduction.lean",
+  "declaration": "WeilConjectures.SemilinearSections.cochain_tensor_reduction",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.cochain_tensor_reduction",
+   "WeilConjectures.SemilinearSections.cochainReduction",
+   "WeilConjectures.SemilinearSections.cochainReduction_eq_transpose"
+  ],
+  "statement": "theorem cochain_tensor_reduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)\n    (P Q : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :\n    (A.scalarTensorModel h).chain\n        (((evaluation.{c, v, max c v r} J B τ m).mapHomologicalComplex (.up ℤ)).obj P)\n        (((evaluation.{c, v, max c v r} J B τ m).mapHomologicalComplex (.up ℤ)).obj Q) ≫\n      ((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).map\n        ((A.tensorEvaluationModel m).chain P Q) ≫\n      cochainReduction.{c, v, r} J B τ A h\n        ((totalTensor.{c, v, r} (coefficientSequenceTopology J)\n          (systemRing.{c, v, max c v r} J B τ)).obj (P, Q)) =\n    (totalTensor.{c, v, r} J (B n)).map\n        (Prod.mkHom (cochainReduction.{c, v, r} J B τ A h P)\n          (cochainReduction.{c, v, r} J B τ A h Q)) ≫\n      (A.tensorEvaluationModel n).chain P Q",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T221213-L-4156862",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T221213-L-4156862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

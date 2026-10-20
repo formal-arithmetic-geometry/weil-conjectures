@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-system-evaluation-flat",
+ "kind": "statement",
+ "title": "Evaluation preserves flatness of strict systems",
+ "statement": "Use the actual coefficient sequence site and evaluation functor of [def-coef-semilinear-system-models]. A flat module sheaf on the coefficient sequence site evaluates to a flat module sheaf over B_n on the original site, for every level n. Flatness means exactness of the site tensor functor; no flatness of the transition ring maps is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Tag 08FC, applied to the vertical inclusions of Zheng Construction 4.1."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "Identify evaluated coefficients and additive sections at U with the original system coefficients and sections at (n,U). These identifications preserve scalar multiplication and vertical restriction. Transfer an arbitrary finite relation to (n,U).",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Tag 08FC, applied to the vertical inclusions of Zheng Construction 4.1."
+   }
+  },
+  {
+   "text": "Apply the local finite-relation criterion for flatness to obtain a covering sieve and finite factorization witnesses. Pull the sieve back along the vertical inclusion at n. The definition of the coefficient sequence topology says it covers U. Restrict the witnesses to vertical arrows and transport them back by the coefficient and additive identifications. Preservation of finite sums and products proves both witness equations, including empty finite families. The converse relation criterion proves flatness of evaluation.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-weil-pbc-flat-local-relations-universes",
+    "lem-weil-pbc-site-flat-equational-criterion-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Tag 08FC, applied to the vertical inclusions of Zheng Construction 4.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-weil-pbc-flat-local-relations-universes",
+  "lem-weil-pbc-site-flat-equational-criterion-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Tag 08FC, applied to the vertical inclusions of Zheng Construction 4.1."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemNormalizedTensorClosure",
+  "date": "2026-10-21",
+  "group": "H3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Evaluation preserves flatness of strict systems; part of the actual tensor transition calculation.",
+   "via": [
+    "lem-pur-system-level-projection-formula-coherence",
+    "lem-pur-system-normalized-tensor-closure",
+    "lem-pur-system-tensor-reduction-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction to a level of a sequence site preserves flat sheaves of modules",
+   "results": "8 hits: AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.flat_appLE, CategoryTheory.compatiblePreservingOfFlat, AlgebraicGeometry.Scheme.Hom.flat_appLE, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, AlgebraicGeometry.Flat.flat_of_affine_subset, SheafOfModules.isFinitePresentation; ",
+   "date": "2026-10-21",
+   "verdict": "General algebra or total-complex tools only. The actual sequence-site identity is proved here using the existing library APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFlatOnSite",
+   "results": "0 hits: ; loogle: unknown identifier 'SheafOfModules.IsFlatOnSite'",
+   "date": "2026-10-21",
+   "verdict": "Query rejected: no absence conclusion; the Module.Flat query is the successful replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat",
+   "results": "12 hits: Module.Flat, Module.Flat.self, Module.Flat.of_free, Module.Flat.of_projective, Module.Flat.of_ulift, Module.Flat.ulift, Module.Flat.of_shrink, Module.Flat.shrink; ",
+   "date": "2026-10-21",
+   "verdict": "General algebra or total-complex tools only. The actual sequence-site identity is proved here using the existing library APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*flat|flat.*evaluation",
+   "results": "0 hits: ; ",
+   "date": "2026-10-21",
+   "verdict": "General algebra or total-complex tools only. The actual sequence-site identity is proved here using the existing library APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction to a level of a sequence site preserves flat sheaves of modules",
+   "results": "8 hits: AlgebraicGeometry.Flat.instMorphismRestrict, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.of_shrink, Module.Flat.shrink, AlgebraicGeometry.Flat.instResLE, SheafOfModules.restrictScalars, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "date": "2026-10-21",
+   "verdict": "General module scalar-extension, restriction or total-complex tools only; no theorem gives the actual coefficient-sequence-site compatibility. The proof uses the existing library APIs."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemEvaluationFlat",
+  "file": "lean/Sheaf/Paper/SystemEvaluationFlat.lean",
+  "declaration": "WeilConjectures.SemilinearSections.evaluation_preserves_flat",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.evaluation_preserves_flat"
+  ],
+  "statement": "theorem evaluation_preserves_flat (n : ℕ) (M : Systems.{c, v, max c v r} J B τ)\n    (hM : SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}\n      (J := coefficientSequenceTopology J) (R := systemRing J B τ) M) :\n    SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}\n      (J := J) (R := B n) ((evaluation.{c, v, max c v r} J B τ n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T221213-L-4156862",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T221213-L-4156862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
