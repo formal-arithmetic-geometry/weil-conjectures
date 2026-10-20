@@ -125,14 +125,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sds2334 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) C1/C4: steps 1 and 3 treated sections of the sheaf coproduct as finitely supported families (false for infinite I; second reading repaired only step 2) -> proof rewritten along Stacks 009E (3),(5): coproduct in Mod(O_X) = sheafification of sectionwise direct sum [lem-weil-pbc-presheaf-modules-colimits-sectionwise, lem-weil-pbc-module-sheaves-colimits-forgetful (2) as generic tool use C7, def-weil-presheaf-modules-sheafification], theta_x iso and O_x-linear [lem-weil-pbc-stalk-sheafification-space], germ-level direct-sum/stalk interchange for the presheaf (elementary), identification with the canonical map; (2) class (b)/(d): new unsplit node lem-pc-stalk-direct-sum-local-support is a consequence of those existing nodes -> dropped; (3) Mathlib grep Stalks.lean/ModuleCat/Stalk.lean: no leaf.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Topology.StalkDirectSums",
+  "module": "WeilConjectures.Topology.StalkDirectSums",
   "declaration": "SheafOfModules.exists_stalk_directSum_linearEquiv",
-  "file": "lean/Sheaf/Topology/StalkDirectSums.lean",
-  "statement": "theorem exists_stalk_directSum_linearEquiv {X : TopCat.{u}} (R : X.Sheaf RingCat.{u}) (I : Type u) (_hcomm : ∀ (U : Opens X) (r s : R.obj.obj (op U)), r * s = s * r) (F : I → SheafOfModules.{u} R) (x : X) : ∃ e : (stalk (C := AddCommGrpCat.{u}) (X := X) (∐ F).val.presheaf x) ≃ₗ[stalk (C := RingCat.{u}) (X := X) R.obj x] (⨁ i : I, (stalk (C := AddCommGrpCat.{u}) (X := X) (F i).val.presheaf x)), ∀ (i : I) (U : Opens X) (hx : x ∈ U) (s : (F i).val.obj (op U)), e (germ (∐ F).val.presheaf U x hx ((Sigma.ι F i).val.app (op U) s)) = DirectSum.lof (stalk (C := RingCat.{u}) (X := X) R.obj x) I (fun j : I => ↑(stalk (C := AddCommGrpCat.{u}) (X := X) (F j).val.presheaf x)) i (germ (F i).val.presheaf U x hx s)",
+  "file": "lean/WeilConjectures/Topology/StalkDirectSums.lean",
+  "statement": "theorem exists_stalk_directSum_linearEquiv {X : TopCat.{u}} (R : X.Sheaf RingCat.{u}) (I : Type u) (F : I → SheafOfModules.{u} R) (x : X) : ∃ e : (stalk (C := AddCommGrpCat.{u}) (X := X) (∐ F).val.presheaf x) ≃ₗ[stalk (C := RingCat.{u}) (X := X) R.obj x] (⨁ i : I, (stalk (C := AddCommGrpCat.{u}) (X := X) (F i).val.presheaf x)), ∀ (i : I) (U : Opens X) (hx : x ∈ U) (s : (F i).val.obj (op U)), e (germ (∐ F).val.presheaf U x hx ((Sigma.ι F i).val.app (op U) s)) = DirectSum.lof (stalk (C := RingCat.{u}) (X := X) R.obj x) I (fun j : I => ↑(stalk (C := AddCommGrpCat.{u}) (X := X) (F j).val.presheaf x)) i (germ (F i).val.presheaf U x hx s)",
   "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "U4",
+  "date": "2026-10-20",
+  "existing": true,
+  "note": "Retired the Sheaf duplicate in favor of the adopted source theorem of the same name. The source theorem omits the unused commutativity hypothesis and proves the unchanged conclusion for every sheaf of rings. Thus it specializes to the node statement, with exactly the same germ compatibility. No source signature or proof changes. The categorical proof and its dependencies are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -155,13 +156,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "C-4a43d",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261012T225301-L-1801975",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T144306-L-2262661",
+  "kind": "interface",
+  "note": "independent cc review: retired copy Sheaf.Topology.StalkDirectSums vs twin WeilConjectures.Topology.StalkDirectSums (same theorem minus unused _hcomm); node lean record vs twin signature; ConormalGradedAlgebra one-line import swap vs clone; importers HomExt/FlatBaseChange compiled"
  }
 }
