@@ -1,0 +1,151 @@
+{
+ "id": "lem-a1-universe-enlarged-etale-realization",
+ "kind": "statement",
+ "title": "Large-valued etale sheaf realization over the canonically enlarged base",
+ "statement": "Let X be a scheme in universe u [def-pc-scheme], and G a Type (u+1)-valued sheaf on its small etale site [def-weil-pbc-etale-site]. There is an etale algebraic space E over the canonical enlarged X [def-trf-scheme-universe-enlargement, lem-a1-etale-sheaf-algebraic-space-realization]. Its functor of points, restricted to canonically enlarged original pro-etale tests, is naturally isomorphic to the comparison inverse image of G [def-weil-pbc-site-comparison-morphism]. For every original pro-etale U and set S in Type (u+1), any constant trivialization of this inverse image restricted to U [def-a1-proetale-set-restriction, def-weil-pbc-constant-sheaf] induces an isomorphism on all enlarged schemes over U↑ between the base-changed E and the coproduct of S copies of U↑. No local Noetherian, nonempty, or finite-sheet hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "lemma-sheaf-gives-space (Tag 0GF6), statement, proof and size footnote; Bhatt-Scholze Lemmas 5.1.1, 5.1.2 and 5.4.1; Stacks Tags 03P5 and 03YW."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-trf-scheme-universe-enlargement",
+  "lem-a1-etale-sheaf-algebraic-space-realization",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-a1-proetale-set-restriction",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use all original etale objects equipped with a section of G as generators, enlarge their affine charts, and take their scheme coproduct in universe u+1. The open equality relation between universal sections is an etale equivalence relation. Its quotient is the desired etale algebraic space. This is the proof of Stacks 0GF6 with its size condition made explicit, not an application of the too-small Type u realization signature.",
+   "uses": [
+    "lem-a1-etale-sheaf-algebraic-space-realization",
+    "def-trf-scheme-universe-enlargement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Comparison takes representable generators to pro-etale Hom sheaves and preserves the atlas coequalizer; this identifies its inverse image with the restricted functor of points, naturally in all tests. Base change gives the same construction over U.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Comparison preserves arbitrary constant sheaves as coproducts of the final sheaf. Its full faithfulness lifts a constant trivialization to etale sheaves. Constant-sheaf representability and full faithfulness of the atlas construction give the actual base-change isomorphism on all enlarged scheme tests. Empty and infinite sheet sets use the same coproduct construction.",
+   "uses": [
+    "det-pe-classical-sheaves-unit",
+    "lem-galois-constant-sheaf-sets-representable",
+    "lem-a1-etale-sheaf-algebraic-space-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-scheme-universe-enlargement",
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-sheaves-unit",
+  "lem-a1-etale-sheaf-algebraic-space-realization",
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "lemma-sheaf-gives-space (Tag 0GF6), statement, proof and size footnote; Bhatt-Scholze Lemmas 5.1.1, 5.1.2 and 5.4.1; Stacks Tags 03P5 and 03YW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary sheaf of sets on the small etale site is represented by an etale algebraic space after universe enlargement",
+   "results": "{'n_hits': 8, 'top': ['AlgebraicGeometry.Scheme.smallEtaleTopology', 'CategoryTheory.hasSheafifyEssentiallySmallSite', 'CategoryTheory.Sheaf.isSheaf_of_isRepresentable', 'Algebra.Etale.formallyEtale', 'AlgebraicGeometry.SheafedSpace.IsSheaf', 'AlgebraicGeometry.Scheme.etaleTopology', 'TopCat.Sheaf.forget', 'AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv'], 'note': ''}",
+   "date": "2026-10-19",
+   "verdict": "No matching universe-transport theorem; Cover.ulift lifts indices only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary sheaf of sets on the small etale site is represented by an etale algebraic space after universe enlargement",
+   "results": "{'n_hits': 8, 'top': ['AlgebraicGeometry.Scheme.Etale', 'AlgebraicGeometry.SheafedSpace', 'AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful', 'AlgebraicGeometry.Scheme.instCategoryEtale', 'AlgebraicGeometry.Scheme.instFullEtaleOverForget', 'AlgebraicGeometry.Scheme.smallEtaleTopology', 'AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget', 'AlgebraicGeometry.Scheme.etaleTopology'], 'note': ''}",
+   "date": "2026-10-19",
+   "verdict": "No matching universe-transport theorem; Cover.ulift lifts indices only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realizing an arbitrary large-valued etale sheaf as an algebraic space after enlarging the universe of the base scheme",
+   "results": "{'n_hits': 8, 'top': ['AlgebraicGeometry.Scheme.Etale', 'AlgebraicGeometry.Scheme.instFullEtaleOverForget', 'AlgebraicGeometry.Scheme.Etale.forget', 'AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful', 'AlgebraicGeometry.Scheme.instCategoryEtale', 'AlgebraicGeometry.IsEtale', 'AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme', 'AlgebraicGeometry.Scheme.smallEtaleTopology'], 'note': ''}",
+   "date": "2026-10-19",
+   "verdict": "No matching universe-transport theorem; Cover.ulift lifts indices only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, Equivalence",
+   "results": "{'n_hits': 0, 'top': [], 'note': ''}",
+   "date": "2026-10-19",
+   "verdict": "No matching universe-transport theorem; Cover.ulift lifts indices only."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeUniverseLift|universe.*[Rr]ealization|[Rr]ealization.*universe",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "No existing universe-enlarged realization API in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleLocalSystemRepresentability",
+  "date": "2026-10-19",
+  "group": "F6"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-proetale-local-system-representability",
+   "place": "Size-explicit implementation of the realization and fpqc-cover steps."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniverseEnlargedEtaleRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniverseEnlargedEtaleRealization.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etaleSheaf_universeEnlarged_realization",
+  "statement": "theorem etaleSheaf_universeEnlarged_realization (X : Scheme.{u})\n    (G : Sheaf X.smallEtaleTopology (Type (u + 1))) :\n    ∃ E : EtaleSpaces (schemeUniverseLift.{u, u + 1} X),\n      Nonempty\n        (((Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X)\n          (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X)).obj G).obj ≅\n          (Scheme.ProEt.forget X ⋙ Over.post schemeUniverseLiftFunctor).op ⋙\n            E.obj.obj.obj) ∧\n      ∀ (U : X.ProEt) (S : Type (u + 1)),\n        Nonempty\n          (((Scheme.proEtaleSetRestriction X U).obj\n            ((Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X)\n              (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X)).obj G)) ≅\n            (constantSheaf (Scheme.ProEt.topology U.left) (Type (u + 1))).obj S) →\n        Nonempty\n          (yoneda.obj (Over.mk (Sigma.desc\n              (fun _ : S ↦ 𝟙 (schemeUniverseLift.{u, u + 1} U.left)))) ≅\n            (Over.map (schemeUniverseLiftMap.{u, u + 1} U.hom)).op ⋙ E.obj.obj.obj)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.schemeUniverseLiftFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.etaleSheaf_universeEnlarged_realization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261020T051244-L-1611405",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261020T051244-L-1611405",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
