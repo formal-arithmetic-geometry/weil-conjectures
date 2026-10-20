@@ -13,13 +13,10 @@ public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Irreducible
 import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.BaseChange
 import WeilConjectures.RingTheory.DimensionAtPointLocalRingTrdeg
-import WeilConjectures.RingTheory.DimensionAtPointComponents
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
+import WeilConjectures.RingTheory.MinimalComponentDimensionMaximumCore
+import WeilConjectures.RingTheory.KrullDimension.FiniteType
+import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Dimension lower bound for components of a finite-type fibre
@@ -27,9 +24,9 @@ import WeilConjectures.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
 Source: Stacks Project, `varieties.tex`, Tag 0B2L, lemma-dimension-fibres-locally-algebraic,
 (2)(a) (blueprint: lem-zl-finite-type-fibre-component-lower-bound).
 
-The statement is the affine formulation for a rational closed fibre.  Its proof follows the
-transcendence-degree computation for the generic fibre and upper semicontinuity of fibre
-dimension described in Tag 0B2L.
+The statement is the affine formulation for a rational closed fibre. The proof combines the
+Noetherian height inequality (Stacks, Tag 00OM) with the finite-type dimension formula
+(Stacks, Tag 00P1).
 -/
 
 @[expose] public section
@@ -45,36 +42,23 @@ component of a rational closed fibre has dimension at least the dimension of the
 minus the dimension of the image algebra (Stacks, Tag 0B2L (2)(a)).
 
 Proof:
-1. Set `P = ker φ`, `A = B/P`, `H = C/J`, and `L = Frac(C)`. Since `C` is a
-   domain, `P` is prime and `A` embeds in `C`. Put `K = Frac(A)`, embedded in `L`.
-   Finite generators descend to `A` and `H`, and generators of `C` over `k` also generate
-   it over `A` (def-weil-pbc-finite-type-algebra).
-2. By lem-weil-pbc-finite-type-domain-dimension-trdeg and
-   lem-kun-transcendence-degree-tower, the two ring dimensions are finite natural numbers
-   and their difference `d` is `trdeg_K L`, hence nonnegative.
-3. Identify the residue field at `P` with `K`. By
-   lem-weil-pbc-generic-fibre-localization-domain-irreducible, the generic fibre
-   `K ⊗[A] C` is the localization of `C` at the nonzero elements of `A`, is a nonzero
-   domain, and is finite type over `K`. Tensor symmetry identifies it with the `B`-fibre.
-4. This localization has fraction field `L`; its local ring and residue field at the zero
-   prime are `L`. The field has dimension zero. By
-   lem-weil-pbc-dimension-at-point-local-ring-trdeg, the local dimension of the generic
-   fibre at its generic point is `trdeg_K L = d`.
-5. If `H` is zero there are no components. Otherwise the bijective structure map
-   `k → B/m` identifies the residue field at `m` with `k`. The maps `c ⊗ a ↦ a*c̄`
-   and `c̄ ↦ c ⊗ 1` identify the rational closed fibre with `H`; the latter map kills
-   every generator of `J` (def-weil-pbc-localization-at-prime).
-6. By lem-weil-pbc-spec-irreducible-components-minimal-primes write `W = V(q̄)` for
-   a minimal prime of `H`. Its inverse image `q` in `C` contracts to `m`. Minimality
-   makes `W` the only component through `q̄`, so
-   lem-weil-pbc-dimension-at-point-components identifies the local dimension there with
-   `dim W`. The fibre homeomorphism preserves local dimensions by matching open
-   neighbourhoods and lem-weil-pbc-homeomorphism-krull-dimension.
-7. By lem-weil-pbc-fibre-dimension-bounded-open-upstairs, an open neighbourhood of `q`
-   bounds every local fibre dimension by `dim W`. By
-   lem-weil-pbc-spec-irreducible-closed-subsets-primes, the zero prime is dense in the
-   spectrum of the domain `C`, so lies in this neighbourhood. The generic-fibre
-   calculation gives `dim C - dim A = d ≤ dim W`.
+1. Set `P = ker φ`, `A = B/P`, and `J = map φ m`. The kernel is prime because `C`
+   is a domain. The finite-type domain dimension theorem gives natural dimensions `dC`
+   and `dA` for `C` and `A`.
+2. Write the component as `W = V(qbar)` for a minimal prime of `C/J`, and let `q` be
+   its inverse image in `C`. Maximality of `m` gives `comap φ q = m`. If `p` is the
+   contraction of `q` to `A`, quotient-map identities give `pC = J`.
+3. Both `A` and `C` are Noetherian. The height inequality for a prime lying over `p`
+   (Stacks, Tag 00OM) gives `height q ≤ height p + height qbar`. Minimality of `qbar`
+   makes its height zero, so `height q ≤ height p ≤ dA`.
+4. The local-dimension theorem at `q` supplies natural numbers `d` and `r` with
+   `height q = d` and `trdeg_k κ(q) = r`. The minimal-component dimension bound,
+   applied to the zero prime of the domain `C`, gives `dC ≤ d + r`.
+5. The finite-type domain dimension theorem identifies `dim(C/q)` with `r`, since
+   its fraction field is `κ(q)`. The third isomorphism theorem and the spectrum-closure
+   dimension theorem identify `dim W` with `dim(C/q)`.
+6. Now `d ≤ dA` and `dC ≤ d + r` imply `dC - dA ≤ r = dim W`.
+The rationality hypothesis is retained in the signature; this argument does not need it.
 (blueprint: lem-zl-finite-type-fibre-component-lower-bound)
 -/
 theorem finiteType_fibre_component_lower_bound
@@ -90,6 +74,92 @@ theorem finiteType_fibre_component_lower_bound
       ∀ W : Set (PrimeSpectrum (C ⧸ Ideal.map φ.toRingHom m)),
         W ∈ irreducibleComponents (PrimeSpectrum (C ⧸ Ideal.map φ.toRingHom m)) →
           ((dC - dA : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim W := by
-  sorry
+  classical
+  cases hmk
+  -- Use the height inequality at a minimal prime of the closed fibre.
+  -- This route does not require the rationality hypothesis.
+  let P := RingHom.ker φ.toRingHom
+  let A := B ⧸ P
+  let π : B →+* A := Ideal.Quotient.mk P
+  let ψ : A →ₐ[k] C := Ideal.kerLiftAlg φ
+  let : Algebra A C := ψ.toRingHom.toAlgebra
+  have : P.IsPrime := RingHom.ker_isPrime φ.toRingHom
+  have : IsDomain A := Ideal.Quotient.isDomain P
+  obtain ⟨dC, hdC, _, _⟩ := finiteType_domain_ringKrullDim_eq_trdeg (k := k) (S := C)
+  obtain ⟨dA, hdA, _, _⟩ := finiteType_domain_ringKrullDim_eq_trdeg (k := k) (S := A)
+  refine ⟨dC, dA, hdC, hdA, ?_⟩
+  intro W hW
+  let J := Ideal.map φ.toRingHom m
+  rw [← PrimeSpectrum.zeroLocus_minimalPrimes] at hW
+  obtain ⟨qbar, hqbar, rfl⟩ := hW
+  have : qbar.IsPrime := hqbar.isPrime
+  let q := qbar.comap (Ideal.Quotient.mk J)
+  have : q.IsPrime := Ideal.comap_isPrime _ qbar
+  have hJq : J ≤ q := by
+    intro x hx
+    change Ideal.Quotient.mk J x ∈ qbar
+    rw [Ideal.Quotient.eq_zero_iff_mem.mpr hx]
+    exact qbar.zero_mem
+  have hmq : m ≤ q.comap φ.toRingHom := Ideal.map_le_iff_le_comap.mp hJq
+  have hqm : q.comap φ.toRingHom = m :=
+    (hm.eq_of_le (Ideal.comap_ne_top φ.toRingHom (inferInstance : q.IsPrime).ne_top) hmq).symm
+  let p := q.comap ψ.toRingHom
+  have : p.IsPrime := Ideal.comap_isPrime _ q
+  have hpπ : p.comap π = m := by
+    change q.comap (ψ.toRingHom.comp π) = m
+    have hf : ψ.toRingHom.comp π = φ.toRingHom := by ext x; rfl
+    rw [hf]
+    exact hqm
+  have hp : p = m.map π := by
+    rw [← hpπ, Ideal.map_comap_of_surjective π Ideal.Quotient.mk_surjective]
+  have hmap : p.map (algebraMap A C) = J := by
+    change p.map ψ.toRingHom = J
+    rw [hp, Ideal.map_map]
+    rfl
+  have : IsNoetherianRing A := Algebra.FiniteType.isNoetherianRing k A
+  have : IsNoetherianRing C := Algebra.FiniteType.isNoetherianRing k C
+  have : q.LiesOver p := ⟨rfl⟩
+  have hheight := Ideal.height_le_height_add_of_liesOver p q
+  have hqmap : q.map (Ideal.Quotient.mk J) = qbar :=
+    Ideal.map_comap_of_surjective _ Ideal.Quotient.mk_surjective qbar
+  rw [hmap, hqmap, Ideal.height_eq_zero_iff.mpr hqbar, add_zero] at hheight
+  have hheightA := p.height_le_ringKrullDim_of_isPrime
+  rw [hdA] at hheightA
+  obtain ⟨d, r, hd, hr, _⟩ :=
+    AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_add_trdeg (k := k) q
+  have hdheight : q.height = (d : ℕ∞) := by
+    rw [IsLocalization.AtPrime.ringKrullDim_eq_height q] at hd
+    exact WithBot.coe_injective hd
+  have hdle : d ≤ dA := by
+    have h := hheight.trans (WithBot.coe_le_coe.mp hheightA)
+    rw [hdheight] at h
+    exact_mod_cast h
+  have hsource := AlgebraicGeometry.minimal_component_dimension_maximum_bound
+    (k := k) q d r hd hr (⊥ : Ideal C) inferInstance bot_le
+    (fun t _ ht ↦ le_bot_iff.mp ht)
+  have hsource' : dC ≤ d + r := by
+    rw [ringKrullDim_eq_of_ringEquiv (RingEquiv.quotientBot C), hdC] at hsource
+    exact_mod_cast hsource
+  obtain ⟨n, hn, ht, _⟩ :=
+    finiteType_domain_ringKrullDim_eq_trdeg (k := k) (S := C ⧸ q)
+  have he : Algebra.trdeg k (FractionRing (C ⧸ q)) = Algebra.trdeg k q.ResidueField :=
+    ((FractionRing.algEquiv (A := C ⧸ q) q.ResidueField).restrictScalars k).trdeg_eq
+  have hnr : n = r := by exact_mod_cast ht.symm.trans (he.trans hr)
+  have hdimq : ringKrullDim (C ⧸ q) = (r : WithBot ℕ∞) := by
+    simpa [hnr] using hn
+  have hdimW : topologicalKrullDim (PrimeSpectrum.zeroLocus (qbar : Set (C ⧸ J))) =
+      (r : WithBot ℕ∞) := by
+    rw [← PrimeSpectrum.closure_singleton
+      (⟨qbar, inferInstance⟩ : PrimeSpectrum (C ⧸ J)),
+      PrimeSpectrum.topologicalKrullDim_closure_singleton]
+    change ringKrullDim ((C ⧸ J) ⧸ qbar) = (r : WithBot ℕ∞)
+    have hdouble := DoubleQuot.quotQuotEquivQuotOfLE hJq
+    rw [← hqmap]
+    rw [ringKrullDim_eq_of_ringEquiv hdouble]
+    exact hdimq
+  change ((dC - dA : ℕ) : WithBot ℕ∞) ≤
+    topologicalKrullDim (PrimeSpectrum.zeroLocus (qbar : Set (C ⧸ J)))
+  rw [hdimW]
+  exact_mod_cast (show dC - dA ≤ r by omega)
 
 end Algebra
