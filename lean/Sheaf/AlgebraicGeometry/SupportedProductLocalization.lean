@@ -14,50 +14,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import Mathlib.AlgebraicGeometry.Fiber
-import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.Topology.InverseImageModule
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Topology.Sheaves.Functors
-import WeilConjectures.AlgebraicGeometry.Picard.Defs
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import WeilConjectures.Algebra.Homology.HomComplex
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
-import Sheaf.Paper.EtaleKFlatCriteria
-import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
-import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.AlgebraicGeometry.SupportRestrictionTriangle
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.AlgebraicGeometry.GlobalSectionsStalkComparison
-import WeilConjectures.SixFunctors.OpenClosed.Exact
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.NormalizedSupportTriangle
-import Sheaf.AlgebraicGeometry.SupportedExteriorProduct
-import Sheaf.Paper.ExternalRHomConePairing
-import Sheaf.SixFunctors.OpenClosedFlatness
 
 /-!
 # Supported exterior products and localization triangles
@@ -390,6 +346,112 @@ noncomputable def supportedExternalProductMap (A : Type (u + 1)) [CommRing A]
     ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map e) ≫
     (supportedExternalProductIso (ModuleCat.{u + 1} A) f g K' L').inv
 
+private theorem evaluation_natural
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : C ⥤ D) (R : D ⥤ C) (G G' : D ⥤ E) (H : C ⥤ E)
+    (σ : H ≅ F ⋙ G) (ε : R ⋙ F ⟶ 𝟭 D) (τ : G' ≅ G)
+    {K K' : D} (a : K ⟶ K') :
+    H.map (R.map a) ≫
+        (σ.hom.app (R.obj K') ≫ G.map (ε.app K') ≫ τ.inv.app K') =
+      (σ.hom.app (R.obj K) ≫ G.map (ε.app K) ≫ τ.inv.app K) ≫ G'.map a := by
+  exact (Functor.whiskerLeft R σ.hom ≫ Functor.whiskerRight ε G ≫ τ.inv).naturality a
+
+private def bifunctorMap {D : Type*} [Category D] (T : D ⥤ D ⥤ D)
+    {U U' V V' : D} (a : U ⟶ U') (b : V ⟶ V') :
+    (T.obj U).obj V ⟶ (T.obj U').obj V' :=
+  (T.map a).app V ≫ (T.obj U').map b
+
+private theorem bifunctorMap_comp {D : Type*} [Category D] (T : D ⥤ D ⥤ D)
+    {U U' U'' V V' V'' : D} (a : U ⟶ U') (b : V ⟶ V')
+    (a' : U' ⟶ U'') (b' : V' ⟶ V'') :
+    bifunctorMap T a b ≫ bifunctorMap T a' b' = bifunctorMap T (a ≫ a') (b ≫ b') := by
+  simp only [bifunctorMap, Category.assoc, Functor.map_comp, NatTrans.comp_app]
+  rw [(T.map a').naturality_assoc b]
+
+private theorem adjunct_bifunctor_pairing_natural
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
+    {F : C ⥤ D} {R : D ⥤ C} (adj : F ⊣ R) (T : D ⥤ D ⥤ D)
+    {M M' N N' : C} {U U' V V' P P' Q Q' : D}
+    (a : M ⟶ M') (b : N ⟶ N') (x : U ⟶ U') (y : V ⟶ V')
+    (t : F.obj (M ⊗ N) ⟶ (T.obj U).obj V)
+    (t' : F.obj (M' ⊗ N') ⟶ (T.obj U').obj V')
+    (v : U ⟶ P) (v' : U' ⟶ P') (w : V ⟶ Q) (w' : V' ⟶ Q')
+    (p : P ⟶ P') (q : Q ⟶ Q')
+    (ht : F.map (a ⊗ₘ b) ≫ t' = t ≫ bifunctorMap T x y)
+    (hv : x ≫ v' = v ≫ p) (hw : y ≫ w' = w ≫ q) :
+    (a ⊗ₘ b) ≫ adj.homEquiv _ _ (t' ≫ bifunctorMap T v' w') =
+      adj.homEquiv _ _ (t ≫ bifunctorMap T v w) ≫ R.map (bifunctorMap T p q) := by
+  apply adj.homEquiv_naturality_left_square
+  rw [← Category.assoc, ht, Category.assoc, bifunctorMap_comp, hv, hw,
+    ← bifunctorMap_comp, ← Category.assoc]
+
+private theorem schemeComparison_natural
+    (E : Type (u + 2)) [Category.{u + 1} E] [Abelian E]
+    [IsGrothendieckAbelian.{u + 1} E] [HasDerivedCategory.{u + 1} E]
+    [MonoidalCategory E] [MonoidalPreadditive E] [SymmetricCategory E] [MonoidalClosed E]
+    [Abelian.HasFunctorialFlatResolution E] (T : Scheme.{u})
+    (G F₁ F₂ : E ⥤ Sheaf T.smallEtaleTopology E)
+    [G.Additive] [F₁.Additive] [F₂.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂] [G.IsLeftAdjoint]
+    (τ : (Functor.postcompose₂.obj G).obj (curriedTensor E) ⟶
+      (((Functor.whiskeringLeft₂ _).obj F₁).obj F₂).obj
+        (supportedSheafTensorGeneric E T))
+    (t : supportedSchemeDerivedHom E T G F₁ F₂)
+    (ht : supportedSchemeDerivedCondition E T G F₁ F₂ τ t)
+    {M M' N N' : DerivedCategory E} (a : M ⟶ M') (b : N ⟶ N') :
+    G.mapDerivedCategory.map (a ⊗ₘ b) ≫ supportedSchemeDerivedApply E T G F₁ F₂ t M' N' =
+      supportedSchemeDerivedApply E T G F₁ F₂ t M N ≫
+        bifunctorMap (derivedTensor E T) (F₁.mapDerivedCategory.map a)
+          (F₂.mapDerivedCategory.map b) := by
+  exact ht.1 M M' N N' a b
+
+private theorem firstEvaluation_natural (A : Type (u + 1)) [CommRing A]
+    {S X Y B : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X)
+    [IsClosedImmersion b] {K K' : DerivedCategoryModule A X} (a : K ⟶ K') :
+    (supportedFirstCoefficients A f g b).mapDerivedCategory.map
+        ((supportedSectionsDerived A b).map a) ≫ supportedFirstEvaluation A f g b K' =
+      supportedFirstEvaluation A f g b K ≫
+        (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map a := by
+  exact evaluation_natural (supportedCoefficients A b).mapDerivedCategory
+    (supportedSectionsDerived A b)
+    (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).mapDerivedCategory
+    (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor
+    (supportedFirstCoefficients A f g b).mapDerivedCategory
+    (Functor.mapDerivedCategoryCompIso (supportedCoefficients A b)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)))
+    (supportedCoefficientDerivedAdjunction A b).counit
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) (pullback.fst f g)) a
+
+private theorem secondEvaluation_natural (A : Type (u + 1)) [CommRing A]
+    {S X Y D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (d : D ⟶ Y)
+    [IsClosedImmersion d] {L L' : DerivedCategoryModule A Y} (e : L ⟶ L') :
+    (supportedSecondCoefficients A f g d).mapDerivedCategory.map
+        ((supportedSectionsDerived A d).map e) ≫ supportedSecondEvaluation A f g d L' =
+      supportedSecondEvaluation A f g d L ≫
+        (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map e := by
+  exact evaluation_natural (supportedCoefficients A d).mapDerivedCategory
+    (supportedSectionsDerived A d)
+    (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).mapDerivedCategory
+    (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor
+    (supportedSecondCoefficients A f g d).mapDerivedCategory
+    (Functor.mapDerivedCategoryCompIso (supportedCoefficients A d)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)))
+    (supportedCoefficientDerivedAdjunction A d).counit
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) (pullback.snd f g)) e
+
+private theorem externalProductMap_eq (A : Type (u + 1)) [CommRing A]
+    {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
+    {K K' : DerivedCategoryModule A X} {L L' : DerivedCategoryModule A Y}
+    (a : K ⟶ K') (e : L ⟶ L') :
+    supportedExternalProductMap A f g a e =
+      supportedDerivedTensorMap A (pullback f g)
+        ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map a)
+        ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map e) := by
+  change 𝟙 _ ≫ _ ≫ 𝟙 _ = _
+  rw [Category.id_comp, Category.comp_id]
+
 /-- Naturality of every specified exterior-product component under coefficient morphisms.
 Source: Tag 0F1E (blueprint: lem-pur-supported-product-localization).
 Proof: evaluation and the coefficient tensor map are natural in both variables. Apply
@@ -405,7 +467,21 @@ theorem supportedProductLocalization_naturality (A : Type (u + 1)) [CommRing A]
       supportedExteriorProduct A f g b d K L ≫
         (supportedSectionsDerived A (supportedProductImmersion f g b d)).map
           (supportedExternalProductMap A f g a e) := by
-  sorry
+  rw [externalProductMap_eq]
+  have ht := schemeComparison_natural (ModuleCat.{u + 1} A) (pullback f g)
+    (supportedCoefficients A (supportedProductImmersion f g b d))
+    (supportedFirstCoefficients A f g b) (supportedSecondCoefficients A f g d)
+    (supportedCoefficientTensorNatTrans A f g b d)
+    (exists_unique_supportedCoefficientTensorDerived A f g b d).choose
+    (exists_unique_supportedCoefficientTensorDerived A f g b d).choose_spec.1
+    ((supportedSectionsDerived A b).map a) ((supportedSectionsDerived A d).map e)
+  have h := adjunct_bifunctor_pairing_natural
+    (supportedCoefficientDerivedAdjunction A (supportedProductImmersion f g b d))
+    (derivedTensor (ModuleCat.{u + 1} A) (pullback f g))
+    ((supportedSectionsDerived A b).map a) ((supportedSectionsDerived A d).map e)
+    _ _ _ _ _ _ _ _ _ _ ht
+    (firstEvaluation_natural A f g b a) (secondEvaluation_natural A f g d e)
+  exact h
 
 /-- Naturality under open restriction of the first ambient scheme, for every
 support, hence for all three components of each localization diagram.
