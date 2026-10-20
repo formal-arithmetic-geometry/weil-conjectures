@@ -34,7 +34,7 @@
    }
   },
   {
-   "text": "For $n\\ge a$ let $A_n$ be the group of finitely supported functions from the underlying set of $C^n$ to $\\mathbf Z$, with pointwise addition, and let $e_n:A_n\\to C^n$ send $\\lambda$ to $\\sum_{c\\in C^n}\\lambda(c)c$. For $n<a$ set $A_n=0$ and $e_n=0$. Each $e_n$ is surjective: for $n\\ge a$ the function supported at $c$ with value $1$ maps to $c$, and below $a$ the target is zero. Each $A_n$ is torsion free since an equation $m\\lambda=0$ with nonzero integer $m$ gives $m\\lambda(c)=0$ in $\\mathbf Z$ at every coordinate, hence $\\lambda=0$.",
+   "text": "For every integer $n$, let $A_n$ be the free integer module on the nonzero elements of $C^n$, implemented by finitely supported integer functions on that subtype. Let $e_n:A_n\\to C^n$ be evaluation. Zero lifts to zero and every nonzero $c$ lifts to the singleton generator with coefficient $1$, so $e_n$ is surjective. If $C^n=0$, the generator subtype is empty, so $A_n=0$. Each $A_n$ is free and hence flat and torsion free. This uniformly implements the degreewise free construction without a conditional definition at the lower bound.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -43,7 +43,7 @@
    }
   },
   {
-   "text": "Define $F^n=A_n\\oplus A_{n-1}$, $d_F^n(x,y)=(0,x)$, and $q^n(x,y)=e_n(x)+d_C^{n-1}e_{n-1}(y)$. Then $d_F^{n+1}d_F^n=0$ and $q^{n+1}d_F^n(x,y)=d_C^n e_n(x)=d_C^nq^n(x,y)$, so $q:F^\\bullet\\to C^\\bullet$ is a chain map. It is surjective in every degree because $e_n$ is, and $F^n=0$ for $n<a$. Each $F^n$ is torsion free, coordinatewise in its two summands.",
+   "text": "Define $F^n=A_n\\oplus A_{n-1}$, with $d_F^n(x,y)=(0,x)$ and $q^n(x,y)=e_n(x)+d_C^{n-1}e_{n-1}(y)$. The Lean definitions coverD, cover and coverπ construct these data; coverD_sq and coverπF_comm prove the differential-square and chain-map equations, including transport across $(n+1)-1=n$. The equation for $q$ follows from $d_C^2=0$. Each $q^n$ is surjective by lifting into its first summand. If $n<a$, both free summands are zero, hence $F^n=0$. Each $F^n$ is free, hence flat and torsion free.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "Let $G^n=\\ker q^n\\subseteq F^n$. The chain-map identity makes $d_F$ restrict to a differential $d_G$ on $G$, and the inclusions $i^n:G^n\\to F^n$ form a chain map. Use the cone formula in [def-weil-abstract-derived-category] to define $P^n=F^n\\oplus G^{n+1}$ and $d_P^n(f,g)=(d_F^n f+i^{n+1}g,-d_G^{n+1}g)$. Explicitly, $d_P^{n+1}d_P^n(f,g)=(d_F^{n+1}d_F^n f+d_F^{n+1}i^{n+1}g-i^{n+2}d_G^{n+1}g,d_G^{n+2}d_G^{n+1}g)=(0,0)$ because $d_F i=i d_G$. The maps $p^n:P^n\\to C^n$, $p^n(f,g)=q^n(f)$, form a chain map since $qi=0$. If $n<a-1$, both $F^n$ and $G^{n+1}$ are zero, so $P^n=0$.",
+   "text": "Take the categorical kernel $G=\\ker(q)$ and its inclusion $i:G\\to F$. The surjectivity in every degree makes $q$ an epimorphism of complexes, so $G\\xrightarrow{i}F\\xrightarrow{q}C$ is short exact, using ShortComplex.exact_kernel. Set $P=\\operatorname{Cone}(i)$ using Mathlib CochainComplex.mappingCone. Its term in degree $n$ is canonically isomorphic to $G^{n+1}\\oplus F^n$. For $n<a-1$, $F^n$ and $F^{n+1}$ are zero; the monomorphism $G^{n+1}\\to F^{n+1}$ then implies $G^{n+1}=0$. Thus $P^n=0$.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
@@ -63,16 +63,7 @@
    }
   },
   {
-   "text": "The map $p$ is surjective on every cohomology group. Indeed, let $c\\in C^n$ be a cycle and lift it to $f\\in F^n$ using the surjectivity of $q^n$. Then $q^{n+1}(d_F f)=d_Cc=0$, so $d_F f\\in G^{n+1}$. The element $(f,-d_F f)\\in P^n$ is a cycle: its first differential component is $d_F f-d_F f=0$ and its second is $d_F^2 f=0$. Its image under $p$ is $c$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0E (lemma-pull-out-constant), first model-construction paragraph; explicit elementary construction written here"
-   }
-  },
-  {
-   "text": "The map $p$ is injective on every cohomology group. Suppose $(f,g)\\in P^n$ is a cycle and $p(f,g)=d_C c_0$ for some $c_0\\in C^{n-1}$. Lift $c_0$ to $t\\in F^{n-1}$ using $q^{n-1}(t)=c_0$ and subtract the boundary $d_P(t,0)$ from $(f,g)$. Writing $f_1=f-d_F^{n-1}t$, we have $q^n f_1=p(f,g)-d_C^{n-1}q^{n-1}t=d_C^{n-1}c_0-d_C^{n-1}c_0=0$, so the resulting cycle $(f_1,g)$ has $f_1\\in G^n$. Its cycle equation is $d_G f_1+g=0$. Hence $(f_1,g)=(i f_1,-d_G f_1)=d_P^{n-1}(0,f_1)$ is a boundary, where $(0,f_1)\\in F^{n-1}\\oplus G^n=P^{n-1}$. Thus the original cycle is a boundary too. Together with the preceding step and the definition of quasi-isomorphism in [def-weil-abstract-derived-category], this proves that $p$ is a quasi-isomorphism.",
+   "text": "The canonical cone map $p:P\\to C$ is CochainComplex.mappingCone.descShortComplex applied to the kernel short complex. Mathlib CochainComplex.mappingCone.quasiIso_descShortComplex proves that it is a quasi-isomorphism because that short complex is short exact. This is the existing categorical implementation of the cycle-lifting and boundary-lifting argument in the original steps 5 and 6; no new intermediate theorem is assumed.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
@@ -83,7 +74,7 @@
    }
   },
   {
-   "text": "Every $G^n$ is torsion free: if $mg=0$ with $m\\ne0$, its image in the torsion-free group $F^n$ is zero, so $g=0$. Therefore every $P^n=F^n\\oplus G^{n+1}$ is torsion free as well. Apply [lem-weil-pbc-pid-torsion-free-module-flat] to the principal ideal domain $\\mathbf Z$ (the zero ideal is generated by $0$; a nonzero ideal is generated by its least positive element, by division with remainder) and the $\\mathbf Z$-module $P^n$ for each $n$. It follows that each $P^n$ is flat, with no finite-generation hypothesis.",
+   "text": "Each $G^n$ embeds into the torsion-free $F^n$, so it is torsion free by Function.Injective.moduleIsTorsionFree. Products of two torsion-free modules are torsion free by applying injectivity of scalar multiplication to their two coordinates. Transfer this property to $P^n$ through the cone-term isomorphism $P^n\\cong G^{n+1}\\oplus F^n$ and ModuleCat.biprodIsoProd. Apply [lem-weil-pbc-pid-torsion-free-module-flat], implemented by Module.Flat.flat_iff_torsion_eq_bot_of_isBezout and Submodule.isTorsionFree_iff_torsion_eq_bot, to the integers. Thus every $P^n$ is flat. The requested statement already uses Module.Flat, so no additional tensor-exactness proof is necessary.",
    "uses": [
     "lem-weil-pbc-pid-torsion-free-module-flat"
    ],
@@ -94,18 +85,7 @@
    }
   },
   {
-   "text": "To verify the exact meaning of flatness requested here, fix $n$ and a short exact sequence $0\\to U\\to V\\to W\\to0$ of abelian groups. Apply [lem-weil-pbc-flat-tensor-exact] with $R=\\mathbf Z$ and $M=P^n$ to each of the exact triples $0\\to U\\to V$, $U\\to V\\to W$ and $V\\to W\\to0$. Since $0\\otimes_{\\mathbf Z}P^n=0$ (every elementary tensor with zero is zero), these give injectivity at the left, exactness at the middle and surjectivity at the right of the tensored sequence. Thus $-\\otimes_{\\mathbf Z}P^n$ preserves short exact sequences.",
-   "uses": [
-    "lem-weil-pbc-flat-tensor-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HD (lemma-flat): flatness is equivalent to exactness of the tensor functor"
-   }
-  },
-  {
-   "text": "By [def-weil-abstract-derived-category], localization sends the quasi-isomorphism $p:P^\\bullet\\to C^\\bullet$ to an isomorphism $Q(p):Q(P^\\bullet)\\to Q(C^\\bullet)$. Composing this map with the step-1 isomorphism $Q(C^\\bullet)\\cong K$ gives the required isomorphism $Q(P^\\bullet)\\cong K$. The lower bound $b=a-1$ from step 4 and the flatness and short-exact-sequence preservation from steps 7 and 8 give every clause of the statement.",
+   "text": "Localization [def-weil-abstract-derived-category] inverts the quasi-isomorphism $p:P\\to C$. Compose the resulting isomorphism $Q(P)\\cong Q(C)$ with the inverse of the step-1 isomorphism $K\\cong Q(C)$. The complex $P$, lower bound $b=a-1$, degreewise flatness, and this derived isomorphism prove all clauses without any remaining sorry.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
@@ -120,13 +100,14 @@
   "def-weil-pbc-bounded-derived-subcategories",
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-pid-torsion-free-module-flat",
-  "lem-weil-pbc-flat-tensor-exact"
+  "lem-weil-pbc-pid-torsion-free-module-flat"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "Z8",
+  "date": "2026-10-20",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0F0E (lemma-pull-out-constant), model-construction paragraph: explicit two-row free-kernel cone construction written by the worker; second reader checked the official raw TeX online because the local source checkout is absent"
+  "place": "Tag 0F0E, first model-construction paragraph; the existing explicit free-kernel-cone plan, with nonzero free generators and Mathlib mappingCone.quasiIso_descShortComplex implementing its cohomology calculation. Fully proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -267,5 +248,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261020T132059-L-1411427",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
