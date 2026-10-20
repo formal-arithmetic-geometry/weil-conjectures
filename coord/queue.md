@@ -2,13 +2,13 @@
 
 223 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (70 clusters, 2492 modules)
+## Rework: quarantined by the upstream sync (70 clusters, 2496 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
-| `Sheaf.Algebra.Homology.FilteredTensorGradedComparison` | 2208 | Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy, Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses, Sheaf.Algebra | error: failed in the global build (no message located) |
+| `Sheaf.Algebra.Homology.FilteredTensorGradedComparison` | 2212 | Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy, Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses, Sheaf.Algebra | error: failed in the global build (no message located) |
 | `Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComparison` | 69 | Sheaf.AlgebraicGeometry.ScalarCohomologyPullbackComposition, Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibili | error: failed in the global build (no message located) |
 | `Sheaf.Algebra.Homology.FilteredHomComplexInvariance` | 20 | Sheaf.Algebra.Homology.FiniteFilteredLocalization, Sheaf.CategoryTheory.FiniteFilteredDerivedPresentation | error: failed in the global build (no message located) |
 | `Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso` | 20 | Sheaf.AlgebraicGeometry.QCohTensorResolutionChartTensorComponents, Sheaf.AlgebraicGeometry.QCohTensorResolutionCompariso | error: failed in the global build (no message located) |
@@ -79,7 +79,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 1 |  | error: failed in the global build (no message located) |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence` | 1 |  | error: failed in the global build (no message located) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 32, stage 3 156 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 32, stage 3 155 items.
 
 ## Stage 1: nodes to split (1)
 
