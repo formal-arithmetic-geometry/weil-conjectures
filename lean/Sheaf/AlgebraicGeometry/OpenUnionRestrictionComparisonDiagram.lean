@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.AlgebraicGeometry.OpenUnionRestrictionComparisonData
-import Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonCoherence
+import WeilConjectures.AlgebraicGeometry.OpenUnionRestrictionComparisonCoherence
 
 /-! # Canonical comparison diagram on inverse image opens of an open union
 
