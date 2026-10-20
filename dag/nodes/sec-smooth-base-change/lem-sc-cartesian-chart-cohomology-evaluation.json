@@ -84,15 +84,16 @@
  "unit": "sk-thm-vanishing",
  "lean": {
   "existing": true,
-  "module": "Sheaf.AlgebraicGeometry.CartesianChartExchangeEvaluation",
+  "module": "WeilConjectures.AlgebraicGeometry.CartesianChartExchangeEvaluation",
   "declaration": "AlgebraicGeometry.Etale.chartCohomologyIso_eval",
   "declarations": [
    "AlgebraicGeometry.Etale.chartCohomologyIso_eval"
   ],
   "statement": "theorem chartCohomologyIso_eval {S X B T : Scheme.{u}}\n    (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S) (w : g' = a ≫ g)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ)\n    (V : B.Etale) (U : T.Etale) (r : U.left ⟶ V.left)\n    (hr : IsPullback r U.hom V.hom a)\n    (z : (abelianHigherDirectImageRawPresheaf\n      (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g) n\n      (((pullback.snd a (pullback.snd f g))^*[AddCommGrpCat.{u + 1}]).obj\n        (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F))).obj (op V)) :\n    (cartesianChartCohomologyIso f g a g' w F n V U r hr).hom\n      (rawRestrictedCohomologyComparison _ n _ V z) =\n    (DerivedCategory.Plus.singleFunctor _ 0).map\n        (abelianFreeRepresentablePullbackSquareIso a V U r hr).hom ≫\n      (cartesianChartRawAdjunctionIso f g a g' w F n V).hom z",
-  "branch": "sheaf-dag",
-  "by": "T3",
-  "date": "2026-10-15"
+  "branch": "slopmaster2",
+  "by": "upstream",
+  "date": "2026-10-21",
+  "note": "The Sheaf duplicate is retired; use the complete upstream twin."
  },
  "lean_audit": {
   "master": {
@@ -117,13 +118,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-cb23a",
-  "group": "T3",
+  "reviewer": "COMPILER",
+  "group": "E5",
   "result": "pass",
-  "landing": "20261015T081231-L-3876910",
+  "landing": "20261020T233122-L-896269",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged exchange theorem and all new constructions with their DAG statements and proof routes; all three modules compile cleanly, and all eight declarations use only propext, Classical.choice, and Quot.sound."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
