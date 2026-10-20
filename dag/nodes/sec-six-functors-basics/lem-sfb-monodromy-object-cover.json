@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-monodromy-object-cover",
+ "kind": "statement",
+ "title": "Etale object models stable under pointed open refinement",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, any scheme $S$, and a finite family $L_a$ of lisse rational modules [def-sfb-monodromy-realization-data]. There is an etale covering family $Y_i\\to S$ such that for every open immersion $g:T\\to Y_i$, every pointed connected qcqs topologically Noetherian datum $p$ on $T$, and every normalized realization $R$ for $p$, there are representations $V_a$ and isomorphisms $R(V_a)\\cong(g\\circ Y_i\\to S)^{-1}L_a$. Restriction is the slice-site presheaf restriction with identity continuous-function coefficient comparison. The assertion concerns only objects, with no arrows; ranks may be zero and the finite family may be empty.",
+ "stmt_deps": [
+  "def-sfb-monodromy-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.3, Proposition 6.8.4(1),(4),(6), pp. 59–60, and the integral-monodromy reduction in the proof of Corollary 6.8.5, p. 60. The exact-realization formulation makes the comparison used in that proof explicit; it does not assert closure of all pro-étale lisse sheaves."
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-monodromy-single-object-cover] separately to every object. Form the family of all etale objects equipped with a map to one member of each chosen cover. For every test object the sieve this family generates contains the intersection of the finitely many covering sieves; the finite intersection is covering by induction. This proves the common family covers, including the empty index set, where the intersection is the top sieve. On a pointed open chart compose with each common refinement map, apply its single-object model, and use the equation in the etale over-category to identify its composite restriction with the chart restriction. Choose the representations pointwise. This argument asserts no lifting of arrows and uses no connected-cover construction.",
+   "uses": [
+    "lem-sfb-monodromy-single-object-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3, Proposition 6.8.4(1),(4),(6), pp. 59–60, and the integral-monodromy reduction in the proof of Corollary 6.8.5, p. 60. The exact-realization formulation makes the comparison used in that proof explicit; it does not assert closure of all pro-étale lisse sheaves."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-monodromy-single-object-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lean proof: finite intersections of covering sieves give a common covering refinement, and the slice-arrow equation transports each single-object monodromy model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous finite dimensional l-adic representation has an exact fully faithful realization as a lisse pro etale sheaf",
+   "results": [
+    "lightProfiniteToLightCondSetFullyFaithful",
+    "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+    "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+    "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+    "LightCondSet.LocallyConstant.functorFullyFaithful",
+    "LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful",
+   "results": [],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": "loogle: unknown identifier 'Functor.FullyFaithful'"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|IntegralLisse|SfMonodromyRealization",
+   "results": [
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Algebra/Torsor/Defs.lean"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous l-adic representations and normalized exact monodromy realization of lisse pro-etale sheaves",
+   "results": [
+    "cyclotomicCharacter.continuous",
+    "CondensedSet.LocallyConstant.iso",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "Condensed.lanSheafProfinite",
+    "CompHausLike.LocallyConstant.functorIso",
+    "LightCondSet.LocallyConstant.iso",
+    "LightCondensed",
+    "CompHausLike.LocallyConstant.functorToPresheavesIso"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLocalMonodromyRealization",
+  "date": "2026-10-19",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-heart-closure",
+   "place": "Proof paragraph (2): the integral-lattice and profinite-monodromy comparison underlying Bhatt–Scholze Corollary 6.8.5, before taking representation cokernels; finite coefficient case.; Etale object models stable under pointed open refinement",
+   "via": [
+    "lem-sfb-etale-local-monodromy-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.MonodromyObjectCover",
+  "file": "lean/Sheaf/Paper/MonodromyObjectCover.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_sf_monodromy_object_cover",
+  "statement": "theorem exists_sf_monodromy_object_cover (l : ℕ) [Fact l.Prime]\n    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (S : Scheme.{u})\n    (A : Type (u + 1)) [Finite A] (L : A → SfRationalModules l E S)\n    (hL : ∀ a : A, (L a).IsFiniteLocallyFree) :\n    ∃ (I : Type (u + 1)) (Y : I → S.Etale), S.smallEtaleTopology.CoversTop Y ∧\n      ∀ (i : I) (T : Scheme.{u}) (g : T ⟶ (Y i).left) [IsOpenImmersion g]\n        (p : SfMonodromyPoint T) (R : SfMonodromyRealization l E p),\n        ∃ V : A → SfContinuousRepresentations l E p,\n          ∀ a : A, Nonempty ((R.functor.obj (V a)).val ≅\n            (PresheafOfModules.pushforward\n              (ProEtale.lisseEtaleCoefficientIdentificationSized l E (g ≫ (Y i).hom))).obj\n                (L a).val)",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

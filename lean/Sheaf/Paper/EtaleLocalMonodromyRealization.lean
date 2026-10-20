@@ -7,23 +7,9 @@ module
 
 public import Sheaf.Paper.EtaleMonodromyRealizationData
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuitySections
-import Sheaf.RepresentationTheory.ProfiniteStableLattice
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
-import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal
-import Sheaf.AlgebraicGeometry.FiniteTypeNoetherianSpectrum
-import Sheaf.AlgebraicGeometry.LisseLatticeCoefficientsSized
-import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheaves
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.Paper.GaloisLisseRepresentations
-import Sheaf.SixFunctors.IntegralLisseReductionEquivalence
-import WeilConjectures.Mathlib.Topology.NoetherianSpace
+import Sheaf.Paper.EtaleLocalMonodromyRealizationBase
+import Sheaf.Paper.EtaleLocalMonodromyRealizationLocal
 
 /-!
 # Etale-local monodromy and exact rational realization
@@ -219,6 +205,8 @@ theorem etale_local_monodromy_realization (l : ℕ) [Fact l.Prime]
                     (PresheafOfModules.pushforward
                       (ProEtale.lisseEtaleCoefficientIdentificationSized l E (Y i).hom)).map
                         (f b).val := by
-  sorry
+  obtain ⟨R⟩ := exists_sf_monodromy_realization l E
+  exact ⟨R, etale_local_monodromy_realization_local l E R⟩
+
 
 end AlgebraicGeometry.Scheme

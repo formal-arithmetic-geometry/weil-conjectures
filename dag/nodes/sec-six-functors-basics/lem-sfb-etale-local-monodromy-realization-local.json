@@ -1,0 +1,219 @@
+{
+ "id": "lem-sfb-etale-local-monodromy-realization-local",
+ "kind": "statement",
+ "title": "Connected chart refinement and diagram arrows",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, and any family $R(T,p)$ of normalized exact realizations [def-sfb-monodromy-realization-data]. For every topologically Noetherian scheme $S$, any finite family $L_a$ of lisse rational modules, and finite family of arrows $f_b:L_{s(b)}\\to L_{t(b)}$, there is an etale covering by pointed connected qcqs topologically Noetherian schemes on which all objects and arrows are isomorphic to the images of one diagram of continuous representations under these fixed realizations. If $S$ is empty the covering index is empty.",
+ "stmt_deps": [
+  "def-sfb-monodromy-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.3, Proposition 6.8.4(1),(4),(6), pp. 59–60, and the integral-monodromy reduction in the proof of Corollary 6.8.5, p. 60. The exact-realization formulation makes the comparison used in that proof explicit; it does not assert closure of all pro-étale lisse sheaves."
+ },
+ "proof": [
+  {
+   "text": "Obtain the etale object cover from [lem-sfb-monodromy-object-cover], retaining its property on every pointed open refinement.",
+   "uses": [
+    "lem-sfb-monodromy-object-cover"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Affine charts with Noetherian underlying spaces. Every map in the preceding cover is etale and hence locally of finite presentation [def-weil-etale-morphism]. The pointwise definition [def-sbc-locally-finite-presentation] supplies a covering of its source by affine neighbourhoods $\\operatorname{Spec}B$ mapping into affine opens $\\operatorname{Spec}R$ of $S$, with $B$ finitely presented over $R$. Such $B$ is finitely generated over $R$, so [lem-sfb-finite-type-noetherian-spectrum] makes $\\operatorname{Spec}B$ topologically Noetherian. Indeed the affine open of $S$ is Noetherian: an ascending chain of its opens is an ascending chain of opens of $S$. Refining by these affine opens is still a covering in [def-weil-pbc-etale-site], and all the lattices restrict along it.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-finite-type-noetherian-spectrum",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), connected refinement in Corollary 6.8.5; Stacks Topology Tag 0052 (lemma-Noetherian); finite type spectrum input explicitly separated"
+   }
+  },
+  {
+   "text": "Connected refinement. Apply [lem-sfb-noetherian-connected-components-open] to each affine chart $X=\\operatorname{Spec}B$ just obtained. Its finitely many nonempty connected components are open, and their complementary finite unions are open, so each component is also closed. Regard each component $C$ as an open subscheme and restrict the lattices to it; the components cover $X$, hence give a further etale covering of $S$ [def-pc-scheme, def-weil-pbc-etale-site]. Each $C$ is topologically Noetherian: an ascending chain of opens of the open subspace $C$ is an ascending chain of opens of $X$, and therefore stabilizes.",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open",
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 04MF and 04ME, connected open components; Tag 0052, Noetherian subspaces."
+   }
+  },
+  {
+   "text": "Quasi-compactness and quasi-separatedness of these components. By [lem-sfb-noetherian-space-compact-subsets], every subset of the Noetherian affine chart $X$ is quasi-compact with its subspace topology. In particular the component $C$ itself is quasi-compact. For the diagonal $\\Delta_C:C\\to C\\times_{\\operatorname{Spec}\\mathbf Z}C$, the inverse image of any quasi-compact open is a subset of $X$, hence quasi-compact by the same statement. Thus the diagonal is quasi-compact, which is precisely quasi-separatedness [def-weil-quasi-separated-morphism]. No separation or ring-theoretic Noetherianity hypothesis is needed.",
+   "uses": [
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 04ZA (lemma-Noetherian-quasi-compact); definition of quasi-separatedness applied to the diagonal."
+   }
+  },
+  {
+   "text": "Geometric points and empty base. The connected pieces are nonempty. Choose a point in each and an algebraic closure of its residue field [def-weil-algebraic-closure]; by [def-weil-geometric-point] this gives a geometric point of that piece. If $S$ is empty, take the empty covering and no geometric points. Together the preceding refinements give the connected qcqs topologically Noetherian pointed charts required for the final diagram construction.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), connected refinement in Corollary 6.8.5; Stacks Topology Tag 0052 (lemma-Noetherian); finite type spectrum input explicitly separated"
+   }
+  },
+  {
+   "text": "For each point of each cover member choose an affine neighbourhood over an affine open of S, then its open connected component. Noetherianity gives compactness and quasi-separatedness. Choose an algebraic closure of the residue field and use Mathlib FiniteEtale.exists_isFundamentalGroup for the geometric fibre functor to obtain SfMonodromyPoint. Index all these neighbourhoods by pairs (old index, point). Their composite maps give an etale cover, since they lift each point of the original cover. An empty S forces this new index empty. Apply the object-cover property to these open immersions, and use the over-category equality to identify the composite slice restriction with the refined etale map.",
+   "uses": [
+    "def-sfb-monodromy-realization-data",
+    "def-galois-fibre-functor",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose each realization with the fully faithful forgetful functor to module presheaves. For each arrow take the full preimage of e_source.hom composed with the restricted arrow and e_target.inv. Applying the functor gives this conjugate; compose with e_target.hom and cancel the inverse. These equalities are exactly the required diagram equations. Choose these arrows simultaneously and assemble the cover, points, objects, arrows and isomorphisms.",
+   "uses": [
+    "def-sfb-monodromy-realization-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-galois-fibre-functor",
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-monodromy-realization-data",
+  "def-weil-algebraic-closure",
+  "def-weil-etale-morphism",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-site",
+  "def-weil-quasi-separated-morphism",
+  "lem-sfb-finite-type-noetherian-spectrum",
+  "lem-sfb-monodromy-object-cover",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sfb-noetherian-space-compact-subsets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lean reduction of lem-sfb-etale-local-monodromy-realization; Connected chart refinement and diagram arrows"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous finite dimensional l-adic representation has an exact fully faithful realization as a lisse pro etale sheaf",
+   "results": [
+    "lightProfiniteToLightCondSetFullyFaithful",
+    "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+    "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+    "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+    "LightCondSet.LocallyConstant.functorFullyFaithful",
+    "LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful",
+   "results": [],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": "loogle: unknown identifier 'Functor.FullyFaithful'"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|IntegralLisse|SfMonodromyRealization",
+   "results": [
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Algebra/Torsor/Defs.lean"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous l-adic representations and normalized exact monodromy realization of lisse pro-etale sheaves",
+   "results": [
+    "cyclotomicCharacter.continuous",
+    "CondensedSet.LocallyConstant.iso",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "Condensed.lanSheafProfinite",
+    "CompHausLike.LocallyConstant.functorIso",
+    "LightCondSet.LocallyConstant.iso",
+    "LightCondensed",
+    "CompHausLike.LocallyConstant.functorToPresheavesIso"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLocalMonodromyRealization",
+  "date": "2026-10-19",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-heart-closure",
+   "place": "Proof paragraph (2): the integral-lattice and profinite-monodromy comparison underlying Bhatt–Scholze Corollary 6.8.5, before taking representation cokernels; finite coefficient case.; Connected chart refinement and diagram arrows",
+   "via": [
+    "lem-sfb-etale-local-monodromy-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleLocalMonodromyRealizationLocal",
+  "file": "lean/Sheaf/Paper/EtaleLocalMonodromyRealizationLocal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_local_monodromy_realization_local",
+  "statement": "theorem etale_local_monodromy_realization_local (l : ℕ) [Fact l.Prime]\n    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E]\n    (R : ∀ (T : Scheme.{u}) (p : SfMonodromyPoint T), SfMonodromyRealization l E p) :\n    ∀ (S : Scheme.{u}) [TopologicalSpace.NoetherianSpace S]\n        (A B : Type (u + 1)) [Finite A] [Finite B] (s t : B → A)\n        (L : A → SfRationalModules l E S) (f : ∀ b : B, L (s b) ⟶ L (t b)),\n        (∀ a : A, (L a).IsFiniteLocallyFree) →\n          ∃ (I : Type (u + 1)) (Y : I → S.Etale),\n            S.smallEtaleTopology.CoversTop Y ∧ (IsEmpty S → IsEmpty I) ∧\n            ∃ (p : ∀ i : I, SfMonodromyPoint (Y i).left)\n              (V : ∀ i : I, A → SfContinuousRepresentations l E (p i))\n              (h : ∀ (i : I) (b : B), V i (s b) ⟶ V i (t b))\n              (e : ∀ (i : I) (a : A),\n                ((R (Y i).left (p i)).functor.obj (V i a)).val ≅\n                  (PresheafOfModules.pushforward\n                    (ProEtale.lisseEtaleCoefficientIdentificationSized l E (Y i).hom)).obj\n                      (L a).val),\n              ∀ (i : I) (b : B),\n                ((R (Y i).left (p i)).functor.map (h i b)).val ≫ (e i (t b)).hom =\n                  (e i (s b)).hom ≫\n                    (PresheafOfModules.pushforward\n                      (ProEtale.lisseEtaleCoefficientIdentificationSized l E (Y i).hom)).map\n                        (f b).val",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

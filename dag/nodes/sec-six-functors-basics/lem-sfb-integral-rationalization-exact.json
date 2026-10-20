@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-integral-rationalization-exact",
+ "kind": "statement",
+ "title": "Exact rationalization for continuous integral coefficient modules",
+ "statement": "For a prime l, a finite extension E of Q_l, and any scheme T, extension of scalars along the actual continuous integral-to-field coefficient inclusion preserves a short exact sequence of arbitrary module sheaves. The composite-zero equation is supplied to form the actual rational short complex. No finite local freeness, nonemptiness, connectedness or Noetherian hypothesis is required.",
+ "stmt_deps": [
+  "def-sfb-monodromy-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(2), localization of continuous coefficient sheaves; Stacks Project Tag 03CO, exact filtered colimits of module sheaves."
+ },
+ "proof": [
+  {
+   "text": "For a continuous E-valued function f on any space, partition into the clopen sets where its norm is at most one and greater than one. The function s equal to 1 on the first set and f inverse on the second is a continuous integral-valued function, nowhere zero, and f s is integral-valued. Thus the field-valued function ring is a localization of the integral-valued function ring at elements whose images are units; the inclusion is injective. Localization is flat. Transport this calculation through the coefficient ULift ring isomorphisms. Sectionwise extension of scalars therefore preserves finite limits. Sheafification preserves finite limits as well. The tensor and sheafification Hom equivalences give a left adjoint to scalar restriction, so this same functor preserves finite colimits. It consequently preserves short exact sequences, and its map is definitionally the specified changeOfRingsHom. Zero modules and empty section spaces satisfy the same argument.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(2), localization of continuous coefficient sheaves; Stacks Project Tag 03CO, exact filtered colimits of module sheaves."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(2); direct section-ring localization proof written by U9, using Mathlib flat localization and sheafification adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension for sheaves of modules preserves short exact sequences if the ring maps on sections are flat",
+   "results": [
+    "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+    "Module.Flat.lTensor_shortComplex_exact",
+    "SheafOfModules.instAbelian"
+   ],
+   "date": "2026-10-19",
+   "verdict": "no exact match",
+   "note": "Use the sectionwise flat extension lemma and prove the sheafification adjunction and coefficient flatness explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat",
+   "results": [
+    "RingHom.Flat.of_isField",
+    "RingHom.Flat.stableUnderComposition",
+    "RingHom.Flat"
+   ],
+   "date": "2026-10-19",
+   "verdict": "no exact match",
+   "note": "The source ring is a ring of continuous integral functions, not a field."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteLimits_extendScalars_of_flat|Flat.of_bijective|IsLocalization.flat",
+   "results": [
+    "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+    "IsLocalization.flat"
+   ],
+   "date": "2026-10-19",
+   "verdict": "no exact match",
+   "note": "These supply the algebraic steps of the direct proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars for sheaves of modules along a sectionwise flat ring homomorphism preserves short exact sequences",
+   "results": [
+    "Module.Flat.lTensor_exact",
+    "Module.Flat.rTensor_shortComplex_exact",
+    "RingHom.Flat"
+   ],
+   "date": "2026-10-20",
+   "verdict": "no exact match",
+   "note": "Search returned generic module flatness or inverse-system limit declarations; none states the full sheaf theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLocalMonodromyRealization",
+  "date": "2026-10-19",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-etale-local-monodromy-realization",
+   "place": "Step 5: rationalization after integral inverse-limit exactness",
+   "via": [
+    "lem-sfb-normalized-monodromy-exact",
+    "lem-sfb-lattice-normalization-rational-exact",
+    "lem-sfb-monodromy-limit-rational-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralRationalizationExact",
+  "file": "lean/Sheaf/Paper/IntegralRationalizationExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sf_integral_rationalization_shortExact",
+  "statement": "theorem sf_integral_rationalization_shortExact (l : ℕ) [Fact l.Prime]\n    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (T : Scheme.{u})\n    (S : ShortComplex (SfIntegralModules l E T)) (hS : S.ShortExact)\n    (w : SheafOfModules.changeOfRingsHom\n        (ProEtale.lisseIntegerToFieldSized l E T) S.X₁ S.f ≫\n      SheafOfModules.changeOfRingsHom\n        (ProEtale.lisseIntegerToFieldSized l E T) S.X₂ S.g = 0) :\n    (ShortComplex.mk\n      (SheafOfModules.changeOfRingsHom\n        (ProEtale.lisseIntegerToFieldSized l E T) S.X₁ S.f)\n      (SheafOfModules.changeOfRingsHom\n        (ProEtale.lisseIntegerToFieldSized l E T) S.X₂ S.g) w).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

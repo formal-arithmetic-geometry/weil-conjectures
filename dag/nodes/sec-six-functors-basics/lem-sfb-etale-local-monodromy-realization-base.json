@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-etale-local-monodromy-realization-base",
+ "kind": "statement",
+ "title": "Simultaneous normalized exact realizations",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$. For every pointed connected qcqs topologically Noetherian scheme datum $(T,p)$ of [def-sfb-monodromy-realization-data], one can simultaneously choose a normalized, fully faithful, additive, $E$-linear, lisse-valued exact rational realization $R(T,p)$, with its normalizations natural on every lattice-preserving map.",
+ "stmt_deps": [
+  "def-sfb-monodromy-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.3, Proposition 6.8.4(1),(4),(6), pp. 59–60, and the integral-monodromy reduction in the proof of Corollary 6.8.5, p. 60. The exact-realization formulation makes the comparison used in that proof explicit; it does not assert closure of all pro-étale lisse sheaves."
+ },
+ "proof": [
+  {
+   "text": "For each T,p install connectedness from p and use [cor-galois-lisse-representations](1) to construct the finite correspondence c, without using its rational algebraically closed clause. For this c take J, full faithfulness, additivity, linearity, lisse values and functorial normalizations from [lem-sfb-normalized-monodromy-functor]. Apply [lem-sfb-normalized-monodromy-exact] to those same normalizations for the exactness field. Assemble SfMonodromyRealization and choose these simultaneously from the resulting Nonempty family.",
+   "uses": [
+    "lem-sfb-normalized-monodromy-functor",
+    "lem-sfb-normalized-monodromy-exact",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "cor-galois-lisse-representations",
+  "lem-sfb-normalized-monodromy-exact",
+  "lem-sfb-normalized-monodromy-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lean reduction of lem-sfb-etale-local-monodromy-realization; Simultaneous normalized exact realizations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous finite dimensional l-adic representation has an exact fully faithful realization as a lisse pro etale sheaf",
+   "results": [
+    "lightProfiniteToLightCondSetFullyFaithful",
+    "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+    "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+    "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+    "LightCondSet.LocallyConstant.functorFullyFaithful",
+    "LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful",
+   "results": [],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": "loogle: unknown identifier 'Functor.FullyFaithful'"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|IntegralLisse|SfMonodromyRealization",
+   "results": [
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Algebra/Torsor/Defs.lean"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous l-adic representations and normalized exact monodromy realization of lisse pro-etale sheaves",
+   "results": [
+    "cyclotomicCharacter.continuous",
+    "CondensedSet.LocallyConstant.iso",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "Condensed.lanSheafProfinite",
+    "CompHausLike.LocallyConstant.functorIso",
+    "LightCondSet.LocallyConstant.iso",
+    "LightCondensed",
+    "CompHausLike.LocallyConstant.functorToPresheavesIso"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLocalMonodromyRealization",
+  "date": "2026-10-19",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-heart-closure",
+   "place": "Proof paragraph (2): the integral-lattice and profinite-monodromy comparison underlying Bhatt–Scholze Corollary 6.8.5, before taking representation cokernels; finite coefficient case.; Simultaneous normalized exact realizations",
+   "via": [
+    "lem-sfb-etale-local-monodromy-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleLocalMonodromyRealizationBase",
+  "file": "lean/Sheaf/Paper/EtaleLocalMonodromyRealizationBase.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_sf_monodromy_realization",
+  "statement": "theorem exists_sf_monodromy_realization (l : ℕ) [Fact l.Prime]\n    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] :\n    Nonempty (∀ (T : Scheme.{u}) (p : SfMonodromyPoint T), SfMonodromyRealization l E p)",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

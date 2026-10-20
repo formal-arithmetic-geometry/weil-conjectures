@@ -1,0 +1,160 @@
+{
+ "id": "lem-sfb-normalized-monodromy-exact",
+ "kind": "statement",
+ "title": "Exactness of normalized additive monodromy",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a pointed connected qcqs topologically Noetherian scheme $(T,p)$, and a finite correspondence $c$ as in [def-sfb-monodromy-realization-data]. Let $J$ be any additive functor from the continuous finite-dimensional representations of $p.group$ to the rational sheaf modules. Suppose that every invariant lattice has a normalization $N(V,B)$ for $c,J$, and that every lattice-preserving map has a normalization map for these choices. Then every short exact sequence of underlying $E$-vector spaces in the representation category has short exact image under $J$ in the ambient rational sheaf-module category.",
+ "stmt_deps": [
+  "def-sfb-monodromy-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.3, Proposition 6.8.4(1),(4),(6), pp. 59–60, and the integral-monodromy reduction in the proof of Corollary 6.8.5, p. 60. The exact-realization formulation makes the comparison used in that proof explicit; it does not assert closure of all pro-étale lisse sheaves."
+ },
+ "proof": [
+  {
+   "text": "Choose a stable lattice in W using [lem-pod-profinite-stable-lattice]. Its preimage under the injection V to W is finite by the injective map into that finite middle lattice over the Noetherian PID valuation ring [lem-weil-l-adic-extension-integers-dvr, def-sc-discrete-valuation-ring, lem-weil-pbc-noetherian-finite-module-acc]. Its image in Z is finite. Both are torsion free, hence free [lem-sc-dvr-fg-torsionfree-free]. To prove spanning of the preimage, express a vector image using denominators in the fraction field, clear one nonzero denominator, and divide it back in the E-span. Spanning of the image follows by surjectivity. Stability follows from equivariance. Exactness and surjectivity of the restricted maps follow directly from preimage and image membership. These assertions are all proved in Lean in the private compatible-lattice helpers.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-noetherian-finite-module-acc",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Integral exactness implicit in proof of Corollary 6.8.5; ordinary module inputs: Stacks Tags 00IK and 0AUW"
+   }
+  },
+  {
+   "text": "The quotient lattice D is free, so lift a basis to split the exact integral sequence. In Lean, ShortComplex.Splitting.ofExactOfSection produces a retraction r and section s with fr+sg=id. Descend f,g,r,s through every uniformizer-power quotient using Submodule.mapQ. The descended equations prove injectivity, middle exactness, and surjectivity of the quotient maps, with their specified formulas. Apply the normalization maps and [lem-sfb-lattice-normalization-rational-exact] to precisely these quotient maps. Additivity and functoriality of J show J(f)J(g)=0. The rational normalization isomorphisms and naturality equations give an isomorphism of short complexes. Transport short exactness along that isomorphism.",
+   "uses": [
+    "lem-sfb-lattice-normalization-rational-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-pod-profinite-stable-lattice",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sfb-lattice-normalization-rational-exact",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-noetherian-finite-module-acc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lean compatible-lattice construction and transport along a proved short-complex isomorphism; inverse-limit and rationalization exactness proved in the imported intermediate modules"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous finite dimensional l-adic representation has an exact fully faithful realization as a lisse pro etale sheaf",
+   "results": [
+    "lightProfiniteToLightCondSetFullyFaithful",
+    "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+    "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+    "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+    "LightCondSet.LocallyConstant.functorFullyFaithful",
+    "LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful",
+   "results": [],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": "loogle: unknown identifier 'Functor.FullyFaithful'"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|IntegralLisse|SfMonodromyRealization",
+   "results": [
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Algebra/Torsor/Defs.lean"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous l-adic representations and normalized exact monodromy realization of lisse pro-etale sheaves",
+   "results": [
+    "cyclotomicCharacter.continuous",
+    "CondensedSet.LocallyConstant.iso",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "Condensed.lanSheafProfinite",
+    "CompHausLike.LocallyConstant.functorIso",
+    "LightCondSet.LocallyConstant.iso",
+    "LightCondensed",
+    "CompHausLike.LocallyConstant.functorToPresheavesIso"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLocalMonodromyRealization",
+  "date": "2026-10-19",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-heart-closure",
+   "place": "Proof paragraph (2): the integral-lattice and profinite-monodromy comparison underlying Bhatt–Scholze Corollary 6.8.5, before taking representation cokernels; finite coefficient case.; Exactness of normalized additive monodromy",
+   "via": [
+    "lem-sfb-etale-local-monodromy-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedMonodromyExact",
+  "file": "lean/Sheaf/Paper/NormalizedMonodromyExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sf_normalized_monodromy_exact",
+  "statement": "theorem sf_normalized_monodromy_exact (l : ℕ) [Fact l.Prime]\n    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) (p : SfMonodromyPoint T)\n    (c : GaloisLisseFiniteCorrespondence p.point p.group)\n    (J : SfContinuousRepresentations l E p ⥤ SfRationalModules l E T)\n    (hJ : J.Additive)\n    (N : ∀ (V : SfContinuousRepresentations l E p) (B : SfInvariantLattice l E V),\n      SfLatticeNormalization l E p c J V B)\n    (hN : ∀ (V W : SfContinuousRepresentations l E p) (f : V ⟶ W)\n      (B : SfInvariantLattice l E V) (C : SfInvariantLattice l E W)\n      (h : ∀ b : B.submodule, f.hom.hom b.val ∈ C.submodule),\n      Nonempty (SfNormalizationMap l E f B C h (N V B) (N W C)))\n    (V W Z : SfContinuousRepresentations l E p) (f : V ⟶ W) (g : W ⟶ Z) :\n    Function.Injective f.hom.hom → Function.Exact f.hom.hom g.hom.hom →\n      Function.Surjective g.hom.hom →\n        ∃ w : J.map f ≫ J.map g = 0,\n          (ShortComplex.mk (J.map f) (J.map g) w).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

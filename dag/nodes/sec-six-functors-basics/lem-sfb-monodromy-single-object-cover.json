@@ -1,0 +1,176 @@
+{
+ "id": "lem-sfb-monodromy-single-object-cover",
+ "kind": "statement",
+ "title": "Etale-local monodromy models for one lisse object",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ in the sized coefficient universe, any scheme $S$, and one lisse rational module $L$ as in [def-sfb-monodromy-realization-data]. There exists an etale covering family $Y_i\\to S$ such that for every etale arrow $g:T\\to Y_i$, every pointed connected qcqs topologically Noetherian datum $p$ on $T$, and every normalized realization $R$ for $p$, there exists a continuous finite-dimensional representation $V$ with $R(V)\\cong (g\\circ Y_i\\to S)^{-1}L$, in the slice-site presheaf presentation with identity continuous-function coefficient comparison. No simultaneous covering refinement for a finite family or any arrow lifting is asserted; rank zero is allowed.",
+ "stmt_deps": [
+  "def-sfb-monodromy-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.3, Proposition 6.8.4(1),(4),(6), pp. 59–60, and the integral-monodromy reduction in the proof of Corollary 6.8.5, p. 60. The exact-realization formulation makes the comparison used in that proof explicit; it does not assert closure of all pro-étale lisse sheaves."
+ },
+ "proof": [
+  {
+   "text": "For the single object L choose an etale-local integral lisse lattice by [lem-weil-pbc-lisse-lattice-etale-local]. Restriction along every etale arrow preserves finite local freeness and rationalization because the slice coefficients are the same continuous functions [def-weil-pbc-lisse-lattice-coefficients]. The sized coefficient universe uses the same construction on lifted values.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-lisse-lattice-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), connected refinement in Corollary 6.8.5; Stacks Topology Tag 0052 (lemma-Noetherian); finite type spectrum input explicitly separated"
+   }
+  },
+  {
+   "text": "Integral monodromy, before rationalization. Apply [lem-sfb-integral-lisse-reduction-equivalence] and [det-pe-finite-local-systems-twist] to identify integral lisse $A_T$-modules with compatible towers of finite locally constant etale $A/\\varpi^n$-modules, whose reductions are normalized. The finite-ring equivalence [cor-galois-lisse-representations](1), including its compatibility with scalar extension, identifies these with compatible towers of finite discrete continuous $\\Pi_T$-modules $B_n$, free over $A/\\varpi^n$ of a single rank $r$. Connectedness ensures a single rank. By [lem-pod-adic-limit-finite-modules](1),(2), $B=\\varprojlim B_n$ is finite over $A$, has precisely these reductions, and its inverse-limit topology is adic. In fact it is free: choose a basis at level one and recursively lift it to a basis at level $n+1$; a lifted matrix is invertible because its determinant is a unit modulo $\\varpi$. The resulting compatible bases identify $B$ with $\\varprojlim(A/\\varpi^n)^r=A^r$. The coordinate actions make $\\Pi_T\\times B\\to B$ jointly continuous, because their composites with every finite discrete projection are continuous. Conversely a continuous action on finite free $B$ gives those discrete actions. The Hom bijection in the adic-limit lemma, restricted to equivariant maps at every level, proves full faithfulness. Thus there is an equivalence $K_T$ from continuous finite free $A$-representations to integral lisse modules, with $K_T(B)=\\varprojlim_n\\nu^*\\mathcal L(B/\\varpi^nB)$, naturally in maps. No use is made of part (2) of the Galois node, whose extra hypotheses are absent here.",
+   "uses": [
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "det-pe-finite-local-systems-twist",
+    "cor-galois-lisse-representations",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), with Corollary 5.1.5 as recalled after Definition 6.8.3; integral-monodromy sentence of Corollary 6.8.5"
+   }
+  },
+  {
+   "text": "On every pointed etale refinement, apply the integral monodromy correspondence of the preceding step to the restricted lattice. Tensor its limit fibre with E. The prescribed lattice normalization of any realization identifies its value with that rationalized integral lattice. Compose with the restricted lattice isomorphism. This constructs object models only; no lifting of diagram arrows or connected covering refinement is asserted. The larger coefficient universe uses the same continuous-function construction, with ULift on values.",
+   "uses": [
+    "def-sfb-monodromy-realization-data",
+    "def-weil-pbc-lisse-lattice-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-galois-lisse-representations",
+  "def-sfb-monodromy-realization-data",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "det-pe-finite-local-systems-twist",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "lem-weil-pbc-lisse-lattice-etale-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Single-object part of the integral-monodromy reduction of Bhatt--Scholze Corollary 6.8.5; Proposition 6.8.4(6) supplies the lattice cover."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous finite dimensional l-adic representation has an exact fully faithful realization as a lisse pro etale sheaf",
+   "results": [
+    "lightProfiniteToLightCondSetFullyFaithful",
+    "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+    "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+    "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+    "LightCondSet.LocallyConstant.functorFullyFaithful",
+    "LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful",
+   "results": [],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": "loogle: unknown identifier 'Functor.FullyFaithful'"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|IntegralLisse|SfMonodromyRealization",
+   "results": [
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Topology/Homotopy/Lifting.lean",
+    "Mathlib/Algebra/Torsor/Defs.lean"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous l-adic representations and normalized exact monodromy realization of lisse pro-etale sheaves",
+   "results": [
+    "cyclotomicCharacter.continuous",
+    "CondensedSet.LocallyConstant.iso",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "Condensed.lanSheafProfinite",
+    "CompHausLike.LocallyConstant.functorIso",
+    "LightCondSet.LocallyConstant.iso",
+    "LightCondensed",
+    "CompHausLike.LocallyConstant.functorToPresheavesIso"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no exact match",
+   "note": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLocalMonodromyRealization",
+  "date": "2026-10-19",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-heart-closure",
+   "place": "Single-object integral-lattice and monodromy essential-image argument of Corollary 6.8.5, before common finite refinement and arrow lifting",
+   "via": [
+    "lem-sfb-etale-local-monodromy-realization",
+    "lem-sfb-monodromy-object-cover"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.MonodromySingleObjectCover",
+  "file": "lean/Sheaf/Paper/MonodromySingleObjectCover.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_sf_monodromy_single_object_cover",
+  "statement": "theorem exists_sf_monodromy_single_object_cover (l : ℕ) [Fact l.Prime]\n    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (S : Scheme.{u})\n    (L : SfRationalModules l E S) (hL : L.IsFiniteLocallyFree) :\n    ∃ (I : Type (u + 1)) (Y : I → S.Etale), S.smallEtaleTopology.CoversTop Y ∧\n      ∀ (i : I) (T : Scheme.{u}) (g : T ⟶ (Y i).left) [Etale g]\n        (p : SfMonodromyPoint T) (R : SfMonodromyRealization l E p),\n        ∃ V : SfContinuousRepresentations l E p,\n          Nonempty ((R.functor.obj V).val ≅\n            (PresheafOfModules.pushforward\n              (ProEtale.lisseEtaleCoefficientIdentificationSized l E (g ≫ (Y i).hom))).obj\n                L.val)",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

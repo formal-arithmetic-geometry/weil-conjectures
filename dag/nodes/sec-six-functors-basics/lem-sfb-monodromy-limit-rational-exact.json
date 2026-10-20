@@ -1,0 +1,153 @@
+{
+ "id": "lem-sfb-monodromy-limit-rational-exact",
+ "kind": "statement",
+ "title": "Exact limits and rationalizations of normalized monodromy towers",
+ "statement": "Fix the monodromy point, finite correspondence, functor, three lattices with normalizations, and two normalization maps as in [def-sfb-monodromy-realization-data]. Suppose the two maps of etale finite levels form a short exact sequence at every level, and the transitions on the first normalized tower are epimorphisms. Then extension of the prescribed integral maps along the integral-to-field coefficient inclusion is a short exact sequence. This assumes categorical finite-level exactness; it does not identify this sequence from the quotient fibres. The rational composite-zero equation is supplied; the conclusion is short exactness of that actual short complex.",
+ "stmt_deps": [
+  "def-sfb-monodromy-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.3, Proposition 6.8.4(1),(4),(6), pp. 59–60, and the integral-monodromy reduction in the proof of Corollary 6.8.5, p. 60. The exact-realization formulation makes the comparison used in that proof explicit; it does not assert closure of all pro-étale lisse sheaves."
+ },
+ "proof": [
+  {
+   "text": "Forget module sheaves to abelian sheaves using the faithful exact functor. Evaluation on weakly contractible pro-etale affines preserves finite limits and epimorphisms, hence finite colimits and short exactness. Epimorphic adjacent kernel transitions induce surjective maps on these sections at every transition. Apply the Mittag-Leffler theorem for countable inverse systems of abelian groups. The weakly contractible affine covering theorem detects the resulting limit epimorphisms locally; kernels and the normalization limit cones identify the actual integral short complex with this inverse-limit sequence. Reflect short exactness through the faithful exact forgetful functor. Apply the separate exact rationalization theorem to the prescribed integral maps.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "det-pe-wcb-cover",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sfb-integral-rationalization-exact",
+    "lem-weil-pbc-mittag-leffler-limit-exact",
+    "lem-sf-proetale-vanishing-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3, Proposition 6.8.4(1),(4),(6), pp. 59–60, and the integral-monodromy reduction in the proof of Corollary 6.8.5, p. 60. The exact-realization formulation makes the comparison used in that proof explicit; it does not assert closure of all pro-étale lisse sheaves."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-wcb-cover",
+  "lem-sf-proetale-vanishing-detection",
+  "lem-sfb-integral-rationalization-exact",
+  "lem-weil-pbc-mittag-leffler-limit-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proof of Corollary 6.8.5; U9 makes exact limits concrete with weakly contractible sections and the abelian-group Mittag-Leffler theorem, then applies exact rationalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A levelwise short exact sequence of inverse systems of sheaves with surjective kernel transitions remains exact after inverse limits on a replete topos and localization",
+   "results": [
+    "Condensed.hasExactLimitsOfShape",
+    "Condensed.hasExactColimitsOfShape",
+    "CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map",
+    "Profinite.NobelingProof.succ_exact",
+    "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+    "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact",
+    "CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf",
+    "Condensed.instAB4StarCondensedMod"
+   ],
+   "date": "2026-10-19",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.ShortExact, limit",
+   "results": [],
+   "date": "2026-10-19",
+   "verdict": "no exact match",
+   "note": "loogle: unknown identifier 'ShortComplex.ShortExact'"
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*(shortExact|short_exact)|shortExact.*limit|localization.*[Ee]xact",
+   "results": [
+    "Mathlib/Algebra/Module/LocalizedModule/Exact.lean",
+    "Mathlib/Algebra/Module/LocalizedModule/Exact.lean",
+    "Mathlib/Algebra/Module/LocalizedModule/Exact.lean",
+    "Mathlib/Algebra/Module/LocalizedModule/Exact.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+    "Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean",
+    "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean",
+    "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean"
+   ],
+   "date": "2026-10-19",
+   "verdict": "no exact match",
+   "note": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence of countable inverse systems of abelian groups with surjective kernel transitions remains exact after taking inverse limits",
+   "results": [
+    "InverseSystem.isNatEquiv_piEquivLim",
+    "CategoryTheory.CountableAB4Star",
+    "CategoryTheory.ShortComplex.ShortExact.exact"
+   ],
+   "date": "2026-10-20",
+   "verdict": "no exact match",
+   "note": "Search returned generic module flatness or inverse-system limit declarations; none states the full sheaf theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLocalMonodromyRealization",
+  "date": "2026-10-19",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-heart-closure",
+   "place": "Proof paragraph (2), expansion of exact monodromy realization: exact inverse limits of the finite-level lattice sequence and inversion of l",
+   "via": [
+    "lem-sfb-etale-local-monodromy-realization",
+    "lem-sfb-normalized-monodromy-exact",
+    "lem-sfb-lattice-normalization-rational-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.MonodromyLimitRationalExact",
+  "file": "lean/Sheaf/Paper/MonodromyLimitRationalExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sf_monodromy_limit_rational_exact",
+  "statement": "theorem sf_monodromy_limit_rational_exact (l : ℕ) [Fact l.Prime]\n    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] {T : Scheme.{u}} (p : SfMonodromyPoint T)\n    (c : GaloisLisseFiniteCorrespondence p.point p.group)\n    (J : SfContinuousRepresentations l E p ⥤ SfRationalModules l E T)\n    {V W Z : SfContinuousRepresentations l E p} (f : V ⟶ W) (g : W ⟶ Z)\n    (C : SfInvariantLattice l E V) (B : SfInvariantLattice l E W)\n    (D : SfInvariantLattice l E Z)\n    (hCB : ∀ a : C.submodule, f.hom.hom a.val ∈ B.submodule)\n    (hBD : ∀ b : B.submodule, g.hom.hom b.val ∈ D.submodule)\n    (N : SfLatticeNormalization l E p c J V C)\n    (M : SfLatticeNormalization l E p c J W B)\n    (P : SfLatticeNormalization l E p c J Z D)\n    (F : SfNormalizationMap l E f C B hCB N M)\n    (G : SfNormalizationMap l E g B D hBD M P)\n    (hfinite : ∀ n : ℕ, ∃ w : F.levels.app (op n) ≫ G.levels.app (op n) = 0,\n      (ShortComplex.mk (F.levels.app (op n)) (G.levels.app (op n)) w).ShortExact)\n    (ht : ∀ n : ℕ, Epi (N.etale.map (homOfLE (Nat.le_succ n)).op))\n    (w : SheafOfModules.changeOfRingsHom\n        (ProEtale.lisseIntegerToFieldSized l E T) N.integral F.integral ≫\n      SheafOfModules.changeOfRingsHom\n        (ProEtale.lisseIntegerToFieldSized l E T) M.integral G.integral = 0) :\n      (ShortComplex.mk\n        (SheafOfModules.changeOfRingsHom\n          (ProEtale.lisseIntegerToFieldSized l E T) N.integral F.integral)\n        (SheafOfModules.changeOfRingsHom\n          (ProEtale.lisseIntegerToFieldSized l E T) M.integral G.integral) w).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261020T132048-L-1408270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
