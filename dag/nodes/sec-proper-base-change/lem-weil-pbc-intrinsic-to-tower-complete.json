@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-intrinsic-to-tower-complete",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "unit-normalized completed-pullback comparison specialized to the identity morphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Intrinsic completeness implies quotient-tower completeness",
+ "statement": "Let A and I satisfy the adic coefficient datum [def-weil-pbc-adic-coefficient-datum], let T be a scheme, and let K be in the actual completed-ring derived category. If K is intrinsically complete in the existential Koszul sense of [def-weil-pbc-bounded-constructible-complete], then the canonical constant-tower-adjunction unit followed by the strict quotient augmentation is invertible, i.e. K is TowerComplete in the sense of [def-weil-pbc-completed-pullback]. This assertion involves no morphism of schemes, properness or etale-origin hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N (2),(5), completed pullback by the identity; derived completion of a complete object",
+  "external": [
+   "Stacks Project Tag 099N"
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the unit-normalized comparison between strict and intrinsic completed pullback to the identity of T. On an intrinsically complete object, the intrinsic identity comparison makes its unit invertible. Transport the unit to the datum presentation to obtain invertibility of d.ordinaryToCompleted (identity T) K.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation at zero is left adjoint to constant inverse towers: the unique maps n to zero define the adjunction explicitly. Derive this exact adjunction. The composite constant-then-evaluation is naturally isomorphic to identity, so derived constant towers are fully faithful. Consequently the unit of the constant/right-derived-limit adjunction is invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand the ordinary-to-completed identity comparison. Cancel its invertible constant-tower unit and the constant-pullback comparison. Identity tower pullback is naturally isomorphic to identity, so the right-derived limit of the quotient augmentation itself is invertible. The completion unit is the composite of this map and the invertible constant-tower unit, proving TowerComplete.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-cbc-completed-extension-zero-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N: specialize the canonical completed-pullback comparison to the identity, then use the constant/evaluation derived adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived Koszul completion quotient tower canonical unit",
+   "results": "Eight hits, including CategoryTheory.Functor.totalRightDerivedUnit, factorPowSucc.isUnit_of_isUnit_image, and ordinary AdicCompletion; no ringed-site completion-unit comparison.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul derived completion agrees with inverse limit of powers of an ideal preserving the canonical unit on a ringed site",
+   "results": "Only ordinary AdicCompletion declarations; no theorem for the ringed-site unit.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence",
+   "results": "Generic equivalence API, including Functor.asEquivalence; no completed-sheaf theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*completion|completion.*koszul",
+   "results": "No independent theorem beyond the recorded Sheaf modules.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteProetale",
+  "date": "2026-10-19",
+  "group": "K5"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcIntrinsicTowerComplete",
+  "file": "lean/Sheaf/Paper/PbcIntrinsicTowerComplete.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcIntrinsicComplete_towerComplete",
+  "statement": "theorem pbcIntrinsicComplete_towerComplete {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (T : Scheme.{u}) (K : PbcCompletedDerived T d) : PbcIsIntrinsicallyComplete T d K → d.TowerComplete T K",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261020T051451-L-1690650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261020T051451-L-1690650",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
