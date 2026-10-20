@@ -115,17 +115,18 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-thm-vanishing",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CartesianChartRestrictedMapEvaluation",
-  "file": "lean/Sheaf/AlgebraicGeometry/CartesianChartRestrictedMapEvaluation.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.CartesianChartRestrictedMapEvaluation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CartesianChartRestrictedMapEvaluation.lean",
   "declaration": "AlgebraicGeometry.Etale.cartesianChartRestrictedCohomologyMap_eval",
   "declarations": [
    "AlgebraicGeometry.Etale.cartesianChartRestrictedCohomologyMap_eval"
   ],
-  "statement": "theorem cartesianChartRestrictedCohomologyMap_eval {S X : Scheme.{u}} (f : X ⟶ S) {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (i : I) (V : (D.obj i).left.Etale) (U : c.pt.left.Etale) (r : U.left ⟶ V.left) (hr : IsPullback r U.hom V.hom (c.π.app i).left) (j : Over i) (x : restrictedOverCohomology (pullback.snd f (D.obj i).hom) (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartDiagram f D i).obj j) V) (hl₂ : ((cartesianChartCone f D c i).π.app j).left ≫ pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) = pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom)) : (cartesianChartCohomologyIso f (D.obj i).hom (c.π.app i).left c.pt.hom (Over.w (c.π.app i)).symm F q V U r hr).hom (restrictedOverCohomologyMap (pullback.snd f (D.obj i).hom) (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartCone f D c i).π.app j) V x) = (DerivedCategory.Plus.singleFunctor _ 0).map (abelianFreeRepresentablePullbackSquareIso (c.π.app i).left V U r hr).hom ≫ (cartesianChartRawAdjunctionIso f (D.obj i).hom (c.π.app i).left c.pt.hom (Over.w (c.π.app i)).symm F q V).hom (cartesianChartRestrictedRawClass f D c F q i V U r hr j x hl₂)",
+  "statement": "theorem cartesianChartRestrictedCohomologyMap_eval {S X : Scheme.{u}} (f : X ⟶ S) {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (i : I) (V : (D.obj i).left.Etale) (U : c.pt.left.Etale) (r : U.left ⟶ V.left) (hr : IsPullback r U.hom V.hom (c.π.app i).left) (j : Over i) (x : restrictedOverCohomology (pullback.snd f (D.obj i).hom) (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartDiagram f D i).obj j) V) (hl₂ : ((cartesianChartCone f D c i).π.app j).left ≫ pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) = pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom)) : (cartesianChartCohomologyIso f (D.obj i).hom (c.π.app i).left c.pt.hom (Over.w (c.π.app i)).symm F q V U r hr).hom (restrictedOverCohomologyMap (pullback.snd f (D.obj i).hom) (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartCone f D c i).π.app j) V x) = (DerivedCategory.Plus.singleFunctor _ 0).map (abelianFreeRepresentablePullbackSquareIso (c.π.app i).left V U r hr).hom ≫ (cartesianChartRawAdjunctionIso f (D.obj i).hom (c.π.app i).left c.pt.hom (Over.w (c.π.app i)).symm F q V).hom (cartesianChartRestrictedRawClass f D c F q i V j x hl₂)",
   "branch": "sheaf-dag",
-  "by": "T3",
-  "date": "2026-10-15"
+  "by": "U2",
+  "date": "2026-10-20",
+  "note": "Retired unused Sheaf copy in favor of the source twin. The source raw-class construction and defining equation omit the unused U, r, hr parameters; their bodies are otherwise identical. The evaluation theorem has the same mathematical statement and proof using that canonical construction. No source-library declaration is changed."
  },
  "lean_audit": {
   "master": {
@@ -150,13 +151,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-cb23a",
-  "group": "T3",
+  "reviewer": "C-0e6ee",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261015T081231-L-3876910",
+  "landing": "20261020T141317-L-2036127",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged exchange theorem and all new constructions with their DAG statements and proof routes; all three modules compile cleanly, and all eight declarations use only propext, Classical.choice, and Quot.sound."
+  "note": "independent cc review: Withdrawn Sheaf CartesianChartExchangeChartMap and unclaimed consumer CartesianChartRestrictedMapEvaluation vs live WeilConjectures twins (diff: header/wrap; raw class drops unused U r hr); node lean.statement verbatim in twin; no remaining importers or users; both stubs compile; twin axioms clean"
  }
 }
