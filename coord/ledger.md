@@ -18493,3 +18493,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:07 L: returned deliver/H5/Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility (reviewer RETURN: (reviewer C-3ee3e, head 3ee3e0775) D (does not compile / adapted importer broken): lean/Sheaf/AlgebraicGeometry/FinitePr)
 
 - 23:10 L: batch 20261020T150635 dependency take-out
+- 15:12 L: merged deliver/A2/Sheaf.CategoryTheory.BraidedSheafTensorGenerators (stage 3; reviewer PASS; first push; landing 20261020T151210-L-2645917 (interface); batch 20261020T151206; modules 1; new nodes 0; change records: coord/changes/A2-braided-sheaf-tensor-generators-proof-scopes.md)
