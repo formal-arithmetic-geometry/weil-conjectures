@@ -23,9 +23,38 @@
   "def-weil-constructible-heart",
   "def-weil-weil-sheaf-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Obtain a finite Weil presentation of F.obj using the complex_descent clause of immersionWeil_pullback_local_behavior at the identity immersion. By the finite residue-field criterion for a closed point and IsAlgClosed.lift, choose a compatible embedding of its residue field into k. Define P to be the displayed finite-stage reverse characteristic polynomial included into the closure.",
+   "uses": [
+    "lem-zl-immersion-weil-local-behavior",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any other finite presentation and compatible residue embedding, compose the two presentation isomorphisms and apply lem-wf-adic-local-frobenius-model-conjugacy at j=0. LinearEquiv.charpoly_conj proves conjugacy invariance. LinearMap.charpoly_baseChange and injective Polynomial.reverse_map identify both scalar-extended reverse characteristic polynomials with their mapped finite-stage factors. Hence P satisfies the required universal formula.",
+   "uses": [
+    "lem-wf-adic-local-frobenius-model-conjugacy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Any polynomial satisfying the universal formula agrees with P by evaluating at the initially chosen finite presentation and residue embedding. This proves existence and uniqueness without changing any of the local-factor, reality or realizability definitions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-immersion-weil-local-behavior",
+  "lem-kun-closed-point-field",
+  "lem-wf-adic-local-frobenius-model-conjugacy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-weights/def-wf-iota-real.md",
+  "place": "The local determinant display: finite presentation, conjugacy invariance, scalar extension and evaluation for uniqueness."
+ },
  "mathlib_searches": [],
  "mathlib_match": null,
  "status": "imported",
@@ -101,5 +130,15 @@
   "group": "Q106",
   "result": "pass",
   "note": "Item eulerSeries/eulerFactor/eulerSeries_spec match every clause of d-real-cohom: cohomology, adic, Frobenius and twist conventions reused from the recorded deps; product over closedPoints with T^{e_x}, e_x=[κ(x):k0], iota-mapped P_x inverted; spec gives bounded-degree finiteness, local finiteness, HasProd and constant coeff 1 (sorry with step docstring). No stronger hypotheses (extra instances on spec are implied by hC). The def-wf-iota-real §1(B) rebind from the auto-recorded upstream WeilSheaf.IsRealizable to the sf common-stage heart (sfLocalCharacteristicFactor = .choose of an ∃! over finite presentations, SfIsReal, SfIsRealizable) matches the node, has a lean.note, no race; it follows the ND/NX migration of the sibling defs, so not H13. Both files compile clean via nt_compile --json (6.2 s, 5.7 s). Maintainer notes: landed old-framework citers (Q06 EvenTensorPositivity, Q42 RealSemisimplification, N6 RealPushforward); HasCommonStageLisseLattice node is not a stmt_dep of def-wf-iota-real; twist/Tate records still on the old framework; a bridge to wfSheafClosedFrobenius would help."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051319-L-1632546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
