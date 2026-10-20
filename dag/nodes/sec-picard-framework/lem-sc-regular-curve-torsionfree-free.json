@@ -25,45 +25,46 @@
  ],
  "proof": [
   {
-   "text": "For every point $x\\in X$, regularity makes $R=\\mathcal O_{X,x}$ a regular Noetherian local domain. The topological dimension bound gives $\\dim R\\le1$. If $\\dim R=0$, then the maximal ideal is zero and $R$ is a field. If $\\dim R=1$, then $R$ is a discrete valuation ring by [lem-sc-regular-dim1-dvr]. Coherence makes $\\mathcal F_x$ a finitely generated $R$-module.",
+   "text": "Choose the affine regular neighborhoods from the given hypothesis. They cover X and have Noetherian section rings, so Mathlib isLocallyNoetherian_of_affine_cover makes X locally Noetherian. Localization of each regular section ring at the prime corresponding to x identifies with O_{X,x}, giving a regular local ring. By pqf-lem-coherent-ft-locnoeth, coherence gives quasi-coherence and finite type. The finite affine section module of lem-weil-pbc-quasi-coherent-finite-type-affine localizes to the stalk by lem-sbc-affine-module-germ-localization. Mathlib Module.Finite.of_isLocalizedModule transfers finite generation along this localization, so every stalk is finite. This last localization argument is the private proved helper finite_stalk.",
    "uses": [
     "def-weil-regular-scheme",
-    "lem-sc-regular-dim1-dvr",
-    "pqf-def-coherent"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sbc-affine-module-germ-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0CC4, proof: regular local rings on a scheme of dimension at most one are fields or discrete valuation rings"
+    "place": "Tag 0CC4, lemma-torsion-free-over-regular-dim-1, finite generation and regularity of the stalks"
    }
   },
   {
-   "text": "Assume $\\mathcal F$ is torsion-free. By [lem-sc-torsion-subsheaf-quotient] the stalk at $x$ of $\\mathcal F_{\\mathrm{tors}}$, which is zero, is the torsion submodule of $\\mathcal F_x$ over the domain $R$, so each $\\mathcal F_x$ is torsion-free over $R$. In the field case it is automatically finite free; in the DVR case [lem-sc-dvr-fg-torsionfree-free] makes it finite free. Thus every stalk is finite free, and [lem-sc-coherent-free-stalks-locally-free] gives that $\\mathcal F$ is finite locally free.",
+   "text": "Install the given stalkwise torsion condition as Module.IsTorsionFree. The local ring has dimension at most one by ringKrullDim_stalk_le_topologicalKrullDim. In the field case the module is free. Otherwise dimension less than one would make the domain a field (Mathlib Ring.KrullDimLE.isField_of_isDomain), so the dimension is exactly one. Apply lem-sc-regular-dim1-dvr, then the Mathlib PID finite torsion-free module instance of lem-sc-dvr-fg-torsionfree-free. These finite free stalks imply finite local freeness by lem-sc-coherent-free-stalks-locally-free.",
    "uses": [
-    "lem-sc-torsion-subsheaf-quotient",
+    "def-pc-integral-scheme",
+    "lem-sc-regular-dim1-dvr",
     "lem-sc-dvr-fg-torsionfree-free",
     "lem-sc-coherent-free-stalks-locally-free"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0CC4, proof: finitely generated torsion-free stalks over DVRs are free and a coherent sheaf with free stalks is locally free"
+    "place": "Tag 0CC4, lemma-torsion-free-over-regular-dim-1, proof of the forward implication"
    }
   },
   {
-   "text": "Conversely, if $\\mathcal F$ is finite locally free, every stalk is a finite free module over the domain $\\mathcal O_{X,x}$ (integrality gives the domain property), hence has no nonzero element killed by a nonzero scalar. So the torsion submodule of every stalk is zero, and by [lem-sc-torsion-subsheaf-quotient] every stalk of $\\mathcal F_{\\mathrm{tors}}$ is zero; a sheaf with zero stalks is zero, so $\\mathcal F_{\\mathrm{tors}}=0$ and $\\mathcal F$ is torsion-free.",
+   "text": "For the converse choose a finite free trivialization around x using exists_mem_over_iso_free. The proved source theorem exists_basis_stalk_of_over_iso_free gives a basis of F_x. Install Module.Free from this basis; over the domain O_{X,x}, smul_eq_zero immediately proves the stated torsion-free condition. This works as well for the empty basis and the zero module.",
    "uses": [
-    "def-pc-integral-scheme",
-    "lem-sc-torsion-subsheaf-quotient"
+    "def-pc-integral-scheme"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0CC4, converse: a locally free sheaf on an integral scheme is torsion-free"
+    "place": "Tag 0CC4, lemma-torsion-free-over-regular-dim-1, converse; source module WeilConjectures.AlgebraicGeometry.Modules.GenericRank, exists_basis_stalk_of_over_iso_free"
    }
   },
   {
-   "text": "The rank of a finite locally free sheaf is locally constant. Since an integral scheme is irreducible and therefore connected, this locally constant rank is constant. On the generic point, the stalk is a vector space over $k(X)=\\mathcal O_{X,\\eta}$, and its dimension is exactly that constant rank. Hence the rank equals $\\dim_{k(X)}\\mathcal F_\\eta$.",
+   "text": "Apply the proved source theorem isFiniteLocallyFreeOfRank_rank. It holds on an arbitrary irreducible scheme: every nonempty trivializing open contains the generic point, so the number of elements in its finite frame equals the function-field dimension of the generic stalk. Unfolding the source definition rank is exactly the displayed Module.finrank conclusion. No smoothness or properness hypothesis is needed.",
    "uses": [
     "def-pc-integral-scheme",
     "def-sc-function-field"
@@ -71,24 +72,25 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0CC4; constant rank on connected schemes is immediate from local constancy"
+    "place": "Tag 0CC4; constant rank on an integral scheme, as proved in WeilConjectures.AlgebraicGeometry.Modules.GenericRank.isFiniteLocallyFreeOfRank_rank"
    }
   }
  ],
  "proof_deps": [
   "def-weil-regular-scheme",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sbc-affine-module-germ-localization",
+  "def-pc-integral-scheme",
   "lem-sc-regular-dim1-dvr",
-  "pqf-def-coherent",
   "lem-sc-dvr-fg-torsionfree-free",
   "lem-sc-coherent-free-stalks-locally-free",
-  "def-pc-integral-scheme",
-  "def-sc-function-field",
-  "lem-sc-torsion-subsheaf-quotient"
+  "def-sc-function-field"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 0CC4 (divisors-lemma-torsion-free-over-regular-dim-1)"
+  "place": "Tag 0CC4, lemma-torsion-free-over-regular-dim-1; affine germ localization for finite stalks and the proved upstream GenericRank API; formalized by K7"
  },
  "mathlib_searches": [
   {
@@ -177,5 +179,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261020T145523-L-2406403",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
