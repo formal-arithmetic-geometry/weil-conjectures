@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
 import WeilConjectures.Algebra.Homology.FilteredFreeKProjectiveStep
-import Sheaf.Algebra.Homology.FilteredFreeKProjectiveAssembly
+import WeilConjectures.Algebra.Homology.FilteredFreeKProjectiveAssembly
 
 /-!
 # Filtered free complexes are K-projective
@@ -92,11 +92,8 @@ theorem isKProjective_of_filtered_free_telescope
       ∃ r : (F (n + 1)).X k ⟶ (F n).X k,
         (step n).f k ≫ r = 𝟙 ((F n).X k))
     (hstage : ∀ n, (F n).IsKProjective) :
-    P.IsKProjective := by
-  obtain ⟨Q, hQ, e⟩ := filtered_free_telescope_assembly P F ι step hzero hmono
-    hcompat hexhaustive hsplit hstage
-  have : Q.IsKProjective := hQ
-  exact isKProjective_of_iso e.some
+    P.IsKProjective :=
+  filtered_free_telescope_assembly P F ι step hzero hmono hcompat hexhaustive hsplit hstage
 
 
 /-- An exhaustive, degreewise split filtration with shifted free quotients is K-projective.

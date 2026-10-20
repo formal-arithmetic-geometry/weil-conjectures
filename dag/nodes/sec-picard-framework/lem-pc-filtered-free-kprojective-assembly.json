@@ -44,8 +44,8 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "lean/Sheaf/Algebra/Homology/FilteredFreeKProjectiveAssembly.lean",
-  "place": "Checked assembly from explicit degreewise telescope splitting, proved coproduct closure and Mathlib triangulated orthogonality; repair of return D1/D2."
+  "document": "lean/WeilConjectures/Algebra/Homology/FilteredFreeKProjectiveAssembly.lean",
+  "place": "2026-10-20 (Y7): reuse the proved upstream telescope assembly with the same degreewise-splitting and coproduct dependencies. Its direct P.IsKProjective conclusion implies the node conclusion with Q = P and Iso.refl P. No proof dependency is pruned."
  },
  "mathlib_searches": [
   {
@@ -81,14 +81,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.FilteredFreeKProjectiveAssembly",
-  "file": "lean/Sheaf/Algebra/Homology/FilteredFreeKProjectiveAssembly.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.FilteredFreeKProjectiveAssembly",
+  "file": "lean/WeilConjectures/Algebra/Homology/FilteredFreeKProjectiveAssembly.lean",
   "declaration": "CochainComplex.filtered_free_telescope_assembly",
-  "statement": "theorem filtered_free_telescope_assembly\n    {A : Type u} [CommRing A]\n    (P : CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (ι : ∀ n, F n ⟶ P) (step : ∀ n, F n ⟶ F (n + 1))\n    (hzero : IsZero (F 0)) (hmono : ∀ n, Mono (ι n))\n    (hcompat : ∀ n, step n ≫ ι (n + 1) = ι n)\n    (hexhaustive : ∀ (k : ℤ) (x : P.X k),\n      ∃ (n : ℕ) (y : (F n).X k), (ι n).f k y = x)\n    (hsplit : ∀ (n : ℕ) (k : ℤ),\n      ∃ r : (F (n + 1)).X k ⟶ (F n).X k,\n        (step n).f k ≫ r = 𝟙 ((F n).X k))\n    (hstage : ∀ n, (F n).IsKProjective) :\n    ∃ Q : CochainComplex (ModuleCat.{max u v} A) ℤ,\n      Q.IsKProjective ∧ Nonempty (Q ≅ P)",
+  "statement": "theorem filtered_free_telescope_assembly\n    {A : Type u} [CommRing A]\n    (P : CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (ι : ∀ n, F n ⟶ P) (step : ∀ n, F n ⟶ F (n + 1))\n    (hzero : IsZero (F 0)) (hmono : ∀ n, Mono (ι n))\n    (hcompat : ∀ n, step n ≫ ι (n + 1) = ι n)\n    (hexhaustive : ∀ (k : ℤ) (x : P.X k),\n      ∃ (n : ℕ) (y : (F n).X k), (ι n).f k y = x)\n    (hsplit : ∀ (n : ℕ) (k : ℤ),\n      ∃ r : (F (n + 1)).X k ⟶ (F n).X k,\n        (step n).f k ≫ r = 𝟙 ((F n).X k))\n    (hstage : ∀ n, (F n).IsKProjective) :\n    P.IsKProjective",
   "branch": "sheaf-dag",
-  "by": "T3",
-  "date": "2026-10-13"
+  "by": "Y7",
+  "date": "2026-10-20",
+  "note": "2026-10-20 (Y7): retired the Sheaf twin and redirected its sole consumer. The adopted upstream theorem has identical hypotheses and proves P.IsKProjective directly. This is equivalent to the unchanged node statement: take Q = P and Iso.refl in one direction, and transport IsKProjective along the supplied isomorphism in the other."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -101,14 +102,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "C-79daf",
+  "group": "Y7",
   "result": "pass",
-  "landing": "20261013T022430-L-3220211",
+  "landing": "20261020T132057-L-1411020",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Sheaf filtered_free_telescope_assembly (∃ Q K-projective ≅ P) vs WeilConjectures twin (same hypotheses, P.IsKProjective); sole consumer Sheaf.Algebra.Homology.FilteredFreeKProjective (unclaimed) adapted in import + one proof body, signatures unchanged, compiles, axioms clean; node lean re-pointed per retire-sheaf-twins-20261020"
  },
  "lean_audit": {
   "master": {
