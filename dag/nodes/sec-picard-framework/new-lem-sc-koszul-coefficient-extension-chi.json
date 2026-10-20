@@ -121,14 +121,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.KoszulCoefficientExtensionChi",
-  "file": "lean/Sheaf/RingTheory/KoszulCoefficientExtensionChi.lean",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.KoszulCoefficientExtensionChi",
+  "file": "lean/WeilConjectures/RingTheory/KoszulCoefficientExtensionChi.lean",
   "declaration": "ExteriorAlgebra.exists_koszul_coefficient_extension_chi",
-  "statement": "theorem exists_koszul_coefficient_extension_chi\n    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I)\n    (T : Submonoid A) (S : Type u) [CommRing S] [Algebra A S]\n    [IsLocalization T S]\n    (hs : Ideal.span (Set.range (algebraMap A S ∘ f)) = I.map (algebraMap A S)) :\n  ∃ (χ : koszulDualComplex A r f ⟶\n    ((ModuleCat.restrictScalars (algebraMap A S)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj (koszulDualComplex S r (algebraMap A S ∘ f))),\n  ∀ (n : ℕ) (x : (koszulComplex A r f).X n ⟶ ModuleCat.of A A)\n    (v : Fin n → (Fin r →₀ A)),\n    (χ.f n x).hom (exteriorPower.ιMulti S n\n      (fun i ↦ (v i).mapRange (algebraMap A S) (map_zero _))) =\n    algebraMap A S (x.hom (exteriorPower.ιMulti A n v))",
+  "statement": "theorem exists_koszul_coefficient_extension_chi\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (S : Type u) [CommRing S] [Algebra A S] :\n  ∃ (χ : koszulDualComplex A r f ⟶\n    ((ModuleCat.restrictScalars (algebraMap A S)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj (koszulDualComplex S r (algebraMap A S ∘ f))),\n  ∀ (n : ℕ) (x : (koszulComplex A r f).X n ⟶ ModuleCat.of A A)\n    (v : Fin n → (Fin r →₀ A)),\n    (χ.f n x).hom (exteriorPower.ιMulti S n\n      (fun i ↦ (v i).mapRange (algebraMap A S) (map_zero _))) =\n    algebraMap A S (x.hom (exteriorPower.ιMulti A n v))",
   "branch": "sheaf-dag",
-  "by": "B4",
-  "date": "2026-10-13"
+  "by": "P3",
+  "date": "2026-10-20",
+  "note": "Retired the unused Sheaf twin. The upstream theorem proves the same cochain-map existence and evaluation formula for any A-algebra S, without regularity, ideal-span or localization hypotheses. The unchanged node statement is its specialization: exact ExteriorAlgebra.exists_koszul_coefficient_extension_chi A r f S. This specialization compiled and the upstream theorem has only propext, Classical.choice and Quot.sound as axioms."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -141,18 +142,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "J1",
+  "reviewer": "C-b9129",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T022417-L-3214942",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "ExteriorAlgebra.exists_koszul_coefficient_extension_chi"
-  ],
-  "sorry_after": []
+  "landing": "20261020T141313-L-2034961",
+  "kind": "interface",
+  "note": "independent cc review: old Sheaf ExteriorAlgebra.exists_koszul_coefficient_extension_chi statement (verbatim) with the upstream WeilConjectures theorem of the same name: same conclusion, fewer hypotheses, specialization compiles, standard axioms only; node changed only in its lean record, which matches upstream lines 211-221"
  },
  "lean_audit": {
   "master": {
