@@ -83,8 +83,9 @@ lemma sheafExtendScalars_map_smul_id
     (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) (a : R) :
     (sheafExtendScalars φ X).map (a • 𝟙 F) = φ a • 𝟙 _ := by
   apply ((sheafExtendScalarsAdjunction φ X).homEquiv _ _).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, ← Adjunction.unit_naturality,
-    sheafComposeRestrictScalars_map_smul_id, Linear.smul_comp, Linear.comp_smul,
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  erw [← (sheafExtendScalarsAdjunction φ X).unit.naturality]
+  rw [sheafComposeRestrictScalars_map_smul_id, Functor.id_map, Linear.smul_comp, Linear.comp_smul,
     Category.id_comp, Category.comp_id]
 
 end Sheaf
@@ -100,6 +101,7 @@ noncomputable def leftDerivedSheafExtendScalarsMonoidal :
     L(sheafExtendScalars (algebraMap R S) X).Monoidal :=
   (sheafExtendScalars (algebraMap R S) X).leftDerivedFunctorMonoidal
 
+set_option maxHeartbeats 1600000 in
 /-- The comonoidal structure of `leftDerivedSheafExtendScalarsMonoidal` is the tensor
 comparison `Functor.leftDerivedTensorComparison`. -/
 lemma leftDerivedSheafExtendScalarsMonoidal_δ
@@ -111,6 +113,7 @@ lemma leftDerivedSheafExtendScalarsMonoidal_δ
 
 attribute [local instance] DerivedCategory.braidedCategory'
 
+set_option maxHeartbeats 1600000 in
 /-- **Derived scalar extension is braided.** For the monoidal structure
 `leftDerivedSheafExtendScalarsMonoidal` of `Ψ = L(S ⊗_R -)` and the Koszul braidings
 `DerivedCategory.braidedCategory'`, `μ_{K, M} ≫ Ψ β_{K, M} = β_{Ψ K, Ψ M} ≫ μ_{M, K}`. -/

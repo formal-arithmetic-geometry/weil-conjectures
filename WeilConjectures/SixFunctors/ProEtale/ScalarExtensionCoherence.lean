@@ -30,8 +30,11 @@ namespace CategoryTheory
 variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
 
 /-- The conjugate of the inverse associator of left adjoints is the inverse associator of the
-right adjoints. -/
-lemma conjugateEquiv_associator_inv {L₀₁ : A ⥤ B} {R₁₀ : B ⥤ A} {L₁₂ : B ⥤ C} {R₂₁ : C ⥤ B}
+right adjoints. (A private copy of the lemma of the same name in
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars`, which this file
+cannot import.) -/
+private lemma conjugateEquiv_associator_inv {L₀₁ : A ⥤ B} {R₁₀ : B ⥤ A} {L₁₂ : B ⥤ C}
+    {R₂₁ : C ⥤ B}
     {L₂₃ : C ⥤ D} {R₃₂ : D ⥤ C} (adj₀₁ : L₀₁ ⊣ R₁₀) (adj₁₂ : L₁₂ ⊣ R₂₁)
     (adj₂₃ : L₂₃ ⊣ R₃₂) :
     conjugateEquiv ((adj₀₁.comp adj₁₂).comp adj₂₃) (adj₀₁.comp (adj₁₂.comp adj₂₃))

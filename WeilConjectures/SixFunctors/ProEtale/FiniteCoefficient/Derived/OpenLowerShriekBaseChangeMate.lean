@@ -59,4 +59,22 @@ noncomputable def derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction 
 
 end Adjunction
 
+section BaseChange
+
+variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
+  [IsOpenImmersion j] [IsOpenImmersion j']
+
+/-- The mate of the base change isomorphism `L(g'')^* j_! ≅ j'_! Lg'^*` of the extension by zero
+along the adjunctions `j_! ⊣ Lj^*` and `j'_! ⊣ Lj'^*` is the square isomorphism
+`Lj^* Lg'^* ≅ L(g'')^* Lj'^*` of derived pullbacks. -/
+theorem mateEquiv_leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso_inv
+    (hsq : IsPullback g' j' j g'') :
+    mateEquiv (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction A j)
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction A j')
+        (leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso A hsq).inv =
+      (leftDerivedUpperStarSquareIso A hsq.toCommSq).inv := by
+  sorry
+
+end BaseChange
+
 end AlgebraicGeometry.ProEtale
