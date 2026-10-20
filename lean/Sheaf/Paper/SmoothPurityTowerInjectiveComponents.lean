@@ -17,10 +17,10 @@ import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Sheaf.Paper.SmoothPurityTowerEvaluationAdjoint
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
-import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
+import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Paper.SmoothPurityCoefficientTowers
 
 /-!
 # Acyclic components of injective coefficient towers
@@ -37,6 +37,8 @@ map, so both coefficients and transitions are fixed, including for the identity 
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -149,6 +151,42 @@ private theorem coefficientRingMap_naturality
     CommRingCat.{max u (t + 1)}).unit.naturality
       ((Functor.const T.ProEtᵒᵖ).map f)) ((Scheme.proEtaleBaseChange g).op.obj U)
 
+private def coefficientRingMapRing (A : CommRingCat.{max u (t + 1)}) :
+    (sheafCompose (Scheme.ProEt.topology S)
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
+        ((constantSheaf (Scheme.ProEt.topology S) CommRingCat.{max u (t + 1)}).obj A) ⟶
+      ((Scheme.proEtaleBaseChange g).sheafPushforwardContinuous
+        RingCat.{max u (t + 1)} (Scheme.ProEt.topology S) (Scheme.ProEt.topology T)).obj
+          ((sheafCompose (Scheme.ProEt.topology T)
+            (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
+              ((constantSheaf (Scheme.ProEt.topology T) CommRingCat.{max u (t + 1)}).obj A)) :=
+  ⟨Functor.whiskerRight (Scheme.coefficientProEtaleDirectRingMap g A).hom
+    (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})⟩
+
+private theorem coefficientRingMapRing_naturality
+    {A B : CommRingCat.{max u (t + 1)}} (f : A ⟶ B) :
+    (sheafCompose (Scheme.ProEt.topology S)
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+        ((constantSheaf (Scheme.ProEt.topology S) CommRingCat.{max u (t + 1)}).map f) ≫
+      coefficientRingMapRing g B =
+    coefficientRingMapRing g A ≫
+      ((Scheme.proEtaleBaseChange g).sheafPushforwardContinuous
+        RingCat.{max u (t + 1)} (Scheme.ProEt.topology S) (Scheme.ProEt.topology T)).map
+          ((sheafCompose (Scheme.ProEt.topology T)
+            (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+            ((constantSheaf (Scheme.ProEt.topology T) CommRingCat.{max u (t + 1)}).map f)) := by
+  have h := coefficientRingMap_naturality (g := g) f
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  have hU := congrArg (fun q ↦ q.hom.app U) h
+  have hR := congrArg
+    ((forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)}).map) hU
+  simpa only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    sheafCompose_map_hom, Functor.whiskerRight_app,
+    Functor.sheafPushforwardContinuous_map_hom_app, Functor.map_comp,
+    coefficientRingMapRing] using hR
+
 /-- Constant-section coefficient maps commute with restrictions and quotient reductions.
 Source: blueprint, levelwise direct image (blueprint: det-sp-tower-injective-components).
 Proof: site naturality is naturality of the published constant-section map. For level
@@ -163,29 +201,22 @@ theorem spTowerRingMap_naturality {X Y : (ℕ × S.ProEt)ᵒᵖ} (f : X ⟶ Y) :
     RingCat.{max u (t + 1)} (Scheme.ProEt.topology S) (Scheme.ProEt.topology T)
   let φ : spCoefficientRings l E S ⟶ spCoefficientRings l E T ⋙ P :=
     NatTrans.ofOpSequence
-      (fun n ↦ ⟨Functor.whiskerRight
-        (Scheme.coefficientProEtaleDirectRingMap g
-          (CommRingCat.of (ULift.{t + 1}
-            (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))))).hom
-        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})⟩)
+      (fun n ↦ coefficientRingMapRing g
+        (CommRingCat.of (ULift.{t + 1}
+          (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1)))))
       (fun n ↦ by
         simp only [spCoefficientRings, Functor.ofOpSequence_map_homOfLE_succ,
           Functor.comp_map]
-        apply Sheaf.hom_ext
-        apply NatTrans.ext
-        funext U
-        have h := coefficientRingMap_naturality.{t, u} (g := g)
+        simpa only [spCoefficientReduction] using coefficientRingMapRing_naturality g
           (CommRingCat.ofHom
             (ULift.ringEquiv.{u, t + 1}.symm.toRingHom.comp
               ((Ideal.Quotient.factorPowSucc (spEllIdeal l E) (n + 1)).comp
-                ULift.ringEquiv.{u, t + 1}.toRingHom)))
-        exact congrArg
-          ((forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)}).map)
-          (congrArg (fun q ↦ q.hom.app U) h))
+                ULift.ringEquiv.{u, t + 1}.toRingHom))))
   let ψ := Functor.uncurry.map
     (Functor.whiskerRight φ (sheafToPresheaf (Scheme.ProEt.topology S)
       RingCat.{max u (t + 1)}))
-  exact ψ.naturality ((prodOpEquiv (C := ℕ) (D := S.ProEt)).functor.map f)
+  have h := ψ.naturality ((prodOpEquiv (C := ℕ) (D := S.ProEt)).functor.map f)
+  exact h
 
 /-- The structural ring map on the product site, with the actual coefficient reductions.
 Source: blueprint, levelwise direct image (blueprint: det-sp-tower-injective-components). -/
@@ -226,6 +257,22 @@ abbrev spLevelPush (n : ℕ) :=
     (CommRingCat.of (ULift.{t + 1}
       (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))))
 
+private theorem presheafPushforward_finiteLimits.{v, w, v₁, w₁, v₂, w₂}
+    {C : Type w₁} [Category.{v₁} C] {D : Type w₂} [Category.{v₂} D]
+    (F : C ⥤ D) {R : Dᵒᵖ ⥤ RingCat.{w}} {S : Cᵒᵖ ⥤ RingCat.{w}}
+    (φ : S ⟶ F.op ⋙ R) :
+    PreservesFiniteLimits (PresheafOfModules.pushforward.{v} φ) := by
+  constructor
+  intro J _ _
+  constructor
+  intro K
+  constructor
+  intro c hc
+  exact ⟨PresheafOfModules.evaluationJointlyReflectsLimits _ _ (fun X ↦
+    isLimitOfPreserves
+      (PresheafOfModules.evaluation R (F.op.obj X) ⋙
+        ModuleCat.restrictScalars (φ.app X).hom) hc)⟩
+
 /-- The componentwise tower direct image is additive and left exact.
 Source: blueprint proof, step 7 (blueprint: det-sp-tower-injective-components).
 Proof: addition is componentwise. Kernels and finite limits are levelwise in the tower
@@ -247,18 +294,8 @@ theorem spTowerPush_properties :
         (isLimitOfPreserves V c.isLimit) (fun j ↦ c.prop_diag_obj j n)
     exact ⟨fun J _ _ ↦ inferInstance⟩
   let P := PresheafOfModules.pushforward.{max u (t + 1)} (spTowerRingMap l E g)
-  have : PreservesFiniteLimits P := by
-    constructor
-    intro J _ _
-    constructor
-    intro K
-    constructor
-    intro c hc
-    exact ⟨PresheafOfModules.evaluationJointlyReflectsLimits _ _ (fun X ↦
-      isLimitOfPreserves
-        (PresheafOfModules.evaluation (spCoefficientPresheaf l E T)
-          ((spTowerBaseChange g).op.obj X) ⋙
-            ModuleCat.restrictScalars ((spTowerRingMap l E g).app X).hom) hc)⟩
+  have : PreservesFiniteLimits P :=
+    presheafPushforward_finiteLimits (spTowerBaseChange g) (spTowerRingMap l E g)
   have := inclusionLimits T
   have : PreservesFiniteLimits
       (spTowerPush l E g ⋙ (spCoefficientTowerSheafCondition l E S).ι) :=
@@ -314,6 +351,17 @@ private theorem evaluationRestriction_fun_heq (X : Scheme.{t})
       spCoefficientCommRings, derivedChangeRingIndependentCoefficients, systemEvaluation,
       Functor.ofOpSequence, Functor.ofSequence, Functor.OfSequence.map_id]
 
+private theorem pushforward_restriction_fun_heq.{v, w, v₁, w₁, v₂, w₂}
+    {C : Type w₁} [Category.{v₁} C] {D : Type w₂} [Category.{v₂} D]
+    (F : C ⥤ D) {R : (ℕ × D)ᵒᵖ ⥤ RingCat.{w}}
+    {S : (ℕ × C)ᵒᵖ ⥤ RingCat.{w}}
+    (φ : S ⟶ ((𝟭 ℕ).prod F).op ⋙ R) (M : PresheafOfModules.{v} R)
+    (n : ℕ) {U V : Cᵒᵖ} (f : U ⟶ V) :
+    HEq (fun x ↦ ((PresheafOfModules.pushforward φ).obj M).map
+      (Prod.mkHom (𝟙 n) f.unop).op x)
+      (fun x ↦ M.map (Prod.mkHom (𝟙 n) (F.op.map f).unop).op x) := by
+  rfl
+
 private theorem moduleRestriction_naturality.{v, w} {R S : Type w} [Ring R] [Ring S]
     (φ : R →+* S) {M M' : ModuleCat.{v} R} {N N' : ModuleCat.{v} S}
     (hM : M = M') (hN : N = N')
@@ -349,10 +397,80 @@ private theorem towerEvaluation_sections (n : ℕ) (M : spCoefficientTowers l E 
         ((spTowerPush l E g).obj M)).val.obj U =
       ((spLevelPush l E g n).obj
         ((spCoefficientEvaluation l E T dT.equivalence n).obj M)).val.obj U := by
-  exact (eq_of_heq (dS.sections ((spTowerPush l E g).obj M) n U)).trans
-    (congrArg (ModuleCat.restrictScalars
-      ((spTowerRingMap l E g).app (op (n, U.unop))).hom).obj
-        (eq_of_heq (dT.sections M n ((Scheme.proEtaleBaseChange g).op.obj U)))).symm
+  have hS : ((spCoefficientEvaluation l E S dS.equivalence n).obj
+      ((spTowerPush l E g).obj M)).val.obj U =
+      ((spTowerPush l E g).obj M).obj.obj (op (n, U.unop)) :=
+    eq_of_heq (dS.sections ((spTowerPush l E g).obj M) n U)
+  have hT : ((spCoefficientEvaluation l E T dT.equivalence n).obj M).val.obj
+      ((Scheme.proEtaleBaseChange g).op.obj U) =
+      M.obj.obj (op (n, (Scheme.proEtaleBaseChange g).obj U.unop)) :=
+    eq_of_heq (dT.sections M n ((Scheme.proEtaleBaseChange g).op.obj U))
+  have h := congrArg (ModuleCat.restrictScalars
+    ((spTowerRingMap l E g).app (op (n, U.unop))).hom).obj hT
+  exact hS.trans h.symm
+
+private def towerEvaluation_component (n : ℕ) (M : spCoefficientTowers l E T) :
+    (spCoefficientEvaluation l E S dS.equivalence n).obj ((spTowerPush l E g).obj M) ≅
+      (spLevelPush l E g n).obj
+        ((spCoefficientEvaluation l E T dT.equivalence n).obj M) :=
+    (SheafOfModules.fullyFaithfulForget (spCoefficientRing l E S n)).preimageIso
+      (PresheafOfModules.isoMk
+        (fun U ↦ eqToIso (towerEvaluation_sections l E g dT dS n M U))
+        (fun {U V} f ↦ by
+          apply moduleRestriction_naturality _
+            (towerEvaluation_sections l E g dT dS n M U)
+            (towerEvaluation_sections l E g dT dS n M V)
+          have hS := evaluationRestriction_fun_heq l E S dS
+            ((spTowerPush l E g).obj M) n f
+          have hT := evaluationRestriction_fun_heq l E T dT M n
+            ((Scheme.proEtaleBaseChange g).op.map f)
+          exact hS.trans ((pushforward_restriction_fun_heq
+            (Scheme.proEtaleBaseChange g) (spTowerRingMap l E g) M.obj n f).trans
+              hT.symm)))
+
+private theorem towerEvaluation_component_naturality (n : ℕ)
+    {M N : spCoefficientTowers l E T} (f : M ⟶ N) :
+    (spCoefficientEvaluation l E S dS.equivalence n).map ((spTowerPush l E g).map f) ≫
+        (towerEvaluation_component l E g dT dS n N).hom =
+      (towerEvaluation_component l E g dT dS n M).hom ≫
+        (spLevelPush l E g n).map
+          ((spCoefficientEvaluation l E T dT.equivalence n).map f) := by
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply moduleHom_naturality
+    (towerEvaluation_sections l E g dT dS n M U)
+    (towerEvaluation_sections l E g dT dS n N U)
+  have hS := moduleHom_fun_heq
+    (eq_of_heq (dS.sections ((spTowerPush l E g).obj M) n U))
+    (eq_of_heq (dS.sections ((spTowerPush l E g).obj N) n U))
+    (dS.morphisms ((spTowerPush l E g).map f) n U)
+  have hT := moduleHom_fun_heq
+    (eq_of_heq (dT.sections M n ((Scheme.proEtaleBaseChange g).op.obj U)))
+    (eq_of_heq (dT.sections N n ((Scheme.proEtaleBaseChange g).op.obj U)))
+    (dT.morphisms f n ((Scheme.proEtaleBaseChange g).op.obj U))
+  exact hS.trans hT.symm
+
+private theorem towerEvaluation_component_apply (n : ℕ) (M : spCoefficientTowers l E T)
+    (U : S.ProEtᵒᵖ)
+    (x : ((spCoefficientEvaluation l E S dS.equivalence n).obj
+      ((spTowerPush l E g).obj M)).val.obj U) :
+    HEq (((towerEvaluation_component l E g dT dS n M).hom).val.app U x) x := by
+  exact moduleEqToHom_apply_heq (towerEvaluation_sections l E g dT dS n M U) x
+
+private theorem moduleSheafIso_unique.{v, w, v₁, w₁, v₂, w₂}
+    {A : Type w₁} [Category.{v₁} A] {C : Type w₂} [Category.{v₂} C]
+    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{w}}
+    (F G : A ⥤ SheafOfModules.{v} R) (e : F ≅ G)
+    (he : ∀ (M : A) (U : Cᵒᵖ) (x : (F.obj M).val.obj U),
+      HEq ((e.hom.app M).val.app U x) x) :
+    ∃! e' : F ≅ G, ∀ (M : A) (U : Cᵒᵖ) (x : (F.obj M).val.obj U),
+      HEq ((e'.hom.app M).val.app U x) x := by
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  ext M U x
+  exact eq_of_heq ((he' M U x).trans (he M U x).symm)
 
 /-- Evaluation commutes with the actual tower direct image, by the identity on sections.
 Source: blueprint, levelwise direct image (blueprint: det-sp-tower-injective-components).
@@ -369,45 +487,16 @@ theorem spTowerEvaluationIso_existsUnique (n : ℕ) :
         HEq ((e.hom.app M).val.app U x) x := by
   let F := spTowerPush l E g ⋙ spCoefficientEvaluation l E S dS.equivalence n
   let G := spCoefficientEvaluation l E T dT.equivalence n ⋙ spLevelPush l E g n
-  let e : F ≅ G := NatIso.ofComponents (fun M ↦
-    (SheafOfModules.fullyFaithfulForget (spCoefficientRing l E S n)).preimageIso
-      (PresheafOfModules.isoMk
-        (fun U ↦ eqToIso (towerEvaluation_sections l E g dT dS n M U))
-        (fun {U V} f ↦ by
-          apply moduleRestriction_naturality _
-            (towerEvaluation_sections l E g dT dS n M U)
-            (towerEvaluation_sections l E g dT dS n M V)
-          exact (evaluationRestriction_fun_heq l E S dS
-            ((spTowerPush l E g).obj M) n f).trans
-              (evaluationRestriction_fun_heq l E T dT M n
-                ((Scheme.proEtaleBaseChange g).op.map f)).symm))) (by
-    intro M N f
-    apply SheafOfModules.hom_ext
-    apply PresheafOfModules.hom_ext
-    intro U
-    apply moduleHom_naturality
-      (towerEvaluation_sections l E g dT dS n M U)
-      (towerEvaluation_sections l E g dT dS n N U)
-    have hS := moduleHom_fun_heq
-      (eq_of_heq (dS.sections ((spTowerPush l E g).obj M) n U))
-      (eq_of_heq (dS.sections ((spTowerPush l E g).obj N) n U))
-      (dS.morphisms ((spTowerPush l E g).map f) n U)
-    have hT := moduleHom_fun_heq
-      (eq_of_heq (dT.sections M n ((Scheme.proEtaleBaseChange g).op.obj U)))
-      (eq_of_heq (dT.sections N n ((Scheme.proEtaleBaseChange g).op.obj U)))
-      (dT.morphisms f n ((Scheme.proEtaleBaseChange g).op.obj U))
-    exact hS.trans hT.symm)
+  let e : F ≅ G := NatIso.ofComponents
+    (towerEvaluation_component l E g dT dS n)
+    (fun f ↦ towerEvaluation_component_naturality l E g dT dS n f)
   have he : ∀ (M : spCoefficientTowers l E T) (U : S.ProEtᵒᵖ)
       (x : ((spCoefficientEvaluation l E S dS.equivalence n).obj
         ((spTowerPush l E g).obj M)).val.obj U),
       HEq ((e.hom.app M).val.app U x) x := by
     intro M U x
-    exact moduleEqToHom_apply_heq (towerEvaluation_sections l E g dT dS n M U) x
-  refine ⟨e, he, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  ext M U x
-  exact eq_of_heq ((he' M U x).trans (he M U x).symm)
+    exact towerEvaluation_component_apply l E g dT dS n M U x
+  exact moduleSheafIso_unique F G e he
 
 /-- The canonical underived evaluation identity, fixed by the identity on sections.
 Source: blueprint, levelwise direct image (blueprint: det-sp-tower-injective-components). -/
@@ -438,6 +527,248 @@ def spTowerEvaluationHomotopyIso (n : ℕ) :
       (G := spLevelPush l E g n)
       (H := spCoefficientEvaluation l E T dT.equivalence n ⋙ spLevelPush l E g n)
       (Iso.refl (spCoefficientEvaluation l E T dT.equivalence n ⋙ spLevelPush l E g n))).symm
+
+private theorem coefficientSystemEvaluation_smallLimits (n : ℕ) :
+    PreservesLimitsOfSize.{0, 0}
+      (systemEvaluation.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T) n) := by
+  have : EssentiallySmall.{max u (t + 1)} T.ProEt := essentiallySmallSelf T.ProEt
+  obtain ⟨L⟩ := systemLevelLeftExtensionTheory.{t + 1, t, max u (t + 1)}
+    (J := Scheme.ProEt.topology T)
+  let adj := (L.single (spCoefficientCommRings l E T) n).ordinaryAdj
+  let : (systemEvaluation.{t + 1, t, max u (t + 1)}
+    (spCoefficientCommRings l E T) n).IsRightAdjoint := ⟨_, ⟨adj⟩⟩
+  infer_instance
+
+private theorem small_module_evaluation_additive.{w} {C : Type w} [SmallCategory C]
+    (J : GrothendieckTopology C) (R : Sheaf J RingCat.{w}) (U : Cᵒᵖ) :
+    (SheafOfModules.evaluation.{w} R U).Additive :=
+  Functor.additive_of_preserves_binary_products _
+
+attribute [local instance] small_module_evaluation_additive
+
+private def supportedProductIso.{v, w} {C : Type w} [Category.{v} C]
+    [HasZeroMorphisms C] {X : ℕ → C} (P : Fan X) (hP : IsLimit P) (r : ℕ)
+    [HasProduct (fun n : Fin (r + 1) ↦ X n.val)]
+    (hz : ∀ n : ℕ, r < n → IsZero (X n)) :
+    P.pt ≅ ∏ᶜ fun n : Fin (r + 1) ↦ X n.val := by
+  classical
+  let f : (n : ℕ) → (∏ᶜ fun n : Fin (r + 1) ↦ X n.val) ⟶ X n := fun n ↦
+    if h : n < r + 1 then Pi.π (fun n : Fin (r + 1) ↦ X n.val) ⟨n, h⟩ else 0
+  let Q := Fan.mk (∏ᶜ fun n : Fin (r + 1) ↦ X n.val) f
+  refine
+    { hom := Pi.lift (fun n ↦ P.proj n.val)
+      inv := hP.lift Q
+      hom_inv_id := ?_
+      inv_hom_id := ?_ }
+  · apply hP.hom_ext
+    intro ⟨n⟩
+    rw [Category.assoc, hP.fac Q]
+    by_cases hn : n < r + 1
+    · simpa only [Q, Fan.mk_π_app, f, dif_pos hn, Category.id_comp, Fan.proj] using
+        Pi.lift_π (fun n : Fin (r + 1) ↦ P.proj n.val) ⟨n, hn⟩
+    · exact (hz n (by omega)).eq_of_tgt _ _
+  · apply Pi.hom_ext
+    intro n
+    rw [Category.assoc, Pi.lift_π]
+    simpa only [Q, Fan.mk_π_app, f, dif_pos n.isLt, Category.id_comp, Fan.proj, Fin.eta] using
+      hP.fac Q ⟨n.val⟩
+
+private theorem evaluatedProductRetract.{v, w, v', w'}
+    {A : Type w} [Category.{v} A] {B : Type w'} [Category.{v'} B]
+    [HasZeroMorphisms B] (V : A ⥤ B) [PreservesLimitsOfShape (Discrete ℕ) V]
+    {X : ℕ → A} (P : Fan X) (hP : IsLimit P) {I : A} (s : Retract I P.pt)
+    (r : ℕ) [HasProduct (fun n : Fin (r + 1) ↦ V.obj (X n.val))]
+    (hz : ∀ n : ℕ, r < n → IsZero (V.obj (X n))) :
+    Nonempty (Retract (V.obj I) (∏ᶜ fun n : Fin (r + 1) ↦ V.obj (X n.val))) := by
+  let Q : Fan (fun n ↦ V.obj (X n)) := Fan.mk (V.obj P.pt) (fun n ↦ V.map (P.proj n))
+  have hQ : IsLimit Q :=
+    isLimitFanMkObjOfIsLimit V _ _
+      (IsLimit.ofIsoLimit hP (Cone.ext (Iso.refl _) (by intro ⟨n⟩; simp [Fan.proj])))
+  exact ⟨(s.map V).trans (Retract.ofIso (supportedProductIso Q hQ r hz))⟩
+
+private theorem levelPush_additive (n : ℕ) : (spLevelPush l E g n).Additive :=
+  spCoefficientModulePushAdditive g _
+
+attribute [local instance] levelPush_additive
+
+private theorem sp_injective_component_retract (I : spCoefficientTowers l E T)
+    [Injective I] (r : ℕ) :
+    ∃ J : (n : Fin (r + 1)) →
+        systemLevel.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T) n.val,
+      (∀ n, Injective (J n)) ∧
+      Nonempty (Retract ((spCoefficientEvaluation l E T dT.equivalence r).obj I)
+        (∏ᶜ fun n : Fin (r + 1) ↦
+          (systemRestriction.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T)
+            (Nat.le_of_lt_succ n.isLt)).obj (J n))) := by
+  classical
+  have hR : Nonempty (SpTowerEvaluationAdjoint l E T dT) :=
+    sp_tower_evaluation_adjoint l E T dT
+  obtain ⟨R⟩ := hR
+  obtain ⟨J, i, hJ, hi, P, ⟨hP⟩, f, hf, hfi⟩ := R.embedding I
+  let : Mono f := hf
+  let s : Retract I P.pt := ⟨f, Injective.factorThru (𝟙 I) f, by simp⟩
+  let V := spCoefficientEvaluation l E T dT.equivalence r
+  let : PreservesLimitsOfSize.{0, 0}
+      (systemEvaluation.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T) r) :=
+    coefficientSystemEvaluation_smallLimits l E (T := T) r
+  let : PreservesLimitsOfShape (Discrete ℕ) V := inferInstance
+  have eLevel (n : ℕ) :
+      V.obj ((R.right n ⋙ dT.equivalence.inverse).obj (J n)) ≅
+        ((R.right n).obj (J n)).level r :=
+    (systemEvaluation.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T) r).mapIso
+      (dT.equivalence.counitIso.app _)
+  obtain ⟨a⟩ := evaluatedProductRetract V P hP s r (fun n hn ↦
+    (R.below n r hn (J n)).of_iso (eLevel n))
+  let b := Pi.mapIso (fun n : Fin (r + 1) ↦ eLevel n.val ≪≫
+    eqToIso (R.above n.val r (Nat.le_of_lt_succ n.isLt) (J n.val)))
+  exact ⟨fun n ↦ J n.val, fun n ↦ hJ n.val,
+    ⟨a.trans (Retract.ofIso b)⟩⟩
+
+private theorem acyclic_of_finite_product_retract.{v, w, v', w'}
+    {C : Type w} [Category.{v} C] {D : Type w'} [Category.{v'} D]
+    [Abelian C] [Abelian D] [HasInjectiveResolutions C]
+    (F : C ⥤ D) [F.Additive] {N : Type} [Finite N] (J : N → C)
+    {I : C} (s : Retract I (∏ᶜ J)) (hJ : ∀ n, F.rightAcyclic (J n)) :
+    F.rightAcyclic I := by
+  let : F.rightAcyclic.IsClosedUnderFiniteProducts :=
+    ObjectProperty.IsClosedUnderFiniteProducts.mk'
+  have hP := F.rightAcyclic.prop_product hJ
+  intro q
+  have h := s.map (F.rightDerived (q + 1))
+  exact IsZero.of_mono h.i (hP q)
+
+private theorem small_forgotten_injective_acyclic.{w}
+    {C : Type w} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J RingCat.{w}) (U : C) (I : SheafOfModules.{w} R) [Injective I] :
+    (sheafToPresheaf J AddCommGrpCat.{w} ⋙
+      (evaluation Cᵒᵖ AddCommGrpCat.{w}).obj (op U)).rightAcyclic
+        ((SheafOfModules.toSheaf R).obj I) := by
+  let := Sheaf.isGrothendieckAbelian_of_essentiallySmall.{w} J AddCommGrpCat.{w}
+  let : HasExt.{w} (Sheaf J AddCommGrpCat.{w}) := hasExt_of_enoughInjectives _
+  intro q
+  let : Subsingleton (Sheaf.H' ((SheafOfModules.toSheaf R).obj I) (q + 1) U) :=
+    injective_module_abelian_acyclic U I (q + 1) (Nat.succ_pos q)
+  obtain ⟨e⟩ := Sheaf.nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived J U (q + 1)
+  have hz : IsZero (Sheaf.H' ((SheafOfModules.toSheaf R).obj I) (q + 1) U) :=
+    AddCommGrpCat.isZero_of_subsingleton _
+  exact hz.of_iso (e.app _).symm
+
+private theorem small_module_evaluation_acyclic.{w}
+    {C : Type w} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J RingCat.{w}) [EnoughInjectives (SheafOfModules.{w} R)]
+    (U : C) (M : SheafOfModules.{w} R)
+    (hM : (sheafToPresheaf J AddCommGrpCat.{w} ⋙
+      (evaluation Cᵒᵖ AddCommGrpCat.{w}).obj (op U)).rightAcyclic
+        ((SheafOfModules.toSheaf R).obj M)) :
+    (SheafOfModules.evaluation.{w} R (op U)).rightAcyclic M := by
+  let := Sheaf.isGrothendieckAbelian_of_essentiallySmall.{w} J AddCommGrpCat.{w}
+  let F := SheafOfModules.toSheaf R
+  let B := sheafToPresheaf J AddCommGrpCat.{w} ⋙
+    (evaluation Cᵒᵖ AddCommGrpCat.{w}).obj (op U)
+  let E := SheafOfModules.evaluation.{w} R (op U)
+  have : E.Additive := Functor.additive_of_preserves_binary_products _
+  let V := forget₂ (ModuleCat.{w} (R.obj.obj (op U))) AddCommGrpCat.{w}
+  intro q
+  let e := Functor.compRightDerivedObjIso F B
+    (fun I _ ↦ small_forgotten_injective_acyclic J R U I) (q + 1) M
+  have hz : IsZero (((E ⋙ V).rightDerived (q + 1)).obj M) := (hM q).of_iso e
+  have hz' : IsZero (V.obj ((E.rightDerived (q + 1)).obj M)) :=
+    hz.of_iso (Functor.rightDerivedCompObjIso E V (q + 1) M).symm
+  apply (IsZero.iff_id_eq_zero _).2
+  apply V.map_injective
+  exact hz'.eq_of_src _ _
+
+private noncomputable def sp_module_site_lift
+    (R : Sheaf (Scheme.ProEt.topology T) RingCat.{max u (t + 1)}) :
+    let e := AsSmall.equiv.{t, t + 1, max u (t + 1)} (C := T.ProEt)
+    let K := e.inverse.inducedTopology (Scheme.ProEt.topology T)
+    SheafOfModules.{max u (t + 1)} R ≌
+      SheafOfModules.{max u (t + 1)}
+        ((e.sheafCongr (Scheme.ProEt.topology T) K RingCat.{max u (t + 1)}).functor.obj R) := by
+  let e := AsSmall.equiv.{t, t + 1, max u (t + 1)} (C := T.ProEt)
+  let K := e.inverse.inducedTopology (Scheme.ProEt.topology T)
+  let R' := (e.sheafCongr (Scheme.ProEt.topology T) K RingCat.{max u (t + 1)}).functor.obj R
+  let φ : R' ⟶ (e.inverse.sheafPushforwardContinuous RingCat.{max u (t + 1)}
+      K (Scheme.ProEt.topology T)).obj R := 𝟙 _
+  let ψ : R ⟶ (e.functor.sheafPushforwardContinuous RingCat.{max u (t + 1)}
+      (Scheme.ProEt.topology T) K).obj R' := 𝟙 _
+  have : e.symm.functor.IsContinuous K (Scheme.ProEt.topology T) := by
+    change e.inverse.IsContinuous K (Scheme.ProEt.topology T)
+    infer_instance
+  have : e.symm.inverse.IsContinuous (Scheme.ProEt.topology T) K := by
+    change e.functor.IsContinuous (Scheme.ProEt.topology T) K
+    infer_instance
+  exact SheafOfModules.pushforwardPushforwardEquivalence e.symm φ ψ
+    (by
+      ext U x
+      change (R.obj.map (𝟙 _)).hom x = x
+      rw [R.obj.map_id]
+      rfl)
+    (by
+      ext U x
+      change (R.obj.map (𝟙 _)).hom x = x
+      rw [R.obj.map_id]
+      rfl)
+
+private theorem sp_restricted_injective_sections
+    (R S : Sheaf (Scheme.ProEt.topology T) RingCat.{max u (t + 1)})
+    (φ : R ⟶ S) (I : SheafOfModules.{max u (t + 1)} S) [Injective I] (U : T.ProEt) :
+    (SheafOfModules.evaluation.{max u (t + 1)} R (op U)).rightAcyclic
+      ((SheafOfModules.restrictScalars φ).obj I) := by
+  let e := AsSmall.equiv.{t, t + 1, max u (t + 1)} (C := T.ProEt)
+  let K := e.inverse.inducedTopology (Scheme.ProEt.topology T)
+  let R' := (e.sheafCongr (Scheme.ProEt.topology T) K RingCat.{max u (t + 1)}).functor.obj R
+  let S' := (e.sheafCongr (Scheme.ProEt.topology T) K RingCat.{max u (t + 1)}).functor.obj S
+  let φ' := (e.sheafCongr (Scheme.ProEt.topology T) K RingCat.{max u (t + 1)}).functor.map φ
+  let LR := sp_module_site_lift (T := T) R
+  let LS := sp_module_site_lift (T := T) S
+  let : IsGrothendieckAbelian.{max u (t + 1)} (SheafOfModules.{max u (t + 1)} R') :=
+    SheafOfModules.isGrothendieckAbelianOfUniverses.{max u (t + 1), max u (t + 1),
+      max u (t + 1), 0} K R'
+  let : IsGrothendieckAbelian.{max u (t + 1)} (SheafOfModules.{max u (t + 1)} S') :=
+    SheafOfModules.isGrothendieckAbelianOfUniverses.{max u (t + 1), max u (t + 1),
+      max u (t + 1), 0} K S'
+  have : Injective (LS.functor.obj I) := LS.functor.injective_obj I
+  let E' := SheafOfModules.evaluation.{max u (t + 1)} R' (op (e.functor.obj U))
+  have : E'.Additive := Functor.additive_of_preserves_binary_products _
+  have h := small_module_evaluation_acyclic K R' (e.functor.obj U)
+    ((SheafOfModules.restrictScalars φ').obj (LS.functor.obj I))
+    (small_forgotten_injective_acyclic K S' (e.functor.obj U) (LS.functor.obj I))
+  let M := (SheafOfModules.restrictScalars φ).obj I
+  have h' : E'.rightAcyclic (LR.functor.obj M) := h
+  have : LR.functor.Additive := Functor.additive_of_preserves_binary_products _
+  intro q
+  let a := Functor.compRightDerivedObjIso LR.functor E'
+    (fun J _ ↦ Functor.rightAcyclic_of_injective _) (q + 1) M
+  exact (h' q).of_iso a
+
+private theorem sp_direct_image_acyclic_of_sections (r : ℕ)
+    (M : ringedSiteModules.{max u (t + 1)} (spCoefficientRing l E T r))
+    (hM : ∀ U : T.ProEt,
+      (SheafOfModules.evaluation.{max u (t + 1)} (spCoefficientRing l E T r)
+        (op U)).rightAcyclic M) :
+    (spLevelPush l E g r).rightAcyclic M := by
+  let P : ObjectProperty (ringedSiteModules.{max u (t + 1)} (spCoefficientRing l E T r)) :=
+    fun N ↦ ∀ U : T.ProEt,
+      (SheafOfModules.evaluation.{max u (t + 1)} (spCoefficientRing l E T r)
+        (op U)).rightAcyclic N
+  apply Functor.rightAcyclic_of_epi_map_g (spLevelPush l E g r) P
+  · intro I hI U
+    exact Functor.rightAcyclic_of_injective I
+  · intro C hC h₁ h₂ U
+    exact hC.rightAcyclic_X₃ (h₁ U) (h₂ U)
+  · intro C hC h₁
+    have hsurj (V : S.ProEtᵒᵖ) :
+        Function.Surjective (((spLevelPush l E g r).map C.g).val.app V) := by
+      let U := (Scheme.proEtaleBaseChange g).obj V.unop
+      have h := (hC.map_of_rightAcyclic (h₁ U)).epi_g
+      have hs := (ModuleCat.epi_iff_surjective _).1 h
+      intro x
+      exact hs x
+    have : Epi (((spLevelPush l E g r).map C.g).val) :=
+      PresheafOfModules.epi_of_surjective (fun {V} ↦ hsurj V)
+    exact (SheafOfModules.forget _).epi_of_epi_map this
+  · exact hM
 
 /-- The finite-product retract and both acyclicity conclusions for injective towers.
 Source: blueprint main-20261015, tower-level acyclicity lemma, paragraphs 1--2;
@@ -479,7 +810,17 @@ theorem sp_tower_injective_components (I : spCoefficientTowers l E T) [Injective
         ((spCoefficientEvaluation l E T dT.equivalence r).obj I)) ∧
     (∀ r : ℕ, (spLevelPush l E g r).rightAcyclic
       ((spCoefficientEvaluation l E T dT.equivalence r).obj I)) := by
-  sorry
+  have hret := sp_injective_component_retract l E dT I
+  have hsec (r : ℕ) (U : T.ProEt) :
+      (SheafOfModules.evaluation.{max u (t + 1)} (spCoefficientRing l E T r)
+        (op U)).rightAcyclic
+          ((spCoefficientEvaluation l E T dT.equivalence r).obj I) := by
+    obtain ⟨J, hJ, ⟨s⟩⟩ := hret r
+    apply acyclic_of_finite_product_retract _ _ s
+    intro n
+    let : Injective (J n) := hJ n
+    exact sp_restricted_injective_sections (T := T) _ _ _ (J n) U
+  exact ⟨hret, hsec, fun r ↦ sp_direct_image_acyclic_of_sections l E g r _ (hsec r)⟩
 
 /-- Evaluating any bounded below injective tower complex gives a complex computing
 finite-level derived direct image: its canonical right-derived unit is invertible.

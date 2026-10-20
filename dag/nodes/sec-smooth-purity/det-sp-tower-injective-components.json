@@ -38,11 +38,12 @@
    }
   },
   {
-   "text": "Apply [det-sp-tower-evaluation-adjoint] to obtain a monomorphism $a:I_\\bullet\\hookrightarrow P_\\bullet=\\prod_{n\\geq1}r_nJ_n$, with $J_n$ injective over $R_n$. By [def-sp-injective-resolutions], the identity of $I_\\bullet$ extends across $a$, giving $b:P_\\bullet\\to I_\\bullet$ with $ba=1$. Products of the systems in [sk-def-sp-coefficient-towers] are levelwise: the projections and a map into the product are defined componentwise, and compatibility with transitions is checked after each projection. Since $(r_nJ_n)_r=0$ for $n>r$ and equals the restriction of $J_n$ for $n\\leq r$, evaluation of $ba=1$ exhibits $I_r$ as a retract of the finite product $\\prod_{n\\leq r}\\operatorname{Res}_{R_r\\to R_n}J_n$.",
+   "text": "Apply [det-sp-tower-evaluation-adjoint] to obtain a monomorphism $a:I_\\bullet\\hookrightarrow P_\\bullet=\\prod_{n\\geq1}r_nJ_n$, with $J_n$ injective over $R_n$. By [def-sp-injective-resolutions], the identity of $I_\\bullet$ extends across $a$, giving $b:P_\\bullet\\to I_\\bullet$ with $ba=1$. Products of the systems in [sk-def-sp-coefficient-towers] are levelwise: the projections and a map into the product are defined componentwise, and compatibility with transitions is checked after each projection. Since $(r_nJ_n)_r=0$ for $n>r$ and equals the restriction of $J_n$ for $n\\leq r$, evaluation of $ba=1$ exhibits $I_r$ as a retract of the finite product $\\prod_{n\\leq r}\\operatorname{Res}_{R_r\\to R_n}J_n$. T4 formalization uses the ordinary left adjoint supplied by [lem-pur-system-level-left-extension]: system evaluation is a right adjoint and therefore preserves the countable product in the embedding. This replaces the explicit construction of pointwise small limits. The equivalence counit identifies its factors with the recorded strict levels; the lower zero factors are omitted by an explicit finite-product isomorphism. This works also at r=0 in the Lean indexing, where there is one factor.",
    "uses": [
     "det-sp-tower-evaluation-adjoint",
     "def-sp-injective-resolutions",
-    "sk-def-sp-coefficient-towers"
+    "sk-def-sp-coefficient-towers",
+    "lem-pur-system-level-left-extension"
    ],
    "elementary": false,
    "source": {
@@ -51,10 +52,11 @@
    }
   },
   {
-   "text": "For every object $U$ of $T_{\\mathrm{proet}}$ and $q>0$, apply [lem-sc-injective-module-abelian-acyclic-zariski] to the ringed site $(T_{\\mathrm{proet}},R_n)$ and the injective $J_n$. Despite its historical Zariski suffix, its statement is for an arbitrary ringed site and gives $H^q(U,(J_n)_{ab})=0$. Restriction along $R_r\\to R_n$ leaves this abelian sheaf unchanged. Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] with ring sheaf $R_r$ to deduce $R^q\\Gamma_{R_r}(U,\\operatorname{Res}J_n)=0$. The smallness, common-universe and enough-injectives hypotheses were established in step 1; no flatness of the quotient map or injectivity after restriction of scalars is asserted.",
+   "text": "Transport the pro-etale site to its AsSmall model in the common coefficient universe, using the induced topology and the explicit module pushforward equivalence. Equivalences preserve injectives and are exact. On that small model apply [lem-sc-injective-module-abelian-acyclic-zariski] to the injective module. [lem-sc-site-cohomology-right-derived-sections] identifies its positive abelian cohomology with positive right derived abelian evaluation. Scalar restriction leaves the abelian sheaf unchanged. The generic exact-composition comparisons compRightDerivedObjIso and rightDerivedCompObjIso identify derived module evaluation after the exact faithful module-to-abelian-group functor with this derived abelian evaluation; faithfulness reflects the resulting zero object. Transport back along the exact module equivalence to obtain section acyclicity on the original pro-etale site. No flatness or preservation of injectives by scalar restriction is used. These are the acyclic-resolution comparisons of [lemma-weil-pbc-leray-acyclicity]. This direct comparison works for the arbitrary induced Grothendieck topology and does not require choosing a precoverage presentation for it.",
    "uses": [
     "lem-sc-injective-module-abelian-acyclic-zariski",
-    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+    "lem-sc-site-cohomology-right-derived-sections",
+    "lemma-weil-pbc-leray-acyclicity"
    ],
    "elementary": false,
    "source": {
@@ -63,10 +65,10 @@
    }
   },
   {
-   "text": "Fix $r,U$ and use injective $R_r$-module resolutions $L_n^\\cdot$ of the finitely many restricted $J_n$. Their finite product is an injective resolution of $P_r$: maps into a finite product extend coordinatewise by [def-sp-injective-resolutions], and kernels and images in a finite sum of complexes are coordinatewise. Sections of this resolution and their cohomology are also finite products. The defining formula for derived functors in [def-sp-left-exact-additive] therefore gives $R^q\\Gamma(U,P_r)=\\prod_{n\\leq r}R^q\\Gamma(U,\\operatorname{Res}J_n)=0$ for $q>0$. Applying the functor $R^q\\Gamma(U,-)$ to the two maps splitting $I_r$ off $P_r$ factors its identity through zero, so $R^q\\Gamma(U,I_r)=0$. This proves the section-acyclicity claim without any infinite-product exactness claim.",
+   "text": "The additive higher right-derived functors preserve finite biproducts, hence their acyclic-object property is closed under binary products and contains zero. The finite-product closure theorem gives section acyclicity of the product of restricted injectives. Apply each positive derived section functor to the evaluated retract. Its section factor embeds into a zero object, hence is zero. This uses [def-sp-left-exact-additive] and the injective/acyclic-resolution properties of [lemma-weil-pbc-leray-acyclicity], without any infinite-product exactness assertion.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "def-sp-left-exact-additive"
+    "def-sp-left-exact-additive",
+    "lemma-weil-pbc-leray-acyclicity"
    ],
    "elementary": true,
    "source": {
@@ -75,9 +77,9 @@
    }
   },
   {
-   "text": "Let $L^\\cdot$ be an injective $R_r$-module resolution of $I_r$. By step 4 and the defining formula of [def-sp-left-exact-additive], $H^q(L^\\cdot(U))=0$ for every $U$ and $q>0$. For an object $V$ of $S_{\\mathrm{proet}}$, [def-weil-pbc-proetale-operations] gives $(g_*L^\\cdot)(V)=L^\\cdot(T\\times_S V)$, whose positive cohomology therefore vanishes. Every positive-degree sectionwise cycle is a sectionwise boundary; since kernels are sectionwise and cokernels are sheafified sectionwise cokernels by [def-weil-sheaf-of-modules-category], the positive cohomology sheaves of $g_*L^\\cdot$ vanish. Thus $R^qg_*I_r=0$ for $q>0$, exactly $g_*$-acyclicity [def-sp-acyclic]. This is the sheafification-of-cohomology argument, written directly on the resolution.",
+   "text": "Use the dimension-shifting acyclicity criterion rightAcyclic_of_epi_map_g from the existing acyclicity API [lemma-weil-pbc-leray-acyclicity], with P the property of being acyclic for sections over every pro-etale object. Injectives satisfy P by the generic vanishing of positive right derived functors on injectives. The long exact derived section sequence shows P is closed under cokernels of monomorphisms between P-objects. For a short exact sequence with first term in P, evaluation over every base-changed object is short exact by map_of_rightAcyclic. The section formula of [def-weil-pbc-proetale-operations] therefore makes the direct image of its last map sectionwise surjective. The module-presheaf epimorphism criterion and the faithful full sheaf inclusion yield an epimorphism of module sheaves. The acyclicity criterion proves [def-sp-acyclic] for direct image. This is the dimension-shifting form of the blueprint sheafification-of-cohomology argument, using only left exactness and the section formula of the actual direct image.",
    "uses": [
-    "def-sp-left-exact-additive",
+    "lemma-weil-pbc-leray-acyclicity",
     "def-weil-pbc-proetale-operations",
     "def-weil-sheaf-of-modules-category",
     "def-sp-acyclic"
@@ -126,11 +128,13 @@
   "def-weil-sheaf-of-modules-category",
   "det-sp-coefficient-towers-abelian",
   "det-sp-tower-evaluation-adjoint",
+  "lem-pur-system-level-left-extension",
   "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sc-site-cohomology-right-derived-sections",
   "lem-sp-grothendieck-enough-injectives",
   "lem-weil-pbc-right-derived-plus-injective",
   "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lemma-weil-pbc-leray-acyclicity",
   "sk-def-sp-coefficient-towers",
   "src-right-derived-functor-plus-acyclic-unit",
   "src-sbc-exact-functor-plus-unit"
@@ -138,7 +142,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-acyclic.proof.md",
-  "place": "All three paragraphs, with Stacks 03FD and 015E supplying the cited general tools and elementary finite-product/sheaf-exactness details written out; X8 stage 3 formalization: direct D+ acyclic-unit and exact-unit computations, and uniqueness of the composite right derived functors; no separate K-injectivity argument is needed by these D+ declarations. X8 continuation also proves pointwise finite-limit preservation and the unique identity-on-sections underived evaluation comparison from the published section, restriction and morphism normalizations. The final derived uniqueness proof is factored through a fully proved private generic lemma for efficient kernel checking."
+  "place": "All three paragraphs, with Stacks 03FD and 015E supplying the cited general tools and elementary finite-product/sheaf-exactness details written out; X8 stage 3 formalization: direct D+ acyclic-unit and exact-unit computations, and uniqueness of the composite right derived functors; no separate K-injectivity argument is needed by these D+ declarations. X8 continuation also proves pointwise finite-limit preservation and the unique identity-on-sections underived evaluation comparison from the published section, restriction and morphism normalizations. The final derived uniqueness proof is factored through a fully proved private generic lemma for efficient kernel checking. T4 closes the last original hole by the existing ordinary left adjunction for system evaluation, the finite-support product isomorphism, module equivalences to the common-universe AsSmall site, the existing abelian cohomology and acyclic-resolution comparisons, and the dimension-shifting direct-image acyclicity criterion. No new unproved result or interface change. T4 also factors the existing coefficient-map naturality, presheaf pushforward finite-limit preservation, and identity-on-sections evaluation comparison through fully proved private generic/component helpers to avoid expensive coefficient-definition unfolding; helper instance attributes are local. The evaluated-product retract is factored through a fully proved private generic helper, and the concrete level-pushforward additive instance is registered locally to avoid repeated typeclass search."
  },
  "mathlib_searches": [
   {
@@ -320,7 +324,6 @@
  "tool_uses": [
   "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-sc-injective-module-abelian-acyclic-zariski",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
   "src-right-derived-functor-plus-acyclic-unit"
  ],
  "reviewed": {
@@ -395,13 +398,13 @@
   "note": "Read node, 8 stmt_deps and their Lean records, full module, report, side-clone declarations (SpCoefficientTowersAbelian HEq normalizations, systemLevel/systemRestriction, rightAcyclic, coefficientProEtaleModuleDirectImage). Every clause matches: Fin(r+1) retract onto restricted injective J_n (paper levels 1..r+1), section and g_*-acyclicity via Functor.rightAcyclic (def-sp-acyclic record), real product-site tower pushforward via canonical constant-section ring map, D+ rightDerivedFunctorPlus with unit-pinned resolution computation and a unique unit-compatible natural comparison (checked true). No added hypotheses or universe restriction; witnesses dT/dS are published inhabited data. No hollow defs, all theorems sorry, docstrings with source/blueprint tag, lines <=100. Node differs only in lean and stmt_deps (+landed def-weil-proetale-inverse-image, permitted); lean.statement verbatim. nt_compile --json exit 0, 21.5 s, no errors/warnings (negative control fails as expected). Non-blocking notes: second-reading section is the post-10-17 stub; the def-weil-proetale-inverse-image record could list the universe-independent coefficientProEtaleModuleDirectImage."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X8",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261019T034351-L-425863",
-  "kind": "proof",
+  "landing": "20261020T132042-L-1407135",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
