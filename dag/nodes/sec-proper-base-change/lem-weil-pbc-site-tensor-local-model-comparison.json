@@ -20,89 +20,76 @@
  },
  "proof": [
   {
-   "text": "Use good upper truncation and bounded-above flat replacement to represent the bounded-above derived objects with the same upper bounds on terms. They are K-flat by the bounded-above flat criterion. The mapping-cone criterion and the defining acyclic-tensor property of the given K-flat P and Q identify their tensor cohomology with that computed by these flat representatives.",
+   "text": "Translate the acyclic-tensor hypothesis to the source K-flat predicate using the homotopy-category acyclic criterion and its braiding. The source bounded flat model theorem applied to good upper truncation gives flat representatives with the stated upper term bounds. The generic bounded-above flat criterion makes them K-flat. Tensoring the two quasi-isomorphisms and applying QObjTensorQObjIsoOfKFlatLeft gives the comparison with derived tensor. Functorial flat resolutions of module sheaves are supplied by hasFunctorialFlatResolution_kfi.",
    "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pc-bounded-above-flat-kflat-site",
     "def-pc-kflat-complex",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-pc-kflat-resolution",
+    "lem-pc-source-kflat-module-tensor-model",
+    "def-kun-truncations"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction is exact and commutes with sheaf tensor and sums. Restricted flat representatives remain flat and bounded above, hence K-flat. The tensor comparison is the same presheaf bilinear map at each object of the slice; slice sheafification has the same local representatives and equalities. This identifies restriction of tensor cohomology with the local derived-tensor computation.",
+   "text": "Prove that slice restriction preserves finite limits by sectionwise evaluation. Prove preservation of countable colimits by the slice sheafification comparison, lifting every sheaf diagram to presheaves by the sheafification counit. Use sliceTensorIso and its naturality for the tensor comparison. Flatness of restricted objects follows from the finite-limit component of restriction-flatness and the closed symmetric tensor structure.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-pur-sheaf-tensor-product",
     "def-pur-localized-ringed-site",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-slice-restriction-flat",
-    "lem-pc-bounded-above-flat-kflat-site"
+    "lem-weil-pbc-slice-tensor-natural",
+    "lem-weil-pbc-slice-restriction-flat-finite-limits",
+    "def-pc-flat-sheaf-modules"
    ],
    "elementary": false
   },
   {
-   "text": "Prove the needed truncation window directly with cutoffs a=i-bQ and c=i-bP. The removed lower pieces have upper cohomological bounds a-1 and c-1. Give each removed piece and the other factor bounded-above flat representatives using good upper truncation and bounded flat replacement. Their tensor has zero terms above the sum of these bounds, which is i-1. Tensor the truncation triangles; the long exact homology sequences therefore identify degree-i cohomology with that of the two truncated factors. A cutoff above the upper bound gives zero and is included. No separately packaged truncation-window declaration is used.",
+   "text": "For each factor, map the short exact good-truncation triangle through restriction and then through the appropriate left or right derived tensor functor. The source upper tensor bound puts the discarded tensor in degrees at most i-1. The long exact homology sequence makes the middle-to-right map an isomorphism in degree i. Identify the quotient term with good lower truncation. This applies also when a cutoff is above the upper bound.",
    "uses": [
     "def-kun-truncations",
     "def-sbc-standard-tstructure-derived-category",
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the two given derived isomorphisms. A finite free module realizes as a finite sum of the ring sheaf, by a basis and preservation of finite sums. Tensoring with it is a finite sum of the identity functor and is exact. Thus the constant realizations of E and F are termwise flat; their upper term bounds make them K-flat. Derived tensor descent computes their local tensor by their total tensor.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On finite free terms, the maps sending a tensor of basis vectors to the corresponding tensor-basis vector and conversely identify c(E^p) tensor c(F^q) with c(E^p tensor F^q). These maps commute with every matrix of B-linear differentials by bilinearity. If E vanishes above r and F above s, only n-s <= p <= r, q=n-p, contribute in degree n. Thus finite sums assemble the termwise comparison into an isomorphism of total complexes, including the sign (-1)^p on the second differential. Constant realization preserves these finite sums by its exactness.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take degree-i cohomology of the complex isomorphism on the slice and combine it with the truncation and representative comparisons. Both sides are homology of restricted complexes; no commutation of restriction with homology or finite-generation assertion about cycles is included in the conclusion.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-source-derived-tensor-upper-bound",
     "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant module presheaf of a flat B-module is tensor-flat by evaluation of limits. Sheafification preserves this flatness. Constant realization preserves countable colimits by evaluation and sheafification; its tensor isomorphism is the constant-presheaf tensor identity followed by the sheafification tensor comparison. Naturality assembles this into the signed total-complex comparison using mapBifunctorComparison.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-pc-sites-modules-sheafification-flat",
+    "lem-pc-sites-module-sheafification-tensor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the supplied local derived isomorphisms for both truncated factors. The first finite free constant model is bounded above and termwise flat, hence K-flat; the source K-flat tensor comparison therefore computes the tensor with the second model, with no flatness or upper bound of the second model required. Compose with the constant-realization and restriction total-tensor comparisons, then take degree-i homology and its factorization through Q.",
+   "uses": [
+    "lem-pc-source-kflat-module-tensor-model",
+    "def-weil-derived-cohomology-sheaves",
+    "lem-weil-pbc-slice-tensor-natural"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sbc-standard-tstructure-derived-category",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-bounded-above-flat-kflat-site",
   "def-pc-kflat-complex",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "def-pur-sheaf-tensor-product",
-  "def-pur-localized-ringed-site",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-weil-pbc-slice-restriction-flat",
+  "lem-pc-kflat-resolution",
+  "lem-pc-source-kflat-module-tensor-model",
   "def-kun-truncations",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-slice-tensor-natural",
+  "lem-weil-pbc-slice-restriction-flat-finite-limits",
   "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-derived-cohomology-sheaves"
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-source-derived-tensor-upper-bound",
+  "def-weil-derived-cohomology-sheaves",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-pc-sites-modules-sheafification-flat",
+  "lem-pc-sites-module-sheafification-tensor",
+  "def-pc-tensor-complex-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 094H, truncation reduction and computation using finite-free constant complexes; Tags 06YS and 06YQ; stage-3 interface reduction of lem-weil-pbc-locally-constant-tensor"
+  "place": "Tags 094H, 06YS and 06YQ; E1 stage-3 proof via the source FlatModel API, two truncation triangles, and natural total-tensor comparisons."
  },
  "mathlib_searches": [
   {
@@ -176,12 +163,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261018T091407-L-3256965",
+  "landing": "20261020T051207-L-1591185",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
