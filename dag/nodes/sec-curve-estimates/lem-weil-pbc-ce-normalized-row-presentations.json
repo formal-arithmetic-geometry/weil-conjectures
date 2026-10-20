@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Use cartanEilenberg_second_filtration to obtain the prescribed second filtration, its graded page zero and the finite image-filtration transport. Use cartanEilenberg_total_resolution, the canonical grothendieckKInjectiveResolutionChoice, kInjective_computes and cartanEilenberg_mapped_total_iso to construct the augmentation, comparison and sections map with their summand equations. Compose its homology isomorphism with resolutionEtaleCohomologyIso and apply the image-filtration transport to this specific composite.",
+   "text": "Use cartanEilenberg_second_filtration to obtain the prescribed second filtration, its graded page zero and the finite image-filtration transport. Use cartanEilenberg_total_resolution, the canonical grothendieckKInjectiveResolutionChoice, CochainComplex.KInjectiveResolution.homotopyEquiv and homotopyEquivHomotopy and cartanEilenberg_mapped_total_iso to construct the augmentation, comparison and sections map with their summand equations. Compose its homology isomorphism with resolutionEtaleCohomologyIso and apply the image-filtration transport to this specific composite.",
    "uses": [
     "lem-sp-cartan-eilenberg-second-filtration",
     "lem-sp-cartan-eilenberg-total-resolution",
@@ -55,7 +55,7 @@
    "elementary": false
   },
   {
-   "text": "Prove coefficient naturality of ceRowOrdinaryIso locally: reuse the proved extClass_naturality and classSectionsIso_naturality implementation lemmas, then the natural mapExtendIso and extendHomologyIso equations. Compose isoRightDerivedObj with this explicit ordinary comparison and use right-derived naturality to obtain ordinary_naturality. Assemble all presentation fields. The inverse and hom of the row-resolution comparison cancel, leaving precisely signedRowComparison followed by ceRowOrdinaryIso. Choose the pointwise witnesses simultaneously; the prescribed bicomplex remains definitionally unchanged. No new unproved statement is used.",
+   "text": "Prove coefficient naturality of ceRowOrdinaryIso locally: reuse the proved extClass_naturality and classSectionsIso_naturality implementation lemmas, then the natural mapExtendIso and extendHomologyIso equations. Compose their four commutative squares with CommSq.vert_comp and cancel the inverse comparisons with CommSq.vert_inv, without unfolding the comparison data in the simplifier. Compose isoRightDerivedObj with this explicit ordinary comparison and use right-derived naturality to obtain ordinary_naturality. Assemble all presentation fields. The inverse and hom of the row-resolution comparison cancel, leaving precisely signedRowComparison followed by ceRowOrdinaryIso. Choose the pointwise witnesses simultaneously; the prescribed bicomplex remains definitionally unchanged. No new unproved statement is used.",
    "uses": [
     "lem-weil-pbc-sheafH-ext-derived-comparison",
     "lem-weil-pbc-ce-row-ordinary-naturality",
@@ -82,10 +82,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q3",
-  "date": "2026-10-13",
+  "group": "B5",
+  "date": "2026-10-20",
   "document": "Stacks Project, Tags 015J, 015K, 0130, 012K and 06XR",
-  "place": "Prescribed CE total, concrete normalized pages and canonical signed row comparisons; implemented with existing proved library constructions"
+  "place": "Repair of the quarantined normalized CE presentation proof: package the total and canonical resolutions as KInjectiveResolution, use homotopyEquiv and homotopyEquivHomotopy, then apply the unchanged mapped-total, normalized-page and signed-row construction."
  },
  "mathlib_searches": [
   {
@@ -146,12 +146,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "B5",
   "result": "pass",
-  "landing": "20261013T150352-L-810046",
+  "landing": "20261020T145449-L-2397852",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
