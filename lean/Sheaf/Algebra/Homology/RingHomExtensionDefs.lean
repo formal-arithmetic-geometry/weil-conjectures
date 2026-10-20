@@ -5,7 +5,7 @@ Authors: SHEAF group Q1, SHEAF group T3
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplexProjections
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
 
@@ -52,7 +52,7 @@ noncomputable def ringHomComplexProjection {A : Type u} [CommRing A]
     (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X n ⟶
       SheafOfModules.homObj (R := CochainComplex.onePointRingSheaf A)
         (P.X p) (Q.X (p + n)) :=
-  (homComplex_exists (R := CochainComplex.onePointRingSheaf A)).choose_spec.choose
+  (homComplex_projections_exists (R := CochainComplex.onePointRingSheaf A)).choose
     P Q n p (p + n) rfl
 
 /-- Evaluate a product coordinate of the shared Hom complex on the unique object's slice.
