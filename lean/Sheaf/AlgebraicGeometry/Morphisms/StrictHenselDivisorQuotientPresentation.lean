@@ -62,7 +62,7 @@ theorem strictHenselizationRing_divisor_quotient_presentation
       Algebra.IsStrictHenselization (Localization.AtPrime p) K
         (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
   obtain ⟨q, hq, K, hK, ares, hsep, aK, htower, aH, hbase, hH⟩ :=
-    strictHenselizationRing_local_presentation R barY b hb
+    smallStrictHenselizationRing_local_presentation R barY b hb
   let := hq
   let := hK
   let := ares

@@ -1,52 +1,82 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group U2, SHEAF group J4, SHEAF group K1
+Authors: SHEAF group B4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalPresentation
 
-/-! # Geometric strict henselization as a local-base algebra
+/-!
+# Local presentation for the small strict-henselization colimit
 
-Source: Stacks Project, Tag 04HX (lemma-describe-etale-local-ring).
+Transport the upstream presentation through the canonical comparison of affine colimits.
+Source: Stacks Project, Tag 04HX.
 (blueprint: lem-sbc-geometric-strict-henselization-local-presentation)
 -/
 
 @[expose] public section
 
 universe u
-open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
--- The nested representative, affine-chart and triple diagrams require extra elaboration.
-set_option backward.isDefEq.respectTransparency false in
-/-- The geometric strict henselization is an algebraic strict henselization of a prime
-localization, compatibly with the given structural ring map. There is no divisor here.
-Source: Stacks Project, Tag 04HX (lemma-describe-etale-local-ring), using Tag 04GW.
+private theorem comparison_base
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) :
+    Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      strictHenselizationStructuralMap s = strictLocalizationToBase s := by
+  classical
+  let : HasColimit (strictHenselizationDiagram s) := inferInstance
+  let := (strictHenselization_properties s).2.1
+  let j := Classical.choice (IsCofiltered.nonempty (C :=
+    SmallModel.{u} (strictHenselizationNeighbourhoods s)))
+  have hs : (strictHenselizationCone s).π.app (Opposite.op (Opposite.op j)) ≫
+      Spec.map (ΓSpecIso
+        (((equivSmallModel.{u}
+          (strictHenselizationNeighbourhoods s)).inverse.obj j).1.left.unop)).inv ≫
+      ((AffineEtale.Spec S).obj
+        (((equivSmallModel.{u}
+          (strictHenselizationNeighbourhoods s)).inverse.obj j).1)).hom =
+      strictHenselizationStructuralMap s :=
+    (exists_strictHenselizationStructuralMap s).choose_spec j
+  rw [← hs]
+  have hι : colimit.ι (strictHenselizationAffineDiagram s) (Opposite.op j) ≫
+      (smallStrictHenselizationColimitIso s).hom =
+      (smallStrictHenselizationCocone s).ι.app (Opposite.op j) := by
+    let := strictHenselizationAffineInclusion_isEquivalence s
+    exact Functor.Final.ι_colimitIso_hom
+      ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
+        strictHenselizationAffineInclusion s).op (strictHenselizationDiagram s) (Opposite.op j)
+  have hleg : Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      (strictHenselizationCone s).π.app (Opposite.op (Opposite.op j)) =
+      (strictHenselizationAffineCone s).π.app (Opposite.op (Opposite.op j)) := by
+    change Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      Spec.map (colimit.ι (strictHenselizationAffineDiagram s) (Opposite.op j)) = _
+    rw [← Spec.map_comp, hι]
+    rfl
+  rw [← Category.assoc, hleg]
+  exact strictHenselizationStructuralMap_eq s j
+
+/-- The small coordinate-ring colimit has the local presentation of the upstream affine
+colimit, with its specified structural ring map preserved.
+Source: Stacks Project, Tag 04HX (lemma-describe-etale-local-ring).
 (blueprint: lem-sbc-geometric-strict-henselization-local-presentation)
 
-Proof: Let q be the image of the geometric point, and put A = R_q. Its residue field is
-canonically the residue field at q. Inside the geometric field take the relative separable
-closure K of that residue field. Affine pointed etale neighbourhoods compute the geometric
-strict henselization ring. By the affine neighbourhood/triples comparison their coordinate
-ring diagram is equivalent to etale residue triples over R at q with embeddings into K.
-Passing from R to A does not change its colimit: etale algebras and their finitely many
-presentation equations descend from A to R after inverting one element outside q, and
-these principal localizations are pointed etale neighbourhoods. The equivalence between
-residue triples over the local ring A and etale A-algebras pointed in K identifies this
-colimit with the diagram defining Algebra.IsStrictHenselization. Each element outside q
-is a unit in the colimit, so the structural R-map extends uniquely to A. The comparison
-preserves the maps from R; applying the faithful spectrum functor and hb identifies that
-R-map with b. Transport the A-algebra structure through the colimit ring isomorphism;
-its composite with R -> A is therefore b. All colimit identifications are characterized
-by their legs, so no arbitrary algebraic object is chosen from mere existence. -/
-theorem strictHenselizationRing_local_presentation
+Proof: Compare the small representative colimit H with the affine-neighbourhood colimit
+H' by their canonical colimit isomorphism e. The coprojection formula for e identifies
+its spectrum with the two structural maps on any representative pointed neighbourhood.
+Thus b followed by e has the structural-map equation required by the upstream local
+presentation theorem. Retain its prime, separable closure and scalar tower. Pull the
+local-base algebra structure back along e inverse. This makes e inverse an algebra
+isomorphism, so composing it with the universal pointed-etale cocone isomorphism proves
+IsStrictHenselization for H. The elementwise base-map equation follows by applying e
+inverse to the equation for H'. No local algebra or ring is selected from mere existence.
+-/
+theorem smallStrictHenselizationRing_local_presentation
     (R : CommRingCat.{u})
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Spec R)
@@ -64,82 +94,32 @@ theorem strictHenselizationRing_local_presentation
         (algebraMap R (Localization.AtPrime q) r) = b.hom r) ∧
       Algebra.IsStrictHenselization (Localization.AtPrime q) K
         (strictHenselizationRing barY) := by
-  classical
-  let p := (SpecToEquivOfField Ω (Spec R) barY).1
-  let F := (Spec R).residueField p
-  let : Algebra F Ω := (SpecToEquivOfField Ω (Spec R) barY).2.hom.toAlgebra
-  let K := separableClosure F Ω
-  let χ := CommRingCat.ofHom (algebraMap F K)
-  let P : ObjectProperty (pointSmallEtale barY).fiber.Elements :=
-    fun c ↦ IsAffine c.1.left
-  let Q : ObjectProperty P.FullSubcategory :=
-    fun c ↦ ∃ g : c.obj.1.left ⟶ Spec R, g ≫ 𝟙 (Spec R) = c.obj.1.hom
-  have h := etale_local_ring_triples (Spec R) Ω R (𝟙 (Spec R)) barY
-  rw [Category.comp_id] at h
-  obtain ⟨-, -, -, -, E, δ, hE, cn, -, ct,
-    ⟨hcn⟩, -, ⟨hct⟩, -, s, -, hs⟩ := h
-  let G := (equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse ⋙
-    strictHenselizationAffineInclusion barY
-  have : (strictHenselizationAffineInclusion barY).IsEquivalence :=
-    strictHenselizationAffineInclusion_isEquivalence barY
-  let k : Cocone (strictHenselizationAffineDiagram barY) :=
-    colimit.cocone (strictHenselizationAffineDiagram barY)
-  have hk : IsColimit k := colimit.isColimit _
-  -- Specify the cocone before Lean infers it from the reducible colimit vertex.
-  let eN : cn.pt ≅ strictHenselizationRing barY :=
-    ((Functor.Final.isColimitWhiskerEquiv G.op cn).symm hcn).coconePointUniqueUpToIso
-      (t := k) hk
-  have hleg (j : SmallModel.{u} (strictHenselizationNeighbourhoods barY)) :
-      cn.ι.app (op (G.obj j)) ≫ eN.hom = k.ι.app (op j) :=
-    IsColimit.comp_coconePointUniqueUpToIso_hom _ (t := k) hk (op j)
-  let e : ct.pt ≅ strictHenselizationRing barY := s.symm ≪≫ eN
-  -- The identity triple determines the common structural map from R.
-  let t0 : EtaleResidueTriples R p K χ :=
-    ⟨R, 𝟙 R, inferInstance, p, by simp, χ, by simp⟩
-  let b' : R ⟶ strictHenselizationRing barY := ct.ι.app t0 ≫ e.hom
-  have hbase (t : EtaleResidueTriples R p K χ) : t.α ≫ ct.ι.app t ≫ e.hom = b' := by
-    let f : t0 ⟶ t := InducedCategory.homMk
-      (Under.homMk (Over.homMk t.α t.compatible) (by
-        apply Over.OverMorphism.ext
-        change (𝟙 R) ≫ t.α = t.α
-        simp))
-    exact congrArg (fun z ↦ z ≫ e.hom) (ct.w f)
-  let := (strictHenselization_properties barY).2.1
-  let j := Classical.choice (IsCofiltered.nonempty (C :=
-    SmallModel.{u} (strictHenselizationNeighbourhoods barY)))
-  let c : Q.FullSubcategory := ⟨G.obj j, (G.obj j).obj.1.hom, by simp⟩
-  have hα := (hE c).1 (G.obj j).obj.1.hom (by rfl)
-  have hmap : b' = (ΓSpecIso R).inv ≫ (G.obj j).obj.1.hom.appTop ≫
-      k.ι.app (op j) := by
-    rw [← hbase (E.functor.obj (op c)), ← hα]
-    simp only [Category.assoc]
-    rw [← Category.assoc (δ.hom.app (op c)), ← hs (op c)]
-    simp only [e, Iso.trans_hom, Iso.symm_hom, Category.assoc,
-      Iso.hom_inv_id_assoc]
-    change (ΓSpecIso R).inv ≫ (G.obj j).obj.1.hom.appTop ≫
-      (cn.ι.app (op (G.obj j)) ≫ eN.hom) = _
-    rw [hleg]
-  -- Check the map on a representative, then use faithfulness of Spec.
-  have hstruct : Spec.map b' = strictHenselizationStructuralMap barY := by
-    rw [hmap, Spec.map_comp, Spec.map_comp]
-    let B := ((equivSmallModel.{u}
-      (strictHenselizationNeighbourhoods barY)).inverse.obj j).1.left.unop
-    let g : Spec B ⟶ Spec R := (G.obj j).obj.1.hom
-    have hn := Scheme.toSpecΓ_naturality g
-    have hn' := congrArg
-      (fun z ↦ Spec.map (ΓSpecIso B).inv ≫ z ≫ Spec.map (ΓSpecIso R).inv) hn
-    simp only [Category.assoc, SpecMap_ΓSpecIso_inv_toSpecΓ_assoc,
-      toSpecΓ_SpecMap_ΓSpecIso_inv, Category.comp_id] at hn'
-    change (strictHenselizationCone barY).π.app (op (op j)) ≫
-      Spec.map g.appTop ≫ Spec.map (ΓSpecIso R).inv = _
-    rw [← hn']
-    exact strictHenselizationStructuralMap_eq barY j
-  have hb' : b' = b := Spec.map_injective (hstruct.trans hb.symm)
-  obtain ⟨L, hL, ares, hsep, aL, htower, aH, hcomp, hstrict⟩ :=
-    etaleResidueTriples_localized_isStrictHenselization R p K ct hct
-      (strictHenselizationRing barY) e b' hbase
-  refine ⟨p.asIdeal, inferInstance, L, hL, ares, hsep, aL, htower, aH, ?_, hstrict⟩
-  intro x
-  exact (hcomp x).trans (congrArg (fun f : R ⟶ strictHenselizationRing barY ↦ f.hom x) hb')
+  let e : strictHenselizationRing barY ≅ strictHenselization barY :=
+    smallStrictHenselizationColimitIso barY
+  have hbe : Spec.map (b ≫ e.hom) = strictLocalizationToBase barY := by
+    rw [Spec.map_comp, hb]
+    exact comparison_base barY
+  obtain ⟨q, hq, K, hK, ares, hsep, aK, htower, aH, hbase, hH⟩ :=
+    strictHenselizationRing_local_presentation R barY (b ≫ e.hom) hbe
+  let := hq
+  let := hK
+  let := ares
+  let := hsep
+  let := aK
+  let := htower
+  let := aH
+  let a : Algebra (Localization.AtPrime q) (strictHenselizationRing barY) :=
+    (e.inv.hom.comp (algebraMap (Localization.AtPrime q) (strictHenselization barY))).toAlgebra
+  let f : strictHenselization barY ≃ₐ[Localization.AtPrime q] strictHenselizationRing barY :=
+    { toRingEquiv := e.symm.commRingCatIsoToRingEquiv
+      commutes' _ := rfl }
+  refine ⟨q, hq, K, hK, ares, hsep, aK, htower, a, ?_, ?_⟩
+  · intro r
+    change e.inv.hom (algebraMap (Localization.AtPrime q) (strictHenselization barY)
+      (algebraMap R (Localization.AtPrime q) r)) = b.hom r
+    rw [hbase r]
+    exact e.commRingCatIsoToRingEquiv.symm_apply_apply (b.hom r)
+  · obtain ⟨c, hc, ⟨i⟩⟩ := hH
+    exact ⟨c, hc, ⟨i ≪≫ CommAlgCat.isoMk f⟩⟩
 
 end AlgebraicGeometry.Scheme
