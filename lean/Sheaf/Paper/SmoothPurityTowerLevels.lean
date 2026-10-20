@@ -10,13 +10,16 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Coseparator
-import Mathlib.CategoryTheory.Adjunction.AdjointFunctorTheorems
-import Mathlib.CategoryTheory.Limits.FullSubcategory
-import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
-import Sheaf.Paper.SmoothPurityLevelPullbackExact
-import Sheaf.Paper.SmoothPurityTowerPushRightExtension
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Paper.SmoothPurityCoefficientTowers
+import Sheaf.Paper.SmoothPurityCoefficientTowersAbelian
+import Sheaf.Paper.SmoothPurityTowerEvaluationAdjoint
 
 /-!
 # Levels of the smooth-purity tower direct image
@@ -97,45 +100,7 @@ All choices here are adjoints to the fixed, explicitly constructed direct images
 so the resulting inverse images are determined up to the unique adjunction isomorphism. -/
 theorem sp_tower_operations_exist :
     (spTowerPush l E g).IsRightAdjoint := by
-  have := (Classical.choice (sp_coefficient_towers_abelian l E T)).grothendieck
-  have inclusionLimits (X : Scheme.{t}) :
-      PreservesLimitsOfSize.{max u (t + 1), max u (t + 1)}
-        (spCoefficientTowerSheafCondition l E X).ι := by
-    have (J : Type (max u (t + 1))) [SmallCategory J] :
-        (spCoefficientTowerSheafCondition l E X).IsClosedUnderLimitsOfShape J := by
-      constructor
-      rintro M ⟨c⟩ n
-      let V :=
-        PresheafOfModules.toPresheaf.{max u (t + 1)} (spCoefficientPresheaf l E X) ⋙
-        (Functor.whiskeringLeft _ _ AddCommGrpCat.{max u (t + 1)}).obj
-          (Prod.sectR n X.ProEt).op
-      exact ObjectProperty.prop_of_isLimit (P := Presheaf.IsSheaf (Scheme.ProEt.topology X))
-        (isLimitOfPreserves V c.isLimit) (fun j ↦ c.prop_diag_obj j n)
-    constructor
-    intro J _
-    infer_instance
-  let P := PresheafOfModules.pushforward.{max u (t + 1)} (spTowerRingMap l E g)
-  have : PreservesLimitsOfSize.{max u (t + 1), max u (t + 1)} P := by
-    constructor
-    intro J _
-    constructor
-    intro K
-    constructor
-    intro c hc
-    exact ⟨PresheafOfModules.evaluationJointlyReflectsLimits _ _ (fun X ↦
-      isLimitOfPreserves
-        (PresheafOfModules.evaluation (spCoefficientPresheaf l E T)
-          ((spTowerBaseChange g).op.obj X) ⋙
-            ModuleCat.restrictScalars ((spTowerRingMap l E g).app X).hom) hc)⟩
-  have := inclusionLimits T
-  have : PreservesLimitsOfSize.{max u (t + 1), max u (t + 1)}
-      (spTowerPush l E g ⋙ (spCoefficientTowerSheafCondition l E S).ι) :=
-    inferInstanceAs (PreservesLimitsOfSize.{max u (t + 1), max u (t + 1)}
-      ((spCoefficientTowerSheafCondition l E T).ι ⋙ P))
-  have := preservesLimits_of_reflects_of_preserves
-    (spTowerPush l E g) (spCoefficientTowerSheafCondition l E S).ι
-  exact isRightAdjoint_of_preservesLimits_of_isCoseparating
-    (isCoseparator_coseparator (spCoefficientTowers l E T)) _
+  sorry
 
 /-- Existence of the tower inverse image. Source: blueprint tower-level lemma
 (blueprint: sk-lem-sp-tower-levels). -/
@@ -166,51 +131,7 @@ theorem sp_tower_operations_properties :
       (∀ n : ℕ, Nonempty
         (spTowerPullback l E g ⋙ spTowerLevelEvaluation l E T n ≅
           spTowerLevelEvaluation l E S n ⋙ (spLevelPush l E g n).leftAdjoint)) := by
-  let dT := Classical.choice (sp_coefficient_towers_abelian l E T)
-  let dS := Classical.choice (sp_coefficient_towers_abelian l E S)
-  obtain ⟨rT⟩ := sp_tower_evaluation_adjoint l E T dT
-  obtain ⟨rS⟩ := sp_tower_evaluation_adjoint l E S dS
-  have he (n : ℕ) : Nonempty
-      (spTowerPullback l E g ⋙ spTowerLevelEvaluation l E T n ≅
-        spTowerLevelEvaluation l E S n ⋙ (spLevelPush l E g n).leftAdjoint) := by
-    obtain ⟨e⟩ := sp_tower_push_right_extension l E g dT dS rT rS n
-    let a := (Adjunction.ofIsRightAdjoint (spTowerPush l E g)).comp (rT.adjunction n)
-    let b := (rS.adjunction n).comp (Adjunction.ofIsRightAdjoint (spLevelPush l E g n))
-    exact ⟨(a.ofNatIsoRight e).leftAdjointUniq b⟩
-  have hj : JointlyFaithful (spTowerLevelEvaluation l E T) := by
-    constructor
-    intro M N f h heq
-    apply dT.equivalence.functor.map_injective
-    cases hf : dT.equivalence.functor.map f with
-    | mk ff cf =>
-      cases hh : dT.equivalence.functor.map h with
-      | mk fh ch =>
-        have hp : ff = fh := by
-          funext n
-          have hn := heq n
-          change (dT.equivalence.functor.map f).app n =
-            (dT.equivalence.functor.map h).app n at hn
-          simpa only [hf, hh] using hn
-        cases hp
-        rfl
-  have : PreservesFiniteLimits (spTowerPullback l E g) := by
-    constructor
-    intro I _ _
-    constructor
-    intro D
-    constructor
-    intro c hc
-    refine ⟨hj.jointlyReflectsIsomorphisms.jointlyReflectsLimit ?_⟩
-    intro n
-    have := sp_level_pullback_exact l E g n
-    have : PreservesFiniteLimits
-        (spTowerPullback l E g ⋙ spTowerLevelEvaluation l E T n) :=
-      preservesFiniteLimits_of_natIso (Classical.choice (he n)).symm
-    exact isLimitOfPreserves
-      (spTowerPullback l E g ⋙ spTowerLevelEvaluation l E T n) hc
-  have : (spTowerPullback l E g).IsLeftAdjoint :=
-    (Adjunction.ofIsRightAdjoint (spTowerPush l E g)).isLeftAdjoint
-  exact ⟨inferInstance, inferInstance, he⟩
+  sorry
 
 /-- Ordinary right derived tower direct image on the bounded below derived categories.
 Source: blueprint tower-level lemma; Stacks 05TI
@@ -262,16 +183,7 @@ theorem sp_tower_levels (n : ℕ) (C : DerivedCategory.Plus (spCoefficientTowers
           ((spTowerDerivedPushforward l E g).obj C) ≅
         (spTowerLevelDerivedPushforward l E g n).obj
           ((spTowerLevelEvaluation l E T n).mapDerivedCategoryPlus.obj C)) := by
-  let dT := Classical.choice (sp_coefficient_towers_abelian l E T)
-  let dS := Classical.choice (sp_coefficient_towers_abelian l E S)
-  let e := (sp_tower_derived_direct_image_evaluation l E g dT dS n).exists.choose
-  exact ⟨(Iso.app
-      (spTowerLevelEvaluation l E S n).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus
-      ((spTowerDerivedPushforward l E g).obj C)).symm ≪≫
-    e.app C ≪≫
-    (spTowerLevelDerivedPushforward l E g n).mapIso
-      (Iso.app
-        (spTowerLevelEvaluation l E T n).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus C)⟩
+  sorry
 
 end AlgebraicGeometry.ProEtale
 

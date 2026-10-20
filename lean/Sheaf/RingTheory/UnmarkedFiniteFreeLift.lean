@@ -3,8 +3,8 @@ module
 public import WeilConjectures.RingTheory.StablyFreeComplexLift
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import all Sheaf.RingTheory.NilpotentProjectiveComplexLift
-import WeilConjectures.RingTheory.FiniteModuleSurjectiveModIdeal
+import WeilConjectures.RingTheory.RingPseudoCoherent
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 @[expose] public section
 set_option autoImplicit false
@@ -12,7 +12,6 @@ universe u v w w'
 open CategoryTheory
 namespace DerivedCategory
 
-set_option linter.unusedVariables false in
 /-- The unmarked finite-free lifting data needed before checking the prescribed marking.
 Source: Stacks Project, More on Algebra, Tags 0H76 and 0BCB.
 (blueprint: lem-weil-pbc-nilpotent-marked-free-complex-lift-unmarked)
@@ -45,44 +44,6 @@ theorem exists_unmarked_finiteFree_lift_of_nilpotent
         (.up ℤ)).obj P ≅ F),
       P.IsStrictlyLE b ∧
       (∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i)) := by
-  classical
-  -- Use the bounded finite-free representative supplied by pseudo-coherence.
-  let E := Classical.choose hK
-  obtain ⟨c, hc, hEterms, ⟨γ⟩⟩ := Classical.choose_spec hK
-  let : E.IsStrictlyLE c := hc
-  have hEproj (i : ℤ) : Module.Projective R (E.X i) := by
-    have : Module.Free R (E.X i) := (hEterms i).1
-    infer_instance
-  obtain ⟨ecomp⟩ := CochainComplex.projective_reduction_comparison
-    (Ideal.Quotient.mk I) L ε E c hEproj
-  have hred : Nonempty (Q.obj
-      (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex
-        (.up ℤ)).obj E) ≅ Q.obj F) :=
-    ⟨ecomp.symm ≪≫ L.mapIso γ ≪≫ α⟩
-  have hFstable (i : ℤ) :
-      Module.Finite (R ⧸ I) (F.X i) ∧ Module.IsStablyFree (R ⧸ I) (F.X i) := by
-    have : Module.Free (R ⧸ I) (F.X i) := (hFterms i).1
-    exact ⟨(hFterms i).2, inferInstance⟩
-  -- Tag 0BCB lifts the complex and detects freeness of every term.
-  obtain ⟨P, _, hPterms, ⟨β⟩, ⟨θ⟩, hPfree⟩ :=
-    exists_stablyFree_lift_mod_ideal I hunits K hK F ⟨b, hFbound⟩ hFstable hred
-  refine ⟨P, β, θ, (P.isStrictlyLE_iff b).2 ?_, ?_⟩
-  · intro i hi
-    -- A finite module with zero reduction is zero by Nakayama.
-    have hzero := ((F.isStrictlyLE_iff b).1 hFbound i hi).of_iso
-      ((HomologicalComplex.eval _ _ i).mapIso θ)
-    have : Subsingleton ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj (P.X i)) :=
-      ModuleCat.subsingleton_of_isZero hzero
-    have : Module.Finite R (P.X i) := (hPterms i).1
-    have hs : Function.Surjective (0 : P.X i ⟶ P.X i) :=
-      ModuleCat.surjective_of_extendScalars_mod_ideal I hunits (P.X i) (P.X i) 0
-        (fun x ↦ ⟨0, Subsingleton.elim _ _⟩)
-    have : Subsingleton (P.X i) := ⟨fun x y ↦ by
-      obtain ⟨a, ha⟩ := hs x
-      obtain ⟨a', ha'⟩ := hs y
-      exact ha.symm.trans ha'⟩
-    exact ModuleCat.isZero_of_subsingleton _
-  · intro i
-    exact ⟨hPfree i (hFterms i).1, (hPterms i).1⟩
+  sorry
 
 end DerivedCategory

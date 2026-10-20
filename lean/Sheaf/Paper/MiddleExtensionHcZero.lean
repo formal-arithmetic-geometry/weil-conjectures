@@ -10,11 +10,30 @@ public import Sheaf.Paper.CurveWeilMiddleExtension
 public import Sheaf.Paper.CommonStageCompactWeilCohomology
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.Paper.ConstructibleDegreeZeroProperSupport
-import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
+import Sheaf.Paper.GaloisLisseRepresentations
+import Mathlib.CategoryTheory.Abelian.Basic
+import Mathlib.CategoryTheory.ObjectProperty.Kernels
+import Mathlib.RepresentationTheory.Rep.Basic
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+import Sheaf.Paper.LisseAdicFiberFunctors
+import Sheaf.Paper.LisseModuleSheaves
+import Sheaf.Paper.LisseTensorScalarExtension
+import Sheaf.RepresentationTheory.LAdic
+import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.Paper.MiddleExtensionSectionRestriction
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.AlgebraicGeometry.Properties
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.Topology.NoetherianSpace
+import Mathlib.Topology.Irreducible
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.ConstructibleDegreeZeroProperSupport
 
 /-! # Degree-zero compact-support vanishing for ordinary adic middle extensions
 
@@ -48,40 +67,6 @@ instance middleExtensionCurve_geometricStructureIsSeparated {D : FiniteFieldDatu
     IsSeparated ((D.geometricFiber c.C).left ↘ Spec (.of D.k)) :=
   inferInstanceAs (IsSeparated
     (pullback.snd c.C.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
-
-/-- A closed subset proper over the geometric base cannot be the whole smooth affine
-connected curve. This is the geometric support obstruction used below.
-Source: Milne, Remark 29.7, p. 166; Stacks Tags 01J4 and 0CYL
-(blueprint: lem-a1-middle-extension-hc0). -/
-private theorem middleExtensionCurve_closedSubset_ne_top
-    {D : FiniteFieldDatum.{u}} (c : MiddleExtensionCurve D)
-    [IsAffine c.C.left] [SmoothOfRelativeDimension 1 c.C.hom]
-    [GeometricallyConnected c.C.hom]
-    (Z : TopologicalSpace.Closeds (D.geometricFiber c.C).left)
-    (hZ : IsClosedSubsetProperOver (D.geometricFiber c.C).hom Z) : Z ≠ ⊤ := by
-  let X := (D.geometricFiber c.C).left
-  let f := (D.geometricFiber c.C).hom
-  have : IsAffine X := inferInstanceAs
-    (IsAffine (pullback c.C.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
-  have : SmoothOfRelativeDimension 1 f := inferInstanceAs
-    (SmoothOfRelativeDimension 1
-      (pullback.snd c.C.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
-  have : GeometricallyConnected f := inferInstanceAs
-    (GeometricallyConnected
-      (pullback.snd c.C.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
-  have : ConnectedSpace X := GeometricallyConnected.connectedSpace_of_subsingleton f
-  have hdim : topologicalKrullDim X = 1 :=
-    topologicalKrullDim_eq_of_smoothOfRelativeDimension f 1
-  have hnp : ¬ IsProper f := by
-    intro hp
-    have hd := (isFinite_of_isProper_of_isAffine f).2
-    rw [hdim] at hd
-    exact (by norm_num : ¬ (1 : WithBot ℕ∞) ≤ 0) hd
-  intro htop
-  subst Z
-  have hp := (closed_subset_proper_over_base_properties f ⊤).2.1.mp hZ
-    X (𝟙 X) (Set.range_id)
-  exact hnp (by simpa using hp)
 
 /-- The ordinary middle extension of a lisse Weil sheaf from a dense open of a
 smooth geometrically connected affine curve has zero degree-zero compact cohomology.
@@ -137,43 +122,6 @@ theorem subsingleton_adicMiddleExtension_hcZero
     Subsingleton (adicCompactCohomology D l hl (D.geometricFiber c.C).left Ω
       compactification ((sfCommonStageWeilForget D l hl c.C Ω).obj
         (adicMiddleExtensionWeil l Ω c hl F theta)) 0) := by
-  classical
-  let X := (D.geometricFiber c.C).left
-  let f := (D.geometricFiber c.C).hom
-  have hZ (Z : TopologicalSpace.Closeds X)
-      (hZ : IsClosedSubsetProperOver f Z) : Z ≠ ⊤ :=
-    middleExtensionCurve_closedSubset_ne_top c Z hZ
-  let G : sfCommonStageHeart l X Ω :=
-    ⟨adicMiddleExtensionObject l Ω c hl F, (adicMiddleExtension_heart l Ω c hl F).1⟩
-  obtain ⟨N⟩ := a1ConstructibleDegreeZeroProperSupport l D hl Ω X compactification
-  have section_zero (z : N.compact.obj G.obj) :
-      N.sections.hom.app G (ULift.up (N.comparison.app G.obj z)) =
-        (0 : A1ConstructibleSections l D hl Ω X G.obj) := by
-    obtain ⟨Z, hproper, hzero⟩ := N.support G z
-    let V : X.Opens := ⟨(Z : Set X)ᶜ, Z.isClosed.isOpen_compl⟩
-    have hV : (V : Set X).Nonempty := by
-      by_contra hempty
-      apply hZ Z hproper
-      apply SetLike.coe_injective
-      apply Set.eq_univ_of_forall
-      intro x
-      by_contra hx
-      exact hempty ⟨x, hx⟩
-    exact adicMiddleExtension_section_eq_zero_of_restriction D l hl Ω c F V hV
-      (N.sections.hom.app G (ULift.up (N.comparison.app G.obj z))) hzero
-  have compact_unique (a b : N.compact.obj G.obj) : a = b := by
-    apply N.injective G
-    apply ULift.up_injective
-    apply (N.sections.app G).toEquiv.injective
-    exact (section_zero a).trans (section_zero b).symm
-  refine ⟨fun a b ↦ ?_⟩
-  have h := compact_unique
-    ((N.compactValue G.obj).inv (ULift.up a))
-    ((N.compactValue G.obj).inv (ULift.up b))
-  have h' := congrArg (fun z ↦ (N.compactValue G.obj).hom z) h
-  have h'' : ULift.up a = ULift.up b := by
-    simpa only [← ConcreteCategory.comp_apply, Iso.inv_hom_id,
-      ConcreteCategory.id_apply] using h'
-  exact ULift.up_injective h''
+  sorry
 
 end WeilConjectures

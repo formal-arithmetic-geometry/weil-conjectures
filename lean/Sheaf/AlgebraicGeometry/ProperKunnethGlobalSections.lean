@@ -7,7 +7,22 @@ module
 public import Sheaf.AlgebraicGeometry.KunnethGlobalSections
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
+import Sheaf.EtaleCohomology.KunnethOneProper
+import Sheaf.AlgebraicGeometry.ProperStability
+import Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula
+import Mathlib.GroupTheory.Torsion
+import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeModN
+import Sheaf.AlgebraicGeometry.PullbackConstantModule
+import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedPointCohomologicalDimension
+import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
+import Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormula
+import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 import Sheaf.AlgebraicGeometry.KunnethMapAgrees
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.EtaleCohomology.SepClosedFieldVanishing
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!
 # Künneth with one proper factor in module-valued cohomology
@@ -60,12 +75,6 @@ theorem isIso_kunnethGlobalSectionsMap_of_isProper
       (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))))) :
     IsIso (kunnethGlobalSectionsMap (ULift.{u + 1} (ZMod n))
       p q aX aY sq.w.symm E K) := by
-  obtain ⟨_, _, _, _, _, hκ⟩ :=
-    kunnethMap_agrees_with_leray_projection_formula_modN
-      aX aY n hn (isUnit_of_invertible (n : k)) p q sq E K
-  let := hκ
-  -- The defining transport consists of tensor/Leray isomorphisms and RΓ of κ.
-  dsimp only [kunnethGlobalSectionsMap]
-  infer_instance
+  sorry
 
 end AlgebraicGeometry.Etale

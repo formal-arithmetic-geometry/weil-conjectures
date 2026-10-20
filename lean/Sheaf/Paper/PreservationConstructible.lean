@@ -10,10 +10,23 @@ public import Sheaf.Paper.CompletedTowerPullback
 public import Sheaf.Paper.CompletedTowerDirectImage
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.Paper.PbcConstructibleReductionCriterion
-import Sheaf.Paper.PbcConstructibleReductionPullback
-import Sheaf.Paper.PbcConstructibleReductionDirectImage
-import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
+import Sheaf.Paper.FiniteLevelAmplification
+import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.Paper.ProEtaleCanonicalTensorPullback
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
+import Sheaf.Paper.RestrictionDirectImage
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.AmplificationProper
+import Sheaf.Paper.BoundedConstructibleTower
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.CompletedPullbackReduction
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity
+import Sheaf.Paper.NormalizedEtaleOriginWitnesses
+import Sheaf.Paper.PerfectProjectionFormula
 
 /-! # Constructible preservation over completed integral coefficients
 
@@ -46,53 +59,40 @@ def pbcReductionsCohomologyIn (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
       (pbcModules T ((pbcAdicRings T d).obj (op n))) q).obj
         ((pbcCompletedReduction T d n).obj K))
 
-private theorem pbc_fieldPoint_dimension
-    {S T : Scheme.{u}} (f : S ⟶ T) [LocallyOfFiniteType f]
-    {Ω : Type u} [Field Ω] (y : T)
-    (t : CommRingCat.of (T.residueField y) ⟶ CommRingCat.of Ω) :
-    topologicalKrullDim (pullback f (Spec.map t ≫ T.fromSpecResidueField y) : Scheme.{u}) =
-      topologicalKrullDim (f.fiber y) := by
-  calc
-    _ = topologicalKrullDim
-        (pullback (pullback.snd f (T.fromSpecResidueField y)) (Spec.map t) : Scheme.{u}) :=
-      (IsHomeomorph.topologicalKrullDim_eq _
-        (pullbackLeftPullbackSndIso f (T.fromSpecResidueField y)
-          (Spec.map t)).hom.homeomorph.isHomeomorph).symm
-    _ = _ := topologicalKrullDim_pullback_eq_of_field _ _
-
-private theorem pbc_all_fieldPoint_bounds
-    {S T : Scheme.{u}} (f : S ⟶ T) [LocallyOfFiniteType f] (e : ℕ)
-    (h : ∀ y : T, topologicalKrullDim
-      (pullback f (Spec.map (CommRingCat.ofHom
-        (algebraMap (T.residueField y) (AlgebraicClosure (T.residueField y)))) ≫
-          T.fromSpecResidueField y) : Scheme.{u}) ≤ (e : WithBot ℕ∞)) :
-    ∀ (Ω : Type u) [Field Ω] (s : Spec (.of Ω) ⟶ T),
-      topologicalKrullDim (pullback f s : Scheme.{u}) ≤ (e : WithBot ℕ∞) := by
-  intro Ω _ s
-  obtain ⟨⟨y, t⟩, rfl⟩ := (Scheme.SpecToEquivOfField Ω T).symm.surjective s
-  change topologicalKrullDim
-    (pullback f (Spec.map t ≫ T.fromSpecResidueField y) : Scheme.{u}) ≤ _
-  rw [pbc_fieldPoint_dimension]
-  simpa only [pbc_fieldPoint_dimension] using h y
-
 /-- Simultaneous preservation and reduction support bounds for the four outputs.
 Source: blueprint order 1355; Stacks 09C1, 09C7, 095U, 0GL0 and 09C2
 (blueprint: prop-weil-pbc-preservation-constructible).
 
-Proof:
-1. Field extension preserves the dimension of finite-type fibres. Factor field-valued
-points through their residue fields and paste the chosen Cartesian square to obtain
-the field-valued fibre bound for both f and f'.
-2. Apply the integral canonical-reduction criterion to the input. It supplies intrinsic
-completeness and the homologyProperty clause of the existing uniform reduction profile.
-3. Apply the single-map direct-image theorem to f and K. Apply the pullback theorem to
-g' and K and to g and Rf_*K. Apply the direct-image theorem to f' and the first pullback.
-The two direct images increase only the upper bound by 2e; pullbacks retain their input
-intervals. The finite-level direct-image and pullback lemmas and the canonical reduction
-comparisons prove these assertions with their actual quotient actions.
-4. Apply the reverse integral criterion to all four complete outputs, using [a,b] for
-the pullback of K and [a,b+2e] for the other three. Combine the four memberships and
-four support bounds. Empty intervals and empty schemes obey the same arguments. -/
+Proof plan, following the node's five steps:
+1. Residue characteristic l divides N; invertibility of N therefore makes l invertible.
+Apply thm-weil-pbc-amplification-proper with the geometric fibre bound e to get AMP(2e).
+The common local models of the input tower imply intrinsic constructible cohomology;
+lem-weil-pbc-finite-ring-constructible-derived-origin identifies its finite etale origins.
+2. For any complete output with canonical reductions constructible in one interval,
+lem-weil-pbc-normalized-constructible-local-effectivity gives common local models,
+compatible with the canonical normalization maps. Choose etale origins levelwise by
+lem-weil-pbc-finite-ring-constructible-derived-origin. The canonical inverse-image/tensor
+comparison is computed on K-flat flat-term resolutions by
+lem-weil-pbc-ringed-topoi-derived-tensor-pullback and the exact comparison of
+prop-weil-pbc-site-comparison-finite-level. Full faithfulness from
+thm-weil-pbc-site-comparison uniquely lifts each normalization and its inverse.
+Faithfulness lifts its identity and quotient cocycle. These witnesses give membership
+by def-weil-pbc-bounded-constructible-complete.
+3. For H = Rf_*K, prop-weil-pbc-direct-image-limits gives completeness. The completed-
+coefficient projection isomorphism of lemma-weil-pbc-perfect-projection-formula induces
+quotient-linear cohomology isomorphisms: locally lift quotient scalars to A_Y, apply
+A_Y-linearity, and use annihilation by I^n for independence. FIN and
+prop-weil-pbc-restriction-direct-image give constructibility and [a,b+2e] for these
+canonical reductions. Apply step 2; no derived quotient-linear lift is assumed.
+4. lemma-weil-pbc-completed-pullback-reduction gives completeness and quotient-linear
+reduction comparisons for completed pullbacks of K and H. The interval-preserving
+pullback clauses of def-weil-pbc-finite-level-amplification give [a,b] and [a,b+2e].
+Apply the finite derived-origin criterion and step 2 to both canonical towers.
+5. For Rf'_* of the pulled-back K, repeat step 3: completeness follows from direct-image
+limits; the projection comparison is quotient-linear on cohomology by locally lifting
+scalars, using lem-weil-pbc-constant-completion-equivalence. FIN for f' puts the
+reductions in [a,b+2e]. Step 2 gives the fourth category membership. These are support
+containments, including zero objects and empty schemes, rather than equalities. -/
 theorem pbc_preservation_constructible
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]
@@ -137,35 +137,6 @@ theorem pbc_preservation_constructible
     pbcReductionsCohomologyIn Y' (pbcIntegralDatum l E) a (b + 2 * (e : ℤ))
       ((completedDerivedDirectImage f' (pbcIntegralDatum l E)).obj
         (completedPullbackObject g' (pbcIntegralDatum l E) K)) := by
-  have hFib := pbc_all_fieldPoint_bounds f e _hFib
-  have hsq : IsPullback g' f' f g :=
-    IsPullback.of_iso_pullback _square.toCommSq _square.isoPullback
-      _square.hom_fst _square.hom_snd
-  have hFib' : ∀ (Ω : Type u) [Field Ω] (s : Spec (.of Ω) ⟶ Y'),
-      topologicalKrullDim (pullback f' s : Scheme.{u}) ≤ (e : WithBot ℕ∞) := by
-    intro Ω _ s
-    have hs := (IsPullback.of_hasPullback f' s).paste_horiz hsq
-    have he := hs.isoPullback
-    rw [IsHomeomorph.topologicalKrullDim_eq _ he.hom.homeomorph.isHomeomorph]
-    exact hFib Ω (s ≫ g)
-  have hInput := (pbc_constructible_reduction_criterion l E X
-    a b K _hInterval).mp _hK
-  have hPush := pbc_constructible_reduction_directImage l E _hDimX _hDimY f N
-    _hN _hAnn _hInvertX _hInvertY e hFib a b K hInput.1 hInput.2 _hInterval
-  have hPull := pbc_constructible_reduction_pullback l E g'
-    a b K hInput.1 hInput.2 _hInterval
-  have hPullPush := pbc_constructible_reduction_pullback l E g
-    a (b + 2 * (e : ℤ)) _ hPush.1 hPush.2.1 hPush.2.2
-  have hPushPull := pbc_constructible_reduction_directImage l E _hDimX' _hDimY' f' N
-    _hN _hAnn _hInvertX' _hInvertY' e hFib' a b _ hPull.1 hPull.2.1 hPull.2.2
-  refine ⟨?_, ?_, ?_, ?_, hPull.2.2, hPush.2.2, hPullPush.2.2, hPushPull.2.2⟩
-  · exact (pbc_constructible_reduction_criterion l E Y
-      a (b + 2 * (e : ℤ)) _ hPush.2.2).mpr ⟨hPush.1, hPush.2.1⟩
-  · exact (pbc_constructible_reduction_criterion l E Y'
-      a (b + 2 * (e : ℤ)) _ hPullPush.2.2).mpr ⟨hPullPush.1, hPullPush.2.1⟩
-  · exact (pbc_constructible_reduction_criterion l E X'
-      a b _ hPull.2.2).mpr ⟨hPull.1, hPull.2.1⟩
-  · exact (pbc_constructible_reduction_criterion l E Y'
-      a (b + 2 * (e : ℤ)) _ hPushPull.2.2).mpr ⟨hPushPull.1, hPushPull.2.1⟩
+  sorry
 
 end WeilConjectures

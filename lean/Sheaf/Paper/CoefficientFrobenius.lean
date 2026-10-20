@@ -10,15 +10,17 @@ public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
-import Sheaf.CategoryTheory.DerivedCategory.DualizingComplexBoundedDuality
 import Sheaf.CategoryTheory.DerivedCategory.PerfectCohomologyAssembly
-import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
-import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
-import WeilConjectures.CategoryTheory.ObjectProperty.Duality
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+import Sheaf.CategoryTheory.DerivedCategory.FiniteTorAmplitudePerfect
+import Mathlib.Algebra.Module.FinitePresentation
+import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.LinearAlgebra.Dual.Lemmas
 import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.RingTheory.SimpleModule.InjectiveProjective
+import Mathlib.Topology.Algebra.Valued.LocallyCompact
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 
 /-! # Coefficient biduality at the finite, integral and field stages
@@ -40,134 +42,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 
 namespace WeilConjectures
-
-@[instance_reducible]
-private noncomputable def coefficientBraided (R : Type u) [CommRing R] :
-    BraidedCategory (DerivedCategory (ModuleCat.{u} R)) :=
-  DerivedCategory.braidedCategory' (ModuleCat.{u} R)
-
-private lemma coefficient_eval_eq (R : Type u) [CommRing R]
-    (K : DerivedCategory (ModuleCat.{u} R)) :
-    coefficientDerivedEvaluation K =
-      @MonoidalClosed.toIhomIhomUnit _ _ _ (coefficientBraided R) _ K := rfl
-
-attribute [local irreducible] DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
-  DerivedCategory.monoidalClosed_of_hasFunctorialFlatResolution
-
-private lemma scalar_unit_iso {C : Type*} [Category C]
-    [MonoidalCategory C] [MonoidalClosed C] :
-    IsIso (MonoidalClosed.curry (ρ_ (𝟙_ C)).hom) := by
-  rw [← unitors_equal]
-  have h : MonoidalClosed.curry (λ_ (𝟙_ C)).hom =
-      (MonoidalClosed.unitNatIso.app (𝟙_ C)).hom := by
-    simp [MonoidalClosed.unitNatIso, MonoidalClosed.curry_eq,
-      conjugateIsoEquiv_apply_hom, conjugateEquiv_apply_app]
-  rw [h]
-  infer_instance
-
-private lemma ordinary_exact (R : Type u) [CommRing R] [Module.Injective R R]
-    (M N P : ModuleCat.{u} R) (f : M →ₗ[R] N) (g : N →ₗ[R] P)
-    (hf : Function.Injective f) (he : Function.Exact f g) (hg : Function.Surjective g) :
-    Function.Injective g.dualMap ∧ Function.Exact g.dualMap f.dualMap ∧
-      Function.Surjective f.dualMap := by
-  refine ⟨LinearMap.dualMap_injective_of_surjective hg, ?_, ?_⟩
-  · rw [LinearMap.exact_iff,
-      LinearMap.range_dualMap_eq_dualAnnihilator_ker_of_surjective g hg,
-      LinearMap.ker_dualMap_eq_dualAnnihilator_range,
-      LinearMap.exact_iff.mp he]
-  · intro h
-    obtain ⟨k, hk⟩ := Module.Injective.extension_property R R M N f hf h
-    exact ⟨k, hk⟩
-
-
-private lemma single_projective_terms (R : Type u) [CommRing R]
-    (M : ModuleCat.{u} R) [Module.Finite R M] [Module.Projective R M] (i : ℤ) :
-    Module.Projective R
-        (((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj M).X i) ∧
-      Module.Finite R (((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj M).X i) := by
-  by_cases hi : i = 0
-  · subst hi
-    let e := HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 M
-    exact ⟨Module.Projective.of_equiv e.toLinearEquiv.symm,
-      Module.Finite.equiv e.toLinearEquiv.symm⟩
-  · have : Subsingleton
-        (((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj M).X i) :=
-      ModuleCat.isZero_iff_subsingleton.mp
-        (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi)
-    exact ⟨@Module.Projective.of_free R _ _ _ _
-      (Module.Free.of_subsingleton R _), Module.Finite.of_finite⟩
-
-private lemma perfect_single_pid (R : Type u) [CommRing R] [IsDomain R]
-    [IsPrincipalIdealRing R] (M : ModuleCat.{u} R) [Module.Finite R M] :
-    DerivedCategory.IsPerfectRingComplex
-      ((DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj M) := by
-  obtain ⟨n, f, hf⟩ := Module.Finite.exists_fin' R M
-  have : Module.Finite R (LinearMap.ker f) := Module.IsNoetherian.finite R _
-  have : Module.Free R (LinearMap.ker f) := Module.free_of_finite_type_torsion_free'
-  let S := f.shortComplexKer
-  have hS := LinearMap.shortExact_shortComplexKer hf
-  let S' := S.map (CochainComplex.singleFunctor (ModuleCat.{u} R) 0)
-  have : PreservesFiniteLimits (CochainComplex.singleFunctor (ModuleCat.{u} R) 0) :=
-    inferInstanceAs (PreservesFiniteLimits
-      (HomologicalComplex.single (ModuleCat.{u} R) (ComplexShape.up ℤ) 0))
-  have : PreservesFiniteColimits (CochainComplex.singleFunctor (ModuleCat.{u} R) 0) :=
-    inferInstanceAs (PreservesFiniteColimits
-      (HomologicalComplex.single (ModuleCat.{u} R) (ComplexShape.up ℤ) 0))
-  have hS' : S'.ShortExact := hS.map_of_exact _
-  have : S'.X₁.IsStrictlyGE 0 :=
-    inferInstanceAs (((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj S.X₁).IsStrictlyGE 0)
-  have : S'.X₁.IsStrictlyLE 0 :=
-    inferInstanceAs (((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj S.X₁).IsStrictlyLE 0)
-  have : S'.X₂.IsStrictlyGE 0 :=
-    inferInstanceAs (((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj S.X₂).IsStrictlyGE 0)
-  have : S'.X₂.IsStrictlyLE 0 :=
-    inferInstanceAs (((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj S.X₂).IsStrictlyLE 0)
-  have := CochainComplex.mappingCone.quasiIso_descShortComplex hS'
-  have hcone := DerivedCategory.isPerfect_Q_obj_mappingCone S'.f 0 0 0 0
-    (single_projective_terms R S.X₁) (single_projective_terms R S.X₂)
-  have hperfect := hcone.of_iso
-    (asIso (DerivedCategory.Q.map (CochainComplex.mappingCone.descShortComplex S')) ≪≫
-      ((DerivedCategory.singleFunctorIsoCompQ (ModuleCat.{u} R) 0).app M).symm)
-  exact hperfect
-
-private lemma derived_dual_equivalence (R : Type u) [CommRing R]
-    (hD : ∀ K, boundedFiniteCoefficientComplex R K →
-      boundedFiniteCoefficientComplex R ((coefficientDerivedDual R).obj (op K)))
-    (hδ : ∀ K, boundedFiniteCoefficientComplex R K →
-      IsIso (coefficientDerivedEvaluation K)) :
-    ∃ F : (boundedFiniteCoefficientComplex R).FullSubcategoryᵒᵖ ⥤
-        (boundedFiniteCoefficientComplex R).FullSubcategory,
-      F.IsEquivalence ∧
-        Nonempty (F ⋙ (boundedFiniteCoefficientComplex R).ι ≅
-          (boundedFiniteCoefficientComplex R).ι.op ⋙ coefficientDerivedDual R) := by
-  let : BraidedCategory (DerivedCategory (ModuleCat.{u} R)) := coefficientBraided R
-  let e := ObjectProperty.liftDualEquivalence (boundedFiniteCoefficientComplex R)
-    (coefficientDerivedDual R) hD (MonoidalClosed.toIhomIhomNatTrans (𝟙_ _))
-    (fun K hK ↦ by
-      have := hδ K hK
-      rwa [coefficient_eval_eq] at this)
-  exact ⟨e.functor, inferInstance, ⟨Iso.refl _⟩⟩
-
-private lemma field_frobenius (R : Type u) [Field R] :
-    coefficientFrobeniusProperties R := by
-  have : Module.Injective R R := Module.injective_of_isSemisimpleRing R R
-  refine ⟨inferInstance, inferInstance, ordinary_exact R, ?_, ?_⟩
-  · intro M hM
-    have := hM
-    exact ⟨inferInstance, Module.bijective_dual_eval R M⟩
-  · have hp : ∀ K, boundedFiniteCoefficientComplex R K → DerivedCategory.IsPerfect K := by
-      intro K hK
-      obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
-      exact (DerivedCategory.isPerfect_iff K).2 ⟨⟨a, b, ha, hb⟩, hK.2⟩
-    apply derived_dual_equivalence R
-    · intro K hK
-      have hpK := hp K hK
-      exact ⟨hpK.ihom_unit.bounded, hpK.ihom_unit.finite_homology⟩
-    · intro K hK
-      let : BraidedCategory (DerivedCategory (ModuleCat.{u} R)) := coefficientBraided R
-      rw [coefficient_eval_eq]
-      exact DerivedCategory.IsPerfect.isIso_toIhomIhomUnit
-        (hp K hK)
 
 /-- The three self-injective coefficient stages have exact ordinary duality,
 finite-module evaluation isomorphisms, and a derived anti-equivalence on bounded
@@ -207,62 +81,7 @@ theorem coefficient_frobenius
     coefficientFrobeniusProperties (Padic.coefficientExtensionRing l E n) ∧
       coefficientFrobeniusProperties E ∧
       coefficientFrobeniusProperties (AlgebraicClosure (Padic l)) := by
-  refine ⟨?_, field_frobenius E, field_frobenius (AlgebraicClosure (Padic l))⟩
-  let R := Padic.coefficientExtensionIntegers l E
-  let π := Padic.coefficientExtensionUniformizer l E
-  have hdata := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
-  have : IsDiscreteValuationRing R := hdata.2.2.2.2.2.2.2.1
-  have hmax : (Padic.coefficientExtensionMaximalIdeal l E).IsMaximal := hdata.2.2.2.2.1
-  have hgen : Ideal.span ({π} : Set R) = Padic.coefficientExtensionMaximalIdeal l E :=
-    hdata.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
-  have hπne : π ≠ 0 := by
-    intro hzero
-    have hne : Padic.coefficientExtensionMaximalIdeal l E ≠ ⊥ :=
-      hdata.2.2.2.2.2.2.2.2.2.1
-    apply hne
-    rw [← hgen, hzero, Ideal.span_singleton_zero]
-  have hπ : Irreducible π := Ideal.irreducible_of_isMaximal_span_singleton hπne
-    (by rw [hgen]; exact hmax)
-  change coefficientFrobeniusProperties (R ⧸ Ideal.span {π} ^ n)
-  rw [Ideal.span_singleton_pow]
-  let A := R ⧸ Ideal.span {π ^ n}
-  have : Module.Injective A A := IsDiscreteValuationRing.injective_quotient_pow hπ n
-  have : Finite A := by
-    simpa only [Padic.coefficientExtensionRing, Padic.coefficientExtensionIdeal,
-      Ideal.span_singleton_pow] using Padic.finite_coefficientExtensionRing l E n hn
-  have : IsArtinianRing A := isArtinian_of_finite
-  refine ⟨inferInstance, inferInstance, ordinary_exact A, ?_, ?_⟩
-  · intro M hM
-    have := hM
-    have : Finite M := Module.finite_of_finite A
-    have : Module.IsReflexive A M :=
-      IsDiscreteValuationRing.isReflexive_quotient_pow hπ n M
-    have : Finite (Module.Dual A M) := Finite.of_injective
-      (fun f : Module.Dual A M ↦ (f : M → A)) DFunLike.coe_injective
-    exact ⟨Module.Finite.of_finite, Module.bijective_dual_eval A M⟩
-  · have : IsNoetherianRing A := isNoetherian_of_finite A A
-    let I := (CochainComplex.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A)
-    let e : DerivedCategory.Q.obj I ≅ 𝟙_ (DerivedCategory (ModuleCat.{u} A)) :=
-      DerivedCategory.unitIsoQObjUnitComplex.symm
-    have hI : ∀ i : ℤ, Injective (I.X i) := by
-      intro i
-      by_cases hi : i = 0
-      · subst hi
-        exact Injective.of_iso
-          (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (ModuleCat.of A A)).symm
-          (Module.injective_object_of_injective_module A A)
-      · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).injective
-    have hperfect : DerivedCategory.IsPerfect (𝟙_ (DerivedCategory (ModuleCat.{u} A))) :=
-      (DerivedCategory.isPerfect_Q_obj I 0 0
-        (single_projective_terms A (ModuleCat.of A A))).of_iso e
-    have hscalar : IsIso (MonoidalClosed.curry
-        (ρ_ (𝟙_ (DerivedCategory (ModuleCat.{u} A)))).hom) := by
-      exact scalar_unit_iso
-    exact DerivedCategory.dualizingComplex_bounded_duality A _
-      ⟨I, ⟨0, 0, fun i hi ↦ HomologicalComplex.isZero_single_obj_X _ _ _ _
-        (by omega)⟩, hI, ⟨e⟩⟩ hperfect.finite_homology hscalar
+  sorry
 
 /-- Integral coefficients are not quasi-Frobenius; finite projectives, but not
 all finite modules, are ordinarily reflexive.
@@ -288,35 +107,7 @@ theorem integral_coefficient_ordinary_duality
     ∃ M : ModuleCat.{u} (Padic.coefficientExtensionIntegers l E),
       Module.Finite (Padic.coefficientExtensionIntegers l E) M ∧
       ¬ Function.Bijective (Module.Dual.eval (Padic.coefficientExtensionIntegers l E) M) := by
-  let R := Padic.coefficientExtensionIntegers l E
-  let π := Padic.coefficientExtensionUniformizer l E
-  have hdata := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
-  have : IsDiscreteValuationRing R := hdata.2.2.2.2.2.2.2.1
-  have hmax : (Padic.coefficientExtensionMaximalIdeal l E).IsMaximal := hdata.2.2.2.2.1
-  have hgen : Ideal.span ({π} : Set R) = Padic.coefficientExtensionMaximalIdeal l E :=
-    hdata.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
-  have hπne : π ≠ 0 := by
-    intro hzero
-    have hne : Padic.coefficientExtensionMaximalIdeal l E ≠ ⊥ :=
-      hdata.2.2.2.2.2.2.2.2.2.1
-    apply hne
-    rw [← hgen, hzero, Ideal.span_singleton_zero]
-  have hπ : Irreducible π := Ideal.irreducible_of_isMaximal_span_singleton hπne
-    (by rw [hgen]; exact hmax)
-  refine ⟨?_, ?_, ?_⟩
-  · rintro ⟨hArt, _⟩
-    have : IsArtinianRing R := hArt
-    exact hπ.not_isUnit (IsArtinianRing.isUnit_of_mem_nonZeroDivisors
-      (mem_nonZeroDivisors_of_ne_zero hπ.ne_zero))
-  · intro M hfinite hprojective
-    have := hfinite
-    have := hprojective
-    exact Module.bijective_dual_eval R M
-  · refine ⟨ModuleCat.of R (R ⧸ Ideal.span {π}), inferInstance, ?_⟩
-    intro heval
-    exact IsDiscreteValuationRing.not_isReflexive_quotient hπ ⟨heval⟩
+  sorry
 
 /-- Every bounded integral complex with finite cohomology is perfect and its
 canonical derived evaluation is invertible.
@@ -336,28 +127,7 @@ theorem integral_coefficient_derived_duality
     (K : DerivedCategory (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)))
     (hK : boundedFiniteCoefficientComplex (Padic.coefficientExtensionIntegers l E) K) :
     DerivedCategory.IsPerfectRingComplex K ∧ IsIso (coefficientDerivedEvaluation K) := by
-  let R := Padic.coefficientExtensionIntegers l E
-  have hdata := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
-  have : IsDiscreteValuationRing R := hdata.2.2.2.2.2.2.2.1
-  have hperfect : DerivedCategory.IsPerfectRingComplex K := by
-    apply DerivedCategory.isPerfectRingComplex_of_perfect_cohomology K
-    · obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
-      have : K.IsGE a := ha
-      have : K.IsLE b := hb
-      refine ⟨a, b, fun i hi ↦ ?_⟩
-      rcases hi with hi | hi
-      · exact DerivedCategory.isZero_of_isGE K a i hi
-      · exact DerivedCategory.isZero_of_isLE K b i hi
-    · intro i
-      have := hK.2 i
-      exact perfect_single_pid R _
-  refine ⟨hperfect, ?_⟩
-  let : BraidedCategory (DerivedCategory (ModuleCat.{u} R)) :=
-    coefficientBraided R
-  rw [coefficient_eval_eq]
-  exact DerivedCategory.IsPerfect.isIso_toIhomIhomUnit hperfect
+  sorry
 
 /-- Perfect complexes over any commutative ring have canonical derived biduality;
 no self-injectivity is assumed.
@@ -377,10 +147,7 @@ theorem perfect_coefficient_derived_evaluation
     (R : Type u) [CommRing R] (K : DerivedCategory (ModuleCat.{u} R))
     (hK : DerivedCategory.IsPerfectRingComplex K) :
     IsIso (coefficientDerivedEvaluation K) := by
-  let : BraidedCategory (DerivedCategory (ModuleCat.{u} R)) :=
-    coefficientBraided R
-  rw [coefficient_eval_eq]
-  exact DerivedCategory.IsPerfect.isIso_toIhomIhomUnit hK
+  sorry
 
 /-- The finite-Tor point consequence at the finite coefficient stage.
 At the two field stages all bounded finite-cohomology complexes have finite Tor
@@ -401,17 +168,6 @@ theorem finiteTor_point_coefficient_evaluation
     (hTor : DerivedCategory.finiteTorAmplitude
       (ModuleCat.{u} (Padic.coefficientExtensionRing l E n)) K) :
     IsIso (coefficientDerivedEvaluation K) := by
-  let R := Padic.coefficientExtensionRing l E n
-  let : Finite R := Padic.finite_coefficientExtensionRing l E n hn
-  let : IsNoetherianRing R := isNoetherian_of_finite R R
-  have hfinite : ∀ i : ℤ,
-      Module.Finite R ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj K) :=
-    hK.2
-  have hperfect : DerivedCategory.IsPerfect K :=
-    DerivedCategory.isPerfect_of_finiteTorAmplitude hK.1 hfinite hTor
-  have hperfect' : DerivedCategory.IsPerfectRingComplex K := by
-    obtain ⟨P, a, b, ha, hb, hP, e⟩ := hperfect
-    exact ⟨P, a, b, ha, hb, hP, e⟩
-  exact perfect_coefficient_derived_evaluation R K hperfect'
+  sorry
 
 end WeilConjectures

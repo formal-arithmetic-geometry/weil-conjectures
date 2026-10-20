@@ -12,8 +12,7 @@ import Sheaf.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection
 import Sheaf.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree
 import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-import WeilConjectures.Topology.GlueSheavesOfModules
-import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.Topology.GlueSheavesOfModules
 
 /-! # Lifting sections into ideal-power annihilator quotients
 

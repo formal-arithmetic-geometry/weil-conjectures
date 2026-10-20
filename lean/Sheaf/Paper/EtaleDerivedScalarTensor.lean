@@ -15,6 +15,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-!
 # Ordinary derived scalar extension in the constant-coefficient presentation
@@ -39,7 +41,7 @@ Proof: its adjunction to additive restriction implies additivity. -/
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     (ProEtale.etaleSheafExtendScalars φ T).Additive := by
-  exact (ProEtale.etaleSheafExtendScalarsAdjunction φ T).left_adjoint_additive
+  sorry
 
 /-- The published scalar-extension functor in the small-etale specialization.
 This is an abbreviation for the existing chosen left adjoint, not a new construction.
@@ -82,24 +84,6 @@ def scalarSheafTensorMap
       ((ProEtale.etaleSheafExtendScalars φ T).obj M) (𝟙_ _) ≫
     (Sheaf.restrictScalars T.smallEtaleTopology φ).map (ρ_ _).hom
 
-private theorem balancing_naturality
-    {C D : Type*} [Category C] [Category D]
-    [MonoidalCategory C] [MonoidalCategory D]
-    {L : C ⥤ D} {R : D ⥤ C} [R.LaxMonoidal] (adj : L ⊣ R)
-    {M N : C} (a : M ⟶ N) :
-    a ▷ R.obj (𝟙_ D) ≫
-        (adj.unit.app N ▷ R.obj (𝟙_ D) ≫
-          Functor.LaxMonoidal.μ R (L.obj N) (𝟙_ D) ≫ R.map (ρ_ (L.obj N)).hom) =
-      (adj.unit.app M ▷ R.obj (𝟙_ D) ≫
-          Functor.LaxMonoidal.μ R (L.obj M) (𝟙_ D) ≫ R.map (ρ_ (L.obj M)).hom) ≫
-        R.map (L.map a) := by
-  have hn : a ≫ adj.unit.app N = adj.unit.app M ≫ R.map (L.map a) :=
-    adj.unit.naturality a
-  rw [← comp_whiskerRight_assoc, hn]
-  rw [comp_whiskerRight_assoc, Functor.LaxMonoidal.μ_natural_left_assoc]
-  rw [← R.map_comp, rightUnitor_naturality, R.map_comp]
-  simp only [Category.assoc]
-
 /-- Naturality of the balancing map.
 Source: Stacks 03EK (blueprint: lem-pur-derived-change-of-rings).
 Proof: apply naturality of the scalar unit, the lax tensorator, and the right unitor.
@@ -112,7 +96,7 @@ theorem scalarSheafTensorMap_naturality
       scalarSheafTensorMap φ T M ≫
         (Sheaf.restrictScalars T.smallEtaleTopology φ).map
           ((ProEtale.etaleSheafExtendScalars φ T).map a) := by
-  exact balancing_naturality (ProEtale.etaleSheafExtendScalarsAdjunction φ T) a
+  sorry
 
 /-- The ordinary balancing map, as a natural transformation.
 Source: Stacks 03EK (blueprint: lem-pur-derived-change-of-rings). -/
@@ -196,15 +180,6 @@ def scalarTensorModelNormalization
           ((CochainComplex.map₂HomologicalComplexFlipObjSingleIso (curriedTensor C) F).hom.app P) ≫
         _root_.DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex τ (.up ℤ)).app P) = r P
 
-private theorem tensor_model_eq
-    (D : Type w) [Category.{u + 1} D] [Abelian D]
-    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]
-    [SymmetricCategory D] [MonoidalClosed D] [Abelian.HasFunctorialFlatResolution D]
-    (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology D) :
-    (derivedTensor D T).flip.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F) =
-      scalarTensorModelFunctor F := by
-  rfl
-
 /-- The site-specific tensor and the general tensor-model functor have the same data.
 Source: Stacks 06YY (blueprint: lem-pur-derived-change-of-rings).
 Proof: unfold derivedTensor, scalarCoefficient and scalarTensorModelFunctor.
@@ -215,7 +190,7 @@ theorem scalarTensorFunctor_eq
     (φ : A →+* B) (T : Scheme.{u}) :
     (derivedTensor (ModuleCat.{u + 1} A) T).flip.obj (scalarCoefficient φ T) =
       scalarTensorModelFunctor (scalarCoefficientSheaf φ T) := by
-  exact tensor_model_eq (ModuleCat.{u + 1} A) T (scalarCoefficientSheaf φ T)
+  sorry
 
 /-- The scalar/tensor comparison is uniquely fixed on K-flat representatives.
 Source: Stacks 06YY, using 03EK (blueprint: lem-pur-derived-change-of-rings).

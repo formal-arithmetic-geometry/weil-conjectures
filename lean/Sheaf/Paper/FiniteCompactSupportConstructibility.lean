@@ -10,16 +10,39 @@ public import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
 public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
 
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekIndependence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Finiteness
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Mathlib.Data.Set.Finite.Lattice
-import Sheaf.Paper.FiniteCompactSupportScalarComparison
+import Sheaf.Paper.ProEtaleConstructibleOrigin
+import Sheaf.Paper.ComparisonPullbackExact
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
+import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
+import Sheaf.AlgebraicGeometry.CompactifiableOverField
+import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.CategoryTheory.TruncationTriangle
+import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Mathlib.GroupTheory.Torsion
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
+import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.FiniteTypeSheafFiniteness
+import Sheaf.CategoryTheory.BoundedHeartAmplitude
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.CompactSupportDirectImageTriangulated
 import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.PurEtaleScalarMateProjection
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
+import WeilConjectures.ConstructibleSheaf.OpenClosed
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Finite-level bounded constructibility for proper support
@@ -102,267 +125,6 @@ def finiteLevelCompactSupportReductionComparison
         (T := Padic.coefficientExtensionIdeal l E m)
         (Ideal.pow_le_pow_right hmn))).hom.app
           ((finiteLevelDerivedReduction l E m n hmn X).obj K))
-
-private theorem finite_homology_support_iff
-    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
-    (K : DerivedCategory C) :
-    Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor C i).obj K)} ↔
-      ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, i < a ∨ b < i →
-        IsZero ((DerivedCategory.homologyFunctor C i).obj K) := by
-  classical
-  constructor
-  · intro h
-    obtain ⟨a, ha⟩ := h.bddBelow
-    obtain ⟨b, hb⟩ := h.bddAbove
-    refine ⟨min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
-    by_contra hn
-    rcases hi with hi | hi
-    · exact (not_lt_of_ge (le_trans (min_le_left _ _) (ha hn))) hi
-    · exact (not_lt_of_ge (le_trans (hb hn) (le_max_right _ _))) hi
-  · rintro ⟨a, b, _, h⟩
-    apply (Set.finite_Icc a b).subset
-    intro i hi
-    exact ⟨le_of_not_gt (fun hia ↦ hi (h i (Or.inl hia))),
-      le_of_not_gt (fun hbi ↦ hi (h i (Or.inr hbi)))⟩
-
-private theorem intrinsic_bc_iff_etale_origin
-    (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})
-    (K : proEtaleDerivedCategory T (Padic.coefficientExtensionRing l E n)) :
-    letI := Padic.finite_coefficientExtensionRing l E n hn
-    intrinsicFiniteTorsionConstructible l E n hn T K ↔
-      ∃ G : Etale.DerivedCategoryModule
-          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T,
-        Etale.DerivedCategory.isBoundedConstructible
-          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T G ∧
-        Nonempty ((ProEtale.finiteCoefficientIntrinsicDerivedComparison T
-          (Padic.coefficientExtensionRing l E n)).obj G ≅ K) := by
-  have := Padic.finite_coefficientExtensionRing l E n hn
-  have h := (finiteRing_constructibleDerived_origin T
-    (Padic.coefficientExtensionRing l E n)).2.2.1 K
-  rw [intrinsicFiniteTorsionConstructible, finite_homology_support_iff]
-  rw [and_comm, ← h]
-  constructor
-  · rintro ⟨G, ⟨e⟩⟩
-    exact ⟨G.obj, G.property, ⟨e⟩⟩
-  · rintro ⟨G, hG, ⟨e⟩⟩
-    exact ⟨⟨G, hG⟩, ⟨e⟩⟩
-
-private noncomputable def intrinsic_compact_support_comparison
-    (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y}
-    (c : Compactification f) :
-    (sfIntrinsicDerivedEquivalence X A).functor ⋙ sfIntrinsicCompactSupport c A ≅
-      ProEtale.rightDerivedLowerShriekOfCompactification
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c ⋙
-        (sfIntrinsicDerivedEquivalence Y A).functor := by
-  let EX := sfIntrinsicModuleEquivalence X A
-  let EZ := sfIntrinsicModuleEquivalence c.Z A
-  let J := ProEtale.openImmersionLowerShriek
-    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i
-  let o : EX.functor ⋙ sfIntrinsicExtensionByZero c.i A ≅ J ⋙ EZ.functor :=
-    EX.funInvIdAssoc (J ⋙ EZ.functor)
-  let od := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso o ≪≫ Functor.mapDerivedCategoryCompIso _ _
-  exact (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight od _ ≪≫ Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (sfIntrinsicDerivedDirectImageComparison c.g A) ≪≫
-    (Functor.associator _ _ _).symm
-
-private theorem coefficient_has_invertible_exponent
-    (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀)) (n : ℕ) (_hn : 1 ≤ n) :
-    HasInvertibleExponent (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))
-      (Spec (.of K₀)) := by
-  let v := Padic.coefficientExtensionAbsoluteValue l E
-  have hv := spectralNorm_extends (K := Padic l) (L := E)
-  have h := (Padic.extension_integers_dvr l E v hv).choose_spec.choose_spec
-  have hm : (l : Padic.coefficientExtensionIntegers l E) ∈
-      Padic.coefficientExtensionMaximalIdeal l E := by
-    apply (h.2.1 _).2
-    change v (l : E) < 1
-    rw [← map_natCast (algebraMap (Padic l) E) l]
-    change spectralNorm (Padic l) E ((algebraMap (Padic l) E) (l : Padic l)) < 1
-    rw [hv]
-    exact Padic.norm_p_lt_one
-  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
-      Set (Padic.coefficientExtensionIntegers l E)) =
-        Padic.coefficientExtensionMaximalIdeal l E :=
-    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
-  have hkill : (l ^ n : Padic.coefficientExtensionRing l E n) = 0 := by
-    apply Ideal.Quotient.eq_zero_iff_mem.mpr
-    change (l : Padic.coefficientExtensionIntegers l E) ^ n ∈
-      Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
-        Set (Padic.coefficientExtensionIntegers l E)) ^ n
-    rw [hgen]
-    exact Ideal.pow_mem_pow hm n
-  refine ⟨l ^ n, pow_pos (Fact.out : l.Prime).pos n, ?_, ?_⟩
-  · apply ULift.ext
-    change ((l ^ n : ℕ) : Padic.coefficientExtensionRing l E n) = 0
-    simpa only [Nat.cast_pow] using hkill
-  · have hu := (hl.pow n).map (Scheme.ΓSpecIso (.of K₀)).inv.hom
-    simpa only [map_pow, map_natCast, Nat.cast_pow] using hu
-
-private theorem etale_bc_iff
-    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
-    (G : Etale.DerivedCategoryModule A T) :
-    Etale.DerivedCategory.isBoundedConstructible A T G ↔
-      Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) T G := by
-  constructor
-  · rintro ⟨hc, a, b, _, hab⟩
-    exact ⟨⟨⟨a, (DerivedCategory.isGE_iff G a).2 fun i hi ↦ hab i (Or.inl hi)⟩,
-      ⟨b, (DerivedCategory.isLE_iff G b).2 fun i hi ↦ hab i (Or.inr hi)⟩⟩,
-      fun i ↦ (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hc i)⟩
-  · rintro ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩
-    refine ⟨fun i ↦ (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hc i),
-      min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
-    rcases hi with hi | hi
-    · exact (DerivedCategory.isGE_iff G a).1 ha i (hi.trans_le (min_le_left _ _))
-    · exact (DerivedCategory.isLE_iff G b).1 hb i ((le_max_right _ _).trans_lt hi)
-
-private theorem intrinsic_bc_realization_iff
-    (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})
-    (L : DerivedCategory (Sheaf (ProEt.topology T)
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))))) :
-    letI := Padic.finite_coefficientExtensionRing l E n hn
-    intrinsicFiniteTorsionConstructible l E n hn T
-      ((sfIntrinsicDerivedEquivalence T (Padic.coefficientExtensionRing l E n)).functor.obj L) ↔
-      ProEtale.DerivedCategory.boundedConstructible
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) T L := by
-  have := Padic.finite_coefficientExtensionRing l E n hn
-  let A := Padic.coefficientExtensionRing l E n
-  let F := sfIntrinsicDerivedEquivalence T A
-  let C := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T
-  let r : C.mapDerivedCategory ⋙ F.functor ≅
-      ProEtale.finiteCoefficientIntrinsicDerivedComparison T A :=
-    (Functor.mapDerivedCategoryCompIso C (sfIntrinsicModuleEquivalence T A).functor).symm
-  rw [intrinsic_bc_iff_etale_origin l E n hn]
-  constructor
-  · rintro ⟨G, hG, ⟨e⟩⟩
-    refine ⟨G, (etale_bc_iff _ _ G).1 hG, ⟨?_⟩⟩
-    exact F.fullyFaithfulFunctor.preimageIso ((r.app G) ≪≫ e)
-  · rintro ⟨G, hG, ⟨e⟩⟩
-    exact ⟨G, (etale_bc_iff _ _ G).2 hG, ⟨(r.app G).symm ≪≫ F.functor.mapIso e⟩⟩
-
-private theorem intrinsic_bc_iso
-    (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})
-    {K L : proEtaleDerivedCategory T (Padic.coefficientExtensionRing l E n)}
-    (e : K ≅ L) (hK : intrinsicFiniteTorsionConstructible l E n hn T K) :
-    intrinsicFiniteTorsionConstructible l E n hn T L := by
-  have := Padic.finite_coefficientExtensionRing l E n hn
-  obtain ⟨G, hG, ⟨eG⟩⟩ := (intrinsic_bc_iff_etale_origin l E n hn T K).1 hK
-  exact (intrinsic_bc_iff_etale_origin l E n hn T L).2 ⟨G, hG, ⟨eG ≪≫ e⟩⟩
-
-private noncomputable def fixed_compact_support_comparison
-    (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y}
-    [QuasiCompact f] [HasCompactification f] (c : Compactification f)
-    (L : DerivedCategory (Sheaf (ProEt.topology X)
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} A))))
-    (hL : ProEtale.DerivedCategory.boundedConstructible
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X L) :
-    (ProEtale.rightDerivedLowerShriekOfCompactification
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).obj L ≅
-      (ProEtale.rightDerivedLowerShriek
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f).obj L := by
-  let G := Classical.choose hL
-  have hG : Etale.DerivedCategory.boundedConstructible
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X G :=
-    (Classical.choose_spec hL).1
-  let e : (ProEtale.comparisonUpperStar
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj G ≅ L :=
-    Classical.choice (Classical.choose_spec hL).2
-  let G' : DerivedCategory.Plus
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
-    ⟨G, hG.1.1⟩
-  exact (ProEtale.rightDerivedLowerShriekOfCompactification _ c).mapIso e.symm ≪≫
-    (ProEtale.rightDerivedLowerShriekCompactificationIso
-      (ULift.{u + 1, u} A) c).symm.app G' ≪≫
-    (ProEtale.rightDerivedLowerShriek _ f).mapIso e
-
-private theorem finite_compact_support_triangulated
-    (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} {f : X ⟶ Y}
-    (c : Compactification f) : (finiteLevelCompactSupport l E n hn c).IsTriangulated := by
-  have := Padic.finite_coefficientExtensionRing l E n hn
-  change ((sfIntrinsicExtensionByZero c.i
-    (Padic.coefficientExtensionRing l E n)).mapDerivedCategory ⋙
-      proEtaleConstantDerivedDirectImage c.g
-        (Padic.coefficientExtensionRing l E n)).IsTriangulated
-  infer_instance
-
-private theorem finite_compact_support_preserves
-    (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀))
-    (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}}
-    [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]
-    [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]
-    [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))]
-    (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))] [QuasiCompact f]
-    (c : Compactification f)
-    (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n))
-    (hK : intrinsicFiniteTorsionConstructible l E n hn X K) :
-    intrinsicFiniteTorsionConstructible l E n hn Y
-      ((finiteLevelCompactSupport l E n hn c).obj K) := by
-  have := Padic.finite_coefficientExtensionRing l E n hn
-  let A := Padic.coefficientExtensionRing l E n
-  let FX := sfIntrinsicDerivedEquivalence X A
-  let FY := sfIntrinsicDerivedEquivalence Y A
-  let L := FX.inverse.obj K
-  let e : FX.functor.obj L ≅ K := FX.counitIso.app K
-  have hL := (intrinsic_bc_realization_iff l E n hn X L).1
-    (intrinsic_bc_iso l E n hn X e.symm hK)
-  let := c.hasCompactification
-  let := coefficient_has_invertible_exponent l E K₀ hl n hn
-  have hR := ProEtale.boundedConstructible_rightDerivedLowerShriek
-    (ULift.{u + 1, u} A) f (X ↘ Spec (.of K₀)) (Y ↘ Spec (.of K₀))
-    (by simp) L hL
-  let eR : FY.functor.obj
-      ((ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1}
-        (ULift.{u + 1, u} A)) f).obj L) ≅
-      (finiteLevelCompactSupport l E n hn c).obj K :=
-    FY.functor.mapIso (fixed_compact_support_comparison A c L hL).symm ≪≫
-      (intrinsic_compact_support_comparison A c).symm.app L ≪≫
-      (finiteLevelCompactSupport l E n hn c).mapIso e
-  exact intrinsic_bc_iso l E n hn Y eR
-    ((intrinsic_bc_realization_iff l E n hn Y _).2 hR)
-
-private theorem finite_compact_support_amplitude
-    (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀))
-    (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}}
-    [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]
-    [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]
-    [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))]
-    (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))] [QuasiCompact f]
-    (c : Compactification f) (e : ℕ)
-    (he : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
-      topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤ (e : WithBot ℕ∞))
-    (a b : ℤ) (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n))
-    (hK : intrinsicFiniteTorsionConstructible l E n hn X K)
-    (hab : DerivedCategory.homologyConcentratedIn a b K) :
-    DerivedCategory.homologyConcentratedIn a (b + 2 * (e : ℤ))
-      ((finiteLevelCompactSupport l E n hn c).obj K) := by
-  have := Padic.finite_coefficientExtensionRing l E n hn
-  let A := Padic.coefficientExtensionRing l E n
-  let FX := sfIntrinsicDerivedEquivalence X A
-  let FY := sfIntrinsicDerivedEquivalence Y A
-  let L := FX.inverse.obj K
-  let eK : FX.functor.obj L ≅ K := FX.counitIso.app K
-  have hL := (intrinsic_bc_realization_iff l E n hn X L).1
-    (intrinsic_bc_iso l E n hn X eK.symm hK)
-  have habL : DerivedCategory.homologyConcentratedIn a b L :=
-    Functor.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj
-      (sfIntrinsicModuleEquivalence X A).functor
-        ((DerivedCategory.homologyConcentratedIn a b).prop_of_iso eK.symm hab)
-  let := c.hasCompactification
-  let := coefficient_has_invertible_exponent l E K₀ hl n hn
-  have hR := ProEtale.constructibleIn_rightDerivedLowerShriek
-    (ULift.{u + 1, u} A) f (X ↘ Spec (.of K₀)) (Y ↘ Spec (.of K₀))
-    (by simp) e he a b L ⟨hL, habL⟩
-  let eR : FY.functor.obj
-      ((ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1}
-        (ULift.{u + 1, u} A)) f).obj L) ≅
-      (finiteLevelCompactSupport l E n hn c).obj K :=
-    FY.functor.mapIso (fixed_compact_support_comparison A c L hL).symm ≪≫
-      (intrinsic_compact_support_comparison A c).symm.app L ≪≫
-      (finiteLevelCompactSupport l E n hn c).mapIso eK
-  exact (DerivedCategory.homologyConcentratedIn a (b + 2 * (e : ℤ))).prop_of_iso eR
-    (Functor.homologyConcentratedIn_mapDerivedCategory_obj
-      (sfIntrinsicModuleEquivalence Y A).functor hR.2)
 
 /-- Finite-level compact support restricts to an exact triangulated functor on the
 intrinsic bounded constructible subcategories. The interval is chosen before both the
@@ -449,30 +211,6 @@ theorem finiteCompactSupportConstructibility
           DerivedCategory.homologyConcentratedIn a (b + 2 * (e : ℤ))
             ((finiteLevelCompactSupport l E m hm c).obj
               ((finiteLevelDerivedReduction l E m n hmn X).obj K))) := by
-  refine ⟨?_, ?_, ?_⟩
-  · intro c
-    exact ⟨finite_compact_support_triangulated l E n hn c,
-      finite_compact_support_preserves l E K₀ hl n hn f c⟩
-  · intro a b hab e he
-    refine ⟨a, b + 2 * (e : ℤ), by omega, ?_⟩
-    intro c K hK hbound
-    exact ⟨finite_compact_support_preserves l E K₀ hl n hn f c K hK,
-      finite_compact_support_amplitude l E K₀ hl n hn f c e he a b K hK hbound⟩
-  · intro m hm hmn c K hK hKm
-    have hi : IsIso (finiteLevelCompactSupportReductionComparison l E m n hm hmn c K) := by
-      simpa only [finiteLevelCompactSupportReductionComparison, finiteLevelDerivedReduction,
-        finiteLevelReductionMap, finiteLevelCompactSupport, sfAmbientCompactSupportCandidate,
-        sfIntrinsicCompactSupport,
-        Functor.id_obj] using
-        finiteCompactSupportScalarComparison l E K₀ hl n hn m hm hmn f c K hK hKm
-    let := hi
-    have ht := finite_compact_support_preserves l E K₀ hl m hm f c
-      ((finiteLevelDerivedReduction l E m n hmn X).obj K) hKm
-    refine ⟨hi, ?_, ht, ?_⟩
-    · exact intrinsic_bc_iso l E m hm Y
-        (asIso (finiteLevelCompactSupportReductionComparison l E m n hm hmn c K)).symm ht
-    · intro e he a b hbound
-      exact finite_compact_support_amplitude l E K₀ hl m hm f c e he a b
-        ((finiteLevelDerivedReduction l E m n hmn X).obj K) hKm hbound
+  sorry
 
 end AlgebraicGeometry.Scheme

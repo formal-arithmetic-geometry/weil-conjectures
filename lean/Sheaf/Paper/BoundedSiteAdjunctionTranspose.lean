@@ -26,7 +26,11 @@ public import Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass
 public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
 public import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import WeilConjectures.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import Sheaf.Paper.ComparisonPullbackExact
 import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Chosen-compactification normalization of bounded site adjunction transposes
 
@@ -91,66 +95,6 @@ def boundedSiteRho
   D(ν^*(X)[ModuleCat.{u + 1} A]).map
     (H.map ((derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y).unit.app K))
 
-private theorem boundedSiteTranspose_left
-    (J J' : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
-    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)))
-    (b : J'.obj ⟶ J.obj)
-    (z : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj
-      (D(ν^*(X)[ModuleCat.{u + 1} A]).obj J.obj) ⟶ L) :
-    boundedSiteTranspose A c H adj J' L
-        ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
-          (D(ν^*(X)[ModuleCat.{u + 1} A]).map b) ≫ z) =
-      D(ν^*(X)[ModuleCat.{u + 1} A]).map b ≫ boundedSiteTranspose A c H adj J L z := by
-  unfold boundedSiteTranspose
-  have hb := (compactSupportSiteComparison A c).inv.naturality
-    (ObjectProperty.homMk b)
-  change D(ν^*(Y)[ModuleCat.{u + 1} A]).map
-      ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map b) ≫
-        (compactSupportSiteComparison A c).inv.app J =
-      (compactSupportSiteComparison A c).inv.app J' ≫
-        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
-          (D(ν^*(X)[ModuleCat.{u + 1} A]).map b) at hb
-  rw [← Category.assoc, ← hb, Category.assoc,
-    Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_left,
-    Functor.map_comp]
-
-private theorem boundedSiteTranspose_right
-    (J : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
-    (L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)))
-    (b : L ⟶ L')
-    (z : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj
-      (D(ν^*(X)[ModuleCat.{u + 1} A]).obj J.obj) ⟶ L) :
-    boundedSiteTranspose A c H adj J L' (z ≫ b) =
-      boundedSiteTranspose A c H adj J L z ≫
-        D(ν^*(X)[ModuleCat.{u + 1} A]).map
-          (H.map ((R(ν_*(Y)[ModuleCat.{u + 1} A])).map b)) := by
-  unfold boundedSiteTranspose
-  rw [← Category.assoc, Adjunction.homEquiv_naturality_right,
-    Adjunction.homEquiv_naturality_right, Functor.map_comp]
-
-private theorem boundedSiteTranspose_compatible
-    (J : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
-    (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)))
-    (ae : (Etale.rightDerivedLowerShriekOfCompactification
-      (ModuleCat.{u + 1} A) c).obj J.obj ⟶ K)
-    (ap : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj
-      (D(ν^*(X)[ModuleCat.{u + 1} A]).obj J.obj) ⟶
-        D(ν^*(Y)[ModuleCat.{u + 1} A]).obj K)
-    (h : (compactSupportSiteComparison A c).inv.app J ≫ ap =
-      D(ν^*(Y)[ModuleCat.{u + 1} A]).map ae) :
-    boundedSiteTranspose A c H adj J _ ap =
-      D(ν^*(X)[ModuleCat.{u + 1} A]).map ((adj.homEquiv J.obj K) ae) ≫
-        boundedSiteRho A H K := by
-  unfold boundedSiteTranspose
-  rw [h]
-  have he : (derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y).homEquiv _ _
-      (D(ν^*(Y)[ModuleCat.{u + 1} A]).map ae) =
-      ae ≫ (derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y).unit.app K := by
-    rw [Adjunction.homEquiv_unit]
-    exact ((derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y).unit.naturality ae).symm
-  rw [he, Adjunction.homEquiv_naturality_right, Functor.map_comp]
-  rfl
-
 end Generic
 
 /-- The etale intermediate object in the specified bounded Hom chain is bounded below.
@@ -196,15 +140,7 @@ theorem boundedSiteRightAdjoint_plus
     (L : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient))) :
     _root_.DerivedCategory.TStructure.t.plus (H.obj ((R(ν_*(Y)[ModuleCat.{u + 1}
       P.Coefficient])).obj L.obj)) := by
-  have _ := hf
-  have _ := hd
-  let : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
-  let := adj.isLeftAdjoint
-  let e := (Adjunction.ofIsLeftAdjoint
-    (Etale.rightDerivedLowerShriekOfCompactification
-      (ModuleCat.{u + 1} P.Coefficient) c)).rightAdjointUniq adj
-  exact DerivedCategory.TStructure.t.plus.prop_of_iso (e.app _)
-    (specifiedExceptionalEtale_boundedBelow P.Coefficient c L)
+  sorry
 
 /-- Bijectivity of the specified Hom-chain function on its bounded etale-origin domains.
 Source: Stacks Tag 0B65; blueprint thm-sf-ambient-adjoint-class, Hom chain
@@ -249,13 +185,7 @@ theorem boundedSiteTranspose_bijective
     (J : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)))
     (L : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient))) :
     Function.Bijective (boundedSiteTranspose P.Coefficient c H adj J L.obj) := by
-  let e := ((compactSupportSiteComparison P.Coefficient c).app J).homFromEquiv (Z := L.obj)
-  let eY := (derivedComparisonAdjunction (ModuleCat.{u + 1} P.Coefficient) Y).homEquiv
-    ((Etale.rightDerivedLowerShriekOfCompactification
-      (ModuleCat.{u + 1} P.Coefficient) c).obj J.obj) L.obj
-  exact (bijective_comparisonUpperStar_mapDerivedCategory_map _ _
-    (boundedSiteRightAdjoint_plus P aX aY f hf c d hd H adj L)).comp
-      ((adj.homEquiv J.obj _).bijective.comp (eY.bijective.comp e.bijective))
+  sorry
 
 /-- The unique equivalence whose forward map is the specified Hom-chain function.
 Its inverse is fixed by bijectivity, not chosen independently.
@@ -387,41 +317,7 @@ theorem boundedSiteAdjunctionTranspose
           ((siteComparisonDerivedPullbackPlus Y P.Coefficient).obj K) a_p =
         D(ν^*(X)[ModuleCat.{u + 1} P.Coefficient]).map ((adj.homEquiv J.obj K.obj) a_e) ≫
           boundedSiteRho P.Coefficient H K.obj) := by
-  let L := (siteComparisonDerivedPullbackPlus Y P.Coefficient).obj K
-  let JH : DerivedCategory.Plus
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) := ⟨H.obj K.obj, hHK⟩
-  let JHL := boundedSiteRightAdjointPlus P aX aY f hf c d hd H adj L
-  have hc : boundedSiteTranspose P.Coefficient c H adj JHL L.obj
-      (boundedSiteCounit P aX aY f hf c d hd H adj L) = 𝟙 _ :=
-    (boundedSiteHomEquiv P aX aY f hf c d hd H adj JHL L).apply_symm_apply (𝟙 _)
-  have hr : IsIso (boundedSiteRho P.Coefficient H K.obj) := by
-    have := isIso_derivedComparisonAdjunction_unit_app
-      (ModuleCat.{u + 1} P.Coefficient) Y K.obj K.property
-    unfold boundedSiteRho
-    infer_instance
-  refine ⟨hr, ?_, ?_⟩
-  · have he :
-        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).map
-            (boundedSiteRho P.Coefficient H K.obj) ≫
-          boundedSiteCounit P aX aY f hf c d hd H adj L =
-        (compactSupportSiteComparison P.Coefficient c).hom.app JH ≫
-          D(ν^*(Y)[ModuleCat.{u + 1} P.Coefficient]).map (adj.counit.app K.obj) := by
-      apply (boundedSiteTranspose_bijective P aX aY f hf c d hd H adj JH L).1
-      rw [boundedSiteRho, boundedSiteTranspose_left P.Coefficient c H adj JHL JH L.obj
-        (H.map ((derivedComparisonAdjunction
-          (ModuleCat.{u + 1} P.Coefficient) Y).unit.app K.obj))]
-      rw [hc, Category.comp_id]
-      erw [boundedSiteTranspose_compatible P.Coefficient c H adj JH K.obj
-        (adj.counit.app K.obj) _ (by
-          simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp])]
-      rw [← adj.homEquiv_symm_id K.obj, Equiv.apply_symm_apply,
-        CategoryTheory.Functor.map_id, Category.id_comp]
-      rfl
-    change (compactSupportSiteComparison P.Coefficient c).inv.app JH ≫ _ = _
-    rw [he]
-    simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
-  · intro ae ap h
-    exact boundedSiteTranspose_compatible P.Coefficient c H adj J K.obj ae ap h
+  sorry
 
 /-- Naturality of the specified transpose in both variables, and of rho in K.
 Source: Stacks Tag 0B65; blueprint thm-sf-ambient-adjoint-class, Hom chain
@@ -491,17 +387,6 @@ theorem boundedSiteAdjunctionTranspose_naturality
       P.Coefficient])).map (D(ν^*(Y)[ModuleCat.{u + 1} P.Coefficient]).map b))) =
         D(ν^*(X)[ModuleCat.{u + 1} P.Coefficient]).map (H.map b) ≫ boundedSiteRho P.Coefficient H
       K'.obj) := by
-  have _ := hf
-  have _ := hd
-  refine ⟨?_, ?_, ?_⟩
-  · intro J J' L b z
-    exact boundedSiteTranspose_left P.Coefficient c H adj J J' L.obj b z
-  · intro J L L' b z
-    exact boundedSiteTranspose_right P.Coefficient c H adj J L.obj L'.obj b z
-  · intro K K' b
-    unfold boundedSiteRho
-    simp only [← Functor.map_comp]
-    exact congrArg (fun z ↦ D(ν^*(X)[ModuleCat.{u + 1} P.Coefficient]).map (H.map z))
-      ((derivedComparisonAdjunction (ModuleCat.{u + 1} P.Coefficient) Y).unit.naturality b).symm
+  sorry
 
 end AlgebraicGeometry.ProEtale

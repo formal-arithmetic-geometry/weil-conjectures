@@ -2,13 +2,10 @@
 
 642 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (1)
+## Stage 1: nodes to split (0)
 
-| node | distance to a target | Lean state on the done branch |
-|---|---|---|
-| `lem-trf-source-hyperext-module-target` | 4008 | none |
 
-## Stage 2: nodes to state (30)
+## Stage 2: nodes to state (31)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -36,6 +33,7 @@
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-pur-weil-basechange-semilinear-pasting` | 1 | state | 0 |
 | `lem-pur-weil-semilinear-exchange-reindexing` | 1 | state | 0 |
+| `lem-trf-source-hyperext-module-target` | 1 | state | 0 |
 | `lem-wf-constant-twist-coefficient-comparison` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
@@ -43,7 +41,7 @@
 | `lem-zl-compact-support-realization-factor-normalization` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 301 nodes that below a finished node, not needed, 85 nodes that wait for a statement dependency (bottom-up), 1 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 301 nodes that below a finished node, not needed, 85 nodes that wait for a statement dependency (bottom-up).
 
 ## Stage 3: modules to prove (611)
 
@@ -54,10 +52,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.RelativeProjExists` | 10 | 1 | repair | route |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 8 | 1 | repair | route |
 | `Sheaf.Paper.SfHomTriangulated` | 7 | 1 | repair | route |
-| `Sheaf.SixFunctorsBasics.BrownHypotheses` | 5 | 1 | repair | route |
 | `Sheaf.Paper.IntegralOperationsWellDefined` | 6 | 3 | repair | route |
 | `Sheaf.Paper.CompleteResidueCohomologyBounds` | 8 | 1 | repair | route |
 | `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 1 | repair | route |
+| `Sheaf.SixFunctorsBasics.BrownHypotheses` | 5 | 1 | disputed | route |
 | `Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction` | 8 | 1 | disputed | 6 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
 | `Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses` | 3 | 3 | proof | route |

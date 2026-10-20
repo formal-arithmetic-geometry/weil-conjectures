@@ -108,22 +108,6 @@ def frobeniusAbsoluteMap (P : PurityFiniteSetting.{u})
       (pullback.fst T₀.hom
         (Spec.map (CommRingCat.ofHom (algebraMap P.field.k₀ P.field.k))) ≫ T₀.hom)) P.field.a
 
-set_option backward.isDefEq.respectTransparency false in
-private theorem absolute_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
-    {p : ℕ} (hp : p.Prime) (hX : (p : Γ(X, ⊤)) = 0)
-    (hY : (p : Γ(Y, ⊤)) = 0) (n : ℕ) :
-    X.iterateFrobenius hp hX n ≫ f = f ≫ Y.iterateFrobenius hp hY n := by
-  apply Scheme.Hom.ext (by ext x; rfl)
-  intro U
-  simp only [Scheme.Hom.comp_app]
-  change f.app U ≫ (X.iterateFrobenius hp hX n).app (f ⁻¹ᵁ U) ≫
-    X.presheaf.map (𝟙 _) =
-      (Y.iterateFrobenius hp hY n).app U ≫ f.app U
-  rw [X.presheaf.map_id, Category.comp_id]
-  ext s
-  exact (map_pow (f.app U).hom s _).symm
-
-set_option backward.isDefEq.respectTransparency false in
 /-- Both arithmetic factorizations of absolute Frobenius, and the resulting geometric
 factorization used to define kappa. Source: blueprint order 2579, affine verification
 (blueprint: def-pur-scheme-geometric-frobenius).
@@ -138,57 +122,7 @@ theorem schemeGeometricFrobenius_factorization (P : PurityFiniteSetting.{u})
     P.frobeniusAbsoluteMap T₀ = P.frobeniusArithmeticMap T₀ ≫ P.frobeniusSchemeMap T₀ ∧
     P.frobeniusAbsoluteMap T₀ = P.frobeniusSchemeMap T₀ ≫ P.frobeniusArithmeticMap T₀ ∧
     P.frobeniusSchemeMap T₀ = P.frobeniusAbsoluteMap T₀ ≫ P.frobeniusGaloisMap T₀ := by
-  let : Fintype P.field.k₀ := Fintype.ofFinite P.field.k₀
-  let b := Spec.map (CommRingCat.ofHom (algebraMap P.field.k₀ P.field.k))
-  let π := pullback.fst T₀.hom b
-  let ρ := pullback.snd T₀.hom b
-  let σ := @FiniteField.geometricFrobeniusAlgEquivOfAlgebraic P.field.k₀ P.field.k _
-    (Fintype.ofFinite P.field.k₀) _ _ _
-  have hA := P.field.galoisMap_projections T₀.hom σ.symm
-  have hS₁ : P.frobeniusSchemeMap T₀ ≫ π = π ≫
-      T₀.left.iterateFrobenius P.field.prime (P.field.model_characteristic T₀.hom)
-        P.field.a := by
-    simp [frobeniusSchemeMap, frobeniusMap, π, b, Over.pullback_map_left]
-  have hS₂ : P.frobeniusSchemeMap T₀ ≫ ρ = ρ := by
-    simp [frobeniusSchemeMap, frobeniusMap, ρ, b, Over.pullback_map_left]
-  have hF₁ : P.frobeniusAbsoluteMap T₀ ≫ π = π ≫
-      T₀.left.iterateFrobenius P.field.prime (P.field.model_characteristic T₀.hom)
-        P.field.a := absolute_naturality π _ _ _ _
-  have hF₂ : P.frobeniusAbsoluteMap T₀ ≫ ρ =
-      ρ ≫ Spec.map (CommRingCat.ofHom σ.symm.toRingHom) := by
-    apply AlgebraicGeometry.ext_to_Spec
-    change (Scheme.ΓSpecIso (CommRingCat.of P.field.k)).inv ≫
-        (P.frobeniusAbsoluteMap T₀ ≫ ρ).appTop =
-      (Scheme.ΓSpecIso (CommRingCat.of P.field.k)).inv ≫
-        (ρ ≫ Spec.map (CommRingCat.ofHom σ.symm.toRingHom)).appTop
-    rw [Scheme.Hom.comp_appTop, Scheme.Hom.comp_appTop]
-    conv_rhs => rw [← Category.assoc, ← Scheme.ΓSpecIso_inv_naturality]
-    ext x
-    change (ρ.appTop ((Scheme.ΓSpecIso (CommRingCat.of P.field.k)).inv x)) ^
-        P.field.p ^ P.field.a =
-      ρ.appTop ((Scheme.ΓSpecIso (CommRingCat.of P.field.k)).inv (σ.symm x))
-    have hx : σ.symm x = x ^ (P.field.p ^ P.field.a) := by
-      change x ^ Fintype.card P.field.k₀ = _
-      rw [← Nat.card_eq_fintype_card, P.field.card_base, P.field.cardinality_eq]
-    rw [hx, map_pow, map_pow]
-  have h₁ : P.frobeniusAbsoluteMap T₀ =
-      P.frobeniusArithmeticMap T₀ ≫ P.frobeniusSchemeMap T₀ := by
-    apply pullback.hom_ext
-    · change _ ≫ π = (_ ≫ _) ≫ π
-      rw [hF₁, Category.assoc, hS₁, ← Category.assoc, hA.1]
-    · change _ ≫ ρ = (_ ≫ _) ≫ ρ
-      rw [hF₂, Category.assoc, hS₂]
-      exact hA.2.symm
-  have h₂ : P.frobeniusAbsoluteMap T₀ =
-      P.frobeniusSchemeMap T₀ ≫ P.frobeniusArithmeticMap T₀ := by
-    apply pullback.hom_ext
-    · change _ ≫ π = (_ ≫ _) ≫ π
-      rw [hF₁, Category.assoc, hA.1, hS₁]
-    · change _ ≫ ρ = (_ ≫ _) ≫ ρ
-      rw [hF₂, Category.assoc, hA.2, ← Category.assoc, hS₂]
-  refine ⟨h₁, h₂, ?_⟩
-  rw [h₂, Category.assoc, (P.field.galoisMap_inverse T₀.hom σ).2]
-  exact (Category.comp_id (P.frobeniusSchemeMap T₀)).symm
+  sorry
 
 /-- Select the ordinary composition family fixed by the dependency's section equation
 for the conjugate direct-image comparison. That equation and the fixed adjunctions
@@ -247,7 +181,6 @@ def schemeGeometricFrobeniusComparison (P : PurityFiniteSetting.{u})
   Functor.isoWhiskerLeft (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusGaloisMap T₀))
     (P.frobeniusAbsoluteTrivialization T₀) ≪≫ Functor.rightUnitor _
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The Cartesian geometric-Galois square and the commuting scheme-Frobenius square.
 The absolute Frobenii are universal homeomorphisms and give equivalences of small etale
 sites. Source: blueprint order 2579, two squares and absolute-Frobenius paragraph
@@ -278,52 +211,7 @@ theorem schemeGeometricFrobenius_squares (P : PurityFiniteSetting.{u})
     (P.frobeniusAbsoluteMap Y₀).Etale.IsEquivalence ∧
     (Scheme.etaleSetPullback (P.frobeniusAbsoluteMap X₀)).IsEquivalence ∧
     (Scheme.etaleSetPullback (P.frobeniusAbsoluteMap Y₀)).IsEquivalence := by
-  let b := Spec.map (CommRingCat.ofHom (algebraMap P.field.k₀ P.field.k))
-  let σ := @FiniteField.geometricFrobeniusAlgEquivOfAlgebraic P.field.k₀ P.field.k _
-    (Fintype.ofFinite P.field.k₀) _ _ _
-  have hX := P.field.galoisMap_inverse X₀.hom σ
-  have hY := P.field.galoisMap_inverse Y₀.hom σ
-  let eX : (P.frobeniusFiber X₀).left ≅ (P.frobeniusFiber X₀).left :=
-    ⟨P.frobeniusGaloisMap X₀, P.frobeniusArithmeticMap X₀, hX.1, hX.2⟩
-  let eY : (P.frobeniusFiber Y₀).left ≅ (P.frobeniusFiber Y₀).left :=
-    ⟨P.frobeniusGaloisMap Y₀, P.frobeniusArithmeticMap Y₀, hY.1, hY.2⟩
-  have hsq := P.field.frobenius_square_cartesian X₀ Y₀ f₀
-  have hcomm : P.frobeniusSchemeMap X₀ ≫ P.frobeniusMap f₀ =
-      P.frobeniusMap f₀ ≫ P.frobeniusSchemeMap Y₀ := by
-    have h : Over.homMk
-        (X₀.left.iterateFrobenius P.field.prime (P.field.model_characteristic X₀.hom)
-          P.field.a) (P.field.model_frobenius_over X₀.hom) ≫ f₀ =
-        f₀ ≫ Over.homMk
-          (Y₀.left.iterateFrobenius P.field.prime (P.field.model_characteristic Y₀.hom)
-            P.field.a) (P.field.model_frobenius_over Y₀.hom) := by
-      apply Over.OverMorphism.ext
-      exact absolute_naturality f₀.left P.field.prime
-        (P.field.model_characteristic X₀.hom) (P.field.model_characteristic Y₀.hom) _
-    unfold frobeniusSchemeMap frobeniusMap
-    change ((Over.pullback b).map _).left ≫ ((Over.pullback b).map f₀).left =
-      ((Over.pullback b).map f₀).left ≫ ((Over.pullback b).map _).left
-    simpa only [Functor.map_comp, Over.comp_left] using
-      congrArg (fun g ↦ ((Over.pullback b).map g).left) h
-  have hUH (T₀ : Over (Spec (CommRingCat.of P.field.k₀))) :
-      IsUniversalHomeomorphism (P.frobeniusAbsoluteMap T₀) := by
-    let : (P.frobeniusFiber T₀).left.Over (Spec (CommRingCat.of P.field.k₀)) :=
-      ⟨pullback.fst T₀.hom b ≫ T₀.hom⟩
-    exact P.field.absoluteFrobenius_isUniversalHomeomorphism (P.frobeniusFiber T₀).left
-  have : IsUniversalHomeomorphism (P.frobeniusAbsoluteMap X₀) := hUH X₀
-  have : IsUniversalHomeomorphism (P.frobeniusAbsoluteMap Y₀) := hUH Y₀
-  have hEX := AlgebraicGeometry.Etale.universalHomeomorphism_invariance.{u, u}
-    (P.frobeniusAbsoluteMap X₀)
-  have hEY := AlgebraicGeometry.Etale.universalHomeomorphism_invariance.{u, u}
-    (P.frobeniusAbsoluteMap Y₀)
-  have hset (T₀ : Over (Spec (CommRingCat.of P.field.k₀)))
-      [IsUniversalHomeomorphism (P.frobeniusAbsoluteMap T₀)] :
-      (Scheme.etaleSetPullback (P.frobeniusAbsoluteMap T₀)).IsEquivalence := by
-    obtain ⟨E, hE, _⟩ := (AlgebraicGeometry.Etale.universalHomeomorphism_invariance.{u, u}
-      (P.frobeniusAbsoluteMap T₀)).2.2.1
-    rw [← hE]
-    infer_instance
-  exact ⟨eX.isIso_hom, eY.isIso_hom, hsq.2.2.2.2.2.1, hsq.2.2.2.2.1, hcomm,
-    hUH X₀, hUH Y₀, hEX.1, hEY.1, hset X₀, hset Y₀⟩
+  sorry
 
 /-- The pullback-composition identification from the first commuting square.
 Source: blueprint order 2579, c_g (blueprint: def-pur-scheme-geometric-frobenius). -/

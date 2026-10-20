@@ -6,6 +6,14 @@ Authors: SHEAF group Q33
 module
 
 public import Sheaf.Algebra.Homology.FiniteFilteredLocalization
+import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
+import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Mathlib.CategoryTheory.Localization.Triangulated
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Cone triangles in the localization of finite filtered complexes
@@ -95,47 +103,6 @@ theorem filteredConeLocalization (B : Option (ℤ × ℤ))
         ∃ S : Triangle (FiniteFilteredHomotopyPlus A B false),
           S ∈ distTriang (FiniteFilteredHomotopyPlus A B false) ∧
             Nonempty (T ≅ (finiteFilteredQh A B).mapTriangle.obj S)) := by
-  refine ⟨inferInstance, ?_, ?_, ?_, inferInstance, inferInstance, ?_⟩
-  · intro T
-    constructor
-    · intro hT
-      have hX : CochainComplex.plus (FiniteFilteredObjects A B false) T.obj₁.obj.as :=
-        (HomotopyCategory.plus_quotient_obj_iff _).mp T.obj₁.property
-      have hY : CochainComplex.plus (FiniteFilteredObjects A B false) T.obj₂.obj.as :=
-        (HomotopyCategory.plus_quotient_obj_iff _).mp T.obj₂.property
-      obtain ⟨f, hf⟩ := (HomotopyCategory.quotient _ _).map_surjective T.mor₁.hom
-      refine ⟨⟨_, hX⟩, ⟨_, hY⟩, ObjectProperty.homMk f, ⟨?_⟩⟩
-      exact isoTriangleOfIso₁₂ _ _
-        ((HomotopyCategory.Plus.ι _).map_distinguished T hT)
-        (HomotopyCategory.mappingCone_triangleh_distinguished f)
-        (Iso.refl _) (Iso.refl _) (by
-          change T.mor₁.hom ≫ 𝟙 _ =
-            𝟙 _ ≫ (HomotopyCategory.quotient _ _).map f
-          simp only [Category.comp_id, Category.id_comp]
-          exact hf.symm)
-    · rintro ⟨X, Y, f, ⟨e⟩⟩
-      exact isomorphic_distinguished _
-        (HomotopyCategory.mappingCone_triangleh_distinguished f.hom) _ e
-  · intro J _ _
-    exact ⟨inferInstance, inferInstance⟩
-  · intro T hT
-    change (∀ p : ℤ, HomotopyCategory.Plus.quasiIso A
-      ((filteredEvaluation A B false (some p)).mapHomotopyCategoryPlus.map T.mor₁)) ↔ _
-    apply forall_congr'
-    intro p
-    let F := (filteredEvaluation A B false (some p)).mapHomotopyCategoryPlus
-    have h := (HomotopyCategory.subcategoryAcyclic A).trW_iff_of_distinguished _
-      ((HomotopyCategory.Plus.ι A).map_distinguished _ (F.map_distinguished T hT))
-    rw [← HomotopyCategory.quasiIso_eq_trW_subcategoryAcyclic,
-      HomotopyCategory.mem_subcategoryAcyclic_iff] at h
-    exact h
-  · intro T
-    change (∃ S, ∃ _ : T ≅ (finiteFilteredQh A B).mapTriangle.obj S,
-      S ∈ distTriang (FiniteFilteredHomotopyPlus A B false)) ↔ _
-    constructor
-    · rintro ⟨S, e, hS⟩
-      exact ⟨S, hS, ⟨e⟩⟩
-    · rintro ⟨S, hS, ⟨e⟩⟩
-      exact ⟨S, e, hS⟩
+  sorry
 
 end CategoryTheory

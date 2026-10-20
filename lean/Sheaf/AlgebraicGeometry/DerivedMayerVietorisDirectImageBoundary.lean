@@ -6,7 +6,7 @@ Authors: SHEAF group S2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageKInjectiveShiftComparison
+import Sheaf.AlgebraicGeometry.DerivedDirectImageKInjectiveShiftComparison
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparison
 
 /-! # DerivedMayerVietorisDirectImageBoundary

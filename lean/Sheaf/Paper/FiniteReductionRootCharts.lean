@@ -13,7 +13,6 @@ public import Sheaf.Paper.FourCorners
 public import Sheaf.Paper.StratumScalarExtension
 public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
-import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
 
 /-! # Reduction of the canonical finite-coefficient purity maps
 
@@ -35,230 +34,6 @@ set_option synthInstance.maxSize 4096
 universe u v w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting
-private theorem existsUnique_heq {α β : Type v} (e : α = β) (b : β) :
-    ∃! a : α, HEq a b := by
-  subst β
-  exact ⟨b, HEq.rfl, fun a h ↦ eq_of_heq h⟩
-
-/-- The ordered composite of the reassociation, root, and tensor-unit factors.
-Source: blueprint finite-reduction Step 1
-(blueprint: def-pur-finite-reduction-root-charts). -/
-def finiteReductionChartComposite (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
-    (M B : _root_.DerivedCategory
-      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) (r : ℤ)
-    (b : B ≅ (𝟙_ (_root_.DerivedCategory
-      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))))⟦r⟧) :=
-  smoothPurityTensorShift A X r M B ≪≫
-    ((smoothPurityTensor A X).obj M).mapIso b ≪≫
-      finiteReductionTensorUnit (ModuleCat.{u + 1} A) X M r
-
-private theorem finiteReductionChartComposite_normalized
-    {C : Type v} [Category.{w} C] (F : C ⥤ C) {U V B D : C}
-    (f : U ≅ F.obj B) (b : B ≅ D) (g : F.obj D ≅ V) (a : U ≅ V) :
-    (∃ i₀ : U ≅ F.obj B, ∃ i₁ : F.obj B ≅ F.obj D, ∃ i₂ : F.obj D ≅ V,
-      HEq i₀ f ∧ (∃ c : B ≅ D, HEq c b ∧ HEq i₁ (F.mapIso c)) ∧
-      HEq i₂ g ∧ HEq a (i₀ ≪≫ i₁ ≪≫ i₂)) ↔ HEq a (f ≪≫ F.mapIso b ≪≫ g) := by
-  constructor
-  · rintro ⟨i₀, i₁, i₂, h₀, ⟨c, hc, h₁⟩, h₂, ha⟩
-    have e₀ := eq_of_heq h₀
-    have ec := eq_of_heq hc
-    have e₁ := eq_of_heq h₁
-    have e₂ := eq_of_heq h₂
-    subst i₀ c i₁ i₂
-    exact ha
-  · intro h
-    exact ⟨_, _, _, HEq.rfl, ⟨b, HEq.rfl, HEq.rfl⟩, HEq.rfl, h⟩
-
-private theorem rootTrivializationOfConstantIso (A : Type (u + 1)) [CommRing A] (N : ℕ) [NeZero N]
-    (hA : (N : A) = 0) (T : Scheme.{u})
-    [HasWeakSheafify T.smallEtaleTopology AddCommGrpCat.{u + 1}]
-    [HasWeakSheafify T.smallEtaleTopology (ModuleCat.{u + 1} A)]
-    (θ : (constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
-      (AddCommGrpCat.of (ULift.{u + 1} (ZMod N))) ≅ T.rootsOfUnitySheaf N) :
-    ∃! t : Etale.ordinaryFiniteConstant A T ≅ Scheme.finiteEtaleTateLine T N A hA,
-      ∀ (W : T.Etaleᵒᵖ) (a : A),
-        t.hom.hom.app W ((toSheafify T.smallEtaleTopology
-          ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))).app W a) =
-        Scheme.finiteEtaleTateOneGenerator A N T hA W a
-          (θ.hom.hom.app W ((toSheafify T.smallEtaleTopology
-            ((Functor.const T.Etaleᵒᵖ).obj
-              (AddCommGrpCat.of (ULift.{u + 1} (ZMod N))))).app W (ULift.up 1))) := by
-  let J := T.smallEtaleTopology
-  let C := Etale.ordinaryFiniteConstant A T
-  let L := Scheme.finiteEtaleTateLine T N A hA
-  let U := forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}
-  let F := sheafCompose J U
-  let Z := (Functor.const T.Etaleᵒᵖ).obj
-    (AddCommGrpCat.of (ULift.{u + 1} (ZMod N)))
-  let η := toSheafify J Z
-  let v := Etale.ordinaryFiniteRootMap A N hA T
-  let s (W : T.Etaleᵒᵖ) : L.obj.obj W :=
-    v.hom.app W (θ.hom.hom.app W (η.app W (ULift.up 1)))
-  have hs {W V : T.Etaleᵒᵖ} (f : W ⟶ V) : L.obj.map f (s W) = s V := by
-    exact (NatTrans.naturality_apply (η ≫ θ.hom.hom ≫ v.hom) f (ULift.up 1)).symm
-  let α₀ : (Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A) ⟶ L.obj :=
-    { app := fun W ↦ ModuleCat.ofHom ((LinearMap.id : A →ₗ[A] A).smulRight (s W))
-      naturality := by
-        intro W V f
-        apply ModuleCat.hom_ext
-        apply LinearMap.ext
-        intro a
-        change a • s V = L.obj.map f (a • s W)
-        rw [map_smul, hs] }
-  let α : C ⟶ L := ⟨sheafifyLift J α₀ L.property⟩
-  have hα (W : T.Etaleᵒᵖ) (a : A) :
-      α.hom.app W ((toSheafify J
-        ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))).app W a) = a • s W := by
-    exact congrArg (fun f ↦ f.app W a) (toSheafify_sheafifyLift J α₀ L.property)
-  let r := Scheme.finiteEtaleTwistScalar N A hA
-  let j₀ : Z ⟶ (F.obj C).obj :=
-    { app := fun W ↦ AddCommGrpCat.ofHom
-        (((U.map ((toSheafify J
-          ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))).app W)).hom).comp
-          (r.toAddMonoidHom.comp AddEquiv.ulift.toAddMonoidHom))
-      naturality := by
-        intro W V f
-        ext z
-        exact NatTrans.naturality_apply (toSheafify J
-          ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))) f (r z.down) }
-  let j : (presheafToSheaf J AddCommGrpCat.{u + 1}).obj Z ⟶ F.obj C :=
-    ⟨sheafifyLift J j₀ (F.obj C).property⟩
-  let ρ := θ.inv ≫ j
-  have hρ (W : T.Etaleᵒᵖ) (z : ULift.{u + 1} (ZMod N)) :
-      ρ.hom.app W (θ.hom.hom.app W (η.app W z)) =
-        (toSheafify J ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))).app W
-          (r z.down) := by
-    have hθ := ConcreteCategory.congr_hom
-      (Iso.hom_inv_id_app ((sheafToPresheaf J _).mapIso θ) W) (η.app W z)
-    change j.hom.app W (θ.inv.hom.app W (θ.hom.hom.app W (η.app W z))) = _
-    change θ.inv.hom.app W (θ.hom.hom.app W (η.app W z)) = η.app W z at hθ
-    rw [hθ]
-    exact congrArg (fun f ↦ f.app W z)
-      (toSheafify_sheafifyLift J j₀ (F.obj C).property)
-  let R := Scheme.finiteEtaleMuModulePresheaf T N
-  let adj := ModuleCat.extendRestrictScalarsAdj.{u + 1, 0, u + 1} r
-  let g (W : T.Etaleᵒᵖ) : R.obj W ⟶ (ModuleCat.restrictScalars r).obj (C.obj.obj W) :=
-    letI := AddCommGroup.zmodModule (Scheme.finiteEtaleMu_annihilated T N W)
-    ModuleCat.ofHom (X := R.obj W) (Y := (ModuleCat.restrictScalars r).obj (C.obj.obj W))
-      ((ρ.hom.app W).hom.toZModLinearMap N
-        (M := R.obj W) (M₁ := (ModuleCat.restrictScalars r).obj (C.obj.obj W)))
-  let q (W : T.Etaleᵒᵖ) : (ModuleCat.extendScalars r).obj (R.obj W) ⟶ C.obj.obj W :=
-    (adj.homEquiv _ _).symm (g W)
-  have hq (W : T.Etaleᵒᵖ) (z : (T.rootsOfUnitySheaf N).obj.obj W) :
-      q W (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ (1 : A) z) =
-        ρ.hom.app W z := by
-    change (adj.homEquiv _ _ (q W)) z = (g W) z
-    exact congrArg (fun f ↦ f z) ((adj.homEquiv _ _).apply_symm_apply (g W))
-  let β₀ : R ⋙ ModuleCat.extendScalars r ⟶ C.obj :=
-    { app := q
-      naturality := by
-        intro W V f
-        apply ModuleCat.ExtendScalars.hom_ext
-        intro z
-        change q V ((ModuleCat.extendScalars r).map (R.map f)
-          (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ (1 : A) z)) =
-            C.obj.map f (q W
-              (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ (1 : A) z))
-        rw [ModuleCat.ExtendScalars.map_tmul, hq, hq]
-        exact NatTrans.naturality_apply ρ.hom f z }
-  let β : L ⟶ C := ⟨sheafifyLift J β₀ C.property⟩
-  have hβ (W : T.Etaleᵒᵖ) (a : A) (z : (T.rootsOfUnitySheaf N).obj.obj W) :
-      β.hom.app W (Scheme.finiteEtaleTateOneGenerator A N T
-        hA W a z) = a • (show C.obj.obj W from ρ.hom.app W z) := by
-    have hh := congrArg (fun f ↦ f.app W
-      (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ a z))
-      (toSheafify_sheafifyLift J β₀ C.property)
-    refine hh.trans ?_
-    change q W _ = _
-    conv_lhs => rw [← mul_one a,
-      ← ModuleCat.ExtendScalars.smul_tmul r a 1 (show R.obj W from z)]
-    rw [map_smul, hq]
-  have hnorm (W : T.Etaleᵒᵖ) (a : A) :
-      α.hom.app W ((toSheafify J
-        ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))).app W a) =
-      Scheme.finiteEtaleTateOneGenerator A N T hA W a
-        (θ.hom.hom.app W (η.app W (ULift.up 1))) := by
-    rw [hα]
-    change a • ((toSheafify J (R ⋙ ModuleCat.extendScalars r)).app W
-      (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ (1 : A) _)) = _
-    rw [← map_smul]
-    congr 1
-    simpa only [mul_one] using
-      ModuleCat.ExtendScalars.smul_tmul r a 1 (show R.obj W from
-        θ.hom.hom.app W (η.app W (ULift.up 1)))
-  have hαβ : α ≫ β = 𝟙 C := by
-    apply Sheaf.hom_ext
-    apply sheafify_hom_ext J _ _ C.property
-    apply NatTrans.ext
-    funext W
-    apply ModuleCat.hom_ext
-    apply LinearMap.ext
-    intro a
-    change A at a
-    change β.hom.app W (α.hom.app W ((toSheafify J
-      ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))).app W a)) =
-        (toSheafify J ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))).app W a
-    rw [hnorm, hβ]
-    rw [hρ]
-    change a • (toSheafify J
-      ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))).app W (r 1) = _
-    rw [map_one, ← map_smul]
-    change (toSheafify J
-      ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))).app W (a * 1) = _
-    rw [mul_one]
-  have hρα : ρ ≫ F.map α = v := by
-    apply (cancel_epi θ.hom).mp
-    apply Sheaf.hom_ext
-    apply sheafify_hom_ext J _ _ (F.obj L).property
-    ext W z
-    change α.hom.app W (ρ.hom.app W (θ.hom.hom.app W (η.app W z))) =
-      v.hom.app W (θ.hom.hom.app W (η.app W z))
-    have hone : α.hom.app W
-        (ρ.hom.app W (θ.hom.hom.app W (η.app W (ULift.up 1)))) =
-        v.hom.app W (θ.hom.hom.app W (η.app W (ULift.up 1))) := by
-      rw [hρ, hα]
-      change (r 1) • s W = s W
-      rw [map_one, one_smul]
-    have hz : z = z.down.val • (ULift.up (1 : ZMod N)) := by
-      apply ULift.ext
-      change z.down = z.down.val • (1 : ZMod N)
-      rw [nsmul_eq_mul, mul_one, ZMod.natCast_zmod_val]
-    rw [hz]
-    simp only [map_nsmul, hone]
-  have hβα : β ≫ α = 𝟙 L := by
-    apply Sheaf.hom_ext
-    apply sheafify_hom_ext J _ _ L.property
-    ext W x
-    change α.hom.app W (β.hom.app W ((toSheafify J
-      (R ⋙ ModuleCat.extendScalars r)).app W x)) =
-        (toSheafify J (R ⋙ ModuleCat.extendScalars r)).app W x
-    induction x using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
-    | add x y hx hy => simp only [map_add, hx, hy]
-    | tmul a z =>
-      change α.hom.app W (β.hom.app W (Scheme.finiteEtaleTateOneGenerator A N T
-        hA W a z)) = _
-      rw [hβ, map_smul]
-      have hh := congrArg (fun f ↦ f.hom.app W z) hρα
-      change α.hom.app W (ρ.hom.app W z) = v.hom.app W z at hh
-      rw [hh]
-      change a • ((toSheafify J (R ⋙ ModuleCat.extendScalars r)).app W
-        (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ (1 : A) z)) = _
-      rw [← map_smul]
-      congr 1
-      simpa only [mul_one] using ModuleCat.ExtendScalars.smul_tmul r a 1 z
-  refine ⟨⟨α, β, hαβ, hβα⟩, hnorm, ?_⟩
-  intro t ht
-  apply Iso.ext
-  apply Sheaf.hom_ext
-  apply sheafify_hom_ext _ _ _ L.property
-  apply NatTrans.ext
-  funext W
-  apply ModuleCat.hom_ext
-  apply LinearMap.ext
-  intro a
-  exact (ht W a).trans (hnorm W a).symm
-
 /-- Change only the positive coefficient level, retaining the fixed field and extension.
 Source: blueprint finite-reduction statement
 (blueprint: def-pur-finite-reduction-root-charts). -/
@@ -305,24 +80,7 @@ theorem finiteReduction_preserves_ctf (P : PurityFiniteSetting.{u}) (m : ℕ)
     (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos T K) :
     finiteTorConstructible P.coefficients.l P.extension m hm T
       ((P.finiteReduction m hm hmn T).obj K) := by
-  let Q := P.finiteReductionSetting m hm
-  let := Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level
-    P.level_pos
-  let := Padic.finite_coefficientExtensionRing P.coefficients.l P.extension m hm
-  obtain ⟨⟨hb, hc⟩, a, b, ht⟩ := hK
-  have hA : ∃ n : ℕ, ∀ x : P.Ring, (P.coefficients.l ^ n) • x = 0 := by
-    refine ⟨P.level, fun x ↦ ?_⟩
-    have h := congrArg ULift.down P.diagonalExponent_annihilates
-    change ((P.coefficients.l ^ P.level : ℕ) : P.Ring) = 0 at h
-    rw [nsmul_eq_mul, h, zero_mul]
-  have hB : ∃ n : ℕ, ∀ x : Q.Ring, (P.coefficients.l ^ n) • x = 0 := by
-    refine ⟨m, fun x ↦ ?_⟩
-    have h := congrArg ULift.down Q.diagonalExponent_annihilates
-    change ((P.coefficients.l ^ m : ℕ) : Q.Ring) = 0 at h
-    rw [nsmul_eq_mul, h, zero_mul]
-  obtain ⟨hb', hc', ht'⟩ := ProEtale.scalarExtensionFunctor_preserves_constructible_tor
-    P.coefficients.l hA hB (P.finiteReductionRingHom m hm hmn) T K hb hc a b ht
-  exact ⟨⟨hb', hc'⟩, a, b, ht'⟩
+  sorry
 
 
 
@@ -384,10 +142,9 @@ theorem existsUnique_finiteReductionRootTrivialization (P : PurityFiniteSetting.
                 W a) =
           Scheme.finiteEtaleTateOneGenerator P.Coefficient P.diagonalExponent T
             P.diagonalExponent_annihilates W a (P.finiteReductionRootSection T ζ hζ W) := by
-  exact rootTrivializationOfConstantIso P.Coefficient P.diagonalExponent
-    P.diagonalExponent_annihilates T
-    (T.constantZModIsoRootsOfUnitySheaf P.diagonalExponent
-      (T ↘ Spec (.of P.field.k)) hζ)
+  sorry
+
+
 
 /-- The primitive-root trivialization used only to characterize coefficient comparisons.
 Its data are uniquely determined by the preceding section formula.
@@ -474,10 +231,19 @@ def FiniteReductionFixedChartNormalized (P : PurityFiniteSetting.{u})
     (M : _root_.DerivedCategory
       (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)))
     (a : (P.compositionTwistShift X d).obj M ≅ M⟦2 * (d : ℤ)⟧) : Prop :=
-  HEq a (finiteReductionChartComposite P.Coefficient X M (P.diagonalTwist X d) (2 * (d : ℤ))
-    (P.finiteReductionPowerTrivialization X ζ hζ d ≪≫
-      (shiftFunctor _ (2 * (d : ℤ))).mapIso
-        (finiteReductionComparisonUnitChart P.Coefficient X)))
+  let S := P.FiniteReductionFixedChartStage X d M
+  ∃ i₀ : S 0 ≅ S 1, ∃ i₁ : S 1 ≅ S 2, ∃ i₂ : S 2 ≅ S 3,
+    HEq i₀ (P.smoothPurityReassociation X d M) ∧
+    (∃ b : P.diagonalTwist X d ≅
+        ((𝟙_ (_root_.DerivedCategory
+          (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))))⟦2 * (d : ℤ)⟧),
+      HEq b (P.finiteReductionPowerTrivialization X ζ hζ d ≪≫
+        (shiftFunctor _ (2 * (d : ℤ))).mapIso
+          (finiteReductionComparisonUnitChart P.Coefficient X)) ∧
+      HEq i₁ (((smoothPurityTensor P.Coefficient X).obj M).mapIso b)) ∧
+    HEq i₂ (finiteReductionTensorUnit
+      (ModuleCat.{u + 1} P.Coefficient) X M (2 * (d : ℤ))) ∧
+    HEq a (i₀ ≪≫ i₁ ≪≫ i₂)
 
 /-- The independent root chart has precisely the three specified fixed-scalar factors.
 Source: blueprint reduction Step 1
@@ -495,11 +261,7 @@ theorem existsUnique_finiteReductionFixedChart (P : PurityFiniteSetting.{u})
       (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) :
     ∃! a : (P.compositionTwistShift X d).obj M ≅ M⟦2 * (d : ℤ)⟧,
       P.FiniteReductionFixedChartNormalized X d ζ hζ M a := by
-  exact existsUnique_heq (by rfl)
-    (finiteReductionChartComposite P.Coefficient X M (P.diagonalTwist X d) (2 * (d : ℤ))
-      (P.finiteReductionPowerTrivialization X ζ hζ d ≪≫
-        (shiftFunctor _ (2 * (d : ℤ))).mapIso
-          (finiteReductionComparisonUnitChart P.Coefficient X)))
+  sorry
 
 /-- The unique fixed-scalar root chart, before intrinsic realization.
 Source: blueprint reduction Step 1

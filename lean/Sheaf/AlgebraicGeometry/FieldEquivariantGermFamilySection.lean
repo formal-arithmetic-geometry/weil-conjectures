@@ -28,7 +28,7 @@ etale object if its lifts cover every underlying point of that object.
 Source: Stacks Project, Tag 03QW; equalizer-sieve and separatedness argument. -/
 private theorem section_germ_ext_of_lifts (S : Scheme.{u}) (Ω : Type u)
     [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
-    (F : Sheaf S.smallEtaleTopology (Type (max u v)))
+    (F : Sheaf S.smallEtaleTopology (Type (max (u + 1) v)))
     (U : S.Etale)
     (hlifts : ∀ y : U.left, ∃ l : Spec (.of Ω) ⟶ U.left,
       l ≫ U.hom = s ∧ l (default : Spec (.of Ω)) = y)
@@ -87,7 +87,7 @@ theorem field_equivariant_germ_family_section
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
     [IsScalarTower K Ks Ω] [IsAlgClosed Ω]
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v))) :
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v))) :
     let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     ∀ (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),
       (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)

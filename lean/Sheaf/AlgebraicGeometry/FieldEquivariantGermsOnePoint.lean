@@ -301,7 +301,7 @@ theorem onePoint_selected_lift_section
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
     [IsScalarTower K Ks Ω] [IsAlgClosed Ω]
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
     (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] :
     let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     ∀ (x₀ : p.fiber.obj X) (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),
@@ -346,7 +346,7 @@ theorem onePoint_selected_lift_section
   let b : Over.mk sΩ ⟶ Over.mk sA := Over.homMk a ha
   let α : q.fiber ⟶ p.fiber :=
     Functor.whiskerLeft (Etale.forget _) (coyoneda.map b.op)
-  obtain ⟨_, hc, _⟩ := geometricPointMorphism_stalk_bijection.{u, max u v}
+  obtain ⟨_, hc, _⟩ := geometricPointMorphism_stalk_bijection.{u, max (u + 1) v}
     sΩ sA a ha
   obtain ⟨⟨c, hcg, _⟩, hcb⟩ := hc F
   let e := Equiv.ofBijective c (hcb c hcg)
@@ -445,7 +445,7 @@ theorem onePoint_propagate_from_selected_lift
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
     [IsScalarTower K Ks Ω] [IsAlgClosed Ω]
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
     (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] :
     let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     ∀ (x₀ : p.fiber.obj X) (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),
@@ -481,7 +481,7 @@ theorem field_equivariant_germ_family_section_onePoint
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
     [IsScalarTower K Ks Ω] [IsAlgClosed Ω]
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
     (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] :
     let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     ∀ (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),

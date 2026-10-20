@@ -7,13 +7,17 @@ module
 
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
-public import Sheaf.AlgebraicGeometry.ProEtaleFiniteReductionPullback
+public import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 public import Sheaf.Paper.PadicIntegersInvertEll
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
-
-import Mathlib.Algebra.Category.Ring.Limits
+import Sheaf.AlgebraicGeometry.ProEtalePointPullback
+import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
+import Sheaf.Topology.ProfiniteCondensedRing
+import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Inverse image of the three coefficient comparisons
@@ -37,7 +41,6 @@ open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
-
 
 private lemma scalar_legs_ext {C : Type*} [Category C] [Preadditive C]
     {A B : C} (l : ℕ) (t : End B) (ht : (l • 𝟙 B) ≫ t = 𝟙 B)
@@ -102,72 +105,47 @@ private theorem ringIsoComposite
   rw [Category.assoc, Category.assoc, ← Mon.comp_hom', e'.inv_hom_id]
   rw [Mon.id_hom', Category.comp_id]
 
-private theorem ringPullbackComposite
-    {A B C : Type*} [Category A] [Category B] [Category C]
-    [MonoidalCategory A] [MonoidalCategory B] [MonoidalCategory C]
-    (F : A ⥤ B) (G : B ⥤ C) (H : A ⥤ C)
-    [F.LaxMonoidal] [G.LaxMonoidal] [H.LaxMonoidal]
-    (e : F ⋙ G ≅ H) [NatTrans.IsMonoidal e.hom] (R : Mon A)
-    (B' : B) [MonObj B'] (C' : C) [MonObj C']
-    (p : F.obj R.X ≅ B') [IsMonHom p.hom]
-    (q : H.obj R.X ≅ C') [IsMonHom q.hom] :
-    ∃ c : G.obj B' ≅ C',
-      G.mapIso p ≪≫ c = e.app R.X ≪≫ q ∧ IsMonHom c.hom ∧ IsMonHom c.inv := by
-  let p' : F.mapMon.obj R ≅ Mon.mk B' := Mon.mkIso' p
-  let q' : H.mapMon.obj R ≅ Mon.mk C' := Mon.mkIso' q
-  let d : G.mapMon.obj (F.mapMon.obj R) ≅ H.mapMon.obj R :=
-    (Functor.mapMonCompIso (F := F) (G := G)).symm.app R ≪≫
-      (Functor.mapMonNatIso e).app R
-  let c := G.mapMon.mapIso p'.symm ≪≫ d ≪≫ q'
-  refine ⟨(Mon.forget C).mapIso c, ?_, ?_, ?_⟩
-  · apply Iso.ext
-    change G.map p.hom ≫ (G.map p.inv ≫ d.hom.hom ≫ q.hom) = _
-    rw [← Category.assoc, ← G.map_comp, p.hom_inv_id, G.map_id, Category.id_comp]
-    dsimp only [d]
-    simp only [Iso.trans_hom, Mon.comp_hom', Iso.app_hom, Iso.symm_hom,
-      Functor.mapMonCompIso_inv_app_hom, Functor.mapMonNatIso_hom_app_hom]
-    change (𝟙 _ ≫ e.hom.app R.X) ≫ q.hom = _
-    rw [Category.id_comp]
-  · exact inferInstanceAs (IsMonHom c.hom.hom)
-  · exact inferInstanceAs (IsMonHom c.inv.hom)
-
-private def sfbConstantRingAbNatIso (X : Scheme.{u}) :
-    constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} ⋙
-        sheafCompose (Scheme.ProEt.topology X)
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ⋙
-        sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1}) ≅
-      forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-        forget₂ RingCat.{u + 1} Ab.{u + 1} ⋙
-        constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1} :=
-  let : (Scheme.ProEt.topology X).PreservesSheafification
+/-- The canonical comparison between a constant commutative ring sheaf, regarded as
+an abelian sheaf, and the constant abelian sheaf of its additive group.
+Source: blueprint pullback clause 1, canonical finite constant-sheaf identifications
+(blueprint: det-prop-sfb-qlbar-colimit-x-pullback). -/
+def sfbConstantRingAbIso (X : Scheme.{u}) (A : CommRingCat.{u + 1}) :
+    (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+        ((sheafCompose (Scheme.ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+            ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).obj A)) ≅
+      (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).obj (AddCommGrpCat.of A) :=
+  letI : (Scheme.ProEt.topology X).PreservesSheafification
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) :=
     GrothendieckTopology.instPreservesSheafification _ _
-  let : (Scheme.ProEt.topology X).PreservesSheafification
+  letI : (Scheme.ProEt.topology X).PreservesSheafification
       (forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
     GrothendieckTopology.instPreservesSheafification _ _
-  Functor.isoWhiskerRight
+  (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso
+    ((constantCommuteCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).app A) ≪≫
     (constantCommuteCompose (Scheme.ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))
-    (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})) ≪≫
-    Functor.isoWhiskerLeft (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
-      (constantCommuteCompose (Scheme.ProEt.topology X)
-        (forget₂ RingCat.{u + 1} Ab.{u + 1}))
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).app ((forget₂ CommRingCat RingCat).obj A)
 
-private def sfbConstantRingAbPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (constantSheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1} ⋙
-        sheafCompose (Scheme.ProEt.topology Y)
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ⋙
-        sheafCompose (Scheme.ProEt.topology Y) (forget₂ RingCat.{u + 1} Ab.{u + 1})) ⋙
-        (f)^*[Ab.{u + 1}] ≅
-      constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} ⋙
-        sheafCompose (Scheme.ProEt.topology X)
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ⋙
-        sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
-  Functor.isoWhiskerRight (sfbConstantRingAbNatIso Y) (f)^*[Ab.{u + 1}] ≪≫
-    Functor.isoWhiskerLeft
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1})
-      (constantSheafCompUpperStarIso Ab.{u + 1} f) ≪≫
-    (sfbConstantRingAbNatIso X).symm
+/-- The canonical finite constant coefficient comparison, with the ring-sheaf encoding
+transported to abelian sheaves by the canonical constant/forgetful comparison.
+Source: blueprint pullback clause 1, the constant-sheaf identifications
+(blueprint: det-prop-sfb-qlbar-colimit-x-pullback). -/
+def sfbFiniteCoefficientPullbackIso (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    (f)^*[Ab.{u + 1}].obj
+        ((sheafCompose (Scheme.ProEt.topology Y) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+          (integralCoefficientSheaf l E Y n)) ≅
+      (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+        (integralCoefficientSheaf l E X n) :=
+  (f)^*[Ab.{u + 1}].mapIso
+    (sfbConstantRingAbIso Y
+      (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))) ≪≫
+    (constantSheafCompUpperStarIso Ab.{u + 1} f).app
+      (AddCommGrpCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) ≪≫
+    (sfbConstantRingAbIso X
+      (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).symm
 
 /-- The normalization of the integral comparison from the integral-limit dependency:
 its adjunction mate is reduction on every profinite test object, using the natural
@@ -196,49 +174,6 @@ def SfbIntegralComparison (l : ℕ) [Fact l.Prime]
               (((sfbIntegralPointAdjunction X).unit.app (sfbCondensedIntegers l E).X).hom.app
                 (op S) (ULift.up g.hom.hom)))) =
           ULift.up ((profiniteToProEtOf X).map (g ≫ j.hom ≫ c.π.app (op n)))
-
-private lemma constantRingAbPullback_app {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : CommRingCat.{u + 1}) :
-    (sfbConstantRingAbPullback f).app A =
-      (f)^*[Ab.{u + 1}].mapIso (sfbConstantRingAbIso Y A) ≪≫
-        (constantSheafCompUpperStarIso Ab.{u + 1} f).app (AddCommGrpCat.of A) ≪≫
-          (sfbConstantRingAbIso X A).symm := by
-  rfl
-
-private lemma finiteCoefficientPullback_naturality (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
-    (f)^*[Ab.{u + 1}].map
-        ((sheafCompose (Scheme.ProEt.topology Y) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-          (integralCoefficientSheafTransition l E Y n)) ≫
-      (sfbFiniteCoefficientPullbackIso l E f n).hom =
-    (sfbFiniteCoefficientPullbackIso l E f (n + 1)).hom ≫
-      (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-        (integralCoefficientSheafTransition l E X n) := by
-  let A := CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 2)))
-  let B := CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
-  let a : A ⟶ B := CommRingCat.ofHom
-    ((ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).symm.toRingHom.comp
-      ((Padic.coefficientExtensionTransition l E (n + 1)).comp
-        (ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).toRingHom))
-  have h := (sfbConstantRingAbPullback f).hom.naturality a
-  change _ ≫ ((sfbConstantRingAbPullback f).app B).hom =
-    ((sfbConstantRingAbPullback f).app A).hom ≫ _ at h
-  rw [constantRingAbPullback_app, constantRingAbPullback_app] at h
-  exact h
-
-
-private def cone_transport {J C : Type*} [Category J] [Category C]
-    {F G : J ⥤ C} (e : F ≅ G) (s : Cone F) (t : Cone G) (ht : IsLimit t)
-    (p : s.pt ≅ t.pt) (hp : ∀ j, s.π.app j ≫ (e.app j).hom = p.hom ≫ t.π.app j) :
-    IsLimit s := by
-  apply (IsLimit.postcomposeHomEquiv e s).toFun
-  apply ht.ofIsoLimit
-  refine Cone.ext p.symm ?_
-  intro j
-  dsimp
-  change t.π.app j = p.inv ≫ (s.π.app j ≫ (e.app j).hom)
-  rw [hp, ← Category.assoc, p.inv_hom_id, Category.id_comp]
 
 /-- The canonical integral comparisons commute with inverse image. The displayed
 projection equations specify the usual limit comparison, and the mapped limit cone is
@@ -279,84 +214,7 @@ theorem sfb_integral_comparison_pullback (l : ℕ) [Fact l.Prime]
         Nonempty (IsLimit ((f)^*[Ab.{u + 1}].mapCone
           ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapCone
             (limit.cone (integralCoefficientSheafSystem l (ULift.{u} E.1) Y))))) := by
-  obtain ⟨aX, qX, jX, hjX, hqX, _, _, _, eX, heX, _⟩ :=
-    sfb_integral_coefficient_limit l (ULift.{u} E.1) X
-  obtain ⟨aY, qY, jY, hjY, hqY, _, _, _, eY, heY, _⟩ :=
-    sfb_integral_coefficient_limit l (ULift.{u} E.1) Y
-  have hX : SfbIntegralComparison l (ULift.{u} E.1) X eX :=
-    ⟨heX.1, heX.2.1, aX, qX, jX, hjX, hqX, heX.2.2⟩
-  have hY : SfbIntegralComparison l (ULift.{u} E.1) Y eY :=
-    ⟨heY.1, heY.2.1, aY, qY, jY, hjY, hqY, heY.2.2⟩
-  have : IsMonHom eY.hom := hY.1
-  have : IsMonHom eX.hom := hX.1
-  obtain ⟨c, hc, hcmon, hcmon'⟩ := ringPullbackComposite
-    (upperStarFromPoint Y) (f)^*[Ab.{u + 1}] (upperStarFromPoint X)
-    (upperStarFromPointComp f) (sfbCondensedIntegers l (ULift.{u} E.1))
-    _ _ eY eX
-  have hp : ∀ n : ℕ,
-      (f)^*[Ab.{u + 1}].map
-          ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-            (limit.π (integralCoefficientSheafSystem l (ULift.{u} E.1) Y) (op n))) ≫
-          (sfbFiniteCoefficientPullbackIso l (ULift.{u} E.1) f n).hom =
-        c.hom ≫ (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-          (limit.π (integralCoefficientSheafSystem l (ULift.{u} E.1) X) (op n)) := by
-    intro n
-    have hq : jY.hom ≫ qY.π.app (op n) = jX.hom ≫ qX.π.app (op n) := by
-      ext x
-      exact (hjY n x).trans (hjX n x).symm
-    have hr := sfb_finite_reduction_pullback l (ULift.{u} E.1) f n aX aY
-      (jX.hom ≫ qX.π.app (op n))
-      (eX.hom ≫ (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-        (limit.π (integralCoefficientSheafSystem l (ULift.{u} E.1) X) (op n)))
-      (eY.hom ≫ (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-        (limit.π (integralCoefficientSheafSystem l (ULift.{u} E.1) Y) (op n)))
-      (fun S g ↦ heX.2.2 S g n) (fun S g ↦ by
-        rw [← hq]
-        exact heY.2.2 S g n)
-    have hc' := congrArg Iso.hom hc
-    change (f)^*[Ab.{u + 1}].map eY.hom ≫ c.hom =
-      ((upperStarFromPointComp f).app (sfbCondensedIntegers l (ULift.{u} E.1)).X).hom ≫
-        eX.hom at hc'
-    apply (cancel_epi ((f)^*[Ab.{u + 1}].map eY.hom)).1
-    rw [← Category.assoc, ← Functor.map_comp, hr, ← Category.assoc, ← hc',
-      Category.assoc]
-  refine ⟨eX, eY, hX, hY, c, hc, hcmon, hcmon', hp, ?_⟩
-  let FY := integralCoefficientSheafSystem l (ULift.{u} E.1) Y ⋙
-    sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})
-  let FX := integralCoefficientSheafSystem l (ULift.{u} E.1) X ⋙
-    sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})
-  let h : FY ⋙ (f)^*[Ab.{u + 1}] ⟶ FX :=
-    NatTrans.ofOpSequence
-      (fun n ↦ (sfbFiniteCoefficientPullbackIso l (ULift.{u} E.1) f n).hom)
-      (fun n ↦ by
-        simp only [FY, FX, Functor.comp_map, integralCoefficientSheafSystem,
-          Functor.ofOpSequence_map_homOfLE_succ]
-        exact finiteCoefficientPullback_naturality l (ULift.{u} E.1) f n)
-  let e : FY ⋙ (f)^*[Ab.{u + 1}] ≅ FX :=
-    NatIso.ofComponents (fun n ↦ sfbFiniteCoefficientPullbackIso l (ULift.{u} E.1) f n.unop)
-      (fun g ↦ h.naturality g)
-  have : PreservesLimitsOfShape ℕᵒᵖ
-      (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1}) ⋙
-        sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1}) := by
-    change PreservesLimitsOfShape ℕᵒᵖ
-      (sheafToPresheaf (Scheme.ProEt.topology X) RingCat.{u + 1} ⋙
-        (Functor.whiskeringRight X.ProEtᵒᵖ RingCat.{u + 1} Ab.{u + 1}).obj
-          (forget₂ RingCat.{u + 1} Ab.{u + 1}))
-    infer_instance
-  have : PreservesLimitsOfShape ℕᵒᵖ
-      (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})) :=
-    preservesLimitsOfShape_of_reflects_of_preserves
-      (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1}))
-      (sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-  exact ⟨cone_transport e _ _
-    (isLimitOfPreserves
-      (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1}))
-      (limit.isLimit (integralCoefficientSheafSystem l (ULift.{u} E.1) X)))
-    c (fun n ↦ by
-      change (f)^*[Ab.{u + 1}].map
-        ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-          (limit.π (integralCoefficientSheafSystem l (ULift.{u} E.1) Y) n)) ≫ _ = _
-      exact hp n.unop)⟩
+  sorry
 
 /-- The canonical localization comparisons commute with inverse image, for any choices
 of the two module colimits with their localization ring structures. The zeroth-leg

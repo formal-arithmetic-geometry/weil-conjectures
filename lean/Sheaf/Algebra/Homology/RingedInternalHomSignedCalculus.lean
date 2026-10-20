@@ -64,18 +64,7 @@ Source: Stacks 06YL (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restricti
 Proof: tensor is the sheafification of the sectionwise module tensor, whose
 maps are additive in each factor; sheafification is additive. -/
 theorem moduleMonoidalPreadditive : MonoidalPreadditive (Modules J R) := by
-  have (M : Modules J R) : (tensorLeft M).Additive := by
-    have : PreservesColimitsOfSize.{0, 0} (tensorLeft M) := inferInstance
-    have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (tensorLeft M)
-    exact Functor.additive_of_preservesBinaryBiproducts _
-  have (M : Modules J R) : (tensorRight M).Additive :=
-    Functor.additive_of_iso (F := tensorLeft M)
-      (BraidedCategory.tensorLeftIsoTensorRight M)
-  exact
-    { whiskerLeft_zero := fun {X Y Z} ↦ (tensorLeft X).map_zero Y Z
-      zero_whiskerRight := fun {X Y Z} ↦ (tensorRight X).map_zero Y Z
-      whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
-      add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
+  sorry
 
 attribute [instance] moduleMonoidalPreadditive
 
@@ -88,7 +77,7 @@ summand is flat, and sums of flat modules are flat. A module map sends the summa
 indexed by a section to the summand indexed by its image. This gives a functorial
 flat cover, and hence the flat resolutions used in the tensor--Hom construction. -/
 theorem moduleFlatResolution : Abelian.HasFunctorialFlatResolution (Modules J R) := by
-  exact SheafOfModules.hasFunctorialFlatResolution_kfi R
+  sorry
 
 attribute [instance] moduleFlatResolution
 
@@ -121,15 +110,6 @@ Source: Stacks 08JC (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restricti
 noncomputable instance derivedTensorShift : (curriedTensor (D J R)).CommShift₂Int :=
   DerivedCategory.commShift₂CurriedTensor (Modules J R)
 
-private theorem nativeMonoidalEquality (A : Type (u + 1)) [Category.{u} A] [Abelian A]
-    [IsGrothendieckAbelian.{u} A] [MonoidalCategory A] [MonoidalPreadditive A]
-    [MonoidalClosed A] [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A]
-    [HasDerivedCategory.{u} A] :
-    DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory A =
-      DerivedMonoidal.instMonoidalCategory DerivedCategory.Qh
-        (HomotopyCategory.quasiIso A (.up ℤ)) := by
-  rfl
-
 /-- The native derived tensor and its explicit localization implementation agree.
 Source: Stacks 06YS, 08J9
 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
@@ -140,7 +120,7 @@ theorem derivedMonoidal_eq_localization :
     derivedMonoidal J R =
       DerivedMonoidal.instMonoidalCategory DerivedCategory.Qh
         (HomotopyCategory.quasiIso (Modules J R) (ComplexShape.up ℤ)) := by
-  exact nativeMonoidalEquality (Modules J R)
+  sorry
 
 
 /-- The recorded derived internal Hom, with independent-universe implementation
@@ -164,14 +144,13 @@ noncomputable instance derivedBraiding : BraidedCategory (D J R) :=
 
 set_option backward.isDefEq.respectTransparency false
 
-set_option linter.unusedSectionVars false in
 /-- The total tensor used in the representative model is the native complex tensor.
 Source: Stacks 06YL (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
 Proof: both are the totalization of the curried sheaf tensor, with the same
 summands, differential and Koszul sign. Unfold the two totalizations. -/
 theorem totalTensor_eq_native (P L : CochainComplex (Modules J R) ℤ) :
     (WeilConjectures.coefficientTotalTensor.{u, u, u} J R).obj (P, L) = P ⊗ L := by
-  rfl
+  sorry
 
 /-- The explicit identification of the two ordinary total-tensor implementations.
 Source: Stacks 06YL (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
@@ -228,16 +207,7 @@ theorem tensorParameterShift_naturality (K : D J R) (s : ℤ)
     (tensorRight (K⟦s⟧)).map f ≫ (tensorParameterShiftIso J R K s Y).hom =
       (tensorParameterShiftIso J R K s X).hom ≫
         (shiftFunctor (D J R) s ⋙ tensorRight K).map f := by
-  dsimp only [tensorParameterShiftIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
-    Iso.app_inv, Functor.comp_map]
-  rw [← Category.assoc]
-  change (((curriedTensor (D J R)).map f).app (K⟦s⟧) ≫
-      (((curriedTensor (D J R)).obj Y).commShiftIso s).hom.app K) ≫ _ = _
-  rw [← NatTrans.shift_app_comm ((curriedTensor (D J R)).map f) s K,
-    Category.assoc]
-  change _ ≫ (shiftFunctor (D J R) s).map
-      (((curriedTensor (D J R)).flip.obj K).map f) ≫ _ = _
-  rw [Functor.commShiftIso_inv_naturality, Category.assoc]
+  sorry
 
 /-- The natural tensor parameter shift comparison.
 Source: Stacks 08JC (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/

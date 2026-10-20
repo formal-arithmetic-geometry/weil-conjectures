@@ -29,7 +29,7 @@ faithfulness. This also handles the empty scheme through the empty covering siev
 theorem field_sheafFiber_faithful (K Ω : Type u) [Field K] [Field Ω]
     [Algebra K Ω] [IsAlgClosed Ω] :
     ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber
-      (A := Type (max u v))).Faithful := by
+      (A := Type (max (u + 1) v))).Faithful := by
   let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω))
   let p := pointSmallEtale s
   refine ⟨fun {F F'} φ ψ h ↦ ?_⟩

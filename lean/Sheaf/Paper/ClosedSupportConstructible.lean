@@ -15,12 +15,23 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
 
+import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
-import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
-import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.AlgebraicGeometry.ProEtaleRingedClosedCounit
+import Mathlib.CategoryTheory.Functor.Derived.Adjunction
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+import Sheaf.CategoryTheory.OrthogonalTriangleCounitNormalization
+import Sheaf.Paper.CoefficientHeartTriangulated
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.FormalClosedSupportDerived
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Constructibility of sections with closed support
@@ -43,11 +54,6 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 open scoped CategoryTheory.Obj
-
--- Avoid unfolding the internal-Hom and coefficient-pullback constructions.
-attribute [local irreducible] DerivedCategory.monoidalClosed
-  CategoryTheory.Mod.monoidalClosed AlgebraicGeometry.ProEtale.upperStarFromPoint
-  Functor.rightDerivedFunctor Sheaf.monoidalCategory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -88,107 +94,6 @@ def ClosedSupportConstructibleAssertions
             ((formalClosedSupport Λ i j).rightDerivedFunctor.obj K.obj)) ⟦(1 : ℤ)⟧) ∧
         boundedConstructible (condensedRingObj Λ Z)
           ((formalClosedSupport Λ i j).rightDerivedFunctor.obj K.obj)
-
-private theorem boundedTriangulated_of_serre
-    {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    [MonObj R] [IsCommMonObj R]
-    (hker : ∀ (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) (f : M ⟶ N),
-      IsConstructibleModuleObject R M → IsConstructibleModuleObject R N →
-      IsConstructibleModuleObject R (kernel f) ∧ IsConstructibleModuleObject R (cokernel f))
-    (hext : ∀ S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R),
-      S.ShortExact → IsConstructibleModuleObject R S.X₁ →
-      IsConstructibleModuleObject R S.X₃ → IsConstructibleModuleObject R S.X₂) :
-    (boundedConstructible R).IsTriangulated := by
-  let P : ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :=
-    IsConstructibleModuleObject R
-  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ IsConstructibleModuleObject.of_iso e h⟩
-  have : P.IsClosedUnderKernels := ⟨by
-    rintro Z ⟨f, k, hk, h⟩
-    exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk)
-      (hker _ _ f h.1 h.2).1⟩
-  have : P.IsClosedUnderCokernels := ⟨by
-    rintro Z ⟨f, k, hk, h⟩
-    exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
-      (hker _ _ f h.1 h.2).2⟩
-  have : P.IsClosedUnderExtensions := ⟨fun h h₁ h₃ ↦ hext _ h h₁ h₃⟩
-  exact isTriangulated_boundedConstructible_of_serre R
-
-private theorem supportPullback_constructible
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (K : DerivedCategory (FormalSupportModules Λ Y))
-    (hK : boundedConstructible (condensedRingObj Λ Y) K) :
-    boundedConstructible (condensedRingObj Λ X)
-      ((formalSupportPullback Λ f).mapDerivedCategory.obj K) := by
-  refine ⟨(formalSupportPullback Λ f).bounded_mapDerivedCategory_obj hK.1, fun n ↦ ?_⟩
-  apply constructible_of_iso
-    (((formalSupportPullback Λ f).mapDerivedCategoryHomologyFunctorIso n).app K)
-  apply constructible_of_iso
-    ((Functor.isoWhiskerLeft
-      ((ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y))
-      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))).app
-        ((DerivedCategory.homologyFunctor _ n).obj K))
-  exact isConstructibleModuleObject_upperStar Λ f _ (hK.2 n)
-
-private theorem support_constructible_of_localization
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
-    (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    [(boundedConstructible (condensedRingObj Λ X)).IsTriangulated]
-    (hpush : ∀ K, boundedConstructible (condensedRingObj Λ U) K →
-      boundedConstructible (condensedRingObj Λ X)
-        ((lowerStar Λ j).rightDerivedFunctor.obj K)) :
-    ClosedSupportConstructibleAssertions Λ i j := by
-  have hji : Set.range j = (Set.range i)ᶜ := by
-    rw [hij, compl_compl]
-  obtain ⟨_, _, a, hn, _, _, _, _, hc, b, c, δ, hb, hj, htri, hfiber⟩ :=
-    formal_closed_support_adjunction.{u, u + 1} Λ i j hji
-  subst b c
-  refine ⟨a, hn, fun K ↦ ?_⟩
-  let F := (lowerStar Λ i).mapDerivedCategory.obj
-    ((formalClosedSupport Λ i j).rightDerivedFunctor.obj K.obj)
-  have hB := hpush _ (supportPullback_constructible Λ j K.obj K.property)
-  have hF : boundedConstructible (condensedRingObj Λ X) F :=
-    (boundedConstructible (condensedRingObj Λ X)).ext_of_isTriangulatedClosed₁
-      _ (htri K.obj) K.property hB
-  obtain ⟨e⟩ := hfiber K.obj F
-    (a.mapDerivedCategoryRightDerivedAdjunction.counit.app K.obj) (δ.app K.obj) (htri K.obj)
-  refine ⟨δ.app K.obj, htri K.obj, hF, hB, ?_, ?_⟩
-  · exact (boundedConstructible (condensedRingObj Λ X)).le_shift (1 : ℤ) _ hF
-  · exact (boundedConstructible (condensedRingObj Λ Z)).prop_of_iso e.symm
-      (supportPullback_constructible Λ i F hF)
-
-private theorem support_constructible_over_field
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsFinitenessCoefficient ℓ Λ]
-    {Z U X : Scheme.{u}}
-    [X.Over (Spec (.of k))] [U.Over (Spec (.of k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-    [IsSeparated (X ↘ Spec (.of k))]
-    [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
-    [IsSeparated (U ↘ Spec (.of k))]
-    (i : Z ⟶ X) (j : U ⟶ X) [j.IsOver (Spec (.of k))]
-    [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
-    [(boundedConstructible (condensedRingObj Λ X)).IsTriangulated]
-    (hij : Set.range i.base = (Set.range j.base)ᶜ) :
-    ClosedSupportConstructibleAssertions Λ i j := by
-  let : LocallyOfFiniteType (U.asOver (Spec (.of k))).hom :=
-    inferInstanceAs (LocallyOfFiniteType (U ↘ Spec (.of k)))
-  let : QuasiCompact (U.asOver (Spec (.of k))).hom :=
-    inferInstanceAs (QuasiCompact (U ↘ Spec (.of k)))
-  let : IsSeparated (U.asOver (Spec (.of k))).hom :=
-    inferInstanceAs (IsSeparated (U ↘ Spec (.of k)))
-  let : LocallyOfFiniteType (X.asOver (Spec (.of k))).hom :=
-    inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (.of k)))
-  let : QuasiCompact (X.asOver (Spec (.of k))).hom :=
-    inferInstanceAs (QuasiCompact (X ↘ Spec (.of k)))
-  let : IsSeparated (X.asOver (Spec (.of k))).hom :=
-    inferInstanceAs (IsSeparated (X ↘ Spec (.of k)))
-  exact support_constructible_of_localization Λ i j hij
-    (fun K hK ↦ boundedConstructible_rightDerivedLowerStar_obj
-      Λ ℓ (k := k) (j.asOver (Spec (.of k))) K hK)
 
 /-- Sections with closed support preserve bounded constructibility for both field
 coefficients, and the counit-unit localization triangle has bounded constructible terms.
@@ -244,27 +149,6 @@ theorem closedSupport_constructible
     (∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       ClosedSupportConstructibleAssertions (Profinite.continuousMapRingObj.{u} E) i j) ∧
     ClosedSupportConstructibleAssertions (Profinite.padicAlgClRingObj.{u} ℓ) i j := by
-  have : IsLocallyNoetherian X :=
-    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-  have : CompactSpace X :=
-    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
-  have : IsNoetherian X := {}
-  have : QuasiCompact j := by infer_instance
-  have : Fact (ringChar k).Prime := ⟨by rw [ringChar.eq k p]; exact Fact.out⟩
-  have : Fact (ringChar k ≠ ℓ) := ⟨by rwa [ringChar.eq k p]⟩
-  constructor
-  · intro E
-    let : IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} E) := .continuous E
-    obtain ⟨hk, he⟩ := isConstructibleModuleObject_serre_padicSubfield X ℓ E
-    have : (boundedConstructible
-        (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X)).IsTriangulated :=
-      boundedTriangulated_of_serre _ hk he
-    exact support_constructible_over_field (Profinite.continuousMapRingObj.{u} E) ℓ k i j hij
-  · let : IsFinitenessCoefficient ℓ (Profinite.padicAlgClRingObj.{u} ℓ) := .algebraicClosure
-    obtain ⟨hk, he⟩ := isConstructibleModuleObject_serre_padicAlgCl X ℓ
-    have : (boundedConstructible
-        (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X)).IsTriangulated :=
-      boundedTriangulated_of_serre _ hk he
-    exact support_constructible_over_field (Profinite.padicAlgClRingObj.{u} ℓ) ℓ k i j hij
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -7,8 +7,20 @@ module
 
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
 public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 public import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Explicit etale-origin witnesses under pullback and open extension
@@ -178,133 +190,6 @@ theorem witnessed_open_pullback (T : TraceFormulaCoefficientConventions.{u})
     (w : Scheme.FixedEtaleOriginWitness X.left (ULift.{u + 1, u} T.coefficientRing) K) :
     Nonempty (WitnessedOpenPullbackData (ULift.{u + 1, u} T.coefficientRing)
       u.left j.left i.left K w) := by
-  suffices h : ∀ (A : Type (u + 1)) [CommRing A]
-      (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X.left)
-        (ModuleCat.{u + 1} A)))
-      (w : Scheme.FixedEtaleOriginWitness X.left A K),
-      Nonempty (WitnessedOpenPullbackData A u.left j.left i.left K w) by
-    exact h (ULift.{u + 1, u} T.coefficientRing) K w
-  intro A inst K w
-  let B := ModuleCat.{u + 1} A
-  let κ : DerivedCategory.Plus.ι ⋙ (Etale.upperStar B u.left).mapDerivedCategory ⋙
-      (ProEtale.comparisonUpperStar B U.left).mapDerivedCategory ≅
-    DerivedCategory.Plus.ι ⋙ (ProEtale.comparisonUpperStar B X.left).mapDerivedCategory ⋙
-      (ProEtale.upperStar B u.left).mapDerivedCategory :=
-    Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-      ((Functor.mapDerivedCategoryCompIso (Etale.upperStar B u.left)
-        (ProEtale.comparisonUpperStar B U.left)).symm ≪≫
-        Functor.mapDerivedCategoryNatIso
-          (@id
-            (Etale.upperStar B u.left ⋙ ProEtale.comparisonUpperStar B U.left ≅
-              ProEtale.comparisonUpperStar B X.left ⋙ ProEtale.upperStar B u.left)
-            (ProEtale.supportSiteComparisonCoefficientPullbackIso B u.left)) ≪≫
-        Functor.mapDerivedCategoryCompIso (ProEtale.comparisonUpperStar B X.left)
-          (ProEtale.upperStar B u.left))
-  let δj : DerivedCategory.Plus.ι ⋙
-      (Etale.openImmersionLowerShriek B j.left).mapDerivedCategory ⋙
-      (ProEtale.comparisonUpperStar B Y.left).mapDerivedCategory ≅
-    DerivedCategory.Plus.ι ⋙ (ProEtale.comparisonUpperStar B X.left).mapDerivedCategory ⋙
-      (ProEtale.openImmersionLowerShriek B j.left).mapDerivedCategory :=
-    Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-      ((Functor.mapDerivedCategoryCompIso (Etale.openImmersionLowerShriek B j.left)
-        (ProEtale.comparisonUpperStar B Y.left)).symm ≪≫
-        Functor.mapDerivedCategoryNatIso
-          (ProEtale.openImmersionLowerShriekComparisonUpperStarIso B j.left) ≪≫
-        Functor.mapDerivedCategoryCompIso (ProEtale.comparisonUpperStar B X.left)
-          (ProEtale.openImmersionLowerShriek B j.left))
-  let δi : DerivedCategory.Plus.ι ⋙
-      (Etale.openImmersionLowerShriek B i.left).mapDerivedCategory ⋙
-      (ProEtale.comparisonUpperStar B V.left).mapDerivedCategory ≅
-    DerivedCategory.Plus.ι ⋙ (ProEtale.comparisonUpperStar B U.left).mapDerivedCategory ⋙
-      (ProEtale.openImmersionLowerShriek B i.left).mapDerivedCategory :=
-    Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-      ((Functor.mapDerivedCategoryCompIso (Etale.openImmersionLowerShriek B i.left)
-        (ProEtale.comparisonUpperStar B V.left)).symm ≪≫
-        Functor.mapDerivedCategoryNatIso
-          (ProEtale.openImmersionLowerShriekComparisonUpperStarIso B i.left) ≪≫
-        Functor.mapDerivedCategoryCompIso (ProEtale.comparisonUpperStar B U.left)
-          (ProEtale.openImmersionLowerShriek B i.left))
-  let γ : (ProEtale.comparisonUpperStar B U.left).mapDerivedCategory.obj
-      ((Etale.upperStar B u.left).mapDerivedCategory.obj w.complex.obj) ≅
-      (ProEtale.upperStar B u.left).mapDerivedCategory.obj
-        ((ProEtale.comparisonUpperStar B X.left).mapDerivedCategory.obj w.complex.obj) :=
-    κ.app w.complex
-  let β : (ProEtale.upperStar B u.left).mapDerivedCategory.obj
-      ((ProEtale.comparisonUpperStar B X.left).mapDerivedCategory.obj w.complex.obj) ≅
-      (ProEtale.upperStar B u.left).mapDerivedCategory.obj K.obj :=
-    (ProEtale.upperStar B u.left).mapDerivedCategory.mapIso w.iso
-  let αu : (ProEtale.comparisonUpperStar B U.left).mapDerivedCategory.obj
-      ((Etale.upperStar B u.left).mapDerivedCategory.obj w.complex.obj) ≅
-      (ProEtale.upperStar B u.left).mapDerivedCategory.obj K.obj :=
-    Iso.trans (C := DerivedCategory (Sheaf (Scheme.ProEt.topology U.left) B))
-      (X := (ProEtale.comparisonUpperStar B U.left).mapDerivedCategory.obj
-        ((Etale.upperStar B u.left).mapDerivedCategory.obj w.complex.obj))
-      (Y := (ProEtale.upperStar B u.left).mapDerivedCategory.obj
-        ((ProEtale.comparisonUpperStar B X.left).mapDerivedCategory.obj w.complex.obj))
-      (Z := (ProEtale.upperStar B u.left).mapDerivedCategory.obj K.obj) γ β
-  let γj : (ProEtale.comparisonUpperStar B Y.left).mapDerivedCategory.obj
-      ((Etale.openImmersionLowerShriek B j.left).mapDerivedCategory.obj w.complex.obj) ≅
-      (ProEtale.openImmersionLowerShriek B j.left).mapDerivedCategory.obj
-        ((ProEtale.comparisonUpperStar B X.left).mapDerivedCategory.obj w.complex.obj) :=
-    δj.app w.complex
-  let βj : (ProEtale.openImmersionLowerShriek B j.left).mapDerivedCategory.obj
-      ((ProEtale.comparisonUpperStar B X.left).mapDerivedCategory.obj w.complex.obj) ≅
-      (ProEtale.openImmersionLowerShriek B j.left).mapDerivedCategory.obj K.obj :=
-    (ProEtale.openImmersionLowerShriek B j.left).mapDerivedCategory.mapIso w.iso
-  let αj : (ProEtale.comparisonUpperStar B Y.left).mapDerivedCategory.obj
-      ((Etale.openImmersionLowerShriek B j.left).mapDerivedCategory.obj w.complex.obj) ≅
-      (ProEtale.openImmersionLowerShriek B j.left).mapDerivedCategory.obj K.obj :=
-    Iso.trans (C := DerivedCategory (Sheaf (Scheme.ProEt.topology Y.left) B))
-      (X := (ProEtale.comparisonUpperStar B Y.left).mapDerivedCategory.obj
-        ((Etale.openImmersionLowerShriek B j.left).mapDerivedCategory.obj w.complex.obj))
-      (Y := (ProEtale.openImmersionLowerShriek B j.left).mapDerivedCategory.obj
-        ((ProEtale.comparisonUpperStar B X.left).mapDerivedCategory.obj w.complex.obj))
-      (Z := (ProEtale.openImmersionLowerShriek B j.left).mapDerivedCategory.obj K.obj) γj βj
-  let Lu := (Etale.upperStar B u.left).mapDerivedCategoryPlus.obj w.complex
-  let γi : (ProEtale.comparisonUpperStar B V.left).mapDerivedCategory.obj
-      ((Etale.openImmersionLowerShriek B i.left).mapDerivedCategory.obj Lu.obj) ≅
-      (ProEtale.openImmersionLowerShriek B i.left).mapDerivedCategory.obj
-        ((ProEtale.comparisonUpperStar B U.left).mapDerivedCategory.obj Lu.obj) :=
-    δi.app Lu
-  let βi : (ProEtale.openImmersionLowerShriek B i.left).mapDerivedCategory.obj
-      ((ProEtale.comparisonUpperStar B U.left).mapDerivedCategory.obj Lu.obj) ≅
-      (ProEtale.openImmersionLowerShriek B i.left).mapDerivedCategory.obj
-        ((ProEtale.upperStar B u.left).mapDerivedCategory.obj K.obj) :=
-    (ProEtale.openImmersionLowerShriek B i.left).mapDerivedCategory.mapIso αu
-  let αi : (ProEtale.comparisonUpperStar B V.left).mapDerivedCategory.obj
-      ((Etale.openImmersionLowerShriek B i.left).mapDerivedCategory.obj Lu.obj) ≅
-      (ProEtale.openImmersionLowerShriek B i.left).mapDerivedCategory.obj
-        ((ProEtale.upperStar B u.left).mapDerivedCategory.obj K.obj) :=
-    Iso.trans (C := DerivedCategory (Sheaf (Scheme.ProEt.topology V.left) B))
-      (X := (ProEtale.comparisonUpperStar B V.left).mapDerivedCategory.obj
-        ((Etale.openImmersionLowerShriek B i.left).mapDerivedCategory.obj Lu.obj))
-      (Y := (ProEtale.openImmersionLowerShriek B i.left).mapDerivedCategory.obj
-        ((ProEtale.comparisonUpperStar B U.left).mapDerivedCategory.obj Lu.obj))
-      (Z := (ProEtale.openImmersionLowerShriek B i.left).mapDerivedCategory.obj
-        ((ProEtale.upperStar B u.left).mapDerivedCategory.obj K.obj)) γi βi
-  refine ⟨{
-    kappa := κ
-    deltaJ := δj
-    deltaI := δi
-    kappa_normalization := rfl
-    deltaJ_normalization := rfl
-    deltaI_normalization := rfl
-    pulled := {
-      complex := (Etale.upperStar B u.left).mapDerivedCategoryPlus.obj w.complex
-      iso := αu }
-    pulled_complex := rfl
-    pulled_iso := HEq.rfl
-    extendedJ := {
-      complex := (Etale.openImmersionLowerShriek B j.left).mapDerivedCategoryPlus.obj
-        w.complex
-      iso := αj }
-    extendedJ_complex := rfl
-    extendedJ_iso := HEq.rfl
-    extendedI := {
-      complex := (Etale.openImmersionLowerShriek B i.left).mapDerivedCategoryPlus.obj
-        ((Etale.upperStar B u.left).mapDerivedCategoryPlus.obj w.complex)
-      iso := αi }
-    extendedI_complex := rfl
-    extendedI_iso := HEq.rfl }⟩
+  sorry
 
 end WeilConjectures

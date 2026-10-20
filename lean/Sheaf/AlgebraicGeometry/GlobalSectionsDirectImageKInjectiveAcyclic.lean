@@ -6,7 +6,7 @@ Authors: SHEAF group M2
 module
 
 public import Mathlib.AlgebraicGeometry.Scheme
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic

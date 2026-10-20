@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseLift
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink
-import WeilConjectures.AlgebraicGeometry.StalkInternalHomFinitePresentation
+import Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Lifting a perfect stalk chain map

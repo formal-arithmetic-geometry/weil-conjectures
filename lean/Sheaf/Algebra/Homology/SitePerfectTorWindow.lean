@@ -11,9 +11,22 @@ public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 public import Sheaf.Paper.WeilTensorProduct
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.Algebra.Homology.RingedSiteTorFlatModel
-import Sheaf.Algebra.Homology.SitePerfectUpperModel
-import Sheaf.Algebra.Homology.SitePerfectLowerModel
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
+import Sheaf.Algebra.Homology.SiteFlatOpcyclesTorCriterion
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatFinitePresentationRetract
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.SiteTorIntervalRestriction
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Local perfect models in a prescribed Tor interval
@@ -151,31 +164,6 @@ theorem exists_strictPerfect_model_in_tor_window
           (ringedSiteDerivedRestrictionOfUniverses
             ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) V E),
           ∀ r : ℤ, r < a ∨ b < r → IsZero (P.F.X r) := by
-  classical
-  obtain ⟨Q, _, hbound, ⟨e⟩⟩ :=
-    (torAmplitude_iff_exists_bounded_flat_model J R E a b _hab).1 _hTor
-  have hcoh (r : ℤ) (hr : b < r) :
-      IsZero ((DerivedCategory.homologyFunctor _ r).obj E) := by
-    exact (HomologicalComplex.ExactAt.of_isZero (hbound r (Or.inr hr))).isZero_homology.of_iso
-      ((DerivedCategory.homologyFunctor _ r).mapIso e ≪≫
-        (DerivedCategory.homologyFunctorFactors _ r).app Q)
-  intro U
-  obtain ⟨S, hS, hP⟩ := exists_strictPerfect_upper_model J R E _hperfect b hcoh U
-  have hlocal (V : C) (f : V ⟶ U) (hf : S f) :
-      ∃ T : Sieve V, T ∈ J V ∧
-        ∀ (W : C) (g : W ⟶ V), T g →
-          ∃ P : StrictPerfectCoefficientRepresentationOfUniverses.{u, v, 0} R W
-            (ringedSiteDerivedRestrictionOfUniverses
-              ((sheafCompose J
-                (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) W E),
-            ∀ r : ℤ, r < a ∨ b < r → IsZero (P.F.X r) := by
-    obtain ⟨P, hupper⟩ := hP V f hf
-    exact exists_strictPerfect_lower_model J R E V P a b _hab hupper _hTor
-  choose T hT hmodel using hlocal
-  refine ⟨Sieve.bind S (fun {V} {f} hf ↦ T V f hf),
-    J.bind_covering hS (fun _ _ hf ↦ hT _ _ hf), ?_⟩
-  intro V f hf
-  obtain ⟨W, g, h, hh, hg, _⟩ := hf
-  exact hmodel W h hh V g hg
+  sorry
 
 end SheafOfModules

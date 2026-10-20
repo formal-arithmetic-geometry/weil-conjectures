@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleCoefficientPullbackUniverses
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian

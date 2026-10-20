@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.RingTheory.FiniteIffFormalGlueing
 import Sheaf.RingTheory.FormalGlueingIsogeny
-import WeilConjectures.Topology.GlueSheavesOfModules
+import Sheaf.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.CompletionIsogenyFromHomLift
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.AlgebraicGeometry.Coherent
@@ -30,7 +30,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSe
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.CoherentFiniteType
-import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Existence of outgoing coherent formal algebraizations
 

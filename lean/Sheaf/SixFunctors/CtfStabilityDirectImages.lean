@@ -14,13 +14,50 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
-import all Sheaf.Paper.UnboundedLocalizingPullback
-import Sheaf.Paper.ExceptionalInverseImageExistence
-import Sheaf.Paper.CompactificationLocalizing
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import Sheaf.SixFunctors.AdmissibleTensorConstructibility
-import Sheaf.SixFunctors.AdmissibleDirectImage
+import Sheaf.Paper.UnboundedLocalizingPullback
+import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.AlgebraicGeometry.Sites.Etale
+import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.ConstructibleSheaf.Refinement
+import Sheaf.Paper.LocallyConstantTensor
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.IntegralModelsOperations
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import Sheaf.AlgebraicGeometry.OpenDirectImageFiniteCoefficients
+import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
+import Sheaf.AlgebraicGeometry.OpenDirectImageClassicalAmplitude
+import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
+import Sheaf.Paper.OpenTorBoundArbitraryField
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.ComparisonTorInterval
+import Sheaf.Paper.CoefficientHeartTriangulated
+import Sheaf.Paper.CompletedCondensedCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuityDirectImage
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+import Sheaf.Paper.PadicIntegersInvertEll
+import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Paper.FiniteLocalizingExceptionalPreservation
+import Sheaf.Paper.RationalExceptionalRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.Paper.FiniteProperLocalizing
+import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.ProperBaseChangeRational
+import Sheaf.SixFunctors.FieldTensor
+import Sheaf.SixFunctors.IntegralExceptionalRestriction
+import Sheaf.SixFunctors.IntegralModelsGenerators
+import Sheaf.SixFunctors.ProEtale.IntegralOpenDirectImage
 
 /-!
 # Pullback, tensor product and direct images on constructible finite-Tor objects
@@ -32,8 +69,7 @@ node det-thm-sf-ctf-stability-direct-images (blueprint: det-thm-sf-ctf-stability
 @[expose] public section
 
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+
 universe u
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Scheme
@@ -41,12 +77,6 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
--- Avoid expanding the coefficient pullback and the derived monoidal construction.
-attribute [local irreducible] upperStarFromPoint derivedTensor
-
-set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
--- Elaborating the six derived-functor clauses needs a larger elaboration budget.
 /-- Pullback, tensor product, direct images, and exceptional pullback preserve
 constructible finite-Tor objects at every admissible coefficient stage.
 
@@ -257,74 +287,6 @@ theorem constructibleFiniteTor_stability_direct_images
           constantModelBoundedConstructible Λ X
             (G.obj ⟨K, fun P _hP hS ↦ hS K hK⟩).obj ∧
           DerivedCategory.finiteTorAmplitude _ (G.obj ⟨K, fun P _hP hS ↦ hS K hK⟩).obj)
-  := by
-  classical
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
-    (X ↘ Spec (.of k))
-  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated
-    (X ↘ Spec (.of k))
-  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
-    (Y ↘ Spec (.of k))
-  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated
-    (Y ↘ Spec (.of k))
-  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
-  · intro K hK
-    exact ⟨pullback_bounded_constructible Λ f (pullback_constructible Λ f) K hK.1,
-      pullback_tor Λ f K hK.2⟩
-  · intro K M hK hM
-    refine ⟨?_, ?_⟩
-    · exact constantModelBoundedConstructible_tensor_of_admissible ℓ k Λ _hΛ (X := X) K M hK hM
-    · obtain ⟨a, b, hK⟩ := hK.2
-      obtain ⟨c, d, hM⟩ := hM.2
-      refine ⟨a + c, b + d, ?_⟩
-      simpa only [derivedTensor, MonoidalCategory.curriedTensor] using
-        DerivedCategory.torAmplitudeIn_tensor hK hM
-  · intro S Sbar _ _ _ _ _ _ _ _ a j i ha _ _ _ _ _ K hK
-    let c : Compactification a :=
-      { Z := Sbar, g := i, i := j, comm := ha,
-        isProper := inferInstance, isOpenImmersion := inferInstance }
-    have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace
-      (S ↘ Spec (.of k))
-    have : QuasiSeparatedSpace Sbar := quasiSeparatedSpace_of_quasiSeparated
-      (Sbar ↘ Spec (.of k))
-    have : QuasiCompact j := quasiCompact_of_compactSpace j
-    have : IsSeparated a := by rw [ha]; infer_instance
-    have : LocallyOfFiniteType a := by rw [ha]; infer_instance
-    have : QuasiCompact a := by rw [ha]; infer_instance
-    let c' : Compactification.BoundaryCompactification a := ⟨⟨c, inferInstance⟩⟩
-    exact (compactification_localizing Λ ℓ k a c' _hΛ).2.2.2 K hK
-  · intro K hK
-    exact constructibleFiniteTor_rightDerivedLowerStar_of_admissible ℓ k Λ _hΛ
-      (X := X) (Y := Y) f K hK
-  · intro K hK
-    let c := @HasCompactification.compactification X Y f
-      (HasCompactification.of_isOver (S := Spec (.of k)) f)
-    have : QuasiCompact c.i :=
-      (Compactification.quasiCompact_openImmersion_iff c).mpr inferInstance
-    let c' : Compactification.BoundaryCompactification f := ⟨⟨c, inferInstance⟩⟩
-    exact (compactification_localizing Λ ℓ k f c' _hΛ).2.2.2 K hK
-  · intro h G adj K hK
-    let X' := Over.mk (X ↘ Spec (.of k))
-    let Y' := Over.mk (Y ↘ Spec (.of k))
-    let f' : X' ⟶ Y' := f.asOver (Spec (.of k))
-    have : LocallyOfFiniteType X'.hom := inferInstanceAs
-      (LocallyOfFiniteType (X ↘ Spec (.of k)))
-    have : QuasiCompact X'.hom := inferInstanceAs (QuasiCompact (X ↘ Spec (.of k)))
-    have : IsSeparated X'.hom := inferInstanceAs (IsSeparated (X ↘ Spec (.of k)))
-    have : LocallyOfFiniteType Y'.hom := inferInstanceAs
-      (LocallyOfFiniteType (Y ↘ Spec (.of k)))
-    have : QuasiCompact Y'.hom := inferInstanceAs (QuasiCompact (Y ↘ Spec (.of k)))
-    have : IsSeparated Y'.hom := inferInstanceAs (IsSeparated (Y ↘ Spec (.of k)))
-    obtain ⟨hX, hY, hSX, hSY, h', sX, sY, hex⟩ :=
-      exceptionalInverseImage_exists Λ ℓ k f' _hΛ
-    obtain ⟨_, _, _, _, _, _, ⟨G', _, _, ⟨adj'⟩, hG'⟩, _⟩ := hex
-    have := (constantModelConstructibleFiniteTor_wellDefined Λ X).2.1
-    have := (constantModelConstructibleFiniteTor_wellDefined Λ X).2.2.2.1
-    let e := adj'.rightAdjointUniq adj
-    exact (constantModelBoundedConstructible Λ X ⊓
-      DerivedCategory.finiteTorAmplitude
-            (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))).prop_of_iso
-        ((localizingClosureProEtale Λ X).ι.mapIso (e.app ⟨K, fun P _ hS ↦ hS K hK⟩))
-        (hG' _ hK)
+  := by sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

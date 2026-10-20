@@ -10,8 +10,11 @@ public import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.AlgebraicGeometry.Properties
-import Sheaf.AlgebraicGeometry.ClosedPointSheafFilteredColimit
-import Sheaf.AlgebraicGeometry.ClosedPointSheafFiniteSupport
+import Sheaf.AlgebraicGeometry.ClosedPointField
+import Sheaf.AlgebraicGeometry.EtaleLfpAndFiniteType
+import Sheaf.AlgebraicGeometry.EtaleSupport
+import Sheaf.AlgebraicGeometry.FiniteClosedPoints
+import WeilConjectures.AlgebraicGeometry.GeometricStalkSupport
 
 /-!
 # Approximation of sheaves supported at closed points
@@ -36,17 +39,21 @@ Source: blueprint `lem-kun-cp-approximation`, Stacks Project, Tags 0F0N and 03SA
 (blueprint: lem-kun-cp-approximation).
 
 Proof:
-1. The filtered-colimit theorem constructs the diagram of finitely generated subsheaves.
-Finite unions of generators give common successors, and affine charts make the canonical
-map to `F` locally surjective. Exact filtered colimits make it monic.
-2. For each generator its closed nonvanishing locus in a Noetherian affine chart has
-finitely many generic points. Their images belong to the closed-point support of `F`,
-so specialization forces the entire image to be finite. On the complement of the finite
-union of these images all generators vanish. Minimality puts the generated subsheaf in
-the kernel of restriction, proving that its support is finite.
-3. Give this finite set of closed points its reduced closed subscheme structure.
-The closed-immersion essential-image theorem identifies the subsheaf with the direct
-image of its inverse-image restriction. -/
+1. Finite-generator subsheaves are filtered by taking the union of finite families of
+sections. Every etale chart is covered by affine opens, so their canonical colimit maps
+locally surjectively to `F`. Inclusions make the map monic, hence an isomorphism.
+2. A section on an affine etale chart has a closed nonvanishing locus. Its points map
+into the closed-point support of `F` (`def-kun-support`, with independence given by
+`lem-kun-support-geometric-point-independent`). The residue fields upstairs are finite
+extensions of those downstairs (`lem-weil-pbc-etale-residue-field-extension-separable`
+and finite presentation). By `lem-kun-closed-point-field` these are finite over the
+base field. The affine chart is quasi-compact over the Noetherian scheme `X`, hence of
+finite type over the base by `lem-kun-etale-lfp`. Its nonvanishing locus consists of
+closed points, so is finite by `lem-kun-finite-closed-subscheme`. The support of the cyclic
+subsheaf is its finite image downstairs, by the stalk description of the generator.
+3. A finite sum of cyclic subsheaves has support the finite union of their supports.
+For the reduced closed immersion on this finite set, `lem-kun-04ca` identifies the
+subsheaf with the direct image of its inverse-image restriction. -/
 theorem closedPointSheaf_filteredColimit_finiteSupport
     {K : Type v} [Field K] [IsSepClosed K] (X : Scheme.{v})
     [X.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))]
@@ -69,9 +76,6 @@ theorem closedPointSheaf_filteredColimit_finiteSupport
             (Etale.lowerStar AddCommGrpCat.{v + 1} i).obj
               ((Etale.upperStar AddCommGrpCat.{v + 1} i).obj
                 (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))) := by
-  dsimp
-  have hcol := closedPointSheaf_finitelyGenerated_filteredColimit (K := K) X F hF
-  refine ⟨hcol.1, hcol.2, ?_⟩
-  exact closedPointSheaf_finitelyGenerated_finiteSupport (K := K) X F hF
+  sorry
 
 end AlgebraicGeometry.Scheme

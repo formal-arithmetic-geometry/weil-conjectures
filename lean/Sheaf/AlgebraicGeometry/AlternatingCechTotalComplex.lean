@@ -6,7 +6,7 @@ Authors: SHEAF group Z2
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective

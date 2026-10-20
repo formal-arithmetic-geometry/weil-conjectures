@@ -9,9 +9,30 @@ public import Sheaf.Paper.WeilMixedUpperBounds
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import Sheaf.Paper.WeilCompactSupportCohomology
 public import Sheaf.Paper.QcqsCompactSupportRealization
-import Sheaf.Paper.FiniteCompactificationWeilExact
-import Sheaf.Paper.FiniteCompactificationEigenvalues
+import Sheaf.Paper.LocalFrobeniusTrace
+import Sheaf.Paper.SfWeilSheafComplex
+import Sheaf.Paper.ConstructiblePullbackTExact
+import Sheaf.Paper.DlConstructibleFibresExact
+import Sheaf.Paper.WeilPullbackLocalFrobenius
+import Sheaf.AlgebraicGeometry.ClosedPointField
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.Paper.ZlFiniteAdicDirectImage
+import Sheaf.Paper.ZlImmersionWeilLocalBehavior
+import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+import Sheaf.Paper.FiniteExtensionCompactSupportBaseChange
+import Sheaf.Paper.QbarCompactSupportBaseChange
 import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.AlgebraicGeometry.AffineScheme
+import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.Paper.A1FiniteWeilSectionsDecomposition
+import Sheaf.Paper.ZlFrameworkPbcOpenExchangeComparison
 
 /-! # Quasi-finite compact-support images and upper weights
 
@@ -30,148 +51,135 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-private theorem punctualEigenvalue_of_iso
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (Y₀ : Over (Spec (.of D.k₀)))
-    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
-    {F G : sfCommonStageWeilSheaf D l hl Y₀ Ω} (e : F ≅ G)
-    (y : {y : Y₀.left // y ∈ closedPoints Y₀.left}) (α : Ω)
-    (h : SfPunctualEigenvalue D l hl Ω Y₀ F y α) :
-    SfPunctualEigenvalue D l hl Ω Y₀ G y α := by
-  obtain ⟨L, K, ⟨a⟩, ι, hι, hα⟩ := h
-  exact ⟨L, K, ⟨((ObjectProperty.ι _).mapIso e).symm ≪≫ a⟩, ι, hι, hα⟩
-
-private theorem punctualPure_of_iso
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (Y₀ : Over (Spec (.of D.k₀)))
-    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
-    (iota : Ω →+* ℂ) (w : ℝ)
-    {F G : sfCommonStageWeilSheaf D l hl Y₀ Ω} (e : F ≅ G)
-    (h : SfIsPunctuallyPureOfWeight D l hl Ω Y₀ iota F w) :
-    SfIsPunctuallyPureOfWeight D l hl Ω Y₀ iota G w := by
-  intro y α hα
-  exact h y α (punctualEigenvalue_of_iso D l hl Ω Y₀ e.symm y α hα)
-
-private theorem mixed_of_iso
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (Y₀ : Over (Spec (.of D.k₀)))
-    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
-    (iota : Ω →+* ℂ) (w : ℝ)
-    {F G : sfCommonStageWeilSheaf D l hl Y₀ Ω} (e : F ≅ G)
-    (h : SfIsMixedOfWeightsAtMost D l hl Ω Y₀ iota F w) :
-    SfIsMixedOfWeightsAtMost D l hl Ω Y₀ iota G w := by
-  obtain ⟨m, A, φ, h0, ⟨a⟩, hmono, hpure⟩ := h
-  exact ⟨m, A, φ, h0, ⟨a ≪≫ e⟩, hmono, hpure⟩
-
-private theorem mixed_map
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (X₀ Y₀ : Over (Spec (.of D.k₀)))
-    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
-    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
-    (H : sfCommonStageWeilSheaf D l hl X₀ Ω ⥤ sfCommonStageWeilSheaf D l hl Y₀ Ω)
-    [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    (iota : Ω →+* ℂ)
-    (hp : ∀ (A : sfCommonStageWeilSheaf D l hl X₀ Ω) (v : ℝ),
-      SfIsPunctuallyPureOfWeight D l hl Ω X₀ iota A v →
-        SfIsPunctuallyPureOfWeight D l hl Ω Y₀ iota (H.obj A) v)
-    (F : sfCommonStageWeilSheaf D l hl X₀ Ω) (w : ℝ)
-    (h : SfIsMixedOfWeightsAtMost D l hl Ω X₀ iota F w) :
-    SfIsMixedOfWeightsAtMost D l hl Ω Y₀ iota (H.obj F) w := by
-  obtain ⟨m, A, φ, h0, ⟨a⟩, hmono, hpure⟩ := h
-  refine ⟨m, fun i ↦ H.obj (A i), fun i ↦ H.map (φ i), H.map_isZero h0,
-    ⟨H.mapIso a⟩, ?_, ?_⟩
-  · intro i
-    let := hmono i
-    infer_instance
-  · intro i
-    obtain ⟨v, hv, hA⟩ := hpure i
-    exact ⟨v, hv, punctualPure_of_iso D l hl Ω Y₀ iota v
-      (PreservesCokernel.iso H (φ i)) (hp _ v hA)⟩
-
-private theorem norm_le_of_pow
-    {Ω : Type v} [Field Ω] (iota : Ω →+* ℂ) (β : Ω)
-    (Q : ℕ) (e : ℕ) (he : e ≠ 0) (w : ℝ)
-    (h : ‖iota (β ^ e)‖ ≤ ((Q ^ e : ℕ) : ℝ) ^ (w / 2)) :
-    ‖iota β‖ ≤ (Q : ℝ) ^ (w / 2) := by
-  rw [map_pow, norm_pow, Nat.cast_pow,
-    ← Real.rpow_pow_comm (Nat.cast_nonneg Q)] at h
-  exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg (Nat.cast_nonneg Q) _)
-    he).mp h
-
-private theorem norm_eq_of_pow
-    {Ω : Type v} [Field Ω] (iota : Ω →+* ℂ) (β : Ω)
-    (Q : ℕ) (e : ℕ) (he : e ≠ 0) (w : ℝ)
-    (h : ‖iota (β ^ e)‖ = ((Q ^ e : ℕ) : ℝ) ^ (w / 2)) :
-    ‖iota β‖ = (Q : ℝ) ^ (w / 2) := by
-  rw [map_pow, norm_pow, Nat.cast_pow,
-    ← Real.rpow_pow_comm (Nat.cast_nonneg Q)] at h
-  exact (pow_left_inj₀ (norm_nonneg _) (Real.rpow_nonneg (Nat.cast_nonneg Q) _)
-    he).mp h
-
-private theorem exists_finite_compactification
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f]
-    [CompactSpace Y] [QuasiSeparatedSpace Y] (hqf : Scheme.Hom.IsQuasiFinite f) :
-    ∃ c : Compactification f, IsFinite c.g := by
-  let := hqf.1
-  let := hqf.2.1
-  have : LocallyQuasiFinite f := by
-    apply locallyQuasiFinite_iff_isDiscrete_preimage_singleton.mpr
-    intro y
-    rw [isDiscrete_iff_discreteTopology]
-    apply discreteTopology_iff_isOpen_singleton.mpr
-    rintro ⟨x, hx⟩
-    change f x = y at hx
-    subst y
-    simpa only [Set.image_singleton, Scheme.Hom.asFiber,
-      Homeomorph.apply_symm_apply] using
-      (f.fiberHomeo (f x)).isOpenMap _ (hqf.2.2 x)
-  obtain ⟨T, j, p, hj, _, hp, h⟩ :=
-    f.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite
-  exact ⟨{ Z := T
-           i := j
-           g := p
-           comm := h.symm
-           isOpenImmersion := hj
-           isProper := inferInstance }, hp⟩
-
 /-- A separated quasi-finite morphism has no positive compact-support higher images;
 its degree-zero image preserves mixed and punctual upper weight bounds.
 Source: blueprint main-20261015, sk-l-dl-general-quasifinite, unit statement and
 finite-fibre argument (blueprint: sk-l-dl-general-quasifinite).
 
-Proof:
+Proof (the reviewed DAG route, including the repair of absolute separatedness):
 
-1. Translate point-isolation quasi-finiteness into Mathlib local quasi-finiteness.
-   The target is quasi-compact and quasi-separated. Zariski Main Theorem gives an
-   open immersion followed by a finite morphism, hence a finite compactification.
-   This does not imply absolute separatedness: the identity of the doubled-origin
-   affine line is finite. All comparisons retain the relative hypotheses.
+1. The target Y_0 is quasi-compact because it is of finite type over a field, and is quasi-
+   separated by hypothesis. Apply [thm-pqf-zmt-factorization] to obtain
+   X_0\xrightarrow{j_0}T_0\xrightarrow{p_0}Y_0, with j_0 quasi-compact open, p_0 finite, and
+   f_0=p_0j_0. This is a compactification since a finite morphism is proper [lem-weil-pbc-finite-
+   proper]. It is over k_0, giving compatible geometric base changes. No absolute separatedness of
+   Y_0 or T_0 is inferred. The false inference in the blueprint proof of lem-zl-quasi-finite is
+   avoided: the identity of the affine line with doubled origin is a finite morphism whose source
+   is not separated over k_0. The compact-support operation of [def-weil-integral-rational-qbar-
+   compact-support] depends on a chosen compactification; by the comparison stated in [def-zl-
+   weil-compact-support-cohomology] (for two compactifications of f_0, with no separatedness of
+   X_0,Y_0 assumed, the higher images R^n_cf_!F are isomorphic as Weil sheaves), every assertion
+   of the item for an arbitrary compactification follows from the same assertion for
+   c_0=(j_0,p_0): vanishing, punctual bounds and mixedness are invariant under isomorphism of Weil
+   sheaves. Steps 3-10 compute with c_0.
 
-2. Apply sfFiniteCompactificationWeilExact to this compactification. It supplies
-   one additive exact heart functor H, objectwise Weil isomorphisms from H to the
-   specified zeroth higher image, and positive-degree vanishing. Compactification
-   independence transports the latter to the supplied compactification c.
+2. For each affine open V_0\subseteq Y_0, put T_{V_0}=T_0\times_{Y_0}V_0 and
+   X_{V_0}=X_0\times_{Y_0}V_0. By [lem-weil-pbc-finite-morphism-permanence], p_{V_0}:T_{V_0}\to
+   V_0 is finite and T_{V_0} is affine. By [lem-weil-pbc-open-immersion-base-change],
+   j_{V_0}:X_{V_0}\hookrightarrow T_{V_0} is open. Both V_0 and T_{V_0} are separated over k_0 by
+   [lem-weil-pbc-affine-source-morphism-separated]; X_{V_0} is separated over k_0 because its
+   diagonal is the restriction of the closed diagonal of T_{V_0}. These schemes are finite type
+   over k_0: Y_0 is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], its open V_0 is
+   quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian] and locally finite type,
+   T_{V_0} is finite over V_0, and X_{V_0} is a quasi-compact open of T_{V_0}. Their geometric
+   base changes remain separated and finite type by [lem-pod-separated-finite-type-base-change].
+   The affine opens cover Y_0 by [lem-weil-pbc-affine-opens-basis].
 
-3. Apply sfFiniteCompactificationEigenvalues to every eigenvalue beta of H(A).
-   It gives a source eigenvalue beta^e at x, with e nonzero and q_x = q_y^e.
-   For the given embedding iota, multiplicativity gives |iota(beta)|^e equal to
-   |iota(beta^e)|. The source upper bound therefore bounds this by
-   (q_y^(w/2))^e. Injectivity and monotonicity of the positive integral power on
-   nonnegative reals give the desired bound. The equality argument gives purity.
-   Neither argument needs surjectivity of iota, and both allow every real weight.
+3. For V=V_0\times_{k_0}k, put u:X_V\hookrightarrow X and v:V\hookrightarrow Y. The four schemes
+   and the finite compactification scheme T are Noetherian and finite-dimensional by [lem-weil-
+   pbc-finite-type-over-noetherian] and [lem-kun-dimension-finite-type]; \ell is invertible. Apply
+   [lem-zl-framework-pbc-open-exchange-comparison] to the supplied finite compactification. It
+   identifies the actual framework functor R\lim_n\operatorname{Res}_n Rp_{*,n}j_!K_n with the
+   completed PBC Rp_*j_! under the coefficient-presentation equivalences J. For the two composite
+   functors it supplies the specified endpoint isomorphisms S,T and the equation
+   \operatorname{Ex}^{\mathrm{pbc}}J\circ S=T\circ J(\operatorname{Ex}^{\mathrm{sf}}). Thus the
+   exchange comparison includes the strict quotient transitions and the proper/open mates before
+   taking the derived limit. This is the comparison of functors and arrows needed here; equality
+   of their finite evaluations alone is not used.
 
-4. Send the input global mixed filtration through the same H. Exactness preserves
-   its initial zero object and its monomorphisms, and the preserved-cokernel
-   isomorphisms identify its quotients with H of the original pure quotients.
-   Step 3 proves their purity at the same weights. Compose the final isomorphism
-   with the comparison to the specified zeroth image for c. Isomorphism invariance
-   of eigenvalue and mixed predicates follows directly by composing finite Weil
-   presentations and final filtration isomorphisms. Length-zero filtrations use
-   the same construction.
+4. Apply [thm-cbc-qbar] to J_XF in the PBC common-stage category. The hypotheses of its finite-
+   stage theorem [thm-cbc-finite-extension] were checked in Step 3; these hypotheses impose
+   relative separatedness of f, without absolute separatedness of X,Y. Its specified exchange
+   \operatorname{Ex}^{\mathrm{pbc}} is invertible. The equation in Step 3 expresses
+   J(\operatorname{Ex}^{\mathrm{sf}})=T^{-1}\operatorname{Ex}^{\mathrm{pbc}}J\,S, so the
+   equivalence J reflects invertibility and gives v^*Rf_!F\simeq Rf_{V!}u^*F for the framework
+   functors. The comparison lemma also identifies their Weil structures. Explicitly, the two
+   pastings of the open square with geometric Frobenius are the same square, because V_0 and the
+   compactification are over k_0. Identity/pasting coherence of the specified exchange in [thm-
+   cbc-finite-extension] makes the composites equal; compose this equation with the image of the
+   Weil arrow of F. Naturality of S,T under the semilinear diagram isomorphisms gives the same
+   equality in the framework category. Hence this is an isomorphism of Weil complexes, using [def-
+   weil-weil-sheaf-complex].
+
+5. On the separated finite-type schemes of Step 2, the composition and properness laws of [prop-
+   functor-package] give Rf_{V!}\simeq Rp_{V*}j_{V!}. Clause (2) of [lem-zl-immersion-weil-local-
+   behavior] identifies the open compact-support operation with the exact j_{V!} on constructible
+   Weil sheaves, without any assumption on a coefficient embedding. The finite direct image is
+   standard-t-exact and exact on the constructible heart by [lem-zl-finite-adic-direct-image].
+   Consequently for every constructible Weil sheaf A on X_{V_0}, Rf_{V!}A\simeq p_{V*}j_{V!}A is a
+   sheaf in degree zero, and A\mapsto p_{V*}j_{V!}A is exact. Every invocation of these three
+   statements is now on absolutely separated finite-type schemes, including T_{V_0} and its
+   geometric base change.
+
+6. Restriction to V commutes with cohomology and is exact on constructible hearts by
+   [lem-a1-constructible-pullback-t-exact]. Steps 4 and 5 therefore show that every cohomology
+   sheaf \mathcal H^i(Rf_!F) with i\ne0 restricts to zero on each V. The restrictions form
+   compatible local-heart data: for nested opens, the transition isomorphisms are the restrictions
+   of the same global object, and their identity and cocycle equations are the restriction/pasting
+   equations of Step 4. The open-cover exactness criterion in [lem-dl-a1-constructible-fibres-
+   exact] detects its vanishing: apply it to the short complex 0\to\mathcal H^i(Rf_!F)\to0, which
+   is exact on each member of this separated open cover. Thus Rf_!F lies in the constructible
+   heart, and in particular R^if_{0!}F=0 for i>0. For any short exact sequence of constructible
+   Weil sheaves on X_0, restriction to X_V is exact by the pullback statement. By Step 5 its
+   direct-image sequence is exact over each V. Applying the same open-cover criterion to that
+   sequence proves that f_{0!}=R^0f_{0!} is an exact functor globally. These checks are on
+   constructible adic sheaves, not arbitrary pro-etale sheaves.
+
+7. Fix the arbitrary field embedding \iota:\Omega\hookrightarrow\mathbf C of [sk-d-dl-general-
+   weights]; no surjectivity is assumed. Suppose F has punctual upper bound w, or is punctually
+   pure of weight w, in the eigenvalue sense spelled out there. Restrict to X_{V_0}. A closed
+   point of this open is closed in X_0: on both finite-type schemes this means its residue field
+   is finite over k_0 by [lem-kun-closed-point-field]. Its stalk and local Frobenius are
+   unchanged. Clause (2) of [lem-zl-immersion-weil-local-behavior] says that B=j_{V!}(F|_{X_V})
+   has that identical stalk and local Frobenius on X_{V_0}, and zero stalk elsewhere in T_{V_0}.
+   Thus B has the same bound or purity for this very embedding \iota. This uses the weight-free
+   stalk assertion, not a weight-preservation theorem stated only for an isomorphism with \mathbf
+   C.
+
+8. Fix closed y\in V_0, set k_y=\kappa(y), and put Z_0=T_{V_0}\times_{V_0}\operatorname{Spec}k_y.
+   The natural finite-fibre formula of [lem-zl-finite-adic-direct-image] identifies
+   (p_{V*}B)_{\bar y} with H^0(Z,B|_Z), including its Frobenius action by the stated semilinear
+   naturality. The fibre is finite, hence proper, so this is also H_c^0 by the properness law of
+   [prop-functor-package]. Give B|_Z the Weil arrow \theta_B^{[d_y]}, where d_y=[k_y:k_0], and
+   apply [lem-a1-finite-weil-sections-decomposition] over k_y, with algebraic closure k. For
+   x\in|Z_0|, it gives a block of e=[\kappa(x):k_y] summands on which F_y acts cyclically and
+   F_y^e on each summand is F_x. The same-residue-field case of [lem-fd-weil-pullback-local-
+   frobenius] for Z_0\to T_{V_0} identifies its stalk operators over k_0. Over k_y, e iterations
+   of \theta_B^{[d_y]} give \theta_B^{[ed_y]}, exactly the original F_x of [def-weil-local-
+   frobenius-trace]. The point x is closed in T_{V_0}, and q_x=q_y^e because a k_y-basis of the
+   degree-e residue extension identifies its underlying set with k_y^e. If \beta is an eigenvalue
+   on this block, choose an eigenvector and a nonzero stalk component. The equation
+   F_y^ev=\beta^ev on that component shows that \alpha=\beta^e is an eigenvalue of F_x. For the
+   bound, multiplicativity of the given embedding and the complex absolute value gives
+   |\iota(\beta)|^e=|\iota(\alpha)|\le q_x^{w/2}=(q_y^{w/2})^e. Taking the positive e-th root
+   proves |\iota(\beta)|\le q_y^{w/2}. For purity use equality throughout. This works for every
+   real w and uses no surjectivity of \iota.
+
+9. By Steps 4 and 5, p_{V*}B is the restriction of f_{0!}F to V_0, as a Weil sheaf. Every closed
+   point of Y_0 is in an affine V_0, with the same residue field, stalk and local Frobenius as on
+   Y_0. Thus Steps 7 and 8 show that f_{0!} preserves punctual upper bounds and punctual purity
+   globally for the original arbitrary embedding. There is no assertion about descent of local
+   mixed filtrations; the punctual predicates are exactly the closed-point eigenvalue
+   inequalities/equalities of [sk-d-dl-general-weights].
+
+10. If F is mixed of weights at most w, choose its global finite filtration
+   0=G_0\subset\cdots\subset G_n=F with punctually pure quotients Q_i of weights u_i\le w, as in
+   [sk-d-dl-general-weights]. Exactness from Step 6 sends each 0\to G_{i-1}\to G_i\to Q_i\to0 to
+   0\to f_{0!}G_{i-1}\to f_{0!}G_i\to f_{0!}Q_i\to0. Thus the inclusions give a finite filtration
+   of f_{0!}F with quotients f_{0!}Q_i. Step 9 shows that these quotients are punctually pure of
+   the same u_i. This is exactly the mixed upper bound w of [sk-d-dl-general-weights]. A zero
+   quotient can be omitted. In particular this argument applies one global input filtration; it
+   does not assume descent or uniqueness of independently chosen local mixed filtrations.
 -/
 theorem sfQuasiFiniteCompactSupport
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
@@ -193,54 +201,6 @@ theorem sfQuasiFiniteCompactSupport
             SfPunctualEigenvalue D l hl Ω Y₀
                 (zlWeilHigherShriek D l hl Ω f₀ c 0 F) y β →
               ‖iota β‖ ≤ (Nat.card (Y₀.left.residueField y.val) : ℝ) ^ (w / 2)) := by
-  let : CompactSpace Y₀.left :=
-    QuasiCompact.compactSpace_of_compactSpace Y₀.hom
-  let : QuasiSeparatedSpace Y₀.left :=
-    quasiSeparatedSpace_of_quasiSeparated Y₀.hom
-  obtain ⟨c', hc'⟩ := exists_finite_compactification f₀.left _hqf
-  let := hc'
-  obtain ⟨H, hHadd, hHlim, hHcolim, hHobj, hHvanish⟩ :=
-    sfFiniteCompactificationWeilExact D l hl Ω f₀ c'
-  let := hHadd
-  let := hHlim
-  let := hHcolim
-  have compare (A : sfCommonStageWeilSheaf D l hl X₀ Ω) :
-      Nonempty (H.obj A ≅ zlWeilHigherShriek D l hl Ω f₀ c 0 A) := by
-    obtain ⟨a⟩ := hHobj A
-    obtain ⟨b⟩ := zlWeilHigherShriek_compactification_independent D l hl Ω f₀ c' c 0 A
-    exact ⟨a ≪≫ b⟩
-  have spectrum (A : sfCommonStageWeilSheaf D l hl X₀ Ω)
-      (y : {y : Y₀.left // y ∈ closedPoints Y₀.left}) (β : Ω)
-      (hβ : SfPunctualEigenvalue D l hl Ω Y₀ (H.obj A) y β) :
-      ∃ (x : {x : X₀.left // x ∈ closedPoints X₀.left}) (e : ℕ),
-        e ≠ 0 ∧ Nat.card (X₀.left.residueField x.val) =
-          Nat.card (Y₀.left.residueField y.val) ^ e ∧
-        SfPunctualEigenvalue D l hl Ω X₀ A x (β ^ e) := by
-    obtain ⟨a⟩ := hHobj A
-    obtain ⟨x, e, _, he, hcard, hx⟩ := sfFiniteCompactificationEigenvalues
-      D l hl Ω f₀ c' A y β (punctualEigenvalue_of_iso D l hl Ω Y₀ a y β hβ)
-    exact ⟨x, e, he, hcard, hx⟩
-  refine ⟨?_, ?_⟩
-  · intro i hi
-    obtain ⟨a⟩ := zlWeilHigherShriek_compactification_independent D l hl Ω f₀ c c' i F
-    exact (hHvanish F i hi).of_iso a
-  · intro iota w
-    refine ⟨?_, ?_⟩
-    · intro hF
-      obtain ⟨a⟩ := compare F
-      apply mixed_of_iso D l hl Ω Y₀ iota w a
-      apply mixed_map D l hl Ω X₀ Y₀ H iota ?_ F w hF
-      intro A v hA y β hβ
-      obtain ⟨x, e, he, hcard, hx⟩ := spectrum A y β hβ
-      have h := hA x (β ^ e) hx
-      rw [hcard] at h
-      exact norm_eq_of_pow iota β _ e he v h
-    · intro hF y β hβ
-      obtain ⟨a⟩ := compare F
-      obtain ⟨x, e, he, hcard, hx⟩ := spectrum F y β
-        (punctualEigenvalue_of_iso D l hl Ω Y₀ a.symm y β hβ)
-      have h := hF x (β ^ e) hx
-      rw [hcard] at h
-      exact norm_le_of_pow iota β _ e he w h
+  sorry
 
 end WeilConjectures

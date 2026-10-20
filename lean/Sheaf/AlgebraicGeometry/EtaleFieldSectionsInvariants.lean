@@ -95,7 +95,7 @@ theorem nonempty_iso_etaleFieldSections_invariants
     Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
   let γ := p.sheafFiberCompIso (CategoryTheory.forget AddCommGrpCat.{u + 1})
   obtain ⟨lift, act, _, hact, _⟩ :=
-    fieldSections_stalkInvariants.{u, u + 1} K Ks Ω
+    fieldSections_stalkInvariants.{u, 0} K Ks Ω
       (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) rfl
   obtain ⟨ρ, hρ, _⟩ := exists_galoisPointAction K Ks Ω
   have hγ (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})

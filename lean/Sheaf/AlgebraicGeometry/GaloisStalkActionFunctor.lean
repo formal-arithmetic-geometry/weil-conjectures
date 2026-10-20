@@ -58,12 +58,12 @@ theorem exists_galoisStalkActionFunctor
     let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω))
     let p := pointSmallEtale s
     let G := Gal(Ks/K)
-    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max u v)) (G := G))
-      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max u v)) (G := G))
-    ∃ (T : Sheaf J (Type (max u v)) ⥤
-        DiscreteContAction (Type (max u v)) G)
-      (j : T ⋙ V ⋙ Action.forget (Type (max u v)) G ≅ p.sheafFiber),
-      ∀ (F : Sheaf J (Type (max u v))) (g : G)
+    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G))
+      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))
+    ∃ (T : Sheaf J (Type (max (u + 1) v)) ⥤
+        DiscreteContAction (Type (max (u + 1) v)) G)
+      (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber),
+      ∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G)
           (τ : Ω ≃ₐ[K] Ω)
           (hτ : (algebraMap Ks Ω).comp g.toRingHom =
             τ.toRingHom.comp (algebraMap Ks Ω))
@@ -79,22 +79,20 @@ theorem exists_galoisStalkActionFunctor
   let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω))
   let p := pointSmallEtale s
   let G := Gal(Ks/K)
-  let W := Type (max u v)
+  let W := Type (max (u + 1) v)
   obtain ⟨ρ, hρ, hopen⟩ := exists_galoisPointAction K Ks Ω
   let φ (g : G) : p ⟶ p := ⟨ρ g⟩
   let η (g : G) : p.sheafFiber (A := W) ⟶ p.sheafFiber := (φ g).sheafFiber
-  have hη_def (g : G) : η g = (φ g).sheafFiber := rfl
-  clear_value η
   have hη_one : η 1 = 𝟙 _ := by
     have h : φ 1 = 𝟙 p := by
       apply GrothendieckTopology.Point.hom_ext
       exact ρ.map_one
-    simp only [hη_def, h, GrothendieckTopology.Point.Hom.sheafFiber_id]
+    simp only [η, h, GrothendieckTopology.Point.Hom.sheafFiber_id]
   have hη_mul (g h : G) : η (g * h) = η h ≫ η g := by
     have heq : φ (g * h) = φ g ≫ φ h := by
       apply GrothendieckTopology.Point.hom_ext
       exact ρ.map_mul g h
-    simp only [hη_def, heq, GrothendieckTopology.Point.Hom.sheafFiber_comp]
+    simp only [η, heq, GrothendieckTopology.Point.Hom.sheafFiber_comp]
   have hη_germ (g : G) (F : Sheaf S.smallEtaleTopology W)
       (X : S.Etale) (x : p.fiber.obj X) (z : F.obj.obj (op X)) :
       (η g).app F (p.toPresheafFiber X x F.obj z) =
@@ -106,7 +104,6 @@ theorem exists_galoisStalkActionFunctor
       rw [p.toPresheafFiber_w]
       congr 1
       exact ((ρ g).naturality_apply f y).symm
-    rw [hη_def]
     change (p.toPresheafFiber X x F.obj ≫
       p.presheafFiberDesc (fun Y y ↦ p.toPresheafFiber Y ((ρ g).app Y y) F.obj) hc) z = _
     rw [p.toPresheafFiber_presheafFiberDesc

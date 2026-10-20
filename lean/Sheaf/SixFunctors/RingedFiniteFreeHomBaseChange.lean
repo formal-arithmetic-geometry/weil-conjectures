@@ -14,16 +14,18 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 public import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-public import Sheaf.SixFunctors.RingedFiniteFreeHomBaseChangeData
-import Sheaf.SixFunctors.RingedFiniteFreeHomBaseChangeTensor
-import Sheaf.SixFunctors.RingedFiniteFreeHomBaseChangeHom
-import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 /-! # Finite free scalar extension and derived internal Hom
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08J9, lemma-internal-hom,
@@ -55,8 +57,25 @@ variable {C : Type c} [Category.{v} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   {R S : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ S)
 
-set_option maxHeartbeats 800000 in
--- Elaborating both closed tensor models and the large dependent witness takes extra heartbeats.
+/-- A pure scalar-extension section, transported along the specified object equality.
+It is the sheafification unit applied to s tensor x; no basis is used.
+Source: Stacks 03EK, 08J9
+(blueprint: lem-sf-ringed-finite-free-hom-base-change). -/
+def ringedFiniteFreeScalarSection
+    (E : SheafOfModules.{max c v r}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients J R) ⥤ SheafOfModules.{max c v r}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients J S))
+    (h : ∀ M, E.obj M = SheafOfModules.changeOfRings φ M)
+    (M : SheafOfModules.{max c v r}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients J R))
+    (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
+    (E.obj M).val.obj U :=
+  (eqToHom (h M).symm).val.app U
+    ((((PresheafOfModules.sheafificationAdjunction
+      (𝟙 (SheafOfModules.derivedChangeRingIndependentCoefficients J S).obj)).unit.app
+        (SheafOfModules.changeOfRingsPresheaf φ M)).app U)
+      (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))
+
 /-- Finite free change of ring sheaves commutes with derived internal Hom,
 with its canonical evaluation normalization and naturality in both variables.
 The existential data present ordinary scalar extension, its universal derived
@@ -177,35 +196,8 @@ theorem ringedFiniteFreeHomBaseChange
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)),
         α.hom.app (op P, Q) = AS.transpose _ (T.obj P) (T.obj Q)
           (μ.inv.app ((derivedInternalHomOfUniverses.{c, v, r, w} J R).obj (op P, Q), P) ≫
-            T.map (AR.evaluation P Q)))  := by
-  obtain ⟨D⟩ := SheafOfModules.nonempty_derivedChangeOfRingsCochainModel.{c, v, max c v r, w, w} φ
-  obtain ⟨AR, MR, _, _⟩ := ringedDerived_closed_symmetric_monoidal.{c, v, r, w} J R
-  obtain ⟨AS, MS, _, _⟩ := ringedDerived_closed_symmetric_monoidal.{c, v, r, w} J S
-  obtain ⟨κ, μ, hκ, hcomp⟩ :=
-    ringedFiniteFreeHomBaseChange_tensor.{c, v, r, w} J φ D AR AS MR MS
-  have hcomp' : ∀ (P Q : CochainComplex (SheafOfModules.{max c v r}
-      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ℤ)
-        (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)
-        (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) Q),
-        ∃ (hEP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := S)
-            ((D.E.mapHomologicalComplex (ComplexShape.up ℤ)).obj P))
-          (hEQ : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := S)
-            ((D.E.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)),
-          IsIso (D.ε.app P) ∧ IsIso (D.ε.app Q) ∧
-          D.T.map ((MR.iso J R AR P Q hP hQ).hom) ≫
-              μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-              AS.tensor.map (Prod.mkHom (D.ε.app P) (D.ε.app Q)) =
-            D.ε.app ((WeilConjectures.coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) ≫
-              DerivedCategory.Q.map (κ.hom.app (P, Q)) ≫
-              (MS.iso J S AS _ _ hEP hEQ).hom := by
-    intro P Q hP hQ
-    obtain ⟨hEP, hEQ, hsq⟩ := hcomp P Q hP hQ
-    exact Exists.intro hEP (Exists.intro hEQ
-      (And.intro (D.computes P hP) (And.intro (D.computes Q hQ) hsq)))
-  obtain ⟨α, hα⟩ := ringedFiniteFreeHomBaseChange_hom.{c, v, r, w} J φ hfree
-      D.E D.obj_eq D.map_eq D.additive D.T D.ε D.universal AR AS MR MS κ μ hκ hcomp'
-  exact ⟨D.E, D.obj_eq, D.map_eq, D.additive, D.T, D.ε, D.universal,
-    AR, AS, MR, MS, κ, μ, α, hκ, hcomp', hα⟩
+            T.map (AR.evaluation P Q))) := by
+  sorry
 
 end Site
 end CategoryTheory

@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
-import Sheaf.AlgebraicGeometry.Sites.FiniteGaloisGermRepresentative
+import WeilConjectures.AlgebraicGeometry.Sites.FiniteGaloisGermRepresentative
 import Sheaf.AlgebraicGeometry.Sites.FiniteGaloisInvariantGermDescent
 
 /-!
@@ -66,7 +66,7 @@ theorem exists_fieldSection_of_invariant_germ
     [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω]
     (s : Spec (.of Ω) ⟶ Spec (.of K))
     (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
     (action : MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F))
     (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
       (hτ : (algebraMap Ks Ω).comp g.toRingHom =

@@ -8,7 +8,27 @@ module
 public import Sheaf.Paper.PurityFiniteSetting
 public import Sheaf.Paper.PurityAffineLineOrientation
 public import Sheaf.Paper.PurityRankOneLocalCalculation
-import Sheaf.Paper.PurityAffineLineOrientationInjectivity
+import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
+import Sheaf.Paper.PurityAffineLineDatum
+import Sheaf.Paper.PurityGysinStructure
+import Sheaf.Paper.ConcentratedComplexShift
+import Sheaf.AlgebraicGeometry.RetractedSupportLocalizationComparison
+import Sheaf.Paper.PurTwistSheafLocallyFree
+import Sheaf.Paper.ProEtaleConstructibleOrigin
+import Sheaf.Paper.SupportedCohomologyHom
+import Sheaf.AlgebraicGeometry.SupportLongExact
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Mathlib.CategoryTheory.Sites.Point.Basic
+import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.PurityRelativeKummer
 
 /-! # Uniqueness of the global affine-line orientation
 
@@ -142,30 +162,6 @@ theorem affineLine_orientation_uniqueness (P : PurityFiniteSetting.{u})
         ∀ m' : P.derivedSheaf h Y false ⟶ P.gysinValue h Y,
           P.orientationGeometricRestriction h D m' = P.orientationNormalizedFamily h D →
             m' = m := by
-  classical
-  obtain ⟨_, _, _, _, chart, m, hm, hf⟩ := P.affineLine_orientation h Y a
-  choose fibreChart transport residue hnormalized hrestriction using hf
-  let D : OrientationRestrictionData P h Y a :=
-    { chart := chart
-      fibreChart := fibreChart
-      transport := transport
-      residue := residue
-      residue_normalized := hnormalized }
-  have hfamily : P.orientationGeometricRestriction h D m =
-      P.orientationNormalizedFamily h D := by
-    funext Ω _ _ _ y hy
-    apply (ModuleCat.mono_iff_injective (D.residue Ω y hy).hom).mp inferInstance
-    change (residue Ω y hy).hom
-        (P.orientationSupportRestriction h y (transport Ω y hy)
-          (chart.support.hom (P.gysinHomToSections h Y m))) =
-      (residue Ω y hy).hom ((residue Ω y hy).inv 1)
-    rw [hrestriction]
-    exact (ConcreteCategory.congr_hom (residue Ω y hy).inv_hom_id 1).symm
-  have hinj : Function.Injective (P.orientationGeometricRestriction h D) := by
-    intro m₁ m₂ heq
-    apply orientation_support_restriction_ext P h Y a D.chart D.transport m₁ m₂
-    intro Ω _ _ _ y hy
-    exact congrArg (fun z ↦ z Ω y hy) heq
-  exact ⟨D, hinj, m, hm, hfamily, fun m' hm' ↦ hinj (hm'.trans hfamily.symm)⟩
+  sorry
 
 end WeilConjectures.PurityFiniteSetting

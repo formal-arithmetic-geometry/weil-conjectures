@@ -9,10 +9,6 @@ public import Sheaf.Paper.AdicPunctualWeights
 public import Sheaf.Paper.CommonStageLisse
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 
-import Sheaf.Paper.ImmersionWeilLocalBehavior
-import Sheaf.Paper.AdicLocalFrobeniusModelConjugacy
-import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse
-
 /-!
 # Local characteristic factors on the common-stage Weil heart
 
@@ -29,7 +25,7 @@ set_option autoImplicit false
 set_option relaxedAutoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option synthInstance.maxSize 4096
-universe u v w
+universe u v
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
 
@@ -37,31 +33,6 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
   (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
   [IsSeparated Y₀.hom]
-
-private theorem mapped_charpolyRev
-    {E : Type u} [Field E] {Ω : Type v} [Field Ω]
-    (φ : E →+* Ω) (M : ModuleCat.{w} E) [FiniteDimensional E M] (f : M ⟶ M) :
-    let := φ.toAlgebra
-    letI : FiniteDimensional Ω ((ModuleCat.extendScalars φ).obj M) := by
-      change Module.Finite Ω (TensorProduct E Ω M)
-      infer_instance
-    ((ModuleCat.extendScalars φ).map f).hom.charpolyRev = f.hom.charpolyRev.map φ := by
-  let := φ.toAlgebra
-  change (f.hom.baseChange Ω).charpoly.reverse = f.hom.charpoly.reverse.map φ
-  rw [LinearMap.charpoly_baseChange]
-  exact Polynomial.reverse_map φ.injective _
-
-private theorem charpolyRev_iso
-    {Ω : Type u} [Field Ω] {M N : ModuleCat.{v} Ω}
-    [FiniteDimensional Ω M] [FiniteDimensional Ω N]
-    (e : M ≅ N) (f : M ⟶ M) (g : N ⟶ N) (h : e.hom ≫ g = f ≫ e.hom) :
-    f.hom.charpolyRev = g.hom.charpolyRev := by
-  have hg : e.toLinearEquiv.conj f.hom = g.hom := by
-    ext x
-    have hx := congrArg (fun z : M ⟶ N ↦ z (e.inv x)) h
-    simpa using hx.symm
-  unfold LinearMap.charpolyRev
-  rw [← hg, LinearEquiv.charpoly_conj]
 
 /-- The finite-stage determinant det(1-T F_y), included into the coefficient closure.
 The finite-dimensionality proof is the defining property of the point complex.
@@ -106,49 +77,7 @@ theorem sfLocalCharacteristicFactor_existsUnique
         ∀ (ι : Y₀.left.residueField y.val →+* D.k)
           (hι : ι.comp (Y₀.hom.residueFieldAlgebraMap y.val) = algebraMap D.k₀ D.k),
           P = sfFiniteStageLocalCharacteristicFactor D l hl Ω Y₀ L K y ι hι := by
-  obtain ⟨C⟩ := immersionWeil_pullback_local_behavior D l hl Y₀ Y₀ (𝟙 Y₀) Ω
-  obtain ⟨L, K, ⟨e⟩⟩ := C.complex_descent F.obj
-  let := (Y₀.hom.residueFieldAlgebraMap y.val).toAlgebra
-  have : Module.Finite D.k₀ (Y₀.left.residueField y.val) :=
-    ((closedPoint_iff_residueField_trdeg_zero_and_finite Y₀.hom y.val).2.1).mp y.property
-  let ι : Y₀.left.residueField y.val →ₐ[D.k₀] D.k := IsAlgClosed.lift
-  let hι := ι.comp_algebraMap
-  let P := sfFiniteStageLocalCharacteristicFactor D l hl Ω Y₀ L K y ι.toRingHom hι
-  have hP : ∀ (L' : Padic.FiniteCoefficientFields l Ω)
-      (K' : sfWeilComplex D l hl Y₀
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L')),
-      Nonempty (F.obj ≅ sfWeilStageObject D l hl Y₀ Ω L' K') →
-      ∀ (ι' : Y₀.left.residueField y.val →+* D.k)
-        (hι' : ι'.comp (Y₀.hom.residueFieldAlgebraMap y.val) = algebraMap D.k₀ D.k),
-        P = sfFiniteStageLocalCharacteristicFactor D l hl Ω Y₀ L' K' y ι' hι' := by
-    intro L' K' hK' ι' hι'
-    obtain ⟨e'⟩ := hK'
-    obtain ⟨a, ha⟩ := sfLocalFrobenius_model_conjugacy D l hl Ω Y₀ L L' K K'
-      ⟨e.symm ≪≫ e'⟩ y ι.toRingHom ι' hι hι' 0
-    let E := AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L
-    let E' := AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L'
-    let M := (DerivedCategory.coefficientFdCohomology E 0).obj
-      (localPointComplex l E D hl Y₀ K (localClosedPoint D Y₀ y ι.toRingHom hι))
-    let M' := (DerivedCategory.coefficientFdCohomology E' 0).obj
-      (localPointComplex l E' D hl Y₀ K' (localClosedPoint D Y₀ y ι' hι'))
-    have : FiniteDimensional E M := DerivedCategory.coefficientFdCohomology_finite _ 0 _
-    have : FiniteDimensional E' M' := DerivedCategory.coefficientFdCohomology_finite _ 0 _
-    let := (sfAdicCoefficientEmbedding.{u} l Ω L).toAlgebra
-    let := (sfAdicCoefficientEmbedding.{u} l Ω L').toAlgebra
-    have : FiniteDimensional Ω
-        ((ModuleCat.extendScalars (sfAdicCoefficientEmbedding.{u} l Ω L)).obj M) := by
-      change Module.Finite Ω (TensorProduct E Ω M)
-      infer_instance
-    have : FiniteDimensional Ω
-        ((ModuleCat.extendScalars (sfAdicCoefficientEmbedding.{u} l Ω L')).obj M') := by
-      change Module.Finite Ω (TensorProduct E' Ω M')
-      infer_instance
-    have hchar := charpolyRev_iso a _ _ ha
-    rw [mapped_charpolyRev, mapped_charpolyRev] at hchar
-    exact hchar
-  refine ⟨P, hP, ?_⟩
-  intro Q hQ
-  exact (hQ L K ⟨e⟩ ι.toRingHom hι).trans (hP L K ⟨e⟩ ι.toRingHom hι).symm
+  sorry
 
 /-- P_y(T)=det(1-T F_y) of a constructible Weil sheaf, with multiplicities.
 It is the unique polynomial prescribed on all finite-stage presentations; only the
