@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 import Sheaf.RingTheory.CyclicExtensionFlatDescent
-import Sheaf.RingTheory.DirectSumExtensionAssembly
+import WeilConjectures.RingTheory.DirectSumExtensionAssembly
 import WeilConjectures.RingTheory.TorsionCyclicPresentation
 import WeilConjectures.RingTheory.TorsionHomFlatComparison
 
