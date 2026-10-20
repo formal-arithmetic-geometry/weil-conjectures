@@ -158,13 +158,15 @@
    }
   },
   {
-   "text": "The chain adjunction in step 5 is natural in all inputs. On representatives, postcomposing $f$ by a map of $J$'s or precomposing it by a map of $P$'s commutes with $\\alpha_T(t\\otimes f)(p)=t\\otimes f(p)$; the same is true for $a_T,v_T$ by the natural resolution augmentation. Derived internal Hom sends quasi-isomorphisms in either variable to isomorphisms, so the evaluation and transpose used in step 10 descend with this naturality to derived inputs. Together with the scalar-adjunction node's naturality, this proves that the canonical $c$ is natural contravariantly in $K$ and covariantly in $L$; its inverse is then natural whenever $c$ is invertible. For a compatible morphism of algebra diagrams, the strict equalities in step 6 hold for its maps as well, so the induced colimit maps commute with $a,v,\\lambda_C$; the scalar-adjunction normalization commutes with coefficient-ring maps. Thus the same naturality holds for the formula in the statement. Boundedness was used only for the common lower bound on $S_i\\otimes C$, never for $J$, $B$ or $K$.",
+   "text": "The chain adjunction in step 5 is natural in all inputs. On representatives, postcomposing $f$ by a map of $J$'s or precomposing it by a map of $P$'s commutes with $\\alpha_T(t\\otimes f)(p)=t\\otimes f(p)$; the same is true for $a_T,v_T$ by the natural resolution augmentation. Derived internal Hom sends quasi-isomorphisms in either variable to isomorphisms, so the evaluation and transpose used in step 10 descend with this naturality to derived inputs. Together with the scalar-adjunction node's naturality, this proves that the canonical $c$ is natural contravariantly in $K$ and covariantly in $L$; its inverse is then natural whenever $c$ is invertible. For a compatible morphism of algebra diagrams, the strict equalities in step 6 hold for its maps as well, so the induced colimit maps commute with $a,v,\\lambda_C$; the scalar-adjunction normalization commutes with coefficient-ring maps. Thus the same naturality holds for the formula in the statement. Boundedness was used only for the common lower bound on $S_i\\otimes C$, never for $J$, $B$ or $K$. The strict scalar naturality identity is proved directly on the generators 1 tensor f and 1 tensor x. The ordinary coefficient adjunction supplies their natural unit. Local surjectivity of sheafification and linearity detect equality from these generators; the actual Hom-product projections detect equality in each Hom-complex degree. Componentwise Hom functoriality and the natural augmentation square then identify the two evaluations. This calculation works for arbitrary target complexes with a commuting augmentation square, before specializing to the fixed resolutions.",
    "uses": [
     "lem-sc-derived-hom-tensor-total",
     "def-pur-derived-internal-hom",
     "lem-pur-rhom-well-defined",
     "prop-pur-kinjective-resolutions-exist",
-    "lem-sfb-dc-hom-scalar-adjunction"
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true,
    "source": {
@@ -193,12 +195,14 @@
   "lem-pur-quasi-iso-cone-acyclic",
   "lem-weil-pbc-site-derived-tensor-descent",
   "def-weil-pbc-category-colimit",
-  "lem-sfb-dc-hom-scalar-adjunction"
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-hom-preserves.proof.md",
-  "place": "Final paragraph: passage from finite coefficient extensions to their filtered colimit. Agent conditional ring-sheaf elaboration, repaired with strict chain maps and natural resolution zigzags; chain transposition from Stacks 0A90 and its 08J9 realization. Bhatt–Scholze 6.8.12–6.8.15 is context, not this statement verbatim."
+  "place": "Final paragraph: passage from finite coefficient extensions to their filtered colimit. Agent conditional ring-sheaf elaboration, repaired with strict chain maps and natural resolution zigzags; chain transposition from Stacks 0A90 and its 08J9 realization. Bhatt–Scholze 6.8.12–6.8.15 is context, not this statement verbatim. Stage-3 strict scalar naturality: direct generator and projection calculation using the ordinary scalar-adjunction unit and its functoriality; other unfinished portions retain their recorded plans."
  },
  "mathlib_searches": [
   {
@@ -402,31 +406,13 @@
   "note": "Universal representative formulation: P is any K-flat representative of K, L any strictly bounded-below representative of the second derived input, and E the ordinary scalar-extension functor with its specified objects and maps. Exact finite-free-colimit scalar extension computes its derived functor on these representatives. The actual map in D(S) is derivedComparison, fixed by pure-tensor evaluation and the actual localization factorization. Auxiliary declarations give its strict termwise-colimit formula, scalar-adjunction normalization and naturality. No mathematical hypothesis or clause of the node is changed."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261019T005411-L-2764395",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.SfbHomFilteredColimit.comparison_diagram_naturality",
-   "WeilConjectures.SfbHomFilteredColimit.comparison_existsUnique",
-   "WeilConjectures.SfbHomFilteredColimit.derivedInternalHom_filteredColimit_comparison",
-   "WeilConjectures.SfbHomFilteredColimit.filteredColimit_comparison",
-   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_existsUnique",
-   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_naturality",
-   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_quasiIso",
-   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_restriction"
-  ],
-  "sorry_after": [
-   "WeilConjectures.SfbHomFilteredColimit.comparison_existsUnique",
-   "WeilConjectures.SfbHomFilteredColimit.filteredColimit_comparison",
-   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_existsUnique",
-   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_naturality",
-   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_quasiIso",
-   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_restriction"
-  ]
+  "landing": "20261020T211638-L-3482443",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

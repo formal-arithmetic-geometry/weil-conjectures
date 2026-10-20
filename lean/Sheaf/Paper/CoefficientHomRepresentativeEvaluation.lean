@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplexComponents
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
@@ -50,8 +51,7 @@ noncomputable def coefficientHomComponent
     (n p q : ℤ) (h : p + n = q) :
     (homComplex.{c, v, max c v u, max c v u} (R := A) L M).X n ⟶
       SheafOfModules.homObj (R := A) (L.X p) (M.X q) :=
-  (homComplex_exists.{c, v, max c v u, max c v u}
-    (R := A)).choose_spec.choose L M n p q h
+  homComplexπ.{c, v, max c v u, max c v u} (J := J) (R := A) L M n p q h
 
 end HomProjection
 
