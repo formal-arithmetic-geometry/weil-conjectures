@@ -35,6 +35,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdju
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalars
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalarsFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation

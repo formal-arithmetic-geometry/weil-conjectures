@@ -74,6 +74,14 @@ theorem trace_globalFrobenius_extendScalars (W : StrictWeilComplex (ModuleCat.{u
         η L(sheafExtendScalars (algebraMap R S) (Spec (.of k))) := by
   have := isIso_rightDerivedLowerShriekOfCompactificationExtendScalarsMap_app R S c
     W.obj.property
+  let : HasRightDual ((Rf_!(c)[ModuleCat.{u + 1} R] ⋙
+      L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).obj W.obj.obj) :=
+    inferInstanceAs (HasRightDual (L(sheafExtendScalars (algebraMap R S) (Spec (.of k))).obj
+      (Rf_!(c)[ModuleCat.{u + 1} R].obj W.obj.obj)))
+  let : HasRightDual ((L(sheafExtendScalars (algebraMap R S) X) ⋙
+      Rf_!(c)[ModuleCat.{u + 1} S]).obj W.obj.obj) :=
+    inferInstanceAs (HasRightDual (Rf_!(c)[ModuleCat.{u + 1} S].obj
+      (W.extendScalars S aX).obj.obj))
   rw [← trace_leftDerivedSheafExtendScalars_map]
   exact (trace_eq_of_iso
     (asIso ((rightDerivedLowerShriekOfCompactificationExtendScalarsMap R S c).app W.obj.obj))
@@ -107,9 +115,17 @@ theorem trace_localFrobenius_extendScalars (W : StrictWeilComplex (ModuleCat.{u 
         L(sheafExtendScalars (algebraMap R S) (Spec (.of k))).map
           (trace (W.localFrobenius m x hx)) ≫
         η L(sheafExtendScalars (algebraMap R S) (Spec (.of k))) := by
+  let : HasRightDual ((L(sheafExtendScalars (algebraMap R S) X) ⋙
+      L((x)^*[ModuleCat.{u + 1} S])).obj W.obj.obj) :=
+    inferInstanceAs (HasRightDual (L((x)^*[ModuleCat.{u + 1} S]).obj
+      (W.extendScalars S aX).obj.obj))
+  let : HasRightDual ((L((x)^*[ModuleCat.{u + 1} R]) ⋙
+      L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).obj W.obj.obj) :=
+    inferInstanceAs (HasRightDual (L(sheafExtendScalars (algebraMap R S) (Spec (.of k))).obj
+      (L((x)^*[ModuleCat.{u + 1} R]).obj W.obj.obj)))
   rw [← trace_leftDerivedSheafExtendScalars_map]
   exact trace_eq_of_iso ((leftDerivedUpperStarExtendScalarsIso R S x).app W.obj.obj) _ _
-    (localFrobenius_extendScalars S W m x hx)
+    (localFrobenius_extendScalars (aX := aX) S W m x hx)
 
 /-- **Coefficient change of the local traces, for scalar traces**: if
 `tr_R(F_{x,m} ∣ K_x̄) = a • 𝟙`, then `tr_S(F_{x,m} ∣ (K_S)_x̄) = ρ a • 𝟙`. -/

@@ -15,13 +15,14 @@ public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityS
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 
 /-!
-# The tensor comparison of the left derived functor of an exact monoidal functor
+# The tensor comparison of the left derived functor of a monoidal functor
 
-Let `F : C ⥤ D` be an exact strong monoidal functor between monoidal Grothendieck abelian
-categories with functorial flat resolutions, which preserves flat objects and `ℤ`-indexed
-colimits. We show that the bifunctors `(K, M) ↦ LF(K ⊗ᴸ M)` and `(K, M) ↦ LF K ⊗ᴸ LF M` are the
-total left derived functors of `(A, B) ↦ F(A ⊗ B)` and `(A, B) ↦ F A ⊗ F B`, and derive the
-comonoidal structure `δ` of `F` into a natural isomorphism
+Let `F : C ⥤ D` be a strong monoidal functor between monoidal Grothendieck abelian categories
+with functorial flat resolutions, which preserves flat objects, `ℤ`-indexed colimits and the
+quasi-isomorphisms between K-flat complexes (for instance an exact functor). We show that the
+bifunctors `(K, M) ↦ LF(K ⊗ᴸ M)` and `(K, M) ↦ LF K ⊗ᴸ LF M` are the total left derived functors
+of `(A, B) ↦ F(A ⊗ B)` and `(A, B) ↦ F A ⊗ F B`, and derive the comonoidal structure `δ` of `F`
+into a natural isomorphism
 `LF(K ⊗ᴸ M) ≅ LF K ⊗ᴸ LF M`.
 
 This is the common generalisation of the tensor comparisons of the derived pullbacks
@@ -29,13 +30,18 @@ This is the common generalisation of the tensor comparisons of the derived pullb
 `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`, which are its instances, and
 it applies as well to the comparison functor between étale and pro-étale sheaves.
 
-We then show that this comparison is compatible with the composition of functors and with
+Both are computed on K-flat complexes `P` whose image `F P` is K-flat
+(`CategoryTheory.Functor.kFlatKFlatMap`), on which the counit of `LF` is an isomorphism.
+
+We then show that this comparison is compatible with the composition of exact functors and with
 monoidal natural isomorphisms.
 
 ## Main definitions and results
 
 - `CategoryTheory.Functor.kFlatMap F`: the complexes whose image under `F` is K-flat; they
   form a left derivability structure.
+- `CategoryTheory.Functor.kFlatKFlatMap F`: the K-flat complexes whose image under `F` is
+  K-flat; they form a left derivability structure.
 - `CategoryTheory.Functor.leftDerivedTensorComparison F`: the comparison
   `LF(K ⊗ᴸ M) ⟶ LF K ⊗ᴸ LF M`, an isomorphism.
 - `CategoryTheory.Functor.leftDerivedTensorComparison_comp`: the comparison of `F ⋙ G` is the

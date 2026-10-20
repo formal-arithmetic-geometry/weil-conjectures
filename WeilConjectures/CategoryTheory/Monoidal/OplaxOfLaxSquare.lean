@@ -29,7 +29,9 @@ compatible with the comonoidal structure of `F` on objects coming from `K₁`, i
 agrees with `G(μ) ≫ e ≫ Q₂(δ F)`. Suppose moreover that every object of `D₁` is isomorphic to
 `Q₁ a` for an `a` in a class `S` of objects such that `μ Q₂ x (F b)` is an isomorphism for all
 `x` and all `b` in `S`. Then `δG`, together with the unit induced by `F`, is an oplax monoidal
-structure on `G` (`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare`).
+structure on `G` (`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare`). It suffices that the
+components `e a` for `a` in `S` are isomorphisms
+(`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare'`).
 
 The typical example is that of a functor `G` between derived categories induced by a monoidal
 functor `F` between homotopy categories, `Q₁` and `Q₂` being the localization functors, and `S`

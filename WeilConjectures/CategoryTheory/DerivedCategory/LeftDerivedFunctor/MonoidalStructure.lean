@@ -14,17 +14,17 @@ public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
 /-!
-# The left derived functor of an exact monoidal functor is monoidal
+# The left derived functor of a monoidal functor is monoidal
 
-Let `F : C ⥤ D` be an exact strong monoidal functor between monoidal Grothendieck abelian
-categories with functorial flat resolutions, which preserves flat objects and is a left adjoint.
-The tensor comparison `LF(K ⊗ᴸ M) ⟶ LF K ⊗ᴸ LF M` of
-`CategoryTheory.Functor.leftDerivedTensorComparison` is the comonoidal structure of a monoidal
-structure on `LF : D(C) ⥤ D(D)`. If moreover the comonoidal structure of `F` is compatible with
-the braidings, then `LF` is braided for the Koszul braidings `DerivedCategory.braidedCategory'`,
-hence preserves categorical traces. Finally, if `F` is semilinear for a ring morphism
-`φ : R →+* S`, then so is `LF` on the endomorphisms `a • 𝟙`, and the induced map on the
-endomorphisms of the unit sends `a • 𝟙` to `φ a • 𝟙`.
+Let `F : C ⥤ D` be a strong monoidal functor between monoidal Grothendieck abelian categories
+with functorial flat resolutions, which preserves flat objects and the quasi-isomorphisms between
+K-flat complexes, and is a left adjoint; `F` need not be exact. The tensor comparison
+`LF(K ⊗ᴸ M) ⟶ LF K ⊗ᴸ LF M` of `CategoryTheory.Functor.leftDerivedTensorComparison` is the
+comonoidal structure of a monoidal structure on `LF : D(C) ⥤ D(D)`. If moreover the comonoidal
+structure of `F` is compatible with the braidings, then `LF` is braided for the Koszul braidings
+`DerivedCategory.braidedCategory'`, hence preserves categorical traces. Finally, if `F` is
+semilinear for a ring morphism `φ : R →+* S`, then so is `LF` on the endomorphisms `a • 𝟙`, and
+the induced map on the endomorphisms of the unit sends `a • 𝟙` to `φ a • 𝟙`.
 
 ## Main definitions and results
 
@@ -206,8 +206,8 @@ variable [F.Monoidal]
 /-- The oplax monoidal structure on the left derived functor `LF : D(C) ⥤ D(D)` whose
 comonoidal structure is the tensor comparison `F.leftDerivedTensorComparison`. It is induced by
 the oplax monoidal structure of `F` on homotopy categories
-(`CategoryTheory.Functor.mapHomotopyCategoryOplaxMonoidal`), computing on complexes whose image
-under `F` is K-flat. -/
+(`CategoryTheory.Functor.mapHomotopyCategoryOplaxMonoidal`), computing on K-flat complexes whose
+image under `F` is K-flat. -/
 @[instance_reducible]
 noncomputable def leftDerivedFunctorOplaxMonoidal : F.leftDerivedFunctor.OplaxMonoidal :=
   haveI := DerivedCategory.isIso_ε_Qh D
@@ -237,7 +237,7 @@ lemma isIso_leftDerivedFunctorOplaxMonoidal_η :
     F.leftDerivedFunctorCounit.app (𝟙_ _) ≫
       Qh.map (η (F.mapHomotopyCategory (.up ℤ))) ≫ CategoryTheory.inv (ε Qh)))
 
-/-- The left derived functor `LF : D(C) ⥤ D(D)` of an exact monoidal functor as a monoidal
+/-- The left derived functor `LF : D(C) ⥤ D(D)` of a monoidal functor as a monoidal
 functor: the oplax monoidal structure `leftDerivedFunctorOplaxMonoidal`, whose structure maps are
 isomorphisms. Its comonoidal structure is `F.leftDerivedTensorComparison`
 (`CategoryTheory.Functor.leftDerivedFunctorMonoidal_δ`). -/
@@ -334,7 +334,7 @@ theorem leftDerivedFunctor_map_braiding_hom_δ
   exact OplaxMonoidal.map_braiding_hom_comp_δ_of_iso _ eP eQ
     (F.leftDerivedFunctor_map_braiding_hom_δ_Qh hF P Q hP.2)
 
-/-- **The left derived functor of a braided exact functor is braided.** For the monoidal
+/-- **The left derived functor of a braided functor is braided.** For the monoidal
 structure `CategoryTheory.Functor.leftDerivedFunctorMonoidal` of `LF` and the derived braidings
 `DerivedCategory.braidedCategory'`, `μ_{K, M} ≫ LF β_{K, M} = β_{LF K, LF M} ≫ μ_{M, K}`. -/
 theorem leftDerivedFunctor_μ_map_braiding_hom
@@ -358,7 +358,7 @@ noncomputable def leftDerivedFunctorBraided
   letI := F.leftDerivedFunctorMonoidal
   { braided := F.leftDerivedFunctor_μ_map_braiding_hom hF }
 
-/-- **The left derived functor of a braided exact functor preserves traces.** For the monoidal
+/-- **The left derived functor of a braided functor preserves traces.** For the monoidal
 structure `CategoryTheory.Functor.leftDerivedFunctorMonoidal` of `LF` and the derived braidings
 `DerivedCategory.braidedCategory'`, `tr(LF v) = ε ≫ LF(tr v) ≫ η` for an endomorphism `v` of a
 dualizable object `P` of `D(C)` such that `LF P` is dualizable. -/
