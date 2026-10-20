@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Use beta and hbeta to show pullback.snd i phi is locally of finite presentation: it is an isomorphism followed by an open immersion. The iterated-pullback isomorphism identifies E=P times_L Spec R with P times_U (U times_L Spec R); its structural map p is locally of finite presentation, being the base change of the etale map pi followed by the preceding locally finitely presented map. Lift the given punctured-root section to E by the pullback universal property. Finiteness of pi is not used.",
+   "text": "Use β and hβ to show pullback.snd i φ is locally of finite presentation. The iterated-pullback isomorphism identifies the structural map p of pullback (π ≫ i) φ over Spec R as locally of finite presentation. Lift the supplied punctured-root section to this pullback by its universal property.",
    "uses": [
     "def-weil-etale-morphism",
     "def-pc-fibre-product"
@@ -26,30 +26,22 @@
    "elementary": true
   },
   {
-   "text": "Compare strictHenselizationRing with the adopted strictHenselization by the unique isomorphism of colimits of the same representative affine diagram. Its coprojection equations and the structural-map leg equations prove compatibility over Spec R. Compose b with this isomorphism and apply the adopted punctured root limit presentation. The root base-change theorem along this ring isomorphism identifies the adopted punctured chart with the original one: the second pullback projection is an isomorphism because the spectrum of the ring comparison is an isomorphism. The pullback condition and first-projection equation identify the chart structure maps. Compose its inverse with the limit comparison to obtain the original-model limit isomorphism and its leg equations.",
+   "text": "Apply the pointed étale inverse-limit presentation of punctured root charts to the adopted strict henselization and its structural map. Its affine cofiltered diagram, limit isomorphism and stage equations transport the lifted map to a morphism from the limit vertex to E over Spec R.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-strict-henselization-structural-map",
-    "lem-sbc-punctured-root-base-change",
     "lem-sbc-punctured-root-limit-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Using the transported limit presentation, all diagram terms are affine, hence qcqs, and their transitions are affine. Transport the lifted section through the inverse of the limit isomorphism e. The equations for the structure maps, canceled through e, show this is a morphism over Spec R. Apply the Mathlib finite-presentation map limit factorization theorem to p and this morphism.",
+   "text": "Use the finite-presentation map limit factorization theorem to factor the transported map through one affine stage. The stage data supplies S, a and z together with the punctured-root chart isomorphism; compose the factor with the projection to P and use the pullback equation and the stage structural equation to obtain the required section identity over L.",
    "uses": [
     "lem-sbc-punctured-root-limit-presentation",
-    "lem-weil-pbc-finite-presentation-map-limit-factorization"
+    "lem-weil-pbc-finite-presentation-map-limit-factorization",
+    "def-pc-fibre-product"
    ],
    "elementary": false
-  },
-  {
-   "text": "The resulting index supplies S, a, z and the isomorphism d from its punctured root chart. Compose d with the descended map to E and the projection E -> P. The pullback condition and the descended map structure equation, followed by the equation d;t_j=k_S, prove the required equality over L. Retain the supplied etaleness and point equation.",
-   "uses": [
-    "def-pc-fibre-product",
-    "lem-sbc-punctured-root-limit-presentation"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
@@ -57,16 +49,15 @@
   "def-pc-fibre-product",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-structural-map",
-  "lem-sbc-punctured-root-base-change",
   "lem-sbc-punctured-root-limit-presentation",
   "lem-weil-pbc-finite-presentation-map-limit-factorization"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "K2",
+  "group": "T2",
   "document": "Stacks Project and Mathlib",
-  "place": "Tags 0BSK, 03Q9 and 05N9; canonical colimit comparison and root base change; Mathlib finite-presentation map limit factorization",
-  "note": "Retirement adaptation preserves the complete section-descent theorem signature. All new glue is proved; the adopted root-limit theorem and root base-change theorem have no sorry. No source-library edits."
+  "place": "Tags 0BSK, 03Q9 and 05N9; adopted source theorem proof and finite-presentation map limit factorization",
+  "note": "Retirement of the duplicate Sheaf module. The adopted WeilConjectures theorem is already fully proved; no source-library declarations are changed."
  },
  "mathlib_searches": [
   {
@@ -128,13 +119,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootSectionEtaleDescent",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedRootSectionEtaleDescent.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootSectionEtaleDescent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/PuncturedRootSectionEtaleDescent.lean",
   "declaration": "AlgebraicGeometry.Scheme.punctured_root_section_etale_descent",
-  "statement": "theorem punctured_root_section_etale_descent\n    {L U P : Scheme.{u}} (i : U ⟶ L) (π : P ⟶ U) [IsFinite π] [Etale π]\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    (n : ℕ)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (y : Spec R) (hy : ∀ x : Spec (.of Ω), barY x = y)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY)\n    (hs : let H := strictHenselizationRing barY\n      let g := b.hom f\n      let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C g)\n      let N := Spec (CommRingCat.of A)\n      let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n      let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n      ∃ s : V.toScheme ⟶ P, s ≫ π ≫ i = V.ι ≫ q ≫ Spec.map b ≫ φ) :\n    ∃ (S : CommRingCat.{u}) (a : R ⟶ S) (z : Spec S),\n      Etale (Spec.map a) ∧ (Spec.map a) z = y ∧\n      let g := a.hom f\n      let A := AdjoinRoot ((Polynomial.X : Polynomial S) ^ n - Polynomial.C g)\n      let N := Spec (CommRingCat.of A)\n      let q := Spec.map (CommRingCat.ofHom (algebraMap S A))\n      let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap S A g)\n      ∃ s : V.toScheme ⟶ P, s ≫ π ≫ i = V.ι ≫ q ≫ Spec.map a ≫ φ",
+  "statement": "theorem punctured_root_section_etale_descent\n    {L U P : Scheme.{u}} (i : U ⟶ L) (π : P ⟶ U) [IsFinite π] [Etale π]\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    (n : ℕ)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (y : Spec R) (hy : ∀ x : Spec (.of Ω), barY x = y)\n    (b : R ⟶ strictHenselization barY)\n    (hb : Spec.map b = strictLocalizationToBase barY)\n    (hs : let H := strictHenselization barY\n      let g := b.hom f\n      let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C g)\n      let N := Spec (CommRingCat.of A)\n      let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n      let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n      ∃ s : V.toScheme ⟶ P, s ≫ π ≫ i = V.ι ≫ q ≫ Spec.map b ≫ φ) :\n    ∃ (S : CommRingCat.{u}) (a : R ⟶ S) (z : Spec S),\n      Etale (Spec.map a) ∧ (Spec.map a) z = y ∧\n      let g := a.hom f\n      let A := AdjoinRoot ((Polynomial.X : Polynomial S) ^ n - Polynomial.C g)\n      let N := Spec (CommRingCat.of A)\n      let q := Spec.map (CommRingCat.ofHom (algebraMap S A))\n      let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap S A g)\n      ∃ s : V.toScheme ⟶ P, s ≫ π ≫ i = V.ι ≫ q ≫ Spec.map a ≫ φ",
   "branch": "sheaf-dag",
   "by": "P4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-21 (T2): retired the Sheaf twin; this node now points to the adopted source theorem."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -149,12 +141,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-0f651",
-  "group": "K2",
+  "reviewer": "C-5c6a5",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261020T221230-L-4161573",
+  "landing": "20261020T233222-L-907515",
   "kind": "interface",
-  "note": "independent cc review: retired stub + node re-pointed to WeilConjectures twin punctured_root_limit_presentation (statement verbatim); adapted consumer PuncturedRootSectionEtaleDescent (signature identical to live, compiles 5.2 s, axioms standard) vs original consumer failing on the stub (unknown identifier)"
+  "note": "independent cc review: retired Sheaf stub (compiles, no importers) and re-pointed node lean.statement matched verbatim against the proved WeilConjectures twin (axioms standard); proof/proof_deps matched against the twin's proof"
  },
  "lean_audit": {
   "master": {
