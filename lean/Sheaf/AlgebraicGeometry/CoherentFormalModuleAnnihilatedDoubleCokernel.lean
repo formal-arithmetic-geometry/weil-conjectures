@@ -13,8 +13,8 @@ import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 

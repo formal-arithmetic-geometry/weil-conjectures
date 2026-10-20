@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import WeilConjectures.RingTheory.LocalizationColimitPrincipalLocalizations
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent
 import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation

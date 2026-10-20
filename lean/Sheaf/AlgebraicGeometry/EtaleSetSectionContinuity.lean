@@ -7,11 +7,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
-public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
-import Sheaf.AlgebraicGeometry.EtaleSetSectionLift
-import Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionLift
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionEventualEquality
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-!

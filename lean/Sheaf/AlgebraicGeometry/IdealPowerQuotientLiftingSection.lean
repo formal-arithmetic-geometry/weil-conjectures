@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection
 import Sheaf.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree

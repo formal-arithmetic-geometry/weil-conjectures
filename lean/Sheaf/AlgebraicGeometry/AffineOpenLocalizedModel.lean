@@ -5,14 +5,14 @@ Authors: SHEAF group B2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.AlgebraicGeometry.AffineModuleComplexRepresentative
-import Sheaf.AlgebraicGeometry.AffineOpenPseudoCoherentLocalizationPoint
+import WeilConjectures.AlgebraicGeometry.AffineModuleComplexRepresentative
+import WeilConjectures.AlgebraicGeometry.AffineOpenPseudoCoherentLocalizationPoint
 import Sheaf.AlgebraicGeometry.AffinePrincipalCoverQuasiIsoDetection
 
 /-! # Affine module models on a quasi-compact open

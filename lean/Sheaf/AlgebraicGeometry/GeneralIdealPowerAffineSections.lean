@@ -6,7 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 import all Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
 
 /-! # Affine sections of recursive powers of a quasi-coherent ideal module

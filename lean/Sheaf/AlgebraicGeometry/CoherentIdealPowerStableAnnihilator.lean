@@ -6,7 +6,7 @@ Authors: SHEAF group N3
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 
@@ -14,8 +14,8 @@ import WeilConjectures.AlgebraicGeometry.AnnihilatorSubsheaf
 import WeilConjectures.AlgebraicGeometry.AnnihilatorAffineCriterion
 import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 import Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator

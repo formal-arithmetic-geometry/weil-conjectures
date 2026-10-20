@@ -6,7 +6,7 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
-import Sheaf.AlgebraicGeometry.AffineQCohComplexModel
+import WeilConjectures.AlgebraicGeometry.AffineQCohComplexModel
 import Sheaf.AlgebraicGeometry.AffineExtensionSectionsModelMate
 
 /-! # Unit compatibility of affine extension and sections

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftExists
 import Sheaf.AlgebraicGeometry.CoherentMapTorsionCompletionExt
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 

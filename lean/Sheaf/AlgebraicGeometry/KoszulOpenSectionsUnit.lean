@@ -5,7 +5,7 @@ Authors: SHEAF group N3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import Mathlib.Algebra.Homology.SingleHomology

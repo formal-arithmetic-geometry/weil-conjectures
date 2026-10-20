@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import WeilConjectures.AlgebraicGeometry.AffineCoverModuleTensorFlatCriterion
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Affine module comparisons for eventual flatness

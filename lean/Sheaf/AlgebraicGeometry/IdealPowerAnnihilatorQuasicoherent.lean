@@ -6,7 +6,7 @@ Authors: SHEAF group F3
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 import WeilConjectures.AlgebraicGeometry.AnnihilatorQuasicoherent

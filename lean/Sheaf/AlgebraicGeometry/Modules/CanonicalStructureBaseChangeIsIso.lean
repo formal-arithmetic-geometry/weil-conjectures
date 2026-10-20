@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
+import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 

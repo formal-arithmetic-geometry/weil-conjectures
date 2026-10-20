@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.AmpleAffineLimitDescent
 import Sheaf.AlgebraicGeometry.InvertibleAffineLimitDescent
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.LimitFibreProducts
 import Sheaf.AlgebraicGeometry.LimitResidueField
 import Sheaf.AlgebraicGeometry.NoetherianFibreAmpleNeighbourhood

@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Over.Pullback

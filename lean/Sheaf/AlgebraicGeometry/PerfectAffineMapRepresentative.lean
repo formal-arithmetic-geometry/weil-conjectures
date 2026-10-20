@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.AffineLocalizedDerivedSheafification
+import WeilConjectures.AlgebraicGeometry.AffineLocalizedDerivedSheafification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-! # Representing affine perfect derived arrows by chain maps

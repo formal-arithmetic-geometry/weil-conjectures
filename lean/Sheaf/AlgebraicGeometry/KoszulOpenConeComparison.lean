@@ -5,7 +5,7 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-! # The cone of the negative Koszul tail augmentation

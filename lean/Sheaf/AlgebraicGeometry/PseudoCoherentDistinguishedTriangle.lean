@@ -5,8 +5,8 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.AlgebraicGeometry.AffineLocalizedDerivedSheafification
+public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+import WeilConjectures.AlgebraicGeometry.AffineLocalizedDerivedSheafification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf

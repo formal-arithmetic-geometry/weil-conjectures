@@ -98,13 +98,14 @@
  "unit": "sk-thm-iff",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionAffineEventualEquality.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleSetSectionAffineEventualEquality.lean",
   "declaration": "AlgebraicGeometry.etaleSetSectionAffineEventualEquality",
   "statement": "theorem etaleSetSectionAffineEventualEquality\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1)))\n    (W₀ : (D.obj (op i₀)).Etale) [QuasiCompact W₀.hom] [QuasiSeparated W₀.hom]\n    [IsAffine W₀.left]\n    (j k : Over (op i₀)) (s : ((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.obj\n        (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W₀)))\n    (t : ((Scheme.etaleSetPullback (D.map k.hom)).obj G).obj.obj\n        (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map k.hom)).obj W₀)))\n :\n    (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom)\n      (c.π.app (op i₀)) (c.w j.hom) G W₀) s =\n      (etaleSetSectionComparison (c.π.app k.left) (D.map k.hom)\n        (c.π.app (op i₀)) (c.w k.hom) G W₀) t →\n    ∃ (l : Over (op i₀)) (a : l ⟶ j) (b : l ⟶ k),\n      (etaleSetSectionComparison (D.map a.left) (D.map j.hom) (D.map l.hom)\n          ((D.map_comp a.left j.hom).symm.trans\n            (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) a.w)) G W₀) s =\n        (etaleSetSectionComparison (D.map b.left) (D.map k.hom) (D.map l.hom)\n          ((D.map_comp b.left k.hom).symm.trans\n            (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) b.w)) G W₀) t",
   "branch": "sheaf-dag",
   "by": "C2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

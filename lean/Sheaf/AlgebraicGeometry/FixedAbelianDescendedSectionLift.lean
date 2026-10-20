@@ -6,7 +6,7 @@ Authors: SHEAF group R2
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleSetSectionLift
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionLift
 import all WeilConjectures.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison
 
 /-! # Fixed-coefficient lifting on a descended qcqs étale object

@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 import Sheaf.Paper.FiniteStructureTensorPowersSupported
 import Sheaf.AlgebraicGeometry.GrothendieckExistence
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 

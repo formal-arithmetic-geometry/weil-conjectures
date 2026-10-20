@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.RingTheory.FiniteIffFormalGlueing
 import Sheaf.RingTheory.FormalGlueingIsogeny
@@ -26,7 +26,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesLocalExactness
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.CoherentFiniteType
 
 /-! # Existence of outgoing coherent formal algebraizations

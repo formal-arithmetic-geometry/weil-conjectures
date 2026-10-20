@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.KoszulOpenConeComparison
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnit

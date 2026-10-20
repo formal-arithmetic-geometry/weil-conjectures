@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! A single-degree reduction of quasi-coherent cohomology for pseudo-coherent complexes.

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 import Sheaf.AlgebraicGeometry.ProperFlatSingleOpenNoetherianComparison
 import Sheaf.AlgebraicGeometry.NoetherianProperBoundedCoherentImage
 import Sheaf.AlgebraicGeometry.NoetherianBoundedCoherentPseudoCoherent

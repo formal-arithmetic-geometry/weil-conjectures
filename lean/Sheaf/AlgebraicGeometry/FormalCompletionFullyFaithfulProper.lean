@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.CoherentSheafHom
 import Sheaf.AlgebraicGeometry.CompletionInternalHom
 import Sheaf.AlgebraicGeometry.FormalFunctionsCompleteBase
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.FormalCompletionMapInjectiveProper

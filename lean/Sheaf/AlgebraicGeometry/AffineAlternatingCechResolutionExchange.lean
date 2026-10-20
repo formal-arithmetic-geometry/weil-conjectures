@@ -6,7 +6,7 @@ Authors: SHEAF group R3
 module
 public import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.AffineOpenPushforwardExchange
+import WeilConjectures.AlgebraicGeometry.AffineOpenPushforwardExchange
 
 @[expose] public section
 set_option autoImplicit false

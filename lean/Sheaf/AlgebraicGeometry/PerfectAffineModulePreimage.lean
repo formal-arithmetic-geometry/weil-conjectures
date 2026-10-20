@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Mathlib.CategoryTheory.Localization.Equivalence
 import Sheaf.AlgebraicGeometry.QuasiCompactFiniteTorDimension
-import Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion
+import WeilConjectures.AlgebraicGeometry.AffinePseudoCoherentCriterion
 import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
 import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 

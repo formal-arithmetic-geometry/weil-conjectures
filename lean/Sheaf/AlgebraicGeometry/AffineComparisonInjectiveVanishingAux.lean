@@ -16,8 +16,7 @@ import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
 import Sheaf.RingTheory.IndEtaleStability
 import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 import Sheaf.AlgebraicGeometry.FibreProductLimit
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.CategoryTheory.InjectiveSheafCechAcyclic
+import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimitStatement
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison

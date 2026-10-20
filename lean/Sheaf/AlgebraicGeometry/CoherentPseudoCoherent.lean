@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentAffineFreeResolution
 

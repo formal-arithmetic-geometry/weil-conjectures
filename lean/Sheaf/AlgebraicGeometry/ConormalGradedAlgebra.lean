@@ -18,7 +18,7 @@ public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Mathlib.CategoryTheory.Abelian.Images
 import Mathlib.LinearAlgebra.Quotient.Basic
 import Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -59,7 +59,6 @@ import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 /-!
 # The conormal graded algebra of a closed immersion
 

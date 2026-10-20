@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Limits
-public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.ProperFinitePresentationClosedLimit
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit

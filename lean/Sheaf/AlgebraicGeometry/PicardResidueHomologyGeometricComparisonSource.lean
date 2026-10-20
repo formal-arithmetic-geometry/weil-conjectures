@@ -13,12 +13,13 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
+public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 import Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison
 import Sheaf.AlgebraicGeometry.PicardResidueHomologySourceFibreComparison
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Geometric naturality after passing to residue homology
 

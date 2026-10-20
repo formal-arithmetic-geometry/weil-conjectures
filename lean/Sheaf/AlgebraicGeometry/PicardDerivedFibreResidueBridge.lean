@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
+public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.DerivedFiberCohomologyFunctor
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedCoefficientMap
@@ -18,6 +18,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueModelData
 import Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridgeCore
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! A common affine residue model bridge for the derived fibre comparison.
 

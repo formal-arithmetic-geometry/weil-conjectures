@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence

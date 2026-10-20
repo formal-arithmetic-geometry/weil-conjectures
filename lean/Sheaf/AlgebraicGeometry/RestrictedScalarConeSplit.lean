@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
+public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
 
 /-! # A scalar cone splits after restriction
 

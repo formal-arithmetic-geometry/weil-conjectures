@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic

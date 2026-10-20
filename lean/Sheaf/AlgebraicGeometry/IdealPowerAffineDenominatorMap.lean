@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.LinearAlgebra.Quotient.Basic
 import WeilConjectures.AlgebraicGeometry.AffineCompatibleDenominatorData
 import Sheaf.AlgebraicGeometry.IdealPowerNumeratorPresentation

@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.ChowFiniteType
 import Sheaf.AlgebraicGeometry.ClosedChowStage

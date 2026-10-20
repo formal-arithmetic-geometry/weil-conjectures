@@ -6,7 +6,7 @@ Authors: SHEAF group R3
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection
 import Sheaf.AlgebraicGeometry.IdealPowerTorsionFreeSectionRestriction

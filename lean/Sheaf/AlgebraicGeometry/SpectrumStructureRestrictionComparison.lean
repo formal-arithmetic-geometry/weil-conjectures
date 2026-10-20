@@ -5,7 +5,7 @@ Authors: SHEAF group S3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import all Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations

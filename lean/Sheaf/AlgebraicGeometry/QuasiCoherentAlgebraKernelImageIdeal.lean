@@ -9,13 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.RingTheory.Ideal.Maps
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-! # Kernels, images, generated ideals and quotients of quasi-coherent algebras

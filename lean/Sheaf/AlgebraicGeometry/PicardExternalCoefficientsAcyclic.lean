@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.Paper.HigherDirectImagePresheaf
 
 /-! # Acyclicity of external tensor coefficients

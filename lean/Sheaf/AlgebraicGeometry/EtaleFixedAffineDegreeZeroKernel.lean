@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison
-import Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 

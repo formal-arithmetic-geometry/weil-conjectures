@@ -7,9 +7,9 @@ module
 
 public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
-public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import all Sheaf.AlgebraicGeometry.KoszulOpenSystem
+import all WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 import Sheaf.AlgebraicGeometry.KoszulCechLocalizedDifferential
 
 /-! # The canonical Koszul-to-Čech comparison
