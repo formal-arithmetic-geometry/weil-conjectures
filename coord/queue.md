@@ -1,14 +1,15 @@
 # Work queue
 
-79 items; claim with `tools/claim.py next <group> [--stage N]`.
+81 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (27 clusters, 2184 modules)
+## Rework: quarantined by the upstream sync (29 clusters, 2154 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.CategoryTheory.RingedCechKoszulDualLimit` | 1 |  | error: Sheaf/CategoryTheory/RingedCechKoszulDualLimit.lean:452:11: error(lean.unknownIdentifier): Unknown constant `CochainComplex.telescopeShiftColimit` | Shea |
+| `Sheaf.AlgebraicGeometry.BoundedConstructibleTensorPreservation` | 1 |  | error: Sheaf/AlgebraicGeometry/BoundedConstructibleTensorPreservation.lean:84:10: error(lean.unknownIdentifier): Unknown identifier `constructible_of_iso` | She |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
 | `Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalLocalizedHomGerm.lean:57:6: error: Application type mismatch: The argument | ((Scheme.strictHenselizationStructuralMap |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
@@ -21,6 +22,8 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAcyclic` | 1 |  | error: Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAcyclic.lean:62:15: error(lean.unknownIdentifier): Unknown constant `AlgebraicGeometry.RingedSpace.modu |
 | `Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsoluteAux` | 1 |  | error: Sheaf/AlgebraicGeometry/RingedSpaceTensorPullbackAbsoluteAux.lean:1:0: error: import WeilConjectures.Algebra.Homology.KFlatPullback failed, environment a |
 | `Sheaf.AlgebraicGeometry.KoszulSelfExtConormalComparisonSurjection` | 1 |  | error: Sheaf/AlgebraicGeometry/KoszulSelfExtConormalComparisonSurjection.lean:66:23: error(lean.unknownIdentifier): Unknown constant `SheafOfModules.existsUniqu |
+| `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationFinite` | 1 |  | error: Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationFinite.lean:190:28: error(lean.unknownIdentifier): Unknown identifier `strictHenselization |
+| `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale` | 1 |  | error: Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationGenericEtale.lean:136:4: error(lean.unknownIdentifier): Unknown identifier `strictHenseliz |
 | `Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarExtCupInverseImage.lean:26:23: error(lean.unknownIdentifier): Unknown identifier `Field` | | Note: A public declaration `Fi |
 | `Sheaf.AlgebraicGeometry.SmoothDiagonalDualizingDeterminant` | 1 |  | error: Sheaf/AlgebraicGeometry/SmoothDiagonalDualizingDeterminant.lean:6:0: error: import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex failed, environme |
 | `Sheaf.Algebra.Homology.AffineTildeCoefficientPushforwardHomologyCoordinates` | 1 |  | error: Sheaf/Algebra/Homology/AffineTildeCoefficientPushforwardHomologyCoordinates.lean:31:25: error(lean.synthInstanceFailed): failed to synthesize instance of |
@@ -29,14 +32,13 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescentRepresentative.lean:51:10: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange` | 1 |  | error: Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison fail |
+| `Sheaf.AlgebraicGeometry.RawModuleScalarHomCompositeFormula` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarHomCompositeFormula.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors fa |
 | `Sheaf.AlgebraicGeometry.TensorRoofTransposition` | 1 |  | error: Sheaf/AlgebraicGeometry/TensorRoofTransposition.lean:106:9: error(lean.unknownIdentifier): Unknown identifier `Scheme` | | Note: A public declaration `Sc |
-| `Sheaf.RingTheory.ResidueFieldProjectiveDimensionDepth` | 1 |  | error: Sheaf/RingTheory/ResidueFieldProjectiveDimensionDepth.lean:1:0: error: import WeilConjectures.RingTheory.GlobalDimension failed, environment already cont |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 1 |  | error: Sheaf/Algebra/Homology/AffinePushforwardCohomologyEdgeIdentity.lean:5:0: error: import Sheaf.AlgebraicGeometry.AffineDerivedCohomologyPresentation failed |
-| `Sheaf.AlgebraicGeometry.AffineSpectrumUnitNormalization` | 1 |  | error: Sheaf/AlgebraicGeometry/AffineSpectrumUnitNormalization.lean:29:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irreduci |
-| `Sheaf.AlgebraicGeometry.FieldFibreHomology` | 1 |  | error: Sheaf/AlgebraicGeometry/FieldFibreHomology.lean:41:6: error: Application type mismatch: The argument | (derivedPullback g).obj (DerivedCategory.Q.obj K)  |
+| `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors faile |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/BaseChange/SmoothBaseChange.lean:1:0: error: import Sheaf.SixFunctors.ProEtale.BaseChange.Smooth |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 144 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 151 items.
 
 ## Stage 1: nodes to split (1)
 
