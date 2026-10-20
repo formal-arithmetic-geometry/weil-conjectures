@@ -28,7 +28,7 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 import WeilConjectures.RingTheory.RegularSequenceConormal
-import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
+import WeilConjectures.RingTheory.KoszulRegularSequenceDualComplex
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import WeilConjectures.RingTheory.FiniteFreeResolution
 import WeilConjectures.RingTheory.RingPseudoCoherent

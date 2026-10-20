@@ -203,7 +203,7 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-krd1952 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0BQZ: shift [-r], cohomology only in degree r, H^r=wedge^r N; consistent with citing lem-sc-koszul-regular-immersion-derived-hom (i_*(wedge^r N_i[-r])). Koszul complex and Koszul-regularity cited from def-weil-pbc-koszul-complex / def-weil-pbc-koszul-regular-sequence, not restated. Leaf exteriorPower.pairingDual read at Pairing.lean:64-74, exact; not in slopmaster2 sorry-free. FIX more, RETURN less: (C4/E) Step 3 sign was wrong: delivery said the evaluation map commutes up to (-1)^r, but under Stacks 0BQZ conventions it commutes exactly for r odd and up to sign for r even (checked r=1: both sides A -(-f_1)-> A, identity map); rewrote the sentence with the convention and the (-1)^n degree-wise correction to an honest complex isomorphism.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.RingTheory.KoszulRegularSequenceDualComplex",
+  "module": "WeilConjectures.RingTheory.KoszulRegularSequenceDualComplex",
   "declaration": "ExteriorAlgebra.exists_unique_koszul_conormal_comparison",
   "declarations": [
    "ExteriorAlgebra.exists_unique_koszul_conormal_comparison",
@@ -213,12 +213,13 @@
    "ExteriorAlgebra.koszul_conormal_comparison_change_generators",
    "ExteriorAlgebra.koszul_conormal_comparison_localization"
   ],
-  "file": "lean/Sheaf/RingTheory/KoszulRegularSequenceDualComplex.lean",
+  "file": "lean/WeilConjectures/RingTheory/KoszulRegularSequenceDualComplex.lean",
   "statement": "theorem exists_unique_koszul_conormal_comparison (A : Type uT) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) : ∃! φ : koszulDualComplex A r f ⟶ (HomologicalComplex.single (ModuleCat A) (ComplexShape.up ℕ) r).obj (koszulNormalDeterminant A I r), IsKoszulConormalComparison A I r f hf φ ∧ QuasiIso φ",
   "branch": "sheaf-dag",
-  "by": "E1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "S2",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Retire the duplicate Sheaf module in favor of the existing upstream proofs. All declarations listed here retain the same signatures except change_generators, whose upstream version proves the identical conclusion without the unused hregg hypothesis. All parent dependencies and the unit route remain valid."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -241,13 +242,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-b4752",
-  "group": "A4",
+  "reviewer": "C-5260e",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T045510-L-124009",
+  "landing": "20261020T233218-L-906547",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with node statements, cited Mathlib APIs, Stacks sources, change record, report, earlier return repairs, compilation and axiom checks."
+  "note": "independent cc review: retired Sheaf copy vs WeilConjectures twin (diff: header, two Mathlib imports, unused hregg dropped in change_generators); 3 node lean records vs twin statements; sole importer AlgebraicShriekCalculus one-line import swap compiled against the stub"
  }
 }

@@ -92,14 +92,15 @@
   "tool_uses": []
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.KoszulRegularSequenceDualComplex",
-  "file": "lean/Sheaf/RingTheory/KoszulRegularSequenceDualComplex.lean",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.KoszulRegularSequenceDualComplex",
+  "file": "lean/WeilConjectures/RingTheory/KoszulRegularSequenceDualComplex.lean",
   "declaration": "ExteriorAlgebra.intrinsic_ext_determinant_multiplication",
   "statement": "theorem intrinsic_ext_determinant_multiplication (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)] (I : Ideal A) (r : ℕ) (hex : ∃ f : Fin r → A, RingTheory.Sequence.IsKoszulRegular f ∧ Ideal.span (Set.range f) = I) : ∃ e : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r ≃ₗ[A] koszulNormalDeterminant A I r, ∀ (b : A ⧸ I) (x : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r), e ((Abelian.Ext.mk₀ (ModuleCat.ofHom (b • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))))).comp x (zero_add r)) = @SMul.smul (A ⧸ I) (⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent)) inferInstance b (e x)",
   "branch": "sheaf-dag",
-  "by": "Q3",
-  "date": "2026-10-13"
+  "by": "S2",
+  "date": "2026-10-21",
+  "note": "Retire the duplicate Sheaf module in favor of the existing upstream proofs. All declarations listed here retain the same signatures except change_generators, whose upstream version proves the identical conclusion without the unused hregg hypothesis. All parent dependencies and the unit route remain valid."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -132,13 +133,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-b4752",
-  "group": "A4",
+  "reviewer": "C-5260e",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T045510-L-124009",
+  "landing": "20261020T233218-L-906547",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with node statements, cited Mathlib APIs, Stacks sources, change record, report, earlier return repairs, compilation and axiom checks."
+  "note": "independent cc review: retired Sheaf copy vs WeilConjectures twin (diff: header, two Mathlib imports, unused hregg dropped in change_generators); 3 node lean records vs twin statements; sole importer AlgebraicShriekCalculus one-line import swap compiled against the stub"
  }
 }

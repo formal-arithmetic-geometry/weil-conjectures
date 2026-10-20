@@ -108,14 +108,15 @@
   "tool_uses": []
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.KoszulRegularSequenceDualComplex",
-  "file": "lean/Sheaf/RingTheory/KoszulRegularSequenceDualComplex.lean",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.KoszulRegularSequenceDualComplex",
+  "file": "lean/WeilConjectures/RingTheory/KoszulRegularSequenceDualComplex.lean",
   "declaration": "ExteriorAlgebra.intrinsic_ext_determinant_roof",
   "statement": "theorem intrinsic_ext_determinant_roof\n    (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]\n    (I : Ideal A) (r : ℕ)\n    (hex : ∃ f : Fin r → A,\n      RingTheory.Sequence.IsKoszulRegular f ∧ Ideal.span (Set.range f) = I) :\n    ∃ e : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r ≃ₗ[A]\n      koszulNormalDeterminant A I r,\n    ∀ (f : Fin r → A) (_hreg : RingTheory.Sequence.IsKoszulRegular f)\n        (hf : Ideal.span (Set.range f) = I)\n        (ε : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶\n          (CochainComplex.singleFunctor (ModuleCat A) 0).obj (ModuleCat.of A (A ⧸ I)))\n        [QuasiIso ε],\n        (∀ x : ⋀[A]^0 (Fin r →₀ A),\n          (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0\n            (ModuleCat.of A (A ⧸ I))).hom\n            (ε.f 0 (((koszulComplex A r f).extendXIso\n              ComplexShape.embeddingDownNat (i := 0) rfl).inv x)) =\n          Ideal.Quotient.mk I (exteriorPower.zeroEquiv A (Fin r →₀ A) x)) →\n        ∀ (z : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶\n            (CochainComplex.singleFunctor (ModuleCat A) (-(r : ℤ))).obj (ModuleCat.of A A))\n          (v : Fin r → (Fin r →₀ A)),\n          exteriorPower.pairingDual (A ⧸ I) I.Cotangent r\n            (e ((Abelian.Ext.homLinearEquiv (R := A)).symm\n              (inv (DerivedCategory.Q.map ε) ≫ DerivedCategory.Q.map z ≫\n                ((DerivedCategory.singleFunctors (ModuleCat A)).shiftIso\n                  (r : ℤ) (-(r : ℤ)) 0 (add_neg_cancel (r : ℤ))).inv.app\n                    (ModuleCat.of A A))))\n            (exteriorPower.ιMulti (A ⧸ I) r\n              (fun i ↦ koszulConormalVector A I r f hf (v i))) =\n            (-1 : A ⧸ I) ^ (r * (r - 1) / 2) *\n            Ideal.Quotient.mk I\n              ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))\n                (ModuleCat.of A A)).hom\n                (z.f (-(r : ℤ)) (((koszulComplex A r f).extendXIso\n                  ComplexShape.embeddingDownNat (i := r) rfl).inv\n                (exteriorPower.ιMulti A r v))))",
   "branch": "sheaf-dag",
-  "by": "A4",
-  "date": "2026-10-13"
+  "by": "S2",
+  "date": "2026-10-21",
+  "note": "Retire the duplicate Sheaf module in favor of the existing upstream proofs. All declarations listed here retain the same signatures except change_generators, whose upstream version proves the identical conclusion without the unused hregg hypothesis. All parent dependencies and the unit route remain valid."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -148,14 +149,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-b4752",
-  "group": "A4",
+  "reviewer": "C-5260e",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T045510-L-124009",
+  "landing": "20261020T233218-L-906547",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with node statements, cited Mathlib APIs, Stacks sources, change record, report, earlier return repairs, compilation and axiom checks."
+  "note": "independent cc review: retired Sheaf copy vs WeilConjectures twin (diff: header, two Mathlib imports, unused hregg dropped in change_generators); 3 node lean records vs twin statements; sole importer AlgebraicShriekCalculus one-line import swap compiled against the stub"
  },
  "statement_change": {
   "date": "2026-10-13",
