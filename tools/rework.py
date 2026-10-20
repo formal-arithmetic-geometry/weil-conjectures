@@ -33,6 +33,8 @@ Rules (the human, 2026-10-20):
 Usage:
   tools/rework.py status              the rows, which are open, which wait for deeper rework, and what they block
   tools/rework.py reconcile           drop the rows verified green (refs/heads/sheaf-verified has the original file)
+  tools/rework.py autorestore         compile each new root (its quarantined imports are back) as it is; restore those
+                                      that compile in one landing, give the others their own error (separate items)
 """
 from __future__ import annotations
 import collections, datetime, pathlib, re, subprocess, sys, time
@@ -343,11 +345,94 @@ def reconcile(commit: bool = True) -> int:
     return len(done)
 
 
+TRIED = ROOT / "local" / "rework-tried.json"   # module -> blob of the quarantined text autorestore compiled without success
+
+
+def autorestore(workers: int = 4, limit: int = 60) -> int:
+    """The human, 2026-10-20: once a root is back, its dependents are no longer the cluster worker's job. Every rework
+    module that imports no open rework module any more (a new root) and that no group has claimed is compiled as it
+    is, alone, against the last green build (tools/lean_file.sh, 60 s, private mirror RW); those that compile go back
+    to their original paths in ONE landing (group S) with their root import lines, verified by the next build and closed
+    by `reconcile`; the others stay rework items with their own error as `cause` (each its own item, in parallel).
+    A quarantined text is compiled at most once (local/rework-tried.json). Run by ~/cc1/buildloop.sh after a green build."""
+    import concurrent.futures, hashlib, json, os, shutil
+    import landing as ld, mergelock
+    rows = load()
+    live = {m for m in rows if not landed(m)}
+    if not live:
+        return 0
+    rimp = {m: i & live for m, i in rework_imports({m: rows[m] for m in live}).items()}
+    try:
+        tried = json.loads(TRIED.read_text())
+    except (OSError, ValueError):
+        tried = {}
+    def blob(m):
+        p = ROOT / (rows[m].get("quarantine") or qpath(m))
+        return hashlib.sha1(p.read_bytes()).hexdigest() if p.is_file() else None
+    claimed = lambda m: (ROOT / "coord" / "claims" / (m + ".lock")).is_file()   # noqa: E731
+    cand = sorted(m for m in live if not (rimp.get(m, set()) - {m}) and not claimed(m)
+                  and tried.get(m) != blob(m) and not (rows[m].get("cause") or "").startswith("error:"))[:limit]
+    if not cand:
+        return 0
+    box = li.LEAN / ".sandbox" / "rework"
+    def compile_one(m):
+        rel = opath(m)[5:]
+        dst = box / rel
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / (rows[m].get("quarantine") or qpath(m)), dst)
+        r = subprocess.run(["bash", str(ROOT / "tools" / "lean_file.sh"), str(dst)], cwd=ROOT, capture_output=True, text=True,
+                           env=dict(os.environ, SHEAF_GROUP="RW"), timeout=900)
+        out = r.stdout + r.stderr
+        errs = [l for l in out.splitlines() if ": error" in l or l.startswith("error")]
+        return m, r.returncode == 0 and not errs, (errs[0] if errs else out.strip().splitlines()[-1:] or ["?"])[0] if not (r.returncode == 0 and not errs) else ""
+    t = time.time()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
+        res = list(ex.map(compile_one, cand))
+    ok = [m for m, good, _ in res if good]
+    bad = {m: e for m, good, e in res if not good}
+    with mergelock.merge_lock():
+        rows = load()
+        paths = ["coord/rework.tsv"]
+        if ok:
+            with ld.tree_lock():
+                prev = {}
+                for m in ok:
+                    rel = opath(m)[5:]
+                    if (li.LEAN / rel).exists():
+                        continue
+                    prev[rel] = None
+                    (li.LEAN / rel).parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(ROOT / (rows[m].get("quarantine") or qpath(m)), li.LEAN / rel)
+                    for rr, text in roots_to_restore(m).items():
+                        if rr not in prev:
+                            prev[rr] = (li.LEAN / rr).read_bytes()
+                        (li.LEAN / rr).write_text(add_import_line((li.LEAN / rr).read_text(), m))
+                if prev:
+                    ld.new_record("S", prev, "rework autorestore: quarantined modules that compile as they are, back in the library",
+                                  kind="interface")
+                    paths += ["lean/" + r for r in prev]
+        for m, e in bad.items():
+            if m in rows:
+                rows[m]["cause"] = ("error: " + re.sub(r"\s+", " ", e))[:300]
+            tried[m] = blob(m)
+        save(rows)
+        TRIED.write_text(json.dumps(tried))
+        git("add", "-A", "--", *paths)
+        git("-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m",
+            f"rework autorestore: {len(ok)} module(s) compile as they are and go back, {len(bad)} stay with their own error"
+            + "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", *paths, check=False)
+    print(f"rework autorestore: {len(cand)} new root(s) compiled in {time.time() - t:.0f} s; {len(ok)} back in the library, "
+          f"{len(bad)} stay rework items with their own error")
+    return len(ok)
+
+
 def main() -> int:
     a = sys.argv[1:]
     cmd = a[0] if a else "status"
     if cmd == "reconcile":
         reconcile(); return 0
+    if cmd == "autorestore":
+        autorestore(); return 0
     if cmd == "status":
         t = time.time()
         rows = load()

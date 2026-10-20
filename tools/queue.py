@@ -198,6 +198,8 @@ def main() -> int:
     rw_open, blocked_n, blocked_m, rw_clusters = [], set(), set(), []
     if rw_rows:
         rw_clusters = rework.clusters(rw_rows)   # the human, 2026-10-20: one item per cluster (its root), bottom-up
+        # a new root not compiled yet waits for `tools/rework.py autorestore` (it may come back by itself)
+        rw_clusters = [c for c in rw_clusters if (rw_rows[c["item"]].get("cause") or "").startswith("error:")]
         rw_open = [c["item"] for c in rw_clusters]
         blocked_n, blocked_m, _ = rework.blocked(g, imports, rw_rows)
         nb = (len(s1), len(s2), len(items3))
