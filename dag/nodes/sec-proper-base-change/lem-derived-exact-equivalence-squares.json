@@ -1,0 +1,128 @@
+{
+ "id": "lem-derived-exact-equivalence-squares",
+ "kind": "statement",
+ "title": "Compatible derived squares under exact equivalences",
+ "statement": "Let B,Bprime,H,Hprime be abelian categories with chosen derived categories, E:B equivalent to Bprime and G:H equivalent to Hprime additive equivalences, and L:B to H, Lprime:Bprime to Hprime, R:H to B and Rprime:Hprime to Bprime additive functors. Fix universal left-derived pairs (LF,epsilon),(LFprime,epsilonprime) on complex localization, universal right-derived pairs (RF,eta),(RFprime,etaprime), and ordinary natural isomorphisms L then G isomorphic to E then Lprime and R then E isomorphic to G then Rprime. There are natural isomorphisms LF then DG isomorphic to DE then LFprime and RF then DE isomorphic to DG then RFprime. Their evaluations on complexes commute with the supplied derived comparisons, the ordinary comparison isomorphisms, and the canonical localization factorizations of E and G. More precisely, the compatible comparisons exist as an inhabited structure of [def-derived-exact-equivalence-square-data], including the equivalences and the localization factors as fields; the coefficient equivalence is naturally isomorphic to the canonical induced derived equivalence.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "current order 1316, Koszul-to-quotient comparison, including its unit equation",
+  "external": [
+   {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul"
+   },
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099L and 099M, derived adic completion"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-derived-exact-equivalence-square-data"
+ ],
+ "proof": [
+  {
+   "text": "Precomposition by an equivalence transports universality of Kan extensions. Postcomposition by an equivalence preserves and reflects their universal extension objects. Apply the Mathlib universal-extension equivalences to the ordinary comparison squares.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Uniqueness of universal right Kan extensions gives the left-derived square; uniqueness of universal left Kan extensions gives the right-derived square. Their universal factorization equations give the two natural transformation identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply this to the induced equivalences of cochain complexes and derived categories. Keep the degreewise complex comparison explicit and expand only the canonical associators and localization factorizations. Evaluation at each complex and cancellation of inverse factorization isomorphisms yield the two displayed equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "Formal comparison and unit-normalization details of the recorded Koszul/quotient reconstruction; proved from the existing universal and reflector interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules the unit of derived completion is the strict quotient cone followed by the universal derived inverse limit comparison; scalar preserving coefficient equivalences preserve Koszul completion and quotient towers",
+   "results": "AdicCompletion.module; AdicCompletion; SheafOfModules.hasLimit; no matching sheaf-derived completion statement",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Ordinary completion and sheaf limits do not identify the specified derived units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of coefficient module categories preserves strict quotient towers and their derived completion units",
+   "results": "AdicCompletion.congr; AdicCompletion.congr_apply; IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-21",
+   "verdict": "No exact match for the sheaf coefficient presentation or its derived unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "CategoryTheory.Functor.leftDerivedUnique in Mathlib.CategoryTheory.Functor.Derived.LeftDerived",
+   "date": "2026-10-21",
+   "verdict": "Useful universal comparison API, but no concrete completed-sheaf unit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*[Uu]nit|[Kk]oszul.*completion|[Cc]ompletion.*[Ee]quiv; preservesLimitNatIso|isUniversalPrecompEquiv|leftDerivedUnique|rightDerivedUnique",
+   "results": "No sheaf completion-unit theorem in Mathlib. KanExtension.Basic supplies LeftExtension.isUniversalPrecompEquiv and RightExtension.isUniversalPrecompEquiv; Derived.LeftDerived/RightDerived supply uniqueness; Limits.Preserves.Limits supplies preservesLimitNatIso.",
+   "date": "2026-10-21",
+   "verdict": "The generic Kan-extension APIs and preservation-of-limit comparisons are reused; the stated concrete compatibility results are absent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulQuotientComparison",
+  "date": "2026-10-21",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "last paragraph: the comparison with intrinsic completion, including the completion unit",
+   "via": [
+    "lem-weil-pbc-completed-koszul-quotient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactEquivalenceDerivedSquares",
+  "file": "lean/Sheaf/CategoryTheory/ExactEquivalenceDerivedSquares.lean",
+  "declaration": "CategoryTheory.exactEquivalenceDerivedSquares",
+  "statement": "theorem exactEquivalenceDerivedSquares\n    {B B' H H' : Type*} [Category* B] [Category* B']\n    [Category* H] [Category* H'] [Abelian B] [Abelian B']\n    [Abelian H] [Abelian H'] [HasDerivedCategory B] [HasDerivedCategory B']\n    [HasDerivedCategory H] [HasDerivedCategory H']\n    (E : B ≌ B') (G : H ≌ H') [E.functor.Additive] [G.functor.Additive]\n    (L : B ⥤ H) (L' : B' ⥤ H') [L.Additive] [L'.Additive]\n    (R : H ⥤ B) (R' : H' ⥤ B') [R.Additive] [R'.Additive]\n    (LF : DerivedCategory B ⥤ DerivedCategory H)\n    (LF' : DerivedCategory B' ⥤ DerivedCategory H')\n    (RF : DerivedCategory H ⥤ DerivedCategory B)\n    (RF' : DerivedCategory H' ⥤ DerivedCategory B')\n    (ε : DerivedCategory.Q ⋙ LF ⟶\n      L.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (ε' : DerivedCategory.Q ⋙ LF' ⟶\n      L'.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (η : R.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF)\n    (η' : R'.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF')\n    [LF.IsRightKanExtension ε] [LF'.IsRightKanExtension ε']\n    [RF.IsLeftKanExtension η] [RF'.IsLeftKanExtension η']\n    (eL : L ⋙ G.functor ≅ E.functor ⋙ L')\n    (eR : R ⋙ E.functor ≅ G.functor ⋙ R') :\n    Nonempty (ExactEquivalenceDerivedSquareData E G L L' R R'\n      LF LF' RF RF' ε ε' η η' eL eR)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261020T230731-L-605952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261020T230731-L-605952",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

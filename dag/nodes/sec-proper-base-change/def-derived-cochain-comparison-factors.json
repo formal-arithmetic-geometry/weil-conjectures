@@ -1,0 +1,117 @@
+{
+ "id": "def-derived-cochain-comparison-factors",
+ "kind": "definition",
+ "title": "Localization comparison for an additive functor on complexes",
+ "statement": "For abelian categories B,H with chosen derived categories as in [def-weil-abstract-derived-category] and an additive functor F from B to H, define the canonical natural isomorphism from F on complexes followed by complex localization to homotopy quotient followed by F on homotopy categories and homotopy localization. It is the composite of the standard quotient/localization and mapped-homotopy-category factorization isomorphisms and associators.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "current order 1316, Koszul-to-quotient comparison, including its unit equation",
+  "external": [
+   {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul"
+   },
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099L and 099M, derived adic completion"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Compose the inverse quotient/localization comparison, the mapped-homotopy-category factorization comparison and the necessary associators.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "Formal comparison and unit-normalization details of the recorded Koszul/quotient reconstruction; proved from the existing universal and reflector interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules the unit of derived completion is the strict quotient cone followed by the universal derived inverse limit comparison; scalar preserving coefficient equivalences preserve Koszul completion and quotient towers",
+   "results": "AdicCompletion.module; AdicCompletion; SheafOfModules.hasLimit; no matching sheaf-derived completion statement",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Ordinary completion and sheaf limits do not identify the specified derived units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of coefficient module categories preserves strict quotient towers and their derived completion units",
+   "results": "AdicCompletion.congr; AdicCompletion.congr_apply; IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-21",
+   "verdict": "No exact match for the sheaf coefficient presentation or its derived unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "CategoryTheory.Functor.leftDerivedUnique in Mathlib.CategoryTheory.Functor.Derived.LeftDerived",
+   "date": "2026-10-21",
+   "verdict": "Useful universal comparison API, but no concrete completed-sheaf unit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*[Uu]nit|[Kk]oszul.*completion|[Cc]ompletion.*[Ee]quiv; preservesLimitNatIso|isUniversalPrecompEquiv|leftDerivedUnique|rightDerivedUnique",
+   "results": "No sheaf completion-unit theorem in Mathlib. KanExtension.Basic supplies LeftExtension.isUniversalPrecompEquiv and RightExtension.isUniversalPrecompEquiv; Derived.LeftDerived/RightDerived supply uniqueness; Limits.Preserves.Limits supplies preservesLimitNatIso.",
+   "date": "2026-10-21",
+   "verdict": "The generic Kan-extension APIs and preservation-of-limit comparisons are reused; the stated concrete compatibility results are absent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulQuotientComparison",
+  "date": "2026-10-21",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "last paragraph: the comparison with intrinsic completion, including the completion unit",
+   "via": [
+    "lem-weil-pbc-completed-koszul-quotient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactEquivalenceDerivedSquares",
+  "file": "lean/Sheaf/CategoryTheory/ExactEquivalenceDerivedSquares.lean",
+  "declaration": "CategoryTheory.derivedCochainComparisonFactors",
+  "statement": "def derivedCochainComparisonFactors :\n    F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ≅\n      HomotopyCategory.quotient B (.up ℤ) ⋙\n        (F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261020T230731-L-605952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261020T230731-L-605952",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

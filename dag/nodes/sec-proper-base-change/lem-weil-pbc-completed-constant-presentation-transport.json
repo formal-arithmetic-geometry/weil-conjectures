@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-completed-constant-presentation-transport",
+ "kind": "statement",
+ "title": "Joint transport of the completed quotient and Koszul presentations",
+ "statement": "Let T be a scheme and d a Noetherian adic coefficient datum over A as in [def-weil-pbc-adic-coefficient-datum]. There is an equivalence F from the actual completed-coefficient derived category to the derived category over the small-site constant completed ring. For every derived object K, F carries the actual total derived inverse limit of its strict quotient tower to constant quotient completion, carrying the actual constant/limit-adjunction unit followed by the specified strict derived quotient augmentation to the constant completion unit. For every finite list a generating the adic ideal and every complex C, the same F carries the localized intrinsic Koszul fiber of [def-weil-pbc-intrinsic-completion] to constant quotient completion of F(Q(C)), carrying its specified fiber unit to the same completion unit. No completeness assumption on K or C is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "current order 1316, Koszul-to-quotient comparison, including its unit equation",
+  "external": [
+   {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul"
+   },
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099L and 099M, derived adic completion"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "prop-weil-pbc-rlim-functoriality",
+  "def-weil-pbc-completed-constant-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose the scalar-preserving completed-ring and module equivalences and the normalized strict quotient-tower comparison.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-coefficient-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical native and constant localizations and their universal derived pairs. Take the induced equivalences on complexes and derived categories. The ordinary quotient-tower comparison and preservation of inverse limits induce compatible left- and right-derived comparison squares.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a native K-flat representative of K. Normalize the actual quotient-completion unit and the constant quotient-completion unit as localized ordinary limit cones followed by their universal inverse-limit comparisons. Their ordinary cones agree because all finite projections agree.",
+   "uses": [
+    "lem-weil-pbc-completed-quotient-unit-normalization",
+    "lem-constant-completion-unit-normalization",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the generic normalized-completion transport API, keeping all ordinary and derived functors abstract in its unit calculation. The right-derived comparison equation identifies the two normalized limit-cone maps. The left-derived comparison equation identifies their reduction counits. The actual reduction counit is invertible on the chosen K-flat complex; cancellation therefore identifies the completion units. Transport this comparison along the realization isomorphism to K.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The scalar-preserving Koszul comparison gives the second clause for the same derived equivalence, using its canonical localization factorization.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-constant-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-constant-coefficient-equivalence",
+  "lem-derived-exact-equivalence-squares",
+  "lem-weil-pbc-completed-quotient-unit-normalization",
+  "lem-constant-completion-unit-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-completed-koszul-constant-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "Formal comparison and unit-normalization details of the recorded Koszul/quotient reconstruction; proved from the existing universal and reflector interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules the unit of derived completion is the strict quotient cone followed by the universal derived inverse limit comparison; scalar preserving coefficient equivalences preserve Koszul completion and quotient towers",
+   "results": "AdicCompletion.module; AdicCompletion; SheafOfModules.hasLimit; no matching sheaf-derived completion statement",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Ordinary completion and sheaf limits do not identify the specified derived units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of coefficient module categories preserves strict quotient towers and their derived completion units",
+   "results": "AdicCompletion.congr; AdicCompletion.congr_apply; IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-21",
+   "verdict": "No exact match for the sheaf coefficient presentation or its derived unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "CategoryTheory.Functor.leftDerivedUnique in Mathlib.CategoryTheory.Functor.Derived.LeftDerived",
+   "date": "2026-10-21",
+   "verdict": "Useful universal comparison API, but no concrete completed-sheaf unit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*[Uu]nit|[Kk]oszul.*completion|[Cc]ompletion.*[Ee]quiv; preservesLimitNatIso|isUniversalPrecompEquiv|leftDerivedUnique|rightDerivedUnique",
+   "results": "No sheaf completion-unit theorem in Mathlib. KanExtension.Basic supplies LeftExtension.isUniversalPrecompEquiv and RightExtension.isUniversalPrecompEquiv; Derived.LeftDerived/RightDerived supply uniqueness; Limits.Preserves.Limits supplies preservesLimitNatIso.",
+   "date": "2026-10-21",
+   "verdict": "The generic Kan-extension APIs and preservation-of-limit comparisons are reused; the stated concrete compatibility results are absent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulQuotientComparison",
+  "date": "2026-10-21",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "last paragraph: the comparison with intrinsic completion, including the completion unit",
+   "via": [
+    "lem-weil-pbc-completed-koszul-quotient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedConstantPresentationTransport",
+  "file": "lean/Sheaf/Paper/CompletedConstantPresentationTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completed_constant_presentation_transport",
+  "statement": "theorem completed_constant_presentation_transport\n    (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :\n    Nonempty (CompletedConstantPresentationData T d)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261020T230731-L-605952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261020T230731-L-605952",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
