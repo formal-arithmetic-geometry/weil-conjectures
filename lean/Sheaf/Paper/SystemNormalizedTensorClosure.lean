@@ -173,7 +173,17 @@ theorem normalized_inverseImage_closure
             ((A.inverseImageGeometry J B τ J' uInv uPush adjSet).target.scalar (h.trans k))
             ((A.inverseImageGeometry J B τ J' uInv uPush adjSet).pull.mapDerivedCategory.obj P))
     := by
-  sorry
+  let G := A.inverseImageGeometry J B τ J' uInv uPush adjSet
+  have hpull : G.PullTransitionFormula J B τ A.systems J' uInv uPush adjSet :=
+    (A.geometric J' uInv uPush adjSet).property.2.1
+  refine ⟨?_, ?_, ?_⟩
+  · intro m n h
+    have := hP h
+    exact IsIso.of_isIso_fac_right (hpull h P)
+  · intro m n h
+    exact hpull h P
+  · intro l m n h k
+    exact G.target.reduction_cocycle h k (G.pull.mapDerivedCategory.obj P)
 
 end InverseImageClosure
 end WeilConjectures.SemilinearSections
