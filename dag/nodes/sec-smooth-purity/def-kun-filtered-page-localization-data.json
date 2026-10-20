@@ -1,0 +1,167 @@
+{
+ "id": "def-kun-filtered-page-localization-data",
+ "kind": "definition",
+ "title": "Data and normalized model for finite filtered-page localization",
+ "statement": "For a commutative ring R define D_f(R), the localization of uniformly finite filtered module complexes modulo filtered homotopy at graded quasi-isomorphisms [def-kun-finite-filtered-module-homotopy]. Define the actual quotient-window transition F^a/F^(a+t) → F^(a-t+1)/F^(a+1), the cohomology image filtration I^a_n, the ambient quotient U/F^(a+1), its image of H^n(F^a), and conjugation of descended maps by specified comparison isomorphisms. Bundle the functor and first-page, image, and cycle/boundary comparisons, together with every law supplied by [lem-kun-filtered-page-functor-normalized] (successor normalization and naturality, first-page image equation, map squares, first differential as connecting map, cycle representatives, abutment and stabilization), into FiniteFilteredPageModel. Select one model from the proved existence theorem; its projections define the page functor and its comparisons jointly. Define FilteredPageLocalizationData with the full descent and stationary contract, and records FilteredPageDescentData and FilteredPageStationaryData partitioning its fields. All original public signatures are retained.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012K, 012M, 012O, 012P, 012W; Derived Categories Tags 05S2 and 05S3; Categories Tag 04VK."
+ },
+ "stmt_deps": [
+  "def-kun-finite-filtered-module-homotopy",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-weil-abstract-derived-category",
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "The transition is the cokernel descent of the step inclusion followed by the target quotient projection. Because t≥1, the relations of the source quotient map to zero; cokernel.π_desc proves its projection equation. The homology image filtration is decreasing since the inclusion of each successive step factors through the previous inclusion, and the image of a composite is contained in the image of its second factor.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unpack the proved normalized page-functor theorem once into the model record, retaining its functor, comparisons and all normalization laws used downstream. Classical choice selects a witness of this proved proposition. The page functor and its first-page and image comparisons are projections of that single witness. The remaining original definitions and full data structure are moved without changing their signatures; the descent and stationary records are precisely its prefix and suffix.",
+   "uses": [
+    "lem-kun-filtered-page-functor-normalized",
+    "def-kun-finite-filtered-module-homotopy",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-weil-abstract-derived-category",
+  "lem-kun-filtered-page-functor-normalized",
+  "def-kun-finite-filtered-module-homotopy",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "The cited filtered-complex proof, with the quotient, homotopy, functoriality and localization calculations written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift",
+   "results": "ok=True; 5 hits: CategoryTheory.Localization.lift, CategoryTheory.Localization.liftingLift, CategoryTheory.Localization.fac, CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac, CategoryTheory.Functor.instIsRightDerivedFunctorLiftInvFac",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite filtered complex spectral sequence functor descends to filtered derived category and stationary page equals graded cohomology image filtration",
+   "results": "ok=True; 8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(localization|stationary)",
+   "results": "ok=True; 0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite filtered complex spectral sequence functor descends to filtered derived category and stationary page equals graded cohomology image filtration",
+   "results": "ok=True; 8 hits: HomologicalComplexUpToQuasiIso.homologyFunctor, CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor, HomologicalComplex.gradedHomologyFunctor, CategoryTheory.Functor.mapDerivedCategory, HomologicalComplexUpToQuasiIso.homologyFunctorFactors, HomologicalComplex.gradedHomologyFunctor_obj, CategoryTheory.Functor.mapDerivedCategoryFactorsh, HomotopyCategory.homologyFunctorFactors",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredPageLocalization",
+  "date": "2026-10-21",
+  "group": "M8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Filtered-page localization: Data and normalized model for finite filtered-page localization",
+   "via": [
+    "lem-kun-filtered-page-localization",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredPageLocalizationSetup",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredPageLocalizationSetup.lean",
+  "declaration": "CategoryTheory.finiteFilteredPageModel",
+  "statement": "def finiteFilteredPageModel (R : Type u) [CommRing R] :\n    FiniteFilteredPageModel R",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.finiteFilteredModuleDerivedCategory",
+   "CategoryTheory.finiteFilteredModuleLocalizationFunctor",
+   "CategoryTheory.finiteFilteredPageTransition",
+   "CategoryTheory.finiteFilteredPageTransition_projection",
+   "CategoryTheory.finiteFilteredPageFunctor",
+   "CategoryTheory.finiteFilteredPageFirstIso",
+   "CategoryTheory.finiteFilteredPageImageIso",
+   "CategoryTheory.finiteFilteredModuleCohomology",
+   "CategoryTheory.finiteFilteredCohomologyImage",
+   "CategoryTheory.finiteFilteredCohomologyImage_succ_le",
+   "CategoryTheory.finiteFilteredCohomologyFiltration",
+   "CategoryTheory.finiteFilteredCohomology",
+   "CategoryTheory.finiteFilteredCohomologyForget",
+   "CategoryTheory.finiteFilteredComplexForget",
+   "CategoryTheory.finiteFilteredDerivedQuotient",
+   "CategoryTheory.finiteFilteredOrdinaryDerivedCategory",
+   "CategoryTheory.finiteFilteredOrdinaryQ",
+   "CategoryTheory.finiteFilteredOrdinaryH",
+   "CategoryTheory.finiteFilteredOrdinaryHComparison",
+   "CategoryTheory.finiteFilteredAmbientQuotient",
+   "CategoryTheory.finiteFilteredAmbientMap",
+   "CategoryTheory.finiteFilteredQuotientImage",
+   "CategoryTheory.finiteFilteredWindowToAmbient",
+   "CategoryTheory.finiteFilteredAmbientQuotientMap",
+   "CategoryTheory.finiteFilteredDescendedMap",
+   "CategoryTheory.FilteredPageStationaryComparison",
+   "CategoryTheory.FilteredPageLocalizationData",
+   "CategoryTheory.FiniteFilteredPageModel",
+   "CategoryTheory.finiteFilteredPageModel_nonempty",
+   "CategoryTheory.finiteFilteredPageModel",
+   "CategoryTheory.FilteredPageDescentData",
+   "CategoryTheory.FilteredPageStationaryData"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "independent cc review: FiniteFilteredPageModel fields vs the 9 clauses of boundedFilteredComplex_pageFunctor_normalized; 27 moved decls vs clone FilteredPageLocalization.lean; item statement vs node; delivered and fixed trees compiled"
+ }
+}

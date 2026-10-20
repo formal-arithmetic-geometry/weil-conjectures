@@ -1,0 +1,126 @@
+{
+ "id": "lem-kun-finite-filtered-graded-comparison",
+ "kind": "statement",
+ "title": "Graded quasi-isomorphisms compare every step of a finite filtration",
+ "statement": "Let R be a commutative ring and f:K→L a filtered map of uniformly finite decreasing filtrations on integer cochain complexes of R-modules [def-kun-finite-filtered-module-homotopy]. If every associated graded map gr^p f is a quasi-isomorphism, the underlying map and every restriction F^p f are quasi-isomorphisms. No cochain-degree bound is required.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012K, 012M, 012O, 012P, 012W; Derived Categories Tags 05S2 and 05S3; Categories Tag 04VK."
+ },
+ "stmt_deps": [
+  "def-kun-finite-filtered-module-homotopy",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "For every p form the short exact sequences F^(p+1)→F^p→gr^p and their morphism induced by f. Restriction squares commute after the monic step inclusion; quotient squares commute by their projection equations. The long exact sequences and five lemma show that quasi-isomorphisms on F^(p+1) and gr^p imply one on F^p. Lean uses the proved source helper HomologicalComplex.HomologySequence.quasiIso_τ₂ in WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns, implementing exactly this argument.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-five-lemma",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Above a common upper zero-filtration bound, both step complexes are zero, so every step map is a quasi-isomorphism. Descending induction over the finite interval to any specified p gives all step quasi-isomorphisms. At a common lower whole-filtration bound the step inclusions are isomorphisms to the underlying complexes, giving the underlying quasi-isomorphism.",
+   "uses": [
+    "def-kun-finite-filtered-module-homotopy"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-five-lemma",
+  "def-sp-filtered-complex-subquotients",
+  "def-kun-finite-filtered-module-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "The cited filtered-complex proof, with the quotient, homotopy, functoriality and localization calculations written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "graded.*[Qq]uasi|[Qq]uasi.*graded",
+   "results": "ok=True; 0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"ShortExact\"",
+   "results": "ok=True; 1 hits: CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of complexes with finite decreasing filtrations is a quasi-isomorphism on each filtration step if it is a quasi-isomorphism on every associated graded quotient",
+   "results": "ok=True; 8 hits: CochainComplex.quasiIso_truncLEMap_iff, quasiIsoAt_iff', quasiIso_iff, CochainComplex.quasiIso_truncGEMap_iff, QuasiIso.quasiIsoAt, QuasiIsoAt.quasiIso, quasiIsoAt_iff, QuasiIsoAt",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of finitely filtered cochain complexes that is a quasi-isomorphism on every associated graded piece is a quasi-isomorphism on every filtration step and on the underlying complex",
+   "results": "ok=True; 8 hits: quasiIso_iff, HomotopyCategory.mem_quasiIso_iff, QuasiIsoAt.mk, CategoryTheory.ShortComplex.QuasiIso.casesOn, QuasiIso.quasiIsoAt, HomologicalComplex.mem_quasiIso_iff, HomologicalComplex.instRespectsIsoQuasiIso, quasiIsoAt_iff_isIso_homologyMap",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredPageLocalization",
+  "date": "2026-10-21",
+  "group": "M8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Filtered-page localization: Graded quasi-isomorphisms compare every step of a finite filtration",
+   "via": [
+    "lem-kun-filtered-page-localization",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteFilteredGradedComparison",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteFilteredGradedComparison.lean",
+  "declaration": "CochainComplex.finiteFilteredModule_graded_comparison",
+  "statement": "theorem finiteFilteredModule_graded_comparison {R : Type u} [CommRing R]\n    {K L : FiniteFilteredModuleComplex R} (f : K ⟶ L)\n    (hg : ∀ p : ℤ, QuasiIso (FilteredObject.gradedMapSteps f.hom p)) :\n    QuasiIso f.hom.hom ∧\n      ∀ p : ℤ, QuasiIso (FilteredObject.restrictionSteps f.hom p)",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "independent cc review: FiniteFilteredPageModel fields vs the 9 clauses of boundedFilteredComplex_pageFunctor_normalized; 27 moved decls vs clone FilteredPageLocalization.lean; item statement vs node; delivered and fixed trees compiled"
+ }
+}

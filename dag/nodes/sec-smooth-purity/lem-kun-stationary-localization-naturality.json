@@ -1,0 +1,122 @@
+{
+ "id": "lem-kun-stationary-localization-naturality",
+ "kind": "statement",
+ "title": "Stationary spectral-sequence naturality extends through localization",
+ "statement": "Let A be a category, W a morphism property, C an abelian category, E:W.Localization→CohomologicalSpectralSequence(C,1) and H:W.Localization→C functors. Fix (a,b), bounds B(X), and comparisons c(X,r):E(X)_r^(a,b)≅H(X) for r≥max(1,B(X)). Suppose the cycle inclusions at (a,b) are epic at these indices, the comparisons respect successor-page homology, and the naturality square for each original morphism commutes at all sufficiently large indices. Then the square E(α)_r c(Y,r)=c(X,r) H(α) commutes for every localized α:X→Y at every r≥max(1,B(X),B(Y)).",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012K, 012M, 012O, 012P, 012W; Derived Categories Tags 05S2 and 05S3; Categories Tag 04VK."
+ },
+ "stmt_deps": [
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Define eventual naturality as a morphism property. For composition take a common bound including the intermediate object bound. For inversion cancel the invertible page-evaluation maps and the maps in H. Mathlib Localization.Construction.morphismProperty_eq_top' extends eventual naturality from original maps and inverse isomorphisms to the entire localization.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Start at a sufficiently large index with the eventual square. Precompose the preceding-page square by the epic source-cycle inclusion. Naturality of cycles and homology, both successor equations and the spectral-sequence morphism equation reduce it to the next-page square. Cancel the epimorphism and induct on the finite difference of indices.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-universal-property",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "The cited filtered-complex proof, with the quotient, homotopy, functoriality and localization calculations written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stationary.*natur|natur.*stationary",
+   "results": "ok=True; 0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"morphismProperty_eq_top\"",
+   "results": "ok=True; 10 hits: CategoryTheory.Paths.morphismProperty_eq_top_of_isMultiplicative, CategoryTheory.Paths.morphismProperty_eq_top, CategoryTheory.Paths.morphismProperty_eq_top', CategoryTheory.Localization.Construction.morphismProperty_eq_top', CategoryTheory.Localization.Construction.morphismProperty_eq_top, CategoryTheory.Localization.morphismProperty_eq_top, CategoryTheory.Cat.FreeRefl.morphismProperty_eq_top, SSet.Truncated.HomotopyCategory.morphismProperty_eq_top",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparisons of stationary spectral sequence pages extend from generators to every morphism of a localization using successor compatibility",
+   "results": "ok=True; 8 hits: AlgebraicTopology.DoldKan.P_is_eventually_constant, AlgebraicTopology.DoldKan.Q_is_eventually_constant, CategoryTheory.Abelian.Ext.covariantSequence, CategoryTheory.OrthogonalReflection.isLocal_isLocal_toSucc, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.HomComplex.Cochain.InductionUp.sequence_eqUpTo, CategoryTheory.SmallObject.prop_iterationFunctor_map_succ",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stationary spectral sequence comparisons natural for generating morphisms extend to all localized morphisms and to earlier stationary pages",
+   "results": "ok=True; 8 hits: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc, ModuleCat.localizedModuleMap, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, RingHom.StableUnderCompositionWithLocalizationAwayTarget, RingHom.StableUnderCompositionWithLocalizationAway, CategoryTheory.Triangulated.SpectralObject.Hom.rec, CategoryTheory.LocalizerMorphism.catCommSq",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredPageLocalization",
+  "date": "2026-10-21",
+  "group": "M8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Filtered-page localization: Stationary spectral-sequence naturality extends through localization",
+   "via": [
+    "lem-kun-filtered-page-localization",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.StationaryLocalizationNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/StationaryLocalizationNaturality.lean",
+  "declaration": "CategoryTheory.localization_stationary_naturality",
+  "statement": "theorem localization_stationary_naturality\n    {A : Type u} [Category.{v} A] {C : Type w} [Category.{z} C] [Abelian C]\n    (W : MorphismProperty A)\n    (E : W.Localization ⥤ CohomologicalSpectralSequence C 1)\n    (H : W.Localization ⥤ C) (a b : ℤ) (B : W.Localization → ℤ)\n    (c : ∀ (X : W.Localization) (r : ℤ) (hr : 1 ≤ r), B X ≤ r →\n      (((E.obj X).page r hr).X (a, b) ≅ H.obj X))\n    (hcycle : ∀ (X : W.Localization) (r : ℤ) (hr : 1 ≤ r) (_ : B X ≤ r),\n      Epi (((E.obj X).page r hr).iCycles (a, b)))\n    (hsucc : ∀ (X : W.Localization) (r : ℤ) (hr : 1 ≤ r) (hX : B X ≤ r),\n      ((E.obj X).page r hr).iCycles (a, b) ≫ (c X r hr hX).hom =\n        ((E.obj X).page r hr).homologyπ (a, b) ≫\n          ((E.obj X).iso r (r + 1) (a, b) rfl hr).hom ≫\n            (c X (r + 1) (by omega) (by omega)).hom)\n    (hgen : ∀ {X Y : A} (f : X ⟶ Y), ∃ R : ℤ,\n      ∀ (r : ℤ) (hr : 1 ≤ r) (hX : B (W.Q.obj X) ≤ r) (hY : B (W.Q.obj Y) ≤ r),\n        R ≤ r → ((E.map (W.Q.map f)).hom r hr).f (a, b) ≫\n          (c (W.Q.obj Y) r hr hY).hom =\n            (c (W.Q.obj X) r hr hX).hom ≫ H.map (W.Q.map f)) :\n    ∀ {X Y : W.Localization} (f : X ⟶ Y)\n      (r : ℤ) (hr : 1 ≤ r) (hX : B X ≤ r) (hY : B Y ≤ r),\n      ((E.map f).hom r hr).f (a, b) ≫ (c Y r hr hY).hom =\n        (c X r hr hX).hom ≫ H.map f",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "independent cc review: FiniteFilteredPageModel fields vs the 9 clauses of boundedFilteredComplex_pageFunctor_normalized; 27 moved decls vs clone FilteredPageLocalization.lean; item statement vs node; delivered and fixed trees compiled"
+ }
+}

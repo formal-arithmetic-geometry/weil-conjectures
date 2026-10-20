@@ -17,170 +17,24 @@
  ],
  "proof": [
   {
-   "text": "Use the normalized quotient-page realization supplied by [lem-kun-filtered-page-functor-normalized], which retains the core page-one, image and representative clauses and fixes the successor isomorphisms. The supplied $\\varphi$ exists because $F^{a+t}U\\subseteq F^{a+1}U$ and $F^aU\\subseteq F^{a-t+1}U$. Thus both projections kill the same required relations, and the quotient equation determines $\\varphi$ uniquely. The normalized successor map sends a successor-cycle class to the same representative on page $t+1$; this is the canonical choice in the specified quotient construction, rather than an arbitrary isomorphic replacement.",
+   "text": "Construct the normalized data of [def-kun-filtered-page-localization-data]. Apply [lem-kun-filtered-page-descent] to obtain the prefix of the full localization contract. Relative to those fixed descended functors apply [lem-kun-filtered-page-stationary] to obtain its suffix. Assemble the original FilteredPageLocalizationData record field by field, preserving the statement and every public signature.",
    "uses": [
-    "lem-kun-filtered-page-functor-normalized",
-    "def-sp-filtered-complex-subquotients"
+    "def-kun-filtered-page-localization-data",
+    "lem-kun-filtered-page-descent",
+    "lem-kun-filtered-page-stationary"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012K (section-filtered-complex), Tag 012M (lemma-spectral-sequence-filtered-complex), explicit cycle/boundary construction and successor quotient normalization"
-   }
-  },
-  {
-   "text": "If $f-g=dh+hd$ with $h$ preserving the filtration, restriction to $F^a$ and passage to $\\operatorname{gr}^a$ give the same homotopy equation. On a cycle $x$, $(f-g)x=d(hx)$, so the two maps on cohomology agree, both on the underlying complex and on every step and graded complex. Naturality of the page-one comparison therefore makes $S(f)_1=S(g)_1$. A morphism of spectral sequences satisfies $m_{t+1}=e_VH(m_t)e_U^{-1}$, with $e$ its successor comparison. Induction starting at $t=1$ gives equality on all positive pages. Equality on the image submodules $I_n^a$ and their quotients follows by restriction and quotient of the equal underlying cohomology maps. Hence these assignments are well-defined on the filtered homotopy category.",
-   "uses": [
-    "def-kun-finite-filtered-module-homotopy",
-    "def-weil-abstract-derived-category",
-    "lem-sp-bounded-filtered-page-core",
-    "def-sp-spectral-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tags 012O (lemma-spectral-sequence-filtered-complex-functorial), 012P (definition-filtration-cohomology-filtered-complex); explicit filtered homotopy calculation"
-   }
-  },
-  {
-   "text": "Let $w:U\\to V$ represent an element of $W$. Give $C=\\operatorname{Cone}(w)$ the componentwise filtration $F^iC^n=F^iV^n\\oplus F^iU^{n+1}$, with differential $(v,u)\\mapsto(dv+wu,-du)$. Taking the quotient in each summand gives $\\operatorname{gr}^iC=\\operatorname{Cone}(\\operatorname{gr}^iw)$ with precisely this differential. The cone criterion [lem-pur-quasi-iso-cone-acyclic] makes every such graded complex acyclic. For a fixed $a$, filter $F^aC$ by $G^i=F^{\\max(i,a)}C$. Its graded pieces are zero for $i<a$ and $\\operatorname{gr}^iC$ for $i\\ge a$. The filtration is finite: use common whole and zero bounds of $U,V$, enlarged to include $a$. By [lem-sp-degreewise-filtered-acyclic], $F^aC$ is acyclic. Its displayed differential identifies it with $\\operatorname{Cone}(F^aw)$, so the cone criterion gives that every $F^aw$ is a quasi-isomorphism. At a common whole-filtration index this is the underlying map $w$.",
-   "uses": [
-    "def-kun-finite-filtered-module-homotopy",
-    "def-weil-abstract-derived-category",
-    "def-sp-filtered-complex-subquotients",
-    "lem-pur-quasi-iso-cone-acyclic",
-    "lem-sp-degreewise-filtered-acyclic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05S3 (lemma-filtered-derived-functors), cone proof for forget F; Tag 05RT (lemma-acyclic); Homology Tag 05QH (lemma-filtered-acyclic)"
-   }
-  },
-  {
-   "text": "The page-one map of $w$ is $H^{a+b}(\\operatorname{gr}^aw)$ under the core comparison, hence bijective. A chain isomorphism of page complexes restricts to an isomorphism on kernels and images and therefore on their cohomology quotients. The successor equation from Step 2 now proves by induction that $S(w)_t$ is bijective at every bidegree for all $t\\ge1$. These component inverses commute with the differentials and the successor comparisons, by multiplying the corresponding equations for $S(w)$ by the inverses, so $S(w)$ is an isomorphism of spectral sequences.",
-   "uses": [
-    "lem-sp-bounded-filtered-page-core",
-    "def-sp-spectral-sequence",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tags 012M and 012O; induction through successor-page homology"
-   }
-  },
-  {
-   "text": "For any filtered map $f$, the cohomology square for $F^aU\\hookrightarrow U$ and $F^aV\\hookrightarrow V$ sends the image submodule $I_n^a(U)$ into $I_n^a(V)$. These restrictions preserve identities and composition. For $w\\in W$, both vertical maps in this square are bijective by Step 3. The underlying bijection $H^n(w)$ restricts to a bijection of images: injectivity follows from ambient injectivity, and an element $H^n(\\iota_V)y$ in the target image lifts by $y=H^n(F^aw)x$ to $H^n(\\iota_U)x$. Thus the inverse preserves every $I_n^a$, and the maps on $I_n^a/I_n^{a+1}$ are also bijective. The filtration is decreasing because the inclusions factor, and finite because whole and zero subcomplex steps give whole and zero cohomology images.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-sp-filtration",
-    "def-kun-finite-filtered-module-homotopy"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012P (definition-filtration-cohomology-filtered-complex); equation-filtration-cohomology; Tag 012W, part (2)"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-localization-universal-property] to $S$ and to $U\\mapsto(H^n(U),I_n)$, with morphisms in the latter target the linear maps preserving every image step. Steps 2, 4 and 5 verify their homotopy invariance and that they invert $W$. This gives the asserted descended functors and their maps on image steps and quotients. Forgetting filtrations also gives a functor $\\omega:\\mathcal D_f(R)\\to D(R)$: filtered homotopies become ordinary homotopies and Step 3 shows that $W$ becomes ordinary quasi-isomorphisms. The cohomology factorization of [def-weil-abstract-derived-category] and uniqueness in the localization universal property identify the descended underlying cohomology functor with $H^n\\omega$. Similarly $\\operatorname{gr}^a$ gives a functor to $D(R)$, since it takes filtered homotopies to homotopies and $W$ to quasi-isomorphisms by definition. The natural page-one comparison of the core descends by the natural-transformation clause of the same universal property. Its map on a chain representative is exactly $H^{a+b}(\\operatorname{gr}^af)$.",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-abstract-derived-category",
-    "def-kun-finite-filtered-module-homotopy",
-    "lem-sp-bounded-filtered-page-core"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05S2 (definition-filtered-derived), 05S3 (lemma-filtered-derived-functors); Categories Tag 04VK (lemma-properties-right-localization)"
-   }
-  },
-  {
-   "text": "Choose bounds $\\ell<h$ with $F^\\ell U=U$ and $F^hU=0$. Fix $a,n$ and take $t\\ge\\max(1,h-a,a-\\ell+1)$. Then $F^{a+t}U=0$ and $F^{a-t+1}U=U$, as complexes, so $\\varphi$ is the actual map $F^aU\\to U/F^{a+1}U$. The core image comparison is therefore the first displayed stationary isomorphism. More explicitly, put $C_a=F^aU^n\\cap\\ker d$, $D_a=F^{a+1}U^n\\cap\\ker d$, and $B_a=F^aU^n\\cap d(U^{n-1})$. The image in $H^n(U/F^{a+1}U)$ is generated by cycles $x\\in C_a$, and such a cycle has zero image exactly when $x=dy+z$ for $y\\in U^{n-1}$ and $z\\in F^{a+1}U^n$. Necessarily $dz=0$ and $dy\\in F^aU^n$, so its kernel is $D_a+B_a$. Thus this image is canonically $C_a/(D_a+B_a)$.",
-   "uses": [
-    "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients",
-    "def-weil-abstract-derived-category",
-    "lem-sp-bounded-filtered-page-core"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012K (section-filtered-complex), explicit Z and B formulas; Tag 012W (lemma-biregular-ss-converges), stabilization argument"
-   }
-  },
-  {
-   "text": "The surjection $C_a\\to I_n^a$, $x\\mapsto[x]$, has kernel $B_a$. The inverse image of $I_n^{a+1}$ under it is exactly $D_a+B_a$: if $[x]=[z]$ with $z\\in D_a$, then $x-z=dy\\in B_a$, and the converse is the same equation. Consequently $I_n^a/I_n^{a+1}$ is also $C_a/(D_a+B_a)$. Combining this with Step 7 defines the second displayed isomorphism and its inverse, both on the same representative $x$. This proves precisely the required normalization and its independence of all choices, since the two equivalence relations have just been proved equal.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-sp-filtered-complex-subquotients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012P (definition-filtration-cohomology-filtered-complex), equations filtration-cohomology and graded-cohomology; omitted intermediate quotient calculation supplied explicitly"
-   }
-  },
-  {
-   "text": "For a filtered chain map $f:U\\to V$, choose $t$ satisfying the bound of Step 7 for both objects. By [lem-kun-filtered-page-functor-normalized], $S$ retains the core image comparison, whose square for $f$ sends the class represented by a cycle $x$ to the class represented by $f(x)$. The normalized stationary map of Step 8 sends those two classes to $[x]$ and $[f(x)]$ modulo the next cohomology image. This proves both stationary comparison squares commute. At adjacent stationary pages $t,t+1$, the subobjects $Z_t,B_t$ are constant by the explicit formulas: cycles are the graded images of $C_a$, and boundaries the graded images of $B_a$. Incoming and outgoing differentials are zero, since their filtration indices lie respectively below $\\ell$ and at least $h$. The normalized successor-homology equation supplied by [lem-kun-filtered-page-functor-normalized] sends the class of the graded image of $x\\in C_a$ to that same class on page $t+1$. These classes generate the stationary quotient. Hence the two stationary comparisons agree under the successor isomorphism.",
-   "uses": [
-    "lem-kun-filtered-page-functor-normalized",
-    "def-sp-filtered-complex-subquotients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tags 012M, 012O and 012W; successor quotient normalization applied to stationary cycles"
-   }
-  },
-  {
-   "text": "Let $\\alpha:U\\to V$ be a localized morphism. The right-fraction calculus [lem-kun-filtered-quasi-isomorphism-fractions] and the dual of [lem-pc-left-localization-fraction-representation] give a roof $U\\xleftarrow{s}T\\xrightarrow{f}V$, $s\\in W$, with $\\alpha=Q(f)Q(s)^{-1}$. Indeed the right-fraction axioms become left-fraction axioms on the opposite category, and a localization remains one on opposites by its universal property. Choose $t'$ at least the given stationary index $t$ for $U,V$ and the bound for $T$. At $t'$ Step 9 proves naturality for $s$ and $f$. The page, cohomology-image and image-quotient maps of $s$ are isomorphisms by Steps 3–5, so multiplying its naturality equation by their inverses gives naturality for $\\alpha$. To return from $t'$ to $t$, all intervening pages of $U,V$ are stationary. Their successor comparisons identify the page maps at consecutive indices by the spectral-sequence morphism equation; here taking homology is the identity on the zero-differential page complexes. Step 9 identifies the stationary comparisons at those consecutive indices as well. Descending finitely from $t'$ to $t$ proves the desired square at every index stationary for the two endpoints. It does not require that the roof object already be stationary at $t$. Independence of the roof follows because both maps are the descended functor maps of Step 6.",
-   "uses": [
-    "lem-kun-filtered-page-functor-normalized",
-    "lem-kun-filtered-quasi-isomorphism-fractions",
-    "lem-pc-left-localization-fraction-representation",
-    "lem-weil-pbc-localization-universal-property",
-    "def-sp-spectral-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tags 04VE (lemma-morphisms-left-localization) and 04VK (lemma-properties-right-localization), by opposites; Homology Tag 012O and stationary successor comparisons"
-   }
-  },
-  {
-   "text": "All bounds used above are bounds on filtration indices, common to all degrees of each object. The cone and its step restrictions retain that property, and Step 7 uses no bound on $n$. At $a\\ge h$ both stationary sides are zero; at $a<\\ell$ one has $I_n^a=I_n^{a+1}=H^n(U)$, again giving zero. The zero complex and the zero ring cause no exception to the cycle and quotient arguments. This completes every clause without imposing any cochain-degree bound.",
-   "uses": [
-    "def-kun-finite-filtered-module-homotopy",
-    "def-sp-filtration"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012W (lemma-biregular-ss-converges), finite-filtration bounds"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-kun-filtered-page-functor-normalized",
-  "def-sp-filtered-complex-subquotients",
-  "def-kun-finite-filtered-module-homotopy",
-  "def-weil-abstract-derived-category",
-  "lem-sp-bounded-filtered-page-core",
-  "def-sp-spectral-sequence",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-sp-degreewise-filtered-acyclic",
-  "def-sp-filtration",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-kun-filtered-quasi-isomorphism-fractions",
-  "lem-pc-left-localization-fraction-representation"
+  "def-kun-filtered-page-localization-data",
+  "lem-kun-filtered-page-descent",
+  "lem-kun-filtered-page-stationary"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tags 012K, 012M, 012O, 012P, 012W; explicit module-cycle normalization and localized naturality, using Derived Categories 05S3 and Categories 04VK."
+  "place": "Tags 012K, 012M, 012O, 012P and 012W, via proved descent and stationary comparisons. Graded comparison uses short exact sequences; localized naturality uses generators and successor transport."
  },
  "mathlib_searches": [
   {
@@ -284,11 +138,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sp-bounded-filtered-page-core",
-  "lem-sp-degreewise-filtered-acyclic",
-  "lem-pur-quasi-iso-cone-acyclic"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -303,40 +153,13 @@
   "file": "lean/Sheaf/Algebra/Homology/FilteredPageLocalization.lean",
   "statement": "theorem filteredPageLocalization (R : Type u) [CommRing R] : Nonempty (FilteredPageLocalizationData R)",
   "declarations": [
-   "CategoryTheory.finiteFilteredModuleDerivedCategory",
-   "CategoryTheory.finiteFilteredModuleLocalizationFunctor",
-   "CategoryTheory.finiteFilteredPageTransition",
-   "CategoryTheory.finiteFilteredPageTransition_projection",
-   "CategoryTheory.finiteFilteredPageFunctor",
-   "CategoryTheory.finiteFilteredPageFirstIso",
-   "CategoryTheory.finiteFilteredPageImageIso",
-   "CategoryTheory.finiteFilteredModuleCohomology",
-   "CategoryTheory.finiteFilteredCohomologyImage",
-   "CategoryTheory.finiteFilteredCohomologyImage_succ_le",
-   "CategoryTheory.finiteFilteredCohomologyFiltration",
-   "CategoryTheory.finiteFilteredCohomology",
-   "CategoryTheory.finiteFilteredCohomologyForget",
-   "CategoryTheory.finiteFilteredComplexForget",
-   "CategoryTheory.finiteFilteredDerivedQuotient",
-   "CategoryTheory.finiteFilteredOrdinaryDerivedCategory",
-   "CategoryTheory.finiteFilteredOrdinaryQ",
-   "CategoryTheory.finiteFilteredOrdinaryH",
-   "CategoryTheory.finiteFilteredOrdinaryHComparison",
-   "CategoryTheory.finiteFilteredAmbientQuotient",
-   "CategoryTheory.finiteFilteredAmbientMap",
-   "CategoryTheory.finiteFilteredQuotientImage",
-   "CategoryTheory.finiteFilteredWindowToAmbient",
-   "CategoryTheory.finiteFilteredAmbientQuotientMap",
-   "CategoryTheory.finiteFilteredDescendedMap",
-   "CategoryTheory.FilteredPageStationaryComparison",
-   "CategoryTheory.FilteredPageLocalizationData",
    "CategoryTheory.filteredPageLocalization"
   ],
-  "branch": "newtargets-dag",
-  "by": "Q18",
-  "date": "2026-10-17",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-21",
   "existing": false,
-  "note": "2026-10-21 V2 rework: restore the complete quarantined module; use canonical FilteredObject.Hom.mk in the two finiteFilteredCohomology functor laws. Prove finiteFilteredPageTransition_projection by cokernel.π_desc and finiteFilteredCohomologyImage_succ_le by imageSubobject_comp_le after cohomology functoriality. All 28 public declarations, their signatures, the imports and the full dependency plan remain. The existing filteredPageLocalization theorem is the one remaining sorry; no holes added."
+  "note": "The original public data declarations are preserved and reexported from FilteredPageLocalizationSetup. The theorem assembles the proved descent and stationary records."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -349,11 +172,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
-  "result": "pass",
-  "landing": "20261020T174911-L-818105",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "independent cc review: FiniteFilteredPageModel fields vs the 9 clauses of boundedFilteredComplex_pageFunctor_normalized; 27 moved decls vs clone FilteredPageLocalization.lean; item statement vs node; delivered and fixed trees compiled"
  }
 }

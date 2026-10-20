@@ -1,0 +1,137 @@
+{
+ "id": "lem-kun-filtered-page-descent",
+ "kind": "statement",
+ "title": "Descent of filtered pages and cohomology through localization",
+ "statement": "For every commutative ring R the record FilteredPageDescentData R of [def-kun-filtered-page-localization-data] is inhabited. The normalized page functor, cohomology with its image filtration, underlying-derived functor, and graded-derived functors descend through filtered homotopy localization, with their specified ordinary-cohomology and page-one normalizations, filtered-homotopy invariance and inversion of graded quasi-isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012K, 012M, 012O, 012P, 012W; Derived Categories Tags 05S2 and 05S3; Categories Tag 04VK."
+ },
+ "stmt_deps": [
+  "def-kun-filtered-page-localization-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict filtered homotopies to steps and their graded cokernels. The proved graded homotopy and quasi-isomorphism criteria in FilteredQuasiIsoTwoOutOfThree give homotopy invariance and invertibility on first-page cohomology. The normalized first-page square identifies those maps with page-one maps. Induction through successor homology gives equality and invertibility on the full spectral sequences. No fraction calculus is used.",
+   "uses": [
+    "lem-kun-filtered-page-functor-normalized",
+    "lem-kun-filtered-quasi-isomorphism-fractions-two-out-of-three",
+    "def-kun-filtered-page-localization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply graded comparison to obtain quasi-isomorphisms on the underlying complex and every step. The induced maps on their cohomology images are isomorphisms, with inverse restrictions preserving each filtration image. Cokernel functoriality gives isomorphisms on the graded pieces. Homotopy invariance on the image filtration follows by cancellation of the step monomorphisms.",
+   "uses": [
+    "lem-kun-finite-filtered-graded-comparison",
+    "def-kun-filtered-page-localization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the four functors through the homotopy quotient and localization. Full faithfulness of precomposition lifts the ordinary-cohomology and first-page natural comparisons. Their component equations follow from naturality, conjugation and the inverse laws of the specified isomorphisms. Assemble all fields of FilteredPageDescentData.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category",
+    "def-kun-filtered-page-localization-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-filtered-page-functor-normalized",
+  "lem-kun-filtered-quasi-isomorphism-fractions-two-out-of-three",
+  "def-kun-filtered-page-localization-data",
+  "lem-kun-finite-filtered-graded-comparison",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "The cited filtered-complex proof, with the quotient, homotopy, functoriality and localization calculations written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift",
+   "results": "ok=True; 5 hits: CategoryTheory.Localization.lift, CategoryTheory.Localization.liftingLift, CategoryTheory.Localization.fac, CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac, CategoryTheory.Functor.instIsRightDerivedFunctorLiftInvFac",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite filtered complex spectral sequence functor descends to filtered derived category and stationary page equals graded cohomology image filtration",
+   "results": "ok=True; 8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(localization|stationary)",
+   "results": "ok=True; 0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite filtered complex spectral sequence functor descends to filtered derived category and stationary page equals graded cohomology image filtration",
+   "results": "ok=True; 8 hits: HomologicalComplexUpToQuasiIso.homologyFunctor, CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor, HomologicalComplex.gradedHomologyFunctor, CategoryTheory.Functor.mapDerivedCategory, HomologicalComplexUpToQuasiIso.homologyFunctorFactors, HomologicalComplex.gradedHomologyFunctor_obj, CategoryTheory.Functor.mapDerivedCategoryFactorsh, HomotopyCategory.homologyFunctorFactors",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredPageLocalization",
+  "date": "2026-10-21",
+  "group": "M8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Filtered-page localization: Descent of filtered pages and cohomology through localization",
+   "via": [
+    "lem-kun-filtered-page-localization",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredPageDescent",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredPageDescent.lean",
+  "declaration": "CategoryTheory.filteredPageDescent",
+  "statement": "theorem filteredPageDescent (R : Type u) [CommRing R] :\n    Nonempty (FilteredPageDescentData R)",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "independent cc review: FiniteFilteredPageModel fields vs the 9 clauses of boundedFilteredComplex_pageFunctor_normalized; 27 moved decls vs clone FilteredPageLocalization.lean; item statement vs node; delivered and fixed trees compiled"
+ }
+}

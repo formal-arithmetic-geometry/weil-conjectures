@@ -1,0 +1,156 @@
+{
+ "id": "lem-kun-filtered-page-stationary",
+ "kind": "statement",
+ "title": "Normalized stationary comparisons for localized finite filtered pages",
+ "statement": "For every commutative ring R and d:FilteredPageDescentData R from [def-kun-filtered-page-localization-data], the record FilteredPageStationaryData R d is inhabited. It provides the derived quotient-image functor, representative-normalized pointwise stationary page comparisons, naturality for all localized morphisms at every index stationary for both endpoints, and agreement under normalized successor homology, without any cochain-degree bound.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012K, 012M, 012O, 012P, 012W; Derived Categories Tags 05S2 and 05S3; Categories Tag 04VK."
+ },
+ "stmt_deps": [
+  "def-kun-filtered-page-localization-data"
+ ],
+ "proof": [
+  {
+   "text": "The short exact sequence F^(a+1)→U→U/F^(a+1) identifies the kernel of H(U)→H(U/F^(a+1)) with I^(a+1). Pullback along H(F^a)→H(U) shows that the epic maps to the quotient image and to I^a/I^(a+1) have equal kernels. Their unique quotient isomorphism proves both representative equations.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-kun-filtered-page-localization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved stationary-cycle comparison with the actual cohomology image filtration at the two finite filtration window bounds. Every actual cycle factors through the normalized page representative object. Comparing the two representative equations and cancelling the epic cycle cover proves the core normalization and constructs the pointwise stationary comparison.",
+   "uses": [
+    "lem-weil-pbc-stationary-cycle-comparison",
+    "lem-kun-filtered-page-functor-normalized",
+    "def-kun-filtered-page-localization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a filtered map, the quotient-window map commutes with the ambient quotient map by their cokernel projection equations. Append homology of this square to the normalized page image square and cancel the monic ambient image inclusion. Step-image naturality and the graded projection equation give the graded square. The representative-forward equation uniquely fixes the image-to-graded comparison independently of the page index.",
+   "uses": [
+    "lem-kun-filtered-page-functor-normalized",
+    "lem-kun-filtered-page-descent",
+    "def-kun-filtered-page-localization-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the normalized successor equation by the actual cycles covering the successor cycle subobject. Both adjacent comparisons send the actual cycle to its same cohomology class modulo the next image. Cancel the epic covers and the graded comparison isomorphism; this proves successor agreement.",
+   "uses": [
+    "lem-weil-pbc-stationary-cycle-comparison",
+    "lem-kun-filtered-page-functor-normalized",
+    "def-kun-filtered-page-localization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the graded functor of d.Hbar as the image-derived functor and compare it with quotient images through the unique normalized image-to-graded isomorphism. Enlarge finite filtration bounds by the normalized differential stabilization bound. Transport the comparisons through d.eS. Fullness of the homotopy quotient reduces every generator to a chain representative. Apply stationary localization naturality and conjugate back to obtain the endpoint-stationary square for every localized morphism. Assemble all fields of FilteredPageStationaryData.",
+   "uses": [
+    "lem-kun-stationary-localization-naturality",
+    "lem-kun-filtered-page-functor-normalized",
+    "lem-kun-filtered-page-descent",
+    "def-kun-filtered-page-localization-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "def-kun-filtered-page-localization-data",
+  "lem-weil-pbc-stationary-cycle-comparison",
+  "lem-kun-filtered-page-functor-normalized",
+  "lem-kun-filtered-page-descent",
+  "lem-kun-stationary-localization-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "The cited filtered-complex proof, with the quotient, homotopy, functoriality and localization calculations written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift",
+   "results": "ok=True; 5 hits: CategoryTheory.Localization.lift, CategoryTheory.Localization.liftingLift, CategoryTheory.Localization.fac, CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac, CategoryTheory.Functor.instIsRightDerivedFunctorLiftInvFac",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite filtered complex spectral sequence functor descends to filtered derived category and stationary page equals graded cohomology image filtration",
+   "results": "ok=True; 8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(localization|stationary)",
+   "results": "ok=True; 0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite filtered complex spectral sequence functor descends to filtered derived category and stationary page equals graded cohomology image filtration",
+   "results": "ok=True; 8 hits: HomologicalComplexUpToQuasiIso.homologyFunctor, CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor, HomologicalComplex.gradedHomologyFunctor, CategoryTheory.Functor.mapDerivedCategory, HomologicalComplexUpToQuasiIso.homologyFunctorFactors, HomologicalComplex.gradedHomologyFunctor_obj, CategoryTheory.Functor.mapDerivedCategoryFactorsh, HomotopyCategory.homologyFunctorFactors",
+   "date": "2026-10-20",
+   "verdict": "No exact filtered comparison theorem; use the component APIs. The localization generator API found by Loogle is used where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredPageLocalization",
+  "date": "2026-10-21",
+  "group": "M8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Filtered-page localization: Normalized stationary comparisons for localized finite filtered pages",
+   "via": [
+    "lem-kun-filtered-page-localization",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredPageStationary",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredPageStationary.lean",
+  "declaration": "CategoryTheory.filteredPageStationary",
+  "statement": "theorem filteredPageStationary (R : Type u) [CommRing R] (d : FilteredPageDescentData R) :\n    Nonempty (FilteredPageStationaryData R d)",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d18d8",
+  "group": "M8",
+  "result": "fix",
+  "landing": "20261020T221255-L-4167556",
+  "kind": "interface",
+  "note": "independent cc review: FiniteFilteredPageModel fields vs the 9 clauses of boundedFilteredComplex_pageFunctor_normalized; 27 moved decls vs clone FilteredPageLocalization.lean; item statement vs node; delivered and fixed trees compiled"
+ }
+}
