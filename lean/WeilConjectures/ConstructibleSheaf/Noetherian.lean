@@ -255,71 +255,87 @@ theorem Etale.exists_finset_mono_pi_lift {X : Scheme.{u}} [IsNoetherian X]
   classical
   obtain ⟨S, hS, hSF⟩ := IsConstructibleSheaf.exists_stratification_isIrreducible F
   have hirr (i : Fin S.n) : IrreducibleSpace (S.domain i) := by
-    have : IrreducibleSpace (S.stratum i) := Subtype.irreducibleSpace (hS i)
+    have := Subtype.irreducibleSpace (hS i)
     rw [← S.range_immersion i] at this
     exact (S.immersion i).isEmbedding.toHomeomorph.irreducibleSpace_iff.2 this
-  let x (i : Fin S.n) : X := S.immersion i (genericPoint (S.domain i))
-  let P (i : Fin S.n) := (pointSmallEtale (X.algClosurePoint (x i))).sheafFiber
-    (A := ModuleCat.{u + 1} Λ)
-  have hfin (i : Fin S.n) : Finite (P i |>.obj F) := by
-    have := (ModuleCat.isFinitelyGenerated_iff _).1
+  let η (i : Fin S.n) : S.domain i := genericPoint (S.domain i)
+  let x (i : Fin S.n) : X := S.immersion i (η i)
+  let V (i : Fin S.n) := ((pointSmallEtale (X.algClosurePoint (x i))).sheafFiber
+    (A := ModuleCat.{u + 1} Λ)).obj F
+  have hfinite (i : Fin S.n) : Finite (V i) := by
+    have : Module.Finite Λ (V i) := (ModuleCat.isFinitelyGenerated_iff _).1
       ((inferInstance : IsConstructibleSheaf F).isFiniteSheaf.isFinitelyGenerated_sheafFiber _
         (X.algClosurePoint (x i)))
     exact Module.finite_of_finite Λ
-  let I := Σ i : Fin S.n, {v : P i |>.obj F // v ≠ 0}
-  have hdetect : ∀ a : I, ∃ l, (P a.1 |>.map (φ l)).hom a.2.1 ≠ 0 := by
-    intro a
-    exact h (x a.1) a.2.1 a.2.2
+  -- Choose one detector for every nonzero element of each finite generic stalk.
+  let I := Σ i : Fin S.n, {v : V i // v ≠ 0}
+  have hdetect : ∀ i : I, ∃ l : L,
+      ((pointSmallEtale (X.algClosurePoint (x i.1))).sheafFiber.map (φ l)).hom i.2.val ≠ 0 :=
+    fun i ↦ h (x i.1) i.2.val i.2.property
   choose index hindex using hdetect
   let : Fintype I := Fintype.ofFinite I
-  let L₀ := Finset.univ.image index
-  let f : F ⟶ ∏ᶜ fun l : L₀ ↦ G l := Pi.lift fun l : L₀ ↦ φ l
-  have htest (i : Fin S.n) : Mono (P i |>.map f) := by
+  let L₀ : Finset L := Finset.univ.image index
+  let f := Pi.lift fun l : L₀ ↦ φ l
+  -- Projection to the chosen detector gives injectivity at each tested stalk.
+  have htest (i : Fin S.n) :
+      Mono ((pointSmallEtale (X.algClosurePoint (x i))).sheafFiber.map f) := by
     apply (ModuleCat.mono_iff_injective _).2
     apply (injective_iff_map_eq_zero _).2
     intro v hv
     by_contra hne
-    let a : I := ⟨i, ⟨v, hne⟩⟩
-    let l : L₀ := ⟨index a, Finset.mem_image.2 ⟨a, Finset.mem_univ _, rfl⟩⟩
-    apply hindex a
-    change (P i |>.map (φ l)).hom v = 0
+    let j : I := ⟨i, ⟨v, hne⟩⟩
+    let l : L₀ := ⟨index j, Finset.mem_image.2 ⟨j, Finset.mem_univ _, rfl⟩⟩
+    apply hindex j
+    change ((pointSmallEtale (X.algClosurePoint (x i))).sheafFiber.map (φ l)).hom v = 0
     rw [← Pi.lift_π (fun l : L₀ ↦ φ l) l, Functor.map_comp,
-      ModuleCat.hom_comp, LinearMap.comp_apply, hv, map_zero]
+      ConcreteCategory.comp_apply]
+    change ((pointSmallEtale (X.algClosurePoint (x i))).sheafFiber.map
+      (Pi.π (fun l : L₀ ↦ G l) l)).hom
+        (((pointSmallEtale (X.algClosurePoint (x i))).sheafFiber.map f).hom v) = 0
+    rw [hv, map_zero]
+  -- Pull back to each irreducible lisse stratum and use its generic-stalk criterion.
   have hmono (i : Fin S.n) : Mono ((S.immersion i)^*[ModuleCat.{u + 1} Λ].map f) := by
     have := (hSF i).toIsLocallyConstantSheaf
     obtain ⟨s, hs⟩ := IsImmersion.exists_comp_eq_of_field (S.immersion i)
-      (X.algClosurePoint (x i)) (by rw [algClosurePoint_base]; exact ⟨_, rfl⟩)
-    have hsgen (p : Spec (.of (AlgebraicClosure (X.residueField (x i))))) :
+      (X.algClosurePoint (x i)) (by rw [algClosurePoint_base]; exact ⟨η i, rfl⟩)
+    have hsη (p : Spec (.of (AlgebraicClosure (X.residueField (x i))))) :
         s.base p = genericPoint (S.domain i) := by
       apply (S.immersion i).isEmbedding.injective
       rw [← Scheme.Hom.comp_apply, hs, algClosurePoint_base]
-    apply mono_of_mono_sheafFiber_of_isLocallyConstantSheaf s hsgen
     let e := upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) (S.immersion i) s
-    have hm : Mono (((pointSmallEtale (s ≫ S.immersion i)).sheafFiber
+    have ht : Mono (((pointSmallEtale (s ≫ S.immersion i)).sheafFiber
         (A := ModuleCat.{u + 1} Λ)).map f) := by
       rw [hs]
       exact htest i
-    exact (mono_map_iff_of_natIso e f).2 hm
+    have hm : Mono (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map
+        ((S.immersion i)^*[ModuleCat.{u + 1} Λ].map f)) :=
+      ((MorphismProperty.monomorphisms _).arrow_mk_iso_iff
+        (((Functor.mapArrowFunctor _ _).mapIso e).app (Arrow.mk f))).2 ht
+    exact Etale.mono_of_mono_sheafFiber_of_isLocallyConstantSheaf s hsη _ hm
+  -- Every point lies in a stratum, so cancellation holds on every geometric stalk.
   refine ⟨L₀, ⟨fun {H} a b hab ↦ ?_⟩⟩
-  change a ≫ f = b ≫ f at hab
   apply sheafHom_ext_of_sheafFiber_map_algClosurePoint
   intro z
-  obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
-    (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ z)
+  have hz : z ∈ ⋃ i, S.stratum i := by rw [S.iUnion_stratum_eq_univ]; trivial
+  obtain ⟨i, hi⟩ := Set.mem_iUnion.mp hz
   rw [← S.range_immersion i] at hi
   obtain ⟨t, ht⟩ := IsImmersion.exists_comp_eq_of_field (S.immersion i)
     (X.algClosurePoint z) (by rw [algClosurePoint_base]; exact hi)
   let e := upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) (S.immersion i) t
   have hm : Mono ((S.immersion i)^*[ModuleCat.{u + 1} Λ].map f) := hmono i
-  have hm' : Mono (((pointSmallEtale t).sheafFiber
-      (A := ModuleCat.{u + 1} Λ)).map ((S.immersion i)^*[ModuleCat.{u + 1} Λ].map f)) :=
-    (pointSmallEtale t).sheafFiber.map_mono _
-  have hz : Mono (((pointSmallEtale (t ≫ S.immersion i)).sheafFiber
-      (A := ModuleCat.{u + 1} Λ)).map f) := (mono_map_iff_of_natIso e f).1 hm'
-  rw [ht] at hz
+  have hm' : Mono (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} Λ)).map
+      ((S.immersion i)^*[ModuleCat.{u + 1} Λ].map f)) := inferInstance
+  have hmz : Mono (((pointSmallEtale (t ≫ S.immersion i)).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).map f) :=
+    ((MorphismProperty.monomorphisms _).arrow_mk_iso_iff
+      (((Functor.mapArrowFunctor _ _).mapIso e).app (Arrow.mk f))).1 hm'
+  rw [ht] at hmz
   apply (cancel_mono (((pointSmallEtale (X.algClosurePoint z)).sheafFiber
     (A := ModuleCat.{u + 1} Λ)).map f)).1
-  simp only [← Functor.map_comp, hab]
+  change a ≫ f = b ≫ f at hab
+  simp only [← Functor.map_comp]
+  exact congrArg
+    (((pointSmallEtale (X.algClosurePoint z)).sheafFiber (A := ModuleCat.{u + 1} Λ)).map) hab
 
 /-- Blueprint `lem-weil-pbc-constructible-subobjects-noetherian`: Subsheaves of a constructible
 sheaf on a Noetherian scheme.
