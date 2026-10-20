@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import Sheaf.CategoryTheory.BraidedSheafTensorGenerators
 
 /-!
 

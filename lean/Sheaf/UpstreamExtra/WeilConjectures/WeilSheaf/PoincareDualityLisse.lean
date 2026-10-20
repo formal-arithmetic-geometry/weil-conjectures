@@ -1,13 +1,7 @@
 module
 
-public import WeilConjectures.WeilSheaf.PoincareDualityLisse
-public import Mathlib.LinearAlgebra.PerfectPairing.Basic
-public import WeilConjectures.WeilSheaf.Cohomology
-public import WeilConjectures.WeilSheaf.Dual
-public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.StalkRationalPoint
-public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 
 /-! Declarations of ours that lived in the upstream file `WeilConjectures.WeilSheaf.PoincareDualityLisse` (moved out by the scheduled sync, tools/upstream_verbatim.py, 2026-10-20: upstream files are verbatim in live). -/
 
@@ -40,21 +34,6 @@ Poincaré duality section, stated here with `sorry` in the form needed by smooth
 universe u
 
 open CategoryTheory Limits
-
-private theorem exists_pairing_of_equiv_dual {K : Type*} [Field K]
-    {M N : FrobeniusModule K} (e : N.Equiv M.dual) :
-    ∃ P : M.carrier →ₗ[K] N.carrier →ₗ[K] K,
-      P.IsPerfPair ∧ ∀ x y, P (M.frobenius x) (N.frobenius y) = P x y := by
-  let E : N.carrier ≃ₗ[K] Module.Dual K M.carrier := e.toLinearEquiv
-  refine ⟨E.toLinearMap.flip,
-    (LinearMap.IsPerfPair.of_bijective _ E.bijective).flip, ?_⟩
-  intro x y
-  change E (N.frobenius y) (M.frobenius x) = E y x
-  have he := e.map_frobenius y
-  change E (N.frobenius y) =
-    (E y) ∘ₗ M.frobenius.symm.toLinearMap at he
-  rw [he]
-  simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply]
 
 private theorem nonempty_dual_equiv {K : Type*} [Field K]
     {M N : FrobeniusModule K} (e : M.Equiv N) :
