@@ -10,27 +10,17 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The map A to C/IC kills I. Descend it uniquely along the surjection pi using RingHom.liftOfSurjective; its kernel condition follows from Ideal.le_comap_map.",
+   "text": "Put J = I.map(algebraMap A C) and q = Ideal.Quotient.mk J. The equality ker(pi) = I and Ideal.le_comap_map imply ker(pi) <= ker(q.comp(algebraMap A C)). Thus RingHom.liftOfSurjective constructs beta : B -> C/J descending this map.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Define the B-algebra action by this descended ring map. The quotient map C to C/IC and the descended map B to C/IC agree on A.",
+   "text": "Equip C/J with beta.toAlgebra. The equation beta.comp(pi) = q.comp(algebraMap A C) follows pointwise from RingHom.liftOfSurjective_comp_apply, including for zero ideals and zero quotient rings.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "For any compatible maps C to T and B to T, the first map kills IC by Ideal.map_le_iff_le_comap and the kernel equation. Ideal.Quotient.lift supplies the unique map from C/IC to T.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Check the two factorization equations; the B equation can be checked after pi by surjectivity. Uniqueness follows from surjectivity of C to C/IC. PushoutCocone.isColimitAux verifies the universal property.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Use uniqueness of pushouts to obtain an isomorphism under B, then map it through the inverse equivalence to CommAlgCat(B).",
+   "text": "Apply the proved upstream Algebra.quotientBaseChangeObjIso with this B-algebra structure and composition equation. Its explicit pushout universal-property construction gives the required isomorphism in CommAlgCat(B). Package this isomorphism in Nonempty and pair it with beta.toAlgebra to obtain the existential statement.",
    "uses": [],
    "elementary": true
   }
@@ -38,9 +28,9 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "F1",
+  "group": "S1",
   "document": "Stacks Project",
-  "place": "Tag 05WS; pointed-algebra proof recorded in lem-sbc-strict-henselization-surjective-quotient"
+  "place": "Tag 05WS, using the proved upstream quotientBaseChangeObjIso and elementary descent along pi"
  },
  "mathlib_searches": [
   {
@@ -86,14 +76,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.SurjectiveQuotientBaseChange",
-  "file": "lean/Sheaf/RingTheory/SurjectiveQuotientBaseChange.lean",
-  "declaration": "Algebra.quotientBaseChange_obj_iso",
-  "statement": "theorem quotientBaseChange_obj_iso\n    (A B C : Type u) [CommRing A] [CommRing B] [CommRing C] [Algebra A C]\n    (π : A →+* B) (hπ : Function.Surjective π)\n    (I : Ideal A) (hker : RingHom.ker π = I) :\n    ∃ (_ : Algebra B (C ⧸ I.map (algebraMap A C))),\n      Nonempty ((quotientBaseChange π).obj (CommAlgCat.of A C) ≅\n        CommAlgCat.of B (C ⧸ I.map (algebraMap A C)))",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.SurjectiveQuotientBaseChange",
+  "file": "lean/WeilConjectures/RingTheory/SurjectiveQuotientBaseChange.lean",
+  "declaration": "Algebra.quotientBaseChangeObjIso",
+  "statement": "noncomputable def quotientBaseChangeObjIso\n    (A B C : Type u) [CommRing A] [CommRing B] [CommRing C] [Algebra A C]\n    (π : A →+* B) (hπ : Function.Surjective π)\n    (I : Ideal A) (hker : RingHom.ker π = I)\n    [Algebra B (C ⧸ I.map (algebraMap A C))]\n    (hcomp : (algebraMap B (C ⧸ I.map (algebraMap A C))).comp π =\n      (Ideal.Quotient.mk _).comp (algebraMap A C)) :\n    (quotientBaseChange π).obj (CommAlgCat.of A C) ≅\n      CommAlgCat.of B (C ⧸ I.map (algebraMap A C))",
   "branch": "sheaf-dag",
-  "by": "F1",
-  "date": "2026-10-14"
+  "by": "S1",
+  "date": "2026-10-20",
+  "note": "Retired the unused Sheaf copy in favor of upstream. The upstream definition gives an explicit isomorphism for the compatible B-action. The action required by the unchanged existential node statement is constructed by RingHom.liftOfSurjective, because Ideal.le_comap_map shows that A -> C/IC kills ker(pi). Its composition equation is RingHom.liftOfSurjective_comp_apply. This construction followed by quotientBaseChangeObjIso proves the original statement; the complete server-compiled attachment check is in coord/reports/S1/Sheaf.RingTheory.SurjectiveQuotientBaseChange.md. No extra hypothesis is imposed on the node statement."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -106,14 +97,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-8ea20",
-  "group": "F1",
+  "reviewer": "C-4c78e",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T215603-L-897456",
+  "landing": "20261020T135424-L-1821639",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched their DAG statements and change record; all modules compiled, forced adaptation failed in the original caller and succeeded in the adapted caller, and no prohibited declarations or extra interface changes were found."
+  "note": "independent cc review: retired Sheaf copy (no importers, no uses of quotientBaseChange_obj_iso) vs upstream WeilConjectures.RingTheory.SurjectiveQuotientBaseChange; node lean record vs upstream quotientBaseChangeObjIso source (byte-identical); node's existential statement re-derived from it in a compiled scratch check with standard axioms only"
  },
  "lean_audit": {
   "master": {
