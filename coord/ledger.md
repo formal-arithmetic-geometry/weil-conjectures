@@ -18741,3 +18741,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:39 L: merged deliver/ND/lem-trf-derived-evaluation-pseudocoherent (stage 2; reviewer PASS; parallel immutable checks)
 - 17:46 L: merged deliver/NC/lem-coef-rational-bidual-triangle-compatibility (stage 2; reviewer PASS; parallel immutable checks)
 - 17:47 L: returned deliver/B9/Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants (reviewer RETURN: (the landing tools, head e349e7f57) the delivery did not land: (d) Sheaf.AlgebraicGeometry.BaseFieldCohomologicalDimensi)
+- 17:47 L: returned deliver/D5/Sheaf.TraceFormula.TwoTermPerfectDeterminant (reviewer RETURN: (the landing tools, head 2c6a1d8ab) the delivery did not land: lean/Sheaf/TraceFormula/TwoTermPerfectDeterminant.lean: <)
