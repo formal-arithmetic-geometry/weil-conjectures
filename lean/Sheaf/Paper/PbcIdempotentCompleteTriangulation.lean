@@ -8,19 +8,8 @@ module
 public import Sheaf.Paper.PbcQbarCategory
 public import Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
-import Sheaf.CategoryTheory.ScalarLocalization
-import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.Paper.PbcRationalCategory
-import Sheaf.Paper.FiniteStagePairCategory
-import Sheaf.Paper.CommonStageCalculus
-import Sheaf.Paper.PbcVerdierAxioms
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.IntrinsicQbarCategory
 import Sheaf.Paper.PbcQbarIdempotentComplete
-import Sheaf.Paper.PbcScalarExtension
+import Sheaf.Paper.PbcVerdierAxioms
 
 /-! # Idempotent-complete triangulation over the algebraic closure
 
@@ -41,6 +30,38 @@ open CategoryTheory CategoryTheory.Idempotents CategoryTheory.StageSystem
 
 namespace AlgebraicGeometry.Scheme
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem scalarHom_inclusion
+    (l : ℕ) [Fact l.Prime] (Qbar : Type w)
+    [Field Qbar] [Algebra ℚ_[l] Qbar] [IsAlgClosure ℚ_[l] Qbar]
+    {C : Padic.FiniteCoefficientFields l Qbar → Type*}
+    [∀ E, Category* (C E)] [∀ E, Preadditive (C E)] [∀ E, Linear E.val (C E)]
+    [IsDirectedOrder (Padic.FiniteCoefficientFields l Qbar)]
+    (S : StageSystem C) (hS : QbarScalarCompatible l Qbar S)
+    (E : Padic.FiniteCoefficientFields l Qbar) {K L : C E} (f : K ⟶ L) (a : E.val) :
+    qbarScalarHom l Qbar S hS (a : Qbar) ((S.ι E).map f) =
+      (S.ι E).map (a • f) := by
+  change qbarScalarHom l Qbar S hS (a : Qbar)
+    (PairCategory.mkHom (X := ⟨E, K⟩) (Y := ⟨E, L⟩) E le_rfl le_rfl
+      ((S.T le_rfl).map f)) = _
+  have hs := qbarScalarHom_mkHom l Qbar S hS (a : Qbar) E
+    (X := ⟨E, K⟩) (Y := ⟨E, L⟩) le_rfl le_rfl ((S.T le_rfl).map f)
+    E le_rfl a.property
+  have ht : S.tr (hi := (le_rfl : E ≤ E)) (hj := (le_rfl : E ≤ E))
+      (le_rfl : E ≤ E) ((S.T (le_rfl : E ≤ E)).map f) =
+      (S.T (le_rfl : E ≤ E)).map f := tr_map (le_rfl : E ≤ E) f
+  have he : (⟨(a : Qbar), a.property⟩ : E.val) •
+      S.tr (hi := (le_rfl : E ≤ E)) (hj := (le_rfl : E ≤ E))
+        (le_rfl : E ≤ E) ((S.T (le_rfl : E ≤ E)).map f) =
+      (S.T (le_rfl : E ≤ E)).map (a • f) := by
+    rw [ht]
+    exact (hS (E := E) (F := E) le_rfl a f).symm
+  exact hs.trans (congrArg
+    (fun g ↦ PairCategory.mkHom (X := ⟨E, K⟩) (Y := ⟨E, L⟩) E le_rfl le_rfl g) he)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The actual common-stage category is linear, triangulated, and idempotent complete;
 its canonical Karoubi inclusion is an exact equivalence, and each finite-stage inclusion
 is exact and linear over that stage's field. Linearity of the latter is written as
@@ -101,6 +122,18 @@ theorem pbcIdempotentCompleteTriangulation
       ∀ {K L : pbcStageCategory l Qbar T E} (f : K ⟶ L) (a : E.val),
         ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).map (a • f) =
           (a : Qbar) • ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).map f) := by
-  sorry
+  let S := pbcScalarSystem l Qbar T hDim.out hInv.out
+  have hS : QbarScalarCompatible l Qbar S := pbcQbarScalarCompatible l Qbar T
+  have hKar := pbcQbarIdempotentComplete l Qbar T
+  refine ⟨?_, ?_, ⟨inferInstance⟩, (pbcVerdierAxioms l Qbar T).1,
+    hKar.1, hKar.2.2.2.1, hKar.2.2.2.2, ?_⟩
+  · intro α X Y r s h
+    exact qbarScalarRep_rel l Qbar S hS α (X := X) (Y := Y) h
+  · intro α X Y M hX hY f N hMN hα
+    exact qbarScalarHom_mkHom l Qbar S hS α (X := X) (Y := Y) M hX hY f N hMN hα
+  · intro E
+    refine ⟨(pbcVerdierAxioms l Qbar T).2.1 E, inferInstance, ?_⟩
+    intro K L f a
+    exact (scalarHom_inclusion l Qbar S hS E f a).symm
 
 end AlgebraicGeometry.Scheme
