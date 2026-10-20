@@ -30,7 +30,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import WeilConjectures.Algebra.Homology.FlatTruncationTower
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Algebra.Homology.TelescopeColimit
+import WeilConjectures.Algebra.Homology.TelescopeColimit
 import WeilConjectures.Algebra.Homology.TruncationTelescope
 import Sheaf.AlgebraicGeometry.ProEtale.WContractibleClopenPartition
 import Sheaf.CategoryTheory.PartitionRefinementSheafification

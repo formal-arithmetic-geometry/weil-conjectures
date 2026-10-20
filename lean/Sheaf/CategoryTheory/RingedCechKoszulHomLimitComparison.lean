@@ -9,7 +9,7 @@ public import Sheaf.CategoryTheory.RingedKoszulSystem
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import Sheaf.Algebra.Homology.SplitPerfectTensorKInjective
-import Sheaf.Algebra.Homology.TelescopeColimit
+import WeilConjectures.Algebra.Homology.TelescopeColimit
 import Sheaf.CategoryTheory.RingedCechKoszulColimitIso
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
