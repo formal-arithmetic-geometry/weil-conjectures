@@ -89,10 +89,11 @@ private theorem exists_models_of_subalgebras
         LocallyOfFiniteType (p i) ∧ QuasiCompact (p i) ∧
         (D.obj i).hom ≫ f = p i ≫ Spec.map (CommRingCat.ofHom (algebraMap K L))) ∧
       (∀ (i j : Iᵒᵖ) (b : i ⟶ j), IsAffineHom (D.map b).left) ∧
-      ∀ (i : Iᵒᵖ) (v : (D.obj i).left),
+      (∀ (i : Iᵒᵖ) (v : (D.obj i).left),
         @Algebra.IsAlgebraic (X.residueField ((D.obj i).hom v))
           ((D.obj i).left.residueField v) _ _
-          (((D.obj i).hom.residueFieldMap v).hom.toAlgebra) := by
+          (((D.obj i).hom.residueFieldMap v).hom.toAlgebra)) ∧
+      (∀ (i j : Iᵒᵖ) (b : i ⟶ j), (D.map b).left ≫ p j = p i) := by
   classical
   let ai (i : I) : Γ(X, ⊤) ⟶ CommRingCat.of (S i) :=
     CommRingCat.ofHom (a.hom.codRestrict (S i) (ha i))
@@ -145,7 +146,7 @@ private theorem exists_models_of_subalgebras
     exact isLimitOfPreserves Scheme.Spec hcb.op
   let p (i : Iᵒᵖ) : (D.obj i).left ⟶ Spec (.of L) :=
     Spec.map (CommRingCat.ofHom (algebraMap L (S i.unop)))
-  refine ⟨D, p, c, Iso.refl _, ⟨hc⟩, by simp [c], ?_, ?_, ?_⟩
+  refine ⟨D, p, c, Iso.refl _, ⟨hc⟩, by simp [c], ?_, ?_, ?_, ?_⟩
   · intro i
     let := hft i.unop
     have hp : LocallyOfFiniteType (p i) :=
@@ -169,12 +170,17 @@ private theorem exists_models_of_subalgebras
     exact inferInstanceAs (IsAffineHom (Spec.map _))
   · intro i v
     exact hres i.unop v
+  · intro i j b
+    change Spec.map (F.map b.unop) ≫ Spec.map _ = Spec.map _
+    rw [← Spec.map_comp]
+    congr 1
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The strict localization has nonempty affine finite type models over a separably closed
 coefficient field of the prescribed transcendence degree. Their residue extensions over an
-affine neighbourhood are algebraic at every point. The cone is a limit in the slice over that
+affine neighbourhood are algebraic at every point. Transition maps respect the maps to
+`Spec L`. The cone is a limit in the slice over that
 neighbourhood, and its vertex identification respects the canonical morphism to the original
 scheme.
 
@@ -303,7 +309,10 @@ lifting-to-$S$ assumption.
 9. The schemes $V_\tau$ are nonempty by step 6 and are affine and finite type over $L$. Their
 inverse index category is the small cofiltered category $T^{\mathrm{op}}$ by step 5. Their
 transition maps are affine by [lem-weil-pbc-morphism-affine-schemes-affine], since both their
-source and target are affine. Thus steps 2, 6, 7 and 8 establish every asserted clause, including
+source and target are affine. The inclusions of coefficient subalgebras preserve the image of
+each element of $L$,
+so the transition maps commute with the structural maps to $\operatorname{Spec}L$.
+Thus steps 2, 6, 7 and 8 establish every asserted clause, including
 the limit over $U$ and every residue extension. When $b=0$ use $R=F=K$ and the empty list of
 $t_i$; all the constructions and arguments still apply.
 -/
@@ -328,10 +337,11 @@ theorem exists_strictLocal_algebraicResidue_models
             (D.obj i).hom ≫ U.ι ≫ (Y ↘ Spec (.of K)) =
               p i ≫ Spec.map (CommRingCat.ofHom (algebraMap K L))) ∧
           (∀ (i j : I) (a : i ⟶ j), IsAffineHom (D.map a).left) ∧
-          ∀ (i : I) (v : (D.obj i).left),
+          (∀ (i : I) (v : (D.obj i).left),
             @Algebra.IsAlgebraic (U.toScheme.residueField ((D.obj i).hom v))
               ((D.obj i).left.residueField v) _ _
-              (((D.obj i).hom.residueFieldMap v).hom.toAlgebra) := by
+              (((D.obj i).hom.residueFieldMap v).hom.toAlgebra)) ∧
+          (∀ (i j : I) (a : i ⟶ j), (D.map a).left ≫ p j = p i) := by
   classical
   -- Enlarge images of entire etale stages by the coefficient field.
   -- Their inclusions make the colimit and all residue extensions directly accessible.
@@ -399,12 +409,12 @@ theorem exists_strictLocal_algebraicResidue_models
     exact (congrArg (fun g : Spec (.of (S i)) ⟶ U.toScheme ↦
       @Algebra.IsAlgebraic (U.toScheme.residueField (g v))
         ((Spec (.of (S i))).residueField v) _ _ (g.residueFieldMap v).hom.toAlgebra) hg).mp hh
-  obtain ⟨D, p, cm, em, hm, hem, hmodels, hmaps, hresidue⟩ :=
+  obtain ⟨D, p, cm, em, hm, hem, hmodels, hmaps, hresidue, hpcompat⟩ :=
     exists_models_of_subalgebras (K := K) (L := L) (I := I) U.toScheme f c.pt.right c.pt.hom hK
       S (fun b ↦ hS b) hall ha hft hres
   refine ⟨U, hsU, hU, L, instL, instKL, instSep, htr,
     Iᵒᵖ, inferInstance, inferInstance, D, p, cm, e ≪≫ em,
-    hm, ?_, hmodels, hmaps, hresidue⟩
+    hm, ?_, hmodels, hmaps, hresidue, hpcompat⟩
   change (e.hom ≫ em.hom) ≫ cm.pt.hom ≫ U.ι = _
   rw [Category.assoc, ← Category.assoc em.hom, hem]
   simpa only [Category.assoc] using he

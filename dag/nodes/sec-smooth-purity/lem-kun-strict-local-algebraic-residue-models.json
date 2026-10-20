@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Strict-local models with a separably closed coefficient field and algebraic residue extensions",
- "statement": "Let $K$ be a field, let $Y$ be a scheme of finite type over $K$ [def-weil-scheme-over-base], [def-weil-finite-type-morphism], and let $\\bar y$ be a geometric point with underlying point $y$ [def-weil-geometric-point]. Put $b=\\operatorname{trdeg}_K\\kappa(y)$ [def-kun-transcendence-degree], [def-weil-residue-field], and $S=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ [def-weil-pbc-strict-henselization-limit]. There exist an affine open neighbourhood $U$ of $y$ in $Y$, a separably closed field extension $L/K$ with $\\operatorname{trdeg}_K L=b$ [def-kun-separably-closed], and a small cofiltered inverse system (the opposite index category is filtered as defined in [def-weil-pbc-category-colimit]) $(V_i\\to U)$ of nonempty affine schemes with affine transition morphisms [pqf-def-affine-morphism] over $U$ [def-pc-scheme], such that each $V_i$ is of finite type over $L$, the maps $V_i\\to U$ are $K$-morphisms, and $S\\cong\\varprojlim_i V_i$ over $U$ (that is, the compatible maps $S\\to V_i$ are universal among compatible cones). For every $i$ and every point $v\\in V_i$ with image $u\\in U$, the induced extension $\\kappa(v)/\\kappa(u)$ is algebraic (each element satisfies a nonzero polynomial over $\\kappa(u)$).",
+ "statement": "Let $K$ be a field, let $Y$ be a scheme of finite type over $K$ [def-weil-scheme-over-base], [def-weil-finite-type-morphism], and let $\\bar y$ be a geometric point with underlying point $y$ [def-weil-geometric-point]. Put $b=\\operatorname{trdeg}_K\\kappa(y)$ [def-kun-transcendence-degree], [def-weil-residue-field], and $S=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ [def-weil-pbc-strict-henselization-limit]. There exist an affine open neighbourhood $U$ of $y$ in $Y$, a separably closed field extension $L/K$ with $\\operatorname{trdeg}_K L=b$ [def-kun-separably-closed], and a small cofiltered inverse system (the opposite index category is filtered as defined in [def-weil-pbc-category-colimit]) $(V_i\\to U)$ of nonempty affine schemes with affine transition morphisms [pqf-def-affine-morphism] over $U$ [def-pc-scheme], such that each $V_i$ is of finite type over $L$, the maps $V_i\\to U$ are $K$-morphisms, and $S\\cong\\varprojlim_i V_i$ over $U$ (that is, the compatible maps $S\\to V_i$ are universal among compatible cones). For every $i$ and every point $v\\in V_i$ with image $u\\in U$, the induced extension $\\kappa(v)/\\kappa(u)$ is algebraic (each element satisfies a nonzero polynomial over $\\kappa(u)$). The transition morphisms are morphisms over $L$: if $p_i:V_i\\to\\operatorname{Spec}L$ is the structural map and $a:i\\to j$ is an index arrow, then $V(a)\\circ p_j=p_i$ (composition in diagram order).",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 0F0U, lemma-strictly-henselian, proof with compatible etale models; Tag 0F0X, lemma-interlude-I, second paragraph (refined residue-field-control input)"
@@ -58,7 +58,7 @@
    }
   },
   {
-   "text": "Build a ring diagram with objects S_i and transition maps the inclusions. Their cocone to B is colimiting: existence of representatives is exhaustivity and eventual equality follows from injectivity of the subtype maps. Spectrum sends this ring colimit to a scheme limit; the forgetful functor from Over U reflects that limit. Take the opposite of I for the cofiltered scheme diagram.",
+   "text": "Build a ring diagram with objects S_i and transition maps the inclusions. Their cocone to B is colimiting: existence of representatives is exhaustivity and eventual equality follows from injectivity of the subtype maps. Spectrum sends this ring colimit to a scheme limit; the forgetful functor from Over U reflects that limit. Take the opposite of I for the cofiltered scheme diagram. Each transition inclusion S_i to S_j is an L-algebra map, so the spectrum transition commutes with the two maps to Spec L; expose this equation in the conclusion.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "lem-weil-pbc-spec-small-colimit-limit"
@@ -95,7 +95,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0F0X, lemma-interlude-I, finite-type coefficient subalgebras; C2 uses images of entire etale stages to obtain the residue control at every prime, and proves their ring colimit explicitly. Coefficient construction remains the first part of Tag 0F0U."
+  "place": "Tag 0F0X, lemma-interlude-I, finite-type coefficient subalgebras; C2 uses images of entire etale stages to obtain the residue control at every prime, and proves their ring colimit explicitly. Coefficient construction remains the first part of Tag 0F0U. R2 additionally exposes transition compatibility over L, proved directly for the existing subalgebra inclusions."
  },
  "mathlib_searches": [
   {
@@ -269,20 +269,92 @@
   "module": "Sheaf.AlgebraicGeometry.StrictLocalAlgebraicResidueModels",
   "declaration": "AlgebraicGeometry.Scheme.exists_strictLocal_algebraicResidue_models",
   "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalAlgebraicResidueModels.lean",
-  "statement": "theorem exists_strictLocal_algebraicResidue_models {K : Type u} [Field K] (Y : Scheme.{u}) [Y.Over (Spec (.of K))] [LocallyOfFiniteType (Y ↘ Spec (.of K))] [QuasiCompact (Y ↘ Spec (.of K))] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) : ∃ U : Y.Opens, s (IsLocalRing.closedPoint Ω) ∈ U ∧ IsAffineOpen U ∧ ∃ (L : Type u) (_ : Field L) (_ : Algebra K L) (_ : IsSepClosed L), Algebra.trdeg K L = @Algebra.trdeg K (Y.residueField (s (IsLocalRing.closedPoint Ω))) _ _ (((Y ↘ Spec (.of K)).residueFieldAlgebraMap (s (IsLocalRing.closedPoint Ω))).toAlgebra) ∧ ∃ (I : Type u) (_ : SmallCategory I) (_ : IsCofiltered I) (D : I ⥤ Over U.toScheme) (p : ∀ i : I, (D.obj i).left ⟶ Spec (.of L)) (c : Cone D) (e : strictHenselizationScheme s ≅ c.pt.left), Nonempty (IsLimit c) ∧ e.hom ≫ c.pt.hom ≫ U.ι = strictHenselizationStructuralMap s ∧ (∀ i : I, Nonempty (D.obj i).left ∧ IsAffine (D.obj i).left ∧ LocallyOfFiniteType (p i) ∧ QuasiCompact (p i) ∧ (D.obj i).hom ≫ U.ι ≫ (Y ↘ Spec (.of K)) = p i ≫ Spec.map (CommRingCat.ofHom (algebraMap K L))) ∧ (∀ (i j : I) (a : i ⟶ j), IsAffineHom (D.map a).left) ∧ ∀ (i : I) (v : (D.obj i).left), @Algebra.IsAlgebraic (U.toScheme.residueField ((D.obj i).hom v)) ((D.obj i).left.residueField v) _ _ (((D.obj i).hom.residueFieldMap v).hom.toAlgebra)",
+  "statement": "theorem exists_strictLocal_algebraicResidue_models {K : Type u} [Field K] (Y : Scheme.{u}) [Y.Over (Spec (.of K))] [LocallyOfFiniteType (Y ↘ Spec (.of K))] [QuasiCompact (Y ↘ Spec (.of K))] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) : ∃ U : Y.Opens, s (IsLocalRing.closedPoint Ω) ∈ U ∧ IsAffineOpen U ∧ ∃ (L : Type u) (_ : Field L) (_ : Algebra K L) (_ : IsSepClosed L), Algebra.trdeg K L = @Algebra.trdeg K (Y.residueField (s (IsLocalRing.closedPoint Ω))) _ _ (((Y ↘ Spec (.of K)).residueFieldAlgebraMap (s (IsLocalRing.closedPoint Ω))).toAlgebra) ∧ ∃ (I : Type u) (_ : SmallCategory I) (_ : IsCofiltered I) (D : I ⥤ Over U.toScheme) (p : ∀ i : I, (D.obj i).left ⟶ Spec (.of L)) (c : Cone D) (e : strictHenselizationScheme s ≅ c.pt.left), Nonempty (IsLimit c) ∧ e.hom ≫ c.pt.hom ≫ U.ι = strictHenselizationStructuralMap s ∧ (∀ i : I, Nonempty (D.obj i).left ∧ IsAffine (D.obj i).left ∧ LocallyOfFiniteType (p i) ∧ QuasiCompact (p i) ∧ (D.obj i).hom ≫ U.ι ≫ (Y ↘ Spec (.of K)) = p i ≫ Spec.map (CommRingCat.ofHom (algebraMap K L))) ∧ (∀ (i j : I) (a : i ⟶ j), IsAffineHom (D.map a).left) ∧ (∀ (i : I) (v : (D.obj i).left), @Algebra.IsAlgebraic (U.toScheme.residueField ((D.obj i).hom v)) ((D.obj i).left.residueField v) _ _ (((D.obj i).hom.residueFieldMap v).hom.toAlgebra)) ∧ (∀ (i j : I) (a : i ⟶ j), (D.map a).left ≫ p j = p i)",
   "branch": "newtargets-dag",
   "by": "NI",
   "date": "2026-10-15",
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "C-67a6a",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261018T071139-L-1664779",
+  "landing": "20261020T122128-L-482397",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item exists_strictHenselization_limit_smaller_dimension (signature unchanged) proved via strengthened, fully proved exists_strictLocal_algebraicResidue_models (unclaimed module, change record, node statement updated); compiled with both direct importers; axioms clean"
+ },
+ "statement_change": {
+  "date": "2026-10-20",
+  "by": "R2 stage 2",
+  "old_statement": "Let $K$ be a field, let $Y$ be a scheme of finite type over $K$ [def-weil-scheme-over-base], [def-weil-finite-type-morphism], and let $\\bar y$ be a geometric point with underlying point $y$ [def-weil-geometric-point]. Put $b=\\operatorname{trdeg}_K\\kappa(y)$ [def-kun-transcendence-degree], [def-weil-residue-field], and $S=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ [def-weil-pbc-strict-henselization-limit]. There exist an affine open neighbourhood $U$ of $y$ in $Y$, a separably closed field extension $L/K$ with $\\operatorname{trdeg}_K L=b$ [def-kun-separably-closed], and a small cofiltered inverse system (the opposite index category is filtered as defined in [def-weil-pbc-category-colimit]) $(V_i\\to U)$ of nonempty affine schemes with affine transition morphisms [pqf-def-affine-morphism] over $U$ [def-pc-scheme], such that each $V_i$ is of finite type over $L$, the maps $V_i\\to U$ are $K$-morphisms, and $S\\cong\\varprojlim_i V_i$ over $U$ (that is, the compatible maps $S\\to V_i$ are universal among compatible cones). For every $i$ and every point $v\\in V_i$ with image $u\\in U$, the induced extension $\\kappa(v)/\\kappa(u)$ is algebraic (each element satisfies a nonzero polynomial over $\\kappa(u)$).",
+  "what": "The Lean interface gave individual finite-type maps p_i to Spec L without saying that transition maps respect them. A diagram over Spec L cannot be assembled from those fields alone. Expose the equation already satisfied by the existing coefficient-subalgebra construction; no old clause is removed.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 0F0U, lemma-strictly-henselian, compatible-model footnote: the tensor models and their transition maps are algebras over the single coefficient field."
+  },
+  "citers": [
+   {
+    "id": "lem-kun-0f0u",
+    "holds": true,
+    "note": "Uses the added compatibility to build its diagram over L; its target statement is unchanged."
+   },
+   {
+    "id": "lem-kun-affine-direct-image-support-bound",
+    "holds": true,
+    "note": "The support-bound construction still uses the same models and residue extensions; compatibility of coefficient maps makes its intended diagram explicit."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Choose the coefficient-compatible small filtered etale presentation E with colimit B, and a spectrum isomorphism from the original strict localization. Define S_i=L[image(E_i→B)] as actual L-subalgebras of B.",
+    "uses": [
+     "lem-kun-strict-local-coefficient-presentation"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex",
+     "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+    }
+   },
+   {
+    "text": "Naturality of the colimit legs makes S_i monotone along every arrow of the original filtered category. Every element of B lies in one S_i by a colimit representative. The structural map Gamma(U)→B lands in every S_i by the under-object equations. Finite generators for E_i over K have images generating S_i over L; the shared K-scalar equation proves this by algebra-adjoin induction. Etaleness of E_i over Gamma(U) and finite type of U over K supply the finite generators.",
+    "uses": [
+     "lem-pc-filtered-colimit-commrings-elementwise",
+     "def-weil-finite-type-morphism",
+     "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex",
+     "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+    }
+   },
+   {
+    "text": "Build a ring diagram with objects S_i and transition maps the inclusions. Their cocone to B is colimiting: existence of representatives is exhaustivity and eventual equality follows from injectivity of the subtype maps. Spectrum sends this ring colimit to a scheme limit; the forgetful functor from Over U reflects that limit. Take the opposite of I for the cofiltered scheme diagram.",
+    "uses": [
+     "def-weil-pbc-category-colimit",
+     "lem-weil-pbc-spec-small-colimit-limit"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex",
+     "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+    }
+   },
+   {
+    "text": "Each S_i is nonzero because it is a subring of nonzero B, so its spectrum is nonempty. Its spectrum is affine, its structural map to Spec L is of finite type, and transition maps are affine. Apply the coefficient-image residue theorem for algebraicity at every point. Assemble the cone and the original spectrum isomorphism; associativity verifies the required canonical structural-map equation.",
+    "uses": [
+     "lem-kun-coefficient-image-residue-algebraic",
+     "lem-weil-pbc-morphism-affine-schemes-affine"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex",
+     "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+    }
+   }
+  ]
  }
 }
