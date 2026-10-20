@@ -13,7 +13,7 @@ import WeilConjectures.RingTheory.Etale.LocalDimension
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
 import WeilConjectures.RingTheory.StrictHenselizationRegular
-import Sheaf.RingTheory.StrictHenselizationSurjectiveQuotient
+import WeilConjectures.RingTheory.StrictHenselizationSurjectiveQuotient
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!

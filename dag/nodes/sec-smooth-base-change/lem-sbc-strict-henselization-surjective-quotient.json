@@ -12,29 +12,33 @@
  ],
  "proof": [
   {
-   "text": "Obtain the field, separable-closure and compatible scalar structures from strictHenselization_surjective_quotient_data. Install these instances; the arbitrary quotient action returned there is not used in the final conclusion.",
-   "uses": [
-    "lem-sbc-strict-henselization-surjective-quotient-data"
-   ],
-   "elementary": false
+   "text": "Choose L = SeparableClosure (ResidueField B). Compose its residue-field algebra map with IsLocalRing.residue B to give the B-action. The composite is definitionally compatible, so IsScalarTower.of_algebraMap_eq' supplies the scalar tower. These canonical constructions supply all field and separable-closure structures in the existential conclusion.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply the corrected strictHenselization_surjective_quotient_core to obtain the constructed B-action on C/IC and its strict-henselization proof, and package these with the field structures.",
+   "text": "Put Q = C/(I.map(algebraMap A C)) and q = Ideal.Quotient.mk _. Rewrite ker(pi) = I; Ideal.le_comap_map gives ker(pi) <= ker(q.comp(algebraMap A C)). Descend q.comp(algebraMap A C) along pi with RingHom.liftOfSurjective to obtain beta : B -> Q. Equip Q with beta.toAlgebra. The compatibility beta.comp(pi) = q.comp(algebraMap A C) follows from RingHom.liftOfSurjective_comp_apply.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the adopted upstream IsStrictHenselization.surjective_quotient to the constructed L and compatible B-action on Q. Its proof uses finality of pointed etale base change, preservation of colimits by extension of scalars, and the compatible quotient vertex isomorphism. Package the resulting strict-henselization proof with the field, tower, and quotient structures. This derives exactly the original existential node statement, also for I=0.",
    "uses": [
-    "lem-sbc-strict-henselization-surjective-quotient-core"
+    "lem-sbc-pointed-etale-quotient-final",
+    "lem-sbc-surjective-quotient-base-change"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-strict-henselization-surjective-quotient-data",
-  "lem-sbc-strict-henselization-surjective-quotient-core"
+  "lem-sbc-pointed-etale-quotient-final",
+  "lem-sbc-surjective-quotient-base-change"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F1",
+  "group": "M3",
   "document": "Stacks Project",
-  "place": "Tag 05WS; assembly from the data and corrected core declarations"
+  "place": "Tag 05WS; adopted upstream theorem with explicitly constructed separable closure and compatible quotient action"
  },
  "mathlib_searches": [
   {
@@ -86,14 +90,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.StrictHenselizationSurjectiveQuotient",
-  "file": "lean/Sheaf/RingTheory/StrictHenselizationSurjectiveQuotient.lean",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.StrictHenselizationSurjectiveQuotient",
+  "file": "lean/WeilConjectures/RingTheory/StrictHenselizationSurjectiveQuotient.lean",
   "declaration": "Algebra.IsStrictHenselization.surjective_quotient",
-  "statement": "theorem IsStrictHenselization.surjective_quotient\n    (A K C B : Type u) [CommRing A] [IsLocalRing A] [Field K]\n    [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]\n    [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K]\n    [CommRing C] [Algebra A C] (hC : IsStrictHenselization A K C)\n    [CommRing B] [IsLocalRing B]\n    (π : A →+* B) (hπ : Function.Surjective π)\n    (I : Ideal A) (hI : I ≤ IsLocalRing.maximalIdeal A) (hker : RingHom.ker π = I) :\n    ∃ (L : Type u) (_ : Field L)\n      (_ : Algebra (IsLocalRing.ResidueField B) L)\n      (_ : IsSepClosure (IsLocalRing.ResidueField B) L)\n      (_ : Algebra B L) (_ : IsScalarTower B (IsLocalRing.ResidueField B) L)\n      (_ : Algebra B (C ⧸ I.map (algebraMap A C))),\n      IsStrictHenselization B L (C ⧸ I.map (algebraMap A C))",
+  "statement": "theorem IsStrictHenselization.surjective_quotient\n    (A K C B L : Type u) [CommRing A] [IsLocalRing A] [Field K]\n    [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]\n    [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K]\n    [CommRing C] [Algebra A C] (hC : IsStrictHenselization A K C)\n    [CommRing B] [IsLocalRing B] [Field L]\n    [Algebra (IsLocalRing.ResidueField B) L]\n    [IsSepClosure (IsLocalRing.ResidueField B) L]\n    [Algebra B L] [IsScalarTower B (IsLocalRing.ResidueField B) L]\n    (π : A →+* B) (hπ : Function.Surjective π) (I : Ideal A) (hker : RingHom.ker π = I)\n    [Algebra B (C ⧸ I.map (algebraMap A C))]\n    (hcomp : (algebraMap B (C ⧸ I.map (algebraMap A C))).comp π =\n      (Ideal.Quotient.mk _).comp (algebraMap A C)) :\n    IsStrictHenselization B L (C ⧸ I.map (algebraMap A C))",
   "branch": "sheaf-dag",
-  "by": "U2",
-  "date": "2026-10-14"
+  "by": "M3",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf copy in favor of the adopted upstream theorem. The node statement remains existential: choose L = SeparableClosure (ResidueField B), give it the B-action through the residue map, and descend A -> C/IC along pi using RingHom.liftOfSurjective. Ideal.le_comap_map proves the kernel inclusion, and liftOfSurjective_comp_apply proves the hcomp equation required upstream. Applying the upstream theorem and packaging these explicitly constructed structures proves the original node statement. The unchanged existential statement was compiled separately in the attachment check recorded in coord/reports/M3/Sheaf.RingTheory.StrictHenselizationSurjectiveQuotient.md; no hypothesis was added to the node."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -106,14 +111,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-8ea20",
-  "group": "F1",
+  "reviewer": "C-b69c8",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T215603-L-897456",
+  "landing": "20261020T162546-L-3622366",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched their DAG statements and change record; all modules compiled, forced adaptation failed in the original caller and succeeded in the adapted caller, and no prohibited declarations or extra interface changes were found."
+  "note": "independent cc review: retired Sheaf surjective_quotient vs WeilConjectures twin (retire-items.tsv l.1108); node lean.statement verbatim upstream; localized_divisor_quotient signature unchanged, original fails vs stub, adapted compiles, axioms clean; all 3 files compile"
  },
  "lean_audit": {
   "master": {

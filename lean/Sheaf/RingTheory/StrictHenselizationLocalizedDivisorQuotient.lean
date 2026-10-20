@@ -8,7 +8,7 @@ module
 public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.Localization.Ideal
-import Sheaf.RingTheory.StrictHenselizationSurjectiveQuotient
+import WeilConjectures.RingTheory.StrictHenselizationSurjectiveQuotient
 
 /-! # Divisor quotients of algebraic strict henselizations of prime localizations
 
@@ -31,10 +31,11 @@ Proof: Set A = R_q and a = f/1. Since f belongs to q, a belongs to the maximal i
 A, so I = (a) is contained in that maximal ideal. Let p be the image of q in R/(f).
 The containment (f) <= q makes p prime and its inverse image is q. The quotient
 localization theorem gives the canonical ring isomorphism A/I = (R/(f))_p, sending the
-class of r/s to the fraction of the classes of r and s. It identifies the residue fields
-because their maximal ideals are the images of q. Transport the given separable closure
-K along this residue-field isomorphism, with its base action factoring through the residue
-field. By Tag 05WS, C/IC is the strict henselization of A/I for that closure. In the
+class of r/s to the fraction of the classes of r and s. Choose L as the canonical separable
+closure of the residue field of B = (R/(f))_p, with its B-action through the residue map.
+Descend A -> C/IC along the surjection A -> B to construct the B-action on C/IC; its
+composition equation follows from RingHom.liftOfSurjective_comp_apply. Apply the upstream
+Tag 05WS theorem with these structures and this compatibility equation. In the
 pointed etale description, base change modulo I sends the original etale diagram to the
 quotient diagram; lifting pointed etale presentations across the quotient is cofinal,
 and tensoring the universal cocone with A/I preserves its colimit. The compatibility
@@ -98,14 +99,31 @@ theorem IsStrictHenselization.localized_divisor_quotient
     rw [RingHom.ker_equiv_comp, Ideal.mk_ker]
   have hIeq : I = Ideal.span {algebraMap R A f} := by
     simp only [I, J, Ideal.map_span, Set.image_singleton]
-  have hI : I ≤ IsLocalRing.maximalIdeal A := by
-    rw [hIeq, Ideal.span_singleton_le_iff_mem]
-    exact (IsLocalization.AtPrime.to_map_mem_maximal_iff A q f).mpr hf
-  have hquot := hC.surjective_quotient A K C (Localization.AtPrime p) π hπ I hI hker
+  let B := Localization.AtPrime p
+  let L := SeparableClosure (IsLocalRing.ResidueField B)
+  let : Algebra B L := ((algebraMap (IsLocalRing.ResidueField B) L).comp
+    (IsLocalRing.residue B)).toAlgebra
+  have : IsScalarTower B (IsLocalRing.ResidueField B) L :=
+    IsScalarTower.of_algebraMap_eq' (by ext; rfl)
+  let Q := C ⧸ I.map (algebraMap A C)
+  let qC : C →+* Q := Ideal.Quotient.mk _
+  have hk : RingHom.ker π ≤ RingHom.ker (qC.comp (algebraMap A C)) := by
+    rw [hker, ← RingHom.comap_ker, Ideal.mk_ker]
+    exact Ideal.le_comap_map
+  let β : B →+* Q := π.liftOfSurjective hπ ⟨qC.comp (algebraMap A C), hk⟩
+  let : Algebra B Q := β.toAlgebra
+  have hcomp : (algebraMap B Q).comp π = qC.comp (algebraMap A C) := by
+    ext a
+    exact π.liftOfSurjective_comp_apply hπ ⟨qC.comp (algebraMap A C), hk⟩ a
+  have hquot : ∃ (_ : Algebra B Q), IsStrictHenselization B L Q :=
+    ⟨β.toAlgebra, hC.surjective_quotient A K C B L π hπ I hker hcomp⟩
   have hIC : I.map (algebraMap A C) = Ideal.span {b f} := by
     rw [hIeq, Ideal.map_span, Set.image_singleton, hbase f]
-  refine ⟨p, hp, ?_⟩
+  change ∃ (_ : Algebra B (C ⧸ I.map (algebraMap A C))),
+    IsStrictHenselization B L (C ⧸ I.map (algebraMap A C)) at hquot
   rw [hIC] at hquot
-  exact hquot
+  obtain ⟨aQ, hQ⟩ := hquot
+  exact ⟨p, hp, L, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, aQ, hQ⟩
 
 end Algebra
