@@ -90,9 +90,9 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineCoordinateModuleModels",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoordinateModuleModels.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.AffineCoordinateModuleModels",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineCoordinateModuleModels.lean",
   "declaration": "AlgebraicGeometry.affineCoordinateComplex_isKFlat",
   "declarations": [
    "AlgebraicGeometry.affineCoordinateModules",
@@ -103,10 +103,11 @@
    "AlgebraicGeometry.affineCoordinateModuleEquivalence",
    "AlgebraicGeometry.affineCoordinateComplex_isKFlat"
   ],
-  "statement": "theorem affineCoordinateComplex_isKFlat (a : AffineComparisonCoordinate.{u, w}) (M : CochainComplex (ModuleCat.{u} a.A) ℤ) (hM : AffineComparisonKFlat a.A M) : CochainComplex.IsAcyclicTensorKFlat (R := a.X.sheaf) ((affineCoordinateComplex a).obj M)",
+  "statement": "theorem affineCoordinateComplex_isKFlat (a : AffineComparisonCoordinate.{u, w}) (M : CochainComplex (ModuleCat.{u} a.A) ℤ) (hM : AffineComparisonKFlat a.A M) : CochainComplex.IsKFlatTensor (R := a.X.sheaf) ((affineCoordinateComplex a).obj M)",
   "branch": "sheaf-dag",
-  "by": "T4",
-  "date": "2026-10-15"
+  "by": "G8",
+  "date": "2026-10-20",
+  "note": "Use the adopted source implementation. The Sheaf module is a compatibility re-export, with no duplicate declarations. The proof route is unchanged; the source uses IsKFlatTensor for the same acyclic-tensor criterion."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -119,14 +120,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-852cd",
-  "group": "T4",
+  "reviewer": "C-d8064",
+  "group": "G8",
   "result": "pass",
-  "landing": "20261014T191827-L-824617",
+  "landing": "20261020T150639-L-2551339",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the recorded node statements and proof route; all modules and the direct importer compile cleanly, with no mechanical findings or forbidden declarations."
+  "note": "independent cc review: Re-export modules vs WeilConjectures twins: 7+14 declarations present, node lean.statement verbatim vs WC signatures (lines 99-101, 279-293), IsKFlatTensor body = IsAcyclicTensorKFlat body; both files compile; all 21 decls only propext/choice/Quot.sound; no importers; quarantined original still fails with the queue error"
  },
  "lean_audit": {
   "master": {

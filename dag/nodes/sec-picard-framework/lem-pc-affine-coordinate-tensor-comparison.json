@@ -100,14 +100,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineCoordinateTensorComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoordinateTensorComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.AffineCoordinateTensorComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineCoordinateTensorComparison.lean",
   "declaration": "AlgebraicGeometry.affineCoordinateHomotopyComparison_comp",
   "declarations": [
    "AlgebraicGeometry.affineCoordinateGamma",
    "AlgebraicGeometry.affineCoordinateAdjunction",
    "AlgebraicGeometry.affineCoordinateGammaComparison",
+   "AlgebraicGeometry.affineCoordinateTensorComparison",
    "AlgebraicGeometry.affineCoordinateGammaComparison_comp",
    "AlgebraicGeometry.affineCoordinateTensorComparison_comp",
    "AlgebraicGeometry.affineCoordinateHomotopy",
@@ -121,8 +122,9 @@
   ],
   "statement": "theorem affineCoordinateHomotopyComparison_comp (a b c : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (p : b.X ⟶ a.X) (q : c.X ⟶ b.X) (hp : b.σ.hom ≫ p = Spec.map (CommRingCat.ofHom φ) ≫ a.σ.hom) (hq : c.σ.hom ≫ q = Spec.map (CommRingCat.ofHom ψ) ≫ b.σ.hom) (hs : c.σ.hom ≫ (q ≫ p) = Spec.map (CommRingCat.ofHom (ψ.comp φ)) ≫ a.σ.hom) (M : CochainComplex (ModuleCat.{u} a.A) ℤ) : (perfectHomTensorHomotopy q).mapIso ((affineCoordinateHomotopyComparison a b φ p hp).app M) ≪≫ (affineCoordinateHomotopyComparison b c ψ q hq).app (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M) = (perfectHomTensorHomotopyComp q p).app ((affineCoordinateHomotopy a).obj M) ≪≫ (affineCoordinateHomotopyComparison a c (ψ.comp φ) (q ≫ p) hs).app M ≪≫ (affineCoordinateHomotopy c).mapIso ((NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp φ ψ) (.up ℤ)).app M)",
   "branch": "sheaf-dag",
-  "by": "T4",
-  "date": "2026-10-15"
+  "by": "G8",
+  "date": "2026-10-20",
+  "note": "Use the adopted source implementation. The Sheaf module is a compatibility re-export, with no duplicate declarations. The proof route is unchanged; the source uses IsKFlatTensor for the same acyclic-tensor criterion."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -135,14 +137,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-852cd",
-  "group": "T4",
+  "reviewer": "C-d8064",
+  "group": "G8",
   "result": "pass",
-  "landing": "20261014T191827-L-824617",
+  "landing": "20261020T150639-L-2551339",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the recorded node statements and proof route; all modules and the direct importer compile cleanly, with no mechanical findings or forbidden declarations."
+  "note": "independent cc review: Re-export modules vs WeilConjectures twins: 7+14 declarations present, node lean.statement verbatim vs WC signatures (lines 99-101, 279-293), IsKFlatTensor body = IsAcyclicTensorKFlat body; both files compile; all 21 decls only propext/choice/Quot.sound; no importers; quarantined original still fails with the queue error"
  },
  "lean_audit": {
   "master": {
