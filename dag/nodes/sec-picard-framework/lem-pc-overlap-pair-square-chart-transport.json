@@ -58,7 +58,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01ZR",
-  "place": "Tag 01ZR first-proof Zariski gluing; explicit Lean proof by M2 using Mathlib pullHom composition and mapComp-prime pentagon identities. No new unproved intermediate statements."
+  "place": "Tag 01ZR first-proof Zariski gluing; explicit Lean proof by M2 using Mathlib pullHom composition and mapComp-prime pentagon identities. No new unproved intermediate statements. T7, 2026-10-20: preserve this complete proof verbatim in the adopted source module and redirect the sole Sheaf consumer; no new mathematical proof dependency."
  },
  "mathlib_searches": [
   {
@@ -117,14 +117,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OverlapPairSquareChartTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/OverlapPairSquareChartTransport.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.OverlapPairSquareChartTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OverlapPairSquareChartTransport.lean",
   "declaration": "AlgebraicGeometry.overlap_pair_square_chart_transport",
-  "statement": "theorem overlap_pair_square_chart_transport\n    {Y Y' Z : Scheme.{u}} (V : Y.OpenCover.{u}) (V' : Y'.OpenCover.{u})\n    (α : V'.I₀ → V.I₀) (r : Y' ⟶ Y) (ρ : ∀ d, V'.X d ⟶ V.X (α d))\n    (hr : ∀ d, ρ d ≫ V.f (α d) = V'.f d ≫ r)\n    (p : Z ⟶ Y) (p' : Z ⟶ Y') (hp : p' ≫ r = p)\n    (A : (d : V.I₀) → (V.X d).Modules)\n    (A' : (d : V'.I₀) → (V'.X d).Modules) (M : Z.Modules)\n    (c : ∀ d, (Scheme.Modules.pullback (ρ d)).obj (A (α d)) ≅ A' d)\n    (δ : ∀ d, (V'.pullback₁ p').X d ⟶ (V.pullback₁ p).X (α d))\n    (hδf : ∀ d, δ d ≫ (V.pullback₁ p).f (α d) = (V'.pullback₁ p').f d)\n    (hδv : ∀ d, δ d ≫ V.pullbackHom p (α d) = V'.pullbackHom p' d ≫ ρ d)\n    (ε : ∀ d, (Scheme.Modules.pullback (V.pullbackHom p d)).obj (A d) ≅\n      (Scheme.Modules.pullback ((V.pullback₁ p).f d)).obj M)\n    (ε' : ∀ d, (Scheme.Modules.pullback (V'.pullbackHom p' d)).obj (A' d) ≅\n      (Scheme.Modules.pullback ((V'.pullback₁ p').f d)).obj M)\n    (hε : ε' =\n    (fun d ↦ (Scheme.Modules.pullback (V'.pullbackHom p' d)).mapIso (c d).symm ≪≫\n      pullbackCompOfEq (V'.pullbackHom p' d) (ρ d)\n        (δ d ≫ V.pullbackHom p (α d)) (hδv d).symm (A (α d)) ≪≫\n      (pullbackCompOfEq (δ d) (V.pullbackHom p (α d))\n        (δ d ≫ V.pullbackHom p (α d)) rfl (A (α d))).symm ≪≫\n      (Scheme.Modules.pullback (δ d)).mapIso (ε (α d)) ≪≫\n      pullbackCompOfEq (δ d) ((V.pullback₁ p).f (α d))\n        ((V'.pullback₁ p').f d) (hδf d) M))\n    (a b : V'.I₀)\n    (φ : (Scheme.Modules.pullback (pullback.fst (V.f (α a)) (V.f (α b)))).obj\n        (A (α a)) ⟶\n      (Scheme.Modules.pullback (pullback.snd (V.f (α a)) (V.f (α b)))).obj\n        (A (α b)))\n    (hs : overlapPairSquare V A p\n      ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M) ε (α a) (α b) φ) :\n    overlapPairSquare V' A' p'\n      ((modulesPseudofunctor.toDescentData (V'.pullback₁ p').f).obj M)\n      ε' a b\n      ((Scheme.Modules.pullback (pullback.fst (V'.f a) (V'.f b))).map (c a).inv ≫\n        modulesPseudofunctor.overlapPairBaseChangeHom\n          (V.f (α a)) (V.f (α b)) r (ρ a) (ρ b) (V'.f a) (V'.f b)\n          (hr a) (hr b) (A (α a)) (A (α b)) φ ≫\n        (Scheme.Modules.pullback (pullback.snd (V'.f a) (V'.f b))).map (c b).hom)",
+  "statement": "theorem overlap_pair_square_chart_transport\n    {Y Y' Z : Scheme.{u}} (V : Y.OpenCover.{u}) (V' : Y'.OpenCover.{u})\n    (α : V'.I₀ → V.I₀) (r : Y' ⟶ Y) (ρ : ∀ d, V'.X d ⟶ V.X (α d))\n    (hr : ∀ d, ρ d ≫ V.f (α d) = V'.f d ≫ r)\n    (p : Z ⟶ Y) (p' : Z ⟶ Y')\n    (A : (d : V.I₀) → (V.X d).Modules)\n    (A' : (d : V'.I₀) → (V'.X d).Modules) (M : Z.Modules)\n    (c : ∀ d, (Scheme.Modules.pullback (ρ d)).obj (A (α d)) ≅ A' d)\n    (δ : ∀ d, (V'.pullback₁ p').X d ⟶ (V.pullback₁ p).X (α d))\n    (hδf : ∀ d, δ d ≫ (V.pullback₁ p).f (α d) = (V'.pullback₁ p').f d)\n    (hδv : ∀ d, δ d ≫ V.pullbackHom p (α d) = V'.pullbackHom p' d ≫ ρ d)\n    (ε : ∀ d, (Scheme.Modules.pullback (V.pullbackHom p d)).obj (A d) ≅\n      (Scheme.Modules.pullback ((V.pullback₁ p).f d)).obj M)\n    (ε' : ∀ d, (Scheme.Modules.pullback (V'.pullbackHom p' d)).obj (A' d) ≅\n      (Scheme.Modules.pullback ((V'.pullback₁ p').f d)).obj M)\n    (hε : ε' =\n    (fun d ↦ (Scheme.Modules.pullback (V'.pullbackHom p' d)).mapIso (c d).symm ≪≫\n      pullbackCompOfEq (V'.pullbackHom p' d) (ρ d)\n        (δ d ≫ V.pullbackHom p (α d)) (hδv d).symm (A (α d)) ≪≫\n      (pullbackCompOfEq (δ d) (V.pullbackHom p (α d))\n        (δ d ≫ V.pullbackHom p (α d)) rfl (A (α d))).symm ≪≫\n      (Scheme.Modules.pullback (δ d)).mapIso (ε (α d)) ≪≫\n      pullbackCompOfEq (δ d) ((V.pullback₁ p).f (α d))\n        ((V'.pullback₁ p').f d) (hδf d) M))\n    (a b : V'.I₀)\n    (φ : (Scheme.Modules.pullback (pullback.fst (V.f (α a)) (V.f (α b)))).obj\n        (A (α a)) ⟶\n      (Scheme.Modules.pullback (pullback.snd (V.f (α a)) (V.f (α b)))).obj\n        (A (α b)))\n    (hs : overlapPairSquare V A p\n      ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M) ε (α a) (α b) φ) :\n    overlapPairSquare V' A' p'\n      ((modulesPseudofunctor.toDescentData (V'.pullback₁ p').f).obj M)\n      ε' a b\n      ((Scheme.Modules.pullback (pullback.fst (V'.f a) (V'.f b))).map (c a).inv ≫\n        modulesPseudofunctor.overlapPairBaseChangeHom\n          (V.f (α a)) (V.f (α b)) r (ρ a) (ρ b) (V'.f a) (V'.f b)\n          (hr a) (hr b) (A (α a)) (A (α b)) φ ≫\n        (Scheme.Modules.pullback (pullback.snd (V'.f a) (V'.f b))).map (c b).hom)",
   "branch": "sheaf-dag",
-  "by": "U1",
-  "date": "2026-10-14"
+  "by": "T7",
+  "date": "2026-10-20",
+  "note": "The adopted source theorem proves the recorded statement without the redundant hypothesis hp : pprime followed by r = p. The chart equations hdeltaf and hdeltav suffice; the old proof never used hp. The Sheaf duplicate is withdrawn and its sole importer calls this source declaration."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -137,14 +138,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "C-d7e40",
+  "group": "T7",
   "result": "pass",
-  "landing": "20261013T190145-L-3218026",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T150708-L-2575009",
+  "kind": "interface",
+  "note": "independent cc review: WeilConjectures.AlgebraicGeometry.OverlapPairSquareChartTransport theorem text vs node lean.statement (verbatim), retire-items.tsv row vs delivered withdrawal + sole-consumer adaptation (import switch, hp dropped), compiled with axioms propext/Classical.choice/Quot.sound"
  },
  "lean_audit": {
   "master": {

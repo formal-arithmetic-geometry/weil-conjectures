@@ -6,7 +6,7 @@ Authors: SHEAF group G4
 module
 
 public import WeilConjectures.AlgebraicGeometry.OverlapPairCanonicalComparisons
-import Sheaf.AlgebraicGeometry.OverlapPairSquareChartTransport
+import WeilConjectures.AlgebraicGeometry.OverlapPairSquareChartTransport
 import WeilConjectures.AlgebraicGeometry.OverlapIteratedComparisonRefinement
 
 /-! # A step of persistent pairwise overlap lifting
@@ -58,7 +58,8 @@ private theorem pair_square_chart_transport_exists
         (Scheme.Modules.pullback (pullback.snd (V'.f a) (V'.f b))).obj (A' b),
       overlapPairSquare V' A' p'
         ((modulesPseudofunctor.toDescentData (V'.pullback₁ p').f).obj M) ε' a b φ' := by
-  refine ⟨_, overlap_pair_square_chart_transport V V' α r ρ hr p p' hp
+  have _ := hp
+  refine ⟨_, overlap_pair_square_chart_transport V V' α r ρ hr p p'
     A A' M c δ hδf hδv ε ε' hε a b φ hs⟩
 
 /-- A compatible map on one pair stays compatible under refinement of the stage.
