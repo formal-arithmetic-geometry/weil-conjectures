@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleAffineCoverStratification
 import Sheaf.AlgebraicGeometry.EtaleSeparatedStratifiedFinite
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluing
 import Mathlib.AlgebraicGeometry.Cover.Open
-import Sheaf.AlgebraicGeometry.ConstructibleStratificationAssembly
+import WeilConjectures.AlgebraicGeometry.ConstructibleStratificationAssembly
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-!
