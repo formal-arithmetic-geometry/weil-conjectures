@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-affine-line-orientation-injectivity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "proof, Steps 4--5: equality of supported geometric restrictions implies equality of the original morphisms",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Injectivity of geometric supported restrictions",
+ "statement": "For the finite purity setting and affine-line zero section, two derived morphisms from the constant coefficient sheaf to the shifted exceptional object are equal if their canonical supported restrictions at every algebraically closed geometric point are equal.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+  "place": "proof Steps 4--5"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "thm-pur-affine-line-orientation",
+  "lem-pur-supported-hom",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-pur-affine-line-support-stalk to obtain one étale model H of the degree-zero Gysin sheaf and compatible isomorphisms on all geometric fibres. Fullness of comparison lifts the degree-zero maps of both derived morphisms to maps from the constant étale sheaf to H.",
+   "uses": [
+    "lem-pur-affine-line-support-stalk",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The terminal object and support-kernel inclusion uniquely determine the support unit of a transport. Thus any two normalized transports give the same derived support restriction. Give each geometric point its k-algebra structure using Spec.preimage of its composite with a. Replace the given transport by the compatible transport from the supported-stalk lemma. Its formula and the fibre isomorphism turn equality of supported restrictions into equality at the constant unit in each geometric stalk. Maps from the constant ring module are determined by 1. Joint faithfulness of the algebraically closed geometric-point family gives equality of the etale maps. The Gysin evaluation bijection returns equality of the original derived morphisms.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-pur-gysin-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-affine-line-support-stalk",
+  "thm-weil-pbc-site-comparison",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-pur-gysin-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+  "place": "proof Steps 4--5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from the constant sheaf to a complex concentrated in degree zero are determined by geometric fibre restrictions",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓObjEquivHom, CategoryTheory.Sheaf.ΓHomEquiv, CategoryTheory.evalEquiv, CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext_iff, CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext, TopCat.Sheaf.hom_ext, CompHausLike.LocallyConstant.presheaf_ext, AlgebraicGeometry.Scheme.Modules.hom_ext",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gysin.*injective|orientation.*uniqueness",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Injective, CategoryTheory.Sheaf",
+   "results": "2 hits: CategoryTheory.Sheaf.isLocallyInjective_iff_injective, CategoryTheory.Sheaf.mono_of_injective",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a constant sheaf are determined by geometric stalks and supported cohomology pullback",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓHomEquiv, TopCat.Presheaf.stalkPullbackHom, CategoryTheory.Sheaf.ΓObjEquivHom, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, and constant-sheaf criteria.",
+   "date": "2026-10-20",
+   "verdict": "No exact support-pullback-to-stalk comparison. The global-section adjunction is available; the geometric etale point family is supplied by the source library."
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "blueprint_kind": "theorem",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityAffineLineOrientationUniqueness",
+  "date": "2026-10-20",
+  "group": "D8"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityAffineLineOrientationInjectivity",
+  "file": "lean/Sheaf/Paper/PurityAffineLineOrientationInjectivity.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.orientation_support_restriction_ext",
+  "statement": "theorem orientation_support_restriction_ext (P : PurityFiniteSetting.{u})\n    (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u})\n    (a : Y ⟶ Spec (CommRingCat.of P.field.k))\n    [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]\n    (chart : OrientationSupportData P h Y)\n    (transport : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra P.field.k Ω]\n      (y : Spec (CommRingCat.of Ω) ⟶ Y)\n      (_hy : y ≫ a = Spec.map (CommRingCat.ofHom (algebraMap P.field.k Ω))),\n      proEtaleSupportHomTransport P (zeroSection Y)\n        (zeroSection (Spec (CommRingCat.of Ω))) (AffineSpace.map (ULift.{u} (Fin 1)) y)) :\n    ∀ m₁ m₂ : P.derivedSheaf h Y false ⟶ P.gysinValue h Y,\n      (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra P.field.k Ω]\n        (y : Spec (CommRingCat.of Ω) ⟶ Y)\n        (hy : y ≫ a = Spec.map (CommRingCat.ofHom (algebraMap P.field.k Ω))),\n        P.orientationSupportRestriction h y (transport Ω y hy)\n          (chart.support.hom (P.gysinHomToSections h Y m₁)) =\n          P.orientationSupportRestriction h y (transport Ω y hy)\n            (chart.support.hom (P.gysinHomToSections h Y m₂))) →\n      m₁ = m₂",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261020T051156-L-1586231",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261020T051156-L-1586231",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

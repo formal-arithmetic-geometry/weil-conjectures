@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-affine-line-support-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "proof Step 4: supported pullback is geometric stalk evaluation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Geometric supported restriction is evaluation on the étale stalk",
+ "statement": "For the finite affine-line zero-section Gysin object, there is one étale model H of its degree-zero cohomology such that, at every algebraically closed geometric point y, a canonical transport and a fixed isomorphism from the stalk of H to the fibre supported cohomology intertwines evaluation of every section with the canonical supported pullback. This is the supported-Hom and pullback calculation of Step 4 of prop-pur-affine-line-orientation-uniqueness, before any use of stalk conservativity.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+  "place": "proof Step 4; relative Kummer geometric base change"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "thm-pur-affine-line-orientation",
+  "lem-pur-gysin-structure",
+  "lem-weil-pbc-geometric-point-pullback-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Use the degree-zero étale Gysin model and the normalized supported-Hom comparison. On injective representatives its cocycle normalization identifies the displayed support chart with the exceptional counit.",
+   "uses": [
+    "lem-pur-gysin-structure",
+    "lem-pur-supported-hom-pullback",
+    "lem-pur-retracted-support-localization-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the closed pair with the unit-normalized support map. The supported-Hom pullback theorem and the comparison square give inverse image of the section. Relative Kummer and its geometric base change identify the inverse image Gysin line with the fibre support group. On an algebraically closed field global sections equal the étale geometric stalk; evaluation at the constant unit gives the asserted identity for every section.",
+   "uses": [
+    "lem-pur-supported-hom-pullback",
+    "prop-pur-gm-relative-kummer",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-geometric-point-pullback-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-gysin-structure",
+  "lem-pur-supported-hom-pullback",
+  "lem-pur-retracted-support-localization-comparison",
+  "prop-pur-gm-relative-kummer",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-geometric-point-pullback-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+  "place": "proof Step 4, using relative Kummer for the fibre identification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from the constant sheaf to a complex concentrated in degree zero are determined by geometric fibre restrictions",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓObjEquivHom, CategoryTheory.Sheaf.ΓHomEquiv, CategoryTheory.evalEquiv, CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext_iff, CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext, TopCat.Sheaf.hom_ext, CompHausLike.LocallyConstant.presheaf_ext, AlgebraicGeometry.Scheme.Modules.hom_ext",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gysin.*injective|orientation.*uniqueness",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Injective, CategoryTheory.Sheaf",
+   "results": "2 hits: CategoryTheory.Sheaf.isLocallyInjective_iff_injective, CategoryTheory.Sheaf.mono_of_injective",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a constant sheaf are determined by geometric stalks and supported cohomology pullback",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓHomEquiv, TopCat.Presheaf.stalkPullbackHom, CategoryTheory.Sheaf.ΓObjEquivHom, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, and constant-sheaf criteria.",
+   "date": "2026-10-20",
+   "verdict": "No exact support-pullback-to-stalk comparison. The global-section adjunction is available; the geometric etale point family is supplied by the source library."
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "blueprint_kind": "theorem",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityAffineLineOrientationUniqueness",
+  "date": "2026-10-20",
+  "group": "D8"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityAffineLineSupportStalk",
+  "file": "lean/Sheaf/Paper/PurityAffineLineSupportStalk.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineLine_support_stalk",
+  "statement": "theorem affineLine_support_stalk (P : PurityFiniteSetting.{u})\n    (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u})\n    (a : Y ⟶ Spec (CommRingCat.of P.field.k))\n    [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]\n    (chart : OrientationSupportData P h Y) :\n    ∃ (H : EtSheaves P Y)\n      (e : (comparisonUpperStar (Modules P) Y).obj H ≅\n        (DerivedCategory.homologyFunctor (ProSheaves P Y) 0).obj (P.gysinValue h Y)),\n    ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra P.field.k Ω]\n      (y : Spec (CommRingCat.of Ω) ⟶ Y)\n      (_hy : y ≫ a = Spec.map (CommRingCat.ofHom (algebraMap P.field.k Ω))),\n    ∃ p : proEtaleSupportHomTransport P (zeroSection Y)\n        (zeroSection (Spec (CommRingCat.of Ω))) (AffineSpace.map (ULift.{u} (Fin 1)) y),\n    ∃ v : (((Scheme.pointSmallEtale y).ulift.{u + 1}).sheafFiber (A := Modules P)).obj H ≅\n      P.gysinSupport h (Spec (CommRingCat.of Ω)),\n    ∀ f : P.constantEtale Y ⟶ H,\n      P.orientationSupportRestriction h y p\n        (chart.support.hom (P.gysinEvaluate Y\n          ((comparisonUpperStar (Modules P) Y).map f ≫ e.hom))) =\n        v.hom (P.orientationEtaleUnitGerm f y)",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261020T051156-L-1586231",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261020T051156-L-1586231",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
