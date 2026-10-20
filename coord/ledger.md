@@ -18169,3 +18169,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:21 L: merged deliver/Z8/Sheaf.Algebra.Homology.IntegerFlatRepresentative (stage 3; reviewer PASS; first push; landing 20261020T132059-L-1411427 (proof); batch 20261020T131932; modules 1; new nodes 0)
 - 13:29 L: merged deliver/ND/lem-sfb-braided-sheaf-tensor-generators (reviewer PASS; first push; new nodes: 2)
 - 13:39 L: returned deliver/S1/Sheaf.AlgebraicGeometry.RetractedSupportLocalizationComparison (reviewer RETURN: (reviewer C-6a2b4, head 6a2b4a349) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Re)
+- 13:43 L: returned deliver/D3/Sheaf.Paper.DualityPairing (reviewer RETURN: (reviewer C-821ec, head 821ec4f4e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.DualityPairing)
