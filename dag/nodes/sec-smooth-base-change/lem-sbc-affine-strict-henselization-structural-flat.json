@@ -102,14 +102,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselizationStructuralFlat.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StrictHenselizationStructuralFlat.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselization_structural_ringHom_flat",
-  "statement": "theorem strictHenselization_structural_ringHom_flat\n    (R : CommRingCat.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    RingHom.Flat b.hom",
+  "statement": "theorem strictHenselization_structural_ringHom_flat\n    (R : CommRingCat.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselization barY)\n    (hb : Spec.map b = strictLocalizationToBase barY) :\n    RingHom.Flat b.hom",
   "branch": "sheaf-dag",
-  "by": "H2",
-  "date": "2026-10-13"
+  "by": "G1",
+  "date": "2026-10-20",
+  "note": "Retirement of the Sheaf twin, as requested by coord/retire-items.tsv. The adopted source theorem proves flatness for the upstream strictHenselization and strictLocalizationToBase. The original small-representative colimit is canonically isomorphic by smallStrictHenselizationColimitIso. A compiled verification checks that Spec of this comparison followed by strictHenselizationStructuralMap is strictLocalizationToBase, and transports source flatness back to the exact original small-ring statement. The four archived Sheaf consumers and their DAG dependency edges are preserved; their active source counterparts already import and apply this upstream theorem. See coord/changes/G1-strict-henselization-structural-flat-retirement.md."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -122,18 +123,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "J3",
+  "reviewer": "C-7a413",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261016T221613-L-1616160",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.strictHenselization_structural_ringHom_flat"
-  ],
-  "sorry_after": []
+  "landing": "20261020T154613-L-3135954",
+  "kind": "interface",
+  "note": "independent cc review: node lem-sbc-affine-strict-henselization-structural-flat (lean record only changed) with upstream WeilConjectures strictHenselization_structural_ringHom_flat; change-record transport to the old small-ring statement compiled (2.7 s, standard axioms); stub compiles; 0 importers"
  },
  "lean_audit": {
   "master": {

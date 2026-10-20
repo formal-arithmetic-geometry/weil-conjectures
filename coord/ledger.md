@@ -18579,3 +18579,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: batch 20261020T154030 dependency take-out
 - 15:46 L: merged deliver/A4/Sheaf.Paper.CondensedFlatCoefficientCalculus (stage 3; reviewer PASS; first push; landing 20261020T154611-L-3135597 (proof); batch 20261020T154608; modules 1; new nodes 0; change records: coord/changes/A4-condensed-flat-calculus-quarantine-restoration.md)
 - 15:46 L: merged deliver/F3/Sheaf.AlgebraicGeometry.ResidueBettiZeroOfTensorVanishing (stage 3; reviewer PASS; first push; landing 20261020T154613-L-3135717 (proof); batch 20261020T154608; modules 1; new nodes 0)
+- 15:46 L: merged deliver/G1/Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat (stage 3; reviewer PASS; first push; landing 20261020T154613-L-3135954 (interface); batch 20261020T154608; modules 1; new nodes 0; change records: coord/changes/G1-strict-henselization-structural-flat-retirement.md)
