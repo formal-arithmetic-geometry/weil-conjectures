@@ -11,7 +11,8 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorLocalPairing
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
 import Mathlib.Data.Finset.Piecewise
 
 /-!
@@ -26,6 +27,18 @@ Source: blueprint `lem-sc-riemann-roch`, proof of (*), determinant paragraph.
 universe v
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
+
+private theorem exteriorSheaf_rank_wedge_eq_zero_compat {X : Scheme.{v}}
+    {A B : X.Modules} (f : A ⟶ B) (r n s : ℕ) (hr : n = r + s)
+    [A.IsFiniteLocallyFreeOfRank r] (U : X.Opens) (a : Fin r → A.val.obj (op U))
+    (c : Fin s → B.val.obj (op U)) (j : Fin s) (d : A.val.obj (op U))
+    (hc : c j = f.val.app (op U) d) :
+    exteriorSheafSection B n U
+      (fun i ↦ Fin.append (fun k ↦ f.val.app (op U) (a k)) c (Fin.cast hr i)) = 0 := by
+  have h := exteriorSheaf_rank_wedge_eq_zero
+    f r n s hr U a c j d hc
+  rw [← exteriorSheafPowerIso_inv_wedge B n U]
+  simpa using congrArg ((exteriorSheafPowerIso B n).inv.app U) h
 
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def exteriorPresheafComparison {X : Scheme.{v}} (M : X.Modules)
@@ -512,7 +525,7 @@ private theorem wedge_lifts_eq {X : Scheme.{v}} {A B : X.Modules}
     | @insert j T hj ih =>
       obtain ⟨z, hz⟩ := hc j
       rw [Finset.piecewise_insert, hz, wedge_update_add]
-      have hz0 := exteriorSheaf_rank_wedge_eq_zero f r (r + s) s rfl W a
+      have hz0 := exteriorSheaf_rank_wedge_eq_zero_compat f r (r + s) s rfl W a
         (Function.update (T.piecewise c c') j (f.val.app (op W) z)) j z
         (Function.update_self ..)
       simp only [Fin.cast_refl, id_eq] at hz0

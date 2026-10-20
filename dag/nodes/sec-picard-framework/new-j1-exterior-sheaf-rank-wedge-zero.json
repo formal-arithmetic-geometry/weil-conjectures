@@ -14,39 +14,21 @@
  ],
  "proof": [
   {
-   "text": "Choose the local generators data in IsFiniteLocallyFreeOfRank. On an object V mapping both to U and to a cover member, the invertible presentation gives A.over(q.X i) isomorphic to the free sheaf on ULift(Fin r). Evaluate this isomorphism and apply the proved sectionsLinearEquivOfIsoFree. Transport Pi.basisFun and reindex with Equiv.ulift to obtain a basis of A(V) indexed by Fin r. This uses only the existing, proved finite-free section interface.",
+   "text": "Use the fully proved adopted source-library theorem with the same rank-vanishing conclusion, expressed using the official exteriorPower/wedge construction. The Sheaf construction remains available to consumers through the proved comparison compatibility in lem-sc-exterior-sheaf-power-comparison.",
    "uses": [
-    "def-amb-finite-locally-free-module",
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Prove alternating_zero_on_large_image directly: freeze the arguments outside a finite subset t and compose the remaining arguments with f. The resulting alternating map on A is zero by Module.Basis.ext_alternating, since an injective tuple of basis indices would give card(t) <= r. Specialize t to the r initial positions together with the position r+j; these are distinct, so card(t)=r+1. Each selected argument is in the image of f, the extra one by hc. Apply this to exteriorPower.ιMulti, obtaining zero already in the sectionwise exterior power. No exterior-power basis theorem or sheafification injectivity is used.",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "def-sc-sheaf-exterior-power"
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
    "elementary": false
-  },
-  {
-   "text": "Use naturality of the sheafification adjunction unit and the unique restriction map on pure wedges directly, so no private helper from ExteriorTensorLiftHomExt is imported. Naturality of f identifies the restricted tuple with the concatenation of the restricted source entries and restricted c; restricting hc identifies its jth entry. The sectionwise zero maps to zero under the sheafification unit. Finally apply separatedness of the exterior sheaf to the covering sieve q.coversTop U. The same finite-cardinality argument covers rank zero; s=0 has no j.",
-   "uses": [
-    "def-sc-sheaf-exterior-power",
-    "def-amb-finite-locally-free-module"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-amb-finite-locally-free-module",
-  "def-weil-pbc-free-module",
-  "def-sc-sheaf-exterior-power"
+  "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
-  "by": "B4 stage3 worker",
+  "by": "V2 stage3 retirement worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts; complete Lean proof by partial alternating-map restriction, local free section coordinates, and separatedness; retirement repair proves naturality directly using the sheafification unit and the restriction characterization"
+  "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts",
+  "note": "Retired the duplicate Sheaf module in favor of the fully proved adopted source-library theorem. Consumer modules retain their exteriorSheaf statements via local comparison helpers."
  },
  "mathlib_searches": [
   {
@@ -104,14 +86,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafRankWedgeZero.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafRankWedgeZero.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_rank_wedge_eq_zero",
-  "statement": "theorem exteriorSheaf_rank_wedge_eq_zero {X : Scheme.{v}} {A B : X.Modules}\n    (f : A ⟶ B) (r n s : ℕ) (hr : n = r + s) [A.IsFiniteLocallyFreeOfRank r]\n    (U : X.Opens) (a : Fin r → A.val.obj (op U))\n    (c : Fin s → B.val.obj (op U)) (j : Fin s) (d : A.val.obj (op U))\n    (hc : c j = f.val.app (op U) d) :\n    exteriorSheafSection B n U\n      (fun i ↦ Fin.append (fun k ↦ f.val.app (op U) (a k)) c (Fin.cast hr i)) = 0",
+  "statement": "theorem exteriorSheaf_rank_wedge_eq_zero {X : Scheme.{v}} {A B : X.Modules}\n    (f : A ⟶ B) (r n s : ℕ) (hr : n = r + s) [A.IsFiniteLocallyFreeOfRank r]\n    (U : X.Opens) (a : Fin r → A.val.obj (op U))\n    (c : Fin s → B.val.obj (op U)) (j : Fin s) (d : A.val.obj (op U))\n    (hc : c j = f.val.app (op U) d) :\n    wedge (M := B) (r := n) (U := U)\n      (fun i ↦ Fin.append (fun k ↦ f.val.app (op U) (a k)) c (Fin.cast hr i)) = 0",
   "branch": "sheaf-dag",
-  "by": "J1",
-  "date": "2026-10-13"
+  "by": "V2",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf twin in favor of the fully proved upstream theorem. Consumers preserve their exteriorSheaf interfaces using exteriorSheafPowerIso."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -126,12 +109,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-8eebc",
-  "group": "P7",
+  "reviewer": "C-547d3",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261020T144259-L-2261123",
+  "landing": "20261020T163703-L-3786630",
   "kind": "interface",
-  "note": "independent cc review: retire-items.tsv row 64 + hand-off retire-sheaf-twins-20261020 vs delivered stub item, new proved ExteriorSheafPowerComparison (iso via isoMk/uniqueness, transport of WC exteriorTensor_lift_hom_ext) and 5 unclaimed consumers (one-line call/import edits, signatures unchanged); --all compile + 6 second-level importers clean, axioms clean, FreeGenerator import shown necessary"
+  "note": "independent cc review: retire-items row 277 + return C-a64b1 points vs head 547d3af7: stub item, node lean record verbatim to the proved WC twin, 3 unclaimed consumers (import swap + private exteriorSheafPowerIso compat helper / dead import drop); --all compile + 3 second-level importers clean, axioms clean"
  },
  "lean_audit": {
   "master": {

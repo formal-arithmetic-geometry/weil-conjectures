@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTensorQuotientComparison
 import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelRelations
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
 /-!
@@ -27,6 +27,18 @@ lift independence (blueprint: lem-sc-determinant-wedge-quotient-factor).
 universe v
 open CategoryTheory Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
+
+private theorem exteriorSheaf_rank_wedge_eq_zero_compat {X : Scheme.{v}}
+    {A B : X.Modules} (f : A ⟶ B) (r n s : ℕ) (hr : n = r + s)
+    [A.IsFiniteLocallyFreeOfRank r] (U : X.Opens) (a : Fin r → A.val.obj (op U))
+    (c : Fin s → B.val.obj (op U)) (j : Fin s) (d : A.val.obj (op U))
+    (hc : c j = f.val.app (op U) d) :
+    exteriorSheafSection B n U
+      (fun i ↦ Fin.append (fun k ↦ f.val.app (op U) (a k)) c (Fin.cast hr i)) = 0 := by
+  have h := exteriorSheaf_rank_wedge_eq_zero
+    f r n s hr U a c j d hc
+  rw [← exteriorSheafPowerIso_inv_wedge B n U]
+  simpa using congrArg ((exteriorSheafPowerIso B n).inv.app U) h
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The wedge map before choosing quotient lifts factors through the quotient exterior power.
@@ -90,7 +102,7 @@ theorem determinant_wedge_quotient_factor {X : Scheme.{v}}
       (exteriorSheaf S.X₂ r₂) r₁ r₃ q ψ hq
     intro U a c j d hc
     rw [hψ U a c]
-    exact exteriorSheaf_rank_wedge_eq_zero S.f r₁ r₂ r₃ hr U a c j d hc
+    exact exteriorSheaf_rank_wedge_eq_zero_compat S.f r₁ r₂ r₃ hr U a c j d hc
   refine ⟨Abelian.epiDesc q ψ hzero, ?_⟩
   exact Abelian.comp_epiDesc q ψ hzero
 
