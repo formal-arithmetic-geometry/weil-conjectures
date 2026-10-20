@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-normalized-scalar-completion",
+ "kind": "statement",
+ "title": "The normalized global scalar-completion comparison",
+ "statement": "Let l be prime, E and L finite extensions of Q_l with an embedding iota, and Y an arbitrary scheme. Use the completed integral coefficient sheaves and their fixed ordinary and completed scalar functors [def-weil-integral-scalar-extension]. There is a unique natural transformation from ordinary derived scalar extension to completed scalar extension whose component on every good (K-flat with flat terms) complex, followed by the completed representative comparison, equals the ordinary derived counit followed by the specified quotient-completion chain map. That chain map has the finite quotient tensor projections and zero shifted-product coordinate. On every derived-complete input [def-weil-derived-complete], this natural transformation is an isomorphism. The complete normalization equation is exactly scalarCompletion_existsUnique in the existing IntegralOperationsScalarComparisons module.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Lemma 6.8.2(1); normalized quotient-completion map in the first paragraph of blueprint lem-weil-scalar-extension-composition"
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "On every K-flat complex with flat terms, the prescribed quotient tensor maps form a compatible map to the product of the finite reductions. The composite with 1 minus shift is zero. Its cone map has those quotient components and zero shifted component. The ordinary derived counit and the fixed completed-scalar representative comparison transport this chain map to a derived morphism. Good resolutions exist for every complex. Naturality for chain maps and the good-resolution roof computation descend these components to a natural transformation on the whole derived category.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a derived-complete input, identify the two ordinary coefficient models by their pure tensor sections; their coefficient maps agree after every finite quotient projection. These identifications preserve the displayed quotient-chain map. The finite-free completed-scalar comparison therefore proves invertibility of this particular component, with no scheme finiteness hypothesis.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, apply the normalization equation to a good representative of any object and cancel the invertible completed representative comparison. Naturality transports this equality along the resolution isomorphism to the original object. Thus every component is forced; natural transformation extensionality proves uniqueness. The construction and argument also apply to the identity embedding, the zero complex and the empty scheme.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-pc-kflat-resolution",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Lemma 6.8.2(1); normalized quotient-completion map in the first paragraph of blueprint lem-weil-scalar-extension-composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized map from ordinary derived scalar extension to completed scalar extension is an isomorphism on derived complete complexes",
+   "results": "AdicCompletion.mkₐ; IsAdicComplete.of_comp_lift; ContinuousLinearMap.completion",
+   "date": "2026-10-20",
+   "verdict": "No derived sheaf completion normalization; reuse the existing project declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between ordinary and completed scalar extension on derived complete constructible complexes; associativity and coherence of extension of scalars",
+   "results": "ModuleCat.extendScalars_assoc; ModuleCat.extendScalarsComp; ModuleCat.extendScalars_comp_id",
+   "date": "2026-10-19",
+   "verdict": "Ordinary modules only; the project already states the normalized derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "completedScalarComparison|integralScalarCompletionChain",
+   "results": "Project declarations in IntegralOperationsScalarComparisons and FiniteFreeCompletedScalarComparison; no direct Mathlib normalized completed coefficient comparison",
+   "date": "2026-10-19",
+   "verdict": "Existing project result, not a new Lean statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfScalarExtensionComposition",
+  "date": "2026-10-20",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-scalar-extension-composition",
+   "place": "Proof, first paragraph: identify completed extension with ordinary derived tensor, with its fixed quotient-completion normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "declaration": "WeilConjectures.scalarCompletion_existsUnique",
+  "statement": "theorem scalarCompletion_existsUnique (W : AlgebraicGeometry.Scheme.{u}) :\n    ∃! χ : integralOrdinaryDerivedScalar l E L ι W ⟶ integralScalarExtension l E L ι W,\n      (∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,\n        χ.app (DerivedCategory.Q.obj P.obj) ≫\n            (integralScalarExtensionComparison l E L ι W).hom.app P =\n          (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.obj ≫\n            DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι W).app P.obj)) ∧\n      (∀ K, IsSfDerivedComplete l E W K → IsIso (χ.app K))",
+  "existing": true,
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-20",
+  "note": "Attach only the existing global completion-normalization theorem. Its previous grouped attachment also contains tower/unit operation coherence and has scalar-extension composition as a statement dependency; that grouped node cannot serve as a noncircular dependency for this item. No Lean statement, proof or module is added here."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261020T051009-L-1522974",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261020T051009-L-1522974",
+  "kind": "interface"
+ }
+}
