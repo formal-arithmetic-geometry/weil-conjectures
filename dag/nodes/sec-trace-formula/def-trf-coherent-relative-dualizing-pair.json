@@ -26,9 +26,40 @@
   "def-pc-finite-tor-dimension-over",
   "def-pc-derived-pullback-tensor-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On every open of the fibre product, multiply sections of O_X on its inverse image under the diagonal. The two distributivity laws and commutativity make this bilinear for the structure-ring action. Restriction maps are ring homomorphisms, hence the products are natural. Apply the proved sheaf tensor bilinear universal property to obtain the unique ordinary multiplication m.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the total tensor of the two degree-zero diagonal complexes with the single complex of their ordinary tensor. Use the proved source-library mapBifunctorSingle₁Iso and Mathlib singleMapHomologicalComplex. Compute its degree-zero tensor summand inclusion using mapBifunctorSingle₁XIso; it is the tensor of the single-object identity identifications. Compose this comparison with the single-complex map of m. The computed component proves the required product equation.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, a map to the degree-zero single complex is determined in degree zero. The total-tensor coproduct extensionality reduces equality there to summand inclusions. If the first index is nonzero, the source is zero because tensor preserves zero objects. Otherwise the second index is also zero, and uniqueness in the sheaf tensor bilinear universal property identifies the component. The original canonical derived multiplication then uses this now proved unique chain map; all other definitions are unchanged.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "X2 stage-3 worker",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2T: ordinary diagonal multiplication; sectionwise sheaf tensor universal property and degree-zero total-complex calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -149,5 +180,15 @@
   "group": "Q80",
   "result": "pass",
   "note": "Source and node match; both Lean modules compile cleanly via scompile.py with server confirmation; no substantive or mechanical findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261020T174922-L-821480",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
