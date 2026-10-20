@@ -38,24 +38,30 @@
    "elementary": true
   },
   {
-   "text": "Flatness of b preserves injectivity of multiplication by f in H. The positive-degree monic root algebra is free over H, so multiplication by g stays injective there. Localization away from g is injective; denseRange_comap_iff_ker_le_nilRadical and the localization-away range formula show V is dense. Torsor surjectivity, delta, and pullback.condition show V is contained in the image of p. Since p is finite its image is closed. A closed set containing a dense set is the whole spectrum, proving p surjective.",
+   "text": "Prove flatness of b directly for the small coordinate-ring colimit: the opposite pointed-neighbourhood category is filtered, the maps from R form a natural transformation, and each component is flat because its neighbourhood is etale. The structural-map equation identifies all colimit composites with b, so RingHom.Flat.of_isColimit applies. Flatness preserves injectivity of multiplication by f in H. The positive-degree monic root algebra is free over H, so multiplication by g stays injective there. Localization away from g is injective; denseRange_comap_iff_ker_le_nilRadical and the localization-away range formula show V is dense. Torsor surjectivity, delta, and pullback.condition show V is contained in the image of p. Since p is finite its image is closed. A closed set containing a dense set is the whole spectrum, proving p surjective.",
    "uses": [
-    "lem-sbc-affine-strict-henselization-structural-flat"
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-ring-map-iff-ind-flat"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-sbc-normal-dominant-galois",
-  "lem-sbc-affine-strict-henselization-structural-flat",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
   "lem-sbc-regular-integral-divisor-etale-purity",
-  "lem-sbc-strict-hensel-root-purity-data"
+  "lem-sbc-strict-hensel-root-purity-data",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-ring-map-iff-ind-flat"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "H2",
+  "group": "E2",
   "document": "Stacks Project",
-  "place": "Tags 09EB, 0BRM, 0EYG, 0EYH and 0EYE; Lean assembly uses existing divisor purity, pullback pasting, flatness, and closedness of finite images."
+  "place": "Tags 09EB, 0BRM, 0EYG, 0EYH and 0EYE. Restore the quarantined zero-hole module with its original statement and finite-etale assembly. Prove the small-colimit structural flatness bridge directly using RingHom.Flat.of_isColimit and flat_appTop, as in the repaired StrictHenselRootPurityData module; no mathematical statement changes."
  },
  "mathlib_searches": [
   {
@@ -129,13 +135,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T140818-L-313146",
-  "kind": "interface",
+  "landing": "20261020T174745-L-791879",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
