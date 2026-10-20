@@ -25,10 +25,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "E1",
-  "date": "2026-10-13",
-  "document": "Stacks Project",
-  "place": "Tags 08DJ, 0A90, 0A96; Lean construction from unique representative values, with coherence isolated"
+  "group": "N3",
+  "date": "2026-10-20",
+  "document": "Stacks Project; adopted source library",
+  "place": "Tags 08DJ, 0A90, 0A96. Restore the Sheaf module as a public re-export of the upstream theorem. The upstream proof uses the same representative-coherence relation, uniqueness, and unique-output choice. IsKFlatTensor is the canonical name of the identical acyclic-total-tensor predicate. Preserve the Sheaf attachment and the representative-coherence proof dependency."
  },
  "mathlib_searches": [
   {
@@ -118,7 +118,7 @@
   "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative",
   "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescentRepresentative.lean",
   "declaration": "AlgebraicGeometry.exists_tensorHomUncurry_descent_representative",
-  "statement": "theorem exists_tensorHomUncurry_descent_representative (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :\n    letI := schemeDerivedTensorMonoidal X\n    ∃ t : ∀ K L M : schemeDerivedCategory X,\n      (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M),\n      ∀ (P L M : CochainComplex\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ),\n        P.IsAcyclicTensorKFlat →\n        ∀ φ : P ⟶ homComplex (R := X.sheaf) L\n            ((schemeHomKInjectiveResolution X).obj M),\n          t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)\n              (DerivedCategory.Q.map φ ≫\n                (schemeDerivedInternalHomResolutionIso X L M).inv) =\n            pullbackTensorModelMap X P L ≫\n              DerivedCategory.Q.map (schemeTensorHomUncurry X P L M φ) ≫\n                schemeHomResolutionInverse X M",
+  "statement": "theorem exists_tensorHomUncurry_descent_representative (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :\n    letI := schemeDerivedTensorMonoidal X\n    ∃ t : ∀ K L M : schemeDerivedCategory X,\n      (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M),\n      ∀ (P L M : CochainComplex\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ),\n        P.IsKFlatTensor →\n        ∀ φ : P ⟶ homComplex (R := X.sheaf) L\n            ((schemeHomKInjectiveResolution X).obj M),\n          t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)\n              (DerivedCategory.Q.map φ ≫\n                (schemeDerivedInternalHomResolutionIso X L M).inv) =\n            pullbackTensorModelMap X P L ≫\n              DerivedCategory.Q.map (schemeTensorHomUncurry X P L M φ) ≫\n                schemeHomResolutionInverse X M",
   "branch": "sheaf-dag",
   "by": "H1",
   "date": "2026-10-13"
@@ -134,13 +134,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "C-9d357",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261013T082337-L-1633054",
-  "kind": "interface"
+  "landing": "20261020T161735-L-3529914",
+  "kind": "proof",
+  "note": "independent cc review: delivered Sheaf re-export module vs quarantined Sheaf original and WeilConjectures CanonicalTensorHomUncurryDescentRepresentative (identical proof; IsAcyclicTensorKFlat≡IsKFlatTensor same body); node lean.statement vs #check; axioms propext/choice/Quot.sound; compiles; no live importers"
  },
  "lean_audit": {
   "master": {
