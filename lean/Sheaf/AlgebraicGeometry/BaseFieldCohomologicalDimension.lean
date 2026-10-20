@@ -7,14 +7,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.CohomologicalDimension
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.RepresentationTheory.BaseFieldContinuousCochains
 import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
 import Sheaf.FieldTheory.FiniteFieldAbsoluteGalois
-import Sheaf.GroupTheory.CyclicInflation
 import Sheaf.AlgebraicGeometry.EllCohomologicalDimensionComparison
+import Sheaf.RepresentationTheory.ProfiniteCyclicTorsionCohomology
+import WeilConjectures.AlgebraicGeometry.Sites.GaloisModule
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.CategoryTheory.Sites.Point.Torsion
 
 /-!
 # Cohomological dimension of the base field
@@ -32,78 +31,106 @@ universe u
 
 namespace AlgebraicGeometry.ProEtale
 
+private theorem finite_field_torsion_bound (K : Type u) [Field K] [Finite K] :
+    Scheme.HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) 1 := by
+  classical
+  let : Fintype K := Fintype.ofFinite K
+  let Ω := SeparableClosure K
+  let G := Gal(Ω / K)
+  let Z := GrpCat.of (Multiplicative ℤ)
+  obtain ⟨τ, _, _, e, he⟩ := finiteField_absoluteGaloisGroup K Ω
+  have hpow (z : ℤ) : e (τ ^ z) =
+      ProfiniteGrp.ProfiniteCompletion.etaFn Z (Multiplicative.ofAdd z) := by
+    rw [map_zpow, he]
+    have hz : (Multiplicative.ofAdd (1 : ℤ)) ^ z = Multiplicative.ofAdd z := by
+      apply Multiplicative.toAdd.injective
+      change z • (1 : ℤ) = z
+      simp
+    exact ((ProfiniteGrp.ProfiniteCompletion.eta Z).hom.map_zpow
+      (Multiplicative.ofAdd (1 : ℤ)) z).symm.trans (congrArg _ hz)
+  have hdense : DenseRange (fun z : ℤ ↦ τ ^ z) := by
+    have h := (ProfiniteGrp.ProfiniteCompletion.denseRange Z).comp
+      (show Function.Surjective (Multiplicative.ofAdd : ℤ → Z) from
+        fun z ↦ ⟨z.toAdd, rfl⟩).denseRange
+      continuous_of_discreteTopology
+    have h' := e.symm.surjective.denseRange.comp h e.symm.continuous
+    change DenseRange (fun z : ℤ ↦ e.symm
+      (ProfiniteGrp.ProfiniteCompletion.etaFn Z (Multiplicative.ofAdd z))) at h'
+    convert h' using 1
+    funext z
+    rw [← hpow, e.symm_apply_apply]
+  have hquot (N : ℕ) (hN : 0 < N) :
+      ∃ χ : G →ₜ* Multiplicative (ZMod N), χ τ = Multiplicative.ofAdd 1 := by
+    let : NeZero N := ⟨Nat.ne_of_gt hN⟩
+    let P := ProfiniteGrp.of (Multiplicative (ZMod N))
+    let f : Z ⟶ GrpCat.of P := GrpCat.ofHom (Int.castAddHom (ZMod N)).toMultiplicative
+    let χ := ProfiniteGrp.ProfiniteCompletion.lift f
+    refine ⟨χ.hom.comp (ContinuousMonoidHom.toContinuousMonoidHom e), ?_⟩
+    change χ (e τ) = _
+    rw [he]
+    have hc := CategoryTheory.ConcreteCategory.congr_hom
+      (ProfiniteGrp.ProfiniteCompletion.lift_eta f)
+      (Multiplicative.ofAdd (1 : ℤ))
+    change χ (ProfiniteGrp.ProfiniteCompletion.etaFn Z (Multiplicative.ofAdd (1 : ℤ))) =
+      Multiplicative.ofAdd ((1 : ℤ) : ZMod N) at hc
+    simpa only [Int.cast_one] using hc
+  intro F hF q hq
+  let M := (Scheme.etaleSheafEquivDiscreteModule K Ω).functor.obj F
+  have ht : ∀ x : M.obj.V, IsOfFinAddOrder x :=
+    (Scheme.galoisPoint K Ω).isAddTorsion_sheafFiber hF
+  have hH : Subsingleton (CategoryTheory.Sheaf.H F q) := by
+    have := DiscreteModule.subsingleton_H_of_dense_generator_cyclic_quotients.{u, u + 1}
+      τ hdense hquot M ht (by omega : 2 ≤ q)
+    exact (Scheme.sheafHAddEquivGaloisH K Ω F q).injective.subsingleton
+  obtain ⟨c⟩ := Scheme.nonempty_sheafH_extDerivedIso (Spec (.of K)) q
+  exact AddCommGrpCat.isZero_iff_subsingleton.mp
+    ((AddCommGrpCat.isZero_iff_subsingleton.mpr hH).of_iso (c.app F).symm)
+
+
 /-- The `ℓ`-cohomological dimension of an algebraically closed field is zero, and
 that of a finite field is at most one. There is no restriction on the characteristic.
 
 Source: blueprint `sec-six-functors-basics/sk-lem-base-field-cd`, order 1507;
 Stacks Project, Tags 03QQ and 010T (blueprint: sk-lem-base-field-cd).
 
-Proof (the eight steps of the DAG node):
-1. Choose a separable closure inside an algebraic closure of `K`. The additive
-   geometric-stalk equivalence `lem-exc-abelian-sheaves-gmodules` identifies all
-   abelian étale sheaves with discrete absolute Galois modules. The natural section
-   formula `lem-exc-field-sections-stalk-invariants` at `L = K` identifies sections
-   with invariants, respecting addition. An additive equivalence and its inverse
-   preserve kernels and cokernels, hence exact complexes; their Hom identifications
-   preserve K-injectivity. Apply the equivalence to the K-injective resolution of
-   `def-weil-pbc-etale-cohomology`. Sections and invariants then give naturally
-   isomorphic complexes. Part (1) of `det-base-field-cd-cochains` identifies derived
-   invariants with continuous cohomology, in every nonnegative degree and without
-   any finite coefficient ring or common annihilator assumption.
-2. If `K` is algebraically closed, it is separably closed. By
-   `lem-sf-separably-closed-torsion-cd`, all positive torsion étale cohomology vanishes.
-   Part (4) of `det-cd-etale-comparison` gives the bound zero. The spectrum is affine,
-   hence qcqs; take its identity for the auxiliary qcqs morphism in that comparison.
-3. The trivial Galois module `ZMod ℓ` is nonzero since `ℓ` is prime. Its inverse image
-   under the additive equivalence is killed by `ℓ`, by faithfulness and additivity,
-   so it is prime-power torsion. Its degree-zero sections are its invariants, namely
-   `ZMod ℓ`, by the section formula. Thus zero belongs to the supremum in part (2)
-   of `det-cd-etale-comparison`, giving equality with zero. This also works in
-   characteristic `ℓ`.
-4. For finite `K`, `det-base-field-cd-galois-group` identifies the absolute Galois
-   group with the profinite integers, the inverse limit of finite cyclic groups
-   under reduction. Pullback along this topological group isomorphism identifies
-   continuous cochains and their differentials, with inverse from the inverse
-   isomorphism; part (1) of `det-base-field-cd-cochains` identifies their cohomology.
-5. In a torsion discrete module over the profinite integers, each element has open
-   stabilizer containing a coordinate kernel, hence finite orbit. If an integer
-   `e > 0` kills that element, it kills the whole orbit. The subgroup generated by
-   the finite orbit is a quotient of a finite product of `ZMod e`, so is finite and
-   stable. Finite sums of these subgroups are finite stable subgroups. Ordered by
-   inclusion they form a small nonempty directed set (containing zero), whose union
-   is the whole module. Part (2) of `det-base-field-cd-cochains` reduces vanishing
-   to finite stable coefficient modules.
-6. For a finite module `A`, choose a positive exponent `e` (use one when `A = 0`).
-   Its finitely many open stabilizers have open intersection, the action kernel.
-   A basic inverse-limit neighborhood restricts finitely many coordinates, whose
-   least common multiple gives a coordinate kernel inside the action kernel.
-   Thus the action factors through `C_m` for some positive `m`. Each coordinate
-   projection is surjective: an integer representative gives a compatible family
-   with any prescribed residue. The coordinate kernels at positive multiples of
-   `m` are cofinal among all open normal subgroups acting trivially on `A`: refine
-   any such subgroup by a coordinate kernel, then take the least common multiple
-   with `m`. They still give the inverse limit, since every finite list of
-   coordinates is dominated by a common multiple. Part (3) of
-   `det-base-field-cd-cochains` therefore computes cohomology as the colimit of
-   `H^s(C_n, A)` over positive multiples `n` of `m`, with inflation maps. Cofinality
-   preserves both representatives and equalities, by passing to common multiples.
-7. For `s ≥ 2`, apply the final clause of `det-base-field-cd-inflation` to
-   `C_(e*n) → C_n`. Its inflation is zero because `e` kills `A`: the periodic
-   complexes have source norm `N_n` and target norm `e*N_n`, and the cochain map
-   in degree `s` multiplies by `e^(s/2)`, which kills `A`. Every colimit class thus
-   becomes zero at the index `e*n`. Step 5 gives vanishing in degrees at least two
-   for every torsion discrete module, with no common exponent for the whole module.
-8. A torsion étale sheaf has torsion geometric stalk, since each germ is locally
-   represented by a section killed by a positive integer. Steps 1 and 4 identify
-   its cohomology with the continuous cohomology vanishing in step 7. In particular
-   this holds for every prime-power torsion sheaf. Part (2) of
-   `det-cd-etale-comparison`, again using the identity of the qcqs spectrum as its
-   auxiliary morphism, bounds the supremum of nonvanishing degrees by one.
+Proof: For an algebraically closed field, use the separably closed torsion étale
+bound and the étale/pro-étale comparison. The value lies in `WithTop ℕ`, so the
+bound by zero gives equality by `zero_le`.
+
+For a finite field, choose its separable closure. The existing additive equivalence
+of abelian étale sheaves with discrete Galois modules identifies sheaf cohomology
+with `DiscreteModule.H`, and a torsion sheaf has torsion geometric fibre. The
+Frobenius theorem identifies the Galois group with the profinite completion of ℤ.
+Density of ℤ gives a dense integer generator; the universal property of the
+completion extends reduction modulo every positive integer to a continuous cyclic
+quotient sending Frobenius to one.
+
+Apply `subsingleton_H_of_dense_generator_cyclic_quotients`. Its proof refines the
+finite period a of a smooth coinduced function to the cyclic quotient of order ae,
+where e kills its finite image. The full norm is e times the period norm, hence
+zero; finite cyclic partial sums give a primitive. The coinduced short exact
+sequence gives vanishing in degree two, and its torsion quotient allows dimension
+shifting in every higher degree. This realizes the finite cyclic refinement and
+norm cancellation without constructing the filtered colimit of periodic complexes.
+Transfer this vanishing through the field/Galois and sheaf-H/Ext-derived comparison,
+then apply the torsion étale/pro-étale bound with the identity of the affine spectrum.
+No common exponent for the whole torsion module and no characteristic restriction
+are used.
 -/
 theorem cohomologicalDimension_baseField (ℓ : ℕ) (hℓ : Nat.Prime ℓ)
     (K : Type u) [Field K] :
     (IsAlgClosed K → cohomologicalDimension ℓ hℓ (Spec (.of K)) = 0) ∧
       (Finite K → cohomologicalDimension ℓ hℓ (Spec (.of K)) ≤ 1) := by
-  sorry
+  constructor
+  · intro hK
+    let : IsAlgClosed K := hK
+    apply le_antisymm _ zero_le
+    exact (ellCohomologicalDimension_etale_comparison ℓ hℓ (Spec (.of K))
+      (CategoryTheory.CategoryStruct.id (Spec (.of K))) 0).2.2.2
+      (Scheme.hasTorsionEtaleCohomologicalDimensionLE_zero_of_isSepClosed K)
+  · intro hK
+    let : Finite K := hK
+    exact (ellCohomologicalDimension_etale_comparison ℓ hℓ (Spec (.of K))
+      (CategoryTheory.CategoryStruct.id (Spec (.of K))) 1).2.2.2 (finite_field_torsion_bound K)
 
 end AlgebraicGeometry.ProEtale

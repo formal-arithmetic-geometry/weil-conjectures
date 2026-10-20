@@ -1,0 +1,100 @@
+{
+ "id": "lem-base-field-etale-galois-cohomology",
+ "kind": "statement",
+ "title": "Étale cohomology of a field as discrete Galois cohomology",
+ "statement": "Let K : Type u be a field, Ω : Type u a separably closed field with a separable algebraic K-algebra structure, and F an abelian étale sheaf on Spec K valued in AddCommGrpCat.{u+1}. Write M for its geometric fibre at Ω with the natural discrete Gal(Ω/K)-action. For every n ∈ ℕ there is an additive equivalence Hⁿ(Spec K_et,F) ≃ Extⁿ_DiscreteModule(Gal(Ω/K))(ℤ,M).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QU, lemma-compare-cohomology-point; Tags 04JQ and 04JM for the additive equivalence and sections"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Let K be a field and Ω a separably closed separable algebraic extension. The geometric fibre point is a Galois point: every étale geometric point is represented over a finite separable intermediate extension, embeddings extend to automorphisms, and the stabilizer of an embedding is its open fixing subgroup. The source module proves this directly as isGaloisPoint_galoisPoint, using étale residue fields and extension of embeddings.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The fibre functor is therefore an additive equivalence from all abelian étale sheaves to discrete Gal(Ω/K)-modules, not just modules killed by one integer. Sections become invariant fibres. An equivalence preserves short exact sequences and injectives. Apply it to an injective resolution; the sections complex becomes the invariants complex. Taking degree-n cohomology gives the additive equivalence of sheaf H with Extⁿ from the trivial integer module. This is exactly the existing declaration sheafHAddEquivGaloisH, whose source proof is the Galois-point Ext comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Sites/GaloisModule.lean",
+  "place": "isGaloisPoint_galoisPoint; etaleSheafEquivDiscreteModule; sheafHAddEquivGaloisH (existing proved source declarations)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafHAddEquivGaloisH|subsingleton_H_of_dense_generator_cyclic_quotients",
+   "results": "0 hits",
+   "date": "2026-10-20",
+   "verdict": "no matching Mathlib theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale cohomology of the spectrum of a field agrees with the continuous cohomology of its absolute Galois group",
+   "results": "Field.absoluteGaloisGroupAbelianization, groupCohomology.H1ofAutOnUnitsUnique, Field.instGroupAbsoluteGaloisGroup, Field.absoluteGaloisGroup, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, InfiniteGalois.limitToAlgEquiv_apply, InfiniteGalois.profiniteGalGrp",
+   "date": "2026-10-20",
+   "verdict": "no matching Mathlib theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale cohomology of the spectrum of a field agrees with the continuous cohomology of its absolute Galois group",
+   "results": "ContinuousCohomology.MultiInd.complex, Field.absoluteGaloisGroup, continuousCohomology, ContinuousCohomology.continuousCohomologyZeroIso, ContinuousCohomology.homogeneousCochains, Field.instGroupAbsoluteGaloisGroup, InfiniteGalois.algEquivToLimit_continuous, ContinuousCohomology.I_obj_V_isAddCommGroup",
+   "date": "2026-10-20",
+   "verdict": "no matching Mathlib theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseFieldCohomologicalDimension",
+  "group": "W2",
+  "date": "2026-10-21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-base-field-cd",
+   "place": "proof, first paragraph: étale sheaves and étale cohomology are Galois modules and Galois cohomology",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-base-field-cd",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.GaloisModule",
+  "declaration": "AlgebraicGeometry.Scheme.sheafHAddEquivGaloisH",
+  "statement": "noncomputable def sheafHAddEquivGaloisH (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) : (Sheaf.H F n : Type (u + 1)) ≃+ DiscreteModule.H Gal(Ω/K) ((etaleSheafEquivDiscreteModule K Ω).functor.obj F) n",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-21",
+  "existing": true
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261020T174917-L-820235",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261020T174917-L-820235",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
