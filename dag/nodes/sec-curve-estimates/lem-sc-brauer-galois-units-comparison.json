@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Apply the proved upstream Algebra.IsCentral.exists_algEquiv_matrix_of_isSepClosed (recorded among lem-sc-c1-brauer-trivial declarations) to obtain a positive matrix splitting. Apply the matrix-lift theorem to obtain locally constant lifts and a homogeneous cycle. Its homology image x, with these concrete witnesses, satisfies HasBrauerScalarDefect. Faithfulness with A=B proves uniqueness of x. Choose that unique class for each A.",
+   "text": "The upstream existsUnique_hasBrauerScalarDefect applies Algebra.IsCentral.exists_algEquiv_matrix_of_isSepClosed to obtain a positive matrix splitting, then exists_brauerScalarDefect_lifts to obtain matrix lifts and a cycle. Its homology class satisfies HasBrauerScalarDefect. Faithfulness with A=B proves uniqueness. brauerScalarDefectClass chooses this uniquely determined class.",
    "uses": [
     "lem-sc-c1-brauer-trivial",
     "lem-sc-brauer-scalar-defect-exists",
@@ -21,14 +21,14 @@
    "elementary": false
   },
   {
-   "text": "Faithfulness in the reverse direction proves that the unique-class map respects IsBrauerEquivalent. Quotient.lift descends it to BrauerGroup. For injectivity, induct on both quotient representatives and apply the forward direction of faithfulness, followed by Quotient.sound.",
+   "text": "The upstream brauerScalarDefectClass_eq_iff uses faithfulness to show that the class map respects Brauer equivalence and detects it. Quotient.lift descends the map to BrauerGroup. Quotient.inductionOn₂ and Quotient.sound establish injectivity.",
    "uses": [
     "lem-sc-brauer-scalar-defect-faithful"
    ],
    "elementary": false
   },
   {
-   "text": "For each x, the crossed-product realization theorem supplies A realizing x. Faithfulness with A=A identifies the chosen class of A with x. The quotient class of A is therefore a preimage. Equiv.ofBijective gives the required equivalence. The choice of the class uses its proved uniqueness, not mere existence of an arbitrary witness.",
+   "text": "The upstream exists_csa_brauerScalarDefect supplies an algebra realizing each class. eq_brauerScalarDefectClass_iff identifies its chosen class with that class and gives a quotient preimage. Equiv.ofBijective packages the map as brauerGroupEquivGaloisUnitsH2. This concrete equivalence realizes the node directly and implies the retired Nonempty theorem.",
    "uses": [
     "lem-sc-brauer-scalar-defect-surjective",
     "lem-sc-brauer-scalar-defect-faithful"
@@ -102,14 +102,15 @@
   }
  },
  "lean": {
-  "module": "Sheaf.FieldTheory.BrauerGaloisComparison",
-  "file": "lean/Sheaf/FieldTheory/BrauerGaloisComparison.lean",
-  "declaration": "Field.nonempty_equiv_brauerGroup_galoisUnitsH2",
-  "statement": "theorem nonempty_equiv_brauerGroup_galoisUnitsH2 (K : Type u) [Field K] : Nonempty (BrauerGroup.{u, u} K ≃ GaloisUnitsH2 K)",
+  "existing": true,
+  "module": "WeilConjectures.FieldTheory.BrauerGaloisComparison",
+  "file": "lean/WeilConjectures/FieldTheory/BrauerGaloisComparison.lean",
+  "declaration": "Field.brauerGroupEquivGaloisUnitsH2",
+  "statement": "noncomputable def brauerGroupEquivGaloisUnitsH2 (K : Type u) [Field K] : BrauerGroup.{u, u} K ≃ GaloisUnitsH2 K",
   "branch": "sheaf-dag",
-  "by": "P2",
-  "date": "2026-10-12",
-  "existing": false
+  "by": "D3",
+  "date": "2026-10-20",
+  "note": "Retired the unconsumed Sheaf twin in favor of the upstream equivalence. The former Nonempty theorem follows by enclosing brauerGroupEquivGaloisUnitsH2 K in Nonempty.intro; this was compiled for arbitrary K and universe u. The upstream equivalence has only the three permitted axioms."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -122,13 +123,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T1",
+  "reviewer": "C-5b6cd",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T085341-L-40370",
+  "landing": "20261020T135356-L-1816360",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: removed Sheaf Nonempty theorem vs upstream Field.brauerGroupEquivGaloisUnitsH2 (same types, axioms clean); node diff vs live (proof text + lean block only); retire-items.tsv row 118 and hand-off; rg shows no importers or users; delivered files compile"
  }
 }
