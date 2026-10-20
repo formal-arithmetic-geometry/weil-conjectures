@@ -119,7 +119,7 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations",
+  "module": "WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations",
   "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCohomologyCup",
   "declarations": [
    "AlgebraicGeometry.Scheme.Modules.scalarMap",
@@ -185,14 +185,14 @@
    "AlgebraicGeometry.Scheme.Modules.scalarTensorCoefficientApp_naturality",
    "AlgebraicGeometry.Scheme.Modules.scalarTensorPresheafCoefficient"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/FieldLinearModuleCohomologyOperations.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FieldLinearModuleCohomologyOperations.lean",
   "statement": "def scalarCohomologyCup (F G : SheafOfModules.{u} X.ringCatSheaf) (p q : ℕ) (a : scalarCohomology f F p) (b : scalarCohomology f G q) : scalarCohomology f (F ⊗ G) (p+q)",
   "branch": "sheaf-dag",
   "by": "Z2",
   "date": "2026-10-12",
   "existing": false,
   "fixed_by": "R-pkq2",
-  "note": "Partial explicit-data repair. Changed characterization signatures (verbatim):\ntheorem exists_scalarUnitLinear (r : k) : scalarUnitLinear f r = scalarMap f ⊤ r\ntheorem exists_scalarTensorCoefficient (F G : SheafOfModules.{u} X.ringCatSheaf) :\n    ∀ (U : X.Opens) (s : scalarObj f F (op U)) (t : scalarObj f G (op U)),\n      (scalarTensorCoefficient f F G).hom.app (op U)\n        (((Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)\n          (ModuleCat.{u} k)) (scalarSheaf f F) (scalarSheaf f G)).app (op U))\n            (s ⊗ₜ[k] t)) = tmulSection s t\nAll other existing signatures unchanged; no TeX statement changes. Remaining hollow comparisons are documented in the report."
+  "note": "X2 retirement: adopted upstream twin has identical public declarations and constructions; only copyright and local instance names differ. Consumers now import the twin."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -210,13 +210,13 @@
   "result": "fix"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-767dc",
-  "group": "T4",
+  "reviewer": "C-c220b",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261014T020517-L-3813991",
+  "landing": "20261020T145551-L-2413903",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with node statements, proof dependencies, change record and report; existing signatures and definitions are unchanged. Both modules and all 47 direct importers compile cleanly; axiom checks confirm the single reported lower obligation."
+  "note": "independent cc review: Sheaf copy vs WeilConjectures twin (diff: header + 5 local-instance names only); 7 import-swapped consumers compiled; CanonicalCoherentEtaleComparison delivered vs import-swap-only: all 14 decl type/value hashes and axioms identical; 3 nodes changed only in lean.module/file/note"
  }
 }

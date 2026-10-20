@@ -5,7 +5,7 @@ Authors: SHEAF groups U2, B2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.FieldScalarRestrictionInjectives
 import Mathlib.Algebra.Homology.ConcreteCategory

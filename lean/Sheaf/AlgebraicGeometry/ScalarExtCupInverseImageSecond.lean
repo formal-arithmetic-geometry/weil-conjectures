@@ -5,7 +5,7 @@ Authors: SHEAF group S2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf

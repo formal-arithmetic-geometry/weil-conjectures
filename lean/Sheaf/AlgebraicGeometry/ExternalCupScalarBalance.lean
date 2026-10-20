@@ -5,7 +5,7 @@ Authors: SHEAF group K4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 
 /-! # Scalar balance of external cup products
 
@@ -23,7 +23,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 variable {k : Type u} [Field k] {X Y : Scheme.{u}}
 
-local instance ExternalCupScalarBalance_monoidalCategory (A : Scheme.{u}) : MonoidalCategory (KSheaf A k) :=
+local instance ExternalCupScalarBalance_monoidalCategory (A : Scheme.{u}) :
+    MonoidalCategory (KSheaf A k) :=
   Sheaf.monoidalCategory _ _
 local instance ExternalCupScalarBalance_hasExt (A : Scheme.{u}) : HasExt.{u + 1} (KSheaf A k) :=
   HasExt.standard (KSheaf A k)

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
-public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.DimensionBaseChange

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentEtaleComparisonMorphism
 public import WeilConjectures.AlgebraicGeometry.EtaleZariskiQcohComparison
-public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
@@ -59,6 +59,9 @@ def coherentEtaleMap {X : Scheme.{u}} (F G : SheafOfModules.{u} X.ringCatSheaf)
   (sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).map
     (Classical.choose (etale_zariski_qcoh_comparison X) F G φ)
 
+attribute [local irreducible] coherentEtaleMap CoherentEtale.IsNormalized
+  CoherentEtale.sourceGroup CoherentEtale.targetGroup CoherentEtale.Coeff
+
 /-- A normalized morphism of the two cohomological delta functors on quasi-coherent modules.
 The source is the underlying Zariski abelian sheaf. Naturality alone is insufficient:
 the displayed connecting-map condition and normalization in degree zero are essential.
@@ -69,6 +72,8 @@ def IsNormalizedCoherentEtaleComparison (X : Scheme.{u})
       CoherentEtale.Source X F q ≃+ CoherentEtale.Target X F q) : Prop :=
   CoherentEtale.IsNormalized X (fun F G _ _ φ ↦ coherentEtaleMap F G φ)
     (fun F _ q ↦ (c F q).toAddMonoidHom)
+
+attribute [local semireducible] coherentEtaleMap
 
 /-- Existence and uniqueness of the normalized comparison.
 Source: Stacks Project, Tags 03P2, 03FD and 010S
@@ -93,15 +98,17 @@ theorem exists_unique_normalizedCoherentEtaleComparison
   classical
   let m : CoherentEtale.Maps X := fun F G _ _ φ ↦ coherentEtaleMap F G φ
   have hm (F G : SheafOfModules.{u} X.ringCatSheaf)
-      [F.IsQuasicoherent] [G.IsQuasicoherent] (φ : F ⟶ G) (U : X.Etale) :
-      (m F G φ).hom.app (op U) =
-        AddCommGrpCat.uliftFunctor.map (((tensorPullback U.hom).map φ).app ⊤) := by
-    change AddCommGrpCat.uliftFunctor.map
-      ((Classical.choose (etale_zariski_qcoh_comparison X) F G φ).hom.app (op U)) = _
-    exact congrArg AddCommGrpCat.uliftFunctor.map
+      [F.IsQuasicoherent] [G.IsQuasicoherent] (φ : F ⟶ G) (U : X.Etale) :=
+    congrArg AddCommGrpCat.uliftFunctor.map
       ((Classical.choose_spec (etale_zariski_qcoh_comparison X)).1 F G φ U)
-  have heff := CoherentEtale.exists_effacing_sequence f m hm
-  obtain ⟨c, hc⟩ := CoherentEtale.exists_normalized_map f m hm
+  have heff : CoherentEtale.Effaces X m := by
+    apply CoherentEtale.exists_effacing_sequence f m
+    unfold CoherentEtale.Coeff
+    exact hm
+  obtain ⟨c, hc⟩ : ∃ c : CoherentEtale.Family X, CoherentEtale.IsNormalized X m c := by
+    apply CoherentEtale.exists_normalized_map f m
+    unfold CoherentEtale.Coeff
+    exact hm
   have hb := CoherentEtale.normalized_bijective X m heff c hc
     (fun F _ ↦ CoherentEtale.normalized_zero_bijective X m c hc F)
   let e (F : SheafOfModules.{u} X.ringCatSheaf) [F.IsQuasicoherent] (q : ℕ) :=
@@ -116,6 +123,9 @@ theorem exists_unique_normalizedCoherentEtaleComparison
   apply AddEquiv.ext
   intro x
   exact congrArg (fun t : CoherentEtale.Family X ↦ t F q x) h
+
+attribute [local semireducible] CoherentEtale.sourceGroup CoherentEtale.targetGroup
+  CoherentEtale.Coeff
 
 /-- Cache the additive group underlying the recorded module cohomology object.
 This uses the existing derived functor without changing its construction.
