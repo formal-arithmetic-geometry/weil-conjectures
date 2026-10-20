@@ -51,9 +51,9 @@
  ],
  "proof_origin": {
   "kind": "agent",
-  "by": "P1",
-  "date": "2026-10-12",
-  "note": "Lean reduction of the existing node proof; sources read at their official Stacks Project tag pages."
+  "by": "M2",
+  "date": "2026-10-21",
+  "note": "Reuse the adopted source proof with the existing limit-cone and pullback argument. Reconciled with ca565a83de: the parent uses strictLocalization upstream, and CoreData already proves the comparison to the small-colimit presentation. No new holes, no new nodes, no change to the unit route. Sources: Stacks algebra lemma-strictly-henselian-functorial (04GU), etale-cohomology definition-etale-local-rings (03PS) and the following functoriality paragraph."
  },
  "mathlib_searches": [
   {
@@ -109,14 +109,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationSchemeFunctoriality",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationSchemeFunctoriality.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictHenselizationSchemeFunctoriality",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationSchemeFunctoriality.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_strictHenselizationSchemeMap",
-  "statement": "theorem exists_strictHenselizationSchemeMap\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {s : Spec (.of Ω) ⟶ S} {t : Spec (.of Ω) ⟶ T}\n    (hst : s = t ≫ g) :\n    ∃ f : strictHenselizationScheme t ⟶ strictHenselizationScheme s,\n      f ≫ strictHenselizationStructuralMap s =\n        strictHenselizationStructuralMap t ≫ g",
+  "statement": "theorem exists_strictHenselizationSchemeMap\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {s : Spec (.of Ω) ⟶ S} {t : Spec (.of Ω) ⟶ T}\n    (hst : s = t ≫ g) :\n    ∃ f : strictLocalization t ⟶ strictLocalization s,\n      f ≫ strictLocalizationToBase s =\n        strictLocalizationToBase t ≫ g",
   "branch": "sheaf-dag",
-  "by": "P1",
-  "date": "2026-10-12"
+  "by": "M2",
+  "date": "2026-10-21",
+  "note": "Retire the duplicate Sheaf module after reconciling the reviewed packet with ca565a83de. The only DAG parent, compatible-strict-henselization-core-completion, is already attached to the proved upstream theorem on strictLocalization and imports this upstream functoriality theorem. Its Sheaf twin is already withdrawn. CompatibleStrictHenselizationCoreData transports the upstream presentations and structural maps to the small-colimit model through its proved private localizationComparison and localizationComparison_base. Preserve all of those landed files and the parent node unchanged; no consumer adaptation remains necessary."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -129,14 +130,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-e6557",
-  "group": "P1",
+  "reviewer": "C-9476c",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T153649-L-2395362",
+  "landing": "20261020T164227-L-3890832",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged item signature, both new declarations and their proofs with the DAG records and cited sources; all delivered modules and the direct importer compile cleanly; axioms are as reported."
+  "note": "independent cc review: retire-items.tsv line 343 retirement (Sheaf→WeilConjectures, DIFFERENT): node lean record existing:true = upstream exists_strictHenselizationSchemeMap lines 127-134 verbatim, axioms propext/choice/Quot.sound; emptied Sheaf module has no importers in lean/, quarantine/ or published oleans; compiles 0.2 s"
  },
  "lean_audit": {
   "master": {
