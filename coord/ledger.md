@@ -17742,3 +17742,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:10 L: merged deliver/C5/Sheaf.Paper.IntegralHeartDualizable (stage 3; reviewer PASS; first push; landing 20261020T051049-L-1549400 (interface); batch 20261020T050952; modules 4; new nodes 3)
 - 05:10 L: merged deliver/C5/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic (stage 3; reviewer PASS; first push; landing 20261020T051052-L-1550627 (interface); batch 20261020T050952; modules 3; new nodes 2)
 - 05:10 L: merged deliver/C7/Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer (stage 3; reviewer PASS; first push; landing 20261020T051055-L-1552413 (interface); batch 20261020T050952; modules 2; new nodes 1)
+- 05:11 L: merged deliver/C7/Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic (stage 3; reviewer PASS; first push; landing 20261020T051058-L-1554768 (interface); batch 20261020T050952; modules 2; new nodes 1)
