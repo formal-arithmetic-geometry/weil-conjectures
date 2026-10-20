@@ -27,7 +27,7 @@
    "elementary": false
   },
   {
-   "text": "Form the five-factor natural isomorphism S. The private square_factorization calculation uses S.hom.naturality at beta, functor map_comp, the counit equation, and associativity. Instantiate it with exact restriction, its source factorization and target factorization. Expand only component formulas and derived direct-image aliases. Keep singleComplexOpenPullbackIso, derivedPullback, and Functor.mapDerivedCategory locally irreducible, and respect transparency during the square calculation. Only the final transport conversion compares the underlying category instances with transparency disabled.",
+   "text": "Form the five-factor natural isomorphism S. The private square_factorization calculation uses S.hom.naturality at beta, functor map_comp, the counit equation, and associativity. Instantiate it with exact restriction, its source factorization and target factorization. Expand only component formulas and derived direct-image aliases. Keep singleComplexOpenPullbackIso and Functor.mapDerivedCategory locally irreducible; derivedPullback is already globally irreducible. Respect transparency during the square calculation. Only the final transport conversion compares the underlying category instances with transparency disabled.",
    "uses": [],
    "elementary": true
   }
@@ -38,7 +38,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
-  "place": "Repair X-734c6 G1/C5: reuse the shared pinned counit normalization, then naturality of the open square; remove both duplicated private counit declarations, preserving the original signature and public imports."
+  "place": "S9, 2026-10-20: retire the quarantined Sheaf copy in favor of WeilConjectures.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization. Preserve the identical theorem statement, shared pinned counit normalization, and naturality proof. The official twin already omits the redundant local irreducibility annotation on derivedPullback."
  },
  "mathlib_searches": [
   {
@@ -95,14 +95,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization",
+  "module": "WeilConjectures.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization",
   "declaration": "AlgebraicGeometry.singleComplexOpen_unit_square_factorization",
-  "existing": false,
-  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnitSquareFactorization.lean",
+  "existing": true,
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SingleComplexOpenUnitSquareFactorization.lean",
   "statement": "theorem singleComplexOpen_unit_square_factorization\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens)\n    (I : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :\n    let _ : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),\n      (Scheme.Modules.tensorPullback k).Additive :=\n      @Classical.choose _ _ exists_derivedPullbackComposition\n    let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom\n    let rY := schemeOpenRestriction Y V\n    let rX := schemeOpenRestriction X (f ⁻¹ᵁ V)\n    let a := @singleComplexOpenPinnedAdjunction.{u, w} _\n    let c := @singleComplexOpenPinnedComposition.{u, w} _\n    let ε := @Classical.choose _ _\n      (Classical.choose_spec exists_derivedPullbackComposition)\n    (derivedPullback (f ∣_ V)).map\n        (rY.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫\n          rY.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app I)) ≫\n      ((derivedPullback (f ∣_ V)).mapIso\n          ((singleComplexOpenPullbackIso Y V).symm.app\n            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I))) ≪≫\n        (c (f ∣_ V) V.ι).app ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)) ≪≫\n        eqToIso (congrArg\n          (fun k ↦ (derivedPullback k).obj\n            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)))\n          (morphismRestrict_ι f V)) ≪≫\n        (c (f ⁻¹ᵁ V).ι f).symm.app\n          ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)) ≪≫\n        (singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).app\n          ((derivedPullback f).obj\n            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)))).hom ≫\n      rX.mapDerivedCategory.map ((a f).counit.app (DerivedCategory.Qh.obj I)) ≫\n      rX.mapDerivedCategoryFactorsh.hom.app I =\n    (derivedPullback (f ∣_ V)).map\n      (rY.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≫\n      ((derivedPullback (f ∣_ V)).mapIso\n          ((singleComplexOpenPullbackIso Y V).symm.app\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I))) ≪≫\n        (c (f ∣_ V) V.ι).app (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≪≫\n        eqToIso (congrArg\n          (fun k ↦ (derivedPullback k).obj\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)))\n          (morphismRestrict_ι f V)) ≪≫\n        (c (f ⁻¹ᵁ V).ι f).symm.app\n          (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≪≫\n        (singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).app\n          ((derivedPullback f).obj\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)))).hom ≫\n      rX.mapDerivedCategory.map ((ε f).app ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≫\n      rX.mapDerivedCategory.map (DerivedCategory.Qh.map\n        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))\n          |>.mapHomotopyCategory (.up ℤ)).counit.app I)) ≫\n      rX.mapDerivedCategoryFactorsh.hom.app I",
   "branch": "sheaf-dag",
   "by": "M3",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "Retired the quarantined Sheaf twin in favor of this official module. Its public theorem signature is byte-identical. The live parent already imports and applies this twin; its DAG dependency and the unit route are preserved."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -115,14 +116,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-21011",
-  "group": "S3",
+  "reviewer": "C-fc23e",
+  "group": "S9",
   "result": "pass",
-  "landing": "20261014T130427-L-3287621",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, shared extraction with the original implementation, and preserved interfaces with all direct importers; compilation and axiom checks pass."
+  "landing": "20261020T150706-L-2574567",
+  "kind": "proof",
+  "note": "independent cc review: Withdrawn quarantine Sheaf copy vs live WeilConjectures twin (byte-identical theorem, only redundant local irreducible on derivedPullback dropped); node lean.statement verbatim in twin; node diff vs live (proof text, proof_origin, lean module/file/existing) covered by change record; no importers of Sheaf path; twin axioms clean"
  },
  "lean_audit": {
   "master": {
