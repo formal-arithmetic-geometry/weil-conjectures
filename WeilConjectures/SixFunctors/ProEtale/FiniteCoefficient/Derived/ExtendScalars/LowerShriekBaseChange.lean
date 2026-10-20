@@ -77,7 +77,41 @@ theorem leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso_extendScalars_
           hsq).hom.app K) ≫
       (openImmersionLowerShriekExtendScalarsIso R S j').hom.app
         (L((g')^*[ModuleCat.{u + 1} R]).obj K) := by
-  sorry
+  have hc := mateEquiv_app_cube_converse
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction (ModuleCat.{u + 1} R) j)
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction (ModuleCat.{u + 1} R) j')
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction (ModuleCat.{u + 1} S) j)
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction (ModuleCat.{u + 1} S) j')
+    (leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} R) hsq).inv
+    (leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} S) hsq).inv
+    (openImmersionLowerShriekExtendScalarsIso R S j).inv
+    (openImmersionLowerShriekExtendScalarsIso R S j').inv
+    (leftDerivedUpperStarExtendScalarsIso R S g').hom
+    (leftDerivedUpperStarExtendScalarsIso R S g'').hom (fun M ↦ by
+      rw [mateEquiv_leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso_inv,
+        mateEquiv_leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso_inv,
+        mateEquiv_openImmersionLowerShriekExtendScalarsIso_inv,
+        mateEquiv_openImmersionLowerShriekExtendScalarsIso_inv]
+      have h := leftDerivedUpperStarExtendScalarsIso_hom_app_square R S hsq.toCommSq M
+      rw [← cancel_epi (L((g')^*[ModuleCat.{u + 1} S]).map
+        ((leftDerivedUpperStarExtendScalarsIso R S j).hom.app M)),
+        ← cancel_epi ((leftDerivedUpperStarSquareIso (ModuleCat.{u + 1} S) hsq.toCommSq).hom.app
+          (L(sheafExtendScalars (algebraMap R S) Z).obj M))]
+      simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+        Category.id_comp, Iso.hom_inv_id_app_assoc]
+      rw [reassoc_of% h.symm]
+      simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+      erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
+      exact Category.comp_id _) K
+  rw [← cancel_mono ((openImmersionLowerShriekExtendScalarsIso R S j').inv.app _),
+    ← cancel_mono (L(sheafExtendScalars (algebraMap R S) Z').map
+      ((leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} R)
+        hsq).inv.app K))]
+  simp only [Category.assoc, Iso.hom_inv_id_app]
+  rw [hc]
+  simp only [Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  simp [← Functor.map_comp]
 
 end OpenImmersion
 
