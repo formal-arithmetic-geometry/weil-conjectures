@@ -19,12 +19,12 @@
    "elementary": true
   },
   {
-   "text": "Prove restriction_path for arbitrary exact functors: the fully faithful bounded-below inclusion sends the composite of two restricted composition comparisons and a middle transport to mapDerivedCategorySquareIso. Obtain the inverse comparison from equality of isomorphisms. For the scheme square, prove etale_square_expansion and plus_square_expansion as separate equations before evaluation at M; the latter uses Etale.pullbackSquareComparison_def and reflexivity. Equality induction proves plus_transport for the middle equality transport. Apply restriction_path, map the two expansion equations to components, and compose the three equalities to obtain square_restrict. Keeping plus_square_expansion separate prevents the kernel from repeatedly unfolding the bounded-below functor constructions.",
+   "text": "Prove restriction_path for arbitrary exact functors: the fully faithful bounded-below inclusion sends the composite of two restricted composition comparisons and a middle transport to mapDerivedCategorySquareIso. Obtain the inverse comparison from equality of isomorphisms. Prove plus_transport by equality induction. For any CommSq of schemes, prove plus_square_expansion by unfolding Etale.pullbackSquareComparison and reflexivity. Map this equation to components and apply restriction_path to obtain square_restrict with the ordinary square comparison expanded explicitly. This helper takes CommSq directly: it does not reconstruct a chosen Cartesian square or require conversion between its projected commutativity square and the original one.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Expand leftDerivedUpperStarComparisonIso: its bounded-below compatibility is the identity, leaving the exact-derived edge comparison followed by the inverse exactness isomorphism. In exact_path_with_comparisons apply naturality of the inverse exactness isomorphism at g-prime twice, to the edge comparison at f and to its endpoint exactness isomorphism. These give precisely the last factors of comparisonSquareTargetIso. Expand the source and target isomorphisms, evaluate at M.obj, and combine with the restriction identity for the etale square. No pro-etale square normalization or underived coherence hypothesis is used. The private exactOrdinaryPath, exactSourceIso, exactTargetIso and exactDerivedPath constructors retain the explicit parenthesizations of the public path definitions. Their specialization equalities are reflexivity lemmas, so all normalization of these constructors takes place in the abstract categorical proof.",
+   "text": "Expand leftDerivedUpperStarComparisonIso: its bounded-below compatibility is the identity, leaving the exact-derived edge comparison followed by the inverse exactness isomorphism. In exact_path_with_comparisons apply naturality of the inverse exactness isomorphism at g-prime twice, to the edge comparison at f and to its endpoint exactness isomorphism. These give precisely the last factors of comparisonSquareTargetIso. Expand the source and target isomorphisms, evaluate at M.obj, and combine with the restriction identity for the etale square. No pro-etale square normalization or underived coherence hypothesis is used. The private exactOrdinaryPath, exactSourceIso, exactTargetIso and exactDerivedPath constructors retain the explicit parenthesizations of the public path definitions. Their specialization equalities are reflexivity lemmas, so all normalization of these constructors takes place in the abstract categorical proof. Prove the private normalization_aux with an arbitrary bounded-below square-component morphism and its restriction equation. Combine exact_path_plus, the supplied restriction equation, and the two edge_derived equations there, where the component is a variable. Specialize normalization_aux to the actual pullbackSquareComparison component and square_restrict at sq.toCommSq. Both occurrences now use the identical commutative-square argument, preventing expensive kernel normalization of the concrete derived comparison during conversion. The exported theorem statement is unchanged.",
    "uses": [],
    "elementary": true
   }
@@ -36,7 +36,7 @@
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
   "place": "Expanded proof step 4",
-  "note": "E3: complete Lean proof using the already proved exact-derived square-pasting theorem. Generic restriction_path and explicit ordinary/bounded-below square expansion equations avoid expensive concrete conversion. All private helpers are proved; no new obligations or public interface changes."
+  "note": "E3: complete Lean proof using the already proved exact-derived square-pasting theorem. Generic restriction_path and explicit ordinary/bounded-below square expansion equations avoid expensive concrete conversion. All private helpers are proved; no new obligations or public interface changes. G3 (2026-10-20): upstream-sync repair. Unfold the comparison directly instead of calling the removed _def lemma. Generalize the private restriction helper to CommSq and combine the path equations with a variable component before specializing. This avoids the concrete-square conversion that timed out after the upstream cached interface disappeared; the repaired file compiles within the unchanged limit. All helpers are proved and the exported signature is verbatim."
  },
  "mathlib_searches": [
   {
@@ -127,13 +127,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261017T021601-L-694009",
-  "kind": "interface",
+  "landing": "20261020T145512-L-2403791",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
