@@ -32,10 +32,12 @@
    }
   },
   {
-   "text": "Use [det-prop-sfb-qlbar-colimit-x-invert-ell]. The morphism $\\varphi:\\cO_{E,X}\\to E_X$ of [def-sfb-integers-to-subfield] induces the ring isomorphism $\\cO_{E,X}[1/\\ell]\\to E_X$, with structure map $\\ell^{-m}\\varphi$ on the $m$-th module in the sequential colimit. Its inverse gives the second comparison in the statement. The sequence is a sequence of module maps: multiplication by $\\ell$ is not a unital ring homomorphism. The ring structure here is the localization structure specified by that lemma.",
+   "text": "Use the explicit scalar-localization cocone of lem-weil-pbc-continuous-integral-scalar-exact, whose legs send a continuous integral function a to a/ell^n. Its universal property follows from a uniform denominator on a compact profinite test space. Apply monoidal sheafification and the scheme inverse image to this cocone of regular modules, using their preservation of colimits and the canonical regular-module and restriction-of-scalars comparisons. Transport along the coefficient isomorphisms. The zeroth leg is the specified integral inclusion. The colimit universal property gives the unique factorization in completedCondensedRational. Multiplication by ell on continuous E-valued functions has inverse division by ell, hence is invertible after inverse image. For every scheme map, monoidal comparison naturality gives the zeroth square; induction on n, cancelling multiplication by ell, gives all remaining squares. This realizes the localization step directly in the underived interface.",
    "uses": [
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "def-sfb-integers-to-subfield"
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "def-weil-pbc-continuous-integral-coefficients",
+    "def-sfb-integers-to-subfield",
+    "sk-def-sfb-pullback-from-point-comp"
    ],
    "elementary": false,
    "source": {
@@ -121,11 +123,13 @@
    }
   },
   {
-   "text": "Finally take $E=\\mathbf Q_\\ell$. By [def-weil-l-adic-numbers], its ring of integers is $\\mathbf Z_\\ell$, $\\ell$ is a uniformizer, and $\\mathbf Z_\\ell/\\ell^n\\mathbf Z_\\ell\\cong\\mathbf Z/\\ell^n\\mathbf Z$ for $n\\geq1$. These unital ring identifications send every integer class to the same integer class, hence commute with the reductions (integer classes generate each quotient). Substituting these identifications into [det-prop-sfb-qlbar-colimit-x-integral-limit] and [det-prop-sfb-qlbar-colimit-x-invert-ell] gives the two final displayed formulas, with the same inverse-image compatibility already proved.",
+   "text": "For the integral specialization retain the stated quotient-ring argument from det-prop-sfb-qlbar-colimit-x-integral-limit: identify the integers in Q_ell with Z_ell and its finite quotients with Z/ell^n, compatibly with reduction. This integral Lean declaration remains unproved in this delivery. For completedCondensedPadicRational, apply the scalar-localization construction of step 2 directly to E = Q_ell. The subring PadicInt.subring ell agrees with continuousIntegers by their norm-at-most-one predicates. The generic sequential colimit and invertible-scalar arguments then give its universal property and inverse-image naturality.",
    "uses": [
     "def-weil-l-adic-numbers",
     "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell"
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "def-weil-pbc-continuous-integral-coefficients",
+    "sk-def-sfb-pullback-from-point-comp"
    ],
    "elementary": true,
    "source": {
@@ -136,8 +140,10 @@
  ],
  "proof_deps": [
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "def-weil-pbc-continuous-integral-coefficients",
   "def-sfb-integers-to-subfield",
+  "sk-def-sfb-pullback-from-point-comp",
   "sk-def-sfb-qlbar-condensed",
   "sk-def-sfb-condensed-ring",
   "def-sfb-qlbar-subextension-to-qlbar",
@@ -147,14 +153,13 @@
   "def-sfb-qlbar-coefficient-ring",
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-sheaf-tensor",
-  "sk-def-sfb-pullback-from-point-comp",
   "det-pe-topos-functoriality-inverse-image",
   "def-weil-l-adic-numbers"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
-  "place": "Four comparison paragraphs, with explicit point-colimit, ring, and pullback arguments; Stacks Tags 001P and 0038 supply the generic categorical tools. N3 stage 3: pullback steps 6–8 use monoidal naturality, transport of normalized integral cones, and the existing additive finite-subfield colimit; the other comparison steps remain the plan for the four retained holes."
+  "place": "Four comparison paragraphs, with explicit point-colimit, ring, and pullback arguments; Stacks Tags 001P and 0038 supply the generic categorical tools. N3 stage 3: pullback steps 6–8 use monoidal naturality, transport of normalized integral cones, and the existing additive finite-subfield colimit; the other comparison steps remain the plan for the four retained holes. J1 stage 3: rational comparisons (steps 2 and rational part of 9) proved using the explicit continuous scalar-localization cocone and monoidal transport; integral comparisons remain the existing plan. The declared PadicIntegersInvertEll interface and ContinuousIntegralRegularTelescope module each reach this module, so their underived constructions are used through ContinuousIntegralScalarExact instead."
  },
  "mathlib_searches": [
   {
@@ -492,13 +497,13 @@
   "note": "The six theorem declarations jointly state all three comparisons, arbitrary inverse-image compatibility, and the explicit Z_l/Q_l specializations. Integral comparisons use normalized IsLimit cones in ring objects; rational comparisons use the canonical module-colimit universal property on the existing rational ring; the finite-field ring cocone is an IsColimit. Helper definitions only bundle existing coefficient objects and their actual maps."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-c04ed",
-  "group": "N3",
+  "reviewer": "COMPILER",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261019T231250-L-567498",
+  "landing": "20261020T132011-L-1400682",
   "kind": "interface",
-  "note": "independent cc review: completedCondensedPullback proof (naturality of upperStarFromPointComp via mapMon + cone transport of completedCondensedIntegral cones + isColimitOfPreserves) against node sk-prop-sfb-qlbar-colimit-x steps 6–8; abbrev→def completedCoefficient against coord/changes/completedCoefficient.md and all 14 direct importers compiled"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

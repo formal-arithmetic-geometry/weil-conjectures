@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
+import all Sheaf.Paper.ContinuousIntegralScalarExact
 import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
@@ -39,8 +40,12 @@ set_option autoImplicit false
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
+open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
+
+attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
+  monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
 
 private theorem completedRingComparisonNaturality
     {C D E : Type*} [Category C] [Category D] [Category E]
@@ -93,7 +98,6 @@ private theorem completedLimitTransport
     exact e.hom.naturality (r n.unop)
   exact ⟨(IsLimit.equivOfNatIsoOfIso (asIso β) (H.mapCone cY) cX
     (Cone.ext v hw)).symm hcX⟩
-
 
 /-- Convert a condensed ring sheaf to its existing ring object, then pull back to `X`.
 Source: blueprint comparison with completed coefficients, notation `Λ_X`
@@ -211,8 +215,8 @@ noncomputable def completedSubfieldLeg (X : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) :=
   completedCoefficientMap X (Profinite.padicSubfieldCondensedRingToPadicAlgCl l E)
 
-set_option backward.isDefEq.respectTransparency false in
 open CategoryTheory.MonObj CategoryTheory.MonoidalCategory in
+set_option backward.isDefEq.respectTransparency false in
 private noncomputable def siftedRingCoconeIsColimit
     {C : Type*} [Category C] [MonoidalCategory C]
     {J : Type*} [Category J] [IsSifted J]
@@ -248,6 +252,232 @@ private noncomputable def siftedRingCoconeIsColimit
     exact (congrArg Mon.Hom.hom (hm j)).trans
       (hc.fac ((Mon.forget C).mapCocone s) j).symm
 
+private theorem completedSequenceUniversal
+    {C : Type*} [Category C] [Preadditive C] (l : ℕ) {A B : C}
+    (c : Cocone (Functor.ofSequence (fun _ ↦ l • 𝟙 A)))
+    (hc : IsColimit c) (e : c.pt ≅ B) :
+    ∃ j : ℕ → (A ⟶ B), j 0 = c.ι.app 0 ≫ e.hom ∧
+      (∀ n, l • j (n + 1) = j n) ∧
+      (∀ (D : C) (b : ℕ → (A ⟶ D)), (∀ n, l • b (n + 1) = b n) →
+        ∃! a : B ⟶ D, ∀ n, j n ≫ a = b n) := by
+  let d := c.extend e.hom
+  have hd : IsColimit d := hc.ofIsoColimit (Cocone.ext e)
+  refine ⟨fun n ↦ d.ι.app n, rfl, ?_, ?_⟩
+  · intro n
+    have h := d.w (homOfLE (Nat.le_succ n))
+    rw [Functor.ofSequence_map_homOfLE_succ] at h
+    change (l • 𝟙 A) ≫ (d.ι.app (n + 1) : A ⟶ B) = d.ι.app n at h
+    simpa only [Preadditive.nsmul_comp, Category.id_comp] using h
+  · intro D b hb
+    let β : Functor.ofSequence (fun _ ↦ l • 𝟙 A) ⟶ (Functor.const ℕ).obj D :=
+      NatTrans.ofSequence b (fun n ↦ by
+        simp only [Functor.ofSequence_map_homOfLE_succ, Functor.const_obj_map]
+        change (l • 𝟙 A) ≫ b (n + 1) = b n ≫ 𝟙 D
+        simpa only [Preadditive.nsmul_comp, Category.id_comp, Category.comp_id] using hb n)
+    let s : Cocone (Functor.ofSequence (fun _ ↦ l • 𝟙 A)) := ⟨D, β⟩
+    exact ⟨hd.desc s, hd.fac s, fun a ha ↦ hd.uniq s a ha⟩
+
+private theorem completedSequenceNaturality
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    (l : ℕ) (F : C ⥤ D) [F.Additive] {A B : C} {A' B' : D}
+    [IsIso (l • 𝟙 B')] (a : F.obj A ⟶ A') (b : F.obj B ⟶ B')
+    (j : ℕ → (A ⟶ B)) (k : ℕ → (A' ⟶ B'))
+    (hj : ∀ n, l • j (n + 1) = j n) (hk : ∀ n, l • k (n + 1) = k n)
+    (hzero : F.map (j 0) ≫ b = a ≫ k 0) :
+    ∀ n, F.map (j n) ≫ b = a ≫ k n := by
+  intro n
+  induction n with
+  | zero => exact hzero
+  | succ n ih =>
+    apply (cancel_mono (l • 𝟙 B')).1
+    simp only [Preadditive.comp_nsmul, Category.comp_id,
+      ← Preadditive.nsmul_comp, ← CategoryTheory.Functor.map_nsmul, hj]
+    rw [Preadditive.nsmul_comp, ← Preadditive.comp_nsmul, hk]
+    exact ih
+
+namespace CondensedRing
+attribute [local irreducible] localizationCoconeIsColimit
+attribute [local irreducible] pointUpperStarLowerStarAdjunction
+  ProEtale.upperStarLowerStarAdjunction
+open CategoryTheory.MonoidalCategory CategoryTheory.MonObj
+
+private theorem completedTransportRegularTelescope
+    (ℓ : ℕ) {A B C : Type*} [Category A] [Category B] [Category C]
+    [Preadditive A] [Preadditive B]
+    (F : A ⥤ B) [F.Additive] {M : A}
+    (c : Cocone (Functor.ofSequence (fun _ ↦ ℓ • 𝟙 M)))
+    (hc : IsColimit (F.mapCocone c)) {N P : B}
+    (er : F.obj M ≅ N) (es : F.obj c.pt ≅ P)
+    (V : B ⥤ C) (φ : V.obj N ⟶ V.obj P)
+    (hz : V.map (F.map (c.ι.app 0) ≫ es.hom) = V.map er.hom ≫ φ) :
+    ∃ c' : Cocone (Functor.ofSequence (fun _ ↦ ℓ • 𝟙 N)),
+      Nonempty (IsColimit c') ∧ ∃ e : c'.pt ≅ P,
+        V.map (c'.ι.app 0 ≫ e.hom) = φ := by
+  let α : Functor.ofSequence (fun _ ↦ ℓ • 𝟙 M) ⋙ F ⟶ Functor.ofSequence (fun _ ↦ ℓ • 𝟙 N) :=
+    NatTrans.ofSequence (fun _ ↦ er.hom) (by
+      intro n
+      simp only [Functor.comp_map,
+        Functor.ofSequence_map_homOfLE_succ]
+      change F.map (ℓ • 𝟙 M) ≫ er.hom = er.hom ≫ (ℓ • 𝟙 N)
+      rw [F.map_nsmul, F.map_id]
+      simp)
+  have : ∀ n, IsIso (α.app n) := fun n ↦ by
+    change IsIso er.hom
+    infer_instance
+  have : IsIso α := NatIso.isIso_of_isIso_app α
+  let c' := (Cocone.precompose (asIso α).inv).obj (F.mapCocone c)
+  refine ⟨c', ⟨(IsColimit.precomposeHomEquiv (asIso α).symm _).symm hc⟩, es, ?_⟩
+  have hi : (asIso α).inv.app 0 = er.inv := by
+    apply (cancel_mono er.hom).1
+    change (asIso α).inv.app 0 ≫ (asIso α).hom.app 0 = er.inv ≫ er.hom
+    simp; rfl
+  change V.map (((asIso α).inv.app 0 ≫ F.map (c.ι.app 0)) ≫ es.hom) = φ
+  rw [hi, Category.assoc, V.map_comp, hz, ← Category.assoc,
+    ← V.map_comp, er.inv_hom_id]
+  change V.map (𝟙 N) ≫ φ = φ
+  rw [V.map_id, Category.id_comp]
+
+private noncomputable def completedMappedRegularIso
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    (L : C ⥤ D) [L.LaxMonoidal] (R : C) [MonObj R]
+    (A : D) [MonObj A] (a : L.obj R ≅ A) [IsMonHom a.hom] :
+    (L.mapMod R ⋙ Mod.comap a.inv).obj (Mod.regular R) ≅ Mod.regular A :=
+  (Mod.comap a.inv).mapIso (mappedRegularIso L R) ≪≫
+    restrictedRegularIso a.inv (𝟙 A) a (by exact a.inv_hom_id) ≪≫ (Mod.comapId A).app _
+
+private noncomputable def completedMappedRestrictedIso
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    (L : C ⥤ D) [L.LaxMonoidal] {R S : C} [MonObj R] [MonObj S]
+    (φ : R ⟶ S) [IsMonHom φ] {A B : D} [MonObj A] [MonObj B]
+    (a : L.obj R ≅ A) (b : L.obj S ≅ B) [IsMonHom a.hom] [IsMonHom b.hom]
+    (ψ : A ⟶ B) [IsMonHom ψ] (h : L.map φ ≫ b.hom = a.hom ≫ ψ) :
+    (L.mapMod R ⋙ Mod.comap a.inv).obj ((Mod.comap φ).obj (Mod.regular S)) ≅
+      (Mod.comap ψ).obj (Mod.regular B) :=
+  (Mod.comap a.inv).mapIso
+    ((L.mapModComapIso φ).app (Mod.regular S) ≪≫
+      (Mod.comap (L.map φ)).mapIso (mappedRegularIso L S)) ≪≫
+    (Mod.comapComp a.inv (L.map φ)).symm.app (Mod.regular (L.obj S)) ≪≫
+    restrictedRegularIso (a.inv ≫ L.map φ) ψ b (by
+      rw [Category.assoc, h, Iso.inv_hom_id_assoc])
+
+private theorem completedSchemeCoefficientIsoIsMonHom (X : Scheme.{u})
+    (R : Type) [TopologicalSpace R] [Ring R] [IsTopologicalRing R] :
+    IsMonHom (schemeCoefficientIso X R).hom := by
+  rw [Functor.monObjObj_comp]
+  exact Functor.map.instIsMonHom (F := upperStarFromPoint X) _ _
+    (pointCoefficientIso R).hom
+
+attribute [local irreducible] schemeCoefficientIso pointCoefficientIso
+
+private theorem completedUpperStarLeftAdjoint (X : Scheme.{u}) :
+    (upperStarFromPoint X).IsLeftAdjoint := by
+  unfold upperStarFromPoint
+  exact (pointUpperStarLowerStarAdjunction.comp
+    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).isLeftAdjoint
+
+private theorem completedIntegralRegularTelescope
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u}) :
+    ∃ c : Cocone (Functor.ofSequence (fun _ ↦ ℓ • 𝟙 (Mod.regular
+        (condensedRingObj (integralCoeff ℓ E) X)))),
+      Nonempty (IsColimit c) ∧
+      ∃ e : c.pt ≅ (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (coefficientMap (integralScalarMap ℓ E) X)).obj
+          (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj E) X)),
+        (c.ι.app 0 ≫ e.hom).hom = coefficientMap (integralScalarMap ℓ E) X := by
+  let := Functor.functorCategoryMonoidalClosed Profinite.{u}ᵒᵖ Ab.{u + 1}
+  have : (upperStarFromPoint X).IsLeftAdjoint := completedUpperStarLeftAdjoint X
+  let L := schemeCoefficientFunctor X
+  let R := coefficientPresheaf.{u} (continuousIntegers ℓ E)
+  let S := coefficientPresheaf.{u} E
+  let A := condensedRingObj (integralCoeff ℓ E) X
+  let B := condensedRingObj (Profinite.continuousMapRingObj E) X
+  let a := schemeCoefficientIso X (continuousIntegers ℓ E)
+  let b := schemeCoefficientIso X E
+  let φ := integralPresheafMap.{u} ℓ E
+  let ψ := coefficientMap (integralScalarMap ℓ E) X
+  have : IsMonHom a.hom := completedSchemeCoefficientIsoIsMonHom X (continuousIntegers ℓ E)
+  have : IsMonHom a.inv := by infer_instance
+  have : IsMonHom b.hom := completedSchemeCoefficientIsoIsMonHom X E
+  let F := L.mapMod R ⋙ Mod.comap a.inv
+  have : L.Additive := by
+    exact rightExactFunctor_le_additiveFunctor _ _ _ (by
+      rw [rightExactFunctor_iff]
+      infer_instance)
+  have : (L.mapMod R).Additive := ⟨fun {M N f g} ↦
+    Mod.hom_ext _ _ (L.map_add (f := f.hom) (g := g.hom))⟩
+  have : PreservesColimitsOfShape ℕ (L.mapMod R) := by
+    have : PreservesColimitsOfShape ℕ
+        (L.mapMod R ⋙ Mod.forget (L.obj R)) :=
+      inferInstanceAs (PreservesColimitsOfShape ℕ (Mod.forget R ⋙ L))
+    exact preservesColimitsOfShape_of_reflects_of_preserves _ (Mod.forget (L.obj R))
+  let er : F.obj (Mod.regular R) ≅ Mod.regular A := completedMappedRegularIso L R A a
+  let es : F.obj ((Mod.comap φ).obj (Mod.regular S)) ≅
+      (Mod.comap ψ).obj (Mod.regular B) :=
+    completedMappedRestrictedIso L φ a b ψ (schemeCoefficientIso_naturality ℓ E X)
+  apply completedTransportRegularTelescope ℓ F (localizationCocone ℓ E)
+    (isColimitOfPreserves F (localizationCoconeIsColimit.{u} ℓ E))
+    er es (Mod.forget A) ψ
+  change L.map (localizationLegHom ℓ E 0) ≫ b.hom = a.hom ≫ ψ
+  have hz : localizationLegHom ℓ E 0 = φ := by
+    ext T x
+    apply ULift.ext
+    ext t
+    simp only [localizationLegHom, pow_zero, div_one]
+    rfl
+  rw [hz]
+  exact schemeCoefficientIso_naturality ℓ E X
+
+private theorem completedIntegralRegularTelescopeFor
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    (O : Subring E) (hO : O = continuousIntegers ℓ E) (X : Scheme.{u}) :
+    ∃ c : Cocone (Functor.ofSequence (fun _ ↦ ℓ • 𝟙 (Mod.regular
+        (condensedRingObj (Profinite.continuousMapRingObj O) X)))),
+      Nonempty (IsColimit c) ∧
+      ∃ e : c.pt ≅ (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (coefficientMap (((sheafCompose (coherentTopology Profinite.{u})
+            (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+              (Profinite.continuousMapRingSheafMap O.subtype continuous_subtype_val))) X)).obj
+          (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj E) X)),
+        (c.ι.app 0 ≫ e.hom).hom = coefficientMap
+          (((sheafCompose (coherentTopology Profinite.{u})
+            (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+              (Profinite.continuousMapRingSheafMap O.subtype continuous_subtype_val))) X := by
+  subst O
+  exact completedIntegralRegularTelescope ℓ E X
+
+private theorem completedScalarIso
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    (X : Scheme.{u}) : IsIso (ℓ • 𝟙 (condensedRingObj
+      (Profinite.continuousMapRingObj.{u} E) X)) := by
+  have hp : (ℓ : E) ≠ 0 := by
+    have h : (ℓ : ℚ_[ℓ]) ≠ 0 := by exact_mod_cast (Fact.out : ℓ.Prime).ne_zero
+    simpa only [map_natCast, map_zero] using (algebraMap ℚ_[ℓ] E).injective.ne h
+  have hm : IsIso ((sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).map
+      (ℓ • 𝟙 (Profinite.continuousMapRingObj E))) := by
+    change IsIso (ℓ • 𝟙 (Profinite.continuousMapRingObj.{u} E).obj)
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro S
+    apply (ConcreteCategory.isIso_iff_bijective _).mpr
+    change Function.Bijective (fun x : ULift.{u + 1} C(S.unop, E) ↦ ℓ • x)
+    simp only [nsmul_eq_mul]
+    have h : IsUnit (ℓ : ULift.{u + 1} C(S.unop, E)) := by
+      simpa only [map_natCast] using
+        (((isUnit_iff_ne_zero.mpr hp).map
+          (ContinuousMap.C : E →+* C(S.unop, E))).map ULift.ringEquiv.symm.toRingHom)
+    exact IsUnit.isUnit_iff_mulLeft_bijective.mp h
+  have : IsIso (ℓ • 𝟙 (Profinite.continuousMapRingObj.{u} E)) :=
+    isIso_of_reflects_iso _ (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+  have : (upperStarFromPoint X).Additive :=
+    rightExactFunctor_le_additiveFunctor _ _ _ (by
+      rw [rightExactFunctor_iff]
+      infer_instance)
+  have hi := (upperStarFromPoint X).map_isIso
+    (ℓ • 𝟙 (Profinite.continuousMapRingObj.{u} E))
+  rw [CategoryTheory.Functor.map_nsmul, CategoryTheory.Functor.map_id] at hi
+  exact hi
+
+end CondensedRing
+
 /-- Integral comparison with the inverse limit of the finite constant quotient rings.
 A uniformizer is specified by generating the maximal ideal. Each pulled-back quotient
 is identified as the constant sheaf with that finite quotient ring as value.
@@ -279,6 +509,83 @@ theorem completedCondensedIntegral (X : Scheme.{u}) (l : ℕ) [Fact l.Prime]
         (k (n + 1)).hom ≫ completedConstantMap X
           (Ideal.Quotient.factorPow (Ideal.span {π}) (Nat.le_succ (n + 1)))) := by
   sorry
+
+private theorem completedRationalOfTelescope (l : ℕ)
+    (R S : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) (φ : R ⟶ S)
+    (h : ∀ X : Scheme.{u}, ∃ c : Cocone (Functor.ofSequence (fun _ ↦ l • 𝟙
+        (Mod.regular (completedCoefficient X R).X))), Nonempty (IsColimit c) ∧
+      ∃ e : c.pt ≅ (Mod.comap (completedCoefficientMap X φ).hom).obj
+        (Mod.regular (completedCoefficient X S).X),
+          (c.ι.app 0 ≫ e.hom).hom = (completedCoefficientMap X φ).hom)
+    (hi : ∀ X : Scheme.{u}, IsIso (l • 𝟙 (completedCoefficient X S).X)) :
+    ∃ j : ∀ X : Scheme.{u}, ℕ →
+      (Mod.regular (completedCoefficient X R).X ⟶
+        ((Mod.comap (completedCoefficientMap X φ).hom).obj
+        (Mod.regular (completedCoefficient X S).X))),
+      (∀ X : Scheme.{u},
+        IsIso (l • 𝟙 (completedCoefficient X S).X) ∧
+        (j X 0).hom = (completedCoefficientMap X
+          φ).hom ∧
+        (∀ n, l • j X (n + 1) = j X n) ∧
+        (∀ (B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+            (completedCoefficient X R).X)
+          (b : ℕ → (Mod.regular
+            (completedCoefficient X R).X ⟶ B)),
+          (∀ n, l • b (n + 1) = b n) →
+          ∃! a : ((Mod.comap (completedCoefficientMap X φ).hom).obj
+        (Mod.regular (completedCoefficient X S).X)) ⟶ B, ∀ n, j X n ≫ a = b n)) ∧
+      (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (n : ℕ),
+        ((f)^*[Ab.{u + 1}]).map (j Y n).hom ≫
+            ((coefficientPullbackIso f
+              (Mon.mk ((sheafCompose (coherentTopology Profinite.{u})
+                (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj S))).hom).hom =
+          ((coefficientPullbackIso f
+              (Mon.mk ((sheafCompose (coherentTopology Profinite.{u})
+                (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R))).hom).hom ≫ (j X n).hom) := by
+  classical
+  choose c hc e he using h
+  have hs (X : Scheme.{u}) := completedSequenceUniversal l (c X) (hc X).some (e X)
+  choose j hj hrec huni using hs
+  refine ⟨j, ?_, ?_⟩
+  · intro X
+    refine ⟨hi X, ?_, hrec X, huni X⟩
+    rw [hj X]
+    exact he X
+  · intro X Y f n
+    have : IsIso (l • 𝟙
+        (completedCoefficient X S).X) :=
+      hi X
+    have hrec' (Z : Scheme.{u}) (m : ℕ) :
+        l • (j Z (m + 1)).hom = (j Z m).hom :=
+      congrArg (fun g : Mod.regular
+        (completedCoefficient Z R).X ⟶
+          ((Mod.comap (completedCoefficientMap Z φ).hom).obj
+          (Mod.regular (completedCoefficient Z S).X)) ↦ g.hom) (hrec Z m)
+    have : IsIso (l • 𝟙
+        (coefficientRing X (Mon.mk ((sheafCompose (coherentTopology Profinite.{u})
+          (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj S))).X) :=
+      hi X
+    refine completedSequenceNaturality l ((f)^*[Ab.{u + 1}])
+      (((coefficientPullbackIso f (Mon.mk ((sheafCompose (coherentTopology Profinite.{u})
+          (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R))).hom).hom)
+      (((coefficientPullbackIso f (Mon.mk ((sheafCompose (coherentTopology Profinite.{u})
+          (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj S))).hom).hom)
+      (fun m ↦ (j Y m).hom) (fun m ↦ (j X m).hom) (hrec' Y) (hrec' X) ?_ n
+    have hz (Z : Scheme.{u}) : (j Z 0).hom =
+        (completedCoefficientMap Z
+          φ).hom := by
+      rw [hj Z]
+      exact he Z
+    rw [hz X, hz Y]
+    exact completedRingComparisonNaturality (upperStarFromPoint Y)
+      ((f)^*[Ab.{u + 1}]) (upperStarFromPoint X) (upperStarFromPointComp f)
+      (Mon.mk ((sheafCompose (coherentTopology Profinite.{u})
+          (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R))
+      (Mon.mk ((sheafCompose (coherentTopology Profinite.{u})
+          (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj S))
+      ((sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+        φ)
 
 /-- Inverting `l` is the sequential colimit in integral modules, with the localization
 ring structure inherited from the specified rational ring. The zero-th leg is the integral
@@ -316,7 +623,20 @@ theorem completedCondensedRational (l : ℕ) [Fact l.Prime]
               (Mon.mk (Profinite.continuousMapRingObj E))).hom).hom =
           ((coefficientPullbackIso f
               (Mon.mk (Profinite.padicIntegersRingObj l E))).hom).hom ≫ (j X n).hom) := by
-  sorry
+  classical
+  let := PadicAlgCl.normedFieldOfAlgebra l E.1
+  let : NormedAlgebra ℚ_[l] E.1 :=
+    { norm_smul_le c x := by
+        change ‖algebraMap E.1 (PadicAlgCl l) (c • x)‖ ≤
+          ‖c‖ * ‖algebraMap E.1 (PadicAlgCl l) x‖
+        rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+          PadicAlgCl.norm_extends] }
+  exact completedRationalOfTelescope l
+    (Profinite.padicIntegersCondensedRing l E)
+    (Profinite.padicSubfieldCondensedRing l E)
+    (Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing l E)
+    (fun X ↦ CondensedRing.completedIntegralRegularTelescope l E.1 X)
+    (fun X ↦ CondensedRing.completedScalarIso l E.1 X)
 
 /-- The canonical finite-subextension cocone is a colimit in ring objects.
 Source: blueprint comparison with completed coefficients, third display
@@ -338,7 +658,6 @@ theorem completedCondensedAlgebraicClosure (X : Scheme.{u}) (l : ℕ) [Fact l.Pr
   change IsColimit (padicAlgClRingObjCocone X l)
   exact isColimitPadicAlgClRingObjCocone X l
 
-attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
 
 /-- Inverse image respects every reduction, integral inclusion and finite-field leg.
 Together with the limit and colimit universal properties this states compatibility of
@@ -449,7 +768,6 @@ theorem completedCondensedPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (l : ℕ) [F
     exact isColimitOfPreserves ((f)^*[Ab.{u + 1}])
       (isColimitPadicAlgClRingObjCocone Y l)
 
-
 /-- The usual continuous reduction of p-adic integers to Z/l^(n+1).
 Source: blueprint comparison with completed coefficients, final paragraph
 (blueprint: sk-prop-sfb-qlbar-colimit-x). -/
@@ -544,6 +862,17 @@ theorem completedCondensedPadicRational (l : ℕ) [Fact l.Prime] :
               (Mon.mk (Profinite.continuousMapRingObj ℚ_[l]))).hom).hom =
           ((coefficientPullbackIso f
               (Mon.mk (Profinite.continuousMapRingObj ℤ_[l]))).hom).hom ≫ (j X n).hom) := by
-  sorry
+  have hO : PadicInt.subring l = CondensedRing.continuousIntegers l ℚ_[l] := by
+    ext x
+    change ‖x‖ ≤ 1 ↔ ‖x‖₊ ≤ 1
+    exact_mod_cast (Iff.rfl : ‖x‖ ≤ 1 ↔ ‖x‖ ≤ 1)
+  refine completedRationalOfTelescope l
+    (Profinite.padicIntCondensedRing l) (Profinite.padicCondensedRing l)
+    (Profinite.padicIntCondensedRingToPadicCondensedRing l) ?_ ?_
+  · intro X
+    exact CondensedRing.completedIntegralRegularTelescopeFor l ℚ_[l]
+      (PadicInt.subring l) hO X
+  · intro X
+    exact CondensedRing.completedScalarIso l ℚ_[l] X
 
 end AlgebraicGeometry.ProEtale
