@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+ "kind": "statement",
+ "title": "Exact sections on the affine-neighbourhood strict henselization",
+ "statement": "Let $S$ be a scheme and $s:\\operatorname{Spec}\\Omega\\to S$ a geometric point. For the actual pointed-affine-neighbourhood coordinate-ring colimit and its spectrum $T=\\operatorname{Spec}(\\mathrm{strictHenselizationRing}(s))$ [def-weil-pbc-strict-henselization-limit], the global sections functor [def-weil-pbc-global-sections-functor] from abelian sheaves on the small etale site of $T$ [def-weil-pbc-abelian-etale-sheaves] to abelian groups preserves finite colimits. This concerns the specified colimit scheme, without identifying it definitionally with another strict localization.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian, exact global sections; local source lines 8206-8239"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Apply strictHenselizationLocalStructure to the coordinate-ring colimit itself, obtaining local and strictly henselian ring structures. Install those structures locally; the scheme is its spectrum by definition.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For this strictly henselian local ring, Scheme.preservesEpimorphisms_sheafSections_of_isStrictlyHenselianLocalRing supplies preservation of epimorphisms by sections at the terminal etale object. Transfer this through Sheaf.ΓNatIsoSheafSections to global sections. Global sections are additive and preserve kernels. Functor.preservesHomology_of_preservesEpis_and_kernels gives preservation of homology, and preservesFiniteColimits_of_preservesHomology gives the conclusion.",
+   "uses": [
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "proof_origin": {
+  "by": "agent H4, complete Lean proof from the adopted source local-structure and terminal-sections theorems",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian, exact global sections; local source lines 8206-8239"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The global sections functor for abelian etale sheaves on a strictly henselian local scheme preserves finite colimits",
+   "results": "Sheaf.Γ and generic exact geometric-fiber and sheaf limit infrastructure; no specialization to strictHenselizationScheme.",
+   "date": "2026-10-20",
+   "verdict": "Use the source terminal-section epimorphism instance and Mathlib exact-functor API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of abelian sheaves on a strictly henselian local scheme preserve finite colimits",
+   "results": "General sheaf and scheme global-section colimit infrastructure; no theorem for the specified colimit scheme.",
+   "date": "2026-10-20",
+   "verdict": "The source theorem handles terminal evaluation; transfer to global sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesFiniteColimits\"",
+   "results": "PreservesFiniteColimits and transfer/composition lemmas.",
+   "date": "2026-10-20",
+   "verdict": "No strictly henselian specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselizationScheme|strictHenselizationRing|preservesEpimorphisms_sheafSections_of_isStrictlyHenselianLocalRing|Γ_additive",
+   "results": "The adopted StrictHenselizationLocalStructure proves locality for strictHenselizationRing; Sites.StrictlyHenselian proves terminal sections preserve epis; Mathlib.CategoryTheory.Abelian.Exact provides the final exactness implications. Existing strictHenselization_globalSections_preservesFiniteColimits now uses strictLocalization, a different Lean model.",
+   "date": "2026-10-20",
+   "verdict": "Prove the original-model specialization, without restating or changing the source declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SourceCocycleExactRestriction",
+  "date": "2026-10-20",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Tag 03QO exact global sections used in the cocycle restriction compatibility calculation",
+   "via": [
+    "lem-weil-pbc-source-cocycle-exact-restriction",
+    "lem-weil-pbc-strict-local-localized-hom-germ",
+    "lem-weil-pbc-strict-local-injective-source-restriction",
+    "lem-weil-pbc-strict-local-injective-source-derived-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationSchemeSectionsExact.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictHenselizationScheme_globalSections_preservesFiniteColimits",
+  "statement": "instance strictHenselizationScheme_globalSections_preservesFiniteColimits\n    {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]\n    (s : Spec (.of Ω) ⟶ S) :\n    PreservesFiniteColimits\n      (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology\n        AddCommGrpCat.{v + 1})",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261020T150644-L-2553664",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261020T150644-L-2553664",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
