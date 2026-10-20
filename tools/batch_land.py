@@ -60,6 +60,14 @@ from pipeline_guard import alert, clear_alert
 ROOT = md.ROOT
 BD = ROOT / "local" / "batch"
 PASSED, OPEN, CLOSED, TRIAGE = BD / "passed", BD / "open.json", BD / "closed", BD / "triage"
+# Pipelined landing (the human, 2026-10-21; switch SHEAF_PIPELINE_BATCHES=1 in coord/sheaf.env, default off): while the
+# global build of the open batch N runs, the next batch N+1 lands on top (local/batch/next.json), so that the next build
+# verifies it. N+1 lands only when the running build contains every landing of N still open and an interface landing
+# (so build.py does not start over for N+1), and N is not in recovery. When N closes, N+1 becomes the open batch. A red
+# build that N must handle while N+1 exists first folds N+1 into N (one open batch again): the triage then sees exactly
+# the landings the red build contained (last.json `included`), and a take-out of N carries along, fully undone, the
+# landings of N+1 that changed the same files after it. No new batch lands while the open one is in recovery.
+NEXT = BD / "next.json"
 CLONE = ld.LOCAL / "buildtree"
 STOP_REQUESTED = lambda: False
 
@@ -784,8 +792,10 @@ def land_one(plan: dict, batch_id: str) -> dict:
             "commit": sha, "overrides": plan.get("overrides", {}), "modules": [m["module"] for m in mods], "claim": claim_text, "state": "landed"}
 
 
-def land_batch(cache: dict, log) -> dict | None:
-    """Steps 1-4. Returns the batch (also written to local/batch/open.json), or None when nothing landed."""
+def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | None:
+    """Steps 1-4. Returns the batch (also written to `target`: local/batch/open.json, or next.json when pipelined),
+    or None when nothing landed."""
+    target = target or OPEN
     if (BD / 'proof-imports.json').exists(): return None
     cands = candidates(cache)
     if not cands:
@@ -913,10 +923,13 @@ def land_batch(cache: dict, log) -> dict | None:
         return None
     b = {"id": batch_id, "time": ld.now(), "round": 0, "handled": [], "entries": entries,
          "check_seconds": round(t1 - t0, 1), "lock_seconds": round(held, 1)}
-    write_json(OPEN, b)
+    if target == NEXT:
+        b["pipelined_on"] = (read_json(OPEN) or {}).get("id")
+    write_json(target, b)
     landing_marker.unlink(missing_ok=True)
     log(f"batch {batch_id}: {len(entries)} landed (checks {b['check_seconds']} s without a lock, lock held "
-        f"{b['lock_seconds']} s); the global build verifies it")
+        f"{b['lock_seconds']} s); the global build verifies it"
+        + (f" (pipelined on the build of batch {b['pipelined_on']})" if target == NEXT else ""))
     return b
 
 
@@ -1134,6 +1147,11 @@ def triage(b: dict, last: dict, imports=None) -> dict:
     """The mechanical part: {decisions: [{failure, case, return: [G/item], reason, message}], open: [{failure,
     suspects: [G/item], message, others}], unattributed: [module]}."""
     entries = [e for e in b['entries'] if e['state'] == 'landed']
+    # 2026-10-21: only the landings the red build contained can have caused it (a landing after its snapshot, e.g. a
+    # pipelined batch, was not compiled by it)
+    inc = set(last.get('included') or [])
+    if inc and any(e['landing'] in inc for e in entries):
+        entries = [e for e in entries if e['landing'] in inc]
     text = (ld.LOCAL / 'build.log').read_text(errors='ignore') if (ld.LOCAL / 'build.log').exists() else ''
     blocks = log_blocks(text)
     if imports is None: imports = library_imports()
@@ -1635,6 +1653,78 @@ def seen_red(b: dict, last: dict) -> bool:
     return last.get("time") in b["handled"] or bool(fp and fp in b.get("handled_sources", []))
 
 
+def pipeline_on() -> bool:
+    """SHEAF_PIPELINE_BATCHES=1 in coord/sheaf.env, read from the file on every step (not from the environment the
+    lander started with), so that switching it off takes effect at once."""
+    val = None
+    try:
+        for line in (ROOT / "coord" / "sheaf.env").read_text().splitlines():
+            f = line.split("#", 1)[0].strip()
+            if f.startswith("SHEAF_PIPELINE_BATCHES="):
+                val = f.split("=", 1)[1].strip().strip("\"'")
+    except OSError:
+        return False
+    return val == "1"
+
+
+def running_build() -> dict | None:
+    """local/builds/current.json of the global build running now (tools/build.py writes it after its snapshot), or None."""
+    cur = ld.read_json(ld.B / "current.json")
+    if not cur or cur.get("finished"):
+        return None
+    try:
+        cmd = pathlib.Path(f"/proc/{int(cur.get('pid'))}/cmdline").read_bytes()
+    except (OSError, TypeError, ValueError):
+        return None
+    return cur if b"build.py" in cmd else None
+
+
+def sync_states(b: dict, log) -> None:
+    """The landed entries whose landing record the build or a take-out closed: verified, or reverted."""
+    for e in b["entries"]:
+        if e["state"] != "landed":
+            continue
+        r = ld.read_json(ld.DONE / f"{e['landing']}.json")
+        if r and r.get("result", "verified") == "verified":
+            e["state"] = "verified"; e["build"] = r.get("commit")
+        elif r:
+            e["state"] = "reverted"; e["why"] = r.get("reason")
+            log("reverted by the maintainer", e["group"], e["item"], e["head"][:9], "|", str(r.get("reason"))[:200])
+
+
+def fold_next(b: dict, log) -> dict:
+    """The pipelined batch joins the open one (a red build the open batch must handle): one open batch again."""
+    nx = read_json(NEXT)
+    if not nx:
+        return b
+    have = {e["landing"] for e in b["entries"]}
+    add = [e for e in nx["entries"] if e["landing"] not in have]
+    b["entries"] += add
+    b.setdefault("folded", []).append(nx["id"])
+    for k in ("handled", "handled_sources"):
+        if nx.get(k):
+            b[k] = list(dict.fromkeys(list(b.get(k) or []) + nx[k]))
+    write_json(OPEN, b)
+    NEXT.unlink(missing_ok=True)
+    log(f"batch {b['id']}: the pipelined batch {nx['id']} ({len(add)} landing(s)) is folded into it for the recovery")
+    return b
+
+
+def maybe_pipeline(b: dict, cache: dict, log) -> str | None:
+    """Land the next batch now, while the build of the open one runs (see NEXT); 'landed' or None."""
+    if not pipeline_on() or NEXT.exists() or (BD / "landing.json").exists() or (BD / "proof-imports.json").exists():
+        return None
+    if b.get("await_recovery") or b.get("triage") or b.get("fallback"):
+        return None
+    cur = running_build()
+    if not cur or not cur.get("has_interface") or cur.get("mode"):
+        return None
+    mine = {e["landing"] for e in b["entries"] if e["state"] == "landed"}
+    if not mine or not mine <= set(cur.get("included") or []):
+        return None
+    return "landed" if land_batch(cache, log, target=NEXT) else None
+
+
 def step(cache: dict, log) -> str:
     """One step of the cycle; returns what it did (idle, landed, waiting, verified, triage, returned)."""
     repairs.reconcile()
@@ -1650,19 +1740,18 @@ def step(cache: dict, log) -> str:
         log('REPAIR statistics', json.dumps(stats, sort_keys=True))
         cache['_repair_stats'] = stats
     b = read_json(OPEN)
+    if not b and NEXT.exists():
+        os.replace(NEXT, OPEN); b = read_json(OPEN)     # a stop between closing a batch and promoting the next one
     if not b and ld.merge_queue() and red_without_batch(log):
         return "returned"
     if not b:
         return "landed" if land_batch(cache, log) else "idle"
-    for e in b["entries"]:
-        if e["state"] != "landed":
-            continue
-        r = ld.read_json(ld.DONE / f"{e['landing']}.json")
-        if r and r.get("result", "verified") == "verified":
-            e["state"] = "verified"; e["build"] = r.get("commit")
-        elif r:
-            e["state"] = "reverted"; e["why"] = r.get("reason")
-            log("reverted by the maintainer", e["group"], e["item"], e["head"][:9], "|", str(r.get("reason"))[:200])
+    sync_states(b, log)
+    nx = read_json(NEXT)
+    if nx:
+        sync_states(nx, log); write_json(NEXT, nx)
+        if b.get('await_recovery') or b.get('triage'):
+            b = fold_next(b, log); nx = None             # never two batches in recovery
     pend = [e for e in b["entries"] if e["state"] == "landed"]
     if b.get('await_recovery'):
         last = ld.read_json(ld.B / 'last.json') or {}
@@ -1675,10 +1764,16 @@ def step(cache: dict, log) -> str:
         n = sum(e["state"] == "verified" for e in b["entries"])
         b["closed"] = ld.now()
         b["cycle_seconds"] = round(time.time() - calendar.timegm(time.strptime(b["time"], "%Y-%m-%dT%H:%M:%SZ")))
-        write_json(CLOSED / f"{b['id']}.json", b); OPEN.unlink(missing_ok=True)
+        write_json(CLOSED / f"{b['id']}.json", b)
+        if NEXT.exists():
+            os.replace(NEXT, OPEN)                       # the pipelined batch is the open one now
+        else:
+            OPEN.unlink(missing_ok=True)
         log(f"batch {b['id']} closed: {n} verified by the global build, {len(b['entries']) - n} not "
             f"({', '.join(key(e) + ' ' + e['state'] for e in b['entries'] if e['state'] != 'verified') or '-'}); "
-            f"cycle {b['cycle_seconds']} s, {b['round']} round(s) of triage")
+            f"cycle {b['cycle_seconds']} s, {b['round']} round(s) of triage"
+            + (f"; folded in: {', '.join(b['folded'])}" if b.get("folded") else "")
+            + (f"; the pipelined batch {nx['id']} is the open one now" if nx else ""))
         clear_alert()
         return "verified"
     write_json(OPEN, b)
@@ -1703,9 +1798,12 @@ def step(cache: dict, log) -> str:
     last = ld.read_json(ld.B / "last.json")
     inc = set((last or {}).get("included") or [])
     if not last or last.get("result") != "red" or seen_red(b, last):
-        return "waiting"
-    if not {e["landing"] for e in pend} & inc or {e["landing"] for e in b["entries"] if e["state"] in ("returned", "reverted", "waiting")} & inc:
-        return "waiting"
+        return maybe_pipeline(b, cache, log) or "waiting"
+    ours = {e["landing"] for e in pend} | {e["landing"] for e in (nx or {}).get("entries", []) if e["state"] == "landed"}
+    if not ours & inc or {e["landing"] for e in b["entries"] if e["state"] in ("returned", "reverted", "waiting")} & inc:
+        return maybe_pipeline(b, cache, log) or "waiting"
+    if nx:
+        b = fold_next(b, log); nx = None
     pre = cache.get('_pre')
     imports = pre.snapshot() if hasattr(pre, 'snapshot') else library_imports()
     T = triage(b, last, imports)
@@ -1749,22 +1847,34 @@ def main(a: list[str]) -> int:
                 print(f"  {e['state']:9} {key(e)} {e['head'][:9]} landing {e['landing']} ({e['kind']}, {e['reviewer']})")
         else:
             print("no open batch")
+        nx = read_json(NEXT)
+        if nx:
+            print(f"pipelined batch {nx['id']} (verified by the build after the open batch's):")
+            for e in nx["entries"]:
+                print(f"  {e['state']:9} {key(e)} {e['head'][:9]} landing {e['landing']} ({e['kind']}, {e['reviewer']})")
         for p in sorted(PASSED.glob("*.json")) if PASSED.is_dir() else []:
             m = read_json(p) or {}
             print(f"  passed, waiting for a batch: {m.get('group')}/{m.get('item')} {str(m.get('head'))[:9]} by {m.get('reviewer')}")
         return 0
     if len(a) >= 4 and a[0] in ("unland", "take-out"):
-        b = read_json(OPEN) or {"entries": []}
-        e = next((e for e in b["entries"] if e["group"] == a[1] and e["item"] == a[2] and e["state"] == "landed"), None)
+        path, b, e = OPEN, None, None
+        for path in (OPEN, NEXT):
+            b = read_json(path) or {"entries": []}
+            e = next((e for e in b["entries"] if e["group"] == a[1] and e["item"] == a[2] and e["state"] == "landed"), None)
+            if e: break
         if not e:
-            print(f"{a[1]}/{a[2]} is not a landed delivery of the open batch"); return 1
+            print(f"{a[1]}/{a[2]} is not a landed delivery of the open (or pipelined) batch"); return 1
+        if path == NEXT:      # a take-out may carry along landings of either batch: one open batch first
+            b = fold_next(read_json(OPEN) or {}, out) if read_json(OPEN) else b
+            path = OPEN if read_json(OPEN) else NEXT
+            e = next(x for x in b["entries"] if x["landing"] == e["landing"])
         reason = " ".join(a[3:])
         try:
             unland(e, f"(the batch landing, head {e['head'][:9]}) taken out of the library again by the maintainer: {reason}", reason)
         except recovery.Conflict as exc:
             withdraw(b, 'take-out conflict: ' + str(exc), out)
             return 0
-        e["state"] = "returned"; e["why"] = reason; write_json(OPEN, b)
+        e["state"] = "returned"; e["why"] = reason; write_json(path, b)
         return 0
     if a and a[0] == "pass":
         import argparse

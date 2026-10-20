@@ -484,6 +484,10 @@ def main() -> int:
         print(f"{ld.now()} building commit {(commit or '-')[:10]}: {len(included)} landing(s), "
               f"{sum(r['kind'] == 'interface' for r in included)} of them interface", flush=True)
         t0 = time.time()
+        # 2026-10-21: what this build contains, for the pipelined landing of tools/batch_land.py (SHEAF_PIPELINE_BATCHES)
+        ld.write_json(ld.B / "current.json", {"time": ld.now(), "commit": commit, "included": sorted(ids),
+                                              "has_interface": has_interface, "pid": os.getpid(),
+                                              "mode": "retry" if retry else "only" if only is not None else ""})
         with open(LOG, "w") as log:
             proc = subprocess.Popen(["nice", "-n", "0", "lake", "build"], cwd=CLONE, stdout=log, stderr=subprocess.STDOUT,
                                     env=dict(os.environ, LEAN_NUM_THREADS=THREADS), start_new_session=True)
@@ -508,8 +512,13 @@ def main() -> int:
 
     text = LOG.read_text(errors="ignore")
     shutil.copy2(LOG, ld.LOCAL / "build.log")
-    return finish_result(included, commit, text, round(time.time() - t0), preempted, source_id, red_trees,
-                         compiler_ok=proc.returncode == 0)
+    try:
+        return finish_result(included, commit, text, round(time.time() - t0), preempted, source_id, red_trees,
+                             compiler_ok=proc.returncode == 0)
+    finally:
+        cur = ld.read_json(ld.B / "current.json")
+        if cur and cur.get("pid") == os.getpid():
+            ld.write_json(ld.B / "current.json", dict(cur, finished=ld.now()))
 
 
 def finish_result(included, commit, text, elapsed, preempted, source_id, red_trees, *, compiler_ok):

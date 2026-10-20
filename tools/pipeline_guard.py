@@ -57,7 +57,7 @@ def proof_imports_guard(root, modules=()):
 
 def frozen_modules(root) -> set[str]:
     """Modules whose files belong to a landing the global build has not verified yet: pending or held landings
-    (local/builds/requests, inflight) and the deliveries of the open batch (local/batch/open.json, landing.json).
+    (local/builds/requests, inflight) and the deliveries of the open batch (local/batch/open.json, next.json, landing.json).
     No writer other than the landing tools and the take-out may change them until the build has verified them
     (the human, 2026-10-19: a prune of unused imports in a delivered file made the take-out conflict and live stayed
     red for hours). Source-only and fast: reads a few hundred small records."""
@@ -69,7 +69,7 @@ def frozen_modules(root) -> set[str]:
                 out |= {f['module'] for f in json.loads(p.read_text()).get('files', []) if f.get('module')}
             except (OSError, ValueError):
                 continue
-    for name in ('open.json', 'landing.json'):
+    for name in ('open.json', 'next.json', 'landing.json'):   # next.json: the pipelined batch (2026-10-21)
         try:
             b = json.loads((root / 'local/batch' / name).read_text())
         except (OSError, ValueError):

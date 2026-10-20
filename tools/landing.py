@@ -297,6 +297,9 @@ def revert(rid: str, reason: str) -> int:
     if rec and rec.get('batch'):
         import batch_land as bl
         b = bl.read_json(bl.OPEN)
+        nx = bl.read_json(bl.NEXT)
+        if b and nx and any(x['landing'] == rid for x in nx.get('entries', [])):
+            b = bl.fold_next(b, lambda *x: print(*x))     # a pipelined batch's landing: one open batch first
         e = next((x for x in (b or {}).get('entries', []) if x['landing'] == rid), None)
         if e:
             try:
