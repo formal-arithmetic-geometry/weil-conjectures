@@ -1,0 +1,111 @@
+{
+ "id": "lem-pod-canonical-module-adjunction-unit",
+ "kind": "statement",
+ "title": "The canonical pro-etale module adjunction has its prescribed tensor unit",
+ "statement": "For arbitrary schemes X,Y, a morphism f:X→Y, commutative ring sheaves R on Y and S on X, and a ring-sheaf isomorphism c:f⁻¹R≅S, the unit of the constructed module pullback/direct-image adjunction sends every section m over U to the section proEtaleRingModuleUnitSection(f,R,S,c,M,U,m). Here this is the sheafification of the tensor 1⊗m on the model site, transported to the fixed small pro-etale site [def-weil-proetale-inverse-image, lem-weil-pbc-ringed-topoi-module-adjunction].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7; the tensor-unit formula for the pullback/pushforward Hom adjunction."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the defining Hom-transpose formula for the constructed adjunction to the identity of the pullback of M. Its transpose is the adjunction unit. Evaluating at U,m gives the model unit followed by the section map g from that formula. The prescribed value of g is the sheafification of 1 tensor m. The model equivalence preserves section carriers, yielding exactly the normalized-unit equation.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7; the tensor-unit formula for the pullback/pushforward Hom adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical proetale module pullback adjunction has unit given by the sheafification of one tensor m",
+   "results": "Eight hits about ordinary module-sheaf pullback units; no exact theorem about the fixed pro-etale model adjunction.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use the named infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv_id\"",
+   "results": "Ten hits including Adjunction.homEquiv_id, used in the proof.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use the named infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "proEtaleRingModuleAdjunctionNormalized",
+   "results": "No Mathlib hit.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use the named infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of the canonical adjunction between inverse image and direct image of sheaves of modules is the sheafification of the tensor section one tensor m",
+   "results": "Eight hits, including SheafOfModules.PullbackConstruction.adjunction and pushforwardPushforwardAdj_unit_app_val_app. These supply ordinary sheaf-module infrastructure, but do not identify the prescribed tensor-unit sections for the fixed pro-etale model adjunction.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; the named Mathlib infrastructure is compatible with the proved source-library route"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSystemPullbackCoherence",
+  "date": "2026-10-21",
+  "group": "M3"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-finite-system-pullback-coherence",
+   "place": "The canonical pro-etale module adjunction has its prescribed tensor unit"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleCanonicalAdjunctionUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleCanonicalAdjunctionUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingModuleAdjunction_normalized",
+  "statement": "theorem proEtaleRingModuleAdjunction_normalized\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S) :\n    proEtaleRingModuleAdjunctionNormalized f R S c\n      (proEtaleRingModuleAdjunction f R S c)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-12ae6",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261020T221247-L-4165169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-12ae6",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261020T221247-L-4165169",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new proved helper modules/nodes vs clone sheaf-dag: target statements byte-identical; 9 changed definition bodies proved defeq to the old bodies (rfl / with_unfolding_all rfl); all 4 delivered modules and 4 downstream users compile; axioms clean except upstream sorryAx"
+ }
+}

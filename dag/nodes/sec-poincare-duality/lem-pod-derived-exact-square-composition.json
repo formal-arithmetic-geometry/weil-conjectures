@@ -1,0 +1,114 @@
+{
+ "id": "lem-pod-derived-exact-square-composition",
+ "kind": "statement",
+ "title": "Composition of exact functor squares survives unbounded derived localization",
+ "statement": "Let C₀,C₁,C₂,D₀,D₁,D₂ be abelian categories with ordinary unbounded derived categories [def-weil-abstract-derived-category]. Let all Fᵢⱼ:Cᵢ→Cⱼ, Gᵢⱼ:Dᵢ→Dⱼ and Uᵢ:Cᵢ→Dᵢ (ij=01,12,02) be additive exact functors. Suppose qᵢⱼ:FᵢⱼUⱼ≅UᵢGᵢⱼ, cF:F₀₂≅F₀₁F₁₂ and cG:G₀₂≅G₀₁G₁₂ are natural isomorphisms satisfying U₂(cF(X));q₁₂(F₀₁X);G₁₂(q₀₁(X))=q₀₂(X);cG(U₀X) for every X. Then the exact induced derived comparisons satisfy the same identity as natural isomorphisms: whisker the derived cF by derived U₂ and paste the derived q₀₁ and q₁₂ horizontally; this equals derived q₀₂ followed by the derived cG whiskered on the left by derived U₀. Each derived compositor is mapDerivedCategoryNatIso(c) followed by mapDerivedCategoryCompIso, and each derived square is mapDerivedCategorySquareIso(q).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Ordinary localization universal property for natural transformations; Stacks Tags 05S7 and 014F."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Invert the ordinary square using cancellation of the three comparison isomorphisms. Apply that equation degreewise to cochain complexes. Form its two derived natural transformations. By localization extensionality it suffices to compare components on Q-images of complexes. Postcompose with the three invertible localization factors for F₀₁,F₁₂,U₂. Naturality and the defining square/compositor factorization identities reduce the two sides to Q of the ordinary degreewise composites, preceded by the same factors. The assumed identity makes them equal. Cancel the factors, apply localization extensionality, and invert the derived square by cancellation. Natural-transformation and isomorphism extensionality give the stated equality before taking components.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Ordinary localization universal property for natural transformations; Stacks Tags 05S7 and 014F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition compatibility of squares of exact functors descends to unbounded derived categories",
+   "results": "Eight hits including mapDerivedCategoryFactors and mapDerivedCategoryFactorsh; these supply factorization but no pasted-square composition equation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use the named infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategorySquareIso\"",
+   "results": "No Mathlib hit; source-library definition.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use the named infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*SquareIso_comp",
+   "results": "No Mathlib hit.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use the named infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition coherence for natural isomorphisms between squares of exact additive functors descends to the unbounded derived categories",
+   "results": "Eight hits, including CatCommSq.hComp and NatTrans.rightDerivedToHomotopyCategory_comp. The first pastes ordinary squares; the second concerns bounded-below right derived functors via injectives. Neither proves the specified unbounded exact-localization square/compositor identity.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; the named Mathlib infrastructure is compatible with the proved source-library route"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSystemPullbackCoherence",
+  "date": "2026-10-21",
+  "group": "M3"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-finite-system-pullback-coherence",
+   "place": "Composition of exact functor squares survives unbounded derived localization"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedExactSquareComposition",
+  "file": "lean/Sheaf/CategoryTheory/DerivedExactSquareComposition.lean",
+  "declaration": "CategoryTheory.Functor.mapDerivedCategorySquareIso_comp",
+  "statement": "theorem mapDerivedCategorySquareIso_comp\n    (q₀₁ : F₀₁ ⋙ U₁ ≅ U₀ ⋙ G₀₁)\n    (q₁₂ : F₁₂ ⋙ U₂ ≅ U₁ ⋙ G₁₂)\n    (q₀₂ : F₀₂ ⋙ U₂ ≅ U₀ ⋙ G₀₂)\n    (cF : F₀₂ ≅ F₀₁ ⋙ F₁₂) (cG : G₀₂ ≅ G₀₁ ⋙ G₁₂)\n    (hq : ∀ X : C₀,\n      U₂.map (cF.hom.app X) ≫ q₁₂.hom.app (F₀₁.obj X) ≫\n        G₁₂.map (q₀₁.hom.app X) = q₀₂.hom.app X ≫ cG.hom.app (U₀.obj X)) :\n    isoWhiskerRight\n        (mapDerivedCategoryNatIso cF ≪≫ mapDerivedCategoryCompIso F₀₁ F₁₂)\n        U₂.mapDerivedCategory ≪≫\n      (associator F₀₁.mapDerivedCategory F₁₂.mapDerivedCategory U₂.mapDerivedCategory ≪≫\n        isoWhiskerLeft F₀₁.mapDerivedCategory (mapDerivedCategorySquareIso q₁₂) ≪≫\n        (associator F₀₁.mapDerivedCategory U₁.mapDerivedCategory G₁₂.mapDerivedCategory).symm ≪≫\n        isoWhiskerRight (mapDerivedCategorySquareIso q₀₁) G₁₂.mapDerivedCategory ≪≫\n        associator U₀.mapDerivedCategory G₀₁.mapDerivedCategory G₁₂.mapDerivedCategory) =\n    mapDerivedCategorySquareIso q₀₂ ≪≫ isoWhiskerLeft U₀.mapDerivedCategory\n      (mapDerivedCategoryNatIso cG ≪≫ mapDerivedCategoryCompIso G₀₁ G₁₂)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-12ae6",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261020T221247-L-4165169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-12ae6",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261020T221247-L-4165169",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new proved helper modules/nodes vs clone sheaf-dag: target statements byte-identical; 9 changed definition bodies proved defeq to the old bodies (rfl / with_unfolding_all rfl); all 4 delivered modules and 4 downstream users compile; axioms clean except upstream sorryAx"
+ }
+}

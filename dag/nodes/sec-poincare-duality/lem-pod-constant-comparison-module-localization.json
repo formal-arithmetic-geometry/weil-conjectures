@@ -1,0 +1,120 @@
+{
+ "id": "lem-pod-constant-comparison-module-localization",
+ "kind": "statement",
+ "title": "Canonical finite-coefficient derived composition is ordinary module composition localized",
+ "statement": "For any composable scheme morphisms h:Z→W and k:W→V and any finite commutative ring A, the inverse of the canonical derived comparison proEtaleConstantRingPullbackComposition(h,k,A) is the localization of the canonical ordinary module comparison of [lem-pur-proetale-module-pullback-composition], followed by the exact-functor derived composition isomorphism [def-weil-abstract-derived-category]. Both ordinary comparisons use the canonical constant-ring inverse-image identifications [prop-weil-pbc-proetale-constant-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, derived pullback composition on flat-term K-flat representatives; sites-modules.tex Tag 03D8 for the ordinary compositor."
+ },
+ "stmt_deps": [
+  "lem-pur-proetale-module-pullback-composition",
+  "def-weil-abstract-derived-category",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pod-canonical-module-adjunction-unit",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "The canonical module adjunction has the normalized tensor unit by lem-pod-canonical-module-adjunction-unit. Uniqueness of the normalized adjunction identifies it with the one used in the canonical derived comparison. Both direct-image comparators restrict sections along exactly the same fibre-product isomorphism, so extensionality identifies them. Conjugation is injective, hence the ordinary comparators coincide. Apply the established representative computation of the canonical derived comparison and substitute this equality. No arbitrary data witness is chosen.",
+   "uses": [
+    "lem-pur-proetale-module-pullback-composition",
+    "def-weil-abstract-derived-category",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-pod-canonical-module-adjunction-unit",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-proetale-module-pullback-composition",
+  "def-weil-abstract-derived-category",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pod-canonical-module-adjunction-unit",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, derived pullback composition on flat-term K-flat representatives; sites-modules.tex Tag 03D8 for the ordinary compositor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived pullback composition is the localization of the ordinary module pullback composition",
+   "results": "Eight ordinary pullback-composition hits; none identifies the specified unbounded pro-etale derived comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use the named infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryNatIso\"",
+   "results": "No Mathlib hit; this is source-library infrastructure.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use the named infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "constantComparison_eq|ModulePullbackComposition.*mapDerived",
+   "results": "No Mathlib hit.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use the named infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison for composite derived inverse image of sheaves of modules equals the localization of the ordinary pullback composition isomorphism",
+   "results": "Eight hits, including SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv. These identify ordinary pullback/pushforward comparisons, but do not identify the published finite-coefficient derived comparator with the localization of that ordinary comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; the named Mathlib infrastructure is compatible with the proved source-library route"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSystemPullbackCoherence",
+  "date": "2026-10-21",
+  "group": "M3"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-finite-system-pullback-coherence",
+   "place": "Canonical finite-coefficient derived composition is ordinary module composition localized"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantModuleComparisonLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantModuleComparisonLocalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantRingPullbackComposition_eq_mapModuleComparison",
+  "statement": "theorem proEtaleConstantRingPullbackComposition_eq_mapModuleComparison\n    {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)\n    (A : Type u) [CommRing A] [Finite A] :\n    (proEtaleConstantRingPullbackComposition h k A).symm =\n      Functor.mapDerivedCategoryNatIso\n        (proEtaleConstantRingModulePullbackComposition h k A).choose ≪≫\n      Functor.mapDerivedCategoryCompIso\n        (proEtaleConstantRingPullback A k) (proEtaleConstantRingPullback A h)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-12ae6",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261020T221247-L-4165169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-12ae6",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261020T221247-L-4165169",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new proved helper modules/nodes vs clone sheaf-dag: target statements byte-identical; 9 changed definition bodies proved defeq to the old bodies (rfl / with_unfolding_all rfl); all 4 delivered modules and 4 downstream users compile; axioms clean except upstream sorryAx"
+ }
+}
