@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalAdjointAdmissibility",
+  "date": "2026-10-21",
+  "group": "V7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-adjoint-admissibility",
+   "place": "proof step identifying scalar-restricted support mate with constant projection"
+  },
+  "same_as": [],
+  "is": null
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coproduct-preserving compact support direct image satisfies the projection formula for every constant derived coefficient complex",
+   "results": "8 ordinary sheaf/tensor hits; no exact pro-etale theorem",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "0 exact hits",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*constant|constant.*projection",
+   "results": "11 unrelated hits",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived constant coefficient projection formula for compact support",
+   "results": "No exact declaration returned.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-exc-support-scalar-projection-normalization",
+ "title": "Normalization of support scalar mate as a projection arrow",
+ "statement": "For a finite ring homomorphism A → B, compactification c, supplied scalar extension adjunctions, and intrinsic source complex K, the scalar-restricted support mate is isomorphic in the arrow category to the proper projection map at the constant target module underlying B.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 together with Tags 07A6 and 07A7"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Compare scalar extension with tensoring by the constant B-module on K-flat models, normalize inverse-image tensor comparison, and transpose the proper and open mates. The two counit transposes agree, yielding the displayed arrow isomorphism.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 0G7E and 07A7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": "Stated as the independent arrow-level normalization calculation.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportScalarProjectionNormalization",
+  "file": "lean/Sheaf/Paper/SupportScalarProjectionNormalization.lean",
+  "declaration": "WeilConjectures.supportScalarMate_projection_arrowIso",
+  "statement": "theorem supportScalarMate_projection_arrowIso {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (LX : proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory X B) (LY : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory Y B) (aX : LX ⊣ (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory) (aY : LY ⊣ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory) (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) : Nonempty (Arrow.mk (((proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory ⋙ (sfIntrinsicDerivedEquivalence Y A).inverse).map (((mateEquiv aX aY).symm (TwoSquare.mk _ _ _ _ (sfCompactSupportRestriction c φ).hom)).natTrans.app ((sfIntrinsicDerivedEquivalence X A).functor.obj K))) ≅ Arrow.mk (((ProEtale.rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.g).app ((ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i).mapDerivedCategory.obj K)).app ((constantSheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))).mapDerivedCategory.obj ((DerivedCategory.singleFunctor _ 0).obj ((ModuleCat.restrictScalars.{u + 1} φ.ulift).obj (ModuleCat.of (ULift.{u + 1, u} B) (ULift.{u + 1, u} B)))))))",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-21"
+ },
+ "tool_uses": [
+  "def-weil-proetale-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261020T211845-L-3511121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261020T211845-L-3511121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,389 +1,423 @@
 {
-  "id": "def-weil-exceptional-adjoint-admissibility",
-  "blueprint": {
-    "is": "def-weil-exceptional-adjoint-admissibility",
-    "from": null,
-    "same_as": []
+ "id": "def-weil-exceptional-adjoint-admissibility",
+ "blueprint": {
+  "is": "def-weil-exceptional-adjoint-admissibility",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Exceptional-adjoint admissibility",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $S$ be a scheme on which $\\ell$ is\ninvertible, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $S$-morphism. Choose a compactification\n[def-weil-compactifications-refinements] $X\\xrightarrow{j}\\overline\nX\\xrightarrow{p}Y$, so $j$ is an open immersion and $p$ is proper. Use\nfinite-torsion constructibility\n[def-weil-finite-torsion-constructibility]. Say that $f$ is\n*exceptional-adjoint admissible at $A$* if:\n\n1. the full cohomological-dimension condition\n   [def-weil-full-cohomological-dimension]\n   $\\operatorname{FullCD}(p,A;c_{\\mathrm{cd}})$ holds for some\n   $c_{\\mathrm{cd}}\\in\\mathbf Z_{\\geq0}$, and $Rf_n^{\\times}$ is a right\n   adjoint to $Rf_{!,n}$ on the ambient derived categories, and for every\n   refinement its units, counits, and comparison maps agree;\n2. there are *signed* integers $c_f^-,c_f^+\\in\\mathbf Z$ such that, for every\n   pair of integers $a\\leq b$, with $D_c^{[a,b]}$ the constructible\n   cohomological interval subcategory\n   [def-weil-constructible-intervals],\n   $$\n    L\\in D_c^{[a,b]}(Y,A)\\Longrightarrow\n    Rf_n^{\\times}L\\in D_c^{[a+c_f^-,b+c_f^+]}(X,A);\n   $$\n3. for the finite-Tor subcategory [def-weil-finite-tor-amplitude]\n   $D^b_{ctf}(Y,A)$, one has\n   $$\n    L\\in D^b_{ctf}(Y,A)\n   \\Longrightarrow\n    Rf_n^{\\times}L\\in D^b_{ctf}(X,A).\n   $$\n\nFor $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$, call $f$ admissible at $\\Lambda$\nwhen the three displayed conditions hold at every finite coefficient stage\nwith uniform bounds and when the finite-reduction and scalar-extension maps\nfor the corresponding right adjoints are isomorphisms.\n\n*Warning.* Clause (1) is not satisfied in general: its\n$\\operatorname{FullCD}$ condition fails for the structure morphism of an\nelliptic curve over $\\overline{\\mathbf F}_p$ with $A=\\mathbf F_r$, $r\\neq p$,\nand for that morphism $Rf_!=Rf_*$ has no right adjoint on the ambient derived\ncategory, nor on $D^+$. Hence the structure morphism of a smooth proper\nvariety may *not* be presupposed exceptional-adjoint admissible in this\nsense. For the constructible exceptional adjoint, defined without clause (1)\nfrom the etale adjoint, the analogues of (1)--(3) on $D^b_c$ and $D^b_{ctf}$\nare theorems for every separated finite-type morphism of finite-type\n$k$-schemes, with explicit constants independent of the coefficient stage.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-exceptional-adjoint-admissibility.md",
+  "place": "node def-weil-exceptional-adjoint-admissibility, order 1474"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-full-cohomological-dimension",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Transport the chosen ambient support adjunction through the intrinsic finite-coefficient realization equivalences. The resulting fixed-coefficient lower-shriek functor is a left adjoint by transport of adjunctions along the explicit realization isomorphism.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/",
+    "place": "coefficient realization and support comparison"
+   }
   },
-  "kind": "definition",
-  "title": "Exceptional-adjoint admissibility",
-  "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $S$ be a scheme on which $\\ell$ is\ninvertible, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $S$-morphism. Choose a compactification\n[def-weil-compactifications-refinements] $X\\xrightarrow{j}\\overline\nX\\xrightarrow{p}Y$, so $j$ is an open immersion and $p$ is proper. Use\nfinite-torsion constructibility\n[def-weil-finite-torsion-constructibility]. Say that $f$ is\n*exceptional-adjoint admissible at $A$* if:\n\n1. the full cohomological-dimension condition\n   [def-weil-full-cohomological-dimension]\n   $\\operatorname{FullCD}(p,A;c_{\\mathrm{cd}})$ holds for some\n   $c_{\\mathrm{cd}}\\in\\mathbf Z_{\\geq0}$, and $Rf_n^{\\times}$ is a right\n   adjoint to $Rf_{!,n}$ on the ambient derived categories, and for every\n   refinement its units, counits, and comparison maps agree;\n2. there are *signed* integers $c_f^-,c_f^+\\in\\mathbf Z$ such that, for every\n   pair of integers $a\\leq b$, with $D_c^{[a,b]}$ the constructible\n   cohomological interval subcategory\n   [def-weil-constructible-intervals],\n   $$\n    L\\in D_c^{[a,b]}(Y,A)\\Longrightarrow\n    Rf_n^{\\times}L\\in D_c^{[a+c_f^-,b+c_f^+]}(X,A);\n   $$\n3. for the finite-Tor subcategory [def-weil-finite-tor-amplitude]\n   $D^b_{ctf}(Y,A)$, one has\n   $$\n    L\\in D^b_{ctf}(Y,A)\n   \\Longrightarrow\n    Rf_n^{\\times}L\\in D^b_{ctf}(X,A).\n   $$\n\nFor $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$, call $f$ admissible at $\\Lambda$\nwhen the three displayed conditions hold at every finite coefficient stage\nwith uniform bounds and when the finite-reduction and scalar-extension maps\nfor the corresponding right adjoints are isomorphisms.\n\n*Warning.* Clause (1) is not satisfied in general: its\n$\\operatorname{FullCD}$ condition fails for the structure morphism of an\nelliptic curve over $\\overline{\\mathbf F}_p$ with $A=\\mathbf F_r$, $r\\neq p$,\nand for that morphism $Rf_!=Rf_*$ has no right adjoint on the ambient derived\ncategory, nor on $D^+$. Hence the structure morphism of a smooth proper\nvariety may *not* be presupposed exceptional-adjoint admissible in this\nsense. For the constructible exceptional adjoint, defined without clause (1)\nfrom the etale adjoint, the analogues of (1)--(3) on $D^b_c$ and $D^b_{ctf}$\nare theorems for every separated finite-type morphism of finite-type\n$k$-schemes, with explicit constants independent of the coefficient stage.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-exceptional-adjoint-admissibility.md",
-    "place": "node def-weil-exceptional-adjoint-admissibility, order 1474"
+  {
+   "text": "For every intrinsic source complex, restrict the scalar support mate and identify it with the constant-coefficient proper projection map. The constant projection theorem gives an isomorphism, and restriction of scalars reflects isomorphisms.",
+   "uses": [
+    "lem-exc-proetale-constant-support-projection",
+    "lem-exc-support-scalar-projection-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GL6, 07A6 and 07A7"
+   }
   },
-  "stmt_deps": [
-    "def-weil-scheme-morphism-properties",
-    "def-weil-compactifications-refinements",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-full-cohomological-dimension",
-    "def-weil-constructible-intervals",
-    "def-weil-finite-tor-amplitude"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Exceptional right adjoint admissibility for compact support direct images on pro-etale derived categories preserving constructible intervals and finite Tor amplitude",
-      "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondMod.LocallyConstant.adjunction, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
-      "date": "2026-10-15",
-      "verdict": "no match: results are ordinary sheaf or module pushforward adjunctions and condensed-module tensor facts, not the conjunction of FullCD, ambient compact-support adjunction, refinement coherence, two preservation conditions, and coefficient comparisons"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
-      "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint; all returned declarations are in Mathlib.CategoryTheory.Adjunction.Basic",
-      "date": "2026-10-15",
-      "verdict": "no match for the item: CategoryTheory.Adjunction and its constructors supply generic adjunction data only, with none of the geometric or coefficient conditions"
-    },
-    {
-      "tool": "grep",
-      "query": "ExceptionalAdjoint|exceptional.adjoint|FullCD|constructibleFiniteTor",
-      "results": "0 hits: ",
-      "date": "2026-10-15",
-      "verdict": "no match: no occurrences of the exceptional-adjoint, FullCD or constructible-finite-Tor names in Mathlib"
-    },
-    {
-      "tool": "leansearch",
-      "query": "A compact support pushforward has a right adjoint preserving constructible complexes and finite Tor amplitude",
-      "results": "unavailable: service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A right adjoint functor to shriek pushforward has uniform signed cohomological amplitude and preserves bounded constructible complexes of finite Tor dimension",
-      "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.pullbackPushforwardAdjunction, DerivedCategory.isGE_Q_obj_iff, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
-      "date": "2026-10-15",
-      "verdict": "no match: ordinary sheaf pushforward adjunctions and DerivedCategory.isGE_Q_obj_iff do not define exceptional-adjoint admissibility"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible|TorAmplitude|lowerShriek|upperShriek",
-      "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; searched subdirectory AlgebraicGeometry; lines 117, 118, 121, 123, 124",
-      "date": "2026-10-15",
-      "verdict": "no match: the five hits concern locally constructible images in Chevalley's theorem, not constructible complexes or exceptional right adjoints"
-    },
-    {
-      "tool": "grep",
-      "query": "cohomological.?dimension|constructible|[Tt]or.?[Aa]mplitude|[Ss]hriek",
-      "results": "0 hits: ",
-      "date": "2026-10-15",
-      "verdict": "no match: no occurrences of the queried constructibility, Tor-amplitude, shriek or cohomological-dimension terms in Mathlib/CategoryTheory"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A functor right adjoint to a derived direct image with compact support preserves constructible sheaves with uniformly bounded cohomology and finite flat dimension",
-      "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, SheafOfModules.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafPushforwardCocontinuous, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
-      "date": "2026-10-15",
-      "verdict": "no match: the returned ordinary sheaf pullback/pushforward adjunctions do not include the FullCD, refinement, constructibility, finite-Tor and coefficient-compatibility conditions"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Adjunction\"",
-      "results": "12 hits: CategoryTheory.Adjunction.id, CategoryTheory.Adjunction.instInhabitedId, CategoryTheory.Adjunction, CategoryTheory.Adjunction.CoreHomEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit, CategoryTheory.Adjunction.CoreUnitCounit, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction'",
-      "date": "2026-10-15",
-      "verdict": "no match for the complete definition: generic adjunctions and equivalences provide only the adjunction ingredient"
-    },
-    {
-      "tool": "grep",
-      "query": "ExceptionalAdjoint|exceptional.adjoint|FullCD|constructibleFiniteTor",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match: generic sheaf adjunctions or condensed constructions do not state the conjunction of FullCD, refinement coherence, preservation and finite-system coefficient compatibility."
-    },
-    {
-      "tool": "leansearch",
-      "query": "A right adjoint to compact support pushforward preserves constructible complexes and finite Tor amplitude",
-      "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafAdjunctionContinuous, CategoryTheory.Adjunction.rightAdjoint_preservesLimits, CategoryTheory.Functor.instPreservesLimitsOfShapeOfIsRightAdjoint, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
-      "date": "2026-10-16",
-      "verdict": "no match: generic sheaf adjunctions or condensed constructions do not state the conjunction of FullCD, refinement coherence, preservation and finite-system coefficient compatibility."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
-      "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint",
-      "date": "2026-10-16",
-      "verdict": "no match: generic sheaf adjunctions or condensed constructions do not state the conjunction of FullCD, refinement coherence, preservation and finite-system coefficient compatibility."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Exceptional right adjoint admissibility for compact support direct images on pro-etale derived categories with uniform constructible cohomological amplitude and finite Tor preservation",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, CondensedMod.LocallyConstant.adjunction, Condensed.profiniteSolidification, Condensed.profiniteSolidCounit, LightCondMod.LocallyConstant.adjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
-      "date": "2026-10-16",
-      "verdict": "no match: generic sheaf adjunctions or condensed constructions do not state the conjunction of FullCD, refinement coherence, preservation and finite-system coefficient compatibility."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An ambient right adjoint to shriek pushforward with signed cohomological bounds and compatibility with all finite coefficient reductions and field extensions",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, TopCat.Sheaf.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, TopCat.Sheaf.instIsLeftAdjointPullback, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
-      "date": "2026-10-16",
-      "verdict": "no match: generic sheaf adjunctions or condensed constructions do not state the conjunction of FullCD, refinement coherence, preservation and finite-system coefficient compatibility."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1474,
-  "blueprint_uses": [
-    "def-weil-compactifications-refinements",
-    "def-weil-constructible-intervals",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-full-cohomological-dimension",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-def-sf-operations",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "def-weil-exceptional-adjoint-admissibility",
-    "worker": "stage1 N7",
-    "summary": "Second-reader repair: reconciled the item with current main-20261015 order 1833. The source defines only the three finite-stage clauses and the finite-stage uniformity sentence; the prior expanded scalar-comparison construction was removed. The item remains a definition with no proof steps and only the six source uses.",
-    "blueprint": "Current main-20261015, sec-proetale-coefficients/sk-def-sf-operations/def-weil-exceptional-adjoint-admissibility.md (order 1833): opening setup, clauses (1)--(3), finite-stage admissibility sentence, and warning. The definition has no proof steps."
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-N7-32bbe8ae5",
-    "group": "N7",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-32bbe8ae5 (reviewer sub-agent of L); spot-checked: Reviewed item, six dependencies, current and master sources, unit route, edge cases, duplicates, coefficient category, and inherited citer issues. No new nodes or proof steps remain; review.md records all checks. No fixes required."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-f1f014da1",
-    "group": "NW",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable statements, all 24 dependencies, sources, canonical mates, universes, edge cases, and the 25-citer audit. Both Lean modules compiled cleanly through scompile.py. No fixes required; branch unchanged.",
-    "statement_corrected": true
-  },
-  "lean": {
-    "module": "Sheaf.Paper.ExceptionalAdjointAdmissibility",
-    "declaration": "WeilConjectures.IsExceptionalAdjointAdmissibleAtFiniteStage",
-    "declarations": [
-      "WeilConjectures.ExceptionalAdjointPreserves",
-      "WeilConjectures.IsExceptionalAdjointAdmissibleAtFiniteStage",
-      "WeilConjectures.FiniteExceptionalAdjunctionFamily",
-      "WeilConjectures.HasUniformFiniteExceptionalAdjoints",
-      "WeilConjectures.exceptionalCoefficientRestriction_isRightAdjoint",
-      "WeilConjectures.exceptionalCoefficientExtension",
-      "WeilConjectures.exceptionalCoefficientAdjunction",
-      "WeilConjectures.exceptionalFiniteSupportExtensionMap",
-      "WeilConjectures.exceptionalFiniteSupportExtensionMap_isIso",
-      "WeilConjectures.exceptionalFiniteRightCoefficientMap",
-      "WeilConjectures.ExceptionalFiniteCoefficientCompatible",
-      "WeilConjectures.ExceptionalFiniteFieldFamily",
-      "WeilConjectures.ExceptionalFiniteReductionsCompatible",
-      "WeilConjectures.ExceptionalFiniteScalarsCompatible",
-      "WeilConjectures.IsExceptionalAdjointAdmissibleAtIntegral",
-      "WeilConjectures.IsExceptionalAdjointAdmissibleAtRational",
-      "WeilConjectures.IsExceptionalAdjointAdmissibleAtAlgebraicallyClosed"
-    ],
-    "file": "lean/Sheaf/Paper/ExceptionalAdjointAdmissibility.lean",
-    "statement": "def IsExceptionalAdjointAdmissibleAtFiniteStage (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (S X Y : Scheme.{u}) [X.Over S] [Y.Over S] (_hS : ∀ s : S, IsUnit (l : S.presheaf.stalk s)) [LocallyOfFiniteType (X ↘ S)] [QuasiCompact (X ↘ S)] [LocallyOfFiniteType (Y ↘ S)] [QuasiCompact (Y ↘ S)] (f : X ⟶ Y) [f.IsOver S] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : Prop",
-    "branch": "newtargets-dag",
-    "by": "NW",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Second reading: uses the now-published canonical sfCompactSupportRestriction on the actual ambient support candidate; duplicate support modules and arbitrary presentation quantifiers are removed. The finite-system correction and full citer audit are retained. The only dependency module is the conservative unordered-interval interface."
-  },
-  "statement_change": {
-    "date": "2026-10-16",
-    "by": "NW stage 2",
-    "old_statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, choose a uniformizer $\\varpi_E$ of the valuation ring $\\mathcal O_E$,\nand put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$\n[def-weil-l-adic-coefficient-extension]. Let $S$ be a scheme on which $\\ell$ is\ninvertible, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $S$-morphism. Choose a compactification\n[def-weil-compactifications-refinements] $X\\xrightarrow{j}\\overline\nX\\xrightarrow{p}Y$, so $j$ is an open immersion and $p$ is proper. Use\nfinite-torsion constructibility\n[def-weil-finite-torsion-constructibility], understood intrinsically as\nboundedness and constructibility of the cohomology sheaves on the scheme\nin question; no finite-field datum is required. The constructible sheaves\nare those of [def-weil-proetale-constructible-sheaf]. Write\n$D(T,A)=D(T_{\\mathrm{proet}},A)$ for the ordinary unbounded derived\ncategory of sheaves of modules over the constant coefficient sheaf on the\nsmall pro-etale site [def-weil-pbc-proetale-site]. At the chosen\ncompactification set\n$$\n F_c=Rf_{!,n}^c=Rp_{*,n}\\,j_!:D(X,A)\\longrightarrow D(Y,A),\n$$\nwhere $Rp_{*,n}$ is the derived direct image\n[def-weil-derived-direct-image], and the extension by zero\n[def-weil-extension-by-zero] is applied termwise to complexes; it induces\nthis derived functor by its exactness [lem-weil-extension-by-zero-exact]\nand [lem-sf-exact-functor-derived-triangulated]. This formula uses the\nchosen compactification; no independence on all ambient inputs is\npresupposed. Say that $f$ is\n*exceptional-adjoint admissible at $A$* if:\n\n1. the full cohomological-dimension condition\n   [def-weil-full-cohomological-dimension]\n   $\\operatorname{FullCD}(p,A;c_{\\mathrm{cd}})$ holds for some\n   $c_{\\mathrm{cd}}\\in\\mathbf Z_{\\geq0}$, and there is a functor\n   $Rf_n^{\\times}:D(Y,A)\\to D(X,A)$ that is a right\n   adjoint to $F_c=Rf_{!,n}^c$ on $D(X,A)$ and $D(Y,A)$, meaning\n   natural bijections\n   $\\operatorname{Hom}_{D(Y,A)}(F_cK,L)\\cong\n   \\operatorname{Hom}_{D(X,A)}(K,Rf_n^{\\times}L)$ for all $K,L$.\n   For every refinement its units, counits, and comparison maps agree.\n   This last requirement is part of the datum: comparison isomorphisms\n   between the compactification functors and between their right adjoints\n   must identify the adjunction units and counits, be identities for\n   identity refinements, and commute with composition. It is not inferred\n   from an etale-origin comparison;\n2. there are *signed* integers $c_f^-,c_f^+\\in\\mathbf Z$ such that, for every\n   pair of integers $a\\leq b$, with $D_c^{[a,b]}$ the constructible\n   cohomological interval subcategory\n   [def-weil-constructible-intervals],\n   $$\n    L\\in D_c^{[a,b]}(Y,A)\\Longrightarrow\n    Rf_n^{\\times}L\\in D_c^{[a+c_f^-,b+c_f^+]}(X,A);\n   $$\n   if the shifted lower endpoint exceeds the upper endpoint, the interval\n   denotes the zero subcategory (bounded constructible complexes with all\n   cohomology sheaves zero). The constants record the cohomological bounds\n   of the right adjoint. Their\n   signs allow shifts in either direction; proving these bounds for a\n   particular geometric morphism is a separate obligation.\n3. for the finite-Tor subcategory [def-weil-finite-tor-amplitude]\n   $D^b_{ctf}(Y,A)$, one has\n   $$\n    L\\in D^b_{ctf}(Y,A)\n   \\Longrightarrow\n    Rf_n^{\\times}L\\in D^b_{ctf}(X,A).\n   $$\n\nAt the remaining coefficient stages use the derived-complete integral\ncategory [def-weil-derived-complete-integral-detailed], its rationalization\n[def-weil-rationalization-karoubi], and the common-stage algebraically\nclosed coefficient category [def-weil-algebraically-closed-coefficients].\nFinite reduction is the derived reduction\n[def-weil-integral-derived-reduction], and scalar extension uses\n[def-weil-integral-scalar-extension] and the rational scalar extension of\n[def-weil-rationalization-karoubi]. The coefficient comparison maps for\nright adjoints are the adjunction mates [def-weil-pbc-adjunction-mate] of\nthe corresponding compact-support coefficient comparisons. For\n$\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$, call $f$ admissible at $\\Lambda$\nwhen the three displayed conditions hold at every finite coefficient stage\nwith uniform bounds and when the finite-reduction and scalar-extension maps\nfor the corresponding right adjoints are isomorphisms. These are proof\nobligations for restriction of an ambient right adjoint, not consequences of\nthe definition of a separated finite-type morphism.\n\n*Warning.* Clause (1) is not satisfied in general: its\n$\\operatorname{FullCD}$ condition fails for the structure morphism of an\nelliptic curve over $\\overline{\\mathbf F}_p$ with $A=\\mathbf F_r$, $r\\neq p$,\nand for that morphism $Rf_!=Rf_*$ has no right adjoint on the ambient derived\ncategory, nor on $D^+$ (rem:sf-ambient-counterexample in the six-functors\nchapter). Hence the structure morphism of a smooth proper variety may *not*\nbe presupposed exceptional-adjoint admissible in this sense, and no statement\non the proof chain of this blueprint assumes it. What the blueprint uses is\nthe constructible exceptional adjoint of def-weil-exceptional-inverse-image,\ndefined without clause (1) from the etale adjoint; for it the analogues of\n(1)–(3) on $D^b_c$ and $D^b_{ctf}$ are theorems for every separated\nfinite-type morphism of finite-type $k$-schemes (thm-sf-ambient-adjoint-class\nfor the adjunction, thm-sf-preservation-class for the two preservation\nclauses with the constants $c_f^-=-2D$, $c_f^+=2\\dim Y+1$). The present\ndefinition is retained only to name the stronger, optional, ambient notion.",
-    "what": "The stage-1 expansion identified the finite-system coefficient criterion with unspecified integral-to-finite and higher-category squares. Neither the source paragraph nor the unit defines such arbitrary square data. The original source states the criterion at every finite stage, and unit sk-def-sf-operations (vi) explicitly uses the quotient maps A_(E,n) to A_(E,m) before normalization, rationalization and common stages. This correction makes the quantifiers and canonical mates explicit, including identity arrows and the nonempty common-stage field index, instead of adding arbitrary higher comparison data. No finite-stage clause or unit statement changes.",
-    "source": {
-      "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-exceptional-adjoint-admissibility.md",
-      "place": "original order-1474 final defining paragraph; sk-def-sf-operations (vi), finite-reduction normalized systems"
-    },
-    "citers": [
-      {
-        "id": "fix-cor-verdier-exchange",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "lem-fix-weil-operations",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "def-pod-conventions",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "cor-pur-smooth-admissibility",
-        "holds": true,
-        "note": "It cites only the unchanged preservation or bounded-class interpretations of finite-stage clauses (1)-(3); no arbitrary higher comparison diagram is used."
-      },
-      {
-        "id": "fix-lem-tensor-adjunction",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "thm-sf-preservation-class",
-        "holds": true,
-        "note": "It cites only the unchanged preservation or bounded-class interpretations of finite-stage clauses (1)-(3); no arbitrary higher comparison diagram is used."
-      },
-      {
-        "id": "cor-pur-general-admissibility-datum",
-        "holds": true,
-        "note": "It cites only the unchanged preservation or bounded-class interpretations of finite-stage clauses (1)-(3); no arbitrary higher comparison diagram is used."
-      },
-      {
-        "id": "lem-weil-smooth-proper-purity-hypotheses",
-        "holds": false,
-        "note": "Its unconditional assertion of strong ambient admissibility for every smooth proper structure morphism already contradicts the elliptic-curve warning; the present finite-system clarification does not repair that assertion."
-      },
-      {
-        "id": "cor-zl-purity-smooth-proper",
-        "holds": true,
-        "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
-      },
-      {
-        "id": "prop-weight-purity",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "thm-weil-deligne-purity",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "lem-trf-global-operator-perfect",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "def-weil-complex-weights",
-        "holds": true,
-        "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
-      },
-      {
-        "id": "fix-prop-adjunctions",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "def-fix-six-functor-datum",
-        "holds": true,
-        "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
-      },
-      {
-        "id": "thm-pur-td-criterion",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "cor-sf-ambient-adjoint-discharge",
-        "holds": true,
-        "note": "It cites only the unchanged preservation or bounded-class interpretations of finite-stage clauses (1)-(3); no arbitrary higher comparison diagram is used."
-      },
-      {
-        "id": "lem-sf-mate",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "lem-fix-operation-reduction",
-        "holds": true,
-        "note": "Its conditional exceptional-adjoint assertion uses exactly the canonical finite quotient and scalar mates required here; integral compatibility is expressed through the normalized finite system before rationalization/common stages."
-      },
-      {
-        "id": "def-pur-smooth-trace",
-        "holds": true,
-        "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
-      },
-      {
-        "id": "def-weil-exceptional-inverse-image",
-        "holds": true,
-        "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
-      },
-      {
-        "id": "def-trf-admissibility",
-        "holds": true,
-        "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
-      },
-      {
-        "id": "def-weil-poincare-trace-cup",
-        "holds": true,
-        "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
-      },
-      {
-        "id": "thm-weil-poincare-duality",
-        "holds": true,
-        "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
-      },
-      {
-        "id": "prop-weil-operations",
-        "holds": true,
-        "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
-      }
-    ],
-    "old_stmt_deps": [
-      "def-weil-scheme-morphism-properties",
-      "def-weil-compactifications-refinements",
-      "def-weil-finite-torsion-constructibility",
-      "def-weil-full-cohomological-dimension",
-      "def-weil-constructible-intervals",
-      "def-weil-finite-tor-amplitude",
-      "def-weil-l-adic-coefficient-extension",
-      "def-weil-proetale-constructible-sheaf",
-      "def-weil-pbc-proetale-site",
-      "def-weil-derived-direct-image",
-      "def-weil-extension-by-zero",
-      "lem-weil-extension-by-zero-exact",
-      "lem-sf-exact-functor-derived-triangulated",
-      "def-weil-derived-complete-integral-detailed",
-      "def-weil-rationalization-karoubi",
-      "def-weil-algebraically-closed-coefficients",
-      "def-weil-integral-derived-reduction",
-      "def-weil-integral-scalar-extension",
-      "def-weil-pbc-adjunction-mate"
-    ]
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $S$ be a scheme on which $\\ell$ is\ninvertible, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $S$-morphism. Choose a compactification\n[def-weil-compactifications-refinements] $X\\xrightarrow{j}\\overline\nX\\xrightarrow{p}Y$, so $j$ is an open immersion and $p$ is proper. Use\nfinite-torsion constructibility\n[def-weil-finite-torsion-constructibility]. Say that $f$ is\n*exceptional-adjoint admissible at $A$* if:\n\n1. the full cohomological-dimension condition\n   [def-weil-full-cohomological-dimension]\n   $\\operatorname{FullCD}(p,A;c_{\\mathrm{cd}})$ holds for some\n   $c_{\\mathrm{cd}}\\in\\mathbf Z_{\\geq0}$, and $Rf_n^{\\times}$ is a right\n   adjoint to $Rf_{!,n}$ on the ambient derived categories, and for every\n   refinement its units, counits, and comparison maps agree;\n2. there are *signed* integers $c_f^-,c_f^+\\in\\mathbf Z$ such that, for every\n   pair of integers $a\\leq b$, with $D_c^{[a,b]}$ the constructible\n   cohomological interval subcategory\n   [def-weil-constructible-intervals],\n   $$\n    L\\in D_c^{[a,b]}(Y,A)\\Longrightarrow\n    Rf_n^{\\times}L\\in D_c^{[a+c_f^-,b+c_f^+]}(X,A);\n   $$\n3. for the finite-Tor subcategory [def-weil-finite-tor-amplitude]\n   $D^b_{ctf}(Y,A)$, one has\n   $$\n    L\\in D^b_{ctf}(Y,A)\n   \\Longrightarrow\n    Rf_n^{\\times}L\\in D^b_{ctf}(X,A).\n   $$\n\nFor $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$, call $f$ admissible at $\\Lambda$\nwhen the three displayed conditions hold at every finite coefficient stage\nwith uniform bounds and when the finite-reduction and scalar-extension maps\nfor the corresponding right adjoints are isomorphisms.\n\n*Warning.* Clause (1) is not satisfied in general: its\n$\\operatorname{FullCD}$ condition fails for the structure morphism of an\nelliptic curve over $\\overline{\\mathbf F}_p$ with $A=\\mathbf F_r$, $r\\neq p$,\nand for that morphism $Rf_!=Rf_*$ has no right adjoint on the ambient derived\ncategory, nor on $D^+$. Hence the structure morphism of a smooth proper\nvariety may *not* be presupposed exceptional-adjoint admissible in this\nsense. For the constructible exceptional adjoint, defined without clause (1)\nfrom the etale adjoint, the analogues of (1)–(3) on $D^b_c$ and $D^b_{ctf}$\nare theorems for every separated finite-type morphism of finite-type\n$k$-schemes, with explicit constants independent of the coefficient stage.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "AUTO",
-    "group": "G6",
-    "result": "pass",
-    "landing": "20261018T150147-L-3799668",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-    "sorry_before": [
-      "WeilConjectures.exceptionalCoefficientRestriction_isRightAdjoint",
-      "WeilConjectures.exceptionalFiniteSupportExtensionMap_isIso"
-    ],
-    "sorry_after": [
-      "WeilConjectures.exceptionalFiniteSupportExtensionMap_isIso"
-    ]
+  {
+   "text": "The componentwise isomorphisms imply that the support natural transformation is an isomorphism. The equivalence counit transports the component result from intrinsic objects to every ambient derived object.",
+   "uses": [
+    "lem-exc-support-component-after-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib.CategoryTheory.NaturalTransformation",
+    "place": "NatTrans.isIso_iff_isIso_app and isIso_app_iff_of_iso"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-exc-proetale-constant-support-projection",
+  "lem-exc-support-scalar-projection-normalization",
+  "lem-exc-support-component-after-restriction",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": "The worker proof transports support through intrinsic realization, applies constant-coefficient projection after normalized scalar mate, and detects isomorphisms by conservative restriction.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional right adjoint admissibility for compact support direct images on pro-etale derived categories preserving constructible intervals and finite Tor amplitude",
+   "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondMod.LocallyConstant.adjunction, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-15",
+   "verdict": "no match: results are ordinary sheaf or module pushforward adjunctions and condensed-module tensor facts, not the conjunction of FullCD, ambient compact-support adjunction, refinement coherence, two preservation conditions, and coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint; all returned declarations are in Mathlib.CategoryTheory.Adjunction.Basic",
+   "date": "2026-10-15",
+   "verdict": "no match for the item: CategoryTheory.Adjunction and its constructors supply generic adjunction data only, with none of the geometric or coefficient conditions"
+  },
+  {
+   "tool": "grep",
+   "query": "ExceptionalAdjoint|exceptional.adjoint|FullCD|constructibleFiniteTor",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: no occurrences of the exceptional-adjoint, FullCD or constructible-finite-Tor names in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact support pushforward has a right adjoint preserving constructible complexes and finite Tor amplitude",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint functor to shriek pushforward has uniform signed cohomological amplitude and preserves bounded constructible complexes of finite Tor dimension",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.pullbackPushforwardAdjunction, DerivedCategory.isGE_Q_obj_iff, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary sheaf pushforward adjunctions and DerivedCategory.isGE_Q_obj_iff do not define exceptional-adjoint admissibility"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|TorAmplitude|lowerShriek|upperShriek",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; searched subdirectory AlgebraicGeometry; lines 117, 118, 121, 123, 124",
+   "date": "2026-10-15",
+   "verdict": "no match: the five hits concern locally constructible images in Chevalley's theorem, not constructible complexes or exceptional right adjoints"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.?dimension|constructible|[Tt]or.?[Aa]mplitude|[Ss]hriek",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: no occurrences of the queried constructibility, Tor-amplitude, shriek or cohomological-dimension terms in Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor right adjoint to a derived direct image with compact support preserves constructible sheaves with uniformly bounded cohomology and finite flat dimension",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, SheafOfModules.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafPushforwardCocontinuous, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
+   "date": "2026-10-15",
+   "verdict": "no match: the returned ordinary sheaf pullback/pushforward adjunctions do not include the FullCD, refinement, constructibility, finite-Tor and coefficient-compatibility conditions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\"",
+   "results": "12 hits: CategoryTheory.Adjunction.id, CategoryTheory.Adjunction.instInhabitedId, CategoryTheory.Adjunction, CategoryTheory.Adjunction.CoreHomEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit, CategoryTheory.Adjunction.CoreUnitCounit, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction'",
+   "date": "2026-10-15",
+   "verdict": "no match for the complete definition: generic adjunctions and equivalences provide only the adjunction ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "ExceptionalAdjoint|exceptional.adjoint|FullCD|constructibleFiniteTor",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf adjunctions or condensed constructions do not state the conjunction of FullCD, refinement coherence, preservation and finite-system coefficient compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right adjoint to compact support pushforward preserves constructible complexes and finite Tor amplitude",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafAdjunctionContinuous, CategoryTheory.Adjunction.rightAdjoint_preservesLimits, CategoryTheory.Functor.instPreservesLimitsOfShapeOfIsRightAdjoint, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf adjunctions or condensed constructions do not state the conjunction of FullCD, refinement coherence, preservation and finite-system coefficient compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf adjunctions or condensed constructions do not state the conjunction of FullCD, refinement coherence, preservation and finite-system coefficient compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional right adjoint admissibility for compact support direct images on pro-etale derived categories with uniform constructible cohomological amplitude and finite Tor preservation",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, CondensedMod.LocallyConstant.adjunction, Condensed.profiniteSolidification, Condensed.profiniteSolidCounit, LightCondMod.LocallyConstant.adjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf adjunctions or condensed constructions do not state the conjunction of FullCD, refinement coherence, preservation and finite-system coefficient compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ambient right adjoint to shriek pushforward with signed cohomological bounds and compatibility with all finite coefficient reductions and field extensions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, TopCat.Sheaf.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, TopCat.Sheaf.instIsLeftAdjointPullback, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf adjunctions or condensed constructions do not state the conjunction of FullCD, refinement coherence, preservation and finite-system coefficient compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1474,
+ "blueprint_uses": [
+  "def-weil-compactifications-refinements",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-full-cohomological-dimension",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-exceptional-adjoint-admissibility",
+  "worker": "stage1 N7",
+  "summary": "Second-reader repair: reconciled the item with current main-20261015 order 1833. The source defines only the three finite-stage clauses and the finite-stage uniformity sentence; the prior expanded scalar-comparison construction was removed. The item remains a definition with no proof steps and only the six source uses.",
+  "blueprint": "Current main-20261015, sec-proetale-coefficients/sk-def-sf-operations/def-weil-exceptional-adjoint-admissibility.md (order 1833): opening setup, clauses (1)--(3), finite-stage admissibility sentence, and warning. The definition has no proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N7-32bbe8ae5",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-32bbe8ae5 (reviewer sub-agent of L); spot-checked: Reviewed item, six dependencies, current and master sources, unit route, edge cases, duplicates, coefficient category, and inherited citer issues. No new nodes or proof steps remain; review.md records all checks. No fixes required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f1f014da1",
+  "group": "NW",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all 24 dependencies, sources, canonical mates, universes, edge cases, and the 25-citer audit. Both Lean modules compiled cleanly through scompile.py. No fixes required; branch unchanged.",
+  "statement_corrected": true
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalAdjointAdmissibility",
+  "declaration": "WeilConjectures.IsExceptionalAdjointAdmissibleAtFiniteStage",
+  "declarations": [
+   "WeilConjectures.ExceptionalAdjointPreserves",
+   "WeilConjectures.IsExceptionalAdjointAdmissibleAtFiniteStage",
+   "WeilConjectures.FiniteExceptionalAdjunctionFamily",
+   "WeilConjectures.HasUniformFiniteExceptionalAdjoints",
+   "WeilConjectures.exceptionalCoefficientRestriction_isRightAdjoint",
+   "WeilConjectures.exceptionalCoefficientExtension",
+   "WeilConjectures.exceptionalCoefficientAdjunction",
+   "WeilConjectures.exceptionalFiniteSupportExtensionMap",
+   "WeilConjectures.exceptionalFiniteSupportExtensionMap_component_after_restriction_isIso",
+   "WeilConjectures.exceptionalFiniteSupportExtensionMap_isIso",
+   "WeilConjectures.exceptionalFiniteRightCoefficientMap",
+   "WeilConjectures.ExceptionalFiniteCoefficientCompatible",
+   "WeilConjectures.ExceptionalFiniteFieldFamily",
+   "WeilConjectures.ExceptionalFiniteReductionsCompatible",
+   "WeilConjectures.ExceptionalFiniteScalarsCompatible",
+   "WeilConjectures.IsExceptionalAdjointAdmissibleAtIntegral",
+   "WeilConjectures.IsExceptionalAdjointAdmissibleAtRational",
+   "WeilConjectures.IsExceptionalAdjointAdmissibleAtAlgebraicallyClosed"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalAdjointAdmissibility.lean",
+  "statement": "def IsExceptionalAdjointAdmissibleAtFiniteStage (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (S X Y : Scheme.{u}) [X.Over S] [Y.Over S] (_hS : ∀ s : S, IsUnit (l : S.presheaf.stalk s)) [LocallyOfFiniteType (X ↘ S)] [QuasiCompact (X ↘ S)] [LocallyOfFiniteType (Y ↘ S)] [QuasiCompact (Y ↘ S)] (f : X ⟶ Y) [f.IsOver S] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The support-map proof uses intrinsic realization, normalized scalar/projection arrow comparison, constant-coefficient generation, and conservative restriction; the coefficientwise comparison is split as a separate theorem."
+ },
+ "statement_change": {
+  "date": "2026-10-16",
+  "by": "NW stage 2",
+  "old_statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, choose a uniformizer $\\varpi_E$ of the valuation ring $\\mathcal O_E$,\nand put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$\n[def-weil-l-adic-coefficient-extension]. Let $S$ be a scheme on which $\\ell$ is\ninvertible, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $S$-morphism. Choose a compactification\n[def-weil-compactifications-refinements] $X\\xrightarrow{j}\\overline\nX\\xrightarrow{p}Y$, so $j$ is an open immersion and $p$ is proper. Use\nfinite-torsion constructibility\n[def-weil-finite-torsion-constructibility], understood intrinsically as\nboundedness and constructibility of the cohomology sheaves on the scheme\nin question; no finite-field datum is required. The constructible sheaves\nare those of [def-weil-proetale-constructible-sheaf]. Write\n$D(T,A)=D(T_{\\mathrm{proet}},A)$ for the ordinary unbounded derived\ncategory of sheaves of modules over the constant coefficient sheaf on the\nsmall pro-etale site [def-weil-pbc-proetale-site]. At the chosen\ncompactification set\n$$\n F_c=Rf_{!,n}^c=Rp_{*,n}\\,j_!:D(X,A)\\longrightarrow D(Y,A),\n$$\nwhere $Rp_{*,n}$ is the derived direct image\n[def-weil-derived-direct-image], and the extension by zero\n[def-weil-extension-by-zero] is applied termwise to complexes; it induces\nthis derived functor by its exactness [lem-weil-extension-by-zero-exact]\nand [lem-sf-exact-functor-derived-triangulated]. This formula uses the\nchosen compactification; no independence on all ambient inputs is\npresupposed. Say that $f$ is\n*exceptional-adjoint admissible at $A$* if:\n\n1. the full cohomological-dimension condition\n   [def-weil-full-cohomological-dimension]\n   $\\operatorname{FullCD}(p,A;c_{\\mathrm{cd}})$ holds for some\n   $c_{\\mathrm{cd}}\\in\\mathbf Z_{\\geq0}$, and there is a functor\n   $Rf_n^{\\times}:D(Y,A)\\to D(X,A)$ that is a right\n   adjoint to $F_c=Rf_{!,n}^c$ on $D(X,A)$ and $D(Y,A)$, meaning\n   natural bijections\n   $\\operatorname{Hom}_{D(Y,A)}(F_cK,L)\\cong\n   \\operatorname{Hom}_{D(X,A)}(K,Rf_n^{\\times}L)$ for all $K,L$.\n   For every refinement its units, counits, and comparison maps agree.\n   This last requirement is part of the datum: comparison isomorphisms\n   between the compactification functors and between their right adjoints\n   must identify the adjunction units and counits, be identities for\n   identity refinements, and commute with composition. It is not inferred\n   from an etale-origin comparison;\n2. there are *signed* integers $c_f^-,c_f^+\\in\\mathbf Z$ such that, for every\n   pair of integers $a\\leq b$, with $D_c^{[a,b]}$ the constructible\n   cohomological interval subcategory\n   [def-weil-constructible-intervals],\n   $$\n    L\\in D_c^{[a,b]}(Y,A)\\Longrightarrow\n    Rf_n^{\\times}L\\in D_c^{[a+c_f^-,b+c_f^+]}(X,A);\n   $$\n   if the shifted lower endpoint exceeds the upper endpoint, the interval\n   denotes the zero subcategory (bounded constructible complexes with all\n   cohomology sheaves zero). The constants record the cohomological bounds\n   of the right adjoint. Their\n   signs allow shifts in either direction; proving these bounds for a\n   particular geometric morphism is a separate obligation.\n3. for the finite-Tor subcategory [def-weil-finite-tor-amplitude]\n   $D^b_{ctf}(Y,A)$, one has\n   $$\n    L\\in D^b_{ctf}(Y,A)\n   \\Longrightarrow\n    Rf_n^{\\times}L\\in D^b_{ctf}(X,A).\n   $$\n\nAt the remaining coefficient stages use the derived-complete integral\ncategory [def-weil-derived-complete-integral-detailed], its rationalization\n[def-weil-rationalization-karoubi], and the common-stage algebraically\nclosed coefficient category [def-weil-algebraically-closed-coefficients].\nFinite reduction is the derived reduction\n[def-weil-integral-derived-reduction], and scalar extension uses\n[def-weil-integral-scalar-extension] and the rational scalar extension of\n[def-weil-rationalization-karoubi]. The coefficient comparison maps for\nright adjoints are the adjunction mates [def-weil-pbc-adjunction-mate] of\nthe corresponding compact-support coefficient comparisons. For\n$\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$, call $f$ admissible at $\\Lambda$\nwhen the three displayed conditions hold at every finite coefficient stage\nwith uniform bounds and when the finite-reduction and scalar-extension maps\nfor the corresponding right adjoints are isomorphisms. These are proof\nobligations for restriction of an ambient right adjoint, not consequences of\nthe definition of a separated finite-type morphism.\n\n*Warning.* Clause (1) is not satisfied in general: its\n$\\operatorname{FullCD}$ condition fails for the structure morphism of an\nelliptic curve over $\\overline{\\mathbf F}_p$ with $A=\\mathbf F_r$, $r\\neq p$,\nand for that morphism $Rf_!=Rf_*$ has no right adjoint on the ambient derived\ncategory, nor on $D^+$ (rem:sf-ambient-counterexample in the six-functors\nchapter). Hence the structure morphism of a smooth proper variety may *not*\nbe presupposed exceptional-adjoint admissible in this sense, and no statement\non the proof chain of this blueprint assumes it. What the blueprint uses is\nthe constructible exceptional adjoint of def-weil-exceptional-inverse-image,\ndefined without clause (1) from the etale adjoint; for it the analogues of\n(1)–(3) on $D^b_c$ and $D^b_{ctf}$ are theorems for every separated\nfinite-type morphism of finite-type $k$-schemes (thm-sf-ambient-adjoint-class\nfor the adjunction, thm-sf-preservation-class for the two preservation\nclauses with the constants $c_f^-=-2D$, $c_f^+=2\\dim Y+1$). The present\ndefinition is retained only to name the stronger, optional, ambient notion.",
+  "what": "The stage-1 expansion identified the finite-system coefficient criterion with unspecified integral-to-finite and higher-category squares. Neither the source paragraph nor the unit defines such arbitrary square data. The original source states the criterion at every finite stage, and unit sk-def-sf-operations (vi) explicitly uses the quotient maps A_(E,n) to A_(E,m) before normalization, rationalization and common stages. This correction makes the quantifiers and canonical mates explicit, including identity arrows and the nonempty common-stage field index, instead of adding arbitrary higher comparison data. No finite-stage clause or unit statement changes.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-exceptional-adjoint-admissibility.md",
+   "place": "original order-1474 final defining paragraph; sk-def-sf-operations (vi), finite-reduction normalized systems"
+  },
+  "citers": [
+   {
+    "id": "fix-cor-verdier-exchange",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "lem-fix-weil-operations",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "def-pod-conventions",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "cor-pur-smooth-admissibility",
+    "holds": true,
+    "note": "It cites only the unchanged preservation or bounded-class interpretations of finite-stage clauses (1)-(3); no arbitrary higher comparison diagram is used."
+   },
+   {
+    "id": "fix-lem-tensor-adjunction",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "thm-sf-preservation-class",
+    "holds": true,
+    "note": "It cites only the unchanged preservation or bounded-class interpretations of finite-stage clauses (1)-(3); no arbitrary higher comparison diagram is used."
+   },
+   {
+    "id": "cor-pur-general-admissibility-datum",
+    "holds": true,
+    "note": "It cites only the unchanged preservation or bounded-class interpretations of finite-stage clauses (1)-(3); no arbitrary higher comparison diagram is used."
+   },
+   {
+    "id": "lem-weil-smooth-proper-purity-hypotheses",
+    "holds": false,
+    "note": "Its unconditional assertion of strong ambient admissibility for every smooth proper structure morphism already contradicts the elliptic-curve warning; the present finite-system clarification does not repair that assertion."
+   },
+   {
+    "id": "cor-zl-purity-smooth-proper",
+    "holds": true,
+    "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
+   },
+   {
+    "id": "prop-weight-purity",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "thm-weil-deligne-purity",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "lem-trf-global-operator-perfect",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "def-weil-complex-weights",
+    "holds": true,
+    "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
+   },
+   {
+    "id": "fix-prop-adjunctions",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "def-fix-six-functor-datum",
+    "holds": true,
+    "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
+   },
+   {
+    "id": "thm-pur-td-criterion",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "cor-sf-ambient-adjoint-discharge",
+    "holds": true,
+    "note": "It cites only the unchanged preservation or bounded-class interpretations of finite-stage clauses (1)-(3); no arbitrary higher comparison diagram is used."
+   },
+   {
+    "id": "lem-sf-mate",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "lem-fix-operation-reduction",
+    "holds": true,
+    "note": "Its conditional exceptional-adjoint assertion uses exactly the canonical finite quotient and scalar mates required here; integral compatibility is expressed through the normalized finite system before rationalization/common stages."
+   },
+   {
+    "id": "def-pur-smooth-trace",
+    "holds": true,
+    "note": "The citation uses the unchanged finite-stage clauses, or assumes the optional higher admissibility with its uniform coefficient compatibility; the concrete finite-system criterion preserves that use."
+   },
+   {
+    "id": "def-weil-exceptional-inverse-image",
+    "holds": true,
+    "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
+   },
+   {
+    "id": "def-trf-admissibility",
+    "holds": true,
+    "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
+   },
+   {
+    "id": "def-weil-poincare-trace-cup",
+    "holds": true,
+    "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
+   },
+   {
+    "id": "thm-weil-poincare-duality",
+    "holds": true,
+    "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
+   },
+   {
+    "id": "prop-weil-operations",
+    "holds": true,
+    "note": "It explicitly uses the unconditional constructible exceptional adjoint and excludes the optional ambient datum; the finite-system clarification leaves that distinction intact."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-scheme-morphism-properties",
+   "def-weil-compactifications-refinements",
+   "def-weil-finite-torsion-constructibility",
+   "def-weil-full-cohomological-dimension",
+   "def-weil-constructible-intervals",
+   "def-weil-finite-tor-amplitude",
+   "def-weil-l-adic-coefficient-extension",
+   "def-weil-proetale-constructible-sheaf",
+   "def-weil-pbc-proetale-site",
+   "def-weil-derived-direct-image",
+   "def-weil-extension-by-zero",
+   "lem-weil-extension-by-zero-exact",
+   "lem-sf-exact-functor-derived-triangulated",
+   "def-weil-derived-complete-integral-detailed",
+   "def-weil-rationalization-karoubi",
+   "def-weil-algebraically-closed-coefficients",
+   "def-weil-integral-derived-reduction",
+   "def-weil-integral-scalar-extension",
+   "def-weil-pbc-adjunction-mate"
+  ]
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $S$ be a scheme on which $\\ell$ is\ninvertible, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $S$-morphism. Choose a compactification\n[def-weil-compactifications-refinements] $X\\xrightarrow{j}\\overline\nX\\xrightarrow{p}Y$, so $j$ is an open immersion and $p$ is proper. Use\nfinite-torsion constructibility\n[def-weil-finite-torsion-constructibility]. Say that $f$ is\n*exceptional-adjoint admissible at $A$* if:\n\n1. the full cohomological-dimension condition\n   [def-weil-full-cohomological-dimension]\n   $\\operatorname{FullCD}(p,A;c_{\\mathrm{cd}})$ holds for some\n   $c_{\\mathrm{cd}}\\in\\mathbf Z_{\\geq0}$, and $Rf_n^{\\times}$ is a right\n   adjoint to $Rf_{!,n}$ on the ambient derived categories, and for every\n   refinement its units, counits, and comparison maps agree;\n2. there are *signed* integers $c_f^-,c_f^+\\in\\mathbf Z$ such that, for every\n   pair of integers $a\\leq b$, with $D_c^{[a,b]}$ the constructible\n   cohomological interval subcategory\n   [def-weil-constructible-intervals],\n   $$\n    L\\in D_c^{[a,b]}(Y,A)\\Longrightarrow\n    Rf_n^{\\times}L\\in D_c^{[a+c_f^-,b+c_f^+]}(X,A);\n   $$\n3. for the finite-Tor subcategory [def-weil-finite-tor-amplitude]\n   $D^b_{ctf}(Y,A)$, one has\n   $$\n    L\\in D^b_{ctf}(Y,A)\n   \\Longrightarrow\n    Rf_n^{\\times}L\\in D^b_{ctf}(X,A).\n   $$\n\nFor $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$, call $f$ admissible at $\\Lambda$\nwhen the three displayed conditions hold at every finite coefficient stage\nwith uniform bounds and when the finite-reduction and scalar-extension maps\nfor the corresponding right adjoints are isomorphisms.\n\n*Warning.* Clause (1) is not satisfied in general: its\n$\\operatorname{FullCD}$ condition fails for the structure morphism of an\nelliptic curve over $\\overline{\\mathbf F}_p$ with $A=\\mathbf F_r$, $r\\neq p$,\nand for that morphism $Rf_!=Rf_*$ has no right adjoint on the ambient derived\ncategory, nor on $D^+$. Hence the structure morphism of a smooth proper\nvariety may *not* be presupposed exceptional-adjoint admissible in this\nsense. For the constructible exceptional adjoint, defined without clause (1)\nfrom the etale adjoint, the analogues of (1)–(3) on $D^b_c$ and $D^b_{ctf}$\nare theorems for every separated finite-type morphism of finite-type\n$k$-schemes, with explicit constants independent of the coefficient stage.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261020T211845-L-3511121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,115 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalAdjointAdmissibility",
+  "date": "2026-10-21",
+  "group": "V7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-adjoint-admissibility",
+   "place": "proof step identifying scalar-restricted support mate with constant projection"
+  },
+  "same_as": [],
+  "is": null
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coproduct-preserving compact support direct image satisfies the projection formula for every constant derived coefficient complex",
+   "results": "8 ordinary sheaf/tensor hits; no exact pro-etale theorem",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "0 exact hits",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*constant|constant.*projection",
+   "results": "11 unrelated hits",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived constant coefficient projection formula for compact support",
+   "results": "No exact declaration returned.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-exc-support-component-after-restriction",
+ "title": "Coefficientwise support-map isomorphism after scalar restriction",
+ "statement": "Under an ambient support adjunction, each component of the exceptional finite-support extension map becomes an isomorphism after applying target scalar restriction and the intrinsic realization inverse.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, proper/open mate calculation and coefficient generation"
+ },
+ "stmt_deps": [
+  "lem-exc-proetale-constant-support-projection",
+  "lem-exc-support-scalar-projection-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Use arrow normalization to identify the restricted component with constant-coefficient projection, apply the projection theorem, and use conservativity of scalar restriction.",
+   "uses": [
+    "lem-exc-proetale-constant-support-projection",
+    "lem-exc-support-scalar-projection-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-proetale-constant-support-projection",
+  "lem-exc-support-scalar-projection-normalization"
+ ],
+ "proof_origin": "Strictly componentwise intermediate result used by final natural-isomorphism proof.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalAdjointAdmissibility",
+  "file": "lean/Sheaf/Paper/ExceptionalAdjointAdmissibility.lean",
+  "declaration": "WeilConjectures.exceptionalFiniteSupportExtensionMap_component_after_restriction_isIso",
+  "statement": "theorem exceptionalFiniteSupportExtensionMap_component_after_restriction_isIso {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) {G : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A} (_a : sfAmbientCompactSupportCandidate A c ⊣ G) (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) : IsIso (((proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory ⋙ (sfIntrinsicDerivedEquivalence Y A).inverse).map ((exceptionalFiniteSupportExtensionMap φ c).app ((sfIntrinsicDerivedEquivalence X A).functor.obj K)))",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-21"
+ },
+ "tool_uses": [
+  "lem-exc-proetale-constant-support-projection",
+  "lem-exc-support-scalar-projection-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261020T211845-L-3511121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261020T211845-L-3511121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

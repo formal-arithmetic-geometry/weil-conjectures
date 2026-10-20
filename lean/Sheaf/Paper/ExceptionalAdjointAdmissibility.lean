@@ -19,6 +19,10 @@ public import Mathlib.Algebra.Field.Shrink
 public import Mathlib.LinearAlgebra.Dimension.Free
 
 import Sheaf.Paper.BoundedConstructibleTower
+public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+import Sheaf.AlgebraicGeometry.ProEtaleConstantSupportProjection
+import Sheaf.Paper.SupportScalarProjectionNormalization
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ScalarExtension
 
 /-!
 # Exceptional-adjoint admissibility as optional ambient data
@@ -31,6 +35,7 @@ of the resulting right-adjoint coefficient mates are conditions of the datum.
 
 @[expose] public section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 universe u v w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 open scoped CategoryTheory.Functor
@@ -149,6 +154,63 @@ noncomputable def exceptionalFiniteSupportExtensionMap
     (exceptionalCoefficientAdjunction φ Y)).symm
       (TwoSquare.mk _ _ _ _ (sfCompactSupportRestriction c φ).hom)).natTrans
 
+private noncomputable def exceptionalSupportRealizationIso
+    (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) :
+    (sfIntrinsicDerivedEquivalence X A).functor ⋙ sfAmbientCompactSupportCandidate A c ≅
+      ProEtale.rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c ⋙
+        (sfIntrinsicDerivedEquivalence Y A).functor := by
+  let EX := sfIntrinsicModuleEquivalence X A
+  let EZ := sfIntrinsicModuleEquivalence c.Z A
+  let J := ProEtale.openImmersionLowerShriek
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i
+  let o : EX.functor ⋙ sfIntrinsicExtensionByZero c.i A ≅ J ⋙ EZ.functor :=
+    EX.funInvIdAssoc (J ⋙ EZ.functor)
+  let od := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso o ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  exact (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight od _ ≪≫ Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (sfIntrinsicDerivedDirectImageComparison c.g A) ≪≫
+    (Functor.associator _ _ _).symm
+
+private theorem fixedSupport_isLeftAdjoint
+    {A : Type u} [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f)
+    {G : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A}
+    (_a : sfAmbientCompactSupportCandidate A c ⊣ G) :
+    (ProEtale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).IsLeftAdjoint := by
+  let EX := sfIntrinsicDerivedEquivalence X A
+  let EY := sfIntrinsicDerivedEquivalence Y A
+  let F := ProEtale.rightDerivedLowerShriekOfCompactification
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c
+  letI : (sfAmbientCompactSupportCandidate A c).IsLeftAdjoint := _a.isLeftAdjoint
+  let e : (EX.functor ⋙ sfAmbientCompactSupportCandidate A c) ⋙ EY.inverse ≅ F :=
+    Functor.isoWhiskerRight (exceptionalSupportRealizationIso A c) EY.inverse ≪≫
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft F EY.unitIso.symm ≪≫
+      Functor.rightUnitor _
+  exact Functor.isLeftAdjoint_of_iso e
+
+/-- Each component of the support coefficient map is invertible after restriction of scalars.
+Source: Stacks Tags 0GL6, 07A6 and 07A7.
+(blueprint: def-weil-exceptional-adjoint-admissibility)
+
+Proof: normalize the restricted mate as the constant projection, apply the constant-support
+projection theorem, and use conservativity of restriction of scalars. -/
+theorem exceptionalFiniteSupportExtensionMap_component_after_restriction_isIso
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    {G : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A}
+    (_a : sfAmbientCompactSupportCandidate A c ⊣ G)
+    (K : DerivedCategory
+      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :
+    IsIso (((proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory ⋙
+      (sfIntrinsicDerivedEquivalence Y A).inverse).map
+      ((exceptionalFiniteSupportExtensionMap φ c).app
+        ((sfIntrinsicDerivedEquivalence X A).functor.obj K))) := by
+  sorry
+
 /-- An ambient right adjoint makes the canonical support coefficient map invertible.
 This concerns the LEFT support comparison, not the optional right-adjoint mate.
 Source: Stacks, Cohomology on Sites, projection formula; blueprint coefficient comparisons
@@ -166,7 +228,34 @@ theorem exceptionalFiniteSupportExtensionMap_isIso
     {G : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A}
     (_a : sfAmbientCompactSupportCandidate A c ⊣ G) :
     IsIso (exceptionalFiniteSupportExtensionMap φ c) := by
-  sorry
+  let EX := sfIntrinsicDerivedEquivalence X A
+  let EY := sfIntrinsicDerivedEquivalence Y A
+  let F := ProEtale.rightDerivedLowerShriekOfCompactification
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c
+  letI : F.IsLeftAdjoint := fixedSupport_isLeftAdjoint c _a
+  letI : (proEtaleCoefficientRestrictScalars Y φ).ReflectsIsomorphisms :=
+    (proEtaleRingRestrictScalars_properties
+      ((constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map
+        (CommRingCat.ofHom φ.ulift))).2.2
+  let U := (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory
+  let H := U ⋙ (sfIntrinsicDerivedEquivalence Y A).inverse
+  letI : U.ReflectsIsomorphisms :=
+    CategoryTheory.Functor.reflectsIsomorphisms_mapDerivedCategory _
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  have h := exceptionalFiniteSupportExtensionMap_component_after_restriction_isIso φ c _a
+    (EX.inverse.obj K)
+  haveI : IsIso (H.map
+      ((exceptionalFiniteSupportExtensionMap φ c).app (EX.functor.obj (EX.inverse.obj K)))) := h
+  haveI : IsIso ((exceptionalFiniteSupportExtensionMap φ c).app
+      (EX.functor.obj (EX.inverse.obj K))) :=
+    isIso_of_reflects_iso
+      ((exceptionalFiniteSupportExtensionMap φ c).app
+        (EX.functor.obj (EX.inverse.obj K))) H
+  have h' : IsIso ((exceptionalFiniteSupportExtensionMap φ c).app
+      (EX.functor.obj (EX.inverse.obj K))) := inferInstance
+  exact (NatTrans.isIso_app_iff_of_iso (exceptionalFiniteSupportExtensionMap φ c)
+    (EX.counitIso.app K)).1 h'
 
 /-- The right coefficient comparison is the actual mate, using the SAME chosen
 ambient adjunctions and the published canonical support restriction comparison.
