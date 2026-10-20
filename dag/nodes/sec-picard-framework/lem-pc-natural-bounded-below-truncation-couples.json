@@ -135,14 +135,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.NaturalTruncationCouple",
-  "file": "lean/Sheaf/CategoryTheory/NaturalTruncationCouple.lean",
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.NaturalTruncationCouple",
+  "file": "lean/WeilConjectures/CategoryTheory/NaturalTruncationCouple.lean",
   "declaration": "CategoryTheory.exists_natural_boundedBelow_truncation_couples",
   "statement": "theorem exists_natural_boundedBelow_truncation_couples\n    {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]\n    [HasDerivedCategory.{wA} A]\n    {B : Type uB} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B]\n    [HasDerivedCategory.{wB} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (a : ℤ) :\n    let L := {M : DerivedCategory A // ∀ r : ℤ, r < a →\n      IsZero ((DerivedCategory.homologyFunctor A r).obj M)}\n    ∃ (Z : L → BigradedExactCouple B 0)\n      (eD : ∀ (M : L) (n : ℤ), (Z M).D 0 n ≅\n        (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).obj M.val)\n      (eE : ∀ (M : L) (p : ℕ) (r : ℤ), (Z M).E p r ≅\n        (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙\n          DerivedCategory.homologyFunctor B (p : ℤ)).obj\n            ((DerivedCategory.homologyFunctor A r).obj M.val)),\n      (∀ (M : L) (p r : ℤ), r < a → IsZero ((Z M).D p r)) ∧\n      (∀ (M : L) (p r : ℤ), p < 0 → IsZero ((Z M).E p r)) ∧\n      ∀ (M N : L) (c : M.val ⟶ N.val),\n        ∃ T : BigradedExactCouple.CoupleMorphism (Z M) (Z N),\n          (∀ n : ℤ, T.tD 0 n ≫ (eD N n).hom = (eD M n).hom ≫\n            (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).map c) ∧\n          (∀ (p : ℕ) (r : ℤ), T.tE p r ≫ (eE N p r).hom = (eE M p r).hom ≫\n            (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙\n              DerivedCategory.homologyFunctor B (p : ℤ)).map\n                ((DerivedCategory.homologyFunctor A r).map c))",
   "branch": "sheaf-dag",
-  "by": "P3",
-  "date": "2026-10-13"
+  "by": "U3",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf duplicate under coord/retire-items.tsv. The adopted source theorem has an identical public signature, the same explicit raw construction and four-step proof, and only the permitted axioms. The existing coproduct parent already imports this adopted module; mathematical dependencies and the unit route are unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -155,13 +156,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T1",
+  "reviewer": "C-95e56",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261017T003429-L-3317743",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T233225-L-908495",
+  "kind": "interface",
+  "note": "independent cc review: Sheaf.CategoryTheory.NaturalTruncationCouple (withdrawn) against its twin WeilConjectures.CategoryTheory.NaturalTruncationCouple: identical signature and imports, node lean.statement matches the twin, no importers of the Sheaf copy, twin axioms propext/Classical.choice/Quot.sound"
  }
 }
