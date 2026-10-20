@@ -18036,3 +18036,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:11 L: merged deliver/U7/Sheaf.DeligneLaumon.BertiniSections (stage 3; reviewer PASS; first push; landing 20261020T131158-L-1254126 (interface); batch 20261020T131122; modules 2; new nodes 1; change records: coord/changes/bertini-sections-proof-imports.md)
 - 13:12 L: returned deliver/Q37/lem-pur-adic-purity-scalar-naturality (reviewer RETURN: L: independent stage-2 immutable head 05c5b91f6033: H12/H4: the clause 'exactly the finite reductions specified in thm-p)
 - 13:12 L: returned deliver/NS/det-sp-tower-gluing (reviewer RETURN: L: independent stage-2 immutable head 6e1c038efe1e: R1′ H12/H4: the new existing:true def node def-sp-coefficient-tower-)
+- 13:12 L: returned deliver/Q05/lem-pur-weil-semilinear-exchange-reindexing (reviewer RETURN: L: independent stage-2 immutable head 8e377108b00e: file-only compilation failed: private overlay Sheaf.Paper.Semilinear)
