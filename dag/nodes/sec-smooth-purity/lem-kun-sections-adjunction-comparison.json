@@ -1,0 +1,105 @@
+{
+ "id": "lem-kun-sections-adjunction-comparison",
+ "kind": "statement",
+ "title": "Ordinary sections comparison from the constants adjunction",
+ "statement": "Let a:L⊣S, b:L⊣T, c:L⊣V, d:K⊣W, f:K⊣X and p:U⊣R be adjunctions in categories C,D,E. Let j:R⋙T≅X and e be leftAdjointUniq from (b.comp p).ofNatIsoRight j to f. Then the right-adjoint comparison from a to c at RG followed by that from (c.comp p).ofNatIsoLeft e to d equals the comparison from a to b at RG, followed by j_G and the inverse comparison from d to f at G.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, lemma-adjoint, and compatibility of the Hom bijections with composition and localization."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Postcompose by the comparison from d to f and apply the inverse f Hom equivalence. The two right-adjoint comparison identities reduce the left side to e inverse followed by the composite a counit. Naturality of e moves each source comparison past e inverse. The defining counit equation for leftAdjointUniq identifies the composite b counit with j followed by the f counit. Apply the comparison from a to b and cancel.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, lemma-adjoint, and compatibility of the Hom bijections with composition and localization. Explicit formal comparison supplied by M7; all lemmas proved in this delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison of two right adjoints commutes with counit compatible squares and natural isomorphisms of left adjoints",
+   "results": "8 hits, including rightAdjointUniq_hom_app_counit and rightAdjointUniq_trans. These supply the counit characterization but do not state the square or the composite sections normalization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": "12 hits in Mathlib.CategoryTheory.Adjunction.Unique: uniqueness, transitivity and the counit equation. Used those lemmas; none states the required comparison square.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq.*(square|comp|counit)|leftAdjointUniq.*counit",
+   "results": "14 hits, including leftAdjointUniq_hom_app_counit and global sections comparison definitions. No complete square/composite-sections result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of the uniqueness of right adjoints with composition of adjunctions and a natural isomorphism of the right adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc, CategoryTheory.Adjunction.rightAdjointUniq_trans_assoc, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_assoc, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app_assoc. The counit, uniqueness, exact-single and zeroth-derived components are used; no theorem gives the full stated composite normalization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction",
+  "date": "2026-10-21",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-geometric-point-derived-sections-adjunction",
+   "place": "Steps 3–7: canonical adjunction and degree-zero normalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SectionsAdjunctionComparison",
+  "file": "lean/Sheaf/CategoryTheory/SectionsAdjunctionComparison.lean",
+  "declaration": "CategoryTheory.Adjunction.sections_comparison",
+  "declarations": [
+   "CategoryTheory.Adjunction.sections_comparison"
+  ],
+  "statement": "theorem sections_comparison\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    {L : C ⥤ D} {U : D ⥤ E} {R : E ⥤ D} {K : C ⥤ E}\n    {S T V : D ⥤ C} {W X : E ⥤ C}\n    (a : L ⊣ S) (b : L ⊣ T) (c : L ⊣ V)\n    (d : K ⊣ W) (f : K ⊣ X) (p : U ⊣ R)\n    (j : R ⋙ T ≅ X) (G : E) :\n    (a.rightAdjointUniq c).hom.app (R.obj G) ≫\n      (((c.comp p).ofNatIsoLeft\n        (((b.comp p).ofNatIsoRight j).leftAdjointUniq f)).rightAdjointUniq d).hom.app G =\n    (a.rightAdjointUniq b).hom.app (R.obj G) ≫ j.hom.app G ≫\n      (d.rightAdjointUniq f).inv.app G",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T211801-L-3501671",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T211801-L-3501671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

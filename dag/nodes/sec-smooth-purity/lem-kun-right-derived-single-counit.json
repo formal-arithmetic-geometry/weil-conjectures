@@ -1,0 +1,114 @@
+{
+ "id": "lem-kun-right-derived-single-counit",
+ "kind": "statement",
+ "title": "Canonical derived counit on a single-object augmentation",
+ "statement": "Let L:C→D be an exact additive left adjoint of an additive R, with the derived-category, K-injective and functorial flat-resolution hypotheses required by the canonical derived adjunction. Transport its left adjoint through the canonical leftDerivedFunctorIsoMapDerivedCategory. Then L_D of the canonical single-object right-derived augmentation, followed by the transported counit, is the exact-left single comparison followed by the single of the ordinary counit. If R is exact, transporting the right adjoint too replaces the augmentation by inverse to its termwise single comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, lemma-adjoint, and compatibility of the Hom bijections with composition and localization."
+ },
+ "stmt_deps": [
+  "lem-kun-right-derived-single-h0"
+ ],
+ "proof": [
+  {
+   "text": "The defining derivedε factorization computes the counit after the right-derived unit. Naturality of the exact-left-derived identification transports this to the ordinary counit on homotopy categories, hence on complexes. Precompose by the inverse single-map comparison; check the resulting chain equality in degree zero and use that its source is zero elsewhere. For exact R the right-derived uniqueness factorization identifies augmentation followed by the exact-right-derived comparison with inverse to the single comparison. Cancel the two right-derived comparisons in the transported counit.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-kun-right-derived-single-h0"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-kun-right-derived-single-h0"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, lemma-adjoint, and compatibility of the Hom bijections with composition and localization. Explicit formal comparison supplied by M7; all lemmas proved in this delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The zeroth homology of the unit into the total right derived functor on a single complex is inverse to the zeroth derived functor comparison",
+   "results": "8 hits: rightDerivedZeroIsoSelf inverse and cancellation lemmas, plus singleFunctorCompHomologyFunctorIso. No total-derived augmentation or derived counit normalization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategorySingleFunctor\"",
+   "results": "11 indexed hits for single comparisons and their localization equations. The indexed composition comparison is not present in this checkout; checked the local Mathlib and source library. Reused the local single-factorization lemmas.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*homology.*zero|mapDerivedCategory.*single.*counit|mapDerivedCategoryCompIso",
+   "results": "0 indexed Mathlib hits. Local source search found CanonicalDirectImageH0Unit (specialized to a ringed-space direct image), ExactDerivedAdjunctionSingleCounit (exact right adjoint and a different derived adjunction), and private single_comp/single_nat in DerivedRestrictionZeroTransport. Their constructions are reused or generalized; none gives the present general statement.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit of a derived adjunction on a single complex composed with the right derived unit is the single of the ordinary counit",
+   "results": "8 hits: CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Bicategory.Adjunction.counit, CategoryTheory.Adjunction.derivedη. The counit, uniqueness, exact-single and zeroth-derived components are used; no theorem gives the full stated composite normalization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction",
+  "date": "2026-10-21",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-geometric-point-derived-sections-adjunction",
+   "place": "Steps 3–7: canonical adjunction and degree-zero normalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedSingleCounit",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedSingleCounit.lean",
+  "declaration": "CategoryTheory.Adjunction.single_rightDerived_counit",
+  "declarations": [
+   "CategoryTheory.Adjunction.single_rightDerived_counit",
+   "CategoryTheory.Adjunction.single_mapDerivedCategory_counit"
+  ],
+  "statement": "theorem single_rightDerived_counit (a : L ⊣ R) (X : D) :\n    L.mapDerivedCategory.map (R.singleRightDerivedUnit.app X) ≫\n        (a.derivedAdjunction.ofNatIsoLeft\n          L.leftDerivedFunctorIsoMapDerivedCategory).counit.app\n            ((DerivedCategory.singleFunctor D 0).obj X) =\n      (L.mapDerivedCategorySingleFunctor 0).hom.app (R.obj X) ≫\n        (DerivedCategory.singleFunctor D 0).map (a.counit.app X)",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T211801-L-3501671",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T211801-L-3501671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

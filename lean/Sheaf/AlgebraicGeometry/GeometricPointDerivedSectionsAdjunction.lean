@@ -5,6 +5,7 @@ Authors: SHEAF group NO
 -/
 module
 
+public import Sheaf.CategoryTheory.SingleAdjunctionComparison
 public import Sheaf.AlgebraicGeometry.GeometricPointDerivedConstants
 public import Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap
 public import Sheaf.AlgebraicGeometry.PullbackConstantModule
@@ -12,18 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.CategoryTheory.SectionsAdjunctionComparison
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-!
 # Derived sections over a geometric point, with adjunction normalization
@@ -107,10 +98,10 @@ noncomputable def geometricPointDerivedSectionsIso
     (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).rightDerivedFunctor ⋙
         (geometricPointStalk Ω).mapDerivedCategory ≅
       rightDerivedGlobalSections (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) Z :=
-  (((geometricPointSectionsStalkAdjunction Ω).mapDerivedCategoryAdjunction.comp
-      (geometricPointSectionsImageAdjunction Ω h)).ofNatIsoLeft
-        (geometricPointSectionsConstantsIso Ω h)).rightAdjointUniq
-    (geometricPointSectionsConstantAdjunction Z)
+  Adjunction.normalizedDerivedRightAdjointIso (geometricPointSectionsStalkAdjunction Ω)
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h)
+    (constantSheafΓAdj Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))
+    (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h)
 
 /-- The actual global-section-to-germ map at the identity geometric point. The lift
 only reindexes the same pointed-neighbourhood colimit, as in the dependency's stalk.
@@ -140,11 +131,8 @@ noncomputable def geometricPointSectionsImageH0Iso
           (geometricPointStalk Ω).mapDerivedCategory).obj
             ((DerivedCategory.singleFunctor _ 0).obj G)) ≅
       (geometricPointStalk Ω).obj ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).obj G) :=
-  ((geometricPointStalk Ω).mapDerivedCategoryHomologyFunctorIso 0).symm.app _ ≪≫
-    (geometricPointStalk Ω).mapIso
-      ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h
-        |>.homologyRightDerivedFunctorObjSingleFunctorIso G 0) ≪≫
-        (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).rightDerivedZeroIsoSelf.app G)
+  (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).mapSingleRightDerivedH0Iso
+    (geometricPointStalk Ω) G
 
 /-- The canonical augmentation identification `H⁰(RΓ_Z G[0]) ≅ Γ_Z G`.
 Source: Stacks Tag 05TD
@@ -155,10 +143,116 @@ noncomputable def geometricPointSectionsGlobalH0Iso (Z : Scheme.{u})
         ((rightDerivedGlobalSections (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) Z).obj
           ((DerivedCategory.singleFunctor _ 0).obj G)) ≅
       (Sheaf.Γ Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).obj G :=
-  (Sheaf.Γ Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
-    |>.homologyRightDerivedFunctorObjSingleFunctorIso G 0) ≪≫
-    (Sheaf.Γ Z.smallEtaleTopology
-      (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).rightDerivedZeroIsoSelf.app G
+  (Sheaf.Γ Z.smallEtaleTopology
+    (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).singleRightDerivedH0Iso G
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem point_germ_normalization
+    {C : Type*} [Category C] (J : GrothendieckTopology C)
+    {A : Type*} [Category A] [HasWeakSheafify J A] [HasTerminal C]
+    (Φ : J.Point) [HasColimitsOfSize A]
+    {T : C} (hT : IsTerminal T) (x : Φ.fiber.obj T)
+    (adj : constantSheaf J A ⊣ Φ.sheafFiber)
+    (hu : ∀ M, adj.unit.app M =
+      Φ.toPresheafFiber T x ((Functor.const _).obj M) ≫
+        Φ.presheafFiber.map (toSheafify J ((Functor.const _).obj M)))
+    (G : Sheaf J A) :
+    (Sheaf.ΓNatIsoSheafSections J A hT).hom.app G ≫
+        Φ.toPresheafFiber T x G.obj =
+      ((constantSheafΓAdj J A).rightAdjointUniq adj).hom.app G := by
+  let a := constantSheafΓAdj J A
+  let b := constantSheafAdj J A hT
+  let M := (Sheaf.Γ J A).obj G
+  have hc := a.rightAdjointUniq_hom_app_counit b G
+  have hc' := congrArg (fun f ↦
+    (toSheafify J ((Functor.const _).obj M)).app (op T) ≫ f.hom.app (op T)) hc
+  have hb : (toSheafify J ((Functor.const _).obj (G.obj.obj (op T)))).app (op T) ≫
+      (b.counit.app G).hom.app (op T) = 𝟙 _ := by
+    simp [b, constantSheafAdj_counit_app, ← NatTrans.comp_app]
+  have hg : (toSheafify J ((Functor.const _).obj M)).app (op T) ≫
+      (a.counit.app G).hom.app (op T) =
+        (Sheaf.ΓNatIsoSheafSections J A hT).hom.app G := by
+    have hn := congr_app (toSheafify_naturality J
+      ((Functor.const _).map ((a.rightAdjointUniq b).hom.app G))) (op T) |>.symm
+    change (toSheafify J ((Functor.const _).obj M)).app (op T) ≫
+        ((constantSheaf J A).map ((a.rightAdjointUniq b).hom.app G)).hom.app (op T) =
+      (a.rightAdjointUniq b).hom.app G ≫
+        (toSheafify J ((Functor.const _).obj (G.obj.obj (op T)))).app (op T) at hn
+    change (toSheafify J ((Functor.const _).obj M)).app (op T) ≫
+      (((constantSheaf J A).map ((a.rightAdjointUniq b).hom.app G)).hom.app (op T) ≫
+        (b.counit.app G).hom.app (op T)) = _ at hc'
+    rw [← Category.assoc, hn, Category.assoc, hb] at hc'
+    erw [Category.comp_id] at hc'
+    exact hc'.symm
+  rw [Adjunction.rightAdjointUniq, conjugateIsoEquiv_apply_hom]
+  simp only [conjugateEquiv_apply_app, Iso.refl_hom,
+    NatTrans.id_app]
+  rw [hu]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  change _ = (Φ.toPresheafFiber T x ((Functor.const _).obj M) ≫
+    Φ.presheafFiber.map (toSheafify J _)) ≫ Φ.presheafFiber.map (a.counit.app G).hom
+  rw [Category.assoc, Φ.toPresheafFiber_naturality_assoc,
+    Φ.toPresheafFiber_naturality, ← Category.assoc, hg]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem sectionsGerm_eq_rightAdjointUniq
+    (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+    (G : Sheaf (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) :
+    geometricPointSectionsGerm Ω G =
+      ((constantSheafΓAdj (Spec (.of Ω)).smallEtaleTopology
+        (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).rightAdjointUniq
+          (geometricPointSectionsStalkAdjunction Ω)).hom.app G := by
+  apply point_germ_normalization
+    (Spec (.of Ω)).smallEtaleTopology
+    ((Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).ulift.{u + 1})
+    (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale (Spec (.of Ω)))
+    (ULift.up (Over.homMk (𝟙 (Spec (.of Ω))) (Category.comp_id _)))
+    (geometricPointSectionsStalkAdjunction Ω) _ G
+  intro M
+  have hu : (geometricPointSectionsStalkAdjunction Ω).unit =
+      (geometricPointConstantGerm Ω).hom :=
+    (Classical.choice (nonempty_geometricPointDerivedConstantsData Ω)).unit_eq
+  rw [hu]
+  let Φ := (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).ulift.{u + 1}
+  change (Φ.presheafFiberConstIso M).inv ≫
+    Φ.presheafFiber.map (toSheafify _ _) = _
+  have ht : (Φ.presheafFiberConstIso M).inv =
+      Φ.toPresheafFiber (Scheme.Etale.mk (𝟙 (Spec (.of Ω))))
+        (ULift.up (Over.homMk (𝟙 (Spec (.of Ω))) (Category.comp_id _)))
+          ((Functor.const _).obj M) := by
+    apply (cancel_mono (Φ.presheafFiberConstIso M).hom).1
+    rw [Iso.inv_hom_id]
+    exact (Φ.toPresheafFiber_presheafFiberConstIso_hom M _ _).symm
+  rw [ht]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem germ_ordinary_comparison
+    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] {Z : Scheme.{u}} (h : Z ⟶ Spec (.of Ω))
+    (G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) :
+    geometricPointSectionsGerm Ω ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).obj G) ≫
+      ((((geometricPointSectionsStalkAdjunction Ω).comp
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h)).ofNatIsoLeft
+          (Scheme.upperStarConstantSheafIso
+            (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h)).rightAdjointUniq
+            (constantSheafΓAdj Z.smallEtaleTopology
+              (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))).hom.app G =
+      (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).hom.app G := by
+  rw [sectionsGerm_eq_rightAdjointUniq]
+  simpa only [lowerStarCompGlobalSectionsIso, Sheaf.ΓNatIsoSheafSections,
+    Scheme.upperStarConstantSheafIso,
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app] using
+    Adjunction.sections_comparison
+      (constantSheafΓAdj _ _) (constantSheafAdj _ _ terminalIsTerminal)
+      (geometricPointSectionsStalkAdjunction Ω)
+      (constantSheafΓAdj _ _) (constantSheafAdj _ _ terminalIsTerminal)
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h)
+      (lowerStarCompSheafSectionsTerminalIso (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h) G
+
 
 /-- The natural right-adjoint comparison has the specified counit identity and is inverse
 to the global-section-to-germ map in degree zero. Source: Stacks Tag 07A6, the subsequent
@@ -166,40 +260,25 @@ pushforward-composition proof, and Tags 04JQ, 0F0F and 05TD
 (blueprint: lem-kun-geometric-point-derived-sections-adjunction).
 
 Proof:
-1. Compose the normalized constant/stalk adjunction of
-   `lem-kun-geometric-point-derived-constants` with the canonical derived image adjunction
-   of `def-kun-projection-formula-map`. Its counit is the image counit after inverse image
-   of the stalk-equivalence counit.
-2. Transport its left adjoint through `lem-kun-pullback-constant`. The transported counit
-   is this composite preceded by inverse to the constants comparison.
-3. Compare with `def-kun-constant-projection-morphism` by `det-sp-unique-right-adjoint`.
-   Its counit equation, precomposed with the constants comparison, is the first clause.
-4. The ordinary constant-section and normalized constant/stalk Hom bijections identify
-   Hom(A, Γ_s H) with Hom(A, SH). The composite sends a map v to ρ_H after v:
-   the constant-section adjunction extends a section by restriction, and the normalized
-   point unit sends a constant to its germ. This is the definition of ρ_H from
-   `def-weil-pbc-geometric-stalks` and `def-weil-pbc-global-sections-functor`.
-   Taking A to be the integer module shows ρ_H bijective, hence invertible.
-   Its naturality follows from the germ-map naturality. Finally
-   `def-weil-pbc-direct-image` identifies sections of h_*G with sections of G on Z.
-5. Choose a K-injective representative by `prop-weil-pbc-kinjective-resolutions-exist`.
-   The recipes of `def-kun-projection-formula-map` and `def-kun-rgamma-unbounded`, together
-   with `lem-weil-pbc-termwise-adjunction-homotopy`,
-   `lem-weil-pbc-right-adjoint-preserves-kinjective` and
-   `lem-weil-pbc-kinjective-hom-derived`, compute all counits by ordinary evaluation.
-6. In each degree inverse to the germ map takes a stalk element to its unique global
-   section. The two sides of the counit identity evaluate that same section after pulling
-   back to Z. Equality on constant sections extends to their sheafifications by
-   `def-kun-constant-sheaf`. Uniqueness identifies this chain isomorphism with β.
-7. For G[0], use `lem-weil-pbc-site-sheaves-enough-injectives`,
-   `lem-weil-pbc-left-exact-injective-resolution-degree-zero` and
-   `lem-weil-pbc-bounded-below-injectives-kinjective` to choose a nonnegative injective
-   resolution. Left exactness of h_* and Γ (the latter by
-   `lem-weil-pbc-right-adjoint-preserves-limits`) identifies degree-zero kernels with
-   h_*G and Γ_Z G; exactness of the stalk identifies the remaining kernel with S(h_*G).
-   Naturality of the germ map with respect to the augmentation then gives the second
-   clause. This resolution is used only for the normalization; β applies to all unbounded E.
--/
+1. Apply the counit characterization of `rightAdjointUniq` to the transported
+   composite adjunction. Expand its counit and cancel the two constants comparisons.
+2. The constant-section and constant/evaluation adjunctions identify the section
+   counit evaluated at the terminal object with the global-section comparison.
+   The normalized point unit is the constant germ. Naturality of the map into
+   the point colimit therefore identifies the actual section-to-germ map with
+   the unique comparison from the sections right adjoint to the stalk right adjoint.
+3. `lem-kun-sections-adjunction-comparison` shows that the ordinary composite
+   right-adjoint comparison, preceded by this germ map, is the pushforward/sections
+   isomorphism. The constants isomorphism is the prescribed `upperStarConstantSheafIso`.
+4. `lem-kun-right-derived-single-counit` computes the canonical derived counits on
+   the single-object augmentations. `lem-kun-single-adjunction-comparison` then
+   identifies the derived comparison on these augmentations with the single of
+   the ordinary comparison. This only uses exactness of the left adjoints and stalk.
+5. `lem-kun-right-derived-single-h0` identifies the zeroth homology of each augmentation
+   with inverse to the canonical zeroth-derived isomorphism, also after applying
+   the exact stalk functor. Apply zeroth homology to Step 4, cancel the augmentation
+   isomorphisms, and use naturality of the single/homology identification.
+   Step 3 gives the required degree-zero normalization. -/
 theorem geometricPoint_derivedSections_adjunction
     (Ω : Type u) [Field Ω] [IsAlgClosed Ω] {Z : Scheme.{u}} (h : Z ⟶ Spec (.of Ω)) :
     (∀ E : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))),
@@ -222,6 +301,38 @@ theorem geometricPoint_derivedSections_adjunction
             ((DerivedCategory.singleFunctor _ 0).obj G)) ≫
         (geometricPointSectionsGlobalH0Iso Z G).hom =
       (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).hom.app G) := by
-  sorry
+  constructor
+  · intro E
+    exact Adjunction.normalizedDerivedRightAdjointIso_counit
+      (geometricPointSectionsStalkAdjunction Ω)
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h)
+      (constantSheafΓAdj Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))
+      (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h) E
+  · intro G
+    let A := ModuleCat.{u + 1} (ULift.{u + 1} ℤ)
+    let S := geometricPointStalk Ω
+    let R := lowerStar A h
+    let T := Sheaf.Γ Z.smallEtaleTopology A
+    let H := DerivedCategory.homologyFunctor A 0
+    let c := ((((geometricPointSectionsStalkAdjunction Ω).comp
+      (upperStarLowerStarAdjunction A h)).ofNatIsoLeft
+        (Scheme.upperStarConstantSheafIso A h)).rightAdjointUniq
+          (constantSheafΓAdj Z.smallEtaleTopology A)).hom.app G
+    let f := (geometricPointDerivedSectionsIso Ω h).hom.app
+      ((DerivedCategory.singleFunctor (Sheaf Z.smallEtaleTopology A) 0).obj G)
+    have hs := Adjunction.normalizedDerivedRightAdjointIso_h0.{
+      u + 2, u + 2, u + 2, u + 1, u + 1, u + 1, u + 1, u + 1, u + 1}
+      (L := geometricPointConstants Ω) (S := S) (U := upperStar A h) (R := R)
+      (K := constantSheaf Z.smallEtaleTopology A) (T := T)
+      (geometricPointSectionsStalkAdjunction Ω) (upperStarLowerStarAdjunction A h)
+      (constantSheafΓAdj Z.smallEtaleTopology A) (Scheme.upperStarConstantSheafIso A h) G
+    have hz : (geometricPointSectionsImageH0Iso Ω h G).inv ≫ H.map f ≫
+        (geometricPointSectionsGlobalH0Iso Z G).hom = c := by
+      delta geometricPointSectionsImageH0Iso geometricPointSectionsGlobalH0Iso
+      dsimp only [f]
+      delta geometricPointDerivedSectionsIso
+      exact hs
+    exact (congrArg (fun k ↦ geometricPointSectionsGerm Ω (R.obj G) ≫ k) hz).trans
+      (germ_ordinary_comparison Ω h G)
 
 end AlgebraicGeometry.Etale

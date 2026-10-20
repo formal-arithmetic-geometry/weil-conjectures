@@ -1,0 +1,129 @@
+{
+ "id": "lem-kun-single-adjunction-comparison",
+ "kind": "statement",
+ "title": "Single-object comparison for composite derived adjunctions",
+ "statement": "Let a:L⊣S,p:U⊣R,b:K⊣T be additive adjunctions between abelian categories C,D,E, with L,S,U,K exact. Let a′:L_D⊣S_D,p′:U_D⊣RR,b′:K_D⊣RT be adjunctions whose counits have the ordinary single-object normalizations. For e:L⋙U≅K descend e by exact composition. Then inverse to the S single comparison followed by S_D of the R single-object augmentation and the derived right-adjoint comparison equals single of the ordinary right-adjoint comparison followed by the T single-object augmentation. Applying zeroth homology and the canonical augmentation isomorphisms identifies the derived comparison with the ordinary comparison. In particular this holds for the canonical derived adjunctions transported through the exact-left-functor identifications. The normalizedDerivedRightAdjointIso construction is exactly this canonical comparison and satisfies the composed derived counit identity.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, lemma-adjoint, and compatibility of the Hom bijections with composition and localization."
+ },
+ "stmt_deps": [
+  "lem-kun-right-derived-single-h0",
+  "lem-kun-right-derived-single-counit"
+ ],
+ "proof": [
+  {
+   "text": "Compose the a′ and p′ normalized counit squares. Naturality of the a′ counit moves the R augmentation through it. The exact single comparisons form an isomorphism from the single of the composite left functor to its descended composite; their compatibility with e is the exact single-constants comparison. Apply the counit-compatible right-adjoint comparison square to the ordinary and derived composite adjunctions. All remaining associators have identity components.",
+   "uses": [
+    "lem-kun-adjunction-comparison-square",
+    "lem-kun-derived-single-constants-comparison",
+    "lem-kun-right-derived-single-h0"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply zeroth homology to the single-object comparison and use the canonical augmentation normalization for R after exact S and for T. Naturality of the single/homology isomorphism and cancellation give the ordinary right-adjoint comparison. For the named canonical construction use the canonical single counit formulas. Its derived counit identity follows directly from uniqueness of right adjoints and cancellation of the exact constants comparison.",
+   "uses": [
+    "lem-kun-right-derived-single-h0",
+    "lem-kun-right-derived-single-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-adjunction-comparison-square",
+  "lem-kun-derived-single-constants-comparison",
+  "lem-kun-right-derived-single-h0",
+  "lem-kun-right-derived-single-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, lemma-adjoint, and compatibility of the Hom bijections with composition and localization. Explicit formal comparison supplied by M7; all lemmas proved in this delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The zeroth homology of the unit into the total right derived functor on a single complex is inverse to the zeroth derived functor comparison",
+   "results": "8 hits: rightDerivedZeroIsoSelf inverse and cancellation lemmas, plus singleFunctorCompHomologyFunctorIso. No total-derived augmentation or derived counit normalization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategorySingleFunctor\"",
+   "results": "11 indexed hits for single comparisons and their localization equations. The indexed composition comparison is not present in this checkout; checked the local Mathlib and source library. Reused the local single-factorization lemmas.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*homology.*zero|mapDerivedCategory.*single.*counit|mapDerivedCategoryCompIso",
+   "results": "0 indexed Mathlib hits. Local source search found CanonicalDirectImageH0Unit (specialized to a ringed-space direct image), ExactDerivedAdjunctionSingleCounit (exact right adjoint and a different derived adjunction), and private single_comp/single_nat in DerivedRestrictionZeroTransport. Their constructions are reused or generalized; none gives the present general statement.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth homology of the canonical composite derived adjunction comparison equals the ordinary right adjoint uniqueness comparison",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.InjectiveResolution.comp_descHomotopyZeroZero, CategoryTheory.Functor.toRightDerivedZero, ChainComplex.isoHomologyι₀, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.ShortComplex.leftRightHomologyComparison', groupHomology.pOpcycles_comp_opcyclesIso_hom, CategoryTheory.Adjunction.homAddEquiv_zero. The counit, uniqueness, exact-single and zeroth-derived components are used; no theorem gives the full stated composite normalization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; used available components"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction",
+  "date": "2026-10-21",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-geometric-point-derived-sections-adjunction",
+   "place": "Steps 3–7: canonical adjunction and degree-zero normalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SingleAdjunctionComparison",
+  "file": "lean/Sheaf/CategoryTheory/SingleAdjunctionComparison.lean",
+  "declaration": "CategoryTheory.Adjunction.single_adjunction_comparison",
+  "declarations": [
+   "CategoryTheory.Adjunction.single_adjunction_comparison",
+   "CategoryTheory.Adjunction.single_adjunction_comparison_h0",
+   "CategoryTheory.Adjunction.normalizedDerivedRightAdjointIso",
+   "CategoryTheory.Adjunction.normalizedDerivedRightAdjointIso_counit",
+   "CategoryTheory.Adjunction.normalizedDerivedRightAdjointIso_h0"
+  ],
+  "statement": "theorem single_adjunction_comparison\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    [Abelian C] [Abelian D] [Abelian E]\n    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]\n    [Abelian.HasKInjectiveResolutions E]\n    {L : C ⥤ D} {S : D ⥤ C} {U : D ⥤ E} {R : E ⥤ D}\n    {K : C ⥤ E} {T : E ⥤ C}\n    [L.Additive] [S.Additive] [U.Additive] [R.Additive] [K.Additive] [T.Additive]\n    [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    [PreservesFiniteLimits S] [PreservesFiniteColimits S]\n    [PreservesFiniteLimits U] [PreservesFiniteColimits U]\n    [PreservesFiniteLimits K] [PreservesFiniteColimits K]\n    (a : L ⊣ S) (p : U ⊣ R) (b : K ⊣ T)\n    (a' : L.mapDerivedCategory ⊣ S.mapDerivedCategory)\n    (p' : U.mapDerivedCategory ⊣ R.rightDerivedFunctor)\n    (b' : K.mapDerivedCategory ⊣ T.rightDerivedFunctor)\n    (ha : ∀ X, L.mapDerivedCategory.map\n        ((S.mapDerivedCategorySingleFunctor 0).inv.app X) ≫\n      a'.counit.app ((DerivedCategory.singleFunctor D 0).obj X) =\n        (L.mapDerivedCategorySingleFunctor 0).hom.app (S.obj X) ≫\n          (DerivedCategory.singleFunctor D 0).map (a.counit.app X))\n    (hp : ∀ X, U.mapDerivedCategory.map (R.singleRightDerivedUnit.app X) ≫\n      p'.counit.app ((DerivedCategory.singleFunctor E 0).obj X) =\n        (U.mapDerivedCategorySingleFunctor 0).hom.app (R.obj X) ≫\n          (DerivedCategory.singleFunctor E 0).map (p.counit.app X))\n    (hb : ∀ X, K.mapDerivedCategory.map (T.singleRightDerivedUnit.app X) ≫\n      b'.counit.app ((DerivedCategory.singleFunctor E 0).obj X) =\n        (K.mapDerivedCategorySingleFunctor 0).hom.app (T.obj X) ≫\n          (DerivedCategory.singleFunctor E 0).map (b.counit.app X))\n    (e : L ⋙ U ≅ K) (X : E) :\n    (S.mapDerivedCategorySingleFunctor 0).inv.app (R.obj X) ≫\n      S.mapDerivedCategory.map (R.singleRightDerivedUnit.app X) ≫\n      (((a'.comp p').ofNatIsoLeft\n        ((Functor.mapDerivedCategoryCompIso L U).symm ≪≫\n          Functor.mapDerivedCategoryNatIso e)).rightAdjointUniq b').hom.app\n            ((DerivedCategory.singleFunctor E 0).obj X) =\n    (DerivedCategory.singleFunctor C 0).map\n      ((((a.comp p).ofNatIsoLeft e).rightAdjointUniq b).hom.app X) ≫\n        T.singleRightDerivedUnit.app X",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T211801-L-3501671",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261020T211801-L-3501671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
