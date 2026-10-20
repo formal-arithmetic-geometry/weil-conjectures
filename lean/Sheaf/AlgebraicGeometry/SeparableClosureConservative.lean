@@ -26,12 +26,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.StalkFaithfulDerived
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # Conservativity of base change to a separable closure
@@ -92,6 +89,56 @@ theorem separableClosure_baseChange_conservative
         ((Etale.upperStar AddCommGrpCat.{u + 1}
           (pullback.fst s
             (Spec.map (CommRingCat.ofHom (algebraMap K L))))).mapDerivedCategory.map α)) := by
-  sorry
+  classical
+  let a := Spec.map (CommRingCat.ofHom (algebraMap K L))
+  let p := pullback.fst s a
+  have lifts (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) :
+      ∃ y : Spec (.of Ω) ⟶ pullback s a, y ≫ p = x := by
+    let k : K →+* Ω := (Spec.preimage (x ≫ s)).hom
+    let : Algebra K Ω := k.toAlgebra
+    have : Algebra.IsSeparable K L := IsSepClosure.separable
+    have : Algebra.IsAlgebraic K L := Algebra.IsSeparable.isAlgebraic K L
+    let b : L →ₐ[K] Ω := IsAlgClosed.lift
+    have hb : CommRingCat.ofHom (algebraMap K L) ≫ CommRingCat.ofHom b.toRingHom =
+        Spec.preimage (x ≫ s) := by
+      ext z
+      exact b.commutes z
+    have comm : x ≫ s = Spec.map (CommRingCat.ofHom b.toRingHom) ≫ a := by
+      rw [← Spec.map_comp, hb, Spec.map_preimage]
+    exact ⟨pullback.lift x (Spec.map (CommRingCat.ofHom b.toRingHom)) comm,
+      pullback.lift_fst _ _ _⟩
+  refine ⟨lifts, ?_, ?_⟩
+  · intro F G α
+    constructor
+    · intro h
+      exact Functor.map_isIso _ α
+    · intro h
+      apply Scheme.isIso_of_isIso_sheafFiber_map
+      intro z
+      let Ω := AlgebraicClosure (X.residueField z)
+      obtain ⟨y, hy⟩ := lifts Ω (X.algClosurePoint z)
+      have e := Etale.upperStarCompUliftSheafFiberIso AddCommGrpCat.{u + 1} p y
+      rw [hy] at e
+      apply (NatIso.isIso_map_iff e α).1
+      change IsIso ((((Scheme.pointSmallEtale y).ulift.{u + 1}).sheafFiber
+        (A := AddCommGrpCat.{u + 1})).map
+          ((Etale.upperStar AddCommGrpCat.{u + 1} p).map α))
+      infer_instance
+  · intro A B α
+    constructor
+    · intro h
+      exact Functor.map_isIso _ α
+    · intro h
+      apply (Etale.stalk_faithful_derived α).2
+      intro Ω _ _ x
+      obtain ⟨y, hy⟩ := lifts Ω x
+      let U := Etale.upperStar AddCommGrpCat.{u + 1} p
+      let V := Etale.upperStar AddCommGrpCat.{u + 1} y
+      let e := Functor.mapDerivedCategoryNatIso
+        (Etale.upperStarComp AddCommGrpCat.{u + 1} y p x hy.symm) ≪≫
+          Functor.mapDerivedCategoryCompIso U V
+      apply (NatIso.isIso_map_iff e α).2
+      change IsIso (V.mapDerivedCategory.map (U.mapDerivedCategory.map α))
+      infer_instance
 
 end AlgebraicGeometry

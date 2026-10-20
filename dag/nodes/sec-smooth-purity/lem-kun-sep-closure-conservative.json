@@ -53,10 +53,9 @@
    }
   },
   {
-   "text": "Suppose $\\alpha:F\\to G$ is a morphism of abelian etale sheaves on $X$ and $p^{-1}\\alpha$ is an isomorphism. For the lift $\\widetilde x$ of any $\\bar x$ just constructed, the composition isomorphism of [lem-weil-pbc-inverse-image-composition](2) gives $\\widetilde x^{-1}p^{-1}\\cong\\bar x^{-1}$. Applying the functor $\\widetilde x^{-1}$ to $p^{-1}\\alpha$ preserves its inverse, so the naturality square of this comparison makes $\\bar x^{-1}\\alpha$ an isomorphism. By [lem-kun-stalk-as-pullback], this is the stalk map $\\alpha_{\\bar x}$, under the identification of sheaves on $\\operatorname{Spec}\\Omega$ with abelian groups. Since this holds for every geometric point $\\bar x$ of $X$, [lemma-weil-pbc-geometric-stalk-conservative] implies that $\\alpha$ is an isomorphism.",
+   "text": "Suppose the inverse image of a sheaf morphism α along p is invertible. For each point z of X, lift the geometric point X.algClosurePoint z using steps 1–2 to y with y ≫ p = X.algClosurePoint z. The proved pullback–stalk comparison upperStarCompUliftSheafFiberIso identifies the universe-lifted stalk of p⁻¹α at y with that of α at X.algClosurePoint z. Functors preserve isomorphisms and NatIso.isIso_map_iff transports invertibility across this comparison. Apply Scheme.isIso_of_isIso_sheafFiber_map to conclude. This uses the direct pullback–stalk API rather than global sections on the geometric point.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-kun-stalk-as-pullback",
+    "lemma-openclosed-stalk-upperstar",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false,
@@ -66,7 +65,7 @@
    }
   },
   {
-   "text": "For the derived clause we need composition on the entire unbounded derived category, not merely on $D^+$. The inverse images along $p$, $\\widetilde x$ and $\\bar x$ are exact by [prop-weil-pbc-inverse-image-exact], and their derived functors are computed termwise on every complex by [lem-weil-pbc-exact-functor-derived-factorization], as specified in [def-weil-pbc-derived-inverse-image]. On a complex $C^\\bullet$, apply the sheaf comparison $c_{p,\\widetilde x}$ of [lem-weil-pbc-inverse-image-composition](2) in every degree: its naturality with respect to $d^n:C^n\\to C^{n+1}$ says $\\bar x^{-1}(d^n)c_{C^n}=c_{C^{n+1}}\\widetilde x^{-1}p^{-1}(d^n)$. Thus these components form a chain isomorphism $\\widetilde x^{-1}p^{-1}C^\\bullet\\cong\\bar x^{-1}C^\\bullet$. Localizing this chain isomorphism gives the comparison of the derived functors on $QC^\\bullet$. It is natural for chain maps and their homotopy classes, and hence for inverses of quasi-isomorphisms and their composites; these generate the localized morphisms. Consequently $\\widetilde x_D^{-1}p_D^{-1}\\cong\\bar x_D^{-1}$ naturally on $D(X_{\\Et})$, with no boundedness assumption.",
+   "text": "Exactness of étale upperStar is supplied by its existing instances. Apply Functor.mapDerivedCategoryNatIso to upperStarComp AddCommGrpCat y p x hy.symm, and compose with Functor.mapDerivedCategoryCompIso. This gives a natural comparison x⁻¹_D ≅ p⁻¹_D ⋙ y⁻¹_D on the entire unbounded derived category. These existing proved APIs apply the sheaf comparison termwise and descend it through localization, so no new chain-level or boundedness lemma is required.",
    "uses": [
     "prop-weil-pbc-inverse-image-exact",
     "lem-weil-pbc-exact-functor-derived-factorization",
@@ -108,17 +107,17 @@
   "def-pc-fibre-product",
   "def-pc-base-change",
   "lem-weil-pbc-inverse-image-composition",
-  "lem-kun-stalk-as-pullback",
   "lemma-weil-pbc-geometric-stalk-conservative",
   "prop-weil-pbc-inverse-image-exact",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "def-weil-pbc-derived-inverse-image",
-  "lem-kun-stalk-faithful-derived"
+  "lem-kun-stalk-faithful-derived",
+  "lemma-openclosed-stalk-upperstar"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-sep-closure-conservative.md",
-  "place": "Proof: geometric-point factorization followed by sheaf and derived stalk conservativity; embedding justified by Stacks 09GU, fibre product by 01JP, pullback by 03Q1 and 021J, unbounded extension by 015F"
+  "place": "Steps 1–6, implemented by K9 using IsAlgClosed.lift, pullback.lift, the proved pullback–stalk comparison, and the existing unbounded derived natural-isomorphism and composition APIs."
  },
  "mathlib_searches": [
   {
@@ -256,5 +255,15 @@
   "group": "Q34",
   "result": "pass",
   "note": "Audited the immutable node, dependencies, Lean module, docstrings, source alignment, edge cases, and report sections. Reproduced scompile successfully for sandbox and library forms with no diagnostics; no substantive or mechanical findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261020T174820-L-802150",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
