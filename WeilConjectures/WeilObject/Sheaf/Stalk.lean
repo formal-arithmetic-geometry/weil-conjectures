@@ -100,7 +100,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 noncomputable def upperStarFromPointMod (X : Scheme.{u}) :
     Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ ⥤
       Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
-  (upperStarFromPoint X).mapMod
+  (upperStarFromPoint X).mapMod Λ
 
 /-- The comparison `p_Y^* ⋙ f^* ≅ p_X^*` on module objects. Writing `f^* = mapMod(f^*) ⋙ Ext_{α_f}`,
 it is the composite of
@@ -226,7 +226,7 @@ noncomputable def geometricFrobeniusOver : f.geometricFiberOver ≅ f.geometricF
 lying over a `k`-rational point `x₀` of `X₀`, that is a section of `f`. -/
 noncomputable def geometricPointOfSection (x₀ : Spec (.of k) ⟶ X₀) (hx₀ : x₀ ≫ f = 𝟙 _) :
     Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber :=
-  pullback.lift (specAlgebraicClosure k ≫ x₀) (𝟙 _) (by simp [hx₀])
+  pullback.lift ((Scheme.specAlgebraicClosure k).hom ≫ x₀) (𝟙 _) (by simp [hx₀])
 
 /-- The geometric point over a `k`-rational point is fixed by the geometric Galois Frobenius up
 to the Frobenius `σ` of `Spec k̄`: `x̄ ≫ g_X = σ ≫ x̄`. -/
@@ -237,7 +237,9 @@ theorem geometricPointOfSection_comp_geometricFrobenius (x₀ : Spec (.of k) ⟶
   apply pullback.hom_ext
   · change _ ≫ _ ≫ f.geometricFiberProj = _ ≫ _ ≫ f.geometricFiberProj
     rw [geometricFrobenius_hom_comp_geometricFiberProj]
-    simp [geometricPointOfSection, geometricFiberProj]
+    simp only [geometricPointOfSection, geometricFiberProj, pullback.lift_fst]
+    rw [← Category.assoc]
+    exact congrArg (· ≫ x₀) (geometricFrobeniusField_hom_comp_specAlgebraicClosure k).symm
   · change _ ≫ _ ≫ f.geometricFiberToAlgebraicClosure =
       _ ≫ _ ≫ f.geometricFiberToAlgebraicClosure
     rw [geometricFrobenius_hom_comp_geometricFiberToAlgebraicClosure]

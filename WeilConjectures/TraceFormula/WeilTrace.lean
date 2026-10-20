@@ -181,7 +181,7 @@ variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 /-- The local trace `t_{n+1}(K; x̄) = ∑ⱼ (-1)ʲ Tr(Fr_{x̄,n+1} | Hʲ(K)_x̄)` of a Weil object `K`
 of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` at a geometric point `x̄` with `x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄`: the supertrace of
 the `(n + 1)`-st Frobenius on the stalks of the Weil homology sheaves. -/
-noncomputable def weilStalkSupertrace (K : WeilBoundedConstructible ℓ e) :
+noncomputable def weilStalkSupertrace (K : WeilBoundedConstructible ℓ e.hom) :
     End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k))) :=
   superTrace
     (fun j ↦ (WeilSheaf.frobeniusStalk ℓ n x hx
@@ -189,7 +189,7 @@ noncomputable def weilStalkSupertrace (K : WeilBoundedConstructible ℓ e) :
     (fun j ↦ (WeilSheaf.frobeniusStalk ℓ n x hx
       ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).str.hom)
 
-lemma weilStalkSupertrace_eq (K : WeilBoundedConstructible ℓ e) :
+lemma weilStalkSupertrace_eq (K : WeilBoundedConstructible ℓ e.hom) :
     weilStalkSupertrace ℓ n x hx K =
       ∑ᶠ j : ℤ, (j.negOnePow : ℤ) •
         weilSheafStalkTrace ℓ n x hx ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K) :=
@@ -198,14 +198,15 @@ lemma weilStalkSupertrace_eq (K : WeilBoundedConstructible ℓ e) :
 /-- The stalks of the homology sheaves of a bounded constructible complex at a geometric point
 are dualizable, that is finite-dimensional over `ℚ̄_ℓ`, so that the local traces are not the
 junk value `0` of `categoricalTrace`. -/
-theorem nonempty_hasRightDual_frobeniusStalk_homology (K : WeilBoundedConstructible ℓ e) (j : ℤ) :
+theorem nonempty_hasRightDual_frobeniusStalk_homology (K : WeilBoundedConstructible ℓ e.hom)
+    (j : ℤ) :
     Nonempty (HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx
       ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).carrier) :=
   sorry
 
 /-- Only finitely many homology sheaves of a bounded complex contribute to the local trace, so
 that the `finsum` defining it is a finite sum. -/
-theorem finite_support_weilSheafStalkTrace_homology (K : WeilBoundedConstructible ℓ e) :
+theorem finite_support_weilSheafStalkTrace_homology (K : WeilBoundedConstructible ℓ e.hom) :
     (Function.support fun j : ℤ ↦
       weilSheafStalkTrace ℓ n x hx
         ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).Finite :=
@@ -223,7 +224,7 @@ variable [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 /-- The unit `ℚ̲̄_ℓ,X` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` with its canonical Weil structure
 `Le^* ℚ̲̄_ℓ,X ≅ ℚ̲̄_ℓ,X`, the inverse of the unit isomorphism of the monoidal functor `Le^*`. -/
-noncomputable def weilUnit : WeilBoundedConstructible ℓ e :=
+noncomputable def weilUnit : WeilBoundedConstructible ℓ e.hom :=
   IsoAlgebra.mk (𝟙_ _)
     (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom)).symm
@@ -297,12 +298,12 @@ variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 Weil object on the base `Spec k` for the identity: the Weil lower shriek along the structure
 morphism `a`. -/
 noncomputable def weilCompactSupportCohomology :
-    WeilBoundedConstructible ℓ e ⥤ WeilBoundedConstructible ℓ (Iso.refl (basePoint k)) :=
+    WeilBoundedConstructible ℓ e.hom ⥤ WeilBoundedConstructible ℓ (Iso.refl (basePoint k)).hom :=
   weilLowerShriek ℓ e (Iso.refl (basePoint k)) (hom_comp_toBasePoint e)
 
 /-- The global trace `L_{n+1}(X, K) = ∑ᵢ (-1)ⁱ Tr(Fr_{c,n+1} | Hⁱ_c(X_k̄, K))` of a Weil object
 `K` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: the local trace of `RΓ_c(X, K)` at the geometric point `s` of the base. -/
-noncomputable def weilGlobalSupertrace (K : WeilBoundedConstructible ℓ e) (n : ℕ) :
+noncomputable def weilGlobalSupertrace (K : WeilBoundedConstructible ℓ e.hom) (n : ℕ) :
     End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k))) :=
   weilStalkSupertrace ℓ n (specAlgebraicClosure k) (specAlgebraicClosure_comp_powSucc n)
     ((weilCompactSupportCohomology ℓ e).obj K)

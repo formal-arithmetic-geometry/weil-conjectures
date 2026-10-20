@@ -32,7 +32,7 @@ functor `ProEtale.CondensedRing.WeilBoundedConstructible.homologyFunctor` is the
 ## Main definitions
 
 - `ProEtale.CondensedRing.WeilBoundedConstructible.homologyFunctor`: the `n`-th homology sheaf,
-  a functor `WeilBoundedConstructible ℓ e ⥤ WeilSheaf ℓ e`.
+  a functor `WeilBoundedConstructible ℓ e.hom ⥤ WeilSheaf ℓ e`.
 
 -/
 
@@ -85,11 +85,11 @@ noncomputable def weilHomologyComparison :
 sheaf: its structure isomorphism is `e^* Hⁿ(K) ≅ Hⁿ(Le^* K) ≅ Hⁿ(K)` given by
 `weilHomologyComparison` and `Hⁿ(φ_K)`. -/
 noncomputable def WeilBoundedConstructible.homologyFunctor :
-    WeilBoundedConstructible ℓ e ⥤ WeilSheaf ℓ e :=
+    WeilBoundedConstructible ℓ e.hom ⥤ WeilSheaf ℓ e :=
   IsoAlgebra.mapOfNatIso (weilHomologyComparison ℓ e n)
 
 @[simp]
-lemma WeilBoundedConstructible.homologyFunctor_obj_carrier (K : WeilBoundedConstructible ℓ e) :
+lemma WeilBoundedConstructible.homologyFunctor_obj_carrier (K : WeilBoundedConstructible ℓ e.hom) :
     ((WeilBoundedConstructible.homologyFunctor ℓ e n).obj K).carrier =
       (DerivedCategory.homologyFunctor _ n).obj K.carrier.obj :=
   rfl

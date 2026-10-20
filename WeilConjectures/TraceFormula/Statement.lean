@@ -99,7 +99,7 @@ theorem weilShriekTraceFunction {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
     (he : ∃ m : ℕ, eX.powSucc m = Iso.refl X)
-    (K : WeilBoundedConstructible ℓ eX) (n : ℕ) (y : frobeniusFixedPoints eY n) :
+    (K : WeilBoundedConstructible ℓ eX.hom) (n : ℕ) (y : frobeniusFixedPoints eY n) :
     weilStalkSupertrace ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
       ∑ᶠ x : {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1},
         weilStalkSupertrace ℓ n x.1.1 x.1.2.2 K :=
@@ -117,7 +117,7 @@ finite type over `𝔽_q`, an automorphism `e` of `X` over `𝔽_q` of finite or
 ```
 It is the case `Y = Spec k` of `weilShriekTraceFunction`. -/
 theorem weilTraceFormula (he : ∃ m : ℕ, e.powSucc m = Iso.refl X)
-    (K : WeilBoundedConstructible ℓ e) (n : ℕ) :
+    (K : WeilBoundedConstructible ℓ e.hom) (n : ℕ) :
     weilGlobalSupertrace ℓ e K n =
       ∑ᶠ x : frobeniusFixedPoints e n, weilStalkSupertrace ℓ n x.1 x.2.2 K := by
   refine (weilShriekTraceFunction ℓ e (Iso.refl (basePoint k)) (hom_comp_toBasePoint e) he K n
