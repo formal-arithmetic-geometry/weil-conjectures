@@ -21,6 +21,8 @@ Let `F : C₁ ⥤ C₂ ⥤ D` and `F' : C₁' ⥤ C₂' ⥤ D'` be bifunctors, `
 corresponds, through the identifications `CochainComplex.mapBifunctorSingle₂Iso` of
 `mapBifunctor K₁ (single X₂) F` with the complex `F(-, X₂)` applied to `K₁`, to the
 degreewise application of `τ(-, X₂)` (`CochainComplex.mapBifunctorComparison_single₂`).
+We also show that `CochainComplex.mapBifunctorSingle₂Iso` is natural in `X₂`
+(`CochainComplex.mapBifunctorSingle₂Iso_inv_naturality₂`).
 
 -/
 
@@ -196,3 +198,61 @@ lemma mapBifunctorComparison_δNatTrans_single₂ :
   mapBifunctorComparison_single₂ (δNatTrans G) K X₂
 
 end CochainComplex
+
+namespace CochainComplex
+
+section Naturality
+
+
+variable {C₁ C₂ D : Type*} [Category* C₁] [Category* C₂] [Category* D]
+  [HasZeroMorphisms C₁] [HasZeroMorphisms C₂] [Preadditive D] [HasZeroObject C₂]
+  [HasZeroObject D] (F : C₁ ⥤ C₂ ⥤ D) [F.PreservesZeroMorphisms]
+  [∀ X₁, (F.obj X₁).PreservesZeroMorphisms]
+
+/-- The isomorphism `mapBifunctorSingle₂Iso` is natural in the object placed in degree `0`. -/
+@[reassoc]
+lemma mapBifunctorSingle₂Iso_inv_naturality₂ {X₂ X₂' : C₂} (f : X₂ ⟶ X₂')
+    (K₁ : CochainComplex C₁ ℤ) :
+    (NatTrans.mapHomologicalComplex (F.flip.map f) (.up ℤ)).app K₁ ≫
+        (mapBifunctorSingle₂Iso F X₂' K₁).inv =
+      (mapBifunctorSingle₂Iso F X₂ K₁).inv ≫
+        mapBifunctorMap (𝟙 K₁) ((single C₂ (.up ℤ) 0).map f) F (.up ℤ) := by
+  ext n
+  have h := ι_mapBifunctorMap (𝟙 K₁) ((single C₂ (.up ℤ) 0).map f) F (.up ℤ) n 0 n (by simp)
+  rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f, mapBifunctorSingle₂Iso_inv_f,
+    mapBifunctorSingle₂Iso_inv_f]
+  erw [Category.assoc, h]
+  rw [HomologicalComplex.id_f, CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp]
+  calc _ = (F.obj (K₁.X n)).map f ≫ (F.obj (K₁.X n)).map (singleObjXSelf (.up ℤ) 0 X₂').inv ≫
+        HomologicalComplex.ιMapBifunctor K₁ ((single C₂ (.up ℤ) 0).obj X₂') F (.up ℤ) n 0 n
+          (by simp) := rfl
+    _ = (F.obj (K₁.X n)).map (singleObjXSelf (.up ℤ) 0 X₂).inv ≫
+        (F.obj (K₁.X n)).map (((single C₂ (.up ℤ) 0).map f).f 0) ≫
+        HomologicalComplex.ιMapBifunctor K₁ ((single C₂ (.up ℤ) 0).obj X₂') F (.up ℤ) n 0 n
+          (by simp) := by
+      rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, single_map_f_self,
+        Iso.inv_hom_id_assoc]
+    _ = _ := rfl
+
+end Naturality
+
+end CochainComplex
+
+namespace CategoryTheory.Functor.LaxMonoidal
+
+open MonoidalCategory
+
+variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
+  (F : C ⥤ D) [F.LaxMonoidal]
+
+/-- Moving a morphism `b ≫ F.map c` in the second factor past a morphism `a` in the first factor
+and the lax monoidal structure `μ` of `F`. -/
+@[reassoc]
+lemma whiskerRight_whiskerLeft_μ_map_whiskerLeft {W X : D} {A B B' : C} (a : W ⟶ F.obj A)
+    (b : X ⟶ F.obj B) (c : B ⟶ B') :
+    a ▷ X ≫ F.obj A ◁ b ≫ μ F A B ≫ F.map (A ◁ c) =
+      W ◁ (b ≫ F.map c) ≫ a ▷ F.obj B' ≫ μ F A B' := by
+  rw [← μ_natural_right, MonoidalCategory.whiskerLeft_comp_assoc, whisker_exchange_assoc,
+    whisker_exchange_assoc]
+
+end CategoryTheory.Functor.LaxMonoidal
