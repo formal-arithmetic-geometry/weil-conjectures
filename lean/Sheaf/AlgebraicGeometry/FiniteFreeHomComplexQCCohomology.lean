@@ -13,7 +13,6 @@ import Sheaf.AlgebraicGeometry.LocalizedComplexQCHomologyExtension
 import WeilConjectures.Algebra.Homology.StupidTailHomShortExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 

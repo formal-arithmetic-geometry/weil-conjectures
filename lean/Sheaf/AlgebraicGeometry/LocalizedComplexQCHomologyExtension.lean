@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 
 import Mathlib.Algebra.Homology.HomologySequence
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentExtension
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
