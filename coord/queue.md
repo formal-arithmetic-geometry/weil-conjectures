@@ -1,6 +1,6 @@
 # Work queue
 
-207 items; claim with `tools/claim.py next <group> [--stage N]`.
+194 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (51 clusters, 2492 modules)
 
@@ -60,7 +60,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean:104:0: error: Unexpected name `Unbounded` after `end`: The current section |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Coherence.lean:116:0: error: Unexpected name `Eta` after `end`: |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 31, stage 3 138 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 31, stage 3 134 items.
 
 ## Stage 1: nodes to split (1)
 
@@ -73,45 +73,33 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 301 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up), 1 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (25)
+## Stage 3: modules to prove (12)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
-| `WeilConjectures.WeilSheaf.GrothendieckLefschetz` | 6 | 1 | proof | route |
-| `WeilConjectures.WeilSheaf.PoincareDualityLisse` | 9 | 1 | proof | route |
-| `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 14 | 1 | proof | route |
-| `WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek` | 16 | 1 | proof | route |
-| `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifUpperShriek` | 16 | 1 | proof | route |
-| `WeilConjectures.ConstructibleSheaf.Noetherian` | 19 | 2 | proof | route |
+| `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 7 | 1 | proof | route |
+| `WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek` | 8 | 1 | proof | route |
 | `Sheaf.CategoryTheory.LocalizationInverseImageCoherence` | - | 2 | proof | 2 |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback` | - | 1 | proof | 3 |
 | `Sheaf.Algebra.Homology.SignedDoubleHomCone` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.ConstantLeftModuleInverseImage` | - | 1 | proof | 3 |
-| `Sheaf.CategoryTheory.SignedFibreTriangulated` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.Sites.GeometricInverseImageExact` | - | 1 | proof | 3 |
-| `Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence` | - | 2 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.DncAffineBlowupComplement` | - | 1 | proof | 4 |
 | `Sheaf.Paper.InvertibleTensorScalarExtension` | - | 1 | proof | 4 |
-| `Sheaf.Paper.KFlatConeComparison` | - | 1 | proof | 4 |
-| `Sheaf.SecSmoothPurity.CochainTensorCoherenceData` | - | 4 | proof | 4 |
-| `Sheaf.SixFunctors.CompactificationOverBase` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.RingedSiteRestrictionKFlat` | - | 1 | proof | 5 |
-| `Sheaf.Paper.RingComplexGodementFunctorial` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteFieldDerivedTensorSummand` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.FiniteAffineProetaleRefinement` | - | 1 | proof | 7 |
-| `Sheaf.CategoryTheory.DualizableJointlyConservativeLocality` | - | 1 | proof | 7 |
-| `Sheaf.Paper.EtaleLisseFiltrationDevissage` | - | 1 | proof | 10 |
-| `Sheaf.Algebra.Homology.IntegerFlatRepresentative` | - | 1 | proof | 17 |
 
-## Stage 3: held for an open upstream PR (20)
+## Stage 3: held for an open upstream PR (22)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
 | module | source |
 |---|---|
 | `WeilConjectures.AlgebraicGeometry.Bertini` | bundle/sec-deligne-laumon-general-d1 |
+| `WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | bundle/sec-curve-estimates-c1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.Compactification.Refinement` | bundle/sec-deligne-laumon-a1-d1 |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | bundle/sec-deligne-laumon-general-d1 |
@@ -125,6 +113,7 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs` | bundle/sec-smooth-purity-d3 |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal` | bundle/sec-smooth-purity-d1 |
 | `WeilConjectures.WeilSheaf.Finiteness` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
 | `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1,bundle/sec-smooth-purity-d3 |
