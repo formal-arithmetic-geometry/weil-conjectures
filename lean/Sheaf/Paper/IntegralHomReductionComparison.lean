@@ -10,6 +10,8 @@ public import Sheaf.Paper.IntegralReductionTowerWellDefined
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Algebra.Homology.HomComplexProjections
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import all Sheaf.Algebra.Homology.ScalarTensorComparisonTransport
+import Sheaf.Paper.CoefficientTensorCurryNormalization
 
 /-! # The evaluation-defined integral Hom reduction comparison
 
@@ -185,7 +187,8 @@ structure HomReductionTensorModel {X : AlgebraicGeometry.Scheme.{u}}
   tensor : DerivedCategory (homReductionModules R) ×
     DerivedCategory (homReductionModules R) ⥤ DerivedCategory (homReductionModules R)
   compute : ∀ (P Q : CochainComplex (homReductionModules R) ℤ),
-    CochainComplex.IsAcyclicTensorKFlat (R := R) P → CochainComplex.IsAcyclicTensorKFlat (R := R) Q →
+    CochainComplex.IsAcyclicTensorKFlat (R := R) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := R) Q →
     (DerivedCategory.Q.obj (homReductionTotal R P Q) ≅
       tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q))
   curry : ∀ K L M : DerivedCategory (homReductionModules R),
@@ -206,6 +209,109 @@ structure HomReductionTensorModel {X : AlgebraicGeometry.Scheme.{u}}
     curry (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I)
       (DerivedCategory.Q.map c ≫ homReductionHomUnit R Q I) =
         (compute P Q hP hQ).inv ≫ DerivedCategory.Q.map f
+
+
+namespace HomReductionProof
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem closed_curry_natural {A : Type c} [Category.{v} A] {H : Aᵒᵖ × A ⥤ A}
+    (S : CoefficientClosedStructure H)
+    (K K' L L' M M' : A) (a : K' ⟶ K) (b : L' ⟶ L) (c : M ⟶ M')
+    (f : K ⟶ H.obj (op L, M)) :
+    (S.transpose K' L' M').symm (a ≫ f ≫ H.map (b.op, c)) =
+      S.tensor.map (a, b) ≫ (S.transpose K L M).symm f ≫ c := by
+  let := S.monoidal
+  have hh : H.map (b.op, c) =
+      H.map (X := (op L, M)) (Y := (op L', M)) (b.op, 𝟙 M) ≫
+        H.map (X := (op L', M)) (Y := (op L', M')) (𝟙 (op L'), c) := by
+    rw [← H.map_comp]
+    simp
+  dsimp only [CoefficientClosedStructure.transpose, CoefficientClosedStructure.tensor]
+  rw [hh]
+  erw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := (S.adjunction L').counit.naturality c
+  change (tensorRight L').map (H.map (X := (op L', M)) (Y := (op L', M')) (𝟙 (op L'), c)) ≫
+    (S.adjunction L').counit.app M' = (S.adjunction L').counit.app M ≫ c at hn
+  erw [hn]
+  erw [reassoc_of% (S.evaluation_naturality L L' M b)]
+  change (a ▷ L') ≫ (f ▷ L') ≫ (H.obj (op L, M) ◁ b) ≫
+    (S.adjunction L).counit.app M ≫ c =
+      (a ⊗ₘ b) ≫ (f ▷ L) ≫ (S.adjunction L).counit.app M ≫ c
+  simp only [← tensorHom_id, ← id_tensorHom, ← Category.assoc,
+    tensorHom_comp_tensorHom, Category.comp_id, Category.id_comp]
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
+private theorem projection_eq {X : AlgebraicGeometry.Scheme.{u}}
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
+    (P Q : CochainComplex (homReductionModules R) ℤ)
+    (a b k : ℤ) (h : b + a = k) :
+    homReductionProjection R P Q a b k h =
+      coefficientHomComponent.{u, u + 1, u} _ R P Q a b k h := rfl
+
+attribute [local irreducible] homComplexFunctor
+
+private theorem generator_eq {X : AlgebraicGeometry.Scheme.{u}}
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
+    (P Q : CochainComplex (homReductionModules R) ℤ)
+    (a b : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt X)ᵒᵖ)
+    (x : (P.X a).val.obj U) (y : (Q.X b).val.obj U) :
+    homReductionTensorElement R P Q a b U x y =
+      coefficientTensorGenerator.{u, u + 1, u} _ R P Q a b (a + b) rfl U x y := rfl
+
+private theorem curry_iff {X : AlgebraicGeometry.Scheme.{u}}
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
+    (P Q I : CochainComplex (homReductionModules R) ℤ)
+    (f : homReductionTotal R P Q ⟶ I) (g : P ⟶ homComplex (R := R) Q I) :
+    IsHomReductionCurry R P Q I f g ↔
+      IsCoefficientTensorCurry.{u, u + 1, u} _ R P Q I f g := by
+  simp only [IsHomReductionCurry, IsCoefficientTensorCurry, coefficientHomSectionApply,
+    generator_eq, projection_eq]
+  with_unfolding_all rfl
+
+private theorem unit_eq {X : AlgebraicGeometry.Scheme.{u}}
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
+    (Q I : CochainComplex (homReductionModules R) ℤ) :
+    homReductionHomUnit R Q I =
+      DerivedCategory.Q.map (((homComplexFunctor (R := R)).obj (op Q)).map
+          ((coefficientHomAugmentation.{u, u + 1, u} _ R).app I)) ≫
+        (coefficientHomResolutionIso.{u, u + 1, u, u + 2} _ R Q I).inv := rfl
+
+attribute [local irreducible] homReductionHomUnit homReductionProjection
+  homReductionTensorElement
+
+private noncomputable def model {X : AlgebraicGeometry.Scheme.{u}}
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
+    (S : CoefficientClosedStructure (homReductionHom R))
+    (T : CoefficientTensorModels.{u, u + 1, u, u + 2}
+      (AlgebraicGeometry.Scheme.ProEt.topology X) R S) : HomReductionTensorModel R where
+  tensor := S.tensor
+  compute P Q hP hQ := CoefficientTensorModels.iso.{u, u + 1, u, u + 2} _ R S T P Q hP hQ
+  curry K L M := (S.transpose K L M).symm
+  natural := closed_curry_natural S
+  cochain_curry P Q I f := by
+    obtain ⟨g, hg, hu⟩ :=
+      coefficientCochainTensorCurry_exists.{u} _ R P Q I f
+    exact ⟨g, (curry_iff R P Q I f g).2 hg,
+      fun g' hg' ↦ hu g' ((curry_iff R P Q I f g').1 hg')⟩
+  normalize P Q I hP hQ _ f g hg := by
+    change (S.transpose _ _ _).symm (DerivedCategory.Q.map g ≫ _) = _
+    rw [unit_eq]
+    have h := coefficientTensorCurry_normalize.{u, u + 1, u, u + 2} _ R S T P Q I hP hQ f g
+      ((curry_iff R P Q I f g).1 hg)
+    erw [Functor.map_comp, Category.assoc] at h
+    with_unfolding_all exact h
+
+private theorem section_transport_cancel {C : Type c} [Category.{v} C]
+    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{r}}
+    {P Q : SheafOfModules.{w} R} (h : P = Q) (U : Cᵒᵖ) (x : P.val.obj U) :
+    (eqToHom h.symm).val.app U ((eqToHom h).val.app U x) = x := by
+  cases h
+  rfl
+
+end HomReductionProof
 
 
 variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
@@ -303,6 +409,26 @@ structure IntegralHomReductionTensorData where
             (((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
             (extension_flat P hP) (extension_flat Q hQ)).hom
 
+attribute [local irreducible] CoefficientClosedStructure.tensor CoefficientTensorModels.iso
+
+private theorem homReductionComplexComparison_eq_scalar
+    (P : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ) :
+    homReductionComplexComparison D l hl E X n P =
+      scalarPairComplexComparison.{u + 1, u, u + 1, u + 2}
+        (J := AlgebraicGeometry.Scheme.ProEt.topology X)
+        (R := completedIntegralCommRingSheaf l E X D hl)
+        (S := integralCoefficientCommRingSheaf l E X n)
+        (integralReductionChangeOfRings l E X D hl n)
+        (homReductionExtensionAdditive D l hl E X n)
+        (integralDerivedReduction l E X D hl n)
+        (integralDerivedReductionCounit l E X D hl n) P := by
+  simp only [homReductionComplexComparison, scalarPairComplexComparison,
+    Functor.mapHomotopyCategoryFactors, CategoryTheory.Quotient.lift.isLift_hom]
+  erw [CategoryTheory.Functor.map_id
+    (DerivedCategory.Qh (C := SheafOfModules.{u + 1} (integralCoefficientSheaf l E X n))),
+    Category.id_comp]
+  all_goals with_unfolding_all rfl
+
 /-- Existence of the normalized universal models defining the comparison.
 This does not assert invertibility of the Hom comparison. The tensor, its representative
 comparisons, currying, scalar unit, total comparison and derived tensor comparison are
@@ -328,7 +454,44 @@ The ordinary tensor comparison and its inverse are isomorphisms, so their descen
 comparisons are inverse. This proves existence of the stated normalized models. -/
 theorem integralHomReductionTensorData_exists :
     Nonempty (IntegralHomReductionTensorData D l hl E X n) := by
-  sorry
+  classical
+  let J := AlgebraicGeometry.Scheme.ProEt.topology X
+  let a := completedIntegralCommRingProjection l E X D hl n
+  let : ∀ R : Sheaf J CommRingCat.{u + 1},
+      HasDerivedCategory.{u + 2} (SheafOfModules.scalarModules J R) :=
+    fun R ↦ homReductionDerived R
+  obtain ⟨M, μ, _⟩ := scalarInternalHomAdjunction_exists.{u + 1, u, u, u + 2} (J := J)
+  let hobj := (integralReductionExistence l E X D hl n).choose_spec.choose
+  have he := ScalarTensorTransport.extension_eq.{u + 1, u, u, u + 2} J a
+    (M.scalar a) (integralReductionChangeOfRings l E X D hl n) hobj
+    (integralReductionExistence l E X D hl n).choose_spec.choose_spec.choose
+  obtain ⟨t⟩ := ScalarTensorTransport.fixedScalarTensorComparison_exists.{u + 1, u, u, u + 2}
+    J a M (μ a) (integralReductionChangeOfRings l E X D hl n)
+    (homReductionExtensionAdditive D l hl E X n) hobj he
+    (integralDerivedReduction l E X D hl n) (integralDerivedReductionCounit l E X D hl n)
+    (by with_unfolding_all exact integralDerivedReductionUniversal l E X D hl n)
+  refine ⟨{
+    source := HomReductionProof.model _ (M.closed _) (M.model _)
+    target := HomReductionProof.model _ (M.closed _) (M.model _)
+    scalarUnit := t.unit
+    scalarUnit_normalize := ?_
+    total := fun P Q ↦ (t.complexIso P Q).hom
+    total_normalize := ?_
+    extension_flat := t.preservesKFlat
+    tensor := t.iso
+    normalize := ?_ }⟩
+  · intro P U x
+    have h := t.unit_normalize P U x
+    apply_fun (fun z ↦ (eqToHom (hobj P).symm).val.app U z) at h
+    have hc := HomReductionProof.section_transport_cancel (hobj P) U
+      ((t.unit.app P).val.app U x)
+    with_unfolding_all exact hc.symm.trans h
+  · intro P Q a b U x y
+    exact t.generators P Q a b (a + b) rfl U x y
+  · intro P Q hp hq
+    simp only [homReductionComplexComparison_eq_scalar]
+    have h := t.normalization P Q hp hq
+    with_unfolding_all exact h
 
 /-- The canonical comparison is the transpose of reduced evaluation, using the inverse
 canonical tensor comparison. The defining model is fixed by its universal properties
