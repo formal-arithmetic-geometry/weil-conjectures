@@ -209,6 +209,18 @@ def retire_items() -> set[str]:
     return _RETIRE["s"]
 
 
+def _withdrawn(m: str) -> bool:
+    """the module is gone from lean/ or is the stub deliver3.py leaves when it withdraws a module (tools/rework.py _present)"""
+    f = li.file_of(m)
+    if not f.is_file():
+        return True
+    try:
+        t = f.read_text(errors="ignore")
+    except OSError:
+        return False
+    return len(t) < 200 and "Withdrawn: no declarations remain." in t
+
+
 def take(who, m, quiet=False, stage=None) -> bool:
     """`stage`: the stage the caller will work the item in (take-many --with-stage). 2026-10-19 (stale dispatch): the
     dispatcher claimed from its copy of coord/queue.tsv, a merge rewrote the queue meanwhile (stage 1 -> 2), and the
@@ -226,6 +238,12 @@ def take(who, m, quiet=False, stage=None) -> bool:
         # (between a landing and the next queue refresh groups claimed just-proved modules and ended BLOCKED)
         if not quiet:
             print(f"{m} has no sorry on the main branch; nothing to claim")
+        return False
+    if m in retire_items() and _withdrawn(m):
+        # 2026-10-21: a retire item whose retirement landed (the module is the withdrawn stub, or gone) is no work; between
+        # the landing and the next queue refresh it was claimed again and the worker answered BLOCKED (~30-80 runs an hour)
+        if not quiet:
+            print(f"{m} is already retired (withdrawn stub on the main branch); nothing to claim")
         return False
     if stage2_parked(m):   # launcher's order 2026-10-11 05:50 UTC: parked for every group until L resolves it
         if not quiet:

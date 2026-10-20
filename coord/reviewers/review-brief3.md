@@ -4,7 +4,7 @@ Stage 3 proves, from the targets downward, and prunes (stages/3-proving-and-prun
 
 The delivered files, whole, are in FILESDIR (a mirror of the repository: lean/…, dag/nodes/…, coord/…); the packet holds their diffs against sheaf-dag. Compile them: `python3 /home/ubuntu/weil-launcher/lcompile.py --all FILESDIR` (import order; each must compile without error or warning). Compare with the version of the library in the clone (`diff`).
 
-Decide by these points, in this order. Each failed point is a point of your RETURN, with the exact change.
+Decide by these points, in this order. A failed point you can correct inside the delivery's files you correct yourself (FIX: the whole corrected files, compiled); a failed point you cannot correct that way is a point of your RETURN.
 
 1. **No target statement changed.** The theorems of lean/Challenge.lean keep name, binders, universes, conclusion, byte for byte.
 2. **Nothing others see changed by accident.** The signature of every existing declaration is unchanged, and no existing definition's body, unless a change record coord/changes/<name>.md declares it, lists every user, and the adapted modules are in the delivery. A proof that got easier because a hypothesis was added, a conclusion weakened or a definition altered is the worst fault of this stage.
@@ -16,6 +16,8 @@ Decide by these points, in this order. Each failed point is a point of your RETU
 8. **The mechanical findings** of the packet (§1) are empty.
 
 Not grounds for a RETURN: style; a proof that is long; a route different from the node's plan, when it is correct and below the unit level.
+
+Fix, do not return (the human, 2026-10-21: the reviewer fixes what it can; only what it cannot fix goes back to the worker). Import hygiene, a shorter route, node `proof`/`proof_deps`/`proof_origin` fields, a wrong node `lean` record, a missing or stale change record or report section, a local compile error, a leftover `sorry` you can close, a statement you can correct in the delivery's own files: correct them and answer FIX. RETURN only for what needs new work or lies outside the delivery's files: a changed target or upstream statement (1), an unannounced change others see that you cannot undo locally (2), a proof that does not exist yet, a false statement whose correction needs a new route, or a delivery you cannot make compile.
 
 Reader gate for interface hazards: when the class reason says `reader required`, list the direct importers from the import graph in the packet and compile each with `lcompile.py` before PASS. This applies to a global instance, an instance or elaboration attribute change (`instance`, `simp`, `ext`, `reducible`, `expose`), a `public import` becoming plain or being removed, and file-level `set_option … in`. A module added by the delivery is exempt. The compiler-only check of the delivered file is insufficient for these effects.
 
