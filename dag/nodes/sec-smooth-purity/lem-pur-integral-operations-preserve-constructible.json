@@ -27,133 +27,75 @@
  ],
  "proof": [
   {
-   "text": "Write $B_W=\\widehat{\\mathcal O}_{E,W}$ and $K_n=K\\otimes^L_{B_Y}(A_{E,n})_Y$, and similarly $M_n,N_n$. Use the single K-flat resolutions with flat terms in [def-pur-integral-derived-operations]. By [lem-pur-kflat-change-of-rings] their reductions remain K-flat with flat terms. For $m\\geq n$, $(P\\otimes_{B_W}A_{E,m})\\otimes_{A_{E,m}}A_{E,n}=P\\otimes_{B_W}A_{E,n}$, by the map $(p\\otimes a)\\otimes b\\mapsto p\\otimes ab$. Thus the reduction towers are normalized, with the quotient cocycle: both composites for three indices send the same pure tensor to its product.",
+   "text": "For a good integral complex, use the object/map formulas for ordinary reduction to compare its actual reduction with changeOfRingsComplex. Transport K-flatness through this isomorphism using the tensor bifunctor. Apply changeOfRings_isKFlat_of_flat_terms. Good representatives of all derived objects are supplied by the proved independent-coefficient K-flat resolution theorem and the site/monoidal tensor comparison.",
    "uses": [
-    "def-pur-integral-derived-operations",
-    "lem-pur-kflat-change-of-rings"
+    "lem-pur-kflat-change-of-rings",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099M, lemma-naive-completion; explicit K-flat quotient calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $U_n=f_n^*K_n$ and $V_n=M_n\\otimes^L_{A_{E,n}}N_n$. For $U_n$ use termwise pullback of the reduced resolution; [lem-weil-pbc-ringed-pullback-preserves-kflat] makes it K-flat, For $m\\geq n$, [lem-weil-pbc-ringed-topoi-module-pullback-tensor] and the canonical constant-ring identification of [prop-weil-pbc-proetale-constant-exact] give $(f_m^*P_m)\\otimes_{(A_{E,m})_X}(A_{E,n})_X\\cong f_n^*(P_m\\otimes_{(A_{E,m})_Y}(A_{E,n})_Y)=f_n^*P_n$. Indeed pullback commutes with tensor, its pullback of $(A_{E,n})_Y$ is $(A_{E,n})_X$, and step 1 identifies the quotient complex with $P_n$. These natural maps commute with quotient transitions because both composites multiply the same coefficient factors. For $V_n$ use $P_n\\otimes_{A_{E,n}}Q_n$ as in [def-pur-integral-derived-operations]. This total tensor is K-flat: tensoring an acyclic complex first with $Q_n$, then with $P_n$, remains acyclic. It has flat terms since tensoring by each term is a composite of exact tensor functors and the direct sums of flat terms are flat by [lem-weil-pbc-flat-coproduct], applied in the Grothendieck abelian symmetric monoidal closed category of module sheaves. Scalar extension to $A_{E,n}$ of the level-$m$ total tensor identifies with $P_n\\otimes_{A_{E,n}}Q_n$, via $(p\\otimes q)\\otimes a\\mapsto(p\\otimes1)\\otimes(q\\otimes a)$. The inverse multiplies the two coefficient factors. These degreewise maps commute with the total differential and quotient maps. Hence both $(U_n)$ and $(V_n)$ are normalized DVR towers in [def-coef-normalized-dvr-tower], with coherent transition data coming from these strict complexes.",
+   "text": "Apply the separate Roos-effectivity lemma to the pullback and tensor towers on arbitrary good representatives. Transport along the defining natural comparisons of the integral operations. Expanding the hom of the representative isomorphism gives exactly integralPullbackFiniteComparison and integralTensorFiniteComparison, including the actual Roos projections. This proves completeness and invertibility for every representative before using constructibility.",
    "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-pur-integral-derived-operations",
-    "def-coef-normalized-dvr-tower",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-flat-coproduct"
+    "lem-pur-integral-operation-roos-effectivity",
+    "def-pur-integral-derived-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N, lemma-pushforward-Noetherian-case (5); termwise tensor and quotient calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-coef-normalized-dvr-effectivity] to the two normalized towers. Their limits are precisely $Lf^*K$ and $M\\widehat\\otimes^L_{\\mathcal O_E}N$ by [def-pur-integral-derived-operations]. Both limits are derived complete, and the effectivity counits identify their reductions with $U_n$ and $V_n$ for every $n$. Since those counits are adjoint to the tower projections, these are the canonical maps of the assertion, not arbitrary isomorphisms. Finally [prop-weil-pbc-proetale-constant-exact] identifies $f_n^*K_n$ with $f^{-1}K_n$, with its transported finite-coefficient module action.",
+   "text": "For finite coefficients pull back a constructible stratification using Stratification.pullback. The composition comparison for constant-module inverse image and the pullback preservation of finite local constancy show that every new stratum has finite locally constant restriction. Transport this assertion along cohomology isomorphisms. The proved comparison integralFinitePullbackModel and exact inverse image identify the cohomology of the finite pullback with pullback of input cohomology. Additivity preserves zero, so the same interval works at every level.",
    "uses": [
-    "lem-coef-normalized-dvr-effectivity",
-    "def-pur-integral-derived-operations",
-    "prop-weil-pbc-proetale-constant-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099M and 099N; normalized DVR effectivity for both strict towers"
-   }
-  },
-  {
-   "text": "At a fixed level $n$, let $F$ be any constructible $(A_{E,n})_Y$-module sheaf. Choose the finite stratification $i_\\nu:Y_\\nu\\to Y$ and locally constant restrictions in [def-weil-proetale-constructible-sheaf]. Put $X_\\nu=X\\times_Y Y_\\nu$, with projection $f_\\nu:X_\\nu\\to Y_\\nu$ and immersion $i^{\\prime}_\\nu:X_\\nu\\to X$. The underlying subsets are exactly $f^{-1}(|Y_\\nu|)$: a point above $y\\in |Y_\\nu|$ has the same fibre as the immersion at $y$, since the immersion induces the same residue field there. They are pairwise disjoint and cover $X$. Their constructibility follows from [lem-pur-scheme-constructible-preimage]. They are locally closed: preimages preserve open and closed subsets. The fibre-product scheme structures give immersions: write each $i_\\nu$ as a closed immersion into an open subscheme; its pulled-back open is an open subscheme of $X$, and on affine patches the pulled-back closed immersion is $\\operatorname{Spec}(B/IB)\\to\\operatorname{Spec}B$. These are precisely the open and closed immersion descriptions of [def-weil-closed-immersion].",
-   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-proetale-constant-module-pullback-composition",
+    "lem-pur-proetale-finite-local-constancy-pullback",
     "def-weil-proetale-constructible-sheaf",
-    "lem-pur-scheme-constructible-preimage",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 054I, lemma-inverse-image-constructible; explicit pulled-back stratification and affine quotient calculation"
-   }
-  },
-  {
-   "text": "The site base-change construction in [def-weil-proetale-inverse-image] identifies $i^{\\prime}_\\nu{}^{-1}f^{-1}F$ with $f_\\nu^{-1}i_\\nu^{-1}F$: both inverse-image composites are left adjoint to direct image along the same composite scheme morphism, whose direct images agree by associativity of fibre products. A covering $\\{U_j\\to Y_\\nu\\}$ trivializing $i_\\nu^*F$ pulls back to a covering $\\{X_\\nu\\times_{Y_\\nu}U_j\\to X_\\nu\\}$, since the site construction sends coverings to coverings. On the latter, the restriction is the same constant finite module $M_j$. Indeed a constant finite set sheaf is the coproduct of copies of the terminal sheaf indexed by its elements; inverse image, being a finite-limit-preserving left adjoint of a morphism of sites, preserves the terminal object and coproducts. It therefore preserves this constant sheaf, and also its addition and scalar-operation tables by finite-product preservation. The constant coefficient ring and module action agree with the transport specified in [prop-weil-pbc-proetale-constant-exact]. Thus $f_n^*F$ is locally constant with finite module stalks on every $X_\\nu$, and is intrinsically constructible by [def-weil-proetale-constructible-sheaf]. Empty strata may be discarded; for empty $X$ retain a single empty stratum.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "prop-weil-pbc-proetale-constant-exact",
-    "def-weil-proetale-constructible-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Finite-level pullback: direct calculation from the site inverse-image and intrinsic constructibility definitions"
-   }
-  },
-  {
-   "text": "Choose the single interval $[r,s]$ for all $K_n$ supplied by [def-weil-derived-complete-integral-detailed]. Exactness of $f_n^*$ in [prop-weil-pbc-proetale-constant-exact] identifies the pulled-back cycles, boundaries and their quotient: $\\mathcal H^i(U_n)=f_n^*\\mathcal H^i(K_n)$. Explicitly, cycles are kernels of differentials, boundaries are kernels of their cokernels, and exactness preserves these kernels, cokernels and quotients. The previous two steps show these cohomology sheaves are constructible. For $i\\notin[r,s]$ they vanish because an additive functor sends zero to zero. Hence every $U_n$ belongs to the intrinsic finite-torsion category [def-weil-finite-torsion-constructibility], with the same interval $[r,s]$. The completeness and canonical reduction identifications in step 3 now verify every condition of [def-weil-derived-complete-integral-detailed] for $Lf^*K$.",
-   "uses": [
-    "def-weil-derived-complete-integral-detailed",
-    "prop-weil-pbc-proetale-constant-exact",
-    "def-weil-finite-torsion-constructibility"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.9(5), finite-reduction argument implemented using intrinsic constructibility and exact finite pullback"
-   }
-  },
-  {
-   "text": "Choose intervals $[a,b]$ and $[c,d]$ for the cohomology of $M_1$ and $N_1$. By [lem-coef-integral-residue-tor], all $M_n$ have Tor amplitude in $[a,b]$ and all $N_n$ have Tor amplitude in $[c,d]$, with the same bounds for every $n$. By [lem-sf-flat-model], choose bounded flat representatives $F_n,G_n$ in these intervals. Their total tensor represents $V_n$, and its degree-$j$ term is $\\bigoplus_{u+v=j}F_n^u\\otimes_{A_{E,n}}G_n^v$. It is zero unless $a+c\\leq j\\leq b+d$. Consequently the cohomology of every $V_n$ is contained in the single interval $[a+c,b+d]$. The flat representatives here serve only to prove the bound; the coherent tower remains the one constructed in step 2.",
-   "uses": [
-    "lem-coef-integral-residue-tor",
-    "lem-sf-flat-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Bhatt--Scholze Lemmas 6.5.3--6.5.4; flat total-complex bound"
-   }
-  },
-  {
-   "text": "Each $M_n,N_n$ is bounded constructible by the definition of the integral category. Apply [lem-pur-finite-tensor-constructible-cohomology] at level $n$: every cohomology sheaf of $V_n$ is constructible. Together with the bound in step 7 this says $V_n\\in D^b_c(W,A_{E,n})$ for every $n$. Step 3 gives derived completeness of the limit and identifies these $V_n$ with its reductions. The single interval $[a+c,b+d]$ verifies the remaining uniform-amplitude requirement of [def-weil-derived-complete-integral-detailed]. Thus $M\\widehat\\otimes^L_{\\mathcal O_E}N\\in D^b_c(W,\\mathcal O_E)$, with exactly the reduction isomorphisms already obtained in step 3.",
-   "uses": [
-    "lem-pur-finite-tensor-constructible-cohomology",
     "def-weil-derived-complete-integral-detailed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BQ, lemma-tensor-c, combined with normalized-tower effectivity and the uniform bound"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use integral_residue_tor on the residue cohomology interval of the first tensor input. Transfer this uniform Tor bound to its actual finite reduction by the K-flat representative comparison. Identify the explicit finite tensor with categorical derived tensor using its K-flat first factor. The generic source-library theorem homologyConcentratedIn_tensor_of_torAmplitudeIn_left adds its Tor interval to the cohomology interval of the second factor. Thus all finite tensors have one common finite support interval; a second Tor-amplitude test is unnecessary.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-sf-source-tensor-cohomology-interval",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteTensor_constructible_cohomology to the two actual reductions, resolving the K-flat first one by its identity. The uniform support interval makes the cohomological support finite. Transport finite constructibility along the canonical reduction isomorphisms, using closure under isomorphisms of the bounded constructible category. Combine this with completeness and the interval to verify every clause of sfIntegralConstructible, for pullback and tensor.",
+   "uses": [
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "lem-weil-proetale-dbc-triangulated",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-coef-normalized-dvr-tower",
   "def-pur-integral-derived-operations",
-  "def-weil-closed-immersion",
   "def-weil-derived-complete-integral-detailed",
-  "def-weil-finite-torsion-constructibility",
   "def-weil-proetale-constructible-sheaf",
-  "def-weil-proetale-inverse-image",
   "lem-coef-integral-residue-tor",
-  "lem-coef-normalized-dvr-effectivity",
+  "lem-pc-kflat-resolution",
   "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-pur-integral-operation-roos-effectivity",
   "lem-pur-kflat-change-of-rings",
-  "lem-pur-scheme-constructible-preimage",
-  "lem-sf-flat-model",
-  "lem-weil-pbc-flat-coproduct",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "prop-weil-pbc-proetale-constant-exact"
+  "lem-pur-proetale-constant-module-pullback-composition",
+  "lem-pur-proetale-finite-local-constancy-pullback",
+  "lem-sf-source-tensor-cohomology-interval",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-proetale-dbc-triangulated"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemmas 6.5.3--6.5.5 and 6.5.9(5), implemented through finite reductions and normalized DVR effectivity; Stacks Tags 099M, 099N, 09BQ"
+  "by": "worker",
+  "group": "T5",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M, 099N(5), 09BQ; finite-level proof with separate unbounded Roos effectivity and existing categorical tensor interval theorem."
  },
  "mathlib_searches": [
   {
@@ -254,11 +196,9 @@
  "tool_uses": [
   "lem-coef-integral-residue-tor",
   "lem-coef-normalized-dvr-effectivity",
-  "lem-sf-flat-model",
   "lem-weil-pbc-ringed-pullback-preserves-kflat",
   "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-flat-coproduct"
+  "prop-weil-pbc-proetale-constant-exact"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -272,9 +212,6 @@
   "module": "Sheaf.Paper.IntegralOperationsPreserveConstructible",
   "declaration": "WeilConjectures.integralOperations_preserve_constructible",
   "declarations": [
-   "WeilConjectures.integralOperationRoosProjection",
-   "WeilConjectures.integralPullbackFiniteComplex",
-   "WeilConjectures.integralTensorFiniteComplex",
    "WeilConjectures.integralPullbackFiniteComparison",
    "WeilConjectures.integralTensorFiniteComparison",
    "WeilConjectures.integralOperations_preserve_constructible"
@@ -293,5 +230,15 @@
   "group": "N3",
   "result": "pass",
   "note": "Statement, dependencies, canonical maps, docstrings, edge cases, report sections, and recorded scompile evidence checked; no substantive or mechanical delivery error found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-fb9aa",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261020T221352-L-4178773",
+  "kind": "interface",
+  "note": "independent cc review: delivered IntegralOperationsPreserveConstructible + new IntegralOperationRoosEffectivity vs clones/live, nodes lem-pur-integral-operations-preserve-constructible / lem-pur-integral-operation-roos-effectivity, all 26 direct importers compiled against the delivered modules"
  }
 }

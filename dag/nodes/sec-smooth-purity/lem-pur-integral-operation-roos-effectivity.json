@@ -1,0 +1,164 @@
+{
+ "id": "lem-pur-integral-operation-roos-effectivity",
+ "kind": "statement",
+ "title": "Effectivity of the strict finite-operation Roos towers",
+ "statement": "Fix a prime l and a finite extension E/Q_l, with finite coefficient rings A_(n+1) and the completed constant coefficient sheaf on each scheme. For any scheme morphism f:X→Y and any good integral complex P on Y, the Roos complex of the strict tower Res_n f*(P tensor A_(n+1)) is derived complete, and reduction at every index n is identified with f*(P tensor A_(n+1)) by the adjoint of its actual Roos projection. For any scheme W and good integral complexes P,Q, the same assertion holds for the tower Res_n((P tensor A_(n+1)) tensor (Q tensor A_(n+1))). No constructibility or boundedness is assumed. If a derived object K is equipped with an isomorphism to either Roos complex, transport completeness and precompose the projection by that isomorphism; its adjoint remains the specified canonical reduction isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M and 099N(5), naive completion and completed pullback; Bhatt--Scholze Lemmas 3.5.4--3.5.7; proof steps 1--3 of lem-pur-integral-operations-preserve-constructible."
+ },
+ "stmt_deps": [
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For a good complex P, changeOfRings_isKFlat_of_flat_terms gives K-flat reductions. Successive quotient extension identifies (P tensor B_m) tensor over B_m B_n with P tensor B_n, by (x tensor a) tensor b sent to x tensor ab. The formula and its inverse descend through sheafification, commute with differentials, and satisfy the quotient cocycle on pure tensors.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact finite pullback commutes with tensor and the canonical constant coefficient identifications. Thus it carries the preceding reduction identifications to normalized pullback towers. For tensor towers, reassociate the two K-flat reductions and their quotient extension; totalization uses direct sums and both signed differential terms commute with the coefficient maps. These identifications agree with the actual pure-tensor transitions recorded by IntegralOperationsWellDefined.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the strict finite complexes to the completed coefficient ring. Localization of this strict diagram is a coherent object in the derived category of towers. Its evaluation isomorphisms are the inverse restriction factorization comparisons. Lift its finite transitions before restriction, using the semilinear coefficient maps. Their identity and cocycle follow from the pure-tensor formulas. The finite scalar-extension isomorphisms above and the tensor/restriction adjunction give exactly the Hom bijections required by NormalizedDVRTower.normalization. Use the unrestricted reduction-tower interface for the exact restriction and its canonical derived factorization.",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved private strictRoosTriangle helper uses exact countable products to identify the two product vertices of the localized mapping-cocone triangle, preserving the actual projections. Construct the coherent normalized tower from the preceding steps and apply normalizedDVRTower_effectivity to that triangle. The normalized counit is the adjoint of mappingCocone.fst followed by Pi.π and the inverse restriction factorization, hence precisely the displayed morphism. Effectivity gives completeness; sfDerivedComplete_iff_legacy converts it to IsSfDerivedComplete.",
+   "uses": [
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the vertex of the distinguished Roos triangle through e. Naturality of the reduction units identifies the transported canonical augmentation. Under adjunction the displayed map is the original counit precomposed by derived reduction of e.hom; both factors are invertible. This establishes the stated form for arbitrary isomorphic vertices and for both operation towers. No boundedness or constructibility enters any step.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-pur-integral-derived-operations",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T5",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M and 099N(5); normalization, exact countable products, and the existing normalized DVR effectivity theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized tower of complexes modulo powers of a discrete valuation uniformizer has derived complete inverse limit and its derived reductions are the tower levels",
+   "results": "8 hits concerning ordinary adic completion, BDeRhamPlus, untilts and Hausdorffification; no derived tower effectivity theorem.",
+   "date": "2026-10-21",
+   "verdict": "No match; use normalizedDVRTower_effectivity from this library."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived complete Roos complex of a countable tower with exact products and canonical finite projection",
+   "results": "No exact Mathlib theorem; the project normalized DVR effectivity theorem is required.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedComplete\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*[Tt]ower|[Rr]oos.*[Ee]ffectiv|derivedComplete",
+   "results": "3 hits, all normalizedTrace in Mathlib/FieldTheory/NormalizedTrace.lean",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsPreserveConstructible",
+  "date": "2026-10-21",
+  "group": "T5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-operations-preserve-constructible",
+   "place": "Proof steps 1--3: normalization and effectivity before finite constructibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOperationRoosEffectivity",
+  "file": "lean/Sheaf/Paper/IntegralOperationRoosEffectivity.lean",
+  "declaration": "WeilConjectures.integralOperationRoos_effectivity",
+  "declarations": [
+   "WeilConjectures.integralOperationRoosProjection",
+   "WeilConjectures.integralPullbackFiniteComplex",
+   "WeilConjectures.integralTensorFiniteComplex",
+   "WeilConjectures.integralOperationRoos_effectivity"
+  ],
+  "statement": "theorem integralOperationRoos_effectivity :\n    (∀ {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)\n      (P : (integralOperationsGoodComplex l E Y).FullSubcategory)\n      (K : DerivedCategory (integralTowerModules l E X))\n      (e : K ≅ DerivedCategory.Q.obj\n        ((integralOperationsPullbackComplexFunctor l E f).obj P.obj)),\n      IsSfDerivedComplete l E X K ∧ ∀ n : ℕ,\n        IsIso ((((derivedScalarExtensionRestrictionAdjunction l E X n).choose).homEquiv _ _).symm\n          (e.hom ≫ integralOperationRoosProjection l E X\n            ((integralOperationsPullbackTowerFunctor l E f).obj P.obj) n ≫\n            (scalarReductionRestriction l E X n).mapDerivedCategoryFactors.inv.app\n              (integralPullbackFiniteComplex l E f P.obj n)))) ∧\n    (∀ (W : AlgebraicGeometry.Scheme.{u})\n      (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)\n      (K : DerivedCategory (integralTowerModules l E W))\n      (e : K ≅ DerivedCategory.Q.obj\n        ((integralOperationsTensorComplexFunctor l E W).obj (P.obj, Q.obj))),\n      IsSfDerivedComplete l E W K ∧ ∀ n : ℕ,\n        IsIso ((((derivedScalarExtensionRestrictionAdjunction l E W n).choose).homEquiv _ _).symm\n          (e.hom ≫ integralOperationRoosProjection l E W\n            ((integralOperationsTensorTowerFunctor l E W).obj (P.obj, Q.obj)) n ≫\n            (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.inv.app\n              (integralTensorFiniteComplex l E W P.obj Q.obj n))))",
+  "branch": "sheaf-dag",
+  "by": "T5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-fb9aa",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261020T221352-L-4178773",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-fb9aa",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261020T221352-L-4178773",
+  "kind": "interface",
+  "note": "independent cc review: delivered IntegralOperationsPreserveConstructible + new IntegralOperationRoosEffectivity vs clones/live, nodes lem-pur-integral-operations-preserve-constructible / lem-pur-integral-operation-roos-effectivity, all 26 direct importers compiled against the delivered modules"
+ }
+}
