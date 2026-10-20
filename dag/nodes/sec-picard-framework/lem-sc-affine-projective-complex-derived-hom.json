@@ -28,37 +28,49 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective resolution L^\\bullet\\to I^\\bullet of the bounded-below complex L^\\bullet in the one-point specialization of [def-pur-derived-internal-hom]. Since P^\\bullet is bounded above with projective terms, [lem-sc-bounded-above-projective-kprojective] says that Hom_R^\\bullet(P^\\bullet,-) sends quasi-isomorphisms to quasi-isomorphisms (apply its acyclicity assertion to the mapping cone). Hence Hom_R^\\bullet(P^\\bullet,L^\\bullet)\\to Hom_R^\\bullet(P^\\bullet,I^\\bullet) is a quasi-isomorphism, and the latter is the representative used by [def-pur-derived-internal-hom]; therefore the ordinary Hom complex represents the derived Hom in D(R).",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-sc-bounded-above-projective-kprojective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM8, lemma-stalk-internal-hom, case (2), using the K-projective replacement construction of Derived Categories Tag 06XR"
-   }
-  },
-  {
-   "text": "For the vanishing assertion, choose integers b and a with P^p=0 for p>b and L^q=0 for q<a. By the Hom-complex formula in the one-point specialization of [def-pur-derived-internal-hom], its degree-n term is the product over p of Hom_R(P^p,L^{p+n}). A nonzero factor requires p\\le b and p+n\\ge a, so no factor exists when n<a-b; the product is then zero. Thus the cohomology vanishes in all sufficiently negative degrees.",
+   "text": "On the one-point bottom-topology site, evaluation is faithful and exact. The slice over the point is again a singleton. Identify sections of internal Hom with module maps on this slice. Kernels are preserved by Hom. Extend a point map to a sheaf morphism and lift it through the given epimorphism using categorical projectivity of P.X p. Restrict this lift back to the point. Thus internal Hom from each term of P preserves short exact sequences, without any finite-generation assumption. This is proved directly by private helpers in the item module.",
    "uses": [
     "def-pur-derived-internal-hom"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM8, lemma-stalk-internal-hom, case (2), boundedness estimate in the affine Hom-complex calculation"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For a quasi-isomorphism between bounded-below targets M,N and a fixed homology degree n, cut P below k=min(aM,aN)-n-1. Below k the target factors of the Hom product vanish in degrees n-1,n,n+1; above k the truncation inclusion is an isomorphism. The product-limit projections therefore show that cutting P preserves Hom homology in degree n. The cut source is bounded and has exact internal Hom in every term, so apply quasiIso_homComplex_map_of_bounded_exact_terms. Naturality and two-out-of-three give the desired quasi-isomorphism in degree n for P.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "lem-pc-bounded-exact-term-hom-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a bounded-below K-injective resolution beta:M→T by exists_boundedBelow_injective_resolution. The preceding step applies to beta. Compare with the canonical functorial replacement eta:M→F(M) through the naturality square for beta. F(beta) and eta at T are quasi-isomorphisms between K-injectives, and Hom(P,-) preserves these by quasiIso_homComplex_map. Two-out-of-three proves the Hom comparison for eta at M. Apply the naturality square again to an arbitrary quasi-isomorphism M→I with I K-injective to obtain its Hom comparison, even if I is not bounded below.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived localization Q inverts the Hom comparison for any functorial replacement, proving the universal comparison clause. Compose its canonical instance with the inverse component of derivedInternalHom_comparison to represent derived Hom by Q Hom(P,L). Finally take a=e-d. If n<a, each product factor Hom(P^p,L^q), with p+n=q, is zero: either p>d or q<e. Product-limit extensionality makes the degree-n term zero, hence its homology zero.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-derived-internal-hom",
-  "lem-sc-bounded-above-projective-kprojective"
+  "lem-sc-hom-complex-projections",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-pur-rhom-well-defined"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0GM8, lemma-stalk-internal-hom, case (2), together with the K-projective construction of derived Hom (Tag 06XR)"
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GM8 case (2), via the bounded exact-term Hom calculation (08DM), bounded-below injective replacements (07A5), and K-injective comparison (0A95). Lean proof by F5, adapting the existing RingProjectiveInternalHomExact and RingedSiteBoundedFreeRHomMapQuasiIso proofs without a finite-generation assumption."
  },
  "mathlib_searches": [
   {
@@ -143,5 +155,15 @@
   "group": "S1",
   "result": "fix",
   "note": "one-point site R-modules via onePointRingSheaf (M1 form); P strictly LE d with projective terms, L strictly GE e; Q homComplex P L ≅ derivedInternalHom ⊥ (onePointRingSheaf R) (Q P, Q L); FIX: tied the iso to the canonical Hom(P,L)→Hom(P,I(L)) as in landed derivedHom_projectiveResolution; eventual negative-degree vanishing of homology"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261020T211708-L-3489696",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
