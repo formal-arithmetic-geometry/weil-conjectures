@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Spec
 
+import WeilConjectures.AlgebraicGeometry.FiniteAffineFibreSections
+
 /-!
 # Sections of an affine finite fibre
 
@@ -79,7 +81,7 @@ theorem finite_affine_fibre_sections [Module.Finite A B] :
       (∀ k : K,
         g ((1 : B) ⊗ₜ[A] k) =
           ((f).fiberToSpecResidueField p).appTop.hom ((Scheme.ΓSpecIso K).inv.hom k)) := by
-  sorry
+  exact Spec.exists_ringEquiv_stalk_tensorProduct_fiber A B p
 
 end
 

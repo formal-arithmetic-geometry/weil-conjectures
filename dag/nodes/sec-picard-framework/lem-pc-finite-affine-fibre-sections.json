@@ -25,49 +25,20 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathfrak p\\subset A$ be the prime of $s$, so $A_s=A_{\\mathfrak p}=\\mathcal O_{V,s}$. By [lem-weil-pbc-spec-tilde-free-module] with $R=B$ and $n=1$, $\\mathcal O_X\\cong\\widetilde B$ as $\\mathcal O_X$-modules. By [lem-weil-pbc-pushforward-tilde-spec] applied to $\\varphi:A\\to B$ and $N=B$, $f_*\\mathcal O_X\\cong f_*\\widetilde B\\cong\\widetilde{B_A}$, where $B_A$ is $B$ viewed as an $A$-module. By [lem-weil-pbc-spec-tilde-stalk-localization] with $R=A$, $M=B_A$, the stalk is $(f_*\\mathcal O_X)_s\\cong(B_A)_{\\mathfrak p}$ as an $A_{\\mathfrak p}$-module, and $(B_A)_{\\mathfrak p}\\cong B\\otimes_AA_{\\mathfrak p}$ (elementary). Finiteness of $B$ over $A$ is not used here or below: the identity holds for every $A$-algebra $B$; the hypothesis is kept for the citer lem-pc-flf-properties.",
-   "uses": [
-    "lem-weil-pbc-spec-tilde-free-module",
-    "lem-weil-pbc-pushforward-tilde-spec",
-    "lem-weil-pbc-spec-tilde-stalk-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02KB, affine calculation in lemma-finite-flat"
-   }
-  },
-  {
-   "text": "By the definition of the residue field, $\\kappa(s)=A_s/\\mathfrak m_sA_s$. Tensoring the quotient presentation with $B$ identifies $B\\otimes_A\\kappa(s)$ with $(B\\otimes_AA_s)\\otimes_{A_s}A_s/\\mathfrak m_sA_s$, so the stalk tensor in the statement is canonically $B\\otimes_A\\kappa(s)$.",
+   "text": "Apply the already proved source-library theorem AlgebraicGeometry.Spec.exists_ringEquiv_stalk_tensorProduct_fiber with A, B and p. Its two ring equivalences and four generator compatibility clauses are definitionally the required ones. The source theorem holds for arbitrary A-algebras, so the retained finite-module hypothesis is unused. Its proof identifies the affine fibre sections as a ring pushout and the pushforward stalk as a localization, then uses tensor base change; no separate tilde-module lemmas are needed here.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02KB, affine calculation in lemma-finite-flat"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-fibre-product-affine-spectra] with $R=A$, $B$ as the first $A$-algebra, and $\\kappa(s)$ as the second. It identifies $X\\times_V\\operatorname{Spec}\\kappa(s)$ with $\\operatorname{Spec}(B\\otimes_A\\kappa(s))$, and its final clause identifies the global sections of this affine fibre with $B\\otimes_A\\kappa(s)$. Under these identifications, the canonical map is the identity of this tensor product, hence an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02KB, affine calculation in lemma-finite-flat"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/FiniteAffineFibreSections.lean",
+    "place": "AlgebraicGeometry.Spec.exists_ringEquiv_stalk_tensorProduct_fiber"
    }
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-spec-tilde-free-module",
-  "lem-weil-pbc-pushforward-tilde-spec",
-  "lem-weil-pbc-spec-tilde-stalk-localization",
-  "lem-weil-pbc-fibre-product-affine-spectra"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 02KB (lemma-finite-flat), affine calculation"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/FiniteAffineFibreSections.lean",
+  "place": "AlgebraicGeometry.Spec.exists_ringEquiv_stalk_tensorProduct_fiber; proved affine pushout/localization calculation"
  },
  "mathlib_searches": [
   {
@@ -153,5 +124,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T131944-L-1394867",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
