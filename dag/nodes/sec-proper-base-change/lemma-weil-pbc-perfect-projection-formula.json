@@ -50,7 +50,7 @@
    }
   },
   {
-   "text": "At $P=A_Y$, [lem-weil-pbc-ringed-projection-mate-exact] identifies the projection mate with $1_{Rf_*K}$. Both functors in its statement are additive, since they are exact, so the map on $A_Y^{\\oplus m}$ is the direct sum of $m$ identities, including $m=0$. This proves the finite-free base case with the actual tensor unit $A_Y$, not the discrete constant sheaf $\\underline A$.",
+   "text": "At $P=A_Y$, [lem-weil-pbc-ringed-projection-mate-exact] identifies the projection mate with $1_{Rf_*K}$. Both functors in its statement are additive, since they are exact, so the map on $A_Y^{\\oplus m}$ is the direct sum of $m$ identities, including $m=0$. This proves the finite-free base case with the actual tensor unit $A_Y$, not the discrete constant sheaf $\\underline A$. The ordinary tensor-unit compatibility is proved directly on sheafified pure tensors: use the sheafification adjunction to reduce equality to pure tensors, apply the canonical pullback comparison generator equation, and use the normalized ordinary pullback unit. Both composites send the generator to the same scalar multiple of the adjunction unit section. This is the Lean proof of ordinaryUnit_coherence; no new theorem with sorry is used. Construct the ordinary right unitor by the tensor-sheafification comparison, the presheaf unitor and the sheafification counit. Oplax unitality proves ordinaryRightUnit_eq, its equality with the localized monoidal unitor; rewrite this equality in the finite-total inverse construction.",
    "uses": [
     "lem-weil-pbc-ringed-projection-mate-exact"
    ],
@@ -135,7 +135,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.md",
-  "place": "Both proofs, repaired using locality of Stacks 0944 and separate coefficient/exactness lemmas"
+  "place": "Both proofs, repaired using locality of Stacks 0944 and separate coefficient/exactness lemmas; H4: ordinary unit coherence by sheafification adjunction and normalized pure-tensor calculation"
  },
  "mathlib_searches": [
   {
@@ -307,7 +307,8 @@
    "AlgebraicGeometry.Scheme.PerfectProjection.baseChangeSource",
    "AlgebraicGeometry.Scheme.PerfectProjection.baseChangeTarget",
    "AlgebraicGeometry.Scheme.PerfectProjection.baseChange_compatibility",
-   "AlgebraicGeometry.Scheme.PerfectProjection.identityCompactification_compatibility"
+   "AlgebraicGeometry.Scheme.PerfectProjection.identityCompactification_compatibility",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryRightUnit_eq"
   ],
   "statement": "theorem perfect_projection_formula : (locus d f aY aX K).IsTriangulated ∧ (locus d f aY aX K).IsStableUnderRetracts ∧ (∀ m : ℕ, locus d f aY aX K ((DerivedCategory.singleFunctor (modules d Y) 0).obj (∏ᶜ fun _ : Fin m ↦ SheafOfModules.unit ((adicLisseForget Y).obj (ring d Y))))) ∧ (∀ P : derived d Y, SheafOfModules.IsPerfectOnSmallRingedSite (ring d Y) P → locus d f aY aX K P)",
   "branch": "newtargets-dag",
@@ -352,40 +353,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "A4",
+  "reviewer": "C-e121f",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261019T002456-L-2138898",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.flat",
-   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetComplex_isKInjective",
-   "AlgebraicGeometry.Scheme.PerfectProjection.baseChange_compatibility",
-   "AlgebraicGeometry.Scheme.PerfectProjection.coefficientCone_naturality",
-   "AlgebraicGeometry.Scheme.PerfectProjection.coefficientMap_isIso",
-   "AlgebraicGeometry.Scheme.PerfectProjection.coefficients_square",
-   "AlgebraicGeometry.Scheme.PerfectProjection.identityCompactification_compatibility",
-   "AlgebraicGeometry.Scheme.PerfectProjection.mixed_existsUnique",
-   "AlgebraicGeometry.Scheme.PerfectProjection.operator_compatibility",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_coherence",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_existsUnique",
-   "AlgebraicGeometry.Scheme.PerfectProjection.perfect_projection_formula",
-   "AlgebraicGeometry.Scheme.PerfectProjection.quotientDerivedPullback_naturality",
-   "AlgebraicGeometry.Scheme.PerfectProjection.quotientModuleMap_existsUnique",
-   "AlgebraicGeometry.Scheme.PerfectProjection.quotientPullback_existsUnique",
-   "AlgebraicGeometry.Scheme.PerfectProjection.reductionMap_isIso",
-   "AlgebraicGeometry.Scheme.PerfectProjection.resolution_exists",
-   "AlgebraicGeometry.Scheme.PerfectProjection.totalization_compatibility",
-   "AlgebraicGeometry.Scheme.PerfectProjection.tower_compatibility"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.PerfectProjection.baseChange_compatibility",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_coherence",
-   "AlgebraicGeometry.Scheme.PerfectProjection.perfect_projection_formula",
-   "AlgebraicGeometry.Scheme.PerfectProjection.totalization_compatibility"
-  ]
+  "landing": "20261020T051358-L-1658222",
+  "kind": "interface",
+  "note": "independent cc review: delivered PerfectProjectionFormula.lean vs live base: ordinaryUnit_coherence proved; ordinaryRightUnit rebuilt explicitly with proved ordinaryRightUnit_eq = ρ_ M (change records with users); ordinaryTensorHom type made explicit (reducibly equal); totalInverse proof arg only; node changes limited to declarations list, step-2 text, proof_origin; 13 direct importers compiled clean"
  }
 }
