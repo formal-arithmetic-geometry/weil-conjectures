@@ -11,18 +11,11 @@ public import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 public import Sheaf.Paper.WeilTensorProduct
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.HomologicalComplex
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
-import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Homology.SiteFlatOpcyclesTorCriterion
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Bounded flat models on a ringed site
@@ -41,7 +34,9 @@ set_option synthInstance.maxSize 4096
 
 universe u v w
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits MonoidalCategory
+
+open scoped ZeroObject
 
 namespace SheafOfModules
 
@@ -104,6 +99,92 @@ theorem torAmplitude_iff_exists_bounded_flat_model
       (∀ i : ℤ, IsFlatOnSite (C := C) (J := J) (R := R) (P.X i)) ∧
       (∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i)) ∧
       Nonempty (K ≅ DerivedCategory.Q.obj P) := by
-  sorry
+  classical
+  let A := SheafOfModules.{max u v}
+    ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
+  let := isMonoidal_W_independentCoefficients R
+  let := monoidalCategory R
+  let := symmetricCategory R
+  let := tensorPreadditive R
+  let := (nonempty_monoidalClosed_independentCoefficients (R := R)).some
+  let := hasFunctorialFlatResolution_kfi R
+  have : IsGrothendieckAbelian.{max u v} A :=
+    isGrothendieckAbelianOfUniverses.{u, v, max u v, 0} J _
+  have : ∀ X Y : GradedObject ℤ A, GradedObject.HasTensor X Y := by infer_instance
+  have : ∀ X Y Z : GradedObject ℤ A,
+      GradedObject.HasGoodTensor₁₂Tensor X Y Z := by infer_instance
+  have : ∀ X Y Z : GradedObject ℤ A,
+      GradedObject.HasGoodTensorTensor₂₃ X Y Z := by infer_instance
+  have : ∀ X Y Z W : GradedObject ℤ A,
+      GradedObject.HasTensor₄ObjExt X Y Z W := by infer_instance
+  have : DerivedCategory.Qh.HasDerivedMonoidalCategory
+      (HomotopyCategory.quasiIso A (.up ℤ)) := by infer_instance
+  have hflat (M : A) : ObjectProperty.flat M ↔ IsFlatOnSite (J := J) (R := R) M := by
+    refine ⟨fun h ↦ ?_, flat_to_cat R M⟩
+    exact (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R M).symm h.2
+  have hcomp (M : A) : Nonempty
+      ((wfSiteDerivedTensor J R).obj (K, (DerivedCategory.singleFunctor A 0).obj M) ≅
+        K ⊗ (DerivedCategory.singleFunctor A 0).obj M) := by
+    let L := DerivedCategory.Q.objPreimage K
+    obtain ⟨P, p, hp, hP, hk⟩ := CochainComplex.exists_quasiIso_flat_kFlat L
+    have : QuasiIso p := hp
+    let e : DerivedCategory.Q.obj P ≅ K :=
+      asIso (DerivedCategory.Q.map p) ≪≫ DerivedCategory.Q.objObjPreimageIso K
+    have hk' : CochainComplex.IsAcyclicTensorKFlat (J := J) (R := R) P := by
+      intro Z hZ
+      let T := tensorRight P
+      have hz : QuasiIso (0 : (0 : CochainComplex A ℤ) ⟶ Z) := by
+        rw [quasiIso_iff]
+        intro i
+        exact (quasiIsoAt_iff_exactAt _ i
+          ((HomologicalComplex.acyclic_of_isZero _ (isZero_zero _)) i)).2 (hZ i)
+      have : QuasiIso (T.map (0 : (0 : CochainComplex A ℤ) ⟶ Z)) := hk.2 _ hz
+      have ht : (T.obj (0 : CochainComplex A ℤ)).Acyclic :=
+        HomologicalComplex.acyclic_of_isZero _ (T.map_isZero (isZero_zero _))
+      exact fun i ↦ (exactAt_iff_of_quasiIsoAt
+        (T.map (0 : (0 : CochainComplex A ℤ) ⟶ Z)) i).1 (ht i)
+    let S := (CochainComplex.singleFunctor A 0).obj M
+    obtain ⟨c⟩ := wfSiteDerivedTensor_first J R P S hk' (fun n ↦ (hP n).2)
+    let s := (DerivedCategory.singleFunctorIsoCompQ A 0).app M
+    let d : DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj S ≅
+        DerivedCategory.Q.obj (P ⊗ S) :=
+      DerivedCategory.QObjTensorQObjIsoOfKFlatLeft P S hk
+    let t : DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj S ≅
+        K ⊗ (DerivedCategory.singleFunctor A 0).obj M := tensorIso e s.symm
+    let r := ((wfSiteDerivedTensor J R).mapIso (Iso.prod e s.symm)).symm
+    exact ⟨r ≪≫ c.symm ≪≫ d.symm ≪≫ t⟩
+  have hamp :
+      (∀ (M : A) (i : ℤ), i < a ∨ b < i →
+        IsZero ((DerivedCategory.homologyFunctor A i).obj
+          ((wfSiteDerivedTensor J R).obj
+            (K, (DerivedCategory.singleFunctor A 0).obj M)))) ↔
+        DerivedCategory.torAmplitudeIn A a b K := by
+    constructor
+    · intro h M
+      obtain ⟨e⟩ := hcomp M
+      exact ⟨(DerivedCategory.isGE_iff _ a).2 (fun i hi ↦
+        (h M i (Or.inl hi)).of_iso ((DerivedCategory.homologyFunctor A i).mapIso e).symm),
+        (DerivedCategory.isLE_iff _ b).2 (fun i hi ↦
+        (h M i (Or.inr hi)).of_iso ((DerivedCategory.homologyFunctor A i).mapIso e).symm)⟩
+    · intro h M i hi
+      obtain ⟨e⟩ := hcomp M
+      apply IsZero.of_iso _ ((DerivedCategory.homologyFunctor A i).mapIso e)
+      rcases hi with hi | hi
+      · exact (DerivedCategory.isGE_iff _ a).1 (h M).1 i hi
+      · exact (DerivedCategory.isLE_iff _ b).1 (h M).2 i hi
+  rw [hamp, DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat]
+  constructor
+  · rintro ⟨P, hge, hle, hP, ⟨e⟩⟩
+    refine ⟨P, fun i ↦ (hflat _).1 (hP i), ?_, ⟨e.symm⟩⟩
+    intro i hi
+    rcases hi with hi | hi
+    · exact P.isZero_of_isStrictlyGE a i hi
+    · exact P.isZero_of_isStrictlyLE b i hi
+  · rintro ⟨P, hP, hb, ⟨e⟩⟩
+    have hge : P.IsStrictlyGE a :=
+      (CochainComplex.isStrictlyGE_iff _ _).2 (fun i hi ↦ hb i (Or.inl hi))
+    have hle : P.IsStrictlyLE b :=
+      (CochainComplex.isStrictlyLE_iff _ _).2 (fun i hi ↦ hb i (Or.inr hi))
+    exact ⟨P, hge, hle, fun i ↦ (hflat _).2 (hP i), ⟨e.symm⟩⟩
 
 end SheafOfModules

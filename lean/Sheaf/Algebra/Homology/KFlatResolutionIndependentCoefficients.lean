@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
@@ -407,7 +408,7 @@ private lemma tensorHomEquiv_whiskerLeft_comp_kfi (A : SheafOfModules.{r} 𝓡)
     Adjunction.homEquiv_naturality_left]
   exact PresheafOfModules.homObjEquiv_whiskerLeft_comp_kfi _ _
 
-@[instance_reducible]
+@[no_expose, irreducible]
 private noncomputable def monoidalClosed_kfi : MonoidalClosed (SheafOfModules.{r} 𝓡) where
   closed A :=
     { rightAdj := Adjunction.rightAdjointOfEquiv (F := tensorLeft A)
@@ -416,6 +417,16 @@ private noncomputable def monoidalClosed_kfi : MonoidalClosed (SheafOfModules.{r
       adj := Adjunction.adjunctionOfEquivRight (F := tensorLeft A)
         (G_obj := homObjSmall_kfi A) (tensorHomEquiv_kfi A)
         (fun _ _ _ f g ↦ tensorHomEquiv_whiskerLeft_comp_kfi A f g) }
+
+/-- The sheafified tensor is closed at independent site and coefficient universes.
+Source: Stacks Project, Modules on Sites, Tag 03EO
+(blueprint: lem-pc-sheaf-modules-tensor-closed).
+
+Proof: the already constructed small internal Hom represents the tensor-Hom
+adjunction. Package that adjunction as the existing closed monoidal structure. -/
+theorem nonempty_monoidalClosed_independentCoefficients :
+    Nonempty (MonoidalClosed (SheafOfModules.{r} 𝓡)) :=
+  ⟨monoidalClosed_kfi⟩
 
 end SheafOfModules
 
