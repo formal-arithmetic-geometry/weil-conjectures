@@ -94,7 +94,7 @@ theorem stalkDerivedExtensionComparison_isIso (z : X') :
       (hP : P.IsAcyclicTensorKFlat)
       (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) :
       IsIso (j.app (DerivedCategory.Q.obj P)) := by
-    have := hcP
+    have h_counit := hcP
     have hstalk := (RingedSpace.isKFlat_iff_stalk_isKFlat X.toRingedSpace P).mp hP (g' z)
     have := ModuleCat.scalarExtensionCounit_isIso_of_kFlat
       ((algebraMap (A g' z ⊗[R f g' z] B f' z) (C z)).comp
@@ -111,14 +111,14 @@ theorem stalkDerivedExtensionComparison_isIso (z : X') :
         (g' z)).mapDerivedCategoryFactors.inv.app P)) _
   have hobj (K : schemeDerivedCategory X) : IsIso (j.app K) := by
     obtain ⟨c⟩ := nonempty_coordinates g' K ((derivedPullback g').obj K) (𝟙 _)
-    have := hcomp c.P c.isKFlat c.counit_isIso
+    have h_component := hcomp c.P c.isKFlat c.counit_isIso
     have heq := j.naturality c.e.hom
     have : IsIso (((comparisonDerivedStalk X (g' z) ⋙ L).map c.e.hom) ≫ j.app K) := by
       rw [heq]
       infer_instance
     exact IsIso.of_isIso_comp_left
       ((comparisonDerivedStalk X (g' z) ⋙ L).map c.e.hom) _
-  have : ∀ K, IsIso (j.app K) := hobj
+  have h_all : ∀ K, IsIso (j.app K) := hobj
   exact NatIso.isIso_of_isIso_app j
 
 end AlgebraicGeometry.SingleComplexBaseChange
