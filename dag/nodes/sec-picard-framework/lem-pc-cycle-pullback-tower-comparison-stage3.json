@@ -28,8 +28,8 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "lean/Sheaf/Algebra/Homology/CyclePullbackTowerComparison.lean",
-  "place": "G3 repair of reviewer X-6c272: canonical evaluation comparison and projection proofs"
+  "document": "lean/WeilConjectures/Algebra/Homology/CyclePullbackTowerComparison.lean",
+  "place": "Y5 retirement: the adopted upstream module contains the identical canonical construction and projection proofs."
  },
  "mathlib_searches": [
   {
@@ -78,9 +78,9 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.CyclePullbackTowerComparison",
-  "file": "lean/Sheaf/Algebra/Homology/CyclePullbackTowerComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.CyclePullbackTowerComparison",
+  "file": "lean/WeilConjectures/Algebra/Homology/CyclePullbackTowerComparison.lean",
   "declaration": "CochainComplex.CyclePullback.tower_comparison",
   "declarations": [
    "CochainComplex.CyclePullback.tower_comparison"
@@ -88,7 +88,8 @@
   "statement": "theorem tower_comparison {A : Type u} [Category.{v} A] [Abelian A] {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A) (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N) : let d := (differential T π F N (i + 1)).app b let f := (F.obj b).d i (i + 1) let g := kernel.ι d ≫ (augmentation T π F N (i + 1)).app b ∃ (c : (term T π F N i).obj b ≅ T.obj (pullback f g)), c.hom ≫ π.app (pullback f g) ≫ pullback.fst f g = (augmentation T π F N i).app b ∧ c.hom ≫ π.app (pullback f g) ≫ pullback.snd f g ≫ kernel.ι d = (differential T π F N i).app b",
   "branch": "sheaf-dag",
   "by": "S3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "Y5 retirement: use the adopted upstream comparison construction and proofs; the duplicate Sheaf module is withdrawn."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -101,14 +102,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-008d1",
-  "group": "G3",
+  "reviewer": "C-2ebf6",
+  "group": "Y5",
   "result": "pass",
-  "landing": "20261012T223406-L-1637048",
+  "landing": "20261020T135441-L-1825136",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean constructions and projection proofs against the revised nodes, declared signature correction, original existential signatures, and Stacks 05T7; verified compilation, direct importer, and axioms."
+  "note": "independent cc review: Removed Sheaf module vs live upstream WeilConjectures.Algebra.Homology.CyclePullbackTowerComparison (identical except the unused wrapper tower_comparison_first, whose existential is proved from canonicalComparison + tower_comparison_canonical_first in a scratch file); 4 node diffs vs live (only lean attachment and proof_origin fields); 0 importers; delivered files and scratch compile; axioms clean"
  },
  "lean_audit": {
   "master": {
