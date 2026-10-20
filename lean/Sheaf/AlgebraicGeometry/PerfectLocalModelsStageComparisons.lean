@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import Sheaf.AlgebraicGeometry.DerivedOpenGluingObjects
+import WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects
 import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport
 import Sheaf.AlgebraicGeometry.PerfectLocalModelsDescendedTransition
 

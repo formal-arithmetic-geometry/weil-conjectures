@@ -7,7 +7,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import WeilConjectures.Algebra.Homology.LowerTruncationStepTriangle
-import Sheaf.AlgebraicGeometry.CoherentPseudoCoherent
+import WeilConjectures.AlgebraicGeometry.CoherentPseudoCoherent
 import Sheaf.AlgebraicGeometry.PseudoCoherentDistinguishedTriangle
 
 /-! # Bounded coherent complexes on Noetherian schemes are pseudo-coherent

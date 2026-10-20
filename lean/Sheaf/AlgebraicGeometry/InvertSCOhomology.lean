@@ -6,10 +6,10 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
+public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
 import Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalization
 import Sheaf.Paper.NonvanishingSectionTrivializes
-import Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluing
+import WeilConjectures.AlgebraicGeometry.CohomologySectionLocalizationGluing
 import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # Localization of graded cohomology at a section

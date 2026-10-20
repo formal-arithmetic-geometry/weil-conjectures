@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsCofan
+import WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsCofan
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import all WeilConjectures.CategoryTheory.DerivedModuleDirectSums

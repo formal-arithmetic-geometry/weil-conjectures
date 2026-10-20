@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
+public import WeilConjectures.AlgebraicGeometry.CoherentThickeningSystem
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

@@ -4,7 +4,7 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedSectionPresheaf
+public import WeilConjectures.AlgebraicGeometry.DerivedSectionPresheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure

@@ -5,7 +5,7 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
+public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
 import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonUnit
 import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonRestriction
 

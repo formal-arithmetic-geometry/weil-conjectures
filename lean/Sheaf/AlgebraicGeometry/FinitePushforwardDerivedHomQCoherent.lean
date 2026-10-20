@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentPseudoCoherent
+import WeilConjectures.AlgebraicGeometry.CoherentPseudoCoherent
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.PseudoCoherentRHomQuasiCoherent
 

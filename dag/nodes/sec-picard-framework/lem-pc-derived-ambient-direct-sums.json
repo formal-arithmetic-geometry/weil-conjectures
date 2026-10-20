@@ -125,14 +125,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-das1832 (reviewer sub-agent of L); spot-checked: Packet read whole. Steps 1-3 follow Stacks 07D9 (1)-(2) and 08DT proof; each step cites only lem-pc-scheme-modules-grothendieck-abelian, whose statement (abelian, small colimits, exact filtered colimits) is what IsGrothendieckAbelian gives. No cycle: item cites neither lem-pc-derived-qcoh-direct-sums nor anything created from it. New node attached to sorry-free AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian (sorryfree.py OK, DirectImage.lean 155-161, via project SheafOfModules.isGrothendieckAbelian, not Mathlib). grep HasCoproducts|hasCoproducts in Mathlib/Algebra/Homology/ and grep coproduct in DerivedCategory/: only HasCoproductsOfShape in GrothendieckAbelian.lean:72, no derived-category or complex coproduct theorem: no leaf possible (verdict no match). Second reading by G1: no fault missed."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums",
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSums",
   "declaration": "AlgebraicGeometry.derivedAmbientDirectSums",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedAmbientDirectSums.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedAmbientDirectSums.lean",
   "statement": "theorem derivedAmbientDirectSums (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (I : Type u) (E : I → schemeDerivedCategory X) (K : I → CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (e : ∀ i : I, DerivedCategory.Q.obj (K i) ≅ E i) : Nonempty (IsColimit (Cofan.mk (DerivedCategory.Q.obj (∐ K)) (fun i ↦ (e i).inv ≫ DerivedCategory.Q.map (Sigma.ι K i)))) ∧ ∀ q : ℤ, IsIso (Sigma.desc (fun i ↦ (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) q).map ((e i).inv ≫ DerivedCategory.Q.map (Sigma.ι K i))))",
   "branch": "sheaf-dag",
   "by": "H1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums; points at its upstream twin."
  },
  "reviewed_lean": {
   "date": "2026-10-11",

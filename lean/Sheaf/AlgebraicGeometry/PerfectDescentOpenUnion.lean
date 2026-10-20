@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.PerfectDescentOnOpen
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.PerfectDescentCompatibleLocalData
 import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
-import Sheaf.AlgebraicGeometry.DerivedOpenGluing
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
+import WeilConjectures.AlgebraicGeometry.DerivedOpenGluing
 import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.PerfectComplex
 

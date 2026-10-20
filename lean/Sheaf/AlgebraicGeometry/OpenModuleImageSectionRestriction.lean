@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U4
 -/
 module
-public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
+public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 /-! # Evaluation of the transported nested-open restriction
 

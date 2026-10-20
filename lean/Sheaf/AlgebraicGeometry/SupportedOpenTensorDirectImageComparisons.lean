@@ -10,10 +10,10 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
-import Sheaf.Topology.SheafIsomorphismLocalOpenCover
+import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive

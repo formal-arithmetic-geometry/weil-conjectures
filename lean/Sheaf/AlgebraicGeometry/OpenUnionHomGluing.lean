@@ -6,7 +6,7 @@ Authors: SHEAF group J4
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.SchemeDerivedHomGluing
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedHomGluing
 import Sheaf.AlgebraicGeometry.OpenUnionRestrictionTransport
 
 /-! # Gluing morphisms between fixed objects on an open union

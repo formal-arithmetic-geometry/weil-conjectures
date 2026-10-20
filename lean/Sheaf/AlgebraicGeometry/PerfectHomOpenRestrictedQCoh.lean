@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 @[expose] public section
 universe u w

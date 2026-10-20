@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.AlgebraicGeometry.DerivedGlobalSectionsAffinizationComparison
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
 
 /-! # Derived global sections preserves quasi-coherent coproducts. -/
 

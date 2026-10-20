@@ -5,7 +5,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.Topology.SheafIsomorphismLocalOpenCover
+import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 @[expose] public section
 universe u w v
 open CategoryTheory CategoryTheory.MonoidalCategory AlgebraicGeometry

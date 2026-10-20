@@ -11,10 +11,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.CoherentStalkMapExtends
-import Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism
+import WeilConjectures.AlgebraicGeometry.CoherentLocalIsomorphism
 import Sheaf.AlgebraicGeometry.CoherentHomsOverOpen
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
@@ -22,7 +22,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealConstruction
-import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealMono
+import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericIdealMono
 
 /-! # An ideal-sum lattice in a coherent module on an integral scheme
 

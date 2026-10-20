@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 import Sheaf.AlgebraicGeometry.StrictlyPerfectRHomEvaluationLocal
-import Sheaf.Topology.SheafIsomorphismLocalOpenCover
+import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 import Mathlib.CategoryTheory.Yoneda
 
 /-! # Local computations for the perfect internal dual -/

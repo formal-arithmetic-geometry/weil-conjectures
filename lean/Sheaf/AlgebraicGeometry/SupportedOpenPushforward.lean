@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforwardPerfectComponent
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforwardLocalComparisons
-import Sheaf.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover
+import WeilConjectures.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover
 
 /-! # Perfect pushforward and canonical maps for supported open inclusions
 

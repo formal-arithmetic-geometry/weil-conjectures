@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
+public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated

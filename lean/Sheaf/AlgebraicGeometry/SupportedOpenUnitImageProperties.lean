@@ -8,8 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.Topology.Sheaves.Abelian

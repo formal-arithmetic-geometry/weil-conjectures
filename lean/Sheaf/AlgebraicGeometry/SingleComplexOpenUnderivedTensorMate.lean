@@ -4,7 +4,7 @@ module
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenDirectImageUnit
 public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.AlgebraicGeometry.OrdinaryOpenCounitSquare
+import WeilConjectures.AlgebraicGeometry.OrdinaryOpenCounitSquare
 
 /-! # The underived mate for restriction to an inverse-image open
 

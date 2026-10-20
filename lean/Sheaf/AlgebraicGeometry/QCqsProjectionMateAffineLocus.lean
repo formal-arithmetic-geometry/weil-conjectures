@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Retract
 import Mathlib.CategoryTheory.Triangulated.Yoneda
 import Mathlib.CategoryTheory.Triangulated.Adjunction
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh

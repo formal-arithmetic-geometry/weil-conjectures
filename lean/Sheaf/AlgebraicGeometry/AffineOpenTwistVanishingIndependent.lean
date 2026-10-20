@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 
 /-! # Vanishing of twists over one affine open
 

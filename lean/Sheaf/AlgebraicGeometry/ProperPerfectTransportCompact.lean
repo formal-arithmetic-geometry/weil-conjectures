@@ -5,7 +5,7 @@ Authors: SHEAF group V2
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
 public import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

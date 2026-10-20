@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.AffinePerfectMapLift
 import Sheaf.AlgebraicGeometry.SupportedOverlapPerfectExtension
 import Sheaf.AlgebraicGeometry.LocalPerfectSupportedStabilization
-import Sheaf.AlgebraicGeometry.CompactOverlapRestrictionModel
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import WeilConjectures.AlgebraicGeometry.CompactOverlapRestrictionModel
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Supported affine overlap data
 

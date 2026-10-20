@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.Algebra.Homology.KFlat
 
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import Mathlib.Data.Int.Interval
 

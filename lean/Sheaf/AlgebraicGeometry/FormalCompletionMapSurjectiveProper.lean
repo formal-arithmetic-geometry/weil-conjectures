@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentSheafHom
+import WeilConjectures.AlgebraicGeometry.CoherentSheafHom
 import Sheaf.AlgebraicGeometry.CompletionInternalHom
 import Sheaf.AlgebraicGeometry.FormalFunctionsCompleteBase
 @[expose] public section

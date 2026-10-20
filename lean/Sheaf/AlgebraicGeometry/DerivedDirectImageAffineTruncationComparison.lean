@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.DerivedDirectImageUniformTruncationBound
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 

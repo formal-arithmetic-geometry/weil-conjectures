@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-import Sheaf.AlgebraicGeometry.CompletedAffineSectionsPowerTorsion
+import WeilConjectures.AlgebraicGeometry.CompletedAffineSectionsPowerTorsion
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineOpenSectionsAdic
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 

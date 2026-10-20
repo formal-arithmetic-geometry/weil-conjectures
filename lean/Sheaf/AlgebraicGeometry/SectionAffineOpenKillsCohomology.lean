@@ -11,7 +11,7 @@ public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.InvertSCOhomology
-import Sheaf.AlgebraicGeometry.FractionZeroTensorPower
+import WeilConjectures.AlgebraicGeometry.FractionZeroTensorPower
 
 /-!
 # A power of a section kills a positive cohomology class

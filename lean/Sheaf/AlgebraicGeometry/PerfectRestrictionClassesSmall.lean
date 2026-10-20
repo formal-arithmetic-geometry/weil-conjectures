@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectGluingEndpointProperties
 import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 

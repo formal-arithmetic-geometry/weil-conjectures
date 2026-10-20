@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.DerivedBasisIncreasingUnion
 import Sheaf.AlgebraicGeometry.DerivedBasisLocalHomGlue
-import Sheaf.AlgebraicGeometry.DerivedOpenGluing
+import WeilConjectures.AlgebraicGeometry.DerivedOpenGluing
 
 /-! # BBD descent for derived objects with vanishing negative self extensions
 

@@ -5,7 +5,7 @@ Authors: SHEAF group K3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstruction
+public import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstruction
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
 
 /-! # The section augmentation is a quasi-isomorphism

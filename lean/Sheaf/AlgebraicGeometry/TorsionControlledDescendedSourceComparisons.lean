@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons
 import all WeilConjectures.Topology.GlueSheavesOfModules
 import Sheaf.Paper.DerivedHomMayerVietoris

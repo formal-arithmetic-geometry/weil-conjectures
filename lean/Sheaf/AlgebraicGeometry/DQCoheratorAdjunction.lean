@@ -14,7 +14,7 @@ import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.AlgebraicGeometry.DerivedQCohCompactGeneration
 import Sheaf.CategoryTheory.BrownRepresentabilityHomLocallySmall
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.CategoryTheory.Adjunction.PartialAdjoint

@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarHomologyLift
 import Mathlib.Algebra.Homology.SingleHomology
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsCofan
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
+import WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsCofan
+import WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 
 /-! # Scalar formality on the rank strata of a closed subscheme
 

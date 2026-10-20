@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 
 @[expose] public section
 set_option autoImplicit false

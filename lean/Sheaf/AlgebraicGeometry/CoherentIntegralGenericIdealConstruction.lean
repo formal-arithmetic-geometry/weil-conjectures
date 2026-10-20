@@ -10,9 +10,9 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhood
+import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhood
 import Sheaf.AlgebraicGeometry.CoherentIntegralGenericLatticeExtension
-import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealSigma
+import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericIdealSigma
 
 /-! Generic coherent ideal lattices. Source: Stacks Project, Tag 01YE. -/
 

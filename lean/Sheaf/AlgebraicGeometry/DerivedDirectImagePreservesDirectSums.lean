@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
+import WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSums
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCohomologyCoproduct
 
 /-! # Derived direct image preserves direct sums

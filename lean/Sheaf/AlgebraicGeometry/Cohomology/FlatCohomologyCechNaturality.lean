@@ -5,7 +5,7 @@ Authors: SHEAF group A3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
 public import Mathlib.Algebra.Category.ModuleCat.Descent
 import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechCocycles
 

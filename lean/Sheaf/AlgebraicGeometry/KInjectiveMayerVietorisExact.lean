@@ -5,7 +5,7 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
+public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisDegreewise
 

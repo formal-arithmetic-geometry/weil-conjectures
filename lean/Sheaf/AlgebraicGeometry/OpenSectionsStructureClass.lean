@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenSectionsCohomologyModel
 public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
-public import Sheaf.AlgebraicGeometry.DerivedStructureEvaluationOne
+public import WeilConjectures.AlgebraicGeometry.DerivedStructureEvaluationOne
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.AlgebraicGeometry.OpenSectionsOrdinaryStructureClass
 

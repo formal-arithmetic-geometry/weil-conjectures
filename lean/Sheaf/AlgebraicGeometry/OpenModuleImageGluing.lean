@@ -5,7 +5,7 @@ Authors: SHEAF group B3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
+public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
 import Sheaf.AlgebraicGeometry.OpenModuleImageAmalgamation
 import Sheaf.AlgebraicGeometry.OpenModuleImageSeparated
 

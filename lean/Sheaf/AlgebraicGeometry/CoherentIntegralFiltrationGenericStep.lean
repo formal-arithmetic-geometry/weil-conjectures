@@ -5,13 +5,13 @@ Authors: SHEAF group N1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
+public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
 import Sheaf.AlgebraicGeometry.CoherentIdealSumCokernelReduction
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSum
-import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationExtension
+import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltrationExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Mathlib.Algebra.Homology.ShortComplex.Abelian
 

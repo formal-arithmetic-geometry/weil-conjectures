@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.InvertSCOhomology
-import Sheaf.AlgebraicGeometry.CohomologyFractionEventuallyZero
+import WeilConjectures.AlgebraicGeometry.CohomologyFractionEventuallyZero
 import Sheaf.AlgebraicGeometry.ResolutionUnitTwistComparison
 
 /-! # Kernel torsion for raw section cohomology

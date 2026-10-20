@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
 import WeilConjectures.Compactification.FiniteTypeDirected
 import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealDiagram
-import Sheaf.Topology.ModuleCohomologyTopComparison
+import WeilConjectures.Topology.ModuleCohomologyTopComparison
 import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Finite-type representatives for first cohomology of ideal sheaves

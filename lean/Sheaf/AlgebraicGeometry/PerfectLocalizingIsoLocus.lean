@@ -7,7 +7,7 @@ Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree (SHEAF group G1).
 module
 public import WeilConjectures.CategoryTheory.ShiftSaturatedIsoLocus
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-public import Sheaf.AlgebraicGeometry.PerfectLocalizingClosure
+public import WeilConjectures.AlgebraicGeometry.PerfectLocalizingClosure
 
 /-! Application of shift-saturated invertibility to the existing definition of
 perfectLocalizingClosure. The proofs of perfect_iso and perfect_shift are
