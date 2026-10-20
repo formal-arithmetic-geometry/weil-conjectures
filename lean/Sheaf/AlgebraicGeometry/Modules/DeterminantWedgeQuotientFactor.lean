@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTensorQuotientComparison
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelRelations
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorKernelRelations
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
@@ -27,6 +27,29 @@ lift independence (blueprint: lem-sc-determinant-wedge-quotient-factor).
 universe v
 open CategoryTheory Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorTensor_comparison {X : Scheme.{v}} (A B : X.Modules) (r s : ℕ) :
+    ∃ e : exteriorSheaf A r ⊗ exteriorSheaf B s ≅ exteriorPower A r ⊗ exteriorPower B s,
+      (∀ (U : X.Opens) (a : Fin r → A.val.obj (op U)) (b : Fin s → B.val.obj (op U)),
+        e.hom.app U (tmulSection (exteriorSheafSection A r U a)
+          (exteriorSheafSection B s U b)) = tmulSection (wedge a) (wedge b)) ∧
+      (∀ (U : X.Opens) (a : Fin r → A.val.obj (op U)) (b : Fin s → B.val.obj (op U)),
+        e.inv.app U (tmulSection (wedge a) (wedge b)) =
+          tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf B s)
+            (exteriorSheafSection A r U a) (exteriorSheafSection B s U b)) := by
+  let e := exteriorSheafPowerIso A r ⊗ᵢ exteriorSheafPowerIso B s
+  have hi (U : X.Opens) (a : Fin r → A.val.obj (op U)) (b : Fin s → B.val.obj (op U)) :
+      e.inv.app U (tmulSection (wedge a) (wedge b)) =
+        tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf B s)
+          (exteriorSheafSection A r U a) (exteriorSheafSection B s U b) := by
+    change ((exteriorSheafPowerIso A r).inv ⊗ₘ (exteriorSheafPowerIso B s).inv).app U _ = _
+    rw [tensorHom_app_tmulSection, exteriorSheafPowerIso_inv_wedge,
+      exteriorSheafPowerIso_inv_wedge]
+  refine ⟨e, ?_, hi⟩
+  intro U a b
+  rw [← hi U a b]
+  exact inv_app_hom_app_apply_of_iso e.symm _
 
 private theorem exteriorSheaf_rank_wedge_eq_zero_compat {X : Scheme.{v}}
     {A B : X.Modules} (f : A ⟶ B) (r n s : ℕ) (hr : n = r + s)
@@ -98,11 +121,34 @@ theorem determinant_wedge_quotient_factor {X : Scheme.{v}}
     rw [hq U a c, hq₀ U a c]
   have : Epi q := hqq ▸ hq₀epi
   have hzero : CategoryTheory.Limits.kernel.ι q ≫ ψ = 0 := by
-    apply exteriorTensor_kernel_eq_zero_of_relations S hS S.X₁
-      (exteriorSheaf S.X₂ r₂) r₁ r₃ q ψ hq
-    intro U a c j d hc
-    rw [hψ U a c]
-    exact exteriorSheaf_rank_wedge_eq_zero_compat S.f r₁ r₂ r₃ hr U a c j d hc
+    obtain ⟨eB, _, hiB⟩ := exteriorTensor_comparison S.X₁ S.X₂ r₁ r₃
+    obtain ⟨eC, heC, _⟩ := exteriorTensor_comparison S.X₁ S.X₃ r₁ r₃
+    let q' := eB.inv ≫ q ≫ eC.hom
+    have hq' (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))
+        (c : Fin r₃ → S.X₂.val.obj (op U)) :
+        q'.app U (tmulSection (wedge a) (wedge c)) =
+          tmulSection (wedge a) (wedge (fun i ↦ S.g.val.app (op U) (c i))) := by
+      change eC.hom.app U (q.app U (eB.inv.app U _)) = _
+      rw [hiB]
+      exact (congrArg (eC.hom.app U) (hq U a c)).trans (heC U a _)
+    have hz : CategoryTheory.Limits.kernel.ι q' ≫ (eB.inv ≫ ψ) = 0 := by
+      apply exteriorTensor_kernel_eq_zero_of_relations S hS S.X₁
+        (exteriorSheaf S.X₂ r₂) r₁ r₃ q' (eB.inv ≫ ψ) hq'
+      intro U a c j d hc
+      change ψ.app U (eB.inv.app U (tmulSection (wedge a) (wedge c))) = 0
+      rw [hiB]
+      change ψ.val.app (op U)
+        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
+          (exteriorSheafSection S.X₂ r₃ U c)) = 0
+      rw [hψ U a c]
+      exact exteriorSheaf_rank_wedge_eq_zero_compat S.f r₁ r₂ r₃ hr U a c j d hc
+    have hrel : (CategoryTheory.Limits.kernel.ι q ≫ eB.hom) ≫ q' = 0 := by
+      simp [q', Category.assoc]
+    have H := congrArg
+      (fun f ↦ CategoryTheory.Limits.kernel.lift q'
+        (CategoryTheory.Limits.kernel.ι q ≫ eB.hom) hrel ≫ f) hz
+    simpa only [Category.assoc, CategoryTheory.Limits.kernel.lift_ι_assoc,
+      Iso.hom_inv_id_assoc, CategoryTheory.Limits.comp_zero] using H
   refine ⟨Abelian.epiDesc q ψ hzero, ?_⟩
   exact Abelian.comp_epiDesc q ψ hzero
 

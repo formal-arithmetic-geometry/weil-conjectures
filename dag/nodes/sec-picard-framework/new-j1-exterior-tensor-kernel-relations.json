@@ -13,31 +13,31 @@
  ],
  "proof": [
   {
-   "text": "If s=0, use exteriorSheaf_zero_iso for B and C. Their composite identifies empty wedges; exteriorSheafTensor_lift_hom_ext with the identity of B identifies q with the tensor of this isomorphism and the identity. Thus q is mono, its kernel inclusion is zero, and the conclusion follows without using hzero. The retirement compatibility theorem exteriorSheafTensor_lift_hom_ext transports this invocation through the canonical exteriorSheafPowerIso to the official exteriorPower/wedge theorem, preserving the statement.",
+   "text": "If s=0, identify both zeroth exterior powers with the structure sheaf by exists_exteriorPower_zero_iso_wedge. Exterior tensor lift extensionality identifies q with the tensor of the identity and the resulting isomorphism. Thus q is mono and its kernel inclusion is zero. This is the existing official proof, with exteriorPower and wedge throughout.",
    "uses": [
     "def-sc-sheaf-exterior-power",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-exterior-tensor-lift-hom-ext"
    ],
    "elementary": true
   },
   {
-   "text": "For s≠0, tensor exteriorSheafPowerIso in both factors. Its inverse preserves wedge tensors by tensorHom_app_tmulSection and exteriorSheafPowerIso_inv_wedge; inverse cancellation gives the forward formula. Conjugate q by these comparisons, obtaining the upstream pure-wedge formula from hq. A section k of kernel(q) maps to t with q(t)=0 by kernel.condition. The conjugated map kills the forward image of t. Apply the upstream local span theorem at every point of U. The inverse comparison sends each upstream relation generator to an original relation generator, killed by hzero. Submodule.span_le puts the whole upstream span in the kernel of ψ after the inverse comparison. Naturality and inverse cancellation identify this vanishing with ψ(t restricted to V)=0. Sheaf section_ext and naturality prove ψ(t)=0. Extensionality over U and k gives kernel.ι q ≫ ψ = 0. The comparison helper and all the transport are proved in the consumer; its public signature is unchanged.",
+   "text": "For s≠0, a section of kernel(q) maps to a section t with q(t)=0. The official local-span theorem expresses its restriction near each point as a member of the span of pure wedge tensors having an entry f(d). The assumed relation vanishing puts all generators, hence their span, in ker(ψ). Naturality and sheaf section extensionality imply ψ(t)=0. Extensionality proves kernel.ι q ≫ ψ=0.",
    "uses": [
-    "lem-sc-exterior-tensor-kernel-locally-spanned",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-exterior-tensor-kernel-locally-spanned"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-sheaf-exterior-power",
-  "lem-sc-exterior-tensor-kernel-locally-spanned",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "lem-sc-exterior-tensor-lift-hom-ext",
+  "lem-sc-exterior-tensor-kernel-locally-spanned"
  ],
  "proof_origin": {
-  "by": "X3 stage3",
+  "by": "E5 retirement",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph; degree-zero isomorphism and positive-degree local kernel generators, transported from the official exteriorPower theorem through the existing canonical exteriorSheafPowerIso."
+  "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts",
+  "note": "The proved official twin carries the same generator criterion for exteriorPower. The comparison transport is now proved at the sole consumer, and the duplicate module is withdrawn."
  },
  "mathlib_searches": [
   {
@@ -103,13 +103,14 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelRelations",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorTensorKernelRelations.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorKernelRelations",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorTensorKernelRelations.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorTensor_kernel_eq_zero_of_relations",
-  "statement": "theorem exteriorTensor_kernel_eq_zero_of_relations {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (hS : S.ShortExact) (A D : X.Modules) (r s : ℕ)\n    (q : exteriorSheaf A r ⊗ exteriorSheaf S.X₂ s ⟶\n      exteriorSheaf A r ⊗ exteriorSheaf S.X₃ s)\n    (ψ : exteriorSheaf A r ⊗ exteriorSheaf S.X₂ s ⟶ D)\n    (hq : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))\n      (c : Fin s → S.X₂.val.obj (op U)),\n      q.val.app (op U)\n        (tmulSection (exteriorSheafSection A r U a)\n          (exteriorSheafSection S.X₂ s U c)) =\n        tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf S.X₃ s)\n          (exteriorSheafSection A r U a)\n          (exteriorSheafSection S.X₃ s U (fun i ↦ S.g.val.app (op U) (c i))))\n    (hzero : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))\n      (c : Fin s → S.X₂.val.obj (op U)) (j : Fin s) (d : S.X₁.val.obj (op U)),\n      c j = S.f.val.app (op U) d →\n      ψ.val.app (op U)\n        (tmulSection (exteriorSheafSection A r U a)\n          (exteriorSheafSection S.X₂ s U c)) = 0) :\n    kernel.ι q ≫ ψ = 0",
+  "statement": "theorem exteriorTensor_kernel_eq_zero_of_relations {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (hS : S.ShortExact) (A D : X.Modules) (r s : ℕ)\n    (q : exteriorPower A r ⊗ exteriorPower S.X₂ s ⟶\n      exteriorPower A r ⊗ exteriorPower S.X₃ s)\n    (ψ : exteriorPower A r ⊗ exteriorPower S.X₂ s ⟶ D)\n    (hq : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))\n      (c : Fin s → S.X₂.val.obj (op U)),\n      q.val.app (op U)\n        (tmulSection (wedge (M := A) (r := r) (U := U) a)\n          (wedge (M := S.X₂) (r := s) (U := U) c)) =\n        tmulSection (M := exteriorPower A r) (N := exteriorPower S.X₃ s)\n          (wedge (M := A) (r := r) (U := U) a)\n          (wedge (M := S.X₃) (r := s) (U := U) (fun i ↦ S.g.val.app (op U) (c i))))\n    (hzero : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))\n      (c : Fin s → S.X₂.val.obj (op U)) (j : Fin s) (d : S.X₁.val.obj (op U)),\n      c j = S.f.val.app (op U) d →\n      ψ.val.app (op U)\n        (tmulSection (wedge (M := A) (r := r) (U := U) a)\n          (wedge (M := S.X₂) (r := s) (U := U) c)) = 0) :\n    kernel.ι q ≫ ψ = 0",
   "branch": "sheaf-dag",
   "by": "J1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "E5 retirement: the official exteriorPower/wedge theorem is proved. The sole direct consumer DeterminantWedgeQuotientFactor conjugates q and precomposes ψ with the tensor of exteriorSheafPowerIso inverses, applies this theorem, and pulls back the vanishing through kernel.lift. Its public signature is unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -124,12 +125,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-d61c1",
-  "group": "G2",
+  "reviewer": "C-be270",
+  "group": "E5",
   "result": "pass",
-  "landing": "20261020T221153-L-4152589",
+  "landing": "20261020T233124-L-896660",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf copy (stub) + node repointed at proved WeilConjectures twin (statement verbatim) + adapted sole importer ExteriorTensorKernelRelations (signature unchanged) against live clone, retire-items row 750 and the hand-off; compiled stub, importer and DeterminantWedgeQuotientFactor at 560 s, axioms clean"
+  "note": "independent cc review: delivered stub + adapted DeterminantWedgeQuotientFactor + 2 node files against live clone, retire-items row 920 and the WC twin statement (verbatim to node lean record); --all compile plus importers DeterminantLiftWedgeKernel/DeterminantWedgeMorphismLocalAt clean; axioms clean"
  },
  "lean_audit": {
   "master": {
