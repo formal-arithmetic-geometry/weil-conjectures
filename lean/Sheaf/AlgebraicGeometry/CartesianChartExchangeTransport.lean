@@ -1,7 +1,7 @@
 module
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
 import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeCoefficients
-import all Sheaf.AlgebraicGeometry.CartesianChartExchangeCore
+import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeCore
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeAdjunction
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
