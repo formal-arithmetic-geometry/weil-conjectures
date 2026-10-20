@@ -142,6 +142,61 @@ abbrev CoefficientScalarUnit {f : R ⟶ R}
       derived.hom.app (DerivedCategory.Q.obj P) =
         A.model.ε.app P ≫
           DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P))
+
+/-- Identity scalar extension is the adjoint unitor, including its universal derived model.
+Source: the identity clause of integral operations and uniqueness of left derived functors
+(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+private theorem scalarUnit_exists {f : R ⟶ R}
+    (A : SemilinearSections.ScalarData.{c, v, max c v r} f) (hf : f = 𝟙 R) :
+    Nonempty (CoefficientScalarUnit.{c, v, r} A) := by
+  subst f
+  let ρ : SemilinearSections.res (𝟙 R) ≅ 𝟭 _ :=
+    NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun U ↦
+        ModuleCat.restrictScalarsId'App _ rfl (M.val.obj U))
+        (by intros; ext x; rfl))) (by intros; ext U x; rfl)
+  let adj := A.ordinaryAdjunction.ofNatIsoRight ρ
+  let a := adj.leftAdjointUniq Adjunction.id
+  let Q := DerivedCategory.Q (C := SemilinearSections.Mod.{c, v, max c v r} J R)
+  let b : A.model.E.mapHomologicalComplex (.up ℤ) ⋙ Q ≅ Q :=
+    Functor.isoWhiskerRight (NatIso.mapHomologicalComplex a (.up ℤ)) Q ≪≫
+      Functor.isoWhiskerRight (Functor.mapHomologicalComplexIdIso _ (.up ℤ)) Q ≪≫
+      Functor.leftUnitor Q
+  let W := HomologicalComplex.quasiIso
+    (SemilinearSections.Mod.{c, v, max c v r} J R) (.up ℤ)
+  have : A.T.IsLeftDerivedFunctor A.model.ε W := A.model.universal
+  have : (𝟭 _).IsLeftDerivedFunctor (Functor.rightUnitor Q).hom W :=
+    Functor.isLeftDerivedFunctor_of_inverts W _ (Functor.rightUnitor Q)
+  let d := Functor.leftDerivedNatIso A.T (𝟭 _) A.model.ε
+    (Functor.rightUnitor Q).hom W b
+  refine ⟨{ ordinary := a, derived := d, section_formula := ?_, model := ?_ }⟩
+  · intro M U z x
+    have hx : SemilinearSections.scalarExtensionSection.{c, v, r} (𝟙 R) A M U x =
+        (A.ordinaryAdjunction.unit.app M).val.app U x := by
+      unfold SemilinearSections.scalarExtensionSection
+      rw [← A.unit_section M U x]
+      erw [← ModuleCat.comp_apply, ← PresheafOfModules.comp_app,
+        ← SheafOfModules.comp_val, eqToHom_trans, eqToHom_refl]
+      rfl
+    rw [hx, (a.hom.app M).val.app U |>.hom.map_smul]
+    congr 1
+    have h := adj.unit_leftAdjointUniq_hom_app Adjunction.id M
+    have h' := congrArg (fun z ↦ (z.val.app U) x) h
+    exact h'
+  · intro P hP
+    have h := Functor.leftDerivedNatTrans_app A.T (𝟭 _) A.model.ε
+      (Functor.rightUnitor Q).hom W b.hom P
+    have hid : (Functor.mapHomologicalComplexIdIso
+        (SemilinearSections.Mod.{c, v, max c v r} J R) (.up ℤ)).hom.app P = 𝟙 P := by
+      ext i
+      rfl
+    change d.hom.app (Q.obj P) = A.model.ε.app P ≫ Q.map _
+    change d.hom.app (Q.obj P) ≫ 𝟙 _ = A.model.ε.app P ≫ b.hom.app P at h
+    dsimp only [b, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Functor.leftUnitor_hom_app] at h
+    erw [hid, Q.map_id, Category.comp_id, Category.comp_id] at h
+    exact h
+
 end ScalarAssociation
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -543,6 +598,41 @@ theorem coefficientExtensionReduction_composition
   sorry
 end SuccessiveExtension
 
+/-- The actual identity coefficient inclusion induces identity on every quotient sheaf.
+Source: the quotient construction in integral operations
+(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+private theorem quotientSheaf_id (n : ℕ) :
+    integralScalarQuotientSheafMap l E E (AlgHom.id ℚ_[l] E) W n = 𝟙 _ := by
+  have hq : integralScalarQuotientMap l E E (AlgHom.id ℚ_[l] E) n = RingHom.id _ := by
+    ext x
+    rfl
+  unfold integralScalarQuotientSheafMap
+  rw [hq]
+  convert (constantSheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}).map_id
+    (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1)))) using 1 <;> rfl
+
+/-- Identity of the quotient maps gives identity of the actual sequence ring map.
+Source: the componentwise specification of semilinear system maps
+(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+private theorem systemMap_id :
+    SemilinearSections.systemMap.{t + 1, t, max u (t + 1)} (Scheme.ProEt.topology W)
+      (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
+      (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
+      (integralScalarQuotientSheafMap l E E (AlgHom.id ℚ_[l] E) W)
+      (coefficientExtensionQuotient_naturality l E E (AlgHom.id ℚ_[l] E) W) = 𝟙 _ := by
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  rcases U with ⟨⟨n, U⟩⟩
+  have h := (SemilinearSections.systemMap_existsUnique.{t + 1, t, max u (t + 1)}
+    (Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
+    (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
+    (integralScalarQuotientSheafMap l E E (AlgHom.id ℚ_[l] E) W)
+    (coefficientExtensionQuotient_naturality l E E (AlgHom.id ℚ_[l] E) W)).exists.choose_spec
+      n (op U)
+  exact h.trans (congrArg (fun f ↦ f.hom.app (op U)) (quotientSheaf_id l E W n))
+
 /-- For identity extension, association is the action unitor and the comparison is
 exactly the usual reduction counit of the completion. K need not be complete.
 Source: integral operations, node proof step 6
@@ -563,6 +653,18 @@ theorem coefficientExtensionReduction_identity
             ((Functor.isoWhiskerLeft SE.reduction a.derived ≪≫
               Functor.rightUnitor SE.reduction).hom.app K)) ≫
           SE.adjunction.counit.app (SE.reduction.obj K) := by
-  sorry
+  obtain ⟨a⟩ := scalarUnit_exists A₀.scalar (systemMap_id l E W)
+  refine ⟨a, ?_⟩
+  intro K
+  simp only [coefficientExtensionReductionIso, asIso_hom,
+    coefficientExtensionCounit, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.associator_hom_app,
+    Functor.rightUnitor_hom_app, Category.id_comp,
+    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Category.assoc]
+  rw [Functor.map_comp, Category.assoc]
+  congr 1
+  dsimp only [coefficientExtensionSystem, Functor.comp_obj]
+  erw [Category.id_comp, Category.comp_id]
+  exact (SE.adjunction.counit.naturality (a.derived.hom.app (SE.reduction.obj K))).symm
 
 end WeilConjectures

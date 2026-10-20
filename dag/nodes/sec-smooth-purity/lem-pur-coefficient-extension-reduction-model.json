@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "The finite quotient sheaf maps commute with transitions: apply faithfulness of forgetting commutativity, functoriality of constant sheafification, and integralScalarQuotientMap_transition to the ULift-transported ring maps. A private ring-level calculation within the same module handles the ULift representatives. This proves coefficientExtensionQuotient_naturality; the following eight steps remain the plan for the three main theorem holes.",
+   "text": "The finite quotient sheaf maps commute with transitions: apply faithfulness of forgetting commutativity, functoriality of constant sheafification, and integralScalarQuotientMap_transition to the ULift-transported ring maps. A private ring-level calculation within the same module handles the ULift representatives. This proves coefficientExtensionQuotient_naturality; the following steps record the proved identity clause and the plans for the two remaining main theorem holes.",
    "uses": [
     "lem-weil-integral-scalar-extension-well-defined"
    ],
@@ -100,12 +100,14 @@
    }
   },
   {
-   "text": "When $L=E$, $B_m=A_m$ and $a_m$ is the usual action unitor $P_m\\otimes_{A_m}A_m\\to P_m$. Thus $a_\\bullet^{-1}e_D$ is precisely the usual reduction counit under that unitor. This asserts the reduction counit for the completion of $K$ and does not require $K$ itself to be derived complete.",
+   "text": "For identity coefficients, prove the actual finite quotient maps are identities by quotient induction and functorial constant sheafification. The sectionwise specification of systemMap then makes the sequence ring map the identity. Restriction along identity is naturally isomorphic to identity on module sheaves. Transport the ordinary scalar adjunction along this restriction unitor; uniqueness of left adjoints gives the ordinary scalar unitor. Its unit equation and the specified unit_section give the formula a tensor x maps to a times x. Apply uniqueness of left derived functors to this ordinary unitor; the universal counit factorization supplies precisely the required model equation, for every complex (in particular every K-flat one). Whisker this unitor by SE.reduction. Expanding the specified comparison gives reduction of the inverse completion followed by the reduction/limit counit. Its naturality proves coefficientExtensionReduction_identity. No effectivity theorem or completeness of K is used for this identity clause.",
    "uses": [
     "def-weil-integral-scalar-extension",
-    "lem-coef-normalized-dvr-effectivity"
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-derived-change-of-rings",
+    "lem-coef-derived-system-evaluation-calculus"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
     "place": "Identity coefficient extension and the reduction counit"
@@ -160,7 +162,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-  "place": "Integral operations clause; explicit coefficient-association and coherent-counit argument using Stacks Tags 06YS, 0G7E, 06YY and normalized DVR effectivity"
+  "place": "Integral operations clause; explicit coefficient-association and coherent-counit argument using Stacks Tags 06YS, 0G7E, 06YY and normalized DVR effectivity; R8 proves the identity clause by ordinary adjoint uniqueness, universal left-derived uniqueness and coherent counit naturality; the two other theorem proofs remain the existing plan"
  },
  "mathlib_searches": [
   {
@@ -385,11 +387,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-ae53f",
-  "group": "Z9",
+  "reviewer": "COMPILER",
+  "group": "R8",
   "result": "pass",
-  "landing": "20261020T221411-L-4184053",
-  "kind": "interface",
-  "note": "independent cc review: delivered CoefficientExtensionReductionModel.lean vs live base (record abbrevs = old structures field-for-field; 3 sorry statements byte-identical), node lem-pur-coefficient-extension-reduction-model vs live (proof step 0 + declarations/note only), change record users vs grep and public-import closure; item + 3 direct importers compiled clean"
+  "landing": "20261020T230830-L-618313",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
