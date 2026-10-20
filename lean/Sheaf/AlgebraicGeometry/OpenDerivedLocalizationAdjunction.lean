@@ -2,11 +2,8 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import Mathlib.CategoryTheory.Localization.LocallySmall
 
 /-! # Derived localizations and the adjunction for open restriction
 
@@ -19,9 +16,6 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
-
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- Transport derived localizations to an open subscheme and its opens, and derive the
 right adjoint of localized open restriction. No support or detector assertion is made.
@@ -42,7 +36,7 @@ so it has K-injective resolutions. The upstream
 `mapDerivedCategoryRightDerivedAdjunction` derives the right adjoint of exact
 restriction and supplies the displayed adjunction. This right adjoint is determined
 up to natural isomorphism. Empty and full opens use the same construction. -/
-theorem open_derived_localization_adjunction
+theorem open_derived_localizations_and_adjunction
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens, HasDerivedCategory.{w}
@@ -59,29 +53,10 @@ theorem open_derived_localization_adjunction
         schemeDerivedCategory X),
       Nonempty ((SheafOfModules.overFunctor.{u}
         (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R) := by
-  classical
-  let B := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
-  let D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)
-  have hD : Nonempty (HasDerivedCategory.{w} D) := by
-    let : HasDerivedCategory.{u + 1} D := HasDerivedCategory.standard D
-    let e : B ≌ D := Scheme.Modules.overEquiv U
-    let ed := e.mapDerivedCategory
-    let : LocallySmall.{w} (DerivedCategory D) :=
-      (locallySmall_congr ed).mp inferInstance
-    exact ⟨(HomologicalComplex.quasiIso D (.up ℤ)).hasLocalizationOfLocallySmall
-      DerivedCategory.Q⟩
-  obtain ⟨hD⟩ := hD
+  obtain ⟨hD⟩ := nonempty_hasDerivedCategory_openSubscheme.{u, w} X U
   let := hD
-  obtain ⟨hO⟩ := nonempty_derivedOpenLocalization U.toScheme
+  obtain ⟨hO⟩ := nonempty_derivedOpenLocalization.{u, w} U.toScheme
   let := hO
-  let : IsGrothendieckAbelian.{u} B :=
-    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
-      ((Opens.grothendieckTopology X).over U) (X.toRingedSpace.sheaf.over U)).1
-  let L := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
-  let : L.IsLeftAdjoint := by dsimp [L, SheafOfModules.overFunctor]; infer_instance
-  let G := Functor.rightAdjoint L
-  let : G.Additive := Functor.additive_of_preserves_binary_products G
-  exact ⟨hD, hO, G.rightDerivedFunctor,
-    ⟨(Adjunction.ofIsLeftAdjoint L).mapDerivedCategoryRightDerivedAdjunction⟩⟩
+  exact ⟨hD, hO, open_derived_localization_adjunction X U⟩
 
 end AlgebraicGeometry

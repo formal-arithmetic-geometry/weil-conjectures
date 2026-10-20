@@ -13,21 +13,21 @@
  ],
  "proof": [
   {
-   "text": "Use the exact module equivalence Modules.overEquiv U and its induced derived equivalence to transport local w-smallness from the given localization on the localized site to the standard derived category of the open scheme. MorphismProperty.hasLocalizationOfLocallySmall supplies hD by shrinking Hom types.",
+   "text": "Apply the proved upstream nonempty_hasDerivedCategory_openSubscheme X U. Its proof transports local w-smallness along the exact module equivalence Modules.overEquiv U and then uses hasLocalizationOfLocallySmall. Install the resulting localization hD on U.",
    "uses": [
     "def-pc-derived-category"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the proved [lem-pc-derived-open-localization-universe] to the open scheme with hD, obtaining the family hO of localizations on its localized open sites in the same universe w. This theorem uses exact extension by zero and restriction to transfer the Hom smallness.",
+   "text": "Apply the proved nonempty_derivedOpenLocalization to U.toScheme with hD, obtaining hO in the same morphism universe w, and install it. This retains the exact extension-by-zero and restriction argument of lem-pc-derived-open-localization-universe.",
    "uses": [
     "lem-pc-derived-open-localization-universe"
    ],
    "elementary": false
   },
   {
-   "text": "The localized restriction L has its existing explicit underived right adjoint G. Use [prop-pur-kinjective-resolutions-exist] to install the Grothendieck abelian structure on its target and the existing source-library K-injective resolution instance. Apply the proved upstream CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction to obtain L.mapDerivedCategory adjoint to G.rightDerivedFunctor. This API establishes the absolute-derived hypotheses and applies [lem-sc-derived-adjunction-from-underived].",
+   "text": "Apply the proved upstream open_derived_localization_adjunction X U, which needs only the ambient and localized-over-U derived localizations already assumed. Its proof installs the Grothendieck abelian structure and K-injective resolutions and derives the underived right adjoint using mapDerivedCategoryRightDerivedAdjunction. Package this adjunction with hD and hO into the displayed nested existentials. The combined theorem has the distinct name open_derived_localizations_and_adjunction, avoiding collision with the upstream adjunction-only theorem.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "lem-sc-derived-adjunction-from-underived"
@@ -44,7 +44,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 079W, Lemma cohomology-lemma-adjoint, specialized to the open inclusion; the same adjunction is used in perfect.tex Tag 0A9A, lemma-supported-generator; explicit localization and module-system comparison argument"
+  "place": "Tag 079W, Lemma cohomology-lemma-adjoint, specialized to the open inclusion; the same adjunction is used in perfect.tex Tag 0A9A, lemma-supported-generator; explicit localization and module-system comparison argument; 2026-10-21: compose the upstream localization-transport and adjunction-only theorems, retaining all three clauses"
  },
  "mathlib_searches": [
   {
@@ -117,8 +117,8 @@
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction",
   "file": "lean/Sheaf/AlgebraicGeometry/OpenDerivedLocalizationAdjunction.lean",
-  "declaration": "AlgebraicGeometry.open_derived_localization_adjunction",
-  "statement": "theorem open_derived_localization_adjunction\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (U : X.Opens) :\n    ∃ hD : HasDerivedCategory.{w}\n        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)),\n    letI := hD\n    ∃ hO : ∀ W : U.toScheme.Opens, HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over W)),\n    letI := hO\n    ∃ (R : DerivedCategory\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n        schemeDerivedCategory X),\n      Nonempty ((SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R)",
+  "declaration": "AlgebraicGeometry.open_derived_localizations_and_adjunction",
+  "statement": "theorem open_derived_localizations_and_adjunction\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (U : X.Opens) :\n    ∃ hD : HasDerivedCategory.{w}\n        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)),\n    letI := hD\n    ∃ hO : ∀ W : U.toScheme.Opens, HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over W)),\n    letI := hO\n    ∃ (R : DerivedCategory\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n        schemeDerivedCategory X),\n      Nonempty ((SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R)",
   "branch": "sheaf-dag",
   "by": "C2",
   "date": "2026-10-12"
@@ -134,13 +134,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-9b52e",
-  "group": "C2",
+  "reviewer": "C-3d00c",
+  "group": "M5",
   "result": "pass",
-  "landing": "20261012T194103-L-452503",
+  "landing": "20261020T221250-L-4166153",
   "kind": "interface",
-  "note": "independent Codex review: Matched all three Lean signatures and proofs with their DAG nodes; existing interface unchanged; delivered modules and sole direct importer compile cleanly; axiom checks show only permitted axioms and inherited sorryAx."
+  "note": "independent cc review: renamed open_derived_localizations_and_adjunction (type identical to old combined theorem) and its 3-step proof against node lem-pc-open-derived-localization-adjunction and upstream WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationAdjunction (nonempty_hasDerivedCategory_openSubscheme, open_derived_localization_adjunction) plus nonempty_derivedOpenLocalization; delivered file compiles, axioms clean, 0 importers"
  }
 }
