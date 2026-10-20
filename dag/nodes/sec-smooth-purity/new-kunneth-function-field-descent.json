@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0F02 and 0F1D"
+ },
+ "stmt_deps": [
+  "def-kun-bc-property",
+  "sbc-def-base-change-property"
+ ],
+ "proof_deps": [
+  "def-kun-bc-property",
+  "sbc-def-base-change-property"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "new-kunneth-function-field-descent",
+ "title": "Generic-field descent of a cyclic higher direct image witness",
+ "statement": "For positive n and d dividing n, a nonzero cyclic higher direct image over an algebraically closed extension of an algebraically closed function field descends to the function field.",
+ "proof": [
+  {
+   "text": "Compute higher direct images by sheafified cohomology presheaves on affine etale objects; algebraically closed extension invariance gives local bijectivity, hence an isomorphism after sheafification and preservation of nonvanishing.",
+   "uses": [
+    "def-kun-bc-property",
+    "sbc-def-base-change-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0F0B and 0F1D"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KunnethFunctionFieldDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/KunnethFunctionFieldDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_functionField_descent_of_algClosedWitness",
+  "statement": "theorem exists_functionField_descent_of_algClosedWitness {S' X' : Scheme.{u}} {f' : X' ⟶ S'} (_hAff : IsAffine S') (_hInt : IsIntegral S') (_hNorm : ∀ x : S', IsIntegrallyClosed (S'.presheaf.stalk x)) (_hAlg : IsAlgClosed S'.functionField) {K : Type u} [_hField : Field K] [_hKAlg : IsAlgClosed K] (i : S'.functionField ⟶ CommRingCat.of K) {Y : Scheme.{u}} (e : Y ⟶ Spec (.of K)) (h : Y ⟶ X') (_hsq : ChosenCartesianSquare h e f' (Spec.map i ≫ S'.fromSpecStalk (genericPoint S'))) (q : ℕ) (n d : ℕ) (hn : 0 < n) (hd : d ∣ n) (hne : ¬ IsZero ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((Etale.lowerStar AddCommGrpCat.{u + 1} h).rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod d)))))))) : ∃ (Y₀ : Scheme.{u}) (e₀ : Y₀ ⟶ Spec S'.functionField) (h₀ : Y₀ ⟶ X') (_ : ChosenCartesianSquare h₀ e₀ f' (S'.fromSpecStalk (genericPoint S'))), ¬ IsZero ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((Etale.lowerStar AddCommGrpCat.{u + 1} h₀).rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj ((constantSheaf Y₀.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod d)))))))",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-21"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KunnethBaseChangeFailure",
+  "date": "2026-10-21",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": null,
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "functionField higherDirectImage algebraically closed extension",
+   "results": "No matching theorem in Mathlib; only constituent scheme and cohomology APIs.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "UniversalBaseChangeProperty",
+   "results": "No matching theorem.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic fibre higher direct image descent algebraically closed field",
+   "results": "No matching theorem.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic algebraically closed field extension preserves etale cohomology",
+   "results": "No exact theorem found; search service returned no applicable declaration.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261020T211811-L-3503474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261020T211811-L-3503474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

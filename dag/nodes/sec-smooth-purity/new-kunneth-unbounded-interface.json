@@ -1,0 +1,120 @@
+{
+ "id": "new-kunneth-unbounded-interface",
+ "kind": "statement",
+ "title": "Unbounded cumulative hypotheses converted to the cyclic witness hypotheses",
+ "statement": "For a positive invertible coefficient order, the lower unbounded cumulative condition yields the cumulative universal lower-degree condition, and failure at q yields failure of the universal degree-q condition.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0F02 and 0F1D"
+ },
+ "stmt_deps": [
+  "def-kun-bc-property",
+  "sbc-def-base-change-property"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the canonical-pullback exchange in the unbounded predicate. For every lower natural degree this gives the corresponding universal predicate; if the degree-q universal predicate held, the same canonical comparison would give the unbounded predicate at q, contradicting failure.",
+   "uses": [
+    "def-kun-bc-property",
+    "sbc-def-base-change-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-bc-property",
+  "sbc-def-base-change-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0F02 and 0F1D"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KunnethUnboundedBridges",
+  "file": "lean/Sheaf/AlgebraicGeometry/KunnethUnboundedBridges.lean",
+  "declaration": "AlgebraicGeometry.Etale.cumulative_and_not_universal_of_unbounded",
+  "statement": "theorem cumulative_and_not_universal_of_unbounded {X S : Scheme.{u}} (f : X ⟶ S) (n : ℕ) (hn : 0 < n) (hinv : IsUnit (n : Γ(S, ⊤))) (q : ℕ) (hprev : UnboundedCumulativeUniversalBaseChangeProperty f n hn (q - 1)) (hfail : ¬ UnboundedCumulativeUniversalBaseChangeProperty f n hn q) : CumulativeUniversalBaseChangeProperty f n hn hinv (q - 1) ∧ ¬ UniversalBaseChangeProperty (ULift.{u + 1} (ZMod n)) f (q : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KunnethBaseChangeFailure",
+  "date": "2026-10-21",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": null,
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "functionField higherDirectImage algebraically closed extension",
+   "results": "No matching theorem in Mathlib; only constituent scheme and cohomology APIs.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "UniversalBaseChangeProperty",
+   "results": "No matching theorem.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic fibre higher direct image descent algebraically closed field",
+   "results": "No matching theorem.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic algebraically closed field extension preserves etale cohomology",
+   "results": "No exact theorem found; search service returned no applicable declaration.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261020T211811-L-3503474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261020T211811-L-3503474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

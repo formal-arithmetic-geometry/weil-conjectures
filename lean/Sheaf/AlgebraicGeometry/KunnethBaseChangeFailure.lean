@@ -23,6 +23,8 @@ import WeilConjectures.ConstructibleSheaf.Defs
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Sheaf.AlgebraicGeometry.CumulativeUniversalBaseChangeProperty
+import Sheaf.AlgebraicGeometry.KunnethUnboundedBridges
+import Sheaf.AlgebraicGeometry.KunnethFunctionFieldDescent
 
 /-!
 # Failure of base change over an algebraically closed function field
@@ -40,6 +42,8 @@ small-site universe convention.
 @[expose] public section
 
 universe u
+
+set_option linter.style.haveILetI false
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -104,6 +108,16 @@ theorem exists_kunnethBaseChangeFailure_functionField
             ((DerivedCategory.Plus.singleFunctor _ 0).obj
               ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
                 (AddCommGrpCat.of (ULift.{u + 1} (ZMod d))))))) := by
-  sorry
+  obtain ⟨hprev', hfail'⟩ := cumulative_and_not_universal_of_unbounded f n hn hinv q hprev hfail
+  obtain ⟨S', X', a, b, f', hsquare, hAff, hInt, hNorm, hAlg, K, hKField,
+      hKAlg, i, Y, e, h, hcart, d, hd, hne⟩ :=
+    exists_universalBaseChangeFailure_cyclic_datum f n hn hinv q hq hprev' hfail'
+  letI : Field K := hKField
+  letI : IsAlgClosed K := hKAlg
+  obtain ⟨Y₀, e₀, h₀, hcart₀, hne₀⟩ :=
+    exists_functionField_descent_of_algClosedWitness (f' := f') hAff hInt hNorm hAlg i e h hcart
+      q n d hn hd hne
+  exact ⟨S', X', a, b, f', hsquare, hAff, hInt, hNorm, hAlg, Y₀, e₀, h₀, hcart₀, d,
+    hd, hne₀⟩
 
 end AlgebraicGeometry.Etale
