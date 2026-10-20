@@ -12,13 +12,11 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.CategoryTheory.Sites.Torsor
 import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 import WeilConjectures.CategoryTheory.Sites.EtaleContractedProductExists
-import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality
+import WeilConjectures.CategoryTheory.Sites.EtaleTorsorH1Functoriality
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.SetLocalSystemCalculus
-import Sheaf.DeligneLaumon.TorsionFiniteSubsystem
 
 /-! # Free actions of torsion local systems
 
