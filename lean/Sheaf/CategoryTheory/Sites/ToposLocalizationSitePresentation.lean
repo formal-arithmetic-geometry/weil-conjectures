@@ -10,12 +10,9 @@ public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
-import Sheaf.CategoryTheory.ContinuousCocontinuousToposAdjunctionForCoverings
-import Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable
-import Sheaf.CategoryTheory.SheafSubcategoryComparison
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.TraceFormula.SieveSheavesCoveringSite
+import all Sheaf.CategoryTheory.SheafSubcategoryComparison
+import all Sheaf.CategoryTheory.ToposCompatibleGenerators
+import all Sheaf.CategoryTheory.Sites.LocalizedSetPullbackComparison
 
 /-!
 # Finite-limit site presentation adapted to an object
@@ -37,6 +34,45 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private noncomputable def starPostIso
+    {T : Type u} [Category.{v} T] [HasBinaryProducts T]
+    {D : Type w} [SmallCategory D] (J : GrothendieckTopology D)
+    (F : T ⥤ Sheaf J (Type w)) [PreservesFiniteLimits F]
+    (A : T) (B : Sheaf J (Type w)) (theta : F.obj A ≅ B) :
+    Over.star A ⋙ Over.post F ⋙ Over.map theta.hom ≅ F ⋙ Over.star B := by
+  refine NatIso.ofComponents (fun H ↦ Over.isoMk
+    (PreservesLimitPair.iso F A H ≪≫ prod.mapIso theta (Iso.refl _)) ?_) ?_
+  · simp [Over.post, PreservesLimitPair.iso_hom]
+  · intro H H' f
+    apply Over.OverMorphism.ext
+    change F.map (prod.map (𝟙 A) f) ≫
+        (prodComparison F A H' ≫ prod.map theta.hom (𝟙 _)) =
+      (prodComparison F A H ≫ prod.map theta.hom (𝟙 _)) ≫ prod.map (𝟙 B) (F.map f)
+    apply prod.hom_ext <;>
+      simp only [Category.assoc, prod.map_fst, prod.map_snd, Category.comp_id,
+        Category.id_comp, prodComparison_snd, prodComparison_snd_assoc, prodComparison_fst_assoc,
+        prod.map_snd_assoc, ← F.map_comp_assoc, ← F.map_comp]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private noncomputable def starTensorIso
+    {D : Type w} [SmallCategory D] (J : GrothendieckTopology D) (U : D) :
+    Over.star ((presheafToSheaf J (Type w)).obj (yoneda.obj U)) ≅ tensorStar J U := by
+  let B := (presheafToSheaf J (Type w)).obj (yoneda.obj U)
+  refine NatIso.ofComponents (fun H ↦
+    Over.isoMk ((CartesianMonoidalCategory.tensorLeftIsoProd B).app H).symm ?_) ?_
+  · simp only [Over.star_obj_hom]
+    simpa [CartesianMonoidalCategory.tensorLeftIsoProd, tensorStar, prod.fst] using
+      IsLimit.conePointUniqueUpToIso_inv_comp
+        (CartesianMonoidalCategory.tensorProductIsBinaryProduct B H)
+        (limit.isLimit (pair B H)) ⟨WalkingPair.left⟩
+  · intro H H' f
+    apply Over.OverMorphism.ext
+    exact (CartesianMonoidalCategory.tensorLeftIsoProd B).inv.naturality f
+
+set_option linter.unusedVariables false in
 /-- A Grothendieck topos admits a finite-limit subcanonical site presentation adapted to
 any chosen object, and localization of that site presents the corresponding slice.
 
@@ -93,6 +129,67 @@ theorem topos_localization_site_presentation
         Nonempty (g.inverse ≅ @Over.star E _ A hprod) ∧
         Nonempty (g.inverse ⋙ s.functor ≅
           e.functor ⋙ K.toGrothendieck.overPullback (Type w) U) := by
-  sorry
+  classical
+  -- The proved comparison helpers work for arbitrary sieve topologies, so the initial
+  -- covering-site replacement in the original proof plan is unnecessary.
+  obtain ⟨D, cD, J, ⟨b⟩⟩ := hE
+  let X : D ⊕ PUnit.{w + 1} → Sheaf J (Type w) := Sum.elim
+    (fun V ↦ (presheafToSheaf J (Type w)).obj (yoneda.obj V))
+    (fun _ ↦ b.functor.obj A)
+  obtain ⟨C, cC, hC, F, hfull, hfaith, hlim, hX⟩ := generators X
+  have hrep : ∀ V : D, ∃ T : C,
+      Nonempty (F.obj T ≅
+        (presheafToSheaf J (Type w)).obj (yoneda.obj V)) :=
+    fun V ↦ hX (.inl V)
+  have hpb : ∀ (V W T : C) (f : V ⟶ T) (g : W ⟶ T),
+      ∃ (P : C) (p : P ⟶ V) (q : P ⟶ W),
+        IsPullback (F.map p) (F.map q) (F.map f) (F.map g) := by
+    intro V W T f g
+    exact ⟨pullback f g, pullback.fst f g, pullback.snd f g,
+      (IsPullback.of_hasPullback f g).map F⟩
+  -- Apply the proved nerve comparison directly to the full finite-limit generators.
+  let K := epiPrecoverage F
+  let hJ := epiPrecoverage_subcanonical F hpb
+  let hK := epiPrecoverage_site F hpb
+  let := nerveToSheaf_isEquivalence F hrep hpb
+  let e₀ := (nerveToSheaf F hpb).asEquivalence
+  obtain ⟨U, ⟨a⟩⟩ := hX (.inr PUnit.unit)
+  let e := b.trans e₀
+  let theta : e.functor.obj A ≅ K.toGrothendieck.yoneda.obj U :=
+    e₀.functor.mapIso a.symm ≪≫ (nerve_representable_sheaf_iso F hpb).app U
+  have : HasBinaryProducts E :=
+    Adjunction.hasLimitsOfShape_of_equivalence e.functor
+  refine ⟨inferInstance, C, cC, hC, K, hK, hJ, e, U, ⟨theta⟩, ?_⟩
+  let B := (presheafToSheaf K.toGrothendieck (Type w)).obj (yoneda.obj U)
+  have : IsIso (toSheafify K.toGrothendieck (yoneda.obj U)) :=
+    isIso_toSheafify _ ((isSheaf_iff_isSheaf_of_type _ _).mpr
+      (GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable _))
+  let y : K.toGrothendieck.yoneda.obj U ≅ B :=
+    (fullyFaithfulSheafToPresheaf _ (Type w)).preimageIso
+      (asIso (toSheafify K.toGrothendieck (yoneda.obj U)))
+  let t := theta ≪≫ y
+  let z := (Over.postEquiv (X := A) e).trans (Over.mapIso t)
+  let s := z.trans (sliceEquivalence K.toGrothendieck U).symm
+  -- Product preservation and the explicit product-fibre bijection identify restriction.
+  let k : Over.star A ⋙ s.functor ≅
+      e.functor ⋙ K.toGrothendieck.overPullback (Type w) U :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (starPostIso K.toGrothendieck e.functor A B t)
+        (fibreFunctor K.toGrothendieck U) ≪≫
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft e.functor
+        (Functor.isoWhiskerRight (starTensorIso K.toGrothendieck U)
+          (fibreFunctor K.toGrothendieck U) ≪≫ restrictionFibreIso K.toGrothendieck U)
+  -- Restriction is also a left adjoint, by cocontinuity of the slice forgetful functor.
+  let R := (Over.forget U).sheafPushforwardCocontinuous (Type w)
+    (K.toGrothendieck.over U) K.toGrothendieck
+  let adj := (e.toAdjunction.comp
+    ((Over.forget U).sheafAdjunctionCocontinuous (Type w)
+      (K.toGrothendieck.over U) K.toGrothendieck)).comp s.symm.toAdjunction
+  let j : Over.star A ≅
+      (e.functor ⋙ K.toGrothendieck.overPullback (Type w) U) ⋙ s.inverse :=
+    (Functor.rightUnitor _).symm ≪≫ Functor.isoWhiskerLeft _ s.unitIso ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight k s.inverse
+  exact ⟨s, ⟨Over.star A, s.functor ⋙ R ⋙ e.inverse,
+    adj.ofNatIsoLeft j.symm, inferInstance⟩, ⟨Iso.refl _⟩, ⟨k⟩⟩
 
 end CategoryTheory

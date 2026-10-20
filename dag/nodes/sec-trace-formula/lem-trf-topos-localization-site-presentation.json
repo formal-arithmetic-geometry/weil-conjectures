@@ -16,77 +16,79 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-topos], choose a $\\mathcal V$-small sieve-site presentation $b:\\mathcal E\\simeq\\operatorname{Sh}(\\mathcal D,J;\\operatorname{Sets}_{\\mathcal V})$. Apply [lem-trf-sieve-sheaves-covering-site] to $(\\mathcal D,J)$, obtaining a small covering-family site $\\mathcal S$ and an equivalence $q:\\mathcal E\\simeq\\operatorname{Sh}(\\mathcal S)$. Put $B=q(A)$. This application uses only the smallness and sieve-topology hypotheses actually supplied by the topos definition; no pullbacks in $\\mathcal D$ have been assumed.",
+   "text": "Choose a small sieve-site presentation b : E ≌ Sheaf J (Type w) from def-weil-pbc-topos. Work directly with this arbitrary Grothendieck topology: the already proved nerve comparison helpers in Sheaf.CategoryTheory.SheafSubcategoryComparison accept J without requiring a precoverage presentation or pullbacks on the original site. Thus no preliminary covering-site replacement is needed.",
    "uses": [
-    "def-weil-pbc-topos",
-    "lem-trf-sieve-sheaves-covering-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CI (lemma-topos-good-site), reduction to a site presentation; arbitrary-sieve starting convention handled by the cited replacement lemma."
-   }
-  },
-  {
-   "text": "Construct the underlying category of the desired site. In $\\operatorname{Sh}(\\mathcal S)$ let $\\mathcal C_0$ be the full subcategory on $B$, the terminal singleton sheaf, and all $h_s^\\#$ for $s\\in\\mathcal S$ [def-weil-pbc-sheafification]. Given its set of objects, form $\\mathcal C_{n+1}$ by adjoining one fibre product for every cospan in $\\mathcal C_n$, retaining all earlier objects. These fibre products and the terminal object exist by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. The natural transformations between two sheaves form a subset of the product over the $\\mathcal V$-small set of objects $s$ of the sets of maps between their $\\mathcal V$-small section sets. Hence all Hom sets are $\\mathcal V$-small; each stage has only a $\\mathcal V$-small set of cospans, and $\\mathcal C=\\bigcup_{n\\geq0}\\mathcal C_n$ is $\\mathcal V$-small [def-weil-size-convention]. Any cospan in $\\mathcal C$ occurs at some finite stage, so its chosen pullback lies in the next stage. Fullness transfers its universal property to $\\mathcal C$. Together with the terminal singleton this gives finite limits: products are pullbacks over the terminal object, and the equalizer of $f,g:X\\to Y$ is the pullback of $(f,g):X\\to Y\\times Y$ along the diagonal $Y\\to Y\\times Y$. Take $U=B$ as an object of $\\mathcal C$.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "def-weil-size-convention"
+    "def-weil-pbc-topos"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CI (lemma-topos-good-site), proof: iterative full-subcategory closure; only finite limits are needed here, so closure under subsheaves is unnecessary. Tag 00W2 (lemma-limit-sheaf)."
+    "place": "Tag 03CI, initial site presentation; the proved comparison implementation works directly with covering sieves."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-sheaf-subcategory-comparison] to the full subcategory $\\mathcal C\\subset\\operatorname{Sh}(\\mathcal S)$. Its three hypotheses hold: the objects form a set, all sheafified representables belong already to $\\mathcal C_0$, and it is closed under fibre products by step 2. Thus the epimorphic-family topology makes $\\mathcal C$ a small subcanonical site, and $N:\\operatorname{Sh}(\\mathcal S)\\simeq\\operatorname{Sh}(\\mathcal C)$ is the equivalence with $N(F)(V)=\\operatorname{Hom}(V,F)$. Set $e=Nq$. The same cited statement gives $N(B)=h_U$, so $e(A)\\cong h_U$. An equivalence of categories is an equivalence of topoi: its inverse and unit/counit give an adjunction, and the equivalence transports universal properties of finite-limit cones in both directions.",
+   "text": "Apply the proved private generators theorem of Sheaf.CategoryTheory.ToposCompatibleGenerators to the w-small family indexed by D ⊕ PUnit consisting of all sheafified representables and b(A). That helper closes the family under terminal objects and pullbacks using ObjectProperty.limitsClosure and passes to SmallModel. It provides a w-small finite-limit category C and a fully faithful finite-limit-preserving F : C → Sheaf J, containing the family up to isomorphism. Each pullback square in C is sent to a pullback square by F. This is the finite-limit-closure construction used for the compatible-generators node, here with the prescribed object included in its input family.",
+   "uses": [
+    "lem-weil-pbc-topos-compatible-generators",
+    "def-weil-pbc-sheafification",
+    "def-weil-size-convention",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CI, full finite-limit closure of sheafified representables and the prescribed sheaf; existing proved generators helper."
+   }
+  },
+  {
+   "text": "Use the proved arbitrary-sieve helpers epiPrecoverage, epiPrecoverage_site, epiPrecoverage_subcanonical, nerveToSheaf_isEquivalence and nerve_representable_sheaf_iso from Sheaf.CategoryTheory.SheafSubcategoryComparison. Their hypotheses are exactly fullness, faithfulness, containment of sheafified representables and the displayed pullback closure. They give the epimorphic precoverage K, its covering-site axioms, subcanonicity, and a nerve equivalence e₀. Choose U with F(U) ≅ b(A); mapping this isomorphism through e₀ and using the representable nerve isomorphism yields e(A) ≅ h_U for e = b.trans e₀. Transport binary products to E along e.",
    "uses": [
     "lem-weil-pbc-sheaf-subcategory-comparison",
-    "def-trf-geometric-morphism"
+    "def-weil-pbc-topos"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03A1 (lemma-special-equivalence), clauses (1)-(4), applied as in the final sentence of the proof of Tag 03CI."
+    "place": "Tags 03A1 and 03CI; use the existing proved general-sieve comparison helpers, without the public theorem's unnecessary precoverage input."
    }
   },
   {
-   "text": "Choose an isomorphism $\\theta:e(A)\\xrightarrow{\\sim}h_U$. The functor on slices sending $p:H\\to A$ to $\\theta\\circ e(p):e(H)\\to h_U$ is an equivalence: apply a quasi-inverse of $e$ and its unit/counit to construct the inverse over $A$; the unit/counit identities over the bases follow from their naturality. Since the topology is subcanonical, $h_U^\\#\\cong h_U$. Now [lem-weil-pbc-localized-sheaves-over-representable] gives an equivalence from $\\operatorname{Sh}(\\mathcal C)/h_U$ to $\\operatorname{Sh}(\\mathcal C/U)$. Its value on $(F,p)$ at $a:V\\to U$ is the fibre $\\{x\\in F(V):p_V(x)=a\\}$, with componentwise restriction. The composite is the required equivalence $\\mathcal E/A\\simeq\\operatorname{Sh}(\\mathcal C/U)$. The site $\\mathcal C/U$ is small since its objects and arrows are subsets of small sets of arrows and commutative triangles of $\\mathcal C$; its covering families are exactly the underlying covering families by [def-pur-localized-ringed-site].",
+   "text": "Subcanonicity makes the unit h_U → h_U^# an isomorphism. Compose Over.postEquiv e, change of base along e(A) ≅ h_U^#, and the inverse of the proved sliceEquivalence helper in Sheaf.CategoryTheory.Sites.LocalizedSetPullbackComparison. This gives s : Over A ≌ Sheaf (K.over U). The helper uses exactly the explicit fibre/extension equivalence of localized-sheaves-over-representable; no arbitrary equivalence lacking the fibre formula is chosen.",
    "uses": [
     "lem-weil-pbc-localized-sheaves-over-representable",
-    "def-pur-localized-ringed-site"
+    "lem-weil-pbc-slice-set-pullback-isIso",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04GZ (lemma-localize-topos), proof via Tag 00Y1 (lemma-essential-image-j-shriek); localized topology in Section 00XZ."
+    "place": "Tags 00Y1 and 04GZ; existing sliceEquivalence helper from the proved set-localization comparison."
    }
   },
   {
-   "text": "The forgetful functor $v:\\mathcal C/U\\to\\mathcal C$ is continuous: it sends a covering family to the identical underlying cover, and pullbacks of covering arrows in the slice are computed by the same pullbacks in $\\mathcal C$. It is cocontinuous: given a covering family $\\{W_i\\to V\\}$ in $\\mathcal C$ and $a:V\\to U$, the arrows $(W_i\\to V\\xrightarrow a U)\\to(V\\xrightarrow a U)$ form a covering in the slice whose image is that family itself. These assertions follow directly from [def-pur-localized-ringed-site]. Apply [lem-weil-pbc-continuous-cocontinuous-topos-adjunction]: precomposition along $v$, namely $F\\mapsto F|_U$, is the inverse image of a geometric morphism. Transport this adjunction through the equivalences of steps 3 and 4; composition of inverse images is as in [def-trf-geometric-morphism]. Thus the transported functor is a geometric inverse image on $\\mathcal E/A$.",
+   "text": "The private starPostIso constructed in this proof uses PreservesLimitPair.iso and prod.mapIso to identify Over.star A after transport with Over.star h_U^#. Its naturality follows by composing with both product projections. The private starTensorIso identifies chosen binary products with the sectionwise cartesian tensor products using tensorLeftIsoProd and uniqueness of product cones. Compose these isomorphisms with the existing proved restrictionFibreIso: the fibre of h_U^# × H over the section eta(a) is sent to H by second projection, with inverse x ↦ (eta(a), x). This supplies k : Over.star A ⋙ s.functor ≅ e.functor ⋙ K.overPullback U, naturally in H.",
+   "uses": [
+    "lem-weil-pbc-slice-set-pullback-isIso",
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04GZ, product inverse-image formula; Tag 03CF product/fibre calculation, already proved as restrictionFibreIso."
+   }
+  },
+  {
+   "text": "The forgetful site functor C/U → C is continuous and cocontinuous by the existing Mathlib Sites.Over instances. Mathlib Functor.sheafAdjunctionCocontinuous therefore gives restriction as a left adjoint to the cocontinuous pushforward. Compose with e.toAdjunction and s.symm.toAdjunction. The unit of s and k identify this transported left adjoint with Over.star A, so Adjunction.ofNatIsoLeft supplies its right adjoint. Over.star A also is the right adjoint of Over.forget A, and therefore preserves finite limits. Package this adjunction and preservation as the geometric morphism g, whose inverse is definitionally Over.star A; k is the required restriction comparison.",
    "uses": [
     "def-pur-localized-ringed-site",
-    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
     "def-trf-geometric-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section 00XZ (section-localize), localization functor; Tag 00XR (lemma-when-shriek), continuous and cocontinuous functors, and Tag 04GZ."
-   }
-  },
-  {
-   "text": "Identify that transported functor explicitly. An equivalence preserves products by their universal property: maps from a test object into $e(H\\times A)$ correspond, after applying the quasi-inverse, to pairs of maps into $H$ and $A$, hence to maps into $e(H)\\times e(A)$. Composing with $\\theta$ identifies the slice object $(H\\times A\\to A)$ with $(e(H)\\times h_U\\xrightarrow{\\mathrm{pr}_2}h_U)$. Products of sheaves are sectionwise by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Therefore the fibre formula of [lem-weil-pbc-localized-sheaves-over-representable] sends this slice object, at $a:V\\to U$, to $\\{(x,t)\\in e(H)(V)\\times h_U(V):t=a\\}$. Projection $(x,a)\\mapsto x$ is a bijection with inverse $x\\mapsto(x,a)$. Along $b:W\\to V$ both sides restrict $x$ to $e(H)(b)(x)$ and replace $a$ by $ab$, so these bijections are natural in slice objects and in $H$. Consequently the slice geometric inverse image is precisely $H\\mapsto(H\\times A\\to A)$ and corresponds under the constructed equivalence to restriction, as claimed.",
-   "uses": [
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "lem-weil-pbc-localized-sheaves-over-representable"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04GZ (lemma-localize-topos), inverse-image description; Tag 03EE (lemma-compute-j-shriek-restrict); explicit fibre calculation from Tag 00Y1."
+    "place": "Section 00XZ and Tag 00XR, via Mathlib sheafAdjunctionCocontinuous; Tag 04GZ. Both adjunctions and their transports are constructed explicitly."
    }
   }
  ],
@@ -96,16 +98,16 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-topos",
   "def-weil-size-convention",
-  "lem-trf-sieve-sheaves-covering-site",
-  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
   "lem-weil-pbc-localized-sheaves-over-representable",
   "lem-weil-pbc-sheaf-subcategory-comparison",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-slice-set-pullback-isIso",
+  "lem-weil-pbc-topos-compatible-generators"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Construction following Tags 03CI and 03A1 and the fibre calculation of Tags 00Y1 and 04GZ, with an explicit preliminary covering-family replacement because def-weil-pbc-topos allows arbitrary sieve sites."
+  "place": "J2 Lean proof of Tags 03CI/03A1 and 04GZ, reusing the fully proved private generator, arbitrary-sieve nerve comparison, slice equivalence and product-fibre helpers through private import all. Mathlib supplies the cocontinuous sheaf adjunction directly. The theorem has only propext, Classical.choice and Quot.sound as axioms."
  },
  "mathlib_searches": [
   {
@@ -217,8 +219,7 @@
  },
  "tool_uses": [
   "lem-weil-pbc-sheaf-subcategory-comparison",
-  "lem-weil-pbc-localized-sheaves-over-representable",
-  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+  "lem-weil-pbc-localized-sheaves-over-representable"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -245,5 +246,15 @@
   "by": "Q42",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T161321-L-3476657",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
