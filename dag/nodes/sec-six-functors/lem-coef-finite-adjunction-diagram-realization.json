@@ -33,7 +33,8 @@
   "prop-asd-internal-adjunction",
   "lem-sf-class-compact-support-comparison",
   "thm-weil-pbc-site-comparison",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coef-finite-adjunction-system-data"
  ],
  "proof": [
   {
@@ -714,5 +715,48 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteAdjunctionDiagramRealization",
+  "declaration": "WeilConjectures.FiniteAdjunctionDiagram.finiteAdjunctionDiagramRealization",
+  "declarations": [
+   "WeilConjectures.FiniteAdjunctionDiagram.ordinaryCoefficientUnit",
+   "WeilConjectures.FiniteAdjunctionDiagram.coefficientUnit",
+   "WeilConjectures.FiniteAdjunctionDiagram.coefficientUnit_mem",
+   "WeilConjectures.FiniteAdjunctionDiagram.normalizedUnit",
+   "WeilConjectures.FiniteAdjunctionDiagram.dual",
+   "WeilConjectures.FiniteAdjunctionDiagram.dualFormula",
+   "WeilConjectures.FiniteAdjunctionDiagram.Realization.mappingSource",
+   "WeilConjectures.FiniteAdjunctionDiagram.Realization.mappingTarget",
+   "WeilConjectures.FiniteAdjunctionDiagram.finiteMappingSource",
+   "WeilConjectures.FiniteAdjunctionDiagram.finiteMappingTarget",
+   "WeilConjectures.FiniteAdjunctionDiagram.Enriched",
+   "WeilConjectures.FiniteAdjunctionDiagram.DualizingSpec",
+   "WeilConjectures.FiniteAdjunctionDiagram.structure_isOver",
+   "WeilConjectures.FiniteAdjunctionDiagram.structureOver",
+   "WeilConjectures.FiniteAdjunctionDiagram.DualizingOperation",
+   "WeilConjectures.FiniteAdjunctionDiagram.DualizingOperation.omega",
+   "WeilConjectures.FiniteAdjunctionDiagram.DualizingOperation.finiteOmega",
+   "WeilConjectures.FiniteAdjunctionDiagram.structuralTrace",
+   "WeilConjectures.FiniteAdjunctionDiagram.Duality",
+   "WeilConjectures.FiniteAdjunctionDiagram.reducedConstructible",
+   "WeilConjectures.FiniteAdjunctionDiagram.IntegralSupport",
+   "WeilConjectures.FiniteAdjunctionDiagram.finiteAdjunctionDiagramRealization"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteAdjunctionDiagramRealization.lean",
+  "statement": "theorem finiteAdjunctionDiagramRealization : ∃ (SX : CoefficientDerivedSystemCalculus l E X) (SZ : CoefficientDerivedSystemCalculus l E c.Z) (SY : CoefficientDerivedSystemCalculus l E Y) (SS : CoefficientDerivedSystemCalculus l E (Spec (.of D.k))), Nonempty (CoefficientDerivedSystemCoherence l E X SX) ∧ Nonempty (CoefficientDerivedSystemCoherence l E c.Z SZ) ∧ Nonempty (CoefficientDerivedSystemCoherence l E Y SY) ∧ Nonempty (CoefficientDerivedSystemCoherence l E (Spec (.of D.k)) SS) ∧ ∃ (βX : @SymmetricCategory (coefficientSequenceDerived l E X) _ SX.systemClosed.monoidal) (βY : @SymmetricCategory (coefficientSequenceDerived l E Y) _ SY.systemClosed.monoidal) (r : Realization l E D hl f c SX SZ SY) (g : Geometry l E f SX SY) (s : SectionsPush g) (aX : DualizingOperation (D := D) (hl := hl) X SX SS) (aY : DualizingOperation (D := D) (hl := hl) Y SY SS), Nonempty (RingedDerivedTensorCoherence.{u+1, u, u} (coefficientSequenceTopology (Scheme.ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X) SX.systemClosed SX.systemTensorModel βX) ∧ Nonempty (RingedDerivedTensorCoherence.{u+1, u, u} (coefficientSequenceTopology (Scheme.ProEt.topology Y)) (coefficientSequenceCommRingSheaf l E Y) SY.systemClosed SY.systemTensorModel βY) ∧ Nonempty (Enriched r g s βX βY) ∧ Nonempty (Duality r aX aY βY g) ∧ Nonempty (IntegralSupport r)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Ordinary derived strict-system realization; the newly defined realization-data interface imposes finite-Tor constructibility separately at every level, with no uniform bound. The actual enriched system map is the projection/evaluation/counit transpose before finite evaluation or total limit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f44f06ff8",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the H3 RETURN at a7fdec. (1) Dual formula: finiteOmega is now a definition (realization exceptionalEvaluation at the normalized unit plus a unit comparison fixed to the identity on sections), and Duality.finiteFormula equates eval_n(iso) under the canonical fiberHom/pullEvaluation/finiteOmega maps with FiniteExceptional.dualFormulaIso, which is unique by FormulaNormalized. The old (-comp,-iso,-finiteOmegaX) twist fails. compactComposition enters only through the trace, pinned by finiteTrace and pairing. (2) supportEvaluation_canonical ties supportEvaluation to supportIso plus Support.evaluation, built only from adjunction-uniqueness comparisons (proper/open/pull, ordinaryDirect fixed by HEq) and the published DirectEvaluation/OpenEvaluation pinned by their counit/mate equations. exceptionalEvaluation is fixed by counit. The remaining (-1,-1) twist is transport along an automorphism of the whole datum, i.e. gauge, not a free map. The def module has no sorry left. The new proof fields (openTensorInvertible, QuotientRestriction) are true. Statement unchanged, lean.statement verbatim, declarations present. No dropped deps or imports, no live duplicate, edge cases and universes OK. nt_compile --json clean: 20.0 s / 9.8 s at load ~17-40. Advisories: structure_isOver and coefficientUnit_mem are sorry helpers without their own nodes; some decls from non-stmt_dep nodes; second readings by the same worker."
  }
 }
