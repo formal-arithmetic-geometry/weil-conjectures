@@ -7,7 +7,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Basic
-import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoCore
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoCore
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoTransfer
 @[expose] public section
 universe u
@@ -38,5 +38,5 @@ theorem stalk_normalization_boundary_dimension_two {S C : Scheme.{u}}
         ((pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
           (pullback.fst c a) : Scheme.{u}).presheaf.stalk z) := by
   apply stalk_normalization_boundary_dimension_two_transfer hS c U PA s hs hmin hdepth
-  exact stalk_normalization_boundary_dimension_two_target hS c U s hs hmin hdepth
+  exact stalk_normalization_boundary_dimension_two_target c U s hmin hdepth
 end AlgebraicGeometry.Scheme

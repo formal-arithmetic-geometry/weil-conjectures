@@ -102,14 +102,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoCore",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationBoundaryDimensionTwoCore.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoCore",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StalkNormalizationBoundaryDimensionTwoCore.lean",
   "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_boundary_dimension_two_target",
   "branch": "sheaf-dag",
-  "by": "E4",
-  "date": "2026-10-13",
-  "statement": "theorem stalk_normalization_boundary_dimension_two_target {S C : Scheme.{u}}\n    [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens) (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth\n      (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :\n    let a := S.fromSpecStalk s\n    ∀ y : (pullback c a : Scheme.{u}),\n      y ∉ (pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U) →\n      (2 : WithBot ℕ∞) ≤\n        ringKrullDim ((pullback c a).presheaf.stalk y)"
+  "by": "F9",
+  "date": "2026-10-21",
+  "statement": "theorem stalk_normalization_boundary_dimension_two_target {S C : Scheme.{u}}\n    [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens) (s : S)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth\n      (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :\n    let a := S.fromSpecStalk s\n    ∀ y : (pullback c a : Scheme.{u}),\n      y ∉ (pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U) →\n      (2 : WithBot ℕ∞) ≤\n        ringKrullDim ((pullback c a).presheaf.stalk y)",
+  "note": "2026-10-21 (F9): retire the Sheaf twin under coord/retire-items.tsv. The upstream declaration drops only the unused hS and hs hypotheses. Its consumer keeps its signature and omits those two arguments at this call."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -122,13 +123,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-4063d",
-  "group": "J3",
+  "reviewer": "C-b8fb6",
+  "group": "F9",
   "result": "pass",
-  "landing": "20261013T151701-L-924132",
+  "landing": "20261020T221149-L-4151720",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged Lean signature matches the node; proof and dependencies agree; delivered module and both direct importers compile cleanly against the delivery; axioms are only propext, Classical.choice, and Quot.sound."
+  "note": "independent cc review: retire row 69 (Sheaf Core → WeilConjectures twin) with the delivered empty module, the adapted consumer (signature unchanged, call drops unused hS/hs), and the node's lean record (statement verbatim in the upstream file); both modules and the indirect importer compile; consumer axioms standard"
  }
 }
