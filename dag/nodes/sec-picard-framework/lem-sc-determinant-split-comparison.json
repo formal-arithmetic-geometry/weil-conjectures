@@ -15,33 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Construct the unique natural linear family d₀ on U and retain both its wedge formula and its restriction compatibility.",
+   "text": "Apply the proved upstream determinant_split_linear_maps_exists to construct its unique natural family on official exteriorPower sheaves. Conjugate each section map by the tensor of exteriorSheafPowerIso.hom on the sources and exteriorSheafPowerIso.inv on the target. The inverse wedge formula and the isomorphism identity give the forward wedge formula. tensorHom_app_tmulSection then transfers the arbitrary-lift formula, and naturality of the comparison morphisms transfers the restriction equation. Only existence of this transported family is needed here.",
    "uses": [
-    "lem-sc-split-determinant-linear-maps"
+    "lem-sc-split-determinant-linear-maps",
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a common chart V containing x on which each given linear map is bijective. Convert these same maps to equivalences using LinearEquiv.ofBijective; their forward functions and wedge formulas are unchanged.",
+   "text": "Choose a common chart V containing x on which each transported linear map is bijective. Combine its existing LinearMap structure with Equiv.ofBijective to construct a linear equivalence. This makes the inverse concrete from bijectivity and leaves the forward function unchanged.",
    "uses": [
     "lem-sc-split-determinant-linear-bijective"
    ],
    "elementary": false
   },
   {
-   "text": "The forward map of LinearEquiv.ofBijective is definitionally the supplied linear map. Apply the retained naturality equation hn directly on W and Z; proof irrelevance identifies the composite inclusion proofs.",
+   "text": "The forward map of the constructed linear equivalence is definitionally the transported linear map. Apply its retained naturality equation directly on W and Z; proof irrelevance identifies the composite inclusion proofs.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-split-determinant-linear-maps",
-  "lem-sc-split-determinant-linear-bijective"
+  "lem-sc-split-determinant-linear-bijective",
+  "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "C8",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph; retain naturality while converting the original linear maps into equivalences; inline the definitional naturality step (K3 second reading)"
+  "place": "Proof of (*), determinant paragraph; retain naturality while converting the original linear maps into equivalences; inline the definitional naturality step (K3 second reading)",
+  "note": "Retirement of the duplicate linear-map module: use the fully proved upstream split determinant construction, transport through the existing canonical exterior-sheaf comparison, and preserve the consumer signature verbatim."
  },
  "mathlib_searches": [
   {
@@ -122,13 +125,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-ead30",
-  "group": "K3",
+  "reviewer": "C-389b3",
+  "group": "C8",
   "result": "pass",
-  "landing": "20261014T092935-L-608889",
+  "landing": "20261020T211648-L-3485841",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean with node statements and proof dependencies; verified recorded retirement, unchanged canonical signature, minimal forced adaptation, original caller failure, clean delivery and importer compilation, standard axioms only, and repairs to both obsolete attachments."
+  "note": "independent cc review: node lem-sc-split-determinant-linear-maps lean.statement verbatim vs WC DeterminantSplitLinearMaps source; retire-items row 530 (after-modules withdrawn); adapted DeterminantSplitComparison signature unchanged, compiles 15.6 s (orig 12.9 s); importer DeterminantWedgeMorphismSplit compiles 76.3 s (published 72.3 s, 60 s timeout pre-existing under load); axioms propext/choice/Quot.sound"
  }
 }

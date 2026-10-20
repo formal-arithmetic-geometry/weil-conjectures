@@ -22,10 +22,9 @@
    "elementary": false
   },
   {
-   "text": "The splitting identity (e.hom followed by fst) followed by f plus g followed by (inr followed by e.inv) equals the identity. Evaluate this identity on each subopen. It proves that t is a right inverse to g and that every section killed by g is the image under f of its first coordinate. Thus t(b)-l(b) is such an image. Replace lifted entries one at a time, using induction on the finite set of replaced indices and multilinearity. Each error term vanishes by the rank wedge-zero theorem; the local exteriorSheaf statement is obtained from the upstream theorem through the proved exteriorSheafPowerIso compatibility. This establishes the given arbitrary-lift formula.",
+   "text": "The splitting identity (e.hom followed by fst) followed by f plus g followed by (inr followed by e.inv) equals the identity. Evaluate this identity on each subopen. It proves that t is a right inverse to g and that every section killed by g is the image under f of its first coordinate. Thus t(b)-l(b) is such an image. Replace lifted entries one at a time, using induction on the finite set of replaced indices and multilinearity. Each error term vanishes by the upstream rank wedge-zero theorem. This establishes the given arbitrary-lift formula.",
    "uses": [
-    "new-j1-exterior-sheaf-rank-wedge-zero",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "new-j1-exterior-sheaf-rank-wedge-zero"
    ],
    "elementary": false
   },
@@ -40,14 +39,13 @@
  "proof_deps": [
   "def-sc-sheaf-exterior-power",
   "lem-sc-exterior-tensor-local-pairing",
-  "new-j1-exterior-sheaf-rank-wedge-zero",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "new-j1-exterior-sheaf-rank-wedge-zero"
  ],
  "proof_origin": {
-  "by": "worker H1",
+  "by": "C8",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph, split exterior comparison and independence of quotient lifts",
-  "note": "Retirement adaptation: the rank-vanishing call now uses the upstream theorem through a private exteriorSheafPowerIso helper; all public signatures and the split route are unchanged."
+  "note": "Retirement under coord/retire-items.tsv: retain the complete upstream proof and point the node to its official exteriorPower statement. The old-API comparison is used only by the adapted consumer, not by this upstream proof."
  },
  "mathlib_searches": [
   {
@@ -103,13 +101,14 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitLinearMaps.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/DeterminantSplitLinearMaps.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_linear_maps_exists",
-  "statement": "theorem determinant_split_linear_maps_exists {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∃! (d : ∀ (W : X.Opens), W ≤ U →\n      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n        →ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),\n      (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W hW (b j)) (Fin.cast hr i))) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,\n        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW)\n            ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n              (homOfLE hZW).op y))",
+  "statement": "theorem determinant_split_linear_maps_exists {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∃! (d : ∀ (W : X.Opens), W ≤ U →\n      (exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.obj (op W)\n        →ₗ[X.presheaf.obj (op W)] (exteriorPower S.X₂ r₂).val.obj (op W)),\n      (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a)\n          (wedge (M := S.X₃) (r := r₃) (U := W) b)) =\n        wedge (M := S.X₂) (r := r₂) (U := W)\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W hW (b j)) (Fin.cast hr i))) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,\n        (exteriorPower S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW)\n            ((exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.map\n              (homOfLE hZW).op y))",
   "branch": "sheaf-dag",
-  "by": "V1",
-  "date": "2026-10-13"
+  "by": "C8",
+  "date": "2026-10-21",
+  "note": "Retirement: the complete upstream theorem supplies the same split determinant family using exteriorPower and wedge. The old-API consumer transports it through exteriorSheafPowerIso; no upstream file is changed."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -124,12 +123,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-547d3",
-  "group": "V2",
+  "reviewer": "C-389b3",
+  "group": "C8",
   "result": "pass",
-  "landing": "20261020T163703-L-3786630",
+  "landing": "20261020T211648-L-3485841",
   "kind": "interface",
-  "note": "independent cc review: retire-items row 277 + return C-a64b1 points vs head 547d3af7: stub item, node lean record verbatim to the proved WC twin, 3 unclaimed consumers (import swap + private exteriorSheafPowerIso compat helper / dead import drop); --all compile + 3 second-level importers clean, axioms clean"
+  "note": "independent cc review: node lem-sc-split-determinant-linear-maps lean.statement verbatim vs WC DeterminantSplitLinearMaps source; retire-items row 530 (after-modules withdrawn); adapted DeterminantSplitComparison signature unchanged, compiles 15.6 s (orig 12.9 s); importer DeterminantWedgeMorphismSplit compiles 76.3 s (published 72.3 s, 60 s timeout pre-existing under load); axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {

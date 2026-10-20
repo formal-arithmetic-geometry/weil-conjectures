@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
-import WeilConjectures.LinearAlgebra.ExteriorTopDirectSum
-import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps
+import WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearBijective
 
 /-!
@@ -28,6 +28,15 @@ universe v
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorSheafPowerIso_hom_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
+    (W : X.Opens) (a : Fin n → M.val.obj (op W)) :
+    (exteriorSheafPowerIso M n).hom.app W (exteriorSheafSection M n W a) =
+      wedge (M := M) (r := n) (U := W) a := by
+  rw [← exteriorSheafPowerIso_inv_wedge M n W a]
+  exact congrArg (fun k ↦ k.app W (wedge (M := M) (r := n) (U := W) a))
+    (exteriorSheafPowerIso M n).inv_hom_id
 
 /-- Construct the comparison independently of any proposed determinant morphism.
 
@@ -87,12 +96,57 @@ theorem determinant_split_comparison_exists {X : Scheme.{v}}
             ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
               (homOfLE hZW).op y)) := by
   classical
-  obtain ⟨d₀, ⟨hd₀, hn⟩, _⟩ :=
+  obtain ⟨d', ⟨hd', hn'⟩, _⟩ :=
     determinant_split_linear_maps_exists S r₁ r₂ r₃ hr U e hf hg l hl
+  let i := (exteriorSheafPowerIso S.X₁ r₁).hom ⊗ₘ
+    (exteriorSheafPowerIso S.X₃ r₃).hom
+  let j := (exteriorSheafPowerIso S.X₂ r₂).inv
+  let d₀ (W : X.Opens) (hW : W ≤ U) :=
+    (j.val.app (op W)).hom.comp ((d' W hW).comp (i.val.app (op W)).hom)
+  have hd₀ : ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))
+      (b : Fin r₃ → S.X₃.val.obj (op W)),
+      d₀ W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)
+        (exteriorSheafSection S.X₃ r₃ W b)) =
+      exteriorSheafSection S.X₂ r₂ W
+        (fun k ↦ Fin.append (fun k ↦ S.f.val.app (op W) (a k))
+          (fun k ↦ l W hW (b k)) (Fin.cast hr k)) := by
+    intro W hW a b
+    have hi := tensorHom_app_tmulSection (exteriorSheafPowerIso S.X₁ r₁).hom
+      (exteriorSheafPowerIso S.X₃ r₃).hom (exteriorSheafSection S.X₁ r₁ W a)
+      (exteriorSheafSection S.X₃ r₃ W b)
+    change i.val.app (op W)
+      (tmulSection (M := exteriorSheaf S.X₁ r₁) (N := exteriorSheaf S.X₃ r₃) (U := W)
+        (exteriorSheafSection S.X₁ r₁ W a) (exteriorSheafSection S.X₃ r₃ W b)) =
+      tmulSection (M := exteriorPower S.X₁ r₁) (N := exteriorPower S.X₃ r₃) (U := W)
+        ((exteriorSheafPowerIso S.X₁ r₁).hom.val.app (op W)
+          (exteriorSheafSection S.X₁ r₁ W a))
+        ((exteriorSheafPowerIso S.X₃ r₃).hom.val.app (op W)
+          (exteriorSheafSection S.X₃ r₃ W b)) at hi
+    have hi' := hi.trans (congrArg₂ (fun x y ↦
+      tmulSection (M := exteriorPower S.X₁ r₁) (N := exteriorPower S.X₃ r₃) (U := W) x y)
+      (exteriorSheafPowerIso_hom_wedge S.X₁ r₁ W a)
+      (exteriorSheafPowerIso_hom_wedge S.X₃ r₃ W b))
+    exact (congrArg (fun x ↦ j.val.app (op W) (d' W hW x)) hi').trans
+      ((congrArg (fun x ↦ j.val.app (op W) x) (hd' W hW a b)).trans
+        (exteriorSheafPowerIso_inv_wedge S.X₂ r₂ W _))
+  have hn : ∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,
+      (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d₀ W hW y) =
+        d₀ Z (hZW.trans hW)
+          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
+            (homOfLE hZW).op y) := by
+    intro W Z hW hZW y
+    exact (PresheafOfModules.naturality_apply j.val (homOfLE hZW).op _).symm.trans
+      (congrArg (fun x ↦ j.val.app (op Z) x)
+        ((hn' W Z hW hZW _).trans
+          (congrArg (d' Z (hZW.trans hW))
+            (PresheafOfModules.naturality_apply i.val (homOfLE hZW).op y).symm)))
   intro x hx
   obtain ⟨V, hVU, hxV, hbij⟩ :=
     determinant_split_linear_maps_locally_bijective S r₁ r₂ r₃ hr U e hf hg l hl d₀ hd₀ x hx
-  let d := fun W hW ↦ LinearEquiv.ofBijective (d₀ W (hW.trans hVU)) (hbij W hW)
+  let d (W : X.Opens) (hW : W ≤ V) :
+      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)
+        ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W) :=
+    { d₀ W (hW.trans hVU), Equiv.ofBijective (d₀ W (hW.trans hVU)) (hbij W hW) with }
   refine ⟨V, hVU, hxV, d, ?_, ?_⟩
   · intro W hW a b
     exact hd₀ W (hW.trans hVU) a b
