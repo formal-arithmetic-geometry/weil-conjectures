@@ -1,0 +1,131 @@
+{
+ "id": "lem-zl-bertini-universal-base-change",
+ "kind": "statement",
+ "title": "Base change of the universal linear-system zero scheme",
+ "statement": "Let k be a field, f:Y -> Spec k a scheme, L an invertible module and s_i finitely many global sections. Put P=A^I_k times_k Y and let J be the universal zero-scheme ideal of [def-zl-bertini-universal-family]. For any scheme X and g:X -> P, the comap J along g is the zero-scheme ideal of sum_i (g followed by pr_1)^*(x_i) times the canonical tensor-pullback unit of s_i along g followed by pr_2. All pullbacks and zero schemes use [def-pc-base-change] and [def-pc-zero-scheme]; the invertible module uses [def-sc-invertible-module]. Conventions: schemes and their residue fields [def-weil-pbc-scheme-conventions].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Situation 0G47, situation-family-divisors, universal divisor and its fibres"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-invertible-module",
+  "def-pc-zero-scheme",
+  "def-zl-bertini-universal-family",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Identify the canonical tensor pullback with the existing module pullback by uniqueness of left adjoints. Its unit maps to the existing pullback section. A module isomorphism carries homOfGlobalSection to the corresponding section morphism, so its zero scheme does not change.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The zero scheme commutes with module pullback. Transport through the comparison just constructed to express this using the canonical tensorSectionsUnit. Composition of the adjunctions gives the composition identity for these units.",
+   "uses": [
+    "lem-pc-zero-scheme-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The unit is additive and semilinear. Apply it to the universal sum, then use the composite-unit identity to identify the resulting coefficients and pulled-back sections with the displayed sum.",
+   "uses": [
+    "def-zl-bertini-universal-family"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-zl-bertini-universal-family",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-zero-scheme-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Situation 0G47, situation-family-divisors, universal divisor and its fibres"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bertini theorem geometric irreducibility general member linear system",
+   "results": "Eight hits: generic points, integral and irreducible schemes, rational-map dense domain, dominance. No universal-incidence or affine Bertini field presentation theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\"",
+   "results": "Twelve hits: the class, base change, residue-field fibre criterion and basic composition lemmas. These give the geometric transport used in the proof, not the incidence chart or algebraic Bertini computation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bertini universal incidence family base change generic fibre function field geometric irreducibility",
+   "results": "Eight hits: Scheme.functionField, germToFunctionField, PartialMap.fromFunctionField_restrict, and general stability under base change. No Bertini family calculation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "bertini|universal.*incidence in Mathlib/AlgebraicGeometry; bertiniUniversal.*comap|bertini.*generic.*fibre|bertiniAffineFunctionField in both project roots and DAG; blueprint_refs.py search bertini",
+   "results": "No Mathlib matches. The project has a private field-specialization comparison in BertiniSmoothMember and the proved algebraic inputs BertiniIndependentFunctions and BertiniFieldExtension. No public arbitrary-scheme base-change formula or generic incidence chart presentation. The one blueprint Bertini node is lem-zl-bertini-finite-cover-curve, an ancestor, not a duplicate.",
+   "date": "2026-10-21",
+   "verdict": "reuse existing inputs; no duplicate of these support results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniIrreducibleMember",
+  "date": "2026-10-21",
+  "group": "C8"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Situation 0G47: identification of universal fibres with section zero schemes",
+   "via": [
+    "lem-zl-bertini-irreducible-member"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniUniversalBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniUniversalBaseChange.lean",
+  "declaration": "AlgebraicGeometry.bertiniUniversalIdeal_comap",
+  "statement": "theorem bertiniUniversalIdeal_comap\n    {k : Type u} [Field k] {Y X : Scheme.{u}}\n    (f : Y ⟶ Spec (CommRingCat.of k)) (L : Y.Modules) [L.IsInvertible]\n    {I : Type u} [Fintype I] (s : I → Γ(L, ⊤))\n    (g : X ⟶ pullback\n      (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k))) f) :\n    (bertiniUniversalIdeal f L s).comap g =\n      (homOfGlobalSection _ (∑ i,\n        (g ≫ pullback.fst\n          (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k))) f).appTop\n          ((Scheme.ΓSpecIso (CommRingCat.of (MvPolynomial I k))).inv (MvPolynomial.X i)) •\n        tensorSectionsUnit (g ≫ pullback.snd\n          (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k))) f)\n          L (s i))).zeroLocus",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

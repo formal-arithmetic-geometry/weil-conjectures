@@ -1,0 +1,211 @@
+{
+ "id": "lem-zl-bertini-generic-fibre-chart",
+ "kind": "statement",
+ "title": "Affine function-field presentation of the Bertini incidence scheme",
+ "statement": "Let $k$ be a field, $Y$ a scheme of finite type over $k$ which is geometrically irreducible over $k$, $\\mathcal L$ an invertible $\\mathcal O_Y$-module, $V$ a finite-dimensional $k$-vector space and $\\psi:V\\to\\Gamma(Y,\\mathcal L)$ a $k$-linear map. Assume (i) there are $v_1,v_2,v_3\\in V$ and an irreducible component $W$ of $H_{v_2}\\cap H_{v_3}$ with $W\\not\\subseteq H_{v_1}$ and $\\operatorname{codim}(W,Y)=2$; (ii) every irreducible component $B$ of $\\bigcap_{v\\in V}H_v$ has $\\operatorname{codim}(B,Y)\\ge2$. Fix any basis b of V and let q be its universal incidence projection of [def-zl-bertini-universal-family]. There exist a finite type k-domain A, n>=2 and g_1,...,g_n in A such that V(g_1,g_2) has a component W with dim W+2=dim A, Spec Frac A is geometrically irreducible over k, the universal incidence scheme H is irreducible, q is dominant, and the spectrum of its generic residue-field map Spec kappa(genericPoint H) -> Spec kappa(q(genericPoint H)) is isomorphic, as an arrow of schemes, to Spec Omega -> Spec F, where Omega=Frac(Frac(A)[x_1,...,x_n]) and F=k(x_1,...,x_n,sum_i g_i x_i), as in [lem-zl-bertini-field-extension]. The statement asserts an actual arrow isomorphism, not geometric irreducibility of Omega/F. Dimensions, fields and fibres are as in [def-weil-pbc-krull-dimension-ring], [def-pc-field-extension] and [def-pc-scheme-fibre]. Conventions: schemes and their residue fields [def-weil-pbc-scheme-conventions], finite type and quasi-compact morphisms [def-weil-scheme-morphism-properties], invertible modules [def-sc-invertible-module], section zero schemes [def-pc-zero-scheme], geometric irreducibility [def-pc-geometrically-irreducible].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, lemma-bertini-irreducible, proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sc-invertible-module",
+  "def-pc-zero-scheme",
+  "def-pc-geometrically-irreducible",
+  "def-zl-bertini-universal-family",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-pc-field-extension",
+  "def-pc-scheme-fibre",
+  "lem-zl-bertini-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "First replace $Y$ by $Y_{\\mathrm{red}}$ and restrict $\\mathcal L$ and its sections. Indeed $Y$ is quasi-compact (finite type over a field), and [pqf-lem-locnoeth-lft] makes it locally Noetherian, since a field has only two ideals. By [lem-sc-reduction-nilradical-nilpotent], its nilradical ideal sheaf $N$ has a positive power zero. After any field extension, the image of $N$ still has that power zero; quotienting further by any section equation preserves this. Prime ideals all contain a nilpotent ideal, so the thickenings $Y_{\\mathrm{red},k'}\\to Y_{k'}$ and their section zero schemes have identical underlying spaces. The same holds for the intersections in (i) and (ii); their components and codimensions agree. Thus all hypotheses and the desired geometric irreducibility are unchanged. The reduced, irreducible scheme is integral [def-pc-integral-scheme]. On every affine open its ring is Noetherian by [pqf-lem-affine-open-locnoeth]. The corresponding nilpotent closed immersion on universal incidence schemes also identifies their underlying spaces and all residue fields, compatibly with the projection maps. Thus irreducibility, dominance and the generic residue-field arrow transfer back to the original possibly nonreduced Y.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-sc-reduction-nilradical-nilpotent",
+    "def-pc-integral-scheme",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4F, first proof paragraph: reduction to an integral scheme"
+   }
+  },
+  {
+   "text": "The vectors $v_1,v_2,v_3$ in (i) are linearly independent. A relation $a_1v_1+a_2v_2+a_3v_3=0$, evaluated in the fibre of $\\mathcal L$ at the generic point of $W$, forces $a_1=0$: the first section is nonzero there, while the other two vanish there. If $v_2,v_3$ were dependent, their zero-scheme intersection would be either all of $Y$ or the zero scheme of one section. The first case has no component of codimension two. In the second, on an affine trivializing neighbourhood of the generic point of $W$, its prime is minimal over one local equation. The image prime in the quotient is minimal, hence height zero; [lem-weil-pbc-noetherian-height-quotient-bound] with $t=1$ gives height at most one. Heights compute the codimensions here by the prime/irreducible-closed-subset correspondence, contradicting (i). Extend these vectors to a basis $v_1,\\ldots,v_r$ of $V$, with $r\\geq3$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-height-quotient-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4F, first proof paragraph: the omitted linear-independence detail"
+   }
+  },
+  {
+   "text": "On an affine chart with a free line-bundle generator, apply lem-zl-bertini-affine-incidence-chart. It gives the actual polynomial quotient presentation of the universal incidence scheme, together with its map to coefficient affine space. Restriction to a trivializing affine open is the base change of the universal family. The coefficient formula and the canonical affine ambient pullback are proved in that chart theorem. Finiteness of a trivializing affine cover follows from quasi-compactness; its quotient charts are finite type over coefficient affine space.",
+   "uses": [
+    "lem-zl-bertini-affine-incidence-chart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4F, first two proof paragraphs; Varieties Situation 0G47"
+   }
+  },
+  {
+   "text": "On each such nonempty chart $U$, $f_1\\ne0$. To see this, $\\psi(v_1)$ is nonzero at the generic point of $W$ by (i), so it is not the zero section. On an integral scheme a section of a line bundle which vanishes on a nonempty open vanishes everywhere: in intersecting trivializing charts this is the injectivity of a domain into its fraction field, and multiplying by invertible transition functions preserves zero. Hypothesis (ii) says that each minimal prime of $(f_1,\\ldots,f_r)$ has height at least two; components of the base locus meeting $U$ are precisely these primes, and their local rings and chains of generalizations are unchanged on restriction to $U$. Apply [lem-zl-bertini-affine-incidence-irreducible] to obtain irreducibility of each $H_U$. For two nonempty base charts, their intersection is nonempty because the base is irreducible. The proved zero-coefficient section Y -> H supplies a point of the intersection of the incidence charts over any point of this base intersection. Thus the irreducible open incidence charts pairwise intersect and cover H, proving H irreducible. No localization at a unit coefficient is needed for this gluing argument.",
+   "uses": [
+    "lem-zl-bertini-affine-incidence-irreducible",
+    "lem-zl-bertini-universal-zero-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4F, middle proof paragraph: irreducibility of the universal incidence scheme"
+   }
+  },
+  {
+   "text": "Choose a nonempty affine open $U=\\operatorname{Spec}A\\subset Y\\setminus H_{v_1}$ meeting $W$. Use $\\psi(v_1)$ itself to trivialize $\\mathcal L$ there; write the other sections as $g_2,\\ldots,g_r$, so the universal equation is $x_1+\\sum_{i=2}^r g_ix_i=0$. The component $W\\cap U$ of $V(g_2,g_3)$ corresponds to a prime $\\mathfrak p$ of height two. By [lem-weil-pbc-finite-type-domain-dimension-local-ring], every maximal prime chain in $A$ has the same finite length $d=\\dim A$. Extend a saturated length-two chain from $(0)$ to $\\mathfrak p$ by any maximal chain above it; the concatenation is maximal in $A$, so every such upper chain has length $d-2$. Prime correspondence for $A/\\mathfrak p$ gives $\\dim(W\\cap U)=d-2$. Hence [lem-zl-bertini-independent-functions] applies to $g_2,\\ldots,g_r$ and supplies $c_2,\\ldots,c_r$ for which $x_2,\\ldots,x_r,\\xi=\\sum_{i=2}^r g_ix_i,\\delta=\\sum_{i=2}^r c_ig_i$ are algebraically independent over $k$ in $\\Omega=K(x_2,\\ldots,x_r)$, where $K=\\operatorname{Frac}A$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-zl-bertini-independent-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4F, last proof paragraph; Tag 0G4E; Tag 00OS chain-length formula"
+   }
+  },
+  {
+   "text": "Apply the generic-residue-field criterion to the geometrically irreducible Y and identify its generic residue field with Frac A on the chosen integral affine chart. This proves the asserted geometric irreducibility of Frac A over k.",
+   "uses": [
+    "lem-zl-generic-point-geometric-irreducibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the independent-functions theorem to obtain independence of the variables and the universal linear combination. Thus the parameter map into A[x_2,...,x_r] is injective and q is dominant. Apply lem-zl-bertini-incidence-elimination with its substitution formula to eliminate the first variable. The incidence generic residue field is Frac(Frac(A)[x_2,...,x_r]); the parameter residue field maps isomorphically onto k(x_2,...,x_r,sum g_i x_i), with the sign absorbed by a variable automorphism. These identify the required residue-field arrow. Transport across the invertible linear coordinate change from the adapted basis to b and across the ULift renaming. No geometric irreducibility of the incidence field or generic-fibre assertion is used.",
+   "uses": [
+    "lem-zl-bertini-independent-functions",
+    "lem-zl-bertini-incidence-elimination"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "lem-sc-reduction-nilradical-nilpotent",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-zl-bertini-affine-incidence-chart",
+  "lem-zl-bertini-affine-incidence-irreducible",
+  "lem-zl-bertini-incidence-elimination",
+  "lem-zl-bertini-independent-functions",
+  "lem-zl-bertini-universal-zero-section",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "pqf-lem-affine-open-locnoeth",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, lemma-bertini-irreducible, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bertini theorem geometric irreducibility general member linear system",
+   "results": "Eight hits: generic points, integral and irreducible schemes, rational-map dense domain, dominance. No universal-incidence or affine Bertini field presentation theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\"",
+   "results": "Twelve hits: the class, base change, residue-field fibre criterion and basic composition lemmas. These give the geometric transport used in the proof, not the incidence chart or algebraic Bertini computation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bertini universal incidence family base change generic fibre function field geometric irreducibility",
+   "results": "Eight hits: Scheme.functionField, germToFunctionField, PartialMap.fromFunctionField_restrict, and general stability under base change. No Bertini family calculation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "bertini|universal.*incidence in Mathlib/AlgebraicGeometry; bertiniUniversal.*comap|bertini.*generic.*fibre|bertiniAffineFunctionField in both project roots and DAG; blueprint_refs.py search bertini",
+   "results": "No Mathlib matches. The project has a private field-specialization comparison in BertiniSmoothMember and the proved algebraic inputs BertiniIndependentFunctions and BertiniFieldExtension. No public arbitrary-scheme base-change formula or generic incidence chart presentation. The one blueprint Bertini node is lem-zl-bertini-finite-cover-curve, an ancestor, not a duplicate.",
+   "date": "2026-10-21",
+   "verdict": "reuse existing inputs; no duplicate of these support results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniIrreducibleMember",
+  "date": "2026-10-21",
+  "group": "C8"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Tag 0G4F, middle and final paragraphs: the irreducible incidence family and its generic residue-field presentation",
+   "via": [
+    "lem-zl-bertini-irreducible-member"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniGenericFibreChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniGenericFibreChart.lean",
+  "declaration": "AlgebraicGeometry.exists_bertiniIncidenceChart",
+  "statement": "theorem exists_bertiniIncidenceChart\n    (k : Type u) [Field k] (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [GeometricallyIrreducible (Y ↘ Spec (.of k))]\n    (L : Y.Modules) [L.IsInvertible]\n    (V : Type v) [AddCommGroup V] [Module k V] [FiniteDimensional k V] :\n    letI : Module k Γ(L, ⊤) :=\n      Module.compHom Γ(L, ⊤) (Scheme.globalSectionsRingHom k (X := Y))\n    ∀ ψ : V →ₗ[k] Γ(L, ⊤),\n      (∃ (v₁ v₂ v₃ : V) (W : TopologicalSpace.IrreducibleCloseds Y),\n        Maximal (fun Z : TopologicalSpace.IrreducibleCloseds Y ↦\n          (Z : Set Y) ⊆ (Scheme.Modules.homOfGlobalSection L (ψ v₂)).zeroLocus.support ∩\n            (Scheme.Modules.homOfGlobalSection L (ψ v₃)).zeroLocus.support) W ∧\n        ¬ (W : Set Y) ⊆ (Scheme.Modules.homOfGlobalSection L (ψ v₁)).zeroLocus.support ∧\n        Order.coheight W = 2) →\n      (∀ B : TopologicalSpace.IrreducibleCloseds Y,\n        Maximal (fun Z : TopologicalSpace.IrreducibleCloseds Y ↦\n          (Z : Set Y) ⊆ ⋂ w : V,\n            ((Scheme.Modules.homOfGlobalSection L (ψ w)).zeroLocus.support : Set Y)) B →\n        2 ≤ Order.coheight B) →\n      ∀ (r : ℕ) (b : Module.Basis (Fin r) k V),\n        let H := (bertiniUniversalIdeal (Y ↘ Spec (.of k)) L\n          (fun i : ULift.{u} (Fin r) ↦ ψ (b i.down))).subscheme\n        let q := bertiniUniversalProjection (Y ↘ Spec (.of k)) L\n          (fun i : ULift.{u} (Fin r) ↦ ψ (b i.down))\n        ∃ (A : CommRingCat.{u}) (a : Algebra k A),\n          letI := a\n          ∃ (hft : Algebra.FiniteType k A) (hdom : IsDomain A),\n            letI := hft\n            letI := hdom\n            ∃ (n : ℕ) (hn : 2 ≤ n) (g : Fin n → A),\n              (∃ W : Set (PrimeSpectrum.zeroLocus\n                  ({g ⟨0, Nat.zero_lt_of_lt hn⟩, g ⟨1, hn⟩} : Set A)),\n                W ∈ irreducibleComponents (PrimeSpectrum.zeroLocus\n                  ({g ⟨0, Nat.zero_lt_of_lt hn⟩, g ⟨1, hn⟩} : Set A)) ∧\n                topologicalKrullDim W + 2 = ringKrullDim A) ∧\n              GeometricallyIrreducible\n                (Spec.map (CommRingCat.ofHom (algebraMap k (FractionRing A)))) ∧\n              ∃ hI : IrreducibleSpace H,\n                letI := hI\n                IsDominant q ∧ Nonempty (Arrow.mk\n                  (Spec.map (q.residueFieldMap (genericPoint H))) ≅\n                  Arrow.mk (Spec.map (CommRingCat.ofHom\n                    (algebraMap\n                      (FieldTheory.bertiniBaseField k (FractionRing A) n\n                        (fun i ↦ algebraMap A (FractionRing A) (g i)))\n                      (FieldTheory.bertiniOmega (FractionRing A) n)))))",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-sc-reduction-nilradical-nilpotent",
+    "why": "The same generic Noetherian or finite-type dimension input already approved on the parent; its use is retained in the affine presentation, with no route change."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "why": "The same generic Noetherian or finite-type dimension input already approved on the parent; its use is retained in the affine presentation, with no route change."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

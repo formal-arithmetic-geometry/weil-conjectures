@@ -1,0 +1,128 @@
+{
+ "id": "lem-zl-bertini-affine-ambient",
+ "kind": "statement",
+ "title": "Affine space commutes with change of coefficient ring",
+ "statement": "For any commutative rings k and A with an algebra k -> A and any variable type I, the square of spectra of A[I], k[I], A and k induced by coefficient change and constant inclusion is cartesian. The two maps out of Spec A[I] are exactly Spec(map(k -> A)) and Spec(C:A -> A[I]). Polynomial rings and pullbacks use [def-weil-pbc-mv-polynomial-ring] and [def-pc-base-change].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, lemma-bertini-irreducible, proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The tensor product A tensor_k k[I] is the pushout of A and k[I] over k. Its canonical polynomial algebra equivalence with A[I] sends a tensor 1 to C(a), and 1 tensor p to coefficient change of p. Transport the pushout square through this equivalence and apply Spec to obtain the stated pullback square.",
+   "uses": [
+    "def-pc-base-change",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, lemma-bertini-irreducible, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bertini theorem geometric irreducibility general member linear system",
+   "results": "Eight hits: generic points, integral and irreducible schemes, rational-map dense domain, dominance. No universal-incidence or affine Bertini field presentation theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\"",
+   "results": "Twelve hits: the class, base change, residue-field fibre criterion and basic composition lemmas. These give the geometric transport used in the proof, not the incidence chart or algebraic Bertini computation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bertini universal incidence family base change generic fibre function field geometric irreducibility",
+   "results": "Eight hits: Scheme.functionField, germToFunctionField, PartialMap.fromFunctionField_restrict, and general stability under base change. No Bertini family calculation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "bertini|universal.*incidence in Mathlib/AlgebraicGeometry; bertiniUniversal.*comap|bertini.*generic.*fibre|bertiniAffineFunctionField in both project roots and DAG; blueprint_refs.py search bertini",
+   "results": "No Mathlib matches. The project has a private field-specialization comparison in BertiniSmoothMember and the proved algebraic inputs BertiniIndependentFunctions and BertiniFieldExtension. No public arbitrary-scheme base-change formula or generic incidence chart presentation. The one blueprint Bertini node is lem-zl-bertini-finite-cover-curve, an ancestor, not a duplicate.",
+   "date": "2026-10-21",
+   "verdict": "reuse existing inputs; no duplicate of these support results"
+  },
+  {
+   "tool": "grep",
+   "query": "residueFieldMap.*fiber|fiber.*residueFieldMap and isFreeGenerator.*zeroLocus in Mathlib and both project roots",
+   "results": "Reused fibreι preimmersion, residue-field naturality, the adjunction comparison, pullback_unit_app_top and Hom.ideal_zeroLocus. Private bijectivity proofs in ProEtaleFunctionsQuotientSections and SmoothClosedPointFiniteFlatLift supply the elementary residue-map argument. No exact public fibre arrow isomorphism or tensor-unit coefficient ideal formula found.",
+   "date": "2026-10-21",
+   "verdict": "proved from existing scheme and module APIs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial ring after extension of scalars is the tensor product; its spectrum is the pullback of affine space",
+   "results": "Eight hits including AffineSpace.map_Spec_map, AffineSpace.map_SpecMap, pullbackSpecIso and its projection identities. Reused algebraTensorAlgEquiv and the tensor-product pushout to retain the specified coefficient maps. No universal incidence quotient presentation found.",
+   "date": "2026-10-21",
+   "verdict": "reuse the tensor-product and affine pullback APIs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniIrreducibleMember",
+  "date": "2026-10-21",
+  "group": "C8"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Tag 0G4F, affine incidence charts: Affine space commutes with change of coefficient ring",
+   "via": [
+    "lem-zl-bertini-irreducible-member"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniAffineAmbient",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniAffineAmbient.lean",
+  "declaration": "AlgebraicGeometry.isPullback_bertiniAffineAmbient",
+  "statement": "theorem isPullback_bertiniAffineAmbient\n    (k A : Type u) [CommRing k] [CommRing A] [Algebra k A] (I : Type u) :\n    IsPullback\n      (Spec.map (CommRingCat.ofHom (MvPolynomial.map\n        (σ := I) (algebraMap k A))))\n      (Spec.map (CommRingCat.ofHom (MvPolynomial.C : A →+* MvPolynomial I A)))\n      (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k)))\n      (Spec.map (CommRingCat.ofHom (algebraMap k A)))",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

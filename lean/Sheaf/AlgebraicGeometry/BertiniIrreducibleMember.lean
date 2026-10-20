@@ -16,15 +16,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 
+import Sheaf.AlgebraicGeometry.BertiniUniversalBaseChange
+import Sheaf.AlgebraicGeometry.BertiniUniversalGenericFibre
 import WeilConjectures.AlgebraicGeometry.GenericGeometricIrreducibilityShrink
-import WeilConjectures.AlgebraicGeometry.Curve.ReductionNilradicalNilpotence
-import WeilConjectures.RingTheory.FiniteTypeDomainDimensionLocalRing
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.BertiniIndependentFunctions
-import Sheaf.AlgebraicGeometry.GenericPointGeometricIrreducibility
-import Sheaf.AlgebraicGeometry.LinearIncidenceIrreducible
-import Sheaf.FieldTheory.BertiniFieldExtension
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Geometric irreducibility of a general member of a linear system
@@ -48,6 +43,9 @@ open scoped AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
+
+attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
+
 /-- The ideal of the member with coordinates `a` over `K`: pull back the sections `s i`
 along `Y_K → Y`, multiply by the functions from `a i`, and take the zero scheme of their sum.
 The adjunction chosen here has the prescribed sectionwise unit `m ↦ 1 ⊗ m`.
@@ -67,6 +65,153 @@ noncomputable def linearSystemMemberIdeal
           (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction
           (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))))).unit.app L).val.app
             (op ⊤) (s i))))).zeroLocus
+
+attribute [local irreducible] linearSystemMemberIdeal bertiniUniversalIdeal
+
+
+private theorem coefficientPoint_comp {k K : Type u} [Field k] [Field K] [Algebra k K]
+    {I : Type u} (a : I → K) :
+    (Spec.map (CommRingCat.ofHom (MvPolynomial.aeval (R := k) a).toRingHom)) ≫
+      Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k)) =
+        Spec.map (CommRingCat.ofHom (algebraMap k K)) := by
+  rw [← Spec.map_comp]
+  congr 1
+  ext c
+  exact MvPolynomial.aeval_C _ c
+
+private noncomputable def memberToUniversalAmbient {k K : Type u} [Field k] [Field K] [Algebra k K]
+    {Y : Scheme.{u}} (f : Y ⟶ Spec (CommRingCat.of k)) {I : Type u} (a : I → K) :
+    pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶
+      pullback (Spec.map
+        (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k))) f :=
+  pullback.lift
+    (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))) ≫
+      (Spec.map (CommRingCat.ofHom (MvPolynomial.aeval (R := k) a).toRingHom)))
+    (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+    (by rw [Category.assoc, coefficientPoint_comp, pullback.condition])
+
+private theorem memberToUniversalAmbient_isPullback
+    {k K : Type u} [Field k] [Field K] [Algebra k K]
+    {Y : Scheme.{u}} (f : Y ⟶ Spec (CommRingCat.of k)) {I : Type u} (a : I → K) :
+    IsPullback (memberToUniversalAmbient f a)
+      (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+      (pullback.fst (Spec.map
+        (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k))) f)
+      ((Spec.map (CommRingCat.ofHom (MvPolynomial.aeval (R := k) a).toRingHom))) := by
+  apply IsPullback.of_right (t := (IsPullback.of_hasPullback _ _).flip)
+  · simpa only [memberToUniversalAmbient, pullback.lift_snd, coefficientPoint_comp] using
+      (IsPullback.of_hasPullback f
+        (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+  · exact pullback.lift_fst _ _ _
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tensorUnit_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) :
+    Scheme.Modules.tensorSectionsUnit f M =
+      (show Γ(M, ⊤) ⟶ Γ((Scheme.Modules.tensorPullback f).obj M, ⊤) from
+        Scheme.Modules.Hom.app
+          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).unit.app M)
+          ⊤) := by
+  unfold Scheme.Modules.tensorSectionsUnit
+  have hi : (homOfLE f.preimage_top.ge).op = 𝟙 (op (⊤ : X.Opens)) := rfl
+  erw [hi, ((Scheme.Modules.tensorPullback f).obj M).presheaf.map_id, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem universalIdeal_comap_member
+    {k K : Type u} [Field k] [Field K] [Algebra k K]
+    {Y : Scheme.{u}} (f : Y ⟶ Spec (CommRingCat.of k))
+    (L : Y.Modules) [L.IsInvertible] {r : ℕ}
+    (s : Fin r → Γ(L, ⊤)) (a : Fin r → K) :
+    (bertiniUniversalIdeal f L (fun i : ULift.{u} (Fin r) ↦ s i.down)).comap
+      (memberToUniversalAmbient f (fun i : ULift.{u} (Fin r) ↦ a i.down)) =
+      linearSystemMemberIdeal f L s K a := by
+  let m := memberToUniversalAmbient f (fun i : ULift.{u} (Fin r) ↦ a i.down)
+  have hm₁ : m ≫ pullback.fst
+      (Spec.map (CommRingCat.ofHom
+        (MvPolynomial.C : k →+* MvPolynomial (ULift.{u} (Fin r)) k))) f =
+      pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))) ≫
+        Spec.map (CommRingCat.ofHom
+          (MvPolynomial.aeval (R := k) (fun i : ULift.{u} (Fin r) ↦ a i.down)).toRingHom) :=
+    pullback.lift_fst _ _ _
+  have hm₂ : m ≫ pullback.snd
+      (Spec.map (CommRingCat.ofHom
+        (MvPolynomial.C : k →+* MvPolynomial (ULift.{u} (Fin r)) k))) f =
+      pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+    pullback.lift_snd _ _ _
+  rw [bertiniUniversalIdeal_comap f L _ m, hm₁, hm₂]
+  unfold linearSystemMemberIdeal
+  apply congrArg (fun t : Γ((Scheme.Modules.tensorPullback
+      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj L, ⊤) ↦
+    (Scheme.Modules.homOfGlobalSection _ t).zeroLocus)
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
+  have hcoord (i : ULift.{u} (Fin r)) :
+      (Spec.map (CommRingCat.ofHom
+        (MvPolynomial.aeval (R := k) (fun j : ULift.{u} (Fin r) ↦ a j.down)).toRingHom)).appTop
+        ((Scheme.ΓSpecIso (.of (MvPolynomial (ULift.{u} (Fin r)) k))).inv
+          (MvPolynomial.X i)) = (Scheme.ΓSpecIso (.of K)).inv (a i.down) := by
+    rw [Scheme.specMap_appTop_ΓSpecIso_inv]
+    change (Scheme.ΓSpecIso (.of K)).inv
+      (MvPolynomial.aeval (R := k) (fun j : ULift.{u} (Fin r) ↦ a j.down)
+        (MvPolynomial.X i)) = _
+    rw [MvPolynomial.aeval_X]
+  simp only [hcoord]
+  refine (Equiv.ulift.sum_comp (fun i : Fin r ↦
+    (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).appTop
+      ((Scheme.ΓSpecIso (.of K)).inv (a i)) •
+      Scheme.Modules.tensorSectionsUnit
+        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) L (s i))).trans ?_
+  apply Finset.sum_congr rfl
+  intro i _
+  apply congrArg (fun t ↦
+    (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).appTop
+      ((Scheme.ΓSpecIso (.of K)).inv (a i)) • t)
+  rw [tensorUnit_eq]
+  rfl
+
+private noncomputable def coefficientLift {k : Type u} [Field k] (r : ℕ) :
+    Spec (.of (MvPolynomial (Fin r) k)) ≅
+      Spec (.of (MvPolynomial (ULift.{u} (Fin r)) k)) :=
+  Scheme.Spec.mapIso
+    (MvPolynomial.renameEquiv k Equiv.ulift).toRingEquiv.toCommRingCatIso.op
+
+private theorem coefficientLift_point {k K : Type u} [Field k] [Field K] [Algebra k K]
+    {r : ℕ} (a : Fin r → K) :
+    Spec.map (CommRingCat.ofHom (MvPolynomial.aeval (R := k) a).toRingHom) ≫
+      (coefficientLift (k := k) r).hom =
+    Spec.map (CommRingCat.ofHom
+      (MvPolynomial.aeval (R := k) (fun i : ULift.{u} (Fin r) ↦ a i.down)).toRingHom) := by
+  unfold coefficientLift
+  rw [Scheme.Spec.mapIso_hom]
+  change Spec.map (CommRingCat.ofHom (MvPolynomial.aeval (R := k) a).toRingHom) ≫
+    Spec.map (CommRingCat.ofHom (MvPolynomial.rename Equiv.ulift).toRingHom) = _
+  rw [← Spec.map_comp]
+  congr 1
+  apply CommRingCat.hom_ext
+  apply MvPolynomial.ringHom_ext
+  · intro c
+    simp
+  · intro i
+    simp
+
+private theorem geometric_baseChange_of_geometric_fibre
+    {H T : Scheme.{u}} (q : H ⟶ T) {K : Type u} [Field K]
+    (a : Spec (.of K) ⟶ T)
+    (h : GeometricallyIrreducible
+      (q.fiberToSpecResidueField (a (IsLocalRing.closedPoint K)))) :
+    GeometricallyIrreducible (pullback.snd q a) := by
+  let t := a (IsLocalRing.closedPoint K)
+  let e := Spec.map (T.descResidueField (Scheme.stalkClosedPointTo a))
+  have he : e ≫ T.fromSpecResidueField t = a :=
+    Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField K T a
+  let d : pullback q a ⟶ q.fiber t := pullback.lift
+    (pullback.fst q a) (pullback.snd q a ≫ e)
+    (by rw [Category.assoc, he, pullback.condition])
+  have hd : IsPullback d (pullback.snd q a) (q.fiberToSpecResidueField t) e := by
+    apply IsPullback.of_right (t := IsPullback.of_hasPullback q (T.fromSpecResidueField t))
+    · simpa only [d, pullback.lift_fst, he] using IsPullback.of_hasPullback q a
+    · exact pullback.lift_snd _ _ _
+  exact MorphismProperty.of_isPullback hd h
 
 /-- Under the codimension-two hypotheses, a general member is geometrically irreducible.
 The `k`-structure on global sections is restriction of scalars along the structure morphism;
@@ -142,6 +287,48 @@ theorem exists_open_geometricallyIrreducible_linearSystemMember
               ((linearSystemMemberIdeal (Y ↘ Spec (.of k)) L (fun i ↦ ψ (b i)) K a).subschemeι ≫
                 pullback.snd (Y ↘ Spec (.of k))
                   (Spec.map (CommRingCat.ofHom (algebraMap k K)))) := by
-  sorry
+  classical
+  intro ψ hcomp hbase r b
+  let f := Y ↘ Spec (.of k)
+  let s : Fin r → Γ(L, ⊤) := fun i ↦ ψ (b i)
+  let q := bertiniUniversalProjection f L (fun i : ULift.{u} (Fin r) ↦ s i.down)
+  let η := genericPoint (Spec (.of (MvPolynomial (ULift.{u} (Fin r)) k)))
+  have hη : IsGenericPoint η Set.univ := genericPoint_spec _
+  have hgeom : GeometricallyIrreducible (q.fiberToSpecResidueField η) :=
+    geometricallyIrreducible_bertiniUniversal_genericFiber k Y L V ψ hcomp hbase r b
+  have : LocallyOfFiniteType q := by
+    dsimp [q, bertiniUniversalProjection]
+    infer_instance
+  have : QuasiCompact q := by
+    dsimp [q, bertiniUniversalProjection]
+    infer_instance
+  obtain ⟨U, hηU, hU⟩ := exists_open_generic_geometric_irreducibility_shrink q η hη hgeom
+  let R := coefficientLift (k := k) r
+  refine ⟨R.hom ⁻¹ᵁ U, ?_, ?_⟩
+  · obtain ⟨x, hx⟩ := R.hom.homeomorph.surjective η
+    exact ⟨x, by change R.hom x ∈ U; rwa [show R.hom x = η from hx]⟩
+  intro K _ _ a ha
+  let a' : ULift.{u} (Fin r) → K := fun i ↦ a i.down
+  have ha' : Set.range
+      (Spec.map (CommRingCat.ofHom (MvPolynomial.aeval (R := k) a').toRingHom)) ⊆ U := by
+    rintro _ ⟨z, rfl⟩
+    rw [← coefficientLift_point a]
+    exact ha (Set.mem_range_self z)
+  have hpoint := hU _ (ha' (Set.mem_range_self (IsLocalRing.closedPoint K)))
+  have hgeom := geometric_baseChange_of_geometric_fibre q
+    (Spec.map (CommRingCat.ofHom (MvPolynomial.aeval (R := k) a').toRingHom)) hpoint
+  have hJ := universalIdeal_comap_member f L s a
+  have hp := ((bertiniUniversalIdeal f L
+    (fun i : ULift.{u} (Fin r) ↦ s i.down)).isPullback_comap
+      (memberToUniversalAmbient f a')).flip.paste_vert
+        (memberToUniversalAmbient_isPullback f a')
+  change IsPullback _ (_ ≫ _) q _ at hp
+  rw [← hJ]
+  let e := hp.isoPullback
+  have he : e.hom ≫ pullback.snd q
+      (Spec.map (CommRingCat.ofHom (MvPolynomial.aeval (R := k) a').toRingHom)) = _ :=
+    hp.isoPullback_hom_snd
+  rw [← he]
+  infer_instance
 
 end AlgebraicGeometry

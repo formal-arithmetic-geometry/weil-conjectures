@@ -1,0 +1,125 @@
+{
+ "id": "lem-zl-bertini-affine-function-field",
+ "kind": "statement",
+ "title": "Geometric irreducibility of the affine Bertini function field",
+ "statement": "Let k be a field and A a finite type k-domain, K=Frac A, n>=2 and g_1,...,g_n in A. Suppose V(g_1,g_2) in Spec A has an irreducible component W with dim W+2=dim A. Suppose Spec K is geometrically irreducible over k. Then Omega=Frac(K[x_1,...,x_n]) is geometrically irreducible over F=k(x_1,...,x_n,sum_i g_i x_i). Here finite type, dimensions, components, polynomial rings and field extensions use [def-weil-pbc-finite-type-algebra], [def-weil-pbc-krull-dimension-ring], [def-weil-irreducible-components], [def-weil-pbc-mv-polynomial-ring] and [def-pc-field-extension]. F and Omega are the concrete bertiniBaseField and bertiniOmega of [lem-zl-bertini-field-extension]. Conventions: geometric irreducibility [def-pc-geometrically-irreducible].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, lemma-bertini-irreducible, proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-irreducible-components",
+  "def-pc-geometrically-irreducible",
+  "def-pc-field-extension",
+  "lem-zl-bertini-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the independent-functions theorem to the component of dimension dim A minus two. Reindex its Fin n plus Fin 2 family by finSumFinEquiv to the Fin (n+2) family used by the field-extension theorem; compare the two final entries by map_sum, map_mul and scalar-tower identities.",
+   "uses": [
+    "lem-zl-bertini-independent-functions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The fraction field of A is essentially of finite type over k, hence finitely generated as an intermediate field. Apply the algebraic Bertini theorem with this finite generation, the given geometric irreducibility and the reindexed independent family.",
+   "uses": [
+    "lem-zl-bertini-field-extension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-bertini-field-extension",
+  "lem-zl-bertini-independent-functions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, lemma-bertini-irreducible, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bertini theorem geometric irreducibility general member linear system",
+   "results": "Eight hits: generic points, integral and irreducible schemes, rational-map dense domain, dominance. No universal-incidence or affine Bertini field presentation theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\"",
+   "results": "Twelve hits: the class, base change, residue-field fibre criterion and basic composition lemmas. These give the geometric transport used in the proof, not the incidence chart or algebraic Bertini computation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bertini universal incidence family base change generic fibre function field geometric irreducibility",
+   "results": "Eight hits: Scheme.functionField, germToFunctionField, PartialMap.fromFunctionField_restrict, and general stability under base change. No Bertini family calculation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "bertini|universal.*incidence in Mathlib/AlgebraicGeometry; bertiniUniversal.*comap|bertini.*generic.*fibre|bertiniAffineFunctionField in both project roots and DAG; blueprint_refs.py search bertini",
+   "results": "No Mathlib matches. The project has a private field-specialization comparison in BertiniSmoothMember and the proved algebraic inputs BertiniIndependentFunctions and BertiniFieldExtension. No public arbitrary-scheme base-change formula or generic incidence chart presentation. The one blueprint Bertini node is lem-zl-bertini-finite-cover-curve, an ancestor, not a duplicate.",
+   "date": "2026-10-21",
+   "verdict": "reuse existing inputs; no duplicate of these support results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniIrreducibleMember",
+  "date": "2026-10-21",
+  "group": "C8"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Tag 0G4F, final paragraph: application of the algebraic Bertini and independent-functions lemmas",
+   "via": [
+    "lem-zl-bertini-irreducible-member"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniAffineFunctionField",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniAffineFunctionField.lean",
+  "declaration": "FieldTheory.geometricallyIrreducible_bertiniAffineFunctionField",
+  "statement": "theorem geometricallyIrreducible_bertiniAffineFunctionField\n    (k A : Type u) [Field k] [CommRing A] [Algebra k A]\n    [Algebra.FiniteType k A] [IsDomain A]\n    (n : ℕ) (hn : 2 ≤ n) (g : Fin n → A)\n    (hcomp : ∃ W : Set (PrimeSpectrum.zeroLocus\n        ({g ⟨0, Nat.zero_lt_of_lt hn⟩, g ⟨1, hn⟩} : Set A)),\n      W ∈ irreducibleComponents (PrimeSpectrum.zeroLocus\n        ({g ⟨0, Nat.zero_lt_of_lt hn⟩, g ⟨1, hn⟩} : Set A)) ∧\n      topologicalKrullDim W + 2 = ringKrullDim A)\n    (hgeom : GeometricallyIrreducible\n      (Spec.map (CommRingCat.ofHom (algebraMap k (FractionRing A))))) :\n    GeometricallyIrreducible\n      (Spec.map (CommRingCat.ofHom\n        (algebraMap\n          (bertiniBaseField k (FractionRing A) n (fun i ↦ algebraMap A (FractionRing A) (g i)))\n          (bertiniOmega (FractionRing A) n))))",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

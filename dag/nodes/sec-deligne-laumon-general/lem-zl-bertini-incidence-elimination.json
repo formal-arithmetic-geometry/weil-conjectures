@@ -1,0 +1,114 @@
+{
+ "id": "lem-zl-bertini-incidence-elimination",
+ "kind": "statement",
+ "title": "Elimination of a unit incidence coefficient",
+ "statement": "For any commutative ring A, natural number n and g:Fin n -> A, the quotient of A[x_0,...,x_n] by x_0+sum_i g_i x_(i+1) is isomorphic as an A-algebra to A[x_1,...,x_n]. There is such an isomorphism that sends the class of every polynomial p to its substitution at x_0=-sum_i g_i x_i and x_(i+1)=x_i. This includes n=0 and the zero ring. Polynomial rings and quotients use [def-weil-pbc-mv-polynomial-ring].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, lemma-bertini-irreducible, proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use MvPolynomial.finSuccEquiv to separate the first variable, and compute that the principal equation maps to X-C(-sum_i g_i x_i). Ideal.quotientEquivAlg transports the quotient. Polynomial.quotientSpanXSubCAlgEquiv evaluates the remaining univariate polynomial at the negative sum. Compare the resulting map with aeval on the variables using MvPolynomial.algHom_ext.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, lemma-bertini-irreducible, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bertini theorem geometric irreducibility general member linear system",
+   "results": "Eight hits: generic points, integral and irreducible schemes, rational-map dense domain, dominance. No universal-incidence or affine Bertini field presentation theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\"",
+   "results": "Twelve hits: the class, base change, residue-field fibre criterion and basic composition lemmas. These give the geometric transport used in the proof, not the incidence chart or algebraic Bertini computation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bertini universal incidence family base change generic fibre function field geometric irreducibility",
+   "results": "Eight hits: Scheme.functionField, germToFunctionField, PartialMap.fromFunctionField_restrict, and general stability under base change. No Bertini family calculation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "bertini|universal.*incidence in Mathlib/AlgebraicGeometry; bertiniUniversal.*comap|bertini.*generic.*fibre|bertiniAffineFunctionField in both project roots and DAG; blueprint_refs.py search bertini",
+   "results": "No Mathlib matches. The project has a private field-specialization comparison in BertiniSmoothMember and the proved algebraic inputs BertiniIndependentFunctions and BertiniFieldExtension. No public arbitrary-scheme base-change formula or generic incidence chart presentation. The one blueprint Bertini node is lem-zl-bertini-finite-cover-curve, an ancestor, not a duplicate.",
+   "date": "2026-10-21",
+   "verdict": "reuse existing inputs; no duplicate of these support results"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleSpace.*fiber|fiber.*irreducibleSpace|genericPoint.*dominant in Mathlib/AlgebraicGeometry; quotient.*Equiv|ker.*eval in Mathlib polynomial modules",
+   "results": "No dominant generic-fibre lemma. Reused Scheme.Hom.fiberHomeo, IsGenericPoint.image and the generic-point open-set criterion. For elimination reused finSuccEquiv, Ideal.quotientEquivAlg and Polynomial.quotientSpanXSubCAlgEquiv; no exact multivariate substitution statement.",
+   "date": "2026-10-21",
+   "verdict": "proved from existing generic APIs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniIrreducibleMember",
+  "date": "2026-10-21",
+  "group": "C8"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Tag 0G4F, final proof paragraph: Elimination of a unit incidence coefficient",
+   "via": [
+    "lem-zl-bertini-irreducible-member"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniIncidenceElimination",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniIncidenceElimination.lean",
+  "declaration": "Algebra.exists_bertiniIncidenceElimination",
+  "statement": "theorem exists_bertiniIncidenceElimination\n    (A : Type u) [CommRing A] (n : ℕ) (g : Fin n → A) :\n    ∃ e :\n      (MvPolynomial (Fin (n + 1)) A ⧸ Ideal.span\n        {(X 0 + ∑ i : Fin n, C (g i) * X i.succ :\n          MvPolynomial (Fin (n + 1)) A)}) ≃ₐ[A] MvPolynomial (Fin n) A,\n      ∀ p : MvPolynomial (Fin (n + 1)) A,\n        e (Ideal.Quotient.mk _ p) =\n          aeval (Fin.cases (-∑ i : Fin n, C (g i) * X i) X) p",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

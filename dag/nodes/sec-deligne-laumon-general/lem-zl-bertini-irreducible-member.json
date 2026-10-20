@@ -18,119 +18,43 @@
  ],
  "proof": [
   {
-   "text": "First replace $Y$ by $Y_{\\mathrm{red}}$ and restrict $\\mathcal L$ and its sections. Indeed $Y$ is quasi-compact (finite type over a field), and [pqf-lem-locnoeth-lft] makes it locally Noetherian, since a field has only two ideals. By [lem-sc-reduction-nilradical-nilpotent], its nilradical ideal sheaf $N$ has a positive power zero. After any field extension, the image of $N$ still has that power zero; quotienting further by any section equation preserves this. Prime ideals all contain a nilpotent ideal, so the thickenings $Y_{\\mathrm{red},k'}\\to Y_{k'}$ and their section zero schemes have identical underlying spaces. The same holds for the intersections in (i) and (ii); their components and codimensions agree. Thus all hypotheses and the desired geometric irreducibility are unchanged. The reduced, irreducible scheme is integral [def-pc-integral-scheme]. On every affine open its ring is Noetherian by [pqf-lem-affine-open-locnoeth].",
+   "text": "Use the universal generic-fibre theorem with the two original codimension hypotheses and the given basis, indexed by ULift to match the scheme universe. The universal zero scheme is a closed subscheme of coefficient affine space times Y. Its projection is locally of finite type and quasi-compact by base change of the finite type structure morphism of Y.",
    "uses": [
-    "pqf-lem-locnoeth-lft",
-    "lem-sc-reduction-nilradical-nilpotent",
-    "def-pc-integral-scheme",
-    "pqf-lem-affine-open-locnoeth"
+    "lem-zl-bertini-universal-generic-fibre",
+    "def-zl-bertini-universal-family",
+    "def-pc-zero-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, first proof paragraph: reduction to an integral scheme"
-   }
+   "elementary": true
   },
   {
-   "text": "The vectors $v_1,v_2,v_3$ in (i) are linearly independent. A relation $a_1v_1+a_2v_2+a_3v_3=0$, evaluated in the fibre of $\\mathcal L$ at the generic point of $W$, forces $a_1=0$: the first section is nonzero there, while the other two vanish there. If $v_2,v_3$ were dependent, their zero-scheme intersection would be either all of $Y$ or the zero scheme of one section. The first case has no component of codimension two. In the second, on an affine trivializing neighbourhood of the generic point of $W$, its prime is minimal over one local equation. The image prime in the quotient is minimal, hence height zero; [lem-weil-pbc-noetherian-height-quotient-bound] with $t=1$ gives height at most one. Heights compute the codimensions here by the prime/irreducible-closed-subset correspondence, contradicting (i). Extend these vectors to a basis $v_1,\\ldots,v_r$ of $V$, with $r\\geq3$.",
-   "uses": [
-    "lem-weil-pbc-noetherian-height-quotient-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, first proof paragraph: the omitted linear-independence detail"
-   }
-  },
-  {
-   "text": "In $\\mathbf A^r_k\\times_kY$, define $H=Z(\\sum_i x_i\\psi(v_i))$ and let $q:H\\to\\mathbf A^r_k$ be projection. On an affine open $U=\\operatorname{Spec}A$ trivializing $\\mathcal L$, with $\\psi(v_i)|_U=f_i$, the dual section map is multiplication by $\\sum_i x_if_i$, its image is the principal ideal it generates, and its zero scheme is $\\operatorname{Spec}(A[x_1,\\ldots,x_r]/(\\sum_i x_if_i))$ [def-pc-zero-scheme, def-weil-pbc-mv-polynomial-ring]. Substitution $x_i\\mapsto a_i$ identifies its fibre over a $k'$-point with $H_v$. A finite affine trivializing cover exists since $Y$ is quasi-compact. On each chart the displayed algebra is finitely generated over $k[x_1,\\ldots,x_r]$, because $A$ is finitely generated over $k$; the finite cover therefore shows $q$ is finite type. This is the universal divisor of Stacks, Varieties, label situation-family-divisors.",
-   "uses": [
-    "def-pc-zero-scheme",
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, first two proof paragraphs; Varieties Situation 0G47"
-   }
-  },
-  {
-   "text": "On each such nonempty chart $U$, $f_1\\ne0$. To see this, $\\psi(v_1)$ is nonzero at the generic point of $W$ by (i), so it is not the zero section. On an integral scheme a section of a line bundle which vanishes on a nonempty open vanishes everywhere: in intersecting trivializing charts this is the injectivity of a domain into its fraction field, and multiplying by invertible transition functions preserves zero. Hypothesis (ii) says that each minimal prime of $(f_1,\\ldots,f_r)$ has height at least two; components of the base locus meeting $U$ are precisely these primes, and their local rings and chains of generalizations are unchanged on restriction to $U$. Apply [lem-zl-linear-incidence-irreducible] to obtain irreducibility of each $H_U$. For two nonempty charts, their intersection meets $Y\\setminus H_{v_1}$: both are nonempty opens of an irreducible space. Over this intersection the equation can be solved for $x_1$ since its coefficient is a unit, so $H_U\\cap H_{U'}$ is nonempty. The irreducible open charts of $H$ thus pairwise intersect, and $H$ is irreducible.",
-   "uses": [
-    "lem-zl-linear-incidence-irreducible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, middle proof paragraph: irreducibility of the universal incidence scheme"
-   }
-  },
-  {
-   "text": "Choose a nonempty affine open $U=\\operatorname{Spec}A\\subset Y\\setminus H_{v_1}$ meeting $W$. Use $\\psi(v_1)$ itself to trivialize $\\mathcal L$ there; write the other sections as $g_2,\\ldots,g_r$, so the universal equation is $x_1+\\sum_{i=2}^r g_ix_i=0$. The component $W\\cap U$ of $V(g_2,g_3)$ corresponds to a prime $\\mathfrak p$ of height two. By [lem-weil-pbc-finite-type-domain-dimension-local-ring], every maximal prime chain in $A$ has the same finite length $d=\\dim A$. Extend a saturated length-two chain from $(0)$ to $\\mathfrak p$ by any maximal chain above it; the concatenation is maximal in $A$, so every such upper chain has length $d-2$. Prime correspondence for $A/\\mathfrak p$ gives $\\dim(W\\cap U)=d-2$. Hence [lem-zl-bertini-independent-functions] applies to $g_2,\\ldots,g_r$ and supplies $c_2,\\ldots,c_r$ for which $x_2,\\ldots,x_r,\\xi=\\sum_{i=2}^r g_ix_i,\\delta=\\sum_{i=2}^r c_ig_i$ are algebraically independent over $k$ in $\\Omega=K(x_2,\\ldots,x_r)$, where $K=\\operatorname{Frac}A$.",
-   "uses": [
-    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-    "lem-zl-bertini-independent-functions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, last proof paragraph; Tag 0G4E; Tag 00OS chain-length formula"
-   }
-  },
-  {
-   "text": "By [lem-zl-generic-point-geometric-irreducibility] applied to $Y$, the field $K$ is geometrically irreducible over $k$. It is finitely generated as a field: the finite algebra generators of $A$ also generate its fraction field as a field. Apply [lem-zl-bertini-field-extension] with $n=r-1$ and the independent family from the preceding step. This says $\\Omega$ is geometrically irreducible over $F=k(x_2,\\ldots,x_r,\\xi)$. Eliminating $x_1$ identifies the incidence chart with $\\operatorname{Spec}(A[x_2,\\ldots,x_r])$, with parameter map $x_1\\mapsto-\\xi$ and $x_i\\mapsto x_i$ for $i\\geq2$. Algebraic independence makes $k[x_1,\\ldots,x_r]\\to A[x_2,\\ldots,x_r]$ injective, so $q$ is dominant; on fraction fields it identifies $k(x_1,\\ldots,x_r)$ with $F$ (the sign of $\\xi$ does not change the generated field). Its generic residue field is exactly $\\Omega$, now geometrically irreducible over the parameter field.",
-   "uses": [
-    "lem-zl-generic-point-geometric-irreducibility",
-    "lem-zl-bertini-field-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, final proof paragraph; Tags 054Q and 0G4D"
-   }
-  },
-  {
-   "text": "Let $\\eta$ be the generic point of $\\mathbf A^r_k$. The generic point $\\zeta$ of the irreducible $H$ lies over $\\eta$ by dominance. The fibre $H_\\eta$ is irreducible with generic point $\\zeta$ and residue field $\\Omega$: on an affine chart it is localization by the nonzero parameter polynomials, and its primes correspond to the chart primes disjoint from those polynomials. Every nonempty such chart retains the unique minimal prime of $H$, which lies under every other prime and is disjoint from those polynomials. Thus all nonempty fibre charts contain $\\zeta$ densely. Applying [lem-zl-generic-point-geometric-irreducibility] over $\\kappa(\\eta)$ and the previous step proves geometric irreducibility of $H_\\eta$.",
-   "uses": [
-    "lem-zl-generic-point-geometric-irreducibility"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, passage to the generic fibre and generic point; Tag 054Q"
-   }
-  },
-  {
-   "text": "Apply [lem-sbc-generic-geometric-irreducibility-shrink] to the finite type map $q$ and the generic point $\\eta$ of the irreducible affine parameter space. It gives a nonempty open $O\\subset\\mathbf A^r_k$ on which each residue-field fibre is geometrically irreducible. For any field extension $k'/k$ and any $v\\in O(k')$ mapping to $t\\in O$, the fibre $H_v$ is the base change of $H_t$ along $\\kappa(t)\\to k'$. For a further field extension of $k'$, this is again a field extension of $\\kappa(t)$, so the defining geometric-irreducibility condition for $H_t$ proves that for $H_v$. This is exactly the meaning of general in the item. The nilpotent-thickening argument in Step 1 transfers the result to the original $Y$.",
+   "text": "Apply generic geometric irreducibility shrinking to this projection and the parameter generic point. Obtain an open containing that point with geometrically irreducible residue-field fibres. Pull the open back through the variable-renaming isomorphism from Fin r coordinates to ULift coordinates.",
    "uses": [
     "lem-sbc-generic-geometric-irreducibility-shrink"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, first proof paragraph; Tag 0559; Varieties Situation 0G47"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For any extension-field coefficient point in this open, factor it through its image residue field. Pullback pasting makes its fibre the corresponding field base change of the geometrically irreducible residue-field fibre. The universal-base-change formula identifies its zero-scheme ideal with linearSystemMemberIdeal: the canonical tensor unit agrees with the chosen adjunction unit, evaluation substitutes each coordinate, and Equiv.ulift.sum_comp reindexes the sum. The ideal-sheaf pullback square gives an isomorphism with the canonical pullback of q, transporting geometric irreducibility to the member.",
+   "uses": [
+    "lem-zl-bertini-universal-base-change",
+    "def-pc-base-change"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-integral-scheme",
+  "def-pc-base-change",
   "def-pc-zero-scheme",
-  "def-weil-pbc-mv-polynomial-ring",
+  "def-zl-bertini-universal-family",
   "lem-sbc-generic-geometric-irreducibility-shrink",
-  "lem-sc-reduction-nilradical-nilpotent",
-  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-  "lem-weil-pbc-noetherian-height-quotient-bound",
-  "lem-zl-bertini-field-extension",
-  "lem-zl-bertini-independent-functions",
-  "lem-zl-generic-point-geometric-irreducibility",
-  "lem-zl-linear-incidence-irreducible",
-  "pqf-lem-affine-open-locnoeth",
-  "pqf-lem-locnoeth-lft"
+  "lem-zl-bertini-universal-base-change",
+  "lem-zl-bertini-universal-generic-fibre"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0G4F, lemma-bertini-irreducible, proof; omitted basis argument supplied using Tag 00KW"
+  "place": "Tag 0G4F, lemma-bertini-irreducible, proof",
+  "note": "The generic-fibre computation is isolated as an affine presentation plus the proved field calculation; all-extension-field specialization and canonical zero-scheme base change are proved explicitly."
  },
  "mathlib_searches": [
   {
@@ -235,8 +159,6 @@
   ]
  },
  "tool_uses": [
-  "lem-sc-reduction-nilradical-nilpotent",
-  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
   "lem-sbc-generic-geometric-irreducibility-shrink"
  ],
  "reviewed": {
@@ -269,5 +191,15 @@
   "group": "Q08",
   "result": "pass",
   "note": "Checked every clause of the node and of Stacks 0G4F/0G47 against the Lean. Hypotheses: finite type, geometric irreducibility, invertible L, finite-dimensional V, k-linear psi via canonical globalSectionsRingHom scalars. (i) is maximal IrreducibleCloseds in the intersection of zero-locus supports, W not inside H_v1, coheight 2; (ii) is every maximal B in the base locus with coheight at least 2. Conclusion: for every basis, a nonempty open U in A^r such that every K-point gives a member that is geometrically irreducible over K. linearSystemMemberIdeal is a real construction: zero locus of the sum of a_i times (1 tensor psi(b_i)) on Y_K, via the canonical normalized tensor-pullback unit. No extra assumptions; K in Type u is the Mathlib convention and loses nothing. Docstrings, 8-step proof docstring and sorry-only proof present; statement verbatim; only the node's lean field changed; imports and line widths fine; no duplicate notion or name collision. nt_compile --json rc=0 in 4.4 s, clean; a broken control copy failed with rc=1. One non-blocking finding: the node's source.place says Situation 0FD3, which should be 0G47 (stage-1 metadata; the Lean cites 0G47 correctly)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261020T211647-L-3485322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
