@@ -6,7 +6,7 @@ Authors: SHEAF group E4
 module
 public import WeilConjectures.AlgebraicGeometry.GlobalDerivedHom
 public import Sheaf.Paper.ModuleCupNaiveMap
-public import Sheaf.Algebra.Homology.KFlatPullback
+public import WeilConjectures.Algebra.Homology.KFlatPullback
 import Sheaf.Paper.GlobalSectionsLaxMonoidalData
 import Sheaf.Paper.GlobalTensorPullbackOplaxIsIso
 /-! # Tensor-counit normalization of the global pullback
@@ -26,17 +26,23 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 variable (X : Scheme.{u})
   [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
-local instance GlobalTensorPullbackMonoidalNormalization_commRing : CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
+local instance GlobalTensorPullbackMonoidalNormalization_commRing :
+    CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
   inferInstanceAs (CommRing Γ(X, ⊤))
-local instance GlobalTensorPullbackMonoidalNormalization_monoidalCategory : MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance GlobalTensorPullbackMonoidalNormalization_monoidalCategory :
+    MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.toRingedSpace.sheaf
-local instance GlobalTensorPullbackMonoidalNormalization_symmetricCategory : SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance GlobalTensorPullbackMonoidalNormalization_symmetricCategory :
+    SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.symmetricCategory X.toRingedSpace.sheaf
-local instance GlobalTensorPullbackMonoidalNormalization_hasColimitsOfSize : HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance GlobalTensorPullbackMonoidalNormalization_hasColimitsOfSize :
+    HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   hasColimitsOfSizeShrink.{0, 0, u} _
-local instance GlobalTensorPullbackMonoidalNormalization_monoidalPreadditive : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance GlobalTensorPullbackMonoidalNormalization_monoidalPreadditive :
+    MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
-local instance GlobalTensorPullbackMonoidalNormalization_monoidalClosed : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance GlobalTensorPullbackMonoidalNormalization_monoidalClosed :
+    MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
 /-- Concrete global pullback admits the tensor constraint normalized by its counit.
 Source: Stacks Tags 008A, 008Y and 0FKU.

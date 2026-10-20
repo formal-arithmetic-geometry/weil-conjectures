@@ -152,15 +152,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kpp1836 (reviewer sub-agent of L); spot-checked: Item vs 06YC (general ringed-space morphism, termwise pullback); step 1 vs inverse-image stalk (abelian groups and rings) and change-of-rings tensor stalk statements; steps 2/4 use the two directions of new 06YB node; step 3 elementary 06Y1 base change (no flatness of A->B), 06Y1 warning fine as in-proof argument; no existing 06YB node in dag; no cycle: new node has only def-pc-kflat-complex as dep, not created from parent, no link to lem-pc-kflat-resolution; proof_deps match citations. No fault missed by second reading."
  },
  "lean": {
-  "module": "Sheaf.Algebra.Homology.KFlatPullback",
+  "module": "WeilConjectures.Algebra.Homology.KFlatPullback",
   "declaration": "CochainComplex.isKFlat_pullback",
-  "file": "lean/Sheaf/Algebra/Homology/KFlatPullback.lean",
-  "statement": "theorem isKFlat_pullback {X Y : TopCat.{w}} (f : X ⟶ Y) (OX : Sheaf (Opens.grothendieckTopology X) CommRingCat.{w}) (OY : Sheaf (Opens.grothendieckTopology Y) CommRingCat.{w}) (φ : OY ⟶ ((Opens.map f).sheafPushforwardContinuous CommRingCat.{w} (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).obj OX) (K : CochainComplex (SheafOfModules.{w} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat.{w} RingCat.{w})).obj OY)) ℤ) (hK : K.IsAcyclicTensorKFlat) : IsAcyclicTensorKFlat (R := OX) (tensorPullbackComplex f OX OY φ K)",
+  "file": "lean/WeilConjectures/Algebra/Homology/KFlatPullback.lean",
+  "statement": "theorem isKFlat_pullback {X Y : TopCat.{w}} (f : X ⟶ Y) (OX : Sheaf (Opens.grothendieckTopology X) CommRingCat.{w}) (OY : Sheaf (Opens.grothendieckTopology Y) CommRingCat.{w}) (φ : OY ⟶ ((Opens.map f).sheafPushforwardContinuous CommRingCat.{w} (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).obj OX) (K : CochainComplex (SheafOfModules.{w} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat.{w} RingCat.{w})).obj OY)) ℤ) (hK : K.IsKFlatTensor) : IsKFlatTensor (R := OX) (tensorPullbackComplex f OX OY φ K)",
   "branch": "sheaf-dag",
   "by": "F1",
   "date": "2026-10-11",
-  "existing": false,
-  "note": "The complex is the termwise canonical module inverse image followed by sheafified sectionwise extension of scalars along the adjoint structure map. Its differentials use inverseImageModuleMap and changeOfRingsHom. No abstract module pullback or comparison theorem is used.",
+  "existing": true,
+  "note": "The complex is the termwise canonical module inverse image followed by sheafified sectionwise extension of scalars along the adjoint structure map. Its differentials use inverseImageModuleMap and changeOfRingsHom. No abstract module pullback or comparison theorem is used. Retired the Sheaf copy in favour of the official upstream twin (2026-10-20); the K-flat predicate is named IsKFlatTensor upstream.",
   "declarations": [
    "CochainComplex.tensorPullbackRingMap",
    "CochainComplex.tensorPullbackDifferential",
@@ -244,13 +244,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R2",
+  "reviewer": "C-015fc",
+  "group": "P5",
   "result": "pass",
-  "landing": "20261012T085327-L-35102",
+  "landing": "20261020T153016-L-2863412",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf.Algebra.Homology.KFlatPullback and Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde against their WeilConjectures twins (same declarations; IsKFlatTensor body = IsAcyclicTensorKFlat body; axioms clean); 10 consumers = all live importers, import-only edits (+whitespace wraps), all compile <60 s; no new twin pairs in import closures; nodes change only lean attachment per retire-sheaf-twins-20261020"
  }
 }

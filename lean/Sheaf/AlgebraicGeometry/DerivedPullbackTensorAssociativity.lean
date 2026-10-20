@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatTensorProduct
-import Sheaf.Algebra.Homology.KFlatPullback
+import WeilConjectures.Algebra.Homology.KFlatPullback
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare

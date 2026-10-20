@@ -167,7 +167,7 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineDerivedPullbackTensorTilde",
   "declaration": "AlgebraicGeometry.derivedPullback_openRestriction_iso",
   "declarations": [
    "AlgebraicGeometry.derivedPullback_openRestriction_iso",
@@ -177,13 +177,13 @@
    "AlgebraicGeometry.derivedPullback_tilde_kFlat_natIso",
    "AlgebraicGeometry.derivedTensor_tilde_kFlat_natIso"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineDerivedPullbackTensorTilde.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineDerivedPullbackTensorTilde.lean",
   "statement": "theorem derivedPullback_openRestriction_iso {X Y : Scheme.{u}} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (hUV : U ≤ f ⁻¹ᵁ V) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] : Nonempty (derivedPullback f ⋙ (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).mapDerivedCategory ≅ (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V)) (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv V)).mapDerivedCategory ⋙ derivedPullback (f.resLE V U hUV))",
   "branch": "sheaf-dag",
   "by": "F1",
   "date": "2026-10-11",
-  "existing": false,
-  "note": "The six statements together render all three clauses. The two open-restriction comparisons and the two affine comparisons on K-flat models are natural isomorphisms. The affine object formulas apply to every K-flat resolution P → M, whose scalar-extension or total-tensor complex is precisely the module derived-tensor representative; no boundedness or flatness assumption is imposed."
+  "existing": true,
+  "note": "The six statements together render all three clauses. The two open-restriction comparisons and the two affine comparisons on K-flat models are natural isomorphisms. The affine object formulas apply to every K-flat resolution P → M, whose scalar-extension or total-tensor complex is precisely the module derived-tensor representative; no boundedness or flatness assumption is imposed. Retired the unclaimed, unused Sheaf duplicate in favour of its official twin (2026-10-20); all six public declarations remain provided by that twin."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -194,13 +194,13 @@
   "note": "clause (1): Lf* ⋙ R_U ≅ R_V ⋙ L(f.resLE V U hUV)* with R = overFunctor ⋙ overEquiv.functor, mapDerivedCategory; (K⊗L)|U ≅ K|U⊗L|U as curried natIso via global schemeDerivedTensorMonoidal; (2) Spec.map φ, Lf* Q(tilde M) ≅ Q(tilde (extendScalars φ P)) for any K-flat qis P→M (recorded MorphismProperty.kFlat), plus natIso on ιKFlat; (3) Q tilde M ⊗ Q tilde N ≅ Q tilde (mapBifunctor P N), natIso via map₂CochainComplex; tilde form as landed 5adffa6dd/qcoh-equivalence; no let/choose/local notation; stmt_deps gained 2 landed used nodes; check_dag unchanged"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-397b1",
-  "group": "B3",
+  "reviewer": "C-015fc",
+  "group": "P5",
   "result": "pass",
-  "landing": "20261013T113336-L-3181143",
-  "kind": "proof",
-  "note": "independent Codex review: Matched the six Lean statements and proofs against the node, dependency declarations, source lemmas, baseline signatures, report, axiom probe, and twelve direct-importer compiles."
+  "landing": "20261020T153016-L-2863412",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf.Algebra.Homology.KFlatPullback and Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde against their WeilConjectures twins (same declarations; IsKFlatTensor body = IsAcyclicTensorKFlat body; axioms clean); 10 consumers = all live importers, import-only edits (+whitespace wraps), all compile <60 s; no new twin pairs in import closures; nodes change only lean attachment per retire-sheaf-twins-20261020"
  }
 }

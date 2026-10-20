@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import WeilConjectures.AlgebraicGeometry.DerivedInternalHomPullbackAdjunction
-import Sheaf.Algebra.Homology.KFlatPullback
+import WeilConjectures.Algebra.Homology.KFlatPullback
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 
 /-! # K-flat model for internal Hom into a derived direct image

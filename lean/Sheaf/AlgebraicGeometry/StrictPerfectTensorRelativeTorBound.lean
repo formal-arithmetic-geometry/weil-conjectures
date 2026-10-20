@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorModel
 import Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison
 import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.Algebra.Homology.KFlatPullback
+import WeilConjectures.Algebra.Homology.KFlatPullback
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 

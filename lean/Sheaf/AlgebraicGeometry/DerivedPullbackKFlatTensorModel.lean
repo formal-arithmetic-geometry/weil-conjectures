@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Monoidal.Multifunctor
-import Sheaf.Algebra.Homology.KFlatPullback
+import WeilConjectures.Algebra.Homology.KFlatPullback
 
 /-! # Tensor comparison on K-flat representatives
 
