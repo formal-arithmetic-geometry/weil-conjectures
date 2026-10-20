@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-proetale-multiplication-difference-criterion",
+ "kind": "statement",
+ "title": "The pro-etale multiplication-difference criterion",
+ "statement": "Let $X$ be any scheme and let $O$ be any sheaf of commutative rings on the coefficient-sized small pro-etale model [def-weil-proetale-inverse-image]. For any object $U$, section $f\\in O(U)$, and module sheaves on its slice [def-pur-localized-ringed-site, def-weil-sheaf-of-modules-category], let $P$ and $\\Delta_f$ be as in [def-weil-pbc-multiplication-difference]. Then $P$ is exact. Use the standard derived category [def-weil-abstract-derived-category], the genuine sheafified sectionwise localization $O|_U[1/f]$ [def-weil-pbc-ringed-section-localization], and derived internal Hom [def-pur-derived-internal-hom]. For any module sheaf F on the ambient site, after restricting F to the slice, $R\\mathcal Hom(O|_U[1/f],F[0])=0$ if and only if $\\Delta_f(F)$ is invertible. For any cochain complex K of module sheaves on the ambient site, after termwise restriction to the slice, invertibility of every $\\Delta_f(K^i)$ implies $R\\mathcal Hom(O|_U[1/f],Q(K))=0$. No boundedness, finiteness or ideal hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997 (lemma-hom-from-Af), free telescope and multiplication tower; proetale.tex Tag 099Q (proposition-enough-weakly-contractibles), product calculation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multiplication-difference",
+  "def-weil-proetale-inverse-image",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-section-localization"
+ ],
+ "proof": [
+  {
+   "text": "Transport the coefficient-sized slice to the raw pro-etale slice by Over.postEquiv for AsSmall.down. The weakly-etale slice equivalence then identifies it with the pro-etale site of the underlying scheme. The ring-sheaf comparison induces the actual module equivalence by pushforwardPushforwardEquivalence. The proved exact_countable_products helper of ProEtaleSurjectiveTowerDerivedLimit packages countableProducts_exact, and exact products transport back along the equivalence. Powers preserve homology because the diagonal and product functors preserve finite limits and finite colimits.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-proetale-surjective-tower-derived-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare localSectionMultiplication on the unit module with the map specified by unitHomEquiv, using commutativity. scalarLocalization_regularColimit identifies the telescope colimit with actual sectionwise localization. For an ambient derived object, choose a derived-limit witness by exists_isDerivedLimit_and_iso. The existing local Hom/tower criterion and the distinguished triangle zero/isomorphism equivalence identify Hom vanishing with invertibility of the tower endomorphism. Conjugate along mapDerivedCategoryFactors to the image of a complex tower. The exact-product theorem identifies the derived product with the image of the termwise product. Check the tower comparison after every product projection.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-regular-colimit",
+    "lem-weil-pbc-local-hom-tower-criterion",
+    "lem-weil-derived-limit-products-core",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For degree-zero objects, multiplication commutes with the single-complex/restriction comparison, checked in degree zero. The single derived functor preserves countable products by the exact-product theorem; its full faithfulness reflects invertibility. Hence derived tower invertibility is equivalent to the ordinary module difference being invertible. For a general ambient complex, evaluation preserves the product and commutes with the tower endomorphism. Invertible component differences therefore give a chain isomorphism. Its image in the derived category is invertible, so the local Hom/tower criterion gives vanishing after the localization and restriction comparisons.",
+   "uses": [
+    "def-weil-pbc-multiplication-difference",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-multiplication-difference",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-local-hom-tower-criterion",
+  "lem-weil-pbc-scalar-localization-regular-colimit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0997 and 099Q: implemented slice transport, exact products, regular localization, the Hom/tower comparison and componentwise invertibility in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Vanishing derived internal Hom from scalar localization is equivalent to invertibility of one minus the multiplication shift on countable products",
+   "results": "8 hits: derived-category localization instances, HasDerivedCategory.standard, invertible module localization, and localized shifted Hom; none states the sheaf multiplication criterion.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal derived Hom from a localization vanishes if and only if one minus multiplication shift on countable powers is invertible; exact countable products on proetale slices",
+   "results": "8 hits: HasExt small shifted Hom, single-functor Hom vanishing for injective/projective objects, K-projective orthogonality, and Tor vanishing. No multiplication-difference or pro-etale product theorem.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*[Cc]omplete|[Cc]omplete.*localization|[Cc]ountable.*[Pp]roduct",
+   "results": "24 hits: CountableAB4Star, HasCountableProducts, products in topology and probability; no sheaf localization criterion.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionLimitSheafCompleteness",
+  "date": "2026-10-20",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reconstruction-uniform-tower",
+   "place": "Proof first sentence: local completeness criterion through the multiplication tower and exact countable products",
+   "via": [
+    "lem-weil-pbc-torsion-limit-sheaf-completeness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleMultiplicationDifferenceCriterion",
+  "file": "lean/Sheaf/Paper/ProEtaleMultiplicationDifferenceCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_multiplicationDifference_criterion",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtale_multiplicationDifference_criterion"
+  ],
+  "statement": "theorem proEtale_multiplicationDifference_criterion (X : Scheme.{t}) (O : Sheaf (coefficientProEtaleModelTopology.{t, u} X) CommRingCat.{max u (t + 1)}) (U : coefficientProEtaleSiteModel.{t, u} X) (f : O.obj.obj (op U)) : let B := SheafOfModules.{max u (t + 1)} ((localCoefficientRings O).over U) let := HasDerivedCategory.standard B (countablePower B).PreservesHomology ∧ (∀ F : SheafOfModules.{max u (t + 1)} (localCoefficientRings O), IsZero ((derivedInternalHom ((coefficientProEtaleModelTopology.{t, u} X).over U) (O.over U)).obj (op ((DerivedCategory.singleFunctor B 0).obj (ringedSectionLocalization (O.over U) (ringedSliceSection O U f))), (DerivedCategory.singleFunctor B 0).obj (F.over U))) ↔ IsIso ((multiplicationDifference O U f).app (F.over U))) ∧ (∀ K : CochainComplex (SheafOfModules.{max u (t + 1)} (localCoefficientRings O)) ℤ, (∀ i : ℤ, IsIso ((multiplicationDifference O U f).app ((K.X i).over U))) → IsZero ((derivedInternalHom ((coefficientProEtaleModelTopology.{t, u} X).over U) (O.over U)).obj (op ((DerivedCategory.singleFunctor B 0).obj (ringedSectionLocalization (O.over U) (ringedSliceSection O U f))), DerivedCategory.Q.obj ((SheafOfModules.overFunctor (localCoefficientRings O) U).mapHomologicalComplex (.up ℤ) |>.obj K))))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-03874",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261020T221341-L-4176958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-03874",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261020T221341-L-4176958",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules + 5 node files vs live clone: 17 moved defs byte-identical, item theorem statement unchanged, item node changed only in lean/proof/proof_deps/proof_origin; compiled all 5 cleanly, importers AdicResidueLissePerfectLift OK and AdicStratifiedPerfect failing identically against published (pre-existing); #print axioms sorryAx traced to 3 sorry-dependent upstream theorems"
+ }
+}

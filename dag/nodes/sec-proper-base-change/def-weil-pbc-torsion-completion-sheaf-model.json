@@ -1,0 +1,120 @@
+{
+ "id": "def-weil-pbc-torsion-completion-sheaf-model",
+ "kind": "definition",
+ "title": "Constant coefficient model and local power-torsion systems",
+ "statement": "Let $X$ be a scheme with its small pro-etale site [def-weil-pbc-proetale-site], represented in a universe containing a commutative ring $A$ by the coefficient-sized model [def-weil-proetale-inverse-image]. Let $O=\\underline A$ be the constant ring sheaf [def-weil-pbc-constant-sheaf], with $A$ universe lifted. For an ideal $I\\subseteq A$, define its extended module ideal as the kernel of the constant quotient map $O\\to\\underline{A/I}$ in module sheaves [def-weil-sheaf-of-modules-category]. The quotient is given its scalar-restricted module structure, and the quotient map sends the unit generator to $1$. Use the standard derived category and its localization functor [def-weil-abstract-derived-category]. Define derived $I$-completeness by [def-weil-pbc-locally-derived-ringed-ideal-complete] for this ideal inclusion; degree-zero completeness uses the single complex. An ideal annihilates a module when all its local sections act by zero. A module is locally a power-torsion limit when on each object there is a covering sieve, and on each member its restriction is isomorphic to the inverse limit of a sequence whose level $n$ is killed by the extended ideal $I^{n+1}$. Transition maps are arbitrary. All these are the unchanged constructions previously in TorsionLimitSheafCompleteness.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099P (section-derived-completion-proetale) and 099Q (proposition-enough-weakly-contractibles), constant coefficients, power-torsion towers and derived completeness."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-derived-internal-hom",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-cochain-complex-modules",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099P (section-derived-completion-proetale) and 099Q (proposition-enough-weakly-contractibles), constant coefficients, power-torsion towers and derived completeness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Power of a section of the constant ideal sheaf belongs to the sheaf of the power ideal",
+   "results": "8 hits, including Ideal.pow_mem_pow (used for coefficients), ideal power membership, structure-sheaf evaluation, and fractional ideal powers. None gives the constant-sheaf kernel statement.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Powers of sections of the kernel of the constant quotient sheaf A to A modulo I belong to the kernel for I power n",
+   "results": "8 hits: ideal cotangent kernel, local cohomology ideal powers diagrams, adic topology, divided powers and adic completion transitions. No sheaf kernel result.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Ii]deal|[Ii]deal.*constant|pow_mem_pow",
+   "results": "25 hits: Ideal.pow_mem_pow and its uses, Witt-vector constant coefficient kernel, fractional and algebra ideal powers. Used Ideal.pow_mem_pow; local lifting and sheaf kernel comparison are additional.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionLimitSheafCompleteness",
+  "date": "2026-10-20",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reconstruction-uniform-tower",
+   "place": "Proof first sentence: coefficient modules and derived completeness of the local integral model",
+   "via": [
+    "lem-weil-pbc-torsion-limit-sheaf-completeness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TorsionCompletionDefinitions",
+  "file": "lean/Sheaf/Paper/TorsionCompletionDefinitions.lean",
+  "declaration": "AlgebraicGeometry.Scheme.torsionCompletionQuotient",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.torsionCompletionRing",
+   "AlgebraicGeometry.Scheme.torsionCompletionModuleRing",
+   "AlgebraicGeometry.Scheme.TorsionCompletionModules",
+   "AlgebraicGeometry.Scheme.torsionCompletionQuotient",
+   "AlgebraicGeometry.Scheme.torsionCompletionQuotientModule",
+   "AlgebraicGeometry.Scheme.torsionCompletionQuotientOne",
+   "AlgebraicGeometry.Scheme.torsionCompletionQuotientMap",
+   "AlgebraicGeometry.Scheme.torsionCompletionIdeal",
+   "AlgebraicGeometry.Scheme.torsionCompletionIdealInclusion",
+   "AlgebraicGeometry.Scheme.TorsionCompletionDerived",
+   "AlgebraicGeometry.Scheme.torsionCompletionLocalization",
+   "AlgebraicGeometry.Scheme.IsTorsionCompletionComplete",
+   "AlgebraicGeometry.Scheme.IsTorsionCompletionCompleteSheaf",
+   "AlgebraicGeometry.Scheme.IsAnnihilatedByModuleIdeal",
+   "AlgebraicGeometry.Scheme.IsLocallyPowerTorsionLimit"
+  ],
+  "statement": "def torsionCompletionQuotient (X : Scheme.{t}) {A : Type u} [CommRing A] (I : Ideal A) : torsionCompletionModuleRing X A ⟶ torsionCompletionModuleRing X (A ⧸ I)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-03874",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261020T221341-L-4176958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-03874",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261020T221341-L-4176958",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules + 5 node files vs live clone: 17 moved defs byte-identical, item theorem statement unchanged, item node changed only in lean/proof/proof_deps/proof_origin; compiled all 5 cleanly, importers AdicResidueLissePerfectLift OK and AdicStratifiedPerfect failing identically against published (pre-existing); #print axioms sorryAx traced to 3 sorry-dependent upstream theorems"
+ }
+}

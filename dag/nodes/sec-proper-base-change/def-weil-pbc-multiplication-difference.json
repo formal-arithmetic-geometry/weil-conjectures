@@ -1,0 +1,101 @@
+{
+ "id": "def-weil-pbc-multiplication-difference",
+ "kind": "definition",
+ "title": "Countable powers and the multiplication difference",
+ "statement": "Let $B$ be a category with countable products. Define the countable-power functor $P(M)=\\prod_{j\\geq0}M$ with coordinatewise action on morphisms. In a preadditive category it is additive; it preserves limits whenever those limits exist. For a small ringed site with commutative coefficient sheaf $O$ [def-pur-localized-ringed-site, def-weil-sheaf-of-modules-category], an object $U$ and $f\\in O(U)$, define the natural endomorphism $\\Delta_f$ on countable powers of module sheaves on the slice by $(x_j)\\mapsto(x_j-fx_{j+1})$. Multiplication by $f$ at an object $V\\to U$ means multiplication by the restriction of $f$.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997 (lemma-hom-from-Af), multiplication difference on countable powers."
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997 (lemma-hom-from-Af), multiplication difference on countable powers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Vanishing derived internal Hom from scalar localization is equivalent to invertibility of one minus the multiplication shift on countable products",
+   "results": "8 hits: derived-category localization instances, HasDerivedCategory.standard, invertible module localization, and localized shifted Hom; none states the sheaf multiplication criterion.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal derived Hom from a localization vanishes if and only if one minus multiplication shift on countable powers is invertible; exact countable products on proetale slices",
+   "results": "8 hits: HasExt small shifted Hom, single-functor Hom vanishing for injective/projective objects, K-projective orthogonality, and Tor vanishing. No multiplication-difference or pro-etale product theorem.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*[Cc]omplete|[Cc]omplete.*localization|[Cc]ountable.*[Pp]roduct",
+   "results": "24 hits: CountableAB4Star, HasCountableProducts, products in topology and probability; no sheaf localization criterion.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionLimitSheafCompleteness",
+  "date": "2026-10-20",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reconstruction-uniform-tower",
+   "place": "Proof first sentence: multiplication-tower calculation for completeness",
+   "via": [
+    "lem-weil-pbc-torsion-limit-sheaf-completeness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.MultiplicationDifference",
+  "file": "lean/Sheaf/CategoryTheory/MultiplicationDifference.lean",
+  "declaration": "CategoryTheory.multiplicationDifference",
+  "declarations": [
+   "CategoryTheory.countablePower",
+   "CategoryTheory.countablePower_additive",
+   "CategoryTheory.countablePower_preservesLimitsOfShape",
+   "CategoryTheory.multiplicationDifference"
+  ],
+  "statement": "def multiplicationDifference {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u}) (U : C) (f : O.obj.obj (op U)) : countablePower (SheafOfModules.{u} ((localCoefficientRings O).over U)) ⟶ countablePower (SheafOfModules.{u} ((localCoefficientRings O).over U))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-03874",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261020T221341-L-4176958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-03874",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261020T221341-L-4176958",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules + 5 node files vs live clone: 17 moved defs byte-identical, item theorem statement unchanged, item node changed only in lean/proof/proof_deps/proof_origin; compiled all 5 cleanly, importers AdicResidueLissePerfectLift OK and AdicStratifiedPerfect failing identically against published (pre-existing); #print axioms sorryAx traced to 3 sorry-dependent upstream theorems"
+ }
+}
