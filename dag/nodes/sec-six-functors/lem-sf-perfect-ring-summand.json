@@ -13,93 +13,53 @@
  ],
  "proof": [
   {
-   "text": "Put $S=K\\oplus L$. By [def-pc-perfect-ring-complex], choose a bounded complex $P^\\bullet$ of finitely generated projective $A$-modules with $Q(P)\\cong S$. Choose integers $a\\leq b$ such that $P^i=0$ outside $[a,b]$, enlarging the bounds if necessary. Apply [lem-pc-finite-projective-complex-free-model] to $P$ with upper bound $b$. It gives a bounded-above finite-free complex $F$ and a quasi-isomorphism $F\\to P$. Composing its derived isomorphism with $Q(P)\\cong S$ shows that $S$ is pseudo-coherent, exactly as defined by [def-pc-ring-pseudo-coherent-complex].",
+   "text": "Unpack IsPerfectRingComplex of S = K biprod L as a finite-projective complex P with strict bounds a,b and an isomorphism S to Q(P). Apply exists_finiteFree_model_of_finite_projective to P and upper bound b. Its quasi-isomorphism f becomes an isomorphism under Q; composing with the model isomorphism exhibits IsPseudoCoherent S. Apply the already stated and proved pseudoCoherent_summand directly to the derived objects K and L. No choice of separate complex representatives is needed.",
    "uses": [
     "def-pc-perfect-ring-complex",
     "lem-pc-finite-projective-complex-free-model",
-    "def-pc-ring-pseudo-coherent-complex"
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-ring-pseudo-coherent-summand"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 066S, lemma-summands-perfect, using Tag 0658 (lemma-perfect) and Tag 064U (lemma-pseudo-coherent), implication (3) to (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose complex representatives $K_0,L_0$ of $K,L$. Their termwise direct sum represents $S$. The last clause of [lem-pc-ring-pseudo-coherent-summand] applies: since $K_0\\oplus L_0$ is quasi-isomorphic to a bounded-above finite-free complex, so are $K_0$ and $L_0$. Thus both $K$ and $L$ are pseudo-coherent in the sense of [def-pc-ring-pseudo-coherent-complex].",
-   "uses": [
-    "lem-pc-ring-pseudo-coherent-summand",
-    "def-pc-ring-pseudo-coherent-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 066S, invoking Tag 064X (lemma-summands-pseudo-coherent), final clause"
-   }
-  },
-  {
-   "text": "Every term $P^i$ is flat by [lem-weil-pbc-projective-module-flat]. The complex $P$ is bounded above, so [lem-pc-module-bounded-flat-kflat] makes it K-flat. This applies over the given arbitrary commutative ring $A$; neither Noetherianity nor flatness of a test module is required.",
+   "text": "Each term P.X i is flat by Module.Flat.of_projective; translate this to categorical flatness with ModuleCat.flat_iff_flat. Apply the existing proved source lemma torAmplitudeIn_Q_obj_of_flat, recorded by lem-trf-source-bounded-flat-tor-amplitude. Transport its Tor amplitude across S isomorphic to Q(P). Widen the lower endpoint to min a b to ensure the ordered interval required by the final perfectness criterion, including the case a>b. The generic source theorem already packages the K-flat computation, so the separate bounded-module K-flatness theorem and mixed-coefficient derived tensor existence theorem are unnecessary.",
    "uses": [
     "lem-weil-pbc-projective-module-flat",
-    "lem-pc-module-bounded-flat-kflat"
+    "lem-trf-source-bounded-flat-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0658 (lemma-perfect), forward implication; Tag 064K (lemma-derived-tor-quasi-isomorphism)"
-   }
+   "elementary": false
   },
   {
-   "text": "For any $A$-module $M$ placed in degree zero, specialize [lem-pc-derived-tensor-second-factor-functor] to the identity ring map $A\\to A$ and $N=M[0]$. Its K-flat computation clause applied to $P$ identifies $S\\otimes_A^{\\mathbf L}M$ with $Q(P\\otimes_A M)$. The latter complex has term $P^i\\otimes_A M$ in degree $i$, hence is zero in every degree outside $[a,b]$. Its cohomology there is zero. The same interval works for every $M$, so $S$ has finite Tor dimension with amplitude $[a,b]$.",
+   "text": "Construct Retract K S from biprod.inl, biprod.fst and biprod.inl_fst, and Retract L S from biprod.inr, biprod.snd and biprod.inr_snd. The existing IsStableUnderRetracts instance for torAmplitudeIn transfers the common interval [min a b,b] to each summand. It maps the retract through tensoring with each degree-zero test module and uses stability of homologyConcentratedIn under retracts, exactly the Tag 066G argument.",
    "uses": [
-    "lem-pc-derived-tensor-second-factor-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0658 (lemma-perfect), forward implication, and Tag 06Y6 (lemma-derived-base-change), K-flat computation"
-   }
-  },
-  {
-   "text": "For $T=K$ and then $T=L$, let $i:T\\to S$ and $p:S\\to T$ be the biproduct inclusion and projection, so $p\\circ i=1_T$. For each $M$ and degree $j$, apply the tensor functor of [lem-pc-derived-tensor-second-factor-functor] and the cohomology functor of [def-weil-abstract-derived-category]. Functoriality gives $H^j(p\\otimes 1)\\circ H^j(i\\otimes 1)=1_{H^j(T\\otimes_A^{\\mathbf L}M)}$. If $j\\notin[a,b]$, these maps factor through $H^j(S\\otimes_A^{\\mathbf L}M)=0$ by Step 4, so the displayed identity is zero. A module whose identity is zero is the zero module. Thus $K$ and $L$ both have Tor amplitude in $[a,b]$. This writes out the summand argument of Tag 066G using the actual inclusion and projection maps.",
-   "uses": [
-    "lem-pc-derived-tensor-second-factor-functor",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 066G (lemma-summands-tor-amplitude), proof by additivity, expanded using retracts"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-pc-ring-pseudo-coherent-finite-tor-perfect] separately to $C=K$ and $C=L$. Step 2 supplies a bounded-above finite-free model, hence in particular a bounded-above finitely generated projective model, and Step 5 supplies the finite Tor interval $[a,b]$. Its conclusion gives a bounded finitely generated projective model for each object. This is perfectness as defined by [def-pc-perfect-ring-complex], proving both assertions.",
+   "text": "For each summand T apply isPerfect_of_pseudoCoherent_finiteTorAmplitude with its pseudo-coherence and the ordered interval [min a b,b]. Unpack the resulting complex E, bounds c,d, finite generation, projectivity and isomorphism Q(E) to T. Convert the termwise support conditions to E.IsStrictlyGE c and E.IsStrictlyLE d using the Mathlib equivalences. Reverse the model isomorphism to obtain exactly IsPerfectRingComplex T. Pair the conclusions for K and L.",
    "uses": [
     "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
     "def-pc-perfect-ring-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 066S, concluding with Tag 0658 (lemma-perfect), implication (2) to (1)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-perfect-ring-complex",
   "def-pc-ring-pseudo-coherent-complex",
   "def-weil-abstract-derived-category",
-  "lem-pc-derived-tensor-second-factor-functor",
   "lem-pc-finite-projective-complex-free-model",
-  "lem-pc-module-bounded-flat-kflat",
   "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
   "lem-pc-ring-pseudo-coherent-summand",
+  "lem-trf-source-bounded-flat-tor-amplitude",
   "lem-weil-pbc-projective-module-flat"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 066S (lemma-summands-perfect): Tag 064X for pseudo-coherence, the elementary Tag 066G retract argument for Tor amplitude, and Tag 0658 for the perfectness criterion; forward implication expanded using Tags 064U, 064K and 06Y6."
+  "place": "Tags 066S, 064X, 066G and 0658. Lean proof by S9 uses the existing generic bounded-flat Tor-amplitude theorem and the existing Tor-amplitude retract instance to package the planned K-flat computation and retract arguments."
  },
  "mathlib_searches": [
   {
@@ -220,8 +180,6 @@
  "tool_uses": [
   "lem-pc-finite-projective-complex-free-model",
   "lem-pc-ring-pseudo-coherent-summand",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-derived-tensor-second-factor-functor",
   "lem-pc-ring-pseudo-coherent-finite-tor-perfect"
  ],
  "reviewed": {
@@ -249,5 +207,15 @@
   "group": "Q109",
   "result": "pass",
   "note": "Statement matches node and Stacks 066S clause by clause: {A : Type u} [CommRing A], [HasDerivedCategory.{w}] with w independent of u, K L : DerivedCategory (ModuleCat.{u} A), h : IsPerfectRingComplex (K ⊞ L) ⊢ IsPerfectRingComplex K ∧ IsPerfectRingComplex L; uses the recorded def-pc-perfect-ring-complex predicate (bounded, finite projective, iso to Q.obj P). Node diff adds only the lean block, and lean.statement appears verbatim in the file. No new nodes or corrections. No existing ring summand theorem (only scheme IsPerfect X versions; upstream Perfect.lean has none). Docstrings carry the source place, the blueprint tag and the six proof steps; proof is sorry only; report has Worker report and Second reading by Q109. Edge cases (zero ring, zero summand, non-Noetherian, non-free projective) covered. nt_compile.py on the snapshot file: rc 0, ~4 s, no errors or warnings; probe axioms [propext, sorryAx, Classical.choice, Quot.sound]. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261020T122136-L-485495",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
