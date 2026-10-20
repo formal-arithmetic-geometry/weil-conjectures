@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPart
 import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
-import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentSupportPart
+import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentSupportPart
 
 /-! # Quasi-coherence and support of derived internal Hom
 
