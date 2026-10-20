@@ -1,0 +1,136 @@
+{
+ "id": "lem-wf-proetale-tensor-model-linear",
+ "kind": "lemma",
+ "title": "Coefficient linearity of a normalized pro-etale derived tensor model",
+ "statement": "Let X be a scheme, A a commutative coefficient ring with adic datum d, and O the completed pro-etale coefficient sheaf [def-weil-pbc-adic-coefficient-datum]. For any normalized derived tensor model b for O [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], both partial functors M ↦ b.tensor(M,N) and N ↦ b.tensor(M,N) are additive and A-linear, for every fixed object in the other variable. The normalization is the natural comparison on flat-term K-flat representatives [lem-weil-pbc-site-derived-tensor-descent].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YT and 06YU, lines 3232–3326; coefficient linearity follows from the explicit tensor and localization constructions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [
+  {
+   "text": "Give module sheaves the coefficient-ring action by their sectionwise scalar homomorphisms. Sheafification is linear, hence tensoring sheaves is linear in each variable; symmetry exchanges the variables.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check scalar multiplication on each summand of total tensor. The direct-sum inclusions jointly detect chain maps, so total tensor is additive and linear in each variable.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the natural comparison of homotopy tensor with total tensor, and fullness and essential surjectivity of the homotopy quotient, to transfer additivity and linearity to homotopy tensor.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flat-term K-flat complexes resolve every complex. Lift right fractions through such resolutions to obtain a right calculus of fractions on the resolving subcategory. Its localization is the derived category. Restrict the normalized representative comparison to this subcategory and descend additivity and linearity through localization, first in one variable and then the other.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "J4 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Sectionwise tensor, totalization, homotopy quotient, and resolving localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived tensor bifunctor on sheaves of modules is linear in each variable over a coefficient ring after K-flat localization",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.Monoidal.tensorObj, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedLightCondMod, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, LightCondensed.instMonoidalCategoryLightCondMod",
+   "date": "2026-10-20",
+   "verdict": "Ingredients only; no normalized K-flat tensor-model linearity theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "linear_of_full_essSurj_comp|functor_linear_iff",
+   "results": "6 hits: Mathlib/CategoryTheory/Shift/Linear.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/CategoryTheory/Localization/Linear.lean, Mathlib/CategoryTheory/Linear/LinearFunctor.lean, Mathlib/CategoryTheory/Linear/LinearFunctor.lean",
+   "date": "2026-10-20",
+   "verdict": "Ingredients only; no normalized K-flat tensor-model linearity theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear",
+   "results": "12 hits: CategoryTheory.Functor.instLinearId, CategoryTheory.Functor.Linear, CategoryTheory.Functor.intLinear, CategoryTheory.Functor.natLinear, CategoryTheory.Functor.ratLinear, CategoryTheory.Functor.fullSubcategoryInclusionLinear, CategoryTheory.Functor.inducedFunctorLinear, CategoryTheory.Equivalence.inverseLinear",
+   "date": "2026-10-20",
+   "verdict": "Ingredients only; no normalized K-flat tensor-model linearity theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived tensor bifunctor on sheaves of modules is linear in each variable over a coefficient ring after K-flat localization",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinear, CategoryTheory.tensoringRight_linear, CategoryTheory.tensorRight_linear, CategoryTheory.Localization.Monoidal.tensorBifunctor, CategoryTheory.tensorLeft_linear, IsLocalization.instIsLocalizedModuleTensorProductMap, DerivedCategory.instLinearCochainComplexIntQ",
+   "date": "2026-10-20",
+   "verdict": "Ingredients only; no normalized K-flat tensor-model linearity theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilTensorProduct",
+  "date": "2026-10-20",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-tensor-product",
+   "place": "linearity needed to define tensor on raw scalar-localized Hom modules"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleTensorModelLinear",
+  "file": "lean/Sheaf/Paper/ProEtaleTensorModelLinear.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleTensorModel_linear",
+  "statement": "theorem proEtaleTensorModel_linear (b : ProEtaleTensorModel X (pbcAdicCompletion X d)) :\n    (∀ M, ((Functor.curry.obj b.tensor).obj M).Additive ∧\n      ((Functor.curry.obj b.tensor).obj M).Linear A) ∧\n    ∀ M, ((Functor.curry.obj b.tensor).flip.obj M).Additive ∧\n      ((Functor.curry.obj b.tensor).flip.obj M).Linear A",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1480f",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261020T221221-L-4159364",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-1480f",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261020T221221-L-4159364",
+  "kind": "interface",
+  "note": "independent cc review: delivered WeilTensorProduct + new ProEtaleTensorModelLinear against live clone, nodes def-wf-tensor-product / lem-wf-proetale-tensor-model-linear / lem-wf-bilinear-scalar-extension, both change records; compiled delivery, #print axioms, and all 10 direct importers"
+ }
+}
