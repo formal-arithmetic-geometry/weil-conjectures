@@ -21,7 +21,7 @@
  ],
  "proof": [
   {
-   "text": "On each open U use Mathlib exteriorPower.oneEquiv, sending a singleton wedge to its entry. The defining characterization of exteriorSheafRestriction [def-sc-sheaf-exterior-power] implies compatibility on singleton wedges, which span, hence on every section. These equivalences give a presheaf isomorphism. Sheafify it and compose with the invertible counit of PresheafOfModules.sheafificationAdjunction at the already-sheaf M.",
+   "text": "On each open use exteriorPower.oneEquiv. Naturality follows on singleton wedges from PresheafOfModules.exteriorPower_map_ιMulti. Sheafify the presheaf isomorphism and compose with the invertible counit at M. This is the official exteriorPower implementation of the sectionwise exterior sheaf [def-sc-sheaf-exterior-power].",
    "uses": [
     "def-sc-sheaf-exterior-power"
    ],
@@ -82,13 +82,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafOneIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafOneIso.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafOneIso",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafOneIso.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_one_iso",
-  "statement": "theorem exteriorSheaf_one_iso {X : Scheme.{u}} (M : X.Modules) : Nonempty (exteriorSheaf M 1 ≅ M)",
+  "statement": "theorem exteriorSheaf_one_iso {X : Scheme.{u}} (M : X.Modules) : Nonempty (exteriorPower M 1 ≅ M)",
   "branch": "sheaf-dag",
   "by": "F1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "Retired the Sheaf twin in favor of the official exteriorPower construction. The legacy exteriorSheaf is identified with it by exteriorSheaf_eq_exteriorPower; the curve consumer explicitly composes this comparison with the official degree-one isomorphism."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -103,14 +104,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "H2",
+  "reviewer": "C-02693",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261020T150641-L-2551703",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261020T211642-L-3483773",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn Sheaf exteriorSheaf_one_iso (0 importers) and node lean record repointed to proved WeilConjectures twin (exteriorPower, equal via exteriorSheaf_eq_exteriorPower); change record carries the adaptation ordered by the e3b66 return; Refinement.exists_overRefinement filled, axioms clean; --all compile clean"
  },
  "lean_audit": {
   "master": {
