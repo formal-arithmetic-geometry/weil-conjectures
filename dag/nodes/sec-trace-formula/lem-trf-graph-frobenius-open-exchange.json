@@ -1,320 +1,263 @@
 {
-  "id": "lem-trf-graph-frobenius-open-exchange",
-  "kind": "statement",
-  "title": "Open extension commutes with the canonical scheme/Galois comparison",
-  "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber] and the finite coefficient ring $A=\\mathcal O_E/\\varpi_E^n$, with $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ finite and $n\\geq1$, of [def-trf-coefficient-conventions]. Let $j_0:X_0\\hookrightarrow Y_0$ be an open immersion of separated finite-type $k_0$-schemes, let $j:X\\hookrightarrow Y$ be its base change to $k$, and fix $m\\geq1$. Write $\\Phi_X,\\Phi_Y$ and $g_X,g_Y$ for the scheme and geometric Galois Frobenii [def-trf-scheme-frobenius]. Use extension by zero [def-weil-extension-by-zero] and derived pullback [def-weil-derived-pullback-tensor-hom] at $A$. Let $\\kappa_{m,X}$ and $\\kappa_{m,Y}$ be the comparisons [prop-trf-scheme-galois-comparison], each specified by the factorization [prop-trf-frobenius-factorization], canonical pullback composition [lem-weil-pbc-proetale-derived-pullback-composition] and absolute-Frobenius trivialization [lem-trf-absolute-frobenius-site]. For $M\\in D^b_{ctf}(X,A)$ write\n$$\nb_{\\Phi,m,M}:L(\\Phi_Y^m)^*j_!M\\xrightarrow{\\sim}j_!L(\\Phi_X^m)^*M,\\qquad\nb_{g,m,M}:L(g_Y^m)^*j_!M\\xrightarrow{\\sim}j_!L(g_X^m)^*M\n$$\nfor the canonical exchanges [lem-trf-open-square-exchange] of the Cartesian squares [lem-trf-frobenius-open-square]. Then\n$$\nb_{g,m,M}\\circ\\kappa_{m,Y,j_!M}=j_!(\\kappa_{m,X,M})\\circ b_{\\Phi,m,M}.\n$$\nThe equality is natural in $M$ and holds for every $m\\geq1$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
-    "place": "Step 2: compatibility of the canonical comparisons with the Cartesian open squares"
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-trf-coefficient-conventions",
-    "def-trf-scheme-frobenius",
-    "def-weil-extension-by-zero",
-    "def-weil-derived-pullback-tensor-hom",
-    "prop-trf-scheme-galois-comparison",
-    "prop-trf-frobenius-factorization",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-trf-absolute-frobenius-site",
-    "lem-trf-open-square-exchange",
-    "lem-trf-frobenius-open-square"
-  ],
-  "proof": [
-    {
-      "text": "For $Z=X,Y$ put $H_Z=F_Z^{am}$, where $F_Z$ is absolute $p$-power Frobenius, and write $P_Z=L\\Phi_Z^{m*}$, $G_Z=Lg_Z^{m*}$, $T_Z=LH_Z^*$. These schemes have characteristic $p$, since their structure maps factor through $k_0$ of characteristic $p$. By [prop-trf-frobenius-factorization] and [def-trf-scheme-frobenius], $H_Z=g_{\\sigma,Z}^m\\Phi_Z^m$ and $g_Z=g_{\\sigma,Z}^{-1}$, hence $\\Phi_Z^m=g_Z^mH_Z$. Let $c_Z:P_Z\\xrightarrow{\\sim}T_ZG_Z$ be canonical pullback composition [lem-weil-pbc-proetale-derived-pullback-composition]. Write $t_Z:T_Z\\xrightarrow{\\sim}\\mathrm{id}$ for the $am$-fold trivialization [lem-trf-absolute-frobenius-site]. The specified comparison [prop-trf-scheme-galois-comparison] is exactly\n$$\\kappa_{m,Z,N}=t_{Z,G_ZN}\\circ c_{Z,N}.$$\nThis uses the geometric inverse of arithmetic Frobenius; neither $g_Z$ nor $H_Z$ is required to be a $k$-morphism.",
-      "uses": [
-        "prop-trf-frobenius-factorization",
-        "def-trf-scheme-frobenius",
-        "lem-weil-pbc-proetale-derived-pullback-composition",
-        "lem-trf-absolute-frobenius-site",
-        "prop-trf-scheme-galois-comparison"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
-        "place": "Step 2: expand the specified comparison using scheme-galois-comparison.proof.md, first displayed construction"
-      }
-    },
-    {
-      "text": "We fix the coherence of the canonical pullback comparisons used below. The finite constant coefficient identifications preserve constants by [prop-weil-pbc-proetale-constant-ring-map], so all composites use those same identifications. The explicit comparison of [lem-sf-proetale-tensor-composition-unit] sends $(v\\otimes a)\\otimes b$ to $v\\otimes c_h(a)b$. For three pullbacks both reassociations therefore send $((v\\otimes a)\\otimes b)\\otimes d$ to $v\\otimes c_hc_k(a)c_h(b)d$; the underlying fibre-product reassociations have the same projections. Thus these comparisons agree, including when one map is the open inclusion. Restricting the formula to the open keeps precisely the same sections and scalar multiplication, so also gives that comparison there. Pullbacks are exact by [prop-weil-pbc-proetale-constant-exact]; applying the formulas degreewise and descending by clauses (2),(3) of [lem-weil-pbc-localization-universal-property] preserves these equations. They give the canonical derived comparisons of [lem-weil-pbc-proetale-derived-pullback-composition], whose statement specifies the same termwise comparison on K-flat representatives. Hence reassociating pullbacks before or after restriction gives the same map.",
-      "uses": [
-        "prop-weil-pbc-proetale-constant-ring-map",
-        "lem-sf-proetale-tensor-composition-unit",
-        "prop-weil-pbc-proetale-constant-exact",
-        "lem-weil-pbc-localization-universal-property",
-        "lem-weil-pbc-proetale-derived-pullback-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
-        "place": "Step 2: elementary coherence calculation for the canonical comparisons used to restrict the factorization"
-      }
-    },
-    {
-      "text": "Put $r=Lj^*$. The commutative squares [lem-trf-frobenius-open-square] give canonical composition comparisons\n$$\\alpha_P:rP_Y\\xrightarrow{\\sim}P_Xr,\\qquad \\alpha_G:rG_Y\\xrightarrow{\\sim}G_Xr.$$\nAbsolute Frobenius commutes with $j$, and [lem-pur-frobenius-trivialization-pullback], applied to $u=j$ and $b=am$, gives $\\alpha_T:rT_Y\\xrightarrow{\\sim}T_Xr$ and the precise equality\n$$t_{X,rN}\\circ\\alpha_{T,N}=r(t_{Y,N}).$$\nThat node identifies $t_Z$ with the trivialization of Step 1, including its iterates; $A$ is a finite commutative ring, as required. The coherence calculation in Step 2, applied to $\\Phi_Z^m=g_Z^mH_Z$, gives\n$$c_{X,rN}\\circ\\alpha_{P,N}=T_X(\\alpha_{G,N})\\circ\\alpha_{T,G_YN}\\circ r(c_{Y,N}).$$\nEvery term has source $rP_YN$ and target $T_XG_XrN$.",
-      "uses": [
-        "lem-trf-frobenius-open-square",
-        "lem-pur-frobenius-trivialization-pullback",
-        "lem-weil-pbc-proetale-derived-pullback-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
-        "place": "Step 2: restriction compatibility of the absolute-Frobenius trivialization, using the explicit pullback-naturality interface"
-      }
-    },
-    {
-      "text": "Expand $\\kappa$ by Step 1 and use Step 3. Naturality of $t_X$ with respect to $\\alpha_{G,N}$ gives\n$$\\begin{aligned}\n\\kappa_{m,X,rN}\\circ\\alpha_{P,N}\n&=t_{X,G_XrN}\\circ T_X(\\alpha_{G,N})\\circ\\alpha_{T,G_YN}\\circ r(c_{Y,N})\\\\\n&=\\alpha_{G,N}\\circ t_{X,rG_YN}\\circ\\alpha_{T,G_YN}\\circ r(c_{Y,N})\\\\\n&=\\alpha_{G,N}\\circ r(\\kappa_{m,Y,N}).\n\\end{aligned}$$\nThis proves the restriction identity for the specified comparisons, rather than for an unspecified isomorphism between the two pullback functors.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
-        "place": "Step 2: substitution of the construction of kappa and naturality of its absolute-Frobenius trivialization"
-      }
-    },
-    {
-      "text": "Use the derived open units $u_Q:Q\\xrightarrow{\\sim}rj_!Q$ from [lem-sf-open-tensor-normalization], with inverses $\\nu_Q$. The squares in [lem-trf-frobenius-open-square] are Cartesian, so [lem-trf-open-square-exchange] supplies $b_P=b_{\\Phi,m,M}$ and $b_G=b_{g,m,M}$. Its identity normalization on the open means exactly\n$$\\nu_{P_XM}\\circ r(b_P)=P_X(\\nu_M)\\circ\\alpha_{P,j_!M},\\qquad\n\\nu_{G_XM}\\circ r(b_G)=G_X(\\nu_M)\\circ\\alpha_{G,j_!M}.$$\nThese equalities use the canonical composition comparisons fixed in Step 2 and the open units; the normalization theorem uses those same units. All functors here act on the ordinary derived categories of pro-etale modules with constant coefficient $A$. Thus its derived-unit assertion applies directly, without passing to an etale category or testing on geometric stalks.",
-      "uses": [
-        "lem-sf-open-tensor-normalization",
-        "lem-trf-frobenius-open-square",
-        "lem-trf-open-square-exchange"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
-        "place": "Step 2: use the identity normalization of the two canonical open-square exchanges"
-      }
-    },
-    {
-      "text": "Write $L=b_G\\circ\\kappa_{m,Y,j_!M}$ and $R=j_!(\\kappa_{m,X,M})\\circ b_P$. Apply Step 4 with $N=j_!M$, and then naturality of $\\kappa_{m,X}$ for $\\nu_M:rj_!M\\to M$. Step 5 gives\n$$\\begin{aligned}\n\\nu_{G_XM}\\circ r(L)\n&=G_X(\\nu_M)\\circ\\alpha_{G,j_!M}\\circ r(\\kappa_{m,Y,j_!M})\\\\\n&=G_X(\\nu_M)\\circ\\kappa_{m,X,rj_!M}\\circ\\alpha_{P,j_!M}\\\\\n&=\\kappa_{m,X,M}\\circ P_X(\\nu_M)\\circ\\alpha_{P,j_!M}\\\\\n&=\\kappa_{m,X,M}\\circ\\nu_{P_XM}\\circ r(b_P)\n=\\nu_{G_XM}\\circ r(R).\n\\end{aligned}$$\nThe last equality is naturality of the open-unit inverse $\\nu$. Since $\\nu_{G_XM}$ is invertible, $r(L)=r(R)$.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
-        "place": "Step 2: explicit calculation of the restrictions of both sides of the claimed equality"
-      }
-    },
-    {
-      "text": "The derived full faithfulness of $j_!$ in [lem-sf-open-tensor-normalization] now lifts this equality. Indeed precompose $L,R$ with $b_P^{-1}$, obtaining maps $f,h:j_!P_XM\\to j_!G_XM$. Full faithfulness writes them uniquely as $j_!f_0,j_!h_0$. Naturality of $\\nu$ gives $f_0=\\nu_{G_XM}\\,r(f)\\,u_{P_XM}$ and the same formula for $h_0$. Their restrictions agree by Step 6, hence $f_0=h_0$, $f=h$, and $L=R$. The comparisons of [prop-trf-scheme-galois-comparison] and the exchanges of [lem-trf-open-square-exchange] are natural in the coefficient complex, so both sides are natural in $M$. The argument was for an arbitrary $m\\geq1$ and used $am$ throughout, proving every asserted iterate, without any induction or extra Weil structure on $M$.",
-      "uses": [
-        "lem-sf-open-tensor-normalization",
-        "prop-trf-scheme-galois-comparison",
-        "lem-trf-open-square-exchange"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
-        "place": "Step 2: lift restriction equality by full faithfulness of derived open extension and conclude naturality"
-      }
-    }
-  ],
-  "proof_deps": [
-    "prop-trf-frobenius-factorization",
-    "def-trf-scheme-frobenius",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-trf-absolute-frobenius-site",
-    "prop-trf-scheme-galois-comparison",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-sf-proetale-tensor-composition-unit",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-trf-frobenius-open-square",
-    "lem-pur-frobenius-trivialization-pullback",
-    "lem-sf-open-tensor-normalization",
+ "id": "lem-trf-graph-frobenius-open-exchange",
+ "kind": "statement",
+ "title": "Open extension commutes with the canonical scheme/Galois comparison",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber] and the finite coefficient ring $A=\\mathcal O_E/\\varpi_E^n$, with $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ finite and $n\\geq1$, of [def-trf-coefficient-conventions]. Let $j_0:X_0\\hookrightarrow Y_0$ be an open immersion of separated finite-type $k_0$-schemes, let $j:X\\hookrightarrow Y$ be its base change to $k$, and fix $m\\geq1$. Write $\\Phi_X,\\Phi_Y$ and $g_X,g_Y$ for the scheme and geometric Galois Frobenii [def-trf-scheme-frobenius]. Use extension by zero [def-weil-extension-by-zero] and derived pullback [def-weil-derived-pullback-tensor-hom] at $A$. Let $\\kappa_{m,X}$ and $\\kappa_{m,Y}$ be the comparisons [prop-trf-scheme-galois-comparison], each specified by the factorization [prop-trf-frobenius-factorization], canonical pullback composition [lem-weil-pbc-proetale-derived-pullback-composition] and absolute-Frobenius trivialization [lem-trf-absolute-frobenius-site]. For $M\\in D^b_{ctf}(X,A)$ write\n$$\nb_{\\Phi,m,M}:L(\\Phi_Y^m)^*j_!M\\xrightarrow{\\sim}j_!L(\\Phi_X^m)^*M,\\qquad\nb_{g,m,M}:L(g_Y^m)^*j_!M\\xrightarrow{\\sim}j_!L(g_X^m)^*M\n$$\nfor the canonical exchanges [lem-trf-open-square-exchange] of the Cartesian squares [lem-trf-frobenius-open-square]. Then\n$$\nb_{g,m,M}\\circ\\kappa_{m,Y,j_!M}=j_!(\\kappa_{m,X,M})\\circ b_{\\Phi,m,M}.\n$$\nThe equality is natural in $M$ and holds for every $m\\geq1$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+  "place": "Step 2: compatibility of the canonical comparisons with the Cartesian open squares"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-weil-extension-by-zero",
+  "def-weil-derived-pullback-tensor-hom",
+  "prop-trf-scheme-galois-comparison",
+  "prop-trf-frobenius-factorization",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-absolute-frobenius-site",
+  "lem-trf-open-square-exchange",
+  "lem-trf-frobenius-open-square"
+ ],
+ "proof": [
+  {
+   "text": "Let J be exact derived open extension and R intrinsic derived restriction. Use the existing exceptionalOpenAdjunction J ⊣ R from prop-exc-open-adjoint. Its unit equals sfIntrinsicDerivedOpenUnit: precompose with the derived localization functor, expand the localized adjunction unit, and cancel the exact identity and composition factorization isomorphisms. This is exactDerivedAdjunction_unit in Lean.",
+   "uses": [
+    "prop-exc-open-adjoint",
     "lem-trf-open-square-exchange"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
-    "place": "Step 2, expanded open-extension compatibility using the existing canonical Frobenius and open-unit interfaces"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Canonical Frobenius open square exchange commutes with scheme Galois comparison after extension by zero",
-      "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.Extension.frob\", \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"RingHom.frobenius_comm\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc\", \"Algebra.IsQuadraticExtension.isMulCommutative_galoisGroup\", \"AlgebraicGeometry.basicOpenIsoSpecAway_inv_homOfLE_assoc\", \"AlgebraicGeometry.ValuativeCommSq.commSq\"], \"digest\": \"3ef4ebd6595f1c2e\", \"sub\": \"\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: generic natural transformations, pullback comparisons and field Frobenius facts omit extension by zero and this canonical comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Frobenius open square exchange comparison extension by zero commutes with canonical pullback comparison",
-      "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.map_lift_pullbackComparison\", \"PresheafOfModules.pullbackComp\", \"CategoryTheory.Limits.map_lift_pullbackComparison_assoc\", \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"CategoryTheory.GlueData.t'_comp_eq_pullbackSymmetry\"], \"digest\": \"393d6347f7e63f32\", \"sub\": \"\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: generic natural transformations, pullback comparisons and field Frobenius facts omit extension by zero and this canonical comparison"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.NatTrans, \"comp\"",
-      "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.vcomp\", \"CategoryTheory.NatTrans.vcomp_app\", \"CategoryTheory.NatTrans.vcomp_eq_comp\", \"CategoryTheory.comp_toNatTrans\", \"CategoryTheory.MonadHom.comp_toNatTrans\", \"CategoryTheory.Functor.mapActionComp_hom\", \"CategoryTheory.Functor.mapActionComp_inv\", \"ContAction.resComp_hom\"], \"digest\": \"2a872d7613963873\", \"sub\": \"\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: generic natural transformations, pullback comparisons and field Frobenius facts omit extension by zero and this canonical comparison"
-    },
-    {
-      "tool": "grep",
-      "query": "extension.*zero|open.*square|exchange.*natural",
-      "results": "{\"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"ed172b420410969c\", \"sub\": \"CategoryTheory\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: generic natural transformations, pullback comparisons and field Frobenius facts omit extension by zero and this canonical comparison"
-    },
-    {
-      "tool": "grep",
-      "query": "Frobenius|extensionByZero|extension_by_zero",
-      "results": "{\"t\": \"2026-10-17T10:11:36Z\", \"tool\": \"grep\", \"query\": \"Frobenius|extensionByZero|extension_by_zero\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: returned declarations concern Zariski scheme modules, ordinary adjunctions or ring Frobenius, not the specified pro-etale Frobenius comparison with open extension"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Naturality under open extension by zero of the absolute Frobenius pullback trivialization on pro etale sheaves",
-      "results": "{\"t\": \"2026-10-17T10:11:37Z\", \"tool\": \"leansearch\", \"query\": \"Naturality under open extension by zero of the absolute Frobenius pullback trivialization on pro etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Trivialization.pullback\", \"Trivialization.ext'\", \"Pretrivialization.codExtend\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"Trivialization.domExtend_target\", \"Trivialization.codExtend'\", \"Trivialization.codExtend\", \"Trivialization.domExtend\"], \"digest\": \"d414a37af0357020\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: returned declarations concern Zariski scheme modules, ordinary adjunctions or ring Frobenius, not the specified pro-etale Frobenius comparison with open extension"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction, \"homEquiv\"",
-      "results": "{\"t\": \"2026-10-17T10:11:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"homEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.homEquiv'\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"d4686c3e2e7585d2\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: returned declarations concern Zariski scheme modules, ordinary adjunctions or ring Frobenius, not the specified pro-etale Frobenius comparison with open extension"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Extension by zero along an open immersion commutes with the canonical comparison between scheme Frobenius pullback and geometric Galois Frobenius pullback",
-      "results": "{\"t\": \"2026-10-17T10:11:40Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero along an open immersion commutes with the canonical comparison between scheme Frobenius pullback and geometric Galois Frobenius pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply\", \"AlgebraicGeometry.Scheme.Hom.app_invApp'_assoc\", \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom\", \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply\", \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv\", \"AlgebraicGeometry.Scheme.Hom.app_invApp'\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom\"], \"digest\": \"f265990891e63132\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: returned declarations concern Zariski scheme modules, ordinary adjunctions or ring Frobenius, not the specified pro-etale Frobenius comparison with open extension"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A morphism between extensions by zero on derived categories is determined by its restriction to the open subscheme",
-      "results": "{\"t\": \"2026-10-17T10:14:38Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between extensions by zero on derived categories is determined by its restriction to the open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.hom_ext\", \"AlgebraicGeometry.Scheme.Modules.hom_ext_iff\", \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"AlgebraicGeometry.Scheme.Hom.ext\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.Scheme.Cover.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.appLE_eq_app\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\"], \"digest\": \"b1e3f4ab82a6d231\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: returned declarations concern Zariski scheme modules, ordinary adjunctions or ring Frobenius, not the specified pro-etale Frobenius comparison with open extension"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "prop-trf-graph-frobenius-operator",
-    "date": "2026-10-17",
-    "group": "N4"
-  },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-d-weil",
-  "blueprint": {
-    "from": {
-      "node": "prop-trf-graph-frobenius-operator",
-      "place": "Step 2, identification with compact-support base change; restriction and extension-by-zero comparison square",
-      "via": []
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-trf-graph-frobenius-open-exchange",
-    "worker": "stage1",
-    "summary": "Expanded the specified comparison, proved its restriction identity by pullback-natural absolute Frobenius trivialization, computed both restricted composites using the normalized exchanges, and lifted equality by derived open full faithfulness. No statement change and no new nodes.",
-    "blueprint": "Realizes prop-trf-graph-frobenius-operator, Step 2: compatibility of the canonical scheme/Galois comparison with open extension in the compact-support comparison.",
-    "tool_uses": [
-      {
-        "node": "lem-sf-open-tensor-normalization",
-        "why": "Uses only the derived open-unit isomorphisms and full faithfulness for ordinary ringed sites; the Frobenius unit has no such general derived open-unit interface."
-      },
-      {
-        "node": "lem-pur-frobenius-trivialization-pullback",
-        "why": "Uses its explicit pullback-naturality equation for the specified trivialization with u=j, b=am; a generic site tool strengthening the already prescribed open-restriction input."
-      },
-      {
-        "node": "lem-sf-proetale-tensor-composition-unit",
-        "why": "Uses the explicit canonical pullback-composition formula to check coherence with restriction; no Frobenius-specific result or alternative route."
-      },
-      {
-        "node": "prop-weil-pbc-proetale-constant-ring-map",
-        "why": "Identifies pullbacks of finite constant coefficients, preserving constants, for canonical composition."
-      },
-      {
-        "node": "prop-weil-pbc-proetale-constant-exact",
-        "why": "Uses exactness of finite constant-coefficient inverse image to descend termwise comparison equations."
-      },
-      {
-        "node": "lem-weil-pbc-localization-universal-property",
-        "why": "Uses descent and faithfulness of natural transformations through localization to transfer termwise coherence equations."
-      },
-      {
-        "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-        "why": "The item itself specifies this canonical composition interface; used to expand and restrict that specified comparison."
-      },
-      {
-        "node": "lem-trf-open-square-exchange",
-        "why": "The item prescribes these two exchanges; uses their stated identity normalization on the open."
-      },
-      {
-        "node": "lem-trf-frobenius-open-square",
-        "why": "The item prescribes these Cartesian open squares; uses them to form both exchanges and restriction comparisons."
-      },
-      {
-        "node": "prop-trf-frobenius-factorization",
-        "why": "The item prescribes this factorization for its comparisons; uses it directly with the geometric inverse Galois map."
-      },
-      {
-        "node": "prop-trf-scheme-galois-comparison",
-        "why": "The item prescribes this canonical natural comparison, expanded exactly by its factorization and trivialization."
-      },
-      {
-        "node": "lem-trf-absolute-frobenius-site",
-        "why": "The item prescribes this canonical trivialization, including its open-restriction and iteration compatibility."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-pur-frobenius-trivialization-pullback",
-    "lem-sf-proetale-tensor-composition-unit",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-trf-open-square-exchange",
+  {
+   "text": "Let bP and bG be the two exchange isomorphisms for the Cartesian squares of lem-trf-frobenius-open-square. Invert the restriction equation of lem-trf-open-square-exchange to obtain eta at p(M) followed by R(bP inverse) = p(eta_M) followed by alpha_P at J(M), and likewise for q and bG. Conjugate by the unit-preserving tensor/intrinsic coordinate comparisons. Naturality of these comparisons and eta preserves this equation. This is constantExchange_inverse_unit.",
+   "uses": [
     "lem-trf-frobenius-open-square",
-    "prop-trf-frobenius-factorization",
-    "prop-trf-scheme-galois-comparison",
-    "lem-trf-absolute-frobenius-site"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q155-f018a7aae",
-    "group": "Q155",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-f018a7aae (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. I also read the parent's citing step, the blueprint (main-20261015) prop-trf-graph-frobenius-operator proof Step 2, and the blueprint_update construction of kappa in prop-trf-scheme-galois-comparison. The delivery has no new nodes and leaves the statement unchanged. Statement checks: g_X and g_Y are the geometric Frobenius g_gamma = g_sigma^{-1}, the same as in lem-trf-frobenius-open-square. The coefficient category is the ordinary D(Z_proet, A) with A = O_E/varpi^n, which is annihilated by l^n with l != p. Both squares are Cartesian by lem-trf-frobenius-open-square, and b goes Lh^*j_! -> j_!Lh^*, the direction of lem-trf-open-square-exchange. X_0 is of finite type because it is open in the noetherian Y_0. Step 1: Fr^{(q^m)} = g_sigma^m Phi^m, so Phi^m = g^m F^{am}; I checked this on sections and on Spec k_0. kappa = t∘c is exactly the specified construction. Step 2: I recomputed both reassociations from the local formula of lem-sf-proetale-tensor-composition-unit and got v⊗c_h c_k(a) c_h(b) d both times. Exactness and clause (3) of the localization node carry the equality to the derived category. Step 3: lem-pur-frobenius-trivialization-pullback with u = j, b = am gives the restriction equation, and its trivialization is the same iterate as in Step 1. Steps 4 to 7: I recomputed every composite and its types. The naturality of t, the two normalization equations, cancelling the invertible nu, and the full-faithfulness lift through b_P^{-1} all hold. Edge cases j = id, X_0 empty, M = 0 and m = 1 behave correctly. Duplicate search: no node in the DAG or the blueprint states this square; lem-trf-compactification-graph-operator gives only the exchange b_m, without kappa. I accept the declared tool_uses: each is a coherence interface that the item's statement or the blueprint's Step 2 already prescribes. No SGA source is used and no fixes were written."
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false
   },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-1cca41a54",
-    "group": "Q16",
-    "result": "pass",
-    "note": "Item theorem graphFrobenius_open_exchange matches the node clause by clause: T fixes the finite-field datum, A=O_E/ϖ^n with n>=1 and separated finite-type X₀; Y₀ is LOFT+QC+separated; j₀ is an open immersion; j is the Over.pullback base change with its instance from Mathlib overPullbackMap; m>=1. The equation whiskerLeft ι (j_!κ_Y ≫ b_g) = whiskerLeft ι (b_Φ ≫ j_!κ_X) gives the node's composites on D^b_ctf, natural in M. The exchanges come from frobenius_open_square .1/.2.1 in the node's direction. §1(B) deps: selectedSchemeGaloisComparison selects κ from schemeGaloisComparison, whose last clause fixes r (projection), τ (unit equation) and κ, so it is not an arbitrary choice; the annihilator theorem is a true sorry'd theorem; Finite is a real instance. constantOpenSquareExchange conjugates the canonical-field-fixed recorded exchange by the unique unit-normalized identification of the tensor and sfIntrinsic pullbacks; no duplicate exists in live or side. Records change only lean with a note; statements are verbatim; docstrings have source and blueprint ids; sorry only in theorems; lines <=100; report sections present (the second reading is the author's own pass, noted). nt_compile --json of all 3 files: 4.3/2.1/10.6 s, no diagnostics. Edge cases empty X₀/Y₀, j=id, M=0, m=1, n=1 covered."
+  {
+   "text": "Apply lem-trf-scheme-galois-pullback-naturality to j0 and the supplied Frobenius-square commutativity equalities. This gives alpha_P followed by R(kappa_Y) = kappa_X at R followed by alpha_G on the full derived categories.",
+   "uses": [
+    "lem-trf-scheme-galois-pullback-naturality",
+    "lem-trf-frobenius-open-square",
+    "prop-trf-scheme-galois-comparison"
+   ],
+   "elementary": false
   },
-  "lean": {
-    "module": "Sheaf.SixFunctors.GraphFrobeniusOpenExchange",
-    "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobenius_open_exchange",
-    "statement": "theorem graphFrobenius_open_exchange (T : TraceFormulaCoefficientConventions.{u}) (Y₀ : Over (Spec (CommRingCat.of T.datum.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (j₀ : T.X₀ ⟶ Y₀) [IsOpenImmersion j₀.left] (m : ℕ) (hm : 1 ≤ m) : Functor.whiskerLeft T.boundedConstructibleFiniteTor.ι (Functor.whiskerLeft (sfIntrinsicDerivedOpen T.coefficientRing (T.graphFrobeniusBaseChangedOpen Y₀ j₀)) (T.selectedSchemeGaloisComparison Y₀ m hm).hom ≫ (T.graphFrobeniusGaloisExchange Y₀ j₀ m).hom) = Functor.whiskerLeft T.boundedConstructibleFiniteTor.ι ((T.graphFrobeniusSchemeExchange Y₀ j₀ m).hom ≫ Functor.whiskerRight (T.selectedSchemeGaloisComparison T.X₀ m hm).hom (sfIntrinsicDerivedOpen T.coefficientRing (T.graphFrobeniusBaseChangedOpen Y₀ j₀)))",
-    "branch": "newtargets-dag",
-    "by": "Q16",
-    "date": "2026-10-18",
-    "existing": false,
-    "file": "lean/Sheaf/SixFunctors/GraphFrobeniusOpenExchange.lean",
-    "declarations": [
-      "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusBaseChangedOpen",
-      "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusBaseChangedOpen_isOpenImmersion",
-      "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusSchemeExchange",
-      "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusGaloisExchange",
-      "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobenius_open_exchange"
-    ]
+  {
+   "text": "For each M, precompose the desired equality by bP inverse and postcompose by bG inverse. It becomes an equality between maps J(pM) to Q(JM). Apply injectivity of the open-adjunction Hom equivalence. Its two adjuncts agree by Step 2, the restriction naturality in Step 3, naturality of kappa_X at eta_M, and naturality of eta at kappa_X(M). Cancel the two exchange inverses. This is the fully proved categorical exchange_naturality_of_mates calculation; no full faithfulness or invertibility of eta is needed. Extend component equality to natural transformations and whisker with the D^b_ctf inclusion, obtaining the original statement unchanged.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "prop-exc-open-adjoint",
+  "lem-trf-open-square-exchange",
+  "lem-trf-frobenius-open-square",
+  "lem-trf-scheme-galois-pullback-naturality",
+  "prop-trf-scheme-galois-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+  "place": "Step 2, using the separate source pullback-naturality equation and injectivity of the open-adjunction Hom bijection in place of the original full-faithfulness detour."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical Frobenius open square exchange commutes with scheme Galois comparison after extension by zero",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.Extension.frob\", \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"RingHom.frobenius_comm\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc\", \"Algebra.IsQuadraticExtension.isMulCommutative_galoisGroup\", \"AlgebraicGeometry.basicOpenIsoSpecAway_inv_homOfLE_assoc\", \"AlgebraicGeometry.ValuativeCommSq.commSq\"], \"digest\": \"3ef4ebd6595f1c2e\", \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic natural transformations, pullback comparisons and field Frobenius facts omit extension by zero and this canonical comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius open square exchange comparison extension by zero commutes with canonical pullback comparison",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.map_lift_pullbackComparison\", \"PresheafOfModules.pullbackComp\", \"CategoryTheory.Limits.map_lift_pullbackComparison_assoc\", \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"CategoryTheory.GlueData.t'_comp_eq_pullbackSymmetry\"], \"digest\": \"393d6347f7e63f32\", \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic natural transformations, pullback comparisons and field Frobenius facts omit extension by zero and this canonical comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, \"comp\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.vcomp\", \"CategoryTheory.NatTrans.vcomp_app\", \"CategoryTheory.NatTrans.vcomp_eq_comp\", \"CategoryTheory.comp_toNatTrans\", \"CategoryTheory.MonadHom.comp_toNatTrans\", \"CategoryTheory.Functor.mapActionComp_hom\", \"CategoryTheory.Functor.mapActionComp_inv\", \"ContAction.resComp_hom\"], \"digest\": \"2a872d7613963873\", \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic natural transformations, pullback comparisons and field Frobenius facts omit extension by zero and this canonical comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.*zero|open.*square|exchange.*natural",
+   "results": "{\"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"ed172b420410969c\", \"sub\": \"CategoryTheory\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic natural transformations, pullback comparisons and field Frobenius facts omit extension by zero and this canonical comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|extensionByZero|extension_by_zero",
+   "results": "{\"t\": \"2026-10-17T10:11:36Z\", \"tool\": \"grep\", \"query\": \"Frobenius|extensionByZero|extension_by_zero\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Zariski scheme modules, ordinary adjunctions or ring Frobenius, not the specified pro-etale Frobenius comparison with open extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality under open extension by zero of the absolute Frobenius pullback trivialization on pro etale sheaves",
+   "results": "{\"t\": \"2026-10-17T10:11:37Z\", \"tool\": \"leansearch\", \"query\": \"Naturality under open extension by zero of the absolute Frobenius pullback trivialization on pro etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Trivialization.pullback\", \"Trivialization.ext'\", \"Pretrivialization.codExtend\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"Trivialization.domExtend_target\", \"Trivialization.codExtend'\", \"Trivialization.codExtend\", \"Trivialization.domExtend\"], \"digest\": \"d414a37af0357020\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Zariski scheme modules, ordinary adjunctions or ring Frobenius, not the specified pro-etale Frobenius comparison with open extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+   "results": "{\"t\": \"2026-10-17T10:11:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"homEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.homEquiv'\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"d4686c3e2e7585d2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Zariski scheme modules, ordinary adjunctions or ring Frobenius, not the specified pro-etale Frobenius comparison with open extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion commutes with the canonical comparison between scheme Frobenius pullback and geometric Galois Frobenius pullback",
+   "results": "{\"t\": \"2026-10-17T10:11:40Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero along an open immersion commutes with the canonical comparison between scheme Frobenius pullback and geometric Galois Frobenius pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply\", \"AlgebraicGeometry.Scheme.Hom.app_invApp'_assoc\", \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom\", \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply\", \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv\", \"AlgebraicGeometry.Scheme.Hom.app_invApp'\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom\"], \"digest\": \"f265990891e63132\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Zariski scheme modules, ordinary adjunctions or ring Frobenius, not the specified pro-etale Frobenius comparison with open extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between extensions by zero on derived categories is determined by its restriction to the open subscheme",
+   "results": "{\"t\": \"2026-10-17T10:14:38Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between extensions by zero on derived categories is determined by its restriction to the open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.hom_ext\", \"AlgebraicGeometry.Scheme.Modules.hom_ext_iff\", \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"AlgebraicGeometry.Scheme.Hom.ext\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.Scheme.Cover.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.appLE_eq_app\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\"], \"digest\": \"b1e3f4ab82a6d231\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Zariski scheme modules, ordinary adjunctions or ring Frobenius, not the specified pro-etale Frobenius comparison with open extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-trf-graph-frobenius-operator",
+  "date": "2026-10-17",
+  "group": "N4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-graph-frobenius-operator",
+   "place": "Step 2, identification with compact-support base change; restriction and extension-by-zero comparison square",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-graph-frobenius-open-exchange",
+  "worker": "stage1",
+  "summary": "Expanded the specified comparison, proved its restriction identity by pullback-natural absolute Frobenius trivialization, computed both restricted composites using the normalized exchanges, and lifted equality by derived open full faithfulness. No statement change and no new nodes.",
+  "blueprint": "Realizes prop-trf-graph-frobenius-operator, Step 2: compatibility of the canonical scheme/Galois comparison with open extension in the compact-support comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Uses only the derived open-unit isomorphisms and full faithfulness for ordinary ringed sites; the Frobenius unit has no such general derived open-unit interface."
+   },
+   {
+    "node": "lem-pur-frobenius-trivialization-pullback",
+    "why": "Uses its explicit pullback-naturality equation for the specified trivialization with u=j, b=am; a generic site tool strengthening the already prescribed open-restriction input."
+   },
+   {
+    "node": "lem-sf-proetale-tensor-composition-unit",
+    "why": "Uses the explicit canonical pullback-composition formula to check coherence with restriction; no Frobenius-specific result or alternative route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies pullbacks of finite constant coefficients, preserving constants, for canonical composition."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Uses exactness of finite constant-coefficient inverse image to descend termwise comparison equations."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Uses descent and faithfulness of natural transformations through localization to transfer termwise coherence equations."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "The item itself specifies this canonical composition interface; used to expand and restrict that specified comparison."
+   },
+   {
+    "node": "lem-trf-open-square-exchange",
+    "why": "The item prescribes these two exchanges; uses their stated identity normalization on the open."
+   },
+   {
+    "node": "lem-trf-frobenius-open-square",
+    "why": "The item prescribes these Cartesian open squares; uses them to form both exchanges and restriction comparisons."
+   },
+   {
+    "node": "prop-trf-frobenius-factorization",
+    "why": "The item prescribes this factorization for its comparisons; uses it directly with the geometric inverse Galois map."
+   },
+   {
+    "node": "prop-trf-scheme-galois-comparison",
+    "why": "The item prescribes this canonical natural comparison, expanded exactly by its factorization and trivialization."
+   },
+   {
+    "node": "lem-trf-absolute-frobenius-site",
+    "why": "The item prescribes this canonical trivialization, including its open-restriction and iteration compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-sf-proetale-tensor-composition-unit",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-open-square-exchange",
+  "lem-trf-frobenius-open-square",
+  "prop-trf-frobenius-factorization",
+  "prop-trf-scheme-galois-comparison",
+  "lem-trf-absolute-frobenius-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-f018a7aae",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-f018a7aae (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. I also read the parent's citing step, the blueprint (main-20261015) prop-trf-graph-frobenius-operator proof Step 2, and the blueprint_update construction of kappa in prop-trf-scheme-galois-comparison. The delivery has no new nodes and leaves the statement unchanged. Statement checks: g_X and g_Y are the geometric Frobenius g_gamma = g_sigma^{-1}, the same as in lem-trf-frobenius-open-square. The coefficient category is the ordinary D(Z_proet, A) with A = O_E/varpi^n, which is annihilated by l^n with l != p. Both squares are Cartesian by lem-trf-frobenius-open-square, and b goes Lh^*j_! -> j_!Lh^*, the direction of lem-trf-open-square-exchange. X_0 is of finite type because it is open in the noetherian Y_0. Step 1: Fr^{(q^m)} = g_sigma^m Phi^m, so Phi^m = g^m F^{am}; I checked this on sections and on Spec k_0. kappa = t∘c is exactly the specified construction. Step 2: I recomputed both reassociations from the local formula of lem-sf-proetale-tensor-composition-unit and got v⊗c_h c_k(a) c_h(b) d both times. Exactness and clause (3) of the localization node carry the equality to the derived category. Step 3: lem-pur-frobenius-trivialization-pullback with u = j, b = am gives the restriction equation, and its trivialization is the same iterate as in Step 1. Steps 4 to 7: I recomputed every composite and its types. The naturality of t, the two normalization equations, cancelling the invertible nu, and the full-faithfulness lift through b_P^{-1} all hold. Edge cases j = id, X_0 empty, M = 0 and m = 1 behave correctly. Duplicate search: no node in the DAG or the blueprint states this square; lem-trf-compactification-graph-operator gives only the exchange b_m, without kappa. I accept the declared tool_uses: each is a coherence interface that the item's statement or the blueprint's Step 2 already prescribes. No SGA source is used and no fixes were written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1cca41a54",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Item theorem graphFrobenius_open_exchange matches the node clause by clause: T fixes the finite-field datum, A=O_E/ϖ^n with n>=1 and separated finite-type X₀; Y₀ is LOFT+QC+separated; j₀ is an open immersion; j is the Over.pullback base change with its instance from Mathlib overPullbackMap; m>=1. The equation whiskerLeft ι (j_!κ_Y ≫ b_g) = whiskerLeft ι (b_Φ ≫ j_!κ_X) gives the node's composites on D^b_ctf, natural in M. The exchanges come from frobenius_open_square .1/.2.1 in the node's direction. §1(B) deps: selectedSchemeGaloisComparison selects κ from schemeGaloisComparison, whose last clause fixes r (projection), τ (unit equation) and κ, so it is not an arbitrary choice; the annihilator theorem is a true sorry'd theorem; Finite is a real instance. constantOpenSquareExchange conjugates the canonical-field-fixed recorded exchange by the unique unit-normalized identification of the tensor and sfIntrinsic pullbacks; no duplicate exists in live or side. Records change only lean with a note; statements are verbatim; docstrings have source and blueprint ids; sorry only in theorems; lines <=100; report sections present (the second reading is the author's own pass, noted). nt_compile --json of all 3 files: 4.3/2.1/10.6 s, no diagnostics. Edge cases empty X₀/Y₀, j=id, M=0, m=1, n=1 covered."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.GraphFrobeniusOpenExchange",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobenius_open_exchange",
+  "statement": "theorem graphFrobenius_open_exchange (T : TraceFormulaCoefficientConventions.{u}) (Y₀ : Over (Spec (CommRingCat.of T.datum.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (j₀ : T.X₀ ⟶ Y₀) [IsOpenImmersion j₀.left] (m : ℕ) (hm : 1 ≤ m) : Functor.whiskerLeft T.boundedConstructibleFiniteTor.ι (Functor.whiskerLeft (sfIntrinsicDerivedOpen T.coefficientRing (T.graphFrobeniusBaseChangedOpen Y₀ j₀)) (T.selectedSchemeGaloisComparison Y₀ m hm).hom ≫ (T.graphFrobeniusGaloisExchange Y₀ j₀ m).hom) = Functor.whiskerLeft T.boundedConstructibleFiniteTor.ι ((T.graphFrobeniusSchemeExchange Y₀ j₀ m).hom ≫ Functor.whiskerRight (T.selectedSchemeGaloisComparison T.X₀ m hm).hom (sfIntrinsicDerivedOpen T.coefficientRing (T.graphFrobeniusBaseChangedOpen Y₀ j₀)))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/SixFunctors/GraphFrobeniusOpenExchange.lean",
+  "declarations": [
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusBaseChangedOpen",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusBaseChangedOpen_isOpenImmersion",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusSchemeExchange",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusGaloisExchange",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobenius_open_exchange"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T051024-L-1532554",
+  "kind": "interface"
+ }
 }
