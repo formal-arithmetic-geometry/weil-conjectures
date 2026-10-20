@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-exterior-sheaf-comparison",
+ "kind": "statement",
+ "title": "Canonical wedge-preserving comparison of exterior sheaf constructions",
+ "statement": "Let X be a scheme [def-pc-scheme], M a sheaf of O_X-modules, and n a natural number. The sectionwise identity on exterior powers [def-sc-sheaf-exterior-power] induces an isomorphism exteriorSheaf M n ≅ exteriorPower M n from the earlier construction to the upstream construction. For every open U and tuple a of n sections of M on U, its hom sends exteriorSheafSection M n U a to wedge a, and its inverse sends wedge a back. Consequently the upstream extensionality theorem for internal dual sections [def-pur-sheaf-hom] transports to the earlier construction.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; lean/WeilConjectures/Algebra/Category/ModuleCat/Presheaf/ExteriorPower.lean",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules (sheafification functor and adjunction); exterior-power universal property and exteriorPower_map_ιMulti. Comparison proof written by C6."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-sheaf-exterior-power",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "The old exterior presheaf and the upstream exteriorPower presheaf have the same sectionwise modules. The old restriction is characterized uniquely on pure wedges, and the upstream restriction satisfies that characterization by exteriorPower_map_ιMulti. Thus the identities form a presheaf isomorphism, proved by exteriorPower.linearMap_ext.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the module-sheafification functor to that explicitly constructed isomorphism. Naturality of the adjunction unit, evaluated on a pure wedge, says its hom sends exteriorSheafSection a to wedge a. Apply the inverse and use hom_inv_id to obtain the inverse formula. No existence witness is chosen.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For dual sections q and r on U in the old encoding, precompose with the inverse comparison on the over-open site. The inverse wedge formula translates the hypothesis to the upstream all-subopen wedge hypothesis. Apply exteriorSheaf_dual_ext to conclude the precompositions agree. The inverse comparison remains an isomorphism under the forgetful and over-open restriction functors, hence is epi; cancel it to obtain q=r.",
+   "uses": [
+    "lem-sc-exterior-sheaf-dual-ext",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-sc-exterior-sheaf-dual-ext"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex; lean/WeilConjectures/Algebra/Category/ModuleCat/Presheaf/ExteriorPower.lean",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules (sheafification functor and adjunction); exterior-power universal property and exteriorPower_map_ιMulti. Comparison proof written by C6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical isomorphism sheafification of exterior powers of modules on opens",
+   "results": "PresheafOfModules.sheafifyHomEquiv'; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv; PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def; SheafOfModules.ιFree_mapFree_inv; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.map_ιFree_mapFree_hom",
+   "date": "2026-10-20",
+   "verdict": "Generic ingredients only; no comparison between these two project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.isoMk",
+   "results": "PresheafOfModules.isoMk; PresheafOfModules.isoMk_hom_app; PresheafOfModules.isoMk_inv_app",
+   "date": "2026-10-20",
+   "verdict": "Generic ingredients only; no comparison between these two project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorSheaf_dual_ext|exteriorPower_map_ιMulti",
+   "results": "0 hits",
+   "date": "2026-10-20",
+   "verdict": "Generic ingredients only; no comparison between these two project definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "isomorphism of sheafifications induced by an isomorphism of presheaves of modules",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; PresheafOfModules.sheafifyMap; PresheafOfModules.sheafification_map; CategoryTheory.isoSheafify; CategoryTheory.sheafificationIso; CategoryTheory.GrothendieckTopology.isoSheafify; PresheafOfModules.isoMk; AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso",
+   "date": "2026-10-20",
+   "verdict": "Generic ingredients only; no comparison between these two project definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExteriorSheafDualExt",
+  "date": "2026-10-20",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Determinant inversion: comparison of the two sectionwise exterior-power sheafifications used to transport the all-subopen dual extensionality step."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExteriorSheafComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExteriorSheafComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheafIsoExteriorPower_hom_wedge",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafPresheafIso",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafIsoExteriorPower",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafIsoExteriorPower_hom_wedge",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafIsoExteriorPower_inv_wedge",
+   "AlgebraicGeometry.exteriorSheaf_dual_ext_compat"
+  ],
+  "statement": "theorem exteriorSheafIsoExteriorPower_hom_wedge (M : X.Modules) (n : ℕ)\n    (U : X.Opens) (a : Fin n → M.val.obj (op U)) :\n    (exteriorSheafIsoExteriorPower M n).hom.val.app (op U)\n        (exteriorSheafSection M n U a) = wedge a",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-288ff",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261020T144238-L-2258197",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-288ff",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261020T144238-L-2258197",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf exteriorSheaf_dual_ext vs upstream WeilConjectures twin (exteriorPower encoding) via proved ExteriorSheafComparison iso + exteriorSheaf_dual_ext_compat (old statement byte-identical); 3 unclaimed importers adapted only at import + 6 call sites, all compile clean; node lean record = upstream signature verbatim"
+ }
+}

@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Sheaf.AlgebraicGeometry.DeterminantDualAlternatingFamily
-import Sheaf.AlgebraicGeometry.ExteriorSheafDualExt
+import Sheaf.AlgebraicGeometry.ExteriorSheafComparison
 
 /-! # Construction of the exterior dual pairing
 Source: Stacks Project, Tag 0BRT, determinant inversion.
@@ -59,7 +59,7 @@ theorem exterior_dual_pairing_exists (X : Scheme.{u}) (M : X.Modules) (n : ℕ) 
       (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)) :
       A V (fun i ↦ (Scheme.Modules.dual M).val.map g.op (φ i)) =
         (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.map g.op (A U φ) := by
-    apply exteriorSheaf_dual_ext X M n V
+    apply exteriorSheaf_dual_ext_compat X M n V
     intro W k a
     rw [hA V W k a]
     change _ = (A U φ).app (op (Over.mk (k ≫ g)))

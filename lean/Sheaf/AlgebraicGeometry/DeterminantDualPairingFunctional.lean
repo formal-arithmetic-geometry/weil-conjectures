@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Sheaf.AlgebraicGeometry.ExteriorSheafDualExt
+import Sheaf.AlgebraicGeometry.ExteriorSheafComparison
 import Mathlib.LinearAlgebra.ExteriorPower.Pairing
 import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
@@ -136,7 +136,7 @@ theorem exterior_dual_pairing_functional (X : Scheme.{u}) (M : X.Modules) (n : �
       (R := X.presheaf.obj (op V)) (fun j ↦ ((φ j).app (op (Over.mk g))).hom) a
   refine ⟨q, hformula, ?_⟩
   intro r hr
-  exact (exteriorSheaf_dual_ext X M n U q r (fun V g a ↦
+  exact (exteriorSheaf_dual_ext_compat X M n U q r (fun V g a ↦
     (hformula V g a).trans (hr V g a).symm)).symm
 
 end AlgebraicGeometry

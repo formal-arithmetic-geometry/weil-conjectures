@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Sheaf.AlgebraicGeometry.DeterminantDualPairingFunctional
-import Sheaf.AlgebraicGeometry.ExteriorSheafDualExt
+import Sheaf.AlgebraicGeometry.ExteriorSheafComparison
 
 /-! # Local alternating determinant functionals
 Source: Stacks Project, Tags 0BRT and 03CY; Mathlib exterior-power determinant pairing.
@@ -57,7 +57,7 @@ theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
       map_update_add' := by
         intro dec φ j x y
         cases Subsingleton.elim dec (instDecidableEqFin n)
-        apply exteriorSheaf_dual_ext X M n U
+        apply exteriorSheaf_dual_ext_compat X M n U
         intro V g a
         change (q (Function.update φ j (x + y))).app (op (Over.mk g))
           (Scheme.Modules.exteriorSheafSection M n V a) =
@@ -86,7 +86,7 @@ theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
       map_update_smul' := by
         intro dec φ j r x
         cases Subsingleton.elim dec (instDecidableEqFin n)
-        apply exteriorSheaf_dual_ext X M n U
+        apply exteriorSheaf_dual_ext_compat X M n U
         intro V g a
         change (q (Function.update φ j (r • x))).app (op (Over.mk g))
             (Scheme.Modules.exteriorSheafSection M n V a) =
@@ -113,7 +113,7 @@ theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
           (fun i ↦ (show X.presheaf.obj (op V) from x.app (op (Over.mk g)) (a i)))
       map_eq_zero_of_eq' := by
         intro φ i j hij hne
-        apply exteriorSheaf_dual_ext X M n U
+        apply exteriorSheaf_dual_ext_compat X M n U
         intro V g a
         change (q φ).app (op (Over.mk g))
           (Scheme.Modules.exteriorSheafSection M n V a) = 0
@@ -125,7 +125,7 @@ theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     exact hq φ V g a
   · intro B hB
     ext φ
-    apply exteriorSheaf_dual_ext X M n U
+    apply exteriorSheaf_dual_ext_compat X M n U
     intro V g a
     exact (hB V g a φ).trans (hq φ V g a).symm
 
