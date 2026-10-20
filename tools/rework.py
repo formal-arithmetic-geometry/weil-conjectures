@@ -471,9 +471,10 @@ def hold_set(rows=None) -> tuple[set[str], dict[str, str], set[str]]:
     rows = load() if rows is None else rows
     if not rows:
         return set(), {}, set()
-    _, held_roots = priority_retire(rows)
+    first, held_roots = priority_retire(rows)
     items = {c["item"] for c in clusters(rows, held_roots)
              if (rows[c["item"]].get("cause") or "").startswith("error:")}
+    items |= set(first)   # retire-first items are queued even when blocked (tools/queue.py): never held
     nodes, mods, why = blocked(None, None, rows)
     hold = (set(m for m in rows if not landed(m)) | nodes | mods) - items
     for m in rows:
