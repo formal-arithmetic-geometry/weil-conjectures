@@ -1,0 +1,176 @@
+{
+ "id": "lem-kun-constant-projection-flat-approximation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0e",
+   "place": "Tag 0F0E paragraph decomposition",
+   "via": [
+    "lem-kun-0f0e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Degreewise bounded flat approximation",
+ "statement": "For any scheme X, bounded-below etale integer-sheaf object E, bounded-below integer-module object K, and integer n, there is a bounded flat complex B and a morphism f:K to Q(B) such that both RΓ(E) tensor^L f and RΓ(E tensor^L constant(f)) induce isomorphisms in degree n. This uses the two functors of [def-kun-constant-projection-morphism], tensor of [def-kun-derived-tensor] and the t-structure of [def-sbc-standard-tstructure-derived-category]. No assertion about the projection comparison is included.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0E (lemma-pull-out-constant)"
+ },
+ "stmt_deps": [
+  "def-kun-constant-projection-morphism",
+  "def-kun-derived-tensor",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose the bounded-below flat integer representative of K from lem-kun-torsionfree-complex-model. Transport it to modules over ULift Z by the explicit ring equivalence ULift.ringEquiv and the induced derived-category equivalence. This preserves lower bounds, flat terms, and the representative isomorphism.",
+   "uses": [
+    "lem-kun-torsionfree-complex-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), flat model and high stupid-tail reduction"
+   }
+  },
+  {
+   "text": "Every submodule of a flat integer module is flat: flat modules over the integer PID are torsion free, and an injective linear map pulls back torsion freeness. The inclusion of a good upper truncation into a termwise flat integer complex is degreewise monic. Thus all good upper truncations are bounded above and termwise flat. Apply the existing generic CochainComplex.kFlat_of_isStrictlyLE_of_flat (lem-sfb-bounded-above-flat-kflat). The filtrationLE cocone has colimit the original complex. The generic K-flat object property is closed under these colimits because tensor preserves them and filtered colimits are exact. Constant sheaves preserve flat objects and colimits; applying the same argument to the image of this filtration proves K-flatness of the constant complex as well. No conversion to SheafOfModules and no ringed-site K-flat lemma is used.",
+   "uses": [
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-sfb-bounded-above-flat-kflat",
+    "def-kun-truncations",
+    "def-kun-derived-tensor",
+    "def-kun-constant-projection-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), flat model and high stupid-tail reduction"
+   }
+  },
+  {
+   "text": "For a derived object E with lower bound a, select a representative L strictly zero below a. If T has flat terms and is strictly zero below c, K-flatness of T identifies E tensor Q(T) with Q(L tensor T), whose terms vanish below a+c. This gives the source lower bound after using left exactness of global sections. For the target, apply the same argument to the constant complex of T. Exactness of constant sheaves identifies its derived image with that termwise image. Right derived sections preserves the resulting lower bound: prove this on the bounded-below right derived functor and transfer by rightDerivedFunctorPlusCompatibility. The helper coefficient categories have object universe u+2 and hom universe u+1, exactly the integer-module and sheaf categories used here; this avoids unnecessary universe enlargements of the same derived constructions.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-pbc-global-sections-functor",
+    "src-right-derived-functor-plus-compatibility",
+    "def-kun-constant-projection-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), flat model and high stupid-tail reduction"
+   }
+  },
+  {
+   "text": "For fixed n put N=max(b,n-a+1). Complementary stupid truncations give a degreewise split short exact sequence T to P to B, with T zero below N+1 and B supported in [b,N]. Its derived triangle is distinguished. Both projection functors are triangulated; both images of T vanish in degrees n and n+1 since a+N+1 is at least n+2. Their long exact homology sequences imply that P to B induces an isomorphism in degree n under both functors. Compose with the inverse representative isomorphism K to Q(P). Apply this generic cutoff lemma to the named projection functors with their specified shift and exactness structures. Prove the lower-bound estimates in the generic coefficient category, with the K-flatness assumptions as inputs; then specialize this proved interface to integer modules. This avoids repeated expansion of concrete derived and sheaf instance data. The construction makes no claim that the projection comparison is invertible.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-right-derived-functor-triangulated",
+    "def-kun-constant-projection-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), flat model and high stupid-tail reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-constant-projection-morphism",
+  "def-kun-derived-tensor",
+  "def-kun-truncations",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-global-sections-functor",
+  "lem-kun-torsionfree-complex-model",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-bounded-above-flat-kflat",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "M5: complete Lean flat-model and stupid-truncation argument",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0E (lemma-pull-out-constant), flat model and high stupid-tail reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded flat quotient of a bounded below flat integer complex approximates the source and target functors of the constant sheaf projection formula in one homology degree, using vanishing of a high stupid tail",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, single-functor vanishing lemmas, CochainComplex.cm5b, and unrelated local-cohomology and Nobeling lemmas. The representative lemma assumes a derived upper bound already; it supplies neither flat terms nor simultaneous approximation under these functors. No exact statement.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Functor.map",
+   "results": "12 hits: Functor.map_isIso, Functor.map_inv, map_hom_inv, map_inv_hom, IsIso inverse identities, and NatTrans.naturality_inv. These give generic isomorphism calculus, not this derived projection or bounded-flat approximation statement. The proof uses the generic map-isomorphism instance.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*flat|bounded.*flat.*approximation|stupidTrunc.*homology",
+   "results": "0 hits from the Mathlib text search. The repository search and existing generic truncation/K-flat declarations used in the proof are described in report.md.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded flat approximation preserving a fixed homology degree under derived tensor and derived global sections using the triangle of stupid truncations of a bounded below flat integer complex",
+   "results": "8 hits: HomologicalComplex.stupidTrunc and its maps/support instances, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, and ComplexShape.Embedding.stupidTruncFunctor_obj. These provide truncation/flatness tools, not the simultaneous two-functor approximation theorem. The proof uses the existing stupid truncation and flatness APIs.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormulaBoundedBelow",
+  "date": "2026-10-20",
+  "group": "M5"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleConstantProjectionFlatApproximation",
+  "declaration": "AlgebraicGeometry.Etale.exists_constantProjection_boundedFlat_approximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleConstantProjectionFlatApproximation.lean",
+  "statement": "theorem exists_constantProjection_boundedFlat_approximation\n    (X : Scheme.{u})\n    (E : DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))))\n    (K : DerivedCategory.Plus (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) (n : ℤ) :\n    let A := ModuleCat.{u + 1} (ULift.{u + 1} ℤ)\n    let F := constantProjectionSource A X (DerivedCategory.Plus.ι.obj E)\n    let G := constantProjectionTarget A X (DerivedCategory.Plus.ι.obj E)\n    ∃ (B : CochainComplex A ℤ) (b N : ℤ),\n      B.IsStrictlyGE b ∧ B.IsStrictlyLE N ∧\n      (∀ i : ℤ, Module.Flat (ULift.{u + 1} ℤ) (B.X i)) ∧\n      ∃ f : (DerivedCategory.Plus.ι.obj K) ⟶ DerivedCategory.Q.obj B,\n        IsIso ((DerivedCategory.homologyFunctor A n).map (F.map f)) ∧\n        IsIso ((DerivedCategory.homologyFunctor A n).map (G.map f))",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261020T221249-L-4165663",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261020T221249-L-4165663",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

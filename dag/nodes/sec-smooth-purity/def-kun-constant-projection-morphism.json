@@ -38,18 +38,28 @@
    "elementary": false
   },
   {
-   "text": "The remaining constructions retain the normalized monoidal constant-presheaf functor, monoidal sheafification, and derived constant-sheaf/global-sections adjunction. Introduce cachedDerivedTensorComparison with the existing leftDerivedTensorComparison verbatim as its data and no_expose, and prove cachedDerivedTensorComparison_eq by unfolding that interface. Define constantDerivedProjectionMap using the cached comparison. The equation identifies the resulting mate with the former canonical mate exactly, while preventing kernel checking of applications from expanding the localization construction. The signature and mathematical morphism are unchanged.",
+   "text": "The remaining constructions retain the normalized monoidal constant-presheaf functor, monoidal sheafification, and derived constant-sheaf/global-sections adjunction. Introduce cachedDerivedTensorComparison with the existing leftDerivedTensorComparison verbatim as its data and no_expose, and prove cachedDerivedTensorComparison_eq by unfolding that interface. Retain the existing constantDerivedProjectionMap body using the cached comparison. The equation identifies the resulting mate with the former canonical mate exactly, while preventing kernel checking of applications from expanding the localization construction. The signature and mathematical morphism are unchanged. Compose the normalized monoidal constant-presheaf functor with monoidal sheafification, derive the constant-sheaf/global-sections adjunction, and take rightAdjointProjectionMap of the existing cachedDerivedTensorComparison. Package this same transformation with its inferred native type. The existing component definition is retained verbatim, and its equation with the named transformation is reflexive. Define the normalized source and target functors by tensor and composition; their equations with the native functors are reflexive. Thus the value of the existing map and all existing signatures remain unchanged. Use the inherited abelian additive and zero structures consistently and cache the existing sheaf tensor additivity as a theorem; the instance choices are definitionally equal to the standard ones. Name the existing derived constant functor by its defining expression, fixing its resolved instance data; the target functor uses this named functor. Its value remains the original leftDerivedFunctor.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Equip the derived constant functor with the shift structure transported along its canonical isomorphism to the exact termwise mapDerivedCategory functor. Transport triangulated exactness along this isomorphism. Derived global sections has its existing right-derived shift and triangulated structures. Tensoring is triangulated in either variable. Compose these structures to obtain the specified source and target shift structures and their exactness proofs. These are auxiliary functor structures and do not change the canonical projection map.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pc-right-derived-functor-triangulated",
   "lem-sfb-etale-flat-geometric-fibers"
  ],
  "proof_origin": {
-  "by": "C6 stage 3; J5 interface repair",
+  "by": "C6; J5 cached comparison; M5 stage 3 interface",
   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
-  "place": "Tags 07A4, 07A6, equation 0B56; lemma-check-flat-stalks. Constant-presheaf core follows the explicit existing Functor.Monoidal.const construction; geometric fibers use the existing FlatModuleCat criterion and Point.sheafFiberConstantSheafIso. J5: compact interface for the same canonical comparison, with its defining equality proved by unfolding; no mathematical change."
+  "place": "Tags 07A4, 07A6, equation 0B56; lemma-check-flat-stalks. Constant-presheaf core follows the explicit existing Functor.Monoidal.const construction; geometric fibers use the existing FlatModuleCat criterion and Point.sheafFiberConstantSheafIso. Preserve the concurrent J5 cached-comparison interface and its proved equation verbatim."
  },
  "mathlib_searches": [
   {
@@ -119,7 +129,21 @@
    "AlgebraicGeometry.Etale.etaleConstantSheafMonoidal",
    "AlgebraicGeometry.Etale.etaleConstantSheaf_preservesFlat",
    "AlgebraicGeometry.Etale.derivedConstantGlobalSectionsAdjunction",
+   "AlgebraicGeometry.Etale.constantDerivedProjectionTransformation",
    "AlgebraicGeometry.Etale.constantDerivedProjectionMap",
+   "AlgebraicGeometry.Etale.constantDerivedProjectionMap_eq_transformation",
+   "AlgebraicGeometry.Etale.constantProjectionSource",
+   "AlgebraicGeometry.Etale.constantProjectionTarget",
+   "AlgebraicGeometry.Etale.constantProjectionSource_eq",
+   "AlgebraicGeometry.Etale.constantProjectionTarget_eq",
+   "AlgebraicGeometry.Etale.constantLeftDerivedShift",
+   "AlgebraicGeometry.Etale.constantLeftDerived_exact",
+   "AlgebraicGeometry.Etale.constantProjectionSourceShift",
+   "AlgebraicGeometry.Etale.constantProjectionTargetShift",
+   "AlgebraicGeometry.Etale.constantProjectionSource_exact",
+   "AlgebraicGeometry.Etale.constantProjectionTarget_exact",
+   "AlgebraicGeometry.Etale.constantProjectionSheafMonoidalPreadditive",
+   "AlgebraicGeometry.Etale.constantProjectionLeftDerived",
    "CategoryTheory.Functor.cachedDerivedTensorComparison",
    "CategoryTheory.Functor.cachedDerivedTensorComparison_eq"
   ],
@@ -151,9 +175,9 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J5",
+  "group": "M5",
   "result": "pass",
-  "landing": "20261020T211743-L-3496986",
+  "landing": "20261020T221249-L-4165663",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

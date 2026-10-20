@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
@@ -26,6 +27,7 @@ the existing unbounded derived adjunction. No choice of an arbitrary comparison 
 -/
 
 @[expose] public section
+
 
 universe u uA
 
@@ -125,10 +127,26 @@ theorem etaleConstantSheaf_preservesFlat (Λ : Type (u + 1)) [CommRing Λ]
 
 attribute [instance] etaleConstantSheaf_preservesFlat
 
+-- Use the additive structure supplied by the abelian instance throughout derivation.
+attribute [local instance 40000] Preadditive.preadditiveHasZeroMorphisms
+attribute [local instance 30000] Abelian.toPreadditive
+attribute [local instance 20000] SymmetricCategory.toBraidedCategory
+attribute [local instance 21000] sheafBraidedCategory
+
 variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+
+omit [HasSmallSiteSheafify A] [Abelian.HasFunctorialFlatResolution A] in
+/-- The existing tensor additivity, expressed using the additive structure inherited
+from the abelian sheaf category. Source: Stacks Tag 07A4
+(blueprint: def-kun-constant-projection-morphism). -/
+theorem constantProjectionSheafMonoidalPreadditive (X : Scheme.{u}) :
+    MonoidalPreadditive (Sheaf X.smallEtaleTopology A) := by
+  infer_instance
+
+attribute [local instance 50000] constantProjectionSheafMonoidalPreadditive
 
 /-- The unbounded adjunction of derived constant sheaves and derived global sections.
 Source: Stacks Tag 07A6 (blueprint: def-kun-constant-projection-morphism).
@@ -137,6 +155,129 @@ noncomputable def derivedConstantGlobalSectionsAdjunction (X : Scheme.{u}) :
     (constantSheaf X.smallEtaleTopology A).leftDerivedFunctor ⊣
       rightDerivedGlobalSections A X :=
   (constantSheafΓAdj X.smallEtaleTopology A).derivedAdjunction
+
+/-- The natural transformation whose components are the canonical constant projection
+maps. Source: Stacks Tags 07A4, 07A6 and 0B56
+(blueprint: def-kun-constant-projection-morphism). The type is inferred from the
+canonical mate to retain its actual derived tensor structures. -/
+noncomputable def constantDerivedProjectionTransformation (X : Scheme.{u})
+    [(constantSheaf X.smallEtaleTopology A).Monoidal]
+    [(constantSheaf X.smallEtaleTopology A).PreservesFlat] :=
+  (derivedConstantGlobalSectionsAdjunction A X).rightAdjointProjectionMap
+    (constantSheaf X.smallEtaleTopology A).cachedDerivedTensorComparison
+
+/-- The derived constant functor with its instance data fixed once.
+Source: Stacks Tag 07A6 (blueprint: def-kun-constant-projection-morphism). -/
+noncomputable def constantProjectionLeftDerived (X : Scheme.{u}) :=
+  (constantSheaf X.smallEtaleTopology A).leftDerivedFunctor
+
+/-- The source functor of the canonical constant projection transformation.
+Source: Stacks Tag 0B56 (blueprint: def-kun-constant-projection-morphism). -/
+noncomputable def constantProjectionSource (X : Scheme.{u})
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
+  (curriedTensor (DerivedCategory A)).obj ((rightDerivedGlobalSections A X).obj E)
+
+/-- The target functor of the canonical constant projection transformation.
+Source: Stacks Tag 0B56 (blueprint: def-kun-constant-projection-morphism). -/
+noncomputable def constantProjectionTarget (X : Scheme.{u})
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
+  constantProjectionLeftDerived A X ⋙
+    (curriedTensor _).obj E ⋙ rightDerivedGlobalSections A X
+
+omit [HasSmallSiteSheafify A] in
+/-- Source formula for the native projection transformation.
+Source: Stacks Tag 0B56 (blueprint: def-kun-constant-projection-morphism). -/
+theorem constantProjectionSource_eq (X : Scheme.{u})
+    [(constantSheaf X.smallEtaleTopology A).Monoidal]
+    [(constantSheaf X.smallEtaleTopology A).PreservesFlat]
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    constantProjectionSource A X E =
+      (Arrow.mk ((constantDerivedProjectionTransformation A X).app E)).left := rfl
+
+omit [HasSmallSiteSheafify A] in
+/-- Target formula for the native projection transformation.
+Source: Stacks Tag 0B56 (blueprint: def-kun-constant-projection-morphism). -/
+theorem constantProjectionTarget_eq (X : Scheme.{u})
+    [(constantSheaf X.smallEtaleTopology A).Monoidal]
+    [(constantSheaf X.smallEtaleTopology A).PreservesFlat]
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    constantProjectionTarget A X E =
+      (Arrow.mk ((constantDerivedProjectionTransformation A X).app E)).right := rfl
+
+/-- Shift structure of the exact derived constant-sheaf functor.
+Source: Stacks Tag 07A6 (blueprint: def-kun-constant-projection-morphism). -/
+@[instance_reducible]
+noncomputable def constantLeftDerivedShift (X : Scheme.{u}) :
+    (constantSheaf X.smallEtaleTopology A).leftDerivedFunctor.CommShift ℤ :=
+  Functor.CommShift.ofIso
+    (constantSheaf X.smallEtaleTopology A).leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
+
+omit [HasSmallSiteSheafify A] in
+/-- Exactness of the derived constant-sheaf functor with its specified shift structure.
+Source: Stacks Tag 07A6 (blueprint: def-kun-constant-projection-morphism). -/
+theorem constantLeftDerived_exact (X : Scheme.{u}) :
+    let := constantLeftDerivedShift A X
+    (constantSheaf X.smallEtaleTopology A).leftDerivedFunctor.IsTriangulated := by
+  let C := constantSheaf X.smallEtaleTopology A
+  let := constantLeftDerivedShift A X
+  have : NatTrans.CommShift C.leftDerivedFunctorIsoMapDerivedCategory.symm.hom ℤ :=
+    Functor.CommShift.ofIso_compatibility C.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
+  exact Functor.isTriangulated_of_iso C.leftDerivedFunctorIsoMapDerivedCategory.symm
+
+/-- Shift structure of the source of the projection transformation.
+Source: Stacks Tag 0B56 (blueprint: def-kun-constant-projection-morphism). -/
+@[instance_reducible]
+noncomputable def constantProjectionSourceShift (X : Scheme.{u})
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (constantProjectionSource A X E).CommShift ℤ := by
+  dsimp only [constantProjectionSource, Arrow.mk_left, Functor.comp_obj]
+  infer_instance
+
+/-- Shift structure of the target of the projection transformation.
+Source: Stacks Tag 0B56 (blueprint: def-kun-constant-projection-morphism). -/
+@[instance_reducible]
+noncomputable def constantProjectionTargetShift (X : Scheme.{u})
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (constantProjectionTarget A X E).CommShift ℤ := by
+  let : (constantProjectionLeftDerived A X).CommShift ℤ :=
+    constantLeftDerivedShift A X
+  let : (rightDerivedGlobalSections A X).CommShift ℤ :=
+    commShiftRightDerivedGlobalSections A X
+  dsimp only [constantProjectionTarget, Arrow.mk_right, Functor.postcompose₂,
+    Functor.whiskeringLeft₂,
+    Functor.comp_obj, Functor.whiskeringRight, Functor.whiskeringLeft]
+  infer_instance
+
+omit [HasSmallSiteSheafify A] in
+/-- The source of the projection transformation is triangulated.
+Source: Stacks Tag 0B56 (blueprint: def-kun-constant-projection-morphism). -/
+theorem constantProjectionSource_exact (X : Scheme.{u})
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    let := constantProjectionSourceShift A X E
+    (constantProjectionSource A X E).IsTriangulated := by
+  let := constantProjectionSourceShift A X E
+  dsimp only [constantProjectionSource, Arrow.mk_left, Functor.comp_obj]
+  infer_instance
+
+omit [HasSmallSiteSheafify A] in
+/-- The target of the projection transformation is triangulated.
+Source: Stacks Tag 0B56 (blueprint: def-kun-constant-projection-morphism). -/
+theorem constantProjectionTarget_exact (X : Scheme.{u})
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    let := constantProjectionTargetShift A X E
+    (constantProjectionTarget A X E).IsTriangulated := by
+  let : (constantProjectionLeftDerived A X).CommShift ℤ :=
+    constantLeftDerivedShift A X
+  have : (constantProjectionLeftDerived A X).IsTriangulated := constantLeftDerived_exact A X
+  let : (rightDerivedGlobalSections A X).CommShift ℤ :=
+    commShiftRightDerivedGlobalSections A X
+  have : (rightDerivedGlobalSections A X).IsTriangulated :=
+    inferInstanceAs (Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctor.IsTriangulated
+  let := constantProjectionTargetShift A X E
+  dsimp only [constantProjectionTarget, Arrow.mk_right, Functor.postcompose₂,
+    Functor.whiskeringLeft₂,
+    Functor.comp_obj, Functor.whiskeringRight, Functor.whiskeringLeft]
+  infer_instance
 
 /-- The canonical map `RΓ(E) ⊗ᴸ K → RΓ(E ⊗ᴸ K̲)`, defined as the adjunct of the
 canonical derived constant-sheaf tensor comparison followed by the counit on `E`.
@@ -157,6 +298,16 @@ noncomputable def constantDerivedProjectionMap (X : Scheme.{u})
   (((derivedConstantGlobalSectionsAdjunction A X).rightAdjointProjectionMap
     (constantSheaf X.smallEtaleTopology A).cachedDerivedTensorComparison).app
       E).app K
+
+omit [HasSmallSiteSheafify A] in
+/-- Component equation for the canonical projection natural transformation.
+Source: Stacks equation 0B56 (blueprint: def-kun-constant-projection-morphism). -/
+theorem constantDerivedProjectionMap_eq_transformation (X : Scheme.{u})
+    [(constantSheaf X.smallEtaleTopology A).Monoidal]
+    [(constantSheaf X.smallEtaleTopology A).PreservesFlat]
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) (K : DerivedCategory A) :
+    constantDerivedProjectionMap A X E K =
+      ((constantDerivedProjectionTransformation A X).app E).app K := rfl
 
 end AlgebraicGeometry.Etale
 
