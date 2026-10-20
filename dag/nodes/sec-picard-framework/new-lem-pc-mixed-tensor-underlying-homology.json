@@ -115,18 +115,18 @@
   "same_as": []
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.MixedTensorUnderlyingHomology",
-  "file": "lean/Sheaf/Algebra/Homology/MixedTensorUnderlyingHomology.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.MixedTensorUnderlyingHomology",
+  "file": "lean/WeilConjectures/Algebra/Homology/MixedTensorUnderlyingHomology.lean",
   "declaration": "RingTensorCohomology.exists_mixedTensorUnderlyingHomology",
   "statement": "theorem exists_mixedTensorUnderlyingHomology (R : Type u) [CommRing R] (i : ℤ) (F : CochainComplex (ModuleCat.{u} R) ℤ) : let T := (MonoidalCategory.curriedTensor (ModuleCat.{u} R)).map₂CochainComplex ∃ e : ∀ (A : Type u) [CommRing A] [Algebra R A] (Q : CochainComplex (ModuleCat.{u} A) ℤ), (((T.obj ((restrict R A).obj Q)).obj F).homology i) ≃+ ((((ModuleCat.mixedTotalTensor (algebraMap R A)).obj Q).obj F).homology i), (∀ (A : Type u) [CommRing A] [Algebra R A] (Q : CochainComplex (ModuleCat.{u} A) ℤ) (a : A) x, e A Q (HomologicalComplex.homologyMap ((T.map ((restrict R A).map (a • 𝟙 Q))).app F) i x) = a • e A Q x) ∧ (∀ (A Aq : Type u) [CommRing A] [CommRing Aq] [Algebra R A] [Algebra A Aq] [Algebra R Aq] [IsScalarTower R A Aq] (Q : CochainComplex (ModuleCat.{u} A) ℤ) (Qq : CochainComplex (ModuleCat.{u} Aq) ℤ) (g : (restrict R A).obj Q ⟶ (restrict R Aq).obj Qq) (v : (((ModuleCat.mixedTotalTensor (algebraMap R A)).obj Q).obj F) ⟶ (restrict A Aq).obj (((ModuleCat.mixedTotalTensor (algebraMap R Aq)).obj Qq).obj F)), (∀ (p q n : ℤ) (h : p + q = n) (x : Q.X p) (y : F.X q), v.f n ((HomologicalComplex.ιMapBifunctor Q F (ModuleCat.mixedTensor (algebraMap R A)) (.up ℤ) p q n h) (x ⊗ₜ[A] ((1 : A) ⊗ₜ[R,algebraMap R A] y))) = (HomologicalComplex.ιMapBifunctor Qq F (ModuleCat.mixedTensor (algebraMap R Aq)) (.up ℤ) p q n h) ((g.f p x) ⊗ₜ[Aq] ((1 : Aq) ⊗ₜ[R,algebraMap R Aq] y))) → ∀ x, (((((ModuleCat.mixedTotalTensor (algebraMap R Aq)).obj Qq).obj F).sc i).mapHomologyIso (ModuleCat.restrictScalars (algebraMap A Aq))).inv (e Aq Qq (HomologicalComplex.homologyMap ((T.map g).app F) i x)) = HomologicalComplex.homologyMap v i (e A Q x))",
   "branch": "sheaf-dag",
-  "by": "N2",
-  "date": "2026-10-14",
+  "by": "B4",
+  "date": "2026-10-20",
   "declarations": [
-   "RingTensorCohomology.exists_mixedTensorUnderlyingHomology",
-   "RingTensorCohomology.mapHomologyIso_hom_comp"
-  ]
+   "RingTensorCohomology.exists_mixedTensorUnderlyingHomology"
+  ],
+  "note": "Retire the unused Sheaf duplicate in favor of the existing upstream theorem, whose signature and proof are identical. The formerly exported Sheaf helper mapHomologyIso_hom_comp is private upstream; its upstream consumer already uses import all and is unchanged. The main theorem remains public and fully proved."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -139,13 +139,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-2d9a0",
-  "group": "G3",
+  "reviewer": "C-fe615",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261014T141504-L-226067",
+  "landing": "20261020T141302-L-2031820",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, DAG records, report, and change record matched the stated item; all four modules and direct importers compiled successfully with no mechanical, proof, interface, or forced-adaptation violations."
+  "note": "independent cc review: Emptied Sheaf twin vs identical upstream WeilConjectures.Algebra.Homology.MixedTensorUnderlyingHomology (only diff: helper public vs private); node lean.statement vs upstream signature; zero Sheaf importers; delivered file compiles clean; upstream theorem axioms propext/choice/Quot.sound"
  }
 }
