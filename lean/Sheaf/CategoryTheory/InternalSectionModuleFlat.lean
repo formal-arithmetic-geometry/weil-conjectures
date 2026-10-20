@@ -202,6 +202,15 @@ private noncomputable def sectionTensorToInternal (M N : IM) :
     intro m n
     have h := congrArg (fun t ↦ t.hom (m ⊗ₜ[ℤ] n)) ((tensorPair J R M N).naturality f)
     exact h
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}] in
+private theorem sectionTensorToInternal_tmul (M N : IM) (U : Cᵒᵖ)
+    (x : M.X.obj.obj U) (y : N.X.obj.obj U) :
+    ((sectionTensorToInternal J R M N).app U).hom
+        (x ⊗ₜ[(sectionRingSheaf J R).obj.obj U] y) =
+      ((Mod.tensorObjπ M N).hom.app U)
+        (((Functor.LaxMonoidal.μ (sheafToPresheaf J AddCommGrpCat.{u}) M.X N.X).app U)
+          (x ⊗ₜ[ℤ] y)) := rfl
+
 private noncomputable def sheafTensorLift
     (M N P : Sheaf J AddCommGrpCat.{u}) (p : M.obj ⊗ N.obj ⟶ P.obj) :
     M ⊗ N ⟶ P := by
@@ -460,6 +469,73 @@ private noncomputable def sheafTensorIso (M N : IM) :
   have : IsIso (sheafTensorToInternal J R M N) :=
     isIso_of_reflects_iso _ (SheafOfModules.toSheaf _)
   exact asIso (sheafTensorToInternal J R M N)
+private noncomputable def comparison_presheafTensorIso (M N : IM) :
+    ((E).obj M).val ⊗ ((E).obj N).val ≅
+      SheafOfModules.siteTensorPresheaf ((E).obj M).val ((E).obj N).val :=
+  PresheafOfModules.isoMk (fun _ ↦ Iso.refl _) (by
+    intro U V f
+    apply ModuleCat.hom_ext
+    ext z
+    induction z using TensorProduct.induction_on with
+    | zero => simp only [map_zero]
+    | tmul x y => rfl
+    | add x y hx hy => simp only [map_add, hx, hy])
+
+/-- The sectionwise balanced tensor sheaf and the internal relative tensor have the
+same universal pairing. Source: Stacks Project, Tag 03EK.
+The inverse is the sheafification lift of the balanced pairing into the coequalizer.
+The forward map is the coequalizer descent of the sectionwise tensor pairing; their
+composites are identities by the two universal properties. The formula follows
+from the sheafification unit equation.
+(blueprint: lem-c2-internal-section-module-flatness) -/
+theorem exists_sectionTensorIso (M N : IM) :
+    ∃ e : (E).obj (M ⊗ N) ≅ (PresheafOfModules.sheafification
+        (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj
+          (sectionRingSheaf J R)) (𝟙 _)).obj
+        (((E).obj M).val ⊗ ((E).obj N).val),
+    ∀ (U : Cᵒᵖ) (x : M.X.obj.obj U) (y : N.X.obj.obj U),
+      (e.hom.val.app U)
+          (((Mod.tensorObjπ M N).hom.app U)
+            (((Functor.LaxMonoidal.μ (sheafToPresheaf J AddCommGrpCat.{u}) M.X N.X).app U)
+              (x ⊗ₜ[ℤ] y))) =
+        ((toSheafify J ((((E).obj M).val ⊗ ((E).obj N).val).presheaf)).app U)
+          (x ⊗ₜ[(sectionRingSheaf J R).obj.obj U] y) := by
+  let S := PresheafOfModules.sheafification
+    (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj (sectionRingSheaf J R)) (𝟙 _)
+  let adj := PresheafOfModules.sheafificationAdjunction
+    (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj (sectionRingSheaf J R)) (𝟙 _)
+  let i := comparison_presheafTensorIso J R M N
+  let c := S.mapIso i ≪≫ sheafTensorIso J R M N
+  refine ⟨c.symm, ?_⟩
+  intro U x y
+  have hf : (c.hom.val.app U)
+      (((toSheafify J ((((E).obj M).val ⊗ ((E).obj N).val).presheaf)).app U)
+        (x ⊗ₜ[(sectionRingSheaf J R).obj.obj U] y)) =
+      ((Mod.tensorObjπ M N).hom.app U)
+        (((Functor.LaxMonoidal.μ (sheafToPresheaf J AddCommGrpCat.{u}) M.X N.X).app U)
+          (x ⊗ₜ[ℤ] y)) := by
+    have hn := congrArg (fun f ↦ (f.app U)
+        (x ⊗ₜ[(sectionRingSheaf J R).obj.obj U] y)) (adj.unit.naturality i.hom)
+    have h := congrArg (fun f ↦ (f.app U).hom
+        (x ⊗ₜ[(sectionRingSheaf J R).obj.obj U] y))
+      (sheafTensorToInternal_unit J R M N)
+    change (sheafTensorToInternal J R M N).val.app U _ =
+      ((sectionTensorToInternal J R M N).app U).hom _ at h
+    rw [sectionTensorToInternal_tmul] at h
+    change (sheafTensorToInternal J R M N).val.app U
+      ((S.map i.hom).val.app U _) = _
+    change ((toSheafify J
+        (SheafOfModules.siteTensorPresheaf ((E).obj M).val ((E).obj N).val).presheaf).app U)
+          (x ⊗ₜ[(sectionRingSheaf J R).obj.obj U] y) =
+        (S.map i.hom).val.app U
+          (((toSheafify J ((((E).obj M).val ⊗ ((E).obj N).val).presheaf)).app U)
+            (x ⊗ₜ[(sectionRingSheaf J R).obj.obj U] y)) at hn
+    exact (congrArg ((sheafTensorToInternal J R M N).val.app U) hn).symm.trans h
+  have hc := congrArg (fun f ↦ (f.val.app U)
+    (((toSheafify J ((((E).obj M).val ⊗ ((E).obj N).val).presheaf)).app U)
+      (x ⊗ₜ[(sectionRingSheaf J R).obj.obj U] y))) c.hom_inv_id
+  exact (congrArg (c.inv.val.app U) hf).symm.trans hc
+
 private theorem sheafTensorToInternal_naturality
     {M M' : IM} (f : M ⟶ M') (N : IM) :
     (PresheafOfModules.sheafification (𝟙 _)).map
