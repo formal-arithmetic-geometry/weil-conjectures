@@ -16,11 +16,11 @@
  ],
  "proof": [
   {
-   "text": "If I is empty, apply the already proved model-data theorem and discharge the geometric fibre and incidence assertions by elimination of an empty index. This requires no field model construction or irreducibility shrinking.",
+   "text": "If I is empty, the private source-library lemma exists_generic_cover_model_of_isEmpty uses the empty covering identity to show that the base-changed generic fibre is empty. The first projection is surjective because Spec L is nonempty and the spectrum of the generic residue field is a singleton. The fibre homeomorphism then shows the original generic fibre is empty. Apply closed avoidance to the whole source and restrict to the resulting open through the generic point. The restricted pullback is empty. Take the empty family of closed subsets and eliminate an empty index for the geometric-fibre and incidence assertions.",
    "uses": [
-    "new-lem-sbc-geometric-generic-cover-model-data"
+    "lem-sbc-generic-fibre-closed-avoidance"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
    "text": "If I is nonempty, obtain T, g, eta, a from the compatible etale generic-fibre model. Define C_i = closure(a(A_i)). The embedding closure formula proves a inverse image of C_i equals A_i. The cover of A implies the C_i cover the fibre over eta. The supplied field-base-change isomorphisms transport the geometric irreducibility of A_i to every geometric generic trace of C_i.",
@@ -46,14 +46,14 @@
  "proof_deps": [
   "lem-sbc-closed-family-geometric-fibre-shrink",
   "lem-sbc-compatible-etale-generic-fibre-model",
-  "lem-sbc-generic-fibre-closed-cover-spread",
-  "new-lem-sbc-geometric-generic-cover-model-data"
+  "lem-sbc-generic-fibre-closed-avoidance",
+  "lem-sbc-generic-fibre-closed-cover-spread"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0551, 054Y and 0559; Tag 055G through the closed-family model construction.",
-  "note": "M3: compatible generic fibre model plus independent closed-family irreducibility shrinking. Closures, their exact generic traces, covering restriction, fibre transport and generic incidences are proved in Lean. No arbitrary-cover refinement."
+  "place": "Tag 055G, model and closure construction; Tags 0551, 054Y, 0559 and 054W.",
+  "note": "F7 retirement: attach the unchanged statement to the existing source-library proof. The empty-index branch uses its proved private closed-avoidance lemma; the nonempty branch retains the compatible generic model, closures, exact generic traces, common shrinking, pullback fibre transport and lifted generic incidences. No unit route is changed. The proof and its consumer compile and have only the three permitted axioms."
  },
  "mathlib_searches": [
   {
@@ -124,14 +124,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-normal-form",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.GeometricGenericCoverModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/GeometricGenericCoverModel.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.GeometricGenericCoverModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GeometricGenericCoverModel.lean",
   "declaration": "AlgebraicGeometry.exists_geometric_generic_cover_model",
   "statement": "theorem exists_geometric_generic_cover_model {X S : Scheme.{u}} [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] {L : Type u} [Field L] (yη : Spec (CommRingCat.of L) ⟶ Spec (CommRingCat.of (S.residueField (genericPoint S)))) [IsFinite yη] [Etale yη] {I : Type u} [Finite I] (A : I → Set ↥(pullback (f.fiberToSpecResidueField (genericPoint S)) yη)) (hclosed : ∀ i, IsClosed (A i)) (hcover : (⋃ i, A i) = Set.univ) (hgeom : ∀ i, ∀ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of L)), IsIrreducible ((pullback.fst (pullback.snd (f.fiberToSpecResidueField (genericPoint S)) yη) z) ⁻¹' A i)) : ∃ (T : Scheme.{u}) (g : T ⟶ S) (η : T) (C : I → Set ↥(pullback f g)), Etale g ∧ IsGenericPoint η Set.univ ∧ g η = genericPoint S ∧ (∀ i, IsClosed (C i)) ∧ (⋃ i, C i) = Set.univ ∧ (∀ i t, ∀ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of (T.residueField t))), IsIrreducible ((pullback.fst ((pullback.snd f g).fiberToSpecResidueField t) z ≫ (pullback.snd f g).fiberι t) ⁻¹' C i)) ∧ ∀ i j, (A i ∩ A j).Nonempty → (C i ∩ C j ∩ (pullback.snd f g) ⁻¹' {η}).Nonempty",
   "branch": "sheaf-dag",
-  "by": "P4",
-  "date": "2026-10-13"
+  "by": "F7",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module. The source-library declaration has exactly the same statement; its compiled proof uses only propext, Classical.choice and Quot.sound. Its empty-index case uses a proved private lemma, not the retired model-data declaration."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -144,13 +145,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M3",
+  "reviewer": "C-3b3bb",
+  "group": "F7",
   "result": "pass",
-  "landing": "20261013T045542-L-132423",
+  "landing": "20261020T233142-L-899548",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf.AlgebraicGeometry.GeometricGenericCoverModel against the byte-identical, axiom-clean AlgebraicGeometry.exists_geometric_generic_cover_model in WeilConjectures.AlgebraicGeometry.GeometricGenericCoverModel; DAG parents (data node ← main node ← lem-sbc-geometric-generic-cover-spread) and proof_deps checked against the surviving proof"
  }
 }
