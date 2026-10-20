@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-global-tensor-hom-cochains-universes",
+ "kind": "lemma",
+ "title": "Global tensor–Hom cochains with independent coefficient universes",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-derived-internal-hom-sections-model",
+   "place": "Proof of K-injectivity of Hom(P,I), Stacks 0A96 via the tensor–Hom cochain identity 0A90",
+   "via": []
+  }
+ },
+ "statement": "Let C be a site with object and morphism universes c and v, let r be an independent universe, and let R be a sheaf of commutative rings with values in universe max(c,v,r). Assume additive sheafification and that local equivalences are the locally bijective maps. Let K,L,I be arbitrary unbounded cochain complexes of sheaves of R-modules [def-pc-cochain-complex-modules]. Write Hom(L,I) for the sheaf Hom complex [def-pur-hom-complex] and T=Tot(K tensor L) for the direct-sum tensor total complex [def-pc-tensor-complex-sheaves]. For every integer n there is an additive equivalence between ordinary degree-n cochains K to Hom(L,I) and ordinary degree-n cochains T to I. These equivalences intertwine the Hom differentials in adjacent degrees. There is no boundedness, flatness or injectivity hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90 (lemma-compose); cochain tensor–Hom identity used in Lemma 0A96."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual sheaf tensor–Hom adjunction at the recorded universes: first use the module sheafification adjunction, then the existing presheaf tensor–Hom equivalence, and finally full faithfulness of forgetting sheaves of modules. Naturality of tensorObjIsoSheafification and the component formulas for presheaf currying establish naturality in each argument. This equips the module category with a private closed structure whose internal Hom is exactly the sheaf Hom, rather than a separately chosen representing object.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compare the sheaf Hom complex with CochainComplex.internalHomObj for this closed structure. On the (p,p+n) factor multiply by (-1)^(pn). Product projections construct both maps and prove they are inverse; the homComplex differential formula shows that these maps commute with the differentials. This is the existing HomComplexInternalHomComparison argument with independent coefficient universes.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose cochains with that chain isomorphism. Apply the additive tensor–Hom cochain equivalence CochainComplex.InternalHom.cochainEquiv, and precompose with the symmetry K tensor L to L tensor K. The generic uncurryCochain_δ theorem and the Hom differential composition formulas prove compatibility with δ. The three signs from the comparison, currying, and symmetry cancel, giving the usual componentwise tensor–Hom identification for every integer degree. Empty and zero complexes are included by the product/coproduct universal properties.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X9",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90, with the generic cochainEquiv and uncurryCochain_δ in WeilConjectures.Algebra.Homology.InternalHom.",
+  "note": "Constructed and proved, not assumed; extends the comparison argument to independent site and coefficient universes without changing the adopted source library."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Currying gives additive equivalences between cochains into the internal Hom complex and cochains from the tensor product complex, commuting with the differential",
+   "date": "2026-10-20",
+   "results": "Eight hits for ordinary Hom cochains, single-complex and shift equivalences, and differential naturality; no sheaf tensor-Hom cochain equivalence.",
+   "verdict": "Use the generic categorical cochainEquiv from the source library after proving the actual sheaf Hom-complex comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Currying is an additive equivalence of cochains from a tensor complex into a target and cochains into the internal Hom, compatible with differentials",
+   "results": "8 hits concerning ordinary HomComplex single and shift equivalences; no ringed-site tensor–Hom cochain statement.",
+   "date": "2026-10-20",
+   "verdict": "Use the existing generic source-library InternalHom.cochainEquiv after explicitly identifying the actual sheaf Hom complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"comp\"",
+   "results": "12 hits for ordinary Hom cochain composition and cocycles; no sheaf tensor–Hom comparison.",
+   "date": "2026-10-20",
+   "verdict": "The ordinary δ_comp_ofHom and δ_ofHom_comp APIs provide the final compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom|cochainEquiv|curryCochain",
+   "results": "25 Mathlib hits, none giving this sheaf cochain comparison. Local source search found CochainComplex.InternalHom.cochainEquiv and uncurryCochain_δ.",
+   "date": "2026-10-20",
+   "verdict": "Reuse the generic source equivalence and prove only the needed universe-general actual-Hom identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel",
+  "date": "2026-10-21",
+  "group": "X9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-ext",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.GlobalTensorHomCochainsOfUniverses",
+  "file": "lean/Sheaf/Algebra/Homology/GlobalTensorHomCochainsOfUniverses.lean",
+  "declaration": "CategoryTheory.global_tensorHom_cochainsOfUniverses",
+  "declarations": [
+   "CategoryTheory.global_tensorHom_cochainsOfUniverses"
+  ],
+  "statement": "theorem global_tensorHom_cochainsOfUniverses\n    {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasSheafify J AddCommGrpCat.{max c v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    (R : Sheaf J CommRingCat.{max c v r})\n    (K L I : CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J\n      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) :\n    letI := SheafOfModules.isMonoidal_W_independentCoefficients R\n    letI := SheafOfModules.monoidalCategory R\n    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R\n    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R\n    let T := CochainComplex.mapBifunctor K L (curriedTensor _)\n    ∃ e : ∀ n : ℤ, CochainComplex.HomComplex.Cochain K (homComplex (R := R) L I) n ≃+\n        CochainComplex.HomComplex.Cochain T I n,\n      ∀ (n m : ℤ) (_hnm : n + 1 = m) (a),\n        e m (CochainComplex.HomComplex.δ n m a) =\n          CochainComplex.HomComplex.δ n m (e n a)",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-21",
+  "note": "A fully proved cochain lemma; no new sorry or arbitrary witness definition."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261020T211900-L-3514092",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261020T211900-L-3514092",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -29,7 +29,7 @@
  ],
  "proof": [
   {
-   "text": "For tensorRightAdjoint_iso, use the existing ringed-site closed symmetric monoidal derived structure (lem-sf-ringed-derived-closed-symmetric-monoidal). Choose a K-flat resolution P of a representative L of K by lem-pc-kflat-resolution, and localize its augmentation to obtain QP ≅ K. The hypothesis model identifies Q ⋙ T with Tot(P tensor -) ⋙ Q. The closed structure's one-K-flat tensor comparison h.tensorIso, with h.tensorIso_naturality applied to (identity P,f), gives a natural isomorphism from that functor to Q ⋙ tensorLeft(QP). Transport through QP ≅ K. Fully faithful whiskering with the derived localization lifts the natural isomorphism to T ≅ tensorLeft(K). Compose with the symmetry tensorLeft(K) ≅ tensorRight(K). Uniqueness of right adjoints for the given adjunction and S.adjunction K gives H ≅ internalHom(K,-). All steps are implemented in Lean. The second theorem remains sorry with the representative and derived-sections argument in the original steps below.",
+   "text": "For tensorRightAdjoint_iso, use the existing ringed-site closed symmetric monoidal derived structure (lem-sf-ringed-derived-closed-symmetric-monoidal). Choose a K-flat resolution P of a representative L of K by lem-pc-kflat-resolution, and localize its augmentation to obtain QP ≅ K. The hypothesis model identifies Q ⋙ T with Tot(P tensor -) ⋙ Q. The closed structure's one-K-flat tensor comparison h.tensorIso, with h.tensorIso_naturality applied to (identity P,f), gives a natural isomorphism from that functor to Q ⋙ tensorLeft(QP). Transport through QP ≅ K. Fully faithful whiskering with the derived localization lifts the natural isomorphism to T ≅ tensorLeft(K). Compose with the symmetry tensorLeft(K) ≅ tensorRight(K). Uniqueness of right adjoints for the given adjunction and S.adjunction K gives H ≅ internalHom(K,-). All steps are implemented in Lean.",
    "uses": [
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
     "lem-pc-kflat-resolution",
@@ -42,56 +42,72 @@
    }
   },
   {
-   "text": "Choose a K-flat resolution $r:\\mathcal P^\\bullet\\to\\mathcal A^\\bullet$ by [lem-pc-kflat-resolution]. Put $B_{\\mathcal A}=\\mathcal Hom^\\bullet(\\mathcal A^\\bullet,\\mathcal J^\\bullet)$ and $C=\\mathcal Hom^\\bullet(\\mathcal P^\\bullet,\\mathcal J^\\bullet)$. By [lem-pur-rhom-well-defined], applied to $r$ and the identity of the K-injective $\\mathcal J^\\bullet$, precomposition gives a quasi-isomorphism $r^*:B_{\\mathcal A}\\to C$. By [lem-pur-hom-kflat-into-kinjective], $C$ is K-injective. The definition [def-pur-derived-internal-hom] therefore represents its functor $R\\mathcal Hom(K,M)$ by either $B_{\\mathcal A}$ or $C$, with the canonical comparison just described, functorial in chain maps of the representatives. The hypotheses here are precisely a small ringed site, a K-flat source resolution, and a K-injective target; $\\mathcal A^\\bullet$ itself need not be flat.",
+   "text": "Compare the canonical functorial K-injective replacement I of a given K-injective target with the target itself. The replacement map is a quasi-isomorphism between K-injectives, so quasiIso_homComplex_mapOfUniverses makes Hom(A,-) invert it after localization. Combine this natural transformation with derivedInternalHomOfUniverses_comparison. This gives representativeComparison, natural in the source complex and all maps of K-injectives.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-rhom-well-defined",
-    "lem-pur-hom-kflat-into-kinjective",
-    "def-pur-derived-internal-hom"
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined-universes",
+    "prop-pur-kinjective-resolutions-exist"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective); Section 08J7 (section-internal-hom)"
+    "place": "Section 08J7, Tags 0A95, 0A96, 08JA and 08J9; Hom complex equation 0A8Z."
    }
   },
   {
-   "text": "We need ordinary global sections of $B_{\\mathcal A}$ to compute its derived sections, even though $B_{\\mathcal A}$ need not be K-injective. First compute ordinary global Hom cohomology in every degree. For any complex $\\mathcal T^\\bullet$ and integer $n$, [def-pur-hom-complex] gives the chain isomorphism $\\Gamma\\mathcal Hom^\\bullet(\\mathcal T,\\mathcal J)[n]\\cong\\Gamma\\mathcal Hom^\\bullet(\\mathcal T,\\mathcal J[n])$ by identity on each component indexed by $p$ (the differentials on both sides are $(-1)^n d_{\\mathcal J}f-(-1)^a f d_{\\mathcal T}$ in degree $a$). Apply [lem-pur-hom-complex-global-homotopy] in degree zero to $\\mathcal T$ and $\\mathcal J[n]$. The complex $\\mathcal J[n]$ is K-injective directly from [def-pur-kinjective-complex]: a map from acyclic $V$ to $\\mathcal J[n]$ is a shifted map from the acyclic $V[-n]$ to $\\mathcal J$, so its null homotopy shifts back. Hence [lem-weil-pbc-kinjective-hom-derived] gives, naturally in both variables,\n$$H^n\\Gamma\\mathcal Hom^\\bullet(\\mathcal T,\\mathcal J)\\cong\\operatorname{Hom}_{D(\\mathcal O)}(Q\\mathcal T,M[n]).$$\nTake $\\mathcal T=\\mathcal A$ and $\\mathcal T=\\mathcal P$. The map on these groups induced by $\\Gamma(r^*)$ is precomposition with $Qr$, which is invertible because $r$ is a quasi-isomorphism. Thus $\\Gamma(r^*):\\Gamma B_{\\mathcal A}\\to\\Gamma C$ is a quasi-isomorphism of abelian-group complexes. This uses no exactness assumption on $\\Gamma$ or on infinite products.",
+   "text": "For a K-flat L and a K-injective I, prove Hom(L,I) is K-injective directly. Given an acyclic K and a chain map K to Hom(L,I), use the global tensor–Hom cochain equivalence to obtain a degree-zero cocycle from Tot(K tensor L) to I. This tensor total is acyclic by K-flatness, so K-injectivity of I expresses the cocycle as a boundary. The inverse cochain equivalence respects δ and therefore gives a null homotopy of the original map. This proves homComplex_isKInjective at the independent coefficient universes.",
    "uses": [
-    "def-pur-hom-complex",
+    "lem-sfb-global-tensor-hom-cochains-universes",
+    "def-pc-kflat-complex",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 08J7, Tags 0A95, 0A96, 08JA and 08J9; Hom complex equation 0A8Z."
+   }
+  },
+  {
+   "text": "Use the existing natural globalComplexIso identifying sections of the sheaf Hom complex with the ordinary global Hom complex. Its projection formula gives the displayed componentwise naturality. In every integer degree, Mathlib HomComplex.leftHomologyData and CohomologyClass.homAddEquiv identify ordinary Hom cohomology with maps A to I[n] in the homotopy category. Prove naturality under pre- and postcomposition via LeftHomologyMapData. If t:P to A is a quasi-isomorphism and I is K-injective, then I[n] is K-injective and Qh_map_bijective identifies precomposition by t with an invertible map in the derived category. Thus externalMap t (identity I) is a quasi-isomorphism.",
+   "uses": [
     "lem-pur-hom-complex-global-homotopy",
-    "def-pur-kinjective-complex",
+    "def-pur-hom-complex",
     "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Equation 0A8Z (equation-global-cohomology-hom-complex); Tag 0A94 (lemma-RHom-into-K-injective), global calculation; derived.tex Tags 070H and 070I"
+    "place": "Section 08J7, Tags 0A95, 0A96, 08JA and 08J9; Hom complex equation 0A8Z."
    }
   },
   {
-   "text": "Use the unbounded K-injective definition of $R\\Gamma$ in [def-pur-ringed-site-zeroth-hypercohomology], with the functorial K-injective resolutions in [prop-pur-kinjective-resolutions-exist]. The resolution maps give a natural comparison $\\delta_E:Q_{\\operatorname{Ab}}\\Gamma E\\to R\\Gamma(QE)$ for every sheaf complex $E$. When $E$ is K-injective, its resolution map is a quasi-isomorphism between K-injectives and hence a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived]; applying $\\Gamma$ preserves its inverse and homotopy equations. Thus $\\delta_C$ is an isomorphism. In the naturality square for $r^*:B_{\\mathcal A}\\to C$, the upper horizontal arrow $Q_{\\operatorname{Ab}}\\Gamma(r^*)$ is invertible by the ordinary global-Hom calculation, and the lower horizontal arrow $R\\Gamma(Qr^*)$ is invertible by the representative comparison. Consequently\n$$\\delta_{B_{\\mathcal A}}=(R\\Gamma(Qr^*))^{-1}\\,\\delta_C\\,Q_{\\operatorname{Ab}}\\Gamma(r^*)$$\nis invertible. Together with clause (1), this proves the asserted representation of $R\\Gamma(\\mathcal C,H_K(M))$ by $\\Gamma B_{\\mathcal A}$. The comparison $\\delta$ is natural before the auxiliary choice of $\\mathcal P$, so this identification is natural for all chain maps $\\mathcal A'\\to\\mathcal A$ and all maps of K-injectives $\\mathcal J\\to\\mathcal J'$. No natural choice of K-flat resolution is needed for that conclusion.",
+   "text": "Construct the canonical natural transformation δ from Q Γ applied termwise to the right derived sections functor, using the homotopy-factorization isomorphisms and rightDerivedFunctorUnit. Its component at a K-injective is invertible. For any source A choose a K-flat resolution t:P to A. The sheaf Hom map Hom(A,I) to Hom(P,I) is a quasi-isomorphism by the independent-universe 0A95, and its ordinary-sections map is a quasi-isomorphism by the preceding global-Hom calculation. Hom(P,I) is K-injective by the previous step. In δ-naturality for this map, both horizontal arrows and the component at Hom(P,I) are invertible, so the component at Hom(A,I) is invertible. These components assemble into sectionsComparison without any natural choice of P.",
    "uses": [
     "def-pur-ringed-site-zeroth-hypercohomology",
+    "lem-pc-kflat-resolution",
+    "lem-pur-rhom-well-defined-universes",
     "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-pur-hom-complex-global-homotopy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JA (lemma-section-RHom-over-U), proof using 0A96 and 0A94; Section 07A5 (section-unbounded); functorial resolutions via injectives.tex Tag 079P"
+    "place": "Section 08J7, Tags 0A95, 0A96, 08JA and 08J9; Hom complex equation 0A8Z."
    }
   },
   {
-   "text": "Finally, [def-pur-hom-complex] computes the degree-$n$ term of $\\Gamma B_{\\mathcal A}$ by taking sections of $\\prod_p\\mathcal Hom_{\\mathcal O}(\\mathcal A^p,\\mathcal J^{p+n})$. Global sections commute with these products: a morphism $\\mathcal O\\to\\prod_p F_p$ is exactly a family of morphisms $\\mathcal O\\to F_p$. By [def-pur-sheaf-hom], global sections of each factor are $\\operatorname{Hom}_{\\mathcal O}(\\mathcal A^p,\\mathcal J^{p+n})$. Its differential is $d_{\\mathcal J}f-(-1)^n f d_{\\mathcal A}$, so the resulting complex is exactly the stated global morphism complex, not just a termwise identification. Pre- and postcomposition are the maps of this complex by the functoriality in [def-pur-hom-complex]. Combining the derived-sections comparison with the degree-$n$ ordinary global-Hom calculation for $\\mathcal T=\\mathcal A$ gives $H^nR\\Gamma(\\mathcal C,H_K(M))\\cong\\operatorname{Hom}_{D(\\mathcal O)}(K,M[n])$ for all integers $n$, proving the final assertion of clause (2).",
+   "text": "Compose representativeComparison with sectionsComparison to obtain the full natural derived-sections isomorphism. For arbitrary derived K,M choose a complex A with QA isomorphic to K and a K-injective I with QI isomorphic to M. Apply the derived-sections comparison, homologyFunctorFactors, globalComplexIso, and the all-degree ordinary Hom cohomology comparison. Then apply Qh_map_bijective for I[n], and transport along quotientCompQhIso, Q.commShiftIso, and the two representative isomorphisms. Every transport is additive, giving H^n RΓ RHom(K,M) additively equivalent to Hom(K,M[n]) for all integers n, including negative degrees. No boundedness or flatness of A is assumed.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pur-sheaf-hom"
+    "def-pur-derived-internal-hom",
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "lem-pur-hom-complex-global-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 0A8X (section-hom-complexes), Equation 0A8Z (equation-global-cohomology-hom-complex); Tag 08JA"
+    "place": "Section 08J7, Tags 0A95, 0A96, 08JA and 08J9; Hom complex equation 0A8Z."
    }
   }
  ],
@@ -99,22 +115,24 @@
   "lem-sf-ringed-derived-closed-symmetric-monoidal",
   "lem-pc-kflat-resolution",
   "def-weil-abstract-derived-category",
-  "lem-pur-rhom-well-defined",
-  "lem-pur-hom-kflat-into-kinjective",
   "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "lem-pur-hom-complex-global-homotopy",
-  "def-pur-kinjective-complex",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-pur-ringed-site-zeroth-hypercohomology",
+  "lem-pur-rhom-well-defined-universes",
   "prop-pur-kinjective-resolutions-exist",
-  "def-pur-sheaf-hom"
+  "lem-sfb-global-tensor-hom-cochains-universes",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "lem-pur-hom-complex-global-homotopy",
+  "def-pur-hom-complex",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-ringed-site-zeroth-hypercohomology"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "X9",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Sections 08J7 and 0FPT, Lemma 08J9; remaining full sections comparison as in original plan.",
-  "note": "V9 proves tensorRightAdjoint_iso from the existing closed symmetric monoidal structure and localization uniqueness. derived_internalHom_sections_model remains unchanged and unproved. No split-off statements."
+  "place": "Section 08J7, Tags 0A95, 0A96, 08JA and 08J9; Hom complex equation 0A8Z.",
+  "note": "Both declarations now proved. The earlier tensorRightAdjoint_iso proof is preserved. The model proof follows the recorded K-flat/δ-naturality route; a new fully proved global tensor–Hom cochain lemma supplies the independent-universe K-injectivity argument. No new sorry."
  },
  "mathlib_searches": [
   {
@@ -293,8 +311,6 @@
  },
  "tool_uses": [
   "lem-pc-kflat-resolution",
-  "lem-pur-rhom-well-defined",
-  "lem-pur-hom-kflat-into-kinjective",
   "def-pur-derived-internal-hom",
   "lem-pur-hom-complex-global-homotopy",
   "prop-pur-kinjective-resolutions-exist"
@@ -354,13 +370,13 @@
   "note": "Two complementary statements render the node: tensorRightAdjoint_iso identifies any specified right adjoint of derived tensor with the existing derived internal Hom; derived_internalHom_sections_model supplies the natural representative and full derived-global-sections comparisons, the ordinary global Hom complex with its componentwise naturality, and the cohomology formula in every integer degree. The added landed dependency def-pur-derived-internal-hom provides the canonical bifunctor; no second internal Hom is constructed. All helper definitions are transparent specializations/composites of the recorded operations. Site object, site morphism, coefficient and derived morphism universes remain independent."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V9",
+  "group": "X9",
   "result": "pass",
-  "landing": "20261019T034333-L-422704",
-  "kind": "proof",
+  "landing": "20261020T211900-L-3514092",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
