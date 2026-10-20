@@ -1,8 +1,8 @@
 # Work queue
 
-102 items; claim with `tools/claim.py next <group> [--stage N]`.
+108 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (38 clusters, 2382 modules)
+## Rework: quarantined by the upstream sync (44 clusters, 2382 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -11,12 +11,17 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.IntegralConstructibleSerre` | 1 |  | error: Sheaf/Paper/IntegralConstructibleSerre.lean:43:4: error(lean.unknownIdentifier): Unknown constant `CategoryTheory.ObjectProperty.IsClosedUnderKernels` |  |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram` | 1 |  | error: Sheaf/AlgebraicGeometry/HigherDirectImageRawDiagram.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTrianglePullback failed |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean:1195:0: error: unexpected token 'by'; expected command | |
+| `Sheaf.AlgebraicGeometry.ClosedSupportStratumHom` | 1 |  | error: Sheaf/AlgebraicGeometry/ClosedSupportStratumHom.lean:222:4: error(lean.synthInstanceFailed): failed to synthesize instance of type class | (i)_*⟦Λ⟧.Prese |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
 | `Sheaf.AlgebraicGeometry.KFlatStalkResidueCohomology` | 1 |  | error: Sheaf/AlgebraicGeometry/KFlatStalkResidueCohomology.lean:62:10: error(lean.unknownIdentifier): Unknown constant `CochainComplex.IsAcyclicTensorKFlat` | C |
+| `Sheaf.CategoryTheory.BrownRepresentabilityConstruction` | 1 |  | error: Sheaf/CategoryTheory/BrownRepresentabilityConstruction.lean:49:50: error(lean.unknownIdentifier): Unknown identifier `IsCompactObject` | | Note: A public |
+| `Sheaf.AlgebraicGeometry.RelativeMVResolvedOpenRoofComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/RelativeMVResolvedOpenRoofComparison.lean:69:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irr |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean:548:4: error: Type mismatch | isLeftDerivedFunctor₂_upperStar |
+| `Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalLocalizedHomGerm.lean:57:6: error: Application type mismatch: The argument | ((Scheme.strictHenselizationStructuralMap |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
 | `Sheaf.AlgebraicGeometry.ZeroSupportFiniteScheme` | 1 |  | error: Sheaf/AlgebraicGeometry/ZeroSupportFiniteScheme.lean:70:26: error(lean.unknownIdentifier): Unknown constant `AlgebraicGeometry.RingedSpace.IsCoherent` |  |
+| `Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarCupModuleCupCompatibility.lean:112:9: error(lean.unknownIdentifier): Unknown identifier `scalarCohomology` | | Note: A publ |
 | `Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIso` | 1 |  | error: Sheaf/AlgebraicGeometry/StalkDerivedExtensionComparisonIso.lean:83:16: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The environment do |
 | `Sheaf.RingTheory.BoundedProjectiveResolutionDimension` | 1 |  | error: Sheaf/RingTheory/BoundedProjectiveResolutionDimension.lean:6:0: error: import WeilConjectures.RingTheory.GlobalDimension failed, environment already cont |
 | `Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso` | 1 |  | error: Sheaf/AlgebraicGeometry/QCohTensorResolutionChartComparisonIso.lean:1:0: error: import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde failed, environment a |
@@ -36,6 +41,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryChainNaturality` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryChainNaturality.lean:189:10: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The environ |
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnitLaws` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedDirectImageCompositionUnitLaws.lean:46:15: error(lean.unknownIdentifier): Unknown identifier `Scheme` | | Note: A public d |
+| `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedPullbackCompositionCounitNormalization.lean:28:17: error: failed to set `[local irreducible]`, `derivedPullback` is curren |
 | `Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange` | 1 |  | error: Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison fail |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineImageRep` | 1 |  | error: Sheaf/AlgebraicGeometry/HigherDirectImageRawAffineImageRep.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTrianglePullback |
 | `Sheaf.AlgebraicGeometry.OpenPinnedSourceCounitTriangle` | 1 |  | error: Sheaf/AlgebraicGeometry/OpenPinnedSourceCounitTriangle.lean:56:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irreducib |
@@ -47,7 +53,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounitCore` | 1 |  | error: Sheaf/AlgebraicGeometry/PicardTermwiseCompositeCounitCore.lean:29:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irredu |
 | `Sheaf.AlgebraicGeometry.SchemeIsoPerfectLocalTransport` | 1 |  | error: Sheaf/AlgebraicGeometry/SchemeIsoPerfectLocalTransport.lean:171:2: error: failed to solve universe constraint | ?u.539 + 1 =?= u | while trying to unify  |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 1, stage 2 32, stage 3 135 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 1, stage 2 32, stage 3 137 items.
 
 ## Stage 1: nodes to split (0)
 
