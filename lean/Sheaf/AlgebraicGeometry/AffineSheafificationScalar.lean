@@ -1,7 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
 
 /-! # Scalars in the underived affine associated-sheaf functor

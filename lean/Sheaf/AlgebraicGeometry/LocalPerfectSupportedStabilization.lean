@@ -5,7 +5,7 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import all Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
 import all Sheaf.AlgebraicGeometry.PerfectCommonAffineModels

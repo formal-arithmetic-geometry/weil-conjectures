@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorComplexCohomologyVanishes
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel

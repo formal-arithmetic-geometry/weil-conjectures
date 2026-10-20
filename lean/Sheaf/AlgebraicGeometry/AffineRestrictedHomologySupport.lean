@@ -1,6 +1,6 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 public import Mathlib.RingTheory.Spectrum.Prime.Module
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Category.Grp.Zero

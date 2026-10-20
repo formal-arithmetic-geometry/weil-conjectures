@@ -1,7 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Affine derived preimages of restricted quasi-coherent targets
 

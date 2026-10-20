@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Data.Nat.Choose.Basic

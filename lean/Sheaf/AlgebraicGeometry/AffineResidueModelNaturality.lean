@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.DerivedFiberCohomologyFunctor
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffineResidueEvaluationHomologyNaturality
 import Sheaf.AlgebraicGeometry.AffinePerfectResidueModelNaturality
 

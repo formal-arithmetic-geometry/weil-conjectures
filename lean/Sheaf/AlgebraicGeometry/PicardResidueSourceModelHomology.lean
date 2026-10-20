@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.CategoryTheory.Adjunction.Additive
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel
 import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -17,7 +17,7 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import all Sheaf.AlgebraicGeometry.AffineFreeTerminalSectionsReconstruction
-import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 
 /-! # Homology of a strictly perfect affine residue model
 

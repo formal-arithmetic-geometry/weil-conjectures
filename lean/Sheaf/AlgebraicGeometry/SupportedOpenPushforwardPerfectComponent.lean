@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.OpenRestrictionPerfectLocalModels
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforwardComplementZero

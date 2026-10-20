@@ -5,7 +5,7 @@ Authors: SHEAF group D4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf

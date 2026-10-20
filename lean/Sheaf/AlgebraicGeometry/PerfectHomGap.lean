@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.Algebra.Homology.RhomGlobalSections
 import Sheaf.AlgebraicGeometry.PerfectHypercohomologyGap

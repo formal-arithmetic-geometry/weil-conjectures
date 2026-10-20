@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 import Sheaf.AlgebraicGeometry.PseudoCoherentSummand
 import Sheaf.AlgebraicGeometry.DerivedTensorVanishingRetract

@@ -5,10 +5,10 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
+import WeilConjectures.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.CategoryTheory.Preadditive.LeftExact
 import Sheaf.AlgebraicGeometry.AffineOpenPerfectSourceModel

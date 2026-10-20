@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # K-flat module models on affine schemes
 

@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PicardResidueSourceModelHomology
 import Sheaf.AlgebraicGeometry.PicardResidueQuotientModelHomology
 

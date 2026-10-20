@@ -6,7 +6,7 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardTermwiseModels
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounit
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData

@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 import Sheaf.AlgebraicGeometry.LocalStrictPerfectStalkProjectiveModel
 import Sheaf.AlgebraicGeometry.StalkFreeResidueCohomologyComparison

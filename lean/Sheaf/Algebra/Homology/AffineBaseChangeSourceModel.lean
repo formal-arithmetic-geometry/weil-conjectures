@@ -13,7 +13,7 @@ import Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso
 import WeilConjectures.Algebra.Homology.RingTensorCohomology
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import all Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # Source model for the affine derived base-change arrow
 

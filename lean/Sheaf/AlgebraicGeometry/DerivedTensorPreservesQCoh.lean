@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 import Sheaf.AlgebraicGeometry.AffineModuleComplexRepresentative
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses

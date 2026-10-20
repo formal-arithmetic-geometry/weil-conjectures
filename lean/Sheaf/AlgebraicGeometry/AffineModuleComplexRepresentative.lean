@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Module-complex representatives on affine schemes

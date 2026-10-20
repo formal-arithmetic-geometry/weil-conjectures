@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.Algebra.Homology.LeftExactHomologyComparison
 import Sheaf.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 

@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.AlgebraicGeometry.MixedHomTensorPullbackIso
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
 import all Sheaf.AlgebraicGeometry.PerfectInternalHomPullbackIsIso
 import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh

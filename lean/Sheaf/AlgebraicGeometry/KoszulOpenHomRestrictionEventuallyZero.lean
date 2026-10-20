@@ -6,7 +6,7 @@ Authors: SHEAF group J2
 module
 
 public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 import Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison
 import Sheaf.AlgebraicGeometry.KoszulOpenHomHomologyComparison
 import WeilConjectures.Algebra.Homology.FilteredModuleComplexHomologyZero

@@ -1,6 +1,6 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits
 import Sheaf.AlgebraicGeometry.AffineRestrictedHomologySupport
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
