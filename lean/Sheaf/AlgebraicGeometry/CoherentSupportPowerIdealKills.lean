@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
 import Mathlib.RingTheory.Finiteness.Ideal
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.ChowFiniteType
-import Sheaf.AlgebraicGeometry.ClosedChowStage
+import WeilConjectures.AlgebraicGeometry.ClosedChowStage
 import Sheaf.AlgebraicGeometry.ExistsIsSeparatedOverPullbackMap
 
 /-!

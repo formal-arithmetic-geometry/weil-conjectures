@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor

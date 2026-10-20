@@ -28,7 +28,7 @@ import WeilConjectures.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.DescendSurjective
 import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 import Sheaf.AlgebraicGeometry.EventuallyProper
-import Sheaf.AlgebraicGeometry.DescendClosedImmersion
+import WeilConjectures.AlgebraicGeometry.DescendClosedImmersion
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
 import Mathlib.AlgebraicGeometry.Properties
 import Sheaf.AlgebraicGeometry.DescendSmoothQcqs

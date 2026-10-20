@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
 import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import WeilConjectures.AlgebraicGeometry.PrincipalQuotientMultiplicationImage
 

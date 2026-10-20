@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology
 import Sheaf.AlgebraicGeometry.PerfectRelativeFiniteTor
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 

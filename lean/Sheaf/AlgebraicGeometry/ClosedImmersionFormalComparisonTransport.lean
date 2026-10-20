@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ClosedImmersionFormalKernelAnnihilation
 
 /-! # Transport of a formal comparison through a closed immersion

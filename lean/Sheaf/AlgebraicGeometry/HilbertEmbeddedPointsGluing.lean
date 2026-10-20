@@ -2,11 +2,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.Topology.GlueSheavesOfModules
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.Topology.GlueSheavesOfModules
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Gluing the affine embedded-point submodules
 

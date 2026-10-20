@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 import WeilConjectures.AlgebraicGeometry.ProjectiveLinePolynomialProjectionChartIso
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-! # Finiteness of twisted sections for the canonical base-field action

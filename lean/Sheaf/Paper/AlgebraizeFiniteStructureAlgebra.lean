@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
 import Sheaf.AlgebraicGeometry.GrothendieckExistence
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Algebraization of the structure algebras of a finite formal system
 

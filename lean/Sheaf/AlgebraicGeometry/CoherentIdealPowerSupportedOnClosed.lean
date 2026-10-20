@@ -4,7 +4,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
-import all Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
+import all WeilConjectures.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
 
 /-! # Concentrating an ideal-power product on a closed subset
 

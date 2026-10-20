@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.ModuleCupResolutionData
 public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.Paper.ModuleCupPullbackAugmentedPairings
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 

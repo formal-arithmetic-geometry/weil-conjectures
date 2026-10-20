@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
+import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.LeraySectionsResolutionComparison
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 

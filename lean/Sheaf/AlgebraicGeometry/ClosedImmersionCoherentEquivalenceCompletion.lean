@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 @[expose] public section
 

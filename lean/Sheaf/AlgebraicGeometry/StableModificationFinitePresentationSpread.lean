@@ -7,7 +7,7 @@ module
 
 public import Sheaf.TraceFormula.MultipointedCurve
 public import Sheaf.AlgebraicGeometry.RiemannZariskiFiniteRefinement
-import Sheaf.AlgebraicGeometry.DescendClosedImmersion
+import WeilConjectures.AlgebraicGeometry.DescendClosedImmersion
 import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.ProperLimitNoetherian

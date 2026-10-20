@@ -13,12 +13,12 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.ThickeningSystemsDictionary
 import Sheaf.AlgebraicGeometry.FormalSystemsProperSupportSerre
-import Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
+import WeilConjectures.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceChowComparison
 import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Proper closed support for a coherent thickening system
 

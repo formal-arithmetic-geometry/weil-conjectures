@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.RingTheory.KoszulGeneratorHomotopy
-import Sheaf.AlgebraicGeometry.BasicOpenTildeScalarIso
+import WeilConjectures.AlgebraicGeometry.BasicOpenTildeScalarIso
 import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 
 /-! # Local exactness of the sheafified Koszul complex

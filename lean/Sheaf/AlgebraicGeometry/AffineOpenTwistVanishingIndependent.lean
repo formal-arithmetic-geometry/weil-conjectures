@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.AffineRestrictedTwistVanishing
+import WeilConjectures.AlgebraicGeometry.AffineRestrictedTwistVanishing
 import Sheaf.AlgebraicGeometry.HigherDirectImageOpenRestriction
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections

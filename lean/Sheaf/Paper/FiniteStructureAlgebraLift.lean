@@ -19,7 +19,7 @@ public import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.Paper.FiniteStructureAlgebraOperationsLift
 import Sheaf.Paper.ClosedImmersionAlgebraSectionsExact
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 

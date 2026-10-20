@@ -12,9 +12,9 @@ public import Sheaf.Paper.FiniteStructureAdjointTransitions
 
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 import Sheaf.Paper.FiniteStructureProperSupport
 import Sheaf.Paper.FiniteStructureSupportedUnitKernel

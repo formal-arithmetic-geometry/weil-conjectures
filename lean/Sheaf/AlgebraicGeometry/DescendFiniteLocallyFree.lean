@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import WeilConjectures.AlgebraicGeometry.DescendFinite
-import all Sheaf.AlgebraicGeometry.DescendClosedImmersion
+import all WeilConjectures.AlgebraicGeometry.DescendClosedImmersion
 import all WeilConjectures.AlgebraicGeometry.DescendFiniteAffineOpen
 import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant

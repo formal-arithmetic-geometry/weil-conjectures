@@ -2,8 +2,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import all Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import all WeilConjectures.AlgebraicGeometry.IdealDataRecursivePowerComparison
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FormalCompletionAffineSections

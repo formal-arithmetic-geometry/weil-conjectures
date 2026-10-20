@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeSubKernel
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeSubKernel
 import Sheaf.Topology.FiniteTypeSurjectiveNearStalk
 
 /-!

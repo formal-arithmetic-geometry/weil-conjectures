@@ -6,7 +6,7 @@ Authors: SHEAF groups U2, B2
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.FieldScalarRestrictionInjectives
 import Mathlib.Algebra.Homology.ConcreteCategory
 import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle

@@ -95,13 +95,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Topology.ModuleCompatibleFamilySheaf",
-  "file": "lean/Sheaf/Topology/ModuleCompatibleFamilySheaf.lean",
+  "module": "WeilConjectures.Topology.ModuleCompatibleFamilySheaf",
+  "file": "lean/WeilConjectures/Topology/ModuleCompatibleFamilySheaf.lean",
   "declaration": "AlgebraicGeometry.module_compatible_family_sheaf",
   "statement": "theorem module_compatible_family_sheaf\n    (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)\n    (hcover : ⨆ i, U i = ⊤)\n    (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))\n    (φij : ∀ i j : I,\n      (SheafOfModules.overMap (moduleRings X)\n        (homOfLE inf_le_left : U i ⊓ U j ⟶ U i)).obj (Fi i) ≅\n      (SheafOfModules.overMap (moduleRings X)\n        (homOfLE inf_le_right : U i ⊓ U j ⟶ U j)).obj (Fi j))\n    : ∃ (H : SheafOfModules.{max u v} (moduleRings X))\n      (π : ∀ i : I, H.over (U i) ⟶ Fi i),\n      ∀ V : Opens X,\n        (∀ s : H.val.obj (op V),\n          OpenModuleFamilyCoherent X I U Fi φij V\n            (openModuleFamilyEval X I U Fi H π V s)) ∧\n        Function.Injective (openModuleFamilyEval X I U Fi H π V) ∧\n        (∀ a : OpenModuleFamily X I U Fi V,\n          OpenModuleFamilyCoherent X I U Fi φij V a →\n            ∃ s : H.val.obj (op V), openModuleFamilyEval X I U Fi H π V s = a)",
   "branch": "sheaf-dag",
   "by": "B3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Topology.ModuleCompatibleFamilySheaf; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

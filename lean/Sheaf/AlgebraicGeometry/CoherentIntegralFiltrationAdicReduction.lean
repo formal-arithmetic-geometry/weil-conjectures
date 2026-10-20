@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
 
 /-! # Reducing an integral-support filtration to generic residue-field modules

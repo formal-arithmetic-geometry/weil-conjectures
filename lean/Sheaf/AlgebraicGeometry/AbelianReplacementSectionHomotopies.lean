@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation
 import Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCore
-import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
+import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # Comparing module replacements with the abelian counit lift

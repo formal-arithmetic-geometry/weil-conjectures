@@ -6,7 +6,7 @@ Authors: SHEAF group Z7
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 public import Sheaf.AlgebraicGeometry.QcoherentPullbackSections
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
 import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
@@ -25,7 +25,6 @@ import WeilConjectures.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
 import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal

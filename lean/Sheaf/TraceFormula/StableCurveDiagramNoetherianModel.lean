@@ -23,7 +23,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.FiniteDiagramLiftOfModels
 import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
-import Sheaf.AlgebraicGeometry.DescendClosedImmersion
+import WeilConjectures.AlgebraicGeometry.DescendClosedImmersion
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.TraceFormula.PureRelativeDimensionFiniteStage
 import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange

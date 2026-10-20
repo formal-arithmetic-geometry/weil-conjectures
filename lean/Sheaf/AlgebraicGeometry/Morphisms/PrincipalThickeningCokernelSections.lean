@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.AlgebraicGeometry.PrincipalQuotientMultiplicationImage
 

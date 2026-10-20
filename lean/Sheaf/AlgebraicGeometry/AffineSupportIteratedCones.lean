@@ -12,7 +12,7 @@ public import Mathlib.Data.Nat.Choose.Basic
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
 import Sheaf.AlgebraicGeometry.ScalarConeStalkVanishing
 import Sheaf.AlgebraicGeometry.RestrictedScalarConeSplit
-import Sheaf.AlgebraicGeometry.BinomialShiftBiproduct
+import WeilConjectures.AlgebraicGeometry.BinomialShiftBiproduct
 
 /-! # Affine support from successive cones
 

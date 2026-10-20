@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Sheaf.AlgebraicGeometry.DescendClosedImmersion
+import WeilConjectures.AlgebraicGeometry.DescendClosedImmersion
 import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
 
 /-!

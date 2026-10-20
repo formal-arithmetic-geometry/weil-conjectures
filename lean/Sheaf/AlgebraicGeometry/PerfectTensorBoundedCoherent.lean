@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalCohomology
-import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.Data.Finset.Max
 

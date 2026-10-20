@@ -107,13 +107,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Topology.ModuleObjectOpenDescentAux",
-  "file": "lean/Sheaf/Topology/ModuleObjectOpenDescentAux.lean",
+  "module": "WeilConjectures.Topology.ModuleObjectOpenDescentAux",
+  "file": "lean/WeilConjectures/Topology/ModuleObjectOpenDescentAux.lean",
   "declaration": "AlgebraicGeometry.module_object_open_descent_aux",
   "statement": "theorem module_object_open_descent_aux\n    (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)\n    (hcover : ⨆ i, U i = ⊤)\n    (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))\n    (φij : ∀ i j : I,\n      (SheafOfModules.overMap (moduleRings X) (homOfLE inf_le_left : U i ⊓ U j ⟶ U i)).obj\n          (Fi i) ≅\n        (SheafOfModules.overMap (moduleRings X)\n          (homOfLE inf_le_right : U i ⊓ U j ⟶ U j)).obj (Fi j))\n    (hdiag : ∀ (i : I) (W : Opens X) (hi : W ≤ U i),\n      (φij i i).hom.val.app (op (Over.mk (homOfLE (le_inf hi hi)))) =\n        𝟙 _) :\n    (∀ (i j k : I) (W : Opens X)\n      (hi : W ≤ U i) (hj : W ≤ U j) (hk : W ≤ U k),\n      (φij i k).hom.val.app (op (Over.mk (homOfLE (le_inf hi hk)))) =\n        (φij i j).hom.val.app (op (Over.mk (homOfLE (le_inf hi hj)))) ≫\n          (φij j k).hom.val.app (op (Over.mk (homOfLE (le_inf hj hk))))) →\n    ∃ (H : SheafOfModules.{max u v} (moduleRings X))\n      (φi : ∀ i : I, H.over (U i) ≅ Fi i),\n      ∀ (i j : I) (W : Opens X) (hi : W ≤ U i) (hj : W ≤ U j),\n        (φi i).hom.val.app (op (Over.mk (homOfLE hi))) ≫\n            (φij i j).hom.val.app (op (Over.mk (homOfLE (le_inf hi hj)))) =\n          (φi j).hom.val.app (op (Over.mk (homOfLE hj)))",
   "branch": "sheaf-dag",
   "by": "V2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Topology.ModuleObjectOpenDescentAux; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

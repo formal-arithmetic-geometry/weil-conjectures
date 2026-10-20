@@ -5,7 +5,7 @@ Authors: SHEAF group U3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Module coefficient factorization

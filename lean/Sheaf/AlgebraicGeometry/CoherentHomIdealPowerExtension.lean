@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.CoherentOpenMapTensorExtension
+import WeilConjectures.AlgebraicGeometry.CoherentOpenMapTensorExtension
 import Sheaf.AlgebraicGeometry.IdealPowerTensorImageLift
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections

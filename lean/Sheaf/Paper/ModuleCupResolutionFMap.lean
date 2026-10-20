@@ -6,11 +6,10 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.Paper.ModuleCupResolutionData
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import all Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+import all WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Maps of computing resolutions across a scheme morphism

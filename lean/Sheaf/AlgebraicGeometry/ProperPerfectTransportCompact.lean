@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 import Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology
 import Sheaf.AlgebraicGeometry.PerfectRelativeFiniteTor
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 

@@ -5,10 +5,10 @@ Authors: SHEAF group E2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
-import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
+import WeilConjectures.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
 import Mathlib.Algebra.Homology.Factorizations.CM5a
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 

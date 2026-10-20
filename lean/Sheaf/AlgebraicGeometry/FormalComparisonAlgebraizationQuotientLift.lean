@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 import all WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 

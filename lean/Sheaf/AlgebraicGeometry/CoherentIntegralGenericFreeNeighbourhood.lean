@@ -10,8 +10,8 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
 
-import Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentStalkMapExtends
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleStalkFinite
 import WeilConjectures.AlgebraicGeometry.FiniteFreeModuleStalkEquiv
 import Mathlib.LinearAlgebra.Dimension.Free

@@ -16,7 +16,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.AlgebraicGeometry.SectionsAnnihilatedByIdeal
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Descent of the generic maximal-ideal-annihilated part
 

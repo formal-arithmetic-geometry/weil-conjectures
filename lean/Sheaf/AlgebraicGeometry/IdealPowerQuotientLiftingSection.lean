@@ -8,11 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection
+import WeilConjectures.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection
 import Sheaf.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree
 import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.Topology.GlueSheavesOfModules
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Lifting sections into ideal-power annihilator quotients
 

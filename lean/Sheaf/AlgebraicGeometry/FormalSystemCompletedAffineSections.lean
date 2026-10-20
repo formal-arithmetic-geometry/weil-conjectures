@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 import Sheaf.AlgebraicGeometry.CompletedAffineSectionsPowerTorsion
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineOpenSectionsAdic
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Termwise section comparison for a completed affine chart
 

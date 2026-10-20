@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension
+import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeImageExtension
 import Mathlib.Topology.Sheaves.Module
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.KernelCokernelComp
 

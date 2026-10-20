@@ -6,7 +6,7 @@ Authors: SHEAF group P4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyCoefficientTransport
 import Sheaf.AlgebraicGeometry.ModuleCohomologyExtEdgeComparison
 

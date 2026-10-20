@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.AffineCohomologySectionEquiv
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison
 import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Canonical affine section comparisons before flat base change
 
