@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "By clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise], choose $j_0\\in J$ and a representative $f':V_{j_0}\\to W$ of $f$. Let $J_0=\\{j\\in J\\mid j\\ge j_0\\}$; it is directed, and the canonical map from the colimit over $J_0$ to the colimit over $J$ is bijective by the elementwise criterion (every index admits an upper bound in $J_0$, and equality is witnessed at a later index). For each $j\\in J_0$ and $k\\in K$, form $V_{j,k}=V_j\\times_{W,f'\\circ g_{jj_0}}W_k$. The fibre products exist and $\\{V_{j,k}\\to V_j\\}_{k\\in K}$ is a covering by axiom (iii) in [def-weil-pbc-sites-and-cohomology].",
+   "text": "Use the representative and common-stage clauses of [lem-weil-pbc-filtered-colimit-sets-elementwise] to represent both sections and f at one index j0. Reindex the finite covering by a universe-lifted finite ordinal so that the site axiom accepts its index universe. On the directed tail T={j | j0 ≤ j}, apply [def-weil-pbc-sites-and-cohomology] to choose covering pullback squares Q(j,k) over V(j), with projections p(j,k) to V(j) and q(j,k) to W(k). The pullback universal property constructs the transition maps and proves their identity, composition, and projection naturality laws.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-sets-elementwise",
     "def-weil-pbc-sites-and-cohomology"
@@ -21,54 +21,52 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YO (Lemma lemma-refine), proof: first paragraph, representation of f and construction of V_{j,k}"
+    "place": "Tag 00YO (lemma-refine), representation of f and covering pullback construction"
    }
   },
   {
-   "text": "For every $j\\in J_0$, the sheaf equalizer condition in [def-weil-pbc-sites-and-cohomology] makes the restriction map $\\mathcal F(V_j)\\to\\prod_{k\\in K}\\mathcal F(V_{j,k})$ injective. These maps commute with the transition maps in $j$, and a filtered colimit of injective maps of sets is injective by clause (3) of [lem-weil-pbc-filtered-colimit-sets-elementwise] (two elements with equal image are equal after some transition, hence equal by injectivity at that index). Hence, after passing to filtered colimits, [lem-weil-pbc-filtered-colimits-commute-finite-limits] identifies the map $\\mathcal F_{p'}\\to\\prod_{k\\in K}\\varinjlim_{j\\in J_0}\\mathcal F(V_{j,k})$ with an injective map (the finite product is a finite limit). Since $s\\ne s'$, their images differ in at least one coordinate; choose $k_0\\in K$ for which their images in $\\varinjlim_{j\\in J_0}\\mathcal F(V_{j,k_0})$ are distinct.",
+   "text": "Sheaf separatedness for each covering Q(j,k) makes the maps to the family of its sections jointly injective. All transitions of the original representative sections remain unequal, since equality at a stage would identify s and s′ in their colimit. If every k identified the restricted sections at some tail stage j(k), choose a common later stage for this finite family (IsFiltered.wideSpan in Lean). Naturality propagates each equality to that stage. Joint injectivity then identifies the original sections there, a contradiction. Thus one k preserves unequal restrictions at every tail stage. This is the elementwise finite-product argument underlying the comparison used in Tag 00YO; no general commutation theorem is needed.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YO (Lemma lemma-refine), proof: sheaf restriction injection, Categories Lemma 002W, and choice of k"
+    "place": "Tag 00YO (lemma-refine), sheaf restriction injection and choice of k; elementwise realization of its finite-product argument"
    }
   },
   {
-   "text": "Construct the refined index poset as the disjoint union $I=J^{(0)}\\amalg J_0^{(1)}$. Put $j^{(0)}\\le j'^{(0)}$ and $j^{(1)}\\le j'^{(1)}$ exactly when $j\\le j'$ in $J$, put $j^{(0)}\\le j'^{(1)}$ exactly when $j\\le j'$, and impose no relation $j^{(1)}\\le j'^{(0)}$. Set $U_{j^{(0)}}=V_j$ and $U_{j^{(1)}}=V_{j,k_0}$. The poset is directed: an upper bound for two indices is obtained by choosing in $J_0$ an element above their underlying indices and taking its $(1)$-copy. Define transition maps for an order relation by $g$ on two $(0)$-copies, by the pullback of $g$ along $W_{k_0}\\to W$ on two $(1)$-copies, and, for $j^{(0)}\\le j'^{(1)}$, by the projection $V_{j',k_0}\\to V_{j'}$ followed by $g_{j'j}$; these maps satisfy the identity and composition laws by the pullback universal property. The $(0)$-copy of $J$ is the original subsystem, so this is a refinement of the given system.",
+   "text": "Construct I=J amalg T with the original order on each summand, j in the first summand below t in the second precisely when j ≤ t, and no relations from the second summand to the first. Upper bounds can always be chosen in T, so I is nonempty and directed. Define the enlarged diagram by V on J and Q(-,k) on T. Mixed transitions are the old transition followed, in the opposite category, by the projection transformation. Its naturality proves the functor laws. The first-summand inclusion is an order embedding, and its restricted diagram is equal to the old diagram.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YO (Lemma lemma-refine), proof: construction of I=J\\amalg J_0, ordering, objects and transition maps"
+    "place": "Tag 00YO (lemma-refine), construction and order of I; transition maps omitted in the source"
    }
   },
   {
-   "text": "The $(1)$-copy $J_0^{(1)}$ is cofinal in $I$, so the elementwise filtered-colimit criterion [lem-weil-pbc-filtered-colimit-sets-elementwise] identifies the colimit over $I$ with the colimit over $J_0$ of the sets $\\mathcal F(V_{j,k_0})$. Therefore the images of $s,s'$ remain distinct by the choice of $k_0$. For every $j\\in J_0$, the projection $V_{j,k_0}\\to V_j$ followed by $g_{jj_0}$ and $f'$ factors through $W_{k_0}$ by the pullback definition. Thus the image of $f$ in $u(W)$ is represented by a morphism through $W_{k_0}$, proving the required conclusion.",
+   "text": "Compute the canonical refinement map on representatives using colimit.ι_pre, with the equality transport made explicit. If the two refined section germs were equal, [lem-weil-pbc-filtered-colimit-sets-elementwise] would witness equality at an index of I. Move that index to a later second-summand index. The resulting equality is exactly the equality of the two restrictions excluded by the selected k. For factorization, use the germ represented at the second-summand copy of j0 by q(j0,k):Q(j0,k)→W(k). The pullback square identifies its composite with wk(k) with the image of f; colimit naturality gives the displayed equation.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YO (Lemma lemma-refine), proof: distinctness in the refined colimit and factorization through W_k"
+    "place": "Tag 00YO (lemma-refine), preservation of distinctness and factorization in the refined colimit"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 00YO (Lemma lemma-refine), proof"
+  "place": "Tag 00YO (lemma-refine), with the finite-product step implemented by finite common upper bounds and naturality (M3, 2026-10-21)"
  },
  "mathlib_searches": [
   {
@@ -178,5 +176,15 @@
   "date": "2026-10-18",
   "existing": false,
   "fixed_by": "NT-stage2-cc-4daee0855"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261020T174823-L-803178",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
