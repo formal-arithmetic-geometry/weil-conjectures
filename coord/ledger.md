@@ -18260,3 +18260,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:05 L: returned deliver/E3/Sheaf.AlgebraicGeometry.FiniteAffineFibreSections (reviewer RETURN: (reviewer C-083cd, head 083cd2731) Point 6 (DAG/Lean agreement; lean record names a removed declaration, cf. H2): delive)
 - 14:09 L: returned deliver/M9/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafOneIso (reviewer RETURN: (reviewer C-11c44, head 11c4487cd) H3/E4 (brief point 6): the node's lean record now states `exteriorPower M 1 ≅ M` with)
 - 14:10 L: returned deliver/J6/Sheaf.Paper.ResidueLisseProjectiveModels (reviewer RETURN: (reviewer C-1372d, head 1372d8e2e) H9: lean/Sheaf/Paper/ResidueLisseProjectiveCover.lean: delete the line `public import)
+- 14:12 L: returned deliver/B5/Sheaf.Paper.EtaleCENormalizedRowPresentations (reviewer RETURN: (the landing tools, head d00cb6c74) the delivery did not land: lean/Sheaf/Paper/EtaleCENormalizedRowPresentations.lean c)
