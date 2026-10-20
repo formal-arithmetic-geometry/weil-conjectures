@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.CategoryTheory.GrothendieckDerivedCompactLocalizationModel
-import WeilConjectures.CategoryTheory.BrownCohomologicalRepresentability
-import Sheaf.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransfer
+import WeilConjectures.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransfer
 import Mathlib.CategoryTheory.Limits.Preserves.Opposites
 import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 
@@ -80,8 +79,6 @@ theorem grothendieckDerived_localization_brown_data
     dsimp [K]
     infer_instance
   have hrep := brownCohomologicalRepresentabilityUniverseTransfer.{0} B hB K hK
-    (fun C _ _ _ _ _ _ _ _ hC F _ hF ↦
-      brownCohomologicalRepresentability C hC F hF)
   obtain ⟨E, ⟨rE⟩⟩ := hrep
   refine ⟨B, cB, L, R, adj, hc, E, ⟨?_⟩⟩
   exact (Functor.RepresentableBy.equivUliftYonedaIso _ E)
