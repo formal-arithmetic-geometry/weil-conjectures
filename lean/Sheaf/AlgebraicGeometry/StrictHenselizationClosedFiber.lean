@@ -6,7 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberForward
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison
 import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-!
@@ -76,7 +76,7 @@ theorem strictHenselizationStructuralMap_fiber_eq_closedPoint
     (e.hom ≫ strictHenselizationStructuralMap s) x = s (IsLocalRing.closedPoint Ω) ↔
       x = IsLocalRing.closedPoint A := by
   constructor
-  · exact strictHenselizationStructuralMap_fiber_eq_closedPoint_of_eq s e x
+  · exact strictHenselizationStructuralMap_fiber_eq_closedPoint_compat s e x
   · intro hx
     subst x
     exact strictHenselizationStructuralMap_closedPoint_eq s e

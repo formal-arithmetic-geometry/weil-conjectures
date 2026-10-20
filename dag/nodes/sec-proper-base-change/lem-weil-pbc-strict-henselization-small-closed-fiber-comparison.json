@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
+ "kind": "statement",
+ "title": "Canonical strict-henselization comparison preserves the structural map and closed fibre",
+ "statement": "Let S be a scheme, Ω an algebraically closed field and s : Spec Ω → S. Let C_small be the chosen small representative coordinate-ring colimit defining strictHenselizationScheme s in [def-weil-pbc-strict-henselization-limit], let C_full be the full affine-neighbourhood colimit defining strictLocalization s, and let c : C_small ≅ C_full be smallStrictHenselizationColimitIso s. Then Spec(c.inv) followed by strictLocalizationToBase s equals strictHenselizationStructuralMap s from [def-weil-pbc-strict-henselization-structural-map]. Consequently, for any commutative local ring A, isomorphism e : Spec A ≅ strictHenselizationScheme s, and point x, if the small-model structural image of e(x) is s(closedPoint Ω), then x = closedPoint A, by transporting [lem-weil-pbc-strict-henselization-closed-fiber-forward] along Spec(c.inv).",
+ "source": {
+  "document": "literature/stacks-project/categories.tex; literature/stacks-project/etale-cohomology.tex; lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationExtension.lean",
+  "place": "Categories Tag 04E7, lemma-cofinal (canonical colimit comparison); Étale Cohomology Tag 04HX, lemma-describe-etale-local-ring (pointed affine-neighbourhood colimit); coprojection formula of smallStrictHenselizationColimitIso. Explicit compatibility and transport proof by C5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "The representative affine pointed-neighbourhood category is cofiltered, hence nonempty. Choose an object j; write B for its coordinate ring and f : Spec B → S for its structural morphism. The two structural-map defining equations express the composites through this neighbourhood as strictLocalizationToBase s and strictHenselizationStructuralMap s, respectively.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inverse coprojection equation Functor.Final.ι_colimitIso_inv for the representative equivalence followed by the affine inclusion says ι_full(j) followed by c.inv is ι_small(j). Apply Spec and compose with Spec(ΓSpecIso B).inv and f. Identify inv (Spec B).toSpecΓ with Spec(ΓSpecIso B).inv by cancelling the canonical affine isomorphism. Associativity and the two equations from the preceding step prove Spec(c.inv) ≫ strictLocalizationToBase s = strictHenselizationStructuralMap s.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a local affine presentation e, form e′ = e followed by the isomorphism Spec(c.inv) from the small model to strictLocalization s. The structure-map equality just proved turns the assumed small-model fibre equation into the full-model fibre equation. Apply the unchanged upstream forward theorem to e′ and x. Its conclusion is precisely x = closedPoint A. No local-ring structure is chosen on a new arbitrary witness; all comparison data are the existing canonical colimit isomorphism.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-closed-fiber-forward"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-strict-henselization-closed-fiber-forward"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "C5",
+  "date": "2026-10-21",
+  "note": "Complete Lean proof from the existing canonical colimit comparison, defining structural-map equations, Mathlib final-colimit coprojection identity and unchanged upstream forward-fibre theorem; no sorry. The bridge prevents the two incompatible structuralMap_eq APIs from being loaded into the consumer."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical colimit isomorphism strict henselization structural morphism",
+   "results": "Generic colimit and cocone comparison lemmas; no strict-henselization structural-map equality.",
+   "date": "2026-10-21",
+   "verdict": "No exact comparison; generic colimit API only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Final.ι_colimitIso_inv",
+   "results": "CategoryTheory.Functor.Final.ι_colimitIso_inv in Mathlib.CategoryTheory.Limits.Final.",
+   "date": "2026-10-21",
+   "verdict": "Found and used the generic coprojection equation; it does not identify the project structural maps."
+  },
+  {
+   "tool": "grep",
+   "query": "ι_colimitIso_inv|smallStrictHenselizationColimitIso_toBase|fiber_eq_closedPoint_compat",
+   "results": "Only Mathlib/CategoryTheory/Limits/Final.lean:359, theorem ι_colimitIso_inv. Local project search found the old private small_toBase transport proof but no public comparison API.",
+   "date": "2026-10-21",
+   "verdict": "No existing public project comparison; preserve and expose the proved comparison and derive the fibre corollary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberForward",
+  "date": "2026-10-21",
+  "group": "C5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Compatible strict-henselization geometric-stalk comparison: identify the structural maps of the small and full affine-neighbourhood colimits before using the singleton distinguished fibre.",
+   "via": [
+    "lem-weil-pbc-strict-henselization-closed-fiber-forward",
+    "lem-weil-pbc-strict-henselization-closed-fiber",
+    "compatible-strict-henselization-core-completion",
+    "compatible-strict-henselization-core-data",
+    "compatible-strict-henselization-residues-core",
+    "lem-weil-pbc-p1-strict-local-model-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationClosedFiberComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.smallStrictHenselizationColimitIso_toBase",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.smallStrictHenselizationColimitIso_toBase",
+   "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap_fiber_eq_closedPoint_compat"
+  ],
+  "statement": "theorem smallStrictHenselizationColimitIso_toBase\n    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (s : Spec (.of Ω) ⟶ S) :\n    Spec.map (smallStrictHenselizationColimitIso s).inv ≫ strictLocalizationToBase s =\n      strictHenselizationStructuralMap s",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4bc22",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261020T221106-L-4142787",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4bc22",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261020T221106-L-4142787",
+  "kind": "interface",
+  "note": "independent cc review: WeilConjectures twin of fiber_eq_closedPoint_of_eq vs the forward node's new lean record; comparison/_compat proofs vs the old small_toBase and the consumer's unchanged signatures; consumer and both transitive importers compiled against the delivery; axioms clean"
+ }
+}

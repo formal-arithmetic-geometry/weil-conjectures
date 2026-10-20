@@ -10,9 +10,9 @@
  ],
  "proof_origin": {
   "kind": "agent",
-  "by": "M1",
-  "date": "2026-10-13",
-  "note": "Completed affine-chart maximal-ideal transport and ideal-containment fibre proof in Lean, from the existing two triple theorems; no new sorry. E3 retirement: use the official full affine chart results with explicit small-colimit transport; all consumer signatures and definitions are preserved."
+  "by": "C5",
+  "date": "2026-10-21",
+  "note": "Attach the existing node to the already proved official forward theorem under its unchanged signature. Its affine-chart, ideal-containment and specialization proof is retained verbatim upstream. Small-model consumers use a separately proved canonical comparison, so the copied Sheaf proof is withdrawn."
  },
  "mathlib_searches": [
   {
@@ -74,7 +74,7 @@
  "statement": "Let S be a scheme, Ω an algebraically closed field, s : Spec Ω → S a geometric point, A a commutative local ring, and e : Spec A ≅ S_(s), where S_(s) is [def-weil-pbc-strict-henselization-limit] and its structural map ρ_s is [def-weil-pbc-strict-henselization-structural-map]. For every x in Spec A, if ρ_s(e(x)) = s(closedPoint Ω), then x = closedPoint A.",
  "proof": [
   {
-   "text": "Choose an affine open chart containing s(closedPoint Ω) and factor the geometric point through it. The spectrum of Ω is a singleton, so its entire image lies in this chart. Apply the chart maximal-ideal theorem and transport its existential conclusion along the factorization equality to obtain a local coordinate ring C and ρ : R → C with Spec(ρ) ≫ i = the structural map and maximalIdeal(C) = p.map(ρ). Apply the official chart theorem at the full affine colimit and transport its ring map and maximal ideal through smallStrictHenselizationColimitIso. Its inverse leg equation and the two defining structural-map equations identify the transported structure map with the existing small-model structure map. Where ind-etaleness is used, apply the official chart ind-etale theorem with the spectrum of this comparison isomorphism.",
+   "text": "Choose an affine open chart containing s(closedPoint Ω) and factor s through it; Spec Ω has one point, so the entire image lies in the chart. Apply strictHenselization_chart_maximalIdeal at the full affine-colimit model strictHenselization s. Rewrite the factorization to obtain locality, the chart structure map ρ and maximalIdeal = p.map(ρ). This is exactly the current upstream theorem; small-model comparison belongs to the separate compatibility node used by its consumer.",
    "uses": [
     "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
     "def-weil-pbc-strict-henselization-limit",
@@ -99,14 +99,15 @@
   "def-weil-pbc-strict-henselization-structural-map"
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberForward",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationClosedFiberForward.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictHenselizationClosedFiberForward",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationClosedFiberForward.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap_fiber_eq_closedPoint_of_eq",
-  "statement": "theorem strictHenselizationStructuralMap_fiber_eq_closedPoint_of_eq\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [IsLocalRing A]\n    (s : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictHenselizationScheme s)\n    (x : Spec (.of A))\n    (h : (e.hom ≫ strictHenselizationStructuralMap s) x =\n      s (IsLocalRing.closedPoint Ω)) :\n    x = IsLocalRing.closedPoint A",
+  "statement": "theorem strictHenselizationStructuralMap_fiber_eq_closedPoint_of_eq\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [IsLocalRing A]\n    (s : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictLocalization s)\n    (x : Spec (.of A))\n    (h : (e.hom ≫ strictLocalizationToBase s) x =\n      s (IsLocalRing.closedPoint Ω)) :\n    x = IsLocalRing.closedPoint A",
   "branch": "sheaf-dag",
-  "by": "H3",
-  "date": "2026-10-12"
+  "by": "C5",
+  "date": "2026-10-21",
+  "note": "Retirement: the unchanged upstream theorem is the full affine-colimit version of the same singleton-fibre assertion. The canonical smallStrictHenselizationColimitIso and the proved smallStrictHenselizationColimitIso_toBase equation identify the two structural maps. StrictHenselizationClosedFiberComparison derives the former small-model signature from this theorem, and the existing consumer keeps its exact statement. No source-library declaration or definition changes."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -121,12 +122,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-d56f7",
-  "group": "E3",
+  "reviewer": "C-4bc22",
+  "group": "C5",
   "result": "pass",
-  "landing": "20261020T164813-L-3967237",
+  "landing": "20261020T221106-L-4142787",
   "kind": "interface",
-  "note": "independent cc review: the withdrawn Sheaf strictHenselization_chart_maximalIdeal against its WeilConjectures twin (signature matches the node's lean.statement); the 3 consumers' proved transport through smallStrictHenselizationColimitIso against their unchanged statements; 6 delivered + 17 affected importer modules compiled (all exit 0, no warnings); axioms clean"
+  "note": "independent cc review: WeilConjectures twin of fiber_eq_closedPoint_of_eq vs the forward node's new lean record; comparison/_compat proofs vs the old small_toBase and the consumer's unchanged signatures; consumer and both transitive importers compiled against the delivery; axioms clean"
  },
  "lean_audit": {
   "master": {
