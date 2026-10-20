@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-ringed-coefficient-change-normalization",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Normalized coefficient changes and their naturality",
+ "statement": "In the same ringed-site setting [def-pur-ringed-coefficient-counit-presentations], let p and p prime be DerivedPresentation records for o and o prime with common geometric adjunction and constant coefficient lift IA. Assume CounitCompatibility for each presentation. Let bX, bY, bI be compatible ring-sheaf maps: they commute with aX, aY, aI, with c, and with the algebraic inverse-image ring identifications. Then there exists a normalized CoefficientChange p p prime bX bY bI [def-pur-ringed-coefficient-change-presentations]; moreover every such normalized change satisfies the two equations CoefficientChange.IsNatural. These equations concern coefficient changes only; the individual counit compatibilities are hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 06YY (lemma-derived-base-change); coefficient normalization is an agent consequence of these and sites-modules.tex Tag 03D7. Lean split: lean/Sheaf/CategoryTheory/RingedCoefficientRestrictionCoefficientChange.lean, coefficientChange_exists."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-coefficient-counit-presentations",
+  "def-pur-ringed-coefficient-change-presentations"
+ ],
+ "proof": [
+  {
+   "text": "Restricting successively along bX and aX has the same underlying module as restricting along aX prime; the equality aX followed by bX = aX prime identifies the actions. The identity on underlying sheaves gives the ordinary restriction-composition isomorphism, and similarly on Y. Exactness of restriction gives the termwise localized functors vX and vY. Localize those ordinary isomorphisms and compose with xFactors and yFactors to obtain rhoX and rhoY with exactly the equations in CoefficientRestrictionChangeNormalized. The remaining five normalization clauses are the given compatibility hypotheses.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Commutation of the structural ring maps makes the two ordinary pushR functors after restriction have the same scalar action, as seen by transposing against the specified geometric adjunction. Thus the identity underlying direct-image map lifts to ordinaryBeta; it is invertible by the same construction in reverse. Apply normalized right-derived composition to its two factorizations to construct beta. Its equation on I and a K-injective resolution j of the restricted I is exactly CoefficientDirectChangeNormalized.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both constant-coefficient left derived functors derive the same IA.modules. Their canonical universal comparison gives alpha, with alpha followed by the primed counit equal to the unprimed counit. The two ordinary pushA functors are right adjoints to IA.modules, with the same geometric Hom formula. Right-adjoint uniqueness gives ordinaryGamma with the prescribed underlying identity. Its right-derived comparison gives gamma; evaluating on K-injectives gives the constant normalization. Take sigma to be the adjoint mate of beta after the primed derived unit. Naturality of adjunction supplies a natural transformation, and its defining formula is CoefficientChangeNormalized. Together these construct CoefficientChange.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any normalized CoefficientChange, compare the two composites in the kappa naturality square on a K-injective I. Resolve its restricted module complex once more by a K-injective T. The normalization equations for beta, rhoX, rhoY, gamma and kappa identify both composites with the same localized ordinary direct-image map to the final resolution. This ordinary equality holds because all three underlying comparisons are identities and the coefficient actions commute by the hypotheses. Common K-injective refinements and naturality of the comparison maps remove the chosen resolutions. Every derived object has a K-injective representative, so this proves the kappa square for all objects.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the assumed CounitCompatibility equations for p and p prime: tau is the adjoint mate of kappa, and tau prime is the mate of kappa prime. The normalized constant comparisons alpha and gamma preserve the canonical derived adjunction by the representative Hom formula. The preceding kappa square, after taking adjoint mates, becomes the displayed tau square: sigma is the mate of beta by its normalization, while rhoX and rhoY are the restriction-composition identifications. The triangle identities cancel the inserted units and counits. Taking mates is a bijection on natural transformations, so this is equality of the specified derived maps and requires no faithfulness of restriction. This establishes both clauses of IsNatural for every normalized comparison.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0D6E and 06YY, with sites-modules.tex Tag 03D7; the constructions are the independent construction and coefficient-coherence steps of the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived pullback pushforward adjunction compatible with coefficient restriction and changes of ring",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullback; PresheafOfModules.instIsRightAdjointPushforward; SheafOfModules.pushforwardPushforwardAdj; PresheafOfModules.pullback; PresheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.instIsLeftAdjointPullback. The generic derived adjunction and uniqueness APIs do not supply the normalized ringed coefficient diagram.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived_unit. The generic derived adjunction and uniqueness APIs do not supply the normalized ringed coefficient diagram.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|rightDerivedUnique|derived_counit",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean. The generic derived adjunction and uniqueness APIs do not supply the normalized ringed coefficient diagram.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCoefficientRestrictionCounit",
+  "date": "2026-10-19",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1: ordinary derived adjunction, coefficient restrictions and their normalized comparison maps.",
+   "via": [
+    "lem-pur-ringed-coefficient-restriction-counit",
+    "lem-pur-ordinary-adjunction-scalar-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedCoefficientRestrictionCoefficientChange",
+  "file": "lean/Sheaf/CategoryTheory/RingedCoefficientRestrictionCoefficientChange.lean",
+  "declaration": "CategoryTheory.RingedCoefficientCounit.coefficientChange_exists",
+  "statement": "theorem coefficientChange_exists\n    (aX : constantRing JX A ⟶ RX) (aY : constantRing JY A ⟶ RY)\n    (aI : constantRing JX A ⟶ RI)\n    (o : OrdinaryPresentation direct geom IA IR c aX aY aI)\n    [IA.modules.Additive]\n    [HasDerivedCategory.{w} (modules RX)] [HasDerivedCategory.{w} (modules RY)]\n    [HasDerivedCategory.{w} (modules (constantRing JX A))]\n    [HasDerivedCategory.{w} (modules (constantRing JY A))]\n    (p : DerivedPresentation o) (hp : CounitCompatibility p)\n    (RX' RI' : Sheaf JX CommRingCat.{r}) (RY' : Sheaf JY CommRingCat.{r})\n    (IR' : SheafOfModules.AlgebraicInverseImage inverse RY' RI') (c' : RI' ⟶ RX')\n    (aX' : constantRing JX A ⟶ RX') (aY' : constantRing JY A ⟶ RY')\n    (aI' : constantRing JX A ⟶ RI')\n    (o' : OrdinaryPresentation direct geom IA IR' c' aX' aY' aI')\n    [HasDerivedCategory.{w} (modules RX')] [HasDerivedCategory.{w} (modules RY')]\n    (p' : DerivedPresentation o') (hp' : CounitCompatibility p')\n    (bX : RX ⟶ RX') (bY : RY ⟶ RY') (bI : RI ⟶ RI')\n    (haX : aX ≫ bX = aX') (haY : aY ≫ bY = aY') (haI' : aI ≫ bI = aI')\n    (hc' : c ≫ bX = bI ≫ c')\n    (hIR : IR.ringUnderlying.hom ≫ (sheafCompose JX (forget CommRingCat.{r})).map bI =\n      inverse.map ((sheafCompose JY (forget CommRingCat.{r})).map bY) ≫ IR'.ringUnderlying.hom) :\n    Nonempty (CoefficientChange p p' bX bY bI) ∧\n      ∀ m : CoefficientChange p p' bX bY bI, m.IsNatural",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261020T051148-L-1582392",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261020T051148-L-1582392",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

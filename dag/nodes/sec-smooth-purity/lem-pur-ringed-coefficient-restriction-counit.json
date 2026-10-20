@@ -23,92 +23,53 @@
  ],
  "proof": [
   {
-   "text": "Construct $\\tau$. Restriction of scalars $U_W$ is exact and is applied termwise [def-pc-sheaf-restrict-scalars, lem-pur-sheaf-ring-derived-coefficient-adjunction]. Since $f^{-1}A_Y=A_X$, the module pullback for $(f,A_Y\\to A_X)$ is $A_X\\otimes_{A_X}f^{-1}M=f^{-1}M$, which is exact, so $Q_A$ is computed termwise on every complex. Every $R_Y$-complex admits a quasi-isomorphism from a flat-term K-flat complex [lem-pc-kflat-resolution], and $Q_R$ is computed by $u^*P=R_X\\otimes_{f^{-1}R_Y}f^{-1}P$ on such $P$, termwise pullback sending quasi-isomorphisms between such complexes to quasi-isomorphisms [lem-weil-pbc-ringed-topoi-derived-pullback, lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For such $P$ the degreewise map $f^{-1}U_YP\\to U_X(R_X\\otimes_{f^{-1}R_Y}f^{-1}P)$, $x\\mapsto1\\otimes x$, is $A_X$-linear because $c$ is a map of $A_X$-algebras, commutes with the differentials, and is natural in chain maps $P\\to P'$. Hence, composed with the canonical resolution isomorphisms $Q_R(QP)\\cong Q(u^*P)$ of the last two citations, it defines a natural transformation $\\tau:Q_AU_Y\\to U_XQ_R$ on $D(R_Y)$, independent of the resolution because any two flat-term K-flat resolutions are compared by these natural isomorphisms. No flatness of $A_W\\to R_W$ is used.",
+   "text": "Apply [lem-pur-ringed-coefficient-derived-presentation-exists] to the ordinary presentation. This supplies existence only; the following representative calculation proves the counit square for any presentation, independently of how it was constructed.",
    "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-ringed-coefficient-derived-presentation-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the faithful underlying sheaf functor to the ordinary adjunction formulas. Cancel the invertible pushAUnderlying comparison and substitute ordinaryKappaFormula, scalarUnitFormula and inverseRestrictionFormula. The remaining equation is adjRFormula. Degreewise this gives ordinaryComplexTranspose. For p, kappaFormula, naturality of yFactors and cancellation of the resolution j give localizedKappaEquation. Apply the constant derived Hom formula to j after scalarUnit after a chain map f; the ordinary transpose equation and tauFormula identify its inverse adjunct with tau followed by x of the R-derived inverse adjunct. This is derivedTransposeOnRepresentative. All these equalities are proved directly from the presentation fields.",
+   "uses": [
+    "def-pur-ringed-coefficient-counit-presentations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a K-injective I choose a K-injective resolution j of restriction(aX)(I), and a flat-term K-flat resolution q:P to pushR(I). The site tensor comparison converts categorical flatness to flatness on the site. Apply derivedTransposeOnRepresentative to the ordinary inverse adjunct of q, and use r.homFormula. The map h=Q(q) followed by r.eta(I) is invertible. Precompose both sides of the counit square by a.left(y(h)); expand inverse adjuncts as images followed by counits, and use naturality of tau. Cancellation of this invertible map proves counitOnInjective.",
+   "uses": [
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; derived change of rings and tensor-pullback normalization"
-   }
+   "elementary": false
   },
   {
-   "text": "Factor the composite ringed-topos morphism through the constant coefficient ring: first use the identity underlying topos on X with structural map $A_X\\to R_X$, then use f with the constant rings $A_X,A_Y$.  The composite direct image on module sheaves is therefore the same underlying functor as $U_YF_R$, while the two successive direct images are $F_AU_X$.  The normalized K-injective comparison for a composite ringed-topos morphism supplies a natural isomorphism $\\kappa:U_YF_R\\xrightarrow{\\sim}F_AU_X$; its normalization is exactly the class specified in the item.  Exactness of restriction of scalars lets these abelian factorizations descend termwise before taking the derived direct images.",
+   "text": "Every derived object is isomorphic to Q(I) for K-injective I. The free sheaf on each shrink-Yoneda representable forms a separating family by the free/sheafification adjunction; its coproduct and exact filtered colimits prove Grothendieck abelianness in the coefficient universe, giving the required K-injective resolutions. Transport counitOnInjective along the representing isomorphism using naturality of tau, kappa and both counits. This proves CounitCompatibility for every presentation.",
    "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-pbc-projection-formula-arrows",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 07A6, lemma-adjoint"
-   }
+   "elementary": false
   },
   {
-   "text": "Representative of $\\varphi=U_X(\\varepsilon_{R,K})\\circ\\tau_{F_RK}$. Let $K\\in D(R_X)$, represented by a K-injective complex $I$ [prop-pur-kinjective-resolutions-exist], so $F_RK$ is represented by $f_*I$. Choose a quasi-isomorphism $q:P\\to f_*I$ from a flat-term K-flat $R_Y$-complex [lem-pc-kflat-resolution], and let $e:f^{-1}f_*I\\to I$ be the ordinary counit of $f^{-1}\\dashv f_*$ on underlying sheaves. The derived adjunction $Q_R\\dashv F_R$ is the canonical one of [def-weil-pbc-projection-formula-arrows], i.e. the bijection of [lem-pc-pre-derived-adjoint-functors-general]; its characterization with $s=\\mathrm{id}_I$, $t=q$ and $f=q$ (so the left side is the identity of $F_RK$) and the module-adjunction formula of [lem-weil-pbc-ringed-topoi-module-adjunction] shows that, under $Q_RF_RK\\cong Q(R_X\\otimes_{f^{-1}R_Y}f^{-1}P)$ [lem-weil-pbc-ringed-topoi-derived-pullback], $\\varepsilon_{R,K}$ is the class of $s\\otimes x\\mapsto s\\,e(f^{-1}q(x))$. Precomposing with $\\tau$ ($x\\mapsto1\\otimes x$) gives $e\\circ f^{-1}(q)$. Since $f^{-1}(q)$ is a quasi-isomorphism ($f^{-1}$ exact), under $Q_AU_YF_RK=Q(f^{-1}U_Yf_*I)$ one gets $\\varphi=Q(e)$, the class of the underlying abelian counit.",
+   "text": "For compatible coefficient maps apply [lem-pur-ringed-coefficient-change-normalization]. Its hypotheses CounitCompatibility for p and p prime have both just been proved, using the same representative argument. This gives the existence of CoefficientChange and the naturality of every normalized change, completing the conjunction.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-kflat-resolution",
-    "def-weil-pbc-projection-formula-arrows",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
+    "lem-pur-ringed-coefficient-change-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7, explicit tensor adjunction; sites-cohomology.tex Tags 0D6E and 07A6, normalization on K-injective representatives"
-   }
-  },
-  {
-   "text": "The $Q_A\\dashv F_A$ adjunct of $\\varphi$ is $\\kappa_K$. Keep $I$ from the previous step and choose a K-injective resolution $j:U_XI\\to J$ of $A_X$-complexes [prop-pur-kinjective-resolutions-exist]; $F_AU_XK$ is represented by $f_*J$. The ordinary adjunct of the chain map $j\\circ e:f^{-1}U_Yf_*I\\to J$ under $f^{-1}\\dashv f_*$ is $f_*(j\\circ e)\\circ\\eta_{f_*I}=f_*(j)$, by the triangle identity of the abelian adjunction. Apply the characterization of the canonical derived adjunction $Q_A\\dashv F_A$ [def-weil-pbc-projection-formula-arrows, lem-pc-pre-derived-adjoint-functors-general] with $s=j$, $t=\\mathrm{id}$ (no left resolution is needed since $f^{-1}$ is exact): the class $Q(f_*j)$ corresponds to $Q(j)^{-1}\\circ Q(j\\circ e)=Q(e)=\\varphi$. Now factor the composite ringed-topos morphism as in Step 2: $(\\mathrm{id}_X,A_X\\to R_X)$, whose direct image is $U_X$ and sends the K-injective $I$ to $U_XI$, followed by $(f,A)$. The normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] says that the class of $f_*(j):U_Yf_*I\\to f_*J$ is exactly $\\kappa_K$. Hence $\\kappa_K$ is the $Q_A\\dashv F_A$ adjunct of $\\varphi$, i.e. $\\kappa_K=F_A(\\varphi)\\circ\\eta_{A,U_YF_RK}$. The identifications used are the canonical resolution isomorphisms, which are natural in $K$ by the functoriality clauses of the cited adjunction and composition statements, so the equality holds for every $K$ and is independent of the choices of $I,q,j$.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-weil-pbc-projection-formula-arrows",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7, explicit tensor adjunction; sites-cohomology.tex Tags 0D6E and 07A6, normalization on K-injective representatives"
-   }
-  },
-  {
-   "text": "Apply the adjunct-counit identity [lem-weil-pbc-adjunct-counit-identity] to the adjunction $Q_A\\dashv F_A$, with objects $U_YF_RK$ of $D(A_Y)$ and $U_XK$ of $D(A_X)$, $\\psi=\\kappa_K$ and $\\varphi=U_X(\\varepsilon_{R,K})\\circ\\tau_{F_RK}$. Step 4 says $\\psi=F_A(\\varphi)\\circ\\eta_{A,U_YF_RK}$, so the identity gives\n$$\\varepsilon_{A,U_XK}\\circ Q_A(\\kappa_K)=U_X(\\varepsilon_{R,K})\\circ\\tau_{F_RK}.$$\nNaturality: $\\tau$ is natural by Step 1, $\\kappa$ by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], the counits by the derived adjunctions. For a compatible map of $A$-algebra sheaves $R\\to R'$ (on $X$ and $Y$), the degreewise formula $x\\mapsto1\\otimes x$, the abelian counit $e$ and the representative $f_*(j)$ of Steps 3--4 are the same underlying maps for $R$ and $R'$ after restriction of scalars, so the comparisons are compatible with the restriction functors. No boundedness, flatness, completeness or constructibility hypothesis enters.",
-   "uses": [
-    "lem-weil-pbc-adjunct-counit-identity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037, adjunction transpose/counit identity"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-pbc-projection-formula-arrows",
+  "def-pur-ringed-coefficient-counit-presentations",
   "lem-pc-kflat-resolution",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-adjunct-counit-identity",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pur-ringed-coefficient-change-normalization",
+  "lem-pur-ringed-coefficient-derived-presentation-exists",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6E and 07A6, combined with Tag 03D7 and the formal adjunct-counit identity Tag 0037"
+  "place": "Tags 07A6, 0D6E and 0FND: ordinary transpose, representative derived transpose, counit on K-injectives, then naturality on every derived object; construction and coefficient coherence are separate results."
  },
  "mathlib_searches": [
   {
@@ -211,13 +172,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-pbc-projection-formula-arrows",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topoi-derived-pullback"
+  "lem-pc-kflat-resolution"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -244,5 +199,15 @@
   "group": "Q54",
   "result": "pass",
   "note": "Wrote review.md. Checked snapshot statements, dependencies, sources, canonical normalizations, universes, edge cases, signatures, docstrings, and route-pivot compliance. All three modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261020T051148-L-1582392",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
