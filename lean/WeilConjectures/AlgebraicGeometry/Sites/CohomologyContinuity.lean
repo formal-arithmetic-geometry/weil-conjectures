@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
-import Sheaf.AlgebraicGeometry.GrothendieckHypercoverCohomology
 
 /-!
 # Continuity of étale cohomology at inverse limits
