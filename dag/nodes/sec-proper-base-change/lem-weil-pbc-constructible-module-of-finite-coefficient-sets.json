@@ -132,14 +132,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets",
-  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleOfFiniteCoefficientSets.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ConstructibleModuleOfFiniteCoefficientSets.lean",
   "declaration": "AlgebraicGeometry.Scheme.isConstructibleSheaf_of_finite_coefficient_underlying_sets",
   "statement": "theorem isConstructibleSheaf_of_finite_coefficient_underlying_sets (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj ((sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F))) (I : Ideal Λ) (hI : Finite (Λ ⧸ I)) (hkill : ∀ (U : X.Etaleᵒᵖ) (r : Λ), r ∈ I → ∀ m : F.obj.obj U, r • m = 0) : IsConstructibleSheaf F",
   "branch": "sheaf-dag",
   "by": "S2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "Retired the duplicate Sheaf module in favor of the adopted source theorem. The public theorem signature is unchanged; both current direct consumers use the source module. Private chart helpers differ only in their finite-local-set predicate presentation; the source module contains the complete proof and no sorry. The recorded proof route is retained."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -152,14 +153,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q2",
+  "reviewer": "C-16fa4",
+  "group": "E5",
   "result": "pass",
-  "landing": "20261012T184334-L-4016211",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221133-L-4148159",
+  "kind": "interface",
+  "note": "independent cc review: Retired Sheaf item vs the WeilConjectures twin (identical public signature, no sorry); ProjectiveLineConstructible wrapper vs upstream hasConstructibleDirectImages_projectiveLine; the 2 adapted consumers and their 4 direct importers compiled in a sandbox (all rc 0)"
  },
  "lean_audit": {
   "master": {

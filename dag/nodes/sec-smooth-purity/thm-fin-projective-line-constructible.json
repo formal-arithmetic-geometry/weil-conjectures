@@ -21,44 +21,24 @@
  ],
  "proof": [
   {
-   "text": "Extract finiteness of the original coefficient ring Lambda and its invertible exponent from the coefficient convention. Finite type over the field makes S Noetherian. It suffices to work over every affine open U of S: projective-space base change identifies the local projective line, inverse image preserves constructibility, and upperStarHomologyRightDerivedLowerStarIso identifies the restriction of the higher image with that for the local projection. Apply the proved source IsConstructibleSheaf.of_iSup_eq_top to glue; the empty base is included. The localization isomorphism is proved in WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal from etale derived base change.",
+   "text": "Use the complete adopted theorem AlgebraicGeometry.Etale.hasConstructibleDirectImages_projectiveLine in WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective. Its proof first works on affine opens, embeds a constructible sheaf into a finite sum of finite pushforwards of finite constant modules, applies the constructible embedding criterion, and identifies the higher images with those of the finite covers. A finite cover embeds in projective space over the affine base; its geometric fibres have dimension at most one by integral incomparability and projective-line base change. The complete source constant-module curve theorem supplies constructibility, using prime-coefficient curve finiteness and finite-coefficient devissage. Exactness for finite maps and additivity handle the finite sum. Etale localization glues over affine opens. Thus the existing unit route through finite pushforwards and projective curves is retained by the source proof; no local duplicate of it is elaborated.",
    "uses": [
-    "sbc-def-coefficient-conventions",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lemma-nagata-projective-space-base-change-pullback",
     "lem-weil-pbc-etale-localization-exchange",
-    "def-weil-pbc-constructible-complexes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
-    "place": "node thm-fin-projective-line-constructible, order 1618"
-   }
-  },
-  {
-   "text": "Over an affine finite-type base, use the proved source hasConstructibleDirectImages_of_exists_mono. Its truncated-resolution argument reduces the claim to embedding each constructible Q into a constructible G whose derived direct image has constructible homology in every integer degree. Apply the existing source exists_mono_biproduct_lowerStar_of_locallyOfFiniteType, the arbitrary finite-coefficient version of the finite-pushforward embedding lemma, to write G as a finite direct sum of h_* of finite constant Lambda-modules. Constant finite module sheaves are finite locally constant, finite direct image preserves constructibility, and finite direct sums preserve constructibility. The source formal embedding criterion supplies the resolution step, including negative-degree vanishing, without a Cartan--Eilenberg spectral sequence.",
-   "uses": [
+    "def-weil-pbc-constructible-complexes",
     "lem-finrepair-constructible-direct-images-from-embeddings",
     "lem-fin-finite-type-pushforward-embedding",
     "lem-fin-finite-morphism",
-    "thm-constructible-serre"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
-    "place": "node thm-fin-projective-line-constructible, order 1618"
-   }
-  },
-  {
-   "text": "For each finite h:Y -> X, where X is the projective line over the affine Noetherian base, finite_over_projective_affineLocally makes h followed by the projection projective. All schemes involved remain finite type over the field. For each geometric base change, the fibre of this composite maps finitely to the corresponding fibre of the projective line. Incomparability for integral extensions, in the proved source geometric form Scheme.Hom.eq_of_specializes_of_apply_eq_of_isIntegralHom, says that comparable points with equal image are equal. The proved source topologicalKrullDim_le_of_continuous therefore bounds the source fibre dimension by the target fibre dimension. The projective-line fibre is a projective line over the geometric-point field, hence has dimension at most one. This treats empty, nonreduced and disconnected fibres without affine-cover dimension conversions.",
-   "uses": [
+    "thm-constructible-serre",
     "def-pc-projective-morphism",
-    "lem-fin-finite-over-projective",
     "lem-weil-pbc-finite-morphism-permanence",
-    "lemma-nagata-projective-space-base-change-pullback",
     "lem-weil-pbc-p1-field-dimension-one",
     "pqf-lem-finite-integral-lft",
-    "lem-weil-pbc-integral-incomparability"
+    "lem-weil-pbc-integral-incomparability",
+    "cor-fin-projective-curve-finite-group",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-pbc-direct-image"
    ],
    "elementary": false,
    "source": {
@@ -67,39 +47,11 @@
    }
   },
   {
-   "text": "For a finite Lambda-module M, choose the positive invertible annihilating exponent n supplied by HasInvertibleExponent. The additive group is killed by n. The proved Mathlib card_dvd_exponent_pow_rank' gives card(M) dividing n raised to its finite group rank. Consequently its cardinality is invertible on the base, by isUnit_of_dvd_unit. Apply projective-curve finiteness for constant finite abelian groups to the composite h followed by the projection. The coefficient-forgetting comparison and constantCommuteCompose identify the result with the abelian sheaf underlying the module higher direct image.",
+   "text": "Extract Finite Lambda and HasInvertibleExponent Lambda (Spec k) from hcoeff. Apply the adopted projective-line theorem to F, converting the hypothesis using isConstructibleEtaleModuleSheaf_iff. Transfer its unbounded derived homology conclusion along rightDerivedFunctorPlusCompatibility and convert back using the same constructibility equivalence. This proves the original public statement with unchanged parameters and every integer degree. The empty base and the zero coefficient ring require no extra assumption.",
    "uses": [
     "sbc-def-coefficient-conventions",
-    "cor-fin-projective-curve-finite-group",
-    "lem-sbc-higher-direct-image-forget-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
-    "place": "node thm-fin-projective-line-constructible, order 1618"
-   }
-  },
-  {
-   "text": "A constructible abelian sheaf gives a finite stratification with finite constant abelian local trivializations. On each stratum these imply local constancy and finite geometric stalks. The finite-local-abelian-forget equivalence turns them into finite locally constant underlying set sheaves. Forgetting to sets commutes with inverse image: use the left-Kan-extension comparison and preservation of sheafification. Transfer the stratification along the abelian comparison isomorphism. The finite-coefficient reconstruction theorem with the zero ideal of Lambda now proves module constructibility (Lambda itself is finite). This performs the scalar-action reconstruction directly over Lambda; no intermediate Z/n coefficients are needed.",
-   "uses": [
-    "def-weil-pbc-constructible-complexes",
-    "lem-weil-pbc-finite-local-abelian-forget",
-    "lem-weil-pbc-constructible-module-of-finite-coefficient-sets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
-    "place": "node thm-fin-projective-line-constructible, order 1618"
-   }
-  },
-  {
-   "text": "Exactness of finite direct image, its derived-functor comparison, and derived composition give rightDerivedLowerStarSingleLowerStarIso: the derived projection-image of h_* of a constant module sheaf in degree zero is the derived image under the composite. Transfer constructibility along this isomorphism. Derived direct image and homology are additive and preserve finite biproducts, so the whole embedding target G has constructible higher images. The embedding criterion finishes the affine claim; the first step globalizes it. Finally use isConstructibleEtaleModuleSheaf_iff and rightDerivedFunctorPlusCompatibility to obtain exactly the stated bounded-below-derived theorem, with unchanged hypotheses and integer degree.",
-   "uses": [
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "thm-constructible-serre",
     "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
-    "src-right-derived-functor-plus-compatibility",
-    "def-weil-pbc-direct-image"
+    "src-right-derived-functor-plus-compatibility"
    ],
    "elementary": false,
    "source": {
@@ -119,15 +71,11 @@
   "lem-fin-finite-morphism",
   "thm-constructible-serre",
   "def-pc-projective-morphism",
-  "lem-fin-finite-over-projective",
   "lem-weil-pbc-finite-morphism-permanence",
   "lem-weil-pbc-p1-field-dimension-one",
   "pqf-lem-finite-integral-lft",
   "lem-weil-pbc-integral-incomparability",
   "cor-fin-projective-curve-finite-group",
-  "lem-sbc-higher-direct-image-forget-comparison",
-  "lem-weil-pbc-finite-local-abelian-forget",
-  "lem-weil-pbc-constructible-module-of-finite-coefficient-sets",
   "lemma-weil-pbc-finite-direct-image-exact",
   "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "src-right-derived-functor-plus-compatibility",
@@ -136,7 +84,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
-  "place": "Proof, implemented by V3 using the proved finite-order embedding criterion, finite exactness, integral incomparability, finite-coefficient reconstruction, and etale localization; no downstream projective-finiteness theorem is imported."
+  "place": "E5: reuse the complete adopted source projective-line proof, retaining its affine-local finite-pushforward/projective-curve route; only the coefficient convention and bounded-below compatibility are elaborated in the local wrapper. The source theorem has only propext, Classical.choice, and Quot.sound."
  },
  "mathlib_searches": [
   {
@@ -315,7 +263,6 @@
   "lemma-nagata-projective-space-base-change-pullback",
   "thm-constructible-serre",
   "lem-weil-pbc-p1-field-dimension-one",
-  "lem-sbc-higher-direct-image-forget-comparison",
   "lem-weil-pbc-etale-localization-exchange"
  ],
  "reviewed": {
@@ -345,13 +292,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V3",
+  "reviewer": "C-16fa4",
+  "group": "E5",
   "result": "pass",
-  "landing": "20261018T091414-L-3259515",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221133-L-4148159",
+  "kind": "interface",
+  "note": "independent cc review: Retired Sheaf item vs the WeilConjectures twin (identical public signature, no sorry); ProjectiveLineConstructible wrapper vs upstream hasConstructibleDirectImages_projectiveLine; the 2 adapted consumers and their 4 direct importers compiled in a sandbox (all rc 0)"
  }
 }
