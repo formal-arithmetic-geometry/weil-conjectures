@@ -1,0 +1,165 @@
+{
+ "id": "lem-zl-bertini-product-system-immersion",
+ "kind": "statement",
+ "title": "A linear system containing ideal products is immersive",
+ "statement": "Let $k$ be a field, $Y$ a $k$-scheme, $i:Z\\to Y$ a closed immersion, $\\mathcal I$ its ideal, and $L$ an invertible module. Schemes, closed immersions, ideals and invertible modules are as in [def-weil-pbc-scheme-conventions], [def-weil-closed-immersion], [def-sbc-closed-immersion-ideal-sheaf], and [def-sc-invertible-module]. Let $r\\le n$ be natural numbers, assume $L^{\\otimes r}$ is very ample [def-sc-ample], and let $\\sigma$ be global generating sections [def-weil-pbc-generating-sections] of $\\mathcal I\\otimes L^{\\otimes(n-r)}$. Put $U=Y\\setminus i(Z)$. Let $A$ be a finite index type and let $s_a\\in\\Gamma(Y,L^{\\otimes n})$ be sections whose $k$-linear span contains every section restricting to zero on $Z$. Suppose their pullbacks $t_a$ generate $L^{\\otimes n}|_U$. Then the morphism $U\\to\\mathbf P(A;k)$ classified by the $t_a$ [def-weil-pbc-morphism-to-projective-space-by-sections] is an immersion [def-weil-scheme-morphism-properties].",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-invertible-module",
+  "def-sc-ample",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD5, lemma-generate-over-complement, product-of-sections argument in the proof"
+ },
+ "proof": [
+  {
+   "text": "Choose a closed immersion $j:Y\\to\\mathbf P(B;k)$ with $j^*\\mathcal O(1)\\cong L^{\\otimes r}$ from very ampleness. Pull its coordinate sections back to sections $t_b$; their nonvanishing loci cover $Y$.",
+   "uses": [
+    "def-sc-ample",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At $x\\in U$, restriction of the ideal inclusion is an isomorphism. Hence the images of the given ideal-twist generators generate $L^{\\otimes(n-r)}$ at $x$. Choose such an image $a$ nonvanishing at $x$, and choose $t_b$ nonvanishing at $x$. The products $a\\otimes t_c$, transported through $L^{\\otimes(n-r)}\\otimes L^{\\otimes r}\\cong L^{\\otimes n}$, vanish on $Z$. The tensor fibre formula says that the nonvanishing locus of $a\\otimes t_b$ is the intersection of the two nonvanishing loci. It lies in $U$.",
+   "uses": [
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sc-closed-immersion-ideal-tensor-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every product is a constant linear combination of the specified $s_a$ by the span assumption. On the projective target, divide these linear forms by one coordinate and invert the form corresponding to $a\\otimes t_b$. The ratios $(a\\otimes t_c)/(a\\otimes t_b)$ then define a morphism to the $b$-th standard affine chart of $\\mathbf P(B;k)$. Construct it from the polynomial coordinate ring. The coordinate formulas for a generating system identify its inverse image with the nonvanishing locus of $a\\otimes t_b$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-projective-morphism-chart-preimage",
+    "lem-weil-pbc-projective-space-functor-of-points"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On this inverse image, both tensor factors are generators. Trivialize by them: the pulled-back ratios cancel the first factor and equal $t_c/t_b$. Maps into the affine chart are determined by the base functions and these ratios, so the composite with the constructed chart morphism equals the restriction of $j$. That restriction is an immersion. Immersion cancellation proves that the specified coordinate morphism is an immersion over this target open.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-zl-immersion-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These target opens cover the image, since a product nonvanishing at each $x\\in U$ was chosen. Apply locality near the image. If $U$ is empty, the same image-cover argument is vacuous and gives the assertion.",
+   "uses": [
+    "lem-zl-immersion-near-image-locality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD5, lemma-generate-over-complement, last three paragraphs; fixed very ample power and chart cancellation variant"
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.BertiniSections",
+  "date": "2026-10-20",
+  "group": "U7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Tag 0FD5 product-of-sections immersion argument used by BertiniSections",
+   "via": [
+    "lem-zl-bertini-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A linear system containing products of sections of a very ample line bundle and an ideal twist defines an immersion on the complement",
+   "results": "Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul; AlgebraicGeometry.IsImmersion; AlgebraicGeometry.IsImmersion.instMorphismRestrict; AlgebraicGeometry.IsImmersion.toIsPreimmersion; Manifold.IsImmersionAtOfComplement; Manifold.IsImmersionOfComplement; AlgebraicGeometry.IsImmersion.isImmersion_iff_exists; AlgebraicGeometry.instIsClosedImmersionMorphismRestrict",
+   "date": "2026-10-19",
+   "verdict": "No exact criterion; generic immersion, chart, or unrelated results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generating linear system containing products of a very ample system with sections generating an ideal on its complement defines an immersion there",
+   "results": "AlgebraicGeometry.Proj.instIsOpenImmersionAwayι; AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι; AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι; AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap; AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan; AlgebraicGeometry.Proj.fromOfGlobalSections; AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; AlgebraicGeometry.isImmersion_eq_inf",
+   "date": "2026-10-19",
+   "verdict": "No exact criterion; generic immersion, chart, or unrelated results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion",
+   "results": "AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget; AlgebraicGeometry.IsImmersion.instIsMultiplicativeScheme; AlgebraicGeometry.IsImmersion.isStableUnderBaseChange; AlgebraicGeometry.IsImmersion; AlgebraicGeometry.Scheme.Hom.coborderRange; AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType; AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion; AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion",
+   "date": "2026-10-19",
+   "verdict": "No exact criterion; generic immersion, chart, or unrelated results only."
+  },
+  {
+   "tool": "grep",
+   "query": "immersion_of_eq_sum_smul|vanishing_linear_system|product.*immersion",
+   "results": "Mathlib/RingTheory/LocalIso.lean; Mathlib/Geometry/Manifold/Immersion.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact criterion; generic immersion, chart, or unrelated results only."
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ample",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-closed-immersion-ideal-tensor-sections",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-zl-immersion-cancellation",
+  "lem-zl-immersion-near-image-locality"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.BertiniImmersionAux",
+  "file": "lean/Sheaf/DeligneLaumon/BertiniImmersionAux.lean",
+  "declaration": "AlgebraicGeometry.vanishing_linear_system_isImmersion",
+  "statement": "theorem vanishing_linear_system_isImmersion (k : Type u) [Field k] {Y : Scheme.{u}} [Y.Over (Spec (.of k))] {Z : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (L : Y.Modules) [L.IsInvertible] (n r : ℕ) (hrn : r ≤ n) (hvery : IsVeryAmple (Y ↘ Spec (.of k)) (L.tensorPow r)) (σ : SheafOfModules.GeneratingSections (i.ker.toModules ⊗ₘ L.tensorPow (n - r))) : letI : Module k Γ(L.tensorPow n, ⊤) := Module.compHom _ ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ (Y ↘ Spec (CommRingCat.of k)).appTop).hom ∀ (I : Type u) [Finite I] (s : I → (L.tensorPow n).sections) (t : I → ((Scheme.Modules.pullback (show Y.Opens from i.ker.support.compl).ι).obj (L.tensorPow n)).sections) (hspan : ∀ v : Γ(L.tensorPow n, ⊤), pullbackΓ i (L.tensorPow n) v = 0 → v ∈ Submodule.span k (Set.range (fun j ↦ (s j).val (op ⊤)) : Set Γ(L.tensorPow n, ⊤))) (hvalue : ∀ j, (t j).val (op ⊤) = pullbackΓ (show Y.Opens from i.ker.support.compl).ι (L.tensorPow n) ((s j).val (op ⊤))) (ht : Epi ((SheafOfModules.freeHomEquiv ((Scheme.Modules.pullback (show Y.Opens from i.ker.support.compl).ι).obj (L.tensorPow n))).symm t)), IsImmersion (@ProjectiveSpace.homOfGeneratingSections I _ (show Y.Opens from i.ker.support.compl).toScheme (Spec (.of k)) ((show Y.Opens from i.ker.support.compl).ι ≫ (Y ↘ Spec (.of k))) ((Scheme.Modules.pullback (show Y.Opens from i.ker.support.compl).ι).obj (L.tensorPow n)) inferInstance t ht)",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261020T131158-L-1254126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261020T131158-L-1254126",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
