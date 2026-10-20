@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.OpenTensorNormalizationData
+import Sheaf.SixFunctors.OpenTensorSupportAux
 
 /-! # Tensoring objects extended from an open -/
 
@@ -42,6 +43,14 @@ sites-cohomology.tex, Tags 0GL1, 06YS and 06YU.
 theorem derivedTensor_openSupported {m : Mode} {d : Input.{u} m} {t : SiteSquare d}
     (o : Operations d t) (M : Der (restrictRing m d.j d.R)) (N : Der d.R) :
     o.opens.jShriek.essImage (o.tensorX.functor.obj (o.opens.jShriek.obj M, N)) := by
-  sorry
+  let f := (o.opens.adj.homEquiv
+      (o.tensorU.functor.obj (M, o.opens.jStar.obj N))
+      (o.tensorX.functor.obj (o.opens.jShriek.obj M, N))).symm
+      (o.tensorU.functor.map (CategoryTheory.Prod.mkHom
+        (o.opens.adj.unit.app M) (𝟙 _)) ≫
+        o.tensorComparison.comparison.inv.app (o.opens.jShriek.obj M, N))
+  have hf : IsIso f := tensor_open_extension_comparison_isIso o M N
+  let _ : IsIso f := hf
+  exact Functor.essImage.ofIso (asIso f) (o.opens.jShriek.obj_mem_essImage _)
 
 end SheafOfModules.OpenTensorNormalization
