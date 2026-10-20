@@ -25,26 +25,41 @@
  ],
  "proof": [
   {
-   "text": "Lift R, B and each term to the common carrier universe. The equivalences\nalong the ring isomorphisms ULift R ≃ R and ULift B ≃ B preserve homology and\nintertwine scalar extension with tensoring by ULift B (tensor symmetry accounts\nfor its placement on the right). Apply the termwise Tor-acyclic comparison to a\nK-flat resolution of the restricted bounded complex. Its tensor augmentation is\na quasi-isomorphism. The left-derived counit computed on this resolution is\ntherefore an isomorphism; uniqueness of the universal derived pair transports\nthis to M.counit. More explicitly, in the naturality square for the resolution\naugmentation, its image under the localized derived functor is invertible,\nthe counit at the K-flat source is invertible by scalarExtensionCounit_isIso_of_kFlat after transporting to the common lifted ring universe, and the ordinary-tensor image of\nthe augmentation is invertible by termwise Tor acyclicity. Thus the fourth side,\nthe counit at Q, is invertible. The argument also applies to the zero complex,\nzero rings and arbitrary bounds, including m > n. No localization or finite\nprojectivity is required.",
+   "text": "First prove the common-universe calculation as a private proved helper. Resolve the bounded S-complex K by the reduced functorial flat resolution P -> K. Its source is K-flat, so scalarExtensionCounit_isIso_of_kFlat makes the counit invertible at P. Apply quasiIso_tensor_of_termwise_tor_acyclic to this resolution. Identify termwise right tensor by T with scalar extension followed by restriction: the underlying T-module T is the ordinary S-module T, and tensorLeftIsoTensorRight supplies symmetry. The natural arrow isomorphism transports the quasi-isomorphism, and faithful exact restriction detects it. Apply DerivedCategory.Q to the augmentation and its scalar extension. In the counit naturality square the other three arrows are invertible, so cancel the invertible source map to obtain the counit isomorphism at K.",
    "uses": [
     "lem-pc-termwise-tor-acyclic-derived-tensor",
     "lem-pc-kflat-scalar-extension-counit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For independent coefficient and carrier universes put U = max(uR,uA,uB,uD,v), lift R and B to Type U, and use restriction along the down ring equivalences. The scalar-extension adjunction, composition of restriction functors, and uniqueness of left adjoints give ulift_scalar_iso. The proved generic private helpers derived_equivalence and kan_postcomp_equivalence from DerivedExtensionRingEquivRawTransportIso are reused via import all: derived restriction is an equivalence and postcomposition with it preserves the universal right Kan extension. Precompose the given universal pair by the homotopy restriction equivalence, use mapDerivedCategoryFactorsh, then postcompose with derived restriction on B. Reassociate with ulift_scalar_iso to obtain a universal derived scalar-extension pair over the lifted rings.",
+   "uses": [
+    "lem-pc-derived-extension-ring-equiv-raw-transport-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict Q first from A to R and then along ULift R -> R, obtaining Kup. Restriction preserves zero objects, so the original bounds also bound Kup. For each degree the explicit linear equivalence x -> ULift.up x identifies Kup.X n with the lifted module in the Tor hypothesis; its inverse is ULift.down and both scalar actions agree definitionally. Apply the derived tensor functor to this isomorphism to transfer Tor vanishing. Apply the first helper to Kup and the transported universal pair. Expanding the transported counit expresses its component as isomorphisms composed with derived restriction of the original counit. Cancel these isomorphisms, reflect isomorphisms through the derived equivalence, and use the counit of the restriction equivalence to return to the original complex. This covers zero rings, zero complexes and reversed bounds.",
+   "uses": [
+    "lem-pc-termwise-tor-acyclic-derived-tensor",
+    "lem-pc-kflat-scalar-extension-counit",
+    "lem-pc-derived-extension-ring-equiv-raw-transport-iso"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-termwise-tor-acyclic-derived-tensor",
-  "lem-pc-kflat-scalar-extension-counit"
+  "lem-pc-kflat-scalar-extension-counit",
+  "lem-pc-derived-extension-ring-equiv-raw-transport-iso"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "G7",
+  "date": "2026-10-20",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors; interface transport written by J4"
+  "place": "Tag 08IB, lemma-compare-base-change; Tag 06Y6 for universal derived scalar extension. Complete Lean proof of the recorded K-flat-resolution/naturality argument, including universe transport. Reuses the proved generic private equivalence/Kan helpers of DerivedExtensionRingEquivRawTransportIso."
  },
  "mathlib_searches": [
   {
@@ -124,13 +139,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "G7",
   "result": "pass",
-  "landing": "20261013T100018-L-2466424",
-  "kind": "interface",
+  "landing": "20261020T145514-L-2404120",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
