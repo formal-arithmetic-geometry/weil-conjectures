@@ -39,95 +39,28 @@
  ],
  "proof": [
   {
-   "text": "For reconstructionTowers_grothendieck, use the independent-universe module-sheaf Grothendieck theorem. Evaluation left adjoints applied to a separator give a separating family for strict towers; filtered colimits and AB5 are pointwise. Inverse-limit additivity follows by all projections.",
+   "text": "Apply koszulReconstructionComparison, which constructs the natural comparison and proves the canonical-unit equality by the strict augmentation, normalized Roos comparison, and K-flat localization descent.",
    "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck"
+    "prop-weil-pbc-koszul-reconstruction-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Construct reconstructionQuotientUnit by the unit/global-sections equivalence using the compatible section 1. Its residue formula gives transition compatibility. The compatible tensor maps define reconstructionOrdinaryUnit by the strict inverse-limit cone, naturally in the module; joint monicity gives uniqueness. The K-flat computation clause of the chosen derived reduction pair proves reconstructionTowerCounit_isIso.",
+   "text": "For an object with invertible Koszul unit, rewrite its quotient completion unit as the composite with the comparison isomorphism. Isomorphisms are closed under composition.",
    "uses": [
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For reconstructionCompletionUnit_exists, the K-flat resolving full subcategory of the homotopy category is right-fraction dense and its restriction of Qh is a localization. Whiskering along it is fully faithful. Compose the natural ordinary-unit/right-derived-limit comparison with the inverse derived-reduction counit on that subcategory, and descend this natural transformation. The localization factor isomorphisms yield exactly the existing complex normalization. This also proves uniqueness on all K-flat representatives. The generic DerivedReductionModelData record retains the same chosen pair and avoids expanding coefficient definitions in the kernel.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-trf-right-fraction-dense-subcategory",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-derived-reduction-model-data"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Tensor interchange and product projections prove reconstructionKoszulProductMap_comm. The mapArrowHom identity and composition laws, followed by the shift functor, prove the corresponding fibre-map laws. The actual Koszul unit is natural by tensor interchange and the explicit cofiber inclusion. Localization factorization and liftNatTrans_app give reconstructionKoszulIntrinsicComparison, preserving its unit.",
-   "uses": [
-    "def-weil-pbc-intrinsic-completion"
+    "def-weil-pbc-koszul-reconstruction-models"
    ],
    "elementary": true
-  },
-  {
-   "text": "For reconstructionKoszulFiberFunctor_inverts, the actual completed exterior Koszul complexes are K-flat. Tensoring by each factor therefore preserves quasi-isomorphisms. Exact countable products of pro-etale module sheaves imply that homology preserves the product, so the product map is a quasi-isomorphism. Identify mapArrowHom with the mapping-cone map, use two-out-of-three for its distinguished triangle after Q, and shift by -1. Hence Q inverts the recorded fibre map.",
-   "uses": [
-    "lem-weil-pbc-completed-adic-koszul-kflat",
-    "lem-pur-kflat-tensor-quasiiso-independent",
-    "lem-weil-proetale-countable-products-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-weil-pbc-completed-constant-sheaf-reduction] with the scheme T, Noetherian ring A and ideal I of [def-weil-pbc-adic-coefficient-datum]. Every P_n is finite, so its last clause identifies the constant sheaf $\\underline{A/I^n}$ with $(P_n)_T$ and the limit $B=\\varprojlim_n\\underline{A/I^n}$ with $A_T$. These identifications are canonical for the finite quotient maps; their projections are the maps $\\pi_n$ of the datum. Thus the quotient tower in the item is precisely the completed-coefficient finite-reduction tower, with no identification of the entire constant and completed module categories.",
-   "uses": [
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M (lemma-completion-flat), including application to powers I^n; finite coefficient identification in the cited node"
-   }
-  },
-  {
-   "text": "Apply the last paragraph of [lem-weil-pbc-constant-completion-equivalence] on the small pro-etale site of T, with $\\widehat A=A_T$, $\\mathcal O=\\widehat A$ and $N=K$. Step 1 verifies exactly its completed constant coefficient sheaf and finite quotient hypotheses. Its $Q_m(\\mathcal O)$ has the same differentials, transition multiplications and degree-zero units as the Koszul tower specified in the statement. Its functorial strict derived inverse limit is the one fixed here. That paragraph gives the canonical comparison between Koszul completion and the finite-reduction derived limit for every $K\\in D(A_T)$ and says it respects units. Hence it gives $c_K$ in the actual completed-coefficient category, with $c_K\\kappa_K=\\operatorname{comp}_K$. The comparisons are induced by the strict quotient augmentations, so maps of K-flat representatives commute with them levelwise and the functorial derived limit gives naturality in K. No equivalence between the entire derived categories is assumed, and no completeness of K is needed for this step.",
-   "uses": [
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099L (section-derived-completion-noetherian), 099M (lemma-naive-completion); algebraization.tex Tag 0A0E (lemma-derived-completion-koszul), Tag 099I (lemma-restriction-derived-complete-equivalence)"
-   }
-  },
-  {
-   "text": "If K is derived I-complete, its unit $\\kappa_K$ is invertible by the definition in the statement. Step 2 gives an invertible $c_K$ and the equality $\\operatorname{comp}_K=c_K\\kappa_K$. The inverse of $\\operatorname{comp}_K$ is $\\kappa_K^{-1}c_K^{-1}$: either composite reduces, by associativity and the two inverse identities, to the identity. This proves that the canonical quotient completion map itself is an isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-koszul-reconstruction.md",
-    "place": "Displayed derived-complete consequence; explicit composition of inverses"
-   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-derived-reduction-model-data",
-  "def-weil-pbc-intrinsic-completion",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-tensor-quasiiso-independent",
-  "lem-trf-right-fraction-dense-subcategory",
-  "lem-weil-pbc-completed-adic-koszul-kflat",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-proetale-countable-products-exact"
+  "prop-weil-pbc-koszul-reconstruction-comparison",
+  "def-weil-pbc-koszul-reconstruction-models"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY, 079Q and 0941 for the proved supporting constructions; the original source plan remains for the principal Koszul-to-quotient comparison, whose hole is retained."
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M strict augmentation and Tag 0941 normalized Roos computation, assembled in koszulReconstructionComparison; composition of isomorphisms proves the consequence"
  },
  "mathlib_searches": [
   {
@@ -239,37 +172,7 @@
   "module": "Sheaf.Paper.KoszulReconstruction",
   "declaration": "AlgebraicGeometry.Scheme.koszulReconstruction",
   "declarations": [
-   "AlgebraicGeometry.Scheme.reconstructionTowers_grothendieck",
-   "AlgebraicGeometry.Scheme.reconstructionLimit",
-   "AlgebraicGeometry.Scheme.reconstructionLimit_additive",
-   "AlgebraicGeometry.Scheme.reconstructionRlim",
-   "AlgebraicGeometry.Scheme.reconstructionRlimComparison",
-   "AlgebraicGeometry.Scheme.reconstructionQuotientUnit_exists",
-   "AlgebraicGeometry.Scheme.reconstructionQuotientUnit",
-   "AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit_exists",
-   "AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit",
-   "AlgebraicGeometry.Scheme.reconstructionReductionCounit",
-   "AlgebraicGeometry.Scheme.reconstructionReductionComplexCounit",
-   "AlgebraicGeometry.Scheme.reconstructionTowerCounit_isIso",
-   "AlgebraicGeometry.Scheme.reconstructionUnitOnKFlat",
-   "AlgebraicGeometry.Scheme.reconstructionCompletionUnit_exists",
-   "AlgebraicGeometry.Scheme.reconstructionCompletionUnit",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulProductMap",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulProductMap_comm",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap_id",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap_comp",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberFunctor",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberFunctor_inverts",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulDerivedFunctor",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulUnit_naturality",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulComplexUnit",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulDerivedUnit",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulIntrinsicComparison",
-   "AlgebraicGeometry.Scheme.koszulReconstruction",
-   "AlgebraicGeometry.Scheme.reconstructionAbSheafify",
-   "AlgebraicGeometry.Scheme.reconstructionAbLocallyBijective",
-   "AlgebraicGeometry.Scheme.reconstructionRingSheafify"
+   "AlgebraicGeometry.Scheme.koszulReconstruction"
   ],
   "file": "lean/Sheaf/Paper/KoszulReconstruction.lean",
   "statement": "theorem koszulReconstruction (r : ℕ) (a : Fin r → A) (_ha : Ideal.span (Set.range a) = d.ideal) : ∃ c : reconstructionKoszulDerivedFunctor T d r a ≅ completedAdicReduction T d ⋙ reconstructionRlim T d, (∀ K : DerivedCategory (CompletedAdicModules T d), (reconstructionKoszulDerivedUnit T d r a).app K ≫ c.hom.app K = (reconstructionCompletionUnit T d).app K) ∧ (∀ K : DerivedCategory (CompletedAdicModules T d), IsIso ((reconstructionKoszulDerivedUnit T d r a).app K) → IsIso ((reconstructionCompletionUnit T d).app K))",
@@ -285,13 +188,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M6",
+  "reviewer": "C-8e934",
+  "group": "W6",
   "result": "pass",
-  "landing": "20261019T192806-L-1868443",
+  "landing": "20261020T230846-L-622028",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered Models module vs live KoszulReconstruction (diff: proof-only change + defeq-checked explicit liftingLift instance), item/comparison/augmentation statements vs their nodes, 3 live direct importers compiled against the delivery, #print axioms of the proved declarations"
  }
 }

@@ -1,0 +1,182 @@
+{
+ "id": "def-weil-pbc-koszul-reconstruction-models",
+ "blueprint": {
+  "is": null,
+  "from": "prop-weil-pbc-koszul-reconstruction",
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The fixed Koszul and quotient reconstruction models",
+ "statement": "For the completed coefficient datum [def-weil-pbc-adic-coefficient-datum], retain the actual module sheaf category, ordinary strict quotient tower, total derived inverse limit, and explicit Koszul mapping fibre of [def-weil-pbc-intrinsic-completion]. The residue-normalized quotient maps determine the ordinary unit. The universal left-derived reduction pair and total right-derived limit determine a unique completion unit on K-flat representatives. The explicit Koszul fibre is functorial, preserves quasi-isomorphisms, and localizes with its original degree-zero unit. This node only records the existing constructions and supporting proofs formerly in the reconstruction module; it introduces no new choices or changed definitions.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "Supporting constructions of prop-weil-pbc-koszul-reconstruction; Stacks Tags 06YY, 079Q, 0941"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof": [
+  {
+   "text": "For reconstructionTowers_grothendieck, use the independent-universe module-sheaf Grothendieck theorem. Evaluation left adjoints applied to a separator give a separating family for strict towers; filtered colimits and AB5 are pointwise. Inverse-limit additivity follows by all projections.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct reconstructionQuotientUnit by the unit/global-sections equivalence using the compatible section 1. Its residue formula gives transition compatibility. The compatible tensor maps define reconstructionOrdinaryUnit by the strict inverse-limit cone, naturally in the module; joint monicity gives uniqueness. The K-flat computation clause of the chosen derived reduction pair proves reconstructionTowerCounit_isIso.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For reconstructionCompletionUnit_exists, the K-flat resolving full subcategory of the homotopy category is right-fraction dense and its restriction of Qh is a localization. Whiskering along it is fully faithful. Compose the natural ordinary-unit/right-derived-limit comparison with the inverse derived-reduction counit on that subcategory, and descend this natural transformation. The localization factor isomorphisms yield exactly the existing complex normalization. This also proves uniqueness on all K-flat representatives. The generic DerivedReductionModelData record retains the same chosen pair and avoids expanding coefficient definitions in the kernel.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-trf-right-fraction-dense-subcategory",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-derived-reduction-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor interchange and product projections prove reconstructionKoszulProductMap_comm. The mapArrowHom identity and composition laws, followed by the shift functor, prove the corresponding fibre-map laws. The actual Koszul unit is natural by tensor interchange and the explicit cofiber inclusion. Localization factorization and liftNatTrans_app give reconstructionKoszulIntrinsicComparison, preserving its unit.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For reconstructionKoszulFiberFunctor_inverts, the actual completed exterior Koszul complexes are K-flat. Tensoring by each factor therefore preserves quasi-isomorphisms. Exact countable products of pro-etale module sheaves imply that homology preserves the product, so the product map is a quasi-isomorphism. Identify mapArrowHom with the mapping-cone map, use two-out-of-three for its distinguished triangle after Q, and shift by -1. Hence Q inverts the recorded fibre map.",
+   "uses": [
+    "lem-weil-pbc-completed-adic-koszul-kflat",
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-derived-reduction-model-data",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-trf-right-fraction-dense-subcategory",
+  "lem-weil-pbc-completed-adic-koszul-kflat",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "Supporting constructions of prop-weil-pbc-koszul-reconstruction; Stacks Tags 06YY, 079Q, 0941"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit of a countable tower product one minus transition Roos complex",
+   "results": "No direct completed-sheaf theorem; existing product and derived-limit declarations located",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnitQ\"",
+   "results": "No direct hit for the full Roos comparison; used the source-library declaration",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|mappingCocone|rightDerivedFunctorUnitQ",
+   "results": "Source-library Roos and mapping-cocone declarations identified and used",
+   "date": "2026-10-21",
+   "verdict": "used local declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism from explicit Roos fibre to right derived inverse limit",
+   "results": "No direct theorem; service search returned no complete match",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KoszulReconstruction",
+  "date": "2026-10-21",
+  "group": "W6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KoszulReconstructionModels",
+  "file": "lean/Sheaf/Paper/KoszulReconstructionModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.reconstructionTowers_grothendieck",
+  "statement": "theorem reconstructionTowers_grothendieck :\n    IsGrothendieckAbelian.{t + 1} (CompletedAdicTowers T d)",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.reconstructionTowers_grothendieck",
+   "AlgebraicGeometry.Scheme.reconstructionLimit",
+   "AlgebraicGeometry.Scheme.reconstructionLimit_additive",
+   "AlgebraicGeometry.Scheme.reconstructionRlim",
+   "AlgebraicGeometry.Scheme.reconstructionRlimComparison",
+   "AlgebraicGeometry.Scheme.reconstructionQuotientUnit_exists",
+   "AlgebraicGeometry.Scheme.reconstructionQuotientUnit",
+   "AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit_exists",
+   "AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit",
+   "AlgebraicGeometry.Scheme.reconstructionReductionCounit",
+   "AlgebraicGeometry.Scheme.reconstructionReductionComplexCounit",
+   "AlgebraicGeometry.Scheme.reconstructionTowerCounit_isIso",
+   "AlgebraicGeometry.Scheme.reconstructionUnitOnKFlat",
+   "AlgebraicGeometry.Scheme.reconstructionCompletionUnit_exists",
+   "AlgebraicGeometry.Scheme.reconstructionCompletionUnit",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulProductMap",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulProductMap_comm",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap_id",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap_comp",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberFunctor",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberFunctor_inverts",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulDerivedFunctor",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulUnit_naturality",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulComplexUnit",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulDerivedUnit",
+   "AlgebraicGeometry.Scheme.reconstructionKoszulIntrinsicComparison",
+   "AlgebraicGeometry.Scheme.reconstructionAbSheafify",
+   "AlgebraicGeometry.Scheme.reconstructionAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.reconstructionRingSheafify"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8e934",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261020T230846-L-622028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8e934",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261020T230846-L-622028",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs live KoszulReconstruction (diff: proof-only change + defeq-checked explicit liftingLift instance), item/comparison/augmentation statements vs their nodes, 3 live direct importers compiled against the delivery, #print axioms of the proved declarations"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-quotient-roos-augmentation",
+ "blueprint": {
+  "is": null,
+  "from": "prop-weil-pbc-koszul-reconstruction",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The completed strict Koszul quotient augmentation on Roos models",
+ "statement": "For T, a completed adic coefficient datum d on A, and a finite family a generating d.ideal, form the explicit chain Koszul fibre functor of [def-weil-pbc-koszul-reconstruction-models] and the Roos fibre of the ordinary strict quotient tensor tower. There is a natural chain map from the former to the latter. It is a quasi-isomorphism on every unbounded K-flat complex over the completed coefficient sheaf. Its composite with the actual degree-zero Koszul unit is the ordinary quotient unit followed by the zero-second-coordinate Roos kernel comparison. All three functors and units in this assertion are fixed independently of the augmentation.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion, strict augmentation argument; More on Algebra, sequence-Koszul-complexes (Tag 091N)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-reconstruction-models",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Augment the exterior Koszul complex on a_i^(m+1) in degree zero by A to A/I^(m+1), with zero negative components. The diagonal transitions commute with quotient maps. Noetherian Koszul augmentation cones are pro-zero in the derived category; generator powers are cofinal with ideal powers.",
+   "uses": [
+    "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact constant sheafification and flat completed scalar extension transport these augmentations and pro-zero cones. Identify finite quotient sheaves with the recorded finite function coefficient modules, respecting their projections. Tensor with C and form the induced product/fibre chain maps.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For K-flat C, tensor preserves derived-zero transition maps. The strict derived-limit Roos theorem kills the pro-zero cone and identifies the explicit fibre map as a quasi-isomorphism. Exact countable products supply the concrete Roos computation.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-pur-kflat-tensor-quasiiso-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exterior degree-zero unit goes to the quotient of one. Products and the zero second coordinate preserve this equality, giving the displayed chain-level equation.",
+   "uses": [
+    "def-weil-pbc-koszul-reconstruction-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-reconstruction-models",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion, strict augmentation argument; More on Algebra, sequence-Koszul-complexes (Tag 091N)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit of a countable tower product one minus transition Roos complex",
+   "results": "No direct completed-sheaf theorem; existing product and derived-limit declarations located",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnitQ\"",
+   "results": "No direct hit for the full Roos comparison; used the source-library declaration",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|mappingCocone|rightDerivedFunctorUnitQ",
+   "results": "Source-library Roos and mapping-cocone declarations identified and used",
+   "date": "2026-10-21",
+   "verdict": "used local declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism from explicit Roos fibre to right derived inverse limit",
+   "results": "No direct theorem; service search returned no complete match",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KoszulReconstruction",
+  "date": "2026-10-21",
+  "group": "W6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulQuotientRoosAugmentation",
+  "file": "lean/Sheaf/Paper/CompletedKoszulQuotientRoosAugmentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulQuotientRoosAugmentation",
+  "statement": "theorem completedKoszulQuotientRoosAugmentation\n    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :\n    ∃ α : reconstructionKoszulFiberFunctor T d r a ⟶\n        (completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ) ⋙\n          ExactProductsRoos.fibre,\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ),\n        CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d) P →\n          QuasiIso (α.app P)) ∧\n      (∀ P : CochainComplex (CompletedAdicModules T d) ℤ,\n        completedAdicKoszulUnitComplex T d r a P ≫ α.app P =\n          (NatTrans.mapHomologicalComplex (reconstructionOrdinaryUnit T d) (.up ℤ)).app P ≫\n            ExactProductsRoos.comparison.app\n              (((completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8e934",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261020T230846-L-622028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8e934",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261020T230846-L-622028",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs live KoszulReconstruction (diff: proof-only change + defeq-checked explicit liftingLift instance), item/comparison/augmentation statements vs their nodes, 3 live direct importers compiled against the delivery, #print axioms of the proved declarations"
+ }
+}

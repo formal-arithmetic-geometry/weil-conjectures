@@ -1,0 +1,104 @@
+{
+ "id": "lem-weil-pbc-koszul-localization-assembly",
+ "kind": "statement",
+ "title": "Localization assembly for the Koszul comparison",
+ "statement": "Let L : C ⥤ D be a functor, W a morphism property and P an object property. Suppose P.ι ⋙ L localizes at the inverse image of W. For functors F,G : D ⥤ E, a natural transformation η : F ⟶ G whose component at every L(X) with P(X) is invertible is the hom of a natural isomorphism. For a further H : D ⥤ E and units uF : H ⟶ F and uG : H ⟶ G, equality uF ≫ e.hom = uG may be checked on these objects.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Precomposition with the localization P.ι ⋙ L is fully faithful by Mathlib Localization.full_whiskeringLeft and faithful_whiskeringLeft. The restricted transformation is an isomorphism by NatIso.isIso_of_isIso_app. Reflection of isomorphisms by fully faithful functors makes η an isomorphism. The second assertion follows by Localization.natTrans_ext applied to uF ≫ e.hom and uG, then evaluating the resulting equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "W6",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M"
+ },
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KoszulReconstructionLocalizationAssembly",
+  "file": "lean/Sheaf/Paper/KoszulReconstructionLocalizationAssembly.lean",
+  "declaration": "AlgebraicGeometry.Scheme.localizationNatTransIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.localizationNatTransIso",
+   "AlgebraicGeometry.Scheme.localizationUnitEq"
+  ],
+  "statement": "theorem AlgebraicGeometry.Scheme.localizationNatTransIso {C D E : Type*} [Category C] [Category D] [Category E] (P : ObjectProperty C) (L : C ⥤ D) (W : MorphismProperty C) [(P.ι ⋙ L).IsLocalization (W.inverseImage P.ι)] (F G : D ⥤ E) (η : F ⟶ G) (hη : ∀ X : P.FullSubcategory, IsIso (η.app (L.obj X.obj))) : ∃ e : F ≅ G, e.hom = η",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "prop-weil-pbc-koszul-reconstruction",
+  "same_as": []
+ },
+ "blueprint_kind": "lemma",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KoszulReconstruction",
+  "date": "2026-10-21",
+  "group": "W6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation from localization is an isomorphism if isomorphism after precomposition",
+   "results": "Localization.liftNatIso; used full/faithful precomposition and isIso_of_fully_faithful directly",
+   "date": "2026-10-21",
+   "verdict": "Mathlib supplies generic ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftNatTrans_app\"",
+   "results": "CategoryTheory.Localization.liftNatTrans_app in Mathlib.CategoryTheory.Localization.Predicate",
+   "date": "2026-10-21",
+   "verdict": "used for unit normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "full_whiskeringLeft|faithful_whiskeringLeft|natTrans_ext|isIso_of_fully_faithful",
+   "results": "Found in Mathlib.CategoryTheory.Localization.Predicate and Functor.FullyFaithful",
+   "date": "2026-10-21",
+   "verdict": "used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural transformation is an isomorphism if its precomposition with a localization functor is an isomorphism",
+   "results": "Eight hits including LocalizerMorphism.isIso_iff_of_hasLeftResolutions, isIso_iff_of_hasRightResolutions and NatTrans.isIso_iff_isIso_app. The current proof uses the generic fully faithful precomposition/reflection API instead of the stronger resolution structures.",
+   "date": "2026-10-21",
+   "verdict": "generic Mathlib ingredients; no need to change the proved assembly"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8e934",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261020T230846-L-622028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8e934",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261020T230846-L-622028",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs live KoszulReconstruction (diff: proof-only change + defeq-checked explicit liftingLift instance), item/comparison/augmentation statements vs their nodes, 3 live direct importers compiled against the delivery, #print axioms of the proved declarations"
+ }
+}

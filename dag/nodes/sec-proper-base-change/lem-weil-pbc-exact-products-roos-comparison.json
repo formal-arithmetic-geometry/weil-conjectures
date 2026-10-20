@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-exact-products-roos-comparison",
+ "blueprint": {
+  "is": null,
+  "from": "prop-weil-pbc-koszul-reconstruction",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The normalized Roos fibre computes derived inverse limit with exact products",
+ "statement": "Let B be an abelian category with countable products, strict inverse limits, exact countable products, and derived categories for B and its strict towers. Suppose the tower category is Grothendieck. Let RF be a functor from the derived category of strict towers to D(B), with a natural comparison η from the ordinary termwise limit followed by Q to Q followed by RF, invertible on every K-injective complex. Form the functorial Roos mapping fibre of minus one-minus-transition, using actual degreewise products of strict tower complexes. There is a natural isomorphism from that fibre followed by Q to Q followed by RF. Its composite with the ordinary-limit kernel inclusion, with zero second coordinate, is exactly η.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0941; the Roos computation and injective-tower argument"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Use product projections and tower naturality to construct the Roos fibre functor and the natural kernel comparison from ordinary limit. Its second coordinate is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a complex of injective strict towers, use the proved split-transition Roos short exact sequence. Negating the final object preserves exactness. The short exact cocone theorem makes its specified kernel inclusion a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "det-pe-milnor-epimorphic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact products imply that homology preserves countable products. Product maps and hence the induced cone and shifted fibre maps preserve quasi-isomorphisms. Resolve towers functorially by K-injectives with injective terms. Compose the fibre resolution map, the inverse kernel comparison on the resolution, and η. Naturality cancels the resolution map and proves the normalization.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-pe-milnor-epimorphic",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0941; the Roos computation and injective-tower argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit of a countable tower product one minus transition Roos complex",
+   "results": "No direct completed-sheaf theorem; existing product and derived-limit declarations located",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnitQ\"",
+   "results": "No direct hit for the full Roos comparison; used the source-library declaration",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|mappingCocone|rightDerivedFunctorUnitQ",
+   "results": "Source-library Roos and mapping-cocone declarations identified and used",
+   "date": "2026-10-21",
+   "verdict": "used local declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism from explicit Roos fibre to right derived inverse limit",
+   "results": "No direct theorem; service search returned no complete match",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KoszulReconstruction",
+  "date": "2026-10-21",
+  "group": "W6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ExactProductsRoosComparison",
+  "file": "lean/Sheaf/Algebra/Homology/ExactProductsRoosComparison.lean",
+  "declaration": "CategoryTheory.ExactProductsRoos.comparisonIso",
+  "statement": "theorem comparisonIso\n    (RF : DerivedCategory (ℕᵒᵖ ⥤ B) ⥤ DerivedCategory B)\n    (η : ordinary ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF)\n    (hI : ∀ I : CochainComplex (ℕᵒᵖ ⥤ B) ℤ, I.IsKInjective → IsIso (η.app I)) :\n    ∃ e : fibre ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ RF,\n      Functor.whiskerRight comparison DerivedCategory.Q ≫ e.hom = η",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8e934",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261020T230846-L-622028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8e934",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261020T230846-L-622028",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs live KoszulReconstruction (diff: proof-only change + defeq-checked explicit liftingLift instance), item/comparison/augmentation statements vs their nodes, 3 live direct importers compiled against the delivery, #print axioms of the proved declarations"
+ }
+}

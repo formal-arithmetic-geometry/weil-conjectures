@@ -1,0 +1,137 @@
+{
+ "id": "prop-weil-pbc-koszul-reconstruction-comparison",
+ "blueprint": {
+  "is": null,
+  "from": "prop-weil-pbc-koszul-reconstruction",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Comparison of completed Koszul and quotient derived limits",
+ "statement": "For a completed adic coefficient datum d on A and a finite family a generating d.ideal, the explicit completed Koszul derived functor is naturally isomorphic to the derived strict quotient inverse-limit functor, and this isomorphism carries the explicit Koszul unit to the independently normalized quotient completion unit.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, together with Tag 0941 and Algebraization Tag 091N"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the derived categories to K-flat representatives, use right-fraction density and localization descent, and form the comparison from the completed strict Koszul-to-quotient Roos augmentation and the normalized Roos derived-limit comparison.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation",
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "lem-pc-kflat-resolution",
+    "lem-trf-right-fraction-dense-subcategory",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-koszul-reconstruction-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The augmentation is a quasi-isomorphism on K-flat models and the reduction counit is invertible there; therefore the descended comparison is an isomorphism. Its unit equality follows from the chain augmentation equation, the Roos normalization, and the chosen K-flat formula for the quotient completion unit.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation",
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "def-weil-pbc-derived-reduction-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic localization assembly reflects isomorphisms under fully faithful precomposition, and extends the unit equality from the K-flat subcategory using localization faithfulness. Its two helper theorems are proved from Mathlib.",
+   "uses": [
+    "lem-weil-pbc-koszul-localization-assembly"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-koszul-quotient-roos-augmentation",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-trf-right-fraction-dense-subcategory",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-koszul-reconstruction-models",
+  "def-weil-pbc-derived-reduction-model-data",
+  "lem-weil-pbc-koszul-localization-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M; W6 localization and unit-normalization proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit of a countable tower product one minus transition Roos complex",
+   "results": "No direct completed-sheaf theorem; existing product and derived-limit declarations located",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnitQ\"",
+   "results": "No direct hit for the full Roos comparison; used the source-library declaration",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|mappingCocone|rightDerivedFunctorUnitQ",
+   "results": "Source-library Roos and mapping-cocone declarations identified and used",
+   "date": "2026-10-21",
+   "verdict": "used local declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism from explicit Roos fibre to right derived inverse limit",
+   "results": "No direct theorem; service search returned no complete match",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KoszulReconstruction",
+  "date": "2026-10-21",
+  "group": "W6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KoszulReconstructionComparison",
+  "file": "lean/Sheaf/Paper/KoszulReconstructionComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.koszulReconstructionComparison",
+  "statement": "theorem koszulReconstructionComparison (r : ℕ) (a : Fin r → A) (_ha : Ideal.span (Set.range a) = d.ideal) : ∃ c : reconstructionKoszulDerivedFunctor T d r a ≅ completedAdicReduction T d ⋙ reconstructionRlim T d, ∀ K : DerivedCategory (CompletedAdicModules T d), (reconstructionKoszulDerivedUnit T d r a).app K ≫ c.hom.app K = (reconstructionCompletionUnit T d).app K",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8e934",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261020T230846-L-622028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8e934",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261020T230846-L-622028",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs live KoszulReconstruction (diff: proof-only change + defeq-checked explicit liftingLift instance), item/comparison/augmentation statements vs their nodes, 3 live direct importers compiled against the delivery, #print axioms of the proved declarations"
+ }
+}
