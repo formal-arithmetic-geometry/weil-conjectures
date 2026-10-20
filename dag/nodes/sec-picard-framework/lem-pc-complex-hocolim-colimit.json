@@ -26,14 +26,14 @@
  ],
  "proof": [
   {
-   "text": "Let u = telescopeShift and q = telescopeToColimit. On summand n the composite u q is colimit.ι_n minus E(n≤n+1) followed by colimit.ι_(n+1), hence zero by the colimit cocone identity.",
+   "text": "Let u = telescopeColimitShift and q = telescopeToColimit. On summand n the composite u q is colimit.ι_n minus E(n≤n+1) followed by colimit.ι_(n+1), hence zero by the colimit cocone identity.",
    "uses": [
     "def-pc-cochain-complex-modules"
    ],
    "elementary": true
   },
   {
-   "text": "Construct the cokernel cofork of u with projection q. A cofork p annihilating u gives maps a_n = ι_n p satisfying a_n = E(n≤n+1)a_(n+1). Induction extends this relation to every n≤m, so the a_n form a cocone. The colimit universal property supplies the unique factorization through q, verified on coproduct injections. The Lean helper telescope_cokernel carries this explicit construction.",
+   "text": "Construct the cokernel cofork of u with projection q. A cofork p annihilating u gives maps a_n = ι_n p satisfying a_n = E(n≤n+1)a_(n+1). Induction extends this relation to every n≤m, so the a_n form a cocone. The colimit universal property supplies the unique factorization through q, verified on coproduct injections. The source-library Lean helper telescope_cokernel carries this explicit construction.",
    "uses": [
     "def-pc-cochain-complex-modules"
    ],
@@ -122,19 +122,20 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chc2244 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0949 (derived.tex 10352): agrees; no hocolim definition node exists, so the inline definition restates nothing (no class b). Step 1 injectivity of 1-shift and cokernel = termwise colimit: elementary, correct (C1 ok). FIX more, RETURN less: (1) C1/E: Step 2 contracting homotopy (a,b)->(0,a) was ill-degreed and wrong (missed by the Second reading); replaced by h(u(c),k)=(0,c) with dh+hd=1 verified. (2) C4: cone rewritten in the convention of def-weil-abstract-derived-category, C(u)^r=A^r+A^{r+1}, d=(d_L, u; 0, -d); quasi-iso concluded by the long exact cohomology sequence (Stacks 0117, elementary) of 0->K->C(u)->coker->0; step marked elementary, uses/proof_deps add def-weil-abstract-derived-category. (3) source/proof_origin still named 06YS (K-flat resolution) despite the Second reading's claim; corrected to derived.tex Lemma 0949.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Algebra.Homology.TelescopeColimit",
+  "module": "WeilConjectures.Algebra.Homology.TelescopeColimit",
   "declaration": "CochainComplex.quasiIso_telescopeColimit",
-  "file": "lean/Sheaf/Algebra/Homology/TelescopeColimit.lean",
-  "statement": "theorem quasiIso_telescopeColimit : ∃ f : mappingCone (telescopeShiftColimit R E) ⟶ colimit E, mappingCone.inr (telescopeShiftColimit R E) ≫ f = telescopeToColimit R E ∧ (mappingCone.inl (telescopeShiftColimit R E)).comp (Cochain.ofHom f) (add_zero _) = 0 ∧ QuasiIso f",
+  "file": "lean/WeilConjectures/Algebra/Homology/TelescopeColimit.lean",
+  "statement": "theorem quasiIso_telescopeColimit : ∃ f : mappingCone (telescopeColimitShift R E) ⟶ colimit E, mappingCone.inr (telescopeColimitShift R E) ≫ f = telescopeToColimit R E ∧ (mappingCone.inl (telescopeColimitShift R E)).comp (Cochain.ofHom f) (add_zero _) = 0 ∧ QuasiIso f",
   "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-11",
-  "existing": false,
+  "by": "M4",
+  "date": "2026-10-20",
+  "existing": true,
   "declarations": [
-   "CochainComplex.telescopeShiftColimit",
+   "CochainComplex.telescopeColimitShift",
    "CochainComplex.telescopeToColimit",
    "CochainComplex.quasiIso_telescopeColimit"
-  ]
+  ],
+  "note": "Consolidated onto the proved source module. Sheaf.Algebra.Homology.TelescopeColimit re-exports it and keeps telescopeShiftColimit as a definitionally equal abbreviation of telescopeColimitShift. All canonicality clauses are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -157,13 +158,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-1976a",
-  "group": "U3",
+  "reviewer": "C-f4e6a",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261012T135324-L-1696045",
+  "landing": "20261020T150655-L-2567895",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly, target signatures and node statements match, and the required direct importer compiles against the delivery."
+  "note": "independent cc review: Delivered Sheaf.Algebra.Homology.TelescopeColimit (re-export plus abbrev) against the proved WeilConjectures.Algebra.Homology.TelescopeColimit: rfl probes of old shift/colimit formulas, old existential closed by the source theorem, axioms clean; both direct importers compile; node lean record matches the source theorem"
  }
 }
