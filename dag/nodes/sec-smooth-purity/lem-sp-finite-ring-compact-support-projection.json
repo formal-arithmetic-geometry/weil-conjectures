@@ -59,10 +59,9 @@
    }
   },
   {
-   "text": "Set $H=E\\otimes_R^{\\mathbf L}p_{\\mathrm{et}}^{-1}K_0$ in the unbounded etale derived category. The pullback comparison [lem-weil-pbc-comparison-pullback], applied termwise, and the unbounded tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] give $A_{\\bar X}H\\cong A_{\\bar X}E\\otimes_R^{\\mathbf L}Lp^*A_YK_0$. The same tensor comparison identifies $A_Y(Rp_{\\mathrm{et},*}E\\otimes_R^{\\mathbf L}K_0)$ with $A_YRp_{\\mathrm{et},*}E\\otimes_R^{\\mathbf L}A_YK_0$. The comparison inverse images here are exact, as recorded in Step 1, and the geometric inverse images with identified constant coefficients are the exact functors specified in the item. These comparisons apply even when $H$ is unbounded below.",
+   "text": "Work in fixed-scalar module sheaves, exactly the coefficient presentation in the definition of finiteRingCompactSupportProjection, and transport the result through the canonical intrinsic realization equivalence at the end. Set H = E tensor-derived p* K0 in the unbounded etale category. The source-library theorem comparisonCompatible_leftDerivedComparisonUpperStarCompUpperStarIso identifies the composites of the canonical tensor comparisons through the derived pullback square. It is proved by the monoidality of the underived comparison square and the generic derived-tensor composition theorem. This supplies the tensor and pullback identifications directly in fixed coefficients, including for unbounded H, without instantiating the general ringed-topos interface.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-weil-pbc-comparison-pullback"
    ],
    "elementary": false,
    "source": {
@@ -84,11 +83,9 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the commutative ringed-topos square whose top and bottom horizontal maps are $\\nu_{\\bar X},\\nu_Y$ and whose vertical maps are $p_{\\mathrm{proet}},p_{\\mathrm{et}}$. The coefficient rings are the constant sheaves $R$, with their canonical identifications under inverse image. No cartesian-square hypothesis is required by the cited statement. Its exchange is the mate defining $b$, so, using the tensor/pullback identifications of Step 3, its equality reads\n$$\\pi_p(A_{\\bar X}E,A_YK_0)\\circ(b_E\\otimes1)=b_H\\circ A_Y(\\mathrm{PF}^{\\mathrm{et}}_p(E,K_0)).$$\nBoth $b_E\\otimes1$ and the right side are invertible by Step 4 and functoriality of tensor and $A_Y$. Hence the specified proper projection map is invertible. By naturality and the isomorphisms in Steps 1 and 2, this is precisely invertibility of $\\pi_p$ at $(j_!M,K)$, rather than only an abstract isomorphism between its source and target.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
-   ],
-   "elementary": false,
+   "text": "Use CategoryTheory.Adjunction.isIso_rightAdjointProjectionMap_of_mateEquiv with the specialized comparisonCompatible_leftDerivedComparisonUpperStarCompUpperStarIso. A private proved helper first identifies the exact-inverse-image derived adjunction with the K-flat left-derived adjunction, by their derived-unit factorizations on the homotopy localization. A second private proved helper unfolds the canonical pullback-square isomorphisms and uses naturality and cancellation to identify the unbounded comparison map with the mate used in the categorical projection-transport theorem, conjugated by the canonical isomorphisms Lnu* = Dnu*. Step 4 therefore makes the actual mates invertible at E and H. The categorical theorem proves invertibility of the specified pro-etale proper projection at (Lnu*E,Lnu*K0). Naturality transports it through the origin and open-extension comparison isomorphisms to (j!M,K), in fixed-scalar presentation. No bounded-below claim for H and no arbitrary isomorphism of endpoints is used.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 0E48, remark-compatible-with-diagram, applied to the etale/pro-etale comparison square"
@@ -112,17 +109,15 @@
   "lem-cbc-proetale-extension-zero",
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-kun-0f0g",
   "def-kun-projection-formula-map",
   "lem-sfb-unbounded-direct-image-comparison",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
   "lem-cbc-extension-zero-projection-formula"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-  "place": "Proof (3), tensor-map paragraph; expanded using Stacks 09AL, 07A4, 0F0G, 0E48 and the existing unbounded direct-image comparison"
+  "place": "Proof (3), tensor-map paragraph; expanded using Stacks 09AL, 07A4, 0F0G, 0E48 and the existing unbounded direct-image comparison; fixed-coefficient tensor and projection-mate compatibility use the proved source-library LowerStarProjComparison and ProjectionMapMate interfaces; private derived-adjunction normalization proved in Lean by F6"
  },
  "mathlib_searches": [
   {
@@ -319,10 +314,8 @@
   "lem-cbc-proetale-extension-zero",
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-kun-0f0g",
   "lem-sfb-unbounded-direct-image-comparison",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
   "lem-cbc-extension-zero-projection-formula"
  ],
  "reviewed": {
@@ -355,5 +348,15 @@
   "existing": false,
   "note": "The actual canonical compactification projection natural transformation is transported through the published coefficient-realization equivalence into intrinsic constant-ring derived categories. The hypotheses use intrinsic constructibility of each cohomology sheaf and a finite cohomological range, without etale-origin, finite-Tor, flatness or DVR hypotheses. The given open and proper maps are packaged as c.i and c.g in an arbitrary Compactification f, with c.comm recording f = c.i ≫ c.g."
  },
- "lead_note": "2026-10-18 L (maintenance, the human): the definitions of its module moved to Sheaf.Paper.FiniteRingCompactSupportProjectionMap (def-sp-finite-ring-compact-support-projection-map); statements cite that node, not this lemma"
+ "lead_note": "2026-10-18 L (maintenance, the human): the definitions of its module moved to Sheaf.Paper.FiniteRingCompactSupportProjectionMap (def-sp-finite-ring-compact-support-projection-map); statements cite that node, not this lemma",
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261020T211710-L-3489856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

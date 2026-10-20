@@ -18,7 +18,13 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
   "place": "the projection arrow of Proof (3) (the definition of the lemma's module)"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Store the existing abelian structure and derived-category model for fixed scalar sheaves, and derive the original canonical realization equivalence using those structures. Its functor and inverse are the original derived functors: Equivalence.mapDerivedCategory is constructed with exactly these two functors. Name the source and target bifunctors of the published fixed-coefficient compactification projection. Realize that same transformation by precomposition with inverse realization and postcomposition with realization. The generic realization API uses the original whiskering and postcomposition formula. Its component is the image of the original component, so Functor.map_isIso proves the component API. All these factorizations preserve the canonical morphism and introduce no choices of a projection-formula isomorphism. A local CommRing.toRing priority keeps abstract scalar rings and their ULift specializations on the same standard ring structure; it changes neither the coefficient ring nor the canonical arrow.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
  "mathlib_match": null,
  "mathlib_searches": [],
@@ -52,6 +58,14 @@
   "module": "Sheaf.Paper.FiniteRingCompactSupportProjectionMap",
   "declaration": "AlgebraicGeometry.Scheme.finiteRingCompactSupportProjection",
   "declarations": [
+   "AlgebraicGeometry.Scheme.sfRealizeCompactificationProjection",
+   "AlgebraicGeometry.Scheme.isIso_sfRealizeCompactificationProjection_app_app",
+   "AlgebraicGeometry.Scheme.sfFixedSheafAbelian",
+   "AlgebraicGeometry.Scheme.sfFixedDerivedCategoryModel",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedModuleEquivalence",
+   "AlgebraicGeometry.Scheme.sfFixedCompactificationProjectionSource",
+   "AlgebraicGeometry.Scheme.sfFixedCompactificationProjectionTarget",
+   "AlgebraicGeometry.Scheme.sfFixedCompactificationProjection",
    "AlgebraicGeometry.Scheme.finiteRingCompactSupportProjection"
   ],
   "file": "lean/Sheaf/Paper/FiniteRingCompactSupportProjectionMap.lean",
@@ -59,6 +73,21 @@
   "by": "L",
   "date": "2026-10-18",
   "existing": true,
-  "note": "declarations moved unchanged from the lemma's module (maintenance, 2026-10-18)"
+  "note": "The original canonical projection is factored through a generic bifunctor-realization API. F6 stores the standard fixed-scalar sheaf abelian structure, its existing small derived-category model, the original derived realization equivalence, and the fixed projection endpoints, to keep repeated categorical data out of conversion. The canonical counit-defined arrow and all its mathematical assumptions are unchanged."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "The projection arrow of Proof (3); implementation API by F6: the existing sheaf abelian structure and derived localization model, derivation of the existing realization equivalence, and functorial whiskering, postcomposition and map_isIso."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261020T211710-L-3489856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
