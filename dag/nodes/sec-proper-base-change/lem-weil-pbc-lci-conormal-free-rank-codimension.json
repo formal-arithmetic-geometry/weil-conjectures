@@ -33,7 +33,7 @@
  ],
  "proof": [
   {
-   "text": "Use the principal-localization prime-spectrum range theorem to obtain a prime p above q. This proves S_g nonzero, rules out the zero-ring branch of the global complete intersection definition, and yields m,t,f, t ≤ m, an algebra isomorphism e : k[y]/(f) ≃ S_g, and dim Spec(S_g)=m-t.",
+   "text": "Use the principal-localization prime-spectrum range theorem to obtain a prime p above q. This proves S_g nonzero, rules out the zero-ring branch of the global complete intersection definition, and yields m,t,f, t ≤ m, an algebra isomorphism e : k[y]/(f) ≃ S_g, and dim Spec(S_g)=m-t. The official theorem performs this construction inline, without the retired private helper principal_ci_presentation_dimension.",
    "uses": [
     "def-weil-ring-localization-away",
     "def-weil-pbc-complete-intersection-over-field",
@@ -90,7 +90,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 00SC (lemma-lci, line 35909), implication (1) => (4): last paragraph of its proof, with Lemma 00P2 (lemma-codimension, line 28270) replaced by the equidimensionality of global complete intersections (paragraph after Definition 00S9) since the statement uses d = dim_q Spec S directly; A4 Lean reduction: concrete stable comparison split off, open-embedding dimension transport reused from the existing private theorem Algebra.dimAt_openEmbedding via import all of its defining upstream module WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension, final local freeness and rank computed with Mathlib finrank rather than a residue-field tensor calculation"
+  "place": "Algebra, Lemma 00SC (lemma-lci, line 35909), implication (1) => (4): last paragraph of its proof, with Lemma 00P2 (lemma-codimension, line 28270) replaced by the equidimensionality of global complete intersections (paragraph after Definition 00S9) since the statement uses d = dim_q Spec S directly; A4 Lean reduction: concrete stable comparison split off, open-embedding dimension transport reused from the existing private theorem Algebra.dimAt_openEmbedding via import all of its defining upstream module WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension, final local freeness and rank computed with Mathlib finrank rather than a residue-field tensor calculation; K5 retirement 2026-10-21: the same argument is already proved in the official module WeilConjectures.RingTheory.LciConormalFreeRankCodimension, with the presentation-dimension argument inline, and both field-change consumers now import that module. No mathematical dependency or unit step is removed."
  },
  "mathlib_searches": [
   {
@@ -150,15 +150,16 @@
   "note": "6 steps following the last paragraph of Stacks 00SC (1)=>(4): the prime of S_g and its localization; d = m - t via the open immersion Spec S_g -> Spec S and the equidimensionality of global complete intersections (new unsplit node, Section 00S8); the f_i form a regular sequence in k[y]_{q''} (new unsplit node from the proof of 00SB) and J/J^2 is free on them (new unsplit 00LN (1) node); localization of the conormal module; the comparison (I/I^2)_g + S_g^m = J/J^2 + S_g^n (new unsplit 00S6 node); a direct summand of a finite free module over the local ring S_q is free, of rank t + n - m = n - d >= 0. L checked the two new statements on the source: all components of a global complete intersection have dimension m - t, and t elements generating an ideal of height t in a Cohen-Macaulay local ring form a regular sequence."
  },
  "lean": {
-  "module": "Sheaf.RingTheory.LciConormalFreeRankCodimension",
+  "module": "WeilConjectures.RingTheory.LciConormalFreeRankCodimension",
   "declaration": "Ideal.exists_basis_cotangent_localization_of_completeIntersection",
-  "file": "lean/Sheaf/RingTheory/LciConormalFreeRankCodimension.lean",
+  "file": "lean/WeilConjectures/RingTheory/LciConormalFreeRankCodimension.lean",
   "statement": "theorem exists_basis_cotangent_localization_of_completeIntersection {k : Type u} [Field k] (n : ℕ) (I : Ideal (MvPolynomial (Fin n) k)) (q : PrimeSpectrum (MvPolynomial (Fin n) k ⧸ I)) (hci : ∃ g : MvPolynomial (Fin n) k ⧸ I, g ∉ q.asIdeal ∧ Algebra.IsGlobalCompleteIntersection k (Localization.Away g)) : ∃ d : ℕ, topologicalKrullDimAt q = (d : WithBot ℕ∞) ∧ d ≤ n ∧ Nonempty (Module.Basis (Fin (n - d)) (Localization.AtPrime q.asIdeal) (LocalizedModule q.asIdeal.primeCompl I.Cotangent))",
   "branch": "sheaf-dag",
   "by": "E1",
   "date": "2026-10-11",
-  "existing": false,
-  "fixed_by": "R-lcf1105"
+  "existing": true,
+  "fixed_by": "R-lcf1105",
+  "note": "K5 retirement (2026-10-21): the official upstream theorem has the identical public signature. The old copy is withdrawn and both current consumers import the official module. The extra principal_ci_presentation_dimension declaration in the copy was private and has no consumers; its argument is inline in the official theorem."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -169,13 +170,13 @@
   "note": "k field/Type u; n:ℕ; P=MvPolynomial (Fin n) k; I ideal; S=P⧸I literal; q:PrimeSpectrum S; ∃g∉q with landed Algebra.IsGlobalCompleteIntersection k (Localization.Away g) (00S9 incl. zero ring); d via topologicalKrullDimAt (not local-ring dim), d:ℕ, d≤n; I.Cotangent localized at q.primeCompl with Basis Fin (n-d) over Localization.AtPrime (free of rank n-d, finite); truth checked via equidimensionality; dead local instance moduleOfIsLocalization removed (synth picks OreLocalization.instModule anyway)"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J2",
+  "reviewer": "C-b55b7",
+  "group": "K5",
   "result": "pass",
-  "landing": "20261017T021602-L-694781",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221236-L-4162976",
+  "kind": "interface",
+  "note": "independent cc review: Sheaf copy's Ideal.exists_basis_cotangent_localization_of_completeIntersection vs the official WeilConjectures twin (identical signature and public imports); node lean record vs twin; the 2 direct importers compiled with the swapped import"
  }
 }

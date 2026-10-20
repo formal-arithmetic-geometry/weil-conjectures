@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.TraceFormula.EssentiallyFiniteTypeCIKernelInvariance
 import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
-import Sheaf.RingTheory.LciConormalFreeRankCodimension
+import WeilConjectures.RingTheory.LciConormalFreeRankCodimension
 import Sheaf.RingTheory.ConormalGeneratorsGlobalCompleteIntersection
 import WeilConjectures.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
 import Mathlib.Algebra.MvPolynomial.Basic
