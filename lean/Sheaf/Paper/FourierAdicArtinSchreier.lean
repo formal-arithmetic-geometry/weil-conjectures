@@ -18,6 +18,9 @@ public import WeilConjectures.FourierTransform.ArtinSchreier
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import WeilConjectures.FourierTransform.Defs
 
+import Sheaf.Paper.EtaleIntegralLineDerivedComplete
+import Sheaf.Paper.EtaleIntegralLineReductions
+
 /-!
 # Integral adic realization of the Artin--Schreier sheaf
 
@@ -107,7 +110,54 @@ theorem fourierIntegralCharacter_existsUnique (F : FourierSetting.{u})
         (ULift.{u + 1} (Padic.coefficientExtensionIntegers F.coefficients.l
           (fourierCoefficient F))),
       ∀ a, fourierCoefficientEmbedding F (χ a).down.val = Ψ a := by
-  sorry
+  classical
+  let e := Shrink.algEquiv (Padic F.coefficients.l) F.extension
+  have hp (a : ZMod F.field.p) : Ψ a ^ F.field.p = 1 := by
+    rw [← AddChar.map_nsmul_eq_pow, nsmul_eq_mul, CharP.cast_eq_zero, zero_mul,
+      AddChar.map_zero_eq_one]
+  have hmem (a : ZMod F.field.p) : Ψ a ∈ F.extension := by
+    exact F.rootsOfUnity_mem ⟨(Ψ.val_isUnit a).unit, by
+      simpa only [mem_rootsOfUnity', IsUnit.unit_spec] using hp a⟩
+  let ψE : AddChar (ZMod F.field.p) F.extension :=
+    { toFun := fun a ↦ ⟨Ψ a, hmem a⟩
+      map_zero_eq_one' := by ext; exact Ψ.map_zero_eq_one
+      map_add_eq_mul' := fun a b ↦ Subtype.ext (Ψ.map_add_eq_mul a b) }
+  let ψ := e.symm.toMonoidHom.compAddChar ψE
+  have hψ (a : ZMod F.field.p) : fourierCoefficientEmbedding F (ψ a) = Ψ a := by
+    change (e (e.symm (ψE a))).val = Ψ a
+    rw [e.apply_symm_apply]
+    rfl
+  have hinj : Function.Injective (fourierCoefficientEmbedding F) :=
+    (fourierCoefficientEmbedding F).injective
+  have hint (a : ZMod F.field.p) :
+      ψ a ∈ Padic.coefficientExtensionIntegers F.coefficients.l (fourierCoefficient F) := by
+    apply ((Padic.extension_integers_dvr F.coefficients.l (fourierCoefficient F)
+      (Padic.coefficientExtensionAbsoluteValue F.coefficients.l (fourierCoefficient F))
+      (spectralNorm_extends (K := ℚ_[F.coefficients.l])
+        (L := fourierCoefficient F))).choose_spec.choose_spec.1 _).mpr
+    have hpow : ψ a ^ F.field.p = 1 := by
+      apply hinj
+      simpa only [map_pow, map_one, hψ] using hp a
+    have habs := congrArg
+      (Padic.coefficientExtensionAbsoluteValue F.coefficients.l (fourierCoefficient F)) hpow
+    rw [map_pow, map_one] at habs
+    have habs1 := (pow_left_inj₀ (apply_nonneg _ _) zero_le_one F.field.prime.ne_zero).mp
+      (habs.trans (one_pow _).symm)
+    exact habs1.le
+  let χ : AddChar (ZMod F.field.p)
+      (ULift.{u + 1} (Padic.coefficientExtensionIntegers F.coefficients.l
+        (fourierCoefficient F))) :=
+    { toFun := fun a ↦ ULift.up ⟨ψ a, hint a⟩
+      map_zero_eq_one' := by apply ULift.ext; apply Subtype.ext; exact ψ.map_zero_eq_one
+      map_add_eq_mul' := fun a b ↦ by
+        apply ULift.ext; apply Subtype.ext; exact ψ.map_add_eq_mul a b }
+  refine ⟨χ, hψ, ?_⟩
+  intro χ' hχ'
+  apply AddChar.ext
+  intro a
+  apply ULift.ext
+  apply Subtype.ext
+  exact hinj ((hχ' a).trans (hψ a).symm)
 
 /-- The uniquely specified lift; no character is chosen from mere existence.
 Source: main-20261015 sk-def-as (blueprint: def-fd-adic-fourier-realization). -/
@@ -123,7 +173,20 @@ and is a unit. The ring isomorphism ULift preserves units. -/
 theorem fourierIntegerPrime_isUnit (F : FourierSetting.{u}) :
     IsUnit (F.field.p : ULift.{u + 1}
       (Padic.coefficientExtensionIntegers F.coefficients.l (fourierCoefficient F))) := by
-  sorry
+  have hunit : IsUnit (F.field.p :
+      Padic.coefficientExtensionIntegers F.coefficients.l (fourierCoefficient F)) := by
+    apply ((Padic.extension_integers_dvr F.coefficients.l (fourierCoefficient F)
+      (Padic.coefficientExtensionAbsoluteValue F.coefficients.l (fourierCoefficient F))
+      (spectralNorm_extends (K := ℚ_[F.coefficients.l])
+        (L := fourierCoefficient F))).choose_spec.choose_spec.2.2.1 _).mpr
+    change spectralNorm ℚ_[F.coefficients.l] (fourierCoefficient F) (F.field.p :
+      fourierCoefficient F) = 1
+    rw [← map_natCast (algebraMap ℚ_[F.coefficients.l] (fourierCoefficient F)),
+      spectralNorm_extends, Padic.norm_natCast_eq_one_iff]
+    exact (Fact.out : F.coefficients.l.Prime).coprime_iff_not_dvd.mpr
+      (fun h ↦ F.coefficients.different ((F.field.prime.eq_one_or_self_of_dvd
+        F.coefficients.l h).resolve_left (Fact.out : F.coefficients.l.Prime).ne_one))
+  exact hunit.map ULift.ringEquiv.symm.toRingHom
 
 /-- The canonical inverse of p, supplied by its unit property.
 Source: sk-def-as (blueprint: def-fd-adic-fourier-realization). -/
@@ -145,6 +208,34 @@ def fourierAdicArtinSchreier (F : FourierSetting.{u}) (X : Scheme.{u})
     (fourierCompletedRealization F.coefficients.l (fourierCoefficient F) X
       (Etale.artinSchreierSheafZMod X (fourierIntegralCharacter F Ψ) b))
 
+private theorem artinSchreierSheafOf_trivializingCover
+    {k : Type u} [Field k] [Fintype k] {Λ : Type (u + 1)} [CommRing Λ]
+    [Invertible (Fintype.card k : Λ)] (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    (Ψ : AddChar k Λ) (b : Γ(X, ⊤)) :
+    ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i : 𝒰.I₀,
+      Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj
+        (Etale.artinSchreierSheafOf X Ψ b) ≅
+        (constantSheaf (𝒰.X i).smallEtaleTopology
+          (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) := by
+  let A := ModuleCat.{u + 1} Λ
+  let f := AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ : PUnit ↦ b
+  let g := AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k)
+  let 𝒱 : Cover.{u} etalePrecoverage (AffineSpace PUnit (Spec (.of k))) :=
+    .singleton g ((Scheme.singleton_mem_precoverage_iff (P := @Etale) _).2
+      ⟨AffineSpace.surjective_artinSchreierMap k, Etale.etale_artinSchreierMap (k := k)⟩)
+  refine ⟨𝒱.pullback₂ f, fun i ↦ ⟨?_⟩⟩
+  change (Etale.upperStar A (pullback.snd g f)).obj
+    ((Etale.upperStar A f).obj (Etale.artinSchreierSheaf Ψ)) ≅ _
+  exact ((Etale.upperStarComp A (pullback.snd g f) f).app _).symm ≪≫
+    eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj
+      (Etale.artinSchreierSheaf Ψ)) pullback.condition.symm) ≪≫
+    (Etale.upperStarComp A (pullback.fst g f) g).app _ ≪≫
+    (Etale.upperStar A (pullback.fst g f)).mapIso
+      (Etale.artinSchreierSheafUpperStarIso Ψ ≪≫
+        Functor.Monoidal.εIso (presheafToSheaf _ A)) ≪≫
+    (Scheme.upperStarConstantSheafIso A (pullback.fst g f)).app (ModuleCat.of Λ Λ)
+
+
 /-- Membership of this actual construction in the intrinsic integral category.
 Source: main-20261015 sk-def-as and def-fourier-set's adic convention
 (blueprint: def-fd-adic-fourier-realization).
@@ -158,7 +249,14 @@ theorem fourierAdicArtinSchreier_mem (F : FourierSetting.{u}) (X : Scheme.{u})
     (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (b : Γ(X, ⊤)) :
     sfIntegralConstructible F.coefficients.l (fourierCoefficient F) X
       (fourierAdicArtinSchreier F X Ψ b) := by
-  sorry
+  let := fourierIntegerPrimeInvertible F
+  let := X.overSpecZModOfCharP F.field.p
+  let χ := (fourierIntegralCharacter F Ψ).compAddMonoidHom AddEquiv.ulift.toAddMonoidHom
+  have hH := artinSchreierSheafOf_trivializingCover X χ b
+  refine ⟨etaleIntegralLine_derivedComplete F.coefficients.l (fourierCoefficient F) X
+    (Etale.artinSchreierSheafOf X χ b) hH, 0, 0, le_rfl, ?_⟩
+  exact etaleIntegralLine_reductions F.coefficients.l (fourierCoefficient F) X
+    (Etale.artinSchreierSheafOf X χ b) hH
 
 /-- The actual Fourier kernel in the adic common-stage category. V and V' may be
 any S-schemes with a characteristic-p pairing; evaluation is the application.

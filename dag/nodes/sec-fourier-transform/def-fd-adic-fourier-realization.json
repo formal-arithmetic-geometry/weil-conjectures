@@ -1,153 +1,222 @@
 {
-  "id": "def-fd-adic-fourier-realization",
-  "title": "Completed adic realization of the Fourier character sheaves",
-  "kind": "definition",
-  "status": "split",
-  "statement": "Fix a Fourier setting [def-fourier-set]: distinct primes $p,\\ell$, $q=p^a$ with $a\\geq1$, $k_0=\\mathbf F_q$, its algebraic closure $k$, and a finite extension $E\\subset\\overline{\\mathbf Q}_\\ell$ containing $\\mu_p$. Let $\\Psi:(\\mathbf F_p,+)\\to\\overline{\\mathbf Q}_\\ell^\\times$ be any additive character, including the trivial one. Its values have a unique lift to $\\mathcal O_E^\\times$ through the fixed embedding; use that lift, with the canonical inverse of $p$ in $\\mathcal O_E$, in the existing prime-field idempotent-image Artin--Schreier construction [def-fd-artin-schreier-sheaf]. For a scheme $X$ of characteristic $p$ and $b\\in\\Gamma(X,\\mathcal O_X)$, pull that integral étale sheaf to the small pro-étale site, identify constant-ring module sheaves with modules over the constant coefficient sheaf, and extend scalars through the canonical constant-to-completion map to $\\widehat{\\mathcal O}_{E,X}$ [def-weil-completed-integral-coefficients]. This ordinary scalar extension, placed in degree zero, defines $\\mathcal L^{\\mathrm{adic}}_{\\Psi,b}$. If $X$ is Noetherian it is in $D^b_c(X,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]: the finite étale torsor makes it the completed free rank-one sheaf, so its reductions are the rank-one character summands in degree zero, with uniform amplitude $[0,0]$. For $V\\xrightarrow{\\pi}S\\xleftarrow{\\pi'}V'$ with $V\\times_SV'$ Noetherian of characteristic $p$ and pairing function $b$, apply this realization to the already defined Fourier kernel [def-fd-kernel], then rationalize and include it at the fixed finite stage $E$ in the common-stage category [def-weil-algebraically-closed-coefficients]; call the resulting object $\\mathcal K^{\\mathrm{adic}}_{\\Psi,b}$. For $K\\in D^b_c(V,\\overline{\\mathbf Q}_\\ell)$ and $\\ell$ invertible on both source and product, its Fourier integrand is the existing common-stage derived tensor $L\\operatorname{pr}_1^*K\\otimes^L\\mathcal K^{\\mathrm{adic}}_{\\Psi,b}$ [def-weil-derived-pullback-tensor-hom]. The general completed-realization construction is also defined for an arbitrary étale $\\mathcal O_E$-module sheaf, without claiming constructibility for that arbitrary input.",
-  "stmt_deps": [
-    "def-fourier-set",
+ "id": "def-fd-adic-fourier-realization",
+ "title": "Completed adic realization of the Fourier character sheaves",
+ "kind": "definition",
+ "status": "split",
+ "statement": "Fix a Fourier setting [def-fourier-set]: distinct primes $p,\\ell$, $q=p^a$ with $a\\geq1$, $k_0=\\mathbf F_q$, its algebraic closure $k$, and a finite extension $E\\subset\\overline{\\mathbf Q}_\\ell$ containing $\\mu_p$. Let $\\Psi:(\\mathbf F_p,+)\\to\\overline{\\mathbf Q}_\\ell^\\times$ be any additive character, including the trivial one. Its values have a unique lift to $\\mathcal O_E^\\times$ through the fixed embedding; use that lift, with the canonical inverse of $p$ in $\\mathcal O_E$, in the existing prime-field idempotent-image Artin--Schreier construction [def-fd-artin-schreier-sheaf]. For a scheme $X$ of characteristic $p$ and $b\\in\\Gamma(X,\\mathcal O_X)$, pull that integral étale sheaf to the small pro-étale site, identify constant-ring module sheaves with modules over the constant coefficient sheaf, and extend scalars through the canonical constant-to-completion map to $\\widehat{\\mathcal O}_{E,X}$ [def-weil-completed-integral-coefficients]. This ordinary scalar extension, placed in degree zero, defines $\\mathcal L^{\\mathrm{adic}}_{\\Psi,b}$. If $X$ is Noetherian it is in $D^b_c(X,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]: the finite étale torsor makes it the completed free rank-one sheaf, so its reductions are the rank-one character summands in degree zero, with uniform amplitude $[0,0]$. For $V\\xrightarrow{\\pi}S\\xleftarrow{\\pi'}V'$ with $V\\times_SV'$ Noetherian of characteristic $p$ and pairing function $b$, apply this realization to the already defined Fourier kernel [def-fd-kernel], then rationalize and include it at the fixed finite stage $E$ in the common-stage category [def-weil-algebraically-closed-coefficients]; call the resulting object $\\mathcal K^{\\mathrm{adic}}_{\\Psi,b}$. For $K\\in D^b_c(V,\\overline{\\mathbf Q}_\\ell)$ and $\\ell$ invertible on both source and product, its Fourier integrand is the existing common-stage derived tensor $L\\operatorname{pr}_1^*K\\otimes^L\\mathcal K^{\\mathrm{adic}}_{\\Psi,b}$ [def-weil-derived-pullback-tensor-hom]. The general completed-realization construction is also defined for an arbitrary étale $\\mathcal O_E$-module sheaf, without claiming constructibility for that arbitrary input.",
+ "stmt_deps": [
+  "def-fourier-set",
+  "def-fd-artin-schreier-sheaf",
+  "def-fd-kernel",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+  "place": "Step 1, evaluation sheaves in the adic common-stage category; sk-def-as, sk-def-kernel and sk-def-fourier-set coefficient conventions"
+ },
+ "proof": [
+  {
+   "text": "Every additive-character value has p-th power one. The roots-of-unity containment puts it in the fixed coefficient extension. Transport through the small-model equivalence; its absolute value has p-th power one and is nonnegative, so equals one. The DVR criterion makes the value integral. The injective fixed coefficient embedding gives the character laws and uniqueness.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-fourier-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.8, coefficient conventions"
+   }
+  },
+  {
+   "text": "The spectral norm of p in the finite ell-adic extension is its ell-adic norm, which is one since p and ell are distinct primes. The DVR unit criterion gives a unit in O_E, and the ULift ring equivalence transports it to the coefficient universe.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-fourier-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.8, coefficient conventions"
+   }
+  },
+  {
+   "text": "Pull back the universal Artin-Schreier etale surjection along the function b. Functoriality of etale inverse image, the pullback square, the existing artinSchreierSheafUpperStarIso and the constant-sheaf inverse-image comparison give an explicit regular-module trivialization on every member of this cover.",
+   "uses": [
     "def-fd-artin-schreier-sheaf",
-    "def-fd-kernel",
-    "def-weil-completed-integral-coefficients",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-derived-pullback-tensor-hom"
-  ],
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
-    "place": "Step 1, evaluation sheaves in the adic common-stage category; sk-def-as, sk-def-kernel and sk-def-fourier-set coefficient conventions"
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 5.1.5; blueprint sk-def-as"
+   }
   },
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_match": null,
-  "mathlib_searches": [
-    {
-      "tool": "LeanSearch (msearch.py leansearch)",
-      "query": "Completed integral adic realization of an Artin Schreier character sheaf and its inclusion in the common finite coefficient stage category",
-      "results": [
-        "Rat.HeightOneSpectrum.adicCompletion.padicEquiv",
-        "AddChar.instFintype",
-        "CategoryTheory.sheafIsAbelian",
-        "Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv",
-        "instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
-        "LaurentSeries.exists_powerSeries_of_memIntegers",
-        "CategoryTheory.instIsLeftAdjointFunctorOppositeSheafPresheafToSheaf",
-        "CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits"
-      ],
-      "date": "2026-10-18",
-      "verdict": "No completed Artin--Schreier realization."
-    },
-    {
-      "tool": "LeanFinder (msearch.py leanfinder)",
-      "query": "Artin Schreier lisse sheaf extended from the constant valuation ring to the completed valuation ring on the pro etale site",
-      "results": [
-        "BDeRhamPlus",
-        "BDeRham",
-        "Tilt",
-        "WittVector.StandardOneDimIsocrystal",
-        "IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def",
-        "Tilt.instField",
-        "WittVector.instModuleFractionRingStandardOneDimIsocrystal",
-        "WittVector.instIsocrystalStandardOneDimIsocrystal"
-      ],
-      "date": "2026-10-18",
-      "verdict": "Period rings and isocrystals do not define this realization."
-    },
-    {
-      "tool": "grep of Mathlib (msearch.py grep)",
-      "query": "ArtinSchreier|artinSchreier|adic.*[Ff]ourier",
-      "results": "[grep] OK 0 hit(s)",
-      "date": "2026-10-18",
-      "verdict": "No Mathlib match."
-    },
-    {
-      "tool": "rg of upstream WeilConjectures and project lean/Sheaf",
-      "query": "artinSchreierSheaf|fourierKernel|fourierCompletedRealization|fourierAdic",
-      "results": [
-        "WeilConjectures/FourierTransform/ArtinSchreier.lean: artinSchreierSheaf and artinSchreierSheafZMod",
-        "WeilConjectures/FourierTransform/Defs.lean: fourierKernel",
-        "lean/Sheaf/Paper/FourierSetting.lean: FourierSetting"
-      ],
-      "date": "2026-10-18",
-      "verdict": "Reuse existing discrete integral sheaf and setting. No adic realization of these sheaves exists."
-    },
-    {
-      "tool": "blueprint_refs.py search and rg of dag/nodes",
-      "query": "blueprint_refs.py search Artin; blueprint_refs.py search realization; rg adic.*(artin|fourier)|(artin|fourier).*adic|completed.*realization dag/nodes/sec-fourier-transform",
-      "results": [
-        "Artin: 35 blueprint matches, including def-fd-artin-schreier-sheaf and def-fd-kernel",
-        "realization: 36 matches, concerning general coefficients, Frobenius, compact support and purity",
-        "Fourier adic mentions are conventions or consumers; no node constructs this scalar realization."
-      ],
-      "date": "2026-10-18",
-      "verdict": "Missing notion, not a second definition of the already recorded sheaf or coefficient category."
-    }
-  ],
-  "created": {
-    "by": "worker",
-    "item": "lem-fd-convolution-kernel",
-    "date": "2026-10-18",
-    "group": "Q04"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-fd-convolution-kernel",
-      "place": "Step 1: actual adic evaluation kernels and their finite-Tor integrand",
-      "via": []
-    },
-    "same_as": []
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "chapter": "sec-fourier-transform",
-  "unit": "sk-prop-convolution-kernel",
-  "lean": {
-    "module": "Sheaf.Paper.FourierAdicArtinSchreier",
-    "declaration": "WeilConjectures.fourierAdicArtinSchreier",
-    "declarations": [
-      "WeilConjectures.fourierCompletedRealization",
-      "WeilConjectures.fourierCoefficientStage",
-      "WeilConjectures.fourierCoefficient",
-      "WeilConjectures.fourierCoefficientEmbedding",
-      "WeilConjectures.fourierCharacteristicPrime",
-      "WeilConjectures.fourierIntegralCharacter_existsUnique",
-      "WeilConjectures.fourierIntegralCharacter",
-      "WeilConjectures.fourierIntegerPrime_isUnit",
-      "WeilConjectures.fourierIntegerPrimeInvertible",
-      "WeilConjectures.fourierAdicArtinSchreier",
-      "WeilConjectures.fourierAdicArtinSchreier_mem",
-      "WeilConjectures.fourierAdicKernel",
-      "WeilConjectures.fourierAdicIntegrand"
-    ],
-    "file": "lean/Sheaf/Paper/FourierAdicArtinSchreier.lean",
-    "statement": "def fourierAdicArtinSchreier (F : FourierSetting.{u}) (X : Scheme.{u}) [CharP Γ(X, ⊤) F.field.p] (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (b : Γ(X, ⊤)) : DerivedCategory (scalarReductionSource F.coefficients.l (fourierCoefficient F) X)",
-    "branch": "newtargets-dag",
-    "by": "Q04",
-    "date": "2026-10-18",
-    "existing": false
-  },
-  "reviewed": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-69a3a96f8",
-    "group": "Q04",
-    "result": "fix",
-    "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-69a3a96f8",
-    "group": "Q04",
-    "result": "fix",
-    "note": "Mathematics and Lean correct: FourierSetting + nontrivial prime-field AddChar; adic common-stage objects from completed pro-etale integral AS sheaves (Etale.fourierKernel of stdPairing, defeq rep); convolution K'*K=Rr13!(r12^*K⊗r23^*K') via tripleProj13 with (Ψ,Ψ⁻¹) and (Ψ,Ψ), unshifted, recorded sfQbarCompactSupportValue; RHS integralCoefficientTwist(-r) pushed along diagonal and (id×neg), shift -2r; edge cases r=0, char 2, p|a, ramified E, universes OK; no hollow defs, 11 true sorry theorems, docstrings/blueprint tags/8-step proof present; new node def-fd-adic-fourier-realization justified (no adic AS/kernel/convolution in Mathlib, slopmaster2 or side); statements verbatim; nt_compile --json both modules rc 0, no warnings. Finding H11: Second reading by Q04 was an admitted self-reading; fixed by fixes/lem-fd-convolution-kernel.report.md (Worker report and New nodes unchanged, independent clause-by-clause second reading; passes check_report). No Lean or node change."
+  {
+   "text": "Apply the two general etale-line results to this particular integral sheaf and cover. The first supplies completeness; the second supplies finite constructible reductions with the single bound [0,0]. Assemble these with the witnesses 0,0 and reflexivity of <= into sfIntegralConstructible. The remaining constructions are the original ordinary scalar realization, common-stage kernel and derived tensor integrand.",
+   "uses": [
+    "lem-fd-etale-integral-line-derived-complete",
+    "lem-fd-etale-integral-line-reductions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1); Proposition 6.8.4(1)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-fourier-set",
+  "def-fd-artin-schreier-sheaf",
+  "lemma-constructible-pullback-constant",
+  "lem-fd-etale-integral-line-derived-complete",
+  "lem-fd-etale-integral-line-reductions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8 and the original blueprint sk-def-as, explicit integral-character and trivializing-cover proofs"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch (msearch.py leansearch)",
+   "query": "Completed integral adic realization of an Artin Schreier character sheaf and its inclusion in the common finite coefficient stage category",
+   "results": [
+    "Rat.HeightOneSpectrum.adicCompletion.padicEquiv",
+    "AddChar.instFintype",
+    "CategoryTheory.sheafIsAbelian",
+    "Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv",
+    "instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+    "LaurentSeries.exists_powerSeries_of_memIntegers",
+    "CategoryTheory.instIsLeftAdjointFunctorOppositeSheafPresheafToSheaf",
+    "CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits"
+   ],
+   "date": "2026-10-18",
+   "verdict": "No completed Artin--Schreier realization."
+  },
+  {
+   "tool": "LeanFinder (msearch.py leanfinder)",
+   "query": "Artin Schreier lisse sheaf extended from the constant valuation ring to the completed valuation ring on the pro etale site",
+   "results": [
+    "BDeRhamPlus",
+    "BDeRham",
+    "Tilt",
+    "WittVector.StandardOneDimIsocrystal",
+    "IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def",
+    "Tilt.instField",
+    "WittVector.instModuleFractionRingStandardOneDimIsocrystal",
+    "WittVector.instIsocrystalStandardOneDimIsocrystal"
+   ],
+   "date": "2026-10-18",
+   "verdict": "Period rings and isocrystals do not define this realization."
+  },
+  {
+   "tool": "grep of Mathlib (msearch.py grep)",
+   "query": "ArtinSchreier|artinSchreier|adic.*[Ff]ourier",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "rg of upstream WeilConjectures and project lean/Sheaf",
+   "query": "artinSchreierSheaf|fourierKernel|fourierCompletedRealization|fourierAdic",
+   "results": [
+    "WeilConjectures/FourierTransform/ArtinSchreier.lean: artinSchreierSheaf and artinSchreierSheafZMod",
+    "WeilConjectures/FourierTransform/Defs.lean: fourierKernel",
+    "lean/Sheaf/Paper/FourierSetting.lean: FourierSetting"
+   ],
+   "date": "2026-10-18",
+   "verdict": "Reuse existing discrete integral sheaf and setting. No adic realization of these sheaves exists."
+  },
+  {
+   "tool": "blueprint_refs.py search and rg of dag/nodes",
+   "query": "blueprint_refs.py search Artin; blueprint_refs.py search realization; rg adic.*(artin|fourier)|(artin|fourier).*adic|completed.*realization dag/nodes/sec-fourier-transform",
+   "results": [
+    "Artin: 35 blueprint matches, including def-fd-artin-schreier-sheaf and def-fd-kernel",
+    "realization: 36 matches, concerning general coefficients, Frobenius, compact support and purity",
+    "Fourier adic mentions are conventions or consumers; no node constructs this scalar realization."
+   ],
+   "date": "2026-10-18",
+   "verdict": "Missing notion, not a second definition of the already recorded sheaf or coefficient category."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-convolution-kernel",
+  "date": "2026-10-18",
+  "group": "Q04"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fd-convolution-kernel",
+   "place": "Step 1: actual adic evaluation kernels and their finite-Tor integrand",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-prop-convolution-kernel",
+ "lean": {
+  "module": "Sheaf.Paper.FourierAdicArtinSchreier",
+  "declaration": "WeilConjectures.fourierAdicArtinSchreier",
+  "declarations": [
+   "WeilConjectures.fourierCompletedRealization",
+   "WeilConjectures.fourierCoefficientStage",
+   "WeilConjectures.fourierCoefficient",
+   "WeilConjectures.fourierCoefficientEmbedding",
+   "WeilConjectures.fourierCharacteristicPrime",
+   "WeilConjectures.fourierIntegralCharacter_existsUnique",
+   "WeilConjectures.fourierIntegralCharacter",
+   "WeilConjectures.fourierIntegerPrime_isUnit",
+   "WeilConjectures.fourierIntegerPrimeInvertible",
+   "WeilConjectures.fourierAdicArtinSchreier",
+   "WeilConjectures.fourierAdicArtinSchreier_mem",
+   "WeilConjectures.fourierAdicKernel",
+   "WeilConjectures.fourierAdicIntegrand"
+  ],
+  "file": "lean/Sheaf/Paper/FourierAdicArtinSchreier.lean",
+  "statement": "def fourierAdicArtinSchreier (F : FourierSetting.{u}) (X : Scheme.{u}) [CharP Γ(X, ⊤) F.field.p] (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (b : Γ(X, ⊤)) : DerivedCategory (scalarReductionSource F.coefficients.l (fourierCoefficient F) X)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69a3a96f8",
+  "group": "Q04",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69a3a96f8",
+  "group": "Q04",
+  "result": "fix",
+  "note": "Mathematics and Lean correct: FourierSetting + nontrivial prime-field AddChar; adic common-stage objects from completed pro-etale integral AS sheaves (Etale.fourierKernel of stdPairing, defeq rep); convolution K'*K=Rr13!(r12^*K⊗r23^*K') via tripleProj13 with (Ψ,Ψ⁻¹) and (Ψ,Ψ), unshifted, recorded sfQbarCompactSupportValue; RHS integralCoefficientTwist(-r) pushed along diagonal and (id×neg), shift -2r; edge cases r=0, char 2, p|a, ramified E, universes OK; no hollow defs, 11 true sorry theorems, docstrings/blueprint tags/8-step proof present; new node def-fd-adic-fourier-realization justified (no adic AS/kernel/convolution in Mathlib, slopmaster2 or side); statements verbatim; nt_compile --json both modules rc 0, no warnings. Finding H11: Second reading by Q04 was an admitted self-reading; fixed by fixes/lem-fd-convolution-kernel.report.md (Worker report and New nodes unchanged, independent clause-by-clause second reading; passes check_report). No Lean or node change."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261020T051249-L-1613748",
+  "kind": "interface"
+ }
 }
