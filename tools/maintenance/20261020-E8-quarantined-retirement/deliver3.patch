@@ -1,0 +1,22 @@
+--- deliver3.py.before
++++ deliver3.py.after
+@@ -109,7 +109,10 @@
+             if not l or l.startswith("#"): continue
+             if not (l.startswith("lean/") and l.endswith(".lean")) or ".." in l:
+                 raise SystemExit(f"FAILED: deleted.txt may list only lean/**/*.lean files: {l}")
+-            if not (clone / l).is_file(): raise SystemExit(f"FAILED: deleted.txt lists {l}, which is not on sheaf-dag")
++            # 2026-10-20: a quarantined module (coord/rework.tsv; its file is at quarantine/<path under lean/>) is withdrawn
++            # like a landed one: its original path gets the withdrawn stub below, which closes the rework row once verified
++            if not (clone / l).is_file() and not (clone / "quarantine" / l[len("lean/"):]).is_file():
++                raise SystemExit(f"FAILED: deleted.txt lists {l}, which is neither on sheaf-dag nor in quarantine/")
+             if (sb / l).exists(): raise SystemExit(f"FAILED: {l} is listed in deleted.txt but still present in the sandbox")
+             deleted.append(l)
+     own_deleted = str(own.relative_to(sb)) in deleted
+@@ -305,6 +308,7 @@
+         # 2026-10-14: the landing tools never delete a file, so a withdrawn module is emptied instead (kept as a module
+         # with no declarations); the queue's pruning removes it once nothing imports it
+         for x in deleted:
++            (clone / x).parent.mkdir(parents=True, exist_ok=True)
+             (clone / x).write_text("module\n\n/-! Withdrawn: no declarations remain. -/\n")
+         if deleted: sh("git", "add", "--", *deleted, cwd=clone)
+         if not sh("git", "diff", "--cached", "--name-only", cwd=clone).stdout.strip(): raise SystemExit("FAILED: nothing differs from sheaf-dag")
