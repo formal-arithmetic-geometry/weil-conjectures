@@ -123,6 +123,6 @@ theorem constructibleCoefficientHomology_isTriangulated
     exact P.prop_of_iso ((Limits.cokernelIsCokernel f).coconePointUniqueUpToIso hk)
       (hkc _ _ f hFG.1 hFG.2).2⟩
   have : P.IsClosedUnderExtensions := ⟨fun hS h₁ h₃ ↦ hext _ hS h₁ h₃⟩
-  exact ⟨inferInstance, inferInstance⟩
+  exact ⟨inferInstance, (cohomology_in_weak_serre_subcategory P).1⟩
 
 end AlgebraicGeometry.Scheme

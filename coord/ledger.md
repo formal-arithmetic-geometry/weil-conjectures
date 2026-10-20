@@ -18938,3 +18938,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:10 L: returned deliver/T1/Sheaf.Paper.LisseAdicAutomorphismPullback (reviewer RETURN: (the landing tools, head cfc1ff2fd) the delivery did not land: lean/Sheaf/Paper/LisseAdicAutomorphismPullback.lean chang)
 - 22:10 L: returned deliver/V9/Sheaf.Paper.IntegralDerivedOperationsOnSlices (reviewer RETURN: (the landing tools, head 7e062ee8c) the delivery did not land: (d) user Sheaf.Paper.IntegralCompletionUnitCriterion (men)
 - 22:10 L: merged deliver/A2/Sheaf.CategoryTheory.RingedSiteCechRefinementSquare (stage 3; reviewer PASS; first push; landing 20261020T221038-L-4136598 (interface); batch 20261020T221035; modules 3; new nodes 2)
+- 22:10 L: merged deliver/A3/Sheaf.Paper.ConstructibleCoefficientHomologyTriangulated (stage 3; reviewer PASS; after a return; landing 20261020T221041-L-4137197 (proof); batch 20261020T221035; modules 1; new nodes 0)
