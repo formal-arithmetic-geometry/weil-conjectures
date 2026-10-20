@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-finite-quotient-tensor-projection",
+ "kind": "statement",
+ "title": "Finite quotient tensor presentations satisfy projection evaluation coherence",
+ "statement": "Let $A$ be a commutative Noetherian ring and $I\\subset A$ an ideal [def-weil-pbc-noetherian-ring], $f:Y\\to X$ a morphism of small sites, and $o$ ordinary tensor data for $f$ over $A$ [def-pur-completed-projection-data]. Then there are finite quotient tensor presentations $s_n$ over $A/I^{n+1}$ (tensor data for $f$ over $A/I^{n+1}$ with scalar balancings $A\\to A/I^{n+1}$ normalized on K-flat models) such that, for all $n$, $H$ and $K$, evaluation at level $n$ of the strict-tower projection $(\\pi^o_{H,K})_\\bullet$, followed by the evaluation, finite evaluation and finite restriction/pushforward comparisons of [lem-sp-completion-mate-comparison], equals the finite evaluation comparison followed by restriction of the finite projection of $s_n$ (FiniteEquation).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0B56, 0941 and 099M; split from completed projection coherence proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pur-completed-projection-data",
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof": [
+  {
+   "text": "At each coefficient ring $A/I^{n+1}$ choose a derived tensor with its K-flat tensor model by [lem-sf-ringed-derived-closed-symmetric-monoidal], on flat-term K-flat representatives [lem-pc-kflat-resolution]. Present the geometric pullback by the module inverse image and the exact localized pullback; its tensor comparison is the canonical one on K-flat representatives [lem-weil-pbc-ringed-projection-mate-exact]. Present each scalar extension by the identity geometric morphism and the quotient homomorphism; the universal left-derived comparison supplies its epsilon and the normalized finite module and derived adjunctions of [lem-sp-completion-mate-comparison] its right adjoints; the canonical derived tensor pullback [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives the balancing, so these data form $s_n$ with both normalizations. On the ringed coefficient square, [lem-weil-pbc-ringed-exchange-tensor-coherence] applied to $H$ and $K$ says that reducing the ordinary projection and then the coefficient exchange equals the finite projection after the source exchange and the scalar balancing. Evaluation of the strict reduction tower gives exactly this coefficient exchange: check both adjuncts on a common K-flat representative with the prescribed evaluation, finite adjunction and finite restriction/pushforward normalizations. Combining the two equalities gives FiniteEquation; no faithfulness of evaluation is used.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 0B56, 0E48, 0941; item proof Steps 3, 6, 8 and 9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof_origin": "split from lem-pur-compact-support-completed-projection-coherence; source proof in docstring",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedProjectionCoherence",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-completed-projection-coherence",
+   "place": "proof step split"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientTensorProjection",
+  "file": "lean/Sheaf/Paper/FiniteQuotientTensorProjection.lean",
+  "declaration": "CategoryTheory.AdicSites.ProjectionCoherence.finiteQuotientTensorProjection",
+  "statement": "theorem finiteQuotientTensorProjection [IsNoetherianRing A]\n    (f : Morphism Y X) (o : TensorData f A) :\n    ∃ s : ∀ n : ℕ, FiniteTensor (I := I) o n, o.FiniteEquation s",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite quotient tensor presentations satisfy projection evaluation coherence",
+   "results": "No matching project declaration; the split statement is required by the source proof route.",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite quotient tensor presentations satisfy projection evaluation coherence",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "Finite quotient tensor presentations satisfy projection evaluation coherence",
+   "results": "no direct match",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  }
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-56c8b",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261020T221357-L-4179895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-56c8b",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261020T221357-L-4179895",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompletedProjectionData vs live item lines 56-312 (byte-identical move) and item theorem signature vs live; three new sorry statements vs their nodes, CompletionMateComparison defs and T4's PASSed split; direct importers IntegralCompactSupportCoefficientData/Comparison compiled against the corrected item"
+ }
+}

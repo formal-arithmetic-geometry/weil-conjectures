@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-perfect-quotient-projection",
+ "kind": "statement",
+ "title": "Perfect quotient coefficients give invertible tower and finite projections",
+ "statement": "Let $A$ be a commutative ring and $I\\subset A$ an ideal such that every $A/I^{n+1}$ is perfect over $A$, and $f:Y\\to X$ a morphism of small sites. Then, with the strict-tower projection and the finite projection of [lem-sp-completion-mate-comparison], for every $H\\in D(X,A)$ the tower projection $(Ru_*H)\\otimes^L(\\underline{A/I^{n+1}})_n\\to Ru^J_*(H\\otimes^L(\\underline{A/I^{n+1}})_n)$ and, for every $n$, the finite projection $Ru_*H\\otimes^L_A\\underline{A/I^{n+1}}\\to Ru_{*}(H\\otimes^L_A\\underline{A/I^{n+1}})$ over $A/I^{n+1}$ are isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0B56, 0941 and 099M; split from completed projection coherence proof"
+ },
+ "stmt_deps": [
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Represent $A/I^{n+1}$ by a bounded complex of finite projective $A$-modules. The constant-module functor is exact, so this represents the constant coefficient sheaf and keeps every finite-free retraction. Compute the direct image on a K-injective representative. The finite-projective totalization projection formula [def-weil-pbc-projection-formula-arrows] [lemma-weil-pbc-projection-formula-totalization] gives an inverse to the counit-tensor projection with this coefficient complex; its representative formula identifies it with the underlying restriction of the finite projection, through the normalized scalar/pullback comparison and finite adjunction of [lem-sp-completion-mate-comparison]. Restriction of quotient coefficients is exact and conservative, so the finite projection is invertible. Evaluating the strict-tower projection at each index gives the same finite projection through the specified evaluation and scalar-restriction comparisons; its cone is acyclic at every index, and cohomology of strict towers is computed levelwise [lem-weil-tower-category-levelwise-abelian], so the tower projection is invertible. The zero quotient is included.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "lemma-weil-pbc-projection-formula-totalization",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B54, 0B56, 0941; item proof Steps 6 and 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projection-formula-arrows",
+  "lemma-weil-pbc-projection-formula-totalization",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof_origin": "split from lem-pur-compact-support-completed-projection-coherence; source proof in docstring",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedProjectionCoherence",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-completed-projection-coherence",
+   "place": "proof step split"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PerfectQuotientProjection",
+  "file": "lean/Sheaf/Paper/PerfectQuotientProjection.lean",
+  "declaration": "CategoryTheory.AdicSites.perfectQuotientProjection",
+  "statement": "theorem perfectQuotientProjection (f : Morphism Y X) (h : PerfectQuotients A I) :\n    (∀ H : X.derived A, IsIso (f.towerProjection A I H)) ∧\n      ∀ (n : ℕ) (H : X.derived A), IsIso (f.finiteProjection A I n H)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect quotient coefficients give invertible tower and finite projections",
+   "results": "No matching project declaration; the split statement is required by the source proof route.",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect quotient coefficients give invertible tower and finite projections",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "Perfect quotient coefficients give invertible tower and finite projections",
+   "results": "no direct match",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  }
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-56c8b",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261020T221357-L-4179895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-56c8b",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261020T221357-L-4179895",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompletedProjectionData vs live item lines 56-312 (byte-identical move) and item theorem signature vs live; three new sorry statements vs their nodes, CompletionMateComparison defs and T4's PASSed split; direct importers IntegralCompactSupportCoefficientData/Comparison compiled against the corrected item"
+ }
+}

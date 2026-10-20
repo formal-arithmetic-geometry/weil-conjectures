@@ -13,11 +13,12 @@
  ],
  "proof": [
   {
-   "text": "First fix the completed tensor comparisons. For arbitrary ambient $V,W$ and complete $Z$, the closed tensor adjunction [lem-sf-ringed-derived-closed-symmetric-monoidal] identifies precomposition by $\\eta_V\\otimes1_W$ with precomposition by $\\eta_V$ on maps into $R\\mathcal Hom(W,Z)$. That last object is complete by [lem-sf-ringed-rhom-derived-complete], so the completion adjunction [lem-sp-completed-pullback-adjunction] makes this a bijection. Thus $C(\\eta_V\\otimes1_W):C(V\\otimes W)\\to C(CV\\otimes W)$ is invertible: testing maps to its complete source and target gives a two-sided inverse. Symmetry gives the comparison for the other factor. The same hom-set argument gives $C_{\\mathcal X}u^*(\\eta_V)$ invertible, because maps into complete $Z$ transpose to maps into the complete object $PZ$. These comparisons specify the completed pullback tensor isomorphism. Their coherence follows by precomposing with the completion units: every resulting associativity or unit diagram becomes the ordinary tensor/pullback diagram, and these precompositions are injective. In the remaining steps all tensor signs without a hat denote ordinary derived tensor.",
+   "text": "First fix the completed tensor comparisons. For arbitrary ambient $V,W$ and complete $Z$, the closed tensor adjunction [lem-sf-ringed-derived-closed-symmetric-monoidal] identifies precomposition by $\\eta_V\\otimes1_W$ with precomposition by $\\eta_V$ on maps into $R\\mathcal Hom(W,Z)$. That last object is complete by [lem-sf-ringed-rhom-derived-complete], so the completion adjunction [lem-sp-completed-pullback-adjunction] makes this a bijection. Thus $C(\\eta_V\\otimes1_W):C(V\\otimes W)\\to C(CV\\otimes W)$ is invertible: testing maps to its complete source and target gives a two-sided inverse. Symmetry gives the comparison for the other factor. The same hom-set argument gives $C_{\\mathcal X}u^*(\\eta_V)$ invertible, because maps into complete $Z$ transpose to maps into the complete object $PZ$. These comparisons specify the completed pullback tensor isomorphism. Their coherence follows by precomposing with the completion units: every resulting associativity or unit diagram becomes the ordinary tensor/pullback diagram, and these precompositions are injective. In the remaining steps all tensor signs without a hat denote ordinary derived tensor. The given ordinary tensor model is identified with the tensor of that closed symmetric monoidal structure by descent of natural isomorphisms along the flat-term K-flat localization [lem-weil-pbc-site-derived-tensor-descent], since both agree with the termwise tensor on such representatives.",
    "uses": [
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
     "lem-sf-ringed-rhom-derived-complete",
-    "lem-sp-completed-pullback-adjunction"
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-site-derived-tensor-descent"
    ],
    "elementary": true,
    "source": {
@@ -43,7 +44,8 @@
     "lem-weil-pbc-diagram-site-realization",
     "lem-pc-kflat-resolution",
     "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-quotient-tower-augmentation-pullback"
    ],
    "elementary": false,
    "source": {
@@ -102,7 +104,8 @@
    "uses": [
     "def-weil-pbc-projection-formula-arrows",
     "lemma-weil-pbc-projection-formula-totalization",
-    "lem-weil-tower-category-levelwise-abelian"
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-pur-perfect-quotient-projection"
    ],
    "elementary": false,
    "source": {
@@ -117,7 +120,8 @@
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
     "lem-weil-ringed-tower-pushforward-limit-comparison",
     "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pur-finite-quotient-tensor-projection"
    ],
    "elementary": false,
    "source": {
@@ -128,7 +132,8 @@
   {
    "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the diagram-site ringed square with vertical maps $u$ over $A$ and $B$, horizontal coefficient-extension maps, object $\\Delta H$, and tensor argument $\\Delta K$. Its two composites are precisely $v$ of Step 8 and $h_N\\mathcal R_{\\mathcal Y}(\\pi^o)$. The tensor identifications are the scalar-extension comparisons already fixed in Step 8, and the constant-diagram projection is $\\Delta\\pi^o$ by Step 4. Therefore\n$$v=h_N\\mathcal R_{\\mathcal Y}(\\pi^o)$$\nin the derived category of $B$-module diagrams. This proves equality before restriction, inverse limit, or evaluation; it uses no faithfulness of any derived reduction functor.",
    "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-pur-finite-quotient-tensor-projection"
    ],
    "elementary": false,
    "source": {
@@ -140,7 +145,8 @@
    "text": "Write $\\widetilde h_F=U h_F$ under the direct-image comparison of Step 6, so $\\widetilde h_F:U\\mathcal R_{\\mathcal Y}(PF)\\to P^JU\\mathcal R_{\\mathcal X}F$. Naturality in the coefficient argument and tensor-unit normalization of [lem-weil-pbc-ringed-projection-mate-exact], applied on the constant-$A$ diagram sites to $\\Delta\\underline A\\to B$, give\n$$\\widetilde h_F i_{PF}=P^J(i_F).$$\nIndeed the projection for the tensor unit is the identity of $\\Delta PF$, and the two vertical arrows of this naturality square are the actual quotient augmentations. Define\n$$\\rho_F=a_{U\\mathcal R_{\\mathcal X}F}^{-1}\\mathcal L_{\\mathcal Y}(\\widetilde h_F):C_{\\mathcal Y}PF\\longrightarrow PC_{\\mathcal X}F.$$\nApply $\\mathcal L$ to the preceding square. Naturality of $a$ [lem-weil-ringed-tower-pushforward-limit-comparison], $a_{\\Delta F}=1$ on diagonal K-injective representatives, and $\\mathcal L(i_F)=\\eta_F$ from Step 4 yield\n$$\\rho_F\\eta_{PF}=P(\\eta_F).$$\nThis is the normalized unit equation for the specified whole-tower comparison; it is not deduced from equalities of evaluated arrows.",
    "uses": [
     "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-ringed-tower-pushforward-limit-comparison"
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-pur-finite-quotient-tensor-projection"
    ],
    "elementary": false,
    "source": {
@@ -152,7 +158,8 @@
    "text": "Take the total inverse limit of $Uv$ and then use $a^{-1}$ on its target. Its source is $\\mathcal L_{\\mathcal Y}U\\mathcal R_{\\mathcal Y}M=C_{\\mathcal Y}M$, and its target is $PC_{\\mathcal X}N$, by [lem-sp-completed-pullback-adjunction, lem-weil-ringed-tower-pushforward-limit-comparison]. Step 9 gives the formula $r=\\rho_N C_{\\mathcal Y}(\\pi^o)$ for this total-limit arrow. Step 10 and naturality of $\\eta$ give\n$$r\\eta_M=\\rho_N\\eta_{PN}\\pi^o=P(\\eta_N)\\pi^o.$$\nThe uniqueness proved in Step 2 implies $r=\\pi^c$. By Steps 7 and 8, this is exactly the total limit of the finite projection mates, with source identification given by the perfect-coefficient comparisons and balancing, and target identification given by $a^{-1}$. Step 5 proves that the same identifications preserve the counits and the transpose of any strict tower arrow after a constant augmentation. Every construction used is natural, so these are equalities of the specified natural transformations. This proves all clauses of the item.",
    "uses": [
     "lem-sp-completed-pullback-adjunction",
-    "lem-weil-ringed-tower-pushforward-limit-comparison"
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-pur-quotient-tower-augmentation-pullback"
    ],
    "elementary": false,
    "source": {
@@ -164,6 +171,7 @@
  "proof_deps": [
   "lem-sf-ringed-derived-closed-symmetric-monoidal",
   "lem-sf-ringed-rhom-derived-complete",
+  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-sp-completed-pullback-adjunction",
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-diagram-site-realization",
@@ -179,7 +187,10 @@
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "def-weil-pbc-projection-formula-arrows",
   "lemma-weil-pbc-projection-formula-totalization",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-pur-quotient-tower-augmentation-pullback",
+  "lem-pur-perfect-quotient-projection",
+  "lem-pur-finite-quotient-tensor-projection"
  ],
  "proof_origin": {
   "by": "agent",
@@ -464,23 +475,6 @@
   "module": "Sheaf.Paper.CompletedProjectionCoherence",
   "declaration": "CategoryTheory.AdicSites.ProjectionCoherence.completedProjectionCoherence",
   "declarations": [
-   "CategoryTheory.AdicSites.ProjectionCoherence.corner",
-   "CategoryTheory.AdicSites.ProjectionCoherence.TensorData",
-   "CategoryTheory.AdicSites.ProjectionCoherence.TensorData.projection",
-   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor",
-   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor.projection",
-   "CategoryTheory.AdicSites.ProjectionCoherence.TensorData.towerProjection",
-   "CategoryTheory.AdicSites.ProjectionCoherence.ScalarTensor",
-   "CategoryTheory.AdicSites.ProjectionCoherence.ScalarTensor.Normalized",
-   "CategoryTheory.AdicSites.ProjectionCoherence.FiniteTensor",
-   "CategoryTheory.AdicSites.ProjectionCoherence.FiniteTensor.targetBalancing",
-   "CategoryTheory.AdicSites.ProjectionCoherence.FiniteTensor.projection",
-   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor.UnitEquation",
-   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor.Unique",
-   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor.LimitEquation",
-   "CategoryTheory.AdicSites.ProjectionCoherence.TransposeCompatibility",
-   "CategoryTheory.AdicSites.ProjectionCoherence.TensorData.FiniteEquation",
-   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor.Natural",
    "CategoryTheory.AdicSites.ProjectionCoherence.completedProjectionCoherence"
   ],
   "file": "lean/Sheaf/Paper/CompletedProjectionCoherence.lean",
@@ -499,5 +493,15 @@
   "group": "Q92",
   "result": "fix",
   "note": "Read the node, the source places (Stacks 07A6/0B56/0941/0A07/099M/099N), the AdicSites declarations used and RingedTensorModel/Edge. Every clause matches: Noetherian A; PerfectQuotients on A/I^(n+1); the completed projection is the completedAdjunction homEquiv with comparisons fixed by their unit equations; UnitEquation, Unique, LimitEquation (Step 11, r = rho_N C(pi^o)), FiniteEquation, TransposeCompatibility, Natural; the tower/finite source comparisons are asserted invertible, not assumed. Edge cases are covered, no extra hypotheses, no hollow definitions, docstrings present, only the main theorem is sorry, lean.statement was verbatim. F1 (H3): the theorem made the ordinary tensor presentation existential (exists o : TensorData f A), so the coherence was only claimed for some unspecified derived-tensor model, while the landed ringedProjectionMateExact and ringedExchangeTensorCoherence take models as inputs. Fixed: o is now an explicit argument; b (unique, existence = Step-1 invertibility) and s stay existential. Fixes: the module, lean-record.json (new verbatim statement) and report.md. nt_compile --json: delivered 17.3 s and fixed 15.8 s, rc 0, no errors or warnings (dependency timeouts under load about 210 cleared on retry)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-56c8b",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261020T221357-L-4179895",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompletedProjectionData vs live item lines 56-312 (byte-identical move) and item theorem signature vs live; three new sorry statements vs their nodes, CompletionMateComparison defs and T4's PASSed split; direct importers IntegralCompactSupportCoefficientData/Comparison compiled against the corrected item"
  }
 }
