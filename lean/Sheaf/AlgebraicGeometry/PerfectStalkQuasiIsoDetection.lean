@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
-import Sheaf.AlgebraicGeometry.PerfectOpenStalkChainMapLift
+import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkChainMapLift
 import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread
 
 /-! # Detecting a quasi-isomorphism of strictly perfect complexes near a point
@@ -49,6 +49,7 @@ private theorem perfect_stalk_isKProjective
     (fun n hn ↦ S.map_isZero (hab n (Or.inr hn)))
   exact CochainComplex.isKProjective_of_projective L b
 
+set_option linter.unusedVariables false in
 /-- A fixed chain map of strictly perfect complexes on an affine open which is a
 quasi-isomorphism at one stalk becomes a quasi-isomorphism on a smaller affine open.
 
@@ -82,8 +83,10 @@ theorem exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso
   have : CochainComplex.IsKProjective (T.obj Q) :=
     perfect_stalk_isKProjective X U x hxU Q hQ
   obtain ⟨e, he⟩ := (CochainComplex.IsKProjective.quasiIso_iff (T.map f)).1 hf
-  obtain ⟨V, hxV, _hV, hVU, c, g, hg⟩ :=
-    exists_affine_perfect_open_stalk_chainMap_lift X U x hxU hU Q P hQ hP e.inv
+  obtain ⟨V, hxV, _hV, hVU, g, hg⟩ :=
+    exists_affine_perfect_open_stalk_chainMap_lift X U x hxU Q P hQ e.inv
+  let c := Functor.mapHomologicalComplexCompIso
+    (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)
   let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
     (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)
   let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)

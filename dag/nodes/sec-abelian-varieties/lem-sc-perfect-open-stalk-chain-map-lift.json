@@ -15,21 +15,21 @@
  ],
  "proof": [
   {
-   "text": "Apply degreewise extension to the components of the given chain map t, obtaining W, eW and g with their stalk identities. Only strict perfectness of P is used.",
+   "text": "Apply degreewise extension to the components of the given chain map t, obtaining W and g with their stalk identities in the canonical restriction comparison eW. Only strict perfectness of P is used.",
    "uses": [
     "lem-sc-perfect-open-stalk-degreewise-lift"
    ],
    "elementary": false
   },
   {
-   "text": "Conjugating t by eW gives a chain map. Its adjacent equations and the component identities of g prove that the stalks of g commute with the differentials. Apply the source degreewise shrinking theorem using its canonical comparisons cW and cV, obtaining V and chain-compatible components k. Set eV = cV followed by cW inverse followed by eW to express the result in the arbitrary coordinates supplied by the degreewise lift.",
+   "text": "Conjugating t by the canonical eW gives a chain map. Its adjacent equations and the component identities of g prove that the stalks of g commute with the differentials. Apply the source degreewise shrinking theorem using its canonical comparisons eW and eV, obtaining V and chain-compatible components k with the prescribed stalk formula.",
    "uses": [
     "lem-sc-perfect-open-stalk-degreewise-shrink"
    ],
    "elementary": false
   },
   {
-   "text": "Construct fV with CochainComplex.ofHom k hk. Check the desired stalk equality degreewise with HomologicalComplex.hom_ext. Substitute the stalk identities of k and g. Expanding the components of eV = cV followed by cW inverse followed by eW identifies the two sides by associativity, without assuming eW is canonical. The original signature, including hU and hQ, stays identical.",
+   "text": "Construct fV with CochainComplex.ofHom k hk. Check the desired stalk equality degreewise with HomologicalComplex.hom_ext. Substitute the stalk identities of k and g and cancel the middle inverse/hom comparison pairs by associativity. This proves the source theorem with the canonical eV. Choosing eV also proves the original node existence statement, and the original extra assumptions on U and Q are unused.",
    "uses": [],
    "elementary": true
   }
@@ -40,10 +40,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M1",
-  "date": "2026-10-20",
+  "group": "F6",
+  "date": "2026-10-21",
   "document": "Stacks Project and adopted source library",
-  "place": "Same degreewise extension and shrinking route (Tags 09RE and 01CP); use the source canonical shrink theorem and transport the final natural isomorphism to the arbitrary lift coordinates."
+  "place": "Tags 09RE and 0BC7 (2). Reuse the existing proved source chain-map lift, which assembles degreewise extension and shrinking and cancels canonical comparisons. Retire the duplicate without bypassing either dependency or changing the node statement."
  },
  "mathlib_searches": [
   {
@@ -101,14 +101,15 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectOpenStalkChainMapLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOpenStalkChainMapLift.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectOpenStalkChainMapLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectOpenStalkChainMapLift.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_open_stalk_chainMap_lift",
-  "statement": "theorem exists_affine_perfect_open_stalk_chainMap_lift\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) (hU : IsAffineOpen U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q)\n    (t : ((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).obj P ⟶\n      ((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).obj Q) :\n    ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (hVU : V ≤ U),\n      let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)\n      let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)\n      ∃ (e : R ⋙ S ≅ T) (g : R.obj P ⟶ R.obj Q),\n        S.map g = (e.app P).hom ≫ t ≫ (e.app Q).inv",
+  "statement": "theorem exists_affine_perfect_open_stalk_chainMap_lift\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P)\n    (t : ((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).obj P ⟶\n      ((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).obj Q) :\n    ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (hVU : V ≤ U),\n      let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)\n      let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)\n      let e : R ⋙ S ≅ T := Functor.mapHomologicalComplexCompIso\n        (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)\n      ∃ g : R.obj P ⟶ R.obj Q,\n        S.map g = (e.app P).hom ≫ t ≫ (e.app Q).inv",
   "branch": "sheaf-dag",
-  "by": "M3",
-  "date": "2026-10-13"
+  "by": "F6",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf theorem. The existing proved source theorem supplies the canonical comparison and requires neither affineness of U nor strict perfectness of Q. Choosing that comparison and ignoring the extra original hypotheses proves the unchanged node statement. Both direct consumers keep their exact public signatures and explicitly name the canonical comparison. The node and all dependency edges remain."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -123,12 +124,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-e8086",
-  "group": "M1",
+  "reviewer": "C-a275a",
+  "group": "F6",
   "result": "pass",
-  "landing": "20261020T162915-L-3674512",
+  "landing": "20261020T233140-L-899237",
   "kind": "interface",
-  "note": "independent cc review: the delivered emptied Sheaf module and the adapted PerfectOpenStalkChainMapLift (signature unchanged) checked against the live WeilConjectures twin (node lean.statement verbatim), the change record and the retire-items row; files and both importers of ChainMapLift compiled, axioms clean"
+  "note": "independent cc review: Retired Sheaf ChainMapLift stub + node lean record (existing:true) vs the live WeilConjectures twin (signature verbatim, stronger than the node: no hU/hQ, canonical e) and the retire-items.tsv row; both adapted consumers diffed against live (only forced lines changed) and compiled, plus the indirect importer PerfectStalkDerivedHomLift; twin's axioms clean"
  },
  "lean_audit": {
   "master": {

@@ -30,7 +30,7 @@
    "elementary": true
   },
   {
-   "text": "Apply exists_affine_perfect_open_stalk_chainMap_lift to f and the unchanged hypotheses on X, U, x, P and Q. It gives an affine V inside U containing x, a natural chain comparison e, and a chain map g between the restrictions, with S.map g = e_P.hom followed by f followed by e_Q.inv.",
+   "text": "Apply the existing source exists_affine_perfect_open_stalk_chainMap_lift to f, using strict perfectness of P. It gives an affine V inside U containing x and a chain map g between the restrictions. Define e to be the canonical termwise openModuleStalkRestrictionComparison specified by the source result. Then S.map g = e_P.hom followed by f followed by e_Q.inv. The original assumptions hU and hQ are unused but their binders stay unchanged.",
    "uses": [
     "lem-sc-perfect-open-stalk-chain-map-lift"
    ],
@@ -54,7 +54,9 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE affine case (1), bounded-projective chain representatives and finite-component descent; Tag 0BC7 (2). J2 uses the existing open-stalk chain-map lift and Mathlib K-projective localization, without affine derived equivalences or a derived Hom colimit presentation."
+  "place": "Tag 09RE affine case (1), bounded-projective chain representatives and finite-component descent; Tag 0BC7 (2). J2 uses the existing open-stalk chain-map lift and Mathlib K-projective localization, without affine derived equivalences or a derived Hom colimit presentation.; retire the duplicate chain-map lift and use its proved source implementation, naming the canonical comparison explicitly without changing this consumer statement.",
+  "group": "F6",
+  "date": "2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -142,14 +144,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J2",
+  "reviewer": "C-a275a",
+  "group": "F6",
   "result": "pass",
-  "landing": "20261013T111855-L-3053584",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T233140-L-899237",
+  "kind": "interface",
+  "note": "independent cc review: Retired Sheaf ChainMapLift stub + node lean record (existing:true) vs the live WeilConjectures twin (signature verbatim, stronger than the node: no hU/hQ, canonical e) and the retire-items.tsv row; both adapted consumers diffed against live (only forced lines changed) and compiled, plus the indirect importer PerfectStalkDerivedHomLift; twin's axioms clean"
  },
  "lean_audit": {
   "master": {

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.PerfectOpenStalkChainMapLift
+import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkChainMapLift
 import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 public import Sheaf.Paper.DerivedHomMayerVietoris
@@ -48,6 +48,7 @@ private theorem perfect_stalk_isKProjective
     (fun n hn ↦ S.map_isZero (hab n (Or.inr hn)))
   exact CochainComplex.isKProjective_of_projective L b
 
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
 -- Comparing the localized stalk functors with the derived factorization unfolds nested functors.
 set_option backward.isDefEq.respectTransparency false in
@@ -120,8 +121,10 @@ theorem exists_affine_perfect_open_stalk_derived_hom_descent
   have : CochainComplex.IsKProjective (TU.obj P) :=
     perfect_stalk_isKProjective X U x hxU P hP
   obtain ⟨f, hf'⟩ := CochainComplex.IsKProjective.exists_Q_map_eq (TU.obj P) (TU.obj Q) t
-  obtain ⟨V, hxV, hV, hVU, e, g, hg⟩ :=
-    exists_affine_perfect_open_stalk_chainMap_lift X U x hxU hU P Q hP hQ f
+  obtain ⟨V, hxV, hV, hVU, g, hg⟩ :=
+    exists_affine_perfect_open_stalk_chainMap_lift X U x hxU P Q hP f
+  let e := Functor.mapHomologicalComplexCompIso
+    (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)
   let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
     (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)
   let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V) ⥤
