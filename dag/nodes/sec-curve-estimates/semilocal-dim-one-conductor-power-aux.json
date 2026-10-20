@@ -18,7 +18,7 @@
  },
  "proof": [
   {
-   "text": "Apply the finite adjoin construction to obtain A, its fraction field, generators, and the compatible surjective map into the integral closure.",
+   "text": "Apply the finite adjoin construction to obtain A, its fraction field, generators, and the compatible injective map into the integral closure with surjective prime-spectrum comap. The proof is the existing upstream theorem; the unused dimension-one hypothesis of the retired Sheaf statement is unnecessary.",
    "uses": [
     "adjoin-finite-fraction-spec"
    ],
@@ -46,14 +46,15 @@
  ],
  "status": "split",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SemilocalDimOneConductorPowerAux",
-  "file": "lean/Sheaf/AlgebraicGeometry/SemilocalDimOneConductorPowerAux.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SemilocalDimOneConductorPowerAux",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SemilocalDimOneConductorPowerAux.lean",
   "declaration": "exists_finite_adjoin_with_jacobson_power",
-  "statement": "theorem exists_finite_adjoin_with_jacobson_power\n    (B : Type u) [CommRing B] [IsDomain B] [IsNoetherianRing B]\n    [Finite (MaximalSpectrum B)] (hdim : ringKrullDim B = 1)\n    (K : Type v) [Field K] [Algebra B K] [IsFractionRing B K]\n    [Finite (MaximalSpectrum (integralClosure B K))]\n    (x y : integralClosure B K)\n    (hx : x ∈ Ideal.jacobson (⊥ : Ideal (integralClosure B K))) :\n    ∃ A : Subalgebra B K, Module.Finite B A ∧ IsFractionRing A K ∧\n      (x : K) ∈ A ∧ (y : K) ∈ A ∧\n      ∃ m : ℕ, 0 < m ∧ ∃ a : A,\n        (a : K) = (x : K) ^ m ∧\n        a ∈ Ideal.map (algebraMap B A) (Ideal.jacobson (⊥ : Ideal B))",
+  "statement": "theorem exists_finite_adjoin_with_jacobson_power\n    (B : Type u) [CommRing B] [IsDomain B] [IsNoetherianRing B]\n    [Finite (MaximalSpectrum B)]\n    (K : Type v) [Field K] [Algebra B K] [IsFractionRing B K]\n    [Finite (MaximalSpectrum (integralClosure B K))]\n    (x y : integralClosure B K)\n    (hx : x ∈ Ideal.jacobson (⊥ : Ideal (integralClosure B K))) :\n    ∃ A : Subalgebra B K, Module.Finite B A ∧ IsFractionRing A K ∧\n      (x : K) ∈ A ∧ (y : K) ∈ A ∧\n      ∃ m : ℕ, 0 < m ∧ ∃ a : A,\n        (a : K) = (x : K) ^ m ∧\n        a ∈ Ideal.map (algebraMap B A) (Ideal.jacobson (⊥ : Ideal B))",
   "branch": "sheaf-dag",
-  "by": "H2",
-  "date": "2026-10-13"
+  "by": "G2",
+  "date": "2026-10-20",
+  "note": "Retired unused Sheaf twin. The upstream theorem has the same conclusion without the unused ringKrullDim B = 1 hypothesis; direct specialization proves the old statement."
  },
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-curveestimate",
@@ -104,14 +105,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "C-0c61d",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T010616-L-2671329",
+  "landing": "20261020T132002-L-1399262",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: node semilocal-dim-one-conductor-power-aux lean.statement vs upstream WeilConjectures.AlgebraicGeometry.SemilocalDimOneConductorPowerAux signature (identical; old hdim signature follows by direct application, compiled); emptied Sheaf module vs live importers (none) and retire-items.tsv row 92"
  },
  "lean_audit": {
   "master": {
