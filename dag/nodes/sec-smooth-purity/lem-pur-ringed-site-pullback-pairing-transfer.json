@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-ringed-site-pullback-pairing-transfer",
+ "kind": "statement",
+ "title": "Extension of module pairings along a ringed site morphism",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small relative to a universe $W$ [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], both with finite limits. Let $U:\\mathcal C\\to\\mathcal D$ be continuous and preserve finite limits and covering sieves. Let $R$ and $S$ be sheaves of commutative rings on the respective sites, with a morphism of underlying ring sheaves $a:R\\to U_*S$. Use the module sheaf categories [def-weil-sheaf-of-modules-category], internal sheaf Hom [def-pur-sheaf-hom] and slice restriction [def-pur-localized-ringed-site]. Assume that for every $V\\in\\mathcal C$, the slice site $\\mathcal C/V$ has additive sheafification and its sheafification equivalences are exactly the locally bijective maps. Suppose the module direct image $U_*$ has a left adjoint $F$, equipped with its adjunction. Write $\\eta_M:M\\to U_*FM$ for its adjunction unit. For every pair of $R$-module sheaves $L,P$ and every $R$-linear $b:P\\to\\mathcal Hom_R(L,R)$, there exists a unique $S$-linear morphism $d:F(P)\\to\\mathcal Hom_S(F(L),S)$ such that for every $V\\in\\mathcal C$, $p\\in P(V)$ and $m\\in L(V)$ one has $d(\\eta_P(p))(\\eta_L(m))=a_V(b(p)(m))$. Evaluation on either side is over the identity object of the corresponding slice. No finite freeness or invertibility of $d$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL (lemma-tensor-product-pullback), 03EO (lemma-internal-hom-adjoint-tensor), 0GMX (remark-pullback-internal-hom), 0FNY (example-dual), and 04J0 (lemma-localize-morphism-ringed-sites); corresponding steps of lem-pur-ringed-site-finite-free-dual-pullback."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "By the independent-universe localization comparison, a map from (FL)|U(V) to S|U(V) is equivalent to a map L|V → U_V*(S|U(V)). Apply this to the functional b(p), followed by the coefficient ring map. This defines the lift of each local functional, with the required evaluation on global unit sections.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-localization-universes",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uniqueness in this localized adjunction proves additivity, scalar linearity and compatibility with restriction of those lifts. They therefore give a module morphism P → U_* Hom(FL,S). Take its adjunct to obtain d. The two adjunction unit equations give the stated evaluation. For uniqueness, global adjunction reduces to equality of local Hom sections, and the localized Hom equivalence detects that equality on all restricted unit sections.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-localization-universes",
+    "lem-pur-ringed-site-module-pullback-exists-universes",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "def-pur-sheaf-hom",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0 localization and Tag 0GMX internal-Hom comparison; explicit adjunction construction and uniqueness fully proved by V1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extending a pairing of sheaves of modules uniquely along pullback using the adjunction unit",
+   "results": "8 hits; SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackIso. No exact pairing-transfer or localized finite-free dual comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\"",
+   "results": "12 hits; PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id. No exact pairing-transfer or localized finite-free dual comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dual|internalHom|homObj",
+   "results": "0 hits; . No exact pairing-transfer or localized finite-free dual comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction for sheaves of modules induces an internal Hom pullback comparison characterized by evaluation on the adjunction unit",
+   "results": "8 hits; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackComp; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackIso. No internal-Hom comparison or bilinear transfer theorem; read PullbackContinuous and PullbackFree signatures.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pairing of sheaves of modules extends uniquely along pullback using the adjunction unit",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.unitToPushforwardObjUnit. These adjunction and unit formulas are infrastructure used by the proof; none states extension and uniqueness for an arbitrary internal-Hom pairing on a ringed site.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback",
+  "date": "2026-10-18",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Powers and duals paragraph: construction of the canonical internal-Hom comparison.",
+   "via": [
+    "lem-pur-ringed-site-finite-free-dual-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackPairingTransfer",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/PullbackPairingTransfer.lean",
+  "declaration": "SheafOfModules.exists_pullback_pairing_transfer",
+  "statement": "theorem exists_pullback_pairing_transfer\n    [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]\n    (_hcover : CoverPreserving J K U)\n    [∀ V : C, HasWeakSheafify (J.over V) AddCommGrpCat.{max u v w}]\n    [∀ V : C, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]\n    (hAdj : (pushforward.{max u v w} a).IsRightAdjoint) :\n      letI := hAdj\n      ∀ (L P : ringedSiteModules.{max u v w}\n          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n        (b : P ⟶ homObj L (unit _)),\n        ∃! d : (pullback a).obj P ⟶ homObj ((pullback a).obj L) (unit _),\n          ∀ (V : C) (p : P.val.obj (op V)) (m : L.val.obj (op V)),\n            (((d.val.app (op (U.obj V))\n              (((pullbackPushforwardAdjunction a).unit.app P).val.app (op V) p)).app\n                (op (Over.mk (𝟙 (U.obj V))))))\n              (((pullbackPushforwardAdjunction a).unit.app L).val.app (op V) m) =\n                a.hom.app (op V) ((b.val.app (op V) p).app (op (Over.mk (𝟙 V))) m)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261020T135431-L-1822983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261020T135431-L-1822983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

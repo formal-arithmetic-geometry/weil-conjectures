@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-ringed-site-pullback-localization-universes",
+ "kind": "statement",
+ "title": "Module pullback commutes with localization in a containing universe",
+ "statement": "Let C and D be sites small relative to the coefficient universe W [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with finite limits. Let U:C → D be continuous and preserve finite limits. Let R and S be sheaves of rings and a:R → U_*S a ring-sheaf morphism. For V in C assume Over.post U is continuous on the slice sites. Write a_V for the restricted coefficient map and assume the global and slice module pushforwards [def-weil-sheaf-of-modules-category] have left adjoints F and F_V. The canonical comparison F_V(L|V) → (FL)|U(V), whose adjunct is the restricted global adjunction unit, is invertible. Its composite with the slice unit equals the restricted global unit. Thus maps from (FL)|U(V) to a module N correspond bijectively to maps L|V → U_V* N, with the correspondence given by composition with the restricted unit. Restriction and localized rings are as in [def-pur-localized-ringed-site]. If U preserves covering sieves, the slice continuity assumption holds.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; localization step in the proof of lem-pur-ringed-site-finite-free-dual-pullback."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "The functor Over.star V sends X to V × X → V and is right adjoint to forgetting the slice. Product comparison U(V × X) ≅ U(V) × U(X) identifies the two composite module right adjoints. Naturality of a along the second projection verifies the coefficient square.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uniqueness of left adjoints gives an isomorphism between slice restriction followed by F_V and F followed by target restriction. Under the composite adjunction its adjunct is the restricted global unit: compute both units at X using restriction along prod.snd; the equation prodComparison_snd and naturality of the global unit identify the components. Consequently the canonical comparison is that isomorphism.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose with this comparison and apply the slice adjunction to obtain the claimed Hom equivalence. The triangle identity gives its unit formula and injectivity gives the local extensionality criterion. For the final assertion, Over.post U preserves finite limits and coverings; Mathlib isContinuous_iff_coverPreserving supplies continuity.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; localization step in the proof of lem-pur-ringed-site-finite-free-dual-pullback."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves of modules commutes with restriction to a slice site localization",
+   "results": "8 hits, including SheafOfModules.pullbackIso, pullbackObjFreeIso, freeFunctorCompPullbackIso, pullbackComp and Scheme.Modules.restrictFunctorIsoPullback. No general independent-universe slice comparison.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.overPushforwardOverAdj\"",
+   "results": "One hit: Mathlib overPushforwardOverAdj, the adjunction between restriction and product pushforward on one ringed site. Used in the proof.",
+   "date": "2026-10-20",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "localComparison|pullback.*[Oo]ver|over.*[Pp]ullback",
+   "results": "25 hits; overPullback on one fixed site and unrelated pullback/over results. No comparison with restriction along an arbitrary continuous finite-limit preserving functor.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of pullback of sheaves of modules to slice sites commutes with pullback by uniqueness of left adjoints",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, TopCat.Sheaf.pullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.sheafPullback, TopCat.Sheaf.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback. The scheme restriction theorem is narrower; ordinary sheaf pullback and its construction do not give the localized module adjunction and unit equation.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback",
+  "date": "2026-10-20",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Powers and duals paragraph: localizing the module inverse image before the finite free calculation.",
+   "via": [
+    "lem-pur-ringed-site-finite-free-dual-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackLocalizationOfUniverses",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/PullbackLocalizationOfUniverses.lean",
+  "declaration": "SheafOfModules.RingedSitePullback.localComparison_eq",
+  "declarations": [
+   "SheafOfModules.RingedSitePullback.locMap",
+   "SheafOfModules.RingedSitePullback.localComparison",
+   "SheafOfModules.RingedSitePullback.localComparison_eq",
+   "SheafOfModules.RingedSitePullback.localComparison_isIso",
+   "SheafOfModules.RingedSitePullback.localHomEquiv",
+   "SheafOfModules.RingedSitePullback.localHomEquiv_apply",
+   "SheafOfModules.RingedSitePullback.local_hom_ext",
+   "SheafOfModules.RingedSitePullback.local_continuous"
+  ],
+  "statement": "lemma localComparison_eq (V : C)\n    [(Over.post (X := V) U).IsContinuous (J.over V) (K.over (U.obj V))]\n    [(pushforward.{max u v w} a).IsRightAdjoint]\n    [(pushforward.{max u v w} (locMap a V)).IsRightAdjoint]\n    (L : SheafOfModules.{max u v w} R) :\n    localComparison a V L = (localLeftIso a V).hom.app L",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261020T135431-L-1822983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261020T135431-L-1822983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

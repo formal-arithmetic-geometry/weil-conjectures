@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-ringed-site-module-pullback-exists-universes",
+ "kind": "statement",
+ "title": "Module pullback exists in a universe containing both sites",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories whose objects and morphisms belong to a universe $W$ [def-weil-size-convention], with Grothendieck topologies $J,K$ [def-weil-pbc-sites-and-cohomology]. Let $U:\\mathcal C\\to\\mathcal D$ be continuous. Let $R$ be a sheaf of rings on $(\\mathcal C,J)$ and $S$ a sheaf of rings on $(\\mathcal D,K)$, with section rings in $W$, and let $a:R\\to U_*S$ be a ring-sheaf morphism. On categories of module sheaves with section modules in $W$ [def-weil-sheaf-of-modules-category], the direct-image functor defined by restriction along $U$ and scalar restriction along $a$ has a left adjoint. The site-object and site-morphism universes may be strictly smaller than $W$. Neither preservation of finite limits nor preservation of coverings by $U$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; Mathlib Algebra/Category/ModuleCat/Presheaf/Pullback.lean, free-representable presentation construction, lines 62-99."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The free module on the lifted representable at X corepresents sections at X, by the free-module adjunction and lifted Yoneda. Hence direct image has a partial left adjoint there, with value the free module at U(X).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Form the coproduct of free lifted representables indexed by all sections of a module presheaf M. Evaluation at the identity gives a sectionwise surjective map to M. Present its kernel by another such coproduct. The resulting cokernel is M. All indices lie in W. Closure of the domain of a partial left adjoint under coproducts and cokernels, using Mathlib Functor.leftAdjointObjIsDefined_of_isColimit, proves existence of the presheaf left adjoint.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pass to a small model of D in the coefficient universe and use Mathlib hasSheafifyEssentiallySmallSite for additive sheafification. Use GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall for its locally-bijective criterion. Mathlib SheafOfModules.PullbackConstruction.adjunction then composes presheaf pullback with module sheafification to give the required sheaf-module adjunction. All these arguments are made directly from Mathlib; no K-flat-complex module is imported.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7; independent-universe adaptation of Mathlib free-representable/cokernel construction, fully proved by V1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The pushforward of sheaves of modules along a continuous functor between small sites and a morphism of sheaves of rings has a left adjoint",
+   "results": "8 hits; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforward; SheafOfModules.pushforward_obj_val. The sheaf adjoint requires the presheaf adjoint; Mathlib constructs that only for equal site, Hom and coefficient universes. Read Presheaf/Pullback.lean lines 62-99 and Sheaf/PullbackContinuous.lean lines 68-102.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pushforward\", CategoryTheory.Functor.IsRightAdjoint",
+   "results": "0 hits; . The sheaf adjoint requires the presheaf adjoint; Mathlib constructs that only for equal site, Hom and coefficient universes. Read Presheaf/Pullback.lean lines 62-99 and Sheaf/PullbackContinuous.lean lines 68-102.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*IsRightAdjoint",
+   "results": "17 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean. The sheaf adjoint requires the presheaf adjoint; Mathlib constructs that only for equal site, Hom and coefficient universes. Read Presheaf/Pullback.lean lines 62-99 and Sheaf/PullbackContinuous.lean lines 68-102.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a left adjoint for pushforward of sheaves of modules on small ringed sites in independent universes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat, TopCat.Sheaf.instIsLeftAdjointPullback, SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction. The scheme theorem is narrower, the ordinary sheaf result has no module structure, and the module construction still needs presheaf adjoint existence at the required independent universes.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback",
+  "date": "2026-10-19",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Powers and duals paragraph: existence of the module pullback used to compare duals.",
+   "via": [
+    "lem-pur-ringed-site-finite-free-dual-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackExistsOfUniverses",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/PullbackExistsOfUniverses.lean",
+  "declaration": "SheafOfModules.module_pushforward_isRightAdjoint_of_universes",
+  "statement": "theorem module_pushforward_isRightAdjoint_of_universes\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {U : C ⥤ D} [U.IsContinuous J K]\n    {R : Sheaf J RingCat.{max u v w}} {S : Sheaf K RingCat.{max u v w}}\n    (a : R ⟶ (U.sheafPushforwardContinuous RingCat J K).obj S) :\n    (SheafOfModules.pushforward.{max u v w} a).IsRightAdjoint",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-19",
+  "declarations": [
+   "SheafOfModules.module_pushforward_isRightAdjoint_of_universes",
+   "SheafOfModules.coefficientSheafification"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261020T135431-L-1822983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261020T135431-L-1822983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

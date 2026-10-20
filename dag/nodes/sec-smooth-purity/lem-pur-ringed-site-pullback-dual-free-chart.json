@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-ringed-site-pullback-dual-free-chart",
+ "kind": "statement",
+ "title": "Invertibility of a pulled evaluation comparison on a finite-free chart",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small relative to a universe $W$ [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], both with finite limits. Let $U:\\mathcal C\\to\\mathcal D$ be continuous and preserve finite limits and covering sieves. Let $R$ and $S$ be sheaves of commutative rings on the respective sites, with a morphism of underlying ring sheaves $a:R\\to U_*S$. Use the module sheaf categories [def-weil-sheaf-of-modules-category], internal sheaf Hom [def-pur-sheaf-hom] and slice restriction [def-pur-localized-ringed-site]. Assume that for every $V\\in\\mathcal C$, the slice site $\\mathcal C/V$ has additive sheafification and its sheafification equivalences are exactly the locally bijective maps. Suppose $F$ is the module left adjoint to $U_*$, with adjunction unit $\\eta$. Let $L$ be an $R$-module sheaf, and let $d:F(\\mathcal Hom_R(L,R))\\to\\mathcal Hom_S(F(L),S)$ be $S$-linear. Suppose that for all $T\\in\\mathcal C$, $\\varphi\\in\\mathcal Hom_R(L,R)(T)$ and $m\\in L(T)$, the equation $d(\\eta(\\varphi))(\\eta(m))=a_T(\\varphi(m))$ holds, with evaluation at the identity object of each slice. Fix $V\\in\\mathcal C$ and $r\\in\\mathbf N$ and an isomorphism $L|_V\\cong(R|_V)^{\\oplus r}$, with the free module indexed by the universe-$W$ lift of $\\operatorname{Fin}(r)$. Then $d|_{U(V)}$ is an isomorphism of $S|_{U(V)}$-module sheaves. Neither a global covering family nor global invertibility nor naturality of a family of comparisons is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL (lemma-tensor-product-pullback), 03EO (lemma-internal-hom-adjoint-tensor), 0GMX (remark-pullback-internal-hom), 0FNY (example-dual), and 04J0 (lemma-localize-morphism-ringed-sites); corresponding steps of lem-pur-ringed-site-finite-free-dual-pullback."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Construct the global dual comparison by pairing transfer. Its evaluation characterization gives contravariant naturality by uniqueness. On the unit module it is the composite of pullback of Hom(R,R) ≅ R, the canonical FR ≅ S, Hom(S,S) ≅ S, and precomposition with FR ≅ S. Evaluation at 1 and linearity identify this composite with the comparison.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-pairing-transfer",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Both contravariant functors, pullback after dual and dual after pullback, are additive: internal Hom is additive and the left adjoint of additive module pushforward is additive. A natural transformation between them which is invertible on the unit is invertible on finite biproducts of units, by preservation of the opposite biproduct colimit. Transport along a free trivialization. This includes the empty biproduct, hence rank zero.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the canonical localization comparison and the restriction isomorphism for internal Hom to transport the given restricted d to the slice. The unit formula for localization and the evaluation formula for d identify that transport with the slice dual comparison by pairing-transfer uniqueness. Existence of all slice module adjoints and additive sheafification in the containing universe is provided by the universe existence lemma. The slice comparison is invertible by the finite biproduct argument. Every localization and Hom restriction factor is invertible, so the original restricted d is invertible.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-localization-universes",
+    "lem-pur-ringed-site-module-pullback-exists-universes",
+    "lem-pur-ringed-site-pullback-pairing-transfer",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-pullback-pairing-transfer",
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04J0, 0GMX and 0FNY. Localization, unit evaluation and finite biproduct argument, implemented by V1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extending a pairing of sheaves of modules uniquely along pullback using the adjunction unit",
+   "results": "8 hits; SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackIso. No exact pairing-transfer or localized finite-free dual comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\"",
+   "results": "12 hits; PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id. No exact pairing-transfer or localized finite-free dual comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dual|internalHom|homObj",
+   "results": "0 hits; . No exact pairing-transfer or localized finite-free dual comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical pullback dual comparison for a finite free module sheaf is an isomorphism using additive functors and finite biproducts",
+   "results": "8 hits: CategoryTheory.Limits.pullbackComparison, SheafOfModules.freeFunctorCompPullbackIso, CategoryTheory.Limits.instIsIsoPullbackComparison, CategoryTheory.Mat_.additiveObjIsoBiproduct, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, CategoryTheory.Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct, SheafOfModules.pullbackObjFreeIso.congr_simp. Free-module pullback and preservation of biproducts are useful components; none identifies the normalized internal-dual comparison on a slice chart.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback",
+  "date": "2026-10-18",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Powers and duals paragraph: check the canonical comparison on a local free basis.",
+   "via": [
+    "lem-pur-ringed-site-finite-free-dual-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackDualFreeChart",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/PullbackDualFreeChart.lean",
+  "declaration": "SheafOfModules.isIso_over_pullback_dual_of_free",
+  "statement": "theorem isIso_over_pullback_dual_of_free\n    [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]\n    (_hcover : CoverPreserving J K U)\n    [∀ V : C, HasWeakSheafify (J.over V) AddCommGrpCat.{max u v w}]\n    [∀ V : C, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]\n    (hAdj : (pushforward.{max u v w} a).IsRightAdjoint)\n    (L : ringedSiteModules.{max u v w}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n    (d : (@pullback _ _ _ _ _ _ _ _ _ _ a hAdj).obj (homObj L (unit _)) ⟶\n      homObj ((@pullback _ _ _ _ _ _ _ _ _ _ a hAdj).obj L) (unit _))\n    (hd : ∀ (T : C) (φ : (homObj L (unit _)).val.obj (op T))\n        (m : L.val.obj (op T)),\n      (((d.val.app (op (U.obj T))\n        (((@pullbackPushforwardAdjunction _ _ _ _ _ _ _ _ _ _ a hAdj).unit.app\n          (homObj L (unit _))).val.app (op T) φ)).app\n            (op (Over.mk (𝟙 (U.obj T))))))\n        (((@pullbackPushforwardAdjunction _ _ _ _ _ _ _ _ _ _ a hAdj).unit.app L).val.app\n          (op T) m) = a.hom.app (op T) (φ.app (op (Over.mk (𝟙 T))) m))\n    (V : C) (r : ℕ)\n    (he : Nonempty (L.over V ≅\n      free (R := ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)\n        (ULift.{max u v w} (Fin r)))) :\n    IsIso (d.over (U.obj V))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261020T135431-L-1822983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261020T135431-L-1822983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
