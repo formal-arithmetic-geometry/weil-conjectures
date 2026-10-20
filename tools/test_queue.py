@@ -46,7 +46,7 @@ class RepairOrder(unittest.TestCase):
             fake={'t':0,'route':{'Sheaf.OnRoute'},'batches':{'batch3':{'Sheaf.OnRoute'}}}
             below={'batch3':{'Sheaf.Near':2,'Sheaf.NotImported':1,'Sheaf.OnRoute':0},'batch4':{'Sheaf.Far':3,'Sheaf.Near':5}}
             with patch.object(queue,'WORK',root),patch.object(queue.li,'file_of',lambda m:root/m),\
-                 patch.object(sorry_route,'load',lambda:fake),patch.object(sorry_route,'changed_since',lambda t,ms:set()):
+                 patch.object(sorry_route,'load',lambda:fake),patch.object(sorry_route,'changed_in_batches',lambda r,imps:set()):
                 items,held=queue.stage3({},dist,{'Sheaf.Far'},below)
                 self.assertEqual([item[2] for item in items],['Sheaf.OnRoute','Sheaf.NotImported','Sheaf.Near'])
                 self.assertEqual([item[5] for item in items],[0,1,2])

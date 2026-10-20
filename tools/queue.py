@@ -127,7 +127,7 @@ def stage3(imports, dist, waiting: set[str], below: dict[str, dict[str, int]] | 
                 bdist[m] = k
     keep = set(dist)
     if route is not None:
-        keep = route["route"] | sorry_route.changed_since(route["t"], dist) | set(repairs)
+        keep = route["route"] | sorry_route.changed_in_batches(route, imports) | set(repairs)
         STATE["off_route"] = sorted(m for m in dist if m not in keep and m not in bdist and li.file_of(m).is_file()
                                     and li.sorry_count(li.file_of(m).read_text(errors="ignore")))
     items, held = [], []

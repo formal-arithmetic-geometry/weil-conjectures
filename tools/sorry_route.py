@@ -31,6 +31,9 @@ not replace a complete local/sorry-route.json: the partial result goes to local/
 keep the last complete route (a walk fails transiently while a global build rewrites the .oleans; at 12:27 that day the
 fallback to the import closure rewrote the queue without the items below the route and the dispatcher stopped 300+
 workers). Only when no complete route exists is the partial file written as before.
+2026-10-20 (G8 maintenance): retain failed batches separately. A missing artifact in one batch must not discard a
+successful refresh of another batch. Each batch keeps the commit and time its own walk read, including retained
+batches; source-change checks use that baseline and that batch's import closure.
 Own route, reporting only (the human, 2026-10-18): batch 4's target uses batch 3's target, so batch 4's route counted
 all of batch 3's remaining work again. "own" is a separate walk per open batch N with stops = its assumptions plus every
 declaration of the target modules of the OTHER open batches (resolved through `declaring()`): another batch's main
@@ -95,7 +98,7 @@ def walk(mod, stops=(), stop_mods=()):
     # 2026-10-20 (b69): no `import {mod}` (the twin modules collide in one environment); the walk reads the .oleans
     # of the target's project closure itself. Every constant of a loaded stop module is a stop (not entered, not reported).
     f.write_text(f"import Lean\nopen Lean\n\n{body}\n#eval SorryRoute.run {arr(declaring(mod))} {arr(stops)} {arr(stop_mods)}\n")
-    env = dict(os.environ, SHEAF_TOOL_TIMEOUT="900")   # SHEAF_FILE_TIMEOUT is reset to 60 by coord/sheaf.env (b69, 2026-10-20)
+    env = dict(os.environ, SHEAF_TOOL_TIMEOUT=os.environ.get("SHEAF_TOOL_TIMEOUT", "900"))
     r = subprocess.run(["tools/lean_file.sh", str(f.relative_to(R))], cwd=R, env=env, capture_output=True, text=True,
                        timeout=1200)
     out = r.stdout + r.stderr
@@ -110,7 +113,7 @@ def walk(mod, stops=(), stop_mods=()):
     return res
 
 
-_COMMITS = {}   # route time -> commit of the build it read (changed_since)
+_SNAPSHOTS = {}   # route time -> per-batch source baselines (changed_since)
 
 
 def build_commit():
@@ -133,22 +136,25 @@ def load():
         return None
     if not d.get("ok") or "batches" not in d:
         return None
-    _COMMITS[d["t"]] = d.get("commit")
+    _SNAPSHOTS[d["t"]] = d
     return {"t": d["t"], "commit": d.get("commit"), "batches": {k: set(v) for k, v in d["batches"].items()}, "route": set(d["route"])}
 
 
-def changed_since(t, modules):
+def changed_since(t, modules, batch=None):
     """Modules whose source changed after the route was computed: a landing may have added a sorry the route does not
     know yet (a split); consumers keep them until the next refresh (~/cc1/sorry-route-loop.sh after each green build).
     2026-10-20 (b69): "changed" means the source differs (git) from the commit of the build the route read; the file
     mtime is used only for a route without a recorded commit (the upstream sync rewrote every file's mtime)."""
-    commit = _COMMITS.get(t)
-    if commit is None:
+    snapshot = _SNAPSHOTS.get(t)
+    if snapshot is None:
         try:
             d = json.loads((R / "local" / "sorry-route.json").read_text())
-            if d.get("t") == t: commit = d.get("commit")
+            if d.get("t") == t: snapshot = d
         except (OSError, ValueError):
             pass
+    snapshot = snapshot or {}
+    commit = snapshot.get("batch_commits", {}).get(batch, snapshot.get("commit"))
+    baseline_time = snapshot.get("batch_times", {}).get(batch, t)
     if commit:
         r = subprocess.run(["git", "diff", "--name-only", "--no-renames", commit, "--", "lean"], cwd=R,
                            capture_output=True, text=True)
@@ -162,9 +168,58 @@ def changed_since(t, modules):
     for m in modules:
         p = R / "lean" / (m.replace(".", "/") + ".lean")
         try:
-            if p.stat().st_mtime > t: out.add(m)
+            if p.stat().st_mtime > baseline_time: out.add(m)
         except OSError:
             pass
+    return out
+
+
+def changed_in_batches(route, imports):
+    """Source changes since each batch's own successful walk, scoped to its current import closure."""
+    out = set()
+    for batch in route["batches"]:
+        seen, todo = set(), list(targets(int(batch.removeprefix("batch"))))
+        while todo:
+            m = todo.pop()
+            if m in seen: continue
+            seen.add(m)
+            todo.extend(imports.get(m, ()))
+        out.update(changed_since(route["t"], seen, batch))
+    return out
+
+
+def retain_failed_batches(out, previous, failed_batches):
+    """Keep complete prior walks for failed batches, without throwing away healthy batches' new walks."""
+    previous = previous if previous and previous.get("ok") else {}
+    out["batch_commits"] = {b: out["commit"] for b in out["batches"]}
+    out["batch_times"] = {b: out["t"] for b in out["batches"]}
+    retained = []
+    missing = []
+    for batch in sorted(failed_batches):
+        if batch not in previous.get("batches", {}):
+            missing.append(batch)
+            continue
+        out["batches"][batch] = previous["batches"][batch]
+        out["batch_commits"][batch] = previous.get("batch_commits", {}).get(batch, previous.get("commit"))
+        out["batch_times"][batch] = previous.get("batch_times", {}).get(batch, previous["t"])
+        retained.append(batch)
+    # Own routes are reporting only, but a failed own walk must not erase an older complete report either.
+    own_retained = []
+    for batch in {x.split(":", 1)[0] for x in out["own_failed"]}:
+        if batch in previous.get("own", {}):
+            out["own"][batch] = previous["own"][batch]
+            own_retained.append(batch)
+    for target in out["failed"]:
+        if target in previous.get("targets", {}):
+            out["targets"][target] = previous["targets"][target]
+    route = {}
+    for batch in out["batches"].values():
+        for m, ds in batch.items():
+            route.setdefault(m, set()).update(ds)
+    out["route"] = {m: sorted(ds) for m, ds in sorted(route.items())}
+    out["retained"] = retained
+    out["own_retained"] = sorted(own_retained)
+    out["ok"] = not missing
     return out
 
 
@@ -189,7 +244,12 @@ def main():
         return check(int(sys.argv[2]), sys.argv[3:])
     ns = [int(a) for a in sys.argv[1:]] or open_batches()
     commit = build_commit()   # before the walks: a build published meanwhile is newer than what they read
+    try:
+        previous = json.loads((R / "local" / "sorry-route.json").read_text())
+    except (OSError, ValueError):
+        previous = None
     route, batches, tgt, failed = {}, {}, {}, []
+    failed_batches = set()
     walks = {}   # (module, assumptions) -> walk; tgt keeps the walks without assumptions
     assumed_by = {}
     for n in ns:
@@ -201,7 +261,7 @@ def main():
             if (mod, stops) not in walks:
                 w = walk(mod, stops)
                 if w is None:
-                    failed.append(mod); continue
+                    failed.append(mod); failed_batches.add(f"batch{n}"); continue
                 walks[(mod, stops)] = w
                 if not stops:
                     tgt[mod] = w
@@ -250,18 +310,21 @@ def main():
            "batches": {k: srt(v) for k, v in batches.items()}, "targets": {k: srt(v) for k, v in tgt.items()},
            "assumed": assumed_by, "own": {k: srt(v) for k, v in own.items()}, "own_failed": own_failed}
     (R / "local").mkdir(exist_ok=True)
-    if failed and load() is not None:   # 2026-10-18: keep the last complete route (see the docstring)
+    if failed:
         (R / "local" / "sorry-route-failed.json").write_text(json.dumps(out, indent=1))
-        print(f"walks failed ({', '.join(failed)}): local/sorry-route.json keeps the last complete route; "
-              "this partial result is in local/sorry-route-failed.json", file=sys.stderr)
+    out = retain_failed_batches(out, previous, failed_batches)
+    if not out["ok"] and previous and previous.get("ok"):
+        print("walks failed without a previous route for every failed batch; keeping the last complete route", file=sys.stderr)
     else:
         tmp = R / "local" / ".sorry-route.json"; tmp.write_text(json.dumps(out, indent=1)); tmp.replace(R / "local" / "sorry-route.json")
+    if out["retained"]:
+        print("retained previous routes and source baselines for " + ", ".join(out["retained"]), file=sys.stderr)
     for k, v in out["batches"].items():
         print(f"{k}: {sum(len(x) for x in v.values())} sorried declarations in {len(v)} modules")
     for k, v in out["own"].items():
         print(f"{k} own: {sum(len(x) for x in v.values())} sorried declarations in {len(v)} modules")
     print("own walks failed:", own_failed)
-    print(len(route), "modules on the sorry route;", "failed:", failed)
+    print(len(out["route"]), "modules on the sorry route;", "failed:", failed)
     return 1 if failed else 0
 
 

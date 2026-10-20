@@ -42,7 +42,7 @@ def reach(n):
     c = closure(n)
     if route is None or f"batch{n}" not in route["batches"]:
         notes.append(f"batch{n}: no complete sorry route, import closure used"); return c
-    return route["batches"][f"batch{n}"] | sorry_route.changed_since(route["t"], c) | set((below or {}).get(f"batch{n}", ()))
+    return route["batches"][f"batch{n}"] | sorry_route.changed_since(route["t"], c, f"batch{n}") | set((below or {}).get(f"batch{n}", ()))
 
 
 ns = sorted(int(m.group(1)) for p in (R / "coord").glob("batch*-targets.txt") if (m := re.fullmatch(r"batch(\d+)-targets\.txt", p.name)))
