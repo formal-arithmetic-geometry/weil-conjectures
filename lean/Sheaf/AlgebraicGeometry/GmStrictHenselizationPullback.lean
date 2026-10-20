@@ -17,6 +17,7 @@ import WeilConjectures.CategoryTheory.Sites.Torsor
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-!
 # Pullback of the units sheaf to a strict henselization

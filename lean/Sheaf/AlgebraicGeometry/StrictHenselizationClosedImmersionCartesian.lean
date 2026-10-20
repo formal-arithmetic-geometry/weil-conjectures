@@ -17,6 +17,7 @@ import WeilConjectures.RingTheory.PointedEtaleFiltered
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import WeilConjectures.RingTheory.StrictlyHenselianQuotient
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-!
 # Strict localization along a closed immersion

@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.TraceFormula.StrictHenselizationQuasiFiniteRing
 import Sheaf.TraceFormula.StrictHenselizationTensorFinite
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-!
 # Finite base change of strict localizations

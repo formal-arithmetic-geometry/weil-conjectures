@@ -7,6 +7,8 @@ module
 public import Sheaf.CategoryTheory.ExactCouple
 public import Sheaf.CategoryTheory.Filtration
 public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import WeilConjectures.CategoryTheory.Abelian.Filtration
+import WeilConjectures.CategoryTheory.ExactCouple
 
 /-!
 # Edge collapse and edge maps

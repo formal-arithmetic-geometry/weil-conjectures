@@ -19,6 +19,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.CategoryTheory.Limits.Final
 import Mathlib.CategoryTheory.Elements
 import Sheaf.CategoryTheory.SitePointFibre
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-! # Affine neighbourhoods of an oriented geometric point
 

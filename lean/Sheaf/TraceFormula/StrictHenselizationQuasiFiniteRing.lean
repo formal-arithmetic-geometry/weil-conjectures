@@ -23,6 +23,7 @@ import Mathlib.FieldTheory.IsSepClosed
 import Mathlib.RingTheory.Etale.Basic
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.RingTheory.IndEtaleUniverseTransport
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-!
 # Strict henselization under a quasi-finite ring map

@@ -24,6 +24,7 @@ import Sheaf.TraceFormula.LocalQuasiFiniteProjection
 import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-!
 # Dimension-preserving projective model of a strict localization

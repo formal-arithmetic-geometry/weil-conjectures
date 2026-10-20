@@ -17,6 +17,8 @@ import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.AlgebraicGeometry.LogSmoothDifferentialLocalFreeness
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-!
 # Logarithmic differential generators and their characteristic cokernel

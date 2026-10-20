@@ -14,6 +14,7 @@ import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.RingTheory.IndEtaleStability
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-! # Ind-etale invariance of strict localizations
 
