@@ -17894,3 +17894,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:20 L: returned deliver/P5/Sheaf.Paper.AdicStratifiedPerfect (reviewer RETURN: (the landing tools, head a02db883b) the delivery did not land: lean/Sheaf/Paper/AdicStratifiedPerfect.lean changed on sh)
 - 12:20 L: returned deliver/P5/Sheaf.Paper.DerivedNakayamaFirstReduction (reviewer RETURN: (the landing tools, head ffaf882b3) the delivery did not land: lean/Sheaf/Paper/DerivedNakayamaFirstReduction.lean chang)
 - 12:20 L: returned deliver/P5/Sheaf.SixFunctors.IntegralExpressionOccurrences (reviewer RETURN: (the landing tools, head 534e05777) the delivery did not land: lean/Sheaf/SixFunctors/IntegralExpressionOccurrences.lean)
+- 12:20 L: returned deliver/P6/Sheaf.Paper.AmplificationProper (reviewer RETURN: (the landing tools, head 149cd6ea6) the delivery did not land: lean/Sheaf/Paper/AmplificationProper.lean changed on shea)
