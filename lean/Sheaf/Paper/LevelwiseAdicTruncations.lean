@@ -69,6 +69,13 @@ namespace AlgebraicGeometry.Scheme
 
 variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
+-- Select the generic standard localizations before trying specialized coefficient instances.
+attribute [local instance 2000] reductionRingModulesHasDerivedCategory
+attribute [local instance 2000] pbcTowers_hasDerivedCategory
+
+-- Keep the universal scalar-extension witnesses behind their functor/adjunction API.
+attribute [local irreducible] completedAdicDerivedChange pbcDerivedScalarAdjunction
+
 /-- Exact scalar restriction inherits the existing termwise derived shift comparison.
 Source: Stacks Tag 03DA, blueprint order 1429
 (blueprint: prop-weil-pbc-levelwise-truncations). -/
@@ -308,6 +315,15 @@ theorem pbc_levelwise_truncation_cohomology (M : AdicTower T d) (m : ℤ) :
       simp only [Functor.id_map, Category.assoc]
       rw [truncGE_restriction_unit]
 
+private lemma scalar_unit_transport
+    {C D : Type*} [Category C] [Category D] {F : C ⥤ D} {G : D ⥤ C}
+    (adj : F ⊣ G) {X X' : C} {Y Y' : D}
+    (u : X ⟶ X') (f : F.obj X' ⟶ Y) (v : Y ⟶ Y') :
+    adj.unit.app X ≫ G.map (F.map u ≫ f ≫ v) =
+      u ≫ adj.unit.app X' ≫ G.map f ≫ G.map v := by
+  have h := adj.unit.naturality_assoc u (G.map f ≫ G.map v)
+  simpa only [Functor.id_map, Functor.comp_map, Functor.map_comp, Category.assoc] using h.symm
+
 set_option backward.isDefEq.respectTransparency false in
 /-- Under normalization, the strict transitions are exactly the adjuncts of the new
 normalizations; thus the preceding cohomology identifications are also those of the
@@ -380,8 +396,10 @@ theorem pbc_levelwise_truncation_transitions {M : AdicTower T d} {m : ℤ}
         Category.assoc] using!
         ((DerivedCategory.TStructure.t.truncLEι m).naturality
           (adicTowerSemilinearTransition T d M.level M.normalization b a hab)).symm
-    simpa [adicTowerSemilinearTransition, PbcLevelwiseTruncationData.lowerNormalization,
-      φ, F, G, adj, Functor.map_comp, Category.assoc] using h
+    simpa only [adicTowerSemilinearTransition,
+      PbcLevelwiseTruncationData.lowerNormalization, φ, F, G, adj,
+      Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, eqToIso.hom, eqToIso.inv,
+      scalar_unit_transport, Category.assoc] using h
   · have h : adj.unit.app
           ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (M.level b)) ≫
         G.map (N.upperNormalization b a hab).hom =
@@ -403,8 +421,10 @@ theorem pbc_levelwise_truncation_transitions {M : AdicTower T d} {m : ℤ}
       erw [truncGE_restriction_unit]
       simp only [adicTowerSemilinearTransition, adj, G, Category.assoc, Functor.id_obj]
       rfl
-    simpa [adicTowerSemilinearTransition, PbcLevelwiseTruncationData.upperNormalization,
-      φ, F, G, adj, Functor.map_comp, Category.assoc] using h
+    simpa only [adicTowerSemilinearTransition,
+      PbcLevelwiseTruncationData.upperNormalization, φ, F, G, adj,
+      Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, eqToIso.hom, eqToIso.inv,
+      scalar_unit_transport, Category.assoc] using h
 
 
 set_option backward.isDefEq.respectTransparency false in
