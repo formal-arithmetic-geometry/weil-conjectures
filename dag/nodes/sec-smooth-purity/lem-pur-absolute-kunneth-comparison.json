@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-absolute-kunneth-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ordinary-kunneth-finite-ring",
+   "place": "canonical absolute exterior-product map and its terminal-topos comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Absolute and relative canonical Kunneth maps agree",
+ "statement": "Fix a monoidal Grothendieck abelian category A with functorial flat resolutions, exact etale inverse image preserving flat objects, and the canonical monoidal constant-sheaf structures. Let p: Z → X, q: Z → Y, f: X → S, g: Y → S satisfy qg=pf. Assume the constant-sheaf functors on S and Z preserve flat objects. Write F_T ⊣ G_T for derived constants and sections. For K in D(X,A), M in D(Y,A), the absolute arrow of [def-pur-ordinary-kunneth-absolute-map] equals the composite: tensor of β_f inverse and β_g inverse; the mate under F_S ⊣ G_S of δ_S followed by ε_S ⊗ ε_S; G_S applied to the relative canonical Kunneth map of [def-kun-kunneth-map]; and β_(pf). Here β_h: Rh_* ⋙ G_S ≅ G_T is the conjugate of the canonical comparison F_T ≅ F_S ⋙ Lh*. This assertion concerns equality of the specified arrows, not existence of an isomorphism of their endpoints.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-ordinary-kunneth-finite-ring.md",
+  "place": "canonical exterior-product arrow; adjoint construction of def-kun-kunneth-map, order 1740"
+ },
+ "stmt_deps": [
+  "def-pur-ordinary-kunneth-absolute-map",
+  "def-kun-constant-projection-morphism",
+  "def-kun-derived-tensor",
+  "def-kun-kunneth-map"
+ ],
+ "proof": [
+  {
+   "text": "The canonical constant-pullback isomorphisms compose and are monoidal: evaluate the sheaf constraints on constant presheaves, whose tensor and unit maps have identity components, and use monoidal sheafification. Derive these equations using the counit normalization of the exact-functor comparison isomorphisms and naturality and composition of the derived tensor comparisons.",
+   "uses": [
+    "def-pur-ordinary-kunneth-absolute-map",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define β_f: Rf_* ⋙ G_S ≅ G_X to be the conjugate of α_f under the composite constants/pullback adjunction and the constants/sections adjunction on X. Transpose the relative composite by F_Z ⊣ G_Z. Its last β_(p≫f) becomes α_(p≫f) followed by the composite counit. Expand the point tensor mate and the relative Kunneth adjunct, using the definitions of the two adjunction bijections.",
+   "uses": [
+    "def-kun-constant-projection-morphism",
+    "def-kun-kunneth-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the constant-pullback composition and tensor identities of step 1. Naturality moves the β_f and β_g inverses through the tensor comparison. Their conjugate counit equations give a_p and a_q; the unit and counit at S cancel by the triangle identities. The resulting adjunct is δ_Z followed by a_p ⊗ a_q, exactly the absolute adjunct. Injectivity of the adjunction Hom bijection proves the claimed equality. No cartesianness, finite type, coefficient finiteness or point equivalence is used. The argument applies also to the empty scheme and zero complexes.",
+   "uses": [
+    "def-pur-ordinary-kunneth-absolute-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-ordinary-kunneth-absolute-map",
+  "lem-kun-inverse-image-monoidal",
+  "def-kun-constant-projection-morphism",
+  "def-kun-kunneth-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-ordinary-kunneth-finite-ring.md",
+  "place": "adjunction specialization of the canonical map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The absolute derived global sections tensor product map agrees with relative Kunneth under the adjunction of constant sheaves and sections",
+   "results": "8 hits: constantSheafΓAdj, constantSheafAdj, Sheaf.ΓHomEquiv and related sheaf adjunctions; no derived Kunneth comparison",
+   "date": "2026-10-21",
+   "verdict": "adjunction ingredients only, no matching theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The absolute Kunneth map obtained from constant sheaves and global sections is the relative Kunneth map transported through the adjunction comparisons",
+   "results": "8 hits including Sheaf.ΓHomEquiv_naturality_left and SheafOfModules.PullbackConstruction.adjunction; none states the derived tensor comparison",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "12 hits including conjugateEquiv_counit and conjugateIsoEquiv; these describe single adjunction conjugates, not the Kunneth identity",
+   "date": "2026-10-21",
+   "verdict": "useful normalization tools, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|kunneth",
+   "results": "0 Mathlib hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryKunnethFiniteRing",
+  "date": "2026-10-21",
+  "group": "G7"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbsoluteKunnethComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbsoluteKunnethComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryGlobalKunnethMap_eq_relative",
+  "statement": "theorem ordinaryGlobalKunnethMap_eq_relative\n    {S X Y Z : Scheme.{u}} (p : Z ⟶ X) (q : Z ⟶ Y)\n    (f : X ⟶ S) (g : Y ⟶ S) (w : q ≫ g = p ≫ f)\n    [(constantSheaf S.smallEtaleTopology A).PreservesFlat]\n    [(constantSheaf Z.smallEtaleTopology A).PreservesFlat]\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))\n    (M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :\n    ordinaryGlobalKunnethMap A p q K M =\n      ordinaryRelativeGlobalKunnethMap A p q f g w K M",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryKunnethSectionsIso",
+   "AlgebraicGeometry.Etale.ordinaryRelativeGlobalKunnethMap",
+   "AlgebraicGeometry.Etale.ordinaryGlobalKunnethMap_eq_relative"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b3b1e",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261020T221202-L-4154765",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b3b1e",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261020T221202-L-4154765",
+  "kind": "interface",
+  "note": "independent cc review: delivered OrdinaryKunnethMap/AbsoluteKunnethComparison/item vs clone sheaf-dag (moved bodies identical) and node lem-pur-ordinary-kunneth-finite-ring + new nodes vs Lean signatures; importers ExternalRHomConePairing (live) and CompactProductArrows/KunnethSupported/CompactProductProperSupportCompatibility (side-live) compiled against delivery and baseline; axioms checked"
+ }
+}
