@@ -46,10 +46,8 @@
    }
   },
   {
-   "text": "Add the two displayed expansions. Every term involving F with an inserted product g_jg_{j+1}, and every endpoint term F(x,g_1,...,g_{n-1})(1), occurs twice with opposite signs; the sole uncancelled term is F(g_1,...,g_n)(x). Since this equality holds for every x and every (g_1,...,g_n), it is the equality of continuous cochains d^{n-1}h_nF+h_{n+1}d^nF=F. Reuse the two public tuple identities Rep.contract_insert_zero and Rep.contract_insert_succ from lem-sc-locally-constant-cochains-acyclic-embedding instead of restating them.",
-   "uses": [
-    "lem-sc-locally-constant-cochains-acyclic-embedding"
-   ],
+   "text": "Add the two displayed expansions. Every term involving F with an inserted product g_jg_{j+1}, and every endpoint term F(x,g_1,...,g_{n-1})(1), occurs twice with opposite signs; the sole uncancelled term is F(g_1,...,g_n)(x). Since this equality holds for every x and every (g_1,...,g_n), it is the equality of continuous cochains d^{n-1}h_nF+h_{n+1}d^nF=F. Establish the two needed specialized tuple equalities locally by function extensionality, Fin.cases, and simplification of Fin.contractNth. The zero face merges x with the head of g; every successor face commutes with insertion of x. Split the finite sum at zero, rewrite signs, and cancel in the additive group.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
@@ -58,13 +56,12 @@
   }
  ],
  "proof_deps": [
-  "lem-exc-coinduced-homotopy-continuous",
-  "lem-sc-locally-constant-cochains-acyclic-embedding"
+  "lem-exc-coinduced-homotopy-continuous"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG; direct local-constancy construction and expansion of the inhomogeneous differential; reuse the existing insertion identities from Sheaf.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedding, exposed publicly in place by P1."
+  "place": "Tag 0DVG; direct local-constancy construction and expansion of the inhomogeneous differential. The specialized insertion equalities are checked locally from Fin.contractNth, so no acyclic-embedding module or public tuple helper is needed."
  },
  "mathlib_searches": [
   {
@@ -145,13 +142,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "C-78b61",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261018T071208-L-1673419",
+  "landing": "20261020T144250-L-2259590",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Withdrawn Sheaf copy's theorem statement vs upstream WeilConjectures.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedding (byte-identical, sorry-free); original CoinducedHomotopyIdentity vs withdrawn stub (fails at 184 as reported) vs adapted (compiles, axioms clean); importer CoinducedContinuousAcyclic compiles; node diffs vs clone"
  }
 }

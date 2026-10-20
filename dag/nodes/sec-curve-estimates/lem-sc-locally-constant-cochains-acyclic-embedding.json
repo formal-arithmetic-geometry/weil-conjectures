@@ -91,14 +91,15 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedding",
-  "file": "lean/Sheaf/RepresentationTheory/LocallyConstantCochainsAcyclicEmbedding.lean",
+  "existing": true,
+  "module": "WeilConjectures.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedding",
+  "file": "lean/WeilConjectures/RepresentationTheory/LocallyConstantCochainsAcyclicEmbedding.lean",
   "declaration": "Rep.locallyConstantCochains_acyclic_embedding",
   "statement": "theorem locallyConstantCochains_acyclic_embedding\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    (A : Type v) [Category.{w} A] [Abelian A]\n    (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G)\n    (C : A ⥤ CochainComplex AddCommGrpCat.{max u s} ℕ)\n    (e : ∀ (M : A) (n : ℕ),\n      (C.obj M).X n ≃+ LocallyConstant (Fin n → G) (E.functor.obj M).obj.V)\n    (hm : ∀ (M N : A) (f : M ⟶ N) (n : ℕ) (x : (C.obj M).X n) (g : Fin n → G),\n      e N n (((C.map f).f n) x) g = (E.functor.map f).hom.hom (e M n x g))\n    (hd : ∀ (M : A) (n : ℕ) (x : (C.obj M).X n) (g : Fin (n + 1) → G),\n      e M (n + 1) (((C.obj M).d n (n + 1)) x) g =\n        (E.functor.obj M).obj.ρ (g 0) (e M n x (fun k ↦ g k.succ)) +\n          ∑ k : Fin (n + 1),\n            (-1 : ℤ) ^ (k.val + 1) • e M n x (Fin.contractNth k (· * ·) g))\n    (M : A) : ∃ (N : A) (f : M ⟶ N), Mono f ∧\n      ∀ n : ℕ, 0 < n → (C.obj N).ExactAt n",
   "branch": "sheaf-dag",
   "by": "G4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "Retired the duplicate Sheaf module in favour of its existing upstream twin. Rep.locallyConstantCochains_acyclic_embedding has the identical statement and a complete proof. The twin keeps its tuple insertion helpers private; the sole former helper consumer proves the required specialized tuple equalities locally."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -111,14 +112,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "C-78b61",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T033006-L-3677987",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T144250-L-2259590",
+  "kind": "interface",
+  "note": "independent cc review: Withdrawn Sheaf copy's theorem statement vs upstream WeilConjectures.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedding (byte-identical, sorry-free); original CoinducedHomotopyIdentity vs withdrawn stub (fails at 184 as reported) vs adapted (compiles, axioms clean); importer CoinducedContinuousAcyclic compiles; node diffs vs clone"
  },
  "lean_audit": {
   "master": {

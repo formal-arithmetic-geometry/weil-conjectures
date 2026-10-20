@@ -6,7 +6,6 @@ Authors: SHEAF worker H1
 module
 
 public import Sheaf.RepresentationTheory.CoinducedHomotopyContinuous
-import Sheaf.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedding
 import Mathlib.Tactic.Abel
 
 /-!
@@ -180,8 +179,17 @@ theorem coinduced_homotopy_identity
       F g x
   rw [Fin.sum_univ_succ (fun k : Fin (n + 2) ↦
     (-1 : ℤ) ^ (k.val + 1) • F (Fin.contractNth k (· * ·) (Fin.cons x g)) 1)]
+  have hzero : Fin.contractNth 0 (· * ·) (Fin.cons x g) =
+      Fin.cons (x * g 0) (fun i ↦ g i.succ) := by
+    funext i
+    refine Fin.cases ?_ (fun j ↦ ?_) i <;> simp [Fin.contractNth]
+  have hsucc (k : Fin (n + 1)) :
+      Fin.contractNth k.succ (· * ·) (Fin.cons x g) =
+        Fin.cons x (Fin.contractNth k (· * ·) g) := by
+    funext i
+    refine Fin.cases ?_ (fun j ↦ ?_) i <;> simp [Fin.contractNth]
   simp only [Fin.val_zero, zero_add, pow_one, neg_one_zsmul,
-    contract_insert_zero, contract_insert_succ, Fin.val_succ]
+    hzero, hsucc, Fin.val_succ]
   simp only [pow_succ', mul_zsmul, neg_one_zsmul, Finset.sum_neg_distrib]
   abel
 
