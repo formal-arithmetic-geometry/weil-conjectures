@@ -14,6 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorStalkKernelSpan
 # Local generators of an exterior tensor quotient kernel
 
 Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
+
+The proof uses the adopted upstream exteriorPower stalk-kernel theorem and transports
+its sectionwise relation span through the sheaf comparison.
 -/
 
 @[expose] public section
