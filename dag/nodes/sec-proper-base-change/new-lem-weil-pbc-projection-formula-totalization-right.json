@@ -16,17 +16,30 @@
  ],
  "proof": [
   {
-   "text": "Expand the canonical representative comparison, apply the chosen finite-total inverse, and cancel the comparison isomorphisms by associativity and identity laws.",
+   "text": "The second component rho is a composite eB.hom, Q.map s and eC.inv. Here s is the inverse of tensorAdjunctionTotal. Install the canonical unit isomorphism and use tensorAdjunctionTotal_isIso with the given bounded splitting package. Localization and composition preserve isomorphisms, so rho is an isomorphism.",
    "uses": [
     "def-weil-pbc-projection-formula-arrows"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the existing first totalization inverse equation with exactly the same data to obtain pi followed by rho equals the identity. This retains the representative and derived-adjunction argument in the first-conjunct node.",
+   "uses": [
+    "new-lem-weil-pbc-projection-formula-totalization-left"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By CategoryTheory.comp_hom_eq_id, pi is inv rho. Substitute this equality and apply IsIso.hom_inv_id to get rho followed by pi equals the identity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-projection-formula-arrows"
+  "def-weil-pbc-projection-formula-arrows",
+  "new-lem-weil-pbc-projection-formula-totalization-left"
  ],
- "proof_origin": "main-20261015 proof, conjunct of lemma 1267",
+ "proof_origin": "F5 stage 3, 2026-10-20: shorter categorical argument from the existing first inverse equation and the invertibility already used in definition 1264. The signed finite-total and canonical-representative route is retained through those declarations.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -95,13 +108,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "F5",
   "result": "pass",
-  "landing": "20261018T103141-L-4174414",
-  "kind": "interface",
+  "landing": "20261020T051241-L-1609066",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
