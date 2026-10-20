@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-realized-exchange-normalization",
+ "kind": "statement",
+ "title": "Constant-ring realization preserves the canonical pro-etale exchange",
+ "statement": "Let Λ be a finite commutative ring, let (g',f',f,g) be a chosen Cartesian square of schemes, and use the actual module-sheaf derived operations and ambient exchange of [def-weil-pbc-ambient-ringed-exchange]. For each corner T choose a ring sheaf R_T and an isomorphism e_T:Λ_T≅R_T from the associated constant ring. Give every edge h:U→V the coefficient identification H_h(R_V)≅R_U equal to H_h(e_V^{-1}) followed by the canonical constant comparison followed by e_U, using [lem-weil-pbc-profinite-coefficient-inverse-image]. Assume explicitly that the two composite coefficient identifications agree around the square. Let C_T:D(R_T)→D(Sh(T_proet,Mod_Λ)) be exact restriction along e_T followed by the inverse of the derived constant-ring realization from [def-weil-pbc-etale-origin-witness, def-weil-pbc-proetale-modules, lem-weil-pbc-realized-exchange-compatibility]. Then for every K∈D(R_X), the actual ringed ambient exchange at K is invertible if and only if the source-library fixed-scalar ProEtale.derivedBaseChangeMap at C_X(K) is invertible. The assertion has no properness, boundedness, constructibility or etale-origin hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-pullback-composition; remark-base-change; remark-compose-base-change (Stacks Tags 0D6D, 0D6E and 07A7)",
+  "note": "This is the coefficient-realization normalization implicit in the first sentence of the finite-level proper-base-change proof. It is independent of the subsequent proper-base-change and etale-origin argument.",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-adjoint-pullback-pushforward-modules; lemma-push-pull-composition-modules (Stacks Tags 00YV and 03D2)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the four assumed coefficient equalities, keeping the supplied coefficient compatibility proof. Specialize [lem-weil-pbc-realized-exchange-compatibility] to K. Its equation and the two already constructed endpoint isomorphisms give an isomorphism of arrows from C_Y prime applied to the actual ambient exchange at K to the fixed-scalar exchange at C_X(K).",
+   "uses": [
+    "lem-weil-pbc-realized-exchange-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coordinates functor reflects isomorphisms: scalar restriction is conservative on module sheaves and exact, hence conservative after localization by the homology criterion; restriction to constant scalars is an exact equivalence. The isomorphism-of-arrows criterion and conservativity give both implications of the asserted IsIso equivalence.",
+   "uses": [
+    "lem-weil-pbc-realized-exchange-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-realized-exchange-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "remark-base-change; invariance under exact equivalences",
+  "note": "Lean proof complete: substitute the coefficient equalities, specialize the structural compatibility, form Arrow.isoMk from the explicit source and target isomorphisms, and use isIso_iff_of_reflects_iso plus arrow_mk_iso_iff."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient pro-etale proper base change exchange map isomorphism",
+   "results": "RingHom etale and standard etale presentation results; no canonical ringed/fixed-scalar exchange comparison.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "equivalence constant ring module sheaves identifies geometric base change mates",
+   "results": "Generic IsBaseChange.tensorEquiv, Sheaf.isConstant_iff_of_equivalence, restriction-of-scalars equivalence and global sections results; none identifies these geometric derived exchange maps.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "Generic mate vertical composition exists; no comparison between the two specified geometric pullback squares.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(exchange|mate)|realiz.*baseChange|baseChange.*realiz",
+   "results": "No Mathlib match for the required canonical exchange normalization; local library search found fixed-scalar transport and separate ringed operations only.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteLevelProEtaleBaseChange",
+  "date": "2026-10-21",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-level-proetale",
+   "place": "Proof: identifying constant-coefficient ringed pullbacks and their canonical ambient mate with fixed-scalar inverse images before the etale proper-base-change transport.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleRealizedExchange",
+  "file": "lean/Sheaf/Paper/ProEtaleRealizedExchange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRealizedExchange_isIso_iff",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleRealizedExchange_isIso_iff"
+  ],
+  "statement": "theorem proEtaleRealizedExchange_isIso_iff\n    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}\n    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)\n    (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (R_X' : Sheaf (ProEt.topology X') CommRingCat.{u + 1})\n    (R_Y' : Sheaf (ProEt.topology Y') CommRingCat.{u + 1})\n    (eX : etaleOriginRing X Λ ≅ R_X) (eY : etaleOriginRing Y Λ ≅ R_Y)\n    (eX' : etaleOriginRing X' Λ ≅ R_X') (eY' : etaleOriginRing Y' Λ ≅ R_Y')\n    (c_f : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X)\n    (c_g : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R_Y ≅ R_Y')\n    (c_g' : (proEtaleSheafInverseImage g' CommRingCat.{u + 1}).obj R_X ≅ R_X')\n    (c_f' : (proEtaleSheafInverseImage f' CommRingCat.{u + 1}).obj R_Y' ≅ R_X')\n    (hf : c_f = proEtaleRealizedCoefficientIso Λ f eY eX)\n    (hg : c_g = proEtaleRealizedCoefficientIso Λ g eY eY')\n    (hg' : c_g' = proEtaleRealizedCoefficientIso Λ g' eX eX')\n    (hf' : c_f' = proEtaleRealizedCoefficientIso Λ f' eY' eX')\n    (hcoeff : HEq (proEtaleRingCompositeCoefficients g' f R_Y R_X R_X' c_f c_g')\n      (proEtaleRingCompositeCoefficients f' g R_Y R_Y' R_X' c_g c_f'))\n    (K : DerivedCategory (proEtaleRingModules X R_X)) :\n    IsIso ((proEtaleAmbientRingedExchange sq R_X R_Y R_X' R_Y'\n      c_f c_g c_g' c_f' hcoeff).app K) ↔\n    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app\n      ((proEtaleRealizedCoordinates Λ X R_X eX).obj K))",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T221046-L-4138746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T221046-L-4138746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

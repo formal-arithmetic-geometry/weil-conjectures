@@ -1,0 +1,183 @@
+{
+ "id": "lem-weil-pbc-realized-exchange-compatibility",
+ "kind": "statement",
+ "title": "Realization compatibility of the canonical pro-etale exchange maps",
+ "statement": "Let Λ be a finite commutative ring, let (g',f',f,g) be a chosen Cartesian square, and at each corner T choose a coefficient sheaf R_T with e_T:Λ_T≅R_T. Give each edge h its conjugated constant comparison H_h(e_V^{-1});constantComparison;e_U and assume the two composite coefficient identifications agree. Use the actual ringed module operations and ambient mate of [def-weil-pbc-ambient-ringed-exchange]. Restriction along e_T followed by restriction to constant scalars gives C_T:D(R_T)→D(Sh(T_proet,Mod_Λ)), using [def-weil-pbc-etale-origin-witness, def-weil-pbc-proetale-modules]. Let s: (Rf_*;Lg^*);C_Y' ≅ C_X;(Rf_*;Lg^*) and t:(Lg'^*;Rf'_*);C_Y' ≅ C_X;(Lg'^*;Rf'_*) be exactly proEtaleRealizedExchangeSourceIso and proEtaleRealizedExchangeTargetIso, constructed from the explicit sectionwise direct-image comparisons, their adjunction conjugates and canonical scalar restriction comparisons [lem-weil-pbc-ring-sheaf-change-adjunction]. Then whiskerRight(ambientExchange,C_Y');t = s;whiskerLeft(C_X,fixedScalarDerivedBaseChangeMap) as natural transformations. This is a structural identity of the specified maps for every unbounded derived object, with no properness, boundedness, origin-witness or invertibility assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-pullback-composition; remark-base-change; remark-compose-base-change (Stacks Tags 0D6D, 0D6E and 07A7)",
+  "note": "This is the coefficient-realization normalization implicit in the first sentence of the finite-level proper-base-change proof. It is independent of the subsequent proper-base-change and etale-origin argument.",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-adjoint-pullback-pushforward-modules; lemma-push-pull-composition-modules (Stacks Tags 00YV and 03D2)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Restrict along the specified coefficient presentations e_T. The identities c_h=H_h(e_V inverse);constantComparison;e_U give each coefficient square. Apply the normalized pullback and direct-image comparisons of [lem-weil-pbc-ring-sheaf-change-adjunction]; restriction along these isomorphisms is an exact equivalence.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A sheaf of modules over the associated constant ring is equivalently a sheaf of fixed Λ-modules, by the constant-scalar realization recorded with [def-weil-pbc-etale-origin-witness] and [def-weil-pbc-proetale-modules]. Restrict its action to constant sections to construct the inverse. Both ordinary direct images are precomposition by the site base-change functor: the identity on each section gives their comparison. The coefficient structural map sends a constant r to the same r after pullback, by the sheafification adjunction defining proEtaleConstantDirectImageMap. Thus this sectionwise comparison is Λ-linear. Adjunction induces the corresponding inverse-image comparison, respecting m mapped to 1 tensor m. The sectionwise composition equation is proved in Lean as proEtaleConstantSectionsDirectImage_comp. The exact ordinary mate equality is proEtaleConstantSectionsPullbackIso_mate; proEtaleConstantSectionsAdjunction is its hom-equivalence form. Their conjugate composition equation follows from Mathlib conjugateEquiv_comp and whiskering, together with the source-library conjugateIsoEquiv_upperStarComp.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise direct-image comparisons respect fibre-product pasting, so their conjugate ordinary pullback comparisons agree. They therefore intertwine the specified composition comparisons of [lem-weil-pbc-proetale-derived-pullback-composition]. One may check the latter on flat-term K-flat resolutions: the degreewise ordinary comparisons and the canonical factorization maps give exactly its defining normalization. Naturality and localization extend the equality to every unbounded derived object. The constant coefficient comparisons are coherent by [lem-weil-pbc-profinite-coefficient-inverse-image]. The explicit hcoeff identifies the two composite ring maps around the square.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under the explicit edge comparisons, the ringed pullback square of [def-weil-pbc-ambient-ringed-exchange] agrees with the fixed-scalar derived pullback square. The unit-square-counit formula for [def-weil-pbc-adjunction-mate], with the derived adjunction comparisons of the preceding steps, identifies the natural transformations after the explicit source and target comparisons. This gives exactly whiskerRight(ambientExchange,C_Y prime) followed by t equals s followed by whiskerLeft(C_X,fixedScalarDerivedBaseChangeMap), for all objects. This identity does not assume either map invertible.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "constant-ring module equivalence, normalized module adjunction, derived pullback composition and remark-base-change",
+  "note": "The direct-image, pullback, derived edge and endpoint isomorphisms are explicitly constructed and proved in Lean in this module. The remaining separate result is their composition/adjunction coherence for the actual canonical ambient mate, rather than an isomorphism assertion or a repackaged proper-base-change theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient pro-etale proper base change exchange map isomorphism",
+   "results": "RingHom etale and standard etale presentation results; no canonical ringed/fixed-scalar exchange comparison.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "equivalence constant ring module sheaves identifies geometric base change mates",
+   "results": "Generic IsBaseChange.tensorEquiv, Sheaf.isConstant_iff_of_equivalence, restriction-of-scalars equivalence and global sections results; none identifies these geometric derived exchange maps.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "Generic mate vertical composition exists; no comparison between the two specified geometric pullback squares.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(exchange|mate)|realiz.*baseChange|baseChange.*realiz",
+   "results": "No Mathlib match for the required canonical exchange normalization; local library search found fixed-scalar transport and separate ringed operations only.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteLevelProEtaleBaseChange",
+  "date": "2026-10-21",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-realized-exchange-normalization",
+   "place": "Proof: identify the two specified exchange arrows under the explicit endpoint comparisons, before applying conservativity.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleRealizedExchangeCompatibility",
+  "file": "lean/Sheaf/Paper/ProEtaleRealizedExchangeCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRealizedExchange_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleOriginRealization_isEquivalence",
+   "AlgebraicGeometry.Scheme.proEtaleRealizedCoefficientIso",
+   "AlgebraicGeometry.Scheme.proEtaleRealizedCoefficientIso_comp",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSections",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsUnit",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsUnit_isIso",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsIsoInverse",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSections_additive",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSections_isEquivalence",
+   "AlgebraicGeometry.Scheme.proEtaleConstantCoefficient_directImageMap",
+   "AlgebraicGeometry.Scheme.proEtaleConstantCoefficient_scalar",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsDirectImage",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsDirectImageInv",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsDirectImageIso",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsDirectImage_comp",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsPullbackIso",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsPullbackIso_mate",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsAdjunction",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsDerivedDirectImage",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsDerivedPullbackIso",
+   "AlgebraicGeometry.Scheme.proEtaleConstantSectionsDerivedIsoInverse",
+   "AlgebraicGeometry.Scheme.proEtaleRealizedCoordinates",
+   "AlgebraicGeometry.Scheme.proEtaleRealizedCoordinates_reflectsIsomorphisms",
+   "AlgebraicGeometry.Scheme.proEtaleRealizedCoefficientIso_square",
+   "AlgebraicGeometry.Scheme.proEtaleRealizedDirectImageIso",
+   "AlgebraicGeometry.Scheme.proEtaleRealizedPullbackIso",
+   "AlgebraicGeometry.Scheme.proEtaleRealizedExchangeSourceIso",
+   "AlgebraicGeometry.Scheme.proEtaleRealizedExchangeTargetIso",
+   "AlgebraicGeometry.Scheme.proEtaleRealizedExchange_compatibility"
+  ],
+  "statement": "theorem proEtaleRealizedExchange_compatibility\n    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}\n    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)\n    (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (R_X' : Sheaf (ProEt.topology X') CommRingCat.{u + 1})\n    (R_Y' : Sheaf (ProEt.topology Y') CommRingCat.{u + 1})\n    (eX : etaleOriginRing X Λ ≅ R_X) (eY : etaleOriginRing Y Λ ≅ R_Y)\n    (eX' : etaleOriginRing X' Λ ≅ R_X') (eY' : etaleOriginRing Y' Λ ≅ R_Y')\n    (hcoeff : HEq\n      (proEtaleRingCompositeCoefficients g' f R_Y R_X R_X'\n        (proEtaleRealizedCoefficientIso Λ f eY eX)\n        (proEtaleRealizedCoefficientIso Λ g' eX eX'))\n      (proEtaleRingCompositeCoefficients f' g R_Y R_Y' R_X'\n        (proEtaleRealizedCoefficientIso Λ g eY eY')\n        (proEtaleRealizedCoefficientIso Λ f' eY' eX'))) :\n    Functor.whiskerRight\n        (proEtaleAmbientRingedExchange sq R_X R_Y R_X' R_Y'\n          (proEtaleRealizedCoefficientIso Λ f eY eX)\n          (proEtaleRealizedCoefficientIso Λ g eY eY')\n          (proEtaleRealizedCoefficientIso Λ g' eX eX')\n          (proEtaleRealizedCoefficientIso Λ f' eY' eX') hcoeff)\n        (proEtaleRealizedCoordinates Λ Y' R_Y' eY') ≫\n      (proEtaleRealizedExchangeTargetIso Λ g' f' R_X R_X' R_Y' eX eX' eY').hom =\n    (proEtaleRealizedExchangeSourceIso Λ f g R_X R_Y R_Y' eX eY eY').hom ≫\n      Functor.whiskerLeft (proEtaleRealizedCoordinates Λ X R_X eX)\n        (ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T221046-L-4138746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261020T221046-L-4138746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -28,32 +28,47 @@
  ],
  "proof": [
   {
-   "text": "Fix the cartesian square and compatible ringed pro-étale exchange datum of [def-weil-pbc-ambient-ringed-exchange], with $f$ proper as understood via [def-weil-pbc-scheme-conventions]. Under the chosen identifications of the coefficient sheaves on the four corners, the module pullback $Lu^*$ in [def-weil-pbc-ambient-ringed-exchange] is canonically the exact sheaf inverse image $u^{-1}$ (the tensor factor is along an isomorphism of coefficient rings); hence its derived pullback is represented by $u^{-1}$ and the ambient map has the displayed form. Because $\\Lambda$ is finite, the witness object $L\\in\\Dplus(X_{\\Et},\\Lambda)$ has torsion cohomology. Thus [thm-weil-pbc-bounded-below] makes the étale exchange map for $L$ an isomorphism. The fully faithful comparison [thm-weil-pbc-site-comparison] transports this isomorphism to the pro-étale site, and [lem-weil-pbc-transport-identifies-exchange] identifies the transported map with the pro-étale exchange transformation of [def-weil-pbc-ambient-ringed-exchange] for $\\nu_X^*L$. The witness [def-weil-pbc-etale-origin-witness] supplies $\\alpha:\\nu_X^*L\\simeq K$, so conjugating by $\\alpha$ gives the displayed exchange map for $K$ and proves it is an isomorphism. If the witness is replaced by an isomorphic witness, naturality of the transported exchange transformation makes the two resulting maps conjugate by that isomorphism, hence equal as the witness-independent map.",
+   "text": "Use the exact constant-ring realization equivalence in [def-weil-pbc-etale-origin-witness] and its derived equivalence unit. Apply its inverse to the retained finite etale-origin witness. The mapDerivedCategory composition isomorphism gives a specified isomorphism from the fixed-scalar comparison inverse image of its bounded-below etale complex L to the fixed-scalar coordinates N of K. This uses the existing coefficient restriction along finiteOriginConstantIso; no antecedent is chosen from mere existence.",
    "uses": [
-    "thm-weil-pbc-bounded-below",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-transport-identifies-exchange",
-    "def-weil-pbc-ambient-ringed-exchange",
     "def-weil-pbc-etale-origin-witness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-level-proetale.md",
-    "place": "## Proof (the single proof paragraph; finite-level transport and witness-independence)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Finiteness of Λ gives additive torsion. Apply the ring specialization of [thm-weil-pbc-bounded-below] to L. Properness is stable under base change, so f prime is proper, and both f and f prime have the quasi-compactness and quasi-separatedness required by the source-library comparison theorem.",
+   "uses": [
+    "thm-weil-pbc-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the actual declared [lem-weil-pbc-transport-identifies-exchange], ProEtale.comparison_derivedBaseChangeMap. Its equation gives an Arrow isomorphism between the comparison image of the etale exchange and the fixed-scalar pro-etale derivedBaseChangeMap at the comparison image of L. Functors preserve isomorphisms, and the two endpoint comparisons are isomorphisms, so the latter exchange is invertible. Naturality across the isomorphism from the first step gives invertibility at N.",
+   "uses": [
+    "lem-weil-pbc-transport-identifies-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The four finiteCoefficientRingIso maps are definitionally the conjugated constant comparisons in [lem-weil-pbc-realized-exchange-normalization]. Their already-proved coherence supplies its coefficient compatibility hypothesis. Apply that lemma to convert invertibility of the fixed-scalar exchange at N into invertibility of the actual ambient ringed exchange [def-weil-pbc-ambient-ringed-exchange] at K. The exchange is defined without the witness, so its arrow is independent of any isomorphic replacement of the witness.",
+   "uses": [
+    "lem-weil-pbc-realized-exchange-normalization",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-etale-origin-witness",
   "thm-weil-pbc-bounded-below",
-  "thm-weil-pbc-site-comparison",
   "lem-weil-pbc-transport-identifies-exchange",
-  "def-weil-pbc-ambient-ringed-exchange",
-  "def-weil-pbc-etale-origin-witness"
+  "lem-weil-pbc-realized-exchange-normalization",
+  "def-weil-pbc-ambient-ringed-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-level-proetale.md",
-  "place": "## Proof"
+  "place": "thm-weil-pbc-finite-level-proetale, Proof; remark-base-change",
+  "note": "The Lean proof retains the bounded-below etale proper-base-change and site-comparison route, using the existing source-library fixed-scalar transport theorem. The independent constant-ring realization normalization is made explicit as one separate lemma; there is no replacement of the actual ambient mate by a transported definition. The blueprint_update for main-20261015 is followed; the supporting structural identity is Stacks sites-cohomology.tex, remark-base-change and remark-compose-base-change."
  },
  "mathlib_searches": [
   {
@@ -242,20 +257,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "H5",
+  "reviewer": "COMPILER",
+  "group": "B5",
   "result": "pass",
-  "landing": "20261019T034301-L-417270",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.finiteCoefficientRingIso_coherent",
-   "AlgebraicGeometry.Scheme.finiteLevelProEtaleBaseChange"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.finiteLevelProEtaleBaseChange"
-  ]
+  "landing": "20261020T221046-L-4138746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
