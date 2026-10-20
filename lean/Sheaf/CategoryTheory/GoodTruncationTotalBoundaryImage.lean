@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
@@ -93,7 +93,7 @@ private theorem step_inclusion_factors
     ((M.secondFiltration n).step (n - q)).Factors
       (M.ιTotal (ComplexShape.up ℤ) i j n h) := by
   apply factors_image
-  dsimp only [secondFiltration, DecreasingFiltration.step]
+  dsimp only [secondFiltration]
   have hj : n - j = i := by omega
   have hh := Finset.le_sup (s := Finset.Icc (n - q) n)
     (f := fun k ↦ imageSubobject
@@ -185,7 +185,7 @@ private theorem step_arrow_ext
         M.ιTotal (ComplexShape.up ℤ) i j n hij ≫ g) :
     ((M.secondFiltration n).step (n - q)).arrow ≫ f =
       ((M.secondFiltration n).step (n - q)).arrow ≫ g := by
-  dsimp only [secondFiltration, DecreasingFiltration.step]
+  dsimp only [secondFiltration]
   apply image_sup_hom_ext (Finset.Icc (n - q) n)
     (fun k ↦ M.ιTotalOrZero (ComplexShape.up ℤ) (n - k) k n)
   intro k hk
