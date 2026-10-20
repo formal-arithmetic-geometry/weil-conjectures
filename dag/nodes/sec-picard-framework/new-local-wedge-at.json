@@ -20,9 +20,10 @@
    "elementary": true
   },
   {
-   "text": "Obtain the pre-quotient wedge map psi from exteriorSheaf_wedgeMap_exists, applied to S.f.",
+   "text": "Obtain the pre-quotient wedge map psi from exteriorSheaf_wedgeMap_exists, applied to S.f. The upstream theorem uses native exterior powers. Identify each legacy exterior presheaf with its native counterpart by identity maps on objects; restriction compatibility follows from the unique pure-wedge restriction formula. Sheafify these isomorphisms, use naturality of the unit to check their hom and inverse on pure wedges, and conjugate the upstream wedge map by the tensor of the two source comparisons and the inverse target comparison. tensorHom_app_tmulSection gives exactly the legacy wedge formula.",
    "uses": [
-    "lem-sc-exterior-sheaf-wedge-map"
+    "lem-sc-exterior-sheaf-wedge-map",
+    "def-sc-sheaf-exterior-power"
    ],
    "elementary": true
   },
@@ -40,15 +41,16 @@
   }
  ],
  "proof_deps": [
-  "def-sc-sheaf-exterior-power",
   "lem-sc-exterior-sheaf-map-exists",
   "lem-sc-exterior-sheaf-wedge-map",
-  "lem-sc-determinant-wedge-quotient-factor"
+  "lem-sc-determinant-wedge-quotient-factor",
+  "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
   "by": "agent K8",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Determinant paragraph: retain the local quotient construction and transport the upstream exterior-power map across the explicit identity-on-sections presheaf comparison."
+  "place": "Determinant paragraph: retain the local quotient construction and transport the upstream exterior-power map across the explicit identity-on-sections presheaf comparison.",
+  "note": "P6 retirement: preserve the existing proof route and statements, transporting the upstream wedge map to the legacy exterior sheaves through fully proved private presheaf/sheaf isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -115,12 +117,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-278cf",
-  "group": "K8",
+  "reviewer": "C-ca4f8",
+  "group": "P6",
   "result": "pass",
-  "landing": "20261020T144253-L-2260279",
+  "landing": "20261020T164814-L-3967578",
   "kind": "interface",
-  "note": "independent cc review: Retirement of the Sheaf copy: delivered LocalAt and its importer DeterminantWedgeMorphismLocal compiled clean, axioms clean, no twin clash, nodes matched to upstream WeilConjectures exteriorSheaf_map_exists and the conjugation helpers"
+  "note": "independent cc review: retired item module vs upstream WeilConjectures exteriorSheaf_wedgeMap_exists (node statement verbatim); both adapted consumers' public signatures vs live, compiled with their importers Glue/Local/DeterminantWedgeMorphism; nodes vs live K8 record (C-991b0 fix applied)"
  },
  "lean_audit": {
   "master": {

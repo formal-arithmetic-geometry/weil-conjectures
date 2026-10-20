@@ -5,7 +5,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafMapExists
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafWedgeMapExists
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafWedgeMapExists
 import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeQuotientFactor
 
 @[expose] public section
@@ -14,25 +14,26 @@ universe v
 open CategoryTheory Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option backward.defeqAttrib.useBackward true in
+-- The two exterior presheaves have the same objects and uniquely determined restrictions.
 set_option backward.isDefEq.respectTransparency false in
-private noncomputable def exteriorPresheafIso {X : Scheme.{v}} (M : X.Modules) (n : ℕ) :
+private noncomputable def exteriorPresheafComparison {X : Scheme.{v}}
+    (M : X.Modules) (n : ℕ) :
     exteriorSheafPresheaf M n ≅ M.val.exteriorPower (R := X.presheaf) n :=
   PresheafOfModules.isoMk (fun _ ↦ Iso.refl _) (by
-    intro U V k
-    change exteriorSheafRestriction M n k =
-      PresheafOfModules.ExteriorPower.map (R := X.presheaf) M.val n k
-    apply ((Classical.choose_spec (exteriorSheafRestriction_existsUnique M n k)).2
-      _ ?_).symm
+    intro U V f
+    change exteriorSheafRestriction M n f =
+      PresheafOfModules.ExteriorPower.map (R := X.presheaf) M.val n f
+    apply ((Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f)).2 _ ?_).symm
     intro a
-    exact PresheafOfModules.ExteriorPower.map_ιMulti (R := X.presheaf) M.val n k a)
+    with_unfolding_all
+      exact PresheafOfModules.ExteriorPower.map_ιMulti (R := X.presheaf) M.val n f a)
 
+-- Sheafify the identity-on-sections comparison.
 private noncomputable def exteriorComparison {X : Scheme.{v}} (M : X.Modules) (n : ℕ) :
     exteriorSheaf M n ≅ exteriorPower M n :=
   (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).mapIso
-    (exteriorPresheafIso M n)
+    (exteriorPresheafComparison M n)
 
-set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 private theorem exteriorComparison_hom_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     (U : X.Opens) (a : Fin n → M.val.obj (op U)) :
@@ -41,22 +42,19 @@ private theorem exteriorComparison_hom_wedge {X : Scheme.{v}} (M : X.Modules) (n
   have h := congrArg
     (fun k ↦ k.app (op U) (_root_.exteriorPower.ιMulti (X.presheaf.obj (op U)) n a))
     ((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.naturality
-      (exteriorPresheafIso M n).hom)
+      (exteriorPresheafComparison M n).hom)
   exact h.symm
 
-set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 private theorem exteriorComparison_inv_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     (U : X.Opens) (a : Fin n → M.val.obj (op U)) :
     (exteriorComparison M n).inv.val.app (op U) (wedge (M := M) (r := n) (U := U) a) =
       exteriorSheafSection M n U a := by
-  have h := congrArg
-    (fun k ↦ k.app (op U) (_root_.exteriorPower.ιMulti (X.presheaf.obj (op U)) n a))
-    ((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.naturality
-      (exteriorPresheafIso M n).inv)
-  exact h.symm
+  rw [← exteriorComparison_hom_wedge M n U a]
+  change (((exteriorComparison M n).hom ≫ (exteriorComparison M n).inv).val.app (op U)) _ = _
+  rw [Iso.hom_inv_id]
+  rfl
 
-set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 private theorem exteriorSheaf_map_from_upstream {X : Scheme.{v}} {M N : X.Modules}
     (f : M ⟶ N) (n : ℕ) :
@@ -71,6 +69,34 @@ private theorem exteriorSheaf_map_from_upstream {X : Scheme.{v}} {M N : X.Module
     (e.val.app (op U)
       ((exteriorComparison M n).hom.val.app (op U) (exteriorSheafSection M n U a))) = _
   rw [exteriorComparison_hom_wedge, he, exteriorComparison_inv_wedge]
+
+-- Transport the upstream wedge map through the comparisons, preserving its generator formula.
+set_option backward.isDefEq.respectTransparency false in
+private theorem wedgeMap_legacy {X : Scheme.{v}} {A B : X.Modules}
+    (f : A ⟶ B) (r s t : ℕ) (ht : t = r + s) :
+    ∃ ψ : exteriorSheaf A r ⊗ exteriorSheaf B s ⟶ exteriorSheaf B t,
+      ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))
+        (c : Fin s → B.val.obj (op U)),
+        ψ.val.app (op U)
+          (tmulSection (exteriorSheafSection A r U a) (exteriorSheafSection B s U c)) =
+          exteriorSheafSection B t U
+            (fun i ↦ Fin.append (fun j ↦ f.val.app (op U) (a j)) c (Fin.cast ht i)) := by
+  obtain ⟨ψ, hψ⟩ := exteriorSheaf_wedgeMap_exists f r s t ht
+  refine ⟨((exteriorComparison A r).hom ⊗ₘ (exteriorComparison B s).hom) ≫
+    ψ ≫ (exteriorComparison B t).inv, ?_⟩
+  intro U a c
+  change (exteriorComparison B t).inv.val.app (op U)
+    (ψ.val.app (op U)
+      ((((exteriorComparison A r).hom ⊗ₘ (exteriorComparison B s).hom).app U)
+        (tmulSection (exteriorSheafSection A r U a) (exteriorSheafSection B s U c)))) = _
+  rw [tensorHom_app_tmulSection]
+  change (exteriorComparison B t).inv.val.app (op U)
+    (ψ.val.app (op U)
+      (tmulSection
+        ((exteriorComparison A r).hom.val.app (op U) (exteriorSheafSection A r U a))
+        ((exteriorComparison B s).hom.val.app (op U) (exteriorSheafSection B s U c)))) = _
+  rw [exteriorComparison_hom_wedge, exteriorComparison_hom_wedge,
+    hψ U a c, exteriorComparison_inv_wedge]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The local wedge construction on a fixed open, as in the determinant paragraph.
@@ -93,7 +119,7 @@ theorem determinant_wedgeMorphism_local_data_at {X : Scheme.{v}}
           exteriorSheafSection S.X₂ r₂ U
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
   obtain ⟨e, he⟩ := exteriorSheaf_map_from_upstream S.g r₃
-  obtain ⟨ψ, hψ⟩ := exteriorSheaf_wedgeMap_exists S.f r₁ r₃ r₂ hr
+  obtain ⟨ψ, hψ⟩ := wedgeMap_legacy S.f r₁ r₃ r₂ hr
   let q : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶
       exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ := 𝟙 _ ⊗ₘ e
   have hq : ∀ (V : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op V))
