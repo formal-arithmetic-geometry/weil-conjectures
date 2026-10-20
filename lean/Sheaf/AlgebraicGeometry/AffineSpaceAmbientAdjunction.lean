@@ -40,6 +40,7 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
 import Sheaf.AlgebraicGeometry.ProjectiveLineFullAdjunction
+import Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunctionCore
 
 /-!
 # Affine-space ambient adjunction
@@ -115,6 +116,13 @@ theorem nonempty_affineSpaceAmbientAdjunction (N : ℕ) (hN : 0 < N)
             ((DerivedCategory.singleFunctor _ 0).obj
               (Scheme.finiteEtaleTateTwist (AffineSpace (ULift.{u} (Fin d)) S) N A hA d))) ⋙
           shiftFunctor _ (2 * (d : ℤ))) := by
-  sorry
+  let f : AffineSpace (ULift.{u} (Fin d)) S ⟶ S :=
+    AffineSpace (ULift.{u} (Fin d)) S ↘ S
+  let c : Compactification f :=
+    Compactification.ofIsImmersionAffineSpace (𝟙 _) (Category.id_comp _)
+  let hcomp : HasCompactification f := c.hasCompactification
+  obtain ⟨a⟩ := affineSpaceAmbientAdjunction_of_compactification N hN A hA S hS d c
+  exact ⟨a.ofNatIsoLeft (@rightDerivedLowerShriekIso _ _ f A inferInstance inferInstance
+    inferInstance hcomp c)⟩
 
 end AlgebraicGeometry.Etale
