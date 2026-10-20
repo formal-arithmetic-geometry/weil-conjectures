@@ -1,0 +1,171 @@
+{
+ "id": "lem-per-trait-tame-character-structure",
+ "kind": "statement",
+ "title": "Kernel and procyclic structure of the canonical tame character",
+ "statement": "Under the same trait hypotheses, suppose a homomorphism t to the actual tame root limit is continuous and surjective, there are compatible roots for every uniformizer, and t satisfies the root-coordinate formula for all such choices. Then its kernel has only finite continuous quotients of order p^n and is trivial for p=1. There exists a compatible primitive family σ. Every compatible primitive family has dense integer powers, and for every positive d prime to p the closure of the integer powers of σ^d is a subgroup of index d.",
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-residue-field",
+  "def-pd-separable-closure",
+  "def-per-tame-root-limit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BUA and 0BUB; uniformizer radicals and tame kernel; compare ILO Expose XVII section 1.2, printed page 259."
+ },
+ "proof": [
+  {
+   "text": "Choose one uniformizer and compatible roots. All roots are nonzero. Injectivity of E→Ω and the root formula identify ker(t) with the actual radical-fixing subgroup. Transfer its finite quotient and characteristic-zero assertions.",
+   "uses": [
+    "lem-per-tame-radical-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tame orders are nonzero in Ω. Finite primitive-root sets form a nonempty inverse system by power maps, with directed index set; compactness supplies a primitive compatible family, normalized at order one.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Equal-coordinate fibers form a neighborhood basis, since a product order dominates two orders. Every coordinate root is a power of a primitive root, so integer powers are dense. The closure of dth powers equals the kernel of the d-coordinate: one inclusion follows from closedness, the other from the divisibility of an exponent at the product of d and an arbitrary coordinate. The surjective coordinate map has order-d image, so its kernel has index d.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-per-tame-radical-kernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BUA and 0BUB, with the direct Hensel-unit-root and telescoping specialization of more-algebra.tex Tag 09EE, written in the Lean helper docstrings."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical tame character of a strictly henselian discrete valuation ring surjection Galois group inverse limit roots of unity pro p kernel",
+   "results": "{\"t\": \"2026-10-19T16:28:45Z\", \"tool\": \"leanfinder\", \"query\": \"canonical tame character of a strictly henselian discrete valuation ring surjection Galois group inverse limit roots of unity pro p kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter\", \"cyclotomicCharacter.toFun_apply\", \"cyclotomicCharacter.toFun\", \"cyclotomicCharacter.toZModPow_toFun\", \"cyclotomicCharacter.spec\", \"cyclotomicCharacter.toZModPow\", \"cyclotomicCharacter.toFun_spec\", \"ValuationSubring.inertiaSubgroup\"], \"digest\": \"4a3d3f51ae7252f9\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete match. Basic Hensel, Krull topology, Eisenstein and finite group APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, Polynomial.X ^ _ - Polynomial.C _",
+   "results": "{\"t\": \"2026-10-19T16:29:59Z\", \"tool\": \"loogle\", \"query\": \"IsSepClosed, Polynomial.X ^ _ - Polynomial.C _\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete match. Basic Hensel, Krull topology, Eisenstein and finite group APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*tame|tame.*surjective",
+   "results": "{\"t\": \"2026-10-19T16:29:59Z\", \"tool\": \"grep\", \"query\": \"exists.*tame|tame.*surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete match. Basic Hensel, Krull topology, Eisenstein and finite group APIs are used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "prime to characteristic uniformizer root binomial irreducible Eisenstein finite Kummer character roots of unity strictly henselian discrete valuation ring",
+   "results": "{\"t\": \"2026-10-19T19:49:06Z\", \"tool\": \"leanfinder\", \"query\": \"prime to characteristic uniformizer root binomial irreducible Eisenstein finite Kummer character roots of unity strictly henselian discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt\", \"PreTilt.untiltFun\", \"Valuation.exists_pow_Uniformizer\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing\", \"hensels_lemma\", \"mem_rootsOfUnity_prime_pow_mul_iff'\", \"HenselianLocalRing.is_henselian\"], \"digest\": \"0facb499b034d071\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete match. Basic Hensel, Krull topology, Eisenstein and finite group APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Irreducible, Polynomial.X ^ _ - Polynomial.C _",
+   "results": "{\"t\": \"2026-10-19T19:49:07Z\", \"tool\": \"loogle\", \"query\": \"Irreducible, Polynomial.X ^ _ - Polynomial.C _\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ne_zero_of_irreducible_X_pow_sub_C\", \"ne_zero_of_irreducible_X_pow_sub_C'\", \"X_pow_sub_C_irreducible_of_prime\", \"X_pow_sub_C_irreducible_iff_of_prime\", \"pow_ne_of_irreducible_X_pow_sub_C\", \"root_X_pow_sub_C_eq_zero_iff\", \"root_X_pow_sub_C_ne_zero_iff\", \"Irreducible.natSepDegree_eq_one_iff_of_monic\"], \"digest\": \"dcfb4dbb6a1ab1cc\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete match. Basic Hensel, Krull topology, Eisenstein and finite group APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "IsEisensteinAt|autEquivRootsOfUnity|exists_algEquiv_of_root",
+   "results": "{\"t\": \"2026-10-19T19:49:07Z\", \"tool\": \"grep\", \"query\": \"IsEisensteinAt|autEquivRootsOfUnity|exists_algEquiv_of_root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\"], \"digest\": \"ca05824cb5d4cfe1\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete match. Basic Hensel, Krull topology, Eisenstein and finite group APIs are used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a strictly henselian DVR, the subgroup of the separable Galois group fixing all prime-to-p uniformizer radicals has p-group image in every finite Galois subextension",
+   "results": "{\"t\": \"2026-10-19T21:56:30Z\", \"tool\": \"leanfinder\", \"query\": \"For a strictly henselian DVR, the subgroup of the separable Galois group fixing all prime-to-p uniformizer radicals has p-group image in every finite Galois subextension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.inertiaSubgroup\", \"fixedByFinite\", \"ValuationSubring.decompositionSubgroup\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"IsArithFrobAt.mul_inv_mem_inertia\", \"arithFrobAt\", \"Ideal.card_inertia_eq_ramificationIdxIn\", \"Ideal.inertiaDeg_eq_of_isGaloisGroup\"], \"digest\": \"f980d6a78ca963a1\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete match. Basic Hensel, Krull topology, Eisenstein and finite group APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPGroup\", \"Gal\"",
+   "results": "{\"t\": \"2026-10-19T22:59:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPGroup\\\", \\\"Gal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete match. Basic Hensel, Krull topology, Eisenstein and finite group APIs are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible roots of a uniformizer in a strictly henselian discrete valuation ring give a surjective tame Galois character and pro-p kernel",
+   "results": "{\"t\": \"2026-10-19T23:59:30Z\", \"tool\": \"leansearch\", \"query\": \"Compatible roots of a uniformizer in a strictly henselian discrete valuation ring give a surjective tame Galois character and pro-p kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"Valuation.IsUniformizer\", \"Valuation.Uniformizer.mk'\", \"cyclotomicCharacter\", \"cyclotomicCharacter.continuous\", \"modularCyclotomicCharacter.toFun\", \"cyclotomicCharacter.toFun\", \"cyclotomicCharacter.spec\"], \"digest\": \"4b125c17e0b63e4d\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete match. Basic Hensel, Krull topology, Eisenstein and finite group APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPGroup.*Gal|wild.*inertia|tame.*character",
+   "results": "{\"t\": \"2026-10-19T23:59:44Z\", \"tool\": \"grep\", \"query\": \"IsPGroup.*Gal|wild.*inertia|tame.*character\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No complete match. Basic Hensel, Krull topology, Eisenstein and finite group APIs are used in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.CanonicalTraitTameCharacter",
+  "date": "2026-10-20",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The tame sequence in Expose XVII 1.2 used by the trait-residue transition; the finite Kummer construction, radical kernel, and procyclic consequences of lem-per-trait-tame-algebra.",
+   "via": [
+    "lem-per-trait-tame-algebra",
+    "lem-per-trait-residue-model",
+    "def-per-potential-dualizing",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.CanonicalTameCharacterStructure",
+  "file": "lean/Sheaf/FieldTheory/CanonicalTameCharacterStructure.lean",
+  "declaration": "IsDiscreteValuationRing.canonical_tame_character_structure",
+  "statement": "theorem canonical_tame_character_structure\n    (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]\n    [IsStrictlyHenselianLocalRing R]\n    (K : Type v) [Field K] [Algebra R K] [IsFractionRing R K]\n    (Ksep : Type w) [Field Ksep] [Algebra K Ksep] [IsSepClosure K Ksep]\n    (Ω : Type z) [Field Ω] [IsAlgClosed Ω] [Algebra Ksep Ω]\n    (p : ℕ) (hp : p = if ringChar (IsLocalRing.ResidueField R) = 0 then 1\n      else ringChar (IsLocalRing.ResidueField R))\n    (t : Gal(Ksep/K) →* TameRoots.limitSubgroup Ω p)\n    (_ht : @Continuous _ _ inferInstance (TameRoots.limitTopology Ω p) t)\n    (_hs : Function.Surjective t)\n    (ha : ∀ π : R, Irreducible π →\n      ∃ α : TameRoots.Order p → Ksep,\n        (∀ d : TameRoots.Order p,\n          α d ^ d.1 = algebraMap K Ksep (algebraMap R K π)) ∧\n        ∀ d e : TameRoots.Order p, d.1 ∣ e.1 → α e ^ (e.1 / d.1) = α d)\n    (hf : ∀ (π : R), Irreducible π → ∀ α : TameRoots.Order p → Ksep,\n      (∀ d : TameRoots.Order p,\n        α d ^ d.1 = algebraMap K Ksep (algebraMap R K π)) →\n      (∀ d e : TameRoots.Order p, d.1 ∣ e.1 → α e ^ (e.1 / d.1) = α d) →\n      ∀ (h : Gal(Ksep/K)) (d : TameRoots.Order p),\n        (((t h).1 d : Ωˣ) : Ω) = algebraMap Ksep Ω (h (α d) / α d)) :\n    (∀ (Q : Type q) [Group Q] [TopologicalSpace Q] [DiscreteTopology Q]\n      [Finite Q] (f : t.ker →* Q), Continuous f → Function.Surjective f →\n        ∃ n : ℕ, Nat.card Q = p ^ n) ∧\n    (p = 1 → t.ker = ⊥) ∧\n    (∃ σ : TameRoots.limitSubgroup Ω p,\n      TameRoots.IsCompatiblePrimitiveFamily p σ.1) ∧\n    ∀ σ : TameRoots.limitSubgroup Ω p,\n      TameRoots.IsCompatiblePrimitiveFamily p σ.1 →\n      @DenseRange (TameRoots.limitSubgroup Ω p) (TameRoots.limitTopology Ω p) ℤ\n        (fun n : ℤ ↦ σ ^ n) ∧\n      ∀ d : TameRoots.Order p,\n        ∃ U : Subgroup (TameRoots.limitSubgroup Ω p),\n          (U : Set (TameRoots.limitSubgroup Ω p)) =\n            @closure _ (TameRoots.limitTopology Ω p)\n              (Set.range (fun n : ℤ ↦ (σ ^ d.1) ^ n)) ∧\n          U.index = d.1",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051431-L-1679928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261020T051431-L-1679928",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
