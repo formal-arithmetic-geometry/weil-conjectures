@@ -92,14 +92,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapDatum",
-  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalMapDatum.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapDatum",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FinitePresentationLocalMapDatum.lean",
   "declaration": "AlgebraicGeometry.exists_finitePresentation_local_map_datum",
-  "statement": "theorem exists_finitePresentation_local_map_datum {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] : (∀ (j : I) (hij : i ≤ j) (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Fj.IsFinitePresentation → Fj.IsQuasicoherent → Gj.IsFinitePresentation → Gj.IsQuasicoherent → ∀ φ : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Gj, ∃ (j' : I) (hjj' : j ≤ j'), let A := Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) let B := Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op)) ∃ e : Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)) ≅ A ⋙ B, e = Scheme.Modules.tensorPullbackCompositionIso (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) (by rw [← baseChangeMap_comp] congr 1 ext simpa using c.w (homOfLE hjj').op) ∧ ∃ U : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjj'))))).OpenCover.{u}, Finite U.I₀ ∧ (∀ a, IsAffine (U.X a)) ∧ let Q := modulesPseudofunctor.toDescentData U.f let V := U.pullback₁ (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))) ∃ ψ : Q.obj (A.obj Fj) ⟶ Q.obj (A.obj Gj), ∀ α : A.obj Fj ⟶ A.obj Gj, Q.map α = ψ → ∀ a, (Scheme.Modules.pullback (V.f a)).map (e.hom.app Fj ≫ B.map α) = (Scheme.Modules.pullback (V.f a)).map (φ ≫ e.hom.app Gj))",
+  "statement": "theorem exists_finitePresentation_local_map_datum {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] : (∀ (j : I) (hij : i ≤ j) (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Fj.IsFinitePresentation → Fj.IsQuasicoherent → Gj.IsFinitePresentation → Gj.IsQuasicoherent → ∀ φ : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Gj, ∃ (j' : I) (hjj' : j ≤ j'), let A := Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) let B := Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op)) ∃ e : Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)) ≅ A ⋙ B, e = Scheme.Modules.tensorPullbackCompositionIso (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) (by rw [← baseChangeMap_comp] congr 1 ext simpa using c.w (homOfLE hjj').op) ∧ ∃ U : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjj'))))).OpenCover.{u}, Finite U.I₀ ∧ (∀ a, IsAffine (U.X a)) ∧ let Q := modulesPseudofunctor.toDescentData U.f let V := U.pullback₁ (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))) ∃ ψ : Q.obj (A.obj Fj) ⟶ Q.obj (A.obj Gj), ∀ α : A.obj Fj ⟶ A.obj Gj, Q.map α = ψ → ∀ a, (Scheme.Modules.pullback (V.f a)).map (e.hom.app Fj ≫ B.map α) = (Scheme.Modules.pullback (V.f a)).map (φ ≫ e.hom.app Gj))",
   "branch": "sheaf-dag",
-  "by": "H3",
-  "date": "2026-10-13"
+  "by": "N1",
+  "date": "2026-10-21",
+  "note": "Retire the duplicate Sheaf module in favor of the upstream twin. The upstream theorem has the same conclusion without the unnecessary Noetherian hypotheses and specializes to this node."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -112,14 +113,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
+  "reviewer": "C-0de92",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T140823-L-315298",
+  "landing": "20261020T233204-L-903947",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Sheaf copy vs upstream twin WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapDatum (identical but for the dropped Noetherian binder); node lean record vs twin signature; live importers (none of the Sheaf module)"
  },
  "lean_audit": {
   "master": {
