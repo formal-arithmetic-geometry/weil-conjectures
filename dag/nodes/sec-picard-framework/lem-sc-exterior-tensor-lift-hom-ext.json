@@ -10,7 +10,7 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use the characterization of exteriorSheafRestriction_existsUnique and naturality of the sheafification unit to show restriction of a wedge is the wedge of the restrictions. This is the fully proved private helper exterior_section_map.",
+   "text": "Use PresheafOfModules.exteriorPower_map_ιMulti and naturality of the sheafification unit to show restriction of a wedge is the wedge of the restrictions. This is the official library's proved private helper exterior_section_map.",
    "uses": [
     "def-sc-sheaf-exterior-power"
    ],
@@ -40,7 +40,7 @@
  "proof_origin": {
   "by": "V3",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph; explicit local-generation argument formalized from the theorem docstring, using Mathlib sheafification, local surjectivity, and exterior-power span APIs"
+  "place": "Proof of (*), determinant paragraph; explicit local-generation argument formalized from the theorem docstring, using Mathlib sheafification, local surjectivity, and exterior-power span APIs; retirement points at the official exteriorPower/wedge implementation, with the same local-generation proof"
  },
  "mathlib_searches": [
   {
@@ -97,14 +97,15 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorTensor_lift_hom_ext",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorTensorLiftHomExt.lean",
-  "statement": "theorem exteriorTensor_lift_hom_ext {X : Scheme.{v}} {A B C D : X.Modules}\n    (g : B ⟶ C) [Epi g] (r s : ℕ)\n    (φ ψ : exteriorSheaf A r ⊗ exteriorSheaf C s ⟶ D)\n    (h : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))\n      (c : Fin s → B.val.obj (op U)),\n      φ.val.app (op U)\n          (tmulSection (exteriorSheafSection A r U a)\n            (exteriorSheafSection C s U (fun i ↦ g.val.app (op U) (c i)))) =\n        ψ.val.app (op U)\n          (tmulSection (exteriorSheafSection A r U a)\n            (exteriorSheafSection C s U (fun i ↦ g.val.app (op U) (c i))))) :\n    φ = ψ",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorTensorLiftHomExt.lean",
+  "statement": "theorem exteriorTensor_lift_hom_ext {X : Scheme.{v}} {A B C D : X.Modules}\n    (g : B ⟶ C) [Epi g] (r s : ℕ)\n    (φ ψ : exteriorPower A r ⊗ exteriorPower C s ⟶ D)\n    (h : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))\n      (c : Fin s → B.val.obj (op U)),\n      φ.val.app (op U)\n          (tmulSection (wedge (M := A) (r := r) (U := U) a)\n            (wedge (M := C) (r := s) (U := U) (fun i ↦ g.val.app (op U) (c i)))) =\n        ψ.val.app (op U)\n          (tmulSection (wedge (M := A) (r := r) (U := U) a)\n            (wedge (M := C) (r := s) (U := U) (fun i ↦ g.val.app (op U) (c i))))) :\n    φ = ψ",
   "branch": "sheaf-dag",
   "by": "X2",
   "date": "2026-10-12",
-  "existing": false
+  "existing": true,
+  "note": "Retired the Sheaf twin in favor of the official exteriorPower/wedge API (P7, 2026-10-20)."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -117,13 +118,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-3c25d",
-  "group": "V3",
+  "reviewer": "C-8eebc",
+  "group": "P7",
   "result": "pass",
-  "landing": "20261012T144155-L-2110752",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module/node/report matched against the packet and repository; all files and the direct importer compiled cleanly, signatures remained unchanged, and no review rule failed."
+  "landing": "20261020T144259-L-2261123",
+  "kind": "interface",
+  "note": "independent cc review: retire-items.tsv row 64 + hand-off retire-sheaf-twins-20261020 vs delivered stub item, new proved ExteriorSheafPowerComparison (iso via isoMk/uniqueness, transport of WC exteriorTensor_lift_hom_ext) and 5 unclaimed consumers (one-line call/import edits, signatures unchanged); --all compile + 6 second-level importers clean, axioms clean, FreeGenerator import shown necessary"
  }
 }

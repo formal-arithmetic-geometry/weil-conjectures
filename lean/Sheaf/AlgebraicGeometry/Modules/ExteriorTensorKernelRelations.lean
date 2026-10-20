@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelLocallySpanned
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
 /-!
 # A generator criterion for annihilating an exterior quotient kernel
@@ -53,7 +53,7 @@ private theorem exteriorTensor_zero_mono {X : Scheme.{v}}
       (fun f ↦ f.val.app (op U) (exteriorSheafSection C 0 U Fin.elim0))
       eC.hom_inv_id
   have hqe : q = (Iso.refl (exteriorSheaf A r) ⊗ᵢ e).hom := by
-    apply exteriorTensor_lift_hom_ext (𝟙 B) r 0
+    apply exteriorSheafTensor_lift_hom_ext (𝟙 B) r 0
     intro U a c
     rw [hq]
     have hc : (fun i ↦ g.val.app (op U) ((𝟙 B : B ⟶ B).val.app (op U) (c i))) =

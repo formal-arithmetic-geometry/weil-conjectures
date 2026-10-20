@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-exterior-sheaf-power-comparison",
+ "kind": "statement",
+ "title": "Transport of exterior tensor extensionality to the official exterior powers",
+ "statement": "For a scheme X, the sheafification of the older exteriorSheafPresheaf M n is canonically isomorphic to the official exteriorPower M n, by identity maps on sectionwise exterior powers. The inverse takes the official wedge of any tuple to exteriorSheafSection of that tuple. For any epi g : B → C, this comparison transfers exteriorTensor_lift_hom_ext to morphisms out of exteriorSheaf A r tensor exteriorSheaf C s, with the identical hypothesis on tensors of lifted pure wedges.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph, lines 140–147; comparison of the two implementations required by the human retirement hand-off of 2026-10-20"
+ },
+ "stmt_deps": [
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "Both restriction maps extend the same alternating map on pure wedges. Uniqueness in exteriorSheafRestriction_existsUnique and the official exteriorPower_map_ιMulti show that the identity components give a presheaf isomorphism. Apply the sheafification functor to obtain exteriorSheafPowerIso. Naturality of its adjunction unit identifies the inverse on wedge sections. This construction uses no arbitrary existence witness.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensor the comparisons for A and C and precompose the two given morphisms with the inverse tensor isomorphism. Apply the official exteriorTensor_lift_hom_ext to these composites. tensorHom_app_tmulSection and the inverse wedge formula identify its generator condition with the given condition. Cancel the epimorphic inverse isomorphism. This works also in degree zero and over the empty scheme or zero ring.",
+   "uses": [
+    "lem-sc-exterior-tensor-lift-hom-ext"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-exterior-power",
+  "lem-sc-exterior-tensor-lift-hom-ext"
+ ],
+ "proof_origin": {
+  "by": "P7",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Agent-written implementation comparison using the already proved universal properties; no change to the mathematical proof route"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification of isomorphic presheaves of modules preserves isomorphisms",
+   "results": "PresheafOfModules.sheafification and sheafification_map; generic functor API used, no theorem comparing project-specific constructions.",
+   "date": "2026-10-20",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare two sheafifications of isomorphic presheaves of modules using identity maps on their exterior power sections",
+   "results": "PresheafOfModules.sheafificationHomEquiv and its forgetful compatibility; no project-specific comparison.",
+   "date": "2026-10-20",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorSheaf.*exteriorPower|exteriorPower.*exteriorSheaf; isoMk; exteriorPower_map_ιMulti",
+   "results": "No existing comparison in Sheaf modules. PresheafOfModules.isoMk and official exteriorPower_map_ιMulti provide the comparison construction.",
+   "date": "2026-10-20",
+   "verdict": "no duplicate comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt",
+  "date": "2026-10-20",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-exterior-tensor-lift-hom-ext",
+   "place": "Compatibility with the official library twin",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafPowerComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheafTensor_lift_hom_ext",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafPowerIso",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafPowerIso_inv_wedge",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafTensor_lift_hom_ext"
+  ],
+  "statement": "theorem exteriorSheafTensor_lift_hom_ext {X : Scheme.{v}} {A B C D : X.Modules}\n    (g : B ⟶ C) [Epi g] (r s : ℕ)\n    (φ ψ : exteriorSheaf A r ⊗ exteriorSheaf C s ⟶ D)\n    (h : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))\n      (c : Fin s → B.val.obj (op U)),\n      φ.val.app (op U)\n          (tmulSection (exteriorSheafSection A r U a)\n            (exteriorSheafSection C s U (fun i ↦ g.val.app (op U) (c i)))) =\n        ψ.val.app (op U)\n          (tmulSection (exteriorSheafSection A r U a)\n            (exteriorSheafSection C s U (fun i ↦ g.val.app (op U) (c i))))) :\n    φ = ψ",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-20"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8eebc",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261020T144259-L-2261123",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-8eebc",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261020T144259-L-2261123",
+  "kind": "interface",
+  "note": "independent cc review: retire-items.tsv row 64 + hand-off retire-sheaf-twins-20261020 vs delivered stub item, new proved ExteriorSheafPowerComparison (iso via isoMk/uniqueness, transport of WC exteriorTensor_lift_hom_ext) and 5 unclaimed consumers (one-line call/import edits, signatures unchanged); --all compile + 6 second-level importers clean, axioms clean, FreeGenerator import shown necessary"
+ }
+}

@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotient
 import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelRelations
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
 /-!
 # Factorization of the pre-quotient wedge map
@@ -75,7 +75,7 @@ theorem determinant_wedge_quotient_factor {X : Scheme.{v}}
   obtain ⟨q₀, hq₀epi, hq₀⟩ :=
     exteriorTensor_quotient_exists S.X₁ S.X₂ S.X₃ S.g r₁ r₃
   have hqq : q = q₀ := by
-    apply exteriorTensor_lift_hom_ext (𝟙 S.X₂) r₁ r₃ q q₀
+    apply exteriorSheafTensor_lift_hom_ext (𝟙 S.X₂) r₁ r₃ q q₀
     intro U a c
     change q.val.app (op U)
         (tmulSection (exteriorSheafSection S.X₁ r₁ U a)

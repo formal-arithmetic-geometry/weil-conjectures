@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTopInvertible
 import Sheaf.AlgebraicGeometry.Modules.DeterminantShortExactExists
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
 /-!
 # Determinants in short exact sequences
@@ -71,7 +71,7 @@ theorem determinant_shortExact {X : Scheme.{v}} (S : ShortComplex X.Modules)
   intro e' he'
   apply Iso.ext_inv
   have := hS.epi_g
-  apply exteriorTensor_lift_hom_ext S.g r₁ r₃
+  apply exteriorSheafTensor_lift_hom_ext S.g r₁ r₃
   intro U a c
   exact (he' U a (fun i ↦ S.g.val.app (op U) (c i)) c (fun _ ↦ rfl)).trans
     (he U a (fun i ↦ S.g.val.app (op U) (c i)) c (fun _ ↦ rfl)).symm

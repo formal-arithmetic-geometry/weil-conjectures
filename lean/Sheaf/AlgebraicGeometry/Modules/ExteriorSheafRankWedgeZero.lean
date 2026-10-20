@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import all Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-!
 # Vanishing of a wedge with too many factors from a finite locally free sheaf
@@ -21,6 +21,19 @@ Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
 universe v
 open CategoryTheory Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorSheaf_section_map {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
+    {U V : X.Opens} (f : V ⟶ U) (a : Fin n → M.val.obj (op U)) :
+    (exteriorSheaf M n).val.map f.op (exteriorSheafSection M n U a) =
+      exteriorSheafSection M n V (fun i ↦ M.val.map f.op (a i)) := by
+  let η := (PresheafOfModules.sheafificationAdjunction.{v}
+    (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf M n)
+  have hn := PresheafOfModules.naturality_apply η f.op
+    (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)
+  have hr := (Classical.choose_spec
+    (exteriorSheafRestriction_existsUnique M n f.op)).1 a
+  exact hn.symm.trans (congrArg (η.app (op V)) hr)
 
 private theorem alternating_zero_on_large_image
     {R M N D ι : Type*} [CommRing R] [AddCommGroup M] [Module R M]
@@ -124,7 +137,7 @@ theorem exteriorSheaf_rank_wedge_eq_zero {X : Scheme.{v}} {A B : X.Modules}
   change (exteriorSheaf B (r + s)).val.map k.op
     (exteriorSheafSection B (r + s) U _) =
       (exteriorSheaf B (r + s)).val.map k.op 0
-  rw [map_zero, exterior_section_map]
+  rw [map_zero, exteriorSheaf_section_map]
   have hnat (x : A.val.obj (op U)) :
       B.val.map k.op (f.val.app (op U) x) =
         f.val.app (op V) (A.val.map k.op x) :=

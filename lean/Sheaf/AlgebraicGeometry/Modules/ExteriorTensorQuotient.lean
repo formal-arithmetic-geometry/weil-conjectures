@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
 /-!
 # Exterior tensor quotients
@@ -119,7 +119,7 @@ theorem exteriorTensor_quotient_exists {X : Scheme.{v}} (A B C : X.Modules)
   refine ⟨q, ?_, hq⟩
   constructor
   intro D φ ψ hcomp
-  apply exteriorTensor_lift_hom_ext g r s
+  apply exteriorSheafTensor_lift_hom_ext g r s
   intro U a c
   rw [← hq U a c]
   exact congrArg (fun k ↦ k.val.app (op U)

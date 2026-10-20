@@ -23,51 +23,30 @@
  ],
  "proof": [
   {
-   "text": "Apply the local-splitting statement to obtain an open cover of $X$ on which the given short exact sequence identifies with $0\\to\\mathcal E_1|_{U_a}\\to\\mathcal E_1|_{U_a}\\oplus\\mathcal E_3|_{U_a}\\to\\mathcal E_3|_{U_a}\\to0$. Refine this cover using the constant-rank local-freeness trivializations so that both $\\mathcal E_1|_{U_a}$ and $\\mathcal E_3|_{U_a}$ are free sheaves with bases of $r_1$ and $r_3$ elements. The split module has rank $r_1+r_3$, hence the assumed rank relation gives $r_2=r_1+r_3$.",
+   "text": "Apply exteriorSheaf_top_isInvertible to each of the three finite locally free modules at its specified rank. This proves the three invertibility clauses, including rank zero.",
    "uses": [
-    "lem-sc-local-splitting-finite-free",
-    "def-amb-finite-locally-free-module"
+    "lem-sc-exterior-sheaf-top-invertible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "Proof of (*), determinant paragraph: local splitting"
-   }
+   "elementary": true
   },
   {
-   "text": "On each refined member $U_a$, apply the top-exterior-power direct-sum isomorphism to the free $\\mathcal O_{U_a}$-modules with the chosen bases. The sheaf $\\bigwedge^{r_i}(\\mathcal E_i|_{U_a})$ is free with basis the wedges of those basis sections, by the free-module exterior-power basis statement, and this identification is compatible with restriction. Thus the module isomorphism gives $\\det(\\mathcal E_2)|_{U_a}\\cong\\det(\\mathcal E_1)|_{U_a}\\otimes_{\\mathcal O_{U_a}}\\det(\\mathcal E_3)|_{U_a}$.",
+   "text": "Apply determinant_shortExact_exists to the short exact sequence and the rank relation for the isomorphism with the specified wedge formula. For uniqueness use Iso.ext_inv. Short exactness gives Epi S.g; exteriorSheafTensor_lift_hom_ext reduces equality of the two inverses to tensors of lifted pure wedges. Their given wedge formulas agree on these tensors. This compatibility theorem transports the official exteriorTensor_lift_hom_ext through exteriorSheafPowerIso, so the unit route and the construction of determinant_shortExact_exists are preserved.",
    "uses": [
-    "lem-sc-exterior-top-direct-sum",
-    "lem-weil-pbc-exterior-power-free-basis"
+    "lem-sc-determinant-short-exact-exists",
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "Proof of (*), determinant paragraph: top exterior powers"
-   }
-  },
-  {
-   "text": "On $U_a$, for a local splitting $s:\\mathcal E_3|_{U_a}\\to\\mathcal E_2|_{U_a}$ and inclusion $u:\\mathcal E_1|_{U_a}\\to\\mathcal E_2|_{U_a}$, define the map by sending $(a_1\\wedge\\cdots\\wedge a_{r_1})\\otimes(b_1\\wedge\\cdots\\wedge b_{r_3})$ to $u(a_1)\\wedge\\cdots\\wedge u(a_{r_1})\\wedge s(b_1)\\wedge\\cdots\\wedge s(b_{r_3})$. If $s'$ is another splitting, then $s'(b)-s(b)$ lies in $u(\\mathcal E_1|_{U_a})$; expanding the wedge, every term containing an $s'-s$ factor has $r_1+1$ factors from the free rank-$r_1$ module $u(\\mathcal E_1|_{U_a})$ and vanishes by [lem-weil-pbc-exterior-power-free-basis]. Hence the map is independent of $s$, so the local maps agree on overlaps and with restriction. They therefore glue to the canonical isomorphism, and when a rank is zero the same formula uses $\\bigwedge^0=\\mathcal O_X$.",
-   "uses": [
-    "lem-sc-local-splitting-finite-free",
-    "lem-weil-pbc-exterior-power-free-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "Proof of (*), determinant paragraph: local splitting and gluing"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-determinant-short-exact-exists",
   "lem-sc-exterior-sheaf-top-invertible",
-  "lem-sc-exterior-tensor-lift-hom-ext"
+  "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
-  "by": "X2",
+  "by": "P7",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph"
+  "place": "Proof of (*), determinant paragraph; actual Lean combination of the existing invertibility and existence results with transported extensionality"
  },
  "mathlib_searches": [
   {
@@ -154,13 +133,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "C-8eebc",
+  "group": "P7",
   "result": "pass",
-  "landing": "20261012T112854-L-773413",
+  "landing": "20261020T144259-L-2261123",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retire-items.tsv row 64 + hand-off retire-sheaf-twins-20261020 vs delivered stub item, new proved ExteriorSheafPowerComparison (iso via isoMk/uniqueness, transport of WC exteriorTensor_lift_hom_ext) and 5 unclaimed consumers (one-line call/import edits, signatures unchanged); --all compile + 6 second-level importers clean, axioms clean, FreeGenerator import shown necessary"
  }
 }
