@@ -172,7 +172,7 @@ try:
                 key = None
         try:
             if not hit:
-                p = subprocess.run(cmd + [str(src)], cwd=str(LEAN), env=dict(os.environ, LEAN_PATH=LP, LEAN_NUM_THREADS="2"),
+                p = subprocess.run(cmd + [str(src)], cwd=str(LEAN), env=dict(os.environ, LEAN_PATH=LP, LEAN_NUM_THREADS="1"),
                                    capture_output=True, text=True, timeout=timeout)
                 rc, out = p.returncode, p.stdout + p.stderr
                 if key and rc == 0:

@@ -183,7 +183,7 @@ def run(args) -> dict:
         raise Rejected("prepared and built package configuration differ")
     env = os.environ.copy()
     env["PATH"] = str(pathlib.Path.home() / ".elan/bin") + os.pathsep + env.get("PATH", "")
-    env["LEAN_NUM_THREADS"] = "2"
+    env["LEAN_NUM_THREADS"] = "1"
     lp = subprocess.check_output(["lake", "env", "printenv", "LEAN_PATH"], cwd=built, env=env, text=True).strip()
     roots = [pathlib.Path(p) if pathlib.Path(p).is_absolute() else built / p for p in lp.split(os.pathsep)]
     env["LEAN_PATH"] = os.pathsep.join(str(p.resolve()) for p in roots)

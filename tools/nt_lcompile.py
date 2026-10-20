@@ -149,7 +149,7 @@ def run(f, timeout=60, out=None, probe=""):
                 waited = time.time() + 7                       # the server is busy too: try it again in about 10 s
             time.sleep(1); lock = take_slot()
         try:
-            p = subprocess.run(["nice", "-n", "19"] + cmd + [str(src)], cwd=P, env=dict(ENV, LEAN_PATH=lean_path(), LEAN_NUM_THREADS="2"), capture_output=True, text=True, timeout=timeout)
+            p = subprocess.run(["nice", "-n", "19"] + cmd + [str(src)], cwd=P, env=dict(ENV, LEAN_PATH=lean_path(), LEAN_NUM_THREADS="1"), capture_output=True, text=True, timeout=timeout)
         finally:
             fcntl.flock(lock, fcntl.LOCK_UN); lock.close()
     except subprocess.TimeoutExpired as exc:

@@ -168,7 +168,7 @@ def main():
             start = time.monotonic()
             try:
                 p = subprocess.run(cmd, cwd=LIVE,
-                                   env=dict(os.environ, LEAN_PATH=lp, LEAN_NUM_THREADS="2"),
+                                   env=dict(os.environ, LEAN_PATH=lp, LEAN_NUM_THREADS="1"),
                                    capture_output=True, text=True, timeout=60)
                 output = (p.stdout + p.stderr).replace(str(tree) + "/", "")
                 print(output, end="", flush=True)

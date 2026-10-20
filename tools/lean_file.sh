@@ -83,7 +83,7 @@ compile() {
   while [ -e "$SHEAF_ROOT/local/PUBLISHING" ] && [ $n -lt 60 ]; do sleep 2; n=$((n + 1)); done
   [ -n "${SHEAF_GROUP:-}" ] && refresh_mirror
   [ ${#OUT[@]} -gt 0 ] && { rm -f "${PARTS[@]}"; git hash-object "$F" > "$M/$R.src" 2>/dev/null || rm -f "$M/$R.src"; }
-  ( cd "$SHEAF_LEAN" && LEAN_PATH="$LP" timeout "${SHEAF_FILE_TIMEOUT:-60}" env LEAN_NUM_THREADS=2 nice -n 19 \
+  ( cd "$SHEAF_LEAN" && LEAN_PATH="$LP" timeout "${SHEAF_FILE_TIMEOUT:-60}" env LEAN_NUM_THREADS=1 nice -n 19 \
       lean "${OPTS[@]}" -R "$SHEAF_LEAN" "${OUT[@]}" "$F" )
 }
 T0=$(date +%s.%N); START=$(mktemp); compile; rc=$?
