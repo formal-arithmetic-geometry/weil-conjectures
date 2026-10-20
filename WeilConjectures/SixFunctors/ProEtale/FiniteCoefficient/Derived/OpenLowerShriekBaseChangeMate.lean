@@ -109,7 +109,8 @@ lemma mateEquiv_openImmersionLowerShriekBaseChangeMap [IsOpenImmersion j] [IsOpe
   exact NatTrans.congr_app h X
 
 /-- The transport `Lf^* ≅ Lg^*` along `f = g` is induced by `f^* ≅ g^*`. -/
-lemma leftDerivedUpperStarCongr_inv_app {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g)
+lemma leftDerivedUpperStarCongr_inv_app_eq_mapDerivedCategory {X Y : Scheme.{u}} {f g : X ⟶ Y}
+    (h : f = g)
     (K : DerivedCategory (Sheaf (ProEt.topology Y) A)) :
     (leftDerivedUpperStarCongr A h).inv.app K =
       (leftDerivedUpperStarIsoMapDerivedCategory A g).hom.app K ≫
@@ -137,7 +138,7 @@ lemma leftDerivedUpperStarSquareIso_inv_app (sq : CommSq g' j' j g'')
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Category.assoc, Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    leftDerivedUpperStarCongr_inv_app]
+    leftDerivedUpperStarCongr_inv_app_eq_mapDerivedCategory]
   simp only [leftDerivedUpperStarIsoMapDerivedCategory] at hnat
   rw [reassoc_of% hnat, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp]
