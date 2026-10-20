@@ -281,5 +281,23 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-aa7c929be (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks more-algebra 0A68(2) (l.28562), 0A60, 0A61 and 0A67, and read the statement of every cited node. There are no new nodes. The statement is unchanged and faithful: commutative R, K pseudo-coherent (bounded-above finite free), L in D^+, M a bounded complex of injectives. The coefficient category is ordinary R-modules throughout. I re-derived the step-4 index bounds (n-b+l<=s<=u, n-b-u<=r<=-l, and A^k with factors only for l-k<=s<=u), so every product in T^n and B^n is finite. I checked the step-5 chain-map property independently, term by term for the d_I, d_J and d_P terms. eps=(-1)^{s(r+1)} meets the three recurrences and equals Stacks' (-1)^{r+qr} after renaming. I checked the step-6 transpose sign, (-1)^{kh+kn}=(-1)^{ks}, which agrees with 0A61; the K-flat replacement of A is handled because I is K-injective. I checked both composites of the step-7 finite-basis inverse. Small case R=Z, K=L=Z, M=Q/Z works, as do the zero-ring and empty-range cases. Duplicate search (0A68, 0A60, evaluation and pseudo-coherent) found only the parent 0A69 node, which cites the item, and the canonical-map node. There is no cycle. I accept the tool_uses lem-pc-module-bounded-flat-kflat, lem-pc-source-kflat-module-tensor-model and lem-pc-kflat-resolution as generic module tools. No SGA is cited and no fixes are needed."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedEvaluationPseudoCoherent",
+  "declaration": "DerivedCategory.isIso_evaluation_of_isPseudoCoherent",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedEvaluationPseudoCoherent.lean",
+  "statement": "theorem isIso_evaluation_of_isPseudoCoherent (R : Type u) [CommRing R] [HasDerivedCategory.{u} (RingSiteModules R)] [HasDerivedCategory.{u} (ModuleCat.{u} R)] (K L M : evaluationDerivedCategory R) (hK : ∃ P : CochainComplex (RingSiteModules R) ℤ, Nonempty (Q.obj P ≅ K) ∧ IsPseudoCoherent (A := R) (Q.obj (((SheafOfModules.forget ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R)) ⋙ PresheafOfModules.evaluation ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R)).obj (op ⟨PUnit.unit⟩)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P))) (hL : ∃ n : ℤ, L.IsGE n) (hM : ∃ I : CochainComplex (RingSiteModules R) ℤ, (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (I.X i)) ∧ (∀ i : ℤ, Injective (I.X i)) ∧ Nonempty (Q.obj I ≅ M)) : IsIso ((derived_evaluation_canonical_map R).choose K L M)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-343293eea",
+  "group": "ND",
+  "result": "pass",
+  "note": "Item isIso_evaluation_of_isPseudoCoherent matches Stacks 0A68(2): K pseudo-coherent via one-point evaluation + IsPseudoCoherent (same encoding as landed isIso_finiteInjectiveEvaluation), L in D+ as ∃n IsGE, M a bounded complex of injectives (a>b allowed), IsIso of the canonical map via .choose of the uniquely pinned canonical-map theorem; no extra hypotheses; statements verbatim; docstrings carry source, blueprint and all 8 steps; item not on the drop lists. The canonical-map §1(B) module is legitimate: NJ's PASSed module (1df3eea78) was taken out of the 2026-10-20 landing candidate (it imported retired Sheaf HomTensorTotal/KFlatConeTrianglePresentation), the live record dangles with no file and no importers, and ND's text is equivalent to NJ's (sectL vs curry.flip, .hom of the same signed shift iso) with live WeilConjectures imports. nt_compile timed out at 60 s at load 208 (12 s CPU); lcompile.run_set(timeout=560) gave rc 0 for both files, no warnings (404.6 s / 119.2 s wall, ~46 s CPU total). Maintainer: landing overwrites NJ's dangling record by design; retry landing at lower load."
  }
 }
