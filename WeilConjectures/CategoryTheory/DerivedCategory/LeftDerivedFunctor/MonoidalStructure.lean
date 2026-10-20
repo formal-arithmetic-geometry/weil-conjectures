@@ -161,6 +161,8 @@ section Monoidal
 
 open LaxMonoidal OplaxMonoidal
 
+section Exact
+
 variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
 omit [HasFunctorialFlatResolution D] [MonoidalClosed C] [BraidedCategory C] in
@@ -184,6 +186,21 @@ lemma exists_kFlatMap_iso (X : DerivedCategory C) :
   have : IsIso (Qh.map R.w) := Localization.inverts Qh (HomotopyCategory.quasiIso _ _) _ R.hw
   exact ⟨R.X₁.obj, R.X₁.property, ⟨asIso (Qh.map R.w) ≪≫ Qh.objObjPreimageIso X⟩⟩
 
+end Exact
+
+variable (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso] [F.PreservesFlat] [F.IsLeftAdjoint]
+
+omit [HasFunctorialFlatResolution D] [F.PreservesKFlatQuasiIso] in
+/-- Every object of `D(C)` is isomorphic to `Qh P` for a K-flat complex `P` whose image under
+`F` is K-flat. -/
+lemma exists_kFlatKFlatMap_iso (X : DerivedCategory C) :
+    ∃ P, F.kFlatKFlatMap P ∧ Nonempty (Qh.obj P ≅ X) := by
+  have := Localization.essSurj (Qh (C := C)) (HomotopyCategory.quasiIso _ (.up ℤ))
+  obtain ⟨R⟩ := LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions
+    (Φ := HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatKFlatMap) (Qh.objPreimage X)
+  have : IsIso (Qh.map R.w) := Localization.inverts Qh (HomotopyCategory.quasiIso _ _) _ R.hw
+  exact ⟨R.X₁.obj, R.X₁.property, ⟨asIso (Qh.map R.w) ≪≫ Qh.objObjPreimageIso X⟩⟩
+
 variable [F.Monoidal]
 
 /-- The oplax monoidal structure on the left derived functor `LF : D(C) ⥤ D(D)` whose
@@ -194,11 +211,12 @@ under `F` is K-flat. -/
 @[instance_reducible]
 noncomputable def leftDerivedFunctorOplaxMonoidal : F.leftDerivedFunctor.OplaxMonoidal :=
   haveI := DerivedCategory.isIso_ε_Qh D
-  OplaxMonoidal.ofLaxSquare (Q₁ := Qh) (Q₂ := Qh) (F := F.mapHomotopyCategory (.up ℤ))
+  OplaxMonoidal.ofLaxSquare' (Q₁ := Qh) (Q₂ := Qh) (F := F.mapHomotopyCategory (.up ℤ))
     F.leftDerivedTensorComparison (fun a ↦ F.leftDerivedFunctorCounit.app a)
     (fun _ _ f ↦ F.leftDerivedFunctorCounit.naturality f)
-    F.leftDerivedTensorComparison_app_app_comp_tensorHom F.kFlatMap
-    F.exists_kFlatMap_iso (fun x _ hb ↦ isIso_μNatTrans_Qh_app_app_of_kFlat x _ hb)
+    F.leftDerivedTensorComparison_app_app_comp_tensorHom F.kFlatKFlatMap
+    F.exists_kFlatKFlatMap_iso (fun a ha ↦ F.isIso_leftDerivedFunctorCounit_app_of_kFlat' a ha.1)
+    (fun x _ hb ↦ isIso_μNatTrans_Qh_app_app_of_kFlat x _ hb.2)
 
 lemma isIso_leftDerivedFunctorOplaxMonoidal_δ (X X' : DerivedCategory C) :
     letI := F.leftDerivedFunctorOplaxMonoidal
@@ -213,6 +231,8 @@ lemma isIso_leftDerivedFunctorOplaxMonoidal_η :
   have : IsIso (η (F.mapHomotopyCategory (.up ℤ))) := by
     rw [Functor.mapHomotopyCategory_η]
     infer_instance
+  have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat' (𝟙_ _)
+    (ObjectProperty.prop_unit (HomotopyCategory.quasiIso C (.up ℤ)).kFlat)
   exact inferInstanceAs (IsIso (F.leftDerivedFunctor.map (ε Qh) ≫
     F.leftDerivedFunctorCounit.app (𝟙_ _) ≫
       Qh.map (η (F.mapHomotopyCategory (.up ℤ))) ≫ CategoryTheory.inv (ε Qh)))
@@ -253,14 +273,16 @@ lemma _root_.DerivedCategory.braidedCategory'_braiding_hom_μ_Qh
 
 attribute [local instance] DerivedCategory.braidedCategory'
 
-variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+variable (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso]
   [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
 
 /-- The comonoidal structure of `LF` is compatible with the derived braidings at `Qh P` and
-`Qh Q`, when `F P` is K-flat. -/
+`Qh Q`, when `F P` is K-flat and the counit of `LF` is an isomorphism at `P` and `Q` (for
+instance when `F` is exact, or `P` and `Q` are K-flat). -/
 lemma leftDerivedFunctor_map_braiding_hom_δ_Qh
     (hF : ∀ X Y : C, F.map (β_ X Y).hom ≫ δ F Y X = δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom)
-    (P Q : HomotopyCategory C (.up ℤ)) (hP : F.kFlatMap P) :
+    (P Q : HomotopyCategory C (.up ℤ)) (hP : F.kFlatMap P)
+    [IsIso (F.leftDerivedFunctorCounit.app P)] [IsIso (F.leftDerivedFunctorCounit.app Q)] :
     letI := F.leftDerivedFunctorMonoidal
     F.leftDerivedFunctor.map (β_ (Qh.obj P) (Qh.obj Q)).hom ≫
         δ F.leftDerivedFunctor (Qh.obj Q) (Qh.obj P) =
@@ -305,10 +327,12 @@ theorem leftDerivedFunctor_map_braiding_hom_δ
       δ F.leftDerivedFunctor K M ≫
         (β_ (F.leftDerivedFunctor.obj K) (F.leftDerivedFunctor.obj M)).hom := by
   let := F.leftDerivedFunctorMonoidal
-  obtain ⟨P, hP, ⟨eP⟩⟩ := F.exists_kFlatMap_iso K
-  obtain ⟨Q, -, ⟨eQ⟩⟩ := F.exists_kFlatMap_iso M
+  obtain ⟨P, hP, ⟨eP⟩⟩ := F.exists_kFlatKFlatMap_iso K
+  obtain ⟨Q, hQ, ⟨eQ⟩⟩ := F.exists_kFlatKFlatMap_iso M
+  have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat' P hP.1
+  have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat' Q hQ.1
   exact OplaxMonoidal.map_braiding_hom_comp_δ_of_iso _ eP eQ
-    (F.leftDerivedFunctor_map_braiding_hom_δ_Qh hF P Q hP)
+    (F.leftDerivedFunctor_map_braiding_hom_δ_Qh hF P Q hP.2)
 
 /-- **The left derived functor of a braided exact functor is braided.** For the monoidal
 structure `CategoryTheory.Functor.leftDerivedFunctorMonoidal` of `LF` and the derived braidings
@@ -354,11 +378,11 @@ section Linear
 
 variable {R S : Type*} [Ring R] [Ring S] [CategoryTheory.Linear R C] [CategoryTheory.Linear S D]
   (φ : R →+* S)
-  (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso]
 
 omit [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
   [HasFunctorialFlatResolution D] in
-/-- If an exact functor `F` is semilinear for `φ : R →+* S` on the endomorphisms `a • 𝟙`, so is
+/-- If a functor `F` is semilinear for `φ : R →+* S` on the endomorphisms `a • 𝟙`, so is
 its left derived functor `LF`: `LF (a • 𝟙 K) = φ a • 𝟙 (LF K)`. -/
 lemma leftDerivedFunctor_map_smul_id
     (hF : ∀ (X : C) (a : R), F.map (a • 𝟙 X) = φ a • 𝟙 (F.obj X))
@@ -377,9 +401,10 @@ lemma leftDerivedFunctor_map_smul_id
     rw [← Functor.map_id, ← Functor.map_smul, Functor.mapHomotopyCategory_map, hC,
       Functor.map_smul, Functor.map_id]
     rfl
-  -- on the image of a complex
-  have hQ (P : HomotopyCategory C (.up ℤ)) :
+  -- on the image of a K-flat complex
+  have hQ (P : HomotopyCategory C (.up ℤ)) (hP : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat P) :
       F.leftDerivedFunctor.map (a • 𝟙 (Qh.obj P)) = φ a • 𝟙 _ := by
+    have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat' P hP
     have e : a • 𝟙 (Qh.obj P) = Qh.map (a • 𝟙 P) := by
       rw [Functor.map_smul, Functor.map_id]
     rw [e, ← cancel_mono (F.leftDerivedFunctorCounit.app _)]
@@ -387,18 +412,17 @@ lemma leftDerivedFunctor_map_smul_id
     rw [Functor.comp_map, hK, Functor.map_smul, Functor.map_id, Linear.smul_comp,
       Linear.comp_smul, id_comp]
     erw [comp_id]
-  -- every object is isomorphic to the image of a complex
-  have := Localization.essSurj (Qh (C := C)) (HomotopyCategory.quasiIso _ (.up ℤ))
-  let e := Qh.objObjPreimageIso K
+  -- every object is isomorphic to the image of a K-flat complex
+  obtain ⟨P, hP, ⟨e⟩⟩ := DerivedCategory.exists_kFlat_iso K
   have h : a • 𝟙 K = e.inv ≫ (a • 𝟙 _) ≫ e.hom := by
     rw [Linear.smul_comp, id_comp, Linear.comp_smul, e.inv_hom_id]
-  rw [h, Functor.map_comp, Functor.map_comp, hQ, Linear.smul_comp, id_comp, Linear.comp_smul,
+  rw [h, Functor.map_comp, Functor.map_comp, hQ P hP, Linear.smul_comp, id_comp, Linear.comp_smul,
     ← Functor.map_comp, e.inv_hom_id, Functor.map_id]
 
 variable [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
 
 open LaxMonoidal OplaxMonoidal in
-/-- If an exact monoidal functor `F` is semilinear for `φ : R →+* S` on the endomorphisms `a • 𝟙`,
+/-- If a monoidal functor `F` is semilinear for `φ : R →+* S` on the endomorphisms `a • 𝟙`,
 the induced map `f ↦ ε ≫ LF f ≫ η` on the endomorphisms of the unit of `D(C)` sends `a • 𝟙` to
 `φ a • 𝟙`. -/
 lemma ε_comp_leftDerivedFunctor_map_smul_id_comp_η
