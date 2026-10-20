@@ -9,7 +9,7 @@ public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.RepresentationTheory.DiscreteResolutionInhomogeneousCohomology
+import WeilConjectures.RepresentationTheory.DiscreteResolutionInhomogeneousCohomology
 import WeilConjectures.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology
 
 /-!
@@ -115,9 +115,9 @@ theorem nonempty_equiv_invariantResolution_continuousCohomology
           e ((-1 : ℤ) ^ (k.val + 1) •
             e.symm (t n x (Fin.contractNth k (· * ·) g)))
     simp only [he, e.apply_symm_apply, map_zsmul]
-  obtain ⟨a⟩ := nonempty_equiv_invariantResolution_inhomogeneous G A E F I K t' ht' q
+  let a := invariantResolutionHomologyAddEquivInhomogeneous G A E F I K t' ht' q
   let b : K.homology q ≅ V.obj (continuousCohomology q N) :=
     ((TopRep.homogeneousCochains N).sc q).mapHomologyIso V
-  exact ⟨a.trans b.addCommGroupIsoToAddEquiv.toEquiv⟩
+  exact ⟨(a.trans b.addCommGroupIsoToAddEquiv).toEquiv⟩
 
 end Rep
