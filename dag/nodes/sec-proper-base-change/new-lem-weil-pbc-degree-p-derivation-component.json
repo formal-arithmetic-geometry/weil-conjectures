@@ -98,14 +98,15 @@
   "same_as": []
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.FormalFiberDegreePDerivation",
-  "file": "lean/Sheaf/RingTheory/FormalFiberDegreePDerivation.lean",
-  "declaration": "MvPowerSeries.FormalFiberDegreePDerivation",
-  "statement": "theorem FormalFiberDegreePDerivation\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (n m : ℕ)\n    (q : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) [q.IsPrime]\n    (L : Type u) [Field L]\n    [Algebra ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) L]\n    [Module.Finite\n      ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) L]\n    [IsPurelyInseparable\n      ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) L]\n    (M : IntermediateField\n      ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) L)\n    [Module.Finite\n      ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) M]\n    [IsPurelyInseparable\n      ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) M]\n    (z : L) (hz : IntermediateField.adjoin M ({z} : Set L) = ⊤)\n    (a : M) (ha : z ^ p = (a : L)) (hdeg : Module.finrank M L = p) :\n    let A := MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)\n    let K := (⊥ : Ideal A).ResidueField\n    let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))\n      (Localization.AtPrime q)\n    let R := TensorProduct K M ((⊥ : Ideal A).Fiber C)\n    letI : CommSemiring R := (inferInstance : CommRing R).toCommSemiring\n    letI : AddCommMonoid R := (inferInstance : CommRing R).toAddCommGroup.toAddCommMonoid\n    ∃ D : Derivation ℤ R R, IsUnit (D (Algebra.TensorProduct.includeLeftRingHom a))",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.FormalFiberDegreePDerivation",
+  "file": "lean/WeilConjectures/RingTheory/FormalFiberDegreePDerivation.lean",
+  "declaration": "MvPowerSeries.exists_derivation_isUnit_tmul_formalFiber",
+  "statement": "theorem exists_derivation_isUnit_tmul_formalFiber\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (n m : ℕ)\n    (q : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) [q.IsPrime]\n    (L : Type u) [Field L]\n    [Algebra ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) L]\n    [Module.Finite\n      ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) L]\n    [IsPurelyInseparable\n      ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) L]\n    (M : IntermediateField\n      ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) L)\n    [Module.Finite\n      ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) M]\n    [IsPurelyInseparable\n      ((⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))).ResidueField) M]\n    (z : L) (hz : IntermediateField.adjoin M ({z} : Set L) = ⊤)\n    (a : M) (ha : z ^ p = (a : L)) (hdeg : Module.finrank M L = p) :\n    let A := MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)\n    let K := (⊥ : Ideal A).ResidueField\n    let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))\n      (Localization.AtPrime q)\n    let R := TensorProduct K M ((⊥ : Ideal A).Fiber C)\n    letI : CommSemiring R := (inferInstance : CommRing R).toCommSemiring\n    letI : AddCommMonoid R := (inferInstance : CommRing R).toAddCommGroup.toAddCommMonoid\n    ∃ D : Derivation ℤ R R, IsUnit (D (Algebra.TensorProduct.includeLeftRingHom a))",
   "branch": "sheaf-dag",
-  "by": "J2",
-  "date": "2026-10-13"
+  "by": "M2",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module in favour of the official upstream twin. The theorem is renamed; its complete signature and proof are otherwise identical. The existing degree-p presentation consumer already imports and calls the upstream theorem."
  },
  "stmt_deps": [
   "def-weil-pbc-multivariate-power-series",
@@ -175,14 +176,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K2",
+  "reviewer": "C-0d914",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T022418-L-3215543",
+  "landing": "20261020T221246-L-4164808",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Retired Sheaf theorem FormalFiberDegreePDerivation vs upstream WeilConjectures twin exists_derivation_isUnit_tmul_formalFiber (statements identical after renaming); node lean record vs twin file (verbatim, existing:true); stub vs accepted FormalFiberDegreePQuotient retirement (byte-identical)"
  },
  "lean_audit": {
   "master": {
