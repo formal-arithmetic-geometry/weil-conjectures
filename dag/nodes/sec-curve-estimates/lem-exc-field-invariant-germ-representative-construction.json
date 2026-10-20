@@ -137,14 +137,15 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Sites.FiniteGaloisGermRepresentative",
-  "file": "lean/Sheaf/AlgebraicGeometry/Sites/FiniteGaloisGermRepresentative.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.FiniteGaloisGermRepresentative",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Sites/FiniteGaloisGermRepresentative.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_finiteGalois_germ_representative",
-  "statement": "theorem exists_finiteGalois_germ_representative\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω]\n    (s : Spec (.of Ω) ⟶ Spec (.of K))\n    (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))\n    (L : IntermediateField K Ks) [FiniteDimensional K L]\n    (m : (pointSmallEtale s).sheafFiber.obj F) :\n    ∃ E : FiniteGaloisIntermediateField K Ks,\n      L ≤ E.toIntermediateField ∧\n      ∃ y : (pointSmallEtale s).fiber.obj (etaleSpec K E),\n        y.left = Spec.map\n          (CommRingCat.ofHom ((algebraMap Ks Ω).comp E.toIntermediateField.subtype)) ∧\n        ∃ z : F.obj.obj (op (etaleSpec K E)),\n          (pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z = m",
+  "statement": "theorem exists_finiteGalois_germ_representative\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω]\n    (s : Spec (.of Ω) ⟶ Spec (.of K))\n    (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))\n    (L : IntermediateField K Ks) [FiniteDimensional K L]\n    (m : (pointSmallEtale s).sheafFiber.obj F) :\n    ∃ E : FiniteGaloisIntermediateField K Ks,\n      L ≤ E.toIntermediateField ∧\n      ∃ y : (pointSmallEtale s).fiber.obj (etaleSpec K E),\n        y.left = Spec.map\n          (CommRingCat.ofHom ((algebraMap Ks Ω).comp E.toIntermediateField.subtype)) ∧\n        ∃ z : F.obj.obj (op (etaleSpec K E)),\n          (pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z = m",
   "branch": "sheaf-dag",
-  "by": "G3",
-  "date": "2026-10-13"
+  "by": "T2",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf copy in favor of the upstream theorem. Its coefficient universe is max (u+1) v. The sole local consumer retains its more general max u v statement: apply the upstream theorem to the ULift sheaf and transfer its representative back using Point.presheafFiberCompIso and toPresheafFiber_presheafFiberCompIso_hom_app."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -159,12 +160,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a97e8",
-  "group": "D5",
+  "reviewer": "C-197b0",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261020T051137-L-1575484",
+  "landing": "20261020T135427-L-1822367",
   "kind": "interface",
-  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
+  "note": "independent cc review: retired Sheaf FiniteGaloisGermRepresentative (empty withdrawn module) vs upstream WeilConjectures twin (same proof, universe max (u+1) v); consumer FieldInvariantGermRepresentative ULift adapter with signature byte-identical; construction node repointed existing:true per change record; delivered modules + importer FieldSectionsStalkInvariants compile; axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {

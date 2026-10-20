@@ -10,7 +10,8 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
-import Sheaf.AlgebraicGeometry.Sites.FiniteGaloisGermRepresentative
+import WeilConjectures.AlgebraicGeometry.Sites.FiniteGaloisGermRepresentative
+import Mathlib.CategoryTheory.Limits.Preserves.Ulift
 import Sheaf.AlgebraicGeometry.Sites.FiniteGaloisInvariantGermDescent
 
 /-!
@@ -84,8 +85,19 @@ theorem exists_fieldSection_of_invariant_germ
     (hm : ∀ g ∈ L.fixingSubgroup, action.smul g m = m) :
     ∃ z : F.obj.obj (op (etaleSpec K L)),
       (pointSmallEtale s).toPresheafFiber (etaleSpec K L) x F.obj z = m := by
-  obtain ⟨E, hLE, y, hy, z, hz⟩ :=
-    exists_finiteGalois_germ_representative K Ks Ω s hs F L m
+  let U := uliftFunctor.{u + 1, max u v}
+  let F' := (sheafCompose (Spec (.of K)).smallEtaleTopology U).obj F
+  let e := ((pointSmallEtale s).presheafFiberCompIso U).app F.obj
+  obtain ⟨E, hLE, y, hy, z', hz'⟩ :=
+    exists_finiteGalois_germ_representative K Ks Ω s hs F' L
+      (e.inv (ULift.up m))
+  let z := z'.down
+  have hz : (pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z = m := by
+    have h := congrArg e.hom hz'
+    rw [e.inv_hom_id_apply] at h
+    have hn := (pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app
+      U (etaleSpec K E) y F.obj
+    exact congrArg ULift.down ((ConcreteCategory.congr_hom hn z').symm.trans h)
   have hinj : Function.Injective
       ((pointSmallEtale s).toPresheafFiber (etaleSpec K E.toIntermediateField) y F.obj) := by
     intro z z' h
