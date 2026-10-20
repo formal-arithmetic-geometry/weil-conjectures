@@ -40,9 +40,15 @@ theorem finite_H_of_shortExact_middle {X : Scheme.{u}} (R : Type v) [CommRing R]
   let : Module R (S.X₃.H q) := Module.compHom _ σ
   intro h₁ h₃
   let a : S.X₁.H q →ₗ[R] S.X₂.H q :=
-    { H.map S.f q with map_smul' := fun r x ↦ H.map_smul S.f q (σ r) x }
+    { H.map S.f q with
+      map_smul' := by
+        intro r x
+        exact H.map_smul S.f q (σ r) x }
   let b : S.X₂.H q →ₗ[R] S.X₃.H q :=
-    { H.map S.g q with map_smul' := fun r x ↦ H.map_smul S.g q (σ r) x }
+    { H.map S.g q with
+      map_smul' := by
+        intro r x
+        exact H.map_smul S.g q (σ r) x }
   have hab : LinearMap.ker b = LinearMap.range a := by
     ext x
     exact SetLike.ext_iff.mp (H.ker_map_g_eq_range_map_f hS q) x
