@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-conormal-graded-piece-stalk",
+ "kind": "statement",
+ "title": "Stalk of each homogeneous conormal piece",
+ "statement": "For a closed immersion i, every n ≥ 0 and z ∈ Z, the module stalk of piece n [lem-pur-conormal-graded-algebra-basic] is additively isomorphic to K^n/K^(n+1), K=ker(i_z). Every representative germ maps to the quotient class of its ambient germ, with its canonical membership in K^n. This includes n=0.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0633; modules.tex, stalks of quotients and tensor pullback (Tags 01AG and 08KS)."
+ },
+ "stmt_deps": [
+  "lem-pur-conormal-graded-algebra-basic",
+  "def-pc-module-stalk-functor",
+  "def-weil-pbc-associated-graded-ring"
+ ],
+ "proof": [
+  {
+   "text": "The image-power calculation gives stalk range K^n for the monic inclusion of I^n, including n=0. Its range equivalence transports the product stalk I·I^n to K·K^n=K^(n+1).",
+   "uses": [
+    "lem-weil-pbc-formal-polynomial-power-lifts",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-closed-immersion-ideal-stalk-range"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0633; modules.tex, stalks of quotients and tensor pullback (Tags 01AG and 08KS)."
+   }
+  },
+  {
+   "text": "Take quotients and compose the normalized unit quotient and the closed-pushforward stalk equivalence. Naturality of germs identifies every representative with its ambient quotient class.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-power-quotient",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0633; modules.tex, stalks of quotients and tensor pullback (Tags 01AG and 08KS)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-polynomial-power-lifts",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-closed-immersion-ideal-stalk-range",
+  "lem-weil-pbc-closed-immersion-power-quotient",
+  "lem-weil-pbc-closed-pushforward-stalks"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0633; modules.tex, stalks of quotients and tensor pullback (Tags 01AG and 08KS).",
+  "method": "Source argument, specialized to the fixed tensor-pullback pieces; Lean proof by N2.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion, the stalk of the tensor pullback of the nth ideal power is the quotient of the nth and n plus first powers of the kernel ideal",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.isPullback_of_isClosedImmersion.",
+   "date": "2026-10-21",
+   "verdict": "No exact match. These declarations concern algebraic graded rings, closed immersions or individual stalks, and do not give this normalized sheaf construction or comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded algebra sheaf of a closed immersion of schemes is the direct sum of tensor pullbacks of ideal powers",
+   "results": "Closed-subscheme and ideal-sheaf constructions; no total associated-graded algebra sheaf theorem.",
+   "date": "2026-10-21",
+   "verdict": "No match. Read the adopted formal graded-piece multiplication, closed-immersion quotient, and affine-section APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GradedSheafAlgebra\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "Mathlib has direct-sum graded ring structures, not the algebra sheaf with the specified homogeneous modules."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|GradedSheafAlgebra|associatedGraded",
+   "results": "No Mathlib declaration supplies this closed-immersion conormal graded algebra interface. Local project search finds the adopted associated-graded ring and homogeneous sheaf operations.",
+   "date": "2026-10-21",
+   "verdict": "Reuse those declarations; the missing total sheaf algebra is a separate construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebra",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-normal-bundle",
+   "place": "Proof steps 3 and 4: the homogeneous quotient-stalk identifications used to compare the graded algebra stalk with the regular-sequence polynomial algebra.",
+   "via": [
+    "lem-pur-conormal-graded-algebra"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConormalGradedPieceStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalGradedPieceStalk.lean",
+  "declaration": "AlgebraicGeometry.ConormalGradedAlgebra.graded_piece_stalk",
+  "statement": "theorem graded_piece_stalk (n : ℕ) (z : Z) :\n    ∃ e : ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj (piece i n)) ≃+\n        Ideal.associatedGradedPiece (RingHom.ker (i.stalkMap z).hom) n,\n      ∀ (U : X.Opens) (hz : i z ∈ U) (a : (power i n).val.obj (op U)),\n        ∃ h : X.presheaf.germ U (i z) hz\n            ((powerInclusion i n).val.app (op U) a) ∈\n              RingHom.ker (i.stalkMap z).hom ^ n,\n          e (TopCat.Presheaf.germ (piece i n).val.presheaf (i ⁻¹ᵁ U) z hz\n            (representative i n U a)) = Submodule.Quotient.mk\n              ⟨X.presheaf.germ U (i z) hz ((powerInclusion i n).val.app (op U) a), h⟩",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aade2",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T233205-L-904241",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aade2",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T233205-L-904241",
+  "kind": "interface",
+  "note": "independent cc review: aade2819 vs 07ff8649 (Lean and nodes sha-identical; only change record Users table and report changed); Presentation/exists_conormalGradedAlgebra and the six moved defs vs live; AffineData fields vs Presentation and Stacks 0630-0633; 7 direct importers compiled against the sandbox-built item olean"
+ }
+}

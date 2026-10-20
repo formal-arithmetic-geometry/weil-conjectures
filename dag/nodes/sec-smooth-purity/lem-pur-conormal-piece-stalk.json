@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-conormal-piece-stalk",
+ "kind": "statement",
+ "title": "Conormal stalk as the cotangent module of the actual kernel",
+ "statement": "For a closed immersion i and z ∈ Z, the stalk of the fixed degree-one piece [lem-pur-conormal-graded-algebra-basic] is additively isomorphic to K.Cotangent = K/K², K = ker(i_z). The isomorphism is semilinear for the fixed quotientStalk scalar map and takes the germ of every representative to the cotangent class of its ambient germ. All ambient opens are allowed; no Noetherian assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0633; modules.tex, Tags 01AG and 08KS: stalks of quotients and tensor pullback."
+ },
+ "stmt_deps": [
+  "lem-pur-conormal-graded-algebra-basic",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ideal-module-product stalk quotient to M=I. The ideal inclusion has stalk range K. Its image-product submodule becomes K·K under the injective range equivalence, so the quotient becomes K.Cotangent.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-closed-immersion-ideal-stalk-range"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0633; modules.tex, Tags 01AG and 08KS: stalks of quotients and tensor pullback."
+   }
+  },
+  {
+   "text": "The normalized unit quotient identifies I/I² with i_*i^*I. The closed pushforward stalk is bijective on the image and has the stated scalar formula. Composing these equivalences proves semilinearity and the representative-germ formula.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-power-quotient",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0633; modules.tex, Tags 01AG and 08KS: stalks of quotients and tensor pullback."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-closed-immersion-ideal-stalk-range",
+  "lem-weil-pbc-closed-immersion-power-quotient",
+  "lem-weil-pbc-closed-pushforward-stalks"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0633; modules.tex, Tags 01AG and 08KS: stalks of quotients and tensor pullback.",
+  "method": "Source argument, specialized to the fixed tensor-pullback pieces; Lean proof by N2.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the conormal sheaf of a closed immersion is the cotangent module I modulo I squared of the kernel ideal of the local ring map",
+   "results": "8 hits: Algebra.Extension.Cotangent, Ideal.instModuleQuotientCotangent, Ideal.Cotangent, Ideal.instInhabitedCotangent, Algebra.Extension.Cotangent.ker_mk, instR, Algebra.Extension.Cotangent.val, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso.",
+   "date": "2026-10-21",
+   "verdict": "No exact match. These declarations concern algebraic graded rings, closed immersions or individual stalks, and do not give this normalized sheaf construction or comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the conormal module of a closed immersion is the cotangent module of the kernel of local rings",
+   "results": "8 algebraic cotangent hits, including Algebra.Extension.Cotangent and cotangentEquiv; none computes this sheaf stalk.",
+   "date": "2026-10-21",
+   "verdict": "No match; use the ideal-product stalk quotient and actual kernel range."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotangent\"",
+   "results": "Ideal.Cotangent, its scalar modules and toCotangent map, and Algebra.Extension results.",
+   "date": "2026-10-21",
+   "verdict": "Reuse Ideal.Cotangent; no normalized conormal sheaf stalk comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Cotangent.*stalk|stalk.*Cotangent",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebra",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-normal-bundle",
+   "place": "Proof step 3: C_z = J_z/J_z² over O_{Z,z}; step 4 transports the regular-sequence conormal basis through this identification.",
+   "via": [
+    "lem-pur-conormal-graded-algebra"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConormalPieceStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalPieceStalk.lean",
+  "declaration": "AlgebraicGeometry.ConormalGradedAlgebra.conormal_stalk",
+  "statement": "theorem conormal_stalk (z : Z) :\n    ∃ e : ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj (piece i 1)) ≃+\n        (RingHom.ker (i.stalkMap z).hom).Cotangent,\n      (∀ (r : X.presheaf.stalk (i z) ⧸ RingHom.ker (i.stalkMap z).hom)\n        (x : (RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj (piece i 1)),\n        e (quotientStalk i z r • x) = r • e x) ∧\n      ∀ (U : X.Opens) (hz : i z ∈ U) (a : (power i 1).val.obj (op U)),\n        ∃ h : X.presheaf.germ U (i z) hz\n            ((powerInclusion i 1).val.app (op U) a) ∈ RingHom.ker (i.stalkMap z).hom,\n          e (TopCat.Presheaf.germ (piece i 1).val.presheaf (i ⁻¹ᵁ U) z hz\n            (representative i 1 U a)) =\n              (RingHom.ker (i.stalkMap z).hom).toCotangent\n                ⟨X.presheaf.germ U (i z) hz ((powerInclusion i 1).val.app (op U) a), h⟩",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aade2",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T233205-L-904241",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aade2",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T233205-L-904241",
+  "kind": "interface",
+  "note": "independent cc review: aade2819 vs 07ff8649 (Lean and nodes sha-identical; only change record Users table and report changed); Presentation/exists_conormalGradedAlgebra and the six moved defs vs live; AffineData fields vs Presentation and Stacks 0630-0633; 7 direct importers compiled against the sandbox-built item olean"
+ }
+}

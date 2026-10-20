@@ -1,0 +1,163 @@
+{
+ "id": "lem-pur-conormal-graded-algebra-construction",
+ "kind": "statement",
+ "title": "Total conormal algebra and normalized affine charts",
+ "statement": "For every closed immersion i : Z → X, with the fixed pieces and representatives of [lem-pur-conormal-graded-algebra-basic], there is a commutative O_Z-algebra sheaf A with maps piece n → A whose cofan is a sheaf-module coproduct. Products of homogeneous representative classes equal the class of the ambient product in degree m+n, on every ambient open; the degree-zero representative is the image of the structure map. For every affine ambient open U, there is a ring isomorphism A(i⁻¹U) ≅ gr_{I(U)} Γ(X,U), carrying each representative to its specified homogeneous quotient class. No finiteness, stalk assertion, symmetric map, augmentation, or uniqueness is part of this construction.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+ },
+ "stmt_deps": [
+  "lem-pur-conormal-graded-algebra-basic",
+  "def-weil-pbc-associated-graded-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use the associated-graded multiplication on the ambient cokernel pieces I^n/I I^n. Their products and unit have the representative formulas and satisfy the graded laws.",
+   "uses": [
+    "lem-weil-pbc-formal-associated-graded-algebra-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+   }
+  },
+  {
+   "text": "The normalized closed-immersion quotient theorem identifies these cokernels with the pushforward of the fixed pieces i^*I^n. Descend the graded operations and laws using fully faithful closed pushforward.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-power-quotient",
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+   }
+  },
+  {
+   "text": "Sheafify the presheaf of finite sums of homogeneous sections, with convolution multiplication. Maps to a sheaf module are exactly families of maps from the homogeneous pieces; thus this is the required coproduct. The induced scalar map is the degree-zero unit.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-graded-sheaf-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+   }
+  },
+  {
+   "text": "On an ambient affine open, identify the fixed quotient pieces with the tilde modules I(U)^n/I(U)^(n+1), using the normalized unit and affine pullback. The tilde adjunction preserves coproducts, giving the direct-sum affine chart. Its unit and products are those of the associated-graded ring.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-associated-graded-algebra-exists",
+  "lem-weil-pbc-closed-immersion-power-quotient",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-graded-sheaf-structures",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification.",
+  "method": "Source argument, specialized to the fixed tensor-pullback pieces; Lean proof by N2.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of the conormal power quotients of a closed immersion is a sheaf of commutative algebras with affine sections the associated graded ring",
+   "results": "8 hits: DirectSum.GCommRing.casesOn, SetLike.gcommRing, Algebra.directSumGAlgebra, DirectSum.GCommRing.recOn, DirectSum.GCommRing.mk.noConfusion, CommRing.directSumGCommRing, DirectSum.GCommSemiring.mk, SetLike.gcommSemiring.",
+   "date": "2026-10-21",
+   "verdict": "No exact match. These declarations concern algebraic graded rings, closed immersions or individual stalks, and do not give this normalized sheaf construction or comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded algebra sheaf of a closed immersion of schemes is the direct sum of tensor pullbacks of ideal powers",
+   "results": "Closed-subscheme and ideal-sheaf constructions; no total associated-graded algebra sheaf theorem.",
+   "date": "2026-10-21",
+   "verdict": "No match. Read the adopted formal graded-piece multiplication, closed-immersion quotient, and affine-section APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GradedSheafAlgebra\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "Mathlib has direct-sum graded ring structures, not the algebra sheaf with the specified homogeneous modules."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|GradedSheafAlgebra|associatedGraded",
+   "results": "No Mathlib declaration supplies this closed-immersion conormal graded algebra interface. Local project search finds the adopted associated-graded ring and homogeneous sheaf operations.",
+   "date": "2026-10-21",
+   "verdict": "Reuse those declarations; the missing total sheaf algebra is a separate construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebra",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-normal-bundle",
+   "place": "Proof step 1: take the conormal algebra G, with multiplication, degree-zero O_Z and affine algebra of sections gr_J(R).",
+   "via": [
+    "lem-pur-conormal-graded-algebra"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebraConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalGradedAlgebraConstruction.lean",
+  "declaration": "AlgebraicGeometry.ConormalGradedAlgebra.exists_affineData",
+  "statement": "theorem exists_affineData : Nonempty (AffineData i)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.ConormalGradedAlgebra.AffineData",
+   "AlgebraicGeometry.ConormalGradedAlgebra.exists_affineData"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aade2",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T233205-L-904241",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aade2",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T233205-L-904241",
+  "kind": "interface",
+  "note": "independent cc review: aade2819 vs 07ff8649 (Lean and nodes sha-identical; only change record Users table and report changed); Presentation/exists_conormalGradedAlgebra and the six moved defs vs live; AffineData fields vs Presentation and Stacks 0630-0633; 7 direct importers compiled against the sandbox-built item olean"
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-conormal-graded-algebra-stalk",
+ "kind": "statement",
+ "title": "Associated-graded stalk chart of the total conormal algebra",
+ "statement": "For i : Z → X a closed immersion and any algebra A with AffineData [lem-pur-conormal-graded-algebra-construction], the stalk A_z is ring-isomorphic to gr_K(O_{X,i(z)}), where K=ker(i_z). The comparison takes the germ of every homogeneous representative on every ambient open to its specified degree quotient class.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+ },
+ "stmt_deps": [
+  "lem-pur-conormal-graded-algebra-construction",
+  "def-pc-module-stalk-functor",
+  "def-weil-pbc-associated-graded-ring"
+ ],
+ "proof": [
+  {
+   "text": "Forget the ring stalk to its additive group. Apply the stalk-coproduct comparison and the normalized degree-piece stalk equivalences, reindexing the lifted countable direct sum. This constructs an additive equivalence with gr_K.",
+   "uses": [
+    "lem-pur-conormal-graded-piece-stalk",
+    "lem-pc-stalk-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+   }
+  },
+  {
+   "text": "On an ambient affine open, every algebra section is a finite sum of homogeneous representatives by the affine chart and the affine power-range formula. Double additive induction and representative multiplication prove preservation of products there.",
+   "uses": [
+    "lem-weil-pbc-formal-associated-graded-affine-multiplication"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+   }
+  },
+  {
+   "text": "Represent two germs on a common ambient affine neighbourhood. The affine product identity proves multiplicativity on stalks. A bijective additive multiplicative map of rings is a ring equivalence, and the degreewise construction gives the normalized formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-conormal-graded-piece-stalk",
+  "lem-pc-stalk-direct-sums",
+  "lem-weil-pbc-formal-associated-graded-affine-multiplication"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification.",
+  "method": "Source argument, specialized to the fixed tensor-pullback pieces; Lean proof by N2.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the direct sum conormal graded algebra is the associated graded ring of the kernel of the closed immersion local ring map",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.stalkIso, AlgebraicGeometry.Proj.stalkIso', AlgebraicGeometry.ProjectiveSpectrum.Proj.toStalk_specStalkEquiv, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, Submodule.galgebra, AlgebraicGeometry.stalkToFiberRingHom, AlgebraicGeometry.stalkClosedPointIso, GradedRing.toDecomposition.",
+   "date": "2026-10-21",
+   "verdict": "No exact match. These declarations concern algebraic graded rings, closed immersions or individual stalks, and do not give this normalized sheaf construction or comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded algebra sheaf of a closed immersion of schemes is the direct sum of tensor pullbacks of ideal powers",
+   "results": "Closed-subscheme and ideal-sheaf constructions; no total associated-graded algebra sheaf theorem.",
+   "date": "2026-10-21",
+   "verdict": "No match. Read the adopted formal graded-piece multiplication, closed-immersion quotient, and affine-section APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GradedSheafAlgebra\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "Mathlib has direct-sum graded ring structures, not the algebra sheaf with the specified homogeneous modules."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|GradedSheafAlgebra|associatedGraded",
+   "results": "No Mathlib declaration supplies this closed-immersion conormal graded algebra interface. Local project search finds the adopted associated-graded ring and homogeneous sheaf operations.",
+   "date": "2026-10-21",
+   "verdict": "Reuse those declarations; the missing total sheaf algebra is a separate construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebra",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-normal-bundle",
+   "place": "Proof step 4: the associated-graded stalk chart under which a degree-one representative is its associated-graded class.",
+   "via": [
+    "lem-pur-conormal-graded-algebra"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebraStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalGradedAlgebraStalk.lean",
+  "declaration": "AlgebraicGeometry.ConormalGradedAlgebra.affineData_stalk_chart",
+  "statement": "theorem affineData_stalk_chart (A : AffineData i) : ∀ z : Z,\n    ∃ e : TopCat.Presheaf.stalk A.algebra.right.obj z ≅\n        CommRingCat.of (Ideal.associatedGraded (RingHom.ker (i.stalkMap z).hom)),\n      ∀ (n : ℕ) (U : X.Opens) (hz : i z ∈ U) (a : (power i n).val.obj (op U)),\n        ∃ h : X.presheaf.germ U (i z) hz\n            ((powerInclusion i n).val.app (op U) a) ∈\n              RingHom.ker (i.stalkMap z).hom ^ n,\n          e.hom (TopCat.Presheaf.germ A.algebra.right.obj (i ⁻¹ᵁ U) z hz\n            (homogeneousClass i A.algebra A.inclusion n U a)) =\n              DirectSum.of (Ideal.associatedGradedPiece (RingHom.ker (i.stalkMap z).hom)) n\n                (Submodule.Quotient.mk\n                  ⟨X.presheaf.germ U (i z) hz ((powerInclusion i n).val.app (op U) a), h⟩)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aade2",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T233205-L-904241",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aade2",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T233205-L-904241",
+  "kind": "interface",
+  "note": "independent cc review: aade2819 vs 07ff8649 (Lean and nodes sha-identical; only change record Users table and report changed); Presentation/exists_conormalGradedAlgebra and the six moved defs vs live; AffineData fields vs Presentation and Stacks 0630-0633; 7 direct importers compiled against the sandbox-built item olean"
+ }
+}

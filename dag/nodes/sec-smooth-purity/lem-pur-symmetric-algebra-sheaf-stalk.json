@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-symmetric-algebra-sheaf-stalk",
+ "kind": "statement",
+ "title": "Stalks commute with the explicit symmetric algebra sheaf",
+ "statement": "For a scheme X, an O_X-module sheaf F, and x ∈ X, the stalk at x of the fixed SymmetricAlgebraSheaf.algebra F [lem-weil-pbc-symmetric-algebra-sheaf-construction] is ring-isomorphic to Sym_{O_{X,x}}(F_x). The comparison takes scalar germs to the algebra map and generator germs to SymmetricAlgebra.ι. No quasi-coherence assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma stalk-tensor-algebra (Tag 01CH), following local-tensor-algebra; sheaves.tex, stalks as filtered colimits."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "The maps from the sectionwise symmetric algebras to Sym(F_x) induced by germ scalars and module germs form a cocone, hence a ring map from the presheaf stalk. Construct the inverse from the scalar stalk map and the linear generator map using SymmetricAlgebra.lift.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-sheaf-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Lemma stalk-tensor-algebra (Tag 01CH), following local-tensor-algebra; sheaves.tex, stalks as filtered colimits."
+   }
+  },
+  {
+   "text": "Every stalk element has a representative, and finite sets have a common neighbourhood. Symmetric-algebra induction on scalars and generators proves the two composites are identities. The stalk of ring sheafification is canonically the presheaf stalk, with its germ formula, so transport this equivalence to the fixed algebra sheaf.",
+   "uses": [
+    "lem-weil-pbc-ring-stalk-sheafification-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Lemma stalk-tensor-algebra (Tag 01CH), following local-tensor-algebra; sheaves.tex, stalks as filtered colimits."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "lem-weil-pbc-ring-stalk-sheafification-space"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma stalk-tensor-algebra (Tag 01CH), following local-tensor-algebra; sheaves.tex, stalks as filtered colimits.",
+  "method": "Source argument, specialized to the fixed tensor-pullback pieces; Lean proof by N2.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Taking the stalk of a sheaf symmetric algebra gives the symmetric algebra of the module stalk preserving scalar germs and generator germs",
+   "results": "8 hits: ModuleCat.Tilde.toOpen_germ_apply, AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_germ, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkToFiberLinearMap_germ, AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply, AlgebraicGeometry.Scheme.stalkMap_germ_apply, AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ_apply, ModuleCat.Tilde.stalkIso.",
+   "date": "2026-10-21",
+   "verdict": "No exact match. These declarations concern algebraic graded rings, closed immersions or individual stalks, and do not give this normalized sheaf construction or comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking stalks commutes with the symmetric algebra sheaf of a module",
+   "results": "8 hits about ModuleCat.Tilde stalk localization; no symmetric-algebra sheaf stalk theorem.",
+   "date": "2026-10-21",
+   "verdict": "No match; use the explicit presheaf construction and its universal property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\"",
+   "results": "SymmetricAlgebra.lift, ι, and related algebraic universal-property declarations.",
+   "date": "2026-10-21",
+   "verdict": "Reuse lift and its generator equations."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*SymmetricAlgebra|SymmetricAlgebra.*stalk",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "The normalized sheaf-stalk comparison is not already stated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebra",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-normal-bundle",
+   "place": "Proof step 4: identify the stalk of the symmetric sheaf with the symmetric algebra of the conormal stalk, preserving constants and generators.",
+   "via": [
+    "lem-pur-conormal-graded-algebra"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricAlgebraSheafStalk.lean",
+  "declaration": "AlgebraicGeometry.SymmetricAlgebraSheaf.stalk_iso",
+  "statement": "theorem stalk_iso :\n    ∃ e : TopCat.Presheaf.stalk (C := CommRingCat) (algebra F).right.obj x ≅\n        CommRingCat.of (SymmetricAlgebra (X.presheaf.stalk x)\n          ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)),\n      (∀ (U : X.Opens) (hx : x ∈ U) (r : Γ(X, U)),\n        e.hom (TopCat.Presheaf.germ (algebra F).right.obj U x hx\n          ((algebra F).hom.hom.app (op U) r)) =\n            algebraMap (X.presheaf.stalk x)\n              (SymmetricAlgebra (X.presheaf.stalk x)\n                ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F))\n                  (X.presheaf.germ U x hx r)) ∧\n      ∀ (U : X.Opens) (hx : x ∈ U) (m : F.val.obj (op U)),\n        e.hom (TopCat.Presheaf.germ (algebra F).right.obj U x hx\n          ((inclusion F).val.app (op U) m)) =\n            SymmetricAlgebra.ι (X.presheaf.stalk x)\n              ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)\n                (TopCat.Presheaf.germ F.val.presheaf U x hx m)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aade2",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T233205-L-904241",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-aade2",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261020T233205-L-904241",
+  "kind": "interface",
+  "note": "independent cc review: aade2819 vs 07ff8649 (Lean and nodes sha-identical; only change record Users table and report changed); Presentation/exists_conormalGradedAlgebra and the six moved defs vs live; AffineData fields vs Presentation and Stacks 0630-0633; 7 direct importers compiled against the sandbox-built item olean"
+ }
+}
