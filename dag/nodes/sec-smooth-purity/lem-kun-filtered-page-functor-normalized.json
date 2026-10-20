@@ -17,10 +17,11 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sp-filtered-quotient-comparisons] to the supplied family $\\varphi$ and its projection equation. It gives $B_r\\le Z_r$ and the representative-normalized isomorphisms $e_H:Q_1^{p,q}(U)\\cong H^{p+q}(\\operatorname{gr}^pU)$ for every $U,p,q$. With these containments, [lem-sp-filtered-complex-page-differential] supplies the square-zero representative differential $D(U,r)$ on the actual objects $Q_r^{p,q}(U)$ for every $r\\ge1$. All these objects are formed degree by degree; neither construction uses a cochain-degree bound.",
+   "text": "Construct the boundary containments using [lem-sp-filtered-complex-boundaries-le-cycles]. Retain the normalized representative equations when carrying out the proof of [lem-sp-filtered-quotient-comparisons]: the private helper normalizedPage_comparisons in the item repeats that proof with the general-page representative equation kept in the conclusion. It uses the already proved representative comparison, first-page comparison and naturality helpers of that module. Choose the uniquely specified representative differentials using [lem-sp-filtered-complex-page-differential]. No cochain-degree bound is used.",
    "uses": [
     "lem-sp-filtered-quotient-comparisons",
-    "lem-sp-filtered-complex-page-differential"
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-boundaries-le-cycles"
    ],
    "elementary": false,
    "source": {
@@ -65,7 +66,7 @@
    }
   },
   {
-   "text": "For each $U,p,q,r$ apply [lem-sp-filtered-complex-quotient-image-comparison] with $n=p+q$. Its transition map equals the supplied $\\varphi$ because both have the same composite with the epic source quotient projection. Define $e_I:Q_r^{p,q}(U)\\cong\\operatorname{im}H^n(\\varphi)$ to be its isomorphism. With $R_r=\\widetilde Z_r^{p,n}$, its maps $z:R_r\\to Z_r$ and $g:R_r\\to Z^n(F^pU/F^{p+r}U)$ satisfy $z\\pi_r e_I\\iota=g\\pi_H H^n(\\varphi)$. By [lem-sp-filtered-complex-representative-epis], $z$ is epic: its composite with the monic inclusion of $Z_r$ is the same as that of the epic representative projection in that statement, so the two maps coincide. This fixes $e_I$ by its representative equation and proves the page-core representative clause with the identity $e_Z$, rather than choosing another page-to-quotient comparison.",
+   "text": "The helper normalizedPage_comparisons retains, for each U,p,q,r, the representative-normalized quotient-image comparison from [lem-sp-filtered-complex-quotient-image-comparison], identifying its transition with the supplied phi by cancellation of the epic source projection. Its maps z and g satisfy z pi eQ iota = g piH H(phi). The proof of the existing comparison_on_representatives helper identifies z with the epic map of [lem-sp-filtered-complex-representative-epis] by its monic inclusion square. Since our page objects are the actual cokernels, take eI=eQ and eZ to be identity. The retained equation is exactly the asserted representative equation.",
    "uses": [
     "lem-sp-filtered-complex-quotient-image-comparison",
     "lem-sp-filtered-complex-representative-epis"
@@ -126,10 +127,11 @@
    }
   },
   {
-   "text": "Choose $a,b$ with $F^aU=U$ and $F^bU=0$ using [def-sp-filtration]. Antitonicity makes $F^kU=U$ for $k\\le a$ and $F^kU=0$ for $k\\ge b$. For fixed $p,q$, set $R=\\max(1,b-p,p+1-a)$. For $r\\ge R$, $F^{p+r}U=0$ and $F^{p-r+1}U=U$, so the formulas in [def-sp-filtered-complex-subquotients] make $Z_r^{p,p+q}$ and $B_r^{p,p+q}$ independent of $r$. Also $\\operatorname{gr}^kU=0$ for $k<a$ or $k\\ge b$, hence $Q_r^{k,l}=0$ there. Since $p+r\\ge b$ and $p-r<a$, the outgoing target and incoming source at $(p,q)$ are zero; both differentials vanish. Equal stabilized cycle and boundary subobjects identify every later quotient page with page $R$. Together with Steps 5--9 this gives every clause of the page core for the single functor of Step 4. The only bound used is on filtration indices, so the construction permits unbounded cochain degrees.",
+   "text": "Reuse the proved private stabilization helpers of [lem-sp-bounded-filtered-page-core] for this same S, with its identity quotient comparisons. The helper pageCore_subobjects_stabilize uses finite filtration bounds a,b to stabilize the cycle and boundary formulas. The helper pageCore_differentials_stabilize identifies the incoming source and outgoing target as zero outside the finite filtration support. Take the maximum of their two positive thresholds. At any later page, compare its stabilized cycle and boundary subobjects with those at the common threshold; pageCore_quotient_iso gives the isomorphism between the actual cokernel page objects. This uses only [def-sp-filtration] and the formulas of [def-sp-filtered-complex-subquotients], and works for cochain complexes unbounded in both directions.",
    "uses": [
     "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients"
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-bounded-filtered-page-core"
    ],
    "elementary": true,
    "source": {
@@ -152,12 +154,14 @@
   "lem-sp-filtered-quotient-canonical-structure",
   "lem-sp-bounded-filtered-couple-abutment",
   "def-sp-filtration",
-  "def-sp-filtered-complex-subquotients"
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-boundaries-le-cycles",
+  "lem-sp-bounded-filtered-page-core"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tags 012K, 012M, 012O and 012W; explicit assembly of existing normalized quotient-page and exact-couple interfaces"
+  "place": "Tags 012K, 012M, 012O and 012W; U3 retains normalized representative equations in the existing comparisons proof, constructs the concrete normalized page functor, and reuses the page-core finite stabilization helpers."
  },
  "mathlib_searches": [
   {
@@ -346,5 +350,15 @@
   "group": "Q107",
   "result": "pass",
   "note": "Signature matches node lean.statement exactly; diff against boundedFilteredComplex_pageCore: hBZ/eZ moved to global witnesses (a strengthening) and two added conjuncts. (1) Successor normalization: an epic cover f of the page cycles with f≫iCycles=ofLE≫π_r≫eZ.inv, and for all e, the FilteredComplexHomologyNormalized square transported through eZ_r/eZ_{r+1} holds iff e=(S.obj U).iso r (r+1); this gives normalization and uniqueness. (2) Naturality iso_U≫S(t)_{r+1}=H(S(t)_r)≫iso_V. All page-core clauses kept verbatim; no extra hypotheses; universes u v explicit. Node record changes only lean. No duplicate (canonical_functor takes D as input and states neither normalization nor page-core data; page_descent assumes normalized presentations). Only proof is sorry, no definitions, source/blueprint docstrings present, theorem docstring has the 10-step proof. nt_compile --json clean in 9 s; a control run with a deliberate error shows diagnostics are reported. Second reading section is an author self-check but substantive, accepted as in earlier S2 reviews. Note only: Epi f is a true extra assertion from proof step 3."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261020T174903-L-815794",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
