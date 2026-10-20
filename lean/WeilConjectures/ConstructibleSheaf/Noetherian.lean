@@ -11,6 +11,7 @@ public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.StalkCardinality
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
+import WeilConjectures.AlgebraicGeometry.IrreducibleStratificationRefinement
 
 /-!
 # Constructible sheaves on Noetherian schemes
