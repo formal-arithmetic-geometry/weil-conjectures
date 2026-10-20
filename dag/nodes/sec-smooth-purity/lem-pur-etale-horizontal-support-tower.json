@@ -1,0 +1,161 @@
+{
+ "id": "lem-pur-etale-horizontal-support-tower",
+ "kind": "statement",
+ "title": "Etale compact-support composition on a pullback compactification tower",
+ "statement": "Use a finite commutative ring A, ordinary small-etale A-module sheaves and their unbounded derived categories [def-weil-pbc-derived-categories]. Let sq be a Cartesian square X′ --v′--> X, f′:X′->Y′, f:X->Y, v:Y′->Y, between Noetherian schemes; assume all four arrows separated and finite type, v,v′ etale, and compactifications for them and their two equal composites. Use the explicitly constructed canonical graph comparison d_e:F_e -> S_e of [lem-asd-compact-support-graph-derived-isomorphism], after the chosen-model identification of [lem-amb-unbounded-compact-support-comparisons]. For a compactification c=(j,p) of f, let c′=(j′,p′) be its pullback and b its ambient horizontal etale arrow. Set J=Dj!, J′=Dj′!, P=Rp*, Q=Rp′*, S_e=D(e_{Sigma!}) with the actual sum/evaluation adjunction of [lem-amb-etale-adjoint-locality]. Let tau:v* p′* -> p* b* be the exact inverse-image square comparison of [def-kun-unbounded-exchange]. Let sumEx:p′* S_b -> S_v p* be its inverse mate under S_v adjoint v* and S_b adjoint b*, and assume sumEx invertible. Let Gamma:Q S_v -> S_b P be the right-adjoint mate of inv(sumEx) under p′* adjoint Q and p* adjoint P. Let a:J′ S_b -> S_v′ J be the composite-left-adjoint comparison conjugate to the inverse-image square for j,j′,v′,b. Let t:JP -> F_f, t′:J′Q -> F_f′ be the model-to-chosen comparisons, where F_e=Re! and all composition and congruence isomorphisms are those of [lem-amb-unbounded-compact-support-comparisons]. Form delta:S_v′ F_f -> F_f′ S_v by d_v′ inverse, alpha_(v′,f), congruence for v′ f=f′ v, alpha_(f′,v) inverse, and d_v, with the indicated whiskerings. For every M in D(X′_et,A), delta.inv at M equals S_v(t′.inv at M), followed by Gamma at J′(M), followed by P(a at M), followed by t at S_v′(M). This is a canonical graph composition normalization before either horizontal counit. It does not involve inverse proper exchange or the full compact-support base-change map of f.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7F (lemma-shriek-proper-and-open-base-change): the proper/quasi-finite interchange map computed by K-injective resolutions, and its compatibility with change of base. Tag 0F7J (lemma-shriek-composition): the proper/open tower and independence of its choices. Tag 0F7L (lemma-base-change-shriek), final proof paragraph item (3): compatibility with these composition maps. Specialize the horizontal maps to separated etale maps and identify their proper-support functors by the constructed graph comparison of etale-cohomology.tex Tag 0F4L. This is the geometric normalization before counits."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pc-fibre-product",
+  "def-weil-compactifications-refinements",
+  "def-weil-etale-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-noetherian-ring",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-kun-unbounded-exchange",
+  "lem-asd-compact-support-graph-derived-isomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose nested compactification towers for v′ followed by f and f′ followed by v, refining their equal composites to a common compactification. Expand the two specified composition maps using unboundedEtaleLowerShriekCompIso_tower. Comparison cocycles and congruence cancel the terminal common model; retain the model-to-chosen comparisons for c and c′ at the endpoints.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Replace the etale compact-support factors by the explicit inverse graph comparisons. Their sheaf maps extend a sheet section by zero from its clopen graph. Restriction along j and j′ gives the same pulled-back graph, the same section on it, and zero on its complement. Under the sum/evaluation adjunctions this is the composite-left-adjoint comparison a conjugate to the open inverse-image square.",
+   "uses": [
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proper/quasi-finite interchange construction of Tag 0F7B: represent the input by a K-injective complex I, resolve its upper-horizontal extension by zero by K, and apply the right vertical direct image to that resolution map after the proper-support identification on I. The identification is the common proper-support inclusion supplied by the sheaf composition theorem. Its inverse-image transpose is inverse etale sum exchange: on a lift summand both maps pull the section to the same pulled-back sheet section. Sheaf gluing and sheafification identify the arrows. Transpose under the proper inverse-image/direct-image adjunctions to identify the proper factor with Gamma. The K-injective construction and its base-change compatibility are Tags 0F7B and 0F7F, as used in item (3) of Tag 0F7L.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "def-kun-unbounded-exchange",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend these equalities of sheaf arrows degreewise and compose with the total-derived direct-image units. compactSupportDerivedComparison_app identifies the explicit canonical graph maps on all homotopy representatives. Compute proper direct images using K-injectives and resolve each open or sum extension before its next direct image. Naturality and the unit equation of derived direct-image composition give equal morphisms; faithfulness of precomposition with homotopy localization gives equality of natural transformations on all unbounded inputs.",
+   "uses": [
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply canonical graph refinement coherence and the normalized proper-refinement equation to remove the refining towers. Associate the surviving factors to give S_v(t′ inverse), Gamma at J′ M, P(a at M), and t at S_v′ M. Identity graphs use the graph identity and derived direct-image right unit. Empty graphs and zero coefficients contribute zero on both sides.",
+   "uses": [
+    "lem-asd-compact-support-graph-coherence",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-unbounded-exchange",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-support-graph-coherence",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "lem-cbc-proper-support-sheaf-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7F (lemma-shriek-proper-and-open-base-change): the proper/quasi-finite interchange map computed by K-injective resolutions, and its compatibility with change of base. Tag 0F7J (lemma-shriek-composition): the proper/open tower and independence of its choices. Tag 0F7L (lemma-base-change-shriek), final proof paragraph item (3): compatibility with these composition maps. Specialize the horizontal maps to separated etale maps and identify their proper-support functors by the constructed graph comparison of etale-cohomology.tex Tag 0F4L. This is the geometric normalization before counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactSupport.*Comp|Graph.*[Cc]omp|etale.*[Cc]omp",
+   "results": "{\"t\": \"2026-10-20T17:49:22Z\", \"tool\": \"grep\", \"query\": \"compactSupport.*Comp|Graph.*[Cc]omp|etale.*[Cc]omp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Topology/Semicontinuity/Defs.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/PartitionOfUnity.lean\", \"Mathlib/Topology/Algebra/Support.lean\", \"Mathlib/Topology/Algebra/Support.lean\", \"Mathlib/Topology/Algebra/Support.lean\"], \"digest\": \"782e6586597f2421\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the canonical geometric graph/tower normalization. General mates identities are used in the proved parent calculation; the geometric comparison is additional."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "results": "{\"t\": \"2026-10-20T17:49:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.iterated_mateEquiv_conjugateEquiv\"], \"digest\": \"93de48492cbf55d3\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the canonical geometric graph/tower normalization. General mates identities are used in the proved parent calculation; the geometric comparison is additional."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical graph compact support comparison respects composition with an etale morphism and proper direct image",
+   "results": "{\"t\": \"2026-10-20T17:49:24Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical graph compact support comparison respects composition with an etale morphism and proper direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.stableUnderComposition\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_comp\"], \"digest\": \"f304c5d50f64e862\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the canonical geometric graph/tower normalization. General mates identities are used in the proved parent calculation; the geometric comparison is additional."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical graph compact support comparison respects composition with an etale morphism and proper direct image",
+   "results": "{\"t\": \"2026-10-20T18:21:57Z\", \"tool\": \"leansearch\", \"query\": \"The canonical graph compact support comparison respects composition with an etale morphism and proper direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.comp_homeomorph\", \"HasCompactSupport.comp_isClosedEmbedding\", \"Function.support_comp_eq_preimage\", \"HasCompactMulSupport.comp_homeomorph\", \"HasCompactMulSupport.comp_isClosedEmbedding\", \"CompactlySupportedContinuousMap.comp\", \"CompactlySupportedContinuousMap.compLinearMap\", \"CompactlySupportedContinuousMap.compAddMonoidHom\"], \"digest\": \"56203be5b2f01e3a\"}",
+   "date": "2026-10-21",
+   "verdict": "No geometric compact-support tower comparison: all eight results concern supports of functions on topological spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleHorizontalSupportMate",
+  "date": "2026-10-21",
+  "group": "F9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Parent etale-horizontal mate proof: identify the normalized composition on a proper/open compactification tower before applying the horizontal counits. This supplies the composition compatibility in ancestor proof Step 1.",
+   "via": [
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting",
+    "lem-pur-etale-horizontal-support-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleHorizontalSupportTower",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleHorizontalSupportTower.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleHorizontalSupport_tower",
+  "statement": "theorem etaleHorizontalSupport_tower\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X X' Y Y' : Scheme.{u}}\n    [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y']\n    {f : X ⟶ Y} {f' : X' ⟶ Y'} {v : Y' ⟶ Y} {v' : X' ⟶ X}\n    [IsSeparated f] [IsSeparated f'] [IsSeparated v] [IsSeparated v']\n    [Etale v] [Etale v'] [LocallyOfFiniteType f] [LocallyOfFiniteType f']\n    [LocallyOfFiniteType v] [LocallyOfFiniteType v']\n    [QuasiCompact f] [QuasiCompact f'] [QuasiCompact v] [QuasiCompact v']\n    [HasCompactification f] [HasCompactification f'] [HasCompactification v]\n    [HasCompactification v'] [HasCompactification (v' ≫ f)]\n    [HasCompactification (f' ≫ v)] [QuasiCompact (v' ≫ f)]\n    [QuasiCompact (f' ≫ v)] (sq : IsPullback v' f' f v)\n    (c : Compactification f)\n    [IsIso (((mateEquiv\n      (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)\n      (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A)\n        (pullback.fst c.g v) inferInstance)).symm\n      (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A)\n        (IsPullback.of_hasPullback c.g v).toCommSq).hom)).natTrans)]\n    (M : DerivedCategoryModule A X') :\n    let cs := c.ofIsPullback sq\n    let va := derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v' inferInstance\n    let ba := derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A)\n      (pullback.fst c.g v) inferInstance\n    let ja := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c.i\n    let j'a := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) cs.i\n    let a := (conjugateIsoEquiv (va.comp ja) (j'a.comp ba)).symm\n      (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A)\n        (c.isPullback_i_ofIsPullback sq).toCommSq.flip)\n    let sumEx := ((mateEquiv\n      (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)\n      (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A)\n        (pullback.fst c.g v) inferInstance)).symm\n      (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A)\n        (IsPullback.of_hasPullback c.g v).toCommSq).hom)).natTrans\n    let gam := (mateEquiv\n      (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A)\n        (pullback.snd c.g v))\n      (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.g)\n      (TwoSquare.mk _ _ _ _ (inv sumEx))).natTrans\n    let dv' := (rightDerivedLowerShriekIso A\n      (HasCompactification.compactification v')).symm ≪≫\n        canonicalEtaleCompactSupportComparison A v' (HasCompactification.compactification v')\n    let dv := (rightDerivedLowerShriekIso A\n      (HasCompactification.compactification v)).symm ≪≫\n        canonicalEtaleCompactSupportComparison A v (HasCompactification.compactification v)\n    let delta := Functor.isoWhiskerRight dv'.symm\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f) ≪≫\n        unboundedEtaleLowerShriekCompIso A v' f ≪≫\n        unboundedEtaleLowerShriekCongr A sq.toCommSq.w ≪≫\n        (unboundedEtaleLowerShriekCompIso A f' v).symm ≪≫\n        Functor.isoWhiskerLeft\n          (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f') dv\n    delta.inv.app M =\n      (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory.map\n          ((rightDerivedLowerShriekIso A cs).inv.app M) ≫\n        gam.app\n          ((openImmersionLowerShriek (ModuleCat.{u + 1} A) cs.i).mapDerivedCategory.obj M) ≫\n        (rightDerivedLowerStar (ModuleCat.{u + 1} A) c.g).map\n          (a.hom.app M) ≫\n        (rightDerivedLowerShriekIso A c).hom.app\n          ((etaleLowerShriek (ModuleCat.{u + 1} A) v' inferInstance).mapDerivedCategory.obj M)",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261020T221148-L-4151252",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261020T221148-L-4151252",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

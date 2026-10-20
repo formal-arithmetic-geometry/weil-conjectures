@@ -23,147 +23,69 @@
  ],
  "proof": [
   {
-   "text": "Use the specified comparisons of [lem-amb-unbounded-compact-support-comparisons] throughout; juxtaposition of maps below composes right to left. Transport the adjunctions of [lem-amb-etale-adjoint-locality] across $d_a$, writing $\\eta^c_a=a^*(d_a^{-1})\\eta^S_a$ and $\\epsilon^c_a=\\epsilon^S_a d_a$ for $F_a\\dashv a^*$, $a=u,u'$. For $L=u'^*M$ and $N=F_{f'}L$, put\n$$\\kappa_M=F_f(\\epsilon^c_{u',M})\\alpha_{f,u'}^{-1}\\alpha_{u,f'}:F_uN\\longrightarrow F_fM.$$\nTaking inverses in the definition in the statement gives the typed formula\n$$\\delta_L^{-1}=F_f(d_{u',L})\\circ\\alpha_{f,u'}^{-1}\\circ\\alpha_{u,f'}\\circ d_{u,N}^{-1}.$$\nThus the left side of the item is $\\kappa_Md_{u,N}^{-1}$. We will prove $C_{f,u,M}u^*(\\kappa_M)\\eta^c_{u,N}=1_N$; invertibility of $C$ then identifies the adjunct of this map as required.",
+   "text": "First prove that every comparison N.comparison(e,c) is the explicit canonicalEtaleCompactSupportComparison. The inclusion of open extension into direct image is sectionwise injective by the open-extension proper-support range theorem; direct-image precomposition and its composition isomorphism preserve this monomorphism. Cancel it in the sheaf_normalization equations for N and the canonical graph core. Precomposition with homotopy localization is faithful, so the two derived_normalization equations identify the inverse comparison natural transformations, and hence the isomorphisms. This is the proved private normalization_comparison_eq_canonical lemma.",
+   "uses": [
+    "lem-asd-etale-compact-support-normalization",
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "lem-cbc-open-extension-proper-support-range"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the given compactification c=(j,p) of f and its pullback c′=(j′,p′). Put J=Dj!, J′=Dj′!, P=Rp*, Q=Rp′*, B=S_b, R=b*, L=S_v and S=v*, where b is the pulled-back etale map on the ambient schemes. The specified proper exchange ex:P S -> R Q is invertible by torsion-ring proper base change. The explicit inverse-image square agrees after transporting total-derived upper star through its exact-derived comparison. Transport invertibility across these isomorphic left adjoints: the conjugate comparisons on right adjoints are automatically isomorphisms. This proves invertibility of exactDerivedBaseChangeMap without requiring an equality between the two chosen adjunction structures.",
+   "uses": [
+    "lem-kun-proper-base-change-torsion-ring",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the proper square put tau equal to its exact inverse-image comparison and sumEx equal to its inverse mate under the actual localized sum/evaluation adjunctions. The iterated-mates identity identifies conjugate(sumEx) under the two composite adjunctions with ex. Conjugacy reflects isomorphisms, so sumEx is invertible. Conjugacy also preserves its inverse; iterating mates in the other order identifies the right-adjoint mate of inverse sumEx with the inverse mate of inverse ex. This is the proved generic rotated_inverse_mate calculation. Apply the canonical graph tower identity to c and v′*M, then replace its canonical comparisons with N using step 1. It writes delta inverse as L(t′ inverse), Gamma, P(a), and t, where Gamma is now the inverse mate of inverse ex.",
+   "uses": [
+    "lem-pur-etale-horizontal-support-tower",
+    "lem-amb-etale-adjoint-locality",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the open square, write its sheaf base-change map as the inverse mate of squareUpperStarIso under the two open-extension adjunctions. The iterated-mates/conjugacy identity proves this directly from the definition of open base change. Its unit equation descends under mapDerivedCategoryAdjunction_mate. Apply the iterated-mates identity again, now with the actual localized etale adjunctions on the horizontal arrows. Thus a is the inverse mate of the exact-derived open base-change isomorphism beta. The mate counit equation gives a at v′*M followed by J(epsilon_v′,M) = B(beta.hom_M) followed by epsilon_b at J(M).",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit equation of the mate defining Gamma gives adj_L(Gamma_H) followed by ex_(B H) = Q(eta_b,H). Naturality of ex, beta.hom followed by beta.inv = identity, and the right triangle for b show that adj_L(Gamma_H followed by P(B(beta.hom) followed by epsilon_b)) followed by ex_(J M) followed by Q(beta.inv) is identity. This is proved as the generic private interchange_mate lemma, without assuming that the etale adjunction unit is invertible. Naturality of t moves the v′ counit through the last factor of the tower formula; step 4 then identifies the parent left-hand side with this generic composite transported by t and t′.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use unboundedEtaleCompactSupport_baseChange and exchange_normalization to write the specified compact-support exchange C on M as S(t inverse) followed by ex_(J M), Q(beta.inv), and t′_(v′*M). Transport the identity in step 5 through t,t′ using adjunction naturality. Cancellation of C.hom identifies the adjunct of the parent left-hand side with C.inv. Applying the inverse adjunction hom equivalence gives exactly the requested sum-extension/counit expression.",
    "uses": [
     "lem-amb-unbounded-compact-support-comparisons",
     "lem-amb-etale-adjoint-locality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J (lemma-shriek-composition), 0F7L (lemma-base-change-shriek); formal transport of an adjunction"
-   }
-  },
-  {
-   "text": "Form $V=Y'\\times_Y Y'$ with projections $p_1,p_2$, and $P=X'\\times_Y Y'$ with projections $a:P\\to X'$ (the old copy) and $b:P\\to Y'$ (the new base). Write $h=(f'a,b):P\\to V$ and $v=(u'a,b):P\\to X'$ (the new copy). Then $p_2h=b=f'v$ and the squares $(h,f';p_1,a)$ and $(v,u';u',a)$ are Cartesian. The diagonals $t:Y'\\to V$ and $e:X'\\to P$ satisfy $p_it=1$, $ae=ve=1$, $he=tf'$, and the square with vertical edges $h,f'$ and horizontal edges $e,t$ is Cartesian. These are identities of fibre products. The projections of $V$ and the maps $a,v$ are separated etale finite type by [lem-weil-pbc-etale-base-change-finite-limits, lem-pod-separated-finite-type-base-change]. The section theorem [lem-weil-pbc-etale-section-clopen-immersion] applied to $p_2$ and $v$ makes $t,e$ clopen immersions. The same finite-type base-change theorem applies to $h,b$. The schemes $V,P$ are quasi-compact over $Y',X'$ and locally Noetherian by [pqf-lem-locnoeth-lft], hence have finite Noetherian affine covers. Each of $p_1,p_2,a,v,h,b$ is a base change of one of $u,u',f'$ or $fu'=uf'$, so pulling back the given compactification gives a compactification of it: the pulled-back open immersion is an open immersion [lem-weil-pbc-open-immersion-base-change] and the pulled-back proper map is proper [lem-weil-pbc-proper-base-change]. The clopen immersions $t,e$ have the compactifications $(t,\\mathrm{id})$, $(e,\\mathrm{id})$. Thus every square used below is in the unbounded comparison theorem's scope.",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-etale-section-clopen-immersion",
-    "pqf-lem-locnoeth-lft",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-weil-pbc-proper-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Fibre-product identities; Tags 02GO/02GW, 01KU/01T4, 024T/01KT and 01T6"
-   }
-  },
-  {
-   "text": "Identify $F_t,F_e$ with termwise open extension using the open compactifications, as in [lem-amb-shriek-open-exchange-adjoint]. Write $\\epsilon_t,\\epsilon_e$ for their evaluation counits. For a complex $B$ on $Y'$ and a complex $H$ on $X'$, define the diagonal insertions\n$$J_B=F_{p_2}(\\epsilon_{t,p_1^*B})\\alpha_{p_2,t,B}^{-1}:B\\longrightarrow F_{p_2}p_1^*B,$$\n$$J'_H=F_v(\\epsilon_{e,a^*H})\\alpha_{v,e,H}^{-1}:H\\longrightarrow F_va^*H.$$\nHere $t^*p_1^*B=B$, $e^*a^*H=H$, $F_{p_2t}=F_1=1$ and $F_{ve}=1$ are the canonical identity comparisons. By the composition normalization in [lem-sfb-quasifinite-compact-support-exact], after replacing the etale $F$'s by sum extension these are precisely the inclusions of the summands supported on the diagonal lifts: the open counit includes the diagonal component and is zero on the complement. This describes sheaf maps induced on the presheaf lift summands, not an objectwise description of sheaf sections.",
-   "uses": [
-    "lem-amb-shriek-open-exchange-adjoint",
-    "lem-sfb-quasifinite-compact-support-exact",
-    "lem-amb-etale-adjoint-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J, 0GKM; diagonal summands and the open evaluation counit"
-   }
-  },
-  {
-   "text": "The base-change identity (1) of [lem-pur-etale-support-map-compatibility], applied to $u$ along itself and to $u'$ along itself, identifies $C_{u,u}$ and $C_{u',u'}$ with the specified sum-extension base-change maps after applying $d$. In the presheaf definition [def-weil-pbc-etale-sum-extension], the adjunction unit sends a section over an etale object of the source to the summand indexed by its structural lift. Under this self-base-change identification that lift is the diagonal lift; restriction of a lift and its value commutes with this description. Sheafification therefore gives the equalities\n$$C_{u,u,B}\\eta^c_{u,B}=J_B,\\qquad C_{u',u',H}\\eta^c_{u',H}=J'_H.$$\nThe composition normalization of [lem-sfb-quasifinite-compact-support-exact] used in Step 3 ensures that these use the specified $\\alpha_{p_2,t}$ and $\\alpha_{v,e}$, rather than arbitrary identifications of $F_{p_2t}$ and $F_{ve}$. All the functors in this check are exact sum extension or exact restriction, with the termwise adjunction of [lem-amb-etale-adjoint-locality]; the same equalities of chain maps give the identities for every unbounded complex.",
-   "uses": [
-    "lem-pur-etale-support-map-compatibility",
-    "def-weil-pbc-etale-sum-extension",
-    "lem-sfb-quasifinite-compact-support-exact",
-    "lem-amb-etale-adjoint-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6 (lemma-shriek-base-change), Tag 0F4L (lemma-shriek-into-star-separated-etale); diagonal lift calculation"
-   }
-  },
-  {
-   "text": "Apply the already established open-horizontal mate theorem [lem-amb-shriek-open-exchange-adjoint] to $h:P\\to V$, the open $t:Y'\\hookrightarrow V$, and its pullback $e:X'\\hookrightarrow P$, with input $a^*L$. It gives the specific equality\n$$F_h(\\epsilon_{e,a^*L})\\alpha_{h,e}^{-1}\\alpha_{t,f'}\n=\\epsilon_{t,F_ha^*L}F_t(C_{h,t,a^*L}^{-1}):F_tF_{f'}L\\longrightarrow F_ha^*L.\\tag{O}$$\nIn particular this is the proper/open tower calculation already available for an open horizontal arrow, applied to the diagonal square, not the etale-horizontal assertion being proved. Its hypotheses hold by Step 2, and its compact-support and open-extension normalizations are exactly those used here.",
-   "uses": [
-    "lem-amb-shriek-open-exchange-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J and 0F7L; open-horizontal mate applied to the clopen diagonal"
-   }
-  },
-  {
-   "text": "Put $Q=C_{f',p_1,L}:p_1^*N\\to F_ha^*L$. Composite-base-change compatibility and identity normalization in [lem-amb-unbounded-compact-support-comparisons], since $p_1t=1$, give\n$$C_{h,t,a^*L}\\,t^*Q=1_N,\\quad\\text{so }t^*Q=C_{h,t,a^*L}^{-1}.$$\nNaturality of the open counit and (O) now give the following calculation, whose source is $N$ and target is $F_{p_2}F_ha^*L$:\n$$\\begin{aligned}\nF_{p_2}(Q)J_N\n&=F_{p_2}(\\epsilon_{t,F_ha^*L})F_{p_2}F_t(t^*Q)\\alpha_{p_2,t,N}^{-1}\\\\\n&=F_{p_2}(F_h(\\epsilon_{e,a^*L}))F_{p_2}(\\alpha_{h,e}^{-1})F_{p_2}(\\alpha_{t,f'})\\alpha_{p_2,t,N}^{-1}.\n\\end{aligned}$$\nThe first line is just naturality of $\\epsilon_t$ in the definition of $J$; the second substitutes the displayed value of $t^*Q$ into (O).",
-   "uses": [
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-amb-shriek-open-exchange-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7K (lemma-pseudo-functor), 0F7L (lemma-base-change-shriek); naturality and the open mate equation"
-   }
-  },
-  {
-   "text": "Postcompose Step 6 by $\\alpha_{p_2,h,a^*L}$. Its naturality moves $F_{p_2}F_h(\\epsilon_e)$ to $F_b(\\epsilon_e)$. Associativity of $\\alpha$ in [lem-amb-unbounded-compact-support-comparisons], applied to the triples $(p_2,h,e)$ and $(p_2,t,f')$, gives\n$$\\alpha_{p_2,h,F_eL}\\,F_{p_2}(\\alpha_{h,e}^{-1})F_{p_2}(\\alpha_{t,f'})\\alpha_{p_2,t,F_{f'}L}^{-1}=\\alpha_{b,e,L}^{-1},$$\nbecause $he=tf'$ and $p_2t=1$. Thus the resulting composite is\n$$F_b(\\epsilon_{e,a^*L})\\alpha_{b,e,L}^{-1}.$$\nOn the other hand the definition of $J'_L$ and associativity for $(f',v,e)$, with $ve=1$ and $f'v=b$, identify this same map with $\\alpha_{f',v,a^*L}F_{f'}(J'_L)$. We have therefore obtained the typed diagonal-insertion identity\n$$\\alpha_{p_2,h,a^*L}F_{p_2}(Q)J_N=\\alpha_{f',v,a^*L}F_{f'}(J'_L).\\tag{D}$$\nThis is a substitution into the stated associativity equations, not an additional geometric comparison lemma.",
-   "uses": [
-    "lem-amb-unbounded-compact-support-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7K (lemma-pseudo-functor); two associativity substitutions"
-   }
-  },
-  {
-   "text": "Write $w=uf'=fu'$ and $T=C_{w,u,L}:u^*F_wL\\to F_ba^*L$. Compatibility of base change with composition in [lem-amb-unbounded-compact-support-comparisons], for the two factorizations of $w$, reads\n$$T\\,u^*(\\alpha_{u,f',L})=\\alpha_{p_2,h,a^*L}\\,F_{p_2}(Q)\\,C_{u,u,N},\\tag{B1}$$\n$$T\\,u^*(\\alpha_{f,u',L})=\\alpha_{f',v,a^*L}\\,F_{f'}(C_{u',u',L})\\,C_{f,u,F_{u'}L}.\\tag{B2}$$\nThese instantiate the same comparison theorem, respectively in the Cartesian squares $(h,f';p_1,a)$ and $(v,u';u',a)$ from Step 2. Naturality of its exchange also gives\n$$C_{f,u,M}\\,u^*F_f(\\epsilon^c_{u',M})\n=F_{f'}(u'^*\\epsilon^c_{u',M})\\,C_{f,u,F_{u'}L}.\\tag{B3}$$\nAll three equations concern the specified proper/open-normalized maps. The first two have common target $F_ba^*L$; the last has target $N$.",
-   "uses": [
-    "lem-amb-unbounded-compact-support-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J and 0F7L; base change of each composition comparison and naturality"
-   }
-  },
-  {
-   "text": "Substitute (B2) into (B3), then (B1) and Step 4 into the definition of $\\kappa$. With $R=C_{u',u',L}$ this gives\n$$\\begin{aligned}\nC_{f,u,M}u^*(\\kappa_M)\\eta^c_{u,N}\n&=F_{f'}(u'^*\\epsilon^c_{u',M})F_{f'}(R^{-1})\\alpha_{f',v,a^*L}^{-1}\\alpha_{p_2,h,a^*L}F_{p_2}(Q)J_N\\\\\n&=F_{f'}\\bigl((u'^*\\epsilon^c_{u',M})R^{-1}J'_L\\bigr)\\\\\n&=F_{f'}\\bigl((u'^*\\epsilon^c_{u',M})\\eta^c_{u',L}\\bigr)=1_N.\n\\end{aligned}$$\nThe second line is (D), and the third is Step 4 for $u'$. The last equality is the triangle identity for the transported adjunction $F_{u'}\\dashv u'^*$, since $L=u'^*M$ [lem-amb-etale-adjoint-locality]. Each cancellation involves inverse comparison maps with the same source and target; no faithfulness of stalks or of degreewise evaluation on derived morphisms is used.",
-   "uses": [
-    "lem-amb-etale-adjoint-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J and 0F7L; substitution of the preceding equations and an adjunction triangle identity"
-   }
-  },
-  {
-   "text": "Since $C_{f,u,M}$ is invertible [lem-amb-unbounded-compact-support-comparisons], Step 9 says $u^*(\\kappa_M)\\eta^c_{u,N}=C_{f,u,M}^{-1}$. By the transported-unit formula from Step 1,\n$$u^*(\\kappa_Md_{u,N}^{-1})\\eta^S_{u,N}=u^*(\\kappa_M)\\eta^c_{u,N}=C_{f,u,M}^{-1}.$$\nThe adjunction bijection of [lem-amb-etale-adjoint-locality] therefore gives\n$$\\kappa_Md_{u,N}^{-1}=\\epsilon^S_{u,F_fM}S_u(C_{f,u,M}^{-1}).$$\nStep 1 identified the left side with $F_f(\\epsilon_{u',M})\\delta_L^{-1}$, proving the asserted equality for every unbounded $M$. Nothing restricts the input to bounded or constructible complexes.",
-   "uses": [
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-amb-etale-adjoint-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J and 0F7L; inverse exchange and the sum-extension adjunction"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sum-extension",
+  "def-kun-unbounded-exchange",
   "lem-amb-etale-adjoint-locality",
-  "lem-amb-shriek-open-exchange-adjoint",
   "lem-amb-unbounded-compact-support-comparisons",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-pur-etale-support-map-compatibility",
-  "lem-sfb-quasifinite-compact-support-exact",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-proper-base-change",
-  "pqf-lem-locnoeth-lft"
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-cbc-open-extension-proper-support-range",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-pur-etale-horizontal-support-tower"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7J/0F7K/0F7L: diagonal reduction to the existing open-horizontal mate; graph normalization from etale-cohomology.tex Tags 03S6/0F4L"
+  "place": "Tags 0F4L, 0F7J and 0F7L: prove uniqueness of graph-normalized comparisons, use the separate canonical graph tower normalization, and prove the remaining etale counit identity by rotated iterated mates, naturality and triangle identities."
  },
  "mathlib_searches": [
   {
@@ -264,14 +186,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pur-etale-support-map-compatibility",
-  "lem-sfb-quasifinite-compact-support-exact",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "pqf-lem-locnoeth-lft"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -305,5 +220,15 @@
   "existing": false,
   "note": "The theorem renders the node’s constant-etale-module derived categories as DerivedCategoryModule, F_a as rightDerivedLowerShriek, S_a as the etale lower-shriek (sum-extension) functor, d_a through the explicit normalization comparison, and C_{f,u} as the canonical unbounded compact-support base-change isomorphism. The three preceding declarations are the canonical comparison, composition mate, and inverse base-change interface used by the theorem. The normalized d_a is etaleCanonicalCompactSupportComparison, built from N : EtaleCompactSupportNormalization A, the landed declaration of lem-asd-etale-compact-support-normalization (Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization). The recorded declaration of lem-sfb-quasifinite-compact-support-exact is an existence theorem with no usable comparison data. N fixes the same graph-normalized proper-support-to-sum comparison: sheaf_normalization pins its sheaf map into the direct image, which is mono, and derived_normalization pins its derived descent, so every N gives the same d_a. This is the convention of lem-amb-etale-adjoint-locality and lem-pur-etale-support-map-compatibility. The counits epsilon_a are those of AlgebraicGeometry.Etale.derivedEtaleLowerShriekUpperStarAdjunction, the termwise sum/evaluation adjunction of the published build that the live lem-amb-etale-adjoint-locality statement also uses. etaleHorizontalSupportBaseChangeIso is C_{f,u} itself; the statement uses its inv, C_{f,u}^{-1}.",
   "fixed_by": "NT-stage2-cc-f394a56b4"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261020T221148-L-4151252",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
