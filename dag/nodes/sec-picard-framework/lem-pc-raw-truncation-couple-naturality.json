@@ -133,14 +133,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.TruncationCoupleNaturality",
-  "file": "lean/Sheaf/CategoryTheory/TruncationCoupleNaturality.lean",
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.TruncationCoupleNaturality",
+  "file": "lean/WeilConjectures/CategoryTheory/TruncationCoupleNaturality.lean",
   "declaration": "CategoryTheory.TruncationCouple.raw_naturality",
   "statement": "theorem raw_naturality (K N : CochainComplex.Plus A)\n    (c : DerivedCategory.Q.obj K.obj ⟶ DerivedCategory.Q.obj N.obj) :\n    ∃ (tD : ∀ p q : ℤ, D F K p q ⟶ D F N p q)\n      (tE : ∀ p q : ℤ, E F K p q ⟶ E F N p q),\n      (∀ p q : ℤ, tD p q ≫ alpha F N p q =\n        alpha F K p q ≫ tD (p - 1) (q + 1)) ∧\n      (∀ p q : ℤ, tE p q ≫ f F N p q = f F K p q ≫ tD (p + 2) (q - 1)) ∧\n      (∀ p q : ℤ, tD p q ≫ g F N p q = g F K p q ≫ tE p q) ∧\n      (∀ n : ℤ, tD 0 n ≫ abutmentMap F N n = abutmentMap F K n ≫\n        (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).map c) ∧\n      (∀ p q : ℤ, tE p q ≫ (singleIso F N p q).hom = (singleIso F K p q).hom ≫\n        (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙\n          DerivedCategory.homologyFunctor B p).map (homologyMap c q))",
   "branch": "sheaf-dag",
-  "by": "E1",
-  "date": "2026-10-13"
+  "by": "J6",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf duplicate under coord/retire-items.tsv; the adopted source supplies all four public names, with the same constructions and naturality conclusion. Its theorem also omits the unused Grothendieck hypothesis on B."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -153,17 +154,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "W2",
+  "reviewer": "C-ce389",
+  "group": "J6",
   "result": "pass",
-  "landing": "20261013T045616-L-140377",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.TruncationCouple.raw_naturality"
-  ],
-  "sorry_after": []
+  "landing": "20261020T221224-L-4160384",
+  "kind": "interface",
+  "note": "independent cc review: Retired Sheaf.CategoryTheory.TruncationCoupleNaturality checked against the live WeilConjectures twin (same text apart from omit lines); importer NaturalTruncationCouple matches live except the line-17 import swap and compiles; node lem-pc-raw-truncation-couple-naturality changes only its lean record"
  }
 }

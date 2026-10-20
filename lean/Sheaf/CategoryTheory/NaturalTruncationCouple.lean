@@ -14,7 +14,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.CategoryTheory.TruncationRawExact
 import WeilConjectures.CategoryTheory.TruncationQuadrantVanishing
 import WeilConjectures.CategoryTheory.TruncationAbutmentCocone
-import Sheaf.CategoryTheory.TruncationCoupleNaturality
+import WeilConjectures.CategoryTheory.TruncationCoupleNaturality
 
 /-! # Individual natural truncation couples
 
