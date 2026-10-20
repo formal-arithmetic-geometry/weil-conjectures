@@ -15,9 +15,15 @@
   "def-trf-uniform-finite-filtered-localization",
   "def-pc-kflat-complex"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "For widenProperty, retain the existing finiteness and bounded-above clauses. Extract F^a = top and F^(b+1) = bottom from the fixed-interval clause. Antitonicity and c <= a give top = F^a <= F^c, so F^c = top. Antitonicity and b+1 <= d+1 give F^(d+1) <= F^(b+1) = bottom, so F^(d+1) = bottom. Equality of the optional interval identifies all quantified endpoints with c,d. The remaining declarations are the explicit constructions recorded in the statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": "R4: elementary interval-widening proof from the existing uniformFilteredProperty and DecreasingFiltration.antitone; the recorded finite-flag constructions are unchanged.",
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -137,5 +143,15 @@
   "group": "Q114",
   "result": "pass",
   "note": "Clean per-file compile of both delivered modules (nt_compile --json, dependency order, side overlay, rc 0, no warnings). Clause-by-clause match with the node; lean.statement verbatim; node text unchanged, stmt_deps adds only the new def node and the existing uniform-localization node. The equivalence is fixed to the inclusion-induced functor and the widening square uses canonical lifts. New definition module has real data, its one sorry is the named widenProperty theorem; split-flat predicate, filtered homotopy and convolution are faithful; total tensor is the same as in the K-flatness definition. No duplicate (FiniteFilteredHomotopyPlus is a different bounded-below model). No extra hypotheses, universes independent, docstrings and both report sections present."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T162324-L-3590084",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
