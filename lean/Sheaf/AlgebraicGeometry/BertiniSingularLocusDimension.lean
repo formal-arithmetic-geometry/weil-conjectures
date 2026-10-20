@@ -6,31 +6,16 @@ Authors: SHEAF group Q38
 module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
-public import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
-public import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
-public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
-public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
-public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Sheaf.AlgebraicGeometry.BertiniUniversalFamily
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.LinearAlgebra.Basis.Defs
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.AlgebraicGeometry.Modules.Differentials
-import Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.ConormalSequenceSmoothImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.Topology.NoetherianSpace
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Spectrum.Prime.Noetherian
-import Mathlib.RingTheory.KrullDimension.Polynomial
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.AlgebraicGeometry.BertiniSingularFibreCharts
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds
-import Sheaf.AlgebraicGeometry.HypersurfaceNonzeroRelativeDifferential
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.RingTheory.KrullDimension.Polynomial
+import Mathlib.RingTheory.KrullDimension.Field
+import Mathlib.RingTheory.Spectrum.Prime.Topology
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension bound for the singular locus in a Bertini family
@@ -43,55 +28,11 @@ Source: Stacks Project, Varieties, Situation 0FD3 and Lemma 0FD6, universal-fami
 
 universe u v
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
 noncomputable section
-
-/-- The universal section `∑ xᵢ pr₂* sᵢ` on coefficient affine space times `Y`.
-The coordinates are the polynomial variables under the canonical global-sections isomorphism.
-Source: Stacks Project, Situation 0FD3 (blueprint: lem-zl-bertini-singular-locus-dimension). -/
-def bertiniUniversalSection {k : Type u} [Field k] {Y : Scheme.{u}}
-    (f : Y ⟶ Spec (CommRingCat.of k)) (L : Y.Modules)
-    {I : Type u} [Fintype I] (s : I → Γ(L, ⊤)) :
-    Γ((Scheme.Modules.tensorPullback
-      (pullback.snd (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k)))
-        f)).obj L, ⊤) :=
-  ∑ i, (pullback.fst
-      (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k))) f).appTop
-        ((Scheme.ΓSpecIso (CommRingCat.of (MvPolynomial I k))).inv (MvPolynomial.X i)) •
-    Scheme.Modules.tensorSectionsUnit
-      (pullback.snd (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k)))
-        f) L (s i)
-
-/-- The ideal sheaf of the universal zero scheme, constructed using the recorded zero scheme.
-Source: Stacks Project, Situation 0FD3 (blueprint: lem-zl-bertini-singular-locus-dimension). -/
-def bertiniUniversalIdeal {k : Type u} [Field k] {Y : Scheme.{u}}
-    (f : Y ⟶ Spec (CommRingCat.of k)) (L : Y.Modules)
-    {I : Type u} [Fintype I] (s : I → Γ(L, ⊤)) :
-    (pullback
-      (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k))) f).IdealSheafData :=
-  (Scheme.Modules.homOfGlobalSection _ (bertiniUniversalSection f L s)).zeroLocus
-
-/-- The projection `q : H_univ ⟶ A^I_k` from the universal zero scheme.
-Source: Stacks Project, Tag 0FD6 (blueprint: lem-zl-bertini-singular-locus-dimension). -/
-def bertiniUniversalProjection {k : Type u} [Field k] {Y : Scheme.{u}}
-    (f : Y ⟶ Spec (CommRingCat.of k)) (L : Y.Modules)
-    {I : Type u} [Fintype I] (s : I → Γ(L, ⊤)) :
-    (bertiniUniversalIdeal f L s).subscheme ⟶ Spec (CommRingCat.of (MvPolynomial I k)) :=
-  (bertiniUniversalIdeal f L s).subschemeι ≫
-    pullback.fst
-      (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k))) f
-
-/-- The non-smooth locus of the universal projection: points with no smooth open neighbourhood.
-Source: Stacks Project, Tag 0FD6 (blueprint: lem-zl-bertini-singular-locus-dimension). -/
-def bertiniUniversalSingularLocus {k : Type u} [Field k] {Y : Scheme.{u}}
-    (f : Y ⟶ Spec (CommRingCat.of k)) (L : Y.Modules)
-    {I : Type u} [Fintype I] (s : I → Γ(L, ⊤)) :
-    Set (bertiniUniversalIdeal f L s).subscheme :=
-  {h | ¬ ∃ W : (bertiniUniversalIdeal f L s).subscheme.Opens,
-    h ∈ W ∧ Smooth (W.ι ≫ bertiniUniversalProjection f L s)}
 
 /-- The non-smooth locus of the universal Bertini family has dimension less than `r`,
 and its image lies in a proper closed subset of coefficient affine space. The additive map
@@ -160,7 +101,119 @@ theorem bertini_singularLocus_dimension_lt
         IsClosed B ∧ B ≠ Set.univ ∧
           (bertiniUniversalProjection f L (fun i ↦ ψ (b i))) ''
             bertiniUniversalSingularLocus f L (fun i ↦ ψ (b i)) ⊆ B := by
-  sorry
+  classical
+  let s : ULift.{u} (Fin r) → Γ(L, ⊤) := fun i ↦ ψ (b i)
+  let φ := ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin r)) f L
+    (fun i ↦ (SheafOfModules.unitHomEquiv L)
+      (Scheme.Modules.homOfGlobalSection L (s i))) hgen
+  let A := Spec (CommRingCat.of (MvPolynomial (ULift.{u} (Fin r)) k))
+  let a : A ⟶ Spec (CommRingCat.of k) :=
+    Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial _ k))
+  let Z := (bertiniSingularIdeal f L s).subscheme
+  let p : Z ⟶ Y := bertiniSingularToSource f L s
+  let q : Z ⟶ A :=
+    (bertiniSingularIdeal f L s).subschemeι ≫ bertiniUniversalProjection f L s
+  have ha : LocallyOfFiniteType a := bertiniCoefficient_locallyOfFiniteType
+  let : Y.Over (Spec (CommRingCat.of k)) := ⟨f⟩
+  let : A.Over (Spec (CommRingCat.of k)) := ⟨a⟩
+  have : LocallyOfFiniteType (A ↘ Spec (CommRingCat.of k)) := ha
+  let : Z.Over (Spec (CommRingCat.of k)) := ⟨p ≫ f⟩
+  have hq : q ≫ a = p ≫ f := by
+    dsimp [q, p, bertiniSingularToSource, bertiniUniversalProjection, a]
+    simp only [Category.assoc, pullback.condition]
+  have : q.IsOver (Spec (CommRingCat.of k)) := ⟨hq⟩
+  have hp : LocallyOfFiniteType p := by
+    dsimp [p, bertiniSingularToSource]
+    infer_instance
+  have : LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k)) := by
+    change LocallyOfFiniteType (p ≫ f)
+    infer_instance
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsLocallyNoetherian (ProjectiveSpace (ULift.{u} (Fin r))
+      (Spec (CommRingCat.of k))) :=
+    LocallyOfFiniteType.isLocallyNoetherian
+      (ProjectiveSpace (ULift.{u} (Fin r)) (Spec (CommRingCat.of k)) ↘
+        Spec (CommRingCat.of k))
+  have : QuasiCompact φ := by
+    rw [← φ.liftCoborder_ι]
+    infer_instance
+  have : CompactSpace (ProjectiveSpace (ULift.{u} (Fin r))
+      (Spec (CommRingCat.of k))) :=
+    QuasiCompact.compactSpace_of_compactSpace
+      (ProjectiveSpace (ULift.{u} (Fin r)) (Spec (CommRingCat.of k)) ↘
+        Spec (CommRingCat.of k))
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace φ
+  have : IsNoetherian Y := {}
+  have : QuasiCompact p := by
+    dsimp [p, bertiniSingularToSource]
+    infer_instance
+  have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace p
+  have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian p
+  have : IsNoetherian Z := {}
+  have hdim : topologicalKrullDim Z < (r : WithBot ℕ∞) := by
+    cases r with
+    | zero =>
+      have : IsEmpty Y := Function.isEmpty φ
+      have : IsEmpty Z := Function.isEmpty p
+      have : IsEmpty (IrreducibleCloseds Z) := ⟨fun C ↦ by
+        obtain ⟨z, _⟩ := C.isIrreducible.nonempty
+        exact isEmptyElim z⟩
+      simp [topologicalKrullDim, Order.krullDim_eq_bot]
+    | succ t =>
+      choose U hyU hU d n hsum hbase hfib using
+        bertini_singular_affine_fibre_charts f L t s hgen
+      have hcover : ⨆ y, p ⁻¹ᵁ U y = ⊤ := by
+        apply eq_top_iff.mpr
+        intro z _
+        exact Opens.mem_iSup.mpr ⟨p z, hyU (p z)⟩
+      have hbound : topologicalKrullDim Z ≤ (t : WithBot ℕ∞) := by
+        apply topologicalKrullDim_le_of_iSup_eq_top (fun y ↦ p ⁻¹ᵁ U y) hcover
+        intro y
+        let g := p ∣_ U y
+        let : (U y : Scheme).Over (Spec (CommRingCat.of k)) := ⟨(U y).ι ≫ f⟩
+        let : (p ⁻¹ᵁ U y : Scheme).Over (Spec (CommRingCat.of k)) :=
+          ⟨(p ⁻¹ᵁ U y).ι ≫ p ≫ f⟩
+        have : g.IsOver (Spec (CommRingCat.of k)) := by
+          constructor
+          change g ≫ (U y).ι ≫ f = (p ⁻¹ᵁ U y).ι ≫ p ≫ f
+          rw [← Category.assoc, morphismRestrict_ι, Category.assoc]
+        have : LocallyOfFiniteType ((U y : Scheme) ↘ Spec (CommRingCat.of k)) := by
+          change LocallyOfFiniteType ((U y).ι ≫ f)
+          infer_instance
+        have : LocallyOfFiniteType ((p ⁻¹ᵁ U y : Scheme) ↘ Spec (.of k)) := by
+          change LocallyOfFiniteType ((p ⁻¹ᵁ U y).ι ≫ p ≫ f)
+          infer_instance
+        have : QuasiCompact ((U y : Scheme) ↘ Spec (.of k)) := by
+          change QuasiCompact ((U y).ι ≫ f)
+          infer_instance
+        have : QuasiCompact ((p ⁻¹ᵁ U y : Scheme) ↘ Spec (.of k)) := by
+          change QuasiCompact ((p ⁻¹ᵁ U y).ι ≫ p ≫ f)
+          infer_instance
+        have hb := (g.finiteType_fibre_image_dimension_bounds (k := k)).2
+          (d y) (n y) (hbase y) (hfib y)
+        exact hb.trans (by exact_mod_cast hsum y)
+      exact hbound.trans_lt (by exact_mod_cast Nat.lt_succ_self t)
+  have hdimS : topologicalKrullDim (bertiniUniversalSingularLocus f L s) =
+      topologicalKrullDim Z :=
+    ((bertiniSingularHomeomorph f L s).isHomeomorph.topologicalKrullDim_eq _).symm
+  refine ⟨hdimS.trans_lt hdim, closure (Set.range q), isClosed_closure, ?_, ?_⟩
+  · intro hB
+    have hBdim := (q.finiteType_fibre_image_dimension_bounds (k := k)).1
+    have hAdim : topologicalKrullDim A = (r : WithBot ℕ∞) := by
+      change topologicalKrullDim (PrimeSpectrum (MvPolynomial (ULift.{u} (Fin r)) k)) = _
+      rw [PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim,
+        MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field]
+      simp
+    have hlt := hBdim.trans_lt hdim
+    rw [hB] at hlt
+    have he := (Homeomorph.Set.univ A).isHomeomorph.topologicalKrullDim_eq _
+    rw [he, hAdim] at hlt
+    exact (lt_irrefl _ hlt)
+  · rintro _ ⟨h, hh, rfl⟩
+    obtain ⟨z, hz⟩ := (bertiniSingularHomeomorph f L s).surjective ⟨h, hh⟩
+    apply subset_closure
+    refine ⟨z, ?_⟩
+    exact congrArg (bertiniUniversalProjection f L s) (congrArg Subtype.val hz)
 
 end
 

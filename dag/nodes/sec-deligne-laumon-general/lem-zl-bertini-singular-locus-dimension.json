@@ -21,113 +21,55 @@
  ],
  "proof": [
   {
-   "text": "If $Y=\\varnothing$, then $\\Sigma=\\varnothing$ and take $B=\\varnothing$. This includes $r=0$: generation by no sections forces every stalk of the invertible sheaf to be zero, so there are no points of $Y$. In this case $\\mathbf P(V)$ is empty (the usual interpretation of $\\mathbf P^{-1}$). Hence assume $Y\\ne\\varnothing$ and $r\\geq1$.",
+   "text": "Use the concrete universal section, zero scheme and reduced singular scheme from the universal-family module, which moves the four original definitions verbatim. Write p:Z -> Y and q:Z -> A^r_k. The product square gives q over k.",
    "uses": [
-    "def-sc-invertible-module",
-    "def-weil-pbc-generating-sections"
+    "def-zl-bertini-universal-family"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
-   }
+   "elementary": false
   },
   {
-   "text": "The standard affine charts of $\\mathbf P^{r-1}_k$ have finite type coordinate rings, hence Noetherian underlying spaces by [lem-wf-affine-noetherian-components]. Their finite union is Noetherian by [lem-kun-finite-union-noetherian]. An immersion is a homeomorphism onto its locally closed image, so [lem-sfb-noetherian-space-compact-subsets] implies that $Y$ is quasi-compact. Smoothness makes $Y$ locally of finite presentation, hence locally of finite type; quasi-compactness makes it finite type. The universal zero scheme is finite type: on an affine trivializing open $\\operatorname{Spec}A\\subseteq Y$ its ring is $A[x_1,\\ldots,x_r]/(\\sum x_if_i)$, generated over $k$ by generators of $A$ and the $x_i$. These finitely many charts show that $H_{\\mathrm{univ}}$ is finite type. The smooth locus of $q$ is open by the definition of smoothness at a point; thus $\\Sigma$ is closed. Give it the reduced closed subscheme structure. On each affine chart this is another quotient of the same finite type algebra, so $\\Sigma$ is finite type over $k$.",
+   "text": "The projective immersion makes Y quasi-compact: projective space is Noetherian and the immersion is quasi-compact over its locally Noetherian target. Smoothness makes Y locally of finite type. The two closed inclusions and the coefficient affine-space projection make p quasi-compact and locally of finite type. Thus Z is Noetherian and finite type over k. If r=0, the projective target is empty, so Y and Z are empty.",
    "uses": [
-    "lem-wf-affine-noetherian-components",
-    "lem-kun-finite-union-noetherian",
-    "lem-sfb-noetherian-space-compact-subsets",
-    "def-weil-closed-immersion",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
     "def-sbc-smooth-morphisms",
     "def-weil-finite-type-morphism",
-    "def-pc-zero-scheme"
+    "def-weil-closed-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Cover $Y$ by affine opens $U$ on which $s_i=\\psi(v_i)$ trivializes $\\mathcal L$ and $\\Omega^1_{U/k}$ is free of rank $d$, using [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension]. Applying its rank equality again at each point of $U$ gives $\\dim_u U=d$ everywhere, hence $\\dim U=d$. Take a finite such cover using quasi-compactness. Set $f_j=s_j/s_i$, so $f_i=1$. At any $y\\in U$, the immersion into the projective chart factors locally as a closed immersion into an open $W\\subseteq\\mathbf A^{r-1}_k$. Since $U$ is smooth, [lem-pur-conormal-sequence-smooth-immersion] makes $\\Omega_{W/k}\\otimes\\kappa(y)\\to\\Omega_{U/k}\\otimes\\kappa(y)$ surjective. The differentials of the affine coordinates generate the source: locally sections on $W$ are polynomial fractions, and $d(a/b)=b^{-1}da-ab^{-2}db$. Their images are $df_j(y)$, $j\\ne i$, by the coordinate description of the associated projective morphism. Consequently the residue-field map $E(y):\\kappa(y)^r\\to\\kappa(y)\\oplus(\\Omega^1_{U/k}\\otimes\\kappa(y))$, $e_j\\mapsto(f_j(y),df_j(y))$, is onto: $e_i$ gives $(1,0)$, and $e_j-f_j(y)e_i$ gives $(0,df_j(y))$. Its rank is therefore $d+1$, so $d+1\\leq r$.",
+   "text": "For r=t+1, obtain affine charts U with complementary base and fibre bounds d+n<=t. The finite-type fibre dimension bound applied to p|_U gives dim p^{-1}(U)<=d+n<=t. These opens cover Z; topologicalKrullDim_le_of_iSup_eq_top yields dim Z<=t<r. Transfer by the singular-scheme homeomorphism.",
    "uses": [
-    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
-    "lem-pur-conormal-sequence-smooth-immersion",
-    "def-weil-pbc-morphism-to-projective-space-by-sections",
-    "def-sc-relative-differential-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
-   }
-  },
-  {
-   "text": "On $\\mathbf A^r_k\\times_kU$ the universal equation is $F=\\sum_jx_jf_j$, and its differential relative to $\\mathbf A^r_k$ is $dF=\\sum_jx_jdf_j$. The ambient projection is smooth, being the base change of $U\\to\\operatorname{Spec}k$ by [lem-pc-proper-base-change](2). The relative differentials here are the pullback of $\\Omega^1_{U/k}$: on affine rings the derivations of $k[x]\\otimes_k A$ over $k[x]$ are exactly the $k$-derivations of $A$, extended $k[x]$-linearly. If $h\\in\\Sigma$ lies above $y\\in U$, the hypersurface criterion [lem-zl-hypersurface-nonzero-relative-differential] implies $dF(h)=0$, since otherwise $q$ would be smooth at $h$. Also $F(h)=0$ because $h\\in H_{\\mathrm{univ}}$. Thus $\\Sigma\\cap p^{-1}(U)$ is contained in the closed locus $K_U$ cut out by $F$ and the $d$ coefficients of $dF$. This is only a containment, and uses no flatness or smoothness assertion about the fibre at the zero coefficient vector.",
-   "uses": [
-    "lem-pc-proper-base-change",
-    "lem-zl-hypersurface-nonzero-relative-differential",
-    "def-sc-relative-differential-sheaf",
-    "def-pc-zero-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
-   }
-  },
-  {
-   "text": "For every $y\\in U$, the fibre $(K_U)_y\\subseteq\\mathbf A^r_{\\kappa(y)}$ is cut out by the homogeneous linear equations $E(y)x=0$. Its matrix has rank $d+1$ by Step 3. Choose a nonzero maximal minor and solve for the corresponding $d+1$ variables; the other $r-d-1$ variables are free, giving $(K_U)_y\\cong\\mathbf A^{r-d-1}_{\\kappa(y)}$. The polynomial dimension formula [lem-sf-noetherian-polynomial-dimension], with the spectrum/ring identification [lem-weil-pbc-spec-topological-krull-dimension-ring], gives fibre dimension $r-d-1$. Here a field has dimension zero because its only prime is $(0)$. Since $U$ is affine finite type of dimension $d$ and $K_U$ is the closed subscheme defined by these finitely many equations in $\\mathbf A^r\\times U$, the fibre bound in [lem-zl-finite-type-fibre-image-dimension-bounds] gives $\\dim K_U\\leq d+(r-d-1)=r-1$. A closed subspace cannot increase dimension: a chain of irreducible closed subsets remains such a chain in its ambient space. Hence Step 4 gives $\\dim(\\Sigma\\cap p^{-1}(U))\\leq r-1$.",
-   "uses": [
-    "lem-sf-noetherian-polynomial-dimension",
-    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "lem-zl-bertini-singular-affine-fibre-charts",
     "lem-zl-finite-type-fibre-image-dimension-bounds"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
-   }
+   "elementary": false
   },
   {
-   "text": "These opens cover $\\Sigma$, so $\\dim\\Sigma\\leq r-1<r$. Explicitly, for a chain of irreducible closed subsets of $\\Sigma$, choose one of the opens meeting its smallest member. All members meet that open and their intersections remain irreducible and closed there; strictness is preserved, since a nonempty open in an irreducible space is dense and therefore cannot be contained in a proper closed subset. Thus every chain has length at most $r-1$. Apply the image inequality in [lem-zl-finite-type-fibre-image-dimension-bounds] to $q|_\\Sigma:\\Sigma\\to\\mathbf A^r_k$: $B=\\overline{q(\\Sigma)}$ has dimension at most $\\dim\\Sigma<r$. The polynomial dimension formula and the spectrum/ring identification give $\\dim\\mathbf A^r_k=r$, so $B$ is a proper closed subset containing $q(\\Sigma)$.",
+   "text": "Set B to the closure of the image of q. The finite-type image bound gives dim B<=dim Z<r. Coefficient affine space has dimension r by the polynomial formula over a field and the spectrum/ring dimension equality. Hence B is not the whole coefficient space. Surjectivity of the singular-scheme homeomorphism shows that B contains the image of the original singular subset.",
    "uses": [
     "lem-zl-finite-type-fibre-image-dimension-bounds",
     "lem-sf-noetherian-polynomial-dimension",
     "lem-weil-pbc-spec-topological-krull-dimension-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-zero-scheme",
   "def-sbc-smooth-morphisms",
-  "def-sc-invertible-module",
-  "def-sc-relative-differential-sheaf",
   "def-weil-closed-immersion",
   "def-weil-finite-type-morphism",
-  "def-weil-pbc-generating-sections",
   "def-weil-pbc-morphism-to-projective-space-by-sections",
-  "lem-kun-finite-union-noetherian",
-  "lem-pc-proper-base-change",
-  "lem-pur-conormal-sequence-smooth-immersion",
+  "def-zl-bertini-universal-family",
   "lem-sf-noetherian-polynomial-dimension",
-  "lem-sfb-noetherian-space-compact-subsets",
-  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
   "lem-weil-pbc-spec-topological-krull-dimension-ring",
-  "lem-wf-affine-noetherian-components",
-  "lem-zl-finite-type-fibre-image-dimension-bounds",
-  "lem-zl-hypersurface-nonzero-relative-differential"
+  "lem-zl-bertini-singular-affine-fibre-charts",
+  "lem-zl-finite-type-fibre-image-dimension-bounds"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0FD6, lemma-bertini; same first-order kernel and dimension route, with the non-flat fibre inference repaired by the relative hypersurface criterion and residue-field calculations in place of algebraic closure."
+  "place": "Tag 0FD6, universal-family proof; source first-order kernel calculation isolated, all rank-nullity, chart gluing and image dimension steps proved in Lean; residue-field formulation uses the one-way relative hypersurface criterion."
  },
  "mathlib_searches": [
   {
@@ -225,10 +167,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
-  "lem-pur-conormal-sequence-smooth-immersion"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -241,10 +180,6 @@
   "module": "Sheaf.AlgebraicGeometry.BertiniSingularLocusDimension",
   "declaration": "AlgebraicGeometry.bertini_singularLocus_dimension_lt",
   "declarations": [
-   "AlgebraicGeometry.bertiniUniversalSection",
-   "AlgebraicGeometry.bertiniUniversalIdeal",
-   "AlgebraicGeometry.bertiniUniversalProjection",
-   "AlgebraicGeometry.bertiniUniversalSingularLocus",
    "AlgebraicGeometry.bertini_singularLocus_dimension_lt"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/BertiniSingularLocusDimension.lean",
@@ -253,7 +188,7 @@
   "by": "Q38",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The four helpers construct the universal section, its zero-scheme ideal, projection, and non-smooth subset introduced by this very statement. The field action on global sections is written explicitly as an additive map with its canonical scalar law. The basis ULift (Fin r) allows projective coordinates in the scheme universe, including r=0; V has an independent universe. Added the landed owner of tensorSectionsUnit to stmt_deps to reuse its canonical section pullback. No statement correction."
+  "note": "The four original universal-family definitions move verbatim to the publicly imported Sheaf.AlgebraicGeometry.BertiniUniversalFamily; their names and mathematical meanings are unchanged. The theorem retains its exact signature. Its proof combines the new local first-order-kernel node with proved rank, dimension, cover and image arguments."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -262,5 +197,15 @@
   "group": "Q38",
   "result": "pass",
   "note": "Statement, definitions, dependencies, source correspondence, edge cases, docstrings, report sections, route-pivot constraints, and reproducible scompile evidence all checked; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-64c49",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T132029-L-1404056",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new nodes/modules vs live clone: theorem signature identical, 4 defs moved verbatim to the publicly imported BertiniUniversalFamily, all 7 modules compile, importer BertiniSmoothMember compiles, axioms as expected, the one remaining sorry (bertini_singular_fibre_equations) checked as true against Stacks 0FD6/00T7"
  }
 }

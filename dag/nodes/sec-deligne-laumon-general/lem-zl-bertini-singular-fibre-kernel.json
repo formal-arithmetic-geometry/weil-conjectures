@@ -1,0 +1,138 @@
+{
+ "id": "lem-zl-bertini-singular-fibre-kernel",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof of the smooth Bertini input (Stacks varieties.tex, lemma-bertini): final paragraph: first-order evaluation is surjective and the singular fibre is contained in its kernel; the one-way hypersurface implication is supplied by Algebra Tag 00T7",
+   "via": [
+    "lem-zl-bertini-singular-first-order-model",
+    "lem-zl-bertini-singular-locus-dimension",
+    "lem-zl-bertini-smooth-member"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The singular fibre embeds in the linear kernel",
+ "statement": "Let k be a field, Y smooth over k with structure morphism f, L invertible, and s_0,...,s_r generating L. Suppose the associated morphism Y -> P^r_k of [def-weil-pbc-morphism-to-projective-space-by-sections] is an immersion. Let Z and p:Z -> Y be the reduced singular scheme and its projection from [def-zl-bertini-universal-family]. For any affine open U smooth of relative dimension d over k and every z in U there is a surjective kappa(z)-linear map E:kappa(z)^(r+1) -> kappa(z) plus kappa(z)^d and a closed immersion of the scheme-theoretic fibre (p|_U)_z into Spec(Sym_{kappa(z)}((ker E)^dual)). Its composite with the coefficient map, defined on polynomial generators by coordinate functionals restricted to ker E and on k by the residue-field map of U -> Spec k, is the original coefficient projection of this fibre. Invertibility and fibres use [def-sc-invertible-module] and [def-pc-scheme-fibre].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini, final paragraph: first-order evaluation and its kernel"
+ },
+ "stmt_deps": [
+  "def-zl-bertini-universal-family",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-sc-invertible-module",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Apply the first-order fibre-equations theorem to obtain E, A, the affine fibre isomorphism e and the quotient H with its generator vanishing and coefficient compatibility.",
+   "uses": [
+    "lem-zl-bertini-singular-fibre-equations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the symmetric-algebra kernel factorization to H to get a surjective G from the symmetric algebra of the kernel dual. Spec(G) is a closed immersion, and composing with e gives j. Check its coefficient composite on constants using G.commutes and on variables using the generator compatibility; Spec.map_comp then identifies it with the original coefficient projection.",
+   "uses": [
+    "lem-zl-symmetric-algebra-kernel-factor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-bertini-singular-fibre-equations",
+  "lem-zl-symmetric-algebra-kernel-factor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini, final paragraph: first-order evaluation and its kernel"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The non smooth fibre of a universal hyperplane family is cut out by the value and differential equations of its generating sections",
+   "results": "Algebra.smoothLocus_eq_compl_support_inter; Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff; Algebra.isOpen_smoothLocus; Algebra.IsStandardSmoothOfRelativeDimension; Algebra.smoothLocus; Algebra.PreSubmersivePresentation.cotangentComplexAux_apply; Algebra.SubmersivePresentation.sectionCotangent_zero_of_notMem_range; Algebra.IsStandardSmooth",
+   "date": "2026-10-19",
+   "verdict": "No direct match. General symmetric-algebra, linear-algebra or smoothness infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"ker\"",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "No direct match. General symmetric-algebra, linear-algebra or smoothness infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "singular.*fibre|singular.*kernel|firstOrder",
+   "results": "Mathlib/Probability/Kernel/Composition/AbsolutelyContinuous.lean; Mathlib/Probability/Kernel/Composition/MeasureCompProd.lean; Mathlib/Probability/Kernel/RadonNikodym.lean; Mathlib/Probability/Kernel/RadonNikodym.lean; Mathlib/Probability/Kernel/RadonNikodym.lean; Mathlib/Probability/Kernel/RadonNikodym.lean; Mathlib/Probability/Kernel/RadonNikodym.lean; Mathlib/FieldTheory/AxGrothendieck.lean",
+   "date": "2026-10-19",
+   "verdict": "No direct match. General symmetric-algebra, linear-algebra or smoothness infrastructure only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective symmetric algebra quotient that kills the dual image of a linear map induces a closed immersion of its spectrum into the spectrum of the symmetric algebra on the dual kernel",
+   "results": [
+    "AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk",
+    "SymmetricAlgebra.algHom_surjective",
+    "SymAlg.sym_surjective",
+    "AlgebraicGeometry.IsClosedImmersion.spec_of_surjective",
+    "AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine",
+    "PrimeSpectrum.isClosedEmbedding_comap_of_surjective",
+    "AlgebraicGeometry.isClosedImmersion_iff_isAffineHom",
+    "Ideal.quotientKerAlgEquivOfSurjective.congr_simp"
+   ],
+   "date": "2026-10-19",
+   "verdict": "The returned affine-fibre and closed-immersion APIs provide infrastructure only; no theorem states the first-order Bertini equations or the dual-kernel factorization. The kernel proof uses spec_of_surjective and the separately proved algebraic factorization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniSingularLocusDimension",
+  "date": "2026-10-19",
+  "group": "Q7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniSingularFibreKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniSingularFibreKernel.lean",
+  "declaration": "AlgebraicGeometry.bertini_singular_fibre_kernel",
+  "declarations": [
+   "AlgebraicGeometry.bertiniLinearKernelCoefficientMap",
+   "AlgebraicGeometry.bertini_singular_fibre_kernel"
+  ],
+  "statement": "theorem bertini_singular_fibre_kernel\n    {k : Type u} [Field k] {Y : Scheme.{u}}\n    (f : Y ⟶ Spec (CommRingCat.of k)) [Smooth f]\n    (L : Y.Modules) [L.IsInvertible] (r : ℕ)\n    (s : ULift.{u} (Fin (r + 1)) → Γ(L, ⊤))\n    (hgen : Epi (L.freeHomEquiv.symm (fun i ↦\n      (SheafOfModules.unitHomEquiv L) (Scheme.Modules.homOfGlobalSection L (s i)))))\n    [IsImmersion (ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin (r + 1))) f L\n      (fun i ↦ (SheafOfModules.unitHomEquiv L)\n        (Scheme.Modules.homOfGlobalSection L (s i))) hgen)] (U : Y.Opens) (_hU : IsAffineOpen U)\n    (d : ℕ) [SmoothOfRelativeDimension d (U.ι ≫ f)] (z : U) :\n    ∃ E : (Fin (r + 1) → (U : Scheme).residueField z) →ₗ[\n            (U : Scheme).residueField z]\n            (U : Scheme).residueField z × (Fin d → (U : Scheme).residueField z),\n          Function.Surjective E ∧\n          ∃ j : (bertiniSingularToSource f L s ∣_ U).fiber z ⟶\n              Spec (CommRingCat.of (SymmetricAlgebra ((U : Scheme).residueField z)\n                (Module.Dual ((U : Scheme).residueField z) E.ker))),\n            IsClosedImmersion j ∧\n            j ≫ bertiniLinearKernelCoefficientMap ((U.ι ≫ f).residueFieldAlgebraMap z) E =\n              (bertiniSingularToSource f L s ∣_ U).fiberι z ≫\n                ((bertiniSingularToSource f L s) ⁻¹ᵁ U).ι ≫\n                (bertiniSingularIdeal f L s).subschemeι ≫ bertiniUniversalProjection f L s",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-64c49",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T132029-L-1404056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-64c49",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T132029-L-1404056",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new nodes/modules vs live clone: theorem signature identical, 4 defs moved verbatim to the publicly imported BertiniUniversalFamily, all 7 modules compile, importer BertiniSmoothMember compiles, axioms as expected, the one remaining sorry (bertini_singular_fibre_equations) checked as true against Stacks 0FD6/00T7"
+ }
+}

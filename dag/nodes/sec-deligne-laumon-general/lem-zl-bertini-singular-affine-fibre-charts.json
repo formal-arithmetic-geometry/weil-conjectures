@@ -1,0 +1,127 @@
+{
+ "id": "lem-zl-bertini-singular-affine-fibre-charts",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof of the smooth Bertini input (Stacks varieties.tex, lemma-bertini): final paragraph: kernel has dimension equal to the number of coefficients minus the first-order rank, followed by the fibre-dimension estimate",
+   "via": [
+    "lem-zl-bertini-singular-locus-dimension",
+    "lem-zl-bertini-smooth-member"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Complementary base and fibre dimensions on Bertini charts",
+ "statement": "Let k be a field, Y smooth over k, L invertible and s_0,...,s_r generating sections inducing an immersion Y -> P^r_k. For p:Z -> Y, the reduced singular scheme of [def-zl-bertini-universal-family], every y has an affine neighbourhood U and natural numbers d,n such that d+n <= r, dim U <= d and every scheme-theoretic fibre of p|_U has dimension <= n. Dimensions use [def-kun-topological-krull-dimension], the sections use [def-weil-pbc-morphism-to-projective-space-by-sections] and the fibres use [def-pc-scheme-fibre].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini: final paragraph: kernel has dimension equal to the number of coefficients minus the first-order rank, followed by the fibre-dimension estimate"
+ },
+ "stmt_deps": [
+  "def-zl-bertini-universal-family",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Take U,d and the surjective first-order maps with their closed fibre embeddings from the local first-order model.",
+   "uses": [
+    "lem-zl-bertini-singular-first-order-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a surjection E:kappa^(r+1) -> kappa plus kappa^d, rank-nullity gives d+finrank(ker E)=r, including d=0 and zero kernel. The symmetric algebra of the dual of ker E is a polynomial algebra in finrank(ker E) variables by SymmetricAlgebra.equivMvPolynomial. A field has ring dimension zero, so the polynomial dimension formula and spectrum identification give its topological dimension finrank(ker E). Closed embeddings cannot increase topological dimension.",
+   "uses": [
+    "lem-sf-noetherian-polynomial-dimension",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A smooth scheme of relative dimension d over a field has dimension at most d (topologicalKrullDim_le_of_smoothOfRelativeDimension). Set n=r-d; rank-nullity gives d+n=r. Apply the closed-embedding bound in each fibre.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-zl-bertini-singular-first-order-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini; final paragraph: kernel has dimension equal to the number of coefficients minus the first-order rank, followed by the fibre-dimension estimate"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Dimension of the affine fibre of the singular scheme of an immersive linear system bounded by the number of coefficients minus the dimension of a smooth chart minus one",
+   "results": "AlgebraicGeometry.instIsAffineFiberOfIsAffineHom; Algebra.IsStandardSmoothOfRelativeDimension.out; Algebra.IsStandardSmooth.relativeDimension; AlgebraicGeometry.isSmoothOfRelativeDimension_comp; Manifold.ImmersionAtProp; Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsSmoothOfRelativeDimension; IsLocalFrameOn.fintype_of_finiteDimensional",
+   "date": "2026-10-19",
+   "verdict": "no match; related general infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of the symmetric algebra of the dual kernel of a surjective linear map from k^(r+1) to k plus k^d has dimension r minus d",
+   "results": "SymmetricAlgebra.rank_eq; Algebra.SubmersivePresentation.rank_kaehlerDifferential; Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension; Module.Dual.finrank_ker_add_one_of_ne_zero; Algebra.IsStandardSmooth.relativeDimension; Module.supportDim_le_of_surjective; Algebra.Presentation.dimension; IsDomain.hasRankNullity",
+   "date": "2026-10-19",
+   "verdict": "no match; related general infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "singular.*locus|universal.*[Zz]ero|first.order.*evaluation",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "date": "2026-10-19",
+   "verdict": "no match; related general infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniSingularLocusDimension",
+  "date": "2026-10-19",
+  "group": "Q7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniSingularFibreCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniSingularFibreCharts.lean",
+  "declaration": "AlgebraicGeometry.bertini_singular_affine_fibre_charts",
+  "declarations": [
+   "AlgebraicGeometry.bertini_singular_affine_fibre_charts"
+  ],
+  "statement": "theorem bertini_singular_affine_fibre_charts\n    {k : Type u} [Field k] {Y : Scheme.{u}}\n    (f : Y ⟶ Spec (CommRingCat.of k)) [Smooth f]\n    (L : Y.Modules) [L.IsInvertible] (r : ℕ)\n    (s : ULift.{u} (Fin (r + 1)) → Γ(L, ⊤))\n    (hgen : Epi (L.freeHomEquiv.symm (fun i ↦\n      (SheafOfModules.unitHomEquiv L) (Scheme.Modules.homOfGlobalSection L (s i)))))\n    [IsImmersion (ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin (r + 1))) f L\n      (fun i ↦ (SheafOfModules.unitHomEquiv L)\n        (Scheme.Modules.homOfGlobalSection L (s i))) hgen)] :\n    ∀ y : Y, ∃ U : Y.Opens, y ∈ U ∧ IsAffineOpen U ∧\n      ∃ d n : ℕ, d + n ≤ r ∧ topologicalKrullDim U ≤ (d : WithBot ℕ∞) ∧\n        ∀ z : U, topologicalKrullDim ((bertiniSingularToSource f L s ∣_ U).fiber z) ≤\n          (n : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-64c49",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T132029-L-1404056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-64c49",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T132029-L-1404056",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new nodes/modules vs live clone: theorem signature identical, 4 defs moved verbatim to the publicly imported BertiniUniversalFamily, all 7 modules compile, importer BertiniSmoothMember compiles, axioms as expected, the one remaining sorry (bertini_singular_fibre_equations) checked as true against Stacks 0FD6/00T7"
+ }
+}

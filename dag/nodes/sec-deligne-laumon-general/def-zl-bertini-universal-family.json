@@ -1,0 +1,138 @@
+{
+ "id": "def-zl-bertini-universal-family",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof of the smooth Bertini input (Stacks varieties.tex, lemma-bertini): universal-family diagram and the paragraph giving the closed singular locus its reduced induced structure; Situation 0FD3 for the universal section",
+   "via": [
+    "lem-zl-bertini-singular-locus-dimension",
+    "lem-zl-bertini-smooth-member"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Universal Bertini family and reduced singular scheme",
+ "statement": "Let k be a field, Y a k-scheme with structure morphism f, L an O_Y-module, I a finite coordinate set, and s_i global sections of L. On A^I_k times_k Y form the section sum_i x_i pr_2^*s_i, its recorded zero-scheme ideal, and the projection q to A^I_k. Define Sigma to be the points with no open neighbourhood smooth over A^I_k. Its complement is the union of the smooth opens, so Sigma is closed. Define Z as the subscheme of the vanishing ideal of this closed subset, and p:Z -> Y as the composite of the two closed inclusions with pr_2. The underlying space of Z is canonically homeomorphic to Sigma. The coefficient affine space is locally of finite type over k. These use the zero scheme of [def-pc-zero-scheme], tensor sections of [lem-sc-etale-qcoherent-presheaf-functorial], smoothness of [def-sbc-smooth-morphisms] and finite type of [def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini: universal-family diagram and the paragraph giving the closed singular locus its reduced induced structure; Situation 0FD3 for the universal section"
+ },
+ "stmt_deps": [
+  "def-pc-zero-scheme",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Form the finite sum of the pullback sections multiplied by the pullbacks of the polynomial variables. Apply the existing zero-locus construction; compose its closed inclusion with the first product projection.",
+   "uses": [
+    "def-pc-zero-scheme",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The smooth locus is exactly the union of opens W for which W -> A^I_k is smooth. This is open, so its complement is closed. Apply IdealSheafData.vanishingIdeal to that closed subset. Its support is exactly the subset, giving the homeomorphism by setCongr. Compose the two closed inclusions with the second product projection to obtain p.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The polynomial algebra in finitely many variables is finite type over k. The affine ring-hom criterion transfers this to its spectrum morphism.",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-zero-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini; universal-family diagram and the paragraph giving the closed singular locus its reduced induced structure; Situation 0FD3 for the universal section"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universal zero scheme of a linear combination of sections of an invertible sheaf and its closed nonsmooth locus",
+   "results": "AlgebraicGeometry.Scheme.zeroLocus; AlgebraicGeometry.RingedSpace.zeroLocus; AlgebraicGeometry.Scheme.zeroLocus_isClosed; AlgebraicGeometry.Scheme.zeroLocus_def; AlgebraicGeometry.RingedSpace.zeroLocus_isClosed; AlgebraicGeometry.Scheme.zeroLocus_mono; AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop; AlgebraicGeometry.Scheme.zeroLocus_eq_univ_iff_subset_nilradical",
+   "date": "2026-10-19",
+   "verdict": "no match; related general infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "singular locus universal hyperplane family embeds into first order evaluation kernel",
+   "results": "ax_grothendieck_zeroLocus; MvPolynomial.ker_evalₗ; FirstOrder.Ring.mvPolynomial_zeroLocus_definable; FirstOrder.realize_genericPolyMapSurjOnOfInjOn; ax_grothendieck_of_definable; MvPolynomial.pointToPoint_zeroLocus_le; Algebra.smoothLocus_eq_compl_support_inter; MvPolynomial.zeroLocus_vanishingIdeal_le",
+   "date": "2026-10-19",
+   "verdict": "no match; related general infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "singular.*locus|universal.*[Zz]ero|first.order.*evaluation",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "date": "2026-10-19",
+   "verdict": "no match; related general infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniSingularLocusDimension",
+  "date": "2026-10-19",
+  "group": "Q7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniUniversalFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniUniversalFamily.lean",
+  "declaration": "AlgebraicGeometry.bertiniUniversalSection",
+  "declarations": [
+   "AlgebraicGeometry.bertiniUniversalSection",
+   "AlgebraicGeometry.bertiniUniversalIdeal",
+   "AlgebraicGeometry.bertiniUniversalProjection",
+   "AlgebraicGeometry.bertiniUniversalSingularLocus",
+   "AlgebraicGeometry.isClosed_bertiniUniversalSingularLocus",
+   "AlgebraicGeometry.bertiniSingularIdeal",
+   "AlgebraicGeometry.bertiniSingularToSource",
+   "AlgebraicGeometry.bertiniSingularHomeomorph",
+   "AlgebraicGeometry.bertiniCoefficient_locallyOfFiniteType"
+  ],
+  "statement": "def bertiniUniversalSection {k : Type u} [Field k] {Y : Scheme.{u}}\n    (f : Y ⟶ Spec (CommRingCat.of k)) (L : Y.Modules)\n    {I : Type u} [Fintype I] (s : I → Γ(L, ⊤)) :\n    Γ((Scheme.Modules.tensorPullback\n      (pullback.snd (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k)))\n        f)).obj L, ⊤)",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-64c49",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T132029-L-1404056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-64c49",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T132029-L-1404056",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new nodes/modules vs live clone: theorem signature identical, 4 defs moved verbatim to the publicly imported BertiniUniversalFamily, all 7 modules compile, importer BertiniSmoothMember compiles, axioms as expected, the one remaining sorry (bertini_singular_fibre_equations) checked as true against Stacks 0FD6/00T7"
+ }
+}

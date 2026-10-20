@@ -1,0 +1,109 @@
+{
+ "id": "lem-zl-symmetric-algebra-kernel-factor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof of the smooth Bertini input (Stacks varieties.tex, lemma-bertini): final paragraph: first-order evaluation is surjective and the singular fibre is contained in its kernel; the one-way hypersurface implication is supplied by Algebra Tag 00T7",
+   "via": [
+    "lem-zl-bertini-singular-first-order-model",
+    "lem-zl-bertini-singular-locus-dimension",
+    "lem-zl-bertini-smooth-member"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coordinate quotients factor through the dual kernel",
+ "statement": "Let K be a field, V and W K-vector spaces, A a commutative K-algebra, E:V -> W linear, and H:Sym_K(V*) -> A a surjective algebra homomorphism. If H kills the degree-one elements E*(phi) for every phi in W*, then there is a surjective algebra homomorphism G:Sym_K((ker E)*) -> A whose value on every restricted ambient functional agrees with H on that functional. Symmetric algebras have their usual universal property; no finite-dimensionality or surjectivity of E is required.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini, final paragraph: first-order evaluation and its kernel"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Restriction V* -> (ker E)* has a linear section Subspace.dualLift. Its kernel is the annihilator of ker E, equal to the range of E.dualMap by LinearMap.range_dualMap_eq_dualAnnihilator_ker. Thus the linear part t of H kills this kernel. Compose t with that section to get l. The difference phi-dualLift(restriction(phi)) is annihilating, so l(restriction(phi))=t(phi).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use SymmetricAlgebra.lift l to get G. The symmetric-algebra map R induced by restriction satisfies G.comp R=H by algHom_ext and equality on degree-one generators. Every element of A is H(b)=G(R(b)), so G is surjective. The generator equation is lift_ι_apply.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini, final paragraph: first-order evaluation and its kernel"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quotient of a symmetric algebra killing the dual of a linear map factors through the symmetric algebra on the dual of its kernel",
+   "results": "SymmetricAlgebra.lift; ModuleCon.quotientKerEquivOfSurjective; SymAlg.sym_surjective; lTensor_mkQ; Subspace.quotDualEquivAnnihilator; Subspace.quotEquivAnnihilator; LinearMap.quotKerEquivOfSurjective; SymmetricAlgebra.algHom",
+   "date": "2026-10-19",
+   "verdict": "No direct match. General symmetric-algebra, linear-algebra or smoothness infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric algebra homomorphism factor through the dual of a linear kernel",
+   "results": "IsSymmetricAlgebra.lift; SymmetricAlgebra.lift; IsSymmetricAlgebra.lift_unique; IsSymmetricAlgebra.lift_eq; IsSymmetricAlgebra.lift_comp_linearMap; SymmetricAlgebra.algebraMapInv; IsSymmetricAlgebra; SymmetricAlgebra.lift_ι_apply",
+   "date": "2026-10-19",
+   "verdict": "No direct match. General symmetric-algebra, linear-algebra or smoothness infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra.*ker|dualRestrict.*lift|lift.*dualRestrict",
+   "results": "Mathlib/LinearAlgebra/Dual/Lemmas.lean; Mathlib/LinearAlgebra/Dual/Lemmas.lean; Mathlib/LinearAlgebra/Dual/Lemmas.lean; Mathlib/LinearAlgebra/Dual/Lemmas.lean; Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+   "date": "2026-10-19",
+   "verdict": "No direct match. General symmetric-algebra, linear-algebra or smoothness infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniSingularLocusDimension",
+  "date": "2026-10-19",
+  "group": "Q7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.SymmetricAlgebraKernelFactor",
+  "file": "lean/Sheaf/LinearAlgebra/SymmetricAlgebraKernelFactor.lean",
+  "declaration": "symmetricAlgebra_factor_through_dual_kernel",
+  "declarations": [
+   "symmetricAlgebra_factor_through_dual_kernel"
+  ],
+  "statement": "theorem symmetricAlgebra_factor_through_dual_kernel\n    {K : Type u} [Field K]\n    {V : Type v} [AddCommGroup V] [Module K V]\n    {W : Type w} [AddCommGroup W] [Module K W]\n    {A : Type x} [CommRing A] [Algebra K A]\n    (E : V →ₗ[K] W) (H : SymmetricAlgebra K (Dual K V) →ₐ[K] A)\n    (hH : Function.Surjective H)\n    (hzero : ∀ φ : Dual K W, H (SymmetricAlgebra.ι K (Dual K V) (E.dualMap φ)) = 0) :\n    ∃ G : SymmetricAlgebra K (Dual K E.ker) →ₐ[K] A,\n      Function.Surjective G ∧\n      ∀ φ : Dual K V,\n        G (SymmetricAlgebra.ι K (Dual K E.ker) (E.ker.dualRestrict φ)) =\n          H (SymmetricAlgebra.ι K (Dual K V) φ)",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-64c49",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T132029-L-1404056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-64c49",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261020T132029-L-1404056",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new nodes/modules vs live clone: theorem signature identical, 4 defs moved verbatim to the publicly imported BertiniUniversalFamily, all 7 modules compile, importer BertiniSmoothMember compiles, axioms as expected, the one remaining sorry (bertini_singular_fibre_equations) checked as true against Stacks 0FD6/00T7"
+ }
+}
