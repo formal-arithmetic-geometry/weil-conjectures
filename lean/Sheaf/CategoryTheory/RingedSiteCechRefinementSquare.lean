@@ -23,6 +23,8 @@ import Sheaf.CategoryTheory.DoubleComplexTotal
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.Sites.DirectImageInjectiveEvaluationAcyclic
 import WeilConjectures.CategoryTheory.SiteCechComplex
+import Sheaf.CategoryTheory.RingedSiteCechRefinementSquareWitness
+import Sheaf.CategoryTheory.RingedSiteCechRefinementSquareEdgesUnique
 
 /-!
 # Ringed-site Čech comparison and refinement
@@ -346,8 +348,22 @@ theorem ringedSite_cech_refinement_square_rest
                   HomologicalComplex.homologyMap ((((SheafOfModules.forget R ⋙
                     PresheafOfModules.toPresheaf R.obj) ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op
                     X)).mapHomologicalComplex (ComplexShape.up ℕ)).map b) q) ∧
-              eM ≫ hH = HomologicalComplex.homologyMap γ q ≫ eN := by
-  sorry
+              eM ≫ hH = HomologicalComplex.homologyMap γ q ≫ eN   := by
+  intro q
+  obtain ⟨eM, hM⟩ :=
+    ringedSite_cech_refinement_square_rest_witness J K u hcover R R' ρ M N h hX huX
+      U v V w hU hV S T r a aTuple haTuple γ q
+  obtain ⟨heM, eN, hN⟩ := hM
+  obtain ⟨heN, hH, hHspec⟩ := hN
+  refine ⟨eM, ⟨heM, ?_⟩, ?_⟩
+  · refine ⟨eN, ⟨heN, hH, hHspec⟩, ?_⟩
+    intro eN' hN'
+    exact ((ringedSite_cech_refinement_square_edges_unique J K u hcover R R' ρ M N h
+      hX huX U v V w hU hV S T r a aTuple haTuple γ q eM eM heM heM).2 eN eN' heN
+      hN'.1).symm
+  · intro eM' hM'
+    exact ((ringedSite_cech_refinement_square_edges_unique J K u hcover R R' ρ M N h
+      hX huX U v V w hU hV S T r a aTuple haTuple γ q eM eM' heM hM'.1).1).symm
 
 theorem ringedSite_cech_refinement_square
     {C D : Type u} [SmallCategory C] [SmallCategory D]
