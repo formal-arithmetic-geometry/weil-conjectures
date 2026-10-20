@@ -23,96 +23,48 @@
  ],
  "proof": [
   {
-   "text": "Both curves in the statement are smooth affine connected curves in the sense of [def-sc-curves]. The sheaf $\\mu_m$ is torsion: multiplication by $m$ is zero, since each of its sections has $m$-th power one. Apply [lem-sc-affine-cohomological-dimension] to $F=\\mu_m$ on each curve to obtain $H^q(C,\\mu_m)=0$ for all $q>1$. This uses the affine bound, not a nonexistent affine clause of the general cohomological-dimension node.",
+   "text": "Apply the root-coefficient computation with m=ell^N and the given primitive root. Invertibility follows by taking a power and mapping scalars. This supplies the actual degree-zero sections, their restriction identity, root vanishings, and the actual degree-one Kummer generator.",
    "uses": [
-    "def-sc-curves",
-    "lem-sc-affine-cohomological-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03SC, theorem-vanishing-affine-curves, part (2); unit sk-prop-a1-kummer, Clause (c)"
-   }
-  },
-  {
-   "text": "Since $m$ is invertible in $k$, [lem-sc-kummer-exact] makes the sequence [def-sc-kummer-sequence] short exact on either curve. The global-sections functor is additive and left exact on the abelian category with enough injectives described by [def-weil-pbc-sites-and-cohomology]. Apply [lem-weil-pbc-derived-functor-long-exact] to this functor and the Kummer sequence. Its degree-zero and degree-one terms give\n$$0\\to H^0(C,\\mu_m)\\to\\Gamma(C,\\mathbf G_m)\\xrightarrow{u\\mapsto u^m}\\Gamma(C,\\mathbf G_m)\\xrightarrow{\\delta_C}H^1(C,\\mu_m)\\to H^1(C,\\mathbf G_m).$$\nBy [lem-sc-h1-gm-pic] the final term is $\\operatorname{Pic}(C)$, and this is zero on both curves by [lem-pur-affine-punctured-line-algebra]. Consequently $H^0(C,\\mu_m)$ is the kernel of the power map and $\\delta_C$ induces an isomorphism from its cokernel to $H^1(C,\\mu_m)$.",
-   "uses": [
-    "lem-sc-kummer-exact",
-    "def-sc-kummer-sequence",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-derived-functor-long-exact",
-    "lem-sc-h1-gm-pic",
-    "lem-pur-affine-punctured-line-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03PL (lemma-kummer-sequence) and 03PK (section-kummer), displayed long exact sequence following remark-no-kummer-sequence-zariski"
-   }
-  },
-  {
-   "text": "Compute the kernels in step 2 using [lem-pur-affine-punctured-line-algebra]. On the affine line the units are $k^\\times$, so the kernel is $\\mu_m(k)$. On the punctured line every unit has the unique form $a t^e$, with $a\\in k^\\times$ and $e\\in\\mathbf Z$; $(at^e)^m=1$ forces $me=0$, hence $e=0$, and then $a^m=1$. Thus both kernels are the same $\\mu_m(k)$, with restriction equal to the identity on that group. By [lem-sc-primitive-root], $\\zeta$ exists and $R\\to\\mu_m(k)$, $b\\mapsto\\zeta^b$, is an isomorphism. This gives the asserted degree-zero maps for coefficients $R$.",
-   "uses": [
-    "lem-pur-affine-punctured-line-algebra",
-    "lem-sc-primitive-root"
+    "lem-pur-kummer-root-line-computation"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/_section.md",
-    "place": "Proof, Degrees 0 and 1, the two kernel calculations; thm-pur-kummer-affine-line proof, H^0 sentence"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/_section.md",
+    "place": "Proof, Coefficients, Clause (c), and Degrees 0 and 1; Stacks etale-cohomology.tex, section-kummer (03PK), lemma-kummer-sequence (03PL), theorem-vanishing-affine-curves (03SC)(2)"
    }
   },
   {
-   "text": "Compute the cokernels in step 2, again using [lem-pur-affine-punctured-line-algebra] with its exponent $N$ specialized to $m$. Every $a\\in k^\\times$ is an $m$-th power, so the affine-line cokernel is zero, hence $H^1(\\mathbf A^1_k,\\mu_m)=0$. For the punctured line, $(a,e)\\mapsto e\\bmod m$ identifies the cokernel with $\\mathbf Z/m\\mathbf Z$: its kernel consists of $at^{mf}=(bt^f)^m$ after choosing $b^m=a$, and every residue is represented by $t^e$. For $C=\\mathbf G_{m,k}$, the inverse of the resulting identification of $H^1(C,\\mu_m)$ is $R\\to H^1(C,\\mu_m)$, $e\\mapsto\\delta_C(t^e)=e\\delta_C(t)$. In particular $1$ maps to $\\kappa_m(t)$.",
+   "text": "Apply finite-free coefficient comparison in every degree. Tensoring the degree-zero root equivalence and the punctured degree-one root equivalence with A gives the displayed generator formulas. A tensor factor that is zero gives zero; all remaining root groups are equivalent to the finite residue ring, so all tensor cohomology groups are finite. Naturality is the coefficient-map formula. Tensor associativity and the comparison for A tensor S give scalar extension and its pure-tensor formula.",
    "uses": [
-    "lem-pur-affine-punctured-line-algebra"
+    "lem-pur-kummer-finite-free-comparison"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/_section.md",
-    "place": "Proof, Degrees 0 and 1, the two unit quotients and the Kummer class of t"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/_section.md",
+    "place": "Proof, Coefficients, Clause (c), and Degrees 0 and 1; Stacks etale-cohomology.tex, section-kummer (03PK), lemma-kummer-sequence (03PL), theorem-vanishing-affine-curves (03SC)(2)"
    }
   },
   {
-   "text": "Here is the finite-free coefficient argument without an additional field hypothesis. By [def-pur-sheaf-tensor-product], a basis $A\\cong R^r$ gives $\\mu_m\\otimes_R A_C\\cong\\mu_m^{\\oplus r}$. With the cohomology model of [def-weil-pbc-sites-and-cohomology], take a nonnegative injective resolution $I^\\bullet$ of $\\mu_m$. The finite sum $(I^\\bullet)^{\\oplus r}$ is an injective resolution of $\\mu_m^{\\oplus r}$: extensions to a finite product of injectives are obtained one component at a time, by the defining extension property in [def-sp-injective-resolutions], and its kernels and images are computed componentwise. Global sections preserve these finite products, so their section complexes and their homology are the corresponding finite sums. This proves that $H^q(C,\\mu_m)\\otimes_R A\\to H^q(C,A(1))$, $x\\otimes a\\mapsto H^q(i_a)(x)$, is an isomorphism: in a basis it is precisely the sum of the maps from the $r$ summands. Additivity on morphisms follows in the same resolution model by adding lifts of coefficient maps and taking homology. The displayed map is defined without a basis; for $u:A\\to B$, $(1\\otimes u)i_a=i_{u(a)}$, so functoriality makes it natural in $A$. The empty basis gives zero sheaves and zero cohomology, and is included.",
+   "text": "Conjugate root restriction tensor the identity on A by the two coefficient comparisons to define restriction. The tensor formula proves both required equations. For uniqueness conjugate any proposed map by the same comparisons; extensionality on pure tensors forces equality. The argument includes A=0.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-sp-injective-resolutions"
+    "lem-pur-kummer-root-line-computation",
+    "lem-pur-kummer-finite-free-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 01FT, section-cohomology-sheaves, equation cohomology-object-site; elementary finite-sum calculation realizing unit Coefficients, final parenthesis"
-   }
-  },
-  {
-   "text": "Tensor the computations of steps 1, 3 and 4 with $A$ using step 5. The degree-zero generator is $\\zeta\\otimes a$, the degree-one map on the punctured line is $a\\mapsto H^1(i_a)(\\kappa_m(t))$, and all other stated groups vanish. The maps in degree zero restrict identically because they are constant sections. Each surviving group is isomorphic to the finite $R$-module $A$, proving finiteness without using a separate finiteness assertion. For finite free $S/R$, both $A$ and $A\\otimes_R S$ are finite free over $R$; apply step 5 to each and the associativity isomorphism $(H^q(C,\\mu_m)\\otimes_R A)\\otimes_R S\\cong H^q(C,\\mu_m)\\otimes_R(A\\otimes_R S)$. On a pure tensor this is exactly the coefficient comparison in the statement. Naturality from step 5 identifies the sections and the Kummer maps, including $\\kappa_m(t)\\otimes a\\otimes s\\mapsto H^1(i_{a\\otimes s})(\\kappa_m(t))$.",
-   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-kummer-affine-line.md",
-    "place": "Proof, final coefficient tensoring, finiteness and coefficient-base-change sentences"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/_section.md",
+    "place": "Proof, Coefficients, Clause (c), and Degrees 0 and 1; Stacks etale-cohomology.tex, section-kummer (03PK), lemma-kummer-sequence (03PL), theorem-vanishing-affine-curves (03SC)(2)"
    }
   }
  ],
  "proof_deps": [
-  "def-sc-curves",
-  "lem-sc-affine-cohomological-dimension",
-  "lem-sc-kummer-exact",
-  "def-sc-kummer-sequence",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-sc-h1-gm-pic",
-  "lem-pur-affine-punctured-line-algebra",
-  "lem-sc-primitive-root",
-  "def-pur-sheaf-tensor-product",
-  "def-sp-injective-resolutions"
+  "lem-pur-kummer-root-line-computation",
+  "lem-pur-kummer-finite-free-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-kummer-affine-line.md",
-  "place": "Proof, expanded into six steps following unit sk-prop-a1-kummer, Coefficients, Clause (c), and Degrees 0 and 1; Stacks Tags 03PK, 03PL, 03SC and 01FT checked"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/_section.md",
+  "place": "Proof, Coefficients, Clause (c), and Degrees 0 and 1; Stacks etale-cohomology.tex, section-kummer (03PK), lemma-kummer-sequence (03PL), theorem-vanishing-affine-curves (03SC)(2)"
  },
  "mathlib_searches": [
   {
@@ -256,5 +208,15 @@
   "group": "N9",
   "result": "pass",
   "note": "Statement, dependencies, constructions, docstrings, edge cases, and recorded per-file compilation checked; no substantive or mechanical faults found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-754d4",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261020T131146-L-1251365",
+  "kind": "interface",
+  "note": "independent cc review: delivered kummer_affine_line (fully proved, axioms propext/choice/Quot.sound) vs live statement (old `_` form closed by `exact` in scratch); 7 relocated defs byte-identical to live; both direct importers compile against delivered .lbuild"
  }
 }

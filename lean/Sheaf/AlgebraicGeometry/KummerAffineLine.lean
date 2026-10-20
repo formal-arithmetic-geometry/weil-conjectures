@@ -5,23 +5,10 @@ Authors: SHEAF group N9
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KummerModuleCoefficients
-public import WeilConjectures.AlgebraicGeometry.Curve
-public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.Algebra.Polynomial.Laurent
-public import Mathlib.LinearAlgebra.Dimension.Free
-import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
-import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra
-import WeilConjectures.AlgebraicGeometry.Sites.Gm
-import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Sheaf.AlgebraicGeometry.KummerLineGeometry
+import Sheaf.AlgebraicGeometry.KummerFiniteFreeComparison
+import Sheaf.AlgebraicGeometry.KummerRootLineComputation
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 
 /-!
 # Kummer computations on the affine and punctured lines
@@ -46,51 +33,31 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct
+open CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.KummerLine
 
-/-- The two affine schemes in the computation.
-Source: blueprint sk-prop-a1-kummer (blueprint: thm-pur-kummer-affine-line). -/
-def curve (k : Type u) [Field k] : Bool → Scheme.{u}
-  | false => Spec (CommRingCat.of (Polynomial k))
-  | true => Spec (CommRingCat.of (LaurentPolynomial k))
+private lemma exponent_isUnit (k : Type u) [Field k] (ℓ N : ℕ)
+    (hℓk : IsUnit (ℓ : k)) (b : Bool) :
+    IsUnit ((ℓ ^ N : ℕ) : Γ(curve k b, ⊤)) := by
+  simpa only [map_pow, map_natCast, Nat.cast_pow] using
+    (hℓk.pow N).map (scalar k b)
 
-/-- The structure morphisms of the two lines over k.
-Source: blueprint sk-prop-a1-kummer (blueprint: thm-pur-kummer-affine-line). -/
-def structureMap (k : Type u) [Field k] : (b : Bool) → curve k b ⟶ Spec (CommRingCat.of k)
-  | false => Spec.map (CommRingCat.ofHom Polynomial.C)
-  | true => Spec.map (CommRingCat.ofHom LaurentPolynomial.C)
+private def residueLinearMap (m : ℕ) {M P : Type (u + 1)}
+    [AddCommGroup M] [AddCommGroup P]
+    [Module (ULift.{u + 1} (ZMod m)) M] [Module (ULift.{u + 1} (ZMod m)) P]
+    (f : M →+ P) : M →ₗ[ULift.{u + 1} (ZMod m)] P :=
+  { f with
+    map_smul' := by
+      intro r x
+      have hr : r = ((ZMod.cast r.down : ℤ) : ULift.{u + 1} (ZMod m)) := by
+        apply ULift.ext
+        exact (ZMod.intCast_zmod_cast r.down).symm
+      change f (r • x) = r • f x
+      rw [hr, Int.cast_smul_eq_zsmul, Int.cast_smul_eq_zsmul, map_zsmul] }
 
-/-- The canonical open inclusion, induced by k[t] → k[t,t⁻¹].
-Source: blueprint sk-prop-a1-kummer (blueprint: thm-pur-kummer-affine-line). -/
-def inclusion (k : Type u) [Field k] : curve k true ⟶ curve k false :=
-  Spec.map (CommRingCat.ofHom Polynomial.toLaurent)
-
-/-- Pullback of a scalar to global functions on either line.
-Source: blueprint sk-prop-a1-kummer (blueprint: thm-pur-kummer-affine-line). -/
-def scalar (k : Type u) [Field k] (b : Bool) : k →+* Γ(curve k b, ⊤) :=
-  ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ (structureMap k b).appTop).hom
-
-/-- The global unit t on the punctured line.
-Source: blueprint sk-prop-a1-kummer (blueprint: thm-pur-kummer-affine-line). -/
-def coordinateUnit (k : Type u) [Field k] : Γ(curve k true, ⊤)ˣ :=
-  Units.map (Scheme.ΓSpecIso (CommRingCat.of (LaurentPolynomial k))).inv.hom.toMonoidHom
-    (LaurentPolynomial.isUnit_T (R := k) 1).unit
-
-/-- The Kummer generator is the actual connecting homomorphism applied to t.
-Source: blueprint sk-prop-a1-kummer, Degrees 0 and 1
-(blueprint: thm-pur-kummer-affine-line). -/
-def generator (k : Type u) [Field k] (m : ℕ) (hm : IsUnit (m : Γ(curve k true, ⊤))) :
-    Sheaf.H ((curve k true).rootsOfUnitySheaf m) 1 :=
-  (curve k true).kummerδ₀ m hm (Additive.ofMul (coordinateUnit k))
-
-/-- Restriction on root-sheaf cohomology, using the canonical pullback comparison.
-Source: Stacks, Tag 03PK (blueprint: thm-pur-kummer-affine-line). -/
-def rootRestriction (k : Type u) [Field k] (m q : ℕ) :
-    Sheaf.H ((curve k false).rootsOfUnitySheaf m) q →+
-      Sheaf.H ((curve k true).rootsOfUnitySheaf m) q :=
-  (Sheaf.H.map (Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf m (inclusion k)) q).comp
-    (Etale.cohomologyMap (inclusion k) ((curve k false).rootsOfUnitySheaf m) q)
+-- Keep the connecting map folded while elaborating coefficient formulas.
+attribute [local irreducible] generator
 
 /-- Kummer computations with all finite free module coefficients, their canonical degree-zero
 sections and degree-one generator, naturality, and finite free coefficient extension.
@@ -129,7 +96,8 @@ theorem kummer_affine_line (k : Type u) [Field k] [IsAlgClosed k]
       (∀ b : Bool,
         (kernel.ι (ℓ ^ N • 𝟙 (curve k b).gmSheaf)).hom.app
             (op (Scheme.Etale.mk (𝟙 (curve k b))))
-            (Sheaf.H.equiv₀ _ (MorphismProperty.Over.mkIdTerminal @Etale (curve k b)) (z b)) =
+            (Sheaf.H.equiv₀ ((curve k b).rootsOfUnitySheaf (ℓ ^ N))
+              (MorphismProperty.Over.mkIdTerminal @Etale (curve k b)) (z b)) =
           ULift.up (Additive.ofMul (Units.map (scalar k b).toMonoidHom ζ))) ∧
       rootRestriction k (ℓ ^ N) 0 (z false) = z true ∧
       (∀ (b : Bool) (A : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ N)))),
@@ -189,7 +157,113 @@ theorem kummer_affine_line (k : Type u) [Field k] [IsAlgClosed k]
           (∀ a : A, res (Sheaf.H.map
               (Scheme.kummerCoefficientInsertion (curve k false) (ℓ ^ N) A a) 0 (z false)) =
             Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k true) (ℓ ^ N) A a)
-              0 (z true))) := by
-  sorry
+              0 (z true)))  := by
+  classical
+  let m := ℓ ^ N
+  let R := ULift.{u + 1} (ZMod m)
+  have hmpos : 1 ≤ m := by
+    obtain ⟨n, hn⟩ := Nat.exists_eq_add_of_le hN
+    simpa only [m, hn] using Nat.one_le_pow (1 + n) ℓ hℓ.pos
+  let : NeZero m := ⟨by omega⟩
+  have hmk : IsUnit (m : k) := by simpa [m] using hℓk.pow N
+  let hm := exponent_isUnit k ℓ N hℓk true
+  obtain ⟨z, hz, hres, he0, hvan, he1⟩ :=
+    kummer_root_line_computation k m hmpos hmk ζ hζ hm
+  have cmp (b : Bool) (A : ModuleCat.{u + 1} R)
+      [Module.Free R A] [Module.Finite R A] (q : ℕ) :
+      ∃ e : (Sheaf.H ((curve k b).rootsOfUnitySheaf m) q ⊗[R] A) ≃ₗ[R]
+        Sheaf.H ((Scheme.kummerAbelianTwist (curve k b) m).obj A) q,
+        ∀ x a, e (x ⊗ₜ a) = Sheaf.H.map
+          (Scheme.kummerCoefficientInsertion (curve k b) m A a) q x := by
+    obtain ⟨e, he⟩ := Scheme.kummer_finite_free_comparison (curve k b) m A
+    exact ⟨e q, he q⟩
+  have gen (b : Bool) (q : ℕ) (w : Sheaf.H ((curve k b).rootsOfUnitySheaf m) q)
+      (ew : R ≃ₗ[R] Sheaf.H ((curve k b).rootsOfUnitySheaf m) q) (hw : ew 1 = w)
+      (A : ModuleCat.{u + 1} R) [Module.Free R A] [Module.Finite R A] :
+      ∃ e : A ≃ₗ[R] Sheaf.H ((Scheme.kummerAbelianTwist (curve k b) m).obj A) q,
+        ∀ a : A, e a = Sheaf.H.map
+          (Scheme.kummerCoefficientInsertion (curve k b) m A a) q w := by
+    obtain ⟨ec, hc⟩ := cmp b A q
+    refine ⟨(TensorProduct.lid R A).symm ≪≫ₗ
+      TensorProduct.congr ew (LinearEquiv.refl R A) ≪≫ₗ ec, ?_⟩
+    intro a
+    simpa only [LinearEquiv.trans_apply, TensorProduct.lid_symm_apply,
+      TensorProduct.congr_tmul, LinearEquiv.refl_apply, hw] using hc w a
+  have deg0 (b : Bool) (A : ModuleCat.{u + 1} R)
+      [Module.Free R A] [Module.Finite R A] :=
+    gen b 0 (z b) (he0 b).choose (he0 b).choose_spec A
+  refine ⟨hm, z, hz, hres, ?_, ?_⟩
+  · intro b A hfree hfinite
+    let := hfree
+    let := hfinite
+    refine ⟨deg0 b A, ?_, ?_, cmp b A, ?_, ?_⟩
+    · intro q hq
+      let := hvan b q hq
+      obtain ⟨ec, _⟩ := cmp b A q
+      exact ec.symm.injective.subsingleton
+    · intro q
+      have rootFinite : Finite (Sheaf.H ((curve k b).rootsOfUnitySheaf m) q) := by
+        by_cases hq : q = 0
+        · subst q
+          exact Finite.of_surjective (he0 b).choose (he0 b).choose.surjective
+        · cases b
+          · let := hvan false q (by simpa using Nat.pos_of_ne_zero hq)
+            infer_instance
+          · by_cases hq1 : q = 1
+            · subst q
+              exact Finite.of_surjective he1.choose he1.choose.surjective
+            · let := hvan true q (by simp only [↓reduceIte]; omega)
+              infer_instance
+      let := rootFinite
+      let : Module.Finite R (Sheaf.H ((curve k b).rootsOfUnitySheaf m) q) :=
+        Module.Finite.of_finite
+      have : Finite (Sheaf.H ((curve k b).rootsOfUnitySheaf m) q ⊗[R] A) :=
+        Module.finite_of_finite R
+      obtain ⟨ec, _⟩ := cmp b A q
+      exact Finite.of_surjective ec ec.surjective
+    · intro B _ _ f q x a
+      rw [← Sheaf.H.map_comp_apply]
+      apply congrArg (fun g ↦ Sheaf.H.map g q x)
+      apply Sheaf.hom_ext
+      ext U y
+      let η := (curve k b).kummerRootModulePresheaf m ◁
+        (Functor.const (curve k b).Etaleᵒᵖ).map (ModuleCat.ofHom f)
+      have h := congrArg (fun g ↦ g.app U)
+        (toSheafify_naturality (curve k b).smallEtaleTopology η)
+      exact (congrArg (fun g ↦ g (y ⊗ₜ[R] a)) h).symm
+    · intro S _ _ _ _ q
+      obtain ⟨ec, hc⟩ := cmp b A q
+      obtain ⟨ed, hd⟩ := cmp b (ModuleCat.of R (A ⊗[R] S)) q
+      refine ⟨TensorProduct.congr ec.symm (LinearEquiv.refl R S) ≪≫ₗ
+        TensorProduct.assoc R _ A S ≪≫ₗ ed, ?_⟩
+      intro x a s
+      change ed ((TensorProduct.assoc R _ A S) (ec.symm _ ⊗ₜ s)) = _
+      rw [← hc x a, LinearEquiv.symm_apply_apply, TensorProduct.assoc_tmul]
+      exact hd x (a ⊗ₜ s)
+  · intro A _ _
+    refine ⟨gen true 1 _ he1.choose he1.choose_spec A, ?_⟩
+    obtain ⟨ef, hf⟩ := cmp false A 0
+    obtain ⟨et, ht⟩ := cmp true A 0
+    let r := residueLinearMap m (rootRestriction k m 0)
+    let res := et.toLinearMap.comp ((TensorProduct.map r LinearMap.id).comp
+      ef.symm.toLinearMap)
+    have hformula (x : Sheaf.H ((curve k false).rootsOfUnitySheaf m) 0) (a : A) :
+        res (Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k false) m A a) 0 x) =
+          Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k true) m A a) 0
+            (rootRestriction k m 0 x) := by
+      change et (TensorProduct.map r LinearMap.id (ef.symm _)) = _
+      rw [← hf, LinearEquiv.symm_apply_apply, TensorProduct.map_tmul]
+      exact ht _ _
+    refine ⟨res, ⟨hformula, ?_⟩, ?_⟩
+    · intro a
+      rw [hformula, hres]
+    · intro other ho
+      apply LinearMap.ext
+      intro y
+      obtain ⟨t, rfl⟩ := ef.surjective y
+      induction t using TensorProduct.induction_on with
+      | zero => simp
+      | tmul x a => rw [hf, ho.1, hformula]
+      | add x y hx hy => simp only [map_add, hx, hy]
 
 end AlgebraicGeometry.KummerLine
