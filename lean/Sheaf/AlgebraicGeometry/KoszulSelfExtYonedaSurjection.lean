@@ -18,7 +18,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtDualExteriorConormal
 import Sheaf.AlgebraicGeometry.DeterminantDualPairing
-import Sheaf.AlgebraicGeometry.DeterminantDualPairingLocal
+import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingLocal
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
 import WeilConjectures.RingTheory.KoszulConormalBasis
@@ -130,10 +131,34 @@ theorem koszulRegularImmersion_self_ext_yoneda_surjection
   obtain ⟨c, hc⟩ := ExteriorAlgebra.exists_koszul_conormal_basis
     Γ(Y, U.1) (i.ker.ideal U) m f hreg hf
   obtain ⟨⟨e⟩, he⟩ := affine_conormal_frame i U m c
+  let eSource := Scheme.Modules.exteriorSheafPowerIso (Scheme.Modules.dual C) n
+  let eTarget := (Scheme.Modules.dualFunctor Z).mapIso
+    (Scheme.Modules.exteriorSheafPowerIso C n).symm.op
+  let p' := eSource.inv ≫ p ≫ eTarget.hom
+  have hp' (W : Z.Opens) (x : Fin n → C.val.obj (op W))
+      (φ : Fin n → (Scheme.Modules.dual C).val.obj (op W)) :
+      (p'.app W (Scheme.Modules.wedge φ)).app
+          (op (Over.mk (𝟙 W))) (Scheme.Modules.wedge x) =
+        (Matrix.of fun j k ↦ (show Z.presheaf.obj (op W) from
+          (φ k).app (op (Over.mk (𝟙 W))) (x j))).det := by
+    change (p.app W (eSource.inv.app W (Scheme.Modules.wedge φ))).app
+      (op (Over.mk (𝟙 W)))
+        ((Scheme.Modules.exteriorSheafPowerIso C n).inv.app W (Scheme.Modules.wedge x)) = _
+    rw [Scheme.Modules.exteriorSheafPowerIso_inv_wedge,
+      Scheme.Modules.exteriorSheafPowerIso_inv_wedge]
+    exact hp W x φ
+  have hb (W : Z.Opens) (g : W ⟶ i ⁻¹ᵁ U.1) :
+      Function.Bijective (p.app W) := by
+    have h := exterior_dual_pairing_app_bijective Z C n p' hp' (i ⁻¹ᵁ U.1) m e W g
+    change Function.Bijective
+      ((eTarget.hom.app W) ∘ (p.app W) ∘ (eSource.inv.app W)) at h
+    exact ((Function.Bijective.of_comp_iff' (ConcreteCategory.bijective_of_isIso
+      (eTarget.hom.app W)) (p.app W)).mp
+        ((Function.Bijective.of_comp_iff _
+          (ConcreteCategory.bijective_of_isIso (eSource.inv.app W))).mp h))
   have hps : Function.Surjective (p.stalkLinearMap z.1) :=
     stalk_surjective_of_local_app p z.1 (i ⁻¹ᵁ U.1) hzU fun W hW ↦
-      (exterior_dual_pairing_app_bijective Z C n p hp (i ⁻¹ᵁ U.1) m e W
-        (homOfLE hW)).2
+      (hb W (homOfLE hW)).2
   have hqs : Function.Surjective (q.stalkLinearMap z) :=
     restrict_stalk_surjective p V z hps
   let F := Scheme.Modules.toPresheaf V.toScheme ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} z

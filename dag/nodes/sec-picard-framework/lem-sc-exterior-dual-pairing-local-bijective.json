@@ -15,10 +15,9 @@
  ],
  "proof": [
   {
-   "text": "Obtain the section basis a, internal dual coordinate sections phi, increasing-wedge bases b and d, and evaluation equivalence c from the official local frame theorem. Unfold its exteriorPower and wedge constructions, including their instance arguments. Dependent rewriting by exteriorSheafPresheaf_eq_exteriorPower identifies the entire assertion with the legacy constructions; convert the induced recursors on pure wedges into casts, which simplify since the section objects coincide definitionally. Form the target basis by transporting d.dualBasis through c inverse. This is independent of f.",
+   "text": "Obtain the section basis a, internal dual coordinate sections phi, increasing-wedge bases b and d, and evaluation equivalence c directly from the official exterior_dual_local_frames theorem. Form the target basis by transporting d.dualBasis through c inverse. Both the theorem and its frames use the official exteriorPower and wedge constructions.",
    "uses": [
-    "lem-sc-exterior-dual-local-frames",
-    "lem-sc-exterior-sheaf-presheaf-upstream-comparison"
+    "lem-sc-exterior-dual-local-frames"
    ],
    "elementary": false
   },
@@ -37,13 +36,12 @@
  ],
  "proof_deps": [
   "lem-sc-exterior-dual-local-frames",
-  "lem-weil-pbc-exterior-power-free-basis",
-  "lem-sc-exterior-sheaf-presheaf-upstream-comparison"
+  "lem-weil-pbc-exterior-power-free-basis"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BRT determinant inversion, local frame reduction. Steps 1-2 of the old plan are isolated as the f-independent frame theorem; step 3 is now proved in Lean using exteriorPower.basis_coord and the finite dual basis. U4 retirement, 2026-10-20: obtain the frames from the official theorem, transporting the sheafification construction through the proved presheaf equality; the determinant calculation is unchanged."
+  "place": "Tag 0BRT determinant inversion. Retirement B8, 2026-10-21: node attached to the fully proved official theorem, which uses official local frames directly. Consumers transport their existing determinant morphisms by the canonical exterior-power comparison and cancel its section isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -102,14 +100,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DeterminantDualPairingLocal",
-  "file": "lean/Sheaf/AlgebraicGeometry/DeterminantDualPairingLocal.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DeterminantDualPairingLocal",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DeterminantDualPairingLocal.lean",
   "declaration": "AlgebraicGeometry.exterior_dual_pairing_app_bijective",
-  "statement": "theorem exterior_dual_pairing_app_bijective (X : Scheme.{u}) (M : X.Modules) (n : ℕ)\n    (f : Scheme.Modules.exteriorSheaf (Scheme.Modules.dual M) n ⟶\n      Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n))\n    (hf : ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U))\n      (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)),\n      (f.val.app (op U) (Scheme.Modules.exteriorSheafSection\n        (Scheme.Modules.dual M) n U φ)).app (op (Over.mk (𝟙 U)))\n        (Scheme.Modules.exteriorSheafSection M n U a) =\n      (Matrix.of fun i j ↦\n        (show X.presheaf.obj (op U) from\n          (φ j).app (op (Over.mk (𝟙 U))) (a i))).det)\n    (U : X.Opens) (r : ℕ)\n    (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r)))\n    (V : X.Opens) (g : V ⟶ U) :\n    Function.Bijective (f.val.app (op V))",
+  "statement": "theorem exterior_dual_pairing_app_bijective (X : Scheme.{u}) (M : X.Modules) (n : ℕ)\n    (f : Scheme.Modules.exteriorPower (Scheme.Modules.dual M) n ⟶\n      Scheme.Modules.dual (Scheme.Modules.exteriorPower M n))\n    (hf : ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U))\n      (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)),\n      (f.val.app (op U) (wedge (M := Scheme.Modules.dual M) (r := n) (U := U) φ)).app\n          (op (Over.mk (𝟙 U)))\n        (wedge (M := M) (r := n) (U := U) a) =\n      (Matrix.of fun i j ↦\n        (show X.presheaf.obj (op U) from\n          (φ j).app (op (Over.mk (𝟙 U))) (a i))).det)\n    (U : X.Opens) (r : ℕ)\n    (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r)))\n    (V : X.Opens) (g : V ⟶ U) :\n    Function.Bijective (f.val.app (op V))",
   "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-12"
+  "by": "B8",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf copy under coord/retire-items.tsv. Consumers use the official theorem via exteriorSheafPowerIso and its inverse-wedge formula; their statements are unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -124,12 +123,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-f5e4a",
-  "group": "U4",
+  "reviewer": "C-5683b",
+  "group": "B8",
   "result": "pass",
-  "landing": "20261020T163316-L-3729203",
+  "landing": "20261020T211636-L-3481975",
   "kind": "interface",
-  "note": "independent cc review: retire-items.tsv:223 retirement; node lean.statement vs WeilConjectures/AlgebraicGeometry/DeterminantDualLocalFrames.lean:55 (byte-identical); adapted DeterminantDualPairingLocal signature vs live (unchanged), compiled with its importer DeterminantExteriorDualIso; axioms clean"
+  "note": "independent cc review: retired Sheaf exterior_dual_pairing_app_bijective vs WeilConjectures twin (node lean.statement byte-identical); 3 adapted direct importers vs live (only plain import + proof changes), all compile (560 s limit under load 260; orig 182 s vs delivered 79 s); axioms clean"
  },
  "lean_audit": {
   "master": {
