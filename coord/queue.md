@@ -1,8 +1,8 @@
 # Work queue
 
-80 items; claim with `tools/claim.py next <group> [--stage N]`.
+95 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (19 clusters, 2098 modules)
+## Rework: quarantined by the upstream sync (34 clusters, 2096 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -10,20 +10,35 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 |---|---|---|---|
 | `Sheaf.CategoryTheory.RingedCechKoszulDualLimit` | 1 |  | error: Sheaf/CategoryTheory/RingedCechKoszulDualLimit.lean:452:11: error(lean.unknownIdentifier): Unknown constant `CochainComplex.telescopeShiftColimit` | Shea |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
+| `Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalUnderivedSectionsMate.lean:392:4: error: Application type mismatch: The argument | Functor.whiskerRight (baseChangeMap |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
 | `Sheaf.Paper.ModuleCupGlobalTensorPullback` | 1 |  | error: Sheaf/Paper/ModuleCupGlobalTensorPullback.lean:126:9: error(lean.unknownIdentifier): Unknown constant `CochainComplex.tensorPullbackRingMap` | | Note: A  |
+| `Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy` | 1 |  | error: Sheaf/Algebra/Homology/FiniteFilteredModuleHomotopy.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'Categor |
+| `Sheaf.CategoryTheory.DoubleComplexTruncationDecalage` | 1 |  | error: Sheaf/CategoryTheory/DoubleComplexTruncationDecalage.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'Catego |
+| `Sheaf.CategoryTheory.GoodTruncationTotalDecalage` | 1 |  | error: Sheaf/CategoryTheory/GoodTruncationTotalDecalage.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'CategoryTh |
+| `Sheaf.CategoryTheory.BoundedFilteredPageConstruction` | 1 |  | error: Sheaf/CategoryTheory/BoundedFilteredPageConstruction.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'Catego |
+| `Sheaf.Algebra.Homology.FilteredTensorGradedComparison` | 1 |  | error: Sheaf/Algebra/Homology/FilteredTensorGradedComparison.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'Categ |
+| `Sheaf.Algebra.Homology.FiniteFilteredLocalization` | 1 |  | error: Sheaf/Algebra/Homology/FiniteFilteredLocalization.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment already  |
+| `Sheaf.Paper.EtaleCERowCyclesNaturality` | 1 |  | error: Sheaf/Paper/EtaleCERowCyclesNaturality.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'CategoryTheory.Decre |
 | `Sheaf.RingTheory.AuslanderBuchsbaum` | 1 |  | error: Sheaf/RingTheory/AuslanderBuchsbaum.lean:52:8: error(lean.unknownIdentifier): Unknown identifier `depth_subsingleton` | Sheaf/RingTheory/AuslanderBuchsba |
+| `Sheaf.CategoryTheory.BoundedBelowCechConeComparison` | 1 |  | error: Sheaf/CategoryTheory/BoundedBelowCechConeComparison.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alread |
 | `Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso` | 1 |  | error: Sheaf/AlgebraicGeometry/QCohTensorResolutionChartComparisonIso.lean:1:0: error: import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde failed, environment a |
+| `Sheaf.TraceFormula.SimplicialDerivedImageSpectralSequence` | 1 |  | error: Sheaf/TraceFormula/SimplicialDerivedImageSpectralSequence.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment  |
 | `Sheaf.AlgebraicGeometry.StrictLocalDerivedExchangeLeray` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalDerivedExchangeLeray.lean:6:0: error: import Sheaf.AlgebraicGeometry.StrictHenselization failed, environment already c |
+| `Sheaf.Algebra.Homology.FirstQuadrantVerticalConeFiltration` | 1 |  | error: Sheaf/Algebra/Homology/FirstQuadrantVerticalConeFiltration.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains ' |
 | `Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute` | 1 |  | error: Sheaf/AlgebraicGeometry/RingedSpaceTensorPullbackAbsolute.lean:56:16: error(lean.unknownIdentifier): Unknown constant `SheafOfModules.changeOfRings` | |  |
 | `Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarExtCupInverseImage.lean:26:23: error(lean.unknownIdentifier): Unknown identifier `Field` | | Note: A public declaration `Fi |
+| `Sheaf.Algebra.Homology.FilteredHomComplexInvariance` | 1 |  | error: Sheaf/Algebra/Homology/FilteredHomComplexInvariance.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alread |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootPurityData` | 1 |  | error: Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootPurityData.lean:167:16: error(lean.unknownIdentifier): Unknown identifier `strictHenselization_structur |
+| `Sheaf.CategoryTheory.FiniteFilteredDerivedPresentation` | 1 |  | error: Sheaf/CategoryTheory/FiniteFilteredDerivedPresentation.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'Cate |
+| `Sheaf.Algebra.Homology.SplitFlatFilteredSheafModels` | 1 |  | error: Sheaf/Algebra/Homology/SplitFlatFilteredSheafModels.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alread |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescentRepresentative.lean:51:10: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange` | 1 |  | error: Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison fail |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarHomCompositeFormula` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarHomCompositeFormula.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors fa |
+| `Sheaf.CategoryTheory.SecondFiltrationTwoColumnImage` | 1 |  | error: Sheaf/CategoryTheory/SecondFiltrationTwoColumnImage.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alread |
 | `Sheaf.AlgebraicGeometry.AffinePerfectTensorRoof` | 1 |  | error: Sheaf/AlgebraicGeometry/AffinePerfectTensorRoof.lean:146:10: error(lean.unknownIdentifier): Unknown constant `CochainComplex.IsAcyclicTensorKFlat` | | No |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors faile |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/BaseChange/SmoothBaseChange.lean:1:0: error: import Sheaf.SixFunctors.ProEtale.BaseChange.Smooth |
@@ -38,7 +53,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 302 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (17)
+## Stage 3: modules to prove (15)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -51,12 +66,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.Sites.FinitarySliceEnoughPoints` | - | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.Sites.FpStalkRealization` | - | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.Sites.RingedSitePoint` | - | 1 | proof | 2 |
-| `Sheaf.CategoryTheory.Sites.ToposLocalizationSitePresentation` | - | 1 | proof | 2 |
 | `Sheaf.Algebra.ModuleDirectedColimitFinitePresentation` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.VectorBundleZeroSection` | - | 3 | proof | 3 |
 | `Sheaf.Paper.FinitarySiteEnoughPoints` | - | 1 | proof | 3 |
 | `Sheaf.Paper.SitePointReconstructionSets` | - | 1 | proof | 3 |
-| `Sheaf.TraceFormula.SieveSheavesCoveringSite` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.PointSystemRefineAll` | - | 1 | proof | 4 |
 | `Sheaf.TraceFormula.InverseSystemSitePoint` | - | 1 | proof | 4 |
 | `Sheaf.Paper.PointSystemRefine` | - | 1 | proof | 5 |
