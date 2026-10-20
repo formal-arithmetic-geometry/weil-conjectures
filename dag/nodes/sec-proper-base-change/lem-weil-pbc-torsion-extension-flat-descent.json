@@ -183,14 +183,15 @@
   "blueprint": "The item's five steps serve the blueprint ancestor thm-weil-pbc-finite-etale-lifting, ## Proof step (b) Essential surjectivity, via the formal-glueing equivalence in the algebraization branch; specifically the extension-descent invocation in Proposition 05ER."
  },
  "lean": {
-  "module": "Sheaf.RingTheory.TorsionExtensionFlatDescent",
+  "module": "WeilConjectures.RingTheory.TorsionExtensionFlatDescent",
   "declaration": "LinearMap.exists_torsion_extension_flat_descent",
-  "file": "lean/Sheaf/RingTheory/TorsionExtensionFlatDescent.lean",
-  "statement": "theorem exists_torsion_extension_flat_descent {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (_hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG) (_hquot : Function.Bijective (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map)) {N : Type w} [AddCommGroup N] [Module R N] {Q : Type x} [AddCommGroup Q] [Module R Q] (_hQ : ∀ x : Q, ∃ n : ℕ, 1 ≤ n ∧ ∀ r ∈ I ^ n, r • x = 0) {M' : Type y} [AddCommGroup M'] [Module S M'] (ι : S ⊗[R] N →ₗ[S] M') (π : M' →ₗ[S] S ⊗[R] Q) (_hι : Function.Injective ι) (_hιπ : Function.Exact ι π) (_hπ : Function.Surjective π) : ∃ (E : Type (max u w x)) (_ : AddCommGroup E) (_ : Module R E) (j : N →ₗ[R] E) (q : E →ₗ[R] Q), Function.Injective j ∧ Function.Exact j q ∧ Function.Surjective q ∧ ∃ θ : S ⊗[R] E ≃ₗ[S] M', θ.toLinearMap.comp (j.baseChange S) = ι ∧ π.comp θ.toLinearMap = q.baseChange S",
+  "file": "lean/WeilConjectures/RingTheory/TorsionExtensionFlatDescent.lean",
+  "statement": "theorem exists_torsion_extension_flat_descent\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]\n    (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)\n    (hquot : Function.Bijective\n      (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S)\n        Ideal.le_comap_map))\n    {N : Type w} [AddCommGroup N] [Module R N]\n    {Q : Type x} [AddCommGroup Q] [Module R Q]\n    (hQ : ∀ x : Q, ∃ n : ℕ, 1 ≤ n ∧ ∀ r ∈ I ^ n, r • x = 0)\n    {M' : Type y} [AddCommGroup M'] [Module S M']\n    (ι : S ⊗[R] N →ₗ[S] M')\n    (π : M' →ₗ[S] S ⊗[R] Q)\n    (_hι : Function.Injective ι) (_hιπ : Function.Exact ι π)\n    (_hπ : Function.Surjective π) :\n    ∃ (E : Type (max u w x)) (_ : AddCommGroup E) (_ : Module R E)\n      (j : N →ₗ[R] E) (q : E →ₗ[R] Q),\n      Function.Injective j ∧ Function.Exact j q ∧ Function.Surjective q ∧\n      ∃ θ : S ⊗[R] E ≃ₗ[S] M',\n        θ.toLinearMap.comp (j.baseChange S) = ι ∧\n        π.comp θ.toLinearMap = q.baseChange S",
   "branch": "sheaf-dag",
-  "by": "M1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "C2",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Retire the duplicate Sheaf theorem in favor of its proved upstream twin. The types agree modulo four hypothesis binder names. The DAG parent already imports the upstream module."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -201,17 +202,13 @@
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "R1",
+  "reviewer": "C-2d398",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261013T100110-L-2481807",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "LinearMap.exists_torsion_extension_flat_descent"
-  ],
-  "sorry_after": []
+  "landing": "20261020T211641-L-3483356",
+  "kind": "interface",
+  "note": "independent cc review: the delivered withdrawn stub and repointed node lean record with the live upstream twin WeilConjectures.RingTheory.TorsionExtensionFlatDescent (same type, only binder names differ; standard axioms only), with no importers of the retired module"
  }
 }
