@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.IrreducibleStratificationRefinement
-import Sheaf.AlgebraicGeometry.RefinementPreservesFiniteLisse
+import WeilConjectures.AlgebraicGeometry.RefinementPreservesFiniteLisse
 import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
 
 /-! Refinement of a finite lisse stratification by irreducible strata. -/

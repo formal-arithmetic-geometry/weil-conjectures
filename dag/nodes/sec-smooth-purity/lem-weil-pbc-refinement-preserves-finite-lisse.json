@@ -55,7 +55,7 @@
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/095A; https://stacks.math.columbia.edu/tag/03SI; https://stacks.math.columbia.edu/tag/03Q1",
-  "place": "095A pullback preservation, 03SI equivalence of sites/topoi, 03Q1 (3) stalk comparison; Lean adaptation by P1 of the upstream abelian-coefficient refinement argument"
+  "place": "095A pullback preservation, 03SI equivalence of sites/topoi, 03Q1 (3) stalk comparison; Lean adaptation by P1 of the upstream abelian-coefficient refinement argument; upstream declaration checked by H7 on 2026-10-21, with only propext, Classical.choice and Quot.sound; duplicate Sheaf module retired"
  },
  "mathlib_searches": [
   {
@@ -121,14 +121,15 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RefinementPreservesFiniteLisse",
-  "file": "lean/Sheaf/AlgebraicGeometry/RefinementPreservesFiniteLisse.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RefinementPreservesFiniteLisse",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RefinementPreservesFiniteLisse.lean",
   "declaration": "AlgebraicGeometry.Scheme.refinement_preserves_finite_lisse",
-  "statement": "theorem refinement_preserves_finite_lisse\n    (X : Scheme.{u})\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (T S : Stratification X) (hTS : T.Refines S)\n    (hS : ∀ k : Fin S.n,\n      IsFiniteLocallyConstantEtaleSheafOfSets\n        ((etaleSetPullback (S.immersion k)).obj F)) :\n    ∀ i : Fin T.n,\n      IsFiniteLocallyConstantEtaleSheafOfSets\n        ((etaleSetPullback (T.immersion i)).obj F)",
+  "statement": "theorem refinement_preserves_finite_lisse\n    (X : Scheme.{u})\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (T S : Stratification X) (hTS : T.Refines S)\n    (hS : ∀ k : Fin S.n,\n      IsFiniteLocallyConstantSheafOfTypes\n        ((etaleSetPullback (S.immersion k)).obj F)) :\n    ∀ i : Fin T.n,\n      IsFiniteLocallyConstantSheafOfTypes\n        ((etaleSetPullback (T.immersion i)).obj F)",
   "branch": "sheaf-dag",
-  "by": "V2",
-  "date": "2026-10-12"
+  "by": "H7",
+  "date": "2026-10-21",
+  "note": "The upstream declaration has the same elaborated type: IsLisseEtaleSheafOfSets is an abbrev of IsFiniteLocallyConstantSheafOfTypes. H7 retired the duplicate Sheaf module and adapted its sole direct importer; the mathematical dependency and its proof dependencies are retained."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -141,14 +142,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "C-348b3",
+  "group": "H7",
   "result": "pass",
-  "landing": "20261012T070545-L-3475085",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221215-L-4157276",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf.AlgebraicGeometry.RefinementPreservesFiniteLisse with the upstream twin WeilConjectures.AlgebraicGeometry.RefinementPreservesFiniteLisse (same name; same type via the IsLisseEtaleSheafOfSets abbrev; same private helpers); importer IrreducibleLisseRefinement and transitive IrreducibleLisseStrata compiled; axioms clean"
  },
  "lean_audit": {
   "master": {
