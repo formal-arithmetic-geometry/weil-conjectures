@@ -15,7 +15,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-public import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
