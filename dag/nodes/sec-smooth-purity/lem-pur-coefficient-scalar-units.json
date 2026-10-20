@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-coefficient-scalar-units",
+ "kind": "statement",
+ "title": "Multiplication units for derived scalar extension",
+ "statement": "On a site essentially small in the independent coefficient universe r, let p be presentations of scalar extension and n their normalized successive scalar-extension data [def-pur-ringed-coefficient-projection-data, lem-sfb-successive-derived-quotient-normalization]. Then there exists ScalarUnits(p): for every ring sheaf R, p(id_R).ordinary is naturally isomorphic to the identity by s tensor x mapped to s times x, and p(id_R).derived is naturally isomorphic to the identity, with component on Q(P) equal to its canonical computation morphism followed by Q of the termwise ordinary multiplication map. The representative formula holds for every complex, hence in particular for the flat-term K-flat representatives required by ScalarUnits. Given coherent scalar shifts normalized by their universal counits, the chosen derived multiplication units commute with these shifts.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, identity pullback; Modules on Sites, scalar-extension/restriction adjunction and scalar multiplication (Tag 03EL)."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-coefficient-projection-data",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Restriction along the identity ring map is canonically identity: construct its natural isomorphism by the identity linear map on every section, with inverse itself. Uniqueness of left adjoints identifies the given normalized ordinary scalar extension with identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The scalar-extension unit sends x to sectionTensor(1,x). The unit equation for the unique comparison of left adjoints therefore forces its ordinary unitor to take sectionTensor(1,x) to x. The sheafification unit is linear, so sectionTensor(s,x)=s times sectionTensor(1,x), and the comparison takes it to s times x. This uses only genuine module morphisms and the specified sheafification unit.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map the ordinary natural isomorphism to homotopy categories, then whisker with Qh and its left unitor. The identity derived functor is its own left derived functor, since Qh is a localization. Uniqueness of left derived functors gives the derived unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The leftDerivedNatTrans_app equation identifies the derived unitor at Qh(H) with the scalar computation counit followed by Qh of the ordinary homotopy unitor. Transport along quotientCompQhIso and use its naturality to obtain exactly the formula on Q(P). No K-flat condition is needed for this identity scalar map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Termwise natural transformations and the termwise identity comparison commute with shifts degree by degree. Precompose with the homotopy quotient and use the factorization isomorphisms to descend this property to the homotopy unit. Whisker by Qh and compose with the prescribed shift-compatible scalar counit. The derived unit computation formula then proves shift compatibility after precomposition by Qh. Every derived object is in the essential image of Qh, so shift compatibility descends to the unit itself.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, identity pullback; Modules on Sites, scalar-extension/restriction adjunction and scalar multiplication (Tag 03EL).; explicit normalization and transport details as in the proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Identity extension of scalars for a sheaf of modules is naturally isomorphic to the identity, and its derived functor has the scalar multiplication unitor",
+   "results": "8 hits: CommRingCat.moduleCatExtendScalarsPseudofunctor_mapId, ModuleCat.extendScalarsId, SheafOfModules.id_val, SheafOfModules.pushforwardId, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, PresheafOfModules.map_id",
+   "date": "2026-10-20",
+   "digest": "2e792c36f65722d7",
+   "verdict": "The ring-module identity comparison and universal derived comparison are in Mathlib; descent of the specified sheaf-module presentation and its multiplication/representative equations still require the proof given here."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsId",
+   "results": "9 hits: ModuleCat.extendScalarsId, ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.homEquiv_extendScalarsId",
+   "date": "2026-10-20",
+   "digest": "beef678cc5ad1014",
+   "verdict": "The ring-module identity comparison and universal derived comparison are in Mathlib; descent of the specified sheaf-module presentation and its multiplication/representative equations still require the proof given here."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatIso|leftDerivedNatTrans_app|rightKanExtension_coherentShift",
+   "results": "3 hits: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-20",
+   "digest": "0198a1f8a4f84fe8",
+   "verdict": "The ring-module identity comparison and universal derived comparison are in Mathlib; descent of the specified sheaf-module presentation and its multiplication/representative equations still require the proof given here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identity extension of scalars is naturally isomorphic to identity, compatible with derived functor counits",
+   "results": "8 hits: ModuleCat.extendScalarsId, ModuleCat.extendScalars_comp_id, ModuleCat.restrictScalarsId'App_hom_naturality, ModuleCat.ExtendScalars.map'_id, ModuleCat.restrictScalarsId'App_hom_naturality_assoc, ModuleCat.extendScalarsId_hom_app_one_tmul, CategoryTheory.WithTerminal.mapId, ModuleCat.restrictScalarsId",
+   "date": "2026-10-20",
+   "digest": "6d0dfb289153ad9d",
+   "verdict": "The ring-module identity comparison and universal derived comparison are in Mathlib; descent of the specified sheaf-module presentation and its multiplication/representative equations still require the proof given here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedCoefficientProjectionCocycle",
+  "date": "2026-10-21",
+  "group": "R4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Step 2, coherent quotient comparisons, and Step 3, successive coefficient extensions; isolates the proper coefficient-transpose cocycle used by the item in its reduction and integral/field comparison squares. This node supplies Multiplication units for derived scalar extension.",
+   "via": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedCoefficientScalarUnits",
+  "file": "lean/Sheaf/Paper/RingedCoefficientScalarUnits.lean",
+  "declaration": "SheafOfModules.RingedCoefficientProjection.coefficientScalarUnits",
+  "declarations": [
+   "SheafOfModules.RingedCoefficientProjection.coefficientScalarUnits"
+  ],
+  "statement": "theorem coefficientScalarUnits\n    [scalar : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S),\n      (p a).derived.CommShift ℤ]\n    (canonical : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S),\n      NatTrans.CommShift (p a).counit ℤ) :\n    ∃ u : ScalarUnits (p := p),\n      ∀ R : Sheaf J CommRingCat.{r}, NatTrans.CommShift (u.derived R).hom ℤ",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs live item module (verbatim move of 16 public records + 6 Prop cache instances, change record lists all 8 users); item proof vs the 6 sublemma nodes; sorry statements PullbackComparison/PullbackCoherence vs Stacks 03EL/0G7E/0D6D; importers RingedRefinementData/RingedRefinementClopen compiled against the delivery"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-coefficient-pullback-coherence",
+ "kind": "statement",
+ "title": "Balanced coherence of canonical coefficient pullback comparisons",
+ "statement": "In the setting and notation of def-pur-ringed-coefficient-projection-data, fix already constructed e:Comparisons(g,nY,nX) and multiplication units uY,uX. Then the inverse-image comparisons commute with the balanced scalar associators and multiplication units, precisely PullbackCoherence(g,nY,nX,e,uY,uX). This is a coherence result for already constructed inverse-image/tensor maps; it contains neither construction of e nor a law about its direct-image mate. All scalar, associator, inverse-image and mate shift equations are proved separately.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, common K-flat representatives for pullback composition; explicit balanced double-tensor and scalar multiplication calculations."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-coefficient-projection-data",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Represent every input by a common flat-term K-flat complex. The given scalar normalizations provide invertible computation maps, and inverse image preserves the representative class.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ordinary insertion fixes the scalar/inverse-image comparison uniquely by tensor generation and module-sheafification uniqueness. The two maps around the associator square take t tensor (s tensor x) to b(s)t tensor x. Thus they are equal chain maps. The representative equations identify these maps with the derived composites. Cancel the invertible computation maps and use the chosen resolution to deduce the composition equation on every derived object.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Both scalar unitors are multiplication. The identity comparison and its rings.map_id transport therefore make the unit square commute on ordinary tensors. Descend its equality using the representative equations for e and the units, giving the exact PullbackCoherence.unit equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, common K-flat representatives for pullback composition; explicit balanced double-tensor and scalar multiplication calculations.; explicit normalization and transport details as in the proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of derived scalar extension and exact inverse image under changing sheaves of rings, coefficient projection cocycle",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.Presentation.map_π_eq, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-20",
+   "digest": "5d1eb754b5af4631",
+   "verdict": "No exact match for normalized inverse image and derived scalar extension; Mathlib mate tools are used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(hComp|paste)|changeOfRings.*(comp|id)",
+   "results": "9 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-20",
+   "digest": "e61921979bf37c9a",
+   "verdict": "No exact match for normalized inverse image and derived scalar extension; Mathlib mate tools are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No exact match for normalized inverse image and derived scalar extension; Mathlib mate tools are used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of derived scalar extension and exact inverse image under changing sheaves of rings, coefficient projection cocycle",
+   "results": "8 hits: ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, SheafOfModules.restrictScalars, PresheafOfModules.pullback, SheafOfModules.restrictScalars_map_val, SheafOfModules.restrictScalars_obj_val, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, PresheafOfModules.Sheafify.SMulCandidate.h",
+   "date": "2026-10-20",
+   "digest": "2fd5ea66b6a55cb6",
+   "verdict": "No exact match for normalized inverse image and derived scalar extension; Mathlib mate tools are used in the parent proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedCoefficientProjectionCocycle",
+  "date": "2026-10-21",
+  "group": "R4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Step 2, coherent quotient comparisons, and Step 3, successive coefficient extensions; isolates the proper coefficient-transpose cocycle used by the item in its reduction and integral/field comparison squares. This node supplies Balanced coherence of canonical coefficient pullback comparisons.",
+   "via": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedCoefficientPullbackCoherence",
+  "file": "lean/Sheaf/Paper/RingedCoefficientPullbackCoherence.lean",
+  "declaration": "SheafOfModules.RingedCoefficientProjection.coefficientPullbackCoherence",
+  "declarations": [
+   "SheafOfModules.RingedCoefficientProjection.PullbackCoherence",
+   "SheafOfModules.RingedCoefficientProjection.PullbackShifts",
+   "SheafOfModules.RingedCoefficientProjection.coefficientPullbackCoherence"
+  ],
+  "statement": "theorem coefficientPullbackCoherence [PreservesFiniteLimits uInv] :\n    PullbackCoherence g nY nX e uY uX",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs live item module (verbatim move of 16 public records + 6 Prop cache instances, change record lists all 8 users); item proof vs the 6 sublemma nodes; sorry statements PullbackComparison/PullbackCoherence vs Stacks 03EL/0G7E/0D6D; importers RingedRefinementData/RingedRefinementClopen compiled against the delivery"
+ }
+}

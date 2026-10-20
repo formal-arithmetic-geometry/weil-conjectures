@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-coefficient-pullback-shifts",
+ "kind": "statement",
+ "title": "Shift compatibility of normalized inverse-image coefficient comparisons",
+ "statement": "For the normalized independent-universe geometric and coefficient data of def-pur-ringed-coefficient-projection-data, let e be already constructed Comparisons(g,nY,nX). Fix coherent scalar shifts whose universal counits commute with shifts. Then each specified derived inverse-image/scalar comparison e.derived(a) commutes with these shifts. No finite-limit assumption on uInv is needed beyond the supplied comparison and exact module inverse-image data; no coefficient map is required to be flat.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 07A6: normalized computation squares on K-flat representatives and canonical signed cochain shifts."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-coefficient-projection-data",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof": [
+  {
+   "text": "For a scalar presentation p, transport its homotopy counit along quotientCompQhIso and mapHomotopyCategoryFactors to the natural transformation on complexes whose component is computation(p,P). Every factor, including the functor associators, commutes with shifts when the counit does. The termwise ordinary comparison also commutes with shifts degree by degree.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Form the source computation beta by the scalar counit on Y followed by exact inverse-image factors and the termwise ordinary comparison. Form the target computation alpha by the exact inverse-image factors followed by the scalar counit on X. Their shift equations are compositions of the preceding shift equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The equation whiskerLeft(Q,e.hom) followed by alpha equals beta holds on flat-term K-flat complexes by Comparisons.representative. Both sides are natural transformations with source Q followed by a derived functor. Resolve any complex by a flat-term K-flat complex, invert the image of its augmentation under this source, and use naturality to extend the equation to all complexes.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every derived object is isomorphic to Q(P) for a flat-term K-flat resolution P. At P, beta is invertible because the given scalar computation is invertible. The comparison e is invertible, so its equation makes alpha invertible too. Compose the two sides of the comparison shift equation with shift(alpha(P)) and precompose with the invertible image of Q shift. The source and target computation shift equations identify the words; cancel both isomorphisms. Naturality transports equality from Q(P) to the arbitrary object. This proves compatibility with every integer shift without assuming that an evaluation detects derived equality.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 07A6: normalized computation squares on K-flat representatives and canonical signed cochain shifts.; explicit normalization and transport details as in the proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CommShift.*computation|computation.*CommShift",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "Mathlib has shift naturality and descent along a functor, but no theorem for the normalized coefficient computation square invertible on a resolving class. The cancellation/density argument is proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift.of_whiskerLeft",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "Mathlib has shift naturality and descent along a functor, but no theorem for the normalized coefficient computation square invertible on a resolving class. The cancellation/density argument is proved here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a natural transformation commutes with shifts if its composite with a normalized computation map commutes with shifts and that map is invertible on representatives of every object",
+   "results": "8 hits: CategoryTheory.NatTrans.CommShiftCore.shift_app_comm, CategoryTheory.LocalizerMorphism.natTransCommShift_hom, CategoryTheory.NatTrans.CommShiftCore.shift_comm, CategoryTheory.NatTrans.CommShift.shift_comm, CategoryTheory.NatTrans.shift_comm, CategoryTheory.NatTrans.shift_app_comm, CategoryTheory.Functor.CommShift.OfComp.map_iso_hom_app, CategoryTheory.Functor.CommShift.ofIso_compatibility",
+   "date": "2026-10-20",
+   "digest": "8a5bfa9dbf8ca1ba",
+   "verdict": "Mathlib has shift naturality and descent along a functor, but no theorem for the normalized coefficient computation square invertible on a resolving class. The cancellation/density argument is proved here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation commutes with shifts if its computation square does on a dense class of K-flat resolutions",
+   "results": "8 hits: CategoryTheory.NatTrans.shift_app_comm, CategoryTheory.LocalizerMorphism.natTransCommShift_hom, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift₂.commShift_app, CategoryTheory.NatTrans.CommShiftCore.shift_comm, CategoryTheory.NatTrans.CommShift.shift_comm, CategoryTheory.NatTrans.shift_comm, CategoryTheory.NatTrans.CommShiftCore.shift_app_comm",
+   "date": "2026-10-20",
+   "digest": "401d66224e0740c8",
+   "verdict": "Mathlib has shift naturality and descent along a functor, but no theorem for the normalized coefficient computation square invertible on a resolving class. The cancellation/density argument is proved here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedCoefficientProjectionCocycle",
+  "date": "2026-10-21",
+  "group": "R4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Step 2, coherent quotient comparisons, and Step 3, successive coefficient extensions; isolates the proper coefficient-transpose cocycle used by the item in its reduction and integral/field comparison squares. This node supplies Shift compatibility of normalized inverse-image coefficient comparisons.",
+   "via": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedCoefficientPullbackShifts",
+  "file": "lean/Sheaf/Paper/RingedCoefficientPullbackShifts.lean",
+  "declaration": "SheafOfModules.RingedCoefficientProjection.coefficientPullbackShifts",
+  "declarations": [
+   "SheafOfModules.RingedCoefficientProjection.coefficientPullbackShifts"
+  ],
+  "statement": "theorem coefficientPullbackShifts\n    {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :\n    NatTrans.CommShift (e.derived a).hom ℤ",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs live item module (verbatim move of 16 public records + 6 Prop cache instances, change record lists all 8 users); item proof vs the 6 sublemma nodes; sorry statements PullbackComparison/PullbackCoherence vs Stacks 03EL/0G7E/0D6D; importers RingedRefinementData/RingedRefinementClopen compiled against the delivery"
+ }
+}

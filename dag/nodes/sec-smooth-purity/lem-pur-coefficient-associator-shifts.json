@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-coefficient-associator-shifts",
+ "kind": "statement",
+ "title": "Shift compatibility of balanced derived scalar associators",
+ "statement": "For a scalar presentation family p on an essentially r-small site and its balanced normalization n [def-pur-ringed-coefficient-projection-data, lem-sfb-successive-derived-quotient-normalization], fix coherent integer shifts on every p(a).derived, normalized by shift compatibility of every universal counit. Then the given balanced derived comparison n.derived(a,b) commutes with shifts for each composable pair of coefficient maps a and b. No coefficient map is required to be flat and no complexes are assumed bounded.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 07A6: balanced scalar associators and the normalized derived comparisons; universal Kan extension uniqueness."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-coefficient-projection-data",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary balanced natural isomorphism maps termwise to cochain complexes with degreewise components. The termwise functor shift comparisons have identity components, so its shift equation follows by the component calculation. The homotopy quotient factorization isomorphisms transfer that equation to mapHomotopyCategoryCompIso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the two scalar universal counits and the termwise ordinary balanced comparison to get a natural transformation beta from Qh followed by the two derived scalar functors to the ordinary composite-map homotopy functor followed by Qh. Each factor commutes with shifts.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift beta through the right Kan extension counit of the derived composite-map scalar functor. Postcomposition by the shift equivalence preserves this Kan extension. Its uniqueness, applied to the two sides of the lift shift equation and the counit shift squares, proves compatibility of the universal lift with every shift.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On a flat-term K-flat representative, cancel the invertible composite-map counit. Its lift equation and the recorded normalization representative equation identify this lift with n.derived(a,b). Resolve every complex by flat-term K-flat complexes, invert the localization image of the augmentation, and use naturality to extend the equality to all Qh objects and hence all derived objects. Transfer the lift shift equation to the given balanced comparison.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 07A6: balanced scalar associators and the normalized derived comparisons; universal Kan extension uniqueness.; explicit normalization and transport details as in the proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryCompIso.*CommShift|CommShift.*mapHomotopyCategoryCompIso",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "Mathlib supplies Kan extension lifting and uniqueness and universal derived comparison equations. The missing compatibility of the specified balanced presentation is proved here using its representative equation and K-flat resolutions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.liftOfIsRightKanExtension",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "Mathlib supplies Kan extension lifting and uniqueness and universal derived comparison equations. The missing compatibility of the specified balanced presentation is proved here using its representative equation and K-flat resolutions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation between left derived functors commutes with shifts by its Kan extension counit equation",
+   "results": "8 hits: CategoryTheory.Functor.leftDerivedNatTrans_app, CategoryTheory.Functor.leftDerivedNatTrans_fac, CategoryTheory.Functor.leftDerivedNatTrans_fac_assoc, CategoryTheory.Functor.leftDerivedNatTrans_app_assoc, CategoryTheory.Functor.leftDerivedNatTrans_comp, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.leftDerived_fac_app, CategoryTheory.Functor.leftDerivedNatTrans",
+   "date": "2026-10-20",
+   "digest": "93ee52f76b714d16",
+   "verdict": "Mathlib supplies Kan extension lifting and uniqueness and universal derived comparison equations. The missing compatibility of the specified balanced presentation is proved here using its representative equation and K-flat resolutions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension associator commutes with shifts by uniqueness of right Kan extensions",
+   "results": "8 hits: CategoryTheory.Functor.rightKanExtensionUniqueOfIso, CategoryTheory.Functor.rightKanExtensionUnique, ModuleCat.extendScalars_assoc, CategoryTheory.NatTrans.CommShift.associator, CategoryTheory.Functor.pointwiseRightKanExtensionCompIsoOfPreserves_inv_fac_assoc, ModuleCat.extendScalars_assoc', CategoryTheory.Functor.liftOfIsRightKanExtension, CategoryTheory.Adjunction.rightAdjointCommShift_commShiftIso",
+   "date": "2026-10-20",
+   "digest": "94b979efd2ab4add",
+   "verdict": "Mathlib supplies Kan extension lifting and uniqueness and universal derived comparison equations. The missing compatibility of the specified balanced presentation is proved here using its representative equation and K-flat resolutions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedCoefficientProjectionCocycle",
+  "date": "2026-10-21",
+  "group": "R4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Step 2, coherent quotient comparisons, and Step 3, successive coefficient extensions; isolates the proper coefficient-transpose cocycle used by the item in its reduction and integral/field comparison squares. This node supplies Shift compatibility of balanced derived scalar associators.",
+   "via": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedCoefficientAssociatorShifts",
+  "file": "lean/Sheaf/Paper/RingedCoefficientAssociatorShifts.lean",
+  "declaration": "SheafOfModules.RingedCoefficientProjection.coefficientAssociatorShifts",
+  "declarations": [
+   "SheafOfModules.RingedCoefficientProjection.coefficientAssociatorShifts"
+  ],
+  "statement": "theorem coefficientAssociatorShifts\n    {R S T : Sheaf J CommRingCat.{r}} (a : R ⟶ S) (b : S ⟶ T) :\n    NatTrans.CommShift (n.derived a b).hom ℤ",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs live item module (verbatim move of 16 public records + 6 Prop cache instances, change record lists all 8 users); item proof vs the 6 sublemma nodes; sorry statements PullbackComparison/PullbackCoherence vs Stacks 03EL/0G7E/0D6D; importers RingedRefinementData/RingedRefinementClopen compiled against the delivery"
+ }
+}

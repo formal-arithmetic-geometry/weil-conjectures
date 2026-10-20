@@ -22,131 +22,53 @@
  ],
  "proof": [
   {
-   "text": "Put $A_Y=A$, $B_Y=B$, $C_Y=C$. For $D=A,B,C$ set $L_D=u_D^{-1}:D(D_Y)\\to D(D_X)$ and $G_D=Ru_{*,D}:D(D_X)\\to D(D_Y)$. These are the canonical derived pullback/direct-image adjunctions $L_D\\dashv G_D$, with unit $\\eta_D$ and counit $\\varepsilon_D$. The module pullback formula is $D_X\\otimes_{u^{-1}D_Y}u^{-1}(-)$, and its derived version tensors over the ring $u^{-1}D_Y$ on $\\mathscr X$. Since $D_X=u^{-1}D_Y$, this is just the exact coefficient inverse image. In particular there is no tensor over $D_Y$ on $\\mathscr X$. The cited K-flat preservation theorem applies to these ringed morphisms and also to identity-topos coefficient changes; thus all ensuing compositions of derived pullbacks can be computed on one K-flat flat-term representative.",
+   "text": "Construct the ordinary and derived insertion/K-flat-normalized inverse-image coefficient comparisons. Independently construct the ordinary multiplication units and their derived representative formulas. Choose coherent scalar shifts normalized by the universal counits and prove shift compatibility of the scalar associators by their universal lift. Prove inverse-image comparison shifts by the normalized source/target computation square and resolution density. Apply the balanced pullback coherence lemma to the given comparison and multiplication units.",
    "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-pur-coefficient-pullback-comparison",
+    "lem-pur-coefficient-scalar-units",
+    "lem-pur-coefficient-scalar-shifts",
+    "lem-pur-coefficient-associator-shifts",
+    "lem-pur-coefficient-pullback-shifts",
+    "lem-pur-coefficient-pullback-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 0G7E (lemma-pullback-K-flat); coefficient inverse images have their specified ring identifications"
-   }
+   "elementary": false
   },
   {
-   "text": "For $a:A\\to B$ the two composites of ringed-topos morphisms from $(\\mathscr X,B_X)$ to $(\\mathscr Y,A_Y)$ agree: their ring map is $u^{-1}a$. The canonical derived pullback-composition comparisons therefore give an isomorphism\n$$c_a:L_BS_a^Y\\xrightarrow{\\sim}S_a^XL_A$$\nof functors $D(A_Y)\\to D(B_X)$. Apply the cited composition-comparison theorem to the two paths through $(\\mathscr Y,B_Y)$ and $(\\mathscr X,A_X)$; its last clause supplies the identification of their equal composite morphisms. Its K-flat description identifies $c_a$ with the inverse-image/balanced-tensor comparison: for a K-flat flat-term $P$, both sides are canonically $u^{-1}P\\otimes_{A_X}B_X$, as complexes of $B_X$-modules. The tensor-pullback theorem ensures that each pullback of $P$ is still an admissible K-flat flat-term complex. Define $c_b,c_{ba}$ in the same way. These are isomorphisms in the changed coefficient category, not merely after restriction of scalars.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat); the commuting coefficient-change square"
-   }
-  },
-  {
-   "text": "Use the cited balanced scalar associator $\\tau_T:S_b^TS_a^T\\cong S_{ba}^T$, represented by $(x\\otimes s)\\otimes t\\mapsto x\\otimes b_T(s)t$. On a K-flat flat-term representative the comparisons of Step 2 only identify inverse image of a tensor with tensor of inverse images. Thus both composites from $L_CS_b^YS_a^Y$ to $S_{ba}^XL_A$ send a double tensor $(x\\otimes s)\\otimes t$ to $x\\otimes b_X(s)t$, after the inverse-image identifications. They give the equality\n$$(\\tau_XL_A)\\circ(S_b^Xc_a)\\circ(c_bS_a^Y)=c_{ba}\\circ(L_C\\tau_Y).$$\nThis is an equality of $C_X$-linear chain maps on the common representative, hence in $D(C_X)$. The cited comparisons are computed on these representatives, so this verifies their coherence rather than assuming it. The same formulas show that $c_{\\mathrm{id}}=1_{L_A}$ under scalar multiplication unitors and that the comparisons are natural in the ring maps.",
-   "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D (lemma-derived-pullback-composition); explicit double-tensor calculation with the associator"
-   }
-  },
-  {
-   "text": "Apply the definition of an adjunction mate with $L_1=L_A$, $R_1=G_A$, $L_2=L_B$, $R_2=G_B$, $G=S_a^Y$, $H=S_a^X$, and square $\\alpha=c_a:L_BS_a^Y\\to S_a^XL_A$. Its mate has component\n$$S_a^YG_AM\\xrightarrow{\\eta_{B,S_a^YG_AM}}G_BL_BS_a^YG_AM\\xrightarrow{G_B(c_{a,G_AM})}G_BS_a^XL_AG_AM\\xrightarrow{G_BS_a^X(\\varepsilon_{A,M})}G_BS_a^XM.$$\nIts transpose under precisely $L_B\\dashv G_B$ is $S_a^X(\\varepsilon_{A,M})\\circ c_{a,G_AM}$, the composite defining $\\chi_a$ in the statement. Thus $\\chi_a=c_a^\\flat$. The same substitution identifies $\\chi_b=c_b^\\flat$ and $\\chi_{ba}=c_{ba}^\\flat$. No composite such as $S_a^XL_A$ is being asserted to have right adjoint $G_B$.",
+   "text": "At each coefficient use the canonical derived inverse-image/direct-image adjunction. For comparison chi_a, mateEquiv_counit gives L_S(chi_a) followed by the S-counit as e_a followed by scalar extension of the R-counit. To prove the cocycle, apply injectivity of the inverse adjunction Hom bijection. Expand the transpose using this identity, counit naturality, naturality of e_b, scalar functoriality, and naturality of the target associator. The balanced pullback composition equation then identifies the transposes. No mate is inverted.",
    "uses": [
     "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7 (remark-base-change); the defining mate formula with the actual source and target adjunctions"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply clause (1), pasting along $G,H$, of the cited mate theorem with $L_1=L_A$, $L_2=L_B$, $L_3=L_C$, their right adjoints $G_A,G_B,G_C$, and $G=S_a^Y$, $H=S_a^X$, $G_2=S_b^Y$, $H_2=S_b^X$, $\\alpha=c_a$, $\\beta=c_b$. It states that\n$$\\gamma=(S_b^Xc_a)\\circ(c_bS_a^Y):L_CS_b^YS_a^Y\\to S_b^XS_a^XL_A$$\nhas mate $\\zeta=(\\chi_bS_a^X)\\circ S_b^Y\\chi_a$. To include the associators explicitly, transpose the two desired maps under $L_C\\dashv G_C$. By the mate definition and naturality of the counit, the transpose of $G_C\\tau_X\\circ\\zeta$ at $M$ is\n$$\\tau_{X,M}\\circ S_b^XS_a^X(\\varepsilon_{A,M})\\circ\\gamma_{G_AM}.$$\nNaturality of $\\tau_X$ and Step 3 turn this into\n$$S_{ba}^X(\\varepsilon_{A,M})\\circ c_{ba,G_AM}\\circ L_C(\\tau_{Y,G_AM}),$$\nwhich is the transpose of $\\chi_{ba,M}\\circ\\tau_{Y,G_AM}$. The adjunction bijection proves equality in $D(C_Y)$, giving the stated cocycle. Clause (2), which instead composes adjunctions, is not used.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-mate",
-    "lem-sfb-successive-derived-quotient-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47 (remark-compose-base-change-horizontal), verification by clause (1) of mate pasting and the adjunction bijection"
-   }
+   "text": "For the identity map, transpose under the same adjunction. Counit naturality and the pullback unit equation identify the transpose with scalar-unit multiplication followed by the geometric counit. The adjunction triangle identity gives the claimed identity mate. For a commuting coefficient square, cancellation of the balanced source associator identifies each successive word with the single comparison for its composite. The equality of composite ring maps and eqToHom_naturality identify these two comparisons.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For an identity coefficient map, Step 3 gives the square $c_{\\mathrm{id}}=1_{L_A}$. Its transpose at $M$ is $\\varepsilon_{A,M}:L_AG_AM\\to M$, which need not be an identity. The mate formula gives $G_A(\\varepsilon_{A,M})\\circ\\eta_{A,G_AM}=1_{G_AM}$ by the triangle identity, equivalently clause (4) of the cited mate theorem. Thus $\\chi_{\\mathrm{id}}=1_{G_A}$ under the scalar unitors. For a commutative square of coefficient rings, apply Step 5 to each path $A\\to B\\to D$ and $A\\to C\\to D$. After the respective balanced tensor identifications both maps equal $\\chi_{A\\to D}$; their equality follows because the composite ring homomorphisms are equal. The associators are natural in those maps by the cited normalization theorem, so this is the specified square identity, with no choice of identification.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-mate",
-    "lem-sfb-successive-derived-quotient-normalization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47 (remark-compose-base-change-horizontal); identity from the adjunction triangle identity, square from the two factorizations"
-   }
+   "text": "The canonical right-derived functor unit commutes with shifts: precompose with the K-injective localization equivalence, where it is the identity. The ordinary adjunction unit, mapped to homotopy and derived categories, has the canonical termwise shift compatibility; combine its factorization with that right-derived unit to prove shift compatibility of the canonical derived adjunction unit. Adjunction.CommShift.mk' and the mate shift instance then give the shift equation for each comparison. Combine it with the input scalar, associator and unit shift equations to construct ShiftLaws.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Check shifts before taking mates. Scalar extension by a ring sheaf uses that ring in cochain degree zero. For every integer $n$, on a K-flat representative its shift comparison is the chain identification $P[n]\\otimes_A B\\cong(P\\otimes_A B)[n]$; both differentials are $(-1)^n(d_P\\otimes1)$. Exact inverse image has the same termwise shift identification. The maps $c_a,c_b,c_{ba}$ of Step 2 only identify these tensors, and $\\tau_T$ sends $(x\\otimes s)\\otimes t$ to $x\\otimes b_T(s)t$ with $s,t$ in degree zero. Neither moves a positive-degree factor past another. Therefore these chain maps commute with the canonical shifts, within $D(B_X)$, $D(C_X)$, and the corresponding categories on $Y$. The cited K-flat computation and scalar normalization identify these chain maps with the actual derived comparisons, so this check does not use a claim that restriction of scalars detects equality.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sfb-successive-derived-quotient-normalization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition); direct cochain-shift calculation for degree-zero coefficient tensors"
-   }
-  },
-  {
-   "text": "For each $D=A,B,C$, the derived-adjunction shift theorem applies to the ringed morphism $(\\mathscr X,D_X)\\to(\\mathscr Y,D_Y)$, including the target coefficient adjunction $L_B\\dashv G_B$ (or $L_C\\dashv G_C$). It states that both its unit and its counit commute with every canonical integer shift. Now the formula of Step 4 expresses $\\chi_a$ as $G_BS_a^X\\varepsilon_A\\circ G_B(c_aG_A)\\circ\\eta_BS_a^YG_A$. Step 7 supplies shift compatibility of $S_a^X,S_a^Y,c_a$, and the cited theorem supplies it for $\\eta_B,\\varepsilon_A$ and the adjoint functors. Composing their shift squares proves $s_{G_BS_a^X}\\chi_{a,M[n]}=\\chi_{a,M}[n]s_{S_a^YG_A}$ as an equality in $D(B_Y)$. Repeat with $b,ba$ and combine with Step 7 for $\\tau$. Hence the cocycle and square equalities respect shifts in their target coefficient categories. Naturality follows from the displayed mate formula, naturality of units/counits, and the representative formulas of Steps 2–3. No step requires flatness of the coefficient maps or invertibility of a mate.",
-   "uses": [
-    "lem-weil-pbc-derived-adjunction-shift",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint); canonical derived-adjunction shifts applied separately at every coefficient, followed by composition of the displayed shift squares"
-   }
-  },
-  {
-   "text": "For strict inverse systems use the small inverse-sequence indexing category and its diagram topos. The diagram-site realization and the system-sections lemma identify a strict system with a module over the corresponding ring object there, and supply the morphism $u_\\bullet$ of diagram topoi, its inverse image and derived direct image, and the derived scalar-extension operations for compatible ring-system maps. Apply Steps 1–8 directly on these two small ringed diagram topoi with ring objects $A_\\bullet\\to B_\\bullet\\to C_\\bullet$. The system lemma identifies their specified exchange maps with precisely the adjunction-mate words used here, and their units, counits and scalar tensors with the specified system operations. Thus the transposition and double-tensor calculations prove identities of maps in $D(\\mathscr S(C))$ itself, including shifts there. The lemma also says evaluation agrees with these constructions, but equality is already proved before evaluation. No claim that evaluations detect equality of arbitrary derived morphisms, and no passage through total inverse limit, is used.",
-   "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent diagram-topos supplement using the existing system realization and operations; Tags 07A6 and 0E47 applied on the diagram topoi"
-   }
+   "text": "The whole argument is uniform for arbitrary sites and their ring sheaves. Apply it first to J,K and then to their actual coefficientSequenceTopology sites. The second application proves the system assertion before evaluation or inverse limit, directly in the specified derived categories.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-adjunction-mate",
-  "lem-coef-semilinear-derived-sections",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-pbc-derived-adjunction-shift",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-pur-coefficient-associator-shifts",
+  "lem-pur-coefficient-pullback-coherence",
+  "lem-pur-coefficient-pullback-comparison",
+  "lem-pur-coefficient-pullback-shifts",
+  "lem-pur-coefficient-scalar-shifts",
+  "lem-pur-coefficient-scalar-units"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A7 and 0E47, expanded via coefficient-side mate pasting (clause 1); Tags 0D6D, 0G7E and 07A6 for the K-flat comparison and adjunction foundations; shifts and diagram-topos clauses checked explicitly"
+  "place": "Tags 07A7 and 0E47: explicit counit transposition and naturality; Tags 0D6D and 0G7E isolated as the comparison/coherence sublemmas. Canonical derived shift-unit proof uses the K-injective localization equivalence and the termwise adjunction."
  },
  "mathlib_searches": [
   {
@@ -295,15 +217,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-pbc-mate-pasting",
-  "def-weil-pbc-adjunction-mate",
-  "lem-weil-pbc-derived-adjunction-shift",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-coef-semilinear-derived-sections"
+  "def-weil-pbc-adjunction-mate"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -325,22 +239,6 @@
   "module": "Sheaf.Paper.RingedCoefficientProjectionCocycle",
   "declaration": "SheafOfModules.RingedCoefficientProjection.ringedCoefficientProjectionCocycle",
   "declarations": [
-   "SheafOfModules.RingedCoefficientProjection.underlying",
-   "SheafOfModules.RingedCoefficientProjection.Scalars",
-   "SheafOfModules.RingedCoefficientProjection.insertion",
-   "SheafOfModules.RingedCoefficientProjection.computation",
-   "SheafOfModules.RingedCoefficientProjection.Geometry",
-   "SheafOfModules.RingedCoefficientProjection.Geometry.left",
-   "SheafOfModules.RingedCoefficientProjection.Geometry.right",
-   "SheafOfModules.RingedCoefficientProjection.Geometry.adjunction",
-   "SheafOfModules.RingedCoefficientProjection.Comparisons",
-   "SheafOfModules.RingedCoefficientProjection.ScalarUnits",
-   "SheafOfModules.RingedCoefficientProjection.comparison",
-   "SheafOfModules.RingedCoefficientProjection.targetAssociator",
-   "SheafOfModules.RingedCoefficientProjection.successive",
-   "SheafOfModules.RingedCoefficientProjection.Laws",
-   "SheafOfModules.RingedCoefficientProjection.ShiftLaws",
-   "SheafOfModules.RingedCoefficientProjection.Assertion",
    "SheafOfModules.RingedCoefficientProjection.ringedCoefficientProjectionCocycle"
   ],
   "file": "lean/Sheaf/Paper/RingedCoefficientProjectionCocycle.lean",
@@ -349,6 +247,16 @@
   "by": "NL",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The canonical comparison family is normalized on ordinary scalar insertion and K-flat representatives; the theorem states cocycle, multiplication-unit and arbitrary commuting-square identities, shift compatibility, and the identical assertion on the actual strict-system sequence sites."
+  "note": "The theorem signature is unchanged. All auxiliary public interfaces retain their exact names and types through the public import of RingedCoefficientProjectionData; its definition node carries their Lean attachments."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs live item module (verbatim move of 16 public records + 6 Prop cache instances, change record lists all 8 users); item proof vs the 6 sublemma nodes; sorry statements PullbackComparison/PullbackCoherence vs Stacks 03EL/0G7E/0D6D; importers RingedRefinementData/RingedRefinementClopen compiled against the delivery"
  }
 }

@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-coefficient-pullback-comparison",
+ "kind": "statement",
+ "title": "Canonical inverse-image coefficient comparison",
+ "statement": "Let uInv be a finite-limit-preserving left adjoint between the set-sheaf topoi of two sites essentially small in r, and let g be its normalized ring and exact module inverse-image geometry. Let pY and pX be scalar-extension presentations and nY and nX their normalizations [def-pur-ringed-coefficient-projection-data]. Then Comparisons(g,nY,nX) is nonempty: for each ring-sheaf map a:R to S, there is an ordinary natural isomorphism E_a^Y then u_S inverse image to u_R inverse image then E_(u inverse a)^X, normalized by scalar insertion, and a derived natural isomorphism between the corresponding functors, with precisely the computation-counit representative equation on flat-term K-flat complexes. This statement constructs comparison data only; it asserts no composition, unit, square or projection-mate law.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition, applied to the two coefficient-change factorizations; Tag 0G7E, lemma-pullback-K-flat; ordinary balanced scalar-extension universal property."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-coefficient-projection-data",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Inverse image preserves the balanced coequalizer defining scalar extension, because it preserves colimits and finite products. The algebraic graph equations transport addition and scalar multiplication. The ring naturality equation identifies coefficient actions. Construct forward and inverse maps by the balanced pairing; tensor generation and sheafification uniqueness show they are inverse. Both paths on scalar insertion are the insertion for the inverse-image module.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a flat-term K-flat resolution of a complex. Inverse image and scalar extension preserve the relevant K-flat flat-term class and acyclic comparisons. Hence both composites compute the derived pullback of the same composite ringed map on this resolution.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the ordinary comparison and cancel the invertible computation counits. Naturality and independence of resolution are localization uniqueness. Transport through the exact inverse-image mapDerivedCategoryFactors isomorphisms to obtain exactly Comparisons.representative.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition, applied to the two coefficient-change factorizations; Tag 0G7E, lemma-pullback-K-flat; ordinary balanced scalar-extension universal property.; explicit normalization and transport details as in the proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of derived scalar extension and exact inverse image under changing sheaves of rings, coefficient projection cocycle",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.Presentation.map_π_eq, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-20",
+   "digest": "5d1eb754b5af4631",
+   "verdict": "No exact match for normalized inverse image and derived scalar extension; Mathlib mate tools are used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(hComp|paste)|changeOfRings.*(comp|id)",
+   "results": "9 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-20",
+   "digest": "e61921979bf37c9a",
+   "verdict": "No exact match for normalized inverse image and derived scalar extension; Mathlib mate tools are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No exact match for normalized inverse image and derived scalar extension; Mathlib mate tools are used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of derived scalar extension and exact inverse image under changing sheaves of rings, coefficient projection cocycle",
+   "results": "8 hits: ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, SheafOfModules.restrictScalars, PresheafOfModules.pullback, SheafOfModules.restrictScalars_map_val, SheafOfModules.restrictScalars_obj_val, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, PresheafOfModules.Sheafify.SMulCandidate.h",
+   "date": "2026-10-20",
+   "digest": "2fd5ea66b6a55cb6",
+   "verdict": "No exact match for normalized inverse image and derived scalar extension; Mathlib mate tools are used in the parent proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedCoefficientProjectionCocycle",
+  "date": "2026-10-21",
+  "group": "R4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Step 2, coherent quotient comparisons, and Step 3, successive coefficient extensions; isolates the proper coefficient-transpose cocycle used by the item in its reduction and integral/field comparison squares. This node supplies Canonical inverse-image coefficient comparison.",
+   "via": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedCoefficientPullbackComparison",
+  "file": "lean/Sheaf/Paper/RingedCoefficientPullbackComparison.lean",
+  "declaration": "SheafOfModules.RingedCoefficientProjection.coefficientPullbackComparisons",
+  "declarations": [
+   "SheafOfModules.RingedCoefficientProjection.coefficientPullbackComparisons"
+  ],
+  "statement": "theorem coefficientPullbackComparisons [PreservesFiniteLimits uInv] :\n    Nonempty (Comparisons g nY nX)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs live item module (verbatim move of 16 public records + 6 Prop cache instances, change record lists all 8 users); item proof vs the 6 sublemma nodes; sorry statements PullbackComparison/PullbackCoherence vs Stacks 03EL/0G7E/0D6D; importers RingedRefinementData/RingedRefinementClopen compiled against the delivery"
+ }
+}

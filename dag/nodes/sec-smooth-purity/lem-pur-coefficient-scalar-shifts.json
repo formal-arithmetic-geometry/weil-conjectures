@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-coefficient-scalar-shifts",
+ "kind": "statement",
+ "title": "Counit-normalized coherent shifts on scalar extension",
+ "statement": "For any family p of the universal derived scalar-extension presentations of def-pur-ringed-coefficient-projection-data, there exists a coherent integer CommShift structure on each p(a).derived for which p(a).counit is a shift-compatible natural transformation. The normalization is by that very universal counit; no ring map is required to be flat.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Derived Categories, Tag 05SU; universal right-Kan-extension shift construction."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-coefficient-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "The additive ordinary scalar functor induces a coherent termwise shift on its homotopy functor; Qh has its canonical coherent shift. The universal scalar left-derived pair is a right Kan extension along Qh. Apply the right-Kan coherent-shift theorem to every coefficient map. Its uniqueness supplies zero and addition coherence and the counit shift equation simultaneously.",
+   "uses": [
+    "lem-pur-right-kan-extension-coherent-shift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-right-kan-extension-coherent-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Derived Categories, Tag 05SU; universal right-Kan-extension shift construction.; explicit normalization and transport details as in the proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A right Kan extension inherits coherent integer shifts from the two input functors, with its counit commuting with shifts",
+   "results": "8 hits: CategoryTheory.Functor.PreservesRightKanExtension, CategoryTheory.Functor.rightKanExtensionCompIsoOfPreserves, CategoryTheory.Functor.PreservesRightKanExtension.mk_of_preserves_isRightKanExtension, CategoryTheory.Functor.PreservesRightKanExtension.mk', CategoryTheory.Functor.hasRightKanExtension_of_preserves, CategoryTheory.Functor.ranCompIsoOfPreserves_hom_app, CategoryTheory.Functor.rightKanExtensionCompIsoOfPreserves_hom_fac_app_assoc, CategoryTheory.Functor.rightKanExtensionCompIsoOfPreserves_hom_fac_app",
+   "date": "2026-10-20",
+   "digest": "11bac370cb1722a7",
+   "verdict": "Mathlib has right Kan extension uniqueness and preservation, but no combined coherent-shift result. The proved source-library coherent-shift theorem is used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightKanExtension",
+   "results": "12 hits: CategoryTheory.Functor.isRightKanExtensionId, CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit, CategoryTheory.Functor.IsRightKanExtension, CategoryTheory.Functor.HasRightKanExtension.mk, CategoryTheory.Functor.coneOfIsRightKanExtension, CategoryTheory.Functor.isRightKanExtensionAlongEquivalence, CategoryTheory.Functor.isRightKanExtensionAlongEquivalence', CategoryTheory.Functor.limitIsoOfIsRightKanExtension",
+   "date": "2026-10-20",
+   "digest": "051de79850fbcc6a",
+   "verdict": "Mathlib has right Kan extension uniqueness and preservation, but no combined coherent-shift result. The proved source-library coherent-shift theorem is used."
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift.*KanExtension|KanExtension.*CommShift",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "Mathlib has right Kan extension uniqueness and preservation, but no combined coherent-shift result. The proved source-library coherent-shift theorem is used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal right Kan extension has coherent integer shifts when its comparison counit commutes with shifts",
+   "results": "8 hits: CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Functor.RightExtension.precomp, CategoryTheory.Functor.ran, CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension, CategoryTheory.Adjunction.rightAdjointCommShift, CategoryTheory.Functor.rightKanExtensionCounit, CategoryTheory.Functor.isPointwiseRightKanExtensionRanCounit.congr_simp, CategoryTheory.Functor.ranCounit",
+   "date": "2026-10-20",
+   "digest": "0b6cf8c1d82d902a",
+   "verdict": "Mathlib has right Kan extension uniqueness and preservation, but no combined coherent-shift result. The proved source-library coherent-shift theorem is used."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedCoefficientProjectionCocycle",
+  "date": "2026-10-21",
+  "group": "R4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Step 2, coherent quotient comparisons, and Step 3, successive coefficient extensions; isolates the proper coefficient-transpose cocycle used by the item in its reduction and integral/field comparison squares. This node supplies Counit-normalized coherent shifts on scalar extension.",
+   "via": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedCoefficientScalarShifts",
+  "file": "lean/Sheaf/Paper/RingedCoefficientScalarShifts.lean",
+  "declaration": "SheafOfModules.RingedCoefficientProjection.coefficientScalarShifts",
+  "declarations": [
+   "SheafOfModules.RingedCoefficientProjection.ScalarShifts",
+   "SheafOfModules.RingedCoefficientProjection.coefficientScalarShifts"
+  ],
+  "statement": "theorem coefficientScalarShifts : Nonempty (ScalarShifts p)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-eb4db",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261020T221333-L-4175763",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs live item module (verbatim move of 16 public records + 6 Prop cache instances, change record lists all 8 users); item proof vs the 6 sublemma nodes; sorry statements PullbackComparison/PullbackCoherence vs Stacks 03EL/0G7E/0D6D; importers RingedRefinementData/RingedRefinementClopen compiled against the delivery"
+ }
+}
