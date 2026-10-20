@@ -1,6 +1,6 @@
 # Work queue
 
-212 items; claim with `tools/claim.py next <group> [--stage N]`.
+209 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (51 clusters, 2492 modules)
 
@@ -60,7 +60,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean:104:0: error: Unexpected name `Unbounded` after `end`: The current section |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Coherence.lean:116:0: error: Unexpected name `Eta` after `end`: |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 31, stage 3 156 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 31, stage 3 149 items.
 
 ## Stage 1: nodes to split (1)
 
@@ -71,9 +71,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 ## Stage 2: nodes to state (0)
 
 
-Not open yet: 301 nodes that below a finished node, not needed, 85 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 301 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (30)
+## Stage 3: modules to prove (27)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -94,20 +94,17 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.DncAffineBlowupComplement` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.StandardGroupSchemes` | - | 12 | proof | 4 |
-| `Sheaf.CategoryTheory.FirstQuadrantLowestRowEdge` | - | 1 | proof | 4 |
 | `Sheaf.FieldTheory.BertiniFieldExtension` | - | 1 | proof | 4 |
 | `Sheaf.Paper.InvertibleTensorScalarExtension` | - | 1 | proof | 4 |
 | `Sheaf.Paper.KFlatConeComparison` | - | 1 | proof | 4 |
 | `Sheaf.SecSmoothPurity.CochainTensorCoherenceData` | - | 4 | proof | 4 |
 | `Sheaf.SixFunctors.CompactificationOverBase` | - | 1 | proof | 4 |
-| `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatFinitePresentationRetract` | - | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.RingedSiteRestrictionKFlat` | - | 1 | proof | 5 |
 | `Sheaf.Paper.RingComplexGodementFunctorial` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteFieldDerivedTensorSummand` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.FiniteAffineProetaleRefinement` | - | 1 | proof | 7 |
 | `Sheaf.CategoryTheory.DualizableJointlyConservativeLocality` | - | 1 | proof | 7 |
 | `Sheaf.Paper.EtaleLisseFiltrationDevissage` | - | 1 | proof | 10 |
-| `Sheaf.RingTheory.ColimOfLocalizations` | - | 1 | proof | 13 |
 | `Sheaf.Algebra.Homology.IntegerFlatRepresentative` | - | 1 | proof | 17 |
 
 ## Stage 3: held for an open upstream PR (20)
