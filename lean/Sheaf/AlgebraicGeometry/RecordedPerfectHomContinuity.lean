@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RecordedPerfectHomTransport
 import Sheaf.AlgebraicGeometry.RecordedPerfectHomNormalization
 import Sheaf.AlgebraicGeometry.PerfectHomContinuity
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 /-! # Continuity of Hom sets for perfect complexes in a ring-colimit system.
 Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation and open induction.

@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Paper.ShiftedKoszulAugmentation
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnitPerfect
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnitIso

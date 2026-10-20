@@ -1,7 +1,7 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
 import Sheaf.AlgebraicGeometry.PerfectCommonAffineModels
 import Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalComparison

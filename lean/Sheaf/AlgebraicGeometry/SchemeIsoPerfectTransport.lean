@@ -5,8 +5,8 @@ Authors: SHEAF group M2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectLocalTransport
 
 /-! # Perfect objects under scheme isomorphisms

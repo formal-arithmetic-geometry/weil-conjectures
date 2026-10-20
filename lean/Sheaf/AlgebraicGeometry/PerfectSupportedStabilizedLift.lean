@@ -5,7 +5,7 @@ Authors: SHEAF group E3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.SupportedMapInitialAmbientLift
 import Sheaf.AlgebraicGeometry.SupportedMapAffineAttachment
 

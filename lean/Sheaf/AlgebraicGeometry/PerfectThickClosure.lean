@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.AlgebraicGeometry.PerfectSummand
 import all Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree

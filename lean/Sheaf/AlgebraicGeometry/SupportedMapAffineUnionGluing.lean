@@ -5,7 +5,7 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import Sheaf.AlgebraicGeometry.SupportedAffineOverlapMap

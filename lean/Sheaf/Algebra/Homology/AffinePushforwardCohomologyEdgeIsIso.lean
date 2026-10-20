@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.AffinePushforwardComparisonCoordinates
 import Sheaf.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
-import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # Normalized affine cohomology edge maps -/
 

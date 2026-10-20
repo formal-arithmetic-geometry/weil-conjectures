@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Noetherian.Basic
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
 
 /-! # Bounded flat complexes with finite cohomology over a Noetherian ring

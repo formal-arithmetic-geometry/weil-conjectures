@@ -5,7 +5,7 @@ Authors: SHEAF group R4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 import Sheaf.AlgebraicGeometry.StrictlyPerfectLocalHomComputations
 import Sheaf.AlgebraicGeometry.ExactSourceEvaluationLocalComparisons

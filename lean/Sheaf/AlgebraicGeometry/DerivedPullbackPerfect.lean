@@ -5,7 +5,7 @@ Authors: SHEAF groups C3 and Q1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.LocalizedPullbackPerfectModel
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree

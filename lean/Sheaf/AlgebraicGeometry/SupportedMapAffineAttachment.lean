@@ -5,7 +5,7 @@ Authors: SHEAF group S4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.SupportedMapAffineUnionGluing
 import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction

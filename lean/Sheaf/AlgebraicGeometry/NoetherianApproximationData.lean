@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Filtered.Basic

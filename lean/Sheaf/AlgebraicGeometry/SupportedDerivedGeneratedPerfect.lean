@@ -5,7 +5,7 @@ Authors: SHEAF group S1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator

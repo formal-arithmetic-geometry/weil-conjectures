@@ -6,7 +6,7 @@ Authors: SHEAF group H4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedFiberOpenFactorization
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.AlgebraicGeometry.ResidueTildeHomologyComparison
 import Sheaf.AlgebraicGeometry.AffinePerfectSectionsCounit

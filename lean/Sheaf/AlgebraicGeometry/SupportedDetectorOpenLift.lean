@@ -5,7 +5,7 @@ Authors: SHEAF group B2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SupportedDetectorOpenLiftCore
 
