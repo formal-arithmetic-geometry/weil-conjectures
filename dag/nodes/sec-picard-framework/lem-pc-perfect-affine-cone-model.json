@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "Construct $K=C(\\alpha)$ [def-weil-abstract-derived-category]. Its degree $i$ term is $A^{i+1}\\oplus B^i$. If the bounds of $A,B$ are $[a_1,b_1],[a_2,b_2]$, this is zero outside $[\\min(a_1-1,a_2),\\max(b_1-1,b_2)]$. The biproduct of their finite-free retract pairs is again a retract pair, by checking the two projections. A binary sum of finite free sheaves is free on the disjoint union of their finite bases; reindex by a finite ordinal and its universe lift. Thus $K$ satisfies precisely [def-pc-perfect-complex], including zero-rank retracts.",
+   "text": "Construct $K=C(\\alpha)$ [def-weil-abstract-derived-category]. Its degree $i$ term is $A^{i+1}\\oplus B^i$. If the bounds of $A,B$ are $[a_1,b_1],[a_2,b_2]$, this is zero outside $[\\min(a_1-1,a_2),\\max(b_1-1,b_2)]$. The biproduct of their finite-free retract pairs is again a retract pair, by checking the two projections. A binary sum of finite free sheaves is free on the disjoint union of their finite bases; reindex by a finite ordinal and its universe lift. Thus $K$ satisfies precisely [def-pc-perfect-complex], including zero-rank retracts. This construction is already fully proved by the retained source implementation in WeilConjectures.AlgebraicGeometry.PerfectAffineConeModel; the duplicate Sheaf module is unnecessary.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-pc-perfect-complex"
@@ -124,14 +124,15 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.PerfectAffineConeModel",
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectAffineConeModel",
   "declaration": "AlgebraicGeometry.Scheme.perfect_affine_cone_model",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectAffineConeModel.lean",
-  "statement": "theorem perfect_affine_cone_model (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (U : X.Opens) (hU : IsAffineOpen U) (T : Triangle (schemeDerivedCategory X)) (hT : T ∈ distTriang (schemeDerivedCategory X)) (A B : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) (hA : IsStrictlyPerfect X U A) (hB : IsStrictlyPerfect X U B) (eA : Nonempty ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₁ ≅ DerivedCategory.Q.obj A)) (eB : Nonempty ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₂ ≅ DerivedCategory.Q.obj B)) : ∃ K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ, IsStrictlyPerfect X U K ∧ Nonempty ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₃ ≅ DerivedCategory.Q.obj K)",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectAffineConeModel.lean",
+  "statement": "theorem perfect_affine_cone_model (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (U : X.Opens) (hU : IsAffineOpen U) (T : Triangle (schemeDerivedCategory X)) (hT : T ∈ distTriang (schemeDerivedCategory X)) (A B : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) (hA : IsStrictlyPerfect X U A) (hB : IsStrictlyPerfect X U B) (eA : Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₁ ≅ DerivedCategory.Q.obj A)) (eB : Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₂ ≅ DerivedCategory.Q.obj B)) : ∃ K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ, IsStrictlyPerfect X U K ∧ Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₃ ≅ DerivedCategory.Q.obj K)",
   "branch": "sheaf-dag",
-  "by": "T3",
-  "date": "2026-10-13",
-  "existing": false
+  "by": "R7",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Retired the duplicate Sheaf module after checking the full old statement against the existing source theorem, including its universe parameters. The source proof and the PerfectTwoOutOfThree consumer are preserved unchanged; both use only the standard axioms."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -144,13 +145,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "C-f072c",
+  "group": "R7",
   "result": "pass",
-  "landing": "20261012T194144-L-465996",
+  "landing": "20261020T221338-L-4176531",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf copy's perfect_affine_cone_model vs twin WeilConjectures.AlgebraicGeometry.PerfectAffineConeModel (rfl type equality at u,w, standard axioms); sole parent lem-pc-perfect-two-out-of-three already imports and uses the twin; no Lean importers; node lean record repointed with existing:true"
  }
 }
