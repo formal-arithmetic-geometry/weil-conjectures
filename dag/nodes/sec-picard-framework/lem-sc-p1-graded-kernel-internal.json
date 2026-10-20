@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-sc-p1-finite-homogeneous-generators] for F and M. The finite ranges of their generators are homogeneous spanning sets, because the supplied surjections agree on canonical basis vectors with their linear-combination maps.",
+   "text": "Use [lem-sc-p1-finite-homogeneous-generators] for F. The finite range of its generators is a homogeneous spanning set, because the supplied surjection agrees on canonical basis vectors with the linear-combination map. No generating family for M is needed.",
    "uses": [
     "lem-sc-p1-finite-homogeneous-generators"
    ],
@@ -61,7 +61,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-  "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+  "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node); Q3 verified the existing complete proof in WeilConjectures.RingTheory.GradedKernelInternal and retired its Sheaf duplicate without changing the argument"
  },
  "mathlib_searches": [
   {
@@ -108,14 +108,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.GradedKernelInternal",
-  "file": "lean/Sheaf/RingTheory/GradedKernelInternal.lean",
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.GradedKernelInternal",
+  "file": "lean/WeilConjectures/RingTheory/GradedKernelInternal.lean",
   "declaration": "MvPolynomial.graded_kernel_internal_finite",
-  "statement": "theorem graded_kernel_internal_finite {k : Type u} [Field k]\n    {F : Type v} [AddCommGroup F] [Module (MvPolynomial (Fin 2) k) F]\n    {M : Type w} [AddCommGroup M] [Module (MvPolynomial (Fin 2) k) M]\n    [Module.Finite (MvPolynomial (Fin 2) k) F]\n    [Module.Finite (MvPolynomial (Fin 2) k) M]\n    (ℱ : ℤ → AddSubgroup F) (hF : DirectSum.IsInternal ℱ)\n    (ℳ : ℤ → AddSubgroup M) (hM : DirectSum.IsInternal ℳ)\n    (hsmulF : ∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : F),\n      s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℱ j → s • x ∈ ℱ ((n : ℤ) + j))\n    (hsmulM : ∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : M),\n      s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℳ j → s • x ∈ ℳ ((n : ℤ) + j))\n    (q : F →ₗ[MvPolynomial (Fin 2) k] M) (hq : Function.Surjective q)\n    (hgraded : ∀ (j : ℤ) (x : F), x ∈ ℱ j → q x ∈ ℳ j) :\n    DirectSum.IsInternal (fun j ↦ (ℱ j).comap q.ker.subtype.toAddMonoidHom) ∧\n    Module.Finite (MvPolynomial (Fin 2) k) q.ker ∧\n    ∃ s : Set q.ker, s.Finite ∧\n      (∀ x ∈ s, SetLike.IsHomogeneousElem\n        (fun j ↦ (ℱ j).comap q.ker.subtype.toAddMonoidHom) x) ∧\n      Submodule.span (MvPolynomial (Fin 2) k) s = ⊤",
+  "statement": "theorem graded_kernel_internal_finite {k : Type u} [Field k]\n    {F : Type v} [AddCommGroup F] [Module (MvPolynomial (Fin 2) k) F]\n    {M : Type w} [AddCommGroup M] [Module (MvPolynomial (Fin 2) k) M]\n    [Module.Finite (MvPolynomial (Fin 2) k) F]\n    [Module.Finite (MvPolynomial (Fin 2) k) M]\n    (ℱ : ℤ → AddSubgroup F) (hF : DirectSum.IsInternal ℱ)\n    (ℳ : ℤ → AddSubgroup M) (hM : DirectSum.IsInternal ℳ)\n    (hsmulF : ∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : F),\n      s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℱ j → s • x ∈ ℱ ((n : ℤ) + j))\n    (q : F →ₗ[MvPolynomial (Fin 2) k] M)\n    (hgraded : ∀ (j : ℤ) (x : F), x ∈ ℱ j → q x ∈ ℳ j) :\n    DirectSum.IsInternal (fun j ↦ (ℱ j).comap q.ker.subtype.toAddMonoidHom) ∧\n    Module.Finite (MvPolynomial (Fin 2) k) q.ker ∧\n    ∃ s : Set q.ker, s.Finite ∧\n      (∀ x ∈ s, SetLike.IsHomogeneousElem\n        (fun j ↦ (ℱ j).comap q.ker.subtype.toAddMonoidHom) x) ∧\n      Submodule.span (MvPolynomial (Fin 2) k) s = ⊤",
   "branch": "sheaf-dag",
-  "by": "A3",
-  "date": "2026-10-12"
+  "by": "Q3",
+  "date": "2026-10-20",
+  "note": "Retired the duplicate Sheaf theorem in favor of its completely proved upstream twin. The conclusion is identical; upstream omits only unused target scalar compatibility and surjectivity hypotheses. The original Sheaf signature follows by direct application. GradedSyzygy already imports and applies the upstream theorem. The mathematical node statement and its dependencies remain unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -128,14 +129,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A3",
+  "reviewer": "C-09f36",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T085211-L-1989",
+  "landing": "20261020T160259-L-3350377",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf duplicate vs upstream WeilConjectures.RingTheory.GradedKernelInternal theorem (same conclusion, two unused hypotheses dropped, axioms clean); node lean record vs upstream source, byte for byte; no importers in lean/ or quarantine"
  },
  "lean_audit": {
   "master": {
