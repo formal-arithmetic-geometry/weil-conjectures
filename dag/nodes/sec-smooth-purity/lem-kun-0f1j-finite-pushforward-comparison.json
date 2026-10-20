@@ -20,135 +20,83 @@
  ],
  "proof": [
   {
-   "text": "The two base changes $\\pi'$ and $\\rho$ are finite by [lem-weil-pbc-finite-morphism-permanence](a), and proper by [lem-weil-pbc-finite-proper]. Finite direct image is exact on abelian sheaves by [lemma-weil-pbc-finite-direct-image-exact]. On module sheaves, direct image has that underlying abelian functor [def-weil-pbc-direct-image]; the faithful exact forgetful functor preserves kernels and cokernels [lem-weil-pbc-module-sheaves-colimits-forgetful](1), so the module direct image is exact too. Thus [lem-weil-pbc-exact-functor-derived-functor] identifies $R\\pi'_*=\\pi'_*$ and $R\\rho_*=\\rho_*$ canonically on all complexes used below. No resolution-acyclicity assumption is added.",
+   "text": "The base changes pi-prime and rho are finite, hence proper. Use the existing coefficient-valued finite-direct-image exactness instance directly. Finite exchange is already proved for these coefficient categories, so no separate argument through coefficient forgetting is required.",
    "uses": [
     "lem-weil-pbc-finite-morphism-permanence",
     "lem-weil-pbc-finite-proper",
     "lemma-weil-pbc-finite-direct-image-exact",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-exact-functor-derived-functor"
+    "lemma-weil-pbc-finite-exchange"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward diagram and calculation"
    }
   },
   {
-   "text": "Finite exchange [lemma-weil-pbc-finite-exchange] for $(\\pi,p)$ identifies $P:=p^{-1}M$ with $\\pi'_*k_{X'_i}$. For $(\\pi',h)$ it gives $E:h^{-1}\\pi'_*k_{X'_i}\\xrightarrow{\\sim}\\rho_*k_{Y_i}$. These are also module isomorphisms, by [lem-weil-pbc-exchange-forget-coefficients]. Inverse image carries the constant coefficient sheaf to itself [prop-weil-pbc-inverse-image-modules-exact](1). Put $A=(f')^{-1}Rg_*\\mathcal F$, $V=e^{-1}\\mathcal F$, $B=(\\pi')^{-1}A$, and $Q=\\rho^{-1}V=e_i^{-1}\\mathcal F$. All inverse-image composition identifications below use [lem-weil-pbc-inverse-image-composition-module-linear]. The map $\\delta=e^{-1}\\varepsilon_g:h^{-1}A\\to V$ pulls back to $\\delta_i=\\rho^{-1}\\delta:h_i^{-1}B\\to Q$, the counit map $e_i^{-1}\\varepsilon_g$.",
+   "text": "Promote underived finite exchange to the specified unbounded derived exchange. On a complex, derivedBaseChangeMap_app_fac in WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac expresses exchange between the exact-derived unit and counit maps as the termwise underived exchange. All three other maps are isomorphisms, because both finite direct images and inverse image are exact. Every derived object is isomorphic to Q of a complex; naturality transports invertibility to it. This uses the factorization API in the module of lem-kun-unbounded-exchange-acyclic-criterion, rather than its more general acyclicity criterion.",
    "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
     "lemma-weil-pbc-finite-exchange",
-    "lem-weil-pbc-exchange-forget-coefficients",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-composition-module-linear"
+    "lem-kun-unbounded-exchange-acyclic-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward diagram and calculation"
    }
   },
   {
-   "text": "Apply [lem-kun-0f0g] to finite proper $\\pi'$, torsion ring $k$, first argument $k_{X'_i}$ and second argument $A$. With the tensor unit identification this gives $\\phi_A:\\pi'_*k_{X'_i}\\otimes_k^{\\mathbf L}A\\xrightarrow{\\sim}\\pi'_*B$. Since $B=(f_i')^{-1}Rg_*\\mathcal F$, composing with Step 2 gives precisely the first isomorphism of the item. We use the canonical projection arrow [def-kun-projection-formula-map], whose $(\\pi')^{-1}\\dashv R\\pi'_*$-transpose is $\\varepsilon_{\\pi',k}\\otimes1_B$, with the monoidal pullback identification [lem-kun-inverse-image-monoidal] understood. The tensor unit contributes no higher Tor: its complex is the free rank-one coefficient module in degree zero.",
+   "text": "Compose derived exchange with the canonical inverse-image unit isomorphism. The coefficient ring ULift(F_ell) is additively torsion, since it is finite. Apply the proper torsion projection formula to pi-prime and rho, with the tensor unit as first argument. Tensoring exchange, applying projection and applying the left unitor proves invertibility of each finiteConstantTensorReduction. The target reduction is then a functorial image followed by the inverse conjugate of the square inverse-image isomorphism, so is invertible too.",
    "uses": [
     "lem-kun-0f0g",
-    "def-kun-projection-formula-map",
-    "lem-kun-inverse-image-monoidal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
-   }
-  },
-  {
-   "text": "Apply the same projection formula to $\\rho$ and $V$. Together with $E$ it gives $\\lambda_V:h^{-1}\\pi'_*k_{X'_i}\\otimes_k^{\\mathbf L}V\\xrightarrow{\\sim}\\rho_*Q$. Its $\\rho^{-1}\\dashv R\\rho_*$-transpose is $(\\varepsilon_{\\rho,k}\\otimes1_Q)\\circ(\\rho^{-1}E\\otimes1)$. The canonical composition isomorphisms [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to $h\\rho=\\pi'h_i$ with constant coefficients, give $C:Rh_*\\rho_*Q\\xrightarrow{\\sim}\\pi'_*Rh_{i,*}Q$. Thus $\\Psi=C\\circ Rh_*\\lambda_V$, preceded by Step 2, is the second isomorphism of the item.",
-   "uses": [
-    "lem-kun-0f0g",
-    "def-kun-projection-formula-map",
     "lem-kun-inverse-image-monoidal",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "def-kun-projection-formula-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward diagram and calculation"
    }
   },
   {
-   "text": "We check equality of the maps, including the composition convention. The composition comparison in [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] is the ordinary composite direct-image identification on a K-injective complex: every direct image here preserves K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective], since its module inverse image is exact [prop-weil-pbc-inverse-image-modules-exact]. Thus one may take the second K-injective resolution in that comparison to be the identity. The sheaf inverse/direct-image composition isomorphisms are module-linear and carry the composite unit to the ordinary unit [lem-weil-pbc-inverse-image-composition-module-linear]. By the Hom bijection and counit formula of [def-weil-pbc-composite-adjunction], $C$ therefore identifies the two successive adjunction bijections for $(h,\\rho)$ and $(\\pi',h_i)$ with the same bijection for the composite map $Y_i\\to X'$. This also follows directly by applying the two termwise Hom bijections on the chosen K-injective representative, so it requires no further base-change theorem.",
+   "text": "Prove equality of the specified maps by transposing under the composite pi-prime/h_i adjunction. The conjugate counit identity identifies this transpose with the one under the h/rho composite, preceded by the inverse square isomorphism. Naturality of the Hom equivalence gives the two successive transposes. The projection transpose formula identifies each with its tensor comparison followed by the counit, tensoring with the identity, and the left unitor. The derived exchange counit identity identifies rho^*(h^*(a) followed by exchange) followed by the counit with the square isomorphism followed by h_i^*(pi-prime^*(a) followed by the counit). Compatibility of the square isomorphism with tensor comparison (derivedSquareUpperStarIso_hom_tensor), tensor naturality, and inverse-image left-unitor compatibility identify the resulting composites. These are closed source-library APIs in LowerStarProjectionBaseChange and UpperStarMonoidal.Unit. Formal private lemmas establish the calculation for arbitrary bifunctors between categories and comparison natural transformations before specializing. Injectivity of the composite Hom equivalence gives the desired equality.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "def-weil-pbc-composite-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
-   }
-  },
-  {
-   "text": "Write $\\alpha:P\\otimes_k^{\\mathbf L}A\\to Rh_*(h^{-1}P\\otimes_k^{\\mathbf L}V)$ for the comparison, and $\\beta:B\\to Rh_{i,*}Q$ for the untensored comparison. Use $P=\\pi'_*k_{X'_i}$ as in Step 2. To prove $\\Psi\\alpha=\\pi'_*(\\beta)\\phi_A$, use the common composite adjunction of Step 5. By definition the $h$-transpose of $\\alpha$ is $1_{h^{-1}P}\\otimes\\delta$. Naturality of the Hom bijection in its target says that the further $\\rho$-transpose of $Rh_*\\lambda_V\\circ\\alpha$ is the $\\rho$-transpose of $\\lambda_V$ followed after $\\rho^{-1}(1\\otimes\\delta)$. Expanding that transpose by [def-kun-projection-formula-map] yields, on $Y_i$,\n$$s=\\bigl(\\varepsilon_{\\rho,k}\\circ\\rho^{-1}E\\bigr)\\otimes\\rho^{-1}\\delta.$$\nThe source is $\\rho^{-1}h^{-1}P\\otimes_k^{\\mathbf L}\\rho^{-1}h^{-1}A$ and the target is $Q$. Bifunctorial monoidality of inverse image is [lem-kun-inverse-image-monoidal].",
-   "uses": [
+    "def-weil-pbc-composite-adjunction",
     "def-kun-projection-formula-map",
     "lem-kun-inverse-image-monoidal"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward diagram and calculation"
    }
   },
   {
-   "text": "Now transpose $\\pi'_*(\\beta)\\phi_A$ first under $(\\pi')^{-1}\\dashv\\pi'_*$ and then under $h_i^{-1}\\dashv Rh_{i,*}$. Naturality of the first Hom bijection gives $\\beta$ after the transpose $\\varepsilon_{\\pi',k}\\otimes1_B$ of $\\phi_A$. The second gives $\\delta_i$ after its inverse image. Consequently this route is\n$$t= h_i^{-1}(\\varepsilon_{\\pi',k})\\otimes\\rho^{-1}\\delta.$$\nThe source and target are exactly those of $s$ after the cartesian inverse-image identification. The mate definition of finite exchange [def-weil-pbc-underived-exchange] gives\n$$\\varepsilon_{\\rho,k}\\circ\\rho^{-1}E=h_i^{-1}(\\varepsilon_{\\pi',k}).$$\nThis is its defining adjunct identity, on the degree-zero constant sheaf; the equality is module-linear because the underlying unit and counit are those of the module adjunction [prop-weil-pbc-inverse-image-modules-exact](3). Hence $s=t$. Injectivity of the composite Hom bijection proves the required equality of the canonical maps, rather than merely an isomorphism between their objects.",
-   "uses": [
-    "def-kun-projection-formula-map",
-    "def-weil-pbc-underived-exchange",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
-   }
-  },
-  {
-   "text": "If $\\beta$ is invertible, $\\pi'_*(\\beta)$ has inverse $\\pi'_*(\\beta^{-1})$. Since $\\phi_A$ and $\\Psi$ are isomorphisms, the equality of Steps 6--7 gives $\\alpha=\\Psi^{-1}\\pi'_*(\\beta)\\phi_A$, which is invertible. This proves the last clause without assuming the untensored comparison theorem as an additional dependency.",
+   "text": "A functor carries an invertible untensored comparison to an invertible map. The proved equality and the two reduction isomorphisms imply that the tensor comparison is invertible, by cancellation of an isomorphism. This does not assume the untensored comparison theorem.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward diagram and calculation"
    }
   }
  ],
  "proof_deps": [
   "def-kun-projection-formula-map",
   "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-underived-exchange",
   "lem-kun-0f0g",
   "lem-kun-inverse-image-monoidal",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-kun-unbounded-exchange-acyclic-criterion",
   "lem-weil-pbc-finite-morphism-permanence",
   "lem-weil-pbc-finite-proper",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-finite-exchange",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lemma-weil-pbc-finite-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0F1J final calculation, with explicit adjunction verification of the omitted map compatibility; Tag 0D6E in sites-cohomology.tex and Tag 0DV0 in categories.tex for composition"
+  "place": "Tag 0F1J final finite-pushforward calculation, implemented using the existing exact-derived factorization and the canonical derived tensor/mate APIs; K5, 2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -316,17 +264,10 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-exchange-forget-coefficients",
   "lem-weil-pbc-finite-morphism-permanence",
   "lem-weil-pbc-finite-proper",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-finite-exchange",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lemma-weil-pbc-finite-exchange"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -361,5 +302,15 @@
   "group": "Q125",
   "result": "fix",
   "note": "Lean mathematics and all four conclusion clauses match the node and source; all nine dependencies checked, signature verbatim, per-file compilation passed without diagnostics. Repaired H11 by supplying a complete replacement report with an independent second reading. Details in review.md; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261020T211750-L-3498341",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
