@@ -24,215 +24,62 @@
  ],
  "proof": [
   {
-   "text": "Let $R$ be $(A_{E,n})_S$ or $\\widehat{\\mathcal O}_{E,S}$. The finite and integral assertions of [lem-pur-twist-sheaf-locally-free], clauses 3 and 4, give a covering on which $\\Lambda(1)$ is $R$, its finite reductions, and the integral membership of $\\mathcal O_E(1)$ in $D^b_c$. Apply the tensor-power and sheaf-Hom definitions of [def-coefficient-twists-detailed]. On the same covering every positive power is $R^{\\otimes m}\\cong R$, and its dual is $\\mathcal Hom_R(R,R)\\cong R$. Thus $L=\\Lambda(m)$ is locally free of rank one for every integer $m$, including $m=0$ and $m<0$. The evaluation maps $L\\otimes_R L^\\vee\\to R$ and $L^\\vee\\otimes_R L\\to R$ are isomorphisms: locally they are multiplication $R\\otimes_R R\\to R$. These maps are defined without a choice of basis, so the local inverses agree on overlaps and glue. The tensor and Hom formulas identify $L^\\vee$ with $\\Lambda(-m)$ for $m\\geq0$; for $m<0$ use the canonical bidual map from the positive power to its double dual, which locally is $R\\to\\operatorname{Hom}_R(\\operatorname{Hom}_R(R,R),R)$, an isomorphism by evaluation at $1$. This uses the completed sheaf as integral unit, not the discrete constant sheaf $(\\mathcal O_E)_S$.",
+   "text": "Apply signedLineTensor_equivalence to the finite first line and to the completed integral first line. These give rank one for every signed power and the inverse sheaf tensor isomorphisms. Descend those isomorphisms by mapDerivedCategoryCompIso, mapDerivedCategoryNatIso and mapDerivedCategoryIdIso to obtain the two inverse derived twist formulas.",
    "uses": [
-    "lem-pur-twist-sheaf-locally-free",
+    "lem-weil-signed-line-tensor-equivalence",
     "def-coefficient-twists-detailed",
-    "def-pur-sheaf-hom",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, first sentence and the tensor-power/internal-Hom sentence; the rank-one input is the existing coefficient-construction lemma (Stacks 03PK, 040M, 03RV for its finite-level part)."
-   }
-  },
-  {
-   "text": "For either $R$ from step 1, put $T_L(F)=F\\otimes_R L$. Associativity, symmetry and unit maps of [lem-pc-sheaf-modules-tensor-closed], followed by the evaluation isomorphisms in step 1, give $T_{L^\\vee}T_L(F)\\cong F$ and $T_LT_{L^\\vee}(F)\\cong F$, naturally in $F$. Hence these are inverse additive equivalences. They preserve kernels and cokernels directly by their universal properties: for example maps $B\\to T_L(\\ker f)$ correspond, after applying $T_{L^\\vee}$, to maps $T_{L^\\vee}B\\to\\ker f$, hence exactly to maps $B\\to T_L(\\operatorname{dom}f)$ killed by $T_L(f)$; for cokernels, maps $T_L(\\operatorname{coker}f)\\to B$ correspond to maps $\\operatorname{coker}f\\to T_{L^\\vee}B$, hence exactly to maps $T_L(\\operatorname{cod}f)\\to B$ annihilating $T_L(f)$. Thus $T_L$ is exact, so $L$ is flat by [def-pc-flat-sheaf-modules].",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, first paragraph: invertibility and flatness; elementary universal-property verification of exactness."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-exact-functor-complex-cohomology] and [lem-sf-exact-functor-derived-triangulated] to the exact functors $T_L$ and $T_{L^\\vee}$ from step 2. They act termwise on complexes, induce inverse triangulated equivalences, and satisfy $\\mathcal H^i(T_L C)\\cong\\mathcal H^i(C)\\otimes_R L$ for every complex, without a boundedness assumption. To identify this functor with derived tensor, first observe that $L[0]$ and $L^\\vee[0]$ are K-flat with flat terms: tensoring any acyclic complex with either is exactly its termwise image under the corresponding exact functor, hence remains acyclic by the cohomology formula. Choose $P\\to C$ K-flat with flat terms by [lem-pc-kflat-resolution]. Exactness makes $P\\otimes_RL\\to C\\otimes_RL$ a quasi-isomorphism. The terms of $P\\otimes_RL$ are flat: tensor with $P^i\\otimes_RL$ is the composite of the exact functors tensor with $P^i$ and $T_L$. Moreover $P\\otimes_RL$ is K-flat: for any acyclic $B$, the total complex $B\\otimes_R(P\\otimes_RL)$ identifies, by termwise tensor associativity, with $(B\\otimes_RP)\\otimes_RL$, which is acyclic since $P$ is K-flat and $T_L$ is exact. In this rebracketing, $T_L$ commutes with the direct sums in the total tensor [def-pc-tensor-complex-sheaves], since the closed tensor statement makes it a left adjoint: $\\operatorname{Hom}(T_L(\\bigoplus_i B_i),D)\\cong\\prod_i\\operatorname{Hom}(T_LB_i,D)$. The degree-zero line introduces no additional differential sign. The derived tensor computation of [lem-weil-pbc-site-derived-tensor-descent] applies to the two K-flat flat-term complexes $P$ and $L[0]$ and gives $C\\otimes_R^LL\\cong T_L(C)$. In particular the cohomology formula holds for derived tensor. Both $L$ and its dual have amplitude $[0,0]$, and the inverse equivalence shows that $\\mathcal H^i(C\\otimes_R^LL)$ vanishes exactly when $\\mathcal H^i(C)$ vanishes.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, cohomology formula: replace the unprovided spectral sequence by exact tensor on complexes (Stacks 010N, 015F, 06YS, 03EO)."
-   }
-  },
-  {
-   "text": "Take $R=(A_{E,n})_S$ and $C\\in D^b_c(S,A_{E,n})$. For each nonzero $\\mathcal H^i(C)$ choose its finite constructible stratification as in [def-weil-finite-torsion-constructibility]. On a stratum, the restriction of $\\mathcal H^i(C)\\otimes_RL$ is the tensor of the restrictions, by [lem-weil-pbc-ringed-topoi-module-pullback-tensor] applied to the immersion of that stratum, with its pro-etale module pullback [def-weil-proetale-inverse-image]. Pulling back the trivializing cover of $L$ gives a cover of the stratum and identifies the pulled-back line there with the constant rank-one module. Refine the local trivializing covers of this locally constant sheaf and of the rank-one line $L$ by their fibre products over the stratum. On each resulting object the tensor is $M\\otimes_{A_{E,n}}A_{E,n}\\cong M$, with $M$ the original finite module. Thus the same finite partition still proves constructibility, and its stalks remain finite; no finite trivializing cover of the entire scheme is needed. Step 3 preserves the cohomological vanishing interval. This proves finite-level bounded constructibility, for $L$ and its dual.",
-   "uses": [
-    "def-weil-finite-torsion-constructibility",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, preservation of finite partitions and locally constant finite stalks, with the inverse-image tensor comparison made explicit (Stacks 03EL)."
-   }
-  },
-  {
-   "text": "Still at finite coefficients, suppose $C$ has Tor amplitude in $[a,b]$ in [def-weil-finite-tor-amplitude]. For an arbitrary sheaf $M$ placed in degree zero, choose also a K-flat flat-term resolution $Q\\to M$ by [lem-pc-kflat-resolution], and use the K-flat $P$ of step 3. Since $P\\otimes_RL$ is K-flat, $(C\\otimes_R^LL)\\otimes_R^LM$ is represented by $(P\\otimes_RL)\\otimes_RQ\\cong(P\\otimes_RQ)\\otimes_RL$, by the total-tensor direct-sum comparison proved in step 3 and the sheaf tensor symmetry and associativity of [lem-pc-sheaf-modules-tensor-closed]. The latter is $T_L$ applied to the representative of $C\\otimes_R^LM$. Exactness and the cohomology formula of step 3 imply that its cohomology vanishes outside $[a,b]$. The implication just proved also holds with $L^\\vee$ as its line; applying that implication to $C\\otimes_R^LL$ and using $(C\\otimes_R^LL)\\otimes_R^LL^\\vee\\cong C$ proves the converse. Thus the entire Tor interval, rather than merely existence of some finite interval, is preserved. This tests all module sheaves $M$, not just constructible ones.",
-   "uses": [
-    "def-weil-finite-tor-amplitude",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-kflat-complex",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, preservation of the vanishing interval in the finite Tor-amplitude condition; explicit K-flat rebracketing."
-   }
-  },
-  {
-   "text": "For the integral stage write $R=\\widehat{\\mathcal O}_{E,S}$, $A_j=(A_{E,j})_S$, and $L=\\mathcal O_E(m)$. Reducing a trivialization $L|_V\\cong R|_V$ gives $L_j=L\\otimes_RA_j$ free of rank one locally. The canonical base-change maps for tensor powers and their duals are isomorphisms, since locally they are the identities on $A_j$; hence step 1 and [def-coefficient-twists-detailed] identify $L_j$ with $A_{E,j}(m)$ for every $j$. Choose $P\\to C$ as in step 3. The termwise rebracketing map\n$$(P\\otimes_RL)\\otimes_RA_j\\cong(P\\otimes_RA_j)\\otimes_{A_j}L_j$$\nis an isomorphism of complexes. The left computes the reduction of $C\\otimes_R^LL$, by [def-weil-integral-derived-reduction], because $P\\otimes_RL$ is K-flat with flat terms; on the right $P\\otimes_RA_j$ is K-flat over $A_j$ by [lem-pur-kflat-change-of-rings]. Also $L_j[0]$ is K-flat with flat terms by the finite-level calculation of step 3, so the two-input derived tensor formula applies on the right. Thus\n$$(C\\otimes_R^LL)\\otimes_R^LA_j\\cong (C\\otimes_R^LA_j)\\otimes_{A_j}^LA_{E,j}(m).$$\nThese maps are compatible with $A_{j+1}\\to A_j$ and the maps from $C$: on tensor representatives they send $(x\\otimes l)\\otimes a$ to $(x\\otimes a)\\otimes(l\\otimes1)$; reducing either before or after this formula has the same result. After restriction of scalars, the same comparison for a reduction complex $B$ is the termwise identity $B\\otimes_RL\\cong B\\otimes_{A_j}L_j$; it computes $T_L$ on that reduction since $T_L$ is exact, without assuming $B$ is K-flat over $R$. The tensor computations use the ringed-site derived tensor of [lem-weil-pbc-site-derived-tensor-descent], so no discrete integral coefficient category is substituted.",
-   "uses": [
-    "def-coefficient-twists-detailed",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-change-of-rings",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-weil-integral-derived-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final sentence: make the levelwise integral reduction formula and its transition compatibility explicit; ringed-site K-flat change of rings (Stacks 06YS and the cited change-of-rings node)."
-   }
-  },
-  {
-   "text": "The integral derived equivalences $T_L$ and $T_{L^\\vee}$ of step 3 preserve the countable products that occur in [def-weil-derived-complete]. Indeed for every derived object $B$ and family $(C_j)$ there are natural bijections\n$$\\operatorname{Hom}(B,T_L(\\prod_jC_j))\\cong\\operatorname{Hom}(T_{L^\\vee}B,\\prod_jC_j)\\cong\\prod_j\\operatorname{Hom}(T_{L^\\vee}B,C_j)\\cong\\prod_j\\operatorname{Hom}(B,T_LC_j).$$\nThis is exactly the product universal property; it identifies the comparison with the map having components $T_L$ of the projections. The following argument is quantified over either line from step 1. Let $C$ be derived complete. Apply the triangulated functor from [lem-sf-exact-functor-derived-triangulated] to its defining distinguished Roos triangle\n$$C\\xrightarrow{c}\\prod_jC_j\\xrightarrow{1-s}\\prod_jC_j\\longrightarrow C[1],$$\nwhere $C_j$ denotes its derived reduction restricted back to $R$-modules. The product isomorphisms and step 6 identify this triangle with a Roos triangle for the reductions of $T_LC$. Its first map has the reduction maps as components, and its second map is $1-s$ for that tower, by the compatibility checked in step 6. Consequently $T_LC$ is derived complete by precisely the existential Roos-triangle condition of [def-weil-derived-complete]. This does not choose a purported unique morphism into a derived limit. Taking the line in this quantified argument to be $L^\\vee$ proves preservation by the inverse twist.",
-   "uses": [
-    "def-weil-derived-complete",
     "lem-sf-exact-functor-derived-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final sentence: supply the derived-completeness argument, using the existing definition and exact-functor theorem (Stacks 015F); product preservation is proved by its universal property, not inferred merely from triangulatedness."
-   }
+   "elementary": false
   },
   {
-   "text": "For integral $C\\in D^b_c(S,\\mathcal O_E)$, [def-weil-derived-complete-integral-detailed] gives derived completeness and one cohomological interval $[r,s]$ for all its reductions. Steps 4 and 6 give bounded constructible reductions of $T_LC$, and step 3 gives the very same interval $[r,s]$ independently of $j$; step 7 gives completeness. This is exactly membership in the integral $D^b_c$. If $C$ satisfies the integral finite-Tor condition, its reductions have one Tor interval $[a,b]$ independent of $j$ by [def-weil-finite-tor-amplitude]; steps 5 and 6 preserve that same interval. All statements hold for the inverse line as well. In particular applying this argument to the integral unit, or applying step 7 to the complete rank-one line already supplied in step 1 and its powers and duals, shows that every $\\mathcal O_E(m)$ belongs to the integral category. To see the unit directly, the integral line $\\mathcal O_E(1)$ is complete by step 1 and its tensor with the inverse line is the unit; step 7 preserves completeness, and its reductions are $A_{E,j}$ in degree zero.",
+   "text": "Apply finiteLineTensor_conditions. The exact-functor homology comparison identifies each homology sheaf of the twist with the tensor of the original homology sheaf. Hence the support shrinks, and the same constructible cohomology range works. Tensor preserves each constructible sheaf by the interface. Combining this with the unchanged Tor interval gives finiteTorConstructible. Transport of constructibility across isomorphisms is proved by pulling the isomorphism to each stratum and each geometric stalk; constantComparison_isIso supplies the actual constant-coefficient pullback functor.",
    "uses": [
+    "lem-weil-finite-line-tensor-conditions",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude",
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use signedTwistReduction_comparison for the unique canonical maps, the single-object reductions and the natural isomorphism between reduction after twisting and finite twisting after reduction. Apply integralLineTensor_complete to the exact completed line tensor. Transport the finite support, Tor and constructibility statements through each component of the natural isomorphism, retaining the same common intervals for every reduction. These are precisely the conjuncts of sfIntegralConstructible and finiteTorConstructibleIntegral. The twisting-object membership is the existing sfIntegralTwistingObject_mem theorem.",
+   "uses": [
+    "lem-weil-signed-twist-reduction-comparison",
+    "lem-weil-integral-line-tensor-completeness",
     "def-weil-derived-complete-integral-detailed",
     "def-weil-finite-tor-amplitude",
-    "lem-pur-twist-sheaf-locally-free"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final sentence: check uniform integral cohomological and Tor bounds, including the integral unit and negative powers."
-   }
-  },
-  {
-   "text": "The functors $T_L$ and $T_{L^\\vee}$ are exact and $\\mathcal O_E$-linear by their tensor definitions and the inverse identities of step 2. Applying [lem-weil-twist-rationalization] to the scalar localization in [def-weil-rationalization-karoubi] gives inverse functors on $D^b_c(S,E)$ and makes the images $E(m)$ invertible.",
-   "uses": [
-    "lem-weil-twist-rationalization",
-    "def-weil-rationalization-karoubi"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final paragraph: O_E-linearity, rationalization, and invertibility."
-   }
-  },
-  {
-   "text": "For $E\\subset F$, clause 3 of [lem-pur-twist-sheaf-locally-free] and the formula in [def-coefficient-twists-detailed] give the canonical identification $\\mathcal O_H(1)\\cong T\\otimes_{R_0}R_H$ for $H=E,F$: substitute $R_H=R_0\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_H)_S$ and rebracket. Thus [lem-weil-integral-twist-base-change] applies and gives $\\mathcal O_E(m)\\otimes_{R_E}R_F\\cong\\mathcal O_F(m)$ for every integer $m$, compatibly with evaluation and tensor/dual powers.",
-   "uses": [
-    "lem-weil-integral-twist-base-change",
-    "lem-pur-twist-sheaf-locally-free",
     "def-coefficient-twists-detailed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final paragraph: first-line scalar base change and tensor/dual powers."
-   }
+   "elementary": false
   },
   {
-   "text": "For a derived-complete $C$ and a K-flat flat-term representative $P\\to C$, [lem-weil-integral-twist-derived-scalar] supplies the chain isomorphism $(P\\otimes_{R_E}\\mathcal O_E(m))\\otimes_{R_E}R_F\\cong(P\\otimes_{R_E}R_F)\\otimes_{R_F}\\mathcal O_F(m)$ and the natural comparison $\\operatorname{Ext}_{F/E}(C(m))\\cong\\operatorname{Ext}_{F/E}(C)(m)$. The K-flat and flat-term hypotheses are preserved by [lem-pur-kflat-change-of-rings], while [lem-weil-finite-free-completed-scalar-comparison] identifies completed and ordinary scalar extension on these complete objects.",
+   "text": "The final two conjuncts are fieldTwist_inverse, with the recorded rational and common-stage functors exactly as stated. Assemble these with the preceding finite and integral clauses to obtain the unchanged proposition.",
    "uses": [
-    "lem-weil-integral-twist-derived-scalar",
-    "lem-pur-kflat-change-of-rings",
-    "lem-weil-finite-free-completed-scalar-comparison"
+    "lem-weil-field-twist-inverse"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final paragraph: K-flat chain comparison and completed-to-ordinary scalar comparison."
-   }
-  },
-  {
-   "text": "For $E\\subset F\\subset G$, [lem-weil-integral-twist-scalar-coherence] gives the commutative square relating successive and direct twist comparisons, with the integral composition map transported from tensor associativity by the specified ordinary-to-completed comparison. Both paths send $(x\\otimes l)\\otimes b\\otimes c$ to $(x\\otimes bc)\\otimes(l\\otimes1)$. Its rationalization agrees with [lem-weil-scalar-extension-composition]; identity extensions use the tensor unit maps. Thus these are comparisons for exactly the transition functors in the common-stage definition.",
-   "uses": [
-    "lem-weil-integral-twist-scalar-coherence",
-    "lem-weil-scalar-extension-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final paragraph: coherence for E\\subset F\\subset G and scalar-comparison maps."
-   }
-  },
-  {
-   "text": "The inverse identities of steps 2 and 9, evaluation compatibility of step 10, and scalar compatibilities of steps 11–12 verify the hypotheses of [lem-weil-qbar-twist-common-stage]. Hence a common-stage morphism $[F,f]$ in [def-weil-algebraically-closed-coefficients] is sent to $[F,T_{F,m}(f)]$ with endpoints identified by the scalar comparisons: explicitly its representative is $\\beta_{F/E',C'}^{-1}\\circ T_{F,m}(f)\\circ\\beta_{F/E,C}$. The lemma gives independence of enlarging $F$, functoriality, and the descended line-evaluation inverse identities. Thus these are inverse twists on the common-stage category with inverse $(-m)$, and $\\Qlb(m)$ is invertible. At $E$ and $\\Qlb$ coefficients, [def-weil-finite-tor-amplitude] identifies the finite-Tor subcategory with the constructible category. All constructions use integral representatives and common finite stages.",
-   "uses": [
-    "lem-weil-qbar-twist-common-stage",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-finite-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-    "place": "Proof, final paragraph: common-stage morphisms, inverse Qbar twists, and finite-Tor interpretation."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-signed-line-tensor-equivalence",
   "def-coefficient-twists-detailed",
-  "def-pur-sheaf-hom",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-pc-kflat-resolution",
-  "def-pc-kflat-complex",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-pc-tensor-complex-sheaves",
+  "lem-weil-finite-line-tensor-conditions",
   "def-weil-finite-torsion-constructibility",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "def-weil-proetale-inverse-image",
   "def-weil-finite-tor-amplitude",
-  "lem-pur-kflat-change-of-rings",
-  "def-weil-integral-derived-reduction",
-  "def-weil-derived-complete",
+  "lem-pur-proetale-constant-coefficient-comparison",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-signed-twist-reduction-comparison",
+  "lem-weil-integral-line-tensor-completeness",
   "def-weil-derived-complete-integral-detailed",
-  "lem-weil-twist-rationalization",
-  "def-weil-rationalization-karoubi",
-  "lem-weil-integral-twist-base-change",
-  "lem-weil-integral-twist-derived-scalar",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-integral-twist-scalar-coherence",
-  "lem-weil-scalar-extension-composition",
-  "lem-weil-qbar-twist-common-stage",
-  "def-weil-algebraically-closed-coefficients"
+  "lem-weil-field-twist-inverse"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
-  "place": "Proof; expanded using the existing DAG interfaces for ringed-site tensor, exact functors, integral reductions and scalar extension."
+  "document": "lean/Sheaf/Paper/TwistPreservesFiniteness.lean",
+  "place": "completed parent proof using the five imported interfaces"
  },
  "mathlib_searches": [
   {
@@ -410,5 +257,15 @@
   "group": "Q115",
   "result": "fix",
   "note": "Read the item, the 8 statement dependencies, the source place, report.md (it has Worker report and Second reading by Q115 sections) and both modules. Every node clause matches the Lean. Finite clauses: rank one, locally constant, D^b_c, D^b_ctf, support interval, Tor interval. Integral clauses: completed line, uniquely normalized reductions, D^b_c, completeness, D^b_ctf, uniform intervals, membership of O_E(m). Inverse twists at all four coefficients. The only Lean change since the passed head 23f6d5 drops the finiteTorConstructible premise from the finite Tor clause. That is a true strengthening: HasProEtaleTorAmplitude is defined for any K and is preserved by an exact invertible tensor. Gates pass: no hollow definitions, docstrings and 13-step proof plan present, only sorry, ProEt site used, universes u and v only, statements verbatim. Compiler evidence: nt_compile exit 0 for the delivered pair; a probe confirmed universes, axioms and that errors are reported. Mechanical fault: the delivery overwrites the dependency def-coefficient-twists-detailed's lean record (Q151 PbcCoefficientTwists at the base 4055419f8f) with a module that publicly imports only Q133's IntrinsicCoefficientTwists. That drops the retained Q118 and Q151 interfaces. Fixed: fixes/IntrinsicCoefficientTwistsUnrestricted.lean adds public import Sheaf.Paper.PbcCoefficientTwists. No name clash, no cycle, and the fixed pair compiles cleanly (4.3 s and 6.5 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

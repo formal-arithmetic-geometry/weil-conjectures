@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-finite-line-tensor-conditions",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "proof plan step isolated by the stage-3 worker"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exact tensor by a finite rank-one coefficient line preserves constructibility and Tor amplitude.",
+ "statement": "The theorem `WeilConjectures.finiteLineTensor_conditions` has the following exact Lean type. It is the strict intermediate interface used by the parent proposition:\n\ntheorem finiteLineTensor_conditions (S : Scheme.{u}) (A : Type u)\n    [CommRing A] [Finite A]\n    (L : proEtaleRingModules S (proEtaleConstantRing S A))\n    [L.IsFiniteLocallyFreeOfRank 1]\n    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := proEtaleConstantRing S A) L).Additive]\n    [PreservesFiniteLimits\n      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := proEtaleConstantRing S A) L)]\n    [PreservesFiniteColimits\n      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := proEtaleConstantRing S A) L)] :\n    IsLocallyConstantProEtaleModuleSheaf S A L ∧\n      (∀ M : proEtaleRingModules S (proEtaleConstantRing S A),\n        IsConstructibleProEtaleModuleSheaf S A M →\n        IsConstructibleProEtaleModuleSheaf S A\n          ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := proEtaleConstantRing S A) L).obj M)) ∧\n      ∀ (K : proEtaleDerivedCategory S A) (a b : ℤ),\n        HasProEtaleTorAmplitude S A K a b →\n        HasProEtaleTorAmplitude S A\n          ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := proEtaleConstantRing S A) L).mapDerivedCategory.obj K) a b",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "the corresponding isolated parent-proof steps"
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "a rank-one trivialization over the constant coefficient ring is a constant\nrank-one module model; hence the line is locally constant. Pull a trivializing cover\nback to each member of a constructible stratification and refine its locally constant\nmodels. The tensor then has model M tensor A, canonically isomorphic to M. Thus it\nhas the same finite stalks and the same finite partition, including on the empty scheme.\nFor Tor amplitude choose flat-term K-flat models P for K and Q for a test module M.\nTensor by the line is exact, so it preserves acyclic complexes and the vanishing of\ncohomology in each degree. Associativity and symmetry identify\n(P tensor L) tensor Q with (P tensor Q) tensor L. Tensor by L preserves the direct\nsums in total tensor, being a left adjoint. The complex P tensor L is still K-flat\nand has flat terms: its tensor with an acyclic complex is an exact line twist of\nan acyclic tensor. Consequently this rebracketing computes both derived tensors.\nApply the assumed Tor interval of K to M, then exact line tensor; the same ordered\ninterval works for all module sheaves M, with no constructibility assumption on M.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "the corresponding isolated parent-proof steps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/TwistPreservesFiniteness.lean",
+  "place": "parent proof, isolated intermediate interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(IsInvertible|LocallyFree)|Twist.*(preserv|inverse)",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"IsInvertible\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor powers and internal dual of a locally free rank one sheaf are invertible and give inverse tensor functors",
+   "results": "SheafOfModules.ιFree_mapFree_inv; Module.Invertible.rTensorEquiv; Module.Invertible.linearEquiv; CommRing.Pic.mk_dual",
+   "date": "2026-10-18",
+   "verdict": "nearest generic candidates; no exact coefficient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring sheaves with a locally free rank one module preserves constructibility, Tor amplitude, reductions and derived completeness",
+   "results": "ModuleCat.tildeInModuleCat; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.mapFree; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; SheafOfModules.free; SheafOfModules.Finite.forgetPreservesFiniteLimits; Algebra.TensorProduct.instFree; SheafOfModules.ιFree_mapFree_inv",
+   "date": "2026-10-18",
+   "verdict": "No exact match for the finite, integral and signed line interfaces; candidates concern free modules or exact scalar tensor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1802,
+ "blueprint_uses": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistPreservesFiniteness",
+  "date": "2026-10-19",
+  "group": "G5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteLineTensorConditions",
+  "file": "lean/Sheaf/Paper/FiniteLineTensorConditions.lean",
+  "declaration": "WeilConjectures.finiteLineTensor_conditions",
+  "statement": "theorem finiteLineTensor_conditions (S : Scheme.{u}) (A : Type u)\n    [CommRing A] [Finite A]\n    (L : proEtaleRingModules S (proEtaleConstantRing S A))\n    [L.IsFiniteLocallyFreeOfRank 1]\n    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := proEtaleConstantRing S A) L).Additive]\n    [PreservesFiniteLimits\n      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := proEtaleConstantRing S A) L)]\n    [PreservesFiniteColimits\n      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := proEtaleConstantRing S A) L)] :\n    IsLocallyConstantProEtaleModuleSheaf S A L ∧\n      (∀ M : proEtaleRingModules S (proEtaleConstantRing S A),\n        IsConstructibleProEtaleModuleSheaf S A M →\n        IsConstructibleProEtaleModuleSheaf S A\n          ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := proEtaleConstantRing S A) L).obj M)) ∧\n      ∀ (K : proEtaleDerivedCategory S A) (a b : ℤ),\n        HasProEtaleTorAmplitude S A K a b →\n        HasProEtaleTorAmplitude S A\n          ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := proEtaleConstantRing S A) L).mapDerivedCategory.obj K) a b",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

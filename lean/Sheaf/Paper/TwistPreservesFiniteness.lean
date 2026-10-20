@@ -13,29 +13,14 @@ public import Sheaf.Paper.SfDerivedComplete
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Paper.DerivedCompleteOnSlices
-import Sheaf.SecSmoothPurity.WeilTwistRationalization
-import Sheaf.Paper.IntegralTwistBaseChange
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Paper.SfScalarExtensionComposition
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 import Sheaf.Paper.FiniteTorAmplitudeSites
-import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import Sheaf.Paper.IntegralTwistDerivedScalarCanonical
-import Sheaf.Paper.IntegralTwistScalarCoherence
-import Sheaf.Paper.PurTwistSheafLocallyFree
-import Sheaf.Paper.QbarTwistCommonStage
-import Sheaf.Paper.SfRationalizationKaroubi
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
+import Sheaf.Paper.FieldTwistInverse
+import Sheaf.Paper.FiniteLineTensorConditions
+import Sheaf.Paper.IntegralLineTensorCompleteness
+import Sheaf.Paper.SignedLineTensorEquivalence
+import Sheaf.Paper.SignedTwistReductionComparison
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Tate twists preserve finiteness conditions
 
@@ -112,6 +97,112 @@ def IsCanonicalTwistReductionMaps (n : ℕ) (c : TwistReductionMaps l E S n) : P
       ((c (Int.ofNat (k + 1))).val.app U x) =
       (completedIntegralCommRingProjectionUnrestricted l E S n).hom.app U
         ((f.app (Opposite.op (Over.mk (𝟙 U.unop)))) x)
+
+private noncomputable def constantModulePullbackFunctor {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A] :
+    proEtaleRingModules Y (proEtaleConstantRing Y A) ⥤
+      proEtaleRingModules X (proEtaleConstantRing X A) := by
+  have := constantComparison_isIso f A
+  exact proEtaleRingModulePullback f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
+    (asIso (proEtaleCoefficientInverseImageMap f A))
+
+private theorem locallyConstant_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A]
+    {F G : proEtaleRingModules Y (proEtaleConstantRing Y A)} (e : F ≅ G)
+    (hF : IsLocallyConstantProEtaleModuleSheaf Y A F) :
+    IsLocallyConstantProEtaleModuleSheaf Y A G := by
+  obtain ⟨I, U, f, hc, ht⟩ := hF
+  refine ⟨I, U, f, hc, fun i ↦ ?_⟩
+  obtain ⟨M, ⟨hM⟩⟩ := ht i
+  exact ⟨M, ⟨(SheafOfModules.overFunctor _ (U i)).mapIso e.symm ≪≫ hM⟩⟩
+
+private theorem finite_stalk_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A]
+    {F G : proEtaleRingModules Y (proEtaleConstantRing Y A)} (e : F ≅ G)
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
+    [Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F)] :
+    Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) G) := by
+  let E : proEtaleRingModules Y (proEtaleConstantRing Y A) ⥤
+      ModuleCat.{u + 1} (proEtaleGeometricStalkRing y (proEtaleConstantRing Y A)) :=
+    (SheafOfModules.forget _ ⋙
+    PresheafOfModules.pushforward₀ (proEtaleGeometricNeighbourhoodForget y) _ ⋙
+    PresheafOfModules.colimitFunctor (C := ProEtaleGeometricNeighbourhood y)
+      (colimit.isColimit (proEtaleGeometricStalkRingDiagram y (proEtaleConstantRing Y A))))
+  have : Finite (E.obj F) :=
+    ‹Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F)›
+  change Finite (E.obj G)
+  exact Finite.of_injective (E.mapIso e.symm).toLinearEquiv
+    (E.mapIso e.symm).toLinearEquiv.injective
+
+private theorem constructibleProEtale_of_iso (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    {F G : proEtaleRingModules Y (proEtaleConstantRing Y A)} (e : F ≅ G)
+    (hF : IsConstructibleProEtaleModuleSheaf Y A F) :
+    IsConstructibleProEtaleModuleSheaf Y A G := by
+  obtain ⟨S, hn, hS⟩ := hF
+  refine ⟨S, hn, fun i ↦ ?_⟩
+  let e' : proEtaleConstantModulePullback (S.immersion i) A F ≅
+      proEtaleConstantModulePullback (S.immersion i) A G :=
+    (constantModulePullbackFunctor (S.immersion i) A).mapIso e
+  refine ⟨locallyConstant_of_iso _ A e' (hS i).1, ?_⟩
+  intro Ω _ _ y
+  have := (hS i).2 Ω y
+  exact finite_stalk_of_iso _ A e' y
+
+
+
+private theorem exact_support_subset (A : Type u) [CommRing A]
+    (F : proEtaleRingModules S (proEtaleConstantRing S A) ⥤
+      proEtaleRingModules S (proEtaleConstantRing S A))
+    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (K : proEtaleDerivedCategory S A) :
+    proEtaleCohomologicalSupport (F.mapDerivedCategory.obj K) ⊆
+      proEtaleCohomologicalSupport K := by
+  intro i hi hz
+  exact hi (((F.mapDerivedCategoryHomologyFunctorIso i).app K).isZero_iff.mp
+    (F.map_isZero hz))
+
+private theorem support_iso (A : Type u) [CommRing A]
+    {K K' : proEtaleDerivedCategory S A} (e : K ≅ K') :
+    proEtaleCohomologicalSupport K = proEtaleCohomologicalSupport K' := by
+  ext i
+  exact not_congr ((DerivedCategory.homologyFunctor _ i).mapIso e).isZero_iff
+
+private theorem tor_of_iso (A : Type u) [CommRing A]
+    {K K' : proEtaleDerivedCategory S A} (e : K ≅ K') (a b : ℤ)
+    (h : HasProEtaleTorAmplitude S A K a b) : HasProEtaleTorAmplitude S A K' a b := by
+  refine ⟨h.1, ?_⟩
+  intro L P hL f hf hP M i hi
+  exact h.2 L P (hL.map (fun e' ↦ e' ≪≫ e.symm)) f hf hP M i hi
+
+omit [∀ x : S, Invertible (l : S.residueField x)] in
+private theorem intrinsic_of_iso (n : ℕ)
+    {K K' : proEtaleDerivedCategory S (Padic.coefficientExtensionRing l E (n + 1))}
+    (e : K ≅ K') (h : intrinsicFiniteTorsionConstructible l E (n + 1)
+      (Nat.succ_pos n) S K) :
+    intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) S K' := by
+  let := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  refine ⟨?_, fun i ↦ constructibleProEtale_of_iso S _
+    ((DerivedCategory.homologyFunctor _ i).mapIso e) (h.2 i)⟩
+  change (proEtaleCohomologicalSupport K').Finite
+  rw [← support_iso S _ e]
+  exact h.1
+
+private theorem finite_twist_constructible (n : ℕ) (m : ℤ)
+    (hr : (finiteCoefficientTwist l E S n m).IsFiniteLocallyFreeOfRank 1)
+    (K : proEtaleDerivedCategory S (Padic.coefficientExtensionRing l E (n + 1)))
+    (hK : intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) S K) :
+    intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) S
+      ((finiteComplexTwist l E S n m).obj K) := by
+  let := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  let := hr
+  let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).1
+  let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).2.1
+  let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).2.2
+  let F := SheafOfModules.siteSheafTensorRight
+    (A := integralCoefficientCommRingSheaf l E S n) (finiteCoefficientTwist l E S n m)
+  refine ⟨hK.1.subset (exact_support_subset S _ F K), ?_⟩
+  intro i
+  exact constructibleProEtale_of_iso S _
+    ((F.mapDerivedCategoryHomologyFunctorIso i).app K)
+    ((finiteLineTensor_conditions S _ (finiteCoefficientTwist l E S n m)).2.1 _ (hK.2 i))
 
 /-- The exact preservation and inverse-twist assertions at all four coefficients.
 Source: blueprint node prop-weil-twist-preserves, order 1802; main order 2148
@@ -368,6 +459,108 @@ theorem twist_preserves_finiteness
       Nonempty (sfRationalTwistingFunctor l E S m ⋙
         sfRationalTwistingFunctor l E S (-m) ≅ 𝟭 _) ∧
       Nonempty (sfQbarTwistingFunctor l S Ω m ⋙ sfQbarTwistingFunctor l S Ω (-m) ≅ 𝟭 _) := by
-  sorry
+  intro m
+  have hfinite (n : ℕ) := signedLineTensor_equivalence S
+    (integralCoefficientCommRingSheaf l E S n) (purTwistFiniteOne S l E n) m
+  have hintegral := signedLineTensor_equivalence S
+    (completedIntegralCommRingSheafUnrestricted l E S) (purTwistIntegralModule S l E) m
+  have hred := signedTwistReduction_comparison l E S
+  have hfin (n : ℕ) : (finiteCoefficientTwist l E S n m).IsFiniteLocallyFreeOfRank 1 :=
+    (hfinite n).1
+  have htor (n : ℕ) (a b : ℤ)
+      (K : proEtaleDerivedCategory S (Padic.coefficientExtensionRing l E (n + 1)))
+      (hK : HasProEtaleTorAmplitude S (Padic.coefficientExtensionRing l E (n + 1)) K a b) :
+      HasProEtaleTorAmplitude S (Padic.coefficientExtensionRing l E (n + 1))
+        ((finiteComplexTwist l E S n m).obj K) a b := by
+    let := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+    let := hfin n
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).1
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).2.1
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).2.2
+    exact (finiteLineTensor_conditions S _ (finiteCoefficientTwist l E S n m)).2.2 K a b hK
+  have hsupp (n : ℕ) (a b : ℤ)
+      (K : proEtaleDerivedCategory S (Padic.coefficientExtensionRing l E (n + 1)))
+      (hK : proEtaleCohomologicalSupport K ⊆ Set.Icc a b) :
+      proEtaleCohomologicalSupport ((finiteComplexTwist l E S n m).obj K) ⊆ Set.Icc a b := by
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).1
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).2.1
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).2.2
+    exact (exact_support_subset S _ (SheafOfModules.siteSheafTensorRight
+      (A := integralCoefficientCommRingSheaf l E S n) (finiteCoefficientTwist l E S n m)) K).trans
+        hK
+  have hcomplete (K : DerivedCategory (scalarReductionSource l E S))
+      (hK : IsSfDerivedComplete l E S K) :
+      IsSfDerivedComplete l E S ((sfIntegralTwistingFunctor l E S m).obj K) := by
+    let := hintegral.1
+    have : (SheafOfModules.siteSheafTensorRight
+        (A := completedIntegralCommRingSheafUnrestricted l E S)
+        (integralTwistLine l E S m)).Additive := integralSheafTwist_additive l E S m
+    have : PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight
+        (A := completedIntegralCommRingSheafUnrestricted l E S)
+        (integralTwistLine l E S m)) := integralSheafTwist_finiteLimits l E S m
+    have : PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight
+        (A := completedIntegralCommRingSheafUnrestricted l E S)
+        (integralTwistLine l E S m)) := integralSheafTwist_finiteColimits l E S m
+    exact integralLineTensor_complete l E S (integralTwistLine l E S m) K hK
+  have hireduce (n : ℕ) (K : DerivedCategory (scalarReductionSource l E S)) :=
+    (hred.2.2 m n).some.app K
+  have hisupp (a b : ℤ) (K : DerivedCategory (scalarReductionSource l E S))
+      (hK : ∀ n : ℕ, proEtaleCohomologicalSupport
+        ((scalarReductionDerivedExtension l E S n).obj K) ⊆ Set.Icc a b) (n : ℕ) :
+      proEtaleCohomologicalSupport ((scalarReductionDerivedExtension l E S n).obj
+        ((sfIntegralTwistingFunctor l E S m).obj K)) ⊆ Set.Icc a b := by
+    exact (support_iso S _ (hireduce n K)).symm ▸ hsupp n a b _ (hK n)
+  have hitor (a b : ℤ) (K : DerivedCategory (scalarReductionSource l E S))
+      (hK : ∀ n : ℕ, HasProEtaleTorAmplitude S (Padic.coefficientExtensionRing l E (n + 1))
+        ((scalarReductionDerivedExtension l E S n).obj K) a b) (n : ℕ) :
+      HasProEtaleTorAmplitude S (Padic.coefficientExtensionRing l E (n + 1))
+        ((scalarReductionDerivedExtension l E S n).obj
+          ((sfIntegralTwistingFunctor l E S m).obj K)) a b :=
+    tor_of_iso S _ (hireduce n K).symm a b (htor n a b _ (hK n))
+  have hiconst (K : DerivedCategory (scalarReductionSource l E S))
+      (hK : sfIntegralConstructible l E S K) :
+      sfIntegralConstructible l E S ((sfIntegralTwistingFunctor l E S m).obj K) := by
+    obtain ⟨hc, a, b, hab, hr⟩ := hK
+    refine ⟨hcomplete K hc, a, b, hab, fun n ↦ ⟨?_, ?_⟩⟩
+    · exact intrinsic_of_iso l E S n (hireduce n K).symm
+        (finite_twist_constructible l E S n m (hfin n) _ (hr n).1)
+    · exact hisupp a b K (fun n ↦ (hr n).2) n
+  refine ⟨?_, hintegral.1, hred.1, hred.2.1, ?_, ?_, hsupp, htor,
+    hiconst, sfIntegralTwistingObject_mem l E S m, hcomplete, ?_, hisupp, hitor, ?_, ?_,
+    (fieldTwist_inverse l E S Ω m).1, (fieldTwist_inverse l E S Ω m).2⟩
+  · intro n
+    let := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+    let := hfin n
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).1
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).2.1
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).2.2
+    exact ⟨hfin n, (finiteLineTensor_conditions S _ (finiteCoefficientTwist l E S n m)).1⟩
+  · exact fun n K hK ↦ finite_twist_constructible l E S n m (hfin n) K hK
+  · intro n K hK
+    obtain ⟨hc, a, b, ht⟩ := hK
+    exact ⟨finite_twist_constructible l E S n m (hfin n) K hc, a, b, htor n a b K ht⟩
+  · intro K hK
+    obtain ⟨hc, a, b, hab, ht⟩ := hK
+    exact ⟨hiconst K hc, a, b, hab, hitor a b K ht⟩
+  · intro n
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).1
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).2.1
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) m).2.2
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) (-m)).1
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) (-m)).2.1
+    let := (coefficientTwistLine_exact S (purTwistFiniteOne S l E n) (-m)).2.2
+    obtain ⟨e⟩ := (hfinite n).2
+    exact ⟨(Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _⟩
+  · obtain ⟨e⟩ := hintegral.2
+    let C := integralTowerModules l E S
+    have : (𝟭 C).Additive := ⟨fun {_ _} _ _ ↦ rfl⟩
+    have : PreservesFiniteLimits (𝟭 C) := inferInstance
+    have : PreservesFiniteColimits (𝟭 C) := inferInstance
+    exact ⟨(Functor.mapDerivedCategoryCompIso (integralSheafTwist l E S m)
+      (integralSheafTwist l E S (-m))).symm ≪≫
+      Functor.mapDerivedCategoryNatIso
+        (G := 𝟭 (integralTowerModules l E S)) e ≪≫
+          Functor.mapDerivedCategoryIdIso _⟩
 
 end WeilConjectures

@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-signed-twist-reduction-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "proof plan step isolated by the stage-3 worker"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Signed completed line reductions have canonical finite-level comparisons.",
+ "statement": "The theorem `WeilConjectures.signedTwistReduction_comparison` has the following exact Lean type. It is the strict intermediate interface used by the parent proposition:\n\ntheorem signedTwistReduction_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (S : Scheme.{u})\n    [∀ x : S, Invertible (l : S.residueField x)] :\n    (∀ n : ℕ, ∃! c : (∀ k : ℤ, integralTwistLine l E S k ⟶\n      (scalarReductionRestriction l E S n).obj (finiteCoefficientTwist l E S n k)),\n    ((∀ (U : S.ProEtᵒᵖ)\n      (a : (completedIntegralCommRingSheafUnrestricted l E S).obj.obj U),\n    (c 0).val.app U a = (completedIntegralCommRingProjectionUnrestricted l E S n).hom.app U a) ∧\n  (∀ (U : S.ProEtᵒᵖ) (x : (purTwistIntegralModule S l E).val.obj U),\n    (c 1).val.app U x = ((((PresheafOfModules.sheafificationAdjunction\n    (𝟙 (integralCoefficientSheaf l E S n).obj)).unit.app\n      (SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1}\n        (purTwistIntegralQuotient S l E n) (purTwistIntegralOne S l E))).app U)\n      ((1 : (integralCoefficientSheaf l E S n).obj.obj U) ⊗ₜ[\n        (purTwistIntegralConstant S l E).obj.obj U,\n        ((purTwistIntegralQuotient S l E n).hom.app U).hom] x))) ∧\n  (∀ (k : ℕ) (U : S.ProEtᵒᵖ)\n      (x : (coefficientTwistPower S\n        (R := completedIntegralCommRingSheafUnrestricted l E S)\n        (purTwistIntegralModule S l E) (k + 1)).val.obj U)\n      (y : (purTwistIntegralModule S l E).val.obj U),\n    (c (Int.ofNat (k + 2))).val.app U\n      (SheafOfModules.siteSheafTensorTmul\n        (A := completedIntegralCommRingSheafUnrestricted l E S) _ _ U x y) =\n      SheafOfModules.siteSheafTensorTmul\n        (A := integralCoefficientCommRingSheaf l E S n) _ _ U\n        ((c (Int.ofNat (k + 1))).val.app U x) ((c 1).val.app U y)) ∧\n  ∀ (k : ℕ) (U : S.ProEtᵒᵖ)\n      (f : (integralTwistLine l E S (Int.negSucc k)).val.obj U)\n      (x : (coefficientTwistPower S\n        (R := completedIntegralCommRingSheafUnrestricted l E S)\n        (purTwistIntegralModule S l E) (k + 1)).val.obj U),\n    (((c (Int.negSucc k)).val.app U f).app (Opposite.op (Over.mk (𝟙 U.unop))))\n      ((c (Int.ofNat (k + 1))).val.app U x) =\n      (completedIntegralCommRingProjectionUnrestricted l E S n).hom.app U\n        ((f.app (Opposite.op (Over.mk (𝟙 U.unop)))) x)) ∧\n    ∀ k : ℤ, ∃! α : (scalarReductionExtension l E S n).obj\n        (integralTwistLine l E S k) ≅ finiteCoefficientTwist l E S n k,\n      ∀ (U : S.ProEtᵒᵖ) (a : (integralCoefficientCommRingSheaf l E S n).obj.obj U)\n          (x : (integralTwistLine l E S k).val.obj U),\n        α.hom.val.app U (sfReductionTensor l E S n (integralTwistLine l E S k) U a x) =\n          a • (@id ((finiteCoefficientTwist l E S n k).val.obj U) ((c k).val.app U x))) ∧\n    (∀ k : ℤ, ∀ n : ℕ, Nonempty ((scalarReductionDerivedExtension l E S n).obj\n      (sfIntegralTwistingObject l E S k) ≅\n        (DerivedCategory.singleFunctor _ 0).obj (finiteCoefficientTwist l E S n k))) ∧\n    ∀ (m : ℤ) (n : ℕ), Nonempty (sfIntegralTwistingFunctor l E S m ⋙\n      scalarReductionDerivedExtension l E S n ≅\n      scalarReductionDerivedExtension l E S n ⋙ finiteComplexTwist l E S n m)",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "the corresponding isolated parent-proof steps"
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-weil-integral-derived-reduction"
+ ],
+ "proof": [
+  {
+   "text": "the integral first line reduces to its prescribed finite line by the original\nquotient tensor construction. The reduction of the unit is the coefficient projection.\nTensor these maps recursively to obtain the positive powers. For a negative power,\nuse the unique map of duals compatible with the evaluation pairing. On a cover\ntrivializing the integral line these maps are the quotient coefficient maps, and\nthe induced scalar extensions are the identity on the quotient coefficient unit.\nThus all induced extension maps are isomorphisms. They glue because their equations\non tensors and evaluations are independent of the local basis. These equations also\nprove uniqueness, first at zero and one, then by induction on positive powers and\nby nondegeneracy of the dual pairing at negative powers. For derived comparisons,\nresolve K by a flat-term K-flat complex P. Exact line tensor preserves K-flatness\nand flat terms. Reduction of P is K-flat over the quotient ring. Rebracketing sends\n(x tensor y) tensor a to (x tensor a) tensor (y tensor 1), and its inverse multiplies\nthe two quotient coefficients. The balanced maps commute with differentials and\nwith every chain map, so descend to the displayed natural derived isomorphism.\nThe same computation on the flat degree-zero line gives the single-object comparison.\nAll formulas commute with quotient transitions and the unit augmentations.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-integral-twist-base-change",
+    "lem-weil-integral-twist-derived-scalar",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "the corresponding isolated parent-proof steps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-integral-twist-base-change",
+  "lem-weil-integral-twist-derived-scalar",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/TwistPreservesFiniteness.lean",
+  "place": "parent proof, isolated intermediate interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(IsInvertible|LocallyFree)|Twist.*(preserv|inverse)",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"IsInvertible\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor powers and internal dual of a locally free rank one sheaf are invertible and give inverse tensor functors",
+   "results": "SheafOfModules.ιFree_mapFree_inv; Module.Invertible.rTensorEquiv; Module.Invertible.linearEquiv; CommRing.Pic.mk_dual",
+   "date": "2026-10-18",
+   "verdict": "nearest generic candidates; no exact coefficient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring sheaves with a locally free rank one module preserves constructibility, Tor amplitude, reductions and derived completeness",
+   "results": "ModuleCat.tildeInModuleCat; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.mapFree; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; SheafOfModules.free; SheafOfModules.Finite.forgetPreservesFiniteLimits; Algebra.TensorProduct.instFree; SheafOfModules.ιFree_mapFree_inv",
+   "date": "2026-10-18",
+   "verdict": "No exact match for the finite, integral and signed line interfaces; candidates concern free modules or exact scalar tensor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1802,
+ "blueprint_uses": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistPreservesFiniteness",
+  "date": "2026-10-19",
+  "group": "G5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SignedTwistReductionComparison",
+  "file": "lean/Sheaf/Paper/SignedTwistReductionComparison.lean",
+  "declaration": "WeilConjectures.signedTwistReduction_comparison",
+  "statement": "theorem signedTwistReduction_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (S : Scheme.{u})\n    [∀ x : S, Invertible (l : S.residueField x)] :\n    (∀ n : ℕ, ∃! c : (∀ k : ℤ, integralTwistLine l E S k ⟶\n      (scalarReductionRestriction l E S n).obj (finiteCoefficientTwist l E S n k)),\n    ((∀ (U : S.ProEtᵒᵖ)\n      (a : (completedIntegralCommRingSheafUnrestricted l E S).obj.obj U),\n    (c 0).val.app U a = (completedIntegralCommRingProjectionUnrestricted l E S n).hom.app U a) ∧\n  (∀ (U : S.ProEtᵒᵖ) (x : (purTwistIntegralModule S l E).val.obj U),\n    (c 1).val.app U x = ((((PresheafOfModules.sheafificationAdjunction\n    (𝟙 (integralCoefficientSheaf l E S n).obj)).unit.app\n      (SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1}\n        (purTwistIntegralQuotient S l E n) (purTwistIntegralOne S l E))).app U)\n      ((1 : (integralCoefficientSheaf l E S n).obj.obj U) ⊗ₜ[\n        (purTwistIntegralConstant S l E).obj.obj U,\n        ((purTwistIntegralQuotient S l E n).hom.app U).hom] x))) ∧\n  (∀ (k : ℕ) (U : S.ProEtᵒᵖ)\n      (x : (coefficientTwistPower S\n        (R := completedIntegralCommRingSheafUnrestricted l E S)\n        (purTwistIntegralModule S l E) (k + 1)).val.obj U)\n      (y : (purTwistIntegralModule S l E).val.obj U),\n    (c (Int.ofNat (k + 2))).val.app U\n      (SheafOfModules.siteSheafTensorTmul\n        (A := completedIntegralCommRingSheafUnrestricted l E S) _ _ U x y) =\n      SheafOfModules.siteSheafTensorTmul\n        (A := integralCoefficientCommRingSheaf l E S n) _ _ U\n        ((c (Int.ofNat (k + 1))).val.app U x) ((c 1).val.app U y)) ∧\n  ∀ (k : ℕ) (U : S.ProEtᵒᵖ)\n      (f : (integralTwistLine l E S (Int.negSucc k)).val.obj U)\n      (x : (coefficientTwistPower S\n        (R := completedIntegralCommRingSheafUnrestricted l E S)\n        (purTwistIntegralModule S l E) (k + 1)).val.obj U),\n    (((c (Int.negSucc k)).val.app U f).app (Opposite.op (Over.mk (𝟙 U.unop))))\n      ((c (Int.ofNat (k + 1))).val.app U x) =\n      (completedIntegralCommRingProjectionUnrestricted l E S n).hom.app U\n        ((f.app (Opposite.op (Over.mk (𝟙 U.unop)))) x)) ∧\n    ∀ k : ℤ, ∃! α : (scalarReductionExtension l E S n).obj\n        (integralTwistLine l E S k) ≅ finiteCoefficientTwist l E S n k,\n      ∀ (U : S.ProEtᵒᵖ) (a : (integralCoefficientCommRingSheaf l E S n).obj.obj U)\n          (x : (integralTwistLine l E S k).val.obj U),\n        α.hom.val.app U (sfReductionTensor l E S n (integralTwistLine l E S k) U a x) =\n          a • (@id ((finiteCoefficientTwist l E S n k).val.obj U) ((c k).val.app U x))) ∧\n    (∀ k : ℤ, ∀ n : ℕ, Nonempty ((scalarReductionDerivedExtension l E S n).obj\n      (sfIntegralTwistingObject l E S k) ≅\n        (DerivedCategory.singleFunctor _ 0).obj (finiteCoefficientTwist l E S n k))) ∧\n    ∀ (m : ℤ) (n : ℕ), Nonempty (sfIntegralTwistingFunctor l E S m ⋙\n      scalarReductionDerivedExtension l E S n ≅\n      scalarReductionDerivedExtension l E S n ⋙ finiteComplexTwist l E S n m)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

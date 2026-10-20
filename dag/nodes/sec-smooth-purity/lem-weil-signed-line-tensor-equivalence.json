@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-signed-line-tensor-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "proof plan step isolated by the stage-3 worker"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Signed powers of a coefficient line give inverse tensor functors.",
+ "statement": "The theorem `WeilConjectures.signedLineTensor_equivalence` has the following exact Lean type. It is the strict intermediate interface used by the parent proposition:\n\ntheorem signedLineTensor_equivalence (S : Scheme.{u})\n    (R : Sheaf (ProEt.topology S) CommRingCat.{u + 1})\n    (L : SheafOfModules.{u + 1}\n      ((sheafCompose (ProEt.topology S) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))\n    [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :\n    (coefficientTwistLine.{u} S (R := R) L m).IsFiniteLocallyFreeOfRank 1 ∧\n      Nonempty (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} (A := R)\n          (coefficientTwistLine.{u} S L m) ⋙\n        SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} (A := R)\n          (coefficientTwistLine.{u} S L (-m)) ≅ 𝟭 _)",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "the corresponding isolated parent-proof steps"
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pur-sheaf-hom",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "choose a cover on which L is the coefficient unit. Tensor powers restrict to\npowers of the unit; internal Hom restricts to the Hom of the restrictions, so its\nnegative powers are units on that same cover. This proves rank one for all signed\npowers, including zero. The evaluation pairings identify the positive power tensored\nwith its internal dual with the unit: locally they are multiplication of coefficients.\nFor negative exponents the bidual evaluation identifies the other signed power with\nthat dual, since evaluation is an isomorphism for a rank-one free module. The local\ninverses of evaluation glue, since the evaluation map is defined before trivializing.\nAssociate (M tensor L(m)) tensor L(-m) to M tensor (L(m) tensor L(-m)), apply this\nevaluation and the unit isomorphism. These isomorphisms are natural in M, and give\nthe asserted inverse tensor functors. Empty covering members cause no exception.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed",
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "the corresponding isolated parent-proof steps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "def-pur-sheaf-hom",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/TwistPreservesFiniteness.lean",
+  "place": "parent proof, isolated intermediate interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(IsInvertible|LocallyFree)|Twist.*(preserv|inverse)",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"IsInvertible\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor powers and internal dual of a locally free rank one sheaf are invertible and give inverse tensor functors",
+   "results": "SheafOfModules.ιFree_mapFree_inv; Module.Invertible.rTensorEquiv; Module.Invertible.linearEquiv; CommRing.Pic.mk_dual",
+   "date": "2026-10-18",
+   "verdict": "nearest generic candidates; no exact coefficient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring sheaves with a locally free rank one module preserves constructibility, Tor amplitude, reductions and derived completeness",
+   "results": "ModuleCat.tildeInModuleCat; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.mapFree; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; SheafOfModules.free; SheafOfModules.Finite.forgetPreservesFiniteLimits; Algebra.TensorProduct.instFree; SheafOfModules.ιFree_mapFree_inv",
+   "date": "2026-10-18",
+   "verdict": "No exact match for the finite, integral and signed line interfaces; candidates concern free modules or exact scalar tensor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1802,
+ "blueprint_uses": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistPreservesFiniteness",
+  "date": "2026-10-19",
+  "group": "G5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SignedLineTensorEquivalence",
+  "file": "lean/Sheaf/Paper/SignedLineTensorEquivalence.lean",
+  "declaration": "WeilConjectures.signedLineTensor_equivalence",
+  "statement": "theorem signedLineTensor_equivalence (S : Scheme.{u})\n    (R : Sheaf (ProEt.topology S) CommRingCat.{u + 1})\n    (L : SheafOfModules.{u + 1}\n      ((sheafCompose (ProEt.topology S) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))\n    [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :\n    (coefficientTwistLine.{u} S (R := R) L m).IsFiniteLocallyFreeOfRank 1 ∧\n      Nonempty (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} (A := R)\n          (coefficientTwistLine.{u} S L m) ⋙\n        SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} (A := R)\n          (coefficientTwistLine.{u} S L (-m)) ≅ 𝟭 _)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

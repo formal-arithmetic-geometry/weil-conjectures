@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-field-twist-inverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "proof plan step isolated by the stage-3 worker"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rational and algebraically closed coefficient twists have inverse evaluations.",
+ "statement": "The theorem `WeilConjectures.fieldTwist_inverse` has the following exact Lean type. It is the strict intermediate interface used by the parent proposition:\n\ntheorem fieldTwist_inverse\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (S : Scheme.{u})\n    [∀ x : S, Invertible (l : S.residueField x)]\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (m : ℤ) :\n    Nonempty (sfRationalTwistingFunctor l E S m ⋙\n      sfRationalTwistingFunctor l E S (-m) ≅ 𝟭 _) ∧\n    Nonempty (sfQbarTwistingFunctor l S Ω m ⋙ sfQbarTwistingFunctor l S Ω (-m) ≅ 𝟭 _)",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "the corresponding isolated parent-proof steps"
+ },
+ "stmt_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Choose a prime p greater than l and a finite-field datum of characteristic p. Apply tateTwist_locallyFree with an algebraic-closure embedding of E into Omega. Its field-stage clauses supply equivalences whose functor and inverse are exactly the prescribed twists at n and -n. Substitute those functor equalities into the unit and counit isomorphisms. For a nonnegative integer m use the unit inverses; for a negative integer use the counits at its positive absolute value. This gives both the rational and common-stage inverse identities, including exponent zero.",
+   "uses": [
+    "det-def-sp-tate-twist-locally-free"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-def-sp-tate-twist-locally-free"
+ ],
+ "proof_origin": "Proof from the existing signed Tate equivalences in det-def-sp-tate-twist-locally-free; arithmetic choice of an auxiliary finite-field datum does not impose a condition on S.",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(IsInvertible|LocallyFree)|Twist.*(preserv|inverse)",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"IsInvertible\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor powers and internal dual of a locally free rank one sheaf are invertible and give inverse tensor functors",
+   "results": "SheafOfModules.ιFree_mapFree_inv; Module.Invertible.rTensorEquiv; Module.Invertible.linearEquiv; CommRing.Pic.mk_dual",
+   "date": "2026-10-18",
+   "verdict": "nearest generic candidates; no exact coefficient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring sheaves with a locally free rank one module preserves constructibility, Tor amplitude, reductions and derived completeness",
+   "results": "ModuleCat.tildeInModuleCat; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.mapFree; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; SheafOfModules.free; SheafOfModules.Finite.forgetPreservesFiniteLimits; Algebra.TensorProduct.instFree; SheafOfModules.ιFree_mapFree_inv",
+   "date": "2026-10-18",
+   "verdict": "No exact match for the finite, integral and signed line interfaces; candidates concern free modules or exact scalar tensor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1802,
+ "blueprint_uses": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistPreservesFiniteness",
+  "date": "2026-10-19",
+  "group": "G5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldTwistInverse",
+  "file": "lean/Sheaf/Paper/FieldTwistInverse.lean",
+  "declaration": "WeilConjectures.fieldTwist_inverse",
+  "statement": "theorem fieldTwist_inverse\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (S : Scheme.{u})\n    [∀ x : S, Invertible (l : S.residueField x)]\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (m : ℤ) :\n    Nonempty (sfRationalTwistingFunctor l E S m ⋙\n      sfRationalTwistingFunctor l E S (-m) ≅ 𝟭 _) ∧\n    Nonempty (sfQbarTwistingFunctor l S Ω m ⋙ sfQbarTwistingFunctor l S Ω (-m) ≅ 𝟭 _)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

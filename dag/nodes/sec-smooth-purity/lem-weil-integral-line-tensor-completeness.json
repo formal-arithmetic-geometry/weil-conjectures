@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-integral-line-tensor-completeness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "proof plan step isolated by the stage-3 worker"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor by a completed rank-one line preserves derived completeness.",
+ "statement": "The theorem `WeilConjectures.integralLineTensor_complete` has the following exact Lean type. It is the strict intermediate interface used by the parent proposition:\n\ntheorem integralLineTensor_complete\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (S : Scheme.{u})\n    (L : scalarReductionSource.{u, u} l E S)\n    [SheafOfModules.IsFiniteLocallyFreeOfRank.{u + 1, u, u + 1} L 1]\n    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L).Additive]\n    [PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L)]\n    [PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L)]\n    (K : DerivedCategory.{u + 2} (scalarReductionSource.{u, u} l E S))\n    (hK : IsSfDerivedComplete l E S K) :\n    IsSfDerivedComplete l E S\n      ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L).mapDerivedCategory.obj\n          K)",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "the corresponding isolated parent-proof steps"
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction"
+ ],
+ "proof": [
+  {
+   "text": "the internal dual of L is its tensor inverse, checked after a rank-one\ntrivialization. Tensor by L and by that dual are inverse exact equivalences of module\nsheaves, and hence give inverse triangulated equivalences on unbounded derived\ncategories. The derived equivalence preserves products by their universal property:\nmaps B to the image of a product correspond to maps from the inverse image of B\nto that product, and hence to the product of the corresponding component Hom sets.\nChoose flat-term K-flat representatives for the reductions of K. The usual balanced\nassociativity map identifies reduction of K tensor L with reduction of K tensored\nwith the ordinary reduction of L. After restriction of scalars it also identifies\nthese reductions with the line twist of the original restricted reductions, without\nrequiring those restrictions to be K-flat over the integral ring. On pure tensors\nthese maps commute with quotient transitions and with x mapped to 1 tensor x.\nApply the triangulated equivalence to the distinguished augmented Roos triangle\nin IsSfDerivedComplete. Its product comparisons and the preceding compatible\nreduction comparisons identify its first map with the canonical reduction units\nand its second map with 1 minus the quotient shift. The transported connecting map\ntherefore supplies exactly the required distinguished triangle. This argument uses\nno boundedness, constructibility, or choice of a unique map to a derived limit.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-weil-integral-derived-reduction",
+    "def-weil-derived-complete",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "the corresponding isolated parent-proof steps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/TwistPreservesFiniteness.lean",
+  "place": "parent proof, isolated intermediate interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(IsInvertible|LocallyFree)|Twist.*(preserv|inverse)",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"IsInvertible\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor powers and internal dual of a locally free rank one sheaf are invertible and give inverse tensor functors",
+   "results": "SheafOfModules.ιFree_mapFree_inv; Module.Invertible.rTensorEquiv; Module.Invertible.linearEquiv; CommRing.Pic.mk_dual",
+   "date": "2026-10-18",
+   "verdict": "nearest generic candidates; no exact coefficient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring sheaves with a locally free rank one module preserves constructibility, Tor amplitude, reductions and derived completeness",
+   "results": "ModuleCat.tildeInModuleCat; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.mapFree; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; SheafOfModules.free; SheafOfModules.Finite.forgetPreservesFiniteLimits; Algebra.TensorProduct.instFree; SheafOfModules.ιFree_mapFree_inv",
+   "date": "2026-10-18",
+   "verdict": "No exact match for the finite, integral and signed line interfaces; candidates concern free modules or exact scalar tensor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1802,
+ "blueprint_uses": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistPreservesFiniteness",
+  "date": "2026-10-19",
+  "group": "G5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLineTensorCompleteness",
+  "file": "lean/Sheaf/Paper/IntegralLineTensorCompleteness.lean",
+  "declaration": "WeilConjectures.integralLineTensor_complete",
+  "statement": "theorem integralLineTensor_complete\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (S : Scheme.{u})\n    (L : scalarReductionSource.{u, u} l E S)\n    [SheafOfModules.IsFiniteLocallyFreeOfRank.{u + 1, u, u + 1} L 1]\n    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L).Additive]\n    [PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L)]\n    [PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L)]\n    (K : DerivedCategory.{u + 2} (scalarReductionSource.{u, u} l E S))\n    (hK : IsSfDerivedComplete l E S K) :\n    IsSfDerivedComplete l E S\n      ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L).mapDerivedCategory.obj\n          K)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261020T051323-L-1634726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
