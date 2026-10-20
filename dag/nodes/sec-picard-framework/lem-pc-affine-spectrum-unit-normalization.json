@@ -79,9 +79,9 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumUnitNormalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumUnitNormalization.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.AffineSpectrumUnitNormalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineSpectrumUnitNormalization.lean",
   "declaration": "AlgebraicGeometry.affineSpectrum_unit_normalization",
   "statement": "theorem affineSpectrum_unit_normalization (X : Scheme.{u}) [IsAffine X] :\n  let c : ∀ {P Q Z : Scheme.{u}} (k : P ⟶ Q) (l : Q ⟶ Z),\n      derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l) :=\n    fun k l ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))) k l\n  let i : ∀ Y : Scheme.{u}, derivedPullback (𝟙 Y) ≅ 𝟭 _ :=\n    Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))).2\n  (affineSpectrumInversePullbackEquivalence X).unitIso.inv =\n    (c X.isoSpec.hom X.isoSpec.inv ≪≫\n      eqToIso (congrArg (fun k : X ⟶ X ↦ derivedPullback k) X.isoSpec.hom_inv_id) ≪≫\n      i X).hom",
   "branch": "sheaf-dag",
@@ -99,14 +99,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K1",
+  "reviewer": "C-db122",
+  "group": "P8",
   "result": "pass",
-  "landing": "20261013T181107-L-2602702",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T155434-L-3242299",
+  "kind": "proof",
+  "note": "independent cc review: node lem-pc-affine-spectrum-unit-normalization lean.statement vs WeilConjectures/AlgebraicGeometry/AffineSpectrumUnitNormalization.lean:127 (byte-identical); node diff vs live = lean.existing/module/file only; forwarding module compiled, axioms propext/Classical.choice/Quot.sound; retire-items.tsv:2235 retires this Sheaf module to the same twin"
  },
  "lean_audit": {
   "master": {
