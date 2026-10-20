@@ -265,6 +265,24 @@ def targetResC [Finite B] [Finite C] (a : B →+* C)
       ((modulePullback C gU ⋙ moduleJ C j') ⋙ res a X').mapHomologicalComplex (.up ℤ) :=
   NatIso.mapHomologicalComplex (targetRes a gU j') (.up ℤ)
 
+/-- Degreewise scalar exchange for the finite open comparison.
+Source: the finite open exchange argument, before lifting to cochain complexes
+(blueprint: lem-cbc-finite-open-exchange-scalars).
+Proof: unfold the termwise scalar restriction, source and target identifications, and the
+finite open Beck--Chevalley comparison. The coefficient square and mate-unit equations
+identify the two composites; uniqueness of adjunction mates gives the displayed equality.
+(blueprint: lem-cbc-finite-open-exchange-scalars-component) -/
+theorem exchange_restrictScalars_component [Finite B] [Finite C] (a : B →+* C)
+    {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
+    (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j']
+    (h : gU ≫ j = j' ≫ g) (hsq : IsPullback gU j' j g)
+    (M : Modules C U) :
+    (sourceRes a j g).hom.app M ≫
+        (res a X').map ((beta C gU j' j g h hsq).hom.app M) =
+      (beta B gU j' j g h hsq).hom.app ((res a U).obj M) ≫
+        (targetRes a gU j').hom.app M := by
+  sorry
+
 /-- Restriction carries the finite C-exchange to the finite B-exchange, for every complex.
 Source: blueprint finite exchange paragraph; Stacks Tags 03DI and 03CY
 (blueprint: lem-cbc-finite-open-exchange-scalars).
@@ -283,7 +301,13 @@ theorem exchange_restrictScalars [Finite B] [Finite C] (a : B →+* C)
         (resC a X').map ((betaC C gU j' j g h hsq).hom.app F) =
       (betaC B gU j' j g h hsq).hom.app ((resC a U).obj F) ≫
         (targetResC a gU j').hom.app F := by
-  sorry
+  ext i V x
+  change (((sourceRes a j g).hom.app (F.X i)) ≫
+      (res a X').map ((beta C gU j' j g h hsq).hom.app (F.X i))).val.app V x =
+    (((beta B gU j' j g h hsq).hom.app ((res a U).obj (F.X i))) ≫
+      (targetRes a gU j').hom.app (F.X i)).val.app V x
+  exact congrArg (fun z ↦ z.val.app V x)
+    (exchange_restrictScalars_component a gU j' j g h hsq (F.X i))
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Scalar restriction preserves the specified open unit and counit.

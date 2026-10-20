@@ -19067,3 +19067,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:06 L: returned deliver/Q3/Sheaf.CategoryTheory.RingedSiteCechRefinementSquare (reviewer RETURN: (the landing tools, head cd69869e1) the delivery did not land: lean/Sheaf/CategoryTheory/RingedSiteCechRefinementSquare.)
 - 23:06 L: returned deliver/R6/Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint (reviewer RETURN: (the landing tools, head 81039679e) the delivery did not land: (d) user Sheaf.Paper.CoefficientLevelOrdinaryImages (ment)
 - 23:06 L: returned deliver/T3/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (the landing tools, head 39e48f366) the delivery did not land: lean/Sheaf/Paper/RingedProjectionRestriction.lean changed)
+- 23:07 L: merged deliver/A2/Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars (stage 3; reviewer PASS; first push; landing 20261020T230700-L-599993 (proof); batch 20261020T230657; modules 1; new nodes 1)
