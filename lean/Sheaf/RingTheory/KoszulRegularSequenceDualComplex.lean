@@ -13,7 +13,7 @@ import WeilConjectures.RingTheory.KoszulCoefficientExtension
 import WeilConjectures.RingTheory.KoszulRegularFlatBaseChange
 import Mathlib.RingTheory.Flat.Localization
 import WeilConjectures.RingTheory.KoszulExtRoofRepresentatives
-import Sheaf.RingTheory.KoszulRoofComparisonIndependence
+import WeilConjectures.RingTheory.KoszulRoofComparisonIndependence
 import WeilConjectures.RingTheory.KoszulConormalBasis
 import WeilConjectures.RingTheory.KoszulConormalComparisonExistence
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
@@ -450,7 +450,7 @@ theorem intrinsic_ext_determinant_roof
         HomologicalComplex.cyclesMap_i_assoc]
     have hh' := congrArg (fun k ↦ k y) hh
     simpa only [ModuleCat.comp_apply, hz, koszulComparisonValue] using hh'
-  have htransport := koszul_roof_comparison_independent A I r f₀ f hreg₀ hreg hf₀ hf
+  have htransport := koszul_roof_comparison_independent A I r f₀ f hreg₀ hf₀ hf
     φ₀ φ hφ₀.1 hφ.1 ε₀ ε haug₀ haug z₀ z
     (by simpa only [x, LinearEquiv.apply_symm_apply] using
       congrArg (Abelian.Ext.homLinearEquiv (R := A)) hx.symm)
