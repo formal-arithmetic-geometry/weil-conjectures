@@ -123,14 +123,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationGenericComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StalkNormalizationGenericComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.GaloisCover.stalk_normalization_generic_comparison",
-  "statement": "theorem GaloisCover.stalk_normalization_generic_comparison {S C : Scheme.{u}} [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x)) (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] (G : Type (u + 1)) [Group G] [Finite G] {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C) (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c) (Z : GaloisCover G Cη) (U : S.Opens) (hηU : genericPoint S ∈ U) (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale) (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j) (hψ : IsPullback ψ Z.π PA.obj.hom jU) (s : S) (hs : s ∉ U) (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) (hdvr : IsDiscreteValuationRing (S.presheaf.stalk s)) : letI : IsFinite PA.obj.hom := PA.property letI : QuasiCompact (c ⁻¹ᵁ U).ι := MorphismProperty.of_isPullback (isPullback_morphismRestrict c U) (inferInstance : QuasiCompact U.ι) let a := S.fromSpecStalk s let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) letI : IsDiscreteValuationRing (S.presheaf.stalk s) := hdvr ∃ W : GaloisCover G (pullback (pullback.snd c a) (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) S.functionField)))), letI : IsFinite W.π := W.isFinite ∃ β : pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) ≅ (W.π ≫ pullback.fst (pullback.snd c a) (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) S.functionField)))).normalization, β.hom ≫ (W.π ≫ pullback.fst (pullback.snd c a) (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) S.functionField)))).fromNormalization = n",
+  "statement": "theorem GaloisCover.stalk_normalization_generic_comparison {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (G : Type (u + 1)) [Group G] [Finite G]\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    (Z : GaloisCover G Cη)\n    (U : S.Opens)\n    (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)\n    (hψ : IsPullback ψ Z.π PA.obj.hom jU)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdvr : IsDiscreteValuationRing (S.presheaf.stalk s)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    letI : IsDiscreteValuationRing (S.presheaf.stalk s) := hdvr\n    ∃ W : GaloisCover G (pullback (pullback.snd c a)\n        (Spec.map (CommRingCat.ofHom\n          (algebraMap (S.presheaf.stalk s) S.functionField)))),\n      letI : IsFinite W.π := W.isFinite\n      ∃ β : pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) ≅\n        (W.π ≫ pullback.fst (pullback.snd c a)\n          (Spec.map (CommRingCat.ofHom\n            (algebraMap (S.presheaf.stalk s) S.functionField)))).normalization,\n        β.hom ≫ (W.π ≫ pullback.fst (pullback.snd c a)\n          (Spec.map (CommRingCat.ofHom\n            (algebraMap (S.presheaf.stalk s) S.functionField)))).fromNormalization = n",
   "branch": "sheaf-dag",
-  "by": "J3",
-  "date": "2026-10-13"
+  "by": "G7",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf duplicate in favor of the proved canonical upstream theorem. The canonical statement drops the unused hS and hηU hypotheses; both consumers keep their statements and use the canonical argument list. The three-step normalization comparison proof and its dependencies are unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -143,14 +144,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S3",
+  "reviewer": "C-838e7",
+  "group": "G7",
   "result": "pass",
-  "landing": "20261013T054237-L-449456",
+  "landing": "20261020T221200-L-4154504",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf GaloisCover.stalk_normalization_generic_comparison with the proved WeilConjectures twin (same statement minus unused hS, hηU); node lean record existing:true verbatim; both direct consumers adapted (import plus call, scoped linter option) and compiled"
  },
  "lean_audit": {
   "master": {

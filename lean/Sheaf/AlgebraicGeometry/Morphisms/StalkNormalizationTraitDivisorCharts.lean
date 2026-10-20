@@ -17,7 +17,7 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 public import Mathlib.RingTheory.AdjoinRoot
 
-import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDenseOpen
 import WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal
 import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorPrescribedPuncturedRootChart
@@ -253,7 +253,7 @@ theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
   let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
   let : IsFinite n := hn
   obtain ⟨W, β, hβ⟩ := GaloisCover.stalk_normalization_generic_comparison
-    hS c G q j hCη Z U hηU jU PA ψ hjU hψ s hs hmin hdvr
+    c G q j hCη Z U jU PA ψ hjU hψ s hs hmin hdvr
   let : IsFinite W.π := W.isFinite
   let b := Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) S.functionField))
   let p := W.π ≫ pullback.fst d b
