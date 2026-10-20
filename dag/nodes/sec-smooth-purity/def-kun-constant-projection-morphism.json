@@ -41,15 +41,20 @@
    "text": "The remaining constructions are unchanged: compose the normalized monoidal constant-presheaf functor with monoidal sheafification, derive the constant-sheaf/global-sections adjunction, and take rightAdjointProjectionMap of the canonical leftDerivedTensorComparison. The two proved theorems supply the same existing instances without any postponed proof.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Package the transformation with its component evaluation, the reflexive equation identifying those components, and transport of componentwise invertibility. projectionComponents constructs all data explicitly. constantProjectionComponents specializes that package once; constantDerivedProjectionMap uses its component field. This is definitionally the same existing mate and keeps its signature unchanged. The package prevents repeated reduction of the large derived tensor instances during kernel checking.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sfb-etale-flat-geometric-fibers"
  ],
  "proof_origin": {
-  "by": "C6 stage 3",
-  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
-  "place": "Tags 07A4, 07A6, equation 0B56; lemma-check-flat-stalks. Constant-presheaf core follows the explicit existing Functor.Monoidal.const construction; geometric fibers use the existing FlatModuleCat criterion and Point.sheafFiberConstantSheafIso."
+  "by": "Q8 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0B56; unchanged canonical mate, stable component evaluation interface; existing C6 proofs retained."
  },
  "mathlib_searches": [
   {
@@ -119,7 +124,10 @@
    "AlgebraicGeometry.Etale.etaleConstantSheafMonoidal",
    "AlgebraicGeometry.Etale.etaleConstantSheaf_preservesFlat",
    "AlgebraicGeometry.Etale.derivedConstantGlobalSectionsAdjunction",
-   "AlgebraicGeometry.Etale.constantDerivedProjectionMap"
+   "AlgebraicGeometry.Etale.constantDerivedProjectionMap",
+   "AlgebraicGeometry.Etale.ProjectionComponents",
+   "AlgebraicGeometry.Etale.projectionComponents",
+   "AlgebraicGeometry.Etale.constantProjectionComponents"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleConstantProjectionMap.lean",
   "statement": "def constantDerivedProjectionMap (X : Scheme.{u}) [(constantSheaf X.smallEtaleTopology A).Monoidal] [(constantSheaf X.smallEtaleTopology A).PreservesFlat] (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) (K : DerivedCategory A) : (((rightDerivedGlobalSections A X) ⋙ curriedTensor (DerivedCategory A)).obj E).obj K ⟶ (((Functor.postcompose₂.obj (rightDerivedGlobalSections A X)).obj ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj (constantSheaf X.smallEtaleTopology A).leftDerivedFunctor).obj (curriedTensor _))).obj E).obj K",
@@ -146,13 +154,13 @@
   "note": "Statement, dependencies, constructions, edge cases, docstrings, and universes checked; both delivered Lean modules compiled cleanly with scompile.py."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C6",
+  "group": "Q8",
   "result": "pass",
-  "landing": "20261019T231053-L-545379",
-  "kind": "proof",
+  "landing": "20261020T132030-L-1404354",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

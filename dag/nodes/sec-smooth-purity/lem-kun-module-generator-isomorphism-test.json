@@ -1,0 +1,125 @@
+{
+ "id": "lem-kun-module-generator-isomorphism-test",
+ "kind": "statement",
+ "title": "The ring detects isomorphisms between continuous exact derived functors",
+ "statement": "For a commutative ring R, let F,G : D(R) → T be triangulated functors to a triangulated category, preserving coproducts indexed in the module universe. Let τ : F → G commute with integer shifts. If τ at R[0] is invertible then τ is invertible. Here D(R) is [def-weil-abstract-derived-category].",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/ModuleCatGeneration.lean",
+  "place": "Stacks Tags 09PB and 0F12; source ModuleCatGeneration main theorem"
+ },
+ "proof": [
+  {
+   "text": "Reuse the proved source theorem. Naturality, shift compatibility and exactness close the invertible components under shifts, retracts, triangles and coproducts. Free modules and their projective retracts belong to this class. The telescope of bounded stupid truncations of a projective resolution gives every single module. The telescope of the bounded double truncations of an arbitrary complex gives every derived object. Essential surjectivity of localization transfers the conclusion to all objects. This is the same generator argument as Stacks Tag 09PB, already implemented in the cited source.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "Q8 stage 3",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/ModuleCatGeneration.lean",
+  "place": "Stacks Tags 09PB and 0F12; source ModuleCatGeneration main theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIso_of_isIso_app_singleFunctor_obj_self",
+   "results": "; 0 Mathlib hits: ",
+   "date": "2026-10-20",
+   "verdict": "No exact Mathlib match; reuse the proved source-library declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesCoproducts_rightDerivedGlobalSections",
+   "results": "; 0 Mathlib hits: ",
+   "date": "2026-10-20",
+   "verdict": "No exact Mathlib match; reuse the proved source-library declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimitsOfShape\", \"rightDerived\"",
+   "results": "; 0 Mathlib hits: ",
+   "date": "2026-10-20",
+   "verdict": "No exact Mathlib match; reuse the proved source-library declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"singleFunctor\"",
+   "results": "; 1 Mathlib hits: CategoryTheory.SingleFunctors.instIsIsoFunctorHom",
+   "date": "2026-10-20",
+   "verdict": "No exact Mathlib match; reuse the proved source-library declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of triangulated coproduct preserving functors on the derived category of modules is an isomorphism if it is an isomorphism at the ring",
+   "results": "; 8 Mathlib hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQIso, CategoryTheory.instIsIsoAppFromLeftDerivedZero, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZero",
+   "date": "2026-10-20",
+   "verdict": "No exact Mathlib match; reuse the proved source-library declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme with finite cohomological dimension unbounded derived global sections preserves coproducts of modules",
+   "results": "; 8 Mathlib hits: AlgebraicGeometry.Scheme.Modules.instHasColimits, Condensed.instAB4CondensedMod, Condensed.instAB4StarCondensedMod, Condensed.instAB5CondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, instHasColimitsCondensedMod, LightCondensed.instCountableAB4StarLightCondMod",
+   "date": "2026-10-20",
+   "verdict": "No exact Mathlib match; reuse the proved source-library declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between triangulated coproduct preserving functors on the derived category of modules is an isomorphism if it is invertible at the ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.NatTrans.isIso_iff_isIso_app\", \"module\": \"Mathlib.CategoryTheory.NatIso\", \"type\": \"{F G : C ⥤ D} (τ : F ⟶ G) : IsIso τ ↔ ∀ X, IsIso (τ.app X)\", \"doc\": \"A natural transformation $\\\\tau: F \\\\Rightarrow G$ between functors $F, G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is an isomorphism in the functor category if and only if for every object $X$ in $\\\\mathcal{C}$, th\"}\n  {\"name\": \"CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived\", \"type\": \"[L.IsLocalization W] {F : C ⥤ H} (RF : D ⥤ H) (α : F ⟶ L ⋙ RF) (hF : W.IsInvertedBy F) [RF.IsRightDerivedFunctor α W] :\\n  IsIso α\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and $RF : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, a morphism property $W$\"}\n  {\"name\": \"CategoryTheory.Functor.isIso_of_isLeftDerivedFunctor_of_inverts\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived\", \"type\": \"[L.IsLocalization W] {F : C ⥤ H} (LF : D ⥤ H) (α : L ⋙ LF ⟶ F) (hF : W.IsInvertedBy F) [LF.IsLeftDerivedFunctor α W] :\\n  IsIso α\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ inverting a morphism property $W$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$ that i\"}\n  {\"name\": \"CategoryTheory.NatIso.isIso_app_of_isIso\", \"module\": \"Mathlib.CategoryTheory.NatIso\", \"type\": \"(α : F ⟶ G) [IsIso α] (X) : IsIso (α.app X)\", \"doc\": \"If $\\\\alpha : F \\\\Rightarrow G$ is a natural isomorphism between functors $F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, then for every object $X$ in $\\\\mathcal{C}$, the component $\\\\alpha_X : F(X) \\\\to G(X)$ is an\"}\n  {\"name\": \"CategoryTheory.Cat.Hom.instIsIsoFunctorαCategoryToNatTransHomHom\", \"module\": \"Mathlib.CategoryTheory.Category.Cat\", \"type\": \"{X Y : Cat.{v, u}} {F G : X ⟶ Y} (e : F ≅ G) : IsIso e.hom.toNatTrans\", \"doc\": \"Given small categories $X$ and $Y$, and an isomorphism $e$ between functors $F$ and $G$ from $X$ to $Y$, the natural transformation corresponding to $e$ is an isomorphism in the category of functors f\"}\n  {\"name\": \"CategoryTheory.NatIso.hom_app_isIso\", \"module\": \"Mathlib.CategoryTheory.NatIso\", \"type\": \"(α : F ≅ G) (X : C) : IsIso (α.hom.app X)\", \"doc\": \"For any natural isomorphism $\\\\alpha : F \\\\cong G$ between functors $F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and for every object $X$ in $\\\\mathcal{C}$, the component morphism $\\\\alpha_X : F(X) \\\\to G(X)$ is a\"}\n  {\"name\": \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(X : C) : IsIso (F.toRightDerivedZero.app X)\", \"doc\": \"For every object $X$ in category $\\\\mathcal{C}$, the component of the natural transformation from an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ to its 0th right-derived functor $R^0F$ at $X$ is\"}\n  {\"name\": \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \": IsIso F.toRightDerivedZero\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the natural transformation from $ F $ to its 0th right-derived functor $ R^0F $ is an iso\"}",
+   "date": "2026-10-20",
+   "verdict": "No exact Mathlib match; reuse the proved source-library declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormula",
+  "date": "2026-10-20",
+  "group": "Q8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f12",
+   "place": "Stacks Tags 09PB and 0F12; source ModuleCatGeneration main theorem",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration",
+  "declaration": "DerivedCategory.isIso_of_isIso_app_singleFunctor_obj_self",
+  "statement": "theorem isIso_of_isIso_app_singleFunctor_obj_self [∀ J : Type v, PreservesColimitsOfShape (Discrete J) F] [∀ J : Type v, PreservesColimitsOfShape (Discrete J) G] (h : IsIso (τ.app ((singleFunctor _ 0).obj (ModuleCat.of R R)))) : IsIso τ",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261020T132030-L-1404354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261020T132030-L-1404354",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
