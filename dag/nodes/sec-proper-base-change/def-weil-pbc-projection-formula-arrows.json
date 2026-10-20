@@ -28,9 +28,57 @@
   "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the generic arrow interface in Sheaf.Paper.ProjectionFormulaArrows, prove the rank-one ordinary mate equation by the adjunction triangle identity and the specified tensor-unit compatibility. Naturality and the product comparison identify the finite-free mate with a finite product of that rank-one isomorphism; additive tensor and the right adjoint preserve the required finite products, including rank zero.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality at the inclusion and retraction proves both inverse identities for the specified retract formula. Identify the chain mate on each total-complex summand using the defining adjunction and the total pullback comparison. In each total degree restrict to the finite interval of coefficient support; all other summands are zero. Additivity preserves this finite coproduct, so the total mate is degreewise invertible. Cancel the forward mate to obtain exactly the specified inverse formula on every summand.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove K-injectivity of the target without dualizing coefficients. In the homotopy category use the right orthogonal of acyclic complexes. Tensoring the K-injective complex with the unit stays in this orthogonal. Finite products and the specified retracts show the same for every coefficient term after pullback. The proved bounded-complex devissage theorem for the triangulated tensor functor then shows the whole tensor total lies in the orthogonal, which is equivalent to K-injectivity.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the mixed comparison apply the public K-flat resolution theorem to obtain a flat K-flat resolution q with degreewise epimorphic augmentation. The mapping-cone tensor comparison shows tensoring a quasi-isomorphism with the fixed K-flat coefficient stays a quasi-isomorphism. Define the comparison using the images of q and the given representative comparison. For any other resolution p, pull back q along p; the kernel exact sequence shows the projection remains a quasi-isomorphism. Resolve this pullback by another flat K-flat complex. The two maps from this common refinement commute over the original complex. Naturality of the representative comparison gives the required square after cancellation of the invertible image of the refinement map. Finally cancellation at q proves uniqueness.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A finite free sheaf is dualizable, including rank zero; the specified retraction makes each coefficient term flat by the proved flatness-of-dualizable and flatness-of-retract results. Apply the bounded-above flat K-flat theorem to the supplied upper bound. Keep all arrow definitions, normalizations, public signatures and the unit-level route unchanged.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pc-kflat-resolution",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-projection-formula-arrows.md",
+  "place": "Definition 1264; stage-3 P2 proof of the generic helper module Sheaf.Paper.ProjectionFormulaArrows, using existing source-library finite products, total tensor, bounded triangulated devissage, mapping cones and public flat K-flat resolutions and common refinements. The recorded specialized pro-etale lean attachment remains unchanged."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -142,17 +190,13 @@
   "note": "The recorded ringed-arrow interface equates site object and morphism universes. Reuse the reviewed Q09 original-small-site specialization with the published tensor and adjunction models. Its inverse is Q of the specified finite-total chain map between uniquely normalized mixed/K-injective representatives; the general original interface is reexported. Published unchanged since preparation: scompile.py --source confirmed the current server source on 2026-10-16 (only its printed final newline differs). Reuse this exact existing module on newtargets-dag; no source is redelivered."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C6",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261019T192656-L-1853845",
+  "landing": "20261020T135419-L-1820853",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.proEtaleProjectionUnit_existsUnique"
-  ],
-  "sorry_after": []
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
