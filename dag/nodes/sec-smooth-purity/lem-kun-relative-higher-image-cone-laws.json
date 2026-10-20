@@ -1,0 +1,126 @@
+{
+ "id": "lem-kun-relative-higher-image-cone-laws",
+ "kind": "lemma",
+ "title": "Canonical relative higher-image diagram and cocone laws",
+ "statement": "Let I be a preorder, DV and DB inverse systems of schemes, and η:DV→DB a natural transformation. Let cV,cB be cones and v:cV.pt→cB.pt commute with their stage maps. Give sheaves F_i on DV_i, coherent inverse-image coefficient maps φ, and a diagram A on cV.pt with object isomorphisms eA_i:A_i≅p_i⁻¹F_i whose transitions are the prescribed pullbacks of φ. Let cA be any cocone of A and q a natural number. Write G_i=R^qη_i,* F_i, O_i=s_i⁻¹G_i, and define M_ij by the inverse-image composition isomorphism for s_i=b_ij s_j followed by pullback of the commutative-square exchange with coefficient φ_ij. Define L_i:O_i→R^qv_*cA.pt by projection exchange followed by the coefficient leg (eA_i)⁻¹ then cA.ι_i. Then M_id=id, M_ik=M_ij M_jk, and M_ij L_j=L_i. No cartesian, affine, qcqs, directedness, torsion or universal cone hypothesis is assumed. The data use [def-weil-pbc-scheme-conventions], [def-weil-pbc-etale-sheaves], [def-weil-pbc-inverse-image], [def-kun-commutative-derived-exchange], and [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYM, lemma-relative-colimit-general, first proof paragraph, equations for ψ_i and ψ_ji and horizontal composition"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-kun-commutative-derived-exchange",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Paste consecutive transition squares horizontally. Apply the derived exchange horizontal composition identity, then naturality for the coefficient map, and the coefficient composition equation. Apply degree-q homology. Exact inverse image commutes with homology, and the composition and single-functor comparisons give the displayed transitions. Inverse-image associativity identifies the two routes from a limiting projection to the composite transition. Hence M(a≫b)=M(a)≫M(b).",
+   "uses": [
+    "sbc-lem-identity-and-base-change-composition",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived identity-square exchange is an isomorphism by the identity pasting formula. The coefficient identity equation makes its coefficient map an isomorphism. Thus M(id) is an isomorphism. The composition equation gives M(id)=M(id)≫M(id); cancel M(id) to obtain the identity law.",
+   "uses": [
+    "sbc-lem-identity-and-base-change-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste a transition square with the projection square at its target. The horizontal composition formula and coefficient naturality rewrite M(a)≫L(j) as the projection exchange at i followed by the higher image of the composite coefficient leg. The equation for A.map a and the cocone relation for cA identify that coefficient leg with (eA i).inv≫cA.ι.app i. Thus M(a)≫L(j)=L(i).",
+   "uses": [
+    "sbc-lem-identity-and-base-change-composition",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-identity-and-base-change-composition",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "kind": "literature",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYM, first proof paragraph; maps composed via the existing derived horizontal pasting and exact inverse-image comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image exchange satisfies horizontal composition and gives a cocone along an inverse system of schemes",
+   "results": "Generic colimit cocones and CatCommSq.hComp; no étale higher-image diagram laws.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"",
+   "results": "CategoryTheory.mateEquiv_hcomp and the bicategorical variant. These are the abstract tool, not the coefficient and projection law.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeHigherDirectImage|higherDirectImage.*limit; higher-image transition composition",
+   "results": "Mathlib has no étale derived-image system. Source fixed-base transition laws for module and abelian sheaves do not cover varying bases; relative continuity states its comparison conditional on already-given diagrams.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImagesLimits",
+  "date": "2026-10-21",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0ezt",
+   "place": "proof Step 2: construct the relative higher-image diagram and continuity legs; the explicit equations are in Tag 0EYM first proof paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeHigherImageConeLaws",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeHigherImageConeLaws.lean",
+  "declaration": "AlgebraicGeometry.Etale.relativeHigherImage_cone_laws",
+  "statement": "theorem relativeHigherImage_cone_laws\n    {I : Type u} [Preorder I]\n    (DV DB : Iᵒᵖ ⥤ Scheme.{u}) (η : DV ⟶ DB)\n    (cV : Cone DV) (cB : Cone DB) (v : cV.pt ⟶ cB.pt)\n    (hu : ∀ i, cV.π.app i ≫ η.app i = v ≫ cB.π.app i)\n    (F : ∀ i : I, Sheaf (DV.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (a : i ⟶ j),\n      ((DV.map a.op)^*[AddCommGrpCat.{u + 1}]).obj (F i) ⟶ F j)\n    (hid : ∀ i, φ (𝟙 i) =\n      eqToHom (congrArg (fun a : DV.obj (op i) ⟶ DV.obj (op i) ↦\n        ((a)^*[AddCommGrpCat.{u + 1}]).obj (F i)) (DV.map_id (op i))) ≫\n        (upperStarId AddCommGrpCat.{u + 1} (DV.obj (op i))).hom.app (F i))\n    (hcomp : ∀ (i j k : I) (a : i ⟶ j) (b : j ⟶ k), φ (a ≫ b) =\n      (upperStarComp AddCommGrpCat.{u + 1} (DV.map b.op) (DV.map a.op)\n        (DV.map (a ≫ b).op) (DV.map_comp b.op a.op)).hom.app (F i) ≫\n      ((DV.map b.op)^*[AddCommGrpCat.{u + 1}]).map (φ a) ≫ φ b)\n    (A : I ⥤ Sheaf cV.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eA : ∀ i, A.obj i ≅ ((cV.π.app (op i))^*[AddCommGrpCat.{u + 1}]).obj (F i))\n    (hA : ∀ (i j : I) (a : i ⟶ j), A.map a ≫ (eA j).hom =\n      (eA i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (cV.π.app (op j)) (DV.map a.op)\n          (cV.π.app (op i)) (cV.w a.op).symm).hom.app (F i) ≫\n        ((cV.π.app (op j))^*[AddCommGrpCat.{u + 1}]).map (φ a))\n    (cA : Cocone A) (q : ℕ) :\n    DiagramCoconeLaws (relativeHigherImageObj DV DB η cB F q)\n      (relativeHigherImageMap DV DB η cB F φ q) ((higherImageFunctor v q).obj cA.pt)\n      (relativeHigherImageLeg DV DB η cV cB v hu F A eA cA q)",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261020T211752-L-3499036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261020T211752-L-3499036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

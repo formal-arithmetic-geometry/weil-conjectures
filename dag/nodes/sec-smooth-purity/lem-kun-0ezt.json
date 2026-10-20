@@ -34,102 +34,80 @@
  ],
  "proof": [
   {
-   "text": "Write $r_i:X\\to X_i$, $s_i:S\\to S_i$, $p_i:T\\to T_i$ and $t_i:Y\\to Y_i$ for the projections. The limit square is cartesian directly from the universal properties: maps $Z\\to X$ and $Z\\to T$ with equal composites to $S$ give, at every stage, a unique map $Z\\to Y_i$; these maps are compatible because their two projections are compatible and the stage square has the pullback uniqueness property. They therefore give a unique map $Z\\to Y$ with the prescribed projections. Because the stage squares are cartesian, $h_i$ is a base change of $g_i$ and hence is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](3). Apply the sheaf-level composition identifications of [lem-weil-pbc-derived-inverse-image-composition](1) to $p_i e=e_i t_i$. Since inverse image preserves colimits by [lem-weil-pbc-inverse-image-preserves-colimits], the coprojections give\n$$e^{-1}F\\cong\\varinjlim_i e^{-1}p_i^{-1}F_i\\cong\\varinjlim_i t_i^{-1}e_i^{-1}F_i.$$\nThe transition from $i$ to $j$ on the latter system is inverse image of the given coefficient transition, conjugated by these composition identifications. Their associativity gives the identity and composition laws, so this is a system to which relative continuity applies.",
+   "text": "Construct the canonical diagram H of the sheaves s_i^* R^q g_i,* F_i, with the explicit exchange/coefficient transitions and projection comparison legs. The relative higher-image cone laws provide exactly its functor and cocone equations. Apply relative continuity for preorders (obtained by thin-skeleton reindexing) for g to its chosen colimit and these legs; its comparison is invertible, hence the canonical cocone cH itself is a colimit.",
    "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-weil-pbc-inverse-image-preserves-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, proof: qcqs base change and the coefficient colimit on Y"
-   }
-  },
-  {
-   "text": "Apply [lem-kun-0eym] to the inverse system $g_i:T_i\\to S_i$ and the given coefficient system. Both its source and base transition morphisms are affine by hypothesis, and every $g_i$ is qcqs. Its canonical comparison gives $R^qg_*F\\cong\\varinjlim_i s_i^{-1}R^qg_{i,*}F_i$. Pull back along $f$ and use [lem-weil-pbc-inverse-image-preserves-colimits], followed by the composition identifications for $s_i f=f_i r_i$ from [lem-weil-pbc-derived-inverse-image-composition], to obtain the canonical isomorphism\n$$C_A:\\varinjlim_i A_i\\xrightarrow{\\sim}f^{-1}R^qg_*F,\\qquad A_i=r_i^{-1}f_i^{-1}R^qg_{i,*}F_i.$$\nThe legs of $C_A$ are the inverse images of the specified continuity legs, with precisely those composition identifications.",
-   "uses": [
-    "lem-kun-0eym",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "lem-weil-pbc-derived-inverse-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, proof: the second displayed continuity equality, for the source"
-   }
-  },
-  {
-   "text": "Apply [lem-kun-0eym] to $h_i:Y_i\\to X_i$ and the coefficient system $e_i^{-1}F_i$ of Step 1. The four given systems supply affine transitions on $Y_i$ and $X_i$; the required qcqs hypotheses were checked in Step 1. Its limit coefficient is $e^{-1}F$, by that step. Thus its canonical legs give\n$$C_B:\\varinjlim_i B_i\\xrightarrow{\\sim}R^qh_*e^{-1}F,\\qquad B_i=r_i^{-1}R^qh_{i,*}e_i^{-1}F_i.$$\nNo statement about the stages being cartesian over each other has been used.",
-   "uses": [
-    "lem-kun-0eym"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, proof: the first displayed continuity equality, for the target"
-   }
-  },
-  {
-   "text": "Write $E_i,E$ for stage and limit derived exchange. For $j\\geq i$ let $(x,y,s,a)=(x_{ji},y_{ji},s_{ji},a_{ji})$ be the transition cube. Its six faces commute by the given inverse system. Apply [lem-kun-derived-exchange-cube] to obtain $E_j(a^{-1}K)f_j^{-1}P_{ji}(K)=Q_{ji}(e_i^{-1}K)x^{-1}E_i(K)$. Apply that node again to the projection cube $(x,y,s,a)=(r_i,t_i,s_i,p_i)$, whose faces commute by the limit cones. This gives $E(p_i^{-1}K)f^{-1}P_i(K)=Q_i(e_i^{-1}K)r_i^{-1}E_i(K)$. The node explicitly includes the inverse-image composition comparisons and allows noncartesian comparison faces; no exchange in these equations has been inverted.",
-   "uses": [
-    "lem-kun-derived-exchange-cube"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, canonical-map comparison, with the specified maps of Tag 0EYM, lemma-relative-colimit-general"
-   }
-  },
-  {
-   "text": "Let $\\beta_i,\\beta$ be the specified usual degree-$q$ base-change maps, and set $d_i=r_i^{-1}\\beta_i:A_i\\to B_i$. Apply [lem-kun-higher-exchange-coefficient-cube] to the transition cube of Step 4, with $F_0=F_i$, $F_1=F_j$, and $\\phi=\\phi_{ji}:a_{ji}^{-1}F_i\\to F_j$. Its cartesian-square hypothesis holds at stages $i,j$. It gives $\\beta_j U_{\\phi_{ji}}=V_{\\phi_{ji}}x_{ji}^{-1}\\beta_i$. Pull back along $r_j$ and use $r_i=x_{ji}r_j$. By the transition formulas stated in [lem-kun-0eym], the resulting two maps are exactly the source and target diagram transitions $u_{ji},v_{ji}$ of Steps 2 and 3. Hence $d_j u_{ji}=v_{ji}d_i$.",
-   "uses": [
-    "lem-kun-higher-exchange-coefficient-cube",
-    "lem-kun-0eym"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, canonical-map comparison, with the specified maps of Tag 0EYM, lemma-relative-colimit-general"
-   }
-  },
-  {
-   "text": "Apply [lem-kun-higher-exchange-coefficient-cube] to the projection cube, with square 0 the stage-$i$ square, square 1 the limit square, $F_0=F_i$, $F_1=F$, and $\\phi=\\iota_i:p_i^{-1}F_i\\to F$. Both squares are cartesian, the latter by Step 1. Its equation is $\\beta U_{\\iota_i}=V_{\\iota_i}r_i^{-1}\\beta_i$. By the leg formulas of [lem-kun-0eym], $U_{\\iota_i}$ is the leg $\\lambda_i:A_i\\to f^{-1}R^qg_*F$ of Step 2. Step 1 identifies $e^{-1}\\iota_i$ with the coefficient leg on $Y$, so $V_{\\iota_i}$ is the leg $\\mu_i:B_i\\to R^qh_*e^{-1}F$ of Step 3. Thus $\\beta\\lambda_i=\\mu_i d_i$. The coefficient morphisms used in both applications may be noninvertible.",
-   "uses": [
-    "lem-kun-higher-exchange-coefficient-cube",
-    "lem-kun-0eym"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, canonical-map comparison, with the specified maps of Tag 0EYM, lemma-relative-colimit-general"
-   }
-  },
-  {
-   "text": "Every $\\beta_i$ is an isomorphism by hypothesis, and a functor preserves its inverse, so every $d_i$ is an isomorphism. If $a_{ji}:A_i\\to A_j$ and $b_{ji}:B_i\\to B_j$ now denote the diagram transitions, Step 5 gives $d_j a_{ji}=b_{ji}d_i$, hence $a_{ji}d_i^{-1}=d_j^{-1}b_{ji}$. Thus the inverses also form a morphism of diagrams. The colimit universal property [def-weil-pbc-category-colimit] induces mutually inverse morphisms $d:\\varinjlim A_i\\to\\varinjlim B_i$ and $d^{-1}$, since their composites are the identity on every coprojection. The leg equation in Step 6 and the same uniqueness clause give $\\beta C_A=C_B d$. Steps 2 and 3 identify $C_A,C_B$ as isomorphisms. Therefore $\\beta=C_B d C_A^{-1}$ is an isomorphism, as required.",
-   "uses": [
+    "lem-kun-relative-higher-image-cone-laws",
+    "lem-kun-relative-continuity-preorder",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, final inference from the two continuity comparisons"
+    "place": "Tags 0EZT and 0EYM; canonical-map comparison and continuity"
+   }
+  },
+  {
+   "text": "Inverse image f^* preserves colimits, so P=H followed by f^* has the colimit cocone cP=f^*cH. Pull the given coefficient diagram D and its colimit cocone along e^*. Define G_i=e_i^*F_i and its coefficient transitions using the commuting inverse-image square and e_j^*phi. The sheaf-level square pasting and composition coherence prove its identity and composition laws and identify the objects and maps of D followed by e^* with the canonical pullback system.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0EZT and 0EYM; canonical-map comparison and continuity"
+   }
+  },
+  {
+   "text": "Let beta_i be the usual abelian-sheaf degree-q base-change map. Its two extra factors relative to the hypothesis are the invertible cohomology and degree-zero pullback comparisons; hence beta_i is invertible. Present P_i as r_i^* R^q h_i,* G_i by the projection square comparison followed by r_i^* beta_i. The coefficient cube theorem on the transition cube, combined with pullback-square coherence, gives precisely the required higher-image transition equation in this presentation.",
+   "uses": [
+    "lem-kun-higher-exchange-coefficient-cube",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0EZT and 0EYM; canonical-map comparison and continuity"
+   }
+  },
+  {
+   "text": "Let beta be the limit abelian-sheaf exchange. Define the legs from P to its target as cP.ι_i followed by beta. Apply the coefficient cube theorem to the projection cube and the original coefficient coprojection. The coefficient-pullback equation identifies these legs with the projection exchanges for h and the pulled coefficient cocone. The h_i are qcqs as pullbacks of the g_i through their chosen cartesian presentations.",
+   "uses": [
+    "lem-kun-higher-exchange-coefficient-cube",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0EZT and 0EYM; canonical-map comparison and continuity"
+   }
+  },
+  {
+   "text": "Apply relative continuity for preorders (obtained by thin-skeleton reindexing) for h with the same diagram P, the stage presentations through beta_i, the already known colimit cocone cP, and the just-verified canonical legs. It makes their descent invertible. The colimit universal property identifies that descent with beta, since their composites with every coprojection agree. Remove the invertible cohomology and single-functor comparison factors from beta to obtain exactly the stated cohomology of the limit derived exchange.",
+   "uses": [
+    "lem-kun-relative-continuity-preorder",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0EZT and 0EYM; canonical-map comparison and continuity"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-kun-relative-higher-image-cone-laws",
+  "lem-kun-relative-continuity-preorder",
+  "def-weil-pbc-category-colimit",
   "lem-weil-pbc-inverse-image-preserves-colimits",
-  "lem-kun-0eym",
-  "lem-kun-derived-exchange-cube",
+  "lem-weil-pbc-inverse-image-composition",
   "lem-kun-higher-exchange-coefficient-cube",
-  "def-weil-pbc-category-colimit"
+  "lem-weil-pbc-qcqs-morphism-permanence"
  ],
  "proof_origin": {
-  "by": "agent",
+  "kind": "literature",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, proof; Tag 0EYM, lemma-relative-colimit-general, canonical transition and leg construction. Agent expansion of the mate-pasting comparison and colimit universal-property arguments."
+  "place": "Tags 0EZT and 0EYM; two continuity applications to one diagram using the stage exchange isomorphisms as object presentations. The coefficient cube handles both transitions and projection legs."
  },
  "mathlib_searches": [
   {
@@ -335,7 +313,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-inverse-image-preserves-colimits",
-  "lem-weil-pbc-derived-inverse-image-composition",
   "lem-weil-pbc-mate-pasting",
   "def-weil-pbc-derived-exchange",
   "prop-weil-pbc-inverse-image-exact",
@@ -372,5 +349,15 @@
   "statement": "Let $I$ be directed and let\n\n$$\n\\begin{array}{ccc}\nX_i&\\xleftarrow{\\;h_i\\;}&Y_i\\\\\n\\Big\\downarrow{\\scriptstyle f_i}&&\\Big\\downarrow{\\scriptstyle e_i}\\\\\nS_i&\\xleftarrow{\\;g_i\\;}&T_i\n\\end{array}\n\\qquad(i\\in I)\n$$\n\nbe an inverse system of\ncartesian squares with affine\ntransition morphisms, where every $g_i$ is\nquasi-compact and\nquasi-separated. Write\n\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle e}\\\\\nS&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nIf $(F_i)$ is a compatible system of torsion abelian sheaves on\n$T_i$, $F=\\varinjlim_ip_i^{-1}F_i$, and if for a fixed $q\\ge0$ every\nbase-change map\n\n$$\nf_i^{-1}R^qg_{i,*}F_i\\longrightarrow R^qh_{i,*}e_i^{-1}F_i\n$$\n\nis an isomorphism, then so is\n\n$$\nf^{-1}R^qg_*F\\longrightarrow R^qh_*e^{-1}F.\n$$",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261020T211752-L-3499036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
