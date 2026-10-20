@@ -15,7 +15,7 @@ public import Mathlib.Tactic.Algebraize
 
 For a ring morphism `φ : R →+* S`, extension of scalars `M ↦ S ⊗_R M`
 (`ModuleCat.extendScalars φ`) sends finite `R`-modules to finite `S`-modules
-(`ModuleCat.finite_extendScalars_obj`) and flat `R`-modules to flat `S`-modules
+(`ModuleCat.finite_extendScalars_obj'`) and flat `R`-modules to flat `S`-modules
 (`ModuleCat.flat_extendScalars_obj`).
 -/
 
@@ -28,7 +28,7 @@ namespace ModuleCat
 variable {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (φ : R →+* S)
 
 /-- Extension of scalars of a finite module is finite. -/
-lemma finite_extendScalars_obj (M : ModuleCat.{v} R) [Module.Finite R M] :
+lemma finite_extendScalars_obj' (M : ModuleCat.{v} R) [Module.Finite R M] :
     Module.Finite S ((extendScalars.{u₁, u₂, v} φ).obj M) := by
   algebraize [φ]
   have : Module.Finite S (TensorProduct R S M) := inferInstance
