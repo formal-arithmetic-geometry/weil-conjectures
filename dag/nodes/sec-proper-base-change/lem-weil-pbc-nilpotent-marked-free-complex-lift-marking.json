@@ -14,25 +14,64 @@
  ],
  "proof": [
   {
-   "text": "Use the cone comparison and explicit contracting homotopy to identify the derived reduction of the lifted complex with the prescribed marking.",
+   "text": "The universal left derived counit is invertible on K-projectives: resolve arbitrary homotopy complexes by large filtered free complexes, use the resolving-class construction, and compare universal left derived functors. The bounded finite free representative supplied by hdata is K-projective.",
    "uses": [
-    "def-pc-ring-pseudo-coherent-complex",
-    "def-weil-abstract-derived-category",
-    "lem-pur-derived-change-of-rings"
+    "lem-pc-large-filtered-free-resolution",
+    "lem-pc-filtered-free-kprojective",
+    "lem-pur-left-derived-from-kflat-class"
    ],
    "elementary": false
+  },
+  {
+   "text": "Represent the inverse of the prescribed marking by a chain map from the bounded projective complex F to the reduction of the supplied representative. Form its bounded acyclic cone, whose terms lift in the finite stably free class.",
+   "uses": [
+    "lem-sc-complex-lift-cone-properties",
+    "lem-sc-pseudo-coherent-lift-stably-free-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the acyclic cone, then lift the cone inclusion strictly. Construct the reduced cokernel isomorphism by cokernel preservation, retaining its commutative square. The reduced splitting lemma makes the cokernel sequence degreewise split with finite stably free terms.",
+   "uses": [
+    "lem-sc-complex-lift-acyclic-projective",
+    "lem-sc-complex-lift-strict-map",
+    "lem-sc-complex-lift-cone-cokernel",
+    "lem-sc-projective-class-reduced-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the cokernel shifted by minus one. Its free reduction makes every finite stably free term free. Nakayama detects its vanishing above the original bound.",
+   "uses": [
+    "lem-sc-finite-projective-free-mod-ideal",
+    "lem-sc-finite-module-surjective-mod-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mathlib cone rotation and its contracting homotopy to identify the reduced roof with the prescribed chain map, with a minus sign in the cone projection. Shift back, use naturality of the counit, and cancel the two derived isomorphisms to obtain exactly the required marking equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-ring-pseudo-coherent-complex",
-  "def-weil-abstract-derived-category",
-  "lem-pur-derived-change-of-rings"
+  "lem-pc-large-filtered-free-resolution",
+  "lem-pc-filtered-free-kprojective",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-sc-complex-lift-cone-properties",
+  "lem-sc-pseudo-coherent-lift-stably-free-complex",
+  "lem-sc-complex-lift-acyclic-projective",
+  "lem-sc-complex-lift-strict-map",
+  "lem-sc-complex-lift-cone-cokernel",
+  "lem-sc-projective-class-reduced-splitting",
+  "lem-sc-finite-projective-free-mod-ideal",
+  "lem-sc-finite-module-surjective-mod-ideal"
  ],
  "proof_origin": {
-  "by": "B3 stage 3",
+  "by": "B5 stage 3",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 0H76, 0BCB and 0BCA",
-  "note": "Strict decomposition of the parent lifting argument."
+  "place": "Tags 0BCA, 0BCB, 0BC6",
+  "note": "Full cone construction with Mathlib cone rotation homotopy and universal derived-counit comparison; no new holes."
  },
  "mathlib_searches": [
   {
@@ -97,12 +136,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "B5",
   "result": "pass",
-  "landing": "20261018T071134-L-1663594",
+  "landing": "20261020T051022-L-1531007",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
