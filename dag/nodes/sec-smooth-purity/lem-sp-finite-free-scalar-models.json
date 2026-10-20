@@ -1,0 +1,123 @@
+{
+ "id": "lem-sp-finite-free-scalar-models",
+ "kind": "statement",
+ "title": "Existence of normalized actual-restriction scalar models",
+ "statement": "For every scheme X, the normalized scalar-model type of [def-sp-finite-free-direct-image-data] is inhabited. This constructs the actual restriction adjunction and both multiplication units, with all displayed normalization equations.\n\ntheorem finiteFreeDirectImageScalarModels (X : Scheme.{u}) : Nonempty (ScalarModel X)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 06YY and 07A6; construction of multiplication-normalized scalar models."
+ },
+ "stmt_deps": [
+  "def-sp-finite-free-direct-image-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain presentations p and normalized family n from successive_derived_quotient_normalization. Lift the isomorphism between the two exact-restriction factorizations along Qh and transport each n.adjunction along it. Naturality of the lifted comparison and its factorization give the actual-restriction unit normalization.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A6; normalized scalar adjunction."
+   }
+  },
+  {
+   "text": "For identity coefficients ordinary restriction is the identity. Use leftAdjointIdIso to identify the ordinary scalar extension with identity. Tensor balancing rewrites r tensor x as 1 tensor rx; the normalized ordinary unit and the triangle identity show that the counit maps this to rx. The ordinary identity extension is exact; thus its universal derived counit is invertible. Lift that counit followed by the ordinary multiplication unit along Qh. The localization factorization gives exactly unit_normalization.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03EK, 06YY and 07A6; multiplication unit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 06YY and 07A6; construction of multiplication-normalized scalar models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized scalar extension adjunctions on unbounded derived categories exist, commute with shifts, and preserve distinguished triangles",
+   "results": "{\"t\": \"2026-10-20T18:14:23Z\", \"tool\": \"leansearch\", \"query\": \"Normalized scalar extension adjunctions on unbounded derived categories exist, commute with shifts, and preserve distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsTriangulated.commShift\", \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"ModuleCat.restrictCoextendScalarsAdj\", \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"CategoryTheory.Adjunction.IsTriangulated.mk\", \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"digest\": \"37f942ec4f7028fc\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-20T17:04:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"8a20b0e5ebd5e4dc\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|restrictScalars|freeFunctor",
+   "results": "{\"t\": \"2026-10-20T18:18:07Z\", \"tool\": \"grep\", \"query\": \"changeOfRings|restrictScalars|freeFunctor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"1c8e242bf0f86b9d\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageCoherence",
+  "date": "2026-10-20",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Opening paragraph: scalar extension commutes with Rp_* for the proper factor; Tags 03EK, 06YY and 07A6; construction of multiplication-normalized scalar models.",
+   "via": [
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageScalarModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeDirectImageScalarModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.finiteFreeDirectImageScalarModels",
+  "statement": "theorem finiteFreeDirectImageScalarModels (X : Scheme.{u}) : Nonempty (ScalarModel X)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item proof + 7 new modules/nodes vs the published item module (moved defs byte-identical, item statement unchanged), compiled all 8 (--all, exit 0), axiom probes, the two new sorry statements checked against the item and the pinned Normalization/ScalarModel fields"
+ }
+}

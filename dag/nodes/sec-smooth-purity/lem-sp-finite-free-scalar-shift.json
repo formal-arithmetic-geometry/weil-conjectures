@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-finite-free-scalar-shift",
+ "kind": "statement",
+ "title": "The normalized scalar counit commutes with shifts and scalar extension is triangulated",
+ "statement": "For any normalized scalar model s on a scheme X [def-sp-finite-free-direct-image-data] and any morphism a:R to S of coefficient ring sheaves, its universal scalar counit commutes with all integer shifts and its left-derived scalar extension is triangulated for precisely the left shift induced from actual restriction.\n\ntheorem finiteFreeDirectImageScalarShift {X : Scheme.{u}} (s : ScalarModel X)\n    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) :\n    (s.presentation a).derived.IsTriangulated ∧\n      NatTrans.CommShift (s.presentation a).counit ℤ",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A6; derived.tex Tag 0A8D, scalar adjunction and its canonical shifts."
+ },
+ "stmt_deps": [
+  "def-sp-finite-free-direct-image-data"
+ ],
+ "proof": [
+  {
+   "text": "Form the inverse mate of exact restriction's derived factorization under the ordinary homotopy and specified derived scalar adjunctions. Their units and counits commute with their compatible shifts, so the inverse mate does too. On a flat-term K-flat complex, the unit normalization identifies its adjoint with that of the universal scalar counit; injectivity of the adjunction bijection proves equality there.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A6; computation on resolving complexes."
+   }
+  },
+  {
+   "text": "Resolve an arbitrary complex by a K-flat complex with flat terms. The localized resolution and its image under scalar extension are invertible. Naturality then extends equality of the inverse mate and universal counit to every homotopy object. Thus the counit is shift-compatible. Actual derived restriction is triangulated because restriction is exact; apply Mathlib Adjunction.isTriangulated_leftAdjoint with the induced compatible left shift.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A6; derived.tex Tag 0A8D, lemma-adjoint-is-exact."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A6; derived.tex Tag 0A8D, scalar adjunction and its canonical shifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized scalar extension adjunctions on unbounded derived categories exist, commute with shifts, and preserve distinguished triangles",
+   "results": "{\"t\": \"2026-10-20T18:14:23Z\", \"tool\": \"leansearch\", \"query\": \"Normalized scalar extension adjunctions on unbounded derived categories exist, commute with shifts, and preserve distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsTriangulated.commShift\", \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"ModuleCat.restrictCoextendScalarsAdj\", \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"CategoryTheory.Adjunction.IsTriangulated.mk\", \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"digest\": \"37f942ec4f7028fc\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "{\"t\": \"2026-10-20T18:18:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.CommShift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.CommShift.id\", \"CategoryTheory.NatTrans.CommShift.isoRefl_hom\", \"CategoryTheory.NatTrans.CommShift\", \"CategoryTheory.Functor.CommShift.ofIso_compatibility\", \"CategoryTheory.NatTrans.CommShift.of_core\", \"CategoryTheory.NatTrans.CommShift.leftUnitor\", \"CategoryTheory.NatTrans.CommShift.rightUnitor\", \"CategoryTheory.NatTrans.CommShift.of_iso_inv\"], \"digest\": \"90520e9555bd11f4\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|mapBiproduct|CommShift",
+   "results": "{\"t\": \"2026-10-20T18:17:13Z\", \"tool\": \"grep\", \"query\": \"conjugateEquiv|mapBiproduct|CommShift\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\"], \"digest\": \"181679303ee50c5b\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageCoherence",
+  "date": "2026-10-20",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Opening paragraph: scalar extension commutes with Rp_* for the proper factor; Tags 06YY and 07A6; derived.tex Tag 0A8D, scalar adjunction and its canonical shifts.",
+   "via": [
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageScalarShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeDirectImageScalarShift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.finiteFreeDirectImageScalarShift",
+  "statement": "theorem finiteFreeDirectImageScalarShift {X : Scheme.{u}} (s : ScalarModel X)\n    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) :\n    (s.presentation a).derived.IsTriangulated ∧\n      NatTrans.CommShift (s.presentation a).counit ℤ",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item proof + 7 new modules/nodes vs the published item module (moved defs byte-identical, item statement unchanged), compiled all 8 (--all, exit 0), axiom probes, the two new sorry statements checked against the item and the pinned Normalization/ScalarModel fields"
+ }
+}

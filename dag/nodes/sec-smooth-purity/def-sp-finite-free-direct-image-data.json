@@ -1,0 +1,107 @@
+{
+ "id": "def-sp-finite-free-direct-image-data",
+ "kind": "definition",
+ "title": "Normalized scalar models and canonical coefficient comparison data",
+ "statement": "For a scheme X with its actual small pro-etale site and module-derived categories [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], define Presentation X a to be the universal ordinary/derived scalar presentation of [lem-sfb-successive-derived-quotient-normalization]. A ScalarModel bundles these presentations, that normalization, the adjunction to actual exact derived restriction normalized on flat-term K-flat complexes, and ordinary and derived multiplication units, fixed respectively on pure tensors and by the universal counit. For q:Z to W, Coefficients consists of target and source ring sheaves identified by inverse image; CoefficientMap is a commuting square of their maps. Define balancing as the inverse conjugate of the canonical restriction/direct-image comparison [lem-weil-pbc-ring-sheaf-change-adjunction] under the composite scalar/geometric adjunctions, and comparison as its right mate under the two geometric adjunctions [def-weil-pbc-proetale-operations]. Identity and composition of coefficient maps are the literal identity and composite ring maps. These are exactly the previous auxiliary definitions of lem-sp-finite-free-direct-image-coherence, relocated without changing any body or signature.\n\nThe complete existing ScalarModel record is:\nstructure ScalarModel (X : Scheme.{u}) where\n  /-- Existing universal scalar-extension pairs, without a second tensor definition. -/\n  presentation : ∀ {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}},\n    (a : R ⟶ S) → Presentation X a\n  /-- The recorded balanced associator and its K-flat normalization. -/\n  normalization :\n    SheafOfModules.SuccessiveDerivedQuotient.Normalization.{u + 1, u, u + 1, u + 2}\n      (C := X.ProEt) (J := ProEt.topology X)\n      (hD := fun T ↦ proEtaleRingModules_hasDerivedCategory X T) presentation\n  /-- Scalar adjunction to the actual exact restriction, rather than an unrelated functor. -/\n  adjunction : ∀ {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S),\n    (presentation a).derived ⊣ (proEtaleRingRestrictScalars a).mapDerivedCategory\n  /-- Normalization of the derived scalar unit at every flat-term K-flat complex. -/\n  adjunction_unit : ∀ {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S)\n    (P : CochainComplex (proEtaleRingModules X R) ℤ),\n    CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (J := ProEt.topology X) (R := R) P →\n    (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n      (J := ProEt.topology X) (R := R) (P.X n)) →\n    (adjunction a).unit.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P)) ≫\n      (proEtaleRingRestrictScalars a).mapDerivedCategory.map\n        ((presentation a).counit.app ((HomotopyCategory.quotient _ _).obj P)) ≫\n      (proEtaleRingRestrictScalars a).mapDerivedCategoryFactorsh.hom.app\n        (((presentation a).ordinary.mapHomotopyCategory (.up ℤ)).obj\n          ((HomotopyCategory.quotient _ _).obj P)) =\n    DerivedCategory.Qh.map\n      (((normalization.ordinaryAdjunction a).mapHomotopyCategory (.up ℤ)).unit.app\n        ((HomotopyCategory.quotient _ _).obj P))\n  /-- Multiplication `r ⊗ x ↦ r x` before localization. -/\n  ordinaryUnit : ∀ R : Sheaf (ProEt.topology X) CommRingCat.{u + 1},\n    (presentation (𝟙 R)).ordinary ≅ 𝟭 (proEtaleRingModules X R)\n  /-- The pure-tensor normalization determines the ordinary unit uniquely. -/\n  ordinaryUnit_pure : ∀ (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (M : proEtaleRingModules X R) (U : X.ProEtᵒᵖ) (r : R.obj.obj U) (x : M.val.obj U),\n    ((ordinaryUnit R).hom.app M).val.app U\n      (SheafOfModules.SuccessiveDerivedQuotient.sectionTensor\n        (presentation (𝟙 R)) M U r x) = r • x\n  /-- Multiplication after the universal derived scalar extension. -/\n  unit : ∀ R : Sheaf (ProEt.topology X) CommRingCat.{u + 1},\n    (presentation (𝟙 R)).derived ≅ 𝟭 (DerivedCategory (proEtaleRingModules X R))\n  /-- The derived multiplication is determined by its universal counit. -/\n  unit_normalization : ∀ (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (H : HomotopyCategory (proEtaleRingModules X R) (.up ℤ)),\n    (unit R).hom.app (DerivedCategory.Qh.obj H) =\n      (presentation (𝟙 R)).counit.app H ≫\n      DerivedCategory.Qh.map\n        ((NatTrans.mapHomotopyCategory (ordinaryUnit R).hom (.up ℤ)).app H) ≫\n      DerivedCategory.Qh.map\n        ((Functor.mapHomotopyCategoryIdIso (proEtaleRingModules X R) (.up ℤ)).hom.app H)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A6 and 0B56, equation-projection-formula-map; normalized auxiliary presentations for the finite-free coefficient instance."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized scalar extension adjunctions on unbounded derived categories exist, commute with shifts, and preserve distinguished triangles",
+   "results": "{\"t\": \"2026-10-20T18:14:23Z\", \"tool\": \"leansearch\", \"query\": \"Normalized scalar extension adjunctions on unbounded derived categories exist, commute with shifts, and preserve distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsTriangulated.commShift\", \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"ModuleCat.restrictCoextendScalarsAdj\", \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"CategoryTheory.Adjunction.IsTriangulated.mk\", \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"digest\": \"37f942ec4f7028fc\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-20T17:04:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"8a20b0e5ebd5e4dc\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|restrictScalars|freeFunctor",
+   "results": "{\"t\": \"2026-10-20T18:18:07Z\", \"tool\": \"grep\", \"query\": \"changeOfRings|restrictScalars|freeFunctor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"1c8e242bf0f86b9d\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageCoherence",
+  "date": "2026-10-20",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Opening paragraph, scalar extension compatibility with Rp_* for the proper factor: normalized presentations of the actual scalar and geometric functors.",
+   "via": [
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageData",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeDirectImageData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.ScalarModel",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Presentation",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.ScalarModel",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.scalarCommShift",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Coefficients",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.CoefficientMap",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.CoefficientMap.id",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.CoefficientMap.comp",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.balancing",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.comparison"
+  ],
+  "statement": "structure ScalarModel (X : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item proof + 7 new modules/nodes vs the published item module (moved defs byte-identical, item statement unchanged), compiled all 8 (--all, exit 0), axiom probes, the two new sorry statements checked against the item and the pinned Normalization/ScalarModel fields"
+ }
+}

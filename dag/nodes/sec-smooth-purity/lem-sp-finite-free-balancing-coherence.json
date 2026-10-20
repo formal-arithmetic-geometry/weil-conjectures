@@ -1,0 +1,130 @@
+{
+ "id": "lem-sp-finite-free-balancing-coherence",
+ "kind": "statement",
+ "title": "Scalar units and associators commute with the canonical balanced pullback comparison",
+ "statement": "For a scheme morphism q and normalized scalar models [def-sp-finite-free-direct-image-data], the canonical left balancing squares respect identity coefficients under the multiplication units, and respect arbitrary towers of coefficient maps under the specified derived scalar associators. The two component equations below are equations of left pullback functors and do not assert any direct-image isomorphism, input-shift compatibility or finite-basis statement.\n\ntheorem finiteFreeDirectImageBalancingCoherence {Z W : Scheme.{u}} (q : Z ⟶ W)\n    (sW : ScalarModel W) (sZ : ScalarModel Z) :\n    (∀ (R : Coefficients q) (K : DerivedCategory (proEtaleRingModules W R.target)),\n      (proEtaleRingDerivedPullback q R.target R.source R.identification).map\n          ((sW.unit R.target).inv.app K) ≫\n        (balancing sW sZ (CoefficientMap.id R)).hom.app K ≫\n        (sZ.unit R.source).hom.app\n          ((proEtaleRingDerivedPullback q R.target R.source R.identification).obj K) = 𝟙 _) ∧\n    (∀ (R S B : Coefficients q) (a : CoefficientMap R S) (b : CoefficientMap S B)\n      (K : DerivedCategory (proEtaleRingModules W R.target)),\n      (balancing sW sZ (a.comp b)).hom.app K =\n        (proEtaleRingDerivedPullback q B.target B.source B.identification).map\n          ((sW.normalization.derived a.target b.target).inv.app K) ≫\n        (balancing sW sZ b).hom.app ((sW.presentation a.target).derived.obj K) ≫\n        (sZ.presentation b.source).derived.map ((balancing sW sZ a).hom.app K) ≫\n        (sZ.normalization.derived a.source b.source).hom.app\n          ((proEtaleRingDerivedPullback q R.target R.source R.identification).obj K))",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; parent proof Step 3, the unit and tower equations for left balancing."
+ },
+ "stmt_deps": [
+  "def-sp-finite-free-direct-image-data"
+ ],
+ "proof": [
+  {
+   "text": "For identity coefficients multiplication sends x tensor r to rx, with inverse x to x tensor 1. The normalized ordinary units therefore turn the identity coefficient balancing square into the identity. For a tower R to S to B the ordinary associator sends (x tensor s) tensor b to x tensor image(s)b. Both pasted balancing maps have value q-inverse(x) tensor cB(q-inverse(image(s)b)), since the coefficient square equates this with q-inverse(x) tensor image(cS(q-inverse(s)))cB(q-inverse(b)). Tensor balancing and sheafification extend this from pure generators to equality of sheaf-module maps.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; identity and tower balancing on local tensors."
+   }
+  },
+  {
+   "text": "Use a flat-term K-flat resolution of each input. The universal scalar counits and normalized adjunction units identify the ordinary balanced maps with the conjugate defining balancing. The representative normalization of the derived associator is the ordinary balanced associator. Thus the ordinary unit and tower calculations yield the displayed derived equations on resolving representatives. Naturality and localization uniqueness extend them to every input. No finite-free or geometric properness assumption is used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY, 07A6 and 0D6D; localization of the balanced unit and tower equations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; parent proof Step 3, the unit and tower equations for left balancing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor associators and multiplication units of scalar extension commute with pullback, and mates respect composition",
+   "results": "{\"t\": \"2026-10-20T18:17:13Z\", \"tool\": \"leansearch\", \"query\": \"The tensor associators and multiplication units of scalar extension commute with pullback, and mates respect composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendScalarsComp_hom_app_one_tmul\", \"ModuleCat.extendScalars_assoc_assoc\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor\", \"ModuleCat.extendScalars_assoc\", \"CategoryTheory.Dial.associatorImpl\", \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"Bialgebra.TensorProduct.assoc\", \"ModuleCat.extendScalars_assoc'\"], \"digest\": \"e6863be5995ae4c4\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-20T17:04:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"8a20b0e5ebd5e4dc\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|mapBiproduct|CommShift",
+   "results": "{\"t\": \"2026-10-20T18:17:13Z\", \"tool\": \"grep\", \"query\": \"conjugateEquiv|mapBiproduct|CommShift\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\"], \"digest\": \"181679303ee50c5b\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageCoherence",
+  "date": "2026-10-20",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Opening paragraph: scalar extension commutes with Rp_* for the proper factor; Tag 0D6D, lemma-derived-pullback-composition; parent proof Step 3, the unit and tower equations for left balancing.",
+   "via": [
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageBalancingCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeDirectImageBalancingCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.finiteFreeDirectImageBalancingCoherence",
+  "statement": "theorem finiteFreeDirectImageBalancingCoherence {Z W : Scheme.{u}} (q : Z ⟶ W)\n    (sW : ScalarModel W) (sZ : ScalarModel Z) :\n    (∀ (R : Coefficients q) (K : DerivedCategory (proEtaleRingModules W R.target)),\n      (proEtaleRingDerivedPullback q R.target R.source R.identification).map\n          ((sW.unit R.target).inv.app K) ≫\n        (balancing sW sZ (CoefficientMap.id R)).hom.app K ≫\n        (sZ.unit R.source).hom.app\n          ((proEtaleRingDerivedPullback q R.target R.source R.identification).obj K) = 𝟙 _) ∧\n    (∀ (R S B : Coefficients q) (a : CoefficientMap R S) (b : CoefficientMap S B)\n      (K : DerivedCategory (proEtaleRingModules W R.target)),\n      (balancing sW sZ (a.comp b)).hom.app K =\n        (proEtaleRingDerivedPullback q B.target B.source B.identification).map\n          ((sW.normalization.derived a.target b.target).inv.app K) ≫\n        (balancing sW sZ b).hom.app ((sW.presentation a.target).derived.obj K) ≫\n        (sZ.presentation b.source).derived.map ((balancing sW sZ a).hom.app K) ≫\n        (sZ.normalization.derived a.source b.source).hom.app\n          ((proEtaleRingDerivedPullback q R.target R.source R.identification).obj K))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item proof + 7 new modules/nodes vs the published item module (moved defs byte-identical, item statement unchanged), compiled all 8 (--all, exit 0), axiom probes, the two new sorry statements checked against the item and the pinned Normalization/ScalarModel fields"
+ }
+}

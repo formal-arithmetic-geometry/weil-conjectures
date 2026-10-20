@@ -20,153 +20,80 @@
  ],
  "proof": [
   {
-   "text": "Write $L_R=Lq_R^*$, $R_R=Rq_{*,R}$, and similarly for $S$. Choose an $R_W$-basis $e_1,\\ldots,e_d$ of $S_W$. Exact identified-coefficient inverse image [def-weil-pbc-proetale-operations] pulls this to an $R_Z$-basis of $S_Z$. For either $T$, the maps $N^{\\oplus d}\\to\\operatorname{Res}(N\\otimes_{R_T}S_T)$, $(x_i)\\mapsto\\sum_i x_i\\otimes e_i$, and $x\\otimes\\sum_i r_i e_i\\mapsto(r_i x)_i$ are inverse: the tensor balancing relations prove both composites are identities. They define sheaf maps by [def-pur-sheaf-tensor-product]. Kernels and cokernels of module sheaves have the underlying abelian-sheaf kernels and cokernels [def-weil-sheaf-of-modules-category]; thus this finite-sum description proves scalar extension exact. By [lem-weil-pbc-exact-functor-derived-functor] its termwise functor computes its left derived functor on every complex, so it computes precisely $C_T$ of [lem-pur-derived-change-of-rings], with the stated target-ring action. The same coordinate maps give $\\operatorname{Res}C_TN\\cong N^{\\oplus d}$ on the unbounded derived categories. If $d=0$, these are the unique maps between zero objects.",
+   "text": "Construct the two scalar models with lem-sp-finite-free-scalar-models. This supplies their normalized ordinary tensors, actual restriction adjunctions and multiplication units, with no additional data choice.",
    "uses": [
-    "def-weil-pbc-proetale-operations",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-pur-derived-change-of-rings"
+    "lem-sp-finite-free-scalar-models"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944, lemma-projection-formula, finite-free reduction; coordinate calculation of exact scalar extension"
+    "place": "Tags 03EK, 06YY and 07A6; normalized scalar model construction."
    }
   },
   {
-   "text": "Normalize $\\mu:L_SC_W\\cong C_ZL_R$ on the exact complex functors of Step 1. On inverse-image local tensor generators it sends $q^{-1}(x\\otimes s)$ to $q^{-1}x\\otimes c_S(q^{-1}s)$; its inverse is the reverse balanced map. Compatibility of $c_R,c_S$ with the coefficient map makes these maps balanced and $S_Z$-linear. They commute with restrictions, differentials and morphisms by the sheaf tensor definition [def-pur-sheaf-tensor-product] and identified-coefficient pullback [def-weil-pbc-proetale-operations]. The exact-functor shift comparisons are degreewise identities [lem-weil-pbc-exact-functor-derived-factorization]; consequently these maps commute with shift, including the negative shifted differential. Localization lifts these natural isomorphisms and their equations uniquely [lem-weil-pbc-localization-universal-property]. This lift is the canonical derived balancing comparison used in the statement: on a flat K-flat representative, which exists by [lem-pc-kflat-resolution], it is the same balanced pullback map computing the scalar functors [lem-pur-derived-change-of-rings] and the tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. No assertion about equality of derived morphisms is inferred merely by forgetting their $S$-actions.",
+   "text": "Apply lem-sp-finite-free-scalar-shift to every scalar map on both sites. It proves the universal counit shift equation and triangulatedness for the exact specified left shifts. Apply lem-sp-finite-free-direct-image-shift to the actual direct-image comparison.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pc-kflat-resolution"
+    "lem-sp-finite-free-scalar-shift",
+    "lem-sp-finite-free-direct-image-shift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0B56, equation-projection-formula-map, and 0D6D, lemma-derived-pullback-composition; normalization and input shift of balancing"
+    "place": "Tags 06YY, 07A6 and 0A8D; exactness and shift compatibility."
    }
   },
   {
-   "text": "For a tower $R\\to S\\to B$, choosing bases gives a basis $e_i f_j$ of $B$ over $R$, so all three scalar functors are exact by Step 1. Write $a_T:C_{B/S,T}C_{S/R,T}\\cong C_{B/R,T}$. By [lem-sfb-successive-derived-quotient-normalization], it is represented by $(x\\otimes s)\\otimes b\\mapsto x\\otimes\\overline{s}b$. The two composites from $L_BC_{B/S,W}C_{S/R,W}$ to $C_{B/R,Z}L_R$ send every local generator $q^{-1}((x\\otimes s)\\otimes b)$ to $q^{-1}x\\otimes c_B(q^{-1}(\\overline{s}b))$: the other route gives $q^{-1}x\\otimes\\overline{c_S(q^{-1}s)}c_B(q^{-1}b)$, the same by the ring-square hypothesis. Tensor balancing and sheafification make this equality of $B_Z$-linear complex maps [def-pur-sheaf-tensor-product]. Uniqueness of localization lifts [lem-weil-pbc-localization-universal-property] gives\n$$\\mu^{B/R}L_B(a_W)=(a_ZL_R)\\,C_{B/S,Z}(\\mu^{S/R})\\,(\\mu^{B/S}C_{S/R,W}).$$\nFor an identity coefficient map the balanced formula is multiplication $x\\otimes r\\mapsto rx$, so $\\mu$ becomes the identity under the unit identifications. This calculation concerns only the exact left functors; no direct-image comparison is assumed.",
+   "text": "Obtain eW, eZ and the columns from lem-sp-finite-free-direct-image-columns. Extensionality on finite biproduct inclusions identifies eW followed by restricted comparison and the restriction/direct-image isomorphism with mapBiproduct(Rq_R).inv followed by Rq_R(eZ.hom). Additivity of Rq_R makes mapBiproduct an isomorphism. Hence the restricted comparison is invertible. The conservativity clause of the ring-sheaf-change adjunct theorem reflects invertibility, objectwise and then for the natural transformation. Composite triangulatedness follows from the scalar and canonical direct-image triangulated instances. This works unchanged for d=0.",
    "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition; elementary balancing equation for the coefficient tower and identity"
-   }
-  },
-  {
-   "text": "The square $\\mu:L_SC_W\\to C_ZL_R$ has mate $C_WR_R\\to R_SC_Z$. By the explicit mate formula [def-weil-pbc-adjunction-mate] this mate has transpose $C_Z(\\varepsilon_R)\\mu_{R_R(-)}$, exactly the defining transpose of $\\pi$; hence it is $\\pi$. In particular it is a natural transformation. Both scalar functors are exact by [lem-pur-derived-change-of-rings], and both derived direct images are exact by [def-weil-pbc-proetale-operations], so its source and target are exact functors. All four corners here are the module derived categories, and the Hom bijection used to define each component has target $D(S_W)$. Thus every component is an $S_W$-module derived morphism.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-pur-derived-change-of-rings",
+    "lem-sp-finite-free-direct-image-columns",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
     "def-weil-pbc-proetale-operations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map; Tag 07A6, lemma-adjoint; naturality from the mate definition"
+    "place": "Tags 0944 and 07A6; finite-biproduct comparison and conservative restriction."
    }
   },
   {
-   "text": "Let $r_T:D(S_T)\\to D(R_T)$ be scalar restriction. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] with the given compatible ring identifications; it supplies $b:r_ZL_S\\cong L_Rr_W$, $d:r_WR_S\\cong R_Rr_Z$, and conservativity of $r_W$. Put $t_M=C_Z(\\varepsilon_{R,M})\\mu_{R_RM}$. Its adjunct is $\\pi_M$. The cited adjunct identity says that $d_{C_ZM}r_W(\\pi_M)$ is the $R$-adjunct of $r_Z(t_M)b_{C_WR_RM}^{-1}$. By the balanced formula of Step 2 and the bases of Step 1, this latter morphism is\n$$L_R((R_RM)^{\\oplus d})\\cong(L_RR_RM)^{\\oplus d}\\xrightarrow{\\varepsilon_{R,M}^{\\oplus d}}M^{\\oplus d}.$$\nIndeed its restriction to the $i$th summand sends $x\\otimes e_i$ to $\\varepsilon_{R,M}(x)\\otimes e_i$. This identifies the actual restricted comparison, rather than an unspecified isomorphism of its source and target.",
+   "text": "For identity coefficients whisker the balancing square by the inverse target multiplication unit and source multiplication unit. The first equation of lem-sp-finite-free-balancing-coherence says this is the unitor identity square. mateEquiv_whiskerTop_whiskerBottom and mateEquiv_unitors give exactly the displayed comparison identity on every M.",
    "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
+    "lem-sp-finite-free-balancing-coherence",
+    "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6, lemma-adjoint, and 0D6E, lemma-derived-pushforward-composition; scalar-restriction adjunct identity"
+    "place": "Tags 0B56 and 0D6D; identity square and its mate."
    }
   },
   {
-   "text": "Let $\\iota_i:M\\to M^{\\oplus d}$ and $p_i:M^{\\oplus d}\\to M$ be the coordinate inclusions and projections. The adjunct of $\\iota_i\\varepsilon_{R,M}:L_RR_RM\\to M^{\\oplus d}$ is $R_R(\\iota_i)$ by naturality of the adjunction [lem-weil-pbc-adjunction-of-natural-bijection]. Therefore Step 5 identifies $d\\,r_W(\\pi_M)$ with the map $\\theta:(R_RM)^{\\oplus d}\\to R_R(M^{\\oplus d})$ having columns $R_R(\\iota_i)$. The map $(R_R(p_i))_i$ is an isomorphism because $R_R$ is a right adjoint and preserves the finite product [lem-weil-pbc-right-adjoint-preserves-limits]; finite sums in these additive derived categories are also products [def-weil-abstract-derived-category]. Its composite with $\\theta$ has $(j,i)$ entry $R_R(p_j\\iota_i)=\\delta_{ij}$, since $R_R$ is additive [def-weil-pbc-proetale-operations]. Thus $\\theta$ is its inverse. For $d=0$ the same assertion is preservation of the terminal zero object. Hence $r_W(\\pi_M)$ is invertible, and conservativity in [lem-weil-pbc-ring-sheaf-change-adjunction] proves $\\pi_M$ invertible in $D(S_W)$. The basis has proved invertibility of the canonical map, without entering its definition.",
+   "text": "Horizontally compose the balancing squares for a and b and whisker by the inverse target derived associator and source derived associator. The tower equation of lem-sp-finite-free-balancing-coherence identifies this with balancing for a.comp b. Apply mateEquiv_whiskerTop_whiskerBottom and mateEquiv_vcomp. Evaluating at M gives exactly the inverse target associator, CW_b of the first comparison, the second comparison, and Rq_B of the source associator, in the required order. The finite-free assumptions are unnecessary for this equation.",
    "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "lem-weil-pbc-right-adjoint-preserves-limits",
-    "def-weil-abstract-derived-category",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
+    "lem-sp-finite-free-balancing-coherence",
+    "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944, lemma-projection-formula, final finite-free case; Categories Tag 0038, lemma-adjoint-exact"
-   }
-  },
-  {
-   "text": "For the input shift, expand the mate formula of Step 4 as\n$$\\pi_M=R_S(C_Z\\varepsilon_{R,M})\\,R_S(\\mu_{R_RM})\\,\\eta^S_{C_WR_RM}.$$\nThe units and counits of $L_R\\dashv R_R$ and $L_S\\dashv R_S$ commute with their canonical shifts by [lem-weil-pbc-derived-adjunction-shift]. These canonical shifts of $L_R,L_S$ are the termwise ones used above: for a K-flat resolution $P\\to K$, $P[1]\\to K[1]$ is one, and $q^*(P[1])=(q^*P)[1]$ degreewise, so by the representation of $Lq^*$ by $q^*P$ in [def-weil-pbc-proetale-operations] the shift of resolutions and the exact-functor comparison $\\tau$ agree; the shifts of $R_R,R_S$ are then the unique ones compatible with the units. The scalar functors carry the termwise shift comparisons of Step 1, by [lem-weil-pbc-exact-functor-derived-factorization], and $\\mu$ respects them by Step 2. Whiskering and composing such transformations preserves shift compatibility by [lem-weil-pbc-commshift-nattrans-comp-whisker]. Applied to the displayed formula this gives, with the composite shift comparisons $s_F,s_G$,\n$$s_G\\pi_{M[1]}=\\pi_M[1]s_F$$\nin $D(S_W)$. Together with Steps 4 and 6 this makes $\\pi$ a natural isomorphism of exact functors, including the connecting morphisms of distinguished triangles.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-derived-adjunction-shift",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-commshift-nattrans-comp-whisker",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map; input-shift equation expanded from the adjunction formula"
-   }
-  },
-  {
-   "text": "For identity coefficients identify $C_W,C_Z$ with identity functors by multiplication. Step 3 identifies the coefficient square with $\\mathrm{id}_{L_R}$. Its mate is $\\mathrm{id}_{R_R}$ by [lem-weil-pbc-mate-pasting], clause (4). Write $m_T:C_T\\cong\\mathrm{id}$ for these multiplication isomorphisms. Transporting a square along $m_W$ on its source and $m_Z$ on its target changes its mate by precomposition with $m_W^{-1}R_R$ and postcomposition with $R_R(m_Z)$, by naturality of the adjunction bijection [lem-weil-pbc-adjunction-of-natural-bijection], exactly as in Step 9. Hence Step 4 gives $R_R(m_{Z,M})\\,\\pi_{R/R,q,M}\\,m_{W,R_RM}^{-1}=\\mathrm{id}_{R_RM}$: $\\pi_{R/R,q}$ is the identity under precisely these unit identifications.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map; identity coefficient square and its mate"
-   }
-  },
-  {
-   "text": "Apply clause (1) of [lem-weil-pbc-mate-pasting] to the two squares $\\mu^{S/R}:L_SC_{S/R,W}\\to C_{S/R,Z}L_R$ and $\\mu^{B/S}:L_BC_{B/S,W}\\to C_{B/S,Z}L_S$. Their pasted square has mate\n$$C_{B/S,W}C_{S/R,W}R_R\\longrightarrow C_{B/S,W}R_SC_{S/R,Z}\\longrightarrow R_BC_{B/S,Z}C_{S/R,Z},$$\nwhose forward composite is $\\pi_{B/S,q,C_{S/R,Z}(-)}\\,C_{B/S,W}(\\pi_{S/R,q})$, by Step 4. Step 3 identifies the pasted left square with $\\mu^{B/R}$ after $a_W,a_Z$. Naturality of the adjunction bijections [lem-weil-pbc-adjunction-of-natural-bijection] sends postcomposition of the transpose by $a_Z$ to postcomposition of the mate by $R_B(a_Z)$, and precomposition by $L_B(a_W^{-1})$ to precomposition by $a_W^{-1}$. Consequently\n$$\\pi_{B/R,q,M}=R_B(a_{Z,M})\\,\\pi_{B/S,q,C_{S/R,Z}M}\\,C_{B/S,W}(\\pi_{S/R,q,M})\\,(a_{W,R_RM})^{-1}.$$\nThis mate calculation takes place throughout in the $B$-module categories. Scalar restriction was used only to detect invertibility in Step 6; no faithfulness of scalar restriction on derived Hom sets is used for this equality.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0B56 and 0D6D; successive coefficient equation by pasting the explicitly balanced squares"
+    "place": "Tags 0B56 and 0D6D; coefficient tower and mate pasting."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-operations",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-kflat-resolution",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "def-weil-pbc-adjunction-mate",
+  "lem-sp-finite-free-scalar-models",
+  "lem-sp-finite-free-scalar-shift",
+  "lem-sp-finite-free-direct-image-shift",
+  "lem-sp-finite-free-direct-image-columns",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "lem-weil-pbc-right-adjoint-preserves-limits",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-derived-adjunction-shift",
-  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "def-weil-pbc-proetale-operations",
+  "lem-sp-finite-free-balancing-coherence",
   "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0B56 (equation-projection-formula-map), 0944 (lemma-projection-formula, finite-free case), 0D6D and 07A6; explicit coefficient-linear shift and tower calculations"
+  "place": "Tags 0B56, 0944, 06YY, 07A6 and 0D6D; compiling proof from normalized scalar construction and shifts, the finite-basis columns, biproduct preservation and conservative restriction, then explicit unit/tower mate pasting."
  },
  "mathlib_searches": [
   {
@@ -325,7 +252,6 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-sfb-successive-derived-quotient-normalization",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-derived-adjunction-shift",
   "lem-pc-kflat-resolution"
  ],
  "reviewed": {
@@ -348,15 +274,6 @@
   "module": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageCoherence",
   "declaration": "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.finiteFreeDirectImageCoherence",
   "declarations": [
-   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Presentation",
-   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.ScalarModel",
-   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.scalarCommShift",
-   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Coefficients",
-   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.CoefficientMap",
-   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.CoefficientMap.id",
-   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.CoefficientMap.comp",
-   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.balancing",
-   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.comparison",
    "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.finiteFreeDirectImageCoherence"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeDirectImageCoherence.lean",
@@ -365,5 +282,15 @@
   "by": "N4",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item proof + 7 new modules/nodes vs the published item module (moved defs byte-identical, item statement unchanged), compiled all 8 (--all, exit 0), axiom probes, the two new sorry statements checked against the item and the pinned Normalization/ScalarModel fields"
  }
 }

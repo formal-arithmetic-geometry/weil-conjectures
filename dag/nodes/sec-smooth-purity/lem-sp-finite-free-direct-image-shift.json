@@ -1,0 +1,129 @@
+{
+ "id": "lem-sp-finite-free-direct-image-shift",
+ "kind": "statement",
+ "title": "Shift compatibility of the actual coefficient/direct-image mate",
+ "statement": "For every scheme morphism q, normalized scalar models on its endpoints [def-sp-finite-free-direct-image-data], and compatible coefficient map a, the specified canonical comparison commutes with integer shifts. No finite-free hypothesis is needed for shift compatibility.\n\ntheorem finiteFreeDirectImageShift {Z W : Scheme.{u}} {q : Z ⟶ W}\n    (sW : ScalarModel W) (sZ : ScalarModel Z)\n    {R S : Coefficients q} (a : CoefficientMap R S) :\n    NatTrans.CommShift (comparison sW sZ a) ℤ",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0DVC and 0D6D; shifts of the canonical restriction comparison and its conjugates."
+ },
+ "stmt_deps": [
+  "def-sp-finite-free-direct-image-data"
+ ],
+ "proof": [
+  {
+   "text": "Use lem-sp-canonical-right-derived-adjunction-shift for the two canonical geometric derived adjunctions. The restriction/pullback isomorphism is a composite of exact-functor derived comparisons and therefore shift-compatible. In the scalar-restriction adjunct identity, take the map to be the geometric counit. The right triangle identity identifies the canonical restriction/direct-image map with the mate of the restriction/pullback inverse; hence it commutes with shifts.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0D6D; canonical adjunct identity."
+   }
+  },
+  {
+   "text": "Scalar adjunctions commute with the left shifts induced from restriction. Composite adjunctions do too. Expand the inverse conjugate defining balancing: it is a composite of whiskered units, the inverse restriction comparison, counits, associators and unitors. Every factor commutes with shifts. Take its mate under the geometric adjunctions; NatTrans.CommShift.mateEquiv proves shift compatibility of comparison.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0D6D; conjugation and mate formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0DVC and 0D6D; shifts of the canonical restriction comparison and its conjugates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical right derived adjunction commutes with shift for an exact left adjoint and the K-injective derived right adjoint",
+   "results": "{\"t\": \"2026-10-20T18:18:08Z\", \"tool\": \"leansearch\", \"query\": \"Canonical right derived adjunction commutes with shift for an exact left adjoint and the K-injective derived right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsTriangulated.commShift\", \"CategoryTheory.Adjunction.rightAdjointCommShift_commShiftIso\", \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_left\", \"CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso\", \"CategoryTheory.Adjunction.rightAdjointCommShift\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso_hom_app\", \"CategoryTheory.Adjunction.leftAdjointCommShift\", \"CategoryTheory.Adjunction.commShift_of_leftAdjoint\"], \"digest\": \"d806cd6547e27ed2\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical unbounded right derived adjunction of an exact left adjoint is compatible with the canonical shift structures",
+   "results": "{\"t\": \"2026-10-20T18:14:24Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical unbounded right derived adjunction of an exact left adjoint is compatible with the canonical shift structures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedη\"], \"digest\": \"fe66b0b896362f32\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|mapBiproduct|CommShift",
+   "results": "{\"t\": \"2026-10-20T18:17:13Z\", \"tool\": \"grep\", \"query\": \"conjugateEquiv|mapBiproduct|CommShift\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\"], \"digest\": \"181679303ee50c5b\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageCoherence",
+  "date": "2026-10-20",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Opening paragraph: scalar extension commutes with Rp_* for the proper factor; Tags 07A6, 0DVC and 0D6D; shifts of the canonical restriction comparison and its conjugates.",
+   "via": [
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeDirectImageShift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.finiteFreeDirectImageShift",
+  "statement": "theorem finiteFreeDirectImageShift {Z W : Scheme.{u}} {q : Z ⟶ W}\n    (sW : ScalarModel W) (sZ : ScalarModel Z)\n    {R S : Coefficients q} (a : CoefficientMap R S) :\n    NatTrans.CommShift (comparison sW sZ a) ℤ",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item proof + 7 new modules/nodes vs the published item module (moved defs byte-identical, item statement unchanged), compiled all 8 (--all, exit 0), axiom probes, the two new sorry statements checked against the item and the pinned Normalization/ScalarModel fields"
+ }
+}

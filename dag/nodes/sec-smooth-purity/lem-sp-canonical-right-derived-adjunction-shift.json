@@ -1,0 +1,130 @@
+{
+ "id": "lem-sp-canonical-right-derived-adjunction-shift",
+ "kind": "statement",
+ "title": "Canonical unbounded right-derived adjunctions commute with canonical shifts",
+ "statement": "Let C and D be abelian categories with the recorded unbounded derived categories, and suppose D has K-injective resolutions. If L is an exact additive left adjoint to an additive R, then the canonical adjunction D(L) left adjoint to the K-injective right derived functor R(R) commutes with their fixed canonical shifts. The conclusion retains the existing K-injective shift, not an arbitrary transported shift.\n\ntheorem canonicalRightDerivedAdjunctionShift\n    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]\n    [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions D]\n    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] [R.Additive]\n    [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ R) :\n    adj.mapDerivedCategoryRightDerivedAdjunction.CommShift ℤ",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0DVC (pre-derived adjoint functors) and 0A8D (adjoint-is-exact), with sites-cohomology.tex Tag 07A6 for unbounded derived adjunctions."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kinjective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Let E be the equivalence from K-injective homotopy objects to D(D). The inverse comparison R(R) to E inverse followed by termwise R and Qh is shift-compatible by construction. The defining formula expresses its components as the canonical right-derived unit followed by R(R) of E's counit. Naturality along E's unit and the triangle identity therefore identify the restriction of the canonical unit to K-injectives with a composite of shift-compatible transformations. Every homotopy object admits a quasi-isomorphism to such an object. NatTrans.CommShift.of_whiskerLeft gives shift compatibility of the entire canonical right-derived unit.",
+   "uses": [
+    "def-weil-pbc-kinjective-resolutions",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0DVC; canonical right-derived unit."
+   }
+  },
+  {
+   "text": "The homotopy adjunction unit commutes with shifts. The derived adjunction unit is normalized by its composite with R(R) of the exact L factorization: it is Qh of the homotopy unit followed by the canonical right-derived unit. Equality of transformations into D(L) followed by R(R) can be detected by the right Kan property of D(L), after taking the adjoint of postcomposition by R(R). Apply that detection to the two shift squares: their composites are equal by the normalized unit formula. This proves that the derived adjunction unit commutes with shifts. Adjunction.CommShift.mk' gives the counit compatibility by the triangle identities.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0DVC; normalized derived adjunction unit and right Kan uniqueness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0DVC (pre-derived adjoint functors) and 0A8D (adjoint-is-exact), with sites-cohomology.tex Tag 07A6 for unbounded derived adjunctions.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical right derived adjunction commutes with shift for an exact left adjoint and the K-injective derived right adjoint",
+   "results": "{\"t\": \"2026-10-20T18:18:08Z\", \"tool\": \"leansearch\", \"query\": \"Canonical right derived adjunction commutes with shift for an exact left adjoint and the K-injective derived right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsTriangulated.commShift\", \"CategoryTheory.Adjunction.rightAdjointCommShift_commShiftIso\", \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_left\", \"CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso\", \"CategoryTheory.Adjunction.rightAdjointCommShift\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso_hom_app\", \"CategoryTheory.Adjunction.leftAdjointCommShift\", \"CategoryTheory.Adjunction.commShift_of_leftAdjoint\"], \"digest\": \"d806cd6547e27ed2\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical unbounded right derived adjunction of an exact left adjoint is compatible with the canonical shift structures",
+   "results": "{\"t\": \"2026-10-20T18:14:24Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical unbounded right derived adjunction of an exact left adjoint is compatible with the canonical shift structures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedη\"], \"digest\": \"fe66b0b896362f32\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|mapBiproduct|CommShift",
+   "results": "{\"t\": \"2026-10-20T18:17:13Z\", \"tool\": \"grep\", \"query\": \"conjugateEquiv|mapBiproduct|CommShift\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\"], \"digest\": \"181679303ee50c5b\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageCoherence",
+  "date": "2026-10-20",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Opening paragraph: scalar extension commutes with Rp_* for the proper factor; Tags 07A6 and 0DVC; compatibility of the normalized canonical unbounded derived adjunction with shifts.",
+   "via": [
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CanonicalRightDerivedAdjunctionShift",
+  "file": "lean/Sheaf/CategoryTheory/CanonicalRightDerivedAdjunctionShift.lean",
+  "declaration": "CategoryTheory.canonicalRightDerivedAdjunctionShift",
+  "statement": "theorem canonicalRightDerivedAdjunctionShift\n    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]\n    [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions D]\n    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] [R.Additive]\n    [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ R) :\n    adj.mapDerivedCategoryRightDerivedAdjunction.CommShift ℤ",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item proof + 7 new modules/nodes vs the published item module (moved defs byte-identical, item statement unchanged), compiled all 8 (--all, exit 0), axiom probes, the two new sorry statements checked against the item and the pinned Normalization/ScalarModel fields"
+ }
+}

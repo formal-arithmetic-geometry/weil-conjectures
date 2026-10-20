@@ -1,0 +1,135 @@
+{
+ "id": "lem-sp-finite-free-direct-image-columns",
+ "kind": "statement",
+ "title": "Finite-basis columns of the restricted canonical coefficient mate",
+ "statement": "For a scheme morphism q:Z to W, normalized scalar models [def-sp-finite-free-direct-image-data], a compatible coefficient map a:R to S, and an R_W-module isomorphism S_W to the free rank-d module sheaf, the restricted scalar extension of Rq_R M and that of M admit finite biproduct coordinate isomorphisms eW and eZ. Under these coordinates, the canonical restricted comparison, followed by the normalized restriction/direct-image isomorphism, has column i equal to Rq_R of the corresponding basis inclusion on Z. This includes d=0 and makes no assertion of invertibility or shift/tower coherence.\n\ntheorem finiteFreeDirectImage_columns {Z W : Scheme.{u}} (q : Z ⟶ W)\n    (sW : ScalarModel W) (sZ : ScalarModel Z)\n    (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)\n    (hfree : Nonempty ((proEtaleRingRestrictScalars a.target).obj\n            (SheafOfModules.unit ((sheafCompose (ProEt.topology W)\n              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)) ≅\n          SheafOfModules.free (R := (sheafCompose (ProEt.topology W)\n            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R.target)\n            (ULift.{u + 1} (Fin d))))\n    (M : DerivedCategory (proEtaleRingModules Z R.source)) :\n    ∃ (eW : (⨁ fun _ : Fin d ↦\n        (proEtaleRingDerivedDirectImage q R.target R.source R.identification).obj M) ≅\n        (proEtaleRingRestrictScalars a.target).mapDerivedCategory.obj\n          ((sW.presentation a.target).derived.obj\n            ((proEtaleRingDerivedDirectImage q R.target R.source R.identification).obj M)))\n      (eZ : (⨁ fun _ : Fin d ↦ M) ≅\n        (proEtaleRingRestrictScalars a.source).mapDerivedCategory.obj\n          ((sZ.presentation a.source).derived.obj M)),\n      ∀ i : Fin d,\n        biproduct.ι _ i ≫ eW.hom ≫\n          (proEtaleRingRestrictScalars a.target).mapDerivedCategory.map\n            ((comparison sW sZ a).app M) ≫\n          (proEtaleRingRestrictionDerivedDirectImage q R.target S.target R.source S.source\n            a.target a.source R.identification S.identification a.comm).hom.app\n              ((sZ.presentation a.source).derived.obj M) =\n        (proEtaleRingDerivedDirectImage q R.target R.source R.identification).map\n          (biproduct.ι _ i ≫ eZ.hom)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56, equation-projection-formula-map, and 0944, lemma-projection-formula, finite-free basis calculation; parent proof Steps 1, 2, 4 and 5."
+ },
+ "stmt_deps": [
+  "def-sp-finite-free-direct-image-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose the displayed finite basis of S_W over R_W. Its inverse-image basis gives S_Z over R_Z through the two fixed coefficient identifications. The maps from a finite tuple to the sum of basis tensors and from a tensor to its coordinate tuple are mutually inverse by tensor balancing. They are natural and commute with sheaf restrictions. Consequently scalar extension is exact, and the same finite-biproduct coordinates compute its universal unbounded derived functor after passing to complexes and localizing. The empty basis gives the zero functor.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 and 0944, projection-formula-map and finite-free reduction."
+   }
+  },
+  {
+   "text": "The ordinary tensor-unit normalization and identity-section restriction comparison identify the conjugate balancing with the usual balanced pullback map. Compute on flat-term K-flat representatives and descend by localization uniqueness. Apply the restriction adjunct identity to the counit transpose defining comparison. On each basis summand this transpose is the R-geometric counit followed by the basis inclusion on Z. Adjunction naturality makes its adjunct Rq_R of that inclusion. This proves the asserted column equality as an equality in D(R_W), without requiring faithful scalar forgetting on derived Hom.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56, 0944 and 07A6; calculation of the actual comparison on basis columns."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56, equation-projection-formula-map, and 0944, lemma-projection-formula, finite-free basis calculation; parent proof Steps 1, 2, 4 and 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension of module sheaves is a finite biproduct, and the restricted projection map has pushforwards of basis inclusions as columns",
+   "results": "{\"t\": \"2026-10-20T18:17:13Z\", \"tool\": \"leansearch\", \"query\": \"Finite free scalar extension of module sheaves is a finite biproduct, and the restricted projection map has pushforwards of basis inclusions as columns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.instFree\", \"SheafOfModules.ιFree\", \"SheafOfModules.free\", \"PresheafOfModules.pushforward\", \"SheafOfModules.restrictScalars\", \"Algebra.TensorProduct.basisAux\", \"Module.Basis.restrictScalars\", \"ModuleCat.instHasFiniteBiproducts\"], \"digest\": \"6b05fc3f3f010fce\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar extension commutes with derived pushforward by a counit projection formula",
+   "results": "{\"t\": \"2026-10-20T17:04:20Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free scalar extension commutes with derived pushforward by a counit projection formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"PresheafOfModules.pushforward₀CompToPresheaf\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"PresheafOfModules.pushforwardCompToPresheaf\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"digest\": \"6eb5d186ed24c161\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|restrictScalars|freeFunctor",
+   "results": "{\"t\": \"2026-10-20T18:18:07Z\", \"tool\": \"grep\", \"query\": \"changeOfRings|restrictScalars|freeFunctor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"1c8e242bf0f86b9d\"}",
+   "date": "2026-10-20",
+   "verdict": "Tools found, no declaration with this exact normalized sheaf-derived statement; used the applicable adjunction, localization and finite-biproduct APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageCoherence",
+  "date": "2026-10-20",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Opening paragraph: scalar extension commutes with Rp_* for the proper factor; Tags 0B56, equation-projection-formula-map, and 0944, lemma-projection-formula, finite-free basis calculation; parent proof Steps 1, 2, 4 and 5.",
+   "via": [
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageColumns",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeDirectImageColumns.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.finiteFreeDirectImage_columns",
+  "statement": "theorem finiteFreeDirectImage_columns {Z W : Scheme.{u}} (q : Z ⟶ W)\n    (sW : ScalarModel W) (sZ : ScalarModel Z)\n    (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)\n    (hfree : Nonempty ((proEtaleRingRestrictScalars a.target).obj\n            (SheafOfModules.unit ((sheafCompose (ProEt.topology W)\n              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)) ≅\n          SheafOfModules.free (R := (sheafCompose (ProEt.topology W)\n            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R.target)\n            (ULift.{u + 1} (Fin d))))\n    (M : DerivedCategory (proEtaleRingModules Z R.source)) :\n    ∃ (eW : (⨁ fun _ : Fin d ↦\n        (proEtaleRingDerivedDirectImage q R.target R.source R.identification).obj M) ≅\n        (proEtaleRingRestrictScalars a.target).mapDerivedCategory.obj\n          ((sW.presentation a.target).derived.obj\n            ((proEtaleRingDerivedDirectImage q R.target R.source R.identification).obj M)))\n      (eZ : (⨁ fun _ : Fin d ↦ M) ≅\n        (proEtaleRingRestrictScalars a.source).mapDerivedCategory.obj\n          ((sZ.presentation a.source).derived.obj M)),\n      ∀ i : Fin d,\n        biproduct.ι _ i ≫ eW.hom ≫\n          (proEtaleRingRestrictScalars a.target).mapDerivedCategory.map\n            ((comparison sW sZ a).app M) ≫\n          (proEtaleRingRestrictionDerivedDirectImage q R.target S.target R.source S.source\n            a.target a.source R.identification S.identification a.comm).hom.app\n              ((sZ.presentation a.source).derived.obj M) =\n        (proEtaleRingDerivedDirectImage q R.target R.source R.identification).map\n          (biproduct.ι _ i ≫ eZ.hom)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6ecf9",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261020T221301-L-4168742",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item proof + 7 new modules/nodes vs the published item module (moved defs byte-identical, item statement unchanged), compiled all 8 (--all, exit 0), axiom probes, the two new sorry statements checked against the item and the pinned Normalization/ScalarModel fields"
+ }
+}

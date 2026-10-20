@@ -5,25 +5,15 @@ Authors: SHEAF group N4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-public import Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization
-public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Paper.EtaleDerivedScalarTensor
-public import Sheaf.Paper.PbcActualScalarPullback
-public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.DerivedAdjunctionShift
-public import Mathlib.CategoryTheory.Shift.Adjunction
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Sheaf.AlgebraicGeometry.FiniteFreeDirectImageData
+import Sheaf.AlgebraicGeometry.FiniteFreeDirectImageScalarModels
+import Sheaf.AlgebraicGeometry.FiniteFreeDirectImageColumns
+import Sheaf.AlgebraicGeometry.FiniteFreeDirectImageScalarShift
+import Sheaf.AlgebraicGeometry.FiniteFreeDirectImageShift
+import Sheaf.AlgebraicGeometry.FiniteFreeDirectImageBalancingCoherence
+import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
-public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 /-!
 # Finite-free direct-image coefficient coherence
 
@@ -39,6 +29,8 @@ its right mate is the specified counit-tensor map. No arbitrary comparison is bo
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe u
 
@@ -46,152 +38,114 @@ open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
-/-- A presentation of the existing derived scalar extension on the actual small site.
-Source: Stacks Tag 06YY (blueprint: lem-sp-finite-free-direct-image-coherence). -/
-abbrev Presentation (X : Scheme.{u}) {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
-    (a : R ⟶ S) :=
-  SheafOfModules.SuccessiveDerivedQuotient.Presentation.{u + 1, u, u + 1, u + 2}
-    (C := X.ProEt) (J := ProEt.topology X) (R := R) (S := S)
-    (hD := fun T ↦ proEtaleRingModules_hasDerivedCategory X T) a
+private theorem comparison_isIso_app {Z W : Scheme.{u}} (q : Z ⟶ W)
+    (sW : ScalarModel W) (sZ : ScalarModel Z)
+    (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)
+    (hfree : Nonempty ((proEtaleRingRestrictScalars a.target).obj
+            (SheafOfModules.unit ((sheafCompose (ProEt.topology W)
+              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)) ≅
+          SheafOfModules.free (R := (sheafCompose (ProEt.topology W)
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R.target)
+            (ULift.{u + 1} (Fin d))))
+    (M : DerivedCategory (proEtaleRingModules Z R.source)) :
+    IsIso ((comparison sW sZ a).app M) := by
+  obtain ⟨eW, eZ, hcol⟩ := finiteFreeDirectImage_columns q sW sZ R S a d hfree M
+  let G := proEtaleRingDerivedDirectImage q R.target R.source R.identification
+  let U := (proEtaleRingRestrictScalars a.target).mapDerivedCategory
+  let δ := proEtaleRingRestrictionDerivedDirectImage q R.target S.target R.source S.source
+    a.target a.source R.identification S.identification a.comm
+  let f := (comparison sW sZ a).app M
+  have heq : eW.hom ≫ U.map f ≫ δ.hom.app ((sZ.presentation a.source).derived.obj M) =
+      (Functor.mapBiproduct G (fun _ : Fin d ↦ M)).inv ≫ G.map eZ.hom := by
+    apply biproduct.hom_ext'
+    intro i
+    simpa only [Category.assoc, Functor.mapBiproduct_inv, biproduct.ι_desc_assoc,
+      ← G.map_comp] using hcol i
+  have : IsIso (eW.hom ≫ U.map f ≫
+      δ.hom.app ((sZ.presentation a.source).derived.obj M)) := by
+    rw [heq]
+    infer_instance
+  have : IsIso (U.map f ≫ δ.hom.app ((sZ.presentation a.source).derived.obj M)) :=
+    IsIso.of_isIso_comp_left eW.hom _
+  have : IsIso (U.map f) := IsIso.of_isIso_comp_right _
+    (δ.hom.app ((sZ.presentation a.source).derived.obj M))
+  have : U.ReflectsIsomorphisms :=
+    (proEtaleRingSheafChangeAdjunction q R.target S.target R.source S.source
+      a.target a.source R.identification S.identification a.comm).2.1
+  exact isIso_of_reflects_iso f U
 
-/-- A normalized family of the existing scalar functors, with its multiplication unit.
-`presentation` fixes ordinary objects and maps and the universal derived counit;
-`normalization` fixes the balanced associators and tensor units. The additional
-adjunction is normalized against exact scalar restriction, and the multiplication
-isomorphism is fixed by its ordinary pure-tensor formula and the universal counit.
-Source: Stacks Tags 03EK, 06YY and 07A6
-(blueprint: lem-sp-finite-free-direct-image-coherence). -/
-structure ScalarModel (X : Scheme.{u}) where
-  /-- Existing universal scalar-extension pairs, without a second tensor definition. -/
-  presentation : ∀ {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}},
-    (a : R ⟶ S) → Presentation X a
-  /-- The recorded balanced associator and its K-flat normalization. -/
-  normalization :
-    SheafOfModules.SuccessiveDerivedQuotient.Normalization.{u + 1, u, u + 1, u + 2}
-      (C := X.ProEt) (J := ProEt.topology X)
-      (hD := fun T ↦ proEtaleRingModules_hasDerivedCategory X T) presentation
-  /-- Scalar adjunction to the actual exact restriction, rather than an unrelated functor. -/
-  adjunction : ∀ {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S),
-    (presentation a).derived ⊣ (proEtaleRingRestrictScalars a).mapDerivedCategory
-  /-- Normalization of the derived scalar unit at every flat-term K-flat complex. -/
-  adjunction_unit : ∀ {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S)
-    (P : CochainComplex (proEtaleRingModules X R) ℤ),
-    CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
-      (J := ProEt.topology X) (R := R) P →
-    (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
-      (J := ProEt.topology X) (R := R) (P.X n)) →
-    (adjunction a).unit.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P)) ≫
-      (proEtaleRingRestrictScalars a).mapDerivedCategory.map
-        ((presentation a).counit.app ((HomotopyCategory.quotient _ _).obj P)) ≫
-      (proEtaleRingRestrictScalars a).mapDerivedCategoryFactorsh.hom.app
-        (((presentation a).ordinary.mapHomotopyCategory (.up ℤ)).obj
-          ((HomotopyCategory.quotient _ _).obj P)) =
-    DerivedCategory.Qh.map
-      (((normalization.ordinaryAdjunction a).mapHomotopyCategory (.up ℤ)).unit.app
-        ((HomotopyCategory.quotient _ _).obj P))
-  /-- Multiplication `r ⊗ x ↦ r x` before localization. -/
-  ordinaryUnit : ∀ R : Sheaf (ProEt.topology X) CommRingCat.{u + 1},
-    (presentation (𝟙 R)).ordinary ≅ 𝟭 (proEtaleRingModules X R)
-  /-- The pure-tensor normalization determines the ordinary unit uniquely. -/
-  ordinaryUnit_pure : ∀ (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (M : proEtaleRingModules X R) (U : X.ProEtᵒᵖ) (r : R.obj.obj U) (x : M.val.obj U),
-    ((ordinaryUnit R).hom.app M).val.app U
-      (SheafOfModules.SuccessiveDerivedQuotient.sectionTensor
-        (presentation (𝟙 R)) M U r x) = r • x
-  /-- Multiplication after the universal derived scalar extension. -/
-  unit : ∀ R : Sheaf (ProEt.topology X) CommRingCat.{u + 1},
-    (presentation (𝟙 R)).derived ≅ 𝟭 (DerivedCategory (proEtaleRingModules X R))
-  /-- The derived multiplication is determined by its universal counit. -/
-  unit_normalization : ∀ (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (H : HomotopyCategory (proEtaleRingModules X R) (.up ℤ)),
-    (unit R).hom.app (DerivedCategory.Qh.obj H) =
-      (presentation (𝟙 R)).counit.app H ≫
-      DerivedCategory.Qh.map
-        ((NatTrans.mapHomotopyCategory (ordinaryUnit R).hom (.up ℤ)).app H) ≫
-      DerivedCategory.Qh.map
-        ((Functor.mapHomotopyCategoryIdIso (proEtaleRingModules X R) (.up ℤ)).hom.app H)
+/-- The identity equation for the actual direct-image mate.
+Source: Stacks Project, Tags 0B56 and 0D6D.
+(blueprint: lem-sp-finite-free-direct-image-coherence).
 
-/-- The canonical scalar shift is the adjoint of the termwise restriction shift.
-Source: Stacks Tag 07A6 (blueprint: lem-sp-finite-free-direct-image-coherence). -/
-instance scalarCommShift {X : Scheme.{u}} (s : ScalarModel X)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) :
-    (s.presentation a).derived.CommShift ℤ :=
-  (s.adjunction a).leftAdjointCommShift ℤ
+Proof: whisker the balancing square by the scalar multiplication units. Balancing
+coherence identifies this square with the identity square. Whiskering commutes
+with the mates correspondence, and the mate of the identity square is the identity.
+Evaluating this equality gives the displayed equation. -/
+private theorem finiteFreeDirectImageUnit {Z W : Scheme.{u}} (q : Z ⟶ W)
+    (sW : ScalarModel W) (sZ : ScalarModel Z) (R : Coefficients q)
+    (M : DerivedCategory (proEtaleRingModules Z R.source)) :
+    (sW.unit R.target).inv.app
+        ((proEtaleRingDerivedDirectImage q R.target R.source R.identification).obj M) ≫
+      (comparison sW sZ (CoefficientMap.id R)).app M ≫
+      (proEtaleRingDerivedDirectImage q R.target R.source R.identification).map
+        ((sZ.unit R.source).hom.app M) = 𝟙 _ := by
+  let adj := proEtaleRingDerivedAdjunction q R.target R.source R.identification
+  let L := proEtaleRingDerivedPullback q R.target R.source R.identification
+  let α := TwoSquare.mk _ _ _ _ (balancing sW sZ (CoefficientMap.id R)).hom
+  have heq : (α.whiskerTop (sW.unit R.target).inv).whiskerBottom (sZ.unit R.source).hom =
+      TwoSquare.mk (𝟭 _) L L (𝟭 _)
+        ((Functor.leftUnitor L).hom ≫ (Functor.rightUnitor L).inv) := by
+    ext K
+    simpa [α, TwoSquare.whiskerTop, TwoSquare.whiskerBottom] using
+      (finiteFreeDirectImageBalancingCoherence q sW sZ).1 R K
+  have h := mateEquiv_whiskerTop_whiskerBottom adj adj α
+    (sW.unit R.target).inv (sZ.unit R.source).hom
+  rw [heq, mateEquiv_unitors] at h
+  have hc := congrArg (fun t ↦ t.natTrans.app M) h
+  simpa [comparison, α, TwoSquare.whiskerRight, TwoSquare.whiskerLeft] using hc.symm
 
-/-- The coefficient ring at both ends, with the specified inverse-image identification.
-Source: Stacks Tag 0B56 (blueprint: lem-sp-finite-free-direct-image-coherence). -/
-structure Coefficients {Z W : Scheme.{u}} (q : Z ⟶ W) where
-  /-- Ring sheaf on the target. -/
-  target : Sheaf (ProEt.topology W) CommRingCat.{u + 1}
-  /-- Ring sheaf on the source. -/
-  source : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}
-  /-- The specified identification of inverse-image coefficients. -/
-  identification : (proEtaleSheafInverseImage q CommRingCat.{u + 1}).obj target ≅ source
+/-- The coefficient tower equation for the actual direct-image mate.
+Source: Stacks Project, Tags 0B56 and 0D6D.
+(blueprint: lem-sp-finite-free-direct-image-coherence).
 
-/-- Compatible coefficient maps on the two sites; the only condition is the ring square.
-Source: Stacks Tag 0B56 (blueprint: lem-sp-finite-free-direct-image-coherence). -/
-structure CoefficientMap {Z W : Scheme.{u}} {q : Z ⟶ W} (R S : Coefficients q) where
-  /-- Coefficient map on the target. -/
-  target : R.target ⟶ S.target
-  /-- Coefficient map on the source. -/
-  source : R.source ⟶ S.source
-  /-- The inverse-image identifications commute with coefficient change. -/
-  comm : R.identification.hom ≫ source =
-    (proEtaleSheafInverseImage q CommRingCat.{u + 1}).map target ≫ S.identification.hom
+Proof: horizontally paste the two balancing squares and whisker by the inverse
+target associator and source associator. Balancing coherence identifies this with
+the single square for the composite ring map. Mate pasting identifies its mate
+with the vertical paste of the two direct-image comparisons. Compatibility of
+whiskering with mates supplies the two displayed associators. -/
+private theorem finiteFreeDirectImageTower {Z W : Scheme.{u}} (q : Z ⟶ W)
+    (sW : ScalarModel W) (sZ : ScalarModel Z)
+    (R S B : Coefficients q) (a : CoefficientMap R S) (b : CoefficientMap S B)
+    (M : DerivedCategory (proEtaleRingModules Z R.source)) :
+    (comparison sW sZ (a.comp b)).app M =
+      (sW.normalization.derived a.target b.target).inv.app
+          ((proEtaleRingDerivedDirectImage q R.target R.source R.identification).obj M) ≫
+        (sW.presentation b.target).derived.map ((comparison sW sZ a).app M) ≫
+        (comparison sW sZ b).app ((sZ.presentation a.source).derived.obj M) ≫
+        (proEtaleRingDerivedDirectImage q B.target B.source B.identification).map
+          ((sZ.normalization.derived a.source b.source).hom.app M) := by
+  let ar := proEtaleRingDerivedAdjunction q R.target R.source R.identification
+  let as' := proEtaleRingDerivedAdjunction q S.target S.source S.identification
+  let ab := proEtaleRingDerivedAdjunction q B.target B.source B.identification
+  let α := TwoSquare.mk _ _ _ _ (balancing sW sZ a).hom
+  let β := TwoSquare.mk _ _ _ _ (balancing sW sZ b).hom
+  have heq : TwoSquare.whiskerBottom
+      ((TwoSquare.hComp α β).whiskerTop (sW.normalization.derived a.target b.target).inv)
+      (sZ.normalization.derived a.source b.source).hom =
+      TwoSquare.mk _ _ _ _ (balancing sW sZ (a.comp b)).hom := by
+    ext K
+    simpa [α, β, TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom] using
+      ((finiteFreeDirectImageBalancingCoherence q sW sZ).2 R S B a b K).symm
+  have h := mateEquiv_whiskerTop_whiskerBottom ar ab (TwoSquare.hComp α β)
+    (sW.normalization.derived a.target b.target).inv
+    (sZ.normalization.derived a.source b.source).hom
+  rw [heq, mateEquiv_vcomp ar as' ab] at h
+  have hc := congrArg (fun t ↦ t.natTrans.app M) h
+  simpa [comparison, α, β, ar, as', ab, CoefficientMap.comp, TwoSquare.vComp,
+    TwoSquare.whiskerRight,
+    TwoSquare.whiskerLeft, Category.assoc] using hc
 
-/-- Identity coefficient map, keeping the given geometric identification.
-Source: Stacks Tag 0B56 (blueprint: lem-sp-finite-free-direct-image-coherence). -/
-def CoefficientMap.id {Z W : Scheme.{u}} {q : Z ⟶ W} (R : Coefficients q) :
-    CoefficientMap R R where
-  target := 𝟙 _
-  source := 𝟙 _
-  comm := by simp
-
-/-- Composition of compatible coefficient maps, using the same identifications.
-Source: Stacks Tag 0D6D (blueprint: lem-sp-finite-free-direct-image-coherence). -/
-def CoefficientMap.comp {Z W : Scheme.{u}} {q : Z ⟶ W} {R S B : Coefficients q}
-    (a : CoefficientMap R S) (b : CoefficientMap S B) : CoefficientMap R B where
-  target := a.target ≫ b.target
-  source := a.source ≫ b.source
-  comm := by
-    rw [← Category.assoc, a.comm, Category.assoc, b.comm, Functor.map_comp,
-      Category.assoc]
-
-/-- Canonical balancing, obtained by conjugating the actual normalized right adjoints.
-The right-adjoint comparison is the published one fixed by its derived units and its
-identity section maps. Scalar adjunctions have the `x ↦ 1 ⊗ x` normalization, so this
-conjugate is exactly the balanced scalar/pullback comparison, including on flat K-flat
-representatives. Its definition does not use the finite-free theorem below.
-Source: Stacks Tags 03EL, 0D6D and 07A6
-(blueprint: lem-sp-finite-free-direct-image-coherence). -/
-def balancing {Z W : Scheme.{u}} {q : Z ⟶ W} (sW : ScalarModel W) (sZ : ScalarModel Z)
-    {R S : Coefficients q} (a : CoefficientMap R S) :
-    (sW.presentation a.target).derived ⋙
-        proEtaleRingDerivedPullback q S.target S.source S.identification ≅
-      proEtaleRingDerivedPullback q R.target R.source R.identification ⋙
-        (sZ.presentation a.source).derived :=
-  ((conjugateIsoEquiv
-      ((sW.adjunction a.target).comp
-        (proEtaleRingDerivedAdjunction q S.target S.source S.identification))
-      ((proEtaleRingDerivedAdjunction q R.target R.source R.identification).comp
-        (sZ.adjunction a.source))).symm
-    (proEtaleRingRestrictionDerivedDirectImage q R.target S.target R.source S.source
-      a.target a.source R.identification S.identification a.comm)).symm
-
-/-- The actual counit-tensor comparison in the larger coefficient derived category.
-By the mate formula its component is the `Lq_S* ⊣ Rq_S*` adjunct of
-`balancing.hom ≫ C_Z(ε_R)`. No scalar-forgetting functor is used to define the arrow.
-Source: Stacks Tag 0B56 (blueprint: lem-sp-finite-free-direct-image-coherence). -/
-def comparison {Z W : Scheme.{u}} {q : Z ⟶ W} (sW : ScalarModel W) (sZ : ScalarModel Z)
-    {R S : Coefficients q} (a : CoefficientMap R S) :
-    proEtaleRingDerivedDirectImage q R.target R.source R.identification ⋙
-        (sW.presentation a.target).derived ⟶
-      (sZ.presentation a.source).derived ⋙
-        proEtaleRingDerivedDirectImage q S.target S.source S.identification :=
-  (mateEquiv
-    (proEtaleRingDerivedAdjunction q R.target R.source R.identification)
-    (proEtaleRingDerivedAdjunction q S.target S.source S.identification)
-    (TwoSquare.mk _ _ _ _ (balancing sW sZ a).hom)).natTrans
 
 /-- Finite-free scalar change commutes canonically with ordinary unbounded derived
 pushforward, as an isomorphism of exact functors, with input-shift, identity and tower
@@ -204,41 +158,27 @@ Source: Stacks Tags 0B56 and 0944; shift and coefficient-tower coherences are ex
 from the counit-tensor construction (blueprint: lem-sp-finite-free-direct-image-coherence).
 
 Proof:
-1. Present each ordinary scalar extension and its universal left-derived pair using
-lem-pur-derived-change-of-rings. Use the balanced associators and tensor-normalized
-adjunctions from lem-sfb-successive-derived-quotient-normalization and
-lem-pur-sheaf-ring-derived-coefficient-adjunction. Multiplication sends r tensor x to rx;
-its inverse sends x to 1 tensor x. Their sheafification and localization give the unit.
-2. For a finite R_W-basis of S_W, the maps (x_i) to sum x_i tensor e_i and
-x tensor sum r_i e_i to (r_i x)_i are inverse. Pullback gives the same basis on Z.
-Thus scalar extension is exact and its derived functor is computed termwise, by
-lem-weil-pbc-exact-functor-derived-functor, even for unbounded complexes and rank zero.
-3. Scalar units and the identity-on-sections restriction comparison show that balancing
-is the usual balanced tensor map. On flat K-flat representatives this is the comparison
-of lem-weil-pbc-ringed-topoi-derived-tensor-pullback. The scalar associator sends
-(x tensor s) tensor b to x tensor image(s)b; tensor balancing proves its compatibility
-with this pullback comparison. Descend the equation by localization uniqueness.
-4. comparison is its right mate by def-weil-pbc-adjunction-mate. Hence its transpose is
-C_Z of the R-counit after balancing, and its components are S_W-linear derived arrows.
-5. Apply lem-weil-pbc-ring-sheaf-change-adjunction to restrict this actual adjunct.
-In the chosen basis its transpose is the d-fold sum of the R-counit. No equality on
-S-module derived Hom sets is deduced from scalar forgetting.
-6. Adjunction naturality identifies its columns with Rq_* of the basis inclusions.
-Right adjoints preserve finite products, which are finite sums here; the Rq_* images
-of coordinate projections give the inverse. Conservativity of exact scalar restriction
-then detects invertibility. The empty finite sum is the terminal zero object.
-7. The scalar shift is the adjoint of the exact termwise restriction shift; its universal
-counit is compatible with termwise cochain shifts. Derived pullback and pushforward
-have the canonical adjunction-compatible shifts of lem-weil-pbc-derived-adjunction-shift.
-Balancing is therefore compatible with shifts. Whisker its mate formula with the unit
-and counit to get NatTrans.CommShift in the input, using
-lem-weil-pbc-commshift-nattrans-comp-whisker. The functors preserve distinguished triangles.
-8. Multiplication makes the identity coefficient square the identity square, whose mate
-is the identity by lem-weil-pbc-mate-pasting. This is exactly the displayed unit equation.
-9. The two balanced pullback maps of a coefficient tower agree on every local tensor.
-Apply mate pasting and adjunction naturality to that equation. The inverse target-site
-associator comes first and the direct image of the source-site associator comes last.
-This proves the tower equation in D(B_W), using no faithfulness of derived restriction.
+1. Construct normalized scalar models by transporting the recorded restriction models
+through their localization factorizations. Multiplication is the counit for identity
+scalars; its universal localization gives the derived unit.
+2. The inverse mate of exact restriction's factorization is the universal scalar counit
+on flat-term K-flat complexes, hence on all complexes by resolving and naturality.
+It commutes with shifts. The left adjoint of triangulated restriction is triangulated.
+3. The finite-basis column calculation gives two biproduct coordinate isomorphisms.
+Biproduct extensionality identifies the restricted comparison with the inverse
+mapBiproduct comparison followed by the direct image of the source coordinates.
+This is invertible, including for the empty biproduct. Conservative restriction
+reflects its invertibility.
+4. The canonical derived geometric adjunctions commute with their canonical shifts.
+The restriction/direct-image comparison is the mate of the termwise restriction/
+pullback comparison. Conjugating and taking its mate therefore proves the required
+shift compatibility for the specified comparison.
+5. Whisker balancing by the multiplication units. Its coherence equation identifies
+this square with the identity square. Compatibility of mates with whiskering and
+the mate of the identity square give the displayed identity equation.
+6. Horizontally paste the two balancing squares and whisker with the two scalar
+associators. Balancing coherence identifies this with the composite coefficient
+square. Mate pasting gives the displayed tower equation in the stated factor order.
 -/
 theorem finiteFreeDirectImageCoherence {Z W : Scheme.{u}} (q : Z ⟶ W) :
     ∃ (sW : ScalarModel W) (sZ : ScalarModel Z),
@@ -287,7 +227,26 @@ theorem finiteFreeDirectImageCoherence {Z W : Scheme.{u}} (q : Z ⟶ W) :
               (sW.presentation b.target).derived.map ((comparison sW sZ a).app M) ≫
               (comparison sW sZ b).app ((sZ.presentation a.source).derived.obj M) ≫
               (proEtaleRingDerivedDirectImage q B.target B.source B.identification).map
-                ((sZ.normalization.derived a.source b.source).hom.app M)) := by
-  sorry
+                ((sZ.normalization.derived a.source b.source).hom.app M))  := by
+  obtain ⟨sW⟩ := finiteFreeDirectImageScalarModels W
+  obtain ⟨sZ⟩ := finiteFreeDirectImageScalarModels Z
+  refine ⟨sW, sZ, ?_, ?_, ?_, ?_, ?_⟩
+  · intro R S a
+    exact finiteFreeDirectImageScalarShift sW a
+  · intro R S a
+    exact finiteFreeDirectImageScalarShift sZ a
+  · intro R S a d hfree
+    have hW := (finiteFreeDirectImageScalarShift sW a.target).1
+    have hZ := (finiteFreeDirectImageScalarShift sZ a.source).1
+    let := hW
+    let := hZ
+    have hi (M : DerivedCategory (proEtaleRingModules Z R.source)) :
+        IsIso ((comparison sW sZ a).app M) :=
+      comparison_isIso_app q sW sZ R S a d hfree M
+    exact ⟨NatIso.isIso_of_isIso_app _, finiteFreeDirectImageShift sW sZ a,
+      inferInstance, inferInstance⟩
+  · exact finiteFreeDirectImageUnit q sW sZ
+  · intro R S B a b d e ha hb M
+    exact finiteFreeDirectImageTower q sW sZ R S B a b M
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
