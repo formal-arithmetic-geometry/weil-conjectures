@@ -25,92 +25,78 @@
  ],
  "proof": [
   {
-   "text": "Work on the diagram site of [lem-weil-pbc-diagram-site-realization] for the index category $J=\\mathbf N_{\\geq1}^{op}$. The tower category is abelian with exact evaluations by [lem-weil-tower-category-levelwise-abelian]. Choose a K-injective representative $M\\to J_M$ using [prop-pur-kinjective-resolutions-exist]. The functor $\\Delta$ is right adjoint to the exact evaluation $\\operatorname{ev}_1$: a map from a tower to a constant tower is uniquely determined by its component at $1$, and the other components are forced by the transition maps. Hence [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $\\Delta J_M$ K-injective. For the constant coefficient rings, [lem-pe-constant-left-module-inverse-image] identifies module pullback with exact geometric inverse image; its right adjoint is the module direct image of [def-weil-pbc-proetale-operations]. Thus [lem-weil-pbc-right-adjoint-preserves-kinjective] also makes $f_*J_M$ K-injective. On this representative the termwise direct image is literally $f_*\\Delta J_M=\\Delta(f_*J_M)$, and [lem-weil-pbc-kinjective-total-derived] identifies it with the derived termwise direct image. This gives the natural isomorphism $\\chi_{f,M}:\\Delta(Rf_*M)\\xrightarrow{\\sim}R_f^{\\mathcal T}(\\Delta M)$. Evaluating the displayed literal equality at every $n$ gives the identity of $Rf_*M$, proving clause (2).",
+   "text": "Construct quotient transitions and augmentation through scalar-extension adjunctions. The tensor-section formula for the scalar adjunction unit, linearity, and the sheafification tensor-generator extensionality prove naturality, strict transition compatibility and uniqueness. Obtain the universal reduction model from the resolving class of K-flat complexes. Its generic four-field record is specialized to the same reduction functor and K-flat predicate; this changes representation only.",
    "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-tower-category-levelwise-abelian",
-    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical right-derived composition comparisons to define the diagonal/direct-image square. Their universal-unit factorization proves its formula on K-injectives. Evaluation and the ordinary constant-square mate identify the evaluated comparison with the identity. The diagonal/limit unit is invertible by fully faithful derived diagonal. The conjugate-adjunction unit equation and the diagonal square mate prove the inverse-limit normalization.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-pe-constant-left-module-inverse-image",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070K (lemma-enough-K-injectives-implies); agent specialization to the constant-tower adjunction, using sites.tex Tag 00YV for exact constant-coefficient inverse image."
-   }
-  },
-  {
-   "text": "On the same diagonal K-injective representative, the ordinary inverse limit of the constant tower is $J_M$, so the derived inverse limit $\\mathcal L_X(\\Delta M)$ is canonically $M$, and similarly $\\mathcal L_Y(\\Delta Rf_*M)$ is $Rf_*M$, by the K-injective computation in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The comparison $a_{f,\\Delta M}$ of [lem-weil-ringed-tower-pushforward-limit-comparison] is induced by the underived equality $f_*\\lim=\\lim f_*^{\\mathcal T}$. For a constant tower this equality is the literal identity on $f_*J_M$, and the source and target identifications are the two canonical diagonal limit identifications just described. Therefore $\\mathcal L_Y(\\chi_{f,M})^{-1}\\circ a_{f,\\Delta M}$ is the identity, proving clause (3).",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-ringed-tower-pushforward-limit-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0940 (section-derived-limits), 0941 (lemma-derived-limit-is-ok), 0A07 (lemma-Rf-commutes-with-Rlim), first proof; agent specialization to constant K-injective towers."
-   }
-  },
-  {
-   "text": "Let $Q_{\\bullet}=(\\underline{P_n}_Y)_n$. Choose a flat-term K-flat representative $K_M\\to M$ by [lem-pc-kflat-resolution], independently of $J_M$ in Step 1. Under [lem-weil-pbc-diagram-site-realization], tensor products and total tensor complexes are computed componentwise: evaluate the sheaf tensor universal property at each diagram index. For any acyclic tower complex $B$, every $B_n$ is acyclic, and $(B\\otimes\\Delta K_M)_n=B_n\\otimes K_M$ is acyclic; exact evaluations detect acyclicity by [lem-weil-tower-category-levelwise-abelian]. Thus $\\Delta K_M$ is K-flat and $(K_M\\otimes_{\\underline A_X}\\underline{P_n}_X)_n$ represents $\\mathcal R_X(M)$ with its quotient augmentation. By [lem-pe-constant-left-module-inverse-image], the exact termwise pullback carries $Q_{\\bullet}$ to $(\\underline{P_n}_X)_n$, compatibly with every quotient map; exactness means that its derived pullback has this same value. Apply [lem-weil-pbc-ringed-projection-mate-exact] to the diagram ringed-topos morphism, $E=\\Delta M$, and $P=Q_{\\bullet}$. Using its canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and precomposing with $\\chi_{f,M}\\otimes1$ identifies its source with $\\mathcal R_Y(Rf_*M)$ and its target with $R_f^{\\mathcal T}\\mathcal R_X(M)$. This is the specified map $h_{f,M}$.",
-   "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-pe-constant-left-module-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 07A4 (lemma-pullback-tensor-product), 0B56 (equation-projection-formula-map); componentwise K-flat argument supplied by the reviewer, constant-coefficient pullback from sites.tex Tag 00YV."
-   }
-  },
-  {
-   "text": "Naturality in the coefficient argument and the tensor-unit normalization in [lem-weil-pbc-ringed-projection-mate-exact] applied to the strict quotient map $\\Delta\\underline A_Y\\to Q_{\\bullet}$ give, before taking any inverse limit, the equality of tower morphisms $h_{f,M}\\circ i_{Rf_*M}=R_f^{\\mathcal T}(i_M)\\circ\\chi_{f,M}$. Indeed the projection for the tensor unit is the identity on the diagonal direct image, while the two vertical arrows are exactly the quotient augmentations; the diagonal direct-image identification is the literal map used to define $\\chi_{f,M}$ in Step 1. Thus the displayed equality is the required clause (4), with all maps normalized by the same counit-tensor construction.",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map); naturality and tensor-unit specialization of the counit-tensor construction, as stated in lem-weil-pbc-ringed-projection-mate-exact."
-   }
-  },
-  {
-   "text": "Implementation of the auxiliary constructions: evaluation at op 0 is exact and left adjoint to constant towers, with unit given by transitions to zero and identity counit. The existing right-adjoint preservation theorem proves delta_preservesKInjective. Full faithfulness of its total right derived functor, transported to mapDerivedCategory, proves invertibility of the diagonal/limit unit. ReductionModule is additive by pointwise evaluation. For reduction_exists use the resolving class of images of K-flat complexes in the homotopy category. Existing K-flat resolutions give resolutions in this class; scalar extension inverts quasi-isomorphisms between K-flat complexes and exact scalar restriction preserves them, so evaluation proves the strict reduction functor inverts these quasi-isomorphisms. The left-derived-from-resolving-class theorem supplies the universal pair and its computation counit. The ordinary augmentation is the sheafification unit on 1 tensor x, followed by the fixed object transport. Its naturality follows from naturality of sheafification and the fixed scalar-extension map formula; its tower compatibility follows from the existing transition characterization and preservation of 1. Equality on all sections proves uniqueness. For the quotient transition, first work over arbitrary coefficient sheaves R to S to T with a commuting scalar triangle. Tensor adjunction constructs the presheaf map to the S-restriction of the T-extension, and the sheafification universal property extends it. Restrict scalars to R using the commuting triangle. The sheafification-unit formula sends s tensor x to q(s) tensor x. The underlying abelian sheafification adjunction and induction on tensor generators show extensionality, hence naturality and uniqueness. Specialize to consecutive quotient maps; their triangle commutes by the quotient factor map. Keeping coefficient sheaves abstract avoids unfolding the chosen constant sheafification or quotient ideals. The original ordinary pullback, derived pullback and final normalization obligations remain as stated.",
-   "uses": [
     "lem-exc-kinjective-derived-fully-faithful",
-    "lem-pur-left-derived-from-kflat-class",
+    "def-pur-completed-rlim-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each quotient level, conjugate the sectionwise identity restriction/direct-image comparison through the extension-of-scalars and inverse-image adjunctions. Compose with the canonical restriction/pullback isomorphism. The conjugate-unit identity gives the image of 1 tensor x, and scalar linearity gives the stated formula for every s tensor x. Naturality of constant coefficient maps and the characterized quotient transition give compatibility of successive levels. NatTrans.ofOpSequence assembles the strict tower map; its levelwise isomorphisms make it an isomorphism. Adjunction and tensor-generator extensionality prove uniqueness.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose flat-term K-flat resolutions whose inverse images remain K-flat. The algebraic presentation of the specified pro-etale inverse image supplies the hypotheses of ringed-topos K-flat pullback. On their homotopy images both reduction counits are invertible. The ordinary square and these counits give an invertible comparison on this full resolving class. Extend it by the right-fraction resolving-class theorem, descend through localization, and use resolutions to prove invertibility and the counit square on every homotopy object. Extensionality on the resolving class proves uniqueness from the required K-flat normalization.",
+   "uses": [
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-sp-proetale-algebraic-inverse-image",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-sc-nattrans-from-resolving-class",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary augmentation square commutes because both sides send x to the inverse image of 1 tensor x. Apply the exact-localization factorization to this square and the two universal reduction counits. At a K-flat source its counit is invertible; the normalized pullback comparison implies invertibility of the whole target factor needed for cancellation. Cancel it to obtain the derived augmentation/pullback square, then extend equality to every derived object using K-flat resolutions. Naturality of adjunction mates, together with the proved identification of chi as the mate of the diagonal pullback square, gives the required projection/augmentation equation.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-operations",
+  "def-cbc-strict-constant-tower-operations",
+  "def-pur-completed-rlim-functor",
+  "def-weil-pbc-bounded-constructible-tower",
+  "det-pe-topos-functoriality-inverse-image",
   "lem-exc-kinjective-derived-fully-faithful",
   "lem-pc-kflat-resolution",
-  "lem-pe-constant-left-module-inverse-image",
   "lem-pur-left-derived-from-kflat-class",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-kinjective-total-derived",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-tower-category-levelwise-abelian",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Agent argument using Tags 0940, 0941, 0A07, 06YS, 07A4, 0B56 and derived.tex Tags 08BJ, 070K. Supports the compactification-composition normalization needed for blueprint fix-lem-exchanges Step 5; the blueprint does not contain the claimed direct-image-generator or final-normalization paragraphs. U6 stage-3 auxiliary construction proofs use the existing fully-faithful derived functor and resolving-class interfaces; three original obligations remain unchanged; the quotient transition is proved by sectionwise tensor adjunction, sheafification, and restriction along the commuting coefficient triangle."
+  "place": "D9: complete Lean proofs using Tags 06YS, 07A4 and 0B56, derived.tex Tags 08BJ and 070K, and the universal-unit/mate formulas for constant towers and limits. The four original conclusions and the unit route are retained. The ordinary and derived comparison existence/uniqueness obligations are proved, and the final normalization follows from the augmentation square and mate naturality. Generic categorical arguments replace the planned diagram-site and abstract projection-mate detour."
  },
  "mathlib_searches": [
   {
@@ -267,16 +253,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-pc-kflat-resolution",
-  "lem-pe-constant-left-module-inverse-image"
+  "lem-pc-kflat-resolution"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -311,6 +289,7 @@
    "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionModule",
    "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionModule_additive",
    "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionHomotopy",
+   "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.DerivedReductionModelData",
    "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ReductionModel",
    "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reduction_exists",
    "AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionModel",
@@ -344,13 +323,13 @@
   "note": "Read node, all 12 stmt_deps records, the source tags (agent proof per proof_origin), the module (36 decls), report and node delta. Hypotheses: A:Type(u+1) (landed ops convention), CompleteCoefficientDatum, any f; small ProEt site, no universe equality, no finite quotients. Clause 1: chi plus K-injective identity-square predicate; clause 2: ev_n(chi) is the identity via evalR/deltaEval; clause 3: deltaLimit^-1, limitPush, L(chi^-1), deltaLimit composite is the identity; clause 4: aug_Y then projection = chi then R(aug_X), in D(towers). limitPush (conjugate of identity square, 0A07) and projection (mate of uniquely characterized reductionPull, 0B56) are canonical helpers; recorded dependency existentials unusable (equal universes / abstract corners). reduction is the universal left derived functor with its K-flat counit, not hollow. Statement verbatim, decl list exact, stmt_deps gained only a landed node. 9 sorry theorem bodies, no axioms, docstrings with source and blueprint. nt_compile clean (8.9 s / 10.1 s). Minor: thin in-thread Q16 second-reading section; stage 3 must prove the mate compatibilities."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U6",
-  "result": "pass",
-  "landing": "20261019T034314-L-419582",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-0f6dc",
+  "group": "D9",
+  "result": "fix",
+  "landing": "20261020T221128-L-4147542",
+  "kind": "interface",
+  "note": "independent cc review: delivered ConstantTowerDirectImageNormalization.lean and node lem-sf-cbc-constant-tower-direct-image-normalization against the live module/node, change record, importer VaryingRingProperOpenArrows (compiled against the delivery), per-import removal compiles and #print axioms"
  }
 }
