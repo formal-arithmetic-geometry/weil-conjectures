@@ -1,278 +1,246 @@
 module
 
-public import Sheaf.Paper.EtaleDerivedScalarTensor
-public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
-public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
-public import Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat
-public import Sheaf.SixFunctors.EtaleHomThickLocus
+public import Sheaf.SixFunctors.EtaleOpenTensorDefs
+import Sheaf.SixFunctors.EtaleOpenScalarCoherence
+import Sheaf.SixFunctors.EtaleOpenKFlat
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaAssoc
+import Sheaf.AlgebraicGeometry.EtaleConstantModuleFlat
 
-public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.OpenClosed.Complex
-/-!
-# Canonical étale open tensor and coefficient comparisons
+/-! # Canonical étale open tensor and coefficient comparisons
 
 Source: Stacks Tags 0GL1, 0E8I, 06YY, 03EL, 03DI and 0E8J
 (blueprint: lem-coef-etale-open-tensor).
-
-The ordinary comparisons are adjunction mates, not arbitrary isomorphisms. The
-coefficient comparisons descend their degreewise maps on K-flat representatives.
-All derived objects are in the ordinary unbounded constant-coefficient categories.
-
-## Main definitions
-
-* `canonicalGammaZero`, `canonicalGamma`: the ordinary and derived projection maps.
-* `openScalarExtension`, `openScalarRestriction`: the fixed natural coefficient comparisons.
-* `OpenScalarExtensionNormalization`, `OpenScalarRestrictionNormalization`: their K-flat models.
-
-## Main statements
-
-* `openScalarRestrictionMap_isIso`: invertibility of the fixed scalar/restriction mate.
-* `etaleOpenTensorComparisons`: projection, flatness, normalization and coherence laws.
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.defeqAttrib.useBackward true
 universe u v
 open CategoryTheory Limits AlgebraicGeometry MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- Exact derived restriction. Source: Stacks 03DJ, 08FJ
-(blueprint: lem-coef-etale-open-tensor). -/
-abbrev derivedRestriction {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
-    (j : U ⟶ X) [IsOpenImmersion j] :
-    DerivedCategoryModule A X ⥤ DerivedCategoryModule A U :=
-  D((j)^*[ModuleCat.{u + 1} A])
-
-/-- Exact derived extension by zero. Source: Stacks 03DJ, 08FJ
-(blueprint: lem-coef-etale-open-tensor). -/
-abbrev derivedExtension {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
-    (j : U ⟶ X) [IsOpenImmersion j] :
-    DerivedCategoryModule A U ⥤ DerivedCategoryModule A X :=
-  D((j)_!open[ModuleCat.{u + 1} A])
-
-/-- The published canonical open projection map. Source: Stacks 0GL1
-(blueprint: lem-coef-etale-open-tensor). -/
-def canonicalGamma {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
-    (j : U ⟶ X) [IsOpenImmersion j]
-    (P : DerivedCategoryModule A U) (T : DerivedCategoryModule A X) :=
-  ((derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} A) j).app P).app T
-
-/-- Site flatness in the recorded constant-ring module coordinates. The realization
-is the existing constant-module equivalence, not a newly chosen action.
-Source: Stacks 03ER (blueprint: lem-coef-etale-open-tensor). -/
-abbrev etaleFlat (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
-    (P : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) : Prop :=
-  SheafOfModules.IsFlatOnSite
-    ((Scheme.etaleSumFlatModuleRealization T A).obj P)
-
-/-- The recorded K-flat predicate after the same exact constant-module realization.
-Source: Stacks 06YN (blueprint: lem-coef-etale-open-tensor). -/
-abbrev etaleKFlat (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
-    (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) : Prop :=
-  CochainComplex.IsKFlatIndependentCoefficients
-    ((Scheme.etaleSumFlatComplexRealization T A).obj P)
-
-/-- Ordinary restriction commutes with restriction of coefficients. The middle
-identification is literally the same sectionwise functor. Source: Stacks 03EL, 03EK
-(blueprint: lem-coef-etale-open-tensor). -/
-def openRestrictScalarsIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    (j)^*[ModuleCat.{u + 1} B] ⋙ Sheaf.restrictScalars U.smallEtaleTopology φ ≅
-      Sheaf.restrictScalars X.smallEtaleTopology φ ⋙ (j)^*[ModuleCat.{u + 1} A] :=
-  Functor.isoWhiskerRight (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} B) j) _ ≪≫
-    (show openImmersionRestriction (ModuleCat.{u + 1} B) j ⋙
-        Sheaf.restrictScalars U.smallEtaleTopology φ ≅
-      Sheaf.restrictScalars X.smallEtaleTopology φ ⋙
-        openImmersionRestriction (ModuleCat.{u + 1} A) j from
-      NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)) ≪≫
-    Functor.isoWhiskerLeft _
-      (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} A) j).symm
-
-/-- Canonical ordinary scalar/restriction comparison `r⁰`, the identification of
-left adjoints to sectionwise direct image and restriction of scalars.
-Source: Stacks 03EL, 03EK (blueprint: lem-coef-etale-open-tensor). -/
-def openScalarRestrictionZero {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    (j)^*[ModuleCat.{u + 1} A] ⋙ ProEtale.etaleSheafExtendScalars φ U ≅
-      ProEtale.etaleSheafExtendScalars φ X ⋙ (j)^*[ModuleCat.{u + 1} B] :=
-  (((ProEtale.etaleSheafExtendScalarsAdjunction φ X).comp
-    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) j)).leftAdjointUniq
-    (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).comp
-      (ProEtale.etaleSheafExtendScalarsAdjunction φ U)).ofNatIsoRight (Iso.refl _))).symm
-
-/-- Canonical ordinary coefficient/open comparison `q⁰`: uniqueness of left
-adjoints to the actual restriction/scalar functors fixes the isomorphism.
-Source: Stacks 0E8I, 03DI (blueprint: lem-coef-etale-open-tensor). -/
-def openScalarExtensionZero {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    (j)_!open[ModuleCat.{u + 1} A] ⋙ ProEtale.etaleSheafExtendScalars φ X ≅
-      ProEtale.etaleSheafExtendScalars φ U ⋙ (j)_!open[ModuleCat.{u + 1} B] :=
-  ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j).comp
-    (ProEtale.etaleSheafExtendScalarsAdjunction φ X)).leftAdjointUniq
-    (((ProEtale.etaleSheafExtendScalarsAdjunction φ U).comp
-      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)).ofNatIsoRight
-      (openRestrictScalarsIso φ j))
-
-/-- Exact descent of the canonical restriction/scalar identification.
-Source: Stacks 06YY, 08FJ (blueprint: lem-coef-etale-open-tensor). -/
-def openDerivedRestrictScalarsIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    derivedRestriction (A := B) j ⋙ Sheaf.derivedRestrictScalars U.smallEtaleTopology φ ≅
-      Sheaf.derivedRestrictScalars X.smallEtaleTopology φ ⋙ derivedRestriction (A := A) j :=
-  Functor.mapDerivedCategorySquareIso (openRestrictScalarsIso φ j)
-
-/-- Canonical derived `q`, using the degreewise derived open adjunction and the
-published scalar adjunction. Source: Stacks 0E8I, 06YY, 08FJ
-(blueprint: lem-coef-etale-open-tensor). -/
-def openScalarExtension {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    derivedExtension (A := A) j ⋙ scalarExtension φ X ≅
-      scalarExtension φ U ⋙ derivedExtension (A := B) j :=
-  Adjunction.leftAdjointUniq
-    ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j).comp
-      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)))
-    (((Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)).comp
-      (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)).ofNatIsoRight
-        (openDerivedRestrictScalarsIso φ j))
-
-/-- The canonical scalar/restriction mate, prior to asserting invertibility.
-Source: Stacks 03EL, 06YY (blueprint: lem-coef-etale-open-tensor). -/
-def openScalarRestrictionMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    derivedRestriction (A := A) j ⋙ scalarExtension φ U ⟶
-      scalarExtension φ X ⋙ derivedRestriction (A := B) j :=
-  ((mateEquiv
-    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ))
-    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ))).symm
-      (TwoSquare.mk _ _ _ _ (openDerivedRestrictScalarsIso φ j).inv)).natTrans
-
-/-- The canonical mate is invertible for arbitrary coefficient maps.
-Source: Stacks 03EL, 06YY (blueprint: lem-coef-etale-open-tensor).
-Proof: choose a K-flat flat-term resolution on X. Exact restriction preserves
-K-flatness by the open total-tensor identity and the invertible open unit.
-Scalar extension is computed on this resolution by ordinary scalar extension.
-The displayed mate is then the ordinary balancing isomorphism `r⁰`, as follows
-by transposing the sectionwise scalar unit. It is invertible on each resolution,
-and hence on every unbounded derived object. -/
-@[instance] theorem openScalarRestrictionMap_isIso
-    {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    IsIso (openScalarRestrictionMap φ j) := by
-  sorry
-
-/-- The canonical natural isomorphism `r`, with its hom fixed as the specified mate.
-Source: Stacks 03EL, 06YY (blueprint: lem-coef-etale-open-tensor). -/
-def openScalarRestriction {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    derivedRestriction (A := A) j ⋙ scalarExtension φ U ≅
-      scalarExtension φ X ⋙ derivedRestriction (A := B) j :=
-  asIso (openScalarRestrictionMap φ j)
-
-/-- The ordinary projection map `γ⁰`, defined as the open-adjunction adjunct
-of the unit followed by the canonical restriction/tensor comparison.
-Source: Stacks 0E8I, 03EL (blueprint: lem-coef-etale-open-tensor). -/
-def canonicalGammaZero
+private theorem canonicalGammaZero_isIso
     (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (P : Sheaf U.smallEtaleTopology C) (T : Sheaf X.smallEtaleTopology C) :
-    (j)_!open[C].obj (P ⊗ (j)^*[C].obj T) ⟶ (j)_!open[C].obj P ⊗ T :=
-  ((openImmersionLowerShriekUpperStarAdjunction C j).homEquiv _ _).symm
-    ((tensorRightUpperStarIso C j T).hom.app P)
+    IsIso (canonicalGammaZero C j P T) := by
+  let adj := openImmersionLowerShriekUpperStarAdjunction C j
+  have : (j)_!open[C].Full := adj.fullyFaithfulLOfIsIsoUnit.full
+  have : (j)_!open[C].Faithful := adj.fullyFaithfulLOfIsIsoUnit.faithful
+  have : IsIso (adj.counit.app ((j)_!open[C].obj P ⊗ T)) :=
+    adj.isIso_counit_app_of_iso (etaleLowerShriekTensorIso C inferInstance P T).symm
+  unfold canonicalGammaZero
+  rw [Adjunction.homEquiv_counit]
+  infer_instance
 
-/-- K-flat model normalization of `q`, expressed by the published scalar derived
-counits and the exact open localization factors. The bottom chain map is the
-ordinary canonical `q⁰` applied degreewise.
-Source: Stacks 0E8I, 06YY (blueprint: lem-coef-etale-open-tensor). -/
-def OpenScalarExtensionNormalization
-    {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (q : derivedExtension (A := A) j ⋙ scalarExtension φ X ≅
-      scalarExtension φ U ⋙ derivedExtension (A := B) j) : Prop :=
-  ∀ P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ,
-    etaleKFlat U A P →
-    q.hom.app (_root_.DerivedCategory.Q.obj P) ≫
-        (derivedExtension (A := B) j).map (scalarExtensionRepresentative φ U P) ≫
-        (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategoryFactors.hom.app
-          (((ProEtale.etaleSheafExtendScalars φ U).mapHomologicalComplex (.up ℤ)).obj P) =
-      (scalarExtension φ X).map
-          ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryFactors.hom.app P) ≫
-        scalarExtensionRepresentative φ X
-          (((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapHomologicalComplex
-            (.up ℤ)).obj P) ≫
-        _root_.DerivedCategory.Q.map
-          ((Functor.mapHomologicalComplexCompIso (openScalarExtensionZero φ j) (.up ℤ)).hom.app P)
 
-/-- K-flat model normalization of `r`. The bottom map is the canonical ordinary
-restriction/balancing map `r⁰`, applied degreewise, not a free iso parameter.
-Source: Stacks 03EL, 06YY (blueprint: lem-coef-etale-open-tensor). -/
-def OpenScalarRestrictionNormalization
-    {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (r : derivedRestriction (A := A) j ⋙ scalarExtension φ U ≅
-      scalarExtension φ X ⋙ derivedRestriction (A := B) j) : Prop :=
-  ∀ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ,
-    etaleKFlat X A P →
-    r.hom.app (_root_.DerivedCategory.Q.obj P) ≫
-        (derivedRestriction (A := B) j).map (scalarExtensionRepresentative φ X P) ≫
-        (upperStar (ModuleCat.{u + 1} B) j).mapDerivedCategoryFactors.hom.app
-          (((ProEtale.etaleSheafExtendScalars φ X).mapHomologicalComplex (.up ℤ)).obj P) =
-      (scalarExtension φ U).map
-          ((upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategoryFactors.hom.app P) ≫
-        scalarExtensionRepresentative φ U
-          (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj P) ≫
-        _root_.DerivedCategory.Q.map
-          ((Functor.mapHomologicalComplexCompIso (openScalarRestrictionZero φ j) (.up ℤ)).hom.app P)
+private theorem open_flat_preserved
+    {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j]
+    (P : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (hP : etaleFlat U A P) :
+    etaleFlat X A ((j)_!open[ModuleCat.{u + 1} A].obj P) := by
+  apply (Scheme.etaleConstantModule_flat_iff X A _).mp
+  exact Functor.PreservesFlat.flat_obj
+    (F := etaleLowerShriek (ModuleCat.{u + 1} A) j inferInstance)
+    ((Scheme.etaleConstantModule_flat_iff U A P).mpr hP)
 
-section ExactTensor
+
+
+
+private theorem projection_transport_assoc
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    {F : C ⥤ D} {G S : D ⥤ C} (a : F ⊣ G) [S.Monoidal] (e : S ≅ G)
+    (δ : (((Functor.whiskeringLeft₂ C).obj G).obj S).obj (curriedTensor C) ⟶
+      (Functor.postcompose₂.obj G).obj (curriedTensor D))
+    (hδ : ∀ X Y, (δ.app X).app Y = e.inv.app X ▷ S.obj Y ≫
+      Functor.LaxMonoidal.μ S X Y ≫ e.hom.app (X ⊗ Y))
+    (P : C) (T₁ T₂ : D) :
+    let γ : ∀ (K : C) (M : D), F.obj (K ⊗ G.obj M) ⟶ F.obj K ⊗ M :=
+      fun K M ↦ F.map (K ◁ e.inv.app M) ≫
+      ((a.projectionMap S (curriedTensor C) (curriedTensor D) δ).app K).app M
+    F.map ((α_ P (G.obj T₁) (G.obj T₂)).hom ≫
+      P ◁ (G.obj T₁ ◁ e.inv.app T₂ ≫ (δ.app T₁).app T₂)) ≫ γ P (T₁ ⊗ T₂) =
+      γ (P ⊗ G.obj T₁) T₂ ≫ γ P T₁ ▷ T₂ ≫ (α_ (F.obj P) T₁ T₂).hom := by
+  let := Functor.Monoidal.transport e
+  let γ : ∀ (K : C) (M : D), F.obj (K ⊗ G.obj M) ⟶ F.obj K ⊗ M :=
+    fun K M ↦ F.map (K ◁ e.inv.app M) ≫
+    ((a.projectionMap S (curriedTensor C) (curriedTensor D) δ).app K).app M
+  have hm (X Y : D) : Functor.LaxMonoidal.μ G X Y =
+      G.obj X ◁ e.inv.app Y ≫ (δ.app X).app Y := by
+    rw [Functor.Monoidal.transport_μ, hδ, tensorHom_def']
+    simp only [Category.assoc]
+  have hg (K : C) (M : D) : γ K M =
+      ((a.projectionMap G (curriedTensor C) (curriedTensor D)
+        (Functor.LaxMonoidal.μNatTrans G)).app K).app M := by
+    dsimp only [γ]
+    rw [Adjunction.projectionMap_app_app, Adjunction.projectionMap_app_app,
+      Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
+    change F.map (K ◁ _) ≫ (F.map ((a.unit.app K ▷ _) ≫ _) ≫ a.counit.app _) =
+      F.map ((a.unit.app K ▷ _) ≫ Functor.LaxMonoidal.μ G _ M) ≫ a.counit.app _
+    rw [← Functor.map_comp_assoc, hm]
+    congr 2
+    change K ◁ e.inv.app M ≫ a.unit.app K ▷ S.obj M ≫ (δ.app (F.obj K)).app M =
+      a.unit.app K ▷ G.obj M ≫ G.obj (F.obj K) ◁ e.inv.app M ≫ _
+    rw [whisker_exchange_assoc]
+    rfl
+  have ha (X M M' : D) :
+      (α_ (G.obj X) (G.obj M) (G.obj M')).hom ≫
+        G.obj X ◁ Functor.LaxMonoidal.μ G M M' ≫
+        Functor.LaxMonoidal.μ G X (M ⊗ M') ≫ G.map (α_ X M M').inv =
+      Functor.LaxMonoidal.μ G X M ▷ G.obj M' ≫
+        Functor.LaxMonoidal.μ G (X ⊗ M) M' := by
+    rw [Functor.LaxMonoidal.associativity_inv, Iso.hom_inv_id_assoc]
+  have h := a.projectionMap_assoc G (Functor.LaxMonoidal.μNatTrans G) ha P T₁ T₂
+  simp only [← hg, hm] at h
+  change F.map _ ≫ γ P _ = γ _ _ ≫ γ _ _ ▷ _ ≫ _
+  rw [Functor.map_comp]
+  apply (cancel_mono (α_ (F.obj P) T₁ T₂).inv).mp
+  simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id,
+    curriedTensor_obj_obj] using h
+
+section ExactTensorCoherence
 
 variable (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
   [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
   [Abelian.HasFunctorialFlatResolution C] [UpperStarPreservesFlat C]
-  {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+  {U X : AlgebraicGeometry.Scheme.{u}} (j : U ⟶ X) [AlgebraicGeometry.IsOpenImmersion j]
 
-/-- Restriction/tensor comparison with exact restriction in both arguments.
-Its tensorator is the published K-flat pullback tensor comparison, transported
-by the published exact/left-derived restriction identification.
-Source: Stacks 03EL, 0GL1 (blueprint: lem-coef-etale-open-tensor). -/
-def openExactRestrictionTensor
-    (T₁ T₂ : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) :
-    ((derivedTensor C U).obj (D((j)^*[C]).obj T₁)).obj (D((j)^*[C]).obj T₂) ≅
-      D((j)^*[C]).obj (((derivedTensor C X).obj T₁).obj T₂) :=
-  ((derivedTensor C U).obj (D((j)^*[C]).obj T₁)).mapIso
-      ((leftDerivedUpperStarIsoMapDerivedCategory C j).app T₂).symm ≪≫
-    ((mapDerivedCategoryUpperStarDerivedTensorIso C j).app T₁).app T₂
+private theorem canonicalGammaExact_assoc
+    (P : DerivedCategory (Sheaf U.smallEtaleTopology C))
+    (T₁ T₂ : DerivedCategory (Sheaf X.smallEtaleTopology C)) :
+    (D((j)_!open[C])).map
+        ((derivedTensorAssociator (C) U P
+            ((D((j)^*[C])).obj T₁) ((D((j)^*[C])).obj T₂)).hom ≫
+          ((derivedTensor (C) U).obj P).map
+            (openExactRestrictionTensor (C) j T₁ T₂).hom) ≫
+        canonicalGammaExact (C) j P
+          (((derivedTensor (C) X).obj T₁).obj T₂) =
+      canonicalGammaExact (C) j
+          (((derivedTensor (C) U).obj P).obj
+            ((D((j)^*[C])).obj T₁)) T₂ ≫
+        ((derivedTensor (C) X).map
+          (canonicalGammaExact (C) j P T₁)).app T₂ ≫
+        (derivedTensorAssociator (C) X
+          ((D((j)_!open[C])).obj P) T₁ T₂).hom := by
+  let := leftDerivedUpperStarMonoidal C j
+  have hμ (K M : DerivedCategory (Sheaf X.smallEtaleTopology C)) :
+      ((leftDerivedUpperStarTensorNatIso C j).inv.app K).app M =
+        Functor.LaxMonoidal.μ L((j)^*[C]) K M := by
+    rw [← cancel_mono (Functor.OplaxMonoidal.δ L((j)^*[C]) K M),
+      Functor.Monoidal.μ_δ]
+    exact congr_app (congr_app (leftDerivedUpperStarTensorNatIso C j).inv_hom_id K) M
+  have hδ (K M : DerivedCategory (Sheaf X.smallEtaleTopology C)) :
+      ((mapDerivedCategoryUpperStarDerivedTensorIso C j).hom.app K).app M =
+        (leftDerivedUpperStarIsoMapDerivedCategory C j).inv.app K ▷ L((j)^*[C]).obj M ≫
+          Functor.LaxMonoidal.μ L((j)^*[C]) K M ≫
+            (leftDerivedUpperStarIsoMapDerivedCategory C j).hom.app (K ⊗ M) := by
+    rw [← hμ]
+    rfl
+  have h := projection_transport_assoc
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction C j)
+    (leftDerivedUpperStarIsoMapDerivedCategory C j)
+    (mapDerivedCategoryUpperStarDerivedTensorIso C j).hom hδ P T₁ T₂
+  simpa only [canonicalGammaExact, derivedOpenImmersionLowerShriekProjectionMap,
+    openExactRestrictionTensor, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
+    Iso.symm_hom, Iso.app_inv, derivedTensor, derivedTensorAssociator_eq, derivedTensor_obj_map,
+    derivedTensor_map_app, curriedTensor_obj_obj, curriedTensor_obj_map,
+    curriedTensor_map_app] using h
 
-/-- The canonical projection map written with exact `j^*`. The change from
-`Lj^*` is the existing exact/left-derived comparison, not a new derived functor.
-Source: Stacks 0GL1 (blueprint: lem-coef-etale-open-tensor). -/
-def canonicalGammaExact
-    (P : _root_.DerivedCategory (Sheaf U.smallEtaleTopology C))
-    (T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) :
-    D((j)_!open[C]).obj (((derivedTensor C U).obj P).obj (D((j)^*[C]).obj T)) ⟶
-      ((derivedTensor C X).obj (D((j)_!open[C]).obj P)).obj T :=
-  D((j)_!open[C]).map
-      (((derivedTensor C U).obj P).map
-        ((leftDerivedUpperStarIsoMapDerivedCategory C j).inv.app T)) ≫
-    ((derivedOpenImmersionLowerShriekProjectionMap C j).app P).app T
+end ExactTensorCoherence
 
-end ExactTensor
+private theorem uniq_eq_conjugate
+    {C D : Type*} [Category C] [Category D]
+    {F F' : C ⥤ D} {G G' : D ⥤ C}
+    (a : F ⊣ G) (b : F' ⊣ G') (e : G' ≅ G) :
+    a.leftAdjointUniq (b.ofNatIsoRight e) = (conjugateIsoEquiv b a).symm e := by
+  ext X
+  simp [Adjunction.leftAdjointUniq, conjugateEquiv_symm_apply_app]
+
+private theorem scalarOpenInverseMate
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {LA : C ⥤ D} {JA : D ⥤ C} {LB : E ⥤ F} {JB : F ⥤ E}
+    {SX : D ⥤ F} {RX : F ⥤ D} {SU : C ⥤ E} {RU : E ⥤ C}
+    (a : LA ⊣ JA) (b : LB ⊣ JB) (x : SX ⊣ RX) (u : SU ⊣ RU)
+    (q : JB ⋙ RU ≅ RX ⋙ JA) :
+    ((mateEquiv a b).symm
+      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))).natTrans =
+      ((a.comp x).leftAdjointUniq ((u.comp b).ofNatIsoRight q)).inv := by
+  rw [uniq_eq_conjugate]
+  exact congrArg TwoSquare.natTrans
+    (iterated_mateEquiv_conjugateEquiv_symm a b u x (TwoSquare.mk _ _ _ _ q.inv))
+
+private theorem scalar_counit
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    (T : DerivedCategoryModule A X) :
+    (openScalarExtension φ j).hom.app ((derivedRestriction (A := A) j).obj T) ≫
+        (derivedExtension (A := B) j).map ((openScalarRestriction φ j).hom.app T) ≫
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction
+          (ModuleCat.{u + 1} B) j).counit.app ((scalarExtension φ X).obj T) =
+      (scalarExtension φ X).map
+        ((derivedOpenImmersionLowerShriekUpperStarAdjunction
+          (ModuleCat.{u + 1} A) j).counit.app T) := by
+  let a := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j
+  let b := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j
+  let x := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)
+  let u := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)
+  let α := (mateEquiv x u).symm
+    (TwoSquare.mk _ _ _ _ (openDerivedRestrictScalarsIso φ j).inv)
+  have h := mateEquiv_counit_symm a b α T
+  have hm : ((mateEquiv a b).symm α).natTrans = (openScalarExtension φ j).inv :=
+    scalarOpenInverseMate a b x u (openDerivedRestrictScalarsIso φ j)
+  change _ = ((mateEquiv a b).symm α).natTrans.app _ ≫ _ at h
+  rw [hm] at h
+  change (derivedExtension (A := B) j).map ((openScalarRestriction φ j).hom.app T) ≫
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j).counit.app
+        ((scalarExtension φ X).obj T) =
+    (openScalarExtension φ j).inv.app ((derivedRestriction (A := A) j).obj T) ≫
+      (scalarExtension φ X).map
+        ((derivedOpenImmersionLowerShriekUpperStarAdjunction
+          (ModuleCat.{u + 1} A) j).counit.app T) at h
+  simpa only [Category.assoc, Iso.hom_inv_id_app_assoc] using
+    congrArg (fun t ↦ (openScalarExtension φ j).hom.app
+      ((derivedRestriction (A := A) j).obj T) ≫ t) h
+
+
+private theorem scalar_restricts
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    (P : DerivedCategoryModule A U) :
+    (derivedRestriction (A := B) j).map ((openScalarExtension φ j).hom.app P) ≫
+        (asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction
+          (ModuleCat.{u + 1} B) j).unit.app _)).inv =
+      (openScalarRestriction φ j).inv.app ((derivedExtension (A := A) j).obj P) ≫
+        (scalarExtension φ U).map
+          (asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction
+            (ModuleCat.{u + 1} A) j).unit.app P)).inv := by
+  let a := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j
+  let b := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j
+  let x := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)
+  let u := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)
+  let α := (mateEquiv x u).symm
+    (TwoSquare.mk _ _ _ _ (openDerivedRestrictScalarsIso φ j).inv)
+  have h := unit_mateEquiv_symm a b α P
+  have hm : ((mateEquiv a b).symm α).natTrans = (openScalarExtension φ j).inv :=
+    scalarOpenInverseMate a b x u (openDerivedRestrictScalarsIso φ j)
+  change _ = b.unit.app _ ≫ (derivedRestriction (A := B) j).map
+    (((mateEquiv a b).symm α).natTrans.app P) at h
+  rw [hm] at h
+  let l := asIso (b.unit.app ((scalarExtension φ U).obj P)) ≪≫
+    (derivedRestriction (A := B) j).mapIso ((openScalarExtension φ j).symm.app P)
+  let r := (scalarExtension φ U).mapIso (asIso (a.unit.app P)) ≪≫
+    (openScalarRestriction φ j).app ((derivedExtension (A := A) j).obj P)
+  have hh : l.hom = r.hom := by
+    change r.hom = l.hom at h
+    exact h.symm
+  have hi := congrArg Iso.inv (Iso.ext hh)
+  simpa only [l, r, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv,
+    Iso.symm_inv, a, b] using hi
+
 
 /-- The full open tensor/coefficient assertion. Every comparison in these laws is
 fixed above, or is a published canonical scalar tensor/composition comparison.
@@ -397,6 +365,23 @@ theorem etaleOpenTensorComparisons
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     EtaleOpenTensorComparisons φ j := by
-  sorry
+  have hscalar := etaleOpenScalarComparisons φ j
+  refine
+    { gamma_isIso := ?_
+      ordinary_tensor := canonicalGammaZero_isIso _ j
+      flat_preserved := open_flat_preserved j
+      kflat_preserved := etaleOpenKFlat j
+      q_normalized := hscalar.q_normalized
+      q_unique := hscalar.q_unique
+      r_normalized := hscalar.r_normalized
+      r_unique := hscalar.r_unique
+      q_restricts := scalar_restricts φ j
+      counit := scalar_counit φ j
+      tensor_associative := canonicalGammaExact_assoc _ j
+      successive_scalar := hscalar.successive_scalar
+      mixed_tensor_scalar := hscalar.mixed_tensor_scalar }
+  intro P T
+  dsimp only [canonicalGamma]
+  infer_instance
 
 end AlgebraicGeometry.Etale

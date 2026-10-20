@@ -1,0 +1,122 @@
+{
+ "id": "lem-coef-etale-open-total-tensor",
+ "kind": "statement",
+ "title": "Unbounded total tensor projection for etale extension without quasi-compactness",
+ "statement": "Let A be a commutative ring and u:U→X a separated etale morphism locally of finite type, as in [def-weil-etale-morphism] and [def-weil-finite-type-morphism]. Let L be the actual sheafified etale sum extension of [def-weil-pbc-etale-sum-extension] and R the exact inverse image of [prop-weil-pbc-inverse-image-modules-exact] on A-module sheaves. For arbitrary unbounded cochain complexes P on U and H on X, there is a family of isomorphisms Tot(LP tensor H) ≅ L Tot(P tensor RH), where total tensor uses direct sums and the differential d_P tensor 1 + (-1)^p 1 tensor d_H from [def-pc-tensor-complex-sheaves]. The degreewise functors are the published L and R. No quasi-compactness, boundedness or flatness hypothesis is imposed. This statement asks only for the comparison family needed for acyclic tests; the separate finite-type totalization theorem retains all of its summand, naturality and homotopy clauses.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKF, canonical sheaf projection isomorphism, and its direct-sum total-complex construction; parent open K-flat proof step 5"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-etale-sum-extension",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Put L=u-sum-shriek and R=u-star. Their published adjunction makes L preserve all coproducts. For each pair of degrees use the inverse of the canonical etaleLowerShriekTensorIso from [lem-pur-etale-projection-kan-comparison]. It is natural in both module sheaves.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-pur-etale-projection-kan-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree n, take the coproduct of these sheaf isomorphisms over p+q=n and follow by the coproduct-preservation comparison for L. Naturality for d_P and d_H intertwines both differential summands; additivity preserves the coefficient (-1)^p. The inverse in each degree intertwines differentials as well, yielding a complex isomorphism. The generic totalTensorIso implements this same construction for additive bifunctors and a coproduct-preserving L. The argument uses arbitrary direct sums and never quasi-compactness.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-pur-etale-projection-kan-comparison",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKF, canonical sheaf projection isomorphism, and its direct-sum total-complex construction; parent open K-flat proof step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves K-flat complexes and commutes with derived scalar extension with tensor coherence",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.rTensor_exact; CategoryTheory.lan_flat_of_flat",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointCompIso",
+   "results": "loogle: unknown identifier 'Adjunction.leftAdjointCompIso'",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersion.*(KFlat|Scalar)|scalar.*(normaliz|coher)",
+   "results": "Mathlib/RingTheory/Localization/Integral.lean; Mathlib/Tactic/Module.lean; Mathlib/Tactic/Module.lean",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive coproduct-preserving functor with a projection formula commutes with direct-sum total tensor of unbounded cochain complexes",
+   "results": "CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, preservesFiniteBiproductsOfAdditive, map_sum, preservesFiniteProductsOfAdditive, CategoryTheory.additiveFunctor_iff, additiveFunctor (Mathlib.CategoryTheory.Preadditive.AdditiveFunctor); CategoryTheory.Limits.preservesCoproduct_of_preservesBiproduct (Mathlib.CategoryTheory.Preadditive.Biproducts); CategoryTheory.Functor.IsTriangulated.instAdditive (Mathlib.CategoryTheory.Triangulated.Functor)",
+   "date": "2026-10-21",
+   "verdict": "no exact match: additive finite-sum preservation is not the signed unbounded total-tensor projection isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleOpenTensor",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-open-tensor",
+   "place": "Parent open K-flat argument: canonical total-tensor projection comparison, without the unnecessary quasi-compactness hypothesis of the stronger finite-type interface",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleSumTensorTotalization",
+  "file": "lean/Sheaf/Paper/EtaleSumTensorTotalization.lean",
+  "declaration": "AlgebraicGeometry.etale_sum_tensor_comparison",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21",
+  "statement": "theorem etale_sum_tensor_comparison\n    (A : Type (u + 1)) [CommRing A]\n    {U X : Scheme.{u}} (u : U ⟶ X) (hu : Etale u)\n    [IsSeparated u] [LocallyOfFiniteType u] :\n    Nonempty (TotalTensorComparison\n      (curriedTensor (EtaleModuleSheaf U A)) (curriedTensor (EtaleModuleSheaf X A))\n      (Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u hu)\n      (Etale.upperStar (ModuleCat.{u + 1} A) u))"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5c5b0",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T233153-L-902140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5c5b0",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T233153-L-902140",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules compiled with lcompile (no error or warning; totalization 50.8 s vs published 51.8 s back to back), the 3 direct importers compiled against the delivery's build, moved declarations diffed against the published item module (identical), #print axioms run on the proved theorems, node records checked against their Lean signatures"
+ }
+}

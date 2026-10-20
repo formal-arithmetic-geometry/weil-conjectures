@@ -20,187 +20,58 @@
  ],
  "proof": [
   {
-   "text": "Regard $U$ as an object of $X_{\\mathrm{et}}$: an open immersion is etale by [lem-weil-pbc-open-immersion-etale]. The equivalence $X_{\\mathrm{et}}/U\\simeq U_{\\mathrm{et}}$ of [lem-weil-pbc-etale-site-localization-open] keeps the underlying test schemes, their section rings and coverings. It therefore also identifies constant-ring module sheaves, their restriction, and the direct-sum extension presheaves in [def-weil-pbc-extension-by-zero]. Thus [lem-pur-site-restriction-module-adjunction-exact] applies with $\\mathcal O=A_X$, and also with $B_X$: $j_!,j^*$ are exact and $j_!\\dashv j^*$. We use the specific Hom bijection and the counit formula of [lem-weil-pbc-extension-by-zero-adjunction], not an unspecified adjunction.",
+   "text": "Use the canonical interface of [lem-coef-etale-open-comparison-data], including invertibility of the fixed inverse scalar/restriction mate. All ordinary and derived functors and all public statements retain their original definitions.",
    "uses": [
-    "lem-weil-pbc-open-immersion-etale",
-    "lem-weil-pbc-etale-site-localization-open",
-    "def-weil-pbc-extension-by-zero",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-extension-by-zero-adjunction"
+    "lem-coef-etale-open-comparison-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DH (localized ringed site), 03DJ (exactness); etale-cohomology.tex Tag 0F70 (open case)"
-   }
+   "elementary": true
   },
   {
-   "text": "The open unit $P\\to j^*j_!P$ is an isomorphism on abelian sheaves by [lem-weil-pbc-extension-by-zero-unit-iso]. The module constructions have the same underlying abelian sheaves: module sheafification is the abelian sheafification with its unique extending action [def-weil-presheaf-modules-sheafification]. The unit is linear, and the inverse of an invertible linear map is linear, so the unit is also an isomorphism for $A$- and $B$-module sheaves. Its normalization is the identity on a section over a test scheme factoring through $U$, by the Hom formula in [lem-weil-pbc-extension-by-zero-adjunction]. In particular, for maps with source $j_!P$, restriction followed by the open unit is precisely the adjunction bijection; it detects equality of maps. Between objects in the image of $j_!$, restriction also detects isomorphisms: use this bijection to lift the inverse of a restricted map, and its injectivity to check the inverse laws.",
+   "text": "For the ordinary projection map, its adjunction-transpose description is left-adjoint image followed by the counit. Open extension is fully faithful, and the étale projection isomorphism puts the target in its essential image. The counit and hence the canonical projection map are invertible.",
    "uses": [
     "lem-weil-pbc-extension-by-zero-unit-iso",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-extension-by-zero-adjunction"
+    "lem-pur-etale-projection-kan-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0F6Z (lemma-restrict-back); etale-cohomology.tex Tag 0F70, first assertion"
-   }
+   "elementary": true
   },
   {
-   "text": "For module sheaves $P,T$, [lem-weil-pbc-ringed-slice-extension-tensor] gives a natural isomorphism between $j_!(P\\otimes_A j^*T)$ and $j_!P\\otimes_A T$. Define $\\gamma^0$ to be the adjunct of the unit at $P$ tensored with $j^*T$, followed by the inverse of the restriction/tensor isomorphism. That restriction/tensor isomorphism, including its pure-tensor normalization, is [lem-sfb-localized-site-tensor-restriction]. Under the unit identifications, $j^*\\gamma^0$ is the identity. Both endpoints are in the essential image of $j_!$ by the cited slice tensor identity. Step 2 therefore proves that this particular $\\gamma^0$ is invertible, rather than merely that its endpoints are isomorphic. The construction is natural. On a test scheme factoring through $U$ its local pure-tensor formula is $j_!(p\\otimes t)\\mapsto j_!(p)\\otimes t$; this follows directly from its adjunct and the specified restriction comparison.",
+   "text": "The published derived open projection map is already an isomorphism. Preserve flatness using the published ordinary étale lower-shriek PreservesFlat instance, transported by etaleConstantModule_flat_iff. Apply [lem-coef-etale-open-kflat] to unbounded K-flat complexes.",
    "uses": [
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-sfb-localized-site-tensor-restriction"
+    "lem-pur-etale-constant-module-flat",
+    "lem-coef-etale-open-kflat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), with Tag 03EL (restriction/tensor comparison)"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $P$ be a flat $A_U$-module sheaf, and tensor a short exact sequence of $A_X$-modules with $j_!P$. Step 3 identifies the resulting sequence with $j_!$ of its restriction tensored with $P$. Restriction and extension by zero are exact by [lem-pur-site-restriction-module-adjunction-exact], and the middle tensor functor is exact by flatness [def-pc-flat-sheaf-modules]. The result is exact. This is exactly flatness of $j_!P$; no stalk or finite-ring criterion is being used.",
+   "text": "Take the four scalar normalization and uniqueness fields, the scalar tower field and the mixed tensor/scalar field from [lem-coef-etale-open-scalar-coherence]. This is strictly the coefficient part; it asserts none of projection invertibility, ordinary projection, flatness, K-flat preservation, the open unit/counit identities or tensor associativity.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-pc-flat-sheaf-modules"
+    "lem-coef-etale-open-scalar-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03ER (definition-flat), 03DJ (exactness), 0E8I (tensor identity)"
-   }
+   "elementary": true
   },
   {
-   "text": "An exact additive functor commutes with cohomology, since it preserves the kernels, images and cokernels defining it; thus both open functors preserve acyclic complexes and quasi-isomorphisms. As a left adjoint, $j_!$ preserves direct sums. Applying step 3 to every bidegree therefore gives an isomorphism of direct-sum total complexes\n$$j_!K\\otimes_A C\\cong j_!(K\\otimes_A j^*C).$$\nIt commutes with the two differential terms $d_K\\otimes1$ and $(-1)^p1\\otimes d_C$ by naturality [def-pc-tensor-complex-sheaves]. If $K$ is K-flat and $C$ is acyclic, the right side is acyclic, proving that $j_!K$ is K-flat [def-pc-kflat-complex]. We will also need restriction of K-flat complexes: for K-flat $R$ on $X$ and acyclic $C$ on $U$, the same identity makes $j_!(C\\otimes_A j^*R)\\cong j_!C\\otimes_A R$ acyclic. Applying exact $j^*$ and $j^*j_!\\cong1$ proves that $C\\otimes_A j^*R$ is acyclic. Hence $j^*R$ is K-flat too.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), total-complex argument; sites-modules.tex Tags 03DJ and 0E8I"
-   }
+   "text": "The inverse open/scalar comparison is the iterated mate of the inverse restriction/scalar square. The iterated-mates/conjugation identity and the unit and counit mate equations give q_restricts and counit. For q_restricts invert the equality of the two composites of unit isomorphisms.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The sheaf adjunction induces the termwise adjunction on complexes and homotopy categories with termwise unit and counit by [lem-weil-pbc-termwise-adjunction-homotopy]. By step 5 both functors preserve quasi-isomorphisms. Consequently these functors and natural transformations descend along the derived-category localization [def-weil-abstract-derived-category]; the triangle identities descend as equalities, giving the unbounded adjunction with the required degreewise normalization. The open unit is still invertible, so the equality and isomorphism tests of step 2 apply in the derived categories as well.",
-   "uses": [
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FJ (lemma-adjoint-lower-shriek-restrict), exact termwise adjunction localized at quasi-isomorphisms"
-   }
-  },
-  {
-   "text": "For arbitrary derived $P,T$, choose a K-flat resolution $R\\to P$ with flat terms [lem-pc-kflat-resolution], and any complex $C$ representing $T$. By step 5, $j_!R$ is K-flat and $j_!$ preserves the resolution quasi-isomorphism. The definition [def-kun-derived-tensor] thus computes the two sides as $j_!(R\\otimes_A j^*C)$ and $j_!R\\otimes_A C$. The total-complex isomorphism of step 5 gives $\\gamma$. It is the adjunct of the identity because degreewise it is the step-3 adjunct, and step 6 descends that same unit and counit. The K-flat model comparisons and their uniqueness in [lem-weil-pbc-site-derived-tensor-descent] make the construction natural and independent of resolutions. This proves the claimed derived projection formula on all unbounded objects.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-kun-derived-tensor",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), expanding its total-complex proof"
-   }
-  },
-  {
-   "text": "For a module $P$ on $U$ specialize $(\\gamma^0)^{-1}$ to $T=B_X$. It is $B_X$-linear: its formula on local tensor generators is $j_!(p)\\otimes b\\mapsto j_!(p\\otimes b)$, which commutes with multiplication by every locally constant section of $B_X$. The same formula and uniqueness of the sheafified action [def-weil-presheaf-modules-sheafification] identify the output with the $B$-module extension $j_{!,B}(P\\otimes_A B_U)$. Apply this degreewise to a K-flat flat-term resolution $R\\to P$. Both $R$ and $j_!R$ are K-flat, so [lem-pur-derived-change-of-rings] computes $F_UP$ and $F_Xj_!P$ by $R\\otimes_A B_U$ and $j_!R\\otimes_A B_X$. The resulting isomorphism is $q_{j,P}$ in $D(X_{\\mathrm{et}},B)$. It is natural and independent of the resolution by the canonical comparisons in that node. Its restriction is the identity, by the explicit generator formula and the open units.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I (tensor identity), specialized to the ring map A_X to B_X; sites-cohomology.tex Tag 06YY (derived change of rings)"
-   }
-  },
-  {
-   "text": "To specify $r_T:F_Uj^*T\\cong j^*F_XT$, choose a K-flat flat-term resolution $R\\to T$ on $X$. Step 5 makes $j^*R$ K-flat. The restriction/tensor comparison [lem-sfb-localized-site-tensor-restriction] identifies $(R\\otimes_A B_X)|_U$ with $(R|_U)\\otimes_A B_U$, with identity pure-tensor formula. Together with [lem-pur-derived-change-of-rings] this defines $r_T$ canonically; it also shows that restriction of $q$ is the identity for the same identifications, without assuming that $B$ is flat over $A$.",
-   "uses": [
-    "lem-sfb-localized-site-tensor-restriction",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY (derived change of rings), with sites-modules.tex Tag 03EL (restriction/tensor)"
-   }
-  },
-  {
-   "text": "Check the counit equation on the K-flat flat-term model $R\\to T$ of step 9. The counit $\\epsilon_{j,A,R}:j_!j^*R\\to R$ is termwise the section map of [lem-weil-pbc-extension-by-zero-adjunction]. By steps 4--5 its source is also K-flat, so [lem-pur-derived-change-of-rings] computes $F_X(\\epsilon_{j,A,T})$ by this actual chain map tensored with $B$. On an extension-presheaf summand over a test scheme factoring through $U$, the left-hand composite sends $s\\otimes b$, successively, to $s\\otimes b$ through $q$, to $s\\otimes b$ through $r$, and then to the same section $s\\otimes b$ by the $B$-counit. The right-hand map does the same. A test scheme not factoring through $U$ has zero extension-presheaf value. Tensor maps are determined locally by these generators, and the sheafification universal property makes the two chain maps equal [def-weil-presheaf-modules-sheafification]. Localization gives exactly the displayed counit equation, with the normalized counits of step 6.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-pur-derived-change-of-rings",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (extension adjunction, summand formula), Tag 03CY (module sheafification), Tag 0E8I; derived on K-flat models"
-   }
-  },
-  {
-   "text": "For the tensor associativity square, choose K-flat flat-term models $R,S,V$ for $P,T_1,T_2$. Restriction keeps K-flatness by step 5 and keeps flat terms by [lem-weil-pbc-slice-restriction-flat]. Rebracketing total tensors sends $((r\\otimes s)\\otimes v)$ to $r\\otimes(s\\otimes v)$ and is a chain isomorphism: the three differential terms have signs $1,(-1)^p,(-1)^{p+q}$ in both bracketings [def-pc-tensor-complex-sheaves]. A tensor of two K-flat complexes is K-flat, since tensoring an acyclic complex with the first and then the second stays acyclic; the displayed rebracketing identifies this with the test for the product. Thus these are valid models for every vertex. Either path in the open tensor square sends the local generator $j_!((r\\otimes s)\\otimes v)$ to $(j_!r\\otimes s)\\otimes v$ under rebracketing. The sheafification universal property gives equality, and the canonical model comparisons of [lem-weil-pbc-site-derived-tensor-descent] descend it. This proves tensor associativity compatibility, including the square obtained by specializing a factor to a coefficient ring.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-slice-restriction-flat",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, with sites-modules.tex Tags 0E8I and 0E8J; explicit triple-total-tensor calculation"
-   }
-  },
-  {
-   "text": "For successive scalar extension $A\\to B\\to C$, take one K-flat flat-term resolution $R$ of $P$ on $U$. The general ringed-topos pullback theorem [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the identity geometric morphism and the ring maps $A_U\\to B_U$ and $A_X\\to B_X$, says that $R\\otimes_A B$ and $j_!R\\otimes_A B$ remain K-flat with flat terms over $B$. Hence the canonical successive-extension identification is represented by $((r\\otimes b)\\otimes c)\\mapsto r\\otimes bc$, with inverse $r\\otimes c\\mapsto(r\\otimes1)\\otimes c$. Both the direct $q^{A,C}$ and the composite $q^{B,C}\\circ F^{B,C}(q^{A,B})$ send $j_!r\\otimes c$ to $j_!(r\\otimes c)$ under these identifications. The mixed tensor/scalar square is the same explicit calculation: the strong scalar tensor comparison sends $(j_!r\\otimes b_1)\\otimes_B(s\\otimes b_2)$ to $(j_!r\\otimes s)\\otimes b_1b_2$. Applying the open comparison before or after it gives $j_!((r\\otimes j^*s)\\otimes b_1b_2)$ in either case, using the same reassociation and no permutation of the graded factors. Equality follows by sheafification, then by the K-flat comparisons [lem-pur-derived-change-of-rings]. This proves the successive-scalar and mixed associativity clauses. Every argument above uses arbitrary complexes and exact open functors, so no boundedness or constructibility hypothesis has entered.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-derived-change-of-rings",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7E (pullback K-flat), 06YY (derived change of rings); sites-modules.tex Tag 0E8I, ring-tower specialization"
-   }
+   "text": "Transport the existing strong monoidal pullback along L(j-star) ≅ D(j-star). Its tensorator is the defined exact restriction tensorator, and its projection map is canonicalGammaExact. Apply the generic adjunction projectionMap_assoc theorem, using lax-monoidal associativity; postcompose with the associator to obtain exactly tensor_associative. This categorical argument is proved over a general coefficient category before specializing to ModuleCat A.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-etale-site-localization-open",
-  "def-weil-pbc-extension-by-zero",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-coef-etale-open-comparison-data",
   "lem-weil-pbc-extension-by-zero-unit-iso",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-sfb-localized-site-tensor-restriction",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "def-weil-abstract-derived-category",
-  "lem-pc-kflat-resolution",
-  "def-kun-derived-tensor",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-slice-restriction-flat",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-pur-etale-projection-kan-comparison",
+  "lem-pur-etale-constant-module-flat",
+  "lem-coef-etale-open-kflat",
+  "lem-coef-etale-open-scalar-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Stacks Tags 0GL1 and 08FJ, with sites-modules.tex Tags 0E8I, 03DJ, 03EL, 0F6Z; explicit open-unit, coefficient/counit and coherence normalization."
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "K3 stage-3 proof: canonical inverse-mate transport; published projection and flatness results; generic unit/counit and monoidal projection coherence; separate scalar model and K-flat assertions"
  },
  "mathlib_searches": [
   {
@@ -364,16 +235,12 @@
  "tool_uses": [
   "lem-weil-pbc-open-immersion-etale",
   "lem-weil-pbc-etale-site-localization-open",
-  "lem-pur-site-restriction-module-adjunction-exact",
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-extension-by-zero-unit-iso",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-sfb-localized-site-tensor-restriction",
   "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-slice-restriction-flat",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "reviewed": {
@@ -396,24 +263,6 @@
   "module": "Sheaf.SixFunctors.EtaleOpenTensor",
   "declaration": "AlgebraicGeometry.Etale.etaleOpenTensorComparisons",
   "declarations": [
-   "AlgebraicGeometry.Etale.derivedRestriction",
-   "AlgebraicGeometry.Etale.derivedExtension",
-   "AlgebraicGeometry.Etale.canonicalGamma",
-   "AlgebraicGeometry.Etale.etaleFlat",
-   "AlgebraicGeometry.Etale.etaleKFlat",
-   "AlgebraicGeometry.Etale.openRestrictScalarsIso",
-   "AlgebraicGeometry.Etale.openScalarRestrictionZero",
-   "AlgebraicGeometry.Etale.openScalarExtensionZero",
-   "AlgebraicGeometry.Etale.openDerivedRestrictScalarsIso",
-   "AlgebraicGeometry.Etale.openScalarExtension",
-   "AlgebraicGeometry.Etale.openScalarRestrictionMap",
-   "AlgebraicGeometry.Etale.openScalarRestrictionMap_isIso",
-   "AlgebraicGeometry.Etale.openScalarRestriction",
-   "AlgebraicGeometry.Etale.canonicalGammaZero",
-   "AlgebraicGeometry.Etale.OpenScalarExtensionNormalization",
-   "AlgebraicGeometry.Etale.OpenScalarRestrictionNormalization",
-   "AlgebraicGeometry.Etale.openExactRestrictionTensor",
-   "AlgebraicGeometry.Etale.canonicalGammaExact",
    "AlgebraicGeometry.Etale.EtaleOpenTensorComparisons",
    "AlgebraicGeometry.Etale.etaleOpenTensorComparisons"
   ],
@@ -424,5 +273,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Repair of returned head 114da1ab2089: canonical natural q is constructed by uniqueness of the fixed scalar/open adjunctions; r is the mate of actual restriction/scalar commutation; their explicit K-flat representative equations uniquely characterize them. Ordinary gamma is the adjunction transpose, and coherence fields are the full projection associativity, three-ring scalar-tower and mixed tensor/scalar squares. The recorded flat/K-flat predicates are used through the published constant-module realization. The two added landed dependencies own the realization and normalized strong scalar tensor comparison."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5c5b0",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T233153-L-902140",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules compiled with lcompile (no error or warning; totalization 50.8 s vs published 51.8 s back to back), the 3 direct importers compiled against the delivery's build, moved declarations diffed against the published item module (identical), #print axioms run on the proved theorems, node records checked against their Lean signatures"
  }
 }

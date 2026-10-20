@@ -1,0 +1,137 @@
+{
+ "id": "lem-coef-etale-open-kflat",
+ "kind": "statement",
+ "title": "Unbounded K-flat preservation under arbitrary open extension",
+ "statement": "Let j:U→X be any open immersion and A any commutative coefficient ring. For a cochain complex P of A-module sheaves on U-small-étale, if its canonical constant-module realization is K-flat in the independent-coefficient sense of [def-pc-kflat-complex], then the realization of the degreewise exact extension by zero j-shriek P is K-flat on X-small-étale. Use exactly etaleKFlat and the degreewise extension of [lem-coef-etale-open-comparison-data]. No quasi-compactness or boundedness assumption is made.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Parent proof step 5: extension by zero preserves K-flat complexes by the unbounded total-tensor projection formula"
+ },
+ "stmt_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "An open immersion is étale by [lem-weil-pbc-open-immersion-etale]. Let E_U and E_X be the canonical constant-module realization equivalences of [lem-pur-etale-sum-tensor-test]. Equivalences preserve and reflect exact short complexes and hence degreewise acyclicity. Lift an arbitrary acyclic ringed-site test B on X along the degreewise equivalence E_X to a module-valued complex K. The lift is acyclic. Exact inverse image makes j-star K acyclic.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-pur-etale-sum-tensor-test",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural two-variable tensor comparison of [lem-pur-etale-constant-module-tensor] induces an isomorphism on unbounded direct-sum total complexes: the realization equivalence preserves coproducts and its additive comparison respects both differentials. K-flatness of P applied to E_U(j-star K) therefore implies acyclicity of Tot((j-star K) tensor P). Reflection of acyclicity along E_U is used here.",
+   "uses": [
+    "lem-pur-etale-constant-module-tensor",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact j-shriek. The unbounded total-tensor comparison [lem-coef-etale-open-total-tensor], extracted from the canonical construction without a quasi-compactness hypothesis, identifies Tot((j-shriek P) tensor K) with j-shriek Tot(P tensor j-star K). On both sides use total-complex symmetry, whose (p,q) component is (-1)^(pq) times the sheaf tensor symmetry, to obtain acyclicity of Tot(K tensor j-shriek P). Apply E_X and its total tensor comparison, and replace E_X K by the original test B along the equivalence counit. This is the required acyclic test, for every B.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-coef-etale-open-total-tensor",
+    "lem-pur-etale-constant-module-tensor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-pur-etale-sum-tensor-test",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pur-etale-constant-module-tensor",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-coef-etale-open-total-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Parent proof step 5, implemented through the canonical constant-module equivalences, published tensor comparison, unrestricted total-tensor comparison extracted from the canonical construction, and exactness of étale sum extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves K-flat complexes and commutes with derived scalar extension with tensor coherence",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.rTensor_exact; CategoryTheory.lan_flat_of_flat",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointCompIso",
+   "results": "loogle: unknown identifier 'Adjunction.leftAdjointCompIso'",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersion.*(KFlat|Scalar)|scalar.*(normaliz|coher)",
+   "results": "Mathlib/RingTheory/Localization/Integral.lean; Mathlib/Tactic/Module.lean; Mathlib/Tactic/Module.lean",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along an open immersion preserves K-flat unbounded cochain complexes of module sheaves",
+   "results": "HomologicalComplex.extendMap_zero, extendMap_f_eq_zero, extend_d_to_eq_zero, isZero_extend_X, extend, extend_single_d (Mathlib.Algebra.Homology.Embedding.Extend); CochainComplex.HomComplex.Cochain.map_zero (Mathlib.Algebra.Homology.HomotopyCategory.HomComplex); AlgebraicGeometry.Flat.instOfIsOpenImmersion (Mathlib.AlgebraicGeometry.Morphisms.Flat)",
+   "date": "2026-10-21",
+   "verdict": "no exact match: extension along a complex-shape embedding and flatness of a scheme morphism do not assert preservation of ringed-site K-flat tensor tests"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleOpenTensor",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-open-tensor",
+   "place": "Parent proof step 5: extension by zero preserves K-flat complexes by the unbounded total-tensor projection formula",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleOpenKFlat",
+  "file": "lean/Sheaf/SixFunctors/EtaleOpenKFlat.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenKFlat",
+  "statement": "theorem etaleOpenKFlat\n    {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}\n    (j : U ⟶ X) [IsOpenImmersion j]\n    (P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)\n    (hP : etaleKFlat U A P) : etaleKFlat X A\n      (((j)_!open[ModuleCat.{u + 1} A].mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5c5b0",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T233153-L-902140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5c5b0",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T233153-L-902140",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules compiled with lcompile (no error or warning; totalization 50.8 s vs published 51.8 s back to back), the 3 direct importers compiled against the delivery's build, moved declarations diffed against the published item module (identical), #print axioms run on the proved theorems, node records checked against their Lean signatures"
+ }
+}

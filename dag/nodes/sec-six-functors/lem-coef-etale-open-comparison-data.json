@@ -1,0 +1,153 @@
+{
+ "id": "lem-coef-etale-open-comparison-data",
+ "kind": "statement",
+ "title": "Canonical open tensor and scalar comparison data",
+ "statement": "Let j:U→X be an open immersion of schemes and φ:A→B a homomorphism of commutative rings. Use the ordinary unbounded constant-module derived categories of [def-weil-pbc-derived-categories], exact open extension and restriction of [def-weil-pbc-extension-by-zero], the tensor of [def-kun-derived-tensor], and the fixed scalar left adjoints of [lem-pur-derived-change-of-rings]. Fix the ordinary restriction/scalar isomorphism sectionwise, and descend it by the exact derived functors. Define q by uniqueness of the composite scalar/open left adjoints. Define r as the inverse scalar-adjunction mate of that descended restriction/scalar isomorphism. Then this fixed mate r is invertible. The ordinary and derived projection maps are the published adjunction mates; the exact-restriction tensorator is the published derived tensor comparison. Flatness and K-flatness mean [def-pc-flat-sheaf-modules] and [def-pc-kflat-complex] after the canonical constant-module realization of [lem-pur-etale-sum-flat-kflat]. The degreewise scalar representative normalization predicates use these same fixed functors and the adjunctions of [lem-weil-pbc-extension-by-zero-adjunction].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Parent open tensor lemma: canonical ordinary and exact-derived scalar/open comparison constructions; scalar mate invertibility"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-extension-by-zero",
+  "def-kun-derived-tensor",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-pur-etale-sum-flat-kflat"
+ ],
+ "proof": [
+  {
+   "text": "Use the published open restriction/upper-star comparison. The two composites of sectionwise restriction and the restriction/coextension scalar adjunctions have equal units: naturality of the module restriction/coextension unit is exactly the sectionwise equality. Identify the inverse ordinary square with the canonical upper-star/scalar square by uniqueness of left adjoints.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-etale-site-localization-open"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exact derived square respects symmetry. Transport its inverse scalar mate along the published identification L(j-star) ≅ D(j-star). The generic mate-transport equation follows by expanding the units and counits and applying naturality.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the étale part of scalarPullbackReverse_isIso in [lem-sfb-etale-proetale-scalar-mate]. The transported mate is its composite with isomorphisms, so is invertible. This proves invertibility of the fixed map, rather than existence of some comparison isomorphism.",
+   "uses": [
+    "lem-sfb-etale-proetale-scalar-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-etale-proetale-scalar-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Parent open tensor lemma: canonical ordinary and exact-derived scalar/open comparison constructions; scalar mate invertibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves K-flat complexes and commutes with derived scalar extension with tensor coherence",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.rTensor_exact; CategoryTheory.lan_flat_of_flat",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointCompIso",
+   "results": "loogle: unknown identifier 'Adjunction.leftAdjointCompIso'",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersion.*(KFlat|Scalar)|scalar.*(normaliz|coher)",
+   "results": "Mathlib/RingTheory/Localization/Integral.lean; Mathlib/Tactic/Module.lean; Mathlib/Tactic/Module.lean",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar restriction commutes with exact pullback of module sheaves along an open immersion; the derived adjunction mate is an isomorphism",
+   "results": "SheafOfModules.restrictScalars (Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings); AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, restrictFunctor, restrictAdjunction, restrict_obj (Mathlib.AlgebraicGeometry.Modules.Sheaf); PresheafOfModules.restrictScalars, restrictScalarsObj (Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings); SheafOfModules.PullbackConstruction.adjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous)",
+   "date": "2026-10-21",
+   "verdict": "no exact match: structure-sheaf restriction and ordinary ringed-site pullback are not the fixed derived constant-coefficient etale mate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleOpenTensor",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-open-tensor",
+   "place": "Parent open tensor lemma: canonical ordinary and exact-derived scalar/open comparison constructions; scalar mate invertibility",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleOpenTensorDefs",
+  "file": "lean/Sheaf/SixFunctors/EtaleOpenTensorDefs.lean",
+  "declaration": "AlgebraicGeometry.Etale.openScalarRestrictionMap_isIso",
+  "statement": "theorem openScalarRestrictionMap_isIso\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    IsIso (openScalarRestrictionMap φ j)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedRestriction",
+   "AlgebraicGeometry.Etale.derivedExtension",
+   "AlgebraicGeometry.Etale.canonicalGamma",
+   "AlgebraicGeometry.Etale.etaleFlat",
+   "AlgebraicGeometry.Etale.etaleKFlat",
+   "AlgebraicGeometry.Etale.openRestrictScalarsIso",
+   "AlgebraicGeometry.Etale.openScalarRestrictionZero",
+   "AlgebraicGeometry.Etale.openScalarExtensionZero",
+   "AlgebraicGeometry.Etale.openDerivedRestrictScalarsIso",
+   "AlgebraicGeometry.Etale.openScalarExtension",
+   "AlgebraicGeometry.Etale.openScalarRestrictionMap",
+   "AlgebraicGeometry.Etale.openScalarRestrictionMap_isIso",
+   "AlgebraicGeometry.Etale.openScalarRestriction",
+   "AlgebraicGeometry.Etale.canonicalGammaZero",
+   "AlgebraicGeometry.Etale.OpenScalarExtensionNormalization",
+   "AlgebraicGeometry.Etale.OpenScalarRestrictionNormalization",
+   "AlgebraicGeometry.Etale.openExactRestrictionTensor",
+   "AlgebraicGeometry.Etale.canonicalGammaExact"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5c5b0",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T233153-L-902140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5c5b0",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T233153-L-902140",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules compiled with lcompile (no error or warning; totalization 50.8 s vs published 51.8 s back to back), the 3 direct importers compiled against the delivery's build, moved declarations diffed against the published item module (identical), #print axioms run on the proved theorems, node records checked against their Lean signatures"
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "lem-coef-etale-open-scalar-coherence",
+ "kind": "statement",
+ "title": "K-flat normalization and tensor coherence of open scalar comparisons",
+ "statement": "Let j:U→X be an arbitrary open immersion and φ:A→B a homomorphism of commutative rings. Write L_A=j_!, J_A=j^*, F_φ,T=−⊗^L_A B, Q_T for localization of cochain complexes, E_φ,T for ordinary scalar extension, and c_φ,T(P):F_φ,T(Q_T P)→Q_T(E_φ,T P) for its scalar representative map. Use exactly the maps and normalization predicates fixed in [lem-coef-etale-open-comparison-data], and the scalar tensor comparison t_T(M,N):F_φ,T M⊗^L_B F_φ,T N→F_φ,T(M⊗^L_A N) of [lem-coef-etale-hom-thick-locus]. Let q_φ:L_A F_φ,X→F_φ,U L_B and r_φ:J_A F_φ,U→F_φ,X J_B be the fixed natural isomorphisms (functors are written in diagrammatic order). Then q_φ satisfies OpenScalarExtensionNormalization φ j, and it is the unique natural isomorphism satisfying that predicate. Likewise r_φ satisfies OpenScalarRestrictionNormalization φ j and is uniquely determined by it. Equivalently, on every K-flat P, the two paths built from q_φ (respectively r_φ), the scalar representative maps c, the exact localization factors for L (respectively J), and Q of the degreewise ordinary q-zero (respectively r-zero), coincide as specified in those predicates. For any ψ:B→C, let a_T:F_φ,T F_ψ,T≅F_(ψφ),T be the fixed scalar composition comparison. For every P in D(U_et,A), using ';' to compose from left to right, F_ψ,X(q_φ,P); q_ψ,F_φ,U(P); L_C(a_U,P) = a_X,L_A(P); q_(ψφ),P. Finally, for every P in D(U_et,A) and T in D(X_et,A), the exact open projection γ obeys the explicit mixed square: γ_B(F_φ,U P,F_φ,X T); (q_φ,P^(-1)⊗id); t_X(L_A P,T) = L_B((id⊗r_φ,T^(-1));t_U(P,J_A T)); q_φ,(P⊗J_A T)^(-1); F_φ,X(γ_A(P,T)). There are no boundedness, constructibility, flat coefficient-map, or quasi-compact-open hypotheses.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Parent proof steps 8–12: scalar model normalization, uniqueness, successive coefficient change and mixed scalar/tensor compatibility"
+ },
+ "stmt_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "lem-coef-etale-hom-thick-locus"
+ ],
+ "proof": [
+  {
+   "text": "Identify the canonical ordinary comparisons with their balanced tensor maps by the scalar and open adjunctions. On flat K-flat cochain models, transpose the scalar units; degreewise exact open descent gives precisely the q and r representative equations.",
+   "uses": [
+    "lem-coef-etale-open-comparison-data",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-coef-etale-open-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every derived object has a flat K-flat resolution in the constant-ring module coordinates, transported by the constant-module equivalence. Scalar representative maps on these models are invertible. Naturality and cancellation determine every component from the normalization equation, giving both uniqueness assertions.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-etale-constant-module-flat",
+    "lem-coef-etale-open-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On model generators successive extension sends ((p tensor b) tensor c) to p tensor bc, and the mixed scalar tensor comparison sends (p tensor b1) tensor (t tensor b2) to (p tensor t) tensor (b1*b2). Both open paths have these same formulas. Balanced tensor universality, sheafification, naturality and signed direct-sum totalization preserve these equalities; descend through the K-flat localization.",
+   "uses": [
+    "lem-coef-etale-hom-thick-locus",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-derived-change-of-rings",
+    "lem-coef-etale-open-kflat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-coef-etale-open-kflat",
+  "lem-pc-kflat-resolution",
+  "lem-pur-etale-constant-module-flat",
+  "lem-coef-etale-hom-thick-locus",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Parent proof steps 8–12: scalar model normalization, uniqueness, successive coefficient change and mixed scalar/tensor compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves K-flat complexes and commutes with derived scalar extension with tensor coherence",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.rTensor_exact; CategoryTheory.lan_flat_of_flat",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointCompIso",
+   "results": "loogle: unknown identifier 'Adjunction.leftAdjointCompIso'",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersion.*(KFlat|Scalar)|scalar.*(normaliz|coher)",
+   "results": "Mathlib/RingTheory/Localization/Integral.lean; Mathlib/Tactic/Module.lean; Mathlib/Tactic/Module.lean",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars commutes with extension by zero and restriction along an open immersion, with K-flat normalization and composition coherence",
+   "results": "ModuleCat.extendScalarsComp, extendScalars_assoc, extendRestrictScalarsAdj (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings); AlgebraicGeometry.Scheme.Modules.restrictFunctorComp (Mathlib.AlgebraicGeometry.Modules.Sheaf); CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp (Mathlib.Algebra.Category.ModuleCat.Pseudofunctor); Algebra.FormallyUnramified.flat_of_restrictScalars (Mathlib.RingTheory.Unramified.Finite); ModuleCat.preservesFiniteLimits_extendScalars_of_flat (Mathlib.Algebra.Category.ModuleCat.Descent); LinearEquiv.extendScalarsOfIsLocalizationEquiv (Mathlib.RingTheory.Localization.Module)",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary module scalar composition is relevant algebra, but does not supply the fixed etale derived normalizations, uniqueness and mixed tensor law"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleOpenTensor",
+  "date": "2026-10-21",
+  "group": "K3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-open-tensor",
+   "place": "Parent proof steps 8–12: scalar model normalization, uniqueness, successive coefficient change and mixed scalar/tensor compatibility",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleOpenScalarCoherence",
+  "file": "lean/Sheaf/SixFunctors/EtaleOpenScalarCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenScalarComparisons",
+  "statement": "theorem etaleOpenScalarComparisons\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    EtaleOpenScalarComparisons φ j",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Etale.EtaleOpenScalarComparisons",
+   "AlgebraicGeometry.Etale.etaleOpenScalarComparisons"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5c5b0",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T233153-L-902140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5c5b0",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261020T233153-L-902140",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules compiled with lcompile (no error or warning; totalization 50.8 s vs published 51.8 s back to back), the 3 direct importers compiled against the delivery's build, moved declarations diffed against the published item module (identical), #print axioms run on the proved theorems, node records checked against their Lean signatures"
+ }
+}

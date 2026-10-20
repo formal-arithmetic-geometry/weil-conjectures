@@ -451,6 +451,21 @@ private theorem totalTensor_descent
   · intro P H
     rfl
 
+private theorem totalTensor_exists
+    [PreservesColimitsOfSize.{0, 0} L]
+    (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
+    (ha : ∀ {M M' : C} {N N' : D} (f : M ⟶ M') (g : N ⟶ N'),
+      (G.map (L.map f)).app N ≫ (G.obj (L.obj M')).map g ≫ (a M' N').hom =
+        (a M N).hom ≫ L.map
+          ((F.map f).app (R.obj N) ≫ (F.obj M').map (R.map g))) :
+    ∃ Ψ : TotalTensorComparison F G L R,
+      TotalTensorClauses F G L R Ψ (fun M N ↦ (a M N).hom) := by
+  let Ψ := totalTensorIso F G L R a ha
+  have hn := totalTensorIso_normalization F G L R a ha
+  have hnat := totalTensor_naturality F G L R Ψ (fun M N ↦ (a M N).hom) ha hn
+  have hh := totalTensor_homotopies F G L R Ψ (fun M N ↦ (a M N).hom) ha hn
+  exact ⟨Ψ, hn, hnat, hh.1, hh.2, totalTensor_descent F G L R Ψ hnat⟩
+
 end GenericHomotopies
 
 /-- The category of sheaves of `A`-modules on the small étale site.
@@ -524,6 +539,49 @@ def EtaleSumPreservesDirectSums
     PreservesColimitsOfShape (Discrete β)
       (Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u hu)
 
+
+/-- Unbounded étale sum extension has a total-tensor projection comparison
+without quasi-compactness. Source: Stacks Tag 0GKF
+(blueprint: lem-coef-etale-open-total-tensor).
+
+Proof: the canonical sheaf projection isomorphism is natural in both factors.
+On the summand (p,q), use its inverse, then the canonical inclusion into
+j-shriek of the direct-sum total tensor. The left adjoint preserves coproducts,
+so each degree map is an isomorphism. Naturality for the two differentials and
+additivity preserve their common sign (-1)^p, giving a chain map; the degreewise
+inverses give its inverse. The generic totalTensorIso is exactly this construction.
+No quasi-compactness, boundedness, flatness or homotopy hypothesis is used. -/
+theorem etale_sum_tensor_comparison
+    (A : Type (u + 1)) [CommRing A]
+    {U X : Scheme.{u}} (u : U ⟶ X) (hu : Etale u)
+    [IsSeparated u] [LocallyOfFiniteType u] :
+    Nonempty (TotalTensorComparison
+      (curriedTensor (EtaleModuleSheaf U A)) (curriedTensor (EtaleModuleSheaf X A))
+      (Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u hu)
+      (Etale.upperStar (ModuleCat.{u + 1} A) u)) := by
+  let L := Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u hu
+  let R := Etale.upperStar (ModuleCat.{u + 1} A) u
+  let F := curriedTensor (EtaleModuleSheaf U A)
+  let G := curriedTensor (EtaleModuleSheaf X A)
+  have : PreservesColimitsOfSize.{0, 0} L :=
+    (Etale.etaleLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} A) u hu).leftAdjoint_preservesColimits
+  let a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)) :=
+    fun M N ↦ (Etale.etaleLowerShriekTensorIso (ModuleCat.{u + 1} A) hu M N).symm
+  have ha : ∀ {M M' : EtaleModuleSheaf U A} {N N' : EtaleModuleSheaf X A}
+      (f : M ⟶ M') (g : N ⟶ N'),
+      (G.map (L.map f)).app N ≫ (G.obj (L.obj M')).map g ≫ (a M' N').hom =
+        (a M N).hom ≫ L.map
+          ((F.map f).app (R.obj N) ≫ (F.obj M').map (R.map g)) := by
+    intro M M' N N' f g
+    change (L.map f ⊗ₘ g) ≫
+      (Etale.etaleLowerShriekTensorIso (ModuleCat.{u + 1} A) hu M' N').inv =
+      (Etale.etaleLowerShriekTensorIso (ModuleCat.{u + 1} A) hu M N).inv ≫
+        L.map (f ⊗ₘ R.map g)
+    rw [Iso.comp_inv_eq, Category.assoc, Iso.eq_inv_comp]
+    exact (Etale.etaleLowerShriekTensorIso_hom_naturality
+      (ModuleCat.{u + 1} A) hu f g).symm
+  exact ⟨totalTensorIso F G L R a ha⟩
 
 /-- For a separated étale finite-type morphism, sum extension commutes canonically with
 unbounded total tensor complexes, naturally in both variables and compatibly with chain
@@ -612,11 +670,8 @@ theorem etale_sum_tensor_totalization
     rw [Iso.comp_inv_eq, Category.assoc, Iso.eq_inv_comp]
     exact (Etale.etaleLowerShriekTensorIso_hom_naturality
       (ModuleCat.{u + 1} A) hu f g).symm
-  let Ψ := totalTensorIso F G L R a ha
-  have hn := totalTensorIso_normalization F G L R a ha
-  have hnat := totalTensor_naturality F G L R Ψ (fun M N ↦ (a M N).hom) ha hn
-  have hh := totalTensor_homotopies F G L R Ψ (fun M N ↦ (a M N).hom) ha hn
-  refine ⟨Ψ, ?_, hn, hnat, hh.1, hh.2, totalTensor_descent F G L R Ψ hnat⟩
+  obtain ⟨Ψ, hΨ⟩ := totalTensor_exists F G L R a ha
+  refine ⟨Ψ, ?_, hΨ⟩
   letI : PreservesColimitsOfSize.{u + 1, u + 1}
       (Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u hu) :=
     (Etale.etaleLowerShriekUpperStarAdjunction

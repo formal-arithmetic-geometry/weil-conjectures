@@ -115,7 +115,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GKF (lemma-f-shriek-projection), expanded using categories.tex Tag 0038 and homology.tex Section 010V / Tag 012Z; stage 3 implements all seven steps using the already proved upstream canonical sheaf isomorphism, coproduct descent, signed total homotopy formulas and quotient functor map-surjectivity"
+  "place": "Tag 0GKF (lemma-f-shriek-projection), expanded using categories.tex Tag 0038 and homology.tex Section 010V / Tag 012Z; stage 3 implements all seven steps using the already proved upstream canonical sheaf isomorphism, coproduct descent, signed total homotopy formulas and quotient functor map-surjectivity; K3 groups the same construction and five clauses in a proved private generic existence lemma before specializing, with all public signatures preserved"
  },
  "mathlib_searches": [
   {
@@ -273,13 +273,13 @@
   "note": "Mathematics matches the node: CommRing A : Type (u+1) (upstream convention), Etale/IsSeparated/LocallyOfFiniteType/QuasiCompact u, nothing stronger; L = Etale.etaleLowerShriek, R = Etale.upperStar, Tot = mapBifunctor curriedTensor (.up Z); every summand pinned to etaleLowerShriekTensorIso.inv (orientation checked upstream, no factor swap), so Psi is unique; naturality in both variables, both mapBifunctorMapHomotopy intertwinings and the homotopy-category iso with components Q(Psi) are correct; one sorry, no pro-etale substitute, report sections present. Findings repaired in fixes/: (1) H5/H3: TotalTensorHomotopyIso was `opaque`, which Lean never unfolds, so the homotopy-category clause was an unprovable, unusable Prop; restored as a def. (2) H8: four declarations (TotalTensorHomotopyComparison₂, TotalTensorHomotopyLeft, TotalTensorHomotopyRight, TotalTensorHomotopyIso) lacked source/blueprint docstrings; added. (3) Two earlier landings were returned for the 60 s per-file timeout; the five clauses are now bundled once as generic TotalTensorClauses and specialized once as EtaleSumTensorClauses, same clauses and same Psi; theorem is ∃ Ψ, EtaleSumPreservesDirectSums ∧ EtaleSumTensorClauses Ψ; unused etaleTensorTotal removed (no users in the side clone or other review runs). nt_compile: delivered file timed out at 60 s; opaque->def only gave 53.9/59.5 s; final fix rc 0, no messages, 31.9 s and 35.9 s at load average about 135. Fixes: EtaleSumTensorTotalization.lean, lean-record.json (16 declarations, statement verbatim), report.md with an appended reviewer-fix section."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "C-5c5b0",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261019T005419-L-2766252",
+  "landing": "20261020T233153-L-902140",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 5 delivered modules compiled with lcompile (no error or warning; totalization 50.8 s vs published 51.8 s back to back), the 3 direct importers compiled against the delivery's build, moved declarations diffed against the published item module (identical), #print axioms run on the proved theorems, node records checked against their Lean signatures"
  }
 }
