@@ -16,58 +16,39 @@
  ],
  "proof": [
   {
-   "text": "Fix $i\\in I$ and give $\\mathcal C/U_i$ the localized topology [def-pur-localized-ringed-site]; it is a small site in the size convention [def-weil-size-convention], its underlying category has finite limits and every covering family admits a finite covering refinement by hypothesis. These are exactly the hypotheses of [lem-trf-finitary-site-enough-points], which therefore gives a set $Q_i$ and points $q:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C/U_i)$, $q\\in Q_i$, whose inverse images jointly reflect isomorphisms. The forgetful functor $j_i:\\mathcal C/U_i\\to\\mathcal C$, $(V\\to U_i)\\mapsto V$, is continuous [def-weil-pbc-sites-and-cohomology](3): a covering of $\\mathcal C/U_i$ is by definition a covering of $\\mathcal C$, and for $T\\to V$ and a covering $\\{V_k\\to V\\}$ over $U_i$ the fibre product $T\\times_VV_k$ formed in $\\mathcal C$ (it exists by site axiom (iii)) lies over $U_i$ and is the fibre product in $\\mathcal C/U_i$, so $j_i$ preserves it. It is cocontinuous [def-weil-pbc-special-cocontinuous-functor](1): a covering $\\{V_k\\to V\\}$ of $j_i(V\\to U_i)=V$ in $\\mathcal C$ is, with the composites $V_k\\to V\\to U_i$, a covering of $V/U_i$ in $\\mathcal C/U_i$ whose image is the given family. By [lem-weil-pbc-continuous-cocontinuous-topos-adjunction], restriction $L_i\\mathcal F=\\mathcal F|_{U_i}$, $\\mathcal F|_{U_i}(V/U_i)=\\mathcal F(V)$, is the inverse image of a morphism of topoi $\\operatorname{Sh}(\\mathcal C/U_i)\\to\\operatorname{Sh}(\\mathcal C)$: it preserves finite limits and has a right adjoint. By the composition clause of [def-trf-geometric-morphism], for every $q\\in Q_i$ the composite $p_{i,q}:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$ is a point of $\\operatorname{Sh}(\\mathcal C)$ with inverse image $p_{i,q}^{-1}=q^{-1}\\circ L_i$, $\\mathcal F\\mapsto q^{-1}(\\mathcal F|_{U_i})$. (This is the procedure of Stacks Lemma 05V1 (lemma-point-morphism-sites) cited in the source proof.)",
+   "text": "The covering axioms [def-weil-pbc-sites-and-cohomology] pass to C/U_i. Induction on Precoverage.Saturate, using bind composition rather than arbitrary repeated indexed composition, shows that a covering sieve contains an actual covering presieve. Pulling such presieves to the slice identifies the generated slice topology with J.over U_i [def-pur-localized-ringed-site]. Transport the slice to AsSmall, with both object and morphism universe max u v [def-weil-size-convention]. Lift covering arrows and finite refinements through AsSmall.up/down; the transported presieve site satisfies the same three axioms. Apply [lem-trf-finitary-site-enough-points] there, and transport its points and conservativity back through Mathlib Equivalence.sheafCongr. The private Lean lemmas asSmall_site, asSmall_dense, exists_cover, over_site, over_topology and finitarySite_large_enoughPoints prove all this glue completely.",
    "uses": [
-    "lem-trf-finitary-site-enough-points",
-    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
-    "def-pur-localized-ringed-site",
     "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-special-cocontinuous-functor",
-    "def-trf-geometric-morphism",
-    "def-weil-size-convention"
+    "def-pur-localized-ringed-site",
+    "def-weil-size-convention",
+    "lem-trf-finitary-site-enough-points"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 0DW0 (lemma-criterion-points), first two sentences of the proof: Proposition 00YQ applied to each C/U_i and points transported by Lemma 05V1 (lemma-point-morphism-sites); localization morphism j_U of Section 00XZ (section-localize)."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of sets on $\\mathcal C$ such that $p_{i,q}^{-1}(\\varphi)$ is a bijection for all $i\\in I$ and $q\\in Q_i$. Fix $i$. By Step 1, $q^{-1}(\\varphi|_{U_i})=p_{i,q}^{-1}(\\varphi)$ is a bijection for every $q\\in Q_i$, so the conservativity conclusion of [lem-trf-finitary-site-enough-points] for the family $Q_i$ shows that $\\varphi|_{U_i}:\\mathcal F|_{U_i}\\to\\mathcal G|_{U_i}$ is an isomorphism of sheaves on $\\mathcal C/U_i$. Since $(\\varphi|_{U_i})_{V/U_i}=\\varphi_V$, this says: $\\varphi_V:\\mathcal F(V)\\to\\mathcal G(V)$ is bijective for every object $V$ of $\\mathcal C$ that admits a morphism $V\\to U_i$ for some $i$.",
+   "text": "For each U_i, Mathlib supplies continuity and cocontinuity of Over.forget, its sheafAdjunctionCocontinuous, and preservation of finite limits by its continuous sheaf restriction. These construct the localization geometric morphism directly, with inverse image J.overPullback. Compose this morphism with each slice point using [def-trf-geometric-morphism]. No separate covering-level topos-adjunction theorem or special-cocontinuity predicate is needed.",
    "uses": [
-    "lem-trf-finitary-site-enough-points",
-    "def-pur-localized-ringed-site"
+    "def-pur-localized-ringed-site",
+    "def-trf-geometric-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 0DW0 (lemma-criterion-points), proof: 'it suffices to show: if phi is a map of sheaves such that phi restricted to C/U_i is an isomorphism for all i, then phi is an isomorphism'."
-   }
+   "elementary": true
   },
   {
-   "text": "Let $P$ be the presheaf $W\\mapsto\\coprod_{i\\in I}\\operatorname{Hom}_{\\mathcal C}(W,U_i)$ (disjoint union of sets). Its sheafification $P^\\#$ [def-weil-pbc-sheafification] is the coproduct $\\coprod_ih_{U_i}$ in $\\operatorname{Sh}(\\mathcal C)$: for a sheaf $\\mathcal H$, $\\operatorname{Hom}(P^\\#,\\mathcal H)=\\operatorname{Hom}(P,\\mathcal H)=\\prod_i\\operatorname{Hom}(\\operatorname{Hom}_{\\mathcal C}(-,U_i),\\mathcal H)=\\prod_i\\operatorname{Hom}(h_{U_i},\\mathcal H)$ by the universal property of sheafification, used twice. The terminal sheaf is $1(W)=\\{*\\}$. Fix an object $W$. Since $P^\\#\\to1$ is an epimorphism, [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] gives a covering $\\{W_a\\to W\\}$ with sections of $P^\\#$ over each $W_a$; by [lem-weil-pbc-site-sheafification-sections-local] each such section is, on a covering $\\{W_{ab}\\to W_a\\}$, the image of an element of $P(W_{ab})$, i.e. of a morphism $W_{ab}\\to U_{i(a,b)}$. By site axiom (ii) of [def-weil-pbc-sites-and-cohomology], $\\{W_k\\to W\\}_k:=\\{W_{ab}\\to W\\}_{a,b}$ is a covering in which every $W_k$ maps to some $U_i$; so $\\varphi_{W_k}$ is bijective by Step 2. Injectivity of $\\varphi_W$: if $\\varphi_W(s)=\\varphi_W(s')$ then $s|_{W_k}=s'|_{W_k}$ for all $k$ by injectivity of $\\varphi_{W_k}$, so $s=s'$ by the sheaf equalizer condition for $\\mathcal F$. This holds for every object $W$. Surjectivity: for $t\\in\\mathcal G(W)$ choose $s_k\\in\\mathcal F(W_k)$ with $\\varphi(s_k)=t|_{W_k}$. On $W_k\\times_WW_l$ (it exists by site axiom (iii)) the two restrictions of $s_k,s_l$ both map to the restriction of $t$; as $\\varphi_{W_k\\times_WW_l}$ is injective by the previous sentence, they agree. The sheaf condition for $\\mathcal F$ glues them to $s\\in\\mathcal F(W)$, and $\\varphi(s)$ and $t$ agree on every $W_k$, hence $\\varphi(s)=t$ by the sheaf condition for $\\mathcal G$. Thus every $\\varphi_W$ is bijective, and the sectionwise inverses form a natural inverse, so $\\varphi$ is an isomorphism. (If $I=\\emptyset$ the hypothesis forces every object to be covered by the empty family, every sheaf is terminal and the argument holds vacuously.)",
+   "text": "Write P for the presheaf coproduct of the lifted representables and T for the constant singleton presheaf. Sheafification [def-weil-pbc-sheafification] preserves coproducts and terminal objects. The composite of its coproduct comparison, the sheafification of P to T, and the terminal isomorphism is the assumed epimorphism; hence the sheafification of P to T is epic. By [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] it is locally surjective. Use the already proved general unit_locally_surjective helper from the module of [lem-weil-pbc-site-sheafification-sections-local], which requires only HasWeakSheafify and no stronger precoverage composition class. The unit at T is an isomorphism. Naturality of the unit therefore gives local surjectivity of P to T. On every object the image sieve of the singleton section is covering. A local section of P belongs to some representable summand, so its domain maps to U_i for some i. Enlarging the image sieve to Sieve.ofObjects U proves J.CoversTop U. The private coversTop_of_epi proves this for arbitrary value universe max u v w.",
    "uses": [
     "def-weil-pbc-sheafification",
     "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-site-sheafification-sections-local"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 0DW0 (lemma-criterion-points), last part of the proof: by assumption (1) every W has a covering by W_j mapping to some U_i; bijectivity on W_j and W_j x_W W_j' and the sheaf condition."
-   }
+   "elementary": false
   },
   {
-   "text": "The family $\\{p_{i,q}\\}_{i\\in I,\\,q\\in Q_i}$ is indexed by the set $\\coprod_{i\\in I}Q_i$, a set in the fixed universe [def-weil-size-convention] since $I$ and every $Q_i$ are sets. Steps 1--3 show that these points jointly reflect isomorphisms, which is the asserted conclusion.",
+   "text": "Index the composite points by the dependent sum of the slice index types, in the same fixed universe [def-weil-size-convention]. If every composite inverse image takes a sheaf map a to a bijection, slice conservativity makes every J.overPullback(a) invertible. Apply the proved Mathlib lemma Sheaf.isIso_of_coversTop to the cover of Step 3 and these restriction isomorphisms. This yields IsIso a, including when the family is empty.",
    "uses": [
-    "def-weil-size-convention"
+    "def-weil-size-convention",
+    "def-pur-localized-ringed-site"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 0DW0 (lemma-criterion-points), conclusion 'C has enough points' (Definition 00YK, definition-enough-points: a conservative family of points)."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -75,17 +56,15 @@
   "def-trf-geometric-morphism",
   "def-weil-pbc-sheafification",
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-special-cocontinuous-functor",
   "def-weil-size-convention",
   "lem-trf-finitary-site-enough-points",
-  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
   "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
   "lem-weil-pbc-site-sheafification-sections-local"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Lemma 0DW0 (lemma-criterion-points) in Section 00YN, using Proposition 00YQ on each slice, the localization morphism of Section 00XZ and Lemma 05V1 (lemma-point-morphism-sites)."
+  "place": "Lemma 0DW0 (lemma-criterion-points), following its slice-point composition and descent argument; the descent is implemented by Mathlib Sheaf.isIso_of_coversTop, and the size and precoverage transports are proved in the item module."
  },
  "mathlib_searches": [
   {
@@ -177,7 +156,6 @@
  },
  "tool_uses": [
   "lem-trf-finitary-site-enough-points",
-  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
   "lem-weil-pbc-site-sheafification-sections-local",
   "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
  ],
@@ -206,5 +184,15 @@
   "group": "NP",
   "result": "pass",
   "note": "Checked every clause against Stacks 0DW0/00YQ (sites.tex l.9400-9467). Site: recorded IsSiteForCoverings, independent universes u, v, values and indices in Type (max u v w). h_U is presheafToSheaf of uliftYoneda, no subcanonicity assumed. hcover is Epi(terminal.from ∐) in the sheaf category. Slice: Over (U i) with J.comap (Over.forget (U i)), i.e. the 00XZ localized coverings. Finite limits only on the slices. hfinite is a finite covering refinement (factoring arrows, not a subcover), same wording as finitarySite_enoughPoints. Conclusion: ι-indexed GeometricMorphism (Type _) (Sheaf J _), inverse : Sheaf ⥤ Type, jointly reflecting isos. Edge cases fine: empty I, empty C, empty or infinite coverings, non-subcanonical sites, universes t+1/t. No definitions, sorry only, source and blueprint docstrings with the proof steps, no duplicate notion in Mathlib or the project. Node differs from the repository only in lean; lean.statement matches the file verbatim. Report has a Worker report and a Second reading by NP section (notes the post-2026-10-17 process). nt_compile --json: compiled in 1.4 s with no errors; probe #check confirms the signature, axioms are sorryAx plus the standard three. No findings needing a fix."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T174802-L-796914",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
