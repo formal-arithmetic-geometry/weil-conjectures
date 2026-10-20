@@ -97,6 +97,16 @@ section Proper
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
 
+/- STATEMENT-DISPUTED: this unconditional assertion is false on the ambient unbounded
+pro-etale derived categories. For the proper structure morphism of a positive dimensional
+abelian variety over an algebraically closed field and field coefficients, the theorem
+`ProEtale.not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety` in
+`WeilConjectures.SixFunctors.ProEtale.AmbientCounterexampleCoproducts` proves that derived
+pushforward fails to preserve countable coproducts. Every left adjoint preserves them.
+See blueprint `sk-rem-sf-fullcd-scope`, "The counterexample and the repair boundary",
+and node `thm-sfb-finite-proper-pushforward-left-adjoint`.
+The protected source signature is retained pending an authorized correction. The active
+constructible exceptional inverse image in `Derived.UpperShriek` uses a different adjunction. -/
 /-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_proét) ⥤ D(Y_proét)` is a
 left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
 -- STATEMENT-DISPUTED: proper pro-etale derived pushforward need not preserve coproducts.
