@@ -6,15 +6,15 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
-import Sheaf.AlgebraicGeometry.SingleComplexOpenAffine
+import WeilConjectures.AlgebraicGeometry.SingleComplexOpenAffine
 import Sheaf.AlgebraicGeometry.SingleComplexOpenAffineUnion
-import Sheaf.AlgebraicGeometry.SingleComplexOpenTop
-import Sheaf.AlgebraicGeometry.SingleComplexTargetLocality
+import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTop
+import WeilConjectures.AlgebraicGeometry.SingleComplexTargetLocality
 
 /-! # Degreewise monomorphism in qcqs single-complex base change
 

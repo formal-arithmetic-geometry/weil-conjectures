@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.Derives
 

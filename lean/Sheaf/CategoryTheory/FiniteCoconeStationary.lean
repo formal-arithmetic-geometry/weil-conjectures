@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.FiniteBoundaryAlphaKernel
 import all Sheaf.CategoryTheory.FiniteCoconeLimitBoundaries
 import Sheaf.CategoryTheory.FiniteCycleFormula

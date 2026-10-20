@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.RingedSiteLocalization
 public import Sheaf.CategoryTheory.RingedSiteDerivedRestriction
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 
 /-!
 # RingedSiteCompleteElement

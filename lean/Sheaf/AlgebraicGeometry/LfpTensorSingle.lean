@@ -21,6 +21,7 @@ import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Local tensor calculations over ell-adic coefficients
 

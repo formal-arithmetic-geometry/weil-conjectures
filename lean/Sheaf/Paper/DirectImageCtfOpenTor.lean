@@ -30,7 +30,7 @@ import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import WeilConjectures.CategoryTheory.TruncationHypercohomology
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.Paper.PbcActualScalarPullback

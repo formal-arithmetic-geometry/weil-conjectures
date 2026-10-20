@@ -17,7 +17,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.RingTheory.ValuationRingNormal
 import Mathlib.RingTheory.Polynomial.IsIntegral
 import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Sheaf.RingTheory.EtaleNormalRing
+import WeilConjectures.RingTheory.EtaleNormalRing
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.RingTheory.Localization.BaseChange

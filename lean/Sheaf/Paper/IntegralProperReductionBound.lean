@@ -16,7 +16,7 @@ public import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 public import Sheaf.Paper.CondensedModuleDerivedPushpull
 import Sheaf.Paper.IntegralProperReductionModel
 import all Sheaf.AlgebraicGeometry.ProperTorsionDirectImageBound
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import Sheaf.CategoryTheory.RightDerivedFunctorUpperBound
 

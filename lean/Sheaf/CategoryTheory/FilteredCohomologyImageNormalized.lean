@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.CategoryTheory.FilteredCohomologyImage
-import all Sheaf.CategoryTheory.FilteredNormalizedQuotientPresentation
+import all WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
 import Sheaf.CategoryTheory.FilteredCohomologyImageCycleMap
 
 /-! # Normalized presentation of the cohomology image graded piece

@@ -5,7 +5,7 @@ Authors: SHEAF group V3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SourceLocalizedCocycleHomology
+public import WeilConjectures.AlgebraicGeometry.SourceLocalizedCocycleHomology
 
 /-! # Restriction of a cocycle through exact strict-local functors
 

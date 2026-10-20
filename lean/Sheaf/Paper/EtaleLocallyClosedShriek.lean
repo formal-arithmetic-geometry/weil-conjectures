@@ -9,7 +9,7 @@ public import Sheaf.Paper.FiniteCoefficientDirectImage
 public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import Sheaf.Paper.FiniteCoefficientReductionFlatModel
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Sheaf.SixFunctors.EtaleOpenTensor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek

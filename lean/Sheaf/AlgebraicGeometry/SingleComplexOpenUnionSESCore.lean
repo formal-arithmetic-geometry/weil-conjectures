@@ -1,14 +1,14 @@
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenComparison
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 
-import Sheaf.AlgebraicGeometry.OpenUnionImageComplexExact
-import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonIso
-import Sheaf.AlgebraicGeometry.RelativeMVMaps
+import WeilConjectures.AlgebraicGeometry.OpenUnionImageComplexExact
+import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonIso
+import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Mathlib.CategoryTheory.Triangulated.Adjunction

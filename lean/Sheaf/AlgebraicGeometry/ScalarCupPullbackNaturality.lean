@@ -6,9 +6,9 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
+import WeilConjectures.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
 import Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage
-import Sheaf.AlgebraicGeometry.ScalarPullbackTensorCoefficient
+import WeilConjectures.AlgebraicGeometry.ScalarPullbackTensorCoefficient
 
 /-! # ScalarCupPullbackNaturality
 

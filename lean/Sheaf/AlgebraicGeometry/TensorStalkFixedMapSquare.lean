@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
-import Sheaf.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison
+import WeilConjectures.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison
 import Sheaf.AlgebraicGeometry.TensorStalkChainCoordinates
 
 /-! # Tensor compatibility of a fixed stalk chain map

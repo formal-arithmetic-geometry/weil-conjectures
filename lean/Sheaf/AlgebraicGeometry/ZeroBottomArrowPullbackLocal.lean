@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Sheaf.AlgebraicGeometry.ZeroBottomArrowAffineChainModel
+import WeilConjectures.AlgebraicGeometry.ZeroBottomArrowAffineChainModel
 import Sheaf.AlgebraicGeometry.BottomFreeChainPullbackSquare
 
 /-! # Local pullback of a bottom truncation arrow

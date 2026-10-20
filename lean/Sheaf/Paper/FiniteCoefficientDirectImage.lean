@@ -10,7 +10,7 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import Sheaf.Paper.WitnessCompatibility
 public import Sheaf.Paper.FiniteDirectImageComposition
-public import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
+public import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 import Sheaf.Paper.EtaleProEtaleScalarMate
@@ -18,7 +18,7 @@ import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing
-import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
+import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
 import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
 import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations

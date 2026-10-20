@@ -5,13 +5,13 @@ Authors: SHEAF group N4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OrdinaryEvaluationData
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.Algebra.Homology.KFlat
 
 import Sheaf.AlgebraicGeometry.ExactSourceKInjectiveEvaluationOpenModels
-import Sheaf.AlgebraicGeometry.OrdinaryEvaluationPostcomposition
-import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferential
+import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationPostcomposition
+import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 

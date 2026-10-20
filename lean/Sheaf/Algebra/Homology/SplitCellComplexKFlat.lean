@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Homology.FilteredColimitsTensor
+import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
 
 /-!
 # K-flatness of complexes built from split free cells

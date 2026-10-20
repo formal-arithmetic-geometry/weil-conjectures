@@ -6,7 +6,7 @@ Authors: SHEAF group NE
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentEtaleComparisonMorphism
-public import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleZariskiQcohComparison
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

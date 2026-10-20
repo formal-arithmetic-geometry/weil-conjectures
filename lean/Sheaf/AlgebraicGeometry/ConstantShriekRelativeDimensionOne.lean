@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

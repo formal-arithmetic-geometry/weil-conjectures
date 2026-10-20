@@ -5,14 +5,14 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel
-import Sheaf.Topology.PointModuleEvaluationEquivalence
+import WeilConjectures.Topology.PointModuleEvaluationEquivalence
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 

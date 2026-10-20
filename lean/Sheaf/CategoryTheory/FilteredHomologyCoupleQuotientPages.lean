@@ -6,11 +6,11 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.CategoryTheory.FilteredHomologyExactCouple
-public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.CategoryTheory.FilteredHomologyTowerQuotients
 import Sheaf.CategoryTheory.FilteredHomologyTowerDifferential
-import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
+import WeilConjectures.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 /-!
 # Derived homology-couple pages as representative quotients

@@ -5,14 +5,14 @@ Authors: SHEAF group B3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 public import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
-public import Sheaf.AlgebraicGeometry.OpenDerivedAdditiveStalkIso
+public import WeilConjectures.AlgebraicGeometry.OpenDerivedAdditiveStalkIso
 import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
 import Sheaf.AlgebraicGeometry.IsomorphismPullbackCounit
-import Sheaf.AlgebraicGeometry.SingleComplexOpenOrdinaryComparison
-import Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseCounitCompatibility
+import WeilConjectures.AlgebraicGeometry.SingleComplexOpenOrdinaryComparison
+import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTermwiseCounitCompatibility
 
 /-! # The normalized comparison on a termwise restricted complex
 

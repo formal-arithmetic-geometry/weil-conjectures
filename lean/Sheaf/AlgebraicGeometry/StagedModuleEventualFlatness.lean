@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.FlatModuleDescent
+import WeilConjectures.AlgebraicGeometry.FlatModuleDescent
 import Sheaf.AlgebraicGeometry.PullbackModelFlatnessComparison
 
 /-! # Eventual relative flatness on a fixed base-change model

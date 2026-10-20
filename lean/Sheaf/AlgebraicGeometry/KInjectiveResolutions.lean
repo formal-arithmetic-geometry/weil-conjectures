@@ -4,7 +4,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # K-injective resolutions

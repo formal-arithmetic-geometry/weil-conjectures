@@ -9,9 +9,9 @@ public import Sheaf.Paper.QcqsOrientedTriplePresentation
 public import WeilConjectures.CategoryTheory.ColimitSites
 public import Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
-import Sheaf.AlgebraicGeometry.ExistsIsSeparatedOverPullbackMap
+import WeilConjectures.AlgebraicGeometry.ExistsIsSeparatedOverPullbackMap
 import Sheaf.TraceFormula.QCQSEtaleFinitarySite
 import Sheaf.CategoryTheory.PseudofunctorSplitFamily
 import Sheaf.CategoryTheory.SiteInverseImageTensor

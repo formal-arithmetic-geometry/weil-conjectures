@@ -6,7 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
-public import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
+public import WeilConjectures.CategoryTheory.CartanEilenbergMappedTotal
 
 /-! # Global sections of Cartan--Eilenberg totals
 

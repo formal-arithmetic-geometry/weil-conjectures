@@ -13,7 +13,7 @@ import Sheaf.RingTheory.PerfectModuleFiniteProjectiveDimension
 import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Sheaf.RingTheory.AuslanderBuchsbaum
-import Sheaf.RingTheory.FiniteProjectiveDimensionOfTorBound
+import WeilConjectures.RingTheory.FiniteProjectiveDimensionOfTorBound
 
 /-!
 # A uniform finite projective resolution bound for perfect ideal-power quotients

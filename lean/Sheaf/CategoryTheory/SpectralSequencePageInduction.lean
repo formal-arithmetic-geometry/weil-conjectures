@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import Mathlib.Order.Bounds.OrderIso
 
 /-!

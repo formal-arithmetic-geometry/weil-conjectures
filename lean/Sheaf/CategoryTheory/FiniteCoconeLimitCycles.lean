@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 import WeilConjectures.CategoryTheory.DerivedCoupleExact
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits

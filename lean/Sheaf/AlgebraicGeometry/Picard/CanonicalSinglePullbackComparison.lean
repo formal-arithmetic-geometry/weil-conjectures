@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
+import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
 
 /-! # The pinned derived pullback comparison on a single module
 

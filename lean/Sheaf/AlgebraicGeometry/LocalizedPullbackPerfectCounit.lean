@@ -5,7 +5,7 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LocalizedPullbackPerfectModel
+public import WeilConjectures.AlgebraicGeometry.LocalizedPullbackPerfectModel
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic

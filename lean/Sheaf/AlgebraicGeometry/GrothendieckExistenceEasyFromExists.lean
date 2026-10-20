@@ -5,22 +5,14 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 import Sheaf.RingTheory.FiniteIffFormalGlueing
-import Sheaf.RingTheory.FormalGlueingIsogeny
+import WeilConjectures.RingTheory.FormalGlueingIsogeny
 import Sheaf.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.CompletionIsogenyFromHomLift
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import Sheaf.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModule

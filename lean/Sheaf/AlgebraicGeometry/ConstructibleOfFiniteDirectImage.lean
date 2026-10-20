@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.SixFunctors.Finite.Counit
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
+import WeilConjectures.AlgebraicGeometry.ConstructibleSubsheafNoetherian
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!

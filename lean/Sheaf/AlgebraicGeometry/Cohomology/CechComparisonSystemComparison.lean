@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
+public import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonSystem
 
 @[expose] public section
 universe u

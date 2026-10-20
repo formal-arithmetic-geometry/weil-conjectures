@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Paper.ShiftedKoszulAugmentation
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 

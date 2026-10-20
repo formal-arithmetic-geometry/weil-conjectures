@@ -23,7 +23,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestrict
 
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

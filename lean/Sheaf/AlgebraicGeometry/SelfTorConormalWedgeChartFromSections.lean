@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
+public import WeilConjectures.AlgebraicGeometry.SelfTorAffineSection
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafQuasicoherent

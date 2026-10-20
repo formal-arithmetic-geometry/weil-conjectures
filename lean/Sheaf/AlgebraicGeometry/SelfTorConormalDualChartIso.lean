@@ -9,10 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-public import Sheaf.RingTheory.SelfTorConormalComparison
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.RingTheory.SelfTorConormalComparison
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.SelfTorChartSquareDualization
+import WeilConjectures.AlgebraicGeometry.SelfTorChartSquareDualization
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-! # Chart factorizations of the canonical exterior-to-self-Tor comparison

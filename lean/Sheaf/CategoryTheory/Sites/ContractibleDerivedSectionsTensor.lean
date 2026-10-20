@@ -27,11 +27,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedC
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Homology.FlatTruncationTower
+import WeilConjectures.Algebra.Homology.FlatTruncationTower
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Algebra.Homology.TelescopeColimit
-import Sheaf.Algebra.Homology.TruncationTelescope
+import WeilConjectures.Algebra.Homology.TruncationTelescope
 import Sheaf.AlgebraicGeometry.ProEtale.WContractibleClopenPartition
 import Sheaf.CategoryTheory.PartitionRefinementSheafification
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions

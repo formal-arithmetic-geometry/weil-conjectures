@@ -6,9 +6,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+import WeilConjectures.AlgebraicGeometry.GlobalDerivedHom
 import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Leray comparison and the base-change mate
 Source: Stacks Project, cohomology.tex, Remark 08HY; duality.tex, Tag 0AA8,

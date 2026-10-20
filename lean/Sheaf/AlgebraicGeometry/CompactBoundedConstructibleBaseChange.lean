@@ -5,7 +5,7 @@ Authors: SHEAF group NS
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 public import Mathlib.AlgebraicGeometry.Noetherian

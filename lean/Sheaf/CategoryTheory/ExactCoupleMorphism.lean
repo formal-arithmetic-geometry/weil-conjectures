@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.CategoryTheory.HalfPlaneConvergence
+public import WeilConjectures.CategoryTheory.HalfPlaneConvergence
 import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
 
 /-!

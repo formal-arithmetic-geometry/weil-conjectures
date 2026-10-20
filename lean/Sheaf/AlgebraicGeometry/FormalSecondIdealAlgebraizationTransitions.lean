@@ -5,16 +5,15 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import all WeilConjectures.AlgebraicGeometry.CoherentFormalModule
-import all Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import all WeilConjectures.AlgebraicGeometry.ThickeningSystemPushforwardAdic
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemComparison
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
+import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
+import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemComparison
 
 /-! # Adjacent maps between second-ideal algebraizations
 

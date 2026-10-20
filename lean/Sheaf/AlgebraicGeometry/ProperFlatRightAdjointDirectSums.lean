@@ -5,19 +5,19 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.CategoryTheory.Limits.Preserves.Basic
-import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
-import Sheaf.AlgebraicGeometry.PerfectObjectCompact
+import WeilConjectures.AlgebraicGeometry.DerivedQCohPerfectGeneration
+import WeilConjectures.AlgebraicGeometry.PerfectObjectCompact
 import Sheaf.AlgebraicGeometry.ProperFlatDerivedDirectImagePerfect
-import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
-import Sheaf.AlgebraicGeometry.DerivedQCohCompactGenerationCore
-import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.PerfectComplexRepresentatives
+import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactGenerationCore
+import WeilConjectures.AlgebraicGeometry.SupportedPerfectGenerator
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products

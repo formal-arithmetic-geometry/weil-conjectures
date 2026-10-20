@@ -5,7 +5,7 @@ Authors: SHEAF group Q48
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories

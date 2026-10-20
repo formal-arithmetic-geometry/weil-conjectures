@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.MixedAffineSectionsComplexUnit
+public import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsComplexUnit
 public import Sheaf.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
-import Sheaf.AlgebraicGeometry.MixedPullbackSectionsCounitUnit
+import WeilConjectures.AlgebraicGeometry.MixedPullbackSectionsCounitUnit
 import all Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 
 /-! # The target affine model and its pullback unit normalization

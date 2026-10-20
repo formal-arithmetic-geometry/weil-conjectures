@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 import Mathlib.Topology.Defs.Filter
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
@@ -20,8 +20,8 @@ import Sheaf.AlgebraicGeometry.ProjectiveLineGenusZero
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
 import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
-import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
-import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
+import WeilConjectures.AlgebraicGeometry.Curve.PicardDecomposition
+import WeilConjectures.AlgebraicGeometry.Curve.PicProperNTorsion
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 import Sheaf.AlgebraicGeometry.SecondKummerDivisors
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem

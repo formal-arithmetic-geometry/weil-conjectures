@@ -11,7 +11,7 @@ public import Mathlib.Topology.Sober
 import Mathlib.Topology.Baire.Lemmas
 import WeilConjectures.AlgebraicGeometry.GenericClosedSubsetFibreNonempty
 import WeilConjectures.AlgebraicGeometry.GenericFibreClosedCoverSpread
-import Sheaf.AlgebraicGeometry.GenericOpenFibreDensity
+import WeilConjectures.AlgebraicGeometry.GenericOpenFibreDensity
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Lower bound for generic-fibre components

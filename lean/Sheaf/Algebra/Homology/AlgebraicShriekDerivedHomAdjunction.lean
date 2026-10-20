@@ -15,8 +15,8 @@ import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import Sheaf.CategoryTheory.RingedSiteDualityMaps
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients

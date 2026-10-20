@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
@@ -15,10 +15,10 @@ public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Length
 public import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
+import WeilConjectures.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
 import Sheaf.AlgebraicGeometry.SnapperNumericalPolynomial
 import Sheaf.RingTheory.LengthOfSupportAtMaximalIdeal
-import Sheaf.Topology.ClosedImmersionPushforwardCohomology
+import WeilConjectures.Topology.ClosedImmersionPushforwardCohomology
 import WeilConjectures.Topology.ClosedImmersionPushforwardExact
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact

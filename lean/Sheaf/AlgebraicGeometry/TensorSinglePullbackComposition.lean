@@ -5,7 +5,7 @@ Authors: SHEAF group A4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedMateEvaluation
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 public import WeilConjectures.AlgebraicGeometry.TensorCoefficientComparison
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComposition

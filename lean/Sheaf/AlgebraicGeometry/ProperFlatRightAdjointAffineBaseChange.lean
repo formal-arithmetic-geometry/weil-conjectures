@@ -4,14 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffinePullbackPerfectDetectsIso
+import WeilConjectures.AlgebraicGeometry.AffinePullbackPerfectDetectsIso
 import Sheaf.AlgebraicGeometry.ProperFlatAffineBaseChangeHomBijective
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 
 @[expose] public section
 

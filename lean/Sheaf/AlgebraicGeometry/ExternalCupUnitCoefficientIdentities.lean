@@ -5,11 +5,11 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
+public import WeilConjectures.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.AlgebraicGeometry.ScalarCupCoefficientNaturality
-import Sheaf.AlgebraicGeometry.ScalarCupUnitIdentities
-import Sheaf.AlgebraicGeometry.ScalarUnitClassPullback
+import WeilConjectures.AlgebraicGeometry.ScalarCupCoefficientNaturality
+import WeilConjectures.AlgebraicGeometry.ScalarCupUnitIdentities
+import WeilConjectures.AlgebraicGeometry.ScalarUnitClassPullback
 
 /-! # External cup with one after identifying the unit coefficients
 

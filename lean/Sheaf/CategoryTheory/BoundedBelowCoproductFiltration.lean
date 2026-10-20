@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
-import Sheaf.CategoryTheory.CoproductTruncationCouple
+import WeilConjectures.CategoryTheory.CoproductTruncationCouple
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 
 /-! # Finite filtered comparison from a bounded-below second-page coproduct comparison

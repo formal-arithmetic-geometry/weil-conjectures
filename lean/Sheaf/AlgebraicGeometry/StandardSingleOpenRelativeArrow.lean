@@ -6,8 +6,8 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeMap
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
-import Sheaf.AlgebraicGeometry.DerivedBaseChangeSourceIso
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeSourceIso
 import Sheaf.AlgebraicGeometry.SingleOpenTensorCoefficientCoherence
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived

@@ -115,18 +115,17 @@ lemma ProEtale.eqToHom_lowerStar_app_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y}
     (p : (g)_*[A] = (g')_*[A]) (G : Sheaf (Scheme.ProEt.topology Z) A) (V : Y.ProEt) :
     ((eqToHom p).app G).hom.app (op V) =
       G.obj.map ((MorphismProperty.Over.pullbackCongr e.symm).hom.app V).op := by
-  cases e
+  subst e
   rw [eqToHom_refl, NatTrans.id_app, ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app]
   erw [← G.obj.map_id]
   congr 1
   apply Quiver.Hom.unop_inj
   apply MorphismProperty.Over.Hom.ext
-  apply pullback.hom_ext
-  · simp only [Functor.op_obj, Functor.id_obj, Functor.const_obj_obj, unop_id,
+  apply pullback.hom_ext <;>
+    simp only [Functor.op_obj, Functor.id_obj, Functor.const_obj_obj, unop_id,
       MorphismProperty.Comma.id_hom, Comma.id_left, Category.id_comp, Quiver.Hom.unop_op,
-      MorphismProperty.Over.pullbackCongr_hom_app_left_fst]
-  · rw [MorphismProperty.Over.pullbackCongr_refl]
-    simp
+      MorphismProperty.Over.pullbackCongr_hom_app_left_fst,
+      MorphismProperty.Over.pullbackCongr_hom_app_left_snd]
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The components of the composition isomorphism `f_* ⋙ g_* ≅ (f ≫ g)_*` are the restriction
@@ -175,35 +174,6 @@ lemma ProEtale.lowerStarComp_id_left {X Y : Scheme.{u}} (k : X ⟶ Y) :
   simpa only [Iso.trans_hom, Functor.isoWhiskerRight_hom,
     lowerStarCongr, eqToIso.hom, Iso.symm_hom,
     eqToIso.inv] using congrArg Iso.hom (ProEtale.legacy_lowerStarComp_id_left A k)
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The composition isomorphisms of pushforwards are associative, up to `eqToHom` along
-`(h₁ ≫ h₂) ≫ h₃ = h₁ ≫ h₂ ≫ h₃`: on sections, both sides are the restriction maps along the
-canonical isomorphisms of iterated fibre products. -/
-lemma ProEtale.coefficient_lowerStarComp_assoc {X₀ X₁ X₂ X₃ : Scheme.{u}}
-    (h₁ : X₀ ⟶ X₁) (h₂ : X₁ ⟶ X₂)
-    (h₃ : X₂ ⟶ X₃) :
-    Functor.whiskerLeft (h₁)_*[A] (lowerStarComp A h₂ h₃).hom ≫
-        (lowerStarComp A h₁ (h₂ ≫ h₃)).hom =
-      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (lowerStarComp A h₁ h₂).hom (h₃)_*[A] ≫
-        (lowerStarComp A (h₁ ≫ h₂) h₃).hom ≫ eqToHom (by rw [Category.assoc]) := by
-  apply (cancel_epi (Functor.associator (h₁)_*[A] (h₂)_*[A] (h₃)_*[A]).hom).mp
-  simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.trans_hom,
-    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-    lowerStarCongr, eqToIso.hom] using
-      congrArg Iso.hom (ProEtale.legacy_lowerStarComp_assoc A h₁ h₂ h₃)
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The composition isomorphism `(𝟙 X)_* ⋙ k_* ≅ (𝟙 X ≫ k)_*` is induced by the identity
-isomorphism `(𝟙 X)_* ≅ 𝟭`, up to `eqToHom` along `𝟙 X ≫ k = k`. -/
-lemma ProEtale.coefficient_lowerStarComp_id_left {X Y : Scheme.{u}} (k : X ⟶ Y) :
-    (lowerStarComp A (𝟙 X) k).hom =
-      Functor.whiskerRight (lowerStarId A X).hom (k)_*[A] ≫ (Functor.leftUnitor _).hom ≫
-        eqToHom (by rw [Category.id_comp]) := by
-  simpa only [Iso.trans_hom, Functor.isoWhiskerRight_hom,
-    lowerStarCongr, eqToIso.hom, Iso.symm_hom,
-    eqToIso.inv] using congrArg Iso.hom (ProEtale.legacy_lowerStarComp_id_left A k)
-
 
 end LowerStar
 

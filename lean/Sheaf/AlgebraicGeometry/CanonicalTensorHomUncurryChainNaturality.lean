@@ -5,8 +5,8 @@ Authors: SHEAF group W3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
-import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation
+public import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
+import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 

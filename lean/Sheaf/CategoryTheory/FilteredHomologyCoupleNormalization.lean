@@ -6,7 +6,6 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.CategoryTheory.FilteredHomologyExactCouple
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.FilteredHomologyCoupleData
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 

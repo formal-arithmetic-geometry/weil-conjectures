@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.EtaleNormalRing
+import WeilConjectures.RingTheory.EtaleNormalRing
 import Sheaf.RingTheory.ValuationRingNormal
 import Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra

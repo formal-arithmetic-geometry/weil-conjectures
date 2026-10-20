@@ -5,14 +5,14 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import Sheaf.AlgebraicGeometry.UniversalLowestFiberRanks
 import Sheaf.AlgebraicGeometry.FiniteFreeResidueModelPullback
-import Sheaf.AlgebraicGeometry.FiniteFreeBottomDifferentialZero
+import WeilConjectures.AlgebraicGeometry.FiniteFreeBottomDifferentialZero
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Zero bottom differential on a universally free locus

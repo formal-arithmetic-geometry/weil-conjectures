@@ -8,12 +8,12 @@ module
 public import Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy
 public import Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.CategoryTheory.DegreewiseFilteredAcyclic
+import WeilConjectures.CategoryTheory.DegreewiseFilteredAcyclic
 import Sheaf.Algebra.Homology.FilteredQuasiIsoFractions
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 public import Mathlib.CategoryTheory.Localization.Construction
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 import Sheaf.CategoryTheory.BoundedFilteredComplexPageCore
 import WeilConjectures.CategoryTheory.Abelian.Filtration
 

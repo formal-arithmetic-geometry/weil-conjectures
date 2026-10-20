@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.ConeHorizontalProjection
 public import WeilConjectures.Algebra.Homology.ConeHorizontalStepStable
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 import Sheaf.Algebra.Homology.ConeHorizontalQuotientIsoExists
 
 @[expose] public section

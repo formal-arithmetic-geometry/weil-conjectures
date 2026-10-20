@@ -1,7 +1,7 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.GrothendieckExistenceEasyTorsionTriple
+public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+import WeilConjectures.AlgebraicGeometry.GrothendieckExistenceEasyTorsionTriple
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceEasyFromExists
 import Sheaf.AlgebraicGeometry.CompletionIsogenyFromHomLift
 

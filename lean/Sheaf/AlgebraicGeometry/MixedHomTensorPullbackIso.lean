@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 import all Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
-import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
+import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatTensorProduct
 import Sheaf.Algebra.Homology.KFlatPullback

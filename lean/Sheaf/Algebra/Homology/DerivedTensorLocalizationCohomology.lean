@@ -7,9 +7,9 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelMap
-import Sheaf.Algebra.Homology.DerivedTensorFirstLocalizationModels
-import Sheaf.Algebra.Homology.DerivedTensorBaseSecondLocalizationModels
+import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelMap
+import WeilConjectures.Algebra.Homology.DerivedTensorFirstLocalizationModels
+import WeilConjectures.Algebra.Homology.DerivedTensorBaseSecondLocalizationModels
 
 /-! # Localization of cohomology of a derived tensor
 

@@ -7,11 +7,11 @@ module
 
 public import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
+public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 import Sheaf.AlgebraicGeometry.IsomorphismPullbackCounit
-import Sheaf.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
+import WeilConjectures.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel

@@ -11,8 +11,8 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

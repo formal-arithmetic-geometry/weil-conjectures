@@ -6,7 +6,7 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.AlgebraicGeometry.PicardLeftCechCupConstruction
-public import Sheaf.AlgebraicGeometry.PicardExternalCupHomologyUnique
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupHomologyUnique
 import Sheaf.AlgebraicGeometry.PicardRightCechCupHomology
 import Sheaf.AlgebraicGeometry.PicardLeftRightCechCup
 

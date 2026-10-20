@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
 
 /-! # Naturality of the ordinary affine comparison on cohomology -/
 

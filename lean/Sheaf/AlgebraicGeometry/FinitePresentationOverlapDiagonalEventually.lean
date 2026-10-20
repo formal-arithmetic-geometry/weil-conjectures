@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 public import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.AlgebraicGeometry.FinitePresentationChartMapZeroEventually
+import WeilConjectures.AlgebraicGeometry.FinitePresentationChartMapZeroEventually
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Persistent eventual diagonal overlap equation

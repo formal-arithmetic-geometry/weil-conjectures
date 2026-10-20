@@ -5,7 +5,7 @@ Authors: SHEAF group N3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 
 /-! # Existence of a module pullback comparison
 

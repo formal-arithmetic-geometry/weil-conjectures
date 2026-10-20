@@ -6,14 +6,14 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.AlgebraicGeometry.SelfProductRightAdjointBaseChangeLocal
-import Sheaf.AlgebraicGeometry.DerivedPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackStructureSheaf
 
 /-!
 # Base change of a right adjoint on the self-product

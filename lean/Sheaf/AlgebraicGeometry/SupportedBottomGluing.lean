@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Sheaf.CategoryTheory.GrothendieckSpectralSequence
 import Sheaf.CategoryTheory.FirstQuadrantLowestRowEdge
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.GrothendieckEdgeCocycle
+import WeilConjectures.CategoryTheory.GrothendieckEdgeCocycle
 import Sheaf.Paper.ComparisonPullbackExact
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom

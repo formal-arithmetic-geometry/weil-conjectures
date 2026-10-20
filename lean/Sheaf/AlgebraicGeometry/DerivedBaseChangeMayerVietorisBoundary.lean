@@ -5,12 +5,12 @@ Authors: SHEAF group C4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
-import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisFunctorial
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 
 
 /-! # Connecting square for relative Mayer--Vietoris base change

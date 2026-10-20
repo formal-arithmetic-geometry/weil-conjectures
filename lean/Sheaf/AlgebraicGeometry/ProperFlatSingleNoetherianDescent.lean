@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Sheaf.AlgebraicGeometry.EventuallyProper
+import WeilConjectures.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.FlatModuleOnLaterStage
 import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
 import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation

@@ -5,8 +5,8 @@ Authors: SHEAF group N1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationLocalRetraction
 import Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationLocalSection

@@ -1,7 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
-public import Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounitTransport
-import Sheaf.AlgebraicGeometry.PinnedPullbackCompositionShifts
+public import WeilConjectures.AlgebraicGeometry.IsomorphicSingleTensorCounitTransport
+import WeilConjectures.AlgebraicGeometry.PinnedPullbackCompositionShifts
 /-! # Counit equation for canonical transport
 Source: Stacks Project, Tags 08HY, 0096 and 0D5S.
 (blueprint: lem-pc-isomorphic-single-tensor-counit-equation). -/

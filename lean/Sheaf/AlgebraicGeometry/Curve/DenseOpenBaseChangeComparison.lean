@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
 
-import all Sheaf.AlgebraicGeometry.Curve.DenseOpenBaseChange
+import all WeilConjectures.AlgebraicGeometry.Curve.DenseOpenBaseChange
 import Mathlib.CategoryTheory.Adjunction.Restrict
 import Mathlib.CategoryTheory.Adjunction.Whiskering
 import WeilConjectures.SixFunctors.OpenClosed.Exact

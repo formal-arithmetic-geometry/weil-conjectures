@@ -1,15 +1,15 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChange
-import Sheaf.AlgebraicGeometry.DerivedQCohStandardAdjunction
-import all Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import WeilConjectures.AlgebraicGeometry.DerivedQCohStandardAdjunction
+import all WeilConjectures.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 
 @[expose] public section
 set_option autoImplicit false

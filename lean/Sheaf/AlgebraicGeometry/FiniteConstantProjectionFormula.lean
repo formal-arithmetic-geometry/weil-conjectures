@@ -5,7 +5,7 @@ Authors: SHEAF group NH
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients

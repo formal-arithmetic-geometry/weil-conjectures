@@ -3,8 +3,8 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
-public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 
 /-! # Resolved relative rows before the overlap mate -/
 

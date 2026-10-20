@@ -14,8 +14,8 @@ public import Mathlib.SetTheory.Cardinal.Finite
 
 import Sheaf.TraceFormula.GeometricFibreComponentCountBaseChange
 import Sheaf.TraceFormula.GenericFibreComponentLowerBound
-import Sheaf.AlgebraicGeometry.GenericComponentsSplit
-import Sheaf.AlgebraicGeometry.GeometricGenericCoverSpread
+import WeilConjectures.AlgebraicGeometry.GenericComponentsSplit
+import WeilConjectures.AlgebraicGeometry.GeometricGenericCoverSpread
 import WeilConjectures.AlgebraicGeometry.EtaleGenericResidueFieldModel
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 

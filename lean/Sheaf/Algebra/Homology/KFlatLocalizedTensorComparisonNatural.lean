@@ -5,10 +5,10 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
+public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.BaseTensorCohomologyFunctor
+import WeilConjectures.Algebra.Homology.BaseTensorCohomologyFunctor
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-! # The coefficient comparison on K-flat complexes

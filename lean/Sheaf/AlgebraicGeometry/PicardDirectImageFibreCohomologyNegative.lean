@@ -11,11 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility

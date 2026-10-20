@@ -7,10 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
-public import Sheaf.AlgebraicGeometry.OpenRestrictedComparisonComposition
-public import Sheaf.AlgebraicGeometry.OpenDerivedStalkIso
-import Sheaf.AlgebraicGeometry.OpenRestrictedOrdinaryComparisonSquare
-import Sheaf.AlgebraicGeometry.OpenRestrictedCounitCompatibility
+public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
+public import WeilConjectures.AlgebraicGeometry.OpenDerivedStalkIso
+import WeilConjectures.AlgebraicGeometry.OpenRestrictedOrdinaryComparisonSquare
+import WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitCompatibility
 
 /-! # Comparison square on literal restrictions
 

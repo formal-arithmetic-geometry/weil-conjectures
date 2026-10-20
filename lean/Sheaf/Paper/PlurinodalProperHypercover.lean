@@ -9,7 +9,7 @@ public import Sheaf.Paper.OrgogozoInductionData
 public import Sheaf.AlgebraicGeometry.ProperHypercover
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.GenericComponentsSplit
+import WeilConjectures.AlgebraicGeometry.GenericComponentsSplit
 import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import Sheaf.RingTheory.QuasiExcellentNagata
 import WeilConjectures.RingTheory.NagataRing

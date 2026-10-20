@@ -1,10 +1,10 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLift
-import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTorsion
+import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTorsion
 
 /-! # Algebraization after a supplied quotient interchange
 

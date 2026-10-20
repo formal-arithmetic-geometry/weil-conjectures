@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Sheaf.Algebra.Homology.DiagramKFlatReplacements
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlat
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-!

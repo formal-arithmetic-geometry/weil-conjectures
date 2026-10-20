@@ -5,7 +5,7 @@ Authors: SHEAF group B2
 -/
 module
 
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 

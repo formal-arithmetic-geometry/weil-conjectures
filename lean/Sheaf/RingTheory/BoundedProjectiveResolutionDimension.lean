@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.CategoryTheory.Abelian.Projective.Dimension
 import Mathlib.CategoryTheory.Abelian.Projective.Ext
-import Sheaf.RingTheory.ProjectiveResolutionSuccSplice
+import WeilConjectures.RingTheory.ProjectiveResolutionSuccSplice
 
 /-!
 # Bounded projective resolutions and projective dimension

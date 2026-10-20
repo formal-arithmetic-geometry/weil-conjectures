@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -50,7 +50,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.AlgebraicGeometry.FiniteTypeSheafFiniteness
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts
+import WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 import Sheaf.AlgebraicGeometry.EtaleDerivedTensorDirectSums
 import Sheaf.Paper.ProjectionMateExact

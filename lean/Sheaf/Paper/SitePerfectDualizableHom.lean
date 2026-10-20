@@ -24,7 +24,7 @@ import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
 import Sheaf.Paper.SfRationalizationKaroubi
 import Sheaf.Paper.BasicOperationsCoefficientReduction
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel

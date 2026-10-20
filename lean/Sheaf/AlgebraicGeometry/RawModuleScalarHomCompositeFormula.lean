@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
-import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula
+import WeilConjectures.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula
 import Sheaf.AlgebraicGeometry.RawModuleScalarHomEvaluation
 
 /-! # The bundled scalar Hom composite

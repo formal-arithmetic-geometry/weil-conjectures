@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineSpectrumDirectImageCoordinates
+public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDirectImageCoordinates
 
 /-! # Affine spectrum unit normalization
 

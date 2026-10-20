@@ -5,7 +5,7 @@ Authors: SHEAF groups S3 and J3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 import Sheaf.AlgebraicGeometry.StrictLocalComplexSectionsMate
 
 /-! # The derived mate on a neighbourhood germ -/

@@ -80,7 +80,7 @@ lemma Etale.pullbackSquareComparison_eq (sq : CommSq g' f' f g) :
         Etale.upperStarCompDerivedPlus A g' f := by
   apply Iso.ext
   rw [Etale.upperStarCompDerivedPlus_eq_eqToIso_trans A f' g (g' ≫ f) sq.w]
-  simp only [Etale.pullbackSquareComparison_def, Iso.trans_hom, Iso.symm_hom, Iso.trans_inv,
+  simp only [Etale.pullbackSquareComparison, Iso.trans_hom, Iso.symm_hom, Iso.trans_inv,
     eqToIso.inv, eqToIso.hom, Category.assoc]
   rfl
 

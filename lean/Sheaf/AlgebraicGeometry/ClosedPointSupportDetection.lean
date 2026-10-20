@@ -6,8 +6,8 @@ Authors: SHEAF group Q07
 module
 
 public import Mathlib.FieldTheory.IsSepClosed
-public import Sheaf.AlgebraicGeometry.EtaleSupport
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.EtaleSupport
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

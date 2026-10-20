@@ -9,7 +9,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.UniformFiniteFilteredLocalization
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.CategoryTheory.Quotient
 

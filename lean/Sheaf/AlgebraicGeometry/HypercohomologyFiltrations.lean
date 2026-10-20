@@ -7,11 +7,10 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.TruncationCouple
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import Sheaf.CategoryTheory.AbutmentImageFiltration
 import Sheaf.CategoryTheory.ExactCoupleMorphism
 import all Sheaf.CategoryTheory.ExactFunctorCouple
 import WeilConjectures.CategoryTheory.AbutmentImageFiltration

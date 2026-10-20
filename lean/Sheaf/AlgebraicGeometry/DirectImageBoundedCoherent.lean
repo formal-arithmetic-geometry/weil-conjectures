@@ -5,17 +5,17 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.CoherentSupportProperHigherDirectImage
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import WeilConjectures.AlgebraicGeometry.CoherentSupportProperHigherDirectImage
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.ProperSupportHigherDirectImageBound
+import WeilConjectures.AlgebraicGeometry.ProperSupportHigherDirectImageBound
 import Mathlib.Data.Int.Interval
-import Sheaf.CategoryTheory.TruncationHypercohomology
+import WeilConjectures.CategoryTheory.TruncationHypercohomology
 
 /-! # Proper-support direct image preserves bounded coherent complexes
 

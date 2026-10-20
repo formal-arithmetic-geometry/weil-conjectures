@@ -8,14 +8,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Affine
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
-public import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
-public import Sheaf.AlgebraicGeometry.GenusInvariant
+public import WeilConjectures.AlgebraicGeometry.Curve.PicProperNTorsion
+public import WeilConjectures.AlgebraicGeometry.GenusInvariant
 import Sheaf.AlgebraicGeometry.Curve.ConstantLowDegreeBaseChange
 import Sheaf.AlgebraicGeometry.Curve.ConstantKummerNaturality
 import Sheaf.AlgebraicGeometry.Curve.ConstantProperDegreeCoordinates
-import Sheaf.AlgebraicGeometry.IsProperOrIsAffine
+import WeilConjectures.AlgebraicGeometry.IsProperOrIsAffine
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
 import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 

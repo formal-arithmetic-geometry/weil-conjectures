@@ -6,9 +6,8 @@ Authors: SHEAF group NA
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Ring.ULift
@@ -16,7 +15,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.Algebra.Homology.DerivedInternalHom
+import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import Sheaf.AlgebraicGeometry.CompactBoundedConstructibleBaseChange
 import Sheaf.AlgebraicGeometry.FiniteLisseFieldDual
 import WeilConjectures.Compactification.BaseChange

@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapCompositeStageMap
-import Sheaf.AlgebraicGeometry.PerfectOverlapCanonicalSiteTriangle
+import WeilConjectures.AlgebraicGeometry.PerfectOverlapCanonicalSiteTriangle
 import Sheaf.AlgebraicGeometry.PerfectOverlapNestedSiteCompatibility
 import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
 import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence

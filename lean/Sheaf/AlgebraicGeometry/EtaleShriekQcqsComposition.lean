@@ -6,7 +6,7 @@ Authors: SHEAF group ND
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import Sheaf.AlgebraicGeometry.CompatibleCompactificationTriangle
 import Sheaf.AlgebraicGeometry.EtaleOpenProperInterchange
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence

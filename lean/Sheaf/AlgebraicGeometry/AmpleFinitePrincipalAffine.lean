@@ -8,10 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpen
 import Sheaf.AlgebraicGeometry.AmpleFiniteSetAffine
-import Sheaf.AlgebraicGeometry.AmpleIdealSection
+import WeilConjectures.AlgebraicGeometry.AmpleIdealSection
 import Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal
 import WeilConjectures.RingTheory.GradedPrimeAvoidance
-import Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap
+import WeilConjectures.AlgebraicGeometry.AmpleProjCanonicalMap
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Affine section neighbourhoods of finite sets

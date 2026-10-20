@@ -1,13 +1,13 @@
 module
 
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.AlgebraicGeometry.FormalSystemsPullback
-import Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective
+import WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
+import WeilConjectures.AlgebraicGeometry.GrothendieckExistenceProjective
 import Sheaf.AlgebraicGeometry.ChowFormalSystemExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 

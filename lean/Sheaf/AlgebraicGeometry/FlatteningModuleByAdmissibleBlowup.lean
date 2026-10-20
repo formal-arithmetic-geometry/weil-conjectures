@@ -17,7 +17,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType
+import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteType
 import Mathlib.RingTheory.FiniteStability
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 import Mathlib.RingTheory.FinitePresentation
@@ -31,7 +31,7 @@ import Mathlib.RingTheory.Unramified.Basic
 import Mathlib.RingTheory.Unramified.Finite
 import WeilConjectures.AlgebraicGeometry.AffineChartRelativeFlatCriterion
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
 import Mathlib.RingTheory.Spectrum.Prime.Chevalley
 import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationCokernel
 import Sheaf.AlgebraicGeometry.GenericFreeBlowup

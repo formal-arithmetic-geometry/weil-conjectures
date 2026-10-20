@@ -16,7 +16,7 @@ public import Sheaf.AlgebraicGeometry.RelativeTorsorCohomology
 public import Sheaf.CategoryTheory.Sites.TorsorWithSection
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import Mathlib.Algebra.Homology.HomologySequence
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier

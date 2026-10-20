@@ -5,8 +5,8 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization
 

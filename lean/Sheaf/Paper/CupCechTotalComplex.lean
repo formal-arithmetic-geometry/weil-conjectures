@@ -7,8 +7,7 @@ module
 
 import Sheaf.AlgebraicGeometry.ModuleCechZeroLemmas
 public import Sheaf.Paper.CechCupResolutionComparisonData
-public import Sheaf.AlgebraicGeometry.ModuleCechComparison
-import all Sheaf.AlgebraicGeometry.ModuleCechComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
 
 /-! # Cech total complexes of computing resolutions
 

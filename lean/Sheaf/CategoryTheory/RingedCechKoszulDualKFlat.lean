@@ -8,7 +8,7 @@ public import Sheaf.CategoryTheory.RingedKoszulSystem
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 -- Reuse the private product-projection and internal-Hom zero lemmas.
-import all Sheaf.Algebra.Homology.FiniteFreeZeroHomologyEvaluationIso
+import all WeilConjectures.Algebra.Homology.FiniteFreeZeroHomologyEvaluationIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 

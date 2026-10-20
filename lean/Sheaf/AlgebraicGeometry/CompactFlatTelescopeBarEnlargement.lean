@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
+public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
 import Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation
 
 /-! # Bar enlargement of a split compact-generator tower

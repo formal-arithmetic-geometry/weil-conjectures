@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 
 import Sheaf.AlgebraicGeometry.StandardSingleStalkFlatCounitModel
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Surjectivity of relatively flat single base change

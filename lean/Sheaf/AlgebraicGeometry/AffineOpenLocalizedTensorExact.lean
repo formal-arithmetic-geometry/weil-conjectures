@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
+import WeilConjectures.AlgebraicGeometry.AffineTorAmplitudeCriterion
 import Sheaf.AlgebraicGeometry.PrincipalLocalizationSheafTorBounds
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Mathlib.RingTheory.Flat.Stability

@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
-import Sheaf.AlgebraicGeometry.Dimension
+import WeilConjectures.AlgebraicGeometry.Dimension
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.AlgebraicGeometry.Properties

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 import Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation
-import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
+import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyLimit
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 import Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit

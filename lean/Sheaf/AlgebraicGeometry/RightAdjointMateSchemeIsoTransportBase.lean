@@ -5,9 +5,9 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.CategoryTheory.Comma.Arrow
-import Sheaf.AlgebraicGeometry.DerivedBaseChangeSourceIso
+import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeSourceIso
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Transport of a right-adjoint mate across a scheme isomorphism

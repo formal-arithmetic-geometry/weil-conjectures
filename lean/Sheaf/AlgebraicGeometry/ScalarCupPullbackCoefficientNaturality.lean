@@ -6,7 +6,7 @@ Authors: SHEAF group S4
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-import Sheaf.AlgebraicGeometry.ScalarCupCoefficientNaturality
+import WeilConjectures.AlgebraicGeometry.ScalarCupCoefficientNaturality
 import Sheaf.AlgebraicGeometry.ScalarCupPullbackNaturality
 
 /-! # Scalar cup products under pullback and coefficient maps

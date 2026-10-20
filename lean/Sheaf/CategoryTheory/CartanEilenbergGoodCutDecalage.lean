@@ -5,13 +5,13 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexDecalageComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.TotalComplexSymmetry
 import Sheaf.CategoryTheory.MapGoodUpperTruncation
 import Sheaf.CategoryTheory.GoodTruncationTotalDecalage
-import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
+import WeilConjectures.CategoryTheory.CartanEilenbergMappedTotal
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # The good-cut total and decalage

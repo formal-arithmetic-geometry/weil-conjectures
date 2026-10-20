@@ -5,7 +5,7 @@ Authors: SHEAF group C4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat

@@ -5,11 +5,11 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardTermwiseModels
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounit
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
+public import WeilConjectures.AlgebraicGeometry.PicardTermwiseModels
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+import WeilConjectures.AlgebraicGeometry.PicardTermwiseCompositeCounit
+import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
+import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian

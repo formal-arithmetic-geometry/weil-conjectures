@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 

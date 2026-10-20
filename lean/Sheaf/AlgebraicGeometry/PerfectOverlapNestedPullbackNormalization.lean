@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenCounitCompatibility
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenCounitCompatibility
 import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
 
 /-! # Normalization of the nested pullback square on restricted objects -/

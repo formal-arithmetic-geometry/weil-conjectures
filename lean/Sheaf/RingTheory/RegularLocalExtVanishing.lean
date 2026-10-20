@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.ProjectiveResolutionExtCharacterization
-import Sheaf.RingTheory.RegularLocalFiniteGlobalDimension
+import WeilConjectures.RingTheory.ProjectiveResolutionExtCharacterization
+import WeilConjectures.RingTheory.RegularLocalFiniteGlobalDimension
 
 /-!
 # Ext vanishing over a regular local ring

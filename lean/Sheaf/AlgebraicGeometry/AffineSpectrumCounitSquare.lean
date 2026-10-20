@@ -5,9 +5,9 @@ Authors: SHEAF group A4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
-public import Sheaf.AlgebraicGeometry.AffineSpectrumOrdinaryComparisonSquare
-import Sheaf.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
+public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
+public import WeilConjectures.AlgebraicGeometry.AffineSpectrumOrdinaryComparisonSquare
+import WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
 
 /-! # The affine spectrum derived counit square
 

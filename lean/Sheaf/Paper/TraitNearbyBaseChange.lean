@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.OrientedNearbyCycles
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSheafColimit
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageLargeFilteredColimit
 import Sheaf.AlgebraicGeometry.StrictHenselization

@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
+public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 /-! # Exact scalar extension preserves bounded constructible module objects
 
 Source: upstream master, SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean,

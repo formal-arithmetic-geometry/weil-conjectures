@@ -6,13 +6,13 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.Algebra.Homology.NormalizedRingHomExtension
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Sheaf.Algebra.Homology.DerivedChangeOfRings
 import Sheaf.Algebra.Homology.KFlatResolution
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.Algebra.Homology.RingProjectiveInternalHomExact
 import Sheaf.Algebra.Homology.RingBoundedProjectiveExtension
 

@@ -44,7 +44,7 @@ import Sheaf.Paper.FiniteCoefficientTensorCtf
 import Sheaf.Algebra.Homology.DerivedTensor
 import Sheaf.CategoryTheory.RingedSitePerfectDuality
 import Sheaf.Algebra.Homology.SitePerfectTorWindow
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
@@ -61,8 +61,8 @@ import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Paper.FiniteConstructibleHom
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -110,7 +110,7 @@ import Sheaf.SixFunctors.IntegralVerdier
 import Sheaf.SixFunctors.RationalOperations
 import Sheaf.SixFunctors.RationalVerdier
 import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 
 /-! # Stability of the constructible finite-Tor domains
 

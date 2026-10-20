@@ -18,7 +18,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.Paper.AmbientIndDerivedTriangulated
 import Sheaf.Paper.ConstructibleCompactnessBounded
-import Sheaf.CategoryTheory.CompactObjectsThick
+import WeilConjectures.CategoryTheory.CompactObjectsThick
 import Sheaf.Paper.AmbientIndDerivedSums
 import Sheaf.Paper.FiniteWindow
 import Sheaf.Paper.UniformConstructibleExt

@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.CategoryTheory.CartanEilenbergProperties
 import Sheaf.CategoryTheory.DoubleComplexTotal
 import WeilConjectures.CategoryTheory.GrothendieckComposablePair
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import WeilConjectures.CategoryTheory.HypercohomologyFirstPage
 import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 

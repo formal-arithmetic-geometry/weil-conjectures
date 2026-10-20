@@ -30,7 +30,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic

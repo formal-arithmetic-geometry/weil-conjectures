@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Topology.Algebra.Group.Defs
 public import Mathlib.Topology.Separation.Profinite
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
-import Sheaf.RepresentationTheory.DiscreteContinuousFunctorialInjectives
+import WeilConjectures.RepresentationTheory.DiscreteContinuousFunctorialInjectives
 
 /-!
 # Injective embeddings of discrete continuous representations

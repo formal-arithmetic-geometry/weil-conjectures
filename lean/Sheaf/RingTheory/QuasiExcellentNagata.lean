@@ -7,12 +7,12 @@ module
 
 public import Sheaf.RingTheory.ExcellentRing
 public import WeilConjectures.RingTheory.NagataRing
-import Sheaf.RingTheory.FiniteTypeGRing
+import WeilConjectures.RingTheory.FiniteTypeGRing
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.RegularRingNormal
+import WeilConjectures.RingTheory.RegularRingNormal
 import WeilConjectures.RingTheory.IsN1OfIsAnalyticallyUnramified
-import Sheaf.RingTheory.IsN1OfLocalCharacterization
+import WeilConjectures.RingTheory.IsN1OfLocalCharacterization
 import Sheaf.RingTheory.RegularMapReducedTarget
 import Sheaf.RingTheory.UniversallyJapaneseN1Criterion
 import WeilConjectures.RingTheory.AdicCompletionNoetherian

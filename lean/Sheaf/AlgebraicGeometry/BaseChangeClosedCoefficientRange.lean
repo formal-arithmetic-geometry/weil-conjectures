@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
+public import WeilConjectures.AlgebraicGeometry.BaseChangeStalkTransition
 import Sheaf.AlgebraicGeometry.ClosedCoefficientSourceTransitionIso
 import Sheaf.AlgebraicGeometry.ClosedCoefficientTargetTransitionIso
-import Sheaf.AlgebraicGeometry.BaseChangeTargetCoefficientNaturality
+import WeilConjectures.AlgebraicGeometry.BaseChangeTargetCoefficientNaturality
 
 /-! # Closed coefficient range comparison
 

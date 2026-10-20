@@ -14,6 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 import Sheaf.Paper.CondensedQbarExchangeEquality
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
+public import Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-!
 # Condensed finite-to-algebraic-closure coefficient change and exchange

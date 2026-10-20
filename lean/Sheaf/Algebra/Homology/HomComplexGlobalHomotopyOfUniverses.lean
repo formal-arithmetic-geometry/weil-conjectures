@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.Algebra.Homology.HomotopyCategory
 public import Mathlib.Algebra.Category.Grp.Abelian
-import Sheaf.Algebra.Homology.HomComplexProjections
+import WeilConjectures.Algebra.Homology.HomComplexProjections
 import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 
 /-!

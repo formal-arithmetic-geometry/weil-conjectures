@@ -5,13 +5,13 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Sheaf.AlgebraicGeometry.LocalStrictPerfectStalkProjectiveModel
+import WeilConjectures.AlgebraicGeometry.LocalStrictPerfectStalkProjectiveModel
 import Sheaf.AlgebraicGeometry.StalkFreeResidueCohomologyComparison
 import Mathlib.RingTheory.LocalRing.Module
 

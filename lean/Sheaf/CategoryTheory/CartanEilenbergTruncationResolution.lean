@@ -5,12 +5,12 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import all WeilConjectures.Algebra.Homology.UpperTruncationStepQuotient
 import Mathlib.Algebra.Homology.TotalComplexSymmetry
-import Sheaf.CategoryTheory.CartanEilenbergTotalResolution
+import WeilConjectures.CategoryTheory.CartanEilenbergTotalResolution
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import Sheaf.CategoryTheory.LeftExactTruncationIso
 

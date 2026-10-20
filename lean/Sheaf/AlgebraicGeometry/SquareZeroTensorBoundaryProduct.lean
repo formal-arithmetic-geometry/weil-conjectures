@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
+public import WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import Sheaf.Paper.BoundaryDerivationSquareZero
 import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryGradedRealization

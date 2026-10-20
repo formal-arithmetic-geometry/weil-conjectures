@@ -5,7 +5,6 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TorsionSubsheafQuotient
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.RingTheory.RegularLocalRing.Defs

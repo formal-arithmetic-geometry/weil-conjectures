@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
-import Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 

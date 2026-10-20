@@ -6,7 +6,7 @@ Authors: SHEAF group NA
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
@@ -14,11 +14,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.GroupTheory.Exponent
-import Sheaf.AlgebraicGeometry.EtaleSupport
+import WeilConjectures.AlgebraicGeometry.EtaleSupport
 import Sheaf.AlgebraicGeometry.AffineDirectImageSupportBound
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSupport
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology

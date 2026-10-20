@@ -10,9 +10,9 @@ public import Sheaf.Compactification.BoundaryRefinement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import Mathlib.CategoryTheory.Adjunction.Unique
-import Sheaf.CategoryTheory.BrownRepresentabilityHomLocallySmall
+import WeilConjectures.CategoryTheory.BrownRepresentabilityHomLocallySmall
 import Sheaf.SixFunctorsBasics.BrownHypotheses
-import Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts
+import WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
 import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Sheaf.Paper.LocalizingClosureExistence

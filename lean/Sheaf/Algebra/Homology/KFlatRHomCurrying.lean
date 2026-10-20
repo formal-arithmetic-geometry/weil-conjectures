@@ -5,14 +5,14 @@ Authors: SHEAF group W3
 -/
 module
 
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Sheaf.Algebra.Homology.KInjectiveHomComplex
-public import Sheaf.Algebra.Homology.HomTensorDegreewise
-public import Sheaf.Algebra.Homology.HomTensorDifferential
-public import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.HomTensorNaturality
+public import WeilConjectures.Algebra.Homology.HomTensorDegreewise
+public import WeilConjectures.Algebra.Homology.HomTensorDifferential
+public import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.HomTensorNaturality
 
 /-! # Normalized currying on K-flat complex representatives
 

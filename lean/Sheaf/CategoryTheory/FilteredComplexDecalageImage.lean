@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.FilteredComplexDecalageComplex
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import all Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
+import all WeilConjectures.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
 
 /-! # Shifted cycle complexes have the original cohomology images
 

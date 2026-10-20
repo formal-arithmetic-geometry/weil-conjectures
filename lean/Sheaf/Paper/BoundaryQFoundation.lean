@@ -9,7 +9,7 @@ public import Sheaf.Paper.BoundaryProEtaleProjectionComparison
 public import Sheaf.Paper.DualityPairing
 
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed

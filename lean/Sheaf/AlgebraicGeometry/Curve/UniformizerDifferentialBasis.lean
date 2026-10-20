@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.Separable
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
-import Sheaf.AlgebraicGeometry.Dimension
+import WeilConjectures.AlgebraicGeometry.Dimension
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties

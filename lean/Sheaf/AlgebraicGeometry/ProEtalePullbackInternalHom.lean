@@ -14,6 +14,7 @@ import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.InternalHom
+public import Sheaf.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 
 /-! # Internal Hom and weakly etale coefficient pullback
 

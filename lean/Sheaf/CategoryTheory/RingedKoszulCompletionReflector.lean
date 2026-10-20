@@ -11,7 +11,7 @@ import Sheaf.CategoryTheory.RingedCechKoszulDualLimit
 import Sheaf.Paper.ExtendedCechCompletionModel
 import Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal
 import Sheaf.Paper.RingedLocalizationRHomCalculus
-import Sheaf.Algebra.Homology.DerivedInternalHom
+import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 
 /-!

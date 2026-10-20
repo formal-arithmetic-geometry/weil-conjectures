@@ -6,10 +6,10 @@ Authors: SHEAF group J4
 module
 
 public import Sheaf.CategoryTheory.FilteredComplexQuotientCoherence
-public import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+public import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
 import Sheaf.CategoryTheory.FilteredComplexQuotientMap
-import all Sheaf.CategoryTheory.FilteredQuotientPageMaps
-import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover
+import all WeilConjectures.CategoryTheory.FilteredQuotientPageMaps
+import WeilConjectures.CategoryTheory.FilteredComplexSuccessorCyclesCover
 import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
 
 /-! # The coherent quotient spectral sequence of a filtered complex

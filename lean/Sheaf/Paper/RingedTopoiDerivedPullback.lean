@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Paper.KFlatRingedToposPullback
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

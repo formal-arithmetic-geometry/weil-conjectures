@@ -5,7 +5,7 @@ Authors: SHEAF group K3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
 
 /-! # Open component compatibility for derived base change
 

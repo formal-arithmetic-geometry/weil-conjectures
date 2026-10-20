@@ -1,8 +1,8 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
-public import Sheaf.AlgebraicGeometry.PinnedPullbackCompositionShifts
+public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
+public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCompositionShifts
 import all Sheaf.AlgebraicGeometry.OpenPinnedSourceCounitTriangle
 
 /-! # Counit comparison for one open leg

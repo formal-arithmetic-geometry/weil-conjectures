@@ -6,11 +6,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-! # Internal Hom exchange with the canonical base-change mate

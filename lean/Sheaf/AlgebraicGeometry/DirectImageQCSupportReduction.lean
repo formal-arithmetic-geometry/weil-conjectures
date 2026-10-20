@@ -5,17 +5,17 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
-import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
+import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import WeilConjectures.AlgebraicGeometry.SupportedOpenPushforward
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Mathlib.Data.Int.Interval

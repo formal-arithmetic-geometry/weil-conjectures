@@ -6,7 +6,7 @@ Authors: SHEAF group NS
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeGroupoidLaws
-public import Sheaf.AlgebraicGeometry.FiniteLocallyFreeNormCharts
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeNormCharts
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.Algebra.Ring.Subring.Basic

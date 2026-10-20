@@ -8,8 +8,8 @@ import Sheaf.AlgebraicGeometry.ModuleCechZeroLemmas
 public import Sheaf.Paper.CechCupResolutionComparisonData
 public import Mathlib.Topology.Sheaves.Flasque
 import Sheaf.Paper.CupCechTotalComplex
-import all Sheaf.AlgebraicGeometry.ModuleCechComparison
-import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
+import all WeilConjectures.AlgebraicGeometry.ModuleCechComparison
+import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 import WeilConjectures.Topology.Sheaves.CechFlasque
 import WeilConjectures.Topology.Sheaves.CechComparison
 import Mathlib.Algebra.Homology.TotalComplexSymmetry

@@ -6,7 +6,7 @@ Authors: SHEAF group NG
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.EventuallyFinite
 import Sheaf.AlgebraicGeometry.LocallyFiniteTypeLimitClosedFp
 

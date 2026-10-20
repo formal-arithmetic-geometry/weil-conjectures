@@ -12,13 +12,12 @@ public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.Paper.PbcActualScalarPullback
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor

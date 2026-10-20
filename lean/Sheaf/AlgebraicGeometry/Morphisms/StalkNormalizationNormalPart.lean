@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 
-import Sheaf.RingTheory.SmoothNormalRing
+import WeilConjectures.RingTheory.SmoothNormalRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 import WeilConjectures.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks

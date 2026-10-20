@@ -5,14 +5,14 @@ Authors: SHEAF group D4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectOpenGluingData
+public import WeilConjectures.AlgebraicGeometry.PerfectOpenGluingData
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.PerfectLocalModelsStageGluing
-import Sheaf.AlgebraicGeometry.PerfectOpenGluingDataOfGlobalModel
-import Sheaf.AlgebraicGeometry.PerfectOfOpenPullbacks
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
+import WeilConjectures.AlgebraicGeometry.PerfectOpenGluingDataOfGlobalModel
+import WeilConjectures.AlgebraicGeometry.PerfectOfOpenPullbacks
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
 
 /-! # Eventual compatibility of two prescribed local perfect models
 

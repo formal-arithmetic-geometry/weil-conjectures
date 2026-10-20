@@ -4,17 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-import Sheaf.AlgebraicGeometry.DerivedPullbackTorIndependentFlatComplex
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackTorIndependentFlatComplex
 import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeCriterion
 import Sheaf.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison
 import Sheaf.AlgebraicGeometry.TensorCounitOneKFlatCoordinates

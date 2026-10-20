@@ -5,12 +5,12 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Category.ModuleCat.Ext.Basic
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
+import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.Algebra.Homology.DerivedHomProjectiveResolution
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.RingTheory.FiniteFreeResolution

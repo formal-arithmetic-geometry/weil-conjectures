@@ -5,7 +5,7 @@ Authors: SHEAF groups S3 and V2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardScalarCechComparison
+public import WeilConjectures.AlgebraicGeometry.PicardScalarCechComparison
 public import Sheaf.AlgebraicGeometry.PicardExternalCechCupComponent
 import Sheaf.AlgebraicGeometry.PicardExternalCechCupBidegree
 import Sheaf.AlgebraicGeometry.PicardModuleCechExternalPairing

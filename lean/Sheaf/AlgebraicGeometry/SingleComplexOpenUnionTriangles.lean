@@ -5,7 +5,7 @@ Authors: SHEAF group D2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenComparison
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated

@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 import all Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
-import Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
+import WeilConjectures.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
 
 /-! # Normalized Leray comparison with independent localization universes
 Source: Stacks Project, Tags 0D5T and 0B6I.

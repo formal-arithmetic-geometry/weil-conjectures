@@ -5,9 +5,9 @@ Authors: SHEAF group K3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineSpectrumDirectImageCoordinates
-public import Sheaf.AlgebraicGeometry.SchemeDerivedMateEvaluation
-public import Sheaf.AlgebraicGeometry.AffineSpectrumComparisonCancellation
+public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDirectImageCoordinates
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
+public import WeilConjectures.AlgebraicGeometry.AffineSpectrumComparisonCancellation
 import WeilConjectures.AlgebraicGeometry.AffineSpectrumCoordinateCounit
 
 /-! # AffineSpectrumCounitCompatibility

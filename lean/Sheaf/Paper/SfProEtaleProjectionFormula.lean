@@ -9,7 +9,7 @@ public import Sheaf.Paper.IntegralCompactSupportCoefficientData
 public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula
 import Sheaf.Paper.BasicOperationsCoefficientReduction
 import Sheaf.Paper.ComparisonTorAmplitude

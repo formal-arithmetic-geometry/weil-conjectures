@@ -5,8 +5,8 @@ Authors: SHEAF group P4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OrdinaryEvaluationData
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 

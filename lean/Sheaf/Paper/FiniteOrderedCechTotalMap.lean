@@ -5,10 +5,10 @@ Authors: SHEAF groups D3, T1 and G2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
+public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import Mathlib.Algebra.Category.ModuleCat.Products
-import all Sheaf.AlgebraicGeometry.QCohAlternatingCechResolutionQuasiIso
+import all WeilConjectures.AlgebraicGeometry.QCohAlternatingCechResolutionQuasiIso
 
 /-! # Sectionwise quasi-isomorphisms of ordered Čech totals
 

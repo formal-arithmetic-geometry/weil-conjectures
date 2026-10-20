@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.SixFunctors.Finite.Stalk
 import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardCoefficientControl
 import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardCohomologyComparison

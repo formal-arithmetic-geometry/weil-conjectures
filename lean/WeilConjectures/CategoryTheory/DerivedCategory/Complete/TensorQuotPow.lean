@@ -39,33 +39,33 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
 attribute [-instance] commShift₂CurriedTensor commShiftTensorLeft commShiftTensorRight
   isTriangulated_tensorLeft isTriangulated_tensorRight monoidalPreadditive monoidalLinear
 
-noncomputable local instance (priority := high) TensorQuotPow_monoidalCategory :
+noncomputable local instance (priority := high) :
     MonoidalCategory (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalCategory
 
-noncomputable local instance (priority := high) TensorQuotPow_monoidalPreadditive :
+noncomputable local instance (priority := high) :
     MonoidalPreadditive (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalPreadditive
 
-noncomputable local instance (priority := high) TensorQuotPow_monoidalLinear :
+noncomputable local instance (priority := high) :
     MonoidalLinear R (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalLinear
 
-noncomputable local instance (priority := high) TensorQuotPow_commShift₂Int :
+noncomputable local instance (priority := high) :
     (curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).CommShift₂Int :=
   (sheafTensorStructure J R).commShift₂
 
-noncomputable local instance (priority := high) TensorQuotPow_isTriangulated
+noncomputable local instance (priority := high)
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     ((curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).obj K).IsTriangulated :=
   (sheafTensorStructure J R).isTriangulated_tensorLeft K
 
-noncomputable local instance (priority := high) TensorQuotPow_isTriangulated2
+noncomputable local instance (priority := high)
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     ((curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj K).IsTriangulated :=
   (sheafTensorStructure J R).isTriangulated_tensorRight K
 
-local instance TensorQuotPow_isIso : IsIso (sheafTensorStructure J R).ε := (sheafTensorStructure J R).isIso_ε
+local instance : IsIso (sheafTensorStructure J R).ε := (sheafTensorStructure J R).isIso_ε
 
 variable {J}
 

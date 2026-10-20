@@ -5,12 +5,12 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
-import Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor
+import WeilConjectures.AlgebraicGeometry.OpenRestrictionTotalTensor
 
 /-! # Derived tensor and exact restriction
 

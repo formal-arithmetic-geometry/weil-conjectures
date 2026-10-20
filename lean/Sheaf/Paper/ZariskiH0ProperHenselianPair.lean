@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.Topology.Sheaves.Functors
-import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
+import WeilConjectures.AlgebraicGeometry.SteinFactorizationAffine
 import WeilConjectures.RingTheory.HenselianPairPrimeConnected
 import WeilConjectures.RingTheory.IntegralOverHenselianPair
 import WeilConjectures.Topology.SpectralClosedRestriction

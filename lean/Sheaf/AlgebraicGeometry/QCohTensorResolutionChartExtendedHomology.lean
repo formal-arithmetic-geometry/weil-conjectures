@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.QCohTensorResolutionExtendedCoordinates
+public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionExtendedCoordinates
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartHomologySquare
 
 @[expose] public section

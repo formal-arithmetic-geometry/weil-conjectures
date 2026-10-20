@@ -5,7 +5,7 @@ Authors: SHEAF group Q11
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
+public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB

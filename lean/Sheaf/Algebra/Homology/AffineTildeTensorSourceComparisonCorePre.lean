@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
+public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 public import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCorePreBase
 public import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonHelpers
 

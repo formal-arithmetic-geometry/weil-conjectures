@@ -5,7 +5,7 @@ Authors: SHEAF group Q110
 -/
 module
 
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import WeilConjectures.CategoryTheory.PBCFiltration
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic

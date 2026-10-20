@@ -9,8 +9,8 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.FiniteCoefficientFlatModel
 public import Sheaf.Paper.FiniteTorAmplitude
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients

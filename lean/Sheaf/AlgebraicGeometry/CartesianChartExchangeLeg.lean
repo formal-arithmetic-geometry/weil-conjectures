@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
+public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
 
 @[expose] public section
 

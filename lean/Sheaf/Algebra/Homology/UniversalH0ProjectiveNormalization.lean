@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Module.Projective
 
-import Sheaf.Algebra.Homology.UniversalConnectiveProjectiveModel
+import WeilConjectures.Algebra.Homology.UniversalConnectiveProjectiveModel
 import Sheaf.Algebra.Homology.ConnectiveUniversalH0ZeroDifferential
 import Mathlib.RingTheory.Finiteness.Projective
 import Mathlib.CategoryTheory.Adjunction.Additive

@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-import Sheaf.AlgebraicGeometry.ScalarExtCupInverseImageFirst
+import WeilConjectures.AlgebraicGeometry.ScalarExtCupInverseImageFirst
 import Sheaf.AlgebraicGeometry.ScalarExtCupInverseImageSecond
 
 /-! # ScalarExtCupInverseImage

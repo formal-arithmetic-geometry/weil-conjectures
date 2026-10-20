@@ -21,7 +21,7 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Paper.ConstantTwoTermResolution
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Paper.KFlatConeComparison
 import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnitySheaf

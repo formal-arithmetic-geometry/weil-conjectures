@@ -27,7 +27,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 import Sheaf.Paper.SfIntegralConstructible
 import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 import Sheaf.Paper.SfDerivedComplete
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -59,7 +59,7 @@ import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.Paper.FiniteConstructibleHom
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite

@@ -18,7 +18,7 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import Sheaf.Paper.PbcCompletedPullbackActual
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy

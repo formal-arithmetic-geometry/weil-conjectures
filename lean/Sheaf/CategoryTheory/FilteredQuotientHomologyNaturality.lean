@@ -5,10 +5,10 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import Sheaf.CategoryTheory.FilteredQuotientPageMaps
-public import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+public import WeilConjectures.CategoryTheory.FilteredQuotientPageMaps
+public import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
 import Sheaf.CategoryTheory.FilteredQuotientSuccessorCycleMaps
-import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover
+import WeilConjectures.CategoryTheory.FilteredComplexSuccessorCyclesCover
 
 /-!
 # Naturality of normalized successor comparisons

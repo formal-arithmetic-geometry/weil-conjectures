@@ -6,7 +6,7 @@ Authors: SHEAF group Q03
 module
 
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.CategoryTheory.Localization.Triangulated
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic

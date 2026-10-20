@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
-import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
 import Sheaf.Algebra.Homology.BoundedFreeProjectiveCohomologySplitting
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 import WeilConjectures.AlgebraicGeometry.Curve.Estimate

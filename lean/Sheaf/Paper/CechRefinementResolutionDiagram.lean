@@ -6,7 +6,7 @@ Authors: SHEAF group N3
 module
 
 public import Sheaf.Paper.CechRefinementCochainMap
-public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
 import Sheaf.Paper.CechRefinementResolutionBeta
 
 /-! # Refinement on resolution total cohomology

@@ -12,7 +12,7 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import Mathlib.CategoryTheory.Monoidal.Limits.Colimits
 import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle

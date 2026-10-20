@@ -8,12 +8,12 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
 import Sheaf.Algebra.Homology.KFlatResolution

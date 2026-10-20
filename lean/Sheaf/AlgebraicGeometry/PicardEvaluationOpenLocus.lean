@@ -6,7 +6,7 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoOpen
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeMapIsoOpen
 import Sheaf.AlgebraicGeometry.PicardCupProductCriterion
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree

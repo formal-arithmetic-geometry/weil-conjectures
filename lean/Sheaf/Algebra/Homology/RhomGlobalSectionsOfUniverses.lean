@@ -5,7 +5,7 @@ Authors: SHEAF maintenance NZ
 -/
 module
 
-public import Sheaf.Algebra.Homology.RhomGlobalSections
+public import WeilConjectures.Algebra.Homology.RhomGlobalSections
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomologyOfUniverses
 import Sheaf.Algebra.Homology.RhomHypercohomologyBridgeOfUniverses

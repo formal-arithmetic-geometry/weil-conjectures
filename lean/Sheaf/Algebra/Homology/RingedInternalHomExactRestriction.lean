@@ -5,7 +5,7 @@ Authors: SHEAF group ND
 -/
 module
 
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.BifunctorShift
@@ -17,10 +17,10 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import all Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 import Mathlib.CategoryTheory.Localization.DerivabilityStructure.OfFunctorialResolutions
 

@@ -7,15 +7,14 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
+public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.LowerStarPairing
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.ProperCohomology
-import WeilConjectures.WeilSheaf.LowerStarPairing
-import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
-import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
-import Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison
+public import WeilConjectures.WeilSheaf.StalkPairing
 
 /-!
 # Finiteness of the cohomology of Weil complexes and Frobenius
@@ -64,8 +63,6 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry
-
-attribute [local instance 1100] CategoryTheory.instOverClass
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 

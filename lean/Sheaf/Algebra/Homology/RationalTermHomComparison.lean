@@ -6,7 +6,7 @@ Authors: SHEAF group Q56
 module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.Algebra.Homology.HomComplexProjections
+public import WeilConjectures.Algebra.Homology.HomComplexProjections
 public import Sheaf.CategoryTheory.ScalarLocalization
 public import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
 public import Mathlib.LinearAlgebra.TensorProduct.Basic

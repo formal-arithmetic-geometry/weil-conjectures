@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.TraceFormula.LciPointwiseCriterion
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 import Sheaf.TraceFormula.CILocalRingPrincipalNeighbourhood
-import Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection
+import WeilConjectures.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection
 
 /-!
 # A pointwise syntomic affine local model

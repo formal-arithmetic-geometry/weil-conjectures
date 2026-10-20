@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 public import Sheaf.Paper.FiniteStructureAdjointTransitions
@@ -18,7 +18,7 @@ import Sheaf.Paper.FiniteStructureTensorPowersSupported
 import Sheaf.AlgebraicGeometry.GrothendieckExistence
 import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
-import Sheaf.AlgebraicGeometry.ThickeningSystemComparisonTransport
+import WeilConjectures.AlgebraicGeometry.ThickeningSystemComparisonTransport
 import Sheaf.Paper.FiniteStructureTensorComparisonComposition
 
 /-! # Core existence statement for a lifted finite-structure product

@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Algebra.Homology.AffinePushforwardComparisonCoordinates
-import Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdge
+public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+import WeilConjectures.Algebra.Homology.AffineDerivedPushforwardSheafEdge
 import Sheaf.Algebra.Homology.AffinePushforwardComparisonFactorization
 
 /-! Identity-representative affine cohomology edge normalization. -/

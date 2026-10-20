@@ -5,7 +5,7 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.RelativeMVCoverChainSquare
 import Sheaf.CategoryTheory.DerivedCategory.ConeDiagramFullSESPresentation

@@ -6,10 +6,10 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.Paper.EtaleCETotalSections
-public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
 import Sheaf.CategoryTheory.FilteredStationaryCycleComparison
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
-import Sheaf.CategoryTheory.BoundedBelowSecondFiltration
+import WeilConjectures.CategoryTheory.BoundedBelowSecondFiltration
 
 /-! # Naturality of stationary CE page quotients
 

@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimens
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Reduction
 
-import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
-
 /-!
 # The affine Artin vanishing bound
 

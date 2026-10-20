@@ -5,9 +5,9 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
-import Sheaf.AlgebraicGeometry.CanonicalTensorHomEvaluationNaturality
-import Sheaf.AlgebraicGeometry.CanonicalTensorModelInputNaturality
+public import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
+import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomEvaluationNaturality
+import WeilConjectures.AlgebraicGeometry.CanonicalTensorModelInputNaturality
 
 /-! # Comparison of normalized derived evaluation maps
 

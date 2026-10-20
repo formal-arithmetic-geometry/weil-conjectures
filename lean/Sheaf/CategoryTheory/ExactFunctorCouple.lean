@@ -5,7 +5,7 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.CategoryTheory.HalfPlaneConvergence
+public import WeilConjectures.CategoryTheory.HalfPlaneConvergence
 import Sheaf.CategoryTheory.ExactFunctorHalfPlane
 import all WeilConjectures.CategoryTheory.HalfPlaneDiagonalColimits
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images

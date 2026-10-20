@@ -5,8 +5,8 @@ Authors: SHEAF group C4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
-import Sheaf.AlgebraicGeometry.OpenImageDirectImageComparisonRestriction
+public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
+import WeilConjectures.AlgebraicGeometry.OpenImageDirectImageComparisonRestriction
 
 /-! # Ordinary direct-image comparison squares for Mayer--Vietoris
 

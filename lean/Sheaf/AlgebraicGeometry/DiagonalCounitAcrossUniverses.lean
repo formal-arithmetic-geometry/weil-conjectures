@@ -5,13 +5,13 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniverses
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.DerivedPullbackAcrossUniverses
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DiagonalPushforwardStructure
-import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
+import WeilConjectures.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 

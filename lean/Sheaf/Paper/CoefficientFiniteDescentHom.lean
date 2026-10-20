@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.CondensedCoefficientComplexColimit
 import all Sheaf.Paper.CondensedFiniteModelProofAPI
 import Sheaf.Paper.CondensedFlatCoefficientCalculus
 import Sheaf.AlgebraicGeometry.SplitCoefficientDerivedFaithful
+public import Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 
 /-!
 # Finite descent of derived coefficient morphisms

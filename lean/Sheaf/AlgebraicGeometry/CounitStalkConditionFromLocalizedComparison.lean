@@ -6,8 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.AlgebraicGeometry.LocalizedComparisonQuasiIsoSquare
-import Sheaf.AlgebraicGeometry.StalkComparisonCoordinateInvariance
+import WeilConjectures.AlgebraicGeometry.LocalizedComparisonQuasiIsoSquare
+import WeilConjectures.AlgebraicGeometry.StalkComparisonCoordinateInvariance
 
 /-! # Stalk condition of the universal pullback counit
 

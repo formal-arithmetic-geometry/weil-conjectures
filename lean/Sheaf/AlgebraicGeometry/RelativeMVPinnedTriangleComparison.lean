@@ -5,13 +5,13 @@ Authors: SHEAF group T4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundary
-import Sheaf.AlgebraicGeometry.RelativeMVPinnedVertexComparisons
-import Sheaf.AlgebraicGeometry.RelativeMVRestrictionSquares
+import WeilConjectures.AlgebraicGeometry.RelativeMVPinnedVertexComparisons
+import WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionSquares
 
 /-! # Compatible relative Mayer--Vietoris boundaries
 

@@ -6,7 +6,7 @@ Authors: SHEAF group S2
 module
 
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 import Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor
 import Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison

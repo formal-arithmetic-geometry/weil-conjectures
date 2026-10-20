@@ -10,7 +10,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison
+import WeilConjectures.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison
 import Sheaf.Paper.QuasiCompactH1Zero
 import Sheaf.AlgebraicGeometry.OpenDimOneHigherDirectImageVanishing
 

@@ -6,11 +6,11 @@ Authors: SHEAF group T2
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Sheaf.AlgebraicGeometry.ThickeningSystemsDictionary
-import Sheaf.AlgebraicGeometry.ThickeningSystemHomTransport
+import WeilConjectures.AlgebraicGeometry.ThickeningSystemsDictionary
+import WeilConjectures.AlgebraicGeometry.ThickeningSystemHomTransport
 
 /-! # Morphisms of completions as compatible restriction families
 

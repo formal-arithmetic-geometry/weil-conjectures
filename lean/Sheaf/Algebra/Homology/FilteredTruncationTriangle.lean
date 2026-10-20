@@ -6,7 +6,7 @@ Authors: SHEAF group NI
 module
 
 public import Sheaf.Algebra.Homology.FilteredTruncationData
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 import Sheaf.Algebra.Homology.FilteredConeLocalization
 import WeilConjectures.CategoryTheory.Abelian.Filtration
 import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension

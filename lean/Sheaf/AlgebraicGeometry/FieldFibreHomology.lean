@@ -3,7 +3,7 @@ module
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure

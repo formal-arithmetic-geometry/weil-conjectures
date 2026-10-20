@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
+public import WeilConjectures.AlgebraicGeometry.BaseChangeStalkTransition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionIsIsoOfLower
 import Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage

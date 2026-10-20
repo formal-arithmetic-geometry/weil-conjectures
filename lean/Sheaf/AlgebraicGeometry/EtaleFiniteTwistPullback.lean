@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTateSheaf
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Sheaf.Paper.RingedTopoiDerivedTensorPullback

@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 import Sheaf.Paper.SmoothPurityCoefficientTowersAbelian
 import Sheaf.Paper.SemilinearDerivedSections
 import Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula

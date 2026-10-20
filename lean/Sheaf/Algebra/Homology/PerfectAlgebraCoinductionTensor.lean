@@ -18,7 +18,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.PerfectRingHomTensorDegrees
 import Sheaf.Algebra.Homology.PerfectRingHomTensorDifferential
 import Sheaf.Algebra.Homology.ProjectiveHomEvaluationModel
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.Algebra.Homology.DerivedCoinductionAdjunction

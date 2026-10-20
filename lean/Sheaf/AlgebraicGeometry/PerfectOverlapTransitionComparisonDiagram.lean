@@ -5,17 +5,17 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.PerfectDescendMorphisms
-import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import WeilConjectures.AlgebraicGeometry.PerfectDescendMorphisms
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackPerfect
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 
-public import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
+public import WeilConjectures.AlgebraicGeometry.TwoOpenComparisonDiagram
 
 /-! # Finite-stage descent of a prescribed overlap transition
 

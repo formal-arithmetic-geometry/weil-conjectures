@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.CategoryTheory.FilteredComplexDecalageTower
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 import Sheaf.CategoryTheory.CartanEilenbergSmartTruncationSpectralObject
 

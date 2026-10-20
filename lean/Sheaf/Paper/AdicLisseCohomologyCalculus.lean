@@ -27,7 +27,7 @@ import Sheaf.RepresentationTheory.LAdic
 import Sheaf.Paper.LisseAdicSheaves
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
 import Sheaf.Paper.LisseTensorScalarExtension
 import Sheaf.RepresentationTheory.ProfiniteStableLattice

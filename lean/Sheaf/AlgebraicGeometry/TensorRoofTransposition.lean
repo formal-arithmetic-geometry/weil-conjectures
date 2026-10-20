@@ -6,7 +6,7 @@ Authors: SHEAF group D3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import Sheaf.AlgebraicGeometry.TensorModelRestrictionAdjunction
 
 /-! # Transposing a supplied augmented complex after open restriction

@@ -7,12 +7,12 @@ module
 
 public import Sheaf.Paper.EtaleCERowOrdinaryComparison
 public import Sheaf.Paper.EtaleCECanonicalRowComparison
-public import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+public import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
 
-import Sheaf.CategoryTheory.CartanEilenbergSecondFiltration
-import Sheaf.CategoryTheory.CartanEilenbergTotalResolution
-import all Sheaf.CategoryTheory.SecondFiltrationRowCohomology
-import all Sheaf.CategoryTheory.SecondFiltrationSignedFirstPage
+import WeilConjectures.CategoryTheory.CartanEilenbergSecondFiltration
+import WeilConjectures.CategoryTheory.CartanEilenbergTotalResolution
+import all WeilConjectures.CategoryTheory.SecondFiltrationRowCohomology
+import all WeilConjectures.CategoryTheory.SecondFiltrationSignedFirstPage
 import all WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-! # Prescribed normalized CE presentations

@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.CategoryTheory.ExactCouple
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Sheaf.CategoryTheory.Filtration
 import WeilConjectures.Algebra.Homology.ExactCouple.Basic
 import WeilConjectures.CategoryTheory.Abelian.Filtration

@@ -3,7 +3,7 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.CategoryTheory.Abelian.Projective.Dimension
-import Sheaf.RingTheory.ProjectiveResolutionExtCharacterization
+import WeilConjectures.RingTheory.ProjectiveResolutionExtCharacterization
 
 @[expose] public section
 

@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.Algebra.Homology.HomologyEvaluation
+public import WeilConjectures.Algebra.Homology.HomologyEvaluation
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.RingTheory.KoszulRegularSequence
@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.LocalTensorFiniteFreeZeroModel
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
 
 /-! # Local models of augmented self-Ext/self-Tor resolutions

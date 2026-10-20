@@ -12,10 +12,10 @@ public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Paper.SfIntegralConstructible
 public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 public import Sheaf.Paper.SfDerivedComplete
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Paper.DualityPairing
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed

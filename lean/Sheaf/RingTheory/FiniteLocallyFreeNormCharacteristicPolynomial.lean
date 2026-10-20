@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Norm.Defs
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Sheaf.AlgebraicGeometry.PushforwardRankOnOpen
+import WeilConjectures.AlgebraicGeometry.PushforwardRankOnOpen
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.AlgebraicGeometry.Pullbacks

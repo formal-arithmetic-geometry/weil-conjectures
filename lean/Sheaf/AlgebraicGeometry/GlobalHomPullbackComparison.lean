@@ -6,7 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 
 
 /-! # Canonical pullback comparison on global derived Hom

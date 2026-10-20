@@ -5,7 +5,7 @@ Authors: SHEAF group V4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition
 import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionAssociativity
 

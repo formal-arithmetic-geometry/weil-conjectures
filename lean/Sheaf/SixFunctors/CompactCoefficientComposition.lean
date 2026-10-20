@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.ProperOpenComparison
 import Sheaf.AlgebraicGeometry.OpenSectionClopen
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint

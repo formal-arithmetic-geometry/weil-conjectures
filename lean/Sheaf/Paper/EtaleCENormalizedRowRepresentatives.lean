@@ -6,7 +6,7 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.Paper.EtaleCERowOrdinaryComparison
-public import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+public import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
 import Sheaf.Paper.EtaleCENormalizedRowPresentations
 import Sheaf.Paper.EtaleCERowCyclesNaturality
 

@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 

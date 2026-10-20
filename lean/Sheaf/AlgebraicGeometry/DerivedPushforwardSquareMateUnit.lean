@@ -6,8 +6,8 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
-import Sheaf.AlgebraicGeometry.DirectImageSquareUnitTransport
-import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
+import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 
 /-! # Unit compatibility of the sheaf direct-image square mate
 

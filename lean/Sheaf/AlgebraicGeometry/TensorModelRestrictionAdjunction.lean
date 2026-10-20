@@ -6,9 +6,9 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import Sheaf.AlgebraicGeometry.TensorModelRestrictionComparisons
-import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 
 /-! # Tensor-model adjunction and restriction
 

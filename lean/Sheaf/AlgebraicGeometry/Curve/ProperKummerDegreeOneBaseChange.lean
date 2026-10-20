@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 import Sheaf.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
 import Sheaf.AlgebraicGeometry.Curve.ProperPicTorsionBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
 import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 
 /-!

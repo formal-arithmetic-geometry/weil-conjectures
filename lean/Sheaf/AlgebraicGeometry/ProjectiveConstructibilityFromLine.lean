@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 import Sheaf.AlgebraicGeometry.RelativeProjectiveSpace
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.ConstructibleSheaf.OpenClosed
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.ConstructibleFiniteSurjectionCancellation
 import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImagesComp
 import Sheaf.AlgebraicGeometry.NoetherianSymmetricProductFiniteSurjective

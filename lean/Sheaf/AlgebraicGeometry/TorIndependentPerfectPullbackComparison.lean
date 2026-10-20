@@ -5,12 +5,12 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
 import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import Sheaf.Algebra.Homology.TorIndependentKFlatTensorComparison
+import WeilConjectures.Algebra.Homology.TorIndependentKFlatTensorComparison
 import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorFlat
 import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 

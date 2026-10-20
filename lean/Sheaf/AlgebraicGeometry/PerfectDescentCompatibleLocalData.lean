@@ -6,9 +6,9 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectDescentOnOpen
-public import Sheaf.AlgebraicGeometry.PerfectOpenGluingData
+public import WeilConjectures.AlgebraicGeometry.PerfectOpenGluingData
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.PerfectDescentCommonLocalModels
+import WeilConjectures.AlgebraicGeometry.PerfectDescentCommonLocalModels
 import Sheaf.AlgebraicGeometry.PerfectLocalModelsEventuallyCompatible
 
 /-! # Compatible local descent data at a common finite stage

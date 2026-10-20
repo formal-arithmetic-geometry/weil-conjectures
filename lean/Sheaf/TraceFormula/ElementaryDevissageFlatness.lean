@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 
-import Sheaf.AlgebraicGeometry.AffineCoverModuleTensorFlatCriterion
+import WeilConjectures.AlgebraicGeometry.AffineCoverModuleTensorFlatCriterion
 import Sheaf.TraceFormula.EtaleLocalRingFlatness
 import Sheaf.AlgebraicGeometry.RelativeFlatnessSourceCover
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange

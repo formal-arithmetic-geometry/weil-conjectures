@@ -9,8 +9,8 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact

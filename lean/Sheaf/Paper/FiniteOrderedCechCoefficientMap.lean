@@ -5,8 +5,7 @@ Authors: SHEAF group G2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
-import all Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
+public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 
 /-! # The coefficient map into the ordered Čech total complex
 

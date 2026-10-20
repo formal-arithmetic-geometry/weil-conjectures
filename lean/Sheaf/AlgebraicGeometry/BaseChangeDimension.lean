@@ -6,9 +6,9 @@ Authors: SHEAF group K1
 module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.Dimension
-import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
-import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import WeilConjectures.AlgebraicGeometry.Dimension
+import WeilConjectures.AlgebraicGeometry.DimensionAffineOpenCover
+import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 @[expose] public section

@@ -6,10 +6,10 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-public import Sheaf.AlgebraicGeometry.SchemeDerivedMateEvaluation
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.AlgebraicGeometry.TensorSinglePullbackComposition
-import Sheaf.AlgebraicGeometry.DerivedSquareVerticalPasting
+import WeilConjectures.AlgebraicGeometry.DerivedSquareVerticalPasting
 
 /-! # Pasting of the coefficient transpose
 

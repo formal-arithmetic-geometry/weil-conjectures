@@ -13,10 +13,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 
-import Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
 import WeilConjectures.AlgebraicGeometry.PicardH1BaseDescentFibreGenerator
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula

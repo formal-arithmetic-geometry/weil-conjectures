@@ -5,10 +5,10 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OrdinaryEvaluationData
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.AlgebraicGeometry.CanonicalEvaluationOpenRestriction
+import WeilConjectures.AlgebraicGeometry.CanonicalEvaluationOpenRestriction
 import Sheaf.AlgebraicGeometry.ExactSourceEvaluationOpenModels
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 

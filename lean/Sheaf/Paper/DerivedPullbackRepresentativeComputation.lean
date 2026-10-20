@@ -8,7 +8,7 @@ public import Sheaf.Paper.RingedTopoiCanonicalTensorComparisonOfUniverses
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatTotalTensorModel
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.CategoryTheory.Adjunction.Additive

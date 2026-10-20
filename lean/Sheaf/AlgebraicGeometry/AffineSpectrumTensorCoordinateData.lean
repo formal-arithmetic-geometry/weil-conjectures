@@ -1,6 +1,6 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
-public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
+public import WeilConjectures.AlgebraicGeometry.IsoPullbackStalkCohomology
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Sheaf.AlgebraicGeometry.AffineSpectrumStalkCoordinateData
 @[expose] public section

@@ -1,10 +1,10 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedComposition
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedAdjunction
-public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
-import Sheaf.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedComposition
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedAdjunction
+public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
+import WeilConjectures.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
 
 /-! # Cancelling the restricted homotopy counit comparisons
 

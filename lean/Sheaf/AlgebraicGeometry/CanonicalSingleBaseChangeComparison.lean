@@ -6,11 +6,11 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-public import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
-import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
-import Sheaf.AlgebraicGeometry.HomotopySingleBaseChangeComparison
+import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
+import WeilConjectures.AlgebraicGeometry.HomotopySingleBaseChangeComparison
 
 /-! # Derived exchange on a single module
 

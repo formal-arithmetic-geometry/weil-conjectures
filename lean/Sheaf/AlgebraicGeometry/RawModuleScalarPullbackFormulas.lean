@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
-import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula
+import WeilConjectures.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
 import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackAbelianFormula
 

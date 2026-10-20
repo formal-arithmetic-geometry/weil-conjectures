@@ -5,12 +5,12 @@ Authors: SHEAF groups P3 and G2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
+public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Topology.Sheaves.Flasque
 import WeilConjectures.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
 import WeilConjectures.Topology.Sheaves.CechFlasque
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import all Sheaf.AlgebraicGeometry.InjectiveAlternatingCechRowAugmentation
+import all WeilConjectures.AlgebraicGeometry.InjectiveAlternatingCechRowAugmentation
 
 /-! # The increasing-tuple augmented Čech row of a flasque module
 

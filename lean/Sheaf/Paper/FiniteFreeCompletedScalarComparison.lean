@@ -28,7 +28,7 @@ import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Paper.ExtendedCechCompletionModel
 import Sheaf.Paper.IntegralScalarExtensionWellDefined
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import Sheaf.Paper.DerivedCompleteOnSlices

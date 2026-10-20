@@ -18,7 +18,7 @@ public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
-import Sheaf.RingTheory.EtaleNormalRing
+import WeilConjectures.RingTheory.EtaleNormalRing
 import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.Compactification.ValuativeCriterion

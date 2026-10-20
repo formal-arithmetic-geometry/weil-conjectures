@@ -4,7 +4,7 @@ public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact
 public import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap

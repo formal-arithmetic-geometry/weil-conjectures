@@ -5,7 +5,7 @@ Authors: SHEAF group P4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
@@ -13,10 +13,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.AlgebraicGeometry.ProperFlatOpenSquareMateIso
 import Sheaf.AlgebraicGeometry.NewBaseOpenMateFactorization
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
+import WeilConjectures.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # One-open compatibility of right-adjoint mates
 

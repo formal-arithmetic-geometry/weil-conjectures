@@ -7,8 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
 
 /-! # The actual coefficient arrow for a Picard direct-image comparison

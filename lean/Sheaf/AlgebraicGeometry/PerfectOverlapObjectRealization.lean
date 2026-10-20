@@ -5,7 +5,7 @@ Authors: SHEAF group F4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuityData
+public import WeilConjectures.AlgebraicGeometry.PerfectOverlapHomContinuityData
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Mathlib.CategoryTheory.HomCongr
 import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData

@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Ideal.Height
-import Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimesHeight
+import WeilConjectures.RingTheory.FractionalPrincipalQuotientAssociatedPrimesHeight
 import Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimesMinimal
 
 /-!

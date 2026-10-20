@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.RelativeTorsorCohomology
 import Sheaf.CategoryTheory.Sites.TorsorWithSection
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Mathlib.Algebra.Homology.HomologySequence
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import Sheaf.AlgebraicGeometry.DerivedModuleUnderlyingComparison

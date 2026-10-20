@@ -6,9 +6,9 @@ Authors: SHEAF group R3
 module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
-public import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+public import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
 import Sheaf.Paper.EtaleCENormalizedRepresentativeCohomology
-import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
+import WeilConjectures.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
 
 /-! # Prescribed normalized CE pages and their first-page computation
 

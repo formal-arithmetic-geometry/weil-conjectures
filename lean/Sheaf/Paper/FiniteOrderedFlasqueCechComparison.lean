@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.DoubleComplexTotal
-public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
+public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Topology.Sheaves.Flasque
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Paper.FiniteOrderedFlasqueCechComparisonAlpha

@@ -5,7 +5,7 @@ Authors: SHEAF group C9
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
+public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Sheaf.Algebra.Homology.ModuleCohomologyBaseChange
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal

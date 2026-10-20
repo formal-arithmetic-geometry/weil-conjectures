@@ -21,14 +21,14 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients

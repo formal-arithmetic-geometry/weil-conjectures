@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
 import Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension
 import Sheaf.TraceFormula.FlatFiniteTypeDensePresentation
 import Sheaf.AlgebraicGeometry.ProperBirationalNormalCurveIso
-import Sheaf.RingTheory.SmoothNormalRing
+import WeilConjectures.RingTheory.SmoothNormalRing
 
 /-!
 # Horizontal curve models over finite-height valuation rings

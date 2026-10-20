@@ -21,7 +21,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 import Sheaf.AlgebraicGeometry.GeometricStalkCohomology
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import Sheaf.CategoryTheory.GrothendieckEdgeCocycle
+import WeilConjectures.CategoryTheory.GrothendieckEdgeCocycle
 import Sheaf.CategoryTheory.FirstQuadrantLowestRowEdge
 import Sheaf.AlgebraicGeometry.KunnethSupported
 import Sheaf.Paper.RelativeSupportCoordinateModel

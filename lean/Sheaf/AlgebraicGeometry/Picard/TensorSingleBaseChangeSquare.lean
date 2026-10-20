@@ -5,9 +5,9 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
-public import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
+public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 import Sheaf.AlgebraicGeometry.CanonicalSingleBaseChangeComparison
 
 /-! # Tensor exchange on single complexes

@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.Morphisms.NormalNoetherianRefinement
-import Sheaf.AlgebraicGeometry.Morphisms.PointedSmoothFamilyStage
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalNoetherianRefinement
+import WeilConjectures.AlgebraicGeometry.Morphisms.PointedSmoothFamilyStage
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!

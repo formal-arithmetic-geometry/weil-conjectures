@@ -1,12 +1,12 @@
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenComparison
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
-import Sheaf.AlgebraicGeometry.DerivedBaseChangeSourceIso
-import Sheaf.AlgebraicGeometry.SingleComplexNestedCoefficientCoherence
+import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeSourceIso
+import WeilConjectures.AlgebraicGeometry.SingleComplexNestedCoefficientCoherence
 import Sheaf.AlgebraicGeometry.RelativeMVCoverRows
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact

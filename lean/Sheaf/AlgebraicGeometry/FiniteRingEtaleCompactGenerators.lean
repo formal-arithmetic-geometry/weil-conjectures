@@ -5,8 +5,8 @@ Authors: SHEAF group Q17
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -17,7 +17,7 @@ public import Sheaf.CategoryTheory.CompactObject
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 import Sheaf.SixFunctors.FlatModel
-import Sheaf.CategoryTheory.CompactObjectsThick
+import WeilConjectures.CategoryTheory.CompactObjectsThick
 import Sheaf.Paper.PurEtaleLisseStratumCompact
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import Sheaf.AlgebraicGeometry.AffineEtaleFreeDetection

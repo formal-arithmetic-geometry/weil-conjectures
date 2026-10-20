@@ -6,7 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Sheaf.Algebra.Homology.KFlatResolution

@@ -1,6 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
-import Sheaf.Algebra.Homology.BaseDerivedExtensionResolution
+import WeilConjectures.Algebra.Homology.BaseDerivedExtensionResolution
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

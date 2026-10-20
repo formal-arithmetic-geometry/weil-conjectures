@@ -5,8 +5,8 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.Algebra.Homology.FiniteStripConeGradedMap
-import Sheaf.Algebra.Homology.FiniteStripConeGradedMapEpi
+public import WeilConjectures.Algebra.Homology.FiniteStripConeGradedMap
+import WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapEpi
 
 /-! # Compatibility name for the finite-strip graded epimorphism
 

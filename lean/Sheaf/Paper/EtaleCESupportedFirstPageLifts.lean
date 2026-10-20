@@ -9,7 +9,7 @@ public import Sheaf.Paper.EtaleCEStationaryPageNaturality
 
 import WeilConjectures.CategoryTheory.CartanEilenbergAllLowerBounds
 import Sheaf.Paper.EtaleCECoherentPrescribedResolutions
-import Sheaf.CategoryTheory.BoundedBelowSecondFiltration
+import WeilConjectures.CategoryTheory.BoundedBelowSecondFiltration
 
 /-! # Supported coherent first-page CE lifts
 

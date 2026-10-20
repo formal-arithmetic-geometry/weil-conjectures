@@ -11,7 +11,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import Sheaf.AlgebraicGeometry.DimZeroFiniteOverField
-import Sheaf.AlgebraicGeometry.Dimension
+import WeilConjectures.AlgebraicGeometry.Dimension
 
 /-!
 # Zero-dimensional closed subschemes are finite over the base field

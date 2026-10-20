@@ -6,7 +6,7 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-public import Sheaf.AlgebraicGeometry.SchemeDerivedMateEvaluation
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComposition

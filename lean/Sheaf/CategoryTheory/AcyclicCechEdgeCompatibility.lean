@@ -14,7 +14,7 @@ import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
 import Mathlib.Algebra.Homology.TotalComplexSymmetry
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
+import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful

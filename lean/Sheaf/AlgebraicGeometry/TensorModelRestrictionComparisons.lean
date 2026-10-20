@@ -6,10 +6,10 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import Sheaf.AlgebraicGeometry.KFlatTensorModelNaturalComparison
-import Sheaf.AlgebraicGeometry.DerivedTensorSymmetry
-import Sheaf.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence
+import WeilConjectures.AlgebraicGeometry.DerivedTensorSymmetry
+import WeilConjectures.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence
 
 /-! # Coherent tensor-model comparisons under open restriction
 

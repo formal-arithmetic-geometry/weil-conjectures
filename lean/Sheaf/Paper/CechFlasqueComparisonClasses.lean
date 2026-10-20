@@ -2,7 +2,7 @@ module
 
 import Sheaf.AlgebraicGeometry.ModuleCechZeroLemmas
 public import Sheaf.Paper.CechCupResolutionComparisonData
-import all Sheaf.AlgebraicGeometry.ModuleCechComparison
+import all WeilConjectures.AlgebraicGeometry.ModuleCechComparison
 
 @[expose] public section
 universe v

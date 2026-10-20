@@ -5,12 +5,12 @@ Authors: SHEAF group G2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
+public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Topology.Sheaves.Flasque
 import Sheaf.Paper.FlasqueAlternatingCechRowAugmentation
-import Sheaf.AlgebraicGeometry.InjectiveAlternatingCechRowAugmentation
-import Sheaf.Algebra.Homology.FiniteStripAugmentation
-import all Sheaf.AlgebraicGeometry.InjectiveTermsAlternatingCechAugmentation
+import WeilConjectures.AlgebraicGeometry.InjectiveAlternatingCechRowAugmentation
+import WeilConjectures.Algebra.Homology.FiniteStripAugmentation
+import all WeilConjectures.AlgebraicGeometry.InjectiveTermsAlternatingCechAugmentation
 
 /-!
 # Augmentation comparison for finite ordered Čech complexes

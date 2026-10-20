@@ -6,7 +6,7 @@ Authors: SHEAF group G4
 module
 
 public import Sheaf.CategoryTheory.FilteredComplexDecalageTower
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 import Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObjectIso
 import Sheaf.CategoryTheory.SpectralObjectBottomIsoCriterion

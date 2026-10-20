@@ -6,7 +6,7 @@ Authors: SHEAF group S2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle

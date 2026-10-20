@@ -17,6 +17,7 @@ import all Sheaf.Paper.CoefficientHeartLisseRestriction
 import Sheaf.Paper.ConstantModelTorAmplitude
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall
+public import Sheaf.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 
 /-!
 # Finite Tor amplitude over the full continuous algebraic closure

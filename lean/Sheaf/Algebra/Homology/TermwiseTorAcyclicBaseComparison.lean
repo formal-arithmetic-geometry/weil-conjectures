@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 import Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor
-import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 
 /-! # Termwise Tor acyclicity for the universal base-tensor comparison
 

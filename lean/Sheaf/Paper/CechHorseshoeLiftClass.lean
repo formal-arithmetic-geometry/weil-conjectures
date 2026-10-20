@@ -5,7 +5,7 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
 import Sheaf.Paper.CechHorseshoeCorrectionCochain
 
 /-! # The local correction in a horseshoe Cech double complex

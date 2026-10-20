@@ -6,7 +6,7 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.CategoryTheory.FilteredHomologyExactCouple
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-! # The forward map on filtered representatives

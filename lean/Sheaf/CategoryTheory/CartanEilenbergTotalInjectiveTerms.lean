@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # Injective terms in finite-diagonal totals

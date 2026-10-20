@@ -46,7 +46,6 @@ lemma AdicSheaf.isZero_of_isZero_upperStar {ι : Type*} {W : ι → Scheme.{u}} 
   refine AdicSheaf.isZero_of_isZero_X ?_
   have : IsIso (0 : M.X ⟶ M.X) := by
     refine isIso_of_isIso_localizationRestriction _ _ g hg fun i ↦ ?_
-    change IsIso ((localizationRestriction _ (g i) inferInstance).map (0 : M.X ⟶ M.X))
     have hz : IsZero ((localizationRestriction _ (g i) inferInstance).obj M.X) :=
       ((AdicSheaf.forget _).map_isZero (h i)).of_iso
         ((upperStarIsoLocalizationRestriction _ (g i) inferInstance).app M.X).symm

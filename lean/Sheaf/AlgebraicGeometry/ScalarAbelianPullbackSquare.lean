@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ScalarAbelianExtFactorization
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.AlgebraicGeometry.ScalarForgetPullbackAdjunction
-import Sheaf.AlgebraicGeometry.ScalarStructureCoefficientAdjunct
+import WeilConjectures.AlgebraicGeometry.ScalarForgetPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.ScalarStructureCoefficientAdjunct
 
 /-! # The underlying abelian square for scalar inverse image
 

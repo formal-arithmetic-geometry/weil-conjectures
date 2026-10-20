@@ -6,12 +6,12 @@ Authors: SHEAF group T3
 module
 
 public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
-public import Sheaf.CategoryTheory.CartanEilenbergPresentation
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.CategoryTheory.CartanEilenbergDecalageTruncationDiagram
 import Sheaf.CategoryTheory.FilteredComplexDecalageImage
-import all Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
+import all WeilConjectures.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
 import all Sheaf.CategoryTheory.GrothendieckCanonicalImageFiltration
 import Sheaf.CategoryTheory.DoubleComplexTotal
 

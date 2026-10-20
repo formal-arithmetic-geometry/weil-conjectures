@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
 public import WeilConjectures.AlgebraicGeometry.NormalScheme
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
-import Sheaf.AlgebraicGeometry.CyclicHigherDirectImageLocalVanishing
+import WeilConjectures.AlgebraicGeometry.CyclicHigherDirectImageLocalVanishing
 
 /-! # Vanishing in the universal curve test
 

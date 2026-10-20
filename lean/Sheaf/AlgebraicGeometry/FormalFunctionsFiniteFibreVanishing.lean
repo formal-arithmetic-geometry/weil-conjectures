@@ -5,15 +5,15 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FiniteDiscreteFiber
-import Sheaf.AlgebraicGeometry.FormalFunctionsStalk
+import WeilConjectures.AlgebraicGeometry.FormalFunctionsStalk
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar

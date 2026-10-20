@@ -12,15 +12,15 @@ public import Sheaf.Algebra.Homology.SignedDoubleHomCone
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import WeilConjectures.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Algebra.Homology.HomComplexGlobalHomotopy
-import Sheaf.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomComplexGlobalHomotopy
+import WeilConjectures.Algebra.Homology.HomTensorTotal
 import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor

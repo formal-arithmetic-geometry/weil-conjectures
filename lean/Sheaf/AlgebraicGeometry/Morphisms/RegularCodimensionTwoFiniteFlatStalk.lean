@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.RingTheory.Depth
 
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
-import Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteEtaleModel
+import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
+import WeilConjectures.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteEtaleModel
 
 /-!
 # Flatness at a regular codimension-two boundary point

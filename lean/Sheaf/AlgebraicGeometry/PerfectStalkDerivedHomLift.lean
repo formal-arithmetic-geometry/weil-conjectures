@@ -5,9 +5,9 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
+import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 public import Sheaf.Paper.DerivedHomMayerVietoris

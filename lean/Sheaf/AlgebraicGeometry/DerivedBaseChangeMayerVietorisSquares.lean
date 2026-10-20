@@ -5,10 +5,10 @@ Authors: SHEAF group C4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
+public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeOpenUnit
-import Sheaf.AlgebraicGeometry.DerivedBaseChangeNaturality
-import Sheaf.AlgebraicGeometry.DerivedBaseChangeOpenRestriction
+import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeNaturality
+import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeOpenRestriction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 
 

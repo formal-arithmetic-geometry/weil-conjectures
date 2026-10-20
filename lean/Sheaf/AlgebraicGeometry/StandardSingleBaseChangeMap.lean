@@ -5,7 +5,7 @@ Authors: SHEAF group U2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition
 public import Mathlib.AlgebraicGeometry.Fiber
 

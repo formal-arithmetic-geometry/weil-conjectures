@@ -6,8 +6,8 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
-import Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackIdentity
-import Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackComposition
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawPullbackIdentity
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawPullbackComposition
 
 /-! # The raw cohomology diagram
 

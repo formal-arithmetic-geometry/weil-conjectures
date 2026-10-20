@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ModuleStrictTransform
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
-import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackQCoh
+import WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackQCoh
 import WeilConjectures.Blowup.Principalization
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Modules.Tilde

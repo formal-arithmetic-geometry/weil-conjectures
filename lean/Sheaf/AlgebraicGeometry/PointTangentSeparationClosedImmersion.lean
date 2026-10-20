@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.ClosedFibreSingleton
 import Sheaf.AlgebraicGeometry.CotangentSurjectiveOfTangentInjective
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import Sheaf.AlgebraicGeometry.InfiniteClosedPointsInterClosureSingleton
 import Sheaf.AlgebraicGeometry.ProperFiniteFibreFiniteNeighbourhood
 import Sheaf.RingTheory.SurjectiveOfFiniteOfCotangent

@@ -8,7 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.TateTwist.ProEtale
-import Sheaf.SmoothPurity.NormalizedWitness
 
 /-!
 
@@ -80,23 +79,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]
-
-/- STATEMENT-DISPUTED: the section instance [SmoothOfRelativeDimension d f.left]
-is absent from the elaborated type of this definition: neither its written result type
-nor its original `sorry` body refers to that instance. Thus the actual declaration
-asserts purity for arbitrary f and d. For the identity of Spec(F_p), p != ell, and d = 1,
-the left side has the nonzero coefficient module as degree-zero cohomology; the right
-side is a degree-zero complex shifted by two and has zero degree-zero cohomology.
-They cannot be isomorphic, independently of any local-triviality claim for the Tate object.
-A proof using smoothness captures a new instance binder and changes the elaborated type.
-The unchanged target needs an authorized statement repair before the blueprint proof fits. -/
-
-/- STATEMENT-DISPUTED: the section instance [SmoothOfRelativeDimension d f.left]
-is absent from the elaborated type of this definition: neither its written result type
-nor its original body refers to that instance. Thus the declaration asserts purity for
-arbitrary f and d. The identity of Spec(F_p), with d = 1 and p != ℓ, is a counterexample.
-The normalized witness below records the intended smooth statement; an authorized binder
-repair is still needed to make the declaration itself match the blueprint. -/
 
 /-- **Smooth purity**: for a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type
 which is smooth of pure relative dimension `d`, the exceptional inverse image of the constant

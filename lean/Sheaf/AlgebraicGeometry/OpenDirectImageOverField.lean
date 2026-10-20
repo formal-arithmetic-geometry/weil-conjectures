@@ -5,7 +5,7 @@ Authors: SHEAF group NQ
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Sheaf.AlgebraicGeometry.GenericOpenImmersionConstructibility
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence

@@ -5,7 +5,7 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 

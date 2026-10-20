@@ -5,11 +5,11 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import WeilConjectures.Algebra.Homology.TensorKunnethNat
-import Sheaf.AlgebraicGeometry.PicardExternalCupZeroTensor
+import WeilConjectures.AlgebraicGeometry.PicardExternalCupZeroTensor
 import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAcyclic
 
 /-! # Acyclic base case for external cup

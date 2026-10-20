@@ -5,16 +5,16 @@ Authors: SHEAF group C4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechComparison
 import WeilConjectures.Algebra.Homology.TensorKunnethNat
-import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.PicardKunnethResolutionModel
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.ModuleCechComparisonIsoAffine
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.PicardKunnethResolutionModel
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.Paper.CechComparisonMapNaturality
 import Sheaf.Paper.CechCupProduct

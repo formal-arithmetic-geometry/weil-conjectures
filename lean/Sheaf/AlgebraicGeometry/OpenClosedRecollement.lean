@@ -5,7 +5,7 @@ Authors: SHEAF groups NQ, V2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension

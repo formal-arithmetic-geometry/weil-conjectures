@@ -46,17 +46,13 @@ abelian sheaves and the change of scalars along the canonical coefficient morphi
 This is the module-object counterpart of
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs`.
 
-## The projection formula
+## Sorried input
 
 * `ProEtale.CondensedRing.hasProjectionFormula_openImmersion`: the projection formula for
   the extension by zero along an open immersion on abelian pro-étale sheaves, i.e. the canonical
   map `j_!(j^* L ⊗ M) ⟶ L ⊗ j_! M` is an isomorphism. Both sides are the sheaf supported on `U`
-  whose restriction to `U` is `j^* L ⊗ M`. On presheaves the extension by zero vanishes
-  where the localization comma category is empty, and tensoring preserves this vanishing.
-  Sheafification is monoidal and intertwines the presheaf and sheaf extensions by zero.
-  Thus `L ⊗ j_! M` belongs to the essential image of the fully faithful `j_!`, so the
-  adjunction counit there is an isomorphism. The projection map is the composite of this
-  counit with the image of the invertible unit and monoidal comparison.
+  whose restriction to `U` is `j^* L ⊗ M`, the tensor product of sheaves being computed by
+  sheafification of the objectwise tensor product, which commutes with restriction to `U`.
 
 -/
 

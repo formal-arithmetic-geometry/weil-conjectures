@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import Sheaf.Paper.DeltaRestriction
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory

@@ -5,7 +5,7 @@ Authors: SHEAF group U3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupLeftCechExact
 
 import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechGenerators
 import WeilConjectures.Algebra.Homology.TensorKunnethNat

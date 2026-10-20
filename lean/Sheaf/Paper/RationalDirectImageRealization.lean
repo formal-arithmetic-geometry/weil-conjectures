@@ -22,7 +22,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.Algebra.Homology.FilteredColimitsTensor
+import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuityDirectImage
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations

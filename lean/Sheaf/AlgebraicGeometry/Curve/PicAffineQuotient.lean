@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 public import Mathlib.GroupTheory.QuotientGroup.Basic
-import Sheaf.AlgebraicGeometry.Curve.PicRestrictionBoundary
+import WeilConjectures.AlgebraicGeometry.Curve.PicRestrictionBoundary
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!

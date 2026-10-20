@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Limits.ExactFunctor
 import Sheaf.Algebra.Homology.FilteredHomComplexInvariance
 import Sheaf.Algebra.Homology.FilteredLocalizationInjectiveModel
 import Sheaf.CategoryTheory.InjectiveGradedFiltrationSplits
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!

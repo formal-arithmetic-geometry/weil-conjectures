@@ -20,7 +20,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison

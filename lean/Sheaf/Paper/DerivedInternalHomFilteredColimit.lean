@@ -16,9 +16,9 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.HomTensorTotal
-import Sheaf.Algebra.Homology.HomComplexGlobalHomotopy
+import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.Algebra.Homology.HomTensorTotal
+import WeilConjectures.Algebra.Homology.HomComplexGlobalHomotopy
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic

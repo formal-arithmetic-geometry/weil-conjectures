@@ -10,11 +10,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.AmpleAffineLimitDescent
 import Sheaf.AlgebraicGeometry.InvertibleAffineLimitDescent
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.AlgebraicGeometry.LimitFibreProducts
-import Sheaf.AlgebraicGeometry.LimitResidueField
+import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.AlgebraicGeometry.LimitFibreProducts
+import WeilConjectures.AlgebraicGeometry.LimitResidueField
 import Sheaf.AlgebraicGeometry.NoetherianFibreAmpleNeighbourhood
-import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
+import WeilConjectures.AlgebraicGeometry.ProperLimitNoetherian
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.AmpleIso
 import WeilConjectures.AlgebraicGeometry.AmplePullback

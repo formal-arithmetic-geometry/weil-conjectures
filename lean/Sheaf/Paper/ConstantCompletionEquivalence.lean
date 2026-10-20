@@ -24,7 +24,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Mathlib.CategoryTheory.Sites.Over
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
-public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
@@ -45,7 +45,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Sheaf.Algebra.Homology.DiagramKFlatReplacements
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.RingTheory.NoetherianKoszulAugmentationProZero
 

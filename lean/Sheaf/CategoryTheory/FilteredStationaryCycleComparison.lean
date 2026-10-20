@@ -5,10 +5,10 @@ Authors: SHEAF group N4
 -/
 module
 
-public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
-import all Sheaf.CategoryTheory.FilteredNormalizedQuotientPresentation
+import WeilConjectures.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
+import all WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
 import Sheaf.CategoryTheory.FilteredCohomologyImage
 
 /-! # A stationary quotient comparison characterized on actual cycles

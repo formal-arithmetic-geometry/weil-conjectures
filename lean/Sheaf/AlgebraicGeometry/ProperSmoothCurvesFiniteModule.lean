@@ -13,7 +13,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProperSmoothConnectedFibreDimensionLoci
 import Sheaf.AlgebraicGeometry.ProperSmoothCurvesPrimeCoefficients

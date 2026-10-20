@@ -4,13 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U2
 -/
 module
-public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Sheaf.AlgebraicGeometry.AffineFreeTerminalSectionsReconstruction
+import WeilConjectures.AlgebraicGeometry.AffineFreeTerminalSectionsReconstruction
 import WeilConjectures.AlgebraicGeometry.AffineResidueScalarTransport
 import Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel
 /-! # Derived residue model from affine free sections

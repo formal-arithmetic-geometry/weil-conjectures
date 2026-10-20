@@ -5,7 +5,7 @@ Authors: SHEAF group X3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
+public import WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule

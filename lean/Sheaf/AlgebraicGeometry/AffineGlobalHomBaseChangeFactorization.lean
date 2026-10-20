@@ -6,10 +6,10 @@ Authors: SHEAF group K4
 module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
-import Sheaf.AlgebraicGeometry.AffineSectionsBaseChangeMate
-import Sheaf.AlgebraicGeometry.PerfectInternalHomPullbackIsIso
-import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
+import WeilConjectures.AlgebraicGeometry.AffineSectionsBaseChangeMate
+import WeilConjectures.AlgebraicGeometry.PerfectInternalHomPullbackIsIso
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
 
 /-!
 # Affine global Hom comparison as sections of sheaf base change

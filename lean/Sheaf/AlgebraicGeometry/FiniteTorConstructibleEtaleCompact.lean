@@ -6,7 +6,7 @@ Authors: SHEAF group Q66
 module
 
 public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Sheaf.CategoryTheory.CompactObject
 

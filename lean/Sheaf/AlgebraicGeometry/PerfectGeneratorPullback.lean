@@ -6,12 +6,12 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffineDerivedPushforwardConservative
+import WeilConjectures.AlgebraicGeometry.AffineDerivedPushforwardConservative
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
+import WeilConjectures.AlgebraicGeometry.FiniteAffineDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
 
 /-! # Affine pullback of a perfect generator
 

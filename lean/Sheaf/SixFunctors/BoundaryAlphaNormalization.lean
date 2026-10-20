@@ -9,7 +9,7 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import Sheaf.Paper.DualityPairing
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
@@ -23,7 +23,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Mathlib.CategoryTheory.HomCongr
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Algebra.Homology.RhomGlobalSections
+import WeilConjectures.Algebra.Homology.RhomGlobalSections
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 

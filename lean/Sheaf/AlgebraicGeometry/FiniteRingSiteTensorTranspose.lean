@@ -24,12 +24,12 @@ public import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.Defs.Filter
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators
 import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
-import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
+import WeilConjectures.CategoryTheory.CompactGeneratorsBuildObjects
 import Sheaf.AlgebraicGeometry.UnboundedSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleOpenTensor
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction

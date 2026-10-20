@@ -5,7 +5,7 @@ Authors: SHEAF group S3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SectionBoundaryExact
+public import WeilConjectures.AlgebraicGeometry.SectionBoundaryExact
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

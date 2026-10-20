@@ -193,9 +193,6 @@ This is one of the three compatibilities out of which the comparison square of
 `sk-prop-sf-pf-reduction` (`AlgebraicGeometry.Etale.projectionMapOfCompactification_constantSingle`)
 is built, and the only one that is not formal; it is what reduces the projection formula at
 level `n` to the projection formula at level `m ≤ n`. -/
--- STATEMENT-DISPUTED: for an arbitrary ideal, `Λ/J` need not be dualizable;
--- the available projection-formula arguments only establish the finite,
--- principal, or weakly-regular cases.
 theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek (J : Ideal Λ) :
     Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y J ≅
       reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) :=

@@ -5,7 +5,7 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceDerivedRestriction
 
 /-! # Computing source derived sections on an injective representative

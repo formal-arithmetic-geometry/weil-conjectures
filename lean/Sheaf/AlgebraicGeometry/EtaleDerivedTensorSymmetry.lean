@@ -5,7 +5,7 @@ Authors: SHEAF group NB
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 

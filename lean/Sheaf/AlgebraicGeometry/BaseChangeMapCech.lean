@@ -2,7 +2,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 
 /-!
 # Čech computation of the derived base change map

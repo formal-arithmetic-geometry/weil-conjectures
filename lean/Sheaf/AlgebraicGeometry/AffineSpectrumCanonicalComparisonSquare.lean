@@ -5,11 +5,11 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
-public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
+public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
+public import WeilConjectures.AlgebraicGeometry.IsoPullbackStalkCohomology
 public import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
-import Sheaf.AlgebraicGeometry.AffineSpectrumOrdinaryComparisonSquare
+import WeilConjectures.AlgebraicGeometry.AffineSpectrumOrdinaryComparisonSquare
 import Sheaf.AlgebraicGeometry.AffineSpectrumCounitSquare
 
 /-! # The affine spectrum counit square on the canonical representative

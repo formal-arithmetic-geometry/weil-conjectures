@@ -3,13 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 import Sheaf.AlgebraicGeometry.RelativeMVHomotopyPullback
 import Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowRoof
-public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
-import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
-import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
+public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
+import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
+import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
+import WeilConjectures.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Resolved relative rows before the overlap mate -/

@@ -12,7 +12,7 @@ public import Sheaf.CategoryTheory.ConstantRingModuleSheaves
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
+import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyLimit
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.CategoryTheory.LeftModuleDerivedEvaluationForget

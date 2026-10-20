@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.NoetherianEtaleSectionSpecialization
 public import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import Sheaf.Targets.VectorBundlePurity

@@ -4,14 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.ProperFlatGlobalHomCompositeIso
-import Sheaf.AlgebraicGeometry.RestrictedGlobalHomShiftedEquiv
+import WeilConjectures.AlgebraicGeometry.RestrictedGlobalHomShiftedEquiv
 
 /-! # Hom comparison for affine proper flat duality base change
 

@@ -5,14 +5,14 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
+public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
-import Sheaf.Algebra.Homology.LocalizedComparisonCoproductSource
+import WeilConjectures.Algebra.Homology.LocalizedComparisonCoproductSource
 import Mathlib.Algebra.Category.ModuleCat.AB
-import all Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
+import all WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorColimits
 
 /-! # Direct-sum square for localized tensor comparisons

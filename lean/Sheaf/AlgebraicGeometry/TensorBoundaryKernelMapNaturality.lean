@@ -6,7 +6,7 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Transport of maps between square-zero tensor kernels
 

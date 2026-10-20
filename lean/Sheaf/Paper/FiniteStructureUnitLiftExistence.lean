@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
@@ -18,7 +18,7 @@ public import Sheaf.Paper.FiniteStructureAdjointTransitions
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.Paper.FiniteStructureUnitQuotientSystem
 import Sheaf.AlgebraicGeometry.GrothendieckExistence
-import Sheaf.AlgebraicGeometry.ThickeningSystemComparisonTransport
+import WeilConjectures.AlgebraicGeometry.ThickeningSystemComparisonTransport
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 

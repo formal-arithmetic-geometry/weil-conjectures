@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.UniformFiniteFilteredLocalization
 import Sheaf.CategoryTheory.DgAbcHomotopyCategoryTriangulated

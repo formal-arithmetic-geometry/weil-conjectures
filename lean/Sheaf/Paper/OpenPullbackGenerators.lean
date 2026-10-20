@@ -14,6 +14,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-!
 # Open inverse image preserves the constructible finite-Tor generators

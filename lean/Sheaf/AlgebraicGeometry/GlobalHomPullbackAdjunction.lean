@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
-public import Sheaf.Algebra.Homology.RhomGlobalSections
+public import WeilConjectures.Algebra.Homology.RhomGlobalSections
 import Sheaf.AlgebraicGeometry.GlobalHomPullbackCounitHZero
 
 /-!

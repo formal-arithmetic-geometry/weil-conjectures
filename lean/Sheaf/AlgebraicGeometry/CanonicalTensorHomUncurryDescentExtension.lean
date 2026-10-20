@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
+public import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
 import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison
 
 @[expose] public section

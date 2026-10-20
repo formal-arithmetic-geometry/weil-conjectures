@@ -26,7 +26,7 @@ import Sheaf.Algebra.Homology.KFlat
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Homology.DiagramKFlatReplacements
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap

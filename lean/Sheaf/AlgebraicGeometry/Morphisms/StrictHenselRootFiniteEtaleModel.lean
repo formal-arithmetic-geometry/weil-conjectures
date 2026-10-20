@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootPurityData
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat
-import Sheaf.AlgebraicGeometry.Morphisms.RegularIntegralDivisorEtalePurity
+import WeilConjectures.AlgebraicGeometry.Morphisms.RegularIntegralDivisorEtalePurity
 import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.AdjoinRoot

@@ -6,7 +6,7 @@ Authors: SHEAF groups T1 and P3
 module
 
 public import Sheaf.Paper.ModuleCupResolutionData
-public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
 public import WeilConjectures.Topology.Sheaves.CechComparison
 import Sheaf.Paper.ModuleCupPairingExists
 import Sheaf.Paper.ModuleCupResolutionInvariance

@@ -7,12 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-public import Sheaf.AlgebraicGeometry.LocalizedMixedDerivedPullback
+public import WeilConjectures.AlgebraicGeometry.LocalizedMixedDerivedPullback
 
 import Sheaf.AlgebraicGeometry.StandardFlatSingleBaseChange
-import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
+import WeilConjectures.AlgebraicGeometry.IsoPullbackStalkCohomology
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 

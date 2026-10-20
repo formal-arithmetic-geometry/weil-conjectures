@@ -1,7 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartModel
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTensorNaturality
-public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartTensorTail
+public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionChartTensorTail
 
 @[expose] public section
 universe u v

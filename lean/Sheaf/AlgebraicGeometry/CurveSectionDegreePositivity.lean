@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier
 import Sheaf.AlgebraicGeometry.CartierDivisorFinite
-import Sheaf.AlgebraicGeometry.Dimension
+import WeilConjectures.AlgebraicGeometry.Dimension
 import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
 

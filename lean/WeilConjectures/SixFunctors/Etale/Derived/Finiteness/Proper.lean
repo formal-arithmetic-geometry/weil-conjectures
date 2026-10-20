@@ -11,10 +11,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstr
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 
-import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
-import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-
 /-!
 # Constructibility of proper direct images
 
@@ -178,13 +174,7 @@ lemma isZero_homology_rightDerivedLowerStar_of_isProper {X S : Scheme.{u}} (f : 
 Let `f : X ⟶ S` be a proper morphism with `S` of finite type over `k`, all of whose geometric
 fibres have dimension at most `d`, and let `F` be a constructible sheaf of `Λ`-modules on `X_ét`,
 `Λ` a finite ring killed by an integer invertible in `k`. Then `Rᵠf_* F` is constructible on
-`S_ét` for every `q`, and `Rᵠf_* F = 0` for `q > 2d`.
-
-Proof: Proper constructibility gives the first assertion. For the second, pull back to
-an algebraic-closure geometric point of S. Proper torsion base change identifies this
-pullback with fibre cohomology, which vanishes above twice the specified fibre dimension.
-Geometric pullbacks detect zero sheaves. Compatibility of total, bounded-below and
-classical right derived functors gives exactly the displayed total-derived statement. -/
+`S_ét` for every `q`, and `Rᵠf_* F = 0` for `q > 2d`. -/
 theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper {X S : Scheme.{u}}
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (f : X ⟶ S) [IsProper f]
     (d : ℕ) (hd : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S),
@@ -210,14 +200,7 @@ finite ring `Λ` killed by an integer invertible in `k`. Let `s : Spec Ω ⟶ S`
    (the `q`-th homology of `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus` at `F`, the
    right-hand side being the sheaf `Rᵠa_{s*}(i_s^* F)` on `Spec Ω`) is an isomorphism, the
    fibre cohomology is finite, and it vanishes for `q > 2d`;
-2. (the finitude) every `Rᵠf_* F` is constructible, and `Rᵠf_* F = 0` for `q > 2d`.
-
-Proof: Use the proper constructibility and fibre-bound theorem just proved for (2).
-Proper torsion base change gives the isomorphism of (1). Exact pullback commutes with
-homology. The bounded-below/total-derived compatibility identifies the source cohomology
-with the sheaf in (2), whose pullback is constructible and therefore has finitely generated
-geometric stalks. Transport this finitude and the vanishing from (2) through the same
-comparison isomorphism. This works for all integer degrees, including negative degrees. -/
+2. (the finitude) every `Rᵠf_* F` is constructible, and `Rᵠf_* F = 0` for `q > 2d`. -/
 theorem isIso_homology_derivedBaseChangeMapPlus_of_isProper {X S : Scheme.{u}}
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (f : X ⟶ S) [IsProper f]
     (d : ℕ) (hd : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S),
@@ -263,14 +246,7 @@ proper direct image.
 
 Let `b : Y ⟶ S` be proper with `S` of finite type over `k`, and let `Λ` be a finite ring killed
 by an integer invertible in `k`. For `K ∈ D^b_c(Y, Λ)`, the derived direct image `Rb_* K` lies in
-`D^b_c(S, Λ)`.
-
-Proof: Finite coefficients are additive torsion, so the finite cohomological-dimension
-result for finite-type morphisms gives one upper bound for all sheaves in degree zero.
-Right-derived direct image preserves the lower bound zero. Proper constructibility gives
-constructible cohomology of these images. The finite-truncation devissage then extends
-this assertion from constructible sheaves in degree zero to all bounded constructible
-complexes. -/
+`D^b_c(S, Λ)`. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isProper {Y S : Scheme.{u}}
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (b : Y ⟶ S) [IsProper b]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

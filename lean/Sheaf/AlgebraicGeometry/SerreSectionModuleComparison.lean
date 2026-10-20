@@ -5,11 +5,11 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowers
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.ProjHomogeneousSectionTensorPowers
 import WeilConjectures.AlgebraicGeometry.SectionClearingDenominatorsQCQS
 import WeilConjectures.AlgebraicGeometry.SectionRestrictionSTorsion
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula

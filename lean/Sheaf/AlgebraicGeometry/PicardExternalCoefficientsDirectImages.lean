@@ -6,12 +6,12 @@ Authors: SHEAF group K2
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineLocalCohomology
-import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsPushforwardCoproduct
+import WeilConjectures.AlgebraicGeometry.PicardExternalCoefficientsPushforwardCoproduct
 import Sheaf.Paper.HigherDirectImagePresheaf
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian

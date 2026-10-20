@@ -6,8 +6,8 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-public import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
-public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Single-module transposes for the pinned derived adjunction
 

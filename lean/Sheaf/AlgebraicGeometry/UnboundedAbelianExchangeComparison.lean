@@ -6,12 +6,12 @@ Authors: SHEAF groups NF and F4
 module
 
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
-import Sheaf.AlgebraicGeometry.ModuleAbelianUnderivedExchange
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
 import Sheaf.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic
 
 /-!

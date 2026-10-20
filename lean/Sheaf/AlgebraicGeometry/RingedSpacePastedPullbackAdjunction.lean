@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute
-import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
+import WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 import Mathlib.CategoryTheory.Functor.Derived.Adjunction

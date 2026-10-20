@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Sheaf.AlgebraicGeometry.AffineRelativeDualizingComparison

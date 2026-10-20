@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Filtration
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import Sheaf.Algebra.Homology.FilteredDerivedHomCalculus
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.Algebra.Homology.HomologySequence

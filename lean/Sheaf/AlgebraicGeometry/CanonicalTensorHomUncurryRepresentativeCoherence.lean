@@ -5,9 +5,9 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
-import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation
-import Sheaf.AlgebraicGeometry.CanonicalTensorHomIdentityEvaluationCoherence
+public import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
+import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation
+import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomIdentityEvaluationCoherence
 
 /-! # Independence of the localized evaluation from a chain presentation
 

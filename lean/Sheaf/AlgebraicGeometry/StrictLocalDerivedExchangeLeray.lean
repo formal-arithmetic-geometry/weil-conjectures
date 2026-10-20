@@ -5,7 +5,7 @@ Authors: SHEAF group M3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
 import Sheaf.AlgebraicGeometry.InjectiveExchangeRepresentative
 import Sheaf.AlgebraicGeometry.StrictLocalSectionsUnitLeray

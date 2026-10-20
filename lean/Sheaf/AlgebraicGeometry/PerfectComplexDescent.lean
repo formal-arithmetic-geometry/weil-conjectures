@@ -1,10 +1,10 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
-import Sheaf.AlgebraicGeometry.PerfectDescentAffineOpen
+import WeilConjectures.AlgebraicGeometry.PerfectDescentAffineOpen
 import Sheaf.AlgebraicGeometry.PerfectDescentOpenUnion
 
 /-! # Descent of a perfect complex

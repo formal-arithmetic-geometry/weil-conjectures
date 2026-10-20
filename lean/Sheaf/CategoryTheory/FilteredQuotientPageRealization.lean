@@ -5,12 +5,12 @@ Authors: SHEAF group G3
 -/
 module
 
-public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
 import Sheaf.CategoryTheory.FilteredQuotientCanonicalFunctor
 import Sheaf.CategoryTheory.FilteredQuotientCanonicalStructure
 

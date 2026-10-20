@@ -5,7 +5,7 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 public import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison

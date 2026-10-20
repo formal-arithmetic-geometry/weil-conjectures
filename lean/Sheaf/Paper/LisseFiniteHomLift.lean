@@ -19,6 +19,7 @@ import Sheaf.AlgebraicGeometry.CondensedCoefficientComplexColimit
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.Algebra.Homology.Single
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Sheaf.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 
 /-! # Finite-stage lifting of lisse coefficient morphisms
 

@@ -11,7 +11,7 @@ public import Sheaf.Algebra.Homology.KFlatPullback
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Sheaf.Algebra.Homology.DerivedChangeOfRings
 import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsoluteAux
 
 /-! # Absolute left derived tensor pullback via K-flat resolutions

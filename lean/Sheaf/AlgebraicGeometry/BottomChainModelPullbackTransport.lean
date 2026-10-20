@@ -5,10 +5,10 @@ Authors: SHEAF group F3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.LocalizedPullbackPerfectCounit
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Transport of a bottom chain model through derived pullback

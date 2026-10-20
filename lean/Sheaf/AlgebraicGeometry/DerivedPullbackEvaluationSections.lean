@@ -6,11 +6,11 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
-public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.Algebra.Homology.RhomGlobalSections
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedTensorHomSectionsUnit
+public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.Algebra.Homology.RhomGlobalSections
+import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
+import WeilConjectures.AlgebraicGeometry.DerivedTensorHomSectionsUnit
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 
 /-! # Sections of the normalized pointwise pullback evaluation

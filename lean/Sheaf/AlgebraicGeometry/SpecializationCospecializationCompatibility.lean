@@ -6,7 +6,7 @@ Authors: SHEAF group NH
 module
 
 public import Sheaf.AlgebraicGeometry.SpecializationCospecializationArrows
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import Sheaf.AlgebraicGeometry.StrictBaseFibreMapFactorization
 import Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreUnit
 

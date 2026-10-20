@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps
+import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkMaps
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Sheaf.CategoryTheory.RingedSiteModules

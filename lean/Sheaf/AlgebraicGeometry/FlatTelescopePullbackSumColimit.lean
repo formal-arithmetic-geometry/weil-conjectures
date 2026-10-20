@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
+import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Pullback of the source coproduct in a flat telescope

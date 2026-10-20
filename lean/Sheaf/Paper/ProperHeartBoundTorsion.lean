@@ -25,9 +25,9 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.SixFunctors.IntTensorProjection
 import Sheaf.AlgebraicGeometry.ProperTorsionDirectImageBound
-import Sheaf.AlgebraicGeometry.DimensionBaseChange
-import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
-import Sheaf.AlgebraicGeometry.Dimension
+import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
+import WeilConjectures.AlgebraicGeometry.DimensionAffineOpenCover
+import WeilConjectures.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.Paper.CondensedConstructibleOpenClosedImages
 import Sheaf.Paper.FiniteConstantCokernel

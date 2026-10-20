@@ -5,16 +5,16 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuityData
+public import WeilConjectures.AlgebraicGeometry.PerfectOverlapHomContinuityData
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreBase
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenCounitCompatibility
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionLocalization
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
+public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenCounitCompatibility
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
+import WeilConjectures.AlgebraicGeometry.TwoOpenComparisonDiagram
+import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 import Sheaf.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
 
 /-! # Core object comparison data (without the final Hom pin).

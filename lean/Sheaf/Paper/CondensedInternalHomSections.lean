@@ -10,6 +10,7 @@ public import Sheaf.Paper.CondensedQcqsPushforwardContinuity
 import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import all WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
+public import Sheaf.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 
 /-! # Global sections of internal Hom -/
 

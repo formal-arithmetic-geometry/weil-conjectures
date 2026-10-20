@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore
 public import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraAffine
-public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Restrict

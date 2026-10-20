@@ -6,14 +6,14 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DiagonalBaseChangeLocalDerivedCategories
-import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import WeilConjectures.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
+import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Mathlib.CategoryTheory.Adjunction.Unique
 

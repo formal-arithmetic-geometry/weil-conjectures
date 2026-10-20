@@ -7,13 +7,13 @@ module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
 import Sheaf.Paper.EtaleCEPrescribedNormalizedFirstPages
-import Sheaf.CategoryTheory.FilteredCanonicalPageDescent
+import WeilConjectures.CategoryTheory.FilteredCanonicalPageDescent
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.ExtPullbackResolutionSections
 import WeilConjectures.AlgebraicGeometry.SheafHExtResolutionSectionsIso
-import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
-import Sheaf.CategoryTheory.FilteredComplexPageDifferential
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
+import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
+import WeilConjectures.CategoryTheory.HypercohomologyFirstPage
 
 /-! # Quotient-page descent on prescribed CE resolutions
 

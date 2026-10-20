@@ -6,9 +6,9 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackCounitIsomorphism
-import Sheaf.Algebra.Homology.RhomGlobalSections
-import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+import WeilConjectures.Algebra.Homology.RhomGlobalSections
+import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
+import WeilConjectures.AlgebraicGeometry.GlobalDerivedHom
 import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses

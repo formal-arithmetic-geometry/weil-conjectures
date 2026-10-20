@@ -7,7 +7,7 @@ module
 public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Data.Int.Interval
-import Sheaf.Algebra.Homology.HomComplexProjections
+import WeilConjectures.Algebra.Homology.HomComplexProjections
 import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! Finite diagonal support for a bounded Hom-complex.

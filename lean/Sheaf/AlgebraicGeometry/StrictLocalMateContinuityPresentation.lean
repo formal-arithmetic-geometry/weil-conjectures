@@ -7,9 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 public import WeilConjectures.AlgebraicGeometry.GlobalCohomologyContinuityPresentation
-import Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometryExistence
-import Sheaf.AlgebraicGeometry.StrictLocalCohomologySourceColimit
-import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionFormulas
+import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometryExistence
+import WeilConjectures.AlgebraicGeometry.StrictLocalCohomologySourceColimit
+import WeilConjectures.AlgebraicGeometry.StrictLocalMateProjectionFormulas
 
 /-! # Presenting the strict-local mate as projection restriction
 

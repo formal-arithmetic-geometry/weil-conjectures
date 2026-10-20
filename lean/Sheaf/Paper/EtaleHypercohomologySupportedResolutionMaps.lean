@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 import Sheaf.Paper.EtaleHypercohomologySupportedCETotals
 import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
-import Sheaf.CategoryTheory.CartanEilenbergAugmentationQuasiIso
+import WeilConjectures.CategoryTheory.CartanEilenbergAugmentationQuasiIso
 
 /-! # Support-controlled filtered resolution maps
 

@@ -22,8 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.AlgebraicallyClosedCohomologyInva
 import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparison
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
-public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
-public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 

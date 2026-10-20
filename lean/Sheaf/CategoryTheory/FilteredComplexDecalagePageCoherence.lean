@@ -13,7 +13,7 @@ import Sheaf.CategoryTheory.FilteredComplexCanonicalModel
 import Sheaf.CategoryTheory.FilteredComplexDecalageTower
 import Sheaf.CategoryTheory.FilteredComplexDecalagePageDifferentialCoherence
 import Sheaf.CategoryTheory.FilteredComplexDecalagePageSuccessorCoherence
-import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover
+import WeilConjectures.CategoryTheory.FilteredComplexSuccessorCyclesCover
 import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
 
 /-! # Differential and successor compatibility of the normalized decalage pages

@@ -5,7 +5,7 @@ Authors: SHEAF group NG
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.Algebra.Homology.DerivedCategory.Plus
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint

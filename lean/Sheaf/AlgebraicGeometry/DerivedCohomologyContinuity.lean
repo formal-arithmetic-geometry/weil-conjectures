@@ -6,7 +6,7 @@ Authors: SHEAF group NX
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
+import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyLimit
 import Sheaf.AlgebraicGeometry.DerivedModuleUnderlyingComparison
 
 /-!

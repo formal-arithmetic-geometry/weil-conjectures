@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
 import Sheaf.AlgebraicGeometry.UnionBoundedAboveModel
-import Sheaf.AlgebraicGeometry.BoundedAboveModelFlatReplacement
+import WeilConjectures.AlgebraicGeometry.BoundedAboveModelFlatReplacement
 
 @[expose] public section
 set_option autoImplicit false

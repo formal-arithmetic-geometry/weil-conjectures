@@ -14,14 +14,6 @@ public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import Sheaf.AlgebraicGeometry.HypercoverFreeAbelianZero
-import Sheaf.AlgebraicGeometry.HypercoverFreeAbelianPositive
-import Sheaf.AlgebraicGeometry.HypercoverFreeModuleZero
-import Sheaf.AlgebraicGeometry.HypercoverFreeModulePositive
-import Sheaf.AlgebraicGeometry.HypercoverInjectiveAbelianZero
-import Sheaf.AlgebraicGeometry.HypercoverInjectiveAbelianPositive
-import Sheaf.AlgebraicGeometry.HypercoverInjectiveModuleZero
-import Sheaf.AlgebraicGeometry.HypercoverInjectiveModulePositive
 
 /-!
 # Blueprint statements

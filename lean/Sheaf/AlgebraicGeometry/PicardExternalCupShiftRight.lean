@@ -5,12 +5,12 @@ Authors: SHEAF groups F1 and C3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
+public import WeilConjectures.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import Sheaf.AlgebraicGeometry.PicardExternalCupRightShortExact
-import Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-! # Right dimension shifting for external cup
