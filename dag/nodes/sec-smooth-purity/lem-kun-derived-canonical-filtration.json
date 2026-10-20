@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Let $C\\in D^b(R)$. By [lem-kun-bounded-derived-roofs], choose a bounded cochain representative $K$ and an isomorphism $Q(K)\\cong C$. For a derived morphism $u:C\\to C'$, choose bounded representatives $K,L$ and a bounded roof $K\\xleftarrow{s}M\\xrightarrow{g}L$ for $u$, with $s$ a quasi-isomorphism. Thus all representative-level constructions below may be made with bounded complexes and bounded roofs; no termwise functorial representative is chosen.",
+   "text": "Let $C\\in D^b(R)$. By [lem-kun-bounded-derived-roofs], choose a bounded cochain representative $K$ and an isomorphism $Q(K)\\cong C$. For a derived morphism $u:C\\to C'$, choose bounded representatives $K,L$ and a bounded roof $K\\xleftarrow{s}M\\xrightarrow{g}L$ for $u$, with $s$ a quasi-isomorphism. Thus all representative-level constructions below may be made with bounded complexes and bounded roofs; no termwise functorial representative is chosen. Form the full subcategory of termwise bounded complexes and its homotopy quotient. The bounded roofs and common-refinement clauses show that the functor from this quotient to the bounded derived category is essentially surjective, every morphism is a right roof, and equality of images of two maps is killed by a quasi-isomorphism. These properties give a right calculus of fractions on this bounded homotopy category and identify its localization with the bounded derived category (Mathlib localization construction and full-faithful criterion).",
    "uses": [
     "def-weil-pbc-bounded-derived-subcategories",
     "lem-kun-bounded-derived-roofs"
@@ -45,12 +45,11 @@
    }
   },
   {
-   "text": "By [lem-kun-filtered-tensor-localization], $\\mathcal D_f(R)$ is the stated localization of $\\mathcal H_f(R)$ at $W$. If $s: M\\to K$ is the denominator of a bounded roof from Step 1, [lem-kun-canonical-truncation-filtration] says that each $\\operatorname{gr}^i(s)$ is a quasi-isomorphism, so $s$ belongs to $W$ in [def-kun-finite-filtered-module-homotopy]. By [lem-kun-filtered-quasi-isomorphism-fractions], $W$ has two-out-of-three and a calculus of right fractions. The bounded common-refinement clause of [lem-kun-bounded-derived-roofs], together with the same filtration-preserving refinement maps, shows that equal derived roofs give equal localized filtered roofs. Therefore $K\\mapsto(K,F)$ and a roof $K\\xleftarrow{s}M\\xrightarrow{g}L\\mapsto Q_W(s)^{-1}Q_W(g)$ define a functor $\\mathcal T:D^b(R)\\to\\mathcal D_f(R)$, independent of all bounded representatives and refinements.",
+   "text": "On bounded complexes, send K to its canonical finite filtered complex and a chain map to its unique filtration-preserving lift. The homotopy clause of [lem-kun-canonical-truncation-filtration] makes this descend to the bounded homotopy quotient. Its graded quasi-isomorphism clause sends every quasi-isomorphism to an invertible map in the finite filtered localization [def-kun-finite-filtered-module-homotopy]. Thus the localization universal property established in Step 1 gives the functor T on the bounded derived category and the comparison on every bounded representative. The naturality of the localization comparison gives its chain-map formula; applying that formula to a quasi-isomorphism and then canceling gives the roof formula. No calculus of fractions in the filtered target is required. Obtain the target forgetful and graded functors, their localization lifting isomorphisms, and their representative-map equations from [lem-kun-filtered-tensor-localization].",
    "uses": [
     "lem-kun-canonical-truncation-filtration",
     "lem-kun-filtered-tensor-localization",
     "def-kun-finite-filtered-module-homotopy",
-    "lem-kun-filtered-quasi-isomorphism-fractions",
     "lem-kun-bounded-derived-roofs"
    ],
    "elementary": false,
@@ -72,11 +71,10 @@
    }
   },
   {
-   "text": "The graded functor on $\\mathcal D_f(R)$ is defined because every map in $W$ is a quasi-isomorphism on each graded quotient. The natural quasi-isomorphisms of Step 2 give, for every bounded representative $K$, canonical identifications $\\operatorname{gr}^i(K,F)\\cong H^{-i}(K)[i]$. Their chain-map and homotopy naturality, and the bounded-roof independence in Step 3, descend these identifications to a natural isomorphism $\\operatorname{gr}^i\\mathcal T(C)\\cong H^{-i}(C)[i]$. For a derived morphism $u$, the map is $H^{-i}(u)[i]$ by the representative roof formula, while the underlying map is $u$ by Step 4. This also proves independence of bounded representatives up to the required compatible natural isomorphism.",
+   "text": "For each i compose the target graded comparison, the image under Q of the natural quasi-isomorphism pi from Step 2, the single-complex shift isomorphism, and the inverse of the canonical homology comparison Q(K). This is a natural isomorphism on bounded complexes: paste the graded comparison naturality, the pi naturality, the shift naturality, and the homology comparison naturality. Descend it first through the homotopy quotient and then through the localization from Step 1 using the fully faithful restriction of natural transformations. Do the same for the forgetful comparison in Step 4. Evaluation on representatives gives exactly the required normalization equations. Naturality along the chosen representative isomorphism proves these equations for every eC; the two final morphism equations are the naturality of these descended isomorphisms. This proves compatibility for all roofs and independence of representatives.",
    "uses": [
     "lem-kun-canonical-truncation-filtration",
     "lem-kun-bounded-derived-roofs",
-    "lem-kun-filtered-quasi-isomorphism-fractions",
     "def-kun-finite-filtered-module-homotopy"
    ],
    "elementary": false,
@@ -94,13 +92,12 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-bounded-derived-subcategories",
   "lem-kun-bounded-derived-roofs",
-  "lem-kun-canonical-truncation-filtration",
-  "lem-kun-filtered-quasi-isomorphism-fractions"
+  "lem-kun-canonical-truncation-filtration"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 05RW, 05S2, 05S6 and homology Tag 0118; explicit representative-level functoriality extension"
+  "place": "Tags 05RW, 05S2, 05S6 and homology Tag 0118; explicit representative-level functoriality extension; formalized via the bounded homotopy quotient localization universal property, Mathlib calculus-of-fractions localization criterion and liftNatIso, without filtered-target fractions"
  },
  "mathlib_searches": [
   {
@@ -194,5 +191,15 @@
   "group": "NV",
   "result": "pass",
   "note": "Clause-by-clause, dependency, source, universe, edge-case, docstring, report, route-pivot, and scompile.py checks passed; only review.md was written."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261020T051126-L-1568534",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
