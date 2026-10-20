@@ -252,6 +252,10 @@ theorem formal_functions_stalk_structureSheaf {X Y : Scheme.{uS}} (f : X ⟶ Y)
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
   have hF : RingedSpace.IsCoherent X.toRingedSpace
       (SheafOfModules.unit X.ringCatSheaf) := by
+    have : (SheafOfModules.unit X.ringCatSheaf).IsInvertible :=
+      SheafOfModules.instIsInvertibleUnit.{uS, uS, uS}
+    have : (SheafOfModules.unit X.ringCatSheaf).IsFiniteLocallyFree :=
+      SheafOfModules.IsInvertible.isFiniteLocallyFree.{uS, uS, uS} _
     have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
       SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{uS, uS, uS} _
     exact (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mpr
