@@ -18613,3 +18613,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:59 L: returned deliver/E1/Sheaf.Paper.GlobalTensorPullbackUnderivedData (reviewer RETURN: (reviewer C-03a5b, head 03a5bf890) H4/brief 2+6: the re-export uses the WeilConjectures copies of moduleCup_sectionTenso)
 
 - 23:59 L: batch 20261020T155823 dependency take-out
+- 16:00 L: returned deliver/M2/Sheaf.AlgebraicGeometry.StrictHenselizationSchemeFunctoriality (reviewer RETURN: (reviewer C-07e72, head 07e72618c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.St)
