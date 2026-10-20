@@ -58,7 +58,7 @@ private theorem fullPointedStrictHenselizationCone
   let E := (opOpEquivalence
     (SmallModel.{v} (strictHenselizationNeighbourhoods s))).symm
   let cR := (strictHenselizationCone s).whisker E.functor
-  let α : A ⟶ E.functor ⋙ (smallStrictHenselizationDiagram s).op ⋙ Scheme.Spec :=
+  let α : A ⟶ E.functor ⋙ (strictHenselizationAffineDiagram s).op ⋙ Scheme.Spec :=
     Functor.whiskerLeft A ΓSpec.adjunction.unit
   have hIso (j : SmallModel.{v} (strictHenselizationNeighbourhoods s)) :
       IsIso (α.app j) := by

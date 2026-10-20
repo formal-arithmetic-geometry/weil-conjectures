@@ -13,7 +13,7 @@ public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 public import Sheaf.RingTheory.GeneralizedHenselizationAtPrime
 public import Sheaf.RingTheory.StrictHenselizationPresentationIn
-public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.RingTheory.IndEtaleUniverseTransport
 import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain

@@ -44,7 +44,7 @@ private theorem pointedStrictHenselizationLift
             j).2.left := by
   classical
   let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
-  let c : Cone ((smallStrictHenselizationDiagram s).op ⋙ Scheme.Spec) :=
+  let c : Cone ((strictHenselizationAffineDiagram s).op ⋙ Scheme.Spec) :=
     { pt := Spec (.of Ω)
       π :=
         { app := fun j ↦ (N.obj j.unop.unop).2.left ≫

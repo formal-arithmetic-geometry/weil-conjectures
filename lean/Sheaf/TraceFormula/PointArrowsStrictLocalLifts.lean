@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Sites.Limits
 
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 import Mathlib.CategoryTheory.Yoneda
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 
 /-!
 # Point arrows and geometric lifts into strict localizations

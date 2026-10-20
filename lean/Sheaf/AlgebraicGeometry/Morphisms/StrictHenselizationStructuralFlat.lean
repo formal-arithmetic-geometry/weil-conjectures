@@ -41,7 +41,7 @@ theorem strictHenselization_structural_ringHom_flat
   classical
   let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse
   let J := (SmallModel.{u} (strictHenselizationNeighbourhoods barY))ᵒᵖ
-  let D := smallStrictHenselizationDiagram barY
+  let D := strictHenselizationAffineDiagram barY
   let f (j : J) : Spec (N.obj j.unop).1.left.unop ⟶ Spec R :=
     ((AffineEtale.Spec (Spec R)).obj (N.obj j.unop).1).hom
   have : IsCofiltered (SmallModel.{u} (strictHenselizationNeighbourhoods barY)) :=
@@ -59,14 +59,10 @@ theorem strictHenselization_structural_ringHom_flat
             (Spec.map (N.map g.unop).1.left.unop).appTop
         rw [Category.id_comp, Category.assoc]
         exact congrArg (fun k ↦ (ΓSpecIso R).inv ≫ k) h.symm }
-  let c : D ⟶ (Functor.const J).obj (strictHenselizationRing barY) := by
-    first
-    | exact (colimit.cocone D).ι
-    | exact (smallStrictHenselizationCocone barY).ι
-  have hc : IsColimit (Cocone.mk (strictHenselizationRing barY) c) := by
-    first
-    | exact colimit.isColimit D
-    | exact isColimitSmallStrictHenselizationCocone barY
+  let c : D ⟶ (Functor.const J).obj (strictHenselizationRing barY) :=
+    (colimit.cocone D).ι
+  have hc : IsColimit (Cocone.mk (strictHenselizationRing barY) c) :=
+    colimit.isColimit D
   apply RingHom.Flat.of_isColimit b J D (t := t) hc
   intro j
   refine ⟨?_, ?_⟩

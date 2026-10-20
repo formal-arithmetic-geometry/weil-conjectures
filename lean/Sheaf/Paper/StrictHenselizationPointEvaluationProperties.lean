@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.StrictHenselizationPointEvaluationImage
 import Sheaf.Paper.StrictHenselizationPointEvaluationComparison
 import WeilConjectures.RingTheory.StrictHenselizationTriples
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.Paper.StrictHenselizationPointEvaluation
 
 /-! # Surjectivity of pointed evaluation

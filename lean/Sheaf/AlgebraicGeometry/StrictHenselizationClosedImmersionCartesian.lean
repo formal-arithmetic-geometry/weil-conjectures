@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.RingTheory.MapIntoHenselianColimit
 import WeilConjectures.RingTheory.PointedEtaleFiltered

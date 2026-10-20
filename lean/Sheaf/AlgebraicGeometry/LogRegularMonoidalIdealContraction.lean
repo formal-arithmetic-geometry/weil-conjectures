@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
-public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Mathlib.RingTheory.FiniteType
 import Sheaf.AlgebraicGeometry.LogRegularSharpChart
 import Sheaf.TraceFormula.KatoTorIndependenceChart

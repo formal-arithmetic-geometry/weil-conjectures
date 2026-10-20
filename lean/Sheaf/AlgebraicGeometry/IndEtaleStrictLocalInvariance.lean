@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
-public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale

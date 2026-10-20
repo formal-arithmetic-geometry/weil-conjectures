@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-! # Geometric strict henselization as a local-base algebra

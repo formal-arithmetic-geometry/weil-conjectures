@@ -5,7 +5,7 @@ Authors: SHEAF group NP
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Sheaf.Paper.StrictHenselizationFunctoriality
 public import Sheaf.Paper.StrictHenselizationPointEvaluation
 public import Mathlib.AlgebraicGeometry.Pullbacks

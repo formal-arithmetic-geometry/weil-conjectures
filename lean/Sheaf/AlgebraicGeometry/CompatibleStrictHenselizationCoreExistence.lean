@@ -4,7 +4,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 
 @[expose] public section
 universe u

@@ -5,7 +5,7 @@ Authors: SHEAF group N7
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine

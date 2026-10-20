@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.GeneralizedHenselizationAtPrime
 public import Sheaf.RingTheory.StrictHenselizationPresentationIn
-public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
@@ -79,10 +79,10 @@ Source: Stacks Project, Tag 04HX (blueprint: lem-wf-strict-henselization-finite-
 noncomputable def finiteResidueLiftChartMap {S : Scheme.{u}} {Ω : Type u}
     [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (j : (SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s))ᵒᵖ) :
-    (Scheme.smallStrictHenselizationDiagram s).obj j ⟶ Scheme.strictHenselizationRing s :=
-  colimit.ι (Scheme.smallStrictHenselizationDiagram s) j ≫
+    (Scheme.strictHenselizationAffineDiagram s).obj j ⟶ Scheme.strictHenselizationRing s :=
+  colimit.ι (Scheme.strictHenselizationAffineDiagram s) j ≫
     (Scheme.strictHenselizationRepresentativeIso s CategoryTheory.Equivalence.refl
-      (Scheme.smallStrictHenselizationDiagram s) (Iso.refl _)).hom
+      (Scheme.strictHenselizationAffineDiagram s) (Iso.refl _)).hom
 
 /-- The system of finite local etale lifts with specified residue identifications.
 A surjective residue map with kernel `m_H B_e` specifies exactly an isomorphism

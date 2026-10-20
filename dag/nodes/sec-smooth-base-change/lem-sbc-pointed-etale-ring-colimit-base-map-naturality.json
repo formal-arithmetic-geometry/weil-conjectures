@@ -88,10 +88,11 @@
   "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitBaseMapNaturality",
   "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedRootLimitBaseMapNaturality.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselization_baseRingMap_naturality",
-  "statement": "theorem strictHenselization_baseRingMap_naturality\n    (R : CommRingCat.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    {j k : (SmallModel.{u} (strictHenselizationNeighbourhoods barY))ᵒᵖ}\n    (f : j ⟶ k) :\n    (ΓSpecIso R).inv ≫ Scheme.Γ.map\n        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj\n          k.unop).1.hom.op =\n      ((ΓSpecIso R).inv ≫ Scheme.Γ.map\n        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj\n          j.unop).1.hom.op) ≫\n        (smallStrictHenselizationDiagram barY).map f",
+  "statement": "theorem strictHenselization_baseRingMap_naturality\n    (R : CommRingCat.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    {j k : (SmallModel.{u} (strictHenselizationNeighbourhoods barY))ᵒᵖ}\n    (f : j ⟶ k) :\n    (ΓSpecIso R).inv ≫ Scheme.Γ.map\n        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj\n          k.unop).1.hom.op =\n      ((ΓSpecIso R).inv ≫ Scheme.Γ.map\n        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj\n          j.unop).1.hom.op) ≫\n        (strictHenselizationAffineDiagram barY).map f",
   "branch": "sheaf-dag",
   "by": "J2",
-  "date": "2026-10-17"
+  "date": "2026-10-17",
+  "note": "W4 retirement adaptation: the recorded Lean signature uses the adopted strictHenselizationAffineDiagram, definitionally identical to the withdrawn smallStrictHenselizationDiagram. The mathematical statement and proof are unchanged."
  },
  "lean_audit": {
   "master": {
@@ -116,13 +117,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J2",
+  "reviewer": "C-d590d",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261017T003422-L-3315188",
+  "landing": "20261020T145547-L-2412568",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf.AlgebraicGeometry.StrictHenselization vs upstream WeilConjectures StrictHenselization(+Extension): identical diagram body, same-name cocone/iso; 37 delivered modules + 60 direct importers compiled clean; nodes and change record match the Lean"
  }
 }

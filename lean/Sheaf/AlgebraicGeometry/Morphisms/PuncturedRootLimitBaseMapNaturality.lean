@@ -5,7 +5,7 @@ Authors: SHEAF group J2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 
 /-! # Naturality of affine pointed neighbourhood base maps
 Source: Stacks Project, Tag 0BSK, proof of the pointed étale colimit presentation.
@@ -39,7 +39,7 @@ theorem strictHenselization_baseRingMap_naturality
       ((ΓSpecIso R).inv ≫ Scheme.Γ.map
         ((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj
           j.unop).1.hom.op) ≫
-        (smallStrictHenselizationDiagram barY).map f := by
+        (strictHenselizationAffineDiagram barY).map f := by
   let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse
   let q (i : (SmallModel.{u} (strictHenselizationNeighbourhoods barY))ᵒᵖ) :
       Scheme.Spec.obj (N.obj i.unop).1.left ⟶ Spec R :=

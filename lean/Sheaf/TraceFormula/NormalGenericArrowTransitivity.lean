@@ -15,7 +15,7 @@ public import Mathlib.Topology.Sober
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 
 import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.RingTheory.StrictHenselizationTriples
 import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain

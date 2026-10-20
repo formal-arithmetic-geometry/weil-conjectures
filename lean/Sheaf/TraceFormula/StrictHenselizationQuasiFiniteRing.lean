@@ -21,7 +21,7 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.RingTheory.IndPrincipalZariski
 import Mathlib.FieldTheory.IsSepClosed
 import Mathlib.RingTheory.Etale.Basic
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-!

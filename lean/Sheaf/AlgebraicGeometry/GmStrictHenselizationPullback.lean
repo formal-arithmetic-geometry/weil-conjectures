@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.DescendAffine
 import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
 import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 import WeilConjectures.CategoryTheory.Sites.Torsor

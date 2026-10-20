@@ -5,7 +5,7 @@ Authors: SHEAF contributors
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 

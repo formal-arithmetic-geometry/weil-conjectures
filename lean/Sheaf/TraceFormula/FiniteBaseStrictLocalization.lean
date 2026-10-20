@@ -12,7 +12,7 @@ public import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.TraceFormula.StrictHenselizationQuasiFiniteRing
 import Sheaf.TraceFormula.StrictHenselizationTensorFinite

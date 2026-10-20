@@ -101,8 +101,8 @@ theorem strictHenselizationPointEvaluation_mem
   let : PreservesColimitsOfShape Cᵒᵖ (CategoryTheory.forget CommRingCat) := by
     apply FinallySmall.preservesColimitsOfShape_of_isFiltered
   obtain ⟨j, b, hb⟩ := Concrete.isColimit_exists_rep
-    (smallStrictHenselizationDiagram barY)
-    (colimit.isColimit (smallStrictHenselizationDiagram barY)) a
+    (strictHenselizationAffineDiagram barY)
+    (colimit.isColimit (strictHenselizationAffineDiagram barY)) a
   rw [← hb]
   let M := (equivSmallModel.{v} (strictHenselizationNeighbourhoods barY)).inverse.obj j.unop
   let X := Spec M.1.left.unop
@@ -114,7 +114,7 @@ theorem strictHenselizationPointEvaluation_mem
     change (M.2.left ≫ X.toSpecΓ) ≫ X.isoSpec.inv = M.2.left
     rw [Category.assoc, toSpecΓ_isoSpec_inv X]
     exact Category.comp_id M.2.left
-  have heq : (colimit.ι (smallStrictHenselizationDiagram barY) j) ≫
+  have heq : (colimit.ι (strictHenselizationAffineDiagram barY) j) ≫
       CommRingCat.ofHom (strictHenselizationPointEvaluation barY) =
       M.2.left.appTop ≫ (ΓSpecIso (.of Ω)).hom := by
     apply Spec.map_injective
@@ -123,7 +123,7 @@ theorem strictHenselizationPointEvaluation_mem
     exact he.trans hs.symm
   have hev := congrArg (fun f => f.hom b) heq
   change strictHenselizationPointEvaluation barY
-      (((colimit.cocone (smallStrictHenselizationDiagram barY)).ι.app j).hom b) = _ at hev
+      (((colimit.cocone (strictHenselizationAffineDiagram barY)).ι.app j).hom b) = _ at hev
   rw [hev]
   have hM : M.2.left ≫ M.1.hom = barY := Over.w M.2
   let q := M.2.left (IsLocalRing.closedPoint Ω)

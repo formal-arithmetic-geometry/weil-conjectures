@@ -6,7 +6,7 @@ Authors: SHEAF group Q65
 module
 
 public import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
-public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.CategoryTheory.Filtered.Final

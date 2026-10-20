@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.TraceFormula.FiniteProjectiveEnvelope
 import Sheaf.TraceFormula.LocalQuasiFiniteProjection
