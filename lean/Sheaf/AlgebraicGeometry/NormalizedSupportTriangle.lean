@@ -6,7 +6,6 @@ Authors: SHEAF group Q06
 module
 
 public import Sheaf.AlgebraicGeometry.SupportedExteriorProduct
-public import Sheaf.AlgebraicGeometry.SupportRestrictionTriangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
