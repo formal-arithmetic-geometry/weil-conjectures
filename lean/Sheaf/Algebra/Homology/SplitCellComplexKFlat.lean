@@ -15,7 +15,8 @@ public import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import Mathlib.Algebra.Homology.BifunctorShift
-import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
+import Sheaf.Algebra.Homology.SplitCellComplexKFlatFiniteStage
+import Sheaf.Algebra.Homology.SplitCellComplexKFlatColimit
 
 /-!
 # K-flatness of complexes built from split free cells
@@ -91,6 +92,9 @@ theorem kFlat_of_split_free_cells {R : Type u} [CommRing R]
     (hquot_d : ∀ (m : ℕ) (n : ℤ), (cokernel (step m)).d n (n + 1) = 0)
     (hquot_free : ∀ (m : ℕ) (n : ℤ), Module.Free R ((cokernel (step m)).X n)) :
     (HomologicalComplex.quasiIso (ModuleCat.{u} R) (ComplexShape.up ℤ)).kFlat C := by
-  sorry
+  have hF : ∀ m : ℕ, (HomologicalComplex.quasiIso (ModuleCat.{u} R)
+      (ComplexShape.up ℤ)).kFlat (F m) :=
+    kFlat_of_split_free_cells_finite_stage F step hzero hsplit hquot_d hquot_free
+  exact kFlat_of_exhaustive_split_colimit C F ι step hmono hcompat hexhaustive hF
 
 end CochainComplex

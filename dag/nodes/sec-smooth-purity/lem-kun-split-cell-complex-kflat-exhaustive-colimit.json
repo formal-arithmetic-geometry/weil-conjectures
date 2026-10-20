@@ -1,0 +1,105 @@
+{
+ "id": "lem-kun-split-cell-complex-kflat-exhaustive-colimit",
+ "kind": "statement",
+ "title": "K-flatness of an exhaustive split filtered union",
+ "statement": "Let R be a commutative ring. Let C be a cochain complex, F : ℕ → CochainComplex (ModuleCat R) ℤ, and ι m : F m ⟶ C and step m : F m ⟶ F (m+1). Assume every ι m is monic, step m ≫ ι (m+1) = ι m, every element of every C.X n lies in some image of ι m, and every F m is K-flat. Then C is K-flat: (HomologicalComplex.quasiIso (ModuleCat R) (ComplexShape.up ℤ)).kFlat C.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0BYH, 06Y3 and 0H7X."
+ },
+ "stmt_deps": [
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "The hypotheses identify C degreewise with the filtered colimit of the F m. Tensor comparison commutes with this filtered colimit; exactness of filtered colimits preserves the equalities of cycles and boundaries. Hence tensoring any acyclic complex with C is acyclic, which is K-flatness.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0BYH, 06Y3 and 0H7X."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "F2",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0BYH, 06Y3 and 0H7X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered free complexes are K-flat finite stage induction",
+   "results": "Module.Flat.of_free and KProjective hits; no exact K-flat theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "kFlat KProjective filtered colimit",
+   "results": "OK 0 hit(s): Unknown identifier kFlat.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat.*filtered|filtered.*kFlat",
+   "results": "OK 0 hit(s).",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.Algebra.Homology.SplitCellComplexKFlat",
+  "by": "worker",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-split-cell-complex-kflat",
+   "place": "Finite-stage and filtered-colimit subarguments."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SplitCellComplexKFlatColimit",
+  "declaration": "CochainComplex.kFlat_of_exhaustive_split_colimit",
+  "file": "lean/Sheaf/Algebra/Homology/SplitCellComplexKFlatColimit.lean",
+  "statement": "theorem kFlat_of_exhaustive_split_colimit {R : Type u} [CommRing R]\n    (C : CochainComplex (ModuleCat.{u} R) ℤ)\n    (F : ℕ → CochainComplex (ModuleCat.{u} R) ℤ)\n    (ι : ∀ m : ℕ, F m ⟶ C)\n    (step : ∀ m : ℕ, F m ⟶ F (m + 1))\n    (hmono : ∀ m : ℕ, Mono (ι m))\n    (hcompat : ∀ m : ℕ, step m ≫ ι (m + 1) = ι m)\n    (hexhaustive : ∀ (n : ℤ) (x : C.X n),\n      ∃ (m : ℕ) (y : (F m).X n), (ι m).f n y = x)\n    (hstage : ∀ m : ℕ, (HomologicalComplex.quasiIso (ModuleCat.{u} R)\n      (ComplexShape.up ℤ)).kFlat (F m)) :\n    (HomologicalComplex.quasiIso (ModuleCat.{u} R) (ComplexShape.up ℤ)).kFlat C",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T230735-L-606513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261020T230735-L-606513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
