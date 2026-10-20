@@ -14,23 +14,38 @@
  ],
  "proof": [
   {
-   "text": "On each pro-etale test object, pull back the two disjoint clopen components. The sheaf terminal-section property on the empty pullback identifies the complementary restriction with zero. The componentwise calculation is compatible with semilinear transitions and hence gives the zero system morphism.",
+   "text": "For an arbitrary system N on C, evaluate pull_s push_c N at each coefficient index. The existing comparisons moduleEvalG and moduleEvalP identify it with the constant-coefficient restriction of direct image. StrictTower.module_disjoint_direct proves this is zero for disjoint images. Evaluation of the identity at each index and test object then proves the identity of pull_s push_c N is zero, so this system is zero.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "def-sp-varying-ring-operations",
+    "lem-cbc-strict-tower-proper-open-calculus"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the adjunctions pull_c ⊣ push_c and extension_s ⊣ pull_s to the identity and zero endomorphisms of pull_c extension_s N. Their two successive transposes have target pull_s push_c of that object, which is zero by the preceding step. Injectivity of both Hom equivalences proves the identity is zero.",
+   "uses": [
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The complementary-image equality gives disjointness. Apply the second step to pull_s M: the target of pull_c(modulePi_s(M)) is zero, so this morphism equals zero.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact"
+  "def-sp-varying-ring-operations",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-sp-varying-ring-proper-open-arrows"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 09AE complementary clopen component",
-  "group": "W4"
+  "place": "Tag 09AE complementary component, using the already proved constant-coefficient disjoint-direct-image calculation and the ordinary evaluation comparisons",
+  "group": "E7"
  },
  "mathlib_searches": [
   {
@@ -94,10 +109,10 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "E7",
   "result": "pass",
-  "landing": "20261020T230844-L-621438",
-  "kind": "interface",
+  "landing": "20261020T233129-L-897774",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
