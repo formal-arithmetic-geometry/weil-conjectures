@@ -18913,3 +18913,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 06:02 L: batch 20261020T211611 dependency take-out
 - 22:04 L: returned deliver/C4/Sheaf.CategoryTheory.FilteredCohomologyImageCycleMap (reviewer RETURN: (reviewer C-f460f, head f460ff075) Brief point 2 (no fitting letter in delivery-errors.md): importer Sheaf.CategoryTheor)
+- 22:05 L: returned deliver/D9/Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison (reviewer RETURN: (reviewer C-dbbc2, head dbbc27947) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Co)
