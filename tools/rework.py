@@ -266,7 +266,7 @@ def stale_cause(m: str, rows: dict) -> bool:
 def blocked(g=None, imports=None, rows=None) -> tuple[set[str], set[str], dict[str, str]]:
     """(blocked node ids, blocked library modules, why: item -> the rework module it waits for).
     Nodes: the nodes realized by a rework module and every node whose stmt_deps/proof_deps (and proof-step `uses`)
-    reach one, transitively. Modules: library modules importing a rework module transitively, and the modules of the
+    name one directly (2026-10-21; before: transitively). Modules: library modules importing a rework module transitively, and the modules of the
     blocked nodes (a stage-3 item whose proof needs a broken dependency)."""
     rows = load() if rows is None else rows
     if not rows:
@@ -302,12 +302,13 @@ def blocked(g=None, imports=None, rows=None) -> tuple[set[str], set[str], dict[s
     nodes = set(seeds)
     for i, m in seeds.items():
         why.setdefault(i, m)
-    st = [(i, m) for i, m in seeds.items()]
-    while st:
-        x, src = st.pop()
+    # 2026-10-21 (the human: no meaningless rigor): only the DIRECT dependents of a quarantined node are blocked (their
+    # dependency has no statement in the library); a node whose dependencies all have their statement in the library is
+    # workable whatever lies below them. The transitive closure held 174 of 204 stage-3 items with every dependency stated.
+    for x, src in seeds.items():
         for p in nrev.get(x, ()):
             if p not in nodes:
-                nodes.add(p); why.setdefault(p, src); st.append((p, src))
+                nodes.add(p); why.setdefault(p, src)
     for i in nodes:
         m = dag_queue.module_of(g.live[i])
         if m and m not in R:
@@ -789,13 +790,42 @@ def _first_errors(failing: set[str]) -> dict[str, str]:
     return out
 
 
-def cluster_restore(rounds: int = 4, dry: bool = False) -> int:
-    """The human's design (2026-10-21): once roots are fixed, put back their WHOLE clusters in one landing (cluster_set),
-    without compiling them one by one; the global build verifies them together. Red: the failing restored modules and
-    their importers (transitively) go back to quarantine in one landing, the failing ones as rework roots with their own
-    error, the importers with `imports X`; everything else stays; then the next build decides again (at most `rounds`
-    builds). Run under local/rework-autorestore.lock (no level-wise autorestore meanwhile)."""
-    import json, shutil
+def _drop_mine(ids: list[str], reason: str) -> list[dict]:
+    """take my open restore landings `ids` out of the candidate (merge queue: ld.drop_plan, files back to their version
+    before the landing, one commit, records closed as reverted). Caller holds coord/.merge.lock."""
+    import landing as ld
+    with ld.tree_lock():
+        open_ids = {r["id"] for r in ld.records(ld.REQUESTS)}
+        ids = [i for i in ids if i in open_ids]
+        if not ids:
+            return []
+        dropped, restore_to, notes = ld.drop_plan(ids)
+        paths = []
+        for rel, data in restore_to.items():
+            f = li.LEAN / rel
+            if data is None:
+                f.unlink(missing_ok=True)
+            else:
+                f.parent.mkdir(parents=True, exist_ok=True); f.write_bytes(data)
+            paths.append("lean/" + rel)
+        for i in range(0, len(paths), 400):
+            git("add", "-A", "--", *paths[i:i + 400])
+        git("-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m",
+            f"rework cluster restore: {len(dropped)} landing(s) taken out of the candidate ({reason[:200]})"
+            "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", *paths, check=False)
+        ld.drop_close(dropped, reason)
+    return dropped
+
+
+def cluster_restore(rounds: int = 8, dry: bool = False) -> int:
+    """The human's design (2026-10-21): put back EVERY quarantined module no confirmed-unfixed root blocks (cluster_set,
+    all levels at once) in one step, without compiling them one by one; the global build verifies them together.
+    One landing record PER MODULE (its file, and its root import lines), all in one commit: a red build then takes out
+    only what fails (the merge queue drops landings whose own modules fail: tools/batch_land.py, and this function
+    itself) instead of the whole restore. Red: the failing restored modules and their restored importers
+    (transitively) are taken out at once; the failing ones become rework roots with their own error (and their text is
+    marked tried), the importers keep `imports X`. Repeat until a build verifies the rest (at most `rounds` builds)."""
+    import hashlib, json, shutil
     import landing as ld, mergelock
     T0 = time.time()
     rows = load()
@@ -804,115 +834,110 @@ def cluster_restore(rounds: int = 4, dry: bool = False) -> int:
           f"({len(seeds)} confirmed unfixed roots block {sum(1 for m in rows if not landed(m)) - len(put)})", flush=True)
     if dry or not put:
         return len(put)
-    restored: set[str] = set()
+    rec_of: dict[str, str] = {}
     with mergelock.merge_lock():
         rows = load()
+        paths = set()
         with ld.tree_lock():
-            prev: dict = {}
             for m in put:
                 rel = opath(m)[5:]
                 src = ROOT / (rows[m].get("quarantine") or qpath(m))
                 if (li.LEAN / rel).exists() or not src.is_file():
                     continue
-                prev[rel] = None
+                prev = {rel: None}
                 (li.LEAN / rel).parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(src, li.LEAN / rel)
-                restored.add(m)
                 for rr in filter(None, (rows[m].get("roots") or "").split(",")):
                     f = li.LEAN / f"{rr}.lean"
                     if f.is_file():
-                        if f"{rr}.lean" not in prev:
-                            prev[f"{rr}.lean"] = f.read_bytes()
-                        f.write_text(add_import_line(f.read_text(), m))
-            rec = ld.new_record("S", prev, f"rework cluster restore: {len(restored)} quarantined module(s) whose "
-                                "quarantined imports are all back, verified together by the global build", kind="interface")
-        paths = ["lean/" + r for r in prev]
+                        old = f.read_bytes(); new = add_import_line(old.decode(), m)
+                        if new != old.decode():
+                            prev[f"{rr}.lean"] = old; f.write_text(new)
+                r = ld.new_record("S", prev, f"rework cluster restore: {m} back from quarantine (verified with its cluster "
+                                  "by the global build)", kind="proof")
+                rec_of[m] = r["id"]
+                paths |= {"lean/" + x for x in prev}
+        paths = sorted(paths)
         for i in range(0, len(paths), 400):
             git("add", "-A", "--", *paths[i:i + 400])
         git("-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m",
-            f"rework cluster restore: {len(restored)} quarantined module(s) back in the library in one landing "
-            f"(their quarantined imports are all back; the global build verifies them together)"
+            f"rework cluster restore: {len(rec_of)} quarantined module(s) back in the library in one step (every module "
+            "no confirmed-unfixed root blocks, all levels; one landing record per module; the global build verifies them)"
             "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", *paths, check=False)
-    rid = rec["id"]
-    print(f"{time.strftime('%F %T')} cluster restore: {len(restored)} module(s) put back, landing {rid}", flush=True)
-    state = {"start": time.strftime("%FT%TZ", time.gmtime()), "restored": len(restored), "landings": [rid], "builds": []}
-    requarantined: set[str] = set()
-    seen_builds: set = set()
+    restored = set(rec_of)
+    print(f"{time.strftime('%F %T')} cluster restore: {len(restored)} module(s) put back ({len(rec_of)} landings, one commit)",
+          flush=True)
+    state = {"start": time.strftime("%FT%TZ", time.gmtime()), "restored": len(restored), "builds": []}
+    out: dict[str, str] = {}          # module -> cause, taken out again
+    seen: set = set()
     for k in range(1, rounds + 1):
+        open_ids = {r["id"] for r in ld.records(ld.REQUESTS)}
+        mine = {m: i for m, i in rec_of.items() if i in open_ids}
+        if not mine:
+            break
         tb = time.time()
-        d = _wait_build(rid, seen_builds)
+        d = {}
+        while time.time() - tb < 7200:
+            try:
+                d = json.loads((ROOT / "local" / "builds" / "last.json").read_text())
+            except (OSError, ValueError):
+                d = {}
+            if d.get("time") not in seen and set(mine.values()) & set((d.get("verified") or []) + (d.get("included") or [])):
+                seen.add(d.get("time")); break
+            d = {}
+            time.sleep(5)
         if not d:
-            print("cluster restore: no build took the landing within 2 h; stopping", flush=True); break
+            print("cluster restore: no build took the landings within 2 h; stopping", flush=True); break
         state["builds"].append({"result": d.get("result"), "seconds": d.get("seconds"), "waited": round(time.time() - tb)})
         print(f"{time.strftime('%F %T')} cluster restore build {k}: {d.get('result')} in {d.get('seconds')} s "
               f"(waited {time.time() - tb:.0f} s)", flush=True)
         if d.get("result") == "green":
-            break
-        failing = set(d.get("failing") or []) & (restored - requarantined)
-        if not failing:
-            print(f"cluster restore: red, but no restored module fails ({' '.join((d.get('failing') or [])[:8])}); "
-                  "waiting for the next build", flush=True)
             continue
+        failing = set(d.get("failing") or []) & restored
         _, imports = li.scan()
-        clos = (importer_closure(failing, imports) & (restored - requarantined)) | failing
-        errs = _first_errors(failing)
+        clos = (importer_closure(failing, imports) & restored) | failing
+        # modules of mine the merge queue already took out (tools/batch_land.py drops a landing whose module fails)
+        gone = {m for m in restored if m not in out and not (ROOT / opath(m)).is_file()}
+        errs = {m: e for m, e in _first_errors(failing).items()
+                if not re.search(r"bad import|unknown module|object file .* does not exist|file not found", e, re.I)}
         memo: dict = {}
-        import hashlib
-        try:
-            tried = json.loads(TRIED.read_text())
-        except (OSError, ValueError):
-            tried = {}
         with mergelock.merge_lock():
+            dropped = _drop_mine([rec_of[m] for m in clos],
+                                 f"the global build of {str(d.get('commit'))[:10]} failed in {' '.join(sorted(failing)[:6])}; "
+                                 "restored module or importer of one: back to quarantine")
+            gone |= {m for m in restored if not (ROOT / opath(m)).is_file()}
             rows = load()
-            with ld.tree_lock():
-                prev = {}
-                for m in sorted(clos):
-                    f = ROOT / opath(m)
-                    if not f.is_file():
-                        continue
-                    rel = opath(m)[5:]
-                    prev[rel] = f.read_bytes()
+            try:
+                tried = json.loads(TRIED.read_text())
+            except (OSError, ValueError):
+                tried = {}
+            new = sorted(gone - set(out))
+            for m in new:
+                if m in errs or (m in failing and not (imports.get(m, set()) & gone)):
+                    cause = errs.get(m) or "error: failed in the global build (no message located)"
                     q = ROOT / (rows[m].get("quarantine") or qpath(m)) if m in rows else ROOT / qpath(m)
-                    q.parent.mkdir(parents=True, exist_ok=True)
-                    q.write_bytes(prev[rel]); f.unlink()
-                    cause = (errs.get(m) or "error: failed in the global build (no message located)") if m in failing \
-                        else "imports " + next(iter(sorted(li.closure(m, imports, memo) & failing)), "?")
-                    if m in rows:
-                        rows[m]["cause"] = cause
-                    if m in failing:
-                        tried[m] = hashlib.sha1(prev[rel]).hexdigest()
-                TRIED.write_text(json.dumps(tried))
-                for r in IMPORT_ROOTS:
-                    root = li.LEAN / f"{r}.lean"
-                    if not root.is_file():
-                        continue
-                    rt = root.read_text()
-                    hit = clos & li.imports_of(rt)
-                    if hit:
-                        prev[f"{r}.lean"] = rt.encode(); root.write_text(drop_import_lines(rt, hit))
-                        for m in hit:
-                            if m in rows:
-                                rows[m]["roots"] = ",".join(sorted(set(filter(None, rows[m].get("roots", "").split(","))) | {r}))
-                save(rows)
-                rec = ld.new_record("S", prev, f"rework cluster restore, round {k}: {len(failing)} failing restored "
-                                    f"module(s) and {len(clos) - len(failing)} importer(s) back to quarantine", kind="interface")
-            paths = ["lean/" + r for r in prev] + [qpath(m) for m in clos] + ["coord/rework.tsv"]
-            for i in range(0, len(paths), 400):
-                git("add", "-A", "--", *paths[i:i + 400])
+                    if q.is_file():
+                        tried[m] = hashlib.sha1(q.read_bytes()).hexdigest()
+                else:
+                    cause = "imports " + next(iter(sorted(li.closure(m, imports, memo) & (failing | gone))), "?")
+                out[m] = cause
+                if m in rows:
+                    rows[m]["cause"] = cause[:300]
+            save(rows); TRIED.write_text(json.dumps(tried))
+            git("add", "--", "coord/rework.tsv")
             git("-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m",
-                f"rework cluster restore, round {k}: {len(failing)} failing module(s) and {len(clos) - len(failing)} "
-                f"importer(s) back to quarantine (rework roots with their own error)"
-                "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", *paths, check=False)
-        requarantined |= clos
-        rid = rec["id"]; state["landings"].append(rid)
-        print(f"{time.strftime('%F %T')} cluster restore round {k}: {len(failing)} failing + {len(clos) - len(failing)} "
-              f"importers re-quarantined; landing {rid}", flush=True)
-    state.update(requarantined=len(requarantined), kept=len(restored - requarantined), seconds=round(time.time() - T0),
+                f"rework cluster restore, build {k}: {len(new)} module(s) back in quarantine "
+                f"({sum(1 for m in new if out[m].startswith('error'))} with their own error)"
+                "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", "coord/rework.tsv", check=False)
+        print(f"{time.strftime('%F %T')} cluster restore build {k}: {len(failing)} failing; {len(new)} module(s) back in "
+              f"quarantine ({len(dropped)} landing(s) dropped here, the rest by the merge queue)", flush=True)
+    kept = sum(1 for m in restored if (ROOT / opath(m)).is_file())
+    state.update(requarantined=len(out), kept=kept, seconds=round(time.time() - T0),
                  quarantined_after=sum(1 for m in load() if not landed(m)))
     CLUSTER_LOG.write_text(json.dumps(state, indent=1))
-    print(f"{time.strftime('%F %T')} cluster restore done: {len(restored)} put back, {len(requarantined)} re-quarantined, "
-          f"{len(restored - requarantined)} stay; {state['seconds']} s; quarantined now {state['quarantined_after']}", flush=True)
-    return len(restored - requarantined)
+    print(f"{time.strftime('%F %T')} cluster restore done: {len(restored)} put back, {len(out)} back in quarantine, "
+          f"{kept} stay; {state['seconds']} s; quarantined now {state['quarantined_after']}", flush=True)
+    return kept
 
 
 def main() -> int:
