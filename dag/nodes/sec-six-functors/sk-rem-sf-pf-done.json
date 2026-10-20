@@ -218,5 +218,32 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-bd50adcc6 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, the unit record, and the cited statements of def-fix-six-functor-datum (including its main-20261015 blueprint_update) and fix-prop-projection-formula (statement and all 15 reviewed steps). I also read the main-20261015 remark _section.md and its proof, rem-sf-pf-done.md, and the fix-prop and lem-fix-weil-operations sources with their proofs. The item states the same thing as fix-prop clause for clause: separated finite-type f, all four Λ, K in Dbc with no finite-Tor condition, L in Dctf, the same PF direction, the full compatibility list, the proper-only ordinary formula, and the Weil clause under the separated finite-type k_0-model. The statement correction is justified. The sk-prop-sf-pf-reduction, sk-thm-sf-pf-field and sk-prop-sf-pf-coherence nodes do not exist. sk-thm-sf-pf-adic now states something else. sk-thm-sf-pf-finite is étale-only and sk-thm-sf-pf-proetale assumes finite Tor on K. The def-sf-datum route assumes A3. I checked the counterexample: A=O_E/ϖ², K=A/ϖ gives Tor_i(K,K)=K for all i, so K is in Dbc but not Dctf. Steps 2-4 use only fix-prop's stated clauses. Steps 1 and 5 are elementary. The 54 direct proof_deps of fix-prop include no duality or purity theorem. There are no new nodes and no cycle: the closure of fix-prop and the datum (12,729 nodes) does not reach the item. No tool_uses are needed and no SGA is cited. Two B2/B3 repairs: (1) the Weil clause used k_0 without introducing it; the statement now says k is an algebraic closure of k_0=F_q. (2) 'the associated Weil categories' cited no definition node; it now cites [def-wf-weil-category] with tensor Frobenius [def-wf-tensor-product], and both ids are added to stmt_deps. No proof step changed. One fault predates this delivery and is not caused by it: sk-thm-sf-tensor-hom step 1 needs PF for arbitrary bounded-below L, beyond this interface.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportProjectionFormula",
+  "declaration": "WeilConjectures.compactSupportProjectionFormula",
+  "declarations": [
+   "WeilConjectures.compactSupportProjectionFormula",
+   "WeilConjectures.compactSupportProjectionFormula_coefficients",
+   "WeilConjectures.CompactSupportWeilProjection.restriction",
+   "WeilConjectures.CompactSupportPbcProjection.forward",
+   "WeilConjectures.CompactSupportPbcProjection.iso",
+   "WeilConjectures.CompactSupportPbcProjection.tensor_identification",
+   "WeilConjectures.CompactSupportPbcProjection.commonIso"
+  ],
+  "statement": "theorem compactSupportProjectionFormula\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (S : SixFunctorOperationDatum D C E n hn) :\n    CompactSupportFiniteProjection.Laws S.toSixFunctorFiniteOperations ∧\n    CompactSupportProjectionLaws S.higher.integral S.higher.integralTensor\n      S.higher.integralExchange S.integralFiniteTorDomain ∧\n    CompactSupportProjectionLaws S.higher.rational S.higher.rationalTensor\n      S.higher.rationalExchange (fun _ _ ↦ True) ∧\n    CompactSupportProjectionLaws S.closure.commonStage S.closure.commonStageTensor\n      S.closure.commonStageExchange (fun _ _ ↦ True) ∧\n    (∀ m : ℕ, CompactSupportFiniteProjection.Laws\n      (S.integralNormalization.finiteLevels m)) ∧\n    ∀ E₀ : Padic.FiniteCoefficientFields C.l C.Qbar,\n      CompactSupportProjectionLaws (S.closure.coefficientStages E₀).integral\n        (S.closure.coefficientStages E₀).integralTensor\n        (S.closure.coefficientStages E₀).integralExchange\n        (fun X K ↦ finiteTorConstructibleIntegral C.l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar E₀) X.obj.left K.obj) ∧\n      CompactSupportProjectionLaws (S.closure.coefficientStages E₀).rational\n        (S.closure.coefficientStages E₀).rationalTensor\n        (S.closure.coefficientStages E₀).rationalExchange (fun _ _ ↦ True) ∧\n      ∀ m : ℕ, CompactSupportFiniteProjection.Laws\n        ((S.coefficientIntegralNormalization E₀).finiteLevels m)",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-20",
+  "existing": true,
+  "note": "Exact existing attachment to the concrete interface already stated by fix-prop-projection-formula. The primary theorem supplies all four coefficient-stage laws; coefficients supplies reduction and scalar change; restriction/forward/iso, tensor_identification and commonIso supply the actual WeilD/WeilDQbar formula with the specified completed tensor Frobenius. No new module or proof is introduced. The no-duality clause is proof provenance, as explained in the node proof and worker report."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-592ad3ff5",
+  "group": "NG",
+  "result": "pass",
+  "note": "existing:true attachment of the item (same_as fix-prop-projection-formula) to the landed, stage-2-PASSed Sheaf.Paper.CompactSupportProjectionFormula; 7 decls present and a subset of fix-prop's; statement verbatim substring of source; clauses match node (K unrestricted, L ctf, 4 stages, coherence fields, proper-only, Weil clause with WeilD/wfTensorFrobenius); record format per merge_delivery existing rule; only the lean field changed; #check compile blocked by a 60 s timeout in an unrelated dep under load 261, relying on fix-prop's recorded clean compile."
  }
 }
