@@ -102,7 +102,30 @@
   "statement": "theorem closedSupportHomSequence (A : Type (u + 1)) [CommRing A] {D V T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (v : V ⟶ T) [IsOpenImmersion v] (hcomp : Set.range v.base = (Set.range i.base)ᶜ) (τ : Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A) ⟶ upperStar (ModuleCat.{u + 1} A) v ⋙ Sheaf.Γ V.smallEtaleTopology (ModuleCat.{u + 1} A)) (hτ : ∀ J, τ.app J = globalSectionsUpperStarMap (ModuleCat.{u + 1} A) v J) : ∃ (α : (linearCoyoneda A (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).obj (op ((lowerStar (ModuleCat.{u + 1} A) i).obj ((constantSheaf D.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A)))) ⟶ Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)) (hzero : ∀ J, α.app J ≫ τ.app J = 0), ∀ J, Injective J → (ShortComplex.mk (α.app J) (τ.app J) (hzero J)).ShortExact",
   "branch": "sheaf-dag",
   "by": "K4",
-  "date": "2026-10-18"
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.Etale.closedSupportHomSequence",
+   "CategoryTheory.adjunctionHomLinearEquiv",
+   "AlgebraicGeometry.Etale.rankOneSectionsEquiv",
+   "AlgebraicGeometry.Etale.rankOneSectionsEquiv_naturality",
+   "AlgebraicGeometry.Etale.rankOneSections_restriction",
+   "AlgebraicGeometry.Etale.closedSupportHomToSections",
+   "AlgebraicGeometry.Etale.closedSupportHomSequenceNormalized",
+   "AlgebraicGeometry.Etale.closedSupportHomFunctor",
+   "AlgebraicGeometry.Etale.closedSupportHomFunctor_additive",
+   "AlgebraicGeometry.Etale.closedSupportHomToSections_apply",
+   "AlgebraicGeometry.Etale.closedSupportEtaleAbelian",
+   "AlgebraicGeometry.Etale.closedSupportEtaleAbelian_eq",
+   "AlgebraicGeometry.Etale.closedSupportEtaleHasSheafify",
+   "AlgebraicGeometry.Etale.closedSupportEtaleHasWeakSheafify",
+   "AlgebraicGeometry.Etale.closedSupportEtaleHasGlobalSections",
+   "AlgebraicGeometry.Etale.closedSupportHomToSections_comp",
+   "AlgebraicGeometry.Etale.closedSupportHomSequence_shortExact",
+   "AlgebraicGeometry.Etale.closedSupportEtaleLinear",
+   "AlgebraicGeometry.Etale.closedSupportEtaleLinear_eq",
+   "AlgebraicGeometry.Etale.closedSupportHomSource",
+   "AlgebraicGeometry.Etale.closedSupportHomSource_eq"
+  ]
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -115,13 +138,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K4",
+  "reviewer": "C-61089",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261018T092207-L-3361999",
+  "landing": "20261020T235554-L-1190593",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Base statement of supportedKummerSupportHomNaturality (twelve old defs copied verbatim as old_*) proved from the delivered theorem in a scratch, clean axioms; three delivered modules and importer OrdinarySupportedCartierKummer compile clean; nodes and change record match the Lean"
  }
 }

@@ -23,166 +23,108 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-closed-immersion-base-change], $i'$ is a closed immersion. Write $h_D:D'\\to D$. Form the exchange $h^{-1}i_*F\\to i'_*h_D^{-1}F$ for an abelian sheaf $F$ using [def-weil-pbc-underived-exchange]. At a geometric point $\\bar t'$ in $D'$, [lemma-openclosed-stalk-upperstar] and [lemma-openclosed-stalk-lowerstar] identify both stalks with $F_{h_D\\bar t'}$; the section-restriction formula for exchange sends each germ to itself. Off $D'$, both stalks are zero: the source is computed over $T-D$ and the target over $T'-D'$, where the closed fibre product is empty, so their direct images evaluate to zero by [def-weil-pbc-direct-image]. Thus [lemma-weil-pbc-geometric-stalk-conservative] makes the exchange an isomorphism. Apply this to the underlying abelian sheaf of $A_D$. The exchange is $A$-linear because restriction commutes with the scalar actions. The canonical constant coefficient identification $h_D^{-1}A_D=A_{D'}$ from [prop-weil-pbc-inverse-image-modules-exact] gives precisely the asserted $e$.",
+   "text": "Apply finite base change to the closed immersion i, which is finite, and compose with the canonical constant-sheaf isomorphism on D'. This is exactly supportedConstantExchange and is an isomorphism. The assumed closed immersion i' is used for the primed support sequence.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-base-change",
+    "lemma-weil-pbc-finite-exchange",
     "def-weil-pbc-underived-exchange",
-    "lemma-openclosed-stalk-upperstar",
-    "lemma-openclosed-stalk-lowerstar",
-    "def-weil-pbc-direct-image",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "def-weil-pbc-constant-sheaf"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03Q1 (lemma-stalk-pullback), 04FX (lemma-stalk-pushforward-closed-immersion), 03PU (theorem-exactness-stalks); morphisms.tex Tag 01QR"
+    "place": "Tag 04FX; the closed-immersion case of finite base change"
    }
   },
   {
-   "text": "Let $\\eta:A_T\\to i_*A_D$ and $\\eta':A_{T'}\\to i'_*A_{D'}$ be the constant adjunction units. Under $h^{-1}A_T=A_{T'}$, one has $e\\circ h^{-1}\\eta=\\eta'$. Indeed the exchange formula of [def-weil-pbc-underived-exchange] first pulls a constant section to the closed fibre product and then restricts it, so the two composites send each local constant $a$ to its constant restriction $a$. These maps on the sheafified constant presheaf determine the sheaf maps by [def-weil-pbc-constant-sheaf]. The coefficient identifications and adjunctions here are those of [prop-weil-pbc-inverse-image-modules-exact].",
+   "text": "The mate formula for exchange and naturality with respect to the constant-sheaf comparison identify the pulled-back constant unit with the primed unit. Compatibility of the constant-sheaf isomorphism with composition identifies the two routes around the pullback square. After inverting exchange, this gives the unit identity needed for precomposition on Hom.",
    "uses": [
     "def-weil-pbc-underived-exchange",
-    "def-weil-pbc-constant-sheaf",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lemma-weil-pbc-underived-exchange-naturality",
+    "def-weil-pbc-constant-sheaf"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095L (lemma-ses-associated-to-open), maps from adjunction; Tag 03Q1"
+    "place": "Tags 03Q1 and 095L, adjunction formulas for inverse image and the constant unit"
    }
   },
   {
-   "text": "The categories $\\Mod(T_{\\mathrm{et}},A)$ and $\\Mod(T'_{\\mathrm{et}},A)$ are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. Choose $K\\xrightarrow{u}I$ by [lem-pur-kinjective-degreewise-existence], with $I$ K-injective and termwise injective. Exactness of $h^{-1}$ in [prop-weil-pbc-inverse-image-modules-exact] makes $h^{-1}u$ a quasi-isomorphism. Apply the same resolution theorem on $T'$ to $h^{-1}I$ to obtain a quasi-isomorphism $a:h^{-1}I\\to J$, with $J$ K-injective and termwise injective. Thus $a\\circ h^{-1}u$ resolves $h^{-1}K$. All comparisons below use this actual chain map $a$.",
+   "text": "Use the functorial degreewise injective K-injective replacement K→I and the fixed replacement h⁻¹K→J. Exact inverse image sends K→I to a monomorphic quasi-isomorphism. The right lifting property of J→0 against monomorphic quasi-isomorphisms supplies an actual chain map h⁻¹I→J extending the pulled-back resolution unit. This uses the construction of the existing replacement, without assuming that inverse image preserves injectives.",
    "uses": [
     "lem-weil-pbc-module-sheaves-grothendieck-abelian",
     "lem-pur-kinjective-degreewise-existence",
     "prop-weil-pbc-inverse-image-modules-exact"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; Modules on Sites Tags 03DA, 03DB, 03EW"
+    "place": "Tag 079P, the functorial fibrant replacement and its lifting property"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-open-closed-short-exact] to $A_T$ and use the constant coefficient identifications of [prop-weil-pbc-inverse-image-modules-exact]. It gives $0\\to v_!A_V\\to A_T\\xrightarrow{\\eta}i_*A_D\\to0$. Put $C_I^n=\\Hom_T(i_*A_D,I^n)$, $E_I^n=\\Hom_T(A_T,I^n)$, and $B_I^n=\\Hom_T(v_!A_V,I^n)$, with differential postcomposition by $d_I$. Then $0\\to C_I\\xrightarrow{k_I}E_I\\xrightarrow{r_I}B_I\\to0$ is a degreewise short exact sequence of complexes: factoring through the cokernel gives the kernel assertion, and the extension property in [def-sp-injective-resolutions] gives surjectivity of $r_I^n$. The adjunction [lem-weil-pbc-extension-by-zero-adjunction] identifies $B_I^n=\\Gamma(V,v^{-1}I^n)$ and $E_I^n=\\Gamma(T,I^n)$; a map from the constant rank-one module is determined by its value on $1$, and a section $s$ defines $a\\mapsto as$. The adjunction's counit formula identifies $r_I$ with restriction, and $k_I$ is precomposition by $\\eta$. Repeat these definitions and assertions on $T'$ with $J$, obtaining $C_J,E_J,B_J,k_J,r_J$.",
+   "text": "Apply Hom into an injective sheaf to the constant open-closed short exact sequence. The rank-one constant-sheaf/global-section linear equivalence identifies its first map with evaluation at 1 after precomposition by the specified constant unit, and its second map with the actual restriction of global sections. The adjunction for extension by zero identifies the third term with sections on the open complement. Apply the resulting normalized short exact sequence to each term of the chosen replacement. The kernel inclusion into the shifted restriction cone is a quasi-isomorphism. Localizing it and the canonical derived-functor computation on K-injective replacements constructs the normalized natural cone comparison, with the specified projection formulas.",
    "uses": [
     "lem-weil-pbc-open-closed-short-exact",
-    "prop-weil-pbc-inverse-image-modules-exact",
     "def-sp-injective-resolutions",
-    "lem-weil-pbc-extension-by-zero-adjunction"
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "new-lem-amb-closed-support-hom-sequence",
+    "lem-amb-closed-support-hom",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095L, lemma-ses-associated-to-open; sites-modules.tex Tag 03DI, lemma-extension-by-zero"
+    "place": "Tags 095L and 0A45; the kernel-inclusion normalization of the support triangle"
    }
   },
   {
-   "text": "By [lem-weil-pbc-extension-by-zero-adjunction] and [lem-weil-pbc-extension-by-zero-exact], $v^{-1}$ is right adjoint to an exact functor, so [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $v^{-1}I$ K-injective. The same applies to $v'^{-1}J$. Both are resolutions of the restricted coefficient complexes, since inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact]. Apply [lem-weil-pbc-kinjective-total-derived] to termwise sections and to termwise $\\Hom(i_*A_D,-)$; these functors commute with shifts and cones by their additive formulas. Consequently $E_I,B_I,C_I$ compute $R\\Gamma(T,K),R\\Gamma(V,K|_V),R\\Hom_T(i_*A_D,K)$ respectively, and the primed complexes compute their counterparts. The required existence of K-injectives on the open schemes follows by the same two nodes used in step 3, applied to $V,V'$.",
+   "text": "Form the section chain maps from the natural pullback-of-sections transformations followed by the chosen resolution comparison. For the open component use the inverse of the square upper-star isomorphism. Functoriality of section pullback gives the restriction square. Form the Hom chain map by applying inverse image, precomposing with inverse exchange, and postcomposing with the comparison. Naturality of the rank-one section equivalence and the unit identity prove the square with the normalized kernel map. The two component projections of the mapping cone then prove that its diagonal map commutes with the kernel inclusion.",
    "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-pur-kinjective-degreewise-existence"
+    "def-weil-pbc-inverse-image",
+    "lemma-weil-pbc-finite-pullback-closed-fibre",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 070K (lemma-enough-K-injectives-implies)"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q1 and 0A45; blueprint supported Hom pullback compatibility"
    }
   },
   {
-   "text": "Use the cone convention of [def-weil-abstract-derived-category]. Write $F_I=\\Cone(r_I)[-1]$, so $F_I^n=B_I^{n-1}\\oplus E_I^n$ and $d(b,s)=(-d_Bb-r_I(s),d_Es)$. The map $\\iota_I:C_I\\to F_I$, $c\\mapsto(0,k_Ic)$, is a quasi-isomorphism. To check surjectivity on cohomology, given a cocycle $(b,s)$, choose $t\\in E_I^{n-1}$ with $r_I(t)=-b$. Subtracting $d(0,t)$ gives $(0,s-d_Et)$ with $s-d_Et\\in\\ker r_I$. For injectivity, if $(0,k_Ic)=d(b,s)$, choose $t\\in E_I^{n-2}$ with $r_I(t)=b$; then $s+d_Et\\in\\ker r_I$ has differential $k_Ic$. Thus $c$ is a boundary in $C_I$. The same applies to $J$. This realizes the canonical identification of [lem-amb-closed-support-hom]: apply Hom to the constant open-closed sequence with its specified unit and counit, and use the inclusion of its kernel into the shifted restriction cone. On $H^q$ its inverse, followed by the derived-Hom interpretation, is $\\Phi^q$.",
+   "text": "Localize the strict square with the kernel inclusions, use the specified comparison isomorphisms, and apply the homology functor. Cancellation of these isomorphisms gives the stated pullback identity. The argument holds for all complexes and hence for the bounded-below complexes in the statement. For forgetting support, the cone projection composed with the kernel inclusion is exactly the normalized map to sections. Localizing this identity and applying homology gives both forgetting-support equations with the fixed section-complex target.",
    "uses": [
     "def-weil-abstract-derived-category",
     "lem-amb-closed-support-hom"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
-    "place": "Penultimate paragraph: supported Hom identification; explicit signed cone calculation realizing the support triangle of Stacks Tag 0A45"
-   }
-  },
-  {
-   "text": "For a degree-$n$ morphism $c:i_*A_D\\to I^n$, define $f_C(c)=a^n\\circ h^{-1}c\\circ e^{-1}$. Define $f_E(s)=a^n\\circ h^{-1}s$ under the constant coefficient identification. Define $f_B$ by pullback of sections on $V$, followed by restriction of $a$ to $V'$; identify $v'^{-1}h^{-1}=h_V^{-1}v^{-1}$, where $h_V:V'\\to V$ is the restricted morphism. These are chain maps since $a$ commutes with differentials. Restricting a pulled-back section is its pulled-back restriction, so $r_J f_E=f_B r_I$ by the sectionwise definition of inverse image [def-weil-pbc-inverse-image]. Step 2 gives $f_E k_I=k_J f_C$: for $c$, both sides equal $a h^{-1}c\\,h^{-1}\\eta$, since $e^{-1}\\eta'=h^{-1}\\eta$. Thus the map of shifted cones is the actual diagonal chain map $f_F(b,s)=(f_Bb,f_Es)$, and $f_F\\iota_I=\\iota_J f_C$ holds strictly.",
-   "uses": [
-    "def-weil-pbc-inverse-image",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
-    "place": "Penultimate paragraph: “All the cone maps and Kummer boundaries commute with pullback of the pair”; chain-level verification of the cone-map assertion"
-   }
-  },
-  {
-   "text": "The map $f_F$ computes the specified relative pullback $P_h$: its two components are the section pullbacks followed by the resolution comparison $a$, and their square with restriction commutes strictly. This choice has the usual resolution-independent meaning. Indeed [lem-weil-pbc-kinjective-hom-derived] identifies maps into the K-injective target $J$ with derived maps. Hence any other comparison into $J$ representing the same derived coefficient map is homotopic to $a$. A homotopy induces maps $s_E,s_B$ of degree $-1$ with $r_Js_E=s_Br_I$, and on shifted cones $S(b,s)=(-s_Bb,s_Es)$ satisfies $dS+Sd=f_F-\\widetilde f_F$, by the displayed cone differential. Additivity of pullback gives the same assertion for the supported Hom complexes. Replacing $I$ or $J$ by another resolution gives homotopy-equivalent K-injective targets by the same cited lemma; these comparisons identify the maps just constructed. Thus no arbitrary lift of a square in the triangulated category is being chosen.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I, lemma-K-injective, morphisms in the localized category; explicit compatible cone homotopy"
-   }
-  },
-  {
-   "text": "For every integer $q$, a cocycle $c\\in C_I^q$ is a chain map $i_*A_D[0]\\to I[q]$, and a boundary is exactly a null-homotopic such map. By [lem-weil-pbc-kinjective-hom-derived], localization identifies $H^q(C_I)$ with $\\Hom_{D(T_{\\mathrm{et}},A)}(i_*A_D,K[q])$; the same holds on $T'$. The shift convention is that of [def-weil-abstract-derived-category]; a cocycle into $I^q$ gives the degree-zero component of the map into $I[q]$. In the derived category $a$ identifies $h^{-1}I$ with the chosen representative $J$ of $h^{-1}K$. Therefore $H^q(f_C)$ sends the class $\\alpha$ to $(h^{-1}\\alpha)\\circ e^{-1}$. Apply $H^q$ to the strict identity $f_F\\iota_I=\\iota_J f_C$ of step 7 and invert $H^q(\\iota_I),H^q(\\iota_J)$ from step 6. This gives $\\Phi^q_{T',D',h^{-1}K}(P_hx)=(h^{-1}\\Phi^q_{T,D,K}(x))\\circ e^{-1}$, as required.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
-    "place": "Penultimate paragraph: supported Hom identification and base-change compatibility"
-   }
-  },
-  {
-   "text": "Forgetting support on the relative section complex is the projection $p_I:F_I\\to E_I$, $(b,s)\\mapsto s$, using [def-weil-abstract-derived-category]. Since $p_I\\iota_I=k_I$ and $k_I(c)=c\\circ\\eta$ by step 4, the identification of step 6 makes forgetting support exactly precomposition by $A_T\\xrightarrow{\\eta}i_*A_D$, in every degree. This also holds on $T'$. The unit identity in step 2 and the map of complexes in step 7 show that these forgetting maps commute with pullback.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
-    "place": "Penultimate paragraph: forgetting the relative trivialization and the image after forgetting support"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45, naturality and forgetting support in the support triangle"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-base-change",
+  "lemma-weil-pbc-finite-exchange",
   "def-weil-pbc-underived-exchange",
-  "lemma-openclosed-stalk-upperstar",
-  "lemma-openclosed-stalk-lowerstar",
-  "def-weil-pbc-direct-image",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-inverse-image-modules-exact",
   "def-weil-pbc-constant-sheaf",
+  "lemma-weil-pbc-underived-exchange-naturality",
   "lem-weil-pbc-module-sheaves-grothendieck-abelian",
   "lem-pur-kinjective-degreewise-existence",
+  "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-open-closed-short-exact",
   "def-sp-injective-resolutions",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-total-derived",
-  "def-weil-abstract-derived-category",
+  "new-lem-amb-closed-support-hom-sequence",
   "lem-amb-closed-support-hom",
+  "def-weil-abstract-derived-category",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lemma-weil-pbc-finite-pullback-closed-fibre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
-  "place": "Penultimate paragraph (supported Hom identification, forgetting support, and commutation with pullback), expanded via Stacks Tags 04FX, 03Q1, 03PU, 095L, 079P, 08BJ, 070K and 070I"
+  "place": "Penultimate paragraph, realized by finite closed exchange, normalized open-closed Hom complexes, an actual resolution lift, strict mapping-cone naturality, and localization followed by homology (E1)."
  },
  "mathlib_searches": [
   {
@@ -336,18 +278,11 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lemma-openclosed-stalk-upperstar",
-  "lemma-weil-pbc-geometric-stalk-conservative",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-module-sheaves-grothendieck-abelian",
   "lem-pur-kinjective-degreewise-existence",
   "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-pbc-extension-by-zero-adjunction"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -361,16 +296,54 @@
   "module": "Sheaf.AlgebraicGeometry.SupportedKummerSupportHomNaturality",
   "declaration": "AlgebraicGeometry.Etale.supportedKummerSupportHomNaturality",
   "declarations": [
+   "SupportedHomResolutionData",
+   "supportedHomResolutionData",
+   "CategoryTheory.Functor.supportedHomResolutionMap",
+   "AlgebraicGeometry.Etale.supportedEtaleGrothendieck",
+   "AlgebraicGeometry.Etale.supportedResolutionFunctor",
+   "AlgebraicGeometry.Etale.supportedResolutionUnit",
    "AlgebraicGeometry.Etale.supportedResolution",
+   "AlgebraicGeometry.Etale.supportedHomComplexFunctor",
+   "AlgebraicGeometry.Etale.supportedHomDerivedFunctor",
+   "AlgebraicGeometry.Etale.supportedSectionsComplexFunctor",
+   "AlgebraicGeometry.Etale.supportedOpenSectionsComplexFunctor",
    "AlgebraicGeometry.Etale.supportedHomComplex",
    "AlgebraicGeometry.Etale.supportedHomObject",
-   "AlgebraicGeometry.Etale.supportedHomModelMap",
    "AlgebraicGeometry.Etale.supportedEvaluateSection",
+   "AlgebraicGeometry.Etale.supportedPullbackComplexFunctor",
    "AlgebraicGeometry.Etale.supportedPullbackComplex",
+   "AlgebraicGeometry.Etale.SupportedHomDiagram",
+   "AlgebraicGeometry.Etale.SupportedHomConeModelCore",
+   "AlgebraicGeometry.Etale.SupportedHomConeModelCore.transport",
+   "AlgebraicGeometry.Etale.supportedHomSectionNormalization",
+   "AlgebraicGeometry.Etale.supportedHomSectionNormalization_iff",
+   "AlgebraicGeometry.Etale.supportedHomDiagramFactory",
+   "AlgebraicGeometry.Etale.supportedHomDiagram",
    "AlgebraicGeometry.Etale.SupportedHomConeModel",
    "AlgebraicGeometry.Etale.supportedRelativeObject",
    "AlgebraicGeometry.Etale.supportedHomIdentification",
+   "AlgebraicGeometry.Etale.supportedResolutionComparisonCondition",
+   "AlgebraicGeometry.Etale.supportedSectionsMapCondition",
+   "AlgebraicGeometry.Etale.supportedOpenSectionsMapCondition",
+   "AlgebraicGeometry.Etale.supportedHomMapCondition",
+   "AlgebraicGeometry.Etale.SupportedHomPullbackDiagram",
+   "AlgebraicGeometry.Etale.SupportedHomPullbackMaps",
+   "AlgebraicGeometry.Etale.SupportedHomPullbackMaps.homPullback",
+   "AlgebraicGeometry.Etale.SupportedHomPullbackMaps.relativePullback",
+   "AlgebraicGeometry.Etale.supportedHomPullbackDiagram",
+   "AlgebraicGeometry.Etale.supportedHomPullbackMapsType",
    "AlgebraicGeometry.Etale.SupportedKummerSupportHomData",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.sourceModel",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.targetModel",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.resolutionComparison",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.resolutionComparison_spec",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.sectionsMap",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.sectionsMap_spec",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.openSectionsMap",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.openSectionsMap_spec",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.restriction_square",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.homMap",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData.homMap_spec",
    "AlgebraicGeometry.Etale.supportedRelativePullback",
    "AlgebraicGeometry.Etale.supportedHomPullback",
    "AlgebraicGeometry.Etale.supportedKummerSupportHomNaturality"
@@ -420,5 +393,15 @@
   "result": "pass",
   "note": "Checked the immutable statement, dependencies, source passages, canonical map specifications, universes, edge cases, verbatim signature, and sole citer. Both scompile checks passed; no landing defects found.",
   "statement_corrected": true
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-61089",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261020T235554-L-1190593",
+  "kind": "interface",
+  "note": "independent cc review: Base statement of supportedKummerSupportHomNaturality (twelve old defs copied verbatim as old_*) proved from the delivered theorem in a scratch, clean axioms; three delivered modules and importer OrdinarySupportedCartierKummer compile clean; nodes and change record match the Lean"
  }
 }

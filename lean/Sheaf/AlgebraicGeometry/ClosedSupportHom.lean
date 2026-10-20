@@ -8,10 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
-import Sheaf.AlgebraicGeometry.ClosedSupportHomSequence
+public import Sheaf.AlgebraicGeometry.ClosedSupportHomSequence
 import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-!
 # Closed support as a relative section complex
@@ -22,12 +22,22 @@ lem-amb-closed-support-hom.md (blueprint: lem-amb-closed-support-hom).
 
 @[expose] public section
 
+attribute [local instance 200000] CategoryTheory.Abelian.toPreadditive
+attribute [local instance 200000] CategoryTheory.Preadditive.preadditiveHasZeroMorphisms
+attribute [local instance 200000] AlgebraicGeometry.Etale.closedSupportEtaleHasSheafify
+attribute [local instance 200000] AlgebraicGeometry.Etale.closedSupportEtaleHasWeakSheafify
+attribute [local instance 200000] AlgebraicGeometry.Etale.closedSupportEtaleHasGlobalSections
+attribute [local instance 200000] AlgebraicGeometry.Etale.closedSupportEtaleAbelian
+attribute [local instance 200000] AlgebraicGeometry.Etale.closedSupportEtaleLinear
+
 universe w v u v' u'
 
 open CategoryTheory CategoryTheory.Limits Opposite HomologicalComplex
 
 namespace CochainComplex
-private noncomputable def closedConeLift
+/-- The canonical closed-support construction and its normalization.
+Source: Stacks, Tags 0A45, 095L (blueprint: lem-amb-closed-support-hom). -/
+noncomputable def closedConeLift
     {C : Type u} [Category.{v} C] [Abelian C]
     {S P Q : CochainComplex C ℤ} (f : P ⟶ Q) (a : S ⟶ P) (ha : a ≫ f = 0) :
     S ⟶ (mappingCone f)⟦(-1 : ℤ)⟧ where
@@ -60,7 +70,9 @@ private noncomputable def closedConeLift
     · congr! 10 <;> omega
 
 
-private lemma closedConeLift_projections
+/-- The canonical closed-support construction and its normalization.
+Source: Stacks, Tags 0A45, 095L (blueprint: lem-amb-closed-support-hom). -/
+lemma closedConeLift_projections
     {C : Type u} [Category.{v} C] [Abelian C]
     {S P Q : CochainComplex C ℤ} (f : P ⟶ Q) (a : S ⟶ P) (ha : a ≫ f = 0)
     (p r : ℤ) (hr : r = p + (-1)) :
@@ -74,7 +86,9 @@ private lemma closedConeLift_projections
   dsimp only [closedConeLift, shiftFunctorObjXIso]
   simp
 
-private lemma closedConeLift_quasiIso
+/-- The canonical closed-support construction and its normalization.
+Source: Stacks, Tags 0A45, 095L (blueprint: lem-amb-closed-support-hom). -/
+lemma closedConeLift_quasiIso
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (S : ShortComplex (CochainComplex C ℤ)) (hS : S.ShortExact) :
     QuasiIso (closedConeLift S.g S.f S.zero) := by
@@ -100,7 +114,9 @@ private lemma closedConeLift_quasiIso
   have := hqκ
   infer_instance
 
-private lemma closedConeLift_naturality
+/-- The canonical closed-support construction and its normalization.
+Source: Stacks, Tags 0A45, 095L (blueprint: lem-amb-closed-support-hom). -/
+lemma closedConeLift_naturality
     {C : Type u} [Category.{v} C] [Abelian C]
     {S P Q S' P' Q' : CochainComplex C ℤ}
     (q : P ⟶ Q) (q' : P' ⟶ Q') (a : S ⟶ P) (a' : S' ⟶ P')
@@ -171,7 +187,9 @@ private lemma closedSupport_objQ_naturality (F : C ⥤ D) [F.Additive]
   simp only [Category.assoc]
   rw [hD]
 
-private noncomputable def closedSupport_resolutionIso (F : C ⥤ D) [F.Additive]
+/-- The canonical closed-support construction and its normalization.
+Source: Stacks, Tags 0A45, 095L (blueprint: lem-amb-closed-support-hom). -/
+noncomputable def closedSupport_resolutionIso (F : C ⥤ D) [F.Additive]
     (K : CochainComplex C ℤ) :
     F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K) ≅
       DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj
@@ -182,7 +200,9 @@ private noncomputable def closedSupport_resolutionIso (F : C ⥤ D) [F.Additive]
       (asIso (DerivedCategory.Q.map ((CochainComplex.toKInjectiveResolution.{w} C).app K))) ≪≫
     F.rightDerivedFunctorObjQIso _
 
-private lemma closedSupport_resolutionIso_naturality (F : C ⥤ D) [F.Additive]
+/-- The canonical closed-support construction and its normalization.
+Source: Stacks, Tags 0A45, 095L (blueprint: lem-amb-closed-support-hom). -/
+lemma closedSupport_resolutionIso_naturality (F : C ⥤ D) [F.Additive]
     {K L : CochainComplex C ℤ} (f : K ⟶ L) :
     F.rightDerivedFunctor.map (DerivedCategory.Q.map f) ≫
         (closedSupport_resolutionIso F L).hom =
@@ -271,7 +291,9 @@ end CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-private theorem closedSupportHom_globalSections_natural {A : Type (u + 1)} [CommRing A]
+/-- The canonical closed-support construction and its normalization.
+Source: Stacks, Tags 0A45, 095L (blueprint: lem-amb-closed-support-hom). -/
+theorem closedSupportHom_globalSections_natural {A : Type (u + 1)} [CommRing A]
     {L K : Scheme.{u}} (m : K ⟶ L)
     {F F' : Sheaf L.smallEtaleTopology (ModuleCat.{u + 1} A)} (k : F ⟶ F') :
     (Sheaf.Γ L.smallEtaleTopology (ModuleCat.{u + 1} A)).map k ≫
@@ -298,6 +320,23 @@ private theorem closedSupportHom_globalSections_natural {A : Type (u + 1)} [Comm
   simpa only [Category.assoc] using! congrArg (fun a ↦ a ≫
     (Sheaf.ΓNatIsoSheafSections K.smallEtaleTopology (ModuleCat.{u + 1} A)
       terminalIsTerminal).inv.app ((upperStar (ModuleCat.{u + 1} A) m).obj F')) hu.symm
+
+/-- Pullback of global sections as a natural transformation on sheaves.
+Source: Stacks, Tag 03Q1 (blueprint: lem-amb-closed-support-hom). -/
+noncomputable def closedSupportSectionsPullback (A : Type (u + 1)) [CommRing A]
+    {V T : Scheme.{u}} (v : V ⟶ T) :
+    Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A) ⟶
+      upperStar (ModuleCat.{u + 1} A) v ⋙ Sheaf.Γ V.smallEtaleTopology (ModuleCat.{u + 1} A) where
+  app J := globalSectionsUpperStarMap (ModuleCat.{u + 1} A) v J
+  naturality _ _ f := closedSupportHom_globalSections_natural v f
+
+/-- The component of the canonical section-pullback transformation.
+Source: Stacks, Tag 03Q1 (blueprint: lem-amb-closed-support-hom). -/
+theorem closedSupportSectionsPullback_app (A : Type (u + 1)) [CommRing A]
+    {V T : Scheme.{u}} (v : V ⟶ T)
+    (J : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+    (closedSupportSectionsPullback A v).app J =
+      globalSectionsUpperStarMap (ModuleCat.{u + 1} A) v J := rfl
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary global derived Hom from `i_* A_D` is the shifted cone of restriction of
@@ -356,11 +395,7 @@ theorem closedSupportHom (A : Type (u + 1)) [CommRing A]
                 (ComplexShape.up ℤ)).map
                 ((CochainComplex.kInjectiveResolutionFunctor _).map f))
             (q.naturality ((CochainComplex.kInjectiveResolutionFunctor _).map f)).symm)) := by
-  let τ : (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)) ⟶
-      (upperStar (ModuleCat.{u + 1} A) v ⋙
-        Sheaf.Γ V.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
-    { app := fun F => globalSectionsUpperStarMap (ModuleCat.{u + 1} A) v F
-      naturality := fun F F' k => closedSupportHom_globalSections_natural v k }
+  let τ := closedSupportSectionsPullback A v
   let q : (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).mapHomologicalComplex
         (ComplexShape.up ℤ) ⟶
       (upperStar (ModuleCat.{u + 1} A) v ⋙
