@@ -356,6 +356,23 @@ def merge_imports(text: str, added: list[str]) -> str:
     return "\n".join(L[:k] + add + L[k:])
 
 
+def merge3(ours: str, base: str, theirs: str) -> str | None:
+    """git merge-file of the delivery's text (`ours`) and the library's text now (`theirs`) over their common `base`;
+    None when they overlap."""
+    with tempfile.TemporaryDirectory(prefix="sheaf-merge3-") as td:
+        fs = []
+        for n, t in (("ours", ours), ("base", base), ("theirs", theirs)):
+            f = pathlib.Path(td) / n; f.write_text(t); fs.append(str(f))
+        r = subprocess.run(["git", "merge-file", "-p", *fs], capture_output=True, text=True)
+        return r.stdout if r.returncode == 0 else None
+
+
+def writers_since(base: str, path: str) -> str:
+    """the commits on the main branch since `base` that touched `path` (short), for the return message"""
+    out = md.git("log", "--format=%h %s", f"{base}..{md.MAIN}", "--", path, check=False).splitlines()
+    return "; ".join(l[:90] for l in out[:3]) + (f"; {len(out) - 3} more" if len(out) > 3 else "") if out else "uncommitted change"
+
+
 def check(c: dict, classify: bool = True) -> dict:
     """Every check that needs no lock. Returns the plan of the landing; Refuse or Wait otherwise."""
     g, item, head = c["group"], c["item"], c["head"]
@@ -390,7 +407,8 @@ def check(c: dict, classify: bool = True) -> dict:
                      "group's delivery tool compiled its modules with the probe, and the server does not compile a "
                      "delivery again; deliver with the delivery tool")
     busy = inflight_files()
-    cur, write = {}, []
+    cur, write, merged_any = {}, [], False
+    base_texts = {m["file"]: s2.Git(ROOT).show(base, m["file"]) for m in D["modules"]}
     for m in D["modules"]:
         p = ROOT / m["file"]
         now = p.read_text() if p.is_file() else None
@@ -399,18 +417,56 @@ def check(c: dict, classify: bool = True) -> dict:
             continue
         if m["file"] in busy:
             raise Wait(f"{m['file']} is in a landing that is still being checked")
-        added = imports_added(m["old"], now)
-        if added is not None:
+        # 2026-10-20: compare with the library's file at the delivery's base, not with m["old"]: for a rework restore
+        # m["old"] is the quarantined text while the library has no file at all, so every restore used to be refused
+        base_text = base_texts[m["file"]]
+        if now == base_text:
+            write.append(m["file"]); continue
+        added = imports_added(base_text, now)
+        if added is not None and m["text"] is not None:
             # the library's file differs from the delivery's base only by added import lines (the proof imports written
             # into the modules on 2026-10-12, tools/add_proof_imports.py): the delivery keeps its content and gets them
-            m["text"], m["old"] = merge_imports(m["text"], added), now
+            m["text"] = merge_imports(m["text"], added)
+            if m["old"] == base_text:
+                m["old"] = now
             D["notes"].append(f"{m['file']}: {len(added)} import line(s) added on {md.MAIN} since the base were merged in")
+            merged_any = True
             if now == m["text"]:
                 continue
-        elif now != m["old"]:
-            raise Refuse(f"{m['file']} changed on {md.MAIN} after the delivery's base {base[:9]} (another landing wrote "
-                         "it): take the file as it is now, make your change in it, compile and deliver again")
+            write.append(m["file"]); continue
+        by = writers_since(base, m["file"])
+        if base_text is None or now is None or m["text"] is None:
+            gone = now is None and base_text is not None
+            raise Refuse(f"{m['file']} " + ("was removed from lean/ on " if gone else "was created on " if base_text is None
+                         else "changed on ") + f"{md.MAIN} after the delivery's base {base[:9]} (by {by})"
+                         + (": the module is quarantined now (coord/rework.tsv); claim its rework item and restore it from "
+                            "quarantine/" if gone else ": take the file as it is now, make your change in it, compile and "
+                            "deliver again"))
+        merged = merge3(m["text"], base_text, now)
+        if merged is None:
+            raise Refuse(f"{m['file']} changed on {md.MAIN} after the delivery's base {base[:9]} (by {by}) in the lines the "
+                         "delivery changes: take the file as it is now, make your change in it, compile and deliver again")
+        # 2026-10-20: a change elsewhere in the file is merged in (3-way: base, the library now, the delivery); the global
+        # build compiles the result and takes it out when red, like any landing
+        m["text"] = merged
+        if m["old"] == base_text:
+            m["old"] = now
+        m["diff"] = s3.diff_module(m["old"], m["text"])
+        D["notes"].append(f"{m['file']}: changes on {md.MAIN} since the base ({by}) merged in (3-way, no overlap)")
+        merged_any = True
+        if now == m["text"]:
+            continue
         write.append(m["file"])
+    if merged_any:
+        for module in D["modules"]:
+            if module["text"] is None:
+                continue
+            missing = sl.missing_gate(module["old"], module["text"])
+            if missing:
+                raise Refuse(module["file"] + " (after merging the library's changes): " + "; ".join(missing[:6]))
+        why3 = s3.classify(D, g, item)
+        if reviewer == "AUTO" and why3:
+            raise Refuse("not AUTO after merging the library's changes: " + "; ".join(why3))
     if not write:
         raise Refuse("every module of the delivery is in the library already, with the same text")
     if reviewer == "AUTO":
