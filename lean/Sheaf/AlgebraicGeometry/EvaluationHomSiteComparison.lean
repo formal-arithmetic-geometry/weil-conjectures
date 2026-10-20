@@ -12,6 +12,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import Sheaf.Paper.IntegralResidueDerivedMonoidal
 
 /-! # The evaluation-defined site comparison
 
@@ -23,14 +25,126 @@ unrelated scheme-pullback coherence modules.
 
 @[expose] public section
 set_option autoImplicit false
-universe u
+universe u u₁ u₂
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
+
+/-- The canonical strong monoidal structure of comparison inverse image.
+Source: Stacks Tag 03EL (blueprint: def-sf-evaluation-hom-site-comparison). -/
+@[irreducible]
+noncomputable def siteComparisonMonoidal
+    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(comparisonUpperStar A X).PreservesFlat] :
+    (comparisonUpperStar A X).Monoidal := by
+  let : (comparisonLowerStar A X).LaxMonoidal := by
+    unfold comparisonLowerStar
+    infer_instance
+  let : (comparisonUpperStar A X).OplaxMonoidal :=
+    (comparisonAdjunction A X).leftAdjointOplaxMonoidal
+  let (V : X.ProEtᵒᵖ) : IsFiltered (CostructuredArrow X.toProEt.op V) :=
+    IsFiltered.of_equivalence (structuredArrowOpEquivalence _ (unop V))
+  let (F G : Sheaf X.smallEtaleTopology A) :
+      IsIso (Functor.OplaxMonoidal.δ (comparisonUpperStar A X) F G) := by
+    unfold comparisonUpperStar
+    infer_instance
+  let : IsIso (Functor.OplaxMonoidal.η (comparisonUpperStar A X)) := by
+    unfold comparisonUpperStar
+    infer_instance
+  exact .ofOplaxMonoidal _
+
+private theorem derived_monoidal_exists
+    {C : Type u₁} [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]
+    [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    {D : Type u₂} [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D]
+    [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+    [Abelian.HasFunctorialFlatResolution D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
+    (e : F.leftDerivedFunctor ≅ F.mapDerivedCategory) :
+    ∃ m : F.mapDerivedCategory.Monoidal,
+      let := m
+      ∀ K M, Functor.OplaxMonoidal.δ F.mapDerivedCategory K M =
+        e.inv.app (K ⊗ M) ≫ (F.leftDerivedTensorComparison.app K).app M ≫
+          (e.hom.app K ⊗ₘ e.hom.app M) := by
+  let : F.leftDerivedFunctor.Monoidal := F.residueDerivedMonoidal
+  refine ⟨Functor.Monoidal.transport e, ?_⟩
+  dsimp only
+  intro K M
+  rw [Functor.Monoidal.transport_δ
+    (C := DerivedCategory C) (D := DerivedCategory D) e K M]
+  rfl
+
+/-- The canonical derived tensor comparison admits a strong monoidal structure.
+Its tensor components are prescribed, so the structure determines the comparison maps
+used below. Source: Stacks Tags 03EL, 08J7
+(blueprint: def-sf-evaluation-hom-site-comparison). -/
+theorem siteComparisonDerivedMonoidal_exists
+    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(comparisonUpperStar A X).PreservesFlat] :
+    let := siteComparisonMonoidal A X
+    let F := comparisonUpperStar A X
+    let e := F.leftDerivedFunctorIsoMapDerivedCategory
+    ∃ m : F.mapDerivedCategory.Monoidal,
+      let := m
+      ∀ K M, Functor.OplaxMonoidal.δ F.mapDerivedCategory K M =
+        e.inv.app (K ⊗ M) ≫ (F.leftDerivedTensorComparison.app K).app M ≫
+          (e.hom.app K ⊗ₘ e.hom.app M) := by
+  let : (comparisonUpperStar A X).Monoidal := siteComparisonMonoidal A X
+  exact derived_monoidal_exists
+    (C := Sheaf X.smallEtaleTopology A)
+    (D := Sheaf (Scheme.ProEt.topology X) A)
+    (comparisonUpperStar A X)
+    (comparisonUpperStar A X).leftDerivedFunctorIsoMapDerivedCategory
+
+/-- Strong monoidal structure with the prescribed canonical derived tensor components.
+Only those components and their inverses occur in the comparison maps. The preceding
+proved theorem specifies them before the structure is selected.
+Source: Stacks Tags 03EL, 08J7 (blueprint: def-sf-evaluation-hom-site-comparison). -/
+@[irreducible]
+noncomputable def siteComparisonDerivedMonoidal
+    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(comparisonUpperStar A X).PreservesFlat] :
+    (comparisonUpperStar A X).mapDerivedCategory.Monoidal :=
+  (siteComparisonDerivedMonoidal_exists A X).choose
+
+set_option backward.isDefEq.respectTransparency true in
+/-- The chosen structure has exactly the canonical transported tensor components.
+Source: Stacks Tags 03EL, 08J7 (blueprint: def-sf-evaluation-hom-site-comparison). -/
+theorem siteComparisonDerivedMonoidal_δ
+    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(comparisonUpperStar A X).PreservesFlat]
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    let := siteComparisonMonoidal A X
+    let F := comparisonUpperStar A X
+    let e := F.leftDerivedFunctorIsoMapDerivedCategory
+    let := siteComparisonDerivedMonoidal A X
+    Functor.OplaxMonoidal.δ F.mapDerivedCategory K M =
+      e.inv.app (K ⊗ M) ≫ (F.leftDerivedTensorComparison.app K).app M ≫
+        (e.hom.app K ⊗ₘ e.hom.app M) := by
+  dsimp only
+  unfold siteComparisonDerivedMonoidal
+  exact (siteComparisonDerivedMonoidal_exists A X).choose_spec K M
 
 /-- The canonical derived tensor comparison of the comparison inverse image.
 It is obtained by deriving the oplax structure conjugate to restriction of sheaves;
 representable flatness makes that structure strong monoidal.
 Source: Stacks Tags 03EO, 03EL (blueprint: def-sf-evaluation-hom-site-comparison). -/
+@[irreducible]
 noncomputable def siteComparisonTensorIso
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
@@ -41,35 +155,33 @@ noncomputable def siteComparisonTensorIso
     (Etale.derivedTensor A X).obj K ⋙ (comparisonUpperStar A X).mapDerivedCategory ≅
       (comparisonUpperStar A X).mapDerivedCategory ⋙
         (derivedTensor A X).obj ((comparisonUpperStar A X).mapDerivedCategory.obj K) := by
-  letI : (comparisonLowerStar A X).LaxMonoidal := by
-    unfold comparisonLowerStar
-    infer_instance
-  letI : (comparisonUpperStar A X).OplaxMonoidal :=
-    (comparisonAdjunction A X).leftAdjointOplaxMonoidal
-  letI (V : X.ProEtᵒᵖ) : IsFiltered (CostructuredArrow X.toProEt.op V) :=
-    IsFiltered.of_equivalence (structuredArrowOpEquivalence _ (unop V))
-  letI (F G : Sheaf X.smallEtaleTopology A) :
-      IsIso (Functor.OplaxMonoidal.δ (comparisonUpperStar A X) F G) := by
-    unfold comparisonUpperStar
-    infer_instance
-  letI : IsIso (Functor.OplaxMonoidal.η (comparisonUpperStar A X)) := by
-    unfold comparisonUpperStar
-    infer_instance
-  letI : (comparisonUpperStar A X).Monoidal := .ofOplaxMonoidal _
-  exact Functor.isoWhiskerLeft _
-      (comparisonUpperStar A X).leftDerivedFunctorIsoMapDerivedCategory.symm ≪≫
-    (asIso (comparisonUpperStar A X).leftDerivedTensorComparison).app K ≪≫
-    Functor.isoWhiskerRight
-      (comparisonUpperStar A X).leftDerivedFunctorIsoMapDerivedCategory _ ≪≫
-    Functor.isoWhiskerLeft (comparisonUpperStar A X).mapDerivedCategory
-      ((derivedTensor A X).mapIso
-        ((comparisonUpperStar A X).leftDerivedFunctorIsoMapDerivedCategory.app K))
+  let F := comparisonUpperStar A X
+  let : F.mapDerivedCategory.Monoidal := siteComparisonDerivedMonoidal A X
+  exact NatIso.ofComponents
+    (fun M ↦ (Functor.Monoidal.μIso F.mapDerivedCategory K M).symm)
+    (fun f ↦ (Functor.OplaxMonoidal.δ_natural_right F.mapDerivedCategory K f).symm)
+
+/-- Component formula for the canonical derived tensor comparison.
+Source: Stacks Tags 03EL, 08J7 (blueprint: def-sf-evaluation-hom-site-comparison). -/
+theorem siteComparisonTensorIso_hom_app
+    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(comparisonUpperStar A X).PreservesFlat]
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    let := siteComparisonDerivedMonoidal A X
+    (siteComparisonTensorIso A X K).hom.app M =
+      Functor.OplaxMonoidal.δ (comparisonUpperStar A X).mapDerivedCategory K M := by
+  unfold siteComparisonTensorIso
+  rfl
 
 /-- The specified comparison is the transpose of pullback of evaluation, using the
 canonical tensor comparison. It is defined on all ambient complexes; invertibility
 requires hypotheses and is a separate assertion.
 Source: Stacks Tags 03EO, 03EL, 08J7
 (blueprint: def-sf-evaluation-hom-site-comparison). -/
+@[irreducible]
 noncomputable def siteComparisonEvaluationHom
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
@@ -83,9 +195,30 @@ noncomputable def siteComparisonEvaluationHom
         (op ((comparisonUpperStar A X).mapDerivedCategory.obj K))).obj
           ((comparisonUpperStar A X).mapDerivedCategory.obj M) :=
   let F := (comparisonUpperStar A X).mapDerivedCategory
-  let H := ((Etale.derivedHom A X).obj (op K)).obj M
-  (derivedTensorHomAdjunction A (F.obj K)).homEquiv (F.obj H) (F.obj M)
-    ((siteComparisonTensorIso A X K).inv.app H ≫
-      F.map ((Etale.derivedTensorHomAdjunction A K).counit.app M))
+  let : F.Monoidal := siteComparisonDerivedMonoidal A X
+  (Functor.LaxMonoidal.ihomComparison F K).natTrans.app M
+
+/-- The canonical comparison is exactly the transpose of pulled-back evaluation.
+The monoidal tensorator is the inverse of `siteComparisonTensorIso`, so this is its
+original evaluation specification. Source: Stacks Tag 03EO
+(blueprint: def-sf-evaluation-hom-site-comparison). -/
+theorem siteComparisonEvaluationHom_eq_curry
+    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(comparisonUpperStar A X).PreservesFlat]
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    let F := (comparisonUpperStar A X).mapDerivedCategory
+    let : F.Monoidal := siteComparisonDerivedMonoidal A X
+    siteComparisonEvaluationHom A X K M =
+      MonoidalClosed.curry ((siteComparisonTensorIso A X K).inv.app ((ihom K).obj M) ≫
+        F.map ((ihom.ev K).app M)) := by
+  let F := (comparisonUpperStar A X).mapDerivedCategory
+  let : F.Monoidal := siteComparisonDerivedMonoidal A X
+  unfold siteComparisonEvaluationHom
+  rw [Functor.LaxMonoidal.ihomComparison_app_eq_curry F K M]
+  unfold siteComparisonTensorIso
+  rfl
 
 end AlgebraicGeometry.ProEtale

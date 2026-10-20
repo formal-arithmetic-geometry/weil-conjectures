@@ -18,9 +18,23 @@
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-comparison-finite-free.md",
   "place": "Evaluation comparison paragraph; Stacks Tags 03EO, 03EL, 08J7"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the ordinary comparison inverse-image strong monoidal structure from the comparison adjunction and its invertible oplax tensor and unit maps. Derive it by Functor.residueDerivedMonoidal and transport along leftDerivedFunctorIsoMapDerivedCategory. Cache the ordinary structure in siteComparisonMonoidal. Prove siteComparisonDerivedMonoidal_exists with the canonical transported tensor components fully prescribed. Select its strong structure in siteComparisonDerivedMonoidal and expose the prescribed components in siteComparisonDerivedMonoidal_δ. The selected tensor maps, and hence their inverse tensorators, are fixed by that theorem; no arbitrary comparison map is chosen. The integral-residue module is needed only inside the existence proof and is imported privately. Define siteComparisonTensorIso from its oplax tensorator; siteComparisonTensorIso_hom_app exposes this tensorator. Functor.Monoidal.transport_δ and the defining residueDerivedOplax tensorator expand it to the original four-isomorphism expression componentwise. The signature of siteComparisonEvaluationHom is unchanged. Its body uses the canonical Functor.LaxMonoidal.ihomComparison for the cached structure. The proved equation siteComparisonEvaluationHom_eq_curry verifies the original specification: it transposes inverse tensor comparison followed by pullback of evaluation; the old derivedTensorHomAdjunction homEquiv and counit are definitionally the curry and ihom.ev used in that equation.",
+   "uses": [
+    "new-integral-residue-derived-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-derived-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 03EO; deriving the canonical comparison using flat resolutions, Tag 08J7. Q3 representation optimization with componentwise preservation proof."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -92,7 +106,13 @@
   "existing": false,
   "declarations": [
    "AlgebraicGeometry.ProEtale.siteComparisonTensorIso",
-   "AlgebraicGeometry.ProEtale.siteComparisonEvaluationHom"
+   "AlgebraicGeometry.ProEtale.siteComparisonEvaluationHom",
+   "AlgebraicGeometry.ProEtale.siteComparisonDerivedMonoidal",
+   "AlgebraicGeometry.ProEtale.siteComparisonTensorIso_hom_app",
+   "AlgebraicGeometry.ProEtale.siteComparisonMonoidal",
+   "AlgebraicGeometry.ProEtale.siteComparisonEvaluationHom_eq_curry",
+   "AlgebraicGeometry.ProEtale.siteComparisonDerivedMonoidal_exists",
+   "AlgebraicGeometry.ProEtale.siteComparisonDerivedMonoidal_δ"
   ],
   "note": "§1(B): the recorded module imports legacy Derived.ComparisonMonoidal; compiling with the fixed-coefficient exceptional functor fails because UpperLowerStar.Iso duplicates upperStarIsoLowerStarInv from FiniteCoefficient.UpperLowerStar.Iso. Retain the evaluation-defined map and construct its identical canonical tensor comparison using the comparison site adjunction and generic derived monoidal API, without importing scheme-pullback coherence. No extra mathematical hypothesis or arbitrary comparison is introduced. The combined consumer also exposed duplicate laxMonoidal_Q from the legacy Derived.Tensor and FiniteCoefficient.Derived.Tensor. All direct ProEtale.Derived/UpperLowerStar imports in this repaired module now consistently use the published FiniteCoefficient paths; the canonical functors, structures, signatures, and equations are unchanged."
  },
@@ -111,5 +131,15 @@
   "group": "Q63",
   "result": "fix",
   "note": "Statement correct: each hypothesis and conclusion clause matches the node, with no extra assumption. Evaluation-defined beta for Pet K and bounded-constructible M. Canonical omega arrow (adjunction unit, then constant-unit transport) to sfFiniteExceptionalFixed applied to the unit. Both pairing and biduality compatibility equations have the right types. Equivalence, anti-equivalence and biduality clauses are justified by proof steps 5, 9 and 10. Universes kept; no hollow definitions; only sorry; lean.statement verbatim; no DAG cycle. All 4 delivered files compile clean with nt_compile. F1 (H4/collision): the delivered EtaleOriginAdjointClass copies fixedDirectImageComparisonIso, fixedCompactSupportComparisonIso and fixedCompactSupportOriginIso, which already exist under the same names in the landed FiniteComparisonClassAdjunction. This breaks the landed FiniteDualityLocallyClosedComparison, which compiles on the base and fails with the delivery. Fixed in fixes/lean/Sheaf/AlgebraicGeometry/EtaleOriginAdjointClass.lean: the copies are removed and that module is imported publicly. With the fix, the four delivered modules, FiniteDualityLocallyClosedComparison, the other six importers of EtaleOriginAdjointClass and a probe importing both compile clean. ConstructibleHomComparison already fails on the base, so the delivery did not cause it. Redundant stmt_dep cor-pur-general-admissibility-datum is harmless."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261020T211816-L-3504665",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

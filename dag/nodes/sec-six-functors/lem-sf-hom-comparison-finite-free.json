@@ -28,86 +28,39 @@
  ],
  "proof": [
   {
-   "text": "Write $F=\\nu_T^*$, $R=A_{T,\\mathrm{et}}$ and $S=A_{T,\\mathrm{proet}}$. The exact comparison-pullback lemma identifies $F(R)$ with $S$ and says that $F$ is additive and exact and sends quasi-isomorphisms to quasi-isomorphisms. Thus its action on the derived category is computed termwise. An additive functor preserves a finite biproduct: apply it to the equations $\\pi_i\\iota_j=\\delta_{ij}$ and $\\sum_i\\iota_i\\pi_i=1$. In particular $F(R^{\\oplus r})\\cong S^{\\oplus r}$, including $r=0$. The complexes $FP'$ and $FN$ have the same termwise support bounds as $P'$ and $N$, since $F(0)=0$.",
-   "uses": [
-    "lem-sf-comparison-pullback-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099R (section-comparison); sites-modules.tex Tag 04JC (lemma-flat-pullback-exact); blueprint proof, comparison pullback sentence"
-   }
+   "text": "The module tensor unit is dualizable. The strong monoidal constant-sheaf functor preserves its dual, so the constant coefficient sheaf is dualizable. Induct on the rank to prove its finite coproducts dualizable, identifying each successor coproduct with a binary biproduct, using the binary-biproduct lemma and the zero-object case. Transport duals across the given basis isomorphisms to obtain dualizability of every term of P. These are proved generic results in WeilConjectures.CategoryTheory.Monoidal.Dualizable and Sites.ConstantSheafMonoidal, with the finite-coproduct induction supplied privately in this module.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For a finite-free term $M=R^{\\oplus r}$ and any module sheaf $B$, evaluation on the basis gives $\\mathcal Hom_R(M,B)\\cong B^{\\oplus r}$: on each slice a linear map is uniquely specified by the images of the $r$ basis sections, and restriction restricts those images. This proves the module identity used in the blueprint for arbitrary $B$, without applying the finite-Tor-only statement of lem-sf-hom-finite-projective. Curry the pulled-back evaluation using the module tensor comparison and tensor-Hom adjunction. The resulting $c_{M,B}:F\\mathcal Hom_R(M,B)\\to\\mathcal Hom_S(FM,FB)$ is, in these coordinates and the identifications of step 1, the identity on $(FB)^{\\oplus r}$: evaluation of $(b_1,\\ldots,b_r)$ on the $i$th basis vector is $b_i$ on both sides. Thus $c_{M,B}$ is an isomorphism. These maps commute with postcomposition and precomposition: after evaluation the two postcomposition composites send $(h,x)$ to $v(h(x))$, and the two precomposition composites send $(h,x)$ to $h(u(x))$. The natural tensor comparison and injectivity of currying identify the respective maps. This argument works for all maps of the finite-free terms, including matrices of nonconstant sections. For a term $M$ given only with an isomorphism $e:R^{\\oplus r}\\xrightarrow{\\sim}M$, precomposition with $e$ and with $Fe$ conjugates $c_{M,B}$ to $c_{R^{\\oplus r},B}$ by the precomposition identity just proved. Hence the conclusion holds for the actual terms of $P'$ and is independent of their chosen bases.",
-   "uses": [
-    "def-pur-sheaf-hom",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04TT (section-internal-hom), Tag 03EO (lemma-internal-hom-adjoint-tensor), Tag 03EL (lemma-tensor-product-pullback); blueprint termwise finite-free identity"
-   }
+   "text": "Convert the supplied support bounds to IsStrictlyGE and IsStrictlyLE. Apply the proved DerivedCategory.isDualizable_Q_obj to P: a bounded complex with dualizable terms is dualizable in the derived category. This implements the current blueprint finite dual-complex and signed totalization computation using the existing proved library theorem, without a second Hom-complex model.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Choose $u\\leq v$ with $P'^i=0$ outside $[u,v]$. For the Hom complex $H=\\mathcal Hom^\\bullet_R(P',N)$, its degree $m$ product has only these finitely many potentially nonzero factors, so $H^m=\\bigoplus_{i=u}^v\\mathcal Hom_R(P'^i,N^{i+m})$. Its differential is $(dh)^i=d_Nh^i-(-1)^m h^{i+1}d_{P'}$. Apply $F$ and its finite-biproduct comparison from step 1; the direct sum of the isomorphisms $c_{P'^i,N^{i+m}}$ of step 2 gives $C^m:(FH)^m\\xrightarrow{\\sim}\\mathcal Hom^m_S(FP',FN)$. The two differential terms commute separately by the postcomposition and precomposition equations of step 2; additivity of $F$ preserves subtraction and $(-1)^m$. Hence $C$ is a chain isomorphism. This is the finite total-complex calculation in the blueprint: if $D=\\mathcal Hom_R^\\bullet(P',R[0])$, its degree $r$ term is $(P'^{-r})^\\vee$, with $d_D\\phi=(-1)^{r+1}\\phi d_{P'}$; the corresponding map $D^r\\otimes N^s\\to H^{r+s}$ sends $\\phi\\otimes n$ to the map $x\\mapsto(-1)^{rs}\\phi(x)n$ on $P'^{-r}$ and to zero on other terms. The postcomposition signs agree because $r+r(s+1)=rs$ modulo $2$, and the precomposition signs agree because $(r+1)s+r+1=rs+r+s+1$. Thus the dual uses degree $-r$, correcting the un-reversed dual index in the blueprint.",
+   "text": "The comparison inverse image is an exact flat-preserving strong monoidal left adjoint by the existing comparison-site instances. Apply Functor.residueDerivedMonoidal and transport along leftDerivedFunctorIsoMapDerivedCategory. Its oplax tensorator is exactly the four-factor canonical tensor comparison of def-sf-evaluation-hom-site-comparison: siteComparisonTensorIso_hom_app exposes this tensorator, and siteComparisonDerivedMonoidal_δ proves its canonical three-factor expression. Expanding the final tensor of two maps gives exactly the original four factors. The strong structure is selected only after a proved existence theorem has prescribed all these components; the monoidality proof import remains private.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves"
+    "def-sf-evaluation-hom-site-comparison",
+    "new-integral-residue-derived-monoidal"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A8X (section-hom-complexes); tensor convention: Tag 06YL (section-flat); blueprint first paragraph, total-complex signs"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the small skeletons in the common size convention. Apply the bounded-free derived-Hom-model lemma on $(T_{\\mathrm{et}},R)$ to $(P',N)$: $P'$ is bounded above, $N$ bounded below, and a finite-free term is a summand of itself via the identity maps. It gives the canonical isomorphism $QH\\cong R\\mathcal Hom_R(QP',QN)$. Apply the same lemma on $(T_{\\mathrm{proet}},S)$ to $(FP',FN)$, whose bounds and finite-free terms were checked in step 1. Since $F$ sends quasi-isomorphisms to quasi-isomorphisms, the first canonical model pulls back to $Q(FH)$. Localizing the chain isomorphism $C$ of step 3 and composing these canonical model isomorphisms therefore gives an isomorphism between the two objects in the statement. Neither application asks for flatness, projectivity, or finite Tor amplitude of $N$ or $FN$.",
+   "text": "For a dualizable K choose its right dual and use the braiding to obtain the left exact pairing. The proved Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing makes the canonical internal-Hom comparison invertible for every second argument. The definition siteComparisonEvaluationHom is this canonical comparison. The equation siteComparisonEvaluationHom_eq_curry, proved by ihomComparison_app_eq_curry and the component formula for the inverse tensorator, verifies its original evaluation specification: curry the inverse canonical tensor comparison followed by pullback of evaluation. Apply this with K=Q(P), M=Q(N). No boundedness, constructibility, or Tor assumption on M is needed by this stronger generic argument.",
    "uses": [
-    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "lem-sf-comparison-pullback-exact",
-    "def-weil-size-convention"
+    "def-sf-evaluation-hom-site-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free), applied on both sites"
-   }
-  },
-  {
-   "text": "Put $H_S=\\mathcal Hom_S^\\bullet(FP',FN)$ and write $a_R:Q_RH\\xrightarrow{\\sim}R\\mathcal Hom_R(Q_RP',Q_RN)$ and $a_S:Q_SH_S\\xrightarrow{\\sim}R\\mathcal Hom_S(Q_SFP',Q_SFN)$ for the canonical models of step 4. Let $F_D$ be the functor on derived categories induced by $F$, and identify $F_DQ_R$ with $Q_SF$ as in step 1. The concrete Hom-model specification of the comparison in the statement is the composite $a_S\\circ Q_S(C)\\circ(F_Da_R)^{-1}$. To check its evaluation description, on each tensor summand $H^m\\otimes_R P'^i$ evaluation is projection to $\\mathcal Hom_R(P'^i,N^{i+m})$ followed by module evaluation, with value $h^i(x)$. The defining currying equation of step 2 says that evaluation following $C^m$ on $FP'^i$ equals $F$ of this evaluation, after the module tensor comparison. Equality on these summands gives equality of the total evaluation maps. Evaluation is a chain map because $(dh)(x)+(-1)^m h(dx)=d_N(h(x))$, with the two precomposition terms cancelling by step 3. Under the K-injective description of derived internal Hom, postcomposition with the specified resolution map $\\eta_N:N\\to I(N)$ respects this identity term by term: $(\\eta_N\\circ h^i)(x)=\\eta_N(h^i(x))$; the identical equation applies to the resolution of $FN$. Thus the representative evaluations are compatible with the canonical model identifications, and the displayed composite is the specified evaluation comparison. Each of its three factors is invertible by steps 3 and 4.",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J7 (section-internal-hom), 08JI (lemma-Rhom-complex-of-direct-summands-finite-free); blueprint last paragraph, evaluation agreement"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sf-comparison-pullback-exact",
-  "def-pur-sheaf-hom",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "def-pur-hom-complex",
-  "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-  "def-pur-derived-internal-hom",
-  "def-weil-size-convention"
+  "def-sf-evaluation-hom-site-comparison",
+  "new-integral-residue-derived-monoidal"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-comparison-finite-free.md",
-  "place": "Proof: finite-free coordinate identity and signed finite totalization, comparison pullback, and evaluation identification; derived models supplied by Stacks Tag 08JI"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-comparison-finite-free.md",
+  "place": "Bounded finite-free dual and evaluation argument, implemented through the proved generic dualizability and internal-Hom-comparison library theorems; Q3 stage 3."
  },
  "mathlib_searches": [
   {
@@ -284,12 +237,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-pc-sheaf-modules-tensor-closed"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-15",
   "by": "L",
@@ -343,5 +291,15 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261020T211816-L-3504665",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
