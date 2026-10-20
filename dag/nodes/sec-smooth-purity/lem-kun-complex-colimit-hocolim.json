@@ -200,7 +200,8 @@
   "declaration": "CategoryTheory.abelianSheaf_complex_colimit_homotopyColimit",
   "declarations": [
    "CategoryTheory.abelianSheaf_complex_colimit_homotopyColimit",
-   "CategoryTheory.moduleSheaf_complex_colimit_homotopyColimit"
+   "CategoryTheory.moduleSheaf_complex_colimit_homotopyColimit",
+   "CategoryTheory.complex_colimit_homotopyColimit"
   ],
   "file": "lean/Sheaf/Algebra/Homology/ComplexColimitHomotopyColimit.lean",
   "statement": "theorem abelianSheaf_complex_colimit_homotopyColimit {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [HasDerivedCategory.{w} (Sheaf J.toGrothendieck AddCommGrpCat.{u})] (E : ℕ ⥤ CochainComplex (Sheaf J.toGrothendieck AddCommGrpCat.{u}) ℤ) (B : Cofan (fun n : ℕ ↦ E.obj n)) (hB : IsColimit B) (L : Cocone E) (hL : IsColimit L) (u : B.pt ⟶ B.pt) (hu : ∀ n : ℕ, B.inj n ≫ u = B.inj n - E.map (homOfLE (Nat.le_succ n)) ≫ B.inj (n + 1)) (q : B.pt ⟶ L.pt) (hq : ∀ n : ℕ, B.inj n ≫ q = L.ι.app n) : ∃ p : mappingCone u ⟶ L.pt, mappingCone.inr u ≫ p = q ∧ (mappingCone.inl u).comp (Cochain.ofHom p) (add_zero _) = 0 ∧ QuasiIso p ∧ Nonempty (IsColimit (Cofan.mk (DerivedCategory.Q.obj B.pt) (fun n : ℕ ↦ DerivedCategory.Q.map (B.inj n)))) ∧ ∃ e : DerivedCategory.Q.obj (mappingCone u) ≅ DerivedCategory.Q.obj L.pt, e.hom = DerivedCategory.Q.map p ∧ DerivedCategory.Q.mapTriangle.obj (mappingCone.triangle u) ∈ distTriang (DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{u})) ∧ Triangle.mk (DerivedCategory.Q.map u) (DerivedCategory.Q.map q) (e.inv ≫ (DerivedCategory.Q.mapTriangle.obj (mappingCone.triangle u)).mor₃) ∈ distTriang (DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{u})) ∧ ∃ h : HasCountableCoproducts (DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{u})), @IsSequentialHomotopyColimit (DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{u})) _ _ _ _ _ _ _ h (fun n : ℕ ↦ DerivedCategory.Q.obj (E.obj n)) (fun n : ℕ ↦ DerivedCategory.Q.map (E.map (homOfLE (Nat.le_succ n)))) (DerivedCategory.Q.obj (mappingCone u)) ∧ @IsSequentialHomotopyColimit (DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{u})) _ _ _ _ _ _ _ h (fun n : ℕ ↦ DerivedCategory.Q.obj (E.obj n)) (fun n : ℕ ↦ DerivedCategory.Q.map (E.map (homOfLE (Nat.le_succ n)))) (DerivedCategory.Q.obj L.pt)",
@@ -210,13 +211,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
+  "reviewer": "C-68a69",
+  "group": "M6",
   "result": "pass",
-  "landing": "20261018T062724-L-640105",
+  "landing": "20261020T122112-L-477212",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item theorem signature vs clone (unchanged, sorry → proof); moved UnitSections def vs clone (identical); ComplexColimitHomotopyColimit diff (additive only); 9 modules compiled in import order (560 s limit, no warnings); #print axioms (sorryAx only via upstream ModuleCat.localization_away_colimit); node proof_deps vs Lean usage and unit realized list"
  }
 }

@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-scalar-localization-unit-factors",
+ "kind": "lemma",
+ "title": "Scalar compatibility of exact derived factorization",
+ "statement": "Let $E:B\\to B\\prime$ and $U:B\\prime\\to B$ be exact additive functors of abelian categories, where $B\\prime$ is linear over a commutative ring $S$. Let $E_D\\dashv U_D$ have unit normalized on a complex $K$ to $Q\\eta_K$ under the canonical factorization isomorphisms. For any $s\\in S$, $Q(\\eta_K U(s1_{EK}))$ equals the derived unit followed by $U_D(s1_{E_DQK})$ and the two canonical factorization maps.",
+ "stmt_deps": [
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor)"
+ },
+ "proof": [
+  {
+   "text": "Bilinearity moves the scalar through the extension factorization isomorphism. Apply U_D, then naturality of the restriction factorization, and the unit normalization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of repeated multiplication by a scalar on complexes is underlying scalar localization",
+   "results": "8 hits, concerning ModuleCat colimits and localCohomology.ofDiagram; no sheaf complex comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapCocone\", \"IsColimit\"",
+   "results": "IsColimit.mapCoconeEquiv, Cofan.isColimitMapCoconeEquiv and preservation constructors.",
+   "date": "2026-10-19",
+   "verdict": "useful categorical tools, no scalar-localization result"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|homotopyColimit|invSelf",
+   "results": "25 hits, mostly metaprogramming and unrelated telescoping sums.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functor derived adjunction unit commutes with shifts and sequential scalar localization colimit",
+   "results": "Adjunction.unit_app_commShiftIso_hom_app and derived unit identities; unit shift lemma requires adj.CommShift.",
+   "date": "2026-10-19",
+   "verdict": "used for proved abstract leg laws; does not supply normalized unit coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ScalarLocalizationUnderlyingTelescope",
+  "date": "2026-10-19",
+  "group": "M6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice/rationalization paragraph: the scalar-extension object is represented by the telescope obtained by repeatedly multiplying an integral complex by the denominator scalar.",
+   "via": [
+    "lem-weil-pbc-scalar-localization-underlying-telescope"
+   ]
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationUnitFactors",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationUnitFactors.lean",
+  "declaration": "CategoryTheory.scalarLocalization_unit_factors",
+  "statement": "theorem scalarLocalization_unit_factors\n    {B : Type u} [Category.{v} B] [Abelian B] [HasDerivedCategory.{w} B]\n    {B' : Type u'} [Category.{v'} B'] [Abelian B'] [HasDerivedCategory.{w'} B']\n    (S : Type r) [CommRing S] [Linear S B']\n    (E : B ⥤ B') [E.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E]\n    (U : B' ⥤ B) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]\n    (adj : E.mapDerivedCategory ⊣ U.mapDerivedCategory)\n    (K : CochainComplex B ℤ)\n    (η : K ⟶ (U.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))\n    (hη : adj.unit.app (DerivedCategory.Q.obj K) ≫\n      U.mapDerivedCategory.map (E.mapDerivedCategoryFactors.hom.app K) ≫\n      U.mapDerivedCategoryFactors.hom.app\n        ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) = DerivedCategory.Q.map η)\n    (s : S) :\n    DerivedCategory.Q.map (η ≫ (U.mapHomologicalComplex (ComplexShape.up ℤ)).map\n      (s • 𝟙 ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))) =\n      adj.unit.app (DerivedCategory.Q.obj K) ≫\n        U.mapDerivedCategory.map (s • 𝟙 (E.mapDerivedCategory.obj (DerivedCategory.Q.obj K))) ≫\n        U.mapDerivedCategory.map (E.mapDerivedCategoryFactors.hom.app K) ≫\n        U.mapDerivedCategoryFactors.hom.app\n          ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged, sorry → proof); moved UnitSections def vs clone (identical); ComplexColimitHomotopyColimit diff (additive only); 9 modules compiled in import order (560 s limit, no warnings); #print axioms (sorryAx only via upstream ModuleCat.localization_away_colimit); node proof_deps vs Lean usage and unit realized list"
+ }
+}

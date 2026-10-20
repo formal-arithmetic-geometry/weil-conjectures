@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-scalar-localization-telescope-leg-laws",
+ "kind": "lemma",
+ "title": "Naturality and shifts of inverse-scalar adjunction legs",
+ "statement": "Let $F:D\\to T$ and $U:T\\to D$ be functors with integer shift comparisons and an adjunction compatible with these comparisons. Let $T$ be $A[1/t]$-linear, with linear shifts. Then the legs $\\eta_L U(t^{-n}1_{FL})$ are natural in $L$ and commute with shifts under the composite comparison.",
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor), canonical termwise shift comparisons"
+ },
+ "proof": [
+  {
+   "text": "Central scalars commute with every morphism. Apply this under U and combine it with naturality of the adjunction unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Move the scalar through the F shift comparison using target linearity and through the U comparison by naturality. Apply the unit shift equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor), canonical termwise shift comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of repeated multiplication by a scalar on complexes is underlying scalar localization",
+   "results": "8 hits, concerning ModuleCat colimits and localCohomology.ofDiagram; no sheaf complex comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapCocone\", \"IsColimit\"",
+   "results": "IsColimit.mapCoconeEquiv, Cofan.isColimitMapCoconeEquiv and preservation constructors.",
+   "date": "2026-10-19",
+   "verdict": "useful categorical tools, no scalar-localization result"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|homotopyColimit|invSelf",
+   "results": "25 hits, mostly metaprogramming and unrelated telescoping sums.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functor derived adjunction unit commutes with shifts and sequential scalar localization colimit",
+   "results": "Adjunction.unit_app_commShiftIso_hom_app and derived unit identities; unit shift lemma requires adj.CommShift.",
+   "date": "2026-10-19",
+   "verdict": "used for proved abstract leg laws; does not supply normalized unit coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ScalarLocalizationUnderlyingTelescope",
+  "date": "2026-10-19",
+  "group": "M6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice/rationalization paragraph: the scalar-extension object is represented by the telescope obtained by repeatedly multiplying an integral complex by the denominator scalar.",
+   "via": [
+    "lem-weil-pbc-scalar-localization-underlying-telescope"
+   ]
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationTelescopeLaws",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationTelescopeLaws.lean",
+  "declaration": "CategoryTheory.scalarLocalizationTelescopeLegLaws",
+  "statement": "theorem scalarLocalizationTelescopeLegLaws\n    (A : Type v) [CommRing A] (t : A)\n    {D : Type uD} [Category.{vD} D] [HasShift D ℤ]\n    {T : Type uT} [Category.{vT} T] [Preadditive T] [HasShift T ℤ]\n    [Linear (Localization.Away t) T]\n    [∀ k : ℤ, (shiftFunctor T k).Linear (Localization.Away t)]\n    (F : D ⥤ T) [F.CommShift ℤ] (U : T ⥤ D) [U.CommShift ℤ]\n    (adj : F ⊣ U) [adj.CommShift ℤ] :\n    (∀ (K L : D) (f : K ⟶ L) (n : ℕ),\n      f ≫ (adj.unit.app L ≫ U.map\n        (((IsLocalization.Away.invSelf t : Localization.Away t) ^ n) •\n          𝟙 (F.obj L))) =\n      (adj.unit.app K ≫ U.map\n        (((IsLocalization.Away.invSelf t : Localization.Away t) ^ n) •\n          𝟙 (F.obj K))) ≫ U.map (F.map f)) ∧\n    (∀ (L : D) (n : ℕ) (k : ℤ),\n      (adj.unit.app (L⟦k⟧) ≫ U.map\n        (((IsLocalization.Away.invSelf t : Localization.Away t) ^ n) •\n          𝟙 (F.obj (L⟦k⟧)))) ≫\n          ((F ⋙ U).commShiftIso k).hom.app L =\n      (adj.unit.app L ≫ U.map\n        (((IsLocalization.Away.invSelf t : Localization.Away t) ^ n) •\n          𝟙 (F.obj L)))⟦k⟧')",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged, sorry → proof); moved UnitSections def vs clone (identical); ComplexColimitHomotopyColimit diff (additive only); 9 modules compiled in import order (560 s limit, no warnings); #print axioms (sorryAx only via upstream ModuleCat.localization_away_colimit); node proof_deps vs Lean usage and unit realized list"
+ }
+}

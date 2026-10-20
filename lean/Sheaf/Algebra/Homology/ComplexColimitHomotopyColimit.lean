@@ -413,4 +413,52 @@ theorem moduleSheaf_complex_colimit_homotopyColimit
 
 
 
+/-- The telescope comparison in any abelian category with exact sequential colimits.
+This is the site-independent form of the two preceding specializations.
+Source: Stacks Project, Derived Categories, Tags 093W, 0949 and 0A5L
+(blueprint: lem-kun-complex-colimit-hocolim).
+Proof: the cocone is the cokernel of the injective telescope map, giving a short
+exact sequence; apply the cone comparison and preservation of countable sums. -/
+theorem complex_colimit_homotopyColimit
+    {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
+    [HasCountableCoproducts A]
+    [HasFilteredColimitsOfSize.{0, 0} A] [AB5OfSize.{0, 0} A]
+    (E : ℕ ⥤ CochainComplex A ℤ)
+    (B : Cofan (fun n : ℕ ↦ E.obj n)) (hB : IsColimit B)
+    (L : Cocone E) (hL : IsColimit L)
+    (u : B.pt ⟶ B.pt)
+    (hu : ∀ n : ℕ, B.inj n ≫ u =
+      B.inj n - E.map (homOfLE (Nat.le_succ n)) ≫ B.inj (n + 1))
+    (q : B.pt ⟶ L.pt) (hq : ∀ n : ℕ, B.inj n ≫ q = L.ι.app n) :
+    ∃ p : mappingCone u ⟶ L.pt,
+      mappingCone.inr u ≫ p = q ∧
+      (mappingCone.inl u).comp (Cochain.ofHom p) (add_zero _) = 0 ∧
+      QuasiIso p ∧
+      Nonempty (IsColimit
+        (Cofan.mk (DerivedCategory.Q.obj B.pt)
+          (fun n : ℕ ↦ DerivedCategory.Q.map (B.inj n)))) ∧
+      ∃ e : DerivedCategory.Q.obj (mappingCone u) ≅ DerivedCategory.Q.obj L.pt,
+        e.hom = DerivedCategory.Q.map p ∧
+        DerivedCategory.Q.mapTriangle.obj (mappingCone.triangle u) ∈
+          distTriang (DerivedCategory A) ∧
+        Triangle.mk (DerivedCategory.Q.map u) (DerivedCategory.Q.map q)
+          (e.inv ≫ (DerivedCategory.Q.mapTriangle.obj (mappingCone.triangle u)).mor₃) ∈
+          distTriang (DerivedCategory A) ∧
+        ∃ h : HasCountableCoproducts (DerivedCategory A),
+          @IsSequentialHomotopyColimit
+            (DerivedCategory A) _ _ _ _ _ _ _ h
+            (fun n : ℕ ↦ DerivedCategory.Q.obj (E.obj n))
+            (fun n : ℕ ↦ DerivedCategory.Q.map (E.map (homOfLE (Nat.le_succ n))))
+            (DerivedCategory.Q.obj (mappingCone u)) ∧
+          @IsSequentialHomotopyColimit
+            (DerivedCategory A) _ _ _ _ _ _ _ h
+            (fun n : ℕ ↦ DerivedCategory.Q.obj (E.obj n))
+            (fun n : ℕ ↦ DerivedCategory.Q.map (E.map (homOfLE (Nat.le_succ n))))
+            (DerivedCategory.Q.obj L.pt) := by
+  have : HasFiniteBiproducts A := Abelian.hasFiniteBiproducts
+  have : CountableAB4 A := CountableAB4.of_countableAB5 A
+  have hz := telescope_zero E B hB L u hu q hq
+  exact complex_colimit_homotopyColimit_of_shortExact E B hB L hL u hu q hz
+    (telescope_shortExact E B hB L hL u hu q hq hz)
+
 end CategoryTheory

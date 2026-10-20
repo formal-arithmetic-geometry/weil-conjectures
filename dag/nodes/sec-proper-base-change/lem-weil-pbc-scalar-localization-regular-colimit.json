@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-scalar-localization-regular-colimit",
+ "kind": "lemma",
+ "title": "The regular module localization colimit",
+ "statement": "Let R be a sheaf of commutative rings on a small site and s a global section. Use the module sheaf category [def-weil-sheaf-of-modules-category] and the sheafified section localization [def-weil-pbc-ringed-section-localization]. The sequence of regular R-module sheaves whose transition is multiplication by s has a colimit c, with an isomorphism c.pt to the localized R-module sheaf carrying its zeroth coprojection to the localization unit.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY (module sheafification); algebra.tex Tag 00CM (localization by powers)"
+ },
+ "proof": [
+  {
+   "text": "At each site object apply the module localization filtered-colimit comparison to the regular module. Its fraction formula sends the stage-n element r to r times invSelf(s)^n. The naturality of the localized ring maps makes these maps a presheaf cocone; evaluation jointly reflects colimits.",
+   "uses": [
+    "lem-sc-module-localization-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a sheaf target the module sheafification adjunction extends the presheaf descent uniquely. The adjunction unit and the presheaf colimit equations verify factorization and uniqueness. The stage-zero fraction map is the given localization unit.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-localization-filtered-colimit",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY (module sheafification); algebra.tex Tag 00CM (localization by powers)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization away from an element is a sequential colimit of multiplication by that element on modules",
+   "results": "8 hits: ModuleCat.localizedModule_functor_obj, localizedModuleIsLocalizedModule, ModuleCat.localizedModule, localCohomology.ofDiagram, ModuleCat.localizedModule_isLocalizedModule, exact_of_isLocalized_span, ModuleCat.localizedModule_functor, IsLocalizedModule.AtPrime",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem; use the existing module and sheafification APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsColimit\", \"ofSequence\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem; use the existing module and sheafification APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "localization_away_colimit|ringedLocalizationRing_moduleComparison|changeOfRingsAdjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem; use the existing module and sheafification APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The colimit of repeated scalar multiplication on the regular module is localization away from that scalar",
+   "results": "8 hits: IsLocalizedModule.Away, ModuleCat.FilteredColimits.colimitSMulAux, LocalizedModule.Away, ModuleCat.HasColimit.coconePointSMul, ModuleCat.FilteredColimits.colimitHasSMul, IsSMulRegular.of_isLocalizedModule, localizedModuleIsLocalizedModule, OreLocalization.hsmul. No regular sheaf-module sequential-colimit theorem.",
+   "date": "2026-10-20",
+   "verdict": "No exact match; retain the proved construction from existing module and sheafification APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ScalarLocalizationUnderlyingTelescope",
+  "date": "2026-10-19",
+  "group": "M6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice/rationalization paragraph: the scalar-extension object is represented by the telescope obtained by repeatedly multiplying an integral complex by the denominator scalar.",
+   "via": [
+    "lem-weil-pbc-scalar-localization-underlying-telescope"
+   ]
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationRegularColimit",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationRegularColimit.lean",
+  "declaration": "CategoryTheory.scalarLocalization_regularColimit",
+  "statement": "theorem scalarLocalization_regularColimit\n    (s : (O.obj ⋙ forget CommRingCat).sections) :\n    ∃ c : Cocone (Functor.ofSequence (X := fun _ : ℕ ↦\n        SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))\n      (fun _ ↦ (SheafOfModules.unitHomEquiv _).symm ⟨s.val, s.property⟩)),\n      Nonempty (IsColimit c) ∧ ∃ e : c.pt ≅ ringedSectionLocalization O s,\n        (show SheafOfModules.unit _ ⟶ c.pt from c.ι.app 0) ≫ e.hom =\n          ringedSectionLocalizationUnit O s",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged, sorry → proof); moved UnitSections def vs clone (identical); ComplexColimitHomotopyColimit diff (additive only); 9 modules compiled in import order (560 s limit, no warnings); #print axioms (sorryAx only via upstream ModuleCat.localization_away_colimit); node proof_deps vs Lean usage and unit realized list"
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-extension-tensor-comparison",
+ "kind": "lemma",
+ "title": "Restricted scalar extension as a sheaf tensor product",
+ "statement": "For a morphism phi:R to S of sheaves of commutative rings on a small site, and an R-module sheaf M [def-weil-sheaf-of-modules-category], restriction of scalar extension S tensor_R M is isomorphic to the sheaf tensor [def-pur-sheaf-tensor-product] of the restricted regular S-module and M. Here scalar extension is the sheafification of sectionwise scalar extension, and restriction is [def-pc-sheaf-restrict-scalars]. On every local pure tensor s tensor m the isomorphism sends its image under the tensor sheafification unit to its image under the scalar-extension sheafification unit.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (tensor product of module sheaves), Tag 03CY (module sheafification)"
+ },
+ "proof": [
+  {
+   "text": "The section modules of the presheaf tensor and the restricted scalar extension are identical. Their restriction maps agree on pure tensors and hence on all tensors by induction, giving a presheaf-module isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restriction commutes with module sheafification: the canonical comparison becomes the identity after forgetting to abelian sheaves, and the forgetful functor reflects isomorphisms. Compose with the tensor-sheafification isomorphism. Naturality of the sheafification unit proves the asserted formula on local pure tensors. The same unit naturality proves the first-factor map formula. Composing with the regular presheaf tensor unitor and the sheafification counit gives the explicit regular tensor unitor, whose inverse has formula m maps to 1 tensor m by the triangle identity.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (tensor product of module sheaves), Tag 03CY (module sheafification)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of extension of scalars for sheaves of modules is tensoring with the restricted target ring",
+   "results": "8 hits: SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars, SheafOfModules.restrictScalars_map_val, SheafOfModules.instAdditiveRestrictScalars, PresheafOfModules.restrictScalarsObj, PresheafOfModules.restrictScalars_obj, PresheafOfModules.restrictScalarsObj_obj, PresheafOfModules.restrictScalars_map_app",
+   "date": "2026-10-19",
+   "verdict": "No exact theorem; use the existing module and sheafification APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorObjIsoSheafification\"",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No exact theorem; use the existing module and sheafification APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictionSheafificationComparison|extensionTensorComparison|tensorObjIsoSheafification",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No exact theorem; use the existing module and sheafification APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of extension of scalars for sheaves of modules is tensoring with the restricted target ring",
+   "results": "8 hits: RestrictScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalars, Submodule.restrictScalars, PresheafOfModules.restrictScalars, LinearMap.restrictScalars, AlgebraicGeometry.Scheme.Modules.restrict. No normalized sheaf tensor comparison.",
+   "date": "2026-10-20",
+   "verdict": "No exact match; retain the proved construction from existing module and sheafification APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ScalarLocalizationUnderlyingTelescope",
+  "date": "2026-10-19",
+  "group": "M6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice/rationalization paragraph: the scalar-extension object is represented by the telescope obtained by repeatedly multiplying an integral complex by the denominator scalar.",
+   "via": [
+    "lem-weil-pbc-scalar-localization-underlying-telescope"
+   ]
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionTensorComparison",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ExtensionTensorComparison.lean",
+  "declaration": "SheafOfModules.exists_extensionTensorComparison",
+  "statement": "theorem exists_extensionTensorComparison (φ : R ⟶ S)\n    (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :\n    ∃ e : (monoidalCategory R).tensorObj\n        ((restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (unit.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))) M ≅\n        (restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (changeOfRings.{u, u, u} φ M),\n      ∀ (V : Cᵒᵖ) (s : S.obj.obj V) (m : M.val.obj V),\n        e.hom.val.app V\n          ((tensorPresheafUnit\n            ((restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n              (unit.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))) M).app V\n            ((show ((restrictScalars.{u}\n                ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n                  (unit.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))).val.obj V\n              from s) ⊗ₜ[R.obj.obj V] m)) =\n        (toSheafify J (changeOfRingsPresheaf.{u, u, u} φ M).presheaf).app V\n          (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-19",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.scalarLocalizationTelescopeUnitSections",
+   "SheafOfModules.tensorPresheafUnit",
+   "SheafOfModules.exists_extensionTensorComparison",
+   "SheafOfModules.regularTensorIso",
+   "SheafOfModules.tensorPresheafUnit_naturality",
+   "SheafOfModules.regularTensorIso_inv_apply"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged, sorry → proof); moved UnitSections def vs clone (identical); ComplexColimitHomotopyColimit diff (additive only); 9 modules compiled in import order (560 s limit, no warnings); #print axioms (sorryAx only via upstream ModuleCat.localization_away_colimit); node proof_deps vs Lean usage and unit realized list"
+ }
+}

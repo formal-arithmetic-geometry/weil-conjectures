@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-scalar-localization-complex-colimit",
+ "kind": "lemma",
+ "title": "Ordinary scalar-sequence colimit of complexes",
+ "statement": "On a small ringed site with commutative coefficient ring $A$ and $t\\in A$, let $E$ be the actual extension of scalars to the sheafified ring $R[1/t]$ and $U_0$ restriction of scalars. Assume their exactness and a termwise unit normalized on every section to $x\\mapsto1\\otimes x$. For every cochain complex $K$, the sequence with constant object $K$ and transition $t$ admits a colimit cocone $c$ and a complex isomorphism $\\beta:c.pt\\cong U_0E(K)$ with $c_n\\beta=\\eta_K U_0(t^{-n})$. Scalar actions are the canonical coefficient actions of [def-weil-pbc-scalar-localization-coefficient-actions].",
+ "stmt_deps": [
+  "def-weil-pbc-scalar-localization-coefficient-actions",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03EK (section-tensor-product); algebra.tex Tag 00CM (section-localization)"
+ },
+ "proof": [
+  {
+   "text": "For each degree apply the ordinary module-sheaf scalar colimit theorem to the normalized unit component. Its cocone equation gives compatibility of the inverse-scalar complex legs with multiplication by t. These legs are already chain maps, so form a complex cocone. Evaluation jointly reflects colimits: in degree i transport the module colimit along its specified isomorphism and the identity comparison of sequence diagrams. The apex is the actual restricted extension complex and the comparison is the identity.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-module-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scalar-localization-module-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03EK (section-tensor-product); algebra.tex Tag 00CM (section-localization)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of repeated multiplication by a scalar on complexes is underlying scalar localization",
+   "results": "8 hits, concerning ModuleCat colimits and localCohomology.ofDiagram; no sheaf complex comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapCocone\", \"IsColimit\"",
+   "results": "IsColimit.mapCoconeEquiv, Cofan.isColimitMapCoconeEquiv and preservation constructors.",
+   "date": "2026-10-19",
+   "verdict": "useful categorical tools, no scalar-localization result"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|homotopyColimit|invSelf",
+   "results": "25 hits, mostly metaprogramming and unrelated telescoping sums.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functor derived adjunction unit commutes with shifts and sequential scalar localization colimit",
+   "results": "Adjunction.unit_app_commShiftIso_hom_app and derived unit identities; unit shift lemma requires adj.CommShift.",
+   "date": "2026-10-19",
+   "verdict": "used for proved abstract leg laws; does not supply normalized unit coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ScalarLocalizationUnderlyingTelescope",
+  "date": "2026-10-19",
+  "group": "M6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice/rationalization paragraph: the scalar-extension object is represented by the telescope obtained by repeatedly multiplying an integral complex by the denominator scalar.",
+   "via": [
+    "lem-weil-pbc-scalar-localization-underlying-telescope"
+   ]
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationTelescopeCore",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationTelescopeCore.lean",
+  "declaration": "CategoryTheory.scalarLocalization_complexColimit",
+  "statement": "theorem scalarLocalization_complexColimit\n    (A : Type v) [CommRing A]\n    (R : Sheaf J CommRingCat.{u})\n    (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat))\n    (t : A)\n    [HasDerivedCategory.{w}\n      (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    [HasDerivedCategory.{w}\n      (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n        (ringedLocalizationRing R (a t))))]\n    (E : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⥤\n      ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n        (ringedLocalizationRing R (a t))))\n    (hE : ∀ M, E.obj M =\n      SheafOfModules.changeOfRings (ringedLocalizationRingUnit R (a t)) M)\n    (_hmap : ∀ {M N} (f : M ⟶ N), E.map f = eqToHom (hE M) ≫\n      SheafOfModules.changeOfRingsHom (ringedLocalizationRingUnit R (a t)) M f ≫\n        eqToHom (hE N).symm)\n    [E.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E]\n    (U₀ : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n        (ringedLocalizationRing R (a t))) ⥤\n      ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n    (hU₀ : U₀ = SheafOfModules.restrictScalars\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map\n        (ringedLocalizationRingUnit R (a t))))\n    [U₀.Additive] [PreservesFiniteLimits U₀] [PreservesFiniteColimits U₀]\n    (unitComplex : ∀ (K : CochainComplex (ringedSiteModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ),\n      K ⟶ (U₀.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))\n    (unitSections : ∀ (K : CochainComplex (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (i : ℤ),\n      scalarLocalizationTelescopeUnitSections (ringedLocalizationRingUnit R (a t))\n        (K.X i) (E.obj (K.X i)) (hE (K.X i))\n        ((unitComplex K).f i ≫\n          eqToHom (congrArg (fun T ↦ T.obj (E.obj (K.X i))) hU₀)))\n :\n    (fun [_source : Linear A (ringedSiteModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n      [_target : Linear (Localization.Away t) (ringedSiteModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n          (ringedLocalizationRing R (a t))))] ↦\n      ∀ (K : CochainComplex (ringedSiteModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ),\n      ∃ (c : Cocone (Functor.ofSequence (X := fun _n : ℕ ↦ K) (fun _n ↦ t • 𝟙 K))),\n        Nonempty (IsColimit c) ∧\n        ∃ β : c.pt ≅ (U₀.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n            ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K),\n          ∀ n : ℕ, (show K ⟶ c.pt from c.ι.app n) ≫ β.hom = (unitComplex K) ≫\n            (U₀.mapHomologicalComplex (ComplexShape.up ℤ)).map\n              (((IsLocalization.Away.invSelf t : Localization.Away t) ^ n) •\n                𝟙 ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)))\n      (_source := scalarLocalizationCoefficientLinear A R a)\n      (_target := scalarLocalizationCoefficientLinear (Localization.Away t)\n        (ringedLocalizationRing R (a t)) (scalarLocalizationCoefficientMap A R a t))",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged, sorry → proof); moved UnitSections def vs clone (identical); ComplexColimitHomotopyColimit diff (additive only); 9 modules compiled in import order (560 s limit, no warnings); #print axioms (sorryAx only via upstream ModuleCat.localization_away_colimit); node proof_deps vs Lean usage and unit realized list"
+ }
+}

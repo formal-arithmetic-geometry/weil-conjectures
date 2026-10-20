@@ -6,6 +6,7 @@ Authors: SHEAF group Q49
 module
 
 public import Sheaf.CategoryTheory.ScalarLocalizationDerivedHom
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionTensorComparison
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.RingedSectionLocalizationRing
@@ -15,16 +16,12 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
-import Mathlib.CategoryTheory.Localization.Predicate
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.CategoryTheory.RingedSectionLocalizationOfUniverses
+import Sheaf.CategoryTheory.ScalarLocalizationTelescopeCore
+import Sheaf.CategoryTheory.ScalarLocalizationTelescopeLaws
+import Sheaf.CategoryTheory.ScalarLocalizationUnitShift
+import Sheaf.CategoryTheory.ScalarLocalizationUnitFactors
 
 /-!
 # The underlying telescope for scalar localization
@@ -49,23 +46,6 @@ open scoped ChangeOfRings
 namespace CategoryTheory
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-
-/-- The section formula for the scalar-extension unit, using the existing tensor
-sheafification. The equality identifies the supplied presentation of the extension object.
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(blueprint: lem-weil-pbc-scalar-localization-underlying-telescope). -/
-def scalarLocalizationTelescopeUnitSections
-    {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
-    (M : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
-    (N : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))
-    (e : N = SheafOfModules.changeOfRings φ M)
-    (η : M ⟶ (SheafOfModules.restrictScalars
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj N) : Prop :=
-  ∀ (V : Cᵒᵖ) (x : M.val.obj V),
-    (η ≫ (SheafOfModules.restrictScalars
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).map (eqToHom e)).val.app V x =
-      (toSheafify J (SheafOfModules.changeOfRingsPresheaf φ M).presheaf).app V
-        ((1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] x)
 
 /-- The nth scalar-localization leg, for a specified adjunction and scalar action.
 The theorem below supplies the canonical derived action and the normalized unit.
@@ -127,60 +107,143 @@ def scalarLocalizationTelescopeProperty
           ((F ⋙ U).commShiftIso k).hom.app L =
         (scalarLocalizationTelescopeLeg A t F U adj L n)⟦k⟧')
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem telescope_of_complexColimit
+    (A : Type v) [CommRing A] (t : A)
+    {B : Type uD} [Category.{vD} B] [Abelian B] [HasDerivedCategory.{w} B]
+    {B' : Type uT} [Category.{vT} B'] [Abelian B'] [HasDerivedCategory.{w} B']
+    [Linear A B] [Linear (Localization.Away t) B']
+    [HasCountableCoproducts B] [HasFilteredColimitsOfSize.{0, 0} B] [AB5OfSize.{0, 0} B]
+    (E : B ⥤ B') [E.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E]
+    (U₀ : B' ⥤ B) [U₀.Additive] [PreservesFiniteLimits U₀] [PreservesFiniteColimits U₀]
+    (unitComplex : ∀ K : CochainComplex B ℤ,
+      K ⟶ (U₀.mapHomologicalComplex (.up ℤ)).obj
+        ((E.mapHomologicalComplex (.up ℤ)).obj K))
+    (adj : E.mapDerivedCategory ⊣ U₀.mapDerivedCategory) [adj.CommShift ℤ]
+    (derivedUnit : scalarLocalizationTelescopeDerivedUnit E U₀ unitComplex adj)
+    (hcol : ∀ K : CochainComplex B ℤ,
+      ∃ c : Cocone (Functor.ofSequence (X := fun _n : ℕ ↦ K) (fun _n ↦ t • 𝟙 K)),
+        Nonempty (IsColimit c) ∧
+        ∃ β : c.pt ≅ (U₀.mapHomologicalComplex (.up ℤ)).obj
+            ((E.mapHomologicalComplex (.up ℤ)).obj K),
+          ∀ n : ℕ, c.ι.app n ≫ β.hom = unitComplex K ≫
+            (U₀.mapHomologicalComplex (.up ℤ)).map
+              (((IsLocalization.Away.invSelf t : Localization.Away t) ^ n) •
+                𝟙 ((E.mapHomologicalComplex (.up ℤ)).obj K)))
+    (P : DerivedCategory B → Prop) :
+    scalarLocalizationTelescopeProperty A t E.mapDerivedCategory U₀.mapDerivedCategory adj P := by
+  classical
+  obtain ⟨hnat, hshift⟩ :=
+    scalarLocalizationTelescopeLegLaws A t E.mapDerivedCategory U₀.mapDerivedCategory adj
+  intro L _hL
+  let K : CochainComplex B ℤ := DerivedCategory.Q.objPreimage L
+  let eK : DerivedCategory.Q.obj K ≅ L := DerivedCategory.Q.objObjPreimageIso L
+  clear_value K eK
+  obtain ⟨c, ⟨hc⟩, β, hβ⟩ :=
+    hcol K
+  let S := Functor.ofSequence (X := fun _n : ℕ ↦ K) (fun _n ↦ t • 𝟙 K)
+  let b : Cofan (fun _n : ℕ ↦ K) :=
+    HomologicalComplex.coconeOfHasColimitEval (Discrete.functor (fun _n : ℕ ↦ K))
+  have hb : IsColimit b := HomologicalComplex.isColimitCoconeOfHasColimitEval _
+  clear_value b
+  let s : b.pt ⟶ b.pt := hb.desc (Cofan.mk b.pt
+    (fun n : ℕ ↦ (t • 𝟙 K) ≫ b.inj (n + 1)))
+  have hs (n : ℕ) : b.inj n ≫ s = (t • 𝟙 K) ≫ b.inj (n + 1) := hb.fac _ ⟨n⟩
+  let q : b.pt ⟶ c.pt := hb.desc (Cofan.mk c.pt (fun n : ℕ ↦ c.ι.app n))
+  have hq (n : ℕ) : b.inj n ≫ q = c.ι.app n := hb.fac _ ⟨n⟩
+  clear_value s q
+  have hu (n : ℕ) : b.inj n ≫ (𝟙 b.pt - s) =
+      b.inj n - (t • 𝟙 K) ≫ b.inj (n + 1) := by
+    simp only [Preadditive.comp_sub, Category.comp_id, hs]
+  obtain ⟨p, hp, hp', hqi, ⟨hQB⟩, e, he, htri, htri', hrest⟩ :=
+    complex_colimit_homotopyColimit S b hb c hc (𝟙 b.pt - s)
+      (fun n ↦ by simpa only [S, Functor.ofSequence_map_homOfLE_succ] using hu n) q hq
+  let δ : U₀.mapDerivedCategory.obj (E.mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≅
+      DerivedCategory.Q.obj
+        ((U₀.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+          ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) :=
+    U₀.mapDerivedCategory.mapIso (E.mapDerivedCategoryFactors.app K) ≪≫
+      U₀.mapDerivedCategoryFactors.app ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)
+  let eL : DerivedCategory.Q.obj c.pt ≅
+      U₀.mapDerivedCategory.obj (E.mapDerivedCategory.obj L) :=
+    DerivedCategory.Q.mapIso β ≪≫ δ.symm ≪≫
+      (E.mapDerivedCategory ⋙ U₀.mapDerivedCategory).mapIso eK
+  have hlegs (n : ℕ) : DerivedCategory.Q.map (c.ι.app n) ≫
+      (DerivedCategory.Q.mapIso β ≪≫ δ.symm).hom =
+      scalarLocalizationTelescopeLeg A t E.mapDerivedCategory U₀.mapDerivedCategory
+        adj (DerivedCategory.Q.obj K) n := by
+    apply (cancel_mono δ.hom).1
+    simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.inv_hom_id,
+      Category.comp_id, Functor.mapIso_hom]
+    rw [← Functor.map_comp, hβ, Functor.map_comp]
+    have hh := scalarLocalization_unit_factors (Localization.Away t) E U₀ adj K
+      (unitComplex K) (derivedUnit K) (IsLocalization.Away.invSelf t ^ n)
+    simpa only [scalarLocalizationTelescopeLeg, Functor.map_comp, δ, Iso.trans_hom,
+      Functor.mapIso_hom, Iso.app_hom, Category.assoc] using hh
+  let ι : ∀ _n : ℕ, L ⟶ DerivedCategory.Q.obj b.pt :=
+    fun n ↦ eK.inv ≫ DerivedCategory.Q.map (b.inj n)
+  have hι : IsColimit (Cofan.mk (DerivedCategory.Q.obj b.pt) ι) := by
+    let d : Discrete.functor (fun _n : ℕ ↦ DerivedCategory.Q.obj K) ≅
+        Discrete.functor (fun _n : ℕ ↦ L) := Discrete.natIso (fun _n ↦ eK)
+    exact (IsColimit.precomposeInvEquiv d _).symm hQB
+  have hsQ (n : ℕ) : ι n ≫ DerivedCategory.Q.map s =
+      (t • 𝟙 L) ≫ ι (n + 1) := by
+    calc
+      ι n ≫ DerivedCategory.Q.map s =
+          eK.inv ≫ DerivedCategory.Q.map (b.inj n ≫ s) := by
+        simp only [ι, Functor.map_comp, Category.assoc]
+      _ = eK.inv ≫ DerivedCategory.Q.map ((t • 𝟙 K) ≫ b.inj (n + 1)) := by rw [hs]
+      _ = (t • 𝟙 L) ≫ ι (n + 1) := by
+        simp only [ι, Functor.map_smul, Linear.comp_smul, Linear.smul_comp,
+          Category.id_comp]
+  refine ⟨DerivedCategory.Q.obj b.pt, ι, hι, DerivedCategory.Q.map s, hsQ,
+    DerivedCategory.Q.obj c.pt, DerivedCategory.Q.map q,
+    e.inv ≫ (DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle
+      (𝟙 b.pt - s))).mor₃, ?_, hnat, hshift⟩
+  constructor
+  · simpa only [Functor.map_sub, Functor.map_id] using htri'
+  · refine ⟨eL, ?_⟩
+    intro n
+    dsimp only [ι, eL, Iso.trans_hom, Functor.mapIso_hom]
+    rw [Category.assoc, ← Functor.map_comp_assoc, hq]
+    calc
+      _ = eK.inv ≫ scalarLocalizationTelescopeLeg A t E.mapDerivedCategory
+          U₀.mapDerivedCategory adj (DerivedCategory.Q.obj K) n ≫
+            U₀.mapDerivedCategory.map (E.mapDerivedCategory.map eK.hom) := by
+        simpa only [Iso.trans_hom, Functor.mapIso_hom, Functor.comp_map, Category.assoc]
+          using congrArg (fun f ↦ eK.inv ≫ f ≫
+            U₀.mapDerivedCategory.map (E.mapDerivedCategory.map eK.hom)) (hlegs n)
+      _ = _ := by
+        have hn := congrArg (fun f ↦ eK.inv ≫ f) (hnat _ _ eK.hom n)
+        simpa only [scalarLocalizationTelescopeLeg, ← Category.assoc, eK.inv_hom_id,
+          Category.id_comp] using hn.symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 1200000 in
+-- The tensor and derived coefficient structures require substantial elaboration.
 /--
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2), and Stacks Project,
 Derived Categories, Lemmas 0949 and 093W.
 (blueprint: lem-weil-pbc-scalar-localization-underlying-telescope).
 
-Proof (the eight steps of the DAG node):
-1. The maps lambda_n : R → R[1/t], r ↦ r/t^n, exhibit R[1/t] as the sheaf colimit
-of repeated multiplication by t. For a compatible family a_n, send r/t^n to a_n(r).
-If r/t^n = r'/t^m, some t^k kills t^m r - t^n r'; the two representatives agree
-at stage n+m+k. This proves well-definedness even with t-torsion. Common stages
-prove additivity, linearity and uniqueness. The maps commute with restrictions;
-module sheafification gives the sheaf universal property. Use
- def-weil-pbc-module-localization, def-weil-pbc-ringed-section-localization and
- def-weil-presheaf-modules-sheafification.
-2. Tensor symmetry and tensor--Hom adjunction identify maps R[1/t] tensor M → N
-with compatible families M → N for the t-sequence, using step 1 on internal Hom.
-Thus restricted scalar extension is its colimit, with leg m ↦ t^(-n) tensor m.
-Use lem-pc-sheaf-modules-tensor-closed, def-pur-sheaf-tensor-product and
- def-pc-sheaf-restrict-scalars.
-3. Filtered colimits of module sheaves are exact by
- lem-pur-ringed-site-grothendieck-abelian. The faithful exact forgetful functor of
- lem-weil-pbc-module-sheaves-colimits-forgetful detects exactness. Restriction
-changes no underlying abelian sheaf, hence is exact and reflects exactness.
-Step 2 then proves extension exact. Apply
- lem-weil-pbc-exact-functor-derived-factorization: both derived functors are
-termwise with their canonical shift comparisons.
-4. Choose a complex K representing L. The degreewise colimit B of its t-sequence
-is isomorphic to restricted E(K), sending the nth colimit leg to t^(-n) tensor x.
-This commutes with differentials since d(t^(-n) tensor x) = t^(-n) tensor dx;
-the inverse commutes by cancellation. Step 3 and
- def-weil-abstract-derived-category identify Q B with U F L. No bounded
-representative or injectivity of t is required.
-5. Apply lem-kun-complex-colimit-hocolim to the constant sequence K with map t.
-Its cone comparison p : Cone(1-s) → B is a quasi-isomorphism whose restriction
-to the unshifted summand is the colimit map. Its actual coprojections remain a
-coproduct after Q. Transport the distinguished cone triangle along Q p and the
-isomorphism of step 4. The second map has precisely the mapped colimit legs.
-6. The zeroth leg is the termwise unit x ↦ 1 tensor x, equal to x tensor 1 after
-symmetry. The other legs are t^(-n) times it. Since t is a unit in R[1/t], these
-are inverse powers of multiplication by t. The two unit normalizations below
-identify their derived images with adj.unit, including n=0. Use
- def-pur-sheaf-tensor-product, def-weil-pbc-ringed-section-localization and
- def-pc-sheaf-restrict-scalars.
-7. For any other telescope cone, identify its coproduct vertices with those of
-step 5. TR3 completes the identity on these vertices to a triangle map. Its
-third component is an isomorphism by lem-sf-triangle-morphism-iso. The second
-square gives the required formula for every leg. Use
- def-weil-triangulated-category; no uniqueness or functorial cone is claimed.
-8. The termwise legs commute with chain maps because both composites send x to
-t^(-n) tensor f(x). They commute with shifts: in degree r both are the original
-leg in degree r+k, and the same sign multiplies both differentials. Descend
-these equations through Q using lem-weil-pbc-localization-universal-property
-and lem-weil-pbc-exact-functor-derived-factorization. This gives naturality on
-all derived morphisms and the displayed CommShift equation for every integer k.
+Proof: choose a complex representing L. The ordinary module fraction-colimit theorem,
+assembled degreewise by scalarLocalization_complexColimit, identifies the sequential
+colimit of its repeated-t diagram with restricted scalar extension. Grothendieck
+exactness gives exact sequential colimits and countable coproducts. The general abelian
+complex_colimit_homotopyColimit theorem then gives the actual mapped coprojections and
+the distinguished triangle with second arrow induced by the colimit cocone.
+
+The normalized derived-unit equation and scalarLocalization_unit_factors identify each
+mapped colimit leg with the unit followed by the inverse power of t. Transport the
+coproduct, successor map and legs along the chosen representative isomorphism to L.
+The theorem asks for a telescope triangle, so this explicit cone supplies its witness.
+
+Finally scalarLocalization_unit_commShift obtains shift coherence for the specified
+normalized adjunction by sectionwise extensionality and descent through localization.
+Apply scalarLocalizationTelescopeLegLaws to obtain naturality on every derived morphism
+and the shift equation for every integer, and combine these with the constructed triangle.
 -/
 theorem scalarLocalization_underlyingTelescope
     (A : Type v) [CommRing A]
@@ -230,6 +293,53 @@ theorem scalarLocalization_underlyingTelescope
       (_iA := scalarLocalizationDerivedLinear A R a)
       (_iT := scalarLocalizationDerivedLinear (Localization.Away t)
         (ringedLocalizationRing R (a t)) (scalarLocalizationCoefficientMap A R a t)) := by
-  sorry
+  classical
+  let B := ringedSiteModules.{u}
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+  let B' := ringedSiteModules.{u}
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R (a t)))
+  let : Linear A B := scalarLocalizationCoefficientLinear A R a
+  let : Linear (Localization.Away t) B' :=
+    scalarLocalizationCoefficientLinear (Localization.Away t)
+      (ringedLocalizationRing R (a t)) (scalarLocalizationCoefficientMap A R a t)
+  let : Linear A (DerivedCategory B) := scalarLocalizationDerivedLinear A R a
+  let : Linear (Localization.Away t) (DerivedCategory B') :=
+    scalarLocalizationDerivedLinear (Localization.Away t)
+      (ringedLocalizationRing R (a t)) (scalarLocalizationCoefficientMap A R a t)
+  have : IsGrothendieckAbelian.{u} B :=
+    (SheafOfModules.grothendieckAbelian_with_localized_generator J R).1
+  have : HasFiniteBiproducts B := Abelian.hasFiniteBiproducts
+  have : HasCoproducts.{0} B := hasCoproducts_of_finite_and_filtered
+  have : HasCountableCoproducts B := hasCountableCoproducts_of_hasCoproducts B
+  have : AB5OfSize.{0, 0} B := AB5OfSize_shrink B
+  have : adj.CommShift ℤ := scalarLocalization_unit_commShift E U₀ adj unitComplex
+    derivedUnit (by
+    intro K k
+    apply HomologicalComplex.hom_ext
+    intro i
+    simp only [Functor.commShiftIso_comp_hom_app, HomologicalComplex.comp_f,
+      Functor.mapHomologicalComplex_map_f,
+      Functor.mapHomologicalComplex_commShiftIso_hom_app_f,
+      CochainComplex.shiftFunctor_map_f']
+    change (unitComplex (K⟦k⟧)).f i ≫ U₀.map (𝟙 (E.obj (K.X (i + k)))) ≫
+      𝟙 (U₀.obj (E.obj (K.X (i + k)))) = (unitComplex K).f (i + k)
+    simp only [Category.comp_id]
+    have eU : U₀.obj (E.obj (K.X (i + k))) =
+        (SheafOfModules.restrictScalars
+          ((sheafCompose J (forget₂ CommRingCat RingCat)).map
+            (ringedLocalizationRingUnit R (a t)))).obj (E.obj (K.X (i + k))) :=
+      congrArg (fun T ↦ T.obj (E.obj (K.X (i + k)))) hU₀
+    erw [U₀.map_id]
+    erw [Category.comp_id]
+    let e := eqToIso eU ≪≫ (SheafOfModules.restrictScalars
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map
+        (ringedLocalizationRingUnit R (a t)))).mapIso (eqToIso (hE (K.X (i + k))))
+    apply (Iso.cancel_iso_hom_right _ _ e).mp
+    ext V x
+    exact (unitSections (K⟦k⟧) i V x).trans (unitSections K (i + k) V x).symm
+    )
+  exact telescope_of_complexColimit A t E U₀ unitComplex adj derivedUnit
+    (scalarLocalization_complexColimit A R a t E hE hmap U₀ hU₀ unitComplex unitSections)
+    (fun L ↦ ∃ b : ℤ, L.IsGE b)
 
 end CategoryTheory

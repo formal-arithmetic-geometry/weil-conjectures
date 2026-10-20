@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-scalar-localization-unit-shift",
+ "kind": "lemma",
+ "title": "Shift coherence of normalized derived scalar unit",
+ "statement": "For abelian categories B and B' with derived categories, exact additive functors E:B to B' and U:B' to B [lem-weil-pbc-exact-functor-derived-functor], and an adjunction between their canonical exact derived functors, suppose a family of complex morphisms eta_K:K to UEK commutes with integer shifts and the derived adjunction unit is Q(eta_K) under the canonical factorization comparisons. Then the adjunction commutes with integer shifts, including its unit and counit. No separate naturality hypothesis on the family is needed: the derived unit provides naturality after Q.",
+ "stmt_deps": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor), Tag 05RU (definition-derived-category)"
+ },
+ "proof": [
+  {
+   "text": "Precompose the derived unit by Q and compose with the canonical factorization comparison. Its components are Q(eta_K). The assumed complex shift equation and shift naturality of Q give shift compatibility of this natural transformation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The exact-functor factorization comparisons respect shifts. Substitute the derived-unit normalization to obtain the shift equation on every localized complex.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Faithfulness of precomposition by localization gives the unit shift equation on the derived category. The adjunction triangle identities give the counit shift equation.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor), Tag 05RU (definition-derived-category)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of repeated multiplication by a scalar on complexes is underlying scalar localization",
+   "results": "8 hits, concerning ModuleCat colimits and localCohomology.ofDiagram; no sheaf complex comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapCocone\", \"IsColimit\"",
+   "results": "IsColimit.mapCoconeEquiv, Cofan.isColimitMapCoconeEquiv and preservation constructors.",
+   "date": "2026-10-19",
+   "verdict": "useful categorical tools, no scalar-localization result"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|homotopyColimit|invSelf",
+   "results": "25 hits, mostly metaprogramming and unrelated telescoping sums.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functor derived adjunction unit commutes with shifts and sequential scalar localization colimit",
+   "results": "Adjunction.unit_app_commShiftIso_hom_app and derived unit identities; unit shift lemma requires adj.CommShift.",
+   "date": "2026-10-19",
+   "verdict": "used for proved abstract leg laws; does not supply normalized unit coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ScalarLocalizationUnderlyingTelescope",
+  "date": "2026-10-19",
+  "group": "M6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice/rationalization paragraph: the scalar-extension object is represented by the telescope obtained by repeatedly multiplying an integral complex by the denominator scalar.",
+   "via": [
+    "lem-weil-pbc-scalar-localization-underlying-telescope"
+   ]
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationUnitShift",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationUnitShift.lean",
+  "declaration": "CategoryTheory.scalarLocalization_unit_commShift",
+  "statement": "theorem scalarLocalization_unit_commShift\n    {B B' : Type*} [Category B] [Category B'] [Abelian B] [Abelian B']\n    [HasDerivedCategory.{w} B] [HasDerivedCategory.{w} B']\n    (E : B ⥤ B') [E.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E]\n    (U : B' ⥤ B) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]\n    (adj : E.mapDerivedCategory ⊣ U.mapDerivedCategory)\n    (η : ∀ K : CochainComplex B ℤ, K ⟶\n      (E.mapHomologicalComplex (.up ℤ) ⋙ U.mapHomologicalComplex (.up ℤ)).obj K)\n    (hη : ∀ K, adj.unit.app (DerivedCategory.Q.obj K) ≫\n      U.mapDerivedCategory.map (E.mapDerivedCategoryFactors.hom.app K) ≫\n      U.mapDerivedCategoryFactors.hom.app ((E.mapHomologicalComplex (.up ℤ)).obj K) =\n        DerivedCategory.Q.map (η K))\n    (hshift : ∀ (K : CochainComplex B ℤ) (k : ℤ), η (K⟦k⟧) ≫\n      ((E.mapHomologicalComplex (.up ℤ) ⋙ U.mapHomologicalComplex (.up ℤ)).commShiftIso k\n        ).hom.app K = (η K)⟦k⟧') : adj.CommShift ℤ",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-68a69",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261020T122112-L-477212",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged, sorry → proof); moved UnitSections def vs clone (identical); ComplexColimitHomotopyColimit diff (additive only); 9 modules compiled in import order (560 s limit, no warnings); #print axioms (sorryAx only via upstream ModuleCat.localization_away_colimit); node proof_deps vs Lean usage and unit realized list"
+ }
+}
