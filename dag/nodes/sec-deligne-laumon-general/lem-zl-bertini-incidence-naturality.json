@@ -1,0 +1,112 @@
+{
+ "id": "lem-zl-bertini-incidence-naturality",
+ "kind": "statement",
+ "title": "Universal incidence commutes with changing the base scheme",
+ "statement": "Given f:Y→Spec k, i:X→Y, an invertible module L on Y and finitely many global sections sᵢ, tensor pullback of their universal incidence equation defines the incidence scheme over X. Its canonical map to the incidence scheme over Y forms a cartesian square over i. It preserves the coefficient projection. The pullback unit preserves scalar multiplication and local free-generator coefficients, and an affine-local generator pulls back to a global generator when the entire source maps into that affine open.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, proof; tensor-pullback and affine-coordinate details"
+ },
+ "stmt_deps": [
+  "def-zl-bertini-universal-family"
+ ],
+ "proof": [
+  {
+   "text": "Compare tensor pullback along a composite with iterated tensor pullback. The comparison identifies pulled-back sections and scalar multiplication, hence identifies the two incidence ideal sheaves. Restrict the canonical ambient product pullback square to the closed subschemes; equality of the pulled-back ideal gives the cartesian incidence square and the projection formula. Apply the same tensor comparison to a local free generator to obtain its coefficient formula.",
+   "uses": [
+    "lem-zl-bertini-universal-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-bertini-universal-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, proof, with the displayed affine and pullback calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_bertiniIncidenceChart|bertiniUniversalIdeal.*IsDominant",
+   "results": "No matches",
+   "date": "2026-10-21",
+   "verdict": "No exact incidence-chart result; reuse the listed general APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type domain affine chart universal incidence generic residue field arrow isomorphism",
+   "results": "AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField; AlgebraicGeometry.Scheme.over_def; AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion; AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue; AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField; AlgebraicGeometry.Scheme.fromSpecResidueField",
+   "date": "2026-10-21",
+   "verdict": "No exact incidence-chart result; reuse the listed general APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IrreducibleCloseds\"",
+   "results": "TopologicalSpace.IrreducibleCloseds; TopologicalSpace.IrreducibleCloseds.instPartialOrder; TopologicalSpace.IrreducibleCloseds.carrier; TopologicalSpace.IrreducibleCloseds.instSetLike; TopologicalSpace.IrreducibleCloseds.Simps.coe; TopologicalSpace.IrreducibleCloseds.instSingletonOfT1Space; TopologicalSpace.IrreducibleCloseds.isClosed'; TopologicalSpace.IrreducibleCloseds.isIrreducible'",
+   "date": "2026-10-21",
+   "verdict": "No exact incidence-chart result; reuse the listed general APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "zero locus of a section of invertible sheaf commutes with base change tensor pullback",
+   "results": "AlgebraicGeometry.Scheme.zeroLocus; AlgebraicGeometry.Scheme.isoSpec_inv_image_zeroLocus; AlgebraicGeometry.Spec_zeroLocus; AlgebraicGeometry.Scheme.preimage_zeroLocus; AlgebraicGeometry.RingedSpace.zeroLocus; AlgebraicGeometry.Scheme.image_zeroLocus; AlgebraicGeometry.Scheme.zeroLocus_map_of_eq; AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop",
+   "date": "2026-10-21",
+   "verdict": "General basis, zero-locus, dominance or residue-field APIs; no exact incidence theorem. The proof uses these general APIs where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniGenericFibreChart",
+  "date": "2026-10-21",
+  "group": "A5"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Bertini irreducibility step: the affine incidence presentation and its generic residue-field computation (Tag 0G4F).",
+   "via": [
+    "lem-zl-bertini-generic-fibre-chart",
+    "lem-zl-bertini-irreducible-member"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniIncidenceNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniIncidenceNaturality.lean",
+  "declaration": "AlgebraicGeometry.isPullback_bertiniIncidenceBaseChange",
+  "statement": "theorem isPullback_bertiniIncidenceBaseChange\n    {k : Type u} [Field k] {Y X : Scheme.{u}} (f : Y ⟶ Spec (.of k))\n    (u : X ⟶ Y) (L : Y.Modules) [L.IsInvertible]\n    {I : Type u} [Fintype I] (s : I → Γ(L, ⊤)) :\n    IsPullback (bertiniIncidenceBaseChange f u L s)\n      ((bertiniUniversalIdeal (u ≫ f) ((tensorPullback u).obj L)\n        (fun i ↦ tensorSectionsUnit u L (s i))).subschemeι ≫ pullback.snd _ _)\n      ((bertiniUniversalIdeal f L s).subschemeι ≫ pullback.snd _ _) u",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261020T235537-L-1187732",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261020T235537-L-1187732",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

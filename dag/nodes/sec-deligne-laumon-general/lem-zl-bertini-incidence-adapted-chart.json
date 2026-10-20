@@ -1,0 +1,162 @@
+{
+ "id": "lem-zl-bertini-incidence-adapted-chart",
+ "kind": "statement",
+ "title": "A dense adapted polynomial chart of the Bertini incidence scheme",
+ "statement": "Under precisely the hypotheses of lem-zl-bertini-generic-fibre-chart and for any prescribed basis of V, there exist a finite type k-domain A, n≥2, g₁,…,gₙ∈A, with a component of V(g₁,g₂) of dimension dim A−2 and geometrically irreducible Spec Frac A, a dominant map j:Spec A[x₁,…,xₙ]→H surjective on stalks, and an isomorphism c of the original parameter affine space with Spec k[t₀,…,tₙ], such that j≫q≫c is exactly t₀↦−Σgᵢxᵢ, tᵢ↦xᵢ.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, proof; tensor-pullback and affine-coordinate details"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sc-invertible-module",
+  "def-pc-zero-scheme",
+  "def-pc-geometrically-irreducible",
+  "def-zl-bertini-universal-family",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-pc-field-extension",
+  "def-pc-scheme-fibre",
+  "lem-zl-bertini-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open avoiding the first section zero locus and meeting the codimension-two component. Pass to the quotient of its coordinate ring by the nilradical. This is a finite type domain; the quotient spectrum is a universal homeomorphism, so the chosen component and codimension survive, and geometric irreducibility survives every base change. The generic residue criterion gives geometric irreducibility of its fraction field.",
+   "uses": [
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lem-zl-generic-point-geometric-irreducibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Codimension of a maximal irreducible closed subset is preserved on open restriction. The height-two minimal prime over the second and third coefficients rules out a linear dependence by the principal ideal theorem. The first coefficient is one, so the three vectors are independent. Extend them to a basis. The dimension formula at a prime and the transcendence-degree formula for a finite type domain give dim(A/p)+height(p)=dim A.",
+   "uses": [
+    "lem-sc-dimension-locally-algebraic",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every nonempty affine trivialization, pass to the reduced domain and transfer the base-locus component codimension bound to the coefficient ideal. A section nonzero somewhere cannot have zero coefficient on a nonempty open of the irreducible base. Apply affine incidence irreducibility. Naturality identifies each resulting image with the preimage of that affine open. The zero-parameter section makes all pairs of such images intersect; the open-cover criterion proves H irreducible.",
+   "uses": [
+    "lem-zl-bertini-affine-incidence-irreducible",
+    "lem-zl-bertini-universal-zero-section",
+    "lem-zl-bertini-incidence-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine incidence presentation, the compatible basis-coordinate change and elimination of the first variable. Their evaluation formulas prove the asserted projection equation. Naturality preserves surjectivity on stalks under base change. The chart image is a nonempty open subset of the irreducible H, hence dense.",
+   "uses": [
+    "lem-zl-bertini-affine-incidence-chart",
+    "lem-zl-bertini-basis-coordinates",
+    "lem-zl-bertini-incidence-elimination",
+    "lem-zl-bertini-incidence-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-zl-bertini-affine-incidence-chart",
+  "lem-zl-bertini-affine-incidence-irreducible",
+  "lem-zl-bertini-basis-coordinates",
+  "lem-zl-bertini-incidence-elimination",
+  "lem-zl-bertini-incidence-naturality",
+  "lem-zl-bertini-universal-zero-section",
+  "lem-zl-generic-point-geometric-irreducibility"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4F, proof, with the displayed affine and pullback calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_bertiniIncidenceChart|bertiniUniversalIdeal.*IsDominant",
+   "results": "No matches",
+   "date": "2026-10-21",
+   "verdict": "No exact incidence-chart result; reuse the listed general APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type domain affine chart universal incidence generic residue field arrow isomorphism",
+   "results": "AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField; AlgebraicGeometry.Scheme.over_def; AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion; AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue; AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField; AlgebraicGeometry.Scheme.fromSpecResidueField",
+   "date": "2026-10-21",
+   "verdict": "No exact incidence-chart result; reuse the listed general APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IrreducibleCloseds\"",
+   "results": "TopologicalSpace.IrreducibleCloseds; TopologicalSpace.IrreducibleCloseds.instPartialOrder; TopologicalSpace.IrreducibleCloseds.carrier; TopologicalSpace.IrreducibleCloseds.instSetLike; TopologicalSpace.IrreducibleCloseds.Simps.coe; TopologicalSpace.IrreducibleCloseds.instSingletonOfT1Space; TopologicalSpace.IrreducibleCloseds.isClosed'; TopologicalSpace.IrreducibleCloseds.isIrreducible'",
+   "date": "2026-10-21",
+   "verdict": "No exact incidence-chart result; reuse the listed general APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bertini universal incidence scheme irreducible codimension two base locus affine polynomial chart",
+   "results": "AlgebraicGeometry.Scheme; AlgebraicGeometry.Scheme.mk.noConfusion; AlgebraicGeometry.Scheme.zeroLocus; AlgebraicGeometry.IsAffineOpen; AlgebraicGeometry.Scheme.affineBasicOpen; AlgebraicGeometry.IsAffineOpen.fromSpec_image_zeroLocus; AlgebraicGeometry.Scheme.zeroLocus_biInf; AlgebraicGeometry.IsSmooth.recOn",
+   "date": "2026-10-21",
+   "verdict": "General basis, zero-locus, dominance or residue-field APIs; no exact incidence theorem. The proof uses these general APIs where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniGenericFibreChart",
+  "date": "2026-10-21",
+  "group": "A5"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Bertini irreducibility step: the affine incidence presentation and its generic residue-field computation (Tag 0G4F).",
+   "via": [
+    "lem-zl-bertini-generic-fibre-chart",
+    "lem-zl-bertini-irreducible-member"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniIncidenceAdaptedChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniIncidenceAdaptedChart.lean",
+  "declaration": "AlgebraicGeometry.exists_bertiniIncidenceAdaptedChart",
+  "statement": "theorem exists_bertiniIncidenceAdaptedChart\n    (k : Type u) [Field k] (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [GeometricallyIrreducible (Y ↘ Spec (.of k))]\n    (L : Y.Modules) [L.IsInvertible]\n    (V : Type v) [AddCommGroup V] [Module k V] [FiniteDimensional k V] :\n    letI : Module k Γ(L, ⊤) :=\n      Module.compHom Γ(L, ⊤) (Scheme.globalSectionsRingHom k (X := Y))\n    ∀ ψ : V →ₗ[k] Γ(L, ⊤),\n      (∃ (v₁ v₂ v₃ : V) (W : TopologicalSpace.IrreducibleCloseds Y),\n        Maximal (fun Z : TopologicalSpace.IrreducibleCloseds Y ↦\n          (Z : Set Y) ⊆ (Scheme.Modules.homOfGlobalSection L (ψ v₂)).zeroLocus.support ∩\n            (Scheme.Modules.homOfGlobalSection L (ψ v₃)).zeroLocus.support) W ∧\n        ¬ (W : Set Y) ⊆ (Scheme.Modules.homOfGlobalSection L (ψ v₁)).zeroLocus.support ∧\n        Order.coheight W = 2) →\n      (∀ B : TopologicalSpace.IrreducibleCloseds Y,\n        Maximal (fun Z : TopologicalSpace.IrreducibleCloseds Y ↦\n          (Z : Set Y) ⊆ ⋂ w : V,\n            ((Scheme.Modules.homOfGlobalSection L (ψ w)).zeroLocus.support : Set Y)) B →\n        2 ≤ Order.coheight B) →\n      ∀ (r : ℕ) (b : Module.Basis (Fin r) k V),\n      ∃ (A : CommRingCat.{u}) (a : Algebra k A),\n        letI := a\n        ∃ (hft : Algebra.FiniteType k A) (hdom : IsDomain A),\n          letI := hft\n          letI := hdom\n          ∃ (n : ℕ) (hn : 2 ≤ n) (g : Fin n → A),\n            (∃ W : Set (PrimeSpectrum.zeroLocus\n                ({g ⟨0, Nat.zero_lt_of_lt hn⟩, g ⟨1, hn⟩} : Set A)),\n              W ∈ irreducibleComponents (PrimeSpectrum.zeroLocus\n                ({g ⟨0, Nat.zero_lt_of_lt hn⟩, g ⟨1, hn⟩} : Set A)) ∧\n              topologicalKrullDim W + 2 = ringKrullDim A) ∧\n            GeometricallyIrreducible\n              (Spec.map (CommRingCat.ofHom (algebraMap k (FractionRing A)))) ∧\n            ∃ (j : Spec (.of (MvPolynomial (Fin n) A)) ⟶\n                (bertiniUniversalIdeal (Y ↘ Spec (.of k)) L\n                  (fun i : ULift.{u} (Fin r) ↦ ψ (b i.down))).subscheme)\n              (c : Spec (.of (MvPolynomial (ULift.{u} (Fin r)) k)) ≅\n                Spec (.of (MvPolynomial (Fin (n + 1)) k))),\n              IsDominant j ∧ SurjectiveOnStalks j ∧\n              j ≫ bertiniUniversalProjection (Y ↘ Spec (.of k)) L\n                  (fun i : ULift.{u} (Fin r) ↦ ψ (b i.down)) ≫ c.hom =\n                bertiniEliminatedProjection k A n g",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261020T235537-L-1187732",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261020T235537-L-1187732",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
