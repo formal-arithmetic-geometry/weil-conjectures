@@ -1,0 +1,119 @@
+{
+ "id": "lem-amb-compact-support-open-source-composition",
+ "kind": "statement",
+ "title": "Compact-support composition with a source open",
+ "statement": "Let A be a finite commutative ring. Let V,X,S be Noetherian schemes, w:V→X an open immersion, and f:X→S separated of finite type and compactifiable [def-weil-pbc-derived-categories, lem-amb-unbounded-compact-support-comparisons]. For a compactification c=(j,r) of f, its source restriction c.precomp w has open factor wj and proper factor r. Identify compact support along w with exact derived open extension using the identity-proper compactification (w,id), and use the model-to-chosen comparisons t_c and t_(c.precomp w). Then the specified composition isomorphism α_(w,f), after this open identification, is Dw_!(t_c inverse), followed by the inverse of derived open-composition D(wj)_!≅Dw_! Dj_! [lem-cbc-extension-zero-composition], followed by t_(c.precomp w). The equality is one of the specified natural isomorphisms, on the whole unbounded derived categories. The open adjunctions have the normalization of [lem-weil-pbc-extension-by-zero-adjunction].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition: source-open specialization of the first two identifications; Tag 0F7B, identity-proper normalization of lemma-shriek-proper-and-open."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Expand the composition isomorphism using the outer compactification c and the identity-proper compactification (wj,id) of wj. The restricted model has ambient c.Z times_(c.Z) X, and its proper projection to X is an isomorphism. Identify it with (w,id) through the canonical pullback unit. The cartesian refinement comparison is the inverse open base-change comparison followed by the direct-image unit; transpose under the open adjunction and apply its triangles to identify the specified maps. The identity-proper interchange cancels this factor. Derived direct-image composition cancels its identity unit. The remaining open factor is inverse derived open-composition, and the terminal model is literally c.precomp w. Naturality moves the c comparison to the input. Common-refinement coherence compares this computation with the chosen models. Identity and empty opens obey the same unit calculations.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition: source-open specialization of the first two identifications; Tag 0F7B, identity-proper normalization of lemma-shriek-proper-and-open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compact support composition with extension by zero along an open source immersion",
+   "results": "Eight hits about topological compact support, including HasCompactSupport.extend_zero, HasCompactSupport.comp_left and CompactlySupportedContinuousMap.comp; no etale compact-support normalization.",
+   "date": "2026-10-20",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryNatIso_trans",
+   "results": "Unknown identifier in the Mathlib-only index; the project declaration was read directly in MapDerivedCategoryMate.",
+   "date": "2026-10-20",
+   "verdict": "The generic descent lemma handles the final open factors, not normalization of the source compactification."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek.*precomp|CompIso.*open_source",
+   "results": "No hits. Local searches also checked the source composition and unbounded comparison modules.",
+   "date": "2026-10-20",
+   "verdict": "The declared general tower theorem still needs this source-open identity-proper normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The compactly supported derived direct image composition with extension by zero along a source open immersion agrees with restricting the source open in a compactification.",
+   "results": "Eight hits: SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, HasCompactSupport.extend_zero, Scheme.Hom.app_appIso_inv, HasCompactSupport.comp_isClosedEmbedding, Scheme.Hom.opensRange_comp, Scheme.Modules.restrictFunctorComp, and two LocallyRingedSpace open-immersion identities. None concerns derived etale compact-support composition.",
+   "date": "2026-10-20",
+   "verdict": "No match: restriction of structure sheaves and topological compact support do not normalize the specified etale composition comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleShriekOpenExchangeAdjoint",
+  "date": "2026-10-20",
+  "group": "B6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-vector-bundle-purity",
+   "place": "Source-open normalization in the two-tower calculation for the extension/composition comparison.",
+   "via": [
+    "lem-amb-shriek-open-exchange-adjoint",
+    "lem-amb-shriek-open-tower-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenSourceComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSourceComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso_open_source",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-20",
+  "statement": "theorem unboundedEtaleLowerShriekCompIso_open_source\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {V X S : Scheme.{u}} [IsNoetherian V] [IsNoetherian X] [IsNoetherian S]\n    (w : V ⟶ X) (f : X ⟶ S) [IsOpenImmersion w]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [HasCompactification w] [HasCompactification f] [HasCompactification (w ≫ f)]\n    (c : Compactification f) :\n    Functor.isoWhiskerRight (rightDerivedLowerShriekIsoOfIsOpenImmersion A w).symm\n        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f) ≪≫\n      unboundedEtaleLowerShriekCompIso A w f =\n    Functor.isoWhiskerLeft\n        (openImmersionLowerShriek (ModuleCat.{u + 1} A) w).mapDerivedCategory\n        (rightDerivedLowerShriekIso A c).symm ≪≫\n      Functor.isoWhiskerRight\n        (mapDerivedCategoryOpenImmersionLowerShriekComp (ModuleCat.{u + 1} A) w c.i).symm\n        (rightDerivedLowerStar (ModuleCat.{u + 1} A) c.g) ≪≫\n      rightDerivedLowerShriekIso A (c.precomp w)"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051026-L-1534117",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051026-L-1534117",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "lem-amb-shriek-open-tower-counit",
+ "kind": "statement",
+ "title": "Open compact-support composition on the pullback tower",
+ "statement": "Let $A$ be a finite commutative ring and use ordinary unbounded derived categories of small etale module sheaves [def-weil-pbc-derived-categories]. Let $f:X\\to S$ be separated, finite type and compactifiable, $u:U\\hookrightarrow S$ open, and $X,U,S,X_U=X\\times_S U$ Noetherian. Put $v:X_U\\to X$ and $f_U:X_U\\to U$ for the projections. Choose any compactification $c=(j:X\\hookrightarrow\\overline X,r:\\overline X\\to S)$ and its pullback $c_U=(j_U:X_U\\hookrightarrow\\overline X_U,r_U:\\overline X_U\\to U)$, and put $b:\\overline X_U\\hookrightarrow\\overline X$. Write $J,J',B,V,L$ for exact derived extension by zero along $j,j_U,b,v,u$, and $P=Rr_*$, $Q=Rr_{U*}$. The open-extension adjunctions are those of [lem-weil-pbc-extension-by-zero-adjunction]; their composition comparisons are those of [lem-cbc-extension-zero-composition]. Let $a_0:j_{U!}b_!\\cong v_!j_!$ be the left-adjoint comparison conjugate to the inverse-image square isomorphism $j^*v^*\\cong b^*j_U^*$. Define $a:J'B\\cong VJ$ by applying these exact functors termwise and the canonical derived composition comparisons. Let $t:JP\\cong Rf_!$ and $t':J'Q\\cong Rf_{U!}$ be the model-to-chosen comparisons of [lem-amb-unbounded-compact-support-comparisons]. Let $\\delta:VRf_!\\cong Rf_{U!}L$ be the normalized composition comparison obtained by the specified compact-support composition comparisons, the equality $vf=f_Uu$, and the identity-proper compactifications of the opens. Let $\\Gamma:QL\\to BP$ be the specified proper/open interchange in that tower. For every $M\\in D(X_{U,\\mathrm{et}},A)$, $\\delta_M^{-1}$ equals $L((t'_M)^{-1})$, followed by $\\Gamma_{J'M}$, followed by $P(a_M)$, followed by $t_{VM}$. This identity concerns composition before evaluation counits or proper base-change exchange.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J; parent open-exchange proof step 1 and the open counit identity in step 2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the source-open composition normalization to v=pullback.fst f u, f and c. This identifies the first composition comparison with the inverse derived open-composition factor and the comparison for c.precomp v.",
+   "uses": [
+    "lem-amb-compact-support-open-source-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the second comparison by unboundedEtaleLowerShriekCompIso_tower with outer compactification (u,id) and inner compactification (c.precomp v).copy(pullback.condition.symm). The two terminal model comparisons cancel after the congruence isomorphism. The inner restricted model is the pullback compactification.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved derived direct-image right-unit identity removes the identity proper factor. Naturality moves its inverse through the tower exchange, and its inverse/hom cancel. Transport the two literal pullback-open presentations by equality, using the proved heterogeneous congruence lemma. The two remaining open-composition factors and the congruence descend to mapDerivedCategorySquareIso, by preservation of composition and inverse under exact derived descent. This gives the asserted formula before applying any evaluation counit.",
+   "uses": [
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-compact-support-open-source-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J, source-open normalization followed by the explicit second tower, derived direct-image unit and exact derived open-composition descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "openExchange|LowerShriekCompIso",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "No match for the specified geometric tower and its open evaluation counit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "date": "2026-10-18",
+   "verdict": "No match for the specified geometric tower and its open evaluation counit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition compact support extension by zero counit proper open interchange tower normalization",
+   "results": "HasCompactSupport.extend_zero, CompactlySupportedContinuousMap.compLeft, CompactlySupportedContinuousMap.comp, CompactlySupportedContinuousMap.coe_compLeft, CompactlySupportedContinuousMap.toContinuousMap_compLeft, CompactlySupportedContinuousMap.compLeft_apply, CompactlySupportedContinuousMap.zero_comp, HasCompactSupport.tsupport_extend_zero_subset",
+   "date": "2026-10-18",
+   "verdict": "No match for the specified geometric tower and its open evaluation counit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact support composition isomorphism proper open interchange extension by zero evaluation counit",
+   "results": "CompactlySupportedContinuousMap.compLeft, HasCompactSupport.comp_homeomorph, HasCompactSupport.comp_left, CompactlySupportedContinuousMap.compLeft_apply, HasCompactSupport.extend_zero, hasCompactSupport_comp_left, HasCompactSupport.comp₂_left, CompactlySupportedContinuousMap.instFunLike",
+   "date": "2026-10-18",
+   "verdict": "No match for the specified geometric tower and its open evaluation counit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleShriekOpenExchangeAdjoint",
+  "date": "2026-10-18",
+  "group": "B6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-vector-bundle-purity",
+   "place": "Parent proof paragraph 2, returned Step 8: normalize the extension/composition comparison and its open counit on a compactification.",
+   "via": [
+    "lem-amb-shriek-open-exchange-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenExchangeTower",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenExchangeTower.lean",
+  "declaration": "AlgebraicGeometry.Etale.openExchange_tower",
+  "statement": "theorem openExchange_tower\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X U S : Scheme.{u}} {f : X ⟶ S} (u : U ⟶ S)\n    [IsOpenImmersion u] [IsNoetherian X] [IsNoetherian U] [IsNoetherian S]\n    [IsNoetherian (pullback f u)] [IsSeparated f] [LocallyOfFiniteType f]\n    [QuasiCompact f] [HasCompactification f]\n    (c : Compactification f) (M : DerivedCategoryModule A (pullback f u)) :\n    let δ :=\n      Functor.isoWhiskerRight\n            (rightDerivedLowerShriekIsoOfIsOpenImmersion A (pullback.fst f u)).symm\n            (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f) ≪≫\n          unboundedEtaleLowerShriekCompIso A (pullback.fst f u) f ≪≫\n          unboundedEtaleLowerShriekCongr A (pullback.condition) ≪≫\n          (unboundedEtaleLowerShriekCompIso A (pullback.snd f u) u).symm ≪≫\n          Functor.isoWhiskerLeft\n            (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (pullback.snd f u))\n            (rightDerivedLowerShriekIsoOfIsOpenImmersion A u)\n    let cs := c.ofIsPullback (IsPullback.of_hasPullback f u)\n    let _sq := c.isPullback_i_ofIsPullback (IsPullback.of_hasPullback f u)\n    let a := (Functor.mapDerivedCategorySquareIso\n      ((openImmersionLowerShriekComp (ModuleCat.{u + 1} A)\n          cs.i (pullback.fst c.g u)).symm ≪≫\n        eqToIso (by\n          simp only [cs, Compactification.ofIsPullback_i_fst]) ≪≫\n        openImmersionLowerShriekComp (ModuleCat.{u + 1} A)\n          (pullback.fst f u) c.i)).hom\n    δ.inv.app M =\n      (openImmersionLowerShriek (ModuleCat.{u + 1} A) u).mapDerivedCategory.map\n        ((rightDerivedLowerShriekIso A cs).inv.app M) ≫\n      (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A)\n        (IsPullback.of_hasPullback c.g u).flip).app\n        ((openImmersionLowerShriek (ModuleCat.{u + 1} A) cs.i).mapDerivedCategory.obj M) ≫\n      (rightDerivedLowerStar (ModuleCat.{u + 1} A) c.g).map (a.app M) ≫\n      (rightDerivedLowerShriekIso A c).hom.app\n        ((openImmersionLowerShriek (ModuleCat.{u + 1} A)\n          (pullback.fst f u)).mapDerivedCategory.obj M) ",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051026-L-1534117",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261020T051026-L-1534117",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
