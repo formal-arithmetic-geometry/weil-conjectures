@@ -11,7 +11,9 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 public import Mathlib.LinearAlgebra.TensorProduct.Map
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafComparison
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPresheafComparison
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
@@ -203,7 +205,9 @@ private theorem topExterior_generator {X : Scheme.{v}} (M : X.Modules)
   let : Unique (Set.powersetCard (Fin r) r) :=
     { default := ⟨Finset.univ, by simp⟩
       uniq a := Subtype.ext (Finset.eq_univ_of_card a.val (by simp)) }
-  obtain ⟨d⟩ := (exteriorSheaf_local_free_comparison X M r V r e).1
+  have h := (exteriorSheaf_local_free_comparison X M r V r e).1
+  rw [← exteriorSheaf_eq_exteriorPower] at h
+  obtain ⟨d⟩ := h
   exact exists_isFreeGenerator_of_iso (d ≪≫ SheafOfModules.freeUniqueIso _)
 
 -- The unchanged statement names existential witnesses not used in later conjuncts.
@@ -270,8 +274,11 @@ theorem determinant_split_chart_comparison {X : Scheme.{v}}
   obtain ⟨eO, hfO, hgO⟩ := overSplit S U e hf hg
   let bV := middleFrame S U V hVU r s eO aV cV
   have hB := (exteriorSheaf_local_free_comparison X S.X₂ (r + s) V (r + s) bV).2
+  rw [← exteriorSheafPresheaf_eq_exteriorPower] at hB
   have hA := (exteriorSheaf_local_free_comparison X S.X₁ r V r aV).2
+  rw [← exteriorSheafPresheaf_eq_exteriorPower] at hA
   have hC := (exteriorSheaf_local_free_comparison X S.X₃ s V s cV).2
+  rw [← exteriorSheafPresheaf_eq_exteriorPower] at hC
   obtain ⟨t, ht⟩ := topExterior_generator S.X₃ V s cV
   refine ⟨V, hVU, hxV, ?_⟩
   intro W hWV

@@ -23,7 +23,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame
 import WeilConjectures.RingTheory.KoszulConormalBasis
 import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafComparison
 
 /-! # Finite bases for self Ext and exterior stalks on a Koszul chart
 
@@ -368,8 +369,10 @@ theorem koszulRegularImmersion_self_ext_stalk_bases
         SheafOfModules.homObjFreeUnitIso.{u} (R := Z.sheaf.over W)
           (ULift.{u} (Fin m))
     let eDV := Scheme.Modules.restrictLocalFrame D W V eD
-    obtain ⟨eE⟩ := (Scheme.Modules.exteriorSheaf_local_free_comparison V.toScheme
+    have hE := (Scheme.Modules.exteriorSheaf_local_free_comparison V.toScheme
       (D.restrict V.ι) n (V.ι ⁻¹ᵁ W) m eDV).1
+    rw [← Scheme.Modules.exteriorSheaf_eq_exteriorPower] at hE
+    obtain ⟨eE⟩ := hE
     let c := Scheme.Modules.localStalkEquiv
       (Scheme.Modules.exteriorSheaf (D.restrict V.ι) n) z (V.ι ⁻¹ᵁ W) hzU eE
     exact ⟨((Pi.basisFun (V.toScheme.presheaf.stalk z)

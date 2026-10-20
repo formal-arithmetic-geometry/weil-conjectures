@@ -18,7 +18,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import WeilConjectures.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame
 import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import WeilConjectures.RingTheory.KoszulConormalBasis
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafComparison
 
 /-! # Local finite-free Koszul self-Ext identifications
 
@@ -90,7 +91,9 @@ theorem koszulRegularImmersion_self_ext_conormal_local_iso
   obtain ⟨b, _⟩ := ExteriorAlgebra.exists_koszul_conormal_basis
     Γ(Y, U.1) (i.ker.ideal U) m f hreg hf
   obtain ⟨eC⟩ := (affine_conormal_frame i U m b).1
-  obtain ⟨eE⟩ := (Scheme.Modules.exteriorSheaf_local_free_comparison Z C n W m eC).1
+  have h := (Scheme.Modules.exteriorSheaf_local_free_comparison Z C n W m eC).1
+  rw [← Scheme.Modules.exteriorSheaf_eq_exteriorPower] at h
+  obtain ⟨eE⟩ := h
   let E := Scheme.Modules.exteriorSheaf C n
   let eF : (Scheme.Modules.dual E).over W ≅
       SheafOfModules.free (ULift.{u} (Set.powersetCard (Fin m) n)) :=

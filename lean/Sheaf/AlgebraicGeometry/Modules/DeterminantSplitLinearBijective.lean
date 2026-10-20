@@ -14,7 +14,6 @@ import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitChartComparison
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Prod
 import Mathlib.LinearAlgebra.TensorProduct.Basis
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
 import WeilConjectures.LinearAlgebra.ExteriorTopDirectSum
 

@@ -7,7 +7,9 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import WeilConjectures.AlgebraicGeometry.Modules.DualLocalEvaluation
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafComparison
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPresheafComparison
 import Mathlib.LinearAlgebra.Dual.Basis
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
@@ -94,9 +96,14 @@ theorem exterior_dual_local_frames (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
       ((SheafOfModules.homFunctor (X.sheaf.over U)).flip.obj
         (SheafOfModules.unit (X.ringCatSheaf.over U))).mapIso e.symm.op ≪≫
       SheafOfModules.homObjFreeUnitIso.{u} (R := X.sheaf.over U) _
-  obtain ⟨⟨eExt⟩, hExt⟩ := Scheme.Modules.exteriorSheaf_local_free_comparison X M n U r e
-  obtain ⟨_, hExtDual⟩ := Scheme.Modules.exteriorSheaf_local_free_comparison X
+  have h := Scheme.Modules.exteriorSheaf_local_free_comparison X M n U r e
+  rw [← Scheme.Modules.exteriorSheaf_eq_exteriorPower,
+    ← Scheme.Modules.exteriorSheafPresheaf_eq_exteriorPower] at h
+  obtain ⟨⟨eExt⟩, hExt⟩ := h
+  have h := Scheme.Modules.exteriorSheaf_local_free_comparison X
     (Scheme.Modules.dual M) n U r eDual
+  rw [← Scheme.Modules.exteriorSheafPresheaf_eq_exteriorPower] at h
+  obtain ⟨_, hExtDual⟩ := h
   let q := (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app
     (Scheme.Modules.exteriorSheafPresheaf M n)).app (op V)).hom
   let qDual := (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app

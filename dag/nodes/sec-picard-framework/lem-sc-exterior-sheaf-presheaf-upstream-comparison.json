@@ -1,0 +1,106 @@
+{
+ "id": "lem-sc-exterior-sheaf-presheaf-upstream-comparison",
+ "kind": "statement",
+ "title": "Equality of the legacy and upstream exterior presheaves",
+ "statement": "Let X be a scheme [def-pc-scheme], M a sheaf of modules, and n a natural number. The presheaf exteriorSheafPresheaf M n of [def-sc-sheaf-exterior-power] equals the upstream PresheafOfModules.exteriorPower M.val n: both have sections the nth exterior power over O_X(U), and their semilinear restrictions agree. This holds without freeness assumptions, including n=0 and zero section rings.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph, lines 140-147; equality of the two implementations of its sectionwise exterior powers. Implementations read in lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheaf.lean and lean/WeilConjectures/Algebra/Category/ModuleCat/Presheaf/ExteriorPower.lean."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "The object families agree definitionally. For any restriction f, the upstream exteriorPower_map_ιMulti sends a pure wedge to the wedge of the restrictions. It therefore satisfies the property in exteriorSheafRestriction_existsUnique. Its uniqueness identifies the maps; function extensionality and proof irrelevance identify the presheaf structures.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "K5 implementation comparison, 2026-10-20; proof from the read universal properties, not an additional assertion in the paper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.exteriorPower",
+   "results": "0 hits; loogle: unknown identifier 'PresheafOfModules.exteriorPower'",
+   "date": "2026-10-20",
+   "verdict": "No existing compatibility theorem. The official local comparison theorem is present and will be used after identifying the constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorSheaf.*(eq|iso).*exteriorPower|exteriorSheaf_local_free_comparison",
+   "results": "0 hits; ",
+   "date": "2026-10-20",
+   "verdict": "No existing compatibility theorem. The official local comparison theorem is present and will be used after identifying the constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of presheaves of modules with equal objects and restriction maps; exterior powers commute with sheafification",
+   "results": "8 hits; ; generic sheafification and presheaf structure APIs, no equality between project-specific definitions.",
+   "date": "2026-10-20",
+   "verdict": "No existing compatibility theorem. The official local comparison theorem is present and will be used after identifying the constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison",
+  "date": "2026-10-20",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The exterior-coordinate comparison in step 2, preserving its legacy callers after retirement of the duplicate local comparison module.",
+   "via": [
+    "lem-sc-exterior-sheaf-local-free-comparison",
+    "lem-sc-exterior-dual-local-frames"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPresheafComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafPresheafComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheafPresheaf_eq_exteriorPower",
+  "statement": "theorem exteriorSheafPresheaf_eq_exteriorPower {X : Scheme.{u}} (M : X.Modules) (n : ℕ) :\n    exteriorSheafPresheaf M n =\n      _root_.PresheafOfModules.exteriorPower (R := X.presheaf) M.val n",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5849a",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261020T144252-L-2260026",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-5849a",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261020T144252-L-2260026",
+  "kind": "interface",
+  "note": "independent cc review: Retirement of the Sheaf twin against coord/retire-items.tsv:60; upstream WeilConjectures exteriorSheaf_local_free_comparison (sorry-free) plus two new proved equality lemmas; the 5 adapted direct importers diffed against live and compiled (all 8 modules exit 0); axioms clean; consumer nodes change only proof/proof_deps/proof_origin"
+ }
+}
