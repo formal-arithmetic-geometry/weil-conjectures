@@ -68,6 +68,7 @@ instance preservesKFlatQuasiIso_tensorRight : (tensorRight c).PreservesKFlatQuas
 noncomputable abbrev derivedSingle : DerivedCategory (Sheaf (ProEt.topology X) A) :=
   DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c))
 
+set_option linter.unusedSimpArgs false in
 /-- On homotopy categories, the tensor product with `c` placed in degree `0` is the degreewise
 tensor product with `c`. -/
 noncomputable def tensorSingleIso :

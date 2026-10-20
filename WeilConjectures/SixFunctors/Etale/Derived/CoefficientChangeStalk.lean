@@ -180,7 +180,7 @@ is invertible on `k`, the canonical coefficient comparison
 (`AlgebraicGeometry.Etale.geometricStalkRestrictScalarsIso`) is an isomorphism for every
 `K ∈ Dᵇctf(X, Λ)`. -/
 theorem isCoefficientChange_geometricStalkRestrictScalarsIso [Finite Λ] [Finite Λ']
-    [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ) :
+    [HasInvertibleExponent Λ (Spec (.of k))] (_hρ : Function.Surjective ρ) :
     IsCoefficientChange ρ (geometricStalk Λ x) (geometricStalk Λ' x)
       (geometricStalkRestrictScalarsIso ρ x) := by
   intro K K' η _ hη

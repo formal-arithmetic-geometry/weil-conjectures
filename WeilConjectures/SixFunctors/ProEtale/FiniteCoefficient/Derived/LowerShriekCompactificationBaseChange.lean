@@ -111,7 +111,8 @@ noncomputable def rightDerivedLowerShriekOfCompactificationBaseChange
       R((c'.g)_*[A]) ≫
     (Functor.associator _ _ _).hom
 
-/-- The components of `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChange`:
+/-- The components of
+`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChange`:
 the derived base change map at `(c.i)_! K`, followed by `R(c'.g)_*` of the base change
 isomorphism of the extension by zero. -/
 lemma rightDerivedLowerShriekOfCompactificationBaseChange_app

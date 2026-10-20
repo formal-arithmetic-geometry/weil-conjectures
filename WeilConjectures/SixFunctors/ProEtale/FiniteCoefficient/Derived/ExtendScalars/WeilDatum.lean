@@ -116,7 +116,8 @@ theorem stalkFrobenius_extendScalarsWeilDatum_comp (hx : x ≫ g = x)
         (leftDerivedUpperStarExtendScalarsIso R S x).hom.app K =
       (leftDerivedUpperStarExtendScalarsIso R S x).hom.app K ≫
         L(sheafExtendScalars (algebraMap R S) P).map (stalkFrobenius hx φ) := by
-  have hi := leftDerivedUpperStarExtendScalarsIso_hom_app_id R S (L((x)^*[ModuleCat.{u + 1} R]).obj K)
+  have hi := leftDerivedUpperStarExtendScalarsIso_hom_app_id R S
+    (L((x)^*[ModuleCat.{u + 1} R]).obj K)
   have hn := (leftDerivedUpperStarId (ModuleCat.{u + 1} S) P).inv.naturality
     ((leftDerivedUpperStarExtendScalarsIso R S x).hom.app K)
   dsimp at hn

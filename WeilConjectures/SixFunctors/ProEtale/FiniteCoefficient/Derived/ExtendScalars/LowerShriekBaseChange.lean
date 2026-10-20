@@ -24,9 +24,9 @@ Frobenius maps (blueprint `sk-p-trace-coeff`).
 
 ## Main results
 
-- `AlgebraicGeometry.ProEtale.leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso_extendScalars_app`:
+- `leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso_extendScalars_app`:
   the compatibility for the extension by zero along a cartesian square of open immersions.
-- `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChange_extendScalars_app`:
+- `rightDerivedLowerShriekOfCompactificationBaseChange_extendScalars_app`:
   the compatibility for the compact-support exchange maps.
 -/
 
