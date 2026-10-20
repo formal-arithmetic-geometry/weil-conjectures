@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "In degree d, the rank-d open is the full open. Unfold the nonnegative term and use exteriorSheaf_fullOpen_pushforward_iso to identify it with exteriorSheaf M d. For nonnegative i different from d, i.toNat differs from d and the rank stratum is empty. Every open of this empty scheme is bottom, whose structure ring is subsingleton. Module.subsingleton makes every section module zero. Hence the pushforward identity is zero on each open, so the pushforward is a zero object. Negative terms are zero by definition. This is the objectwise classification proved by termIso.",
+   "text": "In degree d, the rank-d open is the full open. Unfold the nonnegative term and use exteriorSheaf_fullOpen_pushforward_iso to identify it with exteriorPower M d. For nonnegative i different from d, i.toNat differs from d and the rank stratum is empty. Every open of this empty scheme is bottom, whose structure ring is subsingleton. Module.subsingleton makes every section module zero. Hence the pushforward identity is zero on each open, so the pushforward is a zero object. Negative terms are zero by definition. This is the objectwise classification proved by termIso.",
    "uses": [
     "def-sc-locally-ranked-exterior-complex",
     "lem-sc-sheaf-exterior-full-open-iso"
@@ -24,7 +24,7 @@
    "elementary": false
   },
   {
-   "text": "Apply ModuleCat.exteriorPower.functor on each open U to the component isomorphism of e. For naturality, apply exteriorPower.linearMap_ext and check a pure wedge. The characterization in exteriorSheafRestriction_existsUnique expresses restrictions as restrictions of tuples; exteriorPower.map_apply_ιMulti maps the wedge through e, and PresheafOfModules.naturality_apply e.hom.val identifies the two tuples. PresheafOfModules.isoMk gives a presheaf isomorphism. Mapping it through sheafification gives exteriorSheaf M d isomorphic to exteriorSheaf N d. This is the proved helper exteriorIso.",
+   "text": "Apply ModuleCat.exteriorPower.functor on each open U to the component isomorphism of e. For naturality, apply exteriorPower.linearMap_ext and check a pure wedge. The characterization in PresheafOfModules.exteriorPower_map_ιMulti expresses restrictions as restrictions of tuples; exteriorPower.map_apply_ιMulti maps the wedge through e, and PresheafOfModules.naturality_apply e.hom.val identifies the two tuples. PresheafOfModules.isoMk gives a presheaf isomorphism. Mapping it through sheafification gives exteriorPower M d isomorphic to exteriorPower N d. This is the proved helper exteriorIso.",
    "uses": [
     "def-sc-sheaf-exterior-power"
    ],
@@ -112,14 +112,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ConstantRankExteriorDerivedComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/ConstantRankExteriorDerivedComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ConstantRankExteriorDerivedComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ConstantRankExteriorDerivedComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.constantRankExterior_derived_iso",
-  "statement": "theorem constantRankExterior_derived_iso {X : Scheme.{u}} [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (M N : X.Modules) (d : ℕ) (e : M ≅ N) : Nonempty (((DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).obj (locallyRankedExteriorComplex M (LocallyConstant.const X d))) ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (exteriorSheaf N d))⟦-(d : ℤ)⟧)",
+  "statement": "theorem constantRankExterior_derived_iso {X : Scheme.{u}} [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (M N : X.Modules) (d : ℕ) (e : M ≅ N) : Nonempty (((DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).obj (locallyRankedExteriorComplex M (LocallyConstant.const X d))) ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (exteriorPower N d))⟦-(d : ℤ)⟧)",
   "branch": "sheaf-dag",
   "by": "C1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "Sheaf copy retired by T4 in favour of the canonical upstream construction and proof; the exterior sheaf is Scheme.Modules.exteriorPower."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -132,13 +133,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-2910f",
-  "group": "U2",
+  "reviewer": "C-1d7b0",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261012T135323-L-1695480",
+  "landing": "20261020T144305-L-2262278",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match recorded node statements and proof metadata; both modules and direct importer compile cleanly with lcompile.py."
+  "note": "independent cc review: retire item (retire-items row 54) vs the human's retire-sheaf-twins-20261020 instruction: two Sheaf copies withdrawn (no remaining importers, rg on live), nodes repointed to the WeilConjectures twins whose signatures match the new lean.statement; delivered stubs compile; upstream axioms clean"
  }
 }
