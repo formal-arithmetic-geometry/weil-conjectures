@@ -18097,3 +18097,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:17 L: returned deliver/W7/Sheaf.Paper.GeometricStalkPerfect (reviewer RETURN: (the landing tools, head 24382de8c) the delivery did not land: lean/Sheaf/Paper/GeometricStalkPerfect.lean changed on sh)
 - 13:17 L: returned deliver/W8/Sheaf.Paper.ProperOpenCoefficientMate (reviewer RETURN: (the landing tools, head a3dee969d) the delivery did not land: lean/Sheaf/Paper/ProperOpenCoefficientMate.lean changed o)
 - 13:17 L: returned deliver/W8/Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (the landing tools, head 330e44250) the delivery did not land: lean/Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/Etal)
+- 13:17 L: returned deliver/W9/Sheaf.AlgebraicGeometry.SmoothStratificationFiniteTor (reviewer RETURN: (the landing tools, head cddc571fd) the delivery did not land: lean/Sheaf/AlgebraicGeometry/SmoothStratificationFiniteTo)
