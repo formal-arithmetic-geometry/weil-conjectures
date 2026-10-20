@@ -24,29 +24,25 @@
    }
   },
   {
-   "text": "Prove $H^1(F^pK)=0$ for every $p$ by descending induction from $b$. For $p\\ge b$ the complex is zero. If it holds at $p+1$, the sequence $0\\to F^{p+1}K\\to F^pK\\to\\operatorname{gr}^pK\\to0$ is short exact in each degree: its first map is a subobject inclusion and its last object is its cokernel. Apply [lem-weil-pbc-complex-ses-homology-long-exact]. The resulting exact segment $H^1(F^{p+1}K)\\to H^1(F^pK)\\to H^1(\\operatorname{gr}^pK)$ has zero outside terms, so its middle object is zero. Iterating $b-p$ times proves the assertion for $a\\le p\\le b$. For $p\\le a$ the complex equals $K=F^aK$, and for $p\\ge b$ it is zero. Consequently every $F^pX\\to F^pY\\to F^pZ$ is exact, and the case $p=a$ proves $X\\to Y\\to Z$ exact.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-   ],
-   "elementary": false,
+   "text": "For each p use the short complexes of restrictions and graded maps. The successive inclusions and cokernel projections give a degreewise short exact extension F^(p+1)K → F^pK → gr^pK. Prove exactness of the middle complex by the direct diagram chase exact_extension: lift a quotient boundary after an epimorphic refinement, subtract it, factor the difference through the monic subcomplex, and lift there using exactness. Descending finite induction starts at the zero bound for Y. Underlying exactness follows from step exactness at a common whole-object bound for X and Y, by ShortComplex.exact_iff_of_epi_of_isIso_of_mono.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
     "place": "Tag 05QH (lemma-filtered-acyclic), parts (2), (5); its filtration induction made explicit using Tag 0117 (lemma-long-exact-sequence-cochain)"
    }
   },
   {
-   "text": "Prove $H^1(K/F^pK)=0$ by ascending induction from $a$. At $p=a$ the quotient complex is zero. For $a\\le p<b$, the natural sequence $0\\to\\operatorname{gr}^pK\\to K/F^{p+1}K\\to K/F^pK\\to0$ is termwise short exact: for a term $T$ its kernel is $F^pT/F^{p+1}T$ and the last projection is the quotient map. The long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact] gives the exact segment $H^1(\\operatorname{gr}^pK)\\to H^1(K/F^{p+1}K)\\to H^1(K/F^pK)$. The outside terms vanish by the graded hypothesis and the induction hypothesis, so the middle term vanishes. This proves the result for $a\\le p\\le b$. Below $a$ the quotient is zero, and above $b$ it equals $K$, already exact by Step 2. This proves exactness of every $X/F^pX\\to Y/F^pY\\to Z/F^pZ$.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-   ],
-   "elementary": false,
+   "text": "Construct gr^pK → K/F^(p+1)K and K/F^(p+1)K → K/F^pK by cokernel descent. The first map is monic: lift a generalized element of its kernel after an epimorphic refinement and factor it through F^(p+1), so its graded class is zero. Their exactness follows by lifting a quotient cycle and factoring through F^p. The transition is epi since its composite with the cokernel projection is epi. Apply exact_extension and ascending finite induction from the whole-object bound for Y; the middle quotient is zero below that bound. This proves exactness of every quotient short complex.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
     "place": "Tag 05QH (lemma-filtered-acyclic), part (3); finite quotient induction using Tag 0117 (lemma-long-exact-sequence-cochain)"
    }
   },
   {
-   "text": "Fix $p$. By Step 2, as subobjects of $Y$, $u(F^pX)=\\ker(v|_{F^pY})=\\ker(v)\\cap F^pY=\\operatorname{im}(u)\\cap F^pY$. Here the first equality is exactness on filtration steps, the second is the defining pullback of the kernel along $F^pY\\hookrightarrow Y$, and the third is underlying exactness. This is precisely strictness of $u$.",
+   "text": "For strictness of u, the restricted image lies in im(u) intersect F^pY. The inclusion of this intersection in F^pY is killed by the restricted v, since vu=0. Step exactness lifts it through the restricted u after an epimorphic refinement. Precomposing with an epimorphism does not change an image subobject, giving the reverse inequality.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -55,7 +51,7 @@
    }
   },
   {
-   "text": "For strictness of $v$, let $q:Y\\twoheadrightarrow Y/F^pY$ and let $\\bar u,\\bar v$ be the induced morphisms between quotients from Step 3. The square defining $\\bar v$ gives $v^{-1}(F^pZ)=q^{-1}(\\ker\\bar v)$. Quotient exactness gives $\\ker\\bar v=\\operatorname{im}\\bar u=q(\\operatorname{im}u)$, since $X\\to X/F^pX$ is an epimorphism. Therefore $v^{-1}(F^pZ)=F^pY+\\operatorname{im}u$: taking the inverse image of the image of a subobject under $q$ adds $\\ker q=F^pY$ (both are the subobject corresponding to that image in the quotient). Taking its image under $v$ now gives $\\operatorname{im}v\\cap F^pZ=v(v^{-1}(F^pZ))=v(F^pY+\\operatorname{im}u)=v(F^pY)$, because $vu=0$. These are subobject inverse-image, sum and image identities in the abelian category; no lifting of individual elements is assumed. This is strictness of $v$, completing all conclusions.",
+   "text": "For strictness of v let P=im(v) intersect F^pZ. Lift its inclusion through v after an epimorphic refinement, using the epi image factorization. Its class in Y/F^pY is a cycle. Quotient exactness and another epi refinement lift this class through the induced u; lift that quotient class to X after a third refinement. Subtract its u-image from the lift in Y. The difference is killed by the quotient projection, hence factors through F^pY. Its v-image still equals the original inclusion of P after the composite epimorphic refinement, because vu=0. Images are unchanged by epi precomposition, so P lies in v(F^pY). The reverse inclusion follows from filtration preservation.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -65,13 +61,13 @@
   }
  ],
  "proof_deps": [
-  "def-sp-filtration",
-  "lem-weil-pbc-complex-ses-homology-long-exact"
+  "def-sp-filtration"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "H3",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 05QH (lemma-filtered-acyclic), parts (1)–(5); the induction diagrams are implemented using the exact segment at the middle cohomology object of Tag 0117 (lemma-long-exact-sequence-cochain)."
+  "place": "Tag 05QH, parts (2)--(5); finite inductions as planned, with the extension-exactness consequence proved directly by Mathlib Abelian.Refinements rather than full homology complexes."
  },
  "mathlib_searches": [
   {
@@ -187,9 +183,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-complex-ses-homology-long-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -227,5 +221,15 @@
   "existing": false,
   "note": "Reviewer fix (H4, H9): restated on the recorded def-sp-filtration representation (upstream CategoryTheory.DecreasingFiltration / FilteredObject, category of HomPreservingSteps in Sheaf.CategoryTheory.Filtration, canonical step and graded maps restrictionSteps / gradedMapSteps of Sheaf.CategoryTheory.FiniteFiltrationInduction) instead of the superseded PBCFilteredObject copy, so that the landed citer lem-trf-filtered-localization-injective-model (FiniteFilteredObjects over FilteredObject) can apply it; the file is now a `module` file. Statement unchanged in content.",
   "fixed_by": "NT-stage2-cc-6e57b31b8"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261020T051355-L-1656504",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
