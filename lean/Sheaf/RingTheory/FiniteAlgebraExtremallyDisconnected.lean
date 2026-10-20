@@ -15,7 +15,7 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.RingTheory.Ideal.GoingUp
 import Sheaf.AlgebraicGeometry.FiniteAffineSectionCover
-import Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
+import WeilConjectures.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
 import Sheaf.RingTheory.WLocalStalkIsomorphismRetraction
 
@@ -213,11 +213,31 @@ private theorem openEmbedding_on_preimage_section
   funext b
   exact congrArg p (hil b).symm
 
+set_option backward.isDefEq.respectTransparency false in
+/-- Transport finiteness along the canonical affine stalk isomorphisms. -/
+private theorem finite_spec_residueFieldMap {R S : CommRingCat.{u}}
+    (φ : R ⟶ S) (x : PrimeSpectrum S)
+    (h : (Ideal.ResidueField.map (x.comap φ.hom).asIdeal x.asIdeal φ.hom rfl).Finite) :
+    ((Spec.map φ).residueFieldMap x).hom.Finite := by
+  have : IsLocalHom (Spec.stalkIso S x).inv.hom :=
+    isLocalHom_of_iso (Spec.stalkIso S x).symm
+  have : IsLocalHom (Spec.stalkIso R (x.comap φ.hom)).hom.hom :=
+    isLocalHom_of_iso (Spec.stalkIso R (x.comap φ.hom))
+  change (IsLocalRing.ResidueField.map ((Spec.map φ).stalkMap x).hom).Finite
+  simp only [← Scheme.localRingHom_comp_stalkIso φ x, CommRingCat.hom_comp,
+    CommRingCat.hom_ofHom]
+  rw [IsLocalRing.ResidueField.map_comp, IsLocalRing.ResidueField.map_comp]
+  apply RingHom.Finite.comp
+  · exact (RingHom.Finite.of_surjective _ (IsLocalRing.ResidueField.mapEquiv
+      (Spec.stalkIso S x).symm.commRingCatIsoToRingEquiv).surjective).comp h
+  · exact RingHom.Finite.of_surjective _ (IsLocalRing.ResidueField.mapEquiv
+      (Spec.stalkIso R (x.comap φ.hom)).commRingCatIsoToRingEquiv).surjective
+
 private theorem finite_residueFieldMap_of_finite
     (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
     [Module.Finite R S] [T2Space (PrimeSpectrum S)] (q : PrimeSpectrum S) :
     ((Spec.map (CommRingCat.ofHom (algebraMap R S))).residueFieldMap q).hom.Finite := by
-  apply AlgebraicGeometry.finite_spec_residueFieldMap
+  apply finite_spec_residueFieldMap
   have : q.asIdeal.IsMaximal :=
     (PrimeSpectrum.isClosed_singleton_iff_isMaximal q).mp isClosed_singleton
   let p := (q.comap (algebraMap R S)).asIdeal
