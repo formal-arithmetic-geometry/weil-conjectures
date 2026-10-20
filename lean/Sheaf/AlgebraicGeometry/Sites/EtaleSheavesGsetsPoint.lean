@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 import Sheaf.AlgebraicGeometry.GaloisStalkActionFunctor
 import Sheaf.AlgebraicGeometry.GaloisStalkActionFullyFaithful
 import Sheaf.AlgebraicGeometry.GaloisStalkActionEssSurj
@@ -24,6 +24,9 @@ Source: Stacks Project, Tag 03QT and the Galois action on stalks in Tag 03QW
 -/
 
 @[expose] public section
+
+attribute [instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 universe u v
 
@@ -79,7 +82,7 @@ private theorem representable_germ_bijective
 
 /-
 The theorem packages the two assertions of the node. `DiscreteContAction` (with the
-discrete topology on sets from `hasForget₂TypeTopCat`, as in `etaleFieldGsets`) is the
+discrete topology on sets from `etaleFieldDiscreteForget₂`, as in `etaleFieldGsets`) is the
 category of `Gal(Ksep/K)`-sets with every stabilizer open for the Krull topology.
 -/
 set_option backward.isDefEq.respectTransparency false in

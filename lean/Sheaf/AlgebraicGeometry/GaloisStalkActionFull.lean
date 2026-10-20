@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 import Sheaf.AlgebraicGeometry.FieldEquivariantGermFamilySection
 
 /-! Fullness of the canonical Galois stalk functor.
@@ -13,6 +13,9 @@ Source: Stacks Project, Tags 03QT and 04JM (blueprint: lem-exc-galois-stalk-acti
 -/
 
 @[expose] public section
+
+attribute [instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 universe u v
 

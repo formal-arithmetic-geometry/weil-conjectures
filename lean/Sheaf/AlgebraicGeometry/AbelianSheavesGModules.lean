@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
-public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModulesData
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModulesAction
@@ -21,6 +21,9 @@ Source: Stacks Project, Etale Cohomology, Tag 04JQ,
 -/
 
 @[expose] public section
+
+attribute [instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 universe u v
 

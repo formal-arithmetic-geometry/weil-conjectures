@@ -6,7 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 import Sheaf.AlgebraicGeometry.GaloisStalkActionFull
 import Sheaf.AlgebraicGeometry.GaloisStalkActionFaithful
 
@@ -17,6 +17,9 @@ Source: Stacks Project, Tags 03QT and 04JM.
 -/
 
 @[expose] public section
+
+attribute [instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 universe u v
 

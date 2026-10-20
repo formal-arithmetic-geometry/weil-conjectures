@@ -6,7 +6,7 @@ Authors: SHEAF worker V1
 module
 
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
-public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.CategoryTheory.DiscreteContinuousRepCommGrpAux
 
@@ -18,6 +18,9 @@ Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-poi
 -/
 
 @[expose] public section
+
+attribute [instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 universe u w
 

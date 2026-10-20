@@ -6,7 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.CategoryTheory.Sites.LeftExact
@@ -21,6 +21,9 @@ Source: Stacks Project, Tags 03QT and 03QR.
 -/
 
 @[expose] public section
+
+attribute [instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 universe u v
 

@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Mathlib.Topology.Algebra.OpenSubgroup
 import Mathlib.Topology.Algebra.MulAction
@@ -18,6 +18,9 @@ Source: Stacks Project, Tag 03QT, proof of theorem-equivalence-sheaves-point.
 -/
 
 @[expose] public section
+
+attribute [instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 universe u w
 

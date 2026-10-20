@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
@@ -19,6 +19,9 @@ Source: Stacks Project, Tags 03QT and 03QR.
 -/
 
 @[expose] public section
+
+attribute [instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 universe u v
 

@@ -1,12 +1,15 @@
 module
 
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
-public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.CategoryTheory.DiscreteContinuousRepToCommGrpFull
 import Sheaf.CategoryTheory.DiscreteContinuousRepToCommGrpEssSurj
 
 @[expose] public section
+
+attribute [instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 universe u w
 open CategoryTheory

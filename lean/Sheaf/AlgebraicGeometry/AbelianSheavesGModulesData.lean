@@ -6,7 +6,7 @@ Authors: SHEAF worker J1
 module
 
 public import Mathlib.CategoryTheory.Sites.Point.Basic
-public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModulesTransport
 import Mathlib.Algebra.Category.Grp.LeftExactFunctor
@@ -19,6 +19,9 @@ Source: Stacks Project, Tag 04JQ, the formal transport step.
 -/
 
 @[expose] public section
+
+attribute [instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 universe u v
 
