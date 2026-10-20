@@ -141,7 +141,7 @@ try:
         rel = pathlib.PurePosixPath(j["rel"])
         if not safe(j["rel"]) or rel.suffix != ".lean": raise SystemExit("bad path")
         f = root / rel; t0 = time.time()
-        cmd = ["nice", "-n", "10", LEANBIN, *OPTS] + ([] if j.get("upstream") else ["-DautoImplicit=false"])
+        cmd = ["nice", "-n", "19", LEANBIN, *OPTS] + ([] if j.get("upstream") else ["-DautoImplicit=false"])
         src = f
         if j.get("probe"):
             src = f.with_name(f.stem + "__probe.lean"); src.write_text(f.read_text() + j["probe"])
