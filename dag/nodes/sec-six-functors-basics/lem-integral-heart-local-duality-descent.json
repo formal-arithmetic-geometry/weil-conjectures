@@ -1,0 +1,136 @@
+{
+ "id": "lem-integral-heart-local-duality-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-integral-heart-dualizable",
+   "place": "Proof, global canonical comparison and cover-local Tor vanishing, steps 3, 4, 6 and 7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Descent of canonical duality and Tor bounds for a degree-zero module",
+ "statement": "Let Lambda be a commutative condensed ring, X a scheme, M a Lambda_X-module sheaf, and {U_i -> X} a pro-etale cover. Let a,b be integers. Suppose every M|U_i placed in degree zero is dualizable in the relative derived category and has Tor amplitude in [a,b], testing tensor against every module sheaf. Then the global canonical map M[0] tensor RHom(M[0],1) -> RHom(M[0],M[0]) is an isomorphism, and M[0] has Tor amplitude in [a,b]. All coefficients, inverse images and relative derived Hom are those of [sk-def-sfb-derived-tensor-hom].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-dualizable.md",
+  "place": "Proof, global canonical comparison and cover-local Tor vanishing, steps 3, 4, 6 and 7"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Apply condensed_dualizable_iff_proetale_cover to M[0]. Exact pullback commutes with singleFunctor, so each assumed local dual identifies with the required derived pullback. Global dualizability follows. Obtain the braided structure and swap the exact pairing to use MonoidalClosed.isIso_ihomUnitTensorToIhom. This makes the canonical global comparison invertible without detecting equality of maps locally.",
+   "uses": [
+    "lem-zl-condensed-lisse-proetale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-dualizable.md",
+    "place": "Proof, global canonical duality comparison (steps 3, 4 and 7)"
+   }
+  },
+  {
+   "text": "For an arbitrary module sheaf G, let L=M[0] tensor G[0]. Derived pullback on a cover member is strong monoidal and commutes with singleFunctor, so its pullback of L is the local module tensor against the restriction of G. The local Tor bound makes each H^q of this object zero for q<a or b<q. Exact pullback commutes with homology. Apply joint conservativity to the degree-zero complex of H^q(L), then faithfulness of singleFunctor, to deduce H^q(L)=0. This proves the global bound for every G.",
+   "uses": [
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-zl-condensed-cover-restriction-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-dualizable.md",
+    "place": "Proof, Tor bounds descend by local cohomology vanishing (steps 3 and 6)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-condensed-lisse-proetale-locality",
+  "lem-zl-condensed-cover-restriction-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-dualizable.md",
+  "place": "Proof, global canonical comparison and cover-local Tor vanishing, steps 3, 4, 6 and 7; explicit formal proof from the cited generic Mathlib and source-library APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Dualizability and bounds on cohomology of derived tensor products descend along a cover of a site",
+   "results": "PiTensorProduct.dualDistribEquiv; PiTensorProduct.dualDistribEquivOfBasis; PiTensorProduct.dualDistribInvOfBasis_apply; PiTensorProduct.dualDistrib_dualDistribInvOfBasis_left_inverse; PiTensorProduct.dualSeminorms_bounded; CategoryTheory.Sheaf.instHasFiniteCoproducts; CategoryTheory.regularTopology.instIsCoverDense; PiTensorProduct.dualDistribInvOfBasis.congr_simp",
+   "date": "2026-10-19",
+   "verdict": "No exact match; use the generic categorical APIs and the named project results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex of sheaves is dualizable and duality is local on the site",
+   "results": "CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; DerivedCategory.IsGE; CochainComplex.IsKProjective; DerivedCategory; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CochainComplex.isKProjective_of_op; DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-19",
+   "verdict": "No match for this sheaf/derived statement. Reuse the generic algebra and categorical APIs and prove the comparison explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactPairing\"",
+   "results": "CategoryTheory.ExactPairing.termε_; CategoryTheory.ExactPairing.termη_; CategoryTheory.ExactPairing; CategoryTheory.exactPairingUnit; CategoryTheory.exactPairingCongrLeft; CategoryTheory.exactPairingCongrRight; CategoryTheory.exactPairingCongr; CategoryTheory.ExactPairing.coevaluation",
+   "date": "2026-10-18",
+   "verdict": "No match for this sheaf/derived statement. Reuse the generic algebra and categorical APIs and prove the comparison explicitly."
+  },
+  {
+   "tool": "grep",
+   "query": "ihomUnitTensorToIhom|torAmplitudeIn_of_exactPairing",
+   "results": "none",
+   "date": "2026-10-18",
+   "verdict": "No match for this sheaf/derived statement. Reuse the generic algebra and categorical APIs and prove the comparison explicitly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHeartDualizable",
+  "date": "2026-10-19",
+  "group": "C5"
+ },
+ "merged_into": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHeartLocalDualityDescent",
+  "file": "lean/Sheaf/Paper/IntegralHeartLocalDualityDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralHeart_local_duality_descent",
+  "statement": "theorem integralHeart_local_duality_descent\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X) (a b : ℤ)\n    (hlocal : ∀ i : 𝒰.I₀,\n      IsDualizable ((DerivedCategory.singleFunctor _ 0).obj\n        ((CondensedRing.upperStar Λ (𝒰.f i)).obj M)) ∧\n      DerivedCategory.torAmplitudeIn _ a b ((DerivedCategory.singleFunctor _ 0).obj\n        ((CondensedRing.upperStar Λ (𝒰.f i)).obj M))) :\n    IsIso (MonoidalClosed.ihomUnitTensorToIhom\n      ((DerivedCategory.singleFunctor _ 0).obj M)\n      ((DerivedCategory.singleFunctor _ 0).obj M)) ∧\n    DerivedCategory.torAmplitudeIn _ a b ((DerivedCategory.singleFunctor _ 0).obj M)",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261020T051049-L-1549400",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261020T051049-L-1549400",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

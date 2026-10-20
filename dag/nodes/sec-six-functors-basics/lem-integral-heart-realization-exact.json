@@ -1,0 +1,148 @@
+{
+ "id": "lem-integral-heart-realization-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-integral-heart-dualizable",
+   "place": "Proof, first two sentences: realize the length-one finite-free resolution",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exactness and finite free terms of completed scalar realization",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, and X a scheme. Write A for the lifted small ring of integers and F_X for the canonical integralHeartRealization of [det-lem-int-integral-heart-local-model], using the actual continuous completed coefficient sheaf. Then F_X preserves finite limits and finite colimits. For every natural number n, F_X(A^(Fin n)) is dualizable in the monoidal category of completed coefficient module sheaves on X.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-dualizable.md",
+  "place": "Proof, first two sentences: realize the length-one finite-free resolution"
+ },
+ "stmt_deps": [
+  "det-lem-int-integral-heart-local-model"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient-ring theorem gives that the small ring of integers O is a DVR, hence a PID. Transport domain and PID along ULift.ringEquiv to A. On a profinite U, the reconstructed section ring is canonically ring-isomorphic to ULift C(U,O). Its multiplication agrees with pointwise multiplication by Sheaf.μ_comp_map_mul. The constant-scalar action is pointwise multiplication. If r is nonzero and r f=0, evaluate at each point and use that O is a domain to obtain f=0. Thus this section module is torsion-free. Mathlib Module.Flat over a Dedekind domain makes each section ring flat over A, including the empty profinite U where the module is zero.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-dualizable.md",
+    "place": "Proof, finite free resolution and flat completed coefficients; Stacks 0AUW"
+   }
+  },
+  {
+   "text": "Form the presheaf U ↦ R(U) tensor_A M with the restriction maps that send s tensor m to res(s) tensor m. Tensor adjunction and sheafification adjunction identify its sheafification naturally with the published realization on the point (constant presheaf, first sheafification, then the published scalar extension). Both Hom bijections restrict a morphism to its value on 1 tensor m; their naturality follows by evaluating the sheafification-unit naturality squares on 1 tensor m. Coyoneda.ext produces the natural comparison. Sectionwise extension by the flat rings preserves finite limits and arbitrary colimits, and presheaf evaluation jointly reflects limits and colimits. Sheafification preserves finite limits and colimits. Transport along the comparison gives exactness for the published point functor.",
+   "uses": [
+    "det-lem-int-integral-heart-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-dualizable.md",
+    "place": "Proof, flat scalar realization; Stacks 093J and 093M"
+   }
+  },
+  {
+   "text": "The section-module equivalence and inverse image from the point are exact, so the scheme realization is exact. The sectionwise tensor-unit isomorphism R(U) tensor_A A → R(U) is s tensor a ↦ s·a, with inverse s ↦ s tensor 1; it respects restrictions. Sheafification of the regular section module is that same sheaf. The equivalence and regularPullbackIso identify F_X(A) with the tensor unit. Additivity carries the decomposition A^(Fin(n+1)) = A ⊕ A^(Fin n) to a biproduct. Induction using dualizability of the unit, zero and binary biproducts proves the finite-free assertion, including n=0.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "det-lem-int-integral-heart-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-dualizable.md",
+    "place": "Proof, finite free terms of the local resolution"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-lem-int-integral-heart-local-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-dualizable.md",
+  "place": "Proof, first two sentences: realize the length-one finite-free resolution; explicit formal proof from the cited generic Mathlib and source-library APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars along a flat ring homomorphism preserves finite limits and finite free modules become dualizable sheaves",
+   "results": "CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; CategoryTheory.lan_preservesFiniteLimits_of_flat; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; Module.Flat.iff_preservesFiniteLimits_tensorLeft; CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier",
+   "date": "2026-10-19",
+   "verdict": "No exact match; use the generic categorical APIs and the named project results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars from a discrete valuation ring to a torsion-free sheaf is exact and sends finite free modules to dualizable objects",
+   "results": "Module.free_of_lTensor_residueField_injective; FGModuleCat.exactPairing; IsBaseChange.dual; FGModuleCat.rightRigidCategory; FGModuleCat.rightDual; exact_of_isLocalized_maximal; FGModuleCat.FGModuleCatEvaluation_apply'; FGModuleCat.FGModuleCatEvaluation_apply",
+   "date": "2026-10-19",
+   "verdict": "No match for this sheaf/derived statement. Reuse the generic algebra and categorical APIs and prove the comparison explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coyoneda\", \"Equiv\"",
+   "results": "CategoryTheory.Functor.CorepresentableBy.equivUliftCoyonedaIso; CategoryTheory.coyonedaEquiv; CategoryTheory.uliftCoyonedaEquiv; CategoryTheory.Functor.CorepresentableBy.coyoneda_homEquiv; CategoryTheory.Functor.RepresentableBy.coyoneda_homEquiv; CategoryTheory.uliftCoyonedaEquiv_symm_apply_app; CategoryTheory.uliftCoyonedaEquiv_apply; CategoryTheory.coyonedaEquiv_symm_app_apply",
+   "date": "2026-10-19",
+   "verdict": "No match for this sheaf/derived statement. Reuse the generic algebra and categorical APIs and prove the comparison explicitly."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*cone.*dual|IsDualizable|PreservesFiniteLimits.*Realization",
+   "results": "none",
+   "date": "2026-10-19",
+   "verdict": "No match for this sheaf/derived statement. Reuse the generic algebra and categorical APIs and prove the comparison explicitly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHeartDualizable",
+  "date": "2026-10-19",
+  "group": "C5"
+ },
+ "merged_into": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHeartRealizationExact",
+  "file": "lean/Sheaf/Paper/IntegralHeartRealizationExact.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralHeartRealization_exact_free",
+  "statement": "theorem integralHeartRealization_exact_free (X : Scheme.{u}) :\n    PreservesFiniteLimits (integralHeartRealization.{u} ℓ E X) ∧\n    PreservesFiniteColimits (integralHeartRealization.{u} ℓ E X) ∧\n    ∀ n : ℕ, IsDualizable ((integralHeartRealization.{u} ℓ E X).obj\n      (ModuleCat.of (integralHeartScalars.{u} ℓ E)\n        (Fin n → integralHeartScalars.{u} ℓ E)))",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261020T051049-L-1549400",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261020T051049-L-1549400",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
