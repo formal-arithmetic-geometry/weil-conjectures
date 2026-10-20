@@ -206,6 +206,33 @@ def properOpenCoefficientComposite
     D((i)_!open[ModuleCat.{u + 1} B]).map (finiteCoefficientDirectImageMap φ r E) ≫
     (properOpenCoefficientInterchange B sq).hom.app ((scalarExtension φ U).obj E)
 
+/-- The transpose identity for the coefficient square.  This is the counit calculation
+that remains after applying the proper direct-image adjunction; it is strictly weaker than
+the coefficient-square equality and is the mate-pasting step of the blueprint.
+Source: Stacks 0F7B and 0GL6; blueprint lem-sp-proper-open-coefficient-mate, proof Step 1.
+(blueprint: lem-sp-proper-open-coefficient-mate-transposed).
+Proof in words: expand the coefficient direct-image map as the adjoint transpose of
+the scalar-extended counit, and expand the coefficient composite.  The tensor and
+open-extension comparison maps reassociate the two paths to the same inverse-image
+composite.  The proper/open interchange normalization and the mate-pasting identity
+then identify their inverse proper-adjunction transposes. -/
+theorem properOpen_coefficient_mate_transposed
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (sq : IsPullback k r p i) (E : DerivedCategoryModule A U)
+    (_hE : ∃ n : ℤ, E.IsGE n)
+    (_hEB : ∃ n : ℤ, ((scalarExtension φ U).obj E).IsGE n) :
+    let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) p
+    ((adj.homEquiv _ _).symm)
+      ((scalarExtension φ Z).map ((properOpenCoefficientInterchange A sq).hom.app E) ≫
+        finiteCoefficientDirectImageMap φ p
+          (D((k)_!open[ModuleCat.{u + 1} A]).obj E) ≫
+        R((p)_*[ModuleCat.{u + 1} B]).map
+          ((openScalarExtension φ k).hom.app E)) =
+    ((adj.homEquiv _ _).symm)
+      (properOpenCoefficientComposite φ sq E) := by
+  sorry
+
+
 /-- The coefficient square, as equality of actual B-linear arrows in the unbounded
 category. Source: Stacks 0F7B/0GL6; blueprint exceptional coefficient comparison,
 existence, uniqueness and naturality (blueprint: lem-sp-proper-open-coefficient-mate).
@@ -229,7 +256,11 @@ theorem properOpen_coefficient_mate
         finiteCoefficientDirectImageMap φ p (D((k)_!open[ModuleCat.{u + 1} A]).obj E) ≫
         R((p)_*[ModuleCat.{u + 1} B]).map ((openScalarExtension φ k).hom.app E) =
       properOpenCoefficientComposite φ sq E := by
-  sorry
+  let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) p
+  have h := properOpen_coefficient_mate_transposed φ sq E _hE _hEB
+  dsimp only at h
+  exact (adj.homEquiv _ _).symm.injective h
+
 
 /-- Naturality of both paths of the coefficient square in the input complex.
 Source: Stacks 0F7B/0GL6 and blueprint exceptional coefficient comparison, naturality
