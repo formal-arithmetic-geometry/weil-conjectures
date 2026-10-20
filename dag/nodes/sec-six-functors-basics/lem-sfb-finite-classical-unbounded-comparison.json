@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "Write $F=\\nu_X^*$ and $R=R\\nu_{X,*}$. The inverse image is exact termwise, so [lem-weil-pbc-exact-functor-bounded-below] gives that for every $M\\in D(X_{\\mathrm{et}},A)$ one has $H^q(FM)\\cong F(H^qM)$ for every $q$. The module part of the classical-sheaf comparison says that $F(H^qM)$ is a classical $A$-module sheaf. Hence $F$ maps the whole unbounded étale derived category into the full subcategory of complexes with classical cohomology.",
+   "text": "Exact inverse image commutes with each cohomology sheaf. Its sheaf image is classical by the module classical-sheaf equivalence. Transport between the chosen small and standard derived-category homology functors by their natural localization isomorphism. Thus the entire unbounded inverse image has classical cohomology.",
    "uses": [
     "sk-thm-pe-classical-sheaves",
     "lem-weil-pbc-exact-functor-bounded-below"
@@ -34,92 +34,112 @@
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 5.3.1 and Proposition 5.3.2, p. 38"
+    "place": "Proposition 5.2.6 (3), Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2 (pp. 37-38): when D(X_et) is left-complete (locally finite cohomological dimension) the unbounded pullback identifies D(X_et) with D_cc(X_proet); specialized to finite l-primary coefficients and finite-type schemes over finite or algebraically closed fields; blueprint sk-prop-pe-unbounded-classical (finite-coefficient hypotheses)"
    }
   },
   {
-   "text": "If $X$ is empty, the empty-cover sheaf condition forces every module sheaf on either site to be zero, so all the conclusions hold. Assume henceforth that $X$ is nonempty, and put $e=2\\dim(X)+1\\geq0$. Every $A$-module sheaf is annihilated by $\\ell^r$, hence is torsion. Applying [det-pe-unbounded-classical-bounds] with $g=\\mathrm{id}_X$ gives $H^q(U_{\\mathrm{proet}},(F G)|_U)=0$ for $q>e$ whenever $G$ is an étale $A$-module sheaf and $U$ has a pro-étale affine presentation over $X$. In particular this holds for every affine étale $W\\to X$, using its constant presentation. By the module-sheaf essential-image statement of [sk-thm-pe-classical-sheaves], every classical $A$-module sheaf is isomorphic to $F G$, so the same bound holds for every classical coefficient sheaf, with the same $e$ independent of $W$.",
+   "text": "Set e=2*((topologicalKrullDim X).unbotD 0).toNat+1. Descend a classical fixed-ring module sheaf H to an etale sheaf G by the classical-sheaf equivalence. Realize G as a module over the constant etale ring sheaf and apply the already stated affine etale module bound at every affine etale W. A mapped injective resolution under the constant-ring equivalence and exact scalar forgetting identify this bound with ordinary fixed-ring module cohomology. The comparison of global cohomology and its pullback compatibility transfer it to R^q sections(W,H)=0 for q>e. This includes empty X and the zero coefficient ring.",
    "uses": [
-    "det-pe-unbounded-classical-bounds",
-    "sk-thm-pe-classical-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.md",
-    "place": "statement, parts (1) and the sentence that the same statements hold with X replaced by Y"
-   }
-  },
-  {
-   "text": "If $K\\in D^+_{\\mathrm{class}}(X_{\\mathrm{proet}},A)$, the bounded-below unit supplied by [sk-prop-sf-comparison] satisfies the hypothesis of [det-pe-classical-derived-equivalence]. Its part (2) therefore gives that the counit $F R K\\to K$ is an isomorphism. Thus the desired counit is already known on all bounded-below classical complexes. The unbounded right derived functor used here restricts to the bounded-below one: by [lem-sc-bounded-below-injective-resolution] a bounded-below representative has a bounded-below injective resolution which is also K-injective, and this same resolution computes both right derived functors and their adjunction counits.",
-   "uses": [
+    "sk-thm-pe-classical-sheaves",
+    "lem-sfb-etale-module-affine-bound",
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
     "sk-prop-sf-comparison",
-    "det-pe-classical-derived-equivalence",
-    "lem-sc-bounded-below-injective-resolution"
+    "def-weil-pbc-site-comparison-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 5.2.6 (3), p. 37"
+    "place": "Proposition 5.2.6 (3), Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2 (pp. 37-38): when D(X_et) is left-complete (locally finite cohomological dimension) the unbounded pullback identifies D(X_et) with D_cc(X_proet); specialized to finite l-primary coefficients and finite-type schemes over finite or algebraically closed fields; blueprint sk-prop-pe-unbounded-classical (finite-coefficient hypotheses)"
    }
   },
   {
-   "text": "For $K\\in D_{\\mathrm{class}}(X_{\\mathrm{proet}},A)$ and $m\\in\\mathbf Z$, let $P_m(K)$ be the presheaf on $X_{\\mathrm{et}}$ given by $W\\mapsto H^mR\\Gamma(W,K)$, where $R\\Gamma(W,-)$ is total derived evaluation on the pro-étale site. There is a natural identification $H^m(RK)=P_m(K)^\\#$. Indeed, the pro-étale site is taken in its small skeleton and $A_{X,\\mathrm{proet}}$ is a sheaf of commutative rings, so [prop-pur-kinjective-resolutions-exist] gives every complex of $A$-module sheaves on $X_{\\mathrm{proet}}$ a K-injective resolution; this is the existence hypothesis of [lem-weil-pbc-kinjective-total-derived] and of the stipulated computation of $R$. Choose a K-injective representative $I$ of $K$. By the stipulated computation of $R$ and the restriction formula in [def-weil-pbc-site-comparison-morphism], $RK$ is represented by the étale sheaf complex $W\\mapsto I(W)$. [lem-weil-pbc-kinjective-total-derived] also makes $I$ compute total derived evaluation at every $W$. Its underlying presheaf cohomology is $W\\mapsto H^m(I(W))=P_m(K)(W)$. Exact sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact] identifies the sheafification of this cohomology presheaf with the cohomology sheaf of that complex. For a derived morphism choose a chain-map representative between K-injective resolutions, using [lem-weil-pbc-kinjective-hom-derived]; chain-homotopic representatives induce the same section cohomology maps. Thus the identification is natural, including for every truncation map used next.",
+   "text": "Restrict the actual unbounded comparison adjunction to bounded-below objects, using the exact-inverse-image and right-derived Plus compatibility isomorphisms. The Mathlib formula for the counit of a fully faithful restriction and uniqueness of right adjoints identify its counit with the bounded-below derived counit. Bounded-below comparison and the classical derived equivalence make this counit invertible on bounded-below classical complexes.",
+   "uses": [
+    "src-right-derived-functor-plus-compatibility",
+    "det-pe-classical-derived-equivalence",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 5.2.6 (3), Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2 (pp. 37-38): when D(X_et) is left-complete (locally finite cohomological dimension) the unbounded pullback identifies D(X_et) with D_cc(X_proet); specialized to finite l-primary coefficients and finite-type schemes over finite or algebraically closed fields; blueprint sk-prop-pe-unbounded-classical (finite-coefficient hypotheses)"
+   }
+  },
+  {
+   "text": "Let F be sections at an affine etale W. Its total right derived functor is triangulated. It preserves countable products: choose K-injective representatives, whose termwise product is K-injective and represents the derived product; F preserves that product termwise, and exact products in ModuleCat make Q preserve it in the target. Use the canonical right-derived comparison on K-injectives and its naturality to transport the product cone, including its projections. These are the proved source-library K-injective APIs, not a new chosen derived functor.",
+   "uses": [
+    "lem-pc-ringed-space-product-kinjective",
+    "lem-weil-derived-limit-products-core",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 5.2.6 (3), Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2 (pp. 37-38): when D(X_et) is left-complete (locally finite cohomological dimension) the unbounded pullback identifies D(X_et) with D_cc(X_proet); specialized to finite l-primary coefficients and finite-type schemes over finite or algebraically closed fields; blueprint sk-prop-pe-unbounded-classical (finite-coefficient hypotheses)"
+   }
+  },
+  {
+   "text": "Induct on the length of a finite cohomological interval [a,b]. The one-degree case is H^b[-b]; its derived affine sections vanish above b+e by Step 2 and shift compatibility. The truncation triangle and its long exact sequence propagate this bound. For an arbitrary classical K in degrees at most b, each tau_{>=-n}K has that bound. Pro-etale fixed-ring module sheaves have exact countable products by the proved source-library Scheme.ProEt.countableAB4Star instance, and modules have exact products. Apply the generic left-completeness truncation-bound theorem and Step 4 to obtain RF(K) in degrees at most b+e+1.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-sfb-derived-left-complete-truncation-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 5.2.6 (3), Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2 (pp. 37-38): when D(X_et) is left-complete (locally finite cohomological dimension) the unbounded pullback identifies D(X_et) with D_cc(X_proet); specialized to finite l-primary coefficients and finite-type schemes over finite or algebraically closed fields; blueprint sk-prop-pe-unbounded-classical (finite-coefficient hypotheses)"
+   }
+  },
+  {
+   "text": "Compute RF(K) and Rnu_*K on a K-injective representative I, using the canonical source-library rightDerivedFunctorObjQIso. Comparison direct image is restriction on etale objects. Restrict its short complex in degree q to the affine etale basis, a faithful exact functor. If each affine derived section has zero degree-q homology, the underlying presheaf short complex is objectwise exact. Exact sheafification and its natural isomorphism on sheaves make the restricted sheaf short complex exact. Faithfulness reflects exactness, so H^q(Rnu_*K)=0. This uses only objectwise vanishing and does not require constructing a natural presheaf homology comparison.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived",
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 5.2.8, reduction to bounded-below complexes, made explicit using the blueprint fixed-degree truncation estimate; Proposition 5.3.2 for the classical subcategory"
-   }
-  },
-  {
-   "text": "Fix $m$ and choose an integer $N<m-e-1$. Put $T=\\tau_{\\geq N}K$ and let $t:K\\to T$ be the canonical map. Its cohomology is zero below $N$ and agrees with that of $K$ in degrees at least $N$, so $T$ is bounded below and classical, and $H^m(t)$ is an isomorphism. For every affine étale $W\\to X$, step 2 verifies precisely the classical-sheaf hypothesis of [det-pe-unbounded-classical-truncation]; part (2) makes $P_m(t)(W)$ an isomorphism. The kernel and cokernel presheaves of $P_m(t)$ are therefore zero on every affine étale object. If $Q$ is either of these presheaves and $S$ any étale sheaf, every map $Q\\to S$ is zero: its value on a section restricts to zero on an affine open cover of its domain, hence is zero by the sheaf condition. The universal property of sheafification gives $\\operatorname{Hom}(Q^\\#,S)=0$ for every $S$, so $Q^\\#=0$. Exact sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact] now makes both the kernel and cokernel of $P_m(t)^\\#$ zero, so this map is an isomorphism. Step 4 gives that $H^m(Rt)$ is an isomorphism, and [lem-weil-pbc-exact-functor-bounded-below] then makes $H^m(FRt)$ an isomorphism. Counit naturality gives\n$$H^m(t)\\circ H^m(\\varepsilon_K)=H^m(\\varepsilon_T)\\circ H^m(FRt).$$\nThe right side is an isomorphism by step 3, and $H^m(t)$ is an isomorphism, so $H^m(\\varepsilon_K)$ is an isomorphism. The integer $m$ was arbitrary; [lem-weil-pbc-unbounded-derived-iso-cohomology] proves that the actual counit $\\varepsilon_K:FRK\\to K$ is an isomorphism.",
-   "uses": [
-    "det-pe-unbounded-classical-truncation",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
     "lem-weil-pbc-site-module-presheaf-sheafification-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 5.2.8, reduction to bounded-below complexes, made explicit using the blueprint fixed-degree truncation estimate; Proposition 5.3.2 for the classical subcategory"
+    "place": "Proposition 5.2.6 (3), Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2 (pp. 37-38): when D(X_et) is left-complete (locally finite cohomological dimension) the unbounded pullback identifies D(X_et) with D_cc(X_proet); specialized to finite l-primary coefficients and finite-type schemes over finite or algebraically closed fields; blueprint sk-prop-pe-unbounded-classical (finite-coefficient hypotheses)"
    }
   },
   {
-   "text": "The counit is therefore an isomorphism in the derived category. Since $R K$ is an object of $D(X_{\\mathrm{et}},A)$, every $K$ in the classical pro-étale subcategory is isomorphic to $F(RK)$, proving the final essential-surjectivity clause.",
-   "uses": [],
-   "elementary": true,
+   "text": "Fix m and put n=m-e-2. The tail J=tau_{<n}K has classical cohomology and lies in degrees at most n-1. Steps 5 and 6 put Rnu_*J in degrees at most n+e, strictly below m. Its homology vanishes in degrees m and m+1. The long exact sequence of the derived image of the truncation triangle makes H^m(Rnu_*K)->H^m(Rnu_*tau_{>=n}K) invertible. Exact inverse image preserves this homology isomorphism. The upper truncation is bounded below and classical, including its zero cohomology sheaves below n. Step 3, counit naturality, and the truncation cohomology isomorphism now make H^m of the actual counit at K invertible. Vary m and apply the cohomology criterion. Take M=Rnu_*K and the counit isomorphism for the final clause.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 5.3.2, p. 38"
+    "place": "Proposition 5.2.6 (3), Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2 (pp. 37-38): when D(X_et) is left-complete (locally finite cohomological dimension) the unbounded pullback identifies D(X_et) with D_cc(X_proet); specialized to finite l-primary coefficients and finite-type schemes over finite or algebraically closed fields; blueprint sk-prop-pe-unbounded-classical (finite-coefficient hypotheses)"
    }
   }
  ],
  "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
   "def-weil-pbc-site-comparison-morphism",
   "det-pe-classical-derived-equivalence",
-  "det-pe-unbounded-classical-bounds",
-  "det-pe-unbounded-classical-truncation",
-  "lem-sc-bounded-below-injective-resolution",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-derived-left-complete-truncation-bound",
+  "lem-sfb-etale-module-affine-bound",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
   "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
   "lem-weil-pbc-site-module-presheaf-sheafification-exact",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "prop-pur-kinjective-resolutions-exist",
   "sk-prop-sf-comparison",
-  "sk-thm-pe-classical-sheaves"
+  "sk-thm-pe-classical-sheaves",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 5.2.6 (3), Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2 (pp. 37-38)"
+  "place": "Proposition 5.2.6 (3), Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2 (pp. 37-38): when D(X_et) is left-complete (locally finite cohomological dimension) the unbounded pullback identifies D(X_et) with D_cc(X_proet); specialized to finite l-primary coefficients and finite-type schemes over finite or algebraically closed fields; blueprint sk-prop-pe-unbounded-classical (finite-coefficient hypotheses); S3: fixed-ring affine section bounds, generic exact-countable-product left completeness, and faithful exact restriction to the affine etale basis; the six-functors unit comparison route is preserved."
  },
  "mathlib_searches": [
   {
@@ -310,12 +330,7 @@
  "tool_uses": [
   "sk-thm-pe-classical-sheaves",
   "sk-prop-sf-comparison",
-  "det-pe-classical-derived-equivalence",
-  "det-pe-unbounded-classical-bounds",
-  "det-pe-unbounded-classical-truncation",
-  "lem-sc-bounded-below-injective-resolution",
-  "lem-weil-pbc-kinjective-total-derived",
-  "prop-pur-kinjective-resolutions-exist"
+  "det-pe-classical-derived-equivalence"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -355,5 +370,15 @@
   "group": "Q70",
   "result": "pass",
   "note": "The statement matches the node clause by clause: field, prime ℓ invertible in k, finite commutative A with ∃ r≥1, ℓ^r=0, and finite-type X (LocallyOfFiniteType+QuasiCompact). It uses fixed-ring module sheaves on the small étale and pro-étale sites, the canonical comparisonUpperStar.mapDerivedCategory, and the counit of comparisonAdjunction.mapDerivedCategoryRightDerivedAdjunction (K-injective rightDerivedFunctor). Classical means the existing IsClassicalComplexFor (∀ q, continuity maps on affine presentations), as in the landed siblings. The three conclusions (classical image, unbounded counit iso, essential image) have no boundedness or extra instances. A : Type (u+1) follows the sibling convention. The node copy differs from live only in lean, the statement is verbatim, all universes are bound, the proof is sorry, and the docstrings carry the source place, blueprint tag and six proof steps. Edge cases (empty X, A=0, r=1, unbounded-below K) are covered. nt_compile --json is clean (3.2 s, exit 0). Advisory: ClassicalDerivedDefinitions decls are not listed in the sk-def-pe-classical-definition declarations (shared with siblings)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261020T122132-L-483046",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
