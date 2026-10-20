@@ -28,6 +28,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Sheaf.CategoryTheory.KInjectiveTotalDerived
 public import Sheaf.AlgebraicGeometry.EtaleGenericStratumMate
+import Sheaf.Paper.StratumAmbientProjectionData
 
 /-! # Internal Hom from extension along a stratum
 
@@ -268,6 +269,9 @@ theorem ProEtale.nonempty_stratumAmbientHomIso
           derivedInternalHomOfUniverses.{u + 1, u, u}
             (ProEt.topology S) (proEtaleConstantRing S A) ⋙
             (sfConstantModuleDirectImage (i ≫ j) A).rightDerivedFunctor) := by
-  sorry
+  obtain ⟨α, hα⟩ := ProEtale.stratumAmbientHomComparison A i j
+  refine ⟨NatIso.ofComponents (fun p ↦ asIso (α.app p)) ?_⟩
+  intro p q f
+  simpa only [asIso_hom] using α.naturality f
 
 end AlgebraicGeometry

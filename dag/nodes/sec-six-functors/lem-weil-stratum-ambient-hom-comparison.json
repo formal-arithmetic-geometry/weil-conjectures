@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-stratum-ambient-hom-comparison",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-stratum-ambient-hom",
+  "same_as": []
+ },
+ "kind": "lemma",
+ "title": "Canonical comparison for the pro-etale stratum internal Hom",
+ "statement": "For a finite commutative coefficient ring A and a locally closed immersion s = j i into a Noetherian pro-etale scheme X, the K-flat/K-injective tensor-Hom, projection, and adjunction construction yields a natural transformation from\n\n`RHom_X(Rs_!(-), -)`\n\nto `Rs_* RHom_S(-, Rs^!(-))`; every component of this canonical transformation is an isomorphism. The final packaging as a natural isomorphism is performed by the parent node.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
+  "place": "the internal-Hom calculation, proof steps 8--10"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Choose K-flat representatives for tensor variables and K-injective representatives for the internal Hom variable. Apply Hom-complex currying, the open and closed projection comparisons, the shriek adjunction, and the direct-image adjunction to define the comparison. Naturality descends from the representative maps. The inverse projection comparisons give a two-sided inverse for every component.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "V3 stage 3",
+  "document": "lean/Sheaf/Paper/StratumAmbientProjectionData.lean",
+  "place": "stratumAmbientHomComparison docstring; parent proof steps 8--10",
+  "note": "The theorem isolates the canonical componentwise comparison before NatIso.ofComponents packaging."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pro-etale locally closed immersion internal Hom exceptional inverse image",
+   "results": "No exact declaration; search unavailable for this site-specific statement.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation componentwise isomorphism internal Hom projection formula adjunction",
+   "results": "No exact site-specific declaration; generic categorical projection helpers only.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory projectionInternalHomMap IsIso",
+   "results": "CategoryTheory.projectionInternalHomMap_isIso is the generic helper; it requires the site-specific projection data.",
+   "date": "2026-10-21",
+   "verdict": "generic helper only"
+  },
+  {
+   "tool": "grep",
+   "query": "stratumAmbientHomComparison|proEtale.*stratum.*Hom",
+   "results": "No existing declaration in Mathlib, WeilConjectures or Sheaf.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2069,
+ "blueprint_uses": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-open-closed-recollement",
+  "lem-exc-closed-ambient"
+ ],
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StratumAmbientHom",
+  "date": "2026-10-21",
+  "group": "V3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StratumAmbientProjectionData",
+  "file": "lean/Sheaf/Paper/StratumAmbientProjectionData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.stratumAmbientHomComparison",
+  "statement": "theorem stratumAmbientHomComparison (A : Type u) [CommRing A] [Finite A] {S U X : Scheme.{u}} [IsNoetherian X] (i : S ⟶ U) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] : ∃ α : ((((sfConstantModuleDirectImage i A).rightDerivedFunctor ⋙ (sfIntrinsicExtensionByZero j A).mapDerivedCategory).op.prod (𝟭 (proEtaleDerivedCategory X A))) ⋙ derivedInternalHomOfUniverses.{u + 1, u, u} (ProEt.topology X) (proEtaleConstantRing X A)) ⟶ (((𝟭 (proEtaleDerivedCategory S A)ᵒᵖ).prod ((sfConstantModulePullback j A).mapDerivedCategory ⋙ (sfIntrinsicClosedUpperShriek i (Scheme.Opens.ι (X := U) (⟨(Set.range i)ᶜ, (IsClosedImmersion.isClosedEmbedding i).isClosed_range.isOpen_compl⟩ : U.Opens)) A).rightDerivedFunctor)) ⋙ derivedInternalHomOfUniverses.{u + 1, u, u} (ProEt.topology S) (proEtaleConstantRing S A) ⋙ (sfConstantModuleDirectImage (i ≫ j) A).rightDerivedFunctor), ∀ p, IsIso (α.app p)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261020T235633-L-1199506",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261020T235633-L-1199506",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
