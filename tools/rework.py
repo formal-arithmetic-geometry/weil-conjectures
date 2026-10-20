@@ -51,7 +51,7 @@ COLS = ("module", "original", "quarantine", "sync", "time", "cause", "nodes", "r
 HEADER = ("# module\toriginal path\tquarantine path\tsync\tquarantined (UTC)\tcause\tDAG nodes\troots   "
           "(tools/rework.py; written by ~/cc1/upsync-quick.py, rows removed by `tools/rework.py reconcile`)\n")
 # never moved out or changed: the six target statements; a failure it imports aborts the sync
-ROOTS_KEPT = ("Challenge", "Weil.Solution", "Weil.Challenge", "Weil.Definitions")   # + the comparator files
+ROOTS_KEPT = ("Challenge", "Weil.Challenge", "Weil.Definitions")   # the locked target statements (+ comparator defs)
 # root files that only list imports: a quarantined module's import line is removed from them (and put back on restore)
 IMPORT_ROOTS = ("WeilConjectures", "TargetsCheck")
 SOURCE_ROOT = "WeilConjectures"
@@ -334,13 +334,53 @@ def roots_to_restore(item: str) -> dict[str, str]:
     return out
 
 
+def drop_default_target(lakefile: str, name: str) -> str:
+    return re.sub(r'(defaultTargets\s*=\s*\[)([^\]]*)\]', lambda m: m.group(1) + ", ".join(
+        x for x in (y.strip() for y in m.group(2).split(",")) if x and x != f'"{name}"') + "]", lakefile, count=1)
+
+
+def restore_solution() -> bool:
+    """put "Solution" back into the Lake default targets once every module Comparator/Weil/Solution.lean imports
+    (transitively) is in the library again; one landing (group S). Called by reconcile under coord/.merge.lock."""
+    lf = li.LEAN / "lakefile.toml"
+    t = lf.read_text()
+    m = re.search(r"defaultTargets\s*=\s*\[([^\]]*)\]", t)
+    if not m or '"Solution"' in m.group(1):
+        return False
+    _, imports = li.scan()
+    sol = li.imports_of((li.LEAN / "Comparator" / "Weil" / "Solution.lean").read_text())
+    need = set(sol)
+    for x in sol:
+        need |= li.closure(x, imports, {})
+    rows = load()
+    if any(x in rows for x in need) or any(x.split(".")[0] in ("Sheaf", "WeilConjectures") and not li.file_of(x).is_file()
+                                           for x in need):
+        return False
+    import landing as ld
+    with ld.tree_lock():
+        new = t.replace(m.group(0), m.group(0)[:-1] + ', "Solution"]', 1)
+        lf.write_text(new)
+        ld.new_record("S", {"lakefile.toml": t.encode()}, "rework: Weil.Solution back in the default targets", kind="interface")
+        git("add", "--", "lean/lakefile.toml")
+        git("-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m",
+            "rework: Weil.Solution back in the Lake default targets (its closure is out of quarantine)"
+            "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", "lean/lakefile.toml", check=False)
+    print("rework: Weil.Solution back in the default targets")
+    return True
+
+
 def reconcile(commit: bool = True) -> int:
     """Rows whose original file is in the verified main: the fix is verified green. Delete the quarantined copy and
     the row (coord/rework-done.tsv keeps the history), one bookkeeping commit under coord/.merge.lock."""
+    import mergelock
+    try:
+        with mergelock.merge_lock():
+            restore_solution()
+    except Exception as e:   # noqa: BLE001
+        print("restore_solution:", repr(e)[:200])
     rows = load()
     if not rows:
         return 0
-    import mergelock
     done = []
     with mergelock.merge_lock():
         rows = load()
