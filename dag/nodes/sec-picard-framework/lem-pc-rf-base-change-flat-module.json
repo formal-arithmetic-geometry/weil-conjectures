@@ -21,73 +21,37 @@
  ],
  "proof": [
   {
-   "text": "Write $p:X_T\\to X$ and $f_T:X_T\\to T$ for the projections and $\\theta:Lg^*Rf_*\\mathcal G\\to Rf_{T,*}\\mathcal G_T$ for the base change map of [lem-pc-base-change-map-cech] (adjoint to $Rf_*\\mathcal G\\to Rf_*Rp_*p^*\\mathcal G=Rg_*Rf_{T,*}\\mathcal G_T$). Being an isomorphism in $D(\\mathcal O_T)$ is checked on the cohomology sheaves, hence on affine opens $W\\subseteq g^{-1}(V)$, $V\\subseteq S$ affine; restriction to opens is exact and commutes with $Rf_*$ and $Lg^*$, so $\\theta$ restricts to the base change map for $f^{-1}(V)\\to V$ and $W\\to V$. Thus take $S=\\operatorname{Spec}(A)$, $T=\\operatorname{Spec}(B)$, and choose a finite affine open cover $X=\\bigcup_i U_i$ (quasi-compactness). Since $X\\to S$ is separated, every finite intersection $U_J=\\operatorname{Spec}(C_J)$ is affine. The node [lem-pc-cech-resolution] gives the bounded Cech complex $K^\\bullet$, $K^p=\\prod_{|J|=p+1}\\Gamma(U_J,\\mathcal G)$, whose associated sheaf complex $\\widetilde{K^\\bullet}$ computes $Rf_*\\mathcal G$.",
+   "text": "Apply the existing canonical theorem lem-pc-relatively-flat-canonical-module-base-change in universe u, choosing the Grothendieck derived-category instance for every scheme. The tensor pullback is a left adjoint, hence right exact and additive. The canonical theorem gives an invertible morphism from Lg* Rf*(G[0]) to Rf_T*((p*G)[0]); apply asIso. Its proof retains the finite affine Cech route of this node, with the same relative-flatness hypotheses, arbitrary base change and no nonemptiness assumption.",
    "uses": [
-    "lem-pc-cech-resolution",
-    "lem-pc-base-change-map-cech"
+    "lem-pc-relatively-flat-canonical-module-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-    "place": "Proof, local affine reduction and Cech resolution"
-   }
+   "elementary": true
   },
   {
-   "text": "For every intersection $U_J=\\operatorname{Spec}(C_J)$, quasi-coherence identifies $N_J=\\Gamma(U_J,\\mathcal G)$ with the module defining $\\mathcal G|_{U_J}$. Relative flatness of $\\mathcal G$ over $S$ says that each $N_J$ is flat over $A$. A finite product of flat $A$-modules is flat (apply the injectivity criterion for flatness coordinatewise), so every term of the finite Cech complex $K^\\bullet$ is flat over $A$.",
+   "text": "Compare each given scheme-derived category with the fixed small category DerivedCategory X.Modules by schemeDerivedCategoryEquiv. Compatibility with Q identifies single objects. For direct image, choose a complex preimage P of the input, resolve it by the functorial K-injective replacement I(P), and compute both direct images from the same quasi-isomorphism P to I(P). The Q-compatibility isomorphism identifies the results. For pullback, derivedPullback_def is exactly transport of Scheme.Modules.derivedPullback through these equivalences, and the equivalence counit gives its object comparison.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-derived-direct-image",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the isomorphism of the first step to the fixed module-derived categories using the second-step source and target comparisons. For the original four HasDerivedCategory instances in arbitrary universe w, construct those same comparisons to the fixed model. Compose the source comparison, the fixed-model base-change isomorphism and the inverse target comparison, and use the fully faithful equivalence functor preimageIso to obtain the required isomorphism. No uniform HasDerivedCategory instance in universe w is added to the statement.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-    "place": "Proof, flatness of the Cech terms"
-   }
-  },
-  {
-   "text": "Each $\\widetilde{K^p}$ is a flat $\\mathcal O_S$-module (its stalks are localizations of the flat $A$-module $K^p$), and $\\widetilde{K^\\bullet}$ is bounded, so [lem-pc-flat-complex-derived-pullback] shows that the canonical map $Lg^*\\widetilde{K^\\bullet}\\to g^*\\widetilde{K^\\bullet}$ is an isomorphism in $D(\\mathcal O_T)$; and $g^*\\widetilde{K^\\bullet}=(K^\\bullet\\otimes_AB)^\\sim$ termwise by [lem-weil-pbc-module-pullback-affine-sections] applied to $g$ with $V=S$, $U=T$.",
-   "uses": [
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-weil-pbc-module-pullback-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-    "place": "Proof, derived pullback of the flat Cech complex"
-   }
-  },
-  {
-   "text": "The pullbacks $U_J\\times_ST=p^{-1}(U_J)=\\operatorname{Spec}(C_J\\otimes_AB)$ are affine and form a finite affine cover of $X_T$ with intersections $U_J\\times_ST$; let $K_T^\\bullet$ be its Cech complex for $\\mathcal G_T=p^*\\mathcal G$. Applying [lem-weil-pbc-module-pullback-affine-sections] to $p$ with $V=U_J$, $U=p^{-1}(U_J)$ shows that the map $c_J:N_J\\otimes_{C_J}(C_J\\otimes_AB)=N_J\\otimes_AB\\to\\Gamma(U_J\\times_ST,\\mathcal G_T)$, $s\\otimes b\\mapsto b\\cdot(p^*s)|_{U_J\\times_ST}$, is an isomorphism for every $J$. These are the components of the cochain map $\\gamma:K^\\bullet\\otimes_AB\\to K_T^\\bullet$ of [lem-pc-base-change-map-cech], so $\\gamma$ is an isomorphism of complexes.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-pc-base-change-map-cech"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-    "place": "Proof, pullback cover and tensor identification of sections"
-   }
-  },
-  {
-   "text": "By [lem-pc-base-change-map-cech], $\\theta$ is the composite $Lg^*\\widetilde{K^\\bullet}\\to g^*\\widetilde{K^\\bullet}=(K^\\bullet\\otimes_AB)^\\sim\\xrightarrow{\\tilde\\gamma}\\widetilde{K_T^\\bullet}$, read through the identifications $Rf_*\\mathcal G\\cong\\widetilde{K^\\bullet}$ and $Rf_{T,*}\\mathcal G_T\\cong\\widetilde{K_T^\\bullet}$ of [lem-pc-cech-resolution] (the latter for the pullback cover, $X_T\\to T$ being separated and quasi-compact). The first arrow is an isomorphism by Step 3 and $\\tilde\\gamma$ by Step 4, so $\\theta$ is an isomorphism.",
-   "uses": [
-    "lem-pc-cech-resolution",
-    "lem-pc-base-change-map-cech"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-    "place": "Proof, comparison with the pullback Cech resolution"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-cech-resolution",
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-pc-base-change-map-cech"
+  "lem-pc-relatively-flat-canonical-module-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent Y3",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-  "place": "## Proof"
+  "place": "Proof: existing canonical finite affine Cech theorem, followed by invariance under the chosen derived-category model; private K-injective and localization comparisons."
  },
  "mathlib_searches": [
   {
@@ -207,5 +171,15 @@
   "group": "E1",
   "result": "pass",
   "note": "Read packet whole; matched f qc+separated as instances, G : SheafOfModules O_X quasi-coherent, flat over S = recorded IsFlatOver G f (stmt_deps gain of landed def-pc-scheme-module-flat-over justified, no cycle), arbitrary g, X_T = pullback f g with f_T = pullback.snd and G_T = tensorPullback (pullback.fst) per BASE CHANGE X_T, LHS derivedPullback g of schemeDerivedDirectImage f of G[0], RHS schemeDerivedDirectImage f_T of G_T[0]; Nonempty iso because def-pc-derived-base-change-map has no Lean yet"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261020T174928-L-823111",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
