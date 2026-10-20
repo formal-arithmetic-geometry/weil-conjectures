@@ -18746,3 +18746,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:47 L: merged deliver/A5/Sheaf.Paper.SystemNormalizedTensorClosure (stage 3; reviewer PASS; first push; landing 20261020T174718-L-783675 (proof); batch 20261020T174710; modules 1; new nodes 0)
 - 17:47 L: merged deliver/A9/Sheaf.AlgebraicGeometry.FieldCurveCompletionInsep (stage 3; reviewer PASS; first push; landing 20261020T174720-L-784163 (proof); batch 20261020T174710; modules 1; new nodes 0)
 - 17:47 L: merged deliver/B5/Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricPullback (stage 3; reviewer PASS; first push; landing 20261020T174723-L-784854 (proof); batch 20261020T174710; modules 1; new nodes 0; change records: coord/changes/rectangle-ordinary-geometric-pullback.md)
+- 17:47 L: merged deliver/C2/Sheaf.AlgebraicGeometry.AmplePositiveTensorPower (stage 3; reviewer PASS; first push; landing 20261020T174725-L-785191 (proof); batch 20261020T174710; modules 1; new nodes 0)
