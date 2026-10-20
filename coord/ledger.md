@@ -18656,3 +18656,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:13 L: returned deliver/P6/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafWedgeMapExists (reviewer RETURN: (reviewer C-991b0, head 991b061f9) C4/G1 dag/nodes/sec-picard-framework/new-local-wedge-at.json: the node was not rebase)
 
 - 00:15 L: batch 20261020T161318 dependency take-out
+- 16:16 L: returned deliver/V2/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero (reviewer RETURN: (reviewer C-a64b1, head a64b195c8) H2: dag/nodes/sec-picard-framework/new-j1-exterior-sheaf-rank-wedge-zero.json lean.st)
