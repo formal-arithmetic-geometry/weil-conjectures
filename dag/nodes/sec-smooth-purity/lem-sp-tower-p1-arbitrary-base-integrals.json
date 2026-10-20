@@ -312,12 +312,12 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q122-4123a5788 (reviewer sub-agent of L); spot-checked: Read all seven steps, cited statements, source passages, and chapter/unit route. Verified trace normalization, Cartier pullback, canonical exchange and mate-pasting compatibility, coefficient categories, edge cases, and absence of circular dependencies or whole-statement duplicates. No repairs needed; detailed checks are in review.md."
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "NT-stage2-cc-8d35148fe",
+  "reviewer": "NT-stage2-cc-1e1ecaa26",
   "group": "ND",
   "result": "pass",
-  "note": "ND 8d35148f: re-statement after J1 withdrew the item. Not on the dropped list; only the lean record changes; dependency nodes byte-equal live; new module names don't clash. Clause by clause: N>0, finite CommRing A in u+1 with (N:A)=0, all N-invertible schemes with no Noetherian assumption. Canonical twist identification t, pinned by its normalization fields. Chern class c fixed by ordinaryFiniteP1ChernSpec; b iso with hom = biprod.desc(twisted unit, Chern adjoint); trace = b.inv ≫ snd. Both base-change equations for every f via ordinaryFiniteP1Exchange. Diagonal effective Cartier; κ from SupportedKummerBoundary, which the dependency proves unique and of the c·u = c1 sign, so dropping Q99's explicit sign clause loses nothing. alpha IsIso (true) plus both Bool integrals, with b's own trace carried along the canonical chart exactly as in the landed Noetherian lemma. Edge cases N=1, A=0, empty base, identity map all covered. Statement verbatim; 7 declarations present; docstrings carry the 7 steps; sorry only. Theorem dependency rule not triggered: stmt_deps unchanged from stage 1. nt_compile --json: two 60 s timeouts at load ~317, then clean in 56.0 s at load ~270 (worker 45.4 s). Advisory: thin compile margin; retry landing at low load."
+  "note": "Re-statement of lem-sp-tower-p1-arbitrary-base-integrals after the S9/J1 unused-withdrawals; the item is back in the stage-2 queue. Fresh module FiniteP1ArbitraryBaseIntegrals with no clash. Only the item's lean record changes; dep records are byte-equal to side-live and dep modules are unchanged since the earlier PASS. Same mathematics as PASSed ND 8d35148f, repackaged as a structure: chern fixed by ordinaryFiniteP1ChernSpec, decomposition_hom = biprod.desc(twisted unit, Chern adjunct), trace = inv≫snd. Both base-change equations for every f, with the canonical OrdinaryFiniteTwistTransport. Diagonal ker.IsInvertible; κ fixed by SupportedKummerBoundary; alpha IsIso; both Bool integrals use d(P_S)'s own trace along the canonical chart. No Noetherian or extra hypotheses; N=1, A=0, empty base, identity f covered. Statement verbatim, 5 declarations present, docstrings with source and 7-step plan, one sorry. Compile: nt_compile timed out at 60 s at load ~400; lcompile timeout=560 clean; nt_compile clean in 33.6 s at load ~91 (worker 31-32 s). Maintainer note: withdraw/re-state loop until det-sp-tower-p1-adjunction gets Lean that imports this."
  },
  "reviewed_proof": {
   "date": "2026-10-19",
@@ -328,5 +328,23 @@
   "landing": "20261019T231346-L-577687",
   "kind": "interface",
   "note": "independent cc review: empty withdrawn module and lean:null node vs live: no importer or name use in lean/ (rg), unit realized empty, citing nodes have no Lean, compiles clean, change record lists no users"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals",
+  "declaration": "AlgebraicGeometry.Etale.exists_arbitraryBaseFiniteP1Integrals",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ArbitraryBaseFiniteP1Splitting",
+   "AlgebraicGeometry.Etale.ArbitraryBaseFiniteP1Splitting.trace",
+   "AlgebraicGeometry.Etale.ArbitraryBaseFiniteP1BaseChange",
+   "AlgebraicGeometry.Etale.arbitraryBaseFiniteP1DiagonalTrace",
+   "AlgebraicGeometry.Etale.exists_arbitraryBaseFiniteP1Integrals"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1ArbitraryBaseIntegrals.lean",
+  "statement": "theorem exists_arbitraryBaseFiniteP1Integrals (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) : ∃ (t : OrdinaryFiniteTwistTransport A N hA) (d : ∀ (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))), ArbitraryBaseFiniteP1Splitting A N hA t S hS), ArbitraryBaseFiniteP1BaseChange A N hA t d ∧ ∀ (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))), ∃ hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible, ∃ κ : Ext ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))).obj (ordinaryFiniteConstant A (ProjectiveLine S))) (Scheme.finiteEtaleTateLine (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) 2, SupportedKummerBoundary A N hA (pullback.diagonal (ProjectiveLine S ↘ S)) hI (by simpa using hS.map ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫ (ProjectiveLine S ↘ S)).appTop.hom) κ ∧ ∀ a : Bool, IsIso (projectiveLineDiagonalAlpha A S a) ∧ projectiveLineDiagonalAlpha A S a ≫ (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map (supportedExactDerivedMap (lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))) (ordinaryFiniteConstant A (ProjectiveLine S)) (Scheme.finiteEtaleTateLine (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) κ) ≫ arbitraryBaseFiniteP1DiagonalTrace A N hA t d S hS a = 𝟙 (ordinaryFiniteUnit A (ProjectiveLine S))",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-20",
+  "existing": false,
+  "note": "Re-states the arbitrary-base splitting and diagonal-integral node after its former unused attachment was withdrawn. Uses the existing normalized twist, scalar Kummer specification, exchange, diagonal chart and alpha; the splitting record omits adjunction data because this node does not assert an adjunction. The trace is definitionally the second projection of its inverse."
  }
 }
