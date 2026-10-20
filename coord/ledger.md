@@ -19216,3 +19216,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:55 L: returned deliver/J6/Sheaf.Paper.AdicReductionCohomologySequence (reviewer RETURN: (the landing tools, head a6d55a2d3) the delivery did not land: (a) 2 commits beyond ed8d16ae4: deliver one module as exa)
 - 23:55 L: returned deliver/U1/Sheaf.Paper.ExceptionalAdjointAdmissibility (reviewer RETURN: (the landing tools, head c16cce320) the delivery did not land: lean/Sheaf/AlgebraicGeometry/ProEtaleConstantSupportProje)
 - 23:55 L: returned deliver/U3/Sheaf.Paper.ProperOpenCoefficientMate (reviewer RETURN: (the landing tools, head 1bcfe63c7) the delivery did not land: (a) 2 commits beyond ed8d16ae4: deliver one module as exa)
+- 23:55 L: returned deliver/X3/Sheaf.AlgebraicGeometry.DeterminantExteriorDualIso (reviewer RETURN: (the landing tools, head 3c41a5b19) the delivery did not land: (a) 2 commits beyond ed8d16ae4: deliver one module as exa)
