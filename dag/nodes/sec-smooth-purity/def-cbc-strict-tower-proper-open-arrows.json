@@ -18,10 +18,39 @@
  },
  "proof": [
   {
-   "text": "Naturality of betaInvApp is the naturality square transported by the open adjunction Hom equivalence. Apply Adjunction.homEquiv_naturality_right_square to the natural transformation obtained by whiskering the open unit and the inverse squareG. This proves betaInvApp_naturality without a separate geometric base-change assertion. The cartesian invertibility and finite evaluation assertions remain the existing named obligations betaInv_isIso and beta_evaluation.",
+   "text": "Naturality of betaInvApp is the naturality square transported by the open adjunction Hom equivalence. Apply Adjunction.homEquiv_naturality_right_square to the natural transformation obtained by whiskering the open unit and the inverse squareG. This proves betaInvApp_naturality without a separate geometric base-change assertion.",
    "uses": [
     "def-cbc-strict-constant-tower-operations",
     "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary commutative B, restrict scalars along the sheafification unit from the constant ring presheaf. This gives a fully faithful functor from modules over the constant ring sheaf to sheaves of fixed B-modules: local injectivity and local surjectivity of the scalar unit give full faithfulness of scalar restriction, and the sheaf condition is detected on underlying additive groups. To show essential surjectivity, construct a constant-presheaf module from a fixed B-module sheaf, extend scalars and sheafify it; the unit on its underlying additive sheaf is an isomorphism. Direct image commutes with this equivalence sectionwise, since the ring map sends each constant scalar to the same constant scalar. Uniqueness of left adjoints supplies pullback and open-extension comparisons. Transport the already proved ordinary pro-etale openImmersionLowerShriekBaseChangeIso through these equivalences, obtaining moduleOpenSquare without a finiteness hypothesis on B.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker moduleOpenSquare over the tower index and apply exact localization to get J_j G_g isomorphic to G_a J_jprime. The open unit is invertible by jAdj_unit_isIso, hence J_jprime is fully faithful. Its counit is invertible on the object G_g J_j M, which lies in its essential image by this isomorphism. The specified betaInvApp is the counit composed with J_jprime applied to the pulled-back invertible unit and the square isomorphism. Thus every component of the specified betaInv is invertible, proving betaInv_isIso.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the finite-evaluation normalization, first prove the unit formula for the specified exact/right-derived open adjunction from derivedη_fac_app and rightDerivedFunctorIsoMapDerivedCategory_hom_fac. Localization preserves mates with this formula: verify it on homotopy-category images using the factorization isomorphisms and the degreewise unit equation, then extend by essential surjectivity. The explicit moduleSquareG_eq formula shows that squareG is precisely the exact-localization square of the whiskered moduleSquareG. Consequently betaInv is exactly the localized whiskering of singleBetaInv. Finally the composition associativity and naturality laws for mapDerivedCategoryCompIso show that level evaluation preserves each localized square. Apply this to the inverse of singleBetaInv, and identify the evaluation isomorphisms with the specified evalJ and evalG. This proves beta_evaluation for the particular maps, rather than merely identifying their source and target functors.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-fix-constant-square-compositor-specification"
    ],
    "elementary": true
   },
@@ -34,15 +63,13 @@
    "elementary": true
   },
   {
-   "text": "For j:U to X, regard j as an open object Uo of X.ProEt. Every test object has at most one arrow to Uo, by cancellation of the mono j. The proved localized extensionSheafAdjunction_unit_isIso from ProEtaleRingedOpenClosed makes the localized extension fully faithful. Use proEtale_ringed_open_comparison and the scalar equivalence for constantRingIso to identify modulePullback with localized restriction followed by the inverse equivalence. Uniqueness of left adjoints transports full faithfulness to the chosen moduleJ. Thus its particular adjunction unit is invertible.",
+   "text": "The ordinary pro-etale open-extension adjunction has invertible unit by the proved open-immersion adjunction triple and the invertible restriction/direct-image counit. Hence ordinary open extension is fully faithful. The fixedOpen comparison transports this full faithfulness to moduleJ composed with fixedRestriction on the target. Since fixedRestriction is faithful, moduleJ is fully faithful, and therefore the particular moduleJAdj unit is invertible. This replaces the direct localized-site argument with the already constructed fixed-coefficient equivalence.",
    "uses": [
     "def-cbc-strict-constant-tower-operations",
     "def-cbc-strict-tower-open-extension",
-    "lem-weil-pbc-proetale-ringed-open-comparison",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-proetale-operations"
+    "def-cbc-finite-constant-coefficient-transport"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
    "text": "Whisker the module open adjunction by the strict tower index. Its unit is pointwise invertible, so it is a natural isomorphism. Exact localization maps this unit isomorphism and the composition and identity functor isomorphisms to an isomorphism J composed with G to the identity. Adjunction.isIso_unit_of_iso proves invertibility of the unit of the specified jAdj, without changing its normalization. This completes jAdj_unit_isIso.",
@@ -53,12 +80,13 @@
    "elementary": true
   },
   {
-   "text": "The already specified openToR map is the counit mate of the inverse open unit. Its clopen invertibility remains the existing named obligation openToR_isIso: split each pro-etale test object over the clopen image and its open complement; both functors give the original module on the first piece and zero on the second, and the specified map is identity on the first piece. With this obligation and the cartesian comparison above, retain the existing pi, alpha, gamma and exchange constructions by their stated functor compositions and adjunction mates.",
+   "text": "For a clopen immersion, the proved ordinary pro-etale isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range gives an isomorphism between open extension and direct image on fixed B-module sheaves. Transport it through the arbitrary-B scalar equivalence to obtain moduleClopenIso. Thus tower direct image is exact and its total right derived functor R is isomorphic to J. In particular R is fully faithful. The pullback/direct-image adjunction unit is invertible on J M because J M lies in the essential image of R. The specified openToR component is that unit followed by R of the inverse open unit, with identity associators and unitors, so is invertible. Retain pi, alpha, gamma and exchange with precisely their existing canonical definitions.",
    "uses": [
     "def-cbc-strict-constant-tower-operations",
     "def-cbc-strict-tower-open-extension",
     "lem-cbc-proetale-extension-zero-base-change",
-    "def-weil-pbc-adjunction-mate"
+    "def-weil-pbc-adjunction-mate",
+    "def-cbc-finite-constant-coefficient-transport"
    ],
    "elementary": false
   }
@@ -68,16 +96,16 @@
   "def-cbc-strict-tower-open-extension",
   "def-weil-proper-morphism",
   "def-pc-fibre-product",
-  "lem-weil-pbc-proetale-ringed-open-comparison",
-  "lem-weil-pbc-proetale-ringed-open-closed",
   "def-weil-pbc-proetale-operations",
   "lem-cbc-proetale-extension-zero-base-change",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-fix-constant-square-compositor-specification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AE, localized open extension and its unit; the geometric clopen-lift argument also uses Tags 01W6 and 01IQ. J9 stage-3 partial proof: naturality, the clopen lift, and the open unit are proved in Lean; the three explicitly identified existing obligations are retained."
+  "place": "Tag 09AE and the already proved ordinary pro-etale open-base-change and clopen-comparison theorems, transported through restriction along the constant-ring sheafification unit for arbitrary B. Exact localization of units and mates proves the specified finite evaluation equality. Y9 stage 3 completes betaInv_isIso, beta_evaluation and openToR_isIso, retaining the J9 proofs of naturality and the clopen lift, and shortening the open-unit proof using the same coefficient equivalence. Tags 01W6 and 01IQ supply the geometric lift argument."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -353,13 +381,13 @@
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, canonical constructions, report sections, and full six-file scompile verification passed."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J9",
+  "group": "Y9",
   "result": "pass",
-  "landing": "20261019T005308-L-2749585",
-  "kind": "proof",
+  "landing": "20261020T211910-L-3516620",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
