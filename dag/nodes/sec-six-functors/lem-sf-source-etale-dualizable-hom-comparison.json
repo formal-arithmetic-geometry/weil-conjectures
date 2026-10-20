@@ -1,0 +1,106 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/GenericFibre/InternalHom.lean",
+  "place": "AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_exactPairing; proof and surrounding hypotheses. Mathematical source: Stacks cohomology.tex, Tags 08DQ and 0GM7(1)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DQ and 0GM7(1); already implemented by the cited source-library declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex is dualizable, its dual has opposite Tor amplitude, and a monoidal pullback commutes with internal Hom",
+   "results": "LinearMap.IsPerfPair.flip; HomologicalComplex.instHasHomologyOppositeOp; LinearMap.flip.instIsPerfPair; HomologicalComplex.op; HomologicalComplex.opFunctor; HomologicalComplex.unop; LinearMap.IsPerfPair.dualEval; HomologicalComplex.homologyOpNatIso",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; reuse the existing source-library declaration stated in the Lean record."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyConcentratedIn\"",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; reuse the existing source-library declaration stated in the Lean record."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSitePerfect|torAmplitudeIn|isIso_ihomComparison_app_of_exactPairing",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; reuse the existing source-library declaration stated in the Lean record."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleGenericPerfectHom",
+  "date": "2026-10-19",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-etale-geometric-biduality",
+   "place": "Proof paragraph 4: finite-projective internal-Hom comparison on a stratum",
+   "via": [
+    "lem-sf-etale-generic-perfect-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-sf-source-etale-dualizable-hom-comparison",
+ "title": "Canonical etale internal-Hom comparison for a dualizable source",
+ "statement": "Let A be a symmetric closed monoidal Grothendieck abelian coefficient category whose tensor is additive, with functorial flat resolutions and etale inverse images preserving flat objects. Let g:Y to X be any scheme morphism, and let D,P in D(X_et,A) have an exact pairing with D a left dual of P. For every N the evaluation-transpose comparison Lg* RHom(P,N) to RHom(Lg*P,Lg*N) is an isomorphism. Also RHom(P,N) is canonically isomorphic to D tensor N. The derived categories, tensor, pullback and Hom are the canonical source-library constructions; no boundedness or constructibility assumption is imposed.",
+ "proof": [
+  {
+   "text": "The exact pairing identifies RHom(P,N) with D tensor N, naturally in N, by the tensor-Hom adjunction and its two triangle identities. Strong monoidal derived pullback preserves the evaluation, coevaluation and triangle identities, so the pulled-back D is a left dual of the pulled-back P. Under the two dual-tensor identifications, the canonical internal-Hom comparison is the strong monoidal tensor comparison, hence invertible. Its defining evaluation equation identifies this isomorphism with the evaluation transpose rather than an arbitrary isomorphism.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom",
+  "declaration": "AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_exactPairing",
+  "statement": "lemma isIso_derivedHomUpperStarComparison_of_exactPairing {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (D P : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [ExactPairing D P]\n    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :\n    IsIso (derivedHomUpperStarComparison A g P M)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-19",
+  "note": "Existing proved source declaration, read with all ambient section hypotheses; no new Lean statement or proof hole is introduced.",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_exactPairing",
+   "AlgebraicGeometry.Etale.derivedHomIsoDerivedTensorOfExactPairing"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-90510",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261020T051403-L-1662081",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-90510",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261020T051403-L-1662081",
+  "kind": "interface",
+  "note": "independent cc review: delivered etaleGenericPerfectHom (ev/ev' via derivedHomRightEvaluation) vs published old signature (defeq: old-signature theorem proved by exact); 4 existing:true source nodes vs FlatModel/InternalHom/SitePerfect decls; importer EtaleGenericExchangeAlgClosed compiled against delivery; axioms clean"
+ }
+}

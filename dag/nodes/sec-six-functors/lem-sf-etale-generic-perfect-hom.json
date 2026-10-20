@@ -18,104 +18,63 @@
  ],
  "proof": [
   {
-   "text": "Refine the given etale covering so that on each chart U the object P is represented by a bounded complex E of constant finite projective A-modules in degrees [a,b]. The charts U'=U\\times_SS' form an etale covering of S', and g restricts to g_U:U'\\to U. The exact constant-coefficient inverse-image theorem [prop-weil-pbc-inverse-image-modules-exact] makes g^* and g_U^* exact, so g_U^*E is a complex of constant finite projective A-modules in the same degree range. Since restriction to a chart is inverse image along the etale morphism and g\\circ j'=j\\circ g_U for the chart maps j:U\\to S, j':U'\\to S', the monoidal composition comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] identify (g^*K)|_{U'} with g_U^*(K|_U) for every K, compatibly with the tensor comparisons; hence g^*P is represented on U' by g_U^*E and (g^*N)|_{U'}=g_U^*(N|_U). The restriction comparison for derived internal Hom [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies the restriction of each global RHom object with RHom on each localized chart; consequently the local models compute the restrictions of both objects in the claimed comparison.",
+   "text": "Read the given local representatives as site-perfectness: the explicit splitting maps are retracts of constant finite powers and the support assumptions give IsStrictlyGE a and IsStrictlyLE b. Exact inverse image identifies mapDerivedCategory with the left-derived pullback. Apply the existing source declaration IsSitePerfect.isDualizable [lem-sf-source-etale-site-perfect-dualizable] to obtain a right dual and, by the derived braiding, a left dual as well.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM7, case (1), first paragraph: locality on the base and exact inverse-image of the local model"
-   }
-  },
-  {
-   "text": "On a chart choose any representative of N|_U and replace it by its good truncation F=\\tau_{\\ge c}N|_U; since H^j(N|_U)=0 for j<c, the truncation map is a quasi-isomorphism, and F^j=0 for j<c. Apply the bounded-free RHom-model lemma [lem-weil-pbc-ringed-site-bounded-free-rhom-model] on U to (E,F), and on the inverse-image chart U' to (g^*E,g^*F): E and g^*E are bounded above with finite-projective terms, while F and g^*F are bounded below, so the ordinary Hom complexes represent the two derived internal Homs. The general chain map c_{E,F} of [lem-sf-etale-hom-complex-pullback] assembles the degreewise maps. For every term E^i and F^j, [lem-sf-etale-finite-projective-pullback-hom] says that this map is an isomorphism and carries the pulled-back evaluation to the evaluation after pullback. The finite direct sums in each total degree therefore give a chain isomorphism, and it is the local canonical comparison because it is induced by evaluation and currying.",
-   "uses": [
-    "def-kun-truncations",
-    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "lem-sf-etale-hom-complex-pullback",
-    "lem-sf-etale-finite-projective-pullback-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM7, case (1), strictly perfect E and bounded-below truncation of N; Tag 08JI for the ordinary Hom model"
-   }
-  },
-  {
-   "text": "Put P^\\vee=\\mathscr H_S(P,A_S). By [lem-sf-etale-local-dual-interval] (with T=S, L=A_S, m=0) it is represented on the charts by the dual complex D=\\mathrm{Hom}^\\bullet_A(E,A) with constant finite projective terms in [-b,-a], and it has Tor amplitude [-b,-a]: \\mathcal H^i(P^\\vee\\otimes_A^LM)=0 outside [-b,-a] for every module sheaf M in degree zero. P is perfect in the sense of [lem-sfb-ringed-site-perfect-duality] (locally a bounded complex of direct summands of finite free A_S-modules), so its canonical evaluation comparison P^\\vee\\otimes_A^LN\\to\\mathscr H_S(P,N) is an isomorphism. Since H^j(N)=0 outside [c,d], \\tau_{\\le c}N=H^c(N)[-c] and \\tau_{\\le d}N=N; apply the successive truncation triangles \\tau_{\\le n-1}N\\to\\tau_{\\le n}N\\to H^n(N)[-n] of [def-kun-truncations] for n=c+1,\\dots,d. Tensoring each triangle by P^\\vee remains distinguished by [lem-kun-derived-tensor-triangulated]; P^\\vee\\otimes^L H^n(N)[-n] has cohomology in [n-b,n-a] by the Tor amplitude, and the long exact cohomology sequence [lem-sf-derived-homology-long-exact] gives inductively that P^\\vee\\otimes^L\\tau_{\\le n}N has cohomology in [c-b,n-a]. Hence \\mathscr H_S(P,N) has cohomology only in [c-b,d-a]. By step 1, g^*P satisfies the same hypothesis on the covering U' with models g_U^*E in [a,b], and g^*N has cohomology only in [c,d] because g^* is exact [prop-weil-pbc-inverse-image-modules-exact]; the same argument on S' bounds \\mathscr H_{S'}(g^*P,g^*N).",
-   "uses": [
-    "lem-sf-etale-local-dual-interval",
-    "lem-sfb-ringed-site-perfect-duality",
-    "def-kun-truncations",
-    "lem-kun-derived-tensor-triangulated",
-    "lem-sf-derived-homology-long-exact",
+    "lem-sf-source-etale-site-perfect-dualizable",
     "prop-weil-pbc-inverse-image-modules-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM7, case (1), with the bounded cohomology interval obtained by finite truncation and the long exact cohomology sequence"
-   }
+   "elementary": false
   },
   {
-   "text": "The local chain isomorphisms in step 2 agree on refinements: the RHom restriction comparison of [lem-weil-pbc-ringed-internal-hom-exact-restriction] together with the evaluation and transpose restriction identities of [lem-weil-pbc-ringed-slice-evaluation-transpose] identifies every refinement with the same canonical map. Choose representatives and take cohomology; exact inverse image from [prop-weil-pbc-inverse-image-modules-exact] identifies the cohomology of a restriction with the restriction of the cohomology. Each cohomology-sheaf map of the global map beta (step 5) is an isomorphism on the covering localized charts U', so [lem-sfb-sheaf-cover-local-isomorphism] makes it an isomorphism globally; a map of complexes inducing isomorphisms on all cohomology sheaves is an isomorphism in D(S'_{\\mathrm{et}},A).",
+   "text": "On a trivializing chart every term is a retract of a dualizable constant finite power, hence flat. The bounded flat-complex theorem [lem-kun-flat-bounded-tor-amplitude] gives Tor amplitude [a,b] for each restricted P. For every degree-zero sheaf F, derived pullback commutes with tensor and with F[0]; cohomology of its pullback is the exact inverse image of cohomology [prop-weil-pbc-inverse-image-modules-exact]. Thus each cohomology sheaf of P tensor F[0] outside [a,b] vanishes on every member of the cover. Jointly surjective etale inverse images reflect isomorphisms [lem-sfb-sheaf-cover-local-isomorphism]; applying this to the zero endomorphism of that cohomology sheaf shows it is zero globally. Hence P has Tor amplitude [a,b]. In Lean the descent uses isIso_of_isIso_upperStar_map_of_jointlySurjective and leftDerivedUpperStarHomologyFunctorIso directly.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-kun-flat-bounded-tor-amplitude",
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-sfb-sheaf-cover-local-isomorphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM7, case (1), final locality and gluing step; slice evaluation-transpose compatibility"
-   }
+   "elementary": false
   },
   {
-   "text": "The derived evaluation and transpose are those of the closed structure of [lem-sf-ringed-derived-closed-symmetric-monoidal]: a morphism u:T\\to\\mathscr H(L,M) corresponds to \\mathrm{ev}\\circ(u\\otimes1_L), so beta_{P,N} is the unique morphism with \\mathrm{ev}\\circ(\\beta\\otimes1)=g^*\\mathrm{ev}_{P,N} after the identification of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. On a chart, with the representative normalization of [def-coef-ringed-tensor-hom-model] and the representative evaluation of [def-coef-hom-representative-evaluation], the derived evaluation on \\mathcal Hom^\\bullet(E,I(F))\\otimes E is represented (after a K-flat replacement of the first factor; E is bounded with flat terms) by componentwise evaluation x\\otimes y\\mapsto\\phi(x)(y); the bounded-free model map \\mathcal Hom^\\bullet(E,F)\\to\\mathcal Hom^\\bullet(E,I(F)) of [lem-weil-pbc-ringed-site-bounded-free-rhom-model] is induced by F\\to I(F) and so commutes with componentwise evaluation. The same holds on U' for g_U^*E and g_U^*F. The map c_{E,F} of [lem-sf-etale-hom-complex-pullback] is defined by currying the pulled-back termwise evaluation, and [lem-sf-etale-finite-projective-pullback-hom] makes the evaluation square commute on each E^i and F^j; summing the finitely many bidegrees and representing the tensor pullback comparison termwise on these K-flat models [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives \\mathrm{ev}\\circ(Q(c_{E,F})\\otimes1)=g_U^*\\mathrm{ev} on U'. By uniqueness of transposes Q(c_{E,F}) represents the restriction of beta to U', using the restriction identities of [lem-weil-pbc-ringed-slice-evaluation-transpose] and step 1 to identify restriction of the global evaluation and transpose with the chart ones. Thus beta is the evaluation-induced comparison of the statement, and step 2 shows it is a chart-wise isomorphism.",
+   "text": "The two-sided dual D of P has Tor amplitude [-b,-a] by [lem-sf-source-dual-tor-interval]. Since N has cohomology in [c,d], the tensor interval theorem [lem-sf-source-tensor-cohomology-interval] bounds D tensor N in [-b+c,-a+d]=[c-b,d-a]. The canonical dual-tensor identification [lem-sf-source-etale-dualizable-hom-comparison], implemented by derivedHomIsoDerivedTensorOfExactPairing, transfers this interval to RHom(P,N).",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "def-coef-ringed-tensor-hom-model",
-    "def-coef-hom-representative-evaluation",
-    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "lem-sf-etale-hom-complex-pullback",
-    "lem-sf-etale-finite-projective-pullback-hom",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+    "lem-sf-source-dual-tor-interval",
+    "lem-sf-source-tensor-cohomology-interval",
+    "lem-sf-source-etale-dualizable-hom-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM7, case (1), evaluation compatibility and identification of the canonical comparison; Tag 08JI Hom-model normalization"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Let beta be asIso of the canonical derivedHomUpperStarComparison. It is invertible by [lem-sf-source-etale-dualizable-hom-comparison]. The defining evaluation equation derivedHomUpperStarComparison_ev follows from the tensor-Hom transpose; braidedness leftDerivedUpperStar_mu_map_braiding_hom and braiding naturality move evaluation from P tensor RHom(P,N) to the order RHom(P,N) tensor P used in the statement. The proved private generic helper perfectHomComparison_eval performs this reassociation, identifying the inverse tensor comparison with the monoidal multiplication by cancellation against the forward comparison and identifying derivedTensorSymmetry with the canonical derived braiding. No alternative comparison map is chosen. The transparent definition derivedHomRightEvaluation names precisely the displayed symmetry followed by the counit; both local evaluation lets use this same composite, with definitional equality to the old spelling. Generic private wrappers align the Tor-amplitude monoidal structures before specializing to ModuleCat.",
+   "uses": [
+    "lem-sf-source-etale-dualizable-hom-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse image transports the established cohomology bound for RHom(P,N) to its derived pullback [prop-weil-pbc-inverse-image-modules-exact]. Apply the homology functor to beta and compose with the inverse of leftDerivedUpperStarHomologyFunctorIso to transfer that bound to RHom(g*P,g*N). Assemble the two bounds, beta, and the evaluation equation.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-coef-hom-representative-evaluation",
-  "def-coef-ringed-tensor-hom-model",
-  "def-kun-truncations",
-  "lem-kun-derived-tensor-triangulated",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-etale-finite-projective-pullback-hom",
-  "lem-sf-etale-hom-complex-pullback",
-  "lem-sf-etale-local-dual-interval",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sfb-ringed-site-perfect-duality",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-kun-tensor-sym",
+  "lem-sf-source-dual-tor-interval",
+  "lem-sf-source-etale-dualizable-hom-comparison",
+  "lem-sf-source-etale-site-perfect-dualizable",
+  "lem-sf-source-tensor-cohomology-interval",
   "lem-sfb-sheaf-cover-local-isomorphism",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-  "lem-weil-pbc-ringed-slice-evaluation-transpose",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0GM7, lemma-pullback-internal-hom, case (1), expanded using Tag 08DM strictly-perfect Hom models."
+  "place": "Tags 08DQ and 0GM7(1), shorter source-library dualizability proof; fixed Tor interval descended from the given etale models, then reflected under duality. Every non-elementary source tool is attached by the new source-tool nodes."
  },
  "mathlib_searches": [
   {
@@ -208,10 +167,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-kun-derived-tensor-triangulated",
-  "lem-sfb-ringed-derived-monoidal-comparisons"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -232,10 +188,24 @@
   "module": "Sheaf.SixFunctors.EtaleGenericPerfectHom",
   "declaration": "AlgebraicGeometry.Etale.etaleGenericPerfectHom",
   "file": "lean/Sheaf/SixFunctors/EtaleGenericPerfectHom.lean",
-  "statement": "theorem etaleGenericPerfectHom (A : Type (u + 1)) [CommRing A] [Finite A] {S S' : Scheme.{u}} (g : S' ⟶ S) (a b c d : ℤ) (hab : a ≤ b) (hcd : c ≤ d) (P N : DerivedCategoryModule A S) (hP : ∃ U : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : U.I₀, ∃ E : CochainComplex (Sheaf (U.X i).smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, Nonempty (DerivedCategory.Q.obj E ≅ (Etale.upperStar (ModuleCat.{u + 1} A) (U.f i)).mapDerivedCategory.obj P) ∧ (∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n)) ∧ (∀ n : ℤ, ∃ r : ℕ, ∃ ι : E.X n ⟶ (constantSheaf (U.X i).smallEtaleTopology (ModuleCat.{u + 1} A)).obj (ModuleCat.of A (Fin r → A)), ∃ π : (constantSheaf (U.X i).smallEtaleTopology (ModuleCat.{u + 1} A)).obj (ModuleCat.of A (Fin r → A)) ⟶ E.X n, ι ≫ π = 𝟙 (E.X n))) (hN : ∀ n : ℤ, n < c ∨ d < n → IsZero ((DerivedCategory.homologyFunctor (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) n).obj N)) : let H : DerivedCategoryModule A S := ((RHom(S)[ModuleCat.{u + 1} A]).obj (op P)).obj N let P' : DerivedCategoryModule A S' := (Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).obj P let N' : DerivedCategoryModule A S' := (Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).obj N let H' : DerivedCategoryModule A S' := ((RHom(S')[ModuleCat.{u + 1} A]).obj (op P')).obj N' let ev : ((derivedTensor (ModuleCat.{u + 1} A) S).obj H).obj P ⟶ N := by simpa [H] using ((derivedTensorSymmetry (ModuleCat.{u + 1} A) S).hom.app H).app P ≫ (derivedTensorHomAdjunction (ModuleCat.{u + 1} A) P).counit.app N let ev' : ((derivedTensor (ModuleCat.{u + 1} A) S').obj H').obj P' ⟶ N' := by simpa [H', P', N'] using ((derivedTensorSymmetry (ModuleCat.{u + 1} A) S').hom.app H').app P' ≫ (derivedTensorHomAdjunction (ModuleCat.{u + 1} A) ((Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).obj P)).counit.app ((Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).obj N) ((∀ n : ℤ, n < c - b ∨ d - a < n → IsZero ((DerivedCategory.homologyFunctor (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) n).obj H)) ∧ (∀ n : ℤ, n < c - b ∨ d - a < n → IsZero ((DerivedCategory.homologyFunctor (Sheaf S'.smallEtaleTopology (ModuleCat.{u + 1} A)) n).obj H')) ∧ ∃ β : (Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).obj (((RHom(S)[ModuleCat.{u + 1} A]).obj (op P)).obj N) ≅ ((RHom(S')[ModuleCat.{u + 1} A]).obj (op P')).obj N', ((leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) g (((RHom(S)[ModuleCat.{u + 1} A]).obj (op P)).obj N) P).inv ≫ (Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).map ev) = ((derivedTensor (ModuleCat.{u + 1} A) S').map β.hom).app ((Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).obj P) ≫ ev')",
+  "statement": "theorem etaleGenericPerfectHom\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {S S' : Scheme.{u}} (g : S' ⟶ S)\n    (a b c d : ℤ) (hab : a ≤ b) (hcd : c ≤ d)\n    (P N : DerivedCategoryModule A S)\n    (hP : ∃ U : Scheme.Cover.{u} Scheme.etalePrecoverage S,\n      ∀ i : U.I₀,\n        ∃ E : CochainComplex\n            (Sheaf (U.X i).smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ,\n          Nonempty\n            (DerivedCategory.Q.obj E ≅\n              (Etale.upperStar (ModuleCat.{u + 1} A) (U.f i)).mapDerivedCategory.obj P) ∧\n          (∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n)) ∧\n          (∀ n : ℤ, ∃ r : ℕ,\n            ∃ ι : E.X n ⟶\n                (constantSheaf (U.X i).smallEtaleTopology\n                  (ModuleCat.{u + 1} A)).obj\n                  (ModuleCat.of A (Fin r → A)),\n            ∃ π :\n                (constantSheaf (U.X i).smallEtaleTopology\n                  (ModuleCat.{u + 1} A)).obj\n                  (ModuleCat.of A (Fin r → A)) ⟶ E.X n,\n              ι ≫ π = 𝟙 (E.X n)))\n    (hN : ∀ n : ℤ, n < c ∨ d < n →\n      IsZero ((DerivedCategory.homologyFunctor\n        (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) n).obj N)) :\n    let H : DerivedCategoryModule A S :=\n      ((RHom(S)[ModuleCat.{u + 1} A]).obj (op P)).obj N\n    let P' : DerivedCategoryModule A S' :=\n      (Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).obj P\n    let N' : DerivedCategoryModule A S' :=\n      (Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).obj N\n    let H' : DerivedCategoryModule A S' :=\n      ((RHom(S')[ModuleCat.{u + 1} A]).obj (op P')).obj N'\n    let ev := derivedHomRightEvaluation (ModuleCat.{u + 1} A) S P N\n    let ev' := derivedHomRightEvaluation (ModuleCat.{u + 1} A) S' P' N'\n    ((∀ n : ℤ, n < c - b ∨ d - a < n →\n        IsZero ((DerivedCategory.homologyFunctor\n          (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) n).obj H)) ∧\n      (∀ n : ℤ, n < c - b ∨ d - a < n →\n        IsZero ((DerivedCategory.homologyFunctor\n          (Sheaf S'.smallEtaleTopology (ModuleCat.{u + 1} A)) n).obj H')) ∧\n      ∃ β : (Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).obj\n          (((RHom(S)[ModuleCat.{u + 1} A]).obj (op P)).obj N) ≅\n          ((RHom(S')[ModuleCat.{u + 1} A]).obj (op P')).obj N',\n        ((leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) g\n            (((RHom(S)[ModuleCat.{u + 1} A]).obj (op P)).obj N) P).inv ≫\n            (Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).map ev) =\n          ((derivedTensor (ModuleCat.{u + 1} A) S').map β.hom).app\n            ((Functor.leftDerivedFunctor ((g)^*[ModuleCat.{u + 1} A])).obj P) ≫ ev')",
   "branch": "newtargets-dag",
   "by": "Q79",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedHomRightEvaluation",
+   "AlgebraicGeometry.Etale.etaleGenericPerfectHom"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-90510",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261020T051403-L-1662081",
+  "kind": "interface",
+  "note": "independent cc review: delivered etaleGenericPerfectHom (ev/ev' via derivedHomRightEvaluation) vs published old signature (defeq: old-signature theorem proved by exact); 4 existing:true source nodes vs FlatModel/InternalHom/SitePerfect decls; importer EtaleGenericExchangeAlgClosed compiled against delivery; axioms clean"
  }
 }

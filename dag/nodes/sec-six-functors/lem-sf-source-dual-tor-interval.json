@@ -1,0 +1,102 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "DerivedCategory.torAmplitudeIn_of_exactPairing; proof and surrounding hypotheses. Mathematical source: Stacks cohomology.tex, Tags 08DQ and 0GM7(1)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DQ and 0GM7(1); already implemented by the cited source-library declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex is dualizable, its dual has opposite Tor amplitude, and a monoidal pullback commutes with internal Hom",
+   "results": "LinearMap.IsPerfPair.flip; HomologicalComplex.instHasHomologyOppositeOp; LinearMap.flip.instIsPerfPair; HomologicalComplex.op; HomologicalComplex.opFunctor; HomologicalComplex.unop; LinearMap.IsPerfPair.dualEval; HomologicalComplex.homologyOpNatIso",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; reuse the existing source-library declaration stated in the Lean record."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyConcentratedIn\"",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; reuse the existing source-library declaration stated in the Lean record."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSitePerfect|torAmplitudeIn|isIso_ihomComparison_app_of_exactPairing",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; reuse the existing source-library declaration stated in the Lean record."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleGenericPerfectHom",
+  "date": "2026-10-19",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-etale-geometric-biduality",
+   "place": "Proof paragraph 4: finite-projective internal-Hom comparison on a stratum",
+   "via": [
+    "lem-sf-etale-generic-perfect-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-sf-source-dual-tor-interval",
+ "title": "A two-sided dual reverses a prescribed Tor interval",
+ "statement": "Let C be a braided closed monoidal Grothendieck abelian category with additive tensor and functorial flat resolutions, and choose D(C) with its canonical K-flat derived tensor. Let K,L in D(C) have exact pairings L,K and K,L. If K has Tor amplitude [a,b], then L has Tor amplitude [-b,-a]. Here Tor amplitude [r,s] means that tensoring with any object F of C placed in degree zero has cohomology only in [r,s]. No ordering or boundedness hypothesis beyond the stated amplitude is required.",
+ "proof": [
+  {
+   "text": "For a degree-zero object F, test L tensor F against the orthogonal descriptions of the standard t-structure. If Y is below -b, duality identifies maps Y to L tensor F with maps K tensor Y to F; the upper Tor bound makes their source concentrated below degree zero, so these maps vanish. If Y is above -a, the other exact pairing identifies maps L tensor F to Y with maps F to K tensor Y; the lower Tor bound again makes them vanish. The two orthogonality criteria give the reflected interval.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModel",
+  "declaration": "DerivedCategory.torAmplitudeIn_of_exactPairing",
+  "statement": "lemma torAmplitudeIn_of_exactPairing {a b : ℤ} {K L : DerivedCategory C} [ExactPairing L K]\n    [ExactPairing K L] (hK : torAmplitudeIn C a b K) : torAmplitudeIn C (-b) (-a) L",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-19",
+  "note": "Existing proved source declaration, read with all ambient section hypotheses; no new Lean statement or proof hole is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-90510",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261020T051403-L-1662081",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-90510",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261020T051403-L-1662081",
+  "kind": "interface",
+  "note": "independent cc review: delivered etaleGenericPerfectHom (ev/ev' via derivedHomRightEvaluation) vs published old signature (defeq: old-signature theorem proved by exact); 4 existing:true source nodes vs FlatModel/InternalHom/SitePerfect decls; importer EtaleGenericExchangeAlgClosed compiled against delivery; axioms clean"
+ }
+}
