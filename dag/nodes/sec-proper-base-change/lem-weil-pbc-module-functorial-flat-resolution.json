@@ -1,145 +1,150 @@
 {
-  "kind": "statement",
-  "stmt_deps": [],
-  "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
-    "place": "Module docstring: inheritance of closedness and the free-module functorial flat-resolution argument; the colimit tensor functor is constructed in lean/WeilConjectures/CategoryTheory/Monoidal/Mod/Tensor.lean."
+ "kind": "statement",
+ "stmt_deps": [],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
+  "place": "Module docstring: inheritance of closedness and the free-module functorial flat-resolution argument; the colimit tensor functor is constructed in lean/WeilConjectures/CategoryTheory/Monoidal/Mod/Tensor.lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Modules over a commutative algebra object in a Grothendieck abelian closed symmetric monoidal category are monoidal closed and admit functorial flat resolutions",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-15",
+   "verdict": "unavailable; source searches and LeanFinder/Loogle used instead"
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Modules over a commutative algebra object in a Grothendieck abelian closed symmetric monoidal category are monoidal closed and admit functorial flat resolutions",
-      "results": "Service unavailable: Internal Server Error.",
-      "date": "2026-10-15",
-      "verdict": "unavailable; source searches and LeanFinder/Loogle used instead"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The category of modules over a commutative monoid object in a closed symmetric monoidal category is monoidal closed",
-      "results": "ModuleCat.instMonoidalClosed, Rep.instMonoidalClosed, LightCondensed.instMonoidalClosedLightCondMod; these are concrete categories, not arbitrary internal modules.",
-      "date": "2026-10-15",
-      "verdict": "no generic match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating",
-      "results": "Exact special adjoint functor theorem found.",
-      "date": "2026-10-15",
-      "verdict": "used after proving colimit preservation for the actual relative tensor"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Free modules on flat objects admit a functorial flat resolution in an abelian monoidal category",
-      "results": "Module.Flat.of_projective, ModuleCat.projectiveResolution, Module.Flat.of_free; concrete module results only.",
-      "date": "2026-10-15",
-      "verdict": "no generic internal-module match"
-    },
-    {
-      "tool": "grep",
-      "query": "free.*flat|tensorLeft.*IsLeftAdjoint|isLeftAdjoint_of_preservesColimits_of_isSeparating",
-      "results": "Mathlib special adjoint theorem; no generic internal-module flatness lemma. Repository search found the proved older coequalizer tensor functor in Monoidal.Mod.Tensor and right-action laws in TensorRegular. Blueprint searches for flat resolution and closed monoidal found no identical generic statement. The ringed-space tensor-Hom adjunction node concerns a different, concrete category.",
-      "date": "2026-10-15",
-      "verdict": "reuse old tensor functor and prove the comparison and free-flat argument"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
-    "date": "2026-10-15",
-    "group": "F2"
+  {
+   "tool": "leanfinder",
+   "query": "The category of modules over a commutative monoid object in a closed symmetric monoidal category is monoidal closed",
+   "results": "ModuleCat.instMonoidalClosed, Rep.instMonoidalClosed, LightCondensed.instMonoidalClosedLightCondMod; these are concrete categories, not arbitrary internal modules.",
+   "date": "2026-10-15",
+   "verdict": "no generic match"
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-extension",
-      "place": "Proof paragraph choosing an integral lattice and rationalizing: generic module-category and flat-resolution infrastructure for the condensed receiving category of def-weil-pbc-condensed-e-module-category.",
-      "via": [
-        "def-weil-pbc-condensed-e-module-category",
-        "nt-target-proetale-e"
-      ]
-    },
-    "same_as": []
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating",
+   "results": "Exact special adjoint functor theorem found.",
+   "date": "2026-10-15",
+   "verdict": "used after proving colimit preservation for the actual relative tensor"
   },
-  "id": "lem-weil-pbc-module-functorial-flat-resolution",
-  "title": "Internal modules inherit functorial flat resolutions",
-  "statement": "Let C be a locally v-small Grothendieck abelian category with an additive closed symmetric monoidal structure, and R a commutative monoid object of C. Let Mod(C,R) be the category of left internal R-modules, with its relative tensor product defined as the coequalizer of the two R-actions. Suppose C admits a functor to its full subcategory of flat objects together with a natural epimorphism from that functor to the identity. Here flat means that both tensor functors are exact. Then Mod(C,R) admits such a functor and natural epimorphism as well.",
-  "proof": [
-    {
-      "text": "For a module M and ambient object F, exhibit the underlying action map M.X tensor (R tensor F) to M.X tensor F as a split coequalizer of the action and multiplication maps. The splitting inserts the unit to the right of M and to the right of R. Associativity of the right module action gives the relation; the two unit axioms give the section identities. This works also for zero objects and the zero algebra.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "The underlying relative tensor coequalizer and the preceding split coequalizer yield an isomorphism (M tensor_R free(F)).X isomorphic to M.X tensor F. Its composite with the quotient is the action map, so epimorphic cancellation proves naturality in M. If F is flat, the right-hand functor preserves finite limits, and forget R reflects them. The braiding handles tensoring on the other side. Closedness supplies preservation of finite colimits on both sides, hence free(F) is flat.",
-      "uses": [
-        "lem-weil-pbc-module-relative-tensor-adjoint"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Choose the given functorial flat resolution Lambda in C, whose resolution object is determined up to natural isomorphism by its specification only insofar as this is the supplied structure; no object is chosen from an unproved theorem. Define the actual module-resolution functor as forget R, then Lambda.F, then the inclusion of flat objects, then free R. Lift this explicit composite to the full subcategory of flat modules by the preceding flatness proof.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "Define its natural transformation at M as free applied to Lambda.pi at M.X followed by the free-forget counit at M. Functoriality, naturality of Lambda.pi, and counit naturality prove naturality. Free preserves epimorphisms because it is a left adjoint; the counit is epi by its split underlying map and the existing epi counit instance. Their composite is epi. Bundle the functor, transformation and epi proofs into HasFunctorialFlatResolution.",
-      "uses": [],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-module-relative-tensor-adjoint"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
-    "place": "Existing module-docstring argument for free flat modules, with the explicit coequalizer comparison and special adjoint theorem route formalized by F2; all steps are now proved."
+  {
+   "tool": "leanfinder",
+   "query": "Free modules on flat objects admit a functorial flat resolution in an abelian monoidal category",
+   "results": "Module.Flat.of_projective, ModuleCat.projectiveResolution, Module.Flat.of_free; concrete module results only.",
+   "date": "2026-10-15",
+   "verdict": "no generic internal-module match"
   },
-  "lean": {
-    "existing": false,
-    "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
-    "file": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
-    "declaration": "CategoryTheory.Mod.hasFunctorialFlatResolution",
-    "statement": "instance hasFunctorialFlatResolution [Abelian.HasFunctorialFlatResolution C] : Abelian.HasFunctorialFlatResolution (Mod C R)",
-    "branch": "sheaf-dag",
-    "by": "F2",
-    "date": "2026-10-15",
-    "note": "New DAG attachment in the delivered source module; existing instance signatures are unchanged."
-  },
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "X-6a485",
-    "group": "F2",
-    "result": "pass",
-    "landing": "20261015T154210-L-164098",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "X-6a485",
-    "group": "F2",
-    "result": "pass",
-    "landing": "20261015T154210-L-164098",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered module compiled cleanly; printed axioms are limited to propext, Classical.choice, Quot.sound; mechanical findings are none; direct importer DerivedCategory also compiles; statements and signatures are unchanged."
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "free.*flat|tensorLeft.*IsLeftAdjoint|isLeftAdjoint_of_preservesColimits_of_isSeparating",
+   "results": "Mathlib special adjoint theorem; no generic internal-module flatness lemma. Repository search found the proved older coequalizer tensor functor in Monoidal.Mod.Tensor and right-action laws in TensorRegular. Blueprint searches for flat resolution and closed monoidal found no identical generic statement. The ringed-space tensor-Hom adjunction node concerns a different, concrete category.",
+   "date": "2026-10-15",
+   "verdict": "reuse old tensor functor and prove the comparison and free-flat argument"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+  "date": "2026-10-15",
+  "group": "F2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof paragraph choosing an integral lattice and rationalizing: generic module-category and flat-resolution infrastructure for the condensed receiving category of def-weil-pbc-condensed-e-module-category.",
+   "via": [
+    "def-weil-pbc-condensed-e-module-category",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-weil-pbc-module-functorial-flat-resolution",
+ "title": "Internal modules inherit functorial flat resolutions",
+ "statement": "Let C be a locally v-small Grothendieck abelian category with an additive closed symmetric monoidal structure, and R a commutative monoid object of C. Let Mod(C,R) be the category of left internal R-modules, with its relative tensor product defined as the coequalizer of the two R-actions. Suppose C admits a functor to its full subcategory of flat objects together with a natural epimorphism from that functor to the identity. Here flat means that both tensor functors are exact. Then Mod(C,R) admits such a functor and natural epimorphism as well.",
+ "proof": [
+  {
+   "text": "For a module M and ambient object F, exhibit the underlying action map M.X tensor (R tensor F) to M.X tensor F as a split coequalizer of the action and multiplication maps. The splitting inserts the unit to the right of M and to the right of R. Associativity of the right module action gives the relation; the two unit axioms give the section identities. This works also for zero objects and the zero algebra.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The underlying relative tensor coequalizer and the preceding split coequalizer yield an isomorphism (M tensor_R free(F)).X isomorphic to M.X tensor F. Its composite with the quotient is the action map, so epimorphic cancellation proves naturality in M. If F is flat, the right-hand functor preserves finite limits, and forget R reflects them. The braiding handles tensoring on the other side. Closedness supplies preservation of finite colimits on both sides, hence free(F) is flat.",
+   "uses": [
+    "lem-weil-pbc-module-relative-tensor-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the given functorial flat resolution Lambda in C, whose resolution object is determined up to natural isomorphism by its specification only insofar as this is the supplied structure; no object is chosen from an unproved theorem. Define the actual module-resolution functor as forget R, then Lambda.F, then the inclusion of flat objects, then free R. Lift this explicit composite to the full subcategory of flat modules by the preceding flatness proof.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define its natural transformation at M as free applied to Lambda.pi at M.X followed by the free-forget counit at M. Functoriality, naturality of Lambda.pi, and counit naturality prove naturality. Free preserves epimorphisms because it is a left adjoint; the counit is epi by its split underlying map and the existing epi counit instance. Their composite is epi. Bundle the functor, transformation and epi proofs into HasFunctorialFlatResolution.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-relative-tensor-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
+  "place": "Existing module-docstring argument for free flat modules, with the explicit coequalizer comparison and special adjoint theorem route formalized by F2; all steps are now proved."
+ },
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+  "file": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
+  "declaration": "CategoryTheory.Mod.hasFunctorialFlatResolution",
+  "statement": "instance hasFunctorialFlatResolution [Abelian.HasFunctorialFlatResolution C] : Abelian.HasFunctorialFlatResolution (Mod C R)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-15",
+  "note": "New DAG attachment in the delivered source module; existing instance signatures are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-6a485",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261015T154210-L-164098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T211651-L-3486462",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Mod.hasFunctorialFlatResolution",
+   "CategoryTheory.Mod.monoidalClosed"
+  ],
+  "sorry_after": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

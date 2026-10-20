@@ -1,223 +1,238 @@
 {
-  "id": "lem-sfb-modobj-flat-resolutions",
-  "blueprint": {
-    "is": "lem-sfb-modobj-flat-resolutions",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Functorial flat resolutions of module objects",
-  "statement": "Let $\\mathcal C$ be a closed symmetric monoidal Grothendieck abelian category whose tensor\nproduct is additive in each variable, and let $\\mathcal R$ be a commutative monoid object.\nIn a monoidal abelian category, call an object $F$ *flat* if $F\\otimes-$ and $-\\otimes F$\nare exact. A *functorial flat resolution* is a functor $P$ with flat values together with a\nnatural epimorphism $\\pi_M\\colon P(M)\\to M$. Suppose $\\mathcal C$ has a functorial flat\nresolution. Then so does $\\Mod_{\\mathcal R}(\\mathcal C)$, with the relative tensor product\nof [def-sfb-modobj-symmetric-tensor]. It is given by the free modules\n$\\mathcal R\\otimes P(M)$ and the maps\n$$\n\\mathcal R\\otimes P(M)\\xrightarrow{\\mathcal R\\otimes\\pi_M}\\mathcal R\\otimes M\n\\xrightarrow{\\gamma_M}M .\n$$",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.md",
-    "place": "node lem-sfb-modobj-flat-resolutions, order 1583"
-  },
-  "stmt_deps": [
-    "def-sfb-modobj-symmetric-tensor"
-  ],
-  "proof": [
-    {
-      "text": "Because $\\mathcal C$ is closed, tensoring with any fixed object is a left adjoint and therefore preserves colimits; in particular $\\mathcal R\\otimes-$ preserves finite colimits. Thus [lem-sfb-modobj-abelian] applies, and [def-sfb-modobj-symmetric-tensor] supplies the symmetric monoidal structure on $\\Mod_{\\mathcal R}(\\mathcal C)$.",
-      "uses": [
-        "lem-sfb-modobj-abelian",
-        "def-sfb-modobj-symmetric-tensor",
-        "def-sfb-modobj-internal-hom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
-        "place": "first paragraph"
-      }
-    },
-    {
-      "text": "Let $F$ be flat in $\\mathcal C$. The coequalizer description of the relative tensor product ([def-sfb-modobj-relative-tensor]) and the associativity and unit isomorphisms give a natural isomorphism $(\\mathcal R\\otimes F)\\otimes_{\\mathcal R}M\\cong F\\otimes(\\mathcal R\\otimes_{\\mathcal R}M)\\cong F\\otimes M$. Hence, after applying the forgetful functor, tensoring over $\\mathcal R$ with the free module $\\mathcal R\\otimes F$ is the exact functor $F\\otimes-$. The forgetful functor is faithful and preserves finite limits and colimits ([lem-sfb-modobj-forget-faithful], [lem-sfb-modobj-forget-left-exact], [lem-sfb-modobj-forget-right-exact]); the kernel and cokernel lemmas ([lem-sfb-modobj-kernels], [lem-sfb-modobj-cokernels]) identify these module-category limits and colimits with the underlying ones. It also reflects isomorphisms: if the underlying map of a module morphism is an isomorphism, its underlying inverse is module-linear by composing the module-linearity equation with that inverse. Hence exactness of the underlying sequence is equivalent to exactness in the module category. Therefore $(\\mathcal R\\otimes F)\\otimes_{\\mathcal R}-$ is exact, and symmetry from [def-sfb-modobj-symmetric-tensor] gives exactness of $-\\otimes_{\\mathcal R}(\\mathcal R\\otimes F)$. Thus $\\mathcal R\\otimes F$ is flat.",
-      "uses": [
-        "def-sfb-modobj-relative-tensor",
-        "def-sfb-modobj-symmetric-tensor",
-        "lem-sfb-modobj-forget-faithful",
-        "lem-sfb-modobj-forget-left-exact",
-        "lem-sfb-modobj-forget-right-exact",
-        "lem-sfb-modobj-kernels",
-        "lem-sfb-modobj-cokernels"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
-        "place": "second paragraph"
-      }
-    },
-    {
-      "text": "For each $M$, define $q_M=\\gamma_M\\circ(\\mathcal R\\otimes\\pi_M)$. The associativity law for the action makes $q_M$ $\\mathcal R$-linear, and naturality of $\\pi$ and of the action makes $q$ natural in $M$. Since $\\mathcal C$ is closed, $\\mathcal R\\otimes-$ preserves colimits and hence sends the epimorphism $\\pi_M$ to an epimorphism. The action map $\\gamma_M$ is split epic with section $(\\eta\\otimes M)\\lambda_M^{-1}$ by the unit law. Thus $q_M$ is a composite of epimorphisms, hence an epimorphism. By the preceding step, each source $\\mathcal R\\otimes P(M)$ is flat, so $q$ is the required functorial flat resolution.",
-      "uses": [
-        "def-sfb-modobj-internal-hom"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
-        "place": "third paragraph"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sfb-modobj-flat-resolutions",
+ "blueprint": {
+  "is": "lem-sfb-modobj-flat-resolutions",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Functorial flat resolutions of module objects",
+ "statement": "Let $\\mathcal C$ be a closed symmetric monoidal Grothendieck abelian category whose tensor\nproduct is additive in each variable, and let $\\mathcal R$ be a commutative monoid object.\nIn a monoidal abelian category, call an object $F$ *flat* if $F\\otimes-$ and $-\\otimes F$\nare exact. A *functorial flat resolution* is a functor $P$ with flat values together with a\nnatural epimorphism $\\pi_M\\colon P(M)\\to M$. Suppose $\\mathcal C$ has a functorial flat\nresolution. Then so does $\\Mod_{\\mathcal R}(\\mathcal C)$, with the relative tensor product\nof [def-sfb-modobj-symmetric-tensor]. It is given by the free modules\n$\\mathcal R\\otimes P(M)$ and the maps\n$$\n\\mathcal R\\otimes P(M)\\xrightarrow{\\mathcal R\\otimes\\pi_M}\\mathcal R\\otimes M\n\\xrightarrow{\\gamma_M}M .\n$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.md",
+  "place": "node lem-sfb-modobj-flat-resolutions, order 1583"
+ },
+ "stmt_deps": [
+  "def-sfb-modobj-symmetric-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Because $\\mathcal C$ is closed, tensoring with any fixed object is a left adjoint and therefore preserves colimits; in particular $\\mathcal R\\otimes-$ preserves finite colimits. Thus [lem-sfb-modobj-abelian] applies, and [def-sfb-modobj-symmetric-tensor] supplies the symmetric monoidal structure on $\\Mod_{\\mathcal R}(\\mathcal C)$.",
+   "uses": [
     "lem-sfb-modobj-abelian",
     "def-sfb-modobj-symmetric-tensor",
-    "def-sfb-modobj-internal-hom",
+    "def-sfb-modobj-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
+    "place": "first paragraph"
+   }
+  },
+  {
+   "text": "Let $F$ be flat in $\\mathcal C$. The coequalizer description of the relative tensor product ([def-sfb-modobj-relative-tensor]) and the associativity and unit isomorphisms give a natural isomorphism $(\\mathcal R\\otimes F)\\otimes_{\\mathcal R}M\\cong F\\otimes(\\mathcal R\\otimes_{\\mathcal R}M)\\cong F\\otimes M$. Hence, after applying the forgetful functor, tensoring over $\\mathcal R$ with the free module $\\mathcal R\\otimes F$ is the exact functor $F\\otimes-$. The forgetful functor is faithful and preserves finite limits and colimits ([lem-sfb-modobj-forget-faithful], [lem-sfb-modobj-forget-left-exact], [lem-sfb-modobj-forget-right-exact]); the kernel and cokernel lemmas ([lem-sfb-modobj-kernels], [lem-sfb-modobj-cokernels]) identify these module-category limits and colimits with the underlying ones. It also reflects isomorphisms: if the underlying map of a module morphism is an isomorphism, its underlying inverse is module-linear by composing the module-linearity equation with that inverse. Hence exactness of the underlying sequence is equivalent to exactness in the module category. Therefore $(\\mathcal R\\otimes F)\\otimes_{\\mathcal R}-$ is exact, and symmetry from [def-sfb-modobj-symmetric-tensor] gives exactness of $-\\otimes_{\\mathcal R}(\\mathcal R\\otimes F)$. Thus $\\mathcal R\\otimes F$ is flat.",
+   "uses": [
     "def-sfb-modobj-relative-tensor",
+    "def-sfb-modobj-symmetric-tensor",
     "lem-sfb-modobj-forget-faithful",
     "lem-sfb-modobj-forget-left-exact",
     "lem-sfb-modobj-forget-right-exact",
     "lem-sfb-modobj-kernels",
     "lem-sfb-modobj-cokernels"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
-    "place": "## Proof (expanded from blueprint route)"
+    "place": "second paragraph"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "functorial flat resolutions in module objects over a commutative monoid object",
-      "results": "Module.Flat, Module.Flat.of_free, ModuleCat.projectiveResolution and related module flatness declarations in Mathlib/RingTheory/Flat/Basic and Mathlib/Algebra/Category/ModuleCat/LeftResolution",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary module flatness/projective resolutions do not state the categorical module-object lemma"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Abelian.HasFunctorialFlatResolution, CategoryTheory.Mod, tensor",
-      "results": "0 hits; unknown identifier 'CategoryTheory.Abelian.HasFunctorialFlatResolution'",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "hasFunctorialFlatResolution|FunctorialFlatResolution|relative tensor [Mathlib/CategoryTheory]",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "free module objects over a commutative monoid inherit functorial flat resolutions",
-      "results": "Module.Flat.of_free, ModuleCat.free, ModuleCat.instProjectiveObjFree and related ordinary module declarations",
-      "date": "2026-10-16",
-      "verdict": "no match: no categorical module-object functorial-resolution theorem"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "free module R tensor F is flat when F is flat",
-      "results": "Module.Flat.of_free, Module.Flat.instTensorProduct, Module.Flat.baseChange and related ordinary module results",
-      "date": "2026-10-16",
-      "verdict": "no match: these concern ordinary semiring modules, not relative tensor module objects"
-    },
-    {
-      "tool": "loogle",
-      "query": "IsFlat, TensorProduct, ModuleCat.hasFunctorialFlatResolution",
-      "results": "0 hits; unknown identifier 'IsFlat'",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "IsFlat|hasFunctorialFlatResolution [Mathlib/Algebra]",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "lean_not_found",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1583,
-  "blueprint_uses": [
-    "def-sfb-modobj-symmetric-tensor",
-    "lem-sfb-modobj-abelian",
-    "lem-sfb-modobj-forget-faithful",
-    "lem-sfb-modobj-forget-left-exact",
-    "lem-sfb-modobj-forget-right-exact"
-  ],
-  "blueprint_lean": [
-    "CategoryTheory.Mod.hasFunctorialFlatResolution"
-  ],
-  "blueprint_lean_not_found": [
-    "CategoryTheory.Mod.hasFunctorialFlatResolution"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-sfb-modobj-flat-resolutions",
-    "worker": "stage1",
-    "summary": "Audited the imported three-paragraph proof. Added the closedness-to-colimit hypothesis needed for the abelian/module structure, made the relative-tensor identification and exactness reflection explicit using the cited forgetful-functor statements, and completed the naturality, linearity, and epimorphism argument for the resolution map. No new child node was needed: the remaining categorical facts are elementary consequences of the hypotheses and definitions.",
-    "blueprint": "Steps realize the first, second, and third paragraphs of lem-sfb-modobj-flat-resolutions.proof.md, with the third paragraph expanded to justify right exactness, the split section, and naturality."
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-Q13-c4c5445b7",
-    "group": "Q13",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-c4c5445b7 (reviewer sub-agent of L); spot-checked: Read the item, blueprint proof, all cited node statements and sources, route, and delivery materials. Step 2 incorrectly claimed that faithfulness plus preservation of finite limits and colimits reflects exactness. I wrote a corrected DAG JSON adding the existing kernel/cokernel lemmas and the missing conservativity argument for the forgetful functor. Review: review.md.; 1 file(s) fixed by the reviewer"
-  },
-  "chapter": "sec-proetale-coefficients",
-  "unit": "sk-prop-sfb-module-category",
-  "lean_audit": {
-    "master": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "CategoryTheory.Mod.hasFunctorialFlatResolution",
-          "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
-          "lines": [
-            67,
-            71
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "CategoryTheory.Mod.hasFunctorialFlatResolution",
-          "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
-          "lines": [
-            67,
-            71
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "lean": {
-    "existing": true,
-    "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
-    "declaration": "CategoryTheory.Mod.hasFunctorialFlatResolution",
-    "statement": "instance hasFunctorialFlatResolution [Abelian.HasFunctorialFlatResolution C] :\n    Abelian.HasFunctorialFlatResolution (Mod C R) :=",
-    "branch": "slopmaster2",
-    "by": "NF",
-    "date": "2026-10-18",
-    "note": "The current published source, read with scompile.py --source, defines this exact instance in namespace CategoryTheory.Mod. Its closed symmetric monoidal Grothendieck abelian assumptions and the free-module resolution construction are documented in the declaration docstring; no second declaration is needed."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-c0677fd96",
-    "group": "NF",
-    "result": "pass",
-    "note": "Existing match: the item's lean field is set to CategoryTheory.Mod.hasFunctorialFlatResolution in WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian; the signature is verbatim the same in the side clone and the live source; only the lean field differs from the base node. Hypotheses are one-to-one: MonoidalClosed, Symmetric, Abelian with IsGrothendieckAbelian.{v}, MonoidalPreadditive, MonObj with IsCommMonObj, plus the HasFunctorialFlatResolution C hypothesis. flat means exactness of tensorLeft and tensorRight; HasFunctorialFlatResolution is a Mathlib LeftResolution with epi components; the Mod C R tensor is the relative one (Mod.monoidalCategory, Mod.symmetricCategory). The construction clause is in the docstrings, and the live proof uses free R and the counit, i.e. gamma_M after R tensor pi_M. nt_compile check file is clean in 1.5 s; the axioms are only propext, Classical.choice and Quot.sound (no sorry in live); the example with the node's hypotheses gets the instance by inferInstance. The report has real Worker report and Second reading sections. No findings."
+  {
+   "text": "For each $M$, define $q_M=\\gamma_M\\circ(\\mathcal R\\otimes\\pi_M)$. The associativity law for the action makes $q_M$ $\\mathcal R$-linear, and naturality of $\\pi$ and of the action makes $q$ natural in $M$. Since $\\mathcal C$ is closed, $\\mathcal R\\otimes-$ preserves colimits and hence sends the epimorphism $\\pi_M$ to an epimorphism. The action map $\\gamma_M$ is split epic with section $(\\eta\\otimes M)\\lambda_M^{-1}$ by the unit law. Thus $q_M$ is a composite of epimorphisms, hence an epimorphism. By the preceding step, each source $\\mathcal R\\otimes P(M)$ is flat, so $q$ is the required functorial flat resolution.",
+   "uses": [
+    "def-sfb-modobj-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
+    "place": "third paragraph"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-sfb-modobj-abelian",
+  "def-sfb-modobj-symmetric-tensor",
+  "def-sfb-modobj-internal-hom",
+  "def-sfb-modobj-relative-tensor",
+  "lem-sfb-modobj-forget-faithful",
+  "lem-sfb-modobj-forget-left-exact",
+  "lem-sfb-modobj-forget-right-exact",
+  "lem-sfb-modobj-kernels",
+  "lem-sfb-modobj-cokernels"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
+  "place": "## Proof (expanded from blueprint route)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "functorial flat resolutions in module objects over a commutative monoid object",
+   "results": "Module.Flat, Module.Flat.of_free, ModuleCat.projectiveResolution and related module flatness declarations in Mathlib/RingTheory/Flat/Basic and Mathlib/Algebra/Category/ModuleCat/LeftResolution",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module flatness/projective resolutions do not state the categorical module-object lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.HasFunctorialFlatResolution, CategoryTheory.Mod, tensor",
+   "results": "0 hits; unknown identifier 'CategoryTheory.Abelian.HasFunctorialFlatResolution'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hasFunctorialFlatResolution|FunctorialFlatResolution|relative tensor [Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "free module objects over a commutative monoid inherit functorial flat resolutions",
+   "results": "Module.Flat.of_free, ModuleCat.free, ModuleCat.instProjectiveObjFree and related ordinary module declarations",
+   "date": "2026-10-16",
+   "verdict": "no match: no categorical module-object functorial-resolution theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "free module R tensor F is flat when F is flat",
+   "results": "Module.Flat.of_free, Module.Flat.instTensorProduct, Module.Flat.baseChange and related ordinary module results",
+   "date": "2026-10-16",
+   "verdict": "no match: these concern ordinary semiring modules, not relative tensor module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFlat, TensorProduct, ModuleCat.hasFunctorialFlatResolution",
+   "results": "0 hits; unknown identifier 'IsFlat'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlat|hasFunctorialFlatResolution [Mathlib/Algebra]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1583,
+ "blueprint_uses": [
+  "def-sfb-modobj-symmetric-tensor",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-modobj-forget-faithful",
+  "lem-sfb-modobj-forget-left-exact",
+  "lem-sfb-modobj-forget-right-exact"
+ ],
+ "blueprint_lean": [
+  "CategoryTheory.Mod.hasFunctorialFlatResolution"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.Mod.hasFunctorialFlatResolution"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-modobj-flat-resolutions",
+  "worker": "stage1",
+  "summary": "Audited the imported three-paragraph proof. Added the closedness-to-colimit hypothesis needed for the abelian/module structure, made the relative-tensor identification and exactness reflection explicit using the cited forgetful-functor statements, and completed the naturality, linearity, and epimorphism argument for the resolution map. No new child node was needed: the remaining categorical facts are elementary consequences of the hypotheses and definitions.",
+  "blueprint": "Steps realize the first, second, and third paragraphs of lem-sfb-modobj-flat-resolutions.proof.md, with the third paragraph expanded to justify right exactness, the split section, and naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q13-c4c5445b7",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-c4c5445b7 (reviewer sub-agent of L); spot-checked: Read the item, blueprint proof, all cited node statements and sources, route, and delivery materials. Step 2 incorrectly claimed that faithfulness plus preservation of finite limits and colimits reflects exactness. I wrote a corrected DAG JSON adding the existing kernel/cokernel lemmas and the missing conservativity argument for the forgetful functor. Review: review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-module-category",
+ "lean_audit": {
+  "master": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.hasFunctorialFlatResolution",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+     "lines": [
+      67,
+      71
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.hasFunctorialFlatResolution",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+     "lines": [
+      67,
+      71
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+  "declaration": "CategoryTheory.Mod.hasFunctorialFlatResolution",
+  "statement": "instance hasFunctorialFlatResolution [Abelian.HasFunctorialFlatResolution C] :\n    Abelian.HasFunctorialFlatResolution (Mod C R) :=",
+  "branch": "slopmaster2",
+  "by": "NF",
+  "date": "2026-10-18",
+  "note": "The current published source, read with scompile.py --source, defines this exact instance in namespace CategoryTheory.Mod. Its closed symmetric monoidal Grothendieck abelian assumptions and the free-module resolution construction are documented in the declaration docstring; no second declaration is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0677fd96",
+  "group": "NF",
+  "result": "pass",
+  "note": "Existing match: the item's lean field is set to CategoryTheory.Mod.hasFunctorialFlatResolution in WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian; the signature is verbatim the same in the side clone and the live source; only the lean field differs from the base node. Hypotheses are one-to-one: MonoidalClosed, Symmetric, Abelian with IsGrothendieckAbelian.{v}, MonoidalPreadditive, MonObj with IsCommMonObj, plus the HasFunctorialFlatResolution C hypothesis. flat means exactness of tensorLeft and tensorRight; HasFunctorialFlatResolution is a Mathlib LeftResolution with epi components; the Mod C R tensor is the relative one (Mod.monoidalCategory, Mod.symmetricCategory). The construction clause is in the docstrings, and the live proof uses free R and the counit, i.e. gamma_M after R tensor pi_M. nt_compile check file is clean in 1.5 s; the axioms are only propext, Classical.choice and Quot.sound (no sorry in live); the example with the node's hypotheses gets the instance by inferInstance. The report has real Worker report and Second reading sections. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261020T211651-L-3486462",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Mod.hasFunctorialFlatResolution",
+   "CategoryTheory.Mod.monoidalClosed"
+  ],
+  "sorry_after": []
+ }
 }
