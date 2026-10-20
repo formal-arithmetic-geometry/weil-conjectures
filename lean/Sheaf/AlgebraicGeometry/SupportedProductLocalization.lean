@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q06
+Authors: SHEAF groups Q06 and H6
 -/
 module
 
@@ -324,11 +324,77 @@ noncomputable def supportedExternalProductMap (A : Type (u + 1)) [CommRing A]
     ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map e) ≫
     (supportedExternalProductIso (ModuleCat.{u + 1} A) f g K' L').inv
 
+/-- Pulling a counit through natural comparison isomorphisms preserves naturality. -/
+private theorem evaluation_naturality
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    {F : B ⥤ C} {G : C ⥤ B} (adj : F ⊣ G)
+    (P Q : C ⥤ D) (H : B ⥤ D) (α : H ≅ F ⋙ P) (β : Q ≅ P)
+    {K K' : C} (a : K ⟶ K') :
+    H.map (G.map a) ≫ α.hom.app (G.obj K') ≫
+        P.map (adj.counit.app K') ≫ β.inv.app K' =
+      (α.hom.app (G.obj K) ≫ P.map (adj.counit.app K) ≫ β.inv.app K) ≫ Q.map a := by
+  rw [α.hom.naturality_assoc]
+  simp only [Functor.comp_map, Category.assoc]
+  have ha := adj.counit.naturality a
+  dsimp only [Functor.comp_map, Functor.id_map] at ha
+  rw [← P.map_comp_assoc, ha]
+  simp only [P.map_comp, Category.assoc]
+  exact congrArg (fun t ↦ α.hom.app (G.obj K) ≫ P.map (adj.counit.app K) ≫ t)
+    (β.inv.naturality a)
+
+/-- A bifunctor carries two commuting squares to a commuting square. -/
+private theorem bifunctor_square
+    {B C D : Type*} [Category B] [Category C] [Category D] (F : B ⥤ C ⥤ D)
+    {X₀ X₁ X₂ X₃ : B} {Y₀ Y₁ Y₂ Y₃ : C}
+    (a : X₀ ⟶ X₁) (b : X₁ ⟶ X₃) (c : X₀ ⟶ X₂) (d : X₂ ⟶ X₃)
+    (e : Y₀ ⟶ Y₁) (f : Y₁ ⟶ Y₃) (g : Y₀ ⟶ Y₂) (h : Y₂ ⟶ Y₃)
+    (hx : a ≫ b = c ≫ d) (hy : e ≫ f = g ≫ h) :
+    ((F.map a).app Y₀ ≫ (F.obj X₁).map e) ≫
+        ((F.map b).app Y₁ ≫ (F.obj X₃).map f) =
+      ((F.map c).app Y₀ ≫ (F.obj X₂).map g) ≫
+        ((F.map d).app Y₂ ≫ (F.obj X₃).map h) := by
+  calc
+    _ = (F.map (a ≫ b)).app Y₀ ≫ (F.obj X₃).map (e ≫ f) := by
+      simp only [F.map_comp, NatTrans.comp_app, Functor.map_comp, Category.assoc]
+      rw [(F.map b).naturality_assoc]
+    _ = (F.map (c ≫ d)).app Y₀ ≫ (F.obj X₃).map (g ≫ h) := by rw [hx, hy]
+    _ = _ := by
+      simp only [F.map_comp, NatTrans.comp_app, Functor.map_comp, Category.assoc]
+      rw [(F.map d).naturality_assoc]
+
+/-- Transposing a natural coefficient comparison and two natural evaluations gives
+an adjoint pairing square. All categorical rewriting is done before specialization. -/
+private theorem adjoint_pairing_square
+    {B C : Type*} [Category B] [Category C] [MonoidalCategory B]
+    {F : B ⥤ C} {G : C ⥤ B} (adj : F ⊣ G)
+    (T : C ⥤ C ⥤ C) (H₁ H₂ : B ⥤ C)
+    {M M' N N' : B} (a : M ⟶ M') (b : N ⟶ N')
+    {X X' Y Y' : C} (f : X ⟶ X') (g : Y ⟶ Y')
+    (e₁ : H₁.obj M ⟶ X) (e₁' : H₁.obj M' ⟶ X')
+    (e₂ : H₂.obj N ⟶ Y) (e₂' : H₂.obj N' ⟶ Y')
+    (t : F.obj (M ⊗ N) ⟶ (T.obj (H₁.obj M)).obj (H₂.obj N))
+    (t' : F.obj (M' ⊗ N') ⟶ (T.obj (H₁.obj M')).obj (H₂.obj N'))
+    (ht : F.map (a ⊗ₘ b) ≫ t' =
+      t ≫ (T.map (H₁.map a)).app (H₂.obj N) ≫ (T.obj (H₁.obj M')).map (H₂.map b))
+    (he₁ : H₁.map a ≫ e₁' = e₁ ≫ f) (he₂ : H₂.map b ≫ e₂' = e₂ ≫ g) :
+    (a ⊗ₘ b) ≫ adj.homEquiv _ _
+        (t' ≫ (T.map e₁').app (H₂.obj N') ≫ (T.obj X').map e₂') =
+      adj.homEquiv _ _ (t ≫ (T.map e₁).app (H₂.obj N) ≫ (T.obj X).map e₂) ≫
+        G.map ((T.map f).app Y ≫ (T.obj X').map g) := by
+  apply adj.homEquiv_naturality_left_square
+  rw [← Category.assoc, ← Category.assoc, ht]
+  simpa only [Category.assoc] using congrArg (fun z ↦ t ≫ z)
+    (bifunctor_square T _ _ _ _ _ _ _ _ he₁ he₂)
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Naturality of every specified exterior-product component under coefficient morphisms.
 Source: Tag 0F1E (blueprint: lem-pur-supported-product-localization).
-Proof: evaluation and the coefficient tensor map are natural in both variables. Apply
-that naturality to their composite and then the natural supported-coefficient adjunction.
-The argument applies also on each open product, hence to all three triangle components. -/
+Proof: pull the naturality square of each supported adjunction counit through the
+exact pullback composition comparison and the comparison with total derived pullback.
+The naturality clause of the normalized derived coefficient tensor map then reduces
+the transposed pairing square to these two evaluation squares, using bifunctoriality
+of derived tensor. Transpose back with the supported derived adjunction. The argument
+applies on every open product as well, so covers all three specified components. -/
 theorem supportedProductLocalization_naturality (A : Type (u + 1)) [CommRing A]
     {S X Y B D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X) (d : D ⟶ Y)
     [IsClosedImmersion b] [IsClosedImmersion d]
@@ -339,7 +405,45 @@ theorem supportedProductLocalization_naturality (A : Type (u + 1)) [CommRing A]
       supportedExteriorProduct A f g b d K L ≫
         (supportedSectionsDerived A (supportedProductImmersion f g b d)).map
           (supportedExternalProductMap A f g a e) := by
-  sorry
+  have ev₁ := evaluation_naturality (supportedCoefficientDerivedAdjunction A b)
+    ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).mapDerivedCategory)
+    ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor)
+    ((supportedFirstCoefficients A f g b).mapDerivedCategory)
+    (Functor.mapDerivedCategoryCompIso (supportedCoefficients A b)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)))
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
+      (pullback.fst f g)) a
+  have ev₂ := evaluation_naturality (supportedCoefficientDerivedAdjunction A d)
+    ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).mapDerivedCategory)
+    ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor)
+    ((supportedSecondCoefficients A f g d).mapDerivedCategory)
+    (Functor.mapDerivedCategoryCompIso (supportedCoefficients A d)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)))
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
+      (pullback.snd f g)) e
+  have hn := (exists_unique_supportedCoefficientTensorDerived A f g b d).choose_spec.1.1
+    _ _ _ _ ((supportedSectionsDerived A b).map a) ((supportedSectionsDerived A d).map e)
+  have hm : supportedExternalProductMap A f g a e =
+      supportedDerivedTensorMap A (pullback f g)
+        ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map a)
+        ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map e) := by
+    change (𝟙 _ ≫ supportedDerivedTensorMap A (pullback f g)
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map a)
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map e) ≫ 𝟙 _) = _
+    rw [Category.id_comp, Category.comp_id]
+  rw [hm]
+  exact adjoint_pairing_square
+    (supportedCoefficientDerivedAdjunction A (supportedProductImmersion f g b d))
+    (derivedTensor (ModuleCat.{u + 1} A) (pullback f g))
+    (supportedFirstCoefficients A f g b).mapDerivedCategory
+    (supportedSecondCoefficients A f g d).mapDerivedCategory
+    ((supportedSectionsDerived A b).map a) ((supportedSectionsDerived A d).map e)
+    ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map a)
+    ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map e)
+    (supportedFirstEvaluation A f g b K) (supportedFirstEvaluation A f g b K')
+    (supportedSecondEvaluation A f g d L) (supportedSecondEvaluation A f g d L')
+    (supportedCoefficientTensorDerived A f g b d _ _)
+    (supportedCoefficientTensorDerived A f g b d _ _) hn ev₁ ev₂
 
 /-- Naturality under open restriction of the first ambient scheme, for every
 support, hence for all three components of each localization diagram.
@@ -411,3 +515,4 @@ theorem supportedProductLocalization_openRows (A : Type (u + 1)) [CommRing A]
   sorry
 
 end AlgebraicGeometry.Etale
+
