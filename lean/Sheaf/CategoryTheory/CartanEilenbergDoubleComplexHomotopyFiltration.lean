@@ -5,9 +5,9 @@ Authors: SHEAF group Q4
 -/
 module
 
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
 public import Mathlib.Algebra.Homology.Homotopy
-import all Sheaf.CategoryTheory.DoubleComplexTotal
+import all WeilConjectures.CategoryTheory.DoubleComplexTotal
 
 /-! Factorization of a componentwise lower-vertical-degree homotopy through the
 second filtration. (blueprint: lem-sp-cartan-eilenberg-double-complex-homotopy-filtration)

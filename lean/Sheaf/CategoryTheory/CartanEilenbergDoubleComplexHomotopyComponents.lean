@@ -6,7 +6,7 @@ Authors: SHEAF group Q4
 module
 
 public import WeilConjectures.CategoryTheory.CartanEilenbergExists
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.Homotopy
 import Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy
