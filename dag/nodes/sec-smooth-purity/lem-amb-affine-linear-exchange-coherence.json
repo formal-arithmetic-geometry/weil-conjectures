@@ -1,0 +1,145 @@
+{
+ "id": "lem-amb-affine-linear-exchange-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-linear-trace-invariance",
+   "place": "Proof paragraph 1: compact-support action and base-change compatibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exchange pasting and equivariant compact-support actions",
+ "statement": "For Cartesian squares of separated finite-type morphisms of Noetherian schemes and finite commutative coefficients A, the ordinary derived compact-support exchange maps satisfy horizontal pasting in the left-derived inverse-image model. If a and a' are automorphisms over the two bases and a'v=va, pasting their squares in either order gives the same exchange after the canonical identity and composition pullback comparisons. For coefficient complexes K,K', coefficient maps theta:a* K→K and theta':a'*K'→K', and a map b:v*K→K' satisfying the pullback square equivariance equation, exchange followed by Rf'!(b) intertwines the induced actions. The exact equations are the three public declarations in the Lean record. This is a consequence of [lem-amb-unbounded-compact-support-comparisons], in the categories of [def-weil-pbc-derived-categories] with functors of [def-amb-etale-compact-support].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+  "place": "Proof paragraphs 1–2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-amb-etale-compact-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+  "place": "Proof paragraphs 1–2, explicit Lean interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of affine space acts on compactly supported top etale cohomology by a locally constant scalar function in an algebraic family",
+   "results": "AffineSpace.map, AffineEquiv.linearHom_apply, MulAction.automorphize_smul_left; no compact-support scalar-family comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar action on top compactly supported cohomology of affine space varies locally constantly on the general linear group",
+   "results": "ContinuousCohomology linear action functors; no compact-support trace scalar-family comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "PrimeSpectrum.*[Ii]rreducible|[Ii]rreducibleSpace.*PrimeSpectrum|apply_eq_of_preconnectedSpace; constant.*End; upperStar.*faithful",
+   "results": "PrimeSpectrum.irreducibleSpace; Topology.IsOpenEmbedding.preirreducibleSpace; IsLocallyConstant.apply_eq_of_preconnectedSpace. No affine trace scalar or residue equality detector.",
+   "date": "2026-10-19",
+   "verdict": "geometry follows from Mathlib; the two comparison obligations are not already declared"
+  },
+  {
+   "tool": "grep",
+   "query": "generalLinearOpen|exists_isPreconnected_glOne|eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible",
+   "results": "Source FrameIndependence.lean supplies relative GL and its connected-fibre geometry; InvertibleRestriction.lean supplies identity detection for invertible complexes. Both are proved. Neither supplies compact-support specialization of this tower action.",
+   "date": "2026-10-19",
+   "verdict": "reuse the proved source geometry and identity detector; only action specialization remains open"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance",
+  "group": "G6",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "proof": [
+  {
+   "text": "Apply unboundedEtaleCompactSupport_baseChange_comp to the two squares. Expand the exact-to-left-derived inverse-image comparisons and use their naturality. Cancel the invertible composition comparisons to obtain the left-derived pasting formula.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2"
+   }
+  },
+  {
+   "text": "Paste the automorphism square before the base-change square and then in the reverse order. Both outer squares have the same map. Use the two unit laws for leftDerivedUpperStarComp and naturality of leftDerivedUpperStarId to identify the action equations. Changing the chosen composite uses equality transport.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2"
+   }
+  },
+  {
+   "text": "Use naturality of exchange on theta to move it past the base-change map. Apply the action equation, combine the direct-image maps, and use the equivariance equation on b. Naturality of the automorphism exchange and identity pullback comparison moves b to the other side.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLinearExchangeCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLinearExchangeCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineLinearExchange_action_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineLinearExchange_paste",
+   "AlgebraicGeometry.Etale.affineLinearExchange_action",
+   "AlgebraicGeometry.Etale.affineLinearExchange_action_naturality"
+  ],
+  "statement": "theorem affineLinearExchange_action_naturality (A : Type (u + 1)) [CommRing A] [Finite A] {X X' Y Y' : Scheme.{u}} [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y'] {f : X ⟶ Y} {f' : X' ⟶ Y'} {v : X' ⟶ X} {g : Y' ⟶ Y} {a : X ⟶ X} {a' : X' ⟶ X'} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f'] [LocallyOfFiniteType f'] [HasCompactification f] [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback v f' f g) (sa : IsPullback a f f (𝟙 Y)) (sa' : IsPullback a' f' f' (𝟙 Y')) (hw : a' ≫ v = v ≫ a) (K : DerivedCategoryModule A X) (K' : DerivedCategoryModule A X') (theta : (ordinaryFinitePullback A a).obj K ⟶ K) (theta' : (ordinaryFinitePullback A a').obj K' ⟶ K') (b : (ordinaryFinitePullback A v).obj K ⟶ K') (hb : (ordinaryFinitePullback A a').map b ≫ theta' = (derivedSquareUpperStarIso (ModuleCat.{u + 1} A) (CommSq.mk hw)).inv.app K ≫ (ordinaryFinitePullback A v).map theta ≫ b) : (ordinaryFinitePullback A g).map ((leftDerivedUpperStarId (ModuleCat.{u + 1} A) Y).inv.app _ ≫ (rightDerivedLowerShriekBaseChangeMap A sa).app K ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map theta) ≫ (rightDerivedLowerShriekBaseChangeMap A sq).app K ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f').map b = (rightDerivedLowerShriekBaseChangeMap A sq).app K ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f').map b ≫ (leftDerivedUpperStarId (ModuleCat.{u + 1} A) Y').inv.app ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f').obj K') ≫ (rightDerivedLowerShriekBaseChangeMap A sa').app K' ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f').map theta'",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-74f1b",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261020T051326-L-1637311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-74f1b",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261020T051326-L-1637311",
+  "kind": "interface"
+ }
+}

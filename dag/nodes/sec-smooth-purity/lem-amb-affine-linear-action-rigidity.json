@@ -1,0 +1,138 @@
+{
+ "id": "lem-amb-affine-linear-action-rigidity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-linear-trace-invariance",
+   "place": "Proof paragraphs 1–2: Identity detection for the affine trace object over the general linear group",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Identity detection for the affine trace object over the general linear group",
+ "statement": "Under the finite-coefficient, Noetherian and N-invertibility hypotheses of the linear trace lemma, every endomorphism r of the affine trace source over GL_d,S whose derived pullback along the identity section is the identity is itself the identity. This includes d=0 and the empty base.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+  "place": "Proof paragraphs 1–2"
+ },
+ "stmt_deps": [
+  "def-amb-affine-linear-universal-action"
+ ],
+ "proof": [
+  {
+   "text": "The top-trace existence theorem supplies one normalized t0,D0 with an isomorphism from the source to the constant complex. The source is independent of the normalized data. The constant complex is tensor-invertible by its left unitor, so transport invertibility through that isomorphism.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "def-amb-affine-linear-universal-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2"
+   }
+  },
+  {
+   "text": "Apply the already proved source-library exists_isPreconnected_glOne and eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible. The former puts every point in a preconnected set meeting the closed identity section. The latter detects the identity on an invertible complex by this restriction; its proof reduces to ordinary sheaf endomorphisms of the constant complex and local constancy. These are generic geometry and sheaf facts, not a use of supported frame classes.",
+   "uses": [
+    "lem-weil-pbc-connected-locally-constant-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-space-top-trace",
+  "def-amb-affine-linear-universal-action",
+  "lem-weil-pbc-connected-locally-constant-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+  "place": "Proof paragraphs 1–2, explicit Lean interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of affine space acts on compactly supported top etale cohomology by a locally constant scalar function in an algebraic family",
+   "results": "AffineSpace.map, AffineEquiv.linearHom_apply, MulAction.automorphize_smul_left; no compact-support scalar-family comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar action on top compactly supported cohomology of affine space varies locally constantly on the general linear group",
+   "results": "ContinuousCohomology linear action functors; no compact-support trace scalar-family comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "PrimeSpectrum.*[Ii]rreducible|[Ii]rreducibleSpace.*PrimeSpectrum|apply_eq_of_preconnectedSpace; constant.*End; upperStar.*faithful",
+   "results": "PrimeSpectrum.irreducibleSpace; Topology.IsOpenEmbedding.preirreducibleSpace; IsLocallyConstant.apply_eq_of_preconnectedSpace. No affine trace scalar or residue equality detector.",
+   "date": "2026-10-19",
+   "verdict": "geometry follows from Mathlib; the two comparison obligations are not already declared"
+  },
+  {
+   "tool": "grep",
+   "query": "generalLinearOpen|exists_isPreconnected_glOne|eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible",
+   "results": "Source FrameIndependence.lean supplies relative GL and its connected-fibre geometry; InvertibleRestriction.lean supplies identity detection for invertible complexes. Both are proved. Neither supplies compact-support specialization of this tower action.",
+   "date": "2026-10-19",
+   "verdict": "reuse the proved source geometry and identity detector; only action specialization remains open"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance",
+  "group": "G6",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLinearActionRigidity",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLinearActionRigidity.lean",
+  "declaration": "AlgebraicGeometry.Etale.linearAction_eq_id_of_identitySection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.linearAction_eq_id_of_identitySection"
+  ],
+  "statement": "theorem linearAction_eq_id_of_identitySection (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (r : linearActionObject A N hA (generalLinearOpen d S).toScheme d ⟶ linearActionObject A N hA (generalLinearOpen d S).toScheme d) (hr : (ordinaryFinitePullback A (glOne (c := d) (S := S))).map r = 𝟙 _) : r = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-74f1b",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261020T051326-L-1637311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-74f1b",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261020T051326-L-1637311",
+  "kind": "interface"
+ }
+}

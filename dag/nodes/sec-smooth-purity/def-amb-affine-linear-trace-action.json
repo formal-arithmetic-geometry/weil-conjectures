@@ -1,0 +1,145 @@
+{
+ "id": "def-amb-affine-linear-trace-action",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-linear-trace-invariance",
+   "place": "Proof paragraphs 1–2: The specified linear compact-support action and its Cartesian geometry",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The specified linear compact-support action and its Cartesian geometry",
+ "statement": "The concrete linear coordinate map, canonical Tate coefficient descent, bounded-below tower comparison, and exchange action used by affineSpaceLinearTraceInvariance are the definitions of [lem-amb-linear-trace-invariance], moved without changing their bodies or types. The linear coordinate map is an automorphism and has a Cartesian square over the identity. The tower map is Cartesian over every change of base, and the linear maps commute with pullback of their matrix entries.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+  "place": "Proof paragraphs 1–2"
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-tower",
+  "lem-amb-affine-space-top-trace",
+  "lem-asd-etale-finite-twist-pullback",
+  "thm-cbc-finite-torsion"
+ ],
+ "proof": [
+  {
+   "text": "For the geometric certificate, compare coordinate pullbacks, prove the composition formula a_g followed by a_h equals a_(hg), and a_1=id. The inverse is a_(g inverse). Apply IsPullback.of_horiz_isIso to its structure-map equality.",
+   "uses": [
+    "def-amb-affine-trace-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2; isolated part of the scalar argument"
+   }
+  },
+  {
+   "text": "Induct through affine-line base change squares and paste vertically. Pullback preserves each coordinate, by induction using the affine-space coordinate equations. Compare the matrix-vector coordinate sums to obtain naturality of the linear map.",
+   "uses": [
+    "def-amb-affine-trace-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-trace-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+  "place": "Proof paragraphs 1–2, explicit Lean interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Endomorphisms of a constant sheaf in the derived category are determined by pullback to residue fields",
+   "results": "ConstantSheaf.IsConstant and Sheaf.ΓObjEquivHom; no derived residue-field equality detector or affine trace scalar family.",
+   "date": "2026-10-19",
+   "verdict": "no exact match; degree-zero and constant-sheaf ingredients exist"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar action on top compactly supported cohomology of affine space varies locally constantly on the general linear group",
+   "results": "ContinuousCohomology linear action functors; no compact-support trace scalar-family comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "PrimeSpectrum.*[Ii]rreducible|[Ii]rreducibleSpace.*PrimeSpectrum|apply_eq_of_preconnectedSpace; constant.*End; upperStar.*faithful",
+   "results": "PrimeSpectrum.irreducibleSpace; Topology.IsOpenEmbedding.preirreducibleSpace; IsLocallyConstant.apply_eq_of_preconnectedSpace. No affine trace scalar or residue equality detector.",
+   "date": "2026-10-19",
+   "verdict": "geometry follows from Mathlib; the two comparison obligations are not already declared"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance",
+  "group": "G6",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLinearTraceAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLinearTraceAction.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineLinearTraceAction",
+  "declarations": [
+   "AlgebraicGeometry.affineTraceLinearMap",
+   "AlgebraicGeometry.affineTraceLinearMap_isPullback",
+   "AlgebraicGeometry.Etale.affineLinearPullbackId",
+   "AlgebraicGeometry.Etale.affineLinearBaseCoefficient",
+   "AlgebraicGeometry.Etale.affineLinearLineDescent",
+   "AlgebraicGeometry.Etale.affineLinearCoefficientDescentStep",
+   "AlgebraicGeometry.Etale.affineLinearCoefficientDescent",
+   "AlgebraicGeometry.Etale.affineLinearCoefficientPullback",
+   "AlgebraicGeometry.Etale.affineLinearCompactComparison",
+   "AlgebraicGeometry.Etale.affineLinearTraceAction",
+   "AlgebraicGeometry.affineTraceLinearMap_over",
+   "AlgebraicGeometry.affineTraceLinearMap_coordinate",
+   "AlgebraicGeometry.affineTraceLinearMap_one",
+   "AlgebraicGeometry.affineTraceMap_isPullback",
+   "AlgebraicGeometry.affineTraceLinearMap_baseChange"
+  ],
+  "statement": "def affineLinearTraceAction (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (a : affineTraceTower S d ⟶ affineTraceTower S d) (sq : IsPullback a (affineTraceProjection S d) (affineTraceProjection S d) (𝟙 S)) : (affineTraceLeft A S d).obj ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ⟶ (affineTraceLeft A S d).obj ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S))",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-74f1b",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261020T051326-L-1637311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-74f1b",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261020T051326-L-1637311",
+  "kind": "interface"
+ }
+}
