@@ -16,26 +16,21 @@
  ],
  "proof": [
   {
-   "text": "Use the noetherian approximation diagram N.D and its limiting cone N.π. Its index category is small and cofiltered, its transition maps are affine, and every stage is Noetherian and consequently quasi-separated. These properties are already supplied by NoetherianApproximation and the Mathlib Noetherian instances.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Apply Scheme.exists_smooth_stage_of_affine_limit to this diagram, p, the smooth limit morphism f, and the given pullback square H. It returns exactly a j : Over i for which pullback.snd p (N.D.map j.hom) is smooth. This argument does not need hmodel or transport smoothness along its bare scheme isomorphism.",
+   "text": "Unpack the later stage j, the smooth model q, and the comparison isomorphism e over the stage base. Its compatibility equation is e.hom ≫ pullback.snd p (N.D.map j.hom) = q. Composing with e.inv gives pullback.snd p (N.D.map j.hom) = e.inv ≫ q. Smoothness of an isomorphism and closure of smooth morphisms under composition prove smoothness of this projection. Return j. This is exactly the complete proof of the existing upstream theorem; the active parent supplies e = Iso.refl and the compatibility by Category.id_comp.",
    "uses": [
-    "lem-sbc-affine-limit-smooth-stage"
+    "def-sbc-smooth-morphisms"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-affine-limit-smooth-stage"
+  "def-sbc-smooth-morphisms"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0C0C, specialized from the existing general affine-transition-limit theorem lem-sbc-affine-limit-smooth-stage",
-  "note": "A2: the original affine-model compatibility is not needed; the existing general theorem applies to f and H."
+  "place": "Tag 0C0C, final transport along a comparison isomorphism over the base",
+  "note": "H9: existing complete proof in WeilConjectures.AlgebraicGeometry.SmoothStageGluing; the unused Sheaf twin is withdrawn. No unit step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -99,13 +94,14 @@
  "unit": "sk-prop-normal-form",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SmoothStageGluing",
-  "file": "lean/Sheaf/AlgebraicGeometry/SmoothStageGluing.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SmoothStageGluing",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SmoothStageGluing.lean",
   "declaration": "AlgebraicGeometry.Scheme.NoetherianApproximation.smooth_stage_of_affine_models",
-  "statement": "theorem Scheme.NoetherianApproximation.smooth_stage_of_affine_models\n    {S : Scheme.{u}} (N : S.NoetherianApproximation) {i : N.I}\n    {Y X : Scheme.{u}} (p : Y ⟶ N.D.obj i)\n    [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p]\n    (f : X ⟶ S) [Smooth f] (a : X ⟶ Y)\n    (H : IsPullback a f p (N.π.app i))\n    (hmodel : ∃ (j : Over i) (Z : Scheme.{u}) (q : Z ⟶ N.D.obj j.left)\n      (_ : LocallyOfFinitePresentation q) (_ : QuasiCompact q) (_ : QuasiSeparated q),\n      Smooth q ∧ Nonempty (Z ≅ Limits.pullback p (N.D.map j.hom))) :\n    ∃ j : Over i, Smooth (pullback.snd p (N.D.map j.hom))",
+  "statement": "theorem Scheme.NoetherianApproximation.smooth_stage_of_affine_models\n    {S : Scheme.{u}} (N : S.NoetherianApproximation) {i : N.I}\n    {Y : Scheme.{u}} (p : Y ⟶ N.D.obj i)\n    (hmodel : ∃ (j : Over i) (Z : Scheme.{u}) (q : Z ⟶ N.D.obj j.left)\n      (e : Z ≅ pullback p (N.D.map j.hom)),\n        e.hom ≫ pullback.snd p (N.D.map j.hom) = q ∧ Smooth q) :\n    ∃ j : Over i, Smooth (pullback.snd p (N.D.map j.hom))",
   "branch": "sheaf-dag",
   "by": "J3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "H9, 2026-10-21: retire the unused Sheaf twin and attach the existing upstream gluing theorem. Its comparison is explicitly over the stage base. The active upstream parent already supplies this compatibility using Iso.refl; no source declaration, signature, attribute or import is changed."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -118,14 +114,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "C-fce20",
+  "group": "H9",
   "result": "pass",
-  "landing": "20261012T202228-L-700093",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221217-L-4158000",
+  "kind": "interface",
+  "note": "independent cc review: retire-items row 99 (Sheaf copy → WeilConjectures twin) against the delivered stub, node lean record vs twin signature/proof, importers (none) and DAG citers (none)"
  },
  "lean_audit": {
   "master": {
