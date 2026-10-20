@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-finite-reduction-pullback-coherence",
+ "kind": "statement",
+ "title": "Finite reduction and the canonical pullback square",
+ "statement": "Let gprime: Xprime -> X, fprime: Xprime -> Yprime, f: X -> Y and g: Yprime -> Y form the chosen Cartesian square of def-weil-pbc-four-corners. Let d be its pro-etale adic coefficient datum, R_T the completed coefficient sheaf and P_(T,n) its quotient at exponent n+1. Put F_T = - tensor^L_(R_T) P_(T,n). For h: U -> V let delta_h: F_U composed with Lh_R^* -> Lh_P^* composed with F_V be the specified coefficient comparison of def-weil-pbc-four-corners. Let theta_R compare the pullback path Y -> Yprime -> Xprime with Y -> X -> Xprime, and theta_P the corresponding quotient-coefficient paths, as in def-weil-pbc-ambient-ringed-exchange. For every M in D(Y,R_Y), F_Xprime(theta_R,M) followed by delta_gprime,LfM and Lgprime_P^*(delta_f,M) equals delta_fprime,LgM followed by Lfprime_P^*(delta_g,M) and theta_P,F_YM. No properness, completion condition on M, or etale-origin hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0D6D, lemma-derived-pullback-composition; Tag 0E48, remark-compatible-with-diagram"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-four-arrows",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Take a flat-term K-flat resolution of M. Pullback along either leg preserves these properties. The characterizations of fourCornerReductionPullback and the canonical geometric composition identify their components on this representative with the localized ordinary coefficient and geometric comparisons.",
+   "uses": [
+    "def-weil-pbc-four-corners",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary coefficient comparison is the conjugate of the identity on restriction/direct-image sections under the tensor-unit adjunctions. The geometric composition is the conjugate of fibre-product pasting. The two composite right-adjoint comparisons are equal on every section: each transports along the same pasting isomorphism and retains the same quotient scalar action. The coefficient projection compatibility identifies the actions. Conjugation, or evaluation on local balanced tensors, gives equality of the ordinary left-adjoint composites. On a local tensor both maps pull back its module section and multiply its quotient scalars in the same order; balancing and sheafification give equality on the whole module.",
+   "uses": [
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-four-arrows",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary equality degreewise and localize. Use the normalization equations and invertibility of their factorization maps to cancel them, obtaining compatibility with each geometric composition. Naturality transports this equality across the resolution isomorphism to all derived M. Finally, the equality of the two composite scheme morphisms and their coefficient identifications transports the same single-morphism reduction comparison along equal sigma indices. Cancel the two composition isomorphisms to obtain the displayed pullback square equality.",
+   "uses": [
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0D6D; coefficient comparison underlying 0E48"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "verdict": "The ordinary pullback composition and mate APIs do not state compatibility of the specified adic reduction and geometric derived comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientPullbackCube|fourCornerReductionPullback|squareExchange",
+   "date": "2026-10-21",
+   "results": "No hits.",
+   "verdict": "The ordinary pullback composition and mate APIs do not state compatibility of the specified adic reduction and geometric derived comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of coefficients commutes with composition of pullback functors on ringed sites",
+   "date": "2026-10-21",
+   "results": "SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback; CategoryTheory.ChosenPullbacksAlong.pullbackComp; PresheafOfModules.pullback_assoc; SheafOfModules.pullback_assoc; PresheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "verdict": "The ordinary pullback composition and mate APIs do not state compatibility of the specified adic reduction and geometric derived comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback_assoc",
+   "date": "2026-10-21",
+   "results": "SheafOfModules.pullback_assoc",
+   "verdict": "The ordinary pullback composition and mate APIs do not state compatibility of the specified adic reduction and geometric derived comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteLevelRectangle",
+  "date": "2026-10-21",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-level-rectangle",
+   "place": "The two routes are both the level-n reduction of the base-change mate; compatibility of the pullback comparison with the finite coefficient action before taking mates.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionPullbackCoherence",
+  "file": "lean/Sheaf/Paper/FiniteReductionPullbackCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.fourCornerReductionPullback_square",
+  "statement": "theorem fourCornerReductionPullback_square (sq : ChosenCartesianSquare g' f' f g) (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) (M : fourCornerDerived Y (adicDatumRing Y d)) : (adicDatumReduction X' d n).map ((fourArrowIntegralPullbackComparison sq d).hom.app M) ≫ (fourCornerReductionPullback g' d n).hom.app ((fourCornerPullback f d).obj M) ≫ (fourCornerFinitePullback g' d n).map ((fourCornerReductionPullback f d n).hom.app M) = (fourCornerReductionPullback f' d n).hom.app ((fourCornerPullback g d).obj M) ≫ (fourCornerFinitePullback f' d n).map ((fourCornerReductionPullback g d n).hom.app M) ≫ (fourArrowFinitePullbackComparison sq d n).hom.app ((adicDatumReduction Y d n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fourCornerReductionPullback_square"
+  ]
+ },
+ "proof_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-four-arrows",
+  "def-weil-pbc-four-corners",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-658d2",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261020T233213-L-905022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-658d2",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261020T233213-L-905022",
+  "kind": "interface",
+  "note": "independent cc review: 658d28 files byte-identical to eaf2be (prior FIX lost: landing refused the change-record fix named .md instead of .change.md); 6 delivered modules + 7 importers/users compiled against the corrected tree; axioms probed; new coherence statement checked against the coefficientPullbackSquare body and the pinned fourCornerReductionPullback_exists"
+ }
+}

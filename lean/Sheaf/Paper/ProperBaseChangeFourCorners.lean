@@ -29,6 +29,9 @@ set_option synthInstance.maxSize 2048
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
+
+attribute [local instance 40000] adicDatumModulesAbelian
+attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
 variable {A : Type (t + 1)} [CommRing A]
 
 /-- The standard unbounded derived category of the existing coefficient modules.
@@ -116,28 +119,53 @@ abbrev fourCornerChangeComplex (T : Scheme.{t})
 
 /-- Ordinary integral derived pullback, without completion.
 Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
-abbrev fourCornerPullback {U V : Scheme.{t}} (f : U ⟶ V)
-    (d : ProEtaleAdicCoefficientDatum A) :=
+def fourCornerPullback {U V : Scheme.{t}} (f : U ⟶ V)
+    (d : ProEtaleAdicCoefficientDatum A) :
+    DerivedCategory (proEtaleRingModules V (adicDatumRing V d)) ⥤ DerivedCategory
+      (proEtaleRingModules U (adicDatumRing U d)) :=
   proEtaleRingDerivedPullback f (adicDatumRing V d)
     (adicDatumRing U d) (fourCornerCoefficientIso f d)
 /-- Ordinary integral derived direct image, resolved in all module sheaves.
 Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
-abbrev fourCornerPushforward {U V : Scheme.{t}} (f : U ⟶ V)
-    (d : ProEtaleAdicCoefficientDatum A) :=
+def fourCornerPushforward {U V : Scheme.{t}} (f : U ⟶ V)
+    (d : ProEtaleAdicCoefficientDatum A) :
+    DerivedCategory (proEtaleRingModules U (adicDatumRing U d)) ⥤ DerivedCategory
+      (proEtaleRingModules V (adicDatumRing V d)) :=
   proEtaleRingDerivedDirectImage f (adicDatumRing V d)
     (adicDatumRing U d) (fourCornerCoefficientIso f d)
 /-- Ordinary finite derived pullback retaining its finite coefficient action.
 Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
-abbrev fourCornerFinitePullback {U V : Scheme.{t}} (f : U ⟶ V)
-    (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :=
+def fourCornerFinitePullback {U V : Scheme.{t}} (f : U ⟶ V)
+    (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :
+    DerivedCategory (proEtaleRingModules V ((adicLisseRingSystem V d.ideal).obj (op n))) ⥤
+      DerivedCategory (proEtaleRingModules U ((adicLisseRingSystem U d.ideal).obj (op n))) :=
   proEtaleRingDerivedPullback f ((adicLisseRingSystem V d.ideal).obj (op n))
     ((adicLisseRingSystem U d.ideal).obj (op n)) (fourCornerFiniteIso f d n)
 /-- Ordinary finite derived direct image retaining its finite coefficient action.
 Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
-abbrev fourCornerFinitePushforward {U V : Scheme.{t}} (f : U ⟶ V)
-    (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :=
+def fourCornerFinitePushforward {U V : Scheme.{t}} (f : U ⟶ V)
+    (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :
+    DerivedCategory (proEtaleRingModules U ((adicLisseRingSystem U d.ideal).obj (op n))) ⥤
+      DerivedCategory (proEtaleRingModules V ((adicLisseRingSystem V d.ideal).obj (op n))) :=
   proEtaleRingDerivedDirectImage f ((adicLisseRingSystem V d.ideal).obj (op n))
     ((adicLisseRingSystem U d.ideal).obj (op n)) (fourCornerFiniteIso f d n)
+/-- The geometric derived adjunction with the fixed four-corner category interface.
+Source: Stacks 0D6D (blueprint: def-weil-pbc-four-corners). -/
+def fourCornerDerivedAdjunction {U V : Scheme.{t}} (f : U ⟶ V)
+    (d : ProEtaleAdicCoefficientDatum A) :
+    fourCornerPullback f d ⊣ fourCornerPushforward f d :=
+  proEtaleRingDerivedAdjunction f (adicDatumRing V d) (adicDatumRing U d)
+    (fourCornerCoefficientIso f d)
+
+/-- The same adjunction at one quotient coefficient level.
+Source: Stacks 0D6D (blueprint: def-weil-pbc-four-corners). -/
+def fourCornerFiniteDerivedAdjunction {U V : Scheme.{t}} (f : U ⟶ V)
+    (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :
+    fourCornerFinitePullback f d n ⊣ fourCornerFinitePushforward f d n :=
+  proEtaleRingDerivedAdjunction f
+    ((adicLisseRingSystem V d.ideal).obj (op n))
+    ((adicLisseRingSystem U d.ideal).obj (op n)) (fourCornerFiniteIso f d n)
+
 /-- Quotient transitions commute with the specified finite identifications.
 Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners).
 Proof: use the finite transition identity of profinite-coefficient-inverse-image.
@@ -359,7 +387,9 @@ theorem fourCornerReductionPullback_exists {U V : Scheme.{t}} (f : U ⟶ V)
 /-- The specified reduction/pullback identification in the finite coefficient category.
 Source: blueprint four corners; Stacks 07A4 (blueprint: def-weil-pbc-four-corners). -/
 def fourCornerReductionPullback {U V : Scheme.{t}} (f : U ⟶ V)
-    (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :=
+    (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :
+    fourCornerPullback f d ⋙ adicDatumReduction U d n ≅
+      adicDatumReduction V d n ⋙ fourCornerFinitePullback f d n :=
   (fourCornerReductionPullback_exists f d n).exists.choose
 /-- E tensor P_n is identified with E_n by the specified comparison at K.
 Source: blueprint four corners; Stacks 07A4 (blueprint: def-weil-pbc-four-corners). -/

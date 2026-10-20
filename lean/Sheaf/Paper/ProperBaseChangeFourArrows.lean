@@ -30,6 +30,9 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
+attribute [local instance 40000] adicDatumModulesAbelian
+attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
+
 variable {A : Type (t + 1)} [CommRing A]
 
 /-- The finite quotient, with no universe change of the recorded adic datum.
@@ -73,12 +76,10 @@ def fourArrowProjection {U V : Scheme.{t}} (f : U ⟶ V)
     (H : fourCornerDerived U (adicDatumRing U d)) (n : ℕ) :
     (adicDatumReduction V d n).obj ((fourCornerPushforward f d).obj H) ⟶
       (fourCornerFinitePushforward f d n).obj ((adicDatumReduction U d n).obj H) :=
-  (proEtaleRingDerivedAdjunction f ((adicLisseRingSystem V d.ideal).obj (op n))
-    ((adicLisseRingSystem U d.ideal).obj (op n)) (fourCornerFiniteIso f d n)).homEquiv _ _
+  (fourCornerFiniteDerivedAdjunction f d n).homEquiv _ _
       ((fourArrowReductionPullback f d n).hom.app ((fourCornerPushforward f d).obj H) ≫
         (adicDatumReduction U d n).map
-          ((proEtaleRingDerivedAdjunction f (adicDatumRing V d) (adicDatumRing U d)
-            (fourCornerCoefficientIso f d)).counit.app H))
+          ((fourCornerDerivedAdjunction f d).counit.app H))
 
 /-- Perfect quotient coefficients make this specified projection adjunct invertible.
 Source: definition 1343, projection paragraph; Stacks 0944
@@ -120,7 +121,23 @@ theorem fourArrowIntegralCoefficients_comm (sq : ChosenCartesianSquare g' f' f g
       (proEtaleRingCompositeCoefficients f' g (adicDatumRing Y d)
         (adicDatumRing Y' d) (adicDatumRing X' d)
         (fourCornerCoefficientIso g d) (fourCornerCoefficientIso f' d)) := by
-  sorry
+  have hcomp {U V W : Scheme.{t}} (h : U ⟶ V) (k : V ⟶ W) :
+      proEtaleRingCompositeCoefficients h k (adicDatumRing W d)
+        (adicDatumRing V d) (adicDatumRing U d)
+        (fourCornerCoefficientIso k d) (fourCornerCoefficientIso h d) =
+      fourCornerCoefficientIso (h ≫ k) d := by
+    apply Iso.ext
+    simpa only [proEtaleRingCompositeCoefficients, Iso.trans_hom,
+      NatTrans.comp_app, Functor.mapIso_hom, Iso.app_hom, Category.assoc] using
+      ((fourCornerCoefficientCoherence d).2.2.1 U V W h k).symm
+  have he : HEq (fourCornerCoefficientIso (g' ≫ f) d)
+      (fourCornerCoefficientIso (f' ≫ g) d) := by
+    generalize hleft : g' ≫ f = left
+    generalize hright : f' ≫ g = right
+    have hh : left = right := hleft.symm.trans (sq.toCommSq.w.trans hright)
+    cases hh
+    rfl
+  exact (heq_of_eq (hcomp g' f)).trans (he.trans (heq_of_eq (hcomp f' g)).symm)
 
 /-- The same coefficient coherence at every finite quotient level.
 Source: definition 1343; Stacks 07A7 (blueprint: def-weil-pbc-four-arrows).
@@ -139,22 +156,103 @@ theorem fourArrowFiniteCoefficients_comm (sq : ChosenCartesianSquare g' f' f g)
         ((adicLisseRingSystem Y' d.ideal).obj (op n))
         ((adicLisseRingSystem X' d.ideal).obj (op n))
         (fourCornerFiniteIso g d n) (fourCornerFiniteIso f' d n)) := by
-  sorry
+  have hcomp {U V W : Scheme.{t}} (h : U ⟶ V) (k : V ⟶ W) :
+      proEtaleRingCompositeCoefficients h k
+        ((adicLisseRingSystem W d.ideal).obj (op n))
+        ((adicLisseRingSystem V d.ideal).obj (op n))
+        ((adicLisseRingSystem U d.ideal).obj (op n))
+        (fourCornerFiniteIso k d n) (fourCornerFiniteIso h d n) =
+      fourCornerFiniteIso (h ≫ k) d n := by
+    apply Iso.ext
+    simpa only [proEtaleRingCompositeCoefficients, Iso.trans_hom,
+      NatTrans.comp_app, Functor.mapIso_hom, Iso.app_hom, Category.assoc] using
+      ((fourCornerCoefficientCoherence d).2.2.2 U V W h k n).symm
+  have he : HEq (fourCornerFiniteIso (g' ≫ f) d n)
+      (fourCornerFiniteIso (f' ≫ g) d n) := by
+    generalize hleft : g' ≫ f = left
+    generalize hright : f' ≫ g = right
+    have hh : left = right := hleft.symm.trans (sq.toCommSq.w.trans hright)
+    cases hh
+    rfl
+  exact (heq_of_eq (hcomp g' f)).trans (he.trans (heq_of_eq (hcomp f' g)).symm)
 
-/-- The actual finite ringed exchange, defined independently of any origin witness.
-Source: definition 1343, final displayed adjunct; Stacks 07A7
-(blueprint: def-weil-pbc-four-arrows). -/
-def fourArrowFiniteExchange (sq : ChosenCartesianSquare g' f' f g)
-    (d : ProEtaleAdicCoefficientDatum A)
-    (K : fourCornerDerived X (adicDatumRing X d)) (n : ℕ) :=
-  (proEtaleAmbientRingedExchange sq
+/-- The specified geometric comparison with the fixed four-corner functor interface.
+Its value is the existing ambient comparison; only its category instances are explicit.
+Source: Stacks 0D6D and 07A7 (blueprint: def-weil-pbc-four-arrows). -/
+def fourArrowIntegralPullbackComparison (sq : ChosenCartesianSquare g' f' f g)
+    (d : ProEtaleAdicCoefficientDatum A) :
+    fourCornerPullback g d ⋙ fourCornerPullback f' d ≅
+      fourCornerPullback f d ⋙ fourCornerPullback g' d :=
+  proEtaleAmbientRingedPullbackComparison sq
+    (adicDatumRing X d)
+    (adicDatumRing Y d)
+    (adicDatumRing X' d)
+    (adicDatumRing Y' d)
+    (fourCornerCoefficientIso f d) (fourCornerCoefficientIso g d)
+    (fourCornerCoefficientIso g' d) (fourCornerCoefficientIso f' d)
+    (fourArrowIntegralCoefficients_comm sq d)
+
+/-- The specified geometric comparison with the fixed four-corner functor interface.
+Its value is the existing ambient comparison; only its category instances are explicit.
+Source: Stacks 0D6D and 07A7 (blueprint: def-weil-pbc-four-arrows). -/
+def fourArrowIntegralExchangeNat (sq : ChosenCartesianSquare g' f' f g)
+    (d : ProEtaleAdicCoefficientDatum A) :
+    fourCornerPushforward f d ⋙ fourCornerPullback g d ⟶
+      fourCornerPullback g' d ⋙ fourCornerPushforward f' d :=
+  proEtaleAmbientRingedExchange sq
+    (adicDatumRing X d)
+    (adicDatumRing Y d)
+    (adicDatumRing X' d)
+    (adicDatumRing Y' d)
+    (fourCornerCoefficientIso f d) (fourCornerCoefficientIso g d)
+    (fourCornerCoefficientIso g' d) (fourCornerCoefficientIso f' d)
+    (fourArrowIntegralCoefficients_comm sq d)
+
+/-- The specified geometric comparison with the fixed four-corner functor interface.
+Its value is the existing ambient comparison; only its category instances are explicit.
+Source: Stacks 0D6D and 07A7 (blueprint: def-weil-pbc-four-arrows). -/
+def fourArrowFinitePullbackComparison (sq : ChosenCartesianSquare g' f' f g)
+    (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :
+    fourCornerFinitePullback g d n ⋙ fourCornerFinitePullback f' d n ≅
+      fourCornerFinitePullback f d n ⋙ fourCornerFinitePullback g' d n :=
+  proEtaleAmbientRingedPullbackComparison sq
     ((adicLisseRingSystem X d.ideal).obj (op n))
     ((adicLisseRingSystem Y d.ideal).obj (op n))
     ((adicLisseRingSystem X' d.ideal).obj (op n))
     ((adicLisseRingSystem Y' d.ideal).obj (op n))
     (fourCornerFiniteIso f d n) (fourCornerFiniteIso g d n)
     (fourCornerFiniteIso g' d n) (fourCornerFiniteIso f' d n)
-    (fourArrowFiniteCoefficients_comm sq d n)).app ((adicDatumReduction X d n).obj K)
+    (fourArrowFiniteCoefficients_comm sq d n)
+
+/-- The specified geometric comparison with the fixed four-corner functor interface.
+Its value is the existing ambient comparison; only its category instances are explicit.
+Source: Stacks 0D6D and 07A7 (blueprint: def-weil-pbc-four-arrows). -/
+def fourArrowFiniteExchangeNat (sq : ChosenCartesianSquare g' f' f g)
+    (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :
+    fourCornerFinitePushforward f d n ⋙ fourCornerFinitePullback g d n ⟶
+      fourCornerFinitePullback g' d n ⋙ fourCornerFinitePushforward f' d n :=
+  proEtaleAmbientRingedExchange sq
+    ((adicLisseRingSystem X d.ideal).obj (op n))
+    ((adicLisseRingSystem Y d.ideal).obj (op n))
+    ((adicLisseRingSystem X' d.ideal).obj (op n))
+    ((adicLisseRingSystem Y' d.ideal).obj (op n))
+    (fourCornerFiniteIso f d n) (fourCornerFiniteIso g d n)
+    (fourCornerFiniteIso g' d n) (fourCornerFiniteIso f' d n)
+    (fourArrowFiniteCoefficients_comm sq d n)
+
+/-- The actual finite ringed exchange, defined independently of any origin witness.
+Source: definition 1343, final displayed adjunct; Stacks 07A7
+(blueprint: def-weil-pbc-four-arrows). -/
+def fourArrowFiniteExchange (sq : ChosenCartesianSquare g' f' f g)
+    (d : ProEtaleAdicCoefficientDatum A)
+    (K : fourCornerDerived X (adicDatumRing X d)) (n : ℕ) :
+    (fourCornerFinitePullback g d n).obj
+        ((fourCornerFinitePushforward f d n).obj
+            ((adicDatumReduction X d n).obj K)) ⟶
+      (fourCornerFinitePushforward f' d n).obj
+          ((fourCornerFinitePullback g' d n).obj
+              ((adicDatumReduction X d n).obj K)) :=
+  (fourArrowFiniteExchangeNat sq d n).app ((adicDatumReduction X d n).obj K)
 
 /-- Proper base change certifies this canonical finite exchange is invertible.
 The supplied bounded-below origin is transported along the normalized coefficient
@@ -209,11 +307,7 @@ def properBaseChangeFourArrows
       (fourCornerFinitePushforward f' d n).mapIso (fourCornerEReductionIso g' d K n),
     (fourArrowReductionPullback g d n).hom.app ((fourCornerPushforward f d).obj K) ≫
       (adicDatumReduction Y' d n).map
-        ((proEtaleAmbientRingedExchange sq (adicDatumRing X d) (adicDatumRing Y d)
-          (adicDatumRing X' d) (adicDatumRing Y' d)
-          (fourCornerCoefficientIso f d) (fourCornerCoefficientIso g d)
-          (fourCornerCoefficientIso g' d) (fourCornerCoefficientIso f' d)
-          (fourArrowIntegralCoefficients_comm sq d)).app K),
+        ((fourArrowIntegralExchangeNat sq d).app K),
     @asIso _ _ _ _ (fourArrowFiniteExchange sq d K n)
       (fourArrowFiniteExchange_isIso sq d K n (W n) (w n) (e n)))
 
