@@ -33,6 +33,11 @@
    "text": "The forward function is injective because d is an epimorphism and equality of underlying maps detects over-morphisms and subtype points. For a tangent vector theta use inv d composed with theta as an over-morphism; its over equation follows from the second naturality identity and its reducing-to-identity equation from the first one after cancelling b. This gives a tangent-group point. Both inverse identities follow by cancelling d with inv d. Compose this type equivalence with infPointsEquivTangentGroup.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "The adopted upstream module implements this construction as identityTangentTransport and proves its formula as identityTangentTransport_val. Consumers use that equivalence and value theorem directly, so the duplicate existential wrapper is unnecessary.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -41,7 +46,7 @@
   "lem-ag-lie-identity-residue-rational"
  ],
  "proof_origin": {
-  "by": "E3 stage 3; explicit argument of the parent node",
+  "by": "F7 stage 3; retire the duplicate existential wrapper in favor of the adopted upstream construction and value theorem",
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-tangent/def-wf-lie-algebra-derivation.md",
   "place": "identity tangent-space infinitesimal-point argument"
  },
@@ -91,14 +96,19 @@
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-i-cartier",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/IdentityTangentTransport.lean",
-  "declaration": "AlgebraicGeometry.GrpObj.exists_identity_tangent_transport",
-  "statement": "theorem exists_identity_tangent_transport\n    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let x := unitSection G (IsLocalRing.closedPoint k)\n    let r : k →+* G.left.residueField x :=\n      (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom\n    ∃ e : infPoints G ≃ schemeTangentSpace k G.left G.hom x,\n      ∀ v : infPoints G, (e v).val =\n        Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom r)) ≫\n          (infPointsEquivTangentGroup G v).val.left",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.IdentityTangentTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/IdentityTangentTransport.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.identityTangentTransport",
+  "statement": "def identityTangentTransport {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    infPoints G ≃ schemeTangentSpace k G.left G.hom (unitSection G (IsLocalRing.closedPoint k))",
   "branch": "sheaf-dag",
-  "by": "E3",
-  "date": "2026-10-12"
+  "by": "F7",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.GrpObj.identityTangentTransport",
+   "AlgebraicGeometry.GrpObj.identityTangentTransport_val"
+  ],
+  "note": "Retired the duplicated Sheaf existential theorem. The upstream construction supplies its equivalence, and identityTangentTransport_val supplies exactly the specified morphism formula. The parent now uses both upstream declarations directly."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -111,13 +121,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E3",
+  "reviewer": "C-bbf6a",
+  "group": "F7",
   "result": "pass",
-  "landing": "20261012T150951-L-2230256",
-  "kind": "interface"
+  "landing": "20261020T221145-L-4150425",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf exists_identity_tangent_transport vs upstream WeilConjectures identityTangentTransport/_val (node lean.statement byte-identical); adapted caller LieIdentityTangentEquiv vs original (statement, public imports unchanged; only import + witness lines); importer LieCotangentDual compiled vs delivery and base"
  },
  "lean_audit": {
   "master": {

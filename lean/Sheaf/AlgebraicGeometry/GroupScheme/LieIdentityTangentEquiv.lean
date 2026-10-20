@@ -1,7 +1,7 @@
 module
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import WeilConjectures.AlgebraicGeometry.SchemeTangentSpace
-import Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentTransport
+import WeilConjectures.AlgebraicGeometry.GroupScheme.IdentityTangentTransport
 import WeilConjectures.AlgebraicGeometry.GroupScheme.IdentityTangentOperations
 @[expose] public section
 universe u
@@ -43,7 +43,8 @@ theorem exists_lie_identity_tangent_linearEquiv
   let : Module k (schemeTangentSpace k G.left G.hom x) :=
     Module.compHom (schemeTangentSpace k G.left G.hom x) r
   change Nonempty (Lie G ≃ₗ[k] schemeTangentSpace k G.left G.hom x)
-  obtain ⟨e, he⟩ := exists_identity_tangent_transport G
+  let e := identityTangentTransport G
+  have he := identityTangentTransport_val G
   obtain ⟨hmul, hscale⟩ := identity_tangent_transport_operations G e he
   refine ⟨{ (lieEquiv G).symm.trans e with
     map_add' := ?_
