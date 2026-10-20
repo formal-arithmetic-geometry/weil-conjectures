@@ -1,0 +1,115 @@
+{
+ "id": "lem-amb-affine-trace-right-normal-form",
+ "kind": "statement",
+ "title": "The right coordinate functor has Tate normal form",
+ "statement": "The coordinate right functor has its ordinary finite Tate normal form.\nSource: blueprint lem-amb-affine-space-top-trace, proof steps 6--7\n(blueprint: lem-amb-affine-trace-right-normal-form).\n\nProof: induct on the number of coordinates. At zero, the zero Tate twist is\nthe constant tensor unit, pullback by identity is identity, and shift zero is\nidentity. At a successor, commute pullback through the preceding tensor and\nshift by the canonical inverse-image tensor and shift comparisons. Combine the\ntwo pullbacks using composition. The Tate pullback comparison identifies the\npulled-back old line with the same twist upstairs. Associativity of derived\ntensor, flatness of Tate sheaves, and their signed tensor product identify the\ntwo factors with the next positive Tate power. Shift addition changes 2d+2 to\n2(d+1). This yields a natural isomorphism, not just objectwise isomorphisms.\nOn the constant input, exact inverse image preserves degree-zero sheaves and\ntensoring flat Tate sheaves computes ordinary tensor. The result is a single\nsheaf shifted by 2d, hence bounded below. All arguments include d=0, the empty\nbase and N=1 (zero coefficients).\n\nPrecise quantified statement:\ntheorem affineTraceRight_normalForm (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :\n    Nonempty (affineTraceRight A N hA S d ≅\n      ordinaryFinitePullback A (affineTraceProjection S d) ⋙\n        derivedTensorRight (ModuleCat.{u + 1} A) (affineTraceTower S d)\n          ((_root_.DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.finiteEtaleTateSheaf A N (affineTraceTower S d) hA (d : ℤ))) ⋙\n        shiftFunctor _ (2 * (d : ℤ))) ∧\n    _root_.DerivedCategory.TStructure.t.plus\n      ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S))",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "node lem-amb-affine-space-top-trace, order 1970"
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-construction"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the coordinate number. At zero use identity pullback, twist zero and shift zero. At a successor commute inverse image past tensor and shifts, compose the two inverse images, and use the Tate pullback and tensor-product comparisons to replace the pulled-back old twist and the new line by twist d+1. The associator and shift-addition isomorphisms assemble a natural functor isomorphism.",
+   "uses": [
+    "def-amb-affine-trace-construction",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the constant input, exact inverse image preserves a sheaf in degree zero. Tate sheaves are flat, so their derived tensor product is their ordinary tensor product in degree zero. The normal form is therefore a sheaf shifted by 2d, which is bounded below.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-trace-construction",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-finite-etale-twist-line"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "The right coordinate functor has Tate normal form; extracted from the existing nine-step proof plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine space compact support trace shifted Tate twist counit isomorphism",
+   "results": "Eight hits concerning shift adjunctions and condensed counits; no etale affine trace.",
+   "date": "2026-10-19",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "Adjunction.comp_counit_app and generic adjunction composition; useful for tower induction but no affine-line calculation.",
+   "date": "2026-10-19",
+   "verdict": "Only generic categorical infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*trace|trace.*affine",
+   "results": "msearch: zero Mathlib hits. Project search found the assigned statement and downstream applications, not independent proofs.",
+   "date": "2026-10-19",
+   "verdict": "No duplicate affine-line counit theorem or coordinate normal-form theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpaceTopTrace",
+  "date": "2026-10-19",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-affine-space-top-trace",
+   "place": "The right coordinate functor has Tate normal form"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTraceRightNormalForm",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTraceRightNormalForm.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineTraceRight_normalForm",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineTraceRight_normalForm"
+  ],
+  "statement": "theorem affineTraceRight_normalForm (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :\n    Nonempty (affineTraceRight A N hA S d ≅\n      ordinaryFinitePullback A (affineTraceProjection S d) ⋙\n        derivedTensorRight (ModuleCat.{u + 1} A) (affineTraceTower S d)\n          ((_root_.DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.finiteEtaleTateSheaf A N (affineTraceTower S d) hA (d : ℤ))) ⋙\n        shiftFunctor _ (2 * (d : ℤ))) ∧\n    _root_.DerivedCategory.TStructure.t.plus\n      ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "independent cc review: exists_affineSpaceTopTrace statement byte-identical to live; moved construction defs (abbrev/irreducible refactor, proved equal to Adjunction.comp / original components) against change record and all 15 users (13 direct importers + 2 transitive users, all compile); two sorry leaves (line localization ⇔ (restriction,trace) iso; open-counit mate square) against their new nodes"
+ }
+}

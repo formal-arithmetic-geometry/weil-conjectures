@@ -1,0 +1,139 @@
+{
+ "id": "lem-amb-affine-trace-line-localization",
+ "kind": "statement",
+ "title": "The affine-line localization triangle in projective coordinates",
+ "statement": "Let A be a finite commutative ring, N a positive integer annihilating A, S a Noetherian scheme on which N is invertible, t an ordinary finite Tate transport, and D a normalized projective-line adjunction datum [lem-asd-ordinary-finite-p1-adjunction]. In the ordinary derived categories [def-weil-pbc-derived-categories], use the functors and adjunctions of [def-amb-affine-trace-construction]. For every complex K on S, put F=Rq_* for the projective-line projection q, J the standard affine-chart adjunction, and M the projective right functor applied to K. There exist a complex B on S, maps r:F(M) to B and w:B to (F J_! J^* M)[1], and an isomorphism b:B direct-sum K to F(M), such that (F of the open counit, r, w) is a distinguished triangle, the first injection followed by b and r is the identity of B, and b followed by the normalized projective counit is second projection. The Lean attachment specifies all maps and compositions, with no boundedness hypothesis on K.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "node lem-amb-affine-space-top-trace, order 1970"
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-construction"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved source theorem exists_distTriang_openClosed, recorded by lem-fin-module-open-closed-triangle, on M=q* K tensor A_P(1)[2]. Apply the triangulated proper direct image. Identify the closed vertex with B=K tensor A_S(1)[2], using exact finite direct image, composition q i=id and the canonical inverse-image comparisons. Its first arrow is exactly q* of the open counit, including the comparison from derived to exact inverse image.",
+   "uses": [
+    "lem-fin-module-open-closed-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+    "place": "Proof paragraph 1: extension-by-zero triangle, twisted and shifted"
+   }
+  },
+  {
+   "text": "Tensor the normalized projective-line decomposition with K and use the proper projection isomorphism to obtain b:B⊕K≅q* M. Under the canonical restriction map r to the closed vertex, the first injection becomes identity: this is restriction of the inverse-image adjunction unit along q i=id. The proper projection map is the adjoint of tensoring the counit, so the same triangle identity applies after tensoring by K. The projective datum counit normalization gives b followed by the projective counit equal to the second projection. No equality for the second component of r is required; the consumer removes it by a triangular automorphism. The unbounded open tensor comparison and the proper projection formula apply to arbitrary K.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-proper-coproducts-projection",
+    "lem-pur-etale-open-derived-tensor",
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-module-open-closed-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "prop-weil-open-closed-recollement-adjunctions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "The normalized localization triangle, steps 2, 3 and 6 of the detailed source proof; separated from the categorical isomorphism criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "open closed localization distinguished triangle projective line normalized decomposition trace",
+   "results": "Eight generic Mathlib hits about distinguished triangles and triangulated localization; none about the etale projective-line normalization. Project search locates the open-closed distinguished triangle and normalized projective-line datum separately.",
+   "date": "2026-10-19",
+   "verdict": "Geometric normalization must be supplied from the source steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃",
+   "results": "One exact generic triangle morphism criterion, used in the consumer AffineTraceLinePurity.",
+   "date": "2026-10-19",
+   "verdict": "Closes the categorical step after the localization result."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*trace|trace.*localization",
+   "results": "16 Mathlib hits on field and algebra trace localization, no etale localization trace.",
+   "date": "2026-10-19",
+   "verdict": "No geometric duplicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "open closed localization distinguished triangle projective line normalized decomposition trace",
+   "results": "Eight hits: generic triangulated localization and algebraic trace lemmas.",
+   "date": "2026-10-19",
+   "verdict": "No exact geometric match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpaceTopTrace",
+  "date": "2026-10-19",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-affine-space-top-trace",
+   "place": "Proof steps 2, 3 and 6: localization triangle and the two normalized coordinates"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTraceLineLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTraceLineLocalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineTraceLine_localization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineTraceLine_localization"
+  ],
+  "statement": "theorem affineTraceLine_localization (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA) (S : Scheme.{u}) [IsNoetherian S]\n    (hS : IsUnit (N : Γ(S, ⊤))) (D : OrdinaryFiniteP1Datum A N hA t S hS)\n    (K : DerivedCategoryModule A S) :\n    let F := ordinaryFinitePushforward A (ProjectiveLine S ↘ S)\n    let J := affineTraceOpenAdjunction A S\n    let M := (ordinaryFiniteP1Right A N hA S).obj K\n    ∃ (B : DerivedCategoryModule A S) (r : F.obj M ⟶ B)\n      (w : B ⟶ ((affineTraceLineLeft A S).obj\n        ((affineTraceLineRight A N hA S).obj K))⟦(1 : ℤ)⟧)\n      (b : B ⊞ K ≅ F.obj M),\n      Triangle.mk (F.map (J.counit.app M)) r w ∈ distTriang _ ∧\n        biprod.inl ≫ b.hom ≫ r = 𝟙 B ∧ b.hom ≫ D.adjunction.counit.app K = biprod.snd",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "independent cc review: exists_affineSpaceTopTrace statement byte-identical to live; moved construction defs (abbrev/irreducible refactor, proved equal to Adjunction.comp / original components) against change record and all 15 users (13 direct importers + 2 transitive users, all compile); two sorry leaves (line localization ⇔ (restriction,trace) iso; open-counit mate square) against their new nodes"
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "lem-amb-affine-trace-line-open-counit-base-change",
+ "kind": "statement",
+ "title": "The standard affine-line compact-support exchange respects the open counit",
+ "statement": "For every finite commutative coefficient ring A, base change g:S′→S and unbounded complex M in the ordinary derived category [def-weil-pbc-derived-categories] on the projective line over S, the actual standard-compactification exchange of [def-amb-affine-trace-construction] followed by the inverse-image square and the changed open counit equals pullback of the old open counit followed by projective direct-image exchange. The precise equation is in the Lean attachment; no Tate datum, projective trace, or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "node lem-amb-affine-space-top-trace, order 1970"
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-construction"
+ ],
+ "proof": [
+  {
+   "text": "Expand the exchange first on the pulled-back projective compactification. The derived open extension base-change isomorphism is the mate of the inverse-image square. Under the open adjunction hom equivalence the two counit composites coincide by the triangle identity. Move the old open counit through proper exchange by naturality. Transport from the pulled-back compactification to the standard compactification through their common refinement. Its comparison consists of a proper/open unit, inverse open exchange, and direct-image composition; their triangle and pasting identities cancel the extra factors. The natural comparisons with exact inverse image give the displayed left-derived equation. Every step is an equality of unbounded functors and so holds for arbitrary M.",
+   "uses": [
+    "def-amb-affine-trace-construction",
+    "def-cbc-exchange-map",
+    "lem-cbc-extension-zero-base-change",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-trace-construction",
+  "def-cbc-exchange-map",
+  "lem-cbc-extension-zero-base-change",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "Source proof step 8, open-counit square before applying the projective trace, with the standard-compactification comparison made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base change of extension by zero is compatible with open adjunction counit",
+   "results": "Eight hits for extension/restriction of scalars and scheme-module restriction counits; none for etale compact-support exchange.",
+   "date": "2026-10-19",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "One exact generic composite-counit component formula; used in the consumer proof.",
+   "date": "2026-10-19",
+   "verdict": "Generic categorical infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*baseChange|baseChange.*counit",
+   "results": "No Mathlib hits. Project rg locates the derived open-unit mate identity, but no counit theorem for the standard compactification comparison.",
+   "date": "2026-10-19",
+   "verdict": "The source open-exchange step remains a separate geometric obligation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change of extension by zero is compatible with open adjunction counit",
+   "results": "Eight hits: scheme-module restriction counits and generic shift compatibility; no etale compact-support counit square.",
+   "date": "2026-10-19",
+   "verdict": "No exact geometric match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpaceTopTrace",
+  "date": "2026-10-19",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-affine-space-top-trace",
+   "place": "Step 8: the open-counit square"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTraceLineOpenCounitBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTraceLineOpenCounitBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineTraceLineExchange_openCounit",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineTraceLineExchange_openCounit"
+  ],
+  "statement": "theorem affineTraceLineExchange_openCounit (A : Type (u + 1)) [CommRing A] [Finite A]\n    {S' S : Scheme.{u}} (g : S' ⟶ S)\n    (M : DerivedCategoryModule A (ProjectiveLine S)) :\n    let J := affineTraceOpenAdjunction A S\n    let J' := affineTraceOpenAdjunction A S'\n    affineTraceLineExchange A g\n        ((ordinaryFinitePullback A (ProjectiveLine.affineChart S)).obj M) ≫\n      (affineTraceLineLeft A S').map ((affineTraceOpenPullbackSquare A g).hom.app M) ≫\n      (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n        (J'.counit.app ((ordinaryFinitePullback A\n          (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).obj M)) =\n    (ordinaryFinitePullback A g).map\n      ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).map (J.counit.app M)) ≫\n        ordinaryFiniteP1Exchange A g M",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "independent cc review: exists_affineSpaceTopTrace statement byte-identical to live; moved construction defs (abbrev/irreducible refactor, proved equal to Adjunction.comp / original components) against change record and all 15 users (13 direct importers + 2 transitive users, all compile); two sorry leaves (line localization ⇔ (restriction,trace) iso; open-counit mate square) against their new nodes"
+ }
+}

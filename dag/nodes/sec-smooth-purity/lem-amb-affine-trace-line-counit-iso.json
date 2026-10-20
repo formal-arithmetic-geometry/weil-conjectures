@@ -1,0 +1,114 @@
+{
+ "id": "lem-amb-affine-trace-line-counit-iso",
+ "kind": "statement",
+ "title": "The affine-line counit is invertible",
+ "statement": "The affine-line counit is invertible on every coefficient complex.\nSource: blueprint lem-amb-affine-space-top-trace, proof steps 2--6\n(blueprint: lem-amb-affine-trace-line-counit-iso).\n\nProof: apply open-closed localization to the shifted Tate line on the projective\nline, then apply proper direct image. The closed vertex is the shifted Tate line\non the base, because the infinity section is finite and its composite with the\nprojection is identity. In the normalized projective-line decomposition the map\nto this vertex is first projection: the unit restricts to identity, and the Chern\nclass restricts to zero since O(1) is trivial along the infinity section. The\ntrace is second projection. Exactness of the cohomology sequence therefore makes\nthe restricted trace an isomorphism. The composite adjunction identifies this map\nwith its counit at the tensor unit. For arbitrary K, open tensor comparison and\nthe proper projection formula identify the counit with K tensor this trace.\nThe open comparison commutes with counits by the adjunction triangle identity;\nproper projection naturality gives the remaining square. Tensoring preserves\nisomorphisms. This also covers unbounded K, the empty base, and the zero ring.\n\nPrecise quantified statement:\ntheorem affineTraceLineCounit_isIso (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ)\n    (hN : 0 < N) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))\n    (D : OrdinaryFiniteP1Datum A N hA t S hS) (K : DerivedCategoryModule A S) :\n    IsIso ((affineTraceLineAdjunction A N hA t S hS D).counit.app K)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "node lem-amb-affine-space-top-trace, order 1970"
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-construction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the affine-line localization triangle. Write a for its first map, r for restriction, b:B⊕K≅Y for its middle-term coordinates, and t:Y→K for the projective counit. The first component of b r is identity and b t is the second projection.",
+   "uses": [
+    "lem-amb-affine-trace-line-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let q=in₂ b r. Then b r=pr₁+q pr₂. Precompose b with the triangular automorphism (x,y)↦(x-q y,y), whose inverse is (x,y)↦(x+q y,y). In these new coordinates, b r=pr₁ and b t=pr₂. The section in₁ b forces the connecting arrow w to be zero since r w=0. Map the resulting distinguished triangle to the split triangle K→K⊕B→B. The components are a t, b⁻¹ followed by the biproduct swap, and id_B. All three squares follow from the triangle equations and coordinate identities. Its last two components are isomorphisms, so Mathlib Pretriangulated.isIso₁_of_isIso₂₃ proves a t invertible. Adjunction.comp_counit_app identifies it with the specified affine-line counit.",
+   "uses": [
+    "def-amb-affine-trace-construction",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-trace-line-localization",
+  "def-amb-affine-trace-construction",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "G1 Lean proof: triangular coordinate change, morphism to a split distinguished triangle, and composite-adjunction counit formula. The Kummer restriction computation and cohomology argument are unnecessary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine space compact support trace shifted Tate twist counit isomorphism",
+   "results": "Eight hits concerning shift adjunctions and condensed counits; no etale affine trace.",
+   "date": "2026-10-19",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "Adjunction.comp_counit_app and generic adjunction composition; useful for tower induction but no affine-line calculation.",
+   "date": "2026-10-19",
+   "verdict": "Only generic categorical infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*trace|trace.*affine",
+   "results": "msearch: zero Mathlib hits. Project search found the assigned statement and downstream applications, not independent proofs.",
+   "date": "2026-10-19",
+   "verdict": "No duplicate affine-line counit theorem or coordinate normal-form theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpaceTopTrace",
+  "date": "2026-10-19",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-affine-space-top-trace",
+   "place": "The affine-line counit is invertible"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTraceLinePurity",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTraceLinePurity.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineTraceLineCounit_isIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineTraceLineCounit_isIso"
+  ],
+  "statement": "theorem affineTraceLineCounit_isIso (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ)\n    (hN : 0 < N) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))\n    (D : OrdinaryFiniteP1Datum A N hA t S hS) (K : DerivedCategoryModule A S) :\n    IsIso ((affineTraceLineAdjunction A N hA t S hS D).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "independent cc review: exists_affineSpaceTopTrace statement byte-identical to live; moved construction defs (abbrev/irreducible refactor, proved equal to Adjunction.comp / original components) against change record and all 15 users (13 direct importers + 2 transitive users, all compile); two sorry leaves (line localization ⇔ (restriction,trace) iso; open-counit mate square) against their new nodes"
+ }
+}

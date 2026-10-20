@@ -1,0 +1,106 @@
+{
+ "id": "lem-amb-affine-trace-line-counit-base-change",
+ "kind": "statement",
+ "title": "The affine-line composite counit commutes with base change",
+ "statement": "For normalized projective-line data satisfying its base-change square, the actual one-coordinate affine-line composite counit commutes with the proper/open compact-support exchange and canonical right-functor comparison, at every coefficient complex K, as quantified in the Lean attachment.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "node lem-amb-affine-space-top-trace, order 1970"
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-construction"
+ ],
+ "proof": [
+  {
+   "text": "Expand the composite-adjunction counit and the canonical right-functor comparison. Naturality of the changed open counit moves the projective right-object comparison through it. Apply the open-counit exchange square, then the normalized projective-line counit base-change identity. Associativity and functoriality give precisely the displayed affine-line equation. All steps are proved categorical equalities. The generic proof retains the exchange as a natural transformation and the right functor as a composite, avoiding expensive concrete category conversions. Specialize it with the literal open and projective adjunctions and no local object-comparison aliases.",
+   "uses": [
+    "def-amb-affine-trace-construction",
+    "lem-amb-affine-trace-line-open-counit-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-trace-construction",
+  "lem-amb-affine-trace-line-open-counit-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "Proved by counit naturality and composition from the open square and the already stated normalized projective-line square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine space compact support trace shifted Tate twist counit isomorphism",
+   "results": "Eight hits concerning shift adjunctions and condensed counits; no etale affine trace.",
+   "date": "2026-10-19",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "Adjunction.comp_counit_app and generic adjunction composition; useful for tower induction but no affine-line calculation.",
+   "date": "2026-10-19",
+   "verdict": "Only generic categorical infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*trace|trace.*affine",
+   "results": "msearch: zero Mathlib hits. Project search found the assigned statement and downstream applications, not independent proofs.",
+   "date": "2026-10-19",
+   "verdict": "No duplicate affine-line counit theorem or coordinate normal-form theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpaceTopTrace",
+  "date": "2026-10-19",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-affine-space-top-trace",
+   "place": "Affine-line counit square, step 8"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTraceLineCounitBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTraceLineCounitBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineTraceLineCounit_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineTraceLineCounit_baseChange"
+  ],
+  "statement": "theorem affineTraceLineCounit_baseChange (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (_hN : 0 < N) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t T hT)\n    (hD : OrdinaryFiniteP1BaseChange A N hA t D)\n    {S' S : Scheme.{u}} [IsNoetherian S'] [IsNoetherian S]\n    (g : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤)))\n    (K : DerivedCategoryModule A S) :\n    affineTraceLineExchange A g ((affineTraceLineRight A N hA S).obj K) ≫\n        (affineTraceLineLeft A S').map\n          (affineTraceLineRightBaseChange A N hA t g\n            (affineTraceProjectiveInvertible N S hS) K).hom ≫\n        (affineTraceLineAdjunction A N hA t S'\n          (affineTracePullbackInvertible N g hS) (D _ _)).counit.app\n            ((ordinaryFinitePullback A g).obj K) =\n      (ordinaryFinitePullback A g).map\n        ((affineTraceLineAdjunction A N hA t S hS (D _ _)).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "independent cc review: exists_affineSpaceTopTrace statement byte-identical to live; moved construction defs (abbrev/irreducible refactor, proved equal to Adjunction.comp / original components) against change record and all 15 users (13 direct importers + 2 transitive users, all compile); two sorry leaves (line localization ⇔ (restriction,trace) iso; open-counit mate square) against their new nodes"
+ }
+}

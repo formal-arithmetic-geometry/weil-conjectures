@@ -1,0 +1,157 @@
+{
+ "id": "def-amb-affine-trace-construction",
+ "kind": "definition",
+ "title": "The literal affine trace functors, adjunctions and exchange",
+ "statement": "For a commutative coefficient ring A and a scheme S, define the affine-line compact-support functor using the standard projective-line compactification and its right functor by restricting the shifted Tate projective-line functor. For invertible N annihilating A and normalized projective-line data, compose the open and projective adjunctions. Define the dimension-d functors and adjunction by ordered recursion, with identity at zero. Define the counit at the constant complex, the bounded-below compact-support comparison, and the proper/open exchange and right-functor pullback comparison by the literal recursive formulas in the Lean attachment. These constructions were formerly in exists_affineSpaceTopTrace's module. The tower adjunction uses the same unit and counit as Mathlib composite adjunction, presented with explicit counit components to avoid expensive unfolding. Generic functor and adjunction towers implement the same ordered recursion. The line exchange is packaged as a natural transformation, with a proved equality to the original component formula. The canonical one-line right base-change isomorphism uses explicit hom and inverse components; affineTraceRightSquareIso_eq proves it equals the original natural-isomorphism component followed by mapIso. The line adjunction, like the tower, uses the proved-equal explicit-component composite. The one-line left and right composites, adjunction and right comparison are abbreviations of these constructions, ensuring the kernel unfolds the short aliases before the scheme and derived-category implementations. The composite-right square interface records both right functors before taking components; its equality with the objectwise square comparison is proved.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "node lem-amb-affine-space-top-trace, order 1970"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-sbc-affine-space",
+  "def-amb-etale-compact-support",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "def-amb-p1-trace",
+  "lem-amb-etale-compact-comparisons",
+  "def-weil-pbc-composite-adjunction",
+  "thm-cbc-finite-torsion",
+  "def-amb-affine-trace-tower"
+ ],
+ "proof": [
+  {
+   "text": "Form the ordered left and right functor towers and adjunctions by recursion. The composite adjunction has the same unit as Mathlib composition and the counit L2.map epsilon1 followed by epsilon2. The component formula proves equality with Mathlib composition; induction gives the successor and invertible-counit APIs.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package the original compactification exchange as its composite natural transformation and recurse through the tower. For the right comparison use the square hom followed by inverse image of the normalized projective comparison, with inverse in reverse order. Functoriality and the inverse identities prove these components form the same isomorphism as the original component/mapIso composite. Retaining the composite right functors in the interface is definitionally the same construction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
+  "place": "Existing actual constructions with signatures preserved. The open extension and open adjunction are recorded once to keep their derived instances consistent; generic tower counits and exchanges have proved component equations and equality with Mathlib composition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine space compact support trace shifted Tate twist counit isomorphism",
+   "results": "Eight hits concerning shift adjunctions and condensed counits; no etale affine trace.",
+   "date": "2026-10-19",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "Adjunction.comp_counit_app and generic adjunction composition; useful for tower induction but no affine-line calculation.",
+   "date": "2026-10-19",
+   "verdict": "Only generic categorical infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*trace|trace.*affine",
+   "results": "msearch: zero Mathlib hits. Project search found the assigned statement and downstream applications, not independent proofs.",
+   "date": "2026-10-19",
+   "verdict": "No duplicate affine-line counit theorem or coordinate normal-form theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpaceTopTrace",
+  "date": "2026-10-19",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-affine-space-top-trace",
+   "place": "The literal affine trace functors, adjunctions and exchange"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTraceConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTraceConstruction.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineTraceLineLeft",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineTraceOpenLeft",
+   "AlgebraicGeometry.Etale.affineTraceLineLeft",
+   "AlgebraicGeometry.Etale.affineTraceLineRight",
+   "AlgebraicGeometry.Etale.affineTraceOpenAdjunction",
+   "AlgebraicGeometry.Etale.affineTraceLeftTower",
+   "AlgebraicGeometry.Etale.affineTraceRightTower",
+   "AlgebraicGeometry.Etale.affineTraceLeft",
+   "AlgebraicGeometry.Etale.affineTraceRight",
+   "AlgebraicGeometry.Etale.affineTraceComposeAdjunction",
+   "AlgebraicGeometry.Etale.affineTraceComposeAdjunction_counit",
+   "AlgebraicGeometry.Etale.affineTraceComposeAdjunction_eq",
+   "AlgebraicGeometry.Etale.affineTraceLineAdjunction",
+   "AlgebraicGeometry.Etale.affineTraceLineAdjunction_counit",
+   "AlgebraicGeometry.Etale.affineTraceAdjunctionTower",
+   "AlgebraicGeometry.Etale.affineTraceAdjunctionTower_counit_succ",
+   "AlgebraicGeometry.Etale.affineTraceAdjunctionTower_counit_isIso",
+   "AlgebraicGeometry.Etale.affineTraceAdjunction",
+   "AlgebraicGeometry.Etale.affineTraceCounit",
+   "AlgebraicGeometry.Etale.affineTraceLeftPlus",
+   "AlgebraicGeometry.Etale.affineTraceCompactSupportComparison",
+   "AlgebraicGeometry.Etale.affineTracePlusCompatibility",
+   "AlgebraicGeometry.Etale.affineTraceLineExchangeTransformation",
+   "AlgebraicGeometry.Etale.affineTraceLineExchange",
+   "AlgebraicGeometry.Etale.affineTraceLineExchange_eq",
+   "AlgebraicGeometry.Etale.affineTraceExchangeTower",
+   "AlgebraicGeometry.Etale.affineTraceExchangeTower_zero",
+   "AlgebraicGeometry.Etale.affineTraceExchangeTower_succ",
+   "AlgebraicGeometry.Etale.affineTraceExchange",
+   "AlgebraicGeometry.Etale.affineTraceOpenPullbackSquare",
+   "AlgebraicGeometry.Etale.affineTraceRightSquareIso",
+   "AlgebraicGeometry.Etale.affineTraceRightSquareIso_eq",
+   "AlgebraicGeometry.Etale.affineTraceCompositeRightSquareIso",
+   "AlgebraicGeometry.Etale.affineTraceCompositeRightSquareIso_eq",
+   "AlgebraicGeometry.Etale.affineTraceLineRightBaseChange",
+   "AlgebraicGeometry.Etale.affineTraceRightBaseChangeStep",
+   "AlgebraicGeometry.Etale.affineTraceRightExchangeTower",
+   "AlgebraicGeometry.Etale.affineTraceRightBaseChange",
+   "AlgebraicGeometry.Etale.affineTraceAdjunction_succ"
+  ],
+  "statement": "abbrev affineTraceLineLeft (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :\n    DerivedCategoryModule A (AffineSpace PUnit.{u + 1} S) ⥤ DerivedCategoryModule A S",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-4d8ad",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261020T051303-L-1621396",
+  "kind": "interface",
+  "note": "independent cc review: exists_affineSpaceTopTrace statement byte-identical to live; moved construction defs (abbrev/irreducible refactor, proved equal to Adjunction.comp / original components) against change record and all 15 users (13 direct importers + 2 transitive users, all compile); two sorry leaves (line localization ⇔ (restriction,trace) iso; open-counit mate square) against their new nodes"
+ }
+}
