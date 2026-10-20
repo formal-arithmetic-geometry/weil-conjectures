@@ -38,9 +38,54 @@
   "prop-pur-kinjective-resolutions-exist",
   "def-weil-integral-reduction-tower"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the transition normalization on the global site and every actual slice, restrict the constant finite coefficient transition. The inverse-limit cone equation gives pi_(n+1) followed by this transition equal to pi_n; sectionwise it is the prescribed rho.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On scalar-extension presheaves send s tensor x to rho(s) tensor x. Projection compatibility makes this balanced and completed-linear. Sheafification extends the map; tensor generation proves its naturality and uniqueness. Apply it degreewise to obtain transition_existsUnique, including the chain-map equations. The proved public reduction_obj equation supplies the equality casts; generator_original_formula verifies that the normalized cast has the original generator value.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For completionUnit_existsUnique, the product augmentation is natural by its projections. Identify the arrow-induced homotopy-cofiber map with the ordinary mapping-cone map on both summands. The explicit cocone lift with zero second cochain is consequently natural, and derived localization gives a transformation qGood to roosGood.",
+   "uses": [
+    "def-weil-derived-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve every homotopy representative by the existing flat-term K-flat resolution theorem. Convert categorical tensor exactness to IsFlatOnSite via the site tensor comparison. The resolving-localization lemma restricts the right calculus of fractions to the resolving subcategory. Compose its fully faithful whiskering with fully faithful restriction along the full, essentially surjective quotient of representatives, then transport along quotientCompQhIso to the direct derived-localization functor. Carry out these categorical steps generically for an abelian category and then a ringed site before specializing to the scheme or slice. Lift the chain-level unit composed with completionComparison.inv, and use faithfulness and cancellation of completionComparison to obtain its unique required normalization.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-limit",
+  "def-weil-integral-reduction-tower",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-resolving-representative-whiskering"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V9",
+  "date": "2026-10-21",
+  "note": "Partial formal proof: transition_existsUnique and completionUnit_existsUnique. Tensor and sheafification argument follows Stacks 03EK; unit descent follows 06YN and 08TC using the existing resolving-representative whiskering theorem. Existing completion descent and global tensor comparison holes retained."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -142,7 +187,8 @@
    "WeilConjectures.IntegralOnSlice.hom",
    "WeilConjectures.IntegralOnSlice.duality",
    "WeilConjectures.IntegralOnSlice.completedTensor",
-   "WeilConjectures.IntegralOnSlice.completedTensor_global_comparison"
+   "WeilConjectures.IntegralOnSlice.completedTensor_global_comparison",
+   "WeilConjectures.IntegralOnSlice.reduction_obj"
   ],
   "file": "lean/Sheaf/Paper/IntegralDerivedOperationsOnSlices.lean",
   "statement": "def completedTensor : (D l E X U) × (D l E X U) ⥤ D l E X U",
@@ -153,27 +199,13 @@
   "note": "§1(B): the published integral operations have only a global Scheme parameter and cannot be formed on the actual over-site. Publicly retain that module and add an independent-universe global/slice interface, using the same completed ring, its sectionwise restricted finite quotients and projections, canonical scalar extension, strict reduction transitions and normalized Roos completion. Completed tensor is completion of the normalized ordinary derived tensor; completedTensor_global_comparison identifies its global computation with the original finite-tensor Roos representatives. No arbitrary tensor, completion unit or map is assumed."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "Y2",
+  "reviewer": "C-8e524",
+  "group": "V9",
   "result": "pass",
-  "landing": "20261019T034352-L-426160",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.IntegralOnSlice.augmentation_existsUnique",
-   "WeilConjectures.IntegralOnSlice.completedTensor_global_comparison",
-   "WeilConjectures.IntegralOnSlice.completionUnit_existsUnique",
-   "WeilConjectures.IntegralOnSlice.completion_exists",
-   "WeilConjectures.IntegralOnSlice.roosUnit_condition",
-   "WeilConjectures.IntegralOnSlice.transition_existsUnique"
-  ],
-  "sorry_after": [
-   "WeilConjectures.IntegralOnSlice.completedTensor_global_comparison",
-   "WeilConjectures.IntegralOnSlice.completionUnit_existsUnique",
-   "WeilConjectures.IntegralOnSlice.completion_exists",
-   "WeilConjectures.IntegralOnSlice.transition_existsUnique"
-  ]
+  "landing": "20261020T235636-L-1199778",
+  "kind": "interface",
+  "note": "independent cc review: 8e5249915199 files byte-identical to PASSed d56fcf46 (landing failed on a missing server file); item module recompiled against current live build (rc 0, no warnings) with #print axioms; 6 direct importers compiled against delivered olean (all rc 0); node and change record Users vs computed users"
  }
 }

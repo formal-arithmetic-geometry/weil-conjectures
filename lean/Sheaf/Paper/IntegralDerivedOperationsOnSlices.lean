@@ -14,6 +14,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import all Sheaf.Paper.IntegralReductionTowerUnrestricted
+import all Sheaf.Paper.ResolvingRepresentativeWhiskering
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-!
 # Completed integral operations on the global site and its slices
 
@@ -34,6 +38,177 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
+
+
+universe a b c d e f r
+
+private theorem resolvingWhiskering
+    {K : Type a} [Category.{b} K] {H : Type c} [Category.{d} H]
+    {D : Type e} [Category.{f} D]
+    (p : K ⥤ H) [p.Full] [p.EssSurj] (hsurj : Function.Surjective p.obj)
+    (W : MorphismProperty H) [W.HasRightCalculusOfFractions]
+    (q : H ⥤ D) [q.IsLocalization W]
+    (P : ObjectProperty K) (S : ObjectProperty H)
+    (hp : ∀ X, P X ↔ S (p.obj X))
+    (hres : ∀ X : H, ∃ (Y : S.FullSubcategory) (s : Y.obj ⟶ X), W s) :
+    Nonempty (((CategoryTheory.Functor.whiskeringLeft
+      P.FullSubcategory D D).obj (P.ι ⋙ p ⋙ q)).FullyFaithful) := by
+  let f := S.lift (P.ι ⋙ p) (fun X ↦ (hp X.obj).1 X.property)
+  have : f.Full := ⟨by
+    intro X Y g
+    obtain ⟨g, hg⟩ := p.map_surjective g.hom
+    refine ⟨ObjectProperty.homMk g, ?_⟩
+    apply ObjectProperty.hom_ext
+    exact hg⟩
+  have : f.EssSurj := ⟨by
+    intro X
+    obtain ⟨Y, hy⟩ := hsurj X.obj
+    refine ⟨⟨Y, (hp Y).2 (hy.symm ▸ X.property)⟩, ?_⟩
+    exact ⟨ObjectProperty.isoMk S (eqToIso hy)⟩⟩
+  have : (S.ι ⋙ q).IsLocalization (W.inverseImage S.ι) :=
+    restriction_localization W q S hres
+  let ff := Localization.fullyFaithfulWhiskeringLeft (S.ι ⋙ q) (W.inverseImage S.ι) D
+  let fg := fullyFaithfulWhiskeringOfFullEssSurj f D
+  exact ⟨ff.comp fg⟩
+
+private theorem complexWhiskering
+    (A : Type a) [Category.{b} A] [Abelian A] [HasDerivedCategory.{e} A]
+    (P : ObjectProperty (CochainComplex A ℤ))
+    (S : ObjectProperty (HomotopyCategory A (.up ℤ)))
+    (hp : ∀ K, P K ↔ S ((HomotopyCategory.quotient A (.up ℤ)).obj K))
+    (hres : ∀ K : HomotopyCategory A (.up ℤ),
+      ∃ (Y : S.FullSubcategory) (s : Y.obj ⟶ K),
+        HomotopyCategory.quasiIso A (.up ℤ) s) :
+    Nonempty (((CategoryTheory.Functor.whiskeringLeft P.FullSubcategory
+      (DerivedCategory A) (DerivedCategory A)).obj (P.ι ⋙ DerivedCategory.Q)).FullyFaithful) := by
+  have hff := resolvingWhiskering (HomotopyCategory.quotient A (.up ℤ))
+    HomotopyCategory.quotient_obj_surjective
+    (HomotopyCategory.quasiIso A (.up ℤ)) DerivedCategory.Qh P S hp hres
+  let e := Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A)
+  let ff := Classical.choice hff
+  exact ⟨ff.ofIso
+    ((CategoryTheory.Functor.whiskeringLeft _ _ (DerivedCategory A)).mapIso e)⟩
+
+private theorem siteWhiskering
+    {C : Type a} [Category.{b} C] [EssentiallySmall.{r} C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
+    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
+    [HasDerivedCategory.{e} (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] :
+    let A := SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
+    let P : ObjectProperty (CochainComplex A ℤ) := fun K ↦
+      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) K ∧
+        ∀ i, SheafOfModules.IsFlatOnSite (J := J) (R := R) (K.X i)
+    Nonempty (((CategoryTheory.Functor.whiskeringLeft P.FullSubcategory
+      (DerivedCategory A) (DerivedCategory A)).obj (P.ι ⋙ DerivedCategory.Q)).FullyFaithful) := by
+  let A := SheafOfModules.{r}
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
+  let S : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun K ↦
+    CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) K.as ∧
+      ∀ i, SheafOfModules.IsFlatOnSite (J := J) (R := R) (K.as.X i)
+  exact complexWhiskering A _ S (fun _ ↦ Iff.rfl) (by
+    intro K
+    obtain ⟨P, g, hP, hflat, hg, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients (J := J) (R := R) K.as
+    have hs : ∀ i, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X i) := fun i ↦
+      (exactFunctor _ _).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso R (P.X i)).symm (hflat i)
+    refine ⟨⟨(HomotopyCategory.quotient _ _).obj P, hP, hs⟩,
+      (HomotopyCategory.quotient _ _).map g, ?_⟩
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff g).2 hg)
+
+private theorem normalizedUnit_existsUnique
+    {C : Type a} [Category.{b} C] {D : Type c} [Category.{d} D]
+    (p : C ⥤ D)
+    (ff : ((CategoryTheory.Functor.whiskeringLeft C D D).obj p).FullyFaithful)
+    (F : D ⥤ D) (G : C ⥤ D) (e : p ⋙ F ≅ G) (β : p ⟶ G) :
+    ∃! η : 𝟭 D ⟶ F, ∀ P : C, η.app (p.obj P) ≫ e.hom.app P = β.app P := by
+  let α : p ⋙ 𝟭 D ⟶ p ⋙ F := β ≫ e.inv
+  let η₀ : 𝟭 D ⟶ F := ff.preimage (X := 𝟭 D) (Y := F) α
+  have hη₀ : Functor.whiskerLeft p η₀ = α := ff.map_preimage α
+  refine ⟨η₀, ?_, ?_⟩
+  · intro P
+    have h := congrArg (fun k ↦ k.app P) hη₀
+    change η₀.app (p.obj P) = β.app P ≫ e.inv.app P at h
+    rw [h, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  · intro η hη
+    apply ff.map_injective
+    ext P
+    apply (cancel_mono (e.hom.app P)).1
+    rw [show (((CategoryTheory.Functor.whiskeringLeft C D D).obj p).map η₀).app P =
+      α.app P from congrArg (fun k ↦ k.app P) hη₀]
+    change η.app (p.obj P) ≫ _ = α.app P ≫ _
+    rw [hη]
+    simp only [α, NatTrans.comp_app, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+
+private theorem arrowConeMap (M : Type*) [Category* M] [Abelian M]
+    {K₁ K₂ L₁ L₂ : CochainComplex M ℤ}
+    (φ₁ : K₁ ⟶ L₁) (φ₂ : K₂ ⟶ L₂) (a : K₁ ⟶ K₂) (b : L₁ ⟶ L₂)
+    (h : φ₁ ≫ b = a ≫ φ₂) :
+    HomologicalComplex.homotopyCofiber.mapArrowHom φ₁ φ₂
+        (fun j ↦ ⟨j - 1, Int.sub_add_cancel j 1⟩) (Arrow.homMk a b h.symm) =
+      CochainComplex.mappingCone.map φ₁ φ₂ a b h := by
+  apply HomologicalComplex.hom_ext
+  intro i
+  apply HomologicalComplex.homotopyCofiber.ext_from_X φ₁ (i + 1) i rfl
+  · change (CochainComplex.mappingCone.inl φ₁).v (i + 1) i (by omega) ≫ _ =
+      (CochainComplex.mappingCone.inl φ₁).v (i + 1) i (by omega) ≫
+        (CochainComplex.mappingCone.map φ₁ φ₂ a b h).f i
+    simp only [CochainComplex.mappingCone.map,
+      CochainComplex.mappingCone.inl_v_desc_f]
+    simp [CochainComplex.mappingCone.inl,
+      HomologicalComplex.homotopyCofiber.mapArrowHom,
+      HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom φ₂
+        (fun j ↦ ⟨j - 1, Int.sub_add_cancel j 1⟩) (i + 1) i rfl]
+  · change (CochainComplex.mappingCone.inr φ₁).f i ≫ _ =
+      (CochainComplex.mappingCone.inr φ₁).f i ≫
+        (CochainComplex.mappingCone.map φ₁ φ₂ a b h).f i
+    simp only [CochainComplex.mappingCone.map,
+      CochainComplex.mappingCone.inr_f_desc_f]
+    change HomologicalComplex.homotopyCofiber.inrX φ₁ i ≫ _ = _
+    simp [HomologicalComplex.homotopyCofiber.mapArrowHom]
+    rfl
+
+private theorem completedCoconeLift_f (M : Type*) [Category* M] [Abelian M]
+    {C K L : CochainComplex M ℤ} (φ : K ⟶ L) (u : C ⟶ K)
+    (hu : u ≫ φ = 0) (p : ℤ) :
+    (CochainComplex.mappingCocone.lift φ u 0 (by simp [hu])).f p =
+      u.f p ≫ (CochainComplex.mappingCocone.inl φ).v p p (add_zero p) := by
+  let l := CochainComplex.mappingCocone.lift φ u 0 (by simp [hu])
+  have h := CochainComplex.mappingCocone.id_X φ p (p + -1) rfl
+  calc
+    l.f p = l.f p ≫ 𝟙 _ := (Category.comp_id _).symm
+    _ = _ := by
+      rw [← h, Preadditive.comp_add, ← Category.assoc, ← Category.assoc,
+        CochainComplex.mappingCocone.lift_f_fst_f,
+        CochainComplex.mappingCocone.lift_f_snd_v]
+      simp
+
+private theorem completedCoconeLift_natural (M : Type*) [Category* M] [Abelian M]
+    {C D K₁ K₂ L₁ L₂ : CochainComplex M ℤ}
+    (φ₁ : K₁ ⟶ L₁) (φ₂ : K₂ ⟶ L₂) (a : K₁ ⟶ K₂) (b : L₁ ⟶ L₂)
+    (h : φ₁ ≫ b = a ≫ φ₂) (α : C ⟶ D) (u : C ⟶ K₁) (v : D ⟶ K₂)
+    (hu : u ≫ φ₁ = 0) (hv : v ≫ φ₂ = 0) (hn : α ≫ v = u ≫ a) :
+    α ≫ CochainComplex.mappingCocone.lift φ₂ v 0 (by simp [hv]) =
+      CochainComplex.mappingCocone.lift φ₁ u 0 (by simp [hu]) ≫
+        (CochainComplex.mappingCone.map φ₁ φ₂ a b h)⟦(-1 : ℤ)⟧' := by
+  apply HomologicalComplex.hom_ext
+  intro p
+  have hi : (CochainComplex.mappingCocone.inl φ₁).v p p (add_zero p) ≫
+      ((CochainComplex.mappingCone.map φ₁ φ₂ a b h)⟦(-1 : ℤ)⟧').f p =
+      a.f p ≫ (CochainComplex.mappingCocone.inl φ₂).v p p (add_zero p) := by
+    simp [CochainComplex.mappingCocone.inl,
+      CochainComplex.HomComplex.Cochain.rightShift_v _ _ _ _ _ _ _ _ rfl,
+      CochainComplex.mappingCone.map]
+  simp only [HomologicalComplex.comp_f]
+  rw [completedCoconeLift_f M φ₂ v hv p, completedCoconeLift_f M φ₁ u hu p,
+    Category.assoc, hi, ← Category.assoc]
+  simpa only [HomologicalComplex.comp_f, Category.assoc] using
+    congrArg (fun z ↦ z.f p ≫
+      (CochainComplex.mappingCocone.inl φ₂).v p p (add_zero p)) hn
+
 namespace WeilConjectures
 namespace IntegralOnSlice
 
@@ -130,12 +305,18 @@ def reductionWitness (n : ℕ) :=
 
 /-- Ordinary change of rings with the witness's fixed objects and maps. Source: Stacks 06YY
 (blueprint: def-pur-integral-derived-operations). -/
-def reduction (n : ℕ) := (reductionWitness l E X U n).choose
+def reduction (n : ℕ) :
+    Mod l E X U ⥤ SheafOfModules.{max u (t + 1)}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients
+        (topology X U) (finite l E X U n)) :=
+  (reductionWitness l E X U n).choose
 
 /-- Additivity supplied by the normalized scalar-extension construction. Source: Stacks 06YY
 (blueprint: def-pur-integral-derived-operations). -/
 instance reductionAdditive (n : ℕ) : (reduction l E X U n).Additive :=
   (reductionWitness l E X U n).choose_spec.choose_spec.choose_spec.choose
+
+attribute [local irreducible] reductionWitness
 
 /-- Termwise reduction with the completed action restored by the actual projection.
 Source: Stacks 06YY (blueprint: def-pur-integral-derived-operations). -/
@@ -146,15 +327,50 @@ def level (n : ℕ) : Cx l E X U ⥤ Cx l E X U :=
         (projection l E X U n))).mapHomologicalComplex
       (ComplexShape.up ℤ)
 
+/-- The normalized scalar-extension functor has the prescribed objects.
+Source: Stacks 06YY (blueprint: def-pur-integral-derived-operations).
+Proof: project the object-normalization clause of the scalar-extension witness. -/
+theorem reduction_obj (n : ℕ) (M : Mod l E X U) :
+    (reduction l E X U n).obj M =
+      SheafOfModules.changeOfRings
+        (projection l E X U n) M :=
+  (reductionWitness l E X U n).choose_spec.choose M
+
 /-- The sheafified generator s tensor x of finite reduction. Source: Stacks 03EK
 (blueprint: def-pur-integral-derived-operations). -/
 def generator (n : ℕ) (M : Mod l E X U) (V : (Site X U)ᵒᵖ)
     (s : (finite l E X U n).obj.obj V) (x : M.val.obj V) :
     ((reduction l E X U n).obj M).val.obj V :=
-  (eqToHom ((reductionWitness l E X U n).choose_spec.choose M).symm).val.app V
+  (eqToHom (reduction_obj l E X U n M).symm).val.app V
     ((toSheafify (topology X U)
       (SheafOfModules.changeOfRingsPresheaf (projection l E X U n) M).presheaf).app V
         (s ⊗ₜ[(ring l E X U).obj.obj V, ((projection l E X U n).hom.app V).hom] x))
+
+/-- The named equality proof leaves the original generator definition unchanged. -/
+private theorem generator_original_formula (n : ℕ) (M : Mod l E X U)
+    (V : (Site X U)ᵒᵖ) (s : (finite l E X U n).obj.obj V) (x : M.val.obj V) :
+    generator l E X U n M V s x =
+      (eqToHom ((reductionWitness l E X U n).choose_spec.choose M).symm).val.app V
+        ((toSheafify (topology X U)
+          (SheafOfModules.changeOfRingsPresheaf (projection l E X U n) M).presheaf).app V
+            (s ⊗ₜ[(ring l E X U).obj.obj V,
+              ((projection l E X U n).hom.app V).hom] x)) := rfl
+
+private theorem unrestrictedReduction_map (n : ℕ)
+    {M N : Mod l E X U} (a : M ⟶ N) :
+    (reduction l E X U n).map a =
+      eqToHom (reduction_obj l E X U n M) ≫
+        SheafOfModules.changeOfRingsHom
+          (projection l E X U n) M a ≫
+        eqToHom (reduction_obj l E X U n N).symm :=
+  (reductionWitness l E X U n).choose_spec.choose_spec.choose a
+
+private theorem sliceGenerator_eq (n : ℕ) (M : Mod l E X U)
+    (V : (Site X U)ᵒᵖ) (s : (finite l E X U n).obj.obj V) (x : M.val.obj V) :
+    generator l E X U n M V s x =
+      (eqToHom (reduction_obj l E X U n M).symm).val.app V
+        (SheafOfModules.UnrestrictedTowerProof.tensorSection
+          (projection l E X U n) M V s x) := rfl
 
 private def unitPresheaf (n : ℕ) (M : Mod l E X U) :
     M.val ⟶ (PresheafOfModules.restrictScalars
@@ -193,53 +409,39 @@ private def unitModule (n : ℕ) (M : Mod l E X U) :
     ((SheafOfModules.restrictScalars
       ((sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
         (projection l E X U n))).map
-      (eqToHom ((reductionWitness l E X U n).choose_spec.choose M).symm)).val
+      (eqToHom (reduction_obj l E X U n M).symm)).val
 
 private theorem unitModule_apply (n : ℕ) (M : Mod l E X U)
     (V : (Site X U)ᵒᵖ) (x : M.val.obj V) :
     (unitModule l E X U n M).val.app V x = generator l E X U n M V 1 x := by
   rfl
 
+
+section TransitionConstruction
+
+
 private theorem generator_map (n : ℕ) {M N : Mod l E X U} (a : M ⟶ N)
     (V : (Site X U)ᵒᵖ) (s : (finite l E X U n).obj.obj V) (x : M.val.obj V) :
     ((reduction l E X U n).map a).val.app V (generator l E X U n M V s x) =
       generator l E X U n N V s (a.val.app V x) := by
-  let h : ∀ M : Mod l E X U, (reduction l E X U n).obj M =
-      SheafOfModules.changeOfRings (projection l E X U n) M :=
-    (reductionWitness l E X U n).choose_spec.choose
-  have hm : (reduction l E X U n).map a = eqToHom (h M) ≫
-      SheafOfModules.changeOfRingsHom (projection l E X U n) M a ≫ eqToHom (h N).symm :=
-    (reductionWitness l E X U n).choose_spec.choose_spec.choose a
-  change ((eqToHom (h M).symm ≫ (reduction l E X U n).map a).val.app V)
-      ((toSheafify (topology X U)
-        (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)}
-          (projection l E X U n) M).presheaf).app V
-          (s ⊗ₜ[(ring l E X U).obj.obj V,
-            ((projection l E X U n).hom.app V).hom] x)) = _
-  rw [hm]
-  simp only [eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
-  change ((eqToHom (h N).symm).val.app V)
-      ((SheafOfModules.changeOfRingsHom.{t, t + 1, max u (t + 1)}
-        (projection l E X U n) M a).val.app V
-        ((toSheafify (topology X U)
-          (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)}
-          (projection l E X U n) M).presheaf).app V
-            (s ⊗ₜ[(ring l E X U).obj.obj V,
-              ((projection l E X U n).hom.app V).hom] x))) = _
-  congr 1
-  let k : SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)} (projection l E X U n) M ⟶
-      SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)} (projection l E X U n) N :=
-    { app := fun V ↦ (ModuleCat.extendScalars
-        ((projection l E X U n).hom.app V).hom).map (a.val.app V)
-      naturality := SheafOfModules.changeOfRingsHom_naturality.{t, t + 1, max u (t + 1)}
-        (projection l E X U n) M a }
-  have hn := CategoryTheory.toSheafify_naturality (topology X U)
-    ((PresheafOfModules.toPresheaf _).map k)
-  have he := ConcreteCategory.congr_hom (NatTrans.congr_app hn V)
-    (s ⊗ₜ[(ring l E X U).obj.obj V,
-      ((projection l E X U n).hom.app V).hom] x)
-  change _ = _ at he
-  convert he.symm using 1 <;> rfl
+  rw [sliceGenerator_eq, sliceGenerator_eq]
+  have h : eqToHom (reduction_obj l E X U n M).symm ≫
+      (reduction l E X U n).map a =
+      SheafOfModules.changeOfRingsHom (projection l E X U n) M a ≫
+        eqToHom (reduction_obj l E X U n N).symm := by
+    rw [unrestrictedReduction_map]
+    simp only [eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+  calc
+    _ = (eqToHom (reduction_obj l E X U n N).symm).val.app V
+        ((SheafOfModules.changeOfRingsHom (projection l E X U n) M a).val.app V
+          (SheafOfModules.UnrestrictedTowerProof.tensorSection
+            (projection l E X U n) M V s x)) :=
+      congrArg (fun k ↦ k.val.app V
+        (SheafOfModules.UnrestrictedTowerProof.tensorSection
+          (projection l E X U n) M V s x)) h
+    _ = _ := congrArg ((eqToHom (reduction_obj l E X U n N).symm).val.app V)
+      (SheafOfModules.UnrestrictedTowerProof.map_tensorSection
+        (projection l E X U n) M a V s x)
 
 private def moduleUnit (n : ℕ) :
     𝟭 (Mod l E X U) ⟶ reduction l E X U n ⋙
@@ -258,6 +460,12 @@ private def moduleUnit (n : ℕ) :
 private def levelUnit (n : ℕ) : 𝟭 (Cx l E X U) ⟶ level l E X U n :=
   NatTrans.mapHomologicalComplex (moduleUnit l E X U n) (.up ℤ)
 
+private theorem levelUnit_apply (n : ℕ) (P : Cx l E X U) (i : ℤ)
+    (V : (Site X U)ᵒᵖ) (x : (P.X i).val.obj V) :
+    (((levelUnit l E X U n).app P).f i).val.app V x =
+      generator l E X U n (P.X i) V 1 x :=
+  unitModule_apply l E X U n (P.X i) V x
+
 /-- The coefficient reduction, forgetting commutativity only. Source: Stacks 03EK
 (blueprint: def-pur-integral-derived-operations). -/
 def rho (n : ℕ) :
@@ -270,6 +478,93 @@ def rho (n : ℕ) :
   | some V => ((Over.forget V).sheafPushforwardContinuous _ _ _).map
       (integralCoefficientSheafTransition l E X n)
 
+private def coefficientStep (n : ℕ) : finite l E X U (n + 1) ⟶ finite l E X U n :=
+  (restrict.{t, u} X U).map (WeilConjectures.unrestrictedCoefficientStep l E X n)
+
+private theorem coefficientStep_apply (n : ℕ) (V : (Site X U)ᵒᵖ)
+    (s : (finite l E X U (n + 1)).obj.obj V) :
+    (coefficientStep l E X U n).hom.app V s = (rho l E X U n).hom.app V s := by
+  cases U <;> rfl
+
+private theorem coefficientStep_comp (n : ℕ) :
+    projection l E X U (n + 1) ≫ coefficientStep l E X U n = projection l E X U n := by
+  exact ((restrict.{t, u} X U).map_comp _ _).symm.trans
+    (congrArg (restrict.{t, u} X U).map (WeilConjectures.unrestrictedCoefficientStep_comp l E X n))
+
+
+
+private noncomputable def unrestrictedModuleStep (n : ℕ)
+    (M : Mod l E X U) :
+    (SheafOfModules.UnrestrictedTowerProof.res
+      (projection l E X U (n + 1))).obj
+        ((reduction l E X U (n + 1)).obj M) ⟶
+      (SheafOfModules.UnrestrictedTowerProof.res
+        (projection l E X U n)).obj
+          ((reduction l E X U n).obj M) :=
+  SheafOfModules.UnrestrictedTowerProof.identifiedMap
+    (projection l E X U (n + 1))
+    (projection l E X U n)
+    (coefficientStep l E X U n) (coefficientStep_comp l E X U n) M
+    (reduction l E X U (n + 1))
+    (reduction l E X U n)
+    (reduction_obj l E X U (n + 1))
+    (reduction_obj l E X U n)
+
+private theorem unrestrictedModuleStep_naturality (n : ℕ)
+    {M N : Mod l E X U} (a : M ⟶ N) :
+    (SheafOfModules.UnrestrictedTowerProof.res
+      (projection l E X U (n + 1))).map
+        ((reduction l E X U (n + 1)).map a) ≫
+      unrestrictedModuleStep l E X U n N =
+    unrestrictedModuleStep l E X U n M ≫
+      (SheafOfModules.UnrestrictedTowerProof.res
+        (projection l E X U n)).map
+          ((reduction l E X U n).map a) :=
+  SheafOfModules.UnrestrictedTowerProof.identifiedMap_naturality
+    (projection l E X U (n + 1))
+    (projection l E X U n)
+    (coefficientStep l E X U n) (coefficientStep_comp l E X U n) M
+    (reduction l E X U (n + 1))
+    (reduction l E X U n)
+    (reduction_obj l E X U (n + 1))
+    (reduction_obj l E X U n)
+    (unrestrictedReduction_map l E X U (n + 1))
+    (unrestrictedReduction_map l E X U n) a
+
+private theorem unrestrictedModuleStep_tmul (n : ℕ) (M : Mod l E X U)
+    (V : (Site X U)ᵒᵖ)
+    (s : (finite l E X U (n + 1)).obj.obj V) (x : M.val.obj V) :
+    (unrestrictedModuleStep l E X U n M).val.app V
+      (generator l E X U (n + 1) M V s x) =
+    generator l E X U n M V
+      ((rho l E X U n).hom.app V s) x := by
+  have h := SheafOfModules.UnrestrictedTowerProof.identifiedMap_tmul
+    (projection l E X U (n + 1))
+    (projection l E X U n)
+    (coefficientStep l E X U n) (coefficientStep_comp l E X U n) M
+    (reduction l E X U (n + 1))
+    (reduction l E X U n)
+    (reduction_obj l E X U (n + 1))
+    (reduction_obj l E X U n) V s x
+  rw [sliceGenerator_eq, sliceGenerator_eq]
+  simp only [coefficientStep_apply] at h
+  convert h using 1 <;> rfl
+
+private theorem unrestrictedReduction_hom_ext (n : ℕ) (M N : Mod l E X U)
+    (a b : (SheafOfModules.UnrestrictedTowerProof.res
+      (projection l E X U n)).obj
+        ((reduction l E X U n).obj M) ⟶ N)
+    (h : ∀ V s x, a.val.app V (generator l E X U n M V s x) =
+      b.val.app V (generator l E X U n M V s x)) : a = b :=
+  SheafOfModules.UnrestrictedTowerProof.identified_hom_ext
+    (projection l E X U n) M
+    (reduction l E X U n)
+    (reduction_obj l E X U n) N a b
+      (fun V s x ↦ by
+        convert h V s x using 1 <;> rfl)
+
+attribute [local irreducible] unrestrictedModuleStep
+
 /-- Consecutive reduction maps are uniquely specified on generators. Source: Stacks 03EK
 (blueprint: def-pur-integral-derived-operations).
 Proof: send s tensor x to rho(s) tensor x. The projection compatibility makes this
@@ -281,16 +576,48 @@ theorem transition_existsUnique (n : ℕ) :
         (s : (finite l E X U (n + 1)).obj.obj V) (x : (P.X i).val.obj V),
         ((τ.app P).f i).val.app V (generator l E X U (n + 1) (P.X i) V s x) =
           generator l E X U n (P.X i) V ((rho l E X U n).hom.app V s) x := by
-  sorry
+  let τ : level l E X U (n + 1) ⟶
+      level l E X U n :=
+    { app := fun P ↦
+        { f := fun i ↦ unrestrictedModuleStep l E X U n (P.X i)
+          comm' := fun i j _ ↦
+            (unrestrictedModuleStep_naturality l E X U n (P.d i j)).symm }
+      naturality := fun P Q a ↦ by
+        apply HomologicalComplex.hom_ext
+        intro i
+        exact unrestrictedModuleStep_naturality l E X U n (a.f i) }
+  have hτ : ∀ (P : CochainComplex (Mod l E X U) ℤ) (i : ℤ)
+      (V : (Site X U)ᵒᵖ)
+      (s : (finite l E X U (n + 1)).obj.obj V)
+      (x : (P.X i).val.obj V),
+      ((τ.app P).f i).val.app V
+        (generator l E X U (n + 1) (P.X i) V s x) =
+      generator l E X U n (P.X i) V
+        ((rho l E X U n).hom.app V s) x :=
+    fun P i V s x ↦ unrestrictedModuleStep_tmul l E X U n (P.X i) V s x
+  refine ⟨τ, hτ, ?_⟩
+  intro τ' hτ'
+  apply NatTrans.ext
+  funext P
+  apply HomologicalComplex.hom_ext
+  intro i
+  apply unrestrictedReduction_hom_ext l E X U (n + 1) (P.X i)
+  intro V s x
+  exact (hτ' P i V s x).trans (hτ P i V s x).symm
+
+end TransitionConstruction
 
 /-- The actual transition fixed by the preceding tensor formula. Source: Stacks 03EK
 (blueprint: def-pur-integral-derived-operations). -/
-def transition (n : ℕ) := (transition_existsUnique l E X U n).exists.choose
+def transition (n : ℕ) : level l E X U (n + 1) ⟶ level l E X U n :=
+  (transition_existsUnique l E X U n).exists.choose
 
 /-- The actual strict reduction tower. Source: Bhatt--Scholze, Definition 3.5.2
 (blueprint: def-pur-integral-derived-operations). -/
 def tower : Cx l E X U ⥤ (ℕᵒᵖ ⥤ Cx l E X U) :=
   (Functor.ofOpSequence (X := fun n ↦ level l E X U n) (transition l E X U)).flip
+
+attribute [local irreducible] levelUnit
 
 /-- The unique augmentation has x mapped to 1 tensor x at every positive exponent.
 Source: Bhatt--Scholze, Definition 3.5.2 (blueprint: def-pur-integral-derived-operations).
@@ -315,26 +642,34 @@ theorem augmentation_existsUnique :
                 (homOfLE (Nat.le_succ n)).op).app P
           rw [Functor.ofOpSequence_map_homOfLE_succ]
           ext i V x
-          change generator l E X U n (P.X i) V 1 x =
+          change (((levelUnit l E X U n).app P).f i).val.app V x =
             (((transition l E X U n).app P).f i).val.app V
-              (generator l E X U (n + 1) (P.X i) V 1 x)
+              ((((levelUnit l E X U (n + 1)).app P).f i).val.app V x)
           have hn := (transition_existsUnique l E X U n).exists.choose_spec P i V 1 x
           simp only [map_one] at hn
-          convert hn.symm using 1 <;> rfl)
+          exact (levelUnit_apply l E X U n P i V x).trans
+            (hn.symm.trans (congrArg
+              ((((transition l E X U n).app P).f i).val.app V)
+              (levelUnit_apply l E X U (n + 1) P i V x)).symm))
       naturality := fun {P Q} f ↦ by
         apply NatTrans.ext
         funext n
         exact (levelUnit l E X U n.unop).naturality f }
   refine ⟨γ, ?_, ?_⟩
   · intro P n i V x
-    rfl
+    exact levelUnit_apply l E X U n P i V x
   · intro γ' hγ'
     ext P n i V x
-    exact hγ' P n.unop i V x
+    exact (hγ' P n.unop i V x).trans
+      (levelUnit_apply l E X U n.unop P i V x).symm
 
 /-- The canonical reduction augmentation. Source: Bhatt--Scholze, Definition 3.5.2
 (blueprint: def-pur-integral-derived-operations). -/
-def augmentation := (augmentation_existsUnique l E X U).exists.choose
+def augmentation :
+    (Functor.const ℕᵒᵖ : Cx l E X U ⥤ (ℕᵒᵖ ⥤ Cx l E X U)) ⟶ tower l E X U :=
+  (augmentation_existsUnique l E X U).exists.choose
+
+attribute [local irreducible] tower augmentation
 
 /-- K-flat representatives with flat terms. Source: Stacks 06YN
 (blueprint: def-pur-integral-derived-operations). -/
@@ -373,12 +708,15 @@ theorem completion_exists :
 
 /-- Completion chosen with its determining representative normalization. Source: Stacks 08TC
 (blueprint: def-pur-integral-derived-operations). -/
-def completion := (completion_exists l E X U).choose
+def completion : D l E X U ⥤ D l E X U :=
+  (completion_exists l E X U).choose
 
 /-- The normalized comparison on every good representative. Source: Stacks 08TC
 (blueprint: def-pur-integral-derived-operations). -/
 def completionComparison : qGood l E X U ⋙ completion l E X U ≅ roosGood l E X U :=
   (completion_exists l E X U).choose_spec.1.some
+
+attribute [local irreducible] completion completionComparison
 
 /-- The augmentation into the termwise product. Source: Bhatt--Scholze, Definition 3.5.2
 (blueprint: def-pur-integral-derived-operations). -/
@@ -423,6 +761,48 @@ def roosUnit (P : Cx l E X U) :
       (integralOperationsTowerStep ((tower l E X U).obj P)))
     (productAugmentation l E X U P) 0 (roosUnit_condition l E X U P)
 
+private theorem goodWhiskering :
+    Nonempty (((CategoryTheory.Functor.whiskeringLeft
+      (Good l E X U).FullSubcategory (D l E X U) (D l E X U)).obj
+      (qGood.{t, u} l E X U)).FullyFaithful) := by
+  let : EssentiallySmall.{max u (t + 1)} (Site X U) := essentiallySmallSelf _
+  set_option backward.isDefEq.respectTransparency true in
+    exact siteWhiskering (topology X U) (ring l E X U)
+
+private theorem roosUnit_eq (P : Cx l E X U) :
+    roosUnit l E X U P = CochainComplex.mappingCocone.lift
+      (towerTransitionEndomorphism
+        (K := fun n : ℕ ↦ ((tower l E X U).obj P).obj (op n))
+        (integralOperationsTowerStep ((tower l E X U).obj P)))
+      (productAugmentation l E X U P) 0 (roosUnit_condition l E X U P) := rfl
+
+attribute [local irreducible] roosUnit
+
+private theorem sliceRoosUnit_natural {P Q : Cx.{t, u} l E X U} (a : P ⟶ Q) :
+    a ≫ roosUnit.{t, u} l E X U Q = roosUnit.{t, u} l E X U P ≫ (roos.{t, u} l E X U).map a := by
+  have hz (T : Cx.{t, u} l E X U) : productAugmentation.{t, u} l E X U T ≫
+      towerTransitionEndomorphism
+        (K := fun n : ℕ ↦ ((tower.{t, u} l E X U).obj T).obj (op n))
+        (integralOperationsTowerStep ((tower.{t, u} l E X U).obj T)) = 0 := by
+    apply CochainComplex.HomComplex.Cochain.ofHom_injective
+    simpa using roosUnit_condition.{t, u} l E X U T
+  have hn : a ≫ productAugmentation.{t, u} l E X U Q =
+      productAugmentation.{t, u} l E X U P ≫
+        Limits.Pi.map (fun n ↦ ((tower.{t, u} l E X U).map a).app (op n)) := by
+    apply Limits.Pi.hom_ext
+    intro n
+    simp only [Category.assoc, productAugmentation, Limits.Pi.lift_π,
+      Limits.Pi.map_π, Limits.Pi.lift_π_assoc]
+    simpa only [Functor.const_map_app, CategoryTheory.NatTrans.comp_app] using
+      congrArg (fun k ↦ k.app (op n)) ((augmentation.{t, u} l E X U).naturality a)
+  rw [roosUnit_eq, roosUnit_eq]
+  change a ≫ _ = _ ≫ (shiftFunctor _ (-1 : ℤ)).map
+    (HomologicalComplex.homotopyCofiber.mapArrowHom _ _ _ _)
+  rw [arrowConeMap]
+  exact completedCoconeLift_natural (Mod l E X U) _ _ _ _
+    (integralOperationsRoos_square ((tower.{t, u} l E X U).map a)) a _ _ (hz P) (hz Q) hn
+
+
 /-- The quotient unit descends uniquely with its (c,0) normalization on good representatives.
 Source: Stacks 06YN, 08TC (blueprint: def-pur-integral-derived-operations).
 Proof: the chain-level unit commutes with maps, by its product components and its zero
@@ -434,16 +814,31 @@ theorem completionUnit_existsUnique :
       ∀ P : (Good l E X U).FullSubcategory,
         η.app ((qGood l E X U).obj P) ≫ (completionComparison l E X U).hom.app P =
           DerivedCategory.Q.map (roosUnit l E X U P.obj) := by
-  sorry
+  let ff := Classical.choice (goodWhiskering l E X U)
+  let β : qGood.{t, u} l E X U ⟶ roosGood.{t, u} l E X U :=
+    { app := fun P ↦ DerivedCategory.Q.map (roosUnit.{t, u} l E X U P.obj)
+      naturality := by
+        intro P Q a
+        change DerivedCategory.Q.map a.hom ≫ _ = _ ≫
+          DerivedCategory.Q.map ((roos.{t, u} l E X U).map a.hom)
+        simpa only [← Functor.map_comp] using
+          congrArg DerivedCategory.Q.map (sliceRoosUnit_natural l E X U a.hom) }
+  exact normalizedUnit_existsUnique (qGood l E X U) ff
+    (completion l E X U) (roosGood l E X U) (completionComparison l E X U) β
 
 /-- The unique completion unit determined on all K-flat flat-term representatives.
 Source: Stacks 08TC (blueprint: def-pur-integral-derived-operations). -/
 def completionUnit : 𝟭 (D l E X U) ⟶ completion l E X U :=
-  (completionUnit_existsUnique l E X U).exists.choose
+  Classical.choose (α := 𝟭 (D l E X U) ⟶ completion l E X U)
+    (p := fun η ↦ ∀ P : (Good l E X U).FullSubcategory,
+      η.app ((qGood l E X U).obj P) ≫ (completionComparison l E X U).hom.app P =
+        DerivedCategory.Q.map (roosUnit l E X U P.obj))
+    (ExistsUnique.exists (completionUnit_existsUnique l E X U))
 
 /-- The ambient internal Hom, with independent site and coefficient sizes. Source: Stacks 08J7
 (blueprint: def-pur-integral-derived-operations). -/
-def hom := derivedInternalHomOfUniverses.{t + 1, t, u} (topology X U) (ring l E X U)
+def hom : (D l E X U)ᵒᵖ × D l E X U ⥤ D l E X U :=
+  derivedInternalHomOfUniverses.{t + 1, t, u} (topology X U) (ring l E X U)
 
 /-- The normalized ordinary derived tensor-Hom model. Source: Stacks 08JD
 (blueprint: def-pur-integral-derived-operations). -/
