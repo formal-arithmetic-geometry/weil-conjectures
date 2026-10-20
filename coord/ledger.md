@@ -17823,3 +17823,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:14 L: merged deliver/K1/Sheaf.RingTheory.QuasiRegularFlatQuotientBaseChange (stage 3; reviewer PASS; first push; landing 20261020T051436-L-1682894 (proof); batch 20261020T050952; modules 1; new nodes 0)
 - 05:14 L: merged deliver/K2/Sheaf.RingTheory.QuasiRegularPrefixQuotient (stage 3; reviewer PASS; first push; landing 20261020T051439-L-1684122 (proof); batch 20261020T050952; modules 1; new nodes 0)
 - 05:14 L: merged deliver/K3/Sheaf.AlgebraicGeometry.ArbitrarySchemeUntensoredBaseChange (stage 3; reviewer PASS; first push; landing 20261020T051442-L-1685408 (interface); batch 20261020T050952; modules 2; new nodes 1)
+- 05:14 L: merged deliver/K3/Sheaf.Paper.EtaleDerivedScalarTensor (stage 3; reviewer PASS; first push; landing 20261020T051444-L-1686716 (proof); batch 20261020T050952; modules 1; new nodes 0)
