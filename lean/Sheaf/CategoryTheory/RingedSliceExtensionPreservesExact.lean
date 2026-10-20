@@ -14,7 +14,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
-import Sheaf.Algebra.Homology.LocalizedRestrictionExtensionExists
+import all WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExists
 
 /-!
 # Preservation of exactness by ringed-slice extension
@@ -88,7 +88,7 @@ theorem ringedSliceExtension_preserves_exact
     intro X Y f g
     ext V x
     rfl
-  let adj := (CategoryTheory.extensionSheafAdjunction_nonempty R U).some
+  let adj := CategoryTheory.extensionSheafAdjunction R U
   have : L.Additive := adj.left_adjoint_additive
   have : PreservesColimitsOfSize.{0, 0} L := adj.leftAdjoint_preservesColimits
   have : PreservesFiniteColimits L := inferInstance

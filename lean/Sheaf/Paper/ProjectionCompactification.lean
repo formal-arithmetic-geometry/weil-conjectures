@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 public import WeilConjectures.Compactification.Defs
 
 import all Sheaf.AlgebraicGeometry.ProEtaleOperations
-import Sheaf.Algebra.Homology.LocalizedRestrictionExtensionExists
+import WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExists
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison
 
 /-!

@@ -10,7 +10,7 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use SheafOfModules.extensionByZeroPresheaf for the actual direct-sum presheaf, at module universe max u v. Its restriction formula on a generator follows from DirectSum.toAddMonoid_of. Construct mutually inverse maps between presheaf morphisms out of this presheaf and module-sheaf morphisms into localized restriction: sum the components in one direction and compose with DirectSum.lof in the other. Prove naturality and the inverse laws on generators. Compose this Hom equivalence with PresheafOfModules.sheafificationHomEquiv and its naturality to construct the adjunction for the sheafified functor G. The fully proved public theorem CategoryTheory.extensionSheafAdjunction_nonempty exposes this adjunction for the concrete composite, without revealing private Hom-equivalence helpers.",
+   "text": "Use SheafOfModules.extensionByZeroPresheaf for the actual direct-sum presheaf, at module universe max u v. Its restriction formula on a generator follows from DirectSum.toAddMonoid_of. Construct mutually inverse maps between presheaf morphisms out of this presheaf and module-sheaf morphisms into localized restriction: sum the components in one direction and compose with DirectSum.lof in the other. Prove naturality and the inverse laws on generators. Compose this Hom equivalence with PresheafOfModules.sheafificationHomEquiv and its naturality to construct the adjunction for the sheafified functor G. The source-library module contains this concrete adjunction as the proved private definition CategoryTheory.extensionSheafAdjunction. Its private implementation is reused by a proof-only import all in the exactness consumer, with no duplicate construction or public wrapper.",
    "uses": [
     "def-weil-extension-by-zero-presheaf"
    ],
@@ -36,9 +36,9 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "U3",
+  "group": "Z9",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemmas 03DI and 03DJ; explicit Lean Hom equivalence adapted from proved private helpers in Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact"
+  "place": "Lemmas 03DI and 03DJ; the proved source-library twin supplies the same direct-sum Hom equivalence, sheafified adjunction and exactness proof. Retirement only; the mathematical route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -110,18 +110,18 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedRestrictionExtensionExists",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedRestrictionExtensionExists.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExists",
+  "file": "lean/WeilConjectures/Algebra/Homology/LocalizedRestrictionExtensionExists.lean",
   "declaration": "CategoryTheory.localized_restriction_extension_exists",
   "statement": "theorem localized_restriction_extension_exists\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (R : Sheaf J RingCat.{max u v}) (U : C)\n    (hzero : (SheafOfModules.overFunctor.{max u v} R U).PreservesZeroMorphisms) :\n    ∃ (G : SheafOfModules.{max u v} (R.over U) ⥤ SheafOfModules.{max u v} R),\n      PreservesFiniteLimits G ∧ PreservesFiniteColimits G ∧\n      Nonempty (G ⊣ SheafOfModules.overFunctor.{max u v} R U)",
   "branch": "sheaf-dag",
   "by": "Q1",
   "date": "2026-10-13",
   "declarations": [
-   "CategoryTheory.localized_restriction_extension_exists",
-   "CategoryTheory.extensionSheafAdjunction_nonempty"
-  ]
+   "CategoryTheory.localized_restriction_extension_exists"
+  ],
+  "note": "Retired the duplicate Sheaf module in favor of its proved source-library twin. The extra public Nonempty interface is removed; its only consumer imports all of the source module and uses its proved private concrete adjunction inside its proof."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -134,14 +134,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-8d2bd",
-  "group": "B4",
+  "reviewer": "C-53ffc",
+  "group": "Z9",
   "result": "pass",
-  "landing": "20261015T232823-L-3301124",
+  "landing": "20261020T144313-L-2264786",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all required compilation and forced-adaptation checks passed."
+  "note": "independent cc review: Sheaf item module (withdrawn) vs identical WeilConjectures twin (same theorem and private extensionSheafAdjunction); two forced-adapted consumers and their 6 importers compiled with the delivered files; node lean records vs twin signature"
  },
  "lean_audit": {
   "master": {

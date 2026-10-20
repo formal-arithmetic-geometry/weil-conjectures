@@ -68,14 +68,14 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI and 03DJ. Reuse the existing concrete direct-sum adjunction in Sheaf.Algebra.Homology.LocalizedRestrictionExtensionExists through its proved public Nonempty interface; prove preservation of monos sectionwise and use Mathlib exact-functor glue."
+  "place": "Tags 03DI and 03DJ. Reuse the proved private concrete direct-sum adjunction in WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExists with a proof-only import all; prove preservation of monos sectionwise and use Mathlib exact-functor glue."
  },
  "id": "lem-weil-pbc-ringed-slice-extension-preserves-exact",
  "title": "Ringed-slice extension preserves exactness",
  "statement": "Let C be a category with object universe u and morphism universe v, J a Grothendieck topology, O a sheaf of commutative rings with values in universe max u v, and U an object. Write R for its underlying ring sheaf, and L for the direct-sum extension from R.over U-module sheaves followed by module sheafification, all module values in universe max u v. For every short complex S of R.over U-module sheaves, S.Exact implies imageSubobject (L.map S.f) = kernelSubobject (L.map S.g). The notions are those of [def-pur-localized-ringed-site], [def-weil-sheaf-of-modules-category], [def-weil-extension-by-zero-presheaf], [def-weil-presheaf-modules-sheafification].",
  "proof": [
   {
-   "text": "Use CategoryTheory.extensionSheafAdjunction_nonempty, the public adjunction interface of [new-localized-restriction-extension-exists], for the concrete direct-sum extension followed by module sheafification. Restriction is additive sectionwise, so Adjunction.left_adjoint_additive makes L additive, and Adjunction.leftAdjoint_preservesColimits makes L preserve finite colimits.",
+   "text": "Use the proved private concrete adjunction CategoryTheory.extensionSheafAdjunction of [new-localized-restriction-extension-exists] through a proof-only import all of WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExists, for the concrete direct-sum extension followed by module sheafification. Restriction is additive sectionwise, so Adjunction.left_adjoint_additive makes L additive, and Adjunction.leftAdjoint_preservesColimits makes L preserve finite colimits.",
    "uses": [
     "new-localized-restriction-extension-exists"
    ],
@@ -123,14 +123,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-8d2bd",
-  "group": "B4",
+  "reviewer": "C-53ffc",
+  "group": "Z9",
   "result": "pass",
-  "landing": "20261015T232823-L-3301124",
+  "landing": "20261020T144313-L-2264786",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all required compilation and forced-adaptation checks passed."
+  "note": "independent cc review: Sheaf item module (withdrawn) vs identical WeilConjectures twin (same theorem and private extensionSheafAdjunction); two forced-adapted consumers and their 6 importers compiled with the delivered files; node lean records vs twin signature"
  },
  "lean_audit": {
   "master": {
