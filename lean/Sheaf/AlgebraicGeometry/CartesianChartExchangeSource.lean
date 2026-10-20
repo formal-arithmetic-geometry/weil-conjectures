@@ -1,9 +1,12 @@
 module
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
-import all Sheaf.AlgebraicGeometry.CartesianChartExchangeCoefficients
+import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeCoefficients
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeCore
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
+-- These comparison helpers are consumed through private proof imports.
+set_option linter.privateModule false
+
 @[expose] public section
 universe u
 open CategoryTheory Limits Opposite

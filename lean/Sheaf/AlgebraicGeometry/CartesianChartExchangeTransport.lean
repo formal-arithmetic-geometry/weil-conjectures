@@ -1,10 +1,13 @@
 module
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
-import all Sheaf.AlgebraicGeometry.CartesianChartExchangeCoefficients
+import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeCoefficients
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeCore
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeAdjunction
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
+-- These comparison helpers are consumed through private proof imports.
+set_option linter.privateModule false
+
 @[expose] public section
 universe u
 open CategoryTheory Limits Opposite
@@ -100,6 +103,7 @@ private lemma chart_inv_leg {S X B T T' : Scheme.{u}}
       simp only [ha, Category.assoc]
 
 set_option maxHeartbeats 100000 in
+-- The coefficient-square comparison elaborates several derived pullback composites.
 private lemma chartAdjunct_pullback {S X B T T' : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S) (w : g' = a ≫ g)
     (b : T' ⟶ T) (a' : T' ⟶ B) (ha : a' = b ≫ a)
@@ -165,7 +169,8 @@ private lemma chartAdjunct_pullback {S X B T T' : Scheme.{u}}
   conv_lhs =>
     arg -1
     rw [← rawClassPullback_eq_raw]
-  have hfinal := actualAdjunct_pullback_block AddCommGrpCat.{u + 1} t (pullback.snd f g') (pullback.snd f g'') b
+  have hfinal := actualAdjunct_pullback_block AddCommGrpCat.{u + 1} t
+    (pullback.snd f g') (pullback.snd f g'') b
     ⟨cartesianImageProjection_snd f g' g'' b wb⟩ a a' ha _ rfl _ rfl
     (pullback.fst f g') (pullback.fst f g'')
     (cartesianImageProjection_fst f g' g'' b wb).symm
