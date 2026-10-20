@@ -1,8 +1,8 @@
 # Work queue
 
-95 items; claim with `tools/claim.py next <group> [--stage N]`.
+96 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (34 clusters, 2096 modules)
+## Rework: quarantined by the upstream sync (36 clusters, 2096 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -10,6 +10,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 |---|---|---|---|
 | `Sheaf.CategoryTheory.RingedCechKoszulDualLimit` | 1 |  | error: Sheaf/CategoryTheory/RingedCechKoszulDualLimit.lean:452:11: error(lean.unknownIdentifier): Unknown constant `CochainComplex.telescopeShiftColimit` | Shea |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
+| `Sheaf.AlgebraicGeometry.RelativeMVResolvedRoofMiddleMateComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/RelativeMVResolvedRoofMiddleMateComparison.lean:26:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently |
 | `Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalUnderivedSectionsMate.lean:392:4: error: Application type mismatch: The argument | Functor.whiskerRight (baseChangeMap |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality f |
 | `Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturali |
@@ -17,10 +18,11 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy` | 1 |  | error: Sheaf/Algebra/Homology/FiniteFilteredModuleHomotopy.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'Categor |
 | `Sheaf.CategoryTheory.DoubleComplexTruncationDecalage` | 1 |  | error: Sheaf/CategoryTheory/DoubleComplexTruncationDecalage.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'Catego |
 | `Sheaf.CategoryTheory.GoodTruncationTotalDecalage` | 1 |  | error: Sheaf/CategoryTheory/GoodTruncationTotalDecalage.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'CategoryTh |
-| `Sheaf.CategoryTheory.BoundedFilteredPageConstruction` | 1 |  | error: Sheaf/CategoryTheory/BoundedFilteredPageConstruction.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'Catego |
+| `Sheaf.AlgebraicGeometry.DerivedFiberOpenFactorization` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedFiberOpenFactorization.lean:103:16: error(lean.unknownIdentifier): Unknown identifier `pullbackOpenIso` | Sheaf/AlgebraicG |
 | `Sheaf.Algebra.Homology.FilteredTensorGradedComparison` | 1 |  | error: Sheaf/Algebra/Homology/FilteredTensorGradedComparison.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'Categ |
 | `Sheaf.Algebra.Homology.FiniteFilteredLocalization` | 1 |  | error: Sheaf/Algebra/Homology/FiniteFilteredLocalization.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment already  |
 | `Sheaf.Paper.EtaleCERowCyclesNaturality` | 1 |  | error: Sheaf/Paper/EtaleCERowCyclesNaturality.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'CategoryTheory.Decre |
+| `Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/StalkDerivedExtensionComparison.lean:102:18: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The environment does |
 | `Sheaf.RingTheory.AuslanderBuchsbaum` | 1 |  | error: Sheaf/RingTheory/AuslanderBuchsbaum.lean:52:8: error(lean.unknownIdentifier): Unknown identifier `depth_subsingleton` | Sheaf/RingTheory/AuslanderBuchsba |
 | `Sheaf.CategoryTheory.BoundedBelowCechConeComparison` | 1 |  | error: Sheaf/CategoryTheory/BoundedBelowCechConeComparison.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alread |
 | `Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso` | 1 |  | error: Sheaf/AlgebraicGeometry/QCohTensorResolutionChartComparisonIso.lean:1:0: error: import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde failed, environment a |
