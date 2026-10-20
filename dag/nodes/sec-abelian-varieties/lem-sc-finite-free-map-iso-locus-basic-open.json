@@ -155,14 +155,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteFreeMapIsoLocusBasicOpen",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeMapIsoLocusBasicOpen.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteFreeMapIsoLocusBasicOpen",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteFreeMapIsoLocusBasicOpen.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.moduleMapIsoLocus_inter_eq_basicOpen_of_free",
-  "statement": "theorem moduleMapIsoLocus_inter_eq_basicOpen_of_free {W : Scheme.{u}}\n    {M N : W.Modules} (φ : M ⟶ N) (U : W.Opens) (hU : IsAffineOpen U)\n    {I J : Type u} [Finite I] [Finite J]\n    (eM : M.restrict U.ι ≅ SheafOfModules.free I)\n    (eN : N.restrict U.ι ≅ SheafOfModules.free J) :\n    ∃ f : W.presheaf.obj (.op U),\n      (U : Set W) ∩ (moduleMapIsoLocus φ : Set W) = (W.basicOpen f : Set W)",
+  "statement": "theorem moduleMapIsoLocus_inter_eq_basicOpen_of_free {W : Scheme.{u}}\n    {M N : W.Modules} (φ : M ⟶ N) (U : W.Opens)\n    {I J : Type u} [Finite I] [Finite J]\n    (eM : M.restrict U.ι ≅ SheafOfModules.free I)\n    (eN : N.restrict U.ι ≅ SheafOfModules.free J) :\n    ∃ f : W.presheaf.obj (.op U),\n      (U : Set W) ∩ (moduleMapIsoLocus φ : Set W) = (W.basicOpen f : Set W)",
   "branch": "sheaf-dag",
   "by": "F4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "D8 retirement: the upstream theorem has the same name and conclusion and drops the unused IsAffineOpen hypothesis. It supplies the original node statement by specialization. The duplicate Sheaf module has no remaining importers and is withdrawn."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -175,13 +176,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "C-bca3a",
+  "group": "D8",
   "result": "pass",
-  "landing": "20261013T015558-L-3022073",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T141307-L-2032756",
+  "kind": "interface",
+  "note": "independent cc review: Withdrawn Sheaf copy vs upstream twin WeilConjectures.AlgebraicGeometry.FiniteFreeMapIsoLocusBasicOpen (same theorem minus unused hU, axioms clean); node lean attachment vs upstream signature (verbatim); no importers in live lean/; retire-items.tsv row 46"
  }
 }
