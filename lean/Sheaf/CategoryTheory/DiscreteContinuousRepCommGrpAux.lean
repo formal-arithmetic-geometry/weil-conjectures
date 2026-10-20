@@ -3,7 +3,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
-import Sheaf.CategoryTheory.DiscreteContinuousRepToCommGrpFull
+import WeilConjectures.CategoryTheory.DiscreteContinuousRepToCommGrpFull
 import Sheaf.CategoryTheory.DiscreteContinuousRepToCommGrpEssSurj
 
 @[expose] public section
