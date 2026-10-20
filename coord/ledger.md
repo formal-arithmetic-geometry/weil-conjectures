@@ -17710,3 +17710,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: returned deliver/Q05/lem-pur-weil-semilinear-exchange-reindexing (reviewer RETURN: L: independent stage-2 immutable head 8d0008293f27: Third delivery 8d0008293f27 is a real rewrite (new module sha). Comp)
 - 03:59 L: returned deliver/Q05/lem-pur-weil-semilinear-exchange-reindexing (reviewer RETURN: L: independent stage-2 immutable head 5f64716740ea: 5f647167 is a byte-identical re-push of the RETURNed 8d0008293f27: d)
 - 04:13 L: returned deliver/NJ/lem-pod-hom-chain-counit-formula (reviewer RETURN: L: independent stage-2 immutable head 4df427a8af6f: H2/H13 stmt_dep fault (mechanical finding upheld): statement_change )
+- 05:09 L: returned deliver/C2/Sheaf.Paper.FiniteClopenExceptionalRestriction (reviewer RETURN: (the landing tools, head c9892dd1f) the delivery did not land: lean/Sheaf/Paper/FiniteClopenExceptionalRestriction.lean )
