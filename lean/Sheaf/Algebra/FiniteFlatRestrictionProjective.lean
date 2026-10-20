@@ -10,6 +10,10 @@ public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Module.Projective
 
+import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+import Mathlib.RingTheory.Flat.Stability
+import Mathlib.RingTheory.Flat.EquationalCriterion
+
 /-!
 # Restriction of scalars preserves finite projectivity
 
@@ -53,6 +57,9 @@ theorem finite_flat_restriction_projective
     [Module.Finite A B] [Algebra.FinitePresentation A B] [Module.Flat A B]
     [Module.FinitePresentation B M] [Module.Projective B M] :
     Module.FinitePresentation A M ∧ Module.Projective A M := by
-  sorry
+  have : Module.FinitePresentation A B := .of_finite_of_finitePresentation A B
+  have : Module.FinitePresentation A M := .trans A M B
+  have : Module.Flat A M := .trans A B M
+  exact ⟨inferInstance, Module.Flat.projective_of_finitePresentation⟩
 
 end Module
