@@ -8,11 +8,9 @@ module
 public import Sheaf.Paper.IntrinsicCompletionCompleted
 public import Sheaf.Paper.SequentialDerivedInverseLimitCompleted
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.CompletedConstantSheafReduction
 import Sheaf.Paper.FiniteProjectiveTensorProducts
-import Sheaf.Paper.KoszulReconstruction
-import Sheaf.Paper.PbcRoosTriangle
+import Sheaf.Paper.CompletedReconstructionUnitComparison
+import Sheaf.Paper.CompletedFiniteReductionTensorModel
 
 /-! # Finite reduction of reconstruction over completed coefficients
 
@@ -117,6 +115,57 @@ theorem finiteReductionReconstructionCompleted {K : adicDatumDerived T d}
           w ≫ completedReconstructionEvaluation T d N L' a) →
       completedReconstructionCounit T d M L n ≫ (adicDatumReduction T d n).map v =
         (adicDatumReduction T d n).map w ≫ completedReconstructionCounit T d N L' n := by
-  sorry
+  obtain ⟨e, he⟩ := completedReconstructionUnitComparison T d M r f hf hcomplete L
+  let adj := adicDatumAdjunction T (adicDatumProjection T d n)
+  have hunit : e.hom ≫ completedReconstructionEvaluation T d M L n =
+      adj.unit.app K := he n
+  have hcomp : (adicDatumReduction T d n).map e.hom ≫
+      completedReconstructionCounit T d M L n = 𝟙 _ := by
+    unfold completedReconstructionCounit
+    change (adicDatumExtension T (adicDatumProjection T d n)).map e.hom ≫
+      (adj.homEquiv _ _).symm (completedReconstructionEvaluation T d M L n) = _
+    calc
+      _ = (adj.homEquiv _ _).symm
+          (e.hom ≫ completedReconstructionEvaluation T d M L n) :=
+        (adj.homEquiv_naturality_left_symm _ _).symm
+      _ = (adj.homEquiv _ _).symm (adj.unit.app K) := congrArg _ hunit
+      _ = 𝟙 _ := adj.homEquiv_symm_unit K
+  have hCounit : IsIso (completedReconstructionCounit T d M L n) := by
+    have : IsIso ((adicDatumReduction T d n).map e.hom) := inferInstance
+    have : IsIso ((adicDatumReduction T d n).map e.hom ≫
+        completedReconstructionCounit T d M L n) := by rw [hcomp]; infer_instance
+    exact IsIso.of_isIso_comp_left ((adicDatumReduction T d n).map e.hom) _
+  obtain ⟨P, hb, p, ⟨j⟩⟩ := completedFiniteReductionTensorModel T d n
+  let C := fun a : ℕ ↦ (adicDatumModelTower T d M).obj (op a)
+  have : IsIso (piComparison (finiteProjectiveTensorRight T d P hb p) C) :=
+    (finiteProjectiveTensorProducts T d P hb p C).1
+  have : PreservesLimit (Discrete.functor C) (finiteProjectiveTensorRight T d P hb p) :=
+    PreservesProduct.of_iso_comparison _ _
+  have : PreservesLimit (Discrete.functor C) (adicDatumReductionUnderlying T d n) :=
+    preservesLimit_of_natIso _ j.symm
+  have hProduct : IsIso (completedReconstructionProductComparison T d M n) := by
+    change IsIso (piComparison (adicDatumReductionUnderlying T d n) C)
+    infer_instance
+  refine ⟨hCounit, hProduct, ?_⟩
+  intro K' N hNcomplete L' v w hcompat
+  let adj := adicDatumAdjunction T (adicDatumProjection T d n)
+  unfold completedReconstructionCounit
+  have hright := adj.homEquiv_naturality_right_symm
+    (completedReconstructionEvaluation T d M L n)
+    ((adicDatumReduction T d n).map v)
+  have hleft := adj.homEquiv_naturality_left_symm w
+    (completedReconstructionEvaluation T d N L' n)
+  calc
+    _ = (adj.homEquiv _ _).symm
+        (completedReconstructionEvaluation T d M L n ≫
+          (adicDatumRestriction T (adicDatumProjection T d n)).map
+            ((adicDatumReduction T d n).map v)) := by
+      exact hright.symm
+    _ = (adj.homEquiv _ _).symm
+        (w ≫ completedReconstructionEvaluation T d N L' n) := by
+      exact congrArg (adj.homEquiv _ _).symm (hcompat n)
+    _ = (adicDatumExtension T (adicDatumProjection T d n)).map w ≫
+        (adj.homEquiv _ _).symm (completedReconstructionEvaluation T d N L' n) := hleft
+    _ = _ := rfl
 
 end AlgebraicGeometry.Scheme
