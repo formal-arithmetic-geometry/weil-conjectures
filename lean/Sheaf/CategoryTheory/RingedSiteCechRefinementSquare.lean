@@ -12,17 +12,7 @@ public import Sheaf.CategoryTheory.SiteCechEdgeNormalization
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Homology.ModelCategory.Injective
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
-import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
-import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.CategoryTheory.Sites.DirectImageInjectiveEvaluationAcyclic
-import WeilConjectures.CategoryTheory.SiteCechComplex
+import Sheaf.CategoryTheory.RingedSiteCechRefinementSquareAbelianExists
 
 /-!
 # Ringed-site Čech comparison and refinement
@@ -270,6 +260,10 @@ Uses: def-weil-sheaf-of-modules-category, def-weil-pbc-sites-and-cohomology,
   lem-weil-pbc-lift-along-injective-quasi-iso, lem-weil-pbc-lift-to-injective-unique-up-to-homotopy,
   lem-weil-pbc-site-pullback-abelian-exact.
 -/
+-- STATEMENT-DISPUTED: γ is arbitrary here; the tuple formula relating γ to h is missing.
+-- On the one-object identity site with a singleton identity cover and coefficients ℤ,
+-- take h = 𝟙 and γ = 0. In degree zero the normalized edges and the roof are identities,
+-- so the asserted square would give 𝟙 = 0. The abelian theorem below is independent of it.
 theorem ringedSite_cech_refinement_square_rest
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     [HasFiniteLimits C] [HasFiniteLimits D]
@@ -533,6 +527,21 @@ theorem ringedSite_cech_refinement_square_abelian
           ((sheafToPresheaf K.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Dᵒᵖ
             AddCommGrpCat.{u}).obj (op (u.obj X))).rightDerived q).map (((sheafAdjunctionContinuous
             u AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).homEquiv M N).symm h)) := by
-  sorry
+  obtain ⟨hH, hh⟩ := ringedSite_cech_refinement_square_abelian_exists J K u hcover M N h q hX huX
+  refine ⟨hH, hh, ?_⟩
+  intro hH' hh'
+  let IM := injectiveResolution M
+  let IN := injectiveResolution N
+  obtain ⟨L, lam, b, hL⟩ := hh.1 IM IN
+  obtain ⟨_, heq⟩ := hh'.2.1 IM IN L lam b hL.1 hL.2.1 hL.2.2.1 hL.2.2.2
+  obtain ⟨_, heq'⟩ := hh.2.1 IM IN L lam b hL.1 hL.2.1 hL.2.2.1 hL.2.2.2
+  have hIso := hh'.2.1 IM IN L lam b hL.1 hL.2.1 hL.2.2.1 hL.2.2.2 |>.1
+  exact (cancel_mono ((IN.isoRightDerivedObj
+    (sheafToPresheaf K.toGrothendieck AddCommGrpCat.{u} ⋙
+      (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (u.obj X))) q).hom ≫
+      HomologicalComplex.homologyMap (((sheafToPresheaf J.toGrothendieck
+        AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op X)).mapHomologicalComplex
+        (ComplexShape.up ℕ)).map lam) q)).mp
+    (heq.trans heq'.symm)
 
 end CategoryTheory
