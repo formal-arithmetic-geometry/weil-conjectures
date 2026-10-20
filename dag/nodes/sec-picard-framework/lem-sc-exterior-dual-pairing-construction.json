@@ -14,27 +14,24 @@
  ],
  "proof": [
   {
-   "text": "For each open choose the uniquely characterized upstream alternating family on exteriorPower from exterior_dual_pairing_local. Compose it with the linear map on sections of dualMap(exteriorSheafIsoExteriorPower.hom), using LinearMap.compAlternatingMap. This gives an alternating family of functionals on exteriorSheaf. The comparison hom preserves pure wedges, so the upstream formula gives its determinant formula on every subopen. Prove compatibility under restriction by exteriorSheaf_dual_ext_compat: for W→V→U both sides evaluate to the same determinant, since internal Hom restriction identifies their components definitionally.",
+   "text": "Choose the uniquely characterized upstream alternating family A on each open using exterior_dual_pairing_local. Prove its restriction compatibility by exteriorSheaf_dual_ext: on every subopen both functionals have the same determinant evaluation, and internal Hom restriction composes the subopen arrows definitionally.",
    "uses": [
     "lem-sc-exterior-dual-pairing-local",
     "lem-sc-exterior-sheaf-dual-ext",
-    "def-pur-sheaf-hom",
-    "lem-sc-exterior-sheaf-comparison"
+    "def-pur-sheaf-hom"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exteriorPower.alternatingMapLinearEquiv on each open. These linear maps form a morphism from the exterior presheaf of the internal dual to the internal dual of the exterior sheaf. Prove naturality using exteriorPower.linearMap_ext, the pure-wedge characterization of exteriorSheafRestriction and the restriction identity from the preceding step. Here the upstream extensionality theorem is transported through the canonical wedge-preserving isomorphism exteriorSheafIsoExteriorPower, as exteriorSheaf_dual_ext_compat; this preserves the original exteriorSheaf statement.",
+   "text": "Apply exteriorPower.alternatingMapLinearEquiv to A on each open to obtain a map from PresheafOfModules.exteriorPower of the internal dual into the internal dual of exteriorPower M n. Prove naturality by exteriorPower.linearMap_ext and exteriorPower_map_ιMulti: on pure wedges it is exactly the preceding restriction compatibility.",
    "uses": [
     "def-sc-sheaf-exterior-power",
-    "lem-sc-exterior-dual-pairing-local",
-    "lem-sc-exterior-sheaf-dual-ext",
-    "lem-sc-exterior-sheaf-comparison"
+    "lem-sc-exterior-dual-pairing-local"
    ],
    "elementary": false
   },
   {
-   "text": "Extend the presheaf morphism through the sheafification adjunction to obtain f. The hom-equivalence apply_symm_apply identity says its composite with the unit is the original presheaf morphism. Evaluate on the pure wedge of φ, then on the pure wedge of a, and use the local determinant formula at the identity subopen. This proves exactly the original existence statement and formula.",
+   "text": "Extend the presheaf morphism through the sheafification adjunction. Its hom-equivalence apply_symm_apply identity identifies precomposition with the unit with the original presheaf morphism. Evaluate this identity first on a pure wedge of dual sections and then on a pure wedge of M sections; the local determinant formula at the identity subopen gives the conclusion. The upstream declaration uses exteriorPower and wedge; earlier exteriorSheaf consumers use the canonical wedge-preserving comparison in their own proofs.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
     "lem-sc-exterior-dual-pairing-local"
@@ -47,13 +44,12 @@
   "def-sc-sheaf-exterior-power",
   "lem-pc-sites-module-sheafification-interface",
   "lem-sc-exterior-dual-pairing-local",
-  "lem-sc-exterior-sheaf-comparison",
   "lem-sc-exterior-sheaf-dual-ext"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/duality.tex; Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean",
-  "place": "N1 Lean reduction of the determinant pairing construction: fixed-open alternating functionals, proved wedge extensionality, restriction compatibility, and sheafification adjunction. C6 (2026-10-20): use the upstream dual extensionality theorem through the proved exterior-sheaf comparison. B4 (2026-10-20): consume the upstream alternating-family theorem on exteriorPower and transport with dualMap of the canonical comparison; LinearMap.compAlternatingMap preserves alternation and the hom-wedge formula proves the same evaluation identity."
+  "place": "D6 (2026-10-21): record the unchanged proved upstream exteriorPower theorem. Its proof is the local alternating family, restriction compatibility from dual extensionality, the exterior-power universal property and sheafification adjunction. Consumers use the upstream local bijectivity result directly, then transport its result by the current exteriorSheafPowerIso."
  },
  "mathlib_searches": [
   {
@@ -112,14 +108,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DeterminantDualPairing",
-  "file": "lean/Sheaf/AlgebraicGeometry/DeterminantDualPairing.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DeterminantDualPairing",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DeterminantDualPairing.lean",
   "declaration": "AlgebraicGeometry.exterior_dual_pairing_exists",
-  "statement": "theorem exterior_dual_pairing_exists (X : Scheme.{u}) (M : X.Modules) (n : ℕ) :\n    ∃ f :\n    (Scheme.Modules.exteriorSheaf (Scheme.Modules.dual M) n) ⟶\n      Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n),\n    ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U))\n      (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)),\n      (f.val.app (op U) (Scheme.Modules.exteriorSheafSection\n        (Scheme.Modules.dual M) n U φ)).app (op (Over.mk (𝟙 U)))\n        (Scheme.Modules.exteriorSheafSection M n U a) =\n      (Matrix.of fun i j ↦\n        (show X.presheaf.obj (op U) from\n          (φ j).app (op (Over.mk (𝟙 U))) (a i))).det",
+  "statement": "theorem exterior_dual_pairing_exists (X : Scheme.{u}) (M : X.Modules) (n : ℕ) :\n    ∃ f :\n    (Scheme.Modules.exteriorPower (Scheme.Modules.dual M) n) ⟶\n      Scheme.Modules.dual (Scheme.Modules.exteriorPower M n),\n    ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U))\n      (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)),\n      (f.val.app (op U) (wedge (M := Scheme.Modules.dual M) (r := n) (U := U) φ)).app\n          (op (Over.mk (𝟙 U)))\n        (wedge (M := M) (r := n) (U := U) a) =\n      (Matrix.of fun i j ↦\n        (show X.presheaf.obj (op U) from\n          (φ j).app (op (Over.mk (𝟙 U))) (a i))).det",
   "branch": "sheaf-dag",
   "by": "K1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "D6 retirement repair: attach the unchanged proved upstream exteriorPower theorem. Consumers use the current exteriorSheafPowerIso and its contravariant dual to transport the resulting morphism or isomorphism, after applying the upstream local bijectivity theorem directly."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -134,12 +131,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-7f331",
-  "group": "B4",
+  "reviewer": "C-fe289",
+  "group": "D6",
   "result": "pass",
-  "landing": "20261020T163938-L-3832985",
+  "landing": "20261020T233118-L-895066",
   "kind": "interface",
-  "note": "independent cc review: withdrawn Sheaf exterior_dual_pairing_local vs upstream WeilConjectures twin (node lean.statement verbatim); adapted DeterminantDualPairing vs live original (import + transport lines 57-71 only, import-only counterfactual fails at 61/80/92/116); compiles clean, importer DeterminantExteriorDualIso clean, axioms propext/choice/Quot.sound"
+  "note": "independent cc review: retired Sheaf exterior_dual_pairing_exists vs upstream WeilConjectures twin (node lean.statement byte-identical); 3 adapted direct importers vs live clone (private import + proof lines only), all compile clean against the delivered stub; axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {

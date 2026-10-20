@@ -28,12 +28,13 @@
    "elementary": false
   },
   {
-   "text": "Construct the existing determinant-evaluation morphism exteriorSheaf(C dual,n)→dual(exteriorSheaf C n). Each supplied regular chart gives a conormal basis, hence a finite free conormal frame; the determinant pairing is bijective on sections of every subopen of that chart. Represent a target germ on such a subopen and lift it through the section map to prove stalk surjectivity.",
+   "text": "Construct the existing determinant-evaluation morphism exteriorSheaf(C dual,n)→dual(exteriorSheaf C n). Each supplied regular chart gives a conormal basis, hence a finite free conormal frame; the determinant pairing is bijective on sections of every subopen of that chart. Represent a target germ on such a subopen and lift it through the section map to prove stalk surjectivity. Obtain the upstream exteriorPower pairing p₀ and its determinant formula. Define p as exteriorSheafPowerIso(dual C,n).hom followed by p₀ and then dualFunctor.mapIso(exteriorSheafPowerIso(C,n).op).hom. Apply the upstream local pairing theorem directly to p₀. Both comparison section maps are bijections; Function.Bijective.comp gives bijectivity of p on every subopen. This replaces conjugation and cancellation with forward composition, retaining the same stalk-surjectivity argument.",
    "uses": [
     "lem-sc-exterior-dual-pairing-construction",
     "lem-sc-koszul-conormal-basis",
     "lem-sc-affine-conormal-frame",
-    "lem-sc-exterior-dual-pairing-local-bijective"
+    "lem-sc-exterior-dual-pairing-local-bijective",
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
    "elementary": false
   },
@@ -52,6 +53,7 @@
   "lem-sc-koszul-conormal-basis",
   "lem-sc-affine-conormal-frame",
   "lem-sc-exterior-dual-pairing-local-bijective",
+  "lem-sc-exterior-sheaf-power-comparison",
   "lem-sc-exterior-sheaf-restrict-iso",
   "lem-sc-exterior-sheaf-upstream-comparison"
  ],
@@ -63,7 +65,8 @@
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
   },
-  "note": "Separates the zero-differential Koszul Hom calculation from exterior duality. The latter is proved using the existing determinant pairing and finite conormal frames; the only remaining new hole is the former. K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved."
+  "note": "Separates the zero-differential Koszul Hom calculation from exterior duality. The latter is proved using the existing determinant pairing and finite conormal frames; the only remaining new hole is the former. K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved.",
+  "retirement": "D6 repair (2026-10-21): reapply pairing retirement to the current consumer, preserving B8 upstream local-bijectivity imports and K4 restriction comparisons where present. Apply upstream construction and local perfection before comparison transport; existing statements are unchanged."
  },
  "mathlib_searches": [
   {
@@ -147,12 +150,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a6756",
-  "group": "K4",
+  "reviewer": "C-fe289",
+  "group": "D6",
   "result": "pass",
-  "landing": "20261020T221234-L-4162476",
+  "landing": "20261020T233118-L-895066",
   "kind": "interface",
-  "note": "independent cc review: retire-items row 749 + twin WeilConjectures…exteriorSheaf_restrict_iso (signature verbatim in node lean record) with the 5 adapted consumers vs live clone; exteriorSheaf_eq_exteriorPower (lem-sc-exterior-sheaf-upstream-comparison) bridges exteriorSheaf/exteriorPower"
+  "note": "independent cc review: retired Sheaf exterior_dual_pairing_exists vs upstream WeilConjectures twin (node lean.statement byte-identical); 3 adapted direct importers vs live clone (private import + proof lines only), all compile clean against the delivered stub; axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {

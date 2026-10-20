@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.DeterminantDualPairing
+import WeilConjectures.AlgebraicGeometry.DeterminantDualPairing
 import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingLocal
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
@@ -56,31 +56,9 @@ theorem exteriorSheaf_dual_iso (X : Scheme.{u}) (M : X.Modules) (d : ℕ)
   obtain ⟨I, U, hU, e⟩ :=
     (SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free.{u, u, u}
       (M := M) (r := d)).mp hfree
-  let a := Scheme.Modules.exteriorSheafPowerIso (Scheme.Modules.dual M) d
-  let b := (Scheme.Modules.dualFunctor X).mapIso
-    (Scheme.Modules.exteriorSheafPowerIso M d).symm.op
-  let f' := a.inv ≫ f ≫ b.hom
-  have hf' (W : X.Opens) (x : Fin d → M.val.obj (Opposite.op W))
-      (φ : Fin d → (Scheme.Modules.dual M).val.obj (Opposite.op W)) :
-      (f'.app W (Scheme.Modules.wedge φ)).app
-          (Opposite.op (Over.mk (𝟙 W))) (Scheme.Modules.wedge x) =
-        (Matrix.of fun i j ↦ (show X.presheaf.obj (Opposite.op W) from
-          (φ j).app (Opposite.op (Over.mk (𝟙 W))) (x i))).det := by
-    change (f.app W (a.inv.app W (Scheme.Modules.wedge φ))).app
-      (Opposite.op (Over.mk (𝟙 W)))
-        ((Scheme.Modules.exteriorSheafPowerIso M d).inv.app W (Scheme.Modules.wedge x)) = _
-    rw [Scheme.Modules.exteriorSheafPowerIso_inv_wedge,
-      Scheme.Modules.exteriorSheafPowerIso_inv_wedge]
-    exact hf W x φ
   have hb (V : X.Opens) (i : I) (g : V ⟶ U i) :
-      Function.Bijective (f.val.app (Opposite.op V)) := by
-    have h := exterior_dual_pairing_app_bijective X M d f' hf' (U i) d (e i).some V g
-    change Function.Bijective
-      ((b.hom.app V) ∘ (f.app V) ∘ (a.inv.app V)) at h
-    exact ((Function.Bijective.of_comp_iff' (ConcreteCategory.bijective_of_isIso
-      (b.hom.app V)) (f.app V)).mp
-        ((Function.Bijective.of_comp_iff _
-          (ConcreteCategory.bijective_of_isIso (a.inv.app V))).mp h))
+      Function.Bijective (f.val.app (Opposite.op V)) :=
+    exterior_dual_pairing_app_bijective X M d f hf (U i) d (e i).some V g
   have : IsIso ((SheafOfModules.toSheaf X.ringCatSheaf).map f) :=
     (Sheaf.isLocallyBijective_iff_isIso _).1
       ⟨Presheaf.isLocallyInjective_of_coversTop hU _ fun V i g ↦ (hb V i g).1,
@@ -89,6 +67,8 @@ theorem exteriorSheaf_dual_iso (X : Scheme.{u}) (M : X.Modules) (d : ℕ)
     PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf_1
   have : IsIso f :=
     isIso_of_reflects_iso f (SheafOfModules.toSheaf.{u} X.ringCatSheaf)
-  exact ⟨asIso f⟩
+  exact ⟨(Scheme.Modules.exteriorSheafPowerIso (Scheme.Modules.dual M) d).trans
+    ((asIso f).trans ((Scheme.Modules.dualFunctor X).mapIso
+      (Scheme.Modules.exteriorSheafPowerIso M d).op))⟩
 
 end AlgebraicGeometry

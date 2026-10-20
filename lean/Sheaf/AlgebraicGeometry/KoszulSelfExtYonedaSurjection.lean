@@ -17,7 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtDualExteriorConormal
-import Sheaf.AlgebraicGeometry.DeterminantDualPairing
+import WeilConjectures.AlgebraicGeometry.DeterminantDualPairing
 import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingLocal
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
@@ -121,7 +121,11 @@ theorem koszulRegularImmersion_self_ext_yoneda_surjection
   classical
   dsimp only
   let C := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
-  obtain ⟨p, hp⟩ := exterior_dual_pairing_exists Z C n
+  obtain ⟨p₀, hp₀⟩ := exterior_dual_pairing_exists Z C n
+  let eSource := Scheme.Modules.exteriorSheafPowerIso (Scheme.Modules.dual C) n
+  let eTarget := (Scheme.Modules.dualFunctor Z).mapIso
+    (Scheme.Modules.exteriorSheafPowerIso C n).op
+  let p := eSource.hom ≫ p₀ ≫ eTarget.hom
   have hrestrict :=
     Scheme.Modules.exteriorSheaf_restrict_iso (Scheme.Modules.dual C) n V
   rw [← Scheme.Modules.exteriorSheaf_eq_exteriorPower (Scheme.Modules.dual C) n,
@@ -137,31 +141,14 @@ theorem koszulRegularImmersion_self_ext_yoneda_surjection
   obtain ⟨c, hc⟩ := ExteriorAlgebra.exists_koszul_conormal_basis
     Γ(Y, U.1) (i.ker.ideal U) m f hreg hf
   obtain ⟨⟨e⟩, he⟩ := affine_conormal_frame i U m c
-  let eSource := Scheme.Modules.exteriorSheafPowerIso (Scheme.Modules.dual C) n
-  let eTarget := (Scheme.Modules.dualFunctor Z).mapIso
-    (Scheme.Modules.exteriorSheafPowerIso C n).symm.op
-  let p' := eSource.inv ≫ p ≫ eTarget.hom
-  have hp' (W : Z.Opens) (x : Fin n → C.val.obj (op W))
-      (φ : Fin n → (Scheme.Modules.dual C).val.obj (op W)) :
-      (p'.app W (Scheme.Modules.wedge φ)).app
-          (op (Over.mk (𝟙 W))) (Scheme.Modules.wedge x) =
-        (Matrix.of fun j k ↦ (show Z.presheaf.obj (op W) from
-          (φ k).app (op (Over.mk (𝟙 W))) (x j))).det := by
-    change (p.app W (eSource.inv.app W (Scheme.Modules.wedge φ))).app
-      (op (Over.mk (𝟙 W)))
-        ((Scheme.Modules.exteriorSheafPowerIso C n).inv.app W (Scheme.Modules.wedge x)) = _
-    rw [Scheme.Modules.exteriorSheafPowerIso_inv_wedge,
-      Scheme.Modules.exteriorSheafPowerIso_inv_wedge]
-    exact hp W x φ
   have hb (W : Z.Opens) (g : W ⟶ i ⁻¹ᵁ U.1) :
       Function.Bijective (p.app W) := by
-    have h := exterior_dual_pairing_app_bijective Z C n p' hp' (i ⁻¹ᵁ U.1) m e W g
+    have h := exterior_dual_pairing_app_bijective Z C n p₀ hp₀
+      (i ⁻¹ᵁ U.1) m e W g
     change Function.Bijective
-      ((eTarget.hom.app W) ∘ (p.app W) ∘ (eSource.inv.app W)) at h
-    exact ((Function.Bijective.of_comp_iff' (ConcreteCategory.bijective_of_isIso
-      (eTarget.hom.app W)) (p.app W)).mp
-        ((Function.Bijective.of_comp_iff _
-          (ConcreteCategory.bijective_of_isIso (eSource.inv.app W))).mp h))
+      ((eTarget.hom.app W) ∘ (p₀.app W) ∘ (eSource.hom.app W))
+    exact (ConcreteCategory.bijective_of_isIso (eTarget.hom.app W)).comp
+      (h.comp (ConcreteCategory.bijective_of_isIso (eSource.hom.app W)))
   have hps : Function.Surjective (p.stalkLinearMap z.1) :=
     stalk_surjective_of_local_app p z.1 (i ⁻¹ᵁ U.1) hzU fun W hW ↦
       (hb W (homOfLE hW)).2
@@ -171,8 +158,8 @@ theorem koszulRegularImmersion_self_ext_yoneda_surjection
   change Function.Surjective (F.map q) at hqs
   have has := (ConcreteCategory.bijective_of_isIso (F.map a.inv)).2
   have hbs := (ConcreteCategory.bijective_of_isIso (F.map b.hom)).2
-  have hs := hbs.comp (hqs.comp has)
-  change Function.Surjective (F.map φ)
-  simpa only [φ, Functor.map_comp, ConcreteCategory.coe_comp, Function.comp_assoc] using hs
+  change Function.Surjective (F.map (a.inv ≫ q ≫ b.hom))
+  rw [Functor.map_comp, Functor.map_comp]
+  exact hbs.comp (hqs.comp has)
 
 end AlgebraicGeometry

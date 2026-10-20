@@ -27,14 +27,15 @@
    "elementary": false
   },
   {
-   "text": "At a point choose one regular chart. The regular conormal basis and affine frame make the determinant pairing from the exterior of the conormal dual to the dual exterior conormal surjective on every subopen of that chart. Represent stalk elements by sections on smaller neighborhoods to obtain stalk surjectivity, and transport through open restriction and exteriorSheaf_restrict_iso. This produces a surjective stalk map q from the exterior of the restricted conormal dual to the dual exterior conormal. For the upstream restriction theorem, rewrite exteriorPower as exteriorSheaf at the module and its restriction using [lem-sc-exterior-sheaf-upstream-comparison]; this preserves exactly the legacy objects used by the rest of the argument.",
+   "text": "At a point choose one regular chart. The regular conormal basis and affine frame make the determinant pairing from the exterior of the conormal dual to the dual exterior conormal surjective on every subopen of that chart. Represent stalk elements by sections on smaller neighborhoods to obtain stalk surjectivity, and transport through open restriction and exteriorSheaf_restrict_iso. This produces a surjective stalk map q from the exterior of the restricted conormal dual to the dual exterior conormal. For the upstream restriction theorem, rewrite exteriorPower as exteriorSheaf at the module and its restriction using [lem-sc-exterior-sheaf-upstream-comparison]; this preserves exactly the legacy objects used by the rest of the argument. Obtain the upstream exteriorPower pairing p₀ and its determinant formula. Define p as exteriorSheafPowerIso(dual C,n).hom followed by p₀ and then dualFunctor.mapIso(exteriorSheafPowerIso(C,n).op).hom. Apply the upstream local pairing theorem directly to p₀. Both comparison section maps are bijections; Function.Bijective.comp gives bijectivity of p on every subopen. This replaces conjugation and cancellation with forward composition, retaining the same stalk-surjectivity argument.",
    "uses": [
     "lem-sc-koszul-conormal-basis",
     "lem-sc-affine-conormal-frame",
     "lem-sc-exterior-dual-pairing-construction",
     "lem-sc-exterior-dual-pairing-local-bijective",
     "lem-sc-exterior-sheaf-restrict-iso",
-    "lem-sc-exterior-sheaf-upstream-comparison"
+    "lem-sc-exterior-sheaf-upstream-comparison",
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
    "elementary": false
   },
@@ -54,9 +55,10 @@
   "lem-sc-exterior-dual-pairing-construction",
   "lem-sc-exterior-dual-pairing-local-bijective",
   "lem-sc-exterior-sheaf-restrict-iso",
+  "lem-sc-exterior-sheaf-upstream-comparison",
+  "lem-sc-exterior-sheaf-power-comparison",
   "lem-sc-koszul-self-ext-stalk-bases",
-  "lem-weil-pbc-module-iso-on-stalks",
-  "lem-sc-exterior-sheaf-upstream-comparison"
+  "lem-weil-pbc-module-iso-on-stalks"
  ],
  "proof_origin": {
   "by": "agent",
@@ -66,7 +68,8 @@
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
   },
-  "note": "Decomposition: construction and spanning are split off; injectivity is proved using the existing independent stalk bases, the determinant pairing and Mathlib OrzechProperty. No target, existing signature, chapter or unit route is changed. K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved."
+  "note": "Decomposition: construction and spanning are split off; injectivity is proved using the existing independent stalk bases, the determinant pairing and Mathlib OrzechProperty. No target, existing signature, chapter or unit route is changed. K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved.",
+  "retirement": "D6 repair (2026-10-21): reapply pairing retirement to the current consumer, preserving B8 upstream local-bijectivity imports and K4 restriction comparisons where present. Apply upstream construction and local perfection before comparison transport; existing statements are unchanged."
  },
  "mathlib_searches": [
   {
@@ -144,12 +147,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a6756",
-  "group": "K4",
+  "reviewer": "C-fe289",
+  "group": "D6",
   "result": "pass",
-  "landing": "20261020T221234-L-4162476",
+  "landing": "20261020T233118-L-895066",
   "kind": "interface",
-  "note": "independent cc review: retire-items row 749 + twin WeilConjectures…exteriorSheaf_restrict_iso (signature verbatim in node lean record) with the 5 adapted consumers vs live clone; exteriorSheaf_eq_exteriorPower (lem-sc-exterior-sheaf-upstream-comparison) bridges exteriorSheaf/exteriorPower"
+  "note": "independent cc review: retired Sheaf exterior_dual_pairing_exists vs upstream WeilConjectures twin (node lean.statement byte-identical); 3 adapted direct importers vs live clone (private import + proof lines only), all compile clean against the delivered stub; axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {

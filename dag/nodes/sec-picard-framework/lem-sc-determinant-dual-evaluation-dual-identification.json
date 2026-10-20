@@ -15,40 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Construct the exterior-dual morphism with its determinant formula in degree d, using lem-sc-exterior-dual-pairing-construction. This step has no finite local freeness hypothesis.",
+   "text": "Construct the upstream exterior-dual morphism f on exteriorPower, together with its determinant formula in degree d, using lem-sc-exterior-dual-pairing-construction. No finite local freeness is needed for this step.",
    "uses": [
     "lem-sc-exterior-dual-pairing-construction"
    ],
    "elementary": false
   },
   {
-   "text": "Unpack finite local freeness into a covering family of opens with free rank-d trivializations. On every subopen of every member, lem-sc-exterior-dual-pairing-local-bijective applied to the constructed morphism proves bijectivity on sections. To apply the official local pairing theorem, conjugate the legacy determinant morphism by exteriorSheafPowerIso on its source and the dual of the inverse comparison on its target. The inverse-wedge formula gives its determinant hypothesis. Bijectivity of the comparison sections cancels from the composite, giving exactly the required bijectivity of the original morphism.",
+   "text": "Unpack finite local freeness into a covering family of opens with free rank-d trivializations. On every subopen of each member apply the upstream lem-sc-exterior-dual-pairing-local-bijective directly to f and its determinant formula. This gives bijectivity of the section maps of f without conjugating any pairing.",
    "uses": [
     "def-amb-finite-locally-free-module",
-    "lem-sc-exterior-dual-pairing-local-bijective",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-exterior-dual-pairing-local-bijective"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the proved coversTop local injectivity and local surjectivity criteria to the underlying sheaf morphism. Sheaf.isLocallyBijective_iff_isIso gives its invertibility, and the forgetful functor SheafOfModules.toSheaf reflects isomorphisms. The asIso construction supplies the required Nonempty isomorphism. This is the explicit Lean assembly of the two parts and the standard sheaf criterion; no choice of data in a definition is involved.",
+   "text": "Apply the coversTop local injectivity and surjectivity criteria to the underlying sheaf morphism. Sheaf.isLocallyBijective_iff_isIso gives invertibility, and SheafOfModules.toSheaf reflects isomorphisms. Compose asIso f with exteriorSheafPowerIso on the source and dualFunctor.mapIso of the opposite exteriorSheafPowerIso on the target. These comparisons produce exactly the stated isomorphism on exteriorSheaf, with no new hypotheses.",
    "uses": [
-    "def-pc-scheme"
+    "def-pc-scheme",
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-amb-finite-locally-free-module",
-  "def-pc-scheme",
   "lem-sc-exterior-dual-pairing-construction",
+  "def-amb-finite-locally-free-module",
   "lem-sc-exterior-dual-pairing-local-bijective",
+  "def-pc-scheme",
   "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BRT final determinant inversion: split map construction and local perfection, and proved covering and local-to-global assembly in Lean (K1). B8 retirement, 2026-10-21: transport through the canonical exterior-power comparisons to the official pairing theorem; no change of mathematical route."
+  "place": "Tag 0BRT final determinant inversion: split map construction and local perfection, and proved covering and local-to-global assembly in Lean (K1). B8 retirement, 2026-10-21: transport through the canonical exterior-power comparisons to the official pairing theorem; no change of mathematical route.",
+  "retirement": "D6 repair (2026-10-21): reapply pairing retirement to the current consumer, preserving B8 upstream local-bijectivity imports and K4 restriction comparisons where present. Apply upstream construction and local perfection before comparison transport; existing statements are unchanged."
  },
  "mathlib_searches": [
   {
@@ -128,12 +129,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-5683b",
-  "group": "B8",
+  "reviewer": "C-fe289",
+  "group": "D6",
   "result": "pass",
-  "landing": "20261020T211636-L-3481975",
+  "landing": "20261020T233118-L-895066",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf exterior_dual_pairing_app_bijective vs WeilConjectures twin (node lean.statement byte-identical); 3 adapted direct importers vs live (only plain import + proof changes), all compile (560 s limit under load 260; orig 182 s vs delivered 79 s); axioms clean"
+  "note": "independent cc review: retired Sheaf exterior_dual_pairing_exists vs upstream WeilConjectures twin (node lean.statement byte-identical); 3 adapted direct importers vs live clone (private import + proof lines only), all compile clean against the delivered stub; axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {
