@@ -1,0 +1,120 @@
+{
+ "kind": "lemma",
+ "status": "split",
+ "mathlib_match": null,
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedAdicCoefficientDatum",
+  "date": "2026-10-21",
+  "group": "E3"
+ },
+ "id": "lem-pbc-restricted-change-tensor-independent",
+ "title": "Restricted scalar extension as tensor at independent site sizes",
+ "statement": "Let (C,J) be an essentially small site at coefficient universe r, with the indicated abelian sheafification and sheaf-composition instances. For commutative ring sheaves R,S and φ:R→S, suppose E is a functor on module sheaves [def-weil-sheaf-of-modules-category] whose object and morphism equalities identify it with the sheafified sectionwise scalar extension [def-pur-sheaf-tensor-product]. Then E followed by scalar restriction [def-pc-sheaf-restrict-scalars] is naturally isomorphic to right tensor by the restricted regular S-module. Site object, site morphism and coefficient universes are independent.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (sheaf tensor products) and 03CY (module sheafification)"
+ },
+ "proof": [
+  {
+   "text": "The restricted scalar-extension presheaf and the presheaf tensor by the restricted regular target ring have identical section modules. Their restrictions agree on pure tensors, so tensor induction gives a natural presheaf isomorphism.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical map comparing source-ring sheafification of restricted presheaves with restriction of target-ring sheafification becomes the identity after forgetting to abelian sheaves. This forgetful functor reflects isomorphisms. Compose this comparison with sheafification of the presheaf tensor identity and the tensor-sheafification isomorphism. Naturality follows from the counit and tensorator identities and naturality of the sheafification comparison. Transport along the given E object and map equalities. The braiding puts the fixed target ring on the right. The construction uses no flatness and includes zero rings and modules.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (sheaf tensor products) and 03CY (module sheafification)",
+  "by": "agent"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "def-weil-pbc-adic-coefficient-datum",
+   "place": "Comparison of the two finite-level reductions of completed coefficients"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RestrictedChangeTensorComparison",
+  "file": "lean/Sheaf/Algebra/Homology/RestrictedChangeTensorComparison.lean",
+  "declaration": "SheafOfModules.nonempty_restrictedChangeTensorIso",
+  "statement": "theorem nonempty_restrictedChangeTensorIso (φ : R ⟶ S)\n    (E : SheafOfModules.{r} (𝓡 R) ⥤ SheafOfModules.{r} (𝓡 S))\n    (hobj : ∀ M, E.obj M = changeOfRings φ M)\n    (hmap : ∀ {M N} (f : M ⟶ N), E.map f =\n      eqToHom (hobj M) ≫ changeOfRingsHom φ M f ≫ eqToHom (hobj N).symm) :\n    let := cochainModulesMonoidal R\n    Nonempty (E ⋙ restrictScalars\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ) ≅\n      tensorRight ((restrictScalars\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj (unit (𝓡 S))))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of extension of scalars of sheaves of modules is naturally tensor with the restricted target ring",
+   "results": "8 hits on restriction of scalars and section tensors, none giving this natural sheaf isomorphism.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing APIs in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.restrictScalars\"",
+   "results": "10 hits describing restriction and its underlying presheaves; no tensor comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing APIs in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionTensorComparison|restrictedChangeTensorIso",
+   "results": "0 Mathlib hits. The project comparison at equal site sizes does not specialize to the pro-etale site sizes here.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing APIs in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of extension of scalars of sheaves of modules is naturally tensor with the restricted target ring",
+   "results": "8 hits, including SheafOfModules.restrictScalars and SheafOfModules.restrictScalars_obj_val (Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings), PresheafOfModules.restrictScalarsObj (Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings), and ModuleCat.restrictScalars (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings). These supply restriction, without the natural tensor comparison for sheafified scalar extension.",
+   "date": "2026-10-21",
+   "verdict": "no match; use restriction and derived universal-property APIs in the proof"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261020T211659-L-3487987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261020T211659-L-3487987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
