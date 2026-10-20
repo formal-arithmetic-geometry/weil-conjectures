@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
 import Mathlib.CategoryTheory.Filtered.Final
-import Sheaf.CategoryTheory.SiteCohomologyZeroSections
+import WeilConjectures.CategoryTheory.SiteCohomologyZeroSections
 import Sheaf.CategoryTheory.VaryingSiteSectionsZeroDetection
 
 /-! # The degree-zero stage comparison
@@ -35,6 +35,8 @@ private theorem arrow_apply_eq_zero_iff
   subst g
   simp
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
 /-- The degree-zero comparison from the group colimit is injective.
 
 Source: Stacks Project, Sites, Tag 09YN and Cohomology on Sites, Tag 09YP,
@@ -248,7 +250,7 @@ theorem cohomology_colimit_sites_zero_comparison_injective
     rwa [colimit.ι_desc] at hw
   let X := (F.map t.hom).toFunctor.obj X_i
   let x₀ : Sheaf.H' (Fs t.right) 0 X := (eqToHom (hDobj t)).hom x
-  let z := siteCohomology_zero_section (P t.right).toGrothendieck (Fs t.right) X x₀
+  let z := Sheaf.objectCohomologyEval₀ (P t.right).toGrothendieck X (Fs t.right) x₀
   let k := eqToHom (hSobj t.right).symm ≫ K.ι.app t.right
   have hx₀ : (canonicalMap t.right 0 X (Fs t.right) ≫
       ((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck 0).map k).app
@@ -259,18 +261,18 @@ theorem cohomology_colimit_sites_zero_comparison_injective
         (Fs t.right)).hom.app (op X)) ≫
       k.hom.app (op ((V.ι.app t.right).toFunctor.obj X))).hom z = 0 := by
     have hh := congrArg
-      (siteCohomology_zero_section Q.toGrothendieck K.pt
-        ((V.ι.app t.right).toFunctor.obj X)) hx₀
-    rw [(siteCohomology_zero_section_properties_sheaf Q.toGrothendieck).2.1] at hh
-    change siteCohomology_zero_section Q.toGrothendieck K.pt
-      ((V.ι.app t.right).toFunctor.obj X)
+      (Sheaf.objectCohomologyEval₀ Q.toGrothendieck
+        ((V.ι.app t.right).toFunctor.obj X) K.pt) hx₀
+    rw [(siteCohomology_zero_section_properties Q.toGrothendieck).2.1] at hh
+    change Sheaf.objectCohomologyEval₀ Q.toGrothendieck
+      ((V.ι.app t.right).toFunctor.obj X) K.pt
       ((((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck 0).map k).app
         (op ((V.ι.app t.right).toFunctor.obj X))).hom
           ((canonicalMap t.right 0 X (Fs t.right)).hom x₀)) = 0 at hh
-    have hh' := ((siteCohomology_zero_section_properties_sheaf Q.toGrothendieck).2.2
+    have hh' := ((siteCohomology_zero_section_properties Q.toGrothendieck).2.2
       _ K.pt k ((V.ι.app t.right).toFunctor.obj X)
       ((canonicalMap t.right 0 X (Fs t.right)).hom x₀)).symm.trans hh
-    rw [show siteCohomology_zero_section Q.toGrothendieck _ _
+    rw [show Sheaf.objectCohomologyEval₀ Q.toGrothendieck _ _
         ((canonicalMap t.right 0 X (Fs t.right)).hom x₀) = _ from
       (hcanonicalMap t.right).2.2 X (Fs t.right) x₀] at hh'
     exact hh'
@@ -282,17 +284,17 @@ theorem cohomology_colimit_sites_zero_comparison_injective
     ((Sheaf.cohomologyPresheafFunctor (P t'.right).toGrothendieck 0).map
       (φ b.right)).app (op Y)).hom x₀
   have hy : y = 0 := by
-    apply (siteCohomology_zero_section_properties_sheaf (P t'.right).toGrothendieck).1
+    apply (siteCohomology_zero_section_properties (P t'.right).toGrothendieck).1
       (Fs t'.right) Y
-    rw [(siteCohomology_zero_section_properties_sheaf (P t'.right).toGrothendieck).2.1]
-    change siteCohomology_zero_section (P t'.right).toGrothendieck (Fs t'.right) Y
+    rw [(siteCohomology_zero_section_properties (P t'.right).toGrothendieck).2.1]
+    change Sheaf.objectCohomologyEval₀ (P t'.right).toGrothendieck Y (Fs t'.right)
       ((((Sheaf.cohomologyPresheafFunctor (P t'.right).toGrothendieck 0).map
         (φ b.right)).app (op Y)).hom
           ((pullbackMap b.right 0 X (Fs t.right)).hom x₀)) = 0
-    apply ((siteCohomology_zero_section_properties_sheaf (P t'.right).toGrothendieck).2.2
+    apply ((siteCohomology_zero_section_properties (P t'.right).toGrothendieck).2.2
       _ (Fs t'.right) (φ b.right) Y
       ((pullbackMap b.right 0 X (Fs t.right)).hom x₀)).trans
-    rw [show siteCohomology_zero_section (P t'.right).toGrothendieck _ _
+    rw [show Sheaf.objectCohomologyEval₀ (P t'.right).toGrothendieck _ _
         ((pullbackMap b.right 0 X (Fs t.right)).hom x₀) = _ from
       (hpullbackMap b.right).2.2 X (Fs t.right) x₀]
     exact hb
