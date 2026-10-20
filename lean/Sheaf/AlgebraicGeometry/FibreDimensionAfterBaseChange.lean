@@ -8,7 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
-import Sheaf.AlgebraicGeometry.RationalPointStalkTopologicalLocalDimension
 
 /-!
 # Fibre dimension after base change
@@ -25,6 +24,34 @@ open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry
 
 namespace AlgebraicGeometry
+
+/-- An open embedding preserves the local topological Krull dimension at each point.
+The open neighbourhoods inside its range are cofinal among all open neighbourhoods
+of the image point, and the embedding identifies their dimensions. -/
+private theorem localDim_openEmbedding {X : Type*} {Y : Type*}
+    [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}
+    (hf : Topology.IsOpenEmbedding f) (x : X) :
+    topologicalKrullDimAt x = topologicalKrullDimAt (f x) := by
+  apply le_antisymm
+  · refine le_iInf₂ fun U hx ↦ ?_
+    let V : TopologicalSpace.Opens X := ⟨f ⁻¹' U, U.isOpen.preimage hf.continuous⟩
+    refine (iInf₂_le V hx).trans ?_
+    refine Topology.IsInducing.topologicalKrullDim_le
+      (f := fun p : V ↦ (⟨f p.1, p.2⟩ : U))
+      (.of_comp (g := Subtype.val) (by fun_prop) ?_ ?_)
+    · exact continuous_subtype_val
+    · exact hf.toIsInducing.comp Topology.IsInducing.subtypeVal
+  · refine le_iInf₂ fun U hx ↦ ?_
+    let V : TopologicalSpace.Opens Y := ⟨f '' U, hf.isOpenMap _ U.isOpen⟩
+    let g : U → Y := fun p ↦ f p.1
+    have hg : Topology.IsEmbedding g := hf.toIsEmbedding.comp
+      Topology.IsEmbedding.subtypeVal
+    have hr : Set.range g = (V : Set Y) := by
+      ext y
+      simp [g, V, Set.mem_image]
+    refine (iInf₂_le V ⟨x, hx, rfl⟩).trans_eq ?_
+    rw [hg.topologicalKrullDim_eq_range, hr]
+    rfl
 
 -- Reduce the scheme comparison to the declared affine tensor-product comparison.
 private theorem localDim_field_extension

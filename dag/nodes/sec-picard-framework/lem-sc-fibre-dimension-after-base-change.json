@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "The morphism X_s -> Spec \\kappa(s) is locally of finite type by [lem-weil-pbc-lft-base-change], applied to f and Spec \\kappa(s) -> S. Choose an affine open U = Spec A of X_s containing x, with A a finite type \\kappa(s)-algebra; its inverse image U' = Spec(A \\otimes_{\\kappa(s)} \\kappa(s')) is an open neighbourhood of x' in the residue-field base change. The dimension at a point is computed on any open neighbourhood [def-kun-dimension], and [lem-weil-pbc-dimension-at-point-field-extension] gives dim_{x'} U' = dim_x U because the prime of A \\otimes_{\\kappa(s)} \\kappa(s') at x' lies over the prime of A at x. Hence dim_{x'}((X')_{s'}) = dim_x(X_s). The Lean proof uses the existing AlgebraicGeometry.localDim_openEmbedding from Sheaf.AlgebraicGeometry.RationalPointStalkTopologicalLocalDimension to pass between affine open neighbourhoods and the scheme. pullbackSpecIso identifies the affine base change, and injectivity of the fibre inclusion identifies the point with asFiber.",
+   "text": "The morphism X_s -> Spec \\kappa(s) is locally of finite type by [lem-weil-pbc-lft-base-change], applied to f and Spec \\kappa(s) -> S. Choose an affine open U = Spec A of X_s containing x, with A a finite type \\kappa(s)-algebra; its inverse image U' = Spec(A \\otimes_{\\kappa(s)} \\kappa(s')) is an open neighbourhood of x' in the residue-field base change. The dimension at a point is computed on any open neighbourhood [def-kun-dimension], and [lem-weil-pbc-dimension-at-point-field-extension] gives dim_{x'} U' = dim_x U because the prime of A \\otimes_{\\kappa(s)} \\kappa(s') at x' lies over the prime of A at x. Hence dim_{x'}((X')_{s'}) = dim_x(X_s). The Lean proof uses the private localDim_openEmbedding helper, relocated unchanged from the retired Sheaf.AlgebraicGeometry.RationalPointStalkTopologicalLocalDimension module, to pass between affine open neighbourhoods and the scheme. pullbackSpecIso identifies the affine base change, and injectivity of the fibre inclusion identifies the point with asFiber.",
    "uses": [
     "lem-weil-pbc-lft-base-change",
     "def-kun-dimension",
@@ -69,10 +69,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N3",
-  "date": "2026-10-18",
+  "group": "B3",
+  "date": "2026-10-20",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 02FY, part (1), affine field-extension comparison Tag 00P4; retained proof with the shared open-embedding lemma exposed in place after return 5d2bdf5da"
+  "place": "Tag 02FY, part (1), affine field-extension comparison Tag 00P4; same proof, with the general open-embedding helper relocated to its sole consumer after duplicate-module retirement"
  },
  "mathlib_searches": [
   {
@@ -162,13 +162,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N3",
+  "reviewer": "C-9b06b",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261018T071206-L-1672852",
+  "landing": "20261020T145446-L-2397211",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf twin vs WeilConjectures.AlgebraicGeometry.RationalPointStalkTopologicalLocalDimension (identical signature, complete proof, retire-items.tsv line 89); relocated private localDim_openEmbedding verbatim vs removed public one; consumer public interface vs clone; 11 direct importers of FibreDimensionAfterBaseChange compiled clean; axioms standard"
  }
 }
