@@ -2,7 +2,7 @@
  "id": "lem-sbc-noetherian-approximation-smooth-stage-affine-model",
  "kind": "statement",
  "title": "Affine smooth model in a noetherian approximation",
- "statement": "For the data of the eventual smoothness theorem, there are a later stage j, a scheme Z and a finitely presented quasi-compact quasi-separated morphism q : Z → D(j.left), with q smooth, together with an isomorphism from Z to the pullback of p.",
+ "statement": "Let S be a scheme [def-pc-scheme], N a noetherian approximation [lemma-nagata-noetherian-inverse-system-affine], and i a stage. Let p : Y → N.D(i) be locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated. Suppose f : X → S is smooth [def-sbc-smooth-morphisms] and a : X → Y makes (a, f, p, N.π(i)) a cartesian square [def-pc-fibre-product]. There is an object j of Over i for which the canonical second projection Y ×_{N.D(i)} N.D(j.left) → N.D(j.left) is smooth.",
  "source": {
   "document": "Stacks Project",
   "place": "Tag 0C0C, limits.tex, lemma-descend-smooth, with Situation 081D; affine descent via Tag 0CAQ and comparison via Tag 01ZM(2)-(3)"
@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Apply the existing affine-limit smooth-stage theorem to the Noetherian approximation diagram; its hypotheses are supplied by the approximation fields. Take the resulting pullback as Z, with q the pullback projection; pullback preserves finite presentation, quasi-compactness and quasi-separatedness, and the comparison isomorphism is reflexivity.",
+   "text": "Apply exists_smooth_stage_of_affine_limit to N.D, N.π and N.isLimit. The affine-transition and Noetherian hypotheses are N.isAffineHom_map and N.isNoetherian_obj, and Noetherian schemes are quasi-separated. This is exactly the official exists_smooth_affine_model proof. The former existential model follows by taking Z to be this canonical pullback, q its second projection and the identity comparison; its finiteness properties are preserved by base change.",
    "uses": [
     "lem-sbc-affine-limit-smooth-stage"
    ],
@@ -29,7 +29,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0C0C, expanding the affine-local reduction using Tags 0CAQ and 01ZM(2)-(3)"
+  "place": "Tag 0C0C, limits.tex, lemma-descend-smooth; official upstream specialization to a noetherian approximation"
  },
  "mathlib_searches": [
   {
@@ -92,14 +92,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-normal-form",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SmoothStageAffineModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/SmoothStageAffineModel.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SmoothStageAffineModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SmoothStageAffineModel.lean",
   "declaration": "AlgebraicGeometry.Scheme.NoetherianApproximation.exists_smooth_affine_model",
-  "statement": "theorem Scheme.NoetherianApproximation.exists_smooth_affine_model\n    {S : Scheme.{u}} (N : S.NoetherianApproximation) {i : N.I}\n    {Y X : Scheme.{u}} (p : Y ⟶ N.D.obj i)\n    [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p]\n    (f : X ⟶ S) [Smooth f] (a : X ⟶ Y)\n    (H : IsPullback a f p (N.π.app i)) :\n    ∃ (j : Over i) (Z : Scheme.{u}) (q : Z ⟶ N.D.obj j.left)\n      (_ : LocallyOfFinitePresentation q) (_ : QuasiCompact q) (_ : QuasiSeparated q),\n      Smooth q ∧ Nonempty (Z ≅ Limits.pullback p (N.D.map j.hom))",
+  "statement": "theorem Scheme.NoetherianApproximation.exists_smooth_affine_model\n    {S : Scheme.{u}} (N : S.NoetherianApproximation) {i : N.I}\n    {Y X : Scheme.{u}} (p : Y ⟶ N.D.obj i)\n    [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p]\n    (f : X ⟶ S) [Smooth f] (a : X ⟶ Y)\n    (H : IsPullback a f p (N.π.app i)) :\n    ∃ j : Over i, Smooth (pullback.snd p (N.D.map j.hom))",
   "branch": "sheaf-dag",
-  "by": "J3",
-  "date": "2026-10-13"
+  "by": "H8",
+  "date": "2026-10-21",
+  "note": "Retire the listed Sheaf twin. The official theorem directly states smoothness of the canonical pullback projection. Its conclusion implies the previous arbitrary-model existence statement by taking that pullback and its identity isomorphism."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -112,14 +113,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M3",
+  "reviewer": "C-dc165",
+  "group": "H8",
   "result": "pass",
-  "landing": "20261012T194126-L-460043",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T221216-L-4157596",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf copy (0 importers, 0 DAG citers, no unit realization) vs upstream twin WeilConjectures.AlgebraicGeometry.SmoothStageAffineModel; node lean.statement vs twin signature (byte-identical); new node statement vs Stacks 0C0C and the old existential (implied via canonical pullback + Iso.refl); twin axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {
@@ -132,5 +133,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "H8 stage 2",
+  "old_statement": "For the data of the eventual smoothness theorem, there are a later stage j, a scheme Z and a finitely presented quasi-compact quasi-separated morphism q : Z → D(j.left), with q smooth, together with an isomorphism from Z to the pullback of p.",
+  "what": "Align the retirement attachment with the official theorem and Tag 0C0C: assert smoothness of the canonical base-change morphism itself. The old conclusion only gave a smooth morphism on an abstractly isomorphic source, with no compatibility with the base. The official stronger statement implies the old one by the canonical pullback and the identity comparison. There are no current DAG citers or Lean consumers of the retired copy.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tag 0C0C, limits.tex, lemma-descend-smooth"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Apply the existing affine-limit smooth-stage theorem to the Noetherian approximation diagram; its hypotheses are supplied by the approximation fields. Take the resulting pullback as Z, with q the pullback projection; pullback preserves finite presentation, quasi-compactness and quasi-separatedness, and the comparison isomorphism is reflexivity.",
+    "uses": [
+     "lem-sbc-affine-limit-smooth-stage"
+    ],
+    "elementary": false
+   }
+  ]
  }
 }
