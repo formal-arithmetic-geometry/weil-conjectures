@@ -1,0 +1,236 @@
+{
+ "id": "lem-coef-site-perfect-rational-bidual",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-retract-evaluation",
+   "place": "Proof paragraph 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertibility of the actual coefficient bidual for a rational site-perfect object",
+ "statement": "For every rational coefficient site-perfect K, the Hom-first transpose of coefficient-unit evaluation after the specified signed swap is an isomorphism. Internal Hom is formed using an arbitrary full constructibility witness h. The statement concerns only the second adjoint of this evaluation, not the general retract law or scalar extension.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+  "place": "Proof paragraphs 1–3; explicit interface extracted from lem-coef-rational-retract-evaluation"
+ },
+ "stmt_deps": [
+  "thm-coef-rational-verdier",
+  "lem-coef-rational-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-coef-completed-tensor-hom-transpose",
+  "def-weil-site-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "For the last clause let $A$ be site-perfect as in [def-weil-site-perfect-complex], put $B=A^\\vee=R\\mathcal Hom_E(A,\\mathbf1_E)$, and let $b:B\\otimes A\\to\\mathbf1_E$ be its usual evaluation. These are the coefficient-passage internal Hom and evaluation of [lem-coef-rational-operations], not a discrete constant-field construction. Let $d_A:A\\to A^{\\vee\\vee}$ be the transpose of $b$ with the inputs interchanged. The two adjoints of $b$ are $1_B$ and $d_A$, so it suffices to prove the latter invertible. We prove this locally and then justify detection in the raw scalar localization explicitly. Derived internal Hom commutes with slice restriction and is exact in either argument by [lem-weil-pbc-ringed-internal-hom-exact-restriction]; these identities rationalize, since the rational internal Hom is the integral operation on objects and the scalar-localized operation on morphisms. Exact restriction of sheaves is [lem-pur-site-restriction-module-adjunction-exact]. For completed tensor, restrict its defining finite-level K-flat models and its Roos complex: restrictions of the K-flat models remain K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], restriction commutes with sectionwise products, and hence with the finite cone matrices. Sectionwise exact products are supplied by [lem-weil-proetale-countable-products-exact]. Thus the completed tensor, evaluation, its transpose $d_A$, and their rational images restrict to the corresponding operations on the slice. This establishes restriction of the actual canonical map, without assuming a six-functor datum.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "lem-coef-rational-operations",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Proof paragraph 3"
+   }
+  },
+  {
+   "text": "On a slice where $A$ has a bounded finite-projective model $P$ in degrees $[a,b]$, coefficient duality $V\\mapsto V^\\vee=R\\mathcal Hom_E(V,\\mathbf1_E)$ is contravariantly exact. The Hom-complex differential is $d_{V^\\vee}^r(\\phi)=(-1)^{r+1}\\phi d_V^{-r-1}$, and the degree-$r$ double-evaluation map is $x\\mapsto(\\phi\\mapsto(-1)^r\\phi(x))$.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-pur-hom-complex",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Proof paragraph 3"
+   }
+  },
+  {
+   "text": "The shift and triangle assertion for the actual evaluation-defined map is [lem-coef-rational-bidual-triangle-compatibility], applied to the integral internal-Hom category and then its raw scalar localization; it requires no lifting of a rational perfect model to an integral perfect lattice. This supplies all three squares, including the shifted connecting-map square. By [lem-sf-triangle-morphism-iso], the class of objects with invertible $d_V$ is therefore closed under shifts and triangles.",
+   "uses": [
+    "lem-coef-rational-bidual-triangle-compatibility",
+    "lem-sf-triangle-morphism-iso",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Proof paragraph 3"
+   }
+  },
+  {
+   "text": "The class of objects with invertible $d_V$ contains the unit by the unit adjunction, hence finite sums, and is closed under retracts: if $V\\xrightarrow{i}W\\xrightarrow{p}V$ has $pi=1$, naturality gives $d_V=(p^{\\vee\\vee})d_Wi$ with inverse $p d_W^{-1}(i^{\\vee\\vee})$. Starting with $\\sigma_{\\ge b+1}P=0$, descend through the degreewise split cone triangles $\\sigma_{\\ge r+1}P\\to\\sigma_{\\ge r}P\\to P^r[-r]\\to(\\sigma_{\\ge r+1}P)[1]$. Each $P^r$ is a retract by the site-perfect definition, so finite induction proves $d_A$ invertible on the slice; dualizing the model gives the same bounded finite-projective property for $A^\\vee$.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "def-weil-abstract-derived-category",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "lem-sf-triangle-morphism-iso",
+    "lem-coef-rational-operations",
+    "lem-coef-rational-bidual-triangle-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Proof paragraph 3"
+   }
+  },
+  {
+   "text": "To pass from this local calculation to the raw rational category, choose integral representatives for the endpoints of $d_A$ and write that rational morphism as an integral numerator divided by $\\varpi_E^t$. Let $C$ be the integral cone of its numerator. The integral endpoints and their cone belong to $D^b_c(X,\\mathcal O_E)$ by the coefficient-operation domains and [lem-weil-integral-constructible-triangulated]; its rational image is a cone of $d_A$ up to the invertible scalar. The finite-type definition gives a finite affine open cover of $X$. On each affine the pro-etale covering definition refines the site-perfect cover by finitely many affine opens in its members. Collect them to obtain a finite covering $\\{U_j\\to X\\}_{j=1}^s$ where steps 8–10 apply. If $X$ is empty, every sheaf is zero and there is nothing to prove. Otherwise, exact restriction shows that $C|_{U_j}$ is zero in the scalar localization. By the Hom-module definition of that localization, the image of $\\operatorname{id}_{C|_{U_j}}$ in $\\operatorname{End}(C|_{U_j})\\otimes_{\\mathcal O_E}E$ is zero. The tensor-localization isomorphism and the localization equivalence relation give $\\varpi_E^{N_j}\\operatorname{id}_{C|_{U_j}}=0$ for some $N_j\\geq0$. Let $N=\\max_jN_j$. Exact restriction identifies the restrictions of $\\varpi_E^N H^r(C)$ with zero maps for every $r$. A section therefore restricts to zero on a covering, so the separatedness axiom for a sheaf makes it zero. Thus $\\varpi_E^N H^r(C)=0$ globally for every $r$. This is a statement about cohomology; it has not yet asserted that the same scalar kills $\\operatorname{id}_C$.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-integral-constructible-triangulated",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-proetale-site",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-localization-module-tensor",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Proof paragraph 3"
+   }
+  },
+  {
+   "text": "The integral cone $C$ has bounded cohomology. Indeed its reductions have support in one interval $[u,v]$ by [def-weil-derived-complete-integral-detailed]. In its Roos triangle from [def-weil-derived-complete], exact countable products have cohomology only in $[u,v]$. The long exact sequence therefore places $H^r(C)$ in $[u,v+1]$. In any distinguished triangle $A_0\\xrightarrow{i}B_0\\xrightarrow{p}D_0\\to A_0[1]$, suppose $\\varpi_E^e\\operatorname{id}_{A_0}=0$ and $\\varpi_E^f\\operatorname{id}_{D_0}=0$. Then $p\\varpi_E^f=\\varpi_E^fp=0$, so exactness of $\\operatorname{Hom}(B_0,-)$ gives $\\varpi_E^f\\operatorname{id}_{B_0}=ih$ for some $h:B_0\\to A_0$. Multiply by $\\varpi_E^e$ to obtain $\\varpi_E^{e+f}\\operatorname{id}_{B_0}=0$. Apply this to the canonical truncation triangles of $C$, starting with $\\tau_{\\leq u-1}C=0$ and adjoining $H^r(C)[-r]$ for $u\\leq r\\leq v+1$. Step 11 says each of these successive pieces is killed by $\\varpi_E^N$, so induction gives $\\varpi_E^{N(v-u+2)}\\operatorname{id}_C=0$. The last truncation is isomorphic to $C$ because its other cohomology vanishes. After scalar localization $\\varpi_E$ is invertible, hence $\\operatorname{id}_C=0$ and $C=0$. Thus $d_A$ is an isomorphism globally. The two adjoints $1_B,d_A$ show that the usual unit-valued evaluation has precisely the perfection asserted in the statement.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-complete",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-abstract-derived-category",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+    "place": "Proof paragraph 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-site-perfect-complex",
+  "lem-coef-rational-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-integral-derived-operations",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "def-pur-hom-complex",
+  "lem-coef-rational-bidual-triangle-compatibility",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-abstract-derived-category",
+  "def-weil-rationalization-karoubi",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-localization-module-tensor",
+  "def-weil-pbc-module-localization",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-rational-retract-evaluation.proof.md",
+  "place": "Expanded normalized-map argument in the Lean declaration docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul braiding of the total tensor product of complexes is natural and involutive",
+   "results": "HomologicalComplex₂.totalFlipIsoX; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.tensor_unit_d₂; HomologicalComplex.HasGoodTensor₂₃; HomologicalComplex.ιTensorObj; HomologicalComplex.tensorObj",
+   "date": "2026-10-19",
+   "verdict": "no match: generic module/complex/monoidal API does not identify the specified raw rational constructible operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "CategoryTheory.Functor.map_comp; PresheafOfModules.map_comp; PresheafOfModules.map_comp_assoc; PresheafOfModules.mk; PresheafOfModulesOfCommRing.mk; AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "date": "2026-10-19",
+   "verdict": "no match: generic module/complex/monoidal API does not identify the specified raw rational constructible operations"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual.*perfect|transpose.*scalar|braiding.*naturality|braiding.*symmetry",
+   "results": "Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Hopf_.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: generic module/complex/monoidal API does not identify the specified raw rational constructible operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical bidual evaluation of a perfect complex is an isomorphism and internal Hom transposition commutes with scalar extension",
+   "results": "LinearMap.apply_toPerfPair_flip; HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply; ModuleCat.ihom_coev_app; HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply; CategoryTheory.Abelian.Ext.homLinearEquiv; HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId; FGModuleCat.FGModuleCatEvaluation_apply'; CategoryTheory.Abelian.Ext.homLinearEquiv_symm_apply",
+   "date": "2026-10-19",
+   "verdict": "no match: generic module/complex/monoidal API does not identify the specified raw rational constructible operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational constructible tensor symmetry, internal Hom scalar extension, Verdier evaluation adjoints, and biduality for perfect complexes",
+   "results": "LinearMap.IsPerfPair.dualEval; dualTensorHomEquivOfBasis; lTensorHomEquivHomLTensor; ModuleCat.monoidalClosedHomEquiv; dualTensorHomEquiv; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars; CategoryTheory.tensorRightHomEquiv; CategoryTheory.tensorLeftAdjunction",
+   "date": "2026-10-19",
+   "verdict": "no match: generic module/complex/monoidal API does not identify the specified raw rational constructible operations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalRetractEvaluation",
+  "date": "2026-10-19",
+  "group": "A4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.SitePerfectRationalBidual",
+  "file": "lean/Sheaf/Paper/SitePerfectRationalBidual.lean",
+  "declaration": "WeilConjectures.sitePerfect_rational_bidual",
+  "statement": "theorem sitePerfect_rational_bidual (h : ∀ K M : sfRationalConstructibleCategory l E X, constructibleRationalHomPairs l E X (op K, M)) (K : sfRationalConstructibleCategory l E X) (hK : IsSfRationalCoefficientSitePerfect l E X K) : IsIso ((@podRationalClosed l _ E _ _ _ X (RationalVerdier.units D l hl X)).transpose K ⟨(op ((RationalOperations.homDual l E X h (RationalOperations.coefficientUnit l E X D hl)).obj (op K)), RationalOperations.coefficientUnit l E X D hl), h _ _⟩ ((@pullbackTensorRationalBraiding l _ E _ _ _ X (RationalVerdier.units D l hl X) K ((RationalOperations.homDual l E X h (RationalOperations.coefficientUnit l E X D hl)).obj (op K))).hom ≫ (@podRationalClosed l _ E _ _ _ X (RationalVerdier.units D l hl X)).evaluation ⟨(op K, RationalOperations.coefficientUnit l E X D hl), h _ _⟩))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261020T051005-L-1520720",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261020T051005-L-1520720",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
