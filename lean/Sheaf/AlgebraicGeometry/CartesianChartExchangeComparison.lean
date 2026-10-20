@@ -1,9 +1,12 @@
 module
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
-import all Sheaf.AlgebraicGeometry.CartesianChartExchangeAdjunction
+import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeAdjunction
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeTransport
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeEvaluation
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+-- This module shares private comparison lemmas through proof imports.
+set_option linter.privateModule false
+
 @[expose] public section
 universe u
 open CategoryTheory Limits Opposite
