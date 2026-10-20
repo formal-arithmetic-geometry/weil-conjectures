@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.BifunctorSingleComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorResolution
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
 
@@ -98,7 +99,10 @@ noncomputable def tensorSingleIso :
         ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c)) ≅
       (tensorRight c).mapHomotopyCategory (.up ℤ) :=
   Quotient.natIsoLift _
-    ((NatIso.ofComponents
+    ((NatIso.ofComponents (F := HomotopyCategory.quotient _ (.up ℤ) ⋙
+        (curriedTensor (HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ))).flip.obj
+          ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c)))
+      (G := (tensorRight c).mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient _ _)
       (fun K ↦ Functor.Monoidal.μIso (HomotopyCategory.quotient _ (.up ℤ)) K
           ((single _ (.up ℤ) 0).obj c) ≪≫
         (HomotopyCategory.quotient _ _).mapIso
@@ -109,8 +113,11 @@ noncomputable def tensorSingleIso :
         have h' := Functor.LaxMonoidal.μ_natural_left (HomotopyCategory.quotient _ (.up ℤ)) f
           ((single (Sheaf (ProEt.topology X) A) (.up ℤ) 0).obj c)
         dsimp at h h' ⊢
-        rw [reassoc_of% h', ← Functor.map_comp, ← Functor.map_comp]
-        congr 1) :
+        simp only [Functor.Monoidal.μIso_hom, Functor.mapIso_hom, Iso.app_hom, Category.assoc]
+        rw [reassoc_of% h']
+        congr 1
+        exact (Functor.map_comp _ _ _).symm.trans
+          ((congrArg (HomotopyCategory.quotient _ _).map h).trans (Functor.map_comp _ _ _))) :
       HomotopyCategory.quotient _ _ ⋙ _ ≅
         (tensorRight c).mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient _ _) ≪≫
     ((tensorRight c).mapHomotopyCategoryFactors (.up ℤ)).symm)
@@ -127,7 +134,7 @@ noncomputable def derivedTensorSingleCounit :
     have h' := Functor.LaxMonoidal.μ_natural_left DerivedCategory.Qh f
       ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c))
     dsimp [derivedTensor] at h h' ⊢
-    rw [reassoc_of% h', ← Functor.map_comp, ← Functor.map_comp, h]
+    rw [reassoc_of% h', Category.assoc, ← Functor.map_comp, ← Functor.map_comp, h]
 
 lemma derivedTensorSingleCounit_app (K : HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ)) :
     (derivedTensorSingleCounit c).app K = Functor.LaxMonoidal.μ DerivedCategory.Qh K _ ≫
@@ -165,8 +172,8 @@ lemma tensorSingleIso_hom_app_quotient_obj (K : CochainComplex (Sheaf (ProEt.top
         (HomotopyCategory.quotient _ _).map
           (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) c K).hom) ≫
         ((tensorRight c).mapHomotopyCategoryFactors (.up ℤ)).inv.app K := rfl
-  rw [h, hμ, Category.id_comp, Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-    Category.comp_id]
+  rw [h, hμ]
+  simp [Functor.mapHomotopyCategoryFactors]
 
 /-- **`L(- ⊗ c) ≅ - ⊗ᴸ c`**: the left derived functor of the tensor product with a sheaf `c` is
 the derived tensor product with `c` placed in degree `0`. -/
@@ -228,8 +235,14 @@ instance isLeftDerivedFunctor_leftDerivedUpperStarTensorRight :
       (leftDerivedUpperStarTensorRightCounit g c_Z) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
   refine LocalizerMorphism.isLeftDerivedFunctor_of_isLeftDerivabilityStructure
     (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)) _ (fun X ↦ ?_)
-  have := (tensorRight c_Z).derives_kFlat.isIso_of_isLeftDerivedFunctor
-    (tensorRight c_Z).leftDerivedFunctorCounit ⟨_, X.property⟩
+  have : IsIso ((tensorRight c_Z).leftDerivedFunctorCounit.app
+      (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X))) :=
+    (tensorRight c_Z).derives_kFlat.isIso_of_isLeftDerivedFunctor
+      (tensorRight c_Z).leftDerivedFunctorCounit ⟨_, X.property⟩
+  have : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X)) :=
+    NatIso.isIso_app_of_isIso _ _
   dsimp [leftDerivedUpperStarTensorRightCounit]
   infer_instance
 
@@ -375,8 +388,16 @@ lemma mapHomotopyCategory_map_tensorSingleIso_hom_app_comp
 
 instance isIso_leftDerivedUpperStarDerivedSingleMap [IsIso κ] :
     IsIso (leftDerivedUpperStarDerivedSingleMap g κ) := by
+  have h₁ : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c_Y))) :=
+    NatIso.isIso_app_of_isIso _ _
+  have : IsIso ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫
+      (single _ (.up ℤ) 0).map κ) := IsIso.comp_isIso
+  have h₂ : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+      ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫
+        (single (Sheaf (ProEt.topology Z) A) (.up ℤ) 0).map κ))) := Functor.map_isIso _ _
   dsimp only [leftDerivedUpperStarDerivedSingleMap]
-  infer_instance
+  exact IsIso.comp_isIso' h₁ h₂
 
 /-- **The comparison `Lg^* (K ⊗ᴸ c_Y) ⟶ Lg^* K ⊗ᴸ c_Z` is induced by the comparison of the derived
 pullback with the derived tensor product**: through `L(- ⊗ c) ≅ - ⊗ᴸ c`, the comparison

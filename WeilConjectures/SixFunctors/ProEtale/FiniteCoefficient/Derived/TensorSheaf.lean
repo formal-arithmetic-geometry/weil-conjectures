@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.BifunctorSingleComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorResolution
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
 
@@ -60,7 +61,8 @@ variable {X : Scheme.{u}} (c : Sheaf (ProEt.topology X) A)
 /-- Tensoring with a fixed pro-étale sheaf sends quasi-isomorphisms between K-flat complexes to
 quasi-isomorphisms. -/
 instance preservesKFlatQuasiIso_tensorRight : (tensorRight c).PreservesKFlatQuasiIso :=
-  sorry
+  Functor.PreservesKFlatQuasiIso.mk' _ fun K hK hK' ↦
+    CochainComplex.acyclic_tensorRight_of_kFlat K hK hK' c
 
 /-- A pro-étale sheaf `c` placed in degree `0`, as an object of `D(X_proét)`. -/
 noncomputable abbrev derivedSingle : DerivedCategory (Sheaf (ProEt.topology X) A) :=
@@ -72,19 +74,65 @@ noncomputable def tensorSingleIso :
     (curriedTensor (HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ))).flip.obj
         ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c)) ≅
       (tensorRight c).mapHomotopyCategory (.up ℤ) :=
-  sorry
+  Quotient.natIsoLift _
+    ((NatIso.ofComponents (F := HomotopyCategory.quotient _ (.up ℤ) ⋙
+        (curriedTensor (HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ))).flip.obj
+          ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c)))
+      (G := (tensorRight c).mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient _ _)
+      (fun K ↦ Functor.Monoidal.μIso (HomotopyCategory.quotient _ (.up ℤ)) K
+          ((single _ (.up ℤ) 0).obj c) ≪≫
+        (HomotopyCategory.quotient _ _).mapIso
+          ((CochainComplex.map₂HomologicalComplexFlipObjSingleIso (curriedTensor _) c).app K))
+      (fun {K L} f ↦ by
+        have h := (CochainComplex.map₂HomologicalComplexFlipObjSingleIso
+          (curriedTensor (Sheaf (ProEt.topology X) A)) c).hom.naturality f
+        have h' := Functor.LaxMonoidal.μ_natural_left (HomotopyCategory.quotient _ (.up ℤ)) f
+          ((single (Sheaf (ProEt.topology X) A) (.up ℤ) 0).obj c)
+        dsimp at h h' ⊢
+        simp only [Functor.Monoidal.μIso_hom, Functor.mapIso_hom, Iso.app_hom, Category.assoc]
+        rw [reassoc_of% h']
+        congr 1
+        exact (Functor.map_comp _ _ _).symm.trans
+          ((congrArg (HomotopyCategory.quotient _ _).map h).trans (Functor.map_comp _ _ _))) :
+      HomotopyCategory.quotient _ _ ⋙ _ ≅
+        (tensorRight c).mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient _ _) ≪≫
+    ((tensorRight c).mapHomotopyCategoryFactors (.up ℤ)).symm)
 
 /-- The counit exhibiting `- ⊗ᴸ c` as the left derived functor of `- ⊗ c`: the comparison
 `Qh K ⊗ᴸ Qh c ⟶ Qh (K ⊗ c)` followed by `AlgebraicGeometry.ProEtale.tensorSingleIso`. -/
 noncomputable def derivedTensorSingleCounit :
     DerivedCategory.Qh ⋙ (-⊗ᴸ-(X)[A]).flip.obj (derivedSingle c) ⟶
-      (tensorRight c).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
-  sorry
+      (tensorRight c).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh where
+  app K := Functor.LaxMonoidal.μ DerivedCategory.Qh K _ ≫
+    DerivedCategory.Qh.map ((tensorSingleIso c).hom.app K)
+  naturality K L f := by
+    have h := (tensorSingleIso c).hom.naturality f
+    have h' := Functor.LaxMonoidal.μ_natural_left DerivedCategory.Qh f
+      ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c))
+    dsimp [derivedTensor] at h h' ⊢
+    rw [reassoc_of% h', Category.assoc, ← Functor.map_comp, ← Functor.map_comp, h]
+
+lemma derivedTensorSingleCounit_app (K : HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ)) :
+    (derivedTensorSingleCounit c).app K = Functor.LaxMonoidal.μ DerivedCategory.Qh K _ ≫
+      DerivedCategory.Qh.map ((tensorSingleIso c).hom.app K) :=
+  rfl
+
+/-- The counit `Qh K ⊗ᴸ Qh c ⟶ Qh (K ⊗ c)` is an isomorphism on K-flat complexes. -/
+lemma isIso_derivedTensorSingleCounit_app
+    {K : HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ)}
+    (hK : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat K) :
+    IsIso ((derivedTensorSingleCounit c).app K) := by
+  have := isIso_μ_Qh_of_kFlat K hK
+    ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c))
+  rw [derivedTensorSingleCounit_app]
+  infer_instance
 
 instance isLeftDerivedFunctor_derivedTensorSingle :
     ((-⊗ᴸ-(X)[A]).flip.obj (derivedSingle c)).IsLeftDerivedFunctor
-      (derivedTensorSingleCounit c) (HomotopyCategory.quasiIso _ (.up ℤ)) :=
-  sorry
+      (derivedTensorSingleCounit c) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
+  rw [(tensorRight c).isLeftDerivedFunctor_iff_isIso_app_of_kFlat]
+  exact fun K hK ↦ isIso_derivedTensorSingleCounit_app c
+    ((HomotopyCategory.kFlat_quotient_obj_iff K).2 hK)
 
 /-- **`L(- ⊗ c) ≅ - ⊗ᴸ c`**: the left derived functor of the tensor product with a sheaf `c` is
 the derived tensor product with `c` placed in degree `0`. -/
@@ -92,6 +140,15 @@ noncomputable def leftDerivedTensorRightIso :
     L(tensorRight c) ≅ (-⊗ᴸ-(X)[A]).flip.obj (derivedSingle c) :=
   Functor.leftDerivedUnique _ _ (tensorRight c).leftDerivedFunctorCounit
     (derivedTensorSingleCounit c) (HomotopyCategory.quasiIso _ (.up ℤ))
+
+/-- The defining property of `AlgebraicGeometry.ProEtale.leftDerivedTensorRightIso`. -/
+@[reassoc]
+lemma leftDerivedTensorRightIso_hom_app_comp
+    (K : HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ)) :
+    (leftDerivedTensorRightIso c).hom.app (DerivedCategory.Qh.obj K) ≫
+        (derivedTensorSingleCounit c).app K =
+      (tensorRight c).leftDerivedFunctorCounit.app K := by
+  simp [leftDerivedTensorRightIso]
 
 end Single
 
@@ -134,8 +191,19 @@ noncomputable def leftDerivedUpperStarTensorRightCounit :
 variable (c_Z) in
 instance isLeftDerivedFunctor_leftDerivedUpperStarTensorRight :
     (L((g)^*[A]) ⋙ L(tensorRight c_Z)).IsLeftDerivedFunctor
-      (leftDerivedUpperStarTensorRightCounit g c_Z) (HomotopyCategory.quasiIso _ (.up ℤ)) :=
-  sorry
+      (leftDerivedUpperStarTensorRightCounit g c_Z) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
+  refine LocalizerMorphism.isLeftDerivedFunctor_of_isLeftDerivabilityStructure
+    (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)) _ (fun X ↦ ?_)
+  have : IsIso ((tensorRight c_Z).leftDerivedFunctorCounit.app
+      (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X))) :=
+    (tensorRight c_Z).derives_kFlat.isIso_of_isLeftDerivedFunctor
+      (tensorRight c_Z).leftDerivedFunctorCounit ⟨_, X.property⟩
+  have : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X)) :=
+    NatIso.isIso_app_of_isIso _ _
+  dsimp [leftDerivedUpperStarTensorRightCounit]
+  infer_instance
 
 /-- The comparison `g^*(P ⊗ c_Y) ⟶ g^* P ⊗ c_Z` on homotopy categories. -/
 noncomputable def mapHomotopyCategoryTensorRightUpperStarMap :
@@ -172,8 +240,17 @@ noncomputable def leftDerivedUpperStarDerivedSingleMap :
       ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫ (single _ (.up ℤ) 0).map κ))
 
 instance isIso_leftDerivedUpperStarDerivedSingleMap [IsIso κ] :
-    IsIso (leftDerivedUpperStarDerivedSingleMap g κ) :=
-  sorry
+    IsIso (leftDerivedUpperStarDerivedSingleMap g κ) := by
+  have h₁ : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c_Y))) :=
+    NatIso.isIso_app_of_isIso _ _
+  have : IsIso ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫
+      (single _ (.up ℤ) 0).map κ) := IsIso.comp_isIso
+  have h₂ : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+      ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫
+        (single (Sheaf (ProEt.topology Z) A) (.up ℤ) 0).map κ))) := Functor.map_isIso _ _
+  dsimp only [leftDerivedUpperStarDerivedSingleMap]
+  exact IsIso.comp_isIso' h₁ h₂
 
 /-- **The comparison `Lg^* (K ⊗ᴸ c_Y) ⟶ Lg^* K ⊗ᴸ c_Z` is induced by the comparison of the derived
 pullback with the derived tensor product**: through `L(- ⊗ c) ≅ - ⊗ᴸ c`, the comparison
