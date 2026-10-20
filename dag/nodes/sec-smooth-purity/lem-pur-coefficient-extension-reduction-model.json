@@ -23,6 +23,13 @@
  ],
  "proof": [
   {
+   "text": "The finite quotient sheaf maps commute with transitions: apply faithfulness of forgetting commutativity, functoriality of constant sheafification, and integralScalarQuotientMap_transition to the ULift-transported ring maps. A private ring-level calculation within the same module handles the ULift representatives. This proves coefficientExtensionQuotient_naturality; the following eight steps remain the plan for the three main theorem holes.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": true
+  },
+  {
    "text": "Choose a flat-term K-flat representative $P\\to K$ by [lem-pc-kflat-resolution]. Set $P_m=P\\otimes_{R_E}A_m$ and $D_m=P\\otimes_{R_E}B_m$, with the actual quotient maps on the coefficient factor. By [lem-pur-kflat-change-of-rings], both are flat-term K-flat over their respective finite coefficient sheaves. By [lem-pur-derived-change-of-rings], $P_m$ computes $K_m$, and $P_m\\otimes_{A_m}B_m$ computes $C_{E,L}(K)_m$. The same lemma applies to $D_m\\otimes_{B_m}B_n$ and, later, to extension from $B_m$ to a third coefficient quotient. All these are applications to morphisms of sheaves of rings on the same site, so no flatness of any coefficient homomorphism is required.",
    "uses": [
     "lem-pc-kflat-resolution",
@@ -359,7 +366,13 @@
    "WeilConjectures.coefficientExtensionSuccessiveSystemIso",
    "WeilConjectures.coefficientExtensionSuccessiveIso",
    "WeilConjectures.coefficientExtensionReduction_composition",
-   "WeilConjectures.coefficientExtensionReduction_identity"
+   "WeilConjectures.coefficientExtensionReduction_identity",
+   "WeilConjectures.CoefficientScalarComparisonData",
+   "WeilConjectures.CoefficientAssociationData",
+   "WeilConjectures.CoefficientStrictModelData",
+   "WeilConjectures.CoefficientReductionModelData",
+   "WeilConjectures.IsCoefficientExtensionModelEvaluation",
+   "WeilConjectures.IsCoefficientExtensionCompletionProjection"
   ],
   "file": "lean/Sheaf/Paper/CoefficientExtensionReductionModel.lean",
   "statement": "theorem coefficientExtensionReductionModel (_hl : IsUnit (l : Γ(W, ⊤))) : Nonempty (CoefficientExtensionReductionData l E L ι W SE SL A)",
@@ -367,6 +380,16 @@
   "by": "Q46",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The existing sequence-site reduction calculus and canonical semilinear scalar models give the coherent quotient systems with independent site and coefficient universes. The main theorem returns the representative-normalized comparison; the identity and composition theorems retain the usual counit and an equality of coherent system maps. Helper structures package these same clauses; no new independent notion or coefficient construction is introduced."
+  "note": "The existing sequence-site reduction calculus and canonical semilinear scalar models give the coherent quotient systems with independent site and coefficient universes. The main theorem returns the representative-normalized comparison; the identity and composition theorems retain the usual counit and an equality of coherent system maps. Helper structures package these same clauses; no new independent notion or coefficient construction is introduced. Stage-3 compile repair: cache the concrete record parameters in generic records, and cache the two large model equations in named predicates; the data and mathematical equations are unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-ae53f",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261020T221411-L-4184053",
+  "kind": "interface",
+  "note": "independent cc review: delivered CoefficientExtensionReductionModel.lean vs live base (record abbrevs = old structures field-for-field; 3 sorry statements byte-identical), node lem-pur-coefficient-extension-reduction-model vs live (proof step 0 + declarations/note only), change record users vs grep and public-import closure; item + 3 direct importers compiled clean"
  }
 }
