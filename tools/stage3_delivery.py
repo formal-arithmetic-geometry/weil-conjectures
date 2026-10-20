@@ -302,6 +302,24 @@ def repair_job(group, item):
     return job
 
 
+def rework_quarantine(git, base: str, item: str) -> str | None:
+    """the quarantine path of `item` when coord/rework.tsv lists it at `base` (tools/rework.py), else None"""
+    for line in (git.show(base, "coord/rework.tsv") or "").splitlines():
+        r = line.split("\t")
+        if not line.startswith("#") and len(r) >= 3 and r[0] == item:
+            return r[2]
+    return None
+
+
+def upstream_exception(mod: str) -> bool:
+    """`mod` has an entry in coord/upstream-statement-exceptions.tsv (our corrections of false upstream statements)"""
+    try:
+        return any(l.split("\t")[0] == mod for l in (ROOT / "coord/upstream-statement-exceptions.tsv").read_text().splitlines()
+                   if not l.startswith("#"))
+    except OSError:
+        return False
+
+
 def claim_holder(mod: str) -> str | None:
     p = ROOT / "coord" / "claims" / (mod.replace("/", "__") + ".lock")
     try:
@@ -335,6 +353,7 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
     item_file = path_of_module(item)
     status = [l.split("\t") for l in git.run("diff", "--name-status", base, ref).splitlines() if l]
     seen_item = False
+    rw = rework_quarantine(git, base, item)   # the human, 2026-10-20: a module the upstream sync quarantined
     for st in status:
         code, p = st[0], st[-1]
         if code[0] in "DR":
@@ -344,6 +363,14 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
             continue
         if is_library_file(p):
             old = git.show(base, p) if code[0] != "A" else None
+            if p == item_file and old is None and rw:
+                # a rework delivery restores the quarantined module to its original path: it is judged against the
+                # quarantined text (statements, sorries, proofs), not as a new module
+                old = git.show(base, rw)
+                D["rework"] = rw
+                if p.startswith("lean/WeilConjectures/") and show(p) != old and not upstream_exception(item):
+                    f("a", f"{p}: an upstream module comes back verbatim from {rw} (tools/rework.py); make it compile by "
+                           "changing our own modules (lean/Sheaf/), not the upstream file")
             role = "item" if p == item_file else ("new" if old is None else "adapted")
             if role == "new" and not p.startswith(f"lean/{PROJECT_ROOT}/"):
                 f("a", f"{p}: a new module goes under lean/{PROJECT_ROOT}/ (the project's root; the source root only "

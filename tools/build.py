@@ -21,6 +21,9 @@ Usage:
                            default 600) and builds as soon as it arrives.
   tools/build.py --retry   after a red build: build the same snapshot again with the maintainer's own landings
                            (group M) and without the landings reverted, taking in nothing else that has landed
+  tools/build.py --only FILE   build once with exactly the landings whose ids FILE lists (one per line); every other
+                           waiting landing is held back (its files at their previous version), no interface restart, no
+                           wait. Used by the scheduled upstream sync (~/cc1/upsync-quick.py), run inside ~/cc1/buildloop.sh.
   tools/build.py status    the last result and the landings waiting
 Results: local/builds/last.json, the log in local/build.log.
 
@@ -301,7 +304,9 @@ def batch_checks(included: list[dict], log: str) -> list[dict]:
     for r in included:
         if r.get("batch"):
             for f in r["files"]:
-                if (CLONE / f["path"]).is_file():
+                # 2026-10-20: a root file that only lists imports (an import line put back by a rework landing,
+                # tools/rework.py) is no delivered module: loading the whole library is not its own compile time
+                if (CLONE / f["path"]).is_file() and f["module"] not in ("WeilConjectures", "TargetsCheck"):
                     mods[f["module"]] = (r, f["path"])
     if not mods:
         return []
@@ -385,7 +390,11 @@ def main() -> int:
     if sys.argv[1:] == ["status"]:
         return status()
     wait, retry = True, sys.argv[1:] == ["--retry"]
-    if sys.argv[1:] and not retry:
+    only = None
+    if len(sys.argv) == 3 and sys.argv[1] == "--only":
+        only = {x for x in pathlib.Path(sys.argv[2]).read_text().split() if x and not x.startswith("#")}
+        wait = False
+    if sys.argv[1:] and not retry and only is None:
         print(__doc__); return 2
     ld.dirs()
     guard = open(ld.B / "build.lock", "w")
@@ -415,6 +424,8 @@ def main() -> int:
             if not last or last["result"] != "red":
                 print("--retry follows a red build; the last build was not red."); return 2
             allowed = set(last.get("included", [])) | {r["id"] for r in ld.records(ld.REQUESTS) if r["group"] == "M"}
+        if only is not None:
+            allowed = only
         snap = snapshot(allowed)
         if snap is None:
             return 1
@@ -457,7 +468,7 @@ def main() -> int:
             restart = False
             while proc.poll() is None:
                 time.sleep(POLL)
-                if has_interface or retry:
+                if has_interface or retry or only is not None:
                     continue
                 new = [r for r in ld.records(ld.REQUESTS) if r["id"] not in ids and r["kind"] == "interface"]
                 if new:

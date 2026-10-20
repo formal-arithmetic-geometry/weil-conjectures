@@ -10,7 +10,8 @@ missing or belongs to another route). A module whose source changed after the ro
 every batch whose import closure reaches it, until the next route refresh (a landing may have split off a new sorry).
 When the route is missing or a walk failed, the batch falls back to its import closure and this script says so.
 The dispatch tag (queue-batches.tsv) is the first such batch; queue-batches-all.tsv lists every one. A stage-3 item
-reached by no open batch is tagged `unneeded`, which no dispatcher lane serves (tools/queue.py lists only modules on
+reached by no open batch is tagged `unneeded`, which no dispatcher lane serves; a rework item (kind `rework`, tools/rework.py)
+is tagged `rework`, the dispatcher's first lane (the human, 2026-10-20) (tools/queue.py lists only modules on
 the route or below it, so this is rare). Other stages: untagged."""
 import collections, pathlib, re, sys
 R = pathlib.Path(__file__).resolve().parent.parent; sys.path.insert(0, str(R / "tools"))
@@ -74,6 +75,8 @@ rows = []; allrows = []
 for l in (R / "coord/queue.tsv").read_text().splitlines():
     r = l.split("\t")
     if l.startswith("#") or len(r) < 2: continue
+    if len(r) > 4 and r[4] == "rework":   # the human, 2026-10-20: quarantined by the upstream sync; the dispatcher's first lane
+        rows.append(f"{r[0]}\trework"); allrows.append(f"{r[0]}\trework"); continue
     b = node_tag(r[0]) if r[1] != "3" else next((name for name, s in rs if r[0] in s), "unneeded")
     rows.append(f"{r[0]}\t{b}")
     allb = ",".join(name for name, s in rs if r[0] in s) if r[1] == "3" else node_tags_all(r[0])

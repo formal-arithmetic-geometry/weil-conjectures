@@ -30,7 +30,12 @@ has a Lean statement, whatever its depth below the target):
      launcher's machine, outside the repository. The hold ends by itself when the module has no `sorry` left in live
      (the sync brought the proof) or when the module leaves the file; such modules are listed as "held for an open
      upstream PR" (STATE["pending"]), claimed or not.
-No cap. The order:
+No cap. Before every stage, the REWORK items (tools/rework.py, the human 2026-10-20): modules the scheduled upstream
+sync moved out of the library because they failed to build, listed first in coord/queue.tsv as stage 3, kind
+`rework`, those that import no other rework module (bottom-up); they have priority over every other queue. Any item
+of stage 1, 2 or 3 whose dependencies reach a rework item (stmt_deps/proof_deps closure for nodes; imports, or a
+blocked node, for modules) is left out of the queue until that item is fixed ("blocked by rework" in queue.md).
+The order of stage 3 after the rework items:
   1. modules listed in coord/repairs.txt, in file order (proof or definition repairs),
   2. modules containing `STATEMENT-DISPUTED`,
   3. the rest: the modules on the route first, then by the distance to the nearest route sorry (dependency steps in
@@ -175,6 +180,7 @@ def main() -> int:
     if cmd == "outside":
         print("\n".join(sorted(lib - set(dist)))); return 0
     s1, s2, waiting, why, below, route_t = [], [], [], collections.Counter(), {}, None
+    g = None
     if dag_queue.nodes_dir().is_dir():
         g = dag_queue.Dag(dag_queue.load())
         s1 = g.stage1(); s2, why = g.stage2(); waiting = g.waiting()
@@ -186,10 +192,27 @@ def main() -> int:
             below, route_t = below_route_reach(g)
     items3, held = stage3(imports, dist, {m for m, _ in waiting}, below)
     STATE["below"] = {b: sum(1 for x in items3 if x[5] > 0 and x[2] in mods) for b, mods in below.items()}
+    # rework (the human, 2026-10-20): the quarantined modules first; whatever depends on one is not an item meanwhile
+    import rework
+    rw_rows = rework.load()
+    rw_open, blocked_n, blocked_m = [], set(), set()
+    if rw_rows:
+        rw_open = rework.open_items(rw_rows, imports)
+        blocked_n, blocked_m, _ = rework.blocked(g, imports, rw_rows)
+        nb = (len(s1), len(s2), len(items3))
+        s1 = [x for x in s1 if x[1] not in blocked_n]
+        s2 = [x for x in s2 if x[2] not in blocked_n]
+        items3 = [x for x in items3 if x[2] not in blocked_m and x[2] not in rw_rows]
+        STATE["blocked"] = (nb[0] - len(s1), nb[1] - len(s2), nb[2] - len(items3))
+    STATE["rework"] = (len(rw_rows), len(rw_open))
     wfor = {}
     for m, c in waiting:
         wfor.setdefault(m, c)
     if cmd == "summary":
+        if rw_rows:
+            b = STATE.get("blocked", (0, 0, 0))
+            print(f"rework: {len(rw_rows)} quarantined modules (tools/rework.py), {len(rw_open)} open; blocked by rework: "
+                  f"stage 1 {b[0]}, stage 2 {b[1]}, stage 3 {b[2]} items")
         print(f"stage 1: {len(s1)} nodes to split")
         print(f"stage 2: {len(s2)} nodes to state" + (f"; not open: " + ", ".join(f"{v} {k}" for k, v in why.items()) if why else ""))
         if dist:
@@ -210,7 +233,12 @@ def main() -> int:
     if cmd != "write":
         print(__doc__); return 2
     WORK.mkdir(exist_ok=True)
-    rows = [(i, 1, d if d < 10**6 else "-", "", dag_queue.audit_state(g.live[i]), "") for d, i in s1]
+    def qsorry(m):
+        p = rework.ROOT / (rw_rows[m].get("quarantine") or rework.qpath(m))
+        try: return li.sorry_count(p.read_text(errors="ignore"))
+        except OSError: return ""
+    rows = [(m, 3, "-", qsorry(m), "rework", "rework") for m in rw_open]
+    rows += [(i, 1, d if d < 10**6 else "-", "", dag_queue.audit_state(g.live[i]), "") for d, i in s1]
     rows += [(i, 2, h, "", "target-statement" if pri == 0 else "state", nb) for pri, h, i, nb in s2]
     rows += [(m, 3, _d(d), n, k, "route" if rd == 0 else rd) for _, d, m, n, k, rd in items3]
     if route_t is not None:
@@ -222,6 +250,18 @@ def main() -> int:
             f.write("\t".join(str(x) for x in r) + "\n")
     with open(WORK / "queue.md", "w") as f:
         f.write(f"# Work queue\n\n{len(rows)} items; claim with `tools/claim.py next <group> [--stage N]`.\n\n")
+        if rw_rows:
+            b = STATE.get("blocked", (0, 0, 0))
+            f.write(f"## Rework: quarantined by the upstream sync ({len(rw_open)} open of {len(rw_rows)})\n\n"
+                    "Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). Open: imports no other "
+                    "rework module. Restore the module to its original path so that it compiles against the current library, "
+                    "without changing upstream statements.\n\n")
+            if rw_open:
+                f.write("| module | sorry | quarantined by | cause |\n|---|---|---|---|\n")
+                for m in rw_open:
+                    f.write(f"| `{m}` | {qsorry(m)} | {rw_rows[m].get('sync', '')} | {rw_rows[m].get('cause', '')[:160]} |\n")
+            f.write(f"\nBlocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 "
+                    f"{b[0]}, stage 2 {b[1]}, stage 3 {b[2]} items.\n\n")
         f.write(f"## Stage 1: nodes to split ({len(s1)})\n\n")
         if s1:
             f.write("| node | distance to a target | Lean state on the done branch |\n|---|---|---|\n")
@@ -255,7 +295,8 @@ def main() -> int:
             f.write("| module | source |\n|---|---|\n")
             for m, src in sorted(STATE["pending"]):
                 f.write(f"| `{m}` | {src} |\n")
-    print(f"wrote {len(rows)} items to coord/queue.tsv and coord/queue.md (stage 3: {len(items3)}, waiting {len(held)}; stage 2: {len(s2)}; stage 1: {len(s1)})")
+    print(f"wrote {len(rows)} items to coord/queue.tsv and coord/queue.md (stage 3: {len(items3)}, waiting {len(held)}; stage 2: {len(s2)}; stage 1: {len(s1)}"
+          + (f"; rework {len(rw_open)} open of {len(rw_rows)}, blocked by rework {sum(STATE.get('blocked', (0, 0, 0)))})" if rw_rows else ")"))
     if dag_queue.nodes_dir().is_dir():  # the reverse index of the blueprint references is regenerated with the queue
         import blueprint_refs
         served, on, same = blueprint_refs.index()

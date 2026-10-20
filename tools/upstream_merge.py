@@ -474,6 +474,46 @@ def redirect_text(text, rel, mapping):
     return text, dict(changes)
 
 
+KNOWN_MAP_KEYS = {"version", "source_tip", "reason", "notes", "node_declarations", "preserve_imports_in", "imports",
+                  "identifiers", "term_predicates", "implicit_first_arguments", "over_applications", "structural_witnesses"}
+
+
+def quick_filter(mapping):
+    """A test `text -> bool` that is False only when redirect_text(text, ...) certainly changes nothing (2026-10-20, hot
+    path of the scheduled sync: 452 s for 23k files, almost all in lean_code_mask). Every rule matches a fixed name
+    delimited by non-name characters: an old import, an identifier, a rule name or a structural witness is a dot-prefix
+    of a name token of the text (a maximal run of [\\w.']), a predicate field is a dot-component of one. One token scan
+    and two set intersections per file. A map with a rule kind not known here disables the filter."""
+    if set(mapping) - KNOWN_MAP_KEYS:
+        return lambda text: True
+    prefixes = set(mapping.get("imports", {}))
+    prefixes |= {r["from"] for r in mapping.get("identifiers", [])}
+    prefixes |= {r["name"] for r in mapping.get("implicit_first_arguments", [])}
+    prefixes |= {r["name"] for r in mapping.get("over_applications", [])}
+    if mapping.get("structural_witnesses"):
+        prefixes.add("exists_strictHenselizationStructuralMap")
+    fields = {r["from"] for r in mapping.get("term_predicates", [])}
+    return _token_filter(prefixes, fields)
+
+
+def _token_filter(prefixes: set[str], fields: set[str]):
+    prefixes = {w for w in prefixes if w}; fields = {w for w in fields if w}
+    tok = re.compile(r"[\w.']+")
+
+    def hit(text: str) -> bool:
+        for t in set(tok.findall(text)):
+            parts = t.split(".")
+            if fields and not fields.isdisjoint(parts):
+                return True
+            acc = ""
+            for p in parts:
+                acc = p if not acc else acc + "." + p
+                if acc in prefixes:
+                    return True
+        return False
+    return hit
+
+
 def migrate(args):
     import argparse
     parser = argparse.ArgumentParser(description="Apply reviewed canonical imports and Lean identifier redirects")
@@ -498,16 +538,27 @@ def migrate(args):
     files = set(LEAN.glob("*.lean"))
     for root in ("Sheaf", "WeilConjectures", "Comparator"): files.update((LEAN / root).rglob("*.lean"))
     report, writes = {"map": str(map_path), "files": []}, []
+    # 2026-10-20 (scheduled sync, hot path: 452 s for 23k files, almost all in lean_code_mask): every rule of
+    # redirect_text rewrites only a match of a fixed string (an old import name, an identifier, a predicate field, a
+    # rule name), so a file containing none of them is returned unchanged; skip it before masking.
+    hit = quick_filter(mapping)
     for f in sorted(files):
-        before = f.read_text(); after, changes = redirect_text(before, str(f.relative_to(LEAN)), mapping)
+        before = f.read_text()
+        if not hit(before):
+            continue
+        after, changes = redirect_text(before, str(f.relative_to(LEAN)), mapping)
         if after != before:
             report["files"].append({"path": str(f.relative_to(ROOT)), "before": hash_bytes(before.encode()), "after": hash_bytes(after.encode()), "changes": changes})
             writes.append((f, after))
     # DAG pointers use exact reviewed qualified names. Statements and removed, non-equivalent
     # theorems are never rewritten; any module move must be explicitly recorded with its name.
     node_rules = mapping.get("node_declarations", {})
+    node_hit = _token_filter(set(node_rules), set())   # a rule rewrites only a node naming one of its declarations
     for f in sorted((ROOT / "dag/nodes").rglob("*.json")):
-        before = f.read_text(); node = json.loads(before); record = node.get("lean")
+        before = f.read_text()
+        if not node_hit(before):
+            continue
+        node = json.loads(before); record = node.get("lean")
         if not isinstance(record, dict): continue
         changes = {}
         old = record.get("declaration")

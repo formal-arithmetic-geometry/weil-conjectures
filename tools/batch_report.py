@@ -111,7 +111,10 @@ def live_batches(m):
         else: ok = m in own[b] or m in reach3.get(b, ()) or (b in t and not onown)   # own route; below its route sorries; a new sorry no own route knows yet
         if ok: out.add(b)
     return out
+rework_open = []   # 2026-10-20 (the human): rework items (tools/rework.py) are no batch's work; their own row below
 for r in rows(LIVE / "coord/queue.tsv"):
+    if r[1] == "3" and len(r) > 4 and r[4] == "rework":
+        rework_open.append(r[0]); continue
     if r[1] == "3":
         try: n = int(r[3])
         except (IndexError, ValueError): n = 0
@@ -198,6 +201,20 @@ for b in B:
     wv = W[b]; o1, o2, o3 = C[(b, "1")][0], C[(b, "2")][0], C[(b, "3")][1]
     tot = o1 + wv[0] + o2 + wv[1] + o3 + wv[3]
     print(f"{b:7} total {tot:>15}   = stage 1 {o1 + wv[0]} + stage 2 {o2 + wv[1]} + stage 3 {o3 + wv[3]} sorries")
+try:   # rework (the human, 2026-10-20): modules the scheduled upstream sync quarantined; priority over every queue
+    import rework as _rw
+    _rows = _rw.load()
+    if _rows:
+        _landed = [m for m in _rows if _rw.landed(m)]
+        _bn, _bm, _ = _rw.blocked(g, None, _rows)
+        _st = [state.get((str(LIVE), m), "") for m in _rows]
+        print(f"{'rework':7} {'3':5} {len(rework_open):>15} {len(_rows) - len(rework_open) - len(_landed):>26} {'':>10} "
+              f"{(sum(x.startswith('held by') for x in _st) if have else '-'):>8} {(sum(x.startswith('delivered by') for x in _st) if have else '-'):>7}")
+        print(f"rework   total {len(_rows):>15}   = open {len(rework_open)} + waiting for deeper rework "
+              f"{len(_rows) - len(rework_open) - len(_landed)} + fix landed, not yet verified {len(_landed)}; blocked by rework: "
+              f"{len(_bn)} DAG nodes, {len(_bm)} modules (not in any queue until fixed)")
+except Exception as _e:   # the report never fails on the rework row
+    print("rework: not available:", repr(_e)[:200])
 print("legend: open = claimable queue items now; waiting = certain own work of that stage not in the queue yet (stage 1: "
       "nodes not split; stage 2: nodes without a Lean statement, including nodes below a route sorry that have no Lean "
       "module yet, each counted once; stage 3, in modules/sorries only: route modules and modules of unproved nodes below "

@@ -602,7 +602,12 @@ def land_one(plan: dict, batch_id: str) -> dict:
         raise Wait("the library moved after the import-cycle check; retry on the new tip")
     mods = D["modules"]
     rels = [f[len("lean/"):] for f in plan["write"]]
-    is_set = len(mods) > 1
+    # the human, 2026-10-20 (tools/rework.py): a rework item restores a quarantined module; its import lines go back into
+    # the root files they were removed from, in this same landing (compiled by the build, taken out with it)
+    import rework
+    roots_add = rework.roots_to_restore(item)
+    rels += [r for r in roots_add if r not in rels]
+    is_set = len(mods) > 1 or bool(roots_add)
     r = subprocess.run([sys.executable, "tools/landing.py", "begin", "L", *rels], cwd=ROOT, capture_output=True, text=True)
     if r.returncode != 0:
         raise Wait("landing.py begin: " + (r.stderr or r.stdout).strip()[:300])
@@ -612,6 +617,8 @@ def land_one(plan: dict, batch_id: str) -> dict:
         for m in mods:
             if m["file"] in plan["write"]:
                 p = ROOT / m["file"]; p.parent.mkdir(parents=True, exist_ok=True); p.write_text(m["text"])
+        for rel, text in roots_add.items():
+            (li.LEAN / rel).write_text(text)
         r = subprocess.run([sys.executable, "tools/landing.py", "finish", landing] + (["--set"] if is_set else []),
                            cwd=ROOT, capture_output=True, text=True)
         if r.returncode != 0:
@@ -676,7 +683,7 @@ def land_one(plan: dict, batch_id: str) -> dict:
             f"landing {landing} ({kind}); batch {batch_id}; modules {len(mods)}; new nodes "
             f"{sum(1 for x in D['nodes'].values() if x['role'] == 'new')}"
             + (f"; change records: {', '.join(D['changes'])}" if D["changes"] else "") + ")")
-        paths += [m["file"] for m in mods] + ["coord/ledger.md", "coord/deliveries.log"]
+        paths += [m["file"] for m in mods] + ["lean/" + rel for rel in roots_add] + ["coord/ledger.md", "coord/deliveries.log"]
         if claim_text is not None and md.exists_at("HEAD", claim.relative_to(ROOT).as_posix()):
             paths.append(claim.relative_to(ROOT).as_posix())
         author = md.git("show", "-s", "--format=%an <%ae>", D["commits"][-1]) if D["commits"] else "L"
