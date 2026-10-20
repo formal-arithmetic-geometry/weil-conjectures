@@ -105,7 +105,7 @@
    }
   },
   {
-   "text": "For successive base changes, transpose both inverse comparisons under the final open adjunction. Both transposes are $G_{hg,V}\\eta_j$ followed by the same iterated inverse-image compositor; naturality of the unit identifies the successive transpose with this one. For successive opens transpose under the composite open adjunction: the unit is $G_{j_1}\\eta_{j_2}j_{1!}\\circ\\eta_{j_1}$, so again the two transposes coincide. For an identity base change the transpose is the open unit, so the comparison is identity under the open-unit identification. Injectivity of the adjunction Hom bijections proves the base-change, open-composition and identity laws, with the canonical compositors, before any evaluation. At finite $B$ this is the canonical extension-by-zero base change of the existing node, since its restriction comparison and open unit are the same ones.",
+   "text": "For successive base changes, transpose both inverse comparisons under the final open adjunction. Both transposes are $G_{hg,V}\\eta_j$ followed by the same iterated inverse-image compositor; naturality of the unit identifies the successive transpose with this one. For successive opens transpose under the composite open adjunction: the unit is $G_{j_1}\\eta_{j_2}j_{1!}\\circ\\eta_{j_1}$, so again the two transposes coincide. For an identity base change the transpose is the open unit, so the comparison is identity under the open-unit identification. Injectivity of the adjunction Hom bijections proves the base-change, open-composition and identity laws, with the canonical compositors, before any evaluation. At finite $B$ this is the canonical extension-by-zero base change of the existing node, since its restriction comparison and open unit are the same ones. In the Lean identity case, first check the two unit equations of moduleRComp on sections using Over.pullbackComp_id_left and Over.pullbackComp_id_right. Adjunction.leftAdjointCompIso transfers them to module pullback. Evaluate the whiskered tower comparisons at each index, and use the naturality and unit laws of mapDerivedCategoryCompIso to obtain the derived pullback unit equations. Transposition under the open adjunction then proves beta_id and the analogous identity-open beta equation.",
    "uses": [
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-proetale-derived-pullback-composition",
@@ -136,7 +136,7 @@
    }
   },
   {
-   "text": "For a module sheaf $F$ on $W_S$, every pro-etale test object $H$ is covered by the two disjoint opens $H\\times_{W_S}s(V)$ and $H\\times_{W_S}C$. The sheaf axiom identifies its sections with the product of the two component section modules, since the intersection is empty. Projection to the first factor, extended by zero on the second, consequently defines a unique natural module map $\\pi_s:F\\to s_!s^{-1}F$. On a clopen immersion extension by zero and direct image agree by exactly this product formula (the other component is the zero module); thus this is the claimed projection and it commutes with restrictions, module maps, tower transitions and differentials. Compose it with the $\\beta$ of steps 3-4 and the open-composition comparison to obtain exactly the displayed $\\alpha_Q$. If the square is cartesian then $s=1$, so $\\pi_s=1$ and $\\alpha_Q=\\beta_{i,p}$. If $r=1$ and $V=S$, then $s=(k,1)$ is the indicated clopen section and the projection is its component projection. This is a construction, not an inference from the finite-coefficient theorem. The direct-image adjunction unit is restriction to this component; the canonical map $s_!\to s_*$ is identity on it and zero on its complement. Consequently this sectionwise projection agrees with the adjunction definition in [def-cbc-strict-tower-proper-open-arrows].",
+   "text": "For a module sheaf $F$ on $W_S$, every pro-etale test object $H$ is covered by the two disjoint opens $H\\times_{W_S}s(V)$ and $H\\times_{W_S}C$. The sheaf axiom identifies its sections with the product of the two component section modules, since the intersection is empty. Projection to the first factor, extended by zero on the second, consequently defines a unique natural module map $\\pi_s:F\\to s_!s^{-1}F$. On a clopen immersion extension by zero and direct image agree by exactly this product formula (the other component is the zero module); thus this is the claimed projection and it commutes with restrictions, module maps, tower transitions and differentials. Compose it with the $\\beta$ of steps 3-4 and the open-composition comparison to obtain exactly the displayed $\\alpha_Q$. If the square is cartesian then $s=1$, so $\\pi_s=1$ and $\\alpha_Q=\\beta_{i,p}$. If $r=1$ and $V=S$, then $s=(k,1)$ is the indicated clopen section and the projection is its component projection. This is a construction, not an inference from the finite-coefficient theorem. The direct-image adjunction unit is restriction to this component; the canonical map $s_!\to s_*$ is identity on it and zero on its complement. Consequently this sectionwise projection agrees with the adjunction definition in [def-cbc-strict-tower-proper-open-arrows]. For the formal proof of pi_components, the adjoint triple J_s ⊣ G_s ⊣ R_s identifies G_s(pi_s) with the open-adjunction unit. For disjoint opens, restriction of a direct image from the other open is zero: each pulled-back test scheme is empty and the empty covering gives a zero section module. The ringed-open comparison identifies this restriction with actual module inverse image. The open adjunction then makes extension from the other open zero after restriction. This zero-object statement passes termwise to towers and through exact derived localization, so the complementary restriction of pi_s has zero target. This proof does not use faithfulness of evaluation.",
    "uses": [
     "lem-weil-proetale-weakly-etale-localization",
     "lem-pur-site-restriction-module-adjunction-exact",
@@ -144,7 +144,8 @@
     "def-weil-presheaf-modules-sheafification",
     "def-pc-fibre-product",
     "def-weil-pbc-proetale-site",
-    "def-cbc-strict-tower-proper-open-arrows"
+    "def-cbc-strict-tower-proper-open-arrows",
+    "lem-weil-pbc-proetale-ringed-open-comparison"
    ],
    "elementary": true,
    "source": {
@@ -307,7 +308,7 @@
    }
   },
   {
-   "text": "Apply the two mate-pasting formulas to the alpha equations in steps 7-8, now in the derived tower categories of step 10. Pasting along the proper adjunctions sends $(\\alpha_{Q_1}G_{r_2})(G_{p_1}\\alpha_{Q_2})$ to\n$$(R_{p_2}^{\\mathcal T}\\gamma_{Q_1})\\circ(\\gamma_{Q_2}R_{r_1}^{\\mathcal T}).$$\nPasting along the open functors sends $(J_l\\alpha_{Q_1})(\\alpha_{Q_2}J_i)$ to\n$$(\\gamma_{Q_2}J_k)\\circ(J_j\\gamma_{Q_1}).$$\nThese are the two displayed gamma laws. Use the composite-adjunction units and counits in the mate-pasting theorem. They correspond to the canonical proper direct-image compositor: right adjoints of the exact inverse images preserve K-injectives, so on a K-injective tower complex $I$ the composition is represented by the underived equality $(p_2p_1)_*I=p_{2,*}p_{1,*}I$; this is the normalization of the ringed-topos composition theorem on the diagram sites. The open compositor is similarly the unit-normalized left adjoint of iterated restriction from steps 3-4. For three proper maps, these underived identifications associate to the same triple direct image on $I$; for three opens the transposes are the same iterated restriction unit. The Hom/localization bijections and uniqueness of adjoints preserve these equations. Together with associativity of natural-transformation composition and the alpha projection identities, this proves independence of parenthesization. Identity horizontal maps give $\\alpha=1_{G_p}$ and the identity clause of mate-pasting gives $1_{R_p^{\\mathcal T}}$. Identity vertical maps give $\\alpha=1_{J_i}$ and identity adjunctions give $1_{J_i}$. These are equalities of derived tower transformations on all inputs, before the finite-origin restriction.",
+   "text": "Apply the two mate-pasting formulas to the alpha equations in steps 7-8, now in the derived tower categories of step 10. Pasting along the proper adjunctions sends $(\\alpha_{Q_1}G_{r_2})(G_{p_1}\\alpha_{Q_2})$ to\n$$(R_{p_2}^{\\mathcal T}\\gamma_{Q_1})\\circ(\\gamma_{Q_2}R_{r_1}^{\\mathcal T}).$$\nPasting along the open functors sends $(J_l\\alpha_{Q_1})(\\alpha_{Q_2}J_i)$ to\n$$(\\gamma_{Q_2}J_k)\\circ(J_j\\gamma_{Q_1}).$$\nThese are the two displayed gamma laws. Use the composite-adjunction units and counits in the mate-pasting theorem. They correspond to the canonical proper direct-image compositor: right adjoints of the exact inverse images preserve K-injectives, so on a K-injective tower complex $I$ the composition is represented by the underived equality $(p_2p_1)_*I=p_{2,*}p_{1,*}I$; this is the normalization of the ringed-topos composition theorem on the diagram sites. The open compositor is similarly the unit-normalized left adjoint of iterated restriction from steps 3-4. For three proper maps, these underived identifications associate to the same triple direct image on $I$; for three opens the transposes are the same iterated restriction unit. The Hom/localization bijections and uniqueness of adjoints preserve these equations. Together with associativity of natural-transformation composition and the alpha projection identities, this proves independence of parenthesization. Identity horizontal maps give $\\alpha=1_{G_p}$ and the identity clause of mate-pasting gives $1_{R_p^{\\mathcal T}}$. Identity vertical maps give $\\alpha=1_{J_i}$ and identity adjunctions give $1_{J_i}$. These are equalities of derived tower transformations on all inputs, before the finite-origin restriction. For the identity clauses, alpha_cartesian reduces the two identity squares to the beta identity equations from step 4. Abstract mate-pasting and conjugation with the identity adjunction transport these equations to the specified rId and jId normalizations.",
    "uses": [
     "lem-weil-pbc-mate-pasting",
     "def-weil-pbc-composite-adjunction",
@@ -398,12 +399,13 @@
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-proper-base-change",
-  "lem-pc-quasi-compact-base-change"
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-proetale-ringed-open-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
-  "place": "Final sentence on comparison compatibility before derived limits; expanded via the cited Stacks sources, clopen projection and adjunction arguments"
+  "place": "Final sentence on comparison compatibility before derived limits; expanded via the cited Stacks sources, clopen projection and adjunction arguments; Lean refinements: normalized module/tower/derived pullback unit equations, adjoint-triple projection calculation, disjoint-open zero objects, and abstract identity-mate transport"
  },
  "mathlib_searches": [
   {
@@ -936,39 +938,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "Y7",
+  "reviewer": "COMPILER",
+  "group": "U5",
   "result": "pass",
-  "landing": "20261019T034401-L-427518",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_baseChange",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_cartesian",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_horizontal",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_vertical",
-   "AlgebraicGeometry.ProEtale.StrictTower.beta_comp",
-   "AlgebraicGeometry.ProEtale.StrictTower.beta_id",
-   "AlgebraicGeometry.ProEtale.StrictTower.beta_open_comp",
-   "AlgebraicGeometry.ProEtale.StrictTower.gamma_evaluation",
-   "AlgebraicGeometry.ProEtale.StrictTower.gamma_identities",
-   "AlgebraicGeometry.ProEtale.StrictTower.gamma_isIso",
-   "AlgebraicGeometry.ProEtale.StrictTower.normalizedProperOpenCalculus",
-   "AlgebraicGeometry.ProEtale.StrictTower.pi_components"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_baseChange",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_cartesian",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_horizontal",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_vertical",
-   "AlgebraicGeometry.ProEtale.StrictTower.beta_comp",
-   "AlgebraicGeometry.ProEtale.StrictTower.beta_id",
-   "AlgebraicGeometry.ProEtale.StrictTower.beta_open_comp",
-   "AlgebraicGeometry.ProEtale.StrictTower.gamma_evaluation",
-   "AlgebraicGeometry.ProEtale.StrictTower.gamma_identities",
-   "AlgebraicGeometry.ProEtale.StrictTower.pi_components"
-  ]
+  "landing": "20261020T211839-L-3510121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
