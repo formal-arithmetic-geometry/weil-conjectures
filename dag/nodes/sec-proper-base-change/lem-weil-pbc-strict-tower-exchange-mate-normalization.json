@@ -113,12 +113,15 @@
    }
   },
   {
-   "text": "Restrict along $\\Delta\\underline A_T\\to\\Delta A_T$. The constant sheaf associated to a ring $B$ on the diagram site is $\\Delta\\underline B_T$: fiberwise sheafification of the constant presheaf has this value under [lem-weil-pbc-diagram-site-realization]. Limits have their componentwise universal property, so the completion of $\\Delta\\underline A_T$ is $\\Delta A_T$. Apply the flatness assertion of [lem-weil-pbc-constant-completion-equivalence] on this small site; thus $\\Delta A_T$ is flat over $\\Delta\\underline A_T$. By [lem-weil-pbc-profinite-coefficient-inverse-image], the finite coefficient identifications carry constant sections to the same constant sections and commute with all quotient projections. Consequently $\\pi_{U,n}c_u=c_{u,n}u^{-1}\\pi_{V,n}$ from [def-weil-pbc-four-corners] identifies both composites of the scalar square on every constant section. Sheafification and the universal property of the inverse limit give the commuting scalar square itself.",
+   "text": "Restrict along $\\Delta\\underline A_T\\to\\Delta A_T$. The constant sheaf associated to a ring $B$ on the diagram site is $\\Delta\\underline B_T$: fiberwise sheafification of the constant presheaf has this value under [lem-weil-pbc-diagram-site-realization]. Limits have their componentwise universal property, so the completion of $\\Delta\\underline A_T$ is $\\Delta A_T$. Apply the flatness assertion of [lem-weil-pbc-constant-completion-equivalence] on this small site; thus $\\Delta A_T$ is flat over $\\Delta\\underline A_T$. By [lem-weil-pbc-profinite-coefficient-inverse-image], the finite coefficient identifications carry constant sections to the same constant sections and commute with all quotient projections. Consequently $\\pi_{U,n}c_u=c_{u,n}u^{-1}\\pi_{V,n}$ from [def-weil-pbc-four-corners] identifies both composites of the scalar square on every constant section. Sheafification and the universal property of the inverse limit give the commuting scalar square itself. For the normalized scalar restriction comparison, one can instead work directly on the original pro-etale sites: apply [lem-weil-pbc-completed-constant-algebra-flat-quotients] to the completed-ring presentation and the compatible-residue scalar map. Its projection hypothesis is the defining equation of adicDatumScalar. It makes scalar extension exact. [lem-pur-sheaf-ring-coefficient-ordinary-adjunction] supplies its adjunction to restriction in the independent coefficient universes. Whisker the exact extension and this adjunction by the strict tower category. The right-adjoint criterion then shows that termwise restriction preserves K-injective complexes, without a diagram-site presentation.",
    "uses": [
     "lem-weil-pbc-diagram-site-realization",
     "lem-weil-pbc-constant-completion-equivalence",
     "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "def-weil-pbc-four-corners"
+    "def-weil-pbc-four-corners",
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
    "elementary": false,
    "source": {
@@ -127,9 +130,12 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-flat-ringed-diagram-restriction] with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, $R_T=\\underline A_T$, $S_T=A_T$, the constant-section identification for $c_R$, and the completed coefficient identification of [def-weil-pbc-four-corners] for $c_S$. The sites are small by step 1; step 5 verifies flatness and the commuting coefficient square. Its normalized comparisons give $\\operatorname{Res}\\mathscr L_u\\simeq G_u\\operatorname{Res}$ and $\\operatorname{Res}\\mathscr R_u\\simeq R_u^{\\mathcal T}\\operatorname{Res}$. Compose first the pullback and then direct-image comparisons for $B_\\bullet$, and in the reverse order for $D_\\bullet$. This gives the stated $b,d$ as isomorphisms in the derived strict-tower category. Their normalizations use the same underlying scalar-restricted inverse image and the same K-injective diagram direct image. Hence their evaluations have the canonical direct-image comparison of [prop-weil-pbc-direct-image-limits]; the finite-reduction scalar identification is the balancing comparison of [lem-weil-pbc-constant-completion-equivalence]. These constructions retain every transition map, without asserting uniqueness from their evaluations.",
+   "text": "Construct the restriction/direct-image comparison as the mate of the exact descent of the ordinary restriction/pullback isomorphism. The ordinary mate is the sectionwise restriction/direct-image isomorphism, by [lem-weil-pbc-ring-sheaf-change-adjunction], applied termwise. The same node proves the generic derived-mate factorization through the complex localization units. Its factorization is exactly ExchangeResPushNormalized. On a K-injective tower the two derived units are invertible, since restriction preserves K-injectives by step 5. All other factors are isomorphisms, so the derived mate is an isomorphism. Every derived object has a K-injective representative; naturality extends invertibility to every object. Uniqueness follows from the universal property of the right-derived functor, after cancelling the exact-restriction factorization isomorphism. This is the complete Lean proof of exchangeResPush_existsUnique. Compose this comparison and the already defined exact-descent pullback comparison to obtain b and d. For the remaining strict-normalization theorem, their evaluations are to be identified with the canonical direct-image comparison of [prop-weil-pbc-direct-image-limits] and the finite-reduction balancing comparison of [lem-weil-pbc-constant-completion-equivalence].",
    "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "def-weil-pbc-adjunction-mate",
     "def-weil-pbc-four-corners",
     "prop-weil-pbc-direct-image-limits",
     "lem-weil-pbc-constant-completion-equivalence"
@@ -141,9 +147,9 @@
    }
   },
   {
-   "text": "These restriction comparisons respect the adjunctions: for each edge $u$, the adjunct clause of [lem-weil-pbc-flat-ringed-diagram-restriction], applied with the data of step 6, states that for $t:\\mathscr L_uM\\to N$ the $G_u\\dashv R_u^{\\mathcal T}$ adjunct of $\\operatorname{Res}(t)b_M^{-1}$ is $d_N\\operatorname{Res}(t^\\sharp)$, where both derived adjunctions are the ones normalized by [lem-pc-pre-derived-adjoint-functors-general]; with $t$ a counit this identifies the restricted counit with the constant-coefficient counit. Pullback composition is also preserved, since its representative is the termwise composition identification of [lem-weil-pbc-proetale-derived-pullback-composition]. Transpose $d\\operatorname{Res}(W)b^{-1}$ under $G_{f'}\\dashv R_{f'}^{\\mathcal T}$. The two compatibilities just checked identify its transpose with $G_{g'}\\varepsilon_f^{\\mathcal T}\\circ\\theta^{\\mathcal T}_{\\square,R_f^{\\mathcal T}\\bar K_\\bullet}$. By the bijection and transpose characterization of [def-weil-pbc-adjunction-mate], this is precisely the transpose of $E^{\\mathcal T}_{\\square,\\bar K_\\bullet}$; hence $d\\operatorname{Res}(W)b^{-1}=E^{\\mathcal T}_{\\square,\\bar K_\\bullet}$. Substitute $W=v'_\\bullet$ from step 4 and compose with $b$. This yields the required ordered equality. Every comparison used is a natural transformation or its inverse, and reduction is a functor, so the equality and both corner isomorphisms are natural for morphisms of $K$. Properness and the etale witnesses ensure the prescribed finite arrows have the meaning in [def-weil-pbc-four-arrows]; the strict mate calculation itself requires neither a uniform lower bound nor witnesses compatible across levels.",
+   "text": "These restriction comparisons respect the adjunctions: for each edge $u$, the construction as a derived adjunction mate in step 6, together with its unique unit normalization, shows that for $t:\\mathscr L_uM\\to N$ the $G_u\\dashv R_u^{\\mathcal T}$ adjunct of $\\operatorname{Res}(t)b_M^{-1}$ is $d_N\\operatorname{Res}(t^\\sharp)$, where both derived adjunctions are the ones normalized by [lem-pc-pre-derived-adjoint-functors-general]; with $t$ a counit this identifies the restricted counit with the constant-coefficient counit. Pullback composition is also preserved, since its representative is the termwise composition identification of [lem-weil-pbc-proetale-derived-pullback-composition]. Transpose $d\\operatorname{Res}(W)b^{-1}$ under $G_{f'}\\dashv R_{f'}^{\\mathcal T}$. The two compatibilities just checked identify its transpose with $G_{g'}\\varepsilon_f^{\\mathcal T}\\circ\\theta^{\\mathcal T}_{\\square,R_f^{\\mathcal T}\\bar K_\\bullet}$. By the bijection and transpose characterization of [def-weil-pbc-adjunction-mate], this is precisely the transpose of $E^{\\mathcal T}_{\\square,\\bar K_\\bullet}$; hence $d\\operatorname{Res}(W)b^{-1}=E^{\\mathcal T}_{\\square,\\bar K_\\bullet}$. Substitute $W=v'_\\bullet$ from step 4 and compose with $b$. This yields the required ordered equality. Every comparison used is a natural transformation or its inverse, and reduction is a functor, so the equality and both corner isomorphisms are natural for morphisms of $K$. Properness and the etale witnesses ensure the prescribed finite arrows have the meaning in [def-weil-pbc-four-arrows]; the strict mate calculation itself requires neither a uniform lower bound nor witnesses compatible across levels.",
    "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
     "lem-pc-pre-derived-adjoint-functors-general",
     "lem-weil-pbc-proetale-derived-pullback-composition",
     "def-weil-pbc-adjunction-mate",
@@ -179,13 +185,14 @@
   "lem-weil-pbc-ringed-exchange-tensor-coherence",
   "lem-weil-pbc-constant-completion-equivalence",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
   "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments"
+  "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram); diagram-site application and strict normalization are agent arguments; J3, 2026-10-21: normalized direct-image existence/uniqueness proved by the termwise flat scalar adjunction and the generic derived-mate unit formula; the final strict-normalization assertion retains its remaining proof plan"
  },
  "mathlib_searches": [
   {
@@ -382,6 +389,7 @@
    "AlgebraicGeometry.Scheme.exchangeTowerRes",
    "AlgebraicGeometry.Scheme.exchangeConstantPull",
    "AlgebraicGeometry.Scheme.exchangeConstantPush",
+   "AlgebraicGeometry.Scheme.exchangeWhiskerSquareIso",
    "AlgebraicGeometry.Scheme.exchangeModuleResPull",
    "AlgebraicGeometry.Scheme.exchangeResPull",
    "AlgebraicGeometry.Scheme.exchangeTowerDerivedUnit",
@@ -414,14 +422,14 @@
   "note": "Checked statement clauses, dependencies, sources, canonical constructions, universes, edge cases, docstrings, and records. Both modules passed per-file scompile.py reproduction. No delivery defects found; branch unchanged."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-5bd48",
-  "group": "P8",
+  "reviewer": "COMPILER",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261019T093539-L-2325287",
+  "landing": "20261020T211742-L-3496725",
   "kind": "interface",
-  "note": "independent cc review: fourTowers_compatibility (statement byte-identical to live) vs strictTowerExchangeMateNormalization .2.1 + towerV' cancellation + exchangeStrict_naturality; moved defs diffed identical to live; CompletedBaseChangeMap import swap forced by the import cycle; 11 importers compiled against the delivered modules"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-19",
