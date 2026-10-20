@@ -53,16 +53,18 @@ theorem Etale.preservesColimitsOfShape_higherDirectImagePresheaf_app {X Y : Sche
     PreservesColimitsOfShape J
       (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
         Etale.higherDirectImagePresheafFunctor Λ h q ⋙ (evaluation _ _).obj (op W)) := by
-  -- The instance goals are taken from the type of the isomorphism, so that the kernel does not
-  -- have to identify differently elaborated forms of the base change `W ×_X Y`.
-  refine @preservesColimitsOfShape_of_natIso _ _ _ _ _ _ _ _
-    (Etale.shiftedHomFunctorUpperStarFreeSheafIso Λ h W q).symm ?_
-  refine @Limits.comp_preservesColimitsOfShape _ _ _ _ _ _ _ _ _ _ ?_
-    (@Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject Λ _ _
-      ‹CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left›
-      ‹QuasiSeparatedSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left› q J _ _)
-  exact (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) _).leftAdjoint_preservesColimits
-    |>.preservesColimitsOfShape
+  let W' := (MorphismProperty.Over.pullback @Etale ⊤ h).obj W
+  have h₁ : PreservesColimitsOfShape J
+      (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ W'.left).obj (Etale.finalObject _)) q) :=
+    Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject Λ W'.left q J
+  have h₂ : PreservesColimitsOfShape J ((W'.hom)^*[ModuleCat.{u + 1} Λ]) :=
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) _).leftAdjoint_preservesColimits
+      |>.preservesColimitsOfShape
+  have : PreservesColimitsOfShape J ((W'.hom)^*[ModuleCat.{u + 1} Λ] ⋙
+      Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ W'.left).obj (Etale.finalObject _)) q) :=
+    @Limits.comp_preservesColimitsOfShape _ _ _ _ _ _ _ _ _ _ h₂ h₁
+  exact preservesColimitsOfShape_of_natIso
+    (Etale.shiftedHomFunctorUpperStarFreeSheafIso Λ h W q).symm
 
 /-- Over an étale `X`-scheme `W` with affine underlying scheme, the base change along a
 quasi-compact quasi-separated `h : Y ⟶ X` is quasi-compact and quasi-separated. -/
@@ -260,40 +262,6 @@ theorem Etale.preservesColimitsOfShape_of_isLocallyBijective {X : Scheme.{u}}
     simp only [op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
     rfl
 
-section ModuleSheafInstances
-
-/- The comparison map `Etale.higherDirectImagePresheafToSheaf` and its properties are stated
-with the instance names of `Etale.ModuleSheaf`, while the statements of this file are elaborated
-with the instances found by synthesis. The kernel identifies the two only by unfolding the
-abbreviation `DerivedCategory.Plus.singleFunctor`, which takes seconds each time. Applying
-`Etale.preservesColimitsOfShape_of_isLocallyBijective` with the instances of
-`Etale.ModuleSheaf` lets the kernel match the statements of the comparison map syntactically,
-so that the two instance paths are compared once instead of once per hypothesis. -/
-attribute [local instance] Etale.moduleSheafCategory Etale.moduleSheafPreadditive
-  Etale.moduleSheafAbelian Etale.moduleSheafHasDerivedCategory
-
-/-- `F ↦ R^q h_* F` preserves colimits of shape `J` as soon as the hypercohomology presheaves
-`W ↦ Hᵠ(W ×_X Y, F|)` do on affine étale `X`-schemes. -/
-private theorem Etale.preservesColimitsOfShape_higherDirectImage_of_app {X Y : Scheme.{u}}
-    (h : Y ⟶ X) (q : ℤ) (J : Type (u + 1)) [SmallCategory J] [IsFiltered J]
-    (hP : ∀ U : X.AffineEtale, PreservesColimitsOfShape J
-      ((DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-        Etale.higherDirectImagePresheafFunctor Λ h q) ⋙
-          (evaluation _ _).obj (op ((Scheme.AffineEtale.Spec X).obj U)))) :
-    PreservesColimitsOfShape J
-      (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-        R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q) :=
-  Etale.preservesColimitsOfShape_of_isLocallyBijective Λ J _
-    (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-      Etale.higherDirectImagePresheafFunctor Λ h q)
-    (fun F ↦ Etale.higherDirectImagePresheafToSheaf Λ h q
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
-    (fun _ ↦ Etale.higherDirectImagePresheafToSheaf_naturality Λ h q _)
-    (fun F ↦ Etale.isLocallyBijective_higherDirectImagePresheafToSheaf Λ h q
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) hP
-
-end ModuleSheafInstances
-
 /-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
 direct image.
 
@@ -307,8 +275,14 @@ theorem Etale.preservesFilteredColimitsOfSize_higherDirectImage {X Y : Scheme.{u
     PreservesFilteredColimitsOfSize.{u + 1, u + 1}
       (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
         R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q) := by
-  refine ⟨fun J _ _ ↦ Etale.preservesColimitsOfShape_higherDirectImage_of_app Λ h q J
-    fun U ↦ ?_⟩
+  refine ⟨fun J _ _ ↦ Etale.preservesColimitsOfShape_of_isLocallyBijective Λ J _
+    (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+      Etale.higherDirectImagePresheafFunctor Λ h q)
+    (fun F ↦ Etale.higherDirectImagePresheafToSheaf Λ h q
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
+    (fun g ↦ Etale.higherDirectImagePresheafToSheaf_naturality Λ h q _)
+    (fun F ↦ Etale.isLocallyBijective_higherDirectImagePresheafToSheaf Λ h q
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) fun U ↦ ?_⟩
   have : IsAffine ((Scheme.AffineEtale.Spec X).obj U).left := by
     rw [Scheme.AffineEtale.Spec_obj_left]; infer_instance
   obtain ⟨_, _⟩ := Etale.compactSpace_and_quasiSeparatedSpace_pullback h

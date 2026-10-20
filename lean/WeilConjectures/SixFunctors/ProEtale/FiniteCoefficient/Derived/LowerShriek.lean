@@ -232,8 +232,6 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- Blueprint `pur9-def-compact-cohomology`: Compact-support cohomology (for `f = a_X` the
 structure morphism of `X` over `Spec k`, and `A` the category of `A_{E,n}`-modules).
-Also blueprint `def-trf-coefficient-conventions` (on the small pro-étale site; the étale model
-is `AlgebraicGeometry.Etale.compactlySupportedGlobalSections`).
 
 The compactly supported derived global sections along a morphism `f : X ⟶ Y`
 admitting a compactification, *defined* as the composite

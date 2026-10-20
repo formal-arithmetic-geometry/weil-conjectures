@@ -19,7 +19,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Def
 import Sheaf.Compactification.BoundaryRefinement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Independence of compactification and the cocycle condition

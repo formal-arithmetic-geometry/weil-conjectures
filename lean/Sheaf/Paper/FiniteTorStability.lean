@@ -110,7 +110,7 @@ import Sheaf.SixFunctors.IntegralVerdier
 import Sheaf.SixFunctors.RationalOperations
 import Sheaf.SixFunctors.RationalVerdier
 import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
 
 /-! # Stability of the constructible finite-Tor domains
 

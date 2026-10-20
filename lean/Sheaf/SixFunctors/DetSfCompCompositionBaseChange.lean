@@ -36,7 +36,7 @@ import Sheaf.SixFunctors.BaseChangeIdentityOpenRestriction
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Base change for `Rf_!` on the localizing category
