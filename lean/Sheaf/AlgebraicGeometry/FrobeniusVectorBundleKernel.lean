@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.CategoryTheory.Sites.Sheaf
 
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
+import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
 import Sheaf.AlgebraicGeometry.FiniteEtaleYonedaLocalTrivializations
 import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore

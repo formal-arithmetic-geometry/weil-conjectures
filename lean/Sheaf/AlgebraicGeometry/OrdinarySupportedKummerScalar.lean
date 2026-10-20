@@ -31,58 +31,6 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Functor
 
-namespace CategoryTheory
-
-/-- A coefficient-unit universal property expressed with abstract functors.
-This is the degree-zero embedding formulation used below; abstracting the functors avoids
-repeatedly expanding the derived localization while using its categorical API.
-Source: Stacks 07A6 (blueprint: def-asd-ordinary-supported-kummer-scalar). -/
-@[irreducible] def IsScalarExtensionUnit
-    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
-    {U : D ⥤ C} {V : D' ⥤ C'} (L : C ⥤ C') (M : D ⥤ D')
-    (e : M ⋙ V ≅ U ⋙ L) {F : C} {G : D} (η : F ⟶ U.obj G) : Prop :=
-  ∀ K : D', Function.Bijective
-    (fun f : M.obj G ⟶ K ↦ (L.map η ≫ e.inv.app G) ≫ V.map f)
-
-/-- Transport a scalar unit through isomorphisms of its ordinary source and target.
-Source: naturality of the degree-zero restriction comparison, Stacks 07A6.
-Proof: precompose test morphisms by the target isomorphism and postcompose their
-images by the source isomorphism. Both operations are bijective. Naturality of the
-comparison and the given ordinary unit equation identify the resulting function.
-(blueprint: lem-asd-scalar-unit-transport-api) -/
-theorem isScalarExtensionUnit_transport
-    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
-    {U : D ⥤ C} {V : D' ⥤ C'} (L : C ⥤ C') (M : D ⥤ D')
-    (e : M ⋙ V ≅ U ⋙ L) {F F' : C} {G G' : D}
-    (a : F' ≅ F) (b : G' ≅ G) (η' : F' ⟶ U.obj G') (η : F ⟶ U.obj G)
-    (hη : a.inv ≫ η' ≫ U.map b.hom = η)
-    (h : IsScalarExtensionUnit L M e η') : IsScalarExtensionUnit L M e η := by
-  rw [IsScalarExtensionUnit] at h ⊢
-  simp only [Category.assoc] at h ⊢
-  intro K
-  let p : (M.obj G ⟶ K) ≃ (M.obj G' ⟶ K) :=
-    { toFun := fun f ↦ M.map b.hom ≫ f
-      invFun := fun f ↦ M.map b.inv ≫ f
-      left_inv := by intro f; simp
-      right_inv := by intro f; simp }
-  let q : (L.obj F' ⟶ V.obj K) ≃ (L.obj F ⟶ V.obj K) :=
-    { toFun := fun f ↦ L.map a.inv ≫ f
-      invFun := fun f ↦ L.map a.hom ≫ f
-      left_inv := by intro f; simp
-      right_inv := by intro f; simp }
-  have hb := q.bijective.comp ((h K).comp p.bijective)
-  convert hb using 1
-  funext f
-  change L.map η ≫ e.inv.app G ≫ V.map f =
-    L.map a.inv ≫ L.map η' ≫ e.inv.app G' ≫ V.map (M.map b.hom ≫ f)
-  have hn := e.inv.naturality b.hom
-  dsimp only [Functor.comp_map] at hn
-  rw [← hη]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hn]
-
-end CategoryTheory
-
 namespace AlgebraicGeometry.Etale
 
 /-- The universal-property formulation of a derived scalar-extension unit at F.
@@ -95,11 +43,12 @@ def SupportedDerivedScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R))
     (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} S))
     (η : F ⟶ (Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) : Prop :=
-  IsScalarExtensionUnit
-    (DerivedCategory.singleFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)) 0)
-    (DerivedCategory.singleFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} S)) 0)
-    ((Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategorySingleFunctor 0) η
-
+  ∀ K : DerivedCategoryModule S T,
+    Function.Bijective (fun f : (DerivedCategory.singleFunctor _ 0).obj G ⟶ K ↦
+      (DerivedCategory.singleFunctor _ 0).map η ≫
+        ((Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategorySingleFunctor 0).inv.app
+          G ≫
+          (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategory.map f)
 
 /-- The scalar-extension clause, with the comparison maps fixed on generators.
 Both displayed universal properties refer to the canonical sectionwise scalar maps:

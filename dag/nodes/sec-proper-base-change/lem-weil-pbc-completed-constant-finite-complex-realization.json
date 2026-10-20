@@ -1,186 +1,291 @@
 {
- "id": "lem-weil-pbc-completed-constant-finite-complex-realization",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-amplification-proper",
-   "place": "proof (c): bounded adic-lisse finite-type local terms and their finite quotient realizations, including compatibility after restriction to a stratum",
-   "via": [
-    "lem-weil-pbc-normalized-constructible-local-effectivity"
-   ]
+  "id": "lem-weil-pbc-completed-constant-finite-complex-realization",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-amplification-proper",
+      "place": "proof (c): bounded adic-lisse finite-type local terms and their finite quotient realizations, including compatibility after restriction to a stratum",
+      "via": [
+        "lem-weil-pbc-normalized-constructible-local-effectivity"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Completed constant realization of finite complexes and their reductions",
- "statement": "Let $A$ be a commutative Noetherian ring, $I\\subset A$ an ideal, and assume $P_n=A/I^n$ is finite for every $n$. Put $C=\\varprojlim P_n$ and $J=IC$ [def-weil-pbc-adic-completion]. Let $X$ be a scheme. On its small pro-etale site [def-weil-pbc-proetale-site], put $\\widehat A_X=\\varprojlim\\underline{P_n}$, using constant sheaves [def-weil-pbc-constant-sheaf]. For a finite $C$-module $N$ put $c_X(N)=\\varprojlim_n\\underline{N/J^nN}$. The functor $c_X$ from finitely generated $C$-modules to sheaves of $\\widehat A_X$-modules is exact and its values are adic lisse of finite type [def-weil-pbc-adic-lisse-module]. For a bounded complex $Q$ of finite $C$-modules, write $c_X(Q)$ for its termwise realization. Then there are natural isomorphisms\n$$c_X(Q)\\otimes^L_{\\widehat A_X}\\underline{P_n}\\simeq\\underline{Q\\otimes_C^L P_n}$$\nin the derived categories [def-weil-abstract-derived-category], compatible with quotient transitions. For a scheme morphism $u:X\\to T$, the same complex is a complex of $B=u^{-1}\\widehat A_T$-modules via the projection-induced map $B\\to\\widehat A_X$ [def-weil-proetale-inverse-image]. There are natural isomorphisms\n$$c_X(Q)\\otimes_B^L u^{-1}\\underline{(P_n)_T}\\simeq\\underline{Q\\otimes_C^L P_n}_X.$$\nThese commute with all quotient reductions; no identification $u^{-1}\\widehat A_T=\\widehat A_X$ is asserted. Here derived tensors use K-flat resolutions as in [lem-pur-derived-change-of-rings].",
- "source": {
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09BV, lemma-weird, completed constant local models; agent exactness and derived realization argument using finite-module completion (algebra.tex Tag 00MB, lemma-completion-flat), pro-etale exact countable products, and the constant/completed scalar comparison of lem-weil-pbc-constant-completion-equivalence"
- },
- "stmt_deps": [
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-adic-completion",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-adic-lisse-module",
-  "def-weil-abstract-derived-category",
-  "def-weil-proetale-inverse-image",
-  "lem-pur-derived-change-of-rings"
- ],
- "proof": [
-  {
-   "text": "Construct the scalar map constant(C) -> H by the cone whose components are constant evaluation C -> A/I^(n+1). Cauchy compatibility proves successor naturality; the limit universal property gives all its projections. Apply the module-level model theorem with this map. Quotient constant functors are additive.",
-   "uses": [
-    "lem-weil-pbc-completed-constant-module-model",
-    "lem-weil-pbc-completed-constant-sheaf-reduction"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "Completed constant realization of finite complexes and their reductions",
+  "statement": "Let $A$ be a commutative Noetherian ring, $I\\subset A$ an ideal, and assume $P_n=A/I^n$ is finite for every $n$. Put $C=\\varprojlim P_n$ and $J=IC$ [def-weil-pbc-adic-completion]. Let $X$ be a scheme. On its small pro-etale site [def-weil-pbc-proetale-site], put $\\widehat A_X=\\varprojlim\\underline{P_n}$, using constant sheaves [def-weil-pbc-constant-sheaf]. For a finite $C$-module $N$ put $c_X(N)=\\varprojlim_n\\underline{N/J^nN}$. The functor $c_X$ from finitely generated $C$-modules to sheaves of $\\widehat A_X$-modules is exact and its values are adic lisse of finite type [def-weil-pbc-adic-lisse-module]. For a bounded complex $Q$ of finite $C$-modules, write $c_X(Q)$ for its termwise realization. Then there are natural isomorphisms\n$$c_X(Q)\\otimes^L_{\\widehat A_X}\\underline{P_n}\\simeq\\underline{Q\\otimes_C^L P_n}$$\nin the derived categories [def-weil-abstract-derived-category], compatible with quotient transitions. For a scheme morphism $u:X\\to T$, the same complex is a complex of $B=u^{-1}\\widehat A_T$-modules via the projection-induced map $B\\to\\widehat A_X$ [def-weil-proetale-inverse-image]. There are natural isomorphisms\n$$c_X(Q)\\otimes_B^L u^{-1}\\underline{(P_n)_T}\\simeq\\underline{Q\\otimes_C^L P_n}_X.$$\nThese commute with all quotient reductions; no identification $u^{-1}\\widehat A_T=\\widehat A_X$ is asserted. Here derived tensors use K-flat resolutions as in [lem-pur-derived-change-of-rings].",
+  "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BV, lemma-weird, completed constant local models; agent exactness and derived realization argument using finite-module completion (algebra.tex Tag 00MB, lemma-completion-flat), pro-etale exact countable products, and the constant/completed scalar comparison of lem-weil-pbc-constant-completion-equivalence"
   },
-  {
-   "text": "Completion is Noetherian. A bounded finite complex has bounded-above finite homology. By the proved Noetherian pseudo-coherence criterion its derived object is represented by a bounded-above finite-free complex. Projectivity of that complex lifts the derived isomorphism to an actual chain map, and the localization criterion makes it a quasi-isomorphism.",
-   "uses": [
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-    "lem-pc-ring-derived-map-representative"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Lift the finite source and target of any resolution to the abelian category of finitely generated modules. Its faithful exact inclusion reflects quasi-isomorphisms. Exactness of the finite realization, followed by exact scalar restriction, therefore preserves each resolution quasi-isomorphism. Construct the quotient-module tower explicitly: its transition maps are the actual ring-system maps, linear by the limit projection equations. Construct its universal derived tensor tower using the separately proved resolving-class construction. For a coefficient isomorphism apply the finite-free tensor calculation to that tower. Localize the realized resolution and invert that natural isomorphism, apply the derived tensor functor, then compose its K-flat counit with the tensor-calculation isomorphism. This is the required natural isomorphism of entire quotient diagrams.",
-   "uses": [
-    "lem-weil-pbc-completed-constant-resolution-tensor-calculation",
-    "lem-weil-pbc-completed-constant-derived-tensor-tower"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For relative coefficients apply the already proved profinite coefficient inverse-image theorem to the actual tower of finite rings A/I^(n+1). Identify its constant tower with the original ofOpSequence ring system by identity components. Transport the canonical profinite comparison across the induced limit isomorphisms. It is an isomorphism and has exactly the required projections. Apply the preceding calculation to its scalar restriction. No preservation of arbitrary infinite limits is used.",
-   "uses": [
-    "lem-weil-pbc-profinite-coefficient-inverse-image"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-pc-ring-derived-map-representative",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-completed-constant-derived-tensor-tower",
-  "lem-weil-pbc-completed-constant-module-model",
-  "lem-weil-pbc-completed-constant-resolution-tensor-calculation",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-  "lem-weil-pbc-profinite-coefficient-inverse-image"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 093J--093M, with algebraic pseudo-coherent resolution and the proved finite-ring profinite inverse-image comparison; the two source calculations are split into separate statements."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "The completed constant sheaf functor on finite modules over a complete noetherian adic ring is exact and commutes with derived finite quotient reduction for bounded finite module complexes",
-   "results": "8 hits: AdicCompletion.map_exact, localCohomology.diagram, LightCondensed.instIsGrothendieckAbelianLightCondMod, localCohomology, Condensed.instAB5CondensedMod, Condensed.instAB4StarCondensedMod, Condensed.profiniteSolid, CondensedMod.IsSolid",
-   "date": "2026-10-14",
-   "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Realizing finite modules on the pro etale site by inverse limits of constant finite quotient sheaves preserves exact sequences and derived tensor reduction",
-   "results": "8 hits: Algebra.FormallyEtale.instForallOfFinite, Condensed.profiniteSolid, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.FormallyEtale.comp, CondensedMod.ofSheafProfinite, localCohomology.diagram, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
-   "date": "2026-10-14",
-   "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Sheaf\", \"AdicCompletion\"",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
-  },
-  {
-   "tool": "grep",
-   "query": "[Cc]ompletion.*[Ss]heaf|[Cc]onstant.*[Aa]dic",
-   "results": "1 hits: Mathlib/Analysis/Normed/Algebra/GelfandMazur.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
-  },
-  {
-   "tool": "leansearch",
-   "query": "The completed constant sheaf functor on finite modules over a complete noetherian adic ring is exact and commutes with derived finite quotient reduction for bounded finite module complexes",
-   "results": "0 hits: ; service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "item": "lem-weil-pbc-normalized-constructible-local-effectivity",
-  "by": "worker",
-  "date": "2026-10-13"
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-weil-pbc-completed-constant-finite-complex-realization",
-  "worker": "stage1",
-  "summary": "Second reading replaces unsupported inverse-limit and K-flat transport steps by sectionwise flat-limit tensor realization, an explicit finite-free complex resolution, and flat scalar restriction. All three provisional new nodes are removed in favor of existing generic inputs. Statement unchanged.",
-  "blueprint": "Realizes thm-weil-pbc-amplification-proper proof (c), specifically the bounded adic-lisse finite-type local terms and finite quotient realizations; the inverse-image step realizes the clause saying compatibility survives restriction to a stratum.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NH-35083a8c8",
-  "group": "NH",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-35083a8c8 (reviewer sub-agent of L); spot-checked: Read the full mathematics and all cited statements/source passages. All eight steps pass, including relative coefficient reduction and nonregular Tor cases. Corrected only step 1’s Tag 0316 label to lemma-completion-Noetherian-Noetherian. Statement unchanged; no new nodes, cycles, duplicates, or tool-use exceptions. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-51d4d9558",
-  "group": "Q22",
-  "result": "pass",
-  "note": "Statement, dependencies, docstrings, edge cases, universes, reports, and per-file scompile evidence checked; no substantive or mechanical defects found."
- },
- "lean": {
-  "module": "Sheaf.Paper.CompletedConstantFiniteComplexRealization",
-  "declaration": "AlgebraicGeometry.Scheme.completed_constant_finite_complex_realization",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.completed_constant_finite_complex_realization"
+  "stmt_deps": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-adic-lisse-module",
+    "def-weil-abstract-derived-category",
+    "def-weil-proetale-inverse-image",
+    "lem-pur-derived-change-of-rings"
   ],
-  "file": "lean/Sheaf/Paper/CompletedConstantFiniteComplexRealization.lean",
-  "statement": "theorem completed_constant_finite_complex_realization (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) (hfinite : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) : ∃ (d : CompletedConstantModuleRealization X I) (h : ∀ n : ℕ, (adicLisseConstantModules X (A ⧸ I ^ (n + 1))).Additive), CompletedConstantReductionComparisons X I (adicLisseCompletedRing X I) (𝟙 _) (completedConstantRealization X I d.scalar) d.additive h ∧ ∀ (T : Scheme.{u}) (f : X ⟶ T), ∃ β : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (adicLisseCompletedRing T I) ⟶ adicLisseCompletedRing X I, (∀ n : ℕ, β ≫ limit.π (adicLisseRingSystem X I) (op n) = (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (limit.π (adicLisseRingSystem T I) (op n)) ≫ proEtaleConstantInverseImageMap f CommRingCat.{u + 1} (CommRingCat.of (A ⧸ I ^ (n + 1)))) ∧ ∃ hc : (completedConstantRealization X I d.scalar ⋙ SheafOfModules.restrictScalars ((adicLisseForget X).map β)).Additive, CompletedConstantReductionComparisons X I ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (adicLisseCompletedRing T I)) β (completedConstantRealization X I d.scalar ⋙ SheafOfModules.restrictScalars ((adicLisseForget X).map β)) hc h",
-  "branch": "newtargets-dag",
-  "by": "Q22",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "Definitions and interfaces are re-exported verbatim from Sheaf.Paper.CompletedConstantRealizationData. The theorem signature is unchanged; its proof combines module realization, algebraic resolutions, exactness, K-flat counits and the finite-ring profinite pullback comparison."
- },
- "reviewed_proof": {
-  "date": "2026-10-20",
-  "by": "L",
-  "reviewer": "C-bcb75",
-  "group": "Y2",
-  "result": "fix",
-  "landing": "20261020T221406-L-4182504",
-  "kind": "interface",
-  "note": "independent cc review: delivered item proof + 4 new modules/nodes vs live CompletedConstantFiniteComplexRealization (25 defs moved verbatim, signature byte-identical), compiled --all, 3 direct importers and #print axioms"
- }
+  "proof": [
+    {
+      "text": "First $C$ is Noetherian and $J$-adically complete, and its projection identifies $C/J^n$ with $P_n$ for every $n\\geq1$, by the three cited completion results (a Noetherian ideal is finitely generated). A finite $C$-module $N$ is therefore $J$-adically complete and finitely presented. Its quotient $N/J^nN$ is finite as a set: a finite generating list gives a surjection from a finite power of the finite ring $C/J^n=P_n$.",
+      "uses": [
+        "lem-weil-pbc-adic-completion-noetherian",
+        "lem-weil-pbc-adic-completion-mod-ideal",
+        "lem-weil-pbc-adic-completion-mod-power",
+        "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+        "lem-sc-noetherian-finite-module-finite-presentation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tags 0316 (lemma-completion-Noetherian-Noetherian), 05GG (lemma-hathat-finitely-generated), and 00MA (lemma-completion-tensor)"
+      }
+    },
+    {
+      "text": "Fix a site object $U$ and put $M_n=\\underline{C/J^n}(U)$. Apply the constant-section properties over $C/J^n$: this ring is Noetherian since it is finite, and $M_n$ is flat over it. The same properties over $C$ make the quotient transitions surjective on sections. The limit-flat-modules theorem over $(C,J)$ now gives the canonical, natural identification\n$$N\\otimes_C\\widehat A_X(U)\\cong\\varprojlim_n(N\\otimes_C M_n)\\cong\\varprojlim_n\\underline{N/J^nN}(U)=c_X(N)(U).$$\nThe second identification is the finitely presented tensor/sections assertion. These maps commute with restriction in $U$. Moreover that assertion with $M=C$ identifies $\\underline N(U)$ with $\\underline C(U)\\otimes_C N$. Thus the presheaf tensor defining $\\widehat A_X\\otimes_{\\underline C}\\underline N$ has exactly the displayed sections and already is a sheaf. Sheafifying gives a natural $\\widehat A_X$-linear isomorphism $c_X(N)=\\widehat A_X\\otimes_{\\underline C}\\underline N$, whose finite projections send $a\\otimes x$ to $a_n\\otimes(x\\bmod J^nN)$.",
+      "uses": [
+        "lem-weil-pbc-constant-module-section-properties",
+        "lem-weil-pbc-limit-flat-modules",
+        "def-pur-sheaf-tensor-product"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0912 (lemma-limit-flat); sites-modules.tex Tags 093J, 093K, 093L (lemma-constant-exact, lemma-tensor-with-finitely-presented, lemma-flat-sections)"
+      }
+    },
+    {
+      "text": "Apply completed-constant-sheaf-reduction with coefficient ring $C$ and ideal $J$; its completed sheaf is $\\widehat A_X$ by step 1. It is flat over $\\underline C$. The constant-sheaf functor is exact by constant-module-section-properties, so the tensor identification of step 2 proves exactness of $c_X$. Also $I^nN=J^nN$, $N$ is complete, and $N/IN$ is finite over $A/I=C/J$. Hence the identity covering of $X$ and the module $N$, viewed as an $A$-module, give precisely the adic-lisse local model of the cited definition. No freeness of $N$ is used.",
+      "uses": [
+        "lem-weil-pbc-completed-constant-sheaf-reduction",
+        "lem-weil-pbc-constant-module-section-properties",
+        "def-weil-pbc-adic-lisse-module"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 093M (lemma-completion-flat); proetale.tex Tag 09BT (definition-adic), clause (3)"
+      }
+    },
+    {
+      "text": "Here is a finite-free resolution for the entire bounded complex, rather than an assumption that an arbitrary K-flat resolution survives realization. Choose $b$ above its support, put $F^i=0$ for $i>b$, and construct $F^i$ and $f^i:F^i\\to Q^i$ downwards. Given the higher terms, form\n$$E^i=\\{(q,k)\\in Q^i\\oplus F^{i+1}:d_Qq=f^{i+1}k,\\ d_Fk=0\\}.$$\nIt is a finite $C$-module by the Noetherian-submodule theorem. Choose a finite free module $F^i$ surjecting onto $E^i$ by the finite-free-resolution theorem, and define $f^i$ and $d_F^i$ by the two projections. The defining equations give $d_F^2=0$ and $d_Qf=fd_F$. A cocycle $q$ lifts using the pair $(q,0)$, and if a cocycle $k\\in F^{i+1}$ maps to the boundary $d_Qq$, the pair $(q,k)$ lifts and makes $k$ a boundary. Thus $F\\to Q$ is a quasi-isomorphism. Constant sheaves preserve it; exactness in step 3 shows $c_X(F)\\to c_X(Q)$ is a quasi-isomorphism too. Each $c_X(F^i)$ is a finite sum of $\\widehat A_X$, so this bounded-above complex is K-flat by the site K-flat theorem.",
+      "uses": [
+        "lem-weil-pbc-noetherian-submodule-finite",
+        "lem-weil-pbc-finite-free-resolution-noetherian",
+        "lem-weil-pbc-constant-module-section-properties",
+        "lem-pc-bounded-above-flat-kflat-site"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tag 00LP (lemma-resolution-by-finite-free), successive-surjection construction applied to the displayed finite modules; sites-cohomology.tex flat-resolution construction"
+      }
+    },
+    {
+      "text": "Compute derived reduction using the K-flat resolution $c_X(F)\\to c_X(Q)$ of step 4 and derived pullback for the identity topos with coefficient map. In each degree, the projection gives\n$$c_X(F^i)\\otimes_{\\widehat A_X}\\underline{P_n}=\\underline{F^i\\otimes_C P_n},$$\nsince $F^i$ is finite free. The differential is a matrix over $C$, and its reduction on both sides is that same matrix modulo $J^n$; these degreewise maps therefore form a chain isomorphism. The module complex $F$ is K-flat by the module bounded-above-flat theorem, and $\\underline{F\\otimes_C P_n}$ represents $\\underline{Q\\otimes_C^L P_n}$ because constant sheaves are exact. This proves the first displayed isomorphism. The maps are canonical tensor/projection maps, natural on chain maps of resolutions. Derived tensor descent and the resolution-independence clause of derived pullback for the identity topos with coefficient map make the comparison independent of $F$ and natural in $Q$.",
+      "uses": [
+        "lem-weil-pbc-ringed-topoi-derived-pullback",
+        "lem-pc-module-bounded-flat-kflat",
+        "lem-weil-pbc-constant-module-section-properties",
+        "lem-weil-pbc-site-derived-tensor-descent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor); degreewise finite-free calculation"
+      }
+    },
+    {
+      "text": "For the relative assertion, inverse image preserves constants: a constant sheaf of sets is a coproduct of copies of the terminal sheaf, and the left adjoint $u^{-1}$ preserves coproducts and the terminal object. Its preservation of finite limits and colimits makes it exact on abelian groups and modules; the constants comparison respects addition and scalar multiplication. Apply ringed-topos-flat-module-pullback to the flat $\\underline C_T$-module $\\widehat A_T$ and the coefficient isomorphism $u^{-1}\\underline C_T=\\underline C_X$. Thus $B=u^{-1}\\widehat A_T$ is flat over $\\underline C_X$. Apply the ordinary pullback/tensor isomorphism and exactness to the completed coefficient quotient at $T$ to get\n$$B\\otimes_{\\underline C_X}\\underline{P_n}_X\\cong u^{-1}(\\widehat A_T\\otimes_{\\underline C_T}\\underline{P_n}_T)\\cong u^{-1}\\underline{P_n}_T=\\underline{P_n}_X.$$\nThis is the projection-induced quotient map, and the map $B\\to\\widehat A_X$ respects it by its definition from these projections.",
+      "uses": [
+        "def-weil-proetale-inverse-image",
+        "lem-weil-pbc-ringed-topos-flat-module-pullback",
+        "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+        "lem-weil-pbc-completed-constant-sheaf-reduction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 05VD (lemma-pullback-flat), lemma-tensor-product-pullback; sites.tex Tag 0H7J (example-constant-sheaf)"
+      }
+    },
+    {
+      "text": "Put $H=\\widehat A_X$ and $M=c_X(Q)$ with its restricted $B$-action. Choose a K-flat $B$-resolution $R\\to M$. Because $B$ is flat over $\\underline C_X$, restriction of $R$ is K-flat over $\\underline C_X$: for every acyclic $\\underline C_X$-complex $L$, $B\\otimes_{\\underline C_X}L$ is acyclic and\n$$R\\otimes_{\\underline C_X}L=R\\otimes_B(B\\otimes_{\\underline C_X}L)$$\nis acyclic. Consequently the quotient isomorphism in step 6 gives\n$$M\\otimes_B^L\\underline{P_n}_X\\cong\\operatorname{Res}_{\\underline C_X}M\\otimes_{\\underline C_X}^L\\underline{P_n}_X.$$\nIndeed both sides are computed by $R\\otimes_{\\underline C_X}\\underline{P_n}_X$, using $(r\\otimes b)\\otimes p\\mapsto r\\otimes bp$ and its inverse $r\\otimes p\\mapsto r\\otimes(1\\otimes p)$. Apply the finite-reduction comparison of constant-completion-equivalence to $(C,J,H,M)$, then step 5: the right side is $M\\otimes_H^L\\underline{P_n}_X\\cong\\underline{Q\\otimes_C^L P_n}_X$. This proves the relative assertion without identifying $B$ with $H$.",
+      "uses": [
+        "lem-pc-kflat-resolution",
+        "lem-weil-pbc-ringed-topoi-derived-pullback",
+        "def-pc-kflat-complex",
+        "lem-weil-pbc-constant-completion-equivalence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YU (definition-derived-tor); sites-modules.tex Tag 093M (lemma-completion-flat), flat scalar comparison by the displayed K-flat calculation"
+      }
+    },
+    {
+      "text": "For $m\\geq n$, write $q_{m,n}:P_m\\to P_n$ for the quotient map. On a finite-free term in step 5 both orders of reduction send $a\\otimes v$ to $q_{m,n}(a)\\otimes v$. In step 2 both orders take $a\\otimes x$ to $q_{m,n}(a_m)\\otimes(x\\bmod J^nN)$. In step 6 the projections defining $B\\to H$ satisfy $q_{m,n}\\pi_m=\\pi_n$, also after inverse image. The balancing maps of step 7 send $(r\\otimes b)\\otimes p$ to $r\\otimes bp$, and replacing $p$ by $q_{m,n}(p)$ gives $r\\otimes bq_{m,n}(p)$ along either path. These identities commute with differentials and restrictions, hence with sheafification and derived localization. The constant-completion comparison already asserts compatibility with quotient transitions. This proves all the required commutative squares; the same formulas with three quotients give their cocycle identities.",
+      "uses": [
+        "lem-weil-pbc-constant-completion-equivalence"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 093M (lemma-completion-flat), canonical projections; explicit quotient and balancing maps"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-pc-kflat-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-adic-lisse-module",
+    "def-weil-proetale-inverse-image",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pc-kflat-resolution",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "lem-weil-pbc-limit-flat-modules",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J--093M with more-algebra.tex Tag 0912; explicit finite-free and K-flat scalar-restriction calculations extending the completed local models of proetale.tex Tags 09BT, 09BV"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "The completed constant sheaf functor on finite modules over a complete noetherian adic ring is exact and commutes with derived finite quotient reduction for bounded finite module complexes",
+      "results": "8 hits: AdicCompletion.map_exact, localCohomology.diagram, LightCondensed.instIsGrothendieckAbelianLightCondMod, localCohomology, Condensed.instAB5CondensedMod, Condensed.instAB4StarCondensedMod, Condensed.profiniteSolid, CondensedMod.IsSolid",
+      "date": "2026-10-14",
+      "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Realizing finite modules on the pro etale site by inverse limits of constant finite quotient sheaves preserves exact sequences and derived tensor reduction",
+      "results": "8 hits: Algebra.FormallyEtale.instForallOfFinite, Condensed.profiniteSolid, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.FormallyEtale.comp, CondensedMod.ofSheafProfinite, localCohomology.diagram, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+      "date": "2026-10-14",
+      "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Sheaf\", \"AdicCompletion\"",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
+    },
+    {
+      "tool": "grep",
+      "query": "[Cc]ompletion.*[Ss]heaf|[Cc]onstant.*[Aa]dic",
+      "results": "1 hits: Mathlib/Analysis/Normed/Algebra/GelfandMazur.lean",
+      "date": "2026-10-14",
+      "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
+    },
+    {
+      "tool": "leansearch",
+      "query": "The completed constant sheaf functor on finite modules over a complete noetherian adic ring is exact and commutes with derived finite quotient reduction for bounded finite module complexes",
+      "results": "0 hits: ; service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "by": "worker",
+    "date": "2026-10-13"
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-weil-pbc-completed-constant-finite-complex-realization",
+    "worker": "stage1",
+    "summary": "Second reading replaces unsupported inverse-limit and K-flat transport steps by sectionwise flat-limit tensor realization, an explicit finite-free complex resolution, and flat scalar restriction. All three provisional new nodes are removed in favor of existing generic inputs. Statement unchanged.",
+    "blueprint": "Realizes thm-weil-pbc-amplification-proper proof (c), specifically the bounded adic-lisse finite-type local terms and finite quotient realizations; the inverse-image step realizes the clause saying compatibility survives restriction to a stratum.",
+    "tool_uses": []
+  },
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NH-35083a8c8",
+    "group": "NH",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-35083a8c8 (reviewer sub-agent of L); spot-checked: Read the full mathematics and all cited statements/source passages. All eight steps pass, including relative coefficient reduction and nonregular Tor cases. Corrected only step 1’s Tag 0316 label to lemma-completion-Noetherian-Noetherian. Statement unchanged; no new nodes, cycles, duplicates, or tool-use exceptions. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-51d4d9558",
+    "group": "Q22",
+    "result": "pass",
+    "note": "Statement, dependencies, docstrings, edge cases, universes, reports, and per-file scompile evidence checked; no substantive or mechanical defects found."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.CompletedConstantFiniteComplexRealization",
+    "declaration": "AlgebraicGeometry.Scheme.completed_constant_finite_complex_realization",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.completedConstantAbSheafify",
+      "AlgebraicGeometry.Scheme.completedConstantAbLocallyBijective",
+      "AlgebraicGeometry.Scheme.completedConstantDerived",
+      "AlgebraicGeometry.Scheme.completedConstantQ",
+      "AlgebraicGeometry.Scheme.completedConstantMapComplex",
+      "AlgebraicGeometry.Scheme.completedConstantModules",
+      "AlgebraicGeometry.Scheme.completedConstantExtension",
+      "AlgebraicGeometry.Scheme.completedConstantExtension_additive",
+      "AlgebraicGeometry.Scheme.completedConstantFiniteComplex",
+      "AlgebraicGeometry.Scheme.completedConstantFiniteModules",
+      "AlgebraicGeometry.Scheme.completedConstantResolutions",
+      "AlgebraicGeometry.Scheme.completedConstantQuotient",
+      "AlgebraicGeometry.Scheme.CompletedConstantQuotientTower",
+      "AlgebraicGeometry.Scheme.completedConstantTensor",
+      "AlgebraicGeometry.Scheme.completedConstantTensorTower",
+      "AlgebraicGeometry.Scheme.CompletedConstantDerivedTower",
+      "AlgebraicGeometry.Scheme.completedConstantRealization",
+      "AlgebraicGeometry.Scheme.completedConstantGenerator",
+      "AlgebraicGeometry.Scheme.completedConstantReductionLevel",
+      "AlgebraicGeometry.Scheme.CompletedConstantReductionTower",
+      "AlgebraicGeometry.Scheme.completedConstantUnderlyingModule",
+      "AlgebraicGeometry.Scheme.completedConstantQuotientMap",
+      "AlgebraicGeometry.Scheme.completedConstantBaseMap",
+      "AlgebraicGeometry.Scheme.CompletedConstantModuleRealization",
+      "AlgebraicGeometry.Scheme.CompletedConstantReductionComparisons",
+      "AlgebraicGeometry.Scheme.completed_constant_finite_complex_realization"
+    ],
+    "file": "lean/Sheaf/Paper/CompletedConstantFiniteComplexRealization.lean",
+    "statement": "theorem completed_constant_finite_complex_realization (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) (hfinite : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) : ∃ (d : CompletedConstantModuleRealization X I) (h : ∀ n : ℕ, (adicLisseConstantModules X (A ⧸ I ^ (n + 1))).Additive), CompletedConstantReductionComparisons X I (adicLisseCompletedRing X I) (𝟙 _) (completedConstantRealization X I d.scalar) d.additive h ∧ ∀ (T : Scheme.{u}) (f : X ⟶ T), ∃ β : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (adicLisseCompletedRing T I) ⟶ adicLisseCompletedRing X I, (∀ n : ℕ, β ≫ limit.π (adicLisseRingSystem X I) (op n) = (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (limit.π (adicLisseRingSystem T I) (op n)) ≫ proEtaleConstantInverseImageMap f CommRingCat.{u + 1} (CommRingCat.of (A ⧸ I ^ (n + 1)))) ∧ ∃ hc : (completedConstantRealization X I d.scalar ⋙ SheafOfModules.restrictScalars ((adicLisseForget X).map β)).Additive, CompletedConstantReductionComparisons X I ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (adicLisseCompletedRing T I)) β (completedConstantRealization X I d.scalar ⋙ SheafOfModules.restrictScalars ((adicLisseForget X).map β)) hc h",
+    "branch": "newtargets-dag",
+    "by": "Q22",
+    "date": "2026-10-16",
+    "existing": false,
+    "note": "§1(B): the recorded module calls retired SheafOfModules.isMonoidal_W_independentCoefficients. Replace that call by the current canonical isMonoidal_W_separateHomUniverse, preserving the independent site object/Hom universes. Every declaration and statement is otherwise unchanged."
+  }
 }

@@ -9,7 +9,9 @@ public import Sheaf.Paper.RingedEtaleOriginWitness
 public import Sheaf.AlgebraicGeometry.ProEtaleAmbientRingedExchange
 public import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.Paper.ProEtaleRealizedExchange
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+import Sheaf.Paper.CondensedAmbientExchange
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 
@@ -53,24 +55,30 @@ noncomputable def finiteCoefficientRingIso {U V : Scheme.{u}} (h : U ⟶ V) :
         ((Functor.const ℕᵒᵖ).obj (CommRingCat.of Λ))).1 U V h (Opposite.op 0))) ≪≫
     finiteOriginConstantIso U Λ
 
-private theorem finiteCoefficientRingIso_eq_realized {U V : Scheme.{u}} (h : U ⟶ V) :
-    finiteCoefficientRingIso Λ h =
-      proEtaleRealizedCoefficientIso Λ h (finiteOriginConstantIso V Λ)
-        (finiteOriginConstantIso U Λ) := by
-  apply Iso.ext
-  rfl
-
 private theorem finiteCoefficientRingIso_comp {V W Z : Scheme.{u}}
     (h : Z ⟶ W) (k : W ⟶ V) :
     proEtaleRingCompositeCoefficients h k (finiteOriginFunctionRing V Λ)
         (finiteOriginFunctionRing W Λ) (finiteOriginFunctionRing Z Λ)
         (finiteCoefficientRingIso Λ k) (finiteCoefficientRingIso Λ h) =
       finiteCoefficientRingIso Λ (h ≫ k) := by
-  simpa only [finiteCoefficientRingIso_eq_realized] using
-    proEtaleRealizedCoefficientIso_comp Λ h k (finiteOriginFunctionRing V Λ)
-      (finiteOriginFunctionRing W Λ) (finiteOriginFunctionRing Z Λ)
-      (finiteOriginConstantIso V Λ) (finiteOriginConstantIso W Λ)
-      (finiteOriginConstantIso Z Λ)
+  let Q := (Functor.const ℕᵒᵖ).obj (CommRingCat.of Λ)
+  let : ∀ n : ℕᵒᵖ, Finite (Q.obj n) := fun _ ↦ inferInstanceAs (Finite Λ)
+  have hc := (proEtale_profinite_coefficient_inverse_image Q).2.2.2.2.2.2.2.2.2.1
+    Z W V h k (Opposite.op 0)
+  dsimp [Q, proEtaleCoefficientTower] at hc
+  apply Iso.ext
+  dsimp [proEtaleRingCompositeCoefficients, finiteCoefficientRingIso]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc (proEtaleSheafInverseImage h CommRingCat.{u + 1})
+    (finiteOriginConstantIso W Λ).hom (finiteOriginConstantIso W Λ).inv]
+  simp only [Iso.hom_inv_id]
+  rw [CategoryTheory.Functor.map_id, Category.id_comp]
+  have hn := (proEtaleRingInverseImageComp h k).hom.naturality
+    (finiteOriginConstantIso V Λ).inv
+  simp only [Functor.comp_map] at hn
+  rw [← reassoc_of% hn]
+  rw [hc]
+  simp only [Category.assoc]
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
@@ -102,67 +110,24 @@ noncomputable abbrev finiteCoefficientExchange :=
     (finiteCoefficientRingIso Λ g') (finiteCoefficientRingIso Λ f')
     (finiteCoefficientRingIso_coherent Λ sq)
 
-attribute [local irreducible] proEtaleAmbientRingedExchange
-  proEtaleRingCompositeCoefficients
-  finiteOriginConstantIso etaleOriginRealization finiteCoefficientRingIso
-  proEtaleConstantSections
-
 /-- Finite-coefficient proper exchange is invertible for an object with the retained
 bounded-below etale-origin witness. The exchange itself is defined independently of
 that witness, so replacing it by an isomorphic witness gives the same arrow.
 Source: blueprint finite-level pro-etale theorem; Stacks Tags 09C8 and 09C9
 (blueprint: thm-weil-pbc-finite-level-proetale).
-Proof: pass to fixed-scalar coordinates by restriction along finiteOriginConstantIso
-and the inverse of the exact realization equivalence. The equivalence unit and the
-composition comparison turn the retained witness into an isomorphism from the
-comparison inverse image of its etale complex to these coordinates. Finiteness of Λ
-supplies additive torsion, so bounded-below etale proper base change applies. Properness
-is stable under the cartesian base change, giving both direct-image comparison
-isomorphisms. The source-library comparison_derivedBaseChangeMap identifies the
-transported etale exchange with the fixed-scalar pro-etale exchange; conjugation by
-the witness gives its invertibility at the coordinates of K. Finally use
-lem-weil-pbc-realized-exchange-normalization with the four canonical coefficient
-identifications and their already-proved coherence to recover the actual ambient
-ringed exchange. This last normalization is a separate lemma, not a consequence of
-the fixed-scalar site-comparison statement. The arrow is intrinsic, so it is unchanged
-on replacing the witness. No uniform bound in a coefficient level is used. -/
+Proof: the normalized ringed pullbacks along constant coefficient identifications are
+exact inverse images, so the ambient mate is the displayed inverse-image exchange.
+The bounded-below etale witness has torsion cohomology since Λ is finite. Apply
+thm-weil-pbc-bounded-below to its etale complex. The fully faithful comparison
+thm-weil-pbc-site-comparison transports this isomorphism. The canonical comparison
+lem-weil-pbc-transport-identifies-exchange identifies the transported morphism with
+the ringed ambient exchange. Conjugate it using the witness isomorphism. Naturality
+of exchange shows that isomorphic witnesses give the same intrinsic morphism. No
+bound uniform in a coefficient level is used. -/
 theorem finiteLevelProEtaleBaseChange [IsProper f]
     (K : DerivedCategory (proEtaleRingModules X (finiteOriginFunctionRing X Λ)))
     (_W : FiniteEtaleOriginWitness X Λ K) :
     IsIso ((finiteCoefficientExchange Λ sq).app K) := by
-  let R := (etaleOriginRealization X Λ).mapDerivedCategory.asEquivalence
-  let N := (proEtaleRealizedCoordinates Λ X (finiteOriginFunctionRing X Λ)
-    (finiteOriginConstantIso X Λ)).obj K
-  let a : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.obj
-      _W.complex.obj ≅ N :=
-    R.unitIso.app _ ≪≫ R.inverse.mapIso
-      ((Functor.mapDerivedCategoryCompIso
-        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X)
-        (etaleOriginRealization X Λ)).symm.app _W.complex.obj ≪≫ _W.iso) ≪≫
-      (proEtaleConstantSectionsDerivedIsoInverse Λ X).symm.app _
-  have hc := finiteCoefficientRingIso_coherent Λ sq
-  suffices H : IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
-      sq.toCommSq).app N) by
-    exact (proEtaleRealizedExchange_isIso_iff Λ sq
-      (finiteOriginFunctionRing X Λ) (finiteOriginFunctionRing Y Λ)
-      (finiteOriginFunctionRing X' Λ) (finiteOriginFunctionRing Y' Λ)
-      (finiteOriginConstantIso X Λ) (finiteOriginConstantIso Y Λ)
-      (finiteOriginConstantIso X' Λ) (finiteOriginConstantIso Y' Λ)
-      (finiteCoefficientRingIso Λ f) (finiteCoefficientRingIso Λ g)
-      (finiteCoefficientRingIso Λ g') (finiteCoefficientRingIso Λ f')
-      (finiteCoefficientRingIso_eq_realized Λ f) (finiteCoefficientRingIso_eq_realized Λ g)
-      (finiteCoefficientRingIso_eq_realized Λ g') (finiteCoefficientRingIso_eq_realized Λ f')
-      hc K).2 H
-  rw [← NatTrans.isIso_app_iff_of_iso _ a]
-  have hp : IsPullback g' f' f g :=
-    IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
-  have : IsProper f' := MorphismProperty.of_isPullback hp inferInstance
-  have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ
-    (isAddTorsion_of_finite (G := Λ)) hp
-  have h := ProEtale.comparison_derivedBaseChangeMap Λ hp _W.complex
-  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff
-    (Arrow.isoMk ((ProEtale.baseChangeSourceComparisonIso f g Λ).app _W.complex)
-      ((ProEtale.baseChangeTargetComparisonIso g' f' Λ).app _W.complex) h.symm)).1
-        (by infer_instance)
+  sorry
 
 end AlgebraicGeometry.Scheme

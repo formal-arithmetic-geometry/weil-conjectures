@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
-import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
+import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.Topology.SpectralConstructibleFiniteIntersection
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
@@ -30,6 +30,7 @@ import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+import Sheaf.AlgebraicGeometry.FiniteEtalePushforwardFiniteType
 
 /-!
 # Affine free presentations for constructible modules

@@ -15,14 +15,10 @@ Compatibility import for the adopted source implementation. It provides
 `AlgebraicGeometry.Scheme.Modules.isIso_canonicalSinglePullbackMap`.
 
 The comparison remains the specified derived counit followed by the single-complex
-comparison and the unique tensor-to-ordinary pullback comparison. The declarations are
-provided by the adopted source module so this compatibility layer does not redeclare
-`AlgebraicGeometry.derivedPullback`.
+comparison and the unique tensor-to-ordinary pullback comparison.
 
 Source: Stacks Project, Tags 06YD, 06YJ and 08HY.
 (blueprint: lem-pc-canonical-single-pullback-comparison).
 -/
 
 @[expose] public section
-
-set_option autoImplicit false

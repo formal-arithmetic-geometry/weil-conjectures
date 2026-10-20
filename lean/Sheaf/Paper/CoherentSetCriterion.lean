@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Limits.Types.Colimits
 import Sheaf.TraceFormula.FinitarySiteCoherentGenerators
 import Sheaf.CategoryTheory.Sites.CoherentConservativeReflection
 import Sheaf.Paper.QcqsOrientedTriplePresentation
-import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
+import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 import Sheaf.CategoryTheory.Sites.CoherentToposRepair

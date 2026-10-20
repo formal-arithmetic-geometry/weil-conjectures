@@ -13,14 +13,21 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-public import Sheaf.Paper.CoefficientSystemImageData
-import Sheaf.Paper.CoefficientSystemOrdinaryImages
-import Sheaf.Paper.CoefficientSystemUnboundedComparison
-import Sheaf.CategoryTheory.ExactDerivedAdjunctionBounds
-import Sheaf.CategoryTheory.ScalarAdjunctionDescent
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
+import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Paper.PbcActualScalarPullback
+import Sheaf.Paper.PbcCompletedPullbackActual
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Mathlib.CategoryTheory.Yoneda
+import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
+public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-!
 # Direct image and evaluation of strict coefficient systems
 
@@ -55,6 +62,63 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{w})]
   (O : Type w) [CommRing O] (ell : O)
 
+/-- The existing forgetful functor at a coefficient level.
+Source: Zheng, Construction 4.1 (blueprint: lem-pur-coefficient-system-derived-comparison). -/
+abbrev coefficientUnderlying (n : ℕ) :
+    coefficientLevelModules (J := J) O ell n ⥤ Sheaf J (Type w) :=
+  toSheaf _ ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{w})
+
+/-- Constant coefficient generators, obtained from the actual ring-sheafification unit.
+Source: Zheng, Construction 4.1 (blueprint: lem-pur-coefficient-system-derived-comparison). -/
+def coefficientConstantSection (n : ℕ)
+    (x : O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) :
+    (constantSheaf J (Type w)).obj PUnit ⟶
+      (sheafCompose J (CategoryTheory.forget CommRingCat.{w})).obj
+        (coefficientQuotientSheaf (J := J) O ell n) :=
+  ((sheafificationAdjunction J (Type w)).homEquiv _ _).symm
+    ((Functor.const Cᵒᵖ).map (TypeCat.ofHom (fun (_ : PUnit.{w+1}) ↦ x)) ≫
+      whiskerRight (toSheafify J ((Functor.const Cᵒᵖ).obj
+        (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)))))
+          (CategoryTheory.forget CommRingCat.{w}))
+
+/-- Scalar restriction leaves the underlying sheaf of sets unchanged.
+Source: Stacks 03CZ (blueprint: lem-pur-coefficient-system-derived-comparison). -/
+def coefficientRestrictionUnderlying {m n : ℕ} (h : n ≤ m) :
+    coefficientRestriction (J := J) O ell h ⋙ coefficientUnderlying (J := J) O ell m ≅
+      coefficientUnderlying (J := J) O ell n :=
+  isoWhiskerRight (siteScalarUnderlyingIso
+    (coefficientQuotientMap (J := J) O ell h))
+      (sheafCompose J (CategoryTheory.forget AddCommGrpCat.{w}))
+
+section DerivedAdjunction
+variable {A : Type a} {B : Type b} [Category.{av} A] [Category.{bv} B]
+  [Abelian A] [Abelian B] [HasDerivedCategory.{d} A] [HasDerivedCategory.{d} B]
+  (F : A ⥤ B) (G : B ⥤ A) [F.Additive] [G.Additive] (adj : F ⊣ G)
+
+/-- Exact inverse image and total right direct image, with their normalized adjunction.
+The universal right-derived pair and its K-injective comparison fix the right functor;
+the transpose equation fixes its adjunction relative to the ordinary one.
+Source: Zheng, Lemma 4.10; Stacks 09T5, 0FND
+(blueprint: lem-pur-coefficient-system-derived-comparison). -/
+structure CoefficientDerivedImage where
+  inverse : DerivedCategory A ⥤ DerivedCategory B
+  inverseFactors : DerivedCategory.Q ⋙ inverse ≅
+    F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q
+  direct : DerivedCategory B ⥤ DerivedCategory A
+  directUnit : G.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶
+    DerivedCategory.Q ⋙ direct
+  isRightDerived : direct.IsRightDerivedFunctor directUnit
+    (HomologicalComplex.quasiIso B (ComplexShape.up ℤ))
+  computes : ∀ I : CochainComplex B ℤ, I.IsKInjective → IsIso (directUnit.app I)
+  adjunction : inverse ⊣ direct
+  transpose : ∀ (P : CochainComplex A ℤ) (I : CochainComplex B ℤ)
+    (f : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P ⟶ I),
+    adjunction.homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj I)
+      (inverseFactors.hom.app P ≫ DerivedCategory.Q.map f) =
+        DerivedCategory.Q.map
+          ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).homEquiv P I f) ≫ directUnit.app I
+end DerivedAdjunction
+
 variable {D : Type u'} [Category.{v'} D] [EssentiallySmall.{w} C]
   [EssentiallySmall.{w} D] {K : GrothendieckTopology D}
   [K.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
@@ -65,106 +129,188 @@ variable {D : Type u'} [Category.{v'} D] [EssentiallySmall.{w} C]
   (L : Sheaf J (Type w) ⥤ Sheaf K (Type w))
   (V : Sheaf K (Type w) ⥤ Sheaf J (Type w)) (adj : L ⊣ V)
 
-omit [EssentiallySmall.{w} D] [HasWeakSheafify K (Type w)]
-  [K.HasSheafCompose (CategoryTheory.forget CommRingCat.{w})]
-  [K.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{w})] in
-private theorem system_hom_ext {M N : CoefficientSystem (J := K) O ell}
-    (f g : M ⟶ N) (h : f.app = g.app) : f = g := by
-  cases f
-  cases g
-  cases h
-  rfl
+/-- The ordinary level and system images. The algebraic lift transports all operations;
+constants are fixed on every coefficient generator, and the displayed Hom formula is
+the underlying set-sheaf adjunction. Evaluation and transition equations fix the actual
+levelwise system functors, on objects and maps, rather than arbitrary adjoint functors.
+Source: Zheng, Construction 4.1, and the paragraph before Lemma 4.10
+(blueprint: lem-pur-coefficient-system-derived-comparison). -/
+structure CoefficientSystemOrdinaryImage where
+  singleton : L.obj ((constantSheaf J (Type w)).obj PUnit) ≅
+    (constantSheaf K (Type w)).obj PUnit
+  lift : ∀ n, AlgebraicInverseImage L
+    (coefficientQuotientSheaf (J := J) O ell n)
+    (coefficientQuotientSheaf (J := K) O ell n)
+  constants : ∀ n x,
+    L.map (coefficientConstantSection (J := J) O ell n x) ≫ (lift n).ringUnderlying.hom =
+      singleton.hom ≫ coefficientConstantSection (J := K) O ell n x
+  [inverseAdditive : ∀ n, (lift n).modules.Additive]
+  inverseExact : ∀ n, PreservesFiniteLimits (lift n).modules ∧
+    PreservesFiniteColimits (lift n).modules
+  right : ∀ n, coefficientLevelModules (J := K) O ell n ⥤
+    coefficientLevelModules (J := J) O ell n
+  [rightAdditive : ∀ n, (right n).Additive]
+  rightUnderlying : ∀ n, right n ⋙ coefficientUnderlying (J := J) O ell n ≅
+    coefficientUnderlying (J := K) O ell n ⋙ V
+  levelAdj : ∀ n, (lift n).modules ⊣ right n
+  levelTranspose : ∀ n M N (f : (lift n).modules.obj M ⟶ N),
+    (coefficientUnderlying (J := J) O ell n).map ((levelAdj n).homEquiv M N f) ≫
+      (rightUnderlying n).hom.app N =
+    adj.homEquiv _ _ ((lift n).moduleUnderlying.inv.app M ≫
+      (coefficientUnderlying (J := K) O ell n).map f)
+  restrictInverse : ∀ {m n : ℕ} (h : n ≤ m),
+    coefficientRestriction (J := J) O ell h ⋙ (lift m).modules ≅
+      (lift n).modules ⋙ coefficientRestriction (J := K) O ell h
+  restrictInverseUnderlying : ∀ {m n : ℕ} (h : n ≤ m) M,
+    (coefficientUnderlying (J := K) O ell m).map ((restrictInverse h).hom.app M) ≫
+      (coefficientRestrictionUnderlying (J := K) O ell h).hom.app
+        ((lift n).modules.obj M) ≫ (lift n).moduleUnderlying.hom.app M =
+    (lift m).moduleUnderlying.hom.app ((coefficientRestriction (J := J) O ell h).obj M) ≫
+      L.map ((coefficientRestrictionUnderlying (J := J) O ell h).hom.app M)
+  inverse : CoefficientSystem (J := J) O ell ⥤ CoefficientSystem (J := K) O ell
+  rightSystem : CoefficientSystem (J := K) O ell ⥤ CoefficientSystem (J := J) O ell
+  [systemInverseAdditive : inverse.Additive]
+  [systemRightAdditive : rightSystem.Additive]
+  systemExact : PreservesFiniteLimits inverse ∧ PreservesFiniteColimits inverse
+  inverseEvaluation : ∀ n, inverse ⋙ coefficientEvaluation (J := K) n ≅
+    coefficientEvaluation (J := J) n ⋙ (lift n).modules
+  rightEvaluation : ∀ n, rightSystem ⋙ coefficientEvaluation (J := J) n ≅
+    coefficientEvaluation (J := K) n ⋙ right n
+  inverseTransition : ∀ n M,
+    ((inverse.obj M).transition n) ≫
+      (coefficientRestriction (J := K) O ell (Nat.le_succ n)).map
+        ((inverseEvaluation n).hom.app M) =
+    (inverseEvaluation (n + 1)).hom.app M ≫ (lift (n + 1)).modules.map (M.transition n) ≫
+      (restrictInverse (Nat.le_succ n)).hom.app (M.level n)
+  systemAdj : inverse ⊣ rightSystem
+  systemTranspose : ∀ M N (f : inverse.obj M ⟶ N) n,
+    (coefficientEvaluation (J := J) n).map ((systemAdj.homEquiv M N) f) ≫
+      (rightEvaluation n).hom.app N =
+    (levelAdj n).homEquiv (M.level n) (N.level n)
+      ((inverseEvaluation n).inv.app M ≫ (coefficientEvaluation (J := K) n).map f)
 
-omit [EssentiallySmall.{w} D] [HasWeakSheafify K (Type w)]
-  [K.HasSheafCompose (CategoryTheory.forget CommRingCat.{w})]
-  [K.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{w})] in
-private theorem coefficientEvaluation_jointlyReflects :
-    JointlyReflectIsomorphisms (coefficientEvaluation (J := K) (O := O) (ell := ell)) where
-  isIso {M N} f hf := by
-    have hi (n : ℕ) : IsIso (f.app n) := hf n
-    let g : N ⟶ M := {
-      app := fun n ↦ inv (f.app n)
-      comm := by
-        intro n
-        apply (cancel_epi (f.app (n + 1))).mp
-        simp only [← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
-        rw [f.comm, Category.assoc]
-        simp only [← Functor.map_comp, IsIso.hom_inv_id]
-        rw [(coefficientRestriction (J := K) O ell (Nat.le_succ n)).map_id]
-        exact (Category.comp_id _).symm }
-    refine ⟨g, ?_, ?_⟩
-    · apply system_hom_ext O ell
-      funext n
-      change f.app n ≫ inv (f.app n) = 𝟙 _
-      exact IsIso.hom_inv_id _
-    · apply system_hom_ext O ell
-      funext n
-      change inv (f.app n) ≫ f.app n = 𝟙 _
-      exact IsIso.inv_hom_id _
-
-omit [EssentiallySmall.{w} D] [HasWeakSheafify K (Type w)]
-  [K.HasSheafCompose (CategoryTheory.forget CommRingCat.{w})]
-  [K.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{w})] in
-private theorem coefficientEvaluation_limits (n : ℕ) :
-    PreservesFiniteLimits (coefficientEvaluation (J := K) (O := O) (ell := ell) n) :=
-  (coefficientEvaluation_exact n).1
-
-omit [EssentiallySmall.{w} D] [HasWeakSheafify K (Type w)]
-  [K.HasSheafCompose (CategoryTheory.forget CommRingCat.{w})]
-  [K.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{w})] in
-private theorem coefficientEvaluation_colimits (n : ℕ) :
-    PreservesFiniteColimits (coefficientEvaluation (J := K) (O := O) (ell := ell) n) :=
-  (coefficientEvaluation_exact n).2
-
-attribute [local instance] coefficientEvaluation_limits coefficientEvaluation_colimits
+attribute [instance] CoefficientSystemOrdinaryImage.inverseAdditive
+  CoefficientSystemOrdinaryImage.rightAdditive
+  CoefficientSystemOrdinaryImage.systemInverseAdditive
+  CoefficientSystemOrdinaryImage.systemRightAdditive
 
 variable [∀ n : ℕ, HasDerivedCategory.{d} (coefficientLevelModules (J := J) O ell n)]
   [∀ n : ℕ, HasDerivedCategory.{d} (coefficientLevelModules (J := K) O ell n)]
   [HasDerivedCategory.{d} (CoefficientSystem (J := J) O ell)]
   [HasDerivedCategory.{d} (CoefficientSystem (J := K) O ell)]
 
-private def coefficientEvaluation_derivedIso
-    (P : CoefficientEvaluationDerivedPackage (J := K) (O := O) (ell := ell)) (n : ℕ) :
-    P.evaluation n ≅
-      (coefficientEvaluation (J := K) (O := O) (ell := ell) n).mapDerivedCategory := by
-  have : PreservesFiniteLimits
-      (coefficientEvaluation (J := K) (O := O) (ell := ell) n) :=
-    (coefficientEvaluation_exact n).1
-  have : PreservesFiniteColimits
-      (coefficientEvaluation (J := K) (O := O) (ell := ell) n) :=
-    (coefficientEvaluation_exact n).2
-  exact Localization.liftNatIso DerivedCategory.Q
-    (HomologicalComplex.quasiIso (CoefficientSystem (J := K) O ell) (.up ℤ))
-    (DerivedCategory.Q ⋙ P.evaluation n)
-    (DerivedCategory.Q ⋙
-      (coefficientEvaluation (J := K) (O := O) (ell := ell) n).mapDerivedCategory)
-    (P.evaluation n)
-    (coefficientEvaluation (J := K) (O := O) (ell := ell) n).mapDerivedCategory
-    (P.evaluationFactors n ≪≫
-      (coefficientEvaluation (J := K) (O := O) (ell := ell) n).mapDerivedCategoryFactors.symm)
+/-- Normalization means invertibility of the actual adjoint derived transitions.
+Source: Zheng, Construction 4.1 (blueprint: lem-pur-coefficient-system-derived-comparison). -/
+def IsNormalizedCoefficientSystem
+    (P : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))
+    (M : DerivedCategory (CoefficientSystem (J := J) O ell)) : Prop :=
+  ∀ {m n : ℕ} (h : n ≤ m), IsIso
+    (((P.scalar h).derivedAdj.homEquiv ((P.evaluation m).obj M)
+      ((P.evaluation n).obj M)).symm ((P.transition h).app M))
 
-omit [HasWeakSheafify K (Type w)]
-  [K.HasSheafCompose (CategoryTheory.forget CommRingCat.{w})]
-  [K.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{w})] in
-private theorem coefficientEvaluation_detectsIso
-    (P : CoefficientEvaluationDerivedPackage (J := K) (O := O) (ell := ell))
-    {M N : DerivedCategory (CoefficientSystem (J := K) O ell)} (f : M ⟶ N) :
-    IsIso f ↔ ∀ n : ℕ, IsIso ((P.evaluation n).map f) := by
-  have hlim (n : ℕ) : PreservesFiniteLimits
-      (coefficientEvaluation (J := K) (O := O) (ell := ell) n) :=
-    (coefficientEvaluation_exact n).1
-  have hcolim (n : ℕ) : PreservesFiniteColimits
-      (coefficientEvaluation (J := K) (O := O) (ell := ell) n) :=
-    (coefficientEvaluation_exact n).2
-  have hj := Functor.jointlyReflectIsomorphisms_mapDerivedCategory
-    (coefficientEvaluation_jointlyReflects O ell (K := K))
-  constructor
-  · intro hf n
-    infer_instance
-  · intro hf
-    apply (hj.isIso_iff f).2
-    intro n
-    exact (NatIso.isIso_map_iff (coefficientEvaluation_derivedIso O ell P n) f).1 (hf n)
+set_option genInjectivity false in
+set_option genSizeOfSpec false in
+set_option maxHeartbeats 800000 in
+-- Elaborate the canonical comparison equations against both evaluation packages.
+/-- The full derived comparison and its coherence on systems and all derived maps.
+Every functor is tied to the ordinary geometric functors or to the universal derived
+scalar extension; the two adjunction equations fix the evaluation comparison.
+Source: Zheng, Construction 4.1 and Lemma 4.10
+(blueprint: lem-pur-coefficient-system-derived-comparison). -/
+structure CoefficientSystemDerivedImage
+    (S : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj)
+    (PY : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))
+    (PX : CoefficientEvaluationDerivedPackage (J := K) (O := O) (ell := ell)) where
+  system : CoefficientDerivedImage S.inverse S.rightSystem S.systemAdj
+  level : ∀ n, CoefficientDerivedImage (S.lift n).modules (S.right n) (S.levelAdj n)
+  inverseEvaluation : ∀ n, system.inverse ⋙ PX.evaluation n ≅
+    PY.evaluation n ⋙ (level n).inverse
+  inverseEvaluation_rep : ∀ n H,
+    (inverseEvaluation n).hom.app (DerivedCategory.Q.obj H) ≫
+      (level n).inverse.map ((PY.evaluationFactors n).hom.app H) ≫
+      (level n).inverseFactors.hom.app
+        (((coefficientEvaluation (J := J) n).mapHomologicalComplex (.up ℤ)).obj H) =
+    (PX.evaluation n).map (system.inverseFactors.hom.app H) ≫
+      (PX.evaluationFactors n).hom.app ((S.inverse.mapHomologicalComplex (.up ℤ)).obj H) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (S.inverseEvaluation n) (.up ℤ)).hom.app H)
+  directEvaluation : ∀ n, system.direct ⋙ PY.evaluation n ≅
+    PX.evaluation n ⋙ (level n).direct
+  counit : ∀ n M,
+    (inverseEvaluation n).hom.app (system.direct.obj M) ≫
+      (level n).inverse.map ((directEvaluation n).hom.app M) ≫
+      (level n).adjunction.counit.app ((PX.evaluation n).obj M) =
+    (PX.evaluation n).map (system.adjunction.counit.app M)
+  unit : ∀ n H,
+    (PY.evaluation n).map (system.adjunction.unit.app H) ≫
+      (directEvaluation n).hom.app (system.inverse.obj H) ≫
+      (level n).direct.map ((inverseEvaluation n).hom.app H) =
+    (level n).adjunction.unit.app ((PY.evaluation n).obj H)
+  tensor : ∀ {m n : ℕ} (h : n ≤ m),
+    coefficientTensor (J := J) (O := O) (ell := ell) h ⋙ (S.lift n).modules ≅
+      (S.lift m).modules ⋙ coefficientTensor (J := K) (O := O) (ell := ell) h
+  tensor_unit : ∀ {m n : ℕ} (h : n ≤ m) M,
+    (S.lift m).modules.map ((coefficientTensorAdj (J := J) h).unit.app M) ≫
+      (S.restrictInverse h).hom.app ((coefficientTensor (J := J) h).obj M) ≫
+      (coefficientRestriction (J := K) O ell h).map ((tensor h).hom.app M) =
+    (coefficientTensorAdj (J := K) h).unit.app ((S.lift m).modules.obj M)
+  derivedTensor : ∀ {m n : ℕ} (h : n ≤ m),
+    (PY.scalar h).derived ⋙ (level n).inverse ≅
+      (level m).inverse ⋙ (PX.scalar h).derived
+  derivedTensor_rep : ∀ {m n : ℕ} (h : n ≤ m) P,
+    CochainComplex.IsKFlatIndependentCoefficients
+      (R := coefficientQuotientSheaf (J := J) O ell m) P →
+    (∀ i : ℤ, IsFlatOnSite (R := coefficientQuotientSheaf (J := J) O ell m) (P.X i)) →
+    (derivedTensor h).hom.app (DerivedCategory.Q.obj P) ≫
+      (PX.scalar h).derived.map ((level m).inverseFactors.hom.app P) ≫
+      (PX.scalar h).counit.app (((S.lift m).modules.mapHomologicalComplex (.up ℤ)).obj P) =
+    (level n).inverse.map ((PY.scalar h).counit.app P) ≫
+      (level n).inverseFactors.hom.app
+        (((coefficientTensor (J := J) h).mapHomologicalComplex (.up ℤ)).obj P) ≫
+      DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (tensor h) (.up ℤ)).hom.app P)
+  restrictedDirect : ∀ {m n : ℕ} (h : n ≤ m),
+    (PX.scalar h).restriction ⋙ (level m).direct ≅
+      (level n).direct ⋙ (PY.scalar h).restriction
+  restrictedDirect_mate : ∀ {m n : ℕ} (h : n ≤ m) A B
+    (f : (level n).inverse.obj ((PY.scalar h).derived.obj A) ⟶ B),
+    (PY.scalar h).derivedAdj.homEquiv A ((level n).direct.obj B)
+      ((level n).adjunction.homEquiv _ B f) =
+    (level m).adjunction.homEquiv A ((PX.scalar h).restriction.obj B)
+      ((PX.scalar h).derivedAdj.homEquiv ((level m).inverse.obj A) B
+        ((derivedTensor h).inv.app A ≫ f)) ≫ (restrictedDirect h).hom.app B
+  restrictedInverse : ∀ {m n : ℕ} (h : n ≤ m),
+    (PY.scalar h).restriction ⋙ (level m).inverse ≅
+      (level n).inverse ⋙ (PX.scalar h).restriction
+  restrictedInverse_mate : ∀ {m n : ℕ} (h : n ≤ m) A,
+    (level m).adjunction.homEquiv _ _ ((restrictedInverse h).hom.app A) =
+      (PY.scalar h).restriction.map ((level n).adjunction.unit.app A) ≫
+        (restrictedDirect h).inv.app ((level n).inverse.obj A)
+  inverseTransition : ∀ {m n : ℕ} (h : n ≤ m) H,
+    (PX.transition h).app (system.inverse.obj H) ≫
+      (PX.scalar h).restriction.map ((inverseEvaluation n).hom.app H) =
+    (inverseEvaluation m).hom.app H ≫ (level m).inverse.map ((PY.transition h).app H) ≫
+      (restrictedInverse h).hom.app ((PY.evaluation n).obj H)
+  directTransition : ∀ {m n : ℕ} (h : n ≤ m) M,
+    (PY.transition h).app (system.direct.obj M) ≫
+      (PY.scalar h).restriction.map ((directEvaluation n).hom.app M) =
+    (directEvaluation m).hom.app M ≫ (level m).direct.map ((PX.transition h).app M) ≫
+      (restrictedDirect h).hom.app ((PX.evaluation n).obj M)
+  detectsIso : ∀ {M N : DerivedCategory (CoefficientSystem (J := K) O ell)} (f : M ⟶ N),
+    IsIso f ↔ ∀ n : ℕ, IsIso ((PX.evaluation n).map f)
+  boundedBelow : ∀ M : DerivedCategory (CoefficientSystem (J := K) O ell),
+    (∃ a : ℤ, M.IsGE a) → ∃ a : ℤ, (system.direct.obj M).IsGE a
+  origin :
+    (∀ n (A B : DerivedCategory (coefficientLevelModules (J := J) O ell n)),
+      (∃ a : ℤ, A.IsGE a) → (∃ b : ℤ, B.IsGE b) →
+      Function.Bijective ((level n).inverse.map : (A ⟶ B) → _)) →
+    ∀ M : DerivedCategory (CoefficientSystem (J := K) O ell),
+      (∃ a : ℤ, M.IsGE a) →
+      (∀ n, ∃ H : DerivedCategory (coefficientLevelModules (J := J) O ell n),
+        (∃ a : ℤ, H.IsGE a) ∧
+        Nonempty ((level n).inverse.obj H ≅ (PX.evaluation n).obj M)) →
+      IsIso (system.adjunction.counit.app M) ∧
+        (IsNormalizedCoefficientSystem O ell PX M →
+          IsNormalizedCoefficientSystem O ell PY (system.direct.obj M))
 
 set_option maxHeartbeats 800000 in
 -- Instantiate both sites and all ordinary/derived coherence structures.
@@ -241,50 +387,6 @@ theorem coefficientSystemDerivedComparison
       (PY : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))
       (PX : CoefficientEvaluationDerivedPackage (J := K) (O := O) (ell := ell)),
       Nonempty (CoefficientSystemDerivedImage O ell L V adj S PY PX) := by
-  obtain ⟨S⟩ := coefficientSystemOrdinaryImage_exists O ell L V adj
-  obtain ⟨PY⟩ := coefficientEvaluationDerivedLeftAdjoint (J := J) hregular
-  obtain ⟨PX⟩ := coefficientEvaluationDerivedLeftAdjoint (J := K) hregular
-  obtain ⟨T⟩ := coefficientSystemUnboundedComparison O ell L V adj S PY PX
-  let image := T.evaluation
-  let scalar := T.scalar
-  have hlim : PreservesFiniteLimits S.inverse := S.systemExact.1
-  have hcolim : PreservesFiniteColimits S.inverse := S.systemExact.2
-  have hlevelLim (n : ℕ) : PreservesFiniteLimits (S.lift n).modules :=
-    (S.inverseExact n).1
-  have hlevelColim (n : ℕ) : PreservesFiniteColimits (S.lift n).modules :=
-    (S.inverseExact n).2
-  refine ⟨S, PY, PX, ⟨{
-    construction := T
-    detectsIso := coefficientEvaluation_detectsIso O ell PX
-    boundedBelow := ?_
-    origin := ?_ }⟩⟩
-  · rintro M ⟨a, ha⟩
-    exact ⟨a, exactDerivedAdjunction_isGE S.inverse image.system.inverse
-      image.system.inverseFactors image.system.adjunction M a⟩
-  · intro hfull M hM horigin
-    have hc (n : ℕ) :
-        IsIso ((image.level n).adjunction.counit.app ((PX.evaluation n).obj M)) := by
-      obtain ⟨H, hH, ⟨e⟩⟩ := horigin n
-      exact exactDerivedAdjunction_counit_isIso_of_origin (S.lift n).modules
-        (image.level n).inverse (image.level n).inverseFactors
-        (image.level n).adjunction
-        (hfull n) _ H hH e
-    constructor
-    · apply (coefficientEvaluation_detectsIso O ell PX _).2
-      intro n
-      rw [← image.counit n M]
-      infer_instance
-    · intro hnorm m n h
-      have hreflect : (image.level n).inverse.ReflectsIsomorphisms :=
-        exactDerived_reflectsIso_of_boundedBelow_faithful (S.lift n).modules
-          (image.level n).inverse (image.level n).inverseFactors
-          (fun A B hA hB ↦ (hfull n A B hA hB).1)
-      have hnorm' := hnorm h
-      exact isIso_scalar_transpose_of_mate (PY.scalar h).derivedAdj
-        (PX.scalar h).derivedAdj (image.level m).adjunction (image.level n).adjunction
-        (scalar.derivedTensor h) (scalar.restrictedDirect h) (scalar.restrictedDirect_mate h)
-        ((image.directEvaluation m).app M) ((image.directEvaluation n).app M)
-        ((PY.transition h).app (image.system.direct.obj M)) ((PX.transition h).app M)
-        (scalar.directTransition h M)
+  sorry
 
 end SheafOfModules

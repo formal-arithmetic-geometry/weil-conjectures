@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 
 import all WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
+import Sheaf.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
 import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
@@ -172,7 +172,7 @@ theorem picard_affine_structure_model_transport
   let F := Modules.restrictFunctor hU.isoSpec.inv
   let H := E ⋙ F
   let B := Modules.restrictFunctor j₀
-  have : B.Additive := inferInstance
+  have : B.Additive := restriction_additive j₀
   have : PreservesFiniteColimits B := by dsimp [B]; infer_instance
   have : PreservesFiniteLimits B := (openImmersion_restriction_derived_properties j₀).1
   have : (affinePerfectSheafification W U hU).Additive := by

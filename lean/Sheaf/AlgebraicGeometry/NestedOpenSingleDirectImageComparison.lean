@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import all WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
+import Sheaf.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Nested open restriction of a single direct image
@@ -99,8 +99,8 @@ theorem nestedOpen_single_directImage_comparison
   let b := SheafOfModules.overFunctor.{u} (moduleRings U.toScheme.toRingedSpace) V
   let E := (Scheme.Modules.overEquiv V).inverse
   let R := schemeOpenRestriction S U ⋙ b
-  let : A.Additive := inferInstance
-  let : B.Additive := inferInstance
+  let : A.Additive := restriction_additive a
+  let : B.Additive := restriction_additive (V.ι ≫ U.ι)
   let : PreservesFiniteLimits A := (openImmersion_restriction_derived_properties a).1
   let : A.PreservesKInjectiveComplexes := (openImmersion_restriction_derived_properties a).2
   let : PreservesFiniteLimits B := (openImmersion_restriction_derived_properties (V.ι ≫ U.ι)).1
