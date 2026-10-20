@@ -400,38 +400,6 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-1e920803b (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 13 steps, every cited statement, and the proofs of the cone, restriction and duality-map nodes. I also read Stacks 08JB/08JC/0A97 and the master blueprint ancestor, proof paragraph 3. Every sign was recomputed by hand. Step 2: both differentials of the curry c(g)(x⊗y)=g(x)(y) agree, and it matches the duality-map node's uncurrying. Step 3: d b_E = b_E d. Step 4: the Koszul exchange is a chain map. Step 5: T(r)b_P is the curry of evaluation after symmetry. Step 6: χ = (−1)^{p+r} including the leading minus, which exactness against the cone triangle (last arrow −p) requires. Step 7: χ b_{E[1]} = b_E[1], the exponents differing by 2p. Step 9: Hom complexes restrict componentwise, matching 08JB and the restriction node, and j*I is K-injective through the exact j_! adjunction. Step 10: change of K-injective target and the connecting square check out. Step 11: F is R-linear on fractions. Step 12: T[1/s] is triangulated by the localization lemma, and F̄, d̄, ψ̄ are well defined. Step 13: two-out-of-three applies with all its hypotheses met. Edge cases checked: zero complex, O[0], characteristic 2, s nilpotent, and a non-reflexive vector space; no invertibility is claimed. There are no new nodes, the statement is unchanged, and the search over bidual, double-dual, evaluation and two-out-of-three nodes found no duplicate. The node is not a target, so the base-change check does not apply, and no SGA source is cited. One fault, C8/route: lem-sfb-ringed-site-duality-maps (unit sk-thm-sf-ctf-stability, outside the route, not Lean-closed) is used in steps 3, 5 and 10 without a declaration. The fixes file for the item adds that split_report.tool_uses entry and changes nothing else. I accept all 12 declared tool_uses plus this one; most of the declared ones are in fact inside the route, which is harmless.; 1 file(s) fixed by the reviewer"
  },
- "lean": {
-  "module": "Sheaf.CategoryTheory.CoefficientBidualTriangles",
-  "declaration": "CategoryTheory.CoefficientBidualTriangles.compatibility",
-  "declarations": [
-   "CategoryTheory.CoefficientBidualTriangles.Modules",
-   "CategoryTheory.CoefficientBidualTriangles.D",
-   "CategoryTheory.CoefficientBidualTriangles.Complex",
-   "CategoryTheory.CoefficientBidualTriangles.dual",
-   "CategoryTheory.CoefficientBidualTriangles.bidual",
-   "CategoryTheory.CoefficientBidualTriangles.bidualMap",
-   "CategoryTheory.CoefficientBidualTriangles.targetResolution",
-   "CategoryTheory.CoefficientBidualTriangles.modelMap",
-   "CategoryTheory.CoefficientBidualTriangles.signedHomShift",
-   "CategoryTheory.CoefficientBidualTriangles.signedModelShift",
-   "CategoryTheory.CoefficientBidualTriangles.compatibility",
-   "CategoryTheory.CoefficientBidualTriangles.canonicalCommShift",
-   "CategoryTheory.CoefficientBidualTriangles.restriction",
-   "CategoryTheory.CoefficientBidualTriangles.subBidual",
-   "CategoryTheory.CoefficientBidualTriangles.subBidualMap",
-   "CategoryTheory.CoefficientBidualTriangles.coefficientLinear_existsUnique",
-   "CategoryTheory.CoefficientBidualTriangles.coefficientLinear",
-   "CategoryTheory.CoefficientBidualTriangles.subBidual_linear",
-   "CategoryTheory.CoefficientBidualTriangles.scalarCompatibility"
-  ],
-  "file": "lean/Sheaf/CategoryTheory/CoefficientBidualTriangles.lean",
-  "statement": "theorem compatibility (M : RingedSiteDualityModel.{c, v, r, w} J O) : ∃ cs : (bidual.{c, v, r, w} J O).CommShift ℤ, (fun [comm : (bidual.{c, v, r, w} J O).CommShift ℤ] ↦ (bidual.{c, v, r, w} J O).IsTriangulated ∧ NatTrans.CommShift (bidualMap.{c, v, r, w} J O M) ℤ ∧ (∀ E : Complex.{c, v, r} J O, DerivedCategory.Q.map (signedModelShift.{c, v, r} J O E).hom ≫ ((DerivedCategory.Q).commShiftIso (1 : ℤ)).hom.app _ ≫ (modelMap.{c, v, r, w} J O E)⟦(1 : ℤ)⟧' = modelMap.{c, v, r, w} J O (E⟦(1 : ℤ)⟧) ≫ (bidual.{c, v, r, w} J O).map (((DerivedCategory.Q).commShiftIso (1 : ℤ)).hom.app E) ≫ ((bidual.{c, v, r, w} J O).commShiftIso (1 : ℤ)).hom.app (DerivedCategory.Q.obj E)) ∧ (∀ T : Triangle (D.{c, v, r, w} J O), T ∈ distTriang _ → ∃ f : T ⟶ (bidual.{c, v, r, w} J O).mapTriangle.obj T, f.hom₁ = (bidualMap.{c, v, r, w} J O M).app T.obj₁ ∧ f.hom₂ = (bidualMap.{c, v, r, w} J O M).app T.obj₂ ∧ f.hom₃ = (bidualMap.{c, v, r, w} J O M).app T.obj₃) ∧ (∀ (V : D.{c, v, r, w} J O) (n : ℤ), IsIso ((bidualMap.{c, v, r, w} J O M).app (V⟦n⟧)) ↔ IsIso ((bidualMap.{c, v, r, w} J O M).app V)) ∧ (∀ T : Triangle (D.{c, v, r, w} J O), T ∈ distTriang _ → (IsIso ((bidualMap.{c, v, r, w} J O M).app T.obj₁) → IsIso ((bidualMap.{c, v, r, w} J O M).app T.obj₂) → IsIso ((bidualMap.{c, v, r, w} J O M).app T.obj₃)) ∧ (IsIso ((bidualMap.{c, v, r, w} J O M).app T.obj₁) → IsIso ((bidualMap.{c, v, r, w} J O M).app T.obj₃) → IsIso ((bidualMap.{c, v, r, w} J O M).app T.obj₂)) ∧ (IsIso ((bidualMap.{c, v, r, w} J O M).app T.obj₂) → IsIso ((bidualMap.{c, v, r, w} J O M).app T.obj₃) → IsIso ((bidualMap.{c, v, r, w} J O M).app T.obj₁)))) (comm := cs)",
-  "branch": "newtargets-dag",
-  "by": "Q58",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "The complete node is stated by compatibility (canonical signed shifts, exactness, triangle morphisms and closure), restriction (slice Hom comparisons and connecting square), and scalarCompatibility (the tensor-defined raw localization and the same closure properties). All coefficient maps use the recorded evaluation transpose. Helpers give the actual bidual, representative comparisons and uniquely specified central scalar action; no hypothesis that biduality maps are invertible is imposed."
- },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
@@ -439,5 +407,15 @@
   "group": "Q58",
   "result": "pass",
   "note": "Checked all statement clauses, dependencies, canonical maps, signs, universes, edge cases, docstrings, and report sections. scompile.py sandbox and library confirmation passed without diagnostics. Repository unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b619f",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261020T141309-L-2033458",
+  "kind": "interface",
+  "note": "independent cc review: Withdrawal of the unused CoefficientBidualTriangles module (emptied like earlier withdrawn modules; node lean→null only) checked against live: no importers or references, not reachable from Challenge/TargetsCheck (7821 modules), unit realized empty, change record verbatim; compiles"
  }
 }
