@@ -99,44 +99,14 @@ noncomputable def finiteConstantProjectionMap
       (Functor.associator C_Y (upperStar (ModuleCat.{u + 1} A) f) S_X).inv (T_X ⋙ R) ≫
     Functor.whiskerRight β (T_X ⋙ R)
 
-/-- With a uniform all-sheaf cohomological-dimension bound and Noetherian coefficients,
-the canonical projection map is an isomorphism for a bounded-above complex and a finitely
-presented constant module. Naturality in `M` is built into `finiteConstantProjectionMap`.
-Source: blueprint sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-lemma lem-sf-projection-finite-constant
+/-- The projection component before the constant-pullback identification.
+Source: the proof of the finite-constant projection theorem immediately below
 (blueprint: lem-sf-projection-finite-constant).
-
-Proof plan:
-1. Constant sheaves are exact by exact sheafification
-   (lem-weil-pbc-site-r-module-presheaf-sheafification-exact). The constant inverse-image
-   isomorphism respects addition and scalars (lem-weil-pbc-sets-etale-inverse-image-constant-sheaf);
-   inverse image is exact (prop-weil-pbc-inverse-image-modules-exact). Thus the mate is natural
-   on constant complexes and its value on `M[0]` is the displayed map.
-2. The projection mate is compatible with distinguished triangles and is the identity at
-   the tensor unit (lem-weil-pbc-ringed-projection-mate-exact). Finite sums and shifts give
-   the assertion for finite free modules. Brutal truncations, the cohomology long exact
-   sequence (lem-sf-derived-homology-long-exact), the five lemma (lem-weil-pbc-five-lemma),
-   and cohomological detection of isomorphisms (lem-weil-pbc-unbounded-derived-iso-cohomology)
-   extend it to bounded finite free complexes.
-3. Resolve `M` by finite free modules in nonpositive degrees. Noetherian submodules are
-   finite (lem-weil-pbc-noetherian-submodule-finite), so all syzygies can be covered by finite
-   free modules. For `P_m = σ_{≥-m} P`, the cone of `P_m → M` has cohomology at most `-m-1`:
-   its degree zero cohomology vanishes by surjectivity, also for `m = 0`, and exactness
-   kills degrees `-m` through `-1` for `m > 0`. Only the bottom kernel can survive.
-4. Direct image is additive and left exact (lem-weil-pbc-module-direct-image-left-exact),
-   and module sheaves have enough injectives (lem-weil-pbc-module-sheaves-enough-injectives).
-   The uniform bound and lem-sf-finite-cd-derived-upper-bound (Stacks 07K7, (4)(c)) give
-   `Rf_* D^{≤t} ⊆ D^{≤t+N}`, in particular `Rf_*K ∈ D^{≤b+N}` for an upper bound `b` of `K`.
-5. Bounded-above flat replacements (lem-kun-bounded-flat-replacement) are K-flat
-   (lem-kun-kflat-criteria). Their total tensor has no summand above the sum of the upper
-   term bounds. Exactness of constant sheaves and Step 4 put both error terms with the
-   constant cone in `D^{≤b+N-m-1}`.
-6. For a fixed `r`, choose `m ≥ 0` with `b+N-m-1 < r-1`. The long exact sequences show
-   that replacing `M` by `P_m` changes neither side's degree `r` cohomology. Naturality
-   gives a square whose other three sides are invertible, so the map for `M` is invertible
-   on degree `r` cohomology. Do this for every `r` and use cohomological detection of
-   isomorphisms. Naturality requires no natural choice of the free resolution. -/
-theorem isIso_finiteConstantProjectionMap
+This is the existing proof's intermediate `hα`, named so proof consumers can use the
+projection component without unfolding `finiteConstantProjectionMap`. The same
+finite-free approximation argument proves it; the public theorem then composes it
+with the constant-pullback isomorphisms. -/
+private theorem finiteConstantProjectionComponent_isIso
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ)
     (hcd : ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℕ),
@@ -147,7 +117,9 @@ theorem isIso_finiteConstantProjectionMap
     (hK : ∃ b : ℤ, ∀ q : ℤ, b < q →
       IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj K))
     (M : ModuleCat.{u + 1} A) [Module.FinitePresentation A M] :
-    IsIso ((finiteConstantProjectionMap A f K).app M) := by
+    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app K).app
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj
+        ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M))) := by
   classical
   let C := constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)
   let R := (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor
@@ -216,6 +188,58 @@ theorem isIso_finiteConstantProjectionMap
     let e := (C.mapDerivedCategorySingleFunctor 0).app M
     exact (NatTrans.isIso_app_iff_of_iso (F := F) (G := G) α e).1 hτ
   dsimp only [α, C] at hα
+  exact hα
+
+/-- With a uniform all-sheaf cohomological-dimension bound and Noetherian coefficients,
+the canonical projection map is an isomorphism for a bounded-above complex and a finitely
+presented constant module. Naturality in `M` is built into `finiteConstantProjectionMap`.
+Source: blueprint sec-six-functors/sk-prop-sf-rf-shriek-preservation,
+lemma lem-sf-projection-finite-constant
+(blueprint: lem-sf-projection-finite-constant).
+
+Proof plan:
+1. Constant sheaves are exact by exact sheafification
+   (lem-weil-pbc-site-r-module-presheaf-sheafification-exact). The constant inverse-image
+   isomorphism respects addition and scalars (lem-weil-pbc-sets-etale-inverse-image-constant-sheaf);
+   inverse image is exact (prop-weil-pbc-inverse-image-modules-exact). Thus the mate is natural
+   on constant complexes and its value on `M[0]` is the displayed map.
+2. The projection mate is compatible with distinguished triangles and is the identity at
+   the tensor unit (lem-weil-pbc-ringed-projection-mate-exact). Finite sums and shifts give
+   the assertion for finite free modules. Brutal truncations, the cohomology long exact
+   sequence (lem-sf-derived-homology-long-exact), the five lemma (lem-weil-pbc-five-lemma),
+   and cohomological detection of isomorphisms (lem-weil-pbc-unbounded-derived-iso-cohomology)
+   extend it to bounded finite free complexes.
+3. Resolve `M` by finite free modules in nonpositive degrees. Noetherian submodules are
+   finite (lem-weil-pbc-noetherian-submodule-finite), so all syzygies can be covered by finite
+   free modules. For `P_m = σ_{≥-m} P`, the cone of `P_m → M` has cohomology at most `-m-1`:
+   its degree zero cohomology vanishes by surjectivity, also for `m = 0`, and exactness
+   kills degrees `-m` through `-1` for `m > 0`. Only the bottom kernel can survive.
+4. Direct image is additive and left exact (lem-weil-pbc-module-direct-image-left-exact),
+   and module sheaves have enough injectives (lem-weil-pbc-module-sheaves-enough-injectives).
+   The uniform bound and lem-sf-finite-cd-derived-upper-bound (Stacks 07K7, (4)(c)) give
+   `Rf_* D^{≤t} ⊆ D^{≤t+N}`, in particular `Rf_*K ∈ D^{≤b+N}` for an upper bound `b` of `K`.
+5. Bounded-above flat replacements (lem-kun-bounded-flat-replacement) are K-flat
+   (lem-kun-kflat-criteria). Their total tensor has no summand above the sum of the upper
+   term bounds. Exactness of constant sheaves and Step 4 put both error terms with the
+   constant cone in `D^{≤b+N-m-1}`.
+6. For a fixed `r`, choose `m ≥ 0` with `b+N-m-1 < r-1`. The long exact sequences show
+   that replacing `M` by `P_m` changes neither side's degree `r` cohomology. Naturality
+   gives a square whose other three sides are invertible, so the map for `M` is invertible
+   on degree `r` cohomology. Do this for every `r` and use cohomological detection of
+   isomorphisms. Naturality requires no natural choice of the free resolution. -/
+theorem isIso_finiteConstantProjectionMap
+    (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ)
+    (hcd : ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℕ),
+      N < q → IsZero ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+        ((lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor.obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj F))))
+    (K : DerivedCategoryModule A X)
+    (hK : ∃ b : ℤ, ∀ q : ℤ, b < q →
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj K))
+    (M : ModuleCat.{u + 1} A) [Module.FinitePresentation A M] :
+    IsIso ((finiteConstantProjectionMap A f K).app M) := by
+  have hα := finiteConstantProjectionComponent_isIso A f N hcd K hK M
   dsimp only [finiteConstantProjectionMap, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app]
   refine IsIso.comp_isIso' ?_ ?_

@@ -24,6 +24,19 @@
  ],
  "proof": [
   {
+   "text": "Consolidate the two canonical etale scalar/pullback definitions by reusing the published K-flat-normalized isomorphism. Prove that it equals the previous inverse scalar mate: iterated ordinary mates identify the ordinary reverse comparison; its scalar-unit equation holds degreewise; the exact localization square commutes with the geometric representative factors; the derived scalar adjunction gives the reverse normalization. Invert it and invoke uniqueness of the K-flat normalization. This is a complete compatibility proof and preserves the maps in the remaining steps.",
+   "uses": [
+    "def-pur-etale-scalar-pullback-iso",
+    "lem-sbc-restrict-scalars-derived-adjunction-identities",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Canonical scalar/pullback comparison; Stacks 07A4, 0G7E and 07A7"
+   }
+  },
+  {
    "text": "Write $C_Z^R=\\nu_Z^*$ over $R$, $l_R=f_{\\mathrm{et},R}^*$, $p_R=f_{\\mathrm{proet},R}^*$, $r_R=Rf_{\\mathrm{et},*,R}$, $s_R=Rf_{\\mathrm{proet},*,R}$, and $T_Z^e,T_Z^p$ for scalar extension. The adjunctions $l_R\\dashv r_R$ and $p_R\\dashv s_R$ are the canonical ordinary derived adjunctions [def-kun-projection-formula-map, def-weil-pbc-proetale-operations]. Let $d_{R,M}:p_RC_Y^RM\\xrightarrow{\\sim}C_X^Rl_RM$ be the inverse-image square in [sk-thm-pe-direct-image-comparison]. Its counit compatibility, read using the transpose formula [def-weil-pbc-adjunction-mate], is\n$$\\varepsilon^p_{R,C_X^RL}\\circ p_R(\\beta^R_L)=C_X^R(\\varepsilon^e_{R,L})\\circ d_{R,r_RL}.$$\nHere $\\beta^A_J$ and $\\beta^B_{T_X^eJ}$ are invertible: $f$ is qcqs, and $J$ and $T_X^eJ$ are bounded below by hypothesis. This invokes the arbitrary-discrete-ring theorem, rather than the finite-ring-only canonical-mate node.",
    "uses": [
     "def-kun-projection-formula-map",
@@ -94,12 +107,15 @@
   "lem-pur-derived-change-of-rings",
   "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "sk-thm-pe-direct-image-comparison"
+  "sk-thm-pe-direct-image-comparison",
+  "def-pur-etale-scalar-pullback-iso",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-  "place": "Finite rings paragraph; expanded counit-transpose calculation using Stacks 07A4, 0D6D and 07A6 (lemma-adjoint)"
+  "place": "Finite rings paragraph; expanded counit-transpose calculation using Stacks 07A4, 0D6D and 07A6 (lemma-adjoint); C4 canonical scalar/pullback definition consolidation and proved inverse-mate identification"
  },
  "mathlib_searches": [
   {
@@ -292,5 +308,15 @@
   "group": "Q13",
   "result": "fix",
   "note": "Read node, 13 stmt_dep records, parent det-prop-scalar-six-direct-image, module, report and the exact upstream declarations. Every clause matches: qcqs f, A,B:Type(u+1) CommRing, J in D+ with T_X J in D+, delta=pbcComparisonReduction (published canonical mate, direction checked), beta=mate of the exact inverse-image square inverted only under hJ, gamma^t=mateEquiv over the canonical scalar/pullback iso (inverse of the restriction-square mate, invertibility a postponed named theorem); composition order and endpoints equal the node's display. No hollow defs, 3 theorem sorries, docstrings carry source/blueprint and the proof steps, no line over 100 chars, statement verbatim, only the lean record added. nt_compile clean (23.4 s, 28.0 s). H4 finding: scalarPullbackEtaleIso and the etale mate duplicate published Etale.scalarPullbackIso/Etale.scalarMate (lem-pur-etale-scalar-mate-projection, used by the parent). Switching to them fails: PurEtaleScalarMateProjection clashes on import with ProEtale.Derived.RestrictScalars (duplicate upperStarIsoLowerStarInv; verified with import-pair tests), so the local helper is forced. Identifying the two forms is a stage-3 Lean step, not a DAG gap. Ambient beta helper accepted: the recorded directImageComparison is D+/ULift only. FIX is documentation only: docstring at scalarPullbackEtaleIso plus lean.note; fixed module compiles clean (29.6 s), statement byte-identical."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-e3ef4",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261020T233102-L-892381",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs earlier PASSed head 56a146233 (Lean and nodes byte-identical; only the change record Users row and report differ), live base hunks vs packet; compiled the 3 delivered modules + 5 direct importers (live text) in sandbox at timeout 560"
  }
 }
