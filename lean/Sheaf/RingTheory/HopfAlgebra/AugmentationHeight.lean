@@ -11,7 +11,7 @@ import Mathlib.RingTheory.HopfAlgebra.Convolution
 import Mathlib.RingTheory.HopfAlgebra.TensorProduct
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
-import Sheaf.RingTheory.IntegralExtensionDimension
+import WeilConjectures.RingTheory.IntegralExtensionDimension
 import WeilConjectures.RingTheory.KrullDimension.GoingDown
 
 /-!
@@ -151,7 +151,7 @@ theorem height_ker_counit_eq_ringKrullDim
   have : Module.FaithfullyFlat A C := inferInstance
   have hdimC : ringKrullDim C = ringKrullDim A := by
     apply le_antisymm
-    · exact (RingHom.integralExtensionDimension (algebraMap A C)
+    · exact (RingHom.IsIntegral.ringKrullDim_le_and_isMaximal_comap (algebraMap A C)
         (Algebra.IsIntegral.isIntegral (R := A))).1
     · exact ringKrullDim_le_of_goingDown_of_surjective (algebraMap A C)
         (by

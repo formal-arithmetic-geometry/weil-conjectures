@@ -157,14 +157,14 @@
   "note": "2 steps following Stacks 00OJ: chains of primes contract to strict chains by incomparability (new leaf, Ideal.IsIntegral.comap_lt_comap, GoingUp.lean:221 verified by L); maximal contracts to maximal (new leaf, GoingUp.lean:211 verified). New definition leaf def-weil-pbc-krull-dimension-ring (ringKrullDim, KrullDimension/Basic.lean:30 verified). Statement now cites the definitions (was empty stmt_deps). Stage 3: the imported pqf-lem-incomparability (unit sk-prop-av-pqf-finite) states the same fact as the new 00GT leaf."
  },
  "lean": {
-  "module": "Sheaf.RingTheory.IntegralExtensionDimension",
-  "declaration": "RingHom.integralExtensionDimension",
-  "file": "lean/Sheaf/RingTheory/IntegralExtensionDimension.lean",
-  "statement": "theorem integralExtensionDimension {R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) (hf : f.IsIntegral) : ringKrullDim S ≤ ringKrullDim R ∧ ∀ (I : Ideal S), I.IsMaximal → (I.comap f).IsMaximal",
+  "module": "WeilConjectures.RingTheory.IntegralExtensionDimension",
+  "declaration": "RingHom.IsIntegral.ringKrullDim_le_and_isMaximal_comap",
+  "file": "lean/WeilConjectures/RingTheory/IntegralExtensionDimension.lean",
+  "statement": "theorem IsIntegral.ringKrullDim_le_and_isMaximal_comap {R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) (hf : f.IsIntegral) : ringKrullDim S ≤ ringKrullDim R ∧ ∀ (I : Ideal S), I.IsMaximal → (I.comap f).IsMaximal",
   "branch": "sheaf-dag",
   "by": "F1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": true
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -175,17 +175,13 @@
   "note": "ring map f : R →+* S of CommRings (no injectivity, as node); B integral over A = f.IsIntegral (Mathlib ring-map form, ∀ x, f.IsIntegralElem x; non-hollow); dim B ≤ dim A = ringKrullDim S ≤ ringKrullDim R (ring dimension, node wording); maximal of B over maximal of A = ∀ I maximal, (I.comap f).IsMaximal; #check resolves root ringKrullDim; no Mathlib theorem states the dimension inequality"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "F1",
+  "reviewer": "C-2a95e",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T173822-L-3294452",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "RingHom.integralExtensionDimension"
-  ],
-  "sorry_after": []
+  "landing": "20261020T144258-L-2260983",
+  "kind": "interface",
+  "note": "independent cc review: removed RingHom.integralExtensionDimension vs live WeilConjectures RingHom.IsIntegral.ringKrullDim_le_and_isMaximal_comap (identical signature and proof); AugmentationHeight 2-line adaptation compiled; node lean record rebinding vs WeilConjectures signature"
  }
 }
