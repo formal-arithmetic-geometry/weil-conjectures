@@ -7,7 +7,7 @@
 #   2  tools/add_proof_imports.py --check (no lock, reads only): nothing missing -> no commit, done.
 #      The tool itself never adds to a node that is proved, to the two reserved target modules, or an import that
 #      closes a cycle.
-#   3  under coord/.merge.lock and local/tree.lock (the tool's run, about 25 s): write the imports
+#   3  under coord/.merge.lock: the Python writer owns local/tree.lock for its whole mutation
 #   4  without the locks: compile each touched file alone (tools/lean_file.sh, 60 s)
 #   5  under coord/.merge.lock: a file that did not compile loses the lines just added (tried again after the next
 #      build: the usual cause is an import landed but not built yet; after 3 failures its pairs go to
@@ -36,10 +36,10 @@ grep -q '^missing, to add: [1-9]' "$W/cycle.check" || { say "check failed: $(tai
 python3 -c "import json,pathlib; p=pathlib.Path('local/batch/proof-imports.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps({'commit':'$COMMIT'}))"
 trap 'rm -f local/batch/proof-imports.json' EXIT
 exec 8>> coord/.merge.lock; flock -w 110 8 || { say "merge lock busy; next cycle"; exit 0; }
-exec 9>> local/tree.lock;   flock -w 60 9 || { say "tree lock busy; next cycle"; exit 0; }
-[ ! -e local/batch/open.json ] && [ ! -e local/batch/landing.json ] || { flock -u 9; flock -u 8; exit 0; }
+# The writer takes local/tree.lock itself. An outer lock here deadlocks its landing record.
+[ ! -e local/batch/open.json ] && [ ! -e local/batch/landing.json ] || { flock -u 8; exit 0; }
 python3 tools/add_proof_imports.py --apply-plan "$J" > "$W/cycle.write" 2>&1; rc=$?
-flock -u 9; flock -u 8
+flock -u 8
 [ $rc = 0 ] || { say "write failed: $(tail -1 "$W/cycle.write")"; exit 0; }
 mapfile -t MODS < <(python3 -c "import json;print('\n'.join(sorted({x[0] for x in json.load(open('$J')).get('added', [])})))")
 [ ${#MODS[@]} -gt 0 ] || { echo "$COMMIT" > "$W/cycle.stamp"; exit 0; }

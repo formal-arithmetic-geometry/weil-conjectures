@@ -60,7 +60,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean:104:0: error: Unexpected name `Unbounded` after `end`: The current section |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Coherence.lean:116:0: error: Unexpected name `Eta` after `end`: |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 31, stage 3 149 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 31, stage 3 152 items.
 
 ## Stage 1: nodes to split (1)
 
@@ -80,21 +80,21 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
 | `WeilConjectures.WeilSheaf.GrothendieckLefschetz` | 6 | 1 | proof | route |
+| `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 7 | 1 | proof | route |
+| `WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek` | 8 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.PoincareDualityLisse` | 9 | 1 | proof | route |
-| `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 14 | 1 | proof | route |
-| `WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek` | 16 | 1 | proof | route |
+| `WeilConjectures.ConstructibleSheaf.Noetherian` | 12 | 2 | proof | route |
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifUpperShriek` | 16 | 1 | proof | route |
-| `WeilConjectures.ConstructibleSheaf.Noetherian` | 19 | 2 | proof | route |
 | `Sheaf.CategoryTheory.LocalizationInverseImageCoherence` | - | 7 | proof | 2 |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback` | - | 1 | proof | 3 |
 | `Sheaf.Algebra.Homology.SignedDoubleHomCone` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.ConstantLeftModuleInverseImage` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.SignedFibreTriangulated` | - | 1 | proof | 3 |
 | `Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence` | - | 2 | proof | 3 |
+| `Sheaf.FieldTheory.BertiniFieldExtension` | 7 | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.DncAffineBlowupComplement` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.StandardGroupSchemes` | - | 12 | proof | 4 |
-| `Sheaf.FieldTheory.BertiniFieldExtension` | - | 1 | proof | 4 |
 | `Sheaf.Paper.InvertibleTensorScalarExtension` | - | 1 | proof | 4 |
 | `Sheaf.Paper.KFlatConeComparison` | - | 1 | proof | 4 |
 | `Sheaf.SecSmoothPurity.CochainTensorCoherenceData` | - | 4 | proof | 4 |
@@ -107,13 +107,15 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.EtaleLisseFiltrationDevissage` | - | 1 | proof | 10 |
 | `Sheaf.Algebra.Homology.IntegerFlatRepresentative` | - | 1 | proof | 17 |
 
-## Stage 3: held for an open upstream PR (20)
+## Stage 3: held for an open upstream PR (23)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
 | module | source |
 |---|---|
 | `WeilConjectures.AlgebraicGeometry.Bertini` | bundle/sec-deligne-laumon-general-d1 |
+| `WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent` | bundle/sec-smooth-purity-d3 |
+| `WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverRefinement` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | bundle/sec-curve-estimates-c1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.Compactification.Refinement` | bundle/sec-deligne-laumon-a1-d1 |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | bundle/sec-deligne-laumon-general-d1 |
@@ -127,6 +129,7 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs` | bundle/sec-smooth-purity-d3 |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal` | bundle/sec-smooth-purity-d1 |
 | `WeilConjectures.WeilSheaf.Finiteness` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
 | `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1,bundle/sec-smooth-purity-d3 |

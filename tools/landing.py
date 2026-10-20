@@ -57,6 +57,12 @@ def merge_queue() -> bool:
 
 @contextlib.contextmanager
 def tree_lock():
+    # A caller that already holds local/tree.lock on its own descriptor (~/cc1/proof-imports-cycle.sh runs
+    # tools/add_proof_imports.py under it) sets SHEAF_TREE_LOCK_HELD=1: a second flock from this process would wait
+    # for the parent forever (2026-10-20 20:30-21:10: merge lock held 40 min, every landing and build stalled).
+    if os.environ.get("SHEAF_TREE_LOCK_HELD") == "1":
+        yield
+        return
     LOCAL.mkdir(exist_ok=True)
     with open(LOCAL / "tree.lock", "w") as f:
         fcntl.flock(f, fcntl.LOCK_EX)

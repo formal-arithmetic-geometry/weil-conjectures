@@ -12,7 +12,7 @@ class OldCycle(unittest.TestCase):
    def plan():return {'#counts':{},'added':[('Sheaf.A','Sheaf.B',[],'')]},{'Sheaf.A':{'Sheaf.B'},'Sheaf.B':set()}
    jf=root/'cycle.json'
    import landing
-   with patch.object(landing,'merge_queue',lambda: False),patch.object(api.li,'ROOT',root),patch.object(api.li,'file_of',side_effect=lambda m:root/'lean'/pathlib.Path(*m.split('.')).with_suffix('.lean')),patch.object(api,'plan',side_effect=plan),contextlib.redirect_stdout(io.StringIO()):
+   with patch.object(landing,'LOCAL',root/'local'),patch.object(landing,'merge_queue',lambda: False),patch.object(api.li,'ROOT',root),patch.object(api.li,'file_of',side_effect=lambda m:root/'lean'/pathlib.Path(*m.split('.')).with_suffix('.lean')),patch.object(api,'plan',side_effect=plan),contextlib.redirect_stdout(io.StringIO()):
     with patch.object(sys,'argv',['add_proof_imports.py','--check']):self.assertEqual(api.main(),1)
     self.assertNotIn('import Sheaf.B',a.read_text())
     with patch.object(sys,'argv',['add_proof_imports.py','--json',str(jf)]):self.assertEqual(api.main(),0)

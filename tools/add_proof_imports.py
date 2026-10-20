@@ -7,7 +7,7 @@ Usage:
                                                      ones left out with the reason; write nothing. Exit 1 if any is
                                                      missing, else 0. The maintainer runs it after each build.
   tools/add_proof_imports.py [--json FILE]           add them (run it as `flock coord/.merge.lock python3 tools/...`;
-                                                     the tool takes no lock itself). Running it twice adds nothing new.
+                                                     the tool owns local/tree.lock). Running it twice adds nothing new.
   options: --public   write `public import` instead of `import` (default: `import`, see below)
            --all      print every edge of every class, not the first 40
 
@@ -298,48 +298,48 @@ def plan():
 
 
 def write(added, public: bool) -> int:
-    from pipeline_guard import proof_imports_guard
-    proof_imports_guard(li.ROOT, {m for m, _, _, _ in added})
-    by = collections.defaultdict(list)
-    for m, dm, _, _ in added:
-        by[m].append(dm)
     import landing as ld
-    mq, before = ld.merge_queue(), {}
-    for m, ds in sorted(by.items()):
-        p = li.file_of(m)
-        text = p.read_text()
-        if mq:
-            before[p.resolve().relative_to(li.LEAN).as_posix()] = p.read_bytes()
-        comment = [(a, b) for k, a, b in li.lex(text) if k in li.COMMENT_KINDS]
-        lines, pos, last, mod_line = text.split("\n"), 0, None, None
-        for n, line in enumerate(lines):
-            start = pos + (len(line) - len(line.lstrip()))
-            pos += len(line) + 1
-            s = line.strip()
-            if not s or any(a <= start < b for a, b in comment):
-                continue
-            if s == "module":
-                mod_line = n
-            elif _IMPORT_LINE.match(s):
-                last = n
-            elif s != "prelude":
-                break
-        kw = "public import" if public and mod_line is not None else "import"
-        new = [f"{kw} {d}" for d in sorted(set(ds))]
-        if last is not None:
-            lines[last + 1:last + 1] = new
-        elif mod_line is not None:
-            lines[mod_line + 1:mod_line + 1] = [""] + new
-        else:
-            lines[0:0] = new + [""]
-        tmp = p.with_name(p.name + ".imports-new")
-        tmp.write_text("\n".join(lines))
-        tmp.replace(p)
-    if before:
-        # merge queue: the change is a landing of its own (writer PI), dropped like any landing if the build is red
-        with ld.tree_lock():
+    with ld.tree_lock():
+        from pipeline_guard import proof_imports_guard
+        proof_imports_guard(li.ROOT, {m for m, _, _, _ in added})
+        by = collections.defaultdict(list)
+        for m, dm, _, _ in added:
+            by[m].append(dm)
+        mq, before = ld.merge_queue(), {}
+        for m, ds in sorted(by.items()):
+            p = li.file_of(m)
+            text = p.read_text()
+            if mq:
+                before[p.resolve().relative_to(li.LEAN).as_posix()] = p.read_bytes()
+            comment = [(a, b) for k, a, b in li.lex(text) if k in li.COMMENT_KINDS]
+            lines, pos, last, mod_line = text.split("\n"), 0, None, None
+            for n, line in enumerate(lines):
+                start = pos + (len(line) - len(line.lstrip()))
+                pos += len(line) + 1
+                s = line.strip()
+                if not s or any(a <= start < b for a, b in comment):
+                    continue
+                if s == "module":
+                    mod_line = n
+                elif _IMPORT_LINE.match(s):
+                    last = n
+                elif s != "prelude":
+                    break
+            kw = "public import" if public and mod_line is not None else "import"
+            new = [f"{kw} {d}" for d in sorted(set(ds))]
+            if last is not None:
+                lines[last + 1:last + 1] = new
+            elif mod_line is not None:
+                lines[mod_line + 1:mod_line + 1] = [""] + new
+            else:
+                lines[0:0] = new + [""]
+            tmp = p.with_name(p.name + ".imports-new")
+            tmp.write_text("\n".join(lines))
+            tmp.replace(p)
+        if before:
+            # merge queue: the change is a landing of its own (writer PI), dropped like any landing if the build is red
             ld.new_record("PI", before, f"imports of the proof dependencies in {len(before)} module(s) (tools/add_proof_imports.py)", kind="proof")
-    return len(by)
+        return len(by)
 
 
 LABEL = {
