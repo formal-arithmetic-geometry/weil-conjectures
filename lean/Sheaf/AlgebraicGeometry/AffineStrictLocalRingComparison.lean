@@ -11,8 +11,8 @@ public import Sheaf.RingTheory.StrictHenselizationPresentation
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.RingTheory.StrictHenselizationPresentationProperties
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
-import Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.RingTheory.EtaleHenselianRingLift
 
@@ -28,6 +28,46 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem small_toBase
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) :
+    Spec.map (smallStrictHenselizationColimitIso s).inv ≫ strictLocalizationToBase s =
+      strictHenselizationStructuralMap s := by
+  classical
+  let : HasColimit (strictHenselizationDiagram s) := inferInstance
+  let rep := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
+  let incl := strictHenselizationAffineInclusion s
+  let : incl.IsEquivalence := strictHenselizationAffineInclusion_isEquivalence s
+  have := (strictHenselization_properties s).2.1
+  let j := Classical.choice (IsCofiltered.nonempty (C :=
+    SmallModel.{u} (strictHenselizationNeighbourhoods s)))
+  have hbig := strictLocalizationCone_π_app_hom s (incl.obj (rep.obj j))
+  rw [strictLocalizationCone_π_app] at hbig
+  have hsmall := (exists_strictHenselizationStructuralMap s).choose_spec j
+  have hleg := Functor.Final.ι_colimitIso_inv (rep ⋙ incl).op
+    (strictHenselizationDiagram s) (op j)
+  change colimit.ι (strictHenselizationDiagram s) (op (incl.obj (rep.obj j))) ≫
+    (smallStrictHenselizationColimitIso s).inv =
+      colimit.ι (strictHenselizationAffineDiagram s) (op j) at hleg
+  let B := (rep.obj j).1.left.unop
+  let f : Spec B ⟶ S := ((AffineEtale.Spec S).obj (rep.obj j).1).hom
+  change (Spec.map (colimit.ι (strictHenselizationDiagram s)
+      (op (incl.obj (rep.obj j)))) ≫ inv (Spec B).toSpecΓ) ≫ f =
+    strictLocalizationToBase s at hbig
+  change Spec.map (colimit.ι (strictHenselizationAffineDiagram s) (op j)) ≫
+    Spec.map (ΓSpecIso B).inv ≫ f = strictHenselizationStructuralMap s at hsmall
+  have hinv : inv (Spec B).toSpecΓ = Spec.map (ΓSpecIso B).inv := by
+    apply (cancel_mono (Spec B).toSpecΓ).1
+    simp only [IsIso.inv_hom_id, SpecMap_ΓSpecIso_inv_toSpecΓ]
+  rw [hinv] at hbig
+  have hh := congrArg (fun z ↦ Spec.map z ≫ Spec.map (ΓSpecIso B).inv ≫ f) hleg
+  simp only [Spec.map_comp, Category.assoc] at hh
+  rw [← hbig]
+  simpa only [Category.assoc] using hh.trans hsmall
+
 
 /-- The canonical chart leg into the affine pointed-neighbourhood ring colimit.
 The chart with its lifted geometric point is itself an affine pointed neighbourhood.
@@ -321,7 +361,22 @@ theorem affine_strict_local_ring_comparison
   have hp : xD (IsLocalRing.closedPoint Ω) = p := by
     rw [hxD]
     simp
-  obtain ⟨_, ρ, hρ, hm⟩ := strictHenselization_chart_maximalIdeal D i xD
+  let eC : strictHenselizationRing (xD ≫ i) ≅ strictHenselization (xD ≫ i) :=
+    smallStrictHenselizationColimitIso (xD ≫ i)
+  obtain ⟨hlocal, ρ₀, hρ₀, hm₀⟩ := strictHenselization_chart_maximalIdeal D i xD
+  let := hlocal
+  let : IsLocalRing C := eC.symm.commRingCatIsoToRingEquiv.isLocalRing
+  let ρ := ρ₀ ≫ eC.inv
+  have hρ : Spec.map ρ ≫ i = strictHenselizationStructuralMap (xD ≫ i) := by
+    rw [Spec.map_comp, Category.assoc, hρ₀]
+    exact small_toBase (xD ≫ i)
+  have hm : IsLocalRing.maximalIdeal C = (xD (IsLocalRing.closedPoint Ω)).asIdeal.map
+      ρ.hom := by
+    have h := IsLocalRing.map_ringEquiv_maximalIdeal eC.symm.commRingCatIsoToRingEquiv
+    change (IsLocalRing.maximalIdeal (strictHenselization (xD ≫ i))).map eC.inv.hom =
+      IsLocalRing.maximalIdeal (strictHenselizationRing (xD ≫ i)) at h
+    rw [← h, hm₀, Ideal.map_map]
+    rfl
   have hρb : ρ = CommRingCat.ofHom b := by
     apply Spec.map_injective
     apply (cancel_mono i).mp
@@ -333,8 +388,8 @@ theorem affine_strict_local_ring_comparison
   let : Algebra D C := b.toAlgebra
   have hInd : Algebra.IndEtale D C :=
     strictHenselization_indEtale_of_affine_chart (xD ≫ i) D i
-      ⟨xD (IsLocalRing.closedPoint Ω), rfl⟩ (Iso.refl _) b
-      (by simpa using (chart_structural_map D i xD).symm)
+      ⟨xD (IsLocalRing.closedPoint Ω), rfl⟩ (Scheme.Spec.mapIso eC.op).symm b
+      ((chart_structural_map D i xD).symm.trans (small_toBase (xD ≫ i)).symm)
   let := hInd
   let k := p.asIdeal.ResidueField
   let dK : D →+* K := (algebraMap k K).comp (algebraMap D k)

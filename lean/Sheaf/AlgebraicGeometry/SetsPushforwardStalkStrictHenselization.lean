@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.CofilteredEtaleLimitSections
@@ -45,7 +45,7 @@ theorem strictHenselizationBaseChange_condition
           ((equivSmallModel.{v} (strictHenselizationNeighbourhoods y)).inverse.obj j).1).hom =
       pullback.snd (strictHenselizationStructuralMap y) f ≫ f := by
   rw [Category.assoc, Category.assoc]
-  rw [strictHenselizationStructuralMap_eq y j]
+  rw [(exists_strictHenselizationStructuralMap y).choose_spec j]
   exact pullback.condition
 
 /-- The map X^sh → V ×_Y X with components c_V ∘ f^sh and p, for a representative affine

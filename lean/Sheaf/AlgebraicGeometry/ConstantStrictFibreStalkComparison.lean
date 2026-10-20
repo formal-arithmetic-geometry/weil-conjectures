@@ -6,7 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 import all WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 
