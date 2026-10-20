@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Paper.SchemeTheoreticSupport
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections

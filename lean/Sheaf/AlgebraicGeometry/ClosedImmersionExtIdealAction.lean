@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module

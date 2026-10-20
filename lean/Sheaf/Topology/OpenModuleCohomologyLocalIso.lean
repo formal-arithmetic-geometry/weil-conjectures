@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Topology.OpenModuleCohomology
 import Sheaf.Topology.RestrictInjectiveResolution
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 

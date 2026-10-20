@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.QuasiSeparated

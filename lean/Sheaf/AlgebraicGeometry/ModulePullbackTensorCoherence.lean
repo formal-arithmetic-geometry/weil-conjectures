@@ -6,7 +6,7 @@ Authors: SHEAF group C2
 module
 
 public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Coherence of the module pullback tensor comparison

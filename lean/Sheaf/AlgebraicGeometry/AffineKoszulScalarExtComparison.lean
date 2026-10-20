@@ -6,7 +6,7 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.RingTheory.KoszulDualComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde

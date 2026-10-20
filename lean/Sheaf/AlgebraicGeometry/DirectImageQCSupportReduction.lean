@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion

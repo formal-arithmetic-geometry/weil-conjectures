@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Mathlib.Algebra.Category.ModuleCat.ExteriorPower
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafFullOpenIso
 

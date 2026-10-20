@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import Sheaf.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # The localized comparison square for a quasi-isomorphism

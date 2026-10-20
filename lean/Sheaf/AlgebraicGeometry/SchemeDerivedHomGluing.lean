@@ -5,7 +5,7 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.SchemeDerivedHomRestrictionTransport
 import Mathlib.CategoryTheory.Localization.Equivalence
 

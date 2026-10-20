@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.Single

@@ -5,7 +5,7 @@ Authors: SHEAF group T1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex

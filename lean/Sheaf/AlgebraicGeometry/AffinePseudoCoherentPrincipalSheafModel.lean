@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings

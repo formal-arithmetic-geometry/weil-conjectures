@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.Algebra.Homology.OpenExtensionRestrictionIso
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkOutside

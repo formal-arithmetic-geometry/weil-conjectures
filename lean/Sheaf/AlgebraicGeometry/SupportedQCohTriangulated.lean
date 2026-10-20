@@ -5,7 +5,7 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian

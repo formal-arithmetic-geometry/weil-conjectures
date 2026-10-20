@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.MixedGlobalExtension
 public import Sheaf.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackMate
 
 /-! # Affine extension and sections with independent localization universes

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.IdealModuleMultiplicationStalkRange
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat

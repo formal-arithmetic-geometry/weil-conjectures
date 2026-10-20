@@ -6,7 +6,7 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarHomologyLift
 import Mathlib.Algebra.Homology.SingleHomology

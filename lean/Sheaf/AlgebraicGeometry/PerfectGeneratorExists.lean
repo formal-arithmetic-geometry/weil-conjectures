@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Triangulated.Subcategory

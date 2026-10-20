@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Sheaf.Algebra.Homology.OpenExtensionCounitStalk
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison

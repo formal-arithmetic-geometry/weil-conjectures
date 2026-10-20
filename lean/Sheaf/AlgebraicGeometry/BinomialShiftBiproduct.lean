@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Data.Nat.Choose.Basic
 
 /-! # Binomial sums of shifted objects

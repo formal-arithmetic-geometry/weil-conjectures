@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 

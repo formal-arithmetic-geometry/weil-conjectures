@@ -5,7 +5,7 @@ Authors: SHEAF group K2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift

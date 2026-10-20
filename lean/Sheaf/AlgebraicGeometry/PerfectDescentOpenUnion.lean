@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.PerfectDescentCompatibleLocalData
 import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
 import Sheaf.AlgebraicGeometry.DerivedOpenGluing
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # PerfectDescentOpenUnion

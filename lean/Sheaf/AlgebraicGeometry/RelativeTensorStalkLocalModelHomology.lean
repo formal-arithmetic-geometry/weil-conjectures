@@ -5,7 +5,7 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor

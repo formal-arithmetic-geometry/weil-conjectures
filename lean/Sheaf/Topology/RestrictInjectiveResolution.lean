@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!

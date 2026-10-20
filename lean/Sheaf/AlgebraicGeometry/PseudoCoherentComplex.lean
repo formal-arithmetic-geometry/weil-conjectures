@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Pseudo-coherent complexes on schemes

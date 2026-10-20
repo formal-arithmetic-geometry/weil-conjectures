@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.AffineAlgebraUpperTruncationEdge
 import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions

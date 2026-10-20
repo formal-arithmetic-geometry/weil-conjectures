@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.RelativeTensorStalkLocalModelHomology
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.StalkTensorComplex
 
 /-! # Relative tensor bounds from a strictly perfect local model

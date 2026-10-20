@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology

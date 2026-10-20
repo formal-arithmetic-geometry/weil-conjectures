@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.DerivedOpenGluingObjects
 import Sheaf.AlgebraicGeometry.SchemeDerivedHomGluing
 

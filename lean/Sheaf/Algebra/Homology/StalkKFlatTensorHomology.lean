@@ -20,7 +20,7 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.Topology.Sheaves.Abelian
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
 /-! # K-flat tensor homology at a stalk, with transported scalars
 

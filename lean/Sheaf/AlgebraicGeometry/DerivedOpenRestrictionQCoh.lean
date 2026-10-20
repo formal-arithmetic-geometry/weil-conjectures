@@ -5,7 +5,7 @@ Authors: SHEAF group R1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Quasi-coherence and derived restriction

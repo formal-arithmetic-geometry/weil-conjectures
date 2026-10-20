@@ -1,7 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

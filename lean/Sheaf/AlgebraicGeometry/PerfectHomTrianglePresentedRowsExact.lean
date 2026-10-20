@@ -5,7 +5,7 @@ Authors: SHEAF group X3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Mathlib.Algebra.Category.Grp.Ulift

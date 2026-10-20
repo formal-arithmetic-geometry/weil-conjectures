@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+public import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps
 
 /-! # Restriction of extension by zero on an open

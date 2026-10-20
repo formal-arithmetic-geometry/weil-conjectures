@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Flat.Basic
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.RingTheory.Flat.CategoryTheory

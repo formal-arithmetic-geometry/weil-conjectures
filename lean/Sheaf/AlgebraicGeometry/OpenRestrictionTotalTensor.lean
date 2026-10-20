@@ -5,7 +5,7 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.AlgebraicGeometry.OpenRestrictionTensorNaturality
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap

@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Topology.OpenModuleCohomology
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure

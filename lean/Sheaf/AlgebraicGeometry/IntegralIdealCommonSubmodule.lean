@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # A common submodule with generically vanishing cokernels

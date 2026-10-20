@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 import Sheaf.Topology.RestrictInjectiveResolution
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Untwisted comparison with raw section cohomology

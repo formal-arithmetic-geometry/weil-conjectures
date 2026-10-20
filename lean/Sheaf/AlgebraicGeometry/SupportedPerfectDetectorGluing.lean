@@ -5,7 +5,7 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SupportedDetectorOpenLift

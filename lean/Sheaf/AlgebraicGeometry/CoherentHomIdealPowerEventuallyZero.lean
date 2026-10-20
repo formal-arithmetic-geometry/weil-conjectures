@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
 /-! # HOM ideal-power comparison over an open complement
 

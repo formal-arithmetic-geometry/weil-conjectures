@@ -5,7 +5,7 @@ Authors: SHEAF group T3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Unique

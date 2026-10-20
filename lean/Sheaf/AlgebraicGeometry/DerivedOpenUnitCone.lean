@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

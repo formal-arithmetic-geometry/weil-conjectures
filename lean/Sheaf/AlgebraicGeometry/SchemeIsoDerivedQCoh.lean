@@ -5,7 +5,7 @@ Authors: SHEAF group M2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 

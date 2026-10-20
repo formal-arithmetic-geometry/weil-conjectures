@@ -5,7 +5,7 @@ Authors: SHEAF group B3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde

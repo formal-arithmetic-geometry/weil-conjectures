@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.SiteBoundedConstantModel
 import Sheaf.CategoryTheory.SiteModuleSheafConstantRingEquivalence
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
+import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits

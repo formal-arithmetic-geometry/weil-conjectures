@@ -10,7 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 import Sheaf.Topology.RestrictInjectiveResolution
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Natural comparison of restriction cohomology and open derived sections

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.AnnihilatorSubsheaf
 import WeilConjectures.AlgebraicGeometry.AnnihilatorAffineCriterion
 import WeilConjectures.AlgebraicGeometry.AnnihilatorQuasicoherent

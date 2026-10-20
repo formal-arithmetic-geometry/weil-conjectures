@@ -5,9 +5,9 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.SchemeModuleFreeYonedaIso
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory

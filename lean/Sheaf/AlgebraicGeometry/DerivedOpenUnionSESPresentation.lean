@@ -5,7 +5,7 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Sheaf.AlgebraicGeometry.OpenUnionImageComplexExact
 import Sheaf.AlgebraicGeometry.LocalizedOpenImageComplexComparisons
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
