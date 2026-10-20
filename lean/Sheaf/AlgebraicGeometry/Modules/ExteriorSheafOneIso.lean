@@ -34,18 +34,19 @@ theorem exteriorSheaf_one_iso {X : Scheme.{u}} (M : X.Modules) :
       (fun U ↦ (exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)).toModuleIso)
       (by
         intro U V f
-        ext x
-        obtain ⟨m, rfl⟩ :=
-          (exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)).symm.surjective x
+        apply ModuleCat.hom_ext
+        apply exteriorPower.linearMap_ext (R := X.presheaf.obj U)
+        apply DFunLike.ext
+        intro a
         change exteriorPower.oneEquiv (X.presheaf.obj V) (M.val.obj V)
             (exteriorSheafRestriction M 1 f
-              ((exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)).symm m)) =
+              (exteriorPower.ιMulti (X.presheaf.obj U) 1 a)) =
           M.val.map f
             (exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)
-              ((exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)).symm m))
-        rw [LinearEquiv.apply_symm_apply, exteriorPower.oneEquiv_symm_apply]
+              (exteriorPower.ιMulti (X.presheaf.obj U) 1 a))
+        rw [exteriorPower.oneEquiv_ιMulti]
         have h := (Classical.choose_spec
-          (exteriorSheafRestriction_existsUnique M 1 f)).1 (fun _ ↦ m)
+          (exteriorSheafRestriction_existsUnique M 1 f)).1 a
         exact (congrArg (exteriorPower.oneEquiv (X.presheaf.obj V) (M.val.obj V)) h).trans
           (exteriorPower.oneEquiv_ιMulti _))
   exact ⟨(PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).mapIso e ≪≫
