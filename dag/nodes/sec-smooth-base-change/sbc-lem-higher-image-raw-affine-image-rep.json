@@ -97,14 +97,15 @@
   "place": "Tags 09Z1, 0EZM and 03Q8; existing raw complex presentation and raw-over comparison, with Mathlib Concrete.isColimit_exists_rep; Y3, 2026-10-13"
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineImageRep",
-  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawAffineImageRep.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.HigherDirectImageRawAffineImageRep",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/HigherDirectImageRawAffineImageRep.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_higher_image_raw_affine_image_rep",
   "statement": "theorem exists_higher_image_raw_affine_image_rep\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Over W)\n    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i, QuasiCompact ((D.obj i).hom ≫ k)]\n    [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)]\n    (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c))\n    [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)]\n    (U : S.Etale) [IsAffine U.left]\n    (z : (higherDirectImageRawOverPresheaf Λ k G q c.pt).obj (op U)) :\n    ∃ (i : I)\n      (t : (higherDirectImageRawOverPresheaf Λ k G q (D.obj i)).obj (op U)),\n      ((higherDirectImageOverMap Λ k G q (c.π.app i)).hom.app (op U))\n        ((higherDirectImageRawOverComparison Λ k G q (D.obj i)).app (op U) t) =\n      (higherDirectImageRawOverComparison Λ k G q c.pt).app (op U) z",
   "branch": "sheaf-dag",
   "by": "V2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "J9, 2026-10-20: retire the quarantined Sheaf twin in favour of the official upstream theorem with the same statement and proof; restore its consumer with the upstream proof import."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -117,14 +118,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-70b81",
-  "group": "Y3",
+  "reviewer": "C-317d8",
+  "group": "J9",
   "result": "pass",
-  "landing": "20261013T145126-L-698155",
+  "landing": "20261020T153750-L-2989004",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, DAG node, report, diffs, compilation, and forced-adaptation reader gate all agree and pass."
+  "note": "independent cc review: Sheaf copy vs WeilConjectures twin of exists_higher_image_raw_affine_image_rep (byte-identical from public section on); restored consumer vs quarantine source (only the import line differs); node vs live (only the lean record repointed to the twin); compiled 23.4 s, axioms clean, no importers"
  },
  "lean_audit": {
   "master": {
