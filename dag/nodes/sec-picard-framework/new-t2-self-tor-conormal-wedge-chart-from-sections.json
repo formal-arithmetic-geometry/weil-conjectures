@@ -30,12 +30,11 @@
    "elementary": false
   },
   {
-   "text": "Restrict the conormal module to the affine open scheme V. Identify exteriorSheafPresheaf with the canonical PresheafOfModules.exteriorPower: their object modules coincide, and uniqueness of restriction on pure wedges identifies all maps using exteriorPower_map_ιMulti. Applying sheafification gives exteriorSheaf = Scheme.Modules.exteriorPower. Rewrite by this equality and apply the upstream isQuasicoherent_exteriorSheaf_of_isAffine there. Transport quasi-coherence back through exteriorSheaf_restrict_iso to obtain quasi-coherence of E.restrict V.ι. Both equality helpers are proved privately; no unfinished prerequisite is added. For the upstream restriction theorem, rewrite exteriorPower as exteriorSheaf at the module and its restriction using [lem-sc-exterior-sheaf-upstream-comparison]; this preserves exactly the legacy objects used by the rest of the argument.",
+   "text": "Restrict the conormal module to the affine open scheme V. Apply isQuasicoherent_exteriorSheaf_of_isAffine to the restriction N|V, and transport quasi-coherence through the isomorphism exteriorSheaf_restrict_iso between (exterior power of N)|V and the exterior power of N|V, obtaining quasi-coherence of E.restrict V.ι.",
    "uses": [
     "lem-weil-pbc-module-restriction-open-immersion-colimits",
     "lem-sc-exterior-sheaf-restrict-iso",
-    "new-q1-exterior-sheaf-quasicoherent",
-    "lem-sc-exterior-sheaf-upstream-comparison"
+    "new-q1-exterior-sheaf-quasicoherent"
    ],
    "elementary": false
   },
@@ -66,16 +65,13 @@
   "lem-weil-pbc-module-pullback-quasi-coherent",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "lem-weil-pbc-quasi-coherent-module-kernel",
-  "new-q1-exterior-sheaf-quasicoherent",
-  "lem-sc-exterior-sheaf-upstream-comparison"
+  "new-q1-exterior-sheaf-quasicoherent"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "K4",
-  "date": "2026-10-20",
-  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafQuasicoherent.lean",
-  "place": "The original affine-conormal argument is preserved; its exterior quasi-coherence step now transports the upstream theorem through proved presheaf and sheafification equalities.",
-  "note": " K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved."
+  "by": "E7 stage 3 retirement; complete proof retained in the adopted upstream twin",
+  "document": "https://stacks.math.columbia.edu/tag/01I6",
+  "place": "Lemmas 26.7.1, 26.7.2(2), 26.7.3(1), and 26.7.4; conormal identification from Tag 01R3(2) and canonical unit from Tag 0096.",
+  "note": "The upstream module contains the complete proof. The Sheaf consumer is adapted through the proved exteriorSheaf/exteriorPower comparison."
  },
  "mathlib_searches": [
   {
@@ -156,14 +152,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChartFromSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorConormalWedgeChartFromSections.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChartFromSections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SelfTorConormalWedgeChartFromSections.lean",
   "declaration": "AlgebraicGeometry.exists_selfTor_conormal_wedge_chart_from_sections",
-  "statement": "theorem exists_selfTor_conormal_wedge_chart_from_sections\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (n : ℕ) (U : Y.affineOpens)\n    (e : let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n      let E := Scheme.Modules.exteriorSheaf N n\n      let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n      let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n        Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n      ((E.over (i ⁻¹ᵁ U.1)).val.obj\n            (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))) ≃ₗ[Z.presheaf.obj (op (i ⁻¹ᵁ U.1))]\n          ((T.obj M).over (i ⁻¹ᵁ U.1)).val.obj\n            (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let E := Scheme.Modules.exteriorSheaf N n\n    let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n      Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    ∃ s : E.over (i ⁻¹ᵁ U.1) ≅ (T.obj M).over (i ⁻¹ᵁ U.1),\n      ∀ x : (E.over (i ⁻¹ᵁ U.1)).val.obj\n        (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1)))),\n        s.hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1)))) x =\n          e x",
+  "statement": "theorem exists_selfTor_conormal_wedge_chart_from_sections\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (n : ℕ) (U : Y.affineOpens)\n    (e : let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n      let E := Scheme.Modules.exteriorPower N n\n      let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n      let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n        Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n      ((E.over (i ⁻¹ᵁ U.1)).val.obj\n            (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))) ≃ₗ[Z.presheaf.obj (op (i ⁻¹ᵁ U.1))]\n          ((T.obj M).over (i ⁻¹ᵁ U.1)).val.obj\n            (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let E := Scheme.Modules.exteriorPower N n\n    let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n      Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    ∃ s : E.over (i ⁻¹ᵁ U.1) ≅ (T.obj M).over (i ⁻¹ᵁ U.1),\n      ∀ x : (E.over (i ⁻¹ᵁ U.1)).val.obj\n        (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1)))),\n        s.hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1)))) x =\n          e x",
   "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-14"
+  "by": "E7",
+  "date": "2026-10-21",
+  "note": "Retired duplicate Sheaf module in favor of the adopted upstream twin; its complete theorem is unchanged."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -178,12 +175,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a6756",
-  "group": "K4",
-  "result": "pass",
-  "landing": "20261020T221234-L-4162476",
+  "reviewer": "C-41db4",
+  "group": "E7",
+  "result": "fix",
+  "landing": "20261020T233128-L-897642",
   "kind": "interface",
-  "note": "independent cc review: retire-items row 749 + twin WeilConjectures…exteriorSheaf_restrict_iso (signature verbatim in node lean record) with the 5 adapted consumers vs live clone; exteriorSheaf_eq_exteriorPower (lem-sc-exterior-sheaf-upstream-comparison) bridges exteriorSheaf/exteriorPower"
+  "note": "independent cc review: delivered node lean record vs live WeilConjectures twin signature (verbatim); adapted consumer vs live original (public statement/imports identical, forced transport via exteriorSheafIsoExteriorPower); node proof fields vs twin's proof"
  },
  "lean_audit": {
   "master": {

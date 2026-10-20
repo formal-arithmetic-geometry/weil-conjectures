@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.SelfTorAffineSection
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChartSectionEquiv
-import Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChartFromSections
+import WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChartFromSections
 import Sheaf.AlgebraicGeometry.ExteriorSheafComparison
 
 /-! # Affine conormal exterior coordinates preserving ideal wedges
@@ -80,12 +80,13 @@ theorem exists_selfTor_conormal_wedge_chart
         Scheme.Modules.wedge (M := N) a :=
     Scheme.Modules.exteriorSheafIsoExteriorPower_hom_wedge N n V a
   obtain ⟨e₁, h₁⟩ := exists_selfTor_conormal_wedge_chart_section_equiv i n U
-  let e := e₀.trans e₁
-  obtain ⟨s, hs⟩ := exists_selfTor_conormal_wedge_chart_from_sections i n U e
-  refine ⟨s, ?_⟩
+  let c := (SheafOfModules.overFunctor Z.ringCatSheaf V).mapIso
+    (Scheme.Modules.exteriorSheafIsoExteriorPower N n)
+  obtain ⟨s, hs⟩ := exists_selfTor_conormal_wedge_chart_from_sections i n U e₁
+  refine ⟨c ≪≫ s, ?_⟩
   intro b
+  change s.hom.val.app (op (Over.mk (𝟙 V))) (e₀ _) = _
   rw [hs]
-  change e₁ (e₀ _) = _
   rw [hc]
   exact h₁ b
 
